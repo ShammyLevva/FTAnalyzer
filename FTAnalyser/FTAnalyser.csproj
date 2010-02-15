@@ -46,13 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainForm.cs">
+    <Compile Include="Fact.cs" />
+    <Compile Include="FactDate.cs" />
+    <Compile Include="FactSource.cs" />
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="FTAnalyser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -63,6 +66,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Old Java Code\org\hardgate\utilities\jndi.properties" />
+    <None Include="Old Java Code\org\hardgate\utilities\messages.properties" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -72,6 +77,53 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Old Java Code\org\hardgate\exceptions\BadIGIDataException.java" />
+    <Content Include="Old Java Code\org\hardgate\exceptions\DelegateException.java" />
+    <Content Include="Old Java Code\org\hardgate\exceptions\DuplicateException.java" />
+    <Content Include="Old Java Code\org\hardgate\exceptions\GedcomTransformException.java" />
+    <Content Include="Old Java Code\org\hardgate\exceptions\MissingPrimaryKeyException.java" />
+    <Content Include="Old Java Code\org\hardgate\exceptions\NotFoundException.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\comparators\CensusAgeComparator.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\comparators\DateComparator.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\comparators\LocationComparator.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\comparators\MultiComparator.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\comparators\NameComparator.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\core\CensusFamily.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\core\Client.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\core\Fact.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\core\FactDate.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\core\FactSource.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\core\Family.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\core\Individual.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\core\Location.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\core\ParentalGroup.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\core\ReadGedcom.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\filters\AllFilter.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\filters\AndFilter.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\filters\BirthFilter.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\filters\DateFilter.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\filters\IncompleteDataFilter.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\filters\LocationFilter.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\filters\OrFilter.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\filters\RegistrationFilter.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\filters\RelationFilter.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\filters\SurnameFilter.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\formatters\BaseOutputFormatter.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\formatters\BirthOutputFormatter.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\formatters\CensusOutputFormatter.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\formatters\DeathOutputFormatter.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\formatters\MarriageOutputFormatter.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\registrations\BirthRegistration.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\registrations\CensusRegistration.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\registrations\DeathRegistration.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\registrations\MarriageRegistration.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\registrations\Registration.java" />
+    <Content Include="Old Java Code\org\hardgate\utilities\DateInterval.java" />
+    <Content Include="Old Java Code\org\hardgate\utilities\Messages.java" />
+    <Content Include="Old Java Code\org\hardgate\utilities\PropertyLoader.java" />
+    <Content Include="Old Java Code\org\hardgate\utilities\ServiceLocator.java" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
