@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace FTAnalyser
 {
-    static class FTAnalyser
+    static class FTAnalyzer
     {
         /// <summary>
         /// The main entry point for the application.
