@@ -2,24 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace FTAnalyser
 {
     class FactDate
     {
- 	    public static DateTime MINDATE = new DateTime(1,0,1);
-        public static DateTime MAXDATE = new DateTime(9999,11,31);
+        public static sealed DateTime MINDATE = new DateTime(1, 0, 1);
+        public static sealed DateTime MAXDATE = new DateTime(9999, 11, 31);
         public static int MAXYEARS = 110;
         public static int MINYEARS = 0;
-        
-        public static FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
-        public static FactDate CENSUS1841 = new FactDate("06 JUN 1841");
-        public static FactDate CENSUS1851 = new FactDate("30 MAR 1851");
-        public static FactDate CENSUS1861 = new FactDate("07 APR 1861");
-        public static FactDate CENSUS1871 = new FactDate("02 APR 1871");
-        public static FactDate CENSUS1881 = new FactDate("03 APR 1881");
-        public static FactDate CENSUS1891 = new FactDate("05 APR 1891");
-        public static FactDate CENSUS1901 = new FactDate("31 MAR 1901");
+
+        public static sealed FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
+        public static sealed FactDate CENSUS1841 = new FactDate("06 JUN 1841");
+        public static sealed FactDate CENSUS1851 = new FactDate("30 MAR 1851");
+        public static sealed FactDate CENSUS1861 = new FactDate("07 APR 1861");
+        public static sealed FactDate CENSUS1871 = new FactDate("02 APR 1871");
+        public static sealed FactDate CENSUS1881 = new FactDate("03 APR 1881");
+        public static sealed FactDate CENSUS1891 = new FactDate("05 APR 1891");
+        public static sealed FactDate CENSUS1901 = new FactDate("31 MAR 1901");
  
         private String dateString;
         private DateTime startdate;
@@ -52,11 +53,11 @@ namespace FTAnalyser
 
         public FactDate addYears(int years)
         {
-            DateTime start = (DateTime) startdate.clone();
-            DateTime end = (DateTime) enddate.clone();
+            DateTime start = new DateTime(startdate.Year, startdate.Month, startdate.Day);
+            DateTime end = new DateTime(enddate.Year, enddate.Month, enddate.Day);
             start.AddYears(years);
             end.AddYears(years);
-            if (end.after(MAXDATE))
+            if (end > MAXDATE)
                 end = MAXDATE;
             return new FactDate(start, end);
         }
@@ -75,7 +76,7 @@ namespace FTAnalyser
             }
             else
             {
-                check = CHECKING.format(startdate.getTime()).toUpperCase();
+                check = CHECKING.format(startdate.ToUniversalTime).ToUpper();
                 if (enddate == MAXDATE)
                     output.Append("AFT ");
                 else
@@ -84,24 +85,24 @@ namespace FTAnalyser
                     between = true;
                 }
                 if (check.Equals("01 JAN"))
-                    output.Append(YEAR.format(startdate.getTime()));
+                    output.Append(YEAR.format(startdate.ToUniversalTime));
                 else
-                    output.Append(DISPLAY.format(startdate.getTime()));
+                    output.Append(DISPLAY.format(startdate.ToUniversalTime));
                 if (between)
                     output.Append(" AND ");
             }
             if (enddate != MAXDATE)
             {
-                check = CHECKING.format(enddate.GetTime()).toUpperCase();
+                check = CHECKING.format(enddate.ToUniversalTime).ToUpper();
                 if (check.Equals("31 DEC"))
                 {
                     // add 1 day to take it to 1st Jan following year
                     // this makes the range of "bef 1900" change to 
                     // "bet xxxx and 1900"
-                    output.Append(YEAR.format(this.enddate.GetTime()));
+                    output.Append(YEAR.format(this.enddate.ToUniversalTime));
                 }
                 else
-                    output.Append(DISPLAY.format(enddate.GetTime()));
+                    output.Append(DISPLAY.format(enddate.ToUniversalTime));
             }
             return output.ToString().ToUpper();
         }
@@ -131,8 +132,7 @@ namespace FTAnalyser
                 {
                     int andpos = processDate.IndexOf(" AND ");
                     enddate = parseDate(processDate.Substring(andpos + 5), HIGH, 0);
-                    startdate = parseDate(processDate.Substring(4, andpos), LOW, 0,
-                            enddate.get(DateTime.YEAR));
+                    startdate = parseDate(processDate.Substring(4, andpos), LOW, 0, enddate.get(DateTime.YEAR));
                 }
                 else
                 {
@@ -141,9 +141,9 @@ namespace FTAnalyser
                     enddate = parseDate(dateValue, HIGH, 0);
                 }
             }
-            catch (IndexOutOfBoundsException e)
+            catch (Exception e)
             {
-                e.printStackTrace();
+                Debug.WriteLine(e.InnerException);
             }
         }
 
@@ -155,7 +155,7 @@ namespace FTAnalyser
         private DateTime parseDate(String dateValue, int highlow, int adjustment, int defaultYear)
         {
             DateTime date;
-            DateTime dt = DateTime.GetInstance();
+            DateTime dt;
             try
             {
                 Matcher matcher = DATE_PATTERN.matcher(dateValue);
@@ -167,15 +167,13 @@ namespace FTAnalyser
                 if (day.Length == 0 && month.Length == 0)
                 {
                     date = YEAR.parse(dateValue);
-                    dt.setTime(date);
-                    dt.AddYears(adjustment);
                     if (highlow == HIGH)
                     {
-                        dt = new DateTime(dt.Year, 12, 31);
+                        dt = new DateTime(dt.Year + adjustment, 12, 31);
                     }
                     else
                     {
-                        dt = new DateTime(dt.Year, 1, 1);
+                        dt = new DateTime(dt.Year + adjustment, 1, 1);
                     }
                 }
                 else if (day.Length == 0 && year.Length > 0)
@@ -225,9 +223,9 @@ namespace FTAnalyser
                     dt = (highlow == HIGH) ? MAXDATE : MINDATE;
                 }
             }
-            catch (ParseException e)
+            catch (Exception e)
             {
-                Debug("Error parsing date: " + dateValue + "\n" + e.Message);
+                Debug.WriteLine("Error parsing date: " + dateValue + "\n" + e.Message);
             }
             return dt;
         }
@@ -253,95 +251,94 @@ namespace FTAnalyser
         /*
          * @return whether that FactDate is before this FactDate
          */
-        public boolean isBefore(FactDate that)
+        public bool isBefore(FactDate that)
         {
             // easy case is extremes whole of date before other
-            return (that == null) ? true : enddate.before(that.startdate);
+            return (that == null) ? true : enddate < that.startdate;
         }
 
         /*
          * @return whether that FactDate starts before this FactDate
          */
-        public boolean startsBefore(FactDate that)
+        public bool startsBefore(FactDate that)
         {
-            return (that == null) ? true : startdate.before(that.startdate);
+            return (that == null) ? true : startdate < that.startdate;
         }
 
         /*
          * @return whether that FactDate is after this FactDate
          */
-        public boolean isAfter(FactDate that)
+        public bool isAfter(FactDate that)
         {
             // easy case is extremes whole of date after other
-            return (that == null) ? true : startdate.after(that.enddate);
+            return (that == null) ? true : startdate > that.enddate;
         }
 
         /*
          * @return whether that FactDate ends after this FactDate
          */
-        public boolean endsAfter(FactDate that)
+        public bool endsAfter(FactDate that)
         {
-            return (that == null) ? true : enddate.after(that.enddate);
+            return (that == null) ? true : enddate > that.enddate;
         }
 
-        public boolean overlaps(FactDate that)
+        public bool overlaps(FactDate that)
         {
             // two dates overlap if not entirely before or after
             return (that == null) ? true : !(isBefore(that) || isAfter(that));
         }
 
-        public boolean contains(FactDate that)
+        public bool contains(FactDate that)
         {
             return (that == null) ? true :
-                (this.startdate.before(that.startdate)
-              && this.enddate.after(that.enddate));
+                (this.startdate < that.startdate && this.enddate > that.enddate);
         }
 
         public int getMaximumYear(FactDate that)
         {
-            //        System.out.println("Max: This start date is " + FULL.format(this.startdate.getTime()));
-            //        System.out.println("Max: That end date is " + (that == null ? "null" : FULL.format(that.enddate.getTime())));
+            //        System.out.println("Max: This start date is " + FULL.format(this.startdate.ToUniversalTime));
+            //        System.out.println("Max: That end date is " + (that == null ? "null" : FULL.format(that.enddate.ToUniversalTime)));
             int diff = DateInterval.yearsBetween(this.startdate, (that == null) ? MAXDATE : that.enddate);
             return Math.Min(diff, MAXYEARS);
         }
 
         public int getMinimumYear(FactDate that)
         {
-            //        System.out.println("Min: This end date is " + FULL.format(this.enddate.getTime()));
-            //        System.out.println("Min: That start date is " + (that == null ? "null" : FULL.format(that.startdate.getTime())));
+            //        System.out.println("Min: This end date is " + FULL.format(this.enddate.ToUniversalTime));
+            //        System.out.println("Min: That start date is " + (that == null ? "null" : FULL.format(that.startdate.ToUniversalTime)));
             int diff = DateInterval.yearsBetween(this.enddate, (that == null) ? MINDATE : that.startdate);
             return Math.Max(diff, MINYEARS);
         }
 
-        public boolean isLongYearSpan()
+        public bool isLongYearSpan()
         {
             int diff = DateInterval.yearsBetween(startdate, enddate);
             return (diff > 5);
         }
 
-        public boolean equals(Object that) 
+        public bool equals(Object that) 
         {
-            if (that == null || ! (that instanceof FactDate))
+            if (that == null || ! (that is FactDate))
                 return false;
             FactDate f = (FactDate) that;
             // two FactDates are equal if same datestring or same start and enddates
-            return (this.dateString.toUpperCase().equals(f.dateString.toUpperCase())) ||
-        	       (this.startdate.equals(f.startdate) && this.enddate.equals(f.enddate));
+            return (this.dateString.ToUpper().Equals(f.dateString.ToUpper())) ||
+        	       (this.startdate.Equals(f.startdate) && this.enddate.Equals(f.enddate));
         }
 
         public int compareTo(FactDate that)
         {
             if (this.equals(that))
                 return 0;
-            else if (this.startdate.equals(that.startdate))
-                return this.enddate.compareTo(that.enddate);
+            else if (this.startdate.Equals(that.startdate))
+                return this.enddate.CompareTo(that.enddate);
             else
-                return this.startdate.compareTo(that.startdate);
+                return this.startdate.CompareTo(that.startdate);
         }
 
-        public boolean isExact()
+        public bool isExact()
         {
-            return this.startdate.equals(this.enddate);
+            return this.startdate.Equals(this.enddate);
         }
 
         public String toString()
