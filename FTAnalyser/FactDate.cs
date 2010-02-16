@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace FTAnalyser
 {
-    class FactDate
+    class FactDate: IComparable<FactDate>
     {
         public static sealed DateTime MINDATE = new DateTime(1, 0, 1);
         public static sealed DateTime MAXDATE = new DateTime(9999, 11, 31);
@@ -316,7 +316,7 @@ namespace FTAnalyser
             return (diff > 5);
         }
 
-        public bool equals(Object that) 
+        public override bool Equals(Object that) 
         {
             if (that == null || ! (that is FactDate))
                 return false;
@@ -326,9 +326,9 @@ namespace FTAnalyser
         	       (this.startdate.Equals(f.startdate) && this.enddate.Equals(f.enddate));
         }
 
-        public int compareTo(FactDate that)
+        public override int CompareTo(FactDate that)
         {
-            if (this.equals(that))
+            if (this.Equals(that))
                 return 0;
             else if (this.startdate.Equals(that.startdate))
                 return this.enddate.CompareTo(that.enddate);
@@ -341,7 +341,7 @@ namespace FTAnalyser
             return this.startdate.Equals(this.enddate);
         }
 
-        public String toString()
+        public override String toString()
         {
             return getDateString();
         }
