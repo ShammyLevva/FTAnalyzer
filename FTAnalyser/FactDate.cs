@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace FTAnalyser
 {
@@ -10,8 +12,19 @@ namespace FTAnalyser
     {
         public static sealed DateTime MINDATE = new DateTime(1, 0, 1);
         public static sealed DateTime MAXDATE = new DateTime(9999, 11, 31);
-        public static int MAXYEARS = 110;
-        public static int MINYEARS = 0;
+        public static sealed int MAXYEARS = 110;
+        public static sealed int MINYEARS = 0;
+        private static sealed int LOW =  0;
+        private static sealed int HIGH = 1;
+
+        private static sealed String YEAR = "{0:yyyy}";
+        private static sealed String MONTHYEAR = "{0:MMM yyyy}";
+        private static sealed String DAYMONTH = "{0:dd MMM}";
+        private static sealed String MONTH = "{0:MMM}";
+        private static sealed String FULL = "{0:dd MMM yyyy}";
+        private static sealed String DISPLAY = "{0:d MMM yyyy}";
+        private static sealed String CHECKING = "{0:dd MMM}";
+        private static sealed String DATE_PATTERN = "(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})";
 
         public static sealed FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
         public static sealed FactDate CENSUS1841 = new FactDate("06 JUN 1841");
@@ -76,7 +89,7 @@ namespace FTAnalyser
             }
             else
             {
-                check = CHECKING.format(startdate.ToUniversalTime).ToUpper();
+                check = String.Format(CHECKING, startdate).ToUpper();
                 if (enddate == MAXDATE)
                     output.Append("AFT ");
                 else
@@ -85,24 +98,24 @@ namespace FTAnalyser
                     between = true;
                 }
                 if (check.Equals("01 JAN"))
-                    output.Append(YEAR.format(startdate.ToUniversalTime));
+                    output.Append(String.Format(YEAR, startdate).ToUpper());
                 else
-                    output.Append(DISPLAY.format(startdate.ToUniversalTime));
+                    output.Append(String.Format(DISPLAY, startdate).ToUpper());
                 if (between)
                     output.Append(" AND ");
             }
             if (enddate != MAXDATE)
             {
-                check = CHECKING.format(enddate.ToUniversalTime).ToUpper();
+                check = String.Format(CHECKING, enddate).ToUpper();
                 if (check.Equals("31 DEC"))
                 {
                     // add 1 day to take it to 1st Jan following year
                     // this makes the range of "bef 1900" change to 
                     // "bet xxxx and 1900"
-                    output.Append(YEAR.format(this.enddate.ToUniversalTime));
+                    output.Append(String.Format(YEAR, enddate).ToUpper());
                 }
                 else
-                    output.Append(DISPLAY.format(enddate.ToUniversalTime));
+                    output.Append(String.Format(DISPLAY, enddate).ToUpper());
             }
             return output.ToString().ToUpper();
         }
@@ -132,7 +145,7 @@ namespace FTAnalyser
                 {
                     int andpos = processDate.IndexOf(" AND ");
                     enddate = parseDate(processDate.Substring(andpos + 5), HIGH, 0);
-                    startdate = parseDate(processDate.Substring(4, andpos), LOW, 0, enddate.get(DateTime.YEAR));
+                    startdate = parseDate(processDate.Substring(4, andpos), LOW, 0, enddate.Year);
                 }
                 else
                 {
@@ -155,30 +168,33 @@ namespace FTAnalyser
         private DateTime parseDate(String dateValue, int highlow, int adjustment, int defaultYear)
         {
             DateTime date;
-            DateTime dt;
+            DateTime dt = MINDATE;
             try
             {
-                Matcher matcher = DATE_PATTERN.matcher(dateValue);
-                matcher.find();
-                String day = matcher.group(1), month = matcher.group(2), year = matcher.group(3);
+                IFormatProvider culture = new CultureInfo("en-GB", true);
+                Regex r = new Regex(DATE_PATTERN, RegexOptions.IgnoreCase);
+                // Match the regular expression pattern against a text string.
+                Match matcher = r.Match(dateValue);
+                Group gDay = matcher.Groups[1], gMonth = matcher.Groups[2], gYear = matcher.Groups[3];
+                String day = gDay.ToString(), month = gMonth.ToString(), year = gYear.ToString();
                 if (day == null) day = "";
                 if (month == null) month = "";
                 if (year == null) year = "";
                 if (day.Length == 0 && month.Length == 0)
                 {
-                    date = YEAR.parse(dateValue);
+                    date = DateTime.ParseExact(dateValue, YEAR, culture);
                     if (highlow == HIGH)
                     {
-                        dt = new DateTime(dt.Year + adjustment, 12, 31);
+                        dt = new DateTime(date.Year + adjustment, 12, 31);
                     }
                     else
                     {
-                        dt = new DateTime(dt.Year + adjustment, 1, 1);
+                        dt = new DateTime(date.Year + adjustment, 1, 1);
                     }
                 }
                 else if (day.Length == 0 && year.Length > 0)
                 {
-                    date = MONTHYEAR.parse(dateValue);
+                    date = DateTime.ParseExact(dateValue, MONTHYEAR, culture); 
                     dt = new DateTime(date.Year, date.Month, 1);
                     dt.AddMonths(adjustment);
                     if (highlow == HIGH)
@@ -191,7 +207,7 @@ namespace FTAnalyser
                 }
                 else if (day.Length == 0 && year.Length == 0)
                 {
-                    date = MONTH.parse(dateValue);
+                    date = DateTime.ParseExact(dateValue, MONTH, culture); 
                     dt = new DateTime(defaultYear, date.Month, 1);
                     if (highlow == HIGH)
                     {
@@ -201,14 +217,14 @@ namespace FTAnalyser
                         dt.AddDays(-1);
                     }
                 }
-                else if (year.length() == 0)
+                else if (year.Length == 0)
                 {
-                    date = DAYMONTH.parse(dateValue);
+                    date = DateTime.ParseExact(dateValue, DAYMONTH, culture); 
                     dt = new DateTime(defaultYear, date.Month, date.Day);
                 }
                 else if (day.Length > 0 && month.Length > 0 && year.Length > 0)
                 {
-                    date = FULL.parse(dateValue);
+                    date = DateTime.ParseExact(dateValue, FULL, culture);
                     dt = new DateTime(date.Year, date.Month, date.Day);
                     if ((highlow == HIGH && adjustment != -1) ||
                         (highlow == LOW && adjustment != +1))
@@ -296,23 +312,23 @@ namespace FTAnalyser
 
         public int getMaximumYear(FactDate that)
         {
-            //        System.out.println("Max: This start date is " + FULL.format(this.startdate.ToUniversalTime));
-            //        System.out.println("Max: That end date is " + (that == null ? "null" : FULL.format(that.enddate.ToUniversalTime)));
-            int diff = DateInterval.yearsBetween(this.startdate, (that == null) ? MAXDATE : that.enddate);
+            Debug.WriteLine("Max: This start date is " + String.Format(FULL, startdate));
+            Debug.WriteLine("Max: That end date is " + (that == null ? "null" : String.Format(FULL, enddate)));
+            int diff = Math.Abs(this.startdate.Year - ((that == null) ? MAXDATE.Year : that.enddate.Year));
             return Math.Min(diff, MAXYEARS);
         }
 
         public int getMinimumYear(FactDate that)
         {
-            //        System.out.println("Min: This end date is " + FULL.format(this.enddate.ToUniversalTime));
-            //        System.out.println("Min: That start date is " + (that == null ? "null" : FULL.format(that.startdate.ToUniversalTime)));
-            int diff = DateInterval.yearsBetween(this.enddate, (that == null) ? MINDATE : that.startdate);
+            Debug.WriteLine("Min: This end date is " + String.Format(FULL, enddate));
+            Debug.WriteLine("Min: That start date is " + (that == null ? "null" : String.Format(FULL, startdate)));
+            int diff = Math.Abs(this.enddate.Year - ((that == null) ? MINDATE.Year : that.startdate.Year));
             return Math.Max(diff, MINYEARS);
         }
 
         public bool isLongYearSpan()
         {
-            int diff = DateInterval.yearsBetween(startdate, enddate);
+            int diff = Math.Abs(startdate.Year - enddate.Year);
             return (diff > 5);
         }
 
