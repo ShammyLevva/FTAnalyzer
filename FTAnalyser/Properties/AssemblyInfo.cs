@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FTAnalyser")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("FTAnalyzer")]
+[assembly: AssemblyDescription("Family Tree Analyzer")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Aberdeen Harbour Board")]
-[assembly: AssemblyProduct("FTAnalyser")]
-[assembly: AssemblyCopyright("Copyright © Aberdeen Harbour Board 2010")]
+[assembly: AssemblyCompany("Alexander Bisset & Deryck Brown")]
+[assembly: AssemblyProduct("FTAnalyzer")]
+[assembly: AssemblyCopyright("Copyright © Alexander Bisset & Deryck Brown 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

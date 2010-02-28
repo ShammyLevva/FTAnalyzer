@@ -101,7 +101,7 @@ namespace FTAnalyser
             }
         }
 
-        private void addFacts(Element element, String factType)
+        private void addFacts(XmlElement element, String factType)
         {
             Iterator it = element.elementIterator(factType);
             while (it.hasNext())
