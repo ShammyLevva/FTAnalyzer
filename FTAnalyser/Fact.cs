@@ -22,7 +22,7 @@ namespace FTAnalyser
         private String comment;
         private String location;
         private List<FactSource> sources;
-        private boolean certificatePresent;
+        private bool certificatePresent;
 
         private static readonly Dictionary<String, String> CUSTOM_TAGS = new Dictionary<String, String>();
         private static readonly HashSet<String> COMMENT_FACTS = new HashSet<String>();
@@ -63,7 +63,7 @@ namespace FTAnalyser
 		    while (it.hasNext()) {
 		        this.sources.add(new FactSource(it.next()));
 		    }
-		    this.certificatePresent = fact.getCertificated().booleanValue();
+		    this.certificatePresent = fact.getCertificated().boolValue();
         }
 
         public Fact (int memberID, Element element) {
@@ -170,7 +170,7 @@ namespace FTAnalyser
     	    return loc == null ? "Scotland" : loc.getCountry();
         }
         
-        private boolean setCertificatePresent() {
+        private bool setCertificatePresent() {
 	        foreach (FactSource fs in sources) {
 	    	    return (factType.Equals(Fact.BIRTH) && fs.isBirthCert()) ||
 	    		    (factType.Equals(Fact.DEATH) && fs.isDeathCert()) ||
@@ -183,7 +183,7 @@ namespace FTAnalyser
         /**
          * @return Returns the certificatePresent.
          */
-        public boolean isCertificatePresent() {
+        public bool isCertificatePresent() {
             return certificatePresent;
         }
     }

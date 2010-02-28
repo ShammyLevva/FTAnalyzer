@@ -203,11 +203,11 @@ namespace FTAnalyser
 		    return parishID;
 	    }
     	
-        public boolean isBlank () {
+        public bool isBlank () {
             return this.country.Length == 0;
         }
         
-        public boolean matches (String s, int level) {
+        public bool matches (String s, int level) {
             switch (level) {
         	    case COUNTRY: return this.country.compareToIgnoreCase(s) == 0;
         	    case REGION:  return this.region.compareToIgnoreCase(s) == 0;
@@ -243,7 +243,7 @@ namespace FTAnalyser
             return location;
         }
         
-        public boolean Equals(Object that) {
+        public bool Equals(Object that) {
     	    if(that is Location) {
     		    return this.compareTo((Location) that) == 0 ? true : false;
     	    } else {
