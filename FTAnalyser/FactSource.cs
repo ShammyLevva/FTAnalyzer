@@ -35,7 +35,7 @@ namespace FTAnalyser
                 this.sourceMedium = (caln == null) ? "" : caln.SelectSingleNode("MEDI").ToString().Trim();
             }
         }
-
+/*
         public FactSource(FactSourceLocal fs)
         {
             this.memberID = fs.getMemberID().intValue();
@@ -44,7 +44,7 @@ namespace FTAnalyser
             this.sourceTitle = fs.getSourceTitle();
             this.sourceMedium = fs.getSourceMedium();
         }
-
+*/
         /**
          * @return Returns the gedcomID.
          */

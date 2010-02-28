@@ -36,7 +36,7 @@ namespace FTAnalyser
             this.place   = "";
             this.parishID = null;
         }
-
+/*
         public Location(LocationLocal loc) {
             this.country = loc.getCountry();
             this.region = loc.getRegion();
@@ -67,7 +67,7 @@ namespace FTAnalyser
             }
             this.location = buildLocation.ToString();
         }
-        
+*/        
         public Location(String location) {
             this();
             if (location != null) {
@@ -207,7 +207,7 @@ namespace FTAnalyser
             return this.country.Length == 0;
         }
         
-        public bool matches (String s, int level) {
+        public bool Matches (String s, int level) {
             switch (level) {
         	    case COUNTRY: return this.country.compareToIgnoreCase(s) == 0;
         	    case REGION:  return this.region.compareToIgnoreCase(s) == 0;
@@ -218,11 +218,11 @@ namespace FTAnalyser
             }
         }
         
-        public int compareTo (Location that) {
-            return compareTo (that, PLACE);
+        public int CompareTo (Location that) {
+            return CompareTo (that, PLACE);
         }
         
-        public int compareTo (Location that, int level) {
+        public int CompareTo (Location that, int level) {
             int res = this.country.CompareTo(that.country);
             if (res == 0 && level > COUNTRY) {
                 res = this.region.CompareTo(that.region);
@@ -239,16 +239,22 @@ namespace FTAnalyser
             return res;
         }
         
-        public String toString() {
+        public override String ToString() {
             return location;
         }
         
-        public bool Equals(Object that) {
+        public override bool Equals(Object that) {
     	    if(that is Location) {
-    		    return this.compareTo((Location) that) == 0 ? true : false;
+    		    return this.CompareTo((Location) that) == 0 ? true : false;
     	    } else {
     		    return false;
     	    }
         }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        } 
+
     }
 }

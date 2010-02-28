@@ -17,14 +17,14 @@ namespace FTAnalyser
         private static readonly int LOW = 0;
         private static readonly int HIGH = 1;
 
-        private static readonly string YEAR = "{0:yyyy}";
-        private static readonly string MONTHYEAR = "{0:MMM yyyy}";
-        private static readonly string DAYMONTH = "{0:dd MMM}";
-        private static readonly string MONTH = "{0:MMM}";
-        private static readonly string FULL = "{0:dd MMM yyyy}";
-        private static readonly string DISPLAY = "{0:d MMM yyyy}";
-        private static readonly string CHECKING = "{0:dd MMM}";
-        private static readonly string DATE_PATTERN = "(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})";
+        public static readonly string YEAR = "{0:yyyy}";
+        public static readonly string MONTHYEAR = "{0:MMM yyyy}";
+        public static readonly string DAYMONTH = "{0:dd MMM}";
+        public static readonly string MONTH = "{0:MMM}";
+        public static readonly string FULL = "{0:dd MMM yyyy}";
+        public static readonly string DISPLAY = "{0:d MMM yyyy}";
+        public static readonly string CHECKING = "{0:dd MMM}";
+        public static readonly string DATE_PATTERN = "(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})";
 
         public static readonly FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
         public static readonly FactDate CENSUS1841 = new FactDate("06 JUN 1841");

@@ -32,7 +32,7 @@ namespace FTAnalyser
             this.facts = new List<Fact>();
             this.children = new List<Individual>();
         }
-
+/*
         public Family(FamilyLocal fam)
         {
             this(fam.getFamilyID(), fam.getMemberID().intValue(), fam.getGedcomID());
@@ -43,15 +43,15 @@ namespace FTAnalyser
             Iterator it = fam.getChildren().iterator();
             while (it.hasNext())
             {
-                this.children.add(new Individual(it.next()));
+                this.children.Add(new Individual(it.next()));
             }
             it = fam.getFacts().iterator();
             while (it.hasNext())
             {
-                this.facts.add(new Fact(it.next()));
+                this.facts.Add(new Fact(it.next()));
             }
         }
-
+*/
         public Family(int memberID, XmlElement element)
         {
             this("", memberID, "");
@@ -89,7 +89,7 @@ namespace FTAnalyser
                     {
                         XmlElement el = (XmlElement)i.next();
                         Individual child = client.getGedcomIndividual(memberID, el.attributeValue("REF"));
-                        children.add(child);
+                        children.Add(child);
                     }
                 }
                 catch (NotFoundException e)
@@ -107,7 +107,7 @@ namespace FTAnalyser
             while (it.hasNext())
             {
                 XmlElement e = (XmlElement)it.next();
-                facts.add(new Fact(this.memberID, e));
+                facts.Add(new Fact(this.memberID, e));
             }
         }
 
@@ -145,11 +145,11 @@ namespace FTAnalyser
          * @return Returns all facts of the given type.
          */
         public List<Fact> getFacts(String factType) {
-	        List<Fact> result = new ArrayList<Fact>();
+	        List<Fact> result = new List<Fact>();
 	        foreach(Fact f in facts) 
             {
 	            if (f.getFactType().Equals(factType))
-	    	        result.add(f);
+	    	        result.Add(f);
 	        }
 	        return result;
 	    }
@@ -283,11 +283,11 @@ namespace FTAnalyser
 
         public List<Individual> getMembers()
         {
-            List<Individual> members = new ArrayList<Individual>();
+            List<Individual> members = new List<Individual>();
             if (husband != null)
-                members.add(husband);
+                members.Add(husband);
             if (wife != null)
-                members.add(wife);
+                members.Add(wife);
             members.addAll(children);
             return members;
         }

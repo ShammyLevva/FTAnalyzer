@@ -39,20 +39,21 @@ namespace FTAnalyser
             CUSTOM_TAGS.put("Unknown",   UNKNOWN);
             CUSTOM_TAGS.put("Unknown-Begin", UNKNOWN);
             
-            COMMENT_FACTS.add(OCCUPATION);
-            COMMENT_FACTS.add(RELIGION);
-            COMMENT_FACTS.add(MILITARY);
-            COMMENT_FACTS.add(RETIREMENT);
-            COMMENT_FACTS.add(SOCIAL_SECURITY_NO);
-            COMMENT_FACTS.add(WILL);
-            COMMENT_FACTS.add(ELECTION);
-            COMMENT_FACTS.add(CHILDLESS);
-            COMMENT_FACTS.add(WITNESS);
-            COMMENT_FACTS.add(UNMARRIED);
-            COMMENT_FACTS.add(UNKNOWN);
-            COMMENT_FACTS.add(IGISEARCH);
+            COMMENT_FACTS.Add(OCCUPATION);
+            COMMENT_FACTS.Add(RELIGION);
+            COMMENT_FACTS.Add(MILITARY);
+            COMMENT_FACTS.Add(RETIREMENT);
+            COMMENT_FACTS.Add(SOCIAL_SECURITY_NO);
+            COMMENT_FACTS.Add(WILL);
+            COMMENT_FACTS.Add(ELECTION);
+            COMMENT_FACTS.Add(CHILDLESS);
+            COMMENT_FACTS.Add(WITNESS);
+            COMMENT_FACTS.Add(UNMARRIED);
+            COMMENT_FACTS.Add(UNKNOWN);
+            COMMENT_FACTS.Add(IGISEARCH);
         }
 */
+/*        
         public Fact (FactLocal fact) {
             this.factID = fact.getFactID();
             this.factType = fact.getFactType();
@@ -62,11 +63,11 @@ namespace FTAnalyser
 	        this.sources = new List<FactSource>();
 		    Iterator it = fact.getSources().iterator();
 		    while (it.hasNext()) {
-		        this.sources.add(new FactSource(it.next()));
+		        this.sources.Add(new FactSource(it.next()));
 		    }
 		    this.certificatePresent = fact.getCertificated().boolValue();
         }
-
+*/
         public Fact (int memberID, XmlElement element) {
             if (element != null) {
                 factType = element.getName();
@@ -84,11 +85,11 @@ namespace FTAnalyser
 			    try {
 				    // now iterate through source elements of the fact
 				    // finding all sources
-				    sources = new ArrayList<FactSource>();
+				    sources = new List<FactSource>();
 			        for(Iterator i = element.elementIterator("SOUR"); i.hasNext();) {
                         XmlElement el = (Element)i.next(); 
 			    	    FactSource source = client.getGedcomSource(memberID, el.attributeValue("REF"));
-			    	    sources.add(source);
+			    	    sources.Add(source);
 			        } 
 			    } catch (NotFoundException e) {
 			        Console.WriteLine("Source not found for fact");

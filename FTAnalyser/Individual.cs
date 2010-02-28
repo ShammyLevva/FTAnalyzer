@@ -69,7 +69,7 @@ namespace FTAnalyser
 			    this.facts = new List<Fact>();
 			    Iterator it = ind.getFacts().iterator();
 			    while (it.hasNext()) {
-			        this.facts.add(new Fact(it.next()));
+			        this.facts.Add(new Fact(it.next()));
 			    }
 	        } else {
 	    	    this.memberID = 0;
@@ -90,12 +90,12 @@ namespace FTAnalyser
 	        Iterator<Element> it = element.elementIterator(factType);
 	        while(it.hasNext()) {
 	            XmlElement e = it.next();
-	            facts.add(new Fact(this.memberID, e));
+	            facts.Add(new Fact(this.memberID, e));
 	        }
 	    }
 
 	    public void addFact(Fact fact) {
-	        facts.add(fact);
+	        facts.Add(fact);
 	    }
     	
 	    /**
@@ -207,7 +207,7 @@ namespace FTAnalyser
 	        foreach(Fact f in facts)
             {
 		        if (f.getFactType().Equals(factType))
-	    	        result.add(f);
+	    	        result.Add(f);
 	        }
 	        return result;
 	    }
@@ -307,23 +307,23 @@ namespace FTAnalyser
                 if (maxValue == FactDate.MAXYEARS) {
                     if (minValue >= FactDate.MAXYEARS) {
                         // if age over maximum return maximum
-                        return Integer.toString(FactDate.MAXYEARS);
+                        return FactDate.MAXYEARS.ToString();
                     }
                     return ">=" + minValue;
                 } else {
-                    return minValue == maxValue ? Integer.toString(minValue) :
+                    return minValue == maxValue ? minValue.ToString() :
                     	    minValue + " to " + maxValue;
                 }
             }
         }
         
-        public String getAge(Calendar when) {
-            String now = new SimpleDateFormat("dd MMM yyyy").format(when.getTime());
+        public String getAge(DateTime when) {
+            String now = string.Format(FactDate.FULL, when);
             return getAge(new FactDate(now));
         }
         
         public int getCurrentAge() {
-            String age = getAge(Calendar.getInstance());
+            String age = getAge(DateTime.Now);
             return Int32.Parse(age);
         }
         
@@ -334,13 +334,15 @@ namespace FTAnalyser
         public int getMinAge(FactDate when) {
             return getBirthDate().getMinimumYear(when);
         }
-        
-        public int getMaxAge(Calendar when) {
+
+        public int getMaxAge(DateTime when)
+        {
             String now = new SimpleDateFormat("dd MMM yyyy").format(when.getTime());
             return getMaxAge(new FactDate(now));
         }
 
-        public int getMinAge(Calendar when) {
+        public int getMinAge(DateTime when)
+        {
             String now = new SimpleDateFormat("dd MMM yyyy").format(when.getTime());
             return getMinAge(new FactDate(now));
         }
