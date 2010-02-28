@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace FTAnalyser
 {
-    class FactSource
+    public class FactSource
     {
         private static readonly String BIRTHCERT = "BIRTH", DEATHCERT = "DEATH",
                 MARRIAGECERT = "MARRIAGE", CENSUSCERT = "CENSUS";

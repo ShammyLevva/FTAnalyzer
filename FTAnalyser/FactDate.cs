@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace FTAnalyser
 {
-    class FactDate: IComparable<FactDate>
+    public class FactDate: IComparable<FactDate>
     {
         public static readonly DateTime MINDATE = new DateTime(1, 0, 1);
         public static readonly DateTime MAXDATE = new DateTime(9999, 11, 31);
