@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
 
 namespace FTAnalyser
 {
-    class Fact
+    public class Fact
     {
         public static readonly String BIRTH = "BIRT", CHRISTENING = "CHRI",
                 DEATH = "DEAT", BURIAL = "BURI", CENSUS = "CENS",
@@ -58,7 +59,7 @@ namespace FTAnalyser
             this.date = new FactDate(fact.getFactDate());
             this.comment = fact.getFactComment();
             this.location = fact.getFactLocation();
-	        this.sources = new ArrayList<FactSource>();
+	        this.sources = new List<FactSource>();
 		    Iterator it = fact.getSources().iterator();
 		    while (it.hasNext()) {
 		        this.sources.add(new FactSource(it.next()));
@@ -66,7 +67,7 @@ namespace FTAnalyser
 		    this.certificatePresent = fact.getCertificated().boolValue();
         }
 
-        public Fact (int memberID, Element element) {
+        public Fact (int memberID, XmlElement element) {
             if (element != null) {
                 factType = element.getName();
                 if (factType.Equals("EVEN")) {
@@ -84,8 +85,8 @@ namespace FTAnalyser
 				    // now iterate through source elements of the fact
 				    // finding all sources
 				    sources = new ArrayList<FactSource>();
-			        for(Iterator i = element.elementIterator("SOUR"); i.hasNext();) { 
-			    	    Element el = (Element) i.next(); 
+			        for(Iterator i = element.elementIterator("SOUR"); i.hasNext();) {
+                        XmlElement el = (Element)i.next(); 
 			    	    FactSource source = client.getGedcomSource(memberID, el.attributeValue("REF"));
 			    	    sources.add(source);
 			        } 
@@ -93,7 +94,7 @@ namespace FTAnalyser
 			        Console.WriteLine("Source not found for fact");
 			    }
                 if (factType.Equals(DEATH)) {
-                    Element cause = element.element("CAUS");
+                    XmlElement cause = element.element("CAUS");
                     comment = (cause == null) ? "" : cause.getText();
                 }
                 this.certificatePresent = setCertificatePresent();
@@ -161,7 +162,7 @@ namespace FTAnalyser
         /**
          * @return Returns the source.
          */
-        public List getSources () {
+        public List<FactSource> getSources () {
             return sources;
         }
 
