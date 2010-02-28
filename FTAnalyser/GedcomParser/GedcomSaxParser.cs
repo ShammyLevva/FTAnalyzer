@@ -1,5 +1,5 @@
 /**
-*  GedcomParser
+*  GedcomSaxParser
 *  
 *  This class is designed to look like a SAX2-compliant XML parser; however,
 *  it takes GEDCOM as its input rather than XML.
@@ -21,7 +21,7 @@ using System.Xml;
 namespace FTAnalyser
 {
 
-    public class GedcomParser : IXmlReader, ILocator {
+    public class GedcomSaxParser : IXmlReader, ILocator {
 
         private IContentHandler contentHandler;
         private IErrorHandler errorHandler;

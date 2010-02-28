@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Org.System.Xml.Sax;
+using System.Xml;
 
 namespace FTAnalyser
 {
@@ -18,10 +19,14 @@ namespace FTAnalyser
 
         private void openButton_Click(object sender, EventArgs e)
         {
-            GedcomParser parser = new GedcomParser();
-            InputSource input = new InputSource();
-            input.SystemId = "C:/Users/Alexander/Documents/Genealogy/Bisset Tree.ged";
-            parser.Parse(input);
+//            InputSource input = new InputSource();
+//            input.SystemId = "C:/Users/Alexander/Documents/Genealogy/Bisset Tree.ged";
+
+//            GedcomSaxParser parser = new GedcomSaxParser();
+//            parser.Parse(input);
+            String path = "C:/Users/Alexander/Documents/Genealogy/Bisset Tree.ged";
+            XmlDocument document = GedcomToXml.Load(path);
+            document.Save("GedcomOutput.xml");
         }
     }
 }
