@@ -133,8 +133,6 @@
     <Compile Include="GedcomParser\AnselEncoding.cs" />
     <Compile Include="GedcomParser\AnselInputStreamReader.cs" />
     <Compile Include="GedcomParser\AnselOutputStreamWriter.cs" />
-    <Compile Include="GedcomParser\GedcomOutputter.cs" />
-    <Compile Include="GedcomParser\GedcomSaxParser.cs" />
     <Compile Include="GedcomParser\GedcomToXml.cs" />
     <Content Include="Old Java Code\org\hardgate\familytree\xml\GedcomOutputter.java" />
     <Content Include="Old Java Code\org\hardgate\familytree\xml\GedcomParser.java" />
