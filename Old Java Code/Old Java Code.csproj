@@ -153,4 +153,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DummyMain.cs" />
+  </ItemGroup>
 </Project>
