@@ -15,7 +15,7 @@ namespace FTAnalyser
 			    LANARK = "Lanarkshire", BANFF = "Banffshire",
 			    ANGUS = "Angus", MIDLOTHIAN = "Midlothian", FIFE = "Fife";
     	
-        public static readonly int COUNTRY = 0, REGION = 1, PARISH = 2,
+        public static const int COUNTRY = 0, REGION = 1, PARISH = 2,
     		    ADDRESS = 3, PLACE = 4; 
     	
 	    private String country;
@@ -28,12 +28,17 @@ namespace FTAnalyser
         private int level;
         
         public Location() {
-            this.location= "";
+            SetupEmptyLocation();
+        }
+
+        private void SetupEmptyLocation()
+        {
+            this.location = "";
             this.country = "";
-            this.region  = "";
-            this.parish  = "";
+            this.region = "";
+            this.parish = "";
             this.address = "";
-            this.place   = "";
+            this.place = "";
             this.parishID = null;
         }
 /*
@@ -69,33 +74,33 @@ namespace FTAnalyser
         }
 */        
         public Location(String location) {
-            this();
+            SetupEmptyLocation();
             if (location != null) {
 	            this.location = location;
 	            // we need to parse the location string from a little injun to a big injun
-	            int comma = this.location.lastIndexOf(",");
+	            int comma = this.location.LastIndexOf(",");
 	            if (comma > 0) {
-	                country = location.substring(comma + 1).trim();
-	                location = location.substring(0,comma);
-	                comma = location.lastIndexOf(",",comma);
+	                country = location.Substring(comma + 1).Trim();
+	                location = location.Substring(0,comma);
+	                comma = location.LastIndexOf(",",comma);
 	                if (comma > 0) {
-	                    region = location.substring(comma + 1).trim();
-	                    location = location.substring(0,comma);
-	                    comma = location.lastIndexOf(",",comma);
+	                    region = location.Substring(comma + 1).Trim();
+	                    location = location.Substring(0,comma);
+	                    comma = location.LastIndexOf(",",comma);
 	                    if (comma > 0) {
-	                        parish = location.substring(comma + 1).trim();
-	                        location = location.substring(0,comma);
-	                        comma = location.lastIndexOf(",",comma);
+	                        parish = location.Substring(comma + 1).Trim();
+	                        location = location.Substring(0,comma);
+	                        comma = location.LastIndexOf(",",comma);
 	                        if (comma > 0) {
-	                            address = location.substring(comma + 1).trim();
-	                            place = location.substring(0,comma).trim();
+	                            address = location.Substring(comma + 1).Trim();
+	                            place = location.Substring(0,comma).Trim();
 	                            level = PLACE;
 	                        } else {
-	                            address = location.trim();
+	                            address = location.Trim();
 	                            level = ADDRESS;
 	                        }
 	                    } else {
-	                        parish = location.trim();
+	                        parish = location.Trim();
 	                        level = PARISH;
 	                    }
 	                } else {
@@ -124,7 +129,7 @@ namespace FTAnalyser
         }
         
         private void shiftRegion(String newRegion) {
-            place = (place + " " + address).trim();
+            place = (place + " " + address).Trim();
             address = parish;
             parish = region;
             region = newRegion;
@@ -209,11 +214,11 @@ namespace FTAnalyser
         
         public bool Matches (String s, int level) {
             switch (level) {
-        	    case COUNTRY: return this.country.compareToIgnoreCase(s) == 0;
-        	    case REGION:  return this.region.compareToIgnoreCase(s) == 0;
-        	    case PARISH:  return this.parish.compareToIgnoreCase(s) == 0;
-        	    case ADDRESS: return this.address.compareToIgnoreCase(s) == 0;
-        	    case PLACE:   return this.place.compareToIgnoreCase(s) == 0;
+        	    case COUNTRY: return this.country.ToUpper().CompareTo(s.ToUpper()) == 0;
+                case REGION:  return this.region.ToUpper().CompareTo(s.ToUpper()) == 0;
+                case PARISH:  return this.parish.ToUpper().CompareTo(s.ToUpper()) == 0;
+                case ADDRESS: return this.address.ToUpper().CompareTo(s.ToUpper()) == 0;
+                case PLACE:   return this.place.ToUpper().CompareTo(s.ToUpper()) == 0;
         	    default:      return false;
             }
         }

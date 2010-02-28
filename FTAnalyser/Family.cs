@@ -13,18 +13,18 @@ namespace FTAnalyser
         public static readonly String SINGLE = "Single", MARRIED = "Married";
 
         private String familyID = "";
-        protected int memberID;
+        private int memberID;
         private String familyGed;
-        protected Individual husband;
+        private Individual husband;
         private String husbandID;
         private String husbandGed;
-        protected Individual wife;
+        private Individual wife;
         private String wifeID;
         private String wifeGed;
         private List<Fact> facts;
-        protected List<Individual> children;
+        private List<Individual> children;
 
-        protected Family(String familyID, int memberID, String familyGed)
+        private void SetupFamily(String familyID, int memberID, String familyGed)
         {
             this.familyID = familyID;
             this.memberID = memberID;
@@ -35,7 +35,7 @@ namespace FTAnalyser
 /*
         public Family(FamilyLocal fam)
         {
-            this(fam.getFamilyID(), fam.getMemberID().intValue(), fam.getGedcomID());
+            SetupFamily(fam.getFamilyID(), fam.getMemberID().intValue(), fam.getGedcomID());
             setHusband(fam.getHusband() != null ? new Individual(fam.getHusband()) : null);
             setWife(fam.getWife() != null ? new Individual(fam.getWife()) : null);
             if (husband != null && wife != null)
@@ -52,9 +52,9 @@ namespace FTAnalyser
             }
         }
 */
-        public Family(int memberID, XmlNode node)
+    public Family(int memberID, XmlNode node)
         {
-            this("", memberID, "");
+            SetupFamily("", memberID, "");
             if (node != null)
             {
                 XmlNode eHusband = node.SelectSingleNode("HUSB");

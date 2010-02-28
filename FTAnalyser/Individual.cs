@@ -86,7 +86,7 @@ namespace FTAnalyser
 		    this.marriedName = surname;
 	    }
  */   	
-	    private void addFacts(XmlNode node,String factType) {
+	    private void addFacts(XmlNode node, String factType) {
 	        Iterator<Element> it = node.nodeIterator(factType);
 	        while(it.hasNext()) {
                 XmlNode n = it.next();
