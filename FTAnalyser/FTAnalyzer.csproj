@@ -83,7 +83,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CsharpVsJava.txt" />
+    <Compile Include="Family.cs" />
     <Content Include="GedcomOutput.xml" />
+    <Compile Include="Individual.cs" />
+    <Compile Include="Location.cs" />
     <Content Include="Old Java Code\org\hardgate\exceptions\BadIGIDataException.java" />
     <Content Include="Old Java Code\org\hardgate\exceptions\DelegateException.java" />
     <Content Include="Old Java Code\org\hardgate\exceptions\DuplicateException.java" />
@@ -139,6 +142,7 @@
     <Content Include="Old Java Code\org\hardgate\utilities\Messages.java" />
     <Content Include="Old Java Code\org\hardgate\utilities\PropertyLoader.java" />
     <Content Include="Old Java Code\org\hardgate\utilities\ServiceLocator.java" />
+    <Compile Include="ParentalGroup.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

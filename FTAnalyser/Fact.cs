@@ -171,7 +171,7 @@ namespace FTAnalyser
         }
         
         private boolean setCertificatePresent() {
-	        for (FactSource fs : sources) {
+	        foreach (FactSource fs in sources) {
 	    	    return (factType.Equals(Fact.BIRTH) && fs.isBirthCert()) ||
 	    		    (factType.Equals(Fact.DEATH) && fs.isDeathCert()) ||
 	    		    (factType.Equals(Fact.MARRIAGE) && fs.isMarriageCert()) ||
