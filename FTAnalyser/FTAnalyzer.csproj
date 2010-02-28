@@ -35,12 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AElfred, Version=2.0.2441.18460, Culture=neutral, PublicKeyToken=f711ce86fddb3731, processorArchitecture=MSIL" />
-    <Reference Include="Org.System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=63191540fddeb5a7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>GedcomParser\Org.System.Xml.dll</HintPath>
-    </Reference>
-    <Reference Include="Sax, Version=2.0.0.0, Culture=neutral, PublicKeyToken=be21d24d19a1d110, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -89,10 +83,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CsharpVsJava.txt" />
-    <Content Include="GedcomParser\AElfred.dll" />
-    <Content Include="GedcomParser\Org.System.Xml.dll" />
-    <Content Include="GedcomParser\Sax.dll" />
-    <Content Include="GedcomParser\XmlToGedcom.xsl" />
     <Content Include="Old Java Code\org\hardgate\exceptions\BadIGIDataException.java" />
     <Content Include="Old Java Code\org\hardgate\exceptions\DelegateException.java" />
     <Content Include="Old Java Code\org\hardgate\exceptions\DuplicateException.java" />

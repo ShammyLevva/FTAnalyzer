@@ -19,11 +19,6 @@ namespace FTAnalyser
 
         private void openButton_Click(object sender, EventArgs e)
         {
-//            InputSource input = new InputSource();
-//            input.SystemId = "C:/Users/Alexander/Documents/Genealogy/Bisset Tree.ged";
-
-//            GedcomSaxParser parser = new GedcomSaxParser();
-//            parser.Parse(input);
             String path = "C:/Users/Alexander/Documents/Genealogy/Bisset Tree.ged";
             XmlDocument document = GedcomToXml.Load(path);
             document.Save("GedcomOutput.xml");
