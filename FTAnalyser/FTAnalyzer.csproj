@@ -121,6 +121,14 @@
     <Content Include="Old Java Code\org\hardgate\familytree\registrations\DeathRegistration.java" />
     <Content Include="Old Java Code\org\hardgate\familytree\registrations\MarriageRegistration.java" />
     <Content Include="Old Java Code\org\hardgate\familytree\registrations\Registration.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\xml\AnselInputStreamReader.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\xml\AnselOutputStreamWriter.java" />
+    <Compile Include="GedcomParser\AnselInputStreamReader.cs" />
+    <Compile Include="GedcomParser\AnselOutputStreamWriter.cs" />
+    <Compile Include="GedcomParser\GedcomOutputter.cs" />
+    <Compile Include="GedcomParser\GedcomParser.cs" />
+    <Content Include="Old Java Code\org\hardgate\familytree\xml\GedcomOutputter.java" />
+    <Content Include="Old Java Code\org\hardgate\familytree\xml\GedcomParser.java" />
     <Content Include="Old Java Code\org\hardgate\utilities\DateInterval.java" />
     <Content Include="Old Java Code\org\hardgate\utilities\Messages.java" />
     <Content Include="Old Java Code\org\hardgate\utilities\PropertyLoader.java" />
