@@ -97,6 +97,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CsharpVsJava.txt" />
+    <Compile Include="Exceptions\BadIGIDataException.cs" />
+    <Compile Include="Exceptions\MissingPrimaryKeyException.cs" />
+    <Compile Include="Exceptions\DuplicateException.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Family.cs" />
     <Content Include="GedcomOutput.xml" />
     <Compile Include="Individual.cs" />
