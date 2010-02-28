@@ -52,16 +52,16 @@ namespace FTAnalyser
             }
         }
 */
-        public Family(int memberID, XmlElement element)
+        public Family(int memberID, XmlNode node)
         {
             this("", memberID, "");
-            if (element != null)
+            if (node != null)
             {
-                XmlElement eHusband = element.element("HUSB");
-                XmlElement eWife = element.element("WIFE");
-                this.familyGed = element.attributeValue("ID");
-                this.husbandGed = eHusband == null ? null : eHusband.attributeValue("REF");
-                this.wifeGed = eWife == null ? null : eWife.attributeValue("REF");
+                XmlNode eHusband = node.SelectSingleNode("HUSB");
+                XmlNode eWife = node.SelectSingleNode("WIFE");
+                this.familyGed = node.Attributes.GetNamedItem("ID").ToString();
+                this.husbandGed = eHusband == null ? null : eHusband.Attributes.GetNamedItem("REF").ToString();
+                this.wifeGed = eWife == null ? null : eWife.Attributes.GetNamedItem("REF").ToString();
                 Client client = Client.getInstance();
                 try
                 {
@@ -85,7 +85,7 @@ namespace FTAnalyser
                 {
                     // now iterate through child elements of eChildren
                     // finding all individuals
-                    for (Iterator i = element.elementIterator("CHIL"); i.hasNext(); )
+                    for (Iterator i = node.elementIterator("CHIL"); i.hasNext(); )
                     {
                         XmlElement el = (XmlElement)i.next();
                         Individual child = client.getGedcomIndividual(memberID, el.attributeValue("REF"));
@@ -96,18 +96,18 @@ namespace FTAnalyser
                 {
                     Console.WriteLine("Child not found in family :" + this.familyGed);
                 }
-                addFacts(element, Fact.MARRIAGE);
-                addFacts(element, Fact.CUSTOM_FACT);
+                addFacts(node, Fact.MARRIAGE);
+                addFacts(node, Fact.CUSTOM_FACT);
             }
         }
 
-        private void addFacts(XmlElement element, String factType)
+        private void addFacts(XmlNode node, String factType)
         {
-            Iterator it = element.elementIterator(factType);
+            Iterator it = node.elementIterator(factType);
             while (it.hasNext())
             {
-                XmlElement e = (XmlElement)it.next();
-                facts.Add(new Fact(this.memberID, e));
+                XmlNode n = (XmlNode)it.next();
+                facts.Add(new Fact(this.memberID, n));
             }
         }
 

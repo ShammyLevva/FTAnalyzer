@@ -259,7 +259,7 @@ namespace FTAnalyser
         /**
          * @return Returns the datestring.
          */
-        public string getDatestring()
+        public string getDateString()
         {
             return this.datestring;
         }
@@ -364,7 +364,7 @@ namespace FTAnalyser
 
         public override string ToString()
         {
-            return getDatestring();
+            return getDateString();
         }
     }
 }

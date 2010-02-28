@@ -68,35 +68,35 @@ namespace FTAnalyser
 		    this.certificatePresent = fact.getCertificated().boolValue();
         }
 */
-        public Fact (int memberID, XmlElement element) {
-            if (element != null) {
-                factType = element.getName();
+        public Fact (int memberID, XmlNode node) {
+            if (node != null) {
+                factType = node.Name;
                 if (factType.Equals("EVEN")) {
-                    String tag = element.elementText("TYPE");
+                    String tag = node.SelectSingleNode("TYPE").ToString();
                     factType = (String) CUSTOM_TAGS.get(tag);
                     if (factType == null) {
                         factType = Fact.UNKNOWN;
                         Console.WriteLine("Recorded unknown fact type " + tag);
                     }
                 }
-                date = new FactDate(element.elementText("DATE"));
-                setCommentAndLocation(factType, element.elementText("PLAC"));
+                date = new FactDate(node.SelectSingleNode("DATE").ToString());
+                setCommentAndLocation(factType, node.SelectSingleNode("PLAC").ToString());
                 Client client = Client.getInstance();
 			    try {
 				    // now iterate through source elements of the fact
 				    // finding all sources
 				    sources = new List<FactSource>();
-			        for(Iterator i = element.elementIterator("SOUR"); i.hasNext();) {
-                        XmlElement el = (Element)i.next(); 
-			    	    FactSource source = client.getGedcomSource(memberID, el.attributeValue("REF"));
+			        for(Iterator i = node.nodeIterator("SOUR"); i.hasNext();) {
+                        XmlNode n = (XmlNode)i.next(); 
+			    	    FactSource source = client.getGedcomSource(memberID, n.attributeValue("REF"));
 			    	    sources.Add(source);
 			        } 
 			    } catch (NotFoundException e) {
 			        Console.WriteLine("Source not found for fact");
 			    }
                 if (factType.Equals(DEATH)) {
-                    XmlElement cause = element.element("CAUS");
-                    comment = (cause == null) ? "" : cause.getText();
+                    XmlNode cause = node.SelectSingleNode("CAUS");
+                    comment = (cause == null) ? "" : cause.ToString();
                 }
                 this.certificatePresent = setCertificatePresent();
             }

@@ -25,37 +25,37 @@ namespace FTAnalyser
 	    private int relation;
 	    private List<Fact> facts;
     	
-	    public Individual (int memberID, XmlElement element) {
+	    public Individual (int memberID, XmlNode node) {
 		    this.memberID = memberID;
-		    gedcomID = element.attributeValue("ID");
-		    String name = element.elementText("NAME").trim();
+            gedcomID = node.Attributes.GetNamedItem("ID").ToString();
+            String name = node.SelectSingleNode("NAME").ToString().Trim();
 		    try {
-			    surname = name.substring(name.IndexOf("/")+1, name.LastIndexOf("/"));
-			    forenames = name.substring(0,name.IndexOf("/")-1);
-		    } catch (IndexOutOfBoundsException e) {
+                surname = name.Substring(name.IndexOf("/") + 1, name.LastIndexOf("/") - name.IndexOf("/"));
+			    forenames = name.Substring(0,name.IndexOf("/") - 1);
+		    } catch (Exception e) {
 			    surname = "UNKNOWN";
 			    forenames = name;
 		    }
 		    marriedName = surname;
 		    name = forenames + " " + surname;
-		    gender = element.elementText("SEX");
+            gender = node.SelectSingleNode("SEX").ToString();
 		    if (gender == null)
 		        gender = "U";
-		    alias = element.elementText("ALIA");
+            alias = node.SelectSingleNode("ALIA").ToString();
 		    relation = UNKNOWN;
 		    status = UNKNOWNSTATUS;
 		    facts = new List<Fact>(0);
-		    addFacts(element,Fact.BIRTH);
-		    addFacts(element,Fact.CHRISTENING);
-		    addFacts(element,Fact.DEATH);
-		    addFacts(element,Fact.BURIAL);
-		    addFacts(element,Fact.CENSUS);
-		    addFacts(element,Fact.RESIDENCE);
-		    addFacts(element,Fact.OCCUPATION);
-		    addFacts(element,Fact.CUSTOM_FACT);
+		    addFacts(node,Fact.BIRTH);
+		    addFacts(node,Fact.CHRISTENING);
+		    addFacts(node,Fact.DEATH);
+		    addFacts(node,Fact.BURIAL);
+		    addFacts(node,Fact.CENSUS);
+		    addFacts(node,Fact.RESIDENCE);
+		    addFacts(node,Fact.OCCUPATION);
+		    addFacts(node,Fact.CUSTOM_FACT);
 	    }
-
-	    public Individual (Individual ind) {
+/*
+	    public Individual (IndividualLocal ind) {
 	        if (ind != null) {
 			    this.individualID = ind.getIndividualID();
 			    this.memberID = ind.getMemberID().intValue();
@@ -85,12 +85,12 @@ namespace FTAnalyser
 	        }
 		    this.marriedName = surname;
 	    }
-    	
-	    private void addFacts(XmlElement element,String factType) {
-	        Iterator<Element> it = element.elementIterator(factType);
+ */   	
+	    private void addFacts(XmlNode node,String factType) {
+	        Iterator<Element> it = node.nodeIterator(factType);
 	        while(it.hasNext()) {
-	            XmlElement e = it.next();
-	            facts.Add(new Fact(this.memberID, e));
+                XmlNode n = it.next();
+	            facts.Add(new Fact(this.memberID, n));
 	        }
 	    }
 
