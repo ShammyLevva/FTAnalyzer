@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Xml;
 
 namespace FTAnalyser
 {
-    public class Individual : Serializable, IComparable<Individual> {
+    public class Individual : IComparable<Individual> {
     	
 	    // define relation type from direct ancestor to related by marriage and 
 	    // MARRIAGEDB ie: married to a direct or blood relation
@@ -21,15 +23,14 @@ namespace FTAnalyser
 	    private String alias;
 	    private String status;
 	    private int relation;
-	    private ArrayList<Fact> facts;
+	    private List<Fact> facts;
     	
-	    public Individual (int memberID, Element element) {
+	    public Individual (int memberID, XmlElement element) {
 		    this.memberID = memberID;
 		    gedcomID = element.attributeValue("ID");
 		    String name = element.elementText("NAME").trim();
 		    try {
-			    surname = name.substring(name.IndexOf("/")+1,
-                    name.LastIndexOf("/"));
+			    surname = name.substring(name.IndexOf("/")+1, name.LastIndexOf("/"));
 			    forenames = name.substring(0,name.IndexOf("/")-1);
 		    } catch (IndexOutOfBoundsException e) {
 			    surname = "UNKNOWN";
@@ -43,7 +44,7 @@ namespace FTAnalyser
 		    alias = element.elementText("ALIA");
 		    relation = UNKNOWN;
 		    status = UNKNOWNSTATUS;
-		    facts = new ArrayList<Fact>(0);
+		    facts = new List<Fact>(0);
 		    addFacts(element,Fact.BIRTH);
 		    addFacts(element,Fact.CHRISTENING);
 		    addFacts(element,Fact.DEATH);
@@ -54,7 +55,7 @@ namespace FTAnalyser
 		    addFacts(element,Fact.CUSTOM_FACT);
 	    }
 
-	    public Individual (IndividualLocal ind) {
+	    public Individual (Individual ind) {
 	        if (ind != null) {
 			    this.individualID = ind.getIndividualID();
 			    this.memberID = ind.getMemberID().intValue();
@@ -65,10 +66,10 @@ namespace FTAnalyser
 			    this.alias = ind.getAlias();
 			    this.relation = ind.getRelation().intValue();
 			    this.status = UNKNOWNSTATUS;
-			    this.facts = new ArrayList<Fact>();
+			    this.facts = new List<Fact>();
 			    Iterator it = ind.getFacts().iterator();
 			    while (it.hasNext()) {
-			        this.facts.add(new Fact((FactLocal) it.next()));
+			        this.facts.add(new Fact(it.next()));
 			    }
 	        } else {
 	    	    this.memberID = 0;
@@ -80,15 +81,15 @@ namespace FTAnalyser
 	    	    this.alias = "";
 	    	    this.relation = UNKNOWN;
 	    	    this.status = UNKNOWNSTATUS;
-	            this.facts = new ArrayList<Fact>(0); 
+	            this.facts = new List<Fact>(0); 
 	        }
 		    this.marriedName = surname;
 	    }
     	
-	    private void addFacts(Element element,String factType) {
+	    private void addFacts(XmlElement element,String factType) {
 	        Iterator<Element> it = element.elementIterator(factType);
 	        while(it.hasNext()) {
-	            Element e = it.next();
+	            XmlElement e = it.next();
 	            facts.add(new Fact(this.memberID, e));
 	        }
 	    }
@@ -145,7 +146,7 @@ namespace FTAnalyser
 	    /**
 	     * @return Returns true if individual is male
 	     */	
-	    public boolean isMale() {
+	    public bool isMale() {
 		    return this.gender.Equals("M");
 	    }
 	    /**
@@ -202,7 +203,7 @@ namespace FTAnalyser
 	     * @return Returns all facts of the given type.
 	     */
 	    public List<Fact> getFacts(String factType) {
-	        List<Fact> result = new ArrayList<Fact>();
+	        List<Fact> result = new List<Fact>();
 	        foreach(Fact f in facts)
             {
 		        if (f.getFactType().Equals(factType))
@@ -211,7 +212,7 @@ namespace FTAnalyser
 	        return result;
 	    }
     	
-	    public boolean isCensusDone(FactDate when) {
+	    public bool isCensusDone(FactDate when) {
 	        foreach(Fact f in facts) 
             {
 		        if (f.getFactType().Equals(Fact.CENSUS) &&
@@ -278,12 +279,12 @@ namespace FTAnalyser
             return occupation == null ? "" : occupation.getComment();
         }
         
-        public boolean isDeceased (FactDate when) {
+        public bool isDeceased (FactDate when) {
             Fact death = getPreferredFact(Fact.DEATH);
             return death != null && death.getFactDate().isBefore(when);
         }
         
-        public boolean isSingleAtDeath() {
+        public bool isSingleAtDeath() {
             Fact single = getPreferredFact(Fact.UNMARRIED);
             return single != null || getMaxAgeAtDeath() < 16 || getCurrentAge() < 16;
         }
@@ -344,12 +345,12 @@ namespace FTAnalyser
             return getMinAge(new FactDate(now));
         }
 
-        public int compareTo (Individual that) {
+        public int CompareTo (Individual that) {
             // Individuals are naturally ordered by surname, then forenames,
             // then date of birth.
-            int res = this.surname.compareTo(that.surname);
+            int res = this.surname.CompareTo(that.surname);
             if (res == 0) {
-                res = this.forenames.compareTo(that.forenames);
+                res = this.forenames.CompareTo(that.forenames);
                 if (res == 0) {
                     Fact b1 = this.getPreferredFact(Fact.BIRTH);
                     Fact b2 = that.getPreferredFact(Fact.BIRTH);

@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace FTAnalyser
 {
-    public class Location : Serializable, IComparable<Location> {
+    public class Location : IComparable<Location> {
         
 	    public static readonly String SCOTLAND = "Scotland", ENGLAND = "England",
 			    CANADA = "Canada";

@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace FTAnalyser
 {
-    public class ParentalGroup : Serializable {
+    public class ParentalGroup {
     	
         private Individual individual;
         private Individual father, mother;
