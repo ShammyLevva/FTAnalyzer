@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +20,7 @@ namespace FTAnalyser
         {
             long lineNr = 0;
 
-            string line, currentLine, token1, token2;
+            string line, token1, token2;
             string level;
             int thislevel;
             int prevlevel;
@@ -31,7 +31,6 @@ namespace FTAnalyser
             newlineCharArray[0] = '\n';
 
             lineNr = 0;
-            currentLine = "";
 
             Stack<string> stack = new Stack<string>();
             stack.Push("GED");
@@ -51,7 +50,6 @@ namespace FTAnalyser
                     line = line.Trim();
 
                     lineNr++;
-                    currentLine = line;
 
                     // parse the GEDCOM line into five fields: level, iden, tag, xref, valu
 
@@ -112,7 +110,7 @@ namespace FTAnalyser
                         // insert any necessary closing tags
                         while (thislevel <= prevlevel)
                         {
-                            string endtag = (string)stack.Pop();
+                            stack.Pop();
                             node = node.ParentNode;
                             prevlevel--;
                         }
