@@ -9,6 +9,11 @@
 *  @version 21 January 2001: modified to conform to SAX2
 */
   
+using System;
+using System.IO;
+using Org.System.Xml.Sax;
+using System.Text;
+using Org.System.Xml.Sax.Helpers;
 namespace FTAnalyser
 {
 /*
@@ -22,20 +27,20 @@ namespace FTAnalyser
     public class GedcomOutputter : DefaultHandler
     {
         int level = 0;
-        boolean acceptCharacters = true;
+        bool acceptCharacters = true;
         GedcomLine line = new GedcomLine();
-        Writer writer;
+        AnselOutputStreamWriter writer;
      
        /**
         * Start of the document. 
         */
-        public void startDocument () throws SAXException
+        public void startDocument ()
         {
             // Create/open the output file
             try {
-                writer = new AnselOutputStreamWriter(System.out);
+                writer = new AnselOutputStreamWriter(Console.OpenStandardOutput());
             } catch (Exception err) {
-                throw new SAXException("Failed to create output stream", err);
+                throw new SaxException("Failed to create output stream", err);
             }
         }
 
@@ -43,14 +48,14 @@ namespace FTAnalyser
         * End of the document.
         */
 
-        public void endDocument () throws SAXException
+        public void endDocument ()
         {
             try {
                 if (line.level>=0) flushLine();
-                writer.write("0 TRLR\n");
-                writer.close();
-            } catch (java.io.IOException err) {
-                throw new SAXException(err);
+                writer.WriteAnsel("0 TRLR\n");
+                writer.Close();
+            } catch (IOException err) {
+                throw new SaxException(err.Message);
             }
         }
 
@@ -58,17 +63,17 @@ namespace FTAnalyser
         * Start of an element.
         */
         
-        public void startElement (String pref, String ns, String name, Attributes attributes) throws SAXException
+        public void startElement (string pref, string ns, string name, IAttributes attributes)
         {
-            if (name.equals("GED")) return;
+            if (name.Equals("GED")) return;
             
             if (line.level>=0) flushLine();
             
             line.level = level;
-            line.id = attributes.getValue("", "ID");       
+            line.id = attributes.GetValue("", "ID");       
             line.tag = name;
-            line.ref = attributes.getValue("", "REF");
-            line.text.setLength(0);
+            line.reference = attributes.GetValue("", "REF");
+            line.text.Length = 0;
 
             acceptCharacters = true;
             level++;
@@ -79,7 +84,7 @@ namespace FTAnalyser
         * End of an element.
         */
 
-        public void endElement (String prefix, String ns, String name) throws SAXException 
+        public void endElement (string prefix, string ns, string name)
         {
             level--;
             if (line.level>=0) flushLine();
@@ -90,16 +95,16 @@ namespace FTAnalyser
         * Character data.
         */
         
-        public void characters (char ch[], int start, int length) throws SAXException
+        public void characters (char[] ch, int start, int length)
         {
             if (!acceptCharacters) {
                 for (int i=start; i<start+length; i++) {
-                    if (!Character.isWhitespace(ch[i])) {
-                        throw new SAXException("Character data not allowed after end tag");
+                    if (!Char.IsWhiteSpace(ch[i])) {
+                        throw new SaxException("Character data not allowed after end tag");
                     }
                 }
             } else {
-                line.text.append(ch, start, length);
+                line.text.Append(ch, start, length);
             }
             
         }
@@ -108,7 +113,7 @@ namespace FTAnalyser
         * Ignore ignorable whitespace.
         */
 
-        public void ignorableWhitespace (char ch[], int start, int length)
+        public void ignorableWhitespace (char[] ch, int start, int length)
         {}
 
 
@@ -116,24 +121,24 @@ namespace FTAnalyser
         * Handle a processing instruction.
         */
         
-        public void processingInstruction (String target, String data)
+        public void processingInstruction (string target, string data)
         {}
 
         /**
         * Flush the accumulated output line
         */
         
-        private void flushLine() throws SAXException {
-            String text = line.text.toString().trim();
-            int base = line.level;
-            int prevnl = 0;
+        private void flushLine() 
+        {
+            string text = line.text.ToString().Trim();
+            int baseLevel = line.level;
             // if the line contains a newline char, add a CONT element
             while (true) {
-                int nl = text.indexOf('\n');
-                String textline = text;
+                int nl = text.IndexOf('\n');
+                string textline = text;
                 if (nl>=0) {
-                    line.text.setLength(nl);
-                    textline = text.substring(0,nl);
+                    line.text.Length = nl;
+                    textline = text.Substring(0,nl);
                 } else {
                     textline = text;
                 }
@@ -141,49 +146,49 @@ namespace FTAnalyser
                 // if the line is longer than the GEDCOM limit, add CONC elements
                 while (true) {
                     int split = -1;
-                    int len = line.tag.length() + 4 +
-                                (line.id==null ? 0 : line.id.length()+3) +
-                                (line.ref==null ? 0 : line.ref.length()+3) +
-                                textline.length();
+                    int len = line.tag.Length + 4 +
+                                (line.id==null ? 0 : line.id.Length+3) +
+                                (line.reference==null ? 0 : line.reference.Length+3) +
+                                textline.Length;
                     if (len > 255) {                    // exceeds the limit
                         // split the line if possible between two non-space characters
                         split = 80;
                         while (split>0 &&
-                                 (Character.isWhitespace(text.charAt(split)) ||
-                                  Character.isWhitespace(text.charAt(split+1)))) {
+                                 (Char.IsWhiteSpace(text[split]) ||
+                                  Char.IsWhiteSpace(text[split+1]))) {
                             split--;
                         }
                         if (split==0) split = 80;       // failed: split at column 80
-                        line.text.setLength(split);
-                        line.write();
+                        line.text.Length = split;
+                        line.write(writer);
                         
-                        line.level = base+1;
+                        line.level = baseLevel+1;
                         line.id = null;
                         line.tag = "CONC";
-                        line.ref = null;
-                        line.text.setLength(0);
-                        textline = textline.substring(split);
-                        line.text.append(textline);
+                        line.reference = null;
+                        line.text.Length = 0;
+                        textline = textline.Substring(split);
+                        line.text.Append(textline);
                     }
                                 
-                    line.write();
+                    line.write(writer);
                     if (split<0) break;
                 }
                 
                 // prepare next line of output
-                if (nl > 0 && nl+1 < text.length()) {                   
-                    line.level = base+1;
+                if (nl > 0 && nl+1 < text.Length) {                   
+                    line.level = baseLevel+1;
                     line.id = null;
                     line.tag = "CONT";
-                    line.ref = null;
-                    line.text.setLength(0);
-                    text = text.substring(nl+1);
-                    line.text.append(text);
+                    line.reference = null;
+                    line.text.Length = 0;
+                    text = text.Substring(nl+1);
+                    line.text.Append(text);
                 } else {
                     break;
                 }
             }
-            line.text.setLength(0);
+            line.text.Length = 0;
             line.level = -1;
         }
 
@@ -192,29 +197,30 @@ namespace FTAnalyser
         */
 
         private class GedcomLine {
+
             public int level = -1;
-            public String id;
-            public String tag;
-            public String ref;
-            public StringBuffer text = new StringBuffer();
+            public string id;
+            public string tag;
+            public string reference;
+            public StringBuilder text = new StringBuilder();
 
             /**
             * Write the GEDCOM line using the current writer
             */
 
-            public void write() throws SAXException {
+            public void write(AnselOutputStreamWriter writer) {
                 try {
-                    writer.write(level + " ");
+                    writer.WriteAnsel(level + " ");
                     if (id!=null) {
-                        writer.write('@' + id + "@ ");
+                        writer.WriteAnsel('@' + id + "@ ");
                     }
-                    writer.write(tag + ' ');
-                    if (ref!=null) {
-                        writer.write('@' + ref + "@ ");
+                    writer.WriteAnsel(tag + ' ');
+                    if (reference!=null) {
+                        writer.WriteAnsel('@' + reference + "@ ");
                     }
-                    writer.write(text.toString() + '\n');
-                } catch (java.io.IOException err) {
-                    throw new SAXException(err);
+                    writer.WriteAnsel(text.ToString() + '\n');
+                } catch (IOException err) {
+                    throw new SaxException(err.Message);
                 }
             }
         }

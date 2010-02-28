@@ -10,50 +10,50 @@ namespace FTAnalyser
 {
     class FactDate: IComparable<FactDate>
     {
-        public static sealed DateTime MINDATE = new DateTime(1, 0, 1);
-        public static sealed DateTime MAXDATE = new DateTime(9999, 11, 31);
-        public static sealed int MAXYEARS = 110;
-        public static sealed int MINYEARS = 0;
-        private static sealed int LOW =  0;
-        private static sealed int HIGH = 1;
+        public static readonly DateTime MINDATE = new DateTime(1, 0, 1);
+        public static readonly DateTime MAXDATE = new DateTime(9999, 11, 31);
+        public static readonly int MAXYEARS = 110;
+        public static readonly int MINYEARS = 0;
+        private static readonly int LOW = 0;
+        private static readonly int HIGH = 1;
 
-        private static sealed String YEAR = "{0:yyyy}";
-        private static sealed String MONTHYEAR = "{0:MMM yyyy}";
-        private static sealed String DAYMONTH = "{0:dd MMM}";
-        private static sealed String MONTH = "{0:MMM}";
-        private static sealed String FULL = "{0:dd MMM yyyy}";
-        private static sealed String DISPLAY = "{0:d MMM yyyy}";
-        private static sealed String CHECKING = "{0:dd MMM}";
-        private static sealed String DATE_PATTERN = "(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})";
+        private static readonly string YEAR = "{0:yyyy}";
+        private static readonly string MONTHYEAR = "{0:MMM yyyy}";
+        private static readonly string DAYMONTH = "{0:dd MMM}";
+        private static readonly string MONTH = "{0:MMM}";
+        private static readonly string FULL = "{0:dd MMM yyyy}";
+        private static readonly string DISPLAY = "{0:d MMM yyyy}";
+        private static readonly string CHECKING = "{0:dd MMM}";
+        private static readonly string DATE_PATTERN = "(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})";
 
-        public static sealed FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
-        public static sealed FactDate CENSUS1841 = new FactDate("06 JUN 1841");
-        public static sealed FactDate CENSUS1851 = new FactDate("30 MAR 1851");
-        public static sealed FactDate CENSUS1861 = new FactDate("07 APR 1861");
-        public static sealed FactDate CENSUS1871 = new FactDate("02 APR 1871");
-        public static sealed FactDate CENSUS1881 = new FactDate("03 APR 1881");
-        public static sealed FactDate CENSUS1891 = new FactDate("05 APR 1891");
-        public static sealed FactDate CENSUS1901 = new FactDate("31 MAR 1901");
+        public static readonly FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
+        public static readonly FactDate CENSUS1841 = new FactDate("06 JUN 1841");
+        public static readonly FactDate CENSUS1851 = new FactDate("30 MAR 1851");
+        public static readonly FactDate CENSUS1861 = new FactDate("07 APR 1861");
+        public static readonly FactDate CENSUS1871 = new FactDate("02 APR 1871");
+        public static readonly FactDate CENSUS1881 = new FactDate("03 APR 1881");
+        public static readonly FactDate CENSUS1891 = new FactDate("05 APR 1891");
+        public static readonly FactDate CENSUS1901 = new FactDate("31 MAR 1901");
  
-        private String dateString;
+        private string datestring;
         private DateTime startdate;
         private DateTime enddate;
 
-        public FactDate(String dateString)
+        public FactDate(string datestring)
         {
-            if (dateString == null || dateString.Length == 0)
+            if (datestring == null || datestring.Length == 0)
             {
-                this.dateString = "UNKNOWN";
+                this.datestring = "UNKNOWN";
             }
             else
             {
-                this.dateString = dateString.ToUpper();
+                this.datestring = datestring.ToUpper();
             }
             startdate = MINDATE;
             enddate = MAXDATE;
-            if (!this.dateString.Equals("UNKNOWN"))
+            if (!this.datestring.Equals("UNKNOWN"))
             {
-                processDate(this.dateString);
+                processDate(this.datestring);
             }
         }
 
@@ -61,7 +61,7 @@ namespace FTAnalyser
         {
             this.startdate = startdate;
             this.enddate = enddate;
-            this.dateString = calculateDateString();
+            this.datestring = calculateDatestring();
         }
 
         public FactDate addYears(int years)
@@ -75,9 +75,9 @@ namespace FTAnalyser
             return new FactDate(start, end);
         }
 
-        private String calculateDateString()
+        private string calculateDatestring()
         {
-            String check;
+            string check;
             bool between = false;
             StringBuilder output = new StringBuilder();
             if (startdate == MINDATE)
@@ -89,7 +89,7 @@ namespace FTAnalyser
             }
             else
             {
-                check = String.Format(CHECKING, startdate).ToUpper();
+                check = string.Format(CHECKING, startdate).ToUpper();
                 if (enddate == MAXDATE)
                     output.Append("AFT ");
                 else
@@ -98,36 +98,36 @@ namespace FTAnalyser
                     between = true;
                 }
                 if (check.Equals("01 JAN"))
-                    output.Append(String.Format(YEAR, startdate).ToUpper());
+                    output.Append(string.Format(YEAR, startdate).ToUpper());
                 else
-                    output.Append(String.Format(DISPLAY, startdate).ToUpper());
+                    output.Append(string.Format(DISPLAY, startdate).ToUpper());
                 if (between)
                     output.Append(" AND ");
             }
             if (enddate != MAXDATE)
             {
-                check = String.Format(CHECKING, enddate).ToUpper();
+                check = string.Format(CHECKING, enddate).ToUpper();
                 if (check.Equals("31 DEC"))
                 {
                     // add 1 day to take it to 1st Jan following year
                     // this makes the range of "bef 1900" change to 
                     // "bet xxxx and 1900"
-                    output.Append(String.Format(YEAR, enddate).ToUpper());
+                    output.Append(string.Format(YEAR, enddate).ToUpper());
                 }
                 else
-                    output.Append(String.Format(DISPLAY, enddate).ToUpper());
+                    output.Append(string.Format(DISPLAY, enddate).ToUpper());
             }
             return output.ToString().ToUpper();
         }
 
-        private void processDate(String processDate)
+        private void processDate(string processDate)
         {
-            // takes dateString and works out start and end dates 
+            // takes datestring and works out start and end dates 
             // prefixes are BEF, AFT, BET and nothing
             // dates are "YYYY" or "MMM YYYY" or "DD MMM YYYY"
             try
             {
-                String dateValue = processDate.Substring(4);
+                string dateValue = processDate.Substring(4);
                 if (processDate.StartsWith("BEF"))
                 {
                     enddate = parseDate(dateValue, HIGH, -1);
@@ -160,12 +160,12 @@ namespace FTAnalyser
             }
         }
 
-        private DateTime parseDate(String dateValue, int highlow, int adjustment)
+        private DateTime parseDate(string dateValue, int highlow, int adjustment)
         {
             return parseDate(dateValue, highlow, adjustment, 0);
         }
 
-        private DateTime parseDate(String dateValue, int highlow, int adjustment, int defaultYear)
+        private DateTime parseDate(string dateValue, int highlow, int adjustment, int defaultYear)
         {
             DateTime date;
             DateTime dt = MINDATE;
@@ -176,7 +176,7 @@ namespace FTAnalyser
                 // Match the regular expression pattern against a text string.
                 Match matcher = r.Match(dateValue);
                 Group gDay = matcher.Groups[1], gMonth = matcher.Groups[2], gYear = matcher.Groups[3];
-                String day = gDay.ToString(), month = gMonth.ToString(), year = gYear.ToString();
+                string day = gDay.ToString(), month = gMonth.ToString(), year = gYear.ToString();
                 if (day == null) day = "";
                 if (month == null) month = "";
                 if (year == null) year = "";
@@ -257,11 +257,11 @@ namespace FTAnalyser
         }
 
         /**
-         * @return Returns the dateString.
+         * @return Returns the datestring.
          */
-        public String getDateString()
+        public string getDatestring()
         {
-            return this.dateString;
+            return this.datestring;
         }
 
         /*
@@ -312,16 +312,16 @@ namespace FTAnalyser
 
         public int getMaximumYear(FactDate that)
         {
-            Debug.WriteLine("Max: This start date is " + String.Format(FULL, startdate));
-            Debug.WriteLine("Max: That end date is " + (that == null ? "null" : String.Format(FULL, enddate)));
+            Debug.WriteLine("Max: This start date is " + string.Format(FULL, startdate));
+            Debug.WriteLine("Max: That end date is " + (that == null ? "null" : string.Format(FULL, enddate)));
             int diff = Math.Abs(this.startdate.Year - ((that == null) ? MAXDATE.Year : that.enddate.Year));
             return Math.Min(diff, MAXYEARS);
         }
 
         public int getMinimumYear(FactDate that)
         {
-            Debug.WriteLine("Min: This end date is " + String.Format(FULL, enddate));
-            Debug.WriteLine("Min: That start date is " + (that == null ? "null" : String.Format(FULL, startdate)));
+            Debug.WriteLine("Min: This end date is " + string.Format(FULL, enddate));
+            Debug.WriteLine("Min: That start date is " + (that == null ? "null" : string.Format(FULL, startdate)));
             int diff = Math.Abs(this.enddate.Year - ((that == null) ? MINDATE.Year : that.startdate.Year));
             return Math.Max(diff, MINYEARS);
         }
@@ -338,11 +338,16 @@ namespace FTAnalyser
                 return false;
             FactDate f = (FactDate) that;
             // two FactDates are equal if same datestring or same start and enddates
-            return (this.dateString.ToUpper().Equals(f.dateString.ToUpper())) ||
+            return (this.datestring.ToUpper().Equals(f.datestring.ToUpper())) ||
         	       (this.startdate.Equals(f.startdate) && this.enddate.Equals(f.enddate));
         }
 
-        public override int CompareTo(FactDate that)
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public int CompareTo(FactDate that)
         {
             if (this.Equals(that))
                 return 0;
@@ -357,9 +362,9 @@ namespace FTAnalyser
             return this.startdate.Equals(this.enddate);
         }
 
-        public override String toString()
+        public override string ToString()
         {
-            return getDateString();
+            return getDatestring();
         }
     }
 }

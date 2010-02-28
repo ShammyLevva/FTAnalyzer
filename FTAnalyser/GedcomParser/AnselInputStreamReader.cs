@@ -8,6 +8,7 @@
 
 // 20 May 1998: conversion tables updated with input from John Cowan (cowan@locke.ccil.org)
 
+using System.IO;
 namespace FTAnalyser
 {
 /*
@@ -15,17 +16,15 @@ namespace FTAnalyser
     import java.io.InputStream;
     import java.io.InputStreamReader;
 */
-    public class AnselInputStreamReader : InputStreamReader
+    public class AnselInputStreamReader : StreamReader
     {
-        private InputStream input;
+        private Stream input;
         private int pending;
 
-        public AnselInputStreamReader(InputStream in)
-        throws IOException
+        public AnselInputStreamReader(Stream input) : base(input)
         {
-            super(in);
-            input = in;
-            pending = input.read(); // we read one character ahead to cope
+            this.input = input;
+            pending = input.ReadByte(); // we read one character ahead to cope
                                     // with non-spacing diacriticals
         }
 
@@ -33,18 +32,18 @@ namespace FTAnalyser
         * Return one UNICODE character
         */
 
-        public int read() throws IOException
+        public int ReadAnsel()
         {
             int b = pending;
             if (b<0) return b;     // return EOF unchanged
-            pending = input.read();
+            pending = input.ReadByte();
             if (b<128) return b;   // return ASCII characters unchanged
 
             // try to match two ansel chars if we can
             if (pending>0 && b>=0xE0 && b<=0xFF) {
                 int u = convert2(b*256 + pending);
                 if (u>0) {
-                    pending = input.read();
+                    pending = input.ReadByte();
                     return u;
                 }
             }
@@ -56,12 +55,11 @@ namespace FTAnalyser
         * Fill a supplied buffer with UNICODE characters
         */
 
-        public int read(char cbuf[], int off, int len)
-                         throws IOException
+        public int ReadAnsel(char[] cbuf, int off, int len)
         {
             if (pending<0) return -1;  // have already hit EOF
             for (int i=off; i<off+len; i++) {
-                int c = read();
+                int c = ReadAnsel();
                 if (c<0) return i-off;
                 cbuf[off+i] = (char)c;
             }
@@ -72,7 +70,7 @@ namespace FTAnalyser
         * Determine the character code in use
         */
 
-        public String getEncoding() {
+        public string getEncoding() {
             return "ANSEL";
         }
 

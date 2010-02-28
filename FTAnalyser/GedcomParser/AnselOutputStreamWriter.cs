@@ -9,6 +9,7 @@
 
 // 20 May 1998: conversion tables updated with input from John Cowan (cowan@locke.ccil.org)
 
+using System.IO;
 namespace FTAnalyser
 {
 /*
@@ -16,34 +17,35 @@ namespace FTAnalyser
     import java.io.OutputStream;
     import java.io.OutputStreamWriter;
 */
-    public class AnselOutputStreamWriter : OutputStreamWriter
+    public class AnselOutputStreamWriter : StreamWriter
     {
-        private OutputStream output;
+        private Stream output;
 
-        public AnselOutputStreamWriter(OutputStream out)
-        throws IOException
+        public AnselOutputStreamWriter(Stream output) : base(output)
         {
-            super(out);
-            output = out;
+            this.output = output;
         }
 
         /*
         * Write one UNICODE character
         */
 
-        public void write(int c) throws IOException
+        public void WriteAnsel(int c)
         {
-
             int ansel;
-            if (c<128) output.write(c);
-            else {
-              ansel = convert(c);
-              if (ansel < 256) {
-                output.write(ansel);
-              } else {
-                output.write(ansel / 256);
-                output.write(ansel % 256);
-              }
+            if (c < 128) output.WriteByte((byte) c);
+            else
+            {
+                ansel = convert(c);
+                if (ansel < 256)
+                {
+                    output.WriteByte((byte) ansel);
+                }
+                else
+                {
+                    output.WriteByte((byte) (ansel / 256));
+                    output.WriteByte((byte) (ansel % 256));
+                }
             }
         }
 
@@ -51,11 +53,11 @@ namespace FTAnalyser
         * Write part of an array of UNICODE characters
         */
 
-        public void write(char cbuf[], int off, int len)
-                         throws IOException
+        public void WriteAnsel(char[] cbuf, int off, int len)
         {
-            for (int i=off; i<off+len; i++) {
-                write(cbuf[i]);
+            for (int i=off; i<off+len; i++)
+            {
+                WriteAnsel(cbuf[i]);
             }
         }
 
@@ -63,11 +65,10 @@ namespace FTAnalyser
         * Write a string of UNICODE characters
         */
 
-        public void write(String s)
-                         throws IOException
+        public void WriteAnsel(string s)
         {
-            for (int i=0; i<s.length(); i++) {
-                write((int)s.charAt(i));
+            for (int i=0; i<s.Length; i++) {
+                WriteAnsel((int)s[i]);
             }
         }
 
@@ -75,7 +76,7 @@ namespace FTAnalyser
         * Determine the character code in use
         */
 
-        public String getEncoding() {
+        public string getEncoding() {
             return "ANSEL";
         }
 
