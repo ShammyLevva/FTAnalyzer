@@ -16,20 +16,13 @@ using System.Text;
 using Org.System.Xml.Sax.Helpers;
 namespace FTAnalyser
 {
-/*
-    import java.io.Writer;
-
-    import org.xml.sax.Attributes;
-    import org.xml.sax.SAXException;
-    import org.xml.sax.helpers.DefaultHandler;
-*/
     
     public class GedcomOutputter : DefaultHandler
     {
         int level = 0;
         bool acceptCharacters = true;
         GedcomLine line = new GedcomLine();
-        AnselOutputStreamWriter writer;
+        StreamWriter writer;
      
        /**
         * Start of the document. 
@@ -52,7 +45,7 @@ namespace FTAnalyser
         {
             try {
                 if (line.level>=0) flushLine();
-                writer.WriteAnsel("0 TRLR\n");
+                writer.Write("0 TRLR\n");
                 writer.Close();
             } catch (IOException err) {
                 throw new SaxException(err.Message);
@@ -208,17 +201,17 @@ namespace FTAnalyser
             * Write the GEDCOM line using the current writer
             */
 
-            public void write(AnselOutputStreamWriter writer) {
+            public void write(StreamWriter writer) {
                 try {
-                    writer.WriteAnsel(level + " ");
+                    writer.Write(level + " ");
                     if (id!=null) {
-                        writer.WriteAnsel('@' + id + "@ ");
+                        writer.Write('@' + id + "@ ");
                     }
-                    writer.WriteAnsel(tag + ' ');
+                    writer.Write(tag + ' ');
                     if (reference!=null) {
-                        writer.WriteAnsel('@' + reference + "@ ");
+                        writer.Write('@' + reference + "@ ");
                     }
-                    writer.WriteAnsel(text.ToString() + '\n');
+                    writer.Write(text.ToString() + '\n');
                 } catch (IOException err) {
                     throw new SaxException(err.Message);
                 }

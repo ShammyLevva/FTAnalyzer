@@ -63,6 +63,9 @@
     </Compile>
     <Compile Include="FTAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -132,6 +135,7 @@
     <Content Include="Old Java Code\org\hardgate\familytree\registrations\Registration.java" />
     <Content Include="Old Java Code\org\hardgate\familytree\xml\AnselInputStreamReader.java" />
     <Content Include="Old Java Code\org\hardgate\familytree\xml\AnselOutputStreamWriter.java" />
+    <Compile Include="GedcomParser\AnselEncoding.cs" />
     <Compile Include="GedcomParser\AnselInputStreamReader.cs" />
     <Compile Include="GedcomParser\AnselOutputStreamWriter.cs" />
     <Compile Include="GedcomParser\GedcomOutputter.cs" />

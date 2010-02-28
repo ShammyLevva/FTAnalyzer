@@ -20,26 +20,7 @@ using System.Xml;
 
 namespace FTAnalyser
 {
-/*
-    import java.io.BufferedReader;
-    import java.io.IOException;
-    import java.net.URL;
-    import java.util.Locale;
-    import java.util.Stack;
 
-    import org.xml.sax.ContentHandler;
-    import org.xml.sax.DTDHandler;
-    import org.xml.sax.EntityResolver;
-    import org.xml.sax.ErrorHandler;
-    import org.xml.sax.InputSource;
-    import org.xml.sax.Locator;
-    import org.xml.sax.SaxException;
-    import org.xml.sax.SAXNotRecognizedException;
-    import org.xml.sax.SAXParseException;
-    import org.xml.sax.XMLReader;
-    import org.xml.sax.helpers.AttributesImpl;
-    import org.xml.sax.helpers.DefaultHandler;
-*/
     public class GedcomParser : IXmlReader, ILocator {
 
         private IContentHandler contentHandler;
@@ -55,7 +36,7 @@ namespace FTAnalyser
         * Parse input from a supplied BufferedReader
         */
 
-        private void parse(AnselInputStreamReader reader) {
+        private void parse(StreamReader reader) {
             string line, currentLine, token1, token2;
             string level;
             int thislevel;
@@ -111,7 +92,7 @@ namespace FTAnalyser
                         if (token1.Length ==1 || !token1.EndsWith("@"))
                             throw new SaxException("Bad xref_id");
                            
-                        iden = token1.Substring(1, token1.Length - 1);
+                        iden = token1.Substring(1, token1.Length - 2);
                         tag = firstWord(line);
                         line = remainder(line);
                     } else {
@@ -125,7 +106,7 @@ namespace FTAnalyser
                         if (token2.Length==1 || !token2.EndsWith("@"))
                             throw new SaxException("Bad pointer value");
                             
-                        xref = token2.Substring(1, token2.Length - 1);
+                        xref = token2.Substring(1, token2.Length - 2);
                         line = remainder(line);
                     };
      
@@ -198,7 +179,7 @@ namespace FTAnalyser
             i = inp.IndexOf(' ');
             if (i==0) return remainder(inp.Trim());
             if (i<0) return "";
-            return inp.Substring(i+1,inp.Length).Trim();
+            return inp.Substring(i+1).Trim();
         }
 
         #region ILocator Members
