@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CsharpVsJava.txt" />
+    <Content Include="GedcomOutput.xml" />
     <Content Include="Old Java Code\org\hardgate\exceptions\BadIGIDataException.java" />
     <Content Include="Old Java Code\org\hardgate\exceptions\DelegateException.java" />
     <Content Include="Old Java Code\org\hardgate\exceptions\DuplicateException.java" />

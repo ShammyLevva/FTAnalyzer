@@ -87,7 +87,7 @@ public class Fact implements java.io.Serializable {
     public Fact (int memberID, Element element) {
         if (element != null) {
             factType = element.getName();
-            if (factType.equals("EVEN")) {
+            if (factType.Equals("EVEN")) {
                 String tag = element.elementText("TYPE");
                 factType = (String) CUSTOM_TAGS.get(tag);
                 if (factType == null) {
@@ -111,7 +111,7 @@ public class Fact implements java.io.Serializable {
 			} catch (NotFoundException e) {
 			    logger.warn("Source not found for fact");
 			}
-            if (factType.equals(DEATH)) {
+            if (factType.Equals(DEATH)) {
                 Element cause = element.element("CAUS");
                 comment = (cause == null) ? "" : cause.getText();
             }
@@ -192,10 +192,10 @@ public class Fact implements java.io.Serializable {
     
     private boolean setCertificatePresent() {
 	    for (FactSource fs : sources) {
-	    	return (factType.equals(Fact.BIRTH) && fs.isBirthCert()) ||
-	    		(factType.equals(Fact.DEATH) && fs.isDeathCert()) ||
-	    		(factType.equals(Fact.MARRIAGE) && fs.isMarriageCert()) ||
-	    		(factType.equals(Fact.CENSUS) && fs.isCensusCert());
+	    	return (factType.Equals(Fact.BIRTH) && fs.isBirthCert()) ||
+	    		(factType.Equals(Fact.DEATH) && fs.isDeathCert()) ||
+	    		(factType.Equals(Fact.MARRIAGE) && fs.isMarriageCert()) ||
+	    		(factType.Equals(Fact.CENSUS) && fs.isCensusCert());
 	    }
 	    return false;
     }
