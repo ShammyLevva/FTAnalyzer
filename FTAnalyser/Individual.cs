@@ -32,7 +32,7 @@ namespace FTAnalyser
 		    try {
                 surname = name.Substring(name.IndexOf("/") + 1, name.LastIndexOf("/") - name.IndexOf("/"));
 			    forenames = name.Substring(0,name.IndexOf("/") - 1);
-		    } catch (Exception e) {
+		    } catch (Exception) {
 			    surname = "UNKNOWN";
 			    forenames = name;
 		    }
@@ -87,7 +87,7 @@ namespace FTAnalyser
 	    }
  */   	
 	    private void addFacts(XmlNode node, String factType) {
-	        Iterator<Element> it = node.nodeIterator(factType);
+	        Iterator<XmlNode> it = node.nodeIterator(factType);
 	        while(it.hasNext()) {
                 XmlNode n = it.next();
 	            facts.Add(new Fact(this.memberID, n));
@@ -270,7 +270,7 @@ namespace FTAnalyser
                 return "";
             else {
                 int pos = forenames.IndexOf(' ');
-                return pos > 0 ? forenames.substring(0, pos) : forenames;
+                return pos > 0 ? forenames.Substring(0, pos) : forenames;
             }
         }
         
@@ -337,13 +337,13 @@ namespace FTAnalyser
 
         public int getMaxAge(DateTime when)
         {
-            String now = new SimpleDateFormat("dd MMM yyyy").format(when.getTime());
+            String now = string.Format(FactDate.FULL, when);
             return getMaxAge(new FactDate(now));
         }
 
         public int getMinAge(DateTime when)
         {
-            String now = new SimpleDateFormat("dd MMM yyyy").format(when.getTime());
+            String now = string.Format(FactDate.FULL, when);
             return getMinAge(new FactDate(now));
         }
 

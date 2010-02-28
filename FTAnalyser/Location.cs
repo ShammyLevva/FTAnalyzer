@@ -15,7 +15,7 @@ namespace FTAnalyser
 			    LANARK = "Lanarkshire", BANFF = "Banffshire",
 			    ANGUS = "Angus", MIDLOTHIAN = "Midlothian", FIFE = "Fife";
     	
-        public static const int COUNTRY = 0, REGION = 1, PARISH = 2,
+        public const int COUNTRY = 0, REGION = 1, PARISH = 2,
     		    ADDRESS = 3, PLACE = 4; 
     	
 	    private String country;

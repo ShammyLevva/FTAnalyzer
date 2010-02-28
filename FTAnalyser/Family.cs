@@ -85,10 +85,10 @@ namespace FTAnalyser
                 {
                     // now iterate through child elements of eChildren
                     // finding all individuals
-                    for (Iterator i = node.elementIterator("CHIL"); i.hasNext(); )
+                    for (Iterator i = node.nodeIterator("CHIL"); i.hasNext(); )
                     {
-                        XmlElement el = (XmlElement)i.next();
-                        Individual child = client.getGedcomIndividual(memberID, el.attributeValue("REF"));
+                        XmlNode n = (XmlNode)i.next();
+                        Individual child = client.getGedcomIndividual(memberID, n.attributeValue("REF"));
                         children.Add(child);
                     }
                 }
