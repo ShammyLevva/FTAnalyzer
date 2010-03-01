@@ -48,7 +48,7 @@ namespace FTAnalyser
 			        child.setStatus(Individual.CHILD);
 			        if (checkIndividual(child)) {
 				        result = true;
-				        censusChildren.add(child);
+				        censusChildren.Add(child);
 				    }
 			    }
 			    children = censusChildren;
@@ -100,7 +100,7 @@ namespace FTAnalyser
         }
         
         private bool checkFamily() {
-    	    if(getMarriageDate().getStartDate().after(censusDate))
+    	    if(getMarriageDate().getStartDate() > censusDate.getEndDate())
     		    return false;
             // don't process family if either parent is under 16
     	    //if(husband != null) System.out.println("husband : " + husband.getAge(censusDate));

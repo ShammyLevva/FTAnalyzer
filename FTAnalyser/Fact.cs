@@ -87,8 +87,8 @@ namespace FTAnalyser
 				    // finding all sources
 				    sources = new List<FactSource>();
 			        for(Iterator i = node.nodeIterator("SOUR"); i.hasNext();) {
-                        XmlNode n = (XmlNode)i.next(); 
-			    	    FactSource source = client.getGedcomSource(memberID, n.attributeValue("REF"));
+                        XmlNode n = (XmlNode)i.next();
+                        FactSource source = client.getGedcomSource(memberID, n.Attributes.GetNamedItem("REF").ToString());
 			    	    sources.Add(source);
 			        } 
 			    } catch (NotFoundException e) {

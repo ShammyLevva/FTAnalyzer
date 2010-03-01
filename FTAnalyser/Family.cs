@@ -288,7 +288,7 @@ namespace FTAnalyser
                 members.Add(husband);
             if (wife != null)
                 members.Add(wife);
-            members.addAll(children);
+            members.AddRange(children);
             return members;
         }
     }

@@ -118,6 +118,11 @@
     <Compile Include="Filters\RegistrationFilter.cs" />
     <Compile Include="Filters\RelationFilter.cs" />
     <Compile Include="Filters\SurnameFilter.cs" />
+    <Compile Include="Formatters\BaseOutputFormatter.cs" />
+    <Compile Include="Formatters\BirthOutputFormatter.cs" />
+    <Compile Include="Formatters\CensusOutputFormatter.cs" />
+    <Compile Include="Formatters\DeathOutputFormatter.cs" />
+    <Compile Include="Formatters\MarriageOutputFormatter.cs" />
     <Content Include="GedcomOutput.xml" />
     <Compile Include="Registrations\BirthRegistration.cs" />
     <Compile Include="Registrations\CensusRegistration.cs" />

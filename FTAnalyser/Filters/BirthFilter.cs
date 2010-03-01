@@ -14,15 +14,9 @@ namespace FTAnalyser
         public static DateFilter GROS_MARRIAGE_FILTER = new BirthFilter("AFT 31 DEC 1929");
         public static DateFilter GROS_DEATH_FILTER = new BirthFilter("AFT 31 DEC 1954");
 
-        public BirthFilter(FactDate cutoff)
-        {
-            base(cutoff);
-        }
+        public BirthFilter(FactDate cutoff) : base(cutoff) {}
 
-        public BirthFilter(String date)
-        {
-            base(date);
-        }
+        public BirthFilter(String date) : base(date) {}
 
         public bool select(Registration r) {
             FactDate d = r.getRegistrationDate();
