@@ -18,7 +18,8 @@ namespace FTAnalyser
 
         public BirthFilter(String date) : base(date) {}
 
-        public bool select(Registration r) {
+        public bool select(Registration r)
+        {
             FactDate d = r.getRegistrationDate();
             FactDate b = r.getIndividual().getBirthDate();
             FactDate old = b;

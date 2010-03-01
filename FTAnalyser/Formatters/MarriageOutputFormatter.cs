@@ -3,25 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using System.IO;
 
 namespace FTAnalyser
 {
     public class MarriageOutputFormatter : BaseOutputFormatter {
 
-        public void printHeader (PrintWriter output) {
-            output.print("HusbandSurname,HusbandForenames,HusbandAge,HusbandOccupation,");
-            output.print("HusbandResidence,HusbandBirthDate,HusbandBirthLocation,HusbandBestLocation,");
-            output.print("HusbandsFathersName,HusbandsFathersOccupation,HusbandsFatherDeceased,");
-            output.print("HusbandsMothersName,HusbandsMothersOccupation,HusbandsMotherDeceased,");
-            output.print("WifeSurname,WifeForenames,WifeAge,WifeOccupation,");
-            output.print("WifeResidence,WifeBirthDate,WifeBirthLocation,WifeBestLocation,");
-            output.print("WifesFathersName,WifesFathersOccupation,WifesFatherDeceased,");
-            output.print("WifesMothersName,WifesMothersOccupation,WifesMotherDeceased,");
-            output.print("Religion,DateOfMarriage,PlaceOfMarriage");
-            output.println();
+        public override void printHeader(StreamWriter output)
+        {
+            output.Write("HusbandSurname,HusbandForenames,HusbandAge,HusbandOccupation,");
+            output.Write("HusbandResidence,HusbandBirthDate,HusbandBirthLocation,HusbandBestLocation,");
+            output.Write("HusbandsFathersName,HusbandsFathersOccupation,HusbandsFatherDeceased,");
+            output.Write("HusbandsMothersName,HusbandsMothersOccupation,HusbandsMotherDeceased,");
+            output.Write("WifeSurname,WifeForenames,WifeAge,WifeOccupation,");
+            output.Write("WifeResidence,WifeBirthDate,WifeBirthLocation,WifeBestLocation,");
+            output.Write("WifesFathersName,WifesFathersOccupation,WifesFatherDeceased,");
+            output.Write("WifesMothersName,WifesMothersOccupation,WifesMotherDeceased,");
+            output.Write("Religion,DateOfMarriage,PlaceOfMarriage");
+            output.WriteLine();
          }
 
-        public void printItem (Registration reg, PrintWriter output) {
+        public override void printItem(Registration reg, StreamWriter output)
+        {
             MarriageRegistration m = (MarriageRegistration) reg;
             if (m.getGender().Equals("M")) {
                 printFamilyGroup(m.getRegistrationDate(), m.getFamilyGroup(), output);
@@ -30,9 +33,9 @@ namespace FTAnalyser
                 printFamilyGroup(m.getRegistrationDate(), m.getSpousesFamilyGroup(), output);
                 printFamilyGroup(m.getRegistrationDate(), m.getFamilyGroup(), output);
             }
-            output.print("\""); output.print(m.getReligion()); output.print("\",");
-            output.print("\""); output.print(m.getDateOfMarriage()); output.print("\",");
-            output.print("\""); output.print(m.getPlaceOfMarriage()); output.println("\"");
+            output.Write("\""); output.Write(m.getReligion()); output.Write("\",");
+            output.Write("\""); output.Write(m.getDateOfMarriage()); output.Write("\",");
+            output.Write("\""); output.Write(m.getPlaceOfMarriage()); output.println("\"");
         }
     }
 }

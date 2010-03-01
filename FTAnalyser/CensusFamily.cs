@@ -10,10 +10,11 @@ namespace FTAnalyser
 
         private FactDate censusDate;
         private Location bestLocation;
-        
+
+/*
         public CensusFamily (FamilyLocal fam) : base(fam) {
         }
-        
+*/        
         public bool process(FactDate censusDate) {
             bool result = false;
             this.censusDate = censusDate;
@@ -38,7 +39,7 @@ namespace FTAnalyser
 			    this.bestLocation = updateBestLocation(bestLocation, marriage);
 		        List<Individual> censusChildren = new List<Individual>();
 			    // sort children oldest first
-			    Collections.sort(children, new CensusAgeComparator());
+			    children.Sort(new CensusAgeComparator());
 			    foreach (Individual child in children) {
 			        // set location to childs birth location
 			        // this will end up setting birth location of last child 

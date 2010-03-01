@@ -79,12 +79,12 @@ namespace FTAnalyser
             return (death == null) ? "" : death.getComment();
         }
 
-        public String getRegistrationLocation()
+        public override String getRegistrationLocation()
         {
             return getPlaceOfDeath();
         }
 
-        public bool isCertificatePresent()
+        public override bool isCertificatePresent()
         {
             return (death == null) ? false : death.isCertificatePresent();
         }

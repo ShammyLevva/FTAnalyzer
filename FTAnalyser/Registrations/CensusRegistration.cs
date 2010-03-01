@@ -18,17 +18,18 @@ namespace FTAnalyser
             this.censusFamily = censusFamily;
         }
 
-        public String getRegistrationLocation()
+        public override String getRegistrationLocation()
         {
             return censusFamily.getBestLocation().ToString();
         }
 
-        public bool isCertificatePresent()
+        public override bool isCertificatePresent()
         {
             return false;
         }
 
-        public List<Fact> getAllFacts() {
+        public List<Fact> getAllFacts()
+        {
             List<Fact> facts = new List<Fact>();
             foreach (Individual i in getMembers()) {
                 facts.AddRange(i.getAllFacts());

@@ -107,11 +107,11 @@ namespace FTAnalyser
             return spousesFamily;
         }
         
-        public String getRegistrationLocation () {
+        public override String getRegistrationLocation () {
             return getPlaceOfMarriage();
         }
         
-        public bool isCertificatePresent() {
+        public override bool isCertificatePresent() {
             return (marriage == null) ? false : marriage.isCertificatePresent();
         }
     }

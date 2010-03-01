@@ -3,31 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using System.IO;
 
 namespace FTAnalyser
 {
     public class CensusOutputFormatter : BaseOutputFormatter {
 
-        public void printHeader(PrintWriter output) {
-            output.print("FamilyGed,BestLocation,CensusName,Age,");
-            output.print("Occupation,DateOfBirth,BirthLocation,Status");
-            output.println();
+        public override void printHeader(StreamWriter output)
+        {
+            output.Write("FamilyGed,BestLocation,CensusName,Age,");
+            output.Write("Occupation,DateOfBirth,BirthLocation,Status");
+            output.WriteLine();
         }
 
-        public void printItem(Registration reg, PrintWriter output) {
+        public override void printItem(Registration reg, StreamWriter output)
+        {
             CensusRegistration c = (CensusRegistration) reg;
             List<Individual> members = c.getMembers();
-            Collections.sort(members, new CensusAgeComparator());
+            members.Sort(new CensusAgeComparator());
             foreach (Individual i in members) {
-                output.print("\""); output.print(c.getFamilyGed()); output.print("\",");
-                output.print("\""); output.print(c.getRegistrationLocation()); output.print("\",");
-                output.print("\""); output.print(i.getCensusName()); output.print("\",");
-                output.print("\""); output.print(i.getAge(c.getRegistrationDate())); output.print("\",");
-                output.print("\""); output.print(i.getOccupation()); output.print("\",");
-                output.print("\""); output.print(i.getDateOfBirth()); output.print("\",");
-                output.print("\""); output.print(i.getBirthLocation()); output.print("\",");
-                output.print("\""); output.print(i.getStatus()); output.print("\"");
-                output.println();
+                output.Write("\""); output.Write(c.getFamilyGed()); output.Write("\",");
+                output.Write("\""); output.Write(c.getRegistrationLocation()); output.Write("\",");
+                output.Write("\""); output.Write(i.getCensusName()); output.Write("\",");
+                output.Write("\""); output.Write(i.getAge(c.getRegistrationDate())); output.Write("\",");
+                output.Write("\""); output.Write(i.getOccupation()); output.Write("\",");
+                output.Write("\""); output.Write(i.getDateOfBirth()); output.Write("\",");
+                output.Write("\""); output.Write(i.getBirthLocation()); output.Write("\",");
+                output.Write("\""); output.Write(i.getStatus()); output.Write("\"");
+                output.WriteLine.println();
             }
         }
     }

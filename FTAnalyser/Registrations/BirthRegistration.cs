@@ -15,11 +15,13 @@ namespace FTAnalyser
             registrationDate = (birth == null) ? null : birth.getFactDate();
         }
 
-        public String getRegistrationLocation () {
+        public override String getRegistrationLocation()
+        {
             return getPlaceOfBirth();
         }
 
-        public bool isCertificatePresent() {
+        public override bool isCertificatePresent()
+        {
             return (birth == null) ? false : birth.isCertificatePresent();
         }
     }
