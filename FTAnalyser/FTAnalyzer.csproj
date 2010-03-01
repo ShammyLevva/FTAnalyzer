@@ -62,9 +62,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fact.cs" />
-    <Compile Include="FactDate.cs" />
-    <Compile Include="FactSource.cs" />
+    <Compile Include="core\Fact.cs" />
+    <Compile Include="core\FactDate.cs" />
+    <Compile Include="core\FactSource.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,7 +96,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CensusFamily.cs" />
+    <Compile Include="core\CensusFamily.cs" />
     <Compile Include="Comparators\CensusAgeComparator.cs" />
     <Compile Include="Comparators\DateComparator.cs" />
     <Compile Include="Comparators\LocationComparator.cs" />
@@ -107,7 +107,7 @@
     <Compile Include="Exceptions\MissingPrimaryKeyException.cs" />
     <Compile Include="Exceptions\DuplicateException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
-    <Compile Include="Family.cs" />
+    <Compile Include="core\Family.cs" />
     <Compile Include="Filters\AllFilter.cs" />
     <Compile Include="Filters\AndFilter.cs" />
     <Compile Include="Filters\BirthFilter.cs" />
@@ -129,13 +129,13 @@
     <Compile Include="Registrations\DeathRegistration.cs" />
     <Compile Include="Registrations\MarriageRegistration.cs" />
     <Compile Include="Registrations\Registration.cs" />
-    <Compile Include="Individual.cs" />
-    <Compile Include="Location.cs" />
+    <Compile Include="core\Individual.cs" />
+    <Compile Include="core\Location.cs" />
     <Compile Include="GedcomParser\AnselEncoding.cs" />
     <Compile Include="GedcomParser\AnselInputStreamReader.cs" />
     <Compile Include="GedcomParser\AnselOutputStreamWriter.cs" />
     <Compile Include="GedcomParser\GedcomToXml.cs" />
-    <Compile Include="ParentalGroup.cs" />
+    <Compile Include="core\ParentalGroup.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
