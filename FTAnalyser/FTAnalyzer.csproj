@@ -108,6 +108,16 @@
     <Compile Include="Exceptions\DuplicateException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Family.cs" />
+    <Compile Include="Filters\AllFilter.cs" />
+    <Compile Include="Filters\AndFilter.cs" />
+    <Compile Include="Filters\BirthFilter.cs" />
+    <Compile Include="Filters\DateFilter.cs" />
+    <Compile Include="Filters\IncompleteDataFilter.cs" />
+    <Compile Include="Filters\LocationFilter.cs" />
+    <Compile Include="Filters\OrFilter.cs" />
+    <Compile Include="Filters\RegistrationFilter.cs" />
+    <Compile Include="Filters\RelationFilter.cs" />
+    <Compile Include="Filters\SurnameFilter.cs" />
     <Content Include="GedcomOutput.xml" />
     <Compile Include="Individual.cs" />
     <Compile Include="Location.cs" />

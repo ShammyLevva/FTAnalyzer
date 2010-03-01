@@ -1,0 +1,21 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Xml;
+
+namespace FTAnalyser
+{
+    public class RelationFilter : RegistrationFilter {
+
+        private int filterType;
+        
+        public RelationFilter(int filterType) {
+            this.filterType = filterType;
+        }
+        
+        public bool select (Registration r) {
+            return r.getRelation() == filterType;
+        }
+    }
+}
