@@ -85,9 +85,9 @@ namespace FTAnalyser
                 {
                     // now iterate through child elements of eChildren
                     // finding all individuals
-                    for (Iterator i = node.nodeIterator("CHIL"); i.hasNext(); )
+                    XmlNodeList list = node.SelectNodes("CHIL");
+                    foreach (XmlNode n in list)
                     {
-                        XmlNode n = (XmlNode)i.next();
                         Individual child = client.getGedcomIndividual(memberID, n.Attributes.GetNamedItem("REF").ToString());
                         children.Add(child);
                     }
@@ -103,10 +103,9 @@ namespace FTAnalyser
 
         private void addFacts(XmlNode node, String factType)
         {
-            Iterator it = node.nodeIterator(factType);
-            while (it.hasNext())
+            XmlNodeList list = node.SelectNodes(factType);
+            foreach(XmlNode n in list)
             {
-                XmlNode n = (XmlNode)it.next();
                 facts.Add(new Fact(this.memberID, n));
             }
         }

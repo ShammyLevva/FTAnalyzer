@@ -87,9 +87,8 @@ namespace FTAnalyser
 	    }
  */   	
 	    private void addFacts(XmlNode node, String factType) {
-	        Iterator<XmlNode> it = node.nodeIterator(factType);
-	        while(it.hasNext()) {
-                XmlNode n = it.next();
+            XmlNodeList list = node.SelectNodes(factType);
+	        foreach(XmlNode n in list) {
 	            facts.Add(new Fact(this.memberID, n));
 	        }
 	    }

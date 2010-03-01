@@ -85,8 +85,8 @@ namespace FTAnalyser
 				    // now iterate through source elements of the fact
 				    // finding all sources
 				    sources = new List<FactSource>();
-			        for(Iterator i = node.nodeIterator("SOUR"); i.hasNext();) {
-                        XmlNode n = (XmlNode)i.next();
+                    XmlNodeList list = node.SelectNodes("SOUR");
+			        foreach (XmlNode n in list) {
                         FactSource source = client.getGedcomSource(memberID, n.Attributes.GetNamedItem("REF").ToString());
 			    	    sources.Add(source);
 			        } 
