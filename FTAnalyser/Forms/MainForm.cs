@@ -18,11 +18,31 @@ namespace FTAnalyser
 
         private void openButton_Click(object sender, EventArgs e)
         {
-            string path = "../../Bisset Tree.ged";
-            XmlDocument document = GedcomToXml.Load(path);
-            document.Save("GedcomOutput.xml");
-            FamilyTree ft = FamilyTree.Instance;
-            ft.LoadTree(document);
+
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.InitialDirectory = Application.StartupPath + "../..";
+            openFileDialog1.FileName = "*.ged";
+            openFileDialog1.Filter = "GED files (*.ged)|*.ged|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    XmlDocument document = GedcomToXml.Load(openFileDialog1.FileName);
+                    document.Save("GedcomOutput.xml");
+                    FamilyTree ft = FamilyTree.Instance;
+                    ft.LoadTree(document);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
+            }
         }
     }
 }

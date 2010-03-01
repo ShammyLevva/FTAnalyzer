@@ -76,7 +76,7 @@ namespace FTAnalyser
                 Family family = new Family(n);
                 addFamily(family);
             } 
-            setRelations("I0001");
+            setRelations("I1");
 		    printRelationCount();
 	        setParishes();
         }

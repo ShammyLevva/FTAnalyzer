@@ -31,7 +31,7 @@ namespace FTAnalyser
             int startPos = name.IndexOf("/"), endPos = name.LastIndexOf("/");
             if (startPos >= 0 && endPos > startPos) {
                 surname = name.Substring(startPos + 1, endPos - startPos - 1);
-		        forenames = name.Substring(0, startPos - 1);
+		        forenames = startPos == 0 ? "UNKNOWN" : name.Substring(0, startPos - 1);
             } else {
                 surname = "UNKNOWN";
 		        forenames = name;

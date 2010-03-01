@@ -51,23 +51,9 @@ namespace FTAnalyser
             COMMENT_FACTS.Add(IGISEARCH);
         }
 
-/*        
-        public Fact (FactLocal fact) {
-            this.factID = fact.getFactID();
-            this.factType = fact.getFactType();
-            this.date = new FactDate(fact.getFactDate());
-            this.comment = fact.getFactComment();
-            this.location = fact.getFactLocation();
-	        this.sources = new List<FactSource>();
-		    Iterator it = fact.getSources().iterator();
-		    while (it.hasNext()) {
-		        this.sources.Add(new FactSource(it.next()));
-		    }
-		    this.certificatePresent = fact.getCertificated().boolValue();
-        }
-*/
         public Fact (XmlNode node) {
-            if (node != null) {
+            if (node != null) 
+            {
                 factType = node.Name;
                 if (factType.Equals("EVEN")) {
                     string tag = FamilyTree.GetText(node, "TYPE");
