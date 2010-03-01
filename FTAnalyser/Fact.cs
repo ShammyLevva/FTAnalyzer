@@ -28,16 +28,15 @@ namespace FTAnalyser
         private static readonly Dictionary<String, String> CUSTOM_TAGS = new Dictionary<String, String>();
         private static readonly HashSet<String> COMMENT_FACTS = new HashSet<String>();
 
-/*
-        static {
-            CUSTOM_TAGS.put("IGI Search", IGISEARCH);
-            CUSTOM_TAGS.put("Childless", CHILDLESS);
-            CUSTOM_TAGS.put("Witness",   WITNESS);
-            CUSTOM_TAGS.put("Unmarried", UNMARRIED);
-            CUSTOM_TAGS.put("Friends",   UNMARRIED);
-            CUSTOM_TAGS.put("Partners",  UNMARRIED);
-            CUSTOM_TAGS.put("Unknown",   UNKNOWN);
-            CUSTOM_TAGS.put("Unknown-Begin", UNKNOWN);
+        static Fact() {
+            CUSTOM_TAGS.Add("IGI Search", IGISEARCH);
+            CUSTOM_TAGS.Add("Childless", CHILDLESS);
+            CUSTOM_TAGS.Add("Witness", WITNESS);
+            CUSTOM_TAGS.Add("Unmarried", UNMARRIED);
+            CUSTOM_TAGS.Add("Friends", UNMARRIED);
+            CUSTOM_TAGS.Add("Partners", UNMARRIED);
+            CUSTOM_TAGS.Add("Unknown", UNKNOWN);
+            CUSTOM_TAGS.Add("Unknown-Begin", UNKNOWN);
             
             COMMENT_FACTS.Add(OCCUPATION);
             COMMENT_FACTS.Add(RELIGION);
@@ -52,7 +51,7 @@ namespace FTAnalyser
             COMMENT_FACTS.Add(UNKNOWN);
             COMMENT_FACTS.Add(IGISEARCH);
         }
-*/
+
 /*        
         public Fact (FactLocal fact) {
             this.factID = fact.getFactID();
