@@ -52,71 +52,71 @@ namespace FTAnalyser
             return individualsFamily.getMother();
         }
         
-        public String getName () {
+        public string getName () {
             return getIndividual().getName();
         }
         
-        public String getSurname() {
+        public string getSurname() {
             return getIndividual().getSurname();
         }
         
-        public String getForenames() {
+        public string getForenames() {
             return getIndividual().getForenames();
         }
         
-        public String getGender () {
+        public string getGender () {
             return getIndividual().getGender();
         }
         
-        public String getOccupation () {
+        public string getOccupation () {
             return getIndividual().getOccupation();
         }
         
-        public int getRelation() {
+        public virtual int getRelation() {
             return getIndividual().getRelation();
         }
         
-        public String getDateOfBirth () {
+        public string getDateOfBirth () {
             return getIndividual().getDateOfBirth();
         }
         
-        public String getPlaceOfBirth () {
+        public string getPlaceOfBirth () {
             return getIndividual().getBirthLocation();
         }
             
-        public String getFathersName () {
+        public string getFathersName () {
             return individualsFamily.getFathersName();
         }
 
-        public String getMothersName () {
+        public string getMothersName () {
             return individualsFamily.getMothersName();
         }
 
-        public String getFathersOccupation () {
+        public string getFathersOccupation () {
             return individualsFamily.getFathersOccupation();
         }
 
-        public String getMothersOccupation () {
+        public string getMothersOccupation () {
             return individualsFamily.getMothersOccupation();
         }
         
-        public String getFatherDeceased () {
+        public string getFatherDeceased () {
             return individualsFamily.getFatherDeceased(registrationDate); 
         }
 
-        public String getMotherDeceased () {
+        public string getMotherDeceased () {
             return individualsFamily.getMotherDeceased(registrationDate); 
         }
         
-        public String getAge () {
+        public string getAge () {
             return getIndividual().getAge(registrationDate);
         }
         
-        public String getParentsMarriageDate () {
+        public string getParentsMarriageDate () {
             return individualsFamily.getParentsMarriageDate(); 
         }
         
-        public String getParentsMarriageLocation () {
+        public string getParentsMarriageLocation () {
             return individualsFamily.getParentsMarriageLocation(); 
         }
        
@@ -133,11 +133,11 @@ namespace FTAnalyser
             return registrationDate;
         }
         
-        public String getBestLocation () {
+        public string getBestLocation () {
             return individualsFamily.getBestLocation().ToString();
         }
         
-        public List<Fact> getAllFacts() {
+        public virtual List<Fact> getAllFacts() {
             List<Fact> facts = new List<Fact>();
             if (individualsFamily != null) {
 	            if (getIndividual() != null)
@@ -152,7 +152,7 @@ namespace FTAnalyser
 	        return facts;
         }
         
-        public abstract String getRegistrationLocation ();
+        public abstract string getRegistrationLocation ();
      
         /**
          * @return Returns the certificatePresent.

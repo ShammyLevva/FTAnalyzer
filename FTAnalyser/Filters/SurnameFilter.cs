@@ -9,11 +9,11 @@ namespace FTAnalyser
     public class SurnameFilter : RegistrationFilter
     {
 
-        private String searchString;
+        private string searchstring;
 
-        public SurnameFilter(String searchString)
+        public SurnameFilter(string searchstring)
         {
-            this.searchString = searchString.ToLower();
+            this.searchstring = searchstring.ToLower();
         }
 
         public bool select(Registration r)
@@ -22,10 +22,10 @@ namespace FTAnalyser
             // contain the search string, then we stop. Otherwise if
             // the registration location is blank, we search all
             // of the facts about this registration.
-            String surname = r.getSurname();
+            string surname = r.getSurname();
             if (surname != null && surname.Length > 0)
             {
-                return searchString.Equals(surname.ToLower());
+                return searchstring.Equals(surname.ToLower());
             }
             else
             {

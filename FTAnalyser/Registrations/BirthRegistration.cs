@@ -15,7 +15,7 @@ namespace FTAnalyser
             registrationDate = (birth == null) ? null : birth.getFactDate();
         }
 
-        public override String getRegistrationLocation()
+        public override string getRegistrationLocation()
         {
             return getPlaceOfBirth();
         }

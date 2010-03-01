@@ -8,7 +8,7 @@ namespace FTAnalyser
 {
     public class LocationFilter : RegistrationFilter {
 
-        private String searchString;
+        private string searchstring;
         private int level;
         
         public static readonly LocationFilter SCOTLAND_FILTER =
@@ -17,8 +17,8 @@ namespace FTAnalyser
         public static readonly LocationFilter ENGLAND_FILTER =
     	    new LocationFilter("England", Location.COUNTRY);
 
-        public LocationFilter (String searchString, int level) {
-            this.searchString = searchString.ToLower();
+        public LocationFilter (string searchstring, int level) {
+            this.searchstring = searchstring.ToLower();
             this.level = level; 
         }
         
@@ -29,13 +29,13 @@ namespace FTAnalyser
             // of the facts about this registration.
             Location l = new Location(r.getRegistrationLocation());
             if (!l.isBlank()) {
-                return l.Matches(searchString, level);
+                return l.Matches(searchstring, level);
             }
             
             bool allLocationsBlank = true;
             foreach (Fact f in r.getAllFacts()) {
                 l = new Location(f.getLocation());
-                if (l.Matches(searchString, level))
+                if (l.Matches(searchstring, level))
                     return true;
                 if (! l.isBlank())
                     allLocationsBlank = false;

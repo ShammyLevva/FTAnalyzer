@@ -18,10 +18,10 @@ namespace FTAnalyser
 
         private void openButton_Click(object sender, EventArgs e)
         {
-            String path = "C:/Users/Alexander/Documents/Genealogy/Bisset Tree.ged";
+            string path = "../../Bisset Tree.ged";
             XmlDocument document = GedcomToXml.Load(path);
             document.Save("GedcomOutput.xml");
-            FamilyTree ft = new FamilyTree();
+            FamilyTree ft = FamilyTree.Instance;
             ft.LoadTree(document);
         }
     }

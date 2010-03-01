@@ -8,13 +8,13 @@ namespace FTAnalyser
 {
     public class FactSource
     {
-        private static readonly String BIRTHCERT = "BIRTH", DEATHCERT = "DEATH",
+        private static readonly string BIRTHCERT = "BIRTH", DEATHCERT = "DEATH",
                 MARRIAGECERT = "MARRIAGE", CENSUSCERT = "CENSUS";
 
-        private String sourceID;
-        private String gedcomID;
-        private String sourceTitle;
-        private String sourceMedium;
+        private string sourceID;
+        private string gedcomID;
+        private string sourceTitle;
+        private string sourceMedium;
 
         public FactSource(XmlNode node)
         {
@@ -45,21 +45,21 @@ namespace FTAnalyser
         /**
          * @return Returns the gedcomID.
          */
-        public String getGedcomID()
+        public string getGedcomID()
         {
             return gedcomID;
         }
         /**
          * @param gedcomID The gedcomID to set.
          */
-        public void setGedcomID(String gedcomID)
+        public void setGedcomID(string gedcomID)
         {
             this.gedcomID = gedcomID;
         }
         /**
          * @return Returns the sourceID.
          */
-        public String getSourceID()
+        public string getSourceID()
         {
             return sourceID;
         }
@@ -67,7 +67,7 @@ namespace FTAnalyser
         /**
          * @param sourceID The sourceID to set.
          */
-        public void setSourceID(String sourceID)
+        public void setSourceID(string sourceID)
         {
             this.sourceID = sourceID;
         }
@@ -75,7 +75,7 @@ namespace FTAnalyser
         /**
          * @return Returns the sourceTitle.
          */
-        public String getSourceTitle()
+        public string getSourceTitle()
         {
             return sourceTitle;
         }
@@ -83,7 +83,7 @@ namespace FTAnalyser
         /**
          * @param sourceTitle The sourceTitle to set.
          */
-        public void setSourceTitle(String sourceTitle)
+        public void setSourceTitle(string sourceTitle)
         {
             this.sourceTitle = sourceTitle;
         }
@@ -91,7 +91,7 @@ namespace FTAnalyser
         /**
          * @return Returns the sourceMedium.
          */
-        public String getSourceMedium()
+        public string getSourceMedium()
         {
             return sourceMedium;
         }
@@ -99,7 +99,7 @@ namespace FTAnalyser
         /**
          * @param sourceMedium The sourceMedium to set.
          */
-        public void setSourceMedium(String sourceMedium)
+        public void setSourceMedium(string sourceMedium)
         {
             this.sourceMedium = sourceMedium;
         }

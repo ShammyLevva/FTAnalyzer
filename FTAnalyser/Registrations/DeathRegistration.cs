@@ -11,9 +11,9 @@ namespace FTAnalyser
 
         private Fact death;
         private Individual spouse;
-        private String maritalStatus;
+        private string maritalStatus;
 
-        public DeathRegistration(ParentalGroup familyGroup, Individual spouse, String maritalStatus)
+        public DeathRegistration(ParentalGroup familyGroup, Individual spouse, string maritalStatus)
             :base(familyGroup)
         {
             death = familyGroup.getPreferredFact(Fact.DEATH);
@@ -39,47 +39,47 @@ namespace FTAnalyser
             this.maritalStatus = maritalStatus;
         }
 
-        public String getDateOfDeath()
+        public string getDateOfDeath()
         {
-            return (death == null) ? "" : death.getDateString();
+            return (death == null) ? "" : death.getDatestring();
         }
 
-        public String getPlaceOfDeath()
+        public string getPlaceOfDeath()
         {
             return (death == null) ? "" : death.getLocation();
         }
 
-        public String getSpousesName()
+        public string getSpousesName()
         {
             return (spouse == null) ? "" : spouse.getName();
         }
 
-        public String getSpousesOccupation()
+        public string getSpousesOccupation()
         {
             return (spouse == null) ? "" : spouse.getOccupation();
         }
 
-        public String getSpouseDeceased()
+        public string getSpouseDeceased()
         {
             return (death == null) ? "" : getSpouseDeceased(death.getFactDate());
         }
 
-        public String getSpouseDeceased(FactDate when)
+        public string getSpouseDeceased(FactDate when)
         {
             return (spouse == null || !spouse.isDeceased(when)) ? "" : "(Deceased)";
         }
 
-        public String getMaritalStatus()
+        public string getMaritalStatus()
         {
             return maritalStatus;
         }
 
-        public String getCauseOfDeath()
+        public string getCauseOfDeath()
         {
             return (death == null) ? "" : death.getComment();
         }
 
-        public override String getRegistrationLocation()
+        public override string getRegistrationLocation()
         {
             return getPlaceOfDeath();
         }

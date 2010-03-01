@@ -16,9 +16,9 @@ namespace FTAnalyser
 
         public BirthFilter(FactDate cutoff) : base(cutoff) {}
 
-        public BirthFilter(String date) : base(date) {}
+        public BirthFilter(string date) : base(date) {}
 
-        public bool select(Registration r)
+        public override bool select(Registration r)
         {
             FactDate d = r.getRegistrationDate();
             FactDate b = r.getIndividual().getBirthDate();

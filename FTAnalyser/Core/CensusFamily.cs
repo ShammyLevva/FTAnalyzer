@@ -80,7 +80,7 @@ namespace FTAnalyser
         private bool checkIndividual(Individual indiv) {
             if (indiv == null)
                 return false;
-            Client client = Client.getInstance();
+            FamilyTree ft = FamilyTree.Instance;
             DateTime birth = (indiv.getBirthDate() == null) ? 
 		            FactDate.MINDATE : indiv.getBirthDate().getStartDate();
             DateTime death = (indiv.getDeathDate() == null) ?
@@ -90,7 +90,7 @@ namespace FTAnalyser
 		            !indiv.isCensusDone(censusDate)) {
 		        if (indiv.getStatus().Equals(Individual.CHILD)) { 
 		            // individual is a child so remove if married before census date
-		    	    return !client.isMarried(indiv, censusDate);
+		    	    return !ft.isMarried(indiv, censusDate);
 		        } else {
 		            // husband or wife with valid date range
 		            return true;

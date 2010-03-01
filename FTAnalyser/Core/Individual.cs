@@ -10,23 +10,24 @@ namespace FTAnalyser
 	    // MARRIAGEDB ie: married to a direct or blood relation
 	    public static readonly int UNKNOWN = 0, DIRECT = 1, BLOOD = 2, 
 						        MARRIAGEDB = 3, MARRIAGE = 4, UNSET = 99;
-	    public static readonly String HUSBAND = "Husband", WIFE = "Wife", CHILD = "Child",
+	    public static readonly string HUSBAND = "Husband", WIFE = "Wife", CHILD = "Child",
 							    UNKNOWNSTATUS = "unknown";
     	
-	    private String individualID;
-	    private String gedcomID;
-	    private String forenames;
-	    private String surname;
-	    private String marriedName;
-	    private String gender;
-	    private String alias;
-	    private String status;
+	    private string individualID;
+	    private string gedcomID;
+	    private string forenames;
+	    private string surname;
+	    private string marriedName;
+	    private string gender;
+	    private string alias;
+	    private string status;
 	    private int relation;
 	    private List<Fact> facts;
     	
 	    public Individual (XmlNode node) {
 		    gedcomID = node.Attributes.GetNamedItem("ID").ToString();
-            String name = node.SelectSingleNode("NAME").ToString().Trim();
+            individualID = gedcomID;
+            string name = node.SelectSingleNode("NAME").ToString().Trim();
 		    try {
                 surname = name.Substring(name.IndexOf("/") + 1, name.LastIndexOf("/") - name.IndexOf("/"));
 			    forenames = name.Substring(0,name.IndexOf("/") - 1);
@@ -82,7 +83,7 @@ namespace FTAnalyser
 		    this.marriedName = surname;
 	    }
  */   	
-	    private void addFacts(XmlNode node, String factType) {
+	    private void addFacts(XmlNode node, string factType) {
             XmlNodeList list = node.SelectNodes(factType);
 	        foreach(XmlNode n in list) {
 	            facts.Add(new Fact(n));
@@ -96,31 +97,31 @@ namespace FTAnalyser
 	    /**
 	     * @return Returns the GedcomID.
 	     */
-	    public String getGedcomID() {
+	    public string getGedcomID() {
 		    return gedcomID;
 	    }
 	    /**
 	     * @return Returns the name.
 	     */
-	    public String getName() {
+	    public string getName() {
 		    return (forenames + " " + surname).Trim();
 	    }
 
 	    /**
 	     * @return Returns the surname.
 	     */
-	    public String getSurname() {
+	    public string getSurname() {
 		    return surname;
 	    }
 
 	    /**
 	     * @return Returns the surname on marriage
 	     */
-	    public String getMarriedName() {
+	    public string getMarriedName() {
 		    return marriedName;
 	    }
 
-	    public String getCensusName() {
+	    public string getCensusName() {
 	        return this.status.Equals(WIFE) ? 
 	             forenames + " " + marriedName + " (" + surname + ")" :
 	             getName();
@@ -129,13 +130,13 @@ namespace FTAnalyser
 	    /**
 	     * @return Returns the alias.
 	     */
-	    public String getAlias() {
+	    public string getAlias() {
 		    return this.alias;
 	    }
 	    /**
 	     * @return Returns the gender.
 	     */
-	    public String getGender() {
+	    public string getGender() {
 		    return this.gender;
 	    }
 	    /**
@@ -154,7 +155,7 @@ namespace FTAnalyser
 	    /**
 	     * @return Returns the first fact of the given type.
 	     */
-	    public Fact getPreferredFact(String factType) {
+	    public Fact getPreferredFact(string factType) {
 	        foreach(Fact f in facts)
             {
 		        if (f.getFactType().Equals(factType))
@@ -163,7 +164,7 @@ namespace FTAnalyser
 	        return null;
 	    }
     	
-	    public FactDate getPreferredFactDate (String factType) {
+	    public FactDate getPreferredFactDate (string factType) {
 	        Fact f = getPreferredFact(factType);
 	        return (f == null) ? FactDate.UNKNOWN_DATE : f.getFactDate();
 	    }
@@ -172,14 +173,14 @@ namespace FTAnalyser
 	        return getPreferredFactDate(Fact.BIRTH);
 	    }
     	
-	    public String getBirthLocation() {
+	    public string getBirthLocation() {
 	        Fact f = getPreferredFact(Fact.BIRTH);
 	        return (f == null) ? "" : f.getLocation();
 	    }
 
-	    public String getDateOfBirth() {
+	    public string getDateOfBirth() {
 	        Fact f = getPreferredFact(Fact.BIRTH);
-	        return (f == null) ? "" : f.getDateString();
+	        return (f == null) ? "" : f.getDatestring();
 	    }
 
 	    public FactDate getDeathDate() {
@@ -190,7 +191,7 @@ namespace FTAnalyser
 	    /**
 	     * @return Returns all facts of the given type.
 	     */
-	    public List<Fact> getFacts(String factType) {
+	    public List<Fact> getFacts(string factType) {
 	        List<Fact> result = new List<Fact>();
 	        foreach(Fact f in facts)
             {
@@ -231,18 +232,18 @@ namespace FTAnalyser
         /**
          * @return Returns the individualID.
          */
-        public String getIndividualID() {
+        public string getIndividualID() {
             return individualID;
         }
         
-        public void setMarriedName(String marriedName) {
+        public void setMarriedName(string marriedName) {
             this.marriedName = marriedName;
         }
         
         /**
          * @return Returns the forenames.
          */
-        public String getForenames() {
+        public string getForenames() {
             return forenames;
         }
 
@@ -253,7 +254,7 @@ namespace FTAnalyser
             return relation;
         }
 
-        public String getForename() {
+        public string getForename() {
             if (forenames == null)
                 return "";
             else {
@@ -262,7 +263,7 @@ namespace FTAnalyser
             }
         }
         
-        public String getOccupation () {
+        public string getOccupation () {
             Fact occupation = getPreferredFact(Fact.OCCUPATION);
             return occupation == null ? "" : occupation.getComment();
         }
@@ -283,7 +284,7 @@ namespace FTAnalyser
                 getBirthDate().getMaximumYear(death.getFactDate());
         }
         
-        public String getAge(FactDate when) {
+        public string getAge(FactDate when) {
             int minValue = getBirthDate().getMinimumYear(when);
             int maxValue = getBirthDate().getMaximumYear(when);
             if (minValue == FactDate.MINYEARS) {
@@ -305,13 +306,13 @@ namespace FTAnalyser
             }
         }
         
-        public String getAge(DateTime when) {
-            String now = string.Format(FactDate.FULL, when);
+        public string getAge(DateTime when) {
+            string now = string.Format(FactDate.FULL, when);
             return getAge(new FactDate(now));
         }
         
         public int getCurrentAge() {
-            String age = getAge(DateTime.Now);
+            string age = getAge(DateTime.Now);
             return Int32.Parse(age);
         }
         
@@ -325,13 +326,13 @@ namespace FTAnalyser
 
         public int getMaxAge(DateTime when)
         {
-            String now = string.Format(FactDate.FULL, when);
+            string now = string.Format(FactDate.FULL, when);
             return getMaxAge(new FactDate(now));
         }
 
         public int getMinAge(DateTime when)
         {
-            String now = string.Format(FactDate.FULL, when);
+            string now = string.Format(FactDate.FULL, when);
             return getMinAge(new FactDate(now));
         }
 
@@ -352,11 +353,11 @@ namespace FTAnalyser
             return res;
         }
 
-        public String getStatus() {
+        public string getStatus() {
             return status;
         }
         
-        public void setStatus(String status) {
+        public void setStatus(string status) {
             this.status = status;
         }
     }

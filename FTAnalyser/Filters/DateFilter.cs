@@ -24,11 +24,11 @@ namespace FTAnalyser
             this.cutoff = cutoff;
         }
 
-        public DateFilter (String date) {
+        public DateFilter (string date) {
             this.cutoff = new FactDate(date);
         }
 
-        public bool select (Registration r) {
+        public virtual bool select (Registration r) {
             FactDate d = r.getRegistrationDate();
             return cutoff.overlaps(d);
         }

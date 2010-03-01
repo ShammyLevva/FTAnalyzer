@@ -44,49 +44,49 @@ namespace FTAnalyser
             return parentsMarriage;
         }
 
-        public String getResidence() {
+        public string getResidence() {
             Fact residence = individual.getPreferredFact(Fact.RESIDENCE);
             return (residence == null) ? "" : residence.getLocation();
         }
         
-        public Fact getPreferredFact(String factType) {
+        public Fact getPreferredFact(string factType) {
             return individual.getPreferredFact(factType);
         }
         
-        public FactDate getPreferredFactDate (String factType) {
+        public FactDate getPreferredFactDate (string factType) {
             return individual.getPreferredFactDate(factType);
         }
         
-        public String getFathersName () {
+        public string getFathersName () {
             return (father == null) ? ""  : father.getName();
         }
 
-        public String getMothersName () {
+        public string getMothersName () {
             return (mother == null) ? ""  : mother.getName();
         }
 
-        public String getFathersOccupation () {
+        public string getFathersOccupation () {
             return (father == null) ? ""  : father.getOccupation();
         }
 
-        public String getMothersOccupation () {
+        public string getMothersOccupation () {
             return (mother == null) ? ""  : mother.getOccupation();
         }
         
-        public String getFatherDeceased (FactDate when) {
+        public string getFatherDeceased (FactDate when) {
             return (father == null || ! father.isDeceased(when)) ? "" : "(Deceased)"; 
         }
 
-        public String getMotherDeceased (FactDate when) {
+        public string getMotherDeceased (FactDate when) {
             return (mother == null || ! mother.isDeceased(when)) ? "" : "(Deceased)"; 
         }
         
-        public String getParentsMarriageDate () {
+        public string getParentsMarriageDate () {
             return (parentsMarriage == null) ? "" :
-            	    parentsMarriage.getFactDate().getDateString();
+            	    parentsMarriage.getFactDate().getDatestring();
         }
         
-        public String getParentsMarriageLocation () {
+        public string getParentsMarriageLocation () {
             return (parentsMarriage == null) ? "" :
         	    parentsMarriage.getLocation();
         }

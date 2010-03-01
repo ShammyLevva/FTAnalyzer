@@ -10,7 +10,7 @@ namespace FTAnalyser
     class GedcomToXml
     {
 
-        public static XmlDocument Load(String path)
+        public static XmlDocument Load(string path)
         {
             StreamReader reader = new AnselInputStreamReader(new FileStream(path, FileMode.Open));
             return parse(reader);

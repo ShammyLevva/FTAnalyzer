@@ -10,25 +10,29 @@ namespace FTAnalyser
     public class Family
     {
 
-        public static readonly String SINGLE = "Single", MARRIED = "Married";
+        public static readonly string SINGLE = "Single", MARRIED = "Married";
 
-        private String familyID = "";
-        private String familyGed;
-        private String husbandID;
-        private String husbandGed;
-        private String wifeID;
-        private String wifeGed;
+        private string familyID = "";
+        private string familyGed;
+        private string husbandID;
+        private string husbandGed;
+        private string wifeID;
+        private string wifeGed;
         private List<Fact> facts;
         internal Individual husband;
         internal Individual wife;
         internal List<Individual> children;
 
-        private void SetupFamily(String familyID, String familyGed)
+        private Family(string familyID, string familyGed)
         {
             this.familyID = familyID;
             this.familyGed = familyGed;
             this.facts = new List<Fact>();
             this.children = new List<Individual>();
+        }
+
+        public Family() : this("", "")
+        {
         }
 /*
         public Family(FamilyLocal fam)
@@ -50,9 +54,8 @@ namespace FTAnalyser
             }
         }
 */
-    public Family(XmlNode node)
+        public Family(XmlNode node) : this("", "")
         {
-            SetupFamily("", "");
             if (node != null)
             {
                 XmlNode eHusband = node.SelectSingleNode("HUSB");
@@ -60,46 +63,33 @@ namespace FTAnalyser
                 this.familyGed = node.Attributes.GetNamedItem("ID").ToString();
                 this.husbandGed = eHusband == null ? null : eHusband.Attributes.GetNamedItem("REF").ToString();
                 this.wifeGed = eWife == null ? null : eWife.Attributes.GetNamedItem("REF").ToString();
-                Client client = Client.getInstance();
-                try
-                {
-                    setHusband(client.getGedcomIndividual(this.husbandGed));
-                }
-                catch (NotFoundException e)
-                {
-                    setHusband(null);
-                }
-                try
-                {
-                    setWife(client.getGedcomIndividual(this.wifeGed));
-                }
-                catch (NotFoundException e)
-                {
-                    setWife(null);
-                }
+                FamilyTree ft = FamilyTree.Instance;
+                setHusband(ft.getGedcomIndividual(this.husbandGed));
+                setWife(ft.getGedcomIndividual(this.wifeGed));
                 if (husband != null && wife != null)
                     wife.setMarriedName(husband.getSurname());
-                try
+                // now iterate through child elements of eChildren
+                // finding all individuals
+                XmlNodeList list = node.SelectNodes("CHIL");
+                foreach (XmlNode n in list)
                 {
-                    // now iterate through child elements of eChildren
-                    // finding all individuals
-                    XmlNodeList list = node.SelectNodes("CHIL");
-                    foreach (XmlNode n in list)
+                    Individual child = ft.getGedcomIndividual(n.Attributes.GetNamedItem("REF").ToString());
+                    if (child != null)
                     {
-                        Individual child = client.getGedcomIndividual(n.Attributes.GetNamedItem("REF").ToString());
                         children.Add(child);
                     }
-                }
-                catch (NotFoundException e)
-                {
-                    Console.WriteLine("Child not found in family :" + this.familyGed);
+                    else
+                    {
+
+                        Console.WriteLine("Child not found in family :" + this.familyGed);
+                    }
                 }
                 addFacts(node, Fact.MARRIAGE);
                 addFacts(node, Fact.CUSTOM_FACT);
             }
         }
 
-        private void addFacts(XmlNode node, String factType)
+        private void addFacts(XmlNode node, string factType)
         {
             XmlNodeList list = node.SelectNodes(factType);
             foreach(XmlNode n in list)
@@ -119,7 +109,7 @@ namespace FTAnalyser
         /**
          * @return Returns the first fact of the given type.
          */
-        public Fact getPreferredFact(String factType) {
+        public Fact getPreferredFact(string factType) {
             foreach (Fact f in facts)
             {
 	    	    if (f.getFactType().Equals(factType))
@@ -132,7 +122,7 @@ namespace FTAnalyser
         /**
          * @return Returns the first fact of the given type.
          */
-        public FactDate getPreferredFactDate(String factType)
+        public FactDate getPreferredFactDate(string factType)
         {
             Fact f = getPreferredFact(factType);
             return (f == null) ? FactDate.UNKNOWN_DATE : f.getFactDate();
@@ -141,7 +131,7 @@ namespace FTAnalyser
         /**
          * @return Returns all facts of the given type.
          */
-        public List<Fact> getFacts(String factType) {
+        public List<Fact> getFacts(string factType) {
 	        List<Fact> result = new List<Fact>();
 	        foreach(Fact f in facts) 
             {
@@ -156,7 +146,7 @@ namespace FTAnalyser
             return getPreferredFactDate(Fact.MARRIAGE);
         }
 
-        public String getMaritalStatus()
+        public string getMaritalStatus()
         {
             if (husband == null || wife == null)
             {
@@ -173,42 +163,42 @@ namespace FTAnalyser
         /**
          * @return Returns the familyGed.
          */
-        public String getFamilyGed()
+        public string getFamilyGed()
         {
             return this.familyGed;
         }
         /**
          * @return Returns the familyID.
          */
-        public String getFamilyID()
+        public string getFamilyID()
         {
             return this.familyID;
         }
         /**
          * @return Returns the husband.
          */
-        public String getHusbandID()
+        public string getHusbandID()
         {
             return this.husbandID;
         }
         /**
          * @return Returns the husbandGed.
          */
-        public String getHusbandGed()
+        public string getHusbandGed()
         {
             return this.husbandGed;
         }
         /**
          * @return Returns the wife.
          */
-        public String getWifeID()
+        public string getWifeID()
         {
             return this.wifeID;
         }
         /**
          * @return Returns the wifeGed.
          */
-        public String getWifeGed()
+        public string getWifeGed()
         {
             return this.wifeGed;
         }
@@ -229,7 +219,7 @@ namespace FTAnalyser
         /**
          * @param wifeID The wifeID to set.
          */
-        public void setWifeID(String wifeID)
+        public void setWifeID(string wifeID)
         {
             this.wifeID = wifeID;
         }

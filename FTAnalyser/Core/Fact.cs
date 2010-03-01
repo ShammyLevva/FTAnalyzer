@@ -8,7 +8,7 @@ namespace FTAnalyser
 {
     public class Fact
     {
-        public static readonly String BIRTH = "BIRT", CHRISTENING = "CHRI",
+        public static readonly string BIRTH = "BIRT", CHRISTENING = "CHRI",
                 DEATH = "DEAT", BURIAL = "BURI", CENSUS = "CENS",
                 RESIDENCE = "RESI", MARRIAGE = "MARR", RELIGION = "RELI",
                 MILITARY = "_MILT", RETIREMENT = "RETI", OCCUPATION = "OCCU",
@@ -17,16 +17,15 @@ namespace FTAnalyser
                 CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSE", IGISEARCH = "*IGI";
 
-        private String factID;
-        private String factType;
+        private string factType;
         private FactDate date;
-        private String comment;
-        private String location;
+        private string comment;
+        private string location;
         private List<FactSource> sources;
         private bool certificatePresent;
 
-        private static readonly Dictionary<String, String> CUSTOM_TAGS = new Dictionary<String, String>();
-        private static readonly HashSet<String> COMMENT_FACTS = new HashSet<String>();
+        private static readonly Dictionary<string, string> CUSTOM_TAGS = new Dictionary<string, string>();
+        private static readonly HashSet<string> COMMENT_FACTS = new HashSet<string>();
 
         static Fact() {
             CUSTOM_TAGS.Add("IGI Search", IGISEARCH);
@@ -71,7 +70,7 @@ namespace FTAnalyser
             if (node != null) {
                 factType = node.Name;
                 if (factType.Equals("EVEN")) {
-                    String tag = node.SelectSingleNode("TYPE").ToString();
+                    string tag = node.SelectSingleNode("TYPE").ToString();
                     CUSTOM_TAGS.TryGetValue(tag, out factType);
                     if (factType == null) {
                         factType = Fact.UNKNOWN;
@@ -80,19 +79,24 @@ namespace FTAnalyser
                 }
                 date = new FactDate(node.SelectSingleNode("DATE").ToString());
                 setCommentAndLocation(factType, node.SelectSingleNode("PLAC").ToString());
-                Client client = Client.getInstance();
-			    try {
-				    // now iterate through source elements of the fact
-				    // finding all sources
-				    sources = new List<FactSource>();
-                    XmlNodeList list = node.SelectNodes("SOUR");
-			        foreach (XmlNode n in list) {
-                        FactSource source = client.getGedcomSource(n.Attributes.GetNamedItem("REF").ToString());
-			    	    sources.Add(source);
-			        } 
-			    } catch (NotFoundException e) {
-			        Console.WriteLine("Source not found for fact");
-			    }
+                FamilyTree ft = FamilyTree.Instance;
+
+                // now iterate through source elements of the fact finding all sources
+			    sources = new List<FactSource>();
+                XmlNodeList list = node.SelectNodes("SOUR");
+                foreach (XmlNode n in list)
+                {
+                    FactSource source = ft.getGedcomSource(n.Attributes.GetNamedItem("REF").ToString());
+                    if (source != null)
+                    {
+                        sources.Add(source);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Source not found for fact");
+                    }
+                }
+
                 if (factType.Equals(DEATH)) {
                     XmlNode cause = node.SelectSingleNode("CAUS");
                     comment = (cause == null) ? "" : cause.ToString();
@@ -101,15 +105,14 @@ namespace FTAnalyser
             }
         }
 
-        public Fact (String factType, FactDate date) {
-            this.factID = null;
+        public Fact (string factType, FactDate date) {
             this.factType = factType;
             this.date = date;
             this.comment = "";
             this.location = "";
         }
         
-        private void setCommentAndLocation (String factType, String place) {
+        private void setCommentAndLocation (string factType, string place) {
             if (place != null) {
                 int slash = place.IndexOf("/");
                 if (slash >= 0) {
@@ -130,11 +133,11 @@ namespace FTAnalyser
             }
         }
 
-        public String getLocation () {
+        public string getLocation () {
             return location;
         }
 
-        public String getComment () {
+        public string getComment () {
             return comment;
         }
 
@@ -148,15 +151,15 @@ namespace FTAnalyser
         /**
          * @return Returns the factType.
          */
-        public String getFactType () {
+        public string getFactType () {
             return factType;
         }
 
         /**
-         * @return Returns the dateString.
+         * @return Returns the datestring.
          */
-        public String getDateString () {
-            return this.date == null ? "" : this.date.getDateString();
+        public string getDatestring () {
+            return this.date == null ? "" : this.date.getDatestring();
         }
 
         /**
@@ -166,7 +169,7 @@ namespace FTAnalyser
             return sources;
         }
 
-        public String getCountry() {
+        public string getCountry() {
     	    Location loc = new Location(location);
     	    return loc == null ? "Scotland" : loc.getCountry();
         }

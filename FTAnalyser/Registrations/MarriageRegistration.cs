@@ -34,70 +34,70 @@ namespace FTAnalyser
             this.spousesFamily = spousesFamily;
         }
 
-        public String getDateOfMarriage () {
-            return (marriage == null) ? "" : marriage.getDateString();
+        public string getDateOfMarriage () {
+            return (marriage == null) ? "" : marriage.getDatestring();
         }
         
-        public String getPlaceOfMarriage () {
+        public string getPlaceOfMarriage () {
             return (marriage == null) ? "" : marriage.getLocation();
         }
         
-        public String getSpousesName () {
+        public string getSpousesName () {
             return (spousesFamily == null) ? "" : spousesFamily.getIndividual().getName();
         }
 
-        public String getSpousesOccupation () {
+        public string getSpousesOccupation () {
             return (spousesFamily == null) ? "" : spousesFamily.getIndividual().getOccupation();
         }
 
-        public String getSpousesAge () {
+        public string getSpousesAge () {
             return (marriage == null || spousesFamily == null) ? "" :
             	    spousesFamily.getIndividual().getAge(marriage.getFactDate());
         }
 
-        public String getSpousesFathersName () {
+        public string getSpousesFathersName () {
             return (spousesFamily == null) ? "" : spousesFamily.getFathersName();
         }
         
-        public String getSpousesFathersOccupation () {
+        public string getSpousesFathersOccupation () {
             return (spousesFamily == null) ? "" : spousesFamily.getFathersOccupation();
         }
         
-        public String getSpousesFatherDeceased () {
+        public string getSpousesFatherDeceased () {
             return (marriage == null || spousesFamily == null) ? "" :
             	    spousesFamily.getFatherDeceased(registrationDate);
         }
         
-        public String getSpousesMothersName () {
+        public string getSpousesMothersName () {
             return (spousesFamily == null) ? "" : spousesFamily.getFathersName();
         }
         
-        public String getSpousesMothersOccupation () {
+        public string getSpousesMothersOccupation () {
             return (spousesFamily == null) ? "" : spousesFamily.getFathersOccupation();
         }
         
-        public String getSpousesMotherDeceased () {
+        public string getSpousesMotherDeceased () {
             return (marriage == null || spousesFamily == null) ? "" :
         	    spousesFamily.getMotherDeceased(registrationDate);
         }
         
-        public String getMaritalStatus () {
+        public string getMaritalStatus () {
             return "";
         }
         
-        public String getSpousesMaritalStatus () {
+        public string getSpousesMaritalStatus () {
             return "";
         }
         
-        public String getResidence () {
+        public string getResidence () {
             return "";
         }
         
-        public String getSpousesResidence () {
+        public string getSpousesResidence () {
             return "";
         }
         
-        public String getReligion () {
+        public string getReligion () {
             return "";
         }
         /**
@@ -107,7 +107,7 @@ namespace FTAnalyser
             return spousesFamily;
         }
         
-        public override String getRegistrationLocation () {
+        public override string getRegistrationLocation () {
             return getPlaceOfMarriage();
         }
         

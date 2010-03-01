@@ -18,7 +18,7 @@ namespace FTAnalyser
             this.censusFamily = censusFamily;
         }
 
-        public override String getRegistrationLocation()
+        public override string getRegistrationLocation()
         {
             return censusFamily.getBestLocation().ToString();
         }
@@ -28,7 +28,7 @@ namespace FTAnalyser
             return false;
         }
 
-        public List<Fact> getAllFacts()
+        public override List<Fact> getAllFacts()
         {
             List<Fact> facts = new List<Fact>();
             foreach (Individual i in getMembers()) {
@@ -42,12 +42,12 @@ namespace FTAnalyser
             return censusFamily.getMembers();
         }
 
-        public String getFamilyGed()
+        public string getFamilyGed()
         {
             return censusFamily.getFamilyGed();
         }
 
-        public int getRelation()
+        public override int getRelation()
         {
             return censusFamily.getRelation();
         }

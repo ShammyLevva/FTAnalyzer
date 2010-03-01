@@ -8,9 +8,9 @@ namespace FTAnalyser
 {
     public class Location : IComparable<Location> {
         
-	    public static readonly String SCOTLAND = "Scotland", ENGLAND = "England",
+	    public static readonly string SCOTLAND = "Scotland", ENGLAND = "England",
 			    CANADA = "Canada";
-	    public static readonly String ABERDEEN = "Aberdeenshire", 
+	    public static readonly string ABERDEEN = "Aberdeenshire", 
 			    AYR = "Ayrshire", KINCARDINE = "Kincardineshire",
 			    LANARK = "Lanarkshire", BANFF = "Banffshire",
 			    ANGUS = "Angus", MIDLOTHIAN = "Midlothian", FIFE = "Fife";
@@ -18,13 +18,13 @@ namespace FTAnalyser
         public const int COUNTRY = 0, REGION = 1, PARISH = 2,
     		    ADDRESS = 3, PLACE = 4; 
     	
-	    private String country;
-        private String region;
-        private String parish;
-        private String address;
-        private String place;
-        private String location;
-        private String parishID;
+	    private string country;
+        private string region;
+        private string parish;
+        private string address;
+        private string place;
+        private string location;
+        private string parishID;
         private int level;
         
         public Location() {
@@ -73,7 +73,7 @@ namespace FTAnalyser
             this.location = buildLocation.ToString();
         }
 */        
-        public Location(String location) {
+        public Location(string location) {
             SetupEmptyLocation();
             if (location != null) {
 	            this.location = location;
@@ -128,7 +128,7 @@ namespace FTAnalyser
         	    shiftRegion(MIDLOTHIAN);
         }
         
-        private void shiftRegion(String newRegion) {
+        private void shiftRegion(string newRegion) {
             place = (place + " " + address).Trim();
             address = parish;
             parish = region;
@@ -139,61 +139,61 @@ namespace FTAnalyser
         /**
          * @return Returns the address.
          */
-        public String getAddress() {
+        public string getAddress() {
             return address;
         }
         /**
          * @param address The address to set.
          */
-        public void setAddress(String address) {
+        public void setAddress(string address) {
             this.address = address;
         }
         /**
          * @return Returns the country.
          */
-        public String getCountry() {
+        public string getCountry() {
             return country;
         }
         /**
          * @param country The country to set.
          */
-        public void setCountry(String country) {
+        public void setCountry(string country) {
             this.country = country;
         }
         /**
          * @return Returns the parish.
          */
-        public String getParish() {
+        public string getParish() {
             return parish;
         }
         /**
          * @param parish The parish to set.
          */
-        public void setParish(String parish) {
+        public void setParish(string parish) {
             this.parish = parish;
         }
         /**
          * @return Returns the place.
          */
-        public String getPlace() {
+        public string getPlace() {
             return place;
         }
         /**
          * @param place The place to set.
          */
-        public void setPlace(String place) {
+        public void setPlace(string place) {
             this.place = place;
         }
         /**
          * @return Returns the region.
          */
-        public String getRegion() {
+        public string getRegion() {
             return region;
         }
         /**
          * @param region The region to set.
          */
-        public void setRegion(String region) {
+        public void setRegion(string region) {
             this.region = region;
         }
         
@@ -204,7 +204,7 @@ namespace FTAnalyser
             return level;
         }
 
-	    public String getParishID() {
+	    public string getParishID() {
 		    return parishID;
 	    }
     	
@@ -212,7 +212,7 @@ namespace FTAnalyser
             return this.country.Length == 0;
         }
         
-        public bool Matches (String s, int level) {
+        public bool Matches (string s, int level) {
             switch (level) {
         	    case COUNTRY: return this.country.ToUpper().CompareTo(s.ToUpper()) == 0;
                 case REGION:  return this.region.ToUpper().CompareTo(s.ToUpper()) == 0;
@@ -244,7 +244,7 @@ namespace FTAnalyser
             return res;
         }
         
-        public override String ToString() {
+        public override string ToString() {
             return location;
         }
         
