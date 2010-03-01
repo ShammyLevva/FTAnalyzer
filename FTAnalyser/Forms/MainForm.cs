@@ -21,6 +21,8 @@ namespace FTAnalyser
             String path = "C:/Users/Alexander/Documents/Genealogy/Bisset Tree.ged";
             XmlDocument document = GedcomToXml.Load(path);
             document.Save("GedcomOutput.xml");
+            FamilyTree ft = new FamilyTree();
+            ft.LoadTree(document);
         }
     }
 }

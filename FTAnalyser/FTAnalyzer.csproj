@@ -62,9 +62,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="core\Fact.cs" />
-    <Compile Include="core\FactDate.cs" />
-    <Compile Include="core\FactSource.cs" />
+    <Compile Include="Core\Fact.cs" />
+    <Compile Include="Core\FactDate.cs" />
+    <Compile Include="Core\FactSource.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,18 +96,19 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="core\CensusFamily.cs" />
+    <Compile Include="Core\CensusFamily.cs" />
     <Compile Include="Comparators\CensusAgeComparator.cs" />
     <Compile Include="Comparators\DateComparator.cs" />
     <Compile Include="Comparators\LocationComparator.cs" />
     <Compile Include="Comparators\MultiComparator.cs" />
     <Compile Include="Comparators\NameComparator.cs" />
     <Content Include="CsharpVsJava.txt" />
+    <Compile Include="Core\FamilyTree.cs" />
     <Compile Include="Exceptions\BadIGIDataException.cs" />
     <Compile Include="Exceptions\MissingPrimaryKeyException.cs" />
     <Compile Include="Exceptions\DuplicateException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
-    <Compile Include="core\Family.cs" />
+    <Compile Include="Core\Family.cs" />
     <Compile Include="Filters\AllFilter.cs" />
     <Compile Include="Filters\AndFilter.cs" />
     <Compile Include="Filters\BirthFilter.cs" />
@@ -129,13 +130,13 @@
     <Compile Include="Registrations\DeathRegistration.cs" />
     <Compile Include="Registrations\MarriageRegistration.cs" />
     <Compile Include="Registrations\Registration.cs" />
-    <Compile Include="core\Individual.cs" />
-    <Compile Include="core\Location.cs" />
+    <Compile Include="Core\Individual.cs" />
+    <Compile Include="Core\Location.cs" />
     <Compile Include="GedcomParser\AnselEncoding.cs" />
     <Compile Include="GedcomParser\AnselInputStreamReader.cs" />
     <Compile Include="GedcomParser\AnselOutputStreamWriter.cs" />
     <Compile Include="GedcomParser\GedcomToXml.cs" />
-    <Compile Include="core\ParentalGroup.cs" />
+    <Compile Include="Core\ParentalGroup.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
