@@ -70,15 +70,16 @@ namespace FTAnalyser
             if (node != null) {
                 factType = node.Name;
                 if (factType.Equals("EVEN")) {
-                    string tag = node.SelectSingleNode("TYPE").ToString();
+                    string tag = FamilyTree.GetText(node, "TYPE");
                     CUSTOM_TAGS.TryGetValue(tag, out factType);
                     if (factType == null) {
                         factType = Fact.UNKNOWN;
                         Console.WriteLine("Recorded unknown fact type " + tag);
                     }
                 }
-                date = new FactDate(node.SelectSingleNode("DATE").ToString());
-                setCommentAndLocation(factType, node.SelectSingleNode("PLAC").ToString());
+                string factDate = FamilyTree.GetText(node, "DATE");
+                date = new FactDate(factDate);
+                setCommentAndLocation(factType, FamilyTree.GetText(node, "PLAC"));
                 FamilyTree ft = FamilyTree.Instance;
 
                 // now iterate through source elements of the fact finding all sources
@@ -86,7 +87,7 @@ namespace FTAnalyser
                 XmlNodeList list = node.SelectNodes("SOUR");
                 foreach (XmlNode n in list)
                 {
-                    FactSource source = ft.getGedcomSource(n.Attributes.GetNamedItem("REF").ToString());
+                    FactSource source = ft.getGedcomSource(n.Attributes["REF"].Value);
                     if (source != null)
                     {
                         sources.Add(source);
@@ -98,8 +99,7 @@ namespace FTAnalyser
                 }
 
                 if (factType.Equals(DEATH)) {
-                    XmlNode cause = node.SelectSingleNode("CAUS");
-                    comment = (cause == null) ? "" : cause.ToString();
+                    comment = FamilyTree.GetText(node, "CAUS");
                 }
                 this.certificatePresent = setCertificatePresent();
             }

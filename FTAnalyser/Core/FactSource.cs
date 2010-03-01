@@ -19,29 +19,11 @@ namespace FTAnalyser
         public FactSource(XmlNode node)
         {
             this.sourceID = "";
-            this.gedcomID = node.Attributes.GetNamedItem("ID").ToString();
-            this.sourceTitle = node.SelectSingleNode("TITL").ToString().Trim();
-            XmlNode repo = node.SelectSingleNode("REPO");
-            if (repo == null)
-            {
-                Console.WriteLine("Missing source medium for source : " + gedcomID);
-                this.sourceMedium = "";
-            }
-            else
-            {
-                XmlNode caln = repo.SelectSingleNode("CALN");
-                this.sourceMedium = (caln == null) ? "" : caln.SelectSingleNode("MEDI").ToString().Trim();
-            }
+            this.gedcomID = node.Attributes["ID"].Value;
+            this.sourceTitle = FamilyTree.GetText(node, "TITL");
+            this.sourceMedium = FamilyTree.GetText(node, "REPO/CALN/MEDI");
         }
-/*
-        public FactSource(FactSourceLocal fs)
-        {
-            this.sourceID = fs.getSourceID();
-            this.gedcomID = fs.getGedcomID();
-            this.sourceTitle = fs.getSourceTitle();
-            this.sourceMedium = fs.getSourceMedium();
-        }
-*/
+
         /**
          * @return Returns the gedcomID.
          */

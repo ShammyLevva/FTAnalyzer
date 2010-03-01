@@ -25,25 +25,25 @@ namespace FTAnalyser
 	    private List<Fact> facts;
     	
 	    public Individual (XmlNode node) {
-		    gedcomID = node.Attributes.GetNamedItem("ID").ToString();
+		    gedcomID = node.Attributes["ID"].Value;
             individualID = gedcomID;
-            string name = node.SelectSingleNode("NAME").ToString().Trim();
-		    try {
-                surname = name.Substring(name.IndexOf("/") + 1, name.LastIndexOf("/") - name.IndexOf("/"));
-			    forenames = name.Substring(0,name.IndexOf("/") - 1);
-		    } catch (Exception) {
-			    surname = "UNKNOWN";
-			    forenames = name;
-		    }
+            string name = FamilyTree.GetText(node, "NAME");
+            int startPos = name.IndexOf("/"), endPos = name.LastIndexOf("/");
+            if (startPos >= 0 && endPos > startPos) {
+                surname = name.Substring(startPos + 1, endPos - startPos - 1);
+		        forenames = name.Substring(0, startPos - 1);
+            } else {
+                surname = "UNKNOWN";
+		        forenames = name;
+            }
 		    marriedName = surname;
-		    name = forenames + " " + surname;
-            gender = node.SelectSingleNode("SEX").ToString();
-		    if (gender == null)
+            gender = FamilyTree.GetText(node, "SEX");
+		    if (gender.Length == 0)
 		        gender = "U";
-            alias = node.SelectSingleNode("ALIA").ToString();
+            alias = FamilyTree.GetText(node, "ALIA");
 		    relation = UNKNOWN;
 		    status = UNKNOWNSTATUS;
-		    facts = new List<Fact>(0);
+		    facts = new List<Fact>();
 		    addFacts(node,Fact.BIRTH);
 		    addFacts(node,Fact.CHRISTENING);
 		    addFacts(node,Fact.DEATH);
@@ -53,37 +53,8 @@ namespace FTAnalyser
 		    addFacts(node,Fact.OCCUPATION);
 		    addFacts(node,Fact.CUSTOM_FACT);
 	    }
-/*
-	    public Individual (IndividualLocal ind) {
-	        if (ind != null) {
-			    this.individualID = ind.getIndividualID();
-			    this.gedcomID = ind.getGedcomID();
-			    this.forenames = ind.getForenames();
-			    this.surname = ind.getSurname();
-			    this.gender = ind.getGender();
-			    this.alias = ind.getAlias();
-			    this.relation = ind.getRelation().intValue();
-			    this.status = UNKNOWNSTATUS;
-			    this.facts = new List<Fact>();
-			    Iterator it = ind.getFacts().iterator();
-			    while (it.hasNext()) {
-			        this.facts.Add(new Fact(it.next()));
-			    }
-	        } else {
-	    	    this.individualID = "";
-	    	    this.gedcomID = "";
-	    	    this.forenames = "";
-	    	    this.surname = "";
-	    	    this.gender = "";
-	    	    this.alias = "";
-	    	    this.relation = UNKNOWN;
-	    	    this.status = UNKNOWNSTATUS;
-	            this.facts = new List<Fact>(0); 
-	        }
-		    this.marriedName = surname;
-	    }
- */   	
-	    private void addFacts(XmlNode node, string factType) {
+
+        private void addFacts(XmlNode node, string factType) {
             XmlNodeList list = node.SelectNodes(factType);
 	        foreach(XmlNode n in list) {
 	            facts.Add(new Fact(n));

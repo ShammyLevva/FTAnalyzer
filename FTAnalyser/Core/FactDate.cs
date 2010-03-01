@@ -10,8 +10,8 @@ namespace FTAnalyser
 {
     public class FactDate: IComparable<FactDate>
     {
-        public static readonly DateTime MINDATE = new DateTime(1, 0, 1);
-        public static readonly DateTime MAXDATE = new DateTime(9999, 11, 31);
+        public static readonly DateTime MINDATE = new DateTime(1, 1, 1);
+        public static readonly DateTime MAXDATE = new DateTime(9999, 12, 31);
         public static readonly int MAXYEARS = 110;
         public static readonly int MINYEARS = 0;
         private static readonly int LOW = 0;
