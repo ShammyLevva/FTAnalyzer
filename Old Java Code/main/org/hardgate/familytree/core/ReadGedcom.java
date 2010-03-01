@@ -29,21 +29,21 @@ public class ReadGedcom {
 	public static void main(String[] args) throws Exception {
 
  		transformGedcomToXML(
-				Messages.getString("SourceGedcomFile"), //$NON-NLS-1$
-				Messages.getString("InitialXMLFile")); //$NON-NLS-1$
-		System.out.println("GEDCOM File Transformed to XML"); //$NON-NLS-1$
+				Messages.getString("SourceGedcomFile"), 
+				Messages.getString("InitialXMLFile")); 
+		System.out.println("GEDCOM File Transformed to XML"); 
 
 		transformXML(
-				Messages.getString("InitialXMLFile"), //$NON-NLS-1$
-				Messages.getString("ListType"), //$NON-NLS-1$
-				Messages.getString("FinalXMLFile")); //$NON-NLS-1$
-		System.out.println("Gedcom XML Transformed to Reporting XML"); //$NON-NLS-1$
+				Messages.getString("InitialXMLFile"), 
+				Messages.getString("ListType"), 
+				Messages.getString("FinalXMLFile")); 
+		System.out.println("Gedcom XML Transformed to Reporting XML"); 
 
 		transformXML(
-				Messages.getString("FinalXMLFile"), //$NON-NLS-1$
-				Messages.getString("ListReportType"), //$NON-NLS-1$
-				Messages.getString("OutputHTMLFile")); //$NON-NLS-1$
-		System.out.println("XML Transformed to HTML"); //$NON-NLS-1$
+				Messages.getString("FinalXMLFile"), 
+				Messages.getString("ListReportType"), 
+				Messages.getString("OutputHTMLFile")); 
+		System.out.println("XML Transformed to HTML"); 
 
 	}
 
@@ -54,7 +54,7 @@ public class ReadGedcom {
 		// define input file
 		FileInputStream GEDsource = new FileInputStream(sourcefile);
 		// define XML transfer file
-		File stylesheet = new File("xml/GedcomToXml.xsl"); //$NON-NLS-1$
+		File stylesheet = new File("xml/GedcomToXml.xsl"); 
 		// define XML output file
 		File gedXml = new File(outfile);
 		

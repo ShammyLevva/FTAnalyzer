@@ -13,16 +13,16 @@ namespace FTAnalyser
         public static readonly String SINGLE = "Single", MARRIED = "Married";
 
         private String familyID = "";
-        private int memberID;
         private String familyGed;
-        private Individual husband;
         private String husbandID;
         private String husbandGed;
-        private Individual wife;
         private String wifeID;
         private String wifeGed;
         private List<Fact> facts;
-        private List<Individual> children;
+        internal int memberID;
+        internal Individual husband;
+        internal Individual wife;
+        internal List<Individual> children;
 
         private void SetupFamily(String familyID, int memberID, String familyGed)
         {

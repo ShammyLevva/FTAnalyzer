@@ -104,11 +104,11 @@ namespace FTAnalyser
 	                        level = PARISH;
 	                    }
 	                } else {
-	                    region = location.trim();
+	                    region = location.Trim();
 	                    level = REGION;
 	                }
 	            } else {
-	                country = location.trim();
+	                country = location.Trim();
 	                level = COUNTRY;
 	            }
 	            fixCities();

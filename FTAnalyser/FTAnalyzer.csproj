@@ -96,6 +96,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CensusFamily.cs" />
+    <Compile Include="Comparators\CensusAgeComparator.cs" />
+    <Compile Include="Comparators\DateComparator.cs" />
+    <Compile Include="Comparators\LocationComparator.cs" />
+    <Compile Include="Comparators\MultiComparator.cs" />
+    <Compile Include="Comparators\NameComparator.cs" />
     <Content Include="CsharpVsJava.txt" />
     <Compile Include="Exceptions\BadIGIDataException.cs" />
     <Compile Include="Exceptions\MissingPrimaryKeyException.cs" />
