@@ -81,12 +81,12 @@ namespace FTAnalyser
             if (indiv == null)
                 return false;
             Client client = Client.getInstance();
-            Calendar birth = (indiv.getBirthDate() == null) ? 
+            DateTime birth = (indiv.getBirthDate() == null) ? 
 		            FactDate.MINDATE : indiv.getBirthDate().getStartDate();
-		    Calendar death = (indiv.getDeathDate() == null) ?
+            DateTime death = (indiv.getDeathDate() == null) ?
 		            FactDate.MAXDATE : indiv.getDeathDate().getEndDate();
-		    if (birth.before(censusDate.getStartDate()) && 
-		            death.after(censusDate.getStartDate()) && 
+		    if (birth < censusDate.getStartDate() && 
+		        death > censusDate.getStartDate() && 
 		            !indiv.isCensusDone(censusDate)) {
 		        if (indiv.getStatus().Equals(Individual.CHILD)) { 
 		            // individual is a child so remove if married before census date

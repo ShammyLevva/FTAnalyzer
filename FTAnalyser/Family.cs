@@ -88,7 +88,7 @@ namespace FTAnalyser
                     for (Iterator i = node.nodeIterator("CHIL"); i.hasNext(); )
                     {
                         XmlNode n = (XmlNode)i.next();
-                        Individual child = client.getGedcomIndividual(memberID, n.attributeValue("REF"));
+                        Individual child = client.getGedcomIndividual(memberID, n.Attributes.GetNamedItem("REF").ToString());
                         children.Add(child);
                     }
                 }
@@ -103,7 +103,7 @@ namespace FTAnalyser
 
         private void addFacts(XmlNode node, String factType)
         {
-            Iterator it = node.elementIterator(factType);
+            Iterator it = node.nodeIterator(factType);
             while (it.hasNext())
             {
                 XmlNode n = (XmlNode)it.next();

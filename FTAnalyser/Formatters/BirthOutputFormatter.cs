@@ -25,7 +25,7 @@ namespace FTAnalyser
             printFamilyGroup(b.getRegistrationDate(), b.getFamilyGroup(), output);
             output.Write("\""); output.Write(b.getGender()); output.Write("\",");
             output.Write("\""); output.Write(b.getParentsMarriageDate()); output.Write("\",");
-            output.Write("\""); output.Write(b.getParentsMarriageLocation()); output.println("\"");
+            output.Write("\""); output.Write(b.getParentsMarriageLocation()); output.WriteLine("\"");
         }
     }
 }

@@ -72,7 +72,7 @@ namespace FTAnalyser
                 factType = node.Name;
                 if (factType.Equals("EVEN")) {
                     String tag = node.SelectSingleNode("TYPE").ToString();
-                    factType = (String) CUSTOM_TAGS.get(tag);
+                    CUSTOM_TAGS.TryGetValue(tag, out factType);
                     if (factType == null) {
                         factType = Fact.UNKNOWN;
                         Console.WriteLine("Recorded unknown fact type " + tag);

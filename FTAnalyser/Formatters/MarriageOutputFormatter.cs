@@ -35,7 +35,7 @@ namespace FTAnalyser
             }
             output.Write("\""); output.Write(m.getReligion()); output.Write("\",");
             output.Write("\""); output.Write(m.getDateOfMarriage()); output.Write("\",");
-            output.Write("\""); output.Write(m.getPlaceOfMarriage()); output.println("\"");
+            output.Write("\""); output.Write(m.getPlaceOfMarriage()); output.WriteLine("\"");
         }
     }
 }

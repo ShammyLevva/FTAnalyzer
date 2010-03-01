@@ -30,7 +30,7 @@ namespace FTAnalyser
                 output.Write("\""); output.Write(i.getDateOfBirth()); output.Write("\",");
                 output.Write("\""); output.Write(i.getBirthLocation()); output.Write("\",");
                 output.Write("\""); output.Write(i.getStatus()); output.Write("\"");
-                output.WriteLine.println();
+                output.WriteLine();
             }
         }
     }
