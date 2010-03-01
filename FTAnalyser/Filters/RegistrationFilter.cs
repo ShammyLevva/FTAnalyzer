@@ -8,6 +8,6 @@ namespace FTAnalyser
 {
     public interface RegistrationFilter
     {
-        public bool select(Registration r);
+        bool select(Registration r);
     }
 }

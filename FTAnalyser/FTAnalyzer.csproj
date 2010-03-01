@@ -119,6 +119,11 @@
     <Compile Include="Filters\RelationFilter.cs" />
     <Compile Include="Filters\SurnameFilter.cs" />
     <Content Include="GedcomOutput.xml" />
+    <Compile Include="Registrations\BirthRegistration.cs" />
+    <Compile Include="Registrations\CensusRegistration.cs" />
+    <Compile Include="Registrations\DeathRegistration.cs" />
+    <Compile Include="Registrations\MarriageRegistration.cs" />
+    <Compile Include="Registrations\Registration.cs" />
     <Compile Include="Individual.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="GedcomParser\AnselEncoding.cs" />
