@@ -6,9 +6,9 @@ using System.Xml;
 
 namespace FTAnalyser
 {
-    public class DateComparator : Comparator<Registration> {
-
-        public int compare (Registration r1, Registration r2) {
+    public class DateComparator : IComparer<Registration>
+    {
+        public int Compare (Registration r1, Registration r2) {
             FactDate d1 = r1.getRegistrationDate();
             FactDate d2 = r2.getRegistrationDate();
             if (d1 == null)  d1 = FactDate.UNKNOWN_DATE;

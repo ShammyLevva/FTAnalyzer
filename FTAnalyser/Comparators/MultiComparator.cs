@@ -6,22 +6,23 @@ using System.Xml;
 
 namespace FTAnalyser
 {
-    public class MultiComparator<T> : Comparator<T> {
-
-        private List<Comparator<T> > comparators;
+    public class MultiComparator<T> : IComparer<T>
+    {
+        private List<IComparer<T>> comparators;
         
         public MultiComparator () {
-            comparators = new List<Comparator<T> >();
+            comparators = new List<IComparer<T>>();
+        }
+
+        public void addComparator(IComparer<T> c)
+        {
+            comparators.Add(c);
         }
         
-        public void addComparator (Comparator<T> c) {
-            comparators.add(c);
-        }
-        
-        public int compare (T o1, T o2) {
+        public int Compare (T o1, T o2) {
             int result = 0;
-            for (Comparator<T> c : comparators) {
-                result = c.compare(o1, o2);
+            foreach (IComparer<T> c in comparators) {
+                result = c.Compare(o1, o2);
                 if (result != 0)
                     break;
             }

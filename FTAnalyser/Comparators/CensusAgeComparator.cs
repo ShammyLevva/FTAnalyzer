@@ -6,12 +6,11 @@ using System.Xml;
 
 namespace FTAnalyser
 {
-    public class CensusAgeComparator : IComparator<Individual>
+    public class CensusAgeComparator : IComparer<Individual>
     {
-
         private FactDate date;
 
-        public int compare(Individual i1, Individual i2)
+        public int Compare(Individual i1, Individual i2)
         {
             if (i1.getStatus().Equals(i2.getStatus()))
                 // same status so sort by date
