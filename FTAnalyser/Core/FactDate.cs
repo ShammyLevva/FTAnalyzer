@@ -169,7 +169,7 @@ namespace FTAnalyser
 
         private DateTime parseDate(string dateValue, int highlow, int adjustment)
         {
-            return parseDate(dateValue, highlow, adjustment, 0);
+            return parseDate(dateValue, highlow, adjustment, 1);
         }
 
         private DateTime parseDate(string dateValue, int highlow, int adjustment, int defaultYear)
