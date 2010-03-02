@@ -14,12 +14,14 @@ namespace FTAnalyser
         private List<FactSource> sources;
         private List<Individual> individuals;
         private List<Family> families;
+        private List<Location> locations;
 
         private FamilyTree()
         {
             sources = new List<FactSource>();
             individuals = new List<Individual>();
             families = new List<Family>();
+            locations = new List<Location>();
         }
 
         public static FamilyTree Instance {
@@ -92,7 +94,7 @@ namespace FTAnalyser
             return RelationCount;
         }
 
-        #region Properties and functions
+        #region Properties and Property Functions
 
         private int RelationCount
         {
@@ -172,6 +174,25 @@ namespace FTAnalyser
                 if (ind.RelationType == relationType)
                     result.Add(ind);
             return result;
+        }
+
+        public List<Fact> AllFacts
+        {
+            get
+            {
+                List<Fact> result = new List<Fact>();
+                foreach (Individual ind in individuals)
+                    result.AddRange(ind.AllFacts);
+                return result;
+            }
+        }
+
+        public Location GetLocation(string place)
+        {
+            Location loc = new Location(place);
+            if (!locations.Contains(loc))
+                locations.Add(loc);
+            return loc; // should return object that is in list of locations 
         }
 
         #endregion
@@ -264,6 +285,10 @@ namespace FTAnalyser
 
         private void setParishes()
         {
+            foreach (Location loc in locations)
+            {
+
+            }
         }
 
         #endregion

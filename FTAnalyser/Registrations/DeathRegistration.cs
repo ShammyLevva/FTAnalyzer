@@ -48,7 +48,7 @@ namespace FTAnalyser
 
         public string PlaceOfDeath
         {
-            get { return (death == null) ? "" : death.Location; }
+            get { return (death == null) ? "" : death.Place; }
         }
 
         public string SpousesName

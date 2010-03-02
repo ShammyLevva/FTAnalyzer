@@ -65,7 +65,7 @@ namespace FTAnalyser
         
         private Location updateBestLocation(Location bestLocation, Fact fact) {
             if (fact != null) {
-		        Location location = new Location(fact.Location);
+		        Location location = new Location(fact.Place);
 		        if (location.Level >= Location.PARISH ||
 			        location.Level >= bestLocation.Level) 
 		        	    return location;

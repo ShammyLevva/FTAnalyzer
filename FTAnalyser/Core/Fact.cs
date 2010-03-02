@@ -21,7 +21,8 @@ namespace FTAnalyser
         private string factType;
         private FactDate date;
         private string comment;
-        private string location;
+        private string place;
+        private Location location;
         private List<FactSource> sources;
         private bool certificatePresent;
 
@@ -99,18 +100,25 @@ namespace FTAnalyser
             this.factType = factType;
             this.date = date;
             this.comment = "";
-            this.location = "";
+            this.place = "";
+            this.location = FamilyTree.Instance.GetLocation(place);
         }
 
         #endregion
 
         #region Properties
 
-        public string Location {
+        public Location Location {
             get { return location; }
         }
 
-        public string Comment {
+        public string Place
+        {
+            get { return place; }
+        }
+
+        public string Comment
+        {
             get { return comment; }
         }
 
@@ -131,35 +139,34 @@ namespace FTAnalyser
         }
 
         public string Country {
-            get
-            {
-                Location loc = new Location(location);
-                return loc == null ? "Scotland" : loc.Country;
-            }
+            get { return location == null ? "Scotland" : location.Country; }
         }
 
         #endregion
 
-        private void setCommentAndLocation (string factType, string place) {
-            if (place != null) {
-                int slash = place.IndexOf("/");
+        private void setCommentAndLocation (string factType, string factString) {
+            if (factString != null)
+            {
+                int slash = factString.IndexOf("/");
                 if (slash >= 0) {
                     comment = place.Substring(0, slash).Trim();
                     // If slash occurs at end of string, location is empty.
-                    location = (slash == place.Length - 1) ? "" : place.Substring(slash + 1).Trim();
+                    place = (slash == factString.Length - 1) ? "" : factString.Substring(slash + 1).Trim();
                 } else if (Fact.COMMENT_FACTS.Contains(factType)) {
                     // we have a comment rather than a location
-                    comment = place;
-                    location = "";
+                    comment = factString;
+                    place = "";
                 } else {
                     comment = "";
-                    location = place;
+                    place = factString;
                 }
             } else {
                 comment = "";
-                location = "";
+                place = "";
             }
+            location = FamilyTree.Instance.GetLocation(place);
         }
+
         private bool setCertificatePresent() {
 	        foreach (FactSource fs in sources) {
 	    	    return (factType.Equals(Fact.BIRTH) && fs.isBirthCert()) ||

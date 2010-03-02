@@ -41,7 +41,7 @@ namespace FTAnalyser
         }
         
         public string PlaceOfMarriage {
-            get { return (marriage == null) ? "" : marriage.Location; }
+            get { return (marriage == null) ? "" : marriage.Place; }
         }
         
         public string SpousesName {

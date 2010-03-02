@@ -40,7 +40,7 @@ namespace FTAnalyser
             get
             {
                 Fact residence = individual.getPreferredFact(Fact.RESIDENCE);
-                return (residence == null) ? "" : residence.Location;
+                return (residence == null) ? "" : residence.Place;
             }
         }
         
@@ -65,7 +65,7 @@ namespace FTAnalyser
         }
         
         public string ParentsMarriageLocation {
-            get { return (parentsMarriage == null) ? "" : parentsMarriage.Location; }
+            get { return (parentsMarriage == null) ? "" : parentsMarriage.Place; }
         }
         
         public Location BestLocation {
@@ -74,7 +74,7 @@ namespace FTAnalyser
                 Location i = individual.BestLocation;
                 if (parentsMarriage == null)
                     return i;
-                Location f = new Location(parentsMarriage.Location);
+                Location f = new Location(parentsMarriage.Place);
                 if (f.Level > i.Level)
                     return f;
                 else

@@ -34,7 +34,7 @@ namespace FTAnalyser
             
             bool allLocationsBlank = true;
             foreach (Fact f in r.AllFacts) {
-                l = new Location(f.Location);
+                l = new Location(f.Place);
                 if (l.Matches(searchstring, level))
                     return true;
                 if (! l.isBlank())

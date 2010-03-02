@@ -159,7 +159,7 @@ namespace FTAnalyser
             get
             {
                 Fact f = getPreferredFact(Fact.BIRTH);
-                return (f == null) ? "" : f.Location;
+                return (f == null) ? "" : f.Place;
             }
         }
 
@@ -194,7 +194,7 @@ namespace FTAnalyser
                 Location result = new Location();
                 foreach (Fact f in facts)
                 {
-                    Location l = new Location(f.Location);
+                    Location l = new Location(f.Place);
                     if (l.Level > bestLevel)
                     {
                         result = l;
