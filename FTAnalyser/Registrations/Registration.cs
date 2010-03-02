@@ -65,7 +65,7 @@ namespace FTAnalyser
         }
         
         public virtual int Relation {
-            get { return Individual.Relation; }
+            get { return Individual.RelationType; }
         }
         
         public string DateOfBirth  {

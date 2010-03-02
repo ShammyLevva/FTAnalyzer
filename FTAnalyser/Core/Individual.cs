@@ -21,7 +21,7 @@ namespace FTAnalyser
 	    private string gender;
 	    private string alias;
 	    private string status;
-	    private int relation;
+	    private int relationType;
 	    private List<Fact> facts;
     	
 	    public Individual (XmlNode node) {
@@ -30,7 +30,7 @@ namespace FTAnalyser
             Name = FamilyTree.GetText(node, "NAME");
 		    Gender = FamilyTree.GetText(node, "SEX");
             alias = FamilyTree.GetText(node, "ALIA");
-		    relation = UNKNOWN;
+		    relationType = UNKNOWN;
 		    status = UNKNOWNSTATUS;
 		    facts = new List<Fact>();
 		    addFacts(node,Fact.BIRTH);
@@ -50,9 +50,10 @@ namespace FTAnalyser
             get { return individualID; } 
         }
 
-        public int Relation 
+        public int RelationType 
         { 
-            get { return relation; } 
+            get { return relationType; }
+            set { relationType = value; }
         }
         
         public List<Fact> AllFacts 

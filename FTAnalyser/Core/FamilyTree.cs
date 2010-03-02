@@ -32,6 +32,8 @@ namespace FTAnalyser
             }
         }
 
+        #region Static Functions
+
         public static string GetText(XmlNode node) {
             return (node != null)? node.InnerText.Trim() : "";
         }
@@ -43,17 +45,15 @@ namespace FTAnalyser
         public static XmlNode GetChildNode(XmlNode node, String tag)
         {
             if (node == null)
-            {
                 return null;
-            }
             else
-            {
                 return node.SelectSingleNode(tag);
-            }
         }
 
-        public void LoadTree(XmlDocument doc) { LoadTree(doc, new ProgressBar(), new ProgressBar(), new ProgressBar()); }
-        public void LoadTree(XmlDocument doc, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
+        #endregion
+
+        public int LoadTree(XmlDocument doc) { return LoadTree(doc, new ProgressBar(), new ProgressBar(), new ProgressBar()); }
+        public int LoadTree(XmlDocument doc, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
         {
             // First iterate through attributes of root finding all sources
             XmlNodeList list = doc.SelectNodes("GED/SOUR");
@@ -62,7 +62,7 @@ namespace FTAnalyser
             foreach(XmlNode n in list)
             {
                 FactSource fs = new FactSource(n);
-                addSource(fs);
+                sources.Add(fs);
                 pbS.Value = counter++;
             }
             // now iterate through child elements of root
@@ -73,7 +73,7 @@ namespace FTAnalyser
             foreach (XmlNode n in list)
             {
                 Individual individual = new Individual(n);
-                addIndividual(individual);
+                individuals.Add(individual);
                 pbI.Value = counter++;
             }
             // now iterate through child elements of root
@@ -84,39 +84,19 @@ namespace FTAnalyser
             foreach (XmlNode n in list)
             {
                 Family family = new Family(n);
-                addFamily(family);
+                families.Add(family);
                 pbF.Value = counter++;
             } 
-            setRelations("I1");
-		    printRelationCount();
+            SetRelations(individuals[0].GedcomID);
 	        setParishes();
+            return RelationCount;
         }
 
-        private void setRelations(string individual)
-        {
-        }
+        #region Properties and functions
 
-        private void printRelationCount()
+        private int RelationCount
         {
-        }
-
-        private void setParishes()
-        {
-        }
-
-        public void addSource(FactSource source)
-        {
-            sources.Add(source);
-        }
-
-        public void addIndividual(Individual individual)
-        {
-            individuals.Add(individual);
-        }
-
-        public void addFamily(Family family)
-        {
-            families.Add(family);
+            get { return 0; }
         }
 
         public Individual getGedcomIndividual(string gedcomID)
@@ -144,7 +124,8 @@ namespace FTAnalyser
             if (ind.isSingleAtDeath())
                 return false;
             List<Family> families = getFamiliesAsParent(ind);
-            foreach (Family f in families) {
+            foreach (Family f in families)
+            {
                 FactDate marriage = f.getPreferredFactDate(Fact.MARRIAGE);
                 if (marriage != null && marriage.isBefore(fd))
                     return true;
@@ -159,17 +140,132 @@ namespace FTAnalyser
             {
                 Individual husband = f.Husband;
                 Individual wife = f.Wife;
-                if (husband != null && husband.Equals(ind))
-                {
+                if (husband != null && husband == ind)
                     result.Add(f);
-                }
-                else if (wife != null && wife.Equals(ind))
-                {
+                else if (wife != null && wife == ind)
                     result.Add(f);
+            }
+            return result;
+        }
+
+        public List<Family> getFamiliesAsChild(Individual ind)
+        {
+            List<Family> result = new List<Family>();
+            foreach (Family f in families)
+            {
+                foreach (Individual child in f.Children)
+                {
+                    if (child != null && child == ind)
+                    {
+                        result.Add(f);
+                        break;
+                    }
                 }
             }
             return result;
         }
-    }
 
+        public List<Individual> getAllRelationsOfType(int relationType)
+        {
+            List<Individual> result = new List<Individual>();
+            foreach (Individual ind in individuals)
+                if (ind.RelationType == relationType)
+                    result.Add(ind);
+            return result;
+        }
+
+        #endregion
+
+        #region Processes
+
+        private void ClearRelations()
+        {
+            foreach(Individual i in individuals)
+            {
+                i.RelationType = Individual.UNKNOWN;
+            }
+        }
+
+        private void addParentsToQueue(Individual indiv, LinkedList<Individual> queue)
+        {
+            List<Family> families = getFamiliesAsChild(indiv);
+            foreach (Family family in families)
+            {
+                // add parents to queue
+                if (family.Husband != null)
+                    queue.AddLast(family.Husband);
+                if (family.Wife != null)
+                    queue.AddLast(family.Wife);
+            }
+        }
+
+        private void SetRelations(string startGed)
+        {	
+            ClearRelations();
+            Individual ind = getGedcomIndividual(startGed);
+            LinkedList<Individual> queue = new LinkedList<Individual>();
+            queue.AddFirst(ind);
+            while (queue.Count > 0) {
+                // now take an item from the queue
+                ind = queue.First();
+                queue.RemoveFirst();
+                // set them as a direct relation
+                ind.RelationType = Individual.DIRECT;
+                addParentsToQueue(ind, queue);
+            }
+            // we have now added all direct ancestors
+            List<Individual> directs = getAllRelationsOfType(Individual.DIRECT);
+		    queue.Union(directs);
+		    while(queue.Count > 0) {
+			    // get the next person
+		        ind = queue.First();
+                queue.RemoveFirst();
+			    List<Family> families = getFamiliesAsParent(ind);
+    		    foreach (Family family in families) {
+    	            // if the spouse of a direct ancestor is not a direct
+    	            // ancestor then they are only related by marriage
+    		        family.setSpouseRelation(ind, Individual.MARRIAGEDB);
+		            // all children of direct ancestors and blood relations
+		            // are blood relations
+    		        family.setChildRelation(queue, Individual.BLOOD);
+    		    }
+		    }
+		    // we have now set all direct ancestors and all blood relations
+		    // all that remains is to loop through the marriage relations
+            List<Individual> marrieds = getAllRelationsOfType(Individual.MARRIAGE);
+            List<Individual> marriedDBs = getAllRelationsOfType(Individual.MARRIAGEDB);
+		    queue.Union(marriedDBs);
+		    queue.Union(marrieds);
+            while (queue.Count > 0)
+            {
+			    // get the next person
+                ind = queue.First();
+                queue.RemoveFirst();
+                // first only process this individual if they are related by marriage or still unknown
+		        int relationship = ind.RelationType;
+		        if (relationship == Individual.MARRIAGE || 
+		            relationship == Individual.MARRIAGEDB ||
+		            relationship == Individual.UNKNOWN) {
+		            // set this individual to be related by marriage
+		            if (relationship == Individual.UNKNOWN)
+		                ind.RelationType = Individual.MARRIAGE;
+		            addParentsToQueue(ind, queue);
+                    List<Family> families = getFamiliesAsParent(ind);
+                    foreach (Family family in families)
+                    {
+                        family.setSpouseRelation(ind, Individual.MARRIAGE);
+	    	            // children of relatives by marriage that we haven't previously 
+	    	            // identified are also relatives by marriage
+	    		        family.setChildRelation(queue, Individual.MARRIAGE);
+	    		    }
+		        }
+		    }
+        }
+
+        private void setParishes()
+        {
+        }
+
+        #endregion
+    }
 }
