@@ -87,7 +87,7 @@ namespace FTAnalyser
                 families.Add(family);
                 pbF.Value = counter++;
             } 
-            SetRelations(individuals[0].GedcomID);
+            // SetRelations(individuals[0].GedcomID); // needs testing
 	        setParishes();
             return RelationCount;
         }
