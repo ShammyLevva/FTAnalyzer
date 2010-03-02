@@ -56,12 +56,20 @@ namespace FTAnalyser
 
         #region Properties
 
-        public string IndividualID { 
+        public string IndividualID 
+        { 
             get { return individualID; } 
         }
-        public string Forenames { get { return forenames; } }
-        public int Relation { get { return relation; } }
-        public List<Fact> AllFacts { get { return this.facts; } }
+
+        public int Relation 
+        { 
+            get { return relation; } 
+        }
+        
+        public List<Fact> AllFacts 
+        { 
+            get { return this.facts; } 
+        }
 
         public string Alias
         {
@@ -73,12 +81,6 @@ namespace FTAnalyser
             get { return this.gender; }
         }
         
-        public string MarriedName
-        {
-            get { return this.MarriedName; }
-            set { this.marriedName = value; }
-        }
-
         public string GedcomID
         {
             get { return gedcomID; }
@@ -89,17 +91,39 @@ namespace FTAnalyser
             get { return (forenames + " " + surname).Trim(); }
         }
 
+        public string Forename
+        {
+            get
+            {
+                if (forenames == null)
+                    return "";
+                else
+                {
+                    int pos = forenames.IndexOf(' ');
+                    return pos > 0 ? forenames.Substring(0, pos) : forenames;
+                }
+            }
+        }
+
+        public string Forenames 
+        { 
+            get { return forenames; } 
+        }
+        
         public string Surname
         {
             get { return surname; }
         }
 
+        public string MarriedName
+        {
+            get { return this.marriedName; }
+            set { this.marriedName = value; }
+        }
+
         public string CensusName
         {
-            get
-            {
-                return this.status.Equals(WIFE) ? forenames + " " + marriedName + " (" + surname + ")" : Name;
-            }
+            get { return this.status == WIFE ? forenames + " " + marriedName + " (" + surname + ")" : Name; }
         }
         
         public string DateOfBirth
@@ -134,20 +158,6 @@ namespace FTAnalyser
             }
         }
 
-        public string Forename
-        {
-            get
-            {
-                if (forenames == null)
-                    return "";
-                else
-                {
-                    int pos = forenames.IndexOf(' ');
-                    return pos > 0 ? forenames.Substring(0, pos) : forenames;
-                }
-            }
-        }
-        
         public string Occupation {
             get
             {
