@@ -9,9 +9,9 @@ namespace FTAnalyser
 	    // define relation type from direct ancestor to related by marriage and 
 	    // MARRIAGEDB ie: married to a direct or blood relation
 	    public static readonly int UNKNOWN = 0, DIRECT = 1, BLOOD = 2, 
-						        MARRIAGEDB = 3, MARRIAGE = 4, UNSET = 99;
+						           MARRIAGEDB = 3, MARRIAGE = 4, UNSET = 99;
 	    public static readonly string HUSBAND = "Husband", WIFE = "Wife", CHILD = "Child",
-							    UNKNOWNSTATUS = "unknown";
+							          UNKNOWNSTATUS = "Unknown";
     	
 	    private string individualID;
 	    private string gedcomID;
@@ -27,19 +27,8 @@ namespace FTAnalyser
 	    public Individual (XmlNode node) {
 		    gedcomID = node.Attributes["ID"].Value;
             individualID = gedcomID;
-            string name = FamilyTree.GetText(node, "NAME");
-            int startPos = name.IndexOf("/"), endPos = name.LastIndexOf("/");
-            if (startPos >= 0 && endPos > startPos) {
-                surname = name.Substring(startPos + 1, endPos - startPos - 1);
-		        forenames = startPos == 0 ? "UNKNOWN" : name.Substring(0, startPos - 1);
-            } else {
-                surname = "UNKNOWN";
-		        forenames = name;
-            }
-		    marriedName = surname;
-            gender = FamilyTree.GetText(node, "SEX");
-		    if (gender.Length == 0)
-		        gender = "U";
+            Name = FamilyTree.GetText(node, "NAME");
+		    Gender = FamilyTree.GetText(node, "SEX");
             alias = FamilyTree.GetText(node, "ALIA");
 		    relation = UNKNOWN;
 		    status = UNKNOWNSTATUS;
@@ -79,6 +68,12 @@ namespace FTAnalyser
         public string Gender
         {
             get { return this.gender; }
+            private set
+            {
+                gender = value;
+                if (gender.Length == 0)
+                    gender = "U";
+            }
         }
         
         public string GedcomID
@@ -89,6 +84,24 @@ namespace FTAnalyser
         public string Name
         {
             get { return (forenames + " " + surname).Trim(); }
+            private set
+            {
+                string name = value;
+                int startPos = name.IndexOf("/"), endPos = name.LastIndexOf("/");
+                if (startPos >= 0 && endPos > startPos)
+                {
+                    surname = name.Substring(startPos + 1, endPos - startPos - 1);
+                    forenames = startPos == 0 ? "UNKNOWN" : name.Substring(0, startPos - 1);
+                }
+                else
+                {
+                    surname = "UNKNOWN";
+                    forenames = name;
+                }
+                if (surname == "?")
+                    surname = "UNKNOWN";
+                marriedName = surname;
+            }
         }
 
         public string Forename
