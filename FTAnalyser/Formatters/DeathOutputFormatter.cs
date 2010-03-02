@@ -24,15 +24,15 @@ namespace FTAnalyser
         public override void printItem(Registration reg, StreamWriter output)
         {
             DeathRegistration d = (DeathRegistration) reg;
-            printFamilyGroup(d.getRegistrationDate(), d.getFamilyGroup(), output);
-            output.Write("\""); output.Write(d.getSpousesName()); output.Write("\",");
-            output.Write("\""); output.Write(d.getSpousesOccupation()); output.Write("\",");
-            output.Write("\""); output.Write(d.getSpouseDeceased()); output.Write("\",");
-            output.Write("\""); output.Write(d.getDateOfDeath()); output.Write("\",");
-            output.Write("\""); output.Write(d.getPlaceOfDeath()); output.Write("\",");
-            output.Write("\""); output.Write(d.getMaritalStatus()); output.Write("\",");
-            output.Write("\""); output.Write(d.getGender()); output.Write("\",");
-            output.Write("\""); output.Write(d.getCauseOfDeath()); output.Write("\"");
+            printFamilyGroup(d.RegistrationDate, d.FamilyGroup, output);
+            output.Write("\""); output.Write(d.SpousesName); output.Write("\",");
+            output.Write("\""); output.Write(d.SpousesOccupation); output.Write("\",");
+            output.Write("\""); output.Write(d.SpouseDeceased); output.Write("\",");
+            output.Write("\""); output.Write(d.DateOfDeath); output.Write("\",");
+            output.Write("\""); output.Write(d.PlaceOfDeath); output.Write("\",");
+            output.Write("\""); output.Write(d.MaritalStatus); output.Write("\",");
+            output.Write("\""); output.Write(d.Gender); output.Write("\",");
+            output.Write("\""); output.Write(d.CauseOfDeath); output.Write("\"");
             output.WriteLine();
         }
     }

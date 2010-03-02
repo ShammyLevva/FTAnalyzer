@@ -112,10 +112,8 @@ namespace FTAnalyser
         {
             foreach (Individual i in individuals)
             {
-                if (i.getGedcomID().Equals(gedcomID))
-                {
+                if (i.GedcomID == gedcomID)
                     return i;
-                }
             }
             return null;
         }
@@ -124,10 +122,8 @@ namespace FTAnalyser
         {
             foreach (FactSource s in sources)
             {
-                if (s.getGedcomID().Equals(gedcomID))
-                {
+                if (s.GedcomID == gedcomID)
                     return s;
-                }
             }
             return null;
         }

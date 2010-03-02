@@ -16,21 +16,21 @@ namespace FTAnalyser
         {
             if (f != null)
             {
-                Individual ind = f.getIndividual();
-                output.Write("\""); output.Write(ind.getSurname()); output.Write("\",");
-                output.Write("\""); output.Write(ind.getForenames()); output.Write("\",");
+                Individual ind = f.Individual;
+                output.Write("\""); output.Write(ind.Surname); output.Write("\",");
+                output.Write("\""); output.Write(ind.Forenames); output.Write("\",");
                 output.Write("\""); output.Write(ind.getAge(fd)); output.Write("\",");
-                output.Write("\""); output.Write(ind.getOccupation()); output.Write("\",");
-                output.Write("\""); output.Write(f.getResidence()); output.Write("\",");
-                output.Write("\""); output.Write(ind.getDateOfBirth()); output.Write("\",");
-                output.Write("\""); output.Write(ind.getBirthLocation()); output.Write("\",");
-                output.Write("\""); output.Write(ind.getBestLocation()); output.Write("\",");
-                output.Write("\""); output.Write(f.getFathersName()); output.Write("\",");
-                output.Write("\""); output.Write(f.getFathersOccupation()); output.Write("\",");
-                output.Write("\""); output.Write(f.getFatherDeceased(fd)); output.Write("\",");
-                output.Write("\""); output.Write(f.getMothersName()); output.Write("\",");
-                output.Write("\""); output.Write(f.getMothersOccupation()); output.Write("\",");
-                output.Write("\""); output.Write(f.getMotherDeceased(fd)); output.Write("\",");
+                output.Write("\""); output.Write(ind.Occupation); output.Write("\",");
+                output.Write("\""); output.Write(f.Residence); output.Write("\",");
+                output.Write("\""); output.Write(ind.DateOfBirth); output.Write("\",");
+                output.Write("\""); output.Write(ind.BirthLocation); output.Write("\",");
+                output.Write("\""); output.Write(ind.BestLocation); output.Write("\",");
+                output.Write("\""); output.Write(f.FathersName); output.Write("\",");
+                output.Write("\""); output.Write(f.FathersOccupation); output.Write("\",");
+                output.Write("\""); output.Write(f.isFatherDeceased(fd)); output.Write("\",");
+                output.Write("\""); output.Write(f.MothersName); output.Write("\",");
+                output.Write("\""); output.Write(f.MothersOccupation); output.Write("\",");
+                output.Write("\""); output.Write(f.isMotherDeceased(fd)); output.Write("\",");
             }
             else
             {

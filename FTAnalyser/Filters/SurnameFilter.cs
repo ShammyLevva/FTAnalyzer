@@ -22,10 +22,9 @@ namespace FTAnalyser
             // contain the search string, then we stop. Otherwise if
             // the registration location is blank, we search all
             // of the facts about this registration.
-            string surname = r.getSurname();
-            if (surname != null && surname.Length > 0)
+            if (r.Surname != null && r.Surname.Length > 0)
             {
-                return searchstring.Equals(surname.ToLower());
+                return searchstring.Equals(r.Surname.ToLower());
             }
             else
             {

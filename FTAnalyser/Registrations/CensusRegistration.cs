@@ -18,38 +18,42 @@ namespace FTAnalyser
             this.censusFamily = censusFamily;
         }
 
-        public override string getRegistrationLocation()
-        {
-            return censusFamily.getBestLocation().ToString();
-        }
-
         public override bool isCertificatePresent()
         {
             return false;
         }
 
-        public override List<Fact> getAllFacts()
+        public override string RegistrationLocation()
         {
-            List<Fact> facts = new List<Fact>();
-            foreach (Individual i in getMembers()) {
-                facts.AddRange(i.getAllFacts());
+            return censusFamily.getBestLocation().ToString();
+        }
+
+        public override List<Fact> AllFacts
+        {
+            get
+            {
+                List<Fact> facts = new List<Fact>();
+                foreach (Individual i in Members)
+                {
+                    facts.AddRange(i.AllFacts);
+                }
+                return facts;
             }
-            return facts;
         }
 
-        public List<Individual> getMembers()
+        public List<Individual> Members
         {
-            return censusFamily.getMembers();
+            get { return censusFamily.getMembers(); }
         }
 
-        public string getFamilyGed()
+        public string FamilyGed
         {
-            return censusFamily.getFamilyGed();
+            get { return censusFamily.getFamilyGed(); }
         }
 
-        public override int getRelation()
+        public override int Relation
         {
-            return censusFamily.getRelation();
+            get { return censusFamily.getRelation(); }
         }
     }
 }

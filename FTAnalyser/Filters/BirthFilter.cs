@@ -20,8 +20,8 @@ namespace FTAnalyser
 
         public override bool select(Registration r)
         {
-            FactDate d = r.getRegistrationDate();
-            FactDate b = r.getIndividual().getBirthDate();
+            FactDate d = r.RegistrationDate;
+            FactDate b = r.Individual.BirthDate;
             FactDate old = b;
             if (r is DeathRegistration)
                 old = b.addYears(FactDate.MAXYEARS);

@@ -19,17 +19,17 @@ namespace FTAnalyser
         public override void printItem(Registration reg, StreamWriter output)
         {
             CensusRegistration c = (CensusRegistration) reg;
-            List<Individual> members = c.getMembers();
+            List<Individual> members = c.Members;
             members.Sort(new CensusAgeComparator());
             foreach (Individual i in members) {
-                output.Write("\""); output.Write(c.getFamilyGed()); output.Write("\",");
-                output.Write("\""); output.Write(c.getRegistrationLocation()); output.Write("\",");
-                output.Write("\""); output.Write(i.getCensusName()); output.Write("\",");
-                output.Write("\""); output.Write(i.getAge(c.getRegistrationDate())); output.Write("\",");
-                output.Write("\""); output.Write(i.getOccupation()); output.Write("\",");
-                output.Write("\""); output.Write(i.getDateOfBirth()); output.Write("\",");
-                output.Write("\""); output.Write(i.getBirthLocation()); output.Write("\",");
-                output.Write("\""); output.Write(i.getStatus()); output.Write("\"");
+                output.Write("\""); output.Write(c.FamilyGed); output.Write("\",");
+                output.Write("\""); output.Write(c.RegistrationLocation()); output.Write("\",");
+                output.Write("\""); output.Write(i.CensusName); output.Write("\",");
+                output.Write("\""); output.Write(i.getAge(c.RegistrationDate)); output.Write("\",");
+                output.Write("\""); output.Write(i.Occupation); output.Write("\",");
+                output.Write("\""); output.Write(i.DateOfBirth); output.Write("\",");
+                output.Write("\""); output.Write(i.BirthLocation); output.Write("\",");
+                output.Write("\""); output.Write(i.Status); output.Write("\"");
                 output.WriteLine();
             }
         }

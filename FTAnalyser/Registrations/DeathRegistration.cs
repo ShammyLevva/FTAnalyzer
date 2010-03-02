@@ -23,15 +23,15 @@ namespace FTAnalyser
             }
             else
             {
-                registrationDate = death.getFactDate();
+                registrationDate = death.FactDate;
                 if (registrationDate != null)
                 {
-                    FactDate birthDate = familyGroup.getIndividual().getBirthDate();
-                    DateTime maxStart = birthDate.getStartDate();
-                    if (maxStart > registrationDate.getStartDate())
+                    FactDate birthDate = familyGroup.Individual.BirthDate;
+                    DateTime maxStart = birthDate.StartDate;
+                    if (maxStart > registrationDate.StartDate)
                     {
                         registrationDate = new FactDate(maxStart,
-                                registrationDate.getEndDate());
+                                registrationDate.EndDate);
                     }
                 }
             }
@@ -39,49 +39,53 @@ namespace FTAnalyser
             this.maritalStatus = maritalStatus;
         }
 
-        public string getDateOfDeath()
+        #region Properties
+
+        public string DateOfDeath
         {
-            return (death == null) ? "" : death.getDatestring();
+            get { return (death == null) ? "" : death.Datestring; }
         }
 
-        public string getPlaceOfDeath()
+        public string PlaceOfDeath
         {
-            return (death == null) ? "" : death.getLocation();
+            get { return (death == null) ? "" : death.Location; }
         }
 
-        public string getSpousesName()
+        public string SpousesName
         {
-            return (spouse == null) ? "" : spouse.getName();
+            get { return (spouse == null) ? "" : spouse.Name; }
         }
 
-        public string getSpousesOccupation()
+        public string SpousesOccupation
         {
-            return (spouse == null) ? "" : spouse.getOccupation();
+            get { return (spouse == null) ? "" : spouse.Occupation; }
         }
 
-        public string getSpouseDeceased()
+        public string SpouseDeceased
         {
-            return (death == null) ? "" : getSpouseDeceased(death.getFactDate());
+            get { return (death == null) ? "" : getSpouseDeceased(death.FactDate); }
         }
+
+        public string MaritalStatus
+        {
+            get { return maritalStatus; }
+        }
+
+        public string CauseOfDeath
+        {
+            get { return (death == null) ? "" : death.Comment; }
+        }
+
+        #endregion
 
         public string getSpouseDeceased(FactDate when)
         {
             return (spouse == null || !spouse.isDeceased(when)) ? "" : "(Deceased)";
         }
 
-        public string getMaritalStatus()
+        public override string RegistrationLocation()
         {
-            return maritalStatus;
-        }
-
-        public string getCauseOfDeath()
-        {
-            return (death == null) ? "" : death.getComment();
-        }
-
-        public override string getRegistrationLocation()
-        {
-            return getPlaceOfDeath();
+            return PlaceOfDeath;
         }
 
         public override bool isCertificatePresent()

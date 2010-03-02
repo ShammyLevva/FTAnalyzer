@@ -69,6 +69,8 @@ namespace FTAnalyser
             return string.Format("{0:" + format + "}", date).ToUpper();
         }
 
+        #region Process Dates
+
         public FactDate addYears(int years)
         {
             DateTime start = new DateTime(startdate.Year, startdate.Month, startdate.Day);
@@ -250,24 +252,27 @@ namespace FTAnalyser
             return dt;
         }
 
-        public DateTime getStartDate()
+        #endregion
+
+        #region Properties
+        public DateTime StartDate
         {
-            return this.startdate;
+            get { return this.startdate; }
         }
 
-        public DateTime getEndDate()
+        public DateTime EndDate
         {
-            return this.enddate;
+            get { return this.enddate; }
         }
 
-        /**
-         * @return Returns the datestring.
-         */
-        public string getDatestring()
+        public string Datestring
         {
-            return this.datestring;
+            get { return this.datestring; }
         }
 
+        #endregion
+
+        #region Tests
         /*
          * @return whether that FactDate is before this FactDate
          */
@@ -314,6 +319,19 @@ namespace FTAnalyser
                 (this.startdate < that.startdate && this.enddate > that.enddate);
         }
 
+        public bool isLongYearSpan()
+        {
+            int diff = Math.Abs(startdate.Year - enddate.Year);
+            return (diff > 5);
+        }
+
+        public bool isExact()
+        {
+            return this.startdate.Equals(this.enddate);
+        }
+
+        #endregion
+
         public int getMaximumYear(FactDate that)
         {
             Debug.WriteLine("Max: This start date is " + Format(FULL, startdate));
@@ -328,12 +346,6 @@ namespace FTAnalyser
             Debug.WriteLine("Min: That start date is " + (that == null ? "null" : Format(FULL, startdate)));
             int diff = Math.Abs(this.enddate.Year - ((that == null) ? MINDATE.Year : that.startdate.Year));
             return Math.Max(diff, MINYEARS);
-        }
-
-        public bool isLongYearSpan()
-        {
-            int diff = Math.Abs(startdate.Year - enddate.Year);
-            return (diff > 5);
         }
 
         public override bool Equals(Object that) 
@@ -361,14 +373,9 @@ namespace FTAnalyser
                 return this.startdate.CompareTo(that.startdate);
         }
 
-        public bool isExact()
-        {
-            return this.startdate.Equals(this.enddate);
-        }
-
         public override string ToString()
         {
-            return getDatestring();
+            return Datestring;
         }
     }
 }

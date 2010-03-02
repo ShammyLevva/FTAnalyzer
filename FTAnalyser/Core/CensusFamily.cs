@@ -11,10 +11,6 @@ namespace FTAnalyser
         private FactDate censusDate;
         private Location bestLocation;
 
-/*
-        public CensusFamily (FamilyLocal fam) : base(fam) {
-        }
-*/        
         public bool process(FactDate censusDate) {
             bool result = false;
             this.censusDate = censusDate;
@@ -22,7 +18,7 @@ namespace FTAnalyser
 	            this.bestLocation = updateBestLocation(new Location(), wife);
 	            if (checkIndividual(wife)) {
 			        result = true;
-			        wife.setStatus(Individual.WIFE);
+			        wife.Status = Individual.WIFE;
 	            } else 
 			        setWife(null);
 		        // overwrite bestLocation by husbands as most commonly the family
@@ -30,7 +26,7 @@ namespace FTAnalyser
 			    this.bestLocation = updateBestLocation(bestLocation, husband);
 			    if (checkIndividual(husband)) {
 			        result = true;
-			        husband.setStatus(Individual.HUSBAND);
+			        husband.Status = Individual.HUSBAND;
 			    } else 
 			        setHusband(null);
 			    // update bestLocation by marriage date as husband and wife 
@@ -46,7 +42,7 @@ namespace FTAnalyser
 			        // as long as the location is at least Parish level
 			        Fact birth = child.getPreferredFact(Fact.BIRTH);
 			        this.bestLocation = updateBestLocation(bestLocation, birth);
-			        child.setStatus(Individual.CHILD);
+			        child.Status = Individual.CHILD;
 			        if (checkIndividual(child)) {
 				        result = true;
 				        censusChildren.Add(child);
@@ -59,9 +55,9 @@ namespace FTAnalyser
         
         private Location updateBestLocation(Location bestLocation, Individual ind) {
             if (ind != null) {
-		        Location location = ind.getBestLocation();
-		        if (location.getLevel() >= Location.PARISH ||
-		            location.getLevel() >= bestLocation.getLevel()) 
+		        Location location = ind.BestLocation;
+		        if (location.Level >= Location.PARISH ||
+		            location.Level >= bestLocation.Level) 
 		        	    return location;
             }
             return bestLocation;
@@ -69,9 +65,9 @@ namespace FTAnalyser
         
         private Location updateBestLocation(Location bestLocation, Fact fact) {
             if (fact != null) {
-		        Location location = new Location(fact.getLocation());
-		        if (location.getLevel() >= Location.PARISH ||
-			        location.getLevel() >= bestLocation.getLevel()) 
+		        Location location = new Location(fact.Location);
+		        if (location.Level >= Location.PARISH ||
+			        location.Level >= bestLocation.Level) 
 		        	    return location;
             }
             return bestLocation;
@@ -81,14 +77,12 @@ namespace FTAnalyser
             if (indiv == null)
                 return false;
             FamilyTree ft = FamilyTree.Instance;
-            DateTime birth = (indiv.getBirthDate() == null) ? 
-		            FactDate.MINDATE : indiv.getBirthDate().getStartDate();
-            DateTime death = (indiv.getDeathDate() == null) ?
-		            FactDate.MAXDATE : indiv.getDeathDate().getEndDate();
-		    if (birth < censusDate.getStartDate() && 
-		        death > censusDate.getStartDate() && 
+            DateTime birth = (indiv.BirthDate == null) ? FactDate.MINDATE : indiv.BirthDate.StartDate;
+            DateTime death = (indiv.DeathDate == null) ? FactDate.MAXDATE : indiv.DeathDate.EndDate;
+		    if (birth < censusDate.StartDate && 
+		        death > censusDate.StartDate && 
 		            !indiv.isCensusDone(censusDate)) {
-		        if (indiv.getStatus().Equals(Individual.CHILD)) { 
+		        if (indiv.Status == Individual.CHILD) { 
 		            // individual is a child so remove if married before census date
 		    	    return !ft.isMarried(indiv, censusDate);
 		        } else {
@@ -101,7 +95,7 @@ namespace FTAnalyser
         }
         
         private bool checkFamily() {
-    	    if(getMarriageDate().getStartDate() > censusDate.getEndDate())
+    	    if(getMarriageDate().StartDate > censusDate.EndDate)
     		    return false;
             // don't process family if either parent is under 16
     	    //if(husband != null) System.out.println("husband : " + husband.getAge(censusDate));
@@ -120,9 +114,9 @@ namespace FTAnalyser
         public int getRelation() {
             int relation = Individual.UNSET;
             foreach (Individual i in getMembers()) {
-                if (i.getRelation() != Individual.UNKNOWN &&
-                    i.getRelation() < relation) 
-                	    relation = i.getRelation();
+                if (i.Relation != Individual.UNKNOWN &&
+                    i.Relation < relation) 
+                	    relation = i.Relation;
             }
             return relation == Individual.UNSET ? Individual.UNKNOWN : relation;
         }

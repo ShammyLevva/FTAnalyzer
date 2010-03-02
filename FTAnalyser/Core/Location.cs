@@ -31,48 +31,6 @@ namespace FTAnalyser
             SetupEmptyLocation();
         }
 
-        private void SetupEmptyLocation()
-        {
-            this.location = "";
-            this.country = "";
-            this.region = "";
-            this.parish = "";
-            this.address = "";
-            this.place = "";
-            this.parishID = null;
-        }
-/*
-        public Location(LocationLocal loc) {
-            this.country = loc.getCountry();
-            this.region = loc.getRegion();
-            this.parish = loc.getParish();
-            this.address = loc.getAddress();
-            this.place = loc.getPlace();
-            this.parishID = loc.getParishID();
-            // now build a little endian string
-            StringBuilder buildLocation = new StringBuilder();
-            if (place != null && !place.Equals("")) {
-                buildLocation.Append(place);
-                buildLocation.Append(", ");
-            }
-            if (address != null && !address.Equals("")) {
-                buildLocation.Append(address);
-                buildLocation.Append(", ");
-            }
-            if (parish != null && !parish.Equals("")) {
-                buildLocation.Append(parish);
-                buildLocation.Append(", ");
-            }
-            if (region != null && !region.Equals("")) {
-                buildLocation.Append(region);
-                buildLocation.Append(", ");
-            }
-            if (country != null && !country.Equals("")) {
-                buildLocation.Append(country);
-            }
-            this.location = buildLocation.ToString();
-        }
-*/        
         public Location(string location) {
             SetupEmptyLocation();
             if (location != null) {
@@ -114,8 +72,20 @@ namespace FTAnalyser
 	            fixCities();
             }
         }
-        
-        private void fixCities() {
+
+        private void SetupEmptyLocation()
+        {
+            this.location = "";
+            this.country = "";
+            this.region = "";
+            this.parish = "";
+            this.address = "";
+            this.place = "";
+            this.parishID = null;
+        }
+
+        private void fixCities()
+        {
             if (region.Equals("Aberdeen"))
                 shiftRegion(ABERDEEN);
             else if (region.Equals("Ayr"))
@@ -135,79 +105,44 @@ namespace FTAnalyser
             region = newRegion;
             if (level < PLACE) level++; // we have moved up a level
         }
-        
-        /**
-         * @return Returns the address.
-         */
-        public string getAddress() {
-            return address;
-        }
-        /**
-         * @param address The address to set.
-         */
-        public void setAddress(string address) {
-            this.address = address;
-        }
-        /**
-         * @return Returns the country.
-         */
-        public string getCountry() {
-            return country;
-        }
-        /**
-         * @param country The country to set.
-         */
-        public void setCountry(string country) {
-            this.country = country;
-        }
-        /**
-         * @return Returns the parish.
-         */
-        public string getParish() {
-            return parish;
-        }
-        /**
-         * @param parish The parish to set.
-         */
-        public void setParish(string parish) {
-            this.parish = parish;
-        }
-        /**
-         * @return Returns the place.
-         */
-        public string getPlace() {
-            return place;
-        }
-        /**
-         * @param place The place to set.
-         */
-        public void setPlace(string place) {
-            this.place = place;
-        }
-        /**
-         * @return Returns the region.
-         */
-        public string getRegion() {
-            return region;
-        }
-        /**
-         * @param region The region to set.
-         */
-        public void setRegion(string region) {
-            this.region = region;
-        }
-        
-        /**
-         * @return Returns the level.
-         */
-        public int getLevel() {
-            return level;
+
+        #region Properties
+
+        public string Address {
+            get { return address; }
+            set { this.address = value; }
         }
 
-	    public string getParishID() {
-		    return parishID;
-	    }
-    	
+        public string Country {
+            get { return country; }
+            set { this.country = value; }
+        }
+
+        public string Parish {
+            get { return parish; }
+            set { this.parish = value; }
+        }
+
+        public string Place {
+            get { return place; }
+            set { this.place = value; }
+        }
+
+        public string Region {
+            get { return region; }
+            set { this.region = value; }
+        }
+        
+        public int Level {
+            get { return level; }
+        }
+
+	    public string ParishID {
+            get { return parishID; }
+        }
+
+        #endregion
+
         public bool isBlank () {
             return this.country.Length == 0;
         }

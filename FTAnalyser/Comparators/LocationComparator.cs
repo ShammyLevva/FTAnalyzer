@@ -19,8 +19,8 @@ namespace FTAnalyser
         }
         
         public int Compare (Registration r1, Registration r2) {
-            Location l1 = new Location(r1.getRegistrationLocation());
-            Location l2 = new Location(r2.getRegistrationLocation());
+            Location l1 = new Location(r1.RegistrationLocation());
+            Location l2 = new Location(r2.RegistrationLocation());
             return l1.CompareTo(l2, level);
         }
     }

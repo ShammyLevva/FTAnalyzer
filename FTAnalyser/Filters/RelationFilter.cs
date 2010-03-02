@@ -15,7 +15,7 @@ namespace FTAnalyser
         }
         
         public bool select (Registration r) {
-            return r.getRelation() == filterType;
+            return r.Relation == filterType;
         }
     }
 }

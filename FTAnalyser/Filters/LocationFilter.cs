@@ -27,14 +27,14 @@ namespace FTAnalyser
             // contain the search string, then we stop. Otherwise if
             // the registration location is blank, we search all
             // of the facts about this registration.
-            Location l = new Location(r.getRegistrationLocation());
+            Location l = new Location(r.RegistrationLocation());
             if (!l.isBlank()) {
                 return l.Matches(searchstring, level);
             }
             
             bool allLocationsBlank = true;
-            foreach (Fact f in r.getAllFacts()) {
-                l = new Location(f.getLocation());
+            foreach (Fact f in r.AllFacts) {
+                l = new Location(f.Location);
                 if (l.Matches(searchstring, level))
                     return true;
                 if (! l.isBlank())

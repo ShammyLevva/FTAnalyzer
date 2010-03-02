@@ -22,10 +22,10 @@ namespace FTAnalyser
         public override void printItem(Registration reg, StreamWriter output)
         {
             BirthRegistration b = (BirthRegistration) reg;
-            printFamilyGroup(b.getRegistrationDate(), b.getFamilyGroup(), output);
-            output.Write("\""); output.Write(b.getGender()); output.Write("\",");
-            output.Write("\""); output.Write(b.getParentsMarriageDate()); output.Write("\",");
-            output.Write("\""); output.Write(b.getParentsMarriageLocation()); output.WriteLine("\"");
+            printFamilyGroup(b.RegistrationDate, b.FamilyGroup, output);
+            output.Write("\""); output.Write(b.Gender); output.Write("\",");
+            output.Write("\""); output.Write(b.ParentsMarriageDate); output.Write("\",");
+            output.Write("\""); output.Write(b.ParentsMarriageLocation); output.WriteLine("\"");
         }
     }
 }

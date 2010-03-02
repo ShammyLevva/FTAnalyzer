@@ -51,6 +51,8 @@ namespace FTAnalyser
             COMMENT_FACTS.Add(IGISEARCH);
         }
 
+        #region Constructors
+
         public Fact (XmlNode node) {
             if (node != null) 
             {
@@ -97,7 +99,45 @@ namespace FTAnalyser
             this.comment = "";
             this.location = "";
         }
-        
+
+        #endregion
+
+        #region Properties
+
+        public string Location {
+            get { return location; }
+        }
+
+        public string Comment {
+            get { return comment; }
+        }
+
+        public FactDate FactDate {
+            get { return date; }
+        }
+
+        public string FactType {
+            get { return factType; }
+        }
+
+        public string Datestring {
+            get { return this.date == null ? "" : this.date.Datestring; }
+        }
+
+        public List<FactSource> Sources {
+            get { return sources; }
+        }
+
+        public string Country {
+            get
+            {
+                Location loc = new Location(location);
+                return loc == null ? "Scotland" : loc.Country;
+            }
+        }
+
+        #endregion
+
         private void setCommentAndLocation (string factType, string place) {
             if (place != null) {
                 int slash = place.IndexOf("/");
@@ -118,48 +158,6 @@ namespace FTAnalyser
                 location = "";
             }
         }
-
-        public string getLocation () {
-            return location;
-        }
-
-        public string getComment () {
-            return comment;
-        }
-
-        /**
-         * @return Returns the date.
-         */
-        public FactDate getFactDate () {
-            return date;
-        }
-
-        /**
-         * @return Returns the factType.
-         */
-        public string getFactType () {
-            return factType;
-        }
-
-        /**
-         * @return Returns the datestring.
-         */
-        public string getDatestring () {
-            return this.date == null ? "" : this.date.getDatestring();
-        }
-
-        /**
-         * @return Returns the source.
-         */
-        public List<FactSource> getSources () {
-            return sources;
-        }
-
-        public string getCountry() {
-    	    Location loc = new Location(location);
-    	    return loc == null ? "Scotland" : loc.getCountry();
-        }
-        
         private bool setCertificatePresent() {
 	        foreach (FactSource fs in sources) {
 	    	    return (factType.Equals(Fact.BIRTH) && fs.isBirthCert()) ||
@@ -170,9 +168,6 @@ namespace FTAnalyser
 	        return false;
         }
         
-        /**
-         * @return Returns the certificatePresent.
-         */
         public bool isCertificatePresent() {
             return certificatePresent;
         }

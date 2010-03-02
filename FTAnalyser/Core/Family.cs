@@ -60,29 +60,24 @@ namespace FTAnalyser
             {
                 XmlNode eHusband = node.SelectSingleNode("HUSB");
                 XmlNode eWife = node.SelectSingleNode("WIFE");
-                this.familyGed = node.Attributes.GetNamedItem("ID").ToString();
-                this.husbandGed = eHusband == null ? null : eHusband.Attributes.GetNamedItem("REF").ToString();
-                this.wifeGed = eWife == null ? null : eWife.Attributes.GetNamedItem("REF").ToString();
+                this.familyGed = node.Attributes["ID"].Value;
+                this.husbandGed = eHusband == null ? null : eHusband.Attributes["REF"].Value;
+                this.wifeGed = eWife == null ? null : eWife.Attributes["REF"].Value;
                 FamilyTree ft = FamilyTree.Instance;
                 setHusband(ft.getGedcomIndividual(this.husbandGed));
                 setWife(ft.getGedcomIndividual(this.wifeGed));
                 if (husband != null && wife != null)
-                    wife.setMarriedName(husband.getSurname());
+                    wife.MarriedName = husband.Surname;
                 // now iterate through child elements of eChildren
                 // finding all individuals
                 XmlNodeList list = node.SelectNodes("CHIL");
                 foreach (XmlNode n in list)
                 {
-                    Individual child = ft.getGedcomIndividual(n.Attributes.GetNamedItem("REF").ToString());
+                    Individual child = ft.getGedcomIndividual(n.Attributes["REF"].Value);
                     if (child != null)
-                    {
                         children.Add(child);
-                    }
                     else
-                    {
-
                         Console.WriteLine("Child not found in family :" + this.familyGed);
-                    }
                 }
                 addFacts(node, Fact.MARRIAGE);
                 addFacts(node, Fact.CUSTOM_FACT);
@@ -112,7 +107,7 @@ namespace FTAnalyser
         public Fact getPreferredFact(string factType) {
             foreach (Fact f in facts)
             {
-	    	    if (f.getFactType().Equals(factType))
+	    	    if (f.FactType == factType)
 	    	        return f;
 	        }
 	        return null;
@@ -125,7 +120,7 @@ namespace FTAnalyser
         public FactDate getPreferredFactDate(string factType)
         {
             Fact f = getPreferredFact(factType);
-            return (f == null) ? FactDate.UNKNOWN_DATE : f.getFactDate();
+            return (f == null) ? FactDate.UNKNOWN_DATE : f.FactDate;
         }
 
         /**
@@ -135,7 +130,7 @@ namespace FTAnalyser
 	        List<Fact> result = new List<Fact>();
 	        foreach(Fact f in facts) 
             {
-	            if (f.getFactType().Equals(factType))
+	            if (f.FactType == factType)
 	    	        result.Add(f);
 	        }
 	        return result;
@@ -241,8 +236,8 @@ namespace FTAnalyser
             }
             else
             {
-                this.husbandID = husband.getIndividualID();
-                this.husbandGed = husband.getGedcomID();
+                this.husbandID = husband.IndividualID;
+                this.husbandGed = husband.GedcomID;
             }
         }
 
@@ -256,8 +251,8 @@ namespace FTAnalyser
             }
             else
             {
-                this.wifeID = wife.getIndividualID();
-                this.wifeGed = wife.getGedcomID();
+                this.wifeID = wife.IndividualID;
+                this.wifeGed = wife.GedcomID;
             }
         }
 

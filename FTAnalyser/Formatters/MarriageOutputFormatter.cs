@@ -26,16 +26,16 @@ namespace FTAnalyser
         public override void printItem(Registration reg, StreamWriter output)
         {
             MarriageRegistration m = (MarriageRegistration) reg;
-            if (m.getGender().Equals("M")) {
-                printFamilyGroup(m.getRegistrationDate(), m.getFamilyGroup(), output);
-                printFamilyGroup(m.getRegistrationDate(), m.getSpousesFamilyGroup(), output);
+            if (m.Gender == "M") {
+                printFamilyGroup(m.RegistrationDate, m.FamilyGroup, output);
+                printFamilyGroup(m.RegistrationDate, m.SpousesFamilyGroup, output);
             } else {
-                printFamilyGroup(m.getRegistrationDate(), m.getSpousesFamilyGroup(), output);
-                printFamilyGroup(m.getRegistrationDate(), m.getFamilyGroup(), output);
+                printFamilyGroup(m.RegistrationDate, m.SpousesFamilyGroup, output);
+                printFamilyGroup(m.RegistrationDate, m.FamilyGroup, output);
             }
-            output.Write("\""); output.Write(m.getReligion()); output.Write("\",");
-            output.Write("\""); output.Write(m.getDateOfMarriage()); output.Write("\",");
-            output.Write("\""); output.Write(m.getPlaceOfMarriage()); output.WriteLine("\"");
+            output.Write("\""); output.Write(m.Religion); output.Write("\",");
+            output.Write("\""); output.Write(m.DateOfMarriage); output.Write("\",");
+            output.Write("\""); output.Write(m.PlaceOfMarriage); output.WriteLine("\"");
         }
     }
 }

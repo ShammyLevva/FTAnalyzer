@@ -12,12 +12,12 @@ namespace FTAnalyser
 
         public BirthRegistration (ParentalGroup familyGroup) : base(familyGroup) {
             this.birth = familyGroup.getPreferredFact(Fact.BIRTH);
-            registrationDate = (birth == null) ? null : birth.getFactDate();
+            registrationDate = (birth == null) ? null : birth.FactDate;
         }
 
-        public override string getRegistrationLocation()
+        public override string RegistrationLocation()
         {
-            return getPlaceOfBirth();
+            return PlaceOfBirth;
         }
 
         public override bool isCertificatePresent()

@@ -24,135 +24,127 @@ namespace FTAnalyser
         public bool isCompleted () {
             return completed;
         }
-        
-        /**
-         * @param completed The completed to set.
-         */
-        public void setCompleted (bool completed) {
-            this.completed = completed;
+
+        #region Getters/Setters
+
+        public bool Completed  
+        {
+            set { this.completed = value; }
         }
         
-        /**
-         * @return Returns the individual.
-         */
-        public Individual getIndividual () {
-            return individualsFamily.getIndividual();
-        }
-        /**
-         * @return Returns the father.
-         */
-        public Individual getFather () {
-            return individualsFamily.getFather();
+        public Individual Individual {
+            get { return individualsFamily.Individual; }
         }
 
-        /**
-         * @return Returns the mother.
-         */
-        public Individual getMother () {
-            return individualsFamily.getMother();
+        public Individual Father {
+            get { return individualsFamily.Father; }
+        }
+
+        public Individual Mother  {
+            get { return individualsFamily.Mother; }
         }
         
-        public string getName () {
-            return getIndividual().getName();
+        public string Name {
+            get { return Individual.Name; }
         }
         
-        public string getSurname() {
-            return getIndividual().getSurname();
+        public string Surname {
+            get { return Individual.Surname; }
         }
         
-        public string getForenames() {
-            return getIndividual().getForenames();
+        public string Forenames {
+            get { return Individual.Forenames; }
         }
         
-        public string getGender () {
-            return getIndividual().getGender();
+        public string Gender {
+            get { return Individual.Gender; }
         }
         
-        public string getOccupation () {
-            return getIndividual().getOccupation();
+        public string Occupation {
+            get { return Individual.Occupation; }
         }
         
-        public virtual int getRelation() {
-            return getIndividual().getRelation();
+        public virtual int Relation {
+            get { return Individual.Relation; }
         }
         
-        public string getDateOfBirth () {
-            return getIndividual().getDateOfBirth();
+        public string DateOfBirth  {
+            get { return Individual.DateOfBirth; }
         }
         
-        public string getPlaceOfBirth () {
-            return getIndividual().getBirthLocation();
+        public string PlaceOfBirth {
+            get { return Individual.BirthLocation; }
         }
             
-        public string getFathersName () {
-            return individualsFamily.getFathersName();
+        public string FathersName  {
+            get { return individualsFamily.FathersName; }
         }
 
-        public string getMothersName () {
-            return individualsFamily.getMothersName();
+        public string MothersName {
+            get { return individualsFamily.MothersName; }
         }
 
-        public string getFathersOccupation () {
-            return individualsFamily.getFathersOccupation();
+        public string FathersOccupation {
+            get { return individualsFamily.FathersOccupation; }
         }
 
-        public string getMothersOccupation () {
-            return individualsFamily.getMothersOccupation();
+        public string MothersOccupation {
+            get { return individualsFamily.MothersOccupation; }
         }
         
-        public string getFatherDeceased () {
-            return individualsFamily.getFatherDeceased(registrationDate); 
+        public string isFatherDeceased {
+            get { return individualsFamily.isFatherDeceased(registrationDate); }
         }
 
-        public string getMotherDeceased () {
-            return individualsFamily.getMotherDeceased(registrationDate); 
+        public string isMotherDeceased {
+            get { return individualsFamily.isMotherDeceased(registrationDate); }
         }
         
-        public string getAge () {
-            return getIndividual().getAge(registrationDate);
+        public string Age {
+            get { return Individual.getAge(registrationDate); }
         }
         
-        public string getParentsMarriageDate () {
-            return individualsFamily.getParentsMarriageDate(); 
+        public string ParentsMarriageDate {
+            get { return individualsFamily.ParentsMarriageDate; }
         }
         
-        public string getParentsMarriageLocation () {
-            return individualsFamily.getParentsMarriageLocation(); 
+        public string ParentsMarriageLocation {
+            get { return individualsFamily.ParentsMarriageLocation; }
         }
        
-        /**
-         * @return Returns the individualsFamily.
-         */
-        public ParentalGroup getFamilyGroup () {
-            return individualsFamily;
+        public ParentalGroup FamilyGroup {
+            get { return individualsFamily; }
         }
-        /**
-         * @return Returns the registrationDate.
-         */
-        public FactDate getRegistrationDate () {
-            return registrationDate;
+ 
+        public FactDate RegistrationDate {
+            get { return registrationDate; }
         }
         
-        public string getBestLocation () {
-            return individualsFamily.getBestLocation().ToString();
+        public string BestLocation {
+            get { return individualsFamily.BestLocation.ToString(); }
         }
         
-        public virtual List<Fact> getAllFacts() {
-            List<Fact> facts = new List<Fact>();
-            if (individualsFamily != null) {
-	            if (getIndividual() != null)
-	                facts.AddRange(getIndividual().getAllFacts());
-    	        
-	            if (getFather() != null)
-	                facts.AddRange(getFather().getAllFacts());
-    	        
-	            if (getMother() != null)
-	                facts.AddRange(getMother().getAllFacts());
+        public virtual List<Fact> AllFacts {
+            get
+            {
+                List<Fact> facts = new List<Fact>();
+                if (individualsFamily != null)
+                {
+                    if (Individual != null)
+                        facts.AddRange(Individual.AllFacts);
+
+                    if (Father != null)
+                        facts.AddRange(Father.AllFacts);
+
+                    if (Mother != null)
+                        facts.AddRange(Mother.AllFacts);
+                }
+                return facts;
             }
-	        return facts;
         }
-        
-        public abstract string getRegistrationLocation ();
+        #endregion 
+
+        public abstract string RegistrationLocation();
      
         /**
          * @return Returns the certificatePresent.

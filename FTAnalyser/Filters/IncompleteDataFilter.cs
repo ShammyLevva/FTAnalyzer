@@ -28,17 +28,17 @@ namespace FTAnalyser
         {
             if (r.isCertificatePresent())
                 return false;
-            FactDate fd = r.getRegistrationDate();
+            FactDate fd = r.RegistrationDate;
             if (fd == null || !fd.isExact())
                 return true;
-            Location l = new Location(r.getRegistrationLocation());
+            Location l = new Location(r.RegistrationLocation());
             switch (level)
             {
-                case Location.COUNTRY: return (l.getCountry().Length == 0);
-                case Location.REGION: return (l.getRegion().Length == 0);
-                case Location.PARISH: return (l.getParish().Length == 0);
-                case Location.ADDRESS: return (l.getAddress().Length == 0);
-                case Location.PLACE: return (l.getPlace().Length == 0);
+                case Location.COUNTRY: return (l.Country.Length == 0);
+                case Location.REGION: return (l.Region.Length == 0);
+                case Location.PARISH: return (l.Parish.Length == 0);
+                case Location.ADDRESS: return (l.Address.Length == 0);
+                case Location.PLACE: return (l.Place.Length == 0);
                 default: return true;
             }
         }

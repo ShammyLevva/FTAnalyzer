@@ -29,7 +29,7 @@ namespace FTAnalyser
         }
 
         public virtual bool select (Registration r) {
-            FactDate d = r.getRegistrationDate();
+            FactDate d = r.RegistrationDate;
             return cutoff.overlaps(d);
         }
     }

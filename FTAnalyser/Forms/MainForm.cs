@@ -48,8 +48,8 @@ namespace FTAnalyser
         private void btnTestDates_Click(object sender, EventArgs e)
         {
             FactDate fd = new FactDate(txtTestDate.Text);
-            txtStartDate.Text = FactDate.Format(FactDate.FULL, fd.getStartDate());
-            txtEndDate.Text = FactDate.Format(FactDate.FULL, fd.getEndDate());
+            txtStartDate.Text = FactDate.Format(FactDate.FULL, fd.StartDate);
+            txtEndDate.Text = FactDate.Format(FactDate.FULL, fd.EndDate);
         }
     }
 }

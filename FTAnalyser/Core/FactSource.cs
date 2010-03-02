@@ -24,67 +24,33 @@ namespace FTAnalyser
             this.sourceMedium = FamilyTree.GetText(node, "REPO/CALN/MEDI");
         }
 
-        /**
-         * @return Returns the gedcomID.
-         */
-        public string getGedcomID()
+        #region Properties
+
+        public string GedcomID
         {
-            return gedcomID;
+            get { return gedcomID; }
+            set { this.gedcomID = value; } 
         }
-        /**
-         * @param gedcomID The gedcomID to set.
-         */
-        public void setGedcomID(string gedcomID)
+        
+        public string SourceID
         {
-            this.gedcomID = gedcomID;
-        }
-        /**
-         * @return Returns the sourceID.
-         */
-        public string getSourceID()
-        {
-            return sourceID;
+            get { return sourceID; }
+            set { this.sourceID = value; }
         }
 
-        /**
-         * @param sourceID The sourceID to set.
-         */
-        public void setSourceID(string sourceID)
+        public string SourceTitle
         {
-            this.sourceID = sourceID;
+            get { return sourceTitle; }
+            set { this.sourceTitle = value; }
         }
 
-        /**
-         * @return Returns the sourceTitle.
-         */
-        public string getSourceTitle()
+        public string SourceMedium
         {
-            return sourceTitle;
+            get { return sourceMedium; }
+            set { this.sourceMedium = value; }
         }
 
-        /**
-         * @param sourceTitle The sourceTitle to set.
-         */
-        public void setSourceTitle(string sourceTitle)
-        {
-            this.sourceTitle = sourceTitle;
-        }
-
-        /**
-         * @return Returns the sourceMedium.
-         */
-        public string getSourceMedium()
-        {
-            return sourceMedium;
-        }
-
-        /**
-         * @param sourceMedium The sourceMedium to set.
-         */
-        public void setSourceMedium(string sourceMedium)
-        {
-            this.sourceMedium = sourceMedium;
-        }
+        #endregion
 
         public bool isBirthCert()
         {

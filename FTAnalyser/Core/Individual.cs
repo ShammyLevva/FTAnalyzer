@@ -52,212 +52,196 @@ namespace FTAnalyser
 		    addFacts(node,Fact.RESIDENCE);
 		    addFacts(node,Fact.OCCUPATION);
 		    addFacts(node,Fact.CUSTOM_FACT);
-	    }
+        }
 
-        private void addFacts(XmlNode node, string factType) {
-            XmlNodeList list = node.SelectNodes(factType);
-	        foreach(XmlNode n in list) {
-	            facts.Add(new Fact(n));
-	        }
-	    }
-
-	    public void addFact(Fact fact) {
-	        facts.Add(fact);
-	    }
-    	
-	    /**
-	     * @return Returns the GedcomID.
-	     */
-	    public string getGedcomID() {
-		    return gedcomID;
-	    }
-	    /**
-	     * @return Returns the name.
-	     */
-	    public string getName() {
-		    return (forenames + " " + surname).Trim();
-	    }
-
-	    /**
-	     * @return Returns the surname.
-	     */
-	    public string getSurname() {
-		    return surname;
-	    }
-
-	    /**
-	     * @return Returns the surname on marriage
-	     */
-	    public string getMarriedName() {
-		    return marriedName;
-	    }
-
-	    public string getCensusName() {
-	        return this.status.Equals(WIFE) ? 
-	             forenames + " " + marriedName + " (" + surname + ")" :
-	             getName();
-	    }
-    	
-	    /**
-	     * @return Returns the alias.
-	     */
-	    public string getAlias() {
-		    return this.alias;
-	    }
-	    /**
-	     * @return Returns the gender.
-	     */
-	    public string getGender() {
-		    return this.gender;
-	    }
-	    /**
-	     * @return Returns true if individual is male
-	     */	
-	    public bool isMale() {
-		    return this.gender.Equals("M");
-	    }
-	    /**
-	     * @return Returns all of the facts.
-	     */
-	    public List<Fact> getAllFacts () {
-	        return this.facts;
-	    }
-    	
-	    /**
-	     * @return Returns the first fact of the given type.
-	     */
-	    public Fact getPreferredFact(string factType) {
-	        foreach(Fact f in facts)
-            {
-		        if (f.getFactType().Equals(factType))
-	    	        return f;
-	        }
-	        return null;
-	    }
-    	
-	    public FactDate getPreferredFactDate (string factType) {
-	        Fact f = getPreferredFact(factType);
-	        return (f == null) ? FactDate.UNKNOWN_DATE : f.getFactDate();
-	    }
-    	
-	    public FactDate getBirthDate() {
-	        return getPreferredFactDate(Fact.BIRTH);
-	    }
-    	
-	    public string getBirthLocation() {
-	        Fact f = getPreferredFact(Fact.BIRTH);
-	        return (f == null) ? "" : f.getLocation();
-	    }
-
-	    public string getDateOfBirth() {
-	        Fact f = getPreferredFact(Fact.BIRTH);
-	        return (f == null) ? "" : f.getDatestring();
-	    }
-
-	    public FactDate getDeathDate() {
-	        Fact f = getPreferredFact(Fact.DEATH);
-	        return (f == null) ? null : f.getFactDate();
-	    }
-    	
-	    /**
-	     * @return Returns all facts of the given type.
-	     */
-	    public List<Fact> getFacts(string factType) {
-	        List<Fact> result = new List<Fact>();
-	        foreach(Fact f in facts)
-            {
-		        if (f.getFactType().Equals(factType))
-	    	        result.Add(f);
-	        }
-	        return result;
-	    }
-    	
-	    public bool isCensusDone(FactDate when) {
-	        foreach(Fact f in facts) 
-            {
-		        if (f.getFactType().Equals(Fact.CENSUS) &&
-	    	        f.getFactDate().overlaps(when)) 
-	    	            return true;   
-	        }
-	        return false;	    
-	    }
-    	
-	    public Location getLocation(FactDate when) {
-	        // ideally this returns a Location a person was at for a given period
+        public Location getLocation(FactDate when) {
+	        // TODO: ideally this returns a Location a person was at for a given period
 	        return new Location();
 	    }
     	
-	    public Location getBestLocation() {
-	        int bestLevel = -1;
-	        Location result = new Location();
-	        foreach(Fact f in facts) {
-	            Location l = new Location(f.getLocation());
-	    	    if (l.getLevel() > bestLevel) {
-	    	        result = l;
-	    	        bestLevel = l.getLevel();
-	    	    }
-	        }
-	        return result;
-	    }
-    	
-        /**
-         * @return Returns the individualID.
-         */
-        public string getIndividualID() {
-            return individualID;
+        #region Properties
+
+        public string IndividualID { 
+            get { return individualID; } 
         }
-        
-        public void setMarriedName(string marriedName) {
-            this.marriedName = marriedName;
-        }
-        
-        /**
-         * @return Returns the forenames.
-         */
-        public string getForenames() {
-            return forenames;
+        public string Forenames { get { return forenames; } }
+        public int Relation { get { return relation; } }
+        public List<Fact> AllFacts { get { return this.facts; } }
+
+        public string Alias
+        {
+            get { return this.alias; }
         }
 
-        /**
-         * @return Returns the relation.
-         */
-        public int getRelation() {
-            return relation;
+        public string Gender
+        {
+            get { return this.gender; }
+        }
+        
+        public string MarriedName
+        {
+            get { return this.MarriedName; }
+            set { this.marriedName = value; }
         }
 
-        public string getForename() {
-            if (forenames == null)
-                return "";
-            else {
-                int pos = forenames.IndexOf(' ');
-                return pos > 0 ? forenames.Substring(0, pos) : forenames;
+        public string GedcomID
+        {
+            get { return gedcomID; }
+        }
+
+        public string Name
+        {
+            get { return (forenames + " " + surname).Trim(); }
+        }
+
+        public string Surname
+        {
+            get { return surname; }
+        }
+
+        public string CensusName
+        {
+            get
+            {
+                return this.status.Equals(WIFE) ? forenames + " " + marriedName + " (" + surname + ")" : Name;
             }
         }
         
-        public string getOccupation () {
-            Fact occupation = getPreferredFact(Fact.OCCUPATION);
-            return occupation == null ? "" : occupation.getComment();
+        public string DateOfBirth
+        {
+            get
+            {
+                Fact f = getPreferredFact(Fact.BIRTH);
+                return (f == null) ? "" : f.Datestring;
+            }
+        }
+
+        public FactDate BirthDate
+        {
+            get { return getPreferredFactDate(Fact.BIRTH); }
+        }
+
+        public string BirthLocation
+        {
+            get
+            {
+                Fact f = getPreferredFact(Fact.BIRTH);
+                return (f == null) ? "" : f.Location;
+            }
+        }
+
+        public FactDate DeathDate
+        {
+            get
+            {
+                Fact f = getPreferredFact(Fact.DEATH);
+                return (f == null) ? null : f.FactDate;
+            }
+        }
+
+        public string Forename
+        {
+            get
+            {
+                if (forenames == null)
+                    return "";
+                else
+                {
+                    int pos = forenames.IndexOf(' ');
+                    return pos > 0 ? forenames.Substring(0, pos) : forenames;
+                }
+            }
         }
         
-        public bool isDeceased (FactDate when) {
+        public string Occupation {
+            get
+            {
+                Fact occupation = getPreferredFact(Fact.OCCUPATION);
+                return occupation == null ? "" : occupation.Comment;
+            }
+        }
+
+        public string Status
+        {
+            get { return status; }
+            set { this.status = value; }
+        }
+
+        public Location BestLocation
+        {
+            get
+            {
+                int bestLevel = -1;
+                Location result = new Location();
+                foreach (Fact f in facts)
+                {
+                    Location l = new Location(f.Location);
+                    if (l.Level > bestLevel)
+                    {
+                        result = l;
+                        bestLevel = l.Level;
+                    }
+                }
+                return result;
+            }
+        }
+
+        private int MaxAgeAtDeath
+        {
+            get
+            {
+                Fact death = getPreferredFact(Fact.DEATH);
+                return (death == null) ? FactDate.MAXYEARS :
+                    BirthDate.getMaximumYear(death.FactDate);
+            }
+        }
+
+        public int CurrentAge
+        {
+            get
+            {
+                string age = getAge(DateTime.Now);
+                return Int32.Parse(age);
+            }
+        }
+
+        #endregion
+
+        #region Boolean Tests
+
+        public bool isMale()
+        {
+            return this.gender.Equals("M");
+        }
+
+        public bool isCensusDone(FactDate when)
+        {
+            foreach (Fact f in facts)
+            {
+                if (f.FactType == Fact.CENSUS && f.FactDate.overlaps(when))
+                    return true;
+            }
+            return false;
+        }
+
+        public bool isDeceased(FactDate when)
+        {
             Fact death = getPreferredFact(Fact.DEATH);
-            return death != null && death.getFactDate().isBefore(when);
+            return death != null && death.FactDate.isBefore(when);
         }
         
         public bool isSingleAtDeath() {
             Fact single = getPreferredFact(Fact.UNMARRIED);
-            return single != null || getMaxAgeAtDeath() < 16 || getCurrentAge() < 16;
+            return single != null || MaxAgeAtDeath < 16 || CurrentAge < 16;
         }
-        
-        private int getMaxAgeAtDeath() {
-            Fact death = getPreferredFact(Fact.DEATH);
-            return (death == null) ? FactDate.MAXYEARS : 
-                getBirthDate().getMaximumYear(death.getFactDate());
-        }
-        
+
+        #endregion
+
+        #region Age Functions
+
         public string getAge(FactDate when) {
-            int minValue = getBirthDate().getMinimumYear(when);
-            int maxValue = getBirthDate().getMaximumYear(when);
+            int minValue = BirthDate.getMinimumYear(when);
+            int maxValue = BirthDate.getMaximumYear(when);
             if (minValue == FactDate.MINYEARS) {
                 if (maxValue == FactDate.MAXYEARS)
                     return "Unknown";
@@ -282,17 +266,12 @@ namespace FTAnalyser
             return getAge(new FactDate(now));
         }
         
-        public int getCurrentAge() {
-            string age = getAge(DateTime.Now);
-            return Int32.Parse(age);
-        }
-        
         public int getMaxAge(FactDate when) {
-            return getBirthDate().getMaximumYear(when);
+            return BirthDate.getMaximumYear(when);
         }
         
         public int getMinAge(FactDate when) {
-            return getBirthDate().getMinimumYear(when);
+            return BirthDate.getMinimumYear(when);
         }
 
         public int getMaxAge(DateTime when)
@@ -306,6 +285,49 @@ namespace FTAnalyser
             string now = FactDate.Format(FactDate.FULL, when);
             return getMinAge(new FactDate(now));
         }
+        #endregion
+
+        #region Fact Functions
+
+        private void addFacts(XmlNode node, string factType) {
+            XmlNodeList list = node.SelectNodes(factType);
+	        foreach(XmlNode n in list) {
+	            facts.Add(new Fact(n));
+	        }
+	    }
+
+	    public void addFact(Fact fact) {
+	        facts.Add(fact);
+	    }
+    	    	
+	    public Fact getPreferredFact(string factType) {
+            // Returns the first fact of the given type.
+            // TODO: Should be fact marked as preferred
+	        foreach(Fact f in facts)
+            {
+		        if (f.FactType == factType)
+	    	        return f;
+	        }
+	        return null;
+	    }
+    	
+	    public FactDate getPreferredFactDate (string factType) {
+	        Fact f = getPreferredFact(factType);
+	        return (f == null) ? FactDate.UNKNOWN_DATE : f.FactDate;
+	    }
+    	
+	    public List<Fact> getFacts(string factType) {
+            // Returns all facts of the given type.
+	        List<Fact> result = new List<Fact>();
+	        foreach(Fact f in facts)
+            {
+		        if (f.FactType == factType)
+	    	        result.Add(f);
+	        }
+	        return result;
+        }
+
+        #endregion
 
         public int CompareTo (Individual that) {
             // Individuals are naturally ordered by surname, then forenames,
@@ -316,20 +338,12 @@ namespace FTAnalyser
                 if (res == 0) {
                     Fact b1 = this.getPreferredFact(Fact.BIRTH);
                     Fact b2 = that.getPreferredFact(Fact.BIRTH);
-                    FactDate d1 = (b1 == null) ? FactDate.UNKNOWN_DATE : b1.getFactDate();
-                    FactDate d2 = (b2 == null) ? FactDate.UNKNOWN_DATE : b2.getFactDate();
+                    FactDate d1 = (b1 == null) ? FactDate.UNKNOWN_DATE : b1.FactDate;
+                    FactDate d2 = (b2 == null) ? FactDate.UNKNOWN_DATE : b2.FactDate;
                     res = d1.CompareTo(d2);
                 }
             }
             return res;
-        }
-
-        public string getStatus() {
-            return status;
-        }
-        
-        public void setStatus(string status) {
-            this.status = status;
         }
     }
 }

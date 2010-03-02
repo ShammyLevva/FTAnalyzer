@@ -18,97 +18,105 @@ namespace FTAnalyser
             if (marriage == null) {
                 registrationDate = null;
             } else {
-                registrationDate = marriage.getFactDate();
+                registrationDate = marriage.FactDate;
                 if (registrationDate != null) {
-	                FactDate birth1 = familyGroup.getIndividual().getBirthDate();
+	                FactDate birth1 = familyGroup.Individual.BirthDate;
 	                FactDate birth2 = (spousesFamily == null) ? FactDate.UNKNOWN_DATE :
-	                	    spousesFamily.getIndividual().getBirthDate();
-	                DateTime maxStart = birth1.getStartDate();
-	                if (maxStart < birth2.getStartDate())
-	                    maxStart = birth2.getStartDate();
-	                if (maxStart > registrationDate.getStartDate()) {
-	                    registrationDate = new FactDate(maxStart, registrationDate.getEndDate());
+	                	    spousesFamily.Individual.BirthDate;
+	                DateTime maxStart = birth1.StartDate;
+	                if (maxStart < birth2.StartDate)
+	                    maxStart = birth2.StartDate;
+	                if (maxStart > registrationDate.StartDate) {
+	                    registrationDate = new FactDate(maxStart, registrationDate.EndDate);
 	                }
 	            }
             }
             this.spousesFamily = spousesFamily;
+            }
+
+        #region Properties
+
+        public string DateOfMarriage {
+            get { return (marriage == null) ? "" : marriage.Datestring; }
+        }
+        
+        public string PlaceOfMarriage {
+            get { return (marriage == null) ? "" : marriage.Location; }
+        }
+        
+        public string SpousesName {
+            get { return (spousesFamily == null) ? "" : spousesFamily.Individual.Name; }
         }
 
-        public string getDateOfMarriage () {
-            return (marriage == null) ? "" : marriage.getDatestring();
-        }
-        
-        public string getPlaceOfMarriage () {
-            return (marriage == null) ? "" : marriage.getLocation();
-        }
-        
-        public string getSpousesName () {
-            return (spousesFamily == null) ? "" : spousesFamily.getIndividual().getName();
+        public string SpousesOccupation {
+            get { return (spousesFamily == null) ? "" : spousesFamily.Individual.Occupation; }
         }
 
-        public string getSpousesOccupation () {
-            return (spousesFamily == null) ? "" : spousesFamily.getIndividual().getOccupation();
+        public string SpousesAge {
+            get 
+            { 
+                return (marriage == null || spousesFamily == null) ? "" : spousesFamily.Individual.getAge(marriage.FactDate); 
+            }
         }
 
-        public string getSpousesAge () {
-            return (marriage == null || spousesFamily == null) ? "" :
-            	    spousesFamily.getIndividual().getAge(marriage.getFactDate());
+        public string SpousesFathersName {
+            get { return (spousesFamily == null) ? "" : spousesFamily.FathersName; }
+        }
+        
+        public string SpousesFathersOccupation {
+            get { return (spousesFamily == null) ? "" : spousesFamily.FathersOccupation; }
+        }
+        
+        public string SpousesFatherDeceased {
+            get
+            {
+                return (marriage == null || spousesFamily == null) ? "" : spousesFamily.isFatherDeceased(registrationDate);
+            }
+        }
+        
+        public string SpousesMothersName {
+            get { return (spousesFamily == null) ? "" : spousesFamily.FathersName; }
+        }
+        
+        public string SpousesMothersOccupation {
+            get { return (spousesFamily == null) ? "" : spousesFamily.FathersOccupation; }
+        }
+        
+        public string SpousesMotherDeceased {
+            get
+            {
+                return (marriage == null || spousesFamily == null) ? "" : spousesFamily.isMotherDeceased(registrationDate);
+            }
+        }
+        
+        public string MaritalStatus {
+            get { return ""; }
+        }
+        
+        public string SpousesMaritalStatus {
+            get { return ""; }
+        }
+        
+        public string Residence {
+            get { return ""; }
+        }
+        
+        public string SpousesResidence {
+            get { return ""; }
+        }
+        
+        public string Religion {
+            get { return ""; }
         }
 
-        public string getSpousesFathersName () {
-            return (spousesFamily == null) ? "" : spousesFamily.getFathersName();
+        public ParentalGroup SpousesFamilyGroup {
+            get { return spousesFamily; }
         }
+
+        #endregion
         
-        public string getSpousesFathersOccupation () {
-            return (spousesFamily == null) ? "" : spousesFamily.getFathersOccupation();
-        }
-        
-        public string getSpousesFatherDeceased () {
-            return (marriage == null || spousesFamily == null) ? "" :
-            	    spousesFamily.getFatherDeceased(registrationDate);
-        }
-        
-        public string getSpousesMothersName () {
-            return (spousesFamily == null) ? "" : spousesFamily.getFathersName();
-        }
-        
-        public string getSpousesMothersOccupation () {
-            return (spousesFamily == null) ? "" : spousesFamily.getFathersOccupation();
-        }
-        
-        public string getSpousesMotherDeceased () {
-            return (marriage == null || spousesFamily == null) ? "" :
-        	    spousesFamily.getMotherDeceased(registrationDate);
-        }
-        
-        public string getMaritalStatus () {
-            return "";
-        }
-        
-        public string getSpousesMaritalStatus () {
-            return "";
-        }
-        
-        public string getResidence () {
-            return "";
-        }
-        
-        public string getSpousesResidence () {
-            return "";
-        }
-        
-        public string getReligion () {
-            return "";
-        }
-        /**
-         * @return Returns the spousesFamily.
-         */
-        public ParentalGroup getSpousesFamilyGroup () {
-            return spousesFamily;
-        }
-        
-        public override string getRegistrationLocation () {
-            return getPlaceOfMarriage();
+        public override string RegistrationLocation () {
+            return PlaceOfMarriage;
         }
         
         public override bool isCertificatePresent() {

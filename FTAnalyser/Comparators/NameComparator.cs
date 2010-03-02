@@ -9,8 +9,8 @@ namespace FTAnalyser
     public class NameComparator : IComparer<Registration>
     {
         public int Compare (Registration r1, Registration r2) {
-            Individual i1 = r1.getIndividual();
-            Individual i2 = r2.getIndividual();
+            Individual i1 = r1.Individual;
+            Individual i2 = r2.Individual;
             return i1.CompareTo(i2);
         }
     }
