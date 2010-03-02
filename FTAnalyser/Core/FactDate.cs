@@ -152,7 +152,7 @@ namespace FTAnalyser
                 {
                     int andpos = processDate.IndexOf(" AND ");
                     enddate = parseDate(processDate.Substring(andpos + 5), HIGH, 0);
-                    startdate = parseDate(processDate.Substring(4, andpos), LOW, 0, enddate.Year);
+                    startdate = parseDate(processDate.Substring(4, andpos - 4), LOW, 0, enddate.Year);
                 }
                 else
                 {
