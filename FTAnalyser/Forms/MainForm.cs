@@ -16,11 +16,6 @@ namespace FTAnalyser
             InitializeComponent();
         }
 
-        private void openButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.InitialDirectory = Application.StartupPath + "../..";
@@ -36,7 +31,8 @@ namespace FTAnalyser
                     XmlDocument document = GedcomToXml.Load(openFileDialog1.FileName);
                     document.Save("GedcomOutput.xml");
                     FamilyTree ft = FamilyTree.Instance;
-                    ft.LoadTree(document);
+                    ft.LoadTree(document, pbSources, pbIndividuals, pbFamilies);
+                    MessageBox.Show("Gedcom File Loaded");
                 }
                 catch (Exception ex)
                 {

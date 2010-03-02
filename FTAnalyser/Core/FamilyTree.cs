@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using System.Windows.Forms;
 
 namespace FTAnalyser
 {
@@ -51,30 +52,40 @@ namespace FTAnalyser
             }
         }
 
-        public void LoadTree(XmlDocument doc)
+        public void LoadTree(XmlDocument doc) { LoadTree(doc, new ProgressBar(), new ProgressBar(), new ProgressBar()); }
+        public void LoadTree(XmlDocument doc, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
         {
             // First iterate through attributes of root finding all sources
             XmlNodeList list = doc.SelectNodes("GED/SOUR");
+            pbS.Maximum = list.Count;
+            int counter = 0;
             foreach(XmlNode n in list)
             {
                 FactSource fs = new FactSource(n);
                 addSource(fs);
+                pbS.Value = counter++;
             }
             // now iterate through child elements of root
             // finding all individuals
             list = doc.SelectNodes("GED/INDI");
-            foreach(XmlNode n in list)
+            pbI.Maximum = list.Count;
+            counter = 0;
+            foreach (XmlNode n in list)
             {
                 Individual individual = new Individual(n);
                 addIndividual(individual);
+                pbI.Value = counter++;
             }
             // now iterate through child elements of root
             // finding all families
             list = doc.SelectNodes("GED/FAM");
-            foreach(XmlNode n in list)
+            pbF.Maximum = list.Count;
+            counter = 0;
+            foreach (XmlNode n in list)
             {
                 Family family = new Family(n);
                 addFamily(family);
+                pbF.Value = counter++;
             } 
             setRelations("I1");
 		    printRelationCount();
