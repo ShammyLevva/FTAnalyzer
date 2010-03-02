@@ -278,7 +278,7 @@ namespace FTAnalyser
         }
         
         public string getAge(DateTime when) {
-            string now = string.Format(FactDate.FULL, when);
+            string now = FactDate.Format(FactDate.FULL, when);
             return getAge(new FactDate(now));
         }
         
@@ -297,13 +297,13 @@ namespace FTAnalyser
 
         public int getMaxAge(DateTime when)
         {
-            string now = string.Format(FactDate.FULL, when);
+            string now = FactDate.Format(FactDate.FULL, when);
             return getMaxAge(new FactDate(now));
         }
 
         public int getMinAge(DateTime when)
         {
-            string now = string.Format(FactDate.FULL, when);
+            string now = FactDate.Format(FactDate.FULL, when);
             return getMinAge(new FactDate(now));
         }
 
