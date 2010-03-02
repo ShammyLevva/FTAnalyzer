@@ -23,9 +23,9 @@ namespace FTAnalyser
             return false;
         }
 
-        public override string RegistrationLocation()
+        public override string RegistrationLocation
         {
-            return censusFamily.getBestLocation().ToString();
+            get { return censusFamily.BestLocation.ToString(); }
         }
 
         public override List<Fact> AllFacts
@@ -43,17 +43,17 @@ namespace FTAnalyser
 
         public List<Individual> Members
         {
-            get { return censusFamily.getMembers(); }
+            get { return censusFamily.Members; }
         }
 
         public string FamilyGed
         {
-            get { return censusFamily.getFamilyGed(); }
+            get { return censusFamily.FamilyGed; }
         }
 
         public override int Relation
         {
-            get { return censusFamily.getRelation(); }
+            get { return censusFamily.Relation; }
         }
     }
 }

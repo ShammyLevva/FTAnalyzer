@@ -76,16 +76,16 @@ namespace FTAnalyser
             get { return (death == null) ? "" : death.Comment; }
         }
 
+        public override string RegistrationLocation
+        {
+            get { return PlaceOfDeath; }
+        }
+
         #endregion
 
         public string getSpouseDeceased(FactDate when)
         {
             return (spouse == null || !spouse.isDeceased(when)) ? "" : "(Deceased)";
-        }
-
-        public override string RegistrationLocation()
-        {
-            return PlaceOfDeath;
         }
 
         public override bool isCertificatePresent()

@@ -23,7 +23,7 @@ namespace FTAnalyser
             members.Sort(new CensusAgeComparator());
             foreach (Individual i in members) {
                 output.Write("\""); output.Write(c.FamilyGed); output.Write("\",");
-                output.Write("\""); output.Write(c.RegistrationLocation()); output.Write("\",");
+                output.Write("\""); output.Write(c.RegistrationLocation); output.Write("\",");
                 output.Write("\""); output.Write(i.CensusName); output.Write("\",");
                 output.Write("\""); output.Write(i.getAge(c.RegistrationDate)); output.Write("\",");
                 output.Write("\""); output.Write(i.Occupation); output.Write("\",");

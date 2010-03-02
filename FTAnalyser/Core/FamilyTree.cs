@@ -146,8 +146,8 @@ namespace FTAnalyser
             List<Family> result = new List<Family>();
             foreach (Family f in families)
             {
-                Individual husband = f.getHusband();
-                Individual wife = f.getWife();
+                Individual husband = f.Husband;
+                Individual wife = f.Wife;
                 if (husband != null && husband.Equals(ind))
                 {
                     result.Add(f);

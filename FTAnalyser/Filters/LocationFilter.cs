@@ -27,7 +27,7 @@ namespace FTAnalyser
             // contain the search string, then we stop. Otherwise if
             // the registration location is blank, we search all
             // of the facts about this registration.
-            Location l = new Location(r.RegistrationLocation());
+            Location l = new Location(r.RegistrationLocation);
             if (!l.isBlank()) {
                 return l.Matches(searchstring, level);
             }

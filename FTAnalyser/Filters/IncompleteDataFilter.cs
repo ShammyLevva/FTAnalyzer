@@ -31,7 +31,7 @@ namespace FTAnalyser
             FactDate fd = r.RegistrationDate;
             if (fd == null || !fd.isExact())
                 return true;
-            Location l = new Location(r.RegistrationLocation());
+            Location l = new Location(r.RegistrationLocation);
             switch (level)
             {
                 case Location.COUNTRY: return (l.Country.Length == 0);

@@ -144,7 +144,10 @@ namespace FTAnalyser
         }
         #endregion 
 
-        public abstract string RegistrationLocation();
+        public virtual string RegistrationLocation
+        {
+            get { return null; }
+        }
      
         /**
          * @return Returns the certificatePresent.

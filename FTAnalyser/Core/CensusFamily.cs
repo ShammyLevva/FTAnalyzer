@@ -14,21 +14,21 @@ namespace FTAnalyser
         public bool process(FactDate censusDate) {
             bool result = false;
             this.censusDate = censusDate;
-            if(checkFamily()) {
+            if(isValidFamily()) {
 	            this.bestLocation = updateBestLocation(new Location(), wife);
-	            if (checkIndividual(wife)) {
+	            if (isValidIndividual(wife)) {
 			        result = true;
 			        wife.Status = Individual.WIFE;
 	            } else 
-			        setWife(null);
+			        Wife = null;
 		        // overwrite bestLocation by husbands as most commonly the family
 		        // end up at husbands location after marriage
 			    this.bestLocation = updateBestLocation(bestLocation, husband);
-			    if (checkIndividual(husband)) {
+			    if (isValidIndividual(husband)) {
 			        result = true;
 			        husband.Status = Individual.HUSBAND;
 			    } else 
-			        setHusband(null);
+			        Husband = null;
 			    // update bestLocation by marriage date as husband and wife 
 			    // locations are often birth locations
 			    Fact marriage = getPreferredFact(Fact.MARRIAGE);
@@ -43,7 +43,7 @@ namespace FTAnalyser
 			        Fact birth = child.getPreferredFact(Fact.BIRTH);
 			        this.bestLocation = updateBestLocation(bestLocation, birth);
 			        child.Status = Individual.CHILD;
-			        if (checkIndividual(child)) {
+			        if (isValidIndividual(child)) {
 				        result = true;
 				        censusChildren.Add(child);
 				    }
@@ -73,7 +73,7 @@ namespace FTAnalyser
             return bestLocation;
         }
         
-        private bool checkIndividual(Individual indiv) {
+        private bool isValidIndividual(Individual indiv) {
             if (indiv == null)
                 return false;
             FamilyTree ft = FamilyTree.Instance;
@@ -94,8 +94,8 @@ namespace FTAnalyser
 		    }
         }
         
-        private bool checkFamily() {
-    	    if(getMarriageDate().StartDate > censusDate.EndDate)
+        private bool isValidFamily() {
+    	    if(MarriageDate.StartDate > censusDate.EndDate)
     		    return false;
             // don't process family if either parent is under 16
     	    //if(husband != null) System.out.println("husband : " + husband.getAge(censusDate));
@@ -107,18 +107,22 @@ namespace FTAnalyser
     	    return true;
         }
         
-        public Location getBestLocation() {
-            return bestLocation;
+        public Location BestLocation {
+            get { return bestLocation; }
         }
         
-        public int getRelation() {
-            int relation = Individual.UNSET;
-            foreach (Individual i in getMembers()) {
-                if (i.Relation != Individual.UNKNOWN &&
-                    i.Relation < relation) 
-                	    relation = i.Relation;
+        public int Relation {
+            get
+            {
+                int relation = Individual.UNSET;
+                foreach (Individual i in Members)
+                {
+                    if (i.Relation != Individual.UNKNOWN &&
+                        i.Relation < relation)
+                        relation = i.Relation;
+                }
+                return relation == Individual.UNSET ? Individual.UNKNOWN : relation;
             }
-            return relation == Individual.UNSET ? Individual.UNKNOWN : relation;
         }
     }
 }

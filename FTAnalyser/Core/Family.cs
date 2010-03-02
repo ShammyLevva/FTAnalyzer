@@ -31,29 +31,8 @@ namespace FTAnalyser
             this.children = new List<Individual>();
         }
 
-        public Family() : this("", "")
-        {
-        }
-/*
-        public Family(FamilyLocal fam)
-        {
-            SetupFamily(fam.getFamilyID(), fam.getGedcomID());
-            setHusband(fam.getHusband() != null ? new Individual(fam.getHusband()) : null);
-            setWife(fam.getWife() != null ? new Individual(fam.getWife()) : null);
-            if (husband != null && wife != null)
-                wife.setMarriedName(husband.getSurname());
-            Iterator it = fam.getChildren().iterator();
-            while (it.hasNext())
-            {
-                this.children.Add(new Individual(it.next()));
-            }
-            it = fam.getFacts().iterator();
-            while (it.hasNext())
-            {
-                this.facts.Add(new Fact(it.next()));
-            }
-        }
-*/
+        public Family() : this("", "") {}
+
         public Family(XmlNode node) : this("", "")
         {
             if (node != null)
@@ -64,8 +43,8 @@ namespace FTAnalyser
                 this.husbandGed = eHusband == null ? null : eHusband.Attributes["REF"].Value;
                 this.wifeGed = eWife == null ? null : eWife.Attributes["REF"].Value;
                 FamilyTree ft = FamilyTree.Instance;
-                setHusband(ft.getGedcomIndividual(this.husbandGed));
-                setWife(ft.getGedcomIndividual(this.wifeGed));
+                this.Husband = ft.getGedcomIndividual(this.husbandGed);
+                this.Wife = ft.getGedcomIndividual(this.wifeGed);
                 if (husband != null && wife != null)
                     wife.MarriedName = husband.Surname;
                 // now iterate through child elements of eChildren
@@ -134,137 +113,116 @@ namespace FTAnalyser
 	    	        result.Add(f);
 	        }
 	        return result;
-	    }
-
-        public FactDate getMarriageDate()
-        {
-            return getPreferredFactDate(Fact.MARRIAGE);
         }
 
-        public string getMaritalStatus()
+        #region Properties
+
+        public FactDate MarriageDate
         {
-            if (husband == null || wife == null)
-            {
-                return SINGLE;
-            }
-            else
-            {
-                // very crude at the moment needs to check marriage facts 
-                // and return the appropriate marriage text string
-                return MARRIED;
-            }
+            get { return getPreferredFactDate(Fact.MARRIAGE); }
         }
 
-        /**
-         * @return Returns the familyGed.
-         */
-        public string getFamilyGed()
+        public string MaritalStatus
         {
-            return this.familyGed;
-        }
-        /**
-         * @return Returns the familyID.
-         */
-        public string getFamilyID()
-        {
-            return this.familyID;
-        }
-        /**
-         * @return Returns the husband.
-         */
-        public string getHusbandID()
-        {
-            return this.husbandID;
-        }
-        /**
-         * @return Returns the husbandGed.
-         */
-        public string getHusbandGed()
-        {
-            return this.husbandGed;
-        }
-        /**
-         * @return Returns the wife.
-         */
-        public string getWifeID()
-        {
-            return this.wifeID;
-        }
-        /**
-         * @return Returns the wifeGed.
-         */
-        public string getWifeGed()
-        {
-            return this.wifeGed;
-        }
-        /**
-         * @return Returns the husband.
-         */
-        public Individual getHusband()
-        {
-            return this.husband;
-        }
-        /**
-         * @return Returns the wife.
-         */
-        public Individual getWife()
-        {
-            return this.wife;
-        }
-        /**
-         * @param wifeID The wifeID to set.
-         */
-        public void setWifeID(string wifeID)
-        {
-            this.wifeID = wifeID;
-        }
-        /**
-         * @return Returns the children.
-         */
-        public List<Individual> getChildren()
-        {
-            return children;
-        }
-
-        protected void setHusband(Individual husband)
-        {
-            this.husband = husband;
-            if (husband == null)
+            get
             {
-                this.husbandID = "";
-                this.husbandGed = "";
-            }
-            else
-            {
-                this.husbandID = husband.IndividualID;
-                this.husbandGed = husband.GedcomID;
+                if (husband == null || wife == null)
+                    return SINGLE;
+                else
+                    // very crude at the moment needs to check marriage facts 
+                    // and return the appropriate marriage text string
+                    return MARRIED;
             }
         }
 
-        protected void setWife(Individual wife)
+        public string FamilyGed
         {
-            this.wife = wife;
-            if (wife == null)
+            get { return this.familyGed; }
+        }
+
+        public string FamilyID
+        {
+            get { return this.familyID; }
+        }
+        
+        public string HusbandID
+        {
+            get { return this.husbandID; }
+        }
+        
+        public string HusbandGed
+        {
+            get { return this.husbandGed; }
+        }
+
+        public Individual Husband
+        {
+            get { return this.husband; }
+            internal set
             {
-                this.wifeID = "";
-                this.wifeGed = "";
-            }
-            else
-            {
-                this.wifeID = wife.IndividualID;
-                this.wifeGed = wife.GedcomID;
+                this.husband = value;
+                if (this.husband == null)
+                {
+                    this.husbandID = "";
+                    this.husbandGed = "";
+                }
+                else
+                {
+                    this.husbandID = value.IndividualID;
+                    this.husbandGed = value.GedcomID;
+                }
             }
         }
 
-        public List<Individual> getMembers()
+        public string WifeID
         {
-            List<Individual> members = new List<Individual>();
-            if (husband != null)
-                members.Add(husband);
-            if (wife != null)
-                members.Add(wife);
-            members.AddRange(children);
-            return members;
+            get { return this.wifeID; }
+            set { this.wifeID = value; }
         }
+        
+        public string WifeGed
+        {
+            get { return this.wifeGed; }
+        }
+        
+        public Individual Wife
+        {
+            get { return this.wife; }
+            internal set
+            {
+                this.wife = value;
+                if (this.wife == null)
+                {
+                    this.wifeID = "";
+                    this.wifeGed = "";
+                }
+                else
+                {
+                    this.wifeID = value.IndividualID;
+                    this.wifeGed = value.GedcomID;
+                }
+            }
+        }
+
+        public List<Individual> Children
+        {
+            get { return children; }
+        }
+
+        public List<Individual> Members
+        {
+            get
+            {
+                List<Individual> members = new List<Individual>();
+                if (husband != null)
+                    members.Add(husband);
+                if (wife != null)
+                    members.Add(wife);
+                members.AddRange(children);
+                return members;
+            }
+        }
+
+        #endregion
     }
 }

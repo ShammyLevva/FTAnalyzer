@@ -15,9 +15,9 @@ namespace FTAnalyser
             registrationDate = (birth == null) ? null : birth.FactDate;
         }
 
-        public override string RegistrationLocation()
+        public override string RegistrationLocation
         {
-            return PlaceOfBirth;
+            get { return PlaceOfBirth; }
         }
 
         public override bool isCertificatePresent()

@@ -113,11 +113,12 @@ namespace FTAnalyser
             get { return spousesFamily; }
         }
 
-        #endregion
-        
-        public override string RegistrationLocation () {
-            return PlaceOfMarriage;
+        public override string RegistrationLocation
+        {
+            get { return PlaceOfMarriage; }
         }
+
+        #endregion
         
         public override bool isCertificatePresent() {
             return (marriage == null) ? false : marriage.isCertificatePresent();
