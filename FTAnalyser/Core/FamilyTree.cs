@@ -66,6 +66,7 @@ namespace FTAnalyser
                 FactSource fs = new FactSource(n);
                 sources.Add(fs);
                 pbS.Value = counter++;
+                Application.DoEvents(); // allows windows to process events and prevents application from appearing to have crashed.
             }
             // now iterate through child elements of root
             // finding all individuals
@@ -77,6 +78,7 @@ namespace FTAnalyser
                 Individual individual = new Individual(n);
                 individuals.Add(individual);
                 pbI.Value = counter++;
+                Application.DoEvents();
             }
             // now iterate through child elements of root
             // finding all families
@@ -88,6 +90,7 @@ namespace FTAnalyser
                 Family family = new Family(n);
                 families.Add(family);
                 pbF.Value = counter++;
+                Application.DoEvents();
             } 
             // SetRelations(individuals[0].GedcomID); // needs testing
 	        setParishes();
