@@ -28,11 +28,16 @@ namespace FTAnalyser
         private int level;
         
         public Location() {
-            SetupEmptyLocation();
+            this.location = "";
+            this.country = "";
+            this.region = "";
+            this.parish = "";
+            this.address = "";
+            this.place = "";
+            this.parishID = null;
         }
 
-        public Location(string location) {
-            SetupEmptyLocation();
+        public Location(string location) : this() {
             if (location != null) {
 	            this.location = location;
 	            // we need to parse the location string from a little injun to a big injun
@@ -71,17 +76,6 @@ namespace FTAnalyser
 	            }
 	            fixCities();
             }
-        }
-
-        private void SetupEmptyLocation()
-        {
-            this.location = "";
-            this.country = "";
-            this.region = "";
-            this.parish = "";
-            this.address = "";
-            this.place = "";
-            this.parishID = null;
         }
 
         private void fixCities()
