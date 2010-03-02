@@ -15,7 +15,8 @@ namespace FTAnalyser
                 SOCIAL_SECURITY_NO = "SSN", WILL = "WILL", ELECTION = "_ELEC",
                 EMIGRATION = "EMIG", IMMIGRATION = "IMMI", CUSTOM_FACT = "EVEN",
                 CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
-                UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSE", IGISEARCH = "*IGI";
+                UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSE", IGISEARCH = "*IGI",
+                CONTACT = "CONT";
 
         private string factType;
         private FactDate date;
@@ -30,6 +31,7 @@ namespace FTAnalyser
         static Fact() {
             CUSTOM_TAGS.Add("IGI Search", IGISEARCH);
             CUSTOM_TAGS.Add("Childless", CHILDLESS);
+            CUSTOM_TAGS.Add("Contact", CONTACT);
             CUSTOM_TAGS.Add("Witness", WITNESS);
             CUSTOM_TAGS.Add("Unmarried", UNMARRIED);
             CUSTOM_TAGS.Add("Friends", UNMARRIED);
@@ -86,7 +88,7 @@ namespace FTAnalyser
                     }
                 }
 
-                if (factType.Equals(DEATH)) {
+                if (factType == DEATH) {
                     comment = FamilyTree.GetText(node, "CAUS");
                 }
                 this.certificatePresent = setCertificatePresent();
