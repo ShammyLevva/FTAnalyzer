@@ -73,14 +73,6 @@ namespace FTAnalyser
         }
 
         /**
-         * @return Returns the facts.
-         */
-        public List<Fact> getAllFacts()
-        {
-            return this.facts;
-        }
-
-        /**
          * @return Returns the first fact of the given type.
          */
         public Fact getPreferredFact(string factType) {
@@ -116,6 +108,11 @@ namespace FTAnalyser
         }
 
         #region Properties
+
+        public List<Fact> AllFacts
+        {
+            get { return this.facts; }
+        }
 
         public FactDate MarriageDate
         {

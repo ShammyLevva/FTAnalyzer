@@ -54,11 +54,6 @@ namespace FTAnalyser
 		    addFacts(node,Fact.CUSTOM_FACT);
         }
 
-        public Location getLocation(FactDate when) {
-	        // TODO: ideally this returns a Location a person was at for a given period
-	        return new Location();
-	    }
-    	
         #region Properties
 
         public string IndividualID { 
@@ -329,7 +324,14 @@ namespace FTAnalyser
 
         #endregion
 
-        public int CompareTo (Individual that) {
+        public Location getLocation(FactDate when)
+        {
+            // TODO: ideally this returns a Location a person was at for a given period
+            return new Location();
+        }
+
+        public int CompareTo(Individual that)
+        {
             // Individuals are naturally ordered by surname, then forenames,
             // then date of birth.
             int res = this.surname.CompareTo(that.surname);
