@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net;
 
 namespace FTAnalyser
 {
@@ -21,14 +22,14 @@ namespace FTAnalyser
         String death;
         String burial;
         String marriage;
-        LinkTag link;
+        String link;
         
-        public IGIResult(int searchType, ParishBatch pb, LinkTag link) {
+        public IGIResult(int searchType, ParishBatch pb, string link) {
             this.searchType = searchType;
             this.parish = pb.Parish;
             this.batch = pb.Batch;
     	    this.link = link;
-            this.person = link.getLinkText();
+            this.person = link;
             this.gender = "";
             this.spouse = "";
             this.mother = "";
@@ -59,8 +60,8 @@ namespace FTAnalyser
                 this.marriage = value;
         }
         
-        public URL URL {
-            get { return new URL(link.getLink()); }
+        public HttpWebRequest URL {
+            get { return (HttpWebRequest)WebRequest.Create(link); }
         }
         
         public String Mother {

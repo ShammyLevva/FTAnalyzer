@@ -3,6 +3,8 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net;
+using System.Net.Cache;
 
 namespace FTAnalyser
 {
@@ -28,7 +30,7 @@ namespace FTAnalyser
     		    SHIRE = "juris1",
     		    PARISH = "juris2";
 
-        private HashMap<String,String> parameters;
+        private Dictionary<string,string> parameters;
         private TextWriter resultFile;
         	
         private static readonly string NOMATCHES = "<strong>International Genealogical Index / British Isles</strong> (No Matches)";
@@ -40,124 +42,134 @@ namespace FTAnalyser
         private static readonly string MISSINGNAME3 = "If you enter a last name without a first name, you must either <b>not enter</b> parent or spouse names, a year, or you <b>must enter</b> a batch number or a film number.";
         private static readonly string INDIVIDUALRECORD = "igi/individual_record.asp";
         private static readonly FactDate IGIMAX = new FactDate("31 DEC 1874");
-        public static readonly const int MARRIAGESEARCH = 0, CHILDRENSEARCH = 1;
+        public const int MARRIAGESEARCH = 1;
+        public const int CHILDRENSEARCH = 2;
         
         public IGISearchForm() {
             initialise();
         }
 
         private void initialise() {
-            parameters = new Dictionary<String,String>();
-            parameters.put(FATHERS_FIRST_NAME, "");
-            parameters.put(FATHERS_LAST_NAME, "");
-            parameters.put(FIRST_NAME, "");
-            parameters.put(LAST_NAME, "");
-            parameters.put(MOTHERS_FIRST_NAME, "");
-            parameters.put(MOTHERS_LAST_NAME, "");
-            parameters.put(SPOUSES_FIRST_NAME, "");
-            parameters.put(SPOUSES_LAST_NAME, "");
-            parameters.put(FROM_DATE, "");
-            parameters.put(BATCH_NUMBER, "");
-            parameters.put(SERIAL_NUMBER, "");
-            parameters.put(FILM_NUMBER, "");
-            parameters.put(EXACT_MATCH, "");
-            parameters.put(DATE_RANGE, "0");
-            parameters.put(EVENT_INDEX, "0");
-            parameters.put(COUNTRY, "2");
-            parameters.put(SHIRE, "Scot");
-            parameters.put(PARISH, "");
-            parameters.put("date_range_index", "0");
-            parameters.put("regionfriendly", "British Isles");
-            parameters.put("juris1friendly", Location.SCOTLAND);
-            parameters.put("juris2friendly", "All Counties");
-            parameters.put("LDS", "1");
-            parameters.put("batch_set", "");
+            parameters = new Dictionary<string,string>();
+            parameters.Add(FATHERS_FIRST_NAME, "");
+            parameters.Add(FATHERS_LAST_NAME, "");
+            parameters.Add(FIRST_NAME, "");
+            parameters.Add(LAST_NAME, "");
+            parameters.Add(MOTHERS_FIRST_NAME, "");
+            parameters.Add(MOTHERS_LAST_NAME, "");
+            parameters.Add(SPOUSES_FIRST_NAME, "");
+            parameters.Add(SPOUSES_LAST_NAME, "");
+            parameters.Add(FROM_DATE, "");
+            parameters.Add(BATCH_NUMBER, "");
+            parameters.Add(SERIAL_NUMBER, "");
+            parameters.Add(FILM_NUMBER, "");
+            parameters.Add(EXACT_MATCH, "");
+            parameters.Add(DATE_RANGE, "0");
+            parameters.Add(EVENT_INDEX, "0");
+            parameters.Add(COUNTRY, "2");
+            parameters.Add(SHIRE, "Scot");
+            parameters.Add(PARISH, "");
+            parameters.Add("date_range_index", "0");
+            parameters.Add("regionfriendly", "British Isles");
+            parameters.Add("juris1friendly", Location.SCOTLAND);
+            parameters.Add("juris2friendly", "All Counties");
+            parameters.Add("LDS", "1");
+            parameters.Add("batch_set", "");
         }
         
-        private void setCountry(String country) {
+        private void setCountry(string country) {
     	    if (country == Location.ENGLAND) {
-	            parameters.put(SHIRE, "Engl");
-	            parameters.put("juris1friendly", Location.ENGLAND);
+	            parameters.Add(SHIRE, "Engl");
+	            parameters.Add("juris1friendly", Location.ENGLAND);
     	    } else {
-	            parameters.put(SHIRE, "Scot");
-	            parameters.put("juris1friendly", Location.SCOTLAND);
+	            parameters.Add(SHIRE, "Scot");
+	            parameters.Add("juris1friendly", Location.SCOTLAND);
     	    }
         }
         
-        public String getEncodedParameters () {
-            StringBuffer s = new StringBuffer();
-            Iterator it = parameters.keySet().iterator();
-            while (it.hasNext()) {
-                String key = (String) it.next();
-                String value = (String) parameters.get(key);
-                s.append(key);
-                s.append("=");
+        public string getEncodedParameters () {
+            StringBuilder s = new StringBuilder();
+            foreach(var entry in parameters)
+            {
+                s.Append(entry.Key);
+                s.Append("=");
                 try {
-                    s.append(URLEncoder.encode(value, "UTF-8"));
-                } catch (Exception e) {
-                    s.append("XXX");
+                    // TODO: URL stuff s.Append(URLEncoder.Encode(entry.Value, "UTF-8"));
+                } catch (Exception) {
+                    s.Append("XXX");
                 }
-                if (it.hasNext())
-                    s.append("&");
+                s.Append("&");
             }
-            return s.toString();
+            return s.ToString().Substring(0,s.Length -1); // remove trailing &
         }
         
-        public void setParameter(String key, String value) {
-            if (parameters.get(key) != null)
-                parameters.put(key, value.Replace('?',' ').Trim());
+        public void setParameter(string key, string value) {
+            string oldvalue;
+            if (parameters.TryGetValue(key, out oldvalue))
+                parameters.Add(key, value.Replace('?',' ').Trim());
         }
-        
-        public String performSearch () {
+
+        public string performSearch () {
             try {
-	            Url url = new URL("http", "www.familysearch.org",
-	        		    "/Eng/Search/customsearchresults.asp");
-    	        
+                /* c# stuff
+                bool connectedToUrl = false;
+                
+                HttpWebRequest webreq = (HttpWebRequest)WebRequest.Create("http://www.familysearch.org/Eng/Search/customsearchresults.asp");
+                webreq.Credentials = CredentialCache.DefaultCredentials;
+                if (webreq != null)
+                {
+                    using (WebResponse res = webreq.GetResponse())
+                    {
+                        connectedToUrl = processResponseCode(res);
+                    }
+                }
+                */
+             /* TODO: URL Stuff
 	            // URL connection channel.
 	            URLConnection urlConn = url.openConnection();
 	            urlConn.setDoInput(true);
 	            urlConn.setDoOutput(true);
 	            urlConn.setUseCaches(false);
-	            urlConn.setRequestProperty("Content-Type",
-	        		    "application/x-www-form-urlencoded");
+	            urlConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
     	        
 	            // Send POST output.
-	            DataOutputStream request = new DataOutputStream(
-	                    urlConn.getOutputStream());
+	            DataOutputStream request = new DataOutputStream(urlConn.getOutputStream());
     	        
 	            request.writeBytes(getEncodedParameters());
 	            request.flush();
 	            request.close();
     	        
 	            // Get response data.
-	            BufferedReader input = new BufferedReader(
-	                    new InputStreamReader(urlConn.getInputStream()));
-	            StringBuffer str = new StringBuffer();
-	            String line;
+	            BufferedReader input = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+
+               StringBuilder str = new StringBuilder();
+	            string line;
 	            while ((line = input.readLine()) != null) {
-	                str.append(line);
-	                str.append("\n");
+	                str.Append(line);
+	                str.Append("\n");
 	            }
 	            input.close();
+
 	            fixBaseURL(str);
-	            return str.toString();
+	            return str.ToString();
+*/
+                return ""; // TODO dummy return - remove when URL stuff done
             } catch (IOException e) {
                 return "<html><body>Error performing search:\n<p>" +
             		    e.ToString() + "</p></body></html>";
             }
         }
         
-        private void fixBaseURL(StringBuffer str) {
-            int head = str.IndexOf("<head>");
+        private void fixBaseURL(StringBuilder str) {
+            int head = str.ToString().IndexOf("<head>");
             if (head != -1) {
-                str.insert(head + 6, "<base href=\"http://www.familysearch.org" +
-                        "/Eng/Search/customsearchresults.asp\">");
+                str.Insert(head + 6, "<base href=\"http://www.familysearch.org/Eng/Search/customsearchresults.asp\">");
             }
         }
         
-        public void writeSlurpResult(String filename) {
+        public void writeSlurpResult(string filename) {
             try {
-                String str = performSearch();
+                string str = performSearch();
 	            // only output if no matches string not found
                 if (str.IndexOf(SERVERUNAVAILABLE) != -1) {
                     throw new BadIGIDataException("Server Unavailable");
@@ -183,9 +195,11 @@ namespace FTAnalyser
            }
         }
 
-        public void parseResults(int searchType, ParishBatch pb, TextWriter output, String filename, String outFile) {
+        public void parseResults(int searchType, ParishBatch pb, TextWriter output, string filename, string outFile)
+        {
+/* TODO: HTML parse stuff
             NodeFilter filter = new NodeClassFilter(LinkTag.Class);
-            LinkedList<IGIResult> queue = new LinkedList<IGIResult>();
+            Queue<IGIResult> queue = new Queue<IGIResult>();
             try {
                 Parser parser = new Parser(filename);
                 NodeList list = parser.extractAllNodesThatMatch (filter);
@@ -193,19 +207,22 @@ namespace FTAnalyser
                     LinkTag link = (LinkTag) list.elementAt(i);
                     if (link.getLink().IndexOf(INDIVIDUALRECORD) != -1) {
                         // this is a result link so add it to the fetch queue
-                        queue.add(new IGIResult(searchType, pb, link));
+                        queue.Enqueue(new IGIResult(searchType, pb, link));
                     }
                 }
                 fetchResults(output, queue, outFile);
             } catch (Exception e) {
-                output.WriteLine(" - no results for " + parameters.get(LAST_NAME) + " found");
+                string value;
+                parameters.TryGetValue(LAST_NAME, out value);
+                output.WriteLine(" - no results for " + value + " found");
             }
+*/
         }
         
         /*
          * passed a list of URLs to visit containing the results 
          */
-        public void fetchResults(TextWriter output, Queue<IGIResult> queue, String outFile) {
+        public void fetchResults(TextWriter output, Queue<IGIResult> queue, string outFile) {
             int counter = 0;
             int errorCounter = 0;
             IGIResult result = null;
@@ -213,30 +230,32 @@ namespace FTAnalyser
             while(queue.Count > 0) {
                 try {
                     result = queue.Dequeue();
-                    URL url = result.getURL();
+                    HttpWebRequest url = result.URL;
+/* TODO: URL Stuff
                     URLConnection urlConn = url.openConnection();
                     urlConn.setDoOutput(true);
                     urlConn.setUseCaches(false);
 
                     // Get response data.
                     BufferedReader input = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
-                    String line;
-                    StringBuffer str = new StringBuffer();
+                    string line;
+                    StringBuilder str = new StringBuilder();
                     while ((line = input.readLine()) != null) {
-                        str.append(line);
-                        str.append("\n");
+                        str.Append(line);
+                        str.Append("\n");
                     }
                     input.close();
                     fixBaseURL(str);
                     counter++;
-                    String filename = outFile + "-file" + counter + ".html";
+                    string filename = outFile + "-file" + counter + ".html";
                     TextWriter pw = new StreamWriter(filename);
                     pw.WriteLine(str); 
                     pw.Close();
                     processResult(result, filename);
+ */
                     writeResult(result);
                     exceptionFlag = false;
-                } catch (IOException e) {
+                } catch (IOException) {
                     // output.WriteLine("Error performing search:\n" + e.getMessage());
             	    // we got an error which is usually just a server busy
             	    // so try adding to queue again
@@ -248,19 +267,21 @@ namespace FTAnalyser
             	    exceptionFlag = true;
                 }
             }
+            string value;
+            parameters.TryGetValue(LAST_NAME, out value);
             if (counter >1)
-                output.WriteLine(" - found " + counter + " results for " + parameters.get(LAST_NAME));
+                output.WriteLine(" - found " + counter + " results for " + value);
             else if (counter == 1)
-                output.WriteLine(" - found " + counter + " result for " + parameters.get(LAST_NAME));
+                output.WriteLine(" - found " + counter + " result for " + value);
             else
-                output.WriteLine(" - no results for " + parameters.get(LAST_NAME) + " found");
+                output.WriteLine(" - no results for " + value + " found");
             if (errorCounter == 1)
         	    output.Write(" and one error");
             else if(errorCounter > 1)
         	    output.Write(" and " + errorCounter + " errors");
         }
-        
-        public void processResult(IGIResult result, String filename) {
+ /* TODO: Convert     
+        public void processResult(IGIResult result, string filename) {
             NodeFilter filter = new NodeClassFilter(TableColumn.Class);
             filter = new AndFilter(filter, new OrFilter(
                          new HasAttributeFilter ("class", "individualLabel"),
@@ -274,9 +295,9 @@ namespace FTAnalyser
                 for (int i = 0; i < list.size(); i++) {
                     TableColumn col = (TableColumn) list.elementAt(i);
                     if (i == 0) 
-                        result.setGender(col.getStringText());
+                        result.Gender = col.getStringText();
                     else {
-                        String classTD = col.getAttribute("class").toUpperCase();
+                        string classTD = col.getAttribute("class").toUpperCase();
                         if (classTD.Equals("INDIVIDUALLABEL")) {
                             TableColumn colValue = (TableColumn) list.elementAt(i+1);
                             classTD = colValue.getAttribute("class").toUpperCase();
@@ -285,7 +306,7 @@ namespace FTAnalyser
                                 classTD = colPlace.getAttribute("class").toUpperCase();
                                 if(classTD.Equals("INDIVIDUALDATA")) {
                                     // store the value as date and place
-                                    String value = colValue.getStringText() + " " +
+                                    string value = colValue.getStringText() + " " +
                                                    colPlace.getStringText();
                                     result.updateValue(col.getStringText(), value);
                                     i+=2;
@@ -303,56 +324,56 @@ namespace FTAnalyser
                 Console.WriteLine(e.StackTrace);
             }
         }
-        
+ */       
         public void writeResult(IGIResult result) {
             resultFile.WriteLine("<Individual>");
 	            resultFile.Write("<SearchType>");
-	            resultFile.Write(result.getSearchType());
+	            resultFile.Write(result.SearchType);
 	            resultFile.WriteLine("</SearchType>");        
                 resultFile.Write("<Batch>");
-                resultFile.Write(result.getBatch());
+                resultFile.Write(result.Batch);
                 resultFile.WriteLine("</Batch>");        
                 resultFile.Write("<Parish>");
-                resultFile.Write(result.getParish());
+                resultFile.Write(result.Parish);
                 resultFile.WriteLine("</Parish>");        
                 resultFile.Write("<Name>");
-                resultFile.Write(result.getPerson());
+                resultFile.Write(result.Person);
                 resultFile.WriteLine("</Name>");        
                 resultFile.Write("<Gender>");
-                resultFile.Write(result.getGender());
+                resultFile.Write(result.Gender);
                 resultFile.WriteLine("</Gender>");        
                 resultFile.Write("<Birth>");
-                resultFile.Write(result.getBirth());
+                resultFile.Write(result.Birth);
                 resultFile.WriteLine("</Birth>");        
                 resultFile.Write("<Christening>");
-                resultFile.Write(result.getChristening());
+                resultFile.Write(result.Christening);
                 resultFile.WriteLine("</Christening>");        
                 resultFile.Write("<Death>");
-                resultFile.Write(result.getDeath());
+                resultFile.Write(result.Death);
                 resultFile.WriteLine("</Death>");        
                 resultFile.Write("<Burial>");
-                resultFile.Write(result.getBurial());
+                resultFile.Write(result.Burial);
                 resultFile.WriteLine("</Burial>");        
                 resultFile.Write("<Father>");
-                resultFile.Write(result.getFather());
+                resultFile.Write(result.Father);
                 resultFile.WriteLine("</Father>");        
                 resultFile.Write("<Mother>");
-                resultFile.Write(result.getMother());
+                resultFile.Write(result.Mother);
                 resultFile.WriteLine("</Mother>");        
                 resultFile.Write("<Spouse>");
-                resultFile.Write(result.getSpouse());
+                resultFile.Write(result.Spouse);
                 resultFile.WriteLine("</Spouse>");        
                 resultFile.Write("<Marriage>");
-                resultFile.Write(result.getMarriage());
+                resultFile.Write(result.Marriage);
                 resultFile.WriteLine("</Marriage>");        
             resultFile.WriteLine("</Individual>");
         }
         
-        public void searchOPR(TextWriter resultFile, String dirname, TextWriter output, String surname, ParishBatch parishBatch) 
+        public void searchOPR(TextWriter resultFile, string dirname, TextWriter output, string surname, ParishBatch parishBatch) 
         {
             int searchType;
             this.resultFile = resultFile;
-            String batch = parishBatch.Batch;
+            string batch = parishBatch.Batch;
             if(batch.Substring(0,1).Equals("M"))
                 searchType = MARRIAGESEARCH;
             else if(batch.Substring(0,1).Equals("C"))
@@ -362,8 +383,8 @@ namespace FTAnalyser
             initialise();
             setParameter(LAST_NAME, surname);
             setParameter(BATCH_NUMBER, batch);
-            String filename = dirname + "/" + surname + "-" + batch + ".html";
-            String outFile = dirname + surname + "-" + batch;
+            string filename = dirname + "/" + surname + "-" + batch + ".html";
+            string outFile = dirname + surname + "-" + batch;
             try {
                 output.WriteLine("<br>Started work on batch :" + batch + " :" +
                         parishBatch.ParishID + "- " + parishBatch.Parish + 
@@ -378,9 +399,9 @@ namespace FTAnalyser
             }
         }
 
-        public void searchIGI(Family family, String dirname, int searchType) {
+        public void SearchIGI(Family family, string dirname, int searchType) {
             if (family != null) {
-			    String filename = dirname + family.FamilyGed + ".html";
+			    string filename = dirname + family.FamilyGed + ".html";
                 Individual husband = family.Husband;
                 Individual wife = family.Wife;
                 if (husband != null && wife != null &&
@@ -397,37 +418,37 @@ namespace FTAnalyser
                         // proceed if marriage date within IGI Range
 					    initialise();
 					    setCountry(marriage.Country);
-                        switch(searchType) {
-                        case MARRIAGESEARCH :
-                            if (!marriageDate.isExact()) {
-			                    setParameter(FIRST_NAME, husband.Forename);
-			                    setParameter(LAST_NAME, husband.Surname);
-			                    setParameter(SPOUSES_FIRST_NAME, wife.Forename);
-			                    setParameter(SPOUSES_LAST_NAME, wife.Surname);
-			                    try {
-				                    writeSlurpResult(filename);
-		                        } catch (BadIGIDataException e) {
-			                        setParameter(FIRST_NAME, wife.Forename);
-			                        setParameter(LAST_NAME, wife.Surname);
-			                        setParameter(SPOUSES_FIRST_NAME, husband.Forename);
-			                        setParameter(SPOUSES_LAST_NAME, husband.Surname);
-			                        try {
-			                            writeSlurpResult(filename);
-			                        } catch (BadIGIDataException e2) { 
-                                        Console.WriteLine("error " + e2.getMessage());
+                        if(searchType == MARRIAGESEARCH)
+                        {
+                            if (!marriageDate.isExact()) 
+                            {
+		                        setParameter(FIRST_NAME, husband.Forename);
+		                        setParameter(LAST_NAME, husband.Surname);
+		                        setParameter(SPOUSES_FIRST_NAME, wife.Forename);
+		                        setParameter(SPOUSES_LAST_NAME, wife.Surname);
+		                        try {
+			                        writeSlurpResult(filename);
+	                            } catch (BadIGIDataException) {
+		                            setParameter(FIRST_NAME, wife.Forename);
+		                            setParameter(LAST_NAME, wife.Surname);
+		                            setParameter(SPOUSES_FIRST_NAME, husband.Forename);
+		                            setParameter(SPOUSES_LAST_NAME, husband.Surname);
+		                            try {
+		                                writeSlurpResult(filename);
+		                            } catch (BadIGIDataException e2) { 
+                                        Console.WriteLine("error " + e2.Message);
                                     }
-		                        }
+	                            }
                             }
-			                break;
-		                case CHILDRENSEARCH :
-	                        setParameter(FATHERS_FIRST_NAME, husband.Forename);
-	                        setParameter(FATHERS_LAST_NAME, husband.Surname);
-	                        setParameter(MOTHERS_FIRST_NAME, wife.Forename);
-	                        if(! marriage.Country.Equals(Location.ENGLAND))
-	                    	    setParameter(MOTHERS_LAST_NAME, wife.Surname);
-	                        try {
-	                            writeSlurpResult(filename);
-	                        } catch (BadIGIDataException e) { 
+                        } else if(searchType == CHILDRENSEARCH) {
+                            setParameter(FATHERS_FIRST_NAME, husband.Forename);
+                            setParameter(FATHERS_LAST_NAME, husband.Surname);
+                            setParameter(MOTHERS_FIRST_NAME, wife.Forename);
+                            if(! marriage.Country.Equals(Location.ENGLAND))
+                    	        setParameter(MOTHERS_LAST_NAME, wife.Surname);
+                            try {
+                                writeSlurpResult(filename);
+                            } catch (BadIGIDataException e) { 
                                 Console.WriteLine("error " + e.Message);
                             }
                         }

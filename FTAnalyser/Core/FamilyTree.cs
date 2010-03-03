@@ -190,6 +190,11 @@ namespace FTAnalyser
             }
         }
 
+        public List<Family> AllFamilies
+        {
+            get { return families; }
+        }
+
         public Location GetLocation(string place)
         {
             Location loc = new Location(place);

@@ -21,12 +21,13 @@ namespace FTAnalyser
             IGISearchForm form = new IGISearchForm();
             FamilyTree ft = FamilyTree.Instance;
             Console.WriteLine("IGI Slurp started.");
-            Family[] families = client.getAllFamilies();
-            for (int i = 0; i < families.Length; i++)
+            List<Family> families = ft.AllFamilies;
+            int counter = 0;
+            foreach (Family f in families)
             {
-                Console.Write(i + "..");
-                form.SearchIGI(families[i], "c:/temp/IGISearch/children", IGISearchForm.CHILDRENSEARCH);
-                form.SearchIGI(families[i], "c:/temp/IGISearch/marriages", IGISearchForm.MARRIAGESEARCH);
+                Console.Write(counter++ + "..");
+                form.SearchIGI(f, "c:/temp/IGISearch/children", (int) IGISearchForm.CHILDRENSEARCH);
+                form.SearchIGI(f, "c:/temp/IGISearch/marriages", (int) IGISearchForm.MARRIAGESEARCH);
             }
             Console.WriteLine();
             Console.WriteLine("IGI Slurp finished");
@@ -53,10 +54,10 @@ namespace FTAnalyser
             resultFile.WriteLine("<IGIResults>");
         }
 
-        private static void writeResultFooter(PrintWriter resultFile)
+        private static void writeResultFooter(TextWriter resultFile)
         {
-            resultFile.write("</IGIResults>");
-            resultFile.close();
+            resultFile.Write("</IGIResults>");
+            resultFile.Close();
         }
     }
 }

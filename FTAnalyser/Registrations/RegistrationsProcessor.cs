@@ -22,7 +22,7 @@ namespace FTAnalyser
             : this(f, null)
         { }
 
-        public RegistrationsProcessor(Comparator<Registration> c)
+        public RegistrationsProcessor(IComparer<Registration> c)
             : this(new AllFilter(), c)
         { }
 

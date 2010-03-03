@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net;
 
 namespace FTAnalyser
 {
@@ -10,8 +11,8 @@ namespace FTAnalyser
 
         public static void main (String[] args) {
             // URL of CGI-Bin script.
-            URL url = new URL("http://www.familysearch.org/Eng/Search/customsearchresults.asp");
-            
+            HttpWebRequest url = (HttpWebRequest)WebRequest.Create("http://www.familysearch.org/Eng/Search/customsearchresults.asp");
+/* TODO: URL Stuff            
             // URL connection channel.
             URLConnection urlConn = url.openConnection();
             urlConn.setDoInput(true);
@@ -21,7 +22,7 @@ namespace FTAnalyser
             
             // Send POST output.
             DataOutputStream printout = new DataOutputStream(urlConn.getOutputStream());
-            
+           
             IGISearchForm form = new IGISearchForm();
             form.setParameter("fathers_last_name", "moffat");
             form.setParameter("fathers_first_name", "john");
@@ -41,6 +42,7 @@ namespace FTAnalyser
             }
             input.Close();
             output.Close();
+ */
             Console.WriteLine("Results File written:\n");
         }
     }

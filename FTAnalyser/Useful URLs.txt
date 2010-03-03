@@ -1,0 +1,4 @@
+﻿http://www.25hoursaday.com/CsharpVsJava.html
+
+http://www.developer.com/net/csharp/article.php/2230091/Parsing-HTML-in-Microsoft-C.htm
+

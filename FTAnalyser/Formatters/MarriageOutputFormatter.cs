@@ -9,7 +9,7 @@ namespace FTAnalyser
 {
     public class MarriageOutputFormatter : BaseOutputFormatter {
 
-        public override void printHeader(StreamWriter output)
+        public override void printHeader(TextWriter output)
         {
             output.Write("HusbandSurname,HusbandForenames,HusbandAge,HusbandOccupation,");
             output.Write("HusbandResidence,HusbandBirthDate,HusbandBirthLocation,HusbandBestLocation,");
@@ -23,7 +23,7 @@ namespace FTAnalyser
             output.WriteLine();
          }
 
-        public override void printItem(Registration reg, StreamWriter output)
+        public override void printItem(Registration reg, TextWriter output)
         {
             MarriageRegistration m = (MarriageRegistration) reg;
             if (m.Gender == "M") {

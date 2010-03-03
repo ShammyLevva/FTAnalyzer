@@ -122,7 +122,7 @@
     <Compile Include="Comparators\LocationComparator.cs" />
     <Compile Include="Comparators\MultiComparator.cs" />
     <Compile Include="Comparators\NameComparator.cs" />
-    <Content Include="CsharpVsJava.txt" />
+    <Content Include="Useful URLs.txt" />
     <Compile Include="Core\Parish.cs" />
     <Compile Include="Core\FamilyTree.cs" />
     <Compile Include="Exceptions\BadIGIDataException.cs" />
@@ -146,6 +146,11 @@
     <Compile Include="Formatters\DeathOutputFormatter.cs" />
     <Compile Include="Formatters\MarriageOutputFormatter.cs" />
     <Content Include="GedcomOutput.xml" />
+    <Compile Include="HTTPParser\Attribute.cs" />
+    <Compile Include="HTTPParser\AttributeList.cs" />
+    <Compile Include="HTTPParser\FindLinks.cs" />
+    <Compile Include="HTTPParser\Parse.cs" />
+    <Compile Include="HTTPParser\ParseHTML.cs" />
     <Compile Include="Searches\GROSearch.cs" />
     <Compile Include="Searches\GROSSearch.cs" />
     <Compile Include="Searches\IGIBatchSearch.cs" />

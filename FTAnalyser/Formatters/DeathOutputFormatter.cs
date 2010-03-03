@@ -9,7 +9,7 @@ namespace FTAnalyser
 {
     public class DeathOutputFormatter : BaseOutputFormatter {
 
-        public override void printHeader(StreamWriter output)
+        public override void printHeader(TextWriter output)
         {
             output.Write("Surname,Forenames,Age,Occupation,Residence,");
             output.Write("BirthDate,BirthLocation,BestLocation,");
@@ -21,7 +21,7 @@ namespace FTAnalyser
             output.WriteLine();
         }
 
-        public override void printItem(Registration reg, StreamWriter output)
+        public override void printItem(Registration reg, TextWriter output)
         {
             DeathRegistration d = (DeathRegistration) reg;
             printFamilyGroup(d.RegistrationDate, d.FamilyGroup, output);

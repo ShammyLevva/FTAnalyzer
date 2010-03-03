@@ -9,14 +9,14 @@ namespace FTAnalyser
 {
     public class CensusOutputFormatter : BaseOutputFormatter {
 
-        public override void printHeader(StreamWriter output)
+        public override void printHeader(TextWriter output)
         {
             output.Write("FamilyGed,BestLocation,CensusName,Age,");
             output.Write("Occupation,DateOfBirth,BirthLocation,Status");
             output.WriteLine();
         }
 
-        public override void printItem(Registration reg, StreamWriter output)
+        public override void printItem(Registration reg, TextWriter output)
         {
             CensusRegistration c = (CensusRegistration) reg;
             List<Individual> members = c.Members;
