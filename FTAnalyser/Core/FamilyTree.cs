@@ -104,12 +104,32 @@ namespace FTAnalyser
             get { return 0; }
         }
 
+        public Individual getIndividual(string individualID)
+        {
+            foreach (Individual i in individuals)
+            {
+                if (i.IndividualID == individualID)
+                    return i;
+            }
+            return null;
+        }
+
         public Individual getGedcomIndividual(string gedcomID)
         {
             foreach (Individual i in individuals)
             {
                 if (i.GedcomID == gedcomID)
                     return i;
+            }
+            return null;
+        }
+
+        public Family getGedcomFamily(string gedcomID)
+        {
+            foreach (Family f in families)
+            {
+                if (f.FamilyGed == gedcomID)
+                    return f;
             }
             return null;
         }
@@ -170,6 +190,28 @@ namespace FTAnalyser
             return result;
         }
 
+        public List<Family> FindFamiliesWhereHusband(Individual ind)
+        {
+            List<Family> result = new List<Family>();
+            foreach (Family f in families)
+            {
+                if (f.Husband != null && f.Husband == ind)
+                    result.Add(f);
+            }
+            return result;
+        }
+
+        public List<Family> FindFamiliesWhereWife(Individual ind)
+        {
+            List<Family> result = new List<Family>();
+            foreach (Family f in families)
+            {
+                if (f.Wife != null && f.Wife == ind)
+                    result.Add(f);
+            }
+            return result;
+        }
+
         public List<Individual> getAllRelationsOfType(int relationType)
         {
             List<Individual> result = new List<Individual>();
@@ -195,6 +237,16 @@ namespace FTAnalyser
             get { return families; }
         }
 
+        public List<Individual> AllIndividuals
+        {
+            get { return individuals; }
+        }
+
+        public List<Location> AllLocations
+        {
+            get { return locations; }
+        }
+
         public Location GetLocation(string place)
         {
             Location loc = new Location(place);
@@ -206,6 +258,17 @@ namespace FTAnalyser
         #endregion
 
         #region Processes
+
+        private ParentalGroup CreateFamilyGroup(Individual i)
+        {
+            List<Family> list = getFamiliesAsChild(i);
+            if (list.Count > 0)
+            {
+                Family f = list.First();
+                return new ParentalGroup(i, f.Husband, f.Wife, f.getPreferredFact(Fact.MARRIAGE));
+            }
+            return new ParentalGroup(i, null, null, null);
+        }
 
         private void ClearRelations()
         {
@@ -307,24 +370,78 @@ namespace FTAnalyser
         public List<Registration> getAllBirthRegistrations()
         {
             List<Registration> result = new List<Registration>();
+            foreach (Individual i in individuals)
+            {
+                ParentalGroup pg = CreateFamilyGroup(i);
+                result.Add(new BirthRegistration(pg));
+            }
             return result;
         }
 
         public List<Registration> getAllMarriageRegistrations()
         {
             List<Registration> result = new List<Registration>();
+            foreach (Individual i in individuals)
+            {
+                if (!i.isSingleAtDeath())
+                {
+                    ParentalGroup pg = CreateFamilyGroup(i);
+                    List<Family> indfam = i.isMale() ? FindFamiliesWhereHusband(i) : FindFamiliesWhereWife(i);
+                    if (indfam.Count == 0)
+                        result.Add(new MarriageRegistration(pg, null, null));
+                    else if (i.isMale())
+                    {
+                        foreach (Family f in indfam)
+                        {
+                            ParentalGroup pg2 = CreateFamilyGroup(f.Wife);
+                            result.Add(new MarriageRegistration(pg, pg2, f));
+                        }
+                    }
+                }
+                
+            }
             return result;
         }
 
         public List<Registration> getAllDeathRegistrations()
         {
             List<Registration> result = new List<Registration>();
+            foreach (Individual i in individuals)
+            {
+                if (i.DeathDate != null)
+                {
+                    // only include dead individuals
+                    ParentalGroup pg = CreateFamilyGroup(i);
+                    List<Family> indfam = i.isMale() ? FindFamiliesWhereHusband(i) : FindFamiliesWhereWife(i);
+                    if (indfam.Count == 0)
+                        result.Add(new DeathRegistration(pg, null, Family.SINGLE));
+                    else
+                    {
+                        foreach(Family f in indfam)
+                        {
+                            if (i.isMale())
+                                result.Add(new DeathRegistration(pg, f.Wife, f.MaritalStatus));
+                            else
+                                result.Add(new DeathRegistration(pg, f.Husband, f.MaritalStatus));
+                        }
+                    }
+                }
+            }
             return result;
         }
 
-        public List<Registration> getAllCensusRegistrations(FactDate when)
+        public List<Registration> getAllCensusRegistrations(FactDate censusDate)
         {
             List<Registration> result = new List<Registration>();
+            if (censusDate != null)
+            {
+                foreach (Family f in families)
+                {
+                    CensusFamily cf = (CensusFamily) f;
+                    if (cf.process(censusDate))
+                        result.Add(new CensusRegistration(null, censusDate, cf));
+                }
+            }
             return result;
         }
 
