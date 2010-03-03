@@ -146,6 +146,14 @@
     <Compile Include="Formatters\DeathOutputFormatter.cs" />
     <Compile Include="Formatters\MarriageOutputFormatter.cs" />
     <Content Include="GedcomOutput.xml" />
+    <Compile Include="Searches\GROSearch.cs" />
+    <Compile Include="Searches\GROSSearch.cs" />
+    <Compile Include="Searches\IGIBatchSearch.cs" />
+    <Compile Include="Searches\IGIDocument.cs" />
+    <Compile Include="Searches\IGIResult.cs" />
+    <Compile Include="Searches\IGISearch.cs" />
+    <Compile Include="Searches\IGISearchForm.cs" />
+    <Compile Include="Core\ParishBatch.cs" />
     <Compile Include="Registrations\RegistrationsProcessor.cs" />
     <Compile Include="Registrations\BirthRegistration.cs" />
     <Compile Include="Registrations\CensusRegistration.cs" />

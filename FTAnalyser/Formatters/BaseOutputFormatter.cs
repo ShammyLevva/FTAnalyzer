@@ -9,10 +9,10 @@ namespace FTAnalyser
 {
     public abstract class BaseOutputFormatter
     {
-        public abstract void printHeader(StreamWriter output);
-        public abstract void printItem(Registration reg, StreamWriter output);
+        public abstract void printHeader(TextWriter output);
+        public abstract void printItem(Registration reg, TextWriter output);
 
-        internal void printFamilyGroup(FactDate fd, ParentalGroup f, StreamWriter output)
+        internal void printFamilyGroup(FactDate fd, ParentalGroup f, TextWriter output)
         {
             if (f != null)
             {

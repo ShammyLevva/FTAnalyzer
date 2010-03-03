@@ -7,5 +7,8 @@ namespace FTAnalyser
 {
     class BadIGIDataException : Exception
     {
+        public BadIGIDataException(string message)
+            : base(message)
+        { }
     }
 }

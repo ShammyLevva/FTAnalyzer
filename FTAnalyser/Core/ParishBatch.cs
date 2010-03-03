@@ -35,6 +35,7 @@ namespace FTAnalyser
         public Parish Parish
         {
             get { return parish; }
+            set { this.parish = value; }
         }
 
         public String ParishID
@@ -58,11 +59,6 @@ namespace FTAnalyser
         {
             get { return startYear; }
             set { this.startYear = value; }
-        }
-
-        public Parish Parish
-        {
-            set { this.parish = value; }
         }
 
         #endregion

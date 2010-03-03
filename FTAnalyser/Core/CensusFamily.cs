@@ -98,10 +98,10 @@ namespace FTAnalyser
     	    if(MarriageDate.StartDate > censusDate.EndDate)
     		    return false;
             // don't process family if either parent is under 16
-    	    //if(husband != null) System.out.println("husband : " + husband.getAge(censusDate));
+    	    //if(husband != null) Console.WriteLine("husband : " + husband.getAge(censusDate));
     	    if(husband != null && husband.getMaxAge(censusDate) < 16) 
     	        return false;
-    	    //if(wife  != null) System.out.println("wife : " + wife.getAge(censusDate));
+    	    //if(wife  != null) Console.WriteLine("wife : " + wife.getAge(censusDate));
     	    if(wife != null && wife.getMaxAge(censusDate) < 16) 
     	        return false;
     	    return true;

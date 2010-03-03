@@ -296,5 +296,33 @@ namespace FTAnalyser
         }
 
         #endregion
+
+        #region Get Registrations
+
+        public List<Registration> getAllBirthRegistrations()
+        {
+            List<Registration> result = new List<Registration>();
+            return result;
+        }
+
+        public List<Registration> getAllMarriageRegistrations()
+        {
+            List<Registration> result = new List<Registration>();
+            return result;
+        }
+
+        public List<Registration> getAllDeathRegistrations()
+        {
+            List<Registration> result = new List<Registration>();
+            return result;
+        }
+
+        public List<Registration> getAllCensusRegistrations(FactDate when)
+        {
+            List<Registration> result = new List<Registration>();
+            return result;
+        }
+
+        #endregion
     }
 }
