@@ -37,7 +37,11 @@ namespace FTAnalyser
         #region Static Functions
 
         public static string GetText(XmlNode node) {
-            return (node != null)? node.InnerText.Trim() : "";
+            if (node == null || node.FirstChild.Value == null)
+            {
+                return "";
+            }
+            return node.FirstChild.Value.Trim();
         }
 
         public static string GetText(XmlNode node, string tag) {

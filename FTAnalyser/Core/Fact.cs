@@ -70,7 +70,7 @@ namespace FTAnalyser
                 }
                 string factDate = FamilyTree.GetText(node, "DATE");
                 date = new FactDate(factDate);
-                setCommentAndLocation(factType, FamilyTree.GetText(node, "PLAC"));
+                setCommentAndLocation(factType, FamilyTree.GetText(node), FamilyTree.GetText(node, "PLAC"));
                 FamilyTree ft = FamilyTree.Instance;
 
                 // now iterate through source elements of the fact finding all sources
@@ -144,25 +144,25 @@ namespace FTAnalyser
 
         #endregion
 
-        private void setCommentAndLocation (string factType, string factString) {
-            if (factString != null)
+        private void setCommentAndLocation (string factType, string factComment, string factPlace) {
+            if (factComment.Length == 0 && factPlace.Length > 0)
             {
-                int slash = factString.IndexOf("/");
+                int slash = factPlace.IndexOf("/");
                 if (slash >= 0) {
                     comment = place.Substring(0, slash).Trim();
                     // If slash occurs at end of string, location is empty.
-                    place = (slash == factString.Length - 1) ? "" : factString.Substring(slash + 1).Trim();
+                    place = (slash == factPlace.Length - 1) ? "" : factPlace.Substring(slash + 1).Trim();
                 } else if (Fact.COMMENT_FACTS.Contains(factType)) {
                     // we have a comment rather than a location
-                    comment = factString;
+                    comment = factPlace;
                     place = "";
                 } else {
                     comment = "";
-                    place = factString;
+                    place = factPlace;
                 }
             } else {
-                comment = "";
-                place = "";
+                comment = factComment;
+                place = factPlace;
             }
             location = FamilyTree.Instance.GetLocation(place);
         }

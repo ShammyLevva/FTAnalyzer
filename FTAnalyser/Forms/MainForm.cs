@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.IO;
 
 namespace FTAnalyser
 {
@@ -39,7 +40,7 @@ namespace FTAnalyser
                     HourGlass(false);
                     MessageBox.Show("Gedcom File Loaded");
                 }
-                catch (Exception ex)
+                catch (IOException ex)
                 {
                     MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
                 }

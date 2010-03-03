@@ -19,11 +19,11 @@ namespace FTAnalyser
 
         public static readonly string YEAR = "yyyy";
         public static readonly string MONTHYEAR = "MMM yyyy";
-        public static readonly string DAYMONTH = "dd MMM";
+        public static readonly string DAYMONTH = "d MMM";
         public static readonly string MONTH = "MMM";
-        public static readonly string FULL = "dd MMM yyyy";
+        public static readonly string FULL = "d MMM yyyy";
         public static readonly string DISPLAY = "d MMM yyyy";
-        public static readonly string CHECKING = "dd MMM";
+        public static readonly string CHECKING = "d MMM";
         public static readonly string DATE_PATTERN = "(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})";
 
         public static readonly FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
