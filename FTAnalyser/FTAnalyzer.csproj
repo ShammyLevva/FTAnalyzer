@@ -123,6 +123,7 @@
     <Compile Include="Comparators\MultiComparator.cs" />
     <Compile Include="Comparators\NameComparator.cs" />
     <Content Include="CsharpVsJava.txt" />
+    <Compile Include="Core\Parish.cs" />
     <Compile Include="Core\FamilyTree.cs" />
     <Compile Include="Exceptions\BadIGIDataException.cs" />
     <Compile Include="Exceptions\MissingPrimaryKeyException.cs" />

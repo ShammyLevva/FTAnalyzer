@@ -16,15 +16,15 @@ namespace FTAnalyser
 			    ANGUS = "Angus", MIDLOTHIAN = "Midlothian", FIFE = "Fife";
     	
         public const int COUNTRY = 0, REGION = 1, PARISH = 2,
-    		    ADDRESS = 3, PLACE = 4; 
-    	
-	    private string country;
-        private string region;
-        private string parish;
-        private string address;
-        private string place;
+    		    ADDRESS = 3, PLACE = 4;
+
         private string location;
-        private string parishID;
+        internal string country;
+        internal string region;
+        internal string parish;
+        internal string address;
+        internal string place;
+        internal string parishID;
         private int level;
         
         public Location() {
