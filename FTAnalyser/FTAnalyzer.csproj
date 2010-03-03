@@ -146,6 +146,7 @@
     <Compile Include="Formatters\DeathOutputFormatter.cs" />
     <Compile Include="Formatters\MarriageOutputFormatter.cs" />
     <Content Include="GedcomOutput.xml" />
+    <Compile Include="Registrations\RegistrationsProcessor.cs" />
     <Compile Include="Registrations\BirthRegistration.cs" />
     <Compile Include="Registrations\CensusRegistration.cs" />
     <Compile Include="Registrations\DeathRegistration.cs" />
