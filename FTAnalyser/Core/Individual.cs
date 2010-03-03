@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace FTAnalyser
 {
-    public class Individual : IComparable<Individual> {
+    public class Individual : IComparable<Individual>, IDisplayIndividual {
     	
 	    // define relation type from direct ancestor to related by marriage and 
 	    // MARRIAGEDB ie: married to a direct or blood relation
@@ -172,7 +172,17 @@ namespace FTAnalyser
             }
         }
 
-        public string Occupation {
+        public string DeathLocation
+        {
+            get
+            {
+                Fact f = getPreferredFact(Fact.DEATH);
+                return (f == null) ? "" : f.Place;
+            }
+        }
+
+        public string Occupation
+        {
             get
             {
                 Fact occupation = getPreferredFact(Fact.OCCUPATION);
@@ -215,12 +225,11 @@ namespace FTAnalyser
             }
         }
 
-        public int CurrentAge
+        public Age CurrentAge
         {
             get
             {
-                string age = getAge(DateTime.Now);
-                return Int32.Parse(age);
+                return getAge(DateTime.Now);
             }
         }
 
@@ -251,36 +260,18 @@ namespace FTAnalyser
         
         public bool isSingleAtDeath() {
             Fact single = getPreferredFact(Fact.UNMARRIED);
-            return single != null || MaxAgeAtDeath < 16 || CurrentAge < 16;
+            return single != null || MaxAgeAtDeath < 16 || CurrentAge.MaxAge < 16;
         }
 
         #endregion
 
         #region Age Functions
 
-        public string getAge(FactDate when) {
-            int minValue = BirthDate.getMinimumYear(when);
-            int maxValue = BirthDate.getMaximumYear(when);
-            if (minValue == FactDate.MINYEARS) {
-                if (maxValue == FactDate.MAXYEARS)
-                    return "Unknown";
-                else
-                    return "<=" + maxValue;
-            } else {
-                if (maxValue == FactDate.MAXYEARS) {
-                    if (minValue >= FactDate.MAXYEARS) {
-                        // if age over maximum return maximum
-                        return FactDate.MAXYEARS.ToString();
-                    }
-                    return ">=" + minValue;
-                } else {
-                    return minValue == maxValue ? minValue.ToString() :
-                    	    minValue + " to " + maxValue;
-                }
-            }
+        public Age getAge(FactDate when) {
+            return new Age(this, when);
         }
         
-        public string getAge(DateTime when) {
+        public Age getAge(DateTime when) {
             string now = FactDate.Format(FactDate.FULL, when);
             return getAge(new FactDate(now));
         }

@@ -35,6 +35,7 @@ namespace FTAnalyser
                     document.Save("GedcomOutput.xml");
                     FamilyTree ft = FamilyTree.Instance;
                     ft.LoadTree(document, pbSources, pbIndividuals, pbFamilies);
+                    dgIndividuals.DataSource = ft.AllDisplayIndividuals;
                     HourGlass(false);
                     MessageBox.Show("Gedcom File Loaded");
                 }

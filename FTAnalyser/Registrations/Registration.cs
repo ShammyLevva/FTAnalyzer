@@ -101,7 +101,7 @@ namespace FTAnalyser
         }
         
         public string Age {
-            get { return Individual.getAge(registrationDate); }
+            get { return Individual.getAge(registrationDate).ToString(); }
         }
         
         public string ParentsMarriageDate {

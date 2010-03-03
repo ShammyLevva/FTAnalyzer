@@ -55,7 +55,7 @@ namespace FTAnalyser
         public string SpousesAge {
             get 
             { 
-                return (marriage == null || spousesFamily == null) ? "" : spousesFamily.Individual.getAge(marriage.FactDate); 
+                return (marriage == null || spousesFamily == null) ? "" : spousesFamily.Individual.getAge(marriage.FactDate).ToString(); 
             }
         }
 

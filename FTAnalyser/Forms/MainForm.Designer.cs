@@ -33,8 +33,16 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabTestFactDate = new System.Windows.Forms.TabPage();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
+            this.pbFamilies = new System.Windows.Forms.ProgressBar();
+            this.label5 = new System.Windows.Forms.Label();
+            this.pbIndividuals = new System.Windows.Forms.ProgressBar();
+            this.label4 = new System.Windows.Forms.Label();
+            this.pbSources = new System.Windows.Forms.ProgressBar();
+            this.tabIndividuals = new System.Windows.Forms.TabPage();
+            this.dgIndividuals = new System.Windows.Forms.DataGridView();
+            this.tabTestFactDate = new System.Windows.Forms.TabPage();
             this.txtEndDate = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtStartDate = new System.Windows.Forms.TextBox();
@@ -42,16 +50,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtTestDate = new System.Windows.Forms.TextBox();
             this.btnTestDates = new System.Windows.Forms.Button();
-            this.pbSources = new System.Windows.Forms.ProgressBar();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.pbIndividuals = new System.Windows.Forms.ProgressBar();
-            this.label6 = new System.Windows.Forms.Label();
-            this.pbFamilies = new System.Windows.Forms.ProgressBar();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
-            this.tabTestFactDate.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
+            this.tabIndividuals.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
+            this.tabTestFactDate.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -85,13 +89,101 @@
             // 
             // tabControl
             // 
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabDisplayProgress);
+            this.tabControl.Controls.Add(this.tabIndividuals);
             this.tabControl.Controls.Add(this.tabTestFactDate);
             this.tabControl.Location = new System.Drawing.Point(0, 27);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(453, 256);
             this.tabControl.TabIndex = 9;
+            // 
+            // tabDisplayProgress
+            // 
+            this.tabDisplayProgress.Controls.Add(this.label6);
+            this.tabDisplayProgress.Controls.Add(this.pbFamilies);
+            this.tabDisplayProgress.Controls.Add(this.label5);
+            this.tabDisplayProgress.Controls.Add(this.pbIndividuals);
+            this.tabDisplayProgress.Controls.Add(this.label4);
+            this.tabDisplayProgress.Controls.Add(this.pbSources);
+            this.tabDisplayProgress.Location = new System.Drawing.Point(4, 22);
+            this.tabDisplayProgress.Name = "tabDisplayProgress";
+            this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDisplayProgress.Size = new System.Drawing.Size(445, 230);
+            this.tabDisplayProgress.TabIndex = 1;
+            this.tabDisplayProgress.Text = "Load Gedcom";
+            this.tabDisplayProgress.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(8, 63);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(85, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Loading Families";
+            // 
+            // pbFamilies
+            // 
+            this.pbFamilies.Location = new System.Drawing.Point(112, 60);
+            this.pbFamilies.Name = "pbFamilies";
+            this.pbFamilies.Size = new System.Drawing.Size(316, 16);
+            this.pbFamilies.TabIndex = 4;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(8, 41);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(98, 13);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Loading Individuals";
+            // 
+            // pbIndividuals
+            // 
+            this.pbIndividuals.Location = new System.Drawing.Point(112, 38);
+            this.pbIndividuals.Name = "pbIndividuals";
+            this.pbIndividuals.Size = new System.Drawing.Size(316, 16);
+            this.pbIndividuals.TabIndex = 2;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Loading Sources";
+            // 
+            // pbSources
+            // 
+            this.pbSources.Location = new System.Drawing.Point(112, 16);
+            this.pbSources.Name = "pbSources";
+            this.pbSources.Size = new System.Drawing.Size(316, 16);
+            this.pbSources.TabIndex = 0;
+            // 
+            // tabIndividuals
+            // 
+            this.tabIndividuals.Controls.Add(this.dgIndividuals);
+            this.tabIndividuals.Location = new System.Drawing.Point(4, 22);
+            this.tabIndividuals.Name = "tabIndividuals";
+            this.tabIndividuals.Padding = new System.Windows.Forms.Padding(3);
+            this.tabIndividuals.Size = new System.Drawing.Size(445, 230);
+            this.tabIndividuals.TabIndex = 2;
+            this.tabIndividuals.Text = "Individuals";
+            this.tabIndividuals.UseVisualStyleBackColor = true;
+            // 
+            // dgIndividuals
+            // 
+            this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgIndividuals.Location = new System.Drawing.Point(3, 3);
+            this.dgIndividuals.Name = "dgIndividuals";
+            this.dgIndividuals.Size = new System.Drawing.Size(439, 224);
+            this.dgIndividuals.TabIndex = 0;
             // 
             // tabTestFactDate
             // 
@@ -109,22 +201,6 @@
             this.tabTestFactDate.TabIndex = 0;
             this.tabTestFactDate.Text = "Test Fact Date";
             this.tabTestFactDate.UseVisualStyleBackColor = true;
-            // 
-            // tabDisplayProgress
-            // 
-            this.tabDisplayProgress.Controls.Add(this.label6);
-            this.tabDisplayProgress.Controls.Add(this.pbFamilies);
-            this.tabDisplayProgress.Controls.Add(this.label5);
-            this.tabDisplayProgress.Controls.Add(this.pbIndividuals);
-            this.tabDisplayProgress.Controls.Add(this.label4);
-            this.tabDisplayProgress.Controls.Add(this.pbSources);
-            this.tabDisplayProgress.Location = new System.Drawing.Point(4, 22);
-            this.tabDisplayProgress.Name = "tabDisplayProgress";
-            this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplayProgress.Size = new System.Drawing.Size(445, 230);
-            this.tabDisplayProgress.TabIndex = 1;
-            this.tabDisplayProgress.Text = "Load Gedcom";
-            this.tabDisplayProgress.UseVisualStyleBackColor = true;
             // 
             // txtEndDate
             // 
@@ -185,54 +261,6 @@
             this.btnTestDates.Text = "Test FactDate";
             this.btnTestDates.UseVisualStyleBackColor = true;
             // 
-            // pbSources
-            // 
-            this.pbSources.Location = new System.Drawing.Point(112, 16);
-            this.pbSources.Name = "pbSources";
-            this.pbSources.Size = new System.Drawing.Size(316, 16);
-            this.pbSources.TabIndex = 0;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 19);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Loading Sources";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 41);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(98, 13);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Loading Individuals";
-            // 
-            // pbIndividuals
-            // 
-            this.pbIndividuals.Location = new System.Drawing.Point(112, 38);
-            this.pbIndividuals.Name = "pbIndividuals";
-            this.pbIndividuals.Size = new System.Drawing.Size(316, 16);
-            this.pbIndividuals.TabIndex = 2;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 63);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(85, 13);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Loading Families";
-            // 
-            // pbFamilies
-            // 
-            this.pbFamilies.Location = new System.Drawing.Point(112, 60);
-            this.pbFamilies.Name = "pbFamilies";
-            this.pbFamilies.Size = new System.Drawing.Size(316, 16);
-            this.pbFamilies.TabIndex = 4;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -246,10 +274,12 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl.ResumeLayout(false);
-            this.tabTestFactDate.ResumeLayout(false);
-            this.tabTestFactDate.PerformLayout();
             this.tabDisplayProgress.ResumeLayout(false);
             this.tabDisplayProgress.PerformLayout();
+            this.tabIndividuals.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
+            this.tabTestFactDate.ResumeLayout(false);
+            this.tabTestFactDate.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -277,6 +307,8 @@
         private System.Windows.Forms.ProgressBar pbFamilies;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ProgressBar pbIndividuals;
+        private System.Windows.Forms.TabPage tabIndividuals;
+        private System.Windows.Forms.DataGridView dgIndividuals;
     }
 }
 

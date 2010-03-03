@@ -116,6 +116,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Age.cs" />
     <Compile Include="Core\CensusFamily.cs" />
     <Compile Include="Comparators\CensusAgeComparator.cs" />
     <Compile Include="Comparators\DateComparator.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Comparators\MultiComparator.cs" />
     <Compile Include="Comparators\NameComparator.cs" />
     <Content Include="Useful URLs.txt" />
+    <Compile Include="Core\Displays\IDisplayIndividual.cs" />
     <Compile Include="Core\Parish.cs" />
     <Compile Include="Core\FamilyTree.cs" />
     <Compile Include="Exceptions\BadIGIDataException.cs" />

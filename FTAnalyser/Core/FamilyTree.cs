@@ -14,14 +14,14 @@ namespace FTAnalyser
         private List<FactSource> sources;
         private List<Individual> individuals;
         private List<Family> families;
-        private List<Location> locations;
+        private Dictionary<string, Location> locations;
 
         private FamilyTree()
         {
             sources = new List<FactSource>();
             individuals = new List<Individual>();
             families = new List<Family>();
-            locations = new List<Location>();
+            locations = new Dictionary<string, Location>();
         }
 
         public static FamilyTree Instance {
@@ -244,14 +244,18 @@ namespace FTAnalyser
 
         public List<Location> AllLocations
         {
-            get { return locations; }
+            get { return locations.Values.ToList(); }
         }
 
         public Location GetLocation(string place)
         {
-            Location loc = new Location(place);
-            if (!locations.Contains(loc))
-                locations.Add(loc);
+            Location loc;
+            locations.TryGetValue(place, out loc);
+            if (loc == null)
+            {
+                loc = new Location(place);
+                locations.Add(place, loc);
+            }
             return loc; // should return object that is in list of locations 
         }
 
@@ -357,9 +361,10 @@ namespace FTAnalyser
 
         private void SetParishes()
         {
-            foreach (Location loc in locations)
+            foreach (Location loc in locations.Values)
             {
                 // do something with parishes
+                
             }
         }
 
@@ -443,6 +448,21 @@ namespace FTAnalyser
                 }
             }
             return result;
+        }
+
+        #endregion
+
+        #region Displays
+
+        public List<IDisplayIndividual> AllDisplayIndividuals
+        {
+            get
+            {
+                List<IDisplayIndividual> result = new List<IDisplayIndividual>();
+                foreach (IDisplayIndividual i in individuals)
+                    result.Add(i);
+                return result;
+            }
         }
 
         #endregion
