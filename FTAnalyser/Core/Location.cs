@@ -156,7 +156,7 @@ namespace FTAnalyser
             return CompareTo (that, PLACE);
         }
         
-        public int CompareTo (Location that, int level) {
+        public virtual int CompareTo (Location that, int level) {
             int res = this.country.CompareTo(that.country);
             if (res == 0 && level > COUNTRY) {
                 res = this.region.CompareTo(that.region);

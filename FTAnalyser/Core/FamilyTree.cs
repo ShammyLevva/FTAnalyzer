@@ -92,8 +92,8 @@ namespace FTAnalyser
                 pbF.Value = counter++;
                 Application.DoEvents();
             } 
-            // SetRelations(individuals[0].GedcomID); // needs testing
-	        setParishes();
+            SetRelations(individuals[0].GedcomID); // needs testing
+	        SetParishes();
             return RelationCount;
         }
 
@@ -210,16 +210,22 @@ namespace FTAnalyser
             }
         }
 
-        private void addParentsToQueue(Individual indiv, LinkedList<Individual> queue)
+        private void AddToQueue(Queue<Individual> queue, List<Individual> list)
+        {
+            foreach (Individual i in list)
+                queue.Enqueue(i);
+        }
+
+        private void addParentsToQueue(Individual indiv, Queue<Individual> queue)
         {
             List<Family> families = getFamiliesAsChild(indiv);
             foreach (Family family in families)
             {
                 // add parents to queue
                 if (family.Husband != null)
-                    queue.AddLast(family.Husband);
+                    queue.Enqueue(family.Husband);
                 if (family.Wife != null)
-                    queue.AddLast(family.Wife);
+                    queue.Enqueue(family.Wife);
             }
         }
 
@@ -227,24 +233,22 @@ namespace FTAnalyser
         {	
             ClearRelations();
             Individual ind = getGedcomIndividual(startGed);
-            LinkedList<Individual> queue = new LinkedList<Individual>();
-            queue.AddFirst(ind);
+            Queue<Individual> queue = new Queue<Individual>();
+            queue.Enqueue(ind);
             while (queue.Count > 0) {
                 // now take an item from the queue
-                ind = queue.First();
-                queue.RemoveFirst();
+                ind = queue.Dequeue();
                 // set them as a direct relation
                 ind.RelationType = Individual.DIRECT;
                 addParentsToQueue(ind, queue);
             }
             // we have now added all direct ancestors
             List<Individual> directs = getAllRelationsOfType(Individual.DIRECT);
-		    queue.Union(directs);
+            AddToQueue(queue, directs);
 		    while(queue.Count > 0) {
 			    // get the next person
-		        ind = queue.First();
-                queue.RemoveFirst();
-			    List<Family> families = getFamiliesAsParent(ind);
+		        ind = queue.Dequeue();
+                List<Family> families = getFamiliesAsParent(ind);
     		    foreach (Family family in families) {
     	            // if the spouse of a direct ancestor is not a direct
     	            // ancestor then they are only related by marriage
@@ -256,15 +260,12 @@ namespace FTAnalyser
 		    }
 		    // we have now set all direct ancestors and all blood relations
 		    // all that remains is to loop through the marriage relations
-            List<Individual> marrieds = getAllRelationsOfType(Individual.MARRIAGE);
             List<Individual> marriedDBs = getAllRelationsOfType(Individual.MARRIAGEDB);
-		    queue.Union(marriedDBs);
-		    queue.Union(marrieds);
-            while (queue.Count > 0)
+            AddToQueue(queue, marriedDBs);
+		    while (queue.Count > 0)
             {
 			    // get the next person
-                ind = queue.First();
-                queue.RemoveFirst();
+                ind = queue.Dequeue();
                 // first only process this individual if they are related by marriage or still unknown
 		        int relationship = ind.RelationType;
 		        if (relationship == Individual.MARRIAGE || 
@@ -286,11 +287,11 @@ namespace FTAnalyser
 		    }
         }
 
-        private void setParishes()
+        private void SetParishes()
         {
             foreach (Location loc in locations)
             {
-
+                // do something with parishes
             }
         }
 

@@ -11,6 +11,8 @@ namespace FTAnalyser
 {
     public partial class MainForm : Form
     {
+        private Cursor storedCursor = Cursors.Default;
+
         public MainForm()
         {
             InitializeComponent();
@@ -28,10 +30,12 @@ namespace FTAnalyser
             {
                 try
                 {
+                    HourGlass(true);
                     XmlDocument document = GedcomToXml.Load(openFileDialog1.FileName);
                     document.Save("GedcomOutput.xml");
                     FamilyTree ft = FamilyTree.Instance;
                     ft.LoadTree(document, pbSources, pbIndividuals, pbFamilies);
+                    HourGlass(false);
                     MessageBox.Show("Gedcom File Loaded");
                 }
                 catch (Exception ex)
@@ -46,6 +50,19 @@ namespace FTAnalyser
             FactDate fd = new FactDate(txtTestDate.Text);
             txtStartDate.Text = FactDate.Format(FactDate.FULL, fd.StartDate);
             txtEndDate.Text = FactDate.Format(FactDate.FULL, fd.EndDate);
+        }
+
+        private void HourGlass(bool on)
+        {
+            if (on)
+            {
+                storedCursor = this.Cursor;
+                this.Cursor = Cursors.WaitCursor;
+            }
+            else
+            {
+                this.Cursor = storedCursor;
+            }
         }
     }
 }

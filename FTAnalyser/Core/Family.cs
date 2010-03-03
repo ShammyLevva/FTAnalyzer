@@ -231,7 +231,7 @@ namespace FTAnalyser
             }
         }
 
-        public void setChildRelation(LinkedList<Individual> queue, int relationType)
+        public void setChildRelation(Queue<Individual> queue, int relationType)
         {
             foreach (Individual child in children)
             {
@@ -240,7 +240,7 @@ namespace FTAnalyser
                     // add this previously unknown individual to list 
                     // of relatives to update family of
                     child.RelationType = relationType;
-                    queue.AddLast(child);
+                    queue.Enqueue(child);
                 }
             }
         }

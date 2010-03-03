@@ -20,7 +20,7 @@ namespace FTAnalyser
             this.parishID = null;
         }
 
-        public int CompareTo (Location that, int level) {
+        public override int CompareTo (Location that, int level) {
             int res = this.country.CompareTo(that.country);
             if (res == 0 && level > COUNTRY) {
                 res = this.region.CompareTo(that.region);
