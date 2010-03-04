@@ -50,12 +50,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtTestDate = new System.Windows.Forms.TextBox();
             this.btnTestDates = new System.Windows.Forms.Button();
+            this.tabLooseDeaths = new System.Windows.Forms.TabPage();
+            this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
+            this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
             this.tabIndividuals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.tabTestFactDate.SuspendLayout();
+            this.tabLooseDeaths.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).BeginInit();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -95,11 +103,13 @@
             this.tabControl.Controls.Add(this.tabDisplayProgress);
             this.tabControl.Controls.Add(this.tabIndividuals);
             this.tabControl.Controls.Add(this.tabTestFactDate);
+            this.tabControl.Controls.Add(this.tabLooseDeaths);
             this.tabControl.Location = new System.Drawing.Point(0, 27);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(453, 256);
             this.tabControl.TabIndex = 9;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabDisplayProgress
             // 
@@ -261,16 +271,61 @@
             this.btnTestDates.Text = "Test FactDate";
             this.btnTestDates.UseVisualStyleBackColor = true;
             // 
+            // tabLooseDeaths
+            // 
+            this.tabLooseDeaths.Controls.Add(this.dgLooseDeaths);
+            this.tabLooseDeaths.Location = new System.Drawing.Point(4, 22);
+            this.tabLooseDeaths.Name = "tabLooseDeaths";
+            this.tabLooseDeaths.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLooseDeaths.Size = new System.Drawing.Size(445, 230);
+            this.tabLooseDeaths.TabIndex = 3;
+            this.tabLooseDeaths.Text = "Loose Deaths";
+            this.tabLooseDeaths.UseVisualStyleBackColor = true;
+            // 
+            // dgLooseDeaths
+            // 
+            this.dgLooseDeaths.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgLooseDeaths.Location = new System.Drawing.Point(0, 0);
+            this.dgLooseDeaths.Name = "dgLooseDeaths";
+            this.dgLooseDeaths.Size = new System.Drawing.Size(445, 230);
+            this.dgLooseDeaths.TabIndex = 0;
+            // 
+            // tsCount
+            // 
+            this.tsCount.Name = "tsCount";
+            this.tsCount.Size = new System.Drawing.Size(52, 17);
+            this.tsCount.Text = "Count : 0";
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsCountLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 260);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(453, 22);
+            this.statusStrip.TabIndex = 10;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // tsCountLabel
+            // 
+            this.tsCountLabel.Name = "tsCountLabel";
+            this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
+            this.tsCountLabel.Text = "Count : 0";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 282);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Family Tree Analyzer";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl.ResumeLayout(false);
@@ -280,6 +335,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
             this.tabTestFactDate.ResumeLayout(false);
             this.tabTestFactDate.PerformLayout();
+            this.tabLooseDeaths.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).EndInit();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,6 +368,11 @@
         private System.Windows.Forms.ProgressBar pbIndividuals;
         private System.Windows.Forms.TabPage tabIndividuals;
         private System.Windows.Forms.DataGridView dgIndividuals;
+        private System.Windows.Forms.TabPage tabLooseDeaths;
+        private System.Windows.Forms.DataGridView dgLooseDeaths;
+        private System.Windows.Forms.ToolStripStatusLabel tsCount;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel tsCountLabel;
     }
 }
 

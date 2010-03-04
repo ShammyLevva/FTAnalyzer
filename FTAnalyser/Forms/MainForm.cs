@@ -36,7 +36,6 @@ namespace FTAnalyser
                     document.Save("GedcomOutput.xml");
                     FamilyTree ft = FamilyTree.Instance;
                     ft.LoadTree(document, pbSources, pbIndividuals, pbFamilies);
-                    dgIndividuals.DataSource = ft.AllDisplayIndividuals;
                     HourGlass(false);
                     MessageBox.Show("Gedcom File Loaded");
                 }
@@ -64,6 +63,26 @@ namespace FTAnalyser
             else
             {
                 this.Cursor = storedCursor;
+            }
+        }
+
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FamilyTree ft = FamilyTree.Instance;
+            switch(tabControl.SelectedIndex)
+            {
+                case 1:
+                    List<IDisplayIndividual> list = ft.AllDisplayIndividuals;
+                    dgIndividuals.DataSource = list;
+                    tsCountLabel.Text = "Count : " + list.Count; 
+                    break;
+                case 3:
+                    HourGlass(true);
+                    List<IDisplayLooseDeath> looseDeathList = ft.GetLooseDeaths();
+                    dgLooseDeaths.DataSource = looseDeathList;
+                    tsCountLabel.Text = "Count : " + looseDeathList.Count;
+                    HourGlass(false);
+                    break;
             }
         }
     }

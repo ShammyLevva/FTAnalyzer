@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace FTAnalyser
 {
-    public class Individual : IComparable<Individual>, IDisplayIndividual {
+    public class Individual : IComparable<Individual>, IDisplayIndividual, IDisplayLooseDeath {
     	
 	    // define relation type from direct ancestor to related by marriage and 
 	    // MARRIAGEDB ie: married to a direct or blood relation

@@ -40,7 +40,7 @@ namespace FTAnalyser
         private static readonly string MISSINGNAME = "You must enter at least a first or last name, or you must enter a father's full name and at least a mother's first name.";
 	    private static readonly string MISSINGNAME2 = "Enter at least your deceased ancestor's first name or last name and the region";
         private static readonly string MISSINGNAME3 = "If you enter a last name without a first name, you must either <b>not enter</b> parent or spouse names, a year, or you <b>must enter</b> a batch number or a film number.";
-        private static readonly string INDIVIDUALRECORD = "igi/individual_record.asp";
+//        private static readonly string INDIVIDUALRECORD = "igi/individual_record.asp";
         private static readonly FactDate IGIMAX = new FactDate("31 DEC 1874");
         public const int MARRIAGESEARCH = 1;
         public const int CHILDRENSEARCH = 2;

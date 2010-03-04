@@ -267,6 +267,127 @@ namespace FTAnalyser
 
         #region Processes
 
+        public List<IDisplayLooseDeath> GetLooseDeaths()
+        {
+            List<IDisplayLooseDeath> result = new List<IDisplayLooseDeath>();
+            foreach (Individual ind in individuals)
+            {
+                checkLooseDeath(ind ,result);
+            }
+            return result;
+        }
+
+        private void checkLooseDeath(Individual indiv, List<IDisplayLooseDeath> result) 
+		{
+		    FactDate deathDate = indiv.DeathDate;
+		    FactDate toAdd = null;
+	        if (deathDate != null && ! deathDate.isExact()) {
+		        DateTime maxLiving = getMaxLivingDate(indiv);
+		        DateTime minDeath = getMinDeathDate(indiv);
+		        if (maxLiving > deathDate.StartDate) {
+		            // the starting death date is before the last alive date
+			        // so add to the list of loose deaths
+		            toAdd = new FactDate(maxLiving, minDeath);
+			    } else if (minDeath < deathDate.EndDate) {
+		            // earliest death date before current latest death
+		            // so add to the list of loose deaths
+		            toAdd = new FactDate(deathDate.StartDate, minDeath);
+			    }
+		    }
+		    if (deathDate == null && indiv.CurrentAge.MinAge >= 110) {
+		        // also check for empty death dates for people aged 110 or over
+		        toAdd = new FactDate(getMaxLivingDate(indiv), getMinDeathDate(indiv));
+		    }
+	        if (toAdd != null && toAdd != deathDate) {
+	            // we have a date to change and its not the same 
+	            // range as the existing death date
+		        Fact looseDeath = new Fact(Fact.LOOSEDEATH, toAdd);
+		        indiv.addFact(looseDeath);
+		        result.Add(indiv);
+	        }
+	    }
+
+      	private DateTime getMaxLivingDate(Individual indiv) {
+		    if (indiv.isMale()) {
+                families = FindFamiliesWhereHusband(indiv);
+	        } else {
+	            families = FindFamiliesWhereWife(indiv);
+	        }
+		    // having got the families the individual is a parent of
+	        // get the max startdate of the birthdate of the youngest child
+	        // this then is the minimum point they were alive
+	        // subtract 9 months for a male
+	        DateTime maxdate = FactDate.MINDATE;
+	        bool childDate = false;
+		    foreach(Family fam in families) {
+		        FactDate marriageDate = fam.getPreferredFactDate(Fact.MARRIAGE);
+		        if (marriageDate.StartDate > maxdate && ! marriageDate.isLongYearSpan()) {
+		            maxdate = marriageDate.StartDate;
+		        }
+		        foreach(Individual child in fam.Children) 
+                {
+			        FactDate birthday = child.BirthDate;
+			        if (birthday.StartDate > maxdate) { 
+			            maxdate = birthday.StartDate;
+			            childDate = true;
+			        }
+			    }
+		    }
+		    if (childDate && indiv.isMale() && maxdate > FactDate.MINDATE) {
+		        // set to Jan 01 of prior year from start date if indiv is a father 
+		        // and we have changed maxdate from the MINDATE default
+		        // and the date is derived from a child not a marriage
+                maxdate = new DateTime(maxdate.Year - 1, 1, 1);
+		    }
+		    List<Fact> census = indiv.getFacts(Fact.CENSUS);
+		    foreach(Fact censusFact in census) {
+		        DateTime censusDate = censusFact.FactDate.StartDate;
+		        if (censusDate > maxdate) {
+		            maxdate = censusDate;
+		        }
+		    }
+		    List<Fact> witness = indiv.getFacts(Fact.WITNESS);
+		    foreach(Fact witnessFact in witness) {
+		        DateTime witnessDate = witnessFact.FactDate.StartDate;
+		        if (witnessDate > maxdate) {
+		            maxdate = witnessDate;
+		        }
+		    }
+		    // at this point we have the maximum point a person was alive
+		    // based on their oldest child and last census record and marriage date
+		    return maxdate;
+	    }
+
+        private DateTime getMinDeathDate(Individual indiv)
+        {
+            FactDate deathDate = indiv.DeathDate;
+            DateTime now = DateTime.Now;
+            DateTime minDeath = indiv.BirthDate.EndDate;
+            if (minDeath != FactDate.MAXDATE)
+            {
+                // set tooOld to 31st Dec 110 years after birth.
+                if (minDeath.Month == 12 && minDeath.Day == 31)
+                {
+                    // because a BEF XXXX is already 31/12/XXXX need to add 111 years
+                    minDeath.AddYears(111);
+                }
+                else
+                {
+                    minDeath = new DateTime(minDeath.Year + 110, 12, 31);
+                }
+                if (minDeath > now)
+                {
+                    // 110 years after death is after todays date so we set the
+                    // maximum to 31 DEC last year.
+                    minDeath = new DateTime(now.Year, minDeath.Month, minDeath.Day);
+                }
+            }
+            if (deathDate == null || minDeath < deathDate.EndDate)
+                return minDeath;
+            else
+                return deathDate.EndDate;
+        }
+
         private ParentalGroup CreateFamilyGroup(Individual i)
         {
             List<Family> list = getFamiliesAsChild(i);

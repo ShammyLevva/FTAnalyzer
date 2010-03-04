@@ -124,6 +124,7 @@
     <Compile Include="Comparators\MultiComparator.cs" />
     <Compile Include="Comparators\NameComparator.cs" />
     <Content Include="Useful URLs.txt" />
+    <Compile Include="Core\Displays\IDisplayLooseDeath.cs" />
     <Compile Include="Core\Displays\IDisplayIndividual.cs" />
     <Compile Include="Core\Parish.cs" />
     <Compile Include="Core\FamilyTree.cs" />
