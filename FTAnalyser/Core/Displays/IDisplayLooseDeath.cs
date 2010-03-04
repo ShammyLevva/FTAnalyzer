@@ -8,11 +8,12 @@ namespace FTAnalyser
     public interface IDisplayLooseDeath
     {
         string IndividualID { get; }
-        string Forename { get; }
+        string Forenames { get; }
         string Surname { get; }
         FactDate BirthDate { get; }
         string BirthLocation { get; }
         FactDate DeathDate { get; }
         string DeathLocation { get; }
+        FactDate LooseDeath { get; }
     }
 }

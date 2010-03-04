@@ -75,8 +75,8 @@ namespace FTAnalyser
         {
             DateTime start = new DateTime(startdate.Year, startdate.Month, startdate.Day);
             DateTime end = new DateTime(enddate.Year, enddate.Month, enddate.Day);
-            start.AddYears(years);
-            end.AddYears(years);
+            start = start.AddYears(years);
+            end = end.AddYears(years);
             if (end > MAXDATE)
                 end = MAXDATE;
             return new FactDate(start, end);

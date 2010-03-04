@@ -308,10 +308,11 @@ namespace FTAnalyser
 	    }
 
       	private DateTime getMaxLivingDate(Individual indiv) {
+            List<Family> indfam = new List<Family>();
 		    if (indiv.isMale()) {
-                families = FindFamiliesWhereHusband(indiv);
+                indfam = FindFamiliesWhereHusband(indiv);
 	        } else {
-	            families = FindFamiliesWhereWife(indiv);
+                indfam = FindFamiliesWhereWife(indiv);
 	        }
 		    // having got the families the individual is a parent of
 	        // get the max startdate of the birthdate of the youngest child
@@ -319,7 +320,8 @@ namespace FTAnalyser
 	        // subtract 9 months for a male
 	        DateTime maxdate = FactDate.MINDATE;
 	        bool childDate = false;
-		    foreach(Family fam in families) {
+            foreach (Family fam in indfam)
+            {
 		        FactDate marriageDate = fam.getPreferredFactDate(Fact.MARRIAGE);
 		        if (marriageDate.StartDate > maxdate && ! marriageDate.isLongYearSpan()) {
 		            maxdate = marriageDate.StartDate;
@@ -369,7 +371,7 @@ namespace FTAnalyser
                 if (minDeath.Month == 12 && minDeath.Day == 31)
                 {
                     // because a BEF XXXX is already 31/12/XXXX need to add 111 years
-                    minDeath.AddYears(111);
+                    minDeath = minDeath.AddYears(111);
                 }
                 else
                 {

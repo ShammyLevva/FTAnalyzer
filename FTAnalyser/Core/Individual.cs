@@ -233,6 +233,15 @@ namespace FTAnalyser
             }
         }
 
+        public FactDate LooseDeath
+        {
+            get
+            {
+                Fact loose = getPreferredFact(Fact.LOOSEDEATH);
+                return loose == null ? new FactDate(FactDate.MINDATE, FactDate.MAXDATE) : loose.FactDate;
+            }
+        }
+
         #endregion
 
         #region Boolean Tests

@@ -107,7 +107,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 27);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(453, 256);
+            this.tabControl.Size = new System.Drawing.Size(453, 230);
             this.tabControl.TabIndex = 9;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -277,7 +277,7 @@
             this.tabLooseDeaths.Location = new System.Drawing.Point(4, 22);
             this.tabLooseDeaths.Name = "tabLooseDeaths";
             this.tabLooseDeaths.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLooseDeaths.Size = new System.Drawing.Size(445, 230);
+            this.tabLooseDeaths.Size = new System.Drawing.Size(445, 204);
             this.tabLooseDeaths.TabIndex = 3;
             this.tabLooseDeaths.Text = "Loose Deaths";
             this.tabLooseDeaths.UseVisualStyleBackColor = true;
@@ -290,7 +290,7 @@
             this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLooseDeaths.Location = new System.Drawing.Point(0, 0);
             this.dgLooseDeaths.Name = "dgLooseDeaths";
-            this.dgLooseDeaths.Size = new System.Drawing.Size(445, 230);
+            this.dgLooseDeaths.Size = new System.Drawing.Size(445, 201);
             this.dgLooseDeaths.TabIndex = 0;
             // 
             // tsCount
