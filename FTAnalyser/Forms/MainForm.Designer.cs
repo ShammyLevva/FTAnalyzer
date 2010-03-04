@@ -76,7 +76,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(453, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1009, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -107,7 +107,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 27);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(453, 230);
+            this.tabControl.Size = new System.Drawing.Size(1009, 446);
             this.tabControl.TabIndex = 9;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -277,7 +277,7 @@
             this.tabLooseDeaths.Location = new System.Drawing.Point(4, 22);
             this.tabLooseDeaths.Name = "tabLooseDeaths";
             this.tabLooseDeaths.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLooseDeaths.Size = new System.Drawing.Size(445, 204);
+            this.tabLooseDeaths.Size = new System.Drawing.Size(1001, 420);
             this.tabLooseDeaths.TabIndex = 3;
             this.tabLooseDeaths.Text = "Loose Deaths";
             this.tabLooseDeaths.UseVisualStyleBackColor = true;
@@ -291,7 +291,7 @@
             this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLooseDeaths.Location = new System.Drawing.Point(0, 0);
             this.dgLooseDeaths.Name = "dgLooseDeaths";
-            this.dgLooseDeaths.Size = new System.Drawing.Size(445, 201);
+            this.dgLooseDeaths.Size = new System.Drawing.Size(1001, 417);
             this.dgLooseDeaths.TabIndex = 0;
             // 
             // tsCount
@@ -304,9 +304,9 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsCountLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 260);
+            this.statusStrip.Location = new System.Drawing.Point(0, 476);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(453, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1009, 22);
             this.statusStrip.TabIndex = 10;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -320,7 +320,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(453, 282);
+            this.ClientSize = new System.Drawing.Size(1009, 498);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
