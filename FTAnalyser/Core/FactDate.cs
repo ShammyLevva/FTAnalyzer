@@ -375,7 +375,10 @@ namespace FTAnalyser
 
         public override string ToString()
         {
-            return Datestring;
+            if (datestring.StartsWith("BET 1 JAN"))
+                return "BET " + datestring.Substring(10);
+            else
+                return datestring;
         }
     }
 }
