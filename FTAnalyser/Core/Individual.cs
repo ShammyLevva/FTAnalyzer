@@ -119,12 +119,13 @@ namespace FTAnalyzer
             }
         }
 
-        public string ForenameSoundex
+        public string ForenameMetaphone
         {
-            get {
-                DoubleMetaphone mp = new DoubleMetaphone(word);
-				
-                return Soundex(Forename); }
+            get 
+            {
+                DoubleMetaphone mp = new DoubleMetaphone(Forename);
+			    return mp.PrimaryKey;
+            }
         }
 
         public string Forenames 
@@ -137,9 +138,13 @@ namespace FTAnalyzer
             get { return surname; }
         }
 
-        public string SurnameSoundex
+        public string SurnameMetaphone
         {
-            get { return Soundex(Surname); }
+            get
+            {
+                DoubleMetaphone mp = new DoubleMetaphone(Surname);
+                return mp.PrimaryKey;
+            }
         }
 
         public string MarriedName

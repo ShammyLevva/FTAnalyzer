@@ -8,15 +8,15 @@
     <ProjectGuid>{799ECA65-6748-4B7C-BBD5-429C19E02161}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FTAnalyser</RootNamespace>
-    <AssemblyName>FTAnalyser</AssemblyName>
+    <RootNamespace>FTAnalyzer</RootNamespace>
+    <AssemblyName>FTAnalyzer</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <StartupObject>FTAnalyser.FTAnalyzer</StartupObject>
+    <StartupObject>FTAnalyzer.FTAnalyzer</StartupObject>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -104,6 +104,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -149,7 +150,6 @@
     <Compile Include="Formatters\DeathOutputFormatter.cs" />
     <Compile Include="Formatters\MarriageOutputFormatter.cs" />
     <Content Include="GedcomOutput.xml" />
-    <Content Include="Utilities\namelist.txt" />
     <Compile Include="HTTPParser\Attribute.cs" />
     <Compile Include="HTTPParser\AttributeList.cs" />
     <Compile Include="HTTPParser\FindLinks.cs" />
@@ -176,9 +176,7 @@
     <Compile Include="GedcomParser\AnselOutputStreamWriter.cs" />
     <Compile Include="GedcomParser\GedcomToXml.cs" />
     <Compile Include="Core\ParentalGroup.cs" />
-    <Compile Include="Utilities\CSWordLookup.cs" />
     <Compile Include="Utilities\DoubleMetaphone.cs" />
-    <Compile Include="Utilities\Main.cs" />
     <Compile Include="Utilities\ShortDoubleMetaphone.cs" />
   </ItemGroup>
   <ItemGroup>
