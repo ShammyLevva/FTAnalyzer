@@ -374,10 +374,10 @@ namespace FTAnalyser
 
         private DateTime getMinDeathDate(Individual indiv)
         {
-            FactDate deathDate = indiv.DeathDate;
+            FactDate deathDate = indiv.DeathDate == null ? new FactDate("UNKNOWN") : indiv.DeathDate;
             DateTime now = DateTime.Now;
-            FactDate.FactDateType type = deathDate == null ? FactDate.FactDateType.UNK : deathDate.Type; 
-            // indiv.BirthDate == null ? FactDate.FactDateType.UNK : indiv.BirthDate.Type;
+            FactDate.FactDateType deathDateType = deathDate == null ? FactDate.FactDateType.UNK : deathDate.Type;
+            FactDate.FactDateType birthDateType = indiv.BirthDate == null ? FactDate.FactDateType.UNK : indiv.BirthDate.Type;
             DateTime minDeath = indiv.BirthDate == null ? FactDate.MAXDATE : indiv.BirthDate.EndDate;
             if (minDeath != FactDate.MAXDATE)
             {
@@ -385,12 +385,12 @@ namespace FTAnalyser
                 if (minDeath > now) // 110 years after birth is after todays date so we set to ignore
                     minDeath = FactDate.MAXDATE;
             }
-            if (type == FactDate.FactDateType.BET)
-                return deathDate.EndDate;
-            if (deathDate == null || minDeath < deathDate.EndDate || minDeath == FactDate.MAXDATE || type == FactDate.FactDateType.ABT)
+            if (minDeath < FactDate.MAXDATE && minDeath.AddYears(1) == deathDate.EndDate)
+                minDeath = minDeath.AddYears(1);
+            if (minDeath <= deathDate.EndDate)
                 return minDeath;
-            if (type == FactDate.FactDateType.BEF)
-                return minDeath.AddYears(1);
+            if (deathDateType == FactDate.FactDateType.BEF && minDeath != FactDate.MAXDATE)
+                return minDeath;
             else
                 return deathDate.EndDate;
         }
