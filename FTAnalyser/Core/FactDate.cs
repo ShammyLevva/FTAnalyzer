@@ -35,12 +35,19 @@ namespace FTAnalyser
         public static readonly FactDate CENSUS1891 = new FactDate("05 APR 1891");
         public static readonly FactDate CENSUS1901 = new FactDate("31 MAR 1901");
  
+        public enum FactDateType
+        {
+            BEF, AFT, BET, ABT, UNK, EXT,
+        }
+
         private string datestring;
         private DateTime startdate;
         private DateTime enddate;
+        private FactDateType type;
 
         public FactDate(string datestring)
         {
+            this.type = FactDateType.UNK;
             if (datestring == null || datestring.Length == 0)
             {
                 this.datestring = "UNKNOWN";
@@ -59,6 +66,7 @@ namespace FTAnalyser
 
         public FactDate(DateTime startdate, DateTime enddate)
         {
+            this.type = FactDateType.UNK;
             this.startdate = startdate;
             this.enddate = enddate;
             this.datestring = calculateDatestring();
@@ -85,30 +93,35 @@ namespace FTAnalyser
         private string calculateDatestring()
         {
             string check;
-            bool between = false;
             StringBuilder output = new StringBuilder();
             if (startdate == MINDATE)
             {
                 if (enddate == MAXDATE)
                     return "UNKNOWN";
                 else
+                {
+                    type = FactDateType.BEF;
                     output.Append("BEF ");
+                }
             }
             else
             {
                 check = Format(CHECKING, startdate);
                 if (enddate == MAXDATE)
+                {
+                    type = FactDateType.AFT;
                     output.Append("AFT ");
+                }
                 else
                 {
+                    type = FactDateType.BET;
                     output.Append("BET ");
-                    between = true;
                 }
                 if (check.Equals("01 JAN"))
                     output.Append(Format(YEAR, startdate));
                 else
                     output.Append(Format(DISPLAY, startdate));
-                if (between)
+                if (type == FactDateType.BET)
                     output.Append(" AND ");
             }
             if (enddate != MAXDATE)
@@ -137,25 +150,30 @@ namespace FTAnalyser
                 string dateValue = processDate.Substring(4);
                 if (processDate.StartsWith("BEF"))
                 {
+                    type = FactDateType.BEF;
                     enddate = parseDate(dateValue, HIGH, -1);
                 }
                 else if (processDate.StartsWith("AFT"))
                 {
+                    type = FactDateType.AFT;
                     startdate = parseDate(dateValue, LOW, +1);
                 }
                 else if (processDate.StartsWith("ABT"))
                 {
+                    type = FactDateType.ABT;
                     startdate = parseDate(dateValue, LOW, -1);
-                    enddate = parseDate(dateValue, HIGH, +1);
+                    enddate = parseDate(dateValue, HIGH, 0);
                 }
                 else if (processDate.StartsWith("BET"))
                 {
+                    type = FactDateType.BET;
                     int andpos = processDate.IndexOf(" AND ");
                     enddate = parseDate(processDate.Substring(andpos + 5), HIGH, 0);
                     startdate = parseDate(processDate.Substring(4, andpos - 4), LOW, 0, enddate.Year);
                 }
                 else
                 {
+                    type = FactDateType.EXT;
                     dateValue = processDate;
                     startdate = parseDate(dateValue, LOW, 0);
                     enddate = parseDate(dateValue, HIGH, 0);
@@ -268,6 +286,11 @@ namespace FTAnalyser
         public string Datestring
         {
             get { return this.datestring; }
+        }
+
+        public FactDateType Type
+        {
+            get { return this.type; }
         }
 
         #endregion

@@ -18,10 +18,7 @@ namespace FTAnalyser
 
         private FamilyTree()
         {
-            sources = new List<FactSource>();
-            individuals = new List<Individual>();
-            families = new List<Family>();
-            locations = new Dictionary<string, Location>();
+            ResetData();
         }
 
         public static FamilyTree Instance {
@@ -58,9 +55,20 @@ namespace FTAnalyser
 
         #endregion
 
+        private void ResetData()
+        {
+            sources = new List<FactSource>();
+            individuals = new List<Individual>();
+            families = new List<Family>();
+            locations = new Dictionary<string, Location>();
+        }
+
         public int LoadTree(XmlDocument doc) { return LoadTree(doc, new ProgressBar(), new ProgressBar(), new ProgressBar()); }
         public int LoadTree(XmlDocument doc, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
         {
+            ResetData();
+            pbS.Value = 0; pbI.Value = 0; pbF.Value = 0;
+            Application.DoEvents();
             // First iterate through attributes of root finding all sources
             XmlNodeList list = doc.SelectNodes("GED/SOUR");
             pbS.Maximum = list.Count;
@@ -290,6 +298,7 @@ namespace FTAnalyser
 		            toAdd = new FactDate(maxLiving, minDeath);
 			    } else if (minDeath < deathDate.EndDate) {
 		            // earliest death date before current latest death
+                    // or they were two BEF dates (flagged by hour == 1)
 		            // so add to the list of loose deaths
 		            toAdd = new FactDate(deathDate.StartDate, minDeath);
 			    }
@@ -336,10 +345,13 @@ namespace FTAnalyser
 			    }
 		    }
 		    if (childDate && indiv.isMale() && maxdate > FactDate.MINDATE) {
-		        // set to Jan 01 of prior year from start date if indiv is a father 
+		        // set to 9 months before birth if indiv is a father 
 		        // and we have changed maxdate from the MINDATE default
 		        // and the date is derived from a child not a marriage
-                maxdate = new DateTime(maxdate.Year - 1, 1, 1);
+                maxdate = maxdate.AddMonths(-9); 
+                // now set to Jan 1 of that year 9 months before birth to prevent 
+                // very exact 9 months before dates
+                maxdate = new DateTime(maxdate.Year, 1, 1); 
 		    }
 		    List<Fact> census = indiv.getFacts(Fact.CENSUS);
 		    foreach(Fact censusFact in census) {
@@ -364,28 +376,21 @@ namespace FTAnalyser
         {
             FactDate deathDate = indiv.DeathDate;
             DateTime now = DateTime.Now;
-            DateTime minDeath = indiv.BirthDate.EndDate;
+            FactDate.FactDateType type = deathDate == null ? FactDate.FactDateType.UNK : deathDate.Type; 
+            // indiv.BirthDate == null ? FactDate.FactDateType.UNK : indiv.BirthDate.Type;
+            DateTime minDeath = indiv.BirthDate == null ? FactDate.MAXDATE : indiv.BirthDate.EndDate;
             if (minDeath != FactDate.MAXDATE)
             {
-                // set tooOld to 31st Dec 110 years after birth.
-                if (minDeath.Month == 12 && minDeath.Day == 31)
-                {
-                    // because a BEF XXXX is already 31/12/XXXX need to add 111 years
-                    minDeath = minDeath.AddYears(111);
-                }
-                else
-                {
-                    minDeath = new DateTime(minDeath.Year + 110, 12, 31);
-                }
-                if (minDeath > now)
-                {
-                    // 110 years after death is after todays date so we set the
-                    // maximum to 31 DEC last year.
-                    minDeath = new DateTime(now.Year, minDeath.Month, minDeath.Day);
-                }
+                minDeath = new DateTime(minDeath.Year + 110, 12, 31);
+                if (minDeath > now) // 110 years after birth is after todays date so we set to ignore
+                    minDeath = FactDate.MAXDATE;
             }
-            if (deathDate == null || minDeath < deathDate.EndDate)
+            if (type == FactDate.FactDateType.BET)
+                return deathDate.EndDate;
+            if (deathDate == null || minDeath < deathDate.EndDate || minDeath == FactDate.MAXDATE || type == FactDate.FactDateType.ABT)
                 return minDeath;
+            if (type == FactDate.FactDateType.BEF)
+                return minDeath.AddYears(1);
             else
                 return deathDate.EndDate;
         }

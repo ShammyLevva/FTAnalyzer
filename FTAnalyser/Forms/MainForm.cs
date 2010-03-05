@@ -17,6 +17,7 @@ namespace FTAnalyser
         public MainForm()
         {
             InitializeComponent();
+            tabTestFactDate.Hide();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -32,6 +33,8 @@ namespace FTAnalyser
                 try
                 {
                     HourGlass(true);
+                    tabControl.SelectTab(tabDisplayProgress);
+                    Application.DoEvents();
                     XmlDocument document = GedcomToXml.Load(openFileDialog1.FileName);
                     document.Save("GedcomOutput.xml");
                     FamilyTree ft = FamilyTree.Instance;
@@ -69,20 +72,17 @@ namespace FTAnalyser
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             FamilyTree ft = FamilyTree.Instance;
-            switch(tabControl.SelectedIndex)
+            if(tabControl.SelectedTab == tabIndividuals)
             {
-                case 1:
                     List<IDisplayIndividual> list = ft.AllDisplayIndividuals;
                     dgIndividuals.DataSource = list;
                     tsCountLabel.Text = "Count : " + list.Count; 
-                    break;
-                case 3:
+            } else if (tabControl.SelectedTab == tabLooseDeaths) {
                     HourGlass(true);
                     List<IDisplayLooseDeath> looseDeathList = ft.GetLooseDeaths();
                     dgLooseDeaths.DataSource = looseDeathList;
                     tsCountLabel.Text = "Count : " + looseDeathList.Count;
                     HourGlass(false);
-                    break;
             }
         }
     }
