@@ -9,7 +9,7 @@
 // 20 May 1998: conversion tables updated with input from John Cowan (cowan@locke.ccil.org)
 
 using System.IO;
-namespace FTAnalyser
+namespace FTAnalyzer
 {
 
     public class AnselInputStreamReader : StreamReader

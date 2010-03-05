@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 
-namespace FTAnalyser
+namespace FTAnalyzer
 {
     public class Individual : IComparable<Individual>, IDisplayIndividual, IDisplayLooseDeath {
     	
@@ -119,6 +119,14 @@ namespace FTAnalyser
             }
         }
 
+        public string ForenameSoundex
+        {
+            get {
+                DoubleMetaphone mp = new DoubleMetaphone(word);
+				
+                return Soundex(Forename); }
+        }
+
         public string Forenames 
         { 
             get { return forenames; } 
@@ -127,6 +135,11 @@ namespace FTAnalyser
         public string Surname
         {
             get { return surname; }
+        }
+
+        public string SurnameSoundex
+        {
+            get { return Soundex(Surname); }
         }
 
         public string MarriedName

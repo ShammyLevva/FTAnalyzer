@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace FTAnalyser
+namespace FTAnalyzer
 {
     static class FTAnalyzer
     {

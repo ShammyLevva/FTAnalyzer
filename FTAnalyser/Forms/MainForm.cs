@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.IO;
 
-namespace FTAnalyser
+namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {

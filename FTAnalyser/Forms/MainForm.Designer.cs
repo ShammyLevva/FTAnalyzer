@@ -1,4 +1,4 @@
-﻿namespace FTAnalyser
+﻿namespace FTAnalyzer
 {
     partial class MainForm
     {

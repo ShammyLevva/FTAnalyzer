@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml;
 using System.Windows.Forms;
 
-namespace FTAnalyser
+namespace FTAnalyzer
 {
     class FamilyTree
     {

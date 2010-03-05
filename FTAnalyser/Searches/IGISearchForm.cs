@@ -6,7 +6,7 @@ using System.Text;
 using System.Net;
 using System.Net.Cache;
 
-namespace FTAnalyser
+namespace FTAnalyzer
 {
     public class IGISearchForm {
 

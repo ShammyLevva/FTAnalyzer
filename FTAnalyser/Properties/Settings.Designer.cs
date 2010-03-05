@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FTAnalyser.Properties
+namespace FTAnalyzer.Properties
 {
 
 

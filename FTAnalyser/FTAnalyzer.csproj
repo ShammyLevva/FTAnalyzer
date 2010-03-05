@@ -149,6 +149,7 @@
     <Compile Include="Formatters\DeathOutputFormatter.cs" />
     <Compile Include="Formatters\MarriageOutputFormatter.cs" />
     <Content Include="GedcomOutput.xml" />
+    <Content Include="Utilities\namelist.txt" />
     <Compile Include="HTTPParser\Attribute.cs" />
     <Compile Include="HTTPParser\AttributeList.cs" />
     <Compile Include="HTTPParser\FindLinks.cs" />
@@ -175,7 +176,10 @@
     <Compile Include="GedcomParser\AnselOutputStreamWriter.cs" />
     <Compile Include="GedcomParser\GedcomToXml.cs" />
     <Compile Include="Core\ParentalGroup.cs" />
-    <Compile Include="Utilities\Utility.cs" />
+    <Compile Include="Utilities\CSWordLookup.cs" />
+    <Compile Include="Utilities\DoubleMetaphone.cs" />
+    <Compile Include="Utilities\Main.cs" />
+    <Compile Include="Utilities\ShortDoubleMetaphone.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

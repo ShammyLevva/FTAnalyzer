@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace FTAnalyser
+namespace FTAnalyzer
 {
     public class FactDate: IComparable<FactDate>
     {

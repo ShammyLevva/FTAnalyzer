@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 
-namespace FTAnalyser
+namespace FTAnalyzer
 {
     public class IGIDocument {
         
