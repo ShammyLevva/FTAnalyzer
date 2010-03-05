@@ -13,7 +13,8 @@ namespace FTAnalyzer
     public partial class MainForm : Form
     {
         private Cursor storedCursor = Cursors.Default;
-
+        private FamilyTree ft = FamilyTree.Instance;
+            
         public MainForm()
         {
             InitializeComponent();
@@ -37,7 +38,6 @@ namespace FTAnalyzer
                     Application.DoEvents();
                     XmlDocument document = GedcomToXml.Load(openFileDialog1.FileName);
                     document.Save("GedcomOutput.xml");
-                    FamilyTree ft = FamilyTree.Instance;
                     ft.LoadTree(document, pbSources, pbIndividuals, pbFamilies);
                     HourGlass(false);
                     MessageBox.Show("Gedcom File Loaded");
@@ -71,7 +71,6 @@ namespace FTAnalyzer
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            FamilyTree ft = FamilyTree.Instance;
             if(tabControl.SelectedTab == tabIndividuals)
             {
                     List<IDisplayIndividual> list = ft.AllDisplayIndividuals;
@@ -84,6 +83,28 @@ namespace FTAnalyzer
                     tsCountLabel.Text = "Count : " + looseDeathList.Count;
                     HourGlass(false);
             }
+        }
+
+        private void dgIndividuals_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            Comparer<IDisplayIndividual> comparer;
+            switch (e.ColumnIndex) 
+            {
+                case 0: // ID
+                    comparer = new DefaultIndividualComparer();
+                    break;
+                case 1: // Forename
+                    comparer = new IndividualNameComparer();
+                    break;
+                default: 
+                    comparer = new DefaultIndividualComparer();
+                    break;
+            }
+
+            List<IDisplayIndividual> list = ft.AllDisplayIndividuals;
+            list.Sort(comparer);
+            dgIndividuals.DataSource = list;
+            tsCountLabel.Text = "Count : " + list.Count; 
         }
     }
 }

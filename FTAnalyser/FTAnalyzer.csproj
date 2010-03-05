@@ -117,13 +117,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comparators\Individual\IndividualNameComparer.cs" />
+    <Compile Include="Comparators\Individual\DefaultIndividualComparer.cs" />
     <Compile Include="Core\Age.cs" />
     <Compile Include="Core\CensusFamily.cs" />
-    <Compile Include="Comparators\CensusAgeComparator.cs" />
-    <Compile Include="Comparators\DateComparator.cs" />
-    <Compile Include="Comparators\LocationComparator.cs" />
-    <Compile Include="Comparators\MultiComparator.cs" />
-    <Compile Include="Comparators\NameComparator.cs" />
+    <Compile Include="Comparators\Registration\CensusAgeComparator.cs" />
+    <Compile Include="Comparators\Registration\DateComparator.cs" />
+    <Compile Include="Comparators\Registration\LocationComparator.cs" />
+    <Compile Include="Comparators\Registration\MultiComparator.cs" />
+    <Compile Include="Comparators\Registration\NameComparator.cs" />
     <Content Include="Useful URLs.txt" />
     <Compile Include="Core\Displays\IDisplayLooseDeath.cs" />
     <Compile Include="Core\Displays\IDisplayIndividual.cs" />
