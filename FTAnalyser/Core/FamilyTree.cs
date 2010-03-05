@@ -273,7 +273,7 @@ namespace FTAnalyser
 
         #endregion
 
-        #region Processes
+        #region Loose Deaths
 
         public List<IDisplayLooseDeath> GetLooseDeaths()
         {
@@ -289,21 +289,24 @@ namespace FTAnalyser
 		{
 		    FactDate deathDate = indiv.DeathDate;
 		    FactDate toAdd = null;
-	        if (deathDate != null && ! deathDate.isExact()) {
-		        DateTime maxLiving = getMaxLivingDate(indiv);
-		        DateTime minDeath = getMinDeathDate(indiv);
-		        if (maxLiving > deathDate.StartDate) {
-		            // the starting death date is before the last alive date
-			        // so add to the list of loose deaths
-		            toAdd = new FactDate(maxLiving, minDeath);
-			    } else if (minDeath < deathDate.EndDate) {
-		            // earliest death date before current latest death
+            if (deathDate != null && !deathDate.isExact())
+            {
+                DateTime maxLiving = getMaxLivingDate(indiv);
+                DateTime minDeath = getMinDeathDate(indiv);
+                if (maxLiving > deathDate.StartDate)
+                {
+                    // the starting death date is before the last alive date
+                    // so add to the list of loose deaths
+                    toAdd = new FactDate(maxLiving, minDeath);
+                }
+                else if (minDeath < deathDate.EndDate)
+                {
+                    // earliest death date before current latest death
                     // or they were two BEF dates (flagged by hour == 1)
-		            // so add to the list of loose deaths
-		            toAdd = new FactDate(deathDate.StartDate, minDeath);
-			    }
-		    }
-		    if (deathDate == null && indiv.CurrentAge.MinAge >= 110) {
+                    // so add to the list of loose deaths
+                    toAdd = new FactDate(deathDate.StartDate, minDeath);
+                }
+            } else if (deathDate == null && indiv.CurrentAge.MinAge >= 110) {
 		        // also check for empty death dates for people aged 110 or over
 		        toAdd = new FactDate(getMaxLivingDate(indiv), getMinDeathDate(indiv));
 		    }
@@ -382,11 +385,11 @@ namespace FTAnalyser
             if (minDeath != FactDate.MAXDATE)
             {
                 minDeath = new DateTime(minDeath.Year + 110, 12, 31);
+                if (birthDateType == FactDate.FactDateType.BEF)
+                    minDeath = minDeath.AddYears(1);
                 if (minDeath > now) // 110 years after birth is after todays date so we set to ignore
                     minDeath = FactDate.MAXDATE;
             }
-            if (minDeath < FactDate.MAXDATE && minDeath.AddYears(1) == deathDate.EndDate)
-                minDeath = minDeath.AddYears(1);
             if (minDeath <= deathDate.EndDate)
                 return minDeath;
             if (deathDateType == FactDate.FactDateType.BEF && minDeath != FactDate.MAXDATE)
@@ -394,6 +397,10 @@ namespace FTAnalyser
             else
                 return deathDate.EndDate;
         }
+
+        #endregion
+
+        #region Relationship Functions
 
         private ParentalGroup CreateFamilyGroup(Individual i)
         {
@@ -490,6 +497,10 @@ namespace FTAnalyser
 		        }
 		    }
         }
+
+        #endregion
+
+        #region Parish Functions
 
         private void SetParishes()
         {

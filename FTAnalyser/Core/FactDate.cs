@@ -357,16 +357,16 @@ namespace FTAnalyser
 
         public int getMaximumYear(FactDate that)
         {
-            Debug.WriteLine("Max: This start date is " + Format(FULL, startdate));
-            Debug.WriteLine("Max: That end date is " + (that == null ? "null" : Format(FULL, enddate)));
+            //Debug.WriteLine("Max: This start date is " + Format(FULL, startdate));
+            //Debug.WriteLine("Max: That end date is " + (that == null ? "null" : Format(FULL, enddate)));
             int diff = ((that == null) ? MAXDATE.Year : that.enddate.Year) - this.startdate.Year;
             return Math.Min(diff, MAXYEARS);
         }
 
         public int getMinimumYear(FactDate that)
         {
-            Debug.WriteLine("Min: This end date is " + Format(FULL, enddate));
-            Debug.WriteLine("Min: That start date is " + (that == null ? "null" : Format(FULL, startdate)));
+            //Debug.WriteLine("Min: This end date is " + Format(FULL, enddate));
+            //Debug.WriteLine("Min: That start date is " + (that == null ? "null" : Format(FULL, startdate)));
             int diff = ((that == null) ? MINDATE.Year : that.startdate.Year) - this.enddate.Year;
             return Math.Max(diff, MINYEARS);
         }
