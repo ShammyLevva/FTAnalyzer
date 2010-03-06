@@ -298,7 +298,9 @@ namespace FTAnalyzer
                     // so add to the list of loose deaths
                     if (minDeath < deathDate.EndDate)
                         toAdd = new FactDate(maxLiving, minDeath);
-                    else if (deathDate.Type == FactDate.FactDateType.BEF && minDeath != FactDate.MAXDATE)
+                    else if (deathDate.Type == FactDate.FactDateType.BEF && minDeath != FactDate.MAXDATE
+                          && deathDate.EndDate != FactDate.MAXDATE 
+                          && deathDate.EndDate.AddYears(1) == minDeath)
                         toAdd = new FactDate(maxLiving, minDeath);
                     else
                         toAdd = new FactDate(maxLiving, deathDate.EndDate);
@@ -406,6 +408,9 @@ namespace FTAnalyzer
                 if (minDeath > now) // 110 years after birth is after todays date so we set to ignore
                     minDeath = FactDate.MAXDATE;
             }
+            FactDate burialDate = indiv.getPreferredFactDate(Fact.BURIAL);
+            if (burialDate.EndDate < minDeath)
+                minDeath = burialDate.EndDate;
             if (minDeath <= deathDate.EndDate)
                 return minDeath;
             if (deathDateType == FactDate.FactDateType.BEF && minDeath != FactDate.MAXDATE)
