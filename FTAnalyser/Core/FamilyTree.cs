@@ -308,7 +308,10 @@ namespace FTAnalyzer
                 }
             } else if (deathDate == null && indiv.CurrentAge.MinAge > 110) {
 		        // also check for empty death dates for people aged over 110
-		        toAdd = new FactDate(getMaxLivingDate(indiv), getMinDeathDate(indiv));
+                DateTime maxLiving = getMaxLivingDate(indiv);
+                DateTime minDeath = getMinDeathDate(indiv);
+                if (minDeath != FactDate.MAXDATE)
+                    toAdd = new FactDate(maxLiving, minDeath);
 		    }
 	        if (toAdd != null && toAdd != deathDate) {
 	            // we have a date to change and its not the same 
