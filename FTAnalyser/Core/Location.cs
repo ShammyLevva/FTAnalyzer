@@ -6,13 +6,13 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class Location : IComparable<Location> {
+    public class FactLocation : IComparable<FactLocation> {
         
 	    public static readonly string SCOTLAND = "Scotland", ENGLAND = "England", CANADA = "Canada", USA = "USA";
 	    public static readonly string ABERDEEN = "Aberdeenshire", AYR = "Ayrshire", KINCARDINE = "Kincardineshire",
 			    LANARK = "Lanarkshire", BANFF = "Banffshire", ANGUS = "Angus", MIDLOTHIAN = "Midlothian", FIFE = "Fife";
     	
-        public const int COUNTRY = 0, REGION = 1, PARISH = 2, ADDRESS = 3, PLACE = 4;
+        public static readonly int COUNTRY = 0, REGION = 1, PARISH = 2, ADDRESS = 3, PLACE = 4;
 
         private string location;
         internal string country;
@@ -23,7 +23,7 @@ namespace FTAnalyzer
         internal string parishID;
         private int level;
         
-        public Location() {
+        public FactLocation() {
             this.location = "";
             this.country = "";
             this.region = "";
@@ -33,7 +33,7 @@ namespace FTAnalyzer
             this.parishID = null;
         }
 
-        public Location(string location) : this() {
+        public FactLocation(string location) : this() {
             if (location != null) {
 	            this.location = location;
 	            // we need to parse the location string from a little injun to a big injun
@@ -139,20 +139,20 @@ namespace FTAnalyzer
         
         public bool Matches (string s, int level) {
             switch (level) {
-        	    case COUNTRY: return this.country.ToUpper().CompareTo(s.ToUpper()) == 0;
-                case REGION:  return this.region.ToUpper().CompareTo(s.ToUpper()) == 0;
-                case PARISH:  return this.parish.ToUpper().CompareTo(s.ToUpper()) == 0;
-                case ADDRESS: return this.address.ToUpper().CompareTo(s.ToUpper()) == 0;
-                case PLACE:   return this.place.ToUpper().CompareTo(s.ToUpper()) == 0;
+        	    /* COUNTRY */ case 0: return this.country.ToUpper().CompareTo(s.ToUpper()) == 0;
+                /* REGION */  case 1: return this.region.ToUpper().CompareTo(s.ToUpper()) == 0;
+                /* PARISH */  case 2: return this.parish.ToUpper().CompareTo(s.ToUpper()) == 0;
+                /* ADDRESS */ case 3: return this.address.ToUpper().CompareTo(s.ToUpper()) == 0;
+                /* PLACE */   case 4: return this.place.ToUpper().CompareTo(s.ToUpper()) == 0;
         	    default:      return false;
             }
         }
         
-        public int CompareTo (Location that) {
+        public int CompareTo (FactLocation that) {
             return CompareTo (that, PLACE);
         }
         
-        public virtual int CompareTo (Location that, int level) {
+        public virtual int CompareTo (FactLocation that, int level) {
             int res = this.country.CompareTo(that.country);
             if (res == 0 && level > COUNTRY) {
                 res = this.region.CompareTo(that.region);
@@ -174,8 +174,8 @@ namespace FTAnalyzer
         }
         
         public override bool Equals(Object that) {
-    	    if(that is Location) {
-    		    return this.CompareTo((Location) that) == 0 ? true : false;
+    	    if(that is FactLocation) {
+    		    return this.CompareTo((FactLocation) that) == 0 ? true : false;
     	    } else {
     		    return false;
     	    }

@@ -68,13 +68,13 @@ namespace FTAnalyzer
             get { return (parentsMarriage == null) ? "" : parentsMarriage.Place; }
         }
         
-        public Location BestLocation {
+        public FactLocation BestLocation {
             get
             {
-                Location i = individual.BestLocation;
+                FactLocation i = individual.BestLocation;
                 if (parentsMarriage == null)
                     return i;
-                Location f = new Location(parentsMarriage.Place);
+                FactLocation f = new FactLocation(parentsMarriage.Place);
                 if (f.Level > i.Level)
                     return f;
                 else

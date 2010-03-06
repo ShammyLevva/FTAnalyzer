@@ -32,6 +32,15 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.censusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu1841Census = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu1851Census = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu1861Census = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu1871Census = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu1881Census = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu1891Census = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu1901Census = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu1911Census = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
@@ -73,7 +82,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.censusToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1009, 24);
@@ -85,15 +95,79 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // censusToolStripMenuItem
+            // 
+            this.censusToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu1841Census,
+            this.mnu1851Census,
+            this.mnu1861Census,
+            this.mnu1871Census,
+            this.mnu1881Census,
+            this.mnu1891Census,
+            this.mnu1901Census,
+            this.mnu1911Census});
+            this.censusToolStripMenuItem.Name = "censusToolStripMenuItem";
+            this.censusToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.censusToolStripMenuItem.Text = "Census";
+            // 
+            // mnu1841Census
+            // 
+            this.mnu1841Census.Name = "mnu1841Census";
+            this.mnu1841Census.Size = new System.Drawing.Size(152, 22);
+            this.mnu1841Census.Text = "1841";
+            // 
+            // mnu1851Census
+            // 
+            this.mnu1851Census.Name = "mnu1851Census";
+            this.mnu1851Census.Size = new System.Drawing.Size(152, 22);
+            this.mnu1851Census.Text = "1851";
+            // 
+            // mnu1861Census
+            // 
+            this.mnu1861Census.Name = "mnu1861Census";
+            this.mnu1861Census.Size = new System.Drawing.Size(152, 22);
+            this.mnu1861Census.Text = "1861";
+            // 
+            // mnu1871Census
+            // 
+            this.mnu1871Census.Name = "mnu1871Census";
+            this.mnu1871Census.Size = new System.Drawing.Size(152, 22);
+            this.mnu1871Census.Text = "1871";
+            // 
+            // mnu1881Census
+            // 
+            this.mnu1881Census.Name = "mnu1881Census";
+            this.mnu1881Census.Size = new System.Drawing.Size(152, 22);
+            this.mnu1881Census.Text = "1881";
+            // 
+            // mnu1891Census
+            // 
+            this.mnu1891Census.Name = "mnu1891Census";
+            this.mnu1891Census.Size = new System.Drawing.Size(152, 22);
+            this.mnu1891Census.Text = "1891";
+            // 
+            // mnu1901Census
+            // 
+            this.mnu1901Census.Name = "mnu1901Census";
+            this.mnu1901Census.Size = new System.Drawing.Size(152, 22);
+            this.mnu1901Census.Text = "1901";
+            // 
+            // mnu1911Census
+            // 
+            this.mnu1911Census.Name = "mnu1911Census";
+            this.mnu1911Census.Size = new System.Drawing.Size(152, 22);
+            this.mnu1911Census.Text = "1911";
+            this.mnu1911Census.Click += new System.EventHandler(this.mnu1911Census_Click);
             // 
             // tabControl
             // 
@@ -314,7 +388,7 @@
             // tsCountLabel
             // 
             this.tsCountLabel.Name = "tsCountLabel";
-            this.tsCountLabel.Size = new System.Drawing.Size(55, 17);
+            this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
             // MainForm
@@ -375,6 +449,15 @@
         private System.Windows.Forms.ToolStripStatusLabel tsCount;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel tsCountLabel;
+        private System.Windows.Forms.ToolStripMenuItem censusToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnu1841Census;
+        private System.Windows.Forms.ToolStripMenuItem mnu1851Census;
+        private System.Windows.Forms.ToolStripMenuItem mnu1861Census;
+        private System.Windows.Forms.ToolStripMenuItem mnu1871Census;
+        private System.Windows.Forms.ToolStripMenuItem mnu1881Census;
+        private System.Windows.Forms.ToolStripMenuItem mnu1891Census;
+        private System.Windows.Forms.ToolStripMenuItem mnu1901Census;
+        private System.Windows.Forms.ToolStripMenuItem mnu1911Census;
     }
 }
 

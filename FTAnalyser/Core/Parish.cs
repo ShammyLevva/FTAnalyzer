@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class Parish : Location {
+    public class Parish : FactLocation {
         
         public Parish() {
             this.address = "";
@@ -20,7 +20,7 @@ namespace FTAnalyzer
             this.parishID = null;
         }
 
-        public override int CompareTo (Location that, int level) {
+        public override int CompareTo (FactLocation that, int level) {
             int res = this.country.CompareTo(that.country);
             if (res == 0 && level > COUNTRY) {
                 res = this.region.CompareTo(that.region);

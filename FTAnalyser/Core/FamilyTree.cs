@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Windows.Forms;
+using System.IO;
 
 namespace FTAnalyzer
 {
@@ -14,7 +15,7 @@ namespace FTAnalyzer
         private List<FactSource> sources;
         private List<Individual> individuals;
         private List<Family> families;
-        private Dictionary<string, Location> locations;
+        private Dictionary<string, FactLocation> locations;
 
         private FamilyTree()
         {
@@ -60,7 +61,7 @@ namespace FTAnalyzer
             sources = new List<FactSource>();
             individuals = new List<Individual>();
             families = new List<Family>();
-            locations = new Dictionary<string, Location>();
+            locations = new Dictionary<string, FactLocation>();
         }
 
         public int LoadTree(XmlDocument doc) { return LoadTree(doc, new ProgressBar(), new ProgressBar(), new ProgressBar()); }
@@ -253,18 +254,18 @@ namespace FTAnalyzer
             get { return individuals; }
         }
 
-        public List<Location> AllLocations
+        public List<FactLocation> AllLocations
         {
             get { return locations.Values.ToList(); }
         }
 
-        public Location GetLocation(string place)
+        public FactLocation GetLocation(string place)
         {
-            Location loc;
+            FactLocation loc;
             locations.TryGetValue(place, out loc);
             if (loc == null)
             {
-                loc = new Location(place);
+                loc = new FactLocation(place);
                 locations.Add(place, loc);
             }
             return loc; // should return object that is in list of locations 
@@ -527,7 +528,7 @@ namespace FTAnalyzer
 
         private void SetParishes()
         {
-            foreach (Location loc in locations.Values)
+            foreach (FactLocation loc in locations.Values)
             {
                 // do something with parishes
                 
@@ -536,7 +537,35 @@ namespace FTAnalyzer
 
         #endregion
 
-        #region Get Registrations
+        #region Registrations
+
+        public void processRegistration(String filename, RegistrationsProcessor rp, 
+            						    List<Registration> sourceRegs, BaseOutputFormatter formatter) 
+    	{
+            TextWriter output = new StreamWriter(filename + ".csv");
+            formatter.printHeader(output);
+            List<Registration> regs = rp.processRegistrations(sourceRegs);
+            foreach (Registration r in regs) {
+                formatter.printItem(r, output);
+            }
+            Console.WriteLine("written " + regs.Count + " records to " + filename);
+            output.Close();
+        }
+
+        private void OpenWordDocument(object filename)
+        {
+            Microsoft.Office.Interop.Word.ApplicationClass WordApp = new Microsoft.Office.Interop.Word.ApplicationClass();
+            object readOnly = false;
+            object isVisible = true;
+            // Here is the way to handle parameters you don't care about in .NET
+            object missing = System.Reflection.Missing.Value;
+            // Make word visible, so you can see what's happening
+            WordApp.Visible = true;
+            // Open the document that was chosen by the dialog
+            Microsoft.Office.Interop.Word.Document aDoc = 
+                WordApp.Documents.Open2000(ref filename, ref missing, ref readOnly, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref isVisible);
+            aDoc.Activate();
+        }
 
         public List<Registration> getAllBirthRegistrations()
         {

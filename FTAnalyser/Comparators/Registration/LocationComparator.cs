@@ -11,7 +11,7 @@ namespace FTAnalyzer
         private int level;
         
         public LocationComparator() {
-            level = Location.PLACE;
+            level = FactLocation.PLACE;
         }
         
         public LocationComparator(int level) {
@@ -19,8 +19,8 @@ namespace FTAnalyzer
         }
         
         public int Compare (Registration r1, Registration r2) {
-            Location l1 = new Location(r1.RegistrationLocation);
-            Location l2 = new Location(r2.RegistrationLocation);
+            FactLocation l1 = new FactLocation(r1.RegistrationLocation);
+            FactLocation l2 = new FactLocation(r2.RegistrationLocation);
             return l1.CompareTo(l2, level);
         }
     }

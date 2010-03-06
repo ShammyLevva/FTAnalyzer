@@ -16,10 +16,10 @@ namespace FTAnalyzer
             MultiComparator<Registration> byLocation = new MultiComparator<Registration>();
             MultiComparator<Registration> byCensusLocation = new MultiComparator<Registration>();
             MultiComparator<Registration> byName = new MultiComparator<Registration>();
-            byLocation.addComparator(new LocationComparator(Location.PARISH));
+            byLocation.addComparator(new LocationComparator(FactLocation.PARISH));
             byLocation.addComparator(new DateComparator());
             byLocation.addComparator(new NameComparator());
-            byCensusLocation.addComparator(new LocationComparator(Location.PARISH));
+            byCensusLocation.addComparator(new LocationComparator(FactLocation.PARISH));
             byCensusLocation.addComparator(new DateComparator());
             byName.addComparator(new NameComparator());
             byName.addComparator(new DateComparator());
@@ -27,7 +27,7 @@ namespace FTAnalyzer
             RegistrationFilter missingData = IncompleteDataFilter.MISSING_DATA_FILTER;
             // partial filter has data but only up to parish level ie: no address
             
-            RegistrationFilter partialData = new IncompleteDataFilter(Location.PARISH);
+            RegistrationFilter partialData = new IncompleteDataFilter(FactLocation.PARISH);
             
             RegistrationFilter directOrBlood = new OrFilter(
                     new RelationFilter(Individual.DIRECT), 

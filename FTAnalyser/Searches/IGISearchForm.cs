@@ -71,19 +71,19 @@ namespace FTAnalyzer
             parameters.Add(PARISH, "");
             parameters.Add("date_range_index", "0");
             parameters.Add("regionfriendly", "British Isles");
-            parameters.Add("juris1friendly", Location.SCOTLAND);
+            parameters.Add("juris1friendly", FactLocation.SCOTLAND);
             parameters.Add("juris2friendly", "All Counties");
             parameters.Add("LDS", "1");
             parameters.Add("batch_set", "");
         }
         
         private void setCountry(string country) {
-    	    if (country == Location.ENGLAND) {
+    	    if (country == FactLocation.ENGLAND) {
 	            parameters.Add(SHIRE, "Engl");
-	            parameters.Add("juris1friendly", Location.ENGLAND);
+	            parameters.Add("juris1friendly", FactLocation.ENGLAND);
     	    } else {
 	            parameters.Add(SHIRE, "Scot");
-	            parameters.Add("juris1friendly", Location.SCOTLAND);
+	            parameters.Add("juris1friendly", FactLocation.SCOTLAND);
     	    }
         }
         
@@ -444,7 +444,7 @@ namespace FTAnalyzer
                             setParameter(FATHERS_FIRST_NAME, husband.Forename);
                             setParameter(FATHERS_LAST_NAME, husband.Surname);
                             setParameter(MOTHERS_FIRST_NAME, wife.Forename);
-                            if(! marriage.Country.Equals(Location.ENGLAND))
+                            if(! marriage.Country.Equals(FactLocation.ENGLAND))
                     	        setParameter(MOTHERS_LAST_NAME, wife.Surname);
                             try {
                                 writeSlurpResult(filename);

@@ -12,10 +12,10 @@ namespace FTAnalyzer
         private int level;
         
         public static readonly LocationFilter SCOTLAND_FILTER =
-        	    new LocationFilter("Scotland", Location.COUNTRY);
+        	    new LocationFilter("Scotland", FactLocation.COUNTRY);
         
         public static readonly LocationFilter ENGLAND_FILTER =
-    	    new LocationFilter("England", Location.COUNTRY);
+    	    new LocationFilter("England", FactLocation.COUNTRY);
 
         public LocationFilter (string searchstring, int level) {
             this.searchstring = searchstring.ToLower();
@@ -27,14 +27,14 @@ namespace FTAnalyzer
             // contain the search string, then we stop. Otherwise if
             // the registration location is blank, we search all
             // of the facts about this registration.
-            Location l = new Location(r.RegistrationLocation);
+            FactLocation l = new FactLocation(r.RegistrationLocation);
             if (!l.isBlank()) {
                 return l.Matches(searchstring, level);
             }
             
             bool allLocationsBlank = true;
             foreach (Fact f in r.AllFacts) {
-                l = new Location(f.Place);
+                l = new FactLocation(f.Place);
                 if (l.Matches(searchstring, level))
                     return true;
                 if (! l.isBlank())

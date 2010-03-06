@@ -21,7 +21,7 @@ namespace FTAnalyzer
         FactDate DeathDate { get; }
         string DeathLocation { get; }
         string Occupation { get; }
-        Location BestLocation { get; }
+        FactLocation BestLocation { get; }
         Age CurrentAge { get; }
     }
 }

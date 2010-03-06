@@ -107,5 +107,17 @@ namespace FTAnalyzer
             dgIndividuals.DataSource = list;
             tsCountLabel.Text = "Count : " + list.Count; 
         }
+
+        private void mnu1911Census_Click(object sender, EventArgs e)
+        {
+            MultiComparator<Registration> byCensusLocation = new MultiComparator<Registration>();
+            byCensusLocation.addComparator(new LocationComparator(FactLocation.PARISH));
+            byCensusLocation.addComparator(new DateComparator());
+            List<Registration> census = ft.getAllCensusRegistrations(FactDate.CENSUS1911);
+            CensusOutputFormatter censusFormatter = new CensusOutputFormatter(); 
+            RegistrationsProcessor censusRP = new RegistrationsProcessor(new AllFilter(), byCensusLocation);
+            ft.processRegistration("1911_census", censusRP, census, censusFormatter);
+            Console.WriteLine("1911 Census Details written.");
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace FTAnalyzer
         private FactDate date;
         private string comment;
         private string place;
-        private Location location;
+        private FactLocation location;
         private List<FactSource> sources;
         private bool certificatePresent;
 
@@ -108,7 +108,7 @@ namespace FTAnalyzer
 
         #region Properties
 
-        public Location Location {
+        public FactLocation Location {
             get { return location; }
         }
 

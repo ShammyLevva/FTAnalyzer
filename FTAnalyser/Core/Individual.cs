@@ -214,15 +214,15 @@ namespace FTAnalyzer
             set { this.status = value; }
         }
 
-        public Location BestLocation
+        public FactLocation BestLocation
         {
             get
             {
                 int bestLevel = -1;
-                Location result = new Location();
+                FactLocation result = new FactLocation();
                 foreach (Fact f in facts)
                 {
-                    Location l = new Location(f.Place);
+                    FactLocation l = new FactLocation(f.Place);
                     if (l.Level > bestLevel)
                     {
                         result = l;
@@ -366,10 +366,10 @@ namespace FTAnalyzer
 
         #endregion
 
-        public Location getLocation(FactDate when)
+        public FactLocation getLocation(FactDate when)
         {
             // TODO: ideally this returns a Location a person was at for a given period
-            return new Location();
+            return new FactLocation();
         }
 
         public int CompareTo(Individual that)

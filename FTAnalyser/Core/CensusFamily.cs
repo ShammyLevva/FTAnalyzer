@@ -9,13 +9,13 @@ namespace FTAnalyzer
     public class CensusFamily : Family {
 
         private FactDate censusDate;
-        private Location bestLocation;
+        private FactLocation bestLocation;
 
         public bool process(FactDate censusDate) {
             bool result = false;
             this.censusDate = censusDate;
             if(isValidFamily()) {
-	            this.bestLocation = updateBestLocation(new Location(), wife);
+	            this.bestLocation = updateBestLocation(new FactLocation(), wife);
 	            if (isValidIndividual(wife)) {
 			        result = true;
 			        wife.Status = Individual.WIFE;
@@ -53,20 +53,20 @@ namespace FTAnalyzer
 		    return result;
         }
         
-        private Location updateBestLocation(Location bestLocation, Individual ind) {
+        private FactLocation updateBestLocation(FactLocation bestLocation, Individual ind) {
             if (ind != null) {
-		        Location location = ind.BestLocation;
-		        if (location.Level >= Location.PARISH ||
+		        FactLocation location = ind.BestLocation;
+		        if (location.Level >= FactLocation.PARISH ||
 		            location.Level >= bestLocation.Level) 
 		        	    return location;
             }
             return bestLocation;
         }
         
-        private Location updateBestLocation(Location bestLocation, Fact fact) {
+        private FactLocation updateBestLocation(FactLocation bestLocation, Fact fact) {
             if (fact != null) {
-		        Location location = new Location(fact.Place);
-		        if (location.Level >= Location.PARISH ||
+		        FactLocation location = new FactLocation(fact.Place);
+		        if (location.Level >= FactLocation.PARISH ||
 			        location.Level >= bestLocation.Level) 
 		        	    return location;
             }
@@ -107,7 +107,7 @@ namespace FTAnalyzer
     	    return true;
         }
         
-        public Location BestLocation {
+        public FactLocation BestLocation {
             get { return bestLocation; }
         }
         
