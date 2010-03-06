@@ -35,6 +35,7 @@ namespace FTAnalyzer
                 {
                     HourGlass(true);
                     tabControl.SelectTab(tabDisplayProgress);
+                    pbSources.Value = pbIndividuals.Value = pbFamilies.Value = 0;
                     Application.DoEvents();
                     XmlDocument document = GedcomToXml.Load(openFileDialog1.FileName);
                     document.Save("GedcomOutput.xml");

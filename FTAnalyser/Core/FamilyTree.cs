@@ -67,7 +67,6 @@ namespace FTAnalyzer
         public int LoadTree(XmlDocument doc, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
         {
             ResetData();
-            pbS.Value = 0; pbI.Value = 0; pbF.Value = 0;
             Application.DoEvents();
             // First iterate through attributes of root finding all sources
             XmlNodeList list = doc.SelectNodes("GED/SOUR");
