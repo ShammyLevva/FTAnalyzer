@@ -306,8 +306,8 @@ namespace FTAnalyzer
                     // so add to the list of loose deaths
                     toAdd = new FactDate(deathDate.StartDate, minDeath);
                 }
-            } else if (deathDate == null && indiv.CurrentAge.MinAge >= 110) {
-		        // also check for empty death dates for people aged 110 or over
+            } else if (deathDate == null && indiv.CurrentAge.MinAge > 110) {
+		        // also check for empty death dates for people aged over 110
 		        toAdd = new FactDate(getMaxLivingDate(indiv), getMinDeathDate(indiv));
 		    }
 	        if (toAdd != null && toAdd != deathDate) {
@@ -468,7 +468,8 @@ namespace FTAnalyzer
 		            // are blood relations
     		        family.setChildRelation(queue, Individual.BLOOD);
     		    }
-		    }
+                Application.DoEvents();
+            }
 		    // we have now set all direct ancestors and all blood relations
 		    // all that remains is to loop through the marriage relations
             List<Individual> marriedDBs = getAllRelationsOfType(Individual.MARRIAGEDB);
@@ -495,6 +496,7 @@ namespace FTAnalyzer
 	    		        family.setChildRelation(queue, Individual.MARRIAGE);
 	    		    }
 		        }
+                Application.DoEvents();
 		    }
         }
 
