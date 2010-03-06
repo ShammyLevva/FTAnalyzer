@@ -637,7 +637,7 @@ namespace FTAnalyzer
             {
                 foreach (Family f in families)
                 {
-                    CensusFamily cf = (CensusFamily) f;
+                    CensusFamily cf = new CensusFamily(f, censusDate); 
                     if (cf.process(censusDate))
                         result.Add(new CensusRegistration(null, censusDate, cf));
                 }

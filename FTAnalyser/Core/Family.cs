@@ -63,6 +63,20 @@ namespace FTAnalyzer
             }
         }
 
+        internal Family(Family f)
+        {
+            this.familyID = f.familyID;
+            this.familyGed = f.familyGed;
+            this.husbandID = f.husbandID;
+            this.husbandGed = f.husbandGed;
+            this.wifeID = f.wifeID;
+            this.wifeGed = f.wifeGed;
+            this.facts = new List<Fact>(f.facts);
+            this.husband = f.husband;
+            this.wife = f.wife;
+            this.children = new List<Individual>(f.children);
+        }
+
         private void addFacts(XmlNode node, string factType)
         {
             XmlNodeList list = node.SelectNodes(factType);

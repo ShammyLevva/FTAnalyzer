@@ -110,13 +110,18 @@ namespace FTAnalyzer
 
         private void mnu1911Census_Click(object sender, EventArgs e)
         {
+            RegistrationFilter directOrBlood = new OrFilter(
+                new OrFilter(new RelationFilter(Individual.DIRECT),
+                             new RelationFilter(Individual.BLOOD)),
+                new RelationFilter(Individual.MARRIAGEDB)); 
             MultiComparator<Registration> byCensusLocation = new MultiComparator<Registration>();
             byCensusLocation.addComparator(new LocationComparator(FactLocation.PARISH));
             byCensusLocation.addComparator(new DateComparator());
+            CensusOutputFormatter censusFormatter = new CensusOutputFormatter();
+            RegistrationsProcessor censusRP = new RegistrationsProcessor(
+                new AndFilter(directOrBlood, LocationFilter.ENGLAND_FILTER), byCensusLocation);
             List<Registration> census = ft.getAllCensusRegistrations(FactDate.CENSUS1911);
-            CensusOutputFormatter censusFormatter = new CensusOutputFormatter(); 
-            RegistrationsProcessor censusRP = new RegistrationsProcessor(new AllFilter(), byCensusLocation);
-            ft.processRegistration("1911_census", censusRP, census, censusFormatter);
+            ft.processRegistration("c:/temp/GROS/1911_census", censusRP, census, censusFormatter);
             Console.WriteLine("1911 Census Details written.");
         }
     }

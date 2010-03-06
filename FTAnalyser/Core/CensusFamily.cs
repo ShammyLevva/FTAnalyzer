@@ -11,6 +11,13 @@ namespace FTAnalyzer
         private FactDate censusDate;
         private FactLocation bestLocation;
 
+        public CensusFamily(Family f, FactDate censusDate) 
+            : base(f)
+        {
+            this.censusDate = censusDate;
+            this.bestLocation = null;
+        }
+
         public bool process(FactDate censusDate) {
             bool result = false;
             this.censusDate = censusDate;

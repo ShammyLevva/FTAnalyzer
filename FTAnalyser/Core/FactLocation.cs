@@ -12,7 +12,7 @@ namespace FTAnalyzer
 	    public static readonly string ABERDEEN = "Aberdeenshire", AYR = "Ayrshire", KINCARDINE = "Kincardineshire",
 			    LANARK = "Lanarkshire", BANFF = "Banffshire", ANGUS = "Angus", MIDLOTHIAN = "Midlothian", FIFE = "Fife";
     	
-        public static readonly int COUNTRY = 0, REGION = 1, PARISH = 2, ADDRESS = 3, PLACE = 4;
+        public const int COUNTRY = 0, REGION = 1, PARISH = 2, ADDRESS = 3, PLACE = 4;
 
         private string location;
         internal string country;
