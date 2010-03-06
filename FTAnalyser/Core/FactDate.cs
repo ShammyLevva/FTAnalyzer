@@ -161,7 +161,16 @@ namespace FTAnalyzer
                 else if (processDate.StartsWith("ABT"))
                 {
                     type = FactDateType.ABT;
-                    startdate = parseDate(dateValue, LOW, -1);
+                    if (processDate.StartsWith("ABT MAR") || processDate.StartsWith("ABT JUN")
+                         || processDate.StartsWith("ABT SEP") || processDate.StartsWith("ABT DEC"))
+                    {
+                        // quarter dates
+                        startdate = parseDate(dateValue, LOW, -3);
+                    }
+                    else
+                    {
+                        startdate = parseDate(dateValue, LOW, -1);
+                    }
                     enddate = parseDate(dateValue, HIGH, 0);
                 }
                 else if (processDate.StartsWith("BET"))
@@ -220,13 +229,11 @@ namespace FTAnalyzer
                 {
                     date = DateTime.ParseExact(dateValue, MONTHYEAR, culture); 
                     dt = new DateTime(date.Year, date.Month, 1);
-                    dt.AddMonths(adjustment);
+                    dt = dt.AddMonths(adjustment + 1);
                     if (highlow == HIGH)
                     {
-                        // at 1st of month so add 1 month to first of next month
-                        dt.AddMonths(1);
-                        // then subtract 1 day to be last day of correct month.
-                        dt.AddDays(-1);
+                        // at 1st of month so subtract 1 day to be last day of correct month.
+                        dt = dt.AddDays(-1);
                     }
                 }
                 else if (day.Length == 0 && year.Length == 0)
@@ -236,9 +243,9 @@ namespace FTAnalyzer
                     if (highlow == HIGH)
                     {
                         // at 1st of month so add 1 month to first of next month
-                        dt.AddMonths(1);
+                        dt = dt.AddMonths(1);
                         // then subtract 1 day to be last day of correct month.
-                        dt.AddDays(-1);
+                        dt = dt.AddDays(-1);
                     }
                 }
                 else if (year.Length == 0)
@@ -255,7 +262,7 @@ namespace FTAnalyzer
                     {
                         // don't bother adding 1 day if date is 
                         // BEF or AFT an exact date
-                        dt.AddDays(adjustment);
+                        dt = dt.AddDays(adjustment);
                     }
                 }
                 else
