@@ -298,6 +298,8 @@ namespace FTAnalyzer
                     // so add to the list of loose deaths
                     if (minDeath < deathDate.EndDate)
                         toAdd = new FactDate(maxLiving, minDeath);
+                    else if (deathDate.Type == FactDate.FactDateType.BEF && minDeath != FactDate.MAXDATE)
+                        toAdd = new FactDate(maxLiving, minDeath);
                     else
                         toAdd = new FactDate(maxLiving, deathDate.EndDate);
                 }
