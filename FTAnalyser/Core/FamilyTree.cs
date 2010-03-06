@@ -361,24 +361,33 @@ namespace FTAnalyzer
                 // very exact 9 months before dates
                 maxdate = new DateTime(maxdate.Year, 1, 1); 
 		    }
-		    List<Fact> census = indiv.getFacts(Fact.CENSUS);
-		    foreach(Fact censusFact in census) {
-		        DateTime censusDate = censusFact.FactDate.StartDate;
-		        if (censusDate > maxdate) {
-		            maxdate = censusDate;
-		        }
-		    }
-		    List<Fact> witness = indiv.getFacts(Fact.WITNESS);
-		    foreach(Fact witnessFact in witness) {
-		        DateTime witnessDate = witnessFact.FactDate.StartDate;
-		        if (witnessDate > maxdate) {
-		            maxdate = witnessDate;
-		        }
-		    }
+            maxdate = getMaxDate(maxdate, getMaxFactDate(indiv, Fact.CENSUS));
+            maxdate = getMaxDate(maxdate, getMaxFactDate(indiv, Fact.RESIDENCE));
+            maxdate = getMaxDate(maxdate, getMaxFactDate(indiv, Fact.WITNESS));
 		    // at this point we have the maximum point a person was alive
 		    // based on their oldest child and last census record and marriage date
 		    return maxdate;
 	    }
+
+        private DateTime getMaxDate(DateTime d1, DateTime d2)
+        {
+            return d1 > d2 ? d1 : d2;
+        }
+
+        private DateTime getMaxFactDate(Individual indiv, string factType)
+        {
+            DateTime maxdate = FactDate.MINDATE;
+            List<Fact> facts = indiv.getFacts(factType);
+            foreach (Fact f in facts)
+            {
+                DateTime d = f.FactDate.StartDate;
+                if (d > maxdate)
+                {
+                    maxdate = d;
+                }
+            }
+            return maxdate;
+        }
 
         private DateTime getMinDeathDate(Individual indiv)
         {
