@@ -297,7 +297,10 @@ namespace FTAnalyzer
                 {
                     // the starting death date is before the last alive date
                     // so add to the list of loose deaths
-                    toAdd = new FactDate(maxLiving, minDeath);
+                    if (minDeath < deathDate.EndDate)
+                        toAdd = new FactDate(maxLiving, minDeath);
+                    else
+                        toAdd = new FactDate(maxLiving, deathDate.EndDate);
                 }
                 else if (minDeath < deathDate.EndDate)
                 {
