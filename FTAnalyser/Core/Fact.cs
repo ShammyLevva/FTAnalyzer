@@ -16,7 +16,7 @@ namespace FTAnalyzer
                 EMIGRATION = "EMIG", IMMIGRATION = "IMMI", CUSTOM_FACT = "EVEN",
                 CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSE", IGISEARCH = "*IGI",
-                CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT";
+                CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT", CHANGE = "*CHNG";
 
         private string factType;
         private FactDate date;
@@ -41,6 +41,7 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("Unknown-Begin", UNKNOWN);
             CUSTOM_TAGS.Add("Arrival", ARRIVAL);
             CUSTOM_TAGS.Add("Departure", DEPARTURE);
+            CUSTOM_TAGS.Add("Record Change", CHANGE);
             
             COMMENT_FACTS.Add(OCCUPATION);
             COMMENT_FACTS.Add(RELIGION);
