@@ -552,6 +552,7 @@ namespace FTAnalyzer
             output.Close();
         }
 
+        /*
         private void OpenWordDocument(object filename)
         {
             Microsoft.Office.Interop.Word.ApplicationClass WordApp = new Microsoft.Office.Interop.Word.ApplicationClass();
@@ -566,6 +567,7 @@ namespace FTAnalyzer
                 WordApp.Documents.Open2000(ref filename, ref missing, ref readOnly, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref isVisible);
             aDoc.Activate();
         }
+        */
 
         public List<Registration> getAllBirthRegistrations()
         {
