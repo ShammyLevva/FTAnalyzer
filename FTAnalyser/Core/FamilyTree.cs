@@ -401,6 +401,8 @@ namespace FTAnalyzer
             FactDate.FactDateType deathDateType = deathDate == null ? FactDate.FactDateType.UNK : deathDate.Type;
             FactDate.FactDateType birthDateType = indiv.BirthDate == null ? FactDate.FactDateType.UNK : indiv.BirthDate.Type;
             DateTime minDeath = indiv.BirthDate == null ? FactDate.MAXDATE : indiv.BirthDate.EndDate;
+            if (minDeath.Year == 1) // filter out births where no year specified
+                minDeath = FactDate.MAXDATE;
             if (minDeath != FactDate.MAXDATE)
             {
                 minDeath = new DateTime(minDeath.Year + 110, 12, 31);
