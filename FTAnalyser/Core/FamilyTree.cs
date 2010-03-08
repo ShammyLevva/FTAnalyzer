@@ -56,6 +56,7 @@ namespace FTAnalyzer
 
         #endregion
 
+        #region Load Gedcom XML
         private void ResetData()
         {
             sources = new List<FactSource>();
@@ -108,6 +109,7 @@ namespace FTAnalyzer
 	        SetParishes();
             return RelationCount;
         }
+        #endregion
 
         #region Properties and Property Functions
 
@@ -230,6 +232,19 @@ namespace FTAnalyzer
             foreach (Individual ind in individuals)
                 if (ind.RelationType == relationType)
                     result.Add(ind);
+            return result;
+        }
+
+        public List<Individual> getUncertifiedFacts(string factType, int relationType)
+        {
+            List<Individual> result = new List<Individual>();
+            foreach (Individual ind in individuals)
+                if (ind.RelationType == relationType)
+                {
+                    Fact f = ind.getPreferredFact(factType);
+                    if (f != null && !f.isCertificatePresent())
+                        result.Add(ind);
+                }
             return result;
         }
 

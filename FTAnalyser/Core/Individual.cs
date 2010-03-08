@@ -27,20 +27,34 @@ namespace FTAnalyzer
 	    public Individual (XmlNode node) {
 		    gedcomID = node.Attributes["ID"].Value;
             individualID = gedcomID;
-            Name = FamilyTree.GetText(node, "NAME");
+            Name =   FamilyTree.GetText(node, "NAME");
 		    Gender = FamilyTree.GetText(node, "SEX");
-            alias = FamilyTree.GetText(node, "ALIA");
+            alias =  FamilyTree.GetText(node, "ALIA");
 		    relationType = UNKNOWN;
 		    status = UNKNOWNSTATUS;
 		    facts = new List<Fact>();
-		    addFacts(node,Fact.BIRTH);
-		    addFacts(node,Fact.CHRISTENING);
-		    addFacts(node,Fact.DEATH);
-		    addFacts(node,Fact.BURIAL);
-		    addFacts(node,Fact.CENSUS);
-		    addFacts(node,Fact.RESIDENCE);
-		    addFacts(node,Fact.OCCUPATION);
-		    addFacts(node,Fact.CUSTOM_FACT);
+		    addFacts(node, Fact.BIRTH);
+		    addFacts(node, Fact.CHRISTENING);
+		    addFacts(node, Fact.DEATH);
+		    addFacts(node, Fact.BURIAL);
+		    addFacts(node, Fact.CENSUS);
+		    addFacts(node, Fact.RESIDENCE);
+		    addFacts(node, Fact.OCCUPATION);
+		    addFacts(node, Fact.CUSTOM_FACT);
+        }
+
+        internal Individual(Individual i)
+        {
+	        this.individualID = i.individualID;
+            this.gedcomID = i.gedcomID;
+	        this.forenames = i.forenames;
+	        this.surname = i.surname;
+	        this.marriedName = i.marriedName;
+	        this.gender = i.gender;
+	        this.alias = i.alias;
+	        this.status = i.status;
+	        this.relationType = i.relationType;
+            this.facts = new List<Fact>(i.facts);
         }
 
         #region Properties
@@ -329,7 +343,7 @@ namespace FTAnalyzer
         private void addFacts(XmlNode node, string factType) {
             XmlNodeList list = node.SelectNodes(factType);
 	        foreach(XmlNode n in list) {
-	            facts.Add(new Fact(n));
+	            addFact(new Fact(n));
 	        }
 	    }
 
