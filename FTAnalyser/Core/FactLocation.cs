@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class FactLocation : IComparable<FactLocation> {
+    public class FactLocation : IComparable<FactLocation>, IDisplayLocation {
         
 	    public static readonly string SCOTLAND = "Scotland", ENGLAND = "England", CANADA = "Canada", USA = "USA";
 	    public static readonly string ABERDEEN = "Aberdeenshire", AYR = "Ayrshire", KINCARDINE = "Kincardineshire",
@@ -139,11 +139,11 @@ namespace FTAnalyzer
         
         public bool Matches (string s, int level) {
             switch (level) {
-        	    /* COUNTRY */ case 0: return this.country.ToUpper().CompareTo(s.ToUpper()) == 0;
-                /* REGION */  case 1: return this.region.ToUpper().CompareTo(s.ToUpper()) == 0;
-                /* PARISH */  case 2: return this.parish.ToUpper().CompareTo(s.ToUpper()) == 0;
-                /* ADDRESS */ case 3: return this.address.ToUpper().CompareTo(s.ToUpper()) == 0;
-                /* PLACE */   case 4: return this.place.ToUpper().CompareTo(s.ToUpper()) == 0;
+        	    case COUNTRY: return this.country.ToUpper().CompareTo(s.ToUpper()) == 0;
+                case REGION: return this.region.ToUpper().CompareTo(s.ToUpper()) == 0;
+                case PARISH: return this.parish.ToUpper().CompareTo(s.ToUpper()) == 0;
+                case ADDRESS: return this.address.ToUpper().CompareTo(s.ToUpper()) == 0;
+                case PLACE: return this.place.ToUpper().CompareTo(s.ToUpper()) == 0;
         	    default:      return false;
             }
         }
@@ -152,6 +152,11 @@ namespace FTAnalyzer
             return CompareTo (that, PLACE);
         }
         
+        public int CompareTo(IDisplayLocation that, int level) 
+        {
+            return CompareTo((FactLocation)that, level);
+        }
+
         public virtual int CompareTo (FactLocation that, int level) {
             int res = this.country.CompareTo(that.country);
             if (res == 0 && level > COUNTRY) {

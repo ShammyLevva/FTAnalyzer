@@ -72,17 +72,43 @@ namespace FTAnalyzer
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(tabControl.SelectedTab == tabIndividuals)
+            if (tabControl.SelectedTab == tabDisplayProgress)
             {
-                    List<IDisplayIndividual> list = ft.AllDisplayIndividuals;
-                    dgIndividuals.DataSource = list;
-                    tsCountLabel.Text = "Count : " + list.Count; 
-            } else if (tabControl.SelectedTab == tabLooseDeaths) {
-                    HourGlass(true);
-                    List<IDisplayLooseDeath> looseDeathList = ft.GetLooseDeaths();
-                    dgLooseDeaths.DataSource = looseDeathList;
-                    tsCountLabel.Text = "Count : " + looseDeathList.Count;
-                    HourGlass(false);
+                tsCountLabel.Text = "";
+            } else if (tabControl.SelectedTab == tabIndividuals)
+            {
+                List<IDisplayIndividual> list = ft.AllDisplayIndividuals;
+                dgIndividuals.DataSource = list;
+                tsCountLabel.Text = "Count : " + list.Count;
+            }
+            else if (tabControl.SelectedTab == tabIndividuals)
+            {
+                tsCountLabel.Text = "";
+            } else if (tabControl.SelectedTab == tabLooseDeaths)
+            {
+                HourGlass(true);
+                List<IDisplayLooseDeath> looseDeathList = ft.GetLooseDeaths();
+                dgLooseDeaths.DataSource = looseDeathList;
+                tsCountLabel.Text = "Count : " + looseDeathList.Count;
+                HourGlass(false);
+            }
+            else if (tabControl.SelectedTab == tabLocations)
+            {
+                HourGlass(true);
+                tsCountLabel.Text = "";
+                List<IDisplayLocation> countries = ft.AllCountries;
+                List<IDisplayLocation> regions = ft.AllRegions;
+                List<IDisplayLocation> parishes = ft.AllParishes;
+                List<IDisplayLocation> addresses = ft.AllAddresses;
+                countries.Sort(new FactLocationComparer(FactLocation.COUNTRY));
+                regions.Sort(new FactLocationComparer(FactLocation.REGION));
+                parishes.Sort(new FactLocationComparer(FactLocation.PARISH));
+                addresses.Sort(new FactLocationComparer(FactLocation.ADDRESS));
+                dgCountries.DataSource = countries;
+                dgRegions.DataSource = regions;
+                dgParishes.DataSource = parishes;
+                dgAddresses.DataSource = addresses;
+                HourGlass(false);
             }
         }
 

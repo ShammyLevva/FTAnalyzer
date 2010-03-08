@@ -139,16 +139,23 @@ namespace FTAnalyzer
             get { return individuals; }
         }
 
-        public List<FactLocation> AllLocations
+        public List<IDisplayLocation> AllLocations
         {
-            get { return locations.Values.ToList(); }
+            get {
+                List<IDisplayLocation> result = new List<IDisplayLocation>();
+                foreach (FactLocation loc in locations.Values.ToList())
+                {
+                    result.Add(loc);
+                }
+                return result;
+            }
         }
 
-        public List<FactLocation> AllCountries
+        public List<IDisplayLocation> AllCountries
         {
             get
             {
-                List<FactLocation> result = new List<FactLocation>();
+                List<IDisplayLocation> result = new List<IDisplayLocation>();
                 foreach (FactLocation loc in AllLocations)
                 {
                     FactLocation c = new FactLocation(loc.country);
@@ -159,11 +166,11 @@ namespace FTAnalyzer
             }
         }
 
-        public List<FactLocation> AllRegions
+        public List<IDisplayLocation> AllRegions
         {
             get
             {
-                List<FactLocation> result = new List<FactLocation>();
+                List<IDisplayLocation> result = new List<IDisplayLocation>();
                 foreach (FactLocation loc in AllLocations)
                 {
                     FactLocation r = new FactLocation(loc.region + ", " + loc.country);
@@ -174,11 +181,11 @@ namespace FTAnalyzer
             }
         }
 
-        public List<FactLocation> AllParishes
+        public List<IDisplayLocation> AllParishes
         {
             get
             {
-                List<FactLocation> result = new List<FactLocation>();
+                List<IDisplayLocation> result = new List<IDisplayLocation>();
                 foreach (FactLocation loc in AllLocations)
                 {
                     FactLocation p = new FactLocation(loc.parish + ", " + loc.region + ", " + loc.country);
@@ -189,11 +196,11 @@ namespace FTAnalyzer
             }
         }
 
-        public List<FactLocation> AllAddresses
+        public List<IDisplayLocation> AllAddresses
         {
             get
             {
-                List<FactLocation> result = new List<FactLocation>();
+                List<IDisplayLocation> result = new List<IDisplayLocation>();
                 foreach (FactLocation loc in AllLocations)
                 {
                     FactLocation a = new FactLocation(loc.address + ", " + loc.parish + ", " + loc.region + ", " + loc.country);
