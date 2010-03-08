@@ -111,65 +111,97 @@ namespace FTAnalyzer
         }
         #endregion
 
-        #region Properties and Property Functions
+        #region Properties
 
         private int RelationCount
         {
             get { return 0; }
         }
 
-        public Individual getIndividual(string individualID)
+        public List<Fact> AllFacts
         {
-            foreach (Individual i in individuals)
+            get
             {
-                if (i.IndividualID == individualID)
-                    return i;
+                List<Fact> result = new List<Fact>();
+                foreach (Individual ind in individuals)
+                    result.AddRange(ind.AllFacts);
+                return result;
             }
-            return null;
         }
 
-        public Individual getGedcomIndividual(string gedcomID)
+        public List<Family> AllFamilies
         {
-            foreach (Individual i in individuals)
-            {
-                if (i.GedcomID == gedcomID)
-                    return i;
-            }
-            return null;
+            get { return families; }
         }
 
-        public Family getGedcomFamily(string gedcomID)
+        public List<Individual> AllIndividuals
         {
+            get { return individuals; }
+        }
+
+        public List<FactLocation> AllLocations
+        {
+            get { return locations.Values.ToList(); }
+        }
+
+        #endregion
+
+        #region Property Functions
+ 
+        public FactLocation GetLocation(string place)
+        {
+            FactLocation loc;
+            locations.TryGetValue(place, out loc);
+            if (loc == null)
+            {
+                loc = new FactLocation(place);
+                locations.Add(place, loc);
+            }
+            return loc; // should return object that is in list of locations 
+        }
+
+        public List<Individual> getAllRelationsOfType(int relationType)
+        {
+            List<Individual> result = new List<Individual>();
+            foreach (Individual ind in individuals)
+                if (ind.RelationType == relationType)
+                    result.Add(ind);
+            return result;
+        }
+
+        public List<Individual> getUncertifiedFacts(string factType, int relationType)
+        {
+            List<Individual> result = new List<Individual>();
+            foreach (Individual ind in individuals)
+                if (ind.RelationType == relationType)
+                {
+                    Fact f = ind.getPreferredFact(factType);
+                    if (f != null && !f.isCertificatePresent())
+                        result.Add(ind);
+                }
+            return result;
+        }
+
+        public List<Family> FindFamiliesWhereHusband(Individual ind)
+        {
+            List<Family> result = new List<Family>();
             foreach (Family f in families)
             {
-                if (f.FamilyGed == gedcomID)
-                    return f;
+                if (f.Husband != null && f.Husband == ind)
+                    result.Add(f);
             }
-            return null;
+            return result;
         }
 
-        public FactSource getGedcomSource(string gedcomID)
+        public List<Family> FindFamiliesWhereWife(Individual ind)
         {
-            foreach (FactSource s in sources)
-            {
-                if (s.GedcomID == gedcomID)
-                    return s;
-            }
-            return null;
-        }
-
-        public bool isMarried(Individual ind, FactDate fd)
-        {
-            if (ind.isSingleAtDeath())
-                return false;
-            List<Family> families = getFamiliesAsParent(ind);
+            List<Family> result = new List<Family>();
             foreach (Family f in families)
             {
-                FactDate marriage = f.getPreferredFactDate(Fact.MARRIAGE);
-                if (marriage != null && marriage.isBefore(fd))
-                    return true;
+                if (f.Wife != null && f.Wife == ind)
+                    result.Add(f);
             }
-            return false;
+            return result;
         }
 
         public List<Family> getFamiliesAsParent(Individual ind)
@@ -204,86 +236,70 @@ namespace FTAnalyzer
             return result;
         }
 
-        public List<Family> FindFamiliesWhereHusband(Individual ind)
+        public FactSource getGedcomSource(string gedcomID)
         {
-            List<Family> result = new List<Family>();
+            foreach (FactSource s in sources)
+            {
+                if (s.GedcomID == gedcomID)
+                    return s;
+            }
+            return null;
+        }
+
+        public bool isMarried(Individual ind, FactDate fd)
+        {
+            if (ind.isSingleAtDeath())
+                return false;
+            List<Family> families = getFamiliesAsParent(ind);
             foreach (Family f in families)
             {
-                if (f.Husband != null && f.Husband == ind)
-                    result.Add(f);
+                FactDate marriage = f.getPreferredFactDate(Fact.MARRIAGE);
+                if (marriage != null && marriage.isBefore(fd))
+                    return true;
             }
-            return result;
+            return false;
         }
 
-        public List<Family> FindFamiliesWhereWife(Individual ind)
+        public Individual getIndividual(string individualID)
         {
-            List<Family> result = new List<Family>();
+            foreach (Individual i in individuals)
+            {
+                if (i.IndividualID == individualID)
+                    return i;
+            }
+            return null;
+        }
+
+        public Individual getGedcomIndividual(string gedcomID)
+        {
+            foreach (Individual i in individuals)
+            {
+                if (i.GedcomID == gedcomID)
+                    return i;
+            }
+            return null;
+        }
+
+        public Family getGedcomFamily(string gedcomID)
+        {
             foreach (Family f in families)
             {
-                if (f.Wife != null && f.Wife == ind)
-                    result.Add(f);
+                if (f.FamilyGed == gedcomID)
+                    return f;
             }
-            return result;
+            return null;
         }
 
-        public List<Individual> getAllRelationsOfType(int relationType)
+        public List<string> getSurnamesAtLocation(FactLocation loc) { return getSurnamesAtLocation(loc, FactLocation.PARISH); }
+        public List<string> getSurnamesAtLocation(FactLocation loc, int level)
         {
-            List<Individual> result = new List<Individual>();
-            foreach (Individual ind in individuals)
-                if (ind.RelationType == relationType)
-                    result.Add(ind);
-            return result;
-        }
-
-        public List<Individual> getUncertifiedFacts(string factType, int relationType)
-        {
-            List<Individual> result = new List<Individual>();
-            foreach (Individual ind in individuals)
-                if (ind.RelationType == relationType)
-                {
-                    Fact f = ind.getPreferredFact(factType);
-                    if (f != null && !f.isCertificatePresent())
-                        result.Add(ind);
-                }
-            return result;
-        }
-
-        public List<Fact> AllFacts
-        {
-            get
+            List<string> result = new List<string>();
+            foreach (Individual i in individuals)
             {
-                List<Fact> result = new List<Fact>();
-                foreach (Individual ind in individuals)
-                    result.AddRange(ind.AllFacts);
-                return result;
+                if (!result.Contains(i.Surname) && i.isAtLocation(loc, level))
+                    result.Add(i.Surname);
             }
-        }
-
-        public List<Family> AllFamilies
-        {
-            get { return families; }
-        }
-
-        public List<Individual> AllIndividuals
-        {
-            get { return individuals; }
-        }
-
-        public List<FactLocation> AllLocations
-        {
-            get { return locations.Values.ToList(); }
-        }
-
-        public FactLocation GetLocation(string place)
-        {
-            FactLocation loc;
-            locations.TryGetValue(place, out loc);
-            if (loc == null)
-            {
-                loc = new FactLocation(place);
-                locations.Add(place, loc);
-            }
-            return loc; // should return object that is in list of locations 
+            return result;
         }
 
         #endregion

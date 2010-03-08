@@ -380,11 +380,24 @@ namespace FTAnalyzer
 
         #endregion
 
+        #region Location functions
+        
         public FactLocation getLocation(FactDate when)
         {
             // TODO: ideally this returns a Location a person was at for a given period
             return new FactLocation();
         }
+
+        public bool isAtLocation(FactLocation loc, int level)
+        {
+            foreach (Fact f in facts)
+            {
+                if (f.Location.Equals(loc, level))
+                    return true;
+            }
+            return false;
+        }
+        #endregion
 
         public int CompareTo(Individual that)
         {

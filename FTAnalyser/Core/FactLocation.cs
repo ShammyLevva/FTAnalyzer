@@ -181,6 +181,11 @@ namespace FTAnalyzer
     	    }
         }
 
+        public bool Equals(FactLocation that, int level)
+        {
+            return this.CompareTo(that, level) == 0 ? true : false;
+        }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
