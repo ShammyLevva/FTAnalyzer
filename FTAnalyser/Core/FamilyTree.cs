@@ -158,9 +158,12 @@ namespace FTAnalyzer
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
                 foreach (FactLocation loc in AllLocations)
                 {
-                    FactLocation c = new FactLocation(loc.country);
-                    if (!result.Contains(c))
-                        result.Add(c);
+                    if (loc.country != string.Empty)
+                    {
+                        FactLocation c = new FactLocation(loc.country);
+                        if (!result.Contains(c))
+                            result.Add(c);
+                    }
                 }
                 return result;
             }
@@ -173,9 +176,12 @@ namespace FTAnalyzer
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
                 foreach (FactLocation loc in AllLocations)
                 {
-                    FactLocation r = new FactLocation(loc.region + ", " + loc.country);
-                    if (!result.Contains(r))
-                        result.Add(r);
+                    if (loc.region != string.Empty)
+                    {
+                        FactLocation r = new FactLocation(loc.region + ", " + loc.country);
+                        if (!result.Contains(r))
+                            result.Add(r);
+                    }
                 }
                 return result;
             }
@@ -188,9 +194,12 @@ namespace FTAnalyzer
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
                 foreach (FactLocation loc in AllLocations)
                 {
-                    FactLocation p = new FactLocation(loc.parish + ", " + loc.region + ", " + loc.country);
-                    if (!result.Contains(p))
-                        result.Add(p);
+                    if (loc.parish != string.Empty)
+                    {
+                        FactLocation p = new FactLocation(loc.parish + ", " + loc.region + ", " + loc.country);
+                        if (!result.Contains(p))
+                            result.Add(p);
+                    }
                 }
                 return result;
             }
@@ -203,9 +212,12 @@ namespace FTAnalyzer
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
                 foreach (FactLocation loc in AllLocations)
                 {
-                    FactLocation a = new FactLocation(loc.address + ", " + loc.parish + ", " + loc.region + ", " + loc.country);
-                    if (!result.Contains(a))
-                        result.Add(a);
+                    if (loc.address != string.Empty)
+                    {
+                        FactLocation a = new FactLocation(loc.address + ", " + loc.parish + ", " + loc.region + ", " + loc.country);
+                        if (!result.Contains(a))
+                            result.Add(a);
+                    }
                 }
                 return result;
             }
