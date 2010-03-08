@@ -133,6 +133,20 @@ namespace FTAnalyzer
 
         #endregion
 
+        public FactLocation getLocation(int level)
+        {
+            StringBuilder location = new StringBuilder(this.country);
+            if (level > COUNTRY && region.Length > 0)
+                location.Insert(0, this.region + ", ");
+            if (level > REGION && parish.Length > 0)
+                location.Insert(0, this.parish + ", ");
+            if (level > PARISH && address.Length > 0)
+                location.Insert(0, this.address + ", ");
+            if (level > ADDRESS && place.Length > 0)
+                location.Insert(0, this.place + ", ");
+            return new FactLocation(location.ToString());
+        }
+
         public bool isBlank () {
             return this.country.Length == 0;
         }

@@ -61,19 +61,19 @@
             this.btnTestDates = new System.Windows.Forms.Button();
             this.tabLooseDeaths = new System.Windows.Forms.TabPage();
             this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
-            this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabLocations = new System.Windows.Forms.TabPage();
             this.tabCtrlLocations = new System.Windows.Forms.TabControl();
             this.tabCountries = new System.Windows.Forms.TabPage();
-            this.tabRegions = new System.Windows.Forms.TabPage();
-            this.tabParishes = new System.Windows.Forms.TabPage();
-            this.tabAddresses = new System.Windows.Forms.TabPage();
             this.dgCountries = new System.Windows.Forms.DataGridView();
+            this.tabRegions = new System.Windows.Forms.TabPage();
             this.dgRegions = new System.Windows.Forms.DataGridView();
+            this.tabParishes = new System.Windows.Forms.TabPage();
             this.dgParishes = new System.Windows.Forms.DataGridView();
+            this.tabAddresses = new System.Windows.Forms.TabPage();
             this.dgAddresses = new System.Windows.Forms.DataGridView();
+            this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -82,17 +82,17 @@
             this.tabTestFactDate.SuspendLayout();
             this.tabLooseDeaths.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).BeginInit();
-            this.statusStrip.SuspendLayout();
             this.tabLocations.SuspendLayout();
             this.tabCtrlLocations.SuspendLayout();
             this.tabCountries.SuspendLayout();
-            this.tabRegions.SuspendLayout();
-            this.tabParishes.SuspendLayout();
-            this.tabAddresses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCountries)).BeginInit();
+            this.tabRegions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRegions)).BeginInit();
+            this.tabParishes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgParishes)).BeginInit();
+            this.tabAddresses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).BeginInit();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -390,28 +390,6 @@
             this.dgLooseDeaths.Size = new System.Drawing.Size(1001, 417);
             this.dgLooseDeaths.TabIndex = 0;
             // 
-            // tsCount
-            // 
-            this.tsCount.Name = "tsCount";
-            this.tsCount.Size = new System.Drawing.Size(52, 17);
-            this.tsCount.Text = "Count : 0";
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsCountLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 476);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1009, 22);
-            this.statusStrip.TabIndex = 10;
-            this.statusStrip.Text = "statusStrip1";
-            // 
-            // tsCountLabel
-            // 
-            this.tsCountLabel.Name = "tsCountLabel";
-            this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
-            this.tsCountLabel.Text = "Count : 0";
-            // 
             // tabLocations
             // 
             this.tabLocations.Controls.Add(this.tabCtrlLocations);
@@ -449,37 +427,6 @@
             this.tabCountries.Text = "Countries";
             this.tabCountries.UseVisualStyleBackColor = true;
             // 
-            // tabRegions
-            // 
-            this.tabRegions.Controls.Add(this.dgRegions);
-            this.tabRegions.Location = new System.Drawing.Point(4, 22);
-            this.tabRegions.Name = "tabRegions";
-            this.tabRegions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRegions.Size = new System.Drawing.Size(990, 393);
-            this.tabRegions.TabIndex = 1;
-            this.tabRegions.Text = "Regions";
-            this.tabRegions.UseVisualStyleBackColor = true;
-            // 
-            // tabParishes
-            // 
-            this.tabParishes.Controls.Add(this.dgParishes);
-            this.tabParishes.Location = new System.Drawing.Point(4, 22);
-            this.tabParishes.Name = "tabParishes";
-            this.tabParishes.Size = new System.Drawing.Size(990, 393);
-            this.tabParishes.TabIndex = 2;
-            this.tabParishes.Text = "Parishes";
-            this.tabParishes.UseVisualStyleBackColor = true;
-            // 
-            // tabAddresses
-            // 
-            this.tabAddresses.Controls.Add(this.dgAddresses);
-            this.tabAddresses.Location = new System.Drawing.Point(4, 22);
-            this.tabAddresses.Name = "tabAddresses";
-            this.tabAddresses.Size = new System.Drawing.Size(990, 393);
-            this.tabAddresses.TabIndex = 3;
-            this.tabAddresses.Text = "Addresses";
-            this.tabAddresses.UseVisualStyleBackColor = true;
-            // 
             // dgCountries
             // 
             this.dgCountries.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -491,6 +438,18 @@
             this.dgCountries.Name = "dgCountries";
             this.dgCountries.Size = new System.Drawing.Size(987, 387);
             this.dgCountries.TabIndex = 0;
+            this.dgCountries.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCountries_CellContentDoubleClick);
+            // 
+            // tabRegions
+            // 
+            this.tabRegions.Controls.Add(this.dgRegions);
+            this.tabRegions.Location = new System.Drawing.Point(4, 22);
+            this.tabRegions.Name = "tabRegions";
+            this.tabRegions.Padding = new System.Windows.Forms.Padding(3);
+            this.tabRegions.Size = new System.Drawing.Size(990, 393);
+            this.tabRegions.TabIndex = 1;
+            this.tabRegions.Text = "Regions";
+            this.tabRegions.UseVisualStyleBackColor = true;
             // 
             // dgRegions
             // 
@@ -503,6 +462,17 @@
             this.dgRegions.Name = "dgRegions";
             this.dgRegions.Size = new System.Drawing.Size(987, 387);
             this.dgRegions.TabIndex = 1;
+            this.dgRegions.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgRegions_CellContentDoubleClick);
+            // 
+            // tabParishes
+            // 
+            this.tabParishes.Controls.Add(this.dgParishes);
+            this.tabParishes.Location = new System.Drawing.Point(4, 22);
+            this.tabParishes.Name = "tabParishes";
+            this.tabParishes.Size = new System.Drawing.Size(990, 393);
+            this.tabParishes.TabIndex = 2;
+            this.tabParishes.Text = "Parishes";
+            this.tabParishes.UseVisualStyleBackColor = true;
             // 
             // dgParishes
             // 
@@ -515,6 +485,17 @@
             this.dgParishes.Name = "dgParishes";
             this.dgParishes.Size = new System.Drawing.Size(987, 387);
             this.dgParishes.TabIndex = 1;
+            this.dgParishes.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgParishes_CellContentDoubleClick);
+            // 
+            // tabAddresses
+            // 
+            this.tabAddresses.Controls.Add(this.dgAddresses);
+            this.tabAddresses.Location = new System.Drawing.Point(4, 22);
+            this.tabAddresses.Name = "tabAddresses";
+            this.tabAddresses.Size = new System.Drawing.Size(990, 393);
+            this.tabAddresses.TabIndex = 3;
+            this.tabAddresses.Text = "Addresses";
+            this.tabAddresses.UseVisualStyleBackColor = true;
             // 
             // dgAddresses
             // 
@@ -527,6 +508,29 @@
             this.dgAddresses.Name = "dgAddresses";
             this.dgAddresses.Size = new System.Drawing.Size(987, 387);
             this.dgAddresses.TabIndex = 1;
+            this.dgAddresses.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAddresses_CellContentDoubleClick);
+            // 
+            // tsCount
+            // 
+            this.tsCount.Name = "tsCount";
+            this.tsCount.Size = new System.Drawing.Size(52, 17);
+            this.tsCount.Text = "Count : 0";
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsCountLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 476);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(1009, 22);
+            this.statusStrip.TabIndex = 10;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // tsCountLabel
+            // 
+            this.tsCountLabel.Name = "tsCountLabel";
+            this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
+            this.tsCountLabel.Text = "Count : 0";
             // 
             // MainForm
             // 
@@ -550,18 +554,18 @@
             this.tabTestFactDate.PerformLayout();
             this.tabLooseDeaths.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).EndInit();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
             this.tabLocations.ResumeLayout(false);
             this.tabCtrlLocations.ResumeLayout(false);
             this.tabCountries.ResumeLayout(false);
-            this.tabRegions.ResumeLayout(false);
-            this.tabParishes.ResumeLayout(false);
-            this.tabAddresses.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgCountries)).EndInit();
+            this.tabRegions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgRegions)).EndInit();
+            this.tabParishes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgParishes)).EndInit();
+            this.tabAddresses.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).EndInit();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

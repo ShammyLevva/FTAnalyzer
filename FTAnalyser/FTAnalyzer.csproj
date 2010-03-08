@@ -93,6 +93,9 @@
     </Compile>
     <Compile Include="FTAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Individuals.resx">
+      <DependentUpon>Individuals.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -158,6 +161,12 @@
     <Compile Include="Formatters\DeathOutputFormatter.cs" />
     <Compile Include="Formatters\MarriageOutputFormatter.cs" />
     <Content Include="GedcomOutput.xml" />
+    <Compile Include="Forms\Individuals.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Individuals.Designer.cs">
+      <DependentUpon>Individuals.cs</DependentUpon>
+    </Compile>
     <Compile Include="HTTPParser\Attribute.cs" />
     <Compile Include="HTTPParser\AttributeList.cs" />
     <Compile Include="HTTPParser\FindLinks.cs" />

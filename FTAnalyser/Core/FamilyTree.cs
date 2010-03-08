@@ -357,6 +357,17 @@ namespace FTAnalyzer
             return null;
         }
 
+        public List<Individual> getIndividualsAtLocation(FactLocation loc, int level)
+        {
+            List<Individual> result = new List<Individual>();
+            foreach (Individual i in individuals)
+            {
+                if (!result.Contains(i) && i.isAtLocation(loc, level))
+                    result.Add(i);
+            }
+            return result;
+        }
+
         public List<string> getSurnamesAtLocation(FactLocation loc) { return getSurnamesAtLocation(loc, FactLocation.PARISH); }
         public List<string> getSurnamesAtLocation(FactLocation loc, int level)
         {

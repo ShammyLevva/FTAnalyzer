@@ -150,5 +150,45 @@ namespace FTAnalyzer
             ft.processRegistration("c:/temp/GROS/1911_census", censusRP, census, censusFormatter);
             Console.WriteLine("1911 Census Details written.");
         }
+
+        private void dgCountries_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            HourGlass(true);
+            FactLocation loc = (FactLocation)dgCountries.CurrentRow.DataBoundItem;
+            Forms.Individuals frmInd = new Forms.Individuals();
+            frmInd.setLocation(loc, FactLocation.COUNTRY);
+            frmInd.Show();
+            HourGlass(false);
+        }
+
+        private void dgRegions_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            HourGlass(true);
+            FactLocation loc = (FactLocation)dgRegions.CurrentRow.DataBoundItem;
+            Forms.Individuals frmInd = new Forms.Individuals();
+            frmInd.setLocation(loc, FactLocation.REGION);
+            frmInd.Show();
+            HourGlass(false);
+        }
+
+        private void dgParishes_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            HourGlass(true);
+            FactLocation loc = (FactLocation)dgParishes.CurrentRow.DataBoundItem;
+            Forms.Individuals frmInd = new Forms.Individuals();
+            frmInd.setLocation(loc, FactLocation.PARISH);
+            frmInd.Show();
+            HourGlass(false);
+        }
+
+        private void dgAddresses_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            HourGlass(true);
+            FactLocation loc = (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
+            Forms.Individuals frmInd = new Forms.Individuals();
+            frmInd.setLocation(loc, FactLocation.ADDRESS);
+            frmInd.Show();
+            HourGlass(false);
+        }
     }
 }
