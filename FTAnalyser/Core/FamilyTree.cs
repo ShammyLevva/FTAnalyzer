@@ -144,6 +144,66 @@ namespace FTAnalyzer
             get { return locations.Values.ToList(); }
         }
 
+        public List<FactLocation> AllCountries
+        {
+            get
+            {
+                List<FactLocation> result = new List<FactLocation>();
+                foreach (FactLocation loc in AllLocations)
+                {
+                    FactLocation c = new FactLocation(loc.country);
+                    if (!result.Contains(c))
+                        result.Add(c);
+                }
+                return result;
+            }
+        }
+
+        public List<FactLocation> AllRegions
+        {
+            get
+            {
+                List<FactLocation> result = new List<FactLocation>();
+                foreach (FactLocation loc in AllLocations)
+                {
+                    FactLocation r = new FactLocation(loc.region + ", " + loc.country);
+                    if (!result.Contains(r))
+                        result.Add(r);
+                }
+                return result;
+            }
+        }
+
+        public List<FactLocation> AllParishes
+        {
+            get
+            {
+                List<FactLocation> result = new List<FactLocation>();
+                foreach (FactLocation loc in AllLocations)
+                {
+                    FactLocation p = new FactLocation(loc.parish + ", " + loc.region + ", " + loc.country);
+                    if (!result.Contains(p))
+                        result.Add(p);
+                }
+                return result;
+            }
+        }
+
+        public List<FactLocation> AllAddresses
+        {
+            get
+            {
+                List<FactLocation> result = new List<FactLocation>();
+                foreach (FactLocation loc in AllLocations)
+                {
+                    FactLocation a = new FactLocation(loc.address + ", " + loc.parish + ", " + loc.region + ", " + loc.country);
+                    if (!result.Contains(a))
+                        result.Add(a);
+                }
+                return result;
+            }
+        }
+
         #endregion
 
         #region Property Functions
