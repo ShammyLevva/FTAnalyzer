@@ -65,8 +65,8 @@ namespace FTAnalyzer
             locations = new Dictionary<string, FactLocation>();
         }
 
-        public int LoadTree(XmlDocument doc) { return LoadTree(doc, new ProgressBar(), new ProgressBar(), new ProgressBar()); }
-        public int LoadTree(XmlDocument doc, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
+        public void LoadTree(XmlDocument doc) { LoadTree(doc, new ProgressBar(), new ProgressBar(), new ProgressBar()); }
+        public void LoadTree(XmlDocument doc, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
         {
             ResetData();
             Application.DoEvents();
@@ -107,16 +107,11 @@ namespace FTAnalyzer
             } 
             SetRelations(individuals[0].GedcomID); // needs testing
 	        SetParishes();
-            return RelationCount;
+            PrintRelationCount();
         }
         #endregion
 
         #region Properties
-
-        private int RelationCount
-        {
-            get { return 0; }
-        }
 
         public List<Fact> AllFacts
         {
@@ -643,6 +638,20 @@ namespace FTAnalyzer
 		        }
                 Application.DoEvents();
 		    }
+        }
+
+        private void PrintRelationCount()
+        {
+            int[] relations = {0,0,0,0,0,0};
+            foreach(Individual i in individuals)
+                relations[i.RelationType]++;
+            Console.WriteLine("Direct Ancestors : " + relations[Individual.DIRECT]);
+            Console.WriteLine("Blood Relations : " + relations[Individual.BLOOD]);
+            Console.WriteLine("Married to Blood or Direct Relation : " + relations[Individual.MARRIAGEDB]);
+            Console.WriteLine("Related by Marriage : " + relations[Individual.MARRIAGE]);
+            Console.WriteLine("Unknown relation : " + relations[Individual.UNKNOWN]);
+            if(relations[Individual.UNSET] > 0)
+                Console.WriteLine("Failed to set relationship : " + relations[Individual.UNSET]);
         }
 
         #endregion
