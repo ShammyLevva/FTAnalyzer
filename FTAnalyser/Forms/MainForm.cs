@@ -34,6 +34,7 @@ namespace FTAnalyzer
                 try
                 {
                     HourGlass(true);
+                    closeIndividualForms();
                     tabControl.SelectTab(tabDisplayProgress);
                     pbSources.Value = pbIndividuals.Value = pbFamilies.Value = 0;
                     Application.DoEvents();
@@ -48,6 +49,18 @@ namespace FTAnalyzer
                     MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
                 }
             }
+        }
+
+        private void closeIndividualForms()
+        {
+            List<Form> toClose = new List<Form>();
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f is Forms.Individuals)
+                    toClose.Add(f);
+            }
+            foreach (Form f in toClose)
+                f.Close();
         }
 
         private void btnTestDates_Click(object sender, EventArgs e)
