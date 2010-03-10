@@ -12,6 +12,8 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
+        private string VERSION = "1.0.0";
+
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
         private FactDate censusDate = FactDate.CENSUS1841;
@@ -247,6 +249,11 @@ namespace FTAnalyzer
                 censusDate = FactDate.CENSUS1901;
             else if (cbCensusDate.Text == "1911")
                 censusDate = FactDate.CENSUS1911; 
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This is Family Tree Analyzer version " + VERSION);
         }
     }
 }
