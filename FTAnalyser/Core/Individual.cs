@@ -5,7 +5,9 @@ using System.Windows.Forms;
 
 namespace FTAnalyzer
 {
-    public class Individual : IComparable<Individual>, IDisplayIndividual, IDisplayLooseDeath {
+    public class Individual : IComparable<Individual>, 
+        IDisplayIndividual, IDisplayLooseDeath
+    {
     	
 	    // define relation type from direct ancestor to related by marriage and 
 	    // MARRIAGEDB ie: married to a direct or blood relation

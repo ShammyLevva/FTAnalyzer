@@ -93,6 +93,9 @@
     </Compile>
     <Compile Include="FTAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Census.resx">
+      <DependentUpon>Census.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Individuals.resx">
       <DependentUpon>Individuals.cs</DependentUpon>
     </EmbeddedResource>
@@ -135,6 +138,7 @@
     <Compile Include="Comparators\Registration\MultiComparator.cs" />
     <Compile Include="Comparators\Registration\NameComparator.cs" />
     <Content Include="Useful URLs.txt" />
+    <Compile Include="Core\Displays\DisplayCensus.cs" />
     <Compile Include="Core\Displays\IDisplayLocation.cs" />
     <Compile Include="Core\Displays\IDisplayLooseDeath.cs" />
     <Compile Include="Core\Displays\IDisplayIndividual.cs" />
@@ -161,6 +165,12 @@
     <Compile Include="Formatters\DeathOutputFormatter.cs" />
     <Compile Include="Formatters\MarriageOutputFormatter.cs" />
     <Content Include="GedcomOutput.xml" />
+    <Compile Include="Forms\Census.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Census.Designer.cs">
+      <DependentUpon>Census.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Individuals.cs">
       <SubType>Form</SubType>
     </Compile>

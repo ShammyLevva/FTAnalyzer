@@ -675,7 +675,7 @@ namespace FTAnalyzer
         #region Registrations
 
         public void processRegistration(String filename, RegistrationsProcessor rp, 
-            						    List<Registration> sourceRegs, BaseOutputFormatter formatter) 
+            List<Registration> sourceRegs, BaseOutputFormatter formatter, RichTextBox rtb) 
     	{
             TextWriter output = new StreamWriter(filename + ".csv");
             formatter.printHeader(output);
@@ -683,7 +683,7 @@ namespace FTAnalyzer
             foreach (Registration r in regs) {
                 formatter.printItem(r, output);
             }
-            Console.WriteLine("written " + regs.Count + " records to " + filename);
+            rtb.AppendText("written " + regs.Count + " records to " + filename + "\n");
             output.Close();
         }
 

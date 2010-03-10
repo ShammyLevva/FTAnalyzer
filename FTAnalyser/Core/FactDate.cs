@@ -34,7 +34,7 @@ namespace FTAnalyzer
         public static readonly FactDate CENSUS1881 = new FactDate("03 APR 1881");
         public static readonly FactDate CENSUS1891 = new FactDate("05 APR 1891");
         public static readonly FactDate CENSUS1901 = new FactDate("31 MAR 1901");
-        public static readonly FactDate CENSUS1911 = new FactDate("02 APR 1901");
+        public static readonly FactDate CENSUS1911 = new FactDate("02 APR 1911");
  
         public enum FactDateType
         {
