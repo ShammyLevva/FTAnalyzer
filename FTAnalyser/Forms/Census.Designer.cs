@@ -34,6 +34,7 @@
             // 
             // dgCensus
             // 
+            this.dgCensus.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgCensus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCensus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgCensus.Location = new System.Drawing.Point(0, 0);

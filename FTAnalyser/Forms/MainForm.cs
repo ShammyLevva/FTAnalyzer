@@ -93,6 +93,7 @@ namespace FTAnalyzer
             {
                 cbCensusDate.Text = "1911";
                 tsCountLabel.Text = "";
+                btnShowResults.Enabled = ft.IndividualCount > 0;
             } else if (tabControl.SelectedTab == tabLooseDeaths)
             {
                 HourGlass(true);

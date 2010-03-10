@@ -221,6 +221,8 @@ namespace FTAnalyzer
             }
         }
 
+        public int IndividualCount { get { return individuals.Count; } }
+
         #endregion
 
         #region Property Functions

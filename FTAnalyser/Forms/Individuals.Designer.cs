@@ -34,6 +34,7 @@
             // 
             // dgIndividuals
             // 
+            this.dgIndividuals.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgIndividuals.Location = new System.Drawing.Point(0, 0);
