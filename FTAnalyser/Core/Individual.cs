@@ -46,16 +46,32 @@ namespace FTAnalyzer
 
         internal Individual(Individual i)
         {
-	        this.individualID = i.individualID;
-            this.gedcomID = i.gedcomID;
-	        this.forenames = i.forenames;
-	        this.surname = i.surname;
-	        this.marriedName = i.marriedName;
-	        this.gender = i.gender;
-	        this.alias = i.alias;
-	        this.status = i.status;
-	        this.relationType = i.relationType;
-            this.facts = new List<Fact>(i.facts);
+            if (i == null)
+            {
+                this.individualID = "";
+                this.gedcomID = "";
+                this.forenames = "";
+                this.surname = "";
+                this.marriedName = "";
+                this.gender = "";
+                this.alias = "";
+                this.status = UNKNOWNSTATUS;
+                this.relationType = UNKNOWN;
+                this.facts = new List<Fact>();
+            }
+            else
+            {
+                this.individualID = i.individualID;
+                this.gedcomID = i.gedcomID;
+                this.forenames = i.forenames;
+                this.surname = i.surname;
+                this.marriedName = i.marriedName;
+                this.gender = i.gender;
+                this.alias = i.alias;
+                this.status = i.status;
+                this.relationType = i.relationType;
+                this.facts = new List<Fact>(i.facts);
+            }
         }
 
         #region Properties

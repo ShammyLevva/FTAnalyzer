@@ -124,8 +124,7 @@ namespace FTAnalyzer
                 int relation = Individual.UNSET;
                 foreach (Individual i in Members)
                 {
-                    if (i.RelationType != Individual.UNKNOWN &&
-                        i.RelationType < relation)
+                    if (i.RelationType != Individual.UNKNOWN && i.RelationType < relation)
                         relation = i.RelationType;
                 }
                 return relation == Individual.UNSET ? Individual.UNKNOWN : relation;

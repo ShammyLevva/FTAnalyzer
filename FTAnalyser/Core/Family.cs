@@ -73,8 +73,8 @@ namespace FTAnalyzer
             this.wifeID = f.wifeID;
             this.wifeGed = f.wifeGed;
             this.facts = new List<Fact>(f.facts);
-            this.husband = new Individual(f.husband);
-            this.wife = new Individual(f.wife);
+            this.husband = f.husband == null ? null : new Individual(f.husband);
+            this.wife = f.wife == null ? null : new Individual(f.wife);
             this.children = new List<Individual>(f.children);
         }
 
