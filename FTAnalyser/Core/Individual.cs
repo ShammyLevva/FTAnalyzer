@@ -11,8 +11,7 @@ namespace FTAnalyzer
     	
 	    // define relation type from direct ancestor to related by marriage and 
 	    // MARRIAGEDB ie: married to a direct or blood relation
-	    public static readonly int UNKNOWN = 0, DIRECT = 1, BLOOD = 2, 
-						           MARRIAGEDB = 3, MARRIAGE = 4, UNSET = 5;
+	    public const int UNKNOWN = 0, DIRECT = 1, BLOOD = 2, MARRIAGEDB = 3, MARRIAGE = 4, UNSET = 5;
 	    public static readonly string HUSBAND = "Husband", WIFE = "Wife", CHILD = "Child",
 							          UNKNOWNSTATUS = "Unknown";
     	
@@ -77,7 +76,21 @@ namespace FTAnalyzer
             get { return relationType; }
             set { relationType = value; }
         }
-        
+
+        public string Relation
+        {
+            get {
+                switch (relationType)
+                {
+                    case DIRECT: return "Direct";
+                    case BLOOD: return "Blood";
+                    case MARRIAGE: return "By Marriage";
+                    case MARRIAGEDB: return "Marr to Direct/Blood";
+                    default: return "Unknown";
+                }
+            }
+        }
+
         public List<Fact> AllFacts 
         { 
             get { return this.facts; } 
