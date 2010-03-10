@@ -91,6 +91,7 @@ namespace FTAnalyzer
             }
             else if (tabControl.SelectedTab == tabCensus)
             {
+                cbCensusDate.Text = "1911";
                 tsCountLabel.Text = "";
             } else if (tabControl.SelectedTab == tabLooseDeaths)
             {
@@ -206,7 +207,7 @@ namespace FTAnalyzer
             if (rbWales.Checked)
                 locationFilter = LocationFilter.WALES_FILTER;
             if (rbGB.Checked)
-                locationFilter = new AndFilter(LocationFilter.SCOTLAND_FILTER, new AndFilter(LocationFilter.ENGLAND_FILTER, LocationFilter.WALES_FILTER));
+                locationFilter = new AndFilter(LocationFilter.SCOTLAND_FILTER, LocationFilter.ENGLAND_FILTER, LocationFilter.WALES_FILTER);
             if (rbCanada.Checked)
                 locationFilter = LocationFilter.CANADA_FILTER;
             if (rbUSA.Checked)
@@ -215,15 +216,20 @@ namespace FTAnalyzer
             RegistrationFilter relationFilter = new FalseFilter();
             if (ckbBlood.Checked)
                 relationFilter = new OrFilter(new RelationFilter(Individual.BLOOD), relationFilter);
-            else if (ckbDirects.Checked)
+            if (ckbDirects.Checked)
                 relationFilter = new OrFilter(new RelationFilter(Individual.DIRECT), relationFilter);
-            else if (ckbMarriage.Checked)
+            if (ckbMarriage.Checked)
                 relationFilter = new OrFilter(new RelationFilter(Individual.MARRIAGE), relationFilter);
-            else if (ckbMarriageDB.Checked)
+            if (ckbMarriageDB.Checked)
                 relationFilter = new OrFilter(new RelationFilter(Individual.MARRIAGEDB), relationFilter);
-            else if (ckbUnknown.Checked)
+            if (ckbUnknown.Checked)
                 relationFilter = new OrFilter(new RelationFilter(Individual.UNKNOWN), relationFilter);
 
+            return new AndFilter(locationFilter, relationFilter, new DateFilter(censusDate));
+        }
+
+        private void cbCensusDate_SelectedValueChanged(object sender, EventArgs e)
+        {
             if (cbCensusDate.Text == "1841")
                 censusDate = FactDate.CENSUS1841;
             else if (cbCensusDate.Text == "1851")
@@ -239,9 +245,7 @@ namespace FTAnalyzer
             else if (cbCensusDate.Text == "1901")
                 censusDate = FactDate.CENSUS1901;
             else if (cbCensusDate.Text == "1911")
-                censusDate = FactDate.CENSUS1911;
-
-            return new AndFilter(locationFilter, new AndFilter(relationFilter, new DateFilter(censusDate)));
+                censusDate = FactDate.CENSUS1911; 
         }
     }
 }

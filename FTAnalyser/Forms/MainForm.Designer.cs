@@ -361,6 +361,7 @@
             this.cbCensusDate.Name = "cbCensusDate";
             this.cbCensusDate.Size = new System.Drawing.Size(49, 21);
             this.cbCensusDate.TabIndex = 1;
+            this.cbCensusDate.SelectedValueChanged += new System.EventHandler(this.cbCensusDate_SelectedValueChanged);
             // 
             // groupBox1
             // 
