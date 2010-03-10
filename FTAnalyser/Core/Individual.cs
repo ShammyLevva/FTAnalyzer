@@ -47,18 +47,7 @@ namespace FTAnalyzer
         internal Individual(Individual i)
         {
             if (i == null)
-            {
-                this.individualID = "";
-                this.gedcomID = "";
-                this.forenames = "";
-                this.surname = "";
-                this.marriedName = "";
-                this.gender = "";
-                this.alias = "";
-                this.status = UNKNOWNSTATUS;
-                this.relationType = UNKNOWN;
-                this.facts = new List<Fact>();
-            }
+                Console.WriteLine("ERROR: Individual copy constructor called with null individual");
             else
             {
                 this.individualID = i.individualID;
