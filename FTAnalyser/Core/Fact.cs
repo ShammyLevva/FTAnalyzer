@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using System.Windows.Forms;
 
 namespace FTAnalyzer
 {
@@ -59,7 +60,7 @@ namespace FTAnalyzer
 
         #region Constructors
 
-        public Fact (XmlNode node) {
+        public Fact (XmlNode node, RichTextBox rtb) {
             if (node != null) 
             {
                 factType = node.Name;
@@ -68,7 +69,7 @@ namespace FTAnalyzer
                     CUSTOM_TAGS.TryGetValue(tag, out factType);
                     if (factType == null) {
                         factType = Fact.UNKNOWN;
-                        Console.WriteLine("Recorded unknown fact type " + tag);
+                        rtb.AppendText("Recorded unknown fact type " + tag + "\n");
                     }
                 }
                 string factDate = FamilyTree.GetText(node, "DATE");
@@ -81,15 +82,12 @@ namespace FTAnalyzer
                 XmlNodeList list = node.SelectNodes("SOUR");
                 foreach (XmlNode n in list)
                 {
-                    FactSource source = ft.getGedcomSource(n.Attributes["REF"].Value);
+                    string srcref = n.Attributes["REF"].Value;
+                    FactSource source = ft.getGedcomSource(srcref);
                     if (source != null)
-                    {
                         sources.Add(source);
-                    }
                     else
-                    {
-                        Console.WriteLine("Source not found for fact");
-                    }
+                        rtb.AppendText("Source " + srcref + " not found." + "\n");
                 }
 
                 if (factType == DEATH) {

@@ -74,6 +74,7 @@
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.rtbOutput = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -208,6 +209,7 @@
             // 
             // tabDisplayProgress
             // 
+            this.tabDisplayProgress.Controls.Add(this.rtbOutput);
             this.tabDisplayProgress.Controls.Add(this.label6);
             this.tabDisplayProgress.Controls.Add(this.pbFamilies);
             this.tabDisplayProgress.Controls.Add(this.label5);
@@ -532,6 +534,16 @@
             this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
+            // rtbOutput
+            // 
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Location = new System.Drawing.Point(10, 89);
+            this.rtbOutput.Name = "rtbOutput";
+            this.rtbOutput.Size = new System.Drawing.Size(979, 325);
+            this.rtbOutput.TabIndex = 6;
+            this.rtbOutput.Text = "";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -619,6 +631,7 @@
         private System.Windows.Forms.DataGridView dgRegions;
         private System.Windows.Forms.DataGridView dgParishes;
         private System.Windows.Forms.DataGridView dgAddresses;
+        private System.Windows.Forms.RichTextBox rtbOutput;
     }
 }
 

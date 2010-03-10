@@ -36,11 +36,12 @@ namespace FTAnalyzer
                     HourGlass(true);
                     closeIndividualForms();
                     tabControl.SelectTab(tabDisplayProgress);
+                    rtbOutput.Text = "";
                     pbSources.Value = pbIndividuals.Value = pbFamilies.Value = 0;
                     Application.DoEvents();
                     XmlDocument document = GedcomToXml.Load(openFileDialog1.FileName);
                     document.Save("GedcomOutput.xml");
-                    ft.LoadTree(document, pbSources, pbIndividuals, pbFamilies);
+                    ft.LoadTree(document, pbSources, pbIndividuals, pbFamilies, rtbOutput);
                     HourGlass(false);
                     MessageBox.Show("Gedcom File Loaded");
                 }

@@ -65,8 +65,8 @@ namespace FTAnalyzer
             locations = new Dictionary<string, FactLocation>();
         }
 
-        public void LoadTree(XmlDocument doc) { LoadTree(doc, new ProgressBar(), new ProgressBar(), new ProgressBar()); }
-        public void LoadTree(XmlDocument doc, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
+        public void LoadTree(XmlDocument doc) { LoadTree(doc, new ProgressBar(), new ProgressBar(), new ProgressBar(), new RichTextBox()); }
+        public void LoadTree(XmlDocument doc, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF, RichTextBox rtb)
         {
             ResetData();
             Application.DoEvents();
@@ -81,6 +81,7 @@ namespace FTAnalyzer
                 pbS.Value = counter++;
                 Application.DoEvents(); // allows windows to process events and prevents application from appearing to have crashed.
             }
+            rtb.AppendText("Loaded " + counter + " sources.\n");
             // now iterate through child elements of root
             // finding all individuals
             list = doc.SelectNodes("GED/INDI");
@@ -88,11 +89,12 @@ namespace FTAnalyzer
             counter = 0;
             foreach (XmlNode n in list)
             {
-                Individual individual = new Individual(n);
+                Individual individual = new Individual(n, rtb);
                 individuals.Add(individual);
                 pbI.Value = counter++;
                 Application.DoEvents();
             }
+            rtb.AppendText("Loaded " + counter + " individuals.\n");
             // now iterate through child elements of root
             // finding all families
             list = doc.SelectNodes("GED/FAM");
@@ -100,14 +102,15 @@ namespace FTAnalyzer
             counter = 0;
             foreach (XmlNode n in list)
             {
-                Family family = new Family(n);
+                Family family = new Family(n, rtb);
                 families.Add(family);
                 pbF.Value = counter++;
                 Application.DoEvents();
-            } 
+            }
+            rtb.AppendText("Loaded " + counter + " families.\nCalculating Relationships... Please wait\n\n");
             SetRelations(individuals[0].GedcomID); // needs testing
+            PrintRelationCount(rtb);
 	        SetParishes();
-            PrintRelationCount();
         }
         #endregion
 
@@ -640,18 +643,18 @@ namespace FTAnalyzer
 		    }
         }
 
-        private void PrintRelationCount()
+        private void PrintRelationCount(RichTextBox rtb)
         {
             int[] relations = {0,0,0,0,0,0};
             foreach(Individual i in individuals)
                 relations[i.RelationType]++;
-            Console.WriteLine("Direct Ancestors : " + relations[Individual.DIRECT]);
-            Console.WriteLine("Blood Relations : " + relations[Individual.BLOOD]);
-            Console.WriteLine("Married to Blood or Direct Relation : " + relations[Individual.MARRIAGEDB]);
-            Console.WriteLine("Related by Marriage : " + relations[Individual.MARRIAGE]);
-            Console.WriteLine("Unknown relation : " + relations[Individual.UNKNOWN]);
+            rtb.AppendText("Direct Ancestors : " + relations[Individual.DIRECT] + "\n");
+            rtb.AppendText("Blood Relations : " + relations[Individual.BLOOD] + "\n");
+            rtb.AppendText("Married to Blood or Direct Relation : " + relations[Individual.MARRIAGEDB] + "\n");
+            rtb.AppendText("Related by Marriage : " + relations[Individual.MARRIAGE] + "\n");
+            rtb.AppendText("Unknown relation : " + relations[Individual.UNKNOWN] + "\n");
             if(relations[Individual.UNSET] > 0)
-                Console.WriteLine("Failed to set relationship : " + relations[Individual.UNSET]);
+                rtb.AppendText("Failed to set relationship : " + relations[Individual.UNSET] + "\n");
         }
 
         #endregion

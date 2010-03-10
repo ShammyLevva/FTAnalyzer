@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using System.Windows.Forms;
 
 namespace FTAnalyzer
 {
@@ -24,7 +25,7 @@ namespace FTAnalyzer
 	    private int relationType;
 	    private List<Fact> facts;
     	
-	    public Individual (XmlNode node) {
+	    public Individual (XmlNode node, RichTextBox rtb) {
 		    gedcomID = node.Attributes["ID"].Value;
             individualID = gedcomID;
             Name =   FamilyTree.GetText(node, "NAME");
@@ -33,14 +34,14 @@ namespace FTAnalyzer
 		    relationType = UNKNOWN;
 		    status = UNKNOWNSTATUS;
 		    facts = new List<Fact>();
-		    addFacts(node, Fact.BIRTH);
-		    addFacts(node, Fact.CHRISTENING);
-		    addFacts(node, Fact.DEATH);
-		    addFacts(node, Fact.BURIAL);
-		    addFacts(node, Fact.CENSUS);
-		    addFacts(node, Fact.RESIDENCE);
-		    addFacts(node, Fact.OCCUPATION);
-		    addFacts(node, Fact.CUSTOM_FACT);
+		    addFacts(node, Fact.BIRTH, rtb);
+            addFacts(node, Fact.CHRISTENING, rtb);
+            addFacts(node, Fact.DEATH, rtb);
+            addFacts(node, Fact.BURIAL, rtb);
+            addFacts(node, Fact.CENSUS, rtb);
+            addFacts(node, Fact.RESIDENCE, rtb);
+            addFacts(node, Fact.OCCUPATION, rtb);
+            addFacts(node, Fact.CUSTOM_FACT, rtb);
         }
 
         internal Individual(Individual i)
@@ -340,10 +341,11 @@ namespace FTAnalyzer
 
         #region Fact Functions
 
-        private void addFacts(XmlNode node, string factType) {
+        private void addFacts(XmlNode node, string factType, RichTextBox rtb)
+        {
             XmlNodeList list = node.SelectNodes(factType);
 	        foreach(XmlNode n in list) {
-	            addFact(new Fact(n));
+	            addFact(new Fact(n, rtb));
 	        }
 	    }
 

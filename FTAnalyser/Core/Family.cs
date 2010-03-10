@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using System.Windows.Forms;
 
 namespace FTAnalyzer
 {
@@ -33,7 +34,7 @@ namespace FTAnalyzer
 
         public Family() : this("", "") {}
 
-        public Family(XmlNode node) : this("", "")
+        public Family(XmlNode node, RichTextBox rtb) : this("", "")
         {
             if (node != null)
             {
@@ -56,10 +57,10 @@ namespace FTAnalyzer
                     if (child != null)
                         children.Add(child);
                     else
-                        Console.WriteLine("Child not found in family :" + this.familyGed);
+                        rtb.AppendText("Child not found in family :" + this.familyGed + "\n");
                 }
-                addFacts(node, Fact.MARRIAGE);
-                addFacts(node, Fact.CUSTOM_FACT);
+                addFacts(node, Fact.MARRIAGE, rtb);
+                addFacts(node, Fact.CUSTOM_FACT, rtb);
             }
         }
 
@@ -77,12 +78,12 @@ namespace FTAnalyzer
             this.children = new List<Individual>(f.children);
         }
 
-        private void addFacts(XmlNode node, string factType)
+        private void addFacts(XmlNode node, string factType, RichTextBox rtb)
         {
             XmlNodeList list = node.SelectNodes(factType);
             foreach(XmlNode n in list)
             {
-                facts.Add(new Fact(n));
+                facts.Add(new Fact(n, rtb));
             }
         }
 
