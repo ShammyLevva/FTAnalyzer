@@ -32,17 +32,9 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.censusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu1841Census = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu1851Census = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu1861Census = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu1871Census = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu1881Census = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu1891Census = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu1901Census = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu1911Census = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
+            this.rtbOutput = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.pbFamilies = new System.Windows.Forms.ProgressBar();
             this.label5 = new System.Windows.Forms.Label();
@@ -51,14 +43,23 @@
             this.pbSources = new System.Windows.Forms.ProgressBar();
             this.tabIndividuals = new System.Windows.Forms.TabPage();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
-            this.tabTestFactDate = new System.Windows.Forms.TabPage();
-            this.txtEndDate = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtStartDate = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.tabCensus = new System.Windows.Forms.TabPage();
+            this.btnShowResults = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ckbUnknown = new System.Windows.Forms.CheckBox();
+            this.ckbMarriageDB = new System.Windows.Forms.CheckBox();
+            this.ckbMarriage = new System.Windows.Forms.CheckBox();
+            this.ckbBlood = new System.Windows.Forms.CheckBox();
+            this.ckbDirects = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtTestDate = new System.Windows.Forms.TextBox();
-            this.btnTestDates = new System.Windows.Forms.Button();
+            this.cbCensusDate = new System.Windows.Forms.ComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbUSA = new System.Windows.Forms.RadioButton();
+            this.rbCanada = new System.Windows.Forms.RadioButton();
+            this.rbGB = new System.Windows.Forms.RadioButton();
+            this.rbWales = new System.Windows.Forms.RadioButton();
+            this.rbEngland = new System.Windows.Forms.RadioButton();
+            this.rbScotland = new System.Windows.Forms.RadioButton();
             this.tabLooseDeaths = new System.Windows.Forms.TabPage();
             this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
             this.tabLocations = new System.Windows.Forms.TabPage();
@@ -74,13 +75,14 @@
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.rtbOutput = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
             this.tabIndividuals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
-            this.tabTestFactDate.SuspendLayout();
+            this.tabCensus.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.tabLooseDeaths.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).BeginInit();
             this.tabLocations.SuspendLayout();
@@ -103,8 +105,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.censusToolStripMenuItem});
+            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1009, 24);
@@ -116,79 +117,15 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
-            // 
-            // censusToolStripMenuItem
-            // 
-            this.censusToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu1841Census,
-            this.mnu1851Census,
-            this.mnu1861Census,
-            this.mnu1871Census,
-            this.mnu1881Census,
-            this.mnu1891Census,
-            this.mnu1901Census,
-            this.mnu1911Census});
-            this.censusToolStripMenuItem.Name = "censusToolStripMenuItem";
-            this.censusToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.censusToolStripMenuItem.Text = "Census";
-            // 
-            // mnu1841Census
-            // 
-            this.mnu1841Census.Name = "mnu1841Census";
-            this.mnu1841Census.Size = new System.Drawing.Size(109, 22);
-            this.mnu1841Census.Text = "1841";
-            // 
-            // mnu1851Census
-            // 
-            this.mnu1851Census.Name = "mnu1851Census";
-            this.mnu1851Census.Size = new System.Drawing.Size(109, 22);
-            this.mnu1851Census.Text = "1851";
-            // 
-            // mnu1861Census
-            // 
-            this.mnu1861Census.Name = "mnu1861Census";
-            this.mnu1861Census.Size = new System.Drawing.Size(109, 22);
-            this.mnu1861Census.Text = "1861";
-            // 
-            // mnu1871Census
-            // 
-            this.mnu1871Census.Name = "mnu1871Census";
-            this.mnu1871Census.Size = new System.Drawing.Size(109, 22);
-            this.mnu1871Census.Text = "1871";
-            // 
-            // mnu1881Census
-            // 
-            this.mnu1881Census.Name = "mnu1881Census";
-            this.mnu1881Census.Size = new System.Drawing.Size(109, 22);
-            this.mnu1881Census.Text = "1881";
-            // 
-            // mnu1891Census
-            // 
-            this.mnu1891Census.Name = "mnu1891Census";
-            this.mnu1891Census.Size = new System.Drawing.Size(109, 22);
-            this.mnu1891Census.Text = "1891";
-            // 
-            // mnu1901Census
-            // 
-            this.mnu1901Census.Name = "mnu1901Census";
-            this.mnu1901Census.Size = new System.Drawing.Size(109, 22);
-            this.mnu1901Census.Text = "1901";
-            // 
-            // mnu1911Census
-            // 
-            this.mnu1911Census.Name = "mnu1911Census";
-            this.mnu1911Census.Size = new System.Drawing.Size(109, 22);
-            this.mnu1911Census.Text = "1911";
-            this.mnu1911Census.Click += new System.EventHandler(this.mnu1911Census_Click);
             // 
             // tabControl
             // 
@@ -197,7 +134,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabDisplayProgress);
             this.tabControl.Controls.Add(this.tabIndividuals);
-            this.tabControl.Controls.Add(this.tabTestFactDate);
+            this.tabControl.Controls.Add(this.tabCensus);
             this.tabControl.Controls.Add(this.tabLooseDeaths);
             this.tabControl.Controls.Add(this.tabLocations);
             this.tabControl.Location = new System.Drawing.Point(0, 27);
@@ -223,6 +160,16 @@
             this.tabDisplayProgress.TabIndex = 1;
             this.tabDisplayProgress.Text = "Load Gedcom";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
+            // 
+            // rtbOutput
+            // 
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Location = new System.Drawing.Point(10, 89);
+            this.rtbOutput.Name = "rtbOutput";
+            this.rtbOutput.Size = new System.Drawing.Size(979, 325);
+            this.rtbOutput.TabIndex = 6;
+            this.rtbOutput.Text = "";
             // 
             // label6
             // 
@@ -293,81 +240,204 @@
             this.dgIndividuals.TabIndex = 0;
             this.dgIndividuals.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgIndividuals_ColumnHeaderMouseClick);
             // 
-            // tabTestFactDate
+            // tabCensus
             // 
-            this.tabTestFactDate.Controls.Add(this.txtEndDate);
-            this.tabTestFactDate.Controls.Add(this.label3);
-            this.tabTestFactDate.Controls.Add(this.txtStartDate);
-            this.tabTestFactDate.Controls.Add(this.label2);
-            this.tabTestFactDate.Controls.Add(this.label1);
-            this.tabTestFactDate.Controls.Add(this.txtTestDate);
-            this.tabTestFactDate.Controls.Add(this.btnTestDates);
-            this.tabTestFactDate.Location = new System.Drawing.Point(4, 22);
-            this.tabTestFactDate.Name = "tabTestFactDate";
-            this.tabTestFactDate.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTestFactDate.Size = new System.Drawing.Size(1001, 420);
-            this.tabTestFactDate.TabIndex = 0;
-            this.tabTestFactDate.Text = "Test Fact Date";
-            this.tabTestFactDate.UseVisualStyleBackColor = true;
+            this.tabCensus.Controls.Add(this.btnShowResults);
+            this.tabCensus.Controls.Add(this.groupBox2);
+            this.tabCensus.Controls.Add(this.label1);
+            this.tabCensus.Controls.Add(this.cbCensusDate);
+            this.tabCensus.Controls.Add(this.groupBox1);
+            this.tabCensus.Location = new System.Drawing.Point(4, 22);
+            this.tabCensus.Name = "tabCensus";
+            this.tabCensus.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCensus.Size = new System.Drawing.Size(1001, 420);
+            this.tabCensus.TabIndex = 0;
+            this.tabCensus.Text = "Census";
+            this.tabCensus.UseVisualStyleBackColor = true;
             // 
-            // txtEndDate
+            // btnShowResults
             // 
-            this.txtEndDate.Enabled = false;
-            this.txtEndDate.Location = new System.Drawing.Point(293, 53);
-            this.txtEndDate.Name = "txtEndDate";
-            this.txtEndDate.Size = new System.Drawing.Size(81, 20);
-            this.txtEndDate.TabIndex = 15;
+            this.btnShowResults.Location = new System.Drawing.Point(257, 93);
+            this.btnShowResults.Name = "btnShowResults";
+            this.btnShowResults.Size = new System.Drawing.Size(82, 25);
+            this.btnShowResults.TabIndex = 4;
+            this.btnShowResults.Text = "Show Results";
+            this.btnShowResults.UseVisualStyleBackColor = true;
+            this.btnShowResults.Click += new System.EventHandler(this.btnShowResults_Click);
             // 
-            // label3
+            // groupBox2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(205, 56);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 13);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "End Date";
+            this.groupBox2.Controls.Add(this.ckbUnknown);
+            this.groupBox2.Controls.Add(this.ckbMarriageDB);
+            this.groupBox2.Controls.Add(this.ckbMarriage);
+            this.groupBox2.Controls.Add(this.ckbBlood);
+            this.groupBox2.Controls.Add(this.ckbDirects);
+            this.groupBox2.Location = new System.Drawing.Point(345, 15);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(317, 72);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Relationship Types";
             // 
-            // txtStartDate
+            // ckbUnknown
             // 
-            this.txtStartDate.Enabled = false;
-            this.txtStartDate.Location = new System.Drawing.Point(106, 53);
-            this.txtStartDate.Name = "txtStartDate";
-            this.txtStartDate.Size = new System.Drawing.Size(81, 20);
-            this.txtStartDate.TabIndex = 13;
+            this.ckbUnknown.AutoSize = true;
+            this.ckbUnknown.Location = new System.Drawing.Point(243, 20);
+            this.ckbUnknown.Name = "ckbUnknown";
+            this.ckbUnknown.Size = new System.Drawing.Size(72, 17);
+            this.ckbUnknown.TabIndex = 4;
+            this.ckbUnknown.Text = "Unknown";
+            this.ckbUnknown.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // ckbMarriageDB
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 56);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Start Date";
+            this.ckbMarriageDB.AutoSize = true;
+            this.ckbMarriageDB.Checked = true;
+            this.ckbMarriageDB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbMarriageDB.Location = new System.Drawing.Point(116, 42);
+            this.ckbMarriageDB.Name = "ckbMarriageDB";
+            this.ckbMarriageDB.Size = new System.Drawing.Size(146, 17);
+            this.ckbMarriageDB.TabIndex = 3;
+            this.ckbMarriageDB.Text = "Married to Blood or Direct";
+            this.ckbMarriageDB.UseVisualStyleBackColor = true;
+            // 
+            // ckbMarriage
+            // 
+            this.ckbMarriage.AutoSize = true;
+            this.ckbMarriage.Location = new System.Drawing.Point(116, 19);
+            this.ckbMarriage.Name = "ckbMarriage";
+            this.ckbMarriage.Size = new System.Drawing.Size(121, 17);
+            this.ckbMarriage.TabIndex = 2;
+            this.ckbMarriage.Text = "Related by Marriage";
+            this.ckbMarriage.UseVisualStyleBackColor = true;
+            // 
+            // ckbBlood
+            // 
+            this.ckbBlood.AutoSize = true;
+            this.ckbBlood.Checked = true;
+            this.ckbBlood.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbBlood.Location = new System.Drawing.Point(6, 43);
+            this.ckbBlood.Name = "ckbBlood";
+            this.ckbBlood.Size = new System.Drawing.Size(100, 17);
+            this.ckbBlood.TabIndex = 1;
+            this.ckbBlood.Text = "Blood Relations";
+            this.ckbBlood.UseVisualStyleBackColor = true;
+            // 
+            // ckbDirects
+            // 
+            this.ckbDirects.AutoSize = true;
+            this.ckbDirects.Checked = true;
+            this.ckbDirects.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbDirects.Location = new System.Drawing.Point(6, 20);
+            this.ckbDirects.Name = "ckbDirects";
+            this.ckbDirects.Size = new System.Drawing.Size(104, 17);
+            this.ckbDirects.TabIndex = 0;
+            this.ckbDirects.Text = "Direct Ancestors";
+            this.ckbDirects.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 22);
+            this.label1.Location = new System.Drawing.Point(17, 99);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Enter Test Date";
+            this.label1.Size = new System.Drawing.Size(68, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Census Date";
             // 
-            // txtTestDate
+            // cbCensusDate
             // 
-            this.txtTestDate.Location = new System.Drawing.Point(106, 19);
-            this.txtTestDate.Name = "txtTestDate";
-            this.txtTestDate.Size = new System.Drawing.Size(174, 20);
-            this.txtTestDate.TabIndex = 10;
+            this.cbCensusDate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCensusDate.FormattingEnabled = true;
+            this.cbCensusDate.Items.AddRange(new object[] {
+            "1841",
+            "1851",
+            "1861",
+            "1871",
+            "1881",
+            "1891",
+            "1901",
+            "1911"});
+            this.cbCensusDate.Location = new System.Drawing.Point(91, 93);
+            this.cbCensusDate.Name = "cbCensusDate";
+            this.cbCensusDate.Size = new System.Drawing.Size(49, 21);
+            this.cbCensusDate.TabIndex = 1;
             // 
-            // btnTestDates
+            // groupBox1
             // 
-            this.btnTestDates.Location = new System.Drawing.Point(289, 14);
-            this.btnTestDates.Name = "btnTestDates";
-            this.btnTestDates.Size = new System.Drawing.Size(85, 28);
-            this.btnTestDates.TabIndex = 9;
-            this.btnTestDates.Text = "Test FactDate";
-            this.btnTestDates.UseVisualStyleBackColor = true;
+            this.groupBox1.Controls.Add(this.rbUSA);
+            this.groupBox1.Controls.Add(this.rbCanada);
+            this.groupBox1.Controls.Add(this.rbGB);
+            this.groupBox1.Controls.Add(this.rbWales);
+            this.groupBox1.Controls.Add(this.rbEngland);
+            this.groupBox1.Controls.Add(this.rbScotland);
+            this.groupBox1.Location = new System.Drawing.Point(13, 15);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(326, 72);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Census Country";
+            // 
+            // rbUSA
+            // 
+            this.rbUSA.AutoSize = true;
+            this.rbUSA.Location = new System.Drawing.Point(79, 42);
+            this.rbUSA.Name = "rbUSA";
+            this.rbUSA.Size = new System.Drawing.Size(89, 17);
+            this.rbUSA.TabIndex = 5;
+            this.rbUSA.Text = "United States";
+            this.rbUSA.UseVisualStyleBackColor = true;
+            // 
+            // rbCanada
+            // 
+            this.rbCanada.AutoSize = true;
+            this.rbCanada.Location = new System.Drawing.Point(6, 42);
+            this.rbCanada.Name = "rbCanada";
+            this.rbCanada.Size = new System.Drawing.Size(62, 17);
+            this.rbCanada.TabIndex = 4;
+            this.rbCanada.Text = "Canada";
+            this.rbCanada.UseVisualStyleBackColor = true;
+            // 
+            // rbGB
+            // 
+            this.rbGB.AutoSize = true;
+            this.rbGB.Location = new System.Drawing.Point(210, 19);
+            this.rbGB.Name = "rbGB";
+            this.rbGB.Size = new System.Drawing.Size(83, 17);
+            this.rbGB.TabIndex = 3;
+            this.rbGB.Text = "Great Britain";
+            this.rbGB.UseVisualStyleBackColor = true;
+            // 
+            // rbWales
+            // 
+            this.rbWales.AutoSize = true;
+            this.rbWales.Location = new System.Drawing.Point(149, 19);
+            this.rbWales.Name = "rbWales";
+            this.rbWales.Size = new System.Drawing.Size(55, 17);
+            this.rbWales.TabIndex = 2;
+            this.rbWales.Text = "Wales";
+            this.rbWales.UseVisualStyleBackColor = true;
+            // 
+            // rbEngland
+            // 
+            this.rbEngland.AutoSize = true;
+            this.rbEngland.Location = new System.Drawing.Point(79, 19);
+            this.rbEngland.Name = "rbEngland";
+            this.rbEngland.Size = new System.Drawing.Size(64, 17);
+            this.rbEngland.TabIndex = 1;
+            this.rbEngland.Text = "England";
+            this.rbEngland.UseVisualStyleBackColor = true;
+            // 
+            // rbScotland
+            // 
+            this.rbScotland.AutoSize = true;
+            this.rbScotland.Checked = true;
+            this.rbScotland.Location = new System.Drawing.Point(6, 19);
+            this.rbScotland.Name = "rbScotland";
+            this.rbScotland.Size = new System.Drawing.Size(67, 17);
+            this.rbScotland.TabIndex = 0;
+            this.rbScotland.TabStop = true;
+            this.rbScotland.Text = "Scotland";
+            this.rbScotland.UseVisualStyleBackColor = true;
             // 
             // tabLooseDeaths
             // 
@@ -531,18 +601,8 @@
             // tsCountLabel
             // 
             this.tsCountLabel.Name = "tsCountLabel";
-            this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
+            this.tsCountLabel.Size = new System.Drawing.Size(55, 17);
             this.tsCountLabel.Text = "Count : 0";
-            // 
-            // rtbOutput
-            // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbOutput.Location = new System.Drawing.Point(10, 89);
-            this.rtbOutput.Name = "rtbOutput";
-            this.rtbOutput.Size = new System.Drawing.Size(979, 325);
-            this.rtbOutput.TabIndex = 6;
-            this.rtbOutput.Text = "";
             // 
             // MainForm
             // 
@@ -562,8 +622,12 @@
             this.tabDisplayProgress.PerformLayout();
             this.tabIndividuals.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
-            this.tabTestFactDate.ResumeLayout(false);
-            this.tabTestFactDate.PerformLayout();
+            this.tabCensus.ResumeLayout(false);
+            this.tabCensus.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.tabLooseDeaths.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).EndInit();
             this.tabLocations.ResumeLayout(false);
@@ -590,14 +654,7 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tabTestFactDate;
-        private System.Windows.Forms.TextBox txtEndDate;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtStartDate;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtTestDate;
-        private System.Windows.Forms.Button btnTestDates;
+        private System.Windows.Forms.TabPage tabCensus;
         private System.Windows.Forms.TabPage tabDisplayProgress;
         private System.Windows.Forms.ProgressBar pbSources;
         private System.Windows.Forms.Label label4;
@@ -612,15 +669,6 @@
         private System.Windows.Forms.ToolStripStatusLabel tsCount;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel tsCountLabel;
-        private System.Windows.Forms.ToolStripMenuItem censusToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnu1841Census;
-        private System.Windows.Forms.ToolStripMenuItem mnu1851Census;
-        private System.Windows.Forms.ToolStripMenuItem mnu1861Census;
-        private System.Windows.Forms.ToolStripMenuItem mnu1871Census;
-        private System.Windows.Forms.ToolStripMenuItem mnu1881Census;
-        private System.Windows.Forms.ToolStripMenuItem mnu1891Census;
-        private System.Windows.Forms.ToolStripMenuItem mnu1901Census;
-        private System.Windows.Forms.ToolStripMenuItem mnu1911Census;
         private System.Windows.Forms.TabPage tabLocations;
         private System.Windows.Forms.TabControl tabCtrlLocations;
         private System.Windows.Forms.TabPage tabCountries;
@@ -632,6 +680,22 @@
         private System.Windows.Forms.DataGridView dgParishes;
         private System.Windows.Forms.DataGridView dgAddresses;
         private System.Windows.Forms.RichTextBox rtbOutput;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rbScotland;
+        private System.Windows.Forms.RadioButton rbEngland;
+        private System.Windows.Forms.RadioButton rbWales;
+        private System.Windows.Forms.RadioButton rbGB;
+        private System.Windows.Forms.RadioButton rbUSA;
+        private System.Windows.Forms.RadioButton rbCanada;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbCensusDate;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox ckbBlood;
+        private System.Windows.Forms.CheckBox ckbDirects;
+        private System.Windows.Forms.CheckBox ckbMarriageDB;
+        private System.Windows.Forms.CheckBox ckbMarriage;
+        private System.Windows.Forms.CheckBox ckbUnknown;
+        private System.Windows.Forms.Button btnShowResults;
     }
 }
 

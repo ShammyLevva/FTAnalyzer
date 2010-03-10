@@ -152,6 +152,8 @@
     <Compile Include="Filters\AllFilter.cs" />
     <Compile Include="Filters\AndFilter.cs" />
     <Compile Include="Filters\BirthFilter.cs" />
+    <Compile Include="Filters\FalseFilter.cs" />
+    <Compile Include="Filters\TrueFilter.cs" />
     <Compile Include="Filters\DateFilter.cs" />
     <Compile Include="Filters\IncompleteDataFilter.cs" />
     <Compile Include="Filters\LocationFilter.cs" />

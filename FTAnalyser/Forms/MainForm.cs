@@ -14,11 +14,12 @@ namespace FTAnalyzer
     {
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
+        private FactDate censusDate = FactDate.CENSUS1841;
             
         public MainForm()
         {
             InitializeComponent();
-            tabTestFactDate.Hide();
+            tabCensus.Hide();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -64,13 +65,6 @@ namespace FTAnalyzer
                 f.Close();
         }
 
-        private void btnTestDates_Click(object sender, EventArgs e)
-        {
-            FactDate fd = new FactDate(txtTestDate.Text);
-            txtStartDate.Text = FactDate.Format(FactDate.FULL, fd.StartDate);
-            txtEndDate.Text = FactDate.Format(FactDate.FULL, fd.EndDate);
-        }
-
         private void HourGlass(bool on)
         {
             if (on)
@@ -95,7 +89,7 @@ namespace FTAnalyzer
                 dgIndividuals.DataSource = list;
                 tsCountLabel.Text = "Count : " + list.Count;
             }
-            else if (tabControl.SelectedTab == tabIndividuals)
+            else if (tabControl.SelectedTab == tabCensus)
             {
                 tsCountLabel.Text = "";
             } else if (tabControl.SelectedTab == tabLooseDeaths)
@@ -148,23 +142,6 @@ namespace FTAnalyzer
             tsCountLabel.Text = "Count : " + list.Count; 
         }
 
-        private void mnu1911Census_Click(object sender, EventArgs e)
-        {
-            RegistrationFilter directOrBlood = new OrFilter(
-                    new OrFilter(new RelationFilter(Individual.DIRECT),
-                                 new RelationFilter(Individual.BLOOD)),
-                    new RelationFilter(Individual.MARRIAGEDB)); 
-            MultiComparator<Registration> byCensusLocation = new MultiComparator<Registration>();
-            byCensusLocation.addComparator(new LocationComparator(FactLocation.PARISH));
-            byCensusLocation.addComparator(new DateComparator());
-            RegistrationsProcessor censusRP = new RegistrationsProcessor(
-                    new AndFilter(directOrBlood, LocationFilter.ENGLAND_FILTER), byCensusLocation);
-
-            Forms.Census census = new Forms.Census();
-            census.setupCensus(censusRP, FactDate.CENSUS1911);
-            census.Show();
-        }
-
         private void dgCountries_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             HourGlass(true);
@@ -203,6 +180,68 @@ namespace FTAnalyzer
             frmInd.setLocation(loc, FactLocation.ADDRESS);
             frmInd.Show();
             HourGlass(false);
+        }
+
+        private void btnShowResults_Click(object sender, EventArgs e)
+        {
+            RegistrationFilter filter = createRegistrationFilter();
+            MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();
+            censusComparator.addComparator(new LocationComparator(FactLocation.PARISH));
+            censusComparator.addComparator(new DateComparator());
+            RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
+
+            Forms.Census census = new Forms.Census();
+            census.setupCensus(censusRP, censusDate);
+            census.Text = censusDate.StartDate.Year.ToString() + " Census Records to search for";
+            census.Show();
+        }
+
+        private RegistrationFilter createRegistrationFilter()
+        {
+            RegistrationFilter locationFilter = new TrueFilter();
+            if (rbScotland.Checked)
+                locationFilter = LocationFilter.SCOTLAND_FILTER;
+            if (rbEngland.Checked)
+                locationFilter = LocationFilter.ENGLAND_FILTER;
+            if (rbWales.Checked)
+                locationFilter = LocationFilter.WALES_FILTER;
+            if (rbGB.Checked)
+                locationFilter = new AndFilter(LocationFilter.SCOTLAND_FILTER, new AndFilter(LocationFilter.ENGLAND_FILTER, LocationFilter.WALES_FILTER));
+            if (rbCanada.Checked)
+                locationFilter = LocationFilter.CANADA_FILTER;
+            if (rbUSA.Checked)
+                locationFilter = LocationFilter.USA_FILTER;
+            
+            RegistrationFilter relationFilter = new FalseFilter();
+            if (ckbBlood.Checked)
+                relationFilter = new OrFilter(new RelationFilter(Individual.BLOOD), relationFilter);
+            else if (ckbDirects.Checked)
+                relationFilter = new OrFilter(new RelationFilter(Individual.DIRECT), relationFilter);
+            else if (ckbMarriage.Checked)
+                relationFilter = new OrFilter(new RelationFilter(Individual.MARRIAGE), relationFilter);
+            else if (ckbMarriageDB.Checked)
+                relationFilter = new OrFilter(new RelationFilter(Individual.MARRIAGEDB), relationFilter);
+            else if (ckbUnknown.Checked)
+                relationFilter = new OrFilter(new RelationFilter(Individual.UNKNOWN), relationFilter);
+
+            if (cbCensusDate.Text == "1841")
+                censusDate = FactDate.CENSUS1841;
+            else if (cbCensusDate.Text == "1851")
+                censusDate = FactDate.CENSUS1851;
+            else if (cbCensusDate.Text == "1861")
+                censusDate = FactDate.CENSUS1861;
+            else if (cbCensusDate.Text == "1871")
+                censusDate = FactDate.CENSUS1871;
+            else if (cbCensusDate.Text == "1881")
+                censusDate = FactDate.CENSUS1881;
+            else if (cbCensusDate.Text == "1891")
+                censusDate = FactDate.CENSUS1891;
+            else if (cbCensusDate.Text == "1901")
+                censusDate = FactDate.CENSUS1901;
+            else if (cbCensusDate.Text == "1911")
+                censusDate = FactDate.CENSUS1911;
+
+            return new AndFilter(locationFilter, new AndFilter(relationFilter, new DateFilter(censusDate)));
         }
     }
 }

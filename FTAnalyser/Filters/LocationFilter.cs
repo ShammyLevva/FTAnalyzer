@@ -11,13 +11,14 @@ namespace FTAnalyzer
         private string searchstring;
         private int level;
         
-        public static readonly LocationFilter SCOTLAND_FILTER =
-        	    new LocationFilter("Scotland", FactLocation.COUNTRY);
-        
-        public static readonly LocationFilter ENGLAND_FILTER =
-    	    new LocationFilter("England", FactLocation.COUNTRY);
+        public static readonly LocationFilter SCOTLAND_FILTER = new LocationFilter("Scotland", FactLocation.COUNTRY);
+        public static readonly LocationFilter ENGLAND_FILTER = new LocationFilter("England", FactLocation.COUNTRY);
+        public static readonly LocationFilter WALES_FILTER = new LocationFilter("Wales", FactLocation.COUNTRY);
+        public static readonly LocationFilter CANADA_FILTER = new LocationFilter("Canada", FactLocation.COUNTRY);
+        public static readonly LocationFilter USA_FILTER = new LocationFilter("USA", FactLocation.COUNTRY);
 
-        public LocationFilter (string searchstring, int level) {
+        public LocationFilter(string searchstring, int level)
+        {
             this.searchstring = searchstring.ToLower();
             this.level = level; 
         }
