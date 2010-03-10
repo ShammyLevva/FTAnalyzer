@@ -687,23 +687,6 @@ namespace FTAnalyzer
             output.Close();
         }
 
-        /*
-        private void OpenWordDocument(object filename)
-        {
-            Microsoft.Office.Interop.Word.ApplicationClass WordApp = new Microsoft.Office.Interop.Word.ApplicationClass();
-            object readOnly = false;
-            object isVisible = true;
-            // Here is the way to handle parameters you don't care about in .NET
-            object missing = System.Reflection.Missing.Value;
-            // Make word visible, so you can see what's happening
-            WordApp.Visible = true;
-            // Open the document that was chosen by the dialog
-            Microsoft.Office.Interop.Word.Document aDoc = 
-                WordApp.Documents.Open2000(ref filename, ref missing, ref readOnly, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref isVisible);
-            aDoc.Activate();
-        }
-        */
-
         public List<Registration> getAllBirthRegistrations()
         {
             List<Registration> result = new List<Registration>();

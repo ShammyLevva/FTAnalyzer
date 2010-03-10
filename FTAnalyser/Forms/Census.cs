@@ -24,7 +24,7 @@ namespace FTAnalyzer.Forms
             List<DisplayCensus> ds = new List<DisplayCensus>();
             foreach (CensusRegistration r in census)
                 foreach (Individual i in r.Members)
-                    ds.Add(new DisplayCensus(r.FamilyGed, r.BestLocation, r.registrationDate, i));
+                    ds.Add(new DisplayCensus(r.FamilyGed, r.RegistrationLocation, r.registrationDate, i));
             // ds.sort(new IndividualNameComparator());
             dgCensus.DataSource = ds;
         }

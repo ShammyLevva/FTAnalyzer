@@ -20,14 +20,14 @@ namespace FTAnalyzer
             this.ind = ind;
         }
 
-        string FamilyGed { get { return familyGed; } }
-        string RegistrationLocation { get { return regLocation; } }
-        string CensusName { get { return ind.CensusName; } }
-        Age Age { get { return ind.getAge(regDate); } }
-        string Occupation { get { return ind.Occupation; } }
-        string DateOfBirth { get { return ind.DateOfBirth; } }
-        string BirthLocation { get { return ind.BirthLocation; } }
-        string Status { get { return ind.Status; } }
+        public string FamilyGed { get { return familyGed; } }
+        public string RegistrationLocation { get { return regLocation; } }
+        public string CensusName { get { return ind.CensusName; } }
+        public Age Age { get { return ind.getAge(regDate); } }
+        public string Occupation { get { return ind.Occupation; } }
+        public string DateOfBirth { get { return ind.DateOfBirth; } }
+        public string BirthLocation { get { return ind.BirthLocation; } }
+        public string Status { get { return ind.Status; } }
 
     }
 }

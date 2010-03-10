@@ -57,7 +57,7 @@ namespace FTAnalyzer
             List<Form> toClose = new List<Form>();
             foreach (Form f in Application.OpenForms)
             {
-                if (f is Forms.Individuals)
+                if (f is Forms.Individuals || f is Forms.Census)
                     toClose.Add(f);
             }
             foreach (Form f in toClose)
