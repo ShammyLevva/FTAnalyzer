@@ -84,6 +84,7 @@
             this.btnLC1841EW = new System.Windows.Forms.Button();
             this.btnLC1911Ireland = new System.Windows.Forms.Button();
             this.btnLC1880USA = new System.Windows.Forms.Button();
+            this.ckbRestrictions = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -634,6 +635,7 @@
             // 
             // tabLostCousins
             // 
+            this.tabLostCousins.Controls.Add(this.ckbRestrictions);
             this.tabLostCousins.Controls.Add(this.btnLC1841EW);
             this.tabLostCousins.Controls.Add(this.btnLC1911Ireland);
             this.tabLostCousins.Controls.Add(this.btnLC1880USA);
@@ -650,7 +652,7 @@
             // 
             // btnLC1881Scot
             // 
-            this.btnLC1881Scot.Location = new System.Drawing.Point(190, 13);
+            this.btnLC1881Scot.Location = new System.Drawing.Point(190, 45);
             this.btnLC1881Scot.Name = "btnLC1881Scot";
             this.btnLC1881Scot.Size = new System.Drawing.Size(162, 36);
             this.btnLC1881Scot.TabIndex = 0;
@@ -660,7 +662,7 @@
             // 
             // btnLC1881Canada
             // 
-            this.btnLC1881Canada.Location = new System.Drawing.Point(358, 13);
+            this.btnLC1881Canada.Location = new System.Drawing.Point(358, 45);
             this.btnLC1881Canada.Name = "btnLC1881Canada";
             this.btnLC1881Canada.Size = new System.Drawing.Size(162, 36);
             this.btnLC1881Canada.TabIndex = 4;
@@ -670,7 +672,7 @@
             // 
             // btnLC1881EW
             // 
-            this.btnLC1881EW.Location = new System.Drawing.Point(22, 13);
+            this.btnLC1881EW.Location = new System.Drawing.Point(22, 45);
             this.btnLC1881EW.Name = "btnLC1881EW";
             this.btnLC1881EW.Size = new System.Drawing.Size(162, 36);
             this.btnLC1881EW.TabIndex = 5;
@@ -680,7 +682,7 @@
             // 
             // btnLC1841EW
             // 
-            this.btnLC1841EW.Location = new System.Drawing.Point(22, 55);
+            this.btnLC1841EW.Location = new System.Drawing.Point(22, 87);
             this.btnLC1841EW.Name = "btnLC1841EW";
             this.btnLC1841EW.Size = new System.Drawing.Size(162, 36);
             this.btnLC1841EW.TabIndex = 8;
@@ -690,7 +692,7 @@
             // 
             // btnLC1911Ireland
             // 
-            this.btnLC1911Ireland.Location = new System.Drawing.Point(358, 55);
+            this.btnLC1911Ireland.Location = new System.Drawing.Point(358, 87);
             this.btnLC1911Ireland.Name = "btnLC1911Ireland";
             this.btnLC1911Ireland.Size = new System.Drawing.Size(162, 36);
             this.btnLC1911Ireland.TabIndex = 7;
@@ -700,13 +702,26 @@
             // 
             // btnLC1880USA
             // 
-            this.btnLC1880USA.Location = new System.Drawing.Point(190, 55);
+            this.btnLC1880USA.Location = new System.Drawing.Point(190, 87);
             this.btnLC1880USA.Name = "btnLC1880USA";
             this.btnLC1880USA.Size = new System.Drawing.Size(162, 36);
             this.btnLC1880USA.TabIndex = 6;
             this.btnLC1880USA.Text = "1880 US Census";
             this.btnLC1880USA.UseVisualStyleBackColor = true;
             this.btnLC1880USA.Click += new System.EventHandler(this.btnLC1880USA_Click);
+            // 
+            // ckbRestrictions
+            // 
+            this.ckbRestrictions.AutoSize = true;
+            this.ckbRestrictions.Checked = true;
+            this.ckbRestrictions.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbRestrictions.Location = new System.Drawing.Point(22, 22);
+            this.ckbRestrictions.Name = "ckbRestrictions";
+            this.ckbRestrictions.Size = new System.Drawing.Size(521, 17);
+            this.ckbRestrictions.TabIndex = 9;
+            this.ckbRestrictions.Text = "Restrict results to only those direct ancestors, blood relations and those marrie" +
+                "d to direct or blood relations";
+            this.ckbRestrictions.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -747,6 +762,7 @@
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.tabLostCousins.ResumeLayout(false);
+            this.tabLostCousins.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -810,6 +826,7 @@
         private System.Windows.Forms.Button btnLC1880USA;
         private System.Windows.Forms.Button btnLC1881EW;
         private System.Windows.Forms.Button btnLC1881Canada;
+        private System.Windows.Forms.CheckBox ckbRestrictions;
     }
 }
 

@@ -16,10 +16,10 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
         }
 
-        public void setupCensus(RegistrationsProcessor rp, FactDate date)
+        public void setupCensus(RegistrationsProcessor rp, FactDate date, bool censusDone)
         {
             FamilyTree ft = FamilyTree.Instance;
-            List<Registration> regs = ft.getAllCensusRegistrations(date);
+            List<Registration> regs = ft.getAllCensusRegistrations(date, censusDone);
             List<Registration> census = rp.processRegistrations(regs);
             List<DisplayCensus> ds = new List<DisplayCensus>();
             foreach (CensusRegistration r in census)
@@ -27,6 +27,7 @@ namespace FTAnalyzer.Forms
                     ds.Add(new DisplayCensus(r.FamilyGed, r.RegistrationLocation, r.registrationDate, i));
             // ds.sort(new IndividualNameComparator());
             dgCensus.DataSource = ds;
+            tsRecords.Text = ds.Count + " Records.";
         }
     }
 }

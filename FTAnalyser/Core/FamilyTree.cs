@@ -752,15 +752,15 @@ namespace FTAnalyzer
             return result;
         }
 
-        public List<Registration> getAllCensusRegistrations(FactDate censusDate)
+        public List<Registration> getAllCensusRegistrations(FactDate censusDate, bool censusDone)
         {
             List<Registration> result = new List<Registration>();
             if (censusDate != null)
             {
                 foreach (Family f in families)
                 {
-                    CensusFamily cf = new CensusFamily(f, censusDate); 
-                    if (cf.process(censusDate))
+                    CensusFamily cf = new CensusFamily(f, censusDate);
+                    if (cf.process(censusDate, censusDone))
                         result.Add(new CensusRegistration(null, censusDate, cf));
                 }
             }

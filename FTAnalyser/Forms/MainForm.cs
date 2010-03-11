@@ -203,7 +203,7 @@ namespace FTAnalyzer
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
 
             Forms.Census census = new Forms.Census();
-            census.setupCensus(censusRP, censusDate);
+            census.setupCensus(censusRP, censusDate, false);
             census.Text = censusDate.StartDate.Year.ToString() + " Census Records to search for";
             census.Show();
         }
@@ -267,14 +267,21 @@ namespace FTAnalyzer
         private void LostCousinsCensus(RegistrationFilter filter, FactDate censusDate, string reportTitle)
         {
             HourGlass(true);
-            filter = new AndFilter(new DateFilter(censusDate), filter);
+            RegistrationFilter relation =
+                new OrFilter(
+                    new OrFilter(new RelationFilter(Individual.BLOOD), new RelationFilter(Individual.DIRECT)),
+                    new RelationFilter(Individual.MARRIAGEDB));
+            if (ckbRestrictions.Checked)
+                filter = new AndFilter(new DateFilter(censusDate), filter, relation);
+            else
+                filter = new AndFilter(new DateFilter(censusDate), filter);
             MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();
             censusComparator.addComparator(new LocationComparator(FactLocation.PARISH));
             censusComparator.addComparator(new DateComparator());
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
 
             Forms.Census census = new Forms.Census();
-            census.setupCensus(censusRP, censusDate);
+            census.setupCensus(censusRP, censusDate, true);
             census.Text = reportTitle;
             HourGlass(false);
             census.Show();
