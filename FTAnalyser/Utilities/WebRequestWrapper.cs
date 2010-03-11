@@ -66,77 +66,77 @@ namespace FTAnalyzer.Utilities
 
             public int MaxHttpRequests
             {
-                get { return FTAnalyzer.Properties.NetworkSettings.Default.MaxHttpRequests; }
+                get { return Properties.NetworkSettings.Default.MaxHttpRequests; }
             }
 
             public bool UseDefaultProxySettings
             {
-                get { return FTAnalyzer.Properties.NetworkSettings.Default.UseDefaultProxySettings; }
+                get { return Properties.NetworkSettings.Default.UseDefaultProxySettings; }
             }
 
             public string ProxyServer
             {
-                get { return FTAnalyzer.Properties.NetworkSettings.Default.ProxyServer; }
+                get { return Properties.NetworkSettings.Default.ProxyServer; }
             }
 
             public int ProxyPort
             {
-                get { return FTAnalyzer.Properties.NetworkSettings.Default.ProxyPort; }
+                get { return Properties.NetworkSettings.Default.ProxyPort; }
             }
 
             public string ProxyUserName
             {
-                get { return FTAnalyzer.Properties.NetworkSettings.Default.ProxyUserName; }
+                get { return Properties.NetworkSettings.Default.ProxyUserName; }
             }
 
             public string ProxyPassword
             {
-                get { return FTAnalyzer.Properties.NetworkSettings.Default.ProxyPassword; }
+                get { return Properties.NetworkSettings.Default.ProxyPassword; }
             }
 
             public string ProxyDomain
             {
-                get { return FTAnalyzer.Properties.NetworkSettings.Default.ProxyDomain; }
+                get { return Properties.NetworkSettings.Default.ProxyDomain; }
             }
 
             public string ProxyType
             {
-                get { return FTAnalyzer.Properties.NetworkSettings.Default.ProxyType; }
+                get { return Properties.NetworkSettings.Default.ProxyType; }
             }
 
             public string UserAgent
             {
-                get { return FTAnalyzer.Properties.NetworkSettings.Default.UserAgent; }
+                get { return Properties.NetworkSettings.Default.UserAgent; }
             }
 
             public bool DownloadItemInfo
             {
-                get { return FTAnalyzer.Properties.NetworkSettings.Default.DownloadItemInfo; }
+                get { return Properties.NetworkSettings.Default.DownloadItemInfo; }
             }
 
             public bool ProxyRequiresAuthentication
             {
-                get { return FTAnalyzer.Properties.NetworkSettings.Default.ProxyRequiresAuthentication; }
+                get { return Properties.NetworkSettings.Default.ProxyRequiresAuthentication; }
             }
 
             public bool UseDefaultAuthenticationForProxy
             {
-                get { return FTAnalyzer.Properties.NetworkSettings.Default.UseDefaultAuthenticationForProxy; }
+                get { return Properties.NetworkSettings.Default.UseDefaultAuthenticationForProxy; }
             }
 
             public string UserAgent_IE7
             {
-                get { return FTAnalyzer.Properties.NetworkSettings.Default.UserAgent_IE7; }
+                get { return Properties.NetworkSettings.Default.UserAgent_IE7; }
             }
 
             public string UserAgent_IE6
             {
-                get { return FTAnalyzer.Properties.NetworkSettings.Default.UserAgent_IE6; }
+                get { return Properties.NetworkSettings.Default.UserAgent_IE6; }
             }
 
             public string UserAgent_FireFox2
             {
-                get { return FTAnalyzer.Properties.NetworkSettings.Default.UserAgent_FireFox2; }
+                get { return Properties.NetworkSettings.Default.UserAgent_FireFox2; }
             }
 
             #endregion
@@ -161,7 +161,7 @@ namespace FTAnalyzer.Utilities
 
         public string GetLatestVersionString()
         {
-            string html = DownloadText("http://www.codeplex.com/EnhSim");
+            string html = DownloadText("http://www.codeplex.com/FTAnalyzer");
             if (html == null || !html.Contains("{Current Version: ")) return string.Empty;
             html = html.Substring(html.IndexOf("{Current Version: ") + "{Current Version: ".Length);
             if (!html.Contains("}")) return string.Empty;
@@ -171,7 +171,7 @@ namespace FTAnalyzer.Utilities
 
         public string GetBetaVersionString()
         {
-            string html = DownloadText("http://www.codeplex.com/EnhSim");
+            string html = DownloadText("http://www.codeplex.com/FTAnalyzer");
             if (html == null || !html.Contains("{Beta Version: ")) return string.Empty;
             html = html.Substring(html.IndexOf("{Beta Version: ") + "{Beta Version: ".Length);
             if (!html.Contains("}")) return string.Empty;
@@ -181,7 +181,7 @@ namespace FTAnalyzer.Utilities
 
         public string GetRandomDidYouKnow()
         {
-            string html = DownloadText("http://EnhSim.codeplex.com/Wiki/View.aspx?title=DidYouKnow");
+            string html = DownloadText("http://FTAnalyzer.codeplex.com/Wiki/View.aspx?title=DidYouKnow");
             if (html == null || !html.Contains("-------<br />") || !(html.Contains("&nbsp;by&nbsp;<a id=\"wikiEditByLink\" href=\"http://www.codeplex.com/site/users/view/Astrylian\">Astrylian</a>") || html.Contains("&nbsp;by&nbsp;<a id=\"wikiEditByLink\" href=\"http://www.codeplex.com/site/users/view/Kavan\">Kavan</a>"))) return string.Empty;
             html = html.Substring(html.IndexOf("-------<br />") + 13);
             if (!html.Contains("<br />-------")) return string.Empty;
@@ -200,7 +200,7 @@ namespace FTAnalyzer.Utilities
 
         public string GetKnownIssues()
         {
-            string html = DownloadText("http://EnhSim.codeplex.com/Wiki/View.aspx?title=KnownIssues");
+            string html = DownloadText("http://FTAnalyzer.codeplex.com/Wiki/View.aspx?title=KnownIssues");
             if (html == null || !html.Contains("-------<br />") || !(html.Contains("&nbsp;by&nbsp;<a id=\"wikiEditByLink\" href=\"http://www.codeplex.com/site/users/view/Astrylian\">Astrylian</a>") || html.Contains("&nbsp;by&nbsp;<a id=\"wikiEditByLink\" href=\"http://www.codeplex.com/site/users/view/Kavan\">Kavan</a>"))) return string.Empty;
             html = html.Substring(html.IndexOf("-------<br />") + 13);
             if (!html.Contains("<br />-------")) return string.Empty;

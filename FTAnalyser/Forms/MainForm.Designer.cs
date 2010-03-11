@@ -62,6 +62,14 @@
             this.rbWales = new System.Windows.Forms.RadioButton();
             this.rbEngland = new System.Windows.Forms.RadioButton();
             this.rbScotland = new System.Windows.Forms.RadioButton();
+            this.tabLostCousins = new System.Windows.Forms.TabPage();
+            this.ckbRestrictions = new System.Windows.Forms.CheckBox();
+            this.btnLC1841EW = new System.Windows.Forms.Button();
+            this.btnLC1911Ireland = new System.Windows.Forms.Button();
+            this.btnLC1880USA = new System.Windows.Forms.Button();
+            this.btnLC1881EW = new System.Windows.Forms.Button();
+            this.btnLC1881Canada = new System.Windows.Forms.Button();
+            this.btnLC1881Scot = new System.Windows.Forms.Button();
             this.tabLooseDeaths = new System.Windows.Forms.TabPage();
             this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
             this.tabLocations = new System.Windows.Forms.TabPage();
@@ -77,14 +85,8 @@
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tabLostCousins = new System.Windows.Forms.TabPage();
-            this.btnLC1881Scot = new System.Windows.Forms.Button();
-            this.btnLC1881Canada = new System.Windows.Forms.Button();
-            this.btnLC1881EW = new System.Windows.Forms.Button();
-            this.btnLC1841EW = new System.Windows.Forms.Button();
-            this.btnLC1911Ireland = new System.Windows.Forms.Button();
-            this.btnLC1880USA = new System.Windows.Forms.Button();
-            this.ckbRestrictions = new System.Windows.Forms.CheckBox();
+            this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -93,6 +95,7 @@
             this.tabCensus.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabLostCousins.SuspendLayout();
             this.tabLooseDeaths.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).BeginInit();
             this.tabLocations.SuspendLayout();
@@ -106,7 +109,6 @@
             this.tabAddresses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).BeginInit();
             this.statusStrip.SuspendLayout();
-            this.tabLostCousins.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -142,6 +144,8 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.checkForUpdatesToolStripMenuItem,
+            this.toolStripSeparator1,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
@@ -468,6 +472,96 @@
             this.rbScotland.Text = "Scotland";
             this.rbScotland.UseVisualStyleBackColor = true;
             // 
+            // tabLostCousins
+            // 
+            this.tabLostCousins.Controls.Add(this.ckbRestrictions);
+            this.tabLostCousins.Controls.Add(this.btnLC1841EW);
+            this.tabLostCousins.Controls.Add(this.btnLC1911Ireland);
+            this.tabLostCousins.Controls.Add(this.btnLC1880USA);
+            this.tabLostCousins.Controls.Add(this.btnLC1881EW);
+            this.tabLostCousins.Controls.Add(this.btnLC1881Canada);
+            this.tabLostCousins.Controls.Add(this.btnLC1881Scot);
+            this.tabLostCousins.Location = new System.Drawing.Point(4, 22);
+            this.tabLostCousins.Name = "tabLostCousins";
+            this.tabLostCousins.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLostCousins.Size = new System.Drawing.Size(1001, 420);
+            this.tabLostCousins.TabIndex = 5;
+            this.tabLostCousins.Text = "Lost Cousins";
+            this.tabLostCousins.UseVisualStyleBackColor = true;
+            // 
+            // ckbRestrictions
+            // 
+            this.ckbRestrictions.AutoSize = true;
+            this.ckbRestrictions.Checked = true;
+            this.ckbRestrictions.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbRestrictions.Location = new System.Drawing.Point(22, 22);
+            this.ckbRestrictions.Name = "ckbRestrictions";
+            this.ckbRestrictions.Size = new System.Drawing.Size(521, 17);
+            this.ckbRestrictions.TabIndex = 9;
+            this.ckbRestrictions.Text = "Restrict results to only those direct ancestors, blood relations and those marrie" +
+                "d to direct or blood relations";
+            this.ckbRestrictions.UseVisualStyleBackColor = true;
+            // 
+            // btnLC1841EW
+            // 
+            this.btnLC1841EW.Location = new System.Drawing.Point(22, 87);
+            this.btnLC1841EW.Name = "btnLC1841EW";
+            this.btnLC1841EW.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1841EW.TabIndex = 8;
+            this.btnLC1841EW.Text = "1841 England && Wales Census";
+            this.btnLC1841EW.UseVisualStyleBackColor = true;
+            this.btnLC1841EW.Click += new System.EventHandler(this.btnLC1841EW_Click);
+            // 
+            // btnLC1911Ireland
+            // 
+            this.btnLC1911Ireland.Location = new System.Drawing.Point(358, 87);
+            this.btnLC1911Ireland.Name = "btnLC1911Ireland";
+            this.btnLC1911Ireland.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1911Ireland.TabIndex = 7;
+            this.btnLC1911Ireland.Text = "1911 Ireland Census";
+            this.btnLC1911Ireland.UseVisualStyleBackColor = true;
+            this.btnLC1911Ireland.Click += new System.EventHandler(this.btnLC1911Ireland_Click);
+            // 
+            // btnLC1880USA
+            // 
+            this.btnLC1880USA.Location = new System.Drawing.Point(190, 87);
+            this.btnLC1880USA.Name = "btnLC1880USA";
+            this.btnLC1880USA.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1880USA.TabIndex = 6;
+            this.btnLC1880USA.Text = "1880 US Census";
+            this.btnLC1880USA.UseVisualStyleBackColor = true;
+            this.btnLC1880USA.Click += new System.EventHandler(this.btnLC1880USA_Click);
+            // 
+            // btnLC1881EW
+            // 
+            this.btnLC1881EW.Location = new System.Drawing.Point(22, 45);
+            this.btnLC1881EW.Name = "btnLC1881EW";
+            this.btnLC1881EW.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1881EW.TabIndex = 5;
+            this.btnLC1881EW.Text = "1881 England && Wales Census";
+            this.btnLC1881EW.UseVisualStyleBackColor = true;
+            this.btnLC1881EW.Click += new System.EventHandler(this.btnLC1881EW_Click);
+            // 
+            // btnLC1881Canada
+            // 
+            this.btnLC1881Canada.Location = new System.Drawing.Point(358, 45);
+            this.btnLC1881Canada.Name = "btnLC1881Canada";
+            this.btnLC1881Canada.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1881Canada.TabIndex = 4;
+            this.btnLC1881Canada.Text = "1881 Canada Census";
+            this.btnLC1881Canada.UseVisualStyleBackColor = true;
+            this.btnLC1881Canada.Click += new System.EventHandler(this.btnLC1881Canada_Click);
+            // 
+            // btnLC1881Scot
+            // 
+            this.btnLC1881Scot.Location = new System.Drawing.Point(190, 45);
+            this.btnLC1881Scot.Name = "btnLC1881Scot";
+            this.btnLC1881Scot.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1881Scot.TabIndex = 0;
+            this.btnLC1881Scot.Text = "1881 Scotland Census";
+            this.btnLC1881Scot.UseVisualStyleBackColor = true;
+            this.btnLC1881Scot.Click += new System.EventHandler(this.btnLC1881Scot_Click);
+            // 
             // tabLooseDeaths
             // 
             this.tabLooseDeaths.Controls.Add(this.dgLooseDeaths);
@@ -633,95 +727,17 @@
             this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
-            // tabLostCousins
+            // checkForUpdatesToolStripMenuItem
             // 
-            this.tabLostCousins.Controls.Add(this.ckbRestrictions);
-            this.tabLostCousins.Controls.Add(this.btnLC1841EW);
-            this.tabLostCousins.Controls.Add(this.btnLC1911Ireland);
-            this.tabLostCousins.Controls.Add(this.btnLC1880USA);
-            this.tabLostCousins.Controls.Add(this.btnLC1881EW);
-            this.tabLostCousins.Controls.Add(this.btnLC1881Canada);
-            this.tabLostCousins.Controls.Add(this.btnLC1881Scot);
-            this.tabLostCousins.Location = new System.Drawing.Point(4, 22);
-            this.tabLostCousins.Name = "tabLostCousins";
-            this.tabLostCousins.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLostCousins.Size = new System.Drawing.Size(1001, 420);
-            this.tabLostCousins.TabIndex = 5;
-            this.tabLostCousins.Text = "Lost Cousins";
-            this.tabLostCousins.UseVisualStyleBackColor = true;
+            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
+            this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
             // 
-            // btnLC1881Scot
+            // toolStripSeparator1
             // 
-            this.btnLC1881Scot.Location = new System.Drawing.Point(190, 45);
-            this.btnLC1881Scot.Name = "btnLC1881Scot";
-            this.btnLC1881Scot.Size = new System.Drawing.Size(162, 36);
-            this.btnLC1881Scot.TabIndex = 0;
-            this.btnLC1881Scot.Text = "1881 Scotland Census";
-            this.btnLC1881Scot.UseVisualStyleBackColor = true;
-            this.btnLC1881Scot.Click += new System.EventHandler(this.btnLC1881Scot_Click);
-            // 
-            // btnLC1881Canada
-            // 
-            this.btnLC1881Canada.Location = new System.Drawing.Point(358, 45);
-            this.btnLC1881Canada.Name = "btnLC1881Canada";
-            this.btnLC1881Canada.Size = new System.Drawing.Size(162, 36);
-            this.btnLC1881Canada.TabIndex = 4;
-            this.btnLC1881Canada.Text = "1881 Canada Census";
-            this.btnLC1881Canada.UseVisualStyleBackColor = true;
-            this.btnLC1881Canada.Click += new System.EventHandler(this.btnLC1881Canada_Click);
-            // 
-            // btnLC1881EW
-            // 
-            this.btnLC1881EW.Location = new System.Drawing.Point(22, 45);
-            this.btnLC1881EW.Name = "btnLC1881EW";
-            this.btnLC1881EW.Size = new System.Drawing.Size(162, 36);
-            this.btnLC1881EW.TabIndex = 5;
-            this.btnLC1881EW.Text = "1881 England && Wales Census";
-            this.btnLC1881EW.UseVisualStyleBackColor = true;
-            this.btnLC1881EW.Click += new System.EventHandler(this.btnLC1881EW_Click);
-            // 
-            // btnLC1841EW
-            // 
-            this.btnLC1841EW.Location = new System.Drawing.Point(22, 87);
-            this.btnLC1841EW.Name = "btnLC1841EW";
-            this.btnLC1841EW.Size = new System.Drawing.Size(162, 36);
-            this.btnLC1841EW.TabIndex = 8;
-            this.btnLC1841EW.Text = "1841 England && Wales Census";
-            this.btnLC1841EW.UseVisualStyleBackColor = true;
-            this.btnLC1841EW.Click += new System.EventHandler(this.btnLC1841EW_Click);
-            // 
-            // btnLC1911Ireland
-            // 
-            this.btnLC1911Ireland.Location = new System.Drawing.Point(358, 87);
-            this.btnLC1911Ireland.Name = "btnLC1911Ireland";
-            this.btnLC1911Ireland.Size = new System.Drawing.Size(162, 36);
-            this.btnLC1911Ireland.TabIndex = 7;
-            this.btnLC1911Ireland.Text = "1911 Ireland Census";
-            this.btnLC1911Ireland.UseVisualStyleBackColor = true;
-            this.btnLC1911Ireland.Click += new System.EventHandler(this.btnLC1911Ireland_Click);
-            // 
-            // btnLC1880USA
-            // 
-            this.btnLC1880USA.Location = new System.Drawing.Point(190, 87);
-            this.btnLC1880USA.Name = "btnLC1880USA";
-            this.btnLC1880USA.Size = new System.Drawing.Size(162, 36);
-            this.btnLC1880USA.TabIndex = 6;
-            this.btnLC1880USA.Text = "1880 US Census";
-            this.btnLC1880USA.UseVisualStyleBackColor = true;
-            this.btnLC1880USA.Click += new System.EventHandler(this.btnLC1880USA_Click);
-            // 
-            // ckbRestrictions
-            // 
-            this.ckbRestrictions.AutoSize = true;
-            this.ckbRestrictions.Checked = true;
-            this.ckbRestrictions.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbRestrictions.Location = new System.Drawing.Point(22, 22);
-            this.ckbRestrictions.Name = "ckbRestrictions";
-            this.ckbRestrictions.Size = new System.Drawing.Size(521, 17);
-            this.ckbRestrictions.TabIndex = 9;
-            this.ckbRestrictions.Text = "Restrict results to only those direct ancestors, blood relations and those marrie" +
-                "d to direct or blood relations";
-            this.ckbRestrictions.UseVisualStyleBackColor = true;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(171, 6);
             // 
             // MainForm
             // 
@@ -734,6 +750,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Family Tree Analyzer";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl.ResumeLayout(false);
@@ -747,6 +764,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabLostCousins.ResumeLayout(false);
+            this.tabLostCousins.PerformLayout();
             this.tabLooseDeaths.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).EndInit();
             this.tabLocations.ResumeLayout(false);
@@ -761,8 +780,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            this.tabLostCousins.ResumeLayout(false);
-            this.tabLostCousins.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -827,6 +844,8 @@
         private System.Windows.Forms.Button btnLC1881EW;
         private System.Windows.Forms.Button btnLC1881Canada;
         private System.Windows.Forms.CheckBox ckbRestrictions;
+        private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 
