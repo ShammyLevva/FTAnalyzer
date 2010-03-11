@@ -222,7 +222,10 @@ namespace FTAnalyzer
             if (rbGB.Checked)
                 locationFilter = new AndFilter(LocationFilter.SCOTLAND, LocationFilter.ENGLAND, LocationFilter.WALES);
             if (rbCanada.Checked)
+            {
                 locationFilter = LocationFilter.CANADA;
+                censusDate = new FactDate(cbCensusDate.Text); // Makes valid Canadian census date any day in that year as I don't know exact date
+            }
             if (rbUSA.Checked)
                 locationFilter = LocationFilter.USA;
             
