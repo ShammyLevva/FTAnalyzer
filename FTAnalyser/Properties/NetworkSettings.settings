@@ -1,0 +1,51 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="EnhSimGUI.Properties" GeneratedClassName="NetworkSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ProxyServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ProxyPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="UseDefaultProxySettings" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ProxyUserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ProxyPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MaxHttpRequests" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="ProxyType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">None</Value>
+    </Setting>
+    <Setting Name="UserAgent_IE7" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; bgft) </Value>
+    </Setting>
+    <Setting Name="UserAgent_IE6" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) </Value>
+    </Setting>
+    <Setting Name="UserAgent_FireFox2" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.8.1.4) Gecko/20070515 Firefox/2.0.0.4</Value>
+    </Setting>
+    <Setting Name="UserAgent" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.8.1.4) Gecko/20070515 Firefox/2.0.0.4</Value>
+    </Setting>
+    <Setting Name="DownloadItemInfo" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ProxyRequiresAuthentication" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UseDefaultAuthenticationForProxy" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ProxyDomain" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

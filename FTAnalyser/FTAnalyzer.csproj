@@ -112,10 +112,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="MailMerge\Births.doc" />
     <None Include="MailMerge\Census.doc" />
     <None Include="MailMerge\Deaths.doc" />
     <None Include="MailMerge\Marriages.doc" />
+    <None Include="Properties\NetworkSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>NetworkSettings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -183,6 +188,11 @@
     <Compile Include="HTTPParser\FindLinks.cs" />
     <Compile Include="HTTPParser\Parse.cs" />
     <Compile Include="HTTPParser\ParseHTML.cs" />
+    <Compile Include="Properties\NetworkSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>NetworkSettings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Searches\GROSearch.cs" />
     <Compile Include="Searches\GROSSearch.cs" />
     <Compile Include="Searches\IGIBatchSearch.cs" />
@@ -206,6 +216,7 @@
     <Compile Include="Core\ParentalGroup.cs" />
     <Compile Include="Utilities\DoubleMetaphone.cs" />
     <Compile Include="Utilities\ShortDoubleMetaphone.cs" />
+    <Compile Include="Utilities\WebRequestWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

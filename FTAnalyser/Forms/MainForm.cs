@@ -12,7 +12,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.0.2";
+        private string VERSION = "1.0.2.0";
 
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
@@ -264,6 +264,7 @@ namespace FTAnalyzer
             MessageBox.Show("This is Family Tree Analyzer version " + VERSION);
         }
 
+        #region Lost Cousins
         private void LostCousinsCensus(RegistrationFilter filter, FactDate censusDate, string reportTitle)
         {
             HourGlass(true);
@@ -328,5 +329,7 @@ namespace FTAnalyzer
             string reportTitle = "1911 Ireland Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(filter, new FactDate("1911"), reportTitle);
         }
+        #endregion
+
     }
 }
