@@ -149,7 +149,6 @@
     <Compile Include="Exceptions\DuplicateException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Core\Family.cs" />
-    <Compile Include="Filters\AllFilter.cs" />
     <Compile Include="Filters\AndFilter.cs" />
     <Compile Include="Filters\BirthFilter.cs" />
     <Compile Include="Filters\FalseFilter.cs" />

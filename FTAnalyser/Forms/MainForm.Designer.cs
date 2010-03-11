@@ -32,6 +32,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
             this.rtbOutput = new System.Windows.Forms.RichTextBox();
@@ -75,8 +77,13 @@
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabLostCousins = new System.Windows.Forms.TabPage();
+            this.btnLC1881Scot = new System.Windows.Forms.Button();
+            this.btnLC1881Canada = new System.Windows.Forms.Button();
+            this.btnLC1881EW = new System.Windows.Forms.Button();
+            this.btnLC1841EW = new System.Windows.Forms.Button();
+            this.btnLC1911Ireland = new System.Windows.Forms.Button();
+            this.btnLC1880USA = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -98,6 +105,7 @@
             this.tabAddresses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).BeginInit();
             this.statusStrip.SuspendLayout();
+            this.tabLostCousins.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -120,15 +128,30 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // tabControl
             // 
@@ -138,6 +161,7 @@
             this.tabControl.Controls.Add(this.tabDisplayProgress);
             this.tabControl.Controls.Add(this.tabIndividuals);
             this.tabControl.Controls.Add(this.tabCensus);
+            this.tabControl.Controls.Add(this.tabLostCousins);
             this.tabControl.Controls.Add(this.tabLooseDeaths);
             this.tabControl.Controls.Add(this.tabLocations);
             this.tabControl.Location = new System.Drawing.Point(0, 27);
@@ -605,23 +629,84 @@
             // tsCountLabel
             // 
             this.tsCountLabel.Name = "tsCountLabel";
-            this.tsCountLabel.Size = new System.Drawing.Size(55, 17);
+            this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
-            // helpToolStripMenuItem
+            // tabLostCousins
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.tabLostCousins.Controls.Add(this.btnLC1841EW);
+            this.tabLostCousins.Controls.Add(this.btnLC1911Ireland);
+            this.tabLostCousins.Controls.Add(this.btnLC1880USA);
+            this.tabLostCousins.Controls.Add(this.btnLC1881EW);
+            this.tabLostCousins.Controls.Add(this.btnLC1881Canada);
+            this.tabLostCousins.Controls.Add(this.btnLC1881Scot);
+            this.tabLostCousins.Location = new System.Drawing.Point(4, 22);
+            this.tabLostCousins.Name = "tabLostCousins";
+            this.tabLostCousins.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLostCousins.Size = new System.Drawing.Size(1001, 420);
+            this.tabLostCousins.TabIndex = 5;
+            this.tabLostCousins.Text = "Lost Cousins";
+            this.tabLostCousins.UseVisualStyleBackColor = true;
             // 
-            // aboutToolStripMenuItem
+            // btnLC1881Scot
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.btnLC1881Scot.Location = new System.Drawing.Point(190, 13);
+            this.btnLC1881Scot.Name = "btnLC1881Scot";
+            this.btnLC1881Scot.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1881Scot.TabIndex = 0;
+            this.btnLC1881Scot.Text = "1881 Scotland Census";
+            this.btnLC1881Scot.UseVisualStyleBackColor = true;
+            this.btnLC1881Scot.Click += new System.EventHandler(this.btnLC1881Scot_Click);
+            // 
+            // btnLC1881Canada
+            // 
+            this.btnLC1881Canada.Location = new System.Drawing.Point(358, 13);
+            this.btnLC1881Canada.Name = "btnLC1881Canada";
+            this.btnLC1881Canada.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1881Canada.TabIndex = 4;
+            this.btnLC1881Canada.Text = "1881 Canada Census";
+            this.btnLC1881Canada.UseVisualStyleBackColor = true;
+            this.btnLC1881Canada.Click += new System.EventHandler(this.btnLC1881Canada_Click);
+            // 
+            // btnLC1881EW
+            // 
+            this.btnLC1881EW.Location = new System.Drawing.Point(22, 13);
+            this.btnLC1881EW.Name = "btnLC1881EW";
+            this.btnLC1881EW.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1881EW.TabIndex = 5;
+            this.btnLC1881EW.Text = "1881 England && Wales Census";
+            this.btnLC1881EW.UseVisualStyleBackColor = true;
+            this.btnLC1881EW.Click += new System.EventHandler(this.btnLC1881EW_Click);
+            // 
+            // btnLC1841EW
+            // 
+            this.btnLC1841EW.Location = new System.Drawing.Point(22, 55);
+            this.btnLC1841EW.Name = "btnLC1841EW";
+            this.btnLC1841EW.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1841EW.TabIndex = 8;
+            this.btnLC1841EW.Text = "1841 England && Wales Census";
+            this.btnLC1841EW.UseVisualStyleBackColor = true;
+            this.btnLC1841EW.Click += new System.EventHandler(this.btnLC1841EW_Click);
+            // 
+            // btnLC1911Ireland
+            // 
+            this.btnLC1911Ireland.Location = new System.Drawing.Point(358, 55);
+            this.btnLC1911Ireland.Name = "btnLC1911Ireland";
+            this.btnLC1911Ireland.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1911Ireland.TabIndex = 7;
+            this.btnLC1911Ireland.Text = "1911 Ireland Census";
+            this.btnLC1911Ireland.UseVisualStyleBackColor = true;
+            this.btnLC1911Ireland.Click += new System.EventHandler(this.btnLC1911Ireland_Click);
+            // 
+            // btnLC1880USA
+            // 
+            this.btnLC1880USA.Location = new System.Drawing.Point(190, 55);
+            this.btnLC1880USA.Name = "btnLC1880USA";
+            this.btnLC1880USA.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1880USA.TabIndex = 6;
+            this.btnLC1880USA.Text = "1880 US Census";
+            this.btnLC1880USA.UseVisualStyleBackColor = true;
+            this.btnLC1880USA.Click += new System.EventHandler(this.btnLC1880USA_Click);
             // 
             // MainForm
             // 
@@ -661,6 +746,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.tabLostCousins.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -717,6 +803,13 @@
         private System.Windows.Forms.Button btnShowResults;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabLostCousins;
+        private System.Windows.Forms.Button btnLC1881Scot;
+        private System.Windows.Forms.Button btnLC1841EW;
+        private System.Windows.Forms.Button btnLC1911Ireland;
+        private System.Windows.Forms.Button btnLC1880USA;
+        private System.Windows.Forms.Button btnLC1881EW;
+        private System.Windows.Forms.Button btnLC1881Canada;
     }
 }
 

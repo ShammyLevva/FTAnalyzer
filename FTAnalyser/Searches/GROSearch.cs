@@ -55,7 +55,7 @@ namespace FTAnalyzer
                             partialData),
                     byLocation);
             RegistrationsProcessor censusRP = new RegistrationsProcessor(
-                    new AllFilter(), byCensusLocation);
+                    new TrueFilter(), byCensusLocation);
                     
             Console.WriteLine("GRO extraction started.");
             List<Registration> births = ft.getAllBirthRegistrations();

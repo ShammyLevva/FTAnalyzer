@@ -96,7 +96,15 @@ namespace FTAnalyzer
                 cbCensusDate.Text = "1911";
                 tsCountLabel.Text = "";
                 btnShowResults.Enabled = ft.IndividualCount > 0;
-            } else if (tabControl.SelectedTab == tabLooseDeaths)
+            }
+            else if (tabControl.SelectedTab == tabLostCousins)
+            {
+                tsCountLabel.Text = "";
+                btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled = 
+                    btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled 
+                    = ft.IndividualCount > 0;
+            }
+            else if (tabControl.SelectedTab == tabLooseDeaths)
             {
                 HourGlass(true);
                 List<IDisplayLooseDeath> looseDeathList = ft.GetLooseDeaths();
@@ -204,17 +212,17 @@ namespace FTAnalyzer
         {
             RegistrationFilter locationFilter = new TrueFilter();
             if (rbScotland.Checked)
-                locationFilter = LocationFilter.SCOTLAND_FILTER;
+                locationFilter = LocationFilter.SCOTLAND;
             if (rbEngland.Checked)
-                locationFilter = LocationFilter.ENGLAND_FILTER;
+                locationFilter = LocationFilter.ENGLAND;
             if (rbWales.Checked)
-                locationFilter = LocationFilter.WALES_FILTER;
+                locationFilter = LocationFilter.WALES;
             if (rbGB.Checked)
-                locationFilter = new AndFilter(LocationFilter.SCOTLAND_FILTER, LocationFilter.ENGLAND_FILTER, LocationFilter.WALES_FILTER);
+                locationFilter = new AndFilter(LocationFilter.SCOTLAND, LocationFilter.ENGLAND, LocationFilter.WALES);
             if (rbCanada.Checked)
-                locationFilter = LocationFilter.CANADA_FILTER;
+                locationFilter = LocationFilter.CANADA;
             if (rbUSA.Checked)
-                locationFilter = LocationFilter.USA_FILTER;
+                locationFilter = LocationFilter.USA;
             
             RegistrationFilter relationFilter = new FalseFilter();
             if (ckbBlood.Checked)
@@ -254,6 +262,64 @@ namespace FTAnalyzer
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This is Family Tree Analyzer version " + VERSION);
+        }
+
+        private void LostCousinsCensus(RegistrationFilter filter, FactDate censusDate, string reportTitle)
+        {
+            HourGlass(true);
+            filter = new AndFilter(new DateFilter(censusDate), filter);
+            MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();
+            censusComparator.addComparator(new LocationComparator(FactLocation.PARISH));
+            censusComparator.addComparator(new DateComparator());
+            RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
+
+            Forms.Census census = new Forms.Census();
+            census.setupCensus(censusRP, censusDate);
+            census.Text = reportTitle;
+            HourGlass(false);
+            census.Show();
+        }
+
+        private void btnLC1881EW_Click(object sender, EventArgs e)
+        {
+            RegistrationFilter filter = new AndFilter(LocationFilter.ENGLAND, LocationFilter.WALES);
+            string reportTitle = "1881 England & Wales Census Records on file to enter to Lost Cousins";
+            LostCousinsCensus(filter, FactDate.CENSUS1881, reportTitle);
+        }
+
+        private void btnLC1881Scot_Click(object sender, EventArgs e)
+        {
+            RegistrationFilter filter = LocationFilter.SCOTLAND;
+            string reportTitle = "1881 Scotland Census Records on file to enter to Lost Cousins";
+            LostCousinsCensus(filter, FactDate.CENSUS1881, reportTitle);
+        }
+
+        private void btnLC1881Canada_Click(object sender, EventArgs e)
+        {
+            RegistrationFilter filter = LocationFilter.CANADA;
+            string reportTitle = "1881 Canada Census Records on file to enter to Lost Cousins";
+            LostCousinsCensus(filter, new FactDate("1881"), reportTitle);
+        }
+
+        private void btnLC1841EW_Click(object sender, EventArgs e)
+        {
+            RegistrationFilter filter = new AndFilter(LocationFilter.ENGLAND, LocationFilter.WALES);
+            string reportTitle = "1841 England & Wales Census Records on file to enter to Lost Cousins";
+            LostCousinsCensus(filter, FactDate.CENSUS1841, reportTitle);
+        }
+
+        private void btnLC1880USA_Click(object sender, EventArgs e)
+        {
+            RegistrationFilter filter = new AndFilter(LocationFilter.USA, LocationFilter.US);
+            string reportTitle = "1880 US Census Records on file to enter to Lost Cousins";
+            LostCousinsCensus(filter, new FactDate("1880"), reportTitle);
+        }
+
+        private void btnLC1911Ireland_Click(object sender, EventArgs e)
+        {
+            RegistrationFilter filter = new AndFilter(LocationFilter.EIRE, LocationFilter.IRELAND);
+            string reportTitle = "1911 Ireland Census Records on file to enter to Lost Cousins";
+            LostCousinsCensus(filter, new FactDate("1911"), reportTitle);
         }
     }
 }

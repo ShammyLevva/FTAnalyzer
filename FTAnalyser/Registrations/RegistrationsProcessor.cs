@@ -23,11 +23,11 @@ namespace FTAnalyzer
         { }
 
         public RegistrationsProcessor(IComparer<Registration> c)
-            : this(new AllFilter(), c)
+            : this(new TrueFilter(), c)
         { }
 
         public RegistrationsProcessor()
-            : this(new AllFilter(), null)
+            : this(new TrueFilter(), null)
         { }
 
         private List<Registration> filterRegistrations(List<Registration> regs) {
