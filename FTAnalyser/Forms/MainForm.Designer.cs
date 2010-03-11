@@ -33,6 +33,8 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
@@ -63,6 +65,8 @@
             this.rbEngland = new System.Windows.Forms.RadioButton();
             this.rbScotland = new System.Windows.Forms.RadioButton();
             this.tabLostCousins = new System.Windows.Forms.TabPage();
+            this.labLostCousinsWeb = new System.Windows.Forms.Label();
+            this.ckbHideRecorded = new System.Windows.Forms.CheckBox();
             this.ckbRestrictions = new System.Windows.Forms.CheckBox();
             this.btnLC1841EW = new System.Windows.Forms.Button();
             this.btnLC1911Ireland = new System.Windows.Forms.Button();
@@ -85,9 +89,6 @@
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.ckbHideRecorded = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -151,6 +152,18 @@
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // checkForUpdatesToolStripMenuItem
+            // 
+            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
+            this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(171, 6);
             // 
             // aboutToolStripMenuItem
             // 
@@ -476,6 +489,7 @@
             // 
             // tabLostCousins
             // 
+            this.tabLostCousins.Controls.Add(this.labLostCousinsWeb);
             this.tabLostCousins.Controls.Add(this.ckbHideRecorded);
             this.tabLostCousins.Controls.Add(this.ckbRestrictions);
             this.tabLostCousins.Controls.Add(this.btnLC1841EW);
@@ -491,6 +505,32 @@
             this.tabLostCousins.TabIndex = 5;
             this.tabLostCousins.Text = "Lost Cousins";
             this.tabLostCousins.UseVisualStyleBackColor = true;
+            // 
+            // labLostCousinsWeb
+            // 
+            this.labLostCousinsWeb.AutoSize = true;
+            this.labLostCousinsWeb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labLostCousinsWeb.ForeColor = System.Drawing.Color.MediumBlue;
+            this.labLostCousinsWeb.Location = new System.Drawing.Point(25, 171);
+            this.labLostCousinsWeb.Name = "labLostCousinsWeb";
+            this.labLostCousinsWeb.Size = new System.Drawing.Size(186, 16);
+            this.labLostCousinsWeb.TabIndex = 11;
+            this.labLostCousinsWeb.Text = "Visit the Lost Cousins Website";
+            this.labLostCousinsWeb.MouseLeave += new System.EventHandler(this.labLostCousinsWeb_MouseLeave);
+            this.labLostCousinsWeb.Click += new System.EventHandler(this.labLostCousinsWeb_Click);
+            this.labLostCousinsWeb.MouseEnter += new System.EventHandler(this.labLostCousinsWeb_MouseEnter);
+            // 
+            // ckbHideRecorded
+            // 
+            this.ckbHideRecorded.AutoSize = true;
+            this.ckbHideRecorded.Checked = true;
+            this.ckbHideRecorded.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbHideRecorded.Location = new System.Drawing.Point(22, 45);
+            this.ckbHideRecorded.Name = "ckbHideRecorded";
+            this.ckbHideRecorded.Size = new System.Drawing.Size(311, 17);
+            this.ckbHideRecorded.TabIndex = 10;
+            this.ckbHideRecorded.Text = "Hide results for individuals tagged as entered in Lost Cousins";
+            this.ckbHideRecorded.UseVisualStyleBackColor = true;
             // 
             // ckbRestrictions
             // 
@@ -730,30 +770,6 @@
             this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
-            // checkForUpdatesToolStripMenuItem
-            // 
-            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
-            this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(171, 6);
-            // 
-            // ckbHideRecorded
-            // 
-            this.ckbHideRecorded.AutoSize = true;
-            this.ckbHideRecorded.Checked = true;
-            this.ckbHideRecorded.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbHideRecorded.Location = new System.Drawing.Point(22, 45);
-            this.ckbHideRecorded.Name = "ckbHideRecorded";
-            this.ckbHideRecorded.Size = new System.Drawing.Size(311, 17);
-            this.ckbHideRecorded.TabIndex = 10;
-            this.ckbHideRecorded.Text = "Hide results for individuals tagged as entered in Lost Cousins";
-            this.ckbHideRecorded.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -862,6 +878,7 @@
         private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.CheckBox ckbHideRecorded;
+        private System.Windows.Forms.Label labLostCousinsWeb;
     }
 }
 

@@ -393,5 +393,23 @@ namespace FTAnalyzer
             _checkForUpdatesEnabled = true;
             _timerCheckForUpdates_Callback(null);
         }
+
+        private void labLostCousinsWeb_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            Help.ShowHelp(null, "http://www.lostcousins.com/?ref=LC585149");
+            HourGlass(false);
+        }
+
+        private void labLostCousinsWeb_MouseEnter(object sender, EventArgs e)
+        {
+            storedCursor = this.Cursor;
+            this.Cursor = Cursors.Hand;
+        }
+
+        private void labLostCousinsWeb_MouseLeave(object sender, EventArgs e)
+        {
+            this.Cursor = storedCursor;
+        }
     }
 }
