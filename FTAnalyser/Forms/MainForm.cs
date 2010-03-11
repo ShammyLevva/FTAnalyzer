@@ -84,53 +84,61 @@ namespace FTAnalyzer
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl.SelectedTab == tabDisplayProgress)
+            if (ft.Loading)
             {
-                tsCountLabel.Text = "";
-            } else if (tabControl.SelectedTab == tabIndividuals)
+                tabControl.SelectedTab = tabDisplayProgress;
+            } 
+            else
             {
-                List<IDisplayIndividual> list = ft.AllDisplayIndividuals;
-                dgIndividuals.DataSource = list;
-                tsCountLabel.Text = "Count : " + list.Count;
-            }
-            else if (tabControl.SelectedTab == tabCensus)
-            {
-                cbCensusDate.Text = "1911";
-                tsCountLabel.Text = "";
-                btnShowResults.Enabled = ft.IndividualCount > 0;
-            }
-            else if (tabControl.SelectedTab == tabLostCousins)
-            {
-                tsCountLabel.Text = "";
-                btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled = 
-                    btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled 
-                    = ft.IndividualCount > 0;
-            }
-            else if (tabControl.SelectedTab == tabLooseDeaths)
-            {
-                HourGlass(true);
-                List<IDisplayLooseDeath> looseDeathList = ft.GetLooseDeaths();
-                dgLooseDeaths.DataSource = looseDeathList;
-                tsCountLabel.Text = "Count : " + looseDeathList.Count;
-                HourGlass(false);
-            }
-            else if (tabControl.SelectedTab == tabLocations)
-            {
-                HourGlass(true);
-                tsCountLabel.Text = "";
-                List<IDisplayLocation> countries = ft.AllCountries;
-                List<IDisplayLocation> regions = ft.AllRegions;
-                List<IDisplayLocation> parishes = ft.AllParishes;
-                List<IDisplayLocation> addresses = ft.AllAddresses;
-                countries.Sort(new FactLocationComparer(FactLocation.COUNTRY));
-                regions.Sort(new FactLocationComparer(FactLocation.REGION));
-                parishes.Sort(new FactLocationComparer(FactLocation.PARISH));
-                addresses.Sort(new FactLocationComparer(FactLocation.ADDRESS));
-                dgCountries.DataSource = countries;
-                dgRegions.DataSource = regions;
-                dgParishes.DataSource = parishes;
-                dgAddresses.DataSource = addresses;
-                HourGlass(false);
+                if (tabControl.SelectedTab == tabDisplayProgress)
+                {
+                    tsCountLabel.Text = "";
+                }
+                else if (tabControl.SelectedTab == tabIndividuals)
+                {
+                    List<IDisplayIndividual> list = ft.AllDisplayIndividuals;
+                    dgIndividuals.DataSource = list;
+                    tsCountLabel.Text = "Count : " + list.Count;
+                }
+                else if (tabControl.SelectedTab == tabCensus)
+                {
+                    cbCensusDate.Text = "1911";
+                    tsCountLabel.Text = "";
+                    btnShowResults.Enabled = ft.IndividualCount > 0;
+                }
+                else if (tabControl.SelectedTab == tabLostCousins)
+                {
+                    tsCountLabel.Text = "";
+                    btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled =
+                        btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled
+                        = ft.IndividualCount > 0;
+                }
+                else if (tabControl.SelectedTab == tabLooseDeaths)
+                {
+                    HourGlass(true);
+                    List<IDisplayLooseDeath> looseDeathList = ft.GetLooseDeaths();
+                    dgLooseDeaths.DataSource = looseDeathList;
+                    tsCountLabel.Text = "Count : " + looseDeathList.Count;
+                    HourGlass(false);
+                }
+                else if (tabControl.SelectedTab == tabLocations)
+                {
+                    HourGlass(true);
+                    tsCountLabel.Text = "";
+                    List<IDisplayLocation> countries = ft.AllCountries;
+                    List<IDisplayLocation> regions = ft.AllRegions;
+                    List<IDisplayLocation> parishes = ft.AllParishes;
+                    List<IDisplayLocation> addresses = ft.AllAddresses;
+                    countries.Sort(new FactLocationComparer(FactLocation.COUNTRY));
+                    regions.Sort(new FactLocationComparer(FactLocation.REGION));
+                    parishes.Sort(new FactLocationComparer(FactLocation.PARISH));
+                    addresses.Sort(new FactLocationComparer(FactLocation.ADDRESS));
+                    dgCountries.DataSource = countries;
+                    dgRegions.DataSource = regions;
+                    dgParishes.DataSource = parishes;
+                    dgAddresses.DataSource = addresses;
+                    HourGlass(false);
+                }
             }
         }
 
@@ -277,10 +285,13 @@ namespace FTAnalyzer
                 new OrFilter(
                     new OrFilter(new RelationFilter(Individual.BLOOD), new RelationFilter(Individual.DIRECT)),
                     new RelationFilter(Individual.MARRIAGEDB));
+            RegistrationFilter noLCFact = new NotFilter(new FactFilter(Fact.LOSTCOUSINS, censusDate));
             if (ckbRestrictions.Checked)
                 filter = new AndFilter(new DateFilter(censusDate), filter, relation);
             else
                 filter = new AndFilter(new DateFilter(censusDate), filter);
+            if (ckbHideRecorded.Checked)
+                filter = new AndFilter(filter, noLCFact);
             MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();
             censusComparator.addComparator(new LocationComparator(FactLocation.PARISH));
             censusComparator.addComparator(new DateComparator());

@@ -11,8 +11,7 @@ namespace FTAnalyzer
 
         private int level;
 
-        public static readonly IncompleteDataFilter MISSING_DATA_FILTER =
-            new IncompleteDataFilter(FactLocation.COUNTRY);
+        public static readonly IncompleteDataFilter MISSING_DATA_FILTER = new IncompleteDataFilter(FactLocation.COUNTRY);
 
         public IncompleteDataFilter(int level)
         {

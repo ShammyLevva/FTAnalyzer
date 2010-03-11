@@ -16,6 +16,7 @@ namespace FTAnalyzer
         private List<Individual> individuals;
         private List<Family> families;
         private Dictionary<string, FactLocation> locations;
+        private bool _loading = false;
 
         private FamilyTree()
         {
@@ -68,6 +69,7 @@ namespace FTAnalyzer
         public void LoadTree(XmlDocument doc) { LoadTree(doc, new ProgressBar(), new ProgressBar(), new ProgressBar(), new RichTextBox()); }
         public void LoadTree(XmlDocument doc, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF, RichTextBox rtb)
         {
+            _loading = true;
             ResetData();
             Application.DoEvents();
             // First iterate through attributes of root finding all sources
@@ -111,10 +113,13 @@ namespace FTAnalyzer
             SetRelations(individuals[0].GedcomID);
             PrintRelationCount(rtb);
 	        SetParishes();
+            _loading = false;
         }
         #endregion
 
         #region Properties
+
+        public bool Loading { get { return _loading; } }
 
         public List<Fact> AllFacts
         {

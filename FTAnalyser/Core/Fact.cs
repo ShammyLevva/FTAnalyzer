@@ -17,7 +17,8 @@ namespace FTAnalyzer
                 EMIGRATION = "EMIG", IMMIGRATION = "IMMI", CUSTOM_FACT = "EVEN",
                 CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSE", IGISEARCH = "*IGI",
-                CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT", CHANGE = "*CHNG";
+                CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT", 
+                CHANGE = "*CHNG", LOSTCOUSINS = "*LOST";
 
         private string factType;
         private FactDate date;
@@ -43,6 +44,7 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("Arrival", ARRIVAL);
             CUSTOM_TAGS.Add("Departure", DEPARTURE);
             CUSTOM_TAGS.Add("Record Change", CHANGE);
+            CUSTOM_TAGS.Add("Lost Cousins", LOSTCOUSINS);
             
             COMMENT_FACTS.Add(OCCUPATION);
             COMMENT_FACTS.Add(RELIGION);
@@ -56,6 +58,7 @@ namespace FTAnalyzer
             COMMENT_FACTS.Add(UNMARRIED);
             COMMENT_FACTS.Add(UNKNOWN);
             COMMENT_FACTS.Add(IGISEARCH);
+            COMMENT_FACTS.Add(LOSTCOUSINS);
         }
 
         #region Constructors

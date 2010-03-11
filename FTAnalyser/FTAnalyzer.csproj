@@ -156,6 +156,8 @@
     <Compile Include="Core\Family.cs" />
     <Compile Include="Filters\AndFilter.cs" />
     <Compile Include="Filters\BirthFilter.cs" />
+    <Compile Include="Filters\NotFilter.cs" />
+    <Compile Include="Filters\FactFilter.cs" />
     <Compile Include="Filters\FalseFilter.cs" />
     <Compile Include="Filters\TrueFilter.cs" />
     <Compile Include="Filters\DateFilter.cs" />

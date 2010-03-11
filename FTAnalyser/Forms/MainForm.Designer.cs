@@ -87,6 +87,7 @@
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ckbHideRecorded = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -154,7 +155,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -475,6 +476,7 @@
             // 
             // tabLostCousins
             // 
+            this.tabLostCousins.Controls.Add(this.ckbHideRecorded);
             this.tabLostCousins.Controls.Add(this.ckbRestrictions);
             this.tabLostCousins.Controls.Add(this.btnLC1841EW);
             this.tabLostCousins.Controls.Add(this.btnLC1911Ireland);
@@ -505,7 +507,7 @@
             // 
             // btnLC1841EW
             // 
-            this.btnLC1841EW.Location = new System.Drawing.Point(22, 87);
+            this.btnLC1841EW.Location = new System.Drawing.Point(22, 114);
             this.btnLC1841EW.Name = "btnLC1841EW";
             this.btnLC1841EW.Size = new System.Drawing.Size(162, 36);
             this.btnLC1841EW.TabIndex = 8;
@@ -515,7 +517,7 @@
             // 
             // btnLC1911Ireland
             // 
-            this.btnLC1911Ireland.Location = new System.Drawing.Point(358, 87);
+            this.btnLC1911Ireland.Location = new System.Drawing.Point(358, 114);
             this.btnLC1911Ireland.Name = "btnLC1911Ireland";
             this.btnLC1911Ireland.Size = new System.Drawing.Size(162, 36);
             this.btnLC1911Ireland.TabIndex = 7;
@@ -525,7 +527,7 @@
             // 
             // btnLC1880USA
             // 
-            this.btnLC1880USA.Location = new System.Drawing.Point(190, 87);
+            this.btnLC1880USA.Location = new System.Drawing.Point(190, 114);
             this.btnLC1880USA.Name = "btnLC1880USA";
             this.btnLC1880USA.Size = new System.Drawing.Size(162, 36);
             this.btnLC1880USA.TabIndex = 6;
@@ -535,7 +537,7 @@
             // 
             // btnLC1881EW
             // 
-            this.btnLC1881EW.Location = new System.Drawing.Point(22, 45);
+            this.btnLC1881EW.Location = new System.Drawing.Point(22, 72);
             this.btnLC1881EW.Name = "btnLC1881EW";
             this.btnLC1881EW.Size = new System.Drawing.Size(162, 36);
             this.btnLC1881EW.TabIndex = 5;
@@ -545,7 +547,7 @@
             // 
             // btnLC1881Canada
             // 
-            this.btnLC1881Canada.Location = new System.Drawing.Point(358, 45);
+            this.btnLC1881Canada.Location = new System.Drawing.Point(358, 72);
             this.btnLC1881Canada.Name = "btnLC1881Canada";
             this.btnLC1881Canada.Size = new System.Drawing.Size(162, 36);
             this.btnLC1881Canada.TabIndex = 4;
@@ -555,7 +557,7 @@
             // 
             // btnLC1881Scot
             // 
-            this.btnLC1881Scot.Location = new System.Drawing.Point(190, 45);
+            this.btnLC1881Scot.Location = new System.Drawing.Point(190, 72);
             this.btnLC1881Scot.Name = "btnLC1881Scot";
             this.btnLC1881Scot.Size = new System.Drawing.Size(162, 36);
             this.btnLC1881Scot.TabIndex = 0;
@@ -740,6 +742,18 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(171, 6);
             // 
+            // ckbHideRecorded
+            // 
+            this.ckbHideRecorded.AutoSize = true;
+            this.ckbHideRecorded.Checked = true;
+            this.ckbHideRecorded.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbHideRecorded.Location = new System.Drawing.Point(22, 45);
+            this.ckbHideRecorded.Name = "ckbHideRecorded";
+            this.ckbHideRecorded.Size = new System.Drawing.Size(311, 17);
+            this.ckbHideRecorded.TabIndex = 10;
+            this.ckbHideRecorded.Text = "Hide results for individuals tagged as entered in Lost Cousins";
+            this.ckbHideRecorded.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -847,6 +861,7 @@
         private System.Windows.Forms.CheckBox ckbRestrictions;
         private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.CheckBox ckbHideRecorded;
     }
 }
 
