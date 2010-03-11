@@ -108,7 +108,7 @@ namespace FTAnalyzer
                 Application.DoEvents();
             }
             rtb.AppendText("Loaded " + counter + " families.\nCalculating Relationships... Please wait\n\n");
-            SetRelations(individuals[0].GedcomID); // needs testing
+            SetRelations(individuals[0].GedcomID);
             PrintRelationCount(rtb);
 	        SetParishes();
         }
@@ -572,16 +572,24 @@ namespace FTAnalyzer
                 queue.Enqueue(i);
         }
 
-        private void addParentsToQueue(Individual indiv, Queue<Individual> queue)
+        private void addParentsToQueue(Individual indiv, Queue<Individual> queue, bool setAhnenfatel)
         {
             List<Family> families = getFamiliesAsChild(indiv);
             foreach (Family family in families)
             {
                 // add parents to queue
                 if (family.Husband != null)
+                {
+                    if (setAhnenfatel && indiv.RelationType == Individual.DIRECT)
+                        family.Husband.Ahnentafel = indiv.Ahnentafel * 2;
                     queue.Enqueue(family.Husband);
+                }
                 if (family.Wife != null)
+                {
+                    if (setAhnenfatel && indiv.RelationType == Individual.DIRECT)
+                        family.Wife.Ahnentafel = indiv.Ahnentafel * 2 + 1;
                     queue.Enqueue(family.Wife);
+                }
             }
         }
 
@@ -589,6 +597,7 @@ namespace FTAnalyzer
         {	
             ClearRelations();
             Individual ind = getGedcomIndividual(startGed);
+            ind.Ahnentafel = 1;
             Queue<Individual> queue = new Queue<Individual>();
             queue.Enqueue(ind);
             while (queue.Count > 0) {
@@ -596,7 +605,7 @@ namespace FTAnalyzer
                 ind = queue.Dequeue();
                 // set them as a direct relation
                 ind.RelationType = Individual.DIRECT;
-                addParentsToQueue(ind, queue);
+                addParentsToQueue(ind, queue, true);
             }
             // we have now added all direct ancestors
             List<Individual> directs = getAllRelationsOfType(Individual.DIRECT);
@@ -631,7 +640,7 @@ namespace FTAnalyzer
 		            // set this individual to be related by marriage
 		            if (relationship == Individual.UNKNOWN)
 		                ind.RelationType = Individual.MARRIAGE;
-		            addParentsToQueue(ind, queue);
+		            addParentsToQueue(ind, queue, false);
                     List<Family> families = getFamiliesAsParent(ind);
                     foreach (Family family in families)
                     {

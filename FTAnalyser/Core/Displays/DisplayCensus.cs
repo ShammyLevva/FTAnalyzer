@@ -29,6 +29,7 @@ namespace FTAnalyzer
         public string BirthLocation { get { return ind.BirthLocation; } }
         public string Status { get { return ind.Status; } }
         public string Relation { get { return ind.Relation; } }
+        public int Ahnentafel { get { return ind.Ahnentafel; } }
 
     }
 }

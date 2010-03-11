@@ -24,6 +24,7 @@ namespace FTAnalyzer
 	    private string alias;
 	    private string status;
 	    private int relationType;
+        private int ahnentafel;
 	    private List<Fact> facts;
     	
 	    public Individual (XmlNode node, RichTextBox rtb) {
@@ -34,6 +35,7 @@ namespace FTAnalyzer
             alias =  FamilyTree.GetText(node, "ALIA");
 		    relationType = UNKNOWN;
 		    status = UNKNOWNSTATUS;
+            ahnentafel = 0;
 		    facts = new List<Fact>();
 		    addFacts(node, Fact.BIRTH, rtb);
             addFacts(node, Fact.CHRISTENING, rtb);
@@ -59,12 +61,19 @@ namespace FTAnalyzer
                 this.gender = i.gender;
                 this.alias = i.alias;
                 this.status = i.status;
+                this.ahnentafel = i.ahnentafel;
                 this.relationType = i.relationType;
                 this.facts = new List<Fact>(i.facts);
             }
         }
 
         #region Properties
+
+        public int Ahnentafel
+        { 
+            get { return ahnentafel; } 
+            set { ahnentafel = value; }
+        }
 
         public string IndividualID 
         { 
