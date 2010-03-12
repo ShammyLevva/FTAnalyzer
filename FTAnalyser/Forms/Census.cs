@@ -16,7 +16,7 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
         }
 
-        public void setupCensus(RegistrationsProcessor rp, FactDate date, bool censusDone)
+        public void setupCensus(RegistrationsProcessor rp, FactDate date, bool censusDone, int maxAge)
         {
             FamilyTree ft = FamilyTree.Instance;
             List<Registration> regs = ft.getAllCensusRegistrations(date, censusDone);
@@ -24,7 +24,10 @@ namespace FTAnalyzer.Forms
             List<DisplayCensus> ds = new List<DisplayCensus>();
             foreach (CensusRegistration r in census)
                 foreach (Individual i in r.Members)
-                    ds.Add(new DisplayCensus(r.FamilyGed, r.RegistrationLocation, r.registrationDate, i));
+                {
+                    if (i.getAge(date).MinAge <= maxAge) 
+                        ds.Add(new DisplayCensus(r.FamilyGed, r.RegistrationLocation, r.registrationDate, i));
+                }
             // ds.sort(new IndividualNameComparator());
             dgCensus.DataSource = ds;
             tsRecords.Text = ds.Count + " Records.";

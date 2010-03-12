@@ -89,6 +89,8 @@
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -111,6 +113,7 @@
             this.tabAddresses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).BeginInit();
             this.statusStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -288,6 +291,8 @@
             // 
             // tabCensus
             // 
+            this.tabCensus.Controls.Add(this.label2);
+            this.tabCensus.Controls.Add(this.udAgeFilter);
             this.tabCensus.Controls.Add(this.btnShowResults);
             this.tabCensus.Controls.Add(this.groupBox2);
             this.tabCensus.Controls.Add(this.label1);
@@ -303,7 +308,7 @@
             // 
             // btnShowResults
             // 
-            this.btnShowResults.Location = new System.Drawing.Point(257, 93);
+            this.btnShowResults.Location = new System.Drawing.Point(19, 137);
             this.btnShowResults.Name = "btnShowResults";
             this.btnShowResults.Size = new System.Drawing.Size(82, 25);
             this.btnShowResults.TabIndex = 4;
@@ -338,8 +343,6 @@
             // ckbMarriageDB
             // 
             this.ckbMarriageDB.AutoSize = true;
-            this.ckbMarriageDB.Checked = true;
-            this.ckbMarriageDB.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbMarriageDB.Location = new System.Drawing.Point(116, 42);
             this.ckbMarriageDB.Name = "ckbMarriageDB";
             this.ckbMarriageDB.Size = new System.Drawing.Size(146, 17);
@@ -384,7 +387,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 99);
+            this.label1.Location = new System.Drawing.Point(348, 95);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 13);
             this.label1.TabIndex = 2;
@@ -403,7 +406,7 @@
             "1891",
             "1901",
             "1911"});
-            this.cbCensusDate.Location = new System.Drawing.Point(91, 93);
+            this.cbCensusDate.Location = new System.Drawing.Point(422, 89);
             this.cbCensusDate.Name = "cbCensusDate";
             this.cbCensusDate.Size = new System.Drawing.Size(49, 21);
             this.cbCensusDate.TabIndex = 1;
@@ -770,6 +773,37 @@
             this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
+            // udAgeFilter
+            // 
+            this.udAgeFilter.Location = new System.Drawing.Point(197, 93);
+            this.udAgeFilter.Maximum = new decimal(new int[] {
+            110,
+            0,
+            0,
+            0});
+            this.udAgeFilter.Minimum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.udAgeFilter.Name = "udAgeFilter";
+            this.udAgeFilter.Size = new System.Drawing.Size(41, 20);
+            this.udAgeFilter.TabIndex = 5;
+            this.udAgeFilter.Value = new decimal(new int[] {
+            90,
+            0,
+            0,
+            0});
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(16, 95);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(175, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Exclude individuals over the age of ";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -811,6 +845,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -879,6 +914,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.CheckBox ckbHideRecorded;
         private System.Windows.Forms.Label labLostCousinsWeb;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown udAgeFilter;
     }
 }
 

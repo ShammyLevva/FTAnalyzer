@@ -213,7 +213,7 @@ namespace FTAnalyzer
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
 
             Forms.Census census = new Forms.Census();
-            census.setupCensus(censusRP, censusDate, false);
+            census.setupCensus(censusRP, censusDate, false, (int) udAgeFilter.Value);
             census.Text = censusDate.StartDate.Year.ToString() + " Census Records to search for";
             census.Show();
         }
@@ -298,7 +298,7 @@ namespace FTAnalyzer
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
 
             Forms.Census census = new Forms.Census();
-            census.setupCensus(censusRP, censusDate, true);
+            census.setupCensus(censusRP, censusDate, true, 110);
             census.Text = reportTitle;
             HourGlass(false);
             census.Show();
