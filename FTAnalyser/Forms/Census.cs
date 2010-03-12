@@ -28,6 +28,13 @@ namespace FTAnalyzer.Forms
             // ds.sort(new IndividualNameComparator());
             dgCensus.DataSource = ds;
             tsRecords.Text = ds.Count + " Records.";
+            resize();
+        }
+
+        public void resize()
+        {
+            foreach (DataGridViewColumn c in dgCensus.Columns)
+                c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
         }
     }
 }

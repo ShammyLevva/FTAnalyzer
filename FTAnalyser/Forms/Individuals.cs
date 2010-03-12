@@ -25,6 +25,14 @@ namespace FTAnalyzer.Forms
                 ds.Add(i);
             // ds.sort(new IndividualNameComparator());
             dgIndividuals.DataSource = ds;
+            resize();
         }
+
+        public void resize()
+        {
+            foreach (DataGridViewColumn c in dgIndividuals.Columns)
+                c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+        }
+
     }
 }
