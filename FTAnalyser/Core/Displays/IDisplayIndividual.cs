@@ -15,10 +15,10 @@ namespace FTAnalyzer
         string BirthLocation { get; }
         FactDate DeathDate { get; }
         string DeathLocation { get; }
-        string Status { get; }
-        int RelationType { get; }
         string Occupation { get; }
         FactLocation BestLocation { get; }
         Age CurrentAge { get; }
+        string Relation { get; }
+        int Ahnentafel { get; }
     }
 }
