@@ -18,7 +18,7 @@ namespace FTAnalyzer
 
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
-        private FactDate censusDate = FactDate.CENSUS1841;
+        private FactDate censusDate = FactDate.CENSUS1881;
             
         public MainForm()
         {
@@ -102,7 +102,7 @@ namespace FTAnalyzer
                 }
                 else if (tabControl.SelectedTab == tabCensus)
                 {
-                    cbCensusDate.Text = "1911";
+                    cbCensusDate.Text = "1881";
                     tsCountLabel.Text = "";
                     btnShowResults.Enabled = ft.IndividualCount > 0;
                 }
