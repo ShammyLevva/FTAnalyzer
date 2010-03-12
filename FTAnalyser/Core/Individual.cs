@@ -91,8 +91,8 @@ namespace FTAnalyzer
             get {
                 switch (relationType)
                 {
-                    case DIRECT: return "Direct";
-                    case BLOOD: return "Blood";
+                    case DIRECT: return "Direct Ancestor";
+                    case BLOOD: return "Blood Relation";
                     case MARRIAGE: return "By Marriage";
                     case MARRIAGEDB: return "Marr to Direct/Blood";
                     default: return "Unknown";
