@@ -57,7 +57,7 @@ namespace FTAnalyzer.Forms
                     highlighted = !highlighted;
                 }
                 if (highlighted)
-                    rowColour.Add(r.Index, Color.DarkGray);
+                    rowColour.Add(r.Index, Color.LightGray);
                 else
                     rowColour.Add(r.Index, Color.White);
             }
