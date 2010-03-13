@@ -45,6 +45,7 @@
             this.dgCensus.Name = "dgCensus";
             this.dgCensus.Size = new System.Drawing.Size(1038, 558);
             this.dgCensus.TabIndex = 1;
+            this.dgCensus.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgCensus_CellFormatting);
             // 
             // statusStrip
             // 
@@ -59,7 +60,7 @@
             // tsRecords
             // 
             this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(109, 17);
+            this.tsRecords.Size = new System.Drawing.Size(118, 17);
             this.tsRecords.Text = "toolStripStatusLabel1";
             // 
             // Census
