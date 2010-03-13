@@ -12,6 +12,7 @@ namespace FTAnalyzer.Forms
     public partial class Census : Form
     {
         private Dictionary<int, Color> rowColour;
+        private int numFamilies;
 
         public Census()
         {
@@ -33,9 +34,9 @@ namespace FTAnalyzer.Forms
                 }
             // ds.sort(new IndividualNameComparator());
             dgCensus.DataSource = ds;
-            tsRecords.Text = ds.Count + " Records.";
             ResizeColumns();
             ColourRows();
+            tsRecords.Text = ds.Count + " Records / " + numFamilies + " Families.";
         }
 
         private void ResizeColumns()
@@ -48,6 +49,7 @@ namespace FTAnalyzer.Forms
         {
             string currentFamilyGed = "";
             bool highlighted = true;
+            numFamilies = 0;
             foreach (DataGridViewRow r in dgCensus.Rows)
             {
                 DisplayCensus cr = (DisplayCensus)r.DataBoundItem;
@@ -55,6 +57,7 @@ namespace FTAnalyzer.Forms
                 {
                     currentFamilyGed = cr.FamilyGed;
                     highlighted = !highlighted;
+                    numFamilies++;
                 }
                 if (highlighted)
                     rowColour.Add(r.Index, Color.LightGray);
