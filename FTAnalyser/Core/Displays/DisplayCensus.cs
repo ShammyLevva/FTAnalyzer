@@ -31,7 +31,7 @@ namespace FTAnalyzer
         public string Relation { get { return ind.Relation; } }
         public int Ahnentafel { get { return ind.Ahnentafel; } }
 
-        public bool isAlive { get { return regDate.isBefore(ind.DeathDate); } }
+        public bool isAlive { get { return regDate.isAfter(ind.BirthDate) && regDate.isBefore(ind.DeathDate); } }
         public int RelationType { get { return ind.RelationType; } }
 
     }
