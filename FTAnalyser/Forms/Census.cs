@@ -69,15 +69,29 @@ namespace FTAnalyzer.Forms
             }
         }
 
+        private string GetTooltipText(DataGridViewCellStyle style)
+        {
+            if (style.Font.Bold && style.ForeColor == Color.Red)
+                return "This direct ancestor is known to be alive on this census.";
+            else if (style.Font.Bold)
+                return "This individual is known to be alive on this census.";
+            else if (style.ForeColor == Color.Red)
+                return "This is a direct ancestor that may be alive on this census.";
+            else
+                return string.Empty;
+        }
+
         private void dgCensus_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             DataGridViewCellStyle style = dgCensus.DefaultCellStyle;
+            DataGridViewCell cell = dgCensus.Rows[e.RowIndex].Cells[e.ColumnIndex];
             rowStyles.TryGetValue(e.RowIndex, out style);
             if (style != null)
             {
                 e.CellStyle.BackColor = style.BackColor;
                 e.CellStyle.ForeColor = style.ForeColor;
                 e.CellStyle.Font = style.Font;
+                cell.ToolTipText = GetTooltipText(style);
             }
         }
     }
