@@ -104,9 +104,9 @@ namespace FTAnalyzer
 
                             // perform validation on the CHAR field (character code)
                             if (tag.Equals("CHAR") &&
-                                !(value.Trim().Equals("ANSEL") || value.Trim().Equals("ASCII")))
+                                !(value.Trim().Equals("ANSEL") || value.Trim().Equals("ASCII") || value.Trim().Equals("ANSI")))
                             {
-                                FamilyTree.Instance.XmlErrorBox.AppendText("WARNING: Character set is " + value + ": should be ANSEL or ASCII");
+                                FamilyTree.Instance.XmlErrorBox.AppendText("WARNING: Character set is " + value + ": should be ANSEL, ANSI or ASCII\n");
                             }
 
                             // insert any necessary closing tags
@@ -147,7 +147,7 @@ namespace FTAnalyzer
                         }
                         catch (Exception e)
                         {
-                            FamilyTree.Instance.XmlErrorBox.AppendText("Found bad line '" + line + ". ");
+                            FamilyTree.Instance.XmlErrorBox.AppendText("Found bad line '" + line + "'. ");
                             FamilyTree.Instance.XmlErrorBox.AppendText("Error was : " + e.Message + "\n");
                         }
                     }
