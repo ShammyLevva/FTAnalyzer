@@ -28,7 +28,7 @@ namespace FTAnalyzer
 	    private List<Fact> facts;
         private List<FactLocation> locations;
     	
-	    public Individual (XmlNode node, RichTextBox rtb) {
+	    public Individual (XmlNode node) {
 		    gedcomID = node.Attributes["ID"].Value;
             individualID = gedcomID;
             Name =   FamilyTree.GetText(node, "NAME");
@@ -40,20 +40,20 @@ namespace FTAnalyzer
 		    facts = new List<Fact>();
             locations = new List<FactLocation>();
 
-		    addFacts(node, Fact.BIRTH, rtb);
-            addFacts(node, Fact.CHRISTENING, rtb);
-            addFacts(node, Fact.DEATH, rtb);
-            addFacts(node, Fact.BURIAL, rtb);
-            addFacts(node, Fact.CENSUS, rtb);
-            addFacts(node, Fact.RESIDENCE, rtb);
-            addFacts(node, Fact.OCCUPATION, rtb);
-            addFacts(node, Fact.CUSTOM_FACT, rtb);
+		    addFacts(node, Fact.BIRTH);
+            addFacts(node, Fact.CHRISTENING);
+            addFacts(node, Fact.DEATH);
+            addFacts(node, Fact.BURIAL);
+            addFacts(node, Fact.CENSUS);
+            addFacts(node, Fact.RESIDENCE);
+            addFacts(node, Fact.OCCUPATION);
+            addFacts(node, Fact.CUSTOM_FACT);
         }
 
         internal Individual(Individual i)
         {
             if (i == null)
-                Console.WriteLine("ERROR: Individual copy constructor called with null individual");
+                FamilyTree.Instance.XmlErrorBox.AppendText("ERROR: Individual copy constructor called with null individual");
             else
             {
                 this.individualID = i.individualID;
@@ -379,11 +379,11 @@ namespace FTAnalyzer
 
         #region Fact Functions
 
-        private void addFacts(XmlNode node, string factType, RichTextBox rtb)
+        private void addFacts(XmlNode node, string factType)
         {
             XmlNodeList list = node.SelectNodes(factType);
 	        foreach(XmlNode n in list) {
-	            addFact(new Fact(n, rtb));
+	            addFact(new Fact(n));
 	        }
 	    }
 

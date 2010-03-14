@@ -63,7 +63,7 @@ namespace FTAnalyzer
 
         #region Constructors
 
-        public Fact (XmlNode node, RichTextBox rtb) {
+        public Fact (XmlNode node) {
             if (node != null) 
             {
                 factType = node.Name;
@@ -72,7 +72,7 @@ namespace FTAnalyzer
                     CUSTOM_TAGS.TryGetValue(tag, out factType);
                     if (factType == null) {
                         factType = Fact.UNKNOWN;
-                        rtb.AppendText("Recorded unknown fact type " + tag + "\n");
+                        FamilyTree.Instance.XmlErrorBox.AppendText("Recorded unknown fact type " + tag + "\n");
                     }
                 }
                 string factDate = FamilyTree.GetText(node, "DATE");
@@ -90,7 +90,7 @@ namespace FTAnalyzer
                     if (source != null)
                         sources.Add(source);
                     else
-                        rtb.AppendText("Source " + srcref + " not found." + "\n");
+                        ft.XmlErrorBox.AppendText("Source " + srcref + " not found." + "\n");
                 }
 
                 if (factType == DEATH) {

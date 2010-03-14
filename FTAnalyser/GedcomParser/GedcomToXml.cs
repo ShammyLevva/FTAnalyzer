@@ -55,92 +55,100 @@ namespace FTAnalyzer
 
                     if (line.Length > 0)
                     {
-                        cpos1 = line.IndexOf(' ');
-                        if (cpos1 < 0) throw new Exception("No space in line");
-
-                        level = firstWord(line);
-                        thislevel = Int32.Parse(level);
-
-                        // check the level number
-
-                        if (thislevel > prevlevel && !(thislevel == prevlevel + 1))
-                            throw new Exception("Level numbers must increase by 1");
-                        if (thislevel < 0)
-                            throw new Exception("Level number must not be negative");
-
-                        line = remainder(line);
-                        token1 = firstWord(line);
-                        line = remainder(line);
-
-                        if (token1.StartsWith("@"))
+                        try
                         {
-                            if (token1.Length == 1 || !token1.EndsWith("@"))
-                                throw new Exception("Bad xref_id");
+                            cpos1 = line.IndexOf(' ');
+                            if (cpos1 < 0) throw new Exception("No space in line");
 
-                            iden = token1.Substring(1, token1.Length - 2);
-                            tag = firstWord(line);
+                            level = firstWord(line);
+                            thislevel = Int32.Parse(level);
+
+                            // check the level number
+
+                            if (thislevel > prevlevel && !(thislevel == prevlevel + 1))
+                                throw new Exception("Level numbers must increase by 1");
+                            if (thislevel < 0)
+                                throw new Exception("Level number must not be negative");
+
                             line = remainder(line);
-                        }
-                        else
-                        {
-                            iden = "";
-                            tag = token1;
-                        };
-
-                        xref = "";
-                        if (line.StartsWith("@"))
-                        {
-                            token2 = firstWord(line);
-                            if (token2.Length == 1 || !token2.EndsWith("@"))
-                                throw new Exception("Bad pointer value");
-
-                            xref = token2.Substring(1, token2.Length - 2);
+                            token1 = firstWord(line);
                             line = remainder(line);
-                        };
 
-                        value = line;
-
-                        // perform validation on the CHAR field (character code)
-                        if (tag.Equals("CHAR") &&
-                            !(value.Trim().Equals("ANSEL") || value.Trim().Equals("ASCII")))
-                        {
-                            Console.Error.WriteLine("WARNING: Character set is " + value + ": should be ANSEL or ASCII");
-                        }
-
-                        // insert any necessary closing tags
-                        while (thislevel <= prevlevel)
-                        {
-                            stack.Pop();
-                            node = node.ParentNode;
-                            prevlevel--;
-                        }
-
-                        if (!tag.Equals("TRLR"))
-                        {
-                            XmlNode newNode = document.CreateElement(tag);
-                            node.AppendChild(newNode);
-                            node = newNode;
-
-                            if (!iden.Equals(""))
+                            if (token1.StartsWith("@"))
                             {
-                                XmlAttribute attr = document.CreateAttribute("ID");
-                                attr.Value = iden;
-                                node.Attributes.Append(attr);
-                            }
-                            if (!xref.Equals(""))
-                            {
-                                XmlAttribute attr = document.CreateAttribute("REF");
-                                attr.Value = xref;
-                                node.Attributes.Append(attr);
-                            }
-                            stack.Push(tag);
-                            prevlevel = thislevel;
-                        }
+                                if (token1.Length == 1 || !token1.EndsWith("@"))
+                                    throw new Exception("Bad xref_id");
 
-                        if (value.Length > 0)
+                                iden = token1.Substring(1, token1.Length - 2);
+                                tag = firstWord(line);
+                                line = remainder(line);
+                            }
+                            else
+                            {
+                                iden = "";
+                                tag = token1;
+                            };
+
+                            xref = "";
+                            if (line.StartsWith("@"))
+                            {
+                                token2 = firstWord(line);
+                                if (token2.Length == 1 || !token2.EndsWith("@"))
+                                    throw new Exception("Bad pointer value");
+
+                                xref = token2.Substring(1, token2.Length - 2);
+                                line = remainder(line);
+                            };
+
+                            value = line;
+
+                            // perform validation on the CHAR field (character code)
+                            if (tag.Equals("CHAR") &&
+                                !(value.Trim().Equals("ANSEL") || value.Trim().Equals("ASCII")))
+                            {
+                                FamilyTree.Instance.XmlErrorBox.AppendText("WARNING: Character set is " + value + ": should be ANSEL or ASCII");
+                            }
+
+                            // insert any necessary closing tags
+                            while (thislevel <= prevlevel)
+                            {
+                                stack.Pop();
+                                node = node.ParentNode;
+                                prevlevel--;
+                            }
+
+                            if (!tag.Equals("TRLR"))
+                            {
+                                XmlNode newNode = document.CreateElement(tag);
+                                node.AppendChild(newNode);
+                                node = newNode;
+
+                                if (!iden.Equals(""))
+                                {
+                                    XmlAttribute attr = document.CreateAttribute("ID");
+                                    attr.Value = iden;
+                                    node.Attributes.Append(attr);
+                                }
+                                if (!xref.Equals(""))
+                                {
+                                    XmlAttribute attr = document.CreateAttribute("REF");
+                                    attr.Value = xref;
+                                    node.Attributes.Append(attr);
+                                }
+                                stack.Push(tag);
+                                prevlevel = thislevel;
+                            }
+
+                            if (value.Length > 0)
+                            {
+                                XmlText text = document.CreateTextNode(value);
+                                node.AppendChild(text);
+                            }
+                        }
+                        catch (Exception e)
                         {
-                            XmlText text = document.CreateTextNode(value);
-                            node.AppendChild(text);
+                            FamilyTree.Instance.XmlErrorBox.AppendText("Found bad line '" + line + ". ");
+                            FamilyTree.Instance.XmlErrorBox.AppendText("Error was : " + e.Message + "\n");
                         }
                     }
 

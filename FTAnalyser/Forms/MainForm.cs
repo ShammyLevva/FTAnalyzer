@@ -12,7 +12,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.0.6.0";
+        private string VERSION = "1.0.7.0";
         private bool _checkForUpdatesEnabled = true;
         private System.Threading.Timer _timerCheckForUpdates;
 
@@ -24,6 +24,7 @@ namespace FTAnalyzer
         {
             InitializeComponent();
             showLocationsToolStripMenuItem.Visible = false;
+            ft.XmlErrorBox = rtbOutput;
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -46,7 +47,7 @@ namespace FTAnalyzer
                     Application.DoEvents();
                     XmlDocument document = GedcomToXml.Load(openFileDialog1.FileName);
                     document.Save("GedcomOutput.xml");
-                    ft.LoadTree(document, pbSources, pbIndividuals, pbFamilies, rtbOutput);
+                    ft.LoadTree(document, pbSources, pbIndividuals, pbFamilies);
                     HourGlass(false);
                     MessageBox.Show("Gedcom File Loaded");
                 }

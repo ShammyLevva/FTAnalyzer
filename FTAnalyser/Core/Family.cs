@@ -34,7 +34,7 @@ namespace FTAnalyzer
 
         public Family() : this("", "") {}
 
-        public Family(XmlNode node, RichTextBox rtb) : this("", "")
+        public Family(XmlNode node) : this("", "")
         {
             if (node != null)
             {
@@ -57,10 +57,10 @@ namespace FTAnalyzer
                     if (child != null)
                         children.Add(child);
                     else
-                        rtb.AppendText("Child not found in family :" + this.familyGed + "\n");
+                        ft.XmlErrorBox.AppendText("Child not found in family :" + this.familyGed + "\n");
                 }
-                addFacts(node, Fact.MARRIAGE, rtb);
-                addFacts(node, Fact.CUSTOM_FACT, rtb);
+                addFacts(node, Fact.MARRIAGE);
+                addFacts(node, Fact.CUSTOM_FACT);
             }
         }
 
@@ -78,12 +78,12 @@ namespace FTAnalyzer
             this.children = new List<Individual>(f.children);
         }
 
-        private void addFacts(XmlNode node, string factType, RichTextBox rtb)
+        private void addFacts(XmlNode node, string factType)
         {
             XmlNodeList list = node.SelectNodes(factType);
             foreach(XmlNode n in list)
             {
-                facts.Add(new Fact(n, rtb));
+                facts.Add(new Fact(n));
             }
         }
 

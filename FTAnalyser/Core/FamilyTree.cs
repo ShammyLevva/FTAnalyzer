@@ -17,6 +17,7 @@ namespace FTAnalyzer
         private List<Family> families;
         private Dictionary<string, FactLocation> locations;
         private bool _loading = false;
+        private RichTextBox xmlErrorbox = new RichTextBox();
 
         private FamilyTree()
         {
@@ -66,8 +67,7 @@ namespace FTAnalyzer
             locations = new Dictionary<string, FactLocation>();
         }
 
-        public void LoadTree(XmlDocument doc) { LoadTree(doc, new ProgressBar(), new ProgressBar(), new ProgressBar(), new RichTextBox()); }
-        public void LoadTree(XmlDocument doc, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF, RichTextBox rtb)
+        public void LoadTree(XmlDocument doc, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
         {
             _loading = true;
             ResetData();
@@ -83,7 +83,7 @@ namespace FTAnalyzer
                 pbS.Value = counter++;
                 Application.DoEvents(); // allows windows to process events and prevents application from appearing to have crashed.
             }
-            rtb.AppendText("Loaded " + counter + " sources.\n");
+            xmlErrorbox.AppendText("Loaded " + counter + " sources.\n");
             // now iterate through child elements of root
             // finding all individuals
             list = doc.SelectNodes("GED/INDI");
@@ -91,12 +91,12 @@ namespace FTAnalyzer
             counter = 0;
             foreach (XmlNode n in list)
             {
-                Individual individual = new Individual(n, rtb);
+                Individual individual = new Individual(n);
                 individuals.Add(individual);
                 pbI.Value = counter++;
                 Application.DoEvents();
             }
-            rtb.AppendText("Loaded " + counter + " individuals.\n");
+            xmlErrorbox.AppendText("Loaded " + counter + " individuals.\n");
             // now iterate through child elements of root
             // finding all families
             list = doc.SelectNodes("GED/FAM");
@@ -104,14 +104,14 @@ namespace FTAnalyzer
             counter = 0;
             foreach (XmlNode n in list)
             {
-                Family family = new Family(n, rtb);
+                Family family = new Family(n);
                 families.Add(family);
                 pbF.Value = counter++;
                 Application.DoEvents();
             }
-            rtb.AppendText("Loaded " + counter + " families.\nCalculating Relationships... Please wait\n\n");
+            xmlErrorbox.AppendText("Loaded " + counter + " families.\nCalculating Relationships... Please wait\n\n");
             SetRelations(individuals[0].GedcomID);
-            PrintRelationCount(rtb);
+            PrintRelationCount();
 	        SetParishes();
             _loading = false;
         }
@@ -120,6 +120,11 @@ namespace FTAnalyzer
         #region Properties
 
         public bool Loading { get { return _loading; } }
+
+        public RichTextBox XmlErrorBox { 
+            get { return xmlErrorbox; } 
+            set { xmlErrorbox = value; } 
+        }
 
         public List<Fact> AllFacts
         {
@@ -666,18 +671,18 @@ namespace FTAnalyzer
 		    }
         }
 
-        private void PrintRelationCount(RichTextBox rtb)
+        private void PrintRelationCount()
         {
             int[] relations = {0,0,0,0,0,0};
             foreach(Individual i in individuals)
                 relations[i.RelationType]++;
-            rtb.AppendText("Direct Ancestors : " + relations[Individual.DIRECT] + "\n");
-            rtb.AppendText("Blood Relations : " + relations[Individual.BLOOD] + "\n");
-            rtb.AppendText("Married to Blood or Direct Relation : " + relations[Individual.MARRIAGEDB] + "\n");
-            rtb.AppendText("Related by Marriage : " + relations[Individual.MARRIAGE] + "\n");
-            rtb.AppendText("Unknown relation : " + relations[Individual.UNKNOWN] + "\n");
+            xmlErrorbox.AppendText("Direct Ancestors : " + relations[Individual.DIRECT] + "\n");
+            xmlErrorbox.AppendText("Blood Relations : " + relations[Individual.BLOOD] + "\n");
+            xmlErrorbox.AppendText("Married to Blood or Direct Relation : " + relations[Individual.MARRIAGEDB] + "\n");
+            xmlErrorbox.AppendText("Related by Marriage : " + relations[Individual.MARRIAGE] + "\n");
+            xmlErrorbox.AppendText("Unknown relation : " + relations[Individual.UNKNOWN] + "\n");
             if(relations[Individual.UNSET] > 0)
-                rtb.AppendText("Failed to set relationship : " + relations[Individual.UNSET] + "\n");
+                xmlErrorbox.AppendText("Failed to set relationship : " + relations[Individual.UNSET] + "\n");
         }
 
         #endregion
@@ -698,7 +703,7 @@ namespace FTAnalyzer
         #region Registrations
 
         public void processRegistration(String filename, RegistrationsProcessor rp, 
-            List<Registration> sourceRegs, BaseOutputFormatter formatter, RichTextBox rtb) 
+            List<Registration> sourceRegs, BaseOutputFormatter formatter) 
     	{
             TextWriter output = new StreamWriter(filename + ".csv");
             formatter.printHeader(output);
@@ -706,7 +711,7 @@ namespace FTAnalyzer
             foreach (Registration r in regs) {
                 formatter.printItem(r, output);
             }
-            rtb.AppendText("written " + regs.Count + " records to " + filename + "\n");
+            FamilyTree.Instance.xmlErrorbox.AppendText("written " + regs.Count + " records to " + filename + "\n");
             output.Close();
         }
 
