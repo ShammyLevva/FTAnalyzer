@@ -63,6 +63,7 @@ namespace FTAnalyzer.Forms
                 }
                 DataGridViewCellStyle style = new DataGridViewCellStyle();
                 style.BackColor = highlighted ? Color.LightGray : Color.White;
+                style.ForeColor = cr.RelationType == Individual.DIRECT ? Color.Red : Color.Black;
                 style.Font = cr.isAlive ? boldFont : regularFont;
                 rowStyles.Add(r.Index, style);
             }
@@ -75,6 +76,7 @@ namespace FTAnalyzer.Forms
             if (style != null)
             {
                 e.CellStyle.BackColor = style.BackColor;
+                e.CellStyle.ForeColor = style.ForeColor;
                 e.CellStyle.Font = style.Font;
             }
         }

@@ -32,6 +32,7 @@ namespace FTAnalyzer
         public int Ahnentafel { get { return ind.Ahnentafel; } }
 
         public bool isAlive { get { return regDate.isBefore(ind.DeathDate); } }
+        public int RelationType { get { return ind.RelationType; } }
 
     }
 }
