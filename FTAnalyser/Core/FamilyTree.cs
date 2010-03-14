@@ -142,7 +142,12 @@ namespace FTAnalyzer
             get { return individuals; }
         }
 
-        public List<IDisplayLocation> AllLocations
+        public List<FactLocation> AllLocations
+        {
+            get { return locations.Values.ToList(); }
+        }
+
+        public List<IDisplayLocation> AllDisplayLocations
         {
             get {
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
@@ -159,7 +164,7 @@ namespace FTAnalyzer
             get
             {
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in AllLocations)
+                foreach (FactLocation loc in AllDisplayLocations)
                 {
                     if (loc.country != string.Empty)
                     {
@@ -177,7 +182,7 @@ namespace FTAnalyzer
             get
             {
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in AllLocations)
+                foreach (FactLocation loc in AllDisplayLocations)
                 {
                     if (loc.region != string.Empty)
                     {
@@ -195,7 +200,7 @@ namespace FTAnalyzer
             get
             {
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in AllLocations)
+                foreach (FactLocation loc in AllDisplayLocations)
                 {
                     if (loc.parish != string.Empty)
                     {
@@ -213,7 +218,7 @@ namespace FTAnalyzer
             get
             {
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in AllLocations)
+                foreach (FactLocation loc in AllDisplayLocations)
                 {
                     if (loc.address != string.Empty)
                     {
@@ -388,13 +393,15 @@ namespace FTAnalyzer
         public List<string> getSurnamesAtLocation(FactLocation loc) { return getSurnamesAtLocation(loc, FactLocation.PARISH); }
         public List<string> getSurnamesAtLocation(FactLocation loc, int level)
         {
-            List<string> result = new List<string>();
+            HashSet<string> result = new HashSet<string>();
             foreach (Individual i in individuals)
             {
                 if (!result.Contains(i.Surname) && i.isAtLocation(loc, level))
                     result.Add(i.Surname);
             }
-            return result;
+            List<string> ls = result.ToList();
+            ls.Sort();
+            return ls;
         }
 
         #endregion

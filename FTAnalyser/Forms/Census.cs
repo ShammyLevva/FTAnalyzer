@@ -24,7 +24,7 @@ namespace FTAnalyzer.Forms
             FamilyTree ft = FamilyTree.Instance;
             List<Registration> regs = ft.getAllCensusRegistrations(date, censusDone);
             List<Registration> census = rp.processRegistrations(regs);
-            List<DisplayCensus> ds = new List<DisplayCensus>();
+            List<IDisplayCensus> ds = new List<IDisplayCensus>();
             rowColour = new Dictionary<int, Color>();
             foreach (CensusRegistration r in census)
                 foreach (Individual i in r.Members)
@@ -52,7 +52,7 @@ namespace FTAnalyzer.Forms
             numFamilies = 0;
             foreach (DataGridViewRow r in dgCensus.Rows)
             {
-                DisplayCensus cr = (DisplayCensus)r.DataBoundItem;
+                IDisplayCensus cr = (IDisplayCensus)r.DataBoundItem;
                 if (cr.FamilyGed != currentFamilyGed)
                 {
                     currentFamilyGed = cr.FamilyGed;

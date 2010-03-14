@@ -48,6 +48,8 @@
             this.tabIndividuals = new System.Windows.Forms.TabPage();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
             this.tabCensus = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
             this.btnShowResults = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ckbUnknown = new System.Windows.Forms.CheckBox();
@@ -89,14 +91,14 @@
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
+            this.showLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
             this.tabIndividuals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.tabCensus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabLostCousins.SuspendLayout();
@@ -113,7 +115,6 @@
             this.tabAddresses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).BeginInit();
             this.statusStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -134,7 +135,8 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem});
+            this.openToolStripMenuItem,
+            this.showLocationsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -142,7 +144,7 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -305,6 +307,37 @@
             this.tabCensus.TabIndex = 0;
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(16, 95);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(175, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Exclude individuals over the age of ";
+            // 
+            // udAgeFilter
+            // 
+            this.udAgeFilter.Location = new System.Drawing.Point(197, 93);
+            this.udAgeFilter.Maximum = new decimal(new int[] {
+            110,
+            0,
+            0,
+            0});
+            this.udAgeFilter.Minimum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.udAgeFilter.Name = "udAgeFilter";
+            this.udAgeFilter.Size = new System.Drawing.Size(41, 20);
+            this.udAgeFilter.TabIndex = 5;
+            this.udAgeFilter.Value = new decimal(new int[] {
+            90,
+            0,
+            0,
+            0});
             // 
             // btnShowResults
             // 
@@ -773,36 +806,12 @@
             this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
-            // udAgeFilter
+            // showLocationsToolStripMenuItem
             // 
-            this.udAgeFilter.Location = new System.Drawing.Point(197, 93);
-            this.udAgeFilter.Maximum = new decimal(new int[] {
-            110,
-            0,
-            0,
-            0});
-            this.udAgeFilter.Minimum = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.udAgeFilter.Name = "udAgeFilter";
-            this.udAgeFilter.Size = new System.Drawing.Size(41, 20);
-            this.udAgeFilter.TabIndex = 5;
-            this.udAgeFilter.Value = new decimal(new int[] {
-            90,
-            0,
-            0,
-            0});
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 95);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(175, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Exclude individuals over the age of ";
+            this.showLocationsToolStripMenuItem.Name = "showLocationsToolStripMenuItem";
+            this.showLocationsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.showLocationsToolStripMenuItem.Text = "Show locations";
+            this.showLocationsToolStripMenuItem.Click += new System.EventHandler(this.showLocationsToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -825,6 +834,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
             this.tabCensus.ResumeLayout(false);
             this.tabCensus.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -845,7 +855,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -916,6 +925,7 @@
         private System.Windows.Forms.Label labLostCousinsWeb;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown udAgeFilter;
+        private System.Windows.Forms.ToolStripMenuItem showLocationsToolStripMenuItem;
     }
 }
 

@@ -99,6 +99,9 @@
     <EmbeddedResource Include="Forms\Individuals.resx">
       <DependentUpon>Individuals.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Locations.resx">
+      <DependentUpon>Locations.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -143,6 +146,9 @@
     <Compile Include="Comparators\Registration\MultiComparator.cs" />
     <Compile Include="Comparators\Registration\NameComparator.cs" />
     <Content Include="Useful URLs.txt" />
+    <Compile Include="Core\Displays\DisplaySurnamesAtLocation.cs" />
+    <Compile Include="Core\Displays\IDisplayCensus.cs" />
+    <Compile Include="Core\Displays\IDisplaySurnamesAtLocation.cs" />
     <Compile Include="Core\Displays\DisplayCensus.cs" />
     <Compile Include="Core\Displays\IDisplayLocation.cs" />
     <Compile Include="Core\Displays\IDisplayLooseDeath.cs" />
@@ -184,6 +190,12 @@
     </Compile>
     <Compile Include="Forms\Individuals.Designer.cs">
       <DependentUpon>Individuals.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Locations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Locations.Designer.cs">
+      <DependentUpon>Locations.cs</DependentUpon>
     </Compile>
     <Compile Include="HTTPParser\Attribute.cs" />
     <Compile Include="HTTPParser\AttributeList.cs" />

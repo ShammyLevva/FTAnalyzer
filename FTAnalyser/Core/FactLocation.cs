@@ -22,6 +22,8 @@ namespace FTAnalyzer
         internal string place;
         internal string parishID;
         private int level;
+
+        private List<Individual> individuals;
         
         public FactLocation() {
             this.location = "";
@@ -31,6 +33,7 @@ namespace FTAnalyzer
             this.address = "";
             this.place = "";
             this.parishID = null;
+            this.individuals = new List<Individual>();
         }
 
         public FactLocation(string location) : this() {
@@ -94,6 +97,26 @@ namespace FTAnalyzer
             parish = region;
             region = newRegion;
             if (level < PLACE) level++; // we have moved up a level
+        }
+
+        public void AddIndividual(Individual ind)
+        {
+            if (ind != null && !individuals.Contains(ind))
+            {
+                individuals.Add(ind);
+            }
+        }
+
+        public List<string> GetSurnames()
+        {
+            HashSet<string> names = new HashSet<string>();
+            foreach (Individual i in individuals)
+            {
+                names.Add(i.Surname);
+            }
+            List<string> result = names.ToList();
+            result.Sort();
+            return result;
         }
 
         #region Properties

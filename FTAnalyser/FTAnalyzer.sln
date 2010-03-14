@@ -1,22 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+# Visual C# Express 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTAnalyzer", "FTAnalyzer.csproj", "{799ECA65-6748-4B7C-BBD5-429C19E02161}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Old Java Code", "..\Old Java Code\Old Java Code.csproj", "{19F9AC73-3B92-4656-9280-6CB638CB88E2}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs08.codeplex.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = FTAnalyzer.csproj
-		SccLocalPath1 = .
-		SccProjectUniqueName2 = ..\\Old\u0020Java\u0020Code\\Old\u0020Java\u0020Code.csproj
-		SccProjectName2 = ../Old\u0020Java\u0020Code
-		SccLocalPath2 = ..\\Old\u0020Java\u0020Code
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
@@ -43,5 +32,16 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs08.codeplex.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = FTAnalyzer.csproj
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = ..\\Old\u0020Java\u0020Code\\Old\u0020Java\u0020Code.csproj
+		SccProjectName2 = ../Old\u0020Java\u0020Code
+		SccLocalPath2 = ..\\Old\u0020Java\u0020Code
 	EndGlobalSection
 EndGlobal

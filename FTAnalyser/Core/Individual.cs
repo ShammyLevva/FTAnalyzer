@@ -26,6 +26,7 @@ namespace FTAnalyzer
 	    private int relationType;
         private int ahnentafel;
 	    private List<Fact> facts;
+        private List<FactLocation> locations;
     	
 	    public Individual (XmlNode node, RichTextBox rtb) {
 		    gedcomID = node.Attributes["ID"].Value;
@@ -37,6 +38,8 @@ namespace FTAnalyzer
 		    status = UNKNOWNSTATUS;
             ahnentafel = 0;
 		    facts = new List<Fact>();
+            locations = new List<FactLocation>();
+
 		    addFacts(node, Fact.BIRTH, rtb);
             addFacts(node, Fact.CHRISTENING, rtb);
             addFacts(node, Fact.DEATH, rtb);
@@ -64,6 +67,7 @@ namespace FTAnalyzer
                 this.ahnentafel = i.ahnentafel;
                 this.relationType = i.relationType;
                 this.facts = new List<Fact>(i.facts);
+                this.locations = new List<FactLocation>(i.locations);
             }
         }
 
@@ -103,6 +107,11 @@ namespace FTAnalyzer
         public List<Fact> AllFacts 
         { 
             get { return this.facts; } 
+        }
+
+        public List<FactLocation> AllLocations
+        {
+            get { return this.locations; }
         }
 
         public string Alias
@@ -380,6 +389,12 @@ namespace FTAnalyzer
 
 	    public void addFact(Fact fact) {
 	        facts.Add(fact);
+            FactLocation loc = fact.Location;
+            if (loc != null && !locations.Contains(loc))
+            {
+                locations.Add(loc);
+                loc.AddIndividual(this);
+            }
 	    }
     	    	
 	    public Fact getPreferredFact(string factType) {

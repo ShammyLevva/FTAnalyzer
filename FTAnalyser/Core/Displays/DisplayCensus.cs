@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    public class DisplayCensus
+    public class DisplayCensus : IDisplayCensus
     {
         private string familyGed;
         private string regLocation;

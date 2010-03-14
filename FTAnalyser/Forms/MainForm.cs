@@ -411,5 +411,14 @@ namespace FTAnalyzer
             _checkForUpdatesEnabled = true;
             _timerCheckForUpdates_Callback(null);
         }
+
+        private void showLocationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.Locations locationsForm = new Forms.Locations();
+            List<FactLocation> locations = ft.AllLocations;
+            locations.Sort();
+            locationsForm.BuildLocationTree(locations);
+            locationsForm.Show();
+        }
     }
 }
