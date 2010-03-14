@@ -11,7 +11,7 @@ namespace FTAnalyzer.Forms
 {
     public partial class Census : Form
     {
-        private Dictionary<int, Color> rowColour;
+        private Dictionary<int, DataGridViewCellStyle> rowStyles;
         private int numFamilies;
 
         public Census()
@@ -25,7 +25,7 @@ namespace FTAnalyzer.Forms
             List<Registration> regs = ft.getAllCensusRegistrations(date, censusDone);
             List<Registration> census = rp.processRegistrations(regs);
             List<IDisplayCensus> ds = new List<IDisplayCensus>();
-            rowColour = new Dictionary<int, Color>();
+            rowStyles = new Dictionary<int, DataGridViewCellStyle>();
             foreach (CensusRegistration r in census)
                 foreach (Individual i in r.Members)
                 {
@@ -35,7 +35,7 @@ namespace FTAnalyzer.Forms
             // ds.sort(new IndividualNameComparator());
             dgCensus.DataSource = ds;
             ResizeColumns();
-            ColourRows();
+            StyleRows();
             tsRecords.Text = ds.Count + " Records / " + numFamilies + " Families.";
         }
 
@@ -45,32 +45,38 @@ namespace FTAnalyzer.Forms
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
         }
 
-        private void ColourRows()
+        private void StyleRows()
         {
             string currentFamilyGed = "";
             bool highlighted = true;
             numFamilies = 0;
+            Font boldFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Bold);
+            Font regularFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Regular);
             foreach (DataGridViewRow r in dgCensus.Rows)
             {
-                IDisplayCensus cr = (IDisplayCensus)r.DataBoundItem;
+                DisplayCensus cr = (DisplayCensus)r.DataBoundItem;
                 if (cr.FamilyGed != currentFamilyGed)
                 {
                     currentFamilyGed = cr.FamilyGed;
                     highlighted = !highlighted;
                     numFamilies++;
                 }
-                if (highlighted)
-                    rowColour.Add(r.Index, Color.LightGray);
-                else
-                    rowColour.Add(r.Index, Color.White);
+                DataGridViewCellStyle style = new DataGridViewCellStyle();
+                style.BackColor = highlighted ? Color.LightGray : Color.White;
+                style.Font = cr.isAlive ? boldFont : regularFont;
+                rowStyles.Add(r.Index, style);
             }
         }
 
         private void dgCensus_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            Color colour = Color.White;
-            rowColour.TryGetValue(e.RowIndex, out colour);
-            e.CellStyle.BackColor = colour;
+            DataGridViewCellStyle style = dgCensus.DefaultCellStyle;
+            rowStyles.TryGetValue(e.RowIndex, out style);
+            if (style != null)
+            {
+                e.CellStyle.BackColor = style.BackColor;
+                e.CellStyle.Font = style.Font;
+            }
         }
     }
 }

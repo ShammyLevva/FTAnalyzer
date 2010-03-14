@@ -243,6 +243,16 @@ namespace FTAnalyzer
             }
         }
 
+        public string DateOfDeath
+        {
+            get
+            {
+                Fact f = getPreferredFact(Fact.DEATH);
+                return (f == null) ? "" :
+                    ((f.Datestring == null) ? "" : f.Datestring);
+            }
+        }
+
         public string DeathLocation
         {
             get
