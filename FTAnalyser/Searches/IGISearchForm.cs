@@ -45,6 +45,7 @@ namespace FTAnalyzer
         private static readonly string MISSINGNAME3 = "If you enter a last name without a first name, you must either <b>not enter</b> parent or spouse names, a year, or you <b>must enter</b> a batch number or a film number.";
 //        private static readonly string INDIVIDUALRECORD = "igi/individual_record.asp";
         private static readonly FactDate IGIMAX = new FactDate("31 DEC 1874");
+        private static readonly FactDate IGIPARENTBIRTHMAX = new FactDate("31 DEC 1860"); //if parents born after than then children are born after IGIMAX
         public const int MARRIAGESEARCH = 1;
         public const int CHILDRENSEARCH = 2;
         
@@ -388,9 +389,9 @@ namespace FTAnalyzer
                         if (marriage == null)
                             marriage = new Fact(Fact.MARRIAGE, FactDate.UNKNOWN_DATE);
                         FactDate marriageDate = marriage.FactDate;
-                        if (!marriageDate.isAfter(IGIMAX))
+                        if (!marriageDate.isAfter(IGIMAX) && husband.BirthDate.isBefore(IGIMAX) && wife.BirthDate.isBefore(IGIMAX))
                         {
-                            // proceed if marriage date within IGI Range
+                            // proceed if marriage date within IGI Range and both were alive before IGI max date
                             Initialise();
                             setCountry(marriage.Country);
                             if (searchType == MARRIAGESEARCH)
@@ -424,18 +425,21 @@ namespace FTAnalyzer
                             }
                             else if (searchType == CHILDRENSEARCH)
                             {
-                                setParameter(FATHERS_FIRST_NAME, husband.Forename);
-                                setParameter(FATHERS_LAST_NAME, husband.Surname);
-                                setParameter(MOTHERS_FIRST_NAME, wife.Forename);
-                                if (!marriage.Country.Equals(FactLocation.ENGLAND))
-                                    setParameter(MOTHERS_LAST_NAME, wife.Surname);
-                                try
+                                if (husband.BirthDate.isBefore(IGIPARENTBIRTHMAX) && wife.BirthDate.isBefore(IGIPARENTBIRTHMAX))
                                 {
-                                    FetchIGIDataAndWriteResult(filename);
-                                }
-                                catch (BadIGIDataException e)
-                                {
-                                    rtbOutput.AppendText("error " + e.Message);
+                                    setParameter(FATHERS_FIRST_NAME, husband.Forename);
+                                    setParameter(FATHERS_LAST_NAME, husband.Surname);
+                                    setParameter(MOTHERS_FIRST_NAME, wife.Forename);
+                                    if (!marriage.Country.Equals(FactLocation.ENGLAND))
+                                        setParameter(MOTHERS_LAST_NAME, wife.Surname);
+                                    try
+                                    {
+                                        FetchIGIDataAndWriteResult(filename);
+                                    }
+                                    catch (BadIGIDataException e)
+                                    {
+                                        rtbOutput.AppendText("error " + e.Message);
+                                    }
                                 }
                             }
                         }
