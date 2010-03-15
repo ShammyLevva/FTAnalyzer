@@ -92,12 +92,15 @@
             this.tabAddresses = new System.Windows.Forms.TabPage();
             this.dgAddresses = new System.Windows.Forms.DataGridView();
             this.tabIGISearch = new System.Windows.Forms.TabPage();
+            this.btnIGIMarriageSearch = new System.Windows.Forms.Button();
+            this.btnIGIChildrenSearch = new System.Windows.Forms.Button();
+            this.rtbIGIResults = new System.Windows.Forms.RichTextBox();
+            this.btnIGIFolderBrowse = new System.Windows.Forms.Button();
+            this.txtIGIfolder = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.txtIGIfolder = new System.Windows.Forms.TextBox();
-            this.btnIGIFolderBrowse = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -136,7 +139,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1009, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(976, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -221,7 +224,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 27);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1009, 446);
+            this.tabControl.Size = new System.Drawing.Size(976, 420);
             this.tabControl.TabIndex = 9;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -237,7 +240,7 @@
             this.tabDisplayProgress.Location = new System.Drawing.Point(4, 22);
             this.tabDisplayProgress.Name = "tabDisplayProgress";
             this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplayProgress.Size = new System.Drawing.Size(1001, 420);
+            this.tabDisplayProgress.Size = new System.Drawing.Size(968, 394);
             this.tabDisplayProgress.TabIndex = 1;
             this.tabDisplayProgress.Text = "Load Gedcom";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
@@ -306,7 +309,7 @@
             this.tabIndividuals.Location = new System.Drawing.Point(4, 22);
             this.tabIndividuals.Name = "tabIndividuals";
             this.tabIndividuals.Padding = new System.Windows.Forms.Padding(3);
-            this.tabIndividuals.Size = new System.Drawing.Size(1001, 420);
+            this.tabIndividuals.Size = new System.Drawing.Size(968, 394);
             this.tabIndividuals.TabIndex = 2;
             this.tabIndividuals.Text = "Individuals";
             this.tabIndividuals.UseVisualStyleBackColor = true;
@@ -317,7 +320,7 @@
             this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgIndividuals.Location = new System.Drawing.Point(3, 3);
             this.dgIndividuals.Name = "dgIndividuals";
-            this.dgIndividuals.Size = new System.Drawing.Size(995, 414);
+            this.dgIndividuals.Size = new System.Drawing.Size(962, 388);
             this.dgIndividuals.TabIndex = 0;
             this.dgIndividuals.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgIndividuals_ColumnHeaderMouseClick);
             // 
@@ -333,7 +336,7 @@
             this.tabCensus.Location = new System.Drawing.Point(4, 22);
             this.tabCensus.Name = "tabCensus";
             this.tabCensus.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCensus.Size = new System.Drawing.Size(1001, 420);
+            this.tabCensus.Size = new System.Drawing.Size(968, 394);
             this.tabCensus.TabIndex = 0;
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
@@ -567,7 +570,7 @@
             this.tabLostCousins.Location = new System.Drawing.Point(4, 22);
             this.tabLostCousins.Name = "tabLostCousins";
             this.tabLostCousins.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLostCousins.Size = new System.Drawing.Size(1001, 420);
+            this.tabLostCousins.Size = new System.Drawing.Size(968, 394);
             this.tabLostCousins.TabIndex = 5;
             this.tabLostCousins.Text = "Lost Cousins";
             this.tabLostCousins.UseVisualStyleBackColor = true;
@@ -675,7 +678,7 @@
             this.tabLooseDeaths.Location = new System.Drawing.Point(4, 22);
             this.tabLooseDeaths.Name = "tabLooseDeaths";
             this.tabLooseDeaths.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLooseDeaths.Size = new System.Drawing.Size(1001, 420);
+            this.tabLooseDeaths.Size = new System.Drawing.Size(968, 394);
             this.tabLooseDeaths.TabIndex = 3;
             this.tabLooseDeaths.Text = "Loose Deaths";
             this.tabLooseDeaths.UseVisualStyleBackColor = true;
@@ -698,7 +701,7 @@
             this.tabLocations.Location = new System.Drawing.Point(4, 22);
             this.tabLocations.Name = "tabLocations";
             this.tabLocations.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLocations.Size = new System.Drawing.Size(1001, 420);
+            this.tabLocations.Size = new System.Drawing.Size(968, 394);
             this.tabLocations.TabIndex = 4;
             this.tabLocations.Text = "Locations";
             this.tabLocations.UseVisualStyleBackColor = true;
@@ -814,15 +817,65 @@
             // 
             // tabIGISearch
             // 
+            this.tabIGISearch.Controls.Add(this.btnIGIMarriageSearch);
+            this.tabIGISearch.Controls.Add(this.btnIGIChildrenSearch);
+            this.tabIGISearch.Controls.Add(this.rtbIGIResults);
             this.tabIGISearch.Controls.Add(this.btnIGIFolderBrowse);
             this.tabIGISearch.Controls.Add(this.txtIGIfolder);
             this.tabIGISearch.Controls.Add(this.label3);
             this.tabIGISearch.Location = new System.Drawing.Point(4, 22);
             this.tabIGISearch.Name = "tabIGISearch";
-            this.tabIGISearch.Size = new System.Drawing.Size(1001, 420);
+            this.tabIGISearch.Size = new System.Drawing.Size(968, 394);
             this.tabIGISearch.TabIndex = 6;
             this.tabIGISearch.Text = "IGI Search";
             this.tabIGISearch.UseVisualStyleBackColor = true;
+            // 
+            // btnIGIMarriageSearch
+            // 
+            this.btnIGIMarriageSearch.Location = new System.Drawing.Point(147, 49);
+            this.btnIGIMarriageSearch.Name = "btnIGIMarriageSearch";
+            this.btnIGIMarriageSearch.Size = new System.Drawing.Size(123, 27);
+            this.btnIGIMarriageSearch.TabIndex = 5;
+            this.btnIGIMarriageSearch.Text = "Start Marriage Search";
+            this.btnIGIMarriageSearch.UseVisualStyleBackColor = true;
+            this.btnIGIMarriageSearch.Click += new System.EventHandler(this.btnIGIMarriageSearch_Click);
+            // 
+            // btnIGIChildrenSearch
+            // 
+            this.btnIGIChildrenSearch.Location = new System.Drawing.Point(320, 49);
+            this.btnIGIChildrenSearch.Name = "btnIGIChildrenSearch";
+            this.btnIGIChildrenSearch.Size = new System.Drawing.Size(123, 27);
+            this.btnIGIChildrenSearch.TabIndex = 4;
+            this.btnIGIChildrenSearch.Text = "Start Children Search";
+            this.btnIGIChildrenSearch.UseVisualStyleBackColor = true;
+            this.btnIGIChildrenSearch.Click += new System.EventHandler(this.btnIGIChildrenSearch_Click);
+            // 
+            // rtbIGIResults
+            // 
+            this.rtbIGIResults.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbIGIResults.Location = new System.Drawing.Point(0, 82);
+            this.rtbIGIResults.Name = "rtbIGIResults";
+            this.rtbIGIResults.Size = new System.Drawing.Size(965, 312);
+            this.rtbIGIResults.TabIndex = 3;
+            this.rtbIGIResults.Text = "";
+            // 
+            // btnIGIFolderBrowse
+            // 
+            this.btnIGIFolderBrowse.Location = new System.Drawing.Point(457, 11);
+            this.btnIGIFolderBrowse.Name = "btnIGIFolderBrowse";
+            this.btnIGIFolderBrowse.Size = new System.Drawing.Size(77, 21);
+            this.btnIGIFolderBrowse.TabIndex = 2;
+            this.btnIGIFolderBrowse.Text = "Browse ...";
+            this.btnIGIFolderBrowse.UseVisualStyleBackColor = true;
+            this.btnIGIFolderBrowse.Click += new System.EventHandler(this.btnIGIFolderBrowse_Click);
+            // 
+            // txtIGIfolder
+            // 
+            this.txtIGIfolder.Location = new System.Drawing.Point(147, 12);
+            this.txtIGIfolder.Name = "txtIGIfolder";
+            this.txtIGIfolder.Size = new System.Drawing.Size(296, 20);
+            this.txtIGIfolder.TabIndex = 1;
             // 
             // label3
             // 
@@ -843,9 +896,9 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsCountLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 476);
+            this.statusStrip.Location = new System.Drawing.Point(0, 450);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1009, 22);
+            this.statusStrip.Size = new System.Drawing.Size(976, 22);
             this.statusStrip.TabIndex = 10;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -855,28 +908,11 @@
             this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
-            // txtIGIfolder
-            // 
-            this.txtIGIfolder.Location = new System.Drawing.Point(147, 12);
-            this.txtIGIfolder.Name = "txtIGIfolder";
-            this.txtIGIfolder.Size = new System.Drawing.Size(296, 20);
-            this.txtIGIfolder.TabIndex = 1;
-            // 
-            // btnIGIFolderBrowse
-            // 
-            this.btnIGIFolderBrowse.Location = new System.Drawing.Point(457, 11);
-            this.btnIGIFolderBrowse.Name = "btnIGIFolderBrowse";
-            this.btnIGIFolderBrowse.Size = new System.Drawing.Size(77, 21);
-            this.btnIGIFolderBrowse.TabIndex = 2;
-            this.btnIGIFolderBrowse.Text = "Browse ...";
-            this.btnIGIFolderBrowse.UseVisualStyleBackColor = true;
-            this.btnIGIFolderBrowse.Click += new System.EventHandler(this.btnIGIFolderBrowse_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1009, 498);
+            this.ClientSize = new System.Drawing.Size(976, 472);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
@@ -993,6 +1029,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnIGIFolderBrowse;
         private System.Windows.Forms.TextBox txtIGIfolder;
+        private System.Windows.Forms.RichTextBox rtbIGIResults;
+        private System.Windows.Forms.Button btnIGIMarriageSearch;
+        private System.Windows.Forms.Button btnIGIChildrenSearch;
     }
 }
 

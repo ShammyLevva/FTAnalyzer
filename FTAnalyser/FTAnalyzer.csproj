@@ -236,9 +236,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>NetworkSettings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Searches\GROSearch.cs" />
-    <Compile Include="Searches\GROSSearch.cs" />
-    <Compile Include="Searches\IGIBatchSearch.cs" />
+    <Compile Include="Still to Process\GROSearch.cs" />
+    <Compile Include="Still to Process\GROSSearch.cs" />
+    <Compile Include="Searches\IGIResultWriter.cs" />
     <Compile Include="Searches\IGIDocument.cs" />
     <Compile Include="Searches\IGIResult.cs" />
     <Compile Include="Searches\IGISearch.cs" />

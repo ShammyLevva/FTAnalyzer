@@ -445,5 +445,33 @@ namespace FTAnalyzer
             if (browse.ShowDialog()==System.Windows.Forms.DialogResult.OK)
                 txtIGIfolder.Text = browse.SelectedPath;
         }
+
+        private void btnIGIMarriageSearch_Click(object sender, EventArgs e)
+        {
+            rtbIGIResults.AppendText("IGI Slurp started.\n");
+            IGISearchForm form = new IGISearchForm();
+            List<Family> families = ft.AllFamilies;
+            int counter = 0;
+            foreach (Family f in families)
+            {
+                rtbIGIResults.AppendText(counter++ + "..");
+                form.SearchIGI(f, txtIGIfolder.Text, IGISearchForm.MARRIAGESEARCH);
+            }
+            rtbIGIResults.AppendText("\n\nIGI Slurp finished.\n");
+        }
+
+        private void btnIGIChildrenSearch_Click(object sender, EventArgs e)
+        {
+            IGISearchForm form = new IGISearchForm();
+            rtbIGIResults.AppendText("IGI Slurp started.\n");
+            List<Family> families = ft.AllFamilies;
+            int counter = 0;
+            foreach (Family f in families)
+            {
+                rtbIGIResults.AppendText(counter++ + "..");
+                form.SearchIGI(f, txtIGIfolder.Text, IGISearchForm.CHILDRENSEARCH);
+            }
+            rtbIGIResults.AppendText("\n\nIGI Slurp finished.\n");
+        }
     }
 }

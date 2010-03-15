@@ -46,10 +46,10 @@ namespace FTAnalyzer
         public const int CHILDRENSEARCH = 2;
         
         public IGISearchForm() {
-            initialise();
+            Initialise();
         }
 
-        private void initialise() {
+        private void Initialise() {
             parameters = new Dictionary<string,string>();
             parameters.Add(FATHERS_FIRST_NAME, "");
             parameters.Add(FATHERS_LAST_NAME, "");
@@ -79,11 +79,11 @@ namespace FTAnalyzer
         
         private void setCountry(string country) {
     	    if (country == FactLocation.ENGLAND) {
-	            parameters.Add(SHIRE, "Engl");
-	            parameters.Add("juris1friendly", FactLocation.ENGLAND);
+	            parameters[SHIRE] = "Engl";
+	            parameters["juris1friendly"] = FactLocation.ENGLAND;
     	    } else {
-	            parameters.Add(SHIRE, "Scot");
-	            parameters.Add("juris1friendly", FactLocation.SCOTLAND);
+	            parameters[SHIRE] = "Scot";
+	            parameters["juris1friendly"] = FactLocation.SCOTLAND;
     	    }
         }
         
@@ -105,12 +105,16 @@ namespace FTAnalyzer
         
         public void setParameter(string key, string value) {
             string oldvalue;
+            string setValue = value.Replace('?',' ').Trim();
             if (parameters.TryGetValue(key, out oldvalue))
-                parameters.Add(key, value.Replace('?',' ').Trim());
+                parameters[key] = value;
+            else
+                parameters.Add(key, setValue);
         }
 
         public string performSearch () {
             try {
+                throw new BadIGIDataException("Search not implemented yet");
                 /* c# stuff
                 bool connectedToUrl = false;
                 
@@ -153,7 +157,6 @@ namespace FTAnalyzer
 	            fixBaseURL(str);
 	            return str.ToString();
 */
-                return ""; // TODO dummy return - remove when URL stuff done
             } catch (IOException e) {
                 return "<html><body>Error performing search:\n<p>" +
             		    e.ToString() + "</p></body></html>";
@@ -222,7 +225,7 @@ namespace FTAnalyzer
         /*
          * passed a list of URLs to visit containing the results 
          */
-        public void fetchResults(TextWriter output, Queue<IGIResult> queue, string outFile) {
+        public void fetchResults(IGIResultWriter output, Queue<IGIResult> queue, string outFile) {
             int counter = 0;
             int errorCounter = 0;
             IGIResult result = null;
@@ -253,7 +256,7 @@ namespace FTAnalyzer
                     pw.Close();
                     processResult(result, filename);
  */
-                    writeResult(result);
+                    output.writeResult(result);
                     exceptionFlag = false;
                 } catch (IOException) {
                     // output.WriteLine("Error performing search:\n" + e.getMessage());
@@ -270,15 +273,15 @@ namespace FTAnalyzer
             string value;
             parameters.TryGetValue(LAST_NAME, out value);
             if (counter >1)
-                output.WriteLine(" - found " + counter + " results for " + value);
+                Console.WriteLine(" - found " + counter + " results for " + value);
             else if (counter == 1)
-                output.WriteLine(" - found " + counter + " result for " + value);
+                Console.WriteLine(" - found " + counter + " result for " + value);
             else
-                output.WriteLine(" - no results for " + value + " found");
+                Console.WriteLine(" - no results for " + value + " found");
             if (errorCounter == 1)
-        	    output.Write(" and one error");
+                Console.Write(" and one error");
             else if(errorCounter > 1)
-        	    output.Write(" and " + errorCounter + " errors");
+                Console.Write(" and " + errorCounter + " errors");
         }
  /* TODO: Convert     
         public void processResult(IGIResult result, string filename) {
@@ -325,49 +328,6 @@ namespace FTAnalyzer
             }
         }
  */       
-        public void writeResult(IGIResult result) {
-            resultFile.WriteLine("<Individual>");
-	            resultFile.Write("<SearchType>");
-	            resultFile.Write(result.SearchType);
-	            resultFile.WriteLine("</SearchType>");        
-                resultFile.Write("<Batch>");
-                resultFile.Write(result.Batch);
-                resultFile.WriteLine("</Batch>");        
-                resultFile.Write("<Parish>");
-                resultFile.Write(result.Parish);
-                resultFile.WriteLine("</Parish>");        
-                resultFile.Write("<Name>");
-                resultFile.Write(result.Person);
-                resultFile.WriteLine("</Name>");        
-                resultFile.Write("<Gender>");
-                resultFile.Write(result.Gender);
-                resultFile.WriteLine("</Gender>");        
-                resultFile.Write("<Birth>");
-                resultFile.Write(result.Birth);
-                resultFile.WriteLine("</Birth>");        
-                resultFile.Write("<Christening>");
-                resultFile.Write(result.Christening);
-                resultFile.WriteLine("</Christening>");        
-                resultFile.Write("<Death>");
-                resultFile.Write(result.Death);
-                resultFile.WriteLine("</Death>");        
-                resultFile.Write("<Burial>");
-                resultFile.Write(result.Burial);
-                resultFile.WriteLine("</Burial>");        
-                resultFile.Write("<Father>");
-                resultFile.Write(result.Father);
-                resultFile.WriteLine("</Father>");        
-                resultFile.Write("<Mother>");
-                resultFile.Write(result.Mother);
-                resultFile.WriteLine("</Mother>");        
-                resultFile.Write("<Spouse>");
-                resultFile.Write(result.Spouse);
-                resultFile.WriteLine("</Spouse>");        
-                resultFile.Write("<Marriage>");
-                resultFile.Write(result.Marriage);
-                resultFile.WriteLine("</Marriage>");        
-            resultFile.WriteLine("</Individual>");
-        }
         
         public void searchOPR(TextWriter resultFile, string dirname, TextWriter output, string surname, ParishBatch parishBatch) 
         {
@@ -380,7 +340,7 @@ namespace FTAnalyzer
                 searchType = CHILDRENSEARCH;
             else
                 throw new BadIGIDataException("Invalid Batch number format " + batch);
-            initialise();
+            Initialise();
             setParameter(LAST_NAME, surname);
             setParameter(BATCH_NUMBER, batch);
             string filename = dirname + "/" + surname + "-" + batch + ".html";
@@ -402,54 +362,70 @@ namespace FTAnalyzer
         public void SearchIGI(Family family, string dirname, int searchType) {
             if (family != null) {
 			    string filename = dirname + family.FamilyGed + ".html";
-                Individual husband = family.Husband;
-                Individual wife = family.Wife;
-                if (husband != null && wife != null &&
-                    family.getPreferredFact(Fact.IGISEARCH) == null &&
-                    family.getPreferredFact(Fact.CHILDLESS) == null) {
-                    // only bother to search if we have a husband and wife family
-                    // and we havent done an IGISEARCH and we havent marked them
-                    // as a childless family
-                    Fact marriage = family.getPreferredFact(Fact.MARRIAGE);
-                    if (marriage == null)
-                	    marriage = new Fact(Fact.MARRIAGE, FactDate.UNKNOWN_DATE);
-                    FactDate marriageDate = marriage.FactDate;
-                    if (!marriageDate.isAfter(IGIMAX)) {
-                        // proceed if marriage date within IGI Range
-					    initialise();
-					    setCountry(marriage.Country);
-                        if(searchType == MARRIAGESEARCH)
+                if(!File.Exists(filename)) // don't bother processing if file already exists.
+                {
+                    Individual husband = family.Husband;
+                    Individual wife = family.Wife;
+                    if (husband != null && wife != null &&
+                        family.getPreferredFact(Fact.IGISEARCH) == null &&
+                        family.getPreferredFact(Fact.CHILDLESS) == null)
+                    {
+                        // only bother to search if we have a husband and wife family
+                        // and we havent done an IGISEARCH and we havent marked them
+                        // as a childless family
+                        Fact marriage = family.getPreferredFact(Fact.MARRIAGE);
+                        if (marriage == null)
+                            marriage = new Fact(Fact.MARRIAGE, FactDate.UNKNOWN_DATE);
+                        FactDate marriageDate = marriage.FactDate;
+                        if (!marriageDate.isAfter(IGIMAX))
                         {
-                            if (!marriageDate.isExact()) 
+                            // proceed if marriage date within IGI Range
+                            Initialise();
+                            setCountry(marriage.Country);
+                            if (searchType == MARRIAGESEARCH)
                             {
-		                        setParameter(FIRST_NAME, husband.Forename);
-		                        setParameter(LAST_NAME, husband.Surname);
-		                        setParameter(SPOUSES_FIRST_NAME, wife.Forename);
-		                        setParameter(SPOUSES_LAST_NAME, wife.Surname);
-		                        try {
-			                        writeSlurpResult(filename);
-	                            } catch (BadIGIDataException) {
-		                            setParameter(FIRST_NAME, wife.Forename);
-		                            setParameter(LAST_NAME, wife.Surname);
-		                            setParameter(SPOUSES_FIRST_NAME, husband.Forename);
-		                            setParameter(SPOUSES_LAST_NAME, husband.Surname);
-		                            try {
-		                                writeSlurpResult(filename);
-		                            } catch (BadIGIDataException e2) { 
-                                        Console.WriteLine("error " + e2.Message);
+                                if (!marriageDate.isExact())
+                                {
+                                    setParameter(FIRST_NAME, husband.Forename);
+                                    setParameter(LAST_NAME, husband.Surname);
+                                    setParameter(SPOUSES_FIRST_NAME, wife.Forename);
+                                    setParameter(SPOUSES_LAST_NAME, wife.Surname);
+                                    try
+                                    {
+                                        writeSlurpResult(filename);
                                     }
-	                            }
+                                    catch (BadIGIDataException)
+                                    {
+                                        setParameter(FIRST_NAME, wife.Forename);
+                                        setParameter(LAST_NAME, wife.Surname);
+                                        setParameter(SPOUSES_FIRST_NAME, husband.Forename);
+                                        setParameter(SPOUSES_LAST_NAME, husband.Surname);
+                                        try
+                                        {
+                                            writeSlurpResult(filename);
+                                        }
+                                        catch (BadIGIDataException e2)
+                                        {
+                                            Console.WriteLine("error " + e2.Message);
+                                        }
+                                    }
+                                }
                             }
-                        } else if(searchType == CHILDRENSEARCH) {
-                            setParameter(FATHERS_FIRST_NAME, husband.Forename);
-                            setParameter(FATHERS_LAST_NAME, husband.Surname);
-                            setParameter(MOTHERS_FIRST_NAME, wife.Forename);
-                            if(! marriage.Country.Equals(FactLocation.ENGLAND))
-                    	        setParameter(MOTHERS_LAST_NAME, wife.Surname);
-                            try {
-                                writeSlurpResult(filename);
-                            } catch (BadIGIDataException e) { 
-                                Console.WriteLine("error " + e.Message);
+                            else if (searchType == CHILDRENSEARCH)
+                            {
+                                setParameter(FATHERS_FIRST_NAME, husband.Forename);
+                                setParameter(FATHERS_LAST_NAME, husband.Surname);
+                                setParameter(MOTHERS_FIRST_NAME, wife.Forename);
+                                if (!marriage.Country.Equals(FactLocation.ENGLAND))
+                                    setParameter(MOTHERS_LAST_NAME, wife.Surname);
+                                try
+                                {
+                                    writeSlurpResult(filename);
+                                }
+                                catch (BadIGIDataException e)
+                                {
+                                    Console.WriteLine("error " + e.Message);
+                                }
                             }
                         }
                     }
