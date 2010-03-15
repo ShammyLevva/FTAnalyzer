@@ -421,5 +421,12 @@ namespace FTAnalyzer
             locationsForm.BuildLocationTree(locations);
             locationsForm.Show();
         }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UserControls.Options options = new UserControls.Options();
+            options.ShowDialog(this);
+            options.Dispose();
+        }
     }
 }

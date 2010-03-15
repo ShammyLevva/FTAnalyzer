@@ -110,16 +110,40 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\GeneralSettings.resx">
+      <DependentUpon>GeneralSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\NetworkSettings.resx">
+      <DependentUpon>NetworkSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Options.resx">
+      <DependentUpon>Options.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ProxySettings.resx">
+      <DependentUpon>ProxySettings.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="MailMerge\Births.doc" />
-    <None Include="MailMerge\Census.doc" />
-    <None Include="MailMerge\Deaths.doc" />
-    <None Include="MailMerge\Marriages.doc" />
+    <None Include="Properties\GeneralSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>GeneralSettings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="MailMerge\Births.doc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MailMerge\Census.doc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MailMerge\Deaths.doc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MailMerge\Marriages.doc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\NetworkSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>NetworkSettings.Designer.cs</LastGenOutput>
@@ -202,6 +226,11 @@
     <Compile Include="HTTPParser\FindLinks.cs" />
     <Compile Include="HTTPParser\Parse.cs" />
     <Compile Include="HTTPParser\ParseHTML.cs" />
+    <Compile Include="Properties\GeneralSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>GeneralSettings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Properties\NetworkSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -228,6 +257,37 @@
     <Compile Include="GedcomParser\AnselOutputStreamWriter.cs" />
     <Compile Include="GedcomParser\GedcomToXml.cs" />
     <Compile Include="Core\ParentalGroup.cs" />
+    <Compile Include="UserControls\ExtendedToolTipLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\ExtendedToolTipLabel.designer.cs">
+      <DependentUpon>ExtendedToolTipLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\GeneralSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\GeneralSettings.designer.cs">
+      <DependentUpon>GeneralSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\IOptions.cs" />
+    <Compile Include="UserControls\NetworkSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\NetworkSettings.designer.cs">
+      <DependentUpon>NetworkSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\Options.designer.cs">
+      <DependentUpon>Options.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProxySettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ProxySettings.designer.cs">
+      <DependentUpon>ProxySettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\DoubleMetaphone.cs" />
     <Compile Include="Utilities\ShortDoubleMetaphone.cs" />
     <Compile Include="Utilities\WebRequestWrapper.cs" />
