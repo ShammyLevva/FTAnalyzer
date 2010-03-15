@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.Net.Cache;
+using System.Windows.Forms;
+using System.Collections.Specialized;
 
 namespace FTAnalyzer
 {
@@ -32,6 +34,7 @@ namespace FTAnalyzer
 
         private Dictionary<string,string> parameters;
         private TextWriter resultFile;
+        private RichTextBox rtbOutput;
         	
         private static readonly string NOMATCHES = "<strong>International Genealogical Index / British Isles</strong> (No Matches)";
         private static readonly string NOMATCHES2 = "<strong><span id='searchPageTitle'>International Genealogical Index / British Isles</span></strong> (No Matches)";
@@ -45,7 +48,8 @@ namespace FTAnalyzer
         public const int MARRIAGESEARCH = 1;
         public const int CHILDRENSEARCH = 2;
         
-        public IGISearchForm() {
+        public IGISearchForm(RichTextBox rtb) {
+            rtbOutput = rtb;
             Initialise();
         }
 
@@ -87,20 +91,13 @@ namespace FTAnalyzer
     	    }
         }
         
-        public string getEncodedParameters () {
-            StringBuilder s = new StringBuilder();
+        public NameValueCollection getEncodedParameters () {
+            NameValueCollection result = new NameValueCollection();
             foreach(var entry in parameters)
             {
-                s.Append(entry.Key);
-                s.Append("=");
-                try {
-                    // TODO: URL stuff s.Append(URLEncoder.Encode(entry.Value, "UTF-8"));
-                } catch (Exception) {
-                    s.Append("XXX");
-                }
-                s.Append("&");
+                result.Add(entry.Key,entry.Value);
             }
-            return s.ToString().Substring(0,s.Length -1); // remove trailing &
+            return result;
         }
         
         public void setParameter(string key, string value) {
@@ -112,113 +109,115 @@ namespace FTAnalyzer
                 parameters.Add(key, setValue);
         }
 
-        public string performSearch () {
-            try {
-                throw new BadIGIDataException("Search not implemented yet");
-                /* c# stuff
-                bool connectedToUrl = false;
+        public string FetchIGIDataFromWebsite () {
+            /* c# stuff
+            bool connectedToUrl = false;
                 
-                HttpWebRequest webreq = (HttpWebRequest)WebRequest.Create("http://www.familysearch.org/Eng/Search/customsearchresults.asp");
-                webreq.Credentials = CredentialCache.DefaultCredentials;
-                if (webreq != null)
+            HttpWebRequest webreq = (HttpWebRequest)WebRequest.Create("http://www.familysearch.org/Eng/Search/customsearchresults.asp");
+            webreq.Credentials = CredentialCache.DefaultCredentials;
+            if (webreq != null)
+            {
+                using (WebResponse res = webreq.GetResponse())
                 {
-                    using (WebResponse res = webreq.GetResponse())
-                    {
-                        connectedToUrl = processResponseCode(res);
-                    }
+                    connectedToUrl = processResponseCode(res);
                 }
-                */
-             /* TODO: URL Stuff
-	            // URL connection channel.
-	            URLConnection urlConn = url.openConnection();
-	            urlConn.setDoInput(true);
-	            urlConn.setDoOutput(true);
-	            urlConn.setUseCaches(false);
-	            urlConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-    	        
-	            // Send POST output.
-	            DataOutputStream request = new DataOutputStream(urlConn.getOutputStream());
-    	        
-	            request.writeBytes(getEncodedParameters());
-	            request.flush();
-	            request.close();
-    	        
-	            // Get response data.
-	            BufferedReader input = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
-
-               StringBuilder str = new StringBuilder();
-	            string line;
-	            while ((line = input.readLine()) != null) {
-	                str.Append(line);
-	                str.Append("\n");
-	            }
-	            input.close();
-
-	            fixBaseURL(str);
-	            return str.ToString();
-*/
-            } catch (IOException e) {
-                return "<html><body>Error performing search:\n<p>" +
-            		    e.ToString() + "</p></body></html>";
             }
-        }
-        
-        private void fixBaseURL(StringBuilder str) {
-            int head = str.ToString().IndexOf("<head>");
-            if (head != -1) {
-                str.Insert(head + 6, "<base href=\"http://www.familysearch.org/Eng/Search/customsearchresults.asp\">");
-            }
-        }
-        
-        public void writeSlurpResult(string filename) {
-            try {
-                string str = performSearch();
-	            // only output if no matches string not found
-                if (str.IndexOf(SERVERUNAVAILABLE) != -1) {
-                    throw new BadIGIDataException("Server Unavailable");
-                }
-	            if (str.IndexOf(SERVERERROR) != -1) {
-                    throw new BadIGIDataException("Server Error 504");
-	            }
-			    if (str.IndexOf(MISSINGNAME) != -1 || 
-                    str.IndexOf(MISSINGNAME2) != -1 ||
-                    str.IndexOf(MISSINGNAME3) != -1) {
-                    // now check if it objects to name
-				    throw new BadIGIDataException("Missing Name");
-			    }
-			    if (str.IndexOf(NOMATCHES) == -1 && 
-				    str.IndexOf(NOMATCHES2) == -1) {
-	                TextWriter output = new StreamWriter(filename);
-		            output.WriteLine(str); 
-		            output.Close();
-    //				Console.WriteLine("\nResults File written to " + filename);
-	            }
+            */
+            /* TODO: URL Stuff
+               // URL connection channel.
+               URLConnection urlConn = url.openConnection();
+               urlConn.setDoInput(true);
+               urlConn.setDoOutput(true);
+               urlConn.setUseCaches(false);
+               urlConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+    	        
+               // Send POST output.
+               DataOutputStream request = new DataOutputStream(urlConn.getOutputStream());
+    	        
+               request.writeBytes(getEncodedParameters());
+               request.flush();
+               request.close();
+    	        
+               // Get response data.
+               BufferedReader input = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+
+              StringBuilder str = new StringBuilder();
+               string line;
+               while ((line = input.readLine()) != null) {
+                   str.Append(line);
+                   str.Append("\n");
+               }
+               input.close();
+ */
+           try {
+               Utilities.WebRequestWrapper web = new Utilities.WebRequestWrapper();
+               NameValueCollection parameters = getEncodedParameters();
+               string result = web.FetchResult("http://www.familysearch.org/Eng/Search/customsearchresults.asp", parameters);
+               StringBuilder htmlText = new StringBuilder(result);
+               fixBaseURL(htmlText);
+               return htmlText.ToString();
+
            } catch (IOException e) {
-                throw new BadIGIDataException("IO Error " + e.Message);
+               return "<html><body>Error performing search:\n<p>" +
+                       e.ToString() + "</p></body></html>";
            }
-        }
+       }
+        
+       private void fixBaseURL(StringBuilder str) {
+           int head = str.ToString().IndexOf("<head>");
+           if (head != -1) {
+               str.Insert(head + 6, "<base href=\"http://www.familysearch.org/Eng/Search/customsearchresults.asp\">");
+           }
+       }
+        
+       public void FetchIGIDataAndWriteResult(string filename) {
+           try {
+               string str = FetchIGIDataFromWebsite();
+               // only output if no matches string not found
+               if (str.IndexOf(SERVERUNAVAILABLE) != -1) {
+                   throw new BadIGIDataException("Server Unavailable");
+               }
+               if (str.IndexOf(SERVERERROR) != -1) {
+                   throw new BadIGIDataException("Server Error 504");
+               }
+               if (str.IndexOf(MISSINGNAME) != -1 || 
+                   str.IndexOf(MISSINGNAME2) != -1 ||
+                   str.IndexOf(MISSINGNAME3) != -1) {
+                   // now check if it objects to name
+                   throw new BadIGIDataException("Missing Name");
+               }
+               if (str.IndexOf(NOMATCHES) == -1 && str.IndexOf(NOMATCHES2) == -1) {
+                   TextWriter output = new StreamWriter(filename);
+                   output.WriteLine(str); 
+                   output.Close();
+                   //rtbOutput.AppendText("\nResults File written to " + filename);
+               }
+          } catch (IOException e) {
+               throw new BadIGIDataException("IO Error " + e.Message);
+          }
+       }
 
-        public void parseResults(int searchType, ParishBatch pb, TextWriter output, string filename, string outFile)
-        {
+       public void parseResults(int searchType, ParishBatch pb, TextWriter output, string filename, string outFile)
+       {
 /* TODO: HTML parse stuff
-            NodeFilter filter = new NodeClassFilter(LinkTag.Class);
-            Queue<IGIResult> queue = new Queue<IGIResult>();
-            try {
-                Parser parser = new Parser(filename);
-                NodeList list = parser.extractAllNodesThatMatch (filter);
-                for (int i = 0; i < list.Count; i++) {
-                    LinkTag link = (LinkTag) list.elementAt(i);
-                    if (link.getLink().IndexOf(INDIVIDUALRECORD) != -1) {
-                        // this is a result link so add it to the fetch queue
-                        queue.Enqueue(new IGIResult(searchType, pb, link));
-                    }
-                }
-                fetchResults(output, queue, outFile);
-            } catch (Exception e) {
-                string value;
-                parameters.TryGetValue(LAST_NAME, out value);
-                output.WriteLine(" - no results for " + value + " found");
-            }
+           NodeFilter filter = new NodeClassFilter(LinkTag.Class);
+           Queue<IGIResult> queue = new Queue<IGIResult>();
+           try {
+               Parser parser = new Parser(filename);
+               NodeList list = parser.extractAllNodesThatMatch (filter);
+               for (int i = 0; i < list.Count; i++) {
+                   LinkTag link = (LinkTag) list.elementAt(i);
+                   if (link.getLink().IndexOf(INDIVIDUALRECORD) != -1) {
+                       // this is a result link so add it to the fetch queue
+                       queue.Enqueue(new IGIResult(searchType, pb, link));
+                   }
+               }
+               fetchResults(output, queue, outFile);
+           } catch (Exception e) {
+               string value;
+               parameters.TryGetValue(LAST_NAME, out value);
+               output.WriteLine(" - no results for " + value + " found");
+           }
 */
         }
         
@@ -258,8 +257,8 @@ namespace FTAnalyzer
  */
                     output.writeResult(result);
                     exceptionFlag = false;
-                } catch (IOException) {
-                    // output.WriteLine("Error performing search:\n" + e.getMessage());
+                } catch (IOException e) {
+                    rtbOutput.AppendText("Error performing search:\n" + e.Message + "\n");
             	    // we got an error which is usually just a server busy
             	    // so try adding to queue again
             	    // may be wise to check that its not a repeating error
@@ -273,15 +272,15 @@ namespace FTAnalyzer
             string value;
             parameters.TryGetValue(LAST_NAME, out value);
             if (counter >1)
-                Console.WriteLine(" - found " + counter + " results for " + value);
+                rtbOutput.AppendText(" - found " + counter + " results for " + value);
             else if (counter == 1)
-                Console.WriteLine(" - found " + counter + " result for " + value);
+                rtbOutput.AppendText(" - found " + counter + " result for " + value);
             else
-                Console.WriteLine(" - no results for " + value + " found");
+                rtbOutput.AppendText(" - no results for " + value + " found");
             if (errorCounter == 1)
-                Console.Write(" and one error");
+                rtbOutput.AppendText(" and one error.\n");
             else if(errorCounter > 1)
-                Console.Write(" and " + errorCounter + " errors");
+                rtbOutput.AppendText(" and " + errorCounter + " errors.\n");
         }
  /* TODO: Convert     
         public void processResult(IGIResult result, string filename) {
@@ -324,7 +323,7 @@ namespace FTAnalyzer
                     }
                 }
             } catch (Exception e) {
-                Console.WriteLine(e.StackTrace);
+                rtbOutput.AppendText(e.StackTrace + "\n");
             }
         }
  */       
@@ -343,7 +342,7 @@ namespace FTAnalyzer
             Initialise();
             setParameter(LAST_NAME, surname);
             setParameter(BATCH_NUMBER, batch);
-            string filename = dirname + "/" + surname + "-" + batch + ".html";
+            string filename = dirname + "\\" + surname + "-" + batch + ".html";
             string outFile = dirname + surname + "-" + batch;
             try {
                 output.WriteLine("<br>Started work on batch :" + batch + " :" +
@@ -351,7 +350,7 @@ namespace FTAnalyzer
                         " " + parishBatch.StartYear + "-" + parishBatch.EndYear +
                         " " + parishBatch.Comments);
                 output.Flush();
-                writeSlurpResult(filename);
+                FetchIGIDataAndWriteResult(filename);
                 parseResults(searchType, parishBatch, output, filename, outFile);
                 output.Flush();
             } catch (BadIGIDataException e) { 
@@ -361,7 +360,11 @@ namespace FTAnalyzer
 
         public void SearchIGI(Family family, string dirname, int searchType) {
             if (family != null) {
-			    string filename = dirname + family.FamilyGed + ".html";
+			    string filename;
+                if(searchType == MARRIAGESEARCH)
+                    filename = dirname + "\\marriages" + family.FamilyGed + ".html";
+                else
+                    filename = dirname + "\\children" + family.FamilyGed + ".html";
                 if(!File.Exists(filename)) // don't bother processing if file already exists.
                 {
                     Individual husband = family.Husband;
@@ -392,7 +395,7 @@ namespace FTAnalyzer
                                     setParameter(SPOUSES_LAST_NAME, wife.Surname);
                                     try
                                     {
-                                        writeSlurpResult(filename);
+                                        FetchIGIDataAndWriteResult(filename);
                                     }
                                     catch (BadIGIDataException)
                                     {
@@ -402,11 +405,11 @@ namespace FTAnalyzer
                                         setParameter(SPOUSES_LAST_NAME, husband.Surname);
                                         try
                                         {
-                                            writeSlurpResult(filename);
+                                            FetchIGIDataAndWriteResult(filename);
                                         }
                                         catch (BadIGIDataException e2)
                                         {
-                                            Console.WriteLine("error " + e2.Message);
+                                            rtbOutput.AppendText("error " + e2.Message);
                                         }
                                     }
                                 }
@@ -420,11 +423,11 @@ namespace FTAnalyzer
                                     setParameter(MOTHERS_LAST_NAME, wife.Surname);
                                 try
                                 {
-                                    writeSlurpResult(filename);
+                                    FetchIGIDataAndWriteResult(filename);
                                 }
                                 catch (BadIGIDataException e)
                                 {
-                                    Console.WriteLine("error " + e.Message);
+                                    rtbOutput.AppendText("error " + e.Message);
                                 }
                             }
                         }

@@ -10,7 +10,7 @@ namespace FTAnalyzer
 {
     public class IGIDocument {
         
-        private XmlDocument doc;
+        // private XmlDocument doc;
         
         public IGIDocument (HttpWebRequest url, string proxy, string port)
 	    {

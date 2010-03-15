@@ -6,6 +6,7 @@ using System.Xml;
 using System.Threading;
 using System.Net;
 using System.IO;
+using System.Collections.Specialized;
 
 namespace FTAnalyzer.Utilities
 {
@@ -353,6 +354,13 @@ namespace FTAnalyzer.Utilities
             {
                 _fatalError = ex;
             }
+        }
+
+        public string FetchResult(string URI, NameValueCollection form)
+        {
+            WebClient webClient = CreateWebClient();
+            Byte[] result = webClient.UploadValues(URI, form);
+            return Encoding.ASCII.GetString(result);
         }
 
         public string DownloadText(string URI)

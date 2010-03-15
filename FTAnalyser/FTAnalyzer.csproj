@@ -239,9 +239,9 @@
     <Compile Include="Still to Process\GROSearch.cs" />
     <Compile Include="Still to Process\GROSSearch.cs" />
     <Compile Include="Searches\IGIResultWriter.cs" />
-    <Compile Include="Searches\IGIDocument.cs" />
+    <Compile Include="Still to Process\IGIDocument.cs" />
     <Compile Include="Searches\IGIResult.cs" />
-    <Compile Include="Searches\IGISearch.cs" />
+    <Compile Include="Still to Process\IGISearch.cs" />
     <Compile Include="Searches\IGISearchForm.cs" />
     <Compile Include="Core\ParishBatch.cs" />
     <Compile Include="Registrations\RegistrationsProcessor.cs" />

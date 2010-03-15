@@ -140,6 +140,11 @@ namespace FTAnalyzer
                     dgAddresses.DataSource = addresses;
                     HourGlass(false);
                 }
+                else if (tabControl.SelectedTab == tabIGISearch)
+                {
+                    tsCountLabel.Text = "";
+                    btnIGIChildrenSearch.Enabled = btnIGIMarriageSearch.Enabled = ft.IndividualCount > 0;
+                }
             }
         }
 
@@ -449,7 +454,7 @@ namespace FTAnalyzer
         private void btnIGIMarriageSearch_Click(object sender, EventArgs e)
         {
             rtbIGIResults.AppendText("IGI Slurp started.\n");
-            IGISearchForm form = new IGISearchForm();
+            IGISearchForm form = new IGISearchForm(rtbIGIResults);
             List<Family> families = ft.AllFamilies;
             int counter = 0;
             foreach (Family f in families)
@@ -462,7 +467,7 @@ namespace FTAnalyzer
 
         private void btnIGIChildrenSearch_Click(object sender, EventArgs e)
         {
-            IGISearchForm form = new IGISearchForm();
+            IGISearchForm form = new IGISearchForm(rtbIGIResults);
             rtbIGIResults.AppendText("IGI Slurp started.\n");
             List<Family> families = ft.AllFamilies;
             int counter = 0;

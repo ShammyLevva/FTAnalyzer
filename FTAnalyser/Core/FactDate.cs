@@ -273,7 +273,7 @@ namespace FTAnalyzer
             }
             catch (Exception e)
             {
-                Debug.WriteLine("Error parsing date: " + dateValue + "\n" + e.Message);
+                FamilyTree.Instance.XmlErrorBox.AppendText("Error parsing date '" + dateValue + "' error message was : " + e.Message + "\n");
             }
             return dt;
         }
