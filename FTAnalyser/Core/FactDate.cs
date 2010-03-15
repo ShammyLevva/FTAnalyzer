@@ -204,6 +204,8 @@ namespace FTAnalyzer
         {
             DateTime date;
             DateTime dt = MINDATE;
+            if (dateValue == string.Empty)
+                return highlow == HIGH ? MAXDATE : MINDATE;
             try
             {
                 IFormatProvider culture = new CultureInfo("en-GB", true);
