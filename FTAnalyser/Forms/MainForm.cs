@@ -475,7 +475,7 @@ namespace FTAnalyzer
                 pbIGISearch.Value = counter++;
                 Application.DoEvents();
             }
-            rtbIGIResults.AppendText("\n\nIGI Slurp finished.\n");
+            rtbIGIResults.AppendText("\nIGI Slurp finished.\n");
         }
 
         private void btnIGIChildrenSearch_Click(object sender, EventArgs e)
@@ -492,7 +492,7 @@ namespace FTAnalyzer
                 form.SearchIGI(f, txtIGIfolder.Text, IGISearchForm.CHILDRENSEARCH);
                 Application.DoEvents();
             }
-            rtbIGIResults.AppendText("\n\nIGI Slurp finished.\n");
+            rtbIGIResults.AppendText("\nIGI Slurp finished.\n");
         }
     }
 }

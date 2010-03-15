@@ -418,7 +418,8 @@ namespace FTAnalyzer
                                         }
                                         catch (BadIGIDataException e2)
                                         {
-                                            rtbOutput.AppendText("error " + e2.Message);
+                                            // write to console rather than RTB as these are web errors
+                                            Console.WriteLine("error " + e2.Message);
                                         }
                                     }
                                 }
@@ -430,7 +431,7 @@ namespace FTAnalyzer
                                     setParameter(FATHERS_FIRST_NAME, husband.Forename);
                                     setParameter(FATHERS_LAST_NAME, husband.Surname);
                                     setParameter(MOTHERS_FIRST_NAME, wife.Forename);
-                                    if (!marriage.Country.Equals(FactLocation.ENGLAND))
+                                    if (marriage.Country.Equals(FactLocation.SCOTLAND))
                                         setParameter(MOTHERS_LAST_NAME, wife.Surname);
                                     try
                                     {
@@ -438,8 +439,13 @@ namespace FTAnalyzer
                                     }
                                     catch (BadIGIDataException e)
                                     {
-                                        rtbOutput.AppendText("error " + e.Message);
+                                        // write to console rather than RTB as these are web errors
+                                        Console.WriteLine("error " + e.Message); 
                                     }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("husband or wife birth date fail");
                                 }
                             }
                         }
