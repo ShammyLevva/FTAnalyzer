@@ -3,4 +3,8 @@ obj
 </Value></Property><Property><Name>svn:ignore</Name><Value>bin
 obj
 Bisset Tree.Ged
+</Value></Property><Property><Name>svn:ignore</Name><Value>*.suo
+Bisset Tree.Ged
+bin
+obj
 </Value></Property></Properties></ItemProperties>
