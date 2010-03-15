@@ -101,6 +101,7 @@
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.pbIGISearch = new System.Windows.Forms.ProgressBar();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -817,6 +818,7 @@
             // 
             // tabIGISearch
             // 
+            this.tabIGISearch.Controls.Add(this.pbIGISearch);
             this.tabIGISearch.Controls.Add(this.btnIGIMarriageSearch);
             this.tabIGISearch.Controls.Add(this.btnIGIChildrenSearch);
             this.tabIGISearch.Controls.Add(this.rtbIGIResults);
@@ -832,7 +834,7 @@
             // 
             // btnIGIMarriageSearch
             // 
-            this.btnIGIMarriageSearch.Location = new System.Drawing.Point(147, 49);
+            this.btnIGIMarriageSearch.Location = new System.Drawing.Point(146, 68);
             this.btnIGIMarriageSearch.Name = "btnIGIMarriageSearch";
             this.btnIGIMarriageSearch.Size = new System.Drawing.Size(123, 27);
             this.btnIGIMarriageSearch.TabIndex = 5;
@@ -842,7 +844,7 @@
             // 
             // btnIGIChildrenSearch
             // 
-            this.btnIGIChildrenSearch.Location = new System.Drawing.Point(320, 49);
+            this.btnIGIChildrenSearch.Location = new System.Drawing.Point(320, 68);
             this.btnIGIChildrenSearch.Name = "btnIGIChildrenSearch";
             this.btnIGIChildrenSearch.Size = new System.Drawing.Size(123, 27);
             this.btnIGIChildrenSearch.TabIndex = 4;
@@ -854,9 +856,9 @@
             // 
             this.rtbIGIResults.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbIGIResults.Location = new System.Drawing.Point(0, 82);
+            this.rtbIGIResults.Location = new System.Drawing.Point(0, 101);
             this.rtbIGIResults.Name = "rtbIGIResults";
-            this.rtbIGIResults.Size = new System.Drawing.Size(965, 312);
+            this.rtbIGIResults.Size = new System.Drawing.Size(965, 293);
             this.rtbIGIResults.TabIndex = 3;
             this.rtbIGIResults.Text = "";
             // 
@@ -907,6 +909,13 @@
             this.tsCountLabel.Name = "tsCountLabel";
             this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
             this.tsCountLabel.Text = "Count : 0";
+            // 
+            // pbIGISearch
+            // 
+            this.pbIGISearch.Location = new System.Drawing.Point(147, 38);
+            this.pbIGISearch.Name = "pbIGISearch";
+            this.pbIGISearch.Size = new System.Drawing.Size(296, 24);
+            this.pbIGISearch.TabIndex = 6;
             // 
             // MainForm
             // 
@@ -1032,6 +1041,7 @@
         private System.Windows.Forms.RichTextBox rtbIGIResults;
         private System.Windows.Forms.Button btnIGIMarriageSearch;
         private System.Windows.Forms.Button btnIGIChildrenSearch;
+        private System.Windows.Forms.ProgressBar pbIGISearch;
     }
 }
 

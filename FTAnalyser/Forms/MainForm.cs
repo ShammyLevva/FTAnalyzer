@@ -467,10 +467,13 @@ namespace FTAnalyzer
             IGISearchForm form = new IGISearchForm(rtbIGIResults);
             List<Family> families = ft.AllFamilies;
             int counter = 0;
+            pbIGISearch.Maximum = families.Count;
+            pbIGISearch.Value = 0;
             foreach (Family f in families)
             {
-                rtbIGIResults.AppendText(counter++ + "..");
                 form.SearchIGI(f, txtIGIfolder.Text, IGISearchForm.MARRIAGESEARCH);
+                pbIGISearch.Value = counter++;
+                Application.DoEvents();
             }
             rtbIGIResults.AppendText("\n\nIGI Slurp finished.\n");
         }
@@ -481,10 +484,13 @@ namespace FTAnalyzer
             rtbIGIResults.AppendText("IGI Slurp started.\n");
             List<Family> families = ft.AllFamilies;
             int counter = 0;
+            pbIGISearch.Maximum = families.Count;
+            pbIGISearch.Value = 0;
             foreach (Family f in families)
             {
-                rtbIGIResults.AppendText(counter++ + "..");
+                pbIGISearch.Value = counter++;
                 form.SearchIGI(f, txtIGIfolder.Text, IGISearchForm.CHILDRENSEARCH);
+                Application.DoEvents();
             }
             rtbIGIResults.AppendText("\n\nIGI Slurp finished.\n");
         }

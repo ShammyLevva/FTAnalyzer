@@ -41,7 +41,7 @@ namespace FTAnalyzer
         private static readonly string SERVERERROR = "java.io.IOException: Server returned HTTP response code";
         private static readonly string SERVERUNAVAILABLE = "Search is unavailable due to maintenance";
         private static readonly string MISSINGNAME = "You must enter at least a first or last name, or you must enter a father's full name and at least a mother's first name.";
-	    private static readonly string MISSINGNAME2 = "Enter at least your deceased ancestor's first name or last name and the region";
+        private static readonly string MISSINGNAME2 = "Enter at least your deceased ancestor's first name or last name";
         private static readonly string MISSINGNAME3 = "If you enter a last name without a first name, you must either <b>not enter</b> parent or spouse names, a year, or you <b>must enter</b> a batch number or a film number.";
 //        private static readonly string INDIVIDUALRECORD = "igi/individual_record.asp";
         private static readonly FactDate IGIMAX = new FactDate("31 DEC 1874");
@@ -109,60 +109,6 @@ namespace FTAnalyzer
                 parameters.Add(key, setValue);
         }
 
-        public string FetchIGIDataFromWebsite () {
-            /* c# stuff
-            bool connectedToUrl = false;
-                
-            HttpWebRequest webreq = (HttpWebRequest)WebRequest.Create("http://www.familysearch.org/Eng/Search/customsearchresults.asp");
-            webreq.Credentials = CredentialCache.DefaultCredentials;
-            if (webreq != null)
-            {
-                using (WebResponse res = webreq.GetResponse())
-                {
-                    connectedToUrl = processResponseCode(res);
-                }
-            }
-            */
-            /* TODO: URL Stuff
-               // URL connection channel.
-               URLConnection urlConn = url.openConnection();
-               urlConn.setDoInput(true);
-               urlConn.setDoOutput(true);
-               urlConn.setUseCaches(false);
-               urlConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-    	        
-               // Send POST output.
-               DataOutputStream request = new DataOutputStream(urlConn.getOutputStream());
-    	        
-               request.writeBytes(getEncodedParameters());
-               request.flush();
-               request.close();
-    	        
-               // Get response data.
-               BufferedReader input = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
-
-              StringBuilder str = new StringBuilder();
-               string line;
-               while ((line = input.readLine()) != null) {
-                   str.Append(line);
-                   str.Append("\n");
-               }
-               input.close();
- */
-           try {
-               Utilities.WebRequestWrapper web = new Utilities.WebRequestWrapper();
-               NameValueCollection parameters = getEncodedParameters();
-               string result = web.FetchResult("http://www.familysearch.org/Eng/Search/customsearchresults.asp", parameters);
-               StringBuilder htmlText = new StringBuilder(result);
-               fixBaseURL(htmlText);
-               return htmlText.ToString();
-
-           } catch (IOException e) {
-               return "<html><body>Error performing search:\n<p>" +
-                       e.ToString() + "</p></body></html>";
-           }
-       }
-        
        private void fixBaseURL(StringBuilder str) {
            int head = str.ToString().IndexOf("<head>");
            if (head != -1) {
@@ -197,6 +143,66 @@ namespace FTAnalyzer
           }
        }
 
+       #region Unused/Still to be done
+
+       public string FetchIGIDataFromWebsite()
+       {
+           /* c# stuff
+           bool connectedToUrl = false;
+                
+           HttpWebRequest webreq = (HttpWebRequest)WebRequest.Create("http://www.familysearch.org/Eng/Search/customsearchresults.asp");
+           webreq.Credentials = CredentialCache.DefaultCredentials;
+           if (webreq != null)
+           {
+               using (WebResponse res = webreq.GetResponse())
+               {
+                   connectedToUrl = processResponseCode(res);
+               }
+           }
+           */
+           /* TODO: URL Stuff
+              // URL connection channel.
+              URLConnection urlConn = url.openConnection();
+              urlConn.setDoInput(true);
+              urlConn.setDoOutput(true);
+              urlConn.setUseCaches(false);
+              urlConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+    	        
+              // Send POST output.
+              DataOutputStream request = new DataOutputStream(urlConn.getOutputStream());
+    	        
+              request.writeBytes(getEncodedParameters());
+              request.flush();
+              request.close();
+    	        
+              // Get response data.
+              BufferedReader input = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+
+             StringBuilder str = new StringBuilder();
+              string line;
+              while ((line = input.readLine()) != null) {
+                  str.Append(line);
+                  str.Append("\n");
+              }
+              input.close();
+*/
+           try
+           {
+               Utilities.WebRequestWrapper web = new Utilities.WebRequestWrapper();
+               NameValueCollection parameters = getEncodedParameters();
+               string result = web.FetchResult("http://www.familysearch.org/Eng/Search/customsearchresults.asp", parameters);
+               StringBuilder htmlText = new StringBuilder(result);
+               fixBaseURL(htmlText);
+               return htmlText.ToString();
+
+           }
+           catch (IOException e)
+           {
+               return "<html><body>Error performing search:\n<p>" +
+                       e.ToString() + "</p></body></html>";
+           }
+       }
+         
        public void parseResults(int searchType, ParishBatch pb, TextWriter output, string filename, string outFile)
        {
 /* TODO: HTML parse stuff
@@ -357,6 +363,8 @@ namespace FTAnalyzer
                 output.WriteLine("error " + e.Message);
             }
         }
+
+#endregion
 
         public void SearchIGI(Family family, string dirname, int searchType) {
             if (family != null) {
