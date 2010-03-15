@@ -102,10 +102,13 @@ namespace FTAnalyzer
         }
         
         public void setParameter(string key, string value) {
-            string oldvalue;
             string setValue = value.Replace('?',' ').Trim();
-            if (parameters.TryGetValue(key, out oldvalue))
-                parameters[key] = value;
+            if (setValue.Equals("UNKNOWN"))
+            {
+                setValue = string.Empty;
+            }
+            if (parameters.ContainsKey(key))
+                parameters[key] = setValue;
             else
                 parameters.Add(key, setValue);
         }
@@ -148,45 +151,6 @@ namespace FTAnalyzer
 
        public string FetchIGIDataFromWebsite()
        {
-           /* c# stuff
-           bool connectedToUrl = false;
-                
-           HttpWebRequest webreq = (HttpWebRequest)WebRequest.Create("http://www.familysearch.org/Eng/Search/customsearchresults.asp");
-           webreq.Credentials = CredentialCache.DefaultCredentials;
-           if (webreq != null)
-           {
-               using (WebResponse res = webreq.GetResponse())
-               {
-                   connectedToUrl = processResponseCode(res);
-               }
-           }
-           */
-           /* TODO: URL Stuff
-              // URL connection channel.
-              URLConnection urlConn = url.openConnection();
-              urlConn.setDoInput(true);
-              urlConn.setDoOutput(true);
-              urlConn.setUseCaches(false);
-              urlConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-    	        
-              // Send POST output.
-              DataOutputStream request = new DataOutputStream(urlConn.getOutputStream());
-    	        
-              request.writeBytes(getEncodedParameters());
-              request.flush();
-              request.close();
-    	        
-              // Get response data.
-              BufferedReader input = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
-
-             StringBuilder str = new StringBuilder();
-              string line;
-              while ((line = input.readLine()) != null) {
-                  str.Append(line);
-                  str.Append("\n");
-              }
-              input.close();
-*/
            try
            {
                Utilities.WebRequestWrapper web = new Utilities.WebRequestWrapper();
@@ -195,7 +159,6 @@ namespace FTAnalyzer
                StringBuilder htmlText = new StringBuilder(result);
                fixBaseURL(htmlText);
                return htmlText.ToString();
-
            }
            catch (IOException e)
            {
