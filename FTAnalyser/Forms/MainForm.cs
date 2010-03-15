@@ -29,13 +29,13 @@ namespace FTAnalyzer
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = Application.StartupPath + "../..";
-            openFileDialog1.FileName = "*.ged";
-            openFileDialog1.Filter = "GED files (*.ged)|*.ged|All files (*.*)|*.*";
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.RestoreDirectory = true;
+            openGedcom.InitialDirectory = Application.StartupPath + "../..";
+            openGedcom.FileName = "*.ged";
+            openGedcom.Filter = "GED files (*.ged)|*.ged|All files (*.*)|*.*";
+            openGedcom.FilterIndex = 1;
+            openGedcom.RestoreDirectory = true;
 
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openGedcom.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
@@ -45,7 +45,7 @@ namespace FTAnalyzer
                     rtbOutput.Text = "";
                     pbSources.Value = pbIndividuals.Value = pbFamilies.Value = 0;
                     Application.DoEvents();
-                    XmlDocument document = GedcomToXml.Load(openFileDialog1.FileName);
+                    XmlDocument document = GedcomToXml.Load(openGedcom.FileName);
                     document.Save("GedcomOutput.xml");
                     ft.LoadTree(document, pbSources, pbIndividuals, pbFamilies);
                     HourGlass(false);
@@ -427,6 +427,23 @@ namespace FTAnalyzer
             UserControls.Options options = new UserControls.Options();
             options.ShowDialog(this);
             options.Dispose();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.lostcousins.com/?ref=LC585149");
+        }
+
+        private void btnIGIFolderBrowse_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog browse = new FolderBrowserDialog();
+            browse.ShowNewFolderButton = true;
+            browse.Description="Please select a folder where the results of the IGI search will be placed";
+            browse.RootFolder = Environment.SpecialFolder.Desktop;
+            if (txtIGIfolder.Text != string.Empty)
+                browse.SelectedPath = txtIGIfolder.Text;
+            if (browse.ShowDialog()==System.Windows.Forms.DialogResult.OK)
+                txtIGIfolder.Text = browse.SelectedPath;
         }
     }
 }

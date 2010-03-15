@@ -28,10 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -67,7 +70,7 @@
             this.rbEngland = new System.Windows.Forms.RadioButton();
             this.rbScotland = new System.Windows.Forms.RadioButton();
             this.tabLostCousins = new System.Windows.Forms.TabPage();
-            this.labLostCousinsWeb = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.ckbHideRecorded = new System.Windows.Forms.CheckBox();
             this.ckbRestrictions = new System.Windows.Forms.CheckBox();
             this.btnLC1841EW = new System.Windows.Forms.Button();
@@ -88,12 +91,13 @@
             this.dgParishes = new System.Windows.Forms.DataGridView();
             this.tabAddresses = new System.Windows.Forms.TabPage();
             this.dgAddresses = new System.Windows.Forms.DataGridView();
+            this.tabIGISearch = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtIGIfolder = new System.Windows.Forms.TextBox();
+            this.btnIGIFolderBrowse = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -116,12 +120,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgParishes)).BeginInit();
             this.tabAddresses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).BeginInit();
+            this.tabIGISearch.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // openFileDialog1
+            // openGedcom
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openGedcom.FileName = "openFileDialog1";
             // 
             // menuStrip1
             // 
@@ -146,9 +151,31 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showLocationsToolStripMenuItem,
+            this.optionsToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // showLocationsToolStripMenuItem
+            // 
+            this.showLocationsToolStripMenuItem.Name = "showLocationsToolStripMenuItem";
+            this.showLocationsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.showLocationsToolStripMenuItem.Text = "Show locations";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.optionsToolStripMenuItem.Text = "Options";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -190,6 +217,7 @@
             this.tabControl.Controls.Add(this.tabLostCousins);
             this.tabControl.Controls.Add(this.tabLooseDeaths);
             this.tabControl.Controls.Add(this.tabLocations);
+            this.tabControl.Controls.Add(this.tabIGISearch);
             this.tabControl.Location = new System.Drawing.Point(0, 27);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -527,7 +555,7 @@
             // 
             // tabLostCousins
             // 
-            this.tabLostCousins.Controls.Add(this.labLostCousinsWeb);
+            this.tabLostCousins.Controls.Add(this.linkLabel1);
             this.tabLostCousins.Controls.Add(this.ckbHideRecorded);
             this.tabLostCousins.Controls.Add(this.ckbRestrictions);
             this.tabLostCousins.Controls.Add(this.btnLC1841EW);
@@ -544,19 +572,17 @@
             this.tabLostCousins.Text = "Lost Cousins";
             this.tabLostCousins.UseVisualStyleBackColor = true;
             // 
-            // labLostCousinsWeb
+            // linkLabel1
             // 
-            this.labLostCousinsWeb.AutoSize = true;
-            this.labLostCousinsWeb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labLostCousinsWeb.ForeColor = System.Drawing.Color.MediumBlue;
-            this.labLostCousinsWeb.Location = new System.Drawing.Point(25, 171);
-            this.labLostCousinsWeb.Name = "labLostCousinsWeb";
-            this.labLostCousinsWeb.Size = new System.Drawing.Size(186, 16);
-            this.labLostCousinsWeb.TabIndex = 11;
-            this.labLostCousinsWeb.Text = "Visit the Lost Cousins Website";
-            this.labLostCousinsWeb.MouseLeave += new System.EventHandler(this.labLostCousinsWeb_MouseLeave);
-            this.labLostCousinsWeb.Click += new System.EventHandler(this.labLostCousinsWeb_Click);
-            this.labLostCousinsWeb.MouseEnter += new System.EventHandler(this.labLostCousinsWeb_MouseEnter);
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.Location = new System.Drawing.Point(19, 170);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(186, 16);
+            this.linkLabel1.TabIndex = 12;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Visit the Lost Cousins Website";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // ckbHideRecorded
             // 
@@ -786,6 +812,27 @@
             this.dgAddresses.TabIndex = 1;
             this.dgAddresses.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAddresses_CellContentDoubleClick);
             // 
+            // tabIGISearch
+            // 
+            this.tabIGISearch.Controls.Add(this.btnIGIFolderBrowse);
+            this.tabIGISearch.Controls.Add(this.txtIGIfolder);
+            this.tabIGISearch.Controls.Add(this.label3);
+            this.tabIGISearch.Location = new System.Drawing.Point(4, 22);
+            this.tabIGISearch.Name = "tabIGISearch";
+            this.tabIGISearch.Size = new System.Drawing.Size(1001, 420);
+            this.tabIGISearch.TabIndex = 6;
+            this.tabIGISearch.Text = "IGI Search";
+            this.tabIGISearch.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(14, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(127, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Folder to store results in : ";
+            // 
             // tsCount
             // 
             this.tsCount.Name = "tsCount";
@@ -808,27 +855,22 @@
             this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
-            // toolsToolStripMenuItem
+            // txtIGIfolder
             // 
-            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showLocationsToolStripMenuItem,
-            this.optionsToolStripMenuItem});
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.toolsToolStripMenuItem.Text = "Tools";
+            this.txtIGIfolder.Location = new System.Drawing.Point(147, 12);
+            this.txtIGIfolder.Name = "txtIGIfolder";
+            this.txtIGIfolder.Size = new System.Drawing.Size(296, 20);
+            this.txtIGIfolder.TabIndex = 1;
             // 
-            // showLocationsToolStripMenuItem
+            // btnIGIFolderBrowse
             // 
-            this.showLocationsToolStripMenuItem.Name = "showLocationsToolStripMenuItem";
-            this.showLocationsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.showLocationsToolStripMenuItem.Text = "Show locations";
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.optionsToolStripMenuItem.Text = "Options";
-            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            this.btnIGIFolderBrowse.Location = new System.Drawing.Point(457, 11);
+            this.btnIGIFolderBrowse.Name = "btnIGIFolderBrowse";
+            this.btnIGIFolderBrowse.Size = new System.Drawing.Size(77, 21);
+            this.btnIGIFolderBrowse.TabIndex = 2;
+            this.btnIGIFolderBrowse.Text = "Browse ...";
+            this.btnIGIFolderBrowse.UseVisualStyleBackColor = true;
+            this.btnIGIFolderBrowse.Click += new System.EventHandler(this.btnIGIFolderBrowse_Click);
             // 
             // MainForm
             // 
@@ -870,6 +912,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgParishes)).EndInit();
             this.tabAddresses.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).EndInit();
+            this.tabIGISearch.ResumeLayout(false);
+            this.tabIGISearch.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -879,7 +923,7 @@
 
         #endregion
 
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openGedcom;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
@@ -939,12 +983,16 @@
         private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.CheckBox ckbHideRecorded;
-        private System.Windows.Forms.Label labLostCousinsWeb;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown udAgeFilter;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showLocationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.TabPage tabIGISearch;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnIGIFolderBrowse;
+        private System.Windows.Forms.TextBox txtIGIfolder;
     }
 }
 
