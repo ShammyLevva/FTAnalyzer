@@ -144,6 +144,13 @@ namespace FTAnalyzer
                 {
                     tsCountLabel.Text = "";
                     btnIGIChildrenSearch.Enabled = btnIGIMarriageSearch.Enabled = ft.IndividualCount > 0;
+                    try {
+                        txtIGIfolder.Text = (string) Application.UserAppDataRegistry.GetValue("IGI Search Path");
+                    }
+                    catch(Exception)
+                    {
+                        txtIGIfolder.Text = string.Empty;
+                    }
                 }
             }
         }
@@ -447,8 +454,11 @@ namespace FTAnalyzer
             browse.RootFolder = Environment.SpecialFolder.Desktop;
             if (txtIGIfolder.Text != string.Empty)
                 browse.SelectedPath = txtIGIfolder.Text;
-            if (browse.ShowDialog()==System.Windows.Forms.DialogResult.OK)
+            if (browse.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Application.UserAppDataRegistry.SetValue("IGI Search Path", browse.SelectedPath); 
                 txtIGIfolder.Text = browse.SelectedPath;
+            }
         }
 
         private void btnIGIMarriageSearch_Click(object sender, EventArgs e)
