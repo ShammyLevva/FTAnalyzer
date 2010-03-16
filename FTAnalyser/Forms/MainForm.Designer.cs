@@ -311,7 +311,7 @@
             this.tabIndividuals.Location = new System.Drawing.Point(4, 22);
             this.tabIndividuals.Name = "tabIndividuals";
             this.tabIndividuals.Padding = new System.Windows.Forms.Padding(3);
-            this.tabIndividuals.Size = new System.Drawing.Size(968, 394);
+            this.tabIndividuals.Size = new System.Drawing.Size(952, 394);
             this.tabIndividuals.TabIndex = 2;
             this.tabIndividuals.Text = "Individuals";
             this.tabIndividuals.UseVisualStyleBackColor = true;
@@ -322,7 +322,7 @@
             this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgIndividuals.Location = new System.Drawing.Point(3, 3);
             this.dgIndividuals.Name = "dgIndividuals";
-            this.dgIndividuals.Size = new System.Drawing.Size(962, 388);
+            this.dgIndividuals.Size = new System.Drawing.Size(946, 388);
             this.dgIndividuals.TabIndex = 0;
             this.dgIndividuals.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgIndividuals_ColumnHeaderMouseClick);
             // 
@@ -703,7 +703,7 @@
             this.tabLocations.Location = new System.Drawing.Point(4, 22);
             this.tabLocations.Name = "tabLocations";
             this.tabLocations.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLocations.Size = new System.Drawing.Size(968, 394);
+            this.tabLocations.Size = new System.Drawing.Size(952, 394);
             this.tabLocations.TabIndex = 4;
             this.tabLocations.Text = "Locations";
             this.tabLocations.UseVisualStyleBackColor = true;
@@ -720,7 +720,7 @@
             this.tabCtrlLocations.Location = new System.Drawing.Point(2, 0);
             this.tabCtrlLocations.Name = "tabCtrlLocations";
             this.tabCtrlLocations.SelectedIndex = 0;
-            this.tabCtrlLocations.Size = new System.Drawing.Size(998, 419);
+            this.tabCtrlLocations.Size = new System.Drawing.Size(950, 394);
             this.tabCtrlLocations.TabIndex = 0;
             // 
             // tabCountries
@@ -729,7 +729,7 @@
             this.tabCountries.Location = new System.Drawing.Point(4, 22);
             this.tabCountries.Name = "tabCountries";
             this.tabCountries.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCountries.Size = new System.Drawing.Size(990, 393);
+            this.tabCountries.Size = new System.Drawing.Size(942, 368);
             this.tabCountries.TabIndex = 0;
             this.tabCountries.Text = "Countries";
             this.tabCountries.UseVisualStyleBackColor = true;
@@ -743,7 +743,7 @@
             this.dgCountries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCountries.Location = new System.Drawing.Point(0, 3);
             this.dgCountries.Name = "dgCountries";
-            this.dgCountries.Size = new System.Drawing.Size(987, 387);
+            this.dgCountries.Size = new System.Drawing.Size(939, 363);
             this.dgCountries.TabIndex = 0;
             this.dgCountries.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCountries_CellContentDoubleClick);
             // 
@@ -753,7 +753,7 @@
             this.tabRegions.Location = new System.Drawing.Point(4, 22);
             this.tabRegions.Name = "tabRegions";
             this.tabRegions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRegions.Size = new System.Drawing.Size(990, 393);
+            this.tabRegions.Size = new System.Drawing.Size(942, 368);
             this.tabRegions.TabIndex = 1;
             this.tabRegions.Text = "Regions";
             this.tabRegions.UseVisualStyleBackColor = true;
@@ -767,7 +767,7 @@
             this.dgRegions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgRegions.Location = new System.Drawing.Point(2, 3);
             this.dgRegions.Name = "dgRegions";
-            this.dgRegions.Size = new System.Drawing.Size(987, 387);
+            this.dgRegions.Size = new System.Drawing.Size(939, 362);
             this.dgRegions.TabIndex = 1;
             this.dgRegions.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgRegions_CellContentDoubleClick);
             // 
@@ -776,7 +776,7 @@
             this.tabParishes.Controls.Add(this.dgParishes);
             this.tabParishes.Location = new System.Drawing.Point(4, 22);
             this.tabParishes.Name = "tabParishes";
-            this.tabParishes.Size = new System.Drawing.Size(990, 393);
+            this.tabParishes.Size = new System.Drawing.Size(942, 368);
             this.tabParishes.TabIndex = 2;
             this.tabParishes.Text = "Parishes";
             this.tabParishes.UseVisualStyleBackColor = true;
@@ -790,7 +790,7 @@
             this.dgParishes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgParishes.Location = new System.Drawing.Point(2, 3);
             this.dgParishes.Name = "dgParishes";
-            this.dgParishes.Size = new System.Drawing.Size(987, 387);
+            this.dgParishes.Size = new System.Drawing.Size(939, 362);
             this.dgParishes.TabIndex = 1;
             this.dgParishes.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgParishes_CellContentDoubleClick);
             // 
@@ -799,7 +799,7 @@
             this.tabAddresses.Controls.Add(this.dgAddresses);
             this.tabAddresses.Location = new System.Drawing.Point(4, 22);
             this.tabAddresses.Name = "tabAddresses";
-            this.tabAddresses.Size = new System.Drawing.Size(990, 393);
+            this.tabAddresses.Size = new System.Drawing.Size(942, 368);
             this.tabAddresses.TabIndex = 3;
             this.tabAddresses.Text = "Addresses";
             this.tabAddresses.UseVisualStyleBackColor = true;
@@ -813,7 +813,7 @@
             this.dgAddresses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgAddresses.Location = new System.Drawing.Point(2, 3);
             this.dgAddresses.Name = "dgAddresses";
-            this.dgAddresses.Size = new System.Drawing.Size(987, 387);
+            this.dgAddresses.Size = new System.Drawing.Size(939, 362);
             this.dgAddresses.TabIndex = 1;
             this.dgAddresses.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAddresses_CellContentDoubleClick);
             // 
