@@ -56,7 +56,6 @@
             // rbUSA
             // 
             this.rbUSA.AutoSize = true;
-            this.rbUSA.Enabled = false;
             this.rbUSA.Location = new System.Drawing.Point(79, 42);
             this.rbUSA.Name = "rbUSA";
             this.rbUSA.Size = new System.Drawing.Size(89, 17);

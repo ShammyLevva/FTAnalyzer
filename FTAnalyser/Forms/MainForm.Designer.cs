@@ -55,8 +55,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
             this.btnShowResults = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbCensusDate = new System.Windows.Forms.ComboBox();
             this.tabLostCousins = new System.Windows.Forms.TabPage();
             this.ckbLCResidence = new System.Windows.Forms.CheckBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -93,6 +91,7 @@
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.censusCountry = new Controls.CensusCountry();
             this.relationTypes = new Controls.RelationTypes();
+            this.cenDate = new Controls.CensusDate();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -316,14 +315,13 @@
             // 
             // tabCensus
             // 
+            this.tabCensus.Controls.Add(this.cenDate);
             this.tabCensus.Controls.Add(this.censusCountry);
             this.tabCensus.Controls.Add(this.relationTypes);
             this.tabCensus.Controls.Add(this.ckbCensusResidence);
             this.tabCensus.Controls.Add(this.label2);
             this.tabCensus.Controls.Add(this.udAgeFilter);
             this.tabCensus.Controls.Add(this.btnShowResults);
-            this.tabCensus.Controls.Add(this.label1);
-            this.tabCensus.Controls.Add(this.cbCensusDate);
             this.tabCensus.Location = new System.Drawing.Point(4, 22);
             this.tabCensus.Name = "tabCensus";
             this.tabCensus.Padding = new System.Windows.Forms.Padding(3);
@@ -382,34 +380,6 @@
             this.btnShowResults.Text = "Show Results";
             this.btnShowResults.UseVisualStyleBackColor = true;
             this.btnShowResults.Click += new System.EventHandler(this.btnShowResults_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(348, 95);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Census Date";
-            // 
-            // cbCensusDate
-            // 
-            this.cbCensusDate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCensusDate.FormattingEnabled = true;
-            this.cbCensusDate.Items.AddRange(new object[] {
-            "1841",
-            "1851",
-            "1861",
-            "1871",
-            "1881",
-            "1891",
-            "1901",
-            "1911"});
-            this.cbCensusDate.Location = new System.Drawing.Point(422, 89);
-            this.cbCensusDate.Name = "cbCensusDate";
-            this.cbCensusDate.Size = new System.Drawing.Size(49, 21);
-            this.cbCensusDate.TabIndex = 1;
-            this.cbCensusDate.SelectedValueChanged += new System.EventHandler(this.cbCensusDate_SelectedValueChanged);
             // 
             // tabLostCousins
             // 
@@ -796,6 +766,14 @@
             this.relationTypes.Size = new System.Drawing.Size(325, 78);
             this.relationTypes.TabIndex = 15;
             // 
+            // cenDate
+            // 
+            this.cenDate.Country = "Scotland";
+            this.cenDate.Location = new System.Drawing.Point(345, 86);
+            this.cenDate.Name = "cenDate";
+            this.cenDate.Size = new System.Drawing.Size(131, 27);
+            this.cenDate.TabIndex = 17;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -874,8 +852,6 @@
         private System.Windows.Forms.DataGridView dgParishes;
         private System.Windows.Forms.DataGridView dgAddresses;
         private System.Windows.Forms.RichTextBox rtbOutput;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cbCensusDate;
         private System.Windows.Forms.Button btnShowResults;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
@@ -908,6 +884,7 @@
         private System.Windows.Forms.CheckBox ckbCensusResidence;
         private Controls.RelationTypes relationTypes;
         private Controls.CensusCountry censusCountry;
+        private Controls.CensusDate cenDate;
     }
 }
 

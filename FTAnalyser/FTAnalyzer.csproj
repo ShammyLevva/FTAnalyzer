@@ -100,6 +100,9 @@
     <EmbeddedResource Include="Forms\Census.resx">
       <DependentUpon>Census.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Controls\CensusDate.resx">
+      <DependentUpon>CensusDate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Individuals.resx">
       <DependentUpon>Individuals.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,6 +141,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\GeneralSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>GeneralSettings.Designer.cs</LastGenOutput>
@@ -224,6 +228,12 @@
     </Compile>
     <Compile Include="Forms\Census.Designer.cs">
       <DependentUpon>Census.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Controls\CensusDate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Controls\CensusDate.Designer.cs">
+      <DependentUpon>CensusDate.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Individuals.cs">
       <SubType>Form</SubType>

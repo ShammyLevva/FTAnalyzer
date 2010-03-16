@@ -104,7 +104,7 @@ namespace FTAnalyzer
                 }
                 else if (tabControl.SelectedTab == tabCensus)
                 {
-                    cbCensusDate.Text = "1881";
+                    cenDate.RevertToDefaultDate();
                     tsCountLabel.Text = "";
                     btnShowResults.Enabled = ft.IndividualCount > 0;
                 }
@@ -246,7 +246,6 @@ namespace FTAnalyzer
             if (censusCountry.Canada)
             {
                 locationFilter = LocationFilter.CANADA;
-                censusDate = new FactDate(cbCensusDate.Text); // Makes valid Canadian census date any day in that year as I don't know exact date
             }
             if (censusCountry.USA)
                 locationFilter = LocationFilter.USA;
@@ -263,27 +262,7 @@ namespace FTAnalyzer
             if (relationTypes.Unknown)
                 relationFilter = new OrFilter(new RelationFilter(Individual.UNKNOWN), relationFilter);
 
-            return new AndFilter(locationFilter, relationFilter, new DateFilter(censusDate));
-        }
-
-        private void cbCensusDate_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (cbCensusDate.Text == "1841")
-                censusDate = FactDate.UKCENSUS1841;
-            else if (cbCensusDate.Text == "1851")
-                censusDate = FactDate.UKCENSUS1851;
-            else if (cbCensusDate.Text == "1861")
-                censusDate = FactDate.UKCENSUS1861;
-            else if (cbCensusDate.Text == "1871")
-                censusDate = FactDate.UKCENSUS1871;
-            else if (cbCensusDate.Text == "1881")
-                censusDate = FactDate.UKCENSUS1881;
-            else if (cbCensusDate.Text == "1891")
-                censusDate = FactDate.UKCENSUS1891;
-            else if (cbCensusDate.Text == "1901")
-                censusDate = FactDate.UKCENSUS1901;
-            else if (cbCensusDate.Text == "1911")
-                censusDate = FactDate.UKCENSUS1911; 
+            return new AndFilter(locationFilter, relationFilter, new DateFilter(cenDate.SelectedDate)); 
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

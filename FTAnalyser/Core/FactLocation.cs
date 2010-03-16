@@ -8,7 +8,8 @@ namespace FTAnalyzer
 {
     public class FactLocation : IComparable<FactLocation>, IDisplayLocation {
         
-	    public static readonly string SCOTLAND = "Scotland", ENGLAND = "England", CANADA = "Canada", USA = "USA";
+	    public static readonly string SCOTLAND = "Scotland", ENGLAND = "England", CANADA = "Canada", USA = "USA",
+            WALES = "Wales", IRELAND = "Ireland";
 	    public static readonly string ABERDEEN = "Aberdeenshire", AYR = "Ayrshire", KINCARDINE = "Kincardineshire",
 			    LANARK = "Lanarkshire", BANFF = "Banffshire", ANGUS = "Angus", MIDLOTHIAN = "Midlothian", FIFE = "Fife";
     	
