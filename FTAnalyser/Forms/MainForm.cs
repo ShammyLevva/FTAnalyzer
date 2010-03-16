@@ -485,5 +485,10 @@ namespace FTAnalyzer
         {
             cenDate.Country = censusCountry.Country;
         }
+
+        private void cenDate_CensusChanged(object sender, EventArgs e)
+        {
+            censusDate = cenDate.SelectedDate;
+        }
     }
 }

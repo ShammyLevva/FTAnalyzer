@@ -50,9 +50,9 @@ namespace FTAnalyzer
             this.displayName = displayName;
         }
 
-        public string DisplayName
+        public override string ToString()
         {
-            get { return displayName; }
+            return displayName;
         }
     }
 }

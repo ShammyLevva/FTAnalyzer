@@ -58,6 +58,7 @@
             this.cbCensusDate.Name = "cbCensusDate";
             this.cbCensusDate.Size = new System.Drawing.Size(49, 21);
             this.cbCensusDate.TabIndex = 3;
+            this.cbCensusDate.SelectedIndexChanged += new System.EventHandler(this.cbCensusDate_SelectedIndexChanged);
             // 
             // CensusDateSelector
             // 

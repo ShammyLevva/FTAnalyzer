@@ -14,6 +14,7 @@ namespace Controls
     {
         private string country = FactLocation.SCOTLAND;
         private CensusDate defaultDate = CensusDate.UKCENSUS1881;
+        private bool _loading = false;
 
         public CensusDateSelector()
         {
@@ -24,53 +25,55 @@ namespace Controls
         public string Country
         {
             get { return country; }
-            set { 
+            set {
+                _loading = true;
                 country = value; 
                 cbCensusDate.Items.Clear();
                 if (country == FactLocation.SCOTLAND || country == FactLocation.ENGLAND || country == FactLocation.WALES)
                 {
-                    cbCensusDate.Items.Add(CensusDate.UKCENSUS1841.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.UKCENSUS1851.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.UKCENSUS1861.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.UKCENSUS1871.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.UKCENSUS1881.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.UKCENSUS1891.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.UKCENSUS1901.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.UKCENSUS1911.DisplayName);
+                    cbCensusDate.Items.Add(CensusDate.UKCENSUS1841);
+                    cbCensusDate.Items.Add(CensusDate.UKCENSUS1851);
+                    cbCensusDate.Items.Add(CensusDate.UKCENSUS1861);
+                    cbCensusDate.Items.Add(CensusDate.UKCENSUS1871);
+                    cbCensusDate.Items.Add(CensusDate.UKCENSUS1881);
+                    cbCensusDate.Items.Add(CensusDate.UKCENSUS1891);
+                    cbCensusDate.Items.Add(CensusDate.UKCENSUS1901);
+                    cbCensusDate.Items.Add(CensusDate.UKCENSUS1911);
                     defaultDate = CensusDate.UKCENSUS1881;
                 } else if (country == FactLocation.USA)
                 {
-                    cbCensusDate.Items.Add(CensusDate.USCENSUS1790.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.USCENSUS1800.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.USCENSUS1810.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.USCENSUS1820.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.USCENSUS1830.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.USCENSUS1840.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.USCENSUS1850.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.USCENSUS1860.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.USCENSUS1870.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.USCENSUS1880.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.USCENSUS1890.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.USCENSUS1900.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.USCENSUS1910.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.USCENSUS1920.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.USCENSUS1930.DisplayName);
+                    cbCensusDate.Items.Add(CensusDate.USCENSUS1790);
+                    cbCensusDate.Items.Add(CensusDate.USCENSUS1800);
+                    cbCensusDate.Items.Add(CensusDate.USCENSUS1810);
+                    cbCensusDate.Items.Add(CensusDate.USCENSUS1820);
+                    cbCensusDate.Items.Add(CensusDate.USCENSUS1830);
+                    cbCensusDate.Items.Add(CensusDate.USCENSUS1840);
+                    cbCensusDate.Items.Add(CensusDate.USCENSUS1850);
+                    cbCensusDate.Items.Add(CensusDate.USCENSUS1860);
+                    cbCensusDate.Items.Add(CensusDate.USCENSUS1870);
+                    cbCensusDate.Items.Add(CensusDate.USCENSUS1880);
+                    cbCensusDate.Items.Add(CensusDate.USCENSUS1890);
+                    cbCensusDate.Items.Add(CensusDate.USCENSUS1900);
+                    cbCensusDate.Items.Add(CensusDate.USCENSUS1910);
+                    cbCensusDate.Items.Add(CensusDate.USCENSUS1920);
+                    cbCensusDate.Items.Add(CensusDate.USCENSUS1930);
                     defaultDate = CensusDate.USCENSUS1880;
                 } else if (country == FactLocation.CANADA)
                 {
-                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1851.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1861.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1871.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1881.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1891.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1901.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1906.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1911.DisplayName);
-                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1906.DisplayName);
+                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1851);
+                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1861);
+                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1871);
+                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1881);
+                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1891);
+                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1901);
+                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1906);
+                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1911);
+                    cbCensusDate.Items.Add(CensusDate.CANADACENSUS1906);
                     defaultDate = CensusDate.CANADACENSUS1881;
                 }
-                cbCensusDate.Text = defaultDate.DisplayName;
                 SetControlWidth();
+                _loading = false;
+                cbCensusDate.Text = defaultDate.ToString();
             }
         }
 
@@ -78,7 +81,7 @@ namespace Controls
 
         public FactDate SelectedDate
         {
-            get { return new FactDate(cbCensusDate.Text); }
+            get { return (FactDate) cbCensusDate.SelectedItem; } 
         }
 
         public FactDate DefaultDate
@@ -88,23 +91,38 @@ namespace Controls
 
         public void RevertToDefaultDate()
         {
-            cbCensusDate.Text = defaultDate.DisplayName;
+            cbCensusDate.Text = defaultDate.ToString();
         }
         #endregion
-
 
         private void SetControlWidth()
         {
             cbCensusDate.Width = 10;
             Graphics g = cbCensusDate.CreateGraphics();
-            foreach(String s in cbCensusDate.Items)
+            foreach(CensusDate cd in cbCensusDate.Items)
             {
                 // use s + "xxx" to add bit extra for drop down icon
-                float itemWidth = g.MeasureString(s + "xxx", cbCensusDate.Font).Width;
+                float itemWidth = g.MeasureString(cd.ToString() + "xxx", cbCensusDate.Font).Width;
                 if (itemWidth > cbCensusDate.Width)
                     cbCensusDate.Width = (int)itemWidth;
             }
             g.Dispose();
         }
+
+        public event EventHandler CensusChanged;
+
+        protected void OnCensusChanged(EventArgs e)
+        {
+            if (CensusChanged != null)
+                CensusChanged(this, e);
+        }
+
+        private void cbCensusDate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!_loading)
+                OnCensusChanged(e);
+        }
+
+
     }
 }
