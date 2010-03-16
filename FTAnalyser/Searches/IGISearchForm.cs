@@ -37,11 +37,13 @@ namespace FTAnalyzer
         private RichTextBox rtbOutput;
         private string defaultCountry = FactLocation.SCOTLAND;
         	
-        private static readonly string NOMATCHES = "<strong>International Genealogical Index / British Isles</strong> (No Matches)";
+        private static readonly string NOMATCHES1 = "<strong>International Genealogical Index / British Isles</strong> (No Matches)";
         private static readonly string NOMATCHES2 = "<strong><span id='searchPageTitle'>International Genealogical Index / British Isles</span></strong> (No Matches)";
+        private static readonly string NOMATCHES3 = "<strong>International Genealogical Index / North America</strong> (No Matches)";
+        private static readonly string NOMATCHES4 = "<strong><span id='searchPageTitle'>International Genealogical Index / North America</span></strong> (No Matches)";
         private static readonly string SERVERERROR = "java.io.IOException: Server returned HTTP response code";
         private static readonly string SERVERUNAVAILABLE = "Search is unavailable due to maintenance";
-        private static readonly string MISSINGNAME = "You must enter at least a first or last name, or you must enter a father's full name and at least a mother's first name.";
+        private static readonly string MISSINGNAME1 = "You must enter at least a first or last name, or you must enter a father's full name and at least a mother's first name.";
         private static readonly string MISSINGNAME2 = "Enter at least your deceased ancestor's first name or last name";
         private static readonly string MISSINGNAME3 = "If you enter a last name without a first name, you must either <b>not enter</b> parent or spouse names, a year, or you <b>must enter</b> a batch number or a film number.";
 //        private static readonly string INDIVIDUALRECORD = "igi/individual_record.asp";
@@ -73,17 +75,48 @@ namespace FTAnalyzer
             parameters.Add(EXACT_MATCH, "");
             parameters.Add(DATE_RANGE, "0");
             parameters.Add(EVENT_INDEX, "0");
-            parameters.Add(COUNTRY, "2");
-            parameters.Add(SHIRE, defaultCountry.Substring(0,4));
             parameters.Add(PARISH, "");
             parameters.Add("date_range_index", "0");
-            parameters.Add("regionfriendly", "British Isles");
-            parameters.Add("juris1friendly", defaultCountry);
-            parameters.Add("juris2friendly", "All Counties");
             parameters.Add("LDS", "1");
             parameters.Add("batch_set", "");
         }
         
+        private void SetCountryParameters(string country)
+        {
+            if (country == FactLocation.SCOTLAND || country == FactLocation.ENGLAND || country == FactLocation.WALES)
+            {
+                setParameter(COUNTRY, "2");
+                setParameter(SHIRE, country.Substring(0, 4));
+                setParameter("regionfriendly", "British Isles");
+                setParameter("juris1friendly", country);
+                setParameter("juris2friendly", "All Counties");
+            }
+            else if (country == FactLocation.GB)
+            {
+                setParameter(COUNTRY, "2");
+                setParameter(SHIRE, "");
+                setParameter("regionfriendly", "British Isles");
+                setParameter("juris1friendly", "All Countries");
+                setParameter("juris2friendly", "All Counties");
+            }
+            else if (country == FactLocation.CANADA)
+            {
+                setParameter(COUNTRY, "11");
+                setParameter(SHIRE, "Can");
+                setParameter("regionfriendly", "North America");
+                setParameter("juris1friendly", "Canada");
+                setParameter("juris2friendly", "All Provinces");
+            }
+            else if (country == FactLocation.USA)
+            {
+                setParameter(COUNTRY, "11");
+                setParameter(SHIRE, "US");
+                setParameter("regionfriendly", "North America");
+                setParameter("juris1friendly", "United States");
+                setParameter("juris2friendly", "All States");
+            }
+        }
+
         private string SetCountry(Individual husband, Individual wife, Fact marriage) {
             string country = string.Empty;
             if (marriage != null && marriage.Country.Length > 0)
@@ -94,14 +127,13 @@ namespace FTAnalyzer
                 country = wife.BestLocation.Country;
             else
                 country = defaultCountry;
-            if (country == FactLocation.ENGLAND)
-            {
-	            parameters[SHIRE] = "Engl";
-	            parameters["juris1friendly"] = FactLocation.ENGLAND;
-    	    } else {
-	            parameters[SHIRE] = "Scot";
-	            parameters["juris1friendly"] = FactLocation.SCOTLAND;
-    	    }
+            if (country != FactLocation.SCOTLAND && country != FactLocation.ENGLAND && country != FactLocation.WALES &&
+                country != FactLocation.CANADA && country != FactLocation.USA)
+            {   // if we have got a random text for country field then use the default country.
+                rtbOutput.AppendText("Country '" + country + "' not recognised/supported. Trying '" + defaultCountry + "' instead.\n");
+                country = defaultCountry;
+            }
+            SetCountryParameters(country);
             return country;
         }
         
@@ -138,33 +170,6 @@ namespace FTAnalyzer
            }
        }
         
-       public void FetchIGIDataAndWriteResult(string filename) {
-           try {
-               string str = FetchIGIDataFromWebsite();
-               // only output if no matches string not found
-               if (str.IndexOf(SERVERUNAVAILABLE) != -1) {
-                   throw new BadIGIDataException("Server Unavailable");
-               }
-               if (str.IndexOf(SERVERERROR) != -1) {
-                   throw new BadIGIDataException("Server Error 504");
-               }
-               if (str.IndexOf(MISSINGNAME) != -1 || 
-                   str.IndexOf(MISSINGNAME2) != -1 ||
-                   str.IndexOf(MISSINGNAME3) != -1) {
-                   // now check if it objects to name
-                   throw new BadIGIDataException("Missing Name");
-               }
-               if (str.IndexOf(NOMATCHES) == -1 && str.IndexOf(NOMATCHES2) == -1) {
-                   TextWriter output = new StreamWriter(filename);
-                   output.WriteLine(str); 
-                   output.Close();
-                   rtbOutput.AppendText("Results File written to " + filename + "\n");
-               }
-          } catch (Exception e) {
-                Console.WriteLine("error " + e.Message);
-          }
-       }
-
        #region Unused/Still to be done
 
        public string FetchIGIDataFromWebsite()
@@ -445,6 +450,42 @@ namespace FTAnalyzer
                 if(country.Equals(FactLocation.SCOTLAND))
                     setParameter(MOTHERS_LAST_NAME, wifeSurname);
                 FetchIGIDataAndWriteResult(filename);
+            }
+        }
+
+        public void FetchIGIDataAndWriteResult(string filename)
+        {
+            try
+            {
+                string str = FetchIGIDataFromWebsite();
+                // only output if no matches string not found
+                if (str.IndexOf(SERVERUNAVAILABLE) != -1)
+                {
+                    throw new BadIGIDataException("Server Unavailable");
+                }
+                if (str.IndexOf(SERVERERROR) != -1)
+                {
+                    throw new BadIGIDataException("Server Error 504");
+                }
+                if (str.IndexOf(MISSINGNAME1) != -1 ||
+                    str.IndexOf(MISSINGNAME2) != -1 ||
+                    str.IndexOf(MISSINGNAME3) != -1)
+                {
+                    // now check if it objects to name
+                    throw new BadIGIDataException("Missing Name");
+                }
+                if (str.IndexOf(NOMATCHES1) == -1 && str.IndexOf(NOMATCHES2) == -1 &&
+                    str.IndexOf(NOMATCHES3) == -1 && str.IndexOf(NOMATCHES4) == -1)
+                {
+                    TextWriter output = new StreamWriter(filename);
+                    output.WriteLine(str);
+                    output.Close();
+                    rtbOutput.AppendText("Results File written to " + filename + "\n");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("error " + e.Message);
             }
         }
     }

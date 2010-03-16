@@ -92,6 +92,7 @@
             this.cenDate = new Controls.CensusDateSelector();
             this.censusCountry = new Controls.CensusCountry();
             this.relationTypes = new Controls.RelationTypes();
+            this.IGIDefaultCountry = new Controls.CensusCountry();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -653,6 +654,7 @@
             // 
             // tabIGISearch
             // 
+            this.tabIGISearch.Controls.Add(this.IGIDefaultCountry);
             this.tabIGISearch.Controls.Add(this.pbIGISearch);
             this.tabIGISearch.Controls.Add(this.btnIGIMarriageSearch);
             this.tabIGISearch.Controls.Add(this.btnIGIChildrenSearch);
@@ -673,10 +675,11 @@
             this.pbIGISearch.Name = "pbIGISearch";
             this.pbIGISearch.Size = new System.Drawing.Size(392, 24);
             this.pbIGISearch.TabIndex = 6;
+            this.pbIGISearch.Visible = false;
             // 
             // btnIGIMarriageSearch
             // 
-            this.btnIGIMarriageSearch.Location = new System.Drawing.Point(692, 68);
+            this.btnIGIMarriageSearch.Location = new System.Drawing.Point(411, 52);
             this.btnIGIMarriageSearch.Name = "btnIGIMarriageSearch";
             this.btnIGIMarriageSearch.Size = new System.Drawing.Size(123, 27);
             this.btnIGIMarriageSearch.TabIndex = 5;
@@ -686,7 +689,7 @@
             // 
             // btnIGIChildrenSearch
             // 
-            this.btnIGIChildrenSearch.Location = new System.Drawing.Point(821, 68);
+            this.btnIGIChildrenSearch.Location = new System.Drawing.Point(411, 85);
             this.btnIGIChildrenSearch.Name = "btnIGIChildrenSearch";
             this.btnIGIChildrenSearch.Size = new System.Drawing.Size(123, 27);
             this.btnIGIChildrenSearch.TabIndex = 4;
@@ -698,9 +701,9 @@
             // 
             this.rtbIGIResults.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbIGIResults.Location = new System.Drawing.Point(0, 101);
+            this.rtbIGIResults.Location = new System.Drawing.Point(0, 118);
             this.rtbIGIResults.Name = "rtbIGIResults";
-            this.rtbIGIResults.Size = new System.Drawing.Size(949, 293);
+            this.rtbIGIResults.Size = new System.Drawing.Size(949, 276);
             this.rtbIGIResults.TabIndex = 3;
             this.rtbIGIResults.Text = "";
             // 
@@ -769,6 +772,7 @@
             this.censusCountry.Name = "censusCountry";
             this.censusCountry.Size = new System.Drawing.Size(331, 78);
             this.censusCountry.TabIndex = 16;
+            this.censusCountry.Title = "Census Country";
             this.censusCountry.CountryChanged += new System.EventHandler(this.censusCountry_CountryChanged);
             // 
             // relationTypes
@@ -777,6 +781,14 @@
             this.relationTypes.Name = "relationTypes";
             this.relationTypes.Size = new System.Drawing.Size(325, 78);
             this.relationTypes.TabIndex = 15;
+            // 
+            // IGIDefaultCountry
+            // 
+            this.IGIDefaultCountry.Location = new System.Drawing.Point(8, 38);
+            this.IGIDefaultCountry.Name = "IGIDefaultCountry";
+            this.IGIDefaultCountry.Size = new System.Drawing.Size(331, 78);
+            this.IGIDefaultCountry.TabIndex = 7;
+            this.IGIDefaultCountry.Title = "Default Country";
             // 
             // MainForm
             // 
@@ -889,6 +901,7 @@
         private Controls.RelationTypes relationTypes;
         private Controls.CensusCountry censusCountry;
         private Controls.CensusDateSelector cenDate;
+        private Controls.CensusCountry IGIDefaultCountry;
     }
 }
 

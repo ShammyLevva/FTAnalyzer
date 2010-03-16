@@ -12,14 +12,14 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.1.1.1";
+        private string VERSION = "1.2.0.0";
         private bool _checkForUpdatesEnabled = true;
         private System.Threading.Timer _timerCheckForUpdates;
 
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
         private FactDate censusDate = CensusDate.UKCENSUS1881;
-            
+
         public MainForm()
         {
             InitializeComponent();
@@ -89,7 +89,7 @@ namespace FTAnalyzer
             if (ft.Loading)
             {
                 tabControl.SelectedTab = tabDisplayProgress;
-            } 
+            }
             else
             {
                 if (tabControl.SelectedTab == tabDisplayProgress)
@@ -145,10 +145,11 @@ namespace FTAnalyzer
                 {
                     tsCountLabel.Text = "";
                     btnIGIChildrenSearch.Enabled = btnIGIMarriageSearch.Enabled = ft.IndividualCount > 0;
-                    try {
-                        txtIGIfolder.Text = (string) Application.UserAppDataRegistry.GetValue("IGI Search Path");
+                    try
+                    {
+                        txtIGIfolder.Text = (string)Application.UserAppDataRegistry.GetValue("IGI Search Path");
                     }
-                    catch(Exception)
+                    catch (Exception)
                     {
                         txtIGIfolder.Text = string.Empty;
                     }
@@ -159,7 +160,7 @@ namespace FTAnalyzer
         private void dgIndividuals_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             Comparer<IDisplayIndividual> comparer;
-            switch (e.ColumnIndex) 
+            switch (e.ColumnIndex)
             {
                 case 0: // ID
                     comparer = new DefaultIndividualComparer();
@@ -167,7 +168,7 @@ namespace FTAnalyzer
                 case 1: // Forename
                     comparer = new IndividualNameComparer();
                     break;
-                default: 
+                default:
                     comparer = new DefaultIndividualComparer();
                     break;
             }
@@ -175,7 +176,7 @@ namespace FTAnalyzer
             List<IDisplayIndividual> list = ft.AllDisplayIndividuals;
             list.Sort(comparer);
             dgIndividuals.DataSource = list;
-            tsCountLabel.Text = "Count : " + list.Count; 
+            tsCountLabel.Text = "Count : " + list.Count;
         }
 
         private void dgCountries_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -227,7 +228,7 @@ namespace FTAnalyzer
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
 
             Forms.Census census = new Forms.Census();
-            census.setupCensus(censusRP, censusDate, false, ckbCensusResidence.Checked, (int) udAgeFilter.Value);
+            census.setupCensus(censusRP, censusDate, false, ckbCensusResidence.Checked, (int)udAgeFilter.Value);
             census.Text = censusDate.StartDate.Year.ToString() + " Census Records to search for";
             census.Show();
         }
@@ -249,7 +250,7 @@ namespace FTAnalyzer
             }
             if (censusCountry.USA)
                 locationFilter = LocationFilter.USA;
-          
+
             RegistrationFilter relationFilter = new FalseFilter();
             if (relationTypes.Blood)
                 relationFilter = new OrFilter(new RelationFilter(Individual.BLOOD), relationFilter);
@@ -262,7 +263,7 @@ namespace FTAnalyzer
             if (relationTypes.Unknown)
                 relationFilter = new OrFilter(new RelationFilter(Individual.UNKNOWN), relationFilter);
 
-            return new AndFilter(locationFilter, relationFilter, new DateFilter(cenDate.SelectedDate)); 
+            return new AndFilter(locationFilter, relationFilter, new DateFilter(cenDate.SelectedDate));
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -338,7 +339,7 @@ namespace FTAnalyzer
             string reportTitle = "1911 Ireland Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(filter, new FactDate("1911"), reportTitle);
         }
- 
+
         private void labLostCousinsWeb_Click(object sender, EventArgs e)
         {
             HourGlass(true);
@@ -430,13 +431,13 @@ namespace FTAnalyzer
         {
             FolderBrowserDialog browse = new FolderBrowserDialog();
             browse.ShowNewFolderButton = true;
-            browse.Description="Please select a folder where the results of the IGI search will be placed";
+            browse.Description = "Please select a folder where the results of the IGI search will be placed";
             browse.RootFolder = Environment.SpecialFolder.Desktop;
             if (txtIGIfolder.Text != string.Empty)
                 browse.SelectedPath = txtIGIfolder.Text;
             if (browse.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                Application.UserAppDataRegistry.SetValue("IGI Search Path", browse.SelectedPath); 
+                Application.UserAppDataRegistry.SetValue("IGI Search Path", browse.SelectedPath);
                 txtIGIfolder.Text = browse.SelectedPath;
             }
         }
@@ -445,9 +446,10 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             rtbIGIResults.Text = "IGI Marriage Search started.\n";
-            IGISearchForm form = new IGISearchForm(rtbIGIResults, FactLocation.SCOTLAND);
+            IGISearchForm form = new IGISearchForm(rtbIGIResults, IGIDefaultCountry.Country);
             List<Family> families = ft.AllFamilies;
             int counter = 0;
+            pbIGISearch.Visible = true;
             pbIGISearch.Maximum = families.Count;
             pbIGISearch.Value = 0;
             foreach (Family f in families)
@@ -456,7 +458,7 @@ namespace FTAnalyzer
                 pbIGISearch.Value = counter++;
                 Application.DoEvents();
             }
-            pbIGISearch.Value = 0;
+            pbIGISearch.Visible = false;
             rtbIGIResults.AppendText("\nIGI Marriage Search finished.\n");
             HourGlass(false);
         }
@@ -465,9 +467,10 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             rtbIGIResults.Text = "IGI Children Search started.\n";
-            IGISearchForm form = new IGISearchForm(rtbIGIResults, FactLocation.SCOTLAND);
+            IGISearchForm form = new IGISearchForm(rtbIGIResults, IGIDefaultCountry.Country);
             List<Family> families = ft.AllFamilies;
             int counter = 0;
+            pbIGISearch.Visible = true;
             pbIGISearch.Maximum = families.Count;
             pbIGISearch.Value = 0;
             foreach (Family f in families)
@@ -476,7 +479,7 @@ namespace FTAnalyzer
                 form.SearchIGI(f, txtIGIfolder.Text, IGISearchForm.CHILDRENSEARCH);
                 Application.DoEvents();
             }
-            pbIGISearch.Value = 0;
+            pbIGISearch.Visible = false;
             rtbIGIResults.AppendText("\nIGI Children Search finished.\n");
             HourGlass(false);
         }

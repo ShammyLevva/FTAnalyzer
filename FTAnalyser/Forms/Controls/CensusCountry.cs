@@ -15,6 +15,7 @@ namespace Controls
         public CensusCountry()
         {
             InitializeComponent();
+            groupBox1.Text = "Census Country";
         }
 
         public bool Scotland { get { return rbScotland.Checked; } }
@@ -31,11 +32,19 @@ namespace Controls
                 if (Scotland) return FactLocation.SCOTLAND;
                 if (England) return FactLocation.ENGLAND;
                 if (Wales) return FactLocation.WALES;
-                if (GB) return FactLocation.ENGLAND;
+                if (GB) return FactLocation.GB;
                 if (Canada) return FactLocation.CANADA;
                 if (USA) return FactLocation.USA;
                 return FactLocation.ENGLAND;
             }
+        }
+
+        public string Title {
+            get { return groupBox1.Text; }
+            set { 
+                if(value != string.Empty)
+                    groupBox1.Text = value; 
+            } 
         }
 
         public event EventHandler CountryChanged;
