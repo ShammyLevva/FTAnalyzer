@@ -25,16 +25,17 @@ namespace FTAnalyzer
         public static readonly string DISPLAY = "d MMM yyyy";
         public static readonly string CHECKING = "d MMM";
         public static readonly string DATE_PATTERN = "(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})";
+        public static readonly string POSTFIX = "(\\d{1,2})(?:ST|ND|RD|TH)(.*)";
 
         public static readonly FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
-        public static readonly FactDate CENSUS1841 = new FactDate("06 JUN 1841");
-        public static readonly FactDate CENSUS1851 = new FactDate("30 MAR 1851");
-        public static readonly FactDate CENSUS1861 = new FactDate("07 APR 1861");
-        public static readonly FactDate CENSUS1871 = new FactDate("02 APR 1871");
-        public static readonly FactDate CENSUS1881 = new FactDate("03 APR 1881");
-        public static readonly FactDate CENSUS1891 = new FactDate("05 APR 1891");
-        public static readonly FactDate CENSUS1901 = new FactDate("31 MAR 1901");
-        public static readonly FactDate CENSUS1911 = new FactDate("02 APR 1911");
+        public static readonly FactDate UKCENSUS1841 = new FactDate("06 JUN 1841");
+        public static readonly FactDate UKCENSUS1851 = new FactDate("30 MAR 1851");
+        public static readonly FactDate UKCENSUS1861 = new FactDate("07 APR 1861");
+        public static readonly FactDate UKCENSUS1871 = new FactDate("02 APR 1871");
+        public static readonly FactDate UKCENSUS1881 = new FactDate("03 APR 1881");
+        public static readonly FactDate UKCENSUS1891 = new FactDate("05 APR 1891");
+        public static readonly FactDate UKCENSUS1901 = new FactDate("31 MAR 1901");
+        public static readonly FactDate UKCENSUS1911 = new FactDate("02 APR 1911");
  
         public enum FactDateType
         {
@@ -46,18 +47,20 @@ namespace FTAnalyzer
         private DateTime enddate;
         private FactDateType type;
 
-        public FactDate(string datestring)
+        public FactDate(string str)
         {
+            if (str == null)
+                str = string.Empty;
             // remove any commas in date string
-            datestring = datestring.Replace(",",string.Empty).Trim();
+            str = FixCommonDateFormats(str);
             this.type = FactDateType.UNK;
-            if (datestring == null || datestring.Length == 0)
+            if (str == null || str.Length == 0)
             {
                 this.datestring = "UNKNOWN";
             }
             else
             {
-                this.datestring = datestring.ToUpper();
+                this.datestring = str.ToUpper();
             }
             startdate = MINDATE;
             enddate = MAXDATE;
@@ -78,6 +81,31 @@ namespace FTAnalyzer
         public static string Format(string format, DateTime date)
         {
             return string.Format("{0:" + format + "}", date).ToUpper();
+        }
+
+        private string FixCommonDateFormats(string str)
+        {
+            str = str.Replace(",", string.Empty).Trim().ToUpper();
+
+            str = str.Replace("JANUARY", "JAN");
+            str = str.Replace("FEBRUARY", "FEB"); 
+            str = str.Replace("MARCH", "MAR"); 
+            str = str.Replace("APRIL", "APR");
+            str = str.Replace("JUNE", "JUN");
+            str = str.Replace("JULY", "JUL");
+            str = str.Replace("AUGUST", "AUG");
+            str = str.Replace("SEPTEMBER", "SEP");
+            str = str.Replace("OCTOBER", "OCT");
+            str = str.Replace("NOVEMBER", "NOV");
+            str = str.Replace("DECEMBER", "DEC");
+
+            Match matcher = Regex.Match(str, POSTFIX);
+            if (matcher.Success)
+            {
+                string result = matcher.Groups[1].ToString() + matcher.Groups[2].ToString();
+                return result.Trim();
+            }
+            return str;
         }
 
         #region Process Dates

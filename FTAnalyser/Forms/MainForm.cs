@@ -18,7 +18,7 @@ namespace FTAnalyzer
 
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
-        private FactDate censusDate = FactDate.CENSUS1881;
+        private FactDate censusDate = FactDate.UKCENSUS1881;
             
         public MainForm()
         {
@@ -269,21 +269,21 @@ namespace FTAnalyzer
         private void cbCensusDate_SelectedValueChanged(object sender, EventArgs e)
         {
             if (cbCensusDate.Text == "1841")
-                censusDate = FactDate.CENSUS1841;
+                censusDate = FactDate.UKCENSUS1841;
             else if (cbCensusDate.Text == "1851")
-                censusDate = FactDate.CENSUS1851;
+                censusDate = FactDate.UKCENSUS1851;
             else if (cbCensusDate.Text == "1861")
-                censusDate = FactDate.CENSUS1861;
+                censusDate = FactDate.UKCENSUS1861;
             else if (cbCensusDate.Text == "1871")
-                censusDate = FactDate.CENSUS1871;
+                censusDate = FactDate.UKCENSUS1871;
             else if (cbCensusDate.Text == "1881")
-                censusDate = FactDate.CENSUS1881;
+                censusDate = FactDate.UKCENSUS1881;
             else if (cbCensusDate.Text == "1891")
-                censusDate = FactDate.CENSUS1891;
+                censusDate = FactDate.UKCENSUS1891;
             else if (cbCensusDate.Text == "1901")
-                censusDate = FactDate.CENSUS1901;
+                censusDate = FactDate.UKCENSUS1901;
             else if (cbCensusDate.Text == "1911")
-                censusDate = FactDate.CENSUS1911; 
+                censusDate = FactDate.UKCENSUS1911; 
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -322,14 +322,14 @@ namespace FTAnalyzer
         {
             RegistrationFilter filter = new OrFilter(LocationFilter.ENGLAND, LocationFilter.WALES);
             string reportTitle = "1881 England & Wales Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, FactDate.CENSUS1881, reportTitle);
+            LostCousinsCensus(filter, FactDate.UKCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Scot_Click(object sender, EventArgs e)
         {
             RegistrationFilter filter = LocationFilter.SCOTLAND;
             string reportTitle = "1881 Scotland Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, FactDate.CENSUS1881, reportTitle);
+            LostCousinsCensus(filter, FactDate.UKCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Canada_Click(object sender, EventArgs e)
@@ -343,7 +343,7 @@ namespace FTAnalyzer
         {
             RegistrationFilter filter = new OrFilter(LocationFilter.ENGLAND, LocationFilter.WALES);
             string reportTitle = "1841 England & Wales Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, FactDate.CENSUS1841, reportTitle);
+            LostCousinsCensus(filter, FactDate.UKCENSUS1841, reportTitle);
         }
 
         private void btnLC1880USA_Click(object sender, EventArgs e)
