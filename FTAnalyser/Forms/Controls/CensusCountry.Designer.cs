@@ -62,6 +62,7 @@
             this.rbUSA.TabIndex = 5;
             this.rbUSA.Text = "United States";
             this.rbUSA.UseVisualStyleBackColor = true;
+            this.rbUSA.CheckedChanged += new System.EventHandler(this.rbUSA_CheckedChanged);
             // 
             // rbCanada
             // 
@@ -72,6 +73,7 @@
             this.rbCanada.TabIndex = 4;
             this.rbCanada.Text = "Canada";
             this.rbCanada.UseVisualStyleBackColor = true;
+            this.rbCanada.CheckedChanged += new System.EventHandler(this.rbCanada_CheckedChanged);
             // 
             // rbGB
             // 
@@ -82,6 +84,7 @@
             this.rbGB.TabIndex = 3;
             this.rbGB.Text = "Great Britain";
             this.rbGB.UseVisualStyleBackColor = true;
+            this.rbGB.CheckedChanged += new System.EventHandler(this.rbGB_CheckedChanged);
             // 
             // rbWales
             // 
@@ -92,6 +95,7 @@
             this.rbWales.TabIndex = 2;
             this.rbWales.Text = "Wales";
             this.rbWales.UseVisualStyleBackColor = true;
+            this.rbWales.CheckedChanged += new System.EventHandler(this.rbWales_CheckedChanged);
             // 
             // rbEngland
             // 
@@ -102,6 +106,7 @@
             this.rbEngland.TabIndex = 1;
             this.rbEngland.Text = "England";
             this.rbEngland.UseVisualStyleBackColor = true;
+            this.rbEngland.CheckedChanged += new System.EventHandler(this.rbEngland_CheckedChanged);
             // 
             // rbScotland
             // 
@@ -114,6 +119,7 @@
             this.rbScotland.TabStop = true;
             this.rbScotland.Text = "Scotland";
             this.rbScotland.UseVisualStyleBackColor = true;
+            this.rbScotland.CheckedChanged += new System.EventHandler(this.rbScotland_CheckedChanged);
             // 
             // CensusCountry
             // 

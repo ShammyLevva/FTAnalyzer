@@ -104,59 +104,59 @@ namespace FTAnalyzer
             List<Registration> census;
             CensusOutputFormatter censusFormatter = new CensusOutputFormatter();
              
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1841, false);
+            census = ft.getAllCensusRegistrations(CensusDate.UKCENSUS1841, false);
             process("bisset_1841_census", bissetRP, census, censusFormatter);
             Console.WriteLine("Bisset 1841 Census Details written.");
 
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1851, false);
+            census = ft.getAllCensusRegistrations(CensusDate.UKCENSUS1851, false);
             process("bisset_1851_census", bissetRP, census, censusFormatter);
             Console.WriteLine("Bisset 1851 Census Details written.");
 
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1861, false);
+            census = ft.getAllCensusRegistrations(CensusDate.UKCENSUS1861, false);
             process("bisset_1861_census", bissetRP, census, censusFormatter);
             Console.WriteLine("Bisset 1861 Census Details written.");
 
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1871, false);
+            census = ft.getAllCensusRegistrations(CensusDate.UKCENSUS1871, false);
             process("bisset_1871_census", bissetRP, census, censusFormatter);
             Console.WriteLine("Bisset 1871 Census Details written.");
 
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1881, false);
+            census = ft.getAllCensusRegistrations(CensusDate.UKCENSUS1881, false);
             process("bisset_1881_census", bissetRP, census, censusFormatter);
             Console.WriteLine("Bisset 1881 Census Details written.");
 
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1891, false);
+            census = ft.getAllCensusRegistrations(CensusDate.UKCENSUS1891, false);
             process("bisset_1891_census", bissetRP, census, censusFormatter);
             Console.WriteLine("Bisset 1891 Census Details written.");
 
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1901, false);
+            census = ft.getAllCensusRegistrations(CensusDate.UKCENSUS1901, false);
             process("bisset_1901_census", bissetRP, census, censusFormatter);
             Console.WriteLine("Bisset 1901 Census Details written.");
 
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1841, false);
+            census = ft.getAllCensusRegistrations(CensusDate.UKCENSUS1841, false);
             process("1841_census", censusRP, census, censusFormatter);
             Console.WriteLine("1841 Census Details written.");
 
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1851, false);
+            census = ft.getAllCensusRegistrations(CensusDate.UKCENSUS1851, false);
             process("1851_census", censusRP, census, censusFormatter);
             Console.WriteLine("1851 Census Details written.");
 
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1861, false);
+            census = ft.getAllCensusRegistrations(CensusDate.UKCENSUS1861, false);
             process("1861_census", censusRP, census, censusFormatter);
             Console.WriteLine("1861 Census Details written.");
 
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1871, false);
+            census = ft.getAllCensusRegistrations(CensusDate.UKCENSUS1871, false);
             process("1871_census", censusRP, census, censusFormatter);
             Console.WriteLine("1871 Census Details written.");
 
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1881, false);
+            census = ft.getAllCensusRegistrations(CensusDate.UKCENSUS1881, false);
             process("1881_census", censusRP, census, censusFormatter);
             Console.WriteLine("1881 Census Details written.");
 
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1891, false);
+            census = ft.getAllCensusRegistrations(CensusDate.UKCENSUS1891, false);
             process("1891_census", censusRP, census, censusFormatter);
             Console.WriteLine("1891 Census Details written.");
 
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1901, false);
+            census = ft.getAllCensusRegistrations(CensusDate.UKCENSUS1901, false);
             process("1901_census", censusRP, census, censusFormatter);
             Console.WriteLine("1901 Census Details written.");
 */

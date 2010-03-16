@@ -1,6 +1,6 @@
 ﻿namespace Controls
 {
-    partial class CensusDate
+    partial class CensusDateSelector
     {
         /// <summary> 
         /// Required designer variable.
@@ -59,14 +59,16 @@
             this.cbCensusDate.Size = new System.Drawing.Size(49, 21);
             this.cbCensusDate.TabIndex = 3;
             // 
-            // CensusDate
+            // CensusDateSelector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbCensusDate);
-            this.Name = "CensusDate";
-            this.Size = new System.Drawing.Size(131, 27);
+            this.Name = "CensusDateSelector";
+            this.Size = new System.Drawing.Size(129, 27);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -100,8 +100,8 @@
     <EmbeddedResource Include="Forms\Census.resx">
       <DependentUpon>Census.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Controls\CensusDate.resx">
-      <DependentUpon>CensusDate.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Controls\CensusDateSelector.resx">
+      <DependentUpon>CensusDateSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Individuals.resx">
       <DependentUpon>Individuals.cs</DependentUpon>
@@ -177,6 +177,7 @@
     <Compile Include="Comparators\Individual\DefaultIndividualComparer.cs" />
     <Compile Include="Comparators\Location\FactLocationComparer.cs" />
     <Compile Include="Core\Age.cs" />
+    <Compile Include="Core\CensusDate.cs" />
     <Compile Include="Core\CensusFamily.cs" />
     <Compile Include="Comparators\Registration\CensusAgeComparator.cs" />
     <Compile Include="Comparators\Registration\DateComparator.cs" />
@@ -229,11 +230,11 @@
     <Compile Include="Forms\Census.Designer.cs">
       <DependentUpon>Census.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Controls\CensusDate.cs">
+    <Compile Include="Forms\Controls\CensusDateSelector.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Controls\CensusDate.Designer.cs">
-      <DependentUpon>CensusDate.cs</DependentUpon>
+    <Compile Include="Forms\Controls\CensusDateSelector.Designer.cs">
+      <DependentUpon>CensusDateSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Individuals.cs">
       <SubType>Form</SubType>

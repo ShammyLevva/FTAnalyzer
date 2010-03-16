@@ -28,40 +28,6 @@ namespace FTAnalyzer
         public static readonly string POSTFIX = "(\\d{1,2})(?:ST|ND|RD|TH)(.*)";
 
         public static readonly FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
-        public static readonly FactDate UKCENSUS1841 = new FactDate("06 JUN 1841");
-        public static readonly FactDate UKCENSUS1851 = new FactDate("30 MAR 1851");
-        public static readonly FactDate UKCENSUS1861 = new FactDate("07 APR 1861");
-        public static readonly FactDate UKCENSUS1871 = new FactDate("02 APR 1871");
-        public static readonly FactDate UKCENSUS1881 = new FactDate("03 APR 1881");
-        public static readonly FactDate UKCENSUS1891 = new FactDate("05 APR 1891");
-        public static readonly FactDate UKCENSUS1901 = new FactDate("31 MAR 1901");
-        public static readonly FactDate UKCENSUS1911 = new FactDate("02 APR 1911");
-
-        public static readonly FactDate USCENSUS1790 = new FactDate("AUG 1790");
-        public static readonly FactDate USCENSUS1800 = new FactDate("AUG 1800");
-        public static readonly FactDate USCENSUS1810 = new FactDate("AUG 1810");
-        public static readonly FactDate USCENSUS1820 = new FactDate("AUG 1820");
-        public static readonly FactDate USCENSUS1830 = new FactDate("1 JUN 1830");
-        public static readonly FactDate USCENSUS1840 = new FactDate("1 JUN 1840");
-        public static readonly FactDate USCENSUS1850 = new FactDate("1 JUN 1850");
-        public static readonly FactDate USCENSUS1860 = new FactDate("1 JUN 1860");
-        public static readonly FactDate USCENSUS1870 = new FactDate("1 JUN 1870");
-        public static readonly FactDate USCENSUS1880 = new FactDate("1 JUN 1880");
-        public static readonly FactDate USCENSUS1890 = new FactDate("JUN 1890");
-        public static readonly FactDate USCENSUS1900 = new FactDate("1 JUN 1900");
-        public static readonly FactDate USCENSUS1910 = new FactDate("15 APR 1910");
-        public static readonly FactDate USCENSUS1920 = new FactDate("1 JAN 1920");
-        public static readonly FactDate USCENSUS1930 = new FactDate("1 APR 1930");
-
-        public static readonly FactDate CANADACENSUS1851 = new FactDate("BET 1851 AND 1852");
-        public static readonly FactDate CANADACENSUS1861 = new FactDate("1861");
-        public static readonly FactDate CANADACENSUS1871 = new FactDate("2 APR 1871");
-        public static readonly FactDate CANADACENSUS1881 = new FactDate("4 APR 1881");
-        public static readonly FactDate CANADACENSUS1891 = new FactDate("6 APR 1891");
-        public static readonly FactDate CANADACENSUS1901 = new FactDate("31 MAR 1901");
-        public static readonly FactDate CANADACENSUS1906 = new FactDate("1906");
-        public static readonly FactDate CANADACENSUS1911 = new FactDate("1 JUN 1911");
-        public static readonly FactDate CANADACENSUS1916 = new FactDate("1916");
 
         public enum FactDateType
         {
@@ -357,11 +323,6 @@ namespace FTAnalyzer
         public FactDateType Type
         {
             get { return this.type; }
-        }
-
-        public string DisplayYear
-        {
-            get { return this.startdate.Year.ToString(); }
         }
 
         #endregion

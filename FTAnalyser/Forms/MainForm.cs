@@ -18,7 +18,7 @@ namespace FTAnalyzer
 
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
-        private FactDate censusDate = FactDate.UKCENSUS1881;
+        private FactDate censusDate = CensusDate.UKCENSUS1881;
             
         public MainForm()
         {
@@ -301,14 +301,14 @@ namespace FTAnalyzer
         {
             RegistrationFilter filter = new OrFilter(LocationFilter.ENGLAND, LocationFilter.WALES);
             string reportTitle = "1881 England & Wales Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, FactDate.UKCENSUS1881, reportTitle);
+            LostCousinsCensus(filter, CensusDate.UKCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Scot_Click(object sender, EventArgs e)
         {
             RegistrationFilter filter = LocationFilter.SCOTLAND;
             string reportTitle = "1881 Scotland Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, FactDate.UKCENSUS1881, reportTitle);
+            LostCousinsCensus(filter, CensusDate.UKCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Canada_Click(object sender, EventArgs e)
@@ -322,7 +322,7 @@ namespace FTAnalyzer
         {
             RegistrationFilter filter = new OrFilter(LocationFilter.ENGLAND, LocationFilter.WALES);
             string reportTitle = "1841 England & Wales Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, FactDate.UKCENSUS1841, reportTitle);
+            LostCousinsCensus(filter, CensusDate.UKCENSUS1841, reportTitle);
         }
 
         private void btnLC1880USA_Click(object sender, EventArgs e)
@@ -479,6 +479,11 @@ namespace FTAnalyzer
             pbIGISearch.Value = 0;
             rtbIGIResults.AppendText("\nIGI Children Search finished.\n");
             HourGlass(false);
+        }
+
+        private void censusCountry_CountryChanged(object sender, EventArgs e)
+        {
+            cenDate.Country = censusCountry.Country;
         }
     }
 }
