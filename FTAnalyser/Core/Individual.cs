@@ -336,9 +336,9 @@ namespace FTAnalyzer
         {
             foreach (Fact f in facts)
             {
-                if (f.FactType == Fact.CENSUS && f.FactDate.overlaps(when))
+                if (f.FactType == Fact.CENSUS && f.FactDate.overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
                     return true;
-                if (includeResidence && f.FactType == Fact.RESIDENCE && f.FactDate.overlaps(when))
+                if (includeResidence && f.FactType == Fact.RESIDENCE && f.FactDate.overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
                     return true; 
             }
             return false;

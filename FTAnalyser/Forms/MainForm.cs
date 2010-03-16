@@ -292,7 +292,7 @@ namespace FTAnalyzer
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
 
             Forms.Census census = new Forms.Census();
-            census.setupCensus(censusRP, censusDate, ckbLCResidence.Checked, true, 110);
+            census.setupCensus(censusRP, censusDate, true, ckbLCResidence.Checked, 110);
             census.Text = reportTitle;
             HourGlass(false);
             census.Show();
@@ -316,7 +316,7 @@ namespace FTAnalyzer
         {
             RegistrationFilter filter = LocationFilter.CANADA;
             string reportTitle = "1881 Canada Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, new FactDate("1881"), reportTitle);
+            LostCousinsCensus(filter, CensusDate.CANADACENSUS1881, reportTitle);
         }
 
         private void btnLC1841EW_Click(object sender, EventArgs e)
@@ -330,7 +330,7 @@ namespace FTAnalyzer
         {
             RegistrationFilter filter = new OrFilter(LocationFilter.USA, LocationFilter.US);
             string reportTitle = "1880 US Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, new FactDate("1880"), reportTitle);
+            LostCousinsCensus(filter, CensusDate.USCENSUS1880, reportTitle);
         }
 
         private void btnLC1911Ireland_Click(object sender, EventArgs e)
