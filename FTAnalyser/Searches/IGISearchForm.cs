@@ -102,7 +102,7 @@ namespace FTAnalyzer
             else if (country == FactLocation.CANADA)
             {
                 setParameter(COUNTRY, "11");
-                setParameter(SHIRE, "Can");
+                setParameter(SHIRE, "CAN");
                 setParameter("regionfriendly", "North America");
                 setParameter("juris1friendly", "Canada");
                 setParameter("juris2friendly", "All Provinces");
