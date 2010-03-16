@@ -877,7 +877,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbIGIResults.Location = new System.Drawing.Point(0, 101);
             this.rtbIGIResults.Name = "rtbIGIResults";
-            this.rtbIGIResults.Size = new System.Drawing.Size(965, 293);
+            this.rtbIGIResults.Size = new System.Drawing.Size(949, 293);
             this.rtbIGIResults.TabIndex = 3;
             this.rtbIGIResults.Text = "";
             // 
