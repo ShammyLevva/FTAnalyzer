@@ -34,7 +34,7 @@ namespace FTAnalyzer
             RegistrationFilter directOrBlood = new OrFilter(
         		    new OrFilter(new RelationFilter(Individual.DIRECT), 
         					     new RelationFilter(Individual.BLOOD)),
-        		    new RelationFilter(Individual.MARRIAGEDB));
+        		    new RelationFilter(Individual.MARRIEDTODB));
             RegistrationFilter unknownOrMarriage = new OrFilter(
                     new RelationFilter(Individual.UNKNOWN), 
                     new RelationFilter(Individual.MARRIAGE));

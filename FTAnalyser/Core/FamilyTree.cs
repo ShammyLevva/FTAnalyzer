@@ -634,7 +634,7 @@ namespace FTAnalyzer
     		    foreach (Family family in families) {
     	            // if the spouse of a direct ancestor is not a direct
     	            // ancestor then they are only related by marriage
-    		        family.setSpouseRelation(ind, Individual.MARRIAGEDB);
+    		        family.setSpouseRelation(ind, Individual.MARRIEDTODB);
 		            // all children of direct ancestors and blood relations
 		            // are blood relations
     		        family.setChildRelation(queue, Individual.BLOOD);
@@ -643,7 +643,7 @@ namespace FTAnalyzer
             }
 		    // we have now set all direct ancestors and all blood relations
 		    // all that remains is to loop through the marriage relations
-            List<Individual> marriedDBs = getAllRelationsOfType(Individual.MARRIAGEDB);
+            List<Individual> marriedDBs = getAllRelationsOfType(Individual.MARRIEDTODB);
             AddToQueue(queue, marriedDBs);
 		    while (queue.Count > 0)
             {
@@ -652,7 +652,7 @@ namespace FTAnalyzer
                 // first only process this individual if they are related by marriage or still unknown
 		        int relationship = ind.RelationType;
 		        if (relationship == Individual.MARRIAGE || 
-		            relationship == Individual.MARRIAGEDB ||
+		            relationship == Individual.MARRIEDTODB ||
 		            relationship == Individual.UNKNOWN) {
 		            // set this individual to be related by marriage
 		            if (relationship == Individual.UNKNOWN)
@@ -678,7 +678,7 @@ namespace FTAnalyzer
                 relations[i.RelationType]++;
             xmlErrorbox.AppendText("Direct Ancestors : " + relations[Individual.DIRECT] + "\n");
             xmlErrorbox.AppendText("Blood Relations : " + relations[Individual.BLOOD] + "\n");
-            xmlErrorbox.AppendText("Married to Blood or Direct Relation : " + relations[Individual.MARRIAGEDB] + "\n");
+            xmlErrorbox.AppendText("Married to Blood or Direct Relation : " + relations[Individual.MARRIEDTODB] + "\n");
             xmlErrorbox.AppendText("Related by Marriage : " + relations[Individual.MARRIAGE] + "\n");
             xmlErrorbox.AppendText("Unknown relation : " + relations[Individual.UNKNOWN] + "\n");
             if(relations[Individual.UNSET] > 0)

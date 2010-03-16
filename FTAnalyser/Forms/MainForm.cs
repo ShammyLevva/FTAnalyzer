@@ -235,7 +235,7 @@ namespace FTAnalyzer
         private RegistrationFilter createRegistrationFilter()
         {
             RegistrationFilter locationFilter = new TrueFilter();
-/*            if (censusCountry.Scotland)
+            if (censusCountry.Scotland)
                 locationFilter = LocationFilter.SCOTLAND;
             if (censusCountry.England)
                 locationFilter = LocationFilter.ENGLAND;
@@ -250,19 +250,19 @@ namespace FTAnalyzer
             }
             if (censusCountry.USA)
                 locationFilter = LocationFilter.USA;
-*/           
+          
             RegistrationFilter relationFilter = new FalseFilter();
-/*            if (ckbBlood.Checked)
+            if (relationTypes.Blood)
                 relationFilter = new OrFilter(new RelationFilter(Individual.BLOOD), relationFilter);
-            if (ckbDirects.Checked)
+            if (relationTypes.Directs)
                 relationFilter = new OrFilter(new RelationFilter(Individual.DIRECT), relationFilter);
-            if (ckbMarriage.Checked)
+            if (relationTypes.Marriage)
                 relationFilter = new OrFilter(new RelationFilter(Individual.MARRIAGE), relationFilter);
-            if (ckbMarriageDB.Checked)
-                relationFilter = new OrFilter(new RelationFilter(Individual.MARRIAGEDB), relationFilter);
-            if (ckbUnknown.Checked)
+            if (relationTypes.MarriedToDB)
+                relationFilter = new OrFilter(new RelationFilter(Individual.MARRIEDTODB), relationFilter);
+            if (relationTypes.Unknown)
                 relationFilter = new OrFilter(new RelationFilter(Individual.UNKNOWN), relationFilter);
-*/
+
             return new AndFilter(locationFilter, relationFilter, new DateFilter(censusDate));
         }
 
@@ -298,7 +298,7 @@ namespace FTAnalyzer
             RegistrationFilter relation =
                 new OrFilter(
                     new OrFilter(new RelationFilter(Individual.BLOOD), new RelationFilter(Individual.DIRECT)),
-                    new RelationFilter(Individual.MARRIAGEDB));
+                    new RelationFilter(Individual.MARRIEDTODB));
             RegistrationFilter noLCFact = new NotFilter(new FactFilter(Fact.LOSTCOUSINS, censusDate));
             if (ckbRestrictions.Checked)
                 filter = new AndFilter(new DateFilter(censusDate), filter, relation);

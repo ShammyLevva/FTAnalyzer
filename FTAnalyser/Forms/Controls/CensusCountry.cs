@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FTAnalyzer
+namespace Controls
 {
     public partial class CensusCountry : UserControl
     {
