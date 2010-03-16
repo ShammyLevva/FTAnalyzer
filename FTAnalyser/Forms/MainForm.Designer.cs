@@ -92,6 +92,7 @@
             this.tabAddresses = new System.Windows.Forms.TabPage();
             this.dgAddresses = new System.Windows.Forms.DataGridView();
             this.tabIGISearch = new System.Windows.Forms.TabPage();
+            this.pbIGISearch = new System.Windows.Forms.ProgressBar();
             this.btnIGIMarriageSearch = new System.Windows.Forms.Button();
             this.btnIGIChildrenSearch = new System.Windows.Forms.Button();
             this.rtbIGIResults = new System.Windows.Forms.RichTextBox();
@@ -101,7 +102,7 @@
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.pbIGISearch = new System.Windows.Forms.ProgressBar();
+            this.label7 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -149,13 +150,13 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -165,19 +166,19 @@
             this.showLocationsToolStripMenuItem,
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // showLocationsToolStripMenuItem
             // 
             this.showLocationsToolStripMenuItem.Name = "showLocationsToolStripMenuItem";
-            this.showLocationsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.showLocationsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.showLocationsToolStripMenuItem.Text = "Show locations";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -188,25 +189,25 @@
             this.toolStripSeparator1,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // checkForUpdatesToolStripMenuItem
             // 
             this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
             this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(171, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(168, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -818,6 +819,7 @@
             // 
             // tabIGISearch
             // 
+            this.tabIGISearch.Controls.Add(this.label7);
             this.tabIGISearch.Controls.Add(this.pbIGISearch);
             this.tabIGISearch.Controls.Add(this.btnIGIMarriageSearch);
             this.tabIGISearch.Controls.Add(this.btnIGIChildrenSearch);
@@ -831,6 +833,13 @@
             this.tabIGISearch.TabIndex = 6;
             this.tabIGISearch.Text = "IGI Search";
             this.tabIGISearch.UseVisualStyleBackColor = true;
+            // 
+            // pbIGISearch
+            // 
+            this.pbIGISearch.Location = new System.Drawing.Point(147, 38);
+            this.pbIGISearch.Name = "pbIGISearch";
+            this.pbIGISearch.Size = new System.Drawing.Size(296, 24);
+            this.pbIGISearch.TabIndex = 6;
             // 
             // btnIGIMarriageSearch
             // 
@@ -907,15 +916,18 @@
             // tsCountLabel
             // 
             this.tsCountLabel.Name = "tsCountLabel";
-            this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
+            this.tsCountLabel.Size = new System.Drawing.Size(55, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
-            // pbIGISearch
+            // label7
             // 
-            this.pbIGISearch.Location = new System.Drawing.Point(147, 38);
-            this.pbIGISearch.Name = "pbIGISearch";
-            this.pbIGISearch.Size = new System.Drawing.Size(296, 24);
-            this.pbIGISearch.TabIndex = 6;
+            this.label7.Location = new System.Drawing.Point(460, 42);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(330, 52);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Note searches are currently limited to England && Scotland and in the event of an" +
+                " unknown location it will currently default to Scotland. Future versions will ha" +
+                "ve a choice of default country.";
             // 
             // MainForm
             // 
@@ -1042,6 +1054,7 @@
         private System.Windows.Forms.Button btnIGIMarriageSearch;
         private System.Windows.Forms.Button btnIGIChildrenSearch;
         private System.Windows.Forms.ProgressBar pbIGISearch;
+        private System.Windows.Forms.Label label7;
     }
 }
 

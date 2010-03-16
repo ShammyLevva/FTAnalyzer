@@ -12,7 +12,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.0.7.1";
+        private string VERSION = "1.1.0.0";
         private bool _checkForUpdatesEnabled = true;
         private System.Threading.Timer _timerCheckForUpdates;
 
@@ -43,6 +43,7 @@ namespace FTAnalyzer
                     closeIndividualForms();
                     tabControl.SelectTab(tabDisplayProgress);
                     rtbOutput.Text = "";
+                    rtbIGIResults.Text = "";
                     pbSources.Value = pbIndividuals.Value = pbFamilies.Value = 0;
                     Application.DoEvents();
                     XmlDocument document = GedcomToXml.Load(openGedcom.FileName);
@@ -463,8 +464,9 @@ namespace FTAnalyzer
 
         private void btnIGIMarriageSearch_Click(object sender, EventArgs e)
         {
-            rtbIGIResults.AppendText("IGI Slurp started.\n");
-            IGISearchForm form = new IGISearchForm(rtbIGIResults);
+            HourGlass(true);
+            rtbIGIResults.Text = "IGI Marriage Search started.\n";
+            IGISearchForm form = new IGISearchForm(rtbIGIResults, FactLocation.SCOTLAND);
             List<Family> families = ft.AllFamilies;
             int counter = 0;
             pbIGISearch.Maximum = families.Count;
@@ -475,13 +477,16 @@ namespace FTAnalyzer
                 pbIGISearch.Value = counter++;
                 Application.DoEvents();
             }
-            rtbIGIResults.AppendText("\nIGI Slurp finished.\n");
+            pbIGISearch.Value = 0;
+            rtbIGIResults.AppendText("\nIGI Marriage Search finished.\n");
+            HourGlass(false);
         }
 
         private void btnIGIChildrenSearch_Click(object sender, EventArgs e)
         {
-            IGISearchForm form = new IGISearchForm(rtbIGIResults);
-            rtbIGIResults.AppendText("IGI Slurp started.\n");
+            HourGlass(true);
+            rtbIGIResults.Text = "IGI Children Search started.\n";
+            IGISearchForm form = new IGISearchForm(rtbIGIResults, FactLocation.SCOTLAND);
             List<Family> families = ft.AllFamilies;
             int counter = 0;
             pbIGISearch.Maximum = families.Count;
@@ -492,7 +497,9 @@ namespace FTAnalyzer
                 form.SearchIGI(f, txtIGIfolder.Text, IGISearchForm.CHILDRENSEARCH);
                 Application.DoEvents();
             }
-            rtbIGIResults.AppendText("\nIGI Slurp finished.\n");
+            pbIGISearch.Value = 0;
+            rtbIGIResults.AppendText("\nIGI Children Search finished.\n");
+            HourGlass(false);
         }
     }
 }

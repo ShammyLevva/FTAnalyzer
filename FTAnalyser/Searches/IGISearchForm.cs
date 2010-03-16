@@ -35,6 +35,7 @@ namespace FTAnalyzer
         private Dictionary<string,string> parameters;
         private TextWriter resultFile;
         private RichTextBox rtbOutput;
+        private string defaultCountry = FactLocation.SCOTLAND;
         	
         private static readonly string NOMATCHES = "<strong>International Genealogical Index / British Isles</strong> (No Matches)";
         private static readonly string NOMATCHES2 = "<strong><span id='searchPageTitle'>International Genealogical Index / British Isles</span></strong> (No Matches)";
@@ -49,8 +50,9 @@ namespace FTAnalyzer
         public const int MARRIAGESEARCH = 1;
         public const int CHILDRENSEARCH = 2;
         
-        public IGISearchForm(RichTextBox rtb) {
+        public IGISearchForm(RichTextBox rtb, string defaultCountry) {
             rtbOutput = rtb;
+            this.defaultCountry = defaultCountry;
             Initialise();
         }
 
@@ -72,24 +74,26 @@ namespace FTAnalyzer
             parameters.Add(DATE_RANGE, "0");
             parameters.Add(EVENT_INDEX, "0");
             parameters.Add(COUNTRY, "2");
-            parameters.Add(SHIRE, "Scot");
+            parameters.Add(SHIRE, defaultCountry.Substring(0,4));
             parameters.Add(PARISH, "");
             parameters.Add("date_range_index", "0");
             parameters.Add("regionfriendly", "British Isles");
-            parameters.Add("juris1friendly", FactLocation.SCOTLAND);
+            parameters.Add("juris1friendly", defaultCountry);
             parameters.Add("juris2friendly", "All Counties");
             parameters.Add("LDS", "1");
             parameters.Add("batch_set", "");
         }
         
-        private void setCountry(Individual husband, Individual wife, Fact marriage) {
+        private string SetCountry(Individual husband, Individual wife, Fact marriage) {
             string country = string.Empty;
-            if (marriage.Country.Length > 0)
+            if (marriage != null && marriage.Country.Length > 0)
                 country = marriage.Country;
-            else if (husband.BestLocation.Country.Length > 0)
+            else if (husband.BestLocation != null && husband.BestLocation.Country.Length > 0)
                 country = husband.BestLocation.Country;
-            else if (wife.BestLocation.Country.Length > 0)
+            else if (wife.BestLocation != null && wife.BestLocation.Country.Length > 0)
                 country = wife.BestLocation.Country;
+            else
+                country = defaultCountry;
             if (country == FactLocation.ENGLAND)
             {
 	            parameters[SHIRE] = "Engl";
@@ -98,6 +102,7 @@ namespace FTAnalyzer
 	            parameters[SHIRE] = "Scot";
 	            parameters["juris1friendly"] = FactLocation.SCOTLAND;
     	    }
+            return country;
         }
         
         public NameValueCollection getEncodedParameters () {
@@ -110,15 +115,20 @@ namespace FTAnalyzer
         }
         
         public void setParameter(string key, string value) {
-            string setValue = value.Replace('?',' ').Trim();
-            if (setValue.Equals("UNKNOWN"))
-            {
-                setValue = string.Empty;
-            }
             if (parameters.ContainsKey(key))
-                parameters[key] = setValue;
+                parameters[key] = value;
             else
-                parameters.Add(key, setValue);
+                parameters.Add(key, value);
+        }
+
+        public string verifyName(string name)
+        {
+            string value = name.Replace('?', ' ').Trim();
+            if (value.Equals("UNKNOWN"))
+            {
+                value = string.Empty;
+            }
+            return value;
         }
 
        private void fixBaseURL(StringBuilder str) {
@@ -148,10 +158,10 @@ namespace FTAnalyzer
                    TextWriter output = new StreamWriter(filename);
                    output.WriteLine(str); 
                    output.Close();
-                   //rtbOutput.AppendText("\nResults File written to " + filename);
+                   rtbOutput.AppendText("Results File written to " + filename + "\n");
                }
-          } catch (IOException e) {
-               throw new BadIGIDataException("IO Error " + e.Message);
+          } catch (Exception e) {
+                Console.WriteLine("error " + e.Message);
           }
        }
 
@@ -346,13 +356,14 @@ namespace FTAnalyzer
                 else
                     filename = dirname + "\\children" + family.FamilyGed + ".html";
                 if(!File.Exists(filename)) // don't bother processing if file already exists.
-                {            
-                    if (family.Husband != null && family.Wife != null)
-                    {
+                {
+                    if (family.getPreferredFact(Fact.IGISEARCH) == null && family.Husband != null && family.Wife != null)
+                    {   // or we have already flagged marriage fact as having been searched
+                        // or either the husband or wife is not present
                         if(searchType == CHILDRENSEARCH)
-                            ChildrenSearch(family, dirname);
+                            ChildrenSearch(family, filename);
                         else
-                            MarriageSearch(family, dirname);
+                            MarriageSearch(family, filename);
                     }
                 }
             }
@@ -371,61 +382,69 @@ namespace FTAnalyzer
             {
                 // proceed if marriage date within IGI Range and both were alive before IGI max date
                 Initialise();
+                SetCountry(husband, wife, marriage);
                 if (!marriageDate.isExact())
+                    SearchForMarriage(husband, wife, filename);   
+            }
+        }
+
+        public void ChildrenSearch(Family family, string filename)
+        {
+            if (family.getPreferredFact(Fact.CHILDLESS) == null)
+            {
+                Individual husband = family.Husband;
+                Individual wife = family.Wife;
+                if (husband.BirthDate.StartDate < IGIPARENTBIRTHMAX.StartDate && wife.BirthDate.StartDate < IGIPARENTBIRTHMAX.StartDate)
                 {
-                    try
-                    {
-                        SearchFor(husband, wife, filename);   
-                    } catch (BadIGIDataException) {
-                        try
-                        {
-                            SearchFor(wife, husband, filename);
-                        } catch (BadIGIDataException e2) {
-                            // write to console rather than RTB as these are web errors
-                            Console.WriteLine("error " + e2.Message);
-                        }
-                    }
+                    Fact marriage = family.getPreferredFact(Fact.MARRIAGE);
+                    string country = SetCountry(husband, wife, marriage);
+                    SearchForChildren(husband, wife, country, filename);
                 }
             }
         }
 
-        public void SearchFor(Individual i1, Individual i2, string filename)
+        public void SearchForMarriage(Individual i1, Individual i2, string filename)
         {
-            setParameter(FIRST_NAME, i1.Forename);
-            setParameter(LAST_NAME, i1.Surname);
-            setParameter(SPOUSES_FIRST_NAME, i2.Forename);
-            setParameter(SPOUSES_LAST_NAME, i2.Surname);
-            FetchIGIDataAndWriteResult(filename);
+            string forename1 = verifyName(i1.Forename);
+            string forename2 = verifyName(i2.Forename);
+            string surname1 = verifyName(i1.Surname);
+            string surname2 = verifyName(i2.Surname);
+            if (forename1 == string.Empty || surname1 == string.Empty)
+            {
+                // if either forename or surname missing then try spouse first
+                // if spouse doesn't have both forename & surname then dont search
+                // ie: only search if one partner has full name
+                if (forename2 != string.Empty && surname2 != string.Empty)
+                {
+                    setParameter(FIRST_NAME, forename2);
+                    setParameter(LAST_NAME, surname2);
+                    setParameter(SPOUSES_FIRST_NAME, forename1);
+                    setParameter(SPOUSES_LAST_NAME, surname1);
+                    FetchIGIDataAndWriteResult(filename);
+                }
+            } else {
+                setParameter(FIRST_NAME, forename1);
+                setParameter(LAST_NAME, surname1);
+                setParameter(SPOUSES_FIRST_NAME, forename2);
+                setParameter(SPOUSES_LAST_NAME, surname2);
+                FetchIGIDataAndWriteResult(filename);
+            }
         }
 
-        public void ChildrenSearch(Family family, string filename)
-        { 
-            if(family.getPreferredFact(Fact.IGISEARCH) == null && family.getPreferredFact(Fact.CHILDLESS) == null)
+        public void SearchForChildren(Individual husband, Individual wife, string country, string filename)
+        {
+            string husbandForename = verifyName(husband.Forename);
+            string husbandSurname = verifyName(husband.Surname);
+            string wifeForename = verifyName(wife.Forename);
+            string wifeSurname = verifyName(wife.Surname);
+            if (husbandForename != string.Empty && husbandSurname != string.Empty && wifeForename != string.Empty)
             {
-                Individual husband = family.Husband;
-                Individual wife = family.Wife;
-                if (husband.BirthDate.isBefore(IGIPARENTBIRTHMAX) && wife.BirthDate.isBefore(IGIPARENTBIRTHMAX))
-                {
-                    Fact marriage = family.getPreferredFact(Fact.MARRIAGE);
-                    setParameter(FATHERS_FIRST_NAME, husband.Forename);
-                    setParameter(FATHERS_LAST_NAME, husband.Surname);
-                    setParameter(MOTHERS_FIRST_NAME, wife.Forename);
-                    if (marriage.Country.Equals(FactLocation.SCOTLAND))
-                        setParameter(MOTHERS_LAST_NAME, wife.Surname);
-                    try
-                    {
-                        FetchIGIDataAndWriteResult(filename);
-                    }
-                    catch (BadIGIDataException e)
-                    {
-                        // write to console rather than RTB as these are web errors
-                        Console.WriteLine("error " + e.Message);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("husband or wife birth date fail");
-                }
+                setParameter(FATHERS_FIRST_NAME, husbandForename);
+                setParameter(FATHERS_LAST_NAME, husbandSurname);
+                setParameter(MOTHERS_FIRST_NAME, wifeForename);
+                if(country.Equals(FactLocation.SCOTLAND))
+                    setParameter(MOTHERS_LAST_NAME, wifeSurname);
+                FetchIGIDataAndWriteResult(filename);
             }
         }
     }
