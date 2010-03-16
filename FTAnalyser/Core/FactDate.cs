@@ -48,6 +48,8 @@ namespace FTAnalyzer
 
         public FactDate(string datestring)
         {
+            // remove any commas in date string
+            datestring = datestring.Replace(",",string.Empty).Trim();
             this.type = FactDateType.UNK;
             if (datestring == null || datestring.Length == 0)
             {

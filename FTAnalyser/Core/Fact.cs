@@ -63,14 +63,30 @@ namespace FTAnalyzer
 
         #region Constructors
 
-        public Fact (XmlNode node) {
+        private Fact()
+        {
+            this.factType = "";
+            this.date = FactDate.UNKNOWN_DATE;
+            this.comment = "";
+            this.place = "";
+            this.location = new FactLocation();
+            this.sources = new List<FactSource>();
+            this.certificatePresent = false;
+        }
+
+        public Fact (XmlNode node) 
+            :base()
+        {
             if (node != null) 
             {
-                factType = node.Name;
+                factType = FixFactTypes(node.Name);
                 if (factType.Equals("EVEN")) {
                     string tag = FamilyTree.GetText(node, "TYPE");
                     CUSTOM_TAGS.TryGetValue(tag, out factType);
-                    if (factType == null) {
+                    if (factType == null)
+                        factType = FixFactTypes(tag);
+                    if (factType == null)
+                    {
                         factType = Fact.UNKNOWN;
                         FamilyTree.Instance.XmlErrorBox.AppendText("Recorded unknown fact type " + tag + "\n");
                     }
@@ -100,7 +116,9 @@ namespace FTAnalyzer
             }
         }
 
-        public Fact (string factType, FactDate date) {
+        public Fact (string factType, FactDate date) 
+            : base()
+        {
             this.factType = factType;
             this.date = date;
             this.comment = "";
@@ -148,12 +166,20 @@ namespace FTAnalyzer
 
         #endregion
 
+        private string FixFactTypes(string tag)
+        {
+            string initialChars = tag.ToUpper().Substring(0, 4);
+            if (initialChars == "BIRT" || initialChars == "MARR" || initialChars == "DEAT")
+                return initialChars;
+            return tag;
+        }
+
         private void setCommentAndLocation (string factType, string factComment, string factPlace) {
             if (factComment.Length == 0 && factPlace.Length > 0)
             {
                 int slash = factPlace.IndexOf("/");
                 if (slash >= 0) {
-                    comment = place.Substring(0, slash).Trim();
+                    comment = factPlace.Substring(0, slash).Trim();
                     // If slash occurs at end of string, location is empty.
                     place = (slash == factPlace.Length - 1) ? "" : factPlace.Substring(slash + 1).Trim();
                 } else if (Fact.COMMENT_FACTS.Contains(factType)) {

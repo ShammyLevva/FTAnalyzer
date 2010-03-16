@@ -37,7 +37,7 @@ namespace FTAnalyzer
         #region Static Functions
 
         public static string GetText(XmlNode node) {
-            if (node == null || node.FirstChild.Value == null)
+            if (node == null || node.FirstChild == null || node.FirstChild.Value == null)
             {
                 return "";
             }
