@@ -51,6 +51,7 @@
             this.tabIndividuals = new System.Windows.Forms.TabPage();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
             this.tabCensus = new System.Windows.Forms.TabPage();
+            this.ckbCensusResidence = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
             this.btnShowResults = new System.Windows.Forms.Button();
@@ -62,14 +63,9 @@
             this.ckbDirects = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbCensusDate = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbUSA = new System.Windows.Forms.RadioButton();
-            this.rbCanada = new System.Windows.Forms.RadioButton();
-            this.rbGB = new System.Windows.Forms.RadioButton();
-            this.rbWales = new System.Windows.Forms.RadioButton();
-            this.rbEngland = new System.Windows.Forms.RadioButton();
-            this.rbScotland = new System.Windows.Forms.RadioButton();
+            this.censusCountry = new UserControls.CensusCountry();
             this.tabLostCousins = new System.Windows.Forms.TabPage();
+            this.ckbLCResidence = new System.Windows.Forms.CheckBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.ckbHideRecorded = new System.Windows.Forms.CheckBox();
             this.ckbRestrictions = new System.Windows.Forms.CheckBox();
@@ -92,7 +88,6 @@
             this.tabAddresses = new System.Windows.Forms.TabPage();
             this.dgAddresses = new System.Windows.Forms.DataGridView();
             this.tabIGISearch = new System.Windows.Forms.TabPage();
-            this.label7 = new System.Windows.Forms.Label();
             this.pbIGISearch = new System.Windows.Forms.ProgressBar();
             this.btnIGIMarriageSearch = new System.Windows.Forms.Button();
             this.btnIGIChildrenSearch = new System.Windows.Forms.Button();
@@ -111,7 +106,6 @@
             this.tabCensus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.tabLostCousins.SuspendLayout();
             this.tabLooseDeaths.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).BeginInit();
@@ -328,13 +322,14 @@
             // 
             // tabCensus
             // 
+            this.tabCensus.Controls.Add(this.ckbCensusResidence);
             this.tabCensus.Controls.Add(this.label2);
             this.tabCensus.Controls.Add(this.udAgeFilter);
             this.tabCensus.Controls.Add(this.btnShowResults);
             this.tabCensus.Controls.Add(this.groupBox2);
             this.tabCensus.Controls.Add(this.label1);
             this.tabCensus.Controls.Add(this.cbCensusDate);
-            this.tabCensus.Controls.Add(this.groupBox1);
+            this.tabCensus.Controls.Add(this.censusCountry);
             this.tabCensus.Location = new System.Drawing.Point(4, 22);
             this.tabCensus.Name = "tabCensus";
             this.tabCensus.Padding = new System.Windows.Forms.Padding(3);
@@ -342,6 +337,16 @@
             this.tabCensus.TabIndex = 0;
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
+            // 
+            // ckbCensusResidence
+            // 
+            this.ckbCensusResidence.AutoSize = true;
+            this.ckbCensusResidence.Location = new System.Drawing.Point(19, 119);
+            this.ckbCensusResidence.Name = "ckbCensusResidence";
+            this.ckbCensusResidence.Size = new System.Drawing.Size(213, 17);
+            this.ckbCensusResidence.TabIndex = 14;
+            this.ckbCensusResidence.Text = "Treat \'Residence\' facts as Census facts";
+            this.ckbCensusResidence.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -376,7 +381,7 @@
             // 
             // btnShowResults
             // 
-            this.btnShowResults.Location = new System.Drawing.Point(19, 137);
+            this.btnShowResults.Location = new System.Drawing.Point(19, 142);
             this.btnShowResults.Name = "btnShowResults";
             this.btnShowResults.Size = new System.Drawing.Size(82, 25);
             this.btnShowResults.TabIndex = 4;
@@ -480,86 +485,16 @@
             this.cbCensusDate.TabIndex = 1;
             this.cbCensusDate.SelectedValueChanged += new System.EventHandler(this.cbCensusDate_SelectedValueChanged);
             // 
-            // groupBox1
+            // censusCountry
             // 
-            this.groupBox1.Controls.Add(this.rbUSA);
-            this.groupBox1.Controls.Add(this.rbCanada);
-            this.groupBox1.Controls.Add(this.rbGB);
-            this.groupBox1.Controls.Add(this.rbWales);
-            this.groupBox1.Controls.Add(this.rbEngland);
-            this.groupBox1.Controls.Add(this.rbScotland);
-            this.groupBox1.Location = new System.Drawing.Point(13, 15);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(326, 72);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Census Country";
-            // 
-            // rbUSA
-            // 
-            this.rbUSA.AutoSize = true;
-            this.rbUSA.Enabled = false;
-            this.rbUSA.Location = new System.Drawing.Point(79, 42);
-            this.rbUSA.Name = "rbUSA";
-            this.rbUSA.Size = new System.Drawing.Size(89, 17);
-            this.rbUSA.TabIndex = 5;
-            this.rbUSA.Text = "United States";
-            this.rbUSA.UseVisualStyleBackColor = true;
-            // 
-            // rbCanada
-            // 
-            this.rbCanada.AutoSize = true;
-            this.rbCanada.Location = new System.Drawing.Point(6, 42);
-            this.rbCanada.Name = "rbCanada";
-            this.rbCanada.Size = new System.Drawing.Size(62, 17);
-            this.rbCanada.TabIndex = 4;
-            this.rbCanada.Text = "Canada";
-            this.rbCanada.UseVisualStyleBackColor = true;
-            // 
-            // rbGB
-            // 
-            this.rbGB.AutoSize = true;
-            this.rbGB.Location = new System.Drawing.Point(210, 19);
-            this.rbGB.Name = "rbGB";
-            this.rbGB.Size = new System.Drawing.Size(83, 17);
-            this.rbGB.TabIndex = 3;
-            this.rbGB.Text = "Great Britain";
-            this.rbGB.UseVisualStyleBackColor = true;
-            // 
-            // rbWales
-            // 
-            this.rbWales.AutoSize = true;
-            this.rbWales.Location = new System.Drawing.Point(149, 19);
-            this.rbWales.Name = "rbWales";
-            this.rbWales.Size = new System.Drawing.Size(55, 17);
-            this.rbWales.TabIndex = 2;
-            this.rbWales.Text = "Wales";
-            this.rbWales.UseVisualStyleBackColor = true;
-            // 
-            // rbEngland
-            // 
-            this.rbEngland.AutoSize = true;
-            this.rbEngland.Location = new System.Drawing.Point(79, 19);
-            this.rbEngland.Name = "rbEngland";
-            this.rbEngland.Size = new System.Drawing.Size(64, 17);
-            this.rbEngland.TabIndex = 1;
-            this.rbEngland.Text = "England";
-            this.rbEngland.UseVisualStyleBackColor = true;
-            // 
-            // rbScotland
-            // 
-            this.rbScotland.AutoSize = true;
-            this.rbScotland.Checked = true;
-            this.rbScotland.Location = new System.Drawing.Point(6, 19);
-            this.rbScotland.Name = "rbScotland";
-            this.rbScotland.Size = new System.Drawing.Size(67, 17);
-            this.rbScotland.TabIndex = 0;
-            this.rbScotland.TabStop = true;
-            this.rbScotland.Text = "Scotland";
-            this.rbScotland.UseVisualStyleBackColor = true;
+            this.censusCountry.Location = new System.Drawing.Point(6, 15);
+            this.censusCountry.Name = "censusCountry";
+            this.censusCountry.Size = new System.Drawing.Size(336, 84);
+            this.censusCountry.TabIndex = 7;
             // 
             // tabLostCousins
             // 
+            this.tabLostCousins.Controls.Add(this.ckbLCResidence);
             this.tabLostCousins.Controls.Add(this.linkLabel1);
             this.tabLostCousins.Controls.Add(this.ckbHideRecorded);
             this.tabLostCousins.Controls.Add(this.ckbRestrictions);
@@ -577,11 +512,21 @@
             this.tabLostCousins.Text = "Lost Cousins";
             this.tabLostCousins.UseVisualStyleBackColor = true;
             // 
+            // ckbLCResidence
+            // 
+            this.ckbLCResidence.AutoSize = true;
+            this.ckbLCResidence.Location = new System.Drawing.Point(22, 68);
+            this.ckbLCResidence.Name = "ckbLCResidence";
+            this.ckbLCResidence.Size = new System.Drawing.Size(213, 17);
+            this.ckbLCResidence.TabIndex = 13;
+            this.ckbLCResidence.Text = "Treat \'Residence\' facts as Census facts";
+            this.ckbLCResidence.UseVisualStyleBackColor = true;
+            // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(19, 170);
+            this.linkLabel1.Location = new System.Drawing.Point(19, 189);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(186, 16);
             this.linkLabel1.TabIndex = 12;
@@ -616,7 +561,7 @@
             // 
             // btnLC1841EW
             // 
-            this.btnLC1841EW.Location = new System.Drawing.Point(22, 114);
+            this.btnLC1841EW.Location = new System.Drawing.Point(22, 133);
             this.btnLC1841EW.Name = "btnLC1841EW";
             this.btnLC1841EW.Size = new System.Drawing.Size(162, 36);
             this.btnLC1841EW.TabIndex = 8;
@@ -626,7 +571,7 @@
             // 
             // btnLC1911Ireland
             // 
-            this.btnLC1911Ireland.Location = new System.Drawing.Point(358, 114);
+            this.btnLC1911Ireland.Location = new System.Drawing.Point(358, 133);
             this.btnLC1911Ireland.Name = "btnLC1911Ireland";
             this.btnLC1911Ireland.Size = new System.Drawing.Size(162, 36);
             this.btnLC1911Ireland.TabIndex = 7;
@@ -636,7 +581,7 @@
             // 
             // btnLC1880USA
             // 
-            this.btnLC1880USA.Location = new System.Drawing.Point(190, 114);
+            this.btnLC1880USA.Location = new System.Drawing.Point(190, 133);
             this.btnLC1880USA.Name = "btnLC1880USA";
             this.btnLC1880USA.Size = new System.Drawing.Size(162, 36);
             this.btnLC1880USA.TabIndex = 6;
@@ -646,7 +591,7 @@
             // 
             // btnLC1881EW
             // 
-            this.btnLC1881EW.Location = new System.Drawing.Point(22, 72);
+            this.btnLC1881EW.Location = new System.Drawing.Point(22, 91);
             this.btnLC1881EW.Name = "btnLC1881EW";
             this.btnLC1881EW.Size = new System.Drawing.Size(162, 36);
             this.btnLC1881EW.TabIndex = 5;
@@ -656,7 +601,7 @@
             // 
             // btnLC1881Canada
             // 
-            this.btnLC1881Canada.Location = new System.Drawing.Point(358, 72);
+            this.btnLC1881Canada.Location = new System.Drawing.Point(358, 91);
             this.btnLC1881Canada.Name = "btnLC1881Canada";
             this.btnLC1881Canada.Size = new System.Drawing.Size(162, 36);
             this.btnLC1881Canada.TabIndex = 4;
@@ -666,7 +611,7 @@
             // 
             // btnLC1881Scot
             // 
-            this.btnLC1881Scot.Location = new System.Drawing.Point(190, 72);
+            this.btnLC1881Scot.Location = new System.Drawing.Point(190, 91);
             this.btnLC1881Scot.Name = "btnLC1881Scot";
             this.btnLC1881Scot.Size = new System.Drawing.Size(162, 36);
             this.btnLC1881Scot.TabIndex = 0;
@@ -819,7 +764,6 @@
             // 
             // tabIGISearch
             // 
-            this.tabIGISearch.Controls.Add(this.label7);
             this.tabIGISearch.Controls.Add(this.pbIGISearch);
             this.tabIGISearch.Controls.Add(this.btnIGIMarriageSearch);
             this.tabIGISearch.Controls.Add(this.btnIGIChildrenSearch);
@@ -834,26 +778,16 @@
             this.tabIGISearch.Text = "IGI Search";
             this.tabIGISearch.UseVisualStyleBackColor = true;
             // 
-            // label7
-            // 
-            this.label7.Location = new System.Drawing.Point(460, 42);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(330, 52);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Note searches are currently limited to England && Scotland and in the event of an" +
-                " unknown location it will currently default to Scotland. Future versions will ha" +
-                "ve a choice of default country.";
-            // 
             // pbIGISearch
             // 
-            this.pbIGISearch.Location = new System.Drawing.Point(147, 38);
+            this.pbIGISearch.Location = new System.Drawing.Point(552, 12);
             this.pbIGISearch.Name = "pbIGISearch";
-            this.pbIGISearch.Size = new System.Drawing.Size(296, 24);
+            this.pbIGISearch.Size = new System.Drawing.Size(392, 24);
             this.pbIGISearch.TabIndex = 6;
             // 
             // btnIGIMarriageSearch
             // 
-            this.btnIGIMarriageSearch.Location = new System.Drawing.Point(146, 68);
+            this.btnIGIMarriageSearch.Location = new System.Drawing.Point(692, 68);
             this.btnIGIMarriageSearch.Name = "btnIGIMarriageSearch";
             this.btnIGIMarriageSearch.Size = new System.Drawing.Size(123, 27);
             this.btnIGIMarriageSearch.TabIndex = 5;
@@ -863,7 +797,7 @@
             // 
             // btnIGIChildrenSearch
             // 
-            this.btnIGIChildrenSearch.Location = new System.Drawing.Point(320, 68);
+            this.btnIGIChildrenSearch.Location = new System.Drawing.Point(821, 68);
             this.btnIGIChildrenSearch.Name = "btnIGIChildrenSearch";
             this.btnIGIChildrenSearch.Size = new System.Drawing.Size(123, 27);
             this.btnIGIChildrenSearch.TabIndex = 4;
@@ -953,8 +887,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.tabLostCousins.ResumeLayout(false);
             this.tabLostCousins.PerformLayout();
             this.tabLooseDeaths.ResumeLayout(false);
@@ -1011,13 +943,6 @@
         private System.Windows.Forms.DataGridView dgParishes;
         private System.Windows.Forms.DataGridView dgAddresses;
         private System.Windows.Forms.RichTextBox rtbOutput;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rbScotland;
-        private System.Windows.Forms.RadioButton rbEngland;
-        private System.Windows.Forms.RadioButton rbWales;
-        private System.Windows.Forms.RadioButton rbGB;
-        private System.Windows.Forms.RadioButton rbUSA;
-        private System.Windows.Forms.RadioButton rbCanada;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbCensusDate;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -1054,7 +979,9 @@
         private System.Windows.Forms.Button btnIGIMarriageSearch;
         private System.Windows.Forms.Button btnIGIChildrenSearch;
         private System.Windows.Forms.ProgressBar pbIGISearch;
-        private System.Windows.Forms.Label label7;
+        private UserControls.CensusCountry censusCountry;
+        private System.Windows.Forms.CheckBox ckbLCResidence;
+        private System.Windows.Forms.CheckBox ckbCensusResidence;
     }
 }
 

@@ -114,6 +114,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\CensusCountry.resx">
+      <DependentUpon>CensusCountry.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\GeneralSettings.resx">
       <DependentUpon>GeneralSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -267,6 +270,12 @@
     <Compile Include="GedcomParser\AnselOutputStreamWriter.cs" />
     <Compile Include="GedcomParser\GedcomToXml.cs" />
     <Compile Include="Core\ParentalGroup.cs" />
+    <Compile Include="UserControls\CensusCountry.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\CensusCountry.Designer.cs">
+      <DependentUpon>CensusCountry.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ExtendedToolTipLabel.cs">
       <SubType>Component</SubType>
     </Compile>

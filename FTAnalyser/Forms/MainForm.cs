@@ -227,7 +227,7 @@ namespace FTAnalyzer
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
 
             Forms.Census census = new Forms.Census();
-            census.setupCensus(censusRP, censusDate, false, (int) udAgeFilter.Value);
+            census.setupCensus(censusRP, censusDate, false, ckbCensusResidence.Checked, (int) udAgeFilter.Value);
             census.Text = censusDate.StartDate.Year.ToString() + " Census Records to search for";
             census.Show();
         }
@@ -235,22 +235,22 @@ namespace FTAnalyzer
         private RegistrationFilter createRegistrationFilter()
         {
             RegistrationFilter locationFilter = new TrueFilter();
-            if (rbScotland.Checked)
+            if (censusCountry.Scotland)
                 locationFilter = LocationFilter.SCOTLAND;
-            if (rbEngland.Checked)
+            if (censusCountry.England)
                 locationFilter = LocationFilter.ENGLAND;
-            if (rbWales.Checked)
+            if (censusCountry.Wales)
                 locationFilter = LocationFilter.WALES;
-            if (rbGB.Checked)
+            if (censusCountry.GB)
                 locationFilter = new OrFilter(LocationFilter.SCOTLAND, LocationFilter.ENGLAND, LocationFilter.WALES);
-            if (rbCanada.Checked)
+            if (censusCountry.Canada)
             {
                 locationFilter = LocationFilter.CANADA;
                 censusDate = new FactDate(cbCensusDate.Text); // Makes valid Canadian census date any day in that year as I don't know exact date
             }
-            if (rbUSA.Checked)
+            if (censusCountry.USA)
                 locationFilter = LocationFilter.USA;
-            
+           
             RegistrationFilter relationFilter = new FalseFilter();
             if (ckbBlood.Checked)
                 relationFilter = new OrFilter(new RelationFilter(Individual.BLOOD), relationFilter);
@@ -312,7 +312,7 @@ namespace FTAnalyzer
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
 
             Forms.Census census = new Forms.Census();
-            census.setupCensus(censusRP, censusDate, true, 110);
+            census.setupCensus(censusRP, censusDate, ckbLCResidence.Checked, true, 110);
             census.Text = reportTitle;
             HourGlass(false);
             census.Show();

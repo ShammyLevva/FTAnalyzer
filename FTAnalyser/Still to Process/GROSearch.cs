@@ -78,27 +78,26 @@ namespace FTAnalyzer
             process("Online_marriages", onlineMarriagesRP, marriages, marriageFormatter);
             marriages = null;
             Console.WriteLine("GRO marriages files created");
-
+/*
             List<Registration> census;
             CensusOutputFormatter censusFormatter = new CensusOutputFormatter();
-              
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1841, false);
+            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1841, false, false);
             process("1841_census", censusRP, census, censusFormatter);
             Console.WriteLine("1841 Census Details written.");
 
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1851, false);
+            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1851, false, false);
             process("1851_census", censusRP, census, censusFormatter);
             Console.WriteLine("1851 Census Details written.");
 
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1861, false);
+            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1861, false, false);
             process("1861_census", censusRP, census, censusFormatter);
             Console.WriteLine("1861 Census Details written.");
 
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1871, false);
+            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1871, false, false);
             process("1871_census", censusRP, census, censusFormatter);
             Console.WriteLine("1871 Census Details written.");
 
-            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1881, false);
+            census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1881, false, false);
             process("1881_census", censusRP, census, censusFormatter);
             Console.WriteLine("1881 Census Details written.");
 
@@ -109,7 +108,7 @@ namespace FTAnalyzer
             census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1901, false);
             process("1901_census", censusRP, census, censusFormatter);
             Console.WriteLine("1901 Census Details written.");
-
+*/
             Console.WriteLine("GRO Search completed.");
         }    
         

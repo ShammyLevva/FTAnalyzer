@@ -332,12 +332,14 @@ namespace FTAnalyzer
             return this.gender.Equals("M");
         }
 
-        public bool isCensusDone(FactDate when)
+        public bool isCensusDone(FactDate when, bool includeResidence)
         {
             foreach (Fact f in facts)
             {
                 if (f.FactType == Fact.CENSUS && f.FactDate.overlaps(when))
                     return true;
+                if (includeResidence && f.FactType == Fact.RESIDENCE && f.FactDate.overlaps(when))
+                    return true; 
             }
             return false;
         }

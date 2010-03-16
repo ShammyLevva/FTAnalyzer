@@ -100,10 +100,10 @@ namespace FTAnalyzer
             process("GROS_marriages", grosMarriagesRP, marriages, marriageFormatter);
             marriages = null;
             Console.WriteLine("GROS marriages files created");
-
+ /*
             List<Registration> census;
             CensusOutputFormatter censusFormatter = new CensusOutputFormatter();
-              
+             
             census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1841, false);
             process("bisset_1841_census", bissetRP, census, censusFormatter);
             Console.WriteLine("Bisset 1841 Census Details written.");
@@ -159,7 +159,7 @@ namespace FTAnalyzer
             census = ft.getAllCensusRegistrations(FactDate.UKCENSUS1901, false);
             process("1901_census", censusRP, census, censusFormatter);
             Console.WriteLine("1901 Census Details written.");
-
+*/
             Console.WriteLine("GROS Search completed.");
         }    
         

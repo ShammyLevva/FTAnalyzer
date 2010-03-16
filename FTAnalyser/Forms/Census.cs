@@ -19,10 +19,11 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
         }
 
-        public void setupCensus(RegistrationsProcessor rp, FactDate date, bool censusDone, int maxAge)
+        public void setupCensus(RegistrationsProcessor rp, FactDate date, 
+            bool censusDone, bool includeResidence, int maxAge)
         {
             FamilyTree ft = FamilyTree.Instance;
-            List<Registration> regs = ft.getAllCensusRegistrations(date, censusDone);
+            List<Registration> regs = ft.getAllCensusRegistrations(date, censusDone, includeResidence);
             List<Registration> census = rp.processRegistrations(regs);
             List<IDisplayCensus> ds = new List<IDisplayCensus>();
             rowStyles = new Dictionary<int, DataGridViewCellStyle>();
