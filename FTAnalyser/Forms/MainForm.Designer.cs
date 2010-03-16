@@ -338,7 +338,7 @@
             this.tabCensus.Location = new System.Drawing.Point(4, 22);
             this.tabCensus.Name = "tabCensus";
             this.tabCensus.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCensus.Size = new System.Drawing.Size(968, 394);
+            this.tabCensus.Size = new System.Drawing.Size(952, 394);
             this.tabCensus.TabIndex = 0;
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
@@ -572,7 +572,7 @@
             this.tabLostCousins.Location = new System.Drawing.Point(4, 22);
             this.tabLostCousins.Name = "tabLostCousins";
             this.tabLostCousins.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLostCousins.Size = new System.Drawing.Size(968, 394);
+            this.tabLostCousins.Size = new System.Drawing.Size(952, 394);
             this.tabLostCousins.TabIndex = 5;
             this.tabLostCousins.Text = "Lost Cousins";
             this.tabLostCousins.UseVisualStyleBackColor = true;
@@ -680,7 +680,7 @@
             this.tabLooseDeaths.Location = new System.Drawing.Point(4, 22);
             this.tabLooseDeaths.Name = "tabLooseDeaths";
             this.tabLooseDeaths.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLooseDeaths.Size = new System.Drawing.Size(968, 394);
+            this.tabLooseDeaths.Size = new System.Drawing.Size(952, 394);
             this.tabLooseDeaths.TabIndex = 3;
             this.tabLooseDeaths.Text = "Loose Deaths";
             this.tabLooseDeaths.UseVisualStyleBackColor = true;
@@ -694,7 +694,7 @@
             this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLooseDeaths.Location = new System.Drawing.Point(0, 0);
             this.dgLooseDeaths.Name = "dgLooseDeaths";
-            this.dgLooseDeaths.Size = new System.Drawing.Size(1001, 417);
+            this.dgLooseDeaths.Size = new System.Drawing.Size(952, 394);
             this.dgLooseDeaths.TabIndex = 0;
             // 
             // tabLocations
@@ -829,7 +829,7 @@
             this.tabIGISearch.Controls.Add(this.label3);
             this.tabIGISearch.Location = new System.Drawing.Point(4, 22);
             this.tabIGISearch.Name = "tabIGISearch";
-            this.tabIGISearch.Size = new System.Drawing.Size(968, 394);
+            this.tabIGISearch.Size = new System.Drawing.Size(952, 394);
             this.tabIGISearch.TabIndex = 6;
             this.tabIGISearch.Text = "IGI Search";
             this.tabIGISearch.UseVisualStyleBackColor = true;
