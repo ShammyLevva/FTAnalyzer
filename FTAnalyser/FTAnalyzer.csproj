@@ -129,6 +129,9 @@
     <EmbeddedResource Include="UserControls\ProxySettings.resx">
       <DependentUpon>ProxySettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\RelationTypes.resx">
+      <DependentUpon>RelationTypes.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -306,6 +309,12 @@
     </Compile>
     <Compile Include="UserControls\ProxySettings.designer.cs">
       <DependentUpon>ProxySettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\RelationTypes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\RelationTypes.Designer.cs">
+      <DependentUpon>RelationTypes.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities\DoubleMetaphone.cs" />
     <Compile Include="Utilities\ShortDoubleMetaphone.cs" />

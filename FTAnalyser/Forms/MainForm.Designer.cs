@@ -55,15 +55,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
             this.btnShowResults = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.ckbUnknown = new System.Windows.Forms.CheckBox();
-            this.ckbMarriageDB = new System.Windows.Forms.CheckBox();
-            this.ckbMarriage = new System.Windows.Forms.CheckBox();
-            this.ckbBlood = new System.Windows.Forms.CheckBox();
-            this.ckbDirects = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbCensusDate = new System.Windows.Forms.ComboBox();
-            this.censusCountry = new UserControls.CensusCountry();
             this.tabLostCousins = new System.Windows.Forms.TabPage();
             this.ckbLCResidence = new System.Windows.Forms.CheckBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -105,7 +98,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.tabCensus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
-            this.groupBox2.SuspendLayout();
             this.tabLostCousins.SuspendLayout();
             this.tabLooseDeaths.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).BeginInit();
@@ -326,10 +318,8 @@
             this.tabCensus.Controls.Add(this.label2);
             this.tabCensus.Controls.Add(this.udAgeFilter);
             this.tabCensus.Controls.Add(this.btnShowResults);
-            this.tabCensus.Controls.Add(this.groupBox2);
             this.tabCensus.Controls.Add(this.label1);
             this.tabCensus.Controls.Add(this.cbCensusDate);
-            this.tabCensus.Controls.Add(this.censusCountry);
             this.tabCensus.Location = new System.Drawing.Point(4, 22);
             this.tabCensus.Name = "tabCensus";
             this.tabCensus.Padding = new System.Windows.Forms.Padding(3);
@@ -389,74 +379,6 @@
             this.btnShowResults.UseVisualStyleBackColor = true;
             this.btnShowResults.Click += new System.EventHandler(this.btnShowResults_Click);
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.ckbUnknown);
-            this.groupBox2.Controls.Add(this.ckbMarriageDB);
-            this.groupBox2.Controls.Add(this.ckbMarriage);
-            this.groupBox2.Controls.Add(this.ckbBlood);
-            this.groupBox2.Controls.Add(this.ckbDirects);
-            this.groupBox2.Location = new System.Drawing.Point(345, 15);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(317, 72);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Relationship Types";
-            // 
-            // ckbUnknown
-            // 
-            this.ckbUnknown.AutoSize = true;
-            this.ckbUnknown.Location = new System.Drawing.Point(243, 20);
-            this.ckbUnknown.Name = "ckbUnknown";
-            this.ckbUnknown.Size = new System.Drawing.Size(72, 17);
-            this.ckbUnknown.TabIndex = 4;
-            this.ckbUnknown.Text = "Unknown";
-            this.ckbUnknown.UseVisualStyleBackColor = true;
-            // 
-            // ckbMarriageDB
-            // 
-            this.ckbMarriageDB.AutoSize = true;
-            this.ckbMarriageDB.Location = new System.Drawing.Point(116, 42);
-            this.ckbMarriageDB.Name = "ckbMarriageDB";
-            this.ckbMarriageDB.Size = new System.Drawing.Size(146, 17);
-            this.ckbMarriageDB.TabIndex = 3;
-            this.ckbMarriageDB.Text = "Married to Blood or Direct";
-            this.ckbMarriageDB.UseVisualStyleBackColor = true;
-            // 
-            // ckbMarriage
-            // 
-            this.ckbMarriage.AutoSize = true;
-            this.ckbMarriage.Location = new System.Drawing.Point(116, 19);
-            this.ckbMarriage.Name = "ckbMarriage";
-            this.ckbMarriage.Size = new System.Drawing.Size(121, 17);
-            this.ckbMarriage.TabIndex = 2;
-            this.ckbMarriage.Text = "Related by Marriage";
-            this.ckbMarriage.UseVisualStyleBackColor = true;
-            // 
-            // ckbBlood
-            // 
-            this.ckbBlood.AutoSize = true;
-            this.ckbBlood.Checked = true;
-            this.ckbBlood.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbBlood.Location = new System.Drawing.Point(6, 43);
-            this.ckbBlood.Name = "ckbBlood";
-            this.ckbBlood.Size = new System.Drawing.Size(100, 17);
-            this.ckbBlood.TabIndex = 1;
-            this.ckbBlood.Text = "Blood Relations";
-            this.ckbBlood.UseVisualStyleBackColor = true;
-            // 
-            // ckbDirects
-            // 
-            this.ckbDirects.AutoSize = true;
-            this.ckbDirects.Checked = true;
-            this.ckbDirects.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbDirects.Location = new System.Drawing.Point(6, 20);
-            this.ckbDirects.Name = "ckbDirects";
-            this.ckbDirects.Size = new System.Drawing.Size(104, 17);
-            this.ckbDirects.TabIndex = 0;
-            this.ckbDirects.Text = "Direct Ancestors";
-            this.ckbDirects.UseVisualStyleBackColor = true;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -484,13 +406,6 @@
             this.cbCensusDate.Size = new System.Drawing.Size(49, 21);
             this.cbCensusDate.TabIndex = 1;
             this.cbCensusDate.SelectedValueChanged += new System.EventHandler(this.cbCensusDate_SelectedValueChanged);
-            // 
-            // censusCountry
-            // 
-            this.censusCountry.Location = new System.Drawing.Point(6, 15);
-            this.censusCountry.Name = "censusCountry";
-            this.censusCountry.Size = new System.Drawing.Size(336, 84);
-            this.censusCountry.TabIndex = 7;
             // 
             // tabLostCousins
             // 
@@ -885,8 +800,6 @@
             this.tabCensus.ResumeLayout(false);
             this.tabCensus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.tabLostCousins.ResumeLayout(false);
             this.tabLostCousins.PerformLayout();
             this.tabLooseDeaths.ResumeLayout(false);
@@ -945,12 +858,6 @@
         private System.Windows.Forms.RichTextBox rtbOutput;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbCensusDate;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox ckbBlood;
-        private System.Windows.Forms.CheckBox ckbDirects;
-        private System.Windows.Forms.CheckBox ckbMarriageDB;
-        private System.Windows.Forms.CheckBox ckbMarriage;
-        private System.Windows.Forms.CheckBox ckbUnknown;
         private System.Windows.Forms.Button btnShowResults;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
@@ -979,7 +886,6 @@
         private System.Windows.Forms.Button btnIGIMarriageSearch;
         private System.Windows.Forms.Button btnIGIChildrenSearch;
         private System.Windows.Forms.ProgressBar pbIGISearch;
-        private UserControls.CensusCountry censusCountry;
         private System.Windows.Forms.CheckBox ckbLCResidence;
         private System.Windows.Forms.CheckBox ckbCensusResidence;
     }

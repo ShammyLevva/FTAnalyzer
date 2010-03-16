@@ -235,7 +235,7 @@ namespace FTAnalyzer
         private RegistrationFilter createRegistrationFilter()
         {
             RegistrationFilter locationFilter = new TrueFilter();
-            if (censusCountry.Scotland)
+/*            if (censusCountry.Scotland)
                 locationFilter = LocationFilter.SCOTLAND;
             if (censusCountry.England)
                 locationFilter = LocationFilter.ENGLAND;
@@ -250,9 +250,9 @@ namespace FTAnalyzer
             }
             if (censusCountry.USA)
                 locationFilter = LocationFilter.USA;
-           
+*/           
             RegistrationFilter relationFilter = new FalseFilter();
-            if (ckbBlood.Checked)
+/*            if (ckbBlood.Checked)
                 relationFilter = new OrFilter(new RelationFilter(Individual.BLOOD), relationFilter);
             if (ckbDirects.Checked)
                 relationFilter = new OrFilter(new RelationFilter(Individual.DIRECT), relationFilter);
@@ -262,7 +262,7 @@ namespace FTAnalyzer
                 relationFilter = new OrFilter(new RelationFilter(Individual.MARRIAGEDB), relationFilter);
             if (ckbUnknown.Checked)
                 relationFilter = new OrFilter(new RelationFilter(Individual.UNKNOWN), relationFilter);
-
+*/
             return new AndFilter(locationFilter, relationFilter, new DateFilter(censusDate));
         }
 
