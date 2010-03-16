@@ -1,4 +1,4 @@
-﻿namespace FTAnalyzer.UserControls
+﻿namespace FTAnalyzer
 {
     partial class RelationTypes
     {

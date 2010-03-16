@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FTAnalyzer.UserControls
+namespace FTAnalyzer
 {
     public partial class RelationTypes : UserControl
     {
