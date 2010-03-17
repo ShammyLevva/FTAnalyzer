@@ -235,6 +235,25 @@ namespace FTAnalyzer
             }
         }
 
+        public string MarriageFilename
+        {
+            get {
+                string husbandsName = husband == null ? "Unknown" : husband.Name;
+                string wifesName = wife == null ? "Unknown" : wife.Name;
+                return familyGed + " - Marriage of " + husbandsName + " and " + wifesName + ".html";
+            }
+        }
+
+        public string ChildrenFilename
+        {
+            get
+            {
+                string husbandsName = husband == null ? "Unknown" : husband.Name;
+                string wifesName = wife == null ? "Unknown" : wife.Name;
+                return familyGed + " - Children of " + husbandsName + " and " + wifesName + ".html";
+            }
+        }
+
         #endregion
 
         public void setSpouseRelation(Individual ind, int relationType)

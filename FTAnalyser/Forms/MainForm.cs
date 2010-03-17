@@ -497,7 +497,10 @@ namespace FTAnalyzer
         private void btnViewResults_Click(object sender, EventArgs e)
         {
             Forms.IGISearchResultsViewer frmResults = new Forms.IGISearchResultsViewer(txtIGIfolder.Text);
-            frmResults.Show();
+            if (frmResults.ResultsPresent)
+                frmResults.Show();
+            else
+                MessageBox.Show("Sorry there are no results files in the selected folder.");
         }
     }
 }

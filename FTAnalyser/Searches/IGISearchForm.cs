@@ -360,10 +360,10 @@ namespace FTAnalyzer
         public void SearchIGI(Family family, string dirname, int searchType) {
             if (family != null) {
 			    string filename;
-                if(searchType == MARRIAGESEARCH)
-                    filename = dirname + "\\marriages" + family.FamilyGed + ".html";
+                if (searchType == MARRIAGESEARCH)
+                    filename = dirname + "\\" + family.MarriageFilename;
                 else
-                    filename = dirname + "\\children" + family.FamilyGed + ".html";
+                    filename = dirname + "\\" + family.ChildrenFilename;
                 if(!File.Exists(filename)) // don't bother processing if file already exists.
                 {
                     if (family.getPreferredFact(Fact.IGISEARCH) == null && family.Husband != null && family.Wife != null)

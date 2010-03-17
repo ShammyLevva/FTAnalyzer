@@ -28,25 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbResults = new System.Windows.Forms.ListBox();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
+            this.tooltips = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // lbResults
             // 
             this.lbResults.FormattingEnabled = true;
-            this.lbResults.Location = new System.Drawing.Point(10, 8);
+            this.lbResults.Location = new System.Drawing.Point(12, 5);
             this.lbResults.Name = "lbResults";
-            this.lbResults.Size = new System.Drawing.Size(184, 563);
+            this.lbResults.Size = new System.Drawing.Size(256, 563);
             this.lbResults.TabIndex = 0;
             this.lbResults.SelectedIndexChanged += new System.EventHandler(this.lbResults_SelectedIndexChanged);
+            this.lbResults.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lbResults_MouseMove);
             // 
             // webBrowser
             // 
-            this.webBrowser.Location = new System.Drawing.Point(200, 8);
+            this.webBrowser.Location = new System.Drawing.Point(274, 5);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(815, 560);
+            this.webBrowser.Size = new System.Drawing.Size(741, 560);
             this.webBrowser.TabIndex = 1;
             // 
             // IGISearchResultsViewer
@@ -66,5 +69,6 @@
 
         private System.Windows.Forms.ListBox lbResults;
         private System.Windows.Forms.WebBrowser webBrowser;
+        private System.Windows.Forms.ToolTip tooltips;
     }
 }

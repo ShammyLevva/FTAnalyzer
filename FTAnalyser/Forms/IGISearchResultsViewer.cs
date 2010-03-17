@@ -13,13 +13,18 @@ namespace FTAnalyzer.Forms
     public partial class IGISearchResultsViewer : Form
     {
         private string folder;
+        private string lasttip = string.Empty;
 
         public IGISearchResultsViewer(string folder)
         {
             InitializeComponent();
             this.folder = folder;
+            this.Text = "IGI Search results in folder " + folder;
             SetupResults();
         }
+
+        public bool ResultsPresent
+        { get { return lbResults.Items.Count > 0; } }
 
         private void SetupResults()
         {
@@ -36,6 +41,21 @@ namespace FTAnalyzer.Forms
         {
             FileInfo fi = (FileInfo) lbResults.SelectedItem;
             webBrowser.Navigate(fi.FullName);
+        }
+
+        private void lbResults_MouseMove(object sender, MouseEventArgs e)
+        {
+            ListBox listBox = (ListBox)sender;
+            int index = listBox.IndexFromPoint(e.Location);
+            if (index > -1 && index < listBox.Items.Count)
+            {
+                string tip = listBox.Items[index].ToString();
+                if (tip != lasttip)
+                {
+                    tooltips.SetToolTip(listBox, tip);
+                    lasttip = tip;
+                }
+            }
         }
     }
 }
