@@ -36,6 +36,7 @@ namespace FTAnalyzer
         private TextWriter resultFile;
         private RichTextBox rtbOutput;
         private string defaultCountry = FactLocation.SCOTLAND;
+        private int resultCount = 0;
         	
         private static readonly string NOMATCHES1 = "<strong>International Genealogical Index / British Isles</strong> (No Matches)";
         private static readonly string NOMATCHES2 = "<strong><span id='searchPageTitle'>International Genealogical Index / British Isles</span></strong> (No Matches)";
@@ -55,8 +56,11 @@ namespace FTAnalyzer
         public IGISearchForm(RichTextBox rtb, string defaultCountry) {
             rtbOutput = rtb;
             this.defaultCountry = defaultCountry;
+            this.resultCount = 0;
             Initialise();
         }
+
+        public int ResultCount { get { return resultCount; } }
 
         private void Initialise() {
             parameters = new Dictionary<string,string>();
@@ -481,6 +485,7 @@ namespace FTAnalyzer
                     output.WriteLine(str);
                     output.Close();
                     rtbOutput.AppendText("Results File written to " + filename + "\n");
+                    resultCount++;
                 }
             }
             catch (Exception e)

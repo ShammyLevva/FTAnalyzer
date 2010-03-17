@@ -12,7 +12,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.2.1.0";
+        private string VERSION = "1.3.0.0";
         private bool _checkForUpdatesEnabled = true;
         private System.Threading.Timer _timerCheckForUpdates;
 
@@ -492,6 +492,12 @@ namespace FTAnalyzer
         private void cenDate_CensusChanged(object sender, EventArgs e)
         {
             censusDate = cenDate.SelectedDate;
+        }
+
+        private void btnViewResults_Click(object sender, EventArgs e)
+        {
+            Forms.IGISearchResultsViewer frmResults = new Forms.IGISearchResultsViewer(txtIGIfolder.Text);
+            frmResults.Show();
         }
     }
 }

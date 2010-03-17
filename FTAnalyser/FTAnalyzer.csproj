@@ -103,6 +103,9 @@
     <EmbeddedResource Include="Forms\Controls\CensusDateSelector.resx">
       <DependentUpon>CensusDateSelector.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IGISearchResultsViewer.resx">
+      <DependentUpon>IGISearchResultsViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Individuals.resx">
       <DependentUpon>Individuals.cs</DependentUpon>
     </EmbeddedResource>
@@ -235,6 +238,12 @@
     </Compile>
     <Compile Include="Forms\Controls\CensusDateSelector.Designer.cs">
       <DependentUpon>CensusDateSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IGISearchResultsViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IGISearchResultsViewer.Designer.cs">
+      <DependentUpon>IGISearchResultsViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Individuals.cs">
       <SubType>Form</SubType>
