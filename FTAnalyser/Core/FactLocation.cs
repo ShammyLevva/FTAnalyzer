@@ -320,8 +320,39 @@ namespace FTAnalyzer
 	                country = location.Trim();
 	                level = COUNTRY;
 	            }
+                fixEmptyFields();
 	            fixCities();
                 fixCountries();
+            }
+        }
+
+        private void fixEmptyFields()
+        {
+            if (country.Length == 0)
+            {
+                country = region;
+                region = parish;
+                parish = address;
+                address = place;
+                place = "";
+            }
+            if (region.Length == 0)
+            {
+                region = parish;
+                parish = address;
+                address = place;
+                place = "";
+            }
+            if (parish.Length == 0)
+            {
+                parish = address;
+                address = place;
+                place = "";
+            }
+            if (address.Length == 0)
+            {
+                address = place;
+                place = "";
             }
         }
 
