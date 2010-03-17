@@ -31,7 +31,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbUSA = new System.Windows.Forms.RadioButton();
             this.rbCanada = new System.Windows.Forms.RadioButton();
-            this.rbGB = new System.Windows.Forms.RadioButton();
+            this.rbUK = new System.Windows.Forms.RadioButton();
             this.rbWales = new System.Windows.Forms.RadioButton();
             this.rbEngland = new System.Windows.Forms.RadioButton();
             this.rbScotland = new System.Windows.Forms.RadioButton();
@@ -42,13 +42,13 @@
             // 
             this.groupBox1.Controls.Add(this.rbUSA);
             this.groupBox1.Controls.Add(this.rbCanada);
-            this.groupBox1.Controls.Add(this.rbGB);
+            this.groupBox1.Controls.Add(this.rbUK);
             this.groupBox1.Controls.Add(this.rbWales);
             this.groupBox1.Controls.Add(this.rbEngland);
             this.groupBox1.Controls.Add(this.rbScotland);
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(326, 72);
+            this.groupBox1.Size = new System.Drawing.Size(254, 72);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Census Country";
@@ -75,16 +75,15 @@
             this.rbCanada.UseVisualStyleBackColor = true;
             this.rbCanada.CheckedChanged += new System.EventHandler(this.rbCanada_CheckedChanged);
             // 
-            // rbGB
+            // rbUK
             // 
-            this.rbGB.AutoSize = true;
-            this.rbGB.Location = new System.Drawing.Point(210, 19);
-            this.rbGB.Name = "rbGB";
-            this.rbGB.Size = new System.Drawing.Size(83, 17);
-            this.rbGB.TabIndex = 3;
-            this.rbGB.Text = "Great Britain";
-            this.rbGB.UseVisualStyleBackColor = true;
-            this.rbGB.CheckedChanged += new System.EventHandler(this.rbGB_CheckedChanged);
+            this.rbUK.AutoSize = true;
+            this.rbUK.Location = new System.Drawing.Point(210, 19);
+            this.rbUK.Name = "rbUK";
+            this.rbUK.Size = new System.Drawing.Size(40, 17);
+            this.rbUK.TabIndex = 3;
+            this.rbUK.Text = "UK";
+            this.rbUK.UseVisualStyleBackColor = true;
             // 
             // rbWales
             // 
@@ -127,7 +126,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
             this.Name = "CensusCountry";
-            this.Size = new System.Drawing.Size(331, 78);
+            this.Size = new System.Drawing.Size(259, 78);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -139,7 +138,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton rbUSA;
         private System.Windows.Forms.RadioButton rbCanada;
-        private System.Windows.Forms.RadioButton rbGB;
+        private System.Windows.Forms.RadioButton rbUK;
         private System.Windows.Forms.RadioButton rbWales;
         private System.Windows.Forms.RadioButton rbEngland;
         private System.Windows.Forms.RadioButton rbScotland;

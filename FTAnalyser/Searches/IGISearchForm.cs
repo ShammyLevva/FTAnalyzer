@@ -91,7 +91,7 @@ namespace FTAnalyzer
                 setParameter("juris1friendly", country);
                 setParameter("juris2friendly", "All Counties");
             }
-            else if (country == FactLocation.GB)
+            else if (country == FactLocation.UK)
             {
                 setParameter(COUNTRY, "2");
                 setParameter(SHIRE, "");

@@ -29,7 +29,8 @@ namespace Controls
                 _loading = true;
                 country = value; 
                 cbCensusDate.Items.Clear();
-                if (country == FactLocation.SCOTLAND || country == FactLocation.ENGLAND || country == FactLocation.WALES)
+                if (country == FactLocation.SCOTLAND || country == FactLocation.ENGLAND || 
+                    country == FactLocation.WALES || country == FactLocation.UK)
                 {
                     cbCensusDate.Items.Add(CensusDate.UKCENSUS1841);
                     cbCensusDate.Items.Add(CensusDate.UKCENSUS1851);

@@ -21,7 +21,7 @@ namespace Controls
         public bool Scotland { get { return rbScotland.Checked; } }
         public bool England { get { return rbEngland.Checked; } }
         public bool Wales { get { return rbWales.Checked; } }
-        public bool GB { get { return rbGB.Checked; } }
+        public bool UK { get { return rbUK.Checked; } }
         public bool Canada { get { return rbCanada.Checked; } }
         public bool USA { get { return rbUSA.Checked; } }
 
@@ -32,7 +32,7 @@ namespace Controls
                 if (Scotland) return FactLocation.SCOTLAND;
                 if (England) return FactLocation.ENGLAND;
                 if (Wales) return FactLocation.WALES;
-                if (GB) return FactLocation.GB;
+                if (UK) return FactLocation.UK;
                 if (Canada) return FactLocation.CANADA;
                 if (USA) return FactLocation.USA;
                 return FactLocation.ENGLAND;
@@ -70,7 +70,7 @@ namespace Controls
             OnCountryChanged(e);
         }
 
-        private void rbGB_CheckedChanged(object sender, EventArgs e)
+        private void rbUK_CheckedChanged(object sender, EventArgs e)
         {
             OnCountryChanged(e);
         }

@@ -242,7 +242,7 @@ namespace FTAnalyzer
                 locationFilter = LocationFilter.ENGLAND;
             if (censusCountry.Wales)
                 locationFilter = LocationFilter.WALES;
-            if (censusCountry.GB)
+            if (censusCountry.UK)
                 locationFilter = new OrFilter(LocationFilter.SCOTLAND, LocationFilter.ENGLAND, LocationFilter.WALES);
             if (censusCountry.Canada)
             {
