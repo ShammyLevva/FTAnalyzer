@@ -22,7 +22,7 @@ namespace FTAnalyzer
 
         public override bool isCertificatePresent()
         {
-            return (birth == null) ? false : birth.isCertificatePresent();
+            return (birth == null) ? false : birth.CertificatePresent;
         }
     }
 }

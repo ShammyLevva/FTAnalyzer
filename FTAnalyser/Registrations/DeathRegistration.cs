@@ -90,7 +90,7 @@ namespace FTAnalyzer
 
         public override bool isCertificatePresent()
         {
-            return (death == null) ? false : death.isCertificatePresent();
+            return (death == null) ? false : death.CertificatePresent;
         }
     }
 }

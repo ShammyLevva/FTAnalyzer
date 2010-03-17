@@ -270,7 +270,7 @@ namespace FTAnalyzer
                 if (ind.RelationType == relationType)
                 {
                     Fact f = ind.getPreferredFact(factType);
-                    if (f != null && !f.isCertificatePresent())
+                    if (f != null && !f.CertificatePresent)
                         result.Add(ind);
                 }
             return result;

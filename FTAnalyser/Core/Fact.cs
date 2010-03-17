@@ -164,11 +164,16 @@ namespace FTAnalyzer
             get { return location == null ? "Scotland" : location.Country; }
         }
 
+        public bool CertificatePresent
+        {
+            get { return certificatePresent; }
+        }
+
         #endregion
 
         private string FixFactTypes(string tag)
         {
-            string initialChars = tag.ToUpper().Substring(0, 4);
+            string initialChars = tag.ToUpper().Substring(0, Math.Min(tag.Length, 4));
             if (initialChars == "BIRT" || initialChars == "MARR" || initialChars == "DEAT")
                 return initialChars;
             return tag;
@@ -199,16 +204,13 @@ namespace FTAnalyzer
 
         private bool setCertificatePresent() {
 	        foreach (FactSource fs in sources) {
-	    	    return (factType.Equals(Fact.BIRTH) && fs.isBirthCert()) ||
+	    	    bool result = (factType.Equals(Fact.BIRTH) && fs.isBirthCert()) ||
 	    		    (factType.Equals(Fact.DEATH) && fs.isDeathCert()) ||
 	    		    (factType.Equals(Fact.MARRIAGE) && fs.isMarriageCert()) ||
 	    		    (factType.Equals(Fact.CENSUS) && fs.isCensusCert());
+                if (result) return true;
 	        }
 	        return false;
-        }
-        
-        public bool isCertificatePresent() {
-            return certificatePresent;
         }
     }
 }

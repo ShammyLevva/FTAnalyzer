@@ -411,7 +411,8 @@ namespace FTAnalyzer
     	    	
 	    public Fact getPreferredFact(string factType) {
             // Returns the first fact of the given type.
-            // TODO: Should be fact marked as preferred
+            // This assumes the original GEDCOM file has the preferred fact first in the list
+            // as per the GEDCOM 5.5 specification.
 	        foreach(Fact f in facts)
             {
 		        if (f.FactType == factType)

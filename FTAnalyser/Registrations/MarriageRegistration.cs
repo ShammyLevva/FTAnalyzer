@@ -121,7 +121,7 @@ namespace FTAnalyzer
         #endregion
         
         public override bool isCertificatePresent() {
-            return (marriage == null) ? false : marriage.isCertificatePresent();
+            return (marriage == null) ? false : marriage.CertificatePresent;
         }
     }
 }
