@@ -9,10 +9,10 @@ namespace FTAnalyzer
     public class FactLocation : IComparable<FactLocation>, IDisplayLocation {
         
 	    public static readonly string SCOTLAND = "Scotland", ENGLAND = "England", CANADA = "Canada", USA = "United States",
-            WALES = "Wales", IRELAND = "Ireland", UK = "UK";
+            WALES = "Wales", IRELAND = "Ireland", UK = "UK", NEWZEALAND = "New Zealand", AUSTRALIA = "AUSTRALIA";
 	    public static readonly string ABERDEEN = "Aberdeenshire", AYR = "Ayrshire", KINCARDINE = "Kincardineshire",
 			    LANARK = "Lanarkshire", BANFF = "Banffshire", ANGUS = "Angus", MIDLOTHIAN = "Midlothian", FIFE = "Fife",
-                MIDDLESEX = "Middlesex";
+                MIDDLESEX = "Middlesex", LANCASHIRE = "Lancashire";
     	
         public const int COUNTRY = 0, REGION = 1, PARISH = 2, ADDRESS = 3, PLACE = 4;
 
@@ -37,9 +37,14 @@ namespace FTAnalyzer
             CITYSHIFTS.Add("Dundee", ANGUS);
             CITYSHIFTS.Add("Edinburgh", MIDLOTHIAN);
             CITYSHIFTS.Add("London", MIDDLESEX);
+            CITYSHIFTS.Add("Manchester", LANCASHIRE);
+            CITYSHIFTS.Add("Liverpool", LANCASHIRE);
 
             COUNTRYFIXES.Add("US", USA);
             COUNTRYFIXES.Add("USA", USA);
+            COUNTRYFIXES.Add("U.S.A.", USA);
+            COUNTRYFIXES.Add("NZ", NEWZEALAND);
+            COUNTRYFIXES.Add("N.Z.", NEWZEALAND);
             
             // Scottish Regions
             COUNTRYSHIFTS.Add("Aberdeenshire", SCOTLAND);
@@ -115,6 +120,7 @@ namespace FTAnalyzer
             COUNTRYSHIFTS.Add("Leicestershire", ENGLAND);
             COUNTRYSHIFTS.Add("Lincolnshire", ENGLAND);
             COUNTRYSHIFTS.Add("Monmouthshire", ENGLAND);
+            COUNTRYSHIFTS.Add("Middlesex", ENGLAND);
             COUNTRYSHIFTS.Add("Norfolk", ENGLAND);
             COUNTRYSHIFTS.Add("Northamptonshire", ENGLAND);
             COUNTRYSHIFTS.Add("Northumberland", ENGLAND);
@@ -130,6 +136,7 @@ namespace FTAnalyzer
             COUNTRYSHIFTS.Add("Warwickshire", ENGLAND);
             COUNTRYSHIFTS.Add("Westmorland", ENGLAND);
             COUNTRYSHIFTS.Add("Westmorlandshire", ENGLAND);
+            COUNTRYSHIFTS.Add("Wessex", ENGLAND);
             COUNTRYSHIFTS.Add("Wiltshire", ENGLAND);
             COUNTRYSHIFTS.Add("Worcestershire", ENGLAND);
             COUNTRYSHIFTS.Add("Yorkshire", ENGLAND);
@@ -269,6 +276,9 @@ namespace FTAnalyzer
             COUNTRYSHIFTS.Add("WV", USA);
             COUNTRYSHIFTS.Add("WI", USA);
             COUNTRYSHIFTS.Add("WY", USA);
+
+            // Australian Territories
+            COUNTRYSHIFTS.Add("NSW", AUSTRALIA);
             
         }
         
@@ -321,9 +331,24 @@ namespace FTAnalyzer
 	                level = COUNTRY;
 	            }
                 fixEmptyFields();
+                fixCapitalisation();
 	            fixCities();
                 fixCountries();
             }
+        }
+
+        private void fixCapitalisation()
+        {
+            if (country.Length > 1)
+                country = char.ToUpper(country[0]) + country.Substring(1);
+            if (region.Length > 1)
+                region = char.ToUpper(region[0]) + region.Substring(1);
+            if (parish.Length > 1)
+                parish = char.ToUpper(parish[0]) + parish.Substring(1);
+            if (address.Length > 1)
+                address = char.ToUpper(address[0]) + address.Substring(1);
+            if (place.Length > 1)
+                place = char.ToUpper(place[0]) + place.Substring(1);
         }
 
         private void fixEmptyFields()
