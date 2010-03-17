@@ -264,18 +264,18 @@ namespace FTAnalyzer
             if (pos == -1)
                 return filename;
             StringBuilder result = new StringBuilder();
-            string remainder = string.Empty;
+            string remainder = filename;
             while (pos != -1)
             {
-                result.Append(filename.Substring(0, Math.Max(pos - 1, 0)));
-                if (pos == filename.Length)
+                result.Append(remainder.Substring(0, pos));
+                if (pos == remainder.Length)
                 {
                     remainder = string.Empty;
                     pos = -1;
                 }
                 else
                 {
-                    remainder = filename.Substring(pos + 1);
+                    remainder = remainder.Substring(pos+1);
                     pos = remainder.IndexOfAny(Path.GetInvalidFileNameChars());
                 }
             }

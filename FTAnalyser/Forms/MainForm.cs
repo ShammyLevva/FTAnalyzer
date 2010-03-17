@@ -19,6 +19,7 @@ namespace FTAnalyzer
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
         private FactDate censusDate = CensusDate.UKCENSUS1881;
+        private bool stopProcessing = false;
 
         public MainForm()
         {
@@ -148,6 +149,8 @@ namespace FTAnalyzer
                 }
                 else if (tabControl.SelectedTab == tabIGISearch)
                 {
+                    btnCancelIGISearch.Visible = false;
+                    btnViewResults.Visible = true;
                     tsCountLabel.Text = "";
                     btnIGIChildrenSearch.Enabled = btnIGIMarriageSearch.Enabled = ft.IndividualCount > 0;
                     try
@@ -450,6 +453,8 @@ namespace FTAnalyzer
         private void btnIGIMarriageSearch_Click(object sender, EventArgs e)
         {
             HourGlass(true);
+            btnCancelIGISearch.Visible = true;
+            btnViewResults.Visible = false;
             rtbIGIResults.Text = "IGI Marriage Search started.\n";
             IGISearchForm form = new IGISearchForm(rtbIGIResults, IGIDefaultCountry.Country);
             List<Family> families = ft.AllFamilies;
@@ -457,13 +462,18 @@ namespace FTAnalyzer
             pbIGISearch.Visible = true;
             pbIGISearch.Maximum = families.Count;
             pbIGISearch.Value = 0;
+            stopProcessing = false;
             foreach (Family f in families)
             {
                 form.SearchIGI(f, txtIGIfolder.Text, IGISearchForm.MARRIAGESEARCH);
                 pbIGISearch.Value = counter++;
                 Application.DoEvents();
+                if (stopProcessing)
+                    break;
             }
             pbIGISearch.Visible = false;
+            btnCancelIGISearch.Visible = false;
+            btnViewResults.Visible = true;
             rtbIGIResults.AppendText("\nIGI Marriage Search finished.\n");
             HourGlass(false);
         }
@@ -471,6 +481,8 @@ namespace FTAnalyzer
         private void btnIGIChildrenSearch_Click(object sender, EventArgs e)
         {
             HourGlass(true);
+            btnCancelIGISearch.Visible = true;
+            btnViewResults.Visible = false;
             rtbIGIResults.Text = "IGI Children Search started.\n";
             IGISearchForm form = new IGISearchForm(rtbIGIResults, IGIDefaultCountry.Country);
             List<Family> families = ft.AllFamilies;
@@ -478,13 +490,18 @@ namespace FTAnalyzer
             pbIGISearch.Visible = true;
             pbIGISearch.Maximum = families.Count;
             pbIGISearch.Value = 0;
+            stopProcessing = false;
             foreach (Family f in families)
             {
                 pbIGISearch.Value = counter++;
                 form.SearchIGI(f, txtIGIfolder.Text, IGISearchForm.CHILDRENSEARCH);
                 Application.DoEvents();
+                if (stopProcessing)
+                    break;
             }
             pbIGISearch.Visible = false;
+            btnCancelIGISearch.Visible = false;
+            btnViewResults.Visible = true;
             rtbIGIResults.AppendText("\nIGI Children Search finished.\n");
             HourGlass(false);
         }
@@ -506,6 +523,11 @@ namespace FTAnalyzer
                 frmResults.Show();
             else
                 MessageBox.Show("Sorry there are no results files in the selected folder.");
+        }
+
+        private void btnCancelIGISearch_Click(object sender, EventArgs e)
+        {
+            stopProcessing = true;
         }
     }
 }

@@ -64,6 +64,9 @@
             this.tabLooseDeaths = new System.Windows.Forms.TabPage();
             this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
             this.tabCensus = new System.Windows.Forms.TabPage();
+            this.cenDate = new Controls.CensusDateSelector();
+            this.censusCountry = new Controls.CensusCountry();
+            this.relationTypes = new Controls.RelationTypes();
             this.ckbCensusResidence = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
@@ -88,14 +91,12 @@
             this.btnIGIFolderBrowse = new System.Windows.Forms.Button();
             this.txtIGIfolder = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.IGIDefaultCountry = new Controls.CensusCountry();
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.cenDate = new Controls.CensusDateSelector();
-            this.censusCountry = new Controls.CensusCountry();
-            this.relationTypes = new Controls.RelationTypes();
-            this.IGIDefaultCountry = new Controls.CensusCountry();
+            this.btnCancelIGISearch = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -141,13 +142,13 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -157,19 +158,19 @@
             this.showLocationsToolStripMenuItem,
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // showLocationsToolStripMenuItem
             // 
             this.showLocationsToolStripMenuItem.Name = "showLocationsToolStripMenuItem";
-            this.showLocationsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.showLocationsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.showLocationsToolStripMenuItem.Text = "Show locations";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -180,25 +181,25 @@
             this.toolStripSeparator1,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // checkForUpdatesToolStripMenuItem
             // 
             this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
             this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(171, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(168, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -479,6 +480,33 @@
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
             // 
+            // cenDate
+            // 
+            this.cenDate.AutoSize = true;
+            this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cenDate.Country = "Scotland";
+            this.cenDate.Location = new System.Drawing.Point(272, 81);
+            this.cenDate.Name = "cenDate";
+            this.cenDate.Size = new System.Drawing.Size(186, 27);
+            this.cenDate.TabIndex = 17;
+            this.cenDate.CensusChanged += new System.EventHandler(this.cenDate_CensusChanged);
+            // 
+            // censusCountry
+            // 
+            this.censusCountry.Location = new System.Drawing.Point(6, 6);
+            this.censusCountry.Name = "censusCountry";
+            this.censusCountry.Size = new System.Drawing.Size(260, 78);
+            this.censusCountry.TabIndex = 16;
+            this.censusCountry.Title = "Census Country";
+            this.censusCountry.CountryChanged += new System.EventHandler(this.censusCountry_CountryChanged);
+            // 
+            // relationTypes
+            // 
+            this.relationTypes.Location = new System.Drawing.Point(272, 6);
+            this.relationTypes.Name = "relationTypes";
+            this.relationTypes.Size = new System.Drawing.Size(325, 78);
+            this.relationTypes.TabIndex = 15;
+            // 
             // ckbCensusResidence
             // 
             this.ckbCensusResidence.AutoSize = true;
@@ -659,6 +687,7 @@
             // 
             // tabIGISearch
             // 
+            this.tabIGISearch.Controls.Add(this.btnCancelIGISearch);
             this.tabIGISearch.Controls.Add(this.btnViewResults);
             this.tabIGISearch.Controls.Add(this.pbIGISearch);
             this.tabIGISearch.Controls.Add(this.btnIGIMarriageSearch);
@@ -749,6 +778,14 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Folder to store results in : ";
             // 
+            // IGIDefaultCountry
+            // 
+            this.IGIDefaultCountry.Location = new System.Drawing.Point(8, 38);
+            this.IGIDefaultCountry.Name = "IGIDefaultCountry";
+            this.IGIDefaultCountry.Size = new System.Drawing.Size(268, 78);
+            this.IGIDefaultCountry.TabIndex = 7;
+            this.IGIDefaultCountry.Title = "Default Country";
+            // 
             // tsCount
             // 
             this.tsCount.Name = "tsCount";
@@ -768,43 +805,18 @@
             // tsCountLabel
             // 
             this.tsCountLabel.Name = "tsCountLabel";
-            this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
+            this.tsCountLabel.Size = new System.Drawing.Size(55, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
-            // cenDate
+            // btnCancelIGISearch
             // 
-            this.cenDate.AutoSize = true;
-            this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cenDate.Country = "Scotland";
-            this.cenDate.Location = new System.Drawing.Point(272, 81);
-            this.cenDate.Name = "cenDate";
-            this.cenDate.Size = new System.Drawing.Size(186, 27);
-            this.cenDate.TabIndex = 17;
-            this.cenDate.CensusChanged += new System.EventHandler(this.cenDate_CensusChanged);
-            // 
-            // censusCountry
-            // 
-            this.censusCountry.Location = new System.Drawing.Point(6, 6);
-            this.censusCountry.Name = "censusCountry";
-            this.censusCountry.Size = new System.Drawing.Size(260, 78);
-            this.censusCountry.TabIndex = 16;
-            this.censusCountry.Title = "Census Country";
-            this.censusCountry.CountryChanged += new System.EventHandler(this.censusCountry_CountryChanged);
-            // 
-            // relationTypes
-            // 
-            this.relationTypes.Location = new System.Drawing.Point(272, 6);
-            this.relationTypes.Name = "relationTypes";
-            this.relationTypes.Size = new System.Drawing.Size(325, 78);
-            this.relationTypes.TabIndex = 15;
-            // 
-            // IGIDefaultCountry
-            // 
-            this.IGIDefaultCountry.Location = new System.Drawing.Point(8, 38);
-            this.IGIDefaultCountry.Name = "IGIDefaultCountry";
-            this.IGIDefaultCountry.Size = new System.Drawing.Size(268, 78);
-            this.IGIDefaultCountry.TabIndex = 7;
-            this.IGIDefaultCountry.Title = "Default Country";
+            this.btnCancelIGISearch.Location = new System.Drawing.Point(821, 85);
+            this.btnCancelIGISearch.Name = "btnCancelIGISearch";
+            this.btnCancelIGISearch.Size = new System.Drawing.Size(123, 27);
+            this.btnCancelIGISearch.TabIndex = 9;
+            this.btnCancelIGISearch.Text = "Cancel Search";
+            this.btnCancelIGISearch.UseVisualStyleBackColor = true;
+            this.btnCancelIGISearch.Click += new System.EventHandler(this.btnCancelIGISearch_Click);
             // 
             // MainForm
             // 
@@ -920,6 +932,7 @@
         private Controls.CensusCountry IGIDefaultCountry;
         private System.Windows.Forms.Button btnViewResults;
         private System.Windows.Forms.ToolTip toolTips;
+        private System.Windows.Forms.Button btnCancelIGISearch;
     }
 }
 
