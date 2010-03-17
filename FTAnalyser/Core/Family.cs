@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Windows.Forms;
+using System.IO;
 
 namespace FTAnalyzer
 {
@@ -238,9 +239,10 @@ namespace FTAnalyzer
         public string MarriageFilename
         {
             get {
+                
                 string husbandsName = husband == null ? "Unknown" : husband.Name;
                 string wifesName = wife == null ? "Unknown" : wife.Name;
-                return familyGed + " - Marriage of " + husbandsName + " and " + wifesName + ".html";
+                return validFilename(familyGed + " - Marriage of " + husbandsName + " and " + wifesName + ".html");
             }
         }
 
@@ -250,11 +252,36 @@ namespace FTAnalyzer
             {
                 string husbandsName = husband == null ? "Unknown" : husband.Name;
                 string wifesName = wife == null ? "Unknown" : wife.Name;
-                return familyGed + " - Children of " + husbandsName + " and " + wifesName + ".html";
+                return validFilename(familyGed + " - Children of " + husbandsName + " and " + wifesName + ".html");
             }
         }
 
         #endregion
+
+        public string validFilename(string filename)
+        {
+            int pos = filename.IndexOfAny(Path.GetInvalidFileNameChars());
+            if (pos == -1)
+                return filename;
+            StringBuilder result = new StringBuilder();
+            string remainder = string.Empty;
+            while (pos != -1)
+            {
+                result.Append(filename.Substring(0, Math.Max(pos - 1, 0)));
+                if (pos == filename.Length)
+                {
+                    remainder = string.Empty;
+                    pos = -1;
+                }
+                else
+                {
+                    remainder = filename.Substring(pos + 1);
+                    pos = remainder.IndexOfAny(Path.GetInvalidFileNameChars());
+                }
+            }
+            result.Append(remainder);
+            return result.ToString();
+        }
 
         public void setSpouseRelation(Individual ind, int relationType)
         {

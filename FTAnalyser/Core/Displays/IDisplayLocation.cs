@@ -12,7 +12,6 @@ namespace FTAnalyzer
         string Parish { get; }
         string Address { get; }
         string Place { get; }
-        int Level { get; }
 
         int CompareTo(IDisplayLocation loc, int level);
         FactLocation getLocation(int level);
