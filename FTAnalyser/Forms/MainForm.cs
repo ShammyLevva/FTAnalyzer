@@ -25,6 +25,11 @@ namespace FTAnalyzer
             InitializeComponent();
             showLocationsToolStripMenuItem.Visible = false;
             ft.XmlErrorBox = rtbOutput;
+            //toolTips.SetToolTip(tabCountries, "Double click on Country name to see list of individuals with that Country.");
+            //toolTips.SetToolTip(dgCountries, "Double click on Country name to see list of individuals with that Country.");
+            //toolTips.SetToolTip(tabRegions, "Double click on Region name to see list of individuals with that Region.");
+            //toolTips.SetToolTip(tabParishes, "Double click on 'Parish' name to see list of individuals with that parish/area.");
+            //toolTips.SetToolTip(tabAddresses, "Double click on Address name to see list of individuals with that Address.");
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)

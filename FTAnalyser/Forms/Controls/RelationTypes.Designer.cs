@@ -44,7 +44,7 @@
             this.groupBox2.Controls.Add(this.ckbMarriage);
             this.groupBox2.Controls.Add(this.ckbBlood);
             this.groupBox2.Controls.Add(this.ckbDirects);
-            this.groupBox2.Location = new System.Drawing.Point(3, 3);
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(317, 72);
             this.groupBox2.TabIndex = 5;
@@ -111,7 +111,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox2);
             this.Name = "RelationTypes";
-            this.Size = new System.Drawing.Size(325, 78);
+            this.Size = new System.Drawing.Size(320, 76);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
