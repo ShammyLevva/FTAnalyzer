@@ -32,9 +32,9 @@ namespace Controls
                 if (Scotland) return FactLocation.SCOTLAND;
                 if (England) return FactLocation.ENGLAND;
                 if (Wales) return FactLocation.WALES;
-                if (UK) return FactLocation.UK;
+                if (UK) return FactLocation.UNITED_KINGDOM;
                 if (Canada) return FactLocation.CANADA;
-                if (USA) return FactLocation.USA;
+                if (USA) return FactLocation.UNITED_STATES;
                 return FactLocation.ENGLAND;
             }
         }

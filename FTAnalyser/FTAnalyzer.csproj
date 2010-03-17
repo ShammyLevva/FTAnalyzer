@@ -188,6 +188,7 @@
     <Compile Include="Comparators\Registration\MultiComparator.cs" />
     <Compile Include="Comparators\Registration\NameComparator.cs" />
     <Content Include="Useful URLs.txt" />
+    <Compile Include="Core\IGILocation.cs" />
     <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>

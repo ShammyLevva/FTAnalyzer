@@ -30,7 +30,7 @@ namespace Controls
                 country = value; 
                 cbCensusDate.Items.Clear();
                 if (country == FactLocation.SCOTLAND || country == FactLocation.ENGLAND || 
-                    country == FactLocation.WALES || country == FactLocation.UK)
+                    country == FactLocation.WALES || country == FactLocation.UNITED_KINGDOM)
                 {
                     cbCensusDate.Items.Add(CensusDate.UKCENSUS1841);
                     cbCensusDate.Items.Add(CensusDate.UKCENSUS1851);
@@ -41,7 +41,7 @@ namespace Controls
                     cbCensusDate.Items.Add(CensusDate.UKCENSUS1901);
                     cbCensusDate.Items.Add(CensusDate.UKCENSUS1911);
                     defaultDate = CensusDate.UKCENSUS1881;
-                } else if (country == FactLocation.USA)
+                } else if (country == FactLocation.UNITED_STATES)
                 {
                     cbCensusDate.Items.Add(CensusDate.USCENSUS1790);
                     cbCensusDate.Items.Add(CensusDate.USCENSUS1800);

@@ -28,14 +28,14 @@ namespace FTAnalyzer
     		    EXACT_MATCH = "standardize",
     		    DATE_RANGE = "date_range",
     		    EVENT_INDEX = "event_index",
-    		    COUNTRY = "region",
-    		    SHIRE = "juris1",
-    		    PARISH = "juris2";
+    		    REGION = "region",
+    		    COUNTRY = "juris1",
+    		    SHIRE = "juris2";
 
         private Dictionary<string,string> parameters;
         private TextWriter resultFile;
         private RichTextBox rtbOutput;
-        private string defaultCountry = FactLocation.SCOTLAND;
+        private FactLocation defaultLocation = new FactLocation(FactLocation.SCOTLAND);
         private int resultCount = 0;
         	
         private static readonly string NOMATCHES1 = "<strong>International Genealogical Index / British Isles</strong> (No Matches)";
@@ -55,7 +55,7 @@ namespace FTAnalyzer
         
         public IGISearchForm(RichTextBox rtb, string defaultCountry) {
             rtbOutput = rtb;
-            this.defaultCountry = defaultCountry;
+            this.defaultLocation = new FactLocation(defaultCountry);
             this.resultCount = 0;
             Initialise();
         }
@@ -79,66 +79,40 @@ namespace FTAnalyzer
             parameters.Add(EXACT_MATCH, "");
             parameters.Add(DATE_RANGE, "0");
             parameters.Add(EVENT_INDEX, "0");
-            parameters.Add(PARISH, "");
+            parameters.Add(SHIRE, "");
             parameters.Add("date_range_index", "0");
             parameters.Add("LDS", "1");
             parameters.Add("batch_set", "");
         }
         
-        private void SetCountryParameters(string country)
+        private void SetLocationParameters(FactLocation location)
         {
-            if (country == FactLocation.SCOTLAND || country == FactLocation.ENGLAND || country == FactLocation.WALES)
-            {
-                setParameter(COUNTRY, "2");
-                setParameter(SHIRE, country.Substring(0, 4));
-                setParameter("regionfriendly", "British Isles");
-                setParameter("juris1friendly", country);
-                setParameter("juris2friendly", "All Counties");
-            }
-            else if (country == FactLocation.UK)
-            {
-                setParameter(COUNTRY, "2");
-                setParameter(SHIRE, "");
-                setParameter("regionfriendly", "British Isles");
-                setParameter("juris1friendly", "All Countries");
-                setParameter("juris2friendly", "All Counties");
-            }
-            else if (country == FactLocation.CANADA)
-            {
-                setParameter(COUNTRY, "11");
-                setParameter(SHIRE, "CAN");
-                setParameter("regionfriendly", "North America");
-                setParameter("juris1friendly", "Canada");
-                setParameter("juris2friendly", "All Provinces");
-            }
-            else if (country == FactLocation.USA)
-            {
-                setParameter(COUNTRY, "11");
-                setParameter(SHIRE, "US");
-                setParameter("regionfriendly", "North America");
-                setParameter("juris1friendly", "United States");
-                setParameter("juris2friendly", "All States");
-            }
+            IGILocation loc = IGILocation.Adapt(location);
+            setParameter(REGION, loc.Region);
+            setParameter(COUNTRY, loc.Juris1);
+            setParameter(SHIRE, loc.Juris2);
+            setParameter("regionfriendly", "");
+            setParameter("juris1friendly", "");
+            setParameter("juris2friendly", "");
         }
 
         private string SetCountry(Individual husband, Individual wife, Fact marriage) {
-            string country = string.Empty;
+            FactLocation location = defaultLocation;
             if (marriage != null && marriage.Country.Length > 0)
-                country = marriage.Country;
+                location = marriage.Location;
             else if (husband.BestLocation != null && husband.BestLocation.Country.Length > 0)
-                country = husband.BestLocation.Country;
+                location = husband.BestLocation;
             else if (wife.BestLocation != null && wife.BestLocation.Country.Length > 0)
-                country = wife.BestLocation.Country;
-            else
-                country = defaultCountry;
+                location = wife.BestLocation;
+            string country = location.Country;
             if (country != FactLocation.SCOTLAND && country != FactLocation.ENGLAND && country != FactLocation.WALES &&
-                country != FactLocation.CANADA && country != FactLocation.USA)
+                country != FactLocation.CANADA && country != FactLocation.UNITED_STATES)
             {   // if we have got a random text for country field then use the default country.
-                rtbOutput.AppendText("Country '" + country + "' not recognised/supported. Trying '" + defaultCountry + "' instead.\n");
-                country = defaultCountry;
+                rtbOutput.AppendText("Country '" + country + "' not recognised/supported. Trying '" + defaultLocation + "' instead.\n");
+                location = defaultLocation;
             }
-            SetCountryParameters(country);
-            return country;
+            SetLocationParameters(location);
+            return location.Country;
         }
         
         public NameValueCollection getEncodedParameters () {
