@@ -21,6 +21,7 @@ namespace FTAnalyzer.Forms
             this.folder = folder;
             this.Text = "IGI Search results in folder " + folder;
             SetupResults();
+            lbResults.SelectedIndex = 0;
         }
 
         public bool ResultsPresent

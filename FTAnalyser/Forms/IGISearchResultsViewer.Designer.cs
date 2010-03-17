@@ -37,19 +37,19 @@
             // lbResults
             // 
             this.lbResults.FormattingEnabled = true;
-            this.lbResults.Location = new System.Drawing.Point(12, 5);
+            this.lbResults.Location = new System.Drawing.Point(12, 477);
             this.lbResults.Name = "lbResults";
-            this.lbResults.Size = new System.Drawing.Size(256, 563);
+            this.lbResults.Size = new System.Drawing.Size(1003, 95);
             this.lbResults.TabIndex = 0;
             this.lbResults.SelectedIndexChanged += new System.EventHandler(this.lbResults_SelectedIndexChanged);
             this.lbResults.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lbResults_MouseMove);
             // 
             // webBrowser
             // 
-            this.webBrowser.Location = new System.Drawing.Point(274, 5);
+            this.webBrowser.Location = new System.Drawing.Point(12, 12);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(741, 560);
+            this.webBrowser.Size = new System.Drawing.Size(1003, 459);
             this.webBrowser.TabIndex = 1;
             // 
             // IGISearchResultsViewer
