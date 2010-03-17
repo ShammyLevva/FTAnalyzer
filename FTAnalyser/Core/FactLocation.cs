@@ -52,7 +52,6 @@ namespace FTAnalyzer
             COUNTRYSHIFTS.Add("Berwick", SCOTLAND);
             COUNTRYSHIFTS.Add("Berwickshire", SCOTLAND);
             COUNTRYSHIFTS.Add("Bute", SCOTLAND);
-            COUNTRYSHIFTS.Add("Bute", SCOTLAND);
             COUNTRYSHIFTS.Add("Caithness", SCOTLAND);
             COUNTRYSHIFTS.Add("Clackmannanshire", SCOTLAND);
             COUNTRYSHIFTS.Add("Dumfries", SCOTLAND);
@@ -179,7 +178,6 @@ namespace FTAnalyzer
             COUNTRYSHIFTS.Add("California", USA);
             COUNTRYSHIFTS.Add("Colorado", USA);
             COUNTRYSHIFTS.Add("Connecticut", USA);
-            COUNTRYSHIFTS.Add("South Dakota", USA);
             COUNTRYSHIFTS.Add("Delaware", USA);
             COUNTRYSHIFTS.Add("District of Columbia", USA);
             COUNTRYSHIFTS.Add("Florida", USA);
