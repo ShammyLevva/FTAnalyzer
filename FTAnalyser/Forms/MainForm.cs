@@ -455,6 +455,8 @@ namespace FTAnalyzer
             HourGlass(true);
             btnCancelIGISearch.Visible = true;
             btnViewResults.Visible = false;
+            btnIGIChildrenSearch.Enabled = false;
+            btnIGIMarriageSearch.Enabled = false;
             rtbIGIResults.Text = "IGI Marriage Search started.\n";
             IGISearchForm form = new IGISearchForm(rtbIGIResults, IGIDefaultCountry.Country);
             List<Family> families = ft.AllFamilies;
@@ -474,6 +476,8 @@ namespace FTAnalyzer
             pbIGISearch.Visible = false;
             btnCancelIGISearch.Visible = false;
             btnViewResults.Visible = true;
+            btnIGIChildrenSearch.Enabled = true;
+            btnIGIMarriageSearch.Enabled = true;
             rtbIGIResults.AppendText("\nIGI Marriage Search finished.\n");
             HourGlass(false);
         }
@@ -483,6 +487,8 @@ namespace FTAnalyzer
             HourGlass(true);
             btnCancelIGISearch.Visible = true;
             btnViewResults.Visible = false;
+            btnIGIChildrenSearch.Enabled = false;
+            btnIGIMarriageSearch.Enabled = false;
             rtbIGIResults.Text = "IGI Children Search started.\n";
             IGISearchForm form = new IGISearchForm(rtbIGIResults, IGIDefaultCountry.Country);
             List<Family> families = ft.AllFamilies;
@@ -502,6 +508,8 @@ namespace FTAnalyzer
             pbIGISearch.Visible = false;
             btnCancelIGISearch.Visible = false;
             btnViewResults.Visible = true;
+            btnIGIChildrenSearch.Enabled = true;
+            btnIGIMarriageSearch.Enabled = true;
             rtbIGIResults.AppendText("\nIGI Children Search finished.\n");
             HourGlass(false);
         }
