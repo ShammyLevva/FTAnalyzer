@@ -202,6 +202,11 @@ namespace FTAnalyzer
             COUNTRYSHIFTS.Add("Kansas", UNITED_STATES);
             COUNTRYSHIFTS.Add("Kentucky", UNITED_STATES);
             COUNTRYSHIFTS.Add("Louisiana", UNITED_STATES);
+            COUNTRYSHIFTS.Add("Maine", UNITED_STATES);
+            COUNTRYSHIFTS.Add("Maryland", UNITED_STATES);
+            COUNTRYSHIFTS.Add("Massachusetts", UNITED_STATES);
+            COUNTRYSHIFTS.Add("Michigan", UNITED_STATES);
+            COUNTRYSHIFTS.Add("Minnesota", UNITED_STATES);
             COUNTRYSHIFTS.Add("Mississippi", UNITED_STATES);
             COUNTRYSHIFTS.Add("Missouri", UNITED_STATES);
             COUNTRYSHIFTS.Add("Montana", UNITED_STATES);

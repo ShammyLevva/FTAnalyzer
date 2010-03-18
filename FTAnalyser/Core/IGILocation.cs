@@ -125,6 +125,88 @@ namespace FTAnalyzer
             adaptors.Add("Sutherland",          new IGILocation(FactLocation.REGION, "2", "Scot", "Suth"));
             adaptors.Add("West Lothian",        new IGILocation(FactLocation.REGION, "2", "Scot", "WLot"));
             adaptors.Add("Wigtonshire",         new IGILocation(FactLocation.REGION, "2", "Scot", "Wigt"));
+
+            adaptors.Add("Anglesey",            new IGILocation(FactLocation.REGION, "2", "Wale", "Angl"));
+            adaptors.Add("Breconshire",         new IGILocation(FactLocation.REGION, "2", "Wale", "Brec"));
+            adaptors.Add("Caernarvon",          new IGILocation(FactLocation.REGION, "2", "Wale", "Caer"));
+            adaptors.Add("Cardiganshire",       new IGILocation(FactLocation.REGION, "2", "Wale", "Card"));
+            adaptors.Add("Carmarthenshire",     new IGILocation(FactLocation.REGION, "2", "Wale", "Carm"));
+            adaptors.Add("Denbighshire",        new IGILocation(FactLocation.REGION, "2", "Wale", "Denb"));
+            adaptors.Add("Denbighshire",        new IGILocation(FactLocation.REGION, "2", "Wale", "Flin"));
+            adaptors.Add("Glamorganshire",      new IGILocation(FactLocation.REGION, "2", "Wale", "Glam"));
+            adaptors.Add("Gwynedd",             new IGILocation(FactLocation.REGION, "2", "Wale", "Gwyn"));
+            adaptors.Add("Merionethshire",      new IGILocation(FactLocation.REGION, "2", "Wale", "Meri"));
+            adaptors.Add("Mid-Glamorgan",       new IGILocation(FactLocation.REGION, "2", "Wale", "MGla"));
+            adaptors.Add("Montgomeryshire",     new IGILocation(FactLocation.REGION, "2", "Wale", "Mntg"));
+            adaptors.Add("Pembrokeshire",       new IGILocation(FactLocation.REGION, "2", "Wale", "Pemb"));
+            adaptors.Add("Radnorshire",         new IGILocation(FactLocation.REGION, "2", "Wale", "Radn"));
+
+            // Canadian Provinces
+            adaptors.Add("Alberta",                 new IGILocation(FactLocation.REGION, "11", "CAN", "Alta"));
+            adaptors.Add("British Columbia",        new IGILocation(FactLocation.REGION, "11", "CAN", "BrCo"));
+            adaptors.Add("Manitoba",                new IGILocation(FactLocation.REGION, "11", "CAN", "Mani"));
+            adaptors.Add("New Brunswick",           new IGILocation(FactLocation.REGION, "11", "CAN", "NBru"));
+            adaptors.Add("Newfoundland",            new IGILocation(FactLocation.REGION, "11", "CAN", "Newf"));
+            adaptors.Add("Northwest Territories",   new IGILocation(FactLocation.REGION, "11", "CAN", "NWT"));
+            adaptors.Add("Nova Scotia",             new IGILocation(FactLocation.REGION, "11", "CAN", "NSco"));
+            adaptors.Add("Ontario",                 new IGILocation(FactLocation.REGION, "11", "CAN", "Ont"));
+            adaptors.Add("Prince Edward Island",    new IGILocation(FactLocation.REGION, "11", "CAN", "PEI"));
+            adaptors.Add("Quebec",                  new IGILocation(FactLocation.REGION, "11", "CAN", "Queb"));
+            adaptors.Add("Saskatchewan",            new IGILocation(FactLocation.REGION, "11", "CAN", "Sask"));
+            adaptors.Add("Yukon Territory",         new IGILocation(FactLocation.REGION, "11", "CAN", "YukT"));
+
+            // US States
+            adaptors.Add("Alabama",                 new IGILocation(FactLocation.REGION, "11", "US", "Alab"));
+            adaptors.Add("Alaska",                  new IGILocation(FactLocation.REGION, "11", "US", "Alas"));
+            adaptors.Add("Arizona",                 new IGILocation(FactLocation.REGION, "11", "US", "Ariz"));
+            adaptors.Add("Arkansas",                new IGILocation(FactLocation.REGION, "11", "US", "Ark"));
+            adaptors.Add("California",              new IGILocation(FactLocation.REGION, "11", "US", "Cal"));
+            adaptors.Add("Colorado",                new IGILocation(FactLocation.REGION, "11", "US", "Colr"));
+            adaptors.Add("Connecticut",             new IGILocation(FactLocation.REGION, "11", "US", "Conn"));
+            adaptors.Add("Delaware",                new IGILocation(FactLocation.REGION, "11", "US", "Dela"));
+            adaptors.Add("District of Columbia",    new IGILocation(FactLocation.REGION, "11", "US", "DiCo"));
+            adaptors.Add("Florida",                 new IGILocation(FactLocation.REGION, "11", "US", "Flor"));
+            adaptors.Add("Georgia",                 new IGILocation(FactLocation.REGION, "11", "US", "Geor"));
+            adaptors.Add("Hawaii",                  new IGILocation(FactLocation.REGION, "11", "US", "Hawa"));
+            adaptors.Add("Idaho",                   new IGILocation(FactLocation.REGION, "11", "US", "Idah"));
+            adaptors.Add("Illinois",                new IGILocation(FactLocation.REGION, "11", "US", "Ill"));
+            adaptors.Add("Indiana",                 new IGILocation(FactLocation.REGION, "11", "US", "Indn"));
+            adaptors.Add("Iowa",                    new IGILocation(FactLocation.REGION, "11", "US", "Iowa"));
+            adaptors.Add("Kansas",                  new IGILocation(FactLocation.REGION, "11", "US", "Kan"));
+            adaptors.Add("Kentucky",                new IGILocation(FactLocation.REGION, "11", "US", "Ktky"));
+            adaptors.Add("Louisiana",               new IGILocation(FactLocation.REGION, "11", "US", "Lou"));
+            adaptors.Add("Maine",                   new IGILocation(FactLocation.REGION, "11", "US", "Main"));
+            adaptors.Add("Maryland",                new IGILocation(FactLocation.REGION, "11", "US", "Mary"));
+            adaptors.Add("Massachusetts",           new IGILocation(FactLocation.REGION, "11", "US", "Mass"));
+            adaptors.Add("Michigan",                new IGILocation(FactLocation.REGION, "11", "US", "Mchi"));
+            adaptors.Add("Minnesota",               new IGILocation(FactLocation.REGION, "11", "US", "Minn"));
+            adaptors.Add("Mississippi",             new IGILocation(FactLocation.REGION, "11", "US", "Misp"));
+            adaptors.Add("Missouri",                new IGILocation(FactLocation.REGION, "11", "US", "Miso"));
+            adaptors.Add("Montana",                 new IGILocation(FactLocation.REGION, "11", "US", "Mont"));
+            adaptors.Add("Nebraska",                new IGILocation(FactLocation.REGION, "11", "US", "Nebr"));
+            adaptors.Add("Nevada",                  new IGILocation(FactLocation.REGION, "11", "US", "Nev"));
+            adaptors.Add("New Hampshire",           new IGILocation(FactLocation.REGION, "11", "US", "NHam"));
+            adaptors.Add("New Jersey",              new IGILocation(FactLocation.REGION, "11", "US", "NJer"));
+            adaptors.Add("New Mexico",              new IGILocation(FactLocation.REGION, "11", "US", "NMex"));
+            adaptors.Add("New York",                new IGILocation(FactLocation.REGION, "11", "US", "NYor"));
+            adaptors.Add("North Carolina",          new IGILocation(FactLocation.REGION, "11", "US", "NCar"));
+            adaptors.Add("North Dakota",            new IGILocation(FactLocation.REGION, "11", "US", "NDak"));
+            adaptors.Add("Ohio",                    new IGILocation(FactLocation.REGION, "11", "US", "Ohio"));
+            adaptors.Add("Oklahoma",                new IGILocation(FactLocation.REGION, "11", "US", "Okla"));
+            adaptors.Add("Oregon",                  new IGILocation(FactLocation.REGION, "11", "US", "Oreg"));
+            adaptors.Add("Pennsylvania",            new IGILocation(FactLocation.REGION, "11", "US", "Penn"));
+            adaptors.Add("Rhode Island",            new IGILocation(FactLocation.REGION, "11", "US", "RhoI"));
+            adaptors.Add("South Carolina",          new IGILocation(FactLocation.REGION, "11", "US", "SCar"));
+            adaptors.Add("South Dakota",            new IGILocation(FactLocation.REGION, "11", "US", "SDak"));
+            adaptors.Add("Tennessee",               new IGILocation(FactLocation.REGION, "11", "US", "Tenn"));
+            adaptors.Add("Texas",                   new IGILocation(FactLocation.REGION, "11", "US", "Tex"));
+            adaptors.Add("Utah",                    new IGILocation(FactLocation.REGION, "11", "US", "Utah"));
+            adaptors.Add("Vermont",                 new IGILocation(FactLocation.REGION, "11", "US", "Verm"));
+            adaptors.Add("Virginia",                new IGILocation(FactLocation.REGION, "11", "US", "Virg"));
+            adaptors.Add("Washington",              new IGILocation(FactLocation.REGION, "11", "US", "Wash"));
+            adaptors.Add("West Virginia",           new IGILocation(FactLocation.REGION, "11", "US", "WVir"));
+            adaptors.Add("Wisconsin",               new IGILocation(FactLocation.REGION, "11", "US", "Wisc"));
+            adaptors.Add("Wyoming",                 new IGILocation(FactLocation.REGION, "11", "US", "Wyom"));
         }
 
         private IGILocation(int level, string region, string juris1, string juris2)
