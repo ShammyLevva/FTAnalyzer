@@ -83,6 +83,7 @@
             this.btnLC1881Canada = new System.Windows.Forms.Button();
             this.btnLC1881Scot = new System.Windows.Forms.Button();
             this.tabIGISearch = new System.Windows.Forms.TabPage();
+            this.btnCancelIGISearch = new System.Windows.Forms.Button();
             this.btnViewResults = new System.Windows.Forms.Button();
             this.pbIGISearch = new System.Windows.Forms.ProgressBar();
             this.btnIGIMarriageSearch = new System.Windows.Forms.Button();
@@ -96,7 +97,10 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.btnCancelIGISearch = new System.Windows.Forms.Button();
+            this.IGIrelationTypes = new Controls.RelationTypes();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbIGISearchCountry = new System.Windows.Forms.RadioButton();
+            this.rbIGISearchRegion = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -119,6 +123,7 @@
             this.tabLostCousins.SuspendLayout();
             this.tabIGISearch.SuspendLayout();
             this.statusStrip.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -133,7 +138,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(960, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(939, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -142,13 +147,13 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -158,19 +163,19 @@
             this.showLocationsToolStripMenuItem,
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // showLocationsToolStripMenuItem
             // 
             this.showLocationsToolStripMenuItem.Name = "showLocationsToolStripMenuItem";
-            this.showLocationsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.showLocationsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.showLocationsToolStripMenuItem.Text = "Show locations";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -181,25 +186,25 @@
             this.toolStripSeparator1,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // checkForUpdatesToolStripMenuItem
             // 
             this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
             this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(168, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(171, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -218,7 +223,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 27);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(960, 420);
+            this.tabControl.Size = new System.Drawing.Size(939, 428);
             this.tabControl.TabIndex = 9;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -234,7 +239,7 @@
             this.tabDisplayProgress.Location = new System.Drawing.Point(4, 22);
             this.tabDisplayProgress.Name = "tabDisplayProgress";
             this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplayProgress.Size = new System.Drawing.Size(952, 394);
+            this.tabDisplayProgress.Size = new System.Drawing.Size(931, 402);
             this.tabDisplayProgress.TabIndex = 1;
             this.tabDisplayProgress.Text = "Load Gedcom";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
@@ -243,9 +248,9 @@
             // 
             this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbOutput.Location = new System.Drawing.Point(10, 89);
+            this.rtbOutput.Location = new System.Drawing.Point(10, 97);
             this.rtbOutput.Name = "rtbOutput";
-            this.rtbOutput.Size = new System.Drawing.Size(936, 302);
+            this.rtbOutput.Size = new System.Drawing.Size(913, 302);
             this.rtbOutput.TabIndex = 6;
             this.rtbOutput.Text = "";
             // 
@@ -303,7 +308,7 @@
             this.tabIndividuals.Location = new System.Drawing.Point(4, 22);
             this.tabIndividuals.Name = "tabIndividuals";
             this.tabIndividuals.Padding = new System.Windows.Forms.Padding(3);
-            this.tabIndividuals.Size = new System.Drawing.Size(952, 394);
+            this.tabIndividuals.Size = new System.Drawing.Size(931, 402);
             this.tabIndividuals.TabIndex = 2;
             this.tabIndividuals.Text = "Individuals";
             this.tabIndividuals.UseVisualStyleBackColor = true;
@@ -314,7 +319,7 @@
             this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgIndividuals.Location = new System.Drawing.Point(3, 3);
             this.dgIndividuals.Name = "dgIndividuals";
-            this.dgIndividuals.Size = new System.Drawing.Size(946, 388);
+            this.dgIndividuals.Size = new System.Drawing.Size(925, 396);
             this.dgIndividuals.TabIndex = 0;
             this.dgIndividuals.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgIndividuals_ColumnHeaderMouseClick);
             // 
@@ -324,7 +329,7 @@
             this.tabLocations.Location = new System.Drawing.Point(4, 22);
             this.tabLocations.Name = "tabLocations";
             this.tabLocations.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLocations.Size = new System.Drawing.Size(952, 394);
+            this.tabLocations.Size = new System.Drawing.Size(931, 402);
             this.tabLocations.TabIndex = 4;
             this.tabLocations.Text = "Locations";
             this.tabLocations.UseVisualStyleBackColor = true;
@@ -341,7 +346,7 @@
             this.tabCtrlLocations.Location = new System.Drawing.Point(2, 0);
             this.tabCtrlLocations.Name = "tabCtrlLocations";
             this.tabCtrlLocations.SelectedIndex = 0;
-            this.tabCtrlLocations.Size = new System.Drawing.Size(950, 394);
+            this.tabCtrlLocations.Size = new System.Drawing.Size(929, 402);
             this.tabCtrlLocations.TabIndex = 0;
             // 
             // tabCountries
@@ -350,7 +355,7 @@
             this.tabCountries.Location = new System.Drawing.Point(4, 22);
             this.tabCountries.Name = "tabCountries";
             this.tabCountries.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCountries.Size = new System.Drawing.Size(942, 368);
+            this.tabCountries.Size = new System.Drawing.Size(921, 376);
             this.tabCountries.TabIndex = 0;
             this.tabCountries.Text = "Countries";
             this.tabCountries.UseVisualStyleBackColor = true;
@@ -364,7 +369,7 @@
             this.dgCountries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCountries.Location = new System.Drawing.Point(0, 3);
             this.dgCountries.Name = "dgCountries";
-            this.dgCountries.Size = new System.Drawing.Size(939, 363);
+            this.dgCountries.Size = new System.Drawing.Size(918, 371);
             this.dgCountries.TabIndex = 0;
             this.toolTips.SetToolTip(this.dgCountries, "Double click on Country name to see list of individuals with that Country.");
             this.dgCountries.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCountries_CellContentDoubleClick);
@@ -375,7 +380,7 @@
             this.tabRegions.Location = new System.Drawing.Point(4, 22);
             this.tabRegions.Name = "tabRegions";
             this.tabRegions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRegions.Size = new System.Drawing.Size(942, 368);
+            this.tabRegions.Size = new System.Drawing.Size(921, 376);
             this.tabRegions.TabIndex = 1;
             this.tabRegions.Text = "Regions";
             this.tabRegions.UseVisualStyleBackColor = true;
@@ -389,7 +394,7 @@
             this.dgRegions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgRegions.Location = new System.Drawing.Point(2, 3);
             this.dgRegions.Name = "dgRegions";
-            this.dgRegions.Size = new System.Drawing.Size(939, 362);
+            this.dgRegions.Size = new System.Drawing.Size(918, 370);
             this.dgRegions.TabIndex = 1;
             this.toolTips.SetToolTip(this.dgRegions, "Double click on Region name to see list of individuals with that Region.");
             this.dgRegions.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgRegions_CellContentDoubleClick);
@@ -399,7 +404,7 @@
             this.tabParishes.Controls.Add(this.dgParishes);
             this.tabParishes.Location = new System.Drawing.Point(4, 22);
             this.tabParishes.Name = "tabParishes";
-            this.tabParishes.Size = new System.Drawing.Size(942, 368);
+            this.tabParishes.Size = new System.Drawing.Size(921, 376);
             this.tabParishes.TabIndex = 2;
             this.tabParishes.Text = "Parishes";
             this.tabParishes.UseVisualStyleBackColor = true;
@@ -413,7 +418,7 @@
             this.dgParishes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgParishes.Location = new System.Drawing.Point(2, 3);
             this.dgParishes.Name = "dgParishes";
-            this.dgParishes.Size = new System.Drawing.Size(939, 362);
+            this.dgParishes.Size = new System.Drawing.Size(918, 370);
             this.dgParishes.TabIndex = 1;
             this.dgParishes.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgParishes_CellContentDoubleClick);
             // 
@@ -422,7 +427,7 @@
             this.tabAddresses.Controls.Add(this.dgAddresses);
             this.tabAddresses.Location = new System.Drawing.Point(4, 22);
             this.tabAddresses.Name = "tabAddresses";
-            this.tabAddresses.Size = new System.Drawing.Size(942, 368);
+            this.tabAddresses.Size = new System.Drawing.Size(921, 376);
             this.tabAddresses.TabIndex = 3;
             this.tabAddresses.Text = "Addresses";
             this.tabAddresses.UseVisualStyleBackColor = true;
@@ -436,7 +441,7 @@
             this.dgAddresses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgAddresses.Location = new System.Drawing.Point(2, 3);
             this.dgAddresses.Name = "dgAddresses";
-            this.dgAddresses.Size = new System.Drawing.Size(939, 362);
+            this.dgAddresses.Size = new System.Drawing.Size(918, 370);
             this.dgAddresses.TabIndex = 1;
             this.dgAddresses.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAddresses_CellContentDoubleClick);
             // 
@@ -446,7 +451,7 @@
             this.tabLooseDeaths.Location = new System.Drawing.Point(4, 22);
             this.tabLooseDeaths.Name = "tabLooseDeaths";
             this.tabLooseDeaths.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLooseDeaths.Size = new System.Drawing.Size(952, 394);
+            this.tabLooseDeaths.Size = new System.Drawing.Size(931, 402);
             this.tabLooseDeaths.TabIndex = 3;
             this.tabLooseDeaths.Text = "Loose Deaths";
             this.tabLooseDeaths.UseVisualStyleBackColor = true;
@@ -460,7 +465,7 @@
             this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLooseDeaths.Location = new System.Drawing.Point(0, 0);
             this.dgLooseDeaths.Name = "dgLooseDeaths";
-            this.dgLooseDeaths.Size = new System.Drawing.Size(952, 394);
+            this.dgLooseDeaths.Size = new System.Drawing.Size(931, 402);
             this.dgLooseDeaths.TabIndex = 0;
             // 
             // tabCensus
@@ -475,7 +480,7 @@
             this.tabCensus.Location = new System.Drawing.Point(4, 22);
             this.tabCensus.Name = "tabCensus";
             this.tabCensus.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCensus.Size = new System.Drawing.Size(952, 394);
+            this.tabCensus.Size = new System.Drawing.Size(931, 402);
             this.tabCensus.TabIndex = 0;
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
@@ -573,7 +578,7 @@
             this.tabLostCousins.Location = new System.Drawing.Point(4, 22);
             this.tabLostCousins.Name = "tabLostCousins";
             this.tabLostCousins.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLostCousins.Size = new System.Drawing.Size(952, 394);
+            this.tabLostCousins.Size = new System.Drawing.Size(931, 402);
             this.tabLostCousins.TabIndex = 5;
             this.tabLostCousins.Text = "Lost Cousins";
             this.tabLostCousins.UseVisualStyleBackColor = true;
@@ -687,6 +692,8 @@
             // 
             // tabIGISearch
             // 
+            this.tabIGISearch.Controls.Add(this.groupBox1);
+            this.tabIGISearch.Controls.Add(this.IGIrelationTypes);
             this.tabIGISearch.Controls.Add(this.btnCancelIGISearch);
             this.tabIGISearch.Controls.Add(this.btnViewResults);
             this.tabIGISearch.Controls.Add(this.pbIGISearch);
@@ -699,14 +706,24 @@
             this.tabIGISearch.Controls.Add(this.IGIDefaultCountry);
             this.tabIGISearch.Location = new System.Drawing.Point(4, 22);
             this.tabIGISearch.Name = "tabIGISearch";
-            this.tabIGISearch.Size = new System.Drawing.Size(952, 394);
+            this.tabIGISearch.Size = new System.Drawing.Size(931, 402);
             this.tabIGISearch.TabIndex = 6;
             this.tabIGISearch.Text = "IGI Search";
             this.tabIGISearch.UseVisualStyleBackColor = true;
             // 
+            // btnCancelIGISearch
+            // 
+            this.btnCancelIGISearch.Location = new System.Drawing.Point(266, 118);
+            this.btnCancelIGISearch.Name = "btnCancelIGISearch";
+            this.btnCancelIGISearch.Size = new System.Drawing.Size(123, 27);
+            this.btnCancelIGISearch.TabIndex = 9;
+            this.btnCancelIGISearch.Text = "Cancel Search";
+            this.btnCancelIGISearch.UseVisualStyleBackColor = true;
+            this.btnCancelIGISearch.Click += new System.EventHandler(this.btnCancelIGISearch_Click);
+            // 
             // btnViewResults
             // 
-            this.btnViewResults.Location = new System.Drawing.Point(821, 85);
+            this.btnViewResults.Location = new System.Drawing.Point(266, 118);
             this.btnViewResults.Name = "btnViewResults";
             this.btnViewResults.Size = new System.Drawing.Size(123, 27);
             this.btnViewResults.TabIndex = 8;
@@ -716,15 +733,17 @@
             // 
             // pbIGISearch
             // 
-            this.pbIGISearch.Location = new System.Drawing.Point(552, 12);
+            this.pbIGISearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbIGISearch.Location = new System.Drawing.Point(8, 151);
             this.pbIGISearch.Name = "pbIGISearch";
-            this.pbIGISearch.Size = new System.Drawing.Size(392, 24);
+            this.pbIGISearch.Size = new System.Drawing.Size(915, 20);
             this.pbIGISearch.TabIndex = 6;
             this.pbIGISearch.Visible = false;
             // 
             // btnIGIMarriageSearch
             // 
-            this.btnIGIMarriageSearch.Location = new System.Drawing.Point(282, 85);
+            this.btnIGIMarriageSearch.Location = new System.Drawing.Point(8, 118);
             this.btnIGIMarriageSearch.Name = "btnIGIMarriageSearch";
             this.btnIGIMarriageSearch.Size = new System.Drawing.Size(123, 27);
             this.btnIGIMarriageSearch.TabIndex = 5;
@@ -734,7 +753,7 @@
             // 
             // btnIGIChildrenSearch
             // 
-            this.btnIGIChildrenSearch.Location = new System.Drawing.Point(411, 85);
+            this.btnIGIChildrenSearch.Location = new System.Drawing.Point(137, 118);
             this.btnIGIChildrenSearch.Name = "btnIGIChildrenSearch";
             this.btnIGIChildrenSearch.Size = new System.Drawing.Size(123, 27);
             this.btnIGIChildrenSearch.TabIndex = 4;
@@ -746,15 +765,15 @@
             // 
             this.rtbIGIResults.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbIGIResults.Location = new System.Drawing.Point(0, 118);
+            this.rtbIGIResults.Location = new System.Drawing.Point(0, 177);
             this.rtbIGIResults.Name = "rtbIGIResults";
-            this.rtbIGIResults.Size = new System.Drawing.Size(949, 276);
+            this.rtbIGIResults.Size = new System.Drawing.Size(928, 225);
             this.rtbIGIResults.TabIndex = 3;
             this.rtbIGIResults.Text = "";
             // 
             // btnIGIFolderBrowse
             // 
-            this.btnIGIFolderBrowse.Location = new System.Drawing.Point(457, 11);
+            this.btnIGIFolderBrowse.Location = new System.Drawing.Point(515, 11);
             this.btnIGIFolderBrowse.Name = "btnIGIFolderBrowse";
             this.btnIGIFolderBrowse.Size = new System.Drawing.Size(77, 21);
             this.btnIGIFolderBrowse.TabIndex = 2;
@@ -764,9 +783,9 @@
             // 
             // txtIGIfolder
             // 
-            this.txtIGIfolder.Location = new System.Drawing.Point(147, 12);
+            this.txtIGIfolder.Location = new System.Drawing.Point(137, 12);
             this.txtIGIfolder.Name = "txtIGIfolder";
-            this.txtIGIfolder.Size = new System.Drawing.Size(296, 20);
+            this.txtIGIfolder.Size = new System.Drawing.Size(372, 20);
             this.txtIGIfolder.TabIndex = 1;
             // 
             // label3
@@ -782,7 +801,7 @@
             // 
             this.IGIDefaultCountry.Location = new System.Drawing.Point(8, 38);
             this.IGIDefaultCountry.Name = "IGIDefaultCountry";
-            this.IGIDefaultCountry.Size = new System.Drawing.Size(268, 78);
+            this.IGIDefaultCountry.Size = new System.Drawing.Size(256, 74);
             this.IGIDefaultCountry.TabIndex = 7;
             this.IGIDefaultCountry.Title = "Default Country";
             // 
@@ -796,33 +815,65 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsCountLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 450);
+            this.statusStrip.Location = new System.Drawing.Point(0, 458);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(960, 22);
+            this.statusStrip.Size = new System.Drawing.Size(939, 22);
             this.statusStrip.TabIndex = 10;
             this.statusStrip.Text = "statusStrip1";
             // 
             // tsCountLabel
             // 
             this.tsCountLabel.Name = "tsCountLabel";
-            this.tsCountLabel.Size = new System.Drawing.Size(55, 17);
+            this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
-            // btnCancelIGISearch
+            // IGIrelationTypes
             // 
-            this.btnCancelIGISearch.Location = new System.Drawing.Point(821, 85);
-            this.btnCancelIGISearch.Name = "btnCancelIGISearch";
-            this.btnCancelIGISearch.Size = new System.Drawing.Size(123, 27);
-            this.btnCancelIGISearch.TabIndex = 9;
-            this.btnCancelIGISearch.Text = "Cancel Search";
-            this.btnCancelIGISearch.UseVisualStyleBackColor = true;
-            this.btnCancelIGISearch.Click += new System.EventHandler(this.btnCancelIGISearch_Click);
+            this.IGIrelationTypes.Enabled = false;
+            this.IGIrelationTypes.Location = new System.Drawing.Point(270, 38);
+            this.IGIrelationTypes.Name = "IGIrelationTypes";
+            this.IGIrelationTypes.Size = new System.Drawing.Size(322, 74);
+            this.IGIrelationTypes.TabIndex = 10;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rbIGISearchRegion);
+            this.groupBox1.Controls.Add(this.rbIGISearchCountry);
+            this.groupBox1.Location = new System.Drawing.Point(598, 38);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(164, 74);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Search By";
+            // 
+            // rbIGISearchCountry
+            // 
+            this.rbIGISearchCountry.AutoSize = true;
+            this.rbIGISearchCountry.Checked = true;
+            this.rbIGISearchCountry.Location = new System.Drawing.Point(7, 20);
+            this.rbIGISearchCountry.Name = "rbIGISearchCountry";
+            this.rbIGISearchCountry.Size = new System.Drawing.Size(61, 17);
+            this.rbIGISearchCountry.TabIndex = 0;
+            this.rbIGISearchCountry.TabStop = true;
+            this.rbIGISearchCountry.Text = "Country";
+            this.rbIGISearchCountry.UseVisualStyleBackColor = true;
+            // 
+            // rbIGISearchRegion
+            // 
+            this.rbIGISearchRegion.AutoSize = true;
+            this.rbIGISearchRegion.Location = new System.Drawing.Point(7, 44);
+            this.rbIGISearchRegion.Name = "rbIGISearchRegion";
+            this.rbIGISearchRegion.Size = new System.Drawing.Size(147, 17);
+            this.rbIGISearchRegion.TabIndex = 1;
+            this.rbIGISearchRegion.TabStop = true;
+            this.rbIGISearchRegion.Text = "County / State / Province";
+            this.rbIGISearchRegion.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(960, 472);
+            this.ClientSize = new System.Drawing.Size(939, 480);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
@@ -858,6 +909,8 @@
             this.tabIGISearch.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -933,6 +986,10 @@
         private System.Windows.Forms.Button btnViewResults;
         private System.Windows.Forms.ToolTip toolTips;
         private System.Windows.Forms.Button btnCancelIGISearch;
+        private Controls.RelationTypes IGIrelationTypes;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rbIGISearchRegion;
+        private System.Windows.Forms.RadioButton rbIGISearchCountry;
     }
 }
 

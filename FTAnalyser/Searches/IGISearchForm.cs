@@ -36,6 +36,7 @@ namespace FTAnalyzer
         private TextWriter resultFile;
         private RichTextBox rtbOutput;
         private FactLocation defaultLocation = new FactLocation(FactLocation.SCOTLAND);
+        private int level;
         private int resultCount = 0;
         	
         private static readonly string NOMATCHES1 = "<strong>International Genealogical Index / British Isles</strong> (No Matches)";
@@ -53,9 +54,10 @@ namespace FTAnalyzer
         public const int MARRIAGESEARCH = 1;
         public const int CHILDRENSEARCH = 2;
         
-        public IGISearchForm(RichTextBox rtb, string defaultCountry) {
+        public IGISearchForm(RichTextBox rtb, string defaultCountry, int level) {
             rtbOutput = rtb;
             this.defaultLocation = new FactLocation(defaultCountry);
+            this.level = level;
             this.resultCount = 0;
             Initialise();
         }
@@ -87,7 +89,7 @@ namespace FTAnalyzer
         
         private void SetLocationParameters(FactLocation location)
         {
-            IGILocation loc = IGILocation.Adapt(location);
+            IGILocation loc = IGILocation.Adapt(location, level);
             setParameter(REGION, loc.Region);
             setParameter(COUNTRY, loc.Juris1);
             setParameter(SHIRE, loc.Juris2);

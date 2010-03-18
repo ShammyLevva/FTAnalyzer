@@ -67,8 +67,8 @@ namespace FTAnalyzer
             COUNTRYSHIFTS.Add("Dumfries", SCOTLAND);
             COUNTRYSHIFTS.Add("Dumfriesshire", SCOTLAND);
             COUNTRYSHIFTS.Add("Dumfries-shire", SCOTLAND);
-            COUNTRYSHIFTS.Add("Dumbarton", SCOTLAND);
-            COUNTRYSHIFTS.Add("Dumbartonshire", SCOTLAND);
+            COUNTRYSHIFTS.Add("Dunbarton", SCOTLAND);
+            COUNTRYSHIFTS.Add("Dunbartonshire", SCOTLAND);
             COUNTRYSHIFTS.Add("East Lothian", SCOTLAND);
             COUNTRYSHIFTS.Add("Fife", SCOTLAND);
             COUNTRYSHIFTS.Add("Fifeshire", SCOTLAND);
