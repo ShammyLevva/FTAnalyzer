@@ -65,6 +65,11 @@
             0,
             0,
             0});
+            this.upIGIResultsFDayilter.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.upIGIResultsFDayilter.Name = "upIGIResultsFDayilter";
             this.upIGIResultsFDayilter.Size = new System.Drawing.Size(40, 20);
             this.upIGIResultsFDayilter.TabIndex = 2;
