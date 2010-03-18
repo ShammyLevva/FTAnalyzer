@@ -32,10 +32,13 @@ namespace FTAnalyzer.Forms
             lbResults.Items.Clear();
             DirectoryInfo di = new DirectoryInfo(folder);
             FileInfo[] files = di.GetFiles("*.html");
+            int filter = -1 * (int) upIGIResultsFDayilter.Value;
             foreach (FileInfo fi in files)
             {
-                lbResults.Items.Add(fi);
+                if(fi.LastWriteTime.AddDays(filter) < DateTime.Now)
+                    lbResults.Items.Add(fi);
             }
+            labFileCount.Text = "Found " + lbResults.Items.Count + " result files";
         }
 
         private void lbResults_SelectedIndexChanged(object sender, EventArgs e)
@@ -58,5 +61,15 @@ namespace FTAnalyzer.Forms
                 }
             }
         }
+
+        private void upIGIResultsFDayilter_ValueChanged(object sender, EventArgs e)
+        {
+            if (upIGIResultsFDayilter.Value == 1)
+                labDays.Text = "Day";
+            else
+                labDays.Text = "days";
+            SetupResults();
+        }
+
     }
 }
