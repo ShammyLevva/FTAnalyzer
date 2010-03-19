@@ -144,7 +144,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\GeneralSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>GeneralSettings.Designer.cs</LastGenOutput>
@@ -227,7 +226,6 @@
     <Compile Include="Formatters\CensusOutputFormatter.cs" />
     <Compile Include="Formatters\DeathOutputFormatter.cs" />
     <Compile Include="Formatters\MarriageOutputFormatter.cs" />
-    <Content Include="GedcomOutput.xml" />
     <Compile Include="Forms\Census.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -338,6 +336,9 @@
       <DependentUpon>RelationTypes.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities\DoubleMetaphone.cs" />
+    <Compile Include="Utilities\ScrollingRichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Utilities\ShortDoubleMetaphone.cs" />
     <Compile Include="Utilities\WebRequestWrapper.cs" />
   </ItemGroup>

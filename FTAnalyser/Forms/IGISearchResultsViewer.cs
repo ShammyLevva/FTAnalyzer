@@ -21,10 +21,6 @@ namespace FTAnalyzer.Forms
             this.folder = folder;
             this.Text = "IGI Search results in folder " + folder;
             SetupResults();
-            if (lbResults.Items.Count > 0)
-            {
-                lbResults.SelectedIndex = 0;
-            }
         }
 
         public bool ResultsPresent
@@ -42,6 +38,8 @@ namespace FTAnalyzer.Forms
                     lbResults.Items.Add(fi);
             }
             labFileCount.Text = "Found " + lbResults.Items.Count + " result files";
+            if (lbResults.Items.Count > 0)
+                lbResults.SelectedIndex = 0;
         }
 
         private void lbResults_SelectedIndexChanged(object sender, EventArgs e)
@@ -71,6 +69,7 @@ namespace FTAnalyzer.Forms
                 labDays.Text = "day";
             else
                 labDays.Text = "days";
+            webBrowser.Navigate("about:blank");
             SetupResults();
         }
 

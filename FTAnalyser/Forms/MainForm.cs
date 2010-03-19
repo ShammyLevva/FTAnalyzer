@@ -539,5 +539,23 @@ namespace FTAnalyzer
         {
             stopProcessing = true;
         }
+
+        private void IGIDefaultCountry_CountryChanged(object sender, EventArgs e)
+        {
+            if (IGIDefaultCountry.Country == FactLocation.SCOTLAND)
+                rbIGISearchCountry.Checked = true;
+            else
+                rbIGISearchRegion.Checked = true;
+        }
+
+        private void rtbIGIResults_TextChanged(object sender, EventArgs e)
+        {
+            rtbIGIResults.ScrollToBottom();
+        }
+
+        private void rtbOutput_TextChanged(object sender, EventArgs e)
+        {
+            rtbOutput.ScrollToBottom();
+        }
     }
 }
