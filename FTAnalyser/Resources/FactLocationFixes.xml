@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Fixes>
+  <Typos>
+    <CountryTypos>
+      <CountryTypo from="USA"    to="United States" />
+      <CountryTypo from="US"     to="United States" />
+      <CountryTypo from="U.S"    to="United States" />
+      <CountryTypo from="U.S."   to="United States" />
+      <CountryTypo from="U.S.A"  to="United States" />
+      <CountryTypo from="U.S.A." to="United States" />
+    </CountryTypos>
+    <RegionTypos>
+      <RegionTypo from ="Dumfriesshire" to="Dumfries-shire" />
+    </RegionTypos>
+  </Typos>
+  <FieldMoves>
+    <DemoteCountries>
+      <CountryToRegion region="Aberdeenshire" country="Scotland" IGIName="Aberdeen" />
+    </DemoteCountries>
+    <DemoteRegions>
+      <RegionToParish parish="Aberdeen" region="Aberdeenshire" />
+    </DemoteRegions>
+  </FieldMoves>
+</Fixes>
