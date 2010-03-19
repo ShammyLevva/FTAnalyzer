@@ -56,6 +56,31 @@ namespace FTAnalyzer
                 return node.SelectSingleNode(tag);
         }
 
+        public static string validFilename(string filename)
+        {
+            int pos = filename.IndexOfAny(Path.GetInvalidFileNameChars());
+            if (pos == -1)
+                return filename;
+            StringBuilder result = new StringBuilder();
+            string remainder = filename;
+            while (pos != -1)
+            {
+                result.Append(remainder.Substring(0, pos));
+                if (pos == remainder.Length)
+                {
+                    remainder = string.Empty;
+                    pos = -1;
+                }
+                else
+                {
+                    remainder = remainder.Substring(pos + 1);
+                    pos = remainder.IndexOfAny(Path.GetInvalidFileNameChars());
+                }
+            }
+            result.Append(remainder);
+            return result.ToString();
+        }
+
         #endregion
 
         #region Load Gedcom XML

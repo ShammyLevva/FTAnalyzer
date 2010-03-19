@@ -482,6 +482,18 @@ namespace FTAnalyzer
 
         #endregion
 
+        public bool SupportedLocation(int level)
+        {
+            if(country == FactLocation.SCOTLAND || country == FactLocation.ENGLAND || country == FactLocation.WALES ||
+                country == FactLocation.CANADA || country == FactLocation.UNITED_STATES)
+            {
+                if (level == COUNTRY) return true;
+                // check region is valid if so return true
+                return true;
+            }
+            return false;
+        }
+
         public FactLocation getLocation(int level)
         {
             StringBuilder location = new StringBuilder(this.country);

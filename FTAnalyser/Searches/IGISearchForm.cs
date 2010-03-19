@@ -85,6 +85,9 @@ namespace FTAnalyzer
             parameters.Add("date_range_index", "0");
             parameters.Add("LDS", "1");
             parameters.Add("batch_set", "");
+            parameters.Add("regionfriendly", "");
+            parameters.Add("juris1friendly", "");
+            parameters.Add("juris2friendly", "");
         }
         
         private void SetLocationParameters(FactLocation location)
@@ -93,30 +96,8 @@ namespace FTAnalyzer
             setParameter(REGION, loc.Region);
             setParameter(COUNTRY, loc.Juris1);
             setParameter(SHIRE, loc.Juris2);
-            setParameter("regionfriendly", "");
-            setParameter("juris1friendly", "");
-            setParameter("juris2friendly", "");
         }
 
-        private string SetCountry(Individual husband, Individual wife, Fact marriage) {
-            FactLocation location = defaultLocation;
-            if (marriage != null && marriage.Country.Length > 0)
-                location = marriage.Location;
-            else if (husband.BestLocation != null && husband.BestLocation.Country.Length > 0)
-                location = husband.BestLocation;
-            else if (wife.BestLocation != null && wife.BestLocation.Country.Length > 0)
-                location = wife.BestLocation;
-            string country = location.Country;
-            if (country != FactLocation.SCOTLAND && country != FactLocation.ENGLAND && country != FactLocation.WALES &&
-                country != FactLocation.CANADA && country != FactLocation.UNITED_STATES)
-            {   // if we have got a random text for country field then use the default country.
-                rtbOutput.AppendText("Country '" + country + "' not recognised/supported. Trying '" + defaultLocation + "' instead.\n");
-                location = defaultLocation;
-            }
-            SetLocationParameters(location);
-            return location.Country;
-        }
-        
         public NameValueCollection getEncodedParameters () {
             NameValueCollection result = new NameValueCollection();
             foreach(var entry in parameters)
@@ -366,14 +347,19 @@ namespace FTAnalyzer
             if (!marriageDate.isAfter(IGIMAX) && husband.BirthDate.isBefore(IGIMAX) && wife.BirthDate.isBefore(IGIMAX))
             {
                 // proceed if marriage date within IGI Range and both were alive before IGI max date
-                Initialise();
-                SetCountry(husband, wife, marriage);
                 if (!marriageDate.isExact())
-                    SearchForMarriage(husband, wife, filename);   
+                {
+                    Initialise();
+                    if (SetMarriageParameters(husband, wife))
+                    {
+                        List<FactLocation> locations = GetLocations(husband, wife, marriage);
+                        CheckIGIAtLocations(locations, filename, MARRIAGESEARCH, null);
+                    }
+                }
             }
         }
 
-        public void ChildrenSearch(Family family, string filename)
+        private void ChildrenSearch(Family family, string filename)
         {
             if (family.getPreferredFact(Fact.CHILDLESS) == null)
             {
@@ -382,13 +368,12 @@ namespace FTAnalyzer
                 if (husband.BirthDate.StartDate < IGIPARENTBIRTHMAX.StartDate && wife.BirthDate.StartDate < IGIPARENTBIRTHMAX.StartDate)
                 {
                     Fact marriage = family.getPreferredFact(Fact.MARRIAGE);
-                    string country = SetCountry(husband, wife, marriage);
-                    SearchForChildren(husband, wife, country, filename);
+                    SearchForChildren(husband, wife, marriage, filename);
                 }
             }
         }
 
-        public void SearchForMarriage(Individual i1, Individual i2, string filename)
+        private bool SetMarriageParameters(Individual i1, Individual i2)
         {
             string forename1 = verifyName(i1.Forename);
             string forename2 = verifyName(i2.Forename);
@@ -405,19 +390,21 @@ namespace FTAnalyzer
                     setParameter(LAST_NAME, surname2);
                     setParameter(SPOUSES_FIRST_NAME, forename1);
                     setParameter(SPOUSES_LAST_NAME, surname1);
-                    FetchIGIDataAndWriteResult(filename);
+                    return true;
                 }
             } else {
                 setParameter(FIRST_NAME, forename1);
                 setParameter(LAST_NAME, surname1);
                 setParameter(SPOUSES_FIRST_NAME, forename2);
                 setParameter(SPOUSES_LAST_NAME, surname2);
-                FetchIGIDataAndWriteResult(filename);
+                return true;
             }
+            return false;
         }
 
-        public void SearchForChildren(Individual husband, Individual wife, string country, string filename)
+        public void SearchForChildren(Individual husband, Individual wife, Fact marriage, string filename)
         {
+            List<FactLocation> locations = GetLocations(husband, wife, marriage);
             string husbandForename = verifyName(husband.Forename);
             string husbandSurname = verifyName(husband.Surname);
             string wifeForename = verifyName(wife.Forename);
@@ -427,13 +414,59 @@ namespace FTAnalyzer
                 setParameter(FATHERS_FIRST_NAME, husbandForename);
                 setParameter(FATHERS_LAST_NAME, husbandSurname);
                 setParameter(MOTHERS_FIRST_NAME, wifeForename);
-                if(country.Equals(FactLocation.SCOTLAND))
-                    setParameter(MOTHERS_LAST_NAME, wifeSurname);
-                FetchIGIDataAndWriteResult(filename);
+                foreach (FactLocation loc in locations)
+                {
+                    CheckIGIAtLocations(locations, filename, CHILDRENSEARCH, wifeSurname);
+                }
             }
         }
 
-        public void FetchIGIDataAndWriteResult(string filename)
+        private List<FactLocation> GetLocations(Individual i1, Individual i2, Fact marriage)
+        {
+            List<FactLocation> result = new List<FactLocation>();
+            if (marriage != null && marriage.Location != null && marriage.Location.SupportedLocation(level))
+            {
+                FactLocation location = marriage.Location.getLocation(level);
+                result.Add(location);
+            }
+            if (i1.BestLocation != null && i1.BestLocation.SupportedLocation(level))
+            {
+                FactLocation location = i1.BestLocation.getLocation(level);
+                if (!result.Contains(location))
+                    result.Add(location);
+            }
+            if (i2.BestLocation != null && i2.BestLocation.SupportedLocation(level))
+            {
+                FactLocation location = i2.BestLocation.getLocation(level);
+                if (!result.Contains(location))
+                    result.Add(location);
+            }
+            if (result.Count == 0)
+            {   // if we have got a random text for country field then use the default country.
+                //rtbOutput.AppendText("Country '" + country + "' not recognised/supported. Trying '" + defaultLocation + "' instead.\n");
+                if (!result.Contains(defaultLocation))
+                    result.Add(defaultLocation);
+            }
+            return result;
+        }
+
+        private void CheckIGIAtLocations(List<FactLocation> locations, string filename, int searchType, string surname)
+        {
+            foreach (FactLocation location in locations)
+            {
+                string newFilename = filename;
+                SetLocationParameters(location);
+                if (searchType == CHILDRENSEARCH && location.Country.Equals(FactLocation.SCOTLAND))
+                    setParameter(MOTHERS_LAST_NAME, surname);
+                if (locations.Count > 1)
+                {
+                    newFilename = filename.Substring(0, filename.Length - 5) + FamilyTree.validFilename(" (" + location.getLocation(level) + ").html");
+                }
+                FetchIGIDataAndWriteResult(newFilename);
+            }
+        }
+
+        private void FetchIGIDataAndWriteResult(string filename)
         {
             try
             {

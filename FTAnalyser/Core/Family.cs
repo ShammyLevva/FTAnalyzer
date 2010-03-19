@@ -242,7 +242,7 @@ namespace FTAnalyzer
                 
                 string husbandsName = husband == null ? "Unknown" : husband.Name;
                 string wifesName = wife == null ? "Unknown" : wife.Name;
-                return validFilename(familyGed + " - Marriage of " + husbandsName + " and " + wifesName + ".html");
+                return FamilyTree.validFilename(familyGed + " - Marriage of " + husbandsName + " and " + wifesName + ".html");
             }
         }
 
@@ -252,36 +252,11 @@ namespace FTAnalyzer
             {
                 string husbandsName = husband == null ? "Unknown" : husband.Name;
                 string wifesName = wife == null ? "Unknown" : wife.Name;
-                return validFilename(familyGed + " - Children of " + husbandsName + " and " + wifesName + ".html");
+                return FamilyTree.validFilename(familyGed + " - Children of " + husbandsName + " and " + wifesName + ".html");
             }
         }
 
         #endregion
-
-        public string validFilename(string filename)
-        {
-            int pos = filename.IndexOfAny(Path.GetInvalidFileNameChars());
-            if (pos == -1)
-                return filename;
-            StringBuilder result = new StringBuilder();
-            string remainder = filename;
-            while (pos != -1)
-            {
-                result.Append(remainder.Substring(0, pos));
-                if (pos == remainder.Length)
-                {
-                    remainder = string.Empty;
-                    pos = -1;
-                }
-                else
-                {
-                    remainder = remainder.Substring(pos+1);
-                    pos = remainder.IndexOfAny(Path.GetInvalidFileNameChars());
-                }
-            }
-            result.Append(remainder);
-            return result.ToString();
-        }
 
         public void setSpouseRelation(Individual ind, int relationType)
         {

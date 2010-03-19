@@ -14,7 +14,6 @@ namespace FTAnalyzer
 
         private static Dictionary<string, IGILocation> adaptors;
 
-
         public static IGILocation Adapt(FactLocation location, int level)
         {
             IGILocation adaptor = null;
@@ -132,7 +131,7 @@ namespace FTAnalyzer
             adaptors.Add("Cardiganshire",       new IGILocation(FactLocation.REGION, "2", "Wale", "Card"));
             adaptors.Add("Carmarthenshire",     new IGILocation(FactLocation.REGION, "2", "Wale", "Carm"));
             adaptors.Add("Denbighshire",        new IGILocation(FactLocation.REGION, "2", "Wale", "Denb"));
-            adaptors.Add("Denbighshire",        new IGILocation(FactLocation.REGION, "2", "Wale", "Flin"));
+            adaptors.Add("Flintshire",        new IGILocation(FactLocation.REGION, "2", "Wale", "Flin"));
             adaptors.Add("Glamorganshire",      new IGILocation(FactLocation.REGION, "2", "Wale", "Glam"));
             adaptors.Add("Gwynedd",             new IGILocation(FactLocation.REGION, "2", "Wale", "Gwyn"));
             adaptors.Add("Merionethshire",      new IGILocation(FactLocation.REGION, "2", "Wale", "Meri"));
