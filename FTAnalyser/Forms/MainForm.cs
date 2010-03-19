@@ -52,11 +52,14 @@ namespace FTAnalyzer
                     rtbIGIResults.Text = "";
                     pbSources.Value = pbIndividuals.Value = pbFamilies.Value = 0;
                     Application.DoEvents();
-                    XmlDocument document = GedcomToXml.Load(openGedcom.FileName);
-                    document.Save("GedcomOutput.xml");
-                    ft.LoadTree(document, pbSources, pbIndividuals, pbFamilies);
-                    HourGlass(false);
-                    MessageBox.Show("Gedcom File Loaded");
+                    if (!stopProcessing)
+                    {
+                        XmlDocument document = GedcomToXml.Load(openGedcom.FileName);
+                        document.Save("GedcomOutput.xml");
+                        ft.LoadTree(document, pbSources, pbIndividuals, pbFamilies);
+                        HourGlass(false);
+                        MessageBox.Show("Gedcom File Loaded");
+                    }
                 }
                 catch (IOException ex)
                 {
@@ -556,6 +559,11 @@ namespace FTAnalyzer
         private void rtbOutput_TextChanged(object sender, EventArgs e)
         {
             rtbOutput.ScrollToBottom();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            stopProcessing = true;
         }
     }
 }

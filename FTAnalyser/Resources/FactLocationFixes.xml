@@ -2,87 +2,130 @@
 <Fixes>
   <Typos>
     <CountryTypos>
+      <CountryTypo from="Can"     to="Canada" />
+      <CountryTypo from="CAN"     to="Canada" />
       <CountryTypo from="USA"     to="United States" />
       <CountryTypo from="US"      to="United States" />
       <CountryTypo from="U.S"     to="United States" />
       <CountryTypo from="U.S."    to="United States" />
       <CountryTypo from="U.S.A"   to="United States" />
+      <CountryTypo from="U.S.A."  to="United States" />
       <CountryTypo from="NZ"      to="New Zealand" />
+      <CountryTypo from="NZ."     to="New Zealand" />
       <CountryTypo from="N.Z"     to="New Zealand" />
       <CountryTypo from="N.Z."    to="New Zealand" />
       <CountryTypo from="UK"      to="England" />
+      <CountryTypo from="UK."     to="England" />
       <CountryTypo from="U.K"     to="England" />
       <CountryTypo from="U.K."    to="England" />
       <CountryTypo from="GB"      to="England" />
-      <CountryTypo from="G.B"     to="England" />
+      <CountryTypo from="GB."     to="England" />
+      <CountryTypo from="G B"     to="England" />
       <CountryTypo from="G.B."    to="England" />
       <CountryTypo from="Great Britain"    to="England" />
+      <CountryTypo from="Aust"    to="Australia" />
+      <CountryTypo from="Aust."   to="Australia" />
     </CountryTypos>
     <RegionTypos>
       <RegionTypo from="Dumfriesshire" to="Dumfries-shire" />
+      <RegionTypo from="Beds"          to="Bedfordshire" />
+      <RegionTypo from="Berks"         to="Berkshire" />
+      <RegionTypo from="Bucks"         to="Buckinghamshire" />
+      <RegionTypo from="Cambs"         to="Cambridgeshire" />
+      <RegionTypo from="Ches"          to="Cheshire" />
+      <RegionTypo from="Cumb"          to="Cumbria" />
+      <RegionTypo from="Derbys"        to="Derbyshire" />
+      <RegionTypo from="Co Durham"     to="Durham" />
+      <RegionTypo from="Glous"         to="Gloucestershire" />
+      <RegionTypo from="Glos"          to="Gloucestershire" />
+      <RegionTypo from="Hants"         to="Hampshire" />
+      <RegionTypo from="Hereford"      to="Herefordshire" />
+      <RegionTypo from="Herts"         to="Hertfordshire" />
+      <RegionTypo from="Hunts"         to="Huntingdonshire" />
+      <RegionTypo from="Lancs"         to="Lancashire" />
+      <RegionTypo from="Leics"         to="Leicestershire" />
+      <RegionTypo from="Lincs"         to="Lincolnshire" />
+      <RegionTypo from="Middx"         to="Middlesex" />
+      <RegionTypo from="Northants"     to="Northamptonshire" />
+      <RegionTypo from="Notts"         to="Nottinghamshire" />
+      <RegionTypo from="Oxon"          to="Oxfordshire" />
+      <RegionTypo from="Salop"         to="Shropshire" />
+      <RegionTypo from="Somt"          to="Somerset" />
+      <RegionTypo from="Staffs"        to="Staffordshire" />
+      <RegionTypo from="SX"            to="Sussex" />
+      <RegionTypo from="Warks"         to="Warwickshire" />
+      <RegionTypo from="Wmld"          to="Westmorland" />
+      <RegionTypo from="Wilts"         to="Wiltshire" />
+      <RegionTypo from="Worcs"         to="Wocestershire" />
+      <RegionTypo from="Yorks"         to="Yorkshire" />
+      <RegionTypo from="North Yorkshire" to="Yorkshire" />
+      <RegionTypo from="West Yorkshire"  to="Yorkshire" />
+      <RegionTypo from="South Yorkshire" to="Yorkshire" />
       
+
       <!-- Canadian Province abbreviations -->
-      <RegionTypo from="BC"            to="British Columbia" />
-      <RegionTypo from="NWT"           to="North West Territories" />
-      <RegionTypo from="NS"            to="Nova Scotia" />
-      <RegionTypo from="ON"            to="Ontario" />
-      <RegionTypo from="PEI"           to="Prince Edward Island" />
+      <RegionTypo from="BC"  to="British Columbia" />
+      <RegionTypo from="NWT" to="North West Territories" />
+      <RegionTypo from="NS"  to="Nova Scotia" />
+      <RegionTypo from="ON"  to="Ontario" />
+      <RegionTypo from="PEI" to="Prince Edward Island" />
 
       <!-- US State abbreviations -->
-      <RegionTypo from="AL"            to="Alabama" />
-      <RegionTypo from="AK"            to="Alaska" />
-      <RegionTypo from="AZ"            to="Arizona" />
-      <RegionTypo from="AR"            to="Arkansas" />
-      <RegionTypo from="CA"            to="California" />
-      <RegionTypo from="CO"            to="Colorado" />
-      <RegionTypo from="CT"            to="Connecticut" />
-      <RegionTypo from="DE"            to="Delaware" />
-      <RegionTypo from="DC"            to="District of Columbia" />
-      <RegionTypo from="FL"            to="Florida" />
-      <RegionTypo from="GA"            to="Georgia" />
-      <RegionTypo from="HI"            to="Hawaii" />
-      <RegionTypo from="ID"            to="Idaho" />
-      <RegionTypo from="IL"            to="Illinois" />
-      <RegionTypo from="IN"            to="Indiana" />
-      <RegionTypo from="IA"            to="Iowa" />
-      <RegionTypo from="KS"            to="Kansas" />
-      <RegionTypo from="KY"            to="Kentucky" />
-      <RegionTypo from="LA"            to="Louisiana" />
-      <RegionTypo from="ME"            to="Maine" />
-      <RegionTypo from="MD"            to="Maryland" />
-      <RegionTypo from="MA"            to="Massachusetts" />
-      <RegionTypo from="MI"            to="Michigan" />
-      <RegionTypo from="MN"            to="Minnesota" />
-      <RegionTypo from="MS"            to="Mississippi" />
-      <RegionTypo from="MO"            to="Missouri" />
-      <RegionTypo from="MT"            to="Montana" />
-      <RegionTypo from="NE"            to="Nebraska" />
-      <RegionTypo from="NV"            to="Nevada" />
-      <RegionTypo from="NJ"            to="New Hampshire" />
-      <RegionTypo from="NH"            to="New Jersey" />
-      <RegionTypo from="NM"            to="New Mexico" />
-      <RegionTypo from="NY"            to="New York" />
-      <RegionTypo from="NC"            to="North Carolina" />
-      <RegionTypo from="ND"            to="North Dakota" />
-      <RegionTypo from="OH"            to="Ohio" />
-      <RegionTypo from="OK"            to="Oklahoma" />
-      <RegionTypo from="OR"            to="Oregon" />
-      <RegionTypo from="PA"            to="Pennsylvania" />
-      <RegionTypo from="RI"            to="Rhode Island" />
-      <RegionTypo from="SC"            to="South Carolina" />
-      <RegionTypo from="SD"            to="South Dakota" />
-      <RegionTypo from="TN"            to="Tennessee" />
-      <RegionTypo from="TX"            to="Texas" />
-      <RegionTypo from="UT"            to="Utah" />
-      <RegionTypo from="VT"            to="Vermont" />
-      <RegionTypo from="VA"            to="Virginia" />
-      <RegionTypo from="WA"            to="Washington" />
-      <RegionTypo from="WV"            to="West Virginia" />
-      <RegionTypo from="WI"            to="Wisconsin" />
-      <RegionTypo from="WY"            to="Wyoming" />
+      <RegionTypo from="AL"  to="Alabama" />
+      <RegionTypo from="AK"  to="Alaska" />
+      <RegionTypo from="AZ"  to="Arizona" />
+      <RegionTypo from="AR"  to="Arkansas" />
+      <RegionTypo from="CA"  to="California" />
+      <RegionTypo from="CO"  to="Colorado" />
+      <RegionTypo from="CT"  to="Connecticut" />
+      <RegionTypo from="DE"  to="Delaware" />
+      <RegionTypo from="DC"  to="District of Columbia" />
+      <RegionTypo from="FL"  to="Florida" />
+      <RegionTypo from="GA"  to="Georgia" />
+      <RegionTypo from="HI"  to="Hawaii" />
+      <RegionTypo from="ID"  to="Idaho" />
+      <RegionTypo from="IL"  to="Illinois" />
+      <RegionTypo from="IN"  to="Indiana" />
+      <RegionTypo from="IA"  to="Iowa" />
+      <RegionTypo from="KS"  to="Kansas" />
+      <RegionTypo from="KY"  to="Kentucky" />
+      <RegionTypo from="LA"  to="Louisiana" />
+      <RegionTypo from="ME"  to="Maine" />
+      <RegionTypo from="MD"  to="Maryland" />
+      <RegionTypo from="MA"  to="Massachusetts" />
+      <RegionTypo from="MI"  to="Michigan" />
+      <RegionTypo from="MN"  to="Minnesota" />
+      <RegionTypo from="MS"  to="Mississippi" />
+      <RegionTypo from="MO"  to="Missouri" />
+      <RegionTypo from="MT"  to="Montana" />
+      <RegionTypo from="NE"  to="Nebraska" />
+      <RegionTypo from="NV"  to="Nevada" />
+      <RegionTypo from="NJ"  to="New Hampshire" />
+      <RegionTypo from="NH"  to="New Jersey" />
+      <RegionTypo from="NM"  to="New Mexico" />
+      <RegionTypo from="NY"  to="New York" />
+      <RegionTypo from="NC"  to="North Carolina" />
+      <RegionTypo from="ND"  to="North Dakota" />
+      <RegionTypo from="OH"  to="Ohio" />
+      <RegionTypo from="OK"  to="Oklahoma" />
+      <RegionTypo from="OR"  to="Oregon" />
+      <RegionTypo from="PA"  to="Pennsylvania" />
+      <RegionTypo from="RI"  to="Rhode Island" />
+      <RegionTypo from="SC"  to="South Carolina" />
+      <RegionTypo from="SD"  to="South Dakota" />
+      <RegionTypo from="TN"  to="Tennessee" />
+      <RegionTypo from="TX"  to="Texas" />
+      <RegionTypo from="UT"  to="Utah" />
+      <RegionTypo from="VT"  to="Vermont" />
+      <RegionTypo from="VA"  to="Virginia" />
+      <RegionTypo from="WA"  to="Washington" />
+      <RegionTypo from="WV"  to="West Virginia" />
+      <RegionTypo from="WI"  to="Wisconsin" />
+      <RegionTypo from="WY"  to="Wyoming" />
 
       <!-- Australian Territories abbreviations -->
-      <RegionTypo from="NSW"           to="New South Wales" />
+      <RegionTypo from="NSW"   to="New South Wales" />
+      <RegionTypo from="N S W" to="New South Wales" />
     </RegionTypos>
   </Typos>
   <FieldMoves>
@@ -178,9 +221,6 @@
       <CountryToRegion region="Wiltshire"           country="England" IGIName="Wiltshire" />
       <CountryToRegion region="Worcestershire"      country="England" IGIName="Worcester" />
       <CountryToRegion region="Yorkshire"           country="England" IGIName="Yorkshire" />
-      <CountryToRegion region="North Yorkshire"     country="England" IGIName="Yorkshire" />
-      <CountryToRegion region="West Yorkshire"      country="England" IGIName="Yorkshire" />
-      <CountryToRegion region="South Yorkshire"     country="England" IGIName="Yorkshire" />
 
       <!-- Welsh Regions -->
       <CountryToRegion region="Anglesey"        country="Wales" IGIName="Anglesey" />
@@ -264,6 +304,9 @@
       <CountryToRegion region="West Virginia"         country="United States" IGIName="West Virginia" />
       <CountryToRegion region="Wisconsin"             country="United States" IGIName="Wisconsin" />
       <CountryToRegion region="Wyoming"               country="United States" IGIName="Wyoming" />
+
+      <!-- Australian Territories -->
+      <CountryToRegion region="New South Wales"       country="Australia" IGIName="" />
     </DemoteCountries>                                                          
     <DemoteRegions>
       <RegionToParish parish="Aberdeen"   region="Aberdeenshire" />
