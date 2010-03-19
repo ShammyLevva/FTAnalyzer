@@ -319,6 +319,7 @@
       <RegionToParish parish="Liverpool"  region="Lancashire" />
 
       <RegionToParish parish="Toronto"    region="Ontario" />
+      <RegionToParish parish="Vancouver"  region="British Columbia" />
     </DemoteRegions>
   </FieldMoves>
 </Fixes>
