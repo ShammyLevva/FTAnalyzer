@@ -317,6 +317,8 @@
       <RegionToParish parish="London"     region="Middlesex" />
       <RegionToParish parish="Manchester" region="Lancashire" />
       <RegionToParish parish="Liverpool"  region="Lancashire" />
+
+      <RegionToParish parish="Toronto"    region="Ontario" />
     </DemoteRegions>
   </FieldMoves>
 </Fixes>

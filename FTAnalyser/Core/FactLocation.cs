@@ -131,7 +131,7 @@ namespace FTAnalyzer
                 fixEmptyFields();
                 fixCapitalisation();
                 fixRegionFullStops();
-                fixMultipleSpaces();
+                fixMultipleSpacesAndAmpersands();
 	            fixCountryTypos();
                 country = fixRegionTypos(country);
                 ShiftCountryToRegion();
@@ -200,7 +200,7 @@ namespace FTAnalyzer
             region = region.Replace(".", " ").Trim();
         }
 
-        private void fixMultipleSpaces()
+        private void fixMultipleSpacesAndAmpersands()
         {
             while (country.IndexOf("  ") != -1)
                 country = country.Replace("  ", " ");
@@ -212,6 +212,11 @@ namespace FTAnalyzer
                 address = address.Replace("  ", " ");
             while (place.IndexOf("  ") != -1)
                 place = place.Replace("  ", " ");
+            country = country.Replace("&", "and");
+            region = region.Replace("&", "and");
+            parish = parish.Replace("&", "and");
+            address = address.Replace("&", "and");
+            place = place.Replace("&", "and");
         }
 
         private void fixCountryTypos()
