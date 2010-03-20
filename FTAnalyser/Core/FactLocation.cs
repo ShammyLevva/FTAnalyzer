@@ -41,21 +41,22 @@ namespace FTAnalyzer
             {
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(filename);
-                foreach (XmlNode n in xmlDoc.SelectNodes("Fixes/Typos/CountryTypos/CountryTypo"))
+                //xmlDoc.Validate(something);
+                foreach (XmlNode n in xmlDoc.SelectNodes("Fixes/CountryTypos/CountryTypo"))
                 {
                     string from = n.Attributes["from"].Value;
                     string to = n.Attributes["to"].Value;
                     if (from != null && from.Length > 0 && to != null && to.Length > 0)
                         COUNTRYTYPOS.Add(from, to);
                 }
-                foreach (XmlNode n in xmlDoc.SelectNodes("Fixes/Typos/RegionTypos/RegionTypo"))
+                foreach (XmlNode n in xmlDoc.SelectNodes("Fixes/RegionTypos/RegionTypo"))
                 {
                     string from = n.Attributes["from"].Value;
                     string to = n.Attributes["to"].Value;
                     if (from != null && from.Length > 0 && to != null && to.Length > 0)
                         REGIONTYPOS.Add(from, to);
                 }
-                foreach (XmlNode n in xmlDoc.SelectNodes("Fixes/FieldMoves/DemoteCountries/CountryToRegion"))
+                foreach (XmlNode n in xmlDoc.SelectNodes("Fixes/DemoteCountries/CountryToRegion"))
                 {
                     string from = n.Attributes["region"].Value;
                     string to = n.Attributes["country"].Value;
@@ -67,7 +68,7 @@ namespace FTAnalyzer
                             IGINAMES.Add(from, IGIName);
                     }
                 }
-                foreach (XmlNode n in xmlDoc.SelectNodes("Fixes/FieldMoves/DemoteRegions/RegionToParish"))
+                foreach (XmlNode n in xmlDoc.SelectNodes("Fixes/DemoteRegions/RegionToParish"))
                 {
                     string from = n.Attributes["parish"].Value;
                     string to = n.Attributes["region"].Value;
