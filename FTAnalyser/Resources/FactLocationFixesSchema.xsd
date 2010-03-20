@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="Fixes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Typos">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CountryTypos">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name ="CountryTypo" type="typo" minOccurs="0" maxOccurs="unbounded" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="RegionTypos">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name ="RegionTypo" type="typo" minOccurs="0" maxOccurs="unbounded" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="FieldMoves" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="typo">
+    <xs:attribute name="from" type="xs:string"/>
+    <xs:attribute name="to" type="xs:string"/>
+  </xs:complexType>
+  
+</xs:schema>
