@@ -23,11 +23,14 @@ namespace FTAnalyzer
             }
             else if (level == FactLocation.REGION)
             {
-                adaptors.TryGetValue(location.Region, out adaptor);
+                adaptors.TryGetValue(location.RegionID, out adaptor);
+                if(adaptor == null) // we have no region so just use country
+                    adaptors.TryGetValue(location.Country, out adaptor);
             }
             if (adaptor == null)
             {
-                adaptor = adaptors["Scotland"];
+                // TODO: Throw error or something it shouldn't be null
+                Console.WriteLine("Failed to process " + location.ToString() + " at level " + level);
             }
             return adaptor;
         }
@@ -92,54 +95,54 @@ namespace FTAnalyzer
             adaptors.Add("Yorkshire",           new IGILocation(FactLocation.REGION, "2", "Engl", "York"));
 
             // Scottish counties
-            adaptors.Add("Aberdeen",       new IGILocation(FactLocation.REGION, "2", "Scot", "Aber"));
+            adaptors.Add("Aberdeen",            new IGILocation(FactLocation.REGION, "2", "Scot", "Aber"));
             adaptors.Add("Angus",               new IGILocation(FactLocation.REGION, "2", "Scot", "Angu"));
             adaptors.Add("Argyll",              new IGILocation(FactLocation.REGION, "2", "Scot", "Argy"));
-            adaptors.Add("Ayrshire",            new IGILocation(FactLocation.REGION, "2", "Scot", "Ayr"));
-            adaptors.Add("Banffshire",          new IGILocation(FactLocation.REGION, "2", "Scot", "Banf"));
-            adaptors.Add("Berwickshire",        new IGILocation(FactLocation.REGION, "2", "Scot", "Berw"));
+            adaptors.Add("Ayr",                 new IGILocation(FactLocation.REGION, "2", "Scot", "Ayr"));
+            adaptors.Add("Banff",               new IGILocation(FactLocation.REGION, "2", "Scot", "Banf"));
+            adaptors.Add("Berwick",             new IGILocation(FactLocation.REGION, "2", "Scot", "Berw"));
             adaptors.Add("Bute",                new IGILocation(FactLocation.REGION, "2", "Scot", "Bute"));
             adaptors.Add("Caithness",           new IGILocation(FactLocation.REGION, "2", "Scot", "Cait"));
-            adaptors.Add("Clackmannanshire",    new IGILocation(FactLocation.REGION, "2", "Scot", "Clac"));
+            adaptors.Add("Clackmannan",         new IGILocation(FactLocation.REGION, "2", "Scot", "Clac"));
             adaptors.Add("Dumfries",            new IGILocation(FactLocation.REGION, "2", "Scot", "Dumf"));
-            adaptors.Add("Dunbartonshire",      new IGILocation(FactLocation.REGION, "2", "Scot", "Dunb"));
+            adaptors.Add("Dunbarton",           new IGILocation(FactLocation.REGION, "2", "Scot", "Dunb"));
             adaptors.Add("East Lothian",        new IGILocation(FactLocation.REGION, "2", "Scot", "ELot"));
             adaptors.Add("Fife",                new IGILocation(FactLocation.REGION, "2", "Scot", "Fife"));
             adaptors.Add("Inverness",           new IGILocation(FactLocation.REGION, "2", "Scot", "Inve"));
-            adaptors.Add("Kincardineshire",     new IGILocation(FactLocation.REGION, "2", "Scot", "Kinc"));
+            adaptors.Add("Kincardine",          new IGILocation(FactLocation.REGION, "2", "Scot", "Kinc"));
             adaptors.Add("Kinross",             new IGILocation(FactLocation.REGION, "2", "Scot", "Kinr"));
-            adaptors.Add("Kirkcudbrightshire",  new IGILocation(FactLocation.REGION, "2", "Scot", "Kirk"));
-            adaptors.Add("Lanarkshire",         new IGILocation(FactLocation.REGION, "2", "Scot", "Lana"));
+            adaptors.Add("Kirkcudbright",       new IGILocation(FactLocation.REGION, "2", "Scot", "Kirk"));
+            adaptors.Add("Lanark",              new IGILocation(FactLocation.REGION, "2", "Scot", "Lana"));
             adaptors.Add("Midlothian",          new IGILocation(FactLocation.REGION, "2", "Scot", "Mlot"));
             adaptors.Add("Moray",               new IGILocation(FactLocation.REGION, "2", "Scot", "Mora"));
             adaptors.Add("Nairn",               new IGILocation(FactLocation.REGION, "2", "Scot", "Nair"));
             adaptors.Add("Orkney",              new IGILocation(FactLocation.REGION, "2", "Scot", "Orkn"));
             adaptors.Add("Peebles",             new IGILocation(FactLocation.REGION, "2", "Scot", "Peeb"));
-            adaptors.Add("Perthshire",          new IGILocation(FactLocation.REGION, "2", "Scot", "Pert"));
-            adaptors.Add("Renfrewshire",        new IGILocation(FactLocation.REGION, "2", "Scot", "Renf"));
+            adaptors.Add("Perth",               new IGILocation(FactLocation.REGION, "2", "Scot", "Pert"));
+            adaptors.Add("Renfrew",             new IGILocation(FactLocation.REGION, "2", "Scot", "Renf"));
             adaptors.Add("Ross and Cromarty",   new IGILocation(FactLocation.REGION, "2", "Scot", "RoCr"));
             adaptors.Add("Roxburgh",            new IGILocation(FactLocation.REGION, "2", "Scot", "Roxb"));
             adaptors.Add("Selkirk",             new IGILocation(FactLocation.REGION, "2", "Scot", "Selk"));
             adaptors.Add("Shetland",            new IGILocation(FactLocation.REGION, "2", "Scot", "Shet"));
-            adaptors.Add("Stirlingshire",       new IGILocation(FactLocation.REGION, "2", "Scot", "Stir"));
+            adaptors.Add("Stirling",            new IGILocation(FactLocation.REGION, "2", "Scot", "Stir"));
             adaptors.Add("Sutherland",          new IGILocation(FactLocation.REGION, "2", "Scot", "Suth"));
             adaptors.Add("West Lothian",        new IGILocation(FactLocation.REGION, "2", "Scot", "WLot"));
-            adaptors.Add("Wigtonshire",         new IGILocation(FactLocation.REGION, "2", "Scot", "Wigt"));
+            adaptors.Add("Wigton",              new IGILocation(FactLocation.REGION, "2", "Scot", "Wigt"));
 
             adaptors.Add("Anglesey",            new IGILocation(FactLocation.REGION, "2", "Wale", "Angl"));
-            adaptors.Add("Breconshire",         new IGILocation(FactLocation.REGION, "2", "Wale", "Brec"));
+            adaptors.Add("Brecon",              new IGILocation(FactLocation.REGION, "2", "Wale", "Brec"));
             adaptors.Add("Caernarvon",          new IGILocation(FactLocation.REGION, "2", "Wale", "Caer"));
-            adaptors.Add("Cardiganshire",       new IGILocation(FactLocation.REGION, "2", "Wale", "Card"));
-            adaptors.Add("Carmarthenshire",     new IGILocation(FactLocation.REGION, "2", "Wale", "Carm"));
-            adaptors.Add("Denbighshire",        new IGILocation(FactLocation.REGION, "2", "Wale", "Denb"));
-            adaptors.Add("Flintshire",        new IGILocation(FactLocation.REGION, "2", "Wale", "Flin"));
-            adaptors.Add("Glamorganshire",      new IGILocation(FactLocation.REGION, "2", "Wale", "Glam"));
+            adaptors.Add("Cardigan",            new IGILocation(FactLocation.REGION, "2", "Wale", "Card"));
+            adaptors.Add("Carmarthen",          new IGILocation(FactLocation.REGION, "2", "Wale", "Carm"));
+            adaptors.Add("Denbigh",             new IGILocation(FactLocation.REGION, "2", "Wale", "Denb"));
+            adaptors.Add("Flint",               new IGILocation(FactLocation.REGION, "2", "Wale", "Flin"));
+            adaptors.Add("Glamorgan",           new IGILocation(FactLocation.REGION, "2", "Wale", "Glam"));
             adaptors.Add("Gwynedd",             new IGILocation(FactLocation.REGION, "2", "Wale", "Gwyn"));
-            adaptors.Add("Merionethshire",      new IGILocation(FactLocation.REGION, "2", "Wale", "Meri"));
+            adaptors.Add("Merioneth",           new IGILocation(FactLocation.REGION, "2", "Wale", "Meri"));
             adaptors.Add("Mid-Glamorgan",       new IGILocation(FactLocation.REGION, "2", "Wale", "MGla"));
-            adaptors.Add("Montgomeryshire",     new IGILocation(FactLocation.REGION, "2", "Wale", "Mntg"));
-            adaptors.Add("Pembrokeshire",       new IGILocation(FactLocation.REGION, "2", "Wale", "Pemb"));
-            adaptors.Add("Radnorshire",         new IGILocation(FactLocation.REGION, "2", "Wale", "Radn"));
+            adaptors.Add("Montgomery",          new IGILocation(FactLocation.REGION, "2", "Wale", "Mntg"));
+            adaptors.Add("Pembroke",            new IGILocation(FactLocation.REGION, "2", "Wale", "Pemb"));
+            adaptors.Add("Radnor",              new IGILocation(FactLocation.REGION, "2", "Wale", "Radn"));
 
             // Canadian Provinces
             adaptors.Add("Alberta",                 new IGILocation(FactLocation.REGION, "11", "CAN", "Alta"));
@@ -153,7 +156,7 @@ namespace FTAnalyzer
             adaptors.Add("Prince Edward Island",    new IGILocation(FactLocation.REGION, "11", "CAN", "PEI"));
             adaptors.Add("Quebec",                  new IGILocation(FactLocation.REGION, "11", "CAN", "Queb"));
             adaptors.Add("Saskatchewan",            new IGILocation(FactLocation.REGION, "11", "CAN", "Sask"));
-            adaptors.Add("Yukon Territory",         new IGILocation(FactLocation.REGION, "11", "CAN", "YukT"));
+            adaptors.Add("Yukon",                   new IGILocation(FactLocation.REGION, "11", "CAN", "YukT"));
 
             // US States
             adaptors.Add("Alabama",                 new IGILocation(FactLocation.REGION, "11", "US", "Alab"));

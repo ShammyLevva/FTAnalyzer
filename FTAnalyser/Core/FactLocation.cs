@@ -25,14 +25,15 @@ namespace FTAnalyzer
         internal string address;
         internal string place;
         internal string parishID;
+        internal string regionID;
         private int level;
 
         private List<Individual> individuals;
-        private static Dictionary<string, string> COUNTRYTYPOS = new Dictionary<string, string>();
-        private static Dictionary<string, string> REGIONTYPOS = new Dictionary<string, string>();
-        private static Dictionary<string, string> COUNTRYSHIFTS = new Dictionary<string, string>();
-        private static Dictionary<string, string> REGIONSHIFTS = new Dictionary<string, string>();
-        private static Dictionary<string, string> IGINAMES = new Dictionary<string, string>();
+        private static Dictionary<string, string> COUNTRY_TYPOS = new Dictionary<string, string>();
+        private static Dictionary<string, string> REGION_TYPOS = new Dictionary<string, string>();
+        private static Dictionary<string, string> COUNTRY_SHIFTS = new Dictionary<string, string>();
+        private static Dictionary<string, string> REGION_SHIFTS = new Dictionary<string, string>();
+        private static Dictionary<string, string> REGION_IDS = new Dictionary<string, string>();
         
         static FactLocation() {
             // load conversions from XML file
@@ -47,14 +48,14 @@ namespace FTAnalyzer
                     string from = n.Attributes["from"].Value;
                     string to = n.Attributes["to"].Value;
                     if (from != null && from.Length > 0 && to != null && to.Length > 0)
-                        COUNTRYTYPOS.Add(from, to);
+                        COUNTRY_TYPOS.Add(from, to);
                 }
                 foreach (XmlNode n in xmlDoc.SelectNodes("Fixes/RegionTypos/RegionTypo"))
                 {
                     string from = n.Attributes["from"].Value;
                     string to = n.Attributes["to"].Value;
                     if (from != null && from.Length > 0 && to != null && to.Length > 0)
-                        REGIONTYPOS.Add(from, to);
+                        REGION_TYPOS.Add(from, to);
                 }
                 foreach (XmlNode n in xmlDoc.SelectNodes("Fixes/DemoteCountries/CountryToRegion"))
                 {
@@ -62,10 +63,10 @@ namespace FTAnalyzer
                     string to = n.Attributes["country"].Value;
                     if (from != null && from.Length > 0 && to != null && to.Length > 0)
                     {
-                        COUNTRYSHIFTS.Add(from, to);
-                        string IGIName = n.Attributes["IGIName"].Value;
-                        if (IGIName != null && IGIName.Length > 0)
-                            IGINAMES.Add(from, IGIName);
+                        COUNTRY_SHIFTS.Add(from, to);
+                        string regionID = n.Attributes["regionID"].Value;
+                        if (regionID != null && regionID.Length > 0 && !REGION_IDS.ContainsKey(from))
+                            REGION_IDS.Add(from, regionID);
                     }
                 }
                 foreach (XmlNode n in xmlDoc.SelectNodes("Fixes/DemoteRegions/RegionToParish"))
@@ -74,7 +75,7 @@ namespace FTAnalyzer
                     string to = n.Attributes["region"].Value;
                     if (from != null && from.Length > 0 && to != null && to.Length > 0)
                     {
-                        REGIONSHIFTS.Add(from, to);
+                        REGION_SHIFTS.Add(from, to);
                     }
                 }
             }
@@ -128,7 +129,7 @@ namespace FTAnalyzer
 	                country = location.Trim();
 	                level = COUNTRY;
 	            }
-                string before = (parish + ", " + region + ", " + country).ToUpper().Trim();
+                //string before = (parish + ", " + region + ", " + country).ToUpper().Trim();
                 fixEmptyFields();
                 fixCapitalisation();
                 fixRegionFullStops();
@@ -138,9 +139,10 @@ namespace FTAnalyzer
                 ShiftCountryToRegion();
                 region = fixRegionTypos(region);
                 ShiftRegionToParish();
-                string after = (parish + ", " + region + ", " + country).ToUpper().Trim();
-                if (!before.Equals(after))
-                    Console.WriteLine("Debug : '" + before + "'  converted to '" + after + "'");
+                SetRegionID();
+                //string after = (parish + ", " + region + ", " + country).ToUpper().Trim();
+                //if (!before.Equals(after))
+                //    Console.WriteLine("Debug : '" + before + "'  converted to '" + after + "'");
             }
         }
 
@@ -223,7 +225,7 @@ namespace FTAnalyzer
         private void fixCountryTypos()
         {
             string newCountry = string.Empty;
-            COUNTRYTYPOS.TryGetValue(country, out newCountry);
+            COUNTRY_TYPOS.TryGetValue(country, out newCountry);
             if (newCountry != null && newCountry.Length > 0)
                 country = newCountry;
         }
@@ -231,7 +233,7 @@ namespace FTAnalyzer
         private string fixRegionTypos(string toFix)
         {
             string result = string.Empty;
-            REGIONTYPOS.TryGetValue(toFix, out result);
+            REGION_TYPOS.TryGetValue(toFix, out result);
             if (result != null && result.Length > 0)
                 return result;
             else
@@ -241,7 +243,7 @@ namespace FTAnalyzer
         private void ShiftCountryToRegion()
         {
             string newCountry = string.Empty;
-            COUNTRYSHIFTS.TryGetValue(country, out newCountry);
+            COUNTRY_SHIFTS.TryGetValue(country, out newCountry);
             if (newCountry != null && newCountry.Length > 0)
             {
                 place = (place + " " + address).Trim();
@@ -256,7 +258,7 @@ namespace FTAnalyzer
         private void ShiftRegionToParish()
         {
             string newRegion = string.Empty;
-            REGIONSHIFTS.TryGetValue(region, out newRegion);
+            REGION_SHIFTS.TryGetValue(region, out newRegion);
             if (newRegion != null && newRegion.Length > 0)
             {
                 place = (place + " " + address).Trim();
@@ -268,6 +270,16 @@ namespace FTAnalyzer
         }
 
         #endregion
+
+        private void SetRegionID()
+        {
+            string newRegionID = string.Empty;
+            REGION_IDS.TryGetValue(region, out newRegionID);
+            if (newRegionID != null && newRegionID.Length > 0)
+                this.regionID = newRegionID;
+            else
+                this.regionID = string.Empty;
+        }
 
         public void AddIndividual(Individual ind)
         {
@@ -315,8 +327,14 @@ namespace FTAnalyzer
             get { return region; }
             set { this.region = value; }
         }
-        
-        public int Level {
+
+        public string RegionID
+        {
+            get { return regionID; }
+        }
+
+        public int Level
+        {
             get { return level; }
         }
 

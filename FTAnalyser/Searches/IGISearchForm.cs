@@ -93,9 +93,13 @@ namespace FTAnalyzer
         private void SetLocationParameters(FactLocation location)
         {
             IGILocation loc = IGILocation.Adapt(location, level);
-            setParameter(REGION, loc.Region);
-            setParameter(COUNTRY, loc.Juris1);
-            setParameter(SHIRE, loc.Juris2);
+            if (loc != null)
+            {
+                setParameter(REGION, loc.Region);
+                setParameter(COUNTRY, loc.Juris1);
+                setParameter(SHIRE, loc.Juris2);
+                Console.WriteLine(location.ToString() + " is '" + loc.Region + ", " + loc.Juris1 + ", " + loc.Juris2 + "'");
+            }
         }
 
         public NameValueCollection getEncodedParameters () {

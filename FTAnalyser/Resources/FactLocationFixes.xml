@@ -63,11 +63,12 @@
     
 
     <!-- Canadian Province abbreviations -->
-    <RegionTypo from="BC"  to="British Columbia" />
-    <RegionTypo from="NWT" to="North West Territories" />
-    <RegionTypo from="NS"  to="Nova Scotia" />
-    <RegionTypo from="ON"  to="Ontario" />
-    <RegionTypo from="PEI" to="Prince Edward Island" />
+    <RegionTypo from="BC"     to="British Columbia" />
+    <RegionTypo from="NWT"    to="North West Territories" />
+    <RegionTypo from="NS"     to="Nova Scotia" />
+    <RegionTypo from="ON"     to="Ontario" />
+    <RegionTypo from="PEI"    to="Prince Edward Island" />
+    <RegionTypo from="Yukon"  to="Yukon Territory" />
 
     <!-- US State abbreviations -->
     <RegionTypo from="AL"  to="Alabama" />
@@ -128,189 +129,189 @@
   </RegionTypos>
   <DemoteCountries>
     <!-- Scottish Counties -->
-    <CountryToRegion region="Aberdeenshire"       country="Scotland" IGIName="Aberdeen" />
-    <CountryToRegion region="Angus"               country="Scotland" IGIName="Angus" />
-    <CountryToRegion region="Argyll"              country="Scotland" IGIName="Argyll" />
-    <CountryToRegion region="Argyllshire"         country="Scotland" IGIName="Argyll" />
-    <CountryToRegion region="Ayrshire"            country="Scotland" IGIName="Ayr" />
-    <CountryToRegion region="Banff"               country="Scotland" IGIName="Banff" />
-    <CountryToRegion region="Banffshire"          country="Scotland" IGIName="Banff" />
-    <CountryToRegion region="Berwick"             country="Scotland" IGIName="Berwick" />
-    <CountryToRegion region="Berwickshire"        country="Scotland" IGIName="Berwick" />
-    <CountryToRegion region="Bute"                country="Scotland" IGIName="Bute" />
-    <CountryToRegion region="Caithness"           country="Scotland" IGIName="Caithness" />
-    <CountryToRegion region="Clackmannanshire"    country="Scotland" IGIName="Clackmannan" />
-    <CountryToRegion region="Dumfries"            country="Scotland" IGIName="Dumfries" />
-    <CountryToRegion region="Dumfries-shire"      country="Scotland" IGIName="Dumfries" />
-    <CountryToRegion region="Dunbarton"           country="Scotland" IGIName="Dunbarton" />
-    <CountryToRegion region="Dunbartonshire"      country="Scotland" IGIName="Dunbarton" />
-    <CountryToRegion region="East Lothian"        country="Scotland" IGIName="East Lothian" />
-    <CountryToRegion region="Fife"                country="Scotland" IGIName="Fife" />
-    <CountryToRegion region="Fifeshire"           country="Scotland" IGIName="Fife" />
-    <CountryToRegion region="Inverness"           country="Scotland" IGIName="Inverness" />
-    <CountryToRegion region="Inverness-shire"     country="Scotland" IGIName="Inverness" />
-    <CountryToRegion region="Kincardineshire"     country="Scotland" IGIName="Kincardine" />
-    <CountryToRegion region="Kinross"             country="Scotland" IGIName="Kinross" />
-    <CountryToRegion region="Kinross-shire"       country="Scotland" IGIName="Kinross" />
-    <CountryToRegion region="Kirkcudbright"       country="Scotland" IGIName="Kirkcudbright" />
-    <CountryToRegion region="Kirkcudbrightshire"  country="Scotland" IGIName="Kirkcudbright" />
-    <CountryToRegion region="Lanarkshire"         country="Scotland" IGIName="Lanark" />
-    <CountryToRegion region="Midlothian"          country="Scotland" IGIName="Midlothian" />
-    <CountryToRegion region="Moray"               country="Scotland" IGIName="Moray" />
-    <CountryToRegion region="Morayshire"          country="Scotland" IGIName="Moray" />
-    <CountryToRegion region="Nairn"               country="Scotland" IGIName="Nairn" />
-    <CountryToRegion region="Nairnshire"          country="Scotland" IGIName="Nairn" />
-    <CountryToRegion region="Orkney"              country="Scotland" IGIName="Orkney" />
-    <CountryToRegion region="Peebles"             country="Scotland" IGIName="Peebles" />
-    <CountryToRegion region="Perthshire"          country="Scotland" IGIName="Perth" />
-    <CountryToRegion region="Renfrewshire"        country="Scotland" IGIName="Renfrew" />
-    <CountryToRegion region="Ross and Cromarty"   country="Scotland" IGIName="Ross and Cromarty" />
-    <CountryToRegion region="Roxburgh"            country="Scotland" IGIName="Roxburgh" />
-    <CountryToRegion region="Selkirk"             country="Scotland" IGIName="Selkirk" />
-    <CountryToRegion region="Shetland"            country="Scotland" IGIName="Shetland" />
-    <CountryToRegion region="Zetland"             country="Scotland" IGIName="Shetland" />
-    <CountryToRegion region="Stirlingshire"       country="Scotland" IGIName="Stirling" />
-    <CountryToRegion region="Sutherland"          country="Scotland" IGIName="Sutherland" />
-    <CountryToRegion region="West Lothian"        country="Scotland" IGIName="West Lothian" />
-    <CountryToRegion region="Wigtonshire"         country="Scotland" IGIName="Wigton" />
+    <CountryToRegion region="Aberdeenshire"       country="Scotland" regionID="Aberdeen" />
+    <CountryToRegion region="Angus"               country="Scotland" regionID="Angus" />
+    <CountryToRegion region="Argyll"              country="Scotland" regionID="Argyll" />
+    <CountryToRegion region="Argyllshire"         country="Scotland" regionID="Argyll" />
+    <CountryToRegion region="Ayrshire"            country="Scotland" regionID="Ayr" />
+    <CountryToRegion region="Banff"               country="Scotland" regionID="Banff" />
+    <CountryToRegion region="Banffshire"          country="Scotland" regionID="Banff" />
+    <CountryToRegion region="Berwick"             country="Scotland" regionID="Berwick" />
+    <CountryToRegion region="Berwickshire"        country="Scotland" regionID="Berwick" />
+    <CountryToRegion region="Bute"                country="Scotland" regionID="Bute" />
+    <CountryToRegion region="Caithness"           country="Scotland" regionID="Caithness" />
+    <CountryToRegion region="Clackmannanshire"    country="Scotland" regionID="Clackmannan" />
+    <CountryToRegion region="Dumfries"            country="Scotland" regionID="Dumfries" />
+    <CountryToRegion region="Dumfries-shire"      country="Scotland" regionID="Dumfries" />
+    <CountryToRegion region="Dunbarton"           country="Scotland" regionID="Dunbarton" />
+    <CountryToRegion region="Dunbartonshire"      country="Scotland" regionID="Dunbarton" />
+    <CountryToRegion region="East Lothian"        country="Scotland" regionID="East Lothian" />
+    <CountryToRegion region="Fife"                country="Scotland" regionID="Fife" />
+    <CountryToRegion region="Fifeshire"           country="Scotland" regionID="Fife" />
+    <CountryToRegion region="Inverness"           country="Scotland" regionID="Inverness" />
+    <CountryToRegion region="Inverness-shire"     country="Scotland" regionID="Inverness" />
+    <CountryToRegion region="Kincardineshire"     country="Scotland" regionID="Kincardine" />
+    <CountryToRegion region="Kinross"             country="Scotland" regionID="Kinross" />
+    <CountryToRegion region="Kinross-shire"       country="Scotland" regionID="Kinross" />
+    <CountryToRegion region="Kirkcudbright"       country="Scotland" regionID="Kirkcudbright" />
+    <CountryToRegion region="Kirkcudbrightshire"  country="Scotland" regionID="Kirkcudbright" />
+    <CountryToRegion region="Lanarkshire"         country="Scotland" regionID="Lanark" />
+    <CountryToRegion region="Midlothian"          country="Scotland" regionID="Midlothian" />
+    <CountryToRegion region="Moray"               country="Scotland" regionID="Moray" />
+    <CountryToRegion region="Morayshire"          country="Scotland" regionID="Moray" />
+    <CountryToRegion region="Nairn"               country="Scotland" regionID="Nairn" />
+    <CountryToRegion region="Nairnshire"          country="Scotland" regionID="Nairn" />
+    <CountryToRegion region="Orkney"              country="Scotland" regionID="Orkney" />
+    <CountryToRegion region="Peebles"             country="Scotland" regionID="Peebles" />
+    <CountryToRegion region="Perthshire"          country="Scotland" regionID="Perth" />
+    <CountryToRegion region="Renfrewshire"        country="Scotland" regionID="Renfrew" />
+    <CountryToRegion region="Ross and Cromarty"   country="Scotland" regionID="Ross and Cromarty" />
+    <CountryToRegion region="Roxburgh"            country="Scotland" regionID="Roxburgh" />
+    <CountryToRegion region="Selkirk"             country="Scotland" regionID="Selkirk" />
+    <CountryToRegion region="Shetland"            country="Scotland" regionID="Shetland" />
+    <CountryToRegion region="Zetland"             country="Scotland" regionID="Shetland" />
+    <CountryToRegion region="Stirlingshire"       country="Scotland" regionID="Stirling" />
+    <CountryToRegion region="Sutherland"          country="Scotland" regionID="Sutherland" />
+    <CountryToRegion region="West Lothian"        country="Scotland" regionID="West Lothian" />
+    <CountryToRegion region="Wigtonshire"         country="Scotland" regionID="Wigton" />
 
     <!-- English Shires & Counties -->
-    <CountryToRegion region="Bedfordshire"        country="England" IGIName="Bedford" />
-    <CountryToRegion region="Berkshire"           country="England" IGIName="Berkshire" />
-    <CountryToRegion region="Buckinghamshire"     country="England" IGIName="Buckingham" />
-    <CountryToRegion region="Cambridgeshire"      country="England" IGIName="Cambridge" />
-    <CountryToRegion region="Cheshire"            country="England" IGIName="Cheshire" />
-    <CountryToRegion region="Cornwall"            country="England" IGIName="Cornwall" />
-    <CountryToRegion region="Cumberland"          country="England" IGIName="Cumberland" />
-    <CountryToRegion region="Cumbria"             country="England" IGIName="Cumbria" />
-    <CountryToRegion region="Derbyshire"          country="England" IGIName="Derby" />
-    <CountryToRegion region="Devon"               country="England" IGIName="Devon" />
-    <CountryToRegion region="Dorset"              country="England" IGIName="Dorset" />
-    <CountryToRegion region="Co.Durham"           country="England" IGIName="Durham" />
-    <CountryToRegion region="Durham"              country="England" IGIName="Durham" />
-    <CountryToRegion region="Essex"               country="England" IGIName="Essex" />
-    <CountryToRegion region="Gloucestershire"     country="England" IGIName="Gloucester" />
-    <CountryToRegion region="Hampshire"           country="England" IGIName="Hampshire" />
-    <CountryToRegion region="Herefordshire"       country="England" IGIName="Hereford" />
-    <CountryToRegion region="Hertfordshire"       country="England" IGIName="Hertford" />
-    <CountryToRegion region="Huntingdonshire"     country="England" IGIName="Huntingdon" />
-    <CountryToRegion region="Kent"                country="England" IGIName="Kent" />
-    <CountryToRegion region="Lancashire"          country="England" IGIName="Lancashire" />
-    <CountryToRegion region="Leicestershire"      country="England" IGIName="Leicester" />
-    <CountryToRegion region="Lincolnshire"        country="England" IGIName="Lincoln" />
-    <CountryToRegion region="Middlesex"           country="England" IGIName="Middlesex" />
-    <CountryToRegion region="Monmouthshire"       country="England" IGIName="Monmouth" />
-    <CountryToRegion region="Norfolk"             country="England" IGIName="Norfolk" />
-    <CountryToRegion region="Northamptonshire"    country="England" IGIName="Northampton" />
-    <CountryToRegion region="Northumberland"      country="England" IGIName="Northumberland" />
-    <CountryToRegion region="Nottinghamshire"     country="England" IGIName="Nottingham" />
-    <CountryToRegion region="Oxfordshire"         country="England" IGIName="Oxford" />
-    <CountryToRegion region="Rutland"             country="England" IGIName="Rutland" />
-    <CountryToRegion region="Shropshire"          country="England" IGIName="Shropshire" />
-    <CountryToRegion region="Somerset"            country="England" IGIName="Somerset" />
-    <CountryToRegion region="Staffordshire"       country="England" IGIName="Staffordshire" />
-    <CountryToRegion region="Suffolk"             country="England" IGIName="Suffolk" />
-    <CountryToRegion region="Sussex"              country="England" IGIName="Sussex" />
-    <CountryToRegion region="Surrey"              country="England" IGIName="Surrey" />
-    <CountryToRegion region="Warwickshire"        country="England" IGIName="Warwick" />
-    <CountryToRegion region="Westmorland"         country="England" IGIName="Westmorland" />
-    <CountryToRegion region="Westmorlandshire"    country="England" IGIName="Westmorland" />
-    <CountryToRegion region="Wiltshire"           country="England" IGIName="Wiltshire" />
-    <CountryToRegion region="Worcestershire"      country="England" IGIName="Worcester" />
-    <CountryToRegion region="Yorkshire"           country="England" IGIName="Yorkshire" />
+    <CountryToRegion region="Bedfordshire"        country="England" regionID="Bedford" />
+    <CountryToRegion region="Berkshire"           country="England" regionID="Berkshire" />
+    <CountryToRegion region="Buckinghamshire"     country="England" regionID="Buckingham" />
+    <CountryToRegion region="Cambridgeshire"      country="England" regionID="Cambridge" />
+    <CountryToRegion region="Cheshire"            country="England" regionID="Cheshire" />
+    <CountryToRegion region="Cornwall"            country="England" regionID="Cornwall" />
+    <CountryToRegion region="Cumberland"          country="England" regionID="Cumberland" />
+    <CountryToRegion region="Cumbria"             country="England" regionID="Cumbria" />
+    <CountryToRegion region="Derbyshire"          country="England" regionID="Derby" />
+    <CountryToRegion region="Devon"               country="England" regionID="Devon" />
+    <CountryToRegion region="Dorset"              country="England" regionID="Dorset" />
+    <CountryToRegion region="Co.Durham"           country="England" regionID="Durham" />
+    <CountryToRegion region="Durham"              country="England" regionID="Durham" />
+    <CountryToRegion region="Essex"               country="England" regionID="Essex" />
+    <CountryToRegion region="Gloucestershire"     country="England" regionID="Gloucester" />
+    <CountryToRegion region="Hampshire"           country="England" regionID="Hampshire" />
+    <CountryToRegion region="Herefordshire"       country="England" regionID="Hereford" />
+    <CountryToRegion region="Hertfordshire"       country="England" regionID="Hertford" />
+    <CountryToRegion region="Huntingdonshire"     country="England" regionID="Huntingdon" />
+    <CountryToRegion region="Kent"                country="England" regionID="Kent" />
+    <CountryToRegion region="Lancashire"          country="England" regionID="Lancashire" />
+    <CountryToRegion region="Leicestershire"      country="England" regionID="Leicester" />
+    <CountryToRegion region="Lincolnshire"        country="England" regionID="Lincoln" />
+    <CountryToRegion region="Middlesex"           country="England" regionID="Middlesex" />
+    <CountryToRegion region="Monmouthshire"       country="England" regionID="Monmouth" />
+    <CountryToRegion region="Norfolk"             country="England" regionID="Norfolk" />
+    <CountryToRegion region="Northamptonshire"    country="England" regionID="Northampton" />
+    <CountryToRegion region="Northumberland"      country="England" regionID="Northumberland" />
+    <CountryToRegion region="Nottinghamshire"     country="England" regionID="Nottingham" />
+    <CountryToRegion region="Oxfordshire"         country="England" regionID="Oxford" />
+    <CountryToRegion region="Rutland"             country="England" regionID="Rutland" />
+    <CountryToRegion region="Shropshire"          country="England" regionID="Shropshire" />
+    <CountryToRegion region="Somerset"            country="England" regionID="Somerset" />
+    <CountryToRegion region="Staffordshire"       country="England" regionID="Staffordshire" />
+    <CountryToRegion region="Suffolk"             country="England" regionID="Suffolk" />
+    <CountryToRegion region="Sussex"              country="England" regionID="Sussex" />
+    <CountryToRegion region="Surrey"              country="England" regionID="Surrey" />
+    <CountryToRegion region="Warwickshire"        country="England" regionID="Warwick" />
+    <CountryToRegion region="Westmorland"         country="England" regionID="Westmorland" />
+    <CountryToRegion region="Westmorlandshire"    country="England" regionID="Westmorland" />
+    <CountryToRegion region="Wiltshire"           country="England" regionID="Wiltshire" />
+    <CountryToRegion region="Worcestershire"      country="England" regionID="Worcester" />
+    <CountryToRegion region="Yorkshire"           country="England" regionID="Yorkshire" />
 
     <!-- Welsh Regions -->
-    <CountryToRegion region="Anglesey"        country="Wales" IGIName="Anglesey" />
-    <CountryToRegion region="Breconshire"     country="Wales" IGIName="Brecon" />
-    <CountryToRegion region="Caernarvon"      country="Wales" IGIName="Caernarvon" />
-    <CountryToRegion region="Cardiganshire"   country="Wales" IGIName="Cardiganshire" />
-    <CountryToRegion region="Carmarthenshire" country="Wales" IGIName="Carmarthenshire" />
-    <CountryToRegion region="Denbighshire"    country="Wales" IGIName="Denbigh" />
-    <CountryToRegion region="Glamorganshire"  country="Wales" IGIName="Glamorgan" />
-    <CountryToRegion region="Gwynedd"         country="Wales" IGIName="Gwynedd" />
-    <CountryToRegion region="Merionethshire"  country="Wales" IGIName="Merioneth" />
-    <CountryToRegion region="Mid-Glamorgan"   country="Wales" IGIName="Mid-Glamorgan" />
-    <CountryToRegion region="Montgomeryshire" country="Wales" IGIName="Montgomery" />
-    <CountryToRegion region="Pembrokeshire"   country="Wales" IGIName="Pembroke" />
-    <CountryToRegion region="Radnorshire"     country="Wales" IGIName="Radnor" />
+    <CountryToRegion region="Anglesey"            country="Wales" regionID="Anglesey" />
+    <CountryToRegion region="Breconshire"         country="Wales" regionID="Brecon" />
+    <CountryToRegion region="Caernarvon"          country="Wales" regionID="Caernarvon" />
+    <CountryToRegion region="Cardiganshire"       country="Wales" regionID="Cardigan" />
+    <CountryToRegion region="Carmarthenshire"     country="Wales" regionID="Carmarthen" />
+    <CountryToRegion region="Denbighshire"        country="Wales" regionID="Denbigh" />
+    <CountryToRegion region="Glamorganshire"      country="Wales" regionID="Glamorgan" />
+    <CountryToRegion region="Gwynedd"             country="Wales" regionID="Gwynedd" />
+    <CountryToRegion region="Merionethshire"      country="Wales" regionID="Merioneth" />
+    <CountryToRegion region="Mid-Glamorgan"       country="Wales" regionID="Mid-Glamorgan" />
+    <CountryToRegion region="Montgomeryshire"     country="Wales" regionID="Montgomery" />
+    <CountryToRegion region="Pembrokeshire"       country="Wales" regionID="Pembroke" />
+    <CountryToRegion region="Radnorshire"         country="Wales" regionID="Radnor" />
 
     <!-- North America -->
     <!-- Canadian Provinces -->
-    <CountryToRegion region="Alberta"               country="Canada" IGIName="Alberta" />
-    <CountryToRegion region="British Columbia"      country="Canada" IGIName="British Columbia" />
-    <CountryToRegion region="Manitoba"              country="Canada" IGIName="Manitoba" />
-    <CountryToRegion region="New Brunswick"         country="Canada" IGIName="New Brunswick" />
-    <CountryToRegion region="Newfoundland"          country="Canada" IGIName="Newfoundland" />
-    <CountryToRegion region="Northwest Territories" country="Canada" IGIName="Northwest Territories" />
-    <CountryToRegion region="Nova Scotia"           country="Canada" IGIName="Nova Scotia" />
-    <CountryToRegion region="Ontario"               country="Canada" IGIName="Ontario" />
-    <CountryToRegion region="Prince Edward Island"  country="Canada" IGIName="Prince Edward Island" />
-    <CountryToRegion region="Quebec"                country="Canada" IGIName="Quebec" />
-    <CountryToRegion region="Saskatchewan"          country="Canada" IGIName="Saskatchewan" />
-    <CountryToRegion region="Yukon Territory"       country="Canada" IGIName="Yukon Territory" />
+    <CountryToRegion region="Alberta"               country="Canada" regionID="Alberta" />
+    <CountryToRegion region="British Columbia"      country="Canada" regionID="British Columbia" />
+    <CountryToRegion region="Manitoba"              country="Canada" regionID="Manitoba" />
+    <CountryToRegion region="New Brunswick"         country="Canada" regionID="New Brunswick" />
+    <CountryToRegion region="Newfoundland"          country="Canada" regionID="Newfoundland" />
+    <CountryToRegion region="Northwest Territories" country="Canada" regionID="Northwest Territories" />
+    <CountryToRegion region="Nova Scotia"           country="Canada" regionID="Nova Scotia" />
+    <CountryToRegion region="Ontario"               country="Canada" regionID="Ontario" />
+    <CountryToRegion region="Prince Edward Island"  country="Canada" regionID="Prince Edward Island" />
+    <CountryToRegion region="Quebec"                country="Canada" regionID="Quebec" />
+    <CountryToRegion region="Saskatchewan"          country="Canada" regionID="Saskatchewan" />
+    <CountryToRegion region="Yukon Territory"       country="Canada" regionID="Yukon" />
 
     <!-- US States -->
-    <CountryToRegion region="Alabama"               country="United States" IGIName="Alabama" />
-    <CountryToRegion region="Alaska"                country="United States" IGIName="Alaska" />
-    <CountryToRegion region="Arizona"               country="United States" IGIName="Arizona" />
-    <CountryToRegion region="Arkansas"              country="United States" IGIName="Arkansas" />
-    <CountryToRegion region="California"            country="United States" IGIName="California" />
-    <CountryToRegion region="Colorado"              country="United States" IGIName="Colorado" />
-    <CountryToRegion region="Connecticut"           country="United States" IGIName="Connecticut" />
-    <CountryToRegion region="Delaware"              country="United States" IGIName="Delaware" />
-    <CountryToRegion region="District of Columbia"  country="United States" IGIName="District of Columbia" />
-    <CountryToRegion region="Florida"               country="United States" IGIName="Florida" />
-    <CountryToRegion region="Georgia"               country="United States" IGIName="Georgia" />
-    <CountryToRegion region="Hawaii"                country="United States" IGIName="Hawaii" />
-    <CountryToRegion region="Idaho"                 country="United States" IGIName="Idaho" />
-    <CountryToRegion region="Illinois"              country="United States" IGIName="Illinois" />
-    <CountryToRegion region="Indiana"               country="United States" IGIName="Indiana" />
-    <CountryToRegion region="Iowa"                  country="United States" IGIName="Iowa" />
-    <CountryToRegion region="Kansas"                country="United States" IGIName="Kansas" />
-    <CountryToRegion region="Kentucky"              country="United States" IGIName="Kentucky" />
-    <CountryToRegion region="Louisiana"             country="United States" IGIName="Louisiana" />
-    <CountryToRegion region="Maine"                 country="United States" IGIName="Maine" />
-    <CountryToRegion region="Maryland"              country="United States" IGIName="Maryland" />
-    <CountryToRegion region="Massachusetts"         country="United States" IGIName="Massachusetts" />
-    <CountryToRegion region="Michigan"              country="United States" IGIName="Michigan" />
-    <CountryToRegion region="Minnesota"             country="United States" IGIName="Minnesota" />
-    <CountryToRegion region="Mississippi"           country="United States" IGIName="Mississippi" />
-    <CountryToRegion region="Missouri"              country="United States" IGIName="Missouri" />
-    <CountryToRegion region="Montana"               country="United States" IGIName="Montana" />
-    <CountryToRegion region="Nebraska"              country="United States" IGIName="Nebraska" />
-    <CountryToRegion region="Nevada"                country="United States" IGIName="Nevada" />
-    <CountryToRegion region="New Hampshire"         country="United States" IGIName="New Hampshire" />
-    <CountryToRegion region="New Jersey"            country="United States" IGIName="New Jersey" />
-    <CountryToRegion region="New Mexico"            country="United States" IGIName="New Mexico" />
-    <CountryToRegion region="New York"              country="United States" IGIName="New York" />
-    <CountryToRegion region="North Carolina"        country="United States" IGIName="North Carolina" />
-    <CountryToRegion region="North Dakota"          country="United States" IGIName="North Dakota" />
-    <CountryToRegion region="Ohio"                  country="United States" IGIName="Ohio" />
-    <CountryToRegion region="Oklahoma"              country="United States" IGIName="Oklahoma" />
-    <CountryToRegion region="Oregon"                country="United States" IGIName="Oregon" />
-    <CountryToRegion region="Pennsylvania"          country="United States" IGIName="Pennsylvania" />
-    <CountryToRegion region="Rhode Island"          country="United States" IGIName="Rhode Island" />
-    <CountryToRegion region="South Carolina"        country="United States" IGIName="South Carolina" />
-    <CountryToRegion region="South Dakota"          country="United States" IGIName="South Dakota" />
-    <CountryToRegion region="Tennessee"             country="United States" IGIName="Tennessee" />
-    <CountryToRegion region="Texas"                 country="United States" IGIName="Texas" />
-    <CountryToRegion region="Utah"                  country="United States" IGIName="Utah" />
-    <CountryToRegion region="Vermont"               country="United States" IGIName="Vermont" />
-    <CountryToRegion region="Virginia"              country="United States" IGIName="Virginia" />
-    <CountryToRegion region="Washington"            country="United States" IGIName="Washington" />
-    <CountryToRegion region="West Virginia"         country="United States" IGIName="West Virginia" />
-    <CountryToRegion region="Wisconsin"             country="United States" IGIName="Wisconsin" />
-    <CountryToRegion region="Wyoming"               country="United States" IGIName="Wyoming" />
+    <CountryToRegion region="Alabama"               country="United States" regionID="Alabama" />
+    <CountryToRegion region="Alaska"                country="United States" regionID="Alaska" />
+    <CountryToRegion region="Arizona"               country="United States" regionID="Arizona" />
+    <CountryToRegion region="Arkansas"              country="United States" regionID="Arkansas" />
+    <CountryToRegion region="California"            country="United States" regionID="California" />
+    <CountryToRegion region="Colorado"              country="United States" regionID="Colorado" />
+    <CountryToRegion region="Connecticut"           country="United States" regionID="Connecticut" />
+    <CountryToRegion region="Delaware"              country="United States" regionID="Delaware" />
+    <CountryToRegion region="District of Columbia"  country="United States" regionID="District of Columbia" />
+    <CountryToRegion region="Florida"               country="United States" regionID="Florida" />
+    <CountryToRegion region="Georgia"               country="United States" regionID="Georgia" />
+    <CountryToRegion region="Hawaii"                country="United States" regionID="Hawaii" />
+    <CountryToRegion region="Idaho"                 country="United States" regionID="Idaho" />
+    <CountryToRegion region="Illinois"              country="United States" regionID="Illinois" />
+    <CountryToRegion region="Indiana"               country="United States" regionID="Indiana" />
+    <CountryToRegion region="Iowa"                  country="United States" regionID="Iowa" />
+    <CountryToRegion region="Kansas"                country="United States" regionID="Kansas" />
+    <CountryToRegion region="Kentucky"              country="United States" regionID="Kentucky" />
+    <CountryToRegion region="Louisiana"             country="United States" regionID="Louisiana" />
+    <CountryToRegion region="Maine"                 country="United States" regionID="Maine" />
+    <CountryToRegion region="Maryland"              country="United States" regionID="Maryland" />
+    <CountryToRegion region="Massachusetts"         country="United States" regionID="Massachusetts" />
+    <CountryToRegion region="Michigan"              country="United States" regionID="Michigan" />
+    <CountryToRegion region="Minnesota"             country="United States" regionID="Minnesota" />
+    <CountryToRegion region="Mississippi"           country="United States" regionID="Mississippi" />
+    <CountryToRegion region="Missouri"              country="United States" regionID="Missouri" />
+    <CountryToRegion region="Montana"               country="United States" regionID="Montana" />
+    <CountryToRegion region="Nebraska"              country="United States" regionID="Nebraska" />
+    <CountryToRegion region="Nevada"                country="United States" regionID="Nevada" />
+    <CountryToRegion region="New Hampshire"         country="United States" regionID="New Hampshire" />
+    <CountryToRegion region="New Jersey"            country="United States" regionID="New Jersey" />
+    <CountryToRegion region="New Mexico"            country="United States" regionID="New Mexico" />
+    <CountryToRegion region="New York"              country="United States" regionID="New York" />
+    <CountryToRegion region="North Carolina"        country="United States" regionID="North Carolina" />
+    <CountryToRegion region="North Dakota"          country="United States" regionID="North Dakota" />
+    <CountryToRegion region="Ohio"                  country="United States" regionID="Ohio" />
+    <CountryToRegion region="Oklahoma"              country="United States" regionID="Oklahoma" />
+    <CountryToRegion region="Oregon"                country="United States" regionID="Oregon" />
+    <CountryToRegion region="Pennsylvania"          country="United States" regionID="Pennsylvania" />
+    <CountryToRegion region="Rhode Island"          country="United States" regionID="Rhode Island" />
+    <CountryToRegion region="South Carolina"        country="United States" regionID="South Carolina" />
+    <CountryToRegion region="South Dakota"          country="United States" regionID="South Dakota" />
+    <CountryToRegion region="Tennessee"             country="United States" regionID="Tennessee" />
+    <CountryToRegion region="Texas"                 country="United States" regionID="Texas" />
+    <CountryToRegion region="Utah"                  country="United States" regionID="Utah" />
+    <CountryToRegion region="Vermont"               country="United States" regionID="Vermont" />
+    <CountryToRegion region="Virginia"              country="United States" regionID="Virginia" />
+    <CountryToRegion region="Washington"            country="United States" regionID="Washington" />
+    <CountryToRegion region="West Virginia"         country="United States" regionID="West Virginia" />
+    <CountryToRegion region="Wisconsin"             country="United States" regionID="Wisconsin" />
+    <CountryToRegion region="Wyoming"               country="United States" regionID="Wyoming" />
 
     <!-- Australian Territories -->
-    <CountryToRegion region="New South Wales"       country="Australia" IGIName="" />
+    <CountryToRegion region="New South Wales"       country="Australia" regionID="" />
   </DemoteCountries>                                                          
   <DemoteRegions>
     <RegionToParish parish="Aberdeen"   region="Aberdeenshire" />
     <RegionToParish parish="Ayr"        region="Ayrshire" />
     <RegionToParish parish="Glasgow"    region="Lanarkshire" />
     <RegionToParish parish="Dundee"     region="Angus" />
-    <RegionToParish parish="Edinburgh"  region="Mid Lothian" />
+    <RegionToParish parish="Edinburgh"  region="Midlothian" />
     <RegionToParish parish="London"     region="Middlesex" />
     <RegionToParish parish="Manchester" region="Lancashire" />
     <RegionToParish parish="Liverpool"  region="Lancashire" />
