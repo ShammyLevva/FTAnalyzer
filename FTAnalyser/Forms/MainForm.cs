@@ -565,5 +565,14 @@ namespace FTAnalyzer
         {
             stopProcessing = true;
         }
+
+        private void btnOpenFolder_Click(object sender, EventArgs e)
+        {
+            string windir = Environment.GetEnvironmentVariable("WINDIR");
+            System.Diagnostics.Process prc = new System.Diagnostics.Process();
+            prc.StartInfo.FileName = windir + @"\explorer.exe";
+            prc.StartInfo.Arguments = txtIGIfolder.Text;
+            prc.Start();
+        }
     }
 }
