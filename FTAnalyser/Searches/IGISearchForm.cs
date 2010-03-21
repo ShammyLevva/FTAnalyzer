@@ -36,6 +36,7 @@ namespace FTAnalyzer
         private TextWriter resultFile;
         private RichTextBox rtbOutput;
         private FactLocation defaultLocation = new FactLocation(FactLocation.SCOTLAND);
+        private IGILocation defLoc = null;
         private int level;
         private int resultCount = 0;
         	
@@ -57,6 +58,7 @@ namespace FTAnalyzer
         public IGISearchForm(RichTextBox rtb, string defaultCountry, int level) {
             rtbOutput = rtb;
             this.defaultLocation = new FactLocation(defaultCountry);
+            this.defLoc = IGILocation.Adapt(this.defaultLocation, level);
             this.level = level;
             this.resultCount = 0;
             Initialise();
@@ -99,6 +101,13 @@ namespace FTAnalyzer
                 setParameter(COUNTRY, loc.Juris1);
                 setParameter(SHIRE, loc.Juris2);
                 Console.WriteLine(location.ToString() + " is '" + loc.Region + ", " + loc.Juris1 + ", " + loc.Juris2 + "'");
+            }
+            else
+            {
+                setParameter(REGION, defLoc.Region);
+                setParameter(COUNTRY, defLoc.Juris1);
+                setParameter(SHIRE, defLoc.Juris2);
+                Console.WriteLine(location.ToString() + " using default '" + defLoc.Region + ", " + defLoc.Juris1 + ", " + defLoc.Juris2 + "'");
             }
         }
 
@@ -320,59 +329,59 @@ namespace FTAnalyzer
 
         public void SearchIGI(Family family, string dirname, int searchType) {
             if (family != null) {
-			    string filename;
-                if (searchType == MARRIAGESEARCH)
-                    filename = dirname + "\\" + family.MarriageFilename;
-                else
-                    filename = dirname + "\\" + family.ChildrenFilename;
-                if(!File.Exists(filename)) // don't bother processing if file already exists.
-                {
-                    if (family.getPreferredFact(Fact.IGISEARCH) == null && family.Husband != null && family.Wife != null)
-                    {   // or we have already flagged marriage fact as having been searched
-                        // or either the husband or wife is not present
-                        if(searchType == CHILDRENSEARCH)
-                            ChildrenSearch(family, filename);
-                        else
-                            MarriageSearch(family, filename);
-                    }
+                if (family.getPreferredFact(Fact.IGISEARCH) == null && family.Husband != null && family.Wife != null)
+                {   // or we have already flagged marriage fact as having been searched
+                    // or either the husband or wife is not present
+                    if(searchType == CHILDRENSEARCH)
+                        ChildrenSearch(family, dirname);
+                    else
+                        MarriageSearch(family, dirname);
                 }
             }
         }
 
-        public void MarriageSearch(Family family, string filename)
+        public void MarriageSearch(Family family, string dirname)
         {
             Individual husband = family.Husband;
             Individual wife = family.Wife;
-
-            Fact marriage = family.getPreferredFact(Fact.MARRIAGE);
-            if (marriage == null)
-                marriage = new Fact(Fact.MARRIAGE, FactDate.UNKNOWN_DATE);
-            FactDate marriageDate = marriage.FactDate;
-            if (!marriageDate.isAfter(IGIMAX) && husband.BirthDate.isBefore(IGIMAX) && wife.BirthDate.isBefore(IGIMAX))
+            string filename = dirname + "\\" + family.MarriageFilename;
+            if (!File.Exists(filename))
             {
-                // proceed if marriage date within IGI Range and both were alive before IGI max date
-                if (!marriageDate.isExact())
+                Fact marriage = family.getPreferredFact(Fact.MARRIAGE);
+                if (marriage == null)
+                    marriage = new Fact(Fact.MARRIAGE, FactDate.UNKNOWN_DATE);
+                FactDate marriageDate = marriage.FactDate;
+                if (!marriageDate.isAfter(IGIMAX) && husband.BirthDate.isBefore(IGIMAX) && wife.BirthDate.isBefore(IGIMAX))
                 {
-                    Initialise();
-                    if (SetMarriageParameters(husband, wife))
+                    // proceed if marriage date within IGI Range and both were alive before IGI max date
+                    // but don't bother processing if file already exists.
+                    if (!marriageDate.isExact())
                     {
-                        List<FactLocation> locations = GetLocations(husband, wife, marriage);
-                        CheckIGIAtLocations(locations, filename, MARRIAGESEARCH, null);
+                        Initialise();
+                        if (SetMarriageParameters(husband, wife))
+                        {
+                            List<FactLocation> locations = GetLocations(husband, wife, marriage);
+                            CheckIGIAtLocations(locations, filename, MARRIAGESEARCH, null);
+                        }
                     }
                 }
             }
         }
 
-        private void ChildrenSearch(Family family, string filename)
+        private void ChildrenSearch(Family family, string dirname)
         {
             if (family.getPreferredFact(Fact.CHILDLESS) == null)
             {
-                Individual husband = family.Husband;
-                Individual wife = family.Wife;
-                if (husband.BirthDate.StartDate < IGIPARENTBIRTHMAX.StartDate && wife.BirthDate.StartDate < IGIPARENTBIRTHMAX.StartDate)
+                string filename = dirname + "\\" + family.ChildrenFilename;
+                if (!File.Exists(filename))
                 {
-                    Fact marriage = family.getPreferredFact(Fact.MARRIAGE);
-                    SearchForChildren(husband, wife, marriage, filename);
+                    Individual husband = family.Husband;
+                    Individual wife = family.Wife;
+                    if (husband.BirthDate.StartDate < IGIPARENTBIRTHMAX.StartDate && wife.BirthDate.StartDate < IGIPARENTBIRTHMAX.StartDate)
+                    {
+                        Fact marriage = family.getPreferredFact(Fact.MARRIAGE);
+                        SearchForChildren(husband, wife, marriage, filename);
+                    }
                 }
             }
         }
@@ -462,11 +471,14 @@ namespace FTAnalyzer
                 SetLocationParameters(location);
                 if (searchType == CHILDRENSEARCH && location.Country.Equals(FactLocation.SCOTLAND))
                     setParameter(MOTHERS_LAST_NAME, surname);
-                if (locations.Count > 1)
+                if (level == FactLocation.REGION && parameters[SHIRE] != string.Empty)
                 {
                     newFilename = filename.Substring(0, filename.Length - 5) + FamilyTree.validFilename(" (" + location.getLocation(level) + ").html");
                 }
-                FetchIGIDataAndWriteResult(newFilename);
+                if (!File.Exists(newFilename))
+                {
+                    FetchIGIDataAndWriteResult(newFilename);
+                }
             }
         }
 
