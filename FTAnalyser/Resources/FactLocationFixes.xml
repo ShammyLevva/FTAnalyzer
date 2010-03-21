@@ -26,7 +26,10 @@
     <CountryTypo from="Aust."   to="Australia" />
   </CountryTypos>
   <RegionTypos>
-    <RegionTypo from="Dumfriesshire" to="Dumfries-shire" />
+    <RegionTypo from="Dumfriesshire"  to="Dumfries-shire" />
+    <RegionTypo from="Invernessshire" to="Inverness-shire" />
+    <RegionTypo from="Kinrossshire"   to="Kinross-shire" />
+    <RegionTypo from="Peeblesshire"   to="Peebles" />
     <RegionTypo from="Beds"          to="Bedfordshire" />
     <RegionTypo from="Berks"         to="Berkshire" />
     <RegionTypo from="Bucks"         to="Buckinghamshire" />
