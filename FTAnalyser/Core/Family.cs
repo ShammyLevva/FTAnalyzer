@@ -9,9 +9,8 @@ using System.IO;
 
 namespace FTAnalyzer
 {
-    public class Family
+    public class Family : IDisplayFamily
     {
-
         public static readonly string SINGLE = "Single", MARRIED = "Married";
 
         private string familyID = "";
@@ -133,6 +132,17 @@ namespace FTAnalyzer
         public FactDate MarriageDate
         {
             get { return getPreferredFactDate(Fact.MARRIAGE); }
+        }
+
+        public string MarriageLocation
+        {
+            get { 
+                Fact marriage  = getPreferredFact(Fact.MARRIAGE);
+                if (marriage == null)
+                    return string.Empty;
+                else
+                    return marriage.Location.ToString();
+            }
         }
 
         public string MaritalStatus
@@ -278,6 +288,89 @@ namespace FTAnalyzer
                     child.RelationType = relationType;
                     queue.Enqueue(child);
                 }
+            }
+        }
+
+        #region IDisplayFamily Members
+
+
+        string IDisplayFamily.Husband
+        {
+            get { return husband == null ? string.Empty : husband.Name + " (b." + husband.BirthDate + ")"; }
+        }
+
+        string IDisplayFamily.Wife
+        {
+            get { return wife == null ? string.Empty : wife.Name + " (b." + wife.BirthDate + ")"; }
+        }
+
+        string IDisplayFamily.Marriage
+        {
+            get { 
+                Fact marriage = getPreferredFact(Fact.MARRIAGE);
+                if(marriage == null)
+                    return string.Empty;
+                return "m." + MarriageDate + " at " + marriage.Location;
+            }
+        }
+
+        string IDisplayFamily.Children
+        {
+            get { 
+                StringBuilder result = new StringBuilder();
+                foreach (Individual c in children)
+                {
+                    if (result.Length > 0)
+                        result.Append(", ");
+                    result.Append(c.Name + " (b." + c.BirthDate + ")");
+                }
+                return result.ToString();
+            }
+        }
+
+        public virtual FactLocation BestLocation
+        {
+            get {
+                
+                int bestLevel = -1;
+                FactLocation result = new FactLocation();
+                foreach (Fact f in AllFamilyFacts)
+                {
+                    FactLocation l = new FactLocation(f.Place);
+                    if (l.Level > bestLevel)
+                    {
+                        result = l;
+                        bestLevel = l.Level;
+                    }
+                }
+                return result;
+            }
+        }
+
+        #endregion
+
+        public bool isAtLocation(FactLocation loc, int level)
+        {
+            foreach (Fact f in AllFamilyFacts)
+            {
+                if (f.Location.Equals(loc, level))
+                    return true;
+            }
+            return false;
+        }
+
+        private List<Fact> AllFamilyFacts
+        {
+            get
+            {
+                List<Fact> results = new List<Fact>();
+                if (husband != null)
+                    results.AddRange(husband.AllFacts);
+                if (wife != null)
+                    results.AddRange(wife.AllFacts);
+                foreach (Individual c in children)
+                    results.AddRange(c.AllFacts);
+                return results;
             }
         }
     }

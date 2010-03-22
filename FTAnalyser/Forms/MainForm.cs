@@ -73,7 +73,7 @@ namespace FTAnalyzer
             List<Form> toClose = new List<Form>();
             foreach (Form f in Application.OpenForms)
             {
-                if (f is Forms.Individuals || f is Forms.Census)
+                if (f is Forms.People || f is Forms.Census)
                     toClose.Add(f);
             }
             foreach (Form f in toClose)
@@ -194,7 +194,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             FactLocation loc = (FactLocation)dgCountries.CurrentRow.DataBoundItem;
-            Forms.Individuals frmInd = new Forms.Individuals();
+            Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.COUNTRY);
             frmInd.Show();
             HourGlass(false);
@@ -204,7 +204,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             FactLocation loc = (FactLocation)dgRegions.CurrentRow.DataBoundItem;
-            Forms.Individuals frmInd = new Forms.Individuals();
+            Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.REGION);
             frmInd.Show();
             HourGlass(false);
@@ -214,7 +214,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             FactLocation loc = (FactLocation)dgParishes.CurrentRow.DataBoundItem;
-            Forms.Individuals frmInd = new Forms.Individuals();
+            Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.PARISH);
             frmInd.Show();
             HourGlass(false);
@@ -224,7 +224,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             FactLocation loc = (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
-            Forms.Individuals frmInd = new Forms.Individuals();
+            Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.ADDRESS);
             frmInd.Show();
             HourGlass(false);

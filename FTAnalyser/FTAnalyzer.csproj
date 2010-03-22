@@ -106,8 +106,8 @@
     <EmbeddedResource Include="Forms\IGISearchResultsViewer.resx">
       <DependentUpon>IGISearchResultsViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Individuals.resx">
-      <DependentUpon>Individuals.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\People.resx">
+      <DependentUpon>People.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Locations.resx">
       <DependentUpon>Locations.cs</DependentUpon>
@@ -193,6 +193,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Useful URLs.txt" />
+    <Compile Include="Core\Displays\IDisplayFamily.cs" />
     <Compile Include="Core\IGILocation.cs" />
     <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>
@@ -250,11 +251,11 @@
     <Compile Include="Forms\IGISearchResultsViewer.Designer.cs">
       <DependentUpon>IGISearchResultsViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Individuals.cs">
+    <Compile Include="Forms\People.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Individuals.Designer.cs">
-      <DependentUpon>Individuals.cs</DependentUpon>
+    <Compile Include="Forms\People.Designer.cs">
+      <DependentUpon>People.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Locations.cs">
       <SubType>Form</SubType>

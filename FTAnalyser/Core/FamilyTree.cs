@@ -420,6 +420,17 @@ namespace FTAnalyzer
             return result;
         }
 
+        public List<Family> getFamiliesAtLocation(FactLocation loc, int level)
+        {
+            List<Family> result = new List<Family>();
+            foreach (Family f in families)
+            {
+                if (!result.Contains(f) && f.isAtLocation(loc, level))
+                    result.Add(f);
+            }
+            return result;
+        }
+
         public List<string> getSurnamesAtLocation(FactLocation loc) { return getSurnamesAtLocation(loc, FactLocation.PARISH); }
         public List<string> getSurnamesAtLocation(FactLocation loc, int level)
         {

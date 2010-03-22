@@ -116,7 +116,7 @@ namespace FTAnalyzer
     	    return true;
         }
         
-        public FactLocation BestLocation {
+        public override FactLocation BestLocation {
             get { return bestLocation; }
         }
         
