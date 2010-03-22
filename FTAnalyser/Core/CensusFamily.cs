@@ -116,14 +116,14 @@ namespace FTAnalyzer
     	    return true;
         }
         
-        public override FactLocation BestLocation {
+        public FactLocation BestLocation {
             get { return bestLocation; }
         }
         
         public int Relation {
             get
             {
-                int relation = Individual.UNSET;
+                int relation = 999;
                 foreach (Individual i in Members)
                 {
                     if (i.RelationType != Individual.UNKNOWN && i.RelationType < relation)

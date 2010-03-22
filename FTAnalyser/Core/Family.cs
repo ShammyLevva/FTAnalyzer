@@ -328,7 +328,7 @@ namespace FTAnalyzer
             }
         }
 
-        public virtual FactLocation BestLocation
+        public FactLocation Location
         {
             get {
                 

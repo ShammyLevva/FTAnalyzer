@@ -31,7 +31,7 @@ namespace FTAnalyzer
         { }
 
         private List<Registration> filterRegistrations(List<Registration> regs) {
-            List<Registration> result = new List<Registration>(regs.Count);
+            List<Registration> result = new List<Registration>();
             foreach (Registration r in regs) {
                 if (filter.select(r))
                     result.Add(r);

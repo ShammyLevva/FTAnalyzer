@@ -22,8 +22,8 @@ namespace FTAnalyzer
 
         public LocationFilter(string searchstring, int level)
         {
-            this.searchstring = searchstring.ToLower();
-            this.level = level; 
+            this.searchstring = searchstring;
+            this.level = level;
         }
         
         public bool select (Registration r) {

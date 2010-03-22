@@ -12,6 +12,6 @@ namespace FTAnalyzer
         string Wife { get; }
         string Marriage { get; }
         string Children { get; }
-        FactLocation BestLocation { get; }
+        FactLocation Location { get; }
     }
 }
