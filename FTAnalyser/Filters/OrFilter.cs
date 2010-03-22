@@ -8,22 +8,51 @@ namespace FTAnalyzer
 {
     public class OrFilter : RegistrationFilter {
 
-        private RegistrationFilter filter1;
-        private RegistrationFilter filter2;
-        private RegistrationFilter filter3;
+        private List<RegistrationFilter> filters;
+
+        private OrFilter()
+        {
+            this.filters = new List<RegistrationFilter>();
+        }
 
         public OrFilter(RegistrationFilter f1, RegistrationFilter f2) :
-            this(f1, f2, new FalseFilter())
-        {}
-        
-        public OrFilter (RegistrationFilter f1, RegistrationFilter f2, RegistrationFilter f3) {
-            this.filter1 = f1;
-            this.filter2 = f2;
-            this.filter3 = f3;
+            this()
+        {
+            Add(f1);
+            Add(f2);
         }
-        
-        public bool select (Registration r) {
-            return filter1.select(r) || filter2.select(r) || filter3.select(r);
+
+        public OrFilter(RegistrationFilter f1, RegistrationFilter f2, RegistrationFilter f3)
+            : this()
+        {
+            Add(f1);
+            Add(f2);
+            Add(f3);
+        }
+
+        private void Add(RegistrationFilter rf)
+        {
+            if (rf is OrFilter)
+            {
+                OrFilter of = (OrFilter)rf;
+                filters.AddRange(of.filters);
+            }
+            else
+            {
+                filters.Add(rf);
+            }
+        }
+
+        public bool select(Registration r)
+        {
+            foreach (RegistrationFilter f in filters)
+            {
+                if (f.select(r))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
