@@ -24,6 +24,7 @@
     <CountryTypo from="Great Britain"    to="England" />
     <CountryTypo from="Aust"    to="Australia" />
     <CountryTypo from="Aust."   to="Australia" />
+    <CountryTypo from="Eire"    to="Ireland" />
   </CountryTypos>
   <RegionTypos>
     <RegionTypo from="Dumfriesshire"  to="Dumfries-shire" />
@@ -237,6 +238,45 @@
     <CountryToRegion region="Montgomeryshire"     country="Wales" regionID="Montgomery" />
     <CountryToRegion region="Pembrokeshire"       country="Wales" regionID="Pembroke" />
     <CountryToRegion region="Radnorshire"         country="Wales" regionID="Radnor" />
+
+    <!-- Irish Provinces -->
+    <CountryToRegion region="Antrim"      country="Ireland" regionID="Antrim"      />
+    <CountryToRegion region="Armagh"      country="Ireland" regionID="Armagh"      />
+    <CountryToRegion region="Cavan"       country="Ireland" regionID="Cavan"       />      
+    <CountryToRegion region="Carlow"      country="Ireland" regionID="Carlow"      />
+    <CountryToRegion region="Clare"       country="Ireland" regionID="Clare"       />
+    <CountryToRegion region="Connaught"   country="Ireland" regionID="Connaught"   />
+    <CountryToRegion region="Cork"        country="Ireland" regionID="Cork"        />
+    <CountryToRegion region="Donegal"     country="Ireland" regionID="Donegal"     />
+    <CountryToRegion region="Down"        country="Ireland" regionID="Down"        />
+    <CountryToRegion region="Dublin"      country="Ireland" regionID="Dublin"      />
+    <CountryToRegion region="Fermanagh"   country="Ireland" regionID="Fermanagh"   />
+    <CountryToRegion region="Galway"      country="Ireland" regionID="Galway"      />
+    <CountryToRegion region="Kerry"       country="Ireland" regionID="Kerry"       />
+    <CountryToRegion region="Kildare"     country="Ireland" regionID="Kildare"     />
+    <CountryToRegion region="Kilkenny"    country="Ireland" regionID="Kilkenny"    />
+    <CountryToRegion region="Laoighis"    country="Ireland" regionID="Laoighis"    />
+    <CountryToRegion region="Leinster"    country="Ireland" regionID="Leinster"    />
+    <CountryToRegion region="Leitrim"     country="Ireland" regionID="Leitrim"     />
+    <CountryToRegion region="Limerick"    country="Ireland" regionID="Limerick"    />
+    <CountryToRegion region="Londonderry" country="Ireland" regionID="Londonderry" />
+    <CountryToRegion region="Longford"    country="Ireland" regionID="Longford"    />
+    <CountryToRegion region="Louth"       country="Ireland" regionID="Louth"       />
+    <CountryToRegion region="Mayo"        country="Ireland" regionID="Mayo"        />
+    <CountryToRegion region="Meath"       country="Ireland" regionID="Meath"       />
+    <CountryToRegion region="Monaghan"    country="Ireland" regionID="Monaghan"    />
+    <CountryToRegion region="Munster"     country="Ireland" regionID="Munster"     />
+    <CountryToRegion region="Offaly"      country="Ireland" regionID="Offaly"      />
+    <CountryToRegion region="Roscommon"   country="Ireland" regionID="Roscommon"   />
+    <CountryToRegion region="Sligo"       country="Ireland" regionID="Sligo"       />
+    <CountryToRegion region="Tipperary"   country="Ireland" regionID="Tipperary"   />
+    <CountryToRegion region="Tyrone"      country="Ireland" regionID="Tyrone"      />
+    <CountryToRegion region="Ulster"      country="Ireland" regionID="Ulster"      />
+    <CountryToRegion region="Waterford"   country="Ireland" regionID="Waterford"   />
+    <CountryToRegion region="Westmeath"   country="Ireland" regionID="Westmeath"   />
+    <CountryToRegion region="Wexford"     country="Ireland" regionID="Wexford"     />
+    <CountryToRegion region="Wicklow"     country="Ireland" regionID="Wicklow"     />
+
 
     <!-- North America -->
     <!-- Canadian Provinces -->
