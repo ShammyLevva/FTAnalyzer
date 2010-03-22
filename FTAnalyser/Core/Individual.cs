@@ -11,9 +11,8 @@ namespace FTAnalyzer
     	
 	    // define relation type from direct ancestor to related by marriage and 
 	    // MARRIAGEDB ie: married to a direct or blood relation
-	    public const int UNKNOWN = 0, DIRECT = 1, BLOOD = 2, MARRIEDTODB = 3, MARRIAGE = 4, UNSET = 5;
-	    public static readonly string HUSBAND = "Husband", WIFE = "Wife", CHILD = "Child",
-							          UNKNOWNSTATUS = "Unknown";
+	    public const int UNKNOWN = 1, DIRECT = 2, BLOOD = 4, MARRIEDTODB = 8, MARRIAGE = 16, UNSET = 0;
+	    public static readonly string HUSBAND = "Husband", WIFE = "Wife", CHILD = "Child", UNKNOWNSTATUS = "Unknown";
     	
 	    private string individualID;
 	    private string gedcomID;

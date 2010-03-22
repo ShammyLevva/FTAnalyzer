@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FTAnalyzer;
 
 namespace Controls
 {
@@ -21,5 +22,24 @@ namespace Controls
         public bool Marriage { get { return ckbMarriage.Checked; } }
         public bool MarriedToDB { get { return ckbMarriageDB.Checked; } }
         public bool Unknown { get { return ckbUnknown.Checked; } }
+
+        public int Status
+        {
+            get
+            {
+                int result = 0;
+                if (ckbUnknown.Checked)
+                    result += Individual.UNKNOWN;
+                if (ckbDirects.Checked)
+                    result += Individual.DIRECT;
+                if (ckbBlood.Checked)
+                    result += Individual.BLOOD;
+                if (ckbMarriage.Checked)
+                    result += Individual.MARRIAGE;
+                if (ckbMarriageDB.Checked)
+                    result += Individual.MARRIEDTODB;
+                return result;
+            }
+        }
     }
 }

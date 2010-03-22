@@ -39,6 +39,7 @@ namespace FTAnalyzer
         private IGILocation defLoc = null;
         private int level;
         private int resultCount = 0;
+        private int relationTypes = Individual.UNSET;
         	
         private static readonly string NOMATCHES1 = "<strong>International Genealogical Index / British Isles</strong> (No Matches)";
         private static readonly string NOMATCHES2 = "<strong><span id='searchPageTitle'>International Genealogical Index / British Isles</span></strong> (No Matches)";
@@ -55,12 +56,13 @@ namespace FTAnalyzer
         public const int MARRIAGESEARCH = 1;
         public const int CHILDRENSEARCH = 2;
         
-        public IGISearchForm(RichTextBox rtb, string defaultCountry, int level) {
+        public IGISearchForm(RichTextBox rtb, string defaultCountry, int level, int relationTypes) {
             rtbOutput = rtb;
             this.defaultLocation = new FactLocation(defaultCountry);
             this.defLoc = IGILocation.Adapt(this.defaultLocation, level);
             this.level = level;
             this.resultCount = 0;
+            this.relationTypes = relationTypes;
             Initialise();
         }
 
@@ -344,24 +346,27 @@ namespace FTAnalyzer
         {
             Individual husband = family.Husband;
             Individual wife = family.Wife;
-            string filename = dirname + "\\" + family.MarriageFilename;
-            if (!File.Exists(filename))
+            if (validRelationType(husband, wife))
             {
-                Fact marriage = family.getPreferredFact(Fact.MARRIAGE);
-                if (marriage == null)
-                    marriage = new Fact(Fact.MARRIAGE, FactDate.UNKNOWN_DATE);
-                FactDate marriageDate = marriage.FactDate;
-                if (!marriageDate.isAfter(IGIMAX) && husband.BirthDate.isBefore(IGIMAX) && wife.BirthDate.isBefore(IGIMAX))
+                string filename = dirname + "\\" + family.MarriageFilename;
+                if (!File.Exists(filename))
                 {
-                    // proceed if marriage date within IGI Range and both were alive before IGI max date
-                    // but don't bother processing if file already exists.
-                    if (!marriageDate.isExact())
+                    Fact marriage = family.getPreferredFact(Fact.MARRIAGE);
+                    if (marriage == null)
+                        marriage = new Fact(Fact.MARRIAGE, FactDate.UNKNOWN_DATE);
+                    FactDate marriageDate = marriage.FactDate;
+                    if (!marriageDate.isAfter(IGIMAX) && husband.BirthDate.isBefore(IGIMAX) && wife.BirthDate.isBefore(IGIMAX))
                     {
-                        Initialise();
-                        if (SetMarriageParameters(husband, wife))
+                        // proceed if marriage date within IGI Range and both were alive before IGI max date
+                        // but don't bother processing if file already exists.
+                        if (!marriageDate.isExact())
                         {
-                            List<FactLocation> locations = GetLocations(husband, wife, marriage);
-                            CheckIGIAtLocations(locations, filename, MARRIAGESEARCH, null);
+                            Initialise();
+                            if (SetMarriageParameters(husband, wife))
+                            {
+                                List<FactLocation> locations = GetLocations(husband, wife, marriage);
+                                CheckIGIAtLocations(locations, filename, MARRIAGESEARCH, null);
+                            }
                         }
                     }
                 }
@@ -384,6 +389,13 @@ namespace FTAnalyzer
                     }
                 }
             }
+        }
+
+        private bool validRelationType(Individual i1, Individual i2)
+        {
+            int checkInd1 = i1.RelationType & relationTypes;
+            int checkInd2 = i2.RelationType & relationTypes;
+            return checkInd1 != 0 || checkInd2 != 0;
         }
 
         private bool SetMarriageParameters(Individual i1, Individual i2)
