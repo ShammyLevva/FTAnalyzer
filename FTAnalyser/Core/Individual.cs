@@ -11,7 +11,7 @@ namespace FTAnalyzer
     	
 	    // define relation type from direct ancestor to related by marriage and 
 	    // MARRIAGEDB ie: married to a direct or blood relation
-	    public const int UNKNOWN = 1, DIRECT = 2, BLOOD = 4, MARRIEDTODB = 8, MARRIAGE = 16, UNSET = 0;
+	    public const int UNKNOWN = 1, DIRECT = 2, BLOOD = 4, MARRIEDTODB = 8, MARRIAGE = 16, UNSET = 32;
 	    public static readonly string HUSBAND = "Husband", WIFE = "Wife", CHILD = "Child", UNKNOWNSTATUS = "Unknown";
     	
 	    private string individualID;
@@ -33,7 +33,7 @@ namespace FTAnalyzer
             Name =   FamilyTree.GetText(node, "NAME");
 		    Gender = FamilyTree.GetText(node, "SEX");
             alias =  FamilyTree.GetText(node, "ALIA");
-		    relationType = UNKNOWN;
+            relationType = UNSET;
 		    status = UNKNOWNSTATUS;
             ahnentafel = 0;
 		    facts = new List<Fact>();

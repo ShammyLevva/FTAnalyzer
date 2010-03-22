@@ -709,7 +709,7 @@ namespace FTAnalyzer
 
         private void PrintRelationCount()
         {
-            int[] relations = new int[17];
+            int[] relations = new int[Individual.UNSET + 1];
             foreach(Individual i in individuals)
                 relations[i.RelationType]++;
             xmlErrorbox.AppendText("Direct Ancestors : " + relations[Individual.DIRECT] + "\n");

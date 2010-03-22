@@ -123,7 +123,7 @@ namespace FTAnalyzer
         public int Relation {
             get
             {
-                int relation = 999;
+                int relation = Individual.UNSET;
                 foreach (Individual i in Members)
                 {
                     if (i.RelationType != Individual.UNKNOWN && i.RelationType < relation)
