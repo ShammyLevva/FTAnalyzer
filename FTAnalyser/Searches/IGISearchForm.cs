@@ -382,10 +382,13 @@ namespace FTAnalyzer
                 {
                     Individual husband = family.Husband;
                     Individual wife = family.Wife;
-                    if (husband.BirthDate.StartDate < IGIPARENTBIRTHMAX.StartDate && wife.BirthDate.StartDate < IGIPARENTBIRTHMAX.StartDate)
+                    if (validRelationType(husband, wife))
                     {
-                        Fact marriage = family.getPreferredFact(Fact.MARRIAGE);
-                        SearchForChildren(husband, wife, marriage, filename);
+                        if (husband.BirthDate.StartDate < IGIPARENTBIRTHMAX.StartDate && wife.BirthDate.StartDate < IGIPARENTBIRTHMAX.StartDate)
+                        {
+                            Fact marriage = family.getPreferredFact(Fact.MARRIAGE);
+                            SearchForChildren(husband, wife, marriage, filename);
+                        }
                     }
                 }
             }
