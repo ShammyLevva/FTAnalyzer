@@ -146,8 +146,6 @@ namespace FTAnalyzer
            }
        }
         
-       #region Unused/Still to be done
-
        public string FetchIGIDataFromWebsite()
        {
            try
@@ -165,6 +163,8 @@ namespace FTAnalyzer
                        e.ToString() + "</p></body></html>";
            }
        }
+
+       #region Unused/Still to be done
          
        public void parseResults(int searchType, ParishBatch pb, TextWriter output, string filename, string outFile)
        {
