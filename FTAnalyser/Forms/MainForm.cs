@@ -575,25 +575,27 @@ namespace FTAnalyzer
             prc.Start();
         }
 
-        private void runTestReportToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void BirthRegistrationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MultiComparator<Registration> byName = new MultiComparator<Registration>();
-            byName.addComparator(new NameComparator());
-            byName.addComparator(new DateComparator());
+            MultiComparator<Registration> birthComparator = new MultiComparator<Registration>();
+            birthComparator.addComparator(new LocationComparator(FactLocation.PARISH));
+            birthComparator.addComparator(new DateComparator());
 
-            RegistrationFilter partialData = new IncompleteDataFilter(FactLocation.PARISH);
+            RegistrationFilter partialEnglishData = 
+                new AndFilter(new IncompleteDataFilter(FactLocation.PARISH), LocationFilter.ENGLAND);
+            RegistrationFilter directOrBlood = new OrFilter(
+                    new RelationFilter(Individual.DIRECT),
+                    new RelationFilter(Individual.BLOOD));
 
             RegistrationsProcessor onlineBirthsRP = new RegistrationsProcessor(
-                    new AndFilter(DateFilter.POST_1837_FILTER,
-                            partialData),
-                    byName);
+                    new AndFilter(directOrBlood, partialEnglishData), birthComparator);
 
             List<Registration> regs = ft.getAllBirthRegistrations();
             List<Registration> result = onlineBirthsRP.processRegistrations(regs);
 
-            BirthsReport test = new BirthsReport();
-            test.setup(result);
-            test.Show();
+            BirthsReport br = new BirthsReport();
+            br.setup(result);
+            br.Show();
         }
     }
 }

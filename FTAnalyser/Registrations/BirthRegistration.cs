@@ -17,7 +17,11 @@ namespace FTAnalyzer
 
         public override string RegistrationLocation
         {
-            get { return PlaceOfBirth; }
+            get {
+                if (PlaceOfBirth.Equals(string.Empty))
+                    return "Unknown";
+                return PlaceOfBirth; 
+            }
         }
 
         public override bool isCertificatePresent()

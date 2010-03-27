@@ -33,6 +33,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BirthRegistrationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,8 +104,6 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BirthRegistrationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -160,6 +160,21 @@
             this.openToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // reportsToolStripMenuItem
+            // 
+            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BirthRegistrationToolStripMenuItem});
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.reportsToolStripMenuItem.Text = "Reports";
+            // 
+            // BirthRegistrationToolStripMenuItem
+            // 
+            this.BirthRegistrationToolStripMenuItem.Name = "BirthRegistrationToolStripMenuItem";
+            this.BirthRegistrationToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.BirthRegistrationToolStripMenuItem.Text = "Birth Registrations";
+            this.BirthRegistrationToolStripMenuItem.Click += new System.EventHandler(this.BirthRegistrationToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -883,21 +898,6 @@
             this.tsCountLabel.Name = "tsCountLabel";
             this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
             this.tsCountLabel.Text = "Count : 0";
-            // 
-            // reportsToolStripMenuItem
-            // 
-            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.BirthRegistrationToolStripMenuItem});
-            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            this.reportsToolStripMenuItem.Text = "Reports";
-            // 
-            // BirthRegistrationToolStripMenuItem
-            // 
-            this.BirthRegistrationToolStripMenuItem.Name = "BirthRegistrationToolStripMenuItem";
-            this.BirthRegistrationToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.BirthRegistrationToolStripMenuItem.Text = "Birth Registrations";
-            this.BirthRegistrationToolStripMenuItem.Click += new System.EventHandler(this.runTestReportToolStripMenuItem_Click_1);
             // 
             // MainForm
             // 
