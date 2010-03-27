@@ -72,6 +72,8 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -79,6 +81,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -94,6 +98,9 @@
     </Compile>
     <Compile Include="FTAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\BirthsReport.resx">
+      <DependentUpon>BirthsReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\BirthReport.rdlc" />
     <EmbeddedResource Include="Forms\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
@@ -264,6 +271,12 @@
     </Compile>
     <Compile Include="Forms\Locations.Designer.cs">
       <DependentUpon>Locations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BirthsReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BirthsReport.Designer.cs">
+      <DependentUpon>BirthsReport.cs</DependentUpon>
     </Compile>
     <Compile Include="HTTPParser\Attribute.cs" />
     <Compile Include="HTTPParser\AttributeList.cs" />

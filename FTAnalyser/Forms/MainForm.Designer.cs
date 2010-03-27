@@ -102,6 +102,8 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BirthRegistrationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -135,6 +137,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.reportsToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -881,6 +884,21 @@
             this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
+            // reportsToolStripMenuItem
+            // 
+            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BirthRegistrationToolStripMenuItem});
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.reportsToolStripMenuItem.Text = "Reports";
+            // 
+            // BirthRegistrationToolStripMenuItem
+            // 
+            this.BirthRegistrationToolStripMenuItem.Name = "BirthRegistrationToolStripMenuItem";
+            this.BirthRegistrationToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.BirthRegistrationToolStripMenuItem.Text = "Birth Registrations";
+            this.BirthRegistrationToolStripMenuItem.Click += new System.EventHandler(this.runTestReportToolStripMenuItem_Click_1);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1004,6 +1022,8 @@
         private global::FTAnalyzer.Utilities.ScrollingRichTextBox rtbOutput;
         private global::FTAnalyzer.Utilities.ScrollingRichTextBox rtbIGIResults;
         private System.Windows.Forms.Button btnOpenFolder;
+        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem BirthRegistrationToolStripMenuItem;
     }
 }
 

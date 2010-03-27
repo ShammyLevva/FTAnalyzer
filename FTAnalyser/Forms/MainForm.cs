@@ -232,7 +232,7 @@ namespace FTAnalyzer
 
         private void btnShowResults_Click(object sender, EventArgs e)
         {
-            RegistrationFilter filter = createRegistrationFilter();
+            RegistrationFilter filter = createCensusRegistrationFilter();
             MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();
             censusComparator.addComparator(new LocationComparator(FactLocation.PARISH));
             censusComparator.addComparator(new DateComparator());
@@ -244,7 +244,7 @@ namespace FTAnalyzer
             census.Show();
         }
 
-        private RegistrationFilter createRegistrationFilter()
+        private RegistrationFilter createCensusRegistrationFilter()
         {
             RegistrationFilter locationFilter = new TrueFilter();
             if (censusCountry.Scotland)
@@ -573,6 +573,27 @@ namespace FTAnalyzer
             prc.StartInfo.FileName = windir + @"\explorer.exe";
             prc.StartInfo.Arguments = txtIGIfolder.Text;
             prc.Start();
+        }
+
+        private void runTestReportToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            MultiComparator<Registration> byName = new MultiComparator<Registration>();
+            byName.addComparator(new NameComparator());
+            byName.addComparator(new DateComparator());
+
+            RegistrationFilter partialData = new IncompleteDataFilter(FactLocation.PARISH);
+
+            RegistrationsProcessor onlineBirthsRP = new RegistrationsProcessor(
+                    new AndFilter(DateFilter.POST_1837_FILTER,
+                            partialData),
+                    byName);
+
+            List<Registration> regs = ft.getAllBirthRegistrations();
+            List<Registration> result = onlineBirthsRP.processRegistrations(regs);
+
+            BirthsReport test = new BirthsReport();
+            test.setup(result);
+            test.Show();
         }
     }
 }
