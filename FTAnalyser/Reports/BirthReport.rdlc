@@ -384,7 +384,7 @@
             </TableRow>
             <TableRow>
               <Visibility>
-                <Hidden>=Fields!BestLocation.Value &lt;&gt; ""</Hidden>
+                <Hidden>=Fields!BestLocation.Value = ""</Hidden>
               </Visibility>
               <TableCells>
                 <TableCell>
@@ -392,9 +392,6 @@
                   <ReportItems>
                     <Textbox Name="textbox14">
                       <rd:DefaultName>textbox14</rd:DefaultName>
-                      <Visibility>
-                        <Hidden>=Fields!BestLocation.Value &lt;&gt; ""</Hidden>
-                      </Visibility>
                       <CanShrink>true</CanShrink>
                       <Style>
                         <PaddingLeft>2pt</PaddingLeft>
