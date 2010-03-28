@@ -56,6 +56,8 @@
     <RegionTypo from="Somt"          to="Somerset" />
     <RegionTypo from="Staffs"        to="Staffordshire" />
     <RegionTypo from="SX"            to="Sussex" />
+    <RegionTypo from="West Sussex"   to="Sussex" />
+    <RegionTypo from="East Sussex"   to="Sussex" />
     <RegionTypo from="Warks"         to="Warwickshire" />
     <RegionTypo from="Wmld"          to="Westmorland" />
     <RegionTypo from="Wilts"         to="Wiltshire" />
