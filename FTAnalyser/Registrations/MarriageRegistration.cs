@@ -21,7 +21,7 @@ namespace FTAnalyzer
                 registrationDate = marriage.FactDate;
                 if (registrationDate != null) {
 	                FactDate birth1 = familyGroup.Individual.BirthDate;
-	                FactDate birth2 = (spousesFamily == null) ? FactDate.UNKNOWN_DATE :
+                    FactDate birth2 = (spousesFamily == null || spousesFamily.Individual == null) ? FactDate.UNKNOWN_DATE :
 	                	    spousesFamily.Individual.BirthDate;
 	                DateTime maxStart = birth1.StartDate;
 	                if (maxStart < birth2.StartDate)

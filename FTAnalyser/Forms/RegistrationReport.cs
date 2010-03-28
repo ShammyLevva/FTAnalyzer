@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.Reporting.WinForms;
 
 namespace FTAnalyzer
 {
@@ -24,8 +25,8 @@ namespace FTAnalyzer
                 temp.Add(r);
             }
             RegistrationBindingSource.DataSource = temp;
-            reportViewer.LocalReport.ReportEmbeddedResource = "FTAnalyzer.Reports.BirthReport.rdlc";
-            reportViewer.RefreshReport();
+            UpdateReportSources("FTAnalyzer_BirthRegistration", "FTAnalyzer.Reports.BirthReport.rdlc");
+            this.Text = "Birth Registrations to find";
         }
 
         public void SetupDeathRegistration(List<Registration> regs)
@@ -36,8 +37,8 @@ namespace FTAnalyzer
                 temp.Add(r);
             }
             RegistrationBindingSource.DataSource = temp;
-            reportViewer.LocalReport.ReportEmbeddedResource = "FTAnalyzer.Reports.DeathReport.rdlc";
-            reportViewer.RefreshReport();
+            UpdateReportSources("FTAnalyzer_DeathRegistration", "FTAnalyzer.Reports.DeathReport.rdlc");
+            this.Text = "Death Registrations to find";
         }
 
         public void SetupMarriageRegistration(List<Registration> regs)
@@ -47,8 +48,18 @@ namespace FTAnalyzer
             {
                 temp.Add(r);
             }
-            RegistrationBindingSource.DataSource = temp;
-            reportViewer.LocalReport.ReportEmbeddedResource = "FTAnalyzer.Reports.MarriageReport.rdlc";
+            RegistrationBindingSource.DataSource = temp; 
+            UpdateReportSources("FTAnalyzer_MarriageRegistration", "FTAnalyzer.Reports.MarriageReport.rdlc");
+            this.Text = "Marriage Registrations to find";
+        }
+
+        private void UpdateReportSources(string dataSourceName, string reportName)
+        {
+            ReportDataSource reportDataSource1 = new ReportDataSource();
+            reportDataSource1.Name = dataSourceName;
+            reportDataSource1.Value = this.RegistrationBindingSource;
+            reportViewer.LocalReport.DataSources.Add(reportDataSource1);
+            reportViewer.LocalReport.ReportEmbeddedResource = reportName;
             reportViewer.RefreshReport();
         }
     }

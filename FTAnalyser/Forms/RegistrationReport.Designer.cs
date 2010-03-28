@@ -30,14 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.RegistrationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.reportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.RegistrationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.RegistrationBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // BirthRegistrationBindingSource
-            // 
-            this.RegistrationBindingSource.DataSource = typeof(BirthRegistration);
             // 
             // reportViewer
             // 
@@ -52,13 +48,13 @@
             this.reportViewer.Size = new System.Drawing.Size(740, 302);
             this.reportViewer.TabIndex = 0;
             // 
-            // ReportTest
+            // RegistrationReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(740, 302);
             this.Controls.Add(this.reportViewer);
-            this.Name = "ReportTest";
+            this.Name = "RegistrationReport";
             this.Text = "ReportTest";
             ((System.ComponentModel.ISupportInitialize)(this.RegistrationBindingSource)).EndInit();
             this.ResumeLayout(false);
