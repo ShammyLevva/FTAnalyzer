@@ -23,8 +23,8 @@ namespace FTAnalyzer
             {
                 temp.Add(r);
             }
-            reportViewer.LocalReport.ReportEmbeddedResource = "FTAnalyzer.Reports.BirthReport.rdlc";
             RegistrationBindingSource.DataSource = temp;
+            reportViewer.LocalReport.ReportEmbeddedResource = "FTAnalyzer.Reports.BirthReport.rdlc";
             reportViewer.RefreshReport();
         }
 
@@ -35,8 +35,8 @@ namespace FTAnalyzer
             {
                 temp.Add(r);
             }
-            reportViewer.LocalReport.ReportEmbeddedResource = "FTAnalyzer.Reports.DeathReport.rdlc";
             RegistrationBindingSource.DataSource = temp;
+            reportViewer.LocalReport.ReportEmbeddedResource = "FTAnalyzer.Reports.DeathReport.rdlc";
             reportViewer.RefreshReport();
         }
 
@@ -47,8 +47,8 @@ namespace FTAnalyzer
             {
                 temp.Add(r);
             }
-            reportViewer.LocalReport.ReportEmbeddedResource = "FTAnalyzer.Reports.MarriageReport.rdlc";
             RegistrationBindingSource.DataSource = temp;
+            reportViewer.LocalReport.ReportEmbeddedResource = "FTAnalyzer.Reports.MarriageReport.rdlc";
             reportViewer.RefreshReport();
         }
     }

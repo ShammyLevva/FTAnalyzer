@@ -131,6 +131,8 @@
     <EmbeddedResource Include="Forms\Controls\CensusCountry.resx">
       <DependentUpon>CensusCountry.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeathReport.rdlc" />
+    <EmbeddedResource Include="Reports\MarriageReport.rdlc" />
     <EmbeddedResource Include="UserControls\GeneralSettings.resx">
       <DependentUpon>GeneralSettings.cs</DependentUpon>
     </EmbeddedResource>

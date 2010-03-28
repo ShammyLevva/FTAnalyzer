@@ -593,9 +593,55 @@ namespace FTAnalyzer
             List<Registration> regs = ft.getAllBirthRegistrations();
             List<Registration> result = onlineBirthsRP.processRegistrations(regs);
 
-            RegistrationReport br = new RegistrationReport();
-            br.SetupBirthRegistration(result);
-            br.Show();
+            RegistrationReport report = new RegistrationReport();
+            report.SetupBirthRegistration(result);
+            report.Show();
+        }
+
+        private void deathRegistrationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MultiComparator<Registration> deathComparator = new MultiComparator<Registration>();
+            deathComparator.addComparator(new LocationComparator(FactLocation.PARISH));
+            deathComparator.addComparator(new DateComparator());
+
+            RegistrationFilter partialEnglishData =
+                new AndFilter(new IncompleteDataFilter(FactLocation.PARISH), LocationFilter.ENGLAND);
+            RegistrationFilter directOrBlood = new OrFilter(
+                    new RelationFilter(Individual.DIRECT),
+                    new RelationFilter(Individual.BLOOD));
+
+            RegistrationsProcessor onlineDeathsRP = new RegistrationsProcessor(
+                    new AndFilter(directOrBlood, partialEnglishData), deathComparator);
+
+            List<Registration> regs = ft.getAllDeathRegistrations();
+            List<Registration> result = onlineDeathsRP.processRegistrations(regs);
+
+            RegistrationReport report = new RegistrationReport();
+            report.SetupDeathRegistration(result);
+            report.Show();
+        }
+
+        private void marriageRegistrationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MultiComparator<Registration> marriageComparator = new MultiComparator<Registration>();
+            marriageComparator.addComparator(new LocationComparator(FactLocation.PARISH));
+            marriageComparator.addComparator(new DateComparator());
+
+            RegistrationFilter partialEnglishData =
+                new AndFilter(new IncompleteDataFilter(FactLocation.PARISH), LocationFilter.ENGLAND);
+            RegistrationFilter directOrBlood = new OrFilter(
+                    new RelationFilter(Individual.DIRECT),
+                    new RelationFilter(Individual.BLOOD));
+
+            RegistrationsProcessor onlineMarriagesRP = new RegistrationsProcessor(
+                    new AndFilter(directOrBlood, partialEnglishData), marriageComparator);
+
+            List<Registration> regs = ft.getAllMarriageRegistrations();
+            List<Registration> result = onlineMarriagesRP.processRegistrations(regs);
+
+            RegistrationReport report = new RegistrationReport();
+            report.SetupMarriageRegistration(result);
+            report.Show();
         }
     }
 }
