@@ -98,8 +98,8 @@
     </Compile>
     <Compile Include="FTAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\BirthsReport.resx">
-      <DependentUpon>BirthsReport.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\RegistrationReport.resx">
+      <DependentUpon>RegistrationReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\BirthReport.rdlc" />
     <EmbeddedResource Include="Forms\AboutBox.resx">
@@ -153,6 +153,8 @@
     </Compile>
     <None Include="app.config" />
     <None Include="Properties\DataSources\BirthRegistration.datasource" />
+    <None Include="Properties\DataSources\DeathRegistration.datasource" />
+    <None Include="Properties\DataSources\MarriageRegistration.datasource" />
     <None Include="Properties\GeneralSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>GeneralSettings.Designer.cs</LastGenOutput>
@@ -272,11 +274,11 @@
     <Compile Include="Forms\Locations.Designer.cs">
       <DependentUpon>Locations.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\BirthsReport.cs">
+    <Compile Include="Forms\RegistrationReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\BirthsReport.Designer.cs">
-      <DependentUpon>BirthsReport.cs</DependentUpon>
+    <Compile Include="Forms\RegistrationReport.Designer.cs">
+      <DependentUpon>RegistrationReport.cs</DependentUpon>
     </Compile>
     <Compile Include="HTTPParser\Attribute.cs" />
     <Compile Include="HTTPParser\AttributeList.cs" />

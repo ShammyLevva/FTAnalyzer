@@ -593,8 +593,8 @@ namespace FTAnalyzer
             List<Registration> regs = ft.getAllBirthRegistrations();
             List<Registration> result = onlineBirthsRP.processRegistrations(regs);
 
-            BirthsReport br = new BirthsReport();
-            br.setup(result);
+            RegistrationReport br = new RegistrationReport();
+            br.SetupBirthRegistration(result);
             br.Show();
         }
     }

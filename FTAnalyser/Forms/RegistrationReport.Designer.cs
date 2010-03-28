@@ -1,6 +1,6 @@
 ﻿namespace FTAnalyzer
 {
-    partial class BirthsReport
+    partial class RegistrationReport
     {
         /// <summary>
         /// Required designer variable.
@@ -30,21 +30,21 @@
         {
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.BirthRegistrationBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.RegistrationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.reportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
-            ((System.ComponentModel.ISupportInitialize)(this.BirthRegistrationBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RegistrationBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // BirthRegistrationBindingSource
             // 
-            this.BirthRegistrationBindingSource.DataSource = typeof(BirthRegistration);
+            this.RegistrationBindingSource.DataSource = typeof(BirthRegistration);
             // 
             // reportViewer
             // 
             this.reportViewer.AutoSize = true;
             this.reportViewer.Dock = System.Windows.Forms.DockStyle.Fill;
             reportDataSource1.Name = "FTAnalyzer_BirthRegistration";
-            reportDataSource1.Value = this.BirthRegistrationBindingSource;
+            reportDataSource1.Value = this.RegistrationBindingSource;
             this.reportViewer.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer.LocalReport.ReportEmbeddedResource = "FTAnalyzer.Reports.BirthReport.rdlc";
             this.reportViewer.Location = new System.Drawing.Point(0, 0);
@@ -60,8 +60,7 @@
             this.Controls.Add(this.reportViewer);
             this.Name = "ReportTest";
             this.Text = "ReportTest";
-            this.Load += new System.EventHandler(this.ReportTest_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.BirthRegistrationBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RegistrationBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -70,6 +69,6 @@
         #endregion
 
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer;
-        private System.Windows.Forms.BindingSource BirthRegistrationBindingSource;
+        private System.Windows.Forms.BindingSource RegistrationBindingSource;
     }
 }
