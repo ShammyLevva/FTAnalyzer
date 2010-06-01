@@ -68,7 +68,6 @@
             this.tabLooseDeaths = new System.Windows.Forms.TabPage();
             this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
             this.tabCensus = new System.Windows.Forms.TabPage();
-            this.ckbNoLocations = new System.Windows.Forms.CheckBox();
             this.cenDate = new Controls.CensusDateSelector();
             this.censusCountry = new Controls.CensusCountry();
             this.relationTypes = new Controls.RelationTypes();
@@ -89,6 +88,7 @@
             this.btnLC1881Scot = new System.Windows.Forms.Button();
             this.tabIGISearch = new System.Windows.Forms.TabPage();
             this.btnOpenFolder = new System.Windows.Forms.Button();
+            this.rtbIGIResults = new Utilities.ScrollingRichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbIGISearchRegion = new System.Windows.Forms.RadioButton();
             this.rbIGISearchCountry = new System.Windows.Forms.RadioButton();
@@ -100,13 +100,13 @@
             this.btnIGIFolderBrowse = new System.Windows.Forms.Button();
             this.txtIGIfolder = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.rtbIGIResults = new Utilities.ScrollingRichTextBox();
             this.IGIrelationTypes = new Controls.RelationTypes();
             this.IGIDefaultCountry = new Controls.CensusCountry();
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
+            this.btnLC1911EW = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -154,13 +154,13 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -171,27 +171,27 @@
             this.deathRegistrationsToolStripMenuItem,
             this.marriageRegistrationsToolStripMenuItem});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.reportsToolStripMenuItem.Text = "Reports";
             // 
             // BirthRegistrationToolStripMenuItem
             // 
             this.BirthRegistrationToolStripMenuItem.Name = "BirthRegistrationToolStripMenuItem";
-            this.BirthRegistrationToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.BirthRegistrationToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.BirthRegistrationToolStripMenuItem.Text = "Birth Registrations";
             this.BirthRegistrationToolStripMenuItem.Click += new System.EventHandler(this.BirthRegistrationToolStripMenuItem_Click);
             // 
             // deathRegistrationsToolStripMenuItem
             // 
             this.deathRegistrationsToolStripMenuItem.Name = "deathRegistrationsToolStripMenuItem";
-            this.deathRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.deathRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.deathRegistrationsToolStripMenuItem.Text = "Death Registrations";
             this.deathRegistrationsToolStripMenuItem.Click += new System.EventHandler(this.deathRegistrationsToolStripMenuItem_Click);
             // 
             // marriageRegistrationsToolStripMenuItem
             // 
             this.marriageRegistrationsToolStripMenuItem.Name = "marriageRegistrationsToolStripMenuItem";
-            this.marriageRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.marriageRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.marriageRegistrationsToolStripMenuItem.Text = "Marriage Registrations";
             this.marriageRegistrationsToolStripMenuItem.Click += new System.EventHandler(this.marriageRegistrationsToolStripMenuItem_Click);
             // 
@@ -201,19 +201,19 @@
             this.showLocationsToolStripMenuItem,
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // showLocationsToolStripMenuItem
             // 
             this.showLocationsToolStripMenuItem.Name = "showLocationsToolStripMenuItem";
-            this.showLocationsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.showLocationsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.showLocationsToolStripMenuItem.Text = "Show locations";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -224,25 +224,25 @@
             this.toolStripSeparator1,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // checkForUpdatesToolStripMenuItem
             // 
             this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
             this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(171, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(168, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -509,7 +509,6 @@
             // 
             // tabCensus
             // 
-            this.tabCensus.Controls.Add(this.ckbNoLocations);
             this.tabCensus.Controls.Add(this.cenDate);
             this.tabCensus.Controls.Add(this.censusCountry);
             this.tabCensus.Controls.Add(this.relationTypes);
@@ -525,22 +524,12 @@
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
             // 
-            // ckbNoLocations
-            // 
-            this.ckbNoLocations.AutoSize = true;
-            this.ckbNoLocations.Location = new System.Drawing.Point(603, 12);
-            this.ckbNoLocations.Name = "ckbNoLocations";
-            this.ckbNoLocations.Size = new System.Drawing.Size(203, 17);
-            this.ckbNoLocations.TabIndex = 18;
-            this.ckbNoLocations.Text = "Records do not include country name";
-            this.ckbNoLocations.UseVisualStyleBackColor = true;
-            // 
             // cenDate
             // 
             this.cenDate.AutoSize = true;
             this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.cenDate.Country = "Scotland";
-            this.cenDate.Location = new System.Drawing.Point(8, 90);
+            this.cenDate.Location = new System.Drawing.Point(272, 81);
             this.cenDate.Name = "cenDate";
             this.cenDate.Size = new System.Drawing.Size(186, 27);
             this.cenDate.TabIndex = 17;
@@ -565,7 +554,7 @@
             // ckbCensusResidence
             // 
             this.ckbCensusResidence.AutoSize = true;
-            this.ckbCensusResidence.Location = new System.Drawing.Point(603, 35);
+            this.ckbCensusResidence.Location = new System.Drawing.Point(11, 111);
             this.ckbCensusResidence.Name = "ckbCensusResidence";
             this.ckbCensusResidence.Size = new System.Drawing.Size(213, 17);
             this.ckbCensusResidence.TabIndex = 14;
@@ -575,7 +564,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(600, 60);
+            this.label2.Location = new System.Drawing.Point(8, 87);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(175, 13);
             this.label2.TabIndex = 6;
@@ -583,7 +572,7 @@
             // 
             // udAgeFilter
             // 
-            this.udAgeFilter.Location = new System.Drawing.Point(781, 58);
+            this.udAgeFilter.Location = new System.Drawing.Point(189, 85);
             this.udAgeFilter.Maximum = new decimal(new int[] {
             110,
             0,
@@ -605,7 +594,7 @@
             // 
             // btnShowResults
             // 
-            this.btnShowResults.Location = new System.Drawing.Point(272, 92);
+            this.btnShowResults.Location = new System.Drawing.Point(6, 134);
             this.btnShowResults.Name = "btnShowResults";
             this.btnShowResults.Size = new System.Drawing.Size(82, 25);
             this.btnShowResults.TabIndex = 4;
@@ -615,6 +604,7 @@
             // 
             // tabLostCousins
             // 
+            this.tabLostCousins.Controls.Add(this.btnLC1911EW);
             this.tabLostCousins.Controls.Add(this.ckbLCResidence);
             this.tabLostCousins.Controls.Add(this.linkLabel1);
             this.tabLostCousins.Controls.Add(this.ckbHideRecorded);
@@ -647,7 +637,7 @@
             // 
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(19, 189);
+            this.linkLabel1.Location = new System.Drawing.Point(19, 232);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(186, 16);
             this.linkLabel1.TabIndex = 12;
@@ -682,7 +672,7 @@
             // 
             // btnLC1841EW
             // 
-            this.btnLC1841EW.Location = new System.Drawing.Point(22, 133);
+            this.btnLC1841EW.Location = new System.Drawing.Point(22, 91);
             this.btnLC1841EW.Name = "btnLC1841EW";
             this.btnLC1841EW.Size = new System.Drawing.Size(162, 36);
             this.btnLC1841EW.TabIndex = 8;
@@ -712,7 +702,7 @@
             // 
             // btnLC1881EW
             // 
-            this.btnLC1881EW.Location = new System.Drawing.Point(22, 91);
+            this.btnLC1881EW.Location = new System.Drawing.Point(22, 133);
             this.btnLC1881EW.Name = "btnLC1881EW";
             this.btnLC1881EW.Size = new System.Drawing.Size(162, 36);
             this.btnLC1881EW.TabIndex = 5;
@@ -743,6 +733,7 @@
             // tabIGISearch
             // 
             this.tabIGISearch.Controls.Add(this.btnOpenFolder);
+            this.tabIGISearch.Controls.Add(this.rtbIGIResults);
             this.tabIGISearch.Controls.Add(this.groupBox1);
             this.tabIGISearch.Controls.Add(this.btnCancelIGISearch);
             this.tabIGISearch.Controls.Add(this.btnViewResults);
@@ -752,7 +743,6 @@
             this.tabIGISearch.Controls.Add(this.btnIGIFolderBrowse);
             this.tabIGISearch.Controls.Add(this.txtIGIfolder);
             this.tabIGISearch.Controls.Add(this.label3);
-            this.tabIGISearch.Controls.Add(this.rtbIGIResults);
             this.tabIGISearch.Controls.Add(this.IGIrelationTypes);
             this.tabIGISearch.Controls.Add(this.IGIDefaultCountry);
             this.tabIGISearch.Location = new System.Drawing.Point(4, 22);
@@ -771,6 +761,15 @@
             this.btnOpenFolder.Text = "Open Folder";
             this.btnOpenFolder.UseVisualStyleBackColor = true;
             this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
+            // 
+            // rtbIGIResults
+            // 
+            this.rtbIGIResults.Location = new System.Drawing.Point(0, 177);
+            this.rtbIGIResults.Name = "rtbIGIResults";
+            this.rtbIGIResults.Size = new System.Drawing.Size(931, 229);
+            this.rtbIGIResults.TabIndex = 12;
+            this.rtbIGIResults.Text = "";
+            this.rtbIGIResults.TextChanged += new System.EventHandler(this.rtbIGIResults_TextChanged);
             // 
             // groupBox1
             // 
@@ -882,15 +881,6 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Folder to store results in : ";
             // 
-            // rtbIGIResults
-            // 
-            this.rtbIGIResults.Location = new System.Drawing.Point(0, 177);
-            this.rtbIGIResults.Name = "rtbIGIResults";
-            this.rtbIGIResults.Size = new System.Drawing.Size(931, 229);
-            this.rtbIGIResults.TabIndex = 12;
-            this.rtbIGIResults.Text = "";
-            this.rtbIGIResults.TextChanged += new System.EventHandler(this.rtbIGIResults_TextChanged);
-            // 
             // IGIrelationTypes
             // 
             this.IGIrelationTypes.Location = new System.Drawing.Point(270, 38);
@@ -926,8 +916,18 @@
             // tsCountLabel
             // 
             this.tsCountLabel.Name = "tsCountLabel";
-            this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
+            this.tsCountLabel.Size = new System.Drawing.Size(55, 17);
             this.tsCountLabel.Text = "Count : 0";
+            // 
+            // btnLC1911EW
+            // 
+            this.btnLC1911EW.Location = new System.Drawing.Point(22, 175);
+            this.btnLC1911EW.Name = "btnLC1911EW";
+            this.btnLC1911EW.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1911EW.TabIndex = 14;
+            this.btnLC1911EW.Text = "1911 England && Wales Census";
+            this.btnLC1911EW.UseVisualStyleBackColor = true;
+            this.btnLC1911EW.Click += new System.EventHandler(this.btnLC1911EW_Click);
             // 
             // MainForm
             // 
@@ -1056,7 +1056,7 @@
         private System.Windows.Forms.ToolStripMenuItem BirthRegistrationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deathRegistrationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem marriageRegistrationsToolStripMenuItem;
-        private System.Windows.Forms.CheckBox ckbNoLocations;
+        private System.Windows.Forms.Button btnLC1911EW;
     }
 }
 

@@ -341,6 +341,14 @@ namespace FTAnalyzer
             LostCousinsCensus(filter, CensusDate.UKCENSUS1841, reportTitle);
         }
 
+
+        private void btnLC1911EW_Click(object sender, EventArgs e)
+        {
+            RegistrationFilter filter = new OrFilter(LocationFilter.ENGLAND, LocationFilter.WALES);
+            string reportTitle = "1911 England & Wales Census Records on file to enter to Lost Cousins";
+            LostCousinsCensus(filter, CensusDate.UKCENSUS1911, reportTitle);
+        }
+
         private void btnLC1880USA_Click(object sender, EventArgs e)
         {
             RegistrationFilter filter = new OrFilter(LocationFilter.USA, LocationFilter.US);
@@ -585,7 +593,7 @@ namespace FTAnalyzer
             birthComparator.addComparator(new LocationComparator(FactLocation.PARISH));
             birthComparator.addComparator(new DateComparator());
 
-            RegistrationFilter partialEnglishData = 
+            RegistrationFilter partialEnglishData =
                 new AndFilter(new IncompleteDataFilter(FactLocation.PARISH), LocationFilter.ENGLAND);
             RegistrationFilter directOrBlood = new OrFilter(
                     new RelationFilter(Individual.DIRECT),
