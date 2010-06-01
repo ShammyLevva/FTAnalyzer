@@ -35,6 +35,8 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BirthRegistrationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deathRegistrationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.marriageRegistrationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,6 +68,7 @@
             this.tabLooseDeaths = new System.Windows.Forms.TabPage();
             this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
             this.tabCensus = new System.Windows.Forms.TabPage();
+            this.ckbNoLocations = new System.Windows.Forms.CheckBox();
             this.cenDate = new Controls.CensusDateSelector();
             this.censusCountry = new Controls.CensusCountry();
             this.relationTypes = new Controls.RelationTypes();
@@ -86,7 +89,6 @@
             this.btnLC1881Scot = new System.Windows.Forms.Button();
             this.tabIGISearch = new System.Windows.Forms.TabPage();
             this.btnOpenFolder = new System.Windows.Forms.Button();
-            this.rtbIGIResults = new Utilities.ScrollingRichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbIGISearchRegion = new System.Windows.Forms.RadioButton();
             this.rbIGISearchCountry = new System.Windows.Forms.RadioButton();
@@ -98,14 +100,13 @@
             this.btnIGIFolderBrowse = new System.Windows.Forms.Button();
             this.txtIGIfolder = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.rtbIGIResults = new Utilities.ScrollingRichTextBox();
             this.IGIrelationTypes = new Controls.RelationTypes();
             this.IGIDefaultCountry = new Controls.CensusCountry();
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.deathRegistrationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.marriageRegistrationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -179,6 +180,20 @@
             this.BirthRegistrationToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.BirthRegistrationToolStripMenuItem.Text = "Birth Registrations";
             this.BirthRegistrationToolStripMenuItem.Click += new System.EventHandler(this.BirthRegistrationToolStripMenuItem_Click);
+            // 
+            // deathRegistrationsToolStripMenuItem
+            // 
+            this.deathRegistrationsToolStripMenuItem.Name = "deathRegistrationsToolStripMenuItem";
+            this.deathRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.deathRegistrationsToolStripMenuItem.Text = "Death Registrations";
+            this.deathRegistrationsToolStripMenuItem.Click += new System.EventHandler(this.deathRegistrationsToolStripMenuItem_Click);
+            // 
+            // marriageRegistrationsToolStripMenuItem
+            // 
+            this.marriageRegistrationsToolStripMenuItem.Name = "marriageRegistrationsToolStripMenuItem";
+            this.marriageRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.marriageRegistrationsToolStripMenuItem.Text = "Marriage Registrations";
+            this.marriageRegistrationsToolStripMenuItem.Click += new System.EventHandler(this.marriageRegistrationsToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -494,6 +509,7 @@
             // 
             // tabCensus
             // 
+            this.tabCensus.Controls.Add(this.ckbNoLocations);
             this.tabCensus.Controls.Add(this.cenDate);
             this.tabCensus.Controls.Add(this.censusCountry);
             this.tabCensus.Controls.Add(this.relationTypes);
@@ -509,12 +525,22 @@
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
             // 
+            // ckbNoLocations
+            // 
+            this.ckbNoLocations.AutoSize = true;
+            this.ckbNoLocations.Location = new System.Drawing.Point(603, 12);
+            this.ckbNoLocations.Name = "ckbNoLocations";
+            this.ckbNoLocations.Size = new System.Drawing.Size(203, 17);
+            this.ckbNoLocations.TabIndex = 18;
+            this.ckbNoLocations.Text = "Records do not include country name";
+            this.ckbNoLocations.UseVisualStyleBackColor = true;
+            // 
             // cenDate
             // 
             this.cenDate.AutoSize = true;
             this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.cenDate.Country = "Scotland";
-            this.cenDate.Location = new System.Drawing.Point(272, 81);
+            this.cenDate.Location = new System.Drawing.Point(8, 90);
             this.cenDate.Name = "cenDate";
             this.cenDate.Size = new System.Drawing.Size(186, 27);
             this.cenDate.TabIndex = 17;
@@ -539,7 +565,7 @@
             // ckbCensusResidence
             // 
             this.ckbCensusResidence.AutoSize = true;
-            this.ckbCensusResidence.Location = new System.Drawing.Point(11, 111);
+            this.ckbCensusResidence.Location = new System.Drawing.Point(603, 35);
             this.ckbCensusResidence.Name = "ckbCensusResidence";
             this.ckbCensusResidence.Size = new System.Drawing.Size(213, 17);
             this.ckbCensusResidence.TabIndex = 14;
@@ -549,7 +575,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 87);
+            this.label2.Location = new System.Drawing.Point(600, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(175, 13);
             this.label2.TabIndex = 6;
@@ -557,7 +583,7 @@
             // 
             // udAgeFilter
             // 
-            this.udAgeFilter.Location = new System.Drawing.Point(189, 85);
+            this.udAgeFilter.Location = new System.Drawing.Point(781, 58);
             this.udAgeFilter.Maximum = new decimal(new int[] {
             110,
             0,
@@ -579,7 +605,7 @@
             // 
             // btnShowResults
             // 
-            this.btnShowResults.Location = new System.Drawing.Point(6, 134);
+            this.btnShowResults.Location = new System.Drawing.Point(272, 92);
             this.btnShowResults.Name = "btnShowResults";
             this.btnShowResults.Size = new System.Drawing.Size(82, 25);
             this.btnShowResults.TabIndex = 4;
@@ -717,7 +743,6 @@
             // tabIGISearch
             // 
             this.tabIGISearch.Controls.Add(this.btnOpenFolder);
-            this.tabIGISearch.Controls.Add(this.rtbIGIResults);
             this.tabIGISearch.Controls.Add(this.groupBox1);
             this.tabIGISearch.Controls.Add(this.btnCancelIGISearch);
             this.tabIGISearch.Controls.Add(this.btnViewResults);
@@ -727,6 +752,7 @@
             this.tabIGISearch.Controls.Add(this.btnIGIFolderBrowse);
             this.tabIGISearch.Controls.Add(this.txtIGIfolder);
             this.tabIGISearch.Controls.Add(this.label3);
+            this.tabIGISearch.Controls.Add(this.rtbIGIResults);
             this.tabIGISearch.Controls.Add(this.IGIrelationTypes);
             this.tabIGISearch.Controls.Add(this.IGIDefaultCountry);
             this.tabIGISearch.Location = new System.Drawing.Point(4, 22);
@@ -745,15 +771,6 @@
             this.btnOpenFolder.Text = "Open Folder";
             this.btnOpenFolder.UseVisualStyleBackColor = true;
             this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
-            // 
-            // rtbIGIResults
-            // 
-            this.rtbIGIResults.Location = new System.Drawing.Point(0, 177);
-            this.rtbIGIResults.Name = "rtbIGIResults";
-            this.rtbIGIResults.Size = new System.Drawing.Size(931, 229);
-            this.rtbIGIResults.TabIndex = 12;
-            this.rtbIGIResults.Text = "";
-            this.rtbIGIResults.TextChanged += new System.EventHandler(this.rtbIGIResults_TextChanged);
             // 
             // groupBox1
             // 
@@ -865,6 +882,15 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Folder to store results in : ";
             // 
+            // rtbIGIResults
+            // 
+            this.rtbIGIResults.Location = new System.Drawing.Point(0, 177);
+            this.rtbIGIResults.Name = "rtbIGIResults";
+            this.rtbIGIResults.Size = new System.Drawing.Size(931, 229);
+            this.rtbIGIResults.TabIndex = 12;
+            this.rtbIGIResults.Text = "";
+            this.rtbIGIResults.TextChanged += new System.EventHandler(this.rtbIGIResults_TextChanged);
+            // 
             // IGIrelationTypes
             // 
             this.IGIrelationTypes.Location = new System.Drawing.Point(270, 38);
@@ -903,20 +929,6 @@
             this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
-            // deathRegistrationsToolStripMenuItem
-            // 
-            this.deathRegistrationsToolStripMenuItem.Name = "deathRegistrationsToolStripMenuItem";
-            this.deathRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.deathRegistrationsToolStripMenuItem.Text = "Death Registrations";
-            this.deathRegistrationsToolStripMenuItem.Click += new System.EventHandler(this.deathRegistrationsToolStripMenuItem_Click);
-            // 
-            // marriageRegistrationsToolStripMenuItem
-            // 
-            this.marriageRegistrationsToolStripMenuItem.Name = "marriageRegistrationsToolStripMenuItem";
-            this.marriageRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.marriageRegistrationsToolStripMenuItem.Text = "Marriage Registrations";
-            this.marriageRegistrationsToolStripMenuItem.Click += new System.EventHandler(this.marriageRegistrationsToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -928,8 +940,8 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Family Tree Analyzer";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl.ResumeLayout(false);
@@ -1044,6 +1056,7 @@
         private System.Windows.Forms.ToolStripMenuItem BirthRegistrationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deathRegistrationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem marriageRegistrationsToolStripMenuItem;
+        private System.Windows.Forms.CheckBox ckbNoLocations;
     }
 }
 

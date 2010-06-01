@@ -64,6 +64,16 @@ namespace FTAnalyzer
             }
         }
 
+        public Family(Individual ind)
+            : this("IND", "")
+        {
+            if (ind.isMale())
+                this.husband = ind;
+            else
+                this.wife = ind;
+
+        }
+
         internal Family(Family f)
         {
             this.familyID = f.familyID;

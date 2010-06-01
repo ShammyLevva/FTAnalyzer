@@ -134,11 +134,37 @@ namespace FTAnalyzer
                 pbF.Value = counter++;
                 Application.DoEvents();
             }
-            xmlErrorbox.AppendText("Loaded " + counter + " families.\nCalculating Relationships... Please wait\n\n");
+            xmlErrorbox.AppendText("Loaded " + counter + " families.\n");
+            CheckAllIndividualsAreInAFamily();
+            xmlErrorbox.AppendText("Calculating Relationships... Please wait\n\n");
             SetRelations(individuals[0].GedcomID);
             PrintRelationCount();
 	        SetParishes();
             _loading = false;
+        }
+
+        private void CheckAllIndividualsAreInAFamily()
+        {
+            foreach (Family f in families)
+            {
+                if (f.husband != null)
+                    f.husband.Infamily = true;
+                if (f.wife != null)
+                    f.wife.Infamily = true;
+                foreach (Individual c in f.children)
+                    c.Infamily = true;
+            }
+            int added = 0;
+            foreach (Individual ind in individuals)
+            {
+                if (!ind.isInFamily())
+                {
+                    families.Add(new Family(ind));
+                    added++;
+                }
+            }
+            if (added > 0)
+                xmlErrorbox.AppendText("Added " + added + " lone individuals as single families.\n");
         }
         #endregion
 

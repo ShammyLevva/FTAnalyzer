@@ -234,7 +234,8 @@ namespace FTAnalyzer
         {
             RegistrationFilter filter = createCensusRegistrationFilter();
             MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();
-            censusComparator.addComparator(new LocationComparator(FactLocation.PARISH));
+            if (!ckbNoLocations.Checked) // only compare on location if no locations isn't checked
+                censusComparator.addComparator(new LocationComparator(FactLocation.PARISH));
             censusComparator.addComparator(new DateComparator());
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
 
@@ -274,7 +275,10 @@ namespace FTAnalyzer
             if (relationTypes.Unknown)
                 relationFilter = new OrFilter(new RelationFilter(Individual.UNKNOWN), relationFilter);
 
-            return new AndFilter(locationFilter, relationFilter, new DateFilter(cenDate.SelectedDate));
+            if (ckbNoLocations.Checked)
+                return new AndFilter(relationFilter, new DateFilter(cenDate.SelectedDate));
+            else
+                return new AndFilter(locationFilter, relationFilter, new DateFilter(cenDate.SelectedDate));
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

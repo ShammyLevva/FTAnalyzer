@@ -24,6 +24,8 @@ namespace FTAnalyzer
 	    private string status;
 	    private int relationType;
         private int ahnentafel;
+        private bool infamily;
+
 	    private List<Fact> facts;
         private List<FactLocation> locations;
     	
@@ -36,6 +38,7 @@ namespace FTAnalyzer
             relationType = UNSET;
 		    status = UNKNOWNSTATUS;
             ahnentafel = 0;
+            infamily = false;
 		    facts = new List<Fact>();
             locations = new List<FactLocation>();
 
@@ -65,6 +68,7 @@ namespace FTAnalyzer
                 this.status = i.status;
                 this.ahnentafel = i.ahnentafel;
                 this.relationType = i.relationType;
+                this.infamily = i.infamily;
                 this.facts = new List<Fact>(i.facts);
                 this.locations = new List<FactLocation>(i.locations);
             }
@@ -72,6 +76,11 @@ namespace FTAnalyzer
 
         #region Properties
 
+        public bool Infamily
+        {
+            set { infamily = value; }
+        }
+        
         public int Ahnentafel
         { 
             get { return ahnentafel; } 
@@ -329,6 +338,11 @@ namespace FTAnalyzer
         public bool isMale()
         {
             return this.gender.Equals("M");
+        }
+
+        public bool isInFamily()
+        {
+            return infamily;
         }
 
         public bool isCensusDone(FactDate when, bool includeResidence)
