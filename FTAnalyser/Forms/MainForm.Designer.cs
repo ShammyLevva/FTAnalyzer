@@ -76,6 +76,7 @@
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
             this.btnShowResults = new System.Windows.Forms.Button();
             this.tabLostCousins = new System.Windows.Forms.TabPage();
+            this.btnLC1911EW = new System.Windows.Forms.Button();
             this.ckbLCResidence = new System.Windows.Forms.CheckBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.ckbHideRecorded = new System.Windows.Forms.CheckBox();
@@ -106,7 +107,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.btnLC1911EW = new System.Windows.Forms.Button();
+            this.ckbNoLocations = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -509,6 +510,7 @@
             // 
             // tabCensus
             // 
+            this.tabCensus.Controls.Add(this.ckbNoLocations);
             this.tabCensus.Controls.Add(this.cenDate);
             this.tabCensus.Controls.Add(this.censusCountry);
             this.tabCensus.Controls.Add(this.relationTypes);
@@ -622,6 +624,16 @@
             this.tabLostCousins.TabIndex = 5;
             this.tabLostCousins.Text = "Lost Cousins";
             this.tabLostCousins.UseVisualStyleBackColor = true;
+            // 
+            // btnLC1911EW
+            // 
+            this.btnLC1911EW.Location = new System.Drawing.Point(22, 175);
+            this.btnLC1911EW.Name = "btnLC1911EW";
+            this.btnLC1911EW.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1911EW.TabIndex = 14;
+            this.btnLC1911EW.Text = "1911 England && Wales Census";
+            this.btnLC1911EW.UseVisualStyleBackColor = true;
+            this.btnLC1911EW.Click += new System.EventHandler(this.btnLC1911EW_Click);
             // 
             // ckbLCResidence
             // 
@@ -919,15 +931,15 @@
             this.tsCountLabel.Size = new System.Drawing.Size(55, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
-            // btnLC1911EW
+            // ckbNoLocations
             // 
-            this.btnLC1911EW.Location = new System.Drawing.Point(22, 175);
-            this.btnLC1911EW.Name = "btnLC1911EW";
-            this.btnLC1911EW.Size = new System.Drawing.Size(162, 36);
-            this.btnLC1911EW.TabIndex = 14;
-            this.btnLC1911EW.Text = "1911 England && Wales Census";
-            this.btnLC1911EW.UseVisualStyleBackColor = true;
-            this.btnLC1911EW.Click += new System.EventHandler(this.btnLC1911EW_Click);
+            this.ckbNoLocations.AutoSize = true;
+            this.ckbNoLocations.Location = new System.Drawing.Point(272, 114);
+            this.ckbNoLocations.Name = "ckbNoLocations";
+            this.ckbNoLocations.Size = new System.Drawing.Size(217, 17);
+            this.ckbNoLocations.TabIndex = 18;
+            this.ckbNoLocations.Text = "Assume locations have no country name";
+            this.ckbNoLocations.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -1057,6 +1069,7 @@
         private System.Windows.Forms.ToolStripMenuItem deathRegistrationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem marriageRegistrationsToolStripMenuItem;
         private System.Windows.Forms.Button btnLC1911EW;
+        private System.Windows.Forms.CheckBox ckbNoLocations;
     }
 }
 
