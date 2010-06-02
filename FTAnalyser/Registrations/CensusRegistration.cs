@@ -60,10 +60,15 @@ namespace FTAnalyzer
         {
             get
             {
-                if (censusFamily.Husband != null)
+                if (censusFamily.Husband != null && censusFamily.Husband.Surname != "UNKNOWN")
                     return censusFamily.Husband.Surname;
-                if (censusFamily.Wife != null)
+                if (censusFamily.Wife != null && censusFamily.Wife.Surname != "UNKNOWN")
                     return censusFamily.Wife.Surname;
+                foreach (Individual child in censusFamily.Children)
+                {
+                    if (child.Surname != "UNKNOWN")
+                        return child.Surname;
+                }
                 return "UNKNOWN";
             }
         }
