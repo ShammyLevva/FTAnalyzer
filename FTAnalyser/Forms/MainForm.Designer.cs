@@ -68,6 +68,7 @@
             this.tabLooseDeaths = new System.Windows.Forms.TabPage();
             this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
             this.tabCensus = new System.Windows.Forms.TabPage();
+            this.ckbNoLocations = new System.Windows.Forms.CheckBox();
             this.cenDate = new Controls.CensusDateSelector();
             this.censusCountry = new Controls.CensusCountry();
             this.relationTypes = new Controls.RelationTypes();
@@ -107,7 +108,8 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.ckbNoLocations = new System.Windows.Forms.CheckBox();
+            this.txtSurname = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -155,13 +157,13 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -172,27 +174,27 @@
             this.deathRegistrationsToolStripMenuItem,
             this.marriageRegistrationsToolStripMenuItem});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.reportsToolStripMenuItem.Text = "Reports";
             // 
             // BirthRegistrationToolStripMenuItem
             // 
             this.BirthRegistrationToolStripMenuItem.Name = "BirthRegistrationToolStripMenuItem";
-            this.BirthRegistrationToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.BirthRegistrationToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.BirthRegistrationToolStripMenuItem.Text = "Birth Registrations";
             this.BirthRegistrationToolStripMenuItem.Click += new System.EventHandler(this.BirthRegistrationToolStripMenuItem_Click);
             // 
             // deathRegistrationsToolStripMenuItem
             // 
             this.deathRegistrationsToolStripMenuItem.Name = "deathRegistrationsToolStripMenuItem";
-            this.deathRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.deathRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.deathRegistrationsToolStripMenuItem.Text = "Death Registrations";
             this.deathRegistrationsToolStripMenuItem.Click += new System.EventHandler(this.deathRegistrationsToolStripMenuItem_Click);
             // 
             // marriageRegistrationsToolStripMenuItem
             // 
             this.marriageRegistrationsToolStripMenuItem.Name = "marriageRegistrationsToolStripMenuItem";
-            this.marriageRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.marriageRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.marriageRegistrationsToolStripMenuItem.Text = "Marriage Registrations";
             this.marriageRegistrationsToolStripMenuItem.Click += new System.EventHandler(this.marriageRegistrationsToolStripMenuItem_Click);
             // 
@@ -202,19 +204,19 @@
             this.showLocationsToolStripMenuItem,
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // showLocationsToolStripMenuItem
             // 
             this.showLocationsToolStripMenuItem.Name = "showLocationsToolStripMenuItem";
-            this.showLocationsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.showLocationsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.showLocationsToolStripMenuItem.Text = "Show locations";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -225,25 +227,25 @@
             this.toolStripSeparator1,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // checkForUpdatesToolStripMenuItem
             // 
             this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
             this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(168, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(171, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -510,6 +512,8 @@
             // 
             // tabCensus
             // 
+            this.tabCensus.Controls.Add(this.label1);
+            this.tabCensus.Controls.Add(this.txtSurname);
             this.tabCensus.Controls.Add(this.ckbNoLocations);
             this.tabCensus.Controls.Add(this.cenDate);
             this.tabCensus.Controls.Add(this.censusCountry);
@@ -525,6 +529,16 @@
             this.tabCensus.TabIndex = 0;
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
+            // 
+            // ckbNoLocations
+            // 
+            this.ckbNoLocations.AutoSize = true;
+            this.ckbNoLocations.Location = new System.Drawing.Point(272, 114);
+            this.ckbNoLocations.Name = "ckbNoLocations";
+            this.ckbNoLocations.Size = new System.Drawing.Size(217, 17);
+            this.ckbNoLocations.TabIndex = 18;
+            this.ckbNoLocations.Text = "Assume locations have no country name";
+            this.ckbNoLocations.UseVisualStyleBackColor = true;
             // 
             // cenDate
             // 
@@ -928,18 +942,24 @@
             // tsCountLabel
             // 
             this.tsCountLabel.Name = "tsCountLabel";
-            this.tsCountLabel.Size = new System.Drawing.Size(55, 17);
+            this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
-            // ckbNoLocations
+            // txtSurname
             // 
-            this.ckbNoLocations.AutoSize = true;
-            this.ckbNoLocations.Location = new System.Drawing.Point(272, 114);
-            this.ckbNoLocations.Name = "ckbNoLocations";
-            this.ckbNoLocations.Size = new System.Drawing.Size(217, 17);
-            this.ckbNoLocations.TabIndex = 18;
-            this.ckbNoLocations.Text = "Assume locations have no country name";
-            this.ckbNoLocations.UseVisualStyleBackColor = true;
+            this.txtSurname.Location = new System.Drawing.Point(658, 14);
+            this.txtSurname.Name = "txtSurname";
+            this.txtSurname.Size = new System.Drawing.Size(201, 20);
+            this.txtSurname.TabIndex = 19;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(603, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Surname";
             // 
             // MainForm
             // 
@@ -1070,6 +1090,8 @@
         private System.Windows.Forms.ToolStripMenuItem marriageRegistrationsToolStripMenuItem;
         private System.Windows.Forms.Button btnLC1911EW;
         private System.Windows.Forms.CheckBox ckbNoLocations;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtSurname;
     }
 }
 

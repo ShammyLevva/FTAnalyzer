@@ -55,5 +55,17 @@ namespace FTAnalyzer
         {
             get { return censusFamily.Relation; }
         }
+
+        public override string Surname
+        {
+            get
+            {
+                if (censusFamily.Husband != null)
+                    return censusFamily.Husband.Surname;
+                if (censusFamily.Wife != null)
+                    return censusFamily.Wife.Surname;
+                return "UNKNOWN";
+            }
+        }
     }
 }

@@ -247,6 +247,8 @@ namespace FTAnalyzer
 
         private RegistrationFilter createCensusRegistrationFilter()
         {
+            RegistrationFilter filter;
+
             RegistrationFilter locationFilter = new TrueFilter();
             if (censusCountry.Scotland)
                 locationFilter = LocationFilter.SCOTLAND;
@@ -276,9 +278,14 @@ namespace FTAnalyzer
                 relationFilter = new OrFilter(new RelationFilter(Individual.UNKNOWN), relationFilter);
 
             if (ckbNoLocations.Checked)
-                return new AndFilter(relationFilter, new DateFilter(cenDate.SelectedDate));
+                filter = new AndFilter(relationFilter, new DateFilter(cenDate.SelectedDate));
             else
-                return new AndFilter(locationFilter, relationFilter, new DateFilter(cenDate.SelectedDate));
+                filter = new AndFilter(locationFilter, relationFilter, new DateFilter(cenDate.SelectedDate));
+
+            if (txtSurname.Text.Length > 0)
+                filter = new AndFilter(filter, new SurnameFilter(txtSurname.Text.ToUpper()));
+
+            return filter;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

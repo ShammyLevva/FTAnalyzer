@@ -48,7 +48,7 @@ namespace FTAnalyzer
             get { return Individual == null ? "UNKNOWN" : Individual.Name; }
         }
         
-        public string Surname {
+        public virtual string Surname {
             get { return Individual == null ? "UNKNOWN" : Individual.Surname; }
         }
         
