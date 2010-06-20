@@ -10,7 +10,8 @@ namespace FTAnalyzer
 
         public override int Compare(IDisplayIndividual x, IDisplayIndividual y)
         {
-            throw new NotImplementedException();
+            int i = x.Surname.CompareTo(y.Surname);
+            return (i==0) ? x.Forenames.CompareTo(y.Forenames) : i;
         }
     }
 }
