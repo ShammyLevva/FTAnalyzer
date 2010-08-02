@@ -46,6 +46,7 @@
             this.dgCensus.Size = new System.Drawing.Size(1038, 558);
             this.dgCensus.TabIndex = 1;
             this.dgCensus.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgCensus_CellFormatting);
+            this.dgCensus.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgCensus_ColumnHeaderMouseClick);
             // 
             // statusStrip
             // 

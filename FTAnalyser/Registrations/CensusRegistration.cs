@@ -62,8 +62,8 @@ namespace FTAnalyzer
             {
                 if (censusFamily.Husband != null && censusFamily.Husband.Surname != "UNKNOWN")
                     return censusFamily.Husband.Surname;
-                if (censusFamily.Wife != null && censusFamily.Wife.Surname != "UNKNOWN")
-                    return censusFamily.Wife.Surname;
+                if (censusFamily.Wife != null && censusFamily.Wife.MarriedName != "UNKNOWN")
+                    return censusFamily.Wife.MarriedName;
                 foreach (Individual child in censusFamily.Children)
                 {
                     if (child.Surname != "UNKNOWN")

@@ -26,17 +26,19 @@ namespace FTAnalyzer.Forms
             List<Registration> regs = ft.getAllCensusRegistrations(date, censusDone, includeResidence);
             List<Registration> census = rp.processRegistrations(regs);
             List<IDisplayCensus> ds = new List<IDisplayCensus>();
-            rowStyles = new Dictionary<int, DataGridViewCellStyle>();
+            int pos = 0; // position of DisplayCensus object in original list.
             foreach (CensusRegistration r in census)
+            {
+
                 foreach (Individual i in r.Members)
                 {
-                    if (i.getAge(date).MinAge <= maxAge) 
-                        ds.Add(new DisplayCensus(r.FamilyGed, r.RegistrationLocation, r.registrationDate, i));
+                    if (i.getAge(date).MinAge <= maxAge)
+                        ds.Add(new DisplayCensus(pos++, r, i));
                 }
-            // ds.sort(new IndividualNameComparator());
+            }
             dgCensus.DataSource = ds;
-            ResizeColumns();
             StyleRows();
+            ResizeColumns();
             tsRecords.Text = ds.Count + " Records / " + numFamilies + " Families.";
         }
 
@@ -51,8 +53,11 @@ namespace FTAnalyzer.Forms
             string currentFamilyGed = "";
             bool highlighted = true;
             numFamilies = 0;
+            rowStyles = new Dictionary<int, DataGridViewCellStyle>();
+
             Font boldFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Bold);
             Font regularFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Regular);
+
             foreach (DataGridViewRow r in dgCensus.Rows)
             {
                 DisplayCensus cr = (DisplayCensus)r.DataBoundItem;
@@ -93,6 +98,36 @@ namespace FTAnalyzer.Forms
                 e.CellStyle.ForeColor = style.ForeColor;
                 e.CellStyle.Font = style.Font;
                 cell.ToolTipText = GetTooltipText(style);
+            }
+        }
+
+        private void dgCensus_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            Comparer<IDisplayCensus> comp;
+            switch (e.ColumnIndex)
+            {
+                case 0: // Family GED
+                    comp = new CensusFamilyGedComparer();
+                    break;
+                case 1: // By location (original sort order)
+                    comp = new DefaultCensusComparer();
+                    break;
+                case 2: // Census Name
+                    comp = new CensusIndividualNameComparer();
+                    break;
+                default:
+                    comp = null;
+                    break;
+            }
+
+            if (comp != null)
+            {
+                List<IDisplayCensus> list = (List<IDisplayCensus>)dgCensus.DataSource;
+                list.Sort(comp);
+                dgCensus.DataSource = list;
+                StyleRows();
+                ResizeColumns();
+                dgCensus.Refresh();
             }
         }
     }

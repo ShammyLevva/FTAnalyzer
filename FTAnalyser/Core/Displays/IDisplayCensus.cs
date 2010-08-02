@@ -17,6 +17,8 @@ namespace FTAnalyzer
         string Status { get; }
         string Relation { get; }
         int Ahnentafel { get; }
-
+        CensusRegistration Registration { get; }
+        Individual Individual { get; }
+        int Position { get; }
     }
 }
