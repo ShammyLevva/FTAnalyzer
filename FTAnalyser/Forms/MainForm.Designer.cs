@@ -68,6 +68,8 @@
             this.tabLooseDeaths = new System.Windows.Forms.TabPage();
             this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
             this.tabCensus = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtSurname = new System.Windows.Forms.TextBox();
             this.ckbNoLocations = new System.Windows.Forms.CheckBox();
             this.cenDate = new Controls.CensusDateSelector();
             this.censusCountry = new Controls.CensusCountry();
@@ -108,8 +110,8 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.txtSurname = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtIGISurname = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -530,6 +532,22 @@
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(603, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Surname";
+            // 
+            // txtSurname
+            // 
+            this.txtSurname.Location = new System.Drawing.Point(658, 14);
+            this.txtSurname.Name = "txtSurname";
+            this.txtSurname.Size = new System.Drawing.Size(201, 20);
+            this.txtSurname.TabIndex = 19;
+            // 
             // ckbNoLocations
             // 
             this.ckbNoLocations.AutoSize = true;
@@ -758,6 +776,8 @@
             // 
             // tabIGISearch
             // 
+            this.tabIGISearch.Controls.Add(this.label7);
+            this.tabIGISearch.Controls.Add(this.txtIGISurname);
             this.tabIGISearch.Controls.Add(this.btnOpenFolder);
             this.tabIGISearch.Controls.Add(this.rtbIGIResults);
             this.tabIGISearch.Controls.Add(this.groupBox1);
@@ -945,21 +965,21 @@
             this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
-            // txtSurname
+            // label7
             // 
-            this.txtSurname.Location = new System.Drawing.Point(658, 14);
-            this.txtSurname.Name = "txtSurname";
-            this.txtSurname.Size = new System.Drawing.Size(201, 20);
-            this.txtSurname.TabIndex = 19;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(506, 125);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(49, 13);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "Surname";
             // 
-            // label1
+            // txtIGISurname
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(603, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "Surname";
+            this.txtIGISurname.Location = new System.Drawing.Point(561, 122);
+            this.txtIGISurname.Name = "txtIGISurname";
+            this.txtIGISurname.Size = new System.Drawing.Size(201, 20);
+            this.txtIGISurname.TabIndex = 21;
             // 
             // MainForm
             // 
@@ -1092,6 +1112,8 @@
         private System.Windows.Forms.CheckBox ckbNoLocations;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtSurname;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtIGISurname;
     }
 }
 

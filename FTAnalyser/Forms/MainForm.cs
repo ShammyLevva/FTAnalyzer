@@ -481,7 +481,7 @@ namespace FTAnalyzer
             btnIGIMarriageSearch.Enabled = false;
             rtbIGIResults.Text = "IGI Marriage Search started.\n";
             int level = rbIGISearchCountry.Checked ? FactLocation.COUNTRY : FactLocation.REGION;
-            IGISearchForm form = new IGISearchForm(rtbIGIResults, IGIDefaultCountry.Country, level, IGIrelationTypes.Status);
+            IGISearchForm form = new IGISearchForm(rtbIGIResults, IGIDefaultCountry.Country, level, IGIrelationTypes.Status, txtIGISurname.Text);
             List<Family> families = ft.AllFamilies;
             int counter = 0;
             pbIGISearch.Visible = true;
@@ -514,7 +514,7 @@ namespace FTAnalyzer
             btnIGIMarriageSearch.Enabled = false;
             rtbIGIResults.Text = "IGI Children Search started.\n";
             int level = rbIGISearchCountry.Checked ? FactLocation.COUNTRY : FactLocation.REGION;
-            IGISearchForm form = new IGISearchForm(rtbIGIResults, IGIDefaultCountry.Country, level, IGIrelationTypes.Status);
+            IGISearchForm form = new IGISearchForm(rtbIGIResults, IGIDefaultCountry.Country, level, IGIrelationTypes.Status, txtIGISurname.Text);
             List<Family> families = ft.AllFamilies;
             int counter = 0;
             pbIGISearch.Visible = true;

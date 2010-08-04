@@ -40,6 +40,8 @@ namespace FTAnalyzer
         private int level;
         private int resultCount = 0;
         private int relationTypes = Individual.UNSET;
+        private string surname = "";
+        private bool surnameSearch = false;
         	
         private static readonly string NOMATCHES1 = "<strong>International Genealogical Index / British Isles</strong> (No Matches)";
         private static readonly string NOMATCHES2 = "<strong><span id='searchPageTitle'>International Genealogical Index / British Isles</span></strong> (No Matches)";
@@ -56,13 +58,15 @@ namespace FTAnalyzer
         public const int MARRIAGESEARCH = 1;
         public const int CHILDRENSEARCH = 2;
         
-        public IGISearchForm(RichTextBox rtb, string defaultCountry, int level, int relationTypes) {
+        public IGISearchForm(RichTextBox rtb, string defaultCountry, int level, int relationTypes, string surname) {
             rtbOutput = rtb;
             this.defaultLocation = new FactLocation(defaultCountry);
             this.defLoc = IGILocation.Adapt(this.defaultLocation, level);
             this.level = level;
             this.resultCount = 0;
             this.relationTypes = relationTypes;
+            this.surname = surname.ToUpper();
+            surnameSearch = (surname.Length > 0);
             Initialise();
         }
 
@@ -334,6 +338,12 @@ namespace FTAnalyzer
                 if (family.getPreferredFact(Fact.IGISEARCH) == null && family.Husband != null && family.Wife != null)
                 {   // or we have already flagged marriage fact as having been searched
                     // or either the husband or wife is not present
+                    if (surnameSearch)
+                    {
+                        if (!family.Husband.Surname.ToUpper().Equals(this.surname) &&
+                           !family.Wife.Surname.ToUpper().Equals(this.surname))
+                                return; // we are doing a surname search and neither of the surnames match.
+                    }
                     if(searchType == CHILDRENSEARCH)
                         ChildrenSearch(family, dirname);
                     else
