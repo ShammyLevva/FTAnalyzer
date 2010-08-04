@@ -5,9 +5,9 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    class DefaultCensusComparer : Comparer<IDisplayCensus>
+    class DefaultCensusComparer : Comparer<DisplayCensus>
     {
-        public override int Compare(IDisplayCensus c1, IDisplayCensus c2)
+        public override int Compare(DisplayCensus c1, DisplayCensus c2)
         {
             return c1.Position - c2.Position;
         }

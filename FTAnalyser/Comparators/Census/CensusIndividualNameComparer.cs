@@ -5,9 +5,9 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    class CensusIndividualNameComparer : Comparer<IDisplayCensus>
+    class CensusIndividualNameComparer : Comparer<DisplayCensus>
     {
-        public override int Compare(IDisplayCensus x, IDisplayCensus y)
+        public override int Compare(DisplayCensus x, DisplayCensus y)
         {
             int r = x.Registration.Surname.CompareTo(y.Registration.Surname);
             if (r == 0)

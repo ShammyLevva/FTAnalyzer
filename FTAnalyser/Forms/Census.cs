@@ -29,7 +29,6 @@ namespace FTAnalyzer.Forms
             int pos = 0; // position of DisplayCensus object in original list.
             foreach (CensusRegistration r in census)
             {
-
                 foreach (Individual i in r.Members)
                 {
                     if (i.getAge(date).MinAge <= maxAge)
@@ -107,13 +106,13 @@ namespace FTAnalyzer.Forms
             switch (e.ColumnIndex)
             {
                 case 0: // Family GED
-                    comp = new CensusFamilyGedComparer();
+                    comp = new IDisplayCensusComparerWrapper(new CensusFamilyGedComparer());
                     break;
                 case 1: // By location (original sort order)
-                    comp = new DefaultCensusComparer();
+                    comp = new IDisplayCensusComparerWrapper(new DefaultCensusComparer());
                     break;
                 case 2: // Census Name
-                    comp = new CensusIndividualNameComparer();
+                    comp = new IDisplayCensusComparerWrapper(new CensusIndividualNameComparer());
                     break;
                 default:
                     comp = null;
@@ -126,8 +125,20 @@ namespace FTAnalyzer.Forms
                 list.Sort(comp);
                 dgCensus.DataSource = list;
                 StyleRows();
-                ResizeColumns();
                 dgCensus.Refresh();
+            }
+        }
+
+        private class IDisplayCensusComparerWrapper : Comparer<IDisplayCensus> {
+
+            private Comparer<DisplayCensus> comparer;
+
+            public IDisplayCensusComparerWrapper(Comparer<DisplayCensus> comp) {
+                this.comparer = comp;
+            }
+
+            public override int Compare(IDisplayCensus x, IDisplayCensus y) {
+                return comparer.Compare((DisplayCensus) x, (DisplayCensus) y);
             }
         }
     }
