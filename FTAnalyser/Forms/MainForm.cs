@@ -278,9 +278,9 @@ namespace FTAnalyzer
                 relationFilter = new OrFilter<Registration>(new RelationFilter<Registration>(Individual.UNKNOWN), relationFilter);
 
             if (ckbNoLocations.Checked)
-                filter = new AndFilter<Registration>(relationFilter, new DateFilter(cenDate.SelectedDate));
+                filter = new AndFilter<Registration>(relationFilter, new DateFilter<Registration>(cenDate.SelectedDate));
             else
-                filter = new AndFilter<Registration>(locationFilter, relationFilter, new DateFilter(cenDate.SelectedDate));
+                filter = new AndFilter<Registration>(locationFilter, relationFilter, new DateFilter<Registration>(cenDate.SelectedDate));
 
             if (txtSurname.Text.Length > 0)
                 filter = new AndFilter<Registration>(filter, new SurnameFilter<Registration>(txtSurname.Text.ToUpper()));
@@ -303,9 +303,9 @@ namespace FTAnalyzer
                     new RelationFilter<Registration>(Individual.MARRIEDTODB));
             Filter<Registration> noLCFact = new NotFilter<Registration>(new FactFilter(Fact.LOSTCOUSINS, censusDate));
             if (ckbRestrictions.Checked)
-                filter = new AndFilter<Registration>(new DateFilter(censusDate), filter, relation);
+                filter = new AndFilter<Registration>(new DateFilter<Registration>(censusDate), filter, relation);
             else
-                filter = new AndFilter<Registration>(new DateFilter(censusDate), filter);
+                filter = new AndFilter<Registration>(new DateFilter<Registration>(censusDate), filter);
             if (ckbHideRecorded.Checked)
                 filter = new AndFilter<Registration>(filter, noLCFact);
             MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();

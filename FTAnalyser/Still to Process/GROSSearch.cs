@@ -40,31 +40,31 @@ namespace FTAnalyzer
                     new RelationFilter<Registration>(Individual.MARRIAGE));
           
             RegistrationsProcessor onlineBirthsRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(DateFilter.ONLINE_BIRTH_FILTER,
+                    new AndFilter<Registration>(DateFilter<Registration>.ONLINE_BIRTH_FILTER,
                             new AndFilter<Registration>(directOrBlood, partialScottishData)),
                     byName);
             RegistrationsProcessor onlineDeathsRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(BirthFilter.ONLINE_DEATH_FILTER,
+                    new AndFilter<Registration>(BirthFilter<Registration>.ONLINE_DEATH_FILTER,
                             new AndFilter<Registration>(directOrBlood, partialScottishData)),
                     byName);
             RegistrationsProcessor onlineMarriagesRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(BirthFilter.ONLINE_MARRIAGE_FILTER,
+                    new AndFilter<Registration>(BirthFilter<Registration>.ONLINE_MARRIAGE_FILTER,
                             new AndFilter<Registration>(directOrBlood, partialScottishData)),
                     byName);
             RegistrationsProcessor grosBirthsRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(DateFilter.GROS_BIRTH_FILTER,
+                    new AndFilter<Registration>(DateFilter<Registration>.GROS_BIRTH_FILTER,
                             new AndFilter<Registration>(directOrBlood, partialScottishData)),
                     byName);
             RegistrationsProcessor grosDeathsRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(BirthFilter.GROS_DEATH_FILTER,
+                    new AndFilter<Registration>(BirthFilter<Registration>.GROS_DEATH_FILTER,
                             new AndFilter<Registration>(directOrBlood, partialScottishData)),
                     byName);
             RegistrationsProcessor grosMarriagesRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(BirthFilter.GROS_MARRIAGE_FILTER,
+                    new AndFilter<Registration>(BirthFilter<Registration>.GROS_MARRIAGE_FILTER,
                             new AndFilter<Registration>(directOrBlood, partialScottishData)),
                     byName);
             RegistrationsProcessor oprRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(DateFilter.PRE_1855_FILTER,
+                    new AndFilter<Registration>(DateFilter<Registration>.PRE_1855_FILTER,
                             new AndFilter<Registration>(directOrBlood, partialScottishData)),
                     byLocation);
             RegistrationsProcessor censusRP = new RegistrationsProcessor(

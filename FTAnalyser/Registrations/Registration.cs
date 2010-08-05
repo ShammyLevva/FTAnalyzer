@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public abstract class Registration : ISurnameFilterable, IRelationFilterable {
+    public abstract class Registration : ISurnameFilterable, IRelationFilterable, IDateFilterable, IIndividualFilterable {
 
         internal ParentalGroup individualsFamily;
         internal FactDate registrationDate;
@@ -119,7 +119,11 @@ namespace FTAnalyzer
         public FactDate RegistrationDate {
             get { return registrationDate; }
         }
-        
+
+        public FactDate FilterDate {
+            get { return registrationDate;  }
+        }
+
         public string BestLocation {
             get { return individualsFamily == null ? "" : individualsFamily.BestLocation.ToString(); }
         }

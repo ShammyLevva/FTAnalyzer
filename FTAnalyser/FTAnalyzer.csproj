@@ -97,6 +97,7 @@
     <Compile Include="Core\Fact.cs" />
     <Compile Include="Core\FactDate.cs" />
     <Compile Include="Core\FactSource.cs" />
+    <Compile Include="Filters\Filterables\IIndividualFilterable.cs" />
     <Compile Include="Filters\Filterables\IRelationFilterable.cs" />
     <Compile Include="Filters\Filterables\IDateFilterable.cs" />
     <Compile Include="Filters\Filterables\ISurnameFilterable.cs" />
@@ -239,12 +240,12 @@
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Core\Family.cs" />
     <Compile Include="Filters\Generic\AndFilter.cs" />
-    <Compile Include="Filters\Registrations\BirthFilter.cs" />
+    <Compile Include="Filters\Filterables\BirthFilter.cs" />
     <Compile Include="Filters\Generic\NotFilter.cs" />
     <Compile Include="Filters\Registrations\FactFilter.cs" />
     <Compile Include="Filters\Generic\FalseFilter.cs" />
     <Compile Include="Filters\Generic\TrueFilter.cs" />
-    <Compile Include="Filters\Registrations\DateFilter.cs" />
+    <Compile Include="Filters\Filterables\DateFilter.cs" />
     <Compile Include="Filters\Registrations\IncompleteDataFilter.cs" />
     <Compile Include="Filters\Registrations\LocationFilter.cs" />
     <Compile Include="Filters\Generic\OrFilter.cs" />

@@ -38,20 +38,20 @@ namespace FTAnalyzer
                     new RelationFilter<Registration>(Individual.MARRIAGE));
           
             RegistrationsProcessor onlineBirthsRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(DateFilter.POST_1837_FILTER, 
+                    new AndFilter<Registration>(DateFilter<Registration>.POST_1837_FILTER, 
                             partialData),
                     byName);
             RegistrationsProcessor onlineDeathsRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(BirthFilter.POST_1837_FILTER, 
+                    new AndFilter<Registration>(BirthFilter<Registration>.POST_1837_FILTER, 
                             partialData),
                     byName);
             RegistrationsProcessor onlineMarriagesRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(BirthFilter.POST_1837_FILTER, 
+                    new AndFilter<Registration>(BirthFilter<Registration>.POST_1837_FILTER, 
                             partialData),
                     byName);
 
             RegistrationsProcessor oprRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(DateFilter.PRE_1837_FILTER, 
+                    new AndFilter<Registration>(DateFilter<Registration>.PRE_1837_FILTER, 
                             partialData),
                     byLocation);
             RegistrationsProcessor censusRP = new RegistrationsProcessor(
