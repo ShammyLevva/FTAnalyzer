@@ -283,7 +283,7 @@ namespace FTAnalyzer
                 filter = new AndFilter<Registration>(locationFilter, relationFilter, new DateFilter(cenDate.SelectedDate));
 
             if (txtSurname.Text.Length > 0)
-                filter = new AndFilter<Registration>(filter, new SurnameFilter(txtSurname.Text.ToUpper()));
+                filter = new AndFilter<Registration>(filter, new SurnameFilter<Registration>(txtSurname.Text.ToUpper()));
 
             return filter;
         }

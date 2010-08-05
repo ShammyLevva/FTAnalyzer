@@ -71,7 +71,7 @@ namespace FTAnalyzer
                     new AndFilter<Registration>(directOrBlood, LocationFilter.SCOTLAND),
                     byCensusLocation);
             RegistrationsProcessor bissetRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(new SurnameFilter("Bisset"),
+                    new AndFilter<Registration>(new SurnameFilter<Registration>("Bisset"),
                 		          LocationFilter.SCOTLAND),
                     byCensusLocation);
                     
