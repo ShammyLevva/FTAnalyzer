@@ -97,6 +97,7 @@
     <Compile Include="Core\Fact.cs" />
     <Compile Include="Core\FactDate.cs" />
     <Compile Include="Core\FactSource.cs" />
+    <Compile Include="Filters\Filterables\ILocationFilterable.cs" />
     <Compile Include="Filters\Filterables\IIndividualFilterable.cs" />
     <Compile Include="Filters\Filterables\IRelationFilterable.cs" />
     <Compile Include="Filters\Filterables\IDateFilterable.cs" />
@@ -247,7 +248,7 @@
     <Compile Include="Filters\Generic\TrueFilter.cs" />
     <Compile Include="Filters\Filterables\DateFilter.cs" />
     <Compile Include="Filters\Registrations\IncompleteDataFilter.cs" />
-    <Compile Include="Filters\Registrations\LocationFilter.cs" />
+    <Compile Include="Filters\Filterables\LocationFilter.cs" />
     <Compile Include="Filters\Generic\OrFilter.cs" />
     <Compile Include="Filters\Generic\Filter.cs" />
     <Compile Include="Filters\Filterables\RelationFilter.cs" />

@@ -26,11 +26,11 @@ namespace FTAnalyzer
 
             Filter<Registration> missingScottishData = new AndFilter<Registration>(
                     IncompleteDataFilter.MISSING_DATA_FILTER,
-                    LocationFilter.SCOTLAND);
+                    LocationFilter<Registration>.SCOTLAND);
             // partial filter has data but only up to parish level ie: no address
             Filter<Registration> partialScottishData = new AndFilter<Registration>(
                     new IncompleteDataFilter(FactLocation.PARISH),
-                    LocationFilter.SCOTLAND);
+                    LocationFilter<Registration>.SCOTLAND);
             Filter<Registration> directOrBlood = new OrFilter<Registration>(
                     new OrFilter<Registration>(new RelationFilter<Registration>(Individual.DIRECT), 
         					     new RelationFilter<Registration>(Individual.BLOOD)),
@@ -68,11 +68,11 @@ namespace FTAnalyzer
                             new AndFilter<Registration>(directOrBlood, partialScottishData)),
                     byLocation);
             RegistrationsProcessor censusRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(directOrBlood, LocationFilter.SCOTLAND),
+                    new AndFilter<Registration>(directOrBlood, LocationFilter<Registration>.SCOTLAND),
                     byCensusLocation);
             RegistrationsProcessor bissetRP = new RegistrationsProcessor(
                     new AndFilter<Registration>(new SurnameFilter<Registration>("Bisset"),
-                		          LocationFilter.SCOTLAND),
+                		          LocationFilter<Registration>.SCOTLAND),
                     byCensusLocation);
                     
 

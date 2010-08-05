@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public abstract class Registration : ISurnameFilterable, IRelationFilterable, IDateFilterable, IIndividualFilterable {
+    public abstract class Registration : ISurnameFilterable, IRelationFilterable, IDateFilterable, IIndividualFilterable, ILocationFilterable {
 
         internal ParentalGroup individualsFamily;
         internal FactDate registrationDate;
@@ -152,7 +152,12 @@ namespace FTAnalyzer
         {
             get { return null; }
         }
-     
+
+        public FactLocation FilterLocation
+        {
+            get { return new FactLocation(RegistrationLocation);  }
+        }
+
         /**
          * @return Returns the certificatePresent.
          */

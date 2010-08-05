@@ -251,19 +251,19 @@ namespace FTAnalyzer
 
             Filter<Registration> locationFilter = new TrueFilter<Registration>();
             if (censusCountry.Scotland)
-                locationFilter = LocationFilter.SCOTLAND;
+                locationFilter = LocationFilter<Registration>.SCOTLAND;
             if (censusCountry.England)
-                locationFilter = LocationFilter.ENGLAND;
+                locationFilter = LocationFilter<Registration>.ENGLAND;
             if (censusCountry.Wales)
-                locationFilter = LocationFilter.WALES;
+                locationFilter = LocationFilter<Registration>.WALES;
             if (censusCountry.UK)
-                locationFilter = new OrFilter<Registration>(LocationFilter.SCOTLAND, LocationFilter.ENGLAND, LocationFilter.WALES);
+                locationFilter = new OrFilter<Registration>(LocationFilter<Registration>.SCOTLAND, LocationFilter<Registration>.ENGLAND, LocationFilter<Registration>.WALES);
             if (censusCountry.Canada)
             {
-                locationFilter = LocationFilter.CANADA;
+                locationFilter = LocationFilter<Registration>.CANADA;
             }
             if (censusCountry.USA)
-                locationFilter = LocationFilter.USA;
+                locationFilter = LocationFilter<Registration>.USA;
 
             Filter<Registration> relationFilter = new FalseFilter<Registration>();
             if (relationTypes.Blood)
@@ -322,28 +322,28 @@ namespace FTAnalyzer
 
         private void btnLC1881EW_Click(object sender, EventArgs e)
         {
-            Filter<Registration> filter = new OrFilter<Registration>(LocationFilter.ENGLAND, LocationFilter.WALES);
+            Filter<Registration> filter = new OrFilter<Registration>(LocationFilter<Registration>.ENGLAND, LocationFilter<Registration>.WALES);
             string reportTitle = "1881 England & Wales Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(filter, CensusDate.UKCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Scot_Click(object sender, EventArgs e)
         {
-            Filter<Registration> filter = LocationFilter.SCOTLAND;
+            Filter<Registration> filter = LocationFilter<Registration>.SCOTLAND;
             string reportTitle = "1881 Scotland Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(filter, CensusDate.UKCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Canada_Click(object sender, EventArgs e)
         {
-            Filter<Registration> filter = LocationFilter.CANADA;
+            Filter<Registration> filter = LocationFilter<Registration>.CANADA;
             string reportTitle = "1881 Canada Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(filter, CensusDate.CANADACENSUS1881, reportTitle);
         }
 
         private void btnLC1841EW_Click(object sender, EventArgs e)
         {
-            Filter<Registration> filter = new OrFilter<Registration>(LocationFilter.ENGLAND, LocationFilter.WALES);
+            Filter<Registration> filter = new OrFilter<Registration>(LocationFilter<Registration>.ENGLAND, LocationFilter<Registration>.WALES);
             string reportTitle = "1841 England & Wales Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(filter, CensusDate.UKCENSUS1841, reportTitle);
         }
@@ -351,21 +351,21 @@ namespace FTAnalyzer
 
         private void btnLC1911EW_Click(object sender, EventArgs e)
         {
-            Filter<Registration> filter = new OrFilter<Registration>(LocationFilter.ENGLAND, LocationFilter.WALES);
+            Filter<Registration> filter = new OrFilter<Registration>(LocationFilter<Registration>.ENGLAND, LocationFilter<Registration>.WALES);
             string reportTitle = "1911 England & Wales Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(filter, CensusDate.UKCENSUS1911, reportTitle);
         }
 
         private void btnLC1880USA_Click(object sender, EventArgs e)
         {
-            Filter<Registration> filter = new OrFilter<Registration>(LocationFilter.USA, LocationFilter.US);
+            Filter<Registration> filter = new OrFilter<Registration>(LocationFilter<Registration>.USA, LocationFilter<Registration>.US);
             string reportTitle = "1880 US Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(filter, CensusDate.USCENSUS1880, reportTitle);
         }
 
         private void btnLC1911Ireland_Click(object sender, EventArgs e)
         {
-            Filter<Registration> filter = new OrFilter<Registration>(LocationFilter.EIRE, LocationFilter.IRELAND);
+            Filter<Registration> filter = new OrFilter<Registration>(LocationFilter<Registration>.EIRE, LocationFilter<Registration>.IRELAND);
             string reportTitle = "1911 Ireland Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(filter, new FactDate("1911"), reportTitle);
         }
@@ -601,7 +601,7 @@ namespace FTAnalyzer
             birthComparator.addComparator(new DateComparator());
 
             Filter<Registration> partialEnglishData =
-                new AndFilter<Registration>(new IncompleteDataFilter(FactLocation.PARISH), LocationFilter.ENGLAND);
+                new AndFilter<Registration>(new IncompleteDataFilter(FactLocation.PARISH), LocationFilter<Registration>.ENGLAND);
             Filter<Registration> directOrBlood = new OrFilter<Registration>(
                     new RelationFilter<Registration>(Individual.DIRECT),
                     new RelationFilter<Registration>(Individual.BLOOD));
@@ -624,7 +624,7 @@ namespace FTAnalyzer
             deathComparator.addComparator(new DateComparator());
 
             Filter<Registration> partialEnglishData =
-                new AndFilter<Registration>(new IncompleteDataFilter(FactLocation.PARISH), LocationFilter.ENGLAND);
+                new AndFilter<Registration>(new IncompleteDataFilter(FactLocation.PARISH), LocationFilter<Registration>.ENGLAND);
             Filter<Registration> directOrBlood = new OrFilter<Registration>(
                     new RelationFilter<Registration>(Individual.DIRECT),
                     new RelationFilter<Registration>(Individual.BLOOD));
@@ -647,7 +647,7 @@ namespace FTAnalyzer
             marriageComparator.addComparator(new DateComparator());
 
             Filter<Registration> partialEnglishData =
-                new AndFilter<Registration>(new IncompleteDataFilter(FactLocation.PARISH), LocationFilter.ENGLAND);
+                new AndFilter<Registration>(new IncompleteDataFilter(FactLocation.PARISH), LocationFilter<Registration>.ENGLAND);
             Filter<Registration> directOrBlood = new OrFilter<Registration>(
                     new RelationFilter<Registration>(Individual.DIRECT),
                     new RelationFilter<Registration>(Individual.BLOOD));
