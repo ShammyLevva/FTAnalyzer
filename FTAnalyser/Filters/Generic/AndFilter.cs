@@ -6,24 +6,24 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class AndFilter : RegistrationFilter
+    public class AndFilter<T> : Filter<T>
     {
 
-        private List<RegistrationFilter> filters;
+        private List<Filter<T>> filters;
 
         private AndFilter()
         {
-            this.filters = new List<RegistrationFilter>();
+            this.filters = new List<Filter<T>>();
         }
 
-        public AndFilter(RegistrationFilter f1, RegistrationFilter f2)
+        public AndFilter(Filter<T> f1, Filter<T> f2)
             : this()
         {
             Add(f1);
             Add(f2);
         }
 
-        public AndFilter(RegistrationFilter f1, RegistrationFilter f2, RegistrationFilter f3)
+        public AndFilter(Filter<T> f1, Filter<T> f2, Filter<T> f3)
             : this()
         {
             Add(f1);
@@ -31,11 +31,11 @@ namespace FTAnalyzer
             Add(f3);
         }
 
-        private void Add(RegistrationFilter rf)
+        private void Add(Filter<T> rf)
         {
-            if (rf is AndFilter)
+            if (rf is AndFilter<T>)
             {
-                AndFilter af = (AndFilter)rf;
+                AndFilter<T> af = (AndFilter<T>)rf;
                 filters.AddRange(af.filters);
             }
             else
@@ -44,11 +44,11 @@ namespace FTAnalyzer
             }
         }
 
-        public bool select(Registration r)
+        public bool select(T t)
         {
-            foreach (RegistrationFilter f in filters)
+            foreach (Filter<T> f in filters)
             {
-                if (!f.select(r))
+                if (!f.select(t))
                 {
                     return false;
                 }

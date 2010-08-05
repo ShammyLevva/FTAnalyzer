@@ -6,12 +6,12 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class FalseFilter : RegistrationFilter
+    public class FalseFilter<T> : Filter<T>
     {
         public FalseFilter()
         { }
 
-        public bool select (Registration r) {
+        public bool select (T t) {
             return false;
         }
     }

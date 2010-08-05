@@ -6,7 +6,8 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class LocationFilter : RegistrationFilter {
+    public class LocationFilter : Filter<Registration>
+    {
 
         private string searchstring;
         private int level;

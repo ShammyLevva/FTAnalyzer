@@ -6,7 +6,8 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class RelationFilter : RegistrationFilter {
+    public class RelationFilter : Filter<Registration>
+    {
 
         private int filterType;
         

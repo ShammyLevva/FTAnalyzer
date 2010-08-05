@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class DateFilter : RegistrationFilter {
+    public class DateFilter : Filter<Registration> {
 
         internal FactDate cutoff;
 

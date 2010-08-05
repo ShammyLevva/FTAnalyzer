@@ -23,55 +23,55 @@ namespace FTAnalyzer
             byCensusLocation.addComparator(new DateComparator());
             byName.addComparator(new NameComparator());
             byName.addComparator(new DateComparator());
-            
-            RegistrationFilter missingScottishData = new AndFilter(
+
+            Filter<Registration> missingScottishData = new AndFilter<Registration>(
                     IncompleteDataFilter.MISSING_DATA_FILTER,
                     LocationFilter.SCOTLAND);
             // partial filter has data but only up to parish level ie: no address
-            RegistrationFilter partialScottishData = new AndFilter(
+            Filter<Registration> partialScottishData = new AndFilter<Registration>(
                     new IncompleteDataFilter(FactLocation.PARISH),
                     LocationFilter.SCOTLAND);
-            RegistrationFilter directOrBlood = new OrFilter(
-        		    new OrFilter(new RelationFilter(Individual.DIRECT), 
+            Filter<Registration> directOrBlood = new OrFilter<Registration>(
+                    new OrFilter<Registration>(new RelationFilter(Individual.DIRECT), 
         					     new RelationFilter(Individual.BLOOD)),
         		    new RelationFilter(Individual.MARRIEDTODB));
-            RegistrationFilter unknownOrMarriage = new OrFilter(
+            Filter<Registration> unknownOrMarriage = new OrFilter<Registration>(
                     new RelationFilter(Individual.UNKNOWN), 
                     new RelationFilter(Individual.MARRIAGE));
           
             RegistrationsProcessor onlineBirthsRP = new RegistrationsProcessor(
-                    new AndFilter(DateFilter.ONLINE_BIRTH_FILTER, 
-                            new AndFilter(directOrBlood,partialScottishData)),
+                    new AndFilter<Registration>(DateFilter.ONLINE_BIRTH_FILTER,
+                            new AndFilter<Registration>(directOrBlood, partialScottishData)),
                     byName);
             RegistrationsProcessor onlineDeathsRP = new RegistrationsProcessor(
-                    new AndFilter(BirthFilter.ONLINE_DEATH_FILTER, 
-                            new AndFilter(directOrBlood,partialScottishData)),
+                    new AndFilter<Registration>(BirthFilter.ONLINE_DEATH_FILTER,
+                            new AndFilter<Registration>(directOrBlood, partialScottishData)),
                     byName);
             RegistrationsProcessor onlineMarriagesRP = new RegistrationsProcessor(
-                    new AndFilter(BirthFilter.ONLINE_MARRIAGE_FILTER, 
-                            new AndFilter(directOrBlood,partialScottishData)),
+                    new AndFilter<Registration>(BirthFilter.ONLINE_MARRIAGE_FILTER,
+                            new AndFilter<Registration>(directOrBlood, partialScottishData)),
                     byName);
             RegistrationsProcessor grosBirthsRP = new RegistrationsProcessor(
-                    new AndFilter(DateFilter.GROS_BIRTH_FILTER, 
-                            new AndFilter(directOrBlood,partialScottishData)),
+                    new AndFilter<Registration>(DateFilter.GROS_BIRTH_FILTER,
+                            new AndFilter<Registration>(directOrBlood, partialScottishData)),
                     byName);
             RegistrationsProcessor grosDeathsRP = new RegistrationsProcessor(
-                    new AndFilter(BirthFilter.GROS_DEATH_FILTER, 
-                            new AndFilter(directOrBlood,partialScottishData)),
+                    new AndFilter<Registration>(BirthFilter.GROS_DEATH_FILTER,
+                            new AndFilter<Registration>(directOrBlood, partialScottishData)),
                     byName);
             RegistrationsProcessor grosMarriagesRP = new RegistrationsProcessor(
-                    new AndFilter(BirthFilter.GROS_MARRIAGE_FILTER, 
-                            new AndFilter(directOrBlood,partialScottishData)),
+                    new AndFilter<Registration>(BirthFilter.GROS_MARRIAGE_FILTER,
+                            new AndFilter<Registration>(directOrBlood, partialScottishData)),
                     byName);
             RegistrationsProcessor oprRP = new RegistrationsProcessor(
-                    new AndFilter(DateFilter.PRE_1855_FILTER, 
-                            new AndFilter(directOrBlood,partialScottishData)),
+                    new AndFilter<Registration>(DateFilter.PRE_1855_FILTER,
+                            new AndFilter<Registration>(directOrBlood, partialScottishData)),
                     byLocation);
             RegistrationsProcessor censusRP = new RegistrationsProcessor(
-                    new AndFilter(directOrBlood,LocationFilter.SCOTLAND),
+                    new AndFilter<Registration>(directOrBlood, LocationFilter.SCOTLAND),
                     byCensusLocation);
             RegistrationsProcessor bissetRP = new RegistrationsProcessor(
-                    new AndFilter(new SurnameFilter("Bisset"),
+                    new AndFilter<Registration>(new SurnameFilter("Bisset"),
                 		          LocationFilter.SCOTLAND),
                     byCensusLocation);
                     

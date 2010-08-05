@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class IncompleteDataFilter : RegistrationFilter
+    public class IncompleteDataFilter : Filter<Registration>
     {
 
         private int level;

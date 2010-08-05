@@ -6,7 +6,8 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class FactFilter : RegistrationFilter {
+    public class FactFilter : Filter<Registration>
+    {
 
         internal string factType;
         internal FactDate factDate;

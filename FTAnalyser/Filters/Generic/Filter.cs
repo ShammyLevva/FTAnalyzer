@@ -6,8 +6,8 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public interface RegistrationFilter
+    public interface Filter<T>
     {
-        bool select(Registration r);
+        bool select(T r);
     }
 }

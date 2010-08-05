@@ -9,25 +9,25 @@ namespace FTAnalyzer
     public class RegistrationsProcessor
     {
 
-        RegistrationFilter filter;
+        Filter<Registration> filter;
         IComparer<Registration> comparator;
 
-        public RegistrationsProcessor(RegistrationFilter f, IComparer<Registration> c)
+        public RegistrationsProcessor(Filter<Registration> f, IComparer<Registration> c)
         {
             filter = f;
             comparator = c;
         }
 
-        public RegistrationsProcessor(RegistrationFilter f) 
+        public RegistrationsProcessor(Filter<Registration> f) 
             : this(f, null)
         { }
 
         public RegistrationsProcessor(IComparer<Registration> c)
-            : this(new TrueFilter(), c)
+            : this(new TrueFilter<Registration>(), c)
         { }
 
         public RegistrationsProcessor()
-            : this(new TrueFilter(), null)
+            : this(new TrueFilter<Registration>(), null)
         { }
 
         private List<Registration> filterRegistrations(List<Registration> regs) {

@@ -6,23 +6,23 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class OrFilter : RegistrationFilter {
+    public class OrFilter<T> : Filter<T> {
 
-        private List<RegistrationFilter> filters;
+        private List<Filter<T>> filters;
 
         private OrFilter()
         {
-            this.filters = new List<RegistrationFilter>();
+            this.filters = new List<Filter<T>>();
         }
 
-        public OrFilter(RegistrationFilter f1, RegistrationFilter f2) :
+        public OrFilter(Filter<T> f1, Filter<T> f2) :
             this()
         {
             Add(f1);
             Add(f2);
         }
 
-        public OrFilter(RegistrationFilter f1, RegistrationFilter f2, RegistrationFilter f3)
+        public OrFilter(Filter<T> f1, Filter<T> f2, Filter<T> f3)
             : this()
         {
             Add(f1);
@@ -30,11 +30,11 @@ namespace FTAnalyzer
             Add(f3);
         }
 
-        private void Add(RegistrationFilter rf)
+        private void Add(Filter<T> rf)
         {
-            if (rf is OrFilter)
+            if (rf is OrFilter<T>)
             {
-                OrFilter of = (OrFilter)rf;
+                OrFilter<T> of = (OrFilter<T>)rf;
                 filters.AddRange(of.filters);
             }
             else
@@ -43,11 +43,11 @@ namespace FTAnalyzer
             }
         }
 
-        public bool select(Registration r)
+        public bool select(T t)
         {
-            foreach (RegistrationFilter f in filters)
+            foreach (Filter<T> f in filters)
             {
-                if (f.select(r))
+                if (f.select(t))
                 {
                     return true;
                 }

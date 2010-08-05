@@ -24,38 +24,38 @@ namespace FTAnalyzer
             byName.addComparator(new NameComparator());
             byName.addComparator(new DateComparator());
             
-            RegistrationFilter missingData = IncompleteDataFilter.MISSING_DATA_FILTER;
+            Filter<Registration> missingData = IncompleteDataFilter.MISSING_DATA_FILTER;
             // partial filter has data but only up to parish level ie: no address
-            
-            RegistrationFilter partialData = new IncompleteDataFilter(FactLocation.PARISH);
-            
-            RegistrationFilter directOrBlood = new OrFilter(
+
+            Filter<Registration> partialData = new IncompleteDataFilter(FactLocation.PARISH);
+
+            Filter<Registration> directOrBlood = new OrFilter<Registration>(
                     new RelationFilter(Individual.DIRECT), 
                     new RelationFilter(Individual.BLOOD));
-            
-            RegistrationFilter unknownOrMarriage = new OrFilter(
+
+            Filter<Registration> unknownOrMarriage = new OrFilter<Registration>(
                     new RelationFilter(Individual.UNKNOWN), 
                     new RelationFilter(Individual.MARRIAGE));
           
             RegistrationsProcessor onlineBirthsRP = new RegistrationsProcessor(
-                    new AndFilter(DateFilter.POST_1837_FILTER, 
+                    new AndFilter<Registration>(DateFilter.POST_1837_FILTER, 
                             partialData),
                     byName);
             RegistrationsProcessor onlineDeathsRP = new RegistrationsProcessor(
-                    new AndFilter(BirthFilter.POST_1837_FILTER, 
+                    new AndFilter<Registration>(BirthFilter.POST_1837_FILTER, 
                             partialData),
                     byName);
             RegistrationsProcessor onlineMarriagesRP = new RegistrationsProcessor(
-                    new AndFilter(BirthFilter.POST_1837_FILTER, 
+                    new AndFilter<Registration>(BirthFilter.POST_1837_FILTER, 
                             partialData),
                     byName);
 
             RegistrationsProcessor oprRP = new RegistrationsProcessor(
-                    new AndFilter(DateFilter.PRE_1837_FILTER, 
+                    new AndFilter<Registration>(DateFilter.PRE_1837_FILTER, 
                             partialData),
                     byLocation);
             RegistrationsProcessor censusRP = new RegistrationsProcessor(
-                    new TrueFilter(), byCensusLocation);
+                    new TrueFilter<Registration>(), byCensusLocation);
                     
             Console.WriteLine("GRO extraction started.");
             List<Registration> births = ft.getAllBirthRegistrations();

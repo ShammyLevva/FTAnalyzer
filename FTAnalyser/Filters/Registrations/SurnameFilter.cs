@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class SurnameFilter : RegistrationFilter
+    public class SurnameFilter : Filter<Registration>
     {
 
         private string searchstring;
