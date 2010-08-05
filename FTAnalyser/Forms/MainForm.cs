@@ -655,6 +655,8 @@ namespace FTAnalyzer
             Filter<Individual> filter = createTreeTopsIndividualFilter();
             List<IDisplayTreeTops> treeTopsList = ft.GetTreeTops(filter);
             dgTreeTops.DataSource = treeTopsList;
+            foreach (DataGridViewColumn c in dgTreeTops.Columns)
+                c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = "Count : " + treeTopsList.Count;
             HourGlass(false);
         }

@@ -588,6 +588,7 @@
             this.censusCountry.Size = new System.Drawing.Size(260, 78);
             this.censusCountry.TabIndex = 16;
             this.censusCountry.Title = "Census Country";
+            this.censusCountry.UKEnabled = false;
             this.censusCountry.CountryChanged += new System.EventHandler(this.censusCountry_CountryChanged);
             // 
             // relationTypes
@@ -969,6 +970,7 @@
             this.IGIDefaultCountry.Size = new System.Drawing.Size(256, 74);
             this.IGIDefaultCountry.TabIndex = 7;
             this.IGIDefaultCountry.Title = "Default Country";
+            this.IGIDefaultCountry.UKEnabled = false;
             this.IGIDefaultCountry.CountryChanged += new System.EventHandler(this.IGIDefaultCountry_CountryChanged);
             // 
             // tabTreetops
@@ -988,6 +990,9 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.dgTreeTops);
             this.panel1.Location = new System.Drawing.Point(8, 92);
             this.panel1.Name = "panel1";
@@ -996,10 +1001,13 @@
             // 
             // dgTreeTops
             // 
+            this.dgTreeTops.AllowUserToAddRows = false;
+            this.dgTreeTops.AllowUserToDeleteRows = false;
             this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgTreeTops.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgTreeTops.Location = new System.Drawing.Point(0, 0);
             this.dgTreeTops.Name = "dgTreeTops";
+            this.dgTreeTops.ReadOnly = true;
             this.dgTreeTops.Size = new System.Drawing.Size(920, 307);
             this.dgTreeTops.TabIndex = 1;
             // 
@@ -1043,6 +1051,7 @@
             this.treetopsCountry.Size = new System.Drawing.Size(256, 74);
             this.treetopsCountry.TabIndex = 11;
             this.treetopsCountry.Title = "Default Country";
+            this.treetopsCountry.UKEnabled = true;
             // 
             // tsCount
             // 

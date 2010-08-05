@@ -25,6 +25,12 @@ namespace Controls
         public bool Canada { get { return rbCanada.Checked; } }
         public bool USA { get { return rbUSA.Checked; } }
 
+        public bool UKEnabled
+        {
+            get { return rbUK.Enabled; }
+            set { rbUK.Enabled = value; }
+        }
+
         public string Country
         {
             get
