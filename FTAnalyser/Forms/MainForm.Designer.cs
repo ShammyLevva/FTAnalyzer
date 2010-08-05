@@ -91,6 +91,8 @@
             this.btnLC1881Canada = new System.Windows.Forms.Button();
             this.btnLC1881Scot = new System.Windows.Forms.Button();
             this.tabIGISearch = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtIGISurname = new System.Windows.Forms.TextBox();
             this.btnOpenFolder = new System.Windows.Forms.Button();
             this.rtbIGIResults = new Utilities.ScrollingRichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -110,8 +112,14 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtIGISurname = new System.Windows.Forms.TextBox();
+            this.tabTreetops = new System.Windows.Forms.TabPage();
+            this.relationTypes1 = new Controls.RelationTypes();
+            this.censusCountry1 = new Controls.CensusCountry();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtTreetopSurname = new System.Windows.Forms.TextBox();
+            this.btnTreeTops = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dgTreeTops = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -135,6 +143,9 @@
             this.tabIGISearch.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.statusStrip.SuspendLayout();
+            this.tabTreetops.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -263,6 +274,7 @@
             this.tabControl.Controls.Add(this.tabCensus);
             this.tabControl.Controls.Add(this.tabLostCousins);
             this.tabControl.Controls.Add(this.tabIGISearch);
+            this.tabControl.Controls.Add(this.tabTreetops);
             this.tabControl.Location = new System.Drawing.Point(0, 27);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -798,6 +810,22 @@
             this.tabIGISearch.Text = "IGI Search";
             this.tabIGISearch.UseVisualStyleBackColor = true;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(506, 125);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(49, 13);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "Surname";
+            // 
+            // txtIGISurname
+            // 
+            this.txtIGISurname.Location = new System.Drawing.Point(561, 122);
+            this.txtIGISurname.Name = "txtIGISurname";
+            this.txtIGISurname.Size = new System.Drawing.Size(201, 20);
+            this.txtIGISurname.TabIndex = 21;
+            // 
             // btnOpenFolder
             // 
             this.btnOpenFolder.Location = new System.Drawing.Point(598, 11);
@@ -965,21 +993,78 @@
             this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
-            // label7
+            // tabTreetops
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(506, 125);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(49, 13);
-            this.label7.TabIndex = 22;
-            this.label7.Text = "Surname";
+            this.tabTreetops.Controls.Add(this.panel1);
+            this.tabTreetops.Controls.Add(this.btnTreeTops);
+            this.tabTreetops.Controls.Add(this.label8);
+            this.tabTreetops.Controls.Add(this.txtTreetopSurname);
+            this.tabTreetops.Controls.Add(this.relationTypes1);
+            this.tabTreetops.Controls.Add(this.censusCountry1);
+            this.tabTreetops.Location = new System.Drawing.Point(4, 22);
+            this.tabTreetops.Name = "tabTreetops";
+            this.tabTreetops.Size = new System.Drawing.Size(931, 402);
+            this.tabTreetops.TabIndex = 7;
+            this.tabTreetops.Text = "Treetops";
+            this.tabTreetops.UseVisualStyleBackColor = true;
             // 
-            // txtIGISurname
+            // relationTypes1
             // 
-            this.txtIGISurname.Location = new System.Drawing.Point(561, 122);
-            this.txtIGISurname.Name = "txtIGISurname";
-            this.txtIGISurname.Size = new System.Drawing.Size(201, 20);
-            this.txtIGISurname.TabIndex = 21;
+            this.relationTypes1.Location = new System.Drawing.Point(270, 12);
+            this.relationTypes1.Name = "relationTypes1";
+            this.relationTypes1.Size = new System.Drawing.Size(322, 74);
+            this.relationTypes1.TabIndex = 12;
+            // 
+            // censusCountry1
+            // 
+            this.censusCountry1.Location = new System.Drawing.Point(8, 12);
+            this.censusCountry1.Name = "censusCountry1";
+            this.censusCountry1.Size = new System.Drawing.Size(256, 74);
+            this.censusCountry1.TabIndex = 11;
+            this.censusCountry1.Title = "Default Country";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(595, 25);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(49, 13);
+            this.label8.TabIndex = 24;
+            this.label8.Text = "Surname";
+            // 
+            // txtTreetopSurname
+            // 
+            this.txtTreetopSurname.Location = new System.Drawing.Point(650, 22);
+            this.txtTreetopSurname.Name = "txtTreetopSurname";
+            this.txtTreetopSurname.Size = new System.Drawing.Size(201, 20);
+            this.txtTreetopSurname.TabIndex = 23;
+            // 
+            // btnTreeTops
+            // 
+            this.btnTreeTops.Location = new System.Drawing.Point(598, 59);
+            this.btnTreeTops.Name = "btnTreeTops";
+            this.btnTreeTops.Size = new System.Drawing.Size(253, 27);
+            this.btnTreeTops.TabIndex = 25;
+            this.btnTreeTops.Text = "Show People at top of tree";
+            this.btnTreeTops.UseVisualStyleBackColor = true;
+            this.btnTreeTops.Click += new System.EventHandler(this.btnTreeTops_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.dgTreeTops);
+            this.panel1.Location = new System.Drawing.Point(8, 92);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(920, 307);
+            this.panel1.TabIndex = 26;
+            // 
+            // dgTreeTops
+            // 
+            this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgTreeTops.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgTreeTops.Location = new System.Drawing.Point(0, 0);
+            this.dgTreeTops.Name = "dgTreeTops";
+            this.dgTreeTops.Size = new System.Drawing.Size(920, 307);
+            this.dgTreeTops.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -1024,6 +1109,10 @@
             this.groupBox1.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.tabTreetops.ResumeLayout(false);
+            this.tabTreetops.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1114,6 +1203,14 @@
         private System.Windows.Forms.TextBox txtSurname;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtIGISurname;
+        private System.Windows.Forms.TabPage tabTreetops;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtTreetopSurname;
+        private Controls.RelationTypes relationTypes1;
+        private Controls.CensusCountry censusCountry1;
+        private System.Windows.Forms.Button btnTreeTops;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridView dgTreeTops;
     }
 }
 

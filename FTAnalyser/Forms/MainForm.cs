@@ -662,5 +662,14 @@ namespace FTAnalyzer
             report.SetupMarriageRegistration(result);
             report.Show();
         }
+
+        private void btnTreeTops_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            List<IDisplayTreeTops> treeTopsList = ft.GetTreeTops(txtTreetopSurname.Text);
+            dgTreeTops.DataSource = treeTopsList;
+            tsCountLabel.Text = "Count : " + treeTopsList.Count;
+            HourGlass(false);
+        }
     }
 }
