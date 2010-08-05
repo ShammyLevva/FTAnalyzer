@@ -630,18 +630,14 @@ namespace FTAnalyzer
 
 		#region TreeTops
 
-		public List<IDisplayTreeTops> GetTreeTops(string surname)
+		public List<IDisplayTreeTops> GetTreeTops(Filter<Individual> filter)
 		{
 			List<IDisplayTreeTops> result = new List<IDisplayTreeTops>();
 			foreach (Individual ind in individuals)
 			{
                 if (!ind.HasParents)
                 {
-                    bool toAdd = true;
-                    if(surname.Length > 0 && !surname.ToUpper().Equals(ind.Surname.ToUpper()))
-                        toAdd = false; // we have specified a surname but it doesn't match
-
-                    if(toAdd)
+                    if(filter.select(ind))
                         result.Add(ind);
                 }
 			}

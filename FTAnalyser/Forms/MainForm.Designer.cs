@@ -108,18 +108,18 @@
             this.label3 = new System.Windows.Forms.Label();
             this.IGIrelationTypes = new Controls.RelationTypes();
             this.IGIDefaultCountry = new Controls.CensusCountry();
+            this.tabTreetops = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dgTreeTops = new System.Windows.Forms.DataGridView();
+            this.btnTreeTops = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtTreetopSurname = new System.Windows.Forms.TextBox();
+            this.treetopsRelation = new Controls.RelationTypes();
+            this.treetopsCountry = new Controls.CensusCountry();
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.tabTreetops = new System.Windows.Forms.TabPage();
-            this.relationTypes1 = new Controls.RelationTypes();
-            this.censusCountry1 = new Controls.CensusCountry();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtTreetopSurname = new System.Windows.Forms.TextBox();
-            this.btnTreeTops = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.dgTreeTops = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -142,10 +142,10 @@
             this.tabLostCousins.SuspendLayout();
             this.tabIGISearch.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.statusStrip.SuspendLayout();
             this.tabTreetops.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).BeginInit();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -170,13 +170,13 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -187,27 +187,27 @@
             this.deathRegistrationsToolStripMenuItem,
             this.marriageRegistrationsToolStripMenuItem});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.reportsToolStripMenuItem.Text = "Reports";
             // 
             // BirthRegistrationToolStripMenuItem
             // 
             this.BirthRegistrationToolStripMenuItem.Name = "BirthRegistrationToolStripMenuItem";
-            this.BirthRegistrationToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.BirthRegistrationToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.BirthRegistrationToolStripMenuItem.Text = "Birth Registrations";
             this.BirthRegistrationToolStripMenuItem.Click += new System.EventHandler(this.BirthRegistrationToolStripMenuItem_Click);
             // 
             // deathRegistrationsToolStripMenuItem
             // 
             this.deathRegistrationsToolStripMenuItem.Name = "deathRegistrationsToolStripMenuItem";
-            this.deathRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.deathRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.deathRegistrationsToolStripMenuItem.Text = "Death Registrations";
             this.deathRegistrationsToolStripMenuItem.Click += new System.EventHandler(this.deathRegistrationsToolStripMenuItem_Click);
             // 
             // marriageRegistrationsToolStripMenuItem
             // 
             this.marriageRegistrationsToolStripMenuItem.Name = "marriageRegistrationsToolStripMenuItem";
-            this.marriageRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.marriageRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.marriageRegistrationsToolStripMenuItem.Text = "Marriage Registrations";
             this.marriageRegistrationsToolStripMenuItem.Click += new System.EventHandler(this.marriageRegistrationsToolStripMenuItem_Click);
             // 
@@ -217,19 +217,19 @@
             this.showLocationsToolStripMenuItem,
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // showLocationsToolStripMenuItem
             // 
             this.showLocationsToolStripMenuItem.Name = "showLocationsToolStripMenuItem";
-            this.showLocationsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.showLocationsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.showLocationsToolStripMenuItem.Text = "Show locations";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -240,25 +240,25 @@
             this.toolStripSeparator1,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // checkForUpdatesToolStripMenuItem
             // 
             this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
             this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(171, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(168, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -971,6 +971,79 @@
             this.IGIDefaultCountry.Title = "Default Country";
             this.IGIDefaultCountry.CountryChanged += new System.EventHandler(this.IGIDefaultCountry_CountryChanged);
             // 
+            // tabTreetops
+            // 
+            this.tabTreetops.Controls.Add(this.panel1);
+            this.tabTreetops.Controls.Add(this.btnTreeTops);
+            this.tabTreetops.Controls.Add(this.label8);
+            this.tabTreetops.Controls.Add(this.txtTreetopSurname);
+            this.tabTreetops.Controls.Add(this.treetopsRelation);
+            this.tabTreetops.Controls.Add(this.treetopsCountry);
+            this.tabTreetops.Location = new System.Drawing.Point(4, 22);
+            this.tabTreetops.Name = "tabTreetops";
+            this.tabTreetops.Size = new System.Drawing.Size(931, 402);
+            this.tabTreetops.TabIndex = 7;
+            this.tabTreetops.Text = "Treetops";
+            this.tabTreetops.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.dgTreeTops);
+            this.panel1.Location = new System.Drawing.Point(8, 92);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(920, 307);
+            this.panel1.TabIndex = 26;
+            // 
+            // dgTreeTops
+            // 
+            this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgTreeTops.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgTreeTops.Location = new System.Drawing.Point(0, 0);
+            this.dgTreeTops.Name = "dgTreeTops";
+            this.dgTreeTops.Size = new System.Drawing.Size(920, 307);
+            this.dgTreeTops.TabIndex = 1;
+            // 
+            // btnTreeTops
+            // 
+            this.btnTreeTops.Location = new System.Drawing.Point(598, 59);
+            this.btnTreeTops.Name = "btnTreeTops";
+            this.btnTreeTops.Size = new System.Drawing.Size(253, 27);
+            this.btnTreeTops.TabIndex = 25;
+            this.btnTreeTops.Text = "Show People at top of tree";
+            this.btnTreeTops.UseVisualStyleBackColor = true;
+            this.btnTreeTops.Click += new System.EventHandler(this.btnTreeTops_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(595, 25);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(49, 13);
+            this.label8.TabIndex = 24;
+            this.label8.Text = "Surname";
+            // 
+            // txtTreetopSurname
+            // 
+            this.txtTreetopSurname.Location = new System.Drawing.Point(650, 22);
+            this.txtTreetopSurname.Name = "txtTreetopSurname";
+            this.txtTreetopSurname.Size = new System.Drawing.Size(201, 20);
+            this.txtTreetopSurname.TabIndex = 23;
+            // 
+            // treetopsRelation
+            // 
+            this.treetopsRelation.Location = new System.Drawing.Point(270, 12);
+            this.treetopsRelation.Name = "treetopsRelation";
+            this.treetopsRelation.Size = new System.Drawing.Size(322, 74);
+            this.treetopsRelation.TabIndex = 12;
+            // 
+            // treetopsCountry
+            // 
+            this.treetopsCountry.Location = new System.Drawing.Point(8, 12);
+            this.treetopsCountry.Name = "treetopsCountry";
+            this.treetopsCountry.Size = new System.Drawing.Size(256, 74);
+            this.treetopsCountry.TabIndex = 11;
+            this.treetopsCountry.Title = "Default Country";
+            // 
             // tsCount
             // 
             this.tsCount.Name = "tsCount";
@@ -990,81 +1063,8 @@
             // tsCountLabel
             // 
             this.tsCountLabel.Name = "tsCountLabel";
-            this.tsCountLabel.Size = new System.Drawing.Size(52, 17);
+            this.tsCountLabel.Size = new System.Drawing.Size(55, 17);
             this.tsCountLabel.Text = "Count : 0";
-            // 
-            // tabTreetops
-            // 
-            this.tabTreetops.Controls.Add(this.panel1);
-            this.tabTreetops.Controls.Add(this.btnTreeTops);
-            this.tabTreetops.Controls.Add(this.label8);
-            this.tabTreetops.Controls.Add(this.txtTreetopSurname);
-            this.tabTreetops.Controls.Add(this.relationTypes1);
-            this.tabTreetops.Controls.Add(this.censusCountry1);
-            this.tabTreetops.Location = new System.Drawing.Point(4, 22);
-            this.tabTreetops.Name = "tabTreetops";
-            this.tabTreetops.Size = new System.Drawing.Size(931, 402);
-            this.tabTreetops.TabIndex = 7;
-            this.tabTreetops.Text = "Treetops";
-            this.tabTreetops.UseVisualStyleBackColor = true;
-            // 
-            // relationTypes1
-            // 
-            this.relationTypes1.Location = new System.Drawing.Point(270, 12);
-            this.relationTypes1.Name = "relationTypes1";
-            this.relationTypes1.Size = new System.Drawing.Size(322, 74);
-            this.relationTypes1.TabIndex = 12;
-            // 
-            // censusCountry1
-            // 
-            this.censusCountry1.Location = new System.Drawing.Point(8, 12);
-            this.censusCountry1.Name = "censusCountry1";
-            this.censusCountry1.Size = new System.Drawing.Size(256, 74);
-            this.censusCountry1.TabIndex = 11;
-            this.censusCountry1.Title = "Default Country";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(595, 25);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(49, 13);
-            this.label8.TabIndex = 24;
-            this.label8.Text = "Surname";
-            // 
-            // txtTreetopSurname
-            // 
-            this.txtTreetopSurname.Location = new System.Drawing.Point(650, 22);
-            this.txtTreetopSurname.Name = "txtTreetopSurname";
-            this.txtTreetopSurname.Size = new System.Drawing.Size(201, 20);
-            this.txtTreetopSurname.TabIndex = 23;
-            // 
-            // btnTreeTops
-            // 
-            this.btnTreeTops.Location = new System.Drawing.Point(598, 59);
-            this.btnTreeTops.Name = "btnTreeTops";
-            this.btnTreeTops.Size = new System.Drawing.Size(253, 27);
-            this.btnTreeTops.TabIndex = 25;
-            this.btnTreeTops.Text = "Show People at top of tree";
-            this.btnTreeTops.UseVisualStyleBackColor = true;
-            this.btnTreeTops.Click += new System.EventHandler(this.btnTreeTops_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.dgTreeTops);
-            this.panel1.Location = new System.Drawing.Point(8, 92);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(920, 307);
-            this.panel1.TabIndex = 26;
-            // 
-            // dgTreeTops
-            // 
-            this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgTreeTops.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgTreeTops.Location = new System.Drawing.Point(0, 0);
-            this.dgTreeTops.Name = "dgTreeTops";
-            this.dgTreeTops.Size = new System.Drawing.Size(920, 307);
-            this.dgTreeTops.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -1107,12 +1107,12 @@
             this.tabIGISearch.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
             this.tabTreetops.ResumeLayout(false);
             this.tabTreetops.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).EndInit();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1206,8 +1206,8 @@
         private System.Windows.Forms.TabPage tabTreetops;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtTreetopSurname;
-        private Controls.RelationTypes relationTypes1;
-        private Controls.CensusCountry censusCountry1;
+        private Controls.RelationTypes treetopsRelation;
+        private Controls.CensusCountry treetopsCountry;
         private System.Windows.Forms.Button btnTreeTops;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgTreeTops;

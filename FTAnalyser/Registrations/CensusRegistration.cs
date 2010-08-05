@@ -51,7 +51,7 @@ namespace FTAnalyzer
             get { return censusFamily.FamilyGed; }
         }
 
-        public override int Relation
+        public override int RelationType
         {
             get { return censusFamily.Relation; }
         }

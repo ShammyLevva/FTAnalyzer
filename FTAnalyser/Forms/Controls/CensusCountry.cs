@@ -47,6 +47,24 @@ namespace Controls
             } 
         }
 
+        public Filter<T> BuildFilter<T>() where T: ILocationFilterable, IFactsFilterable
+        {
+            Filter<T> locationFilter = new TrueFilter<T>();
+            if (Scotland)
+                locationFilter = LocationFilter<T>.SCOTLAND;
+            if (England)
+                locationFilter = LocationFilter<T>.ENGLAND;
+            if (Wales)
+                locationFilter = LocationFilter<T>.WALES;
+            if (UK)
+                locationFilter = new OrFilter<T>(LocationFilter<T>.SCOTLAND, LocationFilter<T>.ENGLAND, LocationFilter<T>.WALES);
+            if (Canada)
+                locationFilter = LocationFilter<T>.CANADA;
+            if (USA)
+                locationFilter = LocationFilter<T>.USA;
+            return locationFilter;
+        }
+
         public event EventHandler CountryChanged;
 
         protected void OnCountryChanged(EventArgs e)

@@ -7,6 +7,6 @@ namespace FTAnalyzer
 {
     public interface IRelationFilterable
     {
-        int Relation { get; }
+        int RelationType { get; }
     }
 }

@@ -67,7 +67,7 @@ namespace FTAnalyzer
             get { return Individual == null ? "" : Individual.Occupation; }
         }
         
-        public virtual int Relation {
+        public virtual int RelationType {
             get { return Individual == null ? Individual.UNKNOWN : Individual.RelationType; }
         }
         

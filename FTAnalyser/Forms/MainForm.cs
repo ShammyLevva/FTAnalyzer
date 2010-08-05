@@ -248,34 +248,8 @@ namespace FTAnalyzer
         private Filter<Registration> createCensusRegistrationFilter()
         {
             Filter<Registration> filter;
-
-            Filter<Registration> locationFilter = new TrueFilter<Registration>();
-            if (censusCountry.Scotland)
-                locationFilter = LocationFilter<Registration>.SCOTLAND;
-            if (censusCountry.England)
-                locationFilter = LocationFilter<Registration>.ENGLAND;
-            if (censusCountry.Wales)
-                locationFilter = LocationFilter<Registration>.WALES;
-            if (censusCountry.UK)
-                locationFilter = new OrFilter<Registration>(LocationFilter<Registration>.SCOTLAND, LocationFilter<Registration>.ENGLAND, LocationFilter<Registration>.WALES);
-            if (censusCountry.Canada)
-            {
-                locationFilter = LocationFilter<Registration>.CANADA;
-            }
-            if (censusCountry.USA)
-                locationFilter = LocationFilter<Registration>.USA;
-
-            Filter<Registration> relationFilter = new FalseFilter<Registration>();
-            if (relationTypes.Blood)
-                relationFilter = new OrFilter<Registration>(new RelationFilter<Registration>(Individual.BLOOD), relationFilter);
-            if (relationTypes.Directs)
-                relationFilter = new OrFilter<Registration>(new RelationFilter<Registration>(Individual.DIRECT), relationFilter);
-            if (relationTypes.Marriage)
-                relationFilter = new OrFilter<Registration>(new RelationFilter<Registration>(Individual.MARRIAGE), relationFilter);
-            if (relationTypes.MarriedToDB)
-                relationFilter = new OrFilter<Registration>(new RelationFilter<Registration>(Individual.MARRIEDTODB), relationFilter);
-            if (relationTypes.Unknown)
-                relationFilter = new OrFilter<Registration>(new RelationFilter<Registration>(Individual.UNKNOWN), relationFilter);
+            Filter<Registration> locationFilter = censusCountry.BuildFilter<Registration>();
+            Filter<Registration> relationFilter = relationTypes.BuildFilter<Registration>();
 
             if (ckbNoLocations.Checked)
                 filter = new AndFilter<Registration>(relationFilter, new DateFilter<Registration>(cenDate.SelectedDate));
@@ -284,6 +258,18 @@ namespace FTAnalyzer
 
             if (txtSurname.Text.Length > 0)
                 filter = new AndFilter<Registration>(filter, new SurnameFilter<Registration>(txtSurname.Text.ToUpper()));
+
+            return filter;
+        }
+
+        private Filter<Individual> createTreeTopsIndividualFilter()
+        {
+            Filter<Individual> locationFilter = treetopsCountry.BuildFilter<Individual>();
+            Filter<Individual> relationFilter = treetopsRelation.BuildFilter<Individual>();
+            Filter<Individual> filter = new AndFilter<Individual>(locationFilter, relationFilter);
+
+            if (txtTreetopSurname.Text.Length > 0)
+                filter = new AndFilter<Individual>(filter, new SurnameFilter<Individual>(txtTreetopSurname.Text.ToUpper()));
 
             return filter;
         }
@@ -666,7 +652,8 @@ namespace FTAnalyzer
         private void btnTreeTops_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            List<IDisplayTreeTops> treeTopsList = ft.GetTreeTops(txtTreetopSurname.Text);
+            Filter<Individual> filter = createTreeTopsIndividualFilter();
+            List<IDisplayTreeTops> treeTopsList = ft.GetTreeTops(filter);
             dgTreeTops.DataSource = treeTopsList;
             tsCountLabel.Text = "Count : " + treeTopsList.Count;
             HourGlass(false);
