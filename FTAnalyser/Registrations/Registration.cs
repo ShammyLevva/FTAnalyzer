@@ -6,7 +6,10 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public abstract class Registration : ISurnameFilterable, IRelationFilterable, IDateFilterable, IIndividualFilterable, ILocationFilterable {
+    public abstract class Registration :
+
+            ISurnameFilterable, IRelationFilterable, IDateFilterable, IIndividualFilterable,
+            ILocationFilterable, IFactsFilterable, ICertificateFilterable {
 
         internal ParentalGroup individualsFamily;
         internal FactDate registrationDate;

@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class FactFilter : Filter<Registration>
+    public class FactFilter<T> : Filter<T> where T: IFactsFilterable
     {
 
         internal string factType;
@@ -18,8 +18,8 @@ namespace FTAnalyzer
             this.factDate = factDate;
         }
 
-        public virtual bool select (Registration r) {
-            foreach (Fact f in r.AllFacts)
+        public virtual bool select (T t) {
+            foreach (Fact f in t.AllFacts)
             {
                 if (f.FactType == factType && f.FactDate.overlaps(factDate))
                     return true;

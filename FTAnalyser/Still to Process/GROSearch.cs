@@ -24,10 +24,10 @@ namespace FTAnalyzer
             byName.addComparator(new NameComparator());
             byName.addComparator(new DateComparator());
             
-            Filter<Registration> missingData = IncompleteDataFilter.MISSING_DATA_FILTER;
+            Filter<Registration> missingData = IncompleteDataFilter<Registration>.MISSING_DATA_FILTER;
             // partial filter has data but only up to parish level ie: no address
 
-            Filter<Registration> partialData = new IncompleteDataFilter(FactLocation.PARISH);
+            Filter<Registration> partialData = new IncompleteDataFilter<Registration>(FactLocation.PARISH);
 
             Filter<Registration> directOrBlood = new OrFilter<Registration>(
                     new RelationFilter<Registration>(Individual.DIRECT), 

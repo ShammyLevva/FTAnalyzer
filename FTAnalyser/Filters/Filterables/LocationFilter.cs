@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class LocationFilter<T> : Filter<T> where T: ILocationFilterable
+    public class LocationFilter<T> : Filter<T> where T: ILocationFilterable, IFactsFilterable
     {
 
         private string searchstring;

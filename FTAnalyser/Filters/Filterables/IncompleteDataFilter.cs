@@ -6,12 +6,12 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class IncompleteDataFilter : Filter<Registration>
+    public class IncompleteDataFilter<T> : Filter<T> where T: IDateFilterable, ILocationFilterable, ICertificateFilterable
     {
 
         private int level;
 
-        public static readonly IncompleteDataFilter MISSING_DATA_FILTER = new IncompleteDataFilter(FactLocation.COUNTRY);
+        public static readonly IncompleteDataFilter<T> MISSING_DATA_FILTER = new IncompleteDataFilter<T>(FactLocation.COUNTRY);
 
         public IncompleteDataFilter(int level)
         {
@@ -23,14 +23,14 @@ namespace FTAnalyzer
             this.level = FactLocation.ADDRESS;
         }
 
-        public bool select(Registration r)
+        public bool select(T t)
         {
-            if (r.isCertificatePresent())
+            if (t.isCertificatePresent())
                 return false;
-            FactDate fd = r.RegistrationDate;
+            FactDate fd = t.FilterDate;
             if (fd == null || !fd.isExact())
                 return true;
-            FactLocation l = new FactLocation(r.RegistrationLocation);
+            FactLocation l = t.FilterLocation;
             switch (level)
             {
                 case FactLocation.COUNTRY: return (l.Country.Length == 0);

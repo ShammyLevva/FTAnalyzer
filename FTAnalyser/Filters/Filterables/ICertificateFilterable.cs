@@ -5,8 +5,8 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    public interface ILocationFilterable
+    public interface ICertificateFilterable
     {
-        FactLocation FilterLocation { get; }
+        bool isCertificatePresent();
     }
 }

@@ -5,8 +5,8 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    public interface ILocationFilterable
+    public interface IFactsFilterable
     {
-        FactLocation FilterLocation { get; }
+        List<Fact> AllFacts { get; }
     }
 }

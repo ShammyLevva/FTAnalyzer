@@ -97,8 +97,10 @@
     <Compile Include="Core\Fact.cs" />
     <Compile Include="Core\FactDate.cs" />
     <Compile Include="Core\FactSource.cs" />
+    <Compile Include="Filters\Filterables\ICertificateFilterable.cs" />
     <Compile Include="Filters\Filterables\ILocationFilterable.cs" />
     <Compile Include="Filters\Filterables\IIndividualFilterable.cs" />
+    <Compile Include="Filters\Filterables\IFactsFilterable.cs" />
     <Compile Include="Filters\Filterables\IRelationFilterable.cs" />
     <Compile Include="Filters\Filterables\IDateFilterable.cs" />
     <Compile Include="Filters\Filterables\ISurnameFilterable.cs" />
@@ -243,11 +245,11 @@
     <Compile Include="Filters\Generic\AndFilter.cs" />
     <Compile Include="Filters\Filterables\BirthFilter.cs" />
     <Compile Include="Filters\Generic\NotFilter.cs" />
-    <Compile Include="Filters\Registrations\FactFilter.cs" />
+    <Compile Include="Filters\Filterables\FactFilter.cs" />
     <Compile Include="Filters\Generic\FalseFilter.cs" />
     <Compile Include="Filters\Generic\TrueFilter.cs" />
     <Compile Include="Filters\Filterables\DateFilter.cs" />
-    <Compile Include="Filters\Registrations\IncompleteDataFilter.cs" />
+    <Compile Include="Filters\Filterables\IncompleteDataFilter.cs" />
     <Compile Include="Filters\Filterables\LocationFilter.cs" />
     <Compile Include="Filters\Generic\OrFilter.cs" />
     <Compile Include="Filters\Generic\Filter.cs" />
@@ -411,6 +413,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Filters\Registrations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
