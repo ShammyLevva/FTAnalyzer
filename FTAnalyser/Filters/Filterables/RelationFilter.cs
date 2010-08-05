@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class RelationFilter : Filter<Registration>
+    public class RelationFilter<T> : Filter<T> where T: IRelationFilterable
     {
 
         private int filterType;
@@ -15,8 +15,8 @@ namespace FTAnalyzer
             this.filterType = filterType;
         }
         
-        public bool select (Registration r) {
-            return r.Relation == filterType;
+        public bool select (T t) {
+            return t.Relation == filterType;
         }
     }
 }

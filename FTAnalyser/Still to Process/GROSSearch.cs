@@ -32,12 +32,12 @@ namespace FTAnalyzer
                     new IncompleteDataFilter(FactLocation.PARISH),
                     LocationFilter.SCOTLAND);
             Filter<Registration> directOrBlood = new OrFilter<Registration>(
-                    new OrFilter<Registration>(new RelationFilter(Individual.DIRECT), 
-        					     new RelationFilter(Individual.BLOOD)),
-        		    new RelationFilter(Individual.MARRIEDTODB));
+                    new OrFilter<Registration>(new RelationFilter<Registration>(Individual.DIRECT), 
+        					     new RelationFilter<Registration>(Individual.BLOOD)),
+        		    new RelationFilter<Registration>(Individual.MARRIEDTODB));
             Filter<Registration> unknownOrMarriage = new OrFilter<Registration>(
-                    new RelationFilter(Individual.UNKNOWN), 
-                    new RelationFilter(Individual.MARRIAGE));
+                    new RelationFilter<Registration>(Individual.UNKNOWN), 
+                    new RelationFilter<Registration>(Individual.MARRIAGE));
           
             RegistrationsProcessor onlineBirthsRP = new RegistrationsProcessor(
                     new AndFilter<Registration>(DateFilter.ONLINE_BIRTH_FILTER,

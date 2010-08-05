@@ -30,12 +30,12 @@ namespace FTAnalyzer
             Filter<Registration> partialData = new IncompleteDataFilter(FactLocation.PARISH);
 
             Filter<Registration> directOrBlood = new OrFilter<Registration>(
-                    new RelationFilter(Individual.DIRECT), 
-                    new RelationFilter(Individual.BLOOD));
+                    new RelationFilter<Registration>(Individual.DIRECT), 
+                    new RelationFilter<Registration>(Individual.BLOOD));
 
             Filter<Registration> unknownOrMarriage = new OrFilter<Registration>(
-                    new RelationFilter(Individual.UNKNOWN), 
-                    new RelationFilter(Individual.MARRIAGE));
+                    new RelationFilter<Registration>(Individual.UNKNOWN), 
+                    new RelationFilter<Registration>(Individual.MARRIAGE));
           
             RegistrationsProcessor onlineBirthsRP = new RegistrationsProcessor(
                     new AndFilter<Registration>(DateFilter.POST_1837_FILTER, 

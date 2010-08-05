@@ -97,7 +97,9 @@
     <Compile Include="Core\Fact.cs" />
     <Compile Include="Core\FactDate.cs" />
     <Compile Include="Core\FactSource.cs" />
-    <Compile Include="Filters\ISurnameFilterable.cs" />
+    <Compile Include="Filters\Filterables\IRelationFilterable.cs" />
+    <Compile Include="Filters\Filterables\IDateFilterable.cs" />
+    <Compile Include="Filters\Filterables\ISurnameFilterable.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -247,8 +249,8 @@
     <Compile Include="Filters\Registrations\LocationFilter.cs" />
     <Compile Include="Filters\Generic\OrFilter.cs" />
     <Compile Include="Filters\Generic\Filter.cs" />
-    <Compile Include="Filters\Registrations\RelationFilter.cs" />
-    <Compile Include="Filters\Registrations\SurnameFilter.cs" />
+    <Compile Include="Filters\Filterables\RelationFilter.cs" />
+    <Compile Include="Filters\Filterables\SurnameFilter.cs" />
     <Compile Include="Formatters\BaseOutputFormatter.cs" />
     <Compile Include="Formatters\BirthOutputFormatter.cs" />
     <Compile Include="Formatters\CensusOutputFormatter.cs" />

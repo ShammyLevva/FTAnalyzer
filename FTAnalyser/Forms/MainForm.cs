@@ -267,15 +267,15 @@ namespace FTAnalyzer
 
             Filter<Registration> relationFilter = new FalseFilter<Registration>();
             if (relationTypes.Blood)
-                relationFilter = new OrFilter<Registration>(new RelationFilter(Individual.BLOOD), relationFilter);
+                relationFilter = new OrFilter<Registration>(new RelationFilter<Registration>(Individual.BLOOD), relationFilter);
             if (relationTypes.Directs)
-                relationFilter = new OrFilter<Registration>(new RelationFilter(Individual.DIRECT), relationFilter);
+                relationFilter = new OrFilter<Registration>(new RelationFilter<Registration>(Individual.DIRECT), relationFilter);
             if (relationTypes.Marriage)
-                relationFilter = new OrFilter<Registration>(new RelationFilter(Individual.MARRIAGE), relationFilter);
+                relationFilter = new OrFilter<Registration>(new RelationFilter<Registration>(Individual.MARRIAGE), relationFilter);
             if (relationTypes.MarriedToDB)
-                relationFilter = new OrFilter<Registration>(new RelationFilter(Individual.MARRIEDTODB), relationFilter);
+                relationFilter = new OrFilter<Registration>(new RelationFilter<Registration>(Individual.MARRIEDTODB), relationFilter);
             if (relationTypes.Unknown)
-                relationFilter = new OrFilter<Registration>(new RelationFilter(Individual.UNKNOWN), relationFilter);
+                relationFilter = new OrFilter<Registration>(new RelationFilter<Registration>(Individual.UNKNOWN), relationFilter);
 
             if (ckbNoLocations.Checked)
                 filter = new AndFilter<Registration>(relationFilter, new DateFilter(cenDate.SelectedDate));
@@ -299,8 +299,8 @@ namespace FTAnalyzer
             HourGlass(true);
             Filter<Registration> relation =
                 new OrFilter<Registration>(
-                    new OrFilter<Registration>(new RelationFilter(Individual.BLOOD), new RelationFilter(Individual.DIRECT)),
-                    new RelationFilter(Individual.MARRIEDTODB));
+                    new OrFilter<Registration>(new RelationFilter<Registration>(Individual.BLOOD), new RelationFilter<Registration>(Individual.DIRECT)),
+                    new RelationFilter<Registration>(Individual.MARRIEDTODB));
             Filter<Registration> noLCFact = new NotFilter<Registration>(new FactFilter(Fact.LOSTCOUSINS, censusDate));
             if (ckbRestrictions.Checked)
                 filter = new AndFilter<Registration>(new DateFilter(censusDate), filter, relation);
@@ -603,8 +603,8 @@ namespace FTAnalyzer
             Filter<Registration> partialEnglishData =
                 new AndFilter<Registration>(new IncompleteDataFilter(FactLocation.PARISH), LocationFilter.ENGLAND);
             Filter<Registration> directOrBlood = new OrFilter<Registration>(
-                    new RelationFilter(Individual.DIRECT),
-                    new RelationFilter(Individual.BLOOD));
+                    new RelationFilter<Registration>(Individual.DIRECT),
+                    new RelationFilter<Registration>(Individual.BLOOD));
 
             RegistrationsProcessor onlineBirthsRP = new RegistrationsProcessor(
                     new AndFilter<Registration>(directOrBlood, partialEnglishData), birthComparator);
@@ -626,8 +626,8 @@ namespace FTAnalyzer
             Filter<Registration> partialEnglishData =
                 new AndFilter<Registration>(new IncompleteDataFilter(FactLocation.PARISH), LocationFilter.ENGLAND);
             Filter<Registration> directOrBlood = new OrFilter<Registration>(
-                    new RelationFilter(Individual.DIRECT),
-                    new RelationFilter(Individual.BLOOD));
+                    new RelationFilter<Registration>(Individual.DIRECT),
+                    new RelationFilter<Registration>(Individual.BLOOD));
 
             RegistrationsProcessor onlineDeathsRP = new RegistrationsProcessor(
                     new AndFilter<Registration>(directOrBlood, partialEnglishData), deathComparator);
@@ -649,8 +649,8 @@ namespace FTAnalyzer
             Filter<Registration> partialEnglishData =
                 new AndFilter<Registration>(new IncompleteDataFilter(FactLocation.PARISH), LocationFilter.ENGLAND);
             Filter<Registration> directOrBlood = new OrFilter<Registration>(
-                    new RelationFilter(Individual.DIRECT),
-                    new RelationFilter(Individual.BLOOD));
+                    new RelationFilter<Registration>(Individual.DIRECT),
+                    new RelationFilter<Registration>(Individual.BLOOD));
 
             RegistrationsProcessor onlineMarriagesRP = new RegistrationsProcessor(
                     new AndFilter<Registration>(directOrBlood, partialEnglishData), marriageComparator);
