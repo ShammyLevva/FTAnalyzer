@@ -24,6 +24,7 @@
     <CountryTypo from="Great Britain"    to="England" />
     <CountryTypo from="Aust"    to="Australia" />
     <CountryTypo from="Aust."   to="Australia" />
+    <CountryTypo from="AUS"     to="Australia" />
     <CountryTypo from="Eire"    to="Ireland" />
   </CountryTypos>
   <RegionTypos>
@@ -132,6 +133,8 @@
     <!-- Australian Territories abbreviations -->
     <RegionTypo from="NSW"   to="New South Wales" />
     <RegionTypo from="N S W" to="New South Wales" />
+    <RegionTypo from="SA"    to="South Australia" />
+    <RegionTypo from="VIC"   to="Victoria" />
   </RegionTypos>
   <DemoteCountries>
     <!-- Scottish Counties -->
@@ -349,7 +352,7 @@
     <CountryToRegion region="Wyoming"               country="United States" regionID="Wyoming" />
 
     <!-- Australian Territories -->
-    <CountryToRegion region="New South Wales"       country="Australia" regionID="" />
+    <CountryToRegion region="New South Wales"       country="Australia" regionID="New South Wales" />
   </DemoteCountries>                                                          
   <DemoteRegions>
     <RegionToParish parish="Aberdeen"   region="Aberdeenshire" />
