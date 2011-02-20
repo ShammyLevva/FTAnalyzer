@@ -428,7 +428,7 @@
             this.dgCountries.Size = new System.Drawing.Size(918, 371);
             this.dgCountries.TabIndex = 0;
             this.toolTips.SetToolTip(this.dgCountries, "Double click on Country name to see list of individuals with that Country.");
-            this.dgCountries.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCountries_CellContentDoubleClick);
+            this.dgCountries.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCountries_CellDoubleClick);
             // 
             // tabRegions
             // 
@@ -453,7 +453,7 @@
             this.dgRegions.Size = new System.Drawing.Size(918, 370);
             this.dgRegions.TabIndex = 1;
             this.toolTips.SetToolTip(this.dgRegions, "Double click on Region name to see list of individuals with that Region.");
-            this.dgRegions.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgRegions_CellContentDoubleClick);
+            this.dgRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgRegions_CellDoubleClick);
             // 
             // tabParishes
             // 
@@ -476,7 +476,7 @@
             this.dgParishes.Name = "dgParishes";
             this.dgParishes.Size = new System.Drawing.Size(918, 370);
             this.dgParishes.TabIndex = 1;
-            this.dgParishes.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgParishes_CellContentDoubleClick);
+            this.dgParishes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgParishes_CellDoubleClick);
             // 
             // tabAddresses
             // 
@@ -499,7 +499,7 @@
             this.dgAddresses.Name = "dgAddresses";
             this.dgAddresses.Size = new System.Drawing.Size(918, 370);
             this.dgAddresses.TabIndex = 1;
-            this.dgAddresses.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAddresses_CellContentDoubleClick);
+            this.dgAddresses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAddresses_CellDoubleClick);
             // 
             // tabLooseDeaths
             // 

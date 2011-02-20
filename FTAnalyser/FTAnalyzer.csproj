@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FTAnalyzer</RootNamespace>
     <AssemblyName>FTAnalyzer</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -36,6 +36,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -84,6 +85,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
@@ -104,6 +106,12 @@
     <Compile Include="Filters\Filterables\IRelationFilterable.cs" />
     <Compile Include="Filters\Filterables\IDateFilterable.cs" />
     <Compile Include="Filters\Filterables\ISurnameFilterable.cs" />
+    <Compile Include="Forms\GoogleMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GoogleMap.Designer.cs">
+      <DependentUpon>GoogleMap.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +120,9 @@
     </Compile>
     <Compile Include="FTAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\GoogleMap.resx">
+      <DependentUpon>GoogleMap.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\RegistrationReport.resx">
       <DependentUpon>RegistrationReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -414,7 +425,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

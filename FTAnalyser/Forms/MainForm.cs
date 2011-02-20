@@ -190,7 +190,7 @@ namespace FTAnalyzer
             tsCountLabel.Text = "Count : " + list.Count;
         }
 
-        private void dgCountries_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgCountries_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             HourGlass(true);
             FactLocation loc = (FactLocation)dgCountries.CurrentRow.DataBoundItem;
@@ -200,17 +200,25 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void dgRegions_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgRegions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             HourGlass(true);
             FactLocation loc = (FactLocation)dgRegions.CurrentRow.DataBoundItem;
-            Forms.People frmInd = new Forms.People();
-            frmInd.setLocation(loc, FactLocation.REGION);
-            frmInd.Show();
+            if (Control.ModifierKeys == Keys.Shift)
+            {
+                // Do geo coding stuff
+                Forms.GoogleMap frmMap = new Forms.GoogleMap();
+                frmMap.setLocation(loc, FactLocation.REGION);
+                frmMap.Show();
+            } else {
+                Forms.People frmInd = new Forms.People();
+                frmInd.setLocation(loc, FactLocation.REGION);
+                frmInd.Show();
+            }
             HourGlass(false);
         }
 
-        private void dgParishes_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgParishes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             HourGlass(true);
             FactLocation loc = (FactLocation)dgParishes.CurrentRow.DataBoundItem;
@@ -220,7 +228,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void dgAddresses_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgAddresses_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             HourGlass(true);
             FactLocation loc = (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
