@@ -16,6 +16,7 @@ namespace FTAnalyzer
         public static readonly int MINYEARS = 0;
         private static readonly int LOW = 0;
         private static readonly int HIGH = 1;
+        private static readonly IFormatProvider CULTURE = new CultureInfo("en-GB", true);
 
         public static readonly string YEAR = "yyyy";
         public static readonly string MONTHYEAR = "MMM yyyy";
@@ -230,7 +231,6 @@ namespace FTAnalyzer
                 return highlow == HIGH ? MAXDATE : MINDATE;
             try
             {
-                IFormatProvider culture = new CultureInfo("en-GB", true);
                 // Match the regular expression pattern against a text string.
                 Match matcher = Regex.Match(dateValue, DATE_PATTERN);
                 Group gDay = matcher.Groups[1], gMonth = matcher.Groups[2], gYear = matcher.Groups[3];
@@ -240,7 +240,7 @@ namespace FTAnalyzer
                 if (year == null) year = "";
                 if (day.Length == 0 && month.Length == 0)
                 {
-                    date = DateTime.ParseExact(dateValue, YEAR, culture);
+                    date = DateTime.ParseExact(dateValue, YEAR, CULTURE);
                     if (highlow == HIGH)
                     {
                         dt = new DateTime(date.Year + adjustment, 12, 31);
@@ -252,7 +252,7 @@ namespace FTAnalyzer
                 }
                 else if (day.Length == 0 && year.Length > 0)
                 {
-                    date = DateTime.ParseExact(dateValue, MONTHYEAR, culture); 
+                    date = DateTime.ParseExact(dateValue, MONTHYEAR, CULTURE); 
                     dt = new DateTime(date.Year, date.Month, 1);
                     dt = dt.AddMonths(adjustment + 1);
                     if (highlow == HIGH)
@@ -263,7 +263,7 @@ namespace FTAnalyzer
                 }
                 else if (day.Length == 0 && year.Length == 0)
                 {
-                    date = DateTime.ParseExact(dateValue, MONTH, culture); 
+                    date = DateTime.ParseExact(dateValue, MONTH, CULTURE); 
                     dt = new DateTime(defaultYear, date.Month, 1);
                     if (highlow == HIGH)
                     {
@@ -275,12 +275,12 @@ namespace FTAnalyzer
                 }
                 else if (year.Length == 0)
                 {
-                    date = DateTime.ParseExact(dateValue, DAYMONTH, culture); 
+                    date = DateTime.ParseExact(dateValue, DAYMONTH, CULTURE); 
                     dt = new DateTime(defaultYear, date.Month, date.Day);
                 }
                 else if (day.Length > 0 && month.Length > 0 && year.Length > 0)
                 {
-                    date = DateTime.ParseExact(dateValue, FULL, culture);
+                    date = DateTime.ParseExact(dateValue, FULL, CULTURE);
                     dt = new DateTime(date.Year, date.Month, date.Day);
                     if ((highlow == HIGH && adjustment != -1) ||
                         (highlow == LOW && adjustment != +1))
