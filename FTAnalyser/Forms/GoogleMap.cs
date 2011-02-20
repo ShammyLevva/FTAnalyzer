@@ -10,25 +10,40 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Web;
 using System.Windows.Forms;
+using System.IO;
+using System.Threading;
 
 namespace FTAnalyzer.Forms
 {
     public partial class GoogleMap : Form
     {
         private String location;
+        private bool loaded;
 
         public GoogleMap()
         {
             InitializeComponent();
+            loaded = false;
+            string filename = Application.StartupPath + "\\Resources\\GoogleMaps.htm";
+            webBrowser.Navigate(filename);
+            webBrowser.Hide();
         }
 
         public void setLocation(FactLocation loc, int level)
         {
+            while (!loaded)
+            {
+                Application.DoEvents();
+            }
             location = loc.ToString();
             GeoResponse res = CallGeoWS(location);
-            webBrowser.Url = new Uri("http://code.google.com/apis/maps/documentation/javascript/examples/map-coordinates.html");
-            webBrowser.Document.InvokeScript();
-            webBrowser.Refresh();
+            double lat = res.Results[0].Geometry.Location.Lat;
+            double lng = res.Results[0].Geometry.Location.Lng;
+            Object[] args = new Object[2];
+            args[0] = lat;
+            args[1] = lng;
+            Object marker = webBrowser.Document.InvokeScript("frontAndCenter", args);
+            webBrowser.Show();
         }
 
         private static GeoResponse CallGeoWS(string address)
@@ -75,6 +90,12 @@ namespace FTAnalyzer.Forms
                     }
                 }
             }
+        }
+
+        private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            loaded = true;
+            System.Diagnostics.Debug.Print("DocumentCompleted called");
         }
 
     }

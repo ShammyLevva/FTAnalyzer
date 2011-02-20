@@ -18,4 +18,11 @@ function addMarker(lat, lng) {
     var point = new google.maps.LatLng(lat, lng);
     var options = { position: point, map: map, visible: true };
     var marker = new google.maps.Marker(options);
+    return marker;
 }
+
+function frontAndCenter(lat, lng) {
+    setCenter(lat, lng);
+    addMarker(lat, lng);
+}
+

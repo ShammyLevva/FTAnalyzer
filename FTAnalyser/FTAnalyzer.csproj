@@ -227,8 +227,12 @@
     <Compile Include="Comparators\Registration\LocationComparator.cs" />
     <Compile Include="Comparators\Registration\MultiComparator.cs" />
     <Compile Include="Comparators\Registration\NameComparator.cs" />
-    <Content Include="Forms\GoogleMaps.htm" />
-    <Content Include="Forms\GoogleMaps.js" />
+    <Content Include="Resources\GoogleMaps.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\GoogleMaps.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\FactLocationFixes.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
