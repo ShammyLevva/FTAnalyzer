@@ -26,7 +26,9 @@ namespace FTAnalyzer.Forms
         {
             location = loc.ToString();
             GeoResponse res = CallGeoWS(location);
-
+            webBrowser.Url = new Uri("http://code.google.com/apis/maps/documentation/javascript/examples/map-coordinates.html");
+            webBrowser.Document.InvokeScript();
+            webBrowser.Refresh();
         }
 
         private static GeoResponse CallGeoWS(string address)

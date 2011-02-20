@@ -203,7 +203,7 @@ namespace FTAnalyzer
         private void dgRegions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             HourGlass(true);
-            FactLocation loc = (FactLocation)dgRegions.CurrentRow.DataBoundItem;
+            FactLocation loc = dgRegions.CurrentRow == null ? new FactLocation() : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
             if (Control.ModifierKeys == Keys.Shift)
             {
                 // Do geo coding stuff
