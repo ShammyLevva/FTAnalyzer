@@ -95,6 +95,8 @@
     <Compile Include="Comparators\Census\CensusIndividualNameComparer.cs" />
     <Compile Include="Comparators\Census\CensusFamilyGedComparer.cs" />
     <Compile Include="Comparators\Census\DefaultCensusComparer.cs" />
+    <Compile Include="Comparators\Individual\DefaultIndividualComparer.cs" />
+    <Compile Include="Comparators\Individual\TreeTopsBirthDateComparer.cs" />
     <Compile Include="Core\Displays\IDisplayTreeTops.cs" />
     <Compile Include="Core\Fact.cs" />
     <Compile Include="Core\FactDate.cs" />
@@ -217,7 +219,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comparators\Individual\IndividualNameComparer.cs" />
-    <Compile Include="Comparators\Individual\DefaultIndividualComparer.cs" />
     <Compile Include="Comparators\Location\FactLocationComparer.cs" />
     <Compile Include="Core\Age.cs" />
     <Compile Include="Core\CensusDate.cs" />

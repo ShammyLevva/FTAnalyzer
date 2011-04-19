@@ -282,7 +282,7 @@ namespace FTAnalyzer
 				{
 					if (loc.address != string.Empty)
 					{
-						FactLocation a = new FactLocation(loc.address + ", " + loc.parish + ", " + loc.region + ", " + loc.country);
+						FactLocation a = new FactLocation(loc.Address + ", " + loc.parish + ", " + loc.region + ", " + loc.country);
 						if (!result.Contains(a))
 							result.Add(a);
 					}
@@ -707,6 +707,7 @@ namespace FTAnalyzer
 				// set them as a direct relation
 				ind.RelationType = Individual.DIRECT;
 				addParentsToQueue(ind, queue, true);
+                Application.DoEvents();
 			}
 			// we have now added all direct ancestors
 			List<Individual> directs = getAllRelationsOfType(Individual.DIRECT);

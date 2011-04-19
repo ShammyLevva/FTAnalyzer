@@ -12,7 +12,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.3.3.0";
+        private string VERSION = "1.3.4.0";
         private bool _checkForUpdatesEnabled = true;
         private System.Threading.Timer _timerCheckForUpdates;
 
@@ -662,6 +662,7 @@ namespace FTAnalyzer
             HourGlass(true);
             Filter<Individual> filter = createTreeTopsIndividualFilter();
             List<IDisplayTreeTops> treeTopsList = ft.GetTreeTops(filter);
+            treeTopsList.Sort(new TreeTopsBirthDateComparer());
             dgTreeTops.DataSource = treeTopsList;
             foreach (DataGridViewColumn c in dgTreeTops.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);

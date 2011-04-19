@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml;
 using System.IO;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace FTAnalyzer
 {
@@ -308,7 +309,13 @@ namespace FTAnalyzer
             set { this.address = value; }
         }
 
-        public string Country {
+        public string AddressNumeric
+        {
+            get { return FixNumerics(this.address); }
+        }
+
+        public string Country
+        {
             get { return country; }
             set { this.country = value; }
         }
@@ -323,7 +330,13 @@ namespace FTAnalyzer
             set { this.place = value; }
         }
 
-        public string Region {
+        public string PlaceNumeric
+        {
+            get { return FixNumerics( this.place); }
+        }
+
+        public string Region
+        {
             get { return region; }
             set { this.region = value; }
         }
@@ -356,7 +369,24 @@ namespace FTAnalyzer
             return false;
         }
 
-        public FactLocation getLocation(int level)
+        private string FixNumerics(string addressField)
+        {
+            int pos = addressField.IndexOf(" ");
+            if (pos > 0 & pos < addressField.Length)
+            {
+                string number = addressField.Substring(0, pos);
+                string name = addressField.Substring(pos + 1);
+                Match matcher = Regex.Match(number, "\\d+[A-Za-z½]?");
+                if (matcher.Success)
+                {
+                    return name + " - " + number;
+                }
+            }
+            return addressField;
+        }
+
+        public FactLocation getLocation(int level) { return getLocation(level, false); }
+        public FactLocation getLocation(int level, bool fixNumerics)
         {
             StringBuilder location = new StringBuilder(this.country);
             if (level > COUNTRY && region.Length > 0)
@@ -364,9 +394,9 @@ namespace FTAnalyzer
             if (level > REGION && parish.Length > 0)
                 location.Insert(0, this.parish + ", ");
             if (level > PARISH && address.Length > 0)
-                location.Insert(0, this.address + ", ");
+                location.Insert(0, fixNumerics ? FixNumerics(this.address) : this.address + ", ");
             if (level > ADDRESS && place.Length > 0)
-                location.Insert(0, this.place + ", ");
+                location.Insert(0, fixNumerics ? FixNumerics(this.place) : this.place + ", ");
             return new FactLocation(location.ToString());
         }
 

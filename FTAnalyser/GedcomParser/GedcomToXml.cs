@@ -12,7 +12,7 @@ namespace FTAnalyzer
 
         public static XmlDocument Load(string path)
         {
-            StreamReader reader = new AnselInputStreamReader(new FileStream(path, FileMode.Open));
+            StreamReader reader = new AnselInputStreamReader(new FileStream(path, FileMode.Open, FileAccess.Read));
             return parse(reader);
         }
 
