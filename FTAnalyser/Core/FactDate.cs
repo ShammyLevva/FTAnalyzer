@@ -25,7 +25,8 @@ namespace FTAnalyzer
         public static readonly string FULL = "d MMM yyyy";
         public static readonly string DISPLAY = "d MMM yyyy";
         public static readonly string CHECKING = "d MMM";
-        public static readonly string DATE_PATTERN = "(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})";
+        public static readonly string DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})$";
+        public static readonly string DOUBLE_DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})/*(\\d{0,2})$";
         public static readonly string POSTFIX = "(\\d{1,2})(?:ST|ND|RD|TH)(.*)";
 
         public static readonly FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
@@ -39,6 +40,7 @@ namespace FTAnalyzer
         private DateTime startdate;
         private DateTime enddate;
         private FactDateType type;
+        private bool doubledate = false; // Is a pre 1752 date bet 1 Jan and 25 Mar eg: 1735/36.
 
         public FactDate(string str)
         {
@@ -226,6 +228,7 @@ namespace FTAnalyzer
         private DateTime parseDate(string dateValue, int highlow, int adjustment, int defaultYear)
         {
             DateTime date;
+            Group gDay, gMonth, gYear, gDouble;
             DateTime dt = MINDATE;
             if (dateValue == string.Empty)
                 return highlow == HIGH ? MAXDATE : MINDATE;
@@ -233,11 +236,35 @@ namespace FTAnalyzer
             {
                 // Match the regular expression pattern against a text string.
                 Match matcher = Regex.Match(dateValue, DATE_PATTERN);
-                Group gDay = matcher.Groups[1], gMonth = matcher.Groups[2], gYear = matcher.Groups[3];
+                if(matcher.Success)
+                {
+                    gDay = matcher.Groups[1];
+                    gMonth = matcher.Groups[2];
+                    gYear = matcher.Groups[3];
+                    gDouble = null;
+                }
+                else
+                {   // Try matching double date pattern
+                    matcher = Regex.Match(dateValue, DOUBLE_DATE_PATTERN);
+                    if (matcher.Success)
+                    {
+                        gDay = matcher.Groups[1];
+                        gMonth = matcher.Groups[2];
+                        gYear = matcher.Groups[3];
+                        gDouble = matcher.Groups[4];
+                        if (dateValue.Length > 3)
+                            dateValue = dateValue.Substring(0, dateValue.Length - 3); // remove the trailing / and 2 digits
+                    }
+                    else
+                        throw new Exception("Unrecognised date format for :" + dateValue);
+                }
+                // Now process matched string - if gDouble is not null we have a double date to check
                 string day = gDay.ToString().Trim(), month = gMonth.ToString().Trim(), year = gYear.ToString().Trim();
                 if (day == null) day = "";
                 if (month == null) month = "";
                 if (year == null) year = "";
+                if (!validDoubleDate(day, month, year, gDouble))
+                    throw new InvalidDoubleDateException();
                 if (day.Length == 0 && month.Length == 0)
                 {
                     date = DateTime.ParseExact(dateValue, YEAR, CULTURE);
@@ -302,6 +329,29 @@ namespace FTAnalyzer
             return dt;
         }
 
+        private bool validDoubleDate(string day, string month, string year, Group gDouble)
+        {
+            doubledate = false;   // set property
+            if (gDouble == null)  // normal date so its valid double date
+                return true;
+            // check if valid double date if so set double date to true
+            string doubleyear = gDouble.ToString().Trim();
+            if (doubleyear == null || doubleyear.Length != 2 || year.Length < 3)
+                return false;
+            int iYear = Convert.ToInt32(year);
+            if (iYear >= 1752)
+                return false; // double years are only for pre 1752
+            if (month.Length == 3 && month != "JAN" && month != "FEB" && month != "MAR")
+                return false; // double years must be pre Mar 25th of year
+            if (doubleyear == "00" && year.Substring(2, 2) != "99")
+                return false; // check for change of century year
+            int iDoubleYear = Convert.ToInt32(year.Substring(0, 2) + doubleyear);
+            if (iDoubleYear - iYear != 1)
+                return false; // must only be 1 year between double years
+            doubledate = true; // passed all checks
+            return doubledate;
+        }
+
         #endregion
 
         #region Properties
@@ -323,6 +373,11 @@ namespace FTAnalyzer
         public FactDateType Type
         {
             get { return this.type; }
+        }
+
+        public bool DoubleDate
+        {
+            get { return this.doubledate; }
         }
 
         #endregion

@@ -101,6 +101,7 @@
     <Compile Include="Core\Fact.cs" />
     <Compile Include="Core\FactDate.cs" />
     <Compile Include="Core\FactSource.cs" />
+    <Compile Include="Exceptions\InvalidDoubleDateException.cs" />
     <Compile Include="Filters\Filterables\ICertificateFilterable.cs" />
     <Compile Include="Filters\Filterables\ILocationFilterable.cs" />
     <Compile Include="Filters\Filterables\IIndividualFilterable.cs" />
