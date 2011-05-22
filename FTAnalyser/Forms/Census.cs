@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Printing.DataGridViewPrint.Tools;
 
 namespace FTAnalyzer.Forms
 {
@@ -14,9 +15,20 @@ namespace FTAnalyzer.Forms
         private Dictionary<int, DataGridViewCellStyle> rowStyles;
         private int numFamilies;
 
+        private PrintingDataGridViewProvider printProvider;
+
         public Census()
         {
             InitializeComponent();
+
+            printDocument.DefaultPageSettings.Margins =
+               new System.Drawing.Printing.Margins(40, 40, 40, 40);
+
+            printProvider = PrintingDataGridViewProvider.Create(
+                printDocument, dgCensus, true, true, true,
+                new TitlePrintBlock(this.Text), null, null);
+
+            printDocument.DefaultPageSettings.Landscape = true;
         }
 
         public void setupCensus(RegistrationsProcessor rp, FactDate date, 
@@ -88,6 +100,10 @@ namespace FTAnalyzer.Forms
 
         private void dgCensus_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
+            {
+                return;
+            }
             DataGridViewCellStyle style = dgCensus.DefaultCellStyle;
             DataGridViewCell cell = dgCensus.Rows[e.RowIndex].Cells[e.ColumnIndex];
             rowStyles.TryGetValue(e.RowIndex, out style);
@@ -140,6 +156,27 @@ namespace FTAnalyzer.Forms
             public override int Compare(IDisplayCensus x, IDisplayCensus y) {
                 return comparer.Compare((DisplayCensus) x, (DisplayCensus) y);
             }
+        }
+
+        private void printToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (printDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                printDocument.Print();
+            }
+        }
+
+        private void printPreviewToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (printDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                printPreviewDialog.ShowDialog(this);
+            }
+        }
+
+        private void Census_TextChanged(object sender, EventArgs e)
+        {
+            printProvider.Drawer.TitlePrintBlock = new TitlePrintBlock(this.Text);
         }
     }
 }

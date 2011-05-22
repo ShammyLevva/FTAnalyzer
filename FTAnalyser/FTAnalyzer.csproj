@@ -78,6 +78,9 @@
   <ItemGroup>
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Printing.DataGridViewPrint">
+      <HintPath>.\Printing.DataGridViewPrint.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -229,6 +232,9 @@
     <Compile Include="Comparators\Registration\LocationComparator.cs" />
     <Compile Include="Comparators\Registration\MultiComparator.cs" />
     <Compile Include="Comparators\Registration\NameComparator.cs" />
+    <Content Include="Printing.DataGridViewPrint.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\GoogleMaps.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
