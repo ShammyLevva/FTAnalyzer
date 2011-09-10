@@ -209,8 +209,8 @@ namespace FTAnalyzer
                         fromdate = fromdate + processDate.Substring(andpos + 7);
                     if (fromdate.Length < 7 && fromdate.IndexOf(" ") > 0)
                         fromdate = fromdate + processDate.Substring(andpos + 11);
-                    enddate = parseDate(fromdate, HIGH, 0);
-                    startdate = parseDate(todate, LOW, 0, enddate.Year);
+                    startdate = parseDate(fromdate, LOW, 0, enddate.Year);
+                    enddate = parseDate(todate, HIGH, 0);
                 }
                 else
                 {

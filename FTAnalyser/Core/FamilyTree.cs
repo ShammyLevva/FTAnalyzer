@@ -491,10 +491,10 @@ namespace FTAnalyzer
 
 		private void checkLooseDeath(Individual indiv, List<IDisplayLooseDeath> result) 
 		{
-			int amb = 0;
+//			int amb = 0;
 			FactDate deathDate = indiv.DeathDate;
-			if (indiv.IndividualID.Equals("I1761"))
-				amb = 1 ;
+//			if (indiv.IndividualID.Equals("I2836"))
+//				amb = 1 ;
 			FactDate toAdd = null;
 			if (deathDate != null && !deathDate.isExact())
 			{
@@ -537,6 +537,7 @@ namespace FTAnalyzer
 		}
 
 		private DateTime getMaxLivingDate(Individual indiv) {
+			DateTime maxdate = FactDate.MINDATE;
 			List<Family> indfam = new List<Family>();
 			if (indiv.isMale()) {
 				indfam = FindFamiliesWhereHusband(indiv);
@@ -547,7 +548,6 @@ namespace FTAnalyzer
 			// get the max startdate of the birthdate of the youngest child
 			// this then is the minimum point they were alive
 			// subtract 9 months for a male
-			DateTime maxdate = FactDate.MINDATE;
 			bool childDate = false;
 			foreach (Family fam in indfam)
 			{
@@ -596,7 +596,7 @@ namespace FTAnalyzer
 			List<Fact> facts = indiv.getFacts(factType);
 			foreach (Fact f in facts)
 			{
-				DateTime d = f.FactDate.StartDate;
+				DateTime d = factType == Fact.BIRTH ? new DateTime(f.FactDate.StartDate.Year, 1, 1) : f.FactDate.StartDate;
 				if (d > maxdate)
 				{
 					maxdate = d;

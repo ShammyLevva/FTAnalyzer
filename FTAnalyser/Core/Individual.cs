@@ -26,6 +26,7 @@ namespace FTAnalyzer
         private int ahnentafel;
         private bool infamily;
         private bool hasParents;
+        private bool hasRangedBirthDate;
 
         private List<Fact> facts;
         private List<FactLocation> locations;
@@ -41,6 +42,7 @@ namespace FTAnalyzer
             ahnentafel = 0;
             infamily = false;
             hasParents = false;
+            hasRangedBirthDate = false;
             facts = new List<Fact>();
             locations = new List<FactLocation>();
 
@@ -87,6 +89,11 @@ namespace FTAnalyzer
         {
             get { return hasParents; }
             set { hasParents = value; }
+        }
+
+        public bool HasRangedBirthDate
+        {
+            get { return BirthDate.Type == FactDate.FactDateType.BET && BirthDate.getMinimumYear(null) != BirthDate.getMaximumYear(null);  }
         }
         
         public int Ahnentafel
