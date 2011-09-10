@@ -13,8 +13,8 @@ namespace FTAnalyzer
 
         public Age(Individual ind, FactDate when)
         {
-            minAge = ind.BirthDate.getMinimumYear(when);
-            maxAge = ind.BirthDate.getMaximumYear(when);
+            minAge = ind.BirthDate.getMaximumYear(when);
+            maxAge = ind.BirthDate.getMinimumYear(when);
             if (minAge == FactDate.MINYEARS)
             {
                 if (maxAge == FactDate.MAXYEARS)

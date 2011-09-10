@@ -491,7 +491,10 @@ namespace FTAnalyzer
 
 		private void checkLooseDeath(Individual indiv, List<IDisplayLooseDeath> result) 
 		{
+			int amb = 0;
 			FactDate deathDate = indiv.DeathDate;
+			if (indiv.IndividualID.Equals("I1761"))
+				amb = 1 ;
 			FactDate toAdd = null;
 			if (deathDate != null && !deathDate.isExact())
 			{
