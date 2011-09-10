@@ -203,8 +203,14 @@ namespace FTAnalyzer
                 {
                     type = FactDateType.BET;
                     int andpos = processDate.IndexOf(" AND ");
-                    enddate = parseDate(processDate.Substring(andpos + 5), HIGH, 0);
-                    startdate = parseDate(processDate.Substring(4, andpos - 4), LOW, 0, enddate.Year);
+                    string fromdate = processDate.Substring(4, andpos - 4);
+                    string todate = processDate.Substring(andpos + 5);
+                    if (fromdate.Length < 3)
+                        fromdate = fromdate + processDate.Substring(andpos + 7);
+                    if (fromdate.Length < 7 && fromdate.IndexOf(" ") > 0)
+                        fromdate = fromdate + processDate.Substring(andpos + 11);
+                    enddate = parseDate(fromdate, HIGH, 0);
+                    startdate = parseDate(todate, LOW, 0, enddate.Year);
                 }
                 else
                 {
@@ -216,7 +222,7 @@ namespace FTAnalyzer
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e.InnerException);
+                FamilyTree.Instance.XmlErrorBox.AppendText("Error parsing date '" + processDate + "' error message was : " + e.Message + "\n");
             }
         }
 
@@ -236,7 +242,7 @@ namespace FTAnalyzer
             {
                 // Match the regular expression pattern against a text string.
                 Match matcher = Regex.Match(dateValue, DATE_PATTERN);
-                if(matcher.Success)
+                if (matcher.Success)
                 {
                     gDay = matcher.Groups[1];
                     gMonth = matcher.Groups[2];
@@ -279,7 +285,7 @@ namespace FTAnalyzer
                 }
                 else if (day.Length == 0 && year.Length > 0)
                 {
-                    date = DateTime.ParseExact(dateValue, MONTHYEAR, CULTURE); 
+                    date = DateTime.ParseExact(dateValue, MONTHYEAR, CULTURE);
                     dt = new DateTime(date.Year, date.Month, 1);
                     dt = dt.AddMonths(adjustment + 1);
                     if (highlow == HIGH)
@@ -290,7 +296,7 @@ namespace FTAnalyzer
                 }
                 else if (day.Length == 0 && year.Length == 0)
                 {
-                    date = DateTime.ParseExact(dateValue, MONTH, CULTURE); 
+                    date = DateTime.ParseExact(dateValue, MONTH, CULTURE);
                     dt = new DateTime(defaultYear, date.Month, 1);
                     if (highlow == HIGH)
                     {
@@ -302,7 +308,7 @@ namespace FTAnalyzer
                 }
                 else if (year.Length == 0)
                 {
-                    date = DateTime.ParseExact(dateValue, DAYMONTH, CULTURE); 
+                    date = DateTime.ParseExact(dateValue, DAYMONTH, CULTURE);
                     dt = new DateTime(defaultYear, date.Month, date.Day);
                 }
                 else if (day.Length > 0 && month.Length > 0 && year.Length > 0)
@@ -322,9 +328,14 @@ namespace FTAnalyzer
                     dt = (highlow == HIGH) ? MAXDATE : MINDATE;
                 }
             }
-            catch (Exception e)
+            catch (System.FormatException e1)
             {
-                FamilyTree.Instance.XmlErrorBox.AppendText("Error parsing date '" + dateValue + "' error message was : " + e.Message + "\n");
+                throw e1;
+            }
+            catch (Exception e2)
+            {
+                dt = (highlow == HIGH) ? MAXDATE : MINDATE;
+                FamilyTree.Instance.XmlErrorBox.AppendText("Error parsing date '" + dateValue + "' error message was : " + e2.Message + "\n");
             }
             return dt;
         }
