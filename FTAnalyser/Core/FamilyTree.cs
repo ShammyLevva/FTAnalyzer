@@ -493,7 +493,7 @@ namespace FTAnalyzer
 		{
 //			int amb = 0;
 			FactDate deathDate = indiv.DeathDate;
-//			if (indiv.IndividualID.Equals("I2836"))
+//			if (indiv.IndividualID.Equals("I935"))
 //				amb = 1 ;
 			FactDate toAdd = null;
 			if (deathDate != null && !deathDate.isExact())
