@@ -154,8 +154,8 @@ namespace FTAnalyzer
 				foreach (Individual c in f.children)
 				{
 					c.Infamily = true;
-                    if (f.husband != null || f.wife != null)
-					    c.HasParents = true;
+					if (f.husband != null || f.wife != null)
+						c.HasParents = true;
 				}
 			}
 			int added = 0;
@@ -573,6 +573,10 @@ namespace FTAnalyzer
 			maxdate = getMaxDate(maxdate, getMaxFactDate(indiv, Fact.CENSUS));
 			maxdate = getMaxDate(maxdate, getMaxFactDate(indiv, Fact.RESIDENCE));
 			maxdate = getMaxDate(maxdate, getMaxFactDate(indiv, Fact.WITNESS));
+			maxdate = getMaxDate(maxdate, getMaxFactDate(indiv, Fact.EMIGRATION));
+			maxdate = getMaxDate(maxdate, getMaxFactDate(indiv, Fact.IMMIGRATION));
+			maxdate = getMaxDate(maxdate, getMaxFactDate(indiv, Fact.ARRIVAL));
+			maxdate = getMaxDate(maxdate, getMaxFactDate(indiv, Fact.DEPARTURE));
 			// at this point we have the maximum point a person was alive
 			// based on their oldest child and last census record and marriage date
 			return maxdate;
@@ -635,11 +639,11 @@ namespace FTAnalyzer
 			List<IDisplayTreeTops> result = new List<IDisplayTreeTops>();
 			foreach (Individual ind in individuals)
 			{
-                if (!ind.HasParents)
-                {
-                    if(filter.select(ind))
-                        result.Add(ind);
-                }
+				if (!ind.HasParents)
+				{
+					if(filter.select(ind))
+						result.Add(ind);
+				}
 			}
 			return result;
 		}
@@ -707,7 +711,7 @@ namespace FTAnalyzer
 				// set them as a direct relation
 				ind.RelationType = Individual.DIRECT;
 				addParentsToQueue(ind, queue, true);
-                Application.DoEvents();
+				Application.DoEvents();
 			}
 			// we have now added all direct ancestors
 			List<Individual> directs = getAllRelationsOfType(Individual.DIRECT);
