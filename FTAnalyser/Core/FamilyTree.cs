@@ -491,12 +491,12 @@ namespace FTAnalyzer
 
 		private void checkLooseDeath(Individual indiv, List<IDisplayLooseDeath> result) 
 		{
-//			int amb = 0;
+			int amb = 0;
 			FactDate deathDate = indiv.DeathDate;
-//			if (indiv.IndividualID.Equals("I935"))
-//				amb = 1 ;
+			if (indiv.IndividualID.Equals("I5787"))
+				amb = 1 ;
 			FactDate toAdd = null;
-			if (deathDate != null && !deathDate.isExact())
+			if (deathDate != null && deathDate.Type != FactDate.FactDateType.ABT && !deathDate.isExact())
 			{
 				DateTime maxLiving = getMaxLivingDate(indiv);
 				DateTime minDeath = getMinDeathDate(indiv);
