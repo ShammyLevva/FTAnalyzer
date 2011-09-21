@@ -26,8 +26,11 @@
     <CountryTypo from="Aust."   to="Australia" />
     <CountryTypo from="AUS"     to="Australia" />
     <CountryTypo from="Eire"    to="Ireland" />
+    <CountryTypo from="SCT"     to="Scotland" />
   </CountryTypos>
   <RegionTypos>
+    <RegionTypo from="ABD"            to="Aberdeenshire" />
+    <RegionTypo from="KCD"            to="Kincardineshire" />
     <RegionTypo from="Dumfriesshire"  to="Dumfries-shire" />
     <RegionTypo from="Invernessshire" to="Inverness-shire" />
     <RegionTypo from="Kinrossshire"   to="Kinross-shire" />
