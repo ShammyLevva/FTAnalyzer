@@ -5,17 +5,22 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTAnalyzer", "FTAnalyzer.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Old Java Code", "..\Old Java Code\Old Java Code.csproj", "{19F9AC73-3B92-4656-9280-6CB638CB88E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTMAnalyzer", "..\FTMAnalyzer\FTMAnalyzer.csproj", "{4DA6B8B8-8F42-4DFF-B998-5DF9F99929AE}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs08.codeplex.com/
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = FTAnalyzer.csproj
 		SccLocalPath1 = .
 		SccProjectUniqueName2 = ..\\Old\u0020Java\u0020Code\\Old\u0020Java\u0020Code.csproj
 		SccProjectName2 = ../Old\u0020Java\u0020Code
 		SccLocalPath2 = ..\\Old\u0020Java\u0020Code
+		SccProjectUniqueName3 = ..\\FTMAnalyzer\\FTMAnalyzer.csproj
+		SccProjectName3 = ../FTMAnalyzer
+		SccLocalPath3 = ..\\FTMAnalyzer
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +45,12 @@ Global
 		{19F9AC73-3B92-4656-9280-6CB638CB88E2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F9AC73-3B92-4656-9280-6CB638CB88E2}.Release|x86.ActiveCfg = Release|x86
 		{19F9AC73-3B92-4656-9280-6CB638CB88E2}.Release|x86.Build.0 = Release|x86
+		{4DA6B8B8-8F42-4DFF-B998-5DF9F99929AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DA6B8B8-8F42-4DFF-B998-5DF9F99929AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DA6B8B8-8F42-4DFF-B998-5DF9F99929AE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4DA6B8B8-8F42-4DFF-B998-5DF9F99929AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DA6B8B8-8F42-4DFF-B998-5DF9F99929AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DA6B8B8-8F42-4DFF-B998-5DF9F99929AE}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
