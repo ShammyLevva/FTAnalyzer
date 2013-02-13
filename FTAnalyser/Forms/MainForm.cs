@@ -12,7 +12,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.3.6.0";
+        private string VERSION = "1.3.7.0";
         private bool _checkForUpdatesEnabled = true;
         private System.Threading.Timer _timerCheckForUpdates;
 
@@ -47,7 +47,7 @@ namespace FTAnalyzer
                 {
                     HourGlass(true);
                     closeIndividualForms();
-                    tabControl.SelectTab(tabDisplayProgress);
+                    txtWardeadSurname.SelectTab(tabDisplayProgress);
                     rtbOutput.Text = "";
                     rtbIGIResults.Text = "";
                     pbSources.Value = pbIndividuals.Value = pbFamilies.Value = 0;
@@ -97,34 +97,34 @@ namespace FTAnalyzer
         {
             if (ft.Loading)
             {
-                tabControl.SelectedTab = tabDisplayProgress;
+                txtWardeadSurname.SelectedTab = tabDisplayProgress;
             }
             else
             {
-                if (tabControl.SelectedTab == tabDisplayProgress)
+                if (txtWardeadSurname.SelectedTab == tabDisplayProgress)
                 {
                     tsCountLabel.Text = "";
                 }
-                else if (tabControl.SelectedTab == tabIndividuals)
+                else if (txtWardeadSurname.SelectedTab == tabIndividuals)
                 {
                     List<IDisplayIndividual> list = ft.AllDisplayIndividuals;
                     dgIndividuals.DataSource = list;
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
-                else if (tabControl.SelectedTab == tabCensus)
+                else if (txtWardeadSurname.SelectedTab == tabCensus)
                 {
                     cenDate.RevertToDefaultDate();
                     tsCountLabel.Text = "";
                     btnShowResults.Enabled = ft.IndividualCount > 0;
                 }
-                else if (tabControl.SelectedTab == tabLostCousins)
+                else if (txtWardeadSurname.SelectedTab == tabLostCousins)
                 {
                     tsCountLabel.Text = "";
                     btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled =
                         btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled
                         = ft.IndividualCount > 0;
                 }
-                else if (tabControl.SelectedTab == tabLooseDeaths)
+                else if (txtWardeadSurname.SelectedTab == tabLooseDeaths)
                 {
                     HourGlass(true);
                     List<IDisplayLooseDeath> looseDeathList = ft.GetLooseDeaths();
@@ -132,7 +132,7 @@ namespace FTAnalyzer
                     tsCountLabel.Text = "Count : " + looseDeathList.Count;
                     HourGlass(false);
                 }
-                else if (tabControl.SelectedTab == tabLocations)
+                else if (txtWardeadSurname.SelectedTab == tabLocations)
                 {
                     HourGlass(true);
                     tsCountLabel.Text = "";
@@ -150,7 +150,7 @@ namespace FTAnalyzer
                     dgAddresses.DataSource = addresses;
                     HourGlass(false);
                 }
-                else if (tabControl.SelectedTab == tabIGISearch)
+                else if (txtWardeadSurname.SelectedTab == tabIGISearch)
                 {
                     btnCancelIGISearch.Visible = false;
                     btnViewResults.Visible = true;
@@ -252,7 +252,13 @@ namespace FTAnalyzer
             census.Text = censusDate.StartDate.Year.ToString() + " Census Records to search for";
             census.Show();
         }
+ 
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This is Family Tree Analyzer version " + VERSION);
+        }
 
+        #region Filters
         private Filter<Registration> createCensusRegistrationFilter()
         {
             Filter<Registration> filter;
@@ -276,16 +282,25 @@ namespace FTAnalyzer
             Filter<Individual> relationFilter = treetopsRelation.BuildFilter<Individual>();
             Filter<Individual> filter = new AndFilter<Individual>(locationFilter, relationFilter);
 
-            if (txtTreetopSurname.Text.Length > 0)
-                filter = new AndFilter<Individual>(filter, new SurnameFilter<Individual>(txtTreetopSurname.Text.ToUpper()));
+            if (txtTreetopsSurname.Text.Length > 0)
+                filter = new AndFilter<Individual>(filter, new SurnameFilter<Individual>(txtTreetopsSurname.Text.ToUpper()));
 
             return filter;
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private Filter<Individual> createWardeadIndividualFilter(FactDate yearRange)
         {
-            MessageBox.Show("This is Family Tree Analyzer version " + VERSION);
+            Filter<Individual> locationFilter = wardeadCountry.BuildFilter<Individual>();
+            Filter<Individual> relationFilter = wardeadRelation.BuildFilter<Individual>();
+            Filter<Individual> ageFilter = new BirthFilter<Individual>(yearRange);
+            Filter<Individual> filter = new AndFilter<Individual>(ageFilter, new AndFilter<Individual>(locationFilter, relationFilter));
+
+            if (txtWardeadSurname.Text.Length > 0)
+                filter = new AndFilter<Individual>(filter, new SurnameFilter<Individual>(txtWardeadSurname.Text.ToUpper()));
+
+            return filter;
         }
+        #endregion 
 
         #region Lost Cousins
         private void LostCousinsCensus(Filter<Registration> filter, FactDate censusDate, string reportTitle)
@@ -424,6 +439,7 @@ namespace FTAnalyzer
             this.Text = "Family Tree Analyzer v" + VERSION;
         }
 
+        #region ToolStrip Clicks
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _checkForUpdatesEnabled = true;
@@ -445,6 +461,77 @@ namespace FTAnalyzer
             options.ShowDialog(this);
             options.Dispose();
         }
+
+        private void BirthRegistrationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MultiComparator<Registration> birthComparator = new MultiComparator<Registration>();
+            birthComparator.addComparator(new LocationComparator(FactLocation.PARISH));
+            birthComparator.addComparator(new DateComparator());
+
+            Filter<Registration> partialEnglishData =
+                new AndFilter<Registration>(new IncompleteDataFilter<Registration>(FactLocation.PARISH), LocationFilter<Registration>.ENGLAND);
+            Filter<Registration> directOrBlood = new OrFilter<Registration>(
+                    new RelationFilter<Registration>(Individual.DIRECT),
+                    new RelationFilter<Registration>(Individual.BLOOD));
+
+            RegistrationsProcessor onlineBirthsRP = new RegistrationsProcessor(
+                    new AndFilter<Registration>(directOrBlood, partialEnglishData), birthComparator);
+
+            List<Registration> regs = ft.getAllBirthRegistrations();
+            List<Registration> result = onlineBirthsRP.processRegistrations(regs);
+
+            RegistrationReport report = new RegistrationReport();
+            report.SetupBirthRegistration(result);
+            report.Show();
+        }
+
+        private void deathRegistrationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MultiComparator<Registration> deathComparator = new MultiComparator<Registration>();
+            deathComparator.addComparator(new LocationComparator(FactLocation.PARISH));
+            deathComparator.addComparator(new DateComparator());
+
+            Filter<Registration> partialEnglishData =
+                new AndFilter<Registration>(new IncompleteDataFilter<Registration>(FactLocation.PARISH), LocationFilter<Registration>.ENGLAND);
+            Filter<Registration> directOrBlood = new OrFilter<Registration>(
+                    new RelationFilter<Registration>(Individual.DIRECT),
+                    new RelationFilter<Registration>(Individual.BLOOD));
+
+            RegistrationsProcessor onlineDeathsRP = new RegistrationsProcessor(
+                    new AndFilter<Registration>(directOrBlood, partialEnglishData), deathComparator);
+
+            List<Registration> regs = ft.getAllDeathRegistrations();
+            List<Registration> result = onlineDeathsRP.processRegistrations(regs);
+
+            RegistrationReport report = new RegistrationReport();
+            report.SetupDeathRegistration(result);
+            report.Show();
+        }
+
+        private void marriageRegistrationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MultiComparator<Registration> marriageComparator = new MultiComparator<Registration>();
+            marriageComparator.addComparator(new LocationComparator(FactLocation.PARISH));
+            marriageComparator.addComparator(new DateComparator());
+
+            Filter<Registration> partialEnglishData =
+                new AndFilter<Registration>(new IncompleteDataFilter<Registration>(FactLocation.PARISH), LocationFilter<Registration>.ENGLAND);
+            Filter<Registration> directOrBlood = new OrFilter<Registration>(
+                    new RelationFilter<Registration>(Individual.DIRECT),
+                    new RelationFilter<Registration>(Individual.BLOOD));
+
+            RegistrationsProcessor onlineMarriagesRP = new RegistrationsProcessor(
+                    new AndFilter<Registration>(directOrBlood, partialEnglishData), marriageComparator);
+
+            List<Registration> regs = ft.getAllMarriageRegistrations();
+            List<Registration> result = onlineMarriagesRP.processRegistrations(regs);
+
+            RegistrationReport report = new RegistrationReport();
+            report.SetupMarriageRegistration(result);
+            report.Show();
+        }
+
+        #endregion 
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -588,75 +675,6 @@ namespace FTAnalyzer
             prc.Start();
         }
 
-        private void BirthRegistrationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MultiComparator<Registration> birthComparator = new MultiComparator<Registration>();
-            birthComparator.addComparator(new LocationComparator(FactLocation.PARISH));
-            birthComparator.addComparator(new DateComparator());
-
-            Filter<Registration> partialEnglishData =
-                new AndFilter<Registration>(new IncompleteDataFilter<Registration>(FactLocation.PARISH), LocationFilter<Registration>.ENGLAND);
-            Filter<Registration> directOrBlood = new OrFilter<Registration>(
-                    new RelationFilter<Registration>(Individual.DIRECT),
-                    new RelationFilter<Registration>(Individual.BLOOD));
-
-            RegistrationsProcessor onlineBirthsRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(directOrBlood, partialEnglishData), birthComparator);
-
-            List<Registration> regs = ft.getAllBirthRegistrations();
-            List<Registration> result = onlineBirthsRP.processRegistrations(regs);
-
-            RegistrationReport report = new RegistrationReport();
-            report.SetupBirthRegistration(result);
-            report.Show();
-        }
-
-        private void deathRegistrationsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MultiComparator<Registration> deathComparator = new MultiComparator<Registration>();
-            deathComparator.addComparator(new LocationComparator(FactLocation.PARISH));
-            deathComparator.addComparator(new DateComparator());
-
-            Filter<Registration> partialEnglishData =
-                new AndFilter<Registration>(new IncompleteDataFilter<Registration>(FactLocation.PARISH), LocationFilter<Registration>.ENGLAND);
-            Filter<Registration> directOrBlood = new OrFilter<Registration>(
-                    new RelationFilter<Registration>(Individual.DIRECT),
-                    new RelationFilter<Registration>(Individual.BLOOD));
-
-            RegistrationsProcessor onlineDeathsRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(directOrBlood, partialEnglishData), deathComparator);
-
-            List<Registration> regs = ft.getAllDeathRegistrations();
-            List<Registration> result = onlineDeathsRP.processRegistrations(regs);
-
-            RegistrationReport report = new RegistrationReport();
-            report.SetupDeathRegistration(result);
-            report.Show();
-        }
-
-        private void marriageRegistrationsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MultiComparator<Registration> marriageComparator = new MultiComparator<Registration>();
-            marriageComparator.addComparator(new LocationComparator(FactLocation.PARISH));
-            marriageComparator.addComparator(new DateComparator());
-
-            Filter<Registration> partialEnglishData =
-                new AndFilter<Registration>(new IncompleteDataFilter<Registration>(FactLocation.PARISH), LocationFilter<Registration>.ENGLAND);
-            Filter<Registration> directOrBlood = new OrFilter<Registration>(
-                    new RelationFilter<Registration>(Individual.DIRECT),
-                    new RelationFilter<Registration>(Individual.BLOOD));
-
-            RegistrationsProcessor onlineMarriagesRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(directOrBlood, partialEnglishData), marriageComparator);
-
-            List<Registration> regs = ft.getAllMarriageRegistrations();
-            List<Registration> result = onlineMarriagesRP.processRegistrations(regs);
-
-            RegistrationReport report = new RegistrationReport();
-            report.SetupMarriageRegistration(result);
-            report.Show();
-        }
-
         private void btnTreeTops_Click(object sender, EventArgs e)
         {
             HourGlass(true);
@@ -668,6 +686,24 @@ namespace FTAnalyzer
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = "Count : " + treeTopsList.Count;
             HourGlass(false);
+        }
+
+        private void btnWWI_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            Filter<Individual> filter = createWardeadIndividualFilter(new FactDate("BET 1870 AND 1904"));
+            List<IDisplayTreeTops> treeTopsList = ft.GetTreeTops(filter);
+            treeTopsList.Sort(new TreeTopsBirthDateComparer());
+            dgTreeTops.DataSource = treeTopsList;
+            foreach (DataGridViewColumn c in dgTreeTops.Columns)
+                c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+            tsCountLabel.Text = "Count : " + treeTopsList.Count;
+            HourGlass(false);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

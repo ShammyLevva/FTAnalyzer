@@ -44,9 +44,9 @@
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControl = new System.Windows.Forms.TabControl();
+            this.txtWardeadSurname = new System.Windows.Forms.TabControl();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
-            this.rtbOutput = new Utilities.ScrollingRichTextBox();
+            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.pbFamilies = new System.Windows.Forms.ProgressBar();
             this.label5 = new System.Windows.Forms.Label();
@@ -94,7 +94,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtIGISurname = new System.Windows.Forms.TextBox();
             this.btnOpenFolder = new System.Windows.Forms.Button();
-            this.rtbIGIResults = new Utilities.ScrollingRichTextBox();
+            this.rtbIGIResults = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbIGISearchRegion = new System.Windows.Forms.RadioButton();
             this.rbIGISearchCountry = new System.Windows.Forms.RadioButton();
@@ -113,15 +113,23 @@
             this.dgTreeTops = new System.Windows.Forms.DataGridView();
             this.btnTreeTops = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.txtTreetopSurname = new System.Windows.Forms.TextBox();
+            this.txtTreetopsSurname = new System.Windows.Forms.TextBox();
             this.treetopsRelation = new Controls.RelationTypes();
             this.treetopsCountry = new Controls.CensusCountry();
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
+            this.tabWarDead = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.wardeadRelation = new Controls.RelationTypes();
+            this.wardeadCountry = new Controls.CensusCountry();
+            this.dgWarDead = new System.Windows.Forms.DataGridView();
+            this.btnWWI = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
-            this.tabControl.SuspendLayout();
+            this.txtWardeadSurname.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
             this.tabIndividuals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
@@ -146,6 +154,8 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).BeginInit();
             this.statusStrip.SuspendLayout();
+            this.tabWarDead.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgWarDead)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -262,25 +272,26 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // tabControl
+            // txtWardeadSurname
             // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl.Controls.Add(this.tabDisplayProgress);
-            this.tabControl.Controls.Add(this.tabIndividuals);
-            this.tabControl.Controls.Add(this.tabLocations);
-            this.tabControl.Controls.Add(this.tabLooseDeaths);
-            this.tabControl.Controls.Add(this.tabCensus);
-            this.tabControl.Controls.Add(this.tabLostCousins);
-            this.tabControl.Controls.Add(this.tabIGISearch);
-            this.tabControl.Controls.Add(this.tabTreetops);
-            this.tabControl.Location = new System.Drawing.Point(0, 27);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(939, 428);
-            this.tabControl.TabIndex = 9;
-            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
+            this.txtWardeadSurname.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtWardeadSurname.Controls.Add(this.tabDisplayProgress);
+            this.txtWardeadSurname.Controls.Add(this.tabIndividuals);
+            this.txtWardeadSurname.Controls.Add(this.tabLocations);
+            this.txtWardeadSurname.Controls.Add(this.tabLooseDeaths);
+            this.txtWardeadSurname.Controls.Add(this.tabCensus);
+            this.txtWardeadSurname.Controls.Add(this.tabLostCousins);
+            this.txtWardeadSurname.Controls.Add(this.tabIGISearch);
+            this.txtWardeadSurname.Controls.Add(this.tabTreetops);
+            this.txtWardeadSurname.Controls.Add(this.tabWarDead);
+            this.txtWardeadSurname.Location = new System.Drawing.Point(0, 27);
+            this.txtWardeadSurname.Name = "txtWardeadSurname";
+            this.txtWardeadSurname.SelectedIndex = 0;
+            this.txtWardeadSurname.Size = new System.Drawing.Size(939, 428);
+            this.txtWardeadSurname.TabIndex = 9;
+            this.txtWardeadSurname.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabDisplayProgress
             // 
@@ -301,8 +312,8 @@
             // 
             // rtbOutput
             // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbOutput.Location = new System.Drawing.Point(3, 97);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.Size = new System.Drawing.Size(925, 302);
@@ -392,9 +403,9 @@
             // 
             // tabCtrlLocations
             // 
-            this.tabCtrlLocations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabCtrlLocations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabCtrlLocations.Controls.Add(this.tabCountries);
             this.tabCtrlLocations.Controls.Add(this.tabRegions);
             this.tabCtrlLocations.Controls.Add(this.tabParishes);
@@ -418,9 +429,9 @@
             // 
             // dgCountries
             // 
-            this.dgCountries.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgCountries.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCountries.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgCountries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCountries.Location = new System.Drawing.Point(0, 3);
@@ -443,9 +454,9 @@
             // 
             // dgRegions
             // 
-            this.dgRegions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgRegions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgRegions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgRegions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgRegions.Location = new System.Drawing.Point(2, 3);
@@ -467,9 +478,9 @@
             // 
             // dgParishes
             // 
-            this.dgParishes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgParishes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgParishes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgParishes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgParishes.Location = new System.Drawing.Point(2, 3);
@@ -490,9 +501,9 @@
             // 
             // dgAddresses
             // 
-            this.dgAddresses.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgAddresses.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgAddresses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgAddresses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgAddresses.Location = new System.Drawing.Point(2, 3);
@@ -514,9 +525,9 @@
             // 
             // dgLooseDeaths
             // 
-            this.dgLooseDeaths.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgLooseDeaths.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgLooseDeaths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLooseDeaths.Location = new System.Drawing.Point(0, 0);
@@ -724,7 +735,7 @@
             this.ckbRestrictions.Size = new System.Drawing.Size(521, 17);
             this.ckbRestrictions.TabIndex = 9;
             this.ckbRestrictions.Text = "Restrict results to only those direct ancestors, blood relations and those marrie" +
-                "d to direct or blood relations";
+    "d to direct or blood relations";
             this.ckbRestrictions.UseVisualStyleBackColor = true;
             // 
             // btnLC1841EW
@@ -902,8 +913,8 @@
             // 
             // pbIGISearch
             // 
-            this.pbIGISearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbIGISearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pbIGISearch.Location = new System.Drawing.Point(8, 151);
             this.pbIGISearch.Name = "pbIGISearch";
             this.pbIGISearch.Size = new System.Drawing.Size(915, 20);
@@ -978,7 +989,7 @@
             this.tabTreetops.Controls.Add(this.panel1);
             this.tabTreetops.Controls.Add(this.btnTreeTops);
             this.tabTreetops.Controls.Add(this.label8);
-            this.tabTreetops.Controls.Add(this.txtTreetopSurname);
+            this.tabTreetops.Controls.Add(this.txtTreetopsSurname);
             this.tabTreetops.Controls.Add(this.treetopsRelation);
             this.tabTreetops.Controls.Add(this.treetopsCountry);
             this.tabTreetops.Location = new System.Drawing.Point(4, 22);
@@ -990,9 +1001,9 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.dgTreeTops);
             this.panel1.Location = new System.Drawing.Point(8, 92);
             this.panel1.Name = "panel1";
@@ -1030,12 +1041,12 @@
             this.label8.TabIndex = 24;
             this.label8.Text = "Surname";
             // 
-            // txtTreetopSurname
+            // txtTreetopsSurname
             // 
-            this.txtTreetopSurname.Location = new System.Drawing.Point(650, 22);
-            this.txtTreetopSurname.Name = "txtTreetopSurname";
-            this.txtTreetopSurname.Size = new System.Drawing.Size(201, 20);
-            this.txtTreetopSurname.TabIndex = 23;
+            this.txtTreetopsSurname.Location = new System.Drawing.Point(650, 22);
+            this.txtTreetopsSurname.Name = "txtTreetopsSurname";
+            this.txtTreetopsSurname.Size = new System.Drawing.Size(201, 20);
+            this.txtTreetopsSurname.TabIndex = 23;
             // 
             // treetopsRelation
             // 
@@ -1075,13 +1086,92 @@
             this.tsCountLabel.Size = new System.Drawing.Size(55, 17);
             this.tsCountLabel.Text = "Count : 0";
             // 
+            // tabWarDead
+            // 
+            this.tabWarDead.Controls.Add(this.button1);
+            this.tabWarDead.Controls.Add(this.btnWWI);
+            this.tabWarDead.Controls.Add(this.dgWarDead);
+            this.tabWarDead.Controls.Add(this.label9);
+            this.tabWarDead.Controls.Add(this.textBox1);
+            this.tabWarDead.Controls.Add(this.wardeadRelation);
+            this.tabWarDead.Controls.Add(this.wardeadCountry);
+            this.tabWarDead.Location = new System.Drawing.Point(4, 22);
+            this.tabWarDead.Name = "tabWarDead";
+            this.tabWarDead.Size = new System.Drawing.Size(931, 402);
+            this.tabWarDead.TabIndex = 8;
+            this.tabWarDead.Text = "War Dead";
+            this.tabWarDead.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(597, 25);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(49, 13);
+            this.label9.TabIndex = 28;
+            this.label9.Text = "Surname";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(652, 22);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(201, 20);
+            this.textBox1.TabIndex = 27;
+            // 
+            // wardeadRelation
+            // 
+            this.wardeadRelation.Location = new System.Drawing.Point(272, 12);
+            this.wardeadRelation.Name = "wardeadRelation";
+            this.wardeadRelation.Size = new System.Drawing.Size(322, 74);
+            this.wardeadRelation.TabIndex = 26;
+            // 
+            // wardeadCountry
+            // 
+            this.wardeadCountry.Location = new System.Drawing.Point(10, 12);
+            this.wardeadCountry.Name = "wardeadCountry";
+            this.wardeadCountry.Size = new System.Drawing.Size(256, 74);
+            this.wardeadCountry.TabIndex = 25;
+            this.wardeadCountry.Title = "Default Country";
+            this.wardeadCountry.UKEnabled = true;
+            // 
+            // dgWarDead
+            // 
+            this.dgWarDead.AllowUserToAddRows = false;
+            this.dgWarDead.AllowUserToDeleteRows = false;
+            this.dgWarDead.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgWarDead.Location = new System.Drawing.Point(3, 92);
+            this.dgWarDead.Name = "dgWarDead";
+            this.dgWarDead.ReadOnly = true;
+            this.dgWarDead.Size = new System.Drawing.Size(920, 307);
+            this.dgWarDead.TabIndex = 29;
+            // 
+            // btnWWI
+            // 
+            this.btnWWI.Location = new System.Drawing.Point(652, 58);
+            this.btnWWI.Name = "btnWWI";
+            this.btnWWI.Size = new System.Drawing.Size(95, 23);
+            this.btnWWI.TabIndex = 30;
+            this.btnWWI.Text = "World War I";
+            this.btnWWI.UseVisualStyleBackColor = true;
+            this.btnWWI.Click += new System.EventHandler(this.btnWWI_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(758, 58);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(95, 23);
+            this.button1.TabIndex = 31;
+            this.button1.Text = "World War II";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(939, 480);
             this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.tabControl);
+            this.Controls.Add(this.txtWardeadSurname);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
@@ -1090,7 +1180,7 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.tabControl.ResumeLayout(false);
+            this.txtWardeadSurname.ResumeLayout(false);
             this.tabDisplayProgress.ResumeLayout(false);
             this.tabDisplayProgress.PerformLayout();
             this.tabIndividuals.ResumeLayout(false);
@@ -1122,6 +1212,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.tabWarDead.ResumeLayout(false);
+            this.tabWarDead.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgWarDead)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1133,7 +1226,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabControl txtWardeadSurname;
         private System.Windows.Forms.TabPage tabCensus;
         private System.Windows.Forms.TabPage tabDisplayProgress;
         private System.Windows.Forms.ProgressBar pbSources;
@@ -1214,12 +1307,20 @@
         private System.Windows.Forms.TextBox txtIGISurname;
         private System.Windows.Forms.TabPage tabTreetops;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtTreetopSurname;
+        private System.Windows.Forms.TextBox txtTreetopsSurname;
         private Controls.RelationTypes treetopsRelation;
         private Controls.CensusCountry treetopsCountry;
         private System.Windows.Forms.Button btnTreeTops;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgTreeTops;
+        private System.Windows.Forms.TabPage tabWarDead;
+        private System.Windows.Forms.DataGridView dgWarDead;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBox1;
+        private Controls.RelationTypes wardeadRelation;
+        private Controls.CensusCountry wardeadCountry;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnWWI;
     }
 }
 
