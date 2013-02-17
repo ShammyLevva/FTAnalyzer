@@ -78,6 +78,7 @@ namespace FTM.Analyzer
         public void PersonSelected(object sender, System.EventArgs e)
         {
             int x = 0;
+            x++;
         }
     }
 }
