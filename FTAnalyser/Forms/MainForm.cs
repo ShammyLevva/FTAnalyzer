@@ -694,7 +694,7 @@ namespace FTAnalyzer
         private void btnWWI_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Filter<Individual> filter = createWardeadIndividualFilter(new FactDate("BET 1870 AND 1904"), new FactDate("BET 1914 AND 1918"));
+            Filter<Individual> filter = createWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("BET 1914 AND 1918"));
             List<IDisplayTreeTops> warDeadList = ft.GetWarDead(filter);
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWarDead.DataSource = warDeadList;
@@ -704,9 +704,17 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnWWII_Click(object sender, EventArgs e)
         {
-
+            HourGlass(true);
+            Filter<Individual> filter = createWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("BET 1939 AND 1945"));
+            List<IDisplayTreeTops> warDeadList = ft.GetWarDead(filter);
+            warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
+            dgWarDead.DataSource = warDeadList;
+            foreach (DataGridViewColumn c in dgWarDead.Columns)
+                c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+            tsCountLabel.Text = "Count : " + warDeadList.Count;
+            HourGlass(false);
         }
     }
 }
