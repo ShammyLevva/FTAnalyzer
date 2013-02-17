@@ -16,12 +16,13 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <StartupObject>FTAnalyzer.FTAnalyzer</StartupObject>
+    <StartupObject>FTAnalyzer.Program</StartupObject>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -36,7 +37,6 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -99,16 +99,18 @@
     <Compile Include="Comparators\Census\CensusFamilyGedComparer.cs" />
     <Compile Include="Comparators\Census\DefaultCensusComparer.cs" />
     <Compile Include="Comparators\Individual\DefaultIndividualComparer.cs" />
-    <Compile Include="Comparators\Individual\TreeTopsBirthDateComparer.cs" />
+    <Compile Include="Comparators\Individual\BirthDateComparer.cs" />
     <Compile Include="Core\Displays\IDisplayTreeTops.cs" />
     <Compile Include="Core\Fact.cs" />
     <Compile Include="Core\FactDate.cs" />
     <Compile Include="Core\FactSource.cs" />
     <Compile Include="Exceptions\InvalidDoubleDateException.cs" />
+    <Compile Include="Filters\Filterables\DeathFilter.cs" />
     <Compile Include="Filters\Filterables\ICertificateFilterable.cs" />
     <Compile Include="Filters\Filterables\ILocationFilterable.cs" />
     <Compile Include="Filters\Filterables\IIndividualFilterable.cs" />
     <Compile Include="Filters\Filterables\IFactsFilterable.cs" />
+    <Compile Include="Filters\Filterables\IndividualBirthFilter.cs" />
     <Compile Include="Filters\Filterables\IRelationFilterable.cs" />
     <Compile Include="Filters\Filterables\IDateFilterable.cs" />
     <Compile Include="Filters\Filterables\ISurnameFilterable.cs" />
@@ -124,7 +126,7 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FTAnalyzer.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\GoogleMap.resx">
       <DependentUpon>GoogleMap.cs</DependentUpon>

@@ -292,7 +292,7 @@ namespace FTAnalyzer
         {
             Filter<Individual> locationFilter = wardeadCountry.BuildFilter<Individual>();
             Filter<Individual> relationFilter = wardeadRelation.BuildFilter<Individual>();
-            Filter<Individual> ageFilter = new BirthFilter<Individual>(yearRange);
+            Filter<Individual> ageFilter = new IndividualBirthFilter(yearRange);
             Filter<Individual> filter = new AndFilter<Individual>(ageFilter, new AndFilter<Individual>(locationFilter, relationFilter));
 
             if (txtWardeadSurname.Text.Length > 0)
@@ -680,7 +680,7 @@ namespace FTAnalyzer
             HourGlass(true);
             Filter<Individual> filter = createTreeTopsIndividualFilter();
             List<IDisplayTreeTops> treeTopsList = ft.GetTreeTops(filter);
-            treeTopsList.Sort(new TreeTopsBirthDateComparer());
+            treeTopsList.Sort(new BirthDateComparer());
             dgTreeTops.DataSource = treeTopsList;
             foreach (DataGridViewColumn c in dgTreeTops.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
@@ -692,12 +692,12 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Filter<Individual> filter = createWardeadIndividualFilter(new FactDate("BET 1870 AND 1904"));
-            List<IDisplayTreeTops> treeTopsList = ft.GetTreeTops(filter);
-            treeTopsList.Sort(new TreeTopsBirthDateComparer());
-            dgTreeTops.DataSource = treeTopsList;
-            foreach (DataGridViewColumn c in dgTreeTops.Columns)
+            List<IDisplayTreeTops> warDeadList = ft.GetWarDead(filter);
+            warDeadList.Sort(new BirthDateComparer());
+            dgWarDead.DataSource = warDeadList;
+            foreach (DataGridViewColumn c in dgWarDead.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
-            tsCountLabel.Text = "Count : " + treeTopsList.Count;
+            tsCountLabel.Text = "Count : " + warDeadList.Count;
             HourGlass(false);
         }
 

@@ -116,18 +116,18 @@
             this.txtTreetopsSurname = new System.Windows.Forms.TextBox();
             this.treetopsRelation = new Controls.RelationTypes();
             this.treetopsCountry = new Controls.CensusCountry();
-            this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolTips = new System.Windows.Forms.ToolTip(this.components);
             this.tabWarDead = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnWWI = new System.Windows.Forms.Button();
+            this.dgWarDead = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.wardeadRelation = new Controls.RelationTypes();
             this.wardeadCountry = new Controls.CensusCountry();
-            this.dgWarDead = new System.Windows.Forms.DataGridView();
-            this.btnWWI = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolTips = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             this.txtWardeadSurname.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -153,9 +153,9 @@
             this.tabTreetops.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).BeginInit();
-            this.statusStrip.SuspendLayout();
             this.tabWarDead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWarDead)).BeginInit();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -1014,8 +1014,10 @@
             // 
             this.dgTreeTops.AllowUserToAddRows = false;
             this.dgTreeTops.AllowUserToDeleteRows = false;
+            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgTreeTops.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgTreeTops.Location = new System.Drawing.Point(0, 0);
             this.dgTreeTops.Name = "dgTreeTops";
             this.dgTreeTops.ReadOnly = true;
@@ -1064,28 +1066,6 @@
             this.treetopsCountry.Title = "Default Country";
             this.treetopsCountry.UKEnabled = true;
             // 
-            // tsCount
-            // 
-            this.tsCount.Name = "tsCount";
-            this.tsCount.Size = new System.Drawing.Size(52, 17);
-            this.tsCount.Text = "Count : 0";
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsCountLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 458);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(939, 22);
-            this.statusStrip.TabIndex = 10;
-            this.statusStrip.Text = "statusStrip1";
-            // 
-            // tsCountLabel
-            // 
-            this.tsCountLabel.Name = "tsCountLabel";
-            this.tsCountLabel.Size = new System.Drawing.Size(55, 17);
-            this.tsCountLabel.Text = "Count : 0";
-            // 
             // tabWarDead
             // 
             this.tabWarDead.Controls.Add(this.button1);
@@ -1101,6 +1081,40 @@
             this.tabWarDead.TabIndex = 8;
             this.tabWarDead.Text = "War Dead";
             this.tabWarDead.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(758, 58);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(95, 23);
+            this.button1.TabIndex = 31;
+            this.button1.Text = "World War II";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnWWI
+            // 
+            this.btnWWI.Location = new System.Drawing.Point(652, 58);
+            this.btnWWI.Name = "btnWWI";
+            this.btnWWI.Size = new System.Drawing.Size(95, 23);
+            this.btnWWI.TabIndex = 30;
+            this.btnWWI.Text = "World War I";
+            this.btnWWI.UseVisualStyleBackColor = true;
+            this.btnWWI.Click += new System.EventHandler(this.btnWWI_Click);
+            // 
+            // dgWarDead
+            // 
+            this.dgWarDead.AllowUserToAddRows = false;
+            this.dgWarDead.AllowUserToDeleteRows = false;
+            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgWarDead.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgWarDead.Location = new System.Drawing.Point(3, 92);
+            this.dgWarDead.Name = "dgWarDead";
+            this.dgWarDead.ReadOnly = true;
+            this.dgWarDead.Size = new System.Drawing.Size(920, 307);
+            this.dgWarDead.TabIndex = 29;
             // 
             // label9
             // 
@@ -1134,36 +1148,27 @@
             this.wardeadCountry.Title = "Default Country";
             this.wardeadCountry.UKEnabled = true;
             // 
-            // dgWarDead
+            // tsCount
             // 
-            this.dgWarDead.AllowUserToAddRows = false;
-            this.dgWarDead.AllowUserToDeleteRows = false;
-            this.dgWarDead.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgWarDead.Location = new System.Drawing.Point(3, 92);
-            this.dgWarDead.Name = "dgWarDead";
-            this.dgWarDead.ReadOnly = true;
-            this.dgWarDead.Size = new System.Drawing.Size(920, 307);
-            this.dgWarDead.TabIndex = 29;
+            this.tsCount.Name = "tsCount";
+            this.tsCount.Size = new System.Drawing.Size(52, 17);
+            this.tsCount.Text = "Count : 0";
             // 
-            // btnWWI
+            // statusStrip
             // 
-            this.btnWWI.Location = new System.Drawing.Point(652, 58);
-            this.btnWWI.Name = "btnWWI";
-            this.btnWWI.Size = new System.Drawing.Size(95, 23);
-            this.btnWWI.TabIndex = 30;
-            this.btnWWI.Text = "World War I";
-            this.btnWWI.UseVisualStyleBackColor = true;
-            this.btnWWI.Click += new System.EventHandler(this.btnWWI_Click);
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsCountLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 458);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(939, 22);
+            this.statusStrip.TabIndex = 10;
+            this.statusStrip.Text = "statusStrip1";
             // 
-            // button1
+            // tsCountLabel
             // 
-            this.button1.Location = new System.Drawing.Point(758, 58);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(95, 23);
-            this.button1.TabIndex = 31;
-            this.button1.Text = "World War II";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.tsCountLabel.Name = "tsCountLabel";
+            this.tsCountLabel.Size = new System.Drawing.Size(55, 17);
+            this.tsCountLabel.Text = "Count : 0";
             // 
             // MainForm
             // 
@@ -1210,11 +1215,11 @@
             this.tabTreetops.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).EndInit();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
             this.tabWarDead.ResumeLayout(false);
             this.tabWarDead.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWarDead)).EndInit();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
