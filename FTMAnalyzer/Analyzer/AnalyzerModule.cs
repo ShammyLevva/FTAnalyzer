@@ -49,6 +49,14 @@ namespace FTM.Analyzer
             if (this.dataService != null)
             {
                 MessageBox.Show("You have " + dataService.People.Count + " people in your tree.");
+                foreach (PersonID pid in dataService.People) {
+                    IPerson person = dataService.People.Get(pid);
+                    IFact death = person.Death;
+                    if (death != null)
+                    {
+                        IDate deathDate = death.Date;
+                    }
+                }
             }
         }
 
