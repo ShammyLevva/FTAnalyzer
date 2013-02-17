@@ -676,8 +676,7 @@ namespace FTAnalyzer
             List<IDisplayTreeTops> result = new List<IDisplayTreeTops>();
             foreach (Individual ind in individuals)
             {
-
-                if (filter.select(ind))
+                if (ind.isMale() && !ind.isDeathKnown() && filter.select(ind))
                     result.Add(ind);
             }
             return result;

@@ -105,7 +105,7 @@
     <Compile Include="Core\FactDate.cs" />
     <Compile Include="Core\FactSource.cs" />
     <Compile Include="Exceptions\InvalidDoubleDateException.cs" />
-    <Compile Include="Filters\Filterables\DeathFilter.cs" />
+    <Compile Include="Filters\Filterables\IndividualDeathFilter.cs" />
     <Compile Include="Filters\Filterables\ICertificateFilterable.cs" />
     <Compile Include="Filters\Filterables\ILocationFilterable.cs" />
     <Compile Include="Filters\Filterables\IIndividualFilterable.cs" />
@@ -229,11 +229,11 @@
     <Compile Include="Core\Age.cs" />
     <Compile Include="Core\CensusDate.cs" />
     <Compile Include="Core\CensusFamily.cs" />
-    <Compile Include="Comparators\Registration\CensusAgeComparator.cs" />
-    <Compile Include="Comparators\Registration\DateComparator.cs" />
-    <Compile Include="Comparators\Registration\LocationComparator.cs" />
-    <Compile Include="Comparators\Registration\MultiComparator.cs" />
-    <Compile Include="Comparators\Registration\NameComparator.cs" />
+    <Compile Include="Comparators\Location\Registration\CensusAgeComparator.cs" />
+    <Compile Include="Comparators\Location\Registration\DateComparator.cs" />
+    <Compile Include="Comparators\Location\Registration\LocationComparator.cs" />
+    <Compile Include="Comparators\Location\Registration\MultiComparator.cs" />
+    <Compile Include="Comparators\Location\Registration\NameComparator.cs" />
     <Content Include="Printing.DataGridViewPrint.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

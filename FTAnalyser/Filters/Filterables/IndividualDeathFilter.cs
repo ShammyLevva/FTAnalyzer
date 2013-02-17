@@ -6,17 +6,17 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class DeathFilter : Filter<Individual>
+    public class IndividualDeathFilter : Filter<Individual>
     {
 
         private FactDate cutoff;
 
-        public DeathFilter(FactDate cutoff)
+        public IndividualDeathFilter(FactDate cutoff)
         {
             this.cutoff = cutoff;
         }
 
-        public DeathFilter(string date) : this(new FactDate(date)) { }
+        public IndividualDeathFilter(string date) : this(new FactDate(date)) { }
 
         public bool select(Individual t)
         {

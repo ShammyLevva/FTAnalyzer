@@ -288,12 +288,15 @@ namespace FTAnalyzer
             return filter;
         }
 
-        private Filter<Individual> createWardeadIndividualFilter(FactDate yearRange)
+        private Filter<Individual> createWardeadIndividualFilter(FactDate birthRange, FactDate deathRange)
         {
             Filter<Individual> locationFilter = wardeadCountry.BuildFilter<Individual>();
             Filter<Individual> relationFilter = wardeadRelation.BuildFilter<Individual>();
-            Filter<Individual> ageFilter = new IndividualBirthFilter(yearRange);
-            Filter<Individual> filter = new AndFilter<Individual>(ageFilter, new AndFilter<Individual>(locationFilter, relationFilter));
+            Filter<Individual> birthFilter = new IndividualBirthFilter(birthRange);
+            Filter<Individual> deathFilter = new IndividualDeathFilter(deathRange);
+            Filter<Individual> filter = new AndFilter<Individual>(
+                                            new AndFilter<Individual>(birthFilter,deathFilter),
+                                            new AndFilter<Individual>(locationFilter, relationFilter));
 
             if (txtWardeadSurname.Text.Length > 0)
                 filter = new AndFilter<Individual>(filter, new SurnameFilter<Individual>(txtWardeadSurname.Text.ToUpper()));
@@ -691,9 +694,9 @@ namespace FTAnalyzer
         private void btnWWI_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Filter<Individual> filter = createWardeadIndividualFilter(new FactDate("BET 1870 AND 1904"));
+            Filter<Individual> filter = createWardeadIndividualFilter(new FactDate("BET 1870 AND 1904"), new FactDate("BET 1914 AND 1918"));
             List<IDisplayTreeTops> warDeadList = ft.GetWarDead(filter);
-            warDeadList.Sort(new BirthDateComparer());
+            warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWarDead.DataSource = warDeadList;
             foreach (DataGridViewColumn c in dgWarDead.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);

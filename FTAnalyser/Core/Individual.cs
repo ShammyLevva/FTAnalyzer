@@ -386,6 +386,16 @@ namespace FTAnalyzer
             return single != null || MaxAgeAtDeath < 16 || CurrentAge.MaxAge < 16;
         }
 
+        public bool isBirthKnown()
+        {
+            return BirthDate != null && BirthDate.isExact();
+        }
+
+        public bool isDeathKnown()
+        {
+            return DeathDate != null && DeathDate.isExact();
+        }
+
         #endregion
 
         #region Age Functions
