@@ -47,7 +47,7 @@ namespace FTAnalyzer
                 {
                     HourGlass(true);
                     closeIndividualForms();
-                    txtWardeadSurname.SelectTab(tabDisplayProgress);
+                    tabSelector.SelectTab(tabDisplayProgress);
                     rtbOutput.Text = "";
                     rtbIGIResults.Text = "";
                     pbSources.Value = pbIndividuals.Value = pbFamilies.Value = 0;
@@ -97,34 +97,34 @@ namespace FTAnalyzer
         {
             if (ft.Loading)
             {
-                txtWardeadSurname.SelectedTab = tabDisplayProgress;
+                tabSelector.SelectedTab = tabDisplayProgress;
             }
             else
             {
-                if (txtWardeadSurname.SelectedTab == tabDisplayProgress)
+                if (tabSelector.SelectedTab == tabDisplayProgress)
                 {
                     tsCountLabel.Text = "";
                 }
-                else if (txtWardeadSurname.SelectedTab == tabIndividuals)
+                else if (tabSelector.SelectedTab == tabIndividuals)
                 {
                     List<IDisplayIndividual> list = ft.AllDisplayIndividuals;
                     dgIndividuals.DataSource = list;
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
-                else if (txtWardeadSurname.SelectedTab == tabCensus)
+                else if (tabSelector.SelectedTab == tabCensus)
                 {
                     cenDate.RevertToDefaultDate();
                     tsCountLabel.Text = "";
                     btnShowResults.Enabled = ft.IndividualCount > 0;
                 }
-                else if (txtWardeadSurname.SelectedTab == tabLostCousins)
+                else if (tabSelector.SelectedTab == tabLostCousins)
                 {
                     tsCountLabel.Text = "";
                     btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled =
-                        btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled
-                        = ft.IndividualCount > 0;
+                        btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled =
+                        btnLC1911EW.Enabled = ft.IndividualCount > 0;
                 }
-                else if (txtWardeadSurname.SelectedTab == tabLooseDeaths)
+                else if (tabSelector.SelectedTab == tabLooseDeaths)
                 {
                     HourGlass(true);
                     List<IDisplayLooseDeath> looseDeathList = ft.GetLooseDeaths();
@@ -132,7 +132,7 @@ namespace FTAnalyzer
                     tsCountLabel.Text = "Count : " + looseDeathList.Count;
                     HourGlass(false);
                 }
-                else if (txtWardeadSurname.SelectedTab == tabLocations)
+                else if (tabSelector.SelectedTab == tabLocations)
                 {
                     HourGlass(true);
                     tsCountLabel.Text = "";
@@ -150,7 +150,7 @@ namespace FTAnalyzer
                     dgAddresses.DataSource = addresses;
                     HourGlass(false);
                 }
-                else if (txtWardeadSurname.SelectedTab == tabIGISearch)
+                else if (tabSelector.SelectedTab == tabIGISearch)
                 {
                     btnCancelIGISearch.Visible = false;
                     btnViewResults.Visible = true;
@@ -298,8 +298,8 @@ namespace FTAnalyzer
                                             new AndFilter<Individual>(birthFilter,deathFilter),
                                             new AndFilter<Individual>(locationFilter, relationFilter));
 
-            if (txtWardeadSurname.Text.Length > 0)
-                filter = new AndFilter<Individual>(filter, new SurnameFilter<Individual>(txtWardeadSurname.Text.ToUpper()));
+            if (tabSelector.Text.Length > 0)
+                filter = new AndFilter<Individual>(filter, new SurnameFilter<Individual>(tabSelector.Text.ToUpper()));
 
             return filter;
         }
@@ -715,6 +715,11 @@ namespace FTAnalyzer
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = "Count : " + warDeadList.Count;
             HourGlass(false);
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://forums.lc");
         }
     }
 }
