@@ -287,7 +287,6 @@
             this.tabSelector.Controls.Add(this.tabIGISearch);
             this.tabSelector.Controls.Add(this.tabTreetops);
             this.tabSelector.Controls.Add(this.tabWarDead);
-            this.tabSelector.Enabled = false;
             this.tabSelector.Location = new System.Drawing.Point(0, 27);
             this.tabSelector.Name = "tabSelector";
             this.tabSelector.SelectedIndex = 0;
