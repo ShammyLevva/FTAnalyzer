@@ -186,6 +186,12 @@
     <CountryToRegion region="Sutherland"          country="Scotland" regionID="Sutherland" />
     <CountryToRegion region="West Lothian"        country="Scotland" regionID="West Lothian" />
     <CountryToRegion region="Wigtonshire"         country="Scotland" regionID="Wigton" />
+    
+    <!-- Scottish Cities -->
+    <CountryToRegion region="Aberdeen"            country="Scotland" regionID="Aberdeen" />
+    <CountryToRegion region="Dundee"              country="Scotland" regionID="Dundee" />
+    <CountryToRegion region="Edinburgh"           country="Scotland" regionID="Edinburgh" />
+    <CountryToRegion region="Glasgow"             country="Scotland" regionID="Glasgow" />
 
     <!-- English Shires & Counties -->
     <CountryToRegion region="Bedfordshire"        country="England" regionID="Bedford" />
@@ -231,6 +237,13 @@
     <CountryToRegion region="Wiltshire"           country="England" regionID="Wiltshire" />
     <CountryToRegion region="Worcestershire"      country="England" regionID="Worcester" />
     <CountryToRegion region="Yorkshire"           country="England" regionID="Yorkshire" />
+    
+    <!-- English Cities -->
+    <CountryToRegion region="Liverpool"           country="England" regionID="Liverpool" />
+    <CountryToRegion region="Manchester"          country="England" regionID="Manchester" />
+    <CountryToRegion region="Birmingham"          country="England" regionID="Birmingham" />
+    <CountryToRegion region="London"              country="England" regionID="London" />
+    <CountryToRegion region="Bristol"             country="England" regionID="Bristol" />
 
     <!-- Welsh Regions -->
     <CountryToRegion region="Anglesey"            country="Wales" regionID="Anglesey" />
