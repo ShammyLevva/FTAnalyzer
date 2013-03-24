@@ -29,8 +29,9 @@ namespace FTAnalyzer
 
         private string queryString;
         private volatile bool navigating;
+        private WebBrowser browser;
 
-        public IGINewSearchForm(RichTextBox rtb, string defaultCountry, int level, int relationTypes, string surname)
+        public IGINewSearchForm(RichTextBox rtb, string defaultCountry, int level, int relationTypes, string surname, WebBrowser browser)
         {
             rtbOutput = rtb;
             this.defaultLocation = new FactLocation(defaultCountry);
@@ -39,6 +40,7 @@ namespace FTAnalyzer
             this.resultCount = 0;
             this.relationTypes = relationTypes;
             this.surname = surname.ToUpper();
+            this.browser = browser;
             surnameSearch = (surname.Length > 0);
             Initialise();
         }
@@ -60,7 +62,7 @@ namespace FTAnalyzer
 
         protected override void SetLocationParameters(FactLocation location)
         {
-            setParameter("any_place", location.ToString());
+            setParameter("record_country", location.Country);
         }
 
         protected override void CheckIGIAtLocations(List<FactLocation> locations, string filename, int searchType, string surname)
@@ -100,19 +102,19 @@ namespace FTAnalyzer
                 // ie: only search if one partner has full name
                 if (forename2 != string.Empty && surname2 != string.Empty)
                 {
-                    setParameter(GIVENNAME, forename2);
-                    setParameter(SURNAME, surname2);
-                    setParameter(SPOUSE_GIVENNAME, forename1);
-                    setParameter(SPOUSE_SURNAME, surname1);
+                    setParameter(GIVENNAME, forename2 + "~");
+                    setParameter(SURNAME, surname2 + "~");
+                    setParameter(SPOUSE_GIVENNAME, forename1 + "~");
+                    setParameter(SPOUSE_SURNAME, surname1 + "~");
                     return true;
                 }
             }
             else
             {
-                setParameter(GIVENNAME, forename1);
-                setParameter(SURNAME, surname1);
-                setParameter(SPOUSE_GIVENNAME, forename2);
-                setParameter(SPOUSE_SURNAME, surname2);
+                setParameter(GIVENNAME, forename1 + "~");
+                setParameter(SURNAME, surname1 + "~");
+                setParameter(SPOUSE_GIVENNAME, forename2 + "~");
+                setParameter(SPOUSE_SURNAME, surname2 + "~");
                 return true;
             }
             return false;
@@ -127,7 +129,7 @@ namespace FTAnalyzer
             }
         }
 
-        private string FetchIGIDataFromWebsite()
+        private HtmlDocument FetchIGIDataFromWebsite()
         {
             try
             {
@@ -141,27 +143,29 @@ namespace FTAnalyzer
 
                     if (sb.Length > 0)
                     {
-                        sb.Append(" ");
+                        sb.Append("%20");
                     }
-                    sb.Append("+");
+                    sb.Append("%2B");
                     sb.Append(key);
-                    sb.Append(":");
+                    sb.Append("%3A");
                     sb.Append(parameters[key]);
                 }
                 queryString = "https://www.familysearch.org/search/record/results#count=20&query=" + sb.ToString();
-                WebBrowser browser = new WebBrowser();
-                browser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(browser_DocumentCompleted);
+                browser.DocumentCompleted += browser_DocumentCompleted;
                 navigating = true;
-                browser.Url = new Uri(queryString);
-                while (navigating) { Thread.Sleep(1000); }
-                StringBuilder htmlText = new StringBuilder(browser.DocumentText);
-                fixBaseURL(htmlText);
-                return htmlText.ToString();
+                browser.Navigate(queryString);
+                while (navigating || browser.IsBusy) {
+                    Thread.Sleep(100);
+                    Application.DoEvents();
+                }
+                browser.DocumentCompleted -= browser_DocumentCompleted;
+                return browser.Document;
             }
             catch (IOException e)
             {
-                return "<html><body>Error performing search:\n<p>" +
-                        e.ToString() + "</p></body></html>";
+                return null;
+                //return "<html><body>Error performing search:\n<p>" +
+                //        e.ToString() + "</p></body></html>";
             }
         }
 
@@ -174,19 +178,8 @@ namespace FTAnalyzer
         {
             try
             {
-                string str = FetchIGIDataFromWebsite();
-                // only output if no matches string not found
-                if (str.IndexOf(SERVERUNAVAILABLE) != -1)
-                {
-                    throw new BadIGIDataException("Server Unavailable");
-                }
-                if (str.IndexOf(SERVERERROR) != -1)
-                {
-                    throw new BadIGIDataException("Server Error 504");
-                }
-                TextWriter output = new StreamWriter(filename);
-                output.WriteLine(str);
-                output.Close();
+                HtmlDocument document = FetchIGIDataFromWebsite();
+                document.ExecCommand("SaveAs", false, filename);
                 rtbOutput.AppendText("Results File written to " + filename + "\n");
                 resultCount++;
             }
