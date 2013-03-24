@@ -26,7 +26,7 @@ namespace FTAnalyzer
             InitializeComponent();
             showLocationsToolStripMenuItem.Visible = false;
             ft.XmlErrorBox = rtbOutput;
-            tabSelector.TabPages.RemoveByKey("tabIGISearch");
+            //tabSelector.TabPages.RemoveByKey("tabIGISearch");
             //toolTips.SetToolTip(tabCountries, "Double click on Country name to see list of individuals with that Country.");
             //toolTips.SetToolTip(dgCountries, "Double click on Country name to see list of individuals with that Country.");
             //toolTips.SetToolTip(tabRegions, "Double click on Region name to see list of individuals with that Region.");
@@ -566,7 +566,7 @@ namespace FTAnalyzer
             btnIGIMarriageSearch.Enabled = false;
             rtbIGIResults.Text = "IGI Marriage Search started.\n";
             int level = rbIGISearchCountry.Checked ? FactLocation.COUNTRY : FactLocation.REGION;
-            IGISearchForm form = new IGIOldSearchForm(rtbIGIResults, IGIDefaultCountry.Country, level, IGIrelationTypes.Status, txtIGISurname.Text);
+            IGISearchForm form = new IGINewSearchForm(rtbIGIResults, IGIDefaultCountry.Country, level, IGIrelationTypes.Status, txtIGISurname.Text);
             List<Family> families = ft.AllFamilies;
             int counter = 0;
             pbIGISearch.Visible = true;

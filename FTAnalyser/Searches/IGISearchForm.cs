@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Text;
 namespace FTAnalyzer
 {
     public abstract class IGISearchForm
@@ -66,6 +67,18 @@ namespace FTAnalyzer
             else
                 parameters.Add(key, value);
         }
+
+        protected NameValueCollection getEncodedParameters()
+        {
+            NameValueCollection result = new NameValueCollection();
+            foreach (var entry in parameters)
+            {
+                result.Add(entry.Key, entry.Value);
+            }
+            return result;
+        }
+
+        protected abstract void fixBaseURL(StringBuilder str);
 
         private void MarriageSearch(Family family, string dirname)
         {

@@ -105,17 +105,7 @@ namespace FTAnalyzer
             }
         }
 
-        private NameValueCollection getEncodedParameters()
-        {
-            NameValueCollection result = new NameValueCollection();
-            foreach (var entry in parameters)
-            {
-                result.Add(entry.Key, entry.Value);
-            }
-            return result;
-        }
-
-        private void fixBaseURL(StringBuilder str)
+        protected override void fixBaseURL(StringBuilder str)
         {
             int head = str.ToString().IndexOf("<head>");
             if (head != -1)
@@ -199,7 +189,7 @@ namespace FTAnalyzer
             {
                 Utilities.WebRequestWrapper web = new Utilities.WebRequestWrapper();
                 NameValueCollection parameters = getEncodedParameters();
-                string result = web.FetchResult("http://www.familysearch.org/Eng/Search/customsearchresults.asp", parameters);
+                string result = web.FetchResult("http://www.familysearch.org/Eng/Search/customsearchresults.asp", parameters, "http");
                 StringBuilder htmlText = new StringBuilder(result);
                 fixBaseURL(htmlText);
                 return htmlText.ToString();

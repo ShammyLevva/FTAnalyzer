@@ -250,11 +250,11 @@ namespace FTAnalyzer.Utilities
         /// <summary>
         /// Used to create a web client with all of the appropriote proxy/useragent/etc settings
         /// </summary>
-        private WebClient CreateWebClient()
+        private WebClient CreateWebClient(String proxyType)
         {
             WebClient client = new WebClient() { Encoding = Encoding.UTF8 };
             client.Headers.Add("user-agent", NetworkSettingsProvider.UserAgent);
-            if (NetworkSettingsProvider.ProxyType == "Http")
+            if (NetworkSettingsProvider.ProxyType == proxyType)
             {
                 if (_useDefaultProxy)
                 {
@@ -304,7 +304,7 @@ namespace FTAnalyzer.Utilities
                         {
                             Directory.CreateDirectory(Path.GetDirectoryName(localPath));
                         }
-                        using (WebClient client = CreateWebClient())
+                        using (WebClient client = CreateWebClient("http"))
                         {
                             try
                             {
@@ -356,16 +356,16 @@ namespace FTAnalyzer.Utilities
             }
         }
 
-        public string FetchResult(string URI, NameValueCollection form)
+        public string FetchResult(string URI, NameValueCollection form, string proxyType)
         {
-            WebClient webClient = CreateWebClient();
-            Byte[] result = webClient.UploadValues(URI, form);
+            WebClient webClient = CreateWebClient(proxyType);
+            Byte[] result = (form == null) ? webClient.DownloadData(URI) : webClient.UploadValues(URI, form);
             return Encoding.ASCII.GetString(result);
         }
 
         public string DownloadText(string URI)
         {
-            WebClient webClient = CreateWebClient();
+            WebClient webClient = CreateWebClient("http");
             string value = null;
             int retry = 0;
             bool success = false;
