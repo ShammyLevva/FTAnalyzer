@@ -66,6 +66,11 @@ namespace FTAnalyzer
                 {
                     MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
                 }
+                catch (Exception ex2)
+                {
+                    MessageBox.Show("Error: Problem processing your file.\n" +
+                        "Please report this at http://ftanalyzer.codeplex.com. Error was: " + ex2.Message);
+                }
             }
         }
 
