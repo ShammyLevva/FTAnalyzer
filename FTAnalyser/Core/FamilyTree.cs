@@ -140,7 +140,8 @@ namespace FTAnalyzer
             }
             xmlErrorbox.AppendText("Loaded " + counter + " families.\n");
             CheckAllIndividualsAreInAFamily();
-            xmlErrorbox.AppendText("Calculating Relationships... Please wait\n\n");
+            xmlErrorbox.AppendText("Calculating Relationships using " + individuals[0].GedcomID + ": " +
+                individuals[0].Name + " as starter person. Please wait.\n\n");
             SetRelations(individuals[0].GedcomID);
             PrintRelationCount();
             SetParishes();

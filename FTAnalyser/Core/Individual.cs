@@ -349,6 +349,14 @@ namespace FTAnalyzer
             }
         }
 
+        public string IndividualRef
+        {
+            get
+            {
+                return gedcomID + ": " + Name;
+            }
+        }
+
         #endregion
 
         #region Boolean Tests
@@ -443,7 +451,7 @@ namespace FTAnalyzer
                 catch (InvalidXMLFactException ex)
                 {
                     FamilyTree ft = FamilyTree.Instance;
-                    ft.XmlErrorBox.AppendText("Error with Individual : " + gedcomID + ": " + forenames + " " + surname + "\n" +
+                    ft.XmlErrorBox.AppendText("Error with Individual : " + IndividualRef + "\n" +
                         "       Invalid fact : " + ex.Message);
                 }
             }

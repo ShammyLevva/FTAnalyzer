@@ -53,11 +53,16 @@ namespace FTAnalyzer
                 XmlNodeList list = node.SelectNodes("CHIL");
                 foreach (XmlNode n in list)
                 {
-                    Individual child = ft.getGedcomIndividual(n.Attributes["REF"].Value);
-                    if (child != null)
-                        children.Add(child);
+                    if (n.Attributes["REF"] != null)
+                    {
+                        Individual child = ft.getGedcomIndividual(n.Attributes["REF"].Value);
+                        if (child != null)
+                            children.Add(child);
+                        else
+                            ft.XmlErrorBox.AppendText("Child not found in family :" + FamilyRef + "\n");
+                    }
                     else
-                        ft.XmlErrorBox.AppendText("Child not found in family :" + this.familyGed + "\n");
+                        ft.XmlErrorBox.AppendText("Child without a reference found in family : " + FamilyRef + "\n");
                 }
                 addFacts(node, Fact.MARRIAGE);
                 addFacts(node, Fact.CUSTOM_FACT);
@@ -256,13 +261,21 @@ namespace FTAnalyzer
             }
         }
 
+        private string familyName
+        {
+            get
+            {
+                string husbandsName = husband == null ? "Unknown" : husband.Name;
+                string wifesName = wife == null ? "Unknown" : wife.Name;
+                return husbandsName + " and " + wifesName;
+            }
+        }
+
         public string MarriageFilename
         {
             get {
                 
-                string husbandsName = husband == null ? "Unknown" : husband.Name;
-                string wifesName = wife == null ? "Unknown" : wife.Name;
-                return FamilyTree.validFilename(familyGed + " - Marriage of " + husbandsName + " and " + wifesName + ".html");
+                 return FamilyTree.validFilename(familyGed + " - Marriage of " + familyName + ".html");
             }
         }
 
@@ -270,9 +283,15 @@ namespace FTAnalyzer
         {
             get
             {
-                string husbandsName = husband == null ? "Unknown" : husband.Name;
-                string wifesName = wife == null ? "Unknown" : wife.Name;
-                return FamilyTree.validFilename(familyGed + " - Children of " + husbandsName + " and " + wifesName + ".html");
+                return FamilyTree.validFilename(familyGed + " - Children of " + familyName + ".html");
+            }
+        }
+
+        public string FamilyRef
+        {
+            get
+            {
+                return familyGed + ": " + familyName;
             }
         }
 
