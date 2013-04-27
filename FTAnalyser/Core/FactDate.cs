@@ -80,7 +80,8 @@ namespace FTAnalyzer
 
         private string FixCommonDateFormats(string str)
         {
-            str = str.Replace(",", string.Empty).Trim().ToUpper();
+            str = str.Trim().ToUpper();
+            str = str.Replace(",", string.Empty);
 
             str = str.Replace("JANUARY", "JAN");
             str = str.Replace("FEBRUARY", "FEB"); 
@@ -94,6 +95,11 @@ namespace FTAnalyzer
             str = str.Replace("NOVEMBER", "NOV");
             str = str.Replace("DECEMBER", "DEC");
 
+            str = str.Replace("ABT.", "ABT");
+            str = str.Replace("AFT.", "AFT");
+            str = str.Replace("BEF.", "BEF");
+            str = str.Replace("BET.", "BET");
+            
             Match matcher = Regex.Match(str, POSTFIX);
             if (matcher.Success)
             {
