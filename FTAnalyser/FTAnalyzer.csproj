@@ -105,6 +105,7 @@
     <Compile Include="Core\Fact.cs" />
     <Compile Include="Core\FactDate.cs" />
     <Compile Include="Core\FactSource.cs" />
+    <Compile Include="Exceptions\InvalidXMLFactException.cs" />
     <Compile Include="Exceptions\InvalidDoubleDateException.cs" />
     <Compile Include="Filters\Filterables\IndividualDeathFilter.cs" />
     <Compile Include="Filters\Filterables\ICertificateFilterable.cs" />

@@ -436,7 +436,16 @@ namespace FTAnalyzer
         {
             XmlNodeList list = node.SelectNodes(factType);
             foreach(XmlNode n in list) {
-                addFact(new Fact(n));
+                try
+                {
+                    addFact(new Fact(n));
+                }
+                catch (InvalidXMLFactException ex)
+                {
+                    FamilyTree ft = FamilyTree.Instance;
+                    ft.XmlErrorBox.AppendText("Error with Individual : " + gedcomID + ": " + forenames + " " + surname + "\n" +
+                        "       Invalid fact : " + ex.Message);
+                }
             }
         }
 

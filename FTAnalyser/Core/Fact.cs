@@ -79,40 +79,49 @@ namespace FTAnalyzer
         {
             if (node != null) 
             {
-                factType = FixFactTypes(node.Name);
-                if (factType.Equals("EVEN")) {
-                    string tag = FamilyTree.GetText(node, "TYPE");
-                    CUSTOM_TAGS.TryGetValue(tag, out factType);
-                    if (factType == null)
-                        factType = FixFactTypes(tag);
-                    if (factType == null)
-                    {
-                        factType = Fact.UNKNOWN;
-                        FamilyTree.Instance.XmlErrorBox.AppendText("Recorded unknown fact type " + tag + "\n");
-                    }
-                }
-                string factDate = FamilyTree.GetText(node, "DATE");
-                date = new FactDate(factDate);
-                setCommentAndLocation(factType, FamilyTree.GetText(node), FamilyTree.GetText(node, "PLAC"));
                 FamilyTree ft = FamilyTree.Instance;
-
-                // now iterate through source elements of the fact finding all sources
-			    sources = new List<FactSource>();
-                XmlNodeList list = node.SelectNodes("SOUR");
-                foreach (XmlNode n in list)
+                try
                 {
-                    string srcref = n.Attributes["REF"].Value;
-                    FactSource source = ft.getGedcomSource(srcref);
-                    if (source != null)
-                        sources.Add(source);
-                    else
-                        ft.XmlErrorBox.AppendText("Source " + srcref + " not found." + "\n");
-                }
+                    factType = FixFactTypes(node.Name);
+                    if (factType.Equals("EVEN"))
+                    {
+                        string tag = FamilyTree.GetText(node, "TYPE");
+                        CUSTOM_TAGS.TryGetValue(tag, out factType);
+                        if (factType == null)
+                            factType = FixFactTypes(tag);
+                        if (factType == null)
+                        {
+                            factType = Fact.UNKNOWN;
+                            FamilyTree.Instance.XmlErrorBox.AppendText("Recorded unknown fact type " + tag + "\n");
+                        }
+                    }
+                    string factDate = FamilyTree.GetText(node, "DATE");
+                    date = new FactDate(factDate);
+                    setCommentAndLocation(factType, FamilyTree.GetText(node), FamilyTree.GetText(node, "PLAC"));
 
-                if (factType == DEATH) {
-                    comment = FamilyTree.GetText(node, "CAUS");
+                    // now iterate through source elements of the fact finding all sources
+                    sources = new List<FactSource>();
+                    XmlNodeList list = node.SelectNodes("SOUR");
+                    foreach (XmlNode n in list)
+                    {
+                        string srcref = n.Attributes["REF"].Value;
+                        FactSource source = ft.getGedcomSource(srcref);
+                        if (source != null)
+                            sources.Add(source);
+                        else
+                            ft.XmlErrorBox.AppendText("Source " + srcref + " not found." + "\n");
+                    }
+
+                    if (factType == DEATH)
+                    {
+                        comment = FamilyTree.GetText(node, "CAUS");
+                    }
+                    this.certificatePresent = setCertificatePresent();
                 }
-                this.certificatePresent = setCertificatePresent();
+                catch (Exception ex)
+                {
+                    throw new InvalidXMLFactException(node.ToString() + ". Error " + ex.Message + "\n");
+                }
             }
         }
 
