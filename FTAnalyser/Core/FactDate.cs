@@ -99,6 +99,21 @@ namespace FTAnalyzer
             str = str.Replace("AFT.", "AFT");
             str = str.Replace("BEF.", "BEF");
             str = str.Replace("BET.", "BET");
+            str = str.Replace("CAL.", "ABT");
+            str = str.Replace("EST.", "ABT");
+
+            str = str.Replace("MAR QTR", "ABT MAR");
+            str = str.Replace("JAN FEB MAR", "ABT MAR");
+            str = str.Replace("JAN-FEB-MAR", "ABT MAR");
+            str = str.Replace("JUN QTR", "ABT JUN");
+            str = str.Replace("APR MAY JUN", "ABT JUN");
+            str = str.Replace("APR-MAY-JUN", "ABT JUN");
+            str = str.Replace("SEP QTR", "ABT SEP");
+            str = str.Replace("JUL AUG SEP", "ABT SEP");
+            str = str.Replace("JUL-AUG-SEP", "ABT SEP");
+            str = str.Replace("DEC QTR", "ABT DEC");
+            str = str.Replace("OCT NOV DEC", "ABT DEC");
+            str = str.Replace("OCT-NOV-DEC", "ABT DEC");
             
             Match matcher = Regex.Match(str, POSTFIX);
             if (matcher.Success)

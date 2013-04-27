@@ -579,9 +579,9 @@
             this.ckbNoLocations.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbNoLocations.Location = new System.Drawing.Point(272, 114);
             this.ckbNoLocations.Name = "ckbNoLocations";
-            this.ckbNoLocations.Size = new System.Drawing.Size(217, 17);
+            this.ckbNoLocations.Size = new System.Drawing.Size(171, 17);
             this.ckbNoLocations.TabIndex = 18;
-            this.ckbNoLocations.Text = "Assume locations have no country name";
+            this.ckbNoLocations.Text = "Ignore locations in census filter";
             this.ckbNoLocations.UseVisualStyleBackColor = true;
             // 
             // ckbCensusResidence
