@@ -104,12 +104,15 @@ namespace FTAnalyzer
                     XmlNodeList list = node.SelectNodes("SOUR");
                     foreach (XmlNode n in list)
                     {
-                        string srcref = n.Attributes["REF"].Value;
-                        FactSource source = ft.getGedcomSource(srcref);
-                        if (source != null)
-                            sources.Add(source);
-                        else
-                            ft.XmlErrorBox.AppendText("Source " + srcref + " not found." + "\n");
+                        if (n.Attributes["Ref"] != null)
+                        {   // only process sources with a reference
+                            string srcref = n.Attributes["REF"].Value;
+                            FactSource source = ft.getGedcomSource(srcref);
+                            if (source != null)
+                                sources.Add(source);
+                            else
+                                ft.XmlErrorBox.AppendText("Source " + srcref + " not found." + "\n");
+                        }
                     }
 
                     if (factType == DEATH)
@@ -120,7 +123,8 @@ namespace FTAnalyzer
                 }
                 catch (Exception ex)
                 {
-                    throw new InvalidXMLFactException(node.ToString() + ". Error " + ex.Message + "\n");
+                    string message = (node == null) ? "" : node.InnerText + ". ";
+                    throw new InvalidXMLFactException(message + "Error " + ex.Message + "\n");
                 }
             }
         }
