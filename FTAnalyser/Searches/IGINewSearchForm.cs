@@ -24,8 +24,8 @@ namespace FTAnalyzer
                 BATCH_NUMBER = "batch_number",
                 FILM_NUMBER = "film_number";
 
-        private static readonly string SERVERERROR = "java.io.IOException: Server returned HTTP response code";
-        private static readonly string SERVERUNAVAILABLE = "Search is unavailable due to maintenance";
+//        private static readonly string SERVERERROR = "java.io.IOException: Server returned HTTP response code";
+//        private static readonly string SERVERUNAVAILABLE = "Search is unavailable due to maintenance";
 
         private string queryString;
         private volatile bool navigating;
