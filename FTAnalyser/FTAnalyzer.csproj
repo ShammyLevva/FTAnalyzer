@@ -99,6 +99,8 @@
     <Compile Include="Comparators\Census\CensusIndividualNameComparer.cs" />
     <Compile Include="Comparators\Census\CensusFamilyGedComparer.cs" />
     <Compile Include="Comparators\Census\DefaultCensusComparer.cs" />
+    <Compile Include="Comparators\Family\DefaultFamilyComparer.cs" />
+    <Compile Include="Comparators\Family\FamilyNameComparer.cs" />
     <Compile Include="Comparators\Individual\DefaultIndividualComparer.cs" />
     <Compile Include="Comparators\Individual\BirthDateComparer.cs" />
     <Compile Include="Core\Displays\IDisplayTreeTops.cs" />

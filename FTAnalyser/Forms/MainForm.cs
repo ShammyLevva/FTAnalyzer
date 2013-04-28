@@ -12,7 +12,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.3.7.6";
+        private string VERSION = "1.3.8.0";
         private bool _checkForUpdatesEnabled = true;
         private System.Threading.Timer _timerCheckForUpdates;
 
@@ -200,6 +200,28 @@ namespace FTAnalyzer
             List<IDisplayIndividual> list = ft.AllDisplayIndividuals;
             list.Sort(comparer);
             dgIndividuals.DataSource = list;
+            tsCountLabel.Text = "Count : " + list.Count;
+        }
+
+        private void dgFamilies_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            Comparer<IDisplayFamily> comparer;
+            switch (e.ColumnIndex)
+            {
+                case 0: // ID
+                    comparer = new DefaultFamilyComparer();
+                    break;
+                case 1: // Forename
+                    comparer = new FamilyNameComparer();
+                    break;
+                default:
+                    comparer = new DefaultFamilyComparer();
+                    break;
+            }
+
+            List<IDisplayFamily> list = ft.AllDisplayFamilies;
+            list.Sort(comparer);
+            dgFamilies.DataSource = list;
             tsCountLabel.Text = "Count : " + list.Count;
         }
 
@@ -733,11 +755,6 @@ namespace FTAnalyzer
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("http://forums.lc");
-        }
-
-        private void dgFamilies_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

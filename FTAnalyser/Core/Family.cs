@@ -139,6 +139,19 @@ namespace FTAnalyzer
 
         #region Properties
 
+        public int Count
+        {
+            get
+            {
+                int count = children.Count;
+                if (husband != null)
+                    count++;
+                if (wife != null)
+                    count++;
+                return count;
+            }
+        }
+
         public List<Fact> AllFacts
         {
             get { return this.facts; }
@@ -339,7 +352,10 @@ namespace FTAnalyzer
                 Fact marriage = getPreferredFact(Fact.MARRIAGE);
                 if(marriage == null)
                     return string.Empty;
-                return "m." + MarriageDate + " at " + marriage.Location;
+                if (marriage.Location.isBlank())
+                    return "m." + MarriageDate;
+                else
+                    return "m." + MarriageDate + " at " + marriage.Location;
             }
         }
 
