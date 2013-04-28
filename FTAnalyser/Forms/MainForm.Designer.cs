@@ -130,6 +130,8 @@
             this.treetopsCountry = new Controls.CensusCountry();
             this.wardeadRelation = new Controls.RelationTypes();
             this.wardeadCountry = new Controls.CensusCountry();
+            this.tabFamilies = new System.Windows.Forms.TabPage();
+            this.dgFamilies = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.tabSelector.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -158,6 +160,8 @@
             this.tabWarDead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWarDead)).BeginInit();
             this.statusStrip.SuspendLayout();
+            this.tabFamilies.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -188,7 +192,7 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -281,6 +285,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tabSelector.Controls.Add(this.tabDisplayProgress);
             this.tabSelector.Controls.Add(this.tabIndividuals);
+            this.tabSelector.Controls.Add(this.tabFamilies);
             this.tabSelector.Controls.Add(this.tabLocations);
             this.tabSelector.Controls.Add(this.tabLooseDeaths);
             this.tabSelector.Controls.Add(this.tabCensus);
@@ -1197,6 +1202,26 @@
             this.wardeadCountry.Title = "Default Country";
             this.wardeadCountry.UKEnabled = true;
             // 
+            // tabFamilies
+            // 
+            this.tabFamilies.Controls.Add(this.dgFamilies);
+            this.tabFamilies.Location = new System.Drawing.Point(4, 22);
+            this.tabFamilies.Name = "tabFamilies";
+            this.tabFamilies.Size = new System.Drawing.Size(931, 402);
+            this.tabFamilies.TabIndex = 9;
+            this.tabFamilies.Text = "Families";
+            this.tabFamilies.UseVisualStyleBackColor = true;
+            // 
+            // dgFamilies
+            // 
+            this.dgFamilies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgFamilies.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgFamilies.Location = new System.Drawing.Point(0, 0);
+            this.dgFamilies.Name = "dgFamilies";
+            this.dgFamilies.Size = new System.Drawing.Size(931, 402);
+            this.dgFamilies.TabIndex = 1;
+            this.dgFamilies.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFamilies_CellContentClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1247,6 +1272,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgWarDead)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.tabFamilies.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1355,6 +1382,8 @@
         private System.Windows.Forms.Button btnWWI;
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.WebBrowser webBrowser;
+        private System.Windows.Forms.TabPage tabFamilies;
+        private System.Windows.Forms.DataGridView dgFamilies;
     }
 }
 

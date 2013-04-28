@@ -937,6 +937,17 @@ namespace FTAnalyzer
             }
         }
 
+        public List<IDisplayFamily> AllDisplayFamilies
+        {
+            get
+            {
+                List<IDisplayFamily> result = new List<IDisplayFamily>();
+                foreach (IDisplayFamily f in families)
+                    result.Add(f);
+                return result;
+            }
+        }
+
         #endregion
 
     }

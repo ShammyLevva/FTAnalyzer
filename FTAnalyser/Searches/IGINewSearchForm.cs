@@ -163,9 +163,8 @@ namespace FTAnalyzer
             }
             catch (IOException e)
             {
+                string x = e.Message;
                 return null;
-                //return "<html><body>Error performing search:\n<p>" +
-                //        e.ToString() + "</p></body></html>";
             }
         }
 
