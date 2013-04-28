@@ -82,6 +82,8 @@ namespace FTAnalyzer
         {
             str = str.Trim().ToUpper();
             str = str.Replace(",", string.Empty);
+            str = str.Replace("(", string.Empty);
+            str = str.Replace(")", string.Empty);
 
             str = str.Replace("JANUARY", "JAN");
             str = str.Replace("FEBRUARY", "FEB"); 
@@ -101,19 +103,32 @@ namespace FTAnalyzer
             str = str.Replace("BET.", "BET");
             str = str.Replace("CAL.", "ABT");
             str = str.Replace("EST.", "ABT");
+            str = str.Replace("CIR.", "ABT"); 
+            str = str.Replace("CAL", "ABT");
+            str = str.Replace("EST", "ABT");
+            str = str.Replace("CIR", "ABT");
 
             str = str.Replace("MAR QTR", "ABT MAR");
+            str = str.Replace("MAR QUARTER", "ABT MAR");
+            str = str.Replace("MAR Q ", "ABT MAR ");
             str = str.Replace("JAN FEB MAR", "ABT MAR");
             str = str.Replace("JAN-FEB-MAR", "ABT MAR");
             str = str.Replace("JUN QTR", "ABT JUN");
+            str = str.Replace("JUN QUARTER", "ABT JUN");
+            str = str.Replace("JUN Q ", "ABT JUN ");
             str = str.Replace("APR MAY JUN", "ABT JUN");
             str = str.Replace("APR-MAY-JUN", "ABT JUN");
             str = str.Replace("SEP QTR", "ABT SEP");
+            str = str.Replace("SEP QUARTER", "ABT SEP");
+            str = str.Replace("SEP Q ", "ABT SEP ");
             str = str.Replace("JUL AUG SEP", "ABT SEP");
             str = str.Replace("JUL-AUG-SEP", "ABT SEP");
             str = str.Replace("DEC QTR", "ABT DEC");
+            str = str.Replace("DEC QUARTER", "ABT DEC");
+            str = str.Replace("DEC Q ", "ABT DEC ");
             str = str.Replace("OCT NOV DEC", "ABT DEC");
             str = str.Replace("OCT-NOV-DEC", "ABT DEC");
+            str = str.Replace("ABT ABT", "ABT"); // fix any ABT X QTR's that will have been changed to ABT ABT
             
             Match matcher = Regex.Match(str, POSTFIX);
             if (matcher.Success)
