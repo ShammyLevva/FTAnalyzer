@@ -20,6 +20,7 @@ namespace FTAnalyzer
         private FamilyTree ft = FamilyTree.Instance;
         private FactDate censusDate = CensusDate.UKCENSUS1881;
         private bool stopProcessing = false;
+        private bool familyCountSortLow = true;
 
         public MainForm()
         {
@@ -215,8 +216,9 @@ namespace FTAnalyzer
                 case 0: // ID
                     comparer = new DefaultFamilyComparer();
                     break;
-                case 1: // Forename
-                    comparer = new FamilyNameComparer();
+                case 6: // Count
+                    familyCountSortLow = !familyCountSortLow;
+                    comparer = new FamilyCountComparer(familyCountSortLow);
                     break;
                 default:
                     comparer = new DefaultFamilyComparer();
@@ -768,5 +770,6 @@ namespace FTAnalyzer
             else
                 censusCountry.Enabled = true;
         }
+
     }
 }

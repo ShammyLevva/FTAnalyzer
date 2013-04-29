@@ -20,7 +20,7 @@ namespace FTAnalyzer
         {
             long lineNr = 0;
 
-            string line, token1, token2;
+            string line, nextline, token1, token2;
             string level;
             int thislevel;
             int prevlevel;
@@ -28,7 +28,7 @@ namespace FTAnalyzer
             int cpos1;
 
             char[] newlineCharArray = new char[1];
-            newlineCharArray[0] = '\n';
+            newlineCharArray[0] = '\r';
 
             lineNr = 0;
 
@@ -43,16 +43,15 @@ namespace FTAnalyzer
 
             try
             {
-
-                while ((line = reader.ReadLine()) != null)
+                line = reader.ReadLine();
+                while (line != null)
                 {
-
-                    line = line.Trim();
-
                     lineNr++;
+                    nextline = reader.ReadLine();
+                    //need to check if nextline is valid if not line=line+nextline and nextline=reader.ReadLine();
 
                     // parse the GEDCOM line into five fields: level, iden, tag, xref, valu
-
+                    line = line.Trim();
                     if (line.Length > 0)
                     {
                         try
@@ -147,11 +146,11 @@ namespace FTAnalyzer
                         }
                         catch (Exception e)
                         {
-                            FamilyTree.Instance.XmlErrorBox.AppendText("Found bad line '" + line + "'. ");
-                            FamilyTree.Instance.XmlErrorBox.AppendText("Error was : " + e.Message + "\n");
+                            FamilyTree.Instance.XmlErrorBox.AppendText("Found bad line '" + line + "'. " +
+                                "Error was : " + e.Message + "\n");
                         }
                     }
-
+                    line = nextline;
                 } // end while
 
             }

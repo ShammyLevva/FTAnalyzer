@@ -425,6 +425,7 @@
             this.dgFamilies.Name = "dgFamilies";
             this.dgFamilies.Size = new System.Drawing.Size(931, 402);
             this.dgFamilies.TabIndex = 1;
+            this.dgFamilies.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgFamilies_ColumnHeaderMouseClick);
             // 
             // tabLocations
             // 
