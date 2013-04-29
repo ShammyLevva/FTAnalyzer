@@ -12,8 +12,31 @@ namespace FTAnalyzer
 
         public static XmlDocument Load(string path)
         {
+            //StreamReader reader = new AnselInputStreamReader(checkInvalidCR(path));
             StreamReader reader = new AnselInputStreamReader(new FileStream(path, FileMode.Open, FileAccess.Read));
             return parse(reader);
+        }
+
+        private static MemoryStream checkInvalidCR(string path)
+        {
+            FileStream infs = new FileStream(path, FileMode.Open, FileAccess.Read);
+            MemoryStream outfs = new MemoryStream();
+            byte b = (byte) infs.ReadByte();
+            while (infs.Position < infs.Length)
+            {
+                if (b == 0x0d)
+                {
+                    b = (byte) infs.ReadByte();
+                    if (b == 0x0a)
+                    { // we have 0x0d 0x0a so write the 0x0d so that normal write works.
+                        outfs.WriteByte(0x0d);
+                    }
+                }
+                outfs.WriteByte(b);
+                b = (byte) infs.ReadByte();
+            }
+            outfs.Position = 0;
+            return outfs;
         }
 
         private static XmlDocument parse(StreamReader reader)
@@ -146,7 +169,7 @@ namespace FTAnalyzer
                         }
                         catch (Exception e)
                         {
-                            FamilyTree.Instance.XmlErrorBox.AppendText("Found bad line '" + line + "'. " +
+                            FamilyTree.Instance.XmlErrorBox.AppendText("Found bad line " + lineNr + ": '" + line + "'. " +
                                 "Error was : " + e.Message + "\n");
                         }
                     }
