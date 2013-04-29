@@ -129,6 +129,10 @@ namespace FTAnalyzer
                     cenDate.RevertToDefaultDate();
                     tsCountLabel.Text = "";
                     btnShowResults.Enabled = ft.IndividualCount > 0;
+                    if (ckbNoLocations.Checked)
+                        censusCountry.Enabled = false;
+                    else
+                        censusCountry.Enabled = true;
                 }
                 else if (tabSelector.SelectedTab == tabLostCousins)
                 {
@@ -755,6 +759,14 @@ namespace FTAnalyzer
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("http://forums.lc");
+        }
+
+        private void ckbNoLocations_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckbNoLocations.Checked)
+                censusCountry.Enabled = false;
+            else
+                censusCountry.Enabled = true;
         }
     }
 }
