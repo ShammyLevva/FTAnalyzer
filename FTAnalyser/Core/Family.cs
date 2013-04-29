@@ -98,7 +98,7 @@ namespace FTAnalyzer
             XmlNodeList list = node.SelectNodes(factType);
             foreach(XmlNode n in list)
             {
-                facts.Add(new Fact(n));
+                facts.Add(new Fact(n, FamilyRef));
             }
         }
 

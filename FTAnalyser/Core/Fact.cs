@@ -74,7 +74,7 @@ namespace FTAnalyzer
             this.certificatePresent = false;
         }
 
-        public Fact (XmlNode node) 
+        public Fact (XmlNode node, string factRef) 
             :base()
         {
             if (node != null) 
@@ -96,7 +96,7 @@ namespace FTAnalyzer
                         }
                     }
                     string factDate = FamilyTree.GetText(node, "DATE");
-                    date = new FactDate(factDate);
+                    date = new FactDate(factDate, factRef);
                     setCommentAndLocation(factType, FamilyTree.GetText(node), FamilyTree.GetText(node, "PLAC"));
 
                     // now iterate through source elements of the fact finding all sources
@@ -124,7 +124,7 @@ namespace FTAnalyzer
                 catch (Exception ex)
                 {
                     string message = (node == null) ? "" : node.InnerText + ". ";
-                    throw new InvalidXMLFactException(message + "Error " + ex.Message + "\n");
+                    throw new InvalidXMLFactException(message + "Error " + ex.Message + "\n    With:" + factRef);
                 }
             }
         }

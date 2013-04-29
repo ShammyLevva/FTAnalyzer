@@ -446,7 +446,7 @@ namespace FTAnalyzer
             foreach(XmlNode n in list) {
                 try
                 {
-                    addFact(new Fact(n));
+                    addFact(new Fact(n, IndividualRef));
                 }
                 catch (InvalidXMLFactException ex)
                 {

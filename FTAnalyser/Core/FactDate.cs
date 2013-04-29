@@ -41,9 +41,11 @@ namespace FTAnalyzer
         private DateTime enddate;
         private FactDateType type;
         private bool doubledate = false; // Is a pre 1752 date bet 1 Jan and 25 Mar eg: 1735/36.
+        private string factRef = "";
 
-        public FactDate(string str)
+        public FactDate(string str, string factRef = "")
         {
+            this.factRef = factRef;
             if (str == null)
                 str = string.Empty;
             // remove any commas in date string
@@ -375,7 +377,7 @@ namespace FTAnalyzer
             catch (Exception e2)
             {
                 dt = (highlow == HIGH) ? MAXDATE : MINDATE;
-                FamilyTree.Instance.XmlErrorBox.AppendText("Error parsing date '" + dateValue + "' error message was : " + e2.Message + "\n");
+                FamilyTree.Instance.XmlErrorBox.AppendText("Error parsing date '" + dateValue + "' for " + factRef + " error message was : " + e2.Message + "\n");
             }
             return dt;
         }
