@@ -162,6 +162,7 @@ namespace FTAnalyzer.Forms
         {
             if (printDialog.ShowDialog(this) == DialogResult.OK)
             {
+                printDocument.PrinterSettings = printDialog.PrinterSettings;
                 printDocument.Print();
             }
         }

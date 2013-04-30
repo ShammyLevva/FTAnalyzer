@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.IO;
+using Printing.DataGridViewPrint.Tools;
 
 namespace FTAnalyzer
 {
@@ -102,6 +103,7 @@ namespace FTAnalyzer
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
+            printToolStripMenuItem.Enabled = false; 
             if (ft.Loading)
             {
                 tabSelector.SelectedTab = tabDisplayProgress;
@@ -729,6 +731,7 @@ namespace FTAnalyzer
             foreach (DataGridViewColumn c in dgTreeTops.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = "Count : " + treeTopsList.Count;
+            printToolStripMenuItem.Enabled = true;
             HourGlass(false);
         }
 
@@ -742,6 +745,7 @@ namespace FTAnalyzer
             foreach (DataGridViewColumn c in dgWarDead.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = "Count : " + warDeadList.Count;
+            printToolStripMenuItem.Enabled = true;
             HourGlass(false);
         }
 
@@ -755,6 +759,7 @@ namespace FTAnalyzer
             foreach (DataGridViewColumn c in dgWarDead.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = "Count : " + warDeadList.Count;
+            printToolStripMenuItem.Enabled = true;
             HourGlass(false);
         }
 
@@ -769,6 +774,36 @@ namespace FTAnalyzer
                 censusCountry.Enabled = false;
             else
                 censusCountry.Enabled = true;
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            printDocument.DefaultPageSettings.Margins =
+               new System.Drawing.Printing.Margins(40, 40, 40, 40);
+            printDocument.DefaultPageSettings.Landscape = true; 
+
+            if (tabSelector.SelectedTab == tabTreetops)
+            {
+                PrintingDataGridViewProvider printProvider = PrintingDataGridViewProvider.Create(
+                    printDocument, dgTreeTops, true, true, true,
+                    new TitlePrintBlock(this.Text), null, null);
+                if (printDialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    printDocument.PrinterSettings = printDialog.PrinterSettings;
+                    printDocument.Print();
+                }
+            }
+            else if (tabSelector.SelectedTab == tabWarDead)
+            {
+                PrintingDataGridViewProvider printProvider = PrintingDataGridViewProvider.Create(
+                    printDocument, dgWarDead, true, true, true,
+                    new TitlePrintBlock(this.Text), null, null);
+                if (printDialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    printDocument.PrinterSettings = printDialog.PrinterSettings;
+                    printDocument.Print();
+                }
+            }
         }
 
     }
