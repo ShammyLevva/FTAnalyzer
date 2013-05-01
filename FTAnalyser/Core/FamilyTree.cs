@@ -360,38 +360,6 @@ namespace FTAnalyzer
             return result;
         }
 
-        public List<Family> getFamiliesAsParent(Individual ind)
-        {
-            List<Family> result = new List<Family>();
-            foreach (Family f in families)
-            {
-                Individual husband = f.Husband;
-                Individual wife = f.Wife;
-                if (husband != null && husband == ind)
-                    result.Add(f);
-                else if (wife != null && wife == ind)
-                    result.Add(f);
-            }
-            return result;
-        }
-
-        public List<Family> getFamiliesAsChild(Individual ind)
-        {
-            List<Family> result = new List<Family>();
-            foreach (Family f in families)
-            {
-                foreach (Individual child in f.Children)
-                {
-                    if (child != null && child == ind)
-                    {
-                        result.Add(f);
-                        break;
-                    }
-                }
-            }
-            return result;
-        }
-
         public FactSource getGedcomSource(string gedcomID)
         {
             foreach (FactSource s in sources)
@@ -406,7 +374,7 @@ namespace FTAnalyzer
         {
             if (ind.isSingleAtDeath())
                 return false;
-            List<Family> families = getFamiliesAsParent(ind);
+            List<Family> families = ind.FamiliesAsParent;
             foreach (Family f in families)
             {
                 FactDate marriage = f.getPreferredFactDate(Fact.MARRIAGE);
@@ -689,7 +657,7 @@ namespace FTAnalyzer
 
         private ParentalGroup CreateFamilyGroup(Individual i)
         {
-            List<Family> list = getFamiliesAsChild(i);
+            List<Family> list = i.FamiliesAsChild;
             if (list.Count > 0)
             {
                 Family f = list.First();
@@ -709,22 +677,24 @@ namespace FTAnalyzer
         private void AddToQueue(Queue<Individual> queue, List<Individual> list)
         {
             foreach (Individual i in list)
+            {
                 queue.Enqueue(i);
+            }
         }
 
         private void addParentsToQueue(Individual indiv, Queue<Individual> queue, bool setAhnenfatel)
         {
-            List<Family> families = getFamiliesAsChild(indiv);
+            List<Family> families = indiv.FamiliesAsChild;
             foreach (Family family in families)
             {
                 // add parents to queue
-                if (family.Husband != null)
+                if (family.Husband != null && family.Husband.RelationType == Individual.UNKNOWN)
                 {
                     if (setAhnenfatel && indiv.RelationType == Individual.DIRECT)
                         family.Husband.Ahnentafel = indiv.Ahnentafel * 2;
                     queue.Enqueue(family.Husband);
                 }
-                if (family.Wife != null)
+                if (family.Wife != null && family.Wife.RelationType == Individual.UNKNOWN)
                 {
                     if (setAhnenfatel && indiv.RelationType == Individual.DIRECT)
                         family.Wife.Ahnentafel = indiv.Ahnentafel * 2 + 1;
@@ -736,6 +706,7 @@ namespace FTAnalyzer
         private void SetRelations(string startGed)
         {
             ClearRelations();
+            SetFamilies();
             Individual ind = getGedcomIndividual(startGed);
             ind.Ahnentafel = 1;
             Queue<Individual> queue = new Queue<Individual>();
@@ -756,7 +727,7 @@ namespace FTAnalyzer
             {
                 // get the next person
                 ind = queue.Dequeue();
-                List<Family> families = getFamiliesAsParent(ind);
+                List<Family> families = ind.FamiliesAsParent;
                 foreach (Family family in families)
                 {
                     // if the spouse of a direct ancestor is not a direct
@@ -786,7 +757,7 @@ namespace FTAnalyzer
                     if (relationship == Individual.UNKNOWN)
                         ind.RelationType = Individual.MARRIAGE;
                     addParentsToQueue(ind, queue, false);
-                    List<Family> families = getFamiliesAsParent(ind);
+                    List<Family> families = ind.FamiliesAsParent;
                     foreach (Family family in families)
                     {
                         family.setSpouseRelation(ind, Individual.MARRIAGE);
@@ -796,6 +767,22 @@ namespace FTAnalyzer
                     }
                 }
                 Application.DoEvents();
+            }
+        }
+
+        private void SetFamilies()
+        {
+            foreach (Family f in families)
+            {
+                if (f.Husband != null)
+                    f.Husband.FamiliesAsParent.Add(f);
+                if (f.Wife != null)
+                    f.Wife.FamiliesAsParent.Add(f);
+                foreach (Individual child in f.Children)
+                {
+                    if (child != null)
+                        child.FamiliesAsChild.Add(f);
+                }
             }
         }
 

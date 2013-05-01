@@ -29,6 +29,8 @@ namespace FTAnalyzer
 
         private List<Fact> facts;
         private List<FactLocation> locations;
+        private List<Family> familiesAsParent;
+        private List<Family> familiesAsChild;
         
         public Individual (XmlNode node) {
             gedcomID = node.Attributes["ID"].Value;
@@ -43,6 +45,8 @@ namespace FTAnalyzer
             hasParents = false;
             facts = new List<Fact>();
             locations = new List<FactLocation>();
+            familiesAsChild = new List<Family>();
+            familiesAsParent = new List<Family>();
 
             addFacts(node, Fact.BIRTH);
             addFacts(node, Fact.CHRISTENING);
@@ -73,6 +77,8 @@ namespace FTAnalyzer
                 this.infamily = i.infamily;
                 this.facts = new List<Fact>(i.facts);
                 this.locations = new List<FactLocation>(i.locations);
+                this.familiesAsChild = i.familiesAsChild;
+                this.familiesAsParent = i.familiesAsParent;
             }
         }
 
@@ -355,6 +361,18 @@ namespace FTAnalyzer
             {
                 return gedcomID + ": " + Name;
             }
+        }
+
+        public List<Family> FamiliesAsParent
+        {
+            get { return familiesAsParent; }
+            set { familiesAsParent = value; }
+        }
+
+        public List<Family> FamiliesAsChild
+        {
+            get { return familiesAsChild; }
+            set { familiesAsChild = value; }
         }
 
         #endregion
