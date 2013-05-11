@@ -23,7 +23,7 @@ namespace FTAnalyzer
             this.censusDate = censusDate;
             if(isValidFamily()) {
 	            this.bestLocation = updateBestLocation(new FactLocation(), wife);
-	            if (isValidIndividual(wife, censusDone, includeResidence)) {
+	            if (isValidIndividual(wife, censusDone, includeResidence, true)) {
 			        result = true;
 			        wife.Status = Individual.WIFE;
 	            } else 
@@ -31,7 +31,7 @@ namespace FTAnalyzer
 		        // overwrite bestLocation by husbands as most commonly the family
 		        // end up at husbands location after marriage
 			    this.bestLocation = updateBestLocation(bestLocation, husband);
-                if (isValidIndividual(husband, censusDone, includeResidence))
+                if (isValidIndividual(husband, censusDone, includeResidence, true))
                 {
 			        result = true;
 			        husband.Status = Individual.HUSBAND;
@@ -51,7 +51,7 @@ namespace FTAnalyzer
 			        Fact birth = child.getPreferredFact(Fact.BIRTH);
 			        this.bestLocation = updateBestLocation(bestLocation, birth);
 			        child.Status = Individual.CHILD;
-                    if (isValidIndividual(child, censusDone, includeResidence))
+                    if (isValidIndividual(child, censusDone, includeResidence, false))
                     {
 				        result = true;
 				        censusChildren.Add(child);
@@ -82,7 +82,7 @@ namespace FTAnalyzer
             return bestLocation;
         }
         
-        private bool isValidIndividual(Individual indiv, bool censusDone, bool includeResisdence) {
+        private bool isValidIndividual(Individual indiv, bool censusDone, bool includeResisdence, bool parentCheck) {
             if (indiv == null)
                 return false;
             FamilyTree ft = FamilyTree.Instance;
@@ -91,13 +91,13 @@ namespace FTAnalyzer
 		    if (birth < censusDate.StartDate && 
 		        death > censusDate.StartDate && 
 		            indiv.isCensusDone(censusDate, includeResisdence) == censusDone) {
-		        if (indiv.Status == Individual.CHILD) { 
-		            // individual is a child so remove if married before census date
-		    	    return !ft.isMarried(indiv, censusDate);
+		        if (parentCheck) {
+                    // husband or wife with valid date range
+                    return true;
 		        } else {
-		            // husband or wife with valid date range
-		            return true;
-		        }
+                    // individual is a child so remove if married before census date
+                    return !ft.isMarried(indiv, censusDate);
+                }
 		    } else {
 		        return false;
 		    }

@@ -137,6 +137,7 @@
             this.treetopsCountry = new Controls.CensusCountry();
             this.wardeadRelation = new Controls.RelationTypes();
             this.wardeadCountry = new Controls.CensusCountry();
+            this.ckbLCIgnoreCountry = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tabSelector.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -679,6 +680,7 @@
             // 
             // tabLostCousins
             // 
+            this.tabLostCousins.Controls.Add(this.ckbLCIgnoreCountry);
             this.tabLostCousins.Controls.Add(this.linkLabel2);
             this.tabLostCousins.Controls.Add(this.btnLC1911EW);
             this.tabLostCousins.Controls.Add(this.ckbLCResidence);
@@ -703,7 +705,7 @@
             // 
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel2.Location = new System.Drawing.Point(211, 232);
+            this.linkLabel2.Location = new System.Drawing.Point(211, 253);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(174, 16);
             this.linkLabel2.TabIndex = 15;
@@ -713,7 +715,7 @@
             // 
             // btnLC1911EW
             // 
-            this.btnLC1911EW.Location = new System.Drawing.Point(22, 175);
+            this.btnLC1911EW.Location = new System.Drawing.Point(22, 196);
             this.btnLC1911EW.Name = "btnLC1911EW";
             this.btnLC1911EW.Size = new System.Drawing.Size(162, 36);
             this.btnLC1911EW.TabIndex = 14;
@@ -724,7 +726,9 @@
             // ckbLCResidence
             // 
             this.ckbLCResidence.AutoSize = true;
-            this.ckbLCResidence.Location = new System.Drawing.Point(22, 68);
+            this.ckbLCResidence.Checked = true;
+            this.ckbLCResidence.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbLCResidence.Location = new System.Drawing.Point(22, 89);
             this.ckbLCResidence.Name = "ckbLCResidence";
             this.ckbLCResidence.Size = new System.Drawing.Size(213, 17);
             this.ckbLCResidence.TabIndex = 13;
@@ -735,7 +739,7 @@
             // 
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(19, 232);
+            this.linkLabel1.Location = new System.Drawing.Point(19, 253);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(186, 16);
             this.linkLabel1.TabIndex = 12;
@@ -770,7 +774,7 @@
             // 
             // btnLC1841EW
             // 
-            this.btnLC1841EW.Location = new System.Drawing.Point(22, 91);
+            this.btnLC1841EW.Location = new System.Drawing.Point(22, 112);
             this.btnLC1841EW.Name = "btnLC1841EW";
             this.btnLC1841EW.Size = new System.Drawing.Size(162, 36);
             this.btnLC1841EW.TabIndex = 8;
@@ -780,7 +784,7 @@
             // 
             // btnLC1911Ireland
             // 
-            this.btnLC1911Ireland.Location = new System.Drawing.Point(358, 133);
+            this.btnLC1911Ireland.Location = new System.Drawing.Point(358, 154);
             this.btnLC1911Ireland.Name = "btnLC1911Ireland";
             this.btnLC1911Ireland.Size = new System.Drawing.Size(162, 36);
             this.btnLC1911Ireland.TabIndex = 7;
@@ -790,7 +794,7 @@
             // 
             // btnLC1880USA
             // 
-            this.btnLC1880USA.Location = new System.Drawing.Point(190, 133);
+            this.btnLC1880USA.Location = new System.Drawing.Point(190, 154);
             this.btnLC1880USA.Name = "btnLC1880USA";
             this.btnLC1880USA.Size = new System.Drawing.Size(162, 36);
             this.btnLC1880USA.TabIndex = 6;
@@ -800,7 +804,7 @@
             // 
             // btnLC1881EW
             // 
-            this.btnLC1881EW.Location = new System.Drawing.Point(22, 133);
+            this.btnLC1881EW.Location = new System.Drawing.Point(22, 154);
             this.btnLC1881EW.Name = "btnLC1881EW";
             this.btnLC1881EW.Size = new System.Drawing.Size(162, 36);
             this.btnLC1881EW.TabIndex = 5;
@@ -810,7 +814,7 @@
             // 
             // btnLC1881Canada
             // 
-            this.btnLC1881Canada.Location = new System.Drawing.Point(358, 91);
+            this.btnLC1881Canada.Location = new System.Drawing.Point(358, 112);
             this.btnLC1881Canada.Name = "btnLC1881Canada";
             this.btnLC1881Canada.Size = new System.Drawing.Size(162, 36);
             this.btnLC1881Canada.TabIndex = 4;
@@ -820,7 +824,7 @@
             // 
             // btnLC1881Scot
             // 
-            this.btnLC1881Scot.Location = new System.Drawing.Point(190, 91);
+            this.btnLC1881Scot.Location = new System.Drawing.Point(190, 112);
             this.btnLC1881Scot.Name = "btnLC1881Scot";
             this.btnLC1881Scot.Size = new System.Drawing.Size(162, 36);
             this.btnLC1881Scot.TabIndex = 0;
@@ -1253,6 +1257,19 @@
             this.wardeadCountry.Title = "Default Country";
             this.wardeadCountry.UKEnabled = true;
             // 
+            // ckbLCIgnoreCountry
+            // 
+            this.ckbLCIgnoreCountry.AutoSize = true;
+            this.ckbLCIgnoreCountry.Checked = true;
+            this.ckbLCIgnoreCountry.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbLCIgnoreCountry.Location = new System.Drawing.Point(22, 66);
+            this.ckbLCIgnoreCountry.Name = "ckbLCIgnoreCountry";
+            this.ckbLCIgnoreCountry.Size = new System.Drawing.Size(150, 17);
+            this.ckbLCIgnoreCountry.TabIndex = 16;
+            this.ckbLCIgnoreCountry.Text = "Ignore Country in Location";
+            this.toolTips.SetToolTip(this.ckbLCIgnoreCountry, "Tick this if you don\'t usually don\'t have country names in your locations");
+            this.ckbLCIgnoreCountry.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1419,6 +1436,7 @@
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
         private System.Windows.Forms.PrintDialog printDialog;
         private System.Drawing.Printing.PrintDocument printDocument;
+        private System.Windows.Forms.CheckBox ckbLCIgnoreCountry;
     }
 }
 

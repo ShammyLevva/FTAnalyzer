@@ -113,6 +113,7 @@ namespace FTAnalyzer
                 Application.DoEvents(); // allows windows to process events and prevents application from appearing to have crashed.
             }
             xmlErrorbox.AppendText("Loaded " + counter + " sources.\n");
+            pbS.Value = pbS.Maximum;
             // now iterate through child elements of root
             // finding all individuals
             list = doc.SelectNodes("GED/INDI");
@@ -126,6 +127,7 @@ namespace FTAnalyzer
                 Application.DoEvents();
             }
             xmlErrorbox.AppendText("Loaded " + counter + " individuals.\n");
+            pbI.Value = pbI.Maximum;
             // now iterate through child elements of root
             // finding all families
             list = doc.SelectNodes("GED/FAM");
@@ -139,6 +141,7 @@ namespace FTAnalyzer
                 Application.DoEvents();
             }
             xmlErrorbox.AppendText("Loaded " + counter + " families.\n");
+            pbF.Value = pbF.Maximum;
             CheckAllIndividualsAreInAFamily();
             xmlErrorbox.AppendText("Calculating Relationships using " + individuals[0].GedcomID + ": " +
                 individuals[0].Name + " as starter person. Please wait.\n\n");
