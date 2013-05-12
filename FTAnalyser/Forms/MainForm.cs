@@ -806,5 +806,29 @@ namespace FTAnalyzer
             }
         }
 
+        private void ckbLCIgnoreCountry_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckbLCIgnoreCountry.Checked)
+            {
+                btnLC1841EW.Text = "1841 Census";
+                btnLC1880USA.Text = "1880 Census";
+                btnLC1881EW.Text = "1881 Census";
+                btnLC1911EW.Text = "1911 Census";
+                btnLC1881Scot.Visible = false;
+                btnLC1911Ireland.Visible = false;
+                btnLC1881Canada.Visible = false;
+            }
+            else
+            {
+                btnLC1880USA.Text = "1880 US Census";
+                btnLC1841EW.Text = "1841 England && Wales Census";
+                btnLC1881EW.Text = "1881 England && Wales Census";
+                btnLC1911EW.Text = "1911 England && Wales Census";
+                btnLC1881Scot.Visible = true;
+                btnLC1911Ireland.Visible = true;
+                btnLC1881Canada.Visible = true;
+            }
+        }
+
     }
 }
