@@ -401,6 +401,16 @@ namespace FTAnalyzer
             return false;
         }
 
+        public bool isLostCousinEntered(FactDate when)
+        {
+            foreach (Fact f in facts)
+            {
+                if (f.FactType == Fact.LOSTCOUSINS && f.FactDate.overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
+                    return true;
+            }
+            return false;
+        }
+
         public bool isDeceased(FactDate when)
         {
             Fact death = getPreferredFact(Fact.DEATH);

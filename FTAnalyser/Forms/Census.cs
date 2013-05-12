@@ -31,11 +31,10 @@ namespace FTAnalyzer.Forms
             printDocument.DefaultPageSettings.Landscape = true;
         }
 
-        public void setupCensus(RegistrationsProcessor rp, FactDate date, 
-            bool censusDone, bool includeResidence, int maxAge)
+        public void setupCensus(RegistrationsProcessor rp, FactDate date, bool censusDone, bool includeResidence, bool lostCousinCheck, int maxAge)
         {
             FamilyTree ft = FamilyTree.Instance;
-            List<Registration> regs = ft.getAllCensusRegistrations(date, censusDone, includeResidence);
+            List<Registration> regs = ft.getAllCensusRegistrations(date, censusDone, includeResidence, lostCousinCheck);
             List<Registration> census = rp.processRegistrations(regs);
             List<IDisplayCensus> ds = new List<IDisplayCensus>();
             int pos = 0; // position of DisplayCensus object in original list.

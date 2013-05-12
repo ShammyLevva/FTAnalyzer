@@ -13,7 +13,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.4.1.0";
+        private string VERSION = "1.4.1.1";
         private bool _checkForUpdatesEnabled = true;
         private System.Threading.Timer _timerCheckForUpdates;
 
@@ -291,7 +291,7 @@ namespace FTAnalyzer
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
 
             Forms.Census census = new Forms.Census();
-            census.setupCensus(censusRP, censusDate, false, ckbCensusResidence.Checked, (int)udAgeFilter.Value);
+            census.setupCensus(censusRP, censusDate, false, ckbCensusResidence.Checked, false, (int)udAgeFilter.Value);
             census.Text = censusDate.StartDate.Year.ToString() + " Census Records to search for";
             census.Show();
         }
@@ -356,15 +356,12 @@ namespace FTAnalyzer
                 new OrFilter<Registration>(
                     new OrFilter<Registration>(new RelationFilter<Registration>(Individual.BLOOD), new RelationFilter<Registration>(Individual.DIRECT)),
                     new RelationFilter<Registration>(Individual.MARRIEDTODB));
-            Filter<Registration> noLCFact = new NotFilter<Registration>(new FactFilter<Registration>(Fact.LOSTCOUSINS, censusDate));
             if (ckbLCIgnoreCountry.Checked)
                 filter = new TrueFilter<Registration>(); // if we are ignoring locations then ignore what was passed as a filter
             if (ckbRestrictions.Checked)                
                 filter = new AndFilter<Registration>(new DateFilter<Registration>(censusDate), filter, relation);
             else
                 filter = new AndFilter<Registration>(new DateFilter<Registration>(censusDate), filter);
-            if (ckbHideRecorded.Checked)
-                filter = new AndFilter<Registration>(filter, noLCFact);
             MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();
             if(!ckbLCIgnoreCountry.Checked) // only add the parish location comparator if we are using locations
                 censusComparator.addComparator(new LocationComparator(FactLocation.PARISH));
@@ -372,7 +369,7 @@ namespace FTAnalyzer
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
 
             Forms.Census census = new Forms.Census();
-            census.setupCensus(censusRP, censusDate, true, ckbLCResidence.Checked, 110);
+            census.setupCensus(censusRP, censusDate, true, ckbLCResidence.Checked, ckbHideRecorded.Checked, 110);
             census.Text = reportTitle;
             HourGlass(false);
             census.Show();
