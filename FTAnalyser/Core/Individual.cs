@@ -553,6 +553,11 @@ namespace FTAnalyzer
         }
         #endregion
 
+        public void FixIndividualID(int length)
+        {
+            individualID = individualID.Substring(0,1) + individualID.Substring(1).PadLeft(length,'0');
+        }
+
         public int CompareTo(Individual that)
         {
             // Individuals are naturally ordered by surname, then forenames,

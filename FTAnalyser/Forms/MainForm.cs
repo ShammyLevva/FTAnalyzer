@@ -118,6 +118,7 @@ namespace FTAnalyzer
                 else if (tabSelector.SelectedTab == tabIndividuals)
                 {
                     List<IDisplayIndividual> list = ft.AllDisplayIndividuals;
+                    list.Sort(new DefaultIndividualComparer());
                     dgIndividuals.DataSource = list;
                     tsCountLabel.Text = "Count : " + list.Count;
                 }

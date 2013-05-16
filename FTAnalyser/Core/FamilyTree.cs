@@ -149,6 +149,7 @@ namespace FTAnalyzer
             SetRelations(individuals[0].GedcomID);
             PrintRelationCount();
             SetParishes();
+            FixIndividualIDs();
             _loading = false;
         }
 
@@ -820,6 +821,15 @@ namespace FTAnalyzer
         }
 
         #endregion
+
+        private void FixIndividualIDs()
+        {
+            int lenID = individuals.Count.ToString().Length;
+            foreach (Individual ind in individuals)
+            {
+                ind.FixIndividualID(lenID);
+            }
+        }
 
         #region Parish Functions
 
