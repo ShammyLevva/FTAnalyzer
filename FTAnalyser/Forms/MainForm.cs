@@ -838,5 +838,10 @@ namespace FTAnalyzer
             }
         }
 
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            rtbOutput.Top = pbFamilies.Top + 30;
+        }
+
     }
 }
