@@ -204,6 +204,9 @@ namespace FTAnalyzer
                 case 12: // Budgie Code
                     comparer = new IndividualBudgieComparer();
                     break;
+                case 13: // Ahnentafel
+                    comparer = new AhnentafelComparer();
+                    break;
                 default:
                     comparer = new DefaultIndividualComparer();
                     break;
