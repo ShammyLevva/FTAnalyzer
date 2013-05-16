@@ -7,18 +7,19 @@ namespace FTAnalyzer
 {
     public interface IDisplayIndividual
     {
-        string IndividualID { get; }
-        string Forenames { get; }
-        string Surname { get; }
-        string Gender { get; }
-        FactDate BirthDate { get; }
-        string BirthLocation { get; }
-        FactDate DeathDate { get; }
-        string DeathLocation { get; }
-        string Occupation { get; }
-        FactLocation BestLocation { get; }
-        Age CurrentAge { get; }
-        string Relation { get; }
+        string IndividualID { get; }        
+        string Forenames { get; }           
+        string Surname { get; }             
+        string Gender { get; }              
+        FactDate BirthDate { get; }         
+        string BirthLocation { get; }       
+        FactDate DeathDate { get; }         
+        string DeathLocation { get; }       
+        string Occupation { get; }          
+        FactLocation BestLocation { get; }  
+        Age CurrentAge { get; }             
+        string Relation { get; }            
+        string BudgieCode { get; }
         int Ahnentafel { get; }
     }
 }

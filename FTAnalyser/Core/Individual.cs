@@ -24,6 +24,7 @@ namespace FTAnalyzer
         private string status;
         private int relationType;
         private int ahnentafel;
+        private string budgieCode;
         private bool infamily;
         private bool hasParents;
 
@@ -41,6 +42,7 @@ namespace FTAnalyzer
             relationType = UNSET;
             status = UNKNOWNSTATUS;
             ahnentafel = 0;
+            budgieCode = string.Empty;
             infamily = false;
             hasParents = false;
             facts = new List<Fact>();
@@ -73,6 +75,7 @@ namespace FTAnalyzer
                 this.alias = i.alias;
                 this.status = i.status;
                 this.ahnentafel = i.ahnentafel;
+                this.budgieCode = i.budgieCode;
                 this.relationType = i.relationType;
                 this.infamily = i.infamily;
                 this.facts = new List<Fact>(i.facts);
@@ -104,6 +107,12 @@ namespace FTAnalyzer
         { 
             get { return ahnentafel; } 
             set { ahnentafel = value; }
+        }
+
+        public string BudgieCode
+        {
+            get { return budgieCode; }
+            set { budgieCode = value; }
         }
 
         public string IndividualID 

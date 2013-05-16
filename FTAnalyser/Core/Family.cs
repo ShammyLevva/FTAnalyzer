@@ -310,6 +310,54 @@ namespace FTAnalyzer
 
         #endregion
 
+        public void setBudgieCode(Individual ind, int lenAhnentafel)
+        {
+            Individual spouse = ind.isMale() ? Wife : Husband;
+            if (spouse != null && spouse.BudgieCode == string.Empty)
+            {
+                spouse.BudgieCode = ind.BudgieCode + "s";
+            }
+            List<Individual> sortedChildren = children.OrderBy(c => c.BirthDate).ToList();
+            int directChild = 0;
+            if (ind.RelationType == Individual.DIRECT)
+            {
+                //first find which child is a direct
+                foreach (Individual child in sortedChildren)
+                {
+                    directChild++;
+                    if (child.RelationType == Individual.DIRECT)
+                        break;
+                }
+            }
+            if (directChild > 0)
+            {
+                int childcount = 0;
+                foreach (Individual child in sortedChildren)
+                {
+                    childcount++;
+                    if (child.BudgieCode == string.Empty)
+                    {
+                        string prefix = (directChild < childcount) ? "+" : "-";
+                        string code = (Math.Abs(directChild - childcount)).ToString();
+                        string ahnentafel = ((int)Math.Floor(ind.Ahnentafel / 2.0)).ToString();
+                        child.BudgieCode = ahnentafel.PadLeft(lenAhnentafel, '0') + prefix + code.PadLeft(2, '0');
+                    }
+                }
+            }
+            else
+            {   // we have got here because we are not dealing with a direct nor a family that contains a direct child
+                int childcount = 0;
+                foreach (Individual child in sortedChildren)
+                {
+                    childcount++;
+                    if (child.BudgieCode == string.Empty)
+                    {
+                        child.BudgieCode = ind.BudgieCode + "." + childcount.ToString().PadLeft(2, '0');
+                    }
+                }
+            }
+        }
+
         public void setSpouseRelation(Individual ind, int relationType)
         {
             Individual spouse = ind.isMale() ? Wife : Husband;

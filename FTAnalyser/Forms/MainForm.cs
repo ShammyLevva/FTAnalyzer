@@ -13,7 +13,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.4.1.2";
+        private string VERSION = "1.4.2.0";
         private bool _checkForUpdatesEnabled = true;
         private System.Threading.Timer _timerCheckForUpdates;
 
@@ -197,7 +197,11 @@ namespace FTAnalyzer
                     comparer = new DefaultIndividualComparer();
                     break;
                 case 1: // Forename
+                case 2: // Surname
                     comparer = new IndividualNameComparer();
+                    break;
+                case 12: // Budgie Code
+                    comparer = new IndividualBudgieComparer();
                     break;
                 default:
                     comparer = new DefaultIndividualComparer();

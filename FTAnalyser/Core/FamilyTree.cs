@@ -18,6 +18,7 @@ namespace FTAnalyzer
         private Dictionary<string, FactLocation> locations;
         private bool _loading = false;
         private RichTextBox xmlErrorbox = new RichTextBox();
+        private int maxAhnentafel = 0;
 
         private FamilyTree()
         {
@@ -694,13 +695,21 @@ namespace FTAnalyzer
                 if (family.Husband != null && family.Husband.RelationType == Individual.UNKNOWN)
                 {
                     if (setAhnenfatel && indiv.RelationType == Individual.DIRECT)
+                    {
                         family.Husband.Ahnentafel = indiv.Ahnentafel * 2;
+                        if(family.Husband.Ahnentafel > maxAhnentafel)
+                            maxAhnentafel = family.Husband.Ahnentafel;
+                    }
                     queue.Enqueue(family.Husband);
                 }
                 if (family.Wife != null && family.Wife.RelationType == Individual.UNKNOWN)
                 {
                     if (setAhnenfatel && indiv.RelationType == Individual.DIRECT)
+                    {
                         family.Wife.Ahnentafel = indiv.Ahnentafel * 2 + 1;
+                        if (family.Wife.Ahnentafel > maxAhnentafel)
+                            maxAhnentafel = family.Wife.Ahnentafel;
+                    }
                     queue.Enqueue(family.Wife);
                 }
             }
@@ -712,6 +721,7 @@ namespace FTAnalyzer
             SetFamilies();
             Individual ind = getGedcomIndividual(startGed);
             ind.Ahnentafel = 1;
+            maxAhnentafel = 1;
             Queue<Individual> queue = new Queue<Individual>();
             queue.Enqueue(ind);
             while (queue.Count > 0)
@@ -723,8 +733,13 @@ namespace FTAnalyzer
                 addParentsToQueue(ind, queue, true);
                 Application.DoEvents();
             }
+            int lenAhnentafel = maxAhnentafel.ToString().Length;
             // we have now added all direct ancestors
             List<Individual> directs = getAllRelationsOfType(Individual.DIRECT);
+            foreach(Individual i in directs)
+            {
+                i.BudgieCode = (i.Ahnentafel).ToString().PadLeft(lenAhnentafel,'0') + "d";
+            }
             AddToQueue(queue, directs);
             while (queue.Count > 0)
             {
@@ -739,6 +754,7 @@ namespace FTAnalyzer
                     // all children of direct ancestors and blood relations
                     // are blood relations
                     family.setChildRelation(queue, Individual.BLOOD);
+                    family.setBudgieCode(ind, lenAhnentafel);
                 }
                 Application.DoEvents();
             }
