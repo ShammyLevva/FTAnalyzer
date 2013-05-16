@@ -105,6 +105,8 @@
     <Compile Include="Comparators\Individual\IndividualBudgieComparer.cs" />
     <Compile Include="Comparators\Individual\DefaultIndividualComparer.cs" />
     <Compile Include="Comparators\Individual\BirthDateComparer.cs" />
+    <Compile Include="Core\Displays\DisplayOccupation.cs" />
+    <Compile Include="Core\Displays\IDisplayOccupation.cs" />
     <Compile Include="Core\Displays\IDisplayTreeTops.cs" />
     <Compile Include="Core\Fact.cs" />
     <Compile Include="Core\FactDate.cs" />

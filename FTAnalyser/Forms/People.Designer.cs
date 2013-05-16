@@ -36,6 +36,8 @@
             // 
             // dgIndividuals
             // 
+            this.dgIndividuals.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.Location = new System.Drawing.Point(0, 0);
             this.dgIndividuals.Name = "dgIndividuals";
@@ -44,6 +46,8 @@
             // 
             // dgFamilies
             // 
+            this.dgFamilies.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgFamilies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFamilies.Location = new System.Drawing.Point(0, 300);
             this.dgFamilies.Name = "dgFamilies";

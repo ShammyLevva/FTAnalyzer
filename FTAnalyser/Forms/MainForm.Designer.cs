@@ -69,6 +69,8 @@
             this.dgParishes = new System.Windows.Forms.DataGridView();
             this.tabAddresses = new System.Windows.Forms.TabPage();
             this.dgAddresses = new System.Windows.Forms.DataGridView();
+            this.tabOccupations = new System.Windows.Forms.TabPage();
+            this.dgOccupations = new System.Windows.Forms.DataGridView();
             this.tabLooseDeaths = new System.Windows.Forms.TabPage();
             this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
             this.tabCensus = new System.Windows.Forms.TabPage();
@@ -155,6 +157,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgParishes)).BeginInit();
             this.tabAddresses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).BeginInit();
+            this.tabOccupations.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgOccupations)).BeginInit();
             this.tabLooseDeaths.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).BeginInit();
             this.tabCensus.SuspendLayout();
@@ -302,6 +306,7 @@
             this.tabSelector.Controls.Add(this.tabIndividuals);
             this.tabSelector.Controls.Add(this.tabFamilies);
             this.tabSelector.Controls.Add(this.tabLocations);
+            this.tabSelector.Controls.Add(this.tabOccupations);
             this.tabSelector.Controls.Add(this.tabLooseDeaths);
             this.tabSelector.Controls.Add(this.tabCensus);
             this.tabSelector.Controls.Add(this.tabLostCousins);
@@ -552,6 +557,27 @@
             this.dgAddresses.Size = new System.Drawing.Size(918, 370);
             this.dgAddresses.TabIndex = 1;
             this.dgAddresses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAddresses_CellDoubleClick);
+            // 
+            // tabOccupations
+            // 
+            this.tabOccupations.Controls.Add(this.dgOccupations);
+            this.tabOccupations.Location = new System.Drawing.Point(4, 22);
+            this.tabOccupations.Name = "tabOccupations";
+            this.tabOccupations.Size = new System.Drawing.Size(931, 402);
+            this.tabOccupations.TabIndex = 10;
+            this.tabOccupations.Text = "Occupations";
+            this.tabOccupations.UseVisualStyleBackColor = true;
+            // 
+            // dgOccupations
+            // 
+            this.dgOccupations.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgOccupations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgOccupations.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgOccupations.Location = new System.Drawing.Point(0, 0);
+            this.dgOccupations.Name = "dgOccupations";
+            this.dgOccupations.Size = new System.Drawing.Size(931, 402);
+            this.dgOccupations.TabIndex = 2;
+            this.dgOccupations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgOccupations_CellDoubleClick);
             // 
             // tabLooseDeaths
             // 
@@ -1302,6 +1328,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgParishes)).EndInit();
             this.tabAddresses.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).EndInit();
+            this.tabOccupations.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgOccupations)).EndInit();
             this.tabLooseDeaths.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).EndInit();
             this.tabCensus.ResumeLayout(false);
@@ -1437,6 +1465,8 @@
         private System.Windows.Forms.PrintDialog printDialog;
         private System.Drawing.Printing.PrintDocument printDocument;
         private System.Windows.Forms.CheckBox ckbLCIgnoreCountry;
+        private System.Windows.Forms.TabPage tabOccupations;
+        private System.Windows.Forms.DataGridView dgOccupations;
     }
 }
 

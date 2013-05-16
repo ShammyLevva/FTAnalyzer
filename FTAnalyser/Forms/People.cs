@@ -26,7 +26,7 @@ namespace FTAnalyzer.Forms
                 dsInd.Add(i);
             // ds.sort(new IndividualNameComparator());
             dgIndividuals.DataSource = dsInd;
-
+            
             List<Family> listFam = ft.getFamiliesAtLocation(loc, level);
             List<IDisplayFamily> dsFam = new List<IDisplayFamily>();
             foreach (Family f in listFam)
@@ -34,6 +34,20 @@ namespace FTAnalyzer.Forms
             // ds.sort(new IndividualNameComparator());
             dgFamilies.DataSource = dsFam;
 
+            resize();
+        }
+
+        public void setWorkers(string job, List<Individual> workers)
+        {
+            this.Text = "Individuals whose occupation was a " + job;
+            List<IDisplayIndividual> dsInd = new List<IDisplayIndividual>();
+            foreach (Individual i in workers)
+                dsInd.Add(i);
+            // ds.sort(new IndividualNameComparator());
+            dgIndividuals.DataSource = dsInd;
+            dgIndividuals.Dock = DockStyle.Fill;
+
+            dgFamilies.Visible = false;
             resize();
         }
 

@@ -16,6 +16,7 @@ namespace FTAnalyzer
         private List<Individual> individuals;
         private List<Family> families;
         private Dictionary<string, FactLocation> locations;
+        private Dictionary<string, List<Individual>> occupations;
         private bool _loading = false;
         private RichTextBox xmlErrorbox = new RichTextBox();
         private int maxAhnentafel = 0;
@@ -95,6 +96,7 @@ namespace FTAnalyzer
             individuals = new List<Individual>();
             families = new List<Family>();
             locations = new Dictionary<string, FactLocation>();
+            occupations = new Dictionary<string, List<Individual>>();
         }
 
         public void LoadTree(XmlDocument doc, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
@@ -124,6 +126,7 @@ namespace FTAnalyzer
             {
                 Individual individual = new Individual(n);
                 individuals.Add(individual);
+                AddOccupations(individual);
                 pbI.Value = counter++;
                 Application.DoEvents();
             }
@@ -151,6 +154,25 @@ namespace FTAnalyzer
             SetParishes();
             FixIndividualIDs();
             _loading = false;
+        }
+
+        private void AddOccupations(Individual individual)
+        {
+            HashSet<string> jobs = new HashSet<string>();
+            foreach (Fact f in individual.getFacts(Fact.OCCUPATION))
+            {
+                if (!jobs.Contains(f.Comment))
+                {
+                    List<Individual> workers;
+                    if (!occupations.TryGetValue(f.Comment, out workers))
+                    {
+                        workers = new List<Individual>();
+                        occupations.Add(f.Comment, workers);
+                    }
+                    workers.Add(individual);
+                    jobs.Add(f.Comment);
+                }
+            }
         }
 
         private void CheckAllIndividualsAreInAFamily()
@@ -962,6 +984,22 @@ namespace FTAnalyzer
                     result.Add(f);
                 return result;
             }
+        }
+
+        public List<IDisplayOccupation> AllDisplayOccupations
+        {
+            get
+            {
+                List<IDisplayOccupation> result = new List<IDisplayOccupation>();
+                foreach (string occ in occupations.Keys)
+                    result.Add(new DisplayOccupation(occ,occupations[occ].Count));
+                return result;
+            }
+        }
+
+        public List<Individual> AllWorkers(string job)
+        {
+            return occupations[job];
         }
 
         #endregion

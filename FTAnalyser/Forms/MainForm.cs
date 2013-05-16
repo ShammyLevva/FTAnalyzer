@@ -13,7 +13,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.4.2.0";
+        private string VERSION = "1.4.3.0";
         private bool _checkForUpdatesEnabled = true;
         private System.Threading.Timer _timerCheckForUpdates;
 
@@ -127,6 +127,15 @@ namespace FTAnalyzer
                     List<IDisplayFamily> list = ft.AllDisplayFamilies;
                     dgFamilies.DataSource = list;
                     tsCountLabel.Text = "Count : " + list.Count;
+                }
+                else if (tabSelector.SelectedTab == tabOccupations)
+                {
+                    HourGlass(true);
+                    List<IDisplayOccupation> list = ft.AllDisplayOccupations;
+                    list.Sort();
+                    dgOccupations.DataSource = list;
+                    tsCountLabel.Text = "Count : " + list.Count;
+                    HourGlass(false);
                 }
                 else if (tabSelector.SelectedTab == tabCensus)
                 {
@@ -841,6 +850,16 @@ namespace FTAnalyzer
         private void MainForm_Resize(object sender, EventArgs e)
         {
             rtbOutput.Top = pbFamilies.Top + 30;
+        }
+
+        private void dgOccupations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            HourGlass(true);
+            DisplayOccupation occ = (DisplayOccupation)dgOccupations.CurrentRow.DataBoundItem;
+            Forms.People frmInd = new Forms.People();
+            frmInd.setWorkers(occ.Occupation, ft.AllWorkers(occ.Occupation));
+            frmInd.Show();
+            HourGlass(false);
         }
 
     }
