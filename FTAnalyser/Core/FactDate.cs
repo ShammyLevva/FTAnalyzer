@@ -131,7 +131,15 @@ namespace FTAnalyzer
             str = str.Replace("OCT NOV DEC", "ABT DEC");
             str = str.Replace("OCT-NOV-DEC", "ABT DEC");
             str = str.Replace("ABT ABT", "ABT"); // fix any ABT X QTR's that will have been changed to ABT ABT
-            
+
+            if (str.StartsWith("FROM"))
+            {
+                if (str.IndexOf("TO") > 0)
+                    str = str.Replace("FROM", "BET").Replace("TO", "AND");
+                else
+                    str = str.Replace("FROM", "AFT");
+            }
+
             Match matcher = Regex.Match(str, POSTFIX);
             if (matcher.Success)
             {
