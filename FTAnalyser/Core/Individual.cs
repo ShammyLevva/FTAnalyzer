@@ -555,7 +555,13 @@ namespace FTAnalyzer
 
         public void FixIndividualID(int length)
         {
-            individualID = individualID.Substring(0,1) + individualID.Substring(1).PadLeft(length,'0');
+            try
+            {
+                individualID = individualID.Substring(0, 1) + individualID.Substring(1).PadLeft(length, '0');
+            }
+            catch (Exception)
+            {  // don't error if Individual isn't of type Ixxxx
+            }
         }
 
         public int CompareTo(Individual that)

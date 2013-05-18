@@ -102,6 +102,20 @@ namespace FTAnalyzer
             }
         }
 
+        public void FixFamilyID(int length)
+        {
+            try
+            {
+                if (familyID == null)
+                    familyID = "Unlinked";
+                else
+                    familyID = familyID.Substring(0, 1) + familyID.Substring(1).PadLeft(length, '0');
+            }
+            catch (Exception)
+            { // don't error if family ID is not of format Fxxxx
+            }
+        }
+
         /**
          * @return Returns the first fact of the given type.
          */
