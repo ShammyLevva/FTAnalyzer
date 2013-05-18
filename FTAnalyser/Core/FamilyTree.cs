@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml;
 using System.Windows.Forms;
 using System.IO;
+using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer
 {
@@ -964,11 +965,11 @@ namespace FTAnalyzer
 
         #region Displays
 
-        public List<IDisplayIndividual> AllDisplayIndividuals
+        public SortableBindingList<IDisplayIndividual> AllDisplayIndividuals
         {
             get
             {
-                List<IDisplayIndividual> result = new List<IDisplayIndividual>();
+                SortableBindingList<IDisplayIndividual> result = new SortableBindingList<IDisplayIndividual>();
                 foreach (IDisplayIndividual i in individuals)
                     result.Add(i);
                 return result;

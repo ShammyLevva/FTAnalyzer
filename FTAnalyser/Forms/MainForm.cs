@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.IO;
 using Printing.DataGridViewPrint.Tools;
+using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer
 {
@@ -117,8 +118,8 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabIndividuals)
                 {
-                    List<IDisplayIndividual> list = ft.AllDisplayIndividuals;
-                    list.Sort(new DefaultIndividualComparer());
+                    SortableBindingList<IDisplayIndividual> list = ft.AllDisplayIndividuals;
+                   // list. .Sort(new DefaultIndividualComparer());
                     dgIndividuals.DataSource = list;
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
@@ -196,35 +197,6 @@ namespace FTAnalyzer
                     }
                 }
             }
-        }
-
-        private void dgIndividuals_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            Comparer<IDisplayIndividual> comparer;
-            switch (e.ColumnIndex)
-            {
-                case 0: // ID
-                    comparer = new DefaultIndividualComparer();
-                    break;
-                case 1: // Forename
-                case 2: // Surname
-                    comparer = new IndividualNameComparer();
-                    break;
-                case 12: // Budgie Code
-                    comparer = new IndividualBudgieComparer();
-                    break;
-                case 13: // Ahnentafel
-                    comparer = new AhnentafelComparer();
-                    break;
-                default:
-                    comparer = new DefaultIndividualComparer();
-                    break;
-            }
-
-            List<IDisplayIndividual> list = ft.AllDisplayIndividuals;
-            list.Sort(comparer);
-            dgIndividuals.DataSource = list;
-            tsCountLabel.Text = "Count : " + list.Count;
         }
 
         private void dgFamilies_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)

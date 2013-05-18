@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    public class Age
+    public class Age : IComparable<Age>
     {
         private int minAge;
         private int maxAge;
@@ -15,6 +15,8 @@ namespace FTAnalyzer
         {
             minAge = ind.BirthDate.getMaximumYear(when);
             maxAge = ind.BirthDate.getMinimumYear(when);
+            if (maxAge > FactDate.MAXYEARS)
+                maxAge = FactDate.MAXYEARS;
             if (minAge == FactDate.MINYEARS)
             {
                 if (maxAge == FactDate.MAXYEARS)
@@ -24,21 +26,17 @@ namespace FTAnalyzer
             }
             else
             {
-                if (maxAge == FactDate.MAXYEARS)
+                if (minAge >= FactDate.MAXYEARS)
                 {
-                    if (minAge >= FactDate.MAXYEARS)
-                    {
-                        // if age over maximum return maximum
-                        age = ">=" + FactDate.MAXYEARS.ToString();
-                    }
-                    else
-                    {
-                        age = ">=" + minAge;
-                    }
+                    // if age over maximum return maximum
+                    age = ">=" + FactDate.MAXYEARS.ToString();
                 }
                 else
                 {
-                    age = minAge == maxAge ? minAge.ToString() : minAge + " to " + maxAge;
+                    if(ind.BirthDate.Type == FactDate.FactDateType.ABT) //fix for abouts having 1 year tolerance
+                        age = minAge == maxAge ? minAge.ToString() : maxAge + " to " + minAge;
+                    else
+                        age = minAge == maxAge ? minAge.ToString() : minAge + " to " + maxAge;
                 }
             }
         }
@@ -56,6 +54,13 @@ namespace FTAnalyzer
         public override string ToString()
         {
             return age;
+        }
+
+        public int CompareTo(Age that)
+        {
+            if (this.minAge == that.minAge)
+                return this.maxAge.CompareTo(that.maxAge);
+            return this.minAge.CompareTo(that.minAge);
         }
     }
 }
