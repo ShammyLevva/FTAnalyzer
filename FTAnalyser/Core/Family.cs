@@ -102,14 +102,14 @@ namespace FTAnalyzer
             }
         }
 
-        public void FixFamilyID(int length)
+        public void FixFamilyGed(int length)
         {
             try
             {
-                if (familyID == null)
-                    familyID = "Unlinked";
+                if (familyGed == null || familyGed == "")
+                    familyGed = "Unlinked";
                 else
-                    familyID = familyID.Substring(0, 1) + familyID.Substring(1).PadLeft(length, '0');
+                    familyGed = familyGed.Substring(0, 1) + familyGed.Substring(1).PadLeft(length, '0');
             }
             catch (Exception)
             { // don't error if family ID is not of format Fxxxx

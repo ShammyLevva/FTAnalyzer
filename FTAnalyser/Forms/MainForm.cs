@@ -22,7 +22,6 @@ namespace FTAnalyzer
         private FamilyTree ft = FamilyTree.Instance;
         private FactDate censusDate = CensusDate.UKCENSUS1881;
         private bool stopProcessing = false;
-        private bool familyCountSortLow = true;
 
         public MainForm()
         {
@@ -112,6 +111,7 @@ namespace FTAnalyzer
             }
             else
             {
+                HourGlass(true);
                 if (tabSelector.SelectedTab == tabDisplayProgress)
                 {
                     tsCountLabel.Text = "";
@@ -119,24 +119,23 @@ namespace FTAnalyzer
                 else if (tabSelector.SelectedTab == tabIndividuals)
                 {
                     SortableBindingList<IDisplayIndividual> list = ft.AllDisplayIndividuals;
-                   // list. .Sort(new DefaultIndividualComparer());
                     dgIndividuals.DataSource = list;
+                    dgIndividuals.Sort(dgIndividuals.Columns[0], ListSortDirection.Ascending);
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
                 else if (tabSelector.SelectedTab == tabFamilies)
                 {
-                    List<IDisplayFamily> list = ft.AllDisplayFamilies;
+                    SortableBindingList<IDisplayFamily> list = ft.AllDisplayFamilies;
                     dgFamilies.DataSource = list;
+                    dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
                 else if (tabSelector.SelectedTab == tabOccupations)
                 {
-                    HourGlass(true);
-                    List<IDisplayOccupation> list = ft.AllDisplayOccupations;
-                    list.Sort();
+                    SortableBindingList<IDisplayOccupation> list = ft.AllDisplayOccupations;
                     dgOccupations.DataSource = list;
+                    dgOccupations.Sort(dgOccupations.Columns[0], ListSortDirection.Ascending);
                     tsCountLabel.Text = "Count : " + list.Count;
-                    HourGlass(false);
                 }
                 else if (tabSelector.SelectedTab == tabCensus)
                 {
@@ -157,15 +156,12 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabLooseDeaths)
                 {
-                    HourGlass(true);
-                    List<IDisplayLooseDeath> looseDeathList = ft.GetLooseDeaths();
+                    SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.GetLooseDeaths();
                     dgLooseDeaths.DataSource = looseDeathList;
                     tsCountLabel.Text = "Count : " + looseDeathList.Count;
-                    HourGlass(false);
                 }
                 else if (tabSelector.SelectedTab == tabLocations)
                 {
-                    HourGlass(true);
                     tsCountLabel.Text = "";
                     List<IDisplayLocation> countries = ft.AllCountries;
                     List<IDisplayLocation> regions = ft.AllRegions;
@@ -179,7 +175,6 @@ namespace FTAnalyzer
                     dgRegions.DataSource = regions;
                     dgParishes.DataSource = parishes;
                     dgAddresses.DataSource = addresses;
-                    HourGlass(false);
                 }
                 else if (tabSelector.SelectedTab == tabIGISearch)
                 {
@@ -196,30 +191,8 @@ namespace FTAnalyzer
                         txtIGIfolder.Text = string.Empty;
                     }
                 }
+                HourGlass(false);
             }
-        }
-
-        private void dgFamilies_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            Comparer<IDisplayFamily> comparer;
-            switch (e.ColumnIndex)
-            {
-                case 0: // ID
-                    comparer = new DefaultFamilyComparer();
-                    break;
-                case 6: // Count
-                    familyCountSortLow = !familyCountSortLow;
-                    comparer = new FamilyCountComparer(familyCountSortLow);
-                    break;
-                default:
-                    comparer = new DefaultFamilyComparer();
-                    break;
-            }
-
-            List<IDisplayFamily> list = ft.AllDisplayFamilies;
-            list.Sort(comparer);
-            dgFamilies.DataSource = list;
-            tsCountLabel.Text = "Count : " + list.Count;
         }
 
         private void dgCountries_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

@@ -153,7 +153,7 @@ namespace FTAnalyzer
             SetRelations(individuals[0].GedcomID);
             PrintRelationCount();
             SetParishes();
-            FixIndividualIDs();
+            FixIDs();
             _loading = false;
         }
 
@@ -482,9 +482,9 @@ namespace FTAnalyzer
 
         #region Loose Deaths
 
-        public List<IDisplayLooseDeath> GetLooseDeaths()
+        public SortableBindingList<IDisplayLooseDeath> GetLooseDeaths()
         {
-            List<IDisplayLooseDeath> result = new List<IDisplayLooseDeath>();
+            SortableBindingList<IDisplayLooseDeath> result = new SortableBindingList<IDisplayLooseDeath>();
             foreach (Individual ind in individuals)
             {
                 checkLooseDeath(ind, result);
@@ -492,7 +492,7 @@ namespace FTAnalyzer
             return result;
         }
 
-        private void checkLooseDeath(Individual indiv, List<IDisplayLooseDeath> result)
+        private void checkLooseDeath(Individual indiv, SortableBindingList<IDisplayLooseDeath> result)
         {
             //			int amb = 0;
             FactDate deathDate = indiv.DeathDate;
@@ -845,12 +845,17 @@ namespace FTAnalyzer
 
         #endregion
 
-        private void FixIndividualIDs()
+        private void FixIDs()
         {
             int lenID = individuals.Count.ToString().Length;
             foreach (Individual ind in individuals)
             {
                 ind.FixIndividualID(lenID);
+            }
+            lenID = families.Count.ToString().Length;
+            foreach (Family f in families)
+            {
+                f.FixFamilyGed(lenID);
             }
         }
 
@@ -976,22 +981,22 @@ namespace FTAnalyzer
             }
         }
 
-        public List<IDisplayFamily> AllDisplayFamilies
+        public SortableBindingList<IDisplayFamily> AllDisplayFamilies
         {
             get
             {
-                List<IDisplayFamily> result = new List<IDisplayFamily>();
+                SortableBindingList<IDisplayFamily> result = new SortableBindingList<IDisplayFamily>();
                 foreach (IDisplayFamily f in families)
                     result.Add(f);
                 return result;
             }
         }
 
-        public List<IDisplayOccupation> AllDisplayOccupations
+        public SortableBindingList<IDisplayOccupation> AllDisplayOccupations
         {
             get
             {
-                List<IDisplayOccupation> result = new List<IDisplayOccupation>();
+                SortableBindingList<IDisplayOccupation> result = new SortableBindingList<IDisplayOccupation>();
                 foreach (string occ in occupations.Keys)
                     result.Add(new DisplayOccupation(occ,occupations[occ].Count));
                 return result;
