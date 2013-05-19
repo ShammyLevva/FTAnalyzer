@@ -151,7 +151,7 @@ namespace FTAnalyzer
             xmlErrorbox.AppendText("Calculating Relationships using " + individuals[0].GedcomID + ": " +
                 individuals[0].Name + " as starter person. Please wait.\n\n");
             SetRelations(individuals[0].GedcomID);
-            PrintRelationCount();
+            xmlErrorbox.AppendText(PrintRelationCount());
             SetParishes();
             FixIDs();
             _loading = false;
@@ -699,6 +699,8 @@ namespace FTAnalyzer
             foreach (Individual i in individuals)
             {
                 i.RelationType = Individual.UNKNOWN;
+                i.BudgieCode = string.Empty;
+                i.Ahnentafel = 0;
             }
         }
 
@@ -739,7 +741,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void SetRelations(string startGed)
+        public void SetRelations(string startGed)
         {
             ClearRelations();
             SetFamilies();
@@ -812,6 +814,8 @@ namespace FTAnalyzer
                 }
                 Application.DoEvents();
             }
+            ind = getGedcomIndividual(startGed);
+            ind.RelationType = Individual.ROOT;
         }
 
         private void SetFamilies()
@@ -830,18 +834,20 @@ namespace FTAnalyzer
             }
         }
 
-        private void PrintRelationCount()
+        public string PrintRelationCount()
         {
+            StringBuilder sb = new StringBuilder();
             int[] relations = new int[Individual.UNSET + 1];
             foreach (Individual i in individuals)
                 relations[i.RelationType]++;
-            xmlErrorbox.AppendText("Direct Ancestors : " + relations[Individual.DIRECT] + "\n");
-            xmlErrorbox.AppendText("Blood Relations : " + relations[Individual.BLOOD] + "\n");
-            xmlErrorbox.AppendText("Married to Blood or Direct Relation : " + relations[Individual.MARRIEDTODB] + "\n");
-            xmlErrorbox.AppendText("Related by Marriage : " + relations[Individual.MARRIAGE] + "\n");
-            xmlErrorbox.AppendText("Unknown relation : " + relations[Individual.UNKNOWN] + "\n");
+            sb.Append("Direct Ancestors : " + relations[Individual.DIRECT] + "\n");
+            sb.Append("Blood Relations : " + relations[Individual.BLOOD] + "\n");
+            sb.Append("Married to Blood or Direct Relation : " + relations[Individual.MARRIEDTODB] + "\n");
+            sb.Append("Related by Marriage : " + relations[Individual.MARRIAGE] + "\n");
+            sb.Append("Unknown relation : " + relations[Individual.UNKNOWN] + "\n");
             if (relations[Individual.UNSET] > 0)
-                xmlErrorbox.AppendText("Failed to set relationship : " + relations[Individual.UNSET] + "\n");
+                sb.Append("Failed to set relationship : " + relations[Individual.UNSET] + "\n");
+            return sb.ToString();
         }
 
         #endregion

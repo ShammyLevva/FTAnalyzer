@@ -130,6 +130,8 @@
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.btnShowMap = new System.Windows.Forms.Button();
+            this.mnuSetRoot = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.setAsRootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.cenDate = new Controls.CensusDateSelector();
             this.censusCountry = new Controls.CensusCountry();
@@ -173,6 +175,7 @@
             this.tabWarDead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWarDead)).BeginInit();
             this.statusStrip.SuspendLayout();
+            this.mnuSetRoot.SuspendLayout();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -412,6 +415,7 @@
             this.dgIndividuals.AllowUserToAddRows = false;
             this.dgIndividuals.AllowUserToDeleteRows = false;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgIndividuals.ContextMenuStrip = this.mnuSetRoot;
             this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgIndividuals.Location = new System.Drawing.Point(3, 3);
             this.dgIndividuals.MultiSelect = false;
@@ -420,6 +424,7 @@
             this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgIndividuals.Size = new System.Drawing.Size(925, 396);
             this.dgIndividuals.TabIndex = 0;
+            this.dgIndividuals.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgIndividuals_CellMouseClick);
             // 
             // tabFamilies
             // 
@@ -1243,6 +1248,20 @@
             this.btnShowMap.UseVisualStyleBackColor = true;
             this.btnShowMap.Click += new System.EventHandler(this.btnShowMap_Click);
             // 
+            // mnuSetRoot
+            // 
+            this.mnuSetRoot.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.setAsRootToolStripMenuItem});
+            this.mnuSetRoot.Name = "mnuSetRoot";
+            this.mnuSetRoot.Size = new System.Drawing.Size(174, 48);
+            // 
+            // setAsRootToolStripMenuItem
+            // 
+            this.setAsRootToolStripMenuItem.Name = "setAsRootToolStripMenuItem";
+            this.setAsRootToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.setAsRootToolStripMenuItem.Text = "Set As Root Person";
+            this.setAsRootToolStripMenuItem.Click += new System.EventHandler(this.setAsRootToolStripMenuItem_Click);
+            // 
             // rtbOutput
             // 
             this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
@@ -1395,6 +1414,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgWarDead)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.mnuSetRoot.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1513,6 +1533,8 @@
         private System.Windows.Forms.TabPage tabOccupations;
         private System.Windows.Forms.DataGridView dgOccupations;
         private System.Windows.Forms.Button btnShowMap;
+        private System.Windows.Forms.ContextMenuStrip mnuSetRoot;
+        private System.Windows.Forms.ToolStripMenuItem setAsRootToolStripMenuItem;
     }
 }
 

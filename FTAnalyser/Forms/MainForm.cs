@@ -838,5 +838,26 @@ namespace FTAnalyzer
                 MessageBox.Show("Unable to find location : " + loc.getLocation(locType));
             Application.UseWaitCursor = false;
         }
+
+        private void dgIndividuals_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+
+            }
+        }
+
+        private void setAsRootToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
+            if (ind != null)
+            {
+                ft.SetRelations(ind.GedcomID);
+                dgIndividuals.Refresh();
+                MessageBox.Show("Root person set as " + ind.Name + "\n\n" + ft.PrintRelationCount());
+            }
+            HourGlass(false);
+        }
     }
 }
