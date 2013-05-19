@@ -832,8 +832,10 @@ namespace FTAnalyzer
             }
             // Do geo coding stuff
             Forms.GoogleMap frmMap = new Forms.GoogleMap();
-            frmMap.setLocation(loc, locType);
-            frmMap.Show();
+            if (frmMap.setLocation(loc, locType))
+                frmMap.Show();
+            else
+                MessageBox.Show("Unable to find location : " + loc.getLocation(locType));
             HourGlass(false);
         }
     }

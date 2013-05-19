@@ -38,6 +38,7 @@
             this.webBrowser.Location = new System.Drawing.Point(0, 0);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
+            this.webBrowser.ScrollBarsEnabled = false;
             this.webBrowser.Size = new System.Drawing.Size(886, 506);
             this.webBrowser.TabIndex = 0;
             this.webBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser_DocumentCompleted);
@@ -47,7 +48,7 @@
             this.labMapLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.labMapLevel.AutoSize = true;
-            this.labMapLevel.Location = new System.Drawing.Point(6, 6);
+            this.labMapLevel.Location = new System.Drawing.Point(6, 458);
             this.labMapLevel.Name = "labMapLevel";
             this.labMapLevel.Size = new System.Drawing.Size(35, 13);
             this.labMapLevel.TabIndex = 1;

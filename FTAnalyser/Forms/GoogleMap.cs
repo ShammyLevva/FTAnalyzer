@@ -45,15 +45,20 @@ namespace FTAnalyzer.Forms
             webBrowser.Hide();
         }
 
-        public void setLocation(FactLocation loc, int level)
+        public bool setLocation(FactLocation loc, int level)
         {
+            this.Cursor = Cursors.WaitCursor;
             while (!loaded)
             {
                 Application.DoEvents();
             }
             location = loc.ToString();
             GeoResponse res = CallGeoWS(location);
-            string status = res.Status;
+            if (res.Status != "OK")
+            {
+                this.Cursor = Cursors.Default;
+                return false;
+            }            
             double lat = res.Results[0].Geometry.Location.Lat;
             double lng = res.Results[0].Geometry.Location.Lng;
             Object[] args = new Object[] { lat, lng };
@@ -62,7 +67,7 @@ namespace FTAnalyzer.Forms
             var viewport = res.Results[0].Geometry.ViewPort;
             args = new Object[] { viewport.NorthEast.Lat, viewport.NorthEast.Lng, viewport.SouthWest.Lat, viewport.SouthWest.Lng };
             webBrowser.Document.InvokeScript("setViewport", args);
-            
+
             int returnlevel = getFactLocation(res.Results[0].Types);
             if (returnlevel != FactLocation.UNKNOWN)
             {
@@ -77,6 +82,8 @@ namespace FTAnalyzer.Forms
                 labMapLevel.Text = "Best guess for " + loc.getLocation(level) + " is " + res.Results[0].ReturnAddress;
             }
             webBrowser.Show();
+            this.Cursor = Cursors.Default;
+            return true;
         }
 
         private int getFactLocation(string[] locationTypes)

@@ -312,7 +312,7 @@ namespace FTAnalyzer
                             dateValue = dateValue.Substring(0, dateValue.Length - 3); // remove the trailing / and 2 digits
                     }
                     else
-                        throw new Exception("Unrecognised date format for :" + dateValue);
+                        throw new Exception("Unrecognised date format for : " + dateValue);
                 }
                 // Now process matched string - if gDouble is not null we have a double date to check
                 string day = gDay.ToString().Trim(), month = gMonth.ToString().Trim(), year = gYear.ToString().Trim();
