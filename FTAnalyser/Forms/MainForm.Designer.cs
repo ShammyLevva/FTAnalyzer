@@ -129,6 +129,7 @@
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.btnShowMap = new System.Windows.Forms.Button();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.cenDate = new Controls.CensusDateSelector();
             this.censusCountry = new Controls.CensusCountry();
@@ -413,8 +414,10 @@
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgIndividuals.Location = new System.Drawing.Point(3, 3);
+            this.dgIndividuals.MultiSelect = false;
             this.dgIndividuals.Name = "dgIndividuals";
             this.dgIndividuals.ReadOnly = true;
+            this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgIndividuals.Size = new System.Drawing.Size(925, 396);
             this.dgIndividuals.TabIndex = 0;
             // 
@@ -435,12 +438,15 @@
             this.dgFamilies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFamilies.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgFamilies.Location = new System.Drawing.Point(0, 0);
+            this.dgFamilies.MultiSelect = false;
             this.dgFamilies.Name = "dgFamilies";
+            this.dgFamilies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgFamilies.Size = new System.Drawing.Size(931, 402);
             this.dgFamilies.TabIndex = 1;
             // 
             // tabLocations
             // 
+            this.tabLocations.Controls.Add(this.btnShowMap);
             this.tabLocations.Controls.Add(this.tabCtrlLocations);
             this.tabLocations.Location = new System.Drawing.Point(4, 22);
             this.tabLocations.Name = "tabLocations";
@@ -459,10 +465,10 @@
             this.tabCtrlLocations.Controls.Add(this.tabRegions);
             this.tabCtrlLocations.Controls.Add(this.tabParishes);
             this.tabCtrlLocations.Controls.Add(this.tabAddresses);
-            this.tabCtrlLocations.Location = new System.Drawing.Point(2, 0);
+            this.tabCtrlLocations.Location = new System.Drawing.Point(2, 18);
             this.tabCtrlLocations.Name = "tabCtrlLocations";
             this.tabCtrlLocations.SelectedIndex = 0;
-            this.tabCtrlLocations.Size = new System.Drawing.Size(929, 402);
+            this.tabCtrlLocations.Size = new System.Drawing.Size(929, 384);
             this.tabCtrlLocations.TabIndex = 0;
             // 
             // tabCountries
@@ -471,7 +477,7 @@
             this.tabCountries.Location = new System.Drawing.Point(4, 22);
             this.tabCountries.Name = "tabCountries";
             this.tabCountries.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCountries.Size = new System.Drawing.Size(921, 376);
+            this.tabCountries.Size = new System.Drawing.Size(921, 358);
             this.tabCountries.TabIndex = 0;
             this.tabCountries.Text = "Countries";
             this.tabCountries.UseVisualStyleBackColor = true;
@@ -486,8 +492,10 @@
             this.dgCountries.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgCountries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCountries.Location = new System.Drawing.Point(0, 3);
+            this.dgCountries.MultiSelect = false;
             this.dgCountries.Name = "dgCountries";
-            this.dgCountries.Size = new System.Drawing.Size(918, 371);
+            this.dgCountries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgCountries.Size = new System.Drawing.Size(918, 353);
             this.dgCountries.TabIndex = 0;
             this.toolTips.SetToolTip(this.dgCountries, "Double click on Country name to see list of individuals with that Country.");
             this.dgCountries.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCountries_CellDoubleClick);
@@ -498,7 +506,7 @@
             this.tabRegions.Location = new System.Drawing.Point(4, 22);
             this.tabRegions.Name = "tabRegions";
             this.tabRegions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRegions.Size = new System.Drawing.Size(921, 376);
+            this.tabRegions.Size = new System.Drawing.Size(921, 358);
             this.tabRegions.TabIndex = 1;
             this.tabRegions.Text = "Regions";
             this.tabRegions.UseVisualStyleBackColor = true;
@@ -513,7 +521,9 @@
             this.dgRegions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgRegions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgRegions.Location = new System.Drawing.Point(2, 3);
+            this.dgRegions.MultiSelect = false;
             this.dgRegions.Name = "dgRegions";
+            this.dgRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgRegions.Size = new System.Drawing.Size(918, 370);
             this.dgRegions.TabIndex = 1;
             this.toolTips.SetToolTip(this.dgRegions, "Double click on Region name to see list of individuals with that Region.");
@@ -524,7 +534,7 @@
             this.tabParishes.Controls.Add(this.dgParishes);
             this.tabParishes.Location = new System.Drawing.Point(4, 22);
             this.tabParishes.Name = "tabParishes";
-            this.tabParishes.Size = new System.Drawing.Size(921, 376);
+            this.tabParishes.Size = new System.Drawing.Size(921, 358);
             this.tabParishes.TabIndex = 2;
             this.tabParishes.Text = "Parishes";
             this.tabParishes.UseVisualStyleBackColor = true;
@@ -539,7 +549,9 @@
             this.dgParishes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgParishes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgParishes.Location = new System.Drawing.Point(2, 3);
+            this.dgParishes.MultiSelect = false;
             this.dgParishes.Name = "dgParishes";
+            this.dgParishes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgParishes.Size = new System.Drawing.Size(918, 370);
             this.dgParishes.TabIndex = 1;
             this.dgParishes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgParishes_CellDoubleClick);
@@ -549,7 +561,7 @@
             this.tabAddresses.Controls.Add(this.dgAddresses);
             this.tabAddresses.Location = new System.Drawing.Point(4, 22);
             this.tabAddresses.Name = "tabAddresses";
-            this.tabAddresses.Size = new System.Drawing.Size(921, 376);
+            this.tabAddresses.Size = new System.Drawing.Size(921, 358);
             this.tabAddresses.TabIndex = 3;
             this.tabAddresses.Text = "Addresses";
             this.tabAddresses.UseVisualStyleBackColor = true;
@@ -564,7 +576,9 @@
             this.dgAddresses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgAddresses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgAddresses.Location = new System.Drawing.Point(2, 3);
+            this.dgAddresses.MultiSelect = false;
             this.dgAddresses.Name = "dgAddresses";
+            this.dgAddresses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgAddresses.Size = new System.Drawing.Size(918, 370);
             this.dgAddresses.TabIndex = 1;
             this.dgAddresses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAddresses_CellDoubleClick);
@@ -587,7 +601,9 @@
             this.dgOccupations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgOccupations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgOccupations.Location = new System.Drawing.Point(0, 0);
+            this.dgOccupations.MultiSelect = false;
             this.dgOccupations.Name = "dgOccupations";
+            this.dgOccupations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgOccupations.Size = new System.Drawing.Size(931, 402);
             this.dgOccupations.TabIndex = 2;
             this.dgOccupations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgOccupations_CellDoubleClick);
@@ -613,7 +629,9 @@
             this.dgLooseDeaths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLooseDeaths.Location = new System.Drawing.Point(0, 0);
+            this.dgLooseDeaths.MultiSelect = false;
             this.dgLooseDeaths.Name = "dgLooseDeaths";
+            this.dgLooseDeaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgLooseDeaths.Size = new System.Drawing.Size(931, 402);
             this.dgLooseDeaths.TabIndex = 0;
             // 
@@ -1215,6 +1233,16 @@
             // 
             this.printDialog.UseEXDialog = true;
             // 
+            // btnShowMap
+            // 
+            this.btnShowMap.Location = new System.Drawing.Point(813, 6);
+            this.btnShowMap.Name = "btnShowMap";
+            this.btnShowMap.Size = new System.Drawing.Size(98, 23);
+            this.btnShowMap.TabIndex = 2;
+            this.btnShowMap.Text = "Show Map";
+            this.btnShowMap.UseVisualStyleBackColor = true;
+            this.btnShowMap.Click += new System.EventHandler(this.btnShowMap_Click);
+            // 
             // rtbOutput
             // 
             this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
@@ -1484,6 +1512,7 @@
         private System.Windows.Forms.CheckBox ckbLCIgnoreCountry;
         private System.Windows.Forms.TabPage tabOccupations;
         private System.Windows.Forms.DataGridView dgOccupations;
+        private System.Windows.Forms.Button btnShowMap;
     }
 }
 

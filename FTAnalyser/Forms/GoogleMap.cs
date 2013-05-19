@@ -39,10 +39,12 @@ namespace FTAnalyzer.Forms
             GeoResponse res = CallGeoWS(location);
             double lat = res.Results[0].Geometry.Location.Lat;
             double lng = res.Results[0].Geometry.Location.Lng;
-            Object[] args = new Object[2];
-            args[0] = lat;
-            args[1] = lng;
+            Object[] args = new Object[] { lat, lng };
             Object marker = webBrowser.Document.InvokeScript("frontAndCenter", args);
+
+            var viewport = res.Results[0].Geometry.ViewPort;
+            args = new Object[] { viewport.NorthEast.Lat, viewport.NorthEast.Lng, viewport.SouthWest.Lat, viewport.SouthWest.Lng };
+            webBrowser.Document.InvokeScript("setViewport", args);
             webBrowser.Show();
         }
 
@@ -56,7 +58,8 @@ namespace FTAnalyzer.Forms
             request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
             request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(GeoResponse));
-            var res = (GeoResponse)serializer.ReadObject(request.GetResponse().GetResponseStream());
+            var stream = request.GetResponse().GetResponseStream();
+            var res = (GeoResponse)serializer.ReadObject(stream);
             return res;
         }
 
@@ -79,6 +82,8 @@ namespace FTAnalyzer.Forms
                 {
                     [DataMember(Name = "location")]
                     public CLocation Location { get; set; }
+                    [DataMember(Name = "viewport")]
+                    public CViewPort ViewPort { get; set; }
 
                     [DataContract]
                     public class CLocation
@@ -87,6 +92,15 @@ namespace FTAnalyzer.Forms
                         public double Lat { get; set; }
                         [DataMember(Name = "lng")]
                         public double Lng { get; set; }
+                    }
+
+                    [DataContract]
+                    public class CViewPort
+                    {
+                        [DataMember(Name = "southwest")]
+                        public CLocation SouthWest { get; set; }
+                        [DataMember(Name = "northeast")]
+                        public CLocation NorthEast { get; set; }
                     }
                 }
             }

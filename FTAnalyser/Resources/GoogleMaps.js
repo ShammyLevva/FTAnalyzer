@@ -26,3 +26,9 @@ function frontAndCenter(lat, lng) {
     addMarker(lat, lng);
 }
 
+function setViewport(neLat, neLng, swLat, swLng) {
+    var ne = new google.maps.LatLng(neLat, neLng);
+    var sw = new google.maps.LatLng(swLat, swLng);
+    var viewport = new google.maps.LatLngBounds(sw, ne);
+    map.fitBounds(viewport);
+}

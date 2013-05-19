@@ -14,7 +14,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.4.3.0";
+        private string VERSION = "1.5.0.0";
         private bool _checkForUpdatesEnabled = true;
         private System.Threading.Timer _timerCheckForUpdates;
 
@@ -209,17 +209,9 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             FactLocation loc = dgRegions.CurrentRow == null ? new FactLocation() : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
-            if (Control.ModifierKeys == Keys.Shift)
-            {
-                // Do geo coding stuff
-                Forms.GoogleMap frmMap = new Forms.GoogleMap();
-                frmMap.setLocation(loc, FactLocation.REGION);
-                frmMap.Show();
-            } else {
-                Forms.People frmInd = new Forms.People();
-                frmInd.setLocation(loc, FactLocation.REGION);
-                frmInd.Show();
-            }
+            Forms.People frmInd = new Forms.People();
+            frmInd.setLocation(loc, FactLocation.REGION);
+            frmInd.Show();
             HourGlass(false);
         }
 
@@ -807,5 +799,41 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        private void btnShowMap_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            // get the tab
+            FactLocation loc = null;
+            int locType = FactLocation.COUNTRY;
+            switch (tabCtrlLocations.SelectedTab.Text)
+            {
+                case "Countries":
+                    loc = dgCountries.CurrentRow == null ? null : (FactLocation)dgCountries.CurrentRow.DataBoundItem;
+                    locType = FactLocation.COUNTRY;
+                    break;
+                case "Regions":
+                    loc = dgRegions.CurrentRow == null ? null : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
+                    locType = FactLocation.REGION;
+                    break;
+                case "Parishes":
+                    loc = dgParishes.CurrentRow == null ? null : (FactLocation)dgParishes.CurrentRow.DataBoundItem;
+                    locType = FactLocation.PARISH;
+                    break;
+                case "Addresses":
+                    loc = dgAddresses.CurrentRow == null ? null : (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
+                    locType = FactLocation.ADDRESS;
+                    break;
+            }
+            if (loc == null)
+            {
+                MessageBox.Show("Please select a location to show on the map.");
+                return;
+            }
+            // Do geo coding stuff
+            Forms.GoogleMap frmMap = new Forms.GoogleMap();
+            frmMap.setLocation(loc, locType);
+            frmMap.Show();
+            HourGlass(false);
+        }
     }
 }
