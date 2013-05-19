@@ -174,6 +174,7 @@ namespace FTAnalyzer
                         }
                     }
                     line = nextline;
+                    System.Windows.Forms.Application.DoEvents();
                 } // end while
 
             }
