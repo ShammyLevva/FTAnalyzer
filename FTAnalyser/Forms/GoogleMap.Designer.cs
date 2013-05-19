@@ -29,31 +29,47 @@
         private void InitializeComponent()
         {
             this.webBrowser = new System.Windows.Forms.WebBrowser();
+            this.labMapLevel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // webBrowser
             // 
-            this.webBrowser.Location = new System.Drawing.Point(12, 12);
+            this.webBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser.Location = new System.Drawing.Point(0, 0);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(729, 482);
+            this.webBrowser.Size = new System.Drawing.Size(886, 506);
             this.webBrowser.TabIndex = 0;
             this.webBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser_DocumentCompleted);
+            // 
+            // labMapLevel
+            // 
+            this.labMapLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.labMapLevel.AutoSize = true;
+            this.labMapLevel.Location = new System.Drawing.Point(6, 6);
+            this.labMapLevel.Name = "labMapLevel";
+            this.labMapLevel.Size = new System.Drawing.Size(35, 13);
+            this.labMapLevel.TabIndex = 1;
+            this.labMapLevel.Text = "label1";
             // 
             // GoogleMap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(753, 506);
+            this.ClientSize = new System.Drawing.Size(886, 506);
+            this.Controls.Add(this.labMapLevel);
             this.Controls.Add(this.webBrowser);
             this.Name = "GoogleMap";
             this.Text = "Google Map";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.WebBrowser webBrowser;
+        private System.Windows.Forms.Label labMapLevel;
     }
 }

@@ -99,6 +99,7 @@ namespace FTAnalyzer
             {
                 this.Cursor = storedCursor;
             }
+            Application.DoEvents();
         }
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)

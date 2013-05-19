@@ -17,7 +17,7 @@ namespace FTAnalyzer
 				LANARKSHIRE = "Lanarkshire", BANFFSHIRE = "Banffshire", ANGUS = "Angus", MIDLOTHIAN = "Midlothian", FIFE = "Fife",
 				MIDDLESEX = "Middlesex", LANCASHIRE = "Lancashire";
 		
-		public const int COUNTRY = 0, REGION = 1, PARISH = 2, ADDRESS = 3, PLACE = 4;
+		public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, PARISH = 2, ADDRESS = 3, PLACE = 4;
 
 		private string location;
 		internal string country;

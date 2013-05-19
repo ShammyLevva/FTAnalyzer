@@ -579,7 +579,7 @@
             this.dgAddresses.MultiSelect = false;
             this.dgAddresses.Name = "dgAddresses";
             this.dgAddresses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgAddresses.Size = new System.Drawing.Size(918, 370);
+            this.dgAddresses.Size = new System.Drawing.Size(918, 363);
             this.dgAddresses.TabIndex = 1;
             this.dgAddresses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAddresses_CellDoubleClick);
             // 
