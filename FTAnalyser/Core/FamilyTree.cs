@@ -762,6 +762,7 @@ namespace FTAnalyzer
             List<Individual> directs = getAllRelationsOfType(Individual.DIRECT);
             foreach(Individual i in directs)
             {
+                // add all direct ancestors budgie codes
                 i.BudgieCode = (i.Ahnentafel).ToString().PadLeft(lenAhnentafel,'0') + "d";
             }
             AddToQueue(queue, directs);
@@ -1003,9 +1004,9 @@ namespace FTAnalyzer
             }
         }
 
-        public List<Individual> AllWorkers(string job)
+        public SortableBindingList<Individual> AllWorkers(string job)
         {
-            return occupations[job];
+            return new SortableBindingList<Individual>(occupations[job]);
         }
 
         #endregion

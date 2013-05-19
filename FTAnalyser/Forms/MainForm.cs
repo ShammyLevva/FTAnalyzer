@@ -120,21 +120,21 @@ namespace FTAnalyzer
                 {
                     SortableBindingList<IDisplayIndividual> list = ft.AllDisplayIndividuals;
                     dgIndividuals.DataSource = list;
-                    dgIndividuals.Sort(dgIndividuals.Columns[0], ListSortDirection.Ascending);
+                    dgIndividuals.Sort(dgIndividuals.Columns["IndividualID"], ListSortDirection.Ascending);
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
                 else if (tabSelector.SelectedTab == tabFamilies)
                 {
                     SortableBindingList<IDisplayFamily> list = ft.AllDisplayFamilies;
                     dgFamilies.DataSource = list;
-                    dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
+                    dgFamilies.Sort(dgFamilies.Columns["FamilyGed"], ListSortDirection.Ascending);
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
                 else if (tabSelector.SelectedTab == tabOccupations)
                 {
                     SortableBindingList<IDisplayOccupation> list = ft.AllDisplayOccupations;
                     dgOccupations.DataSource = list;
-                    dgOccupations.Sort(dgOccupations.Columns[0], ListSortDirection.Ascending);
+                    dgOccupations.Sort(dgOccupations.Columns["Occupation"], ListSortDirection.Ascending);
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
                 else if (tabSelector.SelectedTab == tabCensus)

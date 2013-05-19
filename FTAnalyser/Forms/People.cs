@@ -36,7 +36,7 @@ namespace FTAnalyzer.Forms
             dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
         }
 
-        public void setWorkers(string job, List<Individual> workers)
+        public void setWorkers(string job, SortableBindingList<Individual> workers)
         {
             this.Text = "Individuals whose occupation was a " + job;
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();

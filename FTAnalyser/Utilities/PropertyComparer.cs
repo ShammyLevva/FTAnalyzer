@@ -24,7 +24,23 @@ namespace FTAnalyzer.Utilities
 
         public int Compare(T x, T y)
         {
-            return this.reverse * this.comparer.Compare(this.propertyDescriptor.GetValue(x), this.propertyDescriptor.GetValue(y));
+            var xValue = this.propertyDescriptor.GetValue(x);
+            var yValue = this.propertyDescriptor.GetValue(y);
+            string xString = xValue == null ? null : xValue.ToString();
+            string yString = yValue == null ? null : yValue.ToString();
+            if (String.IsNullOrEmpty(xString) && string.IsNullOrEmpty(yString))
+            {
+                return 0;
+            }
+            else if (string.IsNullOrEmpty(xString))
+            {
+                return this.reverse;
+            }
+            else if (string.IsNullOrEmpty(yString))
+            {
+                return -1 * this.reverse;
+            }
+            return this.reverse * this.comparer.Compare(xValue, yValue);
         }
 
         #endregion

@@ -61,7 +61,7 @@ namespace FTAnalyzer.Utilities
             }
 
             comparer.SetPropertyAndDirection(property, direction);
-            itemsList.Sort(comparer);
+            MergeSort(itemsList, comparer);
 
             this.propertyDescriptor = property;
             this.listSortDirection = direction;
@@ -93,5 +93,63 @@ namespace FTAnalyzer.Utilities
 
             return -1;
         }
+
+        private void MergeSort(List<T> inputList, PropertyComparer<T> comparer)
+        {
+            int left = 0;
+            int right = inputList.Count - 1;
+            InternalMergeSort(inputList, comparer, left, right);
+        }
+
+        private void InternalMergeSort(List<T> inputList, PropertyComparer<T> comparer, int left, int right)
+        {
+            int mid = 0;
+
+            if (left < right)
+            {
+                mid = (left + right) / 2;
+                InternalMergeSort(inputList, comparer, left, mid);
+                InternalMergeSort(inputList, comparer, (mid + 1), right);
+                MergeSortedList(inputList, comparer, left, mid, right);
+            }
+        }
+
+        private void MergeSortedList(List<T> inputList, PropertyComparer<T> comparer, int left, int mid, int right)
+        {
+            int total_elements = right - left + 1; //BODMAS rule
+            int right_start = mid + 1;
+            int temp_location = left;
+            List<T> tempList = new List<T>();
+
+            while ((left <= mid) && right_start <= right)
+            {
+                if (comparer.Compare(inputList[left], inputList[right_start]) <= 0)
+                {
+                    tempList.Add(inputList[left++]);
+                }
+                else
+                {
+                    tempList.Add(inputList[right_start++]);
+                }
+            }
+
+            if (left > mid)
+            {
+                for (int j = right_start; j <= right; j++)
+                    tempList.Add(inputList[right_start++]);
+            }
+            else
+            {
+                for (int j = left; j <= mid; j++)
+                    tempList.Add(inputList[left++]);
+            }
+
+            //Array.Copy(tempArray, 0, inputArray, temp_location, total_elements); // just another way of accomplishing things (in-built copy)
+            for (int i = 0, j = temp_location; i < total_elements; i++, j++)
+            {
+                inputList[j] = tempList[i];
+            }
+        }
+
     }
 }

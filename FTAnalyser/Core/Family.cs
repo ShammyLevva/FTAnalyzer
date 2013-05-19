@@ -329,7 +329,7 @@ namespace FTAnalyzer
             Individual spouse = ind.isMale() ? Wife : Husband;
             if (spouse != null && spouse.BudgieCode == string.Empty)
             {
-                spouse.BudgieCode = ind.BudgieCode + "s";
+                spouse.BudgieCode = ind.BudgieCode + "*s";
             }
             List<Individual> sortedChildren = children.OrderBy(c => c.BirthDate).ToList();
             int directChild = 0;
