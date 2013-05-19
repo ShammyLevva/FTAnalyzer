@@ -802,7 +802,7 @@ namespace FTAnalyzer
 
         private void btnShowMap_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            Application.UseWaitCursor = true;
             // get the tab
             FactLocation loc = null;
             int locType = FactLocation.COUNTRY;
@@ -836,7 +836,7 @@ namespace FTAnalyzer
                 frmMap.Show();
             else
                 MessageBox.Show("Unable to find location : " + loc.getLocation(locType));
-            HourGlass(false);
+            Application.UseWaitCursor = false;
         }
     }
 }
