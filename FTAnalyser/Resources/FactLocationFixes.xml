@@ -17,6 +17,10 @@
     <CountryTypo from="UK."     to="England" />
     <CountryTypo from="U.K"     to="England" />
     <CountryTypo from="U.K."    to="England" />
+    <CountryTypo from="Eng."    to="England" />
+    <CountryTypo from="Eng"     to="England" />
+    <CountryTypo from="ENG."    to="England" />
+    <CountryTypo from="ENG"     to="England" />
     <CountryTypo from="GB"      to="England" />
     <CountryTypo from="GB."     to="England" />
     <CountryTypo from="G B"     to="England" />
@@ -27,6 +31,8 @@
     <CountryTypo from="AUS"     to="Australia" />
     <CountryTypo from="Eire"    to="Ireland" />
     <CountryTypo from="SCT"     to="Scotland" />
+    <CountryTypo from="Scot"    to="Scotland" />
+    <CountryTypo from="Scot."   to="Scotland" />
   </CountryTypos>
   <RegionTypos>
     <RegionTypo from="ABD"            to="Aberdeenshire" />
@@ -218,7 +224,6 @@
     <CountryToRegion region="Leicestershire"      country="England" regionID="Leicester" />
     <CountryToRegion region="Lincolnshire"        country="England" regionID="Lincoln" />
     <CountryToRegion region="Middlesex"           country="England" regionID="Middlesex" />
-    <CountryToRegion region="Monmouthshire"       country="England" regionID="Monmouth" />
     <CountryToRegion region="Norfolk"             country="England" regionID="Norfolk" />
     <CountryToRegion region="Northamptonshire"    country="England" regionID="Northampton" />
     <CountryToRegion region="Northumberland"      country="England" regionID="Northumberland" />
@@ -252,10 +257,12 @@
     <CountryToRegion region="Cardiganshire"       country="Wales" regionID="Cardigan" />
     <CountryToRegion region="Carmarthenshire"     country="Wales" regionID="Carmarthen" />
     <CountryToRegion region="Denbighshire"        country="Wales" regionID="Denbigh" />
+    <CountryToRegion region="Flintshire"          country="Wales" regionID="Flint" />
     <CountryToRegion region="Glamorganshire"      country="Wales" regionID="Glamorgan" />
     <CountryToRegion region="Gwynedd"             country="Wales" regionID="Gwynedd" />
     <CountryToRegion region="Merionethshire"      country="Wales" regionID="Merioneth" />
     <CountryToRegion region="Mid-Glamorgan"       country="Wales" regionID="Mid-Glamorgan" />
+    <CountryToRegion region="Monmouthshire"       country="Wales" regionID="Monmouth" />
     <CountryToRegion region="Montgomeryshire"     country="Wales" regionID="Montgomery" />
     <CountryToRegion region="Pembrokeshire"       country="Wales" regionID="Pembroke" />
     <CountryToRegion region="Radnorshire"         country="Wales" regionID="Radnor" />
@@ -379,6 +386,7 @@
     <RegionToParish parish="London"     region="Middlesex" />
     <RegionToParish parish="Manchester" region="Lancashire" />
     <RegionToParish parish="Liverpool"  region="Lancashire" />
+    <RegionToParish parish="Cardiff"    region="Glamorganshire" />
 
     <RegionToParish parish="Toronto"    region="Ontario" />
     <RegionToParish parish="Vancouver"  region="British Columbia" />
