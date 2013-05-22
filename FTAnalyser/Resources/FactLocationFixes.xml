@@ -249,6 +249,8 @@
     <CountryToRegion region="Birmingham"          country="England" regionID="Birmingham" />
     <CountryToRegion region="London"              country="England" regionID="London" />
     <CountryToRegion region="Bristol"             country="England" regionID="Bristol" />
+    <CountryToRegion region="Oxford"              country="England" regionID="Oxford" />
+    <CountryToRegion region="Newcastle"           country="England" regionID="Newcastle" />
 
     <!-- Welsh Regions -->
     <CountryToRegion region="Anglesey"            country="Wales" regionID="Anglesey" />
@@ -378,15 +380,23 @@
     <CountryToRegion region="New South Wales"       country="Australia" regionID="New South Wales" />
   </DemoteCountries>                                                          
   <DemoteRegions>
-    <RegionToParish parish="Aberdeen"   region="Aberdeenshire" />
-    <RegionToParish parish="Ayr"        region="Ayrshire" />
-    <RegionToParish parish="Glasgow"    region="Lanarkshire" />
-    <RegionToParish parish="Dundee"     region="Angus" />
-    <RegionToParish parish="Edinburgh"  region="Midlothian" />
-    <RegionToParish parish="London"     region="Middlesex" />
-    <RegionToParish parish="Manchester" region="Lancashire" />
-    <RegionToParish parish="Liverpool"  region="Lancashire" />
-    <RegionToParish parish="Cardiff"    region="Glamorganshire" />
+    <RegionToParish parish="Aberdeen"      region="Aberdeenshire" />
+    <RegionToParish parish="Ayr"           region="Ayrshire" />
+    <RegionToParish parish="Glasgow"       region="Lanarkshire" />
+    <RegionToParish parish="Inverness"     region="Inverness-shire" />
+    <RegionToParish parish="Dundee"        region="Angus" />
+    <RegionToParish parish="Edinburgh"     region="Midlothian" />
+    <RegionToParish parish="Falkirk"       region="West Lothian" />
+    <RegionToParish parish="Stirling"      region="Stirlingshire" />
+    <RegionToParish parish="Perth"         region="Perthshire" />
+    <RegionToParish parish="London"        region="Middlesex" />
+    <RegionToParish parish="Manchester"    region="Lancashire" />
+    <RegionToParish parish="Liverpool"     region="Lancashire" />
+    <RegionToParish parish="Cardiff"       region="Glamorganshire" />
+    <RegionToParish parish="Newcastle"     region="Northumberland" />
+    <RegionToParish parish="Oxford"        region="Oxfordshire" />
+    <RegionToParish parish="Southhampton"  region="Hampshire" />
+    <RegionToParish parish="Isle of Wight" region="Hampshire" />
 
     <RegionToParish parish="Toronto"    region="Ontario" />
     <RegionToParish parish="Vancouver"  region="British Columbia" />
