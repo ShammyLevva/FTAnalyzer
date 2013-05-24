@@ -72,5 +72,10 @@ namespace FTAnalyzer.Forms
             System.Diagnostics.Debug.Print("DocumentCompleted called");
         }
 
+        private void labTOU_Click(object sender, EventArgs e)
+        {
+            webBrowser.Navigate("http://www.microsoft.com/Maps/product/terms.html");
+        }
+
     }
 }

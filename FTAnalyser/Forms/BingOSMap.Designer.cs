@@ -58,11 +58,14 @@
             // 
             this.labTOU.AutoSize = true;
             this.labTOU.Dock = System.Windows.Forms.DockStyle.Right;
+            this.labTOU.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labTOU.ForeColor = System.Drawing.SystemColors.Highlight;
             this.labTOU.Location = new System.Drawing.Point(632, 0);
             this.labTOU.Name = "labTOU";
             this.labTOU.Size = new System.Drawing.Size(254, 13);
             this.labTOU.TabIndex = 2;
             this.labTOU.Text = "http://www.microsoft.com/Maps/product/terms.html";
+            this.labTOU.Click += new System.EventHandler(this.labTOU_Click);
             // 
             // BingOSMap
             // 
