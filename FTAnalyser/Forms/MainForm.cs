@@ -9,12 +9,13 @@ using System.Xml;
 using System.IO;
 using Printing.DataGridViewPrint.Tools;
 using FTAnalyzer.Utilities;
+using FTAnalyzer.Forms;
 
 namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.5.0.0";
+        private string VERSION = "1.5.1.0";
         private bool _checkForUpdatesEnabled = true;
         private System.Threading.Timer _timerCheckForUpdates;
 
@@ -800,12 +801,56 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        private void setAsRootToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
+            if (ind != null)
+            {
+                ft.SetRelations(ind.GedcomID);
+                dgIndividuals.Refresh();
+                MessageBox.Show("Root person set as " + ind.Name + "\n\n" + ft.PrintRelationCount());
+            }
+            HourGlass(false);
+        }
+
         private void btnShowMap_Click(object sender, EventArgs e)
         {
-            Application.UseWaitCursor = true;
-            // get the tab
+            this.Cursor = Cursors.WaitCursor;
             FactLocation loc = null;
+            int locType = getMapLocationType(out loc);
+            if (loc != null)
+            {   // Do geo coding stuff
+                GoogleMap frmGoogleMap = new GoogleMap();
+                if (frmGoogleMap.setLocation(loc, locType))
+                    frmGoogleMap.Show();
+                else
+                    MessageBox.Show("Unable to find location : " + loc.getLocation(locType));
+            }
+            this.Cursor = Cursors.Default;
+        }
+
+        private void btnBingOSMap_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            FactLocation loc = null;
+            int locType = getMapLocationType(out loc);
+            if (loc != null)
+            {   // Do geo coding stuff
+                BingOSMap frmBingMap = new BingOSMap();
+                if (frmBingMap.setLocation(loc, locType))
+                    frmBingMap.Show();
+                else
+                    MessageBox.Show("Unable to find location : " + loc.getLocation(locType));
+            }
+            this.Cursor = Cursors.Default;
+        }
+
+        private int getMapLocationType(out FactLocation loc)
+        {
+            // get the tab
             int locType = FactLocation.COUNTRY;
+            loc = null;
             switch (tabCtrlLocations.SelectedTab.Text)
             {
                 case "Countries":
@@ -826,39 +871,8 @@ namespace FTAnalyzer
                     break;
             }
             if (loc == null)
-            {
                 MessageBox.Show("Please select a location to show on the map.");
-                return;
-            }
-            // Do geo coding stuff
-            Forms.GoogleMap frmMap = new Forms.GoogleMap();
-            if (frmMap.setLocation(loc, locType))
-                frmMap.Show();
-            else
-                MessageBox.Show("Unable to find location : " + loc.getLocation(locType));
-            Application.UseWaitCursor = false;
+            return locType;
         }
-
-        private void dgIndividuals_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-
-            }
-        }
-
-        private void setAsRootToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
-            if (ind != null)
-            {
-                ft.SetRelations(ind.GedcomID);
-                dgIndividuals.Refresh();
-                MessageBox.Show("Root person set as " + ind.Name + "\n\n" + ft.PrintRelationCount());
-            }
-            HourGlass(false);
-        }
-
     }
 }

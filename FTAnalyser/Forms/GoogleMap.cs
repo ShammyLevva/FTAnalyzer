@@ -64,29 +64,35 @@ namespace FTAnalyzer.Forms
             Object[] args = new Object[] { lat, lng };
             Object marker = webBrowser.Document.InvokeScript("frontAndCenter", args);
 
+            labMapLevel.Text = locationText(res, loc, level);
             var viewport = res.Results[0].Geometry.ViewPort;
             args = new Object[] { viewport.NorthEast.Lat, viewport.NorthEast.Lng, viewport.SouthWest.Lat, viewport.SouthWest.Lng };
             webBrowser.Document.InvokeScript("setViewport", args);
-
-            int returnlevel = getFactLocation(res.Results[0].Types);
-            if (returnlevel != FactLocation.UNKNOWN)
-            {
-                labMapLevel.Text = "Google found " + loc.getLocation(returnlevel);
-                // if we have different input and output levels, assuming it isn't just a more accurate place in the address field
-                // then also show what Google found
-                if (level != returnlevel && !(level == FactLocation.ADDRESS && returnlevel >= FactLocation.ADDRESS))
-                    labMapLevel.Text += " as " + res.Results[0].ReturnAddress;
-            }
-            else
-            {
-                labMapLevel.Text = "Best guess for " + loc.getLocation(level) + " is " + res.Results[0].ReturnAddress;
-            }
             webBrowser.Show();
             this.Cursor = Cursors.Default;
             return true;
         }
 
-        private int getFactLocation(string[] locationTypes)
+        public static string locationText(GeoResponse res, FactLocation loc, int level)
+        {
+            string output = string.Empty;
+            int returnlevel = getFactLocation(res.Results[0].Types);
+            if (returnlevel != FactLocation.UNKNOWN)
+            {
+                output = "Google found " + loc.getLocation(returnlevel);
+                // if we have different input and output levels, assuming it isn't just a more accurate place in the address field
+                // then also show what Google found
+                if (level != returnlevel && !(level == FactLocation.ADDRESS && returnlevel >= FactLocation.ADDRESS))
+                    output += " as " + res.Results[0].ReturnAddress;
+            }
+            else
+            {
+                output = "Best guess for " + loc.getLocation(level) + " is " + res.Results[0].ReturnAddress;
+            }
+            return output;
+        }
+
+        private static int getFactLocation(string[] locationTypes)
         {
             HashSet<string> types = new HashSet<string>(locationTypes);
             if (types.Contains(PREMISE) || types.Contains(STREET_ADDRESS) || types.Contains(CEMETERY) ||
@@ -104,7 +110,7 @@ namespace FTAnalyzer.Forms
             return FactLocation.UNKNOWN;
         }
 
-        private static GeoResponse CallGeoWS(string address)
+        public static GeoResponse CallGeoWS(string address)
         {
             string url = string.Format(
                     "http://maps.google.com/maps/api/geocode/json?address={0}&region=dk&sensor=false",
@@ -164,7 +170,7 @@ namespace FTAnalyzer.Forms
 
 
         [DataContract]
-        class GeoResponse
+        public class GeoResponse
         {
             [DataMember(Name = "status")]
             public string Status { get; set; }

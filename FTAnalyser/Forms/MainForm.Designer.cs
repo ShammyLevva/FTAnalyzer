@@ -63,6 +63,7 @@
             this.tabFamilies = new System.Windows.Forms.TabPage();
             this.dgFamilies = new System.Windows.Forms.DataGridView();
             this.tabLocations = new System.Windows.Forms.TabPage();
+            this.btnBingOSMap = new System.Windows.Forms.Button();
             this.btnShowMap = new System.Windows.Forms.Button();
             this.tabCtrlLocations = new System.Windows.Forms.TabControl();
             this.tabCountries = new System.Windows.Forms.TabPage();
@@ -435,7 +436,6 @@
             this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgIndividuals.Size = new System.Drawing.Size(925, 396);
             this.dgIndividuals.TabIndex = 0;
-            this.dgIndividuals.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgIndividuals_CellMouseClick);
             // 
             // mnuSetRoot
             // 
@@ -476,6 +476,7 @@
             // 
             // tabLocations
             // 
+            this.tabLocations.Controls.Add(this.btnBingOSMap);
             this.tabLocations.Controls.Add(this.btnShowMap);
             this.tabLocations.Controls.Add(this.tabCtrlLocations);
             this.tabLocations.Location = new System.Drawing.Point(4, 22);
@@ -485,6 +486,16 @@
             this.tabLocations.TabIndex = 4;
             this.tabLocations.Text = "Locations";
             this.tabLocations.UseVisualStyleBackColor = true;
+            // 
+            // btnBingOSMap
+            // 
+            this.btnBingOSMap.Location = new System.Drawing.Point(709, 6);
+            this.btnBingOSMap.Name = "btnBingOSMap";
+            this.btnBingOSMap.Size = new System.Drawing.Size(98, 23);
+            this.btnBingOSMap.TabIndex = 3;
+            this.btnBingOSMap.Text = "Show OS Map";
+            this.btnBingOSMap.UseVisualStyleBackColor = true;
+            this.btnBingOSMap.Click += new System.EventHandler(this.btnBingOSMap_Click);
             // 
             // btnShowMap
             // 
@@ -1527,6 +1538,7 @@
         private System.Windows.Forms.Button btnShowMap;
         private System.Windows.Forms.ContextMenuStrip mnuSetRoot;
         private System.Windows.Forms.ToolStripMenuItem setAsRootToolStripMenuItem;
+        private System.Windows.Forms.Button btnBingOSMap;
     }
 }
 
