@@ -11,12 +11,12 @@ namespace FTAnalyzer
     {
         public static readonly string BIRTH = "BIRT", CHRISTENING = "CHRI",
                 DEATH = "DEAT", BURIAL = "BURI", CENSUS = "CENS",
-                RESIDENCE = "RESI", MARRIAGE = "MARR", RELIGION = "RELI",
+                RESIDENCE = "RESI", MARRIAGE = "MARR", RELFamilySearchON = "RELI",
                 MILITARY = "_MILT", RETIREMENT = "RETI", OCCUPATION = "OCCU",
                 SOCIAL_SECURITY_NO = "SSN", WILL = "WILL", ELECTION = "_ELEC",
                 EMIGRATION = "EMIG", IMMIGRATION = "IMMI", CUSTOM_FACT = "EVEN",
                 CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
-                UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSE", IGISEARCH = "*IGI",
+                UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSE", FamilySearch = "*FamilySearch",
                 CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT", 
                 CHANGE = "*CHNG", LOSTCOUSINS = "*LOST";
 
@@ -32,7 +32,7 @@ namespace FTAnalyzer
         private static readonly HashSet<string> COMMENT_FACTS = new HashSet<string>();
 
         static Fact() {
-            CUSTOM_TAGS.Add("IGI Search", IGISEARCH);
+            CUSTOM_TAGS.Add("FamilySearch Search", FamilySearch);
             CUSTOM_TAGS.Add("Childless", CHILDLESS);
             CUSTOM_TAGS.Add("Contact", CONTACT);
             CUSTOM_TAGS.Add("Witness", WITNESS);
@@ -47,7 +47,7 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("Lost Cousins", LOSTCOUSINS);
             
             COMMENT_FACTS.Add(OCCUPATION);
-            COMMENT_FACTS.Add(RELIGION);
+            COMMENT_FACTS.Add(RELFamilySearchON);
             COMMENT_FACTS.Add(MILITARY);
             COMMENT_FACTS.Add(RETIREMENT);
             COMMENT_FACTS.Add(SOCIAL_SECURITY_NO);
@@ -57,7 +57,7 @@ namespace FTAnalyzer
             COMMENT_FACTS.Add(WITNESS);
             COMMENT_FACTS.Add(UNMARRIED);
             COMMENT_FACTS.Add(UNKNOWN);
-            COMMENT_FACTS.Add(IGISEARCH);
+            COMMENT_FACTS.Add(FamilySearch);
             COMMENT_FACTS.Add(LOSTCOUSINS);
         }
 

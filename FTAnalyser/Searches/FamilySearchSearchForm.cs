@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System.Text;
 namespace FTAnalyzer
 {
-    public abstract class IGISearchForm
+    public abstract class FamilySearchForm
     {
         public const int MARRIAGESEARCH = 1;
         public const int CHILDRENSEARCH = 2;
@@ -17,21 +17,21 @@ namespace FTAnalyzer
         protected TextWriter resultFile;
         protected RichTextBox rtbOutput;
         protected FactLocation defaultLocation = new FactLocation(FactLocation.SCOTLAND);
-        protected IGILocation defLoc = null;
+        protected FamilySearchLocation defLoc = null;
         protected int level;
         protected int resultCount = 0;
         protected int relationTypes = Individual.UNSET;
         protected string surname = "";
         protected bool surnameSearch = false;
 
-        protected static readonly FactDate IGIMAX = new FactDate("31 DEC 1874");
-        protected static readonly FactDate IGIPARENTBIRTHMAX = new FactDate("31 DEC 1860"); //if parents born after than then children are born after IGIMAX
+        protected static readonly FactDate FamilySearchMAX = new FactDate("31 DEC 1874");
+        protected static readonly FactDate FamilySearchPARENTBIRTHMAX = new FactDate("31 DEC 1860"); //if parents born after than then children are born after FamilySearchMAX
 
-        public void SearchIGI(Family family, string dirname, int searchType)
+        public void SearchFamilySearch(Family family, string dirname, int searchType)
         {
             if (family != null)
             {
-                if (family.getPreferredFact(Fact.IGISEARCH) == null && family.Husband != null && family.Wife != null)
+                if (family.getPreferredFact(Fact.FamilySearch) == null && family.Husband != null && family.Wife != null)
                 {   // or we have already flagged marriage fact as having been searched
                     // or either the husband or wife is not present
                     if (surnameSearch)
@@ -40,7 +40,7 @@ namespace FTAnalyzer
                            !family.Wife.Surname.ToUpper().Equals(this.surname))
                             return; // we are doing a surname search and neither of the surnames match.
                     }
-                    if (searchType == IGISearchForm.CHILDRENSEARCH)
+                    if (searchType == FamilySearchForm.CHILDRENSEARCH)
                         ChildrenSearch(family, dirname);
                     else
                         MarriageSearch(family, dirname);
@@ -93,9 +93,9 @@ namespace FTAnalyzer
                     if (marriage == null)
                         marriage = new Fact(Fact.MARRIAGE, FactDate.UNKNOWN_DATE);
                     FactDate marriageDate = marriage.FactDate;
-                    if (!marriageDate.isAfter(IGIMAX) && husband.BirthDate.isBefore(IGIMAX) && wife.BirthDate.isBefore(IGIMAX))
+                    if (!marriageDate.isAfter(FamilySearchMAX) && husband.BirthDate.isBefore(FamilySearchMAX) && wife.BirthDate.isBefore(FamilySearchMAX))
                     {
-                        // proceed if marriage date within IGI Range and both were alive before IGI max date
+                        // proceed if marriage date within FamilySearch Range and both were alive before FamilySearch max date
                         // but don't bother processing if file already exists.
                         if (!marriageDate.isExact())
                         {
@@ -103,7 +103,7 @@ namespace FTAnalyzer
                             if (SetMarriageParameters(husband, wife))
                             {
                                 List<FactLocation> locations = GetLocations(husband, wife, marriage);
-                                CheckIGIAtLocations(locations, filename, IGISearchForm.MARRIAGESEARCH, null);
+                                CheckFamilySearchAtLocations(locations, filename, FamilySearchForm.MARRIAGESEARCH, null);
                             }
                         }
                     }
@@ -111,7 +111,7 @@ namespace FTAnalyzer
             }
         }
 
-        protected abstract void CheckIGIAtLocations(List<FactLocation> locations, string filename, int searchType, string surname);
+        protected abstract void CheckFamilySearchAtLocations(List<FactLocation> locations, string filename, int searchType, string surname);
 
         private void ChildrenSearch(Family family, string dirname)
         {
@@ -124,7 +124,7 @@ namespace FTAnalyzer
                     Individual wife = family.Wife;
                     if (validRelationType(husband, wife))
                     {
-                        if (husband.BirthDate.StartDate < IGIPARENTBIRTHMAX.StartDate && wife.BirthDate.StartDate < IGIPARENTBIRTHMAX.StartDate)
+                        if (husband.BirthDate.StartDate < FamilySearchPARENTBIRTHMAX.StartDate && wife.BirthDate.StartDate < FamilySearchPARENTBIRTHMAX.StartDate)
                         {
                             Fact marriage = family.getPreferredFact(Fact.MARRIAGE);
                             SearchForChildren(husband, wife, marriage, filename);
@@ -174,6 +174,6 @@ namespace FTAnalyzer
             return result;
         }
 
-        protected abstract void FetchIGIDataAndWriteResult(string filename);
+        protected abstract void FetchFamilySearchDataAndWriteResult(string filename);
     }
 }

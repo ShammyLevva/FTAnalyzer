@@ -126,8 +126,8 @@
           <DataField>Relation</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="Religion">
-          <DataField>Religion</DataField>
+        <Field Name="RelFamilySearchon">
+          <DataField>RelFamilySearchon</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Residence">

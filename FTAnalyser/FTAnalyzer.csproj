@@ -161,8 +161,8 @@
     <EmbeddedResource Include="Forms\Controls\CensusDateSelector.resx">
       <DependentUpon>CensusDateSelector.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\IGISearchResultsViewer.resx">
-      <DependentUpon>IGISearchResultsViewer.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FamilySearchResultsViewer.resx">
+      <DependentUpon>FamilySearchResultsViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\People.resx">
       <DependentUpon>People.cs</DependentUpon>
@@ -271,7 +271,7 @@
     </Content>
     <Content Include="Useful URLs.txt" />
     <Compile Include="Core\Displays\IDisplayFamily.cs" />
-    <Compile Include="Core\IGILocation.cs" />
+    <Compile Include="Core\FamilySearchLocation.cs" />
     <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,7 +287,7 @@
     <Compile Include="Core\Displays\IDisplayIndividual.cs" />
     <Compile Include="Core\Parish.cs" />
     <Compile Include="Core\FamilyTree.cs" />
-    <Compile Include="Exceptions\BadIGIDataException.cs" />
+    <Compile Include="Exceptions\BadFamilySearchDataException.cs" />
     <Compile Include="Exceptions\MissingPrimaryKeyException.cs" />
     <Compile Include="Exceptions\DuplicateException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
@@ -322,11 +322,11 @@
     <Compile Include="Forms\Controls\CensusDateSelector.Designer.cs">
       <DependentUpon>CensusDateSelector.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\IGISearchResultsViewer.cs">
+    <Compile Include="Forms\FamilySearchResultsViewer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\IGISearchResultsViewer.Designer.cs">
-      <DependentUpon>IGISearchResultsViewer.cs</DependentUpon>
+    <Compile Include="Forms\FamilySearchResultsViewer.Designer.cs">
+      <DependentUpon>FamilySearchResultsViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\People.cs">
       <SubType>Form</SubType>
@@ -361,15 +361,15 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>NetworkSettings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Searches\IGINewSearchForm.cs" />
-    <Compile Include="Searches\IGISearchForm.cs" />
+    <Compile Include="Searches\FamilySearchNewSearchForm.cs" />
+    <Compile Include="Searches\FamilySearchSearchForm.cs" />
     <Compile Include="Still to Process\GROSearch.cs" />
     <Compile Include="Still to Process\GROSSearch.cs" />
-    <Compile Include="Searches\IGIResultWriter.cs" />
+    <Compile Include="Searches\FamilySearchResultWriter.cs" />
     <Compile Include="Still to Process\IGIDocument.cs" />
-    <Compile Include="Searches\IGIResult.cs" />
+    <Compile Include="Searches\FamilySearchResult.cs" />
     <Compile Include="Still to Process\IGISearch.cs" />
-    <Compile Include="Searches\IGIOldSearchForm.cs" />
+    <Compile Include="Searches\FamilySearchOldSearchForm.cs" />
     <Compile Include="Core\ParishBatch.cs" />
     <Compile Include="Registrations\RegistrationsProcessor.cs" />
     <Compile Include="Registrations\BirthRegistration.cs" />

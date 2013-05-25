@@ -309,7 +309,7 @@ namespace FTAnalyzer
                         gYear = matcher.Groups[3];
                         gDouble = matcher.Groups[4];
                         if (dateValue.Length > 3)
-                            dateValue = dateValue.Substring(0, dateValue.Length - 3); // remove the trailing / and 2 digits
+                            dateValue = dateValue.Substring(0, dateValue.Length - 3); // remove the trailing / and 2 dFamilySearchts
                     }
                     else
                         throw new Exception("Unrecognised date format for : " + dateValue);

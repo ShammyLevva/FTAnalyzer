@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace FTAnalyzer
 {
-    public class IGIResultWriter
+    public class FamilySearchResultWriter
     {
         private TextWriter resultFile;
 
-        public IGIResultWriter(TextWriter resultFile)
+        public FamilySearchResultWriter(TextWriter resultFile)
         {
             this.resultFile = resultFile;
         }
@@ -19,8 +19,8 @@ namespace FTAnalyzer
         private void WriteHeader()
         {
             resultFile.WriteLine("<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>");
-            resultFile.WriteLine("<!DOCTYPE IGIResults [");
-            resultFile.WriteLine("<!ELEMENT IGIResults (Individual*)>");
+            resultFile.WriteLine("<!DOCTYPE FamilySearchResults [");
+            resultFile.WriteLine("<!ELEMENT FamilySearchResults (Individual*)>");
             resultFile.WriteLine("<!ELEMENT Individual (Name,Gender,Birth,Christening,Death,Burial,Father,Mother,Spouse,Marriage)>");
             resultFile.WriteLine("<!ELEMENT Name        (#PCDATA)>");
             resultFile.WriteLine("<!ELEMENT Gender      (#PCDATA)>");
@@ -34,16 +34,16 @@ namespace FTAnalyzer
             resultFile.WriteLine("<!ELEMENT Marriage    (#PCDATA)>");
             resultFile.WriteLine("]>");
 
-            resultFile.WriteLine("<IGIResults>");
+            resultFile.WriteLine("<FamilySearchResults>");
         }
 
         private void writeResultFooter()
         {
-            resultFile.Write("</IGIResults>");
+            resultFile.Write("</FamilySearchResults>");
             resultFile.Close();
         }
 
-        public void writeResult(IGIResult result)
+        public void writeResult(FamilySearchResult result)
         {
             resultFile.WriteLine("<Individual>");
             resultFile.Write("<SearchType>");

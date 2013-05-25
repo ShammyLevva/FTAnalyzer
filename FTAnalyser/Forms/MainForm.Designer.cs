@@ -103,24 +103,24 @@
             this.btnLC1881EW = new System.Windows.Forms.Button();
             this.btnLC1881Canada = new System.Windows.Forms.Button();
             this.btnLC1881Scot = new System.Windows.Forms.Button();
-            this.tabIGISearch = new System.Windows.Forms.TabPage();
+            this.tabFamilySearch = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtIGISurname = new System.Windows.Forms.TextBox();
+            this.txtFamilySearchSurname = new System.Windows.Forms.TextBox();
             this.btnOpenFolder = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbIGISearchRegion = new System.Windows.Forms.RadioButton();
-            this.rbIGISearchCountry = new System.Windows.Forms.RadioButton();
-            this.btnCancelIGISearch = new System.Windows.Forms.Button();
+            this.rbFamilySearchRegion = new System.Windows.Forms.RadioButton();
+            this.rbFamilySearchCountry = new System.Windows.Forms.RadioButton();
+            this.btnCancelFamilySearch = new System.Windows.Forms.Button();
             this.btnViewResults = new System.Windows.Forms.Button();
-            this.pbIGISearch = new System.Windows.Forms.ProgressBar();
-            this.btnIGIMarriageSearch = new System.Windows.Forms.Button();
-            this.btnIGIChildrenSearch = new System.Windows.Forms.Button();
-            this.btnIGIFolderBrowse = new System.Windows.Forms.Button();
-            this.txtIGIfolder = new System.Windows.Forms.TextBox();
+            this.pbFamilySearch = new System.Windows.Forms.ProgressBar();
+            this.btnFamilySearchMarriageSearch = new System.Windows.Forms.Button();
+            this.btnFamilySearchChildrenSearch = new System.Windows.Forms.Button();
+            this.btnFamilySearchFolderBrowse = new System.Windows.Forms.Button();
+            this.txtFamilySearchfolder = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.rtbIGIResults = new FTAnalyzer.Utilities.ScrollingRichTextBox();
-            this.IGIrelationTypes = new Controls.RelationTypes();
-            this.IGIDefaultCountry = new Controls.CensusCountry();
+            this.rtbFamilySearchResults = new FTAnalyzer.Utilities.ScrollingRichTextBox();
+            this.FamilySearchrelationTypes = new Controls.RelationTypes();
+            this.FamilySearchDefaultCountry = new Controls.CensusCountry();
             this.tabTreetops = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgTreeTops = new System.Windows.Forms.DataGridView();
@@ -169,7 +169,7 @@
             this.tabCensus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
             this.tabLostCousins.SuspendLayout();
-            this.tabIGISearch.SuspendLayout();
+            this.tabFamilySearch.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabTreetops.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -315,7 +315,7 @@
             this.tabSelector.Controls.Add(this.tabLooseDeaths);
             this.tabSelector.Controls.Add(this.tabCensus);
             this.tabSelector.Controls.Add(this.tabLostCousins);
-            this.tabSelector.Controls.Add(this.tabIGISearch);
+            this.tabSelector.Controls.Add(this.tabFamilySearch);
             this.tabSelector.Controls.Add(this.tabTreetops);
             this.tabSelector.Controls.Add(this.tabWarDead);
             this.tabSelector.Location = new System.Drawing.Point(0, 27);
@@ -974,29 +974,29 @@
             this.btnLC1881Scot.UseVisualStyleBackColor = true;
             this.btnLC1881Scot.Click += new System.EventHandler(this.btnLC1881Scot_Click);
             // 
-            // tabIGISearch
+            // tabFamilySearch
             // 
-            this.tabIGISearch.Controls.Add(this.label7);
-            this.tabIGISearch.Controls.Add(this.txtIGISurname);
-            this.tabIGISearch.Controls.Add(this.btnOpenFolder);
-            this.tabIGISearch.Controls.Add(this.groupBox1);
-            this.tabIGISearch.Controls.Add(this.btnCancelIGISearch);
-            this.tabIGISearch.Controls.Add(this.btnViewResults);
-            this.tabIGISearch.Controls.Add(this.pbIGISearch);
-            this.tabIGISearch.Controls.Add(this.btnIGIMarriageSearch);
-            this.tabIGISearch.Controls.Add(this.btnIGIChildrenSearch);
-            this.tabIGISearch.Controls.Add(this.btnIGIFolderBrowse);
-            this.tabIGISearch.Controls.Add(this.txtIGIfolder);
-            this.tabIGISearch.Controls.Add(this.label3);
-            this.tabIGISearch.Controls.Add(this.rtbIGIResults);
-            this.tabIGISearch.Controls.Add(this.IGIrelationTypes);
-            this.tabIGISearch.Controls.Add(this.IGIDefaultCountry);
-            this.tabIGISearch.Location = new System.Drawing.Point(4, 22);
-            this.tabIGISearch.Name = "tabIGISearch";
-            this.tabIGISearch.Size = new System.Drawing.Size(931, 402);
-            this.tabIGISearch.TabIndex = 6;
-            this.tabIGISearch.Text = "IGI Search";
-            this.tabIGISearch.UseVisualStyleBackColor = true;
+            this.tabFamilySearch.Controls.Add(this.label7);
+            this.tabFamilySearch.Controls.Add(this.txtFamilySearchSurname);
+            this.tabFamilySearch.Controls.Add(this.btnOpenFolder);
+            this.tabFamilySearch.Controls.Add(this.groupBox1);
+            this.tabFamilySearch.Controls.Add(this.btnCancelFamilySearch);
+            this.tabFamilySearch.Controls.Add(this.btnViewResults);
+            this.tabFamilySearch.Controls.Add(this.pbFamilySearch);
+            this.tabFamilySearch.Controls.Add(this.btnFamilySearchMarriageSearch);
+            this.tabFamilySearch.Controls.Add(this.btnFamilySearchChildrenSearch);
+            this.tabFamilySearch.Controls.Add(this.btnFamilySearchFolderBrowse);
+            this.tabFamilySearch.Controls.Add(this.txtFamilySearchfolder);
+            this.tabFamilySearch.Controls.Add(this.label3);
+            this.tabFamilySearch.Controls.Add(this.rtbFamilySearchResults);
+            this.tabFamilySearch.Controls.Add(this.FamilySearchrelationTypes);
+            this.tabFamilySearch.Controls.Add(this.FamilySearchDefaultCountry);
+            this.tabFamilySearch.Location = new System.Drawing.Point(4, 22);
+            this.tabFamilySearch.Name = "tabFamilySearch";
+            this.tabFamilySearch.Size = new System.Drawing.Size(931, 402);
+            this.tabFamilySearch.TabIndex = 6;
+            this.tabFamilySearch.Text = "FamilySearch Search";
+            this.tabFamilySearch.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
@@ -1007,12 +1007,12 @@
             this.label7.TabIndex = 22;
             this.label7.Text = "Surname";
             // 
-            // txtIGISurname
+            // txtFamilySearchSurname
             // 
-            this.txtIGISurname.Location = new System.Drawing.Point(561, 122);
-            this.txtIGISurname.Name = "txtIGISurname";
-            this.txtIGISurname.Size = new System.Drawing.Size(201, 20);
-            this.txtIGISurname.TabIndex = 21;
+            this.txtFamilySearchSurname.Location = new System.Drawing.Point(561, 122);
+            this.txtFamilySearchSurname.Name = "txtFamilySearchSurname";
+            this.txtFamilySearchSurname.Size = new System.Drawing.Size(201, 20);
+            this.txtFamilySearchSurname.TabIndex = 21;
             // 
             // btnOpenFolder
             // 
@@ -1026,8 +1026,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.rbIGISearchRegion);
-            this.groupBox1.Controls.Add(this.rbIGISearchCountry);
+            this.groupBox1.Controls.Add(this.rbFamilySearchRegion);
+            this.groupBox1.Controls.Add(this.rbFamilySearchCountry);
             this.groupBox1.Location = new System.Drawing.Point(598, 38);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(164, 74);
@@ -1035,38 +1035,38 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search By";
             // 
-            // rbIGISearchRegion
+            // rbFamilySearchRegion
             // 
-            this.rbIGISearchRegion.AutoSize = true;
-            this.rbIGISearchRegion.Location = new System.Drawing.Point(7, 44);
-            this.rbIGISearchRegion.Name = "rbIGISearchRegion";
-            this.rbIGISearchRegion.Size = new System.Drawing.Size(147, 17);
-            this.rbIGISearchRegion.TabIndex = 1;
-            this.rbIGISearchRegion.TabStop = true;
-            this.rbIGISearchRegion.Text = "County / State / Province";
-            this.rbIGISearchRegion.UseVisualStyleBackColor = true;
+            this.rbFamilySearchRegion.AutoSize = true;
+            this.rbFamilySearchRegion.Location = new System.Drawing.Point(7, 44);
+            this.rbFamilySearchRegion.Name = "rbFamilySearchRegion";
+            this.rbFamilySearchRegion.Size = new System.Drawing.Size(147, 17);
+            this.rbFamilySearchRegion.TabIndex = 1;
+            this.rbFamilySearchRegion.TabStop = true;
+            this.rbFamilySearchRegion.Text = "County / State / Province";
+            this.rbFamilySearchRegion.UseVisualStyleBackColor = true;
             // 
-            // rbIGISearchCountry
+            // rbFamilySearchCountry
             // 
-            this.rbIGISearchCountry.AutoSize = true;
-            this.rbIGISearchCountry.Checked = true;
-            this.rbIGISearchCountry.Location = new System.Drawing.Point(7, 20);
-            this.rbIGISearchCountry.Name = "rbIGISearchCountry";
-            this.rbIGISearchCountry.Size = new System.Drawing.Size(61, 17);
-            this.rbIGISearchCountry.TabIndex = 0;
-            this.rbIGISearchCountry.TabStop = true;
-            this.rbIGISearchCountry.Text = "Country";
-            this.rbIGISearchCountry.UseVisualStyleBackColor = true;
+            this.rbFamilySearchCountry.AutoSize = true;
+            this.rbFamilySearchCountry.Checked = true;
+            this.rbFamilySearchCountry.Location = new System.Drawing.Point(7, 20);
+            this.rbFamilySearchCountry.Name = "rbFamilySearchCountry";
+            this.rbFamilySearchCountry.Size = new System.Drawing.Size(61, 17);
+            this.rbFamilySearchCountry.TabIndex = 0;
+            this.rbFamilySearchCountry.TabStop = true;
+            this.rbFamilySearchCountry.Text = "Country";
+            this.rbFamilySearchCountry.UseVisualStyleBackColor = true;
             // 
-            // btnCancelIGISearch
+            // btnCancelFamilySearch
             // 
-            this.btnCancelIGISearch.Location = new System.Drawing.Point(266, 118);
-            this.btnCancelIGISearch.Name = "btnCancelIGISearch";
-            this.btnCancelIGISearch.Size = new System.Drawing.Size(123, 27);
-            this.btnCancelIGISearch.TabIndex = 9;
-            this.btnCancelIGISearch.Text = "Cancel Search";
-            this.btnCancelIGISearch.UseVisualStyleBackColor = true;
-            this.btnCancelIGISearch.Click += new System.EventHandler(this.btnCancelIGISearch_Click);
+            this.btnCancelFamilySearch.Location = new System.Drawing.Point(266, 118);
+            this.btnCancelFamilySearch.Name = "btnCancelFamilySearch";
+            this.btnCancelFamilySearch.Size = new System.Drawing.Size(123, 27);
+            this.btnCancelFamilySearch.TabIndex = 9;
+            this.btnCancelFamilySearch.Text = "Cancel Search";
+            this.btnCancelFamilySearch.UseVisualStyleBackColor = true;
+            this.btnCancelFamilySearch.Click += new System.EventHandler(this.btnCancelFamilySearch_Click);
             // 
             // btnViewResults
             // 
@@ -1078,52 +1078,52 @@
             this.btnViewResults.UseVisualStyleBackColor = true;
             this.btnViewResults.Click += new System.EventHandler(this.btnViewResults_Click);
             // 
-            // pbIGISearch
+            // pbFamilySearch
             // 
-            this.pbIGISearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.pbFamilySearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbIGISearch.Location = new System.Drawing.Point(8, 151);
-            this.pbIGISearch.Name = "pbIGISearch";
-            this.pbIGISearch.Size = new System.Drawing.Size(915, 20);
-            this.pbIGISearch.TabIndex = 6;
-            this.pbIGISearch.Visible = false;
+            this.pbFamilySearch.Location = new System.Drawing.Point(8, 151);
+            this.pbFamilySearch.Name = "pbFamilySearch";
+            this.pbFamilySearch.Size = new System.Drawing.Size(915, 20);
+            this.pbFamilySearch.TabIndex = 6;
+            this.pbFamilySearch.Visible = false;
             // 
-            // btnIGIMarriageSearch
+            // btnFamilySearchMarriageSearch
             // 
-            this.btnIGIMarriageSearch.Location = new System.Drawing.Point(8, 118);
-            this.btnIGIMarriageSearch.Name = "btnIGIMarriageSearch";
-            this.btnIGIMarriageSearch.Size = new System.Drawing.Size(123, 27);
-            this.btnIGIMarriageSearch.TabIndex = 5;
-            this.btnIGIMarriageSearch.Text = "Start Marriage Search";
-            this.btnIGIMarriageSearch.UseVisualStyleBackColor = true;
-            this.btnIGIMarriageSearch.Click += new System.EventHandler(this.btnIGIMarriageSearch_Click);
+            this.btnFamilySearchMarriageSearch.Location = new System.Drawing.Point(8, 118);
+            this.btnFamilySearchMarriageSearch.Name = "btnFamilySearchMarriageSearch";
+            this.btnFamilySearchMarriageSearch.Size = new System.Drawing.Size(123, 27);
+            this.btnFamilySearchMarriageSearch.TabIndex = 5;
+            this.btnFamilySearchMarriageSearch.Text = "Start Marriage Search";
+            this.btnFamilySearchMarriageSearch.UseVisualStyleBackColor = true;
+            this.btnFamilySearchMarriageSearch.Click += new System.EventHandler(this.btnFamilySearchMarriageSearch_Click);
             // 
-            // btnIGIChildrenSearch
+            // btnFamilySearchChildrenSearch
             // 
-            this.btnIGIChildrenSearch.Location = new System.Drawing.Point(137, 118);
-            this.btnIGIChildrenSearch.Name = "btnIGIChildrenSearch";
-            this.btnIGIChildrenSearch.Size = new System.Drawing.Size(123, 27);
-            this.btnIGIChildrenSearch.TabIndex = 4;
-            this.btnIGIChildrenSearch.Text = "Start Children Search";
-            this.btnIGIChildrenSearch.UseVisualStyleBackColor = true;
-            this.btnIGIChildrenSearch.Click += new System.EventHandler(this.btnIGIChildrenSearch_Click);
+            this.btnFamilySearchChildrenSearch.Location = new System.Drawing.Point(137, 118);
+            this.btnFamilySearchChildrenSearch.Name = "btnFamilySearchChildrenSearch";
+            this.btnFamilySearchChildrenSearch.Size = new System.Drawing.Size(123, 27);
+            this.btnFamilySearchChildrenSearch.TabIndex = 4;
+            this.btnFamilySearchChildrenSearch.Text = "Start Children Search";
+            this.btnFamilySearchChildrenSearch.UseVisualStyleBackColor = true;
+            this.btnFamilySearchChildrenSearch.Click += new System.EventHandler(this.btnFamilySearchChildrenSearch_Click);
             // 
-            // btnIGIFolderBrowse
+            // btnFamilySearchFolderBrowse
             // 
-            this.btnIGIFolderBrowse.Location = new System.Drawing.Point(515, 11);
-            this.btnIGIFolderBrowse.Name = "btnIGIFolderBrowse";
-            this.btnIGIFolderBrowse.Size = new System.Drawing.Size(77, 21);
-            this.btnIGIFolderBrowse.TabIndex = 2;
-            this.btnIGIFolderBrowse.Text = "Browse ...";
-            this.btnIGIFolderBrowse.UseVisualStyleBackColor = true;
-            this.btnIGIFolderBrowse.Click += new System.EventHandler(this.btnIGIFolderBrowse_Click);
+            this.btnFamilySearchFolderBrowse.Location = new System.Drawing.Point(515, 11);
+            this.btnFamilySearchFolderBrowse.Name = "btnFamilySearchFolderBrowse";
+            this.btnFamilySearchFolderBrowse.Size = new System.Drawing.Size(77, 21);
+            this.btnFamilySearchFolderBrowse.TabIndex = 2;
+            this.btnFamilySearchFolderBrowse.Text = "Browse ...";
+            this.btnFamilySearchFolderBrowse.UseVisualStyleBackColor = true;
+            this.btnFamilySearchFolderBrowse.Click += new System.EventHandler(this.btnFamilySearchFolderBrowse_Click);
             // 
-            // txtIGIfolder
+            // txtFamilySearchfolder
             // 
-            this.txtIGIfolder.Location = new System.Drawing.Point(137, 12);
-            this.txtIGIfolder.Name = "txtIGIfolder";
-            this.txtIGIfolder.Size = new System.Drawing.Size(372, 20);
-            this.txtIGIfolder.TabIndex = 1;
+            this.txtFamilySearchfolder.Location = new System.Drawing.Point(137, 12);
+            this.txtFamilySearchfolder.Name = "txtFamilySearchfolder";
+            this.txtFamilySearchfolder.Size = new System.Drawing.Size(372, 20);
+            this.txtFamilySearchfolder.TabIndex = 1;
             // 
             // label3
             // 
@@ -1134,31 +1134,31 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Folder to store results in : ";
             // 
-            // rtbIGIResults
+            // rtbFamilySearchResults
             // 
-            this.rtbIGIResults.Location = new System.Drawing.Point(0, 177);
-            this.rtbIGIResults.Name = "rtbIGIResults";
-            this.rtbIGIResults.Size = new System.Drawing.Size(931, 229);
-            this.rtbIGIResults.TabIndex = 12;
-            this.rtbIGIResults.Text = "";
-            this.rtbIGIResults.TextChanged += new System.EventHandler(this.rtbIGIResults_TextChanged);
+            this.rtbFamilySearchResults.Location = new System.Drawing.Point(0, 177);
+            this.rtbFamilySearchResults.Name = "rtbFamilySearchResults";
+            this.rtbFamilySearchResults.Size = new System.Drawing.Size(931, 229);
+            this.rtbFamilySearchResults.TabIndex = 12;
+            this.rtbFamilySearchResults.Text = "";
+            this.rtbFamilySearchResults.TextChanged += new System.EventHandler(this.rtbFamilySearchResults_TextChanged);
             // 
-            // IGIrelationTypes
+            // FamilySearchrelationTypes
             // 
-            this.IGIrelationTypes.Location = new System.Drawing.Point(270, 38);
-            this.IGIrelationTypes.Name = "IGIrelationTypes";
-            this.IGIrelationTypes.Size = new System.Drawing.Size(322, 74);
-            this.IGIrelationTypes.TabIndex = 10;
+            this.FamilySearchrelationTypes.Location = new System.Drawing.Point(270, 38);
+            this.FamilySearchrelationTypes.Name = "FamilySearchrelationTypes";
+            this.FamilySearchrelationTypes.Size = new System.Drawing.Size(322, 74);
+            this.FamilySearchrelationTypes.TabIndex = 10;
             // 
-            // IGIDefaultCountry
+            // FamilySearchDefaultCountry
             // 
-            this.IGIDefaultCountry.Location = new System.Drawing.Point(8, 38);
-            this.IGIDefaultCountry.Name = "IGIDefaultCountry";
-            this.IGIDefaultCountry.Size = new System.Drawing.Size(256, 74);
-            this.IGIDefaultCountry.TabIndex = 7;
-            this.IGIDefaultCountry.Title = "Default Country";
-            this.IGIDefaultCountry.UKEnabled = false;
-            this.IGIDefaultCountry.CountryChanged += new System.EventHandler(this.IGIDefaultCountry_CountryChanged);
+            this.FamilySearchDefaultCountry.Location = new System.Drawing.Point(8, 38);
+            this.FamilySearchDefaultCountry.Name = "FamilySearchDefaultCountry";
+            this.FamilySearchDefaultCountry.Size = new System.Drawing.Size(256, 74);
+            this.FamilySearchDefaultCountry.TabIndex = 7;
+            this.FamilySearchDefaultCountry.Title = "Default Country";
+            this.FamilySearchDefaultCountry.UKEnabled = false;
+            this.FamilySearchDefaultCountry.CountryChanged += new System.EventHandler(this.FamilySearchDefaultCountry_CountryChanged);
             // 
             // tabTreetops
             // 
@@ -1405,8 +1405,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).EndInit();
             this.tabLostCousins.ResumeLayout(false);
             this.tabLostCousins.PerformLayout();
-            this.tabIGISearch.ResumeLayout(false);
-            this.tabIGISearch.PerformLayout();
+            this.tabFamilySearch.ResumeLayout(false);
+            this.tabFamilySearch.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabTreetops.ResumeLayout(false);
@@ -1475,28 +1475,28 @@
         private System.Windows.Forms.ToolStripMenuItem showLocationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.TabPage tabIGISearch;
+        private System.Windows.Forms.TabPage tabFamilySearch;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnIGIFolderBrowse;
-        private System.Windows.Forms.TextBox txtIGIfolder;
-        private System.Windows.Forms.Button btnIGIMarriageSearch;
-        private System.Windows.Forms.Button btnIGIChildrenSearch;
-        private System.Windows.Forms.ProgressBar pbIGISearch;
+        private System.Windows.Forms.Button btnFamilySearchFolderBrowse;
+        private System.Windows.Forms.TextBox txtFamilySearchfolder;
+        private System.Windows.Forms.Button btnFamilySearchMarriageSearch;
+        private System.Windows.Forms.Button btnFamilySearchChildrenSearch;
+        private System.Windows.Forms.ProgressBar pbFamilySearch;
         private System.Windows.Forms.CheckBox ckbLCResidence;
         private System.Windows.Forms.CheckBox ckbCensusResidence;
         private Controls.RelationTypes relationTypes;
         private Controls.CensusCountry censusCountry;
         private Controls.CensusDateSelector cenDate;
-        private Controls.CensusCountry IGIDefaultCountry;
+        private Controls.CensusCountry FamilySearchDefaultCountry;
         private System.Windows.Forms.Button btnViewResults;
         private System.Windows.Forms.ToolTip toolTips;
-        private System.Windows.Forms.Button btnCancelIGISearch;
-        private Controls.RelationTypes IGIrelationTypes;
+        private System.Windows.Forms.Button btnCancelFamilySearch;
+        private Controls.RelationTypes FamilySearchrelationTypes;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rbIGISearchRegion;
-        private System.Windows.Forms.RadioButton rbIGISearchCountry;
+        private System.Windows.Forms.RadioButton rbFamilySearchRegion;
+        private System.Windows.Forms.RadioButton rbFamilySearchCountry;
         private global::FTAnalyzer.Utilities.ScrollingRichTextBox rtbOutput;
-        private global::FTAnalyzer.Utilities.ScrollingRichTextBox rtbIGIResults;
+        private global::FTAnalyzer.Utilities.ScrollingRichTextBox rtbFamilySearchResults;
         private System.Windows.Forms.Button btnOpenFolder;
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem BirthRegistrationToolStripMenuItem;
@@ -1507,7 +1507,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtSurname;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtIGISurname;
+        private System.Windows.Forms.TextBox txtFamilySearchSurname;
         private System.Windows.Forms.TabPage tabTreetops;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtTreetopsSurname;

@@ -1,6 +1,6 @@
 ﻿namespace FTAnalyzer.Forms
 {
-    partial class IGISearchResultsViewer
+    partial class FamilySearchResultsViewer
     {
         /// <summary>
         /// Required designer variable.
@@ -32,11 +32,11 @@
             this.lbResults = new System.Windows.Forms.ListBox();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.tooltips = new System.Windows.Forms.ToolTip(this.components);
-            this.upIGIResultsFDayilter = new System.Windows.Forms.NumericUpDown();
+            this.upFamilySearchResultsFDayilter = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.labDays = new System.Windows.Forms.Label();
             this.labFileCount = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.upIGIResultsFDayilter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upFamilySearchResultsFDayilter)).BeginInit();
             this.SuspendLayout();
             // 
             // lbResults
@@ -57,28 +57,28 @@
             this.webBrowser.Size = new System.Drawing.Size(1003, 459);
             this.webBrowser.TabIndex = 1;
             // 
-            // upIGIResultsFDayilter
+            // upFamilySearchResultsFDayilter
             // 
-            this.upIGIResultsFDayilter.Location = new System.Drawing.Point(940, 477);
-            this.upIGIResultsFDayilter.Maximum = new decimal(new int[] {
+            this.upFamilySearchResultsFDayilter.Location = new System.Drawing.Point(940, 477);
+            this.upFamilySearchResultsFDayilter.Maximum = new decimal(new int[] {
             365,
             0,
             0,
             0});
-            this.upIGIResultsFDayilter.Minimum = new decimal(new int[] {
+            this.upFamilySearchResultsFDayilter.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.upIGIResultsFDayilter.Name = "upIGIResultsFDayilter";
-            this.upIGIResultsFDayilter.Size = new System.Drawing.Size(40, 20);
-            this.upIGIResultsFDayilter.TabIndex = 2;
-            this.upIGIResultsFDayilter.Value = new decimal(new int[] {
+            this.upFamilySearchResultsFDayilter.Name = "upFamilySearchResultsFDayilter";
+            this.upFamilySearchResultsFDayilter.Size = new System.Drawing.Size(40, 20);
+            this.upFamilySearchResultsFDayilter.TabIndex = 2;
+            this.upFamilySearchResultsFDayilter.Value = new decimal(new int[] {
             7,
             0,
             0,
             0});
-            this.upIGIResultsFDayilter.ValueChanged += new System.EventHandler(this.upIGIResultsFDayilter_ValueChanged);
+            this.upFamilySearchResultsFDayilter.ValueChanged += new System.EventHandler(this.upFamilySearchResultsFDayilter_ValueChanged);
             // 
             // label1
             // 
@@ -107,7 +107,7 @@
             this.labFileCount.TabIndex = 5;
             this.labFileCount.Text = "label2";
             // 
-            // IGISearchResultsViewer
+            // FamilySearchResultsViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -115,12 +115,12 @@
             this.Controls.Add(this.labFileCount);
             this.Controls.Add(this.labDays);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.upIGIResultsFDayilter);
+            this.Controls.Add(this.upFamilySearchResultsFDayilter);
             this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.lbResults);
-            this.Name = "IGISearchResultsViewer";
-            this.Text = "IGISearchResultsViewer";
-            ((System.ComponentModel.ISupportInitialize)(this.upIGIResultsFDayilter)).EndInit();
+            this.Name = "FamilySearchResultsViewer";
+            this.Text = "FamilySearchResultsViewer";
+            ((System.ComponentModel.ISupportInitialize)(this.upFamilySearchResultsFDayilter)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -131,7 +131,7 @@
         private System.Windows.Forms.ListBox lbResults;
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.ToolTip tooltips;
-        private System.Windows.Forms.NumericUpDown upIGIResultsFDayilter;
+        private System.Windows.Forms.NumericUpDown upFamilySearchResultsFDayilter;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labDays;
         private System.Windows.Forms.Label labFileCount;

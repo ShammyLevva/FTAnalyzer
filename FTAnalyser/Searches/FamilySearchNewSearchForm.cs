@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace FTAnalyzer
 {
-    public class IGINewSearchForm : IGISearchForm
+    public class FamilySearchNewSearchForm : FamilySearchForm
     {
 
         public static readonly string
@@ -31,11 +31,11 @@ namespace FTAnalyzer
         private volatile bool navigating;
         private WebBrowser browser;
 
-        public IGINewSearchForm(RichTextBox rtb, string defaultCountry, int level, int relationTypes, string surname, WebBrowser browser)
+        public FamilySearchNewSearchForm(RichTextBox rtb, string defaultCountry, int level, int relationTypes, string surname, WebBrowser browser)
         {
             rtbOutput = rtb;
             this.defaultLocation = new FactLocation(defaultCountry);
-            this.defLoc = IGILocation.Adapt(this.defaultLocation, level);
+            this.defLoc = FamilySearchLocation.Adapt(this.defaultLocation, level);
             this.level = level;
             this.resultCount = 0;
             this.relationTypes = relationTypes;
@@ -65,13 +65,13 @@ namespace FTAnalyzer
             setParameter("record_country", location.Country);
         }
 
-        protected override void CheckIGIAtLocations(List<FactLocation> locations, string filename, int searchType, string surname)
+        protected override void CheckFamilySearchAtLocations(List<FactLocation> locations, string filename, int searchType, string surname)
         {
             foreach (FactLocation location in locations)
             {
                 string newFilename = filename;
                 SetLocationParameters(location);
-                if (searchType == IGISearchForm.CHILDRENSEARCH && location.Country.Equals(FactLocation.SCOTLAND))
+                if (searchType == FamilySearchForm.CHILDRENSEARCH && location.Country.Equals(FactLocation.SCOTLAND))
                     setParameter(MOTHER_SURNAME, surname);
                 //if (level == FactLocation.REGION && parameters[SHIRE] != string.Empty)
                 //{
@@ -79,7 +79,7 @@ namespace FTAnalyzer
                 //}
                 if (!File.Exists(newFilename))
                 {
-                    FetchIGIDataAndWriteResult(newFilename);
+                    FetchFamilySearchDataAndWriteResult(newFilename);
                 }
             }
         }
@@ -129,7 +129,7 @@ namespace FTAnalyzer
             }
         }
 
-        private HtmlDocument FetchIGIDataFromWebsite()
+        private HtmlDocument FetchFamilySearchDataFromWebsite()
         {
             try
             {
@@ -173,11 +173,11 @@ namespace FTAnalyzer
             navigating = false;
         }
 
-        protected override void FetchIGIDataAndWriteResult(string filename)
+        protected override void FetchFamilySearchDataAndWriteResult(string filename)
         {
             try
             {
-                HtmlDocument document = FetchIGIDataFromWebsite();
+                HtmlDocument document = FetchFamilySearchDataFromWebsite();
                 document.ExecCommand("SaveAs", false, filename);
                 rtbOutput.AppendText("Results File written to " + filename + "\n");
                 resultCount++;

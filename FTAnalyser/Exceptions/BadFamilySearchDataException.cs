@@ -5,9 +5,9 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    class BadIGIDataException : Exception
+    class BadFamilySearchDataException : Exception
     {
-        public BadIGIDataException(string message)
+        public BadFamilySearchDataException(string message)
             : base(message)
         { }
     }

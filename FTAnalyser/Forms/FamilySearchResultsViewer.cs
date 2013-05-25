@@ -10,16 +10,16 @@ using System.IO;
 
 namespace FTAnalyzer.Forms
 {
-    public partial class IGISearchResultsViewer : Form
+    public partial class FamilySearchResultsViewer : Form
     {
         private string folder;
         private string lasttip = string.Empty;
 
-        public IGISearchResultsViewer(string folder)
+        public FamilySearchResultsViewer(string folder)
         {
             InitializeComponent();
             this.folder = folder;
-            this.Text = "IGI Search results in folder " + folder;
+            this.Text = "FamilySearch Search results in folder " + folder;
             SetupResults();
         }
 
@@ -31,7 +31,7 @@ namespace FTAnalyzer.Forms
             lbResults.Items.Clear();
             DirectoryInfo di = new DirectoryInfo(folder);
             FileInfo[] files = di.GetFiles("*.html");
-            int additionalDays = (int) upIGIResultsFDayilter.Value;
+            int additionalDays = (int) upFamilySearchResultsFDayilter.Value;
             foreach (FileInfo fi in files)
             {
                 if (fi.LastWriteTime.AddDays(additionalDays) >= DateTime.Now)
@@ -63,9 +63,9 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void upIGIResultsFDayilter_ValueChanged(object sender, EventArgs e)
+        private void upFamilySearchResultsFDayilter_ValueChanged(object sender, EventArgs e)
         {
-            if (upIGIResultsFDayilter.Value == 1)
+            if (upFamilySearchResultsFDayilter.Value == 1)
                 labDays.Text = "day";
             else
                 labDays.Text = "days";

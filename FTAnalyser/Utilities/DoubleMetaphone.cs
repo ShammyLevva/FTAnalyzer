@@ -46,8 +46,8 @@ namespace FTAnalyzer
 		///Variables to track the key length w/o having to grab the .Length attr
 		private int m_primaryKeyLength, m_alternateKeyLength;
 		
-		///Working copy of the word, and the original word
-		private String m_word, m_originalWord;
+		///Working copy of the word, and the orFamilySearchnal word
+		private String m_word, m_orFamilySearchnalWord;
 		
 		///Length and last valid zero-based index into word
 		int m_length, m_last;
@@ -93,10 +93,10 @@ namespace FTAnalyzer
 			}
 		}
 		
-        /// <summary>Original word for which the keys were computed</summary>
+        /// <summary>OrFamilySearchnal word for which the keys were computed</summary>
 		public String Word {
 			get {
-				return m_originalWord;
+				return m_orFamilySearchnalWord;
 			}
 		}
 		
@@ -130,7 +130,7 @@ namespace FTAnalyzer
 			
 			m_hasAlternate = false;
 			
-			m_originalWord = word;
+			m_orFamilySearchnalWord = word;
 			
 			//Copy word to an internal working buffer so it can be modified
             m_word = word;
@@ -152,7 +152,7 @@ namespace FTAnalyzer
 		
 		/**
 		 * Internal impl of double metaphone algorithm.  Populates m_primaryKey and m_alternateKey.  Modified copy-past of
-		 * Phillips' original code
+		 * Phillips' orFamilySearchnal code
 		 */
 		private void buildMetaphoneKeys() {
 			int current = 0;
@@ -652,7 +652,7 @@ namespace FTAnalyzer
 					if (areStringsAt(current, 2, "SC")) {
 						//Schlesinger's rule
 						if (m_word[current + 2] == 'H')
-							//dutch origin, e.g. 'school', 'schooner'
+							//dutch orFamilySearchn, e.g. 'school', 'schooner'
 							if (areStringsAt((current + 3), 2, "OO", "ER", "EN", "UY", "ED", "EM")) {
 								//'schermerhorn', 'schenker'
 								if (areStringsAt((current + 3), 2, "ER", "EN")) {
@@ -828,7 +828,7 @@ namespace FTAnalyzer
 		 * Returns true if m_word is classified as "slavo-germanic" by Phillips' algorithm
 		 * 
 		 * @return true if word contains strings that Lawrence's algorithm considers indicative of
-		 *         slavo-germanic origin; else false
+		 *         slavo-germanic orFamilySearchn; else false
 		 */
 		private bool isWordSlavoGermanic() {
 			if((m_word.IndexOf("W") != -1) || 

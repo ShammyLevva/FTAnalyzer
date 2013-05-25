@@ -29,12 +29,12 @@ namespace FTAnalyzer
             InitializeComponent();
             showLocationsToolStripMenuItem.Visible = false;
             ft.XmlErrorBox = rtbOutput;
-            tabSelector.TabPages.RemoveByKey("tabIGISearch");
-            //toolTips.SetToolTip(tabCountries, "Double click on Country name to see list of individuals with that Country.");
-            //toolTips.SetToolTip(dgCountries, "Double click on Country name to see list of individuals with that Country.");
-            //toolTips.SetToolTip(tabRegions, "Double click on Region name to see list of individuals with that Region.");
-            //toolTips.SetToolTip(tabParishes, "Double click on 'Parish' name to see list of individuals with that parish/area.");
-            //toolTips.SetToolTip(tabAddresses, "Double click on Address name to see list of individuals with that Address.");
+            //tabSelector.TabPages.RemoveByKey("tabFamilySearch");
+            toolTips.SetToolTip(tabCountries, "Double click on Country name to see list of individuals with that Country.");
+            toolTips.SetToolTip(dgCountries, "Double click on Country name to see list of individuals with that Country.");
+            toolTips.SetToolTip(tabRegions, "Double click on Region name to see list of individuals with that Region.");
+            toolTips.SetToolTip(tabParishes, "Double click on 'Parish' name to see list of individuals with that parish/area.");
+            toolTips.SetToolTip(tabAddresses, "Double click on Address name to see list of individuals with that Address.");
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -53,7 +53,7 @@ namespace FTAnalyzer
                     closeIndividualForms();
                     tabSelector.SelectTab(tabDisplayProgress);
                     rtbOutput.Text = "";
-                    rtbIGIResults.Text = "";
+                    rtbFamilySearchResults.Text = "";
                     pbSources.Value = pbIndividuals.Value = pbFamilies.Value = 0;
                     Application.DoEvents();
                     if (!stopProcessing)
@@ -67,7 +67,7 @@ namespace FTAnalyzer
                 }
                 catch (IOException ex)
                 {
-                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                    MessageBox.Show("Error: Could not read file from disk. OrFamilySearchnal error: " + ex.Message);
                 }
                 catch (Exception ex2)
                 {
@@ -178,19 +178,19 @@ namespace FTAnalyzer
                     dgParishes.DataSource = parishes;
                     dgAddresses.DataSource = addresses;
                 }
-                else if (tabSelector.SelectedTab == tabIGISearch)
+                else if (tabSelector.SelectedTab == tabFamilySearch)
                 {
-                    btnCancelIGISearch.Visible = false;
+                    btnCancelFamilySearch.Visible = false;
                     btnViewResults.Visible = true;
                     tsCountLabel.Text = "";
-                    btnIGIChildrenSearch.Enabled = btnIGIMarriageSearch.Enabled = ft.IndividualCount > 0;
+                    btnFamilySearchChildrenSearch.Enabled = btnFamilySearchMarriageSearch.Enabled = ft.IndividualCount > 0;
                     try
                     {
-                        txtIGIfolder.Text = (string)Application.UserAppDataRegistry.GetValue("IGI Search Path");
+                        txtFamilySearchfolder.Text = (string)Application.UserAppDataRegistry.GetValue("FamilySearch Search Path");
                     }
                     catch (Exception)
                     {
-                        txtIGIfolder.Text = string.Empty;
+                        txtFamilySearchfolder.Text = string.Empty;
                     }
                 }
                 HourGlass(false);
@@ -540,84 +540,84 @@ namespace FTAnalyzer
             System.Diagnostics.Process.Start("http://www.lostcousins.com/?ref=LC585149");
         }
 
-        private void btnIGIFolderBrowse_Click(object sender, EventArgs e)
+        private void btnFamilySearchFolderBrowse_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog browse = new FolderBrowserDialog();
             browse.ShowNewFolderButton = true;
-            browse.Description = "Please select a folder where the results of the IGI search will be placed";
+            browse.Description = "Please select a folder where the results of the FamilySearch search will be placed";
             browse.RootFolder = Environment.SpecialFolder.Desktop;
-            if (txtIGIfolder.Text != string.Empty)
-                browse.SelectedPath = txtIGIfolder.Text;
+            if (txtFamilySearchfolder.Text != string.Empty)
+                browse.SelectedPath = txtFamilySearchfolder.Text;
             if (browse.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                Application.UserAppDataRegistry.SetValue("IGI Search Path", browse.SelectedPath);
-                txtIGIfolder.Text = browse.SelectedPath;
+                Application.UserAppDataRegistry.SetValue("FamilySearch Search Path", browse.SelectedPath);
+                txtFamilySearchfolder.Text = browse.SelectedPath;
             }
         }
 
-        private void btnIGIMarriageSearch_Click(object sender, EventArgs e)
+        private void btnFamilySearchMarriageSearch_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            btnCancelIGISearch.Visible = true;
+            btnCancelFamilySearch.Visible = true;
             btnViewResults.Visible = false;
-            btnIGIChildrenSearch.Enabled = false;
-            btnIGIMarriageSearch.Enabled = false;
-            rtbIGIResults.Text = "IGI Marriage Search started.\n";
-            int level = rbIGISearchCountry.Checked ? FactLocation.COUNTRY : FactLocation.REGION;
-            IGISearchForm form = new IGINewSearchForm(rtbIGIResults, IGIDefaultCountry.Country, level, IGIrelationTypes.Status, txtIGISurname.Text, webBrowser);
+            btnFamilySearchChildrenSearch.Enabled = false;
+            btnFamilySearchMarriageSearch.Enabled = false;
+            rtbFamilySearchResults.Text = "FamilySearch Marriage Search started.\n";
+            int level = rbFamilySearchCountry.Checked ? FactLocation.COUNTRY : FactLocation.REGION;
+            FamilySearchForm form = new FamilySearchNewSearchForm(rtbFamilySearchResults, FamilySearchDefaultCountry.Country, level, FamilySearchrelationTypes.Status, txtFamilySearchSurname.Text, webBrowser);
             List<Family> families = ft.AllFamilies;
             int counter = 0;
-            pbIGISearch.Visible = true;
-            pbIGISearch.Maximum = families.Count;
-            pbIGISearch.Value = 0;
+            pbFamilySearch.Visible = true;
+            pbFamilySearch.Maximum = families.Count;
+            pbFamilySearch.Value = 0;
             stopProcessing = false;
             foreach (Family f in families)
             {
-                form.SearchIGI(f, txtIGIfolder.Text, IGISearchForm.MARRIAGESEARCH);
-                pbIGISearch.Value = counter++;
+                form.SearchFamilySearch(f, txtFamilySearchfolder.Text, FamilySearchForm.MARRIAGESEARCH);
+                pbFamilySearch.Value = counter++;
                 Application.DoEvents();
                 if (stopProcessing)
                     break;
             }
-            pbIGISearch.Visible = false;
-            btnCancelIGISearch.Visible = false;
+            pbFamilySearch.Visible = false;
+            btnCancelFamilySearch.Visible = false;
             btnViewResults.Visible = true;
-            btnIGIChildrenSearch.Enabled = true;
-            btnIGIMarriageSearch.Enabled = true;
-            rtbIGIResults.AppendText("\nIGI Marriage Search finished.\n");
+            btnFamilySearchChildrenSearch.Enabled = true;
+            btnFamilySearchMarriageSearch.Enabled = true;
+            rtbFamilySearchResults.AppendText("\nFamilySearch Marriage Search finished.\n");
             HourGlass(false);
         }
 
-        private void btnIGIChildrenSearch_Click(object sender, EventArgs e)
+        private void btnFamilySearchChildrenSearch_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            btnCancelIGISearch.Visible = true;
+            btnCancelFamilySearch.Visible = true;
             btnViewResults.Visible = false;
-            btnIGIChildrenSearch.Enabled = false;
-            btnIGIMarriageSearch.Enabled = false;
-            rtbIGIResults.Text = "IGI Children Search started.\n";
-            int level = rbIGISearchCountry.Checked ? FactLocation.COUNTRY : FactLocation.REGION;
-            IGISearchForm form = new IGIOldSearchForm(rtbIGIResults, IGIDefaultCountry.Country, level, IGIrelationTypes.Status, txtIGISurname.Text);
+            btnFamilySearchChildrenSearch.Enabled = false;
+            btnFamilySearchMarriageSearch.Enabled = false;
+            rtbFamilySearchResults.Text = "FamilySearch Children Search started.\n";
+            int level = rbFamilySearchCountry.Checked ? FactLocation.COUNTRY : FactLocation.REGION;
+            FamilySearchForm form = new FamilySearchOldSearchForm(rtbFamilySearchResults, FamilySearchDefaultCountry.Country, level, FamilySearchrelationTypes.Status, txtFamilySearchSurname.Text);
             List<Family> families = ft.AllFamilies;
             int counter = 0;
-            pbIGISearch.Visible = true;
-            pbIGISearch.Maximum = families.Count;
-            pbIGISearch.Value = 0;
+            pbFamilySearch.Visible = true;
+            pbFamilySearch.Maximum = families.Count;
+            pbFamilySearch.Value = 0;
             stopProcessing = false;
             foreach (Family f in families)
             {
-                pbIGISearch.Value = counter++;
-                form.SearchIGI(f, txtIGIfolder.Text, IGISearchForm.CHILDRENSEARCH);
+                pbFamilySearch.Value = counter++;
+                form.SearchFamilySearch(f, txtFamilySearchfolder.Text, FamilySearchForm.CHILDRENSEARCH);
                 Application.DoEvents();
                 if (stopProcessing)
                     break;
             }
-            pbIGISearch.Visible = false;
-            btnCancelIGISearch.Visible = false;
+            pbFamilySearch.Visible = false;
+            btnCancelFamilySearch.Visible = false;
             btnViewResults.Visible = true;
-            btnIGIChildrenSearch.Enabled = true;
-            btnIGIMarriageSearch.Enabled = true;
-            rtbIGIResults.AppendText("\nIGI Children Search finished.\n");
+            btnFamilySearchChildrenSearch.Enabled = true;
+            btnFamilySearchMarriageSearch.Enabled = true;
+            rtbFamilySearchResults.AppendText("\nFamilySearch Children Search finished.\n");
             HourGlass(false);
         }
 
@@ -633,29 +633,29 @@ namespace FTAnalyzer
 
         private void btnViewResults_Click(object sender, EventArgs e)
         {
-            Forms.IGISearchResultsViewer frmResults = new Forms.IGISearchResultsViewer(txtIGIfolder.Text);
+            Forms.FamilySearchResultsViewer frmResults = new Forms.FamilySearchResultsViewer(txtFamilySearchfolder.Text);
             if (frmResults.ResultsPresent)
                 frmResults.Show();
             else
                 MessageBox.Show("Sorry there are no results files in the selected folder.");
         }
 
-        private void btnCancelIGISearch_Click(object sender, EventArgs e)
+        private void btnCancelFamilySearch_Click(object sender, EventArgs e)
         {
             stopProcessing = true;
         }
 
-        private void IGIDefaultCountry_CountryChanged(object sender, EventArgs e)
+        private void FamilySearchDefaultCountry_CountryChanged(object sender, EventArgs e)
         {
-            if (IGIDefaultCountry.Country == FactLocation.SCOTLAND)
-                rbIGISearchCountry.Checked = true;
+            if (FamilySearchDefaultCountry.Country == FactLocation.SCOTLAND)
+                rbFamilySearchCountry.Checked = true;
             else
-                rbIGISearchRegion.Checked = true;
+                rbFamilySearchRegion.Checked = true;
         }
 
-        private void rtbIGIResults_TextChanged(object sender, EventArgs e)
+        private void rtbFamilySearchResults_TextChanged(object sender, EventArgs e)
         {
-            rtbIGIResults.ScrollToBottom();
+            rtbFamilySearchResults.ScrollToBottom();
         }
 
         private void rtbOutput_TextChanged(object sender, EventArgs e)
@@ -673,7 +673,7 @@ namespace FTAnalyzer
             string windir = Environment.GetEnvironmentVariable("WINDIR");
             System.Diagnostics.Process prc = new System.Diagnostics.Process();
             prc.StartInfo.FileName = windir + @"\explorer.exe";
-            prc.StartInfo.Arguments = txtIGIfolder.Text;
+            prc.StartInfo.Arguments = txtFamilySearchfolder.Text;
             prc.Start();
         }
 

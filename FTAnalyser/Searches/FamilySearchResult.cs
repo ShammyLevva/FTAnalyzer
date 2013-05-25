@@ -7,7 +7,7 @@ using System.Net;
 
 namespace FTAnalyzer
 {
-    public class IGIResult {
+    public class FamilySearchResult {
         
 	    int searchType;
 	    Parish parish;
@@ -24,7 +24,7 @@ namespace FTAnalyzer
         String marriage;
         String link;
         
-        public IGIResult(int searchType, ParishBatch pb, string link) {
+        public FamilySearchResult(int searchType, ParishBatch pb, string link) {
             this.searchType = searchType;
             this.parish = pb.Parish;
             this.batch = pb.Batch;

@@ -10,7 +10,7 @@ using System.Collections.Specialized;
 
 namespace FTAnalyzer
 {
-    public class IGIOldSearchForm : IGISearchForm
+    public class FamilySearchOldSearchForm : FamilySearchForm
     {
 
         public static readonly string
@@ -42,13 +42,13 @@ namespace FTAnalyzer
         private static readonly string MISSINGNAME1 = "You must enter at least a first or last name, or you must enter a father's full name and at least a mother's first name.";
         private static readonly string MISSINGNAME2 = "Enter at least your deceased ancestor's first name or last name";
         private static readonly string MISSINGNAME3 = "If you enter a last name without a first name, you must either <b>not enter</b> parent or spouse names, a year, or you <b>must enter</b> a batch number or a film number.";
-        //        private static readonly string INDIVIDUALRECORD = "igi/individual_record.asp";
+        //        private static readonly string INDIVIDUALRECORD = "FamilySearch/individual_record.asp";
 
-        public IGIOldSearchForm(RichTextBox rtb, string defaultCountry, int level, int relationTypes, string surname)
+        public FamilySearchOldSearchForm(RichTextBox rtb, string defaultCountry, int level, int relationTypes, string surname)
         {
             rtbOutput = rtb;
             this.defaultLocation = new FactLocation(defaultCountry);
-            this.defLoc = IGILocation.Adapt(this.defaultLocation, level);
+            this.defLoc = FamilySearchLocation.Adapt(this.defaultLocation, level);
             this.level = level;
             this.resultCount = 0;
             this.relationTypes = relationTypes;
@@ -88,7 +88,7 @@ namespace FTAnalyzer
 
         protected override void SetLocationParameters(FactLocation location)
         {
-            IGILocation loc = IGILocation.Adapt(location, level);
+            FamilySearchLocation loc = FamilySearchLocation.Adapt(location, level);
             if (loc != null)
             {
                 setParameter(REGION, loc.Region);
@@ -128,7 +128,7 @@ namespace FTAnalyzer
                 setParameter(MOTHERS_FIRST_NAME, wifeForename);
                 foreach (FactLocation loc in locations)
                 {
-                    CheckIGIAtLocations(locations, filename, IGISearchForm.CHILDRENSEARCH, wifeSurname);
+                    CheckFamilySearchAtLocations(locations, filename, FamilySearchForm.CHILDRENSEARCH, wifeSurname);
                 }
             }
         }
@@ -164,13 +164,13 @@ namespace FTAnalyzer
             return false;
         }
 
-        protected override void CheckIGIAtLocations(List<FactLocation> locations, string filename, int searchType, string surname)
+        protected override void CheckFamilySearchAtLocations(List<FactLocation> locations, string filename, int searchType, string surname)
         {
             foreach (FactLocation location in locations)
             {
                 string newFilename = filename;
                 SetLocationParameters(location);
-                if (searchType == IGISearchForm.CHILDRENSEARCH && location.Country.Equals(FactLocation.SCOTLAND))
+                if (searchType == FamilySearchForm.CHILDRENSEARCH && location.Country.Equals(FactLocation.SCOTLAND))
                     setParameter(MOTHERS_LAST_NAME, surname);
                 if (level == FactLocation.REGION && parameters[SHIRE] != string.Empty)
                 {
@@ -178,12 +178,12 @@ namespace FTAnalyzer
                 }
                 if (!File.Exists(newFilename))
                 {
-                    FetchIGIDataAndWriteResult(newFilename);
+                    FetchFamilySearchDataAndWriteResult(newFilename);
                 }
             }
         }
 
-        private string FetchIGIDataFromWebsite()
+        private string FetchFamilySearchDataFromWebsite()
         {
             try
             {
@@ -207,7 +207,7 @@ namespace FTAnalyzer
         {
             /* TODO: HTML parse stuff
                        NodeFilter filter = new NodeClassFilter(LinkTag.Class);
-                       Queue<IGIResult> queue = new Queue<IGIResult>();
+                       Queue<FamilySearchResult> queue = new Queue<FamilySearchResult>();
                        try {
                            Parser parser = new Parser(filename);
                            NodeList list = parser.extractAllNodesThatMatch (filter);
@@ -215,7 +215,7 @@ namespace FTAnalyzer
                                LinkTag link = (LinkTag) list.elementAt(i);
                                if (link.getLink().IndexOf(INDIVIDUALRECORD) != -1) {
                                    // this is a result link so add it to the fetch queue
-                                   queue.Enqueue(new IGIResult(searchType, pb, link));
+                                   queue.Enqueue(new FamilySearchResult(searchType, pb, link));
                                }
                            }
                            fetchResults(output, queue, outFile);
@@ -230,11 +230,11 @@ namespace FTAnalyzer
         /*
          * passed a list of URLs to visit containing the results 
          */
-        private void fetchResults(IGIResultWriter output, Queue<IGIResult> queue, string outFile)
+        private void fetchResults(FamilySearchResultWriter output, Queue<FamilySearchResult> queue, string outFile)
         {
             int counter = 0;
             int errorCounter = 0;
-            IGIResult result = null;
+            FamilySearchResult result = null;
             bool exceptionFlag = false;
             while (queue.Count > 0)
             {
@@ -294,14 +294,14 @@ namespace FTAnalyzer
                 rtbOutput.AppendText(" and " + errorCounter + " errors.\n");
         }
         /* TODO: Convert     
-               public void processResult(IGIResult result, string filename) {
+               public void processResult(FamilySearchResult result, string filename) {
                    NodeFilter filter = new NodeClassFilter(TableColumn.Class);
                    filter = new AndFilter(filter, new OrFilter(
                                 new HasAttributeFilter ("class", "individualLabel"),
                                 new OrFilter(
                                         new HasAttributeFilter ("class", "individualData"),
                                         new HasAttributeFilter ("class", "IndividualData"))));
-                   LinkedList<IGIResult> queue = new LinkedList<IGIResult>();
+                   LinkedList<FamilySearchResult> queue = new LinkedList<FamilySearchResult>();
                    try {
                        Parser parser = new Parser(filename);
                        NodeList list = parser.extractAllNodesThatMatch(filter);
@@ -345,11 +345,11 @@ namespace FTAnalyzer
             this.resultFile = resultFile;
             string batch = parishBatch.Batch;
             if (batch.Substring(0, 1).Equals("M"))
-                searchType = IGISearchForm.MARRIAGESEARCH;
+                searchType = FamilySearchForm.MARRIAGESEARCH;
             else if (batch.Substring(0, 1).Equals("C"))
-                searchType = IGISearchForm.CHILDRENSEARCH;
+                searchType = FamilySearchForm.CHILDRENSEARCH;
             else
-                throw new BadIGIDataException("Invalid Batch number format " + batch);
+                throw new BadFamilySearchDataException("Invalid Batch number format " + batch);
             Initialise();
             setParameter(LAST_NAME, surname);
             setParameter(BATCH_NUMBER, batch);
@@ -362,11 +362,11 @@ namespace FTAnalyzer
                         " " + parishBatch.StartYear + "-" + parishBatch.EndYear +
                         " " + parishBatch.Comments);
                 output.Flush();
-                FetchIGIDataAndWriteResult(filename);
+                FetchFamilySearchDataAndWriteResult(filename);
                 parseResults(searchType, parishBatch, output, filename, outFile);
                 output.Flush();
             }
-            catch (BadIGIDataException e)
+            catch (BadFamilySearchDataException e)
             {
                 output.WriteLine("error " + e.Message);
             }
@@ -375,26 +375,26 @@ namespace FTAnalyzer
         #endregion
 
 
-        protected override void FetchIGIDataAndWriteResult(string filename)
+        protected override void FetchFamilySearchDataAndWriteResult(string filename)
         {
             try
             {
-                string str = FetchIGIDataFromWebsite();
+                string str = FetchFamilySearchDataFromWebsite();
                 // only output if no matches string not found
                 if (str.IndexOf(SERVERUNAVAILABLE) != -1)
                 {
-                    throw new BadIGIDataException("Server Unavailable");
+                    throw new BadFamilySearchDataException("Server Unavailable");
                 }
                 if (str.IndexOf(SERVERERROR) != -1)
                 {
-                    throw new BadIGIDataException("Server Error 504");
+                    throw new BadFamilySearchDataException("Server Error 504");
                 }
                 if (str.IndexOf(MISSINGNAME1) != -1 ||
                     str.IndexOf(MISSINGNAME2) != -1 ||
                     str.IndexOf(MISSINGNAME3) != -1)
                 {
                     // now check if it objects to name
-                    throw new BadIGIDataException("Missing Name");
+                    throw new BadFamilySearchDataException("Missing Name");
                 }
                 if (str.IndexOf(NOMATCHES1) == -1 && str.IndexOf(NOMATCHES2) == -1 &&
                     str.IndexOf(NOMATCHES3) == -1 && str.IndexOf(NOMATCHES4) == -1)

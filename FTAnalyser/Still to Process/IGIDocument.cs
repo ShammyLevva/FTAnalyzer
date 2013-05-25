@@ -8,11 +8,11 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class IGIDocument {
+    public class FamilySearchDocument {
         
         // private XmlDocument doc;
         
-        public IGIDocument (HttpWebRequest url, string proxy, string port)
+        public FamilySearchDocument (HttpWebRequest url, string proxy, string port)
 	    {
 		    if (proxy != null) {
                 int portNum = Int32.Parse(port);
@@ -23,16 +23,16 @@ namespace FTAnalyzer
 //            doc = reader.read(url);
 	    }
 
-        public IGIDocument(HttpWebRequest url) 
+        public FamilySearchDocument(HttpWebRequest url) 
             : this(url, null, null)
         { }
 
         
-        public IGIDocument(string strUrl) 
+        public FamilySearchDocument(string strUrl) 
             : this(createURL(strUrl), null, null)
         { }
 
-        public IGIDocument(string strUrl, string proxy, string port)
+        public FamilySearchDocument(string strUrl, string proxy, string port)
     		: this(createURL(strUrl), proxy, port)
         { }
 

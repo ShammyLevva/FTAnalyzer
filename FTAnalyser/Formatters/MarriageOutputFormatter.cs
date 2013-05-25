@@ -19,7 +19,7 @@ namespace FTAnalyzer
             output.Write("WifeResidence,WifeBirthDate,WifeBirthLocation,WifeBestLocation,");
             output.Write("WifesFathersName,WifesFathersOccupation,WifesFatherDeceased,");
             output.Write("WifesMothersName,WifesMothersOccupation,WifesMotherDeceased,");
-            output.Write("Religion,DateOfMarriage,PlaceOfMarriage");
+            output.Write("RelFamilySearchon,DateOfMarriage,PlaceOfMarriage");
             output.WriteLine();
          }
 
@@ -33,7 +33,7 @@ namespace FTAnalyzer
                 printFamilyGroup(m.RegistrationDate, m.SpousesFamilyGroup, output);
                 printFamilyGroup(m.RegistrationDate, m.FamilyGroup, output);
             }
-            output.Write("\""); output.Write(m.Religion); output.Write("\",");
+            output.Write("\""); output.Write(m.RelFamilySearchon); output.Write("\",");
             output.Write("\""); output.Write(m.DateOfMarriage); output.Write("\",");
             output.Write("\""); output.Write(m.PlaceOfMarriage); output.WriteLine("\"");
         }

@@ -37,7 +37,7 @@ namespace FTAnalyzer.Forms
             List<Registration> regs = ft.getAllCensusRegistrations(date, censusDone, includeResidence, lostCousinCheck);
             List<Registration> census = rp.processRegistrations(regs);
             List<IDisplayCensus> ds = new List<IDisplayCensus>();
-            int pos = 0; // position of DisplayCensus object in original list.
+            int pos = 0; // position of DisplayCensus object in orFamilySearchnal list.
             foreach (CensusRegistration r in census)
             {
                 foreach (Individual i in r.Members)
@@ -123,7 +123,7 @@ namespace FTAnalyzer.Forms
                 case 0: // Family GED
                     comp = new IDisplayCensusComparerWrapper(new CensusFamilyGedComparer());
                     break;
-                case 1: // By location (original sort order)
+                case 1: // By location (orFamilySearchnal sort order)
                     comp = new IDisplayCensusComparerWrapper(new DefaultCensusComparer());
                     break;
                 case 2: // Census Name

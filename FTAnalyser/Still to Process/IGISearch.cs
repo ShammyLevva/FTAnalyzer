@@ -7,7 +7,7 @@ using System.Net;
 
 namespace FTAnalyzer
 {
-    public class IGISearch {
+    public class FamilySearch {
 
         public static void main (String[] args) {
             // URL of CGI-Bin script.
@@ -23,7 +23,7 @@ namespace FTAnalyzer
             // Send POST output.
             DataOutputStream printout = new DataOutputStream(urlConn.getOutputStream());
            
-            IGISearchForm form = new IGISearchForm();
+            FamilySearchForm form = new FamilySearchForm();
             form.setParameter("fathers_last_name", "moffat");
             form.setParameter("fathers_first_name", "john");
             form.setParameter("mothers_last_name", "allen");
