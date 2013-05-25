@@ -40,8 +40,8 @@
             this.deathRegistrationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.marriageRegistrationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.geocodeLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -254,24 +254,25 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showLocationsToolStripMenuItem,
+            this.geocodeLocationsToolStripMenuItem,
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
-            // showLocationsToolStripMenuItem
-            // 
-            this.showLocationsToolStripMenuItem.Name = "showLocationsToolStripMenuItem";
-            this.showLocationsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.showLocationsToolStripMenuItem.Text = "Show locations";
-            // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            // 
+            // geocodeLocationsToolStripMenuItem
+            // 
+            this.geocodeLocationsToolStripMenuItem.Name = "geocodeLocationsToolStripMenuItem";
+            this.geocodeLocationsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.geocodeLocationsToolStripMenuItem.Text = "Geocode Locations";
+            this.geocodeLocationsToolStripMenuItem.Click += new System.EventHandler(this.geocodeLocationsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -1472,7 +1473,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown udAgeFilter;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem showLocationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.TabPage tabFamilySearch;
@@ -1539,6 +1539,7 @@
         private System.Windows.Forms.ContextMenuStrip mnuSetRoot;
         private System.Windows.Forms.ToolStripMenuItem setAsRootToolStripMenuItem;
         private System.Windows.Forms.Button btnBingOSMap;
+        private System.Windows.Forms.ToolStripMenuItem geocodeLocationsToolStripMenuItem;
     }
 }
 

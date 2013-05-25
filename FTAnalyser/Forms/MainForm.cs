@@ -15,7 +15,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.5.1.0";
+        private string VERSION = "1.5.2.0";
         private bool _checkForUpdatesEnabled = true;
         private System.Threading.Timer _timerCheckForUpdates;
 
@@ -27,9 +27,8 @@ namespace FTAnalyzer
         public MainForm()
         {
             InitializeComponent();
-            showLocationsToolStripMenuItem.Visible = false;
             ft.XmlErrorBox = rtbOutput;
-            //tabSelector.TabPages.RemoveByKey("tabFamilySearch");
+            tabSelector.TabPages.RemoveByKey("tabFamilySearch");
             toolTips.SetToolTip(tabCountries, "Double click on Country name to see list of individuals with that Country.");
             toolTips.SetToolTip(dgCountries, "Double click on Country name to see list of individuals with that Country.");
             toolTips.SetToolTip(tabRegions, "Double click on Region name to see list of individuals with that Region.");
@@ -105,7 +104,7 @@ namespace FTAnalyzer
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            printToolStripMenuItem.Enabled = false; 
+            printToolStripMenuItem.Enabled = false;
             if (ft.Loading)
             {
                 tabSelector.SelectedTab = tabDisplayProgress;
@@ -251,7 +250,7 @@ namespace FTAnalyzer
             census.Text = censusDate.StartDate.Year.ToString() + " Census Records to search for";
             census.Show();
         }
- 
+
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This is Family Tree Analyzer version " + VERSION);
@@ -294,7 +293,7 @@ namespace FTAnalyzer
             Filter<Individual> birthFilter = new IndividualBirthFilter(birthRange);
             Filter<Individual> deathFilter = new IndividualDeathFilter(deathRange);
             Filter<Individual> filter = new AndFilter<Individual>(
-                                            new AndFilter<Individual>(birthFilter,deathFilter),
+                                            new AndFilter<Individual>(birthFilter, deathFilter),
                                             new AndFilter<Individual>(locationFilter, relationFilter));
 
             if (tabSelector.Text.Length > 0)
@@ -302,7 +301,7 @@ namespace FTAnalyzer
 
             return filter;
         }
-        #endregion 
+        #endregion
 
         #region Lost Cousins
         private void LostCousinsCensus(Filter<Registration> filter, FactDate censusDate, string reportTitle)
@@ -314,12 +313,12 @@ namespace FTAnalyzer
                     new RelationFilter<Registration>(Individual.MARRIEDTODB));
             if (ckbLCIgnoreCountry.Checked)
                 filter = new TrueFilter<Registration>(); // if we are ignoring locations then ignore what was passed as a filter
-            if (ckbRestrictions.Checked)                
+            if (ckbRestrictions.Checked)
                 filter = new AndFilter<Registration>(new DateFilter<Registration>(censusDate), filter, relation);
             else
                 filter = new AndFilter<Registration>(new DateFilter<Registration>(censusDate), filter);
             MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();
-            if(!ckbLCIgnoreCountry.Checked) // only add the parish location comparator if we are using locations
+            if (!ckbLCIgnoreCountry.Checked) // only add the parish location comparator if we are using locations
                 censusComparator.addComparator(new LocationComparator(FactLocation.PARISH));
             censusComparator.addComparator(new DateComparator());
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
@@ -533,7 +532,7 @@ namespace FTAnalyzer
             report.Show();
         }
 
-        #endregion 
+        #endregion
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -736,7 +735,7 @@ namespace FTAnalyzer
         {
             printDocument.DefaultPageSettings.Margins =
                new System.Drawing.Printing.Margins(40, 40, 40, 40);
-            printDocument.DefaultPageSettings.Landscape = true; 
+            printDocument.DefaultPageSettings.Landscape = true;
 
             if (tabSelector.SelectedTab == tabTreetops)
             {
@@ -873,6 +872,11 @@ namespace FTAnalyzer
             if (loc == null)
                 MessageBox.Show("Please select a location to show on the map.");
             return locType;
+        }
+
+        private void geocodeLocationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -22,7 +22,8 @@ namespace FTAnalyzer
                 SPOUSE_GIVENNAME = "spouse_givenname",
                 SPOUSE_SURNAME = "spouse_surname",
                 BATCH_NUMBER = "batch_number",
-                FILM_NUMBER = "film_number";
+                FILM_NUMBER = "film_number",
+                RECORD_TYPE = "record_type";
 
 //        private static readonly string SERVERERROR = "java.io.IOException: Server returned HTTP response code";
 //        private static readonly string SERVERUNAVAILABLE = "Search is unavailable due to maintenance";
@@ -58,6 +59,7 @@ namespace FTAnalyzer
             parameters.Add(SPOUSE_SURNAME, "");
             parameters.Add(BATCH_NUMBER, "");
             parameters.Add(FILM_NUMBER, "");
+//            parameters.Add(RECORD_TYPE, "");
         }
 
         protected override void SetLocationParameters(FactLocation location)
@@ -106,6 +108,7 @@ namespace FTAnalyzer
                     setParameter(SURNAME, surname2 + "~");
                     setParameter(SPOUSE_GIVENNAME, forename1 + "~");
                     setParameter(SPOUSE_SURNAME, surname1 + "~");
+//                    setParameter(RECORD_TYPE, "marriage");
                     return true;
                 }
             }
@@ -115,6 +118,7 @@ namespace FTAnalyzer
                 setParameter(SURNAME, surname1 + "~");
                 setParameter(SPOUSE_GIVENNAME, forename2 + "~");
                 setParameter(SPOUSE_SURNAME, surname2 + "~");
+//                setParameter(RECORD_TYPE, "marriage");
                 return true;
             }
             return false;
