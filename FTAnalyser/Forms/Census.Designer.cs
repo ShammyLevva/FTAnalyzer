@@ -39,6 +39,9 @@
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+            this.tsBtnMapLocation = new System.Windows.Forms.ToolStripButton();
+            this.tsBtnMapOSLocation = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dgCensus)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -46,12 +49,13 @@
             // 
             // dgCensus
             // 
-            this.dgCensus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgCensus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCensus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCensus.Location = new System.Drawing.Point(0, 28);
             this.dgCensus.Name = "dgCensus";
+            this.dgCensus.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgCensus.Size = new System.Drawing.Size(1038, 530);
             this.dgCensus.TabIndex = 1;
             this.dgCensus.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgCensus_CellFormatting);
@@ -79,7 +83,10 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.printToolStripButton,
             this.printPreviewToolStripButton,
-            this.toolStripSeparator});
+            this.toolStripSeparator,
+            this.tsBtnMapLocation,
+            this.tsBtnMapOSLocation,
+            this.toolStripSeparator1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1038, 25);
@@ -127,6 +134,31 @@
             this.printPreviewDialog.Name = "printPreviewDialog";
             this.printPreviewDialog.Visible = false;
             // 
+            // tsBtnMapLocation
+            // 
+            this.tsBtnMapLocation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsBtnMapLocation.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnMapLocation.Image")));
+            this.tsBtnMapLocation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnMapLocation.Name = "tsBtnMapLocation";
+            this.tsBtnMapLocation.Size = new System.Drawing.Size(133, 22);
+            this.tsBtnMapLocation.Text = "Show Location on Map";
+            this.tsBtnMapLocation.Click += new System.EventHandler(this.tsBtnMapLocation_Click);
+            // 
+            // tsBtnMapOSLocation
+            // 
+            this.tsBtnMapOSLocation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsBtnMapOSLocation.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnMapOSLocation.Image")));
+            this.tsBtnMapOSLocation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnMapOSLocation.Name = "tsBtnMapOSLocation";
+            this.tsBtnMapOSLocation.Size = new System.Drawing.Size(151, 22);
+            this.tsBtnMapOSLocation.Text = "Show Location on OS Map";
+            this.tsBtnMapOSLocation.Click += new System.EventHandler(this.tsBtnMapOSLocation_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
             // Census
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -160,5 +192,8 @@
         private System.Windows.Forms.PrintDialog printDialog;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
         private System.Windows.Forms.ToolStripButton printPreviewToolStripButton;
+        private System.Windows.Forms.ToolStripButton tsBtnMapLocation;
+        private System.Windows.Forms.ToolStripButton tsBtnMapOSLocation;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

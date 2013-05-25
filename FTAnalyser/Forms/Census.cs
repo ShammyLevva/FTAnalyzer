@@ -178,5 +178,37 @@ namespace FTAnalyzer.Forms
         {
             printProvider.Drawer.TitlePrintBlock = new TitlePrintBlock(this.Text);
         }
+
+        private void tsBtnMapLocation_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            DisplayCensus ds = dgCensus.CurrentRow == null ? null : (DisplayCensus)dgCensus.CurrentRow.DataBoundItem;
+            FactLocation loc = ds == null ? null : ds.RegistrationLocation;
+            if (loc != null)
+            {   // Do geo coding stuff
+                GoogleMap frmGoogleMap = new GoogleMap();
+                if (frmGoogleMap.setLocation(loc, loc.Level))
+                    frmGoogleMap.Show();
+                else
+                    MessageBox.Show("Unable to find location : " + loc.ToString());
+            }
+            this.Cursor = Cursors.Default;
+        }
+
+        private void tsBtnMapOSLocation_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            DisplayCensus ds = dgCensus.CurrentRow == null ? null : (DisplayCensus)dgCensus.CurrentRow.DataBoundItem;
+            FactLocation loc = ds == null ? null : ds.RegistrationLocation;
+            if (loc != null)
+            {   // Do geo coding stuff
+                BingOSMap frmBingMap = new BingOSMap();
+                if (frmBingMap.setLocation(loc, loc.Level))
+                    frmBingMap.Show();
+                else
+                    MessageBox.Show("Unable to find location : " + loc.ToString());
+            }
+            this.Cursor = Cursors.Default;
+        }
     }
 }
