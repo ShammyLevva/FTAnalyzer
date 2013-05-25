@@ -31,7 +31,7 @@ namespace FTAnalyzer
         {
             if (family != null)
             {
-                if (family.getPreferredFact(Fact.FamilySearch) == null && family.Husband != null && family.Wife != null)
+                if (family.getPreferredFact(Fact.FAMILYSEARCH) == null && family.Husband != null && family.Wife != null)
                 {   // or we have already flagged marriage fact as having been searched
                     // or either the husband or wife is not present
                     if (surnameSearch)

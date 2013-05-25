@@ -507,7 +507,7 @@ namespace FTAnalyzer
                 
         public Fact getPreferredFact(string factType) {
             // Returns the first fact of the given type.
-            // This assumes the orFamilySearchnal GEDCOM file has the preferred fact first in the list
+            // This assumes the original GEDCOM file has the preferred fact first in the list
             // as per the GEDCOM 5.5 specification.
             foreach(Fact f in facts)
             {

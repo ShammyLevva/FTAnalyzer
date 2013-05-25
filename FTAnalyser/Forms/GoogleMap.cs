@@ -126,7 +126,7 @@ namespace FTAnalyzer.Forms
             //{
             //    result = sr.ReadToEnd();
             //}
-            //stream.Seek(0L, SeekOrFamilySearchn.Begin);
+            //stream.Seek(0L, SeekOrigin.Begin);
             var res = (GeoResponse)serializer.ReadObject(stream);
             return res;
         }

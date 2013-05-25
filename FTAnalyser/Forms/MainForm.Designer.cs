@@ -995,7 +995,7 @@
             this.tabFamilySearch.Name = "tabFamilySearch";
             this.tabFamilySearch.Size = new System.Drawing.Size(931, 402);
             this.tabFamilySearch.TabIndex = 6;
-            this.tabFamilySearch.Text = "FamilySearch Search";
+            this.tabFamilySearch.Text = "FamilySearch";
             this.tabFamilySearch.UseVisualStyleBackColor = true;
             // 
             // label7

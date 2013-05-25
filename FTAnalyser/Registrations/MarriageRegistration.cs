@@ -105,7 +105,7 @@ namespace FTAnalyzer
             get { return ""; }
         }
         
-        public string RelFamilySearchon {
+        public string Religion {
             get { return ""; }
         }
 

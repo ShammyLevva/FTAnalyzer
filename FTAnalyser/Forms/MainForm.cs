@@ -67,7 +67,7 @@ namespace FTAnalyzer
                 }
                 catch (IOException ex)
                 {
-                    MessageBox.Show("Error: Could not read file from disk. OrFamilySearchnal error: " + ex.Message);
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
                 }
                 catch (Exception ex2)
                 {

@@ -31,7 +31,7 @@ namespace FTAnalyzer.Forms
             lbResults.Items.Clear();
             DirectoryInfo di = new DirectoryInfo(folder);
             FileInfo[] files = di.GetFiles("*.html");
-            int additionalDays = (int) upFamilySearchResultsFDayilter.Value;
+            int additionalDays = (int) upFamilySearchResultsFilter.Value;
             foreach (FileInfo fi in files)
             {
                 if (fi.LastWriteTime.AddDays(additionalDays) >= DateTime.Now)
@@ -63,9 +63,9 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void upFamilySearchResultsFDayilter_ValueChanged(object sender, EventArgs e)
+        private void upFamilySearchResultsFilter_ValueChanged(object sender, EventArgs e)
         {
-            if (upFamilySearchResultsFDayilter.Value == 1)
+            if (upFamilySearchResultsFilter.Value == 1)
                 labDays.Text = "day";
             else
                 labDays.Text = "days";

@@ -32,11 +32,11 @@
             this.lbResults = new System.Windows.Forms.ListBox();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.tooltips = new System.Windows.Forms.ToolTip(this.components);
-            this.upFamilySearchResultsFDayilter = new System.Windows.Forms.NumericUpDown();
+            this.upFamilySearchResultsFilter = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.labDays = new System.Windows.Forms.Label();
             this.labFileCount = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.upFamilySearchResultsFDayilter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upFamilySearchResultsFilter)).BeginInit();
             this.SuspendLayout();
             // 
             // lbResults
@@ -57,28 +57,28 @@
             this.webBrowser.Size = new System.Drawing.Size(1003, 459);
             this.webBrowser.TabIndex = 1;
             // 
-            // upFamilySearchResultsFDayilter
+            // upFamilySearchResultsFilter
             // 
-            this.upFamilySearchResultsFDayilter.Location = new System.Drawing.Point(940, 477);
-            this.upFamilySearchResultsFDayilter.Maximum = new decimal(new int[] {
+            this.upFamilySearchResultsFilter.Location = new System.Drawing.Point(940, 477);
+            this.upFamilySearchResultsFilter.Maximum = new decimal(new int[] {
             365,
             0,
             0,
             0});
-            this.upFamilySearchResultsFDayilter.Minimum = new decimal(new int[] {
+            this.upFamilySearchResultsFilter.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.upFamilySearchResultsFDayilter.Name = "upFamilySearchResultsFDayilter";
-            this.upFamilySearchResultsFDayilter.Size = new System.Drawing.Size(40, 20);
-            this.upFamilySearchResultsFDayilter.TabIndex = 2;
-            this.upFamilySearchResultsFDayilter.Value = new decimal(new int[] {
+            this.upFamilySearchResultsFilter.Name = "upFamilySearchResultsFilter";
+            this.upFamilySearchResultsFilter.Size = new System.Drawing.Size(40, 20);
+            this.upFamilySearchResultsFilter.TabIndex = 2;
+            this.upFamilySearchResultsFilter.Value = new decimal(new int[] {
             7,
             0,
             0,
             0});
-            this.upFamilySearchResultsFDayilter.ValueChanged += new System.EventHandler(this.upFamilySearchResultsFDayilter_ValueChanged);
+            this.upFamilySearchResultsFilter.ValueChanged += new System.EventHandler(this.upFamilySearchResultsFilter_ValueChanged);
             // 
             // label1
             // 
@@ -115,12 +115,12 @@
             this.Controls.Add(this.labFileCount);
             this.Controls.Add(this.labDays);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.upFamilySearchResultsFDayilter);
+            this.Controls.Add(this.upFamilySearchResultsFilter);
             this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.lbResults);
             this.Name = "FamilySearchResultsViewer";
             this.Text = "FamilySearchResultsViewer";
-            ((System.ComponentModel.ISupportInitialize)(this.upFamilySearchResultsFDayilter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upFamilySearchResultsFilter)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -131,7 +131,7 @@
         private System.Windows.Forms.ListBox lbResults;
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.ToolTip tooltips;
-        private System.Windows.Forms.NumericUpDown upFamilySearchResultsFDayilter;
+        private System.Windows.Forms.NumericUpDown upFamilySearchResultsFilter;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labDays;
         private System.Windows.Forms.Label labFileCount;
