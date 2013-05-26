@@ -76,7 +76,7 @@ namespace FTAnalyzer.Forms
         public static string locationText(GeoResponse res, FactLocation loc, int level)
         {
             string output = string.Empty;
-            int returnlevel = getFactLocation(res.Results[0].Types);
+            int returnlevel = GetFactLocation(res.Results[0].Types);
             if (returnlevel != FactLocation.UNKNOWN)
             {
                 output = "Google found " + loc.getLocation(returnlevel);
@@ -92,7 +92,7 @@ namespace FTAnalyzer.Forms
             return output;
         }
 
-        private static int getFactLocation(string[] locationTypes)
+        public static int GetFactLocation(string[] locationTypes)
         {
             HashSet<string> types = new HashSet<string>(locationTypes);
             if (types.Contains(PREMISE) || types.Contains(STREET_ADDRESS) || types.Contains(CEMETERY) ||
@@ -134,7 +134,7 @@ namespace FTAnalyzer.Forms
         private static int sleepinterval = 200;
 
         // Call geocoding routine but account for throttling by Google geocoding engine
-        private static GeoResponse CallGeoWSCount(string address, int badtries)
+        public static GeoResponse CallGeoWSCount(string address, int badtries)
         {
             Thread.Sleep(sleepinterval);
             GeoResponse res;
