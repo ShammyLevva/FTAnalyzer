@@ -35,6 +35,7 @@ namespace FTAnalyzer
             toolTips.SetToolTip(tabRegions, "Double click on Region name to see list of individuals with that Region.");
             toolTips.SetToolTip(tabParishes, "Double click on 'Parish' name to see list of individuals with that parish/area.");
             toolTips.SetToolTip(tabAddresses, "Double click on Address name to see list of individuals with that Address.");
+            ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -67,10 +68,12 @@ namespace FTAnalyzer
                 }
                 catch (IOException ex)
                 {
+                    HourGlass(true);
                     MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
                 }
                 catch (Exception ex2)
                 {
+                    HourGlass(true);
                     MessageBox.Show("Error: Problem processing your file.\n" +
                         "Please report this at http://ftanalyzer.codeplex.com. Error was: " + ex2.Message);
                 }
@@ -113,6 +116,16 @@ namespace FTAnalyzer
             }
             else
             {
+                if (!ft.DataLoaded)
+                {   // do not process anything if no GEDCOM yet loaded
+                    if (tabSelector.SelectedTab != tabDisplayProgress)
+                    {
+                        tabSelector.SelectedTab = tabDisplayProgress;
+                        tsCountLabel.Text = "";
+                        MessageBox.Show("You need to load your GEDCOM file before the program can display results. Click File | Open.");
+                    }
+                    return;
+                }
                 HourGlass(true);
                 if (tabSelector.SelectedTab == tabDisplayProgress)
                 {
@@ -155,6 +168,10 @@ namespace FTAnalyzer
                     btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled =
                         btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled =
                         btnLC1911EW.Enabled = ft.IndividualCount > 0;
+                }
+                else if (tabSelector.SelectedTab == tabDataErrors)
+                {
+                    ft.UpdateDataErrorsList(ckbDataErrors);
                 }
                 else if (tabSelector.SelectedTab == tabLooseDeaths)
                 {
@@ -921,12 +938,18 @@ namespace FTAnalyzer
                     Console.WriteLine("Found " + good + " records and failed to find " + bad + " records from " + count + " of " + locations.Count);
                 }
                 conn.Close();
+                MessageBox.Show("Finished Geocoding");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error geocoding : " + ex.Message);
             }
             HourGlass(false);
+        }
+
+        private void ckbDataErrors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ft.UpdateDataErrorsList(ckbDataErrors);
         }
     }
 }

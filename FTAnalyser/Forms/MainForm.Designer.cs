@@ -75,6 +75,9 @@
             this.dgAddresses = new System.Windows.Forms.DataGridView();
             this.tabOccupations = new System.Windows.Forms.TabPage();
             this.dgOccupations = new System.Windows.Forms.DataGridView();
+            this.tabDataErrors = new System.Windows.Forms.TabPage();
+            this.gbDataErrorTypes = new System.Windows.Forms.GroupBox();
+            this.ckbDataErrors = new System.Windows.Forms.CheckedListBox();
             this.tabLooseDeaths = new System.Windows.Forms.TabPage();
             this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
             this.tabCensus = new System.Windows.Forms.TabPage();
@@ -133,9 +136,6 @@
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
-            this.tabDataErrors = new System.Windows.Forms.TabPage();
-            this.gbDataErrorTypes = new System.Windows.Forms.GroupBox();
-            this.ckbDataErrors = new System.Windows.Forms.CheckedListBox();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.cenDate = new Controls.CensusDateSelector();
             this.censusCountry = new Controls.CensusCountry();
@@ -167,6 +167,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).BeginInit();
             this.tabOccupations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgOccupations)).BeginInit();
+            this.tabDataErrors.SuspendLayout();
+            this.gbDataErrorTypes.SuspendLayout();
             this.tabLooseDeaths.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).BeginInit();
             this.tabCensus.SuspendLayout();
@@ -180,8 +182,6 @@
             this.tabWarDead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWarDead)).BeginInit();
             this.statusStrip.SuspendLayout();
-            this.tabDataErrors.SuspendLayout();
-            this.gbDataErrorTypes.SuspendLayout();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -270,6 +270,7 @@
             this.geocodeLocationsToolStripMenuItem.Name = "geocodeLocationsToolStripMenuItem";
             this.geocodeLocationsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.geocodeLocationsToolStripMenuItem.Text = "Geocode Locations";
+            this.geocodeLocationsToolStripMenuItem.Visible = false;
             this.geocodeLocationsToolStripMenuItem.Click += new System.EventHandler(this.geocodeLocationsToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
@@ -310,9 +311,9 @@
             // 
             // tabSelector
             // 
-            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabSelector.Controls.Add(this.tabDisplayProgress);
             this.tabSelector.Controls.Add(this.tabIndividuals);
             this.tabSelector.Controls.Add(this.tabFamilies);
@@ -505,9 +506,9 @@
             // 
             // tabCtrlLocations
             // 
-            this.tabCtrlLocations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabCtrlLocations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabCtrlLocations.Controls.Add(this.tabCountries);
             this.tabCtrlLocations.Controls.Add(this.tabRegions);
             this.tabCtrlLocations.Controls.Add(this.tabParishes);
@@ -647,6 +648,39 @@
             this.dgOccupations.TabIndex = 2;
             this.dgOccupations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgOccupations_CellDoubleClick);
             // 
+            // tabDataErrors
+            // 
+            this.tabDataErrors.Controls.Add(this.gbDataErrorTypes);
+            this.tabDataErrors.Location = new System.Drawing.Point(4, 22);
+            this.tabDataErrors.Name = "tabDataErrors";
+            this.tabDataErrors.Size = new System.Drawing.Size(931, 402);
+            this.tabDataErrors.TabIndex = 11;
+            this.tabDataErrors.Text = "Data Errors";
+            this.tabDataErrors.UseVisualStyleBackColor = true;
+            // 
+            // gbDataErrorTypes
+            // 
+            this.gbDataErrorTypes.Controls.Add(this.ckbDataErrors);
+            this.gbDataErrorTypes.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gbDataErrorTypes.Location = new System.Drawing.Point(0, 0);
+            this.gbDataErrorTypes.Name = "gbDataErrorTypes";
+            this.gbDataErrorTypes.Size = new System.Drawing.Size(931, 108);
+            this.gbDataErrorTypes.TabIndex = 0;
+            this.gbDataErrorTypes.TabStop = false;
+            this.gbDataErrorTypes.Text = "Types of Data Error to display";
+            // 
+            // ckbDataErrors
+            // 
+            this.ckbDataErrors.CheckOnClick = true;
+            this.ckbDataErrors.ColumnWidth = 225;
+            this.ckbDataErrors.FormattingEnabled = true;
+            this.ckbDataErrors.Location = new System.Drawing.Point(8, 19);
+            this.ckbDataErrors.MultiColumn = true;
+            this.ckbDataErrors.Name = "ckbDataErrors";
+            this.ckbDataErrors.Size = new System.Drawing.Size(700, 79);
+            this.ckbDataErrors.TabIndex = 0;
+            this.ckbDataErrors.SelectedIndexChanged += new System.EventHandler(this.ckbDataErrors_SelectedIndexChanged);
+            // 
             // tabLooseDeaths
             // 
             this.tabLooseDeaths.Controls.Add(this.dgLooseDeaths);
@@ -662,9 +696,9 @@
             // 
             this.dgLooseDeaths.AllowUserToAddRows = false;
             this.dgLooseDeaths.AllowUserToDeleteRows = false;
-            this.dgLooseDeaths.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgLooseDeaths.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgLooseDeaths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLooseDeaths.Location = new System.Drawing.Point(0, 0);
@@ -879,7 +913,7 @@
             this.ckbRestrictions.Size = new System.Drawing.Size(521, 17);
             this.ckbRestrictions.TabIndex = 9;
             this.ckbRestrictions.Text = "Restrict results to only those direct ancestors, blood relations and those marrie" +
-    "d to direct or blood relations";
+                "d to direct or blood relations";
             this.ckbRestrictions.UseVisualStyleBackColor = true;
             // 
             // btnLC1841EW
@@ -1048,8 +1082,8 @@
             // 
             // pbFamilySearch
             // 
-            this.pbFamilySearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbFamilySearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pbFamilySearch.Location = new System.Drawing.Point(8, 151);
             this.pbFamilySearch.Name = "pbFamilySearch";
             this.pbFamilySearch.Size = new System.Drawing.Size(915, 20);
@@ -1119,9 +1153,9 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.dgTreeTops);
             this.panel1.Location = new System.Drawing.Point(8, 92);
             this.panel1.Name = "panel1";
@@ -1132,9 +1166,9 @@
             // 
             this.dgTreeTops.AllowUserToAddRows = false;
             this.dgTreeTops.AllowUserToDeleteRows = false;
-            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgTreeTops.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgTreeTops.Location = new System.Drawing.Point(0, 0);
@@ -1209,9 +1243,9 @@
             // 
             this.dgWarDead.AllowUserToAddRows = false;
             this.dgWarDead.AllowUserToDeleteRows = false;
-            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgWarDead.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgWarDead.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgWarDead.Location = new System.Drawing.Point(3, 92);
@@ -1272,57 +1306,10 @@
             // 
             this.printDialog.UseEXDialog = true;
             // 
-            // tabDataErrors
-            // 
-            this.tabDataErrors.Controls.Add(this.gbDataErrorTypes);
-            this.tabDataErrors.Location = new System.Drawing.Point(4, 22);
-            this.tabDataErrors.Name = "tabDataErrors";
-            this.tabDataErrors.Size = new System.Drawing.Size(931, 402);
-            this.tabDataErrors.TabIndex = 11;
-            this.tabDataErrors.Text = "Data Errors";
-            this.tabDataErrors.UseVisualStyleBackColor = true;
-            // 
-            // gbDataErrorTypes
-            // 
-            this.gbDataErrorTypes.Controls.Add(this.ckbDataErrors);
-            this.gbDataErrorTypes.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbDataErrorTypes.Location = new System.Drawing.Point(0, 0);
-            this.gbDataErrorTypes.Name = "gbDataErrorTypes";
-            this.gbDataErrorTypes.Size = new System.Drawing.Size(931, 108);
-            this.gbDataErrorTypes.TabIndex = 0;
-            this.gbDataErrorTypes.TabStop = false;
-            this.gbDataErrorTypes.Text = "Types of Data Error to display";
-            // 
-            // ckbDataErrors
-            // 
-            this.ckbDataErrors.CheckOnClick = true;
-            this.ckbDataErrors.ColumnWidth = 225;
-            this.ckbDataErrors.FormattingEnabled = true;
-            this.ckbDataErrors.Items.AddRange(new object[] {
-            "Birth after death",
-            "Birth after father aged 90+",
-            "Birth after mother aged 60+",
-            "Birth after mothers death",
-            "Birth more than 9m after fathers death",
-            "Birth before father aged 13",
-            "Birth before mother aged 13",
-            "Burial before death",
-            "Aged more than 120 at death",
-            "Facts dated before birth",
-            "Marriage after death",
-            "Marriage after spouse\'s death",
-            "Marriage before aged 13",
-            "Marriage before spouse aged 13"});
-            this.ckbDataErrors.Location = new System.Drawing.Point(8, 19);
-            this.ckbDataErrors.MultiColumn = true;
-            this.ckbDataErrors.Name = "ckbDataErrors";
-            this.ckbDataErrors.Size = new System.Drawing.Size(700, 79);
-            this.ckbDataErrors.TabIndex = 0;
-            // 
             // rtbOutput
             // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbOutput.Location = new System.Drawing.Point(3, 90);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.Size = new System.Drawing.Size(925, 303);
@@ -1452,6 +1439,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).EndInit();
             this.tabOccupations.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgOccupations)).EndInit();
+            this.tabDataErrors.ResumeLayout(false);
+            this.gbDataErrorTypes.ResumeLayout(false);
             this.tabLooseDeaths.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).EndInit();
             this.tabCensus.ResumeLayout(false);
@@ -1472,8 +1461,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgWarDead)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            this.tabDataErrors.ResumeLayout(false);
-            this.gbDataErrorTypes.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

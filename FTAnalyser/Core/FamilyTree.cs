@@ -19,8 +19,10 @@ namespace FTAnalyzer
         private Dictionary<string, FactLocation> locations;
         private Dictionary<string, List<Individual>> occupations;
         private bool _loading = false;
+        private bool _dataloaded = false;
         private RichTextBox xmlErrorbox = new RichTextBox();
         private int maxAhnentafel = 0;
+        private List<string> dataErrorTypes;
 
         private FamilyTree()
         {
@@ -93,11 +95,14 @@ namespace FTAnalyzer
         #region Load Gedcom XML
         private void ResetData()
         {
+            _dataloaded = false;
             sources = new List<FactSource>();
             individuals = new List<Individual>();
             families = new List<Family>();
             locations = new Dictionary<string, FactLocation>();
             occupations = new Dictionary<string, List<Individual>>();
+            dataErrorTypes = new List<string>();
+            SetDataErrorTypes();
         }
 
         public void LoadTree(XmlDocument doc, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
@@ -155,6 +160,7 @@ namespace FTAnalyzer
             SetParishes();
             FixIDs();
             _loading = false;
+            _dataloaded = true;
         }
 
         private void AddOccupations(Individual individual)
@@ -208,6 +214,8 @@ namespace FTAnalyzer
         #region Properties
 
         public bool Loading { get { return _loading; } }
+
+        public bool DataLoaded { get { return _dataloaded; } }
 
         public RichTextBox XmlErrorBox
         {
@@ -1015,6 +1023,46 @@ namespace FTAnalyzer
             return new SortableBindingList<Individual>(occupations[job]);
         }
 
+        #endregion
+
+        #region Data Errors
+
+        private void SetDataErrorTypes()
+        {
+            dataErrorTypes.Add("Birth after death");
+            dataErrorTypes.Add("Birth after father aged 90+");
+            dataErrorTypes.Add("Birth after mother aged 60+");
+            dataErrorTypes.Add("Birth after mothers death");
+            dataErrorTypes.Add("Birth more than 9m after fathers death");
+            dataErrorTypes.Add("Birth before father aged 13");
+            dataErrorTypes.Add("Birth before mother aged 13");
+            dataErrorTypes.Add("Burial before death");
+            dataErrorTypes.Add("Aged more than 120 at death");
+            dataErrorTypes.Add("Facts dated before birth");
+            dataErrorTypes.Add("Marriage after death");
+            dataErrorTypes.Add("Marriage after spouse's death");
+            dataErrorTypes.Add("Marriage before aged 13");
+            dataErrorTypes.Add("Marriage before spouse aged 13");
+
+        }
+
+        public void SetDataErrorsCheckedDefaults(CheckedListBox list)
+        {
+            // TODO dataErrorTypes is list of strings but it should be list of dataError methods
+            foreach(string dataError in dataErrorTypes)
+            {
+                int index = list.Items.Add(dataError);
+                list.SetItemChecked(index, true);
+            }
+        }
+
+        public void UpdateDataErrorsList(CheckedListBox list)
+        {
+            foreach (int indexChecked in list.CheckedIndices)
+            {
+                string item = (string) list.CheckedItems[indexChecked];
+            }       
+        }
         #endregion
 
     }
