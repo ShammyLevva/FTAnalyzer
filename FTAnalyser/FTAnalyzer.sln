@@ -7,9 +7,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Old Java Code", "..\Old Jav
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTMAnalyzer", "..\FTMAnalyzer\FTMAnalyzer.csproj", "{4DA6B8B8-8F42-4DFF-B998-5DF9F99929AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactDateTest", "FactDateTest\FactDateTest.csproj", "{B1B5657E-4843-42BC-B859-FFEE313A1680}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9E472449-87D9-4733-B16D-C380B90A309C}"
+	ProjectSection(SolutionItems) = preProject
+		FTAnalyzer.vsmdi = FTAnalyzer.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
 		SccLocalPath0 = .
@@ -21,6 +30,12 @@ Global
 		SccProjectUniqueName3 = ..\\FTMAnalyzer\\FTMAnalyzer.csproj
 		SccProjectName3 = ../FTMAnalyzer
 		SccLocalPath3 = ..\\FTMAnalyzer
+		SccProjectUniqueName4 = FactDateTest\\FactDateTest.csproj
+		SccProjectName4 = FactDateTest
+		SccLocalPath4 = FactDateTest
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = FTAnalyzer.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +66,12 @@ Global
 		{4DA6B8B8-8F42-4DFF-B998-5DF9F99929AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DA6B8B8-8F42-4DFF-B998-5DF9F99929AE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4DA6B8B8-8F42-4DFF-B998-5DF9F99929AE}.Release|x86.ActiveCfg = Release|Any CPU
+		{B1B5657E-4843-42BC-B859-FFEE313A1680}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1B5657E-4843-42BC-B859-FFEE313A1680}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1B5657E-4843-42BC-B859-FFEE313A1680}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B1B5657E-4843-42BC-B859-FFEE313A1680}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1B5657E-4843-42BC-B859-FFEE313A1680}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1B5657E-4843-42BC-B859-FFEE313A1680}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
