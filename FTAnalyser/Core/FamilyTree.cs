@@ -1099,6 +1099,13 @@ namespace FTAnalyzer
                             maxAge = spouse.getMaxAge(asParent.MarriageDate);
                             if (maxAge < 13)
                                 errors[13].Add(new DataError(ind, "Marriage to " + spouse.Name + " in " + asParent.MarriageDate + " is before spouse born " + spouse.BirthDate + " was 13 years old"));
+                            //if (ind.FirstMarriage != null && ind.FirstMarriage.MarriageDate != null)
+                            //{
+                            //    if (asParent.MarriageDate.isAfter(ind.FirstMarriage.MarriageDate))
+                            //    {  // we have a later marriage now see if first marriage wife
+
+                            //    }
+                            //}
                         }
                     }
                 }
