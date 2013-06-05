@@ -542,6 +542,17 @@ namespace FTAnalyzer
             return result;
         }
 
+        public FactDate getFirstMarriageDate()
+        {
+            FactDate firstMarriage = new FactDate(FactDate.MAXDATE.ToString());
+            foreach(Family marriage in familiesAsParent)
+            {
+                if (marriage.MarriageDate.isBefore(firstMarriage))
+                    firstMarriage = marriage.MarriageDate;
+            }
+            return firstMarriage;
+        }
+
         #endregion
 
         #region Location functions

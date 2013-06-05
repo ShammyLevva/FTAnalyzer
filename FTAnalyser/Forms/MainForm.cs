@@ -62,6 +62,7 @@ namespace FTAnalyzer
                         document.Save("GedcomOutput.xml");
                         ft.LoadTree(document, pbSources, pbIndividuals, pbFamilies);
                         ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
+                        Application.UseWaitCursor = false;
                         HourGlass(false);
                         MessageBox.Show("Gedcom File Loaded");
                     }

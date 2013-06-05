@@ -322,6 +322,15 @@ namespace FTAnalyzer
             }
         }
 
+        public Individual Spouse(Individual ind)
+        {
+            if (ind.Equals(husband))
+                return wife;
+            if (ind.Equals(wife))
+                return husband;
+            return null;
+        }
+
         #endregion
 
         public void setBudgieCode(Individual ind, int lenAhnentafel)
