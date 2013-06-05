@@ -251,7 +251,7 @@ namespace FTAnalyzer
                          || processDate.StartsWith("ABT SEP") || processDate.StartsWith("ABT DEC"))
                     {
                         // quarter dates
-                        startdate = parseDate(dateValue, LOW, -3);
+                        startdate = parseDate(dateValue, LOW, -2);
                     }
                     else
                     {
@@ -351,10 +351,12 @@ namespace FTAnalyzer
                 {
                     date = DateTime.ParseExact(dateValue, MONTHYEAR, CULTURE);
                     dt = new DateTime(date.Year, date.Month, 1);
-                    dt = dt.AddMonths(adjustment + 1);
+                    dt = dt.AddMonths(adjustment);
                     if (highlow == HIGH)
                     {
-                        // at 1st of month so subtract 1 day to be last day of correct month.
+                        // at 1st of month so add 1 month to first of next month
+                        dt = dt.AddMonths(1);
+                        // then subtract 1 day to be last day of correct month.
                         dt = dt.AddDays(-1);
                     }
                 }
