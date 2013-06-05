@@ -162,6 +162,20 @@ namespace FTAnalyzer
             return new FactDate(start, end);
         }
 
+        public FactDate subtractMonths(int months)
+        {
+            DateTime start = new DateTime(startdate.Year, startdate.Month, startdate.Day);
+            DateTime end = new DateTime(enddate.Year, enddate.Month, enddate.Day);
+            if (startdate != MINDATE)
+                start = start.AddMonths(-months);
+            else
+                start = MINDATE;
+            end = end.AddMonths(-months);
+            if (start < MINDATE)
+                start = MINDATE;
+            return new FactDate(start, end);
+        }
+
         private string calculateDatestring()
         {
             string check;

@@ -22,7 +22,7 @@ namespace FTAnalyzer
         private bool _dataloaded = false;
         private RichTextBox xmlErrorbox = new RichTextBox();
         private int maxAhnentafel = 0;
-        private List<string> dataErrorTypes;
+        private List<DataErrorGroup> dataErrorTypes;
 
         private FamilyTree()
         {
@@ -101,8 +101,7 @@ namespace FTAnalyzer
             families = new List<Family>();
             locations = new Dictionary<string, FactLocation>();
             occupations = new Dictionary<string, List<Individual>>();
-            dataErrorTypes = new List<string>();
-            SetDataErrorTypes();
+            dataErrorTypes = new List<DataErrorGroup>();
         }
 
         public void LoadTree(XmlDocument doc, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
@@ -159,6 +158,7 @@ namespace FTAnalyzer
             xmlErrorbox.AppendText(PrintRelationCount());
             SetParishes();
             FixIDs();
+            SetDataErrorTypes();
             _loading = false;
             _dataloaded = true;
         }
@@ -484,6 +484,20 @@ namespace FTAnalyzer
             List<string> ls = result.ToList();
             ls.Sort();
             return ls;
+        }
+
+        private void FixIDs()
+        {
+            int lenID = individuals.Count.ToString().Length;
+            foreach (Individual ind in individuals)
+            {
+                ind.FixIndividualID(lenID);
+            }
+            lenID = families.Count.ToString().Length;
+            foreach (Family f in families)
+            {
+                f.FixFamilyGed(lenID);
+            }
         }
 
         #endregion
@@ -860,20 +874,6 @@ namespace FTAnalyzer
 
         #endregion
 
-        private void FixIDs()
-        {
-            int lenID = individuals.Count.ToString().Length;
-            foreach (Individual ind in individuals)
-            {
-                ind.FixIndividualID(lenID);
-            }
-            lenID = families.Count.ToString().Length;
-            foreach (Family f in families)
-            {
-                f.FixFamilyGed(lenID);
-            }
-        }
-
         #region Parish Functions
 
         private void SetParishes()
@@ -1029,39 +1029,98 @@ namespace FTAnalyzer
 
         private void SetDataErrorTypes()
         {
-            dataErrorTypes.Add("Birth after death");
-            dataErrorTypes.Add("Birth after father aged 90+");
-            dataErrorTypes.Add("Birth after mother aged 60+");
-            dataErrorTypes.Add("Birth after mothers death");
-            dataErrorTypes.Add("Birth more than 9m after fathers death");
-            dataErrorTypes.Add("Birth before father aged 13");
-            dataErrorTypes.Add("Birth before mother aged 13");
-            dataErrorTypes.Add("Burial before death");
-            dataErrorTypes.Add("Aged more than 120 at death");
-            dataErrorTypes.Add("Facts dated before birth");
-            dataErrorTypes.Add("Marriage after death");
-            dataErrorTypes.Add("Marriage after spouse's death");
-            dataErrorTypes.Add("Marriage before aged 13");
-            dataErrorTypes.Add("Marriage before spouse aged 13");
-
+            dataErrorTypes = new List<DataErrorGroup>();
+            List<DataError>[] errors = new List<DataError>[15];
+            for (int i = 0; i < 15; i++)
+                errors[i] = new List<DataError>();
+            // calculate error lists
+            foreach(Individual ind in AllIndividuals)
+            {
+                try
+                {
+                    if (ind.DeathDate != null)
+                    {
+                        if (ind.BirthDate.isAfter(ind.DeathDate))
+                            errors[0].Add(new DataError(ind, "Died " + ind.DeathDate + " before born"));
+                        if (ind.BurialDate != null && ind.BurialDate.isBefore(ind.DeathDate) && !ind.BurialDate.overlaps(ind.DeathDate))
+                            errors[7].Add(new DataError(ind, "Buried " + ind.BurialDate + " before died " + ind.DeathDate));
+                        int minAge = ind.getMinAge(ind.DeathDate);
+                        if(minAge > 110)
+                            errors[8].Add(new DataError(ind, "Aged over 110 before died " + ind.DeathDate));
+                    }
+                    foreach (Family asChild in ind.FamiliesAsChild)
+                    {
+                        Individual father = asChild.Husband;
+                        if (father != null)
+                        {
+                            int minAge = father.getMinAge(ind.BirthDate);
+                            int maxAge = father.getMaxAge(ind.BirthDate);
+                            if (minAge > 90)
+                                errors[1].Add(new DataError(ind, "Father " + father.Name + " born " + father.BirthDate + " is more than 90 at individual's birthdate"));
+                            if (maxAge < 13)
+                                errors[5].Add(new DataError(ind, "Father " + father.Name + " born " + father.BirthDate + " is less than 13 at individual's birthdate"));
+                            if (father.DeathDate != null && ind.BirthDate.ToString() != "UNKNOWN")
+                            {
+                                FactDate conception = ind.BirthDate.subtractMonths(9);
+                                if (father.DeathDate.isBefore(conception))
+                                    errors[4].Add(new DataError(ind, "Father " + father.Name + " died " + father.DeathDate + " more than 9 months before individual's birthdate"));
+                            }
+                        }
+                        Individual mother = asChild.Wife;
+                        if (mother != null)
+                        {
+                            int minAge = mother.getMinAge(ind.BirthDate);
+                            int maxAge = mother.getMaxAge(ind.BirthDate);
+                            if (minAge > 60)
+                                errors[2].Add(new DataError(ind, "Mother " + mother.Name + " born " + mother.BirthDate + " is more than 60 at individual's birthdate"));
+                            if (maxAge < 13)
+                                errors[6].Add(new DataError(ind, "Mother " + mother.Name + " born " + mother.BirthDate + " is less than 13 at individual's birthdate"));
+                            if (mother.DeathDate != null && mother.DeathDate.isBefore(ind.BirthDate))
+                                errors[3].Add(new DataError(ind, "Mother " + mother.Name + " died " + mother.DeathDate + " which is before individual's birthdate"));
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }            
+            dataErrorTypes.Add(new DataErrorGroup("Birth after death", errors[0]));
+            dataErrorTypes.Add(new DataErrorGroup("Birth after father aged 90+", errors[1]));
+            dataErrorTypes.Add(new DataErrorGroup("Birth after mother aged 60+", errors[2]));
+            dataErrorTypes.Add(new DataErrorGroup("Birth after mothers death", errors[3]));
+            dataErrorTypes.Add(new DataErrorGroup("Birth more than 9m after fathers death", errors[4]));
+            dataErrorTypes.Add(new DataErrorGroup("Birth before father aged 13", errors[5]));
+            dataErrorTypes.Add(new DataErrorGroup("Birth before mother aged 13", errors[6]));
+            dataErrorTypes.Add(new DataErrorGroup("Burial before death", errors[7]));
+            dataErrorTypes.Add(new DataErrorGroup("Aged more than 120 at death" , errors[8]));
+            dataErrorTypes.Add(new DataErrorGroup("Facts dated before birth", errors[9]));
+            dataErrorTypes.Add(new DataErrorGroup("Marriage after death", errors[10]));
+            dataErrorTypes.Add(new DataErrorGroup("Marriage after spouse's death", errors[11]));
+            dataErrorTypes.Add(new DataErrorGroup("Marriage before aged 13", errors[12]));
+            dataErrorTypes.Add(new DataErrorGroup("Marriage before spouse aged 13", errors[13]));
+            dataErrorTypes.Add(new DataErrorGroup("Later marriage before previous spouse died", errors[14]));
         }
 
         public void SetDataErrorsCheckedDefaults(CheckedListBox list)
         {
-            // TODO dataErrorTypes is list of strings but it should be list of dataError methods
-            foreach(string dataError in dataErrorTypes)
+            list.Items.Clear();
+            foreach(DataErrorGroup dataError in dataErrorTypes)
             {
                 int index = list.Items.Add(dataError);
                 list.SetItemChecked(index, true);
             }
         }
 
-        public void UpdateDataErrorsList(CheckedListBox list)
+        public List<DataError> DataErrors(CheckedListBox list)
         {
+            List<DataError> errors = new List<DataError>();
             foreach (int indexChecked in list.CheckedIndices)
             {
-                string item = (string) list.CheckedItems[indexChecked];
-            }       
+                DataErrorGroup item = (DataErrorGroup) list.Items[indexChecked];
+                errors.AddRange(item.Errors);
+            }
+            return errors;
         }
         #endregion
 

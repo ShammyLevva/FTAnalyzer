@@ -35,7 +35,6 @@ namespace FTAnalyzer
             toolTips.SetToolTip(tabRegions, "Double click on Region name to see list of individuals with that Region.");
             toolTips.SetToolTip(tabParishes, "Double click on 'Parish' name to see list of individuals with that parish/area.");
             toolTips.SetToolTip(tabAddresses, "Double click on Address name to see list of individuals with that Address.");
-            ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -62,6 +61,7 @@ namespace FTAnalyzer
                         XmlDocument document = GedcomToXml.Load(openGedcom.FileName);
                         document.Save("GedcomOutput.xml");
                         ft.LoadTree(document, pbSources, pbIndividuals, pbFamilies);
+                        ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
                         HourGlass(false);
                         MessageBox.Show("Gedcom File Loaded");
                     }
@@ -171,7 +171,9 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabDataErrors)
                 {
-                    ft.UpdateDataErrorsList(ckbDataErrors);
+                    List<DataError> errors =  ft.DataErrors(ckbDataErrors);
+                    dgDataErrors.DataSource = errors;
+                    tsCountLabel.Text = "Count : " + errors.Count;
                 }
                 else if (tabSelector.SelectedTab == tabLooseDeaths)
                 {
@@ -949,7 +951,9 @@ namespace FTAnalyzer
 
         private void ckbDataErrors_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ft.UpdateDataErrorsList(ckbDataErrors);
+            List<DataError> errors = ft.DataErrors(ckbDataErrors);
+            dgDataErrors.DataSource = errors;
+            tsCountLabel.Text = "Count : " + errors.Count;
         }
     }
 }

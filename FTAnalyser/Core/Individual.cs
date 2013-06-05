@@ -299,6 +299,15 @@ namespace FTAnalyzer
             }
         }
 
+        public FactDate BurialDate
+        {
+            get
+            {
+                Fact f = getPreferredFact(Fact.BURIAL);
+                return (f == null) ? null : f.FactDate;
+            }
+        }
+
         public string Occupation
         {
             get

@@ -111,6 +111,8 @@
     <Compile Include="Comparators\Individual\IndividualBudgieComparer.cs" />
     <Compile Include="Comparators\Individual\DefaultIndividualComparer.cs" />
     <Compile Include="Comparators\Individual\BirthDateComparer.cs" />
+    <Compile Include="Core\DataError.cs" />
+    <Compile Include="Core\DataErrorGroup.cs" />
     <Compile Include="Core\Displays\DisplayOccupation.cs" />
     <Compile Include="Core\Displays\IDisplayOccupation.cs" />
     <Compile Include="Core\Displays\IDisplayTreeTops.cs" />
