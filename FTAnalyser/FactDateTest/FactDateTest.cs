@@ -125,7 +125,43 @@ namespace FactDateTest
             target = new FactDate("AFT 19 Nov 1966");
             Assert.AreEqual(new DateTime(1966, 11, 20), target.StartDate);
             Assert.AreEqual(FactDate.MAXDATE, target.EndDate);
- 
+
+            // Betweens 
+            target = new FactDate("BET 1983 AND 1986");
+            Assert.AreEqual(new DateTime(1983, 1, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1986, 12, 31), target.EndDate);
+
+            target = new FactDate("BET SEP 1983 AND 1986");
+            Assert.AreEqual(new DateTime(1983, 9, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1986, 12, 31), target.EndDate);
+
+            target = new FactDate("BET 28 SEP 1983 AND 1986");
+            Assert.AreEqual(new DateTime(1983, 9, 28), target.StartDate);
+            Assert.AreEqual(new DateTime(1986, 12, 31), target.EndDate);
+
+            target = new FactDate("BET 1983 AND JUN 1986");
+            Assert.AreEqual(new DateTime(1983, 1, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1986, 6, 30), target.EndDate);
+
+            target = new FactDate("BET SEP 1983 AND JUN 1986");
+            Assert.AreEqual(new DateTime(1983, 9, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1986, 6, 30), target.EndDate);
+
+            target = new FactDate("BET 28 SEP 1983 AND JUN 1986");
+            Assert.AreEqual(new DateTime(1983, 9, 28), target.StartDate);
+            Assert.AreEqual(new DateTime(1986, 6, 30), target.EndDate);
+
+            target = new FactDate("BET 1983 AND 10 JUN 1986");
+            Assert.AreEqual(new DateTime(1983, 1, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1986, 6, 10), target.EndDate);
+
+            target = new FactDate("BET SEP 1983 AND 10 JUN 1986");
+            Assert.AreEqual(new DateTime(1983, 9, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1986, 6, 10), target.EndDate);
+
+            target = new FactDate("BET 28 SEP 1983 AND 10 JUN 1986");
+            Assert.AreEqual(new DateTime(1983, 9, 28), target.StartDate);
+            Assert.AreEqual(new DateTime(1986, 6, 10), target.EndDate);
         }
     }
 }
