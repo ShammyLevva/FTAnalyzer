@@ -381,13 +381,7 @@ namespace FTAnalyzer
                 {
                     date = DateTime.ParseExact(dateValue, FULL, CULTURE);
                     dt = new DateTime(date.Year, date.Month, date.Day);
-                    if ((highlow == HIGH && adjustment != -1) ||
-                        (highlow == LOW && adjustment != +1))
-                    {
-                        // don't bother adding 1 day if date is 
-                        // BEF or AFT an exact date
-                        dt = dt.AddDays(adjustment);
-                    }
+                    dt = dt.AddDays(adjustment);
                 }
                 else
                 {

@@ -1048,6 +1048,11 @@ namespace FTAnalyzer
                         if(minAge > 110)
                             errors[8].Add(new DataError(ind, "Aged over 110 before died " + ind.DeathDate));
                     }
+                    foreach (Fact f in ind.AllFacts)
+                    {
+                        if(f.FactDate.isBefore(ind.BirthDate))
+                            errors[9].Add(new DataError(ind, f.FactType + " fact recorded on " + f.FactDate + " before individual was born"));
+                    }
                     foreach (Family asChild in ind.FamiliesAsChild)
                     {
                         Individual father = asChild.Husband;
@@ -1056,14 +1061,14 @@ namespace FTAnalyzer
                             int minAge = father.getMinAge(ind.BirthDate);
                             int maxAge = father.getMaxAge(ind.BirthDate);
                             if (minAge > 90)
-                                errors[1].Add(new DataError(ind, "Father " + father.Name + " born " + father.BirthDate + " is more than 90 at individual's birthdate"));
+                                errors[1].Add(new DataError(ind, "Father " + father.Name + " born " + father.BirthDate + " is more than 90 at individual was born"));
                             if (maxAge < 13)
-                                errors[5].Add(new DataError(ind, "Father " + father.Name + " born " + father.BirthDate + " is less than 13 at individual's birthdate"));
+                                errors[5].Add(new DataError(ind, "Father " + father.Name + " born " + father.BirthDate + " is less than 13 at individual was born"));
                             if (father.DeathDate != null && ind.BirthDate.ToString() != "UNKNOWN")
                             {
                                 FactDate conception = ind.BirthDate.subtractMonths(9);
                                 if (father.DeathDate.isBefore(conception))
-                                    errors[4].Add(new DataError(ind, "Father " + father.Name + " died " + father.DeathDate + " more than 9 months before individual's birthdate"));
+                                    errors[4].Add(new DataError(ind, "Father " + father.Name + " died " + father.DeathDate + " more than 9 months before individual was born"));
                             }
                         }
                         Individual mother = asChild.Wife;
@@ -1072,11 +1077,11 @@ namespace FTAnalyzer
                             int minAge = mother.getMinAge(ind.BirthDate);
                             int maxAge = mother.getMaxAge(ind.BirthDate);
                             if (minAge > 60)
-                                errors[2].Add(new DataError(ind, "Mother " + mother.Name + " born " + mother.BirthDate + " is more than 60 at individual's birthdate"));
+                                errors[2].Add(new DataError(ind, "Mother " + mother.Name + " born " + mother.BirthDate + " is more than 60 at individual was born"));
                             if (maxAge < 13)
-                                errors[6].Add(new DataError(ind, "Mother " + mother.Name + " born " + mother.BirthDate + " is less than 13 at individual's birthdate"));
+                                errors[6].Add(new DataError(ind, "Mother " + mother.Name + " born " + mother.BirthDate + " is less than 13 at individual was born"));
                             if (mother.DeathDate != null && mother.DeathDate.isBefore(ind.BirthDate))
-                                errors[3].Add(new DataError(ind, "Mother " + mother.Name + " died " + mother.DeathDate + " which is before individual's birthdate"));
+                                errors[3].Add(new DataError(ind, "Mother " + mother.Name + " died " + mother.DeathDate + " which is before individual was born"));
                         }
                     }
                 }
