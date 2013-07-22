@@ -113,6 +113,7 @@
     <Compile Include="Comparators\Individual\BirthDateComparer.cs" />
     <Compile Include="Core\DataError.cs" />
     <Compile Include="Core\DataErrorGroup.cs" />
+    <Compile Include="Core\Displays\IDisplayLCReport.cs" />
     <Compile Include="Core\Displays\DisplayOccupation.cs" />
     <Compile Include="Core\Displays\IDisplayOccupation.cs" />
     <Compile Include="Core\Displays\IDisplayTreeTops.cs" />
@@ -136,6 +137,12 @@
     <Compile Include="Forms\BingOSMap.Designer.cs">
       <DependentUpon>BingOSMap.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\LCReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LCReport.Designer.cs">
+      <DependentUpon>LCReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\GoogleMap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +159,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\BingOSMap.resx">
       <DependentUpon>BingOSMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LCReport.resx">
+      <DependentUpon>LCReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GoogleMap.resx">
       <DependentUpon>GoogleMap.cs</DependentUpon>

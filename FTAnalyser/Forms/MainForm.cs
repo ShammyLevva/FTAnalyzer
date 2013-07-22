@@ -86,7 +86,7 @@ namespace FTAnalyzer
             List<Form> toClose = new List<Form>();
             foreach (Form f in Application.OpenForms)
             {
-                if (f is Forms.People || f is Forms.Census)
+                if (f is Forms.People || f is Forms.LCReport)
                     toClose.Add(f);
             }
             foreach (Form f in toClose)
@@ -266,7 +266,7 @@ namespace FTAnalyzer
             censusComparator.addComparator(new DateComparator());
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
 
-            Forms.Census census = new Forms.Census();
+            Census census = new Census();
             census.setupCensus(censusRP, censusDate, false, ckbCensusResidence.Checked, false, (int)udAgeFilter.Value);
             census.Text = censusDate.StartDate.Year.ToString() + " Census Records to search for";
             census.Show();
@@ -344,7 +344,7 @@ namespace FTAnalyzer
             censusComparator.addComparator(new DateComparator());
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
 
-            Forms.Census census = new Forms.Census();
+            Census census = new Census();
             census.setupCensus(censusRP, censusDate, true, ckbLCResidence.Checked, ckbHideRecorded.Checked, 110);
             census.Text = reportTitle;
             HourGlass(false);
@@ -952,9 +952,20 @@ namespace FTAnalyzer
 
         private void ckbDataErrors_SelectedIndexChanged(object sender, EventArgs e)
         {
+            HourGlass(true);
             List<DataError> errors = ft.DataErrors(ckbDataErrors);
             dgDataErrors.DataSource = errors;
             tsCountLabel.Text = "Count : " + errors.Count;
+            HourGlass(false);
+        }
+
+        private void btnLCReport_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            SortableBindingList<IDisplayLCReport> list = ft.LCReport(ckbRestrictions.Checked);
+            LCReport rs = new LCReport(list);
+            rs.Show();
+            HourGlass(false);
         }
     }
 }

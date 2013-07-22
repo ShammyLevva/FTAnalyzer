@@ -6,7 +6,8 @@ using System.Windows.Forms;
 namespace FTAnalyzer
 {
     public class Individual : IComparable<Individual>, 
-        IDisplayIndividual, IDisplayLooseDeath, IDisplayTreeTops, ILocationFilterable, ISurnameFilterable, IRelationFilterable, IFactsFilterable
+        IDisplayIndividual, IDisplayLooseDeath, IDisplayTreeTops, IDisplayLCReport,
+        ILocationFilterable, ISurnameFilterable, IRelationFilterable, IFactsFilterable
     {
         
         // define relation type from direct ancestor to related by marriage and 
@@ -124,6 +125,13 @@ namespace FTAnalyzer
         { 
             get { return relationType; }
             set { relationType = value; }
+        }
+
+        public bool isBloodDirect
+        {
+            get { return relationType == ROOT || relationType == BLOOD ||
+                    relationType == DIRECT || relationType == MARRIEDTODB;
+            }
         }
 
         public string Relation
@@ -605,6 +613,59 @@ namespace FTAnalyzer
                 }
             }
             return res;
+        }
+
+        private int LCReport(FactDate census, bool lcCensus)
+        {
+            if ((BirthDate !=null && BirthDate.isAfter(census)) || 
+                (DeathDate !=null && DeathDate.isBefore(census)))
+                return 0; // not alive - grey
+            if (!isCensusDone(census, true))
+                return 1; // no census - red
+            if (!lcCensus || isLostCousinEntered(census))
+                return 4; // census + Lost cousins entered (or not LCyear) - green
+            else
+                return 2; // census entered LC not entered - yellow
+        }
+
+        public int Census1841
+        {
+            get { return LCReport(CensusDate.UKCENSUS1841, true); }
+        }
+
+        public int Census1851
+        {
+            get { return LCReport(CensusDate.UKCENSUS1851, false); }
+        }
+
+        public int Census1861
+        {
+            get { return LCReport(CensusDate.UKCENSUS1861, false); }
+        }
+
+        public int Census1871
+        {
+            get { return LCReport(CensusDate.UKCENSUS1871, false); }
+        }
+
+        public int Census1881
+        {
+            get { return LCReport(CensusDate.UKCENSUS1851, true); }
+        }
+
+        public int Census1891
+        {
+            get { return LCReport(CensusDate.UKCENSUS1891, false); }
+        }
+
+        public int Census1901
+        {
+            get { return LCReport(CensusDate.UKCENSUS1901, false); }
+        }
+
+        public int Census1911
+        {
+            get { return LCReport(CensusDate.UKCENSUS1911, true); }
         }
     }
 }

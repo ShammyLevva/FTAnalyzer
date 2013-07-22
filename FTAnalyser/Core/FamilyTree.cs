@@ -1023,6 +1023,25 @@ namespace FTAnalyzer
             return new SortableBindingList<Individual>(occupations[job]);
         }
 
+        public SortableBindingList<IDisplayLCReport> LCReport(bool blnDirectBlood)
+        {
+            SortableBindingList<IDisplayLCReport> result = new SortableBindingList<IDisplayLCReport>();
+            foreach (Individual i in individuals)
+            {
+                if (!blnDirectBlood || (blnDirectBlood && i.isBloodDirect))
+                {
+                    // valid to add check LC status && age within range
+                    if ((i.BirthDate == null || !i.BirthDate.isAfter(CensusDate.UKCENSUS1911)) && 
+                        (i.DeathDate == null || !i.DeathDate.isBefore(CensusDate.UKCENSUS1841)))
+                    {
+                        //born & died within census periods so we can add them to result
+                        result.Add(i);
+                    }
+                }
+            }
+            return result;
+        }
+
         #endregion
 
         #region Data Errors
