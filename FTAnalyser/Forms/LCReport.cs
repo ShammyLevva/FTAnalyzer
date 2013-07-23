@@ -30,6 +30,9 @@ namespace FTAnalyzer.Forms
             DataGridViewCellStyle censusMissingLC = new DataGridViewCellStyle();
             censusMissingLC.BackColor = censusMissingLC.ForeColor = Color.Yellow;
             styles.Add(2, censusMissingLC);
+            DataGridViewCellStyle notCensusEnterednotLCYear = new DataGridViewCellStyle();
+            notCensusEnterednotLCYear.BackColor = notCensusEnterednotLCYear.ForeColor = Color.Green;
+            styles.Add(3, notCensusEnterednotLCYear);
             DataGridViewCellStyle allEntered = new DataGridViewCellStyle();
             allEntered.BackColor = allEntered.ForeColor = Color.Green;
             styles.Add(4, allEntered);
@@ -44,6 +47,7 @@ namespace FTAnalyzer.Forms
             printDocument.DefaultPageSettings.Landscape = true;
 
             dgReportSheet.DataSource = reportList;
+            dgReportSheet.Sort(dgReportSheet.Columns[2], ListSortDirection.Ascending);
             ResizeColumns();
         }
 
@@ -66,7 +70,25 @@ namespace FTAnalyzer.Forms
             if (style != null)
             {
                 e.CellStyle.BackColor = style.BackColor;
-                //e.CellStyle.ForeColor = style.ForeColor;
+                e.CellStyle.ForeColor = style.ForeColor;
+                switch(value)
+                {
+                    case 0 :
+                        cell.ToolTipText = "Not alive at time of census.";
+                        break;
+                    case 1 : 
+                        cell.ToolTipText = "No census information entered.";
+                        break;
+                    case 2:
+                        cell.ToolTipText = "Census entered but no Lost Cousins flag set.";
+                        break;
+                    case 3:
+                        cell.ToolTipText = "Census entered and not a Lost Cousins year.";
+                        break;
+                    case 4:
+                        cell.ToolTipText = "Census entered and flagged as entered on Lost Cousins.";
+                        break;
+                }
             }
         }
 

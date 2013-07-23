@@ -622,8 +622,10 @@ namespace FTAnalyzer
                 return 0; // not alive - grey
             if (!isCensusDone(census, true))
                 return 1; // no census - red
-            if (!lcCensus || isLostCousinEntered(census))
-                return 4; // census + Lost cousins entered (or not LCyear) - green
+            if (!lcCensus)
+                return 3; // not LCyear - green
+            if(isLostCousinEntered(census))
+                return 4; // census + Lost cousins entered - green
             else
                 return 2; // census entered LC not entered - yellow
         }
@@ -650,7 +652,7 @@ namespace FTAnalyzer
 
         public int Census1881
         {
-            get { return LCReport(CensusDate.UKCENSUS1851, true); }
+            get { return LCReport(CensusDate.UKCENSUS1881, true); }
         }
 
         public int Census1891

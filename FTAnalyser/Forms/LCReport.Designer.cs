@@ -51,7 +51,7 @@
             this.dgReportSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgReportSheet.Location = new System.Drawing.Point(0, 28);
             this.dgReportSheet.Name = "dgReportSheet";
-            this.dgReportSheet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgReportSheet.ReadOnly = true;
             this.dgReportSheet.Size = new System.Drawing.Size(1038, 530);
             this.dgReportSheet.TabIndex = 1;
             this.dgReportSheet.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgReportSheet_CellFormatting);
@@ -120,7 +120,7 @@
             this.printPreviewDialog.Name = "printPreviewDialog";
             this.printPreviewDialog.Visible = false;
             // 
-            // ReportSheet
+            // LCReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -128,7 +128,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dgReportSheet);
-            this.Name = "ReportSheet";
+            this.Name = "LCReport";
             this.Text = "Report Result";
             ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).EndInit();
             this.statusStrip.ResumeLayout(false);
