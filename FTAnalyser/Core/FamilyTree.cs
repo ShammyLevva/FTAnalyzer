@@ -1071,7 +1071,7 @@ namespace FTAnalyzer
                     foreach (Family asChild in ind.FamiliesAsChild)
                     {
                         Individual father = asChild.Husband;
-                        if (father != null)
+                        if (father != null && ind.BirthDate.StartDate.Year != 1)
                         {
                             int minAge = father.getMinAge(ind.BirthDate);
                             int maxAge = father.getMaxAge(ind.BirthDate);
@@ -1087,7 +1087,7 @@ namespace FTAnalyzer
                             }
                         }
                         Individual mother = asChild.Wife;
-                        if (mother != null)
+                        if (mother != null && ind.BirthDate.StartDate.Year != 1)
                         {
                             int minAge = mother.getMinAge(ind.BirthDate);
                             int maxAge = mother.getMaxAge(ind.BirthDate);
