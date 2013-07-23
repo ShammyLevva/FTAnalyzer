@@ -24,8 +24,8 @@ namespace FTAnalyzer
         protected string surname = "";
         protected bool surnameSearch = false;
 
-        protected static readonly FactDate FamilySearchMAX = new FactDate("31 DEC 1874");
-        protected static readonly FactDate FamilySearchPARENTBIRTHMAX = new FactDate("31 DEC 1860"); //if parents born after than then children are born after FamilySearchMAX
+        protected static readonly FactDate FAMILYSEARCHMAX = new FactDate("31 DEC 1874");
+        protected static readonly FactDate FAMILYSEARCHPARENTBIRTHMAX = new FactDate("31 DEC 1860"); //if parents born after than then children are born after FamilySearchMAX
 
         public void SearchFamilySearch(Family family, string dirname, int searchType)
         {
@@ -93,7 +93,7 @@ namespace FTAnalyzer
                     if (marriage == null)
                         marriage = new Fact(Fact.MARRIAGE, FactDate.UNKNOWN_DATE);
                     FactDate marriageDate = marriage.FactDate;
-                    if (!marriageDate.isAfter(FamilySearchMAX) && husband.BirthDate.isBefore(FamilySearchMAX) && wife.BirthDate.isBefore(FamilySearchMAX))
+                    if (!marriageDate.isAfter(FAMILYSEARCHMAX) && husband.BirthDate.isBefore(FAMILYSEARCHMAX) && wife.BirthDate.isBefore(FAMILYSEARCHMAX))
                     {
                         // proceed if marriage date within FamilySearch Range and both were alive before FamilySearch max date
                         // but don't bother processing if file already exists.
@@ -124,7 +124,7 @@ namespace FTAnalyzer
                     Individual wife = family.Wife;
                     if (validRelationType(husband, wife))
                     {
-                        if (husband.BirthDate.StartDate < FamilySearchPARENTBIRTHMAX.StartDate && wife.BirthDate.StartDate < FamilySearchPARENTBIRTHMAX.StartDate)
+                        if (husband.BirthDate.StartDate < FAMILYSEARCHPARENTBIRTHMAX.StartDate && wife.BirthDate.StartDate < FAMILYSEARCHPARENTBIRTHMAX.StartDate)
                         {
                             Fact marriage = family.getPreferredFact(Fact.MARRIAGE);
                             SearchForChildren(husband, wife, marriage, filename);

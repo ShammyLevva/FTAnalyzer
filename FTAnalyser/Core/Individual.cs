@@ -267,7 +267,11 @@ namespace FTAnalyzer
 
         public FactDate BirthDate
         {
-            get { return getPreferredFactDate(Fact.BIRTH); }
+            get 
+            { 
+                FactDate f = getPreferredFactDate(Fact.BIRTH);
+                return (f == null) ? FactDate.UNKNOWN_DATE : f;
+            }
         }
 
         public string BirthLocation
@@ -283,8 +287,8 @@ namespace FTAnalyzer
         {
             get
             {
-                Fact f = getPreferredFact(Fact.DEATH);
-                return (f == null) ? null : f.FactDate;
+                FactDate f = getPreferredFactDate(Fact.DEATH);
+                return (f == null) ? FactDate.UNKNOWN_DATE : f;
             }
         }
 
@@ -360,8 +364,7 @@ namespace FTAnalyzer
             get
             {
                 Fact death = getPreferredFact(Fact.DEATH);
-                return (death == null) ? FactDate.MAXYEARS :
-                    BirthDate.getMaximumYear(death.FactDate);
+                return (death == null) ? FactDate.MAXYEARS : BirthDate.getMaximumYear(death.FactDate);
             }
         }
 
@@ -440,8 +443,7 @@ namespace FTAnalyzer
 
         public bool isDeceased(FactDate when)
         {
-            Fact death = getPreferredFact(Fact.DEATH);
-            return death != null && death.FactDate.isBefore(when);
+            return DeathDate != FactDate.UNKNOWN_DATE && DeathDate.isBefore(when);
         }
         
         public bool isSingleAtDeath() {
@@ -451,12 +453,12 @@ namespace FTAnalyzer
 
         public bool isBirthKnown()
         {
-            return BirthDate != null && BirthDate.isExact();
+            return BirthDate != FactDate.UNKNOWN_DATE && BirthDate.isExact();
         }
 
         public bool isDeathKnown()
         {
-            return DeathDate != null && DeathDate.isExact();
+            return DeathDate != FactDate.UNKNOWN_DATE && DeathDate.isExact();
         }
 
         #endregion
@@ -617,8 +619,7 @@ namespace FTAnalyzer
 
         private int LCReport(FactDate census, bool lcCensus)
         {
-            if ((BirthDate !=null && BirthDate.isAfter(census)) || 
-                (DeathDate !=null && DeathDate.isBefore(census)))
+            if (BirthDate.isAfter(census) || DeathDate.isBefore(census))
                 return 0; // not alive - grey
             if (!isCensusDone(census, true))
                 return 1; // no census - red

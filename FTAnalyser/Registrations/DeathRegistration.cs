@@ -30,8 +30,7 @@ namespace FTAnalyzer
                     DateTime maxStart = birthDate.StartDate;
                     if (maxStart > registrationDate.StartDate)
                     {
-                        registrationDate = new FactDate(maxStart,
-                                registrationDate.EndDate);
+                        registrationDate = new FactDate(maxStart, registrationDate.EndDate);
                     }
                 }
             }

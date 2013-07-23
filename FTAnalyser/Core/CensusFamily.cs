@@ -86,8 +86,8 @@ namespace FTAnalyzer
             if (indiv == null)
                 return false;
             FamilyTree ft = FamilyTree.Instance;
-            DateTime birth = (indiv.BirthDate == null) ? FactDate.MINDATE : indiv.BirthDate.StartDate;
-            DateTime death = (indiv.DeathDate == null) ? FactDate.MAXDATE : indiv.DeathDate.EndDate;
+            DateTime birth = indiv.BirthDate.StartDate;
+            DateTime death = indiv.DeathDate.EndDate;
 		    if (birth < censusDate.StartDate && death > censusDate.StartDate && indiv.isCensusDone(censusDate, includeResisdence) == censusDone) {
                 if(lostCousinsCheck && indiv.isLostCousinEntered(censusDate))
                     return false;
