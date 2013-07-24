@@ -280,8 +280,8 @@ namespace FTAnalyzer
                 {
                     type = FactDateType.EXT;
                     dateValue = processDate;
-                    startdate = parseDate(dateValue, LOW, 0);
-                    enddate = parseDate(dateValue, HIGH, 0);
+                    startdate = parseDate(dateValue, LOW, 0, 1);
+                    enddate = parseDate(dateValue, HIGH, 0, 9999); // have upper default year as 9999 if no year in date
                 }
             }
             catch (Exception e)
