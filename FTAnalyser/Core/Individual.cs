@@ -631,42 +631,42 @@ namespace FTAnalyzer
                 return 2; // census entered LC not entered - yellow
         }
 
-        public int Census1841
+        public int C1841
         {
             get { return LCReport(CensusDate.UKCENSUS1841, true); }
         }
 
-        public int Census1851
+        public int C1851
         {
             get { return LCReport(CensusDate.UKCENSUS1851, false); }
         }
 
-        public int Census1861
+        public int C1861
         {
             get { return LCReport(CensusDate.UKCENSUS1861, false); }
         }
 
-        public int Census1871
+        public int C1871
         {
             get { return LCReport(CensusDate.UKCENSUS1871, false); }
         }
 
-        public int Census1881
+        public int C1881
         {
             get { return LCReport(CensusDate.UKCENSUS1881, true); }
         }
 
-        public int Census1891
+        public int C1891
         {
             get { return LCReport(CensusDate.UKCENSUS1891, false); }
         }
 
-        public int Census1901
+        public int C1901
         {
             get { return LCReport(CensusDate.UKCENSUS1901, false); }
         }
 
-        public int Census1911
+        public int C1911
         {
             get { return LCReport(CensusDate.UKCENSUS1911, true); }
         }

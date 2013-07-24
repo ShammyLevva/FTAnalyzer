@@ -49,6 +49,54 @@ namespace FTAnalyzer.Forms
             dgReportSheet.DataSource = reportList;
             dgReportSheet.Sort(dgReportSheet.Columns[2], ListSortDirection.Ascending);
             ResizeColumns();
+            tsRecords.Text = CountText(reportList);
+        }
+
+        private class CensusCount
+        {
+            public int year { get; set; }
+            public int count { get; set; }
+
+            public CensusCount(int year, int count) { this.year = year; this.count = count; }
+
+            public override bool Equals(Object that)
+            {
+                if (that == null || !(that is CensusCount))
+                    return false;
+                CensusCount c = (CensusCount)that;
+                // two CensusCounts are equal if same year and count
+                return c.year == this.year && c.count == this.count;
+            }
+
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
+            }
+        }
+
+        private string CountText(SortableBindingList<IDisplayLCReport> reportList)
+        {
+
+            StringBuilder output = new StringBuilder("Count : " + reportList.Count + " records listed.");
+/*
+ *          Dictionary<CensusCount, int> totals = new Dictionary<CensusCount, int>();
+            for (int census = 1841; census <= 1911; census += 10)
+                for (int i = 0; i <= 4; i++)
+                    totals[new CensusCount(census, i)] = 0;
+
+            foreach (IDisplayLCReport r in reportList)
+            {
+                totals[new CensusCount(1841, r.C1841)]++;
+                totals[new CensusCount(1851, r.C1851)]++;
+                totals[new CensusCount(1861, r.C1861)]++;
+                totals[new CensusCount(1871, r.C1871)]++;
+                totals[new CensusCount(1881, r.C1881)]++;
+                totals[new CensusCount(1891, r.C1891)]++;
+                totals[new CensusCount(1901, r.C1901)]++;
+                totals[new CensusCount(1911, r.C1911)]++;
+            }
+*/
+            return output.ToString();
         }
 
         private void ResizeColumns()
@@ -59,7 +107,7 @@ namespace FTAnalyzer.Forms
 
         private void dgReportSheet_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex == -1 || e.ColumnIndex <= 7)
+            if (e.RowIndex == -1 || e.ColumnIndex <= 4)
             {
                 return;
             }

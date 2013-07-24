@@ -10,18 +10,18 @@ namespace FTAnalyzer
         string IndividualID { get; }        
         string Forenames { get; }           
         string Surname { get; }             
-        string Gender { get; }
+//        string Gender { get; }
         string Relation { get; }
-        int Ahnentafel { get; }
+//        int Ahnentafel { get; }
         FactDate BirthDate { get; }         
-        FactDate DeathDate { get; }       
-        int Census1841 { get; }
-        int Census1851 { get; }
-        int Census1861 { get; }
-        int Census1871 { get; }
-        int Census1881 { get; }
-        int Census1891 { get; }
-        int Census1901 { get; }
-        int Census1911 { get; }
+//        FactDate DeathDate { get; }       
+        int C1841 { get; }
+        int C1851 { get; }
+        int C1861 { get; }
+        int C1871 { get; }
+        int C1881 { get; }
+        int C1891 { get; }
+        int C1901 { get; }
+        int C1911 { get; }
     }
 }
