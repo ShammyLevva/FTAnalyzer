@@ -45,6 +45,7 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("Departure", DEPARTURE);
             CUSTOM_TAGS.Add("Record Change", CHANGE);
             CUSTOM_TAGS.Add("Lost Cousins", LOSTCOUSINS);
+            CUSTOM_TAGS.Add("LostCousins", LOSTCOUSINS);
             
             COMMENT_FACTS.Add(OCCUPATION);
             COMMENT_FACTS.Add(RELIGION);
