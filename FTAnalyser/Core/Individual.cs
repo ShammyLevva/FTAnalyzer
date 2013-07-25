@@ -274,12 +274,12 @@ namespace FTAnalyzer
             }
         }
 
-        public string BirthLocation
+        public FactLocation BirthLocation
         {
             get
             {
                 Fact f = getPreferredFact(Fact.BIRTH);
-                return (f == null) ? "" : f.Place;
+                return (f == null) ? null : f.Location;
             }
         }
 
@@ -302,12 +302,12 @@ namespace FTAnalyzer
             }
         }
 
-        public string DeathLocation
+        public FactLocation DeathLocation
         {
             get
             {
                 Fact f = getPreferredFact(Fact.DEATH);
-                return (f == null) ? "" : f.Place;
+                return (f == null) ? null : f.Location;
             }
         }
 

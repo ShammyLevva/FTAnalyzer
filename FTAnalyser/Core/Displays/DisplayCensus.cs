@@ -24,7 +24,7 @@ namespace FTAnalyzer
         public Age Age { get { return ind.getAge(reg.registrationDate); } }
         public string Occupation { get { return ind.Occupation; } }
         public string DateOfBirth { get { return ind.DateOfBirth; } }
-        public string BirthLocation { get { return ind.BirthLocation; } }
+        public FactLocation BirthLocation { get { return ind.BirthLocation; } }
         public string Status { get { return ind.Status; } }
         public string Relation { get { return ind.Relation; } }
         public int Ahnentafel { get { return ind.Ahnentafel; } }

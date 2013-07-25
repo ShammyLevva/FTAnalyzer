@@ -13,7 +13,7 @@ namespace FTAnalyzer
         Age Age { get; }
         string Occupation { get; }
         string DateOfBirth { get; }
-        string BirthLocation { get; }
+        FactLocation BirthLocation { get; }
         string Status { get; }
         string Relation { get; }
         int Ahnentafel { get; }

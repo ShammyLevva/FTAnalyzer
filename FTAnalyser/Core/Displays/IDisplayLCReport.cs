@@ -9,12 +9,11 @@ namespace FTAnalyzer
     {
         string IndividualID { get; }        
         string Forenames { get; }           
-        string Surname { get; }             
-//        string Gender { get; }
+        string Surname { get; }
+        string MarriedName { get; }
         string Relation { get; }
-//        int Ahnentafel { get; }
-        FactDate BirthDate { get; }         
-//        FactDate DeathDate { get; }       
+        FactDate BirthDate { get; }
+        FactLocation BirthLocation { get; }
         int C1841 { get; }
         int C1851 { get; }
         int C1861 { get; }

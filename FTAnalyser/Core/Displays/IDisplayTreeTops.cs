@@ -11,8 +11,8 @@ namespace FTAnalyzer
         string Forenames { get; }
         string Surname { get; }
         FactDate BirthDate { get; }
-        string BirthLocation { get; }
+        FactLocation BirthLocation { get; }
         FactDate DeathDate { get; }
-        string DeathLocation { get; }
+        FactLocation DeathLocation { get; }
     }
 }

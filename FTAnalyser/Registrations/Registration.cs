@@ -76,7 +76,7 @@ namespace FTAnalyzer
         }
         
         public string PlaceOfBirth {
-            get { return Individual == null ? "" : Individual.BirthLocation; }
+            get { return Individual == null ? "" : Individual.BirthLocation.ToString(); }
         }
             
         public string FathersName  {

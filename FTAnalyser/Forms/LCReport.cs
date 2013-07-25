@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using Printing.DataGridViewPrint.Tools;
 using FTAnalyzer.Utilities;
+using System.Web;
+using System.Diagnostics;
 
 namespace FTAnalyzer.Forms
 {
@@ -16,6 +18,7 @@ namespace FTAnalyzer.Forms
 
         private PrintingDataGridViewProvider printProvider;
         private Dictionary<int, DataGridViewCellStyle> styles;
+        private int c1841ColumnIndex;
 
         public LCReport(SortableBindingList<IDisplayLCReport> reportList)
         {
@@ -36,7 +39,7 @@ namespace FTAnalyzer.Forms
             DataGridViewCellStyle allEntered = new DataGridViewCellStyle();
             allEntered.BackColor = allEntered.ForeColor = Color.Green;
             styles.Add(4, allEntered);
-            
+
             printDocument.DefaultPageSettings.Margins =
                new System.Drawing.Printing.Margins(40, 40, 40, 40);
 
@@ -47,55 +50,51 @@ namespace FTAnalyzer.Forms
             printDocument.DefaultPageSettings.Landscape = true;
 
             dgReportSheet.DataSource = reportList;
-            dgReportSheet.Sort(dgReportSheet.Columns[2], ListSortDirection.Ascending);
+            // Sort by birth date, then forenames, then surname to get the final order required.
+            dgReportSheet.Sort(dgReportSheet.Columns["BirthDate"], ListSortDirection.Ascending);
+            dgReportSheet.Sort(dgReportSheet.Columns["Forenames"], ListSortDirection.Ascending);
+            dgReportSheet.Sort(dgReportSheet.Columns["Surname"], ListSortDirection.Ascending);
+            dgReportSheet.Columns["BirthLocation"].Visible = false;
+            dgReportSheet.Columns["MarriedName"].Visible = false;
+            c1841ColumnIndex = dgReportSheet.Columns["C1841"].Index;
             ResizeColumns();
             tsRecords.Text = CountText(reportList);
-        }
-
-        private class CensusCount
-        {
-            public int year { get; set; }
-            public int count { get; set; }
-
-            public CensusCount(int year, int count) { this.year = year; this.count = count; }
-
-            public override bool Equals(Object that)
-            {
-                if (that == null || !(that is CensusCount))
-                    return false;
-                CensusCount c = (CensusCount)that;
-                // two CensusCounts are equal if same year and count
-                return c.year == this.year && c.count == this.count;
-            }
-
-            public override int GetHashCode()
-            {
-                return base.GetHashCode();
-            }
         }
 
         private string CountText(SortableBindingList<IDisplayLCReport> reportList)
         {
 
             StringBuilder output = new StringBuilder("Count : " + reportList.Count + " records listed.");
-/*
- *          Dictionary<CensusCount, int> totals = new Dictionary<CensusCount, int>();
-            for (int census = 1841; census <= 1911; census += 10)
-                for (int i = 0; i <= 4; i++)
-                    totals[new CensusCount(census, i)] = 0;
 
-            foreach (IDisplayLCReport r in reportList)
-            {
-                totals[new CensusCount(1841, r.C1841)]++;
-                totals[new CensusCount(1851, r.C1851)]++;
-                totals[new CensusCount(1861, r.C1861)]++;
-                totals[new CensusCount(1871, r.C1871)]++;
-                totals[new CensusCount(1881, r.C1881)]++;
-                totals[new CensusCount(1891, r.C1891)]++;
-                totals[new CensusCount(1901, r.C1901)]++;
-                totals[new CensusCount(1911, r.C1911)]++;
-            }
-*/
+            //Dictionary<int, int> totals = new Dictionary<int, int>();
+            //for (int census = 1841; census <= 1911; census += 10)
+            //    for (int i = 0; i <= 4; i++)
+            //        totals[census * 10 + i] = 0;
+
+            //foreach (IDisplayLCReport r in reportList)
+            //{
+            //    totals[18410 + r.C1841]++;
+            //    totals[18510 + r.C1851]++;
+            //    totals[18610 + r.C1861]++;
+            //    totals[18710 + r.C1871]++;
+            //    totals[18810 + r.C1881]++;
+            //    totals[18910 + r.C1891]++;
+            //    totals[19010 + r.C1901]++;
+            //    totals[19110 + r.C1911]++;
+            //}
+
+            //for (int census = 1841; census <= 1911; census += 10)
+            //{
+            //    output.Append(census);
+            //    output.Append(":");
+            //    output.Append(totals[census * 10 + 1]);
+            //    output.Append("/");
+            //    output.Append(totals[census * 10 + 2]);
+            //    output.Append("/");
+            //    output.Append(totals[census * 10 + 3] + totals[census * 10 + 4]);
+            //    output.Append(" ");
+            //}
+
             return output.ToString();
         }
 
@@ -107,35 +106,48 @@ namespace FTAnalyzer.Forms
 
         private void dgReportSheet_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex == -1 || e.ColumnIndex <= 4)
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
             {
                 return;
             }
-            DataGridViewCellStyle style = dgReportSheet.DefaultCellStyle;
-            DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            int value = (int)cell.Value;
-            styles.TryGetValue(value, out style);
-            if (style != null)
+            if (e.ColumnIndex < c1841ColumnIndex)
             {
-                e.CellStyle.BackColor = style.BackColor;
-                e.CellStyle.ForeColor = style.ForeColor;
-                switch(value)
+                DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[3];
+                string relation = (string)cell.Value;
+                if (relation == "Direct Ancestor")
                 {
-                    case 0 :
-                        cell.ToolTipText = "Not alive at time of census.";
-                        break;
-                    case 1 : 
-                        cell.ToolTipText = "No census information entered.";
-                        break;
-                    case 2:
-                        cell.ToolTipText = "Census entered but no Lost Cousins flag set.";
-                        break;
-                    case 3:
-                        cell.ToolTipText = "Census entered and not a Lost Cousins year.";
-                        break;
-                    case 4:
-                        cell.ToolTipText = "Census entered and flagged as entered on Lost Cousins.";
-                        break;
+                    e.CellStyle.Font = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
+                }
+            }
+            else
+            {
+                DataGridViewCellStyle style = dgReportSheet.DefaultCellStyle;
+                DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                int value = (int)cell.Value;
+                styles.TryGetValue(value, out style);
+                if (style != null)
+                {
+                    e.CellStyle.BackColor = style.BackColor;
+                    e.CellStyle.ForeColor = style.ForeColor;
+                    e.CellStyle.SelectionForeColor = e.CellStyle.SelectionBackColor;
+                    switch (value)
+                    {
+                        case 0:
+                            cell.ToolTipText = "Not alive at time of census.";
+                            break;
+                        case 1:
+                            cell.ToolTipText = "No census information entered.";
+                            break;
+                        case 2:
+                            cell.ToolTipText = "Census entered but no Lost Cousins flag set.";
+                            break;
+                        case 3:
+                            cell.ToolTipText = "Census entered and not a Lost Cousins year.";
+                            break;
+                        case 4:
+                            cell.ToolTipText = "Census entered and flagged as entered on Lost Cousins.";
+                            break;
+                    }
                 }
             }
         }
@@ -154,6 +166,75 @@ namespace FTAnalyzer.Forms
             if (printDialog.ShowDialog(this) == DialogResult.OK)
             {
                 printPreviewDialog.ShowDialog(this);
+            }
+        }
+
+        private void dgReportSheet_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            int value = (int)cell.Value;
+            if (value == 1)
+            {
+                IDisplayLCReport person = (IDisplayLCReport)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
+                UriBuilder uri = new UriBuilder();
+                uri.Host = "search.ancestry.co.uk";
+                uri.Path = "cgi-bin/sse.dll";
+                StringBuilder query = new StringBuilder();
+                query.Append("gl=" + (1841 + (e.ColumnIndex - c1841ColumnIndex) * 10) + "uki&");
+                query.Append("rank=1&");
+                query.Append("new=1&");
+                query.Append("so=3&");
+                query.Append("MSAV=1&");
+                query.Append("msT=1&");
+                query.Append("gss=ms_f-68&");
+                if (person.Forenames != "?" && person.Forenames.ToUpper() != "UNKNOWN")
+                {
+                    query.Append("gsfn=" + HttpUtility.UrlEncode(person.Forenames) + "&");
+                }
+                string surname = string.Empty;
+                if (person.Surname != "?" && person.Surname.ToUpper() != "UNKNOWN")
+                {
+                    surname = person.Surname;
+                }
+                if (person.MarriedName != "?" && person.MarriedName.ToUpper() != "UNKNOWN" && person.MarriedName != person.Surname)
+                {
+                    surname += " " + person.MarriedName;
+                }
+                surname = surname.Trim();
+                query.Append("gsln=" + HttpUtility.UrlEncode(surname) + "&");
+                if (person.BirthDate != FactDate.UNKNOWN_DATE)
+                {
+                    int startYear = person.BirthDate.StartDate.Year;
+                    int endYear = person.BirthDate.EndDate.Year;
+                    int year, range;
+                    if (startYear == FactDate.MINDATE.Year)
+                    {
+                        year = endYear + 1;
+                        range = 10;
+                    }
+                    else if (endYear == FactDate.MAXDATE.Year)
+                    {
+                        year = startYear - 1;
+                        range = 10;
+                    }
+                    else
+                    {
+                        year = (endYear + startYear + 1) / 2;
+                        range = (endYear - startYear + 1) / 2;
+                        if (2 < range && range < 5) range = 5;
+                        if (range > 5) range = 10;
+                    }
+                    query.Append("msbdy=" + year + "&");
+                    query.Append("msbdp=" + range + "&");
+                }
+                if (person.BirthLocation != null)
+                {
+                    string location = person.BirthLocation.getLocation(FactLocation.PARISH).ToString();
+                    query.Append("msbpn__ftp=" + HttpUtility.UrlEncode(location) + "&");
+                }
+                query.Append("uidh=2t2");
+                uri.Query = query.ToString();
+                Process.Start(uri.ToString());
             }
         }
     }
