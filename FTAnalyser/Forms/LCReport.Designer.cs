@@ -35,12 +35,12 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.cbCensusSearchProvider = new System.Windows.Forms.ToolStripComboBox();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
-            this.cbCensusSearchProvider = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -48,9 +48,9 @@
             // 
             // dgReportSheet
             // 
-            this.dgReportSheet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgReportSheet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgReportSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgReportSheet.Location = new System.Drawing.Point(0, 28);
             this.dgReportSheet.MultiSelect = false;
@@ -113,6 +113,27 @@
             this.printPreviewToolStripButton.Text = "Print Preview...";
             this.printPreviewToolStripButton.Click += new System.EventHandler(this.printPreviewToolStripButton_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(117, 22);
+            this.toolStripLabel1.Text = "Census search using:";
+            // 
+            // cbCensusSearchProvider
+            // 
+            this.cbCensusSearchProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCensusSearchProvider.Items.AddRange(new object[] {
+            "Ancestry",
+            "Find My Past",
+            "FreeCen"});
+            this.cbCensusSearchProvider.Name = "cbCensusSearchProvider";
+            this.cbCensusSearchProvider.Size = new System.Drawing.Size(121, 25);
+            // 
             // printDialog
             // 
             this.printDialog.Document = this.printDocument;
@@ -129,27 +150,6 @@
             this.printPreviewDialog.Name = "printPreviewDialog";
             this.printPreviewDialog.Visible = false;
             // 
-            // cbCensusSearchProvider
-            // 
-            this.cbCensusSearchProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCensusSearchProvider.Items.AddRange(new object[] {
-            "Ancestry",
-            "Find My Past",
-            "FreeCen"});
-            this.cbCensusSearchProvider.Name = "cbCensusSearchProvider";
-            this.cbCensusSearchProvider.Size = new System.Drawing.Size(121, 25);
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(117, 22);
-            this.toolStripLabel1.Text = "Census search using:";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
             // LCReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -159,7 +159,7 @@
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dgReportSheet);
             this.Name = "LCReport";
-            this.Text = "Report Result";
+            this.Text = "Census Report Result";
             ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
