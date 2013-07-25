@@ -14,6 +14,7 @@ namespace FTAnalyzer
         string Relation { get; }
         FactDate BirthDate { get; }
         FactLocation BirthLocation { get; }
+        FactDate DeathDate { get; }
         int C1841 { get; }
         int C1851 { get; }
         int C1861 { get; }
