@@ -114,7 +114,7 @@ namespace FTAnalyzer.Forms
             }
             if (e.ColumnIndex < c1841ColumnIndex)
             {
-                DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[3];
+                DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells["Relation"];
                 string relation = (string)cell.Value;
                 if (relation == "Direct Ancestor")
                 {

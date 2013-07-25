@@ -16,7 +16,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.5.4.0";
+        private string VERSION = "1.5.4.1";
         private bool _checkForUpdatesEnabled = true;
         private System.Threading.Timer _timerCheckForUpdates;
 
@@ -960,6 +960,15 @@ namespace FTAnalyzer
         }
 
         private void btnLCReport_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            SortableBindingList<IDisplayLCReport> list = ft.LCReport(ckbRestrictions.Checked);
+            LCReport rs = new LCReport(list);
+            rs.Show();
+            HourGlass(false);
+        }
+
+        private void btnLCReport2_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             SortableBindingList<IDisplayLCReport> list = ft.LCReport(ckbRestrictions.Checked);
