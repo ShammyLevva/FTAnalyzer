@@ -105,6 +105,8 @@ namespace FTAnalyzer.Forms
         {
             foreach (DataGridViewColumn c in dgReportSheet.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+            for (int i = c1841ColumnIndex; i <= c1911ColumnIndex; i++)
+                dgReportSheet.Columns[i].Width = 50;
         }
 
         private void dgReportSheet_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -259,6 +261,7 @@ namespace FTAnalyzer.Forms
 
         private UriBuilder BuildFreeCenQuery(int censusYear, IDisplayLCReport person)
         {
+            FactDate censusFactDate = new FactDate(censusYear.ToString());
             UriBuilder uri = new UriBuilder();
             uri.Host = "www.freecen.org.uk";
             uri.Path = "/cgi/search.pl";
@@ -272,9 +275,10 @@ namespace FTAnalyzer.Forms
                     forename = person.Forenames.Substring(0,pos); //strip out any middle names as FreeCen searches better without then
                 query.Append("g=" + HttpUtility.UrlEncode(forename) + "&");
             }
-            if (person.Surname != "?" && person.Surname.ToUpper() != "UNKNOWN")
+            string surname = person.SurnameAtDate(censusFactDate);
+            if (surname != "?" && surname.ToUpper() != "UNKNOWN")
             {
-                query.Append("s=" + HttpUtility.UrlEncode(person.Surname) + "&");
+                query.Append("s=" + HttpUtility.UrlEncode(surname) + "&");
                 query.Append("p=on&");
             }
             if (person.BirthDate != FactDate.UNKNOWN_DATE)
@@ -331,6 +335,7 @@ namespace FTAnalyzer.Forms
         {
             MessageBox.Show("Find My Past Searching coming soon in a future version");
             return null;
+            //FactDate censusFactDate = new FactDate(censusYear.ToString());
             //UriBuilder uri = new UriBuilder();
             //uri.Host = "www.findmypast.co.uk";
             //uri.Path = "/CensusPersonSearchResultServlet";
@@ -347,7 +352,7 @@ namespace FTAnalyzer.Forms
             //    query.Append("forenames=" + HttpUtility.UrlEncode(person.Forenames) + "&");
             //    query.Append("fns=fns&");
             //}
-            //string surname = person.SurnameAtDate(new FactDate(censusYear.ToString()));
+            //string surname = person.SurnameAtDate(censusFactDate);
             //if (surname != "?" && surname.ToUpper() != "UNKNOWN")
             //{
             //    query.Append("lastName=" + HttpUtility.UrlEncode(surname) + "&");
