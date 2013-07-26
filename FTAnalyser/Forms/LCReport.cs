@@ -19,6 +19,7 @@ namespace FTAnalyzer.Forms
         private PrintingDataGridViewProvider printProvider;
         private Dictionary<int, DataGridViewCellStyle> styles;
         private int c1841ColumnIndex;
+        private int c1911ColumnIndex;
 
         public LCReport(SortableBindingList<IDisplayLCReport> reportList)
         {
@@ -54,9 +55,9 @@ namespace FTAnalyzer.Forms
             dgReportSheet.Sort(dgReportSheet.Columns["BirthDate"], ListSortDirection.Ascending);
             dgReportSheet.Sort(dgReportSheet.Columns["Forenames"], ListSortDirection.Ascending);
             dgReportSheet.Sort(dgReportSheet.Columns["Surname"], ListSortDirection.Ascending);
-            dgReportSheet.Columns["BirthLocation"].Visible = false;
             dgReportSheet.Columns["MarriedName"].Visible = false;
             c1841ColumnIndex = dgReportSheet.Columns["C1841"].Index;
+            c1911ColumnIndex = dgReportSheet.Columns["C1911"].Index;
             ResizeColumns();
             tsRecords.Text = CountText(reportList);
 
@@ -112,7 +113,7 @@ namespace FTAnalyzer.Forms
             {
                 return;
             }
-            if (e.ColumnIndex < c1841ColumnIndex)
+            if (e.ColumnIndex < c1841ColumnIndex || e.ColumnIndex > c1911ColumnIndex)
             {
                 DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells["Relation"];
                 string relation = (string)cell.Value;
@@ -258,8 +259,72 @@ namespace FTAnalyzer.Forms
 
         private UriBuilder BuildFreeCenQuery(int censusYear, IDisplayLCReport person)
         {
-            MessageBox.Show("FreeCen Searching coming soon in a future version");
-            return null;
+            UriBuilder uri = new UriBuilder();
+            uri.Host = "www.freecen.org.uk";
+            uri.Path = "/cgi/search.pl";
+            StringBuilder query = new StringBuilder();
+            query.Append("y=" + censusYear + "&");
+            if (person.Forenames != "?" && person.Forenames.ToUpper() != "UNKNOWN")
+            {
+                int pos = person.Forenames.IndexOf(" ");
+                string forename = person.Forenames;
+                if(pos>0)
+                    forename = person.Forenames.Substring(0,pos); //strip out any middle names as FreeCen searches better without then
+                query.Append("g=" + HttpUtility.UrlEncode(forename) + "&");
+            }
+            if (person.Surname != "?" && person.Surname.ToUpper() != "UNKNOWN")
+            {
+                query.Append("s=" + HttpUtility.UrlEncode(person.Surname) + "&");
+                query.Append("p=on&");
+            }
+            if (person.BirthDate != FactDate.UNKNOWN_DATE)
+            {
+                int startYear = person.BirthDate.StartDate.Year;
+                int endYear = person.BirthDate.EndDate.Year;
+                int year, range;
+                if (startYear == FactDate.MINDATE.Year)
+                {
+                    year = endYear + 1;
+                    range = 10;
+                }
+                else if (endYear == FactDate.MAXDATE.Year)
+                {
+                    year = startYear - 1;
+                    range = 10;
+                }
+                else
+                {
+                    year = (endYear + startYear + 1) / 2;
+                    range = (endYear - startYear + 1) / 2;
+                }
+                if (range == 0)
+                {
+                    query.Append("r=0&");
+                }
+                else if (range <= 2)
+                {
+                    query.Append("r=2&");
+                }
+                else if (range <= 5)
+                {
+                    query.Append("r=5&");
+                }
+                else 
+                {
+                    query.Append("r=10&");
+                }
+                query.Append("a=" + year + "&");
+            }
+            if (person.BirthLocation != null)
+            {
+                string location = person.BirthLocation.Parish;
+                query.Append("t=" + HttpUtility.UrlEncode(location) + "&");
+                query.Append("b=all&"); // initially set to search all birth counties need a routine to return FreeCen county codes 
+            }
+            query.Append("c=all&"); // initially set to search all counties need a routine to return FreeCen county codes 
+            query.Append("z=Find&"); // executes search
+            uri.Query = query.ToString();
+            return uri;
         }
 
         private UriBuilder BuildFindMyPastQuery(int censusYear, IDisplayLCReport person)
