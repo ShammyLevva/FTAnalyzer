@@ -333,7 +333,12 @@ namespace FTAnalyzer.Forms
 
         private UriBuilder BuildFindMyPastQuery(int censusYear, IDisplayLCReport person)
         {
-            MessageBox.Show("Find My Past Searching coming soon in a future version");
+            //POST /CensusPersonSearchResultServlet?censusYear=1881
+            //[truncated] recordPosition=0&pageDirection=&startNewSearch=startNewSearch&basicSearch=false&
+            //    route=&censusYear=1881&forenames=Alexander&fns=fns&lastName=Bisset&yearOfBirth=1863&
+            //    yearOfBirthVariation=2&occupation=&birthPlace=aberdeen&residenc
+
+            MessageBox.Show("Find My Past searching coming soon in a future version");
             return null;
             //FactDate censusFactDate = new FactDate(censusYear.ToString());
             //UriBuilder uri = new UriBuilder();
@@ -344,12 +349,19 @@ namespace FTAnalyzer.Forms
             //query.Append("startNewSearch=startNewSearch&");
             //query.Append("pageDirection=&");
             //query.Append("route=&");
-            //query.Append("basicSearch=false&");
+            //query.Append("basicSearch=true&");
             //query.Append("searchHouseholds=6,15&");
+            //query.Append("searchInstitutions=9&");
+            //query.Append("searchVessels=11,12&");
+
             //query.Append("censusYear=" + censusYear + "&");
             //if (person.Forenames != "?" && person.Forenames.ToUpper() != "UNKNOWN")
             //{
-            //    query.Append("forenames=" + HttpUtility.UrlEncode(person.Forenames) + "&");
+            //    int pos = person.Forenames.IndexOf(" ");
+            //    string forenames = person.Forenames;
+            //    if (pos > 0)
+            //        forenames = person.Forenames.Substring(0, pos); //strip out any middle names as FreeCen searches better without then
+            //    query.Append("forenames=" + HttpUtility.UrlEncode(forenames) + "&");
             //    query.Append("fns=fns&");
             //}
             //string surname = person.SurnameAtDate(censusFactDate);
@@ -357,6 +369,10 @@ namespace FTAnalyzer.Forms
             //{
             //    query.Append("lastName=" + HttpUtility.UrlEncode(surname) + "&");
             //    query.Append("sns=sns");
+            //}
+            //if (person.MarriedName != "?" && person.MarriedName.ToUpper() != "UNKNOWN" && person.MarriedName != person.Surname)
+            //{
+            //    query.Append("otherLastName=" + HttpUtility.UrlEncode(surname) + "&");
             //}
             //if (person.BirthDate != FactDate.UNKNOWN_DATE)
             //{
@@ -388,6 +404,7 @@ namespace FTAnalyzer.Forms
             //    query.Append("birthPlace=" + HttpUtility.UrlEncode(location) + "&");
             //    query.Append("country=" + HttpUtility.UrlEncode(person.BirthLocation.Country));
             //}
+            //query.Append("sortOrder=nameAsc&");
             //uri.Query = query.ToString();
             //return uri;
         }
