@@ -200,7 +200,7 @@ namespace FTAnalyzer
             int added = 0;
             foreach (Individual ind in individuals)
             {
-                if (!ind.isInFamily())
+                if (!ind.isInFamily)
                 {
                     families.Add(new Family(ind));
                     added++;
@@ -565,7 +565,7 @@ namespace FTAnalyzer
         {
             DateTime maxdate = FactDate.MINDATE;
             List<Family> indfam = new List<Family>();
-            if (indiv.isMale())
+            if (indiv.isMale)
             {
                 indfam = FindFamiliesWhereHusband(indiv);
             }
@@ -595,7 +595,7 @@ namespace FTAnalyzer
                     }
                 }
             }
-            if (childDate && indiv.isMale() && maxdate > FactDate.MINDATE)
+            if (childDate && indiv.isMale && maxdate > FactDate.MINDATE)
             {
                 // set to 9 months before birth if indiv is a father 
                 // and we have changed maxdate from the MINDATE default
@@ -692,7 +692,7 @@ namespace FTAnalyzer
             List<IDisplayTreeTops> result = new List<IDisplayTreeTops>();
             foreach (Individual ind in individuals)
             {
-                if (ind.isMale() && !ind.isDeathKnown() && filter.select(ind))
+                if (ind.isMale && !ind.isDeathKnown() && filter.select(ind))
                     result.Add(ind);
             }
             return result;
@@ -919,10 +919,10 @@ namespace FTAnalyzer
                 if (!i.isSingleAtDeath())
                 {
                     ParentalGroup pg = CreateFamilyGroup(i);
-                    List<Family> indfam = i.isMale() ? FindFamiliesWhereHusband(i) : FindFamiliesWhereWife(i);
+                    List<Family> indfam = i.isMale ? FindFamiliesWhereHusband(i) : FindFamiliesWhereWife(i);
                     if (indfam.Count == 0)
                         result.Add(new MarriageRegistration(pg, null, null));
-                    else if (i.isMale())
+                    else if (i.isMale)
                     {
                         foreach (Family f in indfam)
                         {
@@ -945,14 +945,14 @@ namespace FTAnalyzer
                 {
                     // only include dead individuals
                     ParentalGroup pg = CreateFamilyGroup(i);
-                    List<Family> indfam = i.isMale() ? FindFamiliesWhereHusband(i) : FindFamiliesWhereWife(i);
+                    List<Family> indfam = i.isMale ? FindFamiliesWhereHusband(i) : FindFamiliesWhereWife(i);
                     if (indfam.Count == 0)
                         result.Add(new DeathRegistration(pg, null, Family.SINGLE));
                     else
                     {
                         foreach (Family f in indfam)
                         {
-                            if (i.isMale())
+                            if (i.isMale)
                                 result.Add(new DeathRegistration(pg, f.Wife, f.MaritalStatus));
                             else
                                 result.Add(new DeathRegistration(pg, f.Husband, f.MaritalStatus));

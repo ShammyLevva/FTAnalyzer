@@ -107,6 +107,7 @@
     <Compile Include="Comparators\Census\DefaultCensusComparer.cs" />
     <Compile Include="Comparators\Family\DefaultFamilyComparer.cs" />
     <Compile Include="Comparators\Family\FamilyCountComparer.cs" />
+    <Compile Include="Comparators\Family\FamilyDateComparer.cs" />
     <Compile Include="Comparators\Individual\AhnentafelComparer.cs" />
     <Compile Include="Comparators\Individual\IndividualBudgieComparer.cs" />
     <Compile Include="Comparators\Individual\DefaultIndividualComparer.cs" />

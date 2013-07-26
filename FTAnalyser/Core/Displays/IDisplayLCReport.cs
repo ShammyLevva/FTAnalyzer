@@ -11,6 +11,7 @@ namespace FTAnalyzer
         string Forenames { get; }           
         string Surname { get; }
         string MarriedName { get; }
+        string SurnameAtDate(FactDate date);
         string Relation { get; }
         int C1841 { get; }
         int C1851 { get; }

@@ -72,7 +72,7 @@ namespace FTAnalyzer
         public Family(Individual ind)
             : this("IND", "")
         {
-            if (ind.isMale())
+            if (ind.isMale)
                 this.husband = ind;
             else
                 this.wife = ind;
@@ -335,7 +335,7 @@ namespace FTAnalyzer
 
         public void setBudgieCode(Individual ind, int lenAhnentafel)
         {
-            Individual spouse = ind.isMale() ? Wife : Husband;
+            Individual spouse = ind.isMale ? Wife : Husband;
             if (spouse != null && spouse.BudgieCode == string.Empty)
             {
                 spouse.BudgieCode = ind.BudgieCode + "*s";
@@ -383,7 +383,7 @@ namespace FTAnalyzer
 
         public void setSpouseRelation(Individual ind, int relationType)
         {
-            Individual spouse = ind.isMale() ? Wife : Husband;
+            Individual spouse = ind.isMale ? Wife : Husband;
             if (spouse != null && spouse.RelationType == Individual.UNKNOWN)
             {
                 spouse.RelationType = relationType;

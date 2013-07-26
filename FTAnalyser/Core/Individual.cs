@@ -409,14 +409,14 @@ namespace FTAnalyzer
 
         #region Boolean Tests
 
-        public bool isMale()
+        public bool isMale
         {
-            return this.gender.Equals("M");
+            get { return this.gender.Equals("M"); }
         }
 
-        public bool isInFamily()
+        public bool isInFamily
         {
-            return infamily;
+            get { return infamily; }
         }
 
         public bool isCensusDone(FactDate when, bool includeResidence)
@@ -565,6 +565,22 @@ namespace FTAnalyzer
                 }
                 return firstMarriage;
             }
+        }
+
+        public string SurnameAtDate(FactDate date)
+        {
+            string name = surname;
+            if (!isMale)
+            {
+                List<Family> families = familiesAsParent;
+                families.Sort(new FamilyDateComparer());
+                foreach (Family marriage in families)
+                {
+                    if (marriage.MarriageDate.isBefore(date))
+                        name = marriage.wife.surname;
+                }
+            }
+            return name;
         }
 
         #endregion

@@ -330,7 +330,7 @@ namespace FTAnalyzer.Forms
         private UriBuilder BuildFindMyPastQuery(int censusYear, IDisplayLCReport person)
         {
             MessageBox.Show("Find My Past Searching coming soon in a future version");
-            return null; 
+            return null;
             //UriBuilder uri = new UriBuilder();
             //uri.Host = "www.findmypast.co.uk";
             //uri.Path = "/CensusPersonSearchResultServlet";
@@ -347,18 +347,12 @@ namespace FTAnalyzer.Forms
             //    query.Append("forenames=" + HttpUtility.UrlEncode(person.Forenames) + "&");
             //    query.Append("fns=fns&");
             //}
-            //string surname = string.Empty;
-            //if (person.Surname != "?" && person.Surname.ToUpper() != "UNKNOWN")
+            //string surname = person.SurnameAtDate(new FactDate(censusYear.ToString()));
+            //if (surname != "?" && surname.ToUpper() != "UNKNOWN")
             //{
-            //    surname = person.Surname;
+            //    query.Append("lastName=" + HttpUtility.UrlEncode(surname) + "&");
+            //    query.Append("sns=sns");
             //}
-            ////if (person.MarriedName != "?" && person.MarriedName.ToUpper() != "UNKNOWN" && person.MarriedName != person.Surname)
-            ////{
-            ////    surname += " " + person.MarriedName;
-            ////}
-            //surname = surname.Trim();
-            //query.Append("lastName=" + HttpUtility.UrlEncode(surname) + "&");
-            //query.Append("sns=sns");
             //if (person.BirthDate != FactDate.UNKNOWN_DATE)
             //{
             //    int startYear = person.BirthDate.StartDate.Year;
