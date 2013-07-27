@@ -35,6 +35,8 @@ namespace FTAnalyzer
 		private static Dictionary<string, string> COUNTRY_SHIFTS = new Dictionary<string, string>();
 		private static Dictionary<string, string> REGION_SHIFTS = new Dictionary<string, string>();
 		private static Dictionary<string, string> REGION_IDS = new Dictionary<string, string>();
+        private static Dictionary<string, string> FREECEN_LOOKUP = new Dictionary<string, string>();
+        private static Dictionary<string, string> FINDMYPAST_LOOKUP = new Dictionary<string, string>();
 		
 		static FactLocation() {
 			// load conversions from XML file
@@ -44,21 +46,21 @@ namespace FTAnalyzer
 				XmlDocument xmlDoc = new XmlDocument();
 				xmlDoc.Load(filename);
 				//xmlDoc.Validate(something);
-				foreach (XmlNode n in xmlDoc.SelectNodes("Fixes/CountryTypos/CountryTypo"))
+				foreach (XmlNode n in xmlDoc.SelectNodes("Data/Fixes/CountryTypos/CountryTypo"))
 				{
 					string from = n.Attributes["from"].Value;
 					string to = n.Attributes["to"].Value;
 					if (from != null && from.Length > 0 && to != null && to.Length > 0)
 						COUNTRY_TYPOS.Add(from, to);
 				}
-				foreach (XmlNode n in xmlDoc.SelectNodes("Fixes/RegionTypos/RegionTypo"))
+				foreach (XmlNode n in xmlDoc.SelectNodes("Data/Fixes/RegionTypos/RegionTypo"))
 				{
 					string from = n.Attributes["from"].Value;
 					string to = n.Attributes["to"].Value;
 					if (from != null && from.Length > 0 && to != null && to.Length > 0)
 						REGION_TYPOS.Add(from, to);
 				}
-				foreach (XmlNode n in xmlDoc.SelectNodes("Fixes/DemoteCountries/CountryToRegion"))
+				foreach (XmlNode n in xmlDoc.SelectNodes("Data/Fixes/DemoteCountries/CountryToRegion"))
 				{
 					string from = n.Attributes["region"].Value;
 					string to = n.Attributes["country"].Value;
@@ -70,7 +72,7 @@ namespace FTAnalyzer
 							REGION_IDS.Add(from, regionID);
 					}
 				}
-				foreach (XmlNode n in xmlDoc.SelectNodes("Fixes/DemoteRegions/RegionToParish"))
+				foreach (XmlNode n in xmlDoc.SelectNodes("Data/Fixes/DemoteRegions/RegionToParish"))
 				{
 					string from = n.Attributes["parish"].Value;
 					string to = n.Attributes["region"].Value;
@@ -79,7 +81,26 @@ namespace FTAnalyzer
 						REGION_SHIFTS.Add(from, to);
 					}
 				}
-			}
+                foreach (XmlNode n in xmlDoc.SelectNodes("Data/Lookups/FreeCen/Lookup"))
+                {
+                    string code = n.Attributes["code"].Value;
+                    string county = n.Attributes["county"].Value;
+                    if (code != null && code.Length > 0 && county != null && county.Length > 0)
+                    {
+                        FREECEN_LOOKUP.Add(code, county);
+                    }
+                }
+                foreach (XmlNode n in xmlDoc.SelectNodes("Data/Lookups/FindMyPast/Lookup"))
+                {
+                    string code = n.Attributes["code"].Value;
+                    string county = n.Attributes["county"].Value;
+                    string country = n.Attributes["country"].Value;
+                    if (code != null && code.Length > 0 && county != null && county.Length > 0)
+                    {
+                        FINDMYPAST_LOOKUP.Add(code, county);
+                    }
+                }
+            }
 		}
 		
 		public FactLocation() {

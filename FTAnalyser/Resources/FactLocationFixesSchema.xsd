@@ -1,34 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-
-  <xs:element name="Fixes">
+  <xs:element name="Data">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="CountryTypos">
+        <xs:element name="Fixes">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name ="CountryTypo" type="typo" minOccurs="0" maxOccurs="unbounded" />
+              <xs:element name="CountryTypos">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name ="CountryTypo" type="typo" minOccurs="0" maxOccurs="unbounded" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="RegionTypos">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name ="RegionTypo" type="typo" minOccurs="0" maxOccurs="unbounded" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="DemoteCountries">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name ="CountryToRegion" type="countryMove" minOccurs="0" maxOccurs="unbounded" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="DemoteRegions">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name ="RegionToParish" type="regionMove" minOccurs="0" maxOccurs="unbounded" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="RegionTypos">
+
+        <xs:element name="Lookups">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name ="RegionTypo" type="typo" minOccurs="0" maxOccurs="unbounded" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="DemoteCountries">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name ="CountryToRegion" type="countryMove" minOccurs="0" maxOccurs="unbounded" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="DemoteRegions">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name ="RegionToParish" type="regionMove" minOccurs="0" maxOccurs="unbounded" />
+              <xs:element name="FreeCen">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name ="Lookup">
+                      <xs:complexType>
+                        <xs:attribute name="code" type="xs:string"/>
+                        <xs:attribute name="county" type="xs:string"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="FindMyPast">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name ="Lookup">
+                      <xs:complexType>
+                        <xs:attribute name="country" type="xs:string"/>
+                        <xs:attribute name="code" type="xs:string"/>
+                        <xs:attribute name="county" type="xs:string"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
