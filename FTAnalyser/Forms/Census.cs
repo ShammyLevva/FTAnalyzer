@@ -14,6 +14,7 @@ namespace FTAnalyzer.Forms
     {
         private Dictionary<int, DataGridViewCellStyle> rowStyles;
         private int numFamilies;
+        private FactDate censusDate;
 
         private PrintingDataGridViewProvider printProvider;
 
@@ -34,6 +35,7 @@ namespace FTAnalyzer.Forms
         public void setupCensus(RegistrationsProcessor rp, FactDate date, bool censusDone, bool includeResidence, bool lostCousinCheck, int maxAge)
         {
             FamilyTree ft = FamilyTree.Instance;
+            censusDate = date;
             List<Registration> regs = ft.getAllCensusRegistrations(date, censusDone, includeResidence, lostCousinCheck);
             List<Registration> census = rp.processRegistrations(regs);
             List<IDisplayCensus> ds = new List<IDisplayCensus>();
@@ -49,6 +51,7 @@ namespace FTAnalyzer.Forms
             dgCensus.DataSource = ds;
             StyleRows();
             ResizeColumns();
+            cbCensusSearchProvider.SelectedIndex = 0;
             tsRecords.Text = ds.Count + " Records / " + numFamilies + " Families.";
         }
 
@@ -209,6 +212,13 @@ namespace FTAnalyzer.Forms
                     MessageBox.Show("Unable to find location : " + loc.ToString());
             }
             this.Cursor = Cursors.Default;
+        }
+
+        private void dgCensus_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DisplayCensus ds = dgCensus.CurrentRow == null ? null : (DisplayCensus)dgCensus.CurrentRow.DataBoundItem;
+            FamilyTree ft = FamilyTree.Instance;
+            ft.SearchCensus(censusDate.StartDate.Year, ds.Individual, cbCensusSearchProvider.SelectedIndex);
         }
     }
 }
