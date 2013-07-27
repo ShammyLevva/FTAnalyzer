@@ -178,7 +178,7 @@ namespace FTAnalyzer.Forms
         {
             DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
             int value = (int)cell.Value;
-            if (value == 1)
+            if (value == 1 || value == 2)
             {
                 IDisplayLCReport person = (IDisplayLCReport)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
                 UriBuilder uri = null;
@@ -323,7 +323,7 @@ namespace FTAnalyzer.Forms
             {
                 string location = person.BirthLocation.Parish;
                 query.Append("t=" + HttpUtility.UrlEncode(location) + "&");
-                query.Append("b=all&"); // initially set to search all birth counties need a routine to return FreeCen county codes 
+                query.Append("b=" + person.BirthLocation.FreeCenCountyCode + "&"); 
             }
             query.Append("c=all&"); // initially set to search all counties need a routine to return FreeCen county codes 
             query.Append("z=Find&"); // executes search
@@ -401,8 +401,10 @@ namespace FTAnalyzer.Forms
             //if (person.BirthLocation != null)
             //{
             //    string location = person.BirthLocation.Parish;
+            //    Tuple<string,string> area = person.BirthLocation.FindMyPastCountyCode
             //    query.Append("birthPlace=" + HttpUtility.UrlEncode(location) + "&");
-            //    query.Append("country=" + HttpUtility.UrlEncode(person.BirthLocation.Country));
+            //    query.Append("country=" + HttpUtility.UrlEncode(area.item1));
+            //    query.Append("coIdList=" + HttpUtility.UrlEncode(area.item2));
             //}
             //query.Append("sortOrder=nameAsc&");
             //uri.Query = query.ToString();

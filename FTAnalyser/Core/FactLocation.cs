@@ -88,7 +88,7 @@ namespace FTAnalyzer
                     string county = n.Attributes["county"].Value;
                     if (code != null && code.Length > 0 && county != null && county.Length > 0)
                     {
-                        FREECEN_LOOKUP.Add(code, county);
+                        FREECEN_LOOKUP.Add(county, code);
                     }
                 }
                 foreach (XmlNode n in xmlDoc.SelectNodes("Data/Lookups/FindMyPast/Lookup"))
@@ -99,7 +99,7 @@ namespace FTAnalyzer
                     if (code != null && code.Length > 0 && county != null && county.Length > 0)
                     {
                         Tuple<string, string> result = new Tuple<string, string>(country, code);
-                        FINDMYPAST_LOOKUP.Add(code, result);
+                        FINDMYPAST_LOOKUP.Add(county, result);
                     }
                 }
                 FMP_All_Counties = new Tuple<string,string>("any_basic_county","Any");

@@ -441,6 +441,48 @@ namespace FTAnalyzer
             return false;
         }
 
+        public bool isLostCousinsCensus(FactDate when)
+        {
+            foreach (Fact f in facts)
+            {
+                if (f.FactType == Fact.CENSUS || f.FactType == Fact.RESIDENCE)
+                {
+                    if (f.FactDate.overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
+                    {
+                        if (f.Location.country == FactLocation.ENGLAND || f.Location.country == FactLocation.WALES)
+                        {
+                            if (f.FactDate.overlaps(CensusDate.UKCENSUS1841) ||
+                                f.FactDate.overlaps(CensusDate.UKCENSUS1881) ||
+                                f.FactDate.overlaps(CensusDate.UKCENSUS1911))
+                                return true;
+                        }
+                        else if (f.Location.country == FactLocation.SCOTLAND)
+                        {
+                            if (f.FactDate.overlaps(CensusDate.UKCENSUS1881))
+                                return true;
+                        }
+                        else if (f.Location.country == FactLocation.CANADA)
+                        {
+                            if (f.FactDate.overlaps(CensusDate.CANADACENSUS1881))
+                                return true;
+                        }
+                        else if (f.Location.country == FactLocation.UNITED_STATES)
+                        {
+                            if (f.FactDate.overlaps(CensusDate.USCENSUS1880) ||
+                                f.FactDate.overlaps(CensusDate.USCENSUS1940))
+                                return true;
+                        }
+                        else if (f.Location.country == FactLocation.IRELAND)
+                        {
+                            if (f.FactDate.overlaps(CensusDate.IRELANDCENSUS1911))
+                                return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
         public bool isDeceased(FactDate when)
         {
             return DeathDate != FactDate.UNKNOWN_DATE && DeathDate.isBefore(when);
@@ -633,13 +675,14 @@ namespace FTAnalyzer
             return res;
         }
 
-        private int LCReport(FactDate census, bool lcCensus)
+        private int LCReport(FactDate census)
         {
+            
             if (BirthDate.isAfter(census) || DeathDate.isBefore(census))
                 return 0; // not alive - grey
             if (!isCensusDone(census, true))
                 return 1; // no census - red
-            if (!lcCensus)
+            if (!isLostCousinsCensus(census))
                 return 3; // not LCyear - green
             if(isLostCousinEntered(census))
                 return 4; // census + Lost cousins entered - green
@@ -649,42 +692,42 @@ namespace FTAnalyzer
 
         public int C1841
         {
-            get { return LCReport(CensusDate.UKCENSUS1841, true); }
+            get { return LCReport(CensusDate.UKCENSUS1841); }
         }
 
         public int C1851
         {
-            get { return LCReport(CensusDate.UKCENSUS1851, false); }
+            get { return LCReport(CensusDate.UKCENSUS1851); }
         }
 
         public int C1861
         {
-            get { return LCReport(CensusDate.UKCENSUS1861, false); }
+            get { return LCReport(CensusDate.UKCENSUS1861); }
         }
 
         public int C1871
         {
-            get { return LCReport(CensusDate.UKCENSUS1871, false); }
+            get { return LCReport(CensusDate.UKCENSUS1871); }
         }
 
         public int C1881
         {
-            get { return LCReport(CensusDate.UKCENSUS1881, true); }
+            get { return LCReport(CensusDate.UKCENSUS1881); }
         }
 
         public int C1891
         {
-            get { return LCReport(CensusDate.UKCENSUS1891, false); }
+            get { return LCReport(CensusDate.UKCENSUS1891); }
         }
 
         public int C1901
         {
-            get { return LCReport(CensusDate.UKCENSUS1901, false); }
+            get { return LCReport(CensusDate.UKCENSUS1901); }
         }
 
         public int C1911
         {
-            get { return LCReport(CensusDate.UKCENSUS1911, true); }
+            get { return LCReport(CensusDate.UKCENSUS1911); }
         }
     }
 }

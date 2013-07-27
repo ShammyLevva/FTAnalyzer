@@ -17,6 +17,8 @@ namespace FTAnalyzer
         public static readonly CensusDate UKCENSUS1891 = new CensusDate("05 APR 1891", "UK Census 1891");
         public static readonly CensusDate UKCENSUS1901 = new CensusDate("31 MAR 1901", "UK Census 1901");
         public static readonly CensusDate UKCENSUS1911 = new CensusDate("02 APR 1911", "UK Census 1911");
+
+        public static readonly CensusDate IRELANDCENSUS1911 = new CensusDate("02 APR 1911", "Ireland Census 1911");
         
         public static readonly CensusDate USCENSUS1790 = new CensusDate("AUG 1790", "US Federal Census 1790");
         public static readonly CensusDate USCENSUS1800 = new CensusDate("AUG 1800", "US Federal Census 1800");
@@ -33,6 +35,7 @@ namespace FTAnalyzer
         public static readonly CensusDate USCENSUS1910 = new CensusDate("15 APR 1910", "US Federal Census 1910");
         public static readonly CensusDate USCENSUS1920 = new CensusDate("1 JAN 1920", "US Federal Census 1920");
         public static readonly CensusDate USCENSUS1930 = new CensusDate("1 APR 1930", "US Federal Census 1930");
+        public static readonly CensusDate USCENSUS1940 = new CensusDate("1 APR 1940", "US Federal Census 1940");
 
         public static readonly CensusDate CANADACENSUS1851 = new CensusDate("BET 1851 AND 1852", "Canadian Census 1851/2");
         public static readonly CensusDate CANADACENSUS1861 = new CensusDate("1861", "Canadian Census 1861");
