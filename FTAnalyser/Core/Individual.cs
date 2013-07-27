@@ -449,7 +449,9 @@ namespace FTAnalyzer
                 {
                     if (f.FactDate.overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
                     {
-                        if (f.Location.country == FactLocation.ENGLAND || f.Location.country == FactLocation.WALES)
+                        bool supportedLocation = f.Location.SupportedLocation(FactLocation.COUNTRY);
+                        if (f.Location.country == FactLocation.ENGLAND || f.Location.country == FactLocation.WALES
+                            || f.Location.country == FactLocation.UNITED_KINGDOM || !supportedLocation)
                         {
                             if (f.FactDate.overlaps(CensusDate.UKCENSUS1841) ||
                                 f.FactDate.overlaps(CensusDate.UKCENSUS1881) ||

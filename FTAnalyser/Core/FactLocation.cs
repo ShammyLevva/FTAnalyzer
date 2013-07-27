@@ -12,7 +12,8 @@ namespace FTAnalyzer
 	public class FactLocation : IComparable<FactLocation>, IDisplayLocation {
 		
 		public static readonly string SCOTLAND = "Scotland", ENGLAND = "England", CANADA = "Canada", UNITED_STATES = "United States",
-			WALES = "Wales", IRELAND = "Ireland", UNITED_KINGDOM = "United Kingdom", NEW_ZEALAND = "New Zealand", AUSTRALIA = "Australia";
+			WALES = "Wales", IRELAND = "Ireland", UNITED_KINGDOM = "United Kingdom", NEW_ZEALAND = "New Zealand", AUSTRALIA = "Australia", 
+            UNKNOWN_COUNTRY = "Unknown";
 		public static readonly string ABERDEENSHIRE = "Aberdeenshire", AYRSHIRE = "Ayrshire", KINCARDINESHIRE = "Kincardineshire",
 				LANARKSHIRE = "Lanarkshire", BANFFSHIRE = "Banffshire", ANGUS = "Angus", MIDLOTHIAN = "Midlothian", FIFE = "Fife",
 				MIDDLESEX = "Middlesex", LANCASHIRE = "Lancashire";
@@ -20,6 +21,7 @@ namespace FTAnalyzer
 		public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, PARISH = 2, ADDRESS = 3, PLACE = 4;
 
 		private string location;
+        private string fixedLocation;
 		internal string country;
 		internal string region;
 		internal string parish;
@@ -108,6 +110,7 @@ namespace FTAnalyzer
 		
 		public FactLocation() {
 			this.location = "";
+            this.fixedLocation = "";
 			this.country = "";
 			this.region = "";
 			this.parish = "";
@@ -165,9 +168,10 @@ namespace FTAnalyzer
 				region = fixRegionTypos(region);
 				ShiftRegionToParish();
 				SetRegionID();
-				//string after = (parish + ", " + region + ", " + country).ToUpper().Trim();
-				//if (!before.Equals(after))
-				//    Console.WriteLine("Debug : '" + before + "'  converted to '" + after + "'");
+                SetFixedLocation();
+                //string after = (parish + ", " + region + ", " + country).ToUpper().Trim();
+                //if (!before.Equals(after))
+                //    Console.WriteLine("Debug : '" + before + "'  converted to '" + after + "'");
 			}
 		}
 
@@ -294,6 +298,19 @@ namespace FTAnalyzer
 			}
 		}
 
+        private void SetFixedLocation()
+        {
+            fixedLocation = country;
+            if (!region.Equals(string.Empty))
+                fixedLocation = region + ", " + fixedLocation;
+            if (!parish.Equals(string.Empty))
+                fixedLocation = parish + ", " + fixedLocation;
+            if (!address.Equals(string.Empty))
+                fixedLocation = address + ", " + fixedLocation;
+            if (!place.Equals(string.Empty))
+                fixedLocation = place + ", " + fixedLocation;
+        }
+
 		#endregion
 
 		private void SetRegionID()
@@ -408,7 +425,7 @@ namespace FTAnalyzer
         public bool SupportedLocation(int level)
 		{
 			if(country == FactLocation.SCOTLAND || country == FactLocation.ENGLAND || country == FactLocation.WALES ||
-				country == FactLocation.CANADA || country == FactLocation.UNITED_STATES)
+				country == FactLocation.IRELAND || country == FactLocation.CANADA || country == FactLocation.UNITED_STATES)
 			{
 				if (level == COUNTRY) return true;
 				// check region is valid if so return true
@@ -490,7 +507,8 @@ namespace FTAnalyzer
 		}
 		
 		public override string ToString() {
-			return location;
+			//return location;
+            return fixedLocation;
 		}
 		
 		public override bool Equals(Object that) {

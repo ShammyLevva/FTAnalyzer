@@ -43,28 +43,38 @@
       <RegionTypo from="Kinrossshire"   to="Kinross-shire" />
       <RegionTypo from="Peeblesshire"   to="Peebles" />
       <RegionTypo from="Beds"          to="Bedfordshire" />
+      <RegionTypo from="Bedford"       to="Bedfordshire" />
       <RegionTypo from="Berks"         to="Berkshire" />
       <RegionTypo from="Bucks"         to="Buckinghamshire" />
+      <RegionTypo from="Buckingham"    to="Buckinghamshire" />
       <RegionTypo from="Cambs"         to="Cambridgeshire" />
+      <RegionTypo from="Cambridge"     to="Cambridgeshire" />
       <RegionTypo from="Ches"          to="Cheshire" />
       <RegionTypo from="Cumb"          to="Cumbria" />
       <RegionTypo from="Derbys"        to="Derbyshire" />
+      <RegionTypo from="Derby"         to="Derbyshire" />
       <RegionTypo from="Co Durham"     to="Durham" />
       <RegionTypo from="Glous"         to="Gloucestershire" />
       <RegionTypo from="Glos"          to="Gloucestershire" />
+      <RegionTypo from="Gloucester"    to="Gloucestershire" />
       <RegionTypo from="Hants"         to="Hampshire" />
       <RegionTypo from="Hereford"      to="Herefordshire" />
       <RegionTypo from="Herts"         to="Hertfordshire" />
       <RegionTypo from="Hunts"         to="Huntingdonshire" />
       <RegionTypo from="Lancs"         to="Lancashire" />
+      <RegionTypo from="Lancaster"     to="Lancashire" />
       <RegionTypo from="Leics"         to="Leicestershire" />
+      <RegionTypo from="Leicester"     to="Leicestershire" />
       <RegionTypo from="Lincs"         to="Lincolnshire" />
+      <RegionTypo from="Lincoln"       to="Lincolnshire" />
       <RegionTypo from="Middx"         to="Middlesex" />
       <RegionTypo from="Northants"     to="Northamptonshire" />
       <RegionTypo from="Notts"         to="Nottinghamshire" />
       <RegionTypo from="Oxon"          to="Oxfordshire" />
+      <RegionTypo from="Oxford"        to="Oxfordshire" />
       <RegionTypo from="Salop"         to="Shropshire" />
       <RegionTypo from="Somt"          to="Somerset" />
+      <RegionTypo from="Somer"         to="Somerset" />
       <RegionTypo from="Staffs"        to="Staffordshire" />
       <RegionTypo from="SX"            to="Sussex" />
       <RegionTypo from="West Sussex"   to="Sussex" />
@@ -74,10 +84,13 @@
       <RegionTypo from="Wilts"         to="Wiltshire" />
       <RegionTypo from="Worcs"         to="Wocestershire" />
       <RegionTypo from="Yorks"         to="Yorkshire" />
-      <RegionTypo from="North Yorkshire" to="Yorkshire" />
-      <RegionTypo from="West Yorkshire"  to="Yorkshire" />
-      <RegionTypo from="South Yorkshire" to="Yorkshire" />
-    
+      <RegionTypo from="North Yorkshire"        to="Yorkshire" />
+      <RegionTypo from="North Riding Yorkshire" to="Yorkshire" />
+      <RegionTypo from="West Yorkshire"         to="Yorkshire" />
+      <RegionTypo from="West Riding Yorkshire"  to="Yorkshire" />
+      <RegionTypo from="South Yorkshire"        to="Yorkshire" />
+      <RegionTypo from="South Riding Yorkshire" to="Yorkshire" />
+
 
       <!-- Canadian Province abbreviations -->
       <RegionTypo from="BC"     to="British Columbia" />
@@ -269,6 +282,10 @@
       <CountryToRegion region="Montgomeryshire"     country="Wales"    regionID="Montgomery" />
       <CountryToRegion region="Pembrokeshire"       country="Wales"    regionID="Pembroke" />
       <CountryToRegion region="Radnorshire"         country="Wales"    regionID="Radnor" />
+      
+      <!-- Welsh Cities -->
+      <CountryToRegion region="Cardiff"             country="Wales"    regionID="Radnor" />
+      <CountryToRegion region="Swansea"             country="Wales"    regionID="Glamorgan" />
 
       <!-- Irish Provinces -->
       <CountryToRegion region="Antrim"      country="Ireland" regionID="Antrim"      />
