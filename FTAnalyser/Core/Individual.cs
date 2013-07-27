@@ -335,29 +335,29 @@ namespace FTAnalyzer
             set { this.status = value; }
         }
 
-        public FactLocation BestLocation
-        {
-            get
-            {
-                int bestLevel = -1;
-                FactLocation result = new FactLocation();
-                foreach (Fact f in facts)
-                {
-                    FactLocation l = new FactLocation(f.Place);
-                    if (l.Level > bestLevel)
-                    {
-                        result = l;
-                        bestLevel = l.Level;
-                    }
-                }
-                return result;
-            }
-        }
+        //public FactLocation BestLocation
+        //{
+        //    get
+        //    {
+        //        int bestLevel = -1;
+        //        FactLocation result = new FactLocation();
+        //        foreach (Fact f in facts)
+        //        {
+        //            FactLocation l = new FactLocation(f.Place);
+        //            if (l.Level > bestLevel)
+        //            {
+        //                result = l;
+        //                bestLevel = l.Level;
+        //            }
+        //        }
+        //        return result;
+        //    }
+        //}
 
-        public FactLocation FilterLocation
-        {
-            get { return BestLocation; }
-        }
+        //public FactLocation FilterLocation
+        //{
+        //    get { return BestLocation; }
+        //}
 
         private int MaxAgeAtDeath
         {
@@ -631,10 +631,10 @@ namespace FTAnalyzer
 
         #region Location functions
         
-        public FactLocation getLocation(FactDate when)
+        public FactLocation BestLocation(FactDate when)
         {
-            // TODO: ideally this returns a Location a person was at for a given period
-            return new FactLocation();
+            // this returns a Location a person was at for a given period
+            return FactLocation.BestLocation(facts, when);
         }
 
         public bool isAtLocation(FactLocation loc, int level)

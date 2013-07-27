@@ -465,6 +465,25 @@ namespace FTAnalyzer
 			return new FactLocation(location.ToString());
 		}
 
+        public static FactLocation BestLocation(List<Fact> facts, FactDate when)
+        {
+            // this returns a Location a person was at for a given period
+            FactLocation result = new FactLocation();
+            double minDistance = float.MaxValue;
+            foreach (Fact f in facts)
+            {
+                double distance = Math.Sqrt(Math.Pow((double)(f.FactDate.StartDate.Year - when.StartDate.Year), 2.0) +
+                    Math.Pow((double)(f.FactDate.EndDate.Year - when.EndDate.Year), 2.0));
+                if (distance < minDistance && !f.Location.location.Equals(string.Empty))
+                {
+                    result = f.Location;
+                    minDistance = distance;
+                }
+            }
+            return result;
+        }
+
+
 		public bool isBlank () {
 			return this.country.Length == 0;
 		}

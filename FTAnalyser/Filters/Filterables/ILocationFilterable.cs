@@ -7,6 +7,6 @@ namespace FTAnalyzer
 {
     public interface ILocationFilterable
     {
-        FactLocation FilterLocation { get; }
+        FactLocation BestLocation(FactDate when);
     }
 }

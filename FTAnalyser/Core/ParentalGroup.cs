@@ -67,22 +67,20 @@ namespace FTAnalyzer
         public string ParentsMarriageLocation {
             get { return (parentsMarriage == null) ? "" : parentsMarriage.Place; }
         }
-        
-        public FactLocation BestLocation {
-            get
-            {
-                FactLocation i = individual.BestLocation;
-                if (parentsMarriage == null)
-                    return i;
-                FactLocation f = new FactLocation(parentsMarriage.Place);
-                if (f.Level > i.Level)
-                    return f;
-                else
-                    return i;
-            }
-        }
 
         #endregion
+
+        public FactLocation BestLocation(FactDate when)
+        {
+            FactLocation i = individual.BestLocation(when);
+            if (parentsMarriage == null)
+                return i;
+            FactLocation f = new FactLocation(parentsMarriage.Place);
+            if (f.Level > i.Level)
+                return f;
+            else
+                return i;
+        }
 
         public string isFatherDeceased(FactDate when)
         {

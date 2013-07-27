@@ -30,7 +30,7 @@ namespace FTAnalyzer
             FactDate fd = t.FilterDate;
             if (fd == null || !fd.isExact())
                 return true;
-            FactLocation l = t.FilterLocation;
+            FactLocation l = t.BestLocation(fd);
             switch (level)
             {
                 case FactLocation.COUNTRY: return (l.Country.Length == 0);

@@ -127,10 +127,6 @@ namespace FTAnalyzer
             get { return registrationDate;  }
         }
 
-        public string BestLocation {
-            get { return individualsFamily == null ? "" : individualsFamily.BestLocation.ToString(); }
-        }
-        
         public virtual List<Fact> AllFacts {
             get
             {
@@ -149,7 +145,6 @@ namespace FTAnalyzer
                 return facts;
             }
         }
-        #endregion 
 
         public virtual string RegistrationLocation
         {
@@ -159,6 +154,13 @@ namespace FTAnalyzer
         public FactLocation FilterLocation
         {
             get { return new FactLocation(RegistrationLocation);  }
+        }
+
+        #endregion
+        
+        public FactLocation BestLocation(FactDate when)
+        {
+            return individualsFamily == null ? new FactLocation() : individualsFamily.BestLocation(when);
         }
 
         /**

@@ -24,7 +24,7 @@ namespace FTAnalyzer
                 output.Write("\""); output.Write(f.Residence); output.Write("\",");
                 output.Write("\""); output.Write(ind.DateOfBirth); output.Write("\",");
                 output.Write("\""); output.Write(ind.BirthLocation); output.Write("\",");
-                output.Write("\""); output.Write(ind.BestLocation); output.Write("\",");
+                output.Write("\""); output.Write(ind.BestLocation(fd).ToString()); output.Write("\",");
                 output.Write("\""); output.Write(f.FathersName); output.Write("\",");
                 output.Write("\""); output.Write(f.FathersOccupation); output.Write("\",");
                 output.Write("\""); output.Write(f.isFatherDeceased(fd)); output.Write("\",");

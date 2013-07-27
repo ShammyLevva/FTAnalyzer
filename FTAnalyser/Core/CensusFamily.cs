@@ -21,26 +21,28 @@ namespace FTAnalyzer
 		public bool process(FactDate censusDate, bool censusDone, bool includeResidence, bool lostCousinsCheck) {
 			bool result = false;
 			this.censusDate = censusDate;
+            List<Fact> facts = new List<Fact>();
 			if(isValidFamily()) {
-				this.bestLocation = updateBestLocation(new FactLocation(), wife);
 				if (isValidIndividual(wife, censusDone, includeResidence, lostCousinsCheck, true)) {
 					result = true;
 					wife.Status = Individual.WIFE;
+                    facts.AddRange(wife.AllFacts);
 				} else 
 					Wife = null;
 				// overwrite bestLocation by husbands as most commonly the family
 				// end up at husbands location after marriage
-				this.bestLocation = updateBestLocation(bestLocation, husband);
-				if (isValidIndividual(husband, censusDone, includeResidence, lostCousinsCheck, true))
+                if (isValidIndividual(husband, censusDone, includeResidence, lostCousinsCheck, true))
 				{
 					result = true;
 					husband.Status = Individual.HUSBAND;
+                    facts.AddRange(husband.AllFacts);
 				} else 
 					Husband = null;
 				// update bestLocation by marriage date as husband and wife 
 				// locations are often birth locations
 				Fact marriage = getPreferredFact(Fact.MARRIAGE);
-				this.bestLocation = updateBestLocation(bestLocation, marriage);
+                if(marriage != null)
+				    facts.Add(marriage);
 				List<Individual> censusChildren = new List<Individual>();
 				// sort children oldest first
 				children.Sort(new CensusAgeComparator());
@@ -48,38 +50,18 @@ namespace FTAnalyzer
 					// set location to childs birth location
 					// this will end up setting birth location of last child 
 					// as long as the location is at least Parish level
-					Fact birth = child.getPreferredFact(Fact.BIRTH);
-					this.bestLocation = updateBestLocation(bestLocation, birth);
 					child.Status = Individual.CHILD;
 					if (isValidIndividual(child, censusDone, includeResidence, lostCousinsCheck, false))
 					{
 						result = true;
 						censusChildren.Add(child);
+                        facts.AddRange(child.AllFacts);
 					}
 				}
 				children = censusChildren;
+                this.bestLocation = FactLocation.BestLocation(facts, censusDate);
 			}
 			return result;
-		}
-		
-		private FactLocation updateBestLocation(FactLocation bestLocation, Individual ind) {
-			if (ind != null) {
-				FactLocation location = ind.BestLocation;
-				if (location.Level >= FactLocation.PARISH ||
-					location.Level >= bestLocation.Level) 
-						return location;
-			}
-			return bestLocation;
-		}
-		
-		private FactLocation updateBestLocation(FactLocation bestLocation, Fact fact) {
-			if (fact != null) {
-				FactLocation location = new FactLocation(fact.Place);
-				if (location.Level >= FactLocation.PARISH ||
-					location.Level >= bestLocation.Level) 
-						return location;
-			}
-			return bestLocation;
 		}
 		
 		private bool isValidIndividual(Individual indiv, bool censusDone, bool includeResisdence, bool lostCousinsCheck, bool parentCheck) {

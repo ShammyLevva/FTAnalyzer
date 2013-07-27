@@ -153,18 +153,18 @@ namespace FTAnalyzer
                 FactLocation location = marriage.Location.getLocation(level);
                 result.Add(location);
             }
-            if (i1.BestLocation != null && i1.BestLocation.SupportedLocation(level))
-            {
-                FactLocation location = i1.BestLocation.getLocation(level);
-                if (!result.Contains(location))
-                    result.Add(location);
-            }
-            if (i2.BestLocation != null && i2.BestLocation.SupportedLocation(level))
-            {
-                FactLocation location = i2.BestLocation.getLocation(level);
-                if (!result.Contains(location))
-                    result.Add(location);
-            }
+            //if (i1.BestLocation != null && i1.BestLocation.SupportedLocation(level))
+            //{
+            //    FactLocation location = i1.BestLocation.getLocation(level);
+            //    if (!result.Contains(location))
+            //        result.Add(location);
+            //}
+            //if (i2.BestLocation != null && i2.BestLocation.SupportedLocation(level))
+            //{
+            //    FactLocation location = i2.BestLocation.getLocation(level);
+            //    if (!result.Contains(location))
+            //        result.Add(location);
+            //}
             if (result.Count == 0)
             {   // if we have got a random text for country field then use the default country.
                 //rtbOutput.AppendText("Country '" + country + "' not recognised/supported. Trying '" + defaultLocation + "' instead.\n");

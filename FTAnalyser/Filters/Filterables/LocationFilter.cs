@@ -32,7 +32,7 @@ namespace FTAnalyzer
             // contain the search string, then we stop. Otherwise if
             // the location is blank, we search all
             // of the facts about this filterable location.
-            FactLocation l = t.FilterLocation;
+            FactLocation l = t.BestLocation(FactDate.UNKNOWN_DATE);
             if (!l.isBlank()) {
                 return l.Matches(searchstring, level);
             }

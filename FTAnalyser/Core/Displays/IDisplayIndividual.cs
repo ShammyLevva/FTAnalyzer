@@ -16,7 +16,7 @@ namespace FTAnalyzer
         FactDate DeathDate { get; }
         FactLocation DeathLocation { get; }       
         string Occupation { get; }          
-        FactLocation BestLocation { get; }  
+        FactLocation BestLocation(FactDate when);
         Age CurrentAge { get; }             
         string Relation { get; }            
         string BudgieCode { get; }
