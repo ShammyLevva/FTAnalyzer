@@ -24,5 +24,6 @@ namespace FTAnalyzer
         FactDate BirthDate { get; }
         FactLocation BirthLocation { get; }
         FactDate DeathDate { get; }
+        int Ahnentafel { get; }
     }
 }

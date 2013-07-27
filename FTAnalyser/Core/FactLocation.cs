@@ -36,7 +36,8 @@ namespace FTAnalyzer
 		private static Dictionary<string, string> REGION_SHIFTS = new Dictionary<string, string>();
 		private static Dictionary<string, string> REGION_IDS = new Dictionary<string, string>();
         private static Dictionary<string, string> FREECEN_LOOKUP = new Dictionary<string, string>();
-        private static Dictionary<string, string> FINDMYPAST_LOOKUP = new Dictionary<string, string>();
+        private static Dictionary<string, Tuple<string, string>> FINDMYPAST_LOOKUP = new Dictionary<string, Tuple<string,string>>();
+        private static Tuple<string, string> FMP_All_Counties;
 		
 		static FactLocation() {
 			// load conversions from XML file
@@ -97,9 +98,11 @@ namespace FTAnalyzer
                     string country = n.Attributes["country"].Value;
                     if (code != null && code.Length > 0 && county != null && county.Length > 0)
                     {
-                        FINDMYPAST_LOOKUP.Add(code, county);
+                        Tuple<string, string> result = new Tuple<string, string>(country, code);
+                        FINDMYPAST_LOOKUP.Add(code, result);
                     }
                 }
+                FMP_All_Counties = new Tuple<string,string>("any_basic_county","Any");
             }
 		}
 		
@@ -376,9 +379,33 @@ namespace FTAnalyzer
 			get { return parishID; }
 		}
 
-		#endregion
+        public string FreeCenCountyCode
+        {
+            get
+            {
+                string result;
+                FREECEN_LOOKUP.TryGetValue(region, out result);
+                if (result == null)
+                    result = "all";
+                return result;
+            }
+        }
 
-		public bool SupportedLocation(int level)
+        public Tuple<string, string> FindMyPastCountyCode
+        {
+            get
+            {
+                Tuple<string,string> result;
+                FINDMYPAST_LOOKUP.TryGetValue(region, out result);
+                if (result == null)
+                    result = FMP_All_Counties;
+                return result;
+            }
+        }
+
+        #endregion
+
+        public bool SupportedLocation(int level)
 		{
 			if(country == FactLocation.SCOTLAND || country == FactLocation.ENGLAND || country == FactLocation.WALES ||
 				country == FactLocation.CANADA || country == FactLocation.UNITED_STATES)
