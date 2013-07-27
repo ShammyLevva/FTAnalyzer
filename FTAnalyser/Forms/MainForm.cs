@@ -69,14 +69,16 @@ namespace FTAnalyzer
                 }
                 catch (IOException ex)
                 {
-                    HourGlass(true);
                     MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
                 }
                 catch (Exception ex2)
                 {
-                    HourGlass(true);
                     MessageBox.Show("Error: Problem processing your file.\n" +
                         "Please report this at http://ftanalyzer.codeplex.com. Error was: " + ex2.Message);
+                }
+                finally
+                {
+                    HourGlass(false);
                 }
             }
         }
