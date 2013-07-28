@@ -123,15 +123,7 @@
     <Compile Include="Core\FactSource.cs" />
     <Compile Include="Exceptions\InvalidXMLFactException.cs" />
     <Compile Include="Exceptions\InvalidDoubleDateException.cs" />
-    <Compile Include="Filters\Filterables\IndividualDeathFilter.cs" />
-    <Compile Include="Filters\Filterables\ICertificateFilterable.cs" />
-    <Compile Include="Filters\Filterables\ILocationFilterable.cs" />
-    <Compile Include="Filters\Filterables\IIndividualFilterable.cs" />
-    <Compile Include="Filters\Filterables\IFactsFilterable.cs" />
-    <Compile Include="Filters\Filterables\IndividualBirthFilter.cs" />
-    <Compile Include="Filters\Filterables\IRelationFilterable.cs" />
-    <Compile Include="Filters\Filterables\IDateFilterable.cs" />
-    <Compile Include="Filters\Filterables\ISurnameFilterable.cs" />
+    <Compile Include="Filters\FilterUtils.cs" />
     <Compile Include="Forms\BingOSMap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -318,19 +310,6 @@
     <Compile Include="Exceptions\DuplicateException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Core\Family.cs" />
-    <Compile Include="Filters\Generic\AndFilter.cs" />
-    <Compile Include="Filters\Filterables\BirthFilter.cs" />
-    <Compile Include="Filters\Generic\NotFilter.cs" />
-    <Compile Include="Filters\Filterables\FactFilter.cs" />
-    <Compile Include="Filters\Generic\FalseFilter.cs" />
-    <Compile Include="Filters\Generic\TrueFilter.cs" />
-    <Compile Include="Filters\Filterables\DateFilter.cs" />
-    <Compile Include="Filters\Filterables\IncompleteDataFilter.cs" />
-    <Compile Include="Filters\Filterables\LocationFilter.cs" />
-    <Compile Include="Filters\Generic\OrFilter.cs" />
-    <Compile Include="Filters\Generic\Filter.cs" />
-    <Compile Include="Filters\Filterables\RelationFilter.cs" />
-    <Compile Include="Filters\Filterables\SurnameFilter.cs" />
     <Compile Include="Formatters\BaseOutputFormatter.cs" />
     <Compile Include="Formatters\BirthOutputFormatter.cs" />
     <Compile Include="Formatters\CensusOutputFormatter.cs" />

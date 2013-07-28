@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
+using System.Data.SQLite;
+using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
-using System.IO;
-using Printing.DataGridViewPrint.Tools;
-using FTAnalyzer.Utilities;
 using FTAnalyzer.Forms;
-using System.Data.SQLite;
+using FTAnalyzer.Utilities;
+using Printing.DataGridViewPrint.Tools;
+using FTAnalyzer.Filters;
 
 namespace FTAnalyzer
 {
@@ -260,7 +260,7 @@ namespace FTAnalyzer
 
         private void btnShowResults_Click(object sender, EventArgs e)
         {
-            Filter<Registration> filter = createCensusRegistrationFilter();
+            Func<Registration, bool> filter = createCensusRegistrationFilter();
             MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();
             if (!ckbNoLocations.Checked) // only compare on location if no locations isn't checked
                 censusComparator.addComparator(new LocationComparator(FactLocation.PARISH));
@@ -279,66 +279,85 @@ namespace FTAnalyzer
         }
 
         #region Filters
-        private Filter<Registration> createCensusRegistrationFilter()
+        private Func<Registration, bool> createCensusRegistrationFilter()
         {
-            Filter<Registration> filter;
-            Filter<Registration> locationFilter = censusCountry.BuildFilter<Registration>();
-            Filter<Registration> relationFilter = relationTypes.BuildFilter<Registration>();
+            Func<Registration, bool> filter;
+            Func<FactDate, Func<Registration, bool>> locationFilter = censusCountry.BuildFilter<Registration>((d, x) => x.BestLocation(d));
+            Func<Registration, bool> relationFilter = relationTypes.BuildFilter<Registration>(x => x.RelationType);
 
             if (ckbNoLocations.Checked)
-                filter = new AndFilter<Registration>(relationFilter, new DateFilter<Registration>(cenDate.SelectedDate));
+                filter = FilterUtils.AndFilter<Registration>(relationFilter,
+                        FilterUtils.DateFilter<Registration>(x => x.RegistrationDate, cenDate.SelectedDate));
             else
-                filter = new AndFilter<Registration>(locationFilter, relationFilter, new DateFilter<Registration>(cenDate.SelectedDate));
+                filter = FilterUtils.AndFilter<Registration>(
+                        locationFilter(cenDate.SelectedDate),
+                        relationFilter,
+                        FilterUtils.DateFilter<Registration>(x => x.RegistrationDate, cenDate.SelectedDate));
 
             if (txtSurname.Text.Length > 0)
-                filter = new AndFilter<Registration>(filter, new SurnameFilter<Registration>(txtSurname.Text.ToUpper()));
+            {
+                Func<Registration, bool> surnameFilter = FilterUtils.StringFilter<Registration>(x => x.Surname, txtSurname.Text);
+                filter = FilterUtils.AndFilter<Registration>(filter, surnameFilter);
+            }
 
             return filter;
         }
 
-        private Filter<Individual> createTreeTopsIndividualFilter()
+        private Func<Individual, bool> createTreeTopsIndividualFilter()
         {
-            Filter<Individual> locationFilter = treetopsCountry.BuildFilter<Individual>();
-            Filter<Individual> relationFilter = treetopsRelation.BuildFilter<Individual>();
-            Filter<Individual> filter = new AndFilter<Individual>(locationFilter, relationFilter);
+            Func<Individual, bool> locationFilter = treetopsCountry.BuildFilter<Individual>((d, x) => x.BestLocation(d))(FactDate.UNKNOWN_DATE);
+            Func<Individual, bool> relationFilter = treetopsRelation.BuildFilter<Individual>(x => x.RelationType);
+            Func<Individual, bool> filter = FilterUtils.AndFilter<Individual>(locationFilter, relationFilter);
 
             if (txtTreetopsSurname.Text.Length > 0)
-                filter = new AndFilter<Individual>(filter, new SurnameFilter<Individual>(txtTreetopsSurname.Text.ToUpper()));
+            {
+                Func<Individual, bool> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtTreetopsSurname.Text);
+                filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
+            }
 
             return filter;
         }
 
-        private Filter<Individual> createWardeadIndividualFilter(FactDate birthRange, FactDate deathRange)
+        private Func<Individual, bool> createWardeadIndividualFilter(FactDate birthRange, FactDate deathRange)
         {
-            Filter<Individual> locationFilter = wardeadCountry.BuildFilter<Individual>();
-            Filter<Individual> relationFilter = wardeadRelation.BuildFilter<Individual>();
-            Filter<Individual> birthFilter = new IndividualBirthFilter(birthRange);
-            Filter<Individual> deathFilter = new IndividualDeathFilter(deathRange);
-            Filter<Individual> filter = new AndFilter<Individual>(
-                                            new AndFilter<Individual>(birthFilter, deathFilter),
-                                            new AndFilter<Individual>(locationFilter, relationFilter));
+            Func<Individual, bool> locationFilter = wardeadCountry.BuildFilter<Individual>((d, x) => x.BestLocation(d))(FactDate.UNKNOWN_DATE);
+            Func<Individual, bool> relationFilter = wardeadRelation.BuildFilter<Individual>(x => x.RelationType);
+            Func<Individual, bool> birthFilter = FilterUtils.DateFilter<Individual>(x => x.BirthDate, birthRange);
+            Func<Individual, bool> deathFilter = FilterUtils.DateFilter<Individual>(x => x.DeathDate, deathRange);
+            Func<Individual, bool> filter = FilterUtils.AndFilter<Individual>(
+                                            FilterUtils.AndFilter<Individual>(birthFilter, deathFilter),
+                                            FilterUtils.AndFilter<Individual>(locationFilter, relationFilter));
 
             if (tabSelector.Text.Length > 0)
-                filter = new AndFilter<Individual>(filter, new SurnameFilter<Individual>(tabSelector.Text.ToUpper()));
+            {
+                Func<Individual, bool> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, tabSelector.Text);
+                filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
+            }
 
             return filter;
         }
         #endregion
 
         #region Lost Cousins
-        private void LostCousinsCensus(Filter<Registration> filter, FactDate censusDate, string reportTitle)
+        private void LostCousinsCensus(Func<Registration, bool> filter, FactDate censusDate, string reportTitle)
         {
+            Func<Registration, int> relationType = x => x.RelationType;
+            Func<Registration, FactDate> registrationDate = x => x.RegistrationDate;
             HourGlass(true);
-            Filter<Registration> relation =
-                new OrFilter<Registration>(
-                    new OrFilter<Registration>(new RelationFilter<Registration>(Individual.BLOOD), new RelationFilter<Registration>(Individual.DIRECT)),
-                    new RelationFilter<Registration>(Individual.MARRIEDTODB));
+            Func<Registration, bool> relation =
+                FilterUtils.OrFilter<Registration>(
+                    FilterUtils.OrFilter<Registration>(
+                        FilterUtils.IntFilter<Registration>(relationType, Individual.BLOOD),
+                        FilterUtils.IntFilter<Registration>(relationType, Individual.DIRECT)),
+                    FilterUtils.IntFilter<Registration>(relationType, Individual.MARRIEDTODB));
             if (ckbLCIgnoreCountry.Checked)
-                filter = new TrueFilter<Registration>(); // if we are ignoring locations then ignore what was passed as a filter
+                filter = FilterUtils.TrueFilter<Registration>(); // if we are ignoring locations then ignore what was passed as a filter
             if (ckbRestrictions.Checked)
-                filter = new AndFilter<Registration>(new DateFilter<Registration>(censusDate), filter, relation);
+                filter = FilterUtils.AndFilter<Registration>(
+                    FilterUtils.DateFilter<Registration>(registrationDate, censusDate),
+                    filter, relation);
             else
-                filter = new AndFilter<Registration>(new DateFilter<Registration>(censusDate), filter);
+                filter = FilterUtils.AndFilter<Registration>(FilterUtils.DateFilter<Registration>(registrationDate, censusDate), filter);
             MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();
             if (!ckbLCIgnoreCountry.Checked) // only add the parish location comparator if we are using locations
                 censusComparator.addComparator(new LocationComparator(FactLocation.PARISH));
@@ -354,28 +373,36 @@ namespace FTAnalyzer
 
         private void btnLC1881EW_Click(object sender, EventArgs e)
         {
-            Filter<Registration> filter = new OrFilter<Registration>(LocationFilter<Registration>.ENGLAND, LocationFilter<Registration>.WALES);
+            Func<Registration, string> country = x => x.BestLocation(CensusDate.UKCENSUS1881).Country;
+            Func<Registration, bool> filter = FilterUtils.OrFilter<Registration>(
+                FilterUtils.StringFilter<Registration>(country, FactLocation.ENGLAND),
+                FilterUtils.StringFilter<Registration>(country, FactLocation.WALES));
             string reportTitle = "1881 England & Wales Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(filter, CensusDate.UKCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Scot_Click(object sender, EventArgs e)
         {
-            Filter<Registration> filter = LocationFilter<Registration>.SCOTLAND;
+            Func<Registration, string> country = x => x.BestLocation(CensusDate.UKCENSUS1881).Country;
+            Func<Registration, bool> filter = FilterUtils.StringFilter<Registration>(country, FactLocation.SCOTLAND);
             string reportTitle = "1881 Scotland Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(filter, CensusDate.UKCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Canada_Click(object sender, EventArgs e)
         {
-            Filter<Registration> filter = LocationFilter<Registration>.CANADA;
+            Func<Registration, string> country = x => x.BestLocation(CensusDate.UKCENSUS1881).Country;
+            Func<Registration, bool> filter = FilterUtils.StringFilter<Registration>(country, FactLocation.CANADA);
             string reportTitle = "1881 Canada Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(filter, CensusDate.CANADACENSUS1881, reportTitle);
         }
 
         private void btnLC1841EW_Click(object sender, EventArgs e)
         {
-            Filter<Registration> filter = new OrFilter<Registration>(LocationFilter<Registration>.ENGLAND, LocationFilter<Registration>.WALES);
+            Func<Registration, string> country = x => x.BestLocation(CensusDate.UKCENSUS1841).Country;
+            Func<Registration, bool> filter = FilterUtils.OrFilter<Registration>(
+                FilterUtils.StringFilter<Registration>(country, FactLocation.ENGLAND),
+                FilterUtils.StringFilter<Registration>(country, FactLocation.WALES));
             string reportTitle = "1841 England & Wales Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(filter, CensusDate.UKCENSUS1841, reportTitle);
         }
@@ -383,23 +410,32 @@ namespace FTAnalyzer
 
         private void btnLC1911EW_Click(object sender, EventArgs e)
         {
-            Filter<Registration> filter = new OrFilter<Registration>(LocationFilter<Registration>.ENGLAND, LocationFilter<Registration>.WALES);
+            Func<Registration, string> country = x => x.BestLocation(CensusDate.UKCENSUS1911).Country;
+            Func<Registration, bool> filter = FilterUtils.OrFilter<Registration>(
+                FilterUtils.StringFilter<Registration>(country, FactLocation.ENGLAND),
+                FilterUtils.StringFilter<Registration>(country, FactLocation.WALES));
             string reportTitle = "1911 England & Wales Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(filter, CensusDate.UKCENSUS1911, reportTitle);
         }
 
         private void btnLC1880USA_Click(object sender, EventArgs e)
         {
-            Filter<Registration> filter = new OrFilter<Registration>(LocationFilter<Registration>.USA, LocationFilter<Registration>.US);
+            Func<Registration, string> country = x => x.BestLocation(CensusDate.USCENSUS1880).Country;
+            Func<Registration, bool> filter = FilterUtils.OrFilter<Registration>(
+                FilterUtils.StringFilter<Registration>(country, FactLocation.USA),
+                FilterUtils.StringFilter<Registration>(country, FactLocation.UNITED_STATES));
             string reportTitle = "1880 US Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(filter, CensusDate.USCENSUS1880, reportTitle);
         }
 
         private void btnLC1911Ireland_Click(object sender, EventArgs e)
         {
-            Filter<Registration> filter = new OrFilter<Registration>(LocationFilter<Registration>.EIRE, LocationFilter<Registration>.IRELAND);
+            Func<Registration, string> country = x => x.BestLocation(CensusDate.IRELANDCENSUS1911).Country;
+            Func<Registration, bool> filter = FilterUtils.OrFilter<Registration>(
+                FilterUtils.StringFilter<Registration>(country, FactLocation.EIRE),
+                FilterUtils.StringFilter<Registration>(country, FactLocation.IRELAND));
             string reportTitle = "1911 Ireland Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, new FactDate("1911"), reportTitle);
+            LostCousinsCensus(filter, CensusDate.IRELANDCENSUS1911, reportTitle);
         }
 
         private void labLostCousinsWeb_Click(object sender, EventArgs e)
@@ -491,14 +527,18 @@ namespace FTAnalyzer
             birthComparator.addComparator(new LocationComparator(FactLocation.PARISH));
             birthComparator.addComparator(new DateComparator());
 
-            Filter<Registration> partialEnglishData =
-                new AndFilter<Registration>(new IncompleteDataFilter<Registration>(FactLocation.PARISH), LocationFilter<Registration>.ENGLAND);
-            Filter<Registration> directOrBlood = new OrFilter<Registration>(
-                    new RelationFilter<Registration>(Individual.DIRECT),
-                    new RelationFilter<Registration>(Individual.BLOOD));
+            Func<Registration, bool> partialEnglishData =
+                FilterUtils.AndFilter<Registration>(
+                    FilterUtils.IncompleteDataFilter<Registration>(
+                        FactLocation.PARISH, x => x.isCertificatePresent(), x => x.FilterDate, (d, x) => x.BestLocation(d)),
+                    FilterUtils.StringFilter<Registration>(x => x.BestLocation(FactDate.UNKNOWN_DATE).Country, FactLocation.ENGLAND));
+
+            Func<Registration, bool> directOrBlood = FilterUtils.OrFilter<Registration>(
+                    FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.DIRECT),
+                    FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.BLOOD));
 
             RegistrationsProcessor onlineBirthsRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(directOrBlood, partialEnglishData), birthComparator);
+                    FilterUtils.AndFilter<Registration>(directOrBlood, partialEnglishData), birthComparator);
 
             List<Registration> regs = ft.getAllBirthRegistrations();
             List<Registration> result = onlineBirthsRP.processRegistrations(regs);
@@ -514,14 +554,18 @@ namespace FTAnalyzer
             deathComparator.addComparator(new LocationComparator(FactLocation.PARISH));
             deathComparator.addComparator(new DateComparator());
 
-            Filter<Registration> partialEnglishData =
-                new AndFilter<Registration>(new IncompleteDataFilter<Registration>(FactLocation.PARISH), LocationFilter<Registration>.ENGLAND);
-            Filter<Registration> directOrBlood = new OrFilter<Registration>(
-                    new RelationFilter<Registration>(Individual.DIRECT),
-                    new RelationFilter<Registration>(Individual.BLOOD));
+            Func<Registration, bool> partialEnglishData =
+                FilterUtils.AndFilter<Registration>(
+                    FilterUtils.IncompleteDataFilter<Registration>(
+                        FactLocation.PARISH, x => x.isCertificatePresent(), x => x.FilterDate, (d, x) => x.BestLocation(d)),
+                    FilterUtils.StringFilter<Registration>(x => x.BestLocation(FactDate.UNKNOWN_DATE).Country, FactLocation.ENGLAND));
+
+            Func<Registration, bool> directOrBlood = FilterUtils.OrFilter<Registration>(
+                    FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.DIRECT),
+                    FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.BLOOD));
 
             RegistrationsProcessor onlineDeathsRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(directOrBlood, partialEnglishData), deathComparator);
+                    FilterUtils.AndFilter<Registration>(directOrBlood, partialEnglishData), deathComparator);
 
             List<Registration> regs = ft.getAllDeathRegistrations();
             List<Registration> result = onlineDeathsRP.processRegistrations(regs);
@@ -537,14 +581,18 @@ namespace FTAnalyzer
             marriageComparator.addComparator(new LocationComparator(FactLocation.PARISH));
             marriageComparator.addComparator(new DateComparator());
 
-            Filter<Registration> partialEnglishData =
-                new AndFilter<Registration>(new IncompleteDataFilter<Registration>(FactLocation.PARISH), LocationFilter<Registration>.ENGLAND);
-            Filter<Registration> directOrBlood = new OrFilter<Registration>(
-                    new RelationFilter<Registration>(Individual.DIRECT),
-                    new RelationFilter<Registration>(Individual.BLOOD));
+            Func<Registration, bool> partialEnglishData =
+                FilterUtils.AndFilter<Registration>(
+                    FilterUtils.IncompleteDataFilter<Registration>(
+                        FactLocation.PARISH, x => x.isCertificatePresent(), x => x.FilterDate, (d, x) => x.BestLocation(d)),
+                    FilterUtils.StringFilter<Registration>(x => x.BestLocation(FactDate.UNKNOWN_DATE).Country, FactLocation.ENGLAND));
+
+            Func<Registration, bool> directOrBlood = FilterUtils.OrFilter<Registration>(
+                    FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.DIRECT),
+                    FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.BLOOD));
 
             RegistrationsProcessor onlineMarriagesRP = new RegistrationsProcessor(
-                    new AndFilter<Registration>(directOrBlood, partialEnglishData), marriageComparator);
+                    FilterUtils.AndFilter<Registration>(directOrBlood, partialEnglishData), marriageComparator);
 
             List<Registration> regs = ft.getAllMarriageRegistrations();
             List<Registration> result = onlineMarriagesRP.processRegistrations(regs);
@@ -701,8 +749,8 @@ namespace FTAnalyzer
         private void btnTreeTops_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Filter<Individual> filter = createTreeTopsIndividualFilter();
-            List<IDisplayTreeTops> treeTopsList = ft.GetTreeTops(filter);
+            Func<Individual, bool> filter = createTreeTopsIndividualFilter();
+            List<IDisplayTreeTops> treeTopsList = ft.GetTreeTops(filter).ToList();
             treeTopsList.Sort(new BirthDateComparer());
             dgTreeTops.DataSource = treeTopsList;
             foreach (DataGridViewColumn c in dgTreeTops.Columns)
@@ -715,8 +763,8 @@ namespace FTAnalyzer
         private void btnWWI_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Filter<Individual> filter = createWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("BET 1914 AND 1918"));
-            List<IDisplayTreeTops> warDeadList = ft.GetWarDead(filter);
+            Func<Individual, bool> filter = createWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("BET 1914 AND 1918"));
+            List<IDisplayTreeTops> warDeadList = ft.GetWarDead(filter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWarDead.DataSource = warDeadList;
             foreach (DataGridViewColumn c in dgWarDead.Columns)
@@ -729,8 +777,8 @@ namespace FTAnalyzer
         private void btnWWII_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Filter<Individual> filter = createWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("BET 1939 AND 1945"));
-            List<IDisplayTreeTops> warDeadList = ft.GetWarDead(filter);
+            Func<Individual, bool> filter = createWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("BET 1939 AND 1945"));
+            List<IDisplayTreeTops> warDeadList = ft.GetWarDead(filter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWarDead.DataSource = warDeadList;
             foreach (DataGridViewColumn c in dgWarDead.Columns)
