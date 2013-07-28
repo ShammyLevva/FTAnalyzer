@@ -36,12 +36,23 @@
       <CountryTypo from="Scot."   to="Scotland" />
     </CountryTypos>
     <RegionTypos>
+      <!-- Scotland -->
       <RegionTypo from="ABD"            to="Aberdeenshire" />
+      <RegionTypo from="ABDN"           to="Aberdeenshire" />
       <RegionTypo from="KCD"            to="Kincardineshire" />
       <RegionTypo from="Dumfriesshire"  to="Dumfries-shire" />
       <RegionTypo from="Invernessshire" to="Inverness-shire" />
       <RegionTypo from="Kinrossshire"   to="Kinross-shire" />
       <RegionTypo from="Peeblesshire"   to="Peebles" />
+      <RegionType from="Forfarshire"    to="Angus" />
+      <RegionType from="Argyllshire"    to="Argyll" />
+      <RegionType from="Buteshire"      to="Bute" />
+      <RegionType from="Caithness-shire" to="Caithness" />
+      <RegionType from="Caithnessshire"  to="Caithness" />
+      <RegionType from="Haddingtonshire" to="East Lothian" />
+      <RegionType from="Linlithgowshire" to="West Lothian" />
+      
+      <!-- England -->
       <RegionTypo from="Beds"          to="Bedfordshire" />
       <RegionTypo from="Bedford"       to="Bedfordshire" />
       <RegionTypo from="Berks"         to="Berkshire" />
@@ -84,13 +95,49 @@
       <RegionTypo from="Wilts"         to="Wiltshire" />
       <RegionTypo from="Worcs"         to="Wocestershire" />
       <RegionTypo from="Yorks"         to="Yorkshire" />
-      <RegionTypo from="North Yorkshire"        to="Yorkshire" />
-      <RegionTypo from="North Riding Yorkshire" to="Yorkshire" />
-      <RegionTypo from="West Yorkshire"         to="Yorkshire" />
-      <RegionTypo from="West Riding Yorkshire"  to="Yorkshire" />
-      <RegionTypo from="South Yorkshire"        to="Yorkshire" />
-      <RegionTypo from="South Riding Yorkshire" to="Yorkshire" />
+      <RegionTypo from="North Riding Yorkshire"     to="North Yorkshire" />
+      <RegionTypo from="North Riding of Yorkshire"  to="North Yorkshire" />
+      <RegionTypo from="Yorkshire (North)"          to="North Yorkshire" />
+      <RegionTypo from="West Riding Yorkshire"      to="West Yorkshire" />
+      <RegionTypo from="West Riding of Yorkshire"   to="West Yorkshire" />
+      <RegionTypo from="Yorkshire (West)"           to="West Yorkshire" />
+      <RegionTypo from="South Riding Yorkshire"     to="South Yorkshire" />
+      <RegionTypo from="South Riding of Yorkshire"  to="South Yorkshire" />
+      <RegionTypo from="Yorkshire (South)"          to="South Yorkshire" />
 
+      <!-- Ireland -->
+      <RegionTypo from="Co Antrim"        to="Antrim" />
+      <RegionTypo from="County Antrim"    to="Antrim" />
+      <RegionTypo from="Co Armagh"        to="Armagh" />
+      <RegionTypo from="County Armagh"    to="Armagh" />
+      <RegionTypo from="Co Carlow"        to="Carlow" />
+      <RegionTypo from="County Carlow"    to="Carlow" />
+      <RegionTypo from="Co Cavan"         to="Cavan" />
+      <RegionTypo from="County Cavan"     to="Cavan" />
+      <RegionTypo from="Co Clare"         to="Clare" />
+      <RegionTypo from="County Clare"     to="Clare" />
+      <RegionTypo from="Co Cork"          to="Cork" />
+      <RegionTypo from="County Cork"      to="Cork" />
+      <RegionTypo from="Co Donegal"       to="Donegal" />
+      <RegionTypo from="County Donegal"   to="Donegal" />
+      <RegionTypo from="Co Down"          to="Down" />
+      <RegionTypo from="County Down"      to="Down" />
+      <RegionTypo from="Co Dublin"        to="Dublin" />
+      <RegionTypo from="County Dublin"    to="Dublin" />
+      <RegionTypo from="Co Fermanagh"     to="Fermanagh" />
+      <RegionTypo from="County Fermanagh" to="Fermanagh" />
+      <RegionTypo from="Co Galway"        to="Galway" />
+      <RegionTypo from="County Galway"    to="Galway" />
+
+      <!-- Wales -->
+      <RegionTypo from="Caernarvonshire"  to="Caernarvon" />
+      <RegionTypo from="Cardiganshire"    to="Cardigan" />
+      <RegionTypo from="Carmarthenshire"  to="Carmarthen" />
+      <RegionTypo from="Brecknockshire"   to="Brecon" />
+      <RegionTypo from="Breconshire"      to="Brecon" />
+      <RegionTypo from="Denbighshire"     to="Denbigh" />
+      <RegionTypo from="Flintshire"       to="Flint" />
+      <RegionTypo from="Glamorganshire"   to="Glamorgan" />
 
       <!-- Canadian Province abbreviations -->
       <RegionTypo from="BC"     to="British Columbia" />
@@ -225,7 +272,7 @@
       <CountryToRegion region="Derbyshire"          country="England" regionID="Derby" />
       <CountryToRegion region="Devon"               country="England" regionID="Devon" />
       <CountryToRegion region="Dorset"              country="England" regionID="Dorset" />
-      <CountryToRegion region="Co.Durham"           country="England" regionID="Durham" />
+      <CountryToRegion region="Co Durham"           country="England" regionID="Durham" />
       <CountryToRegion region="Durham"              country="England" regionID="Durham" />
       <CountryToRegion region="Essex"               country="England" regionID="Essex" />
       <CountryToRegion region="Gloucestershire"     country="England" regionID="Gloucester" />
@@ -410,7 +457,7 @@
       <RegionToParish parish="London"        region="Middlesex" />
       <RegionToParish parish="Manchester"    region="Lancashire" />
       <RegionToParish parish="Liverpool"     region="Lancashire" />
-      <RegionToParish parish="Cardiff"       region="Glamorganshire" />
+      <RegionToParish parish="Cardiff"       region="Glamorgan" />
       <RegionToParish parish="Newcastle"     region="Northumberland" />
       <RegionToParish parish="Oxford"        region="Oxfordshire" />
       <RegionToParish parish="Southhampton"  region="Hampshire" />
@@ -427,48 +474,48 @@
       <Lookup code="ALD" county="Alderney" />
       <Lookup code="AGY" county="Anglesey" />
       <Lookup code="ANS" county="Angus" />
-      <Lookup code="ANT" county="Co. Antrim" />
-      <Lookup code="ARL" county="Argyllshire" />
-      <Lookup code="ARM" county="Co. Armagh" />
+      <Lookup code="ANT" county="Antrim" />
+      <Lookup code="ARL" county="Argyll" />
+      <Lookup code="ARM" county="Armagh" />
       <Lookup code="AYR" county="Ayrshire" />
       <Lookup code="BAN" county="Banffshire" />
       <Lookup code="BDF" county="Bedfordshire" />
       <Lookup code="BRK" county="Berkshire" />
       <Lookup code="BEW" county="Berwickshire" />
-      <Lookup code="BRE" county="Breconshire" />
+      <Lookup code="BRE" county="Brecon" />
       <Lookup code="BKM" county="Buckinghamshire" />
       <Lookup code="BUT" county="Bute" />
-      <Lookup code="CAE" county="Caernarvonshire" />
+      <Lookup code="CAE" county="Caernarvon" />
       <Lookup code="CAI" county="Caithness" />
       <Lookup code="CAM" county="Cambridgeshire" />
-      <Lookup code="CGN" county="Cardiganshire" />
-      <Lookup code="CAR" county="Co. Carlow" />
-      <Lookup code="CMN" county="Carmarthenshire" />
-      <Lookup code="CAV" county="Co. Cavan" />
+      <Lookup code="CGN" county="Cardigan" />
+      <Lookup code="CAR" county="Carlow" />
+      <Lookup code="CMN" county="Carmarthen" />
+      <Lookup code="CAV" county="Cavan" />
       <Lookup code="CHI" county="Channel Islands" />
       <Lookup code="CHS" county="Cheshire" />
       <Lookup code="CLK" county="Clackmannanshire" />
-      <Lookup code="CLA" county="Co. Clare" />
-      <Lookup code="COR" county="Co. Cork" />
+      <Lookup code="CLA" county="Clare" />
+      <Lookup code="COR" county="Cork" />
       <Lookup code="CON" county="Cornwall" />
       <Lookup code="CUL" county="Cumberland" />
       <Lookup code="DBY" county="Derbyshire" />
       <Lookup code="DEV" county="Devon" />
-      <Lookup code="DON" county="Co. Donegal" />
+      <Lookup code="DON" county="Donegal" />
       <Lookup code="DOR" county="Dorset" />
-      <Lookup code="DOW" county="Co. Down" />
-      <Lookup code="DUB" county="Co. Dublin" />
+      <Lookup code="DOW" county="Down" />
+      <Lookup code="DUB" county="Dublin" />
       <Lookup code="DFS" county="Dumfries-shire" />
-      <Lookup code="DNB" county="Dunbartonshire" />
-      <Lookup code="DUR" county="Co. Durham" />
+      <Lookup code="DNB" county="Dunbarton" />
+      <Lookup code="DUR" county="Durham" />
       <Lookup code="ELN" county="East Lothian" />
-      <Lookup code="ERY" county="East Riding of Yorkshire" />
+      <Lookup code="ERY" county="East Yorkshire" />
       <Lookup code="ENG" county="England" />
       <Lookup code="ESS" county="Essex" />
-      <Lookup code="FER" county="Co. Fermanagh" />
+      <Lookup code="FER" county="Fermanagh" />
       <Lookup code="FIF" county="Fife" />
       <Lookup code="FLN" county="Flintshire" />
-      <Lookup code="GAL" county="Co. Galway" />
+      <Lookup code="GAL" county="Galway" />
       <Lookup code="GLA" county="Glamorgan" />
       <Lookup code="GLS" county="Gloucestershire" />
       <Lookup code="GSY" county="Guernsey" />
@@ -511,7 +558,7 @@
       <Lookup code="MOR" county="Morayshire" />
       <Lookup code="NAI" county="Nairn" />
       <Lookup code="NFK" county="Norfolk" />
-      <Lookup code="NRY" county="North Riding of Yorkshire" />
+      <Lookup code="NRY" county="North Yorkshire" />
       <Lookup code="NTH" county="Northamptonshire" />
       <Lookup code="NBL" county="Northumberland" />
       <Lookup code="NTT" county="Nottinghamshire" />
@@ -546,7 +593,7 @@
       <Lookup code="WAL" county="Wales"    />
       <Lookup code="WAT" county="Co. Waterford" />
       <Lookup code="WLN" county="West Lothian" />
-      <Lookup code="WRY" county="West Riding of Yorkshire" />
+      <Lookup code="WRY" county="West Yorkshire" />
       <Lookup code="WEM" county="Co. Westmeath" />
       <Lookup code="WEX" county="Co. Wexford" />
       <Lookup code="WIC" county="Co. Wicklow" />
@@ -558,41 +605,40 @@
       <Lookup country="Scotland" code="Aberdeenshire                           :66                            " county="Aberdeenshire" />
       <Lookup country="Channel Islands" code="Alderney                                :71                            " county="Alderney" />
       <Lookup country="Wales"    code="Anglesey                                :52                            " county="Anglesey" />
-      <Lookup country="Scotland" code="Argyllshire                             :69                            " county="Argyllshire" />
+      <Lookup country="Scotland" code="Argyllshire                             :69                            " county="Argyll" />
       <Lookup country="Scotland" code="Ayrshire                                :104                           " county="Ayrshire" />
       <Lookup country="Scotland" code="Banffshire                              :105                           " county="Banffshire" />
       <Lookup country="England"  code="Bedfordshire                            :13                            " county="Bedfordshire" />
       <Lookup country="England"  code="Berkshire                               :14                            " county="Berkshire" />
       <Lookup country="Scotland" code="Berwickshire                            :72                            " county="Berwickshire" />
-      <Lookup country="Wales"    code="Brecknockshire                          :48                            " county="Brecknockshire" />
-      <Lookup country="Ships and Overseas Establishments" code="British Ships in ports                  :61                            " county="British Ships in ports" />
+      <Lookup country="Wales"    code="Brecknockshire                          :48                            " county="Brecon" />
       <Lookup country="England"  code="Buckinghamshire                         :40                            " county="Buckinghamshire" />
-      <Lookup country="Scotland" code="Buteshire                               :73                            " county="Buteshire" />
-      <Lookup country="Wales"    code="Caernarvonshire                         :42                            " county="Caernarvonshire" />
-      <Lookup country="Scotland" code="Caithnessshire                          :74                            " county="Caithnessshire" />
+      <Lookup country="Scotland" code="Buteshire                               :73                            " county="Bute" />
+      <Lookup country="Wales"    code="Caernarvonshire                         :42                            " county="Caernarvon" />
+      <Lookup country="Scotland" code="Caithnessshire                          :74                            " county="Caithness" />
       <Lookup country="England"  code="Cambridgeshire                          :15                            " county="Cambridgeshire" />
-      <Lookup country="Wales"    code="Cardiganshire                           :43                            " county="Cardiganshire" />
-      <Lookup country="Wales"    code="Carmarthenshire                         :41                            " county="Carmarthenshire" />
+      <Lookup country="Wales"    code="Cardiganshire                           :43                            " county="Cardigan" />
+      <Lookup country="Wales"    code="Carmarthenshire                         :41                            " county="Carmarthen" />
       <Lookup country="Channel Islands" code="Channel Islands                         :56,57,70,71                   " county="Channel Islands" />
       <Lookup country="England"  code="Cheshire                                :28                            " county="Cheshire" />
       <Lookup country="Scotland" code="Clackmannanshire                        :75                            " county="Clackmannanshire" />
       <Lookup country="England"  code="Cornwall                                :22                            " county="Cornwall" />
       <Lookup country="England"  code="Cumberland                              :35                            " county="Cumberland" />
-      <Lookup country="Wales"    code="Denbighshire                            :44                            " county="Denbighshire" />
+      <Lookup country="Wales"    code="Denbighshire                            :44                            " county="Denbigh" />
       <Lookup country="England"  code="Derbyshire                              :33                            " county="Derbyshire" />
       <Lookup country="England"  code="Devonshire                              :18                            " county="Devonshire" />
       <Lookup country="England"  code="Dorsetshire                             :19                            " county="Dorsetshire" />
-      <Lookup country="Scotland" code="Dumfriesshire                           :76                            " county="Dumfriesshire" />
-      <Lookup country="Scotland" code="Dunbartonshire                          :77                            " county="Dunbartonshire" />
+      <Lookup country="Scotland" code="Dumfriesshire                           :76                            " county="Dumfries-shire" />
+      <Lookup country="Scotland" code="Dunbartonshire                          :77                            " county="Dunbarton" />
       <Lookup country="England"  code="Durham                                  :23                            " county="Durham" />
       <Lookup country="England"  code="Essex                                   :7                             " county="Essex" />
       <Lookup country="Scotland" code="Fife                                    :81                            " county="Fife" />
-      <Lookup country="Wales"    code="Flintshire                              :54                            " county="Flintshire" />
+      <Lookup country="Wales"    code="Flintshire                              :54                            " county="Flint" />
       <Lookup country="Scotland" code="Forfarshire (Angus)                     :68                            " county="Angus" />
       <Lookup country="Wales"    code="Glamorganshire                          :62                            " county="Glamorgan" />
       <Lookup country="England"  code="Gloucestershire                         :27                            " county="Gloucestershire" />
       <Lookup country="Channel Islands" code="Guernsey &amp; Adjacent Islands             :57,70,71                      " county="Guernsey" />
-      <Lookup country="Scotland" code="Haddingtonshire (East Lothian)          :79                            " county="Haddingtonshire (East Lothian)" />
+      <Lookup country="Scotland" code="Haddingtonshire (East Lothian)          :79                            " county="East Lothian" />
       <Lookup country="England"  code="Hampshire                               :29                            " county="Hampshire" />
       <Lookup country="England"  code="Herefordshire                           :47                            " county="Herefordshire" />
       <Lookup country="England"  code="Hertfordshire                           :20                            " county="Hertfordshire" />
@@ -608,7 +654,7 @@
       <Lookup country="England"  code="Lancashire                              :8                             " county="Lancashire" />
       <Lookup country="England"  code="Leicestershire                          :21                            " county="Leicestershire" />
       <Lookup country="England"  code="Lincolnshire                            :26                            " county="Lincolnshire" />
-      <Lookup country="Scotland" code="Linlithgowshire (West Lothian)          :102                           " county="Linlithgowshire (West Lothian)" />
+      <Lookup country="Scotland" code="Linlithgowshire (West Lothian)          :102                           " county="West Lothian" />
       <Lookup country="England"  code="London                                  :1,3,5                         " county="London" />
       <Lookup country="Wales"    code="Merionethshire                          :49                            " county="Merionethshire" />
       <Lookup country="England"  code="Middlesex                               :1,2                           " county="Middlesex" />
@@ -631,7 +677,6 @@
       <Lookup country="Scotland" code="Renfrewshire                            :95                            " county="Renfrewshire" />
       <Lookup country="Scotland" code="Ross and Cromarty                       :96                            " county="Ross and Cromarty" />
       <Lookup country="Scotland" code="Roxburghshire                           :97                            " county="Roxburghshire" />
-      <Lookup country="Ships and Overseas Establishments" code="Royal Navy at sea                       :60                            " county="Royal Navy at sea" />
       <Lookup country="England"  code="Rutlandshire                            :55                            " county="Rutlandshire" />
       <Lookup country="Channel Islands" code="Sark                                    :70                            " county="Sark" />
       <Lookup country="Scotland" code="Selkirkshire                            :98                            " county="Selkirkshire" />
@@ -649,10 +694,10 @@
       <Lookup country="Scotland" code="Wigtownshire                            :103                           " county="Wigtownshire" />
       <Lookup country="England"  code="Wiltshire                               :36                            " county="Wiltshire" />
       <Lookup country="England"  code="Worcestershire                          :12                            " county="Worcestershire" />
-      <Lookup country="England"  code="Yorkshire (all)                         :9,10,11                       " county="Yorkshire (all)" />
-      <Lookup country="England"  code="Yorkshire (East riding)                 :10                            " county="Yorkshire (East riding)" />
-      <Lookup country="England"  code="Yorkshire (North riding)                :11                            " county="Yorkshire (North riding)" />
-      <Lookup country="England"  code="Yorkshire (West riding)                 :9                             " county="Yorkshire (West riding)" />
+      <Lookup country="England"  code="Yorkshire (all)                         :9,10,11                       " county="Yorkshire" />
+      <Lookup country="England"  code="Yorkshire (East riding)                 :10                            " county="East Yorkshire" />
+      <Lookup country="England"  code="Yorkshire (North riding)                :11                            " county="North Yorkshire" />
+      <Lookup country="England"  code="Yorkshire (West riding)                 :9                             " county="West Yorkshire" />
     </FindMyPast>
   </Lookups>
 </Data>
