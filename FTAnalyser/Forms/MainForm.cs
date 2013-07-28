@@ -99,12 +99,11 @@ namespace FTAnalyzer
         {
             if (on)
             {
-                storedCursor = this.Cursor;
                 this.Cursor = Cursors.WaitCursor;
             }
             else
             {
-                this.Cursor = storedCursor;
+                this.Cursor = Cursors.Default;
             }
             Application.DoEvents();
         }
