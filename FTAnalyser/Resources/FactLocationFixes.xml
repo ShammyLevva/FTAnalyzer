@@ -47,6 +47,10 @@
       <RegionType from="Forfarshire"    to="Angus" />
       <RegionType from="Argyllshire"    to="Argyll" />
       <RegionType from="Buteshire"      to="Bute" />
+      <RegionType from="Morayshire"     to="Moray" />
+      <RegionType from="Nairnshire"     to="Nairn" />
+      <RegionType from="Roxburghshire"  to="Roxburgh" />
+      <RegionType from="Selkirkshire"   to="Selkirk" />
       <RegionType from="Caithness-shire" to="Caithness" />
       <RegionType from="Caithnessshire"  to="Caithness" />
       <RegionType from="Haddingtonshire" to="East Lothian" />
@@ -83,6 +87,7 @@
       <RegionTypo from="Notts"         to="Nottinghamshire" />
       <RegionTypo from="Oxon"          to="Oxfordshire" />
       <RegionTypo from="Oxford"        to="Oxfordshire" />
+      <RegionTypo from="Rutlandshire"  to="Rutland" />
       <RegionTypo from="Salop"         to="Shropshire" />
       <RegionTypo from="Somt"          to="Somerset" />
       <RegionTypo from="Somer"         to="Somerset" />
@@ -128,6 +133,48 @@
       <RegionTypo from="County Fermanagh" to="Fermanagh" />
       <RegionTypo from="Co Galway"        to="Galway" />
       <RegionTypo from="County Galway"    to="Galway" />
+      <RegionTypo from="Co Kerry"         to="Kerry" />
+      <RegionTypo from="County Kerry"     to="Kerry" />
+      <RegionTypo from="Co Kildare"       to="Kildare" />
+      <RegionTypo from="County Kildare"   to="Kildare" />
+      <RegionTypo from="Co Kilkenny"      to="Kilkenny" />
+      <RegionTypo from="County Kilkenny"  to="Kilkenny" />
+      <RegionTypo from="Co Laois"         to="Laois" />
+      <RegionTypo from="County Laois"     to="Laois" />
+      <RegionTypo from="Co Leitrim"       to="Leitrim" />
+      <RegionTypo from="County Leitrim"   to="Leitrim" />
+      <RegionTypo from="Co Limerick"      to="Limerick" />
+      <RegionTypo from="County Limerick"  to="Limerick" />
+      <RegionTypo from="Co Londonderry"      to="Londonderry" />
+      <RegionTypo from="County Londonderry"  to="Londonderry" />
+      <RegionTypo from="Co Derry"         to="Londonderry" />
+      <RegionTypo from="County Derry"     to="Londonderry" />
+      <RegionTypo from="Co Longford"      to="Longford" />
+      <RegionTypo from="County Longford"  to="Longford" />
+      <RegionTypo from="Co Louth"         to="Louth" />
+      <RegionTypo from="County Louth"     to="Louth" />
+      <RegionTypo from="Co Mayo"          to="Mayo" />
+      <RegionTypo from="County Mayo"      to="Mayo" />
+      <RegionTypo from="Co Meath"         to="Meath" />
+      <RegionTypo from="County Meath"     to="Meath" />
+      <RegionTypo from="Co Monaghan"      to="Monaghan" />
+      <RegionTypo from="County Monaghan"  to="Monaghan" />
+      <RegionTypo from="Co Offaly"        to="Offaly" />
+      <RegionTypo from="County Offaly"    to="Offaly" />
+      <RegionTypo from="Co Roscommon"     to="Roscommon" />
+      <RegionTypo from="County Roscommon" to="Roscommon" />
+      <RegionTypo from="Co Sligo"         to="Sligo" />
+      <RegionTypo from="County Sligo"     to="Sligo" />
+      <RegionTypo from="Co Tyrone"        to="Tyrone" />
+      <RegionTypo from="County Tyrone"    to="Tyrone" />
+      <RegionTypo from="Co Waterford"     to="Waterford" />
+      <RegionTypo from="County Waterford" to="Waterford" />
+      <RegionTypo from="Co Westmeath"     to="Westmeath" />
+      <RegionTypo from="County Westmeath" to="Westmeath" />
+      <RegionTypo from="Co Wexford"       to="Wexford" />
+      <RegionTypo from="County Wexford"   to="Wexford" />
+      <RegionTypo from="Co Wicklow"       to="Wicklow" />
+      <RegionTypo from="County Wicklow"   to="Wicklow" />
 
       <!-- Wales -->
       <RegionTypo from="Caernarvonshire"  to="Caernarvon" />
@@ -138,6 +185,8 @@
       <RegionTypo from="Denbighshire"     to="Denbigh" />
       <RegionTypo from="Flintshire"       to="Flint" />
       <RegionTypo from="Glamorganshire"   to="Glamorgan" />
+      <RegionTypo from="Pembrokeshire"    to="Pembroke" />
+      <RegionTypo from="Radnorshire"      to="Radnor" />
 
       <!-- Canadian Province abbreviations -->
       <RegionTypo from="BC"     to="British Columbia" />
@@ -529,66 +578,63 @@
       <Lookup code="IOW" county="Isle of Wight" />
       <Lookup code="JSY" county="Jersey" />
       <Lookup code="KEN" county="Kent" />
-      <Lookup code="KER" county="Co. Kerry" />
-      <Lookup code="KID" county="Co. Kildare" />
-      <Lookup code="KIK" county="Co. Kilkenny" />
+      <Lookup code="KER" county="Kerry" />
+      <Lookup code="KID" county="Kildare" />
+      <Lookup code="KIK" county="Kilkenny" />
       <Lookup code="KCD" county="Kincardineshire" />
       <Lookup code="KRS" county="Kinross-shire" />
       <Lookup code="KKD" county="Kirkcudbrightshire" />
       <Lookup code="LKS" county="Lanarkshire" />
       <Lookup code="LAN" county="Lancashire" />
-      <Lookup code="LEX" county="Co. Laois" />
+      <Lookup code="LEX" county="Laois" />
       <Lookup code="LEI" county="Leicestershire" />
       <Lookup code="LEN" county="Leinster" />
-      <Lookup code="LET" county="Co. Leitrim" />
-      <Lookup code="LIM" county="Co. Limerick" />
+      <Lookup code="LET" county="Leitrim" />
+      <Lookup code="LIM" county="Limerick" />
       <Lookup code="LIN" county="Lincolnshire" />
       <Lookup code="LND" county="London" />
-      <Lookup code="LDY" county="Co. Londonderry" />
-      <Lookup code="LOG" county="Co. Longford" />
-      <Lookup code="LOU" county="Co. Louth" />
-      <Lookup code="MAY" county="Co. Mayo" />
-      <Lookup code="MEA" county="Co. Meath" />
+      <Lookup code="LDY" county="Londonderry" />
+      <Lookup code="LOG" county="Longford" />
+      <Lookup code="LOU" county="Louth" />
+      <Lookup code="MAY" county="Mayo" />
+      <Lookup code="MEA" county="Meath" />
       <Lookup code="MER" county="Merionethshire" />
       <Lookup code="MDX" county="Middlesex" />
       <Lookup code="MLN" county="Midlothian" />
-      <Lookup code="MOG" county="Co. Monaghan" />
+      <Lookup code="MOG" county="Monaghan" />
       <Lookup code="MON" county="Monmouthshire" />
       <Lookup code="MGY" county="Montgomeryshire" />
-      <Lookup code="MOR" county="Morayshire" />
+      <Lookup code="MOR" county="Moray" />
       <Lookup code="NAI" county="Nairn" />
       <Lookup code="NFK" county="Norfolk" />
       <Lookup code="NRY" county="North Yorkshire" />
       <Lookup code="NTH" county="Northamptonshire" />
       <Lookup code="NBL" county="Northumberland" />
       <Lookup code="NTT" county="Nottinghamshire" />
-      <Lookup code="OFF" county="Co. Offaly" />
+      <Lookup code="OFF" county="Offaly" />
       <Lookup code="OKI" county="Orkney" />
-      <Lookup code="OUC" county="Outside Census County (1841)" />
-      <Lookup code="OVB" county="Overseas - British" />
-      <Lookup code="OVF" county="Overseas - Foreign" />
       <Lookup code="OXF" county="Oxfordshire" />
-      <Lookup code="PEE" county="Peebles-shire" />
+      <Lookup code="PEE" county="Peebles" />
       <Lookup code="PEM" county="Pembrokeshire" />
       <Lookup code="PER" county="Perth" />
-      <Lookup code="RAD" county="Radnorshire" />
+      <Lookup code="RAD" county="Radnor" />
       <Lookup code="RFW" county="Renfrewshire" />
-      <Lookup code="ROS" county="Co. Roscommon" />
+      <Lookup code="ROS" county="Roscommon" />
       <Lookup code="ROC" county="Ross and Cromarty" />
-      <Lookup code="ROX" county="Roxburghshire" />
+      <Lookup code="ROX" county="Roxburgh" />
       <Lookup code="RUT" county="Rutland" />
       <Lookup code="SRK" county="Sark" />
       <Lookup code="SCT" county="Scotland" />
-      <Lookup code="SEL" county="Selkirkshire" />
+      <Lookup code="SEL" county="Selkirk" />
       <Lookup code="SHI" county="Shetland" />
       <Lookup code="SAL" county="Shropshire" />
-      <Lookup code="SLI" county="Co. Sligo" />
+      <Lookup code="SLI" county="Sligo" />
       <Lookup code="SOM" county="Somerset" />
       <Lookup code="STS" county="Staffordshire" />
       <Lookup code="SFK" county="Suffolk" />
       <Lookup code="SRY" county="Surrey" />
       <Lookup code="SSX" county="Sussex" />
-      <Lookup code="TYR" county="Co. Tyrone" />
+      <Lookup code="TYR" county="Tyrone" />
       <Lookup code="UNK" county="Unknown" />
       <Lookup code="WAL" county="Wales"    />
       <Lookup code="WAT" county="Co. Waterford" />
@@ -643,7 +689,7 @@
       <Lookup country="England"  code="Herefordshire                           :47                            " county="Herefordshire" />
       <Lookup country="England"  code="Hertfordshire                           :20                            " county="Hertfordshire" />
       <Lookup country="England"  code="Huntingdonshire                         :51                            " county="Huntingdonshire" />
-      <Lookup country="Scotland" code="Invernessshire                          :83                            " county="Invernessshire" />
+      <Lookup country="Scotland" code="Invernessshire                          :83                            " county="Inverness-shire" />
       <Lookup country="Isle of Man" code="Isle of Man                             :58                            " county="Isle of Man" />
       <Lookup country="Channel Islands" code="Jersey                                  :56                            " county="Jersey" />
       <Lookup country="England"  code="Kent                                    :5,6                           " county="Kent" />
@@ -670,16 +716,16 @@
       <Lookup country="England"  code="Nottinghamshire                         :31                            " county="Nottinghamshire" />
       <Lookup country="Scotland" code="Orkney                                  :92                            " county="Orkney" />
       <Lookup country="England"  code="Oxfordshire                             :39                            " county="Oxfordshire" />
-      <Lookup country="Scotland" code="Peeblesshire                            :93                            " county="Peeblesshire" />
+      <Lookup country="Scotland" code="Peeblesshire                            :93                            " county="Peebles" />
       <Lookup country="Wales"    code="Pembrokeshire                           :45                            " county="Pembrokeshire" />
       <Lookup country="Scotland" code="Perthshire                              :94                            " county="Perthshire" />
-      <Lookup country="Wales"    code="Radnorshire                             :53                            " county="Radnorshire" />
+      <Lookup country="Wales"    code="Radnorshire                             :53                            " county="Radnor" />
       <Lookup country="Scotland" code="Renfrewshire                            :95                            " county="Renfrewshire" />
       <Lookup country="Scotland" code="Ross and Cromarty                       :96                            " county="Ross and Cromarty" />
-      <Lookup country="Scotland" code="Roxburghshire                           :97                            " county="Roxburghshire" />
-      <Lookup country="England"  code="Rutlandshire                            :55                            " county="Rutlandshire" />
+      <Lookup country="Scotland" code="Roxburghshire                           :97                            " county="Roxburgh" />
+      <Lookup country="England"  code="Rutlandshire                            :55                            " county="Rutland" />
       <Lookup country="Channel Islands" code="Sark                                    :70                            " county="Sark" />
-      <Lookup country="Scotland" code="Selkirkshire                            :98                            " county="Selkirkshire" />
+      <Lookup country="Scotland" code="Selkirkshire                            :98                            " county="Selkirk" />
       <Lookup country="Scotland" code="Shetland                                :99                            " county="Shetland" />
       <Lookup country="England"  code="Shropshire                              :16                            " county="Shropshire" />
       <Lookup country="England"  code="Somersetshire                           :25                            " county="Somersetshire" />
