@@ -671,33 +671,28 @@ namespace FTAnalyzer
 
         #region TreeTops
 
-        public List<IDisplayTreeTops> GetTreeTops(Filter<Individual> filter)
+        public IEnumerable<IDisplayTreeTops> GetTreeTops(Func<Individual, bool> filter)
         {
-            List<IDisplayTreeTops> result = new List<IDisplayTreeTops>();
             foreach (Individual ind in individuals)
             {
-                if (!ind.HasParents)
+                if (!ind.HasParents && filter(ind))
                 {
-                    if (filter.select(ind))
-                        result.Add(ind);
+                    yield return ind;
                 }
             }
-            return result;
         }
 
         #endregion
 
         #region WarDead
 
-        public List<IDisplayTreeTops> GetWarDead(Filter<Individual> filter)
+        public IEnumerable<IDisplayTreeTops> GetWarDead(Func<Individual, bool> filter)
         {
-            List<IDisplayTreeTops> result = new List<IDisplayTreeTops>();
             foreach (Individual ind in individuals)
             {
-                if (ind.isMale && !ind.isDeathKnown() && filter.select(ind))
-                    result.Add(ind);
+                if (ind.isMale && !ind.isDeathKnown() && filter(ind))
+                    yield return ind;
             }
-            return result;
         }
 
         #endregion

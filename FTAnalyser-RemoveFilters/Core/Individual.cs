@@ -6,8 +6,7 @@ using System.Windows.Forms;
 namespace FTAnalyzer
 {
     public class Individual : IComparable<Individual>, 
-        IDisplayIndividual, IDisplayLooseDeath, IDisplayTreeTops, IDisplayLCReport,
-        ILocationFilterable, ISurnameFilterable, IRelationFilterable, IFactsFilterable
+        IDisplayIndividual, IDisplayLooseDeath, IDisplayTreeTops, IDisplayLCReport
     {
         
         // define relation type from direct ancestor to related by marriage and 

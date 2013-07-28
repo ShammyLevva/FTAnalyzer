@@ -9,35 +9,26 @@ namespace FTAnalyzer
     public class RegistrationsProcessor
     {
 
-        Filter<Registration> filter;
+        Func<Registration, bool> filter;
         IComparer<Registration> comparator;
 
-        public RegistrationsProcessor(Filter<Registration> f, IComparer<Registration> c)
+        public RegistrationsProcessor(Func<Registration, bool> f, IComparer<Registration> c)
         {
             filter = f;
             comparator = c;
         }
 
-        public RegistrationsProcessor(Filter<Registration> f) 
+        public RegistrationsProcessor(Func<Registration, bool> f) 
             : this(f, null)
         { }
 
         public RegistrationsProcessor(IComparer<Registration> c)
-            : this(new TrueFilter<Registration>(), c)
+            : this(x => true, c)
         { }
 
         public RegistrationsProcessor()
-            : this(new TrueFilter<Registration>(), null)
+            : this((IComparer<Registration>)null)
         { }
-
-        private List<Registration> filterRegistrations(List<Registration> regs) {
-            List<Registration> result = new List<Registration>();
-            foreach (Registration r in regs) {
-                if (filter.select(r))
-                    result.Add(r);
-            }
-            return result;
-        }
 
         private List<Registration> sortRegistrations(List<Registration> regs)
         {
@@ -46,9 +37,9 @@ namespace FTAnalyzer
             return regs;
         }
 
-        public List<Registration> processRegistrations(List<Registration> regs)
+        public List<Registration> processRegistrations(IList<Registration> regs)
         {
-            return sortRegistrations(filterRegistrations(regs));
+            return sortRegistrations(regs.Where(filter).ToList());
         }
     }
 }

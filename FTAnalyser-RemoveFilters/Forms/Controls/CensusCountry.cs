@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using FTAnalyzer;
+using FTAnalyzer.Filters;
 
 namespace Controls
 {
@@ -53,21 +48,24 @@ namespace Controls
             } 
         }
 
-        public Filter<T> BuildFilter<T>() where T: ILocationFilterable, IFactsFilterable
+        public Func<FactDate, Func<T, bool>> BuildFilter<T>(Func<FactDate, T, FactLocation> location)
         {
-            Filter<T> locationFilter = new TrueFilter<T>();
+            Func<FactDate, Func<T, bool>> locationFilter = d => FilterUtils.TrueFilter<T>();
+            Func<FactLocation, string> country = x => x.Country;
             if (Scotland)
-                locationFilter = LocationFilter<T>.SCOTLAND;
+                locationFilter = FilterUtils.LocationFilter<T>(location, country, FactLocation.SCOTLAND);
             if (England)
-                locationFilter = LocationFilter<T>.ENGLAND;
+                locationFilter = FilterUtils.LocationFilter<T>(location, country, FactLocation.ENGLAND);
             if (Wales)
-                locationFilter = LocationFilter<T>.WALES;
+                locationFilter = FilterUtils.LocationFilter<T>(location, country, FactLocation.WALES);
             if (UK)
-                locationFilter = new OrFilter<T>(LocationFilter<T>.SCOTLAND, LocationFilter<T>.ENGLAND, LocationFilter<T>.WALES);
+                locationFilter = FilterUtils.OrFilter<FactDate, T>(FilterUtils.LocationFilter<T>(location, country, FactLocation.SCOTLAND),
+                                        FilterUtils.LocationFilter<T>(location, country, FactLocation.ENGLAND),
+                                        FilterUtils.LocationFilter<T>(location, country, FactLocation.WALES));
             if (Canada)
-                locationFilter = LocationFilter<T>.CANADA;
+                locationFilter = FilterUtils.LocationFilter<T>(location, country, FactLocation.CANADA);
             if (USA)
-                locationFilter = LocationFilter<T>.USA;
+                locationFilter = FilterUtils.LocationFilter<T>(location, country, FactLocation.USA);
             return locationFilter;
         }
 

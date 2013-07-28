@@ -13,7 +13,8 @@ namespace FTAnalyzer
 		
 		public static readonly string SCOTLAND = "Scotland", ENGLAND = "England", CANADA = "Canada", UNITED_STATES = "United States",
 			WALES = "Wales", IRELAND = "Ireland", UNITED_KINGDOM = "United Kingdom", NEW_ZEALAND = "New Zealand", AUSTRALIA = "Australia", 
-            UNKNOWN_COUNTRY = "Unknown";
+            UNKNOWN_COUNTRY = "Unknown", USA="USA", EIRE="Eire";
+
 		public static readonly string ABERDEENSHIRE = "Aberdeenshire", AYRSHIRE = "Ayrshire", KINCARDINESHIRE = "Kincardineshire",
 				LANARKSHIRE = "Lanarkshire", BANFFSHIRE = "Banffshire", ANGUS = "Angus", MIDLOTHIAN = "Midlothian", FIFE = "Fife",
 				MIDDLESEX = "Middlesex", LANCASHIRE = "Lancashire";
