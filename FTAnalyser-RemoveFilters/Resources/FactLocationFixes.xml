@@ -1,0 +1,749 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+  <Fixes>
+    <CountryTypos>
+      <CountryTypo from="Can"     to="Canada" />
+      <CountryTypo from="CAN"     to="Canada" />
+      <CountryTypo from="USA"     to="United States" />
+      <CountryTypo from="US"      to="United States" />
+      <CountryTypo from="U.S"     to="United States" />
+      <CountryTypo from="U.S."    to="United States" />
+      <CountryTypo from="U.S.A"   to="United States" />
+      <CountryTypo from="U.S.A."  to="United States" />
+      <CountryTypo from="NZ"      to="New Zealand" />
+      <CountryTypo from="NZ."     to="New Zealand" />
+      <CountryTypo from="N.Z"     to="New Zealand" />
+      <CountryTypo from="N.Z."    to="New Zealand" />
+      <CountryTypo from="UK"      to="England" />
+      <CountryTypo from="UK."     to="England" />
+      <CountryTypo from="U.K"     to="England" />
+      <CountryTypo from="U.K."    to="England" />
+      <CountryTypo from="Eng."    to="England" />
+      <CountryTypo from="Eng"     to="England" />
+      <CountryTypo from="ENG."    to="England" />
+      <CountryTypo from="ENG"     to="England" />
+      <CountryTypo from="GB"      to="England" />
+      <CountryTypo from="GB."     to="England" />
+      <CountryTypo from="G B"     to="England" />
+      <CountryTypo from="G.B."    to="England" />
+      <CountryTypo from="Great Britain"    to="England" />
+      <CountryTypo from="Aust"    to="Australia" />
+      <CountryTypo from="Aust."   to="Australia" />
+      <CountryTypo from="AUS"     to="Australia" />
+      <CountryTypo from="Eire"    to="Ireland" />
+      <CountryTypo from="SCT"     to="Scotland" />
+      <CountryTypo from="Scot"    to="Scotland" />
+      <CountryTypo from="Scot."   to="Scotland" />
+    </CountryTypos>
+    <RegionTypos>
+      <!-- Scotland -->
+      <RegionTypo from="ABD"            to="Aberdeenshire" />
+      <RegionTypo from="ABDN"           to="Aberdeenshire" />
+      <RegionTypo from="KCD"            to="Kincardineshire" />
+      <RegionTypo from="Dumfriesshire"  to="Dumfries-shire" />
+      <RegionTypo from="Invernessshire" to="Inverness-shire" />
+      <RegionTypo from="Kinrossshire"   to="Kinross-shire" />
+      <RegionTypo from="Peeblesshire"   to="Peebles" />
+      <RegionType from="Forfarshire"    to="Angus" />
+      <RegionType from="Argyllshire"    to="Argyll" />
+      <RegionType from="Buteshire"      to="Bute" />
+      <RegionType from="Morayshire"     to="Moray" />
+      <RegionType from="Nairnshire"     to="Nairn" />
+      <RegionType from="Roxburghshire"  to="Roxburgh" />
+      <RegionType from="Selkirkshire"   to="Selkirk" />
+      <RegionType from="Caithness-shire" to="Caithness" />
+      <RegionType from="Caithnessshire"  to="Caithness" />
+      <RegionType from="Haddingtonshire" to="East Lothian" />
+      <RegionType from="Linlithgowshire" to="West Lothian" />
+      
+      <!-- England -->
+      <RegionTypo from="Beds"          to="Bedfordshire" />
+      <RegionTypo from="Bedford"       to="Bedfordshire" />
+      <RegionTypo from="Berks"         to="Berkshire" />
+      <RegionTypo from="Bucks"         to="Buckinghamshire" />
+      <RegionTypo from="Buckingham"    to="Buckinghamshire" />
+      <RegionTypo from="Cambs"         to="Cambridgeshire" />
+      <RegionTypo from="Cambridge"     to="Cambridgeshire" />
+      <RegionTypo from="Ches"          to="Cheshire" />
+      <RegionTypo from="Cumb"          to="Cumbria" />
+      <RegionTypo from="Derbys"        to="Derbyshire" />
+      <RegionTypo from="Derby"         to="Derbyshire" />
+      <RegionTypo from="Co Durham"     to="Durham" />
+      <RegionTypo from="Glous"         to="Gloucestershire" />
+      <RegionTypo from="Glos"          to="Gloucestershire" />
+      <RegionTypo from="Gloucester"    to="Gloucestershire" />
+      <RegionTypo from="Hants"         to="Hampshire" />
+      <RegionTypo from="Hereford"      to="Herefordshire" />
+      <RegionTypo from="Herts"         to="Hertfordshire" />
+      <RegionTypo from="Hunts"         to="Huntingdonshire" />
+      <RegionTypo from="Lancs"         to="Lancashire" />
+      <RegionTypo from="Lancaster"     to="Lancashire" />
+      <RegionTypo from="Leics"         to="Leicestershire" />
+      <RegionTypo from="Leicester"     to="Leicestershire" />
+      <RegionTypo from="Lincs"         to="Lincolnshire" />
+      <RegionTypo from="Lincoln"       to="Lincolnshire" />
+      <RegionTypo from="Middx"         to="Middlesex" />
+      <RegionTypo from="Northants"     to="Northamptonshire" />
+      <RegionTypo from="Notts"         to="Nottinghamshire" />
+      <RegionTypo from="Oxon"          to="Oxfordshire" />
+      <RegionTypo from="Oxford"        to="Oxfordshire" />
+      <RegionTypo from="Rutlandshire"  to="Rutland" />
+      <RegionTypo from="Salop"         to="Shropshire" />
+      <RegionTypo from="Somt"          to="Somerset" />
+      <RegionTypo from="Somer"         to="Somerset" />
+      <RegionTypo from="Staffs"        to="Staffordshire" />
+      <RegionTypo from="SX"            to="Sussex" />
+      <RegionTypo from="West Sussex"   to="Sussex" />
+      <RegionTypo from="East Sussex"   to="Sussex" />
+      <RegionTypo from="Warks"         to="Warwickshire" />
+      <RegionTypo from="Wmld"          to="Westmorland" />
+      <RegionTypo from="Wilts"         to="Wiltshire" />
+      <RegionTypo from="Worcs"         to="Wocestershire" />
+      <RegionTypo from="Yorks"         to="Yorkshire" />
+      <RegionTypo from="North Riding Yorkshire"     to="North Yorkshire" />
+      <RegionTypo from="North Riding of Yorkshire"  to="North Yorkshire" />
+      <RegionTypo from="Yorkshire (North)"          to="North Yorkshire" />
+      <RegionTypo from="West Riding Yorkshire"      to="West Yorkshire" />
+      <RegionTypo from="West Riding of Yorkshire"   to="West Yorkshire" />
+      <RegionTypo from="Yorkshire (West)"           to="West Yorkshire" />
+      <RegionTypo from="South Riding Yorkshire"     to="South Yorkshire" />
+      <RegionTypo from="South Riding of Yorkshire"  to="South Yorkshire" />
+      <RegionTypo from="Yorkshire (South)"          to="South Yorkshire" />
+
+      <!-- Ireland -->
+      <RegionTypo from="Co Antrim"        to="Antrim" />
+      <RegionTypo from="County Antrim"    to="Antrim" />
+      <RegionTypo from="Co Armagh"        to="Armagh" />
+      <RegionTypo from="County Armagh"    to="Armagh" />
+      <RegionTypo from="Co Carlow"        to="Carlow" />
+      <RegionTypo from="County Carlow"    to="Carlow" />
+      <RegionTypo from="Co Cavan"         to="Cavan" />
+      <RegionTypo from="County Cavan"     to="Cavan" />
+      <RegionTypo from="Co Clare"         to="Clare" />
+      <RegionTypo from="County Clare"     to="Clare" />
+      <RegionTypo from="Co Cork"          to="Cork" />
+      <RegionTypo from="County Cork"      to="Cork" />
+      <RegionTypo from="Co Donegal"       to="Donegal" />
+      <RegionTypo from="County Donegal"   to="Donegal" />
+      <RegionTypo from="Co Down"          to="Down" />
+      <RegionTypo from="County Down"      to="Down" />
+      <RegionTypo from="Co Dublin"        to="Dublin" />
+      <RegionTypo from="County Dublin"    to="Dublin" />
+      <RegionTypo from="Co Fermanagh"     to="Fermanagh" />
+      <RegionTypo from="County Fermanagh" to="Fermanagh" />
+      <RegionTypo from="Co Galway"        to="Galway" />
+      <RegionTypo from="County Galway"    to="Galway" />
+      <RegionTypo from="Co Kerry"         to="Kerry" />
+      <RegionTypo from="County Kerry"     to="Kerry" />
+      <RegionTypo from="Co Kildare"       to="Kildare" />
+      <RegionTypo from="County Kildare"   to="Kildare" />
+      <RegionTypo from="Co Kilkenny"      to="Kilkenny" />
+      <RegionTypo from="County Kilkenny"  to="Kilkenny" />
+      <RegionTypo from="Co Laois"         to="Laois" />
+      <RegionTypo from="County Laois"     to="Laois" />
+      <RegionTypo from="Co Leitrim"       to="Leitrim" />
+      <RegionTypo from="County Leitrim"   to="Leitrim" />
+      <RegionTypo from="Co Limerick"      to="Limerick" />
+      <RegionTypo from="County Limerick"  to="Limerick" />
+      <RegionTypo from="Co Londonderry"      to="Londonderry" />
+      <RegionTypo from="County Londonderry"  to="Londonderry" />
+      <RegionTypo from="Co Derry"         to="Londonderry" />
+      <RegionTypo from="County Derry"     to="Londonderry" />
+      <RegionTypo from="Co Longford"      to="Longford" />
+      <RegionTypo from="County Longford"  to="Longford" />
+      <RegionTypo from="Co Louth"         to="Louth" />
+      <RegionTypo from="County Louth"     to="Louth" />
+      <RegionTypo from="Co Mayo"          to="Mayo" />
+      <RegionTypo from="County Mayo"      to="Mayo" />
+      <RegionTypo from="Co Meath"         to="Meath" />
+      <RegionTypo from="County Meath"     to="Meath" />
+      <RegionTypo from="Co Monaghan"      to="Monaghan" />
+      <RegionTypo from="County Monaghan"  to="Monaghan" />
+      <RegionTypo from="Co Offaly"        to="Offaly" />
+      <RegionTypo from="County Offaly"    to="Offaly" />
+      <RegionTypo from="Co Roscommon"     to="Roscommon" />
+      <RegionTypo from="County Roscommon" to="Roscommon" />
+      <RegionTypo from="Co Sligo"         to="Sligo" />
+      <RegionTypo from="County Sligo"     to="Sligo" />
+      <RegionTypo from="Co Tyrone"        to="Tyrone" />
+      <RegionTypo from="County Tyrone"    to="Tyrone" />
+      <RegionTypo from="Co Waterford"     to="Waterford" />
+      <RegionTypo from="County Waterford" to="Waterford" />
+      <RegionTypo from="Co Westmeath"     to="Westmeath" />
+      <RegionTypo from="County Westmeath" to="Westmeath" />
+      <RegionTypo from="Co Wexford"       to="Wexford" />
+      <RegionTypo from="County Wexford"   to="Wexford" />
+      <RegionTypo from="Co Wicklow"       to="Wicklow" />
+      <RegionTypo from="County Wicklow"   to="Wicklow" />
+
+      <!-- Wales -->
+      <RegionTypo from="Caernarvonshire"  to="Caernarvon" />
+      <RegionTypo from="Cardiganshire"    to="Cardigan" />
+      <RegionTypo from="Carmarthenshire"  to="Carmarthen" />
+      <RegionTypo from="Brecknockshire"   to="Brecon" />
+      <RegionTypo from="Breconshire"      to="Brecon" />
+      <RegionTypo from="Denbighshire"     to="Denbigh" />
+      <RegionTypo from="Flintshire"       to="Flint" />
+      <RegionTypo from="Glamorganshire"   to="Glamorgan" />
+      <RegionTypo from="Pembrokeshire"    to="Pembroke" />
+      <RegionTypo from="Radnorshire"      to="Radnor" />
+
+      <!-- Canadian Province abbreviations -->
+      <RegionTypo from="BC"     to="British Columbia" />
+      <RegionTypo from="NWT"    to="North West Territories" />
+      <RegionTypo from="NS"     to="Nova Scotia" />
+      <RegionTypo from="ON"     to="Ontario" />
+      <RegionTypo from="PEI"    to="Prince Edward Island" />
+      <RegionTypo from="Yukon"  to="Yukon Territory" />
+
+      <!-- US State abbreviations -->
+      <RegionTypo from="AL"  to="Alabama" />
+      <RegionTypo from="AK"  to="Alaska" />
+      <RegionTypo from="AZ"  to="Arizona" />
+      <RegionTypo from="AR"  to="Arkansas" />
+      <RegionTypo from="CA"  to="California" />
+      <RegionTypo from="CO"  to="Colorado" />
+      <RegionTypo from="CT"  to="Connecticut" />
+      <RegionTypo from="DE"  to="Delaware" />
+      <RegionTypo from="DC"  to="District of Columbia" />
+      <RegionTypo from="FL"  to="Florida" />
+      <RegionTypo from="GA"  to="Georgia" />
+      <RegionTypo from="HI"  to="Hawaii" />
+      <RegionTypo from="ID"  to="Idaho" />
+      <RegionTypo from="IL"  to="Illinois" />
+      <RegionTypo from="IN"  to="Indiana" />
+      <RegionTypo from="IA"  to="Iowa" />
+      <RegionTypo from="KS"  to="Kansas" />
+      <RegionTypo from="KY"  to="Kentucky" />
+      <RegionTypo from="LA"  to="Louisiana" />
+      <RegionTypo from="ME"  to="Maine" />
+      <RegionTypo from="MD"  to="Maryland" />
+      <RegionTypo from="MA"  to="Massachusetts" />
+      <RegionTypo from="MI"  to="Michigan" />
+      <RegionTypo from="MN"  to="Minnesota" />
+      <RegionTypo from="MS"  to="Mississippi" />
+      <RegionTypo from="MO"  to="Missouri" />
+      <RegionTypo from="MT"  to="Montana" />
+      <RegionTypo from="NE"  to="Nebraska" />
+      <RegionTypo from="NV"  to="Nevada" />
+      <RegionTypo from="NJ"  to="New Hampshire" />
+      <RegionTypo from="NH"  to="New Jersey" />
+      <RegionTypo from="NM"  to="New Mexico" />
+      <RegionTypo from="NY"  to="New York" />
+      <RegionTypo from="NC"  to="North Carolina" />
+      <RegionTypo from="ND"  to="North Dakota" />
+      <RegionTypo from="OH"  to="Ohio" />
+      <RegionTypo from="OK"  to="Oklahoma" />
+      <RegionTypo from="OR"  to="Oregon" />
+      <RegionTypo from="PA"  to="Pennsylvania" />
+      <RegionTypo from="RI"  to="Rhode Island" />
+      <RegionTypo from="SC"  to="South Carolina" />
+      <RegionTypo from="SD"  to="South Dakota" />
+      <RegionTypo from="TN"  to="Tennessee" />
+      <RegionTypo from="TX"  to="Texas" />
+      <RegionTypo from="UT"  to="Utah" />
+      <RegionTypo from="VT"  to="Vermont" />
+      <RegionTypo from="VA"  to="Virginia" />
+      <RegionTypo from="WA"  to="Washington" />
+      <RegionTypo from="WV"  to="West Virginia" />
+      <RegionTypo from="WI"  to="Wisconsin" />
+      <RegionTypo from="WY"  to="Wyoming" />
+
+      <!-- Australian Territories abbreviations -->
+      <RegionTypo from="NSW"   to="New South Wales"    />
+      <RegionTypo from="N S W" to="New South Wales"    />
+      <RegionTypo from="SA"    to="South Australia" />
+      <RegionTypo from="VIC"   to="Victoria" />
+    </RegionTypos>
+    <DemoteCountries>
+      <!-- Scottish Counties -->
+      <CountryToRegion region="Aberdeenshire"       country="Scotland" regionID="Aberdeen" />
+      <CountryToRegion region="Angus"               country="Scotland" regionID="Angus" />
+      <CountryToRegion region="Argyll"              country="Scotland" regionID="Argyll" />
+      <CountryToRegion region="Argyllshire"         country="Scotland" regionID="Argyll" />
+      <CountryToRegion region="Ayrshire"            country="Scotland" regionID="Ayr" />
+      <CountryToRegion region="Banff"               country="Scotland" regionID="Banff" />
+      <CountryToRegion region="Banffshire"          country="Scotland" regionID="Banff" />
+      <CountryToRegion region="Berwick"             country="Scotland" regionID="Berwick" />
+      <CountryToRegion region="Berwickshire"        country="Scotland" regionID="Berwick" />
+      <CountryToRegion region="Bute"                country="Scotland" regionID="Bute" />
+      <CountryToRegion region="Caithness"           country="Scotland" regionID="Caithness" />
+      <CountryToRegion region="Clackmannanshire"    country="Scotland" regionID="Clackmannan" />
+      <CountryToRegion region="Dumfries"            country="Scotland" regionID="Dumfries" />
+      <CountryToRegion region="Dumfries-shire"      country="Scotland" regionID="Dumfries" />
+      <CountryToRegion region="Dunbarton"           country="Scotland" regionID="Dunbarton" />
+      <CountryToRegion region="Dunbartonshire"      country="Scotland" regionID="Dunbarton" />
+      <CountryToRegion region="East Lothian"        country="Scotland" regionID="East Lothian" />
+      <CountryToRegion region="Fife"                country="Scotland" regionID="Fife" />
+      <CountryToRegion region="Fifeshire"           country="Scotland" regionID="Fife" />
+      <CountryToRegion region="Inverness"           country="Scotland" regionID="Inverness" />
+      <CountryToRegion region="Inverness-shire"     country="Scotland" regionID="Inverness" />
+      <CountryToRegion region="Kincardineshire"     country="Scotland" regionID="Kincardine" />
+      <CountryToRegion region="Kinross"             country="Scotland" regionID="Kinross" />
+      <CountryToRegion region="Kinross-shire"       country="Scotland" regionID="Kinross" />
+      <CountryToRegion region="Kirkcudbright"       country="Scotland" regionID="Kirkcudbright" />
+      <CountryToRegion region="Kirkcudbrightshire"  country="Scotland" regionID="Kirkcudbright" />
+      <CountryToRegion region="Lanarkshire"         country="Scotland" regionID="Lanark" />
+      <CountryToRegion region="Midlothian"          country="Scotland" regionID="Midlothian" />
+      <CountryToRegion region="Moray"               country="Scotland" regionID="Moray" />
+      <CountryToRegion region="Morayshire"          country="Scotland" regionID="Moray" />
+      <CountryToRegion region="Nairn"               country="Scotland" regionID="Nairn" />
+      <CountryToRegion region="Nairnshire"          country="Scotland" regionID="Nairn" />
+      <CountryToRegion region="Orkney"              country="Scotland" regionID="Orkney" />
+      <CountryToRegion region="Peebles"             country="Scotland" regionID="Peebles" />
+      <CountryToRegion region="Perthshire"          country="Scotland" regionID="Perth" />
+      <CountryToRegion region="Renfrewshire"        country="Scotland" regionID="Renfrew" />
+      <CountryToRegion region="Ross and Cromarty"   country="Scotland" regionID="Ross and Cromarty" />
+      <CountryToRegion region="Roxburgh"            country="Scotland" regionID="Roxburgh" />
+      <CountryToRegion region="Selkirk"             country="Scotland" regionID="Selkirk" />
+      <CountryToRegion region="Shetland"            country="Scotland" regionID="Shetland" />
+      <CountryToRegion region="Zetland"             country="Scotland" regionID="Shetland" />
+      <CountryToRegion region="Stirlingshire"       country="Scotland" regionID="Stirling" />
+      <CountryToRegion region="Sutherland"          country="Scotland" regionID="Sutherland" />
+      <CountryToRegion region="West Lothian"        country="Scotland" regionID="West Lothian" />
+      <CountryToRegion region="Wigtonshire"         country="Scotland" regionID="Wigton" />
+    
+      <!-- Scottish Cities -->
+      <CountryToRegion region="Aberdeen"            country="Scotland" regionID="Aberdeen" />
+      <CountryToRegion region="Dundee"              country="Scotland" regionID="Dundee" />
+      <CountryToRegion region="Edinburgh"           country="Scotland" regionID="Edinburgh" />
+      <CountryToRegion region="Glasgow"             country="Scotland" regionID="Glasgow" />
+
+      <!-- English Shires & Counties -->
+      <CountryToRegion region="Bedfordshire"        country="England" regionID="Bedford" />
+      <CountryToRegion region="Berkshire"           country="England" regionID="Berkshire" />
+      <CountryToRegion region="Buckinghamshire"     country="England" regionID="Buckingham" />
+      <CountryToRegion region="Cambridgeshire"      country="England" regionID="Cambridge" />
+      <CountryToRegion region="Cheshire"            country="England" regionID="Cheshire" />
+      <CountryToRegion region="Cornwall"            country="England" regionID="Cornwall" />
+      <CountryToRegion region="Cumberland"          country="England" regionID="Cumberland" />
+      <CountryToRegion region="Cumbria"             country="England" regionID="Cumbria" />
+      <CountryToRegion region="Derbyshire"          country="England" regionID="Derby" />
+      <CountryToRegion region="Devon"               country="England" regionID="Devon" />
+      <CountryToRegion region="Dorset"              country="England" regionID="Dorset" />
+      <CountryToRegion region="Co Durham"           country="England" regionID="Durham" />
+      <CountryToRegion region="Durham"              country="England" regionID="Durham" />
+      <CountryToRegion region="Essex"               country="England" regionID="Essex" />
+      <CountryToRegion region="Gloucestershire"     country="England" regionID="Gloucester" />
+      <CountryToRegion region="Hampshire"           country="England" regionID="Hampshire" />
+      <CountryToRegion region="Herefordshire"       country="England" regionID="Hereford" />
+      <CountryToRegion region="Hertfordshire"       country="England" regionID="Hertford" />
+      <CountryToRegion region="Huntingdonshire"     country="England" regionID="Huntingdon" />
+      <CountryToRegion region="Kent"                country="England" regionID="Kent" />
+      <CountryToRegion region="Lancashire"          country="England" regionID="Lancashire" />
+      <CountryToRegion region="Leicestershire"      country="England" regionID="Leicester" />
+      <CountryToRegion region="Lincolnshire"        country="England" regionID="Lincoln" />
+      <CountryToRegion region="Middlesex"           country="England" regionID="Middlesex" />
+      <CountryToRegion region="Norfolk"             country="England" regionID="Norfolk" />
+      <CountryToRegion region="Northamptonshire"    country="England" regionID="Northampton" />
+      <CountryToRegion region="Northumberland"      country="England" regionID="Northumberland" />
+      <CountryToRegion region="Nottinghamshire"     country="England" regionID="Nottingham" />
+      <CountryToRegion region="Oxfordshire"         country="England" regionID="Oxford" />
+      <CountryToRegion region="Rutland"             country="England" regionID="Rutland" />
+      <CountryToRegion region="Shropshire"          country="England" regionID="Shropshire" />
+      <CountryToRegion region="Somerset"            country="England" regionID="Somerset" />
+      <CountryToRegion region="Staffordshire"       country="England" regionID="Staffordshire" />
+      <CountryToRegion region="Suffolk"             country="England" regionID="Suffolk" />
+      <CountryToRegion region="Sussex"              country="England" regionID="Sussex" />
+      <CountryToRegion region="Surrey"              country="England" regionID="Surrey" />
+      <CountryToRegion region="Warwickshire"        country="England" regionID="Warwick" />
+      <CountryToRegion region="Westmorland"         country="England" regionID="Westmorland" />
+      <CountryToRegion region="Westmorlandshire"    country="England" regionID="Westmorland" />
+      <CountryToRegion region="Wiltshire"           country="England" regionID="Wiltshire" />
+      <CountryToRegion region="Worcestershire"      country="England" regionID="Worcester" />
+      <CountryToRegion region="Yorkshire"           country="England" regionID="Yorkshire" />
+    
+      <!-- English Cities -->
+      <CountryToRegion region="Liverpool"           country="England" regionID="Liverpool" />
+      <CountryToRegion region="Manchester"          country="England" regionID="Manchester" />
+      <CountryToRegion region="Birmingham"          country="England" regionID="Birmingham" />
+      <CountryToRegion region="London"              country="England" regionID="London" />
+      <CountryToRegion region="Bristol"             country="England" regionID="Bristol" />
+      <CountryToRegion region="Oxford"              country="England" regionID="Oxford" />
+      <CountryToRegion region="Newcastle"           country="England" regionID="Newcastle" />
+
+      <!-- Welsh Regions -->
+      <CountryToRegion region="Anglesey"            country="Wales"    regionID="Anglesey" />
+      <CountryToRegion region="Breconshire"         country="Wales"    regionID="Brecon" />
+      <CountryToRegion region="Caernarvon"          country="Wales"    regionID="Caernarvon" />
+      <CountryToRegion region="Cardiganshire"       country="Wales"    regionID="Cardigan" />
+      <CountryToRegion region="Carmarthenshire"     country="Wales"    regionID="Carmarthen" />
+      <CountryToRegion region="Denbighshire"        country="Wales"    regionID="Denbigh" />
+      <CountryToRegion region="Flintshire"          country="Wales"    regionID="Flint" />
+      <CountryToRegion region="Glamorganshire"      country="Wales"    regionID="Glamorgan" />
+      <CountryToRegion region="Gwynedd"             country="Wales"    regionID="Gwynedd" />
+      <CountryToRegion region="Merionethshire"      country="Wales"    regionID="Merioneth" />
+      <CountryToRegion region="Mid-Glamorgan"       country="Wales"    regionID="Mid-Glamorgan" />
+      <CountryToRegion region="Monmouthshire"       country="Wales"    regionID="Monmouth" />
+      <CountryToRegion region="Montgomeryshire"     country="Wales"    regionID="Montgomery" />
+      <CountryToRegion region="Pembrokeshire"       country="Wales"    regionID="Pembroke" />
+      <CountryToRegion region="Radnorshire"         country="Wales"    regionID="Radnor" />
+      
+      <!-- Welsh Cities -->
+      <CountryToRegion region="Cardiff"             country="Wales"    regionID="Radnor" />
+      <CountryToRegion region="Swansea"             country="Wales"    regionID="Glamorgan" />
+
+      <!-- Irish Provinces -->
+      <CountryToRegion region="Antrim"      country="Ireland" regionID="Antrim"      />
+      <CountryToRegion region="Armagh"      country="Ireland" regionID="Armagh"      />
+      <CountryToRegion region="Cavan"       country="Ireland" regionID="Cavan"       />      
+      <CountryToRegion region="Carlow"      country="Ireland" regionID="Carlow"      />
+      <CountryToRegion region="Clare"       country="Ireland" regionID="Clare"       />
+      <CountryToRegion region="Connaught"   country="Ireland" regionID="Connaught"   />
+      <CountryToRegion region="Cork"        country="Ireland" regionID="Cork"        />
+      <CountryToRegion region="Donegal"     country="Ireland" regionID="Donegal"     />
+      <CountryToRegion region="Down"        country="Ireland" regionID="Down"        />
+      <CountryToRegion region="Dublin"      country="Ireland" regionID="Dublin"      />
+      <CountryToRegion region="Fermanagh"   country="Ireland" regionID="Fermanagh"   />
+      <CountryToRegion region="Galway"      country="Ireland" regionID="Galway"      />
+      <CountryToRegion region="Kerry"       country="Ireland" regionID="Kerry"       />
+      <CountryToRegion region="Kildare"     country="Ireland" regionID="Kildare"     />
+      <CountryToRegion region="Kilkenny"    country="Ireland" regionID="Kilkenny"    />
+      <CountryToRegion region="Laoighis"    country="Ireland" regionID="Laoighis"    />
+      <CountryToRegion region="Leinster"    country="Ireland" regionID="Leinster"    />
+      <CountryToRegion region="Leitrim"     country="Ireland" regionID="Leitrim"     />
+      <CountryToRegion region="Limerick"    country="Ireland" regionID="Limerick"    />
+      <CountryToRegion region="Londonderry" country="Ireland" regionID="Londonderry" />
+      <CountryToRegion region="Longford"    country="Ireland" regionID="Longford"    />
+      <CountryToRegion region="Louth"       country="Ireland" regionID="Louth"       />
+      <CountryToRegion region="Mayo"        country="Ireland" regionID="Mayo"        />
+      <CountryToRegion region="Meath"       country="Ireland" regionID="Meath"       />
+      <CountryToRegion region="Monaghan"    country="Ireland" regionID="Monaghan"    />
+      <CountryToRegion region="Munster"     country="Ireland" regionID="Munster"     />
+      <CountryToRegion region="Offaly"      country="Ireland" regionID="Offaly"      />
+      <CountryToRegion region="Roscommon"   country="Ireland" regionID="Roscommon"   />
+      <CountryToRegion region="Sligo"       country="Ireland" regionID="Sligo"       />
+      <CountryToRegion region="Tipperary"   country="Ireland" regionID="Tipperary"   />
+      <CountryToRegion region="Tyrone"      country="Ireland" regionID="Tyrone"      />
+      <CountryToRegion region="Ulster"      country="Ireland" regionID="Ulster"      />
+      <CountryToRegion region="Waterford"   country="Ireland" regionID="Waterford"   />
+      <CountryToRegion region="Westmeath"   country="Ireland" regionID="Westmeath"   />
+      <CountryToRegion region="Wexford"     country="Ireland" regionID="Wexford"     />
+      <CountryToRegion region="Wicklow"     country="Ireland" regionID="Wicklow"     />
+
+
+      <!-- North America -->
+      <!-- Canadian Provinces -->
+      <CountryToRegion region="Alberta"               country="Canada" regionID="Alberta" />
+      <CountryToRegion region="British Columbia"      country="Canada" regionID="British Columbia" />
+      <CountryToRegion region="Manitoba"              country="Canada" regionID="Manitoba" />
+      <CountryToRegion region="New Brunswick"         country="Canada" regionID="New Brunswick" />
+      <CountryToRegion region="Newfoundland"          country="Canada" regionID="Newfoundland" />
+      <CountryToRegion region="Northwest Territories" country="Canada" regionID="Northwest Territories" />
+      <CountryToRegion region="Nova Scotia"           country="Canada" regionID="Nova Scotia" />
+      <CountryToRegion region="Ontario"               country="Canada" regionID="Ontario" />
+      <CountryToRegion region="Prince Edward Island"  country="Canada" regionID="Prince Edward Island" />
+      <CountryToRegion region="Quebec"                country="Canada" regionID="Quebec" />
+      <CountryToRegion region="Saskatchewan"          country="Canada" regionID="Saskatchewan" />
+      <CountryToRegion region="Yukon Territory"       country="Canada" regionID="Yukon" />
+
+      <!-- US States -->
+      <CountryToRegion region="Alabama"               country="United States" regionID="Alabama" />
+      <CountryToRegion region="Alaska"                country="United States" regionID="Alaska" />
+      <CountryToRegion region="Arizona"               country="United States" regionID="Arizona" />
+      <CountryToRegion region="Arkansas"              country="United States" regionID="Arkansas" />
+      <CountryToRegion region="California"            country="United States" regionID="California" />
+      <CountryToRegion region="Colorado"              country="United States" regionID="Colorado" />
+      <CountryToRegion region="Connecticut"           country="United States" regionID="Connecticut" />
+      <CountryToRegion region="Delaware"              country="United States" regionID="Delaware" />
+      <CountryToRegion region="District of Columbia"  country="United States" regionID="District of Columbia" />
+      <CountryToRegion region="Florida"               country="United States" regionID="Florida" />
+      <CountryToRegion region="Georgia"               country="United States" regionID="Georgia" />
+      <CountryToRegion region="Hawaii"                country="United States" regionID="Hawaii" />
+      <CountryToRegion region="Idaho"                 country="United States" regionID="Idaho" />
+      <CountryToRegion region="Illinois"              country="United States" regionID="Illinois" />
+      <CountryToRegion region="Indiana"               country="United States" regionID="Indiana" />
+      <CountryToRegion region="Iowa"                  country="United States" regionID="Iowa" />
+      <CountryToRegion region="Kansas"                country="United States" regionID="Kansas" />
+      <CountryToRegion region="Kentucky"              country="United States" regionID="Kentucky" />
+      <CountryToRegion region="Louisiana"             country="United States" regionID="Louisiana" />
+      <CountryToRegion region="Maine"                 country="United States" regionID="Maine" />
+      <CountryToRegion region="Maryland"              country="United States" regionID="Maryland" />
+      <CountryToRegion region="Massachusetts"         country="United States" regionID="Massachusetts" />
+      <CountryToRegion region="Michigan"              country="United States" regionID="Michigan" />
+      <CountryToRegion region="Minnesota"             country="United States" regionID="Minnesota" />
+      <CountryToRegion region="Mississippi"           country="United States" regionID="Mississippi" />
+      <CountryToRegion region="Missouri"              country="United States" regionID="Missouri" />
+      <CountryToRegion region="Montana"               country="United States" regionID="Montana" />
+      <CountryToRegion region="Nebraska"              country="United States" regionID="Nebraska" />
+      <CountryToRegion region="Nevada"                country="United States" regionID="Nevada" />
+      <CountryToRegion region="New Hampshire"         country="United States" regionID="New Hampshire" />
+      <CountryToRegion region="New Jersey"            country="United States" regionID="New Jersey" />
+      <CountryToRegion region="New Mexico"            country="United States" regionID="New Mexico" />
+      <CountryToRegion region="New York"              country="United States" regionID="New York" />
+      <CountryToRegion region="North Carolina"        country="United States" regionID="North Carolina" />
+      <CountryToRegion region="North Dakota"          country="United States" regionID="North Dakota" />
+      <CountryToRegion region="Ohio"                  country="United States" regionID="Ohio" />
+      <CountryToRegion region="Oklahoma"              country="United States" regionID="Oklahoma" />
+      <CountryToRegion region="Oregon"                country="United States" regionID="Oregon" />
+      <CountryToRegion region="Pennsylvania"          country="United States" regionID="Pennsylvania" />
+      <CountryToRegion region="Rhode Island"          country="United States" regionID="Rhode Island" />
+      <CountryToRegion region="South Carolina"        country="United States" regionID="South Carolina" />
+      <CountryToRegion region="South Dakota"          country="United States" regionID="South Dakota" />
+      <CountryToRegion region="Tennessee"             country="United States" regionID="Tennessee" />
+      <CountryToRegion region="Texas"                 country="United States" regionID="Texas" />
+      <CountryToRegion region="Utah"                  country="United States" regionID="Utah" />
+      <CountryToRegion region="Vermont"               country="United States" regionID="Vermont" />
+      <CountryToRegion region="Virginia"              country="United States" regionID="Virginia" />
+      <CountryToRegion region="Washington"            country="United States" regionID="Washington" />
+      <CountryToRegion region="West Virginia"         country="United States" regionID="West Virginia" />
+      <CountryToRegion region="Wisconsin"             country="United States" regionID="Wisconsin" />
+      <CountryToRegion region="Wyoming"               country="United States" regionID="Wyoming" />
+
+      <!-- Australian Territories -->
+      <CountryToRegion region="New South Wales"          country="Australia" regionID="New South Wales"    />
+    </DemoteCountries>                                                          
+    <DemoteRegions>
+      <RegionToParish parish="Aberdeen"      region="Aberdeenshire" />
+      <RegionToParish parish="Ayr"           region="Ayrshire" />
+      <RegionToParish parish="Glasgow"       region="Lanarkshire" />
+      <RegionToParish parish="Inverness"     region="Inverness-shire" />
+      <RegionToParish parish="Dundee"        region="Angus" />
+      <RegionToParish parish="Edinburgh"     region="Midlothian" />
+      <RegionToParish parish="Falkirk"       region="West Lothian" />
+      <RegionToParish parish="Stirling"      region="Stirlingshire" />
+      <RegionToParish parish="Perth"         region="Perthshire" />
+      <RegionToParish parish="London"        region="Middlesex" />
+      <RegionToParish parish="Manchester"    region="Lancashire" />
+      <RegionToParish parish="Liverpool"     region="Lancashire" />
+      <RegionToParish parish="Cardiff"       region="Glamorgan" />
+      <RegionToParish parish="Newcastle"     region="Northumberland" />
+      <RegionToParish parish="Oxford"        region="Oxfordshire" />
+      <RegionToParish parish="Southhampton"  region="Hampshire" />
+      <RegionToParish parish="Isle of Wight" region="Hampshire" />
+
+      <RegionToParish parish="Toronto"    region="Ontario" />
+      <RegionToParish parish="Vancouver"  region="British Columbia" />
+    </DemoteRegions>
+  </Fixes>
+
+  <Lookups>
+    <FreeCen>
+      <Lookup code="ABD" county="Aberdeenshire" />
+      <Lookup code="ALD" county="Alderney" />
+      <Lookup code="AGY" county="Anglesey" />
+      <Lookup code="ANS" county="Angus" />
+      <Lookup code="ANT" county="Antrim" />
+      <Lookup code="ARL" county="Argyll" />
+      <Lookup code="ARM" county="Armagh" />
+      <Lookup code="AYR" county="Ayrshire" />
+      <Lookup code="BAN" county="Banffshire" />
+      <Lookup code="BDF" county="Bedfordshire" />
+      <Lookup code="BRK" county="Berkshire" />
+      <Lookup code="BEW" county="Berwickshire" />
+      <Lookup code="BRE" county="Brecon" />
+      <Lookup code="BKM" county="Buckinghamshire" />
+      <Lookup code="BUT" county="Bute" />
+      <Lookup code="CAE" county="Caernarvon" />
+      <Lookup code="CAI" county="Caithness" />
+      <Lookup code="CAM" county="Cambridgeshire" />
+      <Lookup code="CGN" county="Cardigan" />
+      <Lookup code="CAR" county="Carlow" />
+      <Lookup code="CMN" county="Carmarthen" />
+      <Lookup code="CAV" county="Cavan" />
+      <Lookup code="CHI" county="Channel Islands" />
+      <Lookup code="CHS" county="Cheshire" />
+      <Lookup code="CLK" county="Clackmannanshire" />
+      <Lookup code="CLA" county="Clare" />
+      <Lookup code="COR" county="Cork" />
+      <Lookup code="CON" county="Cornwall" />
+      <Lookup code="CUL" county="Cumberland" />
+      <Lookup code="DBY" county="Derbyshire" />
+      <Lookup code="DEV" county="Devon" />
+      <Lookup code="DON" county="Donegal" />
+      <Lookup code="DOR" county="Dorset" />
+      <Lookup code="DOW" county="Down" />
+      <Lookup code="DUB" county="Dublin" />
+      <Lookup code="DFS" county="Dumfries-shire" />
+      <Lookup code="DNB" county="Dunbarton" />
+      <Lookup code="DUR" county="Durham" />
+      <Lookup code="ELN" county="East Lothian" />
+      <Lookup code="ERY" county="East Yorkshire" />
+      <Lookup code="ENG" county="England" />
+      <Lookup code="ESS" county="Essex" />
+      <Lookup code="FER" county="Fermanagh" />
+      <Lookup code="FIF" county="Fife" />
+      <Lookup code="FLN" county="Flintshire" />
+      <Lookup code="GAL" county="Galway" />
+      <Lookup code="GLA" county="Glamorgan" />
+      <Lookup code="GLS" county="Gloucestershire" />
+      <Lookup code="GSY" county="Guernsey" />
+      <Lookup code="HAM" county="Hampshire" />
+      <Lookup code="HEF" county="Herefordshire" />
+      <Lookup code="HRT" county="Hertfordshire" />
+      <Lookup code="HUN" county="Huntingdonshire" />
+      <Lookup code="INV" county="Inverness-shire" />
+      <Lookup code="IRL" county="Ireland" />
+      <Lookup code="IOM" county="Isle of Man" />
+      <Lookup code="IOW" county="Isle of Wight" />
+      <Lookup code="JSY" county="Jersey" />
+      <Lookup code="KEN" county="Kent" />
+      <Lookup code="KER" county="Kerry" />
+      <Lookup code="KID" county="Kildare" />
+      <Lookup code="KIK" county="Kilkenny" />
+      <Lookup code="KCD" county="Kincardineshire" />
+      <Lookup code="KRS" county="Kinross-shire" />
+      <Lookup code="KKD" county="Kirkcudbrightshire" />
+      <Lookup code="LKS" county="Lanarkshire" />
+      <Lookup code="LAN" county="Lancashire" />
+      <Lookup code="LEX" county="Laois" />
+      <Lookup code="LEI" county="Leicestershire" />
+      <Lookup code="LEN" county="Leinster" />
+      <Lookup code="LET" county="Leitrim" />
+      <Lookup code="LIM" county="Limerick" />
+      <Lookup code="LIN" county="Lincolnshire" />
+      <Lookup code="LND" county="London" />
+      <Lookup code="LDY" county="Londonderry" />
+      <Lookup code="LOG" county="Longford" />
+      <Lookup code="LOU" county="Louth" />
+      <Lookup code="MAY" county="Mayo" />
+      <Lookup code="MEA" county="Meath" />
+      <Lookup code="MER" county="Merionethshire" />
+      <Lookup code="MDX" county="Middlesex" />
+      <Lookup code="MLN" county="Midlothian" />
+      <Lookup code="MOG" county="Monaghan" />
+      <Lookup code="MON" county="Monmouthshire" />
+      <Lookup code="MGY" county="Montgomeryshire" />
+      <Lookup code="MOR" county="Moray" />
+      <Lookup code="NAI" county="Nairn" />
+      <Lookup code="NFK" county="Norfolk" />
+      <Lookup code="NRY" county="North Yorkshire" />
+      <Lookup code="NTH" county="Northamptonshire" />
+      <Lookup code="NBL" county="Northumberland" />
+      <Lookup code="NTT" county="Nottinghamshire" />
+      <Lookup code="OFF" county="Offaly" />
+      <Lookup code="OKI" county="Orkney" />
+      <Lookup code="OXF" county="Oxfordshire" />
+      <Lookup code="PEE" county="Peebles" />
+      <Lookup code="PEM" county="Pembrokeshire" />
+      <Lookup code="PER" county="Perth" />
+      <Lookup code="RAD" county="Radnor" />
+      <Lookup code="RFW" county="Renfrewshire" />
+      <Lookup code="ROS" county="Roscommon" />
+      <Lookup code="ROC" county="Ross and Cromarty" />
+      <Lookup code="ROX" county="Roxburgh" />
+      <Lookup code="RUT" county="Rutland" />
+      <Lookup code="SRK" county="Sark" />
+      <Lookup code="SCT" county="Scotland" />
+      <Lookup code="SEL" county="Selkirk" />
+      <Lookup code="SHI" county="Shetland" />
+      <Lookup code="SAL" county="Shropshire" />
+      <Lookup code="SLI" county="Sligo" />
+      <Lookup code="SOM" county="Somerset" />
+      <Lookup code="STS" county="Staffordshire" />
+      <Lookup code="SFK" county="Suffolk" />
+      <Lookup code="SRY" county="Surrey" />
+      <Lookup code="SSX" county="Sussex" />
+      <Lookup code="TYR" county="Tyrone" />
+      <Lookup code="UNK" county="Unknown" />
+      <Lookup code="WAL" county="Wales"    />
+      <Lookup code="WAT" county="Co. Waterford" />
+      <Lookup code="WLN" county="West Lothian" />
+      <Lookup code="WRY" county="West Yorkshire" />
+      <Lookup code="WEM" county="Co. Westmeath" />
+      <Lookup code="WEX" county="Co. Wexford" />
+      <Lookup code="WIC" county="Co. Wicklow" />
+      <Lookup code="WIG" county="Wigtownshire" />
+      <Lookup code="WIL" county="Wiltshire" />
+      <Lookup code="YKS" county="Yorkshire" />
+    </FreeCen>
+    <FindMyPast>
+      <Lookup country="Scotland" code="Aberdeenshire                           :66                            " county="Aberdeenshire" />
+      <Lookup country="Channel Islands" code="Alderney                                :71                            " county="Alderney" />
+      <Lookup country="Wales"    code="Anglesey                                :52                            " county="Anglesey" />
+      <Lookup country="Scotland" code="Argyllshire                             :69                            " county="Argyll" />
+      <Lookup country="Scotland" code="Ayrshire                                :104                           " county="Ayrshire" />
+      <Lookup country="Scotland" code="Banffshire                              :105                           " county="Banffshire" />
+      <Lookup country="England"  code="Bedfordshire                            :13                            " county="Bedfordshire" />
+      <Lookup country="England"  code="Berkshire                               :14                            " county="Berkshire" />
+      <Lookup country="Scotland" code="Berwickshire                            :72                            " county="Berwickshire" />
+      <Lookup country="Wales"    code="Brecknockshire                          :48                            " county="Brecon" />
+      <Lookup country="England"  code="Buckinghamshire                         :40                            " county="Buckinghamshire" />
+      <Lookup country="Scotland" code="Buteshire                               :73                            " county="Bute" />
+      <Lookup country="Wales"    code="Caernarvonshire                         :42                            " county="Caernarvon" />
+      <Lookup country="Scotland" code="Caithnessshire                          :74                            " county="Caithness" />
+      <Lookup country="England"  code="Cambridgeshire                          :15                            " county="Cambridgeshire" />
+      <Lookup country="Wales"    code="Cardiganshire                           :43                            " county="Cardigan" />
+      <Lookup country="Wales"    code="Carmarthenshire                         :41                            " county="Carmarthen" />
+      <Lookup country="Channel Islands" code="Channel Islands                         :56,57,70,71                   " county="Channel Islands" />
+      <Lookup country="England"  code="Cheshire                                :28                            " county="Cheshire" />
+      <Lookup country="Scotland" code="Clackmannanshire                        :75                            " county="Clackmannanshire" />
+      <Lookup country="England"  code="Cornwall                                :22                            " county="Cornwall" />
+      <Lookup country="England"  code="Cumberland                              :35                            " county="Cumberland" />
+      <Lookup country="Wales"    code="Denbighshire                            :44                            " county="Denbigh" />
+      <Lookup country="England"  code="Derbyshire                              :33                            " county="Derbyshire" />
+      <Lookup country="England"  code="Devonshire                              :18                            " county="Devonshire" />
+      <Lookup country="England"  code="Dorsetshire                             :19                            " county="Dorsetshire" />
+      <Lookup country="Scotland" code="Dumfriesshire                           :76                            " county="Dumfries-shire" />
+      <Lookup country="Scotland" code="Dunbartonshire                          :77                            " county="Dunbarton" />
+      <Lookup country="England"  code="Durham                                  :23                            " county="Durham" />
+      <Lookup country="England"  code="Essex                                   :7                             " county="Essex" />
+      <Lookup country="Scotland" code="Fife                                    :81                            " county="Fife" />
+      <Lookup country="Wales"    code="Flintshire                              :54                            " county="Flint" />
+      <Lookup country="Scotland" code="Forfarshire (Angus)                     :68                            " county="Angus" />
+      <Lookup country="Wales"    code="Glamorganshire                          :62                            " county="Glamorgan" />
+      <Lookup country="England"  code="Gloucestershire                         :27                            " county="Gloucestershire" />
+      <Lookup country="Channel Islands" code="Guernsey &amp; Adjacent Islands             :57,70,71                      " county="Guernsey" />
+      <Lookup country="Scotland" code="Haddingtonshire (East Lothian)          :79                            " county="East Lothian" />
+      <Lookup country="England"  code="Hampshire                               :29                            " county="Hampshire" />
+      <Lookup country="England"  code="Herefordshire                           :47                            " county="Herefordshire" />
+      <Lookup country="England"  code="Hertfordshire                           :20                            " county="Hertfordshire" />
+      <Lookup country="England"  code="Huntingdonshire                         :51                            " county="Huntingdonshire" />
+      <Lookup country="Scotland" code="Invernessshire                          :83                            " county="Inverness-shire" />
+      <Lookup country="Isle of Man" code="Isle of Man                             :58                            " county="Isle of Man" />
+      <Lookup country="Channel Islands" code="Jersey                                  :56                            " county="Jersey" />
+      <Lookup country="England"  code="Kent                                    :5,6                           " county="Kent" />
+      <Lookup country="Scotland" code="Kincardineshire                         :84                            " county="Kincardineshire" />
+      <Lookup country="Scotland" code="Kinrossshire                            :85                            " county="Kinross-shire" />
+      <Lookup country="Scotland" code="Kirkcudbrightshire                      :86                            " county="Kirkcudbrightshire" />
+      <Lookup country="Scotland" code="Lanarkshire                             :87                            " county="Lanarkshire" />
+      <Lookup country="England"  code="Lancashire                              :8                             " county="Lancashire" />
+      <Lookup country="England"  code="Leicestershire                          :21                            " county="Leicestershire" />
+      <Lookup country="England"  code="Lincolnshire                            :26                            " county="Lincolnshire" />
+      <Lookup country="Scotland" code="Linlithgowshire (West Lothian)          :102                           " county="West Lothian" />
+      <Lookup country="England"  code="London                                  :1,3,5                         " county="London" />
+      <Lookup country="Wales"    code="Merionethshire                          :49                            " county="Merionethshire" />
+      <Lookup country="England"  code="Middlesex                               :1,2                           " county="Middlesex" />
+      <Lookup country="Scotland" code="Midlothian                              :88                            " county="Midlothian" />
+      <Lookup country="Scotland" code="Minor records                           :89                            " county="Minor records" />
+      <Lookup country="Wales"    code="Monmouthshire                           :37                            " county="Monmouthshire" />
+      <Lookup country="Wales"    code="Montgomeryshire                         :46                            " county="Montgomeryshire" />
+      <Lookup country="Scotland" code="Moray                                   :90                            " county="Moray" />
+      <Lookup country="Scotland" code="Nairn                                   :91                            " county="Nairn" />
+      <Lookup country="England"  code="Norfolk                                 :30                            " county="Norfolk" />
+      <Lookup country="England"  code="Northamptonshire                        :38                            " county="Northamptonshire" />
+      <Lookup country="England"  code="Northumberland                          :63                            " county="Northumberland" />
+      <Lookup country="England"  code="Nottinghamshire                         :31                            " county="Nottinghamshire" />
+      <Lookup country="Scotland" code="Orkney                                  :92                            " county="Orkney" />
+      <Lookup country="England"  code="Oxfordshire                             :39                            " county="Oxfordshire" />
+      <Lookup country="Scotland" code="Peeblesshire                            :93                            " county="Peebles" />
+      <Lookup country="Wales"    code="Pembrokeshire                           :45                            " county="Pembrokeshire" />
+      <Lookup country="Scotland" code="Perthshire                              :94                            " county="Perthshire" />
+      <Lookup country="Wales"    code="Radnorshire                             :53                            " county="Radnor" />
+      <Lookup country="Scotland" code="Renfrewshire                            :95                            " county="Renfrewshire" />
+      <Lookup country="Scotland" code="Ross and Cromarty                       :96                            " county="Ross and Cromarty" />
+      <Lookup country="Scotland" code="Roxburghshire                           :97                            " county="Roxburgh" />
+      <Lookup country="England"  code="Rutlandshire                            :55                            " county="Rutland" />
+      <Lookup country="Channel Islands" code="Sark                                    :70                            " county="Sark" />
+      <Lookup country="Scotland" code="Selkirkshire                            :98                            " county="Selkirk" />
+      <Lookup country="Scotland" code="Shetland                                :99                            " county="Shetland" />
+      <Lookup country="England"  code="Shropshire                              :16                            " county="Shropshire" />
+      <Lookup country="England"  code="Somersetshire                           :25                            " county="Somersetshire" />
+      <Lookup country="England"  code="Staffordshire                           :17                            " county="Staffordshire" />
+      <Lookup country="Scotland" code="Stirlingshire                           :100                           " county="Stirlingshire" />
+      <Lookup country="England"  code="Suffolk                                 :34                            " county="Suffolk" />
+      <Lookup country="England"  code="Surrey                                  :3,4                           " county="Surrey" />
+      <Lookup country="England"  code="Sussex                                  :32                            " county="Sussex" />
+      <Lookup country="Scotland" code="Sutherland                              :101                           " county="Sutherland" />
+      <Lookup country="England"  code="Warwickshire                            :24                            " county="Warwickshire" />
+      <Lookup country="England"  code="Westmorland                             :50                            " county="Westmorland" />
+      <Lookup country="Scotland" code="Wigtownshire                            :103                           " county="Wigtownshire" />
+      <Lookup country="England"  code="Wiltshire                               :36                            " county="Wiltshire" />
+      <Lookup country="England"  code="Worcestershire                          :12                            " county="Worcestershire" />
+      <Lookup country="England"  code="Yorkshire (all)                         :9,10,11                       " county="Yorkshire" />
+      <Lookup country="England"  code="Yorkshire (East riding)                 :10                            " county="East Yorkshire" />
+      <Lookup country="England"  code="Yorkshire (North riding)                :11                            " county="North Yorkshire" />
+      <Lookup country="England"  code="Yorkshire (West riding)                 :9                             " county="West Yorkshire" />
+    </FindMyPast>
+  </Lookups>
+</Data>
