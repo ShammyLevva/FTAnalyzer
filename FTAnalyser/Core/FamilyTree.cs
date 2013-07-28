@@ -1291,7 +1291,7 @@ namespace FTAnalyzer
                 else
                 {
                     year = (endYear + startYear + 1) / 2;
-                    range = (endYear - startYear + 1) / 2;
+                    range = (endYear - startYear + 5) / 2;
                 }
                 if (range == 0)
                 {
@@ -1330,77 +1330,82 @@ namespace FTAnalyzer
             //    route=&censusYear=1881&forenames=Alexander&fns=fns&lastName=Bisset&yearOfBirth=1863&
             //    yearOfBirthVariation=2&occupation=&birthPlace=aberdeen&residenc
 
-            MessageBox.Show("Find My Past searching coming soon in a future version");
-            return null;
-            //FactDate censusFactDate = new FactDate(censusYear.ToString());
-            //UriBuilder uri = new UriBuilder();
-            //uri.Host = "www.findmypast.co.uk";
-            //uri.Path = "/CensusPersonSearchResultServlet";
-            //StringBuilder query = new StringBuilder();
-            //query.Append("recordPosition=0&");
-            //query.Append("startNewSearch=startNewSearch&");
-            //query.Append("pageDirection=&");
-            //query.Append("route=&");
-            //query.Append("basicSearch=true&");
-            //query.Append("searchHouseholds=6,15&");
-            //query.Append("searchInstitutions=9&");
-            //query.Append("searchVessels=11,12&");
+            //MessageBox.Show("Find My Past searching coming soon in a future version");
+            //return null;
 
-            //query.Append("censusYear=" + censusYear + "&");
-            //if (person.Forenames != "?" && person.Forenames.ToUpper() != "UNKNOWN")
-            //{
-            //    int pos = person.Forenames.IndexOf(" ");
-            //    string forenames = person.Forenames;
-            //    if (pos > 0)
-            //        forenames = person.Forenames.Substring(0, pos); //strip out any middle names as FreeCen searches better without then
-            //    query.Append("forenames=" + HttpUtility.UrlEncode(forenames) + "&");
-            //    query.Append("fns=fns&");
-            //}
-            //string surname = person.SurnameAtDate(censusFactDate);
-            //if (surname != "?" && surname.ToUpper() != "UNKNOWN")
-            //{
-            //    query.Append("lastName=" + HttpUtility.UrlEncode(surname) + "&");
-            //    query.Append("sns=sns");
-            //}
+            FactDate censusFactDate = new FactDate(censusYear.ToString());
+            UriBuilder uri = new UriBuilder();
+            uri.Host = "www.findmypast.co.uk";
+            uri.Path = "/CensusPersonSearchResultServlet";
+            StringBuilder query = new StringBuilder();
+            query.Append("basicSearch=false&");
+            query.Append("censusYear=" + censusYear + "&");
+            query.Append("occupation=&");
+            query.Append("otherForenames=&");
+            query.Append("otherLastName=&");
+            query.Append("pageDirection=&");
+            query.Append("recordPosition=0&");
+            query.Append("residence=&");
+            query.Append("route=&");
+            query.Append("searchHouseholds=6,15&");
+            query.Append("searchInstitutions=9&");
+            query.Append("searchVessels=11,12&");
+            query.Append("sortOrder=nameAsc&");
+            query.Append("startNewSearch=startNewSearch&");
+
+            if (person.Forenames != "?" && person.Forenames.ToUpper() != "UNKNOWN")
+            {
+                int pos = person.Forenames.IndexOf(" ");
+                string forenames = person.Forenames;
+                if (pos > 0)
+                    forenames = person.Forenames.Substring(0, pos); //strip out any middle names as FreeCen searches better without then
+                query.Append("forenames=" + HttpUtility.UrlEncode(forenames) + "&");
+                query.Append("fns=fns&");
+            }
+            string surname = person.SurnameAtDate(censusFactDate);
+            if (surname != "?" && surname.ToUpper() != "UNKNOWN")
+            {
+                query.Append("lastName=" + HttpUtility.UrlEncode(surname) + "&");
+                query.Append("sns=sns&");
+            }
             //if (person.MarriedName != "?" && person.MarriedName.ToUpper() != "UNKNOWN" && person.MarriedName != person.Surname)
             //{
             //    query.Append("otherLastName=" + HttpUtility.UrlEncode(surname) + "&");
             //}
-            //if (person.BirthDate != FactDate.UNKNOWN_DATE)
-            //{
-            //    int startYear = person.BirthDate.StartDate.Year;
-            //    int endYear = person.BirthDate.EndDate.Year;
-            //    int year, range;
-            //    if (startYear == FactDate.MINDATE.Year)
-            //    {
-            //        year = endYear + 1;
-            //        range = 10;
-            //    }
-            //    else if (endYear == FactDate.MAXDATE.Year)
-            //    {
-            //        year = startYear - 1;
-            //        range = 10;
-            //    }
-            //    else
-            //    {
-            //        year = (endYear + startYear + 1) / 2;
-            //        range = (endYear - startYear + 1) / 2;
-            //        if (range > 5) range = 10;
-            //    }
-            //    query.Append("yearOfBirth=" + year + "&");
-            //    query.Append("yearOfBirthVariation=" + range + "&");
-            //}
-            //if (person.BirthLocation != null)
-            //{
-            //    string location = person.BirthLocation.Parish;
-            //    Tuple<string,string> area = person.BirthLocation.FindMyPastCountyCode
-            //    query.Append("birthPlace=" + HttpUtility.UrlEncode(location) + "&");
-            //    query.Append("country=" + HttpUtility.UrlEncode(area.item1));
-            //    query.Append("coIdList=" + HttpUtility.UrlEncode(area.item2));
-            //}
-            //query.Append("sortOrder=nameAsc&");
-            //uri.Query = query.ToString();
-            //return uri;
+            if (person.BirthDate != FactDate.UNKNOWN_DATE)
+            {
+                int startYear = person.BirthDate.StartDate.Year;
+                int endYear = person.BirthDate.EndDate.Year;
+                int year, range;
+                if (startYear == FactDate.MINDATE.Year)
+                {
+                    year = endYear + 1;
+                    range = 10;
+                }
+                else if (endYear == FactDate.MAXDATE.Year)
+                {
+                    year = startYear - 1;
+                    range = 10;
+                }
+                else
+                {
+                    year = (endYear + startYear + 1) / 2;
+                    range = (endYear - startYear + 3) / 2;
+                    if (range > 5) range = 10;
+                }
+                query.Append("yearOfBirth=" + year + "&");
+                query.Append("yearOfBirthVariation=" + range + "&");
+            }
+            if (person.BirthLocation != null)
+            {
+                string location = person.BirthLocation.Parish;
+                Tuple<string, string> area = person.BirthLocation.FindMyPastCountyCode;
+                query.Append("birthPlace=" + HttpUtility.UrlEncode(location) + "&");
+                query.Append("country=" + HttpUtility.UrlEncode(area.Item1) + "&");
+                query.Append("coIdList=" + HttpUtility.UrlEncode(area.Item2));
+            }
+            uri.Query = query.ToString();
+            return uri;
         }
         #endregion
 

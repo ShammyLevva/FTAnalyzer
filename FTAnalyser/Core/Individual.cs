@@ -620,8 +620,8 @@ namespace FTAnalyzer
                 families.Sort(new FamilyDateComparer());
                 foreach (Family marriage in families)
                 {
-                    if (marriage.MarriageDate.isBefore(date))
-                        name = marriage.wife.surname;
+                    if (marriage.MarriageDate.isBefore(date) && marriage.husband != null)
+                        name = marriage.husband.surname;
                 }
             }
             return name;
