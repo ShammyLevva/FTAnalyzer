@@ -121,6 +121,7 @@
     <Compile Include="Core\Fact.cs" />
     <Compile Include="Core\FactDate.cs" />
     <Compile Include="Core\FactSource.cs" />
+    <Compile Include="Database\Statistics.cs" />
     <Compile Include="Exceptions\InvalidXMLFactException.cs" />
     <Compile Include="Exceptions\InvalidDoubleDateException.cs" />
     <Compile Include="Filters\Filterables\IndividualDeathFilter.cs" />
@@ -503,9 +504,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Database\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

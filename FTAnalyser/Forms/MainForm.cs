@@ -11,12 +11,13 @@ using Printing.DataGridViewPrint.Tools;
 using FTAnalyzer.Utilities;
 using FTAnalyzer.Forms;
 using System.Data.SQLite;
+using System.Diagnostics;
 
 namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.5.6.0";
+        private string VERSION = "1.5.7.0";
         private bool _checkForUpdatesEnabled = true;
         private System.Threading.Timer _timerCheckForUpdates;
 
@@ -976,6 +977,24 @@ namespace FTAnalyzer
             LCReport rs = new LCReport(list);
             rs.Show();
             HourGlass(false);
+        }
+
+        private void childAgeProfilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!ft.DataLoaded)
+            {
+                MessageBox.Show("You must load a GEDCOM file before you can see any statistics");
+            }
+            else
+            {
+                Statistics s = Statistics.Instance;
+                MessageBox.Show(s.ChildrenBirthProfiles());
+            }
+        }
+
+        private void viewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://ftanalyzer.codeplex.com/documentation");
         }
     }
 }
