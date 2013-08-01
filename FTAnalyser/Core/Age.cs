@@ -13,8 +13,8 @@ namespace FTAnalyzer
 
         public Age(Individual ind, FactDate when)
         {
-            minAge = ind.BirthDate.getMaximumYear(when);
-            maxAge = ind.BirthDate.getMinimumYear(when);
+            minAge = ind.BirthDate.getMinimumYear(when);
+            maxAge = ind.BirthDate.getMaximumYear(when);
             if (maxAge > FactDate.MAXYEARS)
                 maxAge = FactDate.MAXYEARS;
             if (minAge == FactDate.MINYEARS)
@@ -24,21 +24,16 @@ namespace FTAnalyzer
                 else
                     age = "<=" + maxAge;
             }
+            else if (maxAge < FactDate.MAXYEARS)
+            {
+                age = minAge == maxAge ? minAge.ToString() : minAge + " to " + maxAge;
+            }
             else
             {
-                if (minAge >= FactDate.MAXYEARS)
-                {
-                    // if age over maximum return maximum
-                    age = ">=" + FactDate.MAXYEARS.ToString();
-                }
-                else
-                {
-                    if(ind.BirthDate.Type == FactDate.FactDateType.ABT) //fix for abouts having 1 year tolerance
-                        age = minAge == maxAge ? minAge.ToString() : maxAge + " to " + minAge;
-                    else
-                        age = minAge == maxAge ? minAge.ToString() : minAge + " to " + maxAge;
-                }
+                // if age over maximum return maximum
+                age = ">=" + minAge;
             }
+            
         }
 
         public int MinAge
