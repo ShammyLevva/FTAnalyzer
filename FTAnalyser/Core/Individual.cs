@@ -101,7 +101,7 @@ namespace FTAnalyzer
 
         public bool HasRangedBirthDate
         {
-            get { return BirthDate.Type == FactDate.FactDateType.BET && BirthDate.getMinimumYear(null) != BirthDate.getMaximumYear(null);  }
+            get { return BirthDate.Type == FactDate.FactDateType.BET && BirthDate.StartDate.Year != BirthDate.EndDate.Year;  }
         }
         
         public int Ahnentafel
