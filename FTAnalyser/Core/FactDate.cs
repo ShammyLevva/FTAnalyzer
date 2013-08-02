@@ -522,7 +522,7 @@ namespace FTAnalyzer
         public int getMinimumYear(FactDate that)
         {
             int diff = ((that == null) ? MINDATE.Year : that.startdate.Year) - this.enddate.Year;
-            return Math.Max(diff, MINYEARS);
+            return Math.Min(Math.Max(diff, MINYEARS),MAXYEARS);
         }
 
         public override bool Equals(Object that) 
