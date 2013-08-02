@@ -762,11 +762,35 @@ namespace FTAnalyzer
             }
         }
 
+        private void addChildrenToQueue(Individual indiv, Queue<Individual> queue, bool isRootPerson)
+        {
+            List<Family> families = indiv.FamiliesAsParent;
+            foreach (Family family in families)
+            {
+                foreach (Individual child in family.children)
+                {
+                    // add child to queue
+                    if (child.RelationType == Individual.BLOOD || child.RelationType == Individual.UNKNOWN)
+                    {
+                        child.RelationType = Individual.BLOOD;
+                        if(isRootPerson)
+                            child.Ahnentafel = indiv.Ahnentafel - 2;
+                        else
+                            child.Ahnentafel = indiv.Ahnentafel - 1;
+                        child.BudgieCode = "-" + Math.Abs(child.Ahnentafel).ToString().PadLeft(2, '0') + "c";
+                        queue.Enqueue(child);
+                    }
+                }
+                family.setBudgieCode(indiv, 2);
+            }
+        }
+
         public void SetRelations(string startGed)
         {
             ClearRelations();
             SetFamilies();
-            Individual ind = getGedcomIndividual(startGed);
+            Individual rootPerson = getGedcomIndividual(startGed);
+            Individual ind = rootPerson;
             ind.Ahnentafel = 1;
             maxAhnentafel = 1;
             Queue<Individual> queue = new Queue<Individual>();
@@ -807,6 +831,20 @@ namespace FTAnalyzer
                 Application.DoEvents();
             }
             // we have now set all direct ancestors and all blood relations
+            // now we need to set all descendants of root person's budgie code
+            //queue.Enqueue(rootPerson);
+            //bool isRootPerson = true;
+            //while (queue.Count > 0)
+            //{
+            //    // now take an item from the queue
+            //    ind = queue.Dequeue();
+            //    // set them as a direct relation
+            //    if (ind != rootPerson)
+            //        ind.RelationType = Individual.BLOOD;
+            //    addChildrenToQueue(ind, queue, isRootPerson);
+            //    isRootPerson = false;
+            //    Application.DoEvents();
+            //}
             // all that remains is to loop through the marriage relations
             List<Individual> marriedDBs = getAllRelationsOfType(Individual.MARRIEDTODB);
             AddToQueue(queue, marriedDBs);
