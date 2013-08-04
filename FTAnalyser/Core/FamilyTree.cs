@@ -1097,6 +1097,8 @@ namespace FTAnalyzer
                     {
                         if (ind.BirthDate.isAfter(ind.DeathDate))
                             errors[0].Add(new DataError(ind, "Died " + ind.DeathDate + " before born"));
+                        if (ind.BurialDate != null && ind.BirthDate.isAfter(ind.BurialDate))
+                            errors[0].Add(new DataError(ind, "Buried " + ind.BurialDate + " before born"));
                         if (ind.BurialDate != null && ind.BurialDate.isBefore(ind.DeathDate) && !ind.BurialDate.overlaps(ind.DeathDate))
                             errors[7].Add(new DataError(ind, "Buried " + ind.BurialDate + " before died " + ind.DeathDate));
                         int minAge = ind.getMinAge(ind.DeathDate);
@@ -1169,7 +1171,7 @@ namespace FTAnalyzer
                     MessageBox.Show("Unexpected Error Checking for inconsistencies in your data\nPlease report this on the issues page at http://ftanalyzer.codeplex.com \nError was " + e.Message);
                 }
             }            
-            dataErrorTypes.Add(new DataErrorGroup("Birth after death", errors[0]));
+            dataErrorTypes.Add(new DataErrorGroup("Birth after death/burial", errors[0]));
             dataErrorTypes.Add(new DataErrorGroup("Birth after father aged 90+", errors[1]));
             dataErrorTypes.Add(new DataErrorGroup("Birth after mother aged 60+", errors[2]));
             dataErrorTypes.Add(new DataErrorGroup("Birth after mothers death", errors[3]));
