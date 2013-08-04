@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FTAnalyzer.Forms;
 
 namespace FTAnalyzer
 {
@@ -29,8 +30,7 @@ namespace FTAnalyzer
 
         public string ChildrenBirthProfiles()
         {
-            int[,,] minAge = new int[2,10,3];
-            int[,,] maxAge = new int[2,10,3];
+            int[,,] stats = new int[2,20,3];
             foreach (Family f in ft.AllFamilies)
             {
                 foreach (Individual child in f.children)
@@ -40,42 +40,44 @@ namespace FTAnalyzer
                         if (f.husband != null && f.husband.BirthDate != FactDate.UNKNOWN_DATE)
                         {
                             Age age = f.husband.getAge(child.BirthDate);
-                            addAgeData(0, minAge, maxAge, age, child.Gender);
+                            addAgeData(0, stats, age, child.Gender);
                         }
                         if (f.wife != null && f.wife.BirthDate != FactDate.UNKNOWN_DATE)
                         {
                             Age age = f.wife.getAge(child.BirthDate);
-                            addAgeData(1, minAge, maxAge, age, child.Gender);
+                            addAgeData(1, stats, age, child.Gender);
                         }
                     }
                 }
             }
-            return buildOutput(minAge, maxAge);
+            Chart chart = new Chart();
+            chart.BuildChildBirthProfile(stats);
+            chart.Show();
+            return buildOutput(stats);
         }
-        private void addAgeData(int parent, int[,,] minAge, int[,,] maxAge, Age age, string gender)
+        private void addAgeData(int parent, int[,,] stats, Age age, string gender)
         {
             int child = gender == "M" ? 0 : (gender == "F" ? 1 : 2);
-            int decade = age.MinAge / 10;
-            if(decade>0 && decade < 10)
-                minAge[parent, decade, child]++;
-            decade = age.MaxAge / 10;
-            if (decade > 0 && decade < 10)
-                maxAge[parent, decade, child]++;
+            int fiveyear = age.MinAge / 5;
+            if(fiveyear>3 && fiveyear < 20)
+                stats[parent, fiveyear, child]++;
         }
 
-        private string buildOutput(int[, ,] minAge, int[, ,] maxAge)
+        private string buildOutput(int[, ,] minAge)
         {
             StringBuilder output = new StringBuilder();
             output.AppendLine("Fathers Age When Child Born");
-            for (int decade = 1; decade < 10; decade++)
+            for (int fiveyear = 3; fiveyear < 20; fiveyear++)
             {
-                output.AppendLine(decade + "0's : " + minAge[0, decade, 0] + " Males, " + minAge[0, decade, 1] + " Females " + minAge[0, decade, 2] + " unknown.");
+                string range = (fiveyear * 5) + " to " + (fiveyear * 5 + 4) + " : ";
+                output.AppendLine(range + minAge[0, fiveyear, 0] + " Males, " + minAge[0, fiveyear, 1] + " Females " + minAge[0, fiveyear, 2] + " unknown.");
             }
             output.AppendLine();
             output.AppendLine("Mothers Age When Child Born");
-            for (int decade = 1; decade < 10; decade++)
+            for (int fiveyear = 3; fiveyear < 13; fiveyear++)
             {
-                output.AppendLine(decade + "0's : " + minAge[1, decade, 0] + " Males, " + minAge[1, decade, 1] + " Females " + minAge[1, decade, 2] + " unknown.");
+                string range = (fiveyear * 5) + " to " + (fiveyear * 5 + 4) + " : ";
+                output.AppendLine(range + minAge[1, fiveyear, 0] + " Males, " + minAge[1, fiveyear, 1] + " Females " + minAge[1, fiveyear, 2] + " unknown.");
             }
             return output.ToString();
         }
