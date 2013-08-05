@@ -17,7 +17,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.5.7.2";
+        private string VERSION = "1.5.7.3";
         private bool _checkForUpdatesEnabled = true;
         private System.Threading.Timer _timerCheckForUpdates;
 
@@ -31,11 +31,6 @@ namespace FTAnalyzer
             InitializeComponent();
             ft.XmlErrorBox = rtbOutput;
             tabSelector.TabPages.RemoveByKey("tabFamilySearch");
-            toolTips.SetToolTip(tabCountries, "Double click on Country name to see list of individuals with that Country.");
-            toolTips.SetToolTip(dgCountries, "Double click on Country name to see list of individuals with that Country.");
-            toolTips.SetToolTip(tabRegions, "Double click on Region name to see list of individuals with that Region.");
-            toolTips.SetToolTip(tabParishes, "Double click on 'Parish' name to see list of individuals with that parish/area.");
-            toolTips.SetToolTip(tabAddresses, "Double click on Address name to see list of individuals with that Address.");
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -125,7 +120,7 @@ namespace FTAnalyzer
                     {
                         tabSelector.SelectedTab = tabDisplayProgress;
                         tsCountLabel.Text = "";
-                        MessageBox.Show("You need to load your GEDCOM file before the program can display results. Click File | Open.");
+                        MessageBox.Show("You need to load your GEDCOM file before the program can display results.\nClick File | Open.");
                     }
                     return;
                 }
@@ -191,14 +186,17 @@ namespace FTAnalyzer
                     List<IDisplayLocation> regions = ft.AllRegions;
                     List<IDisplayLocation> parishes = ft.AllParishes;
                     List<IDisplayLocation> addresses = ft.AllAddresses;
+                    List<IDisplayLocation> places = ft.AllPlaces;
                     countries.Sort(new FactLocationComparer(FactLocation.COUNTRY));
                     regions.Sort(new FactLocationComparer(FactLocation.REGION));
                     parishes.Sort(new FactLocationComparer(FactLocation.PARISH));
                     addresses.Sort(new FactLocationComparer(FactLocation.ADDRESS));
+                    places.Sort(new FactLocationComparer(FactLocation.PLACE));
                     dgCountries.DataSource = countries;
                     dgRegions.DataSource = regions;
                     dgParishes.DataSource = parishes;
                     dgAddresses.DataSource = addresses;
+                    dgPlaces.DataSource = places;
                 }
                 else if (tabSelector.SelectedTab == tabFamilySearch)
                 {
@@ -255,6 +253,16 @@ namespace FTAnalyzer
             FactLocation loc = (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.ADDRESS);
+            frmInd.Show();
+            HourGlass(false);
+        }
+
+        private void dgPlaces_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            HourGlass(true);
+            FactLocation loc = (FactLocation)dgPlaces.CurrentRow.DataBoundItem;
+            Forms.People frmInd = new Forms.People();
+            frmInd.setLocation(loc, FactLocation.PLACE);
             frmInd.Show();
             HourGlass(false);
         }

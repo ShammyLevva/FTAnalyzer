@@ -251,25 +251,12 @@ namespace FTAnalyzer
             get { return locations.Values.ToList(); }
         }
 
-        public List<IDisplayLocation> AllDisplayLocations
-        {
-            get
-            {
-                List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in locations.Values.ToList())
-                {
-                    result.Add(loc);
-                }
-                return result;
-            }
-        }
-
         public List<IDisplayLocation> AllCountries
         {
             get
             {
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in AllDisplayLocations)
+                foreach (FactLocation loc in locations.Values.ToList())
                 {
                     if (loc.country != string.Empty)
                     {
@@ -287,7 +274,7 @@ namespace FTAnalyzer
             get
             {
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in AllDisplayLocations)
+                foreach (FactLocation loc in locations.Values.ToList())
                 {
                     if (loc.region != string.Empty)
                     {
@@ -305,7 +292,7 @@ namespace FTAnalyzer
             get
             {
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in AllDisplayLocations)
+                foreach (FactLocation loc in locations.Values.ToList())
                 {
                     if (loc.parish != string.Empty)
                     {
@@ -323,7 +310,7 @@ namespace FTAnalyzer
             get
             {
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in AllDisplayLocations)
+                foreach (FactLocation loc in locations.Values.ToList())
                 {
                     if (loc.address != string.Empty)
                     {
@@ -336,6 +323,20 @@ namespace FTAnalyzer
             }
         }
 
+        public List<IDisplayLocation> AllPlaces
+        {
+            get
+            {
+                List<IDisplayLocation> result = new List<IDisplayLocation>();
+                foreach (FactLocation loc in locations.Values.ToList())
+                {
+                    if (loc.place != string.Empty && !result.Contains(loc))
+                        result.Add(loc);
+                }
+                return result;
+            }
+        }
+        
         public int IndividualCount { get { return individuals.Count; } }
 
         #endregion

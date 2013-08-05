@@ -480,6 +480,8 @@ namespace FTAnalyzer
             get
             {
                 List<Fact> results = new List<Fact>();
+                // add the family facts then the facts from each individual
+                results.AddRange(facts); 
                 if (husband != null)
                     results.AddRange(husband.AllFacts);
                 if (wife != null)

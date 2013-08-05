@@ -41,6 +41,7 @@
             this.marriageRegistrationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.childAgeProfilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.olderParentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.geocodeLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,6 +78,8 @@
             this.dgParishes = new System.Windows.Forms.DataGridView();
             this.tabAddresses = new System.Windows.Forms.TabPage();
             this.dgAddresses = new System.Windows.Forms.DataGridView();
+            this.tabPlaces = new System.Windows.Forms.TabPage();
+            this.dgPlaces = new System.Windows.Forms.DataGridView();
             this.tabOccupations = new System.Windows.Forms.TabPage();
             this.dgOccupations = new System.Windows.Forms.DataGridView();
             this.tabDataErrors = new System.Windows.Forms.TabPage();
@@ -153,7 +156,6 @@
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
-            this.olderParentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabSelector.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -172,6 +174,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgParishes)).BeginInit();
             this.tabAddresses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).BeginInit();
+            this.tabPlaces.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).BeginInit();
             this.tabOccupations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgOccupations)).BeginInit();
             this.tabDataErrors.SuspendLayout();
@@ -280,6 +284,13 @@
             this.childAgeProfilesToolStripMenuItem.Text = "Child Age Profiles";
             this.childAgeProfilesToolStripMenuItem.Click += new System.EventHandler(this.childAgeProfilesToolStripMenuItem_Click);
             // 
+            // olderParentsToolStripMenuItem
+            // 
+            this.olderParentsToolStripMenuItem.Name = "olderParentsToolStripMenuItem";
+            this.olderParentsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.olderParentsToolStripMenuItem.Text = "Older Parents";
+            this.olderParentsToolStripMenuItem.Click += new System.EventHandler(this.olderParentsToolStripMenuItem_Click);
+            // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -343,9 +354,9 @@
             // 
             // tabSelector
             // 
-            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabSelector.Controls.Add(this.tabDisplayProgress);
             this.tabSelector.Controls.Add(this.tabIndividuals);
             this.tabSelector.Controls.Add(this.tabFamilies);
@@ -394,8 +405,8 @@
             // 
             // rtbOutput
             // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbOutput.Location = new System.Drawing.Point(3, 90);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.Size = new System.Drawing.Size(925, 303);
@@ -549,13 +560,14 @@
             // 
             // tabCtrlLocations
             // 
-            this.tabCtrlLocations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabCtrlLocations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabCtrlLocations.Controls.Add(this.tabCountries);
             this.tabCtrlLocations.Controls.Add(this.tabRegions);
             this.tabCtrlLocations.Controls.Add(this.tabParishes);
             this.tabCtrlLocations.Controls.Add(this.tabAddresses);
+            this.tabCtrlLocations.Controls.Add(this.tabPlaces);
             this.tabCtrlLocations.Location = new System.Drawing.Point(2, 18);
             this.tabCtrlLocations.Name = "tabCtrlLocations";
             this.tabCtrlLocations.SelectedIndex = 0;
@@ -571,6 +583,7 @@
             this.tabCountries.Size = new System.Drawing.Size(921, 362);
             this.tabCountries.TabIndex = 0;
             this.tabCountries.Text = "Countries";
+            this.tabCountries.ToolTipText = "Double click on Country name to see list of individuals with that Country.";
             this.tabCountries.UseVisualStyleBackColor = true;
             // 
             // dgCountries
@@ -598,6 +611,7 @@
             this.tabRegions.Size = new System.Drawing.Size(921, 362);
             this.tabRegions.TabIndex = 1;
             this.tabRegions.Text = "Regions";
+            this.tabRegions.ToolTipText = "Double click on Region name to see list of individuals with that Region.";
             this.tabRegions.UseVisualStyleBackColor = true;
             // 
             // dgRegions
@@ -624,6 +638,7 @@
             this.tabParishes.Size = new System.Drawing.Size(921, 362);
             this.tabParishes.TabIndex = 2;
             this.tabParishes.Text = "Parishes";
+            this.tabParishes.ToolTipText = "Double click on \'Parish\' name to see list of individuals with that parish/area.";
             this.tabParishes.UseVisualStyleBackColor = true;
             // 
             // dgParishes
@@ -649,6 +664,7 @@
             this.tabAddresses.Size = new System.Drawing.Size(921, 362);
             this.tabAddresses.TabIndex = 3;
             this.tabAddresses.Text = "Addresses";
+            this.tabAddresses.ToolTipText = "Double click on Address name to see list of individuals with that Address.";
             this.tabAddresses.UseVisualStyleBackColor = true;
             // 
             // dgAddresses
@@ -665,6 +681,33 @@
             this.dgAddresses.Size = new System.Drawing.Size(921, 362);
             this.dgAddresses.TabIndex = 1;
             this.dgAddresses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAddresses_CellDoubleClick);
+            // 
+            // tabPlaces
+            // 
+            this.tabPlaces.Controls.Add(this.dgPlaces);
+            this.tabPlaces.Location = new System.Drawing.Point(4, 22);
+            this.tabPlaces.Name = "tabPlaces";
+            this.tabPlaces.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPlaces.Size = new System.Drawing.Size(921, 362);
+            this.tabPlaces.TabIndex = 4;
+            this.tabPlaces.Text = "Places";
+            this.tabPlaces.ToolTipText = "Double click on Address name to see list of individuals with that Place";
+            this.tabPlaces.UseVisualStyleBackColor = true;
+            // 
+            // dgPlaces
+            // 
+            this.dgPlaces.AllowUserToAddRows = false;
+            this.dgPlaces.AllowUserToDeleteRows = false;
+            this.dgPlaces.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgPlaces.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgPlaces.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgPlaces.Location = new System.Drawing.Point(3, 3);
+            this.dgPlaces.MultiSelect = false;
+            this.dgPlaces.Name = "dgPlaces";
+            this.dgPlaces.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgPlaces.Size = new System.Drawing.Size(915, 356);
+            this.dgPlaces.TabIndex = 2;
+            this.dgPlaces.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgPlaces_CellDoubleClick);
             // 
             // tabOccupations
             // 
@@ -754,9 +797,9 @@
             // 
             this.dgLooseDeaths.AllowUserToAddRows = false;
             this.dgLooseDeaths.AllowUserToDeleteRows = false;
-            this.dgLooseDeaths.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgLooseDeaths.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgLooseDeaths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLooseDeaths.Location = new System.Drawing.Point(0, 0);
@@ -1021,7 +1064,7 @@
             this.ckbRestrictions.Size = new System.Drawing.Size(521, 17);
             this.ckbRestrictions.TabIndex = 9;
             this.ckbRestrictions.Text = "Restrict results to only those direct ancestors, blood relations and those marrie" +
-                "d to direct or blood relations";
+    "d to direct or blood relations";
             this.ckbRestrictions.UseVisualStyleBackColor = true;
             // 
             // btnLC1841EW
@@ -1190,8 +1233,8 @@
             // 
             // pbFamilySearch
             // 
-            this.pbFamilySearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbFamilySearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pbFamilySearch.Location = new System.Drawing.Point(8, 151);
             this.pbFamilySearch.Name = "pbFamilySearch";
             this.pbFamilySearch.Size = new System.Drawing.Size(915, 20);
@@ -1287,9 +1330,9 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.dgTreeTops);
             this.panel1.Location = new System.Drawing.Point(8, 92);
             this.panel1.Name = "panel1";
@@ -1300,9 +1343,9 @@
             // 
             this.dgTreeTops.AllowUserToAddRows = false;
             this.dgTreeTops.AllowUserToDeleteRows = false;
-            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgTreeTops.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgTreeTops.Location = new System.Drawing.Point(0, 0);
@@ -1393,9 +1436,9 @@
             // 
             this.dgWarDead.AllowUserToAddRows = false;
             this.dgWarDead.AllowUserToDeleteRows = false;
-            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgWarDead.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgWarDead.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgWarDead.Location = new System.Drawing.Point(3, 92);
@@ -1471,13 +1514,6 @@
             // 
             this.printDialog.UseEXDialog = true;
             // 
-            // olderParentsToolStripMenuItem
-            // 
-            this.olderParentsToolStripMenuItem.Name = "olderParentsToolStripMenuItem";
-            this.olderParentsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.olderParentsToolStripMenuItem.Text = "Older Parents";
-            this.olderParentsToolStripMenuItem.Click += new System.EventHandler(this.olderParentsToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1512,6 +1548,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgParishes)).EndInit();
             this.tabAddresses.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).EndInit();
+            this.tabPlaces.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).EndInit();
             this.tabOccupations.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgOccupations)).EndInit();
             this.tabDataErrors.ResumeLayout(false);
@@ -1668,6 +1706,8 @@
         private System.Windows.Forms.ToolStripMenuItem childAgeProfilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewOnlineManualToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem olderParentsToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPlaces;
+        private System.Windows.Forms.DataGridView dgPlaces;
     }
 }
 
