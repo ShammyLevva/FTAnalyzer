@@ -18,6 +18,7 @@ namespace FTAnalyzer.Forms
         public People()
         {
             InitializeComponent();
+            People_Resize(this, null); 
         }
 
         public void setLocation(FactLocation loc, int level)
@@ -122,6 +123,13 @@ namespace FTAnalyzer.Forms
                     }
                 }
             }
+        }
+
+        private void People_Resize(object sender, EventArgs e)
+        {
+            int height = (this.Height - 40) / 2;
+            dgIndividuals.Height = height;
+            dgFamilies.Height = height;
         }
     }
 }
