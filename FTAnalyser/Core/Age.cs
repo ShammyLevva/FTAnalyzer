@@ -50,6 +50,8 @@ namespace FTAnalyzer
             {
                 age = 0;
             }
+            if (age > FactDate.MAXYEARS)
+                age = FactDate.MAXYEARS;
             return age;
         }
 
