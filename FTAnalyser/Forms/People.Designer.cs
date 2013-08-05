@@ -46,6 +46,7 @@
             this.dgIndividuals.Name = "dgIndividuals";
             this.dgIndividuals.Size = new System.Drawing.Size(1038, 283);
             this.dgIndividuals.TabIndex = 1;
+            this.dgIndividuals.SelectionChanged += new System.EventHandler(this.dgIndividuals_SelectionChanged);
             // 
             // dgFamilies
             // 

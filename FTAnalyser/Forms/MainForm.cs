@@ -17,7 +17,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.5.7.1";
+        private string VERSION = "1.5.7.2";
         private bool _checkForUpdatesEnabled = true;
         private System.Threading.Timer _timerCheckForUpdates;
 
@@ -995,6 +995,22 @@ namespace FTAnalyzer
         private void viewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("http://ftanalyzer.codeplex.com/documentation");
+        }
+
+        private void olderParentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!ft.DataLoaded)
+            {
+                MessageBox.Show("You must load a GEDCOM file before you can see any statistics");
+            }
+            else
+            {
+                HourGlass(true);
+                Forms.People frmInd = new Forms.People();
+                frmInd.OlderParents();
+                frmInd.Show();
+                HourGlass(false);
+            }
         }
     }
 }
