@@ -363,8 +363,7 @@ namespace FTAnalyzer
         {
             get
             {
-                Fact death = getPreferredFact(Fact.DEATH);
-                return (death == null) ? FactDate.MAXYEARS : BirthDate.getMaximumYear(death.FactDate);
+                return getAge(DeathDate).MaxAge;
             }
         }
 
@@ -519,11 +518,11 @@ namespace FTAnalyzer
         }
         
         public int getMaxAge(FactDate when) {
-            return BirthDate.getMaximumYear(when);
+            return getAge(when).MaxAge;
         }
         
         public int getMinAge(FactDate when) {
-            return BirthDate.getMinimumYear(when);
+            return getAge(when).MinAge;
         }
 
         public int getMaxAge(DateTime when)

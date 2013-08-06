@@ -513,18 +513,6 @@ namespace FTAnalyzer
 
         #endregion
 
-        public int getMaximumYear(FactDate that)
-        {
-            int diff = ((that == null) ? MAXDATE.Year : that.enddate.Year) - this.startdate.Year;
-            return Math.Min(diff, MAXYEARS);
-        }
-
-        public int getMinimumYear(FactDate that)
-        {
-            int diff = ((that == null) ? MINDATE.Year : that.startdate.Year) - this.enddate.Year;
-            return Math.Min(Math.Max(diff, MINYEARS),MAXYEARS);
-        }
-
         public override bool Equals(Object that) 
         {
             if (that == null || ! (that is FactDate))
