@@ -58,18 +58,39 @@ namespace Controls
             Filter<T> locationFilter = new TrueFilter<T>();
             if (Scotland)
                 locationFilter = LocationFilter<T>.SCOTLAND;
-            if (England)
+            else if (England)
                 locationFilter = LocationFilter<T>.ENGLAND;
-            if (Wales)
+            else if (Wales)
                 locationFilter = LocationFilter<T>.WALES;
-            if (UK)
+            else if (UK)
                 locationFilter = new OrFilter<T>(LocationFilter<T>.SCOTLAND, LocationFilter<T>.ENGLAND, LocationFilter<T>.WALES);
-            if (Canada)
+            else if (Canada)
                 locationFilter = LocationFilter<T>.CANADA;
-            if (USA)
+            else if (USA)
                 locationFilter = LocationFilter<T>.USA;
             return locationFilter;
         }
+
+        public FactLocation GetLocation
+        {
+            get {
+
+                if (Scotland)
+                    return new FactLocation(FactLocation.SCOTLAND);
+                else if (England)
+                    return new FactLocation(FactLocation.ENGLAND);
+                else if (Wales)
+                    return new FactLocation(FactLocation.WALES);
+                else if (UK)
+                    return new FactLocation(FactLocation.UNITED_KINGDOM);
+                else if (Canada)
+                    return new FactLocation(FactLocation.CANADA);
+                else if (USA)
+                    return new FactLocation(FactLocation.UNITED_STATES);
+                else
+                    return null;
+            }
+       }
 
         public event EventHandler CountryChanged;
 

@@ -15,6 +15,8 @@ namespace FTAnalyzer.Forms
         private Dictionary<int, DataGridViewCellStyle> rowStyles;
         private int numFamilies;
         private FactDate censusDate;
+        private FactLocation location;
+        private FactLocation location2;
 
         private PrintingDataGridViewProvider printProvider;
 
@@ -32,6 +34,19 @@ namespace FTAnalyzer.Forms
             printDocument.DefaultPageSettings.Landscape = true;
         }
 
+        public Census(FactLocation location)
+            : this()
+        {
+            this.location = location;
+        }
+
+        public Census(FactLocation location, FactLocation location2)
+            : this()
+        {
+            this.location = location;
+            this.location2 = location2;
+        }
+
         public void setupCensus(RegistrationsProcessor rp, FactDate date, bool censusDone, bool includeResidence, bool lostCousinCheck, int maxAge)
         {
             FamilyTree ft = FamilyTree.Instance;
@@ -45,7 +60,10 @@ namespace FTAnalyzer.Forms
                 foreach (Individual i in r.Members)
                 {
                     if (i.getAge(date).MinAge <= maxAge)
-                        ds.Add(new DisplayCensus(pos++, r, i));
+                        if(location == null || r.FilterCountry.Equals(location))
+                            ds.Add(new DisplayCensus(pos++, r, i));
+                        else if(location2 != null && r.FilterCountry.Equals(location2))
+                            ds.Add(new DisplayCensus(pos++, r, i));
                 }
             }
             dgCensus.DataSource = ds;

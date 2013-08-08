@@ -28,6 +28,14 @@ namespace FTAnalyzer
             get { return censusFamily.BestLocation.ToString(); }
         }
 
+        public FactLocation FilterCountry
+        {
+            get
+            {
+                return censusFamily.BestLocation.getLocation(FactLocation.COUNTRY);
+            }
+        }
+
         public override List<Fact> AllFacts
         {
             get

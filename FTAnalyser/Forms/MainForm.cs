@@ -269,14 +269,19 @@ namespace FTAnalyzer
 
         private void btnShowResults_Click(object sender, EventArgs e)
         {
+            Census census;
             Filter<Registration> filter = createCensusRegistrationFilter();
             MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();
             if (!ckbNoLocations.Checked) // only compare on location if no locations isn't checked
                 censusComparator.addComparator(new LocationComparator(FactLocation.PARISH));
             censusComparator.addComparator(new DateComparator());
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
+            
+            if (ckbNoLocations.Checked)
+                census = new Census();
+            else
+                census = new Census(censusCountry.GetLocation);
 
-            Census census = new Census();
             census.setupCensus(censusRP, censusDate, false, ckbCensusResidence.Checked, false, (int)udAgeFilter.Value);
             census.Text = censusDate.StartDate.Year.ToString() + " Census Records to search for";
             census.Show();
@@ -335,26 +340,36 @@ namespace FTAnalyzer
         #endregion
 
         #region Lost Cousins
-        private void LostCousinsCensus(Filter<Registration> filter, FactDate censusDate, string reportTitle)
+        private void LostCousinsCensus(string location, Filter<Registration> filter, FactDate censusDate, string reportTitle)
         {
             HourGlass(true);
+            Census census;
             Filter<Registration> relation =
                 new OrFilter<Registration>(
                     new OrFilter<Registration>(new RelationFilter<Registration>(Individual.BLOOD), new RelationFilter<Registration>(Individual.DIRECT)),
                     new RelationFilter<Registration>(Individual.MARRIEDTODB));
-            if (ckbLCIgnoreCountry.Checked)
+            MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();
+            if (ckbLCIgnoreCountry.Checked) // only add the parish location comparator if we are using locations
+            {
                 filter = new TrueFilter<Registration>(); // if we are ignoring locations then ignore what was passed as a filter
+                census = new Census();
+            }
+            else
+            {
+                if(location == FactLocation.ENG_WALES)
+                    census = new Census(new FactLocation(FactLocation.ENGLAND), new FactLocation(FactLocation.WALES));
+                else
+                    census = new Census(new FactLocation(location));
+                censusComparator.addComparator(new LocationComparator(FactLocation.COUNTRY));
+            }
+            if (ckbLCIgnoreCountry.Checked)
             if (ckbRestrictions.Checked)
                 filter = new AndFilter<Registration>(new DateFilter<Registration>(censusDate), filter, relation);
             else
                 filter = new AndFilter<Registration>(new DateFilter<Registration>(censusDate), filter);
-            MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();
-            if (!ckbLCIgnoreCountry.Checked) // only add the parish location comparator if we are using locations
-                censusComparator.addComparator(new LocationComparator(FactLocation.PARISH));
             censusComparator.addComparator(new DateComparator());
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
 
-            Census census = new Census();
             census.setupCensus(censusRP, censusDate, true, ckbLCResidence.Checked, ckbHideRecorded.Checked, 110);
             census.Text = reportTitle;
             HourGlass(false);
@@ -365,28 +380,28 @@ namespace FTAnalyzer
         {
             Filter<Registration> filter = new OrFilter<Registration>(LocationFilter<Registration>.ENGLAND, LocationFilter<Registration>.WALES);
             string reportTitle = "1881 England & Wales Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, CensusDate.UKCENSUS1881, reportTitle);
+            LostCousinsCensus(FactLocation.ENG_WALES, filter, CensusDate.UKCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Scot_Click(object sender, EventArgs e)
         {
             Filter<Registration> filter = LocationFilter<Registration>.SCOTLAND;
             string reportTitle = "1881 Scotland Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, CensusDate.UKCENSUS1881, reportTitle);
+            LostCousinsCensus(FactLocation.SCOTLAND, filter, CensusDate.UKCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Canada_Click(object sender, EventArgs e)
         {
             Filter<Registration> filter = LocationFilter<Registration>.CANADA;
             string reportTitle = "1881 Canada Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, CensusDate.CANADACENSUS1881, reportTitle);
+            LostCousinsCensus(FactLocation.CANADA, filter, CensusDate.CANADACENSUS1881, reportTitle);
         }
 
         private void btnLC1841EW_Click(object sender, EventArgs e)
         {
             Filter<Registration> filter = new OrFilter<Registration>(LocationFilter<Registration>.ENGLAND, LocationFilter<Registration>.WALES);
             string reportTitle = "1841 England & Wales Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, CensusDate.UKCENSUS1841, reportTitle);
+            LostCousinsCensus(FactLocation.ENG_WALES, filter, CensusDate.UKCENSUS1841, reportTitle);
         }
 
 
@@ -394,21 +409,21 @@ namespace FTAnalyzer
         {
             Filter<Registration> filter = new OrFilter<Registration>(LocationFilter<Registration>.ENGLAND, LocationFilter<Registration>.WALES);
             string reportTitle = "1911 England & Wales Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, CensusDate.UKCENSUS1911, reportTitle);
+            LostCousinsCensus(FactLocation.ENG_WALES, filter, CensusDate.UKCENSUS1911, reportTitle);
         }
 
         private void btnLC1880USA_Click(object sender, EventArgs e)
         {
             Filter<Registration> filter = new OrFilter<Registration>(LocationFilter<Registration>.USA, LocationFilter<Registration>.US);
             string reportTitle = "1880 US Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, CensusDate.USCENSUS1880, reportTitle);
+            LostCousinsCensus(FactLocation.UNITED_STATES, filter, CensusDate.USCENSUS1880, reportTitle);
         }
 
         private void btnLC1911Ireland_Click(object sender, EventArgs e)
         {
             Filter<Registration> filter = new OrFilter<Registration>(LocationFilter<Registration>.EIRE, LocationFilter<Registration>.IRELAND);
             string reportTitle = "1911 Ireland Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, new FactDate("1911"), reportTitle);
+            LostCousinsCensus(FactLocation.IRELAND, filter, new FactDate("1911"), reportTitle);
         }
 
         private void labLostCousinsWeb_Click(object sender, EventArgs e)
