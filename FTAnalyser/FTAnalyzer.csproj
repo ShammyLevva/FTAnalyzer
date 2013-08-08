@@ -398,6 +398,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>NetworkSettings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Searches\FamilySearch.cs" />
     <Compile Include="Searches\FamilySearchNewSearchForm.cs" />
     <Compile Include="Searches\FamilySearchSearchForm.cs" />
     <Compile Include="Still to Process\GROSearch.cs" />

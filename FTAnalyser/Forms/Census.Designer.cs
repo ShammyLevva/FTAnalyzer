@@ -160,7 +160,8 @@
             this.cbCensusSearchProvider.Items.AddRange(new object[] {
             "Ancestry",
             "Find My Past",
-            "FreeCen"});
+            "FreeCen",
+            "FamilySearch"});
             this.cbCensusSearchProvider.Name = "cbCensusSearchProvider";
             this.cbCensusSearchProvider.Size = new System.Drawing.Size(121, 25);
             // 

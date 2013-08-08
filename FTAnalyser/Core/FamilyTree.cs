@@ -1215,21 +1215,58 @@ namespace FTAnalyzer
 
         public void SearchCensus(int censusYear, Individual person, int censusProvider)
         {
-            UriBuilder uri = null;
+            string uri = null;
          
             switch (censusProvider)
             {
                 case 0: uri = BuildAncestryQuery(censusYear, person); break;
                 case 1: uri = BuildFindMyPastQuery(censusYear, person); break;
                 case 2: uri = BuildFreeCenQuery(censusYear, person); break;
+                case 3:
+                    string country = person.BestLocation(new FactDate(censusYear.ToString())).Country;
+                    uri = BuildFamilySearchQuery(country, censusYear, person); break;
             }
             if (uri != null)
             {
-                Process.Start(uri.ToString());
+                Process.Start(uri);
             }
         }
 
-        private UriBuilder BuildAncestryQuery(int censusYear, Individual person)
+        private string BuildFamilySearchQuery(string country, int censusYear, Individual person)
+        {
+            FactDate censusFactDate = new FactDate(censusYear.ToString());
+            // bad  https://familysearch.org/search/record/results%23count=20&query=%2Bgivenname%3ACharles~%20%2Bsurname%3AGalloway~%20%2Brecord_type%3A(3)&collection_id=2046756
+            // good https://familysearch.org/search/record/results#count=20&query=%2Bgivenname%3ACharles%7E%20%2Bsurname%3ABisset%7E%20%2Brecord_country%3AScotland%20%2Brecord_type%3A%283%29&collection_id=2046756
+            StringBuilder path = new StringBuilder();
+            path.Append("https://www.familysearch.org/search/record/results#count=20&query=");
+            if (person.Forenames != "?" && person.Forenames.ToUpper() != "UNKNOWN")
+            {
+                path.Append("%2B" + FamilySearch.GIVENNAME + "%3A" + HttpUtility.UrlEncode(person.Forenames) + "%7E%20");
+            }
+            string surname = person.SurnameAtDate(censusFactDate);
+            if (surname != "?" && surname.ToUpper() != "UNKNOWN")
+            {
+                path.Append("%2B" + FamilySearch.SURNAME + "%3A" + HttpUtility.UrlEncode(surname) + "%7E%20");
+            }
+            path.Append("%2B" + FamilySearch.RECORD_TYPE + "%3A%283%29");
+            if (person.BirthDate != FactDate.UNKNOWN_DATE)
+            {
+                int startYear = person.BirthDate.StartDate.Year -1;
+                int endYear = person.BirthDate.EndDate.Year +1;
+                path.Append("%2B" + FamilySearch.BIRTH_YEAR + "%3A" + startYear + "-" + endYear + "%7E%20");
+            }
+            if (person.BirthLocation != null)
+            {
+                string location = person.BirthLocation.getLocation(FactLocation.REGION).ToString().Replace(",","");
+                path.Append("%2B" + FamilySearch.BIRTH_LOCATION + "%3A" + HttpUtility.UrlEncode(location) + "%7E%20");
+            }
+            int collection = FamilySearch.CensusCollectionID(country, censusYear);
+            if(collection > 0)
+                path.Append("&collection_id=" + collection);
+            return path.ToString();
+        }
+
+        private string BuildAncestryQuery(int censusYear, Individual person)
         {
             UriBuilder uri = new UriBuilder();
             uri.Host = "search.ancestry.co.uk";
@@ -1289,10 +1326,10 @@ namespace FTAnalyzer
             }
             query.Append("uidh=2t2");
             uri.Query = query.ToString();
-            return uri;
+            return uri.ToString();
         }
 
-        private UriBuilder BuildFreeCenQuery(int censusYear, Individual person)
+        private string BuildFreeCenQuery(int censusYear, Individual person)
         {
             FactDate censusFactDate = new FactDate(censusYear.ToString());
             UriBuilder uri = new UriBuilder();
@@ -1361,10 +1398,10 @@ namespace FTAnalyzer
             query.Append("c=all&"); // initially set to search all counties need a routine to return FreeCen county codes 
             query.Append("z=Find&"); // executes search
             uri.Query = query.ToString();
-            return uri;
+            return uri.ToString();
         }
 
-        private UriBuilder BuildFindMyPastQuery(int censusYear, Individual person)
+        private string BuildFindMyPastQuery(int censusYear, Individual person)
         {
             //POST /CensusPersonSearchResultServlet?censusYear=1881
             //[truncated] recordPosition=0&pageDirection=&startNewSearch=startNewSearch&basicSearch=false&
@@ -1446,7 +1483,7 @@ namespace FTAnalyzer
                 query.Append("coIdList=" + HttpUtility.UrlEncode(area.Item2));
             }
             uri.Query = query.ToString();
-            return uri;
+            return uri.ToString();
         }
         #endregion
 
