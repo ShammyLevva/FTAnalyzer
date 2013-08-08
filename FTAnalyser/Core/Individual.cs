@@ -633,7 +633,13 @@ namespace FTAnalyzer
         public FactLocation BestLocation(FactDate when)
         {
             // this returns a Location a person was at for a given period
-            return FactLocation.BestLocation(facts, when);
+            List<Fact> allFacts = new List<Fact>();
+            allFacts.AddRange(facts);
+            foreach (Family f in familiesAsParent)
+            {
+                allFacts.AddRange(f.AllFacts);
+            }
+            return FactLocation.BestLocation(allFacts, when);
         }
 
         public bool isAtLocation(FactLocation loc, int level)
