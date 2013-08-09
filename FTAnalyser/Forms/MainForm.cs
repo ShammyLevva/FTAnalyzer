@@ -19,6 +19,7 @@ namespace FTAnalyzer
     {
         private string VERSION = "1.5.7.5";
         private bool _checkForUpdatesEnabled = true;
+        private bool _showNoUpdateMessage = false;
         private System.Threading.Timer _timerCheckForUpdates;
 
         private Cursor storedCursor = Cursors.Default;
@@ -460,7 +461,11 @@ namespace FTAnalyzer
                         DialogResult result = MessageBox.Show(string.Format("A new version of FTAnalyzer has been released, version {0}!\nWould you like to go to the FTAnalyzer site to download the new version?",
                             strLatestVersion), "New Version Released!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                         if (result == DialogResult.Yes)
-                            Help.ShowHelp(null, "http://FTAnalyzer.codeplex.com/");
+                            Process.Start("http://FTAnalyzer.codeplex.com/");
+                    }
+                    else if (_showNoUpdateMessage)
+                    {
+                        MessageBox.Show("You are running the latest version of FTAnalyzer");
                     }
                 }
                 string strBetaVersion = new Utilities.WebRequestWrapper().GetBetaVersionString();
@@ -473,7 +478,7 @@ namespace FTAnalyzer
                         DialogResult result = MessageBox.Show(string.Format("A new TEST version of FTAnalyzer has been released, version {0}!\nWould you like to go to the FTAnalyzer site to download the new version?\nPlease note this version is possibly unstable and should only be used by testers.",
                             strBetaVersion), "New TEST Version Released!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                         if (result == DialogResult.Yes)
-                            Help.ShowHelp(null, "http://FTAnalyzer.codeplex.com/");
+                            Process.Start("http://FTAnalyzer.codeplex.com/");
                     }
                 }
             }
@@ -490,7 +495,9 @@ namespace FTAnalyzer
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _checkForUpdatesEnabled = true;
+            _showNoUpdateMessage = true;
             _timerCheckForUpdates_Callback(null);
+            _showNoUpdateMessage = false;
         }
 
         private void showLocationsToolStripMenuItem_Click(object sender, EventArgs e)
