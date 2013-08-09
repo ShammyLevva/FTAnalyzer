@@ -672,9 +672,9 @@ namespace FTAnalyzer
 
         #region TreeTops
 
-        public List<IDisplayTreeTops> GetTreeTops(Filter<Individual> filter)
+        public List<IDisplayIndividual> GetTreeTops(Filter<Individual> filter)
         {
-            List<IDisplayTreeTops> result = new List<IDisplayTreeTops>();
+            List<IDisplayIndividual> result = new List<IDisplayIndividual>();
             foreach (Individual ind in individuals)
             {
                 if (!ind.HasParents)
@@ -690,9 +690,9 @@ namespace FTAnalyzer
 
         #region WarDead
 
-        public List<IDisplayTreeTops> GetWarDead(Filter<Individual> filter)
+        public List<IDisplayIndividual> GetWarDead(Filter<Individual> filter)
         {
-            List<IDisplayTreeTops> result = new List<IDisplayTreeTops>();
+            List<IDisplayIndividual> result = new List<IDisplayIndividual>();
             foreach (Individual ind in individuals)
             {
                 if (ind.isMale && !ind.isDeathKnown() && filter.select(ind))

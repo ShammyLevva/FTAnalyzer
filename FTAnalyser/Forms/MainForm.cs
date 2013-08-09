@@ -733,7 +733,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Filter<Individual> filter = createTreeTopsIndividualFilter();
-            List<IDisplayTreeTops> treeTopsList = ft.GetTreeTops(filter);
+            List<IDisplayIndividual> treeTopsList = ft.GetTreeTops(filter);
             treeTopsList.Sort(new BirthDateComparer());
             dgTreeTops.DataSource = treeTopsList;
             foreach (DataGridViewColumn c in dgTreeTops.Columns)
@@ -747,7 +747,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Filter<Individual> filter = createWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("BET 1914 AND 1918"));
-            List<IDisplayTreeTops> warDeadList = ft.GetWarDead(filter);
+            List<IDisplayIndividual> warDeadList = ft.GetWarDead(filter);
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWarDead.DataSource = warDeadList;
             foreach (DataGridViewColumn c in dgWarDead.Columns)
@@ -761,7 +761,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Filter<Individual> filter = createWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("BET 1939 AND 1945"));
-            List<IDisplayTreeTops> warDeadList = ft.GetWarDead(filter);
+            List<IDisplayIndividual> warDeadList = ft.GetWarDead(filter);
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWarDead.DataSource = warDeadList;
             foreach (DataGridViewColumn c in dgWarDead.Columns)
