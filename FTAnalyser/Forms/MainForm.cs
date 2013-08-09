@@ -56,7 +56,7 @@ namespace FTAnalyzer
                     if (!stopProcessing)
                     {
                         XmlDocument document = GedcomToXml.Load(openGedcom.FileName);
-                        document.Save("GedcomOutput.xml");
+                        //document.Save("GedcomOutput.xml");
                         ft.LoadTree(document, pbSources, pbIndividuals, pbFamilies);
                         ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
                         Application.UseWaitCursor = false;
@@ -1116,7 +1116,7 @@ namespace FTAnalyzer
             {
                 HourGlass(true);
                 ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-                DataTable dt = convertor.ToDataTable(ft.AllIndividuals);
+                DataTable dt = convertor.ToDataTable(new List<IExportIndividual>(ft.AllIndividuals));
                 ExportToExcel.Export(dt);
                 HourGlass(false);
             }
