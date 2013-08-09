@@ -161,6 +161,24 @@ namespace FTAnalyzer
                     else
                         censusCountry.Enabled = true;
                 }
+                else if (tabSelector.SelectedTab == tabTreetops)
+                {
+                    tsCountLabel.Text = "";
+                    dgTreeTops.DataSource = null;
+                    if (ckbTTIgnoreLocations.Checked)
+                        treetopsCountry.Enabled = false;
+                    else
+                        treetopsCountry.Enabled = true;
+                }
+                else if (tabSelector.SelectedTab == tabWarDead)
+                {
+                    tsCountLabel.Text = "";
+                    dgWarDead.DataSource = null;
+                    if (ckbWDIgnoreLocations.Checked)
+                        wardeadCountry.Enabled = false;
+                    else
+                        wardeadCountry.Enabled = true;
+                }
                 else if (tabSelector.SelectedTab == tabLostCousins)
                 {
                     tsCountLabel.Text = "";
@@ -313,9 +331,13 @@ namespace FTAnalyzer
 
         private Filter<Individual> createTreeTopsIndividualFilter()
         {
+            Filter<Individual> filter;
             Filter<Individual> locationFilter = treetopsCountry.BuildFilter<Individual>();
             Filter<Individual> relationFilter = treetopsRelation.BuildFilter<Individual>();
-            Filter<Individual> filter = new AndFilter<Individual>(locationFilter, relationFilter);
+            if(ckbTTIgnoreLocations.Checked)
+                filter = relationFilter;
+            else
+                filter = new AndFilter<Individual>(locationFilter, relationFilter);
 
             if (txtTreetopsSurname.Text.Length > 0)
                 filter = new AndFilter<Individual>(filter, new SurnameFilter<Individual>(txtTreetopsSurname.Text.ToUpper()));
@@ -325,14 +347,18 @@ namespace FTAnalyzer
 
         private Filter<Individual> createWardeadIndividualFilter(FactDate birthRange, FactDate deathRange)
         {
+            Filter<Individual> filter;
             Filter<Individual> locationFilter = wardeadCountry.BuildFilter<Individual>();
             Filter<Individual> relationFilter = wardeadRelation.BuildFilter<Individual>();
             Filter<Individual> birthFilter = new IndividualBirthFilter(birthRange);
             Filter<Individual> deathFilter = new IndividualDeathFilter(deathRange);
-            Filter<Individual> filter = new AndFilter<Individual>(
-                                            new AndFilter<Individual>(birthFilter, deathFilter),
-                                            new AndFilter<Individual>(locationFilter, relationFilter));
-
+            if(ckbWDIgnoreLocations.Checked)
+                filter = new AndFilter<Individual>(
+                         new AndFilter<Individual>(birthFilter, deathFilter), relationFilter);
+            else
+                filter = new AndFilter<Individual>(
+                         new AndFilter<Individual>(birthFilter, deathFilter),
+                         new AndFilter<Individual>(locationFilter, relationFilter));
             if (tabSelector.Text.Length > 0)
                 filter = new AndFilter<Individual>(filter, new SurnameFilter<Individual>(tabSelector.Text.ToUpper()));
 
@@ -1062,6 +1088,22 @@ namespace FTAnalyzer
                 }
                 HourGlass(false);
             }
+        }
+
+        private void ckbTTIgnoreLocations_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckbTTIgnoreLocations.Checked)
+                treetopsCountry.Enabled = false;
+            else
+                treetopsCountry.Enabled = true;
+        }
+
+        private void ckbWDIgnoreLocations_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckbWDIgnoreLocations.Checked)
+                wardeadCountry.Enabled = false;
+            else
+                wardeadCountry.Enabled = true;
         }
     }
 }

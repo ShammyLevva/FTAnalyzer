@@ -134,6 +134,7 @@
             this.FamilySearchrelationTypes = new Controls.RelationTypes();
             this.FamilySearchDefaultCountry = new Controls.CensusCountry();
             this.tabTreetops = new System.Windows.Forms.TabPage();
+            this.ckbTTIgnoreLocations = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgTreeTops = new System.Windows.Forms.DataGridView();
             this.btnTreeTops = new System.Windows.Forms.Button();
@@ -142,6 +143,7 @@
             this.treetopsRelation = new Controls.RelationTypes();
             this.treetopsCountry = new Controls.CensusCountry();
             this.tabWarDead = new System.Windows.Forms.TabPage();
+            this.ckbWDIgnoreLocations = new System.Windows.Forms.CheckBox();
             this.btnWWII = new System.Windows.Forms.Button();
             this.btnWWI = new System.Windows.Forms.Button();
             this.dgWarDead = new System.Windows.Forms.DataGridView();
@@ -354,9 +356,9 @@
             // 
             // tabSelector
             // 
-            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabSelector.Controls.Add(this.tabDisplayProgress);
             this.tabSelector.Controls.Add(this.tabIndividuals);
             this.tabSelector.Controls.Add(this.tabFamilies);
@@ -405,8 +407,8 @@
             // 
             // rtbOutput
             // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbOutput.Location = new System.Drawing.Point(3, 90);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.Size = new System.Drawing.Size(925, 303);
@@ -560,9 +562,9 @@
             // 
             // tabCtrlLocations
             // 
-            this.tabCtrlLocations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabCtrlLocations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabCtrlLocations.Controls.Add(this.tabCountries);
             this.tabCtrlLocations.Controls.Add(this.tabRegions);
             this.tabCtrlLocations.Controls.Add(this.tabParishes);
@@ -797,9 +799,9 @@
             // 
             this.dgLooseDeaths.AllowUserToAddRows = false;
             this.dgLooseDeaths.AllowUserToDeleteRows = false;
-            this.dgLooseDeaths.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgLooseDeaths.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgLooseDeaths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLooseDeaths.Location = new System.Drawing.Point(0, 0);
@@ -1064,7 +1066,7 @@
             this.ckbRestrictions.Size = new System.Drawing.Size(521, 17);
             this.ckbRestrictions.TabIndex = 9;
             this.ckbRestrictions.Text = "Restrict results to only those direct ancestors, blood relations and those marrie" +
-                "d to direct or blood relations";
+    "d to direct or blood relations";
             this.ckbRestrictions.UseVisualStyleBackColor = true;
             // 
             // btnLC1841EW
@@ -1233,8 +1235,8 @@
             // 
             // pbFamilySearch
             // 
-            this.pbFamilySearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbFamilySearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pbFamilySearch.Location = new System.Drawing.Point(8, 151);
             this.pbFamilySearch.Name = "pbFamilySearch";
             this.pbFamilySearch.Size = new System.Drawing.Size(915, 20);
@@ -1315,6 +1317,7 @@
             // 
             // tabTreetops
             // 
+            this.tabTreetops.Controls.Add(this.ckbTTIgnoreLocations);
             this.tabTreetops.Controls.Add(this.panel1);
             this.tabTreetops.Controls.Add(this.btnTreeTops);
             this.tabTreetops.Controls.Add(this.label8);
@@ -1328,30 +1331,43 @@
             this.tabTreetops.Text = "Treetops";
             this.tabTreetops.UseVisualStyleBackColor = true;
             // 
+            // ckbTTIgnoreLocations
+            // 
+            this.ckbTTIgnoreLocations.AutoSize = true;
+            this.ckbTTIgnoreLocations.Checked = true;
+            this.ckbTTIgnoreLocations.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbTTIgnoreLocations.Location = new System.Drawing.Point(8, 87);
+            this.ckbTTIgnoreLocations.Name = "ckbTTIgnoreLocations";
+            this.ckbTTIgnoreLocations.Size = new System.Drawing.Size(175, 17);
+            this.ckbTTIgnoreLocations.TabIndex = 27;
+            this.ckbTTIgnoreLocations.Text = "Ignore locations in treetops filter";
+            this.ckbTTIgnoreLocations.UseVisualStyleBackColor = true;
+            this.ckbTTIgnoreLocations.CheckedChanged += new System.EventHandler(this.ckbTTIgnoreLocations_CheckedChanged);
+            // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.dgTreeTops);
-            this.panel1.Location = new System.Drawing.Point(8, 92);
+            this.panel1.Location = new System.Drawing.Point(8, 110);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(920, 307);
+            this.panel1.Size = new System.Drawing.Size(920, 289);
             this.panel1.TabIndex = 26;
             // 
             // dgTreeTops
             // 
             this.dgTreeTops.AllowUserToAddRows = false;
             this.dgTreeTops.AllowUserToDeleteRows = false;
-            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgTreeTops.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgTreeTops.Location = new System.Drawing.Point(0, 0);
+            this.dgTreeTops.Location = new System.Drawing.Point(0, 3);
             this.dgTreeTops.Name = "dgTreeTops";
             this.dgTreeTops.ReadOnly = true;
-            this.dgTreeTops.Size = new System.Drawing.Size(920, 307);
+            this.dgTreeTops.Size = new System.Drawing.Size(920, 283);
             this.dgTreeTops.TabIndex = 1;
             // 
             // btnTreeTops
@@ -1398,6 +1414,7 @@
             // 
             // tabWarDead
             // 
+            this.tabWarDead.Controls.Add(this.ckbWDIgnoreLocations);
             this.tabWarDead.Controls.Add(this.btnWWII);
             this.tabWarDead.Controls.Add(this.btnWWI);
             this.tabWarDead.Controls.Add(this.dgWarDead);
@@ -1411,6 +1428,19 @@
             this.tabWarDead.TabIndex = 8;
             this.tabWarDead.Text = "War Dead";
             this.tabWarDead.UseVisualStyleBackColor = true;
+            // 
+            // ckbWDIgnoreLocations
+            // 
+            this.ckbWDIgnoreLocations.AutoSize = true;
+            this.ckbWDIgnoreLocations.Checked = true;
+            this.ckbWDIgnoreLocations.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbWDIgnoreLocations.Location = new System.Drawing.Point(10, 92);
+            this.ckbWDIgnoreLocations.Name = "ckbWDIgnoreLocations";
+            this.ckbWDIgnoreLocations.Size = new System.Drawing.Size(181, 17);
+            this.ckbWDIgnoreLocations.TabIndex = 32;
+            this.ckbWDIgnoreLocations.Text = "Ignore locations in war dead filter";
+            this.ckbWDIgnoreLocations.UseVisualStyleBackColor = true;
+            this.ckbWDIgnoreLocations.CheckedChanged += new System.EventHandler(this.ckbWDIgnoreLocations_CheckedChanged);
             // 
             // btnWWII
             // 
@@ -1436,15 +1466,15 @@
             // 
             this.dgWarDead.AllowUserToAddRows = false;
             this.dgWarDead.AllowUserToDeleteRows = false;
-            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgWarDead.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgWarDead.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgWarDead.Location = new System.Drawing.Point(3, 92);
+            this.dgWarDead.Location = new System.Drawing.Point(3, 115);
             this.dgWarDead.Name = "dgWarDead";
             this.dgWarDead.ReadOnly = true;
-            this.dgWarDead.Size = new System.Drawing.Size(920, 307);
+            this.dgWarDead.Size = new System.Drawing.Size(920, 284);
             this.dgWarDead.TabIndex = 29;
             // 
             // label9
@@ -1708,6 +1738,8 @@
         private System.Windows.Forms.ToolStripMenuItem olderParentsToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPlaces;
         private System.Windows.Forms.DataGridView dgPlaces;
+        private System.Windows.Forms.CheckBox ckbTTIgnoreLocations;
+        private System.Windows.Forms.CheckBox ckbWDIgnoreLocations;
     }
 }
 
