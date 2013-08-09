@@ -158,6 +158,9 @@
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.mnuExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.individualsToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.familiesToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabSelector.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -207,6 +210,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.reportsToolStripMenuItem,
+            this.mnuExport,
             this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -227,7 +231,7 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -235,7 +239,7 @@
             // 
             this.printToolStripMenuItem.Enabled = false;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.printToolStripMenuItem.Text = "Print";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
@@ -1544,6 +1548,28 @@
             // 
             this.printDialog.UseEXDialog = true;
             // 
+            // mnuExport
+            // 
+            this.mnuExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.individualsToExcelToolStripMenuItem,
+            this.familiesToExcelToolStripMenuItem});
+            this.mnuExport.Name = "mnuExport";
+            this.mnuExport.Size = new System.Drawing.Size(52, 20);
+            this.mnuExport.Text = "Export";
+            // 
+            // individualsToExcelToolStripMenuItem
+            // 
+            this.individualsToExcelToolStripMenuItem.Name = "individualsToExcelToolStripMenuItem";
+            this.individualsToExcelToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.individualsToExcelToolStripMenuItem.Text = "Individuals to Excel";
+            this.individualsToExcelToolStripMenuItem.Click += new System.EventHandler(this.individualsToExcelToolStripMenuItem_Click);
+            // 
+            // familiesToExcelToolStripMenuItem
+            // 
+            this.familiesToExcelToolStripMenuItem.Name = "familiesToExcelToolStripMenuItem";
+            this.familiesToExcelToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.familiesToExcelToolStripMenuItem.Text = "Families to Excel";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1740,6 +1766,9 @@
         private System.Windows.Forms.DataGridView dgPlaces;
         private System.Windows.Forms.CheckBox ckbTTIgnoreLocations;
         private System.Windows.Forms.CheckBox ckbWDIgnoreLocations;
+        private System.Windows.Forms.ToolStripMenuItem mnuExport;
+        private System.Windows.Forms.ToolStripMenuItem individualsToExcelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem familiesToExcelToolStripMenuItem;
     }
 }
 

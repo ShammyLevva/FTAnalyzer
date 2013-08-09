@@ -1105,5 +1105,21 @@ namespace FTAnalyzer
             else
                 wardeadCountry.Enabled = true;
         }
+
+        private void individualsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!ft.DataLoaded)
+            {
+                MessageBox.Show("You must load a GEDCOM file before you can export data.");
+            }
+            else
+            {
+                HourGlass(true);
+                ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+                DataTable dt = convertor.ToDataTable(ft.AllIndividuals);
+                ExportToExcel.Export(dt);
+                HourGlass(false);
+            }
+        }
     }
 }
