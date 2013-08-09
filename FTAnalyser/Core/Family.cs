@@ -406,7 +406,6 @@ namespace FTAnalyzer
 
         #region IDisplayFamily Members
 
-
         string IDisplayFamily.Husband
         {
             get { return husband == null ? string.Empty : husband.Name + " (b." + husband.BirthDate + ")"; }

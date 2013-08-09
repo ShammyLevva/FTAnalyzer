@@ -42,6 +42,9 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.childAgeProfilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.olderParentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.individualsToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.familiesToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.geocodeLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -158,9 +161,6 @@
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
-            this.mnuExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.individualsToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.familiesToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabSelector.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -231,7 +231,7 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -239,7 +239,7 @@
             // 
             this.printToolStripMenuItem.Enabled = false;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.printToolStripMenuItem.Text = "Print";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
@@ -296,6 +296,29 @@
             this.olderParentsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.olderParentsToolStripMenuItem.Text = "Older Parents";
             this.olderParentsToolStripMenuItem.Click += new System.EventHandler(this.olderParentsToolStripMenuItem_Click);
+            // 
+            // mnuExport
+            // 
+            this.mnuExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.individualsToExcelToolStripMenuItem,
+            this.familiesToExcelToolStripMenuItem});
+            this.mnuExport.Name = "mnuExport";
+            this.mnuExport.Size = new System.Drawing.Size(52, 20);
+            this.mnuExport.Text = "Export";
+            // 
+            // individualsToExcelToolStripMenuItem
+            // 
+            this.individualsToExcelToolStripMenuItem.Name = "individualsToExcelToolStripMenuItem";
+            this.individualsToExcelToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.individualsToExcelToolStripMenuItem.Text = "Individuals to Excel";
+            this.individualsToExcelToolStripMenuItem.Click += new System.EventHandler(this.individualsToExcelToolStripMenuItem_Click);
+            // 
+            // familiesToExcelToolStripMenuItem
+            // 
+            this.familiesToExcelToolStripMenuItem.Name = "familiesToExcelToolStripMenuItem";
+            this.familiesToExcelToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.familiesToExcelToolStripMenuItem.Text = "Families to Excel";
+            this.familiesToExcelToolStripMenuItem.Click += new System.EventHandler(this.familiesToExcelToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -360,9 +383,9 @@
             // 
             // tabSelector
             // 
-            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabSelector.Controls.Add(this.tabDisplayProgress);
             this.tabSelector.Controls.Add(this.tabIndividuals);
             this.tabSelector.Controls.Add(this.tabFamilies);
@@ -411,8 +434,8 @@
             // 
             // rtbOutput
             // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbOutput.Location = new System.Drawing.Point(3, 90);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.Size = new System.Drawing.Size(925, 303);
@@ -566,9 +589,9 @@
             // 
             // tabCtrlLocations
             // 
-            this.tabCtrlLocations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabCtrlLocations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabCtrlLocations.Controls.Add(this.tabCountries);
             this.tabCtrlLocations.Controls.Add(this.tabRegions);
             this.tabCtrlLocations.Controls.Add(this.tabParishes);
@@ -803,9 +826,9 @@
             // 
             this.dgLooseDeaths.AllowUserToAddRows = false;
             this.dgLooseDeaths.AllowUserToDeleteRows = false;
-            this.dgLooseDeaths.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgLooseDeaths.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgLooseDeaths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLooseDeaths.Location = new System.Drawing.Point(0, 0);
@@ -1070,7 +1093,7 @@
             this.ckbRestrictions.Size = new System.Drawing.Size(521, 17);
             this.ckbRestrictions.TabIndex = 9;
             this.ckbRestrictions.Text = "Restrict results to only those direct ancestors, blood relations and those marrie" +
-    "d to direct or blood relations";
+                "d to direct or blood relations";
             this.ckbRestrictions.UseVisualStyleBackColor = true;
             // 
             // btnLC1841EW
@@ -1239,8 +1262,8 @@
             // 
             // pbFamilySearch
             // 
-            this.pbFamilySearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbFamilySearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pbFamilySearch.Location = new System.Drawing.Point(8, 151);
             this.pbFamilySearch.Name = "pbFamilySearch";
             this.pbFamilySearch.Size = new System.Drawing.Size(915, 20);
@@ -1350,9 +1373,9 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.dgTreeTops);
             this.panel1.Location = new System.Drawing.Point(8, 110);
             this.panel1.Name = "panel1";
@@ -1363,9 +1386,9 @@
             // 
             this.dgTreeTops.AllowUserToAddRows = false;
             this.dgTreeTops.AllowUserToDeleteRows = false;
-            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgTreeTops.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgTreeTops.Location = new System.Drawing.Point(0, 3);
@@ -1470,9 +1493,9 @@
             // 
             this.dgWarDead.AllowUserToAddRows = false;
             this.dgWarDead.AllowUserToDeleteRows = false;
-            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgWarDead.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgWarDead.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgWarDead.Location = new System.Drawing.Point(3, 115);
@@ -1547,28 +1570,6 @@
             // printDialog
             // 
             this.printDialog.UseEXDialog = true;
-            // 
-            // mnuExport
-            // 
-            this.mnuExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.individualsToExcelToolStripMenuItem,
-            this.familiesToExcelToolStripMenuItem});
-            this.mnuExport.Name = "mnuExport";
-            this.mnuExport.Size = new System.Drawing.Size(52, 20);
-            this.mnuExport.Text = "Export";
-            // 
-            // individualsToExcelToolStripMenuItem
-            // 
-            this.individualsToExcelToolStripMenuItem.Name = "individualsToExcelToolStripMenuItem";
-            this.individualsToExcelToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.individualsToExcelToolStripMenuItem.Text = "Individuals to Excel";
-            this.individualsToExcelToolStripMenuItem.Click += new System.EventHandler(this.individualsToExcelToolStripMenuItem_Click);
-            // 
-            // familiesToExcelToolStripMenuItem
-            // 
-            this.familiesToExcelToolStripMenuItem.Name = "familiesToExcelToolStripMenuItem";
-            this.familiesToExcelToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.familiesToExcelToolStripMenuItem.Text = "Families to Excel";
             // 
             // MainForm
             // 

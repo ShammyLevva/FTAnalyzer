@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace FTAnalyzer
 {
     public class Individual : IComparable<Individual>, 
-        IDisplayIndividual, IDisplayLooseDeath, IDisplayLCReport,
+        IDisplayIndividual, IDisplayLooseDeath, IDisplayLCReport, IExportIndividual,
         ILocationFilterable, ISurnameFilterable, IRelationFilterable, IFactsFilterable
     {
         
