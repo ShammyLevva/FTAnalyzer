@@ -123,30 +123,36 @@ namespace FTAnalyzer
             str = str.Replace("EST", "ABT");
             str = str.Replace("CIR", "ABT");
 
+            str = str.Replace("QUARTER", "QTR");
             str = str.Replace("MAR QTR", "ABT MAR");
-            str = str.Replace("MAR QUARTER", "ABT MAR");
             str = str.Replace("MAR Q ", "ABT MAR ");
             str = str.Replace("JAN FEB MAR", "ABT MAR");
             str = str.Replace("JAN-FEB-MAR", "ABT MAR");
             str = str.Replace("Q1", "ABT MAR");
+            str = str.Replace("QTR1", "ABT MAR");
+            str = str.Replace("QTR 1", "ABT MAR");
             str = str.Replace("JUN QTR", "ABT JUN");
-            str = str.Replace("JUN QUARTER", "ABT JUN");
             str = str.Replace("JUN Q ", "ABT JUN ");
             str = str.Replace("APR MAY JUN", "ABT JUN");
             str = str.Replace("APR-MAY-JUN", "ABT JUN");
             str = str.Replace("Q2", "ABT JUN");
+            str = str.Replace("QTR2", "ABT JUN");
+            str = str.Replace("QTR 2", "ABT JUN");
             str = str.Replace("SEP QTR", "ABT SEP");
-            str = str.Replace("SEP QUARTER", "ABT SEP");
             str = str.Replace("SEP Q ", "ABT SEP ");
             str = str.Replace("JUL AUG SEP", "ABT SEP");
             str = str.Replace("JUL-AUG-SEP", "ABT SEP");
             str = str.Replace("Q3", "ABT SEP");
+            str = str.Replace("QTR3", "ABT SEP");
+            str = str.Replace("QTR 3", "ABT SEP");
             str = str.Replace("DEC QTR", "ABT DEC");
-            str = str.Replace("DEC QUARTER", "ABT DEC");
             str = str.Replace("DEC Q ", "ABT DEC ");
             str = str.Replace("OCT NOV DEC", "ABT DEC");
             str = str.Replace("OCT-NOV-DEC", "ABT DEC");
             str = str.Replace("Q4", "ABT DEC");
+            str = str.Replace("QTR4", "ABT DEC");
+            str = str.Replace("QTR 4", "ABT DEC");
+            
             str = str.Replace("ABT ABT", "ABT"); // fix any ABT X QTR's that will have been changed to ABT ABT
 
             if (str.StartsWith("FROM"))
