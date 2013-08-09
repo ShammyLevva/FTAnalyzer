@@ -99,6 +99,19 @@ namespace FTAnalyzer
             str = str.Replace("NOVEMBER", "NOV");
             str = str.Replace("DECEMBER", "DEC");
 
+            str = str.Replace("M01", "JAN");
+            str = str.Replace("M02", "FEB");
+            str = str.Replace("M03", "MAR");
+            str = str.Replace("M04", "APR");
+            str = str.Replace("M05", "MAY");
+            str = str.Replace("M06", "JUN");
+            str = str.Replace("M07", "JUL");
+            str = str.Replace("M08", "AUG");
+            str = str.Replace("M09", "SEP");
+            str = str.Replace("M10", "OCT");
+            str = str.Replace("M11", "NOV");
+            str = str.Replace("M12", "DEC");
+
             str = str.Replace("ABT.", "ABT");
             str = str.Replace("AFT.", "AFT");
             str = str.Replace("BEF.", "BEF");
