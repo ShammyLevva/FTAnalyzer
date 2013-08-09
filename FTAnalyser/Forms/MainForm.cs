@@ -1037,8 +1037,29 @@ namespace FTAnalyzer
             {
                 HourGlass(true);
                 Forms.People frmInd = new Forms.People();
-                frmInd.OlderParents();
-                frmInd.Show();
+                string inputAge = "50";
+                DialogResult result = DialogResult.Cancel;
+                int age  = 0;
+                do
+                {
+                    try
+                    {
+                        result = InputBox.Show("Enter age between 13 and 90", "Please select minimum age to report on", ref inputAge);
+                        age = Int32.Parse(inputAge);
+                    }
+                    catch (Exception)
+                    {
+                        if(result != DialogResult.Cancel)
+                            MessageBox.Show("Invalid Age entered");
+                    }
+                    if (age < 13 || age > 90)
+                        MessageBox.Show("Please enter an age between 13 and 90");
+                } while ((result != DialogResult.Cancel) && (age < 13 || age > 90));
+                if(result == DialogResult.OK)
+                {
+                    frmInd.OlderParents(age);
+                    frmInd.Show();
+                }
                 HourGlass(false);
             }
         }

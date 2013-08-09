@@ -53,9 +53,9 @@ namespace FTAnalyzer.Forms
             dgFamilies.Visible = false;
         }
 
-        public void OlderParents()
+        public void OlderParents(int minAge)
         {
-            this.Text = "Parents aged 50+ at time of child's birth";
+            this.Text = "Parents aged " + minAge + "+ at time of child's birth";
             FamilyTree ft = FamilyTree.Instance;
             selectRow = true;
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
@@ -71,7 +71,7 @@ namespace FTAnalyzer.Forms
                         if (f.husband != null && f.husband.BirthDate != FactDate.UNKNOWN_DATE)
                         {
                             Age age = f.husband.getAge(child.BirthDate);
-                            if (age.MinAge >= 50 && !dsInd.Contains(f.husband))
+                            if (age.MinAge >= minAge && !dsInd.Contains(f.husband))
                             {
                                 dsInd.Add(f.husband);
                                 families.Add(f.husband, f);
@@ -81,7 +81,7 @@ namespace FTAnalyzer.Forms
                         if (f.wife != null && f.wife.BirthDate != FactDate.UNKNOWN_DATE)
                         {
                             Age age = f.wife.getAge(child.BirthDate);
-                            if (age.MinAge >= 50 && !dsInd.Contains(f.wife))
+                            if (age.MinAge >= minAge && !dsInd.Contains(f.wife))
                             {
                                 dsInd.Add(f.wife);
                                 families.Add(f.wife, f);

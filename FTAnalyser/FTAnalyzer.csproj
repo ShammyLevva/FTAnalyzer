@@ -440,6 +440,7 @@
     <Compile Include="UserControls\GeneralSettings.designer.cs">
       <DependentUpon>GeneralSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\InputBox.cs" />
     <Compile Include="UserControls\IOptions.cs" />
     <Compile Include="UserControls\NetworkSettings.cs">
       <SubType>UserControl</SubType>
