@@ -23,5 +23,6 @@ namespace FTAnalyzer
         int Ahnentafel { get; }
         bool HasRangedBirthDate { get; }
         bool HasParents { get; }
+        int CensusFactCount { get; }
     }
 }
