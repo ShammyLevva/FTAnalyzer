@@ -17,7 +17,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.5.8.0";
+        private string VERSION = "1.6.0.0";
         private bool _checkForUpdatesEnabled = true;
         private bool _showNoUpdateMessage = false;
         private System.Threading.Timer _timerCheckForUpdates;
@@ -359,8 +359,8 @@ namespace FTAnalyzer
                 filter = new AndFilter<Individual>(
                          new AndFilter<Individual>(birthFilter, deathFilter),
                          new AndFilter<Individual>(locationFilter, relationFilter));
-            if (tabSelector.Text.Length > 0)
-                filter = new AndFilter<Individual>(filter, new SurnameFilter<Individual>(tabSelector.Text.ToUpper()));
+            if (txtWarDeadSurname.Text.Length > 0)
+                filter = new AndFilter<Individual>(filter, new SurnameFilter<Individual>(txtWarDeadSurname.Text.ToUpper()));
 
             return filter;
         }
