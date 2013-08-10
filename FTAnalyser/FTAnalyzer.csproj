@@ -118,6 +118,7 @@
     <Compile Include="Core\Displays\IDisplayLCReport.cs" />
     <Compile Include="Core\Displays\DisplayOccupation.cs" />
     <Compile Include="Core\Displays\IDisplayOccupation.cs" />
+    <Compile Include="Core\Exports\ExportFacts.cs" />
     <Compile Include="Core\Exports\IExportIndividual.cs" />
     <Compile Include="Core\Fact.cs" />
     <Compile Include="Core\FactDate.cs" />

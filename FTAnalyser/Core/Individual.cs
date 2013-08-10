@@ -418,6 +418,36 @@ namespace FTAnalyzer
             }
         }
 
+        public string MarriageDates
+        {
+            get
+            {
+                string output = string.Empty;
+                foreach (Family f in familiesAsParent)
+                    if(f.MarriageDate.ToString() != string.Empty)
+                        output += f.MarriageDate + "; ";
+                if (output.Length > 0)
+                    return output.Substring(0, output.Length - 2); // remove trailing ;
+                else
+                    return output;
+            }
+        }
+
+        public string MarriageLocations
+        {
+            get
+            {
+                string output = string.Empty;
+                foreach (Family f in familiesAsParent)
+                    if(f.MarriageLocation.ToString() != string.Empty)
+                        output += f.MarriageLocation + "; ";
+                if (output.Length > 0)
+                    return output.Substring(0, output.Length - 2); // remove trailing ;
+                else
+                    return output;
+            }
+        }
+
         #endregion
 
         #region Boolean Tests

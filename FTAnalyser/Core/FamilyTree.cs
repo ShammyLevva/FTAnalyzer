@@ -244,13 +244,14 @@ namespace FTAnalyzer
             set { xmlErrorbox = value; }
         }
 
-        public List<Fact> AllFacts
+        public List<ExportFacts> AllFacts
         {
             get
             {
-                List<Fact> result = new List<Fact>();
+                List<ExportFacts> result = new List<ExportFacts>();
                 foreach (Individual ind in individuals)
-                    result.AddRange(ind.AllFacts);
+                    foreach(Fact f in ind.AllFacts)
+                        result.Add(new ExportFacts(ind, f));
                 return result;
             }
         }

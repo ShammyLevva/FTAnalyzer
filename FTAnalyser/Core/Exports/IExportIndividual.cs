@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    interface IExportIndividual
+    public interface IExportIndividual
     {
         string IndividualID { get; }
         string Forenames { get; }
@@ -24,5 +24,7 @@ namespace FTAnalyzer
         bool HasRangedBirthDate { get; }
         bool HasParents { get; }
         int CensusFactCount { get; }
+        string MarriageDates { get; }
+        string MarriageLocations { get; }
     }
 }

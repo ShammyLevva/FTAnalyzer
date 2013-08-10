@@ -19,7 +19,8 @@ namespace FTAnalyzer
 
 		private string location;
         private string fixedLocation;
-		internal string country;
+        private string sortableLocation;
+        internal string country;
 		internal string region;
 		internal string parish;
 		internal string address;
@@ -109,7 +110,8 @@ namespace FTAnalyzer
 		public FactLocation() {
 			this.location = "";
             this.fixedLocation = "";
-			this.country = "";
+            this.sortableLocation = "";
+            this.country = "";
 			this.region = "";
 			this.parish = "";
 			this.address = "";
@@ -168,6 +170,7 @@ namespace FTAnalyzer
 				ShiftRegionToParish();
 				SetRegionID();
                 SetFixedLocation();
+                SetSortableLocation();
                 CheckKnownLocation();
                 //string after = (parish + ", " + region + ", " + country).ToUpper().Trim();
                 //if (!before.Equals(after))
@@ -319,7 +322,20 @@ namespace FTAnalyzer
                 fixedLocation = place + ", " + fixedLocation;
         }
 
-		#endregion
+        private void SetSortableLocation()
+        {
+            sortableLocation = country;
+            if (!region.Equals(string.Empty))
+                sortableLocation = sortableLocation + ", " + region;
+            if (!parish.Equals(string.Empty))
+                sortableLocation = sortableLocation + ", " + parish;
+            if (!address.Equals(string.Empty))
+                sortableLocation = sortableLocation + ", " + address;
+            if (!place.Equals(string.Empty))
+                sortableLocation = sortableLocation + ", " + place;
+        }
+        
+        #endregion
 
 		private void SetRegionID()
 		{
@@ -352,6 +368,11 @@ namespace FTAnalyzer
 		}
 
 		#region Properties
+
+        public String SortableLocation
+        {
+            get { return sortableLocation; }
+        }
 
 		public string Address {
 			get { return address; }

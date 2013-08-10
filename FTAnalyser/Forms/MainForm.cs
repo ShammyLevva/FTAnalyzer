@@ -48,6 +48,8 @@ namespace FTAnalyzer
                 {
                     HourGlass(true);
                     closeIndividualForms();
+                    mnuReports.Visible = false;
+                    mnuExport.Visible = false;
                     tabSelector.SelectTab(tabDisplayProgress);
                     rtbOutput.Text = "";
                     rtbFamilySearchResults.Text = "";
@@ -61,6 +63,8 @@ namespace FTAnalyzer
                         ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
                         Application.UseWaitCursor = false;
                         HourGlass(false);
+                        mnuReports.Visible = true;
+                        mnuExport.Visible = true;
                         MessageBox.Show("Gedcom File Loaded");
                     }
                 }
@@ -1037,15 +1041,8 @@ namespace FTAnalyzer
 
         private void childAgeProfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!ft.DataLoaded)
-            {
-                MessageBox.Show("You must load a GEDCOM file before you can see any statistics");
-            }
-            else
-            {
-                Statistics s = Statistics.Instance;
-                MessageBox.Show(s.ChildrenBirthProfiles());
-            }
+            Statistics s = Statistics.Instance;
+            MessageBox.Show(s.ChildrenBirthProfiles());
         }
 
         private void viewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1055,39 +1052,32 @@ namespace FTAnalyzer
 
         private void olderParentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!ft.DataLoaded)
+            HourGlass(true);
+            Forms.People frmInd = new Forms.People();
+            string inputAge = "50";
+            DialogResult result = DialogResult.Cancel;
+            int age  = 0;
+            do
             {
-                MessageBox.Show("You must load a GEDCOM file before you can see any statistics");
-            }
-            else
-            {
-                HourGlass(true);
-                Forms.People frmInd = new Forms.People();
-                string inputAge = "50";
-                DialogResult result = DialogResult.Cancel;
-                int age  = 0;
-                do
+                try
                 {
-                    try
-                    {
-                        result = InputBox.Show("Enter age between 13 and 90", "Please select minimum age to report on", ref inputAge);
-                        age = Int32.Parse(inputAge);
-                    }
-                    catch (Exception)
-                    {
-                        if(result != DialogResult.Cancel)
-                            MessageBox.Show("Invalid Age entered");
-                    }
-                    if (age < 13 || age > 90)
-                        MessageBox.Show("Please enter an age between 13 and 90");
-                } while ((result != DialogResult.Cancel) && (age < 13 || age > 90));
-                if(result == DialogResult.OK)
-                {
-                    if(frmInd.OlderParents(age))
-                        frmInd.Show();
+                    result = InputBox.Show("Enter age between 13 and 90", "Please select minimum age to report on", ref inputAge);
+                    age = Int32.Parse(inputAge);
                 }
-                HourGlass(false);
+                catch (Exception)
+                {
+                    if(result != DialogResult.Cancel)
+                        MessageBox.Show("Invalid Age entered");
+                }
+                if (age < 13 || age > 90)
+                    MessageBox.Show("Please enter an age between 13 and 90");
+            } while ((result != DialogResult.Cancel) && (age < 13 || age > 90));
+            if(result == DialogResult.OK)
+            {
+                if(frmInd.OlderParents(age))
+                    frmInd.Show();
             }
+            HourGlass(false);
         }
 
         private void ckbTTIgnoreLocations_CheckedChanged(object sender, EventArgs e)
@@ -1108,34 +1098,29 @@ namespace FTAnalyzer
 
         private void individualsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!ft.DataLoaded)
-            {
-                MessageBox.Show("You must load a GEDCOM file before you can export data.");
-            }
-            else
-            {
-                HourGlass(true);
-                ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-                DataTable dt = convertor.ToDataTable(new List<IExportIndividual>(ft.AllIndividuals));
-                ExportFile(dt);
-                HourGlass(false);
-            }
+            HourGlass(true);
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            DataTable dt = convertor.ToDataTable(new List<IExportIndividual>(ft.AllIndividuals));
+            ExportFile(dt);
+            HourGlass(false);
         }
 
         private void familiesToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!ft.DataLoaded)
-            {
-                MessageBox.Show("You must load a GEDCOM file before you can export data.");
-            }
-            else
-            {
-                HourGlass(true);
-                ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-                DataTable dt = convertor.ToDataTable(new List<IDisplayFamily>(ft.AllFamilies));
-                ExportFile(dt);
-                HourGlass(false);
-            }
+            HourGlass(true);
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            DataTable dt = convertor.ToDataTable(new List<IDisplayFamily>(ft.AllFamilies));
+            ExportFile(dt);
+            HourGlass(false);
+        }
+
+        private void factsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            DataTable dt = convertor.ToDataTable(new List<ExportFacts>(ft.AllFacts));
+            ExportFile(dt);
+            HourGlass(false);
         }
 
         private void ExportFile(DataTable dt)
