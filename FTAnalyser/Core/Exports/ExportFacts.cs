@@ -38,7 +38,7 @@ namespace FTAnalyzer
 
         public string FactType
         {
-            get { return f.FactType.ToString(); }
+            get { return f.FactType; }
         }
 
         public string FactDate
@@ -53,7 +53,7 @@ namespace FTAnalyzer
 
         public string FactComment
         {
-            get { return f.Comment.ToString(); }
+            get { return f.Comment; }
         }
 
         public string SortableLocation

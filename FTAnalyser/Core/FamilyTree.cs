@@ -250,8 +250,13 @@ namespace FTAnalyzer
             {
                 List<ExportFacts> result = new List<ExportFacts>();
                 foreach (Individual ind in individuals)
-                    foreach(Fact f in ind.AllFacts)
+                {
+                    foreach (Fact f in ind.AllFacts)
                         result.Add(new ExportFacts(ind, f));
+                    foreach (Family fam in ind.FamiliesAsParent)
+                        foreach(Fact famfact in fam.AllFacts)
+                            result.Add(new ExportFacts(ind, famfact));
+                }
                 return result;
             }
         }
