@@ -28,7 +28,10 @@ namespace FTAnalyzer
         public static readonly string DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})$";
         public static readonly string DOUBLE_DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})/*(\\d{0,2})$";
         public static readonly string POSTFIX = "(\\d{1,2})(?:ST|ND|RD|TH)(.*)";
-
+        public static readonly string BETWEENFIX = "(\\d{4})-(\\d{4})";
+        public static readonly string USDATEFIX = "^([A-Za-z]{3}) *(\\d{1,2} )(\\d{4})$";
+        public static readonly string SPACEFIX = "^(\\d{1,2}) *([A-Za-z]{3}) *(\\d{0,4})$";
+        
         public static readonly FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
 
         public enum FactDateType
@@ -86,6 +89,9 @@ namespace FTAnalyzer
             str = str.Replace(",", string.Empty);
             str = str.Replace("(", string.Empty);
             str = str.Replace(")", string.Empty);
+            str = str.Replace("?", string.Empty);
+            str = str.Replace(".", " ");
+            str = str.Replace("  ", " ");
 
             str = str.Replace("JANUARY", "JAN");
             str = str.Replace("FEBRUARY", "FEB"); 
@@ -95,6 +101,7 @@ namespace FTAnalyzer
             str = str.Replace("JULY", "JUL");
             str = str.Replace("AUGUST", "AUG");
             str = str.Replace("SEPTEMBER", "SEP");
+            str = str.Replace("SEPT", "SEP");
             str = str.Replace("OCTOBER", "OCT");
             str = str.Replace("NOVEMBER", "NOV");
             str = str.Replace("DECEMBER", "DEC");
@@ -112,16 +119,14 @@ namespace FTAnalyzer
             str = str.Replace("M11", "NOV");
             str = str.Replace("M12", "DEC");
 
-            str = str.Replace("ABT.", "ABT");
-            str = str.Replace("AFT.", "AFT");
-            str = str.Replace("BEF.", "BEF");
-            str = str.Replace("BET.", "BET");
-            str = str.Replace("CAL.", "ABT");
-            str = str.Replace("EST.", "ABT");
-            str = str.Replace("CIR.", "ABT"); 
             str = str.Replace("CAL", "ABT");
             str = str.Replace("EST", "ABT");
             str = str.Replace("CIR", "ABT");
+
+            str = str.Replace("ABOUT", "ABT");
+            str = str.Replace("AFTER", "AFT");
+            str = str.Replace("BEFORE", "BEF");
+            str = str.Replace("BETWEEN", "BET");
 
             str = str.Replace("QUARTER", "QTR");
             str = str.Replace("MAR QTR", "ABT MAR");
@@ -167,6 +172,24 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 string result = matcher.Groups[1].ToString() + matcher.Groups[2].ToString();
+                return result.Trim();
+            }
+            matcher = Regex.Match(str, BETWEENFIX);
+            if (matcher.Success)
+            {
+                string result = "BET " + matcher.Groups[1].ToString() + " AND " + matcher.Groups[2].ToString();
+                return result.Trim();
+            }
+            matcher = Regex.Match(str, USDATEFIX);
+            if (matcher.Success)
+            {
+                string result = matcher.Groups[2].ToString() + matcher.Groups[1].ToString() + " " + matcher.Groups[3].ToString();
+                return result.Trim();
+            }
+            matcher = Regex.Match(str, SPACEFIX);
+            if (matcher.Success)
+            {
+                string result = matcher.Groups[1].ToString() + " " + matcher.Groups[2].ToString() + " " + matcher.Groups[3].ToString();
                 return result.Trim();
             }
             return str;
