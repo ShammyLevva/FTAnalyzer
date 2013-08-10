@@ -26,7 +26,7 @@ namespace FTAnalyzer
         public static readonly string DISPLAY = "d MMM yyyy";
         public static readonly string CHECKING = "d MMM";
         public static readonly string DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})$";
-        public static readonly string DOUBLE_DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})/*(\\d{0,2})$";
+        public static readonly string DOUBLE_DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})/(\\d{0,2})$";
         public static readonly string POSTFIX = "(\\d{1,2})(?:ST|ND|RD|TH)(.*)";
         public static readonly string BETWEENFIX = "(\\d{4})-(\\d{4})";
         public static readonly string USDATEFIX = "^([A-Za-z]{3}) *(\\d{1,2} )(\\d{4})$";
@@ -122,6 +122,8 @@ namespace FTAnalyzer
             str = str.Replace("CAL", "ABT");
             str = str.Replace("EST", "ABT");
             str = str.Replace("CIR", "ABT");
+            str = str.Replace("PRE", "BEF");
+            str = str.Replace("POST", "AFT");
 
             str = str.Replace("ABOUT", "ABT");
             str = str.Replace("AFTER", "AFT");
@@ -192,7 +194,7 @@ namespace FTAnalyzer
                 string result = matcher.Groups[1].ToString() + " " + matcher.Groups[2].ToString() + " " + matcher.Groups[3].ToString();
                 return result.Trim();
             }
-            return str;
+            return str.Trim();
         }
 
         #region Process Dates
@@ -369,7 +371,7 @@ namespace FTAnalyzer
                         gYear = matcher.Groups[3];
                         gDouble = matcher.Groups[4];
                         if (dateValue.Length > 3)
-                            dateValue = dateValue.Substring(0, dateValue.Length - 3); // remove the trailing / and 2 digits
+                            dateValue = dateValue.Substring(0, dateValue.Length - gDouble.ToString().Length - 1); // remove the trailing / and 1 or 2 digits
                     }
                     else
                         throw new Exception("Unrecognised date format for : " + dateValue);
@@ -453,6 +455,8 @@ namespace FTAnalyzer
                 return true;
             // check if valid double date if so set double date to true
             string doubleyear = gDouble.ToString().Trim();
+            if (doubleyear.Length == 1 && year.Length >= 2)
+                doubleyear = year.Substring(year.Length - 2,1) + doubleyear;
             if (doubleyear == null || doubleyear.Length != 2 || year.Length < 3)
                 return false;
             int iYear = Convert.ToInt32(year);
