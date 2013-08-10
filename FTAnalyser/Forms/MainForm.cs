@@ -1130,7 +1130,7 @@ namespace FTAnalyzer
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 string initialDir = (string)Application.UserAppDataRegistry.GetValue("Excel Export Individual Path");
                 saveFileDialog.InitialDirectory = initialDir == null ? Environment.SpecialFolder.MyDocuments.ToString() : initialDir;
-                saveFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv|All Files (*.*)|*.*";
+                saveFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv";
                 saveFileDialog.FilterIndex = 1;
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
