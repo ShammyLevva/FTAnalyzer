@@ -53,7 +53,7 @@ namespace FTAnalyzer.Forms
             dgFamilies.Visible = false;
         }
 
-        public void OlderParents(int minAge)
+        public bool OlderParents(int minAge)
         {
             this.Text = "Parents aged " + minAge + "+ at time of child's birth";
             FamilyTree ft = FamilyTree.Instance;
@@ -95,13 +95,22 @@ namespace FTAnalyzer.Forms
                     dsFam.Add(f);
                 }
             }
-            dgIndividuals.DataSource = dsInd;
-            dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
-            dgIndividuals.SelectionMode = DataGridViewSelectionMode.FullRowSelect; 
-            dgFamilies.DataSource = dsFam;
-            dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
-            dgFamilies.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgIndividuals.Rows[0].Selected = true; // force a selection to update both grids
+            if (dsInd.Count > 0)
+            {
+                dgIndividuals.DataSource = dsInd;
+                dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
+                dgIndividuals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgFamilies.DataSource = dsFam;
+                dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
+                dgFamilies.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgIndividuals.Rows[0].Selected = true; // force a selection to update both grids
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("You have no parents older than " + minAge + " at time of children's birth.");
+                return false;
+            }
         }
 
         private void dgIndividuals_SelectionChanged(object sender, EventArgs e)

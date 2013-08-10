@@ -1083,8 +1083,8 @@ namespace FTAnalyzer
                 } while ((result != DialogResult.Cancel) && (age < 13 || age > 90));
                 if(result == DialogResult.OK)
                 {
-                    frmInd.OlderParents(age);
-                    frmInd.Show();
+                    if(frmInd.OlderParents(age))
+                        frmInd.Show();
                 }
                 HourGlass(false);
             }
