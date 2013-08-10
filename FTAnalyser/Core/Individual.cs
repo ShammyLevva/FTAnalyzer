@@ -404,6 +404,20 @@ namespace FTAnalyzer
             set { familiesAsChild = value; }
         }
 
+        public int CensusFactCount
+        {
+            get
+            {
+                int censusFacts = 0;
+                foreach (Fact f in facts)
+                {
+                    if (f.FactType == Fact.CENSUS)
+                        censusFacts++;
+                }
+                return censusFacts;
+            }
+        }
+
         #endregion
 
         #region Boolean Tests

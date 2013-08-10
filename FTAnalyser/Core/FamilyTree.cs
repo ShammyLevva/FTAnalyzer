@@ -158,11 +158,30 @@ namespace FTAnalyzer
                 individuals[0].Name + " as starter person. Please wait.\n\n");
             SetRelations(individuals[0].GedcomID);
             xmlErrorbox.AppendText(PrintRelationCount());
+            CountCensusFacts();
             SetParishes();
             FixIDs();
             SetDataErrorTypes();
             _loading = false;
             _dataloaded = true;
+        }
+
+        private void CountCensusFacts()
+        {
+            int censusFacts = 0;
+            foreach (Individual ind in individuals)
+            {
+                censusFacts += ind.CensusFactCount;
+            }
+            if (censusFacts > 0)
+                xmlErrorbox.AppendText("\nFound " + censusFacts + " census facts in GEDCOM File.\n");
+            else
+            {
+                xmlErrorbox.AppendText("\nFound no census facts in GEDCOM File.\n");
+                xmlErrorbox.AppendText("This is probably because you have recorded census facts as notes\n");
+                xmlErrorbox.AppendText("This will mean that the census report will show everyone as not yet found on census\n");
+                xmlErrorbox.AppendText("and the Lost Cousins report will report no-one with a census needing entered to Lost Cousins\n");
+            }
         }
 
         private void AddOccupations(Individual individual)

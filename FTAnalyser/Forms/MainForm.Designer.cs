@@ -261,6 +261,7 @@
             this.BirthRegistrationToolStripMenuItem.Name = "BirthRegistrationToolStripMenuItem";
             this.BirthRegistrationToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.BirthRegistrationToolStripMenuItem.Text = "Birth Registrations";
+            this.BirthRegistrationToolStripMenuItem.Visible = false;
             this.BirthRegistrationToolStripMenuItem.Click += new System.EventHandler(this.BirthRegistrationToolStripMenuItem_Click);
             // 
             // deathRegistrationsToolStripMenuItem
@@ -268,6 +269,7 @@
             this.deathRegistrationsToolStripMenuItem.Name = "deathRegistrationsToolStripMenuItem";
             this.deathRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.deathRegistrationsToolStripMenuItem.Text = "Death Registrations";
+            this.deathRegistrationsToolStripMenuItem.Visible = false;
             this.deathRegistrationsToolStripMenuItem.Click += new System.EventHandler(this.deathRegistrationsToolStripMenuItem_Click);
             // 
             // marriageRegistrationsToolStripMenuItem
@@ -276,12 +278,14 @@
             this.marriageRegistrationsToolStripMenuItem.Name = "marriageRegistrationsToolStripMenuItem";
             this.marriageRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.marriageRegistrationsToolStripMenuItem.Text = "Marriage Registrations";
+            this.marriageRegistrationsToolStripMenuItem.Visible = false;
             this.marriageRegistrationsToolStripMenuItem.Click += new System.EventHandler(this.marriageRegistrationsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(189, 6);
+            this.toolStripSeparator2.Visible = false;
             // 
             // childAgeProfilesToolStripMenuItem
             // 
