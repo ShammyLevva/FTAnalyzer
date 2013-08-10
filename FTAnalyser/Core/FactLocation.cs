@@ -14,9 +14,6 @@ namespace FTAnalyzer
 		public static readonly string SCOTLAND = "Scotland", ENGLAND = "England", CANADA = "Canada", UNITED_STATES = "United States",
 			WALES = "Wales", IRELAND = "Ireland", UNITED_KINGDOM = "United Kingdom", NEW_ZEALAND = "New Zealand", AUSTRALIA = "Australia", 
             UNKNOWN_COUNTRY = "Unknown", ENG_WALES = "England & Wales";
-		public static readonly string ABERDEENSHIRE = "Aberdeenshire", AYRSHIRE = "Ayrshire", KINCARDINESHIRE = "Kincardineshire",
-				LANARKSHIRE = "Lanarkshire", BANFFSHIRE = "Banffshire", ANGUS = "Angus", MIDLOTHIAN = "Midlothian", FIFE = "Fife",
-				MIDDLESEX = "Middlesex", LANCASHIRE = "Lancashire";
 		
 		public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, PARISH = 2, ADDRESS = 3, PLACE = 4;
 
@@ -30,6 +27,7 @@ namespace FTAnalyzer
 		internal string parishID;
 		internal string regionID;
 		private int level;
+        private bool knownCountry;
 
 		private List<Individual> individuals;
 		private static Dictionary<string, string> COUNTRY_TYPOS = new Dictionary<string, string>();
@@ -118,6 +116,7 @@ namespace FTAnalyzer
 			this.place = "";
 			this.parishID = null;
 			this.individuals = new List<Individual>();
+            this.knownCountry = false;
 		}
 
 		public FactLocation(string location) : this() {
@@ -169,11 +168,20 @@ namespace FTAnalyzer
 				ShiftRegionToParish();
 				SetRegionID();
                 SetFixedLocation();
+                CheckKnownLocation();
                 //string after = (parish + ", " + region + ", " + country).ToUpper().Trim();
                 //if (!before.Equals(after))
                 //    Console.WriteLine("Debug : '" + before + "'  converted to '" + after + "'");
 			}
 		}
+
+        private void CheckKnownLocation()
+        {
+            if (country.Equals(ENGLAND) || country.Equals(SCOTLAND) || country.Equals(WALES) || country.Equals(IRELAND) || 
+                country.Equals(UNITED_STATES) || country.Equals(UNITED_KINGDOM) || country.Equals(CANADA) ||
+                country.Equals(NEW_ZEALAND) || country.Equals(AUSTRALIA))
+                knownCountry = true;
+        }
 
 		#region Fix Location string routines
 		private void fixEmptyFields()
@@ -395,6 +403,11 @@ namespace FTAnalyzer
 		public string ParishID {
 			get { return parishID; }
 		}
+
+        public bool KnownCountry
+        {
+            get { return knownCountry; }
+        }
 
         public string FreeCenCountyCode
         {
