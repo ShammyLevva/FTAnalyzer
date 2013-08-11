@@ -39,7 +39,7 @@
     <TargetCulture>en</TargetCulture>
     <ProductName>FT Analyzer</ProductName>
     <PublisherName>FT Analyzer</PublisherName>
-    <MinimumRequiredVersion>2.0.0.3</MinimumRequiredVersion>
+    <MinimumRequiredVersion>2.0.0.4</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>4</ApplicationRevision>
