@@ -324,6 +324,7 @@
     <Content Include="Resources\FactLocationFixes.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Icon.png" />
     <Content Include="System.Data.SQLite.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
