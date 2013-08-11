@@ -44,17 +44,17 @@
       <RegionTypo from="Invernessshire" to="Inverness-shire" />
       <RegionTypo from="Kinrossshire"   to="Kinross-shire" />
       <RegionTypo from="Peeblesshire"   to="Peebles" />
-      <RegionType from="Forfarshire"    to="Angus" />
-      <RegionType from="Argyllshire"    to="Argyll" />
-      <RegionType from="Buteshire"      to="Bute" />
-      <RegionType from="Morayshire"     to="Moray" />
-      <RegionType from="Nairnshire"     to="Nairn" />
-      <RegionType from="Roxburghshire"  to="Roxburgh" />
-      <RegionType from="Selkirkshire"   to="Selkirk" />
-      <RegionType from="Caithness-shire" to="Caithness" />
-      <RegionType from="Caithnessshire"  to="Caithness" />
-      <RegionType from="Haddingtonshire" to="East Lothian" />
-      <RegionType from="Linlithgowshire" to="West Lothian" />
+      <RegionTypo from="Forfarshire"    to="Angus" />
+      <RegionTypo from="Argyllshire"    to="Argyll" />
+      <RegionTypo from="Buteshire"      to="Bute" />
+      <RegionTypo from="Morayshire"     to="Moray" />
+      <RegionTypo from="Nairnshire"     to="Nairn" />
+      <RegionTypo from="Roxburghshire"  to="Roxburgh" />
+      <RegionTypo from="Selkirkshire"   to="Selkirk" />
+      <RegionTypo from="Caithness-shire" to="Caithness" />
+      <RegionTypo from="Caithnessshire"  to="Caithness" />
+      <RegionTypo from="Haddingtonshire" to="East Lothian" />
+      <RegionTypo from="Linlithgowshire" to="West Lothian" />
       
       <!-- England -->
       <RegionTypo from="Beds"          to="Bedfordshire" />
