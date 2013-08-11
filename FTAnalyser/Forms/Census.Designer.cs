@@ -189,6 +189,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dgCensus);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Census";
             this.Text = "Census Records to search for";
             this.TextChanged += new System.EventHandler(this.Census_TextChanged);

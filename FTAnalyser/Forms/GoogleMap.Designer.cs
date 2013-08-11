@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GoogleMap));
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.labMapLevel = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -61,6 +62,7 @@
             this.ClientSize = new System.Drawing.Size(886, 506);
             this.Controls.Add(this.labMapLevel);
             this.Controls.Add(this.webBrowser);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GoogleMap";
             this.Text = "Google Map";
             this.ResumeLayout(false);

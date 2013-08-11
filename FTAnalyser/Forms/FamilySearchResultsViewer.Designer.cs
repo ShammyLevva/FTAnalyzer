@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FamilySearchResultsViewer));
             this.lbResults = new System.Windows.Forms.ListBox();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.tooltips = new System.Windows.Forms.ToolTip(this.components);
@@ -118,6 +119,7 @@
             this.Controls.Add(this.upFamilySearchResultsFilter);
             this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.lbResults);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FamilySearchResultsViewer";
             this.Text = "FamilySearchResultsViewer";
             ((System.ComponentModel.ISupportInitialize)(this.upFamilySearchResultsFilter)).EndInit();

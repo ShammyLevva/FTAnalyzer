@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BingOSMap));
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.labMapLevel = new System.Windows.Forms.Label();
             this.labTOU = new System.Windows.Forms.Label();
@@ -75,6 +76,7 @@
             this.Controls.Add(this.labTOU);
             this.Controls.Add(this.labMapLevel);
             this.Controls.Add(this.webBrowser);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BingOSMap";
             this.Text = "Bing OS Map";
             this.ResumeLayout(false);

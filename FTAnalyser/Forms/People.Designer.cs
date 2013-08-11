@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(People));
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
             this.dgFamilies = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
@@ -64,6 +65,7 @@
             this.ClientSize = new System.Drawing.Size(1038, 583);
             this.Controls.Add(this.dgFamilies);
             this.Controls.Add(this.dgIndividuals);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "People";
             this.Text = "Individuals & Families";
             this.Resize += new System.EventHandler(this.People_Resize);

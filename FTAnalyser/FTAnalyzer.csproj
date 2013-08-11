@@ -310,7 +310,6 @@
     <Compile Include="Comparators\Location\Registration\LocationComparator.cs" />
     <Compile Include="Comparators\Location\Registration\MultiComparator.cs" />
     <Compile Include="Comparators\Location\Registration\NameComparator.cs" />
-    <Content Include="FTAnalyzer.ico" />
     <Content Include="Printing.DataGridViewPrint.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

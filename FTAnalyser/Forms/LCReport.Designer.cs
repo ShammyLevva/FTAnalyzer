@@ -159,6 +159,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dgReportSheet);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LCReport";
             this.Text = "Census Report Result";
             ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).EndInit();
