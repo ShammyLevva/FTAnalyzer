@@ -103,8 +103,8 @@ namespace FTAnalyzer
                         FINDMYPAST_LOOKUP.Add(county, result);
                     }
                 }
-                FMP_All_Counties = new Tuple<string,string>("any_basic_county","Any");
             }
+            FMP_All_Counties = new Tuple<string, string>("any_basic_county", "Any");
 		}
 		
 		public FactLocation() {
