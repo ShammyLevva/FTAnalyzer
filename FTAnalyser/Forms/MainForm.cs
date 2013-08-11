@@ -17,7 +17,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.6.0.0";
+        private string VERSION = "2.0.0.0";
         private bool _checkForUpdatesEnabled = true;
         private bool _showNoUpdateMessage = false;
         private System.Threading.Timer _timerCheckForUpdates;
