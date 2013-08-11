@@ -182,9 +182,9 @@ namespace FTAnalyzer.Forms
                 IDisplayLCReport person = (IDisplayLCReport)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
                 int censusYear = (1841 + (e.ColumnIndex - c1841ColumnIndex) * 10);
                 FamilyTree ft = FamilyTree.Instance;
-                ft.SearchCensus(censusYear, ft.getIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
+                string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
+                ft.SearchCensus(censusCountry, censusYear, ft.getIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
             }
-
         }
     }
 }

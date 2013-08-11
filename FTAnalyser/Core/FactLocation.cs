@@ -423,11 +423,32 @@ namespace FTAnalyzer
 			get { return parishID; }
 		}
 
-        public bool KnownCountry
+        public bool isKnownCountry
         {
             get { return knownCountry; }
         }
 
+        public bool isUnitedKingdom
+        {
+            get
+            {
+                return country.Equals(UNITED_KINGDOM) || country.Equals(ENG_WALES) || country.Equals(ENGLAND) || country.Equals(WALES) || country.Equals(SCOTLAND);
+            }
+        }
+
+        public string CensusCountry
+        {
+            get
+            {
+                if (isUnitedKingdom)
+                    return UNITED_KINGDOM;
+                else if (country.Equals(IRELAND) || country.Equals(UNITED_STATES) || country.Equals(CANADA))
+                    return country;
+                else
+                    return UNKNOWN_COUNTRY;
+            }
+        }
+        
         public string FreeCenCountyCode
         {
             get
@@ -576,7 +597,6 @@ namespace FTAnalyzer
 		public override int GetHashCode()
 		{
 			return base.GetHashCode();
-		} 
-
-	}
+		}
+    }
 }

@@ -13,6 +13,7 @@ namespace Controls
     public partial class CensusDateSelector : UserControl
     {
         private string country = FactLocation.SCOTLAND;
+        private string censusCountry = FactLocation.UNITED_KINGDOM;
         private CensusDate defaultDate = CensusDate.UKCENSUS1881;
         private CensusDate previousDate;
         private string previousCountry;
@@ -42,6 +43,7 @@ namespace Controls
                     cbCensusDate.Items.Add(CensusDate.UKCENSUS1891);
                     cbCensusDate.Items.Add(CensusDate.UKCENSUS1901);
                     cbCensusDate.Items.Add(CensusDate.UKCENSUS1911);
+                    censusCountry = FactLocation.UNITED_KINGDOM;
                     if (previousCountry == FactLocation.SCOTLAND || previousCountry == FactLocation.ENGLAND ||
                        previousCountry == FactLocation.WALES || previousCountry == FactLocation.UNITED_KINGDOM)
                         defaultDate = previousDate;
@@ -64,6 +66,7 @@ namespace Controls
                     cbCensusDate.Items.Add(CensusDate.USCENSUS1910);
                     cbCensusDate.Items.Add(CensusDate.USCENSUS1920);
                     cbCensusDate.Items.Add(CensusDate.USCENSUS1930);
+                    censusCountry = FactLocation.UNITED_STATES;
                     if (previousCountry == FactLocation.UNITED_STATES)
                         defaultDate = previousDate;
                     else
@@ -79,6 +82,7 @@ namespace Controls
                     cbCensusDate.Items.Add(CensusDate.CANADACENSUS1906);
                     cbCensusDate.Items.Add(CensusDate.CANADACENSUS1911);
                     cbCensusDate.Items.Add(CensusDate.CANADACENSUS1906);
+                    censusCountry = FactLocation.CANADA;
                     if (previousCountry == FactLocation.CANADA)
                         defaultDate = previousDate;
                     else
@@ -104,11 +108,16 @@ namespace Controls
             get { return defaultDate; }
         }
 
+        public string CensusCountry
+        {
+            get { return censusCountry; }
+        }
+        #endregion
+
         public void RevertToDefaultDate()
         {
             cbCensusDate.Text = defaultDate.ToString();
         }
-        #endregion
 
         private void SetControlWidth()
         {

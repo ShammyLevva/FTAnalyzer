@@ -311,14 +311,13 @@ namespace FTAnalyzer
                 censusComparator.addComparator(new LocationComparator(FactLocation.PARISH));
             censusComparator.addComparator(new DateComparator());
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
-            
             if (ckbNoLocations.Checked)
-                census = new Census();
+                census = new Census(cenDate.CensusCountry);
             else
-                census = new Census(censusCountry.GetLocation);
+                census = new Census(cenDate.CensusCountry, censusCountry.GetLocation);
 
             census.setupCensus(censusRP, censusDate, false, ckbCensusResidence.Checked, false, (int)udAgeFilter.Value);
-            census.Text = censusDate.StartDate.Year.ToString() + " Census Records to search for";
+            census.Text = "People missing a " + censusDate.StartDate.Year.ToString() + " " + cenDate.Country + " Census Record that you can search for";
             census.Show();
         }
 
@@ -395,14 +394,16 @@ namespace FTAnalyzer
             if (ckbLCIgnoreCountry.Checked) // only add the parish location comparator if we are using locations
             {
                 filter = new TrueFilter<Registration>(); // if we are ignoring locations then ignore what was passed as a filter
-                census = new Census();
+                census = new Census(location);
             }
             else
             {
                 if(location == FactLocation.ENG_WALES)
-                    census = new Census(new FactLocation(FactLocation.ENGLAND), new FactLocation(FactLocation.WALES));
+                    census = new Census(FactLocation.UNITED_KINGDOM, new FactLocation(FactLocation.ENGLAND), new FactLocation(FactLocation.WALES));
+                else if(location == FactLocation.SCOTLAND)
+                    census = new Census(FactLocation.UNITED_KINGDOM, new FactLocation(location));
                 else
-                    census = new Census(new FactLocation(location));
+                    census = new Census(location, new FactLocation(location));
                 censusComparator.addComparator(new LocationComparator(FactLocation.COUNTRY));
             }
             if (ckbLCIgnoreCountry.Checked)

@@ -1238,15 +1238,15 @@ namespace FTAnalyzer
 
         #region Census Searching
 
-        public void SearchCensus(int censusYear, Individual person, int censusProvider)
+        public void SearchCensus(string censusCountry, int censusYear, Individual person, int censusProvider)
         {
             string uri = null;
          
             switch (censusProvider)
             {
-                case 0: uri = BuildAncestryQuery(censusYear, person); break;
-                case 1: uri = BuildFindMyPastQuery(censusYear, person); break;
-                case 2: uri = BuildFreeCenQuery(censusYear, person); break;
+                case 0: uri = BuildAncestryQuery(censusCountry, censusYear, person); break;
+                case 1: uri = BuildFindMyPastQuery(censusCountry, censusYear, person); break;
+                case 2: uri = BuildFreeCenQuery(censusCountry, censusYear, person); break;
                 case 3:
                     string country = person.BestLocation(new FactDate(censusYear.ToString())).Country;
                     uri = BuildFamilySearchQuery(country, censusYear, person); break;
@@ -1291,13 +1291,23 @@ namespace FTAnalyzer
             return path.ToString();
         }
 
-        private string BuildAncestryQuery(int censusYear, Individual person)
+        private string BuildAncestryQuery(string censusCountry, int censusYear, Individual person)
         {
             UriBuilder uri = new UriBuilder();
             uri.Host = "search.ancestry.co.uk";
             uri.Path = "cgi-bin/sse.dll";
             StringBuilder query = new StringBuilder();
-            query.Append("gl=" + censusYear + "uki&");
+            if(censusCountry.Equals(FactLocation.UNITED_KINGDOM))
+                query.Append("gl=" + censusYear + "uki&");
+            else if (censusCountry.Equals(FactLocation.IRELAND))
+            {
+                MessageBox.Show("Sorry searching the Ireland census on Ancestry for " + censusYear + " is not supported by FTAnalyzer at this time");
+                return null;
+            }
+            else if (censusCountry.Equals(FactLocation.UNITED_STATES))
+                query.Append("db=" + censusYear + "usfedcenancestry&");
+            else if (censusCountry.Equals(FactLocation.CANADA))
+                query.Append("db=" + censusYear + "canada&");
             query.Append("rank=1&");
             query.Append("new=1&");
             query.Append("so=3&");
@@ -1354,8 +1364,13 @@ namespace FTAnalyzer
             return uri.ToString();
         }
 
-        private string BuildFreeCenQuery(int censusYear, Individual person)
+        private string BuildFreeCenQuery(string censusCountry, int censusYear, Individual person)
         {
+            if (!censusCountry.Equals(FactLocation.UNITED_KINGDOM))
+            {
+                MessageBox.Show("Sorry only UK searches can be done on FreeCEN.");
+                return null;
+            }
             FactDate censusFactDate = new FactDate(censusYear.ToString());
             UriBuilder uri = new UriBuilder();
             uri.Host = "www.freecen.org.uk";
@@ -1426,16 +1441,13 @@ namespace FTAnalyzer
             return uri.ToString();
         }
 
-        private string BuildFindMyPastQuery(int censusYear, Individual person)
+        private string BuildFindMyPastQuery(string censusCountry, int censusYear, Individual person)
         {
-            //POST /CensusPersonSearchResultServlet?censusYear=1881
-            //[truncated] recordPosition=0&pageDirection=&startNewSearch=startNewSearch&basicSearch=false&
-            //    route=&censusYear=1881&forenames=Alexander&fns=fns&lastName=Bisset&yearOfBirth=1863&
-            //    yearOfBirthVariation=2&occupation=&birthPlace=aberdeen&residenc
-
-            //MessageBox.Show("Find My Past searching coming soon in a future version");
-            //return null;
-
+            if (!censusCountry.Equals(FactLocation.UNITED_KINGDOM))
+            {
+                MessageBox.Show("Sorry non UK census searching of Find My Past isn't supported in this version of FTAnalyzer");
+                return null;
+            }
             FactDate censusFactDate = new FactDate(censusYear.ToString());
             UriBuilder uri = new UriBuilder();
             uri.Host = "www.findmypast.co.uk";

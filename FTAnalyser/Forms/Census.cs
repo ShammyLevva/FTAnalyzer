@@ -15,12 +15,13 @@ namespace FTAnalyzer.Forms
         private Dictionary<int, DataGridViewCellStyle> rowStyles;
         private int numFamilies;
         private FactDate censusDate;
+        private string censusCountry;
         private FactLocation location;
         private FactLocation location2;
 
         private PrintingDataGridViewProvider printProvider;
 
-        public Census()
+        public Census(string censusCountry)
         {
             InitializeComponent();
 
@@ -32,16 +33,17 @@ namespace FTAnalyzer.Forms
                 new TitlePrintBlock(this.Text), null, null);
 
             printDocument.DefaultPageSettings.Landscape = true;
+            this.censusCountry = censusCountry;
         }
 
-        public Census(FactLocation location)
-            : this()
+        public Census(string censusCountry, FactLocation location)
+            : this(censusCountry)
         {
             this.location = location;
         }
 
-        public Census(FactLocation location, FactLocation location2)
-            : this()
+        public Census(string censusCountry, FactLocation location, FactLocation location2)
+            : this(censusCountry)
         {
             this.location = location;
             this.location2 = location2;
@@ -60,10 +62,22 @@ namespace FTAnalyzer.Forms
                 foreach (Individual i in r.Members)
                 {
                     if (i.getAge(date).MinAge <= maxAge)
-                        if(location == null || r.FilterCountry.Equals(location))
+                        if (location == null)
+                        {  // no location check TODO check if known location vs censusCountry (United Kingdom, Ireland, United States, Canada)
+                            if(!r.FilterCountry.isKnownCountry)
+                                ds.Add(new DisplayCensus(pos++, r, i)); // if we don't recognise the country and we aren't checking then ignore it
+                            else  if(censusCountry == FactLocation.UNITED_KINGDOM && (r.FilterCountry.isUnitedKingdom))
+                                ds.Add(new DisplayCensus(pos++, r, i));
+                            else if (censusCountry == FactLocation.IRELAND || censusCountry == FactLocation.UNITED_STATES || censusCountry == FactLocation.CANADA)
+                            {
+                                if(r.FilterCountry.Equals(censusCountry))
+                                    ds.Add(new DisplayCensus(pos++, r, i));
+                            }
+                        }
+                        else if(r.FilterCountry.Equals(location) || (location2 != null && r.FilterCountry.Equals(location2)))
+                        {
                             ds.Add(new DisplayCensus(pos++, r, i));
-                        else if(location2 != null && r.FilterCountry.Equals(location2))
-                            ds.Add(new DisplayCensus(pos++, r, i));
+                        }
                 }
             }
             dgCensus.DataSource = ds;
@@ -236,7 +250,7 @@ namespace FTAnalyzer.Forms
         {
             DisplayCensus ds = dgCensus.CurrentRow == null ? null : (DisplayCensus)dgCensus.CurrentRow.DataBoundItem;
             FamilyTree ft = FamilyTree.Instance;
-            ft.SearchCensus(censusDate.StartDate.Year, ds.Individual, cbCensusSearchProvider.SelectedIndex);
+            ft.SearchCensus(censusCountry, censusDate.StartDate.Year, ds.Individual, cbCensusSearchProvider.SelectedIndex);
         }
     }
 }
