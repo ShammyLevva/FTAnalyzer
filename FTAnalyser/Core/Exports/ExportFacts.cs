@@ -60,5 +60,15 @@ namespace FTAnalyzer
         {
             get { return f.Location.SortableLocation; }
         }
+
+        public DateTime StartDate
+        {
+            get { return f.FactDate.StartDate; }
+        }
+
+        public DateTime EndDate
+        {
+            get { return f.FactDate.EndDate; }
+        }
     }
 }
