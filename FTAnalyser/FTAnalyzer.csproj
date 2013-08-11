@@ -315,6 +315,7 @@
     <Content Include="Resources\BingOSMaps.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\FTAnalyzer.ico" />
     <Content Include="Resources\GoogleMaps.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -324,7 +325,6 @@
     <Content Include="Resources\FactLocationFixes.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Icon.png" />
     <Content Include="System.Data.SQLite.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
