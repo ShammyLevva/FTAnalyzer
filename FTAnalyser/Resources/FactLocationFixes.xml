@@ -296,7 +296,7 @@
       <CountryToRegion region="Nairnshire"          country="Scotland" regionID="Nairn" />
       <CountryToRegion region="Orkney"              country="Scotland" regionID="Orkney" />
       <CountryToRegion region="Peebles"             country="Scotland" regionID="Peebles" />
-      <CountryToRegion region="Perthshire"          country="Scotland" regionID="Perth" />
+      <CountryToRegion region="Perthshire"          country="Scotland" regionID="Perthshire" />
       <CountryToRegion region="Renfrewshire"        country="Scotland" regionID="Renfrew" />
       <CountryToRegion region="Ross and Cromarty"   country="Scotland" regionID="Ross and Cromarty" />
       <CountryToRegion region="Roxburgh"            country="Scotland" regionID="Roxburgh" />
@@ -554,6 +554,7 @@
       <Lookup code="CON" county="Cornwall" />
       <Lookup code="CUL" county="Cumberland" />
       <Lookup code="DBY" county="Derbyshire" />
+      <Lookup code="DEN" county="Denbigh" />
       <Lookup code="DEV" county="Devon" />
       <Lookup code="DON" county="Donegal" />
       <Lookup code="DOR" county="Dorset" />
@@ -564,11 +565,10 @@
       <Lookup code="DUR" county="Durham" />
       <Lookup code="ELN" county="East Lothian" />
       <Lookup code="ERY" county="East Yorkshire" />
-      <Lookup code="ENG" county="England" />
       <Lookup code="ESS" county="Essex" />
       <Lookup code="FER" county="Fermanagh" />
       <Lookup code="FIF" county="Fife" />
-      <Lookup code="FLN" county="Flintshire" />
+      <Lookup code="FLN" county="Flint" />
       <Lookup code="GAL" county="Galway" />
       <Lookup code="GLA" county="Glamorgan" />
       <Lookup code="GLS" county="Gloucestershire" />
@@ -620,8 +620,8 @@
       <Lookup code="OKI" county="Orkney" />
       <Lookup code="OXF" county="Oxfordshire" />
       <Lookup code="PEE" county="Peebles" />
-      <Lookup code="PEM" county="Pembrokeshire" />
-      <Lookup code="PER" county="Perth" />
+      <Lookup code="PEM" county="Pembroke" />
+      <Lookup code="PER" county="Perthshire" />
       <Lookup code="RAD" county="Radnor" />
       <Lookup code="RFW" county="Renfrewshire" />
       <Lookup code="ROS" county="Roscommon" />
@@ -635,14 +635,18 @@
       <Lookup code="SAL" county="Shropshire" />
       <Lookup code="SLI" county="Sligo" />
       <Lookup code="SOM" county="Somerset" />
+      <Lookup code="STI" county="Stirling" />
       <Lookup code="STS" county="Staffordshire" />
       <Lookup code="SFK" county="Suffolk" />
       <Lookup code="SRY" county="Surrey" />
       <Lookup code="SSX" county="Sussex" />
+      <Lookup code="SUT" county="Sutherland" />
       <Lookup code="TYR" county="Tyrone" />
       <Lookup code="UNK" county="Unknown" />
       <Lookup code="WAL" county="Wales"    />
+      <Lookup code="WAR" county="Warwickshire" />
       <Lookup code="WAT" county="Waterford" />
+      <Lookup code="WES" county="Westmorland" />
       <Lookup code="WLN" county="West Lothian" />
       <Lookup code="WRY" county="West Yorkshire" />
       <Lookup code="WEM" county="Westmeath" />
@@ -650,6 +654,7 @@
       <Lookup code="WIC" county="Wicklow" />
       <Lookup code="WIG" county="Wigtownshire" />
       <Lookup code="WIL" county="Wiltshire" />
+      <Lookup code="WOR" county="Worcestershire" />
       <Lookup code="YKS" county="Yorkshire" />
     </FreeCen>
     <FindMyPast>
@@ -734,10 +739,9 @@
       <Lookup country="England"  code="Northumberland                          :63                            " county="Northumberland" />
       <Lookup country="England"  code="Nottinghamshire                         :31                            " county="Nottinghamshire" />
       <Lookup country="England"  code="Oxfordshire                             :39                            " county="Oxfordshire" />
-      <Lookup country="England"  code="Oxfordshire                             :39                            " county="Oxford" />
       <Lookup country="England"  code="Rutlandshire                            :55                            " county="Rutland" />
       <Lookup country="England"  code="Shropshire                              :16                            " county="Shropshire" />
-      <Lookup country="England"  code="Somersetshire                           :25                            " county="Somersetshire" />
+      <Lookup country="England"  code="Somersetshire                           :25                            " county="Somerset" />
       <Lookup country="England"  code="Staffordshire                           :17                            " county="Staffordshire" />
       <Lookup country="England"  code="Suffolk                                 :34                            " county="Suffolk" />
       <Lookup country="England"  code="Surrey                                  :3,4                           " county="Surrey" />
