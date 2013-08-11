@@ -89,7 +89,7 @@ namespace FTAnalyzer
             List<Form> toClose = new List<Form>();
             foreach (Form f in Application.OpenForms)
             {
-                if (f is Forms.People || f is Forms.LCReport)
+                if (!object.ReferenceEquals(f, this))
                     toClose.Add(f);
             }
             foreach (Form f in toClose)
