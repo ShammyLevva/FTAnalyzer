@@ -1501,16 +1501,17 @@ namespace FTAnalyzer
             }
             if (person.BirthLocation != null)
             {
-                string location = person.BirthLocation.Parish;
+                query.Append("birthPlace=" + HttpUtility.UrlEncode(person.BirthLocation.Parish) + "&");
                 Tuple<string, string> area = person.BirthLocation.FindMyPastCountyCode;
-                query.Append("birthPlace=" + HttpUtility.UrlEncode(location) + "&");
-                query.Append("country=" + HttpUtility.UrlEncode(area.Item1) + "&");
-                query.Append("coIdList=" + HttpUtility.UrlEncode(area.Item2));
+                if (area != null)
+                {
+                    query.Append("country=" + HttpUtility.UrlEncode(area.Item1) + "&");
+                    query.Append("coIdList=" + HttpUtility.UrlEncode(area.Item2));
+                }
             }
             uri.Query = query.ToString();
             return uri.ToString();
         }
         #endregion
-
     }
 }

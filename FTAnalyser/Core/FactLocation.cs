@@ -38,7 +38,6 @@ namespace FTAnalyzer
 		private static Dictionary<string, string> REGION_IDS = new Dictionary<string, string>();
         private static Dictionary<string, string> FREECEN_LOOKUP = new Dictionary<string, string>();
         private static Dictionary<string, Tuple<string, string>> FINDMYPAST_LOOKUP = new Dictionary<string, Tuple<string,string>>();
-        private static Tuple<string, string> FMP_All_Counties;
 		
 		static FactLocation() {
 			// load conversions from XML file
@@ -104,7 +103,6 @@ namespace FTAnalyzer
                     }
                 }
             }
-            FMP_All_Counties = new Tuple<string, string>("any_basic_county", "Any");
 		}
 		
 		public FactLocation() {
@@ -448,8 +446,6 @@ namespace FTAnalyzer
             {
                 Tuple<string,string> result;
                 FINDMYPAST_LOOKUP.TryGetValue(region, out result);
-                if (result == null)
-                    result = FMP_All_Counties;
                 return result;
             }
         }
