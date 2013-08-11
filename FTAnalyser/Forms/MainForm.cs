@@ -17,7 +17,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.0.0.0";
+        private string VERSION = "2.0.0.0 (Local)";
         private bool _checkForUpdatesEnabled = true;
         private bool _showNoUpdateMessage = false;
         private System.Threading.Timer _timerCheckForUpdates;
@@ -32,6 +32,18 @@ namespace FTAnalyzer
             InitializeComponent();
             ft.XmlErrorBox = rtbOutput;
             tabSelector.TabPages.RemoveByKey("tabFamilySearch");
+            VERSION = PublishVersion();
+        }
+
+        private string PublishVersion()
+        {
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            {
+                Version ver = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
+                return string.Format("{0}.{1}.{2}.{3}", ver.Major, ver.Minor, ver.Build, ver.Revision);
+            }
+            else
+                return VERSION;
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
