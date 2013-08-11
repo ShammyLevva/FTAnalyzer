@@ -31,17 +31,18 @@
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
+    <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://ftanalyzer.codeplex.com/releases/clickonce/</InstallUrl>
     <SupportUrl>http://ftanalyzer.codeplex.com/documentation/</SupportUrl>
     <ErrorReportUrl>http://ftanalyzer.codeplex.com/workitem/list/basic</ErrorReportUrl>
     <TargetCulture>en</TargetCulture>
     <ProductName>FT Analyzer</ProductName>
-    <PublisherName>Alexander Bisset</PublisherName>
+    <PublisherName>FT Analyzer</PublisherName>
+    <MinimumRequiredVersion>2.0.0.3</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
