@@ -1443,6 +1443,8 @@ namespace FTAnalyzer
 
         private string BuildFindMyPastQuery(string censusCountry, int censusYear, Individual person)
         {
+            // bad  http://www.findmypast.co.uk/CensusPersonSearchResultServlet?basicSearch=false&censusYear=1881&occupation=&otherForenames=&otherLastName=&pageDirection=&recordPosition=0&residence=&route=&searchHouseholds=6,15&searchInstitutions=9&searchVessels=11,12&sortOrder=nameAsc&startNewSearch=startNewSearch&forenames=Michael&fns=fns&lastName=Tebbutt&sns=sns&yearOfBirth=1867&yearOfBirthVariation=1&birthPlace=Streatham&country=England&coIdList=Surrey++++++++++++++++++++++++++++++++++%3a3%2c4+++++++++++++++++++++++++++
+            // good http://www.findmypast.co.uk/CensusPersonSearchResultServlet?basicSearch=false&censusYear=1881&occupation=&otherForenames=&otherLastName=&pageDirection=&recordPosition=0&residence=&route=&searchHouseholds=6,15&searchInstitutions=9&searchVessels=11,12&sortOrder=nameAsc&startNewSearch=startNewSearch&forenames=C&fns=fns&lastName=Whitethread&sns=sns&yearOfBirth=1867&yearOfBirthVariation=1&birthPlace=Streatham&country=England&coIdList=Surrey++++++++++++++++++++++++++++++++++%3a3%2c4+++++++++++++++++++++++++++
             if (!censusCountry.Equals(FactLocation.UNITED_KINGDOM))
             {
                 MessageBox.Show("Sorry non UK census searching of Find My Past isn't supported in this version of FTAnalyzer");
@@ -1477,16 +1479,20 @@ namespace FTAnalyzer
                 query.Append("forenames=" + HttpUtility.UrlEncode(forenames) + "&");
                 query.Append("fns=fns&");
             }
+            else
+            {
+                query.Append("forenames=&fns=fns&");
+            }
             string surname = person.SurnameAtDate(censusFactDate);
             if (surname != "?" && surname.ToUpper() != "UNKNOWN")
             {
                 query.Append("lastName=" + HttpUtility.UrlEncode(surname) + "&");
                 query.Append("sns=sns&");
             }
-            //if (person.MarriedName != "?" && person.MarriedName.ToUpper() != "UNKNOWN" && person.MarriedName != person.Surname)
-            //{
-            //    query.Append("otherLastName=" + HttpUtility.UrlEncode(surname) + "&");
-            //}
+            else
+            {
+                query.Append("lastName=&sns=sns&");
+            }
             if (person.BirthDate != FactDate.UNKNOWN_DATE)
             {
                 int startYear = person.BirthDate.StartDate.Year;
@@ -1511,6 +1517,10 @@ namespace FTAnalyzer
                 query.Append("yearOfBirth=" + year + "&");
                 query.Append("yearOfBirthVariation=" + range + "&");
             }
+            else
+            {
+                query.Append("yearOfBirth=&yearOfBirthVariation=&");
+            }
             if (person.BirthLocation != null)
             {
                 query.Append("birthPlace=" + HttpUtility.UrlEncode(person.BirthLocation.Parish) + "&");
@@ -1520,6 +1530,14 @@ namespace FTAnalyzer
                     query.Append("country=" + HttpUtility.UrlEncode(area.Item1) + "&");
                     query.Append("coIdList=" + HttpUtility.UrlEncode(area.Item2));
                 }
+                else
+                {
+                    query.Append("country=&coIdList=");
+                }
+            }
+            else
+            {
+                query.Append("birthPlace=&country=&coIdList=");
             }
             uri.Query = query.ToString();
             return uri.ToString();
