@@ -12,12 +12,13 @@ using FTAnalyzer.Utilities;
 using FTAnalyzer.Forms;
 using System.Data.SQLite;
 using System.Diagnostics;
+using System.Drawing.Printing;
 
 namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.0.0.4";
+        private string VERSION = "2.0.1.0";
         private bool _checkForUpdatesEnabled = false;
         private bool _showNoUpdateMessage = false;
         private System.Threading.Timer _timerCheckForUpdates;
@@ -123,7 +124,7 @@ namespace FTAnalyzer
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            printToolStripMenuItem.Enabled = false;
+            mnuPrint.Enabled = false;
             if (ft.Loading)
             {
                 tabSelector.SelectedTab = tabDisplayProgress;
@@ -151,6 +152,7 @@ namespace FTAnalyzer
                     SortableBindingList<IDisplayIndividual> list = ft.AllDisplayIndividuals;
                     dgIndividuals.DataSource = list;
                     dgIndividuals.Sort(dgIndividuals.Columns["IndividualID"], ListSortDirection.Ascending);
+                    mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
                 else if (tabSelector.SelectedTab == tabFamilies)
@@ -158,6 +160,7 @@ namespace FTAnalyzer
                     SortableBindingList<IDisplayFamily> list = ft.AllDisplayFamilies;
                     dgFamilies.DataSource = list;
                     dgFamilies.Sort(dgFamilies.Columns["FamilyGed"], ListSortDirection.Ascending);
+                    mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
                 else if (tabSelector.SelectedTab == tabOccupations)
@@ -165,6 +168,7 @@ namespace FTAnalyzer
                     SortableBindingList<IDisplayOccupation> list = ft.AllDisplayOccupations;
                     dgOccupations.DataSource = list;
                     dgOccupations.Sort(dgOccupations.Columns["Occupation"], ListSortDirection.Ascending);
+                    mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
                 else if (tabSelector.SelectedTab == tabCensus)
@@ -206,17 +210,20 @@ namespace FTAnalyzer
                 {
                     List<DataError> errors =  ft.DataErrors(ckbDataErrors);
                     dgDataErrors.DataSource = errors;
+                    mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + errors.Count;
                 }
                 else if (tabSelector.SelectedTab == tabLooseDeaths)
                 {
                     SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.GetLooseDeaths();
                     dgLooseDeaths.DataSource = looseDeathList;
+                    mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + looseDeathList.Count;
                 }
                 else if (tabSelector.SelectedTab == tabLocations)
                 {
                     tsCountLabel.Text = "";
+                    mnuPrint.Enabled = true;
                     List<IDisplayLocation> countries = ft.AllCountries;
                     List<IDisplayLocation> regions = ft.AllRegions;
                     List<IDisplayLocation> parishes = ft.AllParishes;
@@ -782,7 +789,7 @@ namespace FTAnalyzer
             foreach (DataGridViewColumn c in dgTreeTops.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = "Count : " + treeTopsList.Count;
-            printToolStripMenuItem.Enabled = true;
+            mnuPrint.Enabled = true;
             HourGlass(false);
         }
 
@@ -796,7 +803,7 @@ namespace FTAnalyzer
             foreach (DataGridViewColumn c in dgWarDead.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = "Count : " + warDeadList.Count;
-            printToolStripMenuItem.Enabled = true;
+            mnuPrint.Enabled = true;
             HourGlass(false);
         }
 
@@ -810,7 +817,7 @@ namespace FTAnalyzer
             foreach (DataGridViewColumn c in dgWarDead.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = "Count : " + warDeadList.Count;
-            printToolStripMenuItem.Enabled = true;
+            mnuPrint.Enabled = true;
             HourGlass(false);
         }
 
@@ -827,34 +834,69 @@ namespace FTAnalyzer
                 censusCountry.Enabled = true;
         }
 
-        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        private void mnuPrint_Click(object sender, EventArgs e)
         {
+            printDocument = new PrintDocument();
             printDocument.DefaultPageSettings.Margins =
-               new System.Drawing.Printing.Margins(40, 40, 40, 40);
+               new System.Drawing.Printing.Margins(20, 20, 40, 40);
             printDocument.DefaultPageSettings.Landscape = true;
+            printDialog.PrinterSettings.DefaultPageSettings.Landscape = true;
 
-            if (tabSelector.SelectedTab == tabTreetops)
+            if (tabSelector.SelectedTab == tabIndividuals)
             {
-                PrintingDataGridViewProvider printProvider = PrintingDataGridViewProvider.Create(
-                    printDocument, dgTreeTops, true, true, true,
-                    new TitlePrintBlock(this.Text), null, null);
-                if (printDialog.ShowDialog(this) == DialogResult.OK)
-                {
-                    printDocument.PrinterSettings = printDialog.PrinterSettings;
-                    printDocument.Print();
-                }
+                PrintDataGrid(true, dgIndividuals);
+            }
+            if (tabSelector.SelectedTab == tabFamilies)
+            {
+                PrintDataGrid(true, dgFamilies);
+            }
+            if (tabSelector.SelectedTab == tabOccupations)
+            {
+                PrintDataGrid(false, dgOccupations);
+            }
+            if (tabSelector.SelectedTab == tabLocations)
+            {
+                if(tabCtrlLocations.SelectedTab == tabCountries)
+                    PrintDataGrid(false, dgCountries);
+                if (tabCtrlLocations.SelectedTab == tabRegions)
+                    PrintDataGrid(false, dgRegions);
+                if (tabCtrlLocations.SelectedTab == tabParishes)
+                    PrintDataGrid(false, dgParishes);
+                if (tabCtrlLocations.SelectedTab == tabAddresses)
+                    PrintDataGrid(false, dgAddresses);
+                if (tabCtrlLocations.SelectedTab == tabPlaces)
+                    PrintDataGrid(false, dgPlaces);
+            }
+            if (tabSelector.SelectedTab == tabDataErrors)
+            {
+                PrintDataGrid(false, dgDataErrors);
+            }
+            else if (tabSelector.SelectedTab == tabLooseDeaths)
+            {
+                PrintDataGrid(true, dgLooseDeaths);
+            }
+            else if (tabSelector.SelectedTab == tabTreetops)
+            {
+                PrintDataGrid(true, dgTreeTops);
             }
             else if (tabSelector.SelectedTab == tabWarDead)
             {
-                PrintingDataGridViewProvider printProvider = PrintingDataGridViewProvider.Create(
-                    printDocument, dgWarDead, true, true, true,
-                    new TitlePrintBlock(this.Text), null, null);
-                if (printDialog.ShowDialog(this) == DialogResult.OK)
-                {
-                    printDocument.PrinterSettings = printDialog.PrinterSettings;
-                    printDocument.Print();
-                }
+                PrintDataGrid(true, dgWarDead);
             }
+        }
+
+        private void PrintDataGrid(bool landscape, DataGridView dg)
+        {
+            PrintingDataGridViewProvider printProvider = PrintingDataGridViewProvider.Create(
+                printDocument, dg, true, true, true,
+                new TitlePrintBlock(this.Text), null, null);
+            printDialog.PrinterSettings.DefaultPageSettings.Landscape = landscape;
+            if (printDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                printDocument.PrinterSettings = printDialog.PrinterSettings;
+                printDocument.Print();
+            }
+
         }
 
         private void ckbLCIgnoreCountry_CheckedChanged(object sender, EventArgs e)
