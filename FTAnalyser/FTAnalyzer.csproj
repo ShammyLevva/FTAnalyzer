@@ -88,10 +88,11 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>B928BCCDB30246DF9C838F74ECB1409D5F47390E</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>FFFBD7BA64F152469E3578035BBB3E6013014A63</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>FTAnalyzer_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
