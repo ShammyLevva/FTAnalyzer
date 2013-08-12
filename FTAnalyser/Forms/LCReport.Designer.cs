@@ -134,6 +134,7 @@
             "FamilySearch"});
             this.cbCensusSearchProvider.Name = "cbCensusSearchProvider";
             this.cbCensusSearchProvider.Size = new System.Drawing.Size(121, 25);
+            this.cbCensusSearchProvider.SelectedIndexChanged += new System.EventHandler(this.cbCensusSearchProvider_SelectedIndexChanged);
             // 
             // printDialog
             // 

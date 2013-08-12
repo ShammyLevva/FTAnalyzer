@@ -18,7 +18,6 @@ namespace FTAnalyzer.Forms
         private string censusCountry;
         private FactLocation location;
         private FactLocation location2;
-        private string defaultProvider;
 
         private PrintingDataGridViewProvider printProvider;
 
@@ -35,7 +34,7 @@ namespace FTAnalyzer.Forms
 
             printDocument.DefaultPageSettings.Landscape = true;
             this.censusCountry = censusCountry;
-            defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
+            string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
             {
                 defaultProvider = "Ancestry";

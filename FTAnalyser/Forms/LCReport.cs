@@ -59,8 +59,12 @@ namespace FTAnalyzer.Forms
             c1911ColumnIndex = dgReportSheet.Columns["C1911"].Index;
             ResizeColumns();
             tsRecords.Text = CountText(reportList);
-
-            cbCensusSearchProvider.SelectedIndex = 0;
+            string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
+            if (defaultProvider == null)
+            {
+                defaultProvider = "Ancestry";
+            }
+            cbCensusSearchProvider.Text = defaultProvider;
         }
 
         private string CountText(SortableBindingList<IDisplayLCReport> reportList)
@@ -185,6 +189,11 @@ namespace FTAnalyzer.Forms
                 string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
                 ft.SearchCensus(censusCountry, censusYear, ft.getIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
             }
+        }
+
+        private void cbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Application.UserAppDataRegistry.SetValue("Default Search Provider", cbCensusSearchProvider.SelectedItem.ToString());
         }
     }
 }
