@@ -18,7 +18,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.0.1.0";
+        private string VERSION = "2.0.1.1";
         private bool _checkForUpdatesEnabled = false;
         private bool _showNoUpdateMessage = false;
         private System.Threading.Timer _timerCheckForUpdates;
@@ -78,6 +78,7 @@ namespace FTAnalyzer
                         HourGlass(false);
                         mnuReports.Visible = true;
                         mnuExport.Visible = true;
+                        mnuPrint.Enabled = true;
                         MessageBox.Show("Gedcom File Loaded");
                     }
                 }
@@ -146,6 +147,7 @@ namespace FTAnalyzer
                 if (tabSelector.SelectedTab == tabDisplayProgress)
                 {
                     tsCountLabel.Text = "";
+                    mnuPrint.Enabled = true;
                 }
                 else if (tabSelector.SelectedTab == tabIndividuals)
                 {
@@ -842,6 +844,16 @@ namespace FTAnalyzer
             printDocument.DefaultPageSettings.Landscape = true;
             printDialog.PrinterSettings.DefaultPageSettings.Landscape = true;
 
+            if (tabSelector.SelectedTab == tabDisplayProgress && ft.DataLoaded)
+            {
+                if (printDialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    Utilities.Printing p = new Utilities.Printing(rtbOutput);
+                    printDocument.PrintPage += new PrintPageEventHandler(p.PrintPage);
+                    printDocument.PrinterSettings = printDialog.PrinterSettings;
+                    printDocument.Print();
+                }
+            }
             if (tabSelector.SelectedTab == tabIndividuals)
             {
                 PrintDataGrid(true, dgIndividuals);
@@ -896,7 +908,6 @@ namespace FTAnalyzer
                 printDocument.PrinterSettings = printDialog.PrinterSettings;
                 printDocument.Print();
             }
-
         }
 
         private void ckbLCIgnoreCountry_CheckedChanged(object sender, EventArgs e)

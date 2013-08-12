@@ -42,7 +42,7 @@
     <MinimumRequiredVersion>2.0.1.1</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>2.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -499,6 +499,7 @@
     <Compile Include="Utilities\DoubleMetaphone.cs" />
     <Compile Include="Utilities\ExportToExcel.cs" />
     <Compile Include="Utilities\ListtoDataTableConvertor.cs" />
+    <Compile Include="Utilities\Printing.cs" />
     <Compile Include="Utilities\PropertyComparer.cs" />
     <Compile Include="Utilities\ScrollingRichTextBox.cs">
       <SubType>Component</SubType>
