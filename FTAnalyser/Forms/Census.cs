@@ -18,6 +18,7 @@ namespace FTAnalyzer.Forms
         private string censusCountry;
         private FactLocation location;
         private FactLocation location2;
+        private string defaultProvider;
 
         private PrintingDataGridViewProvider printProvider;
 
@@ -34,6 +35,12 @@ namespace FTAnalyzer.Forms
 
             printDocument.DefaultPageSettings.Landscape = true;
             this.censusCountry = censusCountry;
+            defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
+            if (defaultProvider == null)
+            {
+                defaultProvider = "Ancestry";
+            }
+            cbCensusSearchProvider.Text = defaultProvider;
         }
 
         public Census(string censusCountry, FactLocation location)
@@ -83,7 +90,6 @@ namespace FTAnalyzer.Forms
             dgCensus.DataSource = ds;
             StyleRows();
             ResizeColumns();
-            cbCensusSearchProvider.SelectedIndex = 0;
             tsRecords.Text = ds.Count + " Records / " + numFamilies + " Families.";
         }
 
@@ -251,6 +257,11 @@ namespace FTAnalyzer.Forms
             DisplayCensus ds = dgCensus.CurrentRow == null ? null : (DisplayCensus)dgCensus.CurrentRow.DataBoundItem;
             FamilyTree ft = FamilyTree.Instance;
             ft.SearchCensus(censusCountry, censusDate.StartDate.Year, ds.Individual, cbCensusSearchProvider.SelectedIndex);
+        }
+
+        private void cbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Application.UserAppDataRegistry.SetValue("Default Search Provider", cbCensusSearchProvider.SelectedItem.ToString());
         }
     }
 }
