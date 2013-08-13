@@ -70,9 +70,8 @@ namespace FTAnalyzer
                     Application.DoEvents();
                     if (!stopProcessing)
                     {
-                        XmlDocument document = GedcomToXml.Load(openGedcom.FileName);
                         //document.Save("GedcomOutput.xml");
-                        ft.LoadTree(document, pbSources, pbIndividuals, pbFamilies);
+                        ft.LoadTree(openGedcom.FileName, pbSources, pbIndividuals, pbFamilies);
                         ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
                         Application.UseWaitCursor = false;
                         HourGlass(false);

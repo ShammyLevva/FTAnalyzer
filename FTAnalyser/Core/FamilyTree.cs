@@ -106,11 +106,13 @@ namespace FTAnalyzer
             dataErrorTypes = new List<DataErrorGroup>();
         }
 
-        public void LoadTree(XmlDocument doc, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
+        public void LoadTree(string filename, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
         {
             _loading = true;
             ResetData();
             Application.DoEvents();
+            XmlDocument doc = GedcomToXml.Load(filename);
+            xmlErrorbox.AppendText("Loading file " + filename + "\n");                        
             // First iterate through attributes of root finding all sources
             XmlNodeList list = doc.SelectNodes("GED/SOUR");
             pbS.Maximum = list.Count;
@@ -169,15 +171,17 @@ namespace FTAnalyzer
         private void CountCensusFacts()
         {
             int censusFacts = 0;
+            int resiFacts = 0;
             foreach (Individual ind in individuals)
             {
                 censusFacts += ind.CensusFactCount;
+                resiFacts += ind.ResiFactCount;
             }
-            if (censusFacts > 0)
-                xmlErrorbox.AppendText("\nFound " + censusFacts + " census facts in GEDCOM File.\n");
-            else
+            xmlErrorbox.AppendText("\nFound " + censusFacts + " census facts in GEDCOM File.");
+            xmlErrorbox.AppendText("\nFound " + resiFacts + " residence facts in GEDCOM File.\n");
+            if (censusFacts == 0 && resiFacts == 0)
             {
-                xmlErrorbox.AppendText("\nFound no census facts in GEDCOM File.\n");
+                xmlErrorbox.AppendText("\nFound no census or residence facts in GEDCOM File.\n");
                 xmlErrorbox.AppendText("This is probably because you have recorded census facts as notes\n");
                 xmlErrorbox.AppendText("This will mean that the census report will show everyone as not yet found on census\n");
                 xmlErrorbox.AppendText("and the Lost Cousins report will report no-one with a census needing entered to Lost Cousins\n");

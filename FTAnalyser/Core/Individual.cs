@@ -418,6 +418,20 @@ namespace FTAnalyzer
             }
         }
 
+        public int ResiFactCount
+        {
+            get
+            {
+                int resiFacts = 0;
+                foreach (Fact f in facts)
+                {
+                    if (f.FactType == Fact.RESIDENCE)
+                        resiFacts++;
+                }
+                return resiFacts;
+            }
+        }
+
         public string MarriageDates
         {
             get
