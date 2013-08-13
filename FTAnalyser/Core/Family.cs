@@ -443,22 +443,47 @@ namespace FTAnalyzer
             }
         }
 
+        public FactDate FamilyDate
+        {
+            get
+            {
+                // return "central" date of family - use marriage facts, husband/wife facts, children birth facts
+                List<FactDate> dates = new List<FactDate>();
+                foreach (Fact f in facts)
+                    if(f.FactDate.AverageDate != FactDate.UNKNOWN_DATE)
+                        dates.Add(f.FactDate.AverageDate);
+                if(husband != null)
+                    foreach (Fact f in husband.AllFacts)
+                        if (f.FactDate.AverageDate != FactDate.UNKNOWN_DATE)
+                            dates.Add(f.FactDate.AverageDate);
+                if(wife != null)
+                    foreach (Fact f in wife.AllFacts)
+                        if (f.FactDate.AverageDate != FactDate.UNKNOWN_DATE)
+                            dates.Add(f.FactDate.AverageDate);
+                foreach (Individual c in children)
+                    if (c.BirthDate.AverageDate != FactDate.UNKNOWN_DATE)
+                        dates.Add(c.BirthDate.AverageDate);
+                if (dates.Count == 0)
+                    return FactDate.UNKNOWN_DATE;
+                long averageTicks = 0L;
+                foreach (FactDate fd in dates)
+                    averageTicks += fd.StartDate.Ticks / dates.Count;
+                try
+                {
+                    DateTime averageDate = new DateTime(averageTicks);
+                    return new FactDate(averageDate, averageDate);
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                }
+                return FactDate.UNKNOWN_DATE;
+            }
+        }
+
         public FactLocation Location
         {
             get {
-                
-                int bestLevel = -1;
-                FactLocation result = new FactLocation();
-                foreach (Fact f in AllFamilyFacts)
-                {
-                    FactLocation l = new FactLocation(f.Place);
-                    if (l.Level > bestLevel)
-                    {
-                        result = l;
-                        bestLevel = l.Level;
-                    }
-                }
-                return result;
+                return FactLocation.BestLocation(AllFamilyFacts, FamilyDate);
             }
         }
 
