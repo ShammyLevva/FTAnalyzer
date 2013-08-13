@@ -254,6 +254,10 @@ namespace FTAnalyzer
                     type = FactDateType.AFT;
                     output.Append("AFT ");
                 }
+                else if (startdate == enddate)
+                {
+                    type = FactDateType.EXT;
+                }
                 else
                 {
                     type = FactDateType.BET;
@@ -266,7 +270,7 @@ namespace FTAnalyzer
                 if (type == FactDateType.BET)
                     output.Append(" AND ");
             }
-            if (enddate != MAXDATE)
+            if (enddate != MAXDATE && enddate != startdate)
             {
                 check = Format(CHECKING, enddate);
                 if (check.Equals("31 DEC"))
@@ -507,6 +511,23 @@ namespace FTAnalyzer
         public bool DoubleDate
         {
             get { return this.doubledate; }
+        }
+
+        public FactDate AverageDate
+        {
+            get
+            {
+                if (this.datestring.Equals("UNKNOWN"))
+                    return UNKNOWN_DATE;
+                if (this.startdate == MINDATE)
+                    return new FactDate(this.enddate, this.enddate);
+                if (this.enddate == MAXDATE)
+                    return new FactDate(this.startdate, this.startdate);
+                TimeSpan ts = this.enddate.Subtract(this.startdate);
+                double midPointSeconds = ts.TotalSeconds / 2.0;
+                DateTime average = this.startdate.AddSeconds(midPointSeconds);
+                return new FactDate(average, average);
+            }
         }
 
         #endregion
