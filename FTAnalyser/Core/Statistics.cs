@@ -59,7 +59,7 @@ namespace FTAnalyzer
         {
             int child = gender == "M" ? 0 : (gender == "F" ? 1 : 2);
             int fiveyear = age.MinAge / 5;
-            if(fiveyear>3 && fiveyear < 20)
+            if(fiveyear>=3 && fiveyear < 20)
                 stats[parent, fiveyear, child]++;
         }
 

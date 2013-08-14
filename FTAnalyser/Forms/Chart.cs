@@ -36,7 +36,7 @@ namespace FTAnalyzer.Forms
             chartDisplay.Series.Add(serMotherSon);
             chartDisplay.Series.Add(serMotherDaughter);
             ChartArea caArea = new ChartArea("area");
-            caArea.AxisX.Minimum = 15;
+            caArea.AxisX.Minimum = 10;
             caArea.AxisX.Maximum = 95;
             caArea.AxisX.Title = "Age Ranges";
             caArea.AxisY.Title = "Number of Children";

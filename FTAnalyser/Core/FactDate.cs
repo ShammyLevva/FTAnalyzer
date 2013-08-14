@@ -324,18 +324,25 @@ namespace FTAnalyzer
                 {
                     type = FactDateType.BET;
                     int andpos = processDate.IndexOf(" AND ");
-                    string fromdate = processDate.Substring(4, andpos - 4);
-                    string todate = processDate.Substring(andpos + 5);
-                    if (fromdate.Length < 3)
-                        fromdate = fromdate + processDate.Substring(andpos + 7);
-                    else if (fromdate.Length == 3)
-                        fromdate = "01 " + fromdate + processDate.Substring(andpos + 8);
-                    else if (fromdate.Length == 4)
-                        fromdate = "01 JAN " + fromdate;
-                    else if (fromdate.Length < 7 && fromdate.IndexOf(" ") > 0)
-                        fromdate = fromdate + processDate.Substring(andpos + 11);
-                    startdate = parseDate(fromdate, LOW, 0, enddate.Year);
-                    enddate = parseDate(todate, HIGH, 0);
+                    if (andpos == -1)
+                    {
+                        throw new Exception("Invalid BETween date no AND found");
+                    }
+                    else
+                    {
+                        string fromdate = processDate.Substring(4, andpos - 4);
+                        string todate = processDate.Substring(andpos + 5);
+                        if (fromdate.Length < 3)
+                            fromdate = fromdate + processDate.Substring(andpos + 7);
+                        else if (fromdate.Length == 3)
+                            fromdate = "01 " + fromdate + processDate.Substring(andpos + 8);
+                        else if (fromdate.Length == 4)
+                            fromdate = "01 JAN " + fromdate;
+                        else if (fromdate.Length < 7 && fromdate.IndexOf(" ") > 0)
+                            fromdate = fromdate + processDate.Substring(andpos + 11);
+                        startdate = parseDate(fromdate, LOW, 0, enddate.Year);
+                        enddate = parseDate(todate, HIGH, 0);
+                    }
                 }
                 else
                 {
