@@ -19,6 +19,7 @@ namespace FTAnalyzer
         }
 
         public string FamilyGed { get { return reg.FamilyGed; } }
+        public string IndividualID { get { return ind.IndividualID; } }
         public FactLocation RegistrationLocation { get { return reg.FilterLocation; } }
         public string CensusName { get { return ind.CensusName; } }
         public Age Age { get { return ind.getAge(reg.registrationDate); } }
