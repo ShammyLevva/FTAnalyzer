@@ -80,6 +80,7 @@ namespace FTAnalyzer
                     {
                         try
                         {
+                            line = line.Replace('–', '-').Replace('—', '-');
                             cpos1 = line.IndexOf(' ');
                             if (cpos1 < 0) throw new Exception("No space in line");
 

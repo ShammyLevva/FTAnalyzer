@@ -91,6 +91,7 @@ namespace FTAnalyzer
             str = str.Replace(")", string.Empty);
             str = str.Replace("?", string.Empty);
             str = str.Replace(".", " ");
+            str = str.Replace("&", " ");
             str = str.Replace("  ", " ");
 
             str = str.Replace("JANUARY", "JAN");
