@@ -510,30 +510,32 @@ namespace FTAnalyzer
                         if (f.Location.country == FactLocation.ENGLAND || f.Location.country == FactLocation.WALES
                             || f.Location.country == FactLocation.UNITED_KINGDOM || !supportedLocation)
                         {
-                            if (f.FactDate.overlaps(CensusDate.UKCENSUS1841) ||
-                                f.FactDate.overlaps(CensusDate.UKCENSUS1881) ||
-                                f.FactDate.overlaps(CensusDate.UKCENSUS1911))
+                            if ((f.FactDate.overlaps(CensusDate.UKCENSUS1841) ||
+                                 f.FactDate.overlaps(CensusDate.UKCENSUS1881) ||
+                                 f.FactDate.overlaps(CensusDate.UKCENSUS1911)) &&
+                                (when == CensusDate.UKCENSUS1841 || when == CensusDate.UKCENSUS1881 || when == CensusDate.UKCENSUS1911))
                                 return true;
                         }
                         else if (f.Location.country == FactLocation.SCOTLAND)
                         {
-                            if (f.FactDate.overlaps(CensusDate.UKCENSUS1881))
+                            if (f.FactDate.overlaps(CensusDate.UKCENSUS1881) && when == CensusDate.UKCENSUS1881)
                                 return true;
                         }
                         else if (f.Location.country == FactLocation.CANADA)
                         {
-                            if (f.FactDate.overlaps(CensusDate.CANADACENSUS1881))
+                            if (f.FactDate.overlaps(CensusDate.CANADACENSUS1881) && when == CensusDate.CANADACENSUS1881)
                                 return true;
                         }
                         else if (f.Location.country == FactLocation.UNITED_STATES)
                         {
-                            if (f.FactDate.overlaps(CensusDate.USCENSUS1880) ||
-                                f.FactDate.overlaps(CensusDate.USCENSUS1940))
+                            if ((f.FactDate.overlaps(CensusDate.USCENSUS1880) ||
+                                 f.FactDate.overlaps(CensusDate.USCENSUS1940)) && 
+                                (when == CensusDate.USCENSUS1880 || when == CensusDate.USCENSUS1940))
                                 return true;
                         }
                         else if (f.Location.country == FactLocation.IRELAND)
                         {
-                            if (f.FactDate.overlaps(CensusDate.IRELANDCENSUS1911))
+                            if (f.FactDate.overlaps(CensusDate.IRELANDCENSUS1911) && when == CensusDate.IRELANDCENSUS1911)
                                 return true;
                         }
                     }
