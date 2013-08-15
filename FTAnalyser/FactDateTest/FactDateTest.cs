@@ -184,6 +184,17 @@ namespace FactDateTest
             Assert.AreEqual(new DateTime(1947, 7, 1), target.StartDate);
             Assert.AreEqual(new DateTime(1947, 9, 30), target.EndDate);
 
+            target = new FactDate("JAN FEB MAR 1966");
+            Assert.AreEqual(new DateTime(1966, 1, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1966, 3, 31), target.EndDate);
+
+            target = new FactDate("JAN / FEB / MAR 1966");
+            Assert.AreEqual(new DateTime(1966, 1, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1966, 3, 31), target.EndDate);
+
+            target = new FactDate("JAN/FEB/MAR 1966");
+            Assert.AreEqual(new DateTime(1966, 1, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1966, 3, 31), target.EndDate);
         }
     }
 }
