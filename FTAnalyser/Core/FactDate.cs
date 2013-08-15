@@ -356,7 +356,7 @@ namespace FTAnalyzer
             }
             catch (Exception e)
             {
-                FamilyTree.Instance.XmlErrorBox.AppendText("Error parsing date '" + processDate + "' error message was : " + e.Message + "\n");
+                FamilyTree.Instance.XmlErrorBox.AppendText("Error parsing date '" + processDate + "' for " + factRef + "' error message was : " + e.Message + "\n");
             }
         }
 
@@ -465,7 +465,7 @@ namespace FTAnalyzer
             catch (Exception e2)
             {
                 dt = (highlow == HIGH) ? MAXDATE : MINDATE;
-                FamilyTree.Instance.XmlErrorBox.AppendText("Error parsing date '" + dateValue + "' for " + factRef + " error message was : " + e2.Message + "\n");
+                throw e2;
             }
             return dt;
         }
