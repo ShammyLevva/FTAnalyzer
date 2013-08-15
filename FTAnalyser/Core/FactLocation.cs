@@ -160,6 +160,7 @@ namespace FTAnalyzer
 				fixEmptyFields();
 				fixCapitalisation();
 				fixRegionFullStops();
+                fixCountryFullStops();
 				fixMultipleSpacesAndAmpersands();
 				fixCountryTypos();
 				country = fixRegionTypos(country);
@@ -241,7 +242,12 @@ namespace FTAnalyzer
 			region = region.Replace(".", " ").Trim();
 		}
 
-		private void fixMultipleSpacesAndAmpersands()
+        private void fixCountryFullStops()
+        {
+            country = country.Replace(".", " ").Trim();
+        }
+
+        private void fixMultipleSpacesAndAmpersands()
 		{
 			while (country.IndexOf("  ") != -1)
 				country = country.Replace("  ", " ");
