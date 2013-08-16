@@ -109,6 +109,18 @@ namespace FTAnalyzer
                 f.Close();
         }
 
+        private void closeDuplicateForms(object form)
+        {
+            List<Form> toClose = new List<Form>();
+            foreach (Form f in Application.OpenForms)
+            {
+                if (!object.ReferenceEquals(f, form) && f.GetType() == form.GetType())
+                    toClose.Add(f);
+            }
+            foreach (Form f in toClose)
+                f.Close();
+        }
+
         private void HourGlass(bool on)
         {
             if (on)
@@ -313,6 +325,7 @@ namespace FTAnalyzer
         private void btnShowResults_Click(object sender, EventArgs e)
         {
             Census census;
+            string country;
             Filter<Registration> filter = createCensusRegistrationFilter();
             MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();
             if (!ckbNoLocations.Checked) // only compare on location if no locations isn't checked
@@ -320,12 +333,18 @@ namespace FTAnalyzer
             censusComparator.addComparator(new DateComparator());
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
             if (ckbNoLocations.Checked)
+            {
                 census = new Census(cenDate.CensusCountry);
+                country = string.Empty;
+            }
             else
+            {
                 census = new Census(cenDate.CensusCountry, censusCountry.GetLocation);
-
+                country = " " + cenDate.Country;
+            }
             census.setupCensus(censusRP, censusDate, false, ckbCensusResidence.Checked, false, (int)udAgeFilter.Value);
-            census.Text = "People missing a " + censusDate.StartDate.Year.ToString() + " " + cenDate.Country + " Census Record that you can search for";
+            census.Text = "People missing a " + censusDate.StartDate.Year.ToString() + country + " Census Record that you can search for";
+            closeDuplicateForms(census);
             census.Show();
         }
 
@@ -425,6 +444,7 @@ namespace FTAnalyzer
             census.setupCensus(censusRP, censusDate, true, ckbLCResidence.Checked, ckbHideRecorded.Checked, 110);
             census.Text = reportTitle;
             HourGlass(false);
+            closeDuplicateForms(census);
             census.Show();
         }
 
@@ -1091,6 +1111,7 @@ namespace FTAnalyzer
             HourGlass(true);
             SortableBindingList<IDisplayLCReport> list = ft.LCReport(ckbRestrictions.Checked);
             LCReport rs = new LCReport(list);
+            closeDuplicateForms(rs);
             rs.Show();
             HourGlass(false);
         }
@@ -1100,6 +1121,7 @@ namespace FTAnalyzer
             HourGlass(true);
             SortableBindingList<IDisplayLCReport> list = ft.LCReport(ckbRestrictions.Checked);
             LCReport rs = new LCReport(list);
+            closeDuplicateForms(rs);
             rs.Show();
             HourGlass(false);
         }
