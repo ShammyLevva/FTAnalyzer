@@ -324,27 +324,34 @@ namespace FTAnalyzer
                 }
                 else if (processDate.StartsWith("BET"))
                 {
+                    string fromdate;
+                    string todate;
                     type = FactDateType.BET;
-                    int andpos = processDate.IndexOf(" AND ");
-                    if (andpos == -1)
+                    int pos = processDate.IndexOf(" AND ");
+                    if (pos == -1)
                     {
-                        throw new Exception("Invalid BETween date no AND found");
+                        pos = processDate.IndexOf("-");
+                        if(pos == -1)
+                            throw new Exception("Invalid BETween date no AND found");
+                        fromdate = processDate.Substring(4, pos - 4);
+                        todate = processDate.Substring(pos + 1);
+                        pos = pos - 4; // from to code in next block expects to jump 5 chars not 1.
                     }
                     else
                     {
-                        string fromdate = processDate.Substring(4, andpos - 4);
-                        string todate = processDate.Substring(andpos + 5);
-                        if (fromdate.Length < 3)
-                            fromdate = fromdate + processDate.Substring(andpos + 7);
-                        else if (fromdate.Length == 3)
-                            fromdate = "01 " + fromdate + processDate.Substring(andpos + 8);
-                        else if (fromdate.Length == 4)
-                            fromdate = "01 JAN " + fromdate;
-                        else if (fromdate.Length < 7 && fromdate.IndexOf(" ") > 0)
-                            fromdate = fromdate + processDate.Substring(andpos + 11);
-                        startdate = parseDate(fromdate, LOW, 0, enddate.Year);
-                        enddate = parseDate(todate, HIGH, 0);
+                        fromdate = processDate.Substring(4, pos - 4);
+                        todate = processDate.Substring(pos + 5);
                     }
+                    if (fromdate.Length < 3)
+                        fromdate = fromdate + processDate.Substring(pos + 7);
+                    else if (fromdate.Length == 3)
+                        fromdate = "01 " + fromdate + processDate.Substring(pos + 8);
+                    else if (fromdate.Length == 4)
+                        fromdate = "01 JAN " + fromdate;
+                    else if (fromdate.Length < 7 && fromdate.IndexOf(" ") > 0)
+                        fromdate = fromdate + processDate.Substring(pos + 11);
+                    startdate = parseDate(fromdate, LOW, 0, enddate.Year);
+                    enddate = parseDate(todate, HIGH, 0);
                 }
                 else
                 {
