@@ -18,7 +18,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.0.1.3";
+        private string VERSION = "2.0.2.0";
         private bool _checkForUpdatesEnabled = false;
         private bool _showNoUpdateMessage = false;
         private System.Threading.Timer _timerCheckForUpdates;
@@ -1209,6 +1209,23 @@ namespace FTAnalyzer
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void dgIndividuals_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                var ht = dgIndividuals.HitTest(e.X, e.Y);
+                if (ht.Type != DataGridViewHitTestType.ColumnHeader)
+                {
+                    DataGridView.HitTestInfo hti = dgIndividuals.HitTest(e.Location.X, e.Location.Y);
+                    dgIndividuals.CurrentCell = dgIndividuals.Rows[hti.RowIndex].Cells[hti.ColumnIndex];
+                    // Can leave these here - doesn't hurt
+                    dgIndividuals.Rows[hti.RowIndex].Selected = true;
+                    dgIndividuals.Focus();
+                    mnuSetRoot.Show(MousePosition);
+                }
             }
         }
     }
