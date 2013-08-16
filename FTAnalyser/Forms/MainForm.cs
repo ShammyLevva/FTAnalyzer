@@ -278,6 +278,7 @@ namespace FTAnalyzer
             FactLocation loc = (FactLocation)dgCountries.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.COUNTRY);
+            closeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
         }
@@ -288,6 +289,7 @@ namespace FTAnalyzer
             FactLocation loc = dgRegions.CurrentRow == null ? new FactLocation() : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.REGION);
+            closeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
         }
@@ -298,6 +300,7 @@ namespace FTAnalyzer
             FactLocation loc = (FactLocation)dgParishes.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.PARISH);
+            closeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
         }
@@ -308,6 +311,7 @@ namespace FTAnalyzer
             FactLocation loc = (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.ADDRESS);
+            closeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
         }
@@ -318,6 +322,7 @@ namespace FTAnalyzer
             FactLocation loc = (FactLocation)dgPlaces.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.PLACE);
+            closeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
         }
@@ -573,10 +578,11 @@ namespace FTAnalyzer
 
         private void showLocationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Forms.Locations locationsForm = new Forms.Locations();
+            Locations locationsForm = new Locations();
             List<FactLocation> locations = ft.AllLocations;
             locations.Sort();
             locationsForm.BuildLocationTree(locations);
+            closeDuplicateForms(locationsForm);
             locationsForm.Show();
         }
 
@@ -607,6 +613,7 @@ namespace FTAnalyzer
 
             RegistrationReport report = new RegistrationReport();
             report.SetupBirthRegistration(result);
+            closeDuplicateForms(report);
             report.Show();
         }
 
@@ -630,6 +637,7 @@ namespace FTAnalyzer
 
             RegistrationReport report = new RegistrationReport();
             report.SetupDeathRegistration(result);
+            closeDuplicateForms(report);
             report.Show();
         }
 
@@ -653,6 +661,7 @@ namespace FTAnalyzer
 
             RegistrationReport report = new RegistrationReport();
             report.SetupMarriageRegistration(result);
+            closeDuplicateForms(report);
             report.Show();
         }
 
@@ -756,11 +765,17 @@ namespace FTAnalyzer
 
         private void btnViewResults_Click(object sender, EventArgs e)
         {
-            Forms.FamilySearchResultsViewer frmResults = new Forms.FamilySearchResultsViewer(txtFamilySearchfolder.Text);
+            FamilySearchResultsViewer frmResults = new FamilySearchResultsViewer(txtFamilySearchfolder.Text);
             if (frmResults.ResultsPresent)
+            {
+                closeDuplicateForms(frmResults);
                 frmResults.Show();
+            }
             else
+            {
+                frmResults.Dispose();
                 MessageBox.Show("Sorry there are no results files in the selected folder.");
+            }
         }
 
         private void btnCancelFamilySearch_Click(object sender, EventArgs e)
@@ -964,6 +979,7 @@ namespace FTAnalyzer
             DisplayOccupation occ = (DisplayOccupation)dgOccupations.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setWorkers(occ.Occupation, ft.AllWorkers(occ.Occupation));
+            closeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
         }
@@ -990,9 +1006,15 @@ namespace FTAnalyzer
             {   // Do geo coding stuff
                 GoogleMap frmGoogleMap = new GoogleMap();
                 if (frmGoogleMap.setLocation(loc, locType))
+                {
+                    closeDuplicateForms(frmGoogleMap);
                     frmGoogleMap.Show();
+                }
                 else
+                {
+                    frmGoogleMap.Dispose();
                     MessageBox.Show("Unable to find location : " + loc.getLocation(locType));
+                }
             }
             this.Cursor = Cursors.Default;
         }
@@ -1006,9 +1028,15 @@ namespace FTAnalyzer
             {   // Do geo coding stuff
                 BingOSMap frmBingMap = new BingOSMap();
                 if (frmBingMap.setLocation(loc, locType))
+                {
+                    closeDuplicateForms(frmBingMap);
                     frmBingMap.Show();
+                }
                 else
+                {
+                    frmBingMap.Dispose();
                     MessageBox.Show("Unable to find location : " + loc.getLocation(locType));
+                }
             }
             this.Cursor = Cursors.Default;
         }
@@ -1161,8 +1189,11 @@ namespace FTAnalyzer
             } while ((result != DialogResult.Cancel) && (age < 13 || age > 90));
             if(result == DialogResult.OK)
             {
-                if(frmInd.OlderParents(age))
+                if (frmInd.OlderParents(age))
+                {
+                    closeDuplicateForms(frmInd);
                     frmInd.Show();
+                }
             }
             HourGlass(false);
         }
