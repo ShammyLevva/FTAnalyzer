@@ -115,7 +115,13 @@ namespace FTAnalyzer
             foreach (Form f in Application.OpenForms)
             {
                 if (!object.ReferenceEquals(f, form) && f.GetType() == form.GetType())
-                    toClose.Add(f);
+                    if (form is Census)
+                    {
+                        if (((Census)f).CensusDate.Equals(((Census)form).CensusDate))
+                            toClose.Add(f);
+                    }
+                    else
+                        toClose.Add(f);
             }
             foreach (Form f in toClose)
                 f.Close();

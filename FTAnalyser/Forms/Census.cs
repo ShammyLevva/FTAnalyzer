@@ -262,5 +262,10 @@ namespace FTAnalyzer.Forms
         {
             Application.UserAppDataRegistry.SetValue("Default Search Provider", cbCensusSearchProvider.SelectedItem.ToString());
         }
+
+        public FactDate CensusDate
+        {
+            get { return this.censusDate; }
+        }
     }
 }
