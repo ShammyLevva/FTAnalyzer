@@ -44,8 +44,7 @@ namespace Controls
                 _loading = true;
                 country = value;
                 cbCensusDate.Items.Clear();
-                if (country == FactLocation.SCOTLAND || country == FactLocation.ENGLAND ||
-                    country == FactLocation.WALES || country == FactLocation.UNITED_KINGDOM)
+                if (FactLocation.isUnitedKingdom(country))
                 {
                     defaultDate = (previousDate.Country == FactLocation.UNITED_KINGDOM) ? previousDate : CensusDate.UKCENSUS1881;
                 }
