@@ -18,19 +18,19 @@ namespace FTAnalyzer
         private static readonly int HIGH = 1;
         private static readonly IFormatProvider CULTURE = new CultureInfo("en-GB", true);
 
-        public static readonly string YEAR = "yyyy";
-        public static readonly string MONTHYEAR = "MMM yyyy";
-        public static readonly string DAYMONTH = "d MMM";
-        public static readonly string MONTH = "MMM";
+        private static readonly string YEAR = "yyyy";
+        private static readonly string MONTHYEAR = "MMM yyyy";
+        private static readonly string DAYMONTH = "d MMM";
+        private static readonly string MONTH = "MMM";
         public static readonly string FULL = "d MMM yyyy";
-        public static readonly string DISPLAY = "d MMM yyyy";
-        public static readonly string CHECKING = "d MMM";
-        public static readonly string DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})$";
-        public static readonly string DOUBLE_DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})/(\\d{0,2})$";
-        public static readonly string POSTFIX = "(\\d{1,2})(?:ST|ND|RD|TH)(.*)";
-        public static readonly string BETWEENFIX = "(\\d{4})-(\\d{4})";
-        public static readonly string USDATEFIX = "^([A-Za-z]{3}) *(\\d{1,2} )(\\d{4})$";
-        public static readonly string SPACEFIX = "^(\\d{1,2}) *([A-Za-z]{3}) *(\\d{0,4})$";
+        private static readonly string DISPLAY = "d MMM yyyy";
+        private static readonly string CHECKING = "d MMM";
+        private static readonly string DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})$";
+        private static readonly string DOUBLE_DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})/(\\d{0,2})$";
+        private static readonly string POSTFIX = "(\\d{1,2})(?:ST|ND|RD|TH)(.*)";
+        private static readonly string BETWEENFIX = "(\\d{4})-(\\d{4})";
+        private static readonly string USDATEFIX = "^([A-Za-z]{3}) *(\\d{1,2} )(\\d{4})$";
+        private static readonly string SPACEFIX = "^(\\d{1,2}) *([A-Za-z]{3}) *(\\d{0,4})$";
         
         public static readonly FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
 

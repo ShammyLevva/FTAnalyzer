@@ -15,9 +15,9 @@ namespace FTAnalyzer.Forms
         private Dictionary<int, DataGridViewCellStyle> rowStyles;
         private int numFamilies;
         private FactDate censusDate;
-        private string censusCountry;
         private FactLocation location;
         private FactLocation location2;
+        private FactLocation censusLocation;
 
         private PrintingDataGridViewProvider printProvider;
 
@@ -33,7 +33,7 @@ namespace FTAnalyzer.Forms
                 new TitlePrintBlock(this.Text), null, null);
 
             printDocument.DefaultPageSettings.Landscape = true;
-            this.censusCountry = censusCountry;
+            this.censusLocation = new FactLocation(censusCountry);
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
             {
@@ -72,11 +72,11 @@ namespace FTAnalyzer.Forms
                         {  // no location check TODO check if known location vs censusCountry (United Kingdom, Ireland, United States, Canada)
                             if(!r.FilterCountry.isKnownCountry)
                                 ds.Add(new DisplayCensus(pos++, r, i)); // if we don't recognise the country and we aren't checking then ignore it
-                            else  if(censusCountry == FactLocation.UNITED_KINGDOM && (r.FilterCountry.isUnitedKingdom))
+                            else  if(censusLocation.Country == FactLocation.UNITED_KINGDOM && (r.FilterCountry.isUnitedKingdom))
                                 ds.Add(new DisplayCensus(pos++, r, i));
-                            else if (censusCountry == FactLocation.IRELAND || censusCountry == FactLocation.UNITED_STATES || censusCountry == FactLocation.CANADA)
+                            else if (censusLocation.Country == FactLocation.IRELAND || censusLocation.Country == FactLocation.UNITED_STATES || censusLocation.Country == FactLocation.CANADA)
                             {
-                                if(r.FilterCountry.Equals(censusCountry))
+                                if(r.FilterCountry.Equals(censusLocation))
                                     ds.Add(new DisplayCensus(pos++, r, i));
                             }
                         }
@@ -255,7 +255,7 @@ namespace FTAnalyzer.Forms
         {
             DisplayCensus ds = dgCensus.CurrentRow == null ? null : (DisplayCensus)dgCensus.CurrentRow.DataBoundItem;
             FamilyTree ft = FamilyTree.Instance;
-            ft.SearchCensus(censusCountry, censusDate.StartDate.Year, ds.Individual, cbCensusSearchProvider.SelectedIndex);
+            ft.SearchCensus(censusLocation.Country, censusDate.StartDate.Year, ds.Individual, cbCensusSearchProvider.SelectedIndex);
         }
 
         private void cbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
