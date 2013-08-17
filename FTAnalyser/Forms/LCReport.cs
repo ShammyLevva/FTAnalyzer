@@ -197,6 +197,7 @@ namespace FTAnalyzer.Forms
         private void cbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
             Application.UserAppDataRegistry.SetValue("Default Search Provider", cbCensusSearchProvider.SelectedItem.ToString());
+            dgReportSheet.Focus();
         }
 
         private List<IDisplayLCReport> BuildFilter(int toFind, bool all)
@@ -261,8 +262,9 @@ namespace FTAnalyzer.Forms
                     break;
             }
             ResizeColumns();
-            this.Cursor = Cursors.Default;
+            dgReportSheet.Focus();
             tsRecords.Text = "Count : " + dgReportSheet.RowCount + " records listed.";
+            this.Cursor = Cursors.Default;
         }
     }
 }

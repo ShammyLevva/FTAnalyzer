@@ -261,6 +261,7 @@ namespace FTAnalyzer.Forms
         private void cbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
             Application.UserAppDataRegistry.SetValue("Default Search Provider", cbCensusSearchProvider.SelectedItem.ToString());
+            dgCensus.Focus();
         }
 
         public FactDate CensusDate
