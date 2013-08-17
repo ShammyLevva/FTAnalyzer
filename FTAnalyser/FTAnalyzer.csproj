@@ -254,18 +254,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>GeneralSettings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="MailMerge\Births.doc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="MailMerge\Census.doc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="MailMerge\Deaths.doc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="MailMerge\Marriages.doc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Properties\NetworkSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>NetworkSettings.Designer.cs</LastGenOutput>
