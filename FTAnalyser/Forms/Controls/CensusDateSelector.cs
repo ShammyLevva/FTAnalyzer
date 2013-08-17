@@ -12,7 +12,7 @@ namespace Controls
 {
     public partial class CensusDateSelector : UserControl
     {
-        private string country = FactLocation.SCOTLAND;
+        private string country = Countries.SCOTLAND;
         private CensusDate defaultDate = CensusDate.UKCENSUS1881;
         private CensusDate previousDate;
         private bool _loading = false;
@@ -27,9 +27,9 @@ namespace Controls
         public void AddAllCensusItems()
         {
             cbCensusDate.Items.Clear();
-            AddCensusItems(FactLocation.UNITED_KINGDOM);
-            AddCensusItems(FactLocation.UNITED_STATES);
-            AddCensusItems(FactLocation.CANADA);
+            AddCensusItems(Countries.UNITED_KINGDOM);
+            AddCensusItems(Countries.UNITED_STATES);
+            AddCensusItems(Countries.CANADA);
             defaultDate = CensusDate.UKCENSUS1881;
             previousDate = defaultDate;
             RevertToDefaultDate();
@@ -44,17 +44,17 @@ namespace Controls
                 _loading = true;
                 country = value;
                 cbCensusDate.Items.Clear();
-                if (FactLocation.isUnitedKingdom(country))
+                if (Countries.isUnitedKingdom(country))
                 {
-                    defaultDate = (previousDate.Country == FactLocation.UNITED_KINGDOM) ? previousDate : CensusDate.UKCENSUS1881;
+                    defaultDate = (previousDate.Country == Countries.UNITED_KINGDOM) ? previousDate : CensusDate.UKCENSUS1881;
                 }
-                else if (country == FactLocation.UNITED_STATES)
+                else if (country == Countries.UNITED_STATES)
                 {
-                    defaultDate = (previousDate.Country == FactLocation.UNITED_STATES) ? previousDate : CensusDate.USCENSUS1880;
+                    defaultDate = (previousDate.Country == Countries.UNITED_STATES) ? previousDate : CensusDate.USCENSUS1880;
                 }
-                else if (country == FactLocation.CANADA)
+                else if (country == Countries.CANADA)
                 {
-                    defaultDate = (previousDate.Country == FactLocation.CANADA) ? previousDate : CensusDate.CANADACENSUS1881;
+                    defaultDate = (previousDate.Country == Countries.CANADA) ? previousDate : CensusDate.CANADACENSUS1881;
                 }
                 AddCensusItems(defaultDate.Country);
                 SetControlWidth();
@@ -66,7 +66,7 @@ namespace Controls
 
         private void AddCensusItems(string location)
         {
-            if (location.Equals(FactLocation.UNITED_KINGDOM))
+            if (location.Equals(Countries.UNITED_KINGDOM))
             {
                 cbCensusDate.Items.Add(CensusDate.UKCENSUS1841);
                 cbCensusDate.Items.Add(CensusDate.UKCENSUS1851);
@@ -77,7 +77,7 @@ namespace Controls
                 cbCensusDate.Items.Add(CensusDate.UKCENSUS1901);
                 cbCensusDate.Items.Add(CensusDate.UKCENSUS1911);
             }
-            else if (location.Equals(FactLocation.UNITED_STATES))
+            else if (location.Equals(Countries.UNITED_STATES))
             {
                 cbCensusDate.Items.Add(CensusDate.USCENSUS1790);
                 cbCensusDate.Items.Add(CensusDate.USCENSUS1800);
@@ -96,7 +96,7 @@ namespace Controls
                 cbCensusDate.Items.Add(CensusDate.USCENSUS1930);
                 cbCensusDate.Items.Add(CensusDate.USCENSUS1940);
             }
-            else if (location.Equals(FactLocation.CANADA))
+            else if (location.Equals(Countries.CANADA))
             {
                 cbCensusDate.Items.Add(CensusDate.CANADACENSUS1851);
                 cbCensusDate.Items.Add(CensusDate.CANADACENSUS1861);

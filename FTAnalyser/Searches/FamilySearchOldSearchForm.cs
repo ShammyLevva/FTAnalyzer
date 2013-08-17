@@ -170,7 +170,7 @@ namespace FTAnalyzer
             {
                 string newFilename = filename;
                 SetLocationParameters(location);
-                if (searchType == FamilySearchForm.CHILDRENSEARCH && location.Country.Equals(FactLocation.SCOTLAND))
+                if (searchType == FamilySearchForm.CHILDRENSEARCH && location.Country.Equals(Countries.SCOTLAND))
                     setParameter(MOTHERS_LAST_NAME, surname);
                 if (level == FactLocation.REGION && parameters[SHIRE] != string.Empty)
                 {

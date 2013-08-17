@@ -72,9 +72,9 @@ namespace FTAnalyzer.Forms
                         {  // no location check TODO check if known location vs censusCountry (United Kingdom, Ireland, United States, Canada)
                             if(!r.FilterCountry.isKnownCountry)
                                 ds.Add(new DisplayCensus(pos++, r, i)); // if we don't recognise the country and we aren't checking then ignore it
-                            else  if(censusLocation.Country == FactLocation.UNITED_KINGDOM && (r.FilterCountry.isUnitedKingdom))
+                            else  if(censusLocation.Country == Countries.UNITED_KINGDOM && (r.FilterCountry.isUnitedKingdom))
                                 ds.Add(new DisplayCensus(pos++, r, i));
-                            else if (censusLocation.Country == FactLocation.IRELAND || censusLocation.Country == FactLocation.UNITED_STATES || censusLocation.Country == FactLocation.CANADA)
+                            else if (censusLocation.Country == Countries.IRELAND || censusLocation.Country == Countries.UNITED_STATES || censusLocation.Country == Countries.CANADA)
                             {
                                 if(r.FilterCountry.Equals(censusLocation))
                                     ds.Add(new DisplayCensus(pos++, r, i));

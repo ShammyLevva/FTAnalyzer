@@ -1300,22 +1300,22 @@ namespace FTAnalyzer
             uri.Host = "search.ancestry.co.uk";
             uri.Path = "cgi-bin/sse.dll";
             StringBuilder query = new StringBuilder();
-            if (censusCountry.Equals(FactLocation.UNITED_KINGDOM))
+            if (censusCountry.Equals(Countries.UNITED_KINGDOM))
             {
                 query.Append("gl=" + censusYear + "uki&");
                 query.Append("gss=ms_f-68&");
             }
-            else if (censusCountry.Equals(FactLocation.IRELAND))
+            else if (censusCountry.Equals(Countries.IRELAND))
             {
                 MessageBox.Show("Sorry searching the Ireland census on Ancestry for " + censusYear + " is not supported by FTAnalyzer at this time");
                 return null;
             }
-            else if (censusCountry.Equals(FactLocation.UNITED_STATES))
+            else if (censusCountry.Equals(Countries.UNITED_STATES))
             {
                 query.Append("db=" + censusYear + "usfedcen&");
                 query.Append("gss=ms_db&");
             }
-            else if (censusCountry.Equals(FactLocation.CANADA))
+            else if (censusCountry.Equals(Countries.CANADA))
                 query.Append("db=" + censusYear + "canada&");
             query.Append("rank=1&");
             query.Append("new=1&");
@@ -1374,7 +1374,7 @@ namespace FTAnalyzer
 
         private string BuildFreeCenQuery(string censusCountry, int censusYear, Individual person)
         {
-            if (!censusCountry.Equals(FactLocation.UNITED_KINGDOM))
+            if (!censusCountry.Equals(Countries.UNITED_KINGDOM))
             {
                 MessageBox.Show("Sorry only UK searches can be done on FreeCEN.");
                 return null;
@@ -1453,7 +1453,7 @@ namespace FTAnalyzer
         {
             // bad  http://www.findmypast.co.uk/CensusPersonSearchResultServlet?basicSearch=false&censusYear=1881&occupation=&otherForenames=&otherLastName=&pageDirection=&recordPosition=0&residence=&route=&searchHouseholds=6,15&searchInstitutions=9&searchVessels=11,12&sortOrder=nameAsc&startNewSearch=startNewSearch&forenames=Michael&fns=fns&lastName=Tebbutt&sns=sns&yearOfBirth=1867&yearOfBirthVariation=1&birthPlace=Streatham&country=England&coIdList=Surrey++++++++++++++++++++++++++++++++++%3a3%2c4+++++++++++++++++++++++++++
             // good http://www.findmypast.co.uk/CensusPersonSearchResultServlet?basicSearch=false&censusYear=1881&occupation=&otherForenames=&otherLastName=&pageDirection=&recordPosition=0&residence=&route=&searchHouseholds=6,15&searchInstitutions=9&searchVessels=11,12&sortOrder=nameAsc&startNewSearch=startNewSearch&forenames=C&fns=fns&lastName=Whitethread&sns=sns&yearOfBirth=1867&yearOfBirthVariation=1&birthPlace=Streatham&country=England&coIdList=Surrey++++++++++++++++++++++++++++++++++%3a3%2c4+++++++++++++++++++++++++++
-            if (!censusCountry.Equals(FactLocation.UNITED_KINGDOM))
+            if (!censusCountry.Equals(Countries.UNITED_KINGDOM))
             {
                 MessageBox.Show("Sorry non UK census searching of Find My Past isn't supported in this version of FTAnalyzer");
                 return null;

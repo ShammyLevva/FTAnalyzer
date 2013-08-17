@@ -466,10 +466,10 @@ namespace FTAnalyzer
             }
             else
             {
-                if (location == FactLocation.ENG_WALES)
-                    census = new Census(FactLocation.UNITED_KINGDOM, new FactLocation(FactLocation.ENGLAND), new FactLocation(FactLocation.WALES));
-                else if (location == FactLocation.SCOTLAND)
-                    census = new Census(FactLocation.UNITED_KINGDOM, new FactLocation(location));
+                if (location == Countries.ENG_WALES)
+                    census = new Census(Countries.UNITED_KINGDOM, new FactLocation(Countries.ENGLAND), new FactLocation(Countries.WALES));
+                else if (location == Countries.SCOTLAND)
+                    census = new Census(Countries.UNITED_KINGDOM, new FactLocation(location));
                 else
                     census = new Census(location, new FactLocation(location));
                 censusComparator.addComparator(new LocationComparator(FactLocation.COUNTRY));
@@ -496,36 +496,36 @@ namespace FTAnalyzer
         {
             Func<Registration, string> country = x => x.BestLocation(CensusDate.UKCENSUS1881).Country;
             Func<Registration, bool> filter = FilterUtils.OrFilter<Registration>(
-                FilterUtils.StringFilter<Registration>(country, FactLocation.ENGLAND),
-                FilterUtils.StringFilter<Registration>(country, FactLocation.WALES));
+                FilterUtils.StringFilter<Registration>(country, Countries.ENGLAND),
+                FilterUtils.StringFilter<Registration>(country, Countries.WALES));
             string reportTitle = "1881 England & Wales Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(FactLocation.ENG_WALES, filter, CensusDate.UKCENSUS1881, reportTitle);
+            LostCousinsCensus(Countries.ENG_WALES, filter, CensusDate.UKCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Scot_Click(object sender, EventArgs e)
         {
             Func<Registration, string> country = x => x.BestLocation(CensusDate.UKCENSUS1881).Country;
-            Func<Registration, bool> filter = FilterUtils.StringFilter<Registration>(country, FactLocation.SCOTLAND);
+            Func<Registration, bool> filter = FilterUtils.StringFilter<Registration>(country, Countries.SCOTLAND);
             string reportTitle = "1881 Scotland Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(FactLocation.SCOTLAND, filter, CensusDate.UKCENSUS1881, reportTitle);
+            LostCousinsCensus(Countries.SCOTLAND, filter, CensusDate.UKCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Canada_Click(object sender, EventArgs e)
         {
             Func<Registration, string> country = x => x.BestLocation(CensusDate.UKCENSUS1881).Country;
-            Func<Registration, bool> filter = FilterUtils.StringFilter<Registration>(country, FactLocation.CANADA);
+            Func<Registration, bool> filter = FilterUtils.StringFilter<Registration>(country, Countries.CANADA);
             string reportTitle = "1881 Canada Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(FactLocation.CANADA, filter, CensusDate.CANADACENSUS1881, reportTitle);
+            LostCousinsCensus(Countries.CANADA, filter, CensusDate.CANADACENSUS1881, reportTitle);
         }
 
         private void btnLC1841EW_Click(object sender, EventArgs e)
         {
             Func<Registration, string> country = x => x.BestLocation(CensusDate.UKCENSUS1841).Country;
             Func<Registration, bool> filter = FilterUtils.OrFilter<Registration>(
-                FilterUtils.StringFilter<Registration>(country, FactLocation.ENGLAND),
-                FilterUtils.StringFilter<Registration>(country, FactLocation.WALES));
+                FilterUtils.StringFilter<Registration>(country, Countries.ENGLAND),
+                FilterUtils.StringFilter<Registration>(country, Countries.WALES));
             string reportTitle = "1841 England & Wales Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(FactLocation.ENG_WALES, filter, CensusDate.UKCENSUS1841, reportTitle);
+            LostCousinsCensus(Countries.ENG_WALES, filter, CensusDate.UKCENSUS1841, reportTitle);
         }
 
 
@@ -533,26 +533,26 @@ namespace FTAnalyzer
         {
             Func<Registration, string> country = x => x.BestLocation(CensusDate.UKCENSUS1911).Country;
             Func<Registration, bool> filter = FilterUtils.OrFilter<Registration>(
-                FilterUtils.StringFilter<Registration>(country, FactLocation.ENGLAND),
-                FilterUtils.StringFilter<Registration>(country, FactLocation.WALES));
+                FilterUtils.StringFilter<Registration>(country, Countries.ENGLAND),
+                FilterUtils.StringFilter<Registration>(country, Countries.WALES));
             string reportTitle = "1911 England & Wales Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(FactLocation.ENG_WALES, filter, CensusDate.UKCENSUS1911, reportTitle);
+            LostCousinsCensus(Countries.ENG_WALES, filter, CensusDate.UKCENSUS1911, reportTitle);
         }
 
         private void btnLC1880USA_Click(object sender, EventArgs e)
         {
             Func<Registration, string> country = x => x.BestLocation(CensusDate.USCENSUS1880).Country;
-            Func<Registration, bool> filter = FilterUtils.StringFilter<Registration>(country, FactLocation.UNITED_STATES);
+            Func<Registration, bool> filter = FilterUtils.StringFilter<Registration>(country, Countries.UNITED_STATES);
             string reportTitle = "1880 US Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(FactLocation.UNITED_STATES, filter, CensusDate.USCENSUS1880, reportTitle);
+            LostCousinsCensus(Countries.UNITED_STATES, filter, CensusDate.USCENSUS1880, reportTitle);
         }
 
         private void btnLC1911Ireland_Click(object sender, EventArgs e)
         {
             Func<Registration, string> country = x => x.BestLocation(CensusDate.IRELANDCENSUS1911).Country;
-            Func<Registration, bool> filter = FilterUtils.StringFilter<Registration>(country, FactLocation.IRELAND);
+            Func<Registration, bool> filter = FilterUtils.StringFilter<Registration>(country, Countries.IRELAND);
             string reportTitle = "1911 Ireland Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(FactLocation.IRELAND, filter, CensusDate.IRELANDCENSUS1911, reportTitle);
+            LostCousinsCensus(Countries.IRELAND, filter, CensusDate.IRELANDCENSUS1911, reportTitle);
         }
 
         private void labLostCousinsWeb_Click(object sender, EventArgs e)
@@ -655,7 +655,7 @@ namespace FTAnalyzer
                 FilterUtils.AndFilter<Registration>(
                     FilterUtils.IncompleteDataFilter<Registration>(
                         FactLocation.PARISH, x => x.isCertificatePresent(), x => x.FilterDate, (d, x) => x.BestLocation(d)),
-                    FilterUtils.StringFilter<Registration>(x => x.BestLocation(FactDate.UNKNOWN_DATE).Country, FactLocation.ENGLAND));
+                    FilterUtils.StringFilter<Registration>(x => x.BestLocation(FactDate.UNKNOWN_DATE).Country, Countries.ENGLAND));
 
             Func<Registration, bool> directOrBlood = FilterUtils.OrFilter<Registration>(
                     FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.DIRECT),
@@ -683,7 +683,7 @@ namespace FTAnalyzer
                 FilterUtils.AndFilter<Registration>(
                     FilterUtils.IncompleteDataFilter<Registration>(
                         FactLocation.PARISH, x => x.isCertificatePresent(), x => x.FilterDate, (d, x) => x.BestLocation(d)),
-                    FilterUtils.StringFilter<Registration>(x => x.BestLocation(FactDate.UNKNOWN_DATE).Country, FactLocation.ENGLAND));
+                    FilterUtils.StringFilter<Registration>(x => x.BestLocation(FactDate.UNKNOWN_DATE).Country, Countries.ENGLAND));
 
             Func<Registration, bool> directOrBlood = FilterUtils.OrFilter<Registration>(
                     FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.DIRECT),
@@ -711,7 +711,7 @@ namespace FTAnalyzer
                 FilterUtils.AndFilter<Registration>(
                     FilterUtils.IncompleteDataFilter<Registration>(
                         FactLocation.PARISH, x => x.isCertificatePresent(), x => x.FilterDate, (d, x) => x.BestLocation(d)),
-                    FilterUtils.StringFilter<Registration>(x => x.BestLocation(FactDate.UNKNOWN_DATE).Country, FactLocation.ENGLAND));
+                    FilterUtils.StringFilter<Registration>(x => x.BestLocation(FactDate.UNKNOWN_DATE).Country, Countries.ENGLAND));
 
             Func<Registration, bool> directOrBlood = FilterUtils.OrFilter<Registration>(
                     FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.DIRECT),
@@ -849,7 +849,7 @@ namespace FTAnalyzer
 
         private void FamilySearchDefaultCountry_CountryChanged(object sender, EventArgs e)
         {
-            if (FamilySearchDefaultCountry.Country == FactLocation.SCOTLAND)
+            if (FamilySearchDefaultCountry.Country == Countries.SCOTLAND)
                 rbFamilySearchCountry.Checked = true;
             else
                 rbFamilySearchRegion.Checked = true;

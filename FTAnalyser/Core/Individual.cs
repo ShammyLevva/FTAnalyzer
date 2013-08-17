@@ -513,24 +513,24 @@ namespace FTAnalyzer
                                 (when == CensusDate.UKCENSUS1841 || when == CensusDate.UKCENSUS1881 || when == CensusDate.UKCENSUS1911))
                                 return true;
                         }
-                        else if (f.Location.country == FactLocation.SCOTLAND)
+                        else if (f.Location.country == Countries.SCOTLAND)
                         {
                             if (f.FactDate.overlaps(CensusDate.UKCENSUS1881) && when == CensusDate.UKCENSUS1881)
                                 return true;
                         }
-                        else if (f.Location.country == FactLocation.CANADA)
+                        else if (f.Location.country == Countries.CANADA)
                         {
                             if (f.FactDate.overlaps(CensusDate.CANADACENSUS1881) && when == CensusDate.CANADACENSUS1881)
                                 return true;
                         }
-                        else if (f.Location.country == FactLocation.UNITED_STATES)
+                        else if (f.Location.country == Countries.UNITED_STATES)
                         {
                             if ((f.FactDate.overlaps(CensusDate.USCENSUS1880) ||
                                  f.FactDate.overlaps(CensusDate.USCENSUS1940)) && 
                                 (when == CensusDate.USCENSUS1880 || when == CensusDate.USCENSUS1940))
                                 return true;
                         }
-                        else if (f.Location.country == FactLocation.IRELAND)
+                        else if (f.Location.country == Countries.IRELAND)
                         {
                             if (f.FactDate.overlaps(CensusDate.IRELANDCENSUS1911) && when == CensusDate.IRELANDCENSUS1911)
                                 return true;

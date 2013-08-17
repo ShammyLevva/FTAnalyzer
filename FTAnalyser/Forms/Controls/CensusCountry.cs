@@ -30,13 +30,13 @@ namespace Controls
         {
             get
             {
-                if (Scotland) return FactLocation.SCOTLAND;
-                if (England) return FactLocation.ENGLAND;
-                if (Wales) return FactLocation.WALES;
-                if (UK) return FactLocation.UNITED_KINGDOM;
-                if (Canada) return FactLocation.CANADA;
-                if (USA) return FactLocation.UNITED_STATES;
-                return FactLocation.ENGLAND;
+                if (Scotland) return Countries.SCOTLAND;
+                if (England) return Countries.ENGLAND;
+                if (Wales) return Countries.WALES;
+                if (UK) return Countries.UNITED_KINGDOM;
+                if (Canada) return Countries.CANADA;
+                if (USA) return Countries.UNITED_STATES;
+                return Countries.ENGLAND;
             }
         }
 
@@ -53,19 +53,19 @@ namespace Controls
             Func<FactDate, Func<T, bool>> locationFilter = d => FilterUtils.TrueFilter<T>();
             Func<FactLocation, string> country = x => x.Country;
             if (Scotland)
-                locationFilter = FilterUtils.LocationFilter<T>(location, country, FactLocation.SCOTLAND);
+                locationFilter = FilterUtils.LocationFilter<T>(location, country, Countries.SCOTLAND);
             else if (England)
-                locationFilter = FilterUtils.LocationFilter<T>(location, country, FactLocation.ENGLAND);
+                locationFilter = FilterUtils.LocationFilter<T>(location, country, Countries.ENGLAND);
             else if (Wales)
-                locationFilter = FilterUtils.LocationFilter<T>(location, country, FactLocation.WALES);
+                locationFilter = FilterUtils.LocationFilter<T>(location, country, Countries.WALES);
             else if (UK)
-                locationFilter = FilterUtils.OrFilter<FactDate, T>(FilterUtils.LocationFilter<T>(location, country, FactLocation.SCOTLAND),
-                                        FilterUtils.LocationFilter<T>(location, country, FactLocation.ENGLAND),
-                                        FilterUtils.LocationFilter<T>(location, country, FactLocation.WALES));
+                locationFilter = FilterUtils.OrFilter<FactDate, T>(FilterUtils.LocationFilter<T>(location, country, Countries.SCOTLAND),
+                                        FilterUtils.LocationFilter<T>(location, country, Countries.ENGLAND),
+                                        FilterUtils.LocationFilter<T>(location, country, Countries.WALES));
             else if (Canada)
-                locationFilter = FilterUtils.LocationFilter<T>(location, country, FactLocation.CANADA);
+                locationFilter = FilterUtils.LocationFilter<T>(location, country, Countries.CANADA);
             else if (USA)
-                locationFilter = FilterUtils.LocationFilter<T>(location, country, FactLocation.UNITED_STATES);
+                locationFilter = FilterUtils.LocationFilter<T>(location, country, Countries.UNITED_STATES);
             return locationFilter;
         }
 
@@ -74,17 +74,17 @@ namespace Controls
             get {
 
                 if (Scotland)
-                    return new FactLocation(FactLocation.SCOTLAND);
+                    return new FactLocation(Countries.SCOTLAND);
                 else if (England)
-                    return new FactLocation(FactLocation.ENGLAND);
+                    return new FactLocation(Countries.ENGLAND);
                 else if (Wales)
-                    return new FactLocation(FactLocation.WALES);
+                    return new FactLocation(Countries.WALES);
                 else if (UK)
-                    return new FactLocation(FactLocation.UNITED_KINGDOM);
+                    return new FactLocation(Countries.UNITED_KINGDOM);
                 else if (Canada)
-                    return new FactLocation(FactLocation.CANADA);
+                    return new FactLocation(Countries.CANADA);
                 else if (USA)
-                    return new FactLocation(FactLocation.UNITED_STATES);
+                    return new FactLocation(Countries.UNITED_STATES);
                 else
                     return null;
             }

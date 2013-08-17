@@ -25,7 +25,7 @@ namespace FTAnalyzer
 
         public static int CensusCollectionID(string censusCountry, int censusYear)
         {
-            if(censusCountry == FactLocation.ENGLAND || censusCountry == FactLocation.WALES)
+            if(censusCountry == Countries.ENGLAND || censusCountry == Countries.WALES)
             {
                 switch(censusYear)
                 {
@@ -39,7 +39,7 @@ namespace FTAnalyzer
                     case 1911 : return 1921547;
                 }
             } 
-            else if(censusCountry == FactLocation.SCOTLAND)
+            else if(censusCountry == Countries.SCOTLAND)
             {
                 switch(censusYear)
                 {

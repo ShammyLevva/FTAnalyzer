@@ -9,27 +9,10 @@ using System.Text.RegularExpressions;
 
 namespace FTAnalyzer
 {
-    public class FactLocation : IComparable<FactLocation>, IDisplayLocation {
-        
-        public static readonly string SCOTLAND = "Scotland", ENGLAND = "England", CANADA = "Canada", UNITED_STATES = "United States",
-            WALES = "Wales", IRELAND = "Ireland", UNITED_KINGDOM = "United Kingdom", NEW_ZEALAND = "New Zealand", AUSTRALIA = "Australia", 
-            UNKNOWN_COUNTRY = "Unknown", ENG_WALES = "England & Wales", INDIA = "India", FRANCE = "France", GERMANY = "Germany", 
-            ITALY = "Italy", SPAIN = "Spain";
-        
+    public class FactLocation : IComparable<FactLocation>, IDisplayLocation
+    {
+
         public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, PARISH = 2, ADDRESS = 3, PLACE = 4;
-
-        private static readonly ISet<string> KNOWN_COUNTRIES = new HashSet<string>(new string[] {
-            SCOTLAND, ENGLAND, CANADA, UNITED_STATES, WALES, IRELAND, UNITED_KINGDOM, NEW_ZEALAND, AUSTRALIA, INDIA, FRANCE, GERMANY,
-            ITALY, SPAIN
-        });
-
-        private static readonly ISet<string> UK_COUNTRIES = new HashSet<string>(new string[] { 
-            SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM
-        });
-
-        private static readonly ISet<string> CENSUS_COUNTRIES = new HashSet<string>(new string[] { 
-            SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM, IRELAND, UNITED_STATES, CANADA
-        });
 
         private string location;
         private string fixedLocation;
@@ -52,11 +35,12 @@ namespace FTAnalyzer
         private static Dictionary<string, string> REGION_SHIFTS = new Dictionary<string, string>();
         private static Dictionary<string, string> REGION_IDS = new Dictionary<string, string>();
         private static Dictionary<string, string> FREECEN_LOOKUP = new Dictionary<string, string>();
-        private static Dictionary<string, Tuple<string, string>> FINDMYPAST_LOOKUP = new Dictionary<string, Tuple<string,string>>();
-        
-        static FactLocation() {
+        private static Dictionary<string, Tuple<string, string>> FINDMYPAST_LOOKUP = new Dictionary<string, Tuple<string, string>>();
+
+        static FactLocation()
+        {
             // load conversions from XML file
-            string filename = Application.StartupPath + "\\Resources\\FactLocationFixes.xml";
+            string filename = Path.Combine(Application.StartupPath, @"Resources\FactLocationFixes.xml");
             if (File.Exists(filename))
             {
                 XmlDocument xmlDoc = new XmlDocument();
@@ -120,12 +104,9 @@ namespace FTAnalyzer
             }
         }
 
-        public static bool isUnitedKingdom(string country)
-        {
-            return UK_COUNTRIES.Contains(country);
-        }
 
-        public FactLocation() {
+        public FactLocation()
+        {
             this.location = "";
             this.fixedLocation = "";
             this.sortableLocation = "";
@@ -158,40 +139,55 @@ namespace FTAnalyzer
             }
         }
 
-        public FactLocation(string location) : this() {
-            if (location != null) {
+        public FactLocation(string location)
+            : this()
+        {
+            if (location != null)
+            {
                 this.location = location;
                 // we need to parse the location string from a little injun to a big injun
                 int comma = this.location.LastIndexOf(",");
-                if (comma > 0) {
+                if (comma > 0)
+                {
                     country = location.Substring(comma + 1).Trim();
-                    location = location.Substring(0,comma);
-                    comma = location.LastIndexOf(",",comma);
-                    if (comma > 0) {
+                    location = location.Substring(0, comma);
+                    comma = location.LastIndexOf(",", comma);
+                    if (comma > 0)
+                    {
                         region = location.Substring(comma + 1).Trim();
-                        location = location.Substring(0,comma);
-                        comma = location.LastIndexOf(",",comma);
-                        if (comma > 0) {
+                        location = location.Substring(0, comma);
+                        comma = location.LastIndexOf(",", comma);
+                        if (comma > 0)
+                        {
                             parish = location.Substring(comma + 1).Trim();
-                            location = location.Substring(0,comma);
-                            comma = location.LastIndexOf(",",comma);
-                            if (comma > 0) {
+                            location = location.Substring(0, comma);
+                            comma = location.LastIndexOf(",", comma);
+                            if (comma > 0)
+                            {
                                 address = location.Substring(comma + 1).Trim();
-                                place = location.Substring(0,comma).Trim();
+                                place = location.Substring(0, comma).Trim();
                                 level = PLACE;
-                            } else {
+                            }
+                            else
+                            {
                                 address = location.Trim();
                                 level = ADDRESS;
                             }
-                        } else {
+                        }
+                        else
+                        {
                             parish = location.Trim();
                             level = PARISH;
                         }
-                    } else {
+                    }
+                    else
+                    {
                         region = location.Trim();
                         level = REGION;
                     }
-                } else {
+                }
+                else
+                {
                     country = location.Trim();
                     level = COUNTRY;
                 }
@@ -214,7 +210,7 @@ namespace FTAnalyzer
                 //    Console.WriteLine("Debug : '" + before + "'  converted to '" + after + "'");
             }
         }
-    
+
         #region Fix Location string routines
         private void fixEmptyFields()
         {
@@ -368,7 +364,7 @@ namespace FTAnalyzer
             if (!place.Equals(string.Empty))
                 sortableLocation = sortableLocation + ", " + place;
         }
-        
+
         #endregion
 
         private void SetRegionID()
@@ -408,7 +404,8 @@ namespace FTAnalyzer
             get { return sortableLocation; }
         }
 
-        public string Address {
+        public string Address
+        {
             get { return address; }
             set { this.address = value; }
         }
@@ -424,19 +421,21 @@ namespace FTAnalyzer
             set { this.country = value; }
         }
 
-        public string Parish {
+        public string Parish
+        {
             get { return parish; }
             set { this.parish = value; }
         }
 
-        public string Place {
+        public string Place
+        {
             get { return place; }
             set { this.place = value; }
         }
 
         public string PlaceNumeric
         {
-            get { return FixNumerics( this.place); }
+            get { return FixNumerics(this.place); }
         }
 
         public string Region
@@ -455,7 +454,8 @@ namespace FTAnalyzer
             get { return level; }
         }
 
-        public string ParishID {
+        public string ParishID
+        {
             get { return parishID; }
         }
 
@@ -473,14 +473,14 @@ namespace FTAnalyzer
 
         public bool isKnownCountry
         {
-            get { return KNOWN_COUNTRIES.Contains(country); }
+            get { return Countries.isKnownCountry(country); }
         }
 
         public bool isUnitedKingdom
         {
             get
             {
-                return UK_COUNTRIES.Contains(country);
+                return Countries.isUnitedKingdom(country);
             }
         }
 
@@ -488,15 +488,15 @@ namespace FTAnalyzer
         {
             get
             {
-                if (isUnitedKingdom(country))
-                    return UNITED_KINGDOM;
-                else if (CENSUS_COUNTRIES.Contains(country))
+                if (Countries.isUnitedKingdom(country))
+                    return Countries.UNITED_KINGDOM;
+                else if (Countries.isCensusCountry(country))
                     return country;
                 else
-                    return UNKNOWN_COUNTRY;
+                    return Countries.UNKNOWN_COUNTRY;
             }
         }
-        
+
         public string FreeCenCountyCode
         {
             get
@@ -513,7 +513,7 @@ namespace FTAnalyzer
         {
             get
             {
-                Tuple<string,string> result;
+                Tuple<string, string> result;
                 FINDMYPAST_LOOKUP.TryGetValue(region, out result);
                 return result;
             }
@@ -523,8 +523,7 @@ namespace FTAnalyzer
 
         public bool SupportedLocation(int level)
         {
-            if(country == FactLocation.SCOTLAND || country == FactLocation.ENGLAND || country == FactLocation.WALES ||
-                country == FactLocation.IRELAND || country == FactLocation.CANADA || country == FactLocation.UNITED_STATES)
+            if (Countries.isCensusCountry(country))
             {
                 if (level == COUNTRY) return true;
                 // check region is valid if so return true
@@ -583,39 +582,48 @@ namespace FTAnalyzer
         }
 
 
-        public bool isBlank () {
+        public bool isBlank()
+        {
             return this.country.Length == 0;
         }
-        
-        public bool Matches (string s, int level) {
-            switch (level) {
+
+        public bool Matches(string s, int level)
+        {
+            switch (level)
+            {
                 case COUNTRY: return this.country.ToUpper().CompareTo(s.ToUpper()) == 0;
                 case REGION: return this.region.ToUpper().CompareTo(s.ToUpper()) == 0;
                 case PARISH: return this.parish.ToUpper().CompareTo(s.ToUpper()) == 0;
                 case ADDRESS: return this.address.ToUpper().CompareTo(s.ToUpper()) == 0;
                 case PLACE: return this.place.ToUpper().CompareTo(s.ToUpper()) == 0;
-                default:      return false;
+                default: return false;
             }
         }
-        
-        public int CompareTo (FactLocation that) {
-            return CompareTo (that, PLACE);
+
+        public int CompareTo(FactLocation that)
+        {
+            return CompareTo(that, PLACE);
         }
-        
-        public int CompareTo(IDisplayLocation that, int level) 
+
+        public int CompareTo(IDisplayLocation that, int level)
         {
             return CompareTo((FactLocation)that, level);
         }
 
-        public virtual int CompareTo (FactLocation that, int level) {
+        public virtual int CompareTo(FactLocation that, int level)
+        {
             int res = this.country.CompareTo(that.country);
-            if (res == 0 && level > COUNTRY) {
+            if (res == 0 && level > COUNTRY)
+            {
                 res = this.region.CompareTo(that.region);
-                if (res == 0 && level > REGION) {
+                if (res == 0 && level > REGION)
+                {
                     res = this.parish.CompareTo(that.parish);
-                    if (res == 0 && level > PARISH) {
+                    if (res == 0 && level > PARISH)
+                    {
                         res = this.address.CompareTo(that.address);
-                        if (res == 0 && level > ADDRESS) {
+                        if (res == 0 && level > ADDRESS)
+                        {
                             res = this.place.CompareTo(that.place);
                         }
                     }
@@ -623,16 +631,21 @@ namespace FTAnalyzer
             }
             return res;
         }
-        
-        public override string ToString() {
+
+        public override string ToString()
+        {
             //return location;
             return fixedLocation;
         }
-        
-        public override bool Equals(Object that) {
-            if(that is FactLocation) {
-                return this.CompareTo((FactLocation) that) == 0 ? true : false;
-            } else {
+
+        public override bool Equals(Object that)
+        {
+            if (that is FactLocation)
+            {
+                return this.CompareTo((FactLocation)that) == 0 ? true : false;
+            }
+            else
+            {
                 return false;
             }
         }
