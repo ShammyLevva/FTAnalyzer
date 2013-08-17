@@ -195,10 +195,7 @@ namespace FTAnalyzer
                     cenDate.RevertToDefaultDate();
                     tsCountLabel.Text = "";
                     btnShowResults.Enabled = ft.IndividualCount > 0;
-                    if (ckbNoLocations.Checked)
-                        censusCountry.Enabled = false;
-                    else
-                        censusCountry.Enabled = true;
+                    SetCensusDateSelector();
                 }
                 else if (tabSelector.SelectedTab == tabTreetops)
                 {
@@ -275,6 +272,20 @@ namespace FTAnalyzer
                     }
                 }
                 HourGlass(false);
+            }
+        }
+
+        private void SetCensusDateSelector()
+        {
+            if (ckbNoLocations.Checked)
+            {
+                censusCountry.Enabled = false;
+                cenDate.AddAllCensusItems();
+            }
+            else
+            {
+                censusCountry.Enabled = true;
+                cenDate.Country = censusCountry.Country;
             }
         }
 
@@ -870,10 +881,7 @@ namespace FTAnalyzer
 
         private void ckbNoLocations_CheckedChanged(object sender, EventArgs e)
         {
-            if (ckbNoLocations.Checked)
-                censusCountry.Enabled = false;
-            else
-                censusCountry.Enabled = true;
+            SetCensusDateSelector();
         }
 
         private void mnuPrint_Click(object sender, EventArgs e)
