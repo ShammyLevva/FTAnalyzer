@@ -467,7 +467,7 @@ namespace FTAnalyzer
             else
             {
                 if (location == Countries.ENG_WALES)
-                    census = new Census(Countries.UNITED_KINGDOM, new FactLocation(Countries.ENGLAND), new FactLocation(Countries.WALES));
+                    census = new Census(Countries.UNITED_KINGDOM, Countries.FactLocation(Countries.ENGLAND), Countries.FactLocation(Countries.WALES));
                 else if (location == Countries.SCOTLAND)
                     census = new Census(Countries.UNITED_KINGDOM, new FactLocation(location));
                 else

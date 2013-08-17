@@ -74,17 +74,17 @@ namespace Controls
             get {
 
                 if (Scotland)
-                    return new FactLocation(Countries.SCOTLAND);
+                    return Countries.FactLocation(Countries.SCOTLAND);
                 else if (England)
-                    return new FactLocation(Countries.ENGLAND);
+                    return Countries.FactLocation(Countries.ENGLAND);
                 else if (Wales)
-                    return new FactLocation(Countries.WALES);
+                    return Countries.FactLocation(Countries.WALES);
                 else if (UK)
-                    return new FactLocation(Countries.UNITED_KINGDOM);
+                    return Countries.FactLocation(Countries.UNITED_KINGDOM);
                 else if (Canada)
-                    return new FactLocation(Countries.CANADA);
+                    return Countries.FactLocation(Countries.CANADA);
                 else if (USA)
-                    return new FactLocation(Countries.UNITED_STATES);
+                    return Countries.FactLocation(Countries.UNITED_STATES);
                 else
                     return null;
             }

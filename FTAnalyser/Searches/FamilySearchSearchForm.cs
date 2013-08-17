@@ -16,7 +16,7 @@ namespace FTAnalyzer
         protected Dictionary<string, string> parameters;
         protected TextWriter resultFile;
         protected RichTextBox rtbOutput;
-        protected FactLocation defaultLocation = new FactLocation(Countries.SCOTLAND);
+        protected FactLocation defaultLocation = Countries.FactLocation(Countries.SCOTLAND);
         protected FamilySearchLocation defLoc = null;
         protected int level;
         protected int resultCount = 0;
