@@ -16,7 +16,7 @@ namespace FTAnalyzer
         }
         
         public bool select (T t) {
-            return t.RelationType == filterType;
+            return t.RelationType == filterType || t.RelationType == Individual.ROOT;
         }
     }
 }
