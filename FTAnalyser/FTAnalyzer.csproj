@@ -198,10 +198,6 @@
     <EmbeddedResource Include="Forms\GoogleMap.resx">
       <DependentUpon>GoogleMap.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RegistrationReport.resx">
-      <DependentUpon>RegistrationReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\BirthReport.rdlc" />
     <EmbeddedResource Include="Forms\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -210,9 +206,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Controls\CensusDateSelector.resx">
       <DependentUpon>CensusDateSelector.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FamilySearchResultsViewer.resx">
-      <DependentUpon>FamilySearchResultsViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\People.resx">
       <DependentUpon>People.cs</DependentUpon>
@@ -231,8 +224,6 @@
     <EmbeddedResource Include="Forms\Controls\CensusCountry.resx">
       <DependentUpon>CensusCountry.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\DeathReport.rdlc" />
-    <EmbeddedResource Include="Reports\MarriageReport.rdlc" />
     <EmbeddedResource Include="UserControls\GeneralSettings.resx">
       <DependentUpon>GeneralSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -351,11 +342,6 @@
     <Compile Include="Exceptions\DuplicateException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Core\Family.cs" />
-    <Compile Include="Formatters\BaseOutputFormatter.cs" />
-    <Compile Include="Formatters\BirthOutputFormatter.cs" />
-    <Compile Include="Formatters\CensusOutputFormatter.cs" />
-    <Compile Include="Formatters\DeathOutputFormatter.cs" />
-    <Compile Include="Formatters\MarriageOutputFormatter.cs" />
     <Compile Include="Forms\Census.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -368,12 +354,6 @@
     <Compile Include="Forms\Controls\CensusDateSelector.Designer.cs">
       <DependentUpon>CensusDateSelector.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FamilySearchResultsViewer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FamilySearchResultsViewer.Designer.cs">
-      <DependentUpon>FamilySearchResultsViewer.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\People.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -385,12 +365,6 @@
     </Compile>
     <Compile Include="Forms\Locations.Designer.cs">
       <DependentUpon>Locations.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\RegistrationReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\RegistrationReport.Designer.cs">
-      <DependentUpon>RegistrationReport.cs</DependentUpon>
     </Compile>
     <Compile Include="HTTPParser\Attribute.cs" />
     <Compile Include="HTTPParser\AttributeList.cs" />
@@ -419,10 +393,7 @@
     <Compile Include="Searches\FamilySearchOldSearchForm.cs" />
     <Compile Include="Core\ParishBatch.cs" />
     <Compile Include="Registrations\RegistrationsProcessor.cs" />
-    <Compile Include="Registrations\BirthRegistration.cs" />
     <Compile Include="Registrations\CensusRegistration.cs" />
-    <Compile Include="Registrations\DeathRegistration.cs" />
-    <Compile Include="Registrations\MarriageRegistration.cs" />
     <Compile Include="Registrations\Registration.cs" />
     <Compile Include="Core\Individual.cs" />
     <Compile Include="Core\FactLocation.cs" />
@@ -616,6 +587,7 @@
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

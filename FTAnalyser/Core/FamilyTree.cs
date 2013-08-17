@@ -955,82 +955,82 @@ namespace FTAnalyzer
 
         #region Registrations
 
-        public void processRegistration(String filename, RegistrationsProcessor rp,
-            List<Registration> sourceRegs, BaseOutputFormatter formatter)
-        {
-            TextWriter output = new StreamWriter(filename + ".csv");
-            formatter.printHeader(output);
-            List<Registration> regs = rp.processRegistrations(sourceRegs);
-            foreach (Registration r in regs)
-            {
-                formatter.printItem(r, output);
-            }
-            FamilyTree.Instance.xmlErrorbox.AppendText("written " + regs.Count + " records to " + filename + "\n");
-            output.Close();
-        }
+        //public void processRegistration(String filename, RegistrationsProcessor rp,
+        //    List<Registration> sourceRegs, BaseOutputFormatter formatter)
+        //{
+        //    TextWriter output = new StreamWriter(filename + ".csv");
+        //    formatter.printHeader(output);
+        //    List<Registration> regs = rp.processRegistrations(sourceRegs);
+        //    foreach (Registration r in regs)
+        //    {
+        //        formatter.printItem(r, output);
+        //    }
+        //    FamilyTree.Instance.xmlErrorbox.AppendText("written " + regs.Count + " records to " + filename + "\n");
+        //    output.Close();
+        //}
 
-        public List<Registration> getAllBirthRegistrations()
-        {
-            List<Registration> result = new List<Registration>();
-            foreach (Individual i in individuals)
-            {
-                ParentalGroup pg = CreateFamilyGroup(i);
-                result.Add(new BirthRegistration(pg));
-            }
-            return result;
-        }
+        //public List<Registration> getAllBirthRegistrations()
+        //{
+        //    List<Registration> result = new List<Registration>();
+        //    foreach (Individual i in individuals)
+        //    {
+        //        ParentalGroup pg = CreateFamilyGroup(i);
+        //        result.Add(new BirthRegistration(pg));
+        //    }
+        //    return result;
+        //}
 
-        public List<Registration> getAllMarriageRegistrations()
-        {
-            List<Registration> result = new List<Registration>();
-            foreach (Individual i in individuals)
-            {
-                if (!i.isSingleAtDeath())
-                {
-                    ParentalGroup pg = CreateFamilyGroup(i);
-                    List<Family> indfam = i.isMale ? FindFamiliesWhereHusband(i) : FindFamiliesWhereWife(i);
-                    if (indfam.Count == 0)
-                        result.Add(new MarriageRegistration(pg, null, null));
-                    else if (i.isMale)
-                    {
-                        foreach (Family f in indfam)
-                        {
-                            ParentalGroup pg2 = CreateFamilyGroup(f.Wife);
-                            result.Add(new MarriageRegistration(pg, pg2, f));
-                        }
-                    }
-                }
+        //public List<Registration> getAllMarriageRegistrations()
+        //{
+        //    List<Registration> result = new List<Registration>();
+        //    foreach (Individual i in individuals)
+        //    {
+        //        if (!i.isSingleAtDeath())
+        //        {
+        //            ParentalGroup pg = CreateFamilyGroup(i);
+        //            List<Family> indfam = i.isMale ? FindFamiliesWhereHusband(i) : FindFamiliesWhereWife(i);
+        //            if (indfam.Count == 0)
+        //                result.Add(new MarriageRegistration(pg, null, null));
+        //            else if (i.isMale)
+        //            {
+        //                foreach (Family f in indfam)
+        //                {
+        //                    ParentalGroup pg2 = CreateFamilyGroup(f.Wife);
+        //                    result.Add(new MarriageRegistration(pg, pg2, f));
+        //                }
+        //            }
+        //        }
 
-            }
-            return result;
-        }
+        //    }
+        //    return result;
+        //}
 
-        public List<Registration> getAllDeathRegistrations()
-        {
-            List<Registration> result = new List<Registration>();
-            foreach (Individual i in individuals)
-            {
-                if (i.DeathDate != FactDate.UNKNOWN_DATE)
-                {
-                    // only include dead individuals
-                    ParentalGroup pg = CreateFamilyGroup(i);
-                    List<Family> indfam = i.isMale ? FindFamiliesWhereHusband(i) : FindFamiliesWhereWife(i);
-                    if (indfam.Count == 0)
-                        result.Add(new DeathRegistration(pg, null, Family.SINGLE));
-                    else
-                    {
-                        foreach (Family f in indfam)
-                        {
-                            if (i.isMale)
-                                result.Add(new DeathRegistration(pg, f.Wife, f.MaritalStatus));
-                            else
-                                result.Add(new DeathRegistration(pg, f.Husband, f.MaritalStatus));
-                        }
-                    }
-                }
-            }
-            return result;
-        }
+        //public List<Registration> getAllDeathRegistrations()
+        //{
+        //    List<Registration> result = new List<Registration>();
+        //    foreach (Individual i in individuals)
+        //    {
+        //        if (i.DeathDate != FactDate.UNKNOWN_DATE)
+        //        {
+        //            // only include dead individuals
+        //            ParentalGroup pg = CreateFamilyGroup(i);
+        //            List<Family> indfam = i.isMale ? FindFamiliesWhereHusband(i) : FindFamiliesWhereWife(i);
+        //            if (indfam.Count == 0)
+        //                result.Add(new DeathRegistration(pg, null, Family.SINGLE));
+        //            else
+        //            {
+        //                foreach (Family f in indfam)
+        //                {
+        //                    if (i.isMale)
+        //                        result.Add(new DeathRegistration(pg, f.Wife, f.MaritalStatus));
+        //                    else
+        //                        result.Add(new DeathRegistration(pg, f.Husband, f.MaritalStatus));
+        //                }
+        //            }
+        //        }
+        //    }
+        //    return result;
+        //}
 
         public List<Registration> getAllCensusRegistrations(FactDate censusDate, bool censusDone, bool includeResidence, bool lostCousinsCheck)
         {
