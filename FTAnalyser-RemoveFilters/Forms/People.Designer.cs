@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(People));
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
             this.dgFamilies = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
@@ -38,21 +39,20 @@
             // 
             this.dgIndividuals.AllowUserToAddRows = false;
             this.dgIndividuals.AllowUserToDeleteRows = false;
-            this.dgIndividuals.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgIndividuals.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgIndividuals.Location = new System.Drawing.Point(0, 0);
             this.dgIndividuals.Name = "dgIndividuals";
             this.dgIndividuals.Size = new System.Drawing.Size(1038, 283);
             this.dgIndividuals.TabIndex = 1;
+            this.dgIndividuals.SelectionChanged += new System.EventHandler(this.dgIndividuals_SelectionChanged);
             // 
             // dgFamilies
             // 
-            this.dgFamilies.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgFamilies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgFamilies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgFamilies.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgFamilies.Location = new System.Drawing.Point(0, 300);
             this.dgFamilies.Name = "dgFamilies";
             this.dgFamilies.Size = new System.Drawing.Size(1038, 283);
@@ -65,8 +65,10 @@
             this.ClientSize = new System.Drawing.Size(1038, 583);
             this.Controls.Add(this.dgFamilies);
             this.Controls.Add(this.dgIndividuals);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "People";
             this.Text = "Individuals & Families";
+            this.Resize += new System.EventHandler(this.People_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).EndInit();
             this.ResumeLayout(false);

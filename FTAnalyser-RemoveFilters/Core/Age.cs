@@ -13,10 +13,10 @@ namespace FTAnalyzer
 
         public Age(Individual ind, FactDate when)
         {
-            minAge = ind.BirthDate.getMaximumYear(when);
-            maxAge = ind.BirthDate.getMinimumYear(when);
-            if (maxAge > FactDate.MAXYEARS)
-                maxAge = FactDate.MAXYEARS;
+            if (when.isAfter(ind.DeathDate))
+                when = ind.DeathDate;
+            minAge = getAge(ind.BirthDate.EndDate, when.StartDate, FactDate.MINDATE);
+            maxAge = getAge(ind.BirthDate.StartDate, when.EndDate, FactDate.MAXDATE);
             if (minAge == FactDate.MINYEARS)
             {
                 if (maxAge == FactDate.MAXYEARS)
@@ -24,21 +24,35 @@ namespace FTAnalyzer
                 else
                     age = "<=" + maxAge;
             }
+            else if (maxAge < FactDate.MAXYEARS)
+            {
+                age = minAge == maxAge ? minAge.ToString() : minAge + " to " + maxAge;
+            }
             else
             {
-                if (minAge >= FactDate.MAXYEARS)
-                {
-                    // if age over maximum return maximum
-                    age = ">=" + FactDate.MAXYEARS.ToString();
-                }
-                else
-                {
-                    if(ind.BirthDate.Type == FactDate.FactDateType.ABT) //fix for abouts having 1 year tolerance
-                        age = minAge == maxAge ? minAge.ToString() : maxAge + " to " + minAge;
-                    else
-                        age = minAge == maxAge ? minAge.ToString() : minAge + " to " + maxAge;
-                }
+                // if age over maximum return maximum
+                age = ">=" + minAge;
             }
+            
+        }
+
+        private int getAge(DateTime birthDate, DateTime laterDate, DateTime nullValue)
+        {
+            int age;
+            if (laterDate == null)
+                laterDate = nullValue;
+            age = laterDate.Year - birthDate.Year;
+            if (age > 0)
+            {
+                age -= Convert.ToInt32(laterDate.Date < birthDate.Date.AddYears(age));
+            }
+            else
+            {
+                age = 0;
+            }
+            if (age > FactDate.MAXYEARS)
+                age = FactDate.MAXYEARS;
+            return age;
         }
 
         public int MinAge

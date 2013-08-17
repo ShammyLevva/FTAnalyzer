@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    public class BirthDateComparer : Comparer<IDisplayTreeTops>
+    public class BirthDateComparer : Comparer<IDisplayIndividual>
     {
 
         public static bool ASCENDING = true;
@@ -19,7 +19,7 @@ namespace FTAnalyzer
             this.direction = direction;
         }
 
-        public override int Compare(IDisplayTreeTops x, IDisplayTreeTops y)
+        public override int Compare(IDisplayIndividual x, IDisplayIndividual y)
         {
             return direction ? x.BirthDate.CompareTo(y.BirthDate) : y.BirthDate.CompareTo(x.BirthDate);
         }

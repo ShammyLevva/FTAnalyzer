@@ -15,10 +15,13 @@ namespace FTAnalyzer.Forms
         private Dictionary<int, DataGridViewCellStyle> rowStyles;
         private int numFamilies;
         private FactDate censusDate;
+        private FactLocation location;
+        private FactLocation location2;
+        private FactLocation censusLocation;
 
         private PrintingDataGridViewProvider printProvider;
 
-        public Census()
+        public Census(string censusCountry)
         {
             InitializeComponent();
 
@@ -30,6 +33,26 @@ namespace FTAnalyzer.Forms
                 new TitlePrintBlock(this.Text), null, null);
 
             printDocument.DefaultPageSettings.Landscape = true;
+            this.censusLocation = new FactLocation(censusCountry);
+            string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
+            if (defaultProvider == null)
+            {
+                defaultProvider = "Ancestry";
+            }
+            cbCensusSearchProvider.Text = defaultProvider;
+        }
+
+        public Census(string censusCountry, FactLocation location)
+            : this(censusCountry)
+        {
+            this.location = location;
+        }
+
+        public Census(string censusCountry, FactLocation location, FactLocation location2)
+            : this(censusCountry)
+        {
+            this.location = location;
+            this.location2 = location2;
         }
 
         public void setupCensus(RegistrationsProcessor rp, FactDate date, bool censusDone, bool includeResidence, bool lostCousinCheck, int maxAge)
@@ -45,13 +68,27 @@ namespace FTAnalyzer.Forms
                 foreach (Individual i in r.Members)
                 {
                     if (i.getAge(date).MinAge <= maxAge)
-                        ds.Add(new DisplayCensus(pos++, r, i));
+                        if (location == null)
+                        {  // no location check TODO check if known location vs censusCountry (United Kingdom, Ireland, United States, Canada)
+                            if(!r.FilterCountry.isKnownCountry)
+                                ds.Add(new DisplayCensus(pos++, r, i)); // if we don't recognise the country and we aren't checking then ignore it
+                            else  if(censusLocation.Country == FactLocation.UNITED_KINGDOM && (r.FilterCountry.isUnitedKingdom))
+                                ds.Add(new DisplayCensus(pos++, r, i));
+                            else if (censusLocation.Country == FactLocation.IRELAND || censusLocation.Country == FactLocation.UNITED_STATES || censusLocation.Country == FactLocation.CANADA)
+                            {
+                                if(r.FilterCountry.Equals(censusLocation))
+                                    ds.Add(new DisplayCensus(pos++, r, i));
+                            }
+                        }
+                        else if(r.FilterCountry.Equals(location) || (location2 != null && r.FilterCountry.Equals(location2)))
+                        {
+                            ds.Add(new DisplayCensus(pos++, r, i));
+                        }
                 }
             }
             dgCensus.DataSource = ds;
             StyleRows();
             ResizeColumns();
-            cbCensusSearchProvider.SelectedIndex = 0;
             tsRecords.Text = ds.Count + " Records / " + numFamilies + " Families.";
         }
 
@@ -218,7 +255,18 @@ namespace FTAnalyzer.Forms
         {
             DisplayCensus ds = dgCensus.CurrentRow == null ? null : (DisplayCensus)dgCensus.CurrentRow.DataBoundItem;
             FamilyTree ft = FamilyTree.Instance;
-            ft.SearchCensus(censusDate.StartDate.Year, ds.Individual, cbCensusSearchProvider.SelectedIndex);
+            ft.SearchCensus(censusLocation.Country, censusDate.StartDate.Year, ds.Individual, cbCensusSearchProvider.SelectedIndex);
+        }
+
+        private void cbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Application.UserAppDataRegistry.SetValue("Default Search Provider", cbCensusSearchProvider.SelectedItem.ToString());
+            dgCensus.Focus();
+        }
+
+        public FactDate CensusDate
+        {
+            get { return this.censusDate; }
         }
     }
 }

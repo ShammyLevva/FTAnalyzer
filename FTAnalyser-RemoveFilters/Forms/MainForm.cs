@@ -3,21 +3,23 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
+using System.Diagnostics;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml;
+using FTAnalyzer.Filters;
 using FTAnalyzer.Forms;
 using FTAnalyzer.Utilities;
 using Printing.DataGridViewPrint.Tools;
-using FTAnalyzer.Filters;
 
 namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "1.5.6.0";
-        private bool _checkForUpdatesEnabled = true;
+        private string VERSION = "2.0.3.0";
+        private bool _checkForUpdatesEnabled = false;
+        private bool _showNoUpdateMessage = false;
         private System.Threading.Timer _timerCheckForUpdates;
 
         private Cursor storedCursor = Cursors.Default;
@@ -30,11 +32,18 @@ namespace FTAnalyzer
             InitializeComponent();
             ft.XmlErrorBox = rtbOutput;
             tabSelector.TabPages.RemoveByKey("tabFamilySearch");
-            toolTips.SetToolTip(tabCountries, "Double click on Country name to see list of individuals with that Country.");
-            toolTips.SetToolTip(dgCountries, "Double click on Country name to see list of individuals with that Country.");
-            toolTips.SetToolTip(tabRegions, "Double click on Region name to see list of individuals with that Region.");
-            toolTips.SetToolTip(tabParishes, "Double click on 'Parish' name to see list of individuals with that parish/area.");
-            toolTips.SetToolTip(tabAddresses, "Double click on Address name to see list of individuals with that Address.");
+            VERSION = PublishVersion();
+        }
+
+        private string PublishVersion()
+        {
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            {
+                Version ver = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
+                return string.Format("{0}.{1}.{2}.{3}", ver.Major, ver.Minor, ver.Build, ver.Revision);
+            }
+            else
+                return VERSION;
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -50,7 +59,9 @@ namespace FTAnalyzer
                 try
                 {
                     HourGlass(true);
-                    closeIndividualForms();
+                    DisposeIndividualForms();
+                    mnuReports.Visible = false;
+                    mnuExport.Visible = false;
                     tabSelector.SelectTab(tabDisplayProgress);
                     rtbOutput.Text = "";
                     rtbFamilySearchResults.Text = "";
@@ -58,12 +69,14 @@ namespace FTAnalyzer
                     Application.DoEvents();
                     if (!stopProcessing)
                     {
-                        XmlDocument document = GedcomToXml.Load(openGedcom.FileName);
-                        document.Save("GedcomOutput.xml");
-                        ft.LoadTree(document, pbSources, pbIndividuals, pbFamilies);
+                        //document.Save("GedcomOutput.xml");
+                        ft.LoadTree(openGedcom.FileName, pbSources, pbIndividuals, pbFamilies);
                         ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
                         Application.UseWaitCursor = false;
                         HourGlass(false);
+                        mnuReports.Visible = true;
+                        mnuExport.Visible = true;
+                        mnuPrint.Enabled = true;
                         MessageBox.Show("Gedcom File Loaded");
                     }
                 }
@@ -83,16 +96,34 @@ namespace FTAnalyzer
             }
         }
 
-        private void closeIndividualForms()
+        private void DisposeIndividualForms()
         {
-            List<Form> toClose = new List<Form>();
+            List<Form> toDispose = new List<Form>();
             foreach (Form f in Application.OpenForms)
             {
-                if (f is Forms.People || f is Forms.LCReport)
-                    toClose.Add(f);
+                if (!object.ReferenceEquals(f, this))
+                    toDispose.Add(f);
             }
-            foreach (Form f in toClose)
-                f.Close();
+            foreach (Form f in toDispose)
+                f.Dispose();
+        }
+
+        private void DisposeDuplicateForms(object form)
+        {
+            List<Form> toDispose = new List<Form>();
+            foreach (Form f in Application.OpenForms)
+            {
+                if (!object.ReferenceEquals(f, form) && f.GetType() == form.GetType())
+                    if (form is Census)
+                    {
+                        if (((Census)f).CensusDate.Equals(((Census)form).CensusDate))
+                            toDispose.Add(f);
+                    }
+                    else
+                        toDispose.Add(f);
+            }
+            foreach (Form f in toDispose)
+                f.Dispose();
         }
 
         private void HourGlass(bool on)
@@ -110,7 +141,7 @@ namespace FTAnalyzer
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            printToolStripMenuItem.Enabled = false;
+            mnuPrint.Enabled = false;
             if (ft.Loading)
             {
                 tabSelector.SelectedTab = tabDisplayProgress;
@@ -124,7 +155,7 @@ namespace FTAnalyzer
                     {
                         tabSelector.SelectedTab = tabDisplayProgress;
                         tsCountLabel.Text = "";
-                        MessageBox.Show("You need to load your GEDCOM file before the program can display results. Click File | Open.");
+                        MessageBox.Show("You need to load your GEDCOM file before the program can display results.\nClick File | Open.");
                     }
                     return;
                 }
@@ -132,12 +163,14 @@ namespace FTAnalyzer
                 if (tabSelector.SelectedTab == tabDisplayProgress)
                 {
                     tsCountLabel.Text = "";
+                    mnuPrint.Enabled = true;
                 }
                 else if (tabSelector.SelectedTab == tabIndividuals)
                 {
                     SortableBindingList<IDisplayIndividual> list = ft.AllDisplayIndividuals;
                     dgIndividuals.DataSource = list;
                     dgIndividuals.Sort(dgIndividuals.Columns["IndividualID"], ListSortDirection.Ascending);
+                    mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
                 else if (tabSelector.SelectedTab == tabFamilies)
@@ -145,6 +178,7 @@ namespace FTAnalyzer
                     SortableBindingList<IDisplayFamily> list = ft.AllDisplayFamilies;
                     dgFamilies.DataSource = list;
                     dgFamilies.Sort(dgFamilies.Columns["FamilyGed"], ListSortDirection.Ascending);
+                    mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
                 else if (tabSelector.SelectedTab == tabOccupations)
@@ -152,6 +186,7 @@ namespace FTAnalyzer
                     SortableBindingList<IDisplayOccupation> list = ft.AllDisplayOccupations;
                     dgOccupations.DataSource = list;
                     dgOccupations.Sort(dgOccupations.Columns["Occupation"], ListSortDirection.Ascending);
+                    mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
                 else if (tabSelector.SelectedTab == tabCensus)
@@ -159,10 +194,25 @@ namespace FTAnalyzer
                     cenDate.RevertToDefaultDate();
                     tsCountLabel.Text = "";
                     btnShowResults.Enabled = ft.IndividualCount > 0;
-                    if (ckbNoLocations.Checked)
-                        censusCountry.Enabled = false;
+                    SetCensusDateSelector();
+                }
+                else if (tabSelector.SelectedTab == tabTreetops)
+                {
+                    tsCountLabel.Text = "";
+                    dgTreeTops.DataSource = null;
+                    if (ckbTTIgnoreLocations.Checked)
+                        treetopsCountry.Enabled = false;
                     else
-                        censusCountry.Enabled = true;
+                        treetopsCountry.Enabled = true;
+                }
+                else if (tabSelector.SelectedTab == tabWarDead)
+                {
+                    tsCountLabel.Text = "";
+                    dgWarDead.DataSource = null;
+                    if (ckbWDIgnoreLocations.Checked)
+                        wardeadCountry.Enabled = false;
+                    else
+                        wardeadCountry.Enabled = true;
                 }
                 else if (tabSelector.SelectedTab == tabLostCousins)
                 {
@@ -173,31 +223,37 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabDataErrors)
                 {
-                    List<DataError> errors =  ft.DataErrors(ckbDataErrors);
+                    List<DataError> errors = ft.DataErrors(ckbDataErrors);
                     dgDataErrors.DataSource = errors;
+                    mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + errors.Count;
                 }
                 else if (tabSelector.SelectedTab == tabLooseDeaths)
                 {
                     SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.GetLooseDeaths();
                     dgLooseDeaths.DataSource = looseDeathList;
+                    mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + looseDeathList.Count;
                 }
                 else if (tabSelector.SelectedTab == tabLocations)
                 {
                     tsCountLabel.Text = "";
+                    mnuPrint.Enabled = true;
                     List<IDisplayLocation> countries = ft.AllCountries;
                     List<IDisplayLocation> regions = ft.AllRegions;
                     List<IDisplayLocation> parishes = ft.AllParishes;
                     List<IDisplayLocation> addresses = ft.AllAddresses;
+                    List<IDisplayLocation> places = ft.AllPlaces;
                     countries.Sort(new FactLocationComparer(FactLocation.COUNTRY));
                     regions.Sort(new FactLocationComparer(FactLocation.REGION));
                     parishes.Sort(new FactLocationComparer(FactLocation.PARISH));
                     addresses.Sort(new FactLocationComparer(FactLocation.ADDRESS));
+                    places.Sort(new FactLocationComparer(FactLocation.PLACE));
                     dgCountries.DataSource = countries;
                     dgRegions.DataSource = regions;
                     dgParishes.DataSource = parishes;
                     dgAddresses.DataSource = addresses;
+                    dgPlaces.DataSource = places;
                 }
                 else if (tabSelector.SelectedTab == tabFamilySearch)
                 {
@@ -218,12 +274,27 @@ namespace FTAnalyzer
             }
         }
 
+        private void SetCensusDateSelector()
+        {
+            if (ckbNoLocations.Checked)
+            {
+                censusCountry.Enabled = false;
+                cenDate.AddAllCensusItems();
+            }
+            else
+            {
+                censusCountry.Enabled = true;
+                cenDate.Country = censusCountry.Country;
+            }
+        }
+
         private void dgCountries_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             HourGlass(true);
             FactLocation loc = (FactLocation)dgCountries.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.COUNTRY);
+            DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
         }
@@ -234,6 +305,7 @@ namespace FTAnalyzer
             FactLocation loc = dgRegions.CurrentRow == null ? new FactLocation() : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.REGION);
+            DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
         }
@@ -244,6 +316,7 @@ namespace FTAnalyzer
             FactLocation loc = (FactLocation)dgParishes.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.PARISH);
+            DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
         }
@@ -254,22 +327,45 @@ namespace FTAnalyzer
             FactLocation loc = (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.ADDRESS);
+            DisposeDuplicateForms(frmInd);
+            frmInd.Show();
+            HourGlass(false);
+        }
+
+        private void dgPlaces_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            HourGlass(true);
+            FactLocation loc = (FactLocation)dgPlaces.CurrentRow.DataBoundItem;
+            Forms.People frmInd = new Forms.People();
+            frmInd.setLocation(loc, FactLocation.PLACE);
+            DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
         }
 
         private void btnShowResults_Click(object sender, EventArgs e)
         {
+            Census census;
+            string country;
             Func<Registration, bool> filter = createCensusRegistrationFilter();
             MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();
             if (!ckbNoLocations.Checked) // only compare on location if no locations isn't checked
                 censusComparator.addComparator(new LocationComparator(FactLocation.PARISH));
             censusComparator.addComparator(new DateComparator());
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
-
-            Census census = new Census();
+            if (ckbNoLocations.Checked)
+            {
+                census = new Census(cenDate.CensusCountry);
+                country = string.Empty;
+            }
+            else
+            {
+                census = new Census(cenDate.CensusCountry, censusCountry.GetLocation);
+                country = " " + cenDate.Country;
+            }
             census.setupCensus(censusRP, censusDate, false, ckbCensusResidence.Checked, false, (int)udAgeFilter.Value);
-            census.Text = censusDate.StartDate.Year.ToString() + " Census Records to search for";
+            census.Text = "People missing a " + censusDate.StartDate.Year.ToString() + country + " Census Record that you can search for";
+            DisposeDuplicateForms(census);
             census.Show();
         }
 
@@ -309,6 +405,11 @@ namespace FTAnalyzer
             Func<Individual, bool> relationFilter = treetopsRelation.BuildFilter<Individual>(x => x.RelationType);
             Func<Individual, bool> filter = FilterUtils.AndFilter<Individual>(locationFilter, relationFilter);
 
+            if (ckbTTIgnoreLocations.Checked)
+                filter = relationFilter;
+            else
+                filter = FilterUtils.AndFilter<Individual>(locationFilter, relationFilter);
+
             if (txtTreetopsSurname.Text.Length > 0)
             {
                 Func<Individual, bool> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtTreetopsSurname.Text);
@@ -320,15 +421,21 @@ namespace FTAnalyzer
 
         private Func<Individual, bool> createWardeadIndividualFilter(FactDate birthRange, FactDate deathRange)
         {
+            Func<Individual, bool> filter;
             Func<Individual, bool> locationFilter = wardeadCountry.BuildFilter<Individual>((d, x) => x.BestLocation(d))(FactDate.UNKNOWN_DATE);
             Func<Individual, bool> relationFilter = wardeadRelation.BuildFilter<Individual>(x => x.RelationType);
             Func<Individual, bool> birthFilter = FilterUtils.DateFilter<Individual>(x => x.BirthDate, birthRange);
             Func<Individual, bool> deathFilter = FilterUtils.DateFilter<Individual>(x => x.DeathDate, deathRange);
-            Func<Individual, bool> filter = FilterUtils.AndFilter<Individual>(
-                                            FilterUtils.AndFilter<Individual>(birthFilter, deathFilter),
-                                            FilterUtils.AndFilter<Individual>(locationFilter, relationFilter));
 
-            if (tabSelector.Text.Length > 0)
+            if (ckbWDIgnoreLocations.Checked)
+                filter = FilterUtils.AndFilter<Individual>(
+                        FilterUtils.AndFilter<Individual>(birthFilter, deathFilter), relationFilter);
+            else
+                filter = FilterUtils.AndFilter<Individual>(
+                        FilterUtils.AndFilter<Individual>(birthFilter, deathFilter),
+                        FilterUtils.AndFilter<Individual>(locationFilter, relationFilter));
+
+            if (txtWarDeadSurname.Text.Length > 0)
             {
                 Func<Individual, bool> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, tabSelector.Text);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
@@ -339,35 +446,49 @@ namespace FTAnalyzer
         #endregion
 
         #region Lost Cousins
-        private void LostCousinsCensus(Func<Registration, bool> filter, FactDate censusDate, string reportTitle)
+        private void LostCousinsCensus(string location, Func<Registration, bool> filter, FactDate censusDate, string reportTitle)
         {
             Func<Registration, int> relationType = x => x.RelationType;
             Func<Registration, FactDate> registrationDate = x => x.RegistrationDate;
             HourGlass(true);
+            Census census;
             Func<Registration, bool> relation =
                 FilterUtils.OrFilter<Registration>(
                     FilterUtils.OrFilter<Registration>(
                         FilterUtils.IntFilter<Registration>(relationType, Individual.BLOOD),
                         FilterUtils.IntFilter<Registration>(relationType, Individual.DIRECT)),
                     FilterUtils.IntFilter<Registration>(relationType, Individual.MARRIEDTODB));
-            if (ckbLCIgnoreCountry.Checked)
+            MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();
+            if (ckbLCIgnoreCountry.Checked) // only add the parish location comparator if we are using locations
+            {
                 filter = FilterUtils.TrueFilter<Registration>(); // if we are ignoring locations then ignore what was passed as a filter
+                census = new Census(location);
+            }
+            else
+            {
+                if (location == FactLocation.ENG_WALES)
+                    census = new Census(FactLocation.UNITED_KINGDOM, new FactLocation(FactLocation.ENGLAND), new FactLocation(FactLocation.WALES));
+                else if (location == FactLocation.SCOTLAND)
+                    census = new Census(FactLocation.UNITED_KINGDOM, new FactLocation(location));
+                else
+                    census = new Census(location, new FactLocation(location));
+                censusComparator.addComparator(new LocationComparator(FactLocation.COUNTRY));
+            }
+
             if (ckbRestrictions.Checked)
                 filter = FilterUtils.AndFilter<Registration>(
                     FilterUtils.DateFilter<Registration>(registrationDate, censusDate),
                     filter, relation);
             else
                 filter = FilterUtils.AndFilter<Registration>(FilterUtils.DateFilter<Registration>(registrationDate, censusDate), filter);
-            MultiComparator<Registration> censusComparator = new MultiComparator<Registration>();
-            if (!ckbLCIgnoreCountry.Checked) // only add the parish location comparator if we are using locations
-                censusComparator.addComparator(new LocationComparator(FactLocation.PARISH));
+
             censusComparator.addComparator(new DateComparator());
             RegistrationsProcessor censusRP = new RegistrationsProcessor(filter, censusComparator);
 
-            Census census = new Census();
             census.setupCensus(censusRP, censusDate, true, ckbLCResidence.Checked, ckbHideRecorded.Checked, 110);
             census.Text = reportTitle;
             HourGlass(false);
+            DisposeDuplicateForms(census);
             census.Show();
         }
 
@@ -378,7 +499,7 @@ namespace FTAnalyzer
                 FilterUtils.StringFilter<Registration>(country, FactLocation.ENGLAND),
                 FilterUtils.StringFilter<Registration>(country, FactLocation.WALES));
             string reportTitle = "1881 England & Wales Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, CensusDate.UKCENSUS1881, reportTitle);
+            LostCousinsCensus(FactLocation.ENG_WALES, filter, CensusDate.UKCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Scot_Click(object sender, EventArgs e)
@@ -386,7 +507,7 @@ namespace FTAnalyzer
             Func<Registration, string> country = x => x.BestLocation(CensusDate.UKCENSUS1881).Country;
             Func<Registration, bool> filter = FilterUtils.StringFilter<Registration>(country, FactLocation.SCOTLAND);
             string reportTitle = "1881 Scotland Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, CensusDate.UKCENSUS1881, reportTitle);
+            LostCousinsCensus(FactLocation.SCOTLAND, filter, CensusDate.UKCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Canada_Click(object sender, EventArgs e)
@@ -394,7 +515,7 @@ namespace FTAnalyzer
             Func<Registration, string> country = x => x.BestLocation(CensusDate.UKCENSUS1881).Country;
             Func<Registration, bool> filter = FilterUtils.StringFilter<Registration>(country, FactLocation.CANADA);
             string reportTitle = "1881 Canada Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, CensusDate.CANADACENSUS1881, reportTitle);
+            LostCousinsCensus(FactLocation.CANADA, filter, CensusDate.CANADACENSUS1881, reportTitle);
         }
 
         private void btnLC1841EW_Click(object sender, EventArgs e)
@@ -404,7 +525,7 @@ namespace FTAnalyzer
                 FilterUtils.StringFilter<Registration>(country, FactLocation.ENGLAND),
                 FilterUtils.StringFilter<Registration>(country, FactLocation.WALES));
             string reportTitle = "1841 England & Wales Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, CensusDate.UKCENSUS1841, reportTitle);
+            LostCousinsCensus(FactLocation.ENG_WALES, filter, CensusDate.UKCENSUS1841, reportTitle);
         }
 
 
@@ -415,27 +536,23 @@ namespace FTAnalyzer
                 FilterUtils.StringFilter<Registration>(country, FactLocation.ENGLAND),
                 FilterUtils.StringFilter<Registration>(country, FactLocation.WALES));
             string reportTitle = "1911 England & Wales Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, CensusDate.UKCENSUS1911, reportTitle);
+            LostCousinsCensus(FactLocation.ENG_WALES, filter, CensusDate.UKCENSUS1911, reportTitle);
         }
 
         private void btnLC1880USA_Click(object sender, EventArgs e)
         {
             Func<Registration, string> country = x => x.BestLocation(CensusDate.USCENSUS1880).Country;
-            Func<Registration, bool> filter = FilterUtils.OrFilter<Registration>(
-                FilterUtils.StringFilter<Registration>(country, FactLocation.USA),
-                FilterUtils.StringFilter<Registration>(country, FactLocation.UNITED_STATES));
+            Func<Registration, bool> filter = FilterUtils.StringFilter<Registration>(country, FactLocation.UNITED_STATES);
             string reportTitle = "1880 US Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, CensusDate.USCENSUS1880, reportTitle);
+            LostCousinsCensus(FactLocation.UNITED_STATES, filter, CensusDate.USCENSUS1880, reportTitle);
         }
 
         private void btnLC1911Ireland_Click(object sender, EventArgs e)
         {
             Func<Registration, string> country = x => x.BestLocation(CensusDate.IRELANDCENSUS1911).Country;
-            Func<Registration, bool> filter = FilterUtils.OrFilter<Registration>(
-                FilterUtils.StringFilter<Registration>(country, FactLocation.EIRE),
-                FilterUtils.StringFilter<Registration>(country, FactLocation.IRELAND));
+            Func<Registration, bool> filter = FilterUtils.StringFilter<Registration>(country, FactLocation.IRELAND);
             string reportTitle = "1911 Ireland Census Records on file to enter to Lost Cousins";
-            LostCousinsCensus(filter, CensusDate.IRELANDCENSUS1911, reportTitle);
+            LostCousinsCensus(FactLocation.IRELAND, filter, CensusDate.IRELANDCENSUS1911, reportTitle);
         }
 
         private void labLostCousinsWeb_Click(object sender, EventArgs e)
@@ -472,7 +589,11 @@ namespace FTAnalyzer
                         DialogResult result = MessageBox.Show(string.Format("A new version of FTAnalyzer has been released, version {0}!\nWould you like to go to the FTAnalyzer site to download the new version?",
                             strLatestVersion), "New Version Released!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                         if (result == DialogResult.Yes)
-                            Help.ShowHelp(null, "http://FTAnalyzer.codeplex.com/");
+                            Process.Start("http://FTAnalyzer.codeplex.com/");
+                    }
+                    else if (_showNoUpdateMessage)
+                    {
+                        MessageBox.Show("You are running the latest version of FTAnalyzer");
                     }
                 }
                 string strBetaVersion = new Utilities.WebRequestWrapper().GetBetaVersionString();
@@ -485,7 +606,7 @@ namespace FTAnalyzer
                         DialogResult result = MessageBox.Show(string.Format("A new TEST version of FTAnalyzer has been released, version {0}!\nWould you like to go to the FTAnalyzer site to download the new version?\nPlease note this version is possibly unstable and should only be used by testers.",
                             strBetaVersion), "New TEST Version Released!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                         if (result == DialogResult.Yes)
-                            Help.ShowHelp(null, "http://FTAnalyzer.codeplex.com/");
+                            Process.Start("http://FTAnalyzer.codeplex.com/");
                     }
                 }
             }
@@ -502,15 +623,18 @@ namespace FTAnalyzer
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _checkForUpdatesEnabled = true;
+            _showNoUpdateMessage = true;
             _timerCheckForUpdates_Callback(null);
+            _showNoUpdateMessage = false;
         }
 
         private void showLocationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Forms.Locations locationsForm = new Forms.Locations();
+            Locations locationsForm = new Locations();
             List<FactLocation> locations = ft.AllLocations;
             locations.Sort();
             locationsForm.BuildLocationTree(locations);
+            DisposeDuplicateForms(locationsForm);
             locationsForm.Show();
         }
 
@@ -545,6 +669,7 @@ namespace FTAnalyzer
 
             RegistrationReport report = new RegistrationReport();
             report.SetupBirthRegistration(result);
+            DisposeDuplicateForms(report);
             report.Show();
         }
 
@@ -572,6 +697,7 @@ namespace FTAnalyzer
 
             RegistrationReport report = new RegistrationReport();
             report.SetupDeathRegistration(result);
+            DisposeDuplicateForms(report);
             report.Show();
         }
 
@@ -599,6 +725,7 @@ namespace FTAnalyzer
 
             RegistrationReport report = new RegistrationReport();
             report.SetupMarriageRegistration(result);
+            DisposeDuplicateForms(report);
             report.Show();
         }
 
@@ -702,11 +829,17 @@ namespace FTAnalyzer
 
         private void btnViewResults_Click(object sender, EventArgs e)
         {
-            Forms.FamilySearchResultsViewer frmResults = new Forms.FamilySearchResultsViewer(txtFamilySearchfolder.Text);
+            FamilySearchResultsViewer frmResults = new FamilySearchResultsViewer(txtFamilySearchfolder.Text);
             if (frmResults.ResultsPresent)
+            {
+                DisposeDuplicateForms(frmResults);
                 frmResults.Show();
+            }
             else
+            {
+                frmResults.Dispose();
                 MessageBox.Show("Sorry there are no results files in the selected folder.");
+            }
         }
 
         private void btnCancelFamilySearch_Click(object sender, EventArgs e)
@@ -750,13 +883,13 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Func<Individual, bool> filter = createTreeTopsIndividualFilter();
-            List<IDisplayTreeTops> treeTopsList = ft.GetTreeTops(filter).ToList();
+            List<IDisplayIndividual> treeTopsList = ft.GetTreeTops(filter).ToList();
             treeTopsList.Sort(new BirthDateComparer());
             dgTreeTops.DataSource = treeTopsList;
             foreach (DataGridViewColumn c in dgTreeTops.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = "Count : " + treeTopsList.Count;
-            printToolStripMenuItem.Enabled = true;
+            mnuPrint.Enabled = true;
             HourGlass(false);
         }
 
@@ -764,13 +897,13 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Func<Individual, bool> filter = createWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("BET 1914 AND 1918"));
-            List<IDisplayTreeTops> warDeadList = ft.GetWarDead(filter).ToList();
+            List<IDisplayIndividual> warDeadList = ft.GetWarDead(filter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWarDead.DataSource = warDeadList;
             foreach (DataGridViewColumn c in dgWarDead.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = "Count : " + warDeadList.Count;
-            printToolStripMenuItem.Enabled = true;
+            mnuPrint.Enabled = true;
             HourGlass(false);
         }
 
@@ -778,13 +911,13 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Func<Individual, bool> filter = createWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("BET 1939 AND 1945"));
-            List<IDisplayTreeTops> warDeadList = ft.GetWarDead(filter).ToList();
+            List<IDisplayIndividual> warDeadList = ft.GetWarDead(filter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWarDead.DataSource = warDeadList;
             foreach (DataGridViewColumn c in dgWarDead.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = "Count : " + warDeadList.Count;
-            printToolStripMenuItem.Enabled = true;
+            mnuPrint.Enabled = true;
             HourGlass(false);
         }
 
@@ -795,39 +928,80 @@ namespace FTAnalyzer
 
         private void ckbNoLocations_CheckedChanged(object sender, EventArgs e)
         {
-            if (ckbNoLocations.Checked)
-                censusCountry.Enabled = false;
-            else
-                censusCountry.Enabled = true;
+            SetCensusDateSelector();
         }
 
-        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        private void mnuPrint_Click(object sender, EventArgs e)
         {
+            printDocument = new PrintDocument();
             printDocument.DefaultPageSettings.Margins =
-               new System.Drawing.Printing.Margins(40, 40, 40, 40);
+               new System.Drawing.Printing.Margins(20, 20, 40, 40);
             printDocument.DefaultPageSettings.Landscape = true;
+            printDialog.PrinterSettings.DefaultPageSettings.Landscape = true;
 
-            if (tabSelector.SelectedTab == tabTreetops)
+            if (tabSelector.SelectedTab == tabDisplayProgress && ft.DataLoaded)
             {
-                PrintingDataGridViewProvider printProvider = PrintingDataGridViewProvider.Create(
-                    printDocument, dgTreeTops, true, true, true,
-                    new TitlePrintBlock(this.Text), null, null);
                 if (printDialog.ShowDialog(this) == DialogResult.OK)
                 {
+                    Utilities.Printing p = new Utilities.Printing(rtbOutput);
+                    printDocument.PrintPage += new PrintPageEventHandler(p.PrintPage);
                     printDocument.PrinterSettings = printDialog.PrinterSettings;
                     printDocument.Print();
                 }
             }
+            if (tabSelector.SelectedTab == tabIndividuals)
+            {
+                PrintDataGrid(true, dgIndividuals);
+            }
+            if (tabSelector.SelectedTab == tabFamilies)
+            {
+                PrintDataGrid(true, dgFamilies);
+            }
+            if (tabSelector.SelectedTab == tabOccupations)
+            {
+                PrintDataGrid(false, dgOccupations);
+            }
+            if (tabSelector.SelectedTab == tabLocations)
+            {
+                if (tabCtrlLocations.SelectedTab == tabCountries)
+                    PrintDataGrid(false, dgCountries);
+                if (tabCtrlLocations.SelectedTab == tabRegions)
+                    PrintDataGrid(false, dgRegions);
+                if (tabCtrlLocations.SelectedTab == tabParishes)
+                    PrintDataGrid(false, dgParishes);
+                if (tabCtrlLocations.SelectedTab == tabAddresses)
+                    PrintDataGrid(false, dgAddresses);
+                if (tabCtrlLocations.SelectedTab == tabPlaces)
+                    PrintDataGrid(false, dgPlaces);
+            }
+            if (tabSelector.SelectedTab == tabDataErrors)
+            {
+                PrintDataGrid(false, dgDataErrors);
+            }
+            else if (tabSelector.SelectedTab == tabLooseDeaths)
+            {
+                PrintDataGrid(true, dgLooseDeaths);
+            }
+            else if (tabSelector.SelectedTab == tabTreetops)
+            {
+                PrintDataGrid(true, dgTreeTops);
+            }
             else if (tabSelector.SelectedTab == tabWarDead)
             {
-                PrintingDataGridViewProvider printProvider = PrintingDataGridViewProvider.Create(
-                    printDocument, dgWarDead, true, true, true,
-                    new TitlePrintBlock(this.Text), null, null);
-                if (printDialog.ShowDialog(this) == DialogResult.OK)
-                {
-                    printDocument.PrinterSettings = printDialog.PrinterSettings;
-                    printDocument.Print();
-                }
+                PrintDataGrid(true, dgWarDead);
+            }
+        }
+
+        private void PrintDataGrid(bool landscape, DataGridView dg)
+        {
+            PrintingDataGridViewProvider printProvider = PrintingDataGridViewProvider.Create(
+                printDocument, dg, true, true, true,
+                new TitlePrintBlock(this.Text), null, null);
+            printDialog.PrinterSettings.DefaultPageSettings.Landscape = landscape;
+            if (printDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                printDocument.PrinterSettings = printDialog.PrinterSettings;
+                printDocument.Print();
             }
         }
 
@@ -866,6 +1040,7 @@ namespace FTAnalyzer
             DisplayOccupation occ = (DisplayOccupation)dgOccupations.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setWorkers(occ.Occupation, ft.AllWorkers(occ.Occupation));
+            DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
         }
@@ -892,9 +1067,15 @@ namespace FTAnalyzer
             {   // Do geo coding stuff
                 GoogleMap frmGoogleMap = new GoogleMap();
                 if (frmGoogleMap.setLocation(loc, locType))
+                {
+                    DisposeDuplicateForms(frmGoogleMap);
                     frmGoogleMap.Show();
+                }
                 else
+                {
+                    frmGoogleMap.Dispose();
                     MessageBox.Show("Unable to find location : " + loc.getLocation(locType));
+                }
             }
             this.Cursor = Cursors.Default;
         }
@@ -908,9 +1089,15 @@ namespace FTAnalyzer
             {   // Do geo coding stuff
                 BingOSMap frmBingMap = new BingOSMap();
                 if (frmBingMap.setLocation(loc, locType))
+                {
+                    DisposeDuplicateForms(frmBingMap);
                     frmBingMap.Show();
+                }
                 else
+                {
+                    frmBingMap.Dispose();
                     MessageBox.Show("Unable to find location : " + loc.getLocation(locType));
+                }
             }
             this.Cursor = Cursors.Default;
         }
@@ -1013,6 +1200,7 @@ namespace FTAnalyzer
             HourGlass(true);
             SortableBindingList<IDisplayLCReport> list = ft.LCReport(ckbRestrictions.Checked);
             LCReport rs = new LCReport(list);
+            DisposeDuplicateForms(rs);
             rs.Show();
             HourGlass(false);
         }
@@ -1022,8 +1210,143 @@ namespace FTAnalyzer
             HourGlass(true);
             SortableBindingList<IDisplayLCReport> list = ft.LCReport(ckbRestrictions.Checked);
             LCReport rs = new LCReport(list);
+            DisposeDuplicateForms(rs);
             rs.Show();
             HourGlass(false);
+        }
+
+        private void childAgeProfilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Statistics s = Statistics.Instance;
+            MessageBox.Show(s.ChildrenBirthProfiles());
+        }
+
+        private void viewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://ftanalyzer.codeplex.com/documentation");
+        }
+
+        private void olderParentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            Forms.People frmInd = new Forms.People();
+            string inputAge = "50";
+            DialogResult result = DialogResult.Cancel;
+            int age = 0;
+            do
+            {
+                try
+                {
+                    result = InputBox.Show("Enter age between 13 and 90", "Please select minimum age to report on", ref inputAge);
+                    age = Int32.Parse(inputAge);
+                }
+                catch (Exception)
+                {
+                    if (result != DialogResult.Cancel)
+                        MessageBox.Show("Invalid Age entered");
+                }
+                if (age < 13 || age > 90)
+                    MessageBox.Show("Please enter an age between 13 and 90");
+            } while ((result != DialogResult.Cancel) && (age < 13 || age > 90));
+            if (result == DialogResult.OK)
+            {
+                if (frmInd.OlderParents(age))
+                {
+                    DisposeDuplicateForms(frmInd);
+                    frmInd.Show();
+                }
+            }
+            HourGlass(false);
+        }
+
+        private void ckbTTIgnoreLocations_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckbTTIgnoreLocations.Checked)
+                treetopsCountry.Enabled = false;
+            else
+                treetopsCountry.Enabled = true;
+        }
+
+        private void ckbWDIgnoreLocations_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckbWDIgnoreLocations.Checked)
+                wardeadCountry.Enabled = false;
+            else
+                wardeadCountry.Enabled = true;
+        }
+
+        private void individualsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            DataTable dt = convertor.ToDataTable(new List<IExportIndividual>(ft.AllIndividuals));
+            ExportFile(dt);
+            HourGlass(false);
+        }
+
+        private void familiesToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            DataTable dt = convertor.ToDataTable(new List<IDisplayFamily>(ft.AllFamilies));
+            ExportFile(dt);
+            HourGlass(false);
+        }
+
+        private void factsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            DataTable dt = convertor.ToDataTable(new List<ExportFacts>(ft.AllFacts));
+            ExportFile(dt);
+            HourGlass(false);
+        }
+
+        private void ExportFile(DataTable dt)
+        {
+            try
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                string initialDir = (string)Application.UserAppDataRegistry.GetValue("Excel Export Individual Path");
+                saveFileDialog.InitialDirectory = initialDir == null ? Environment.SpecialFolder.MyDocuments.ToString() : initialDir;
+                saveFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv";
+                saveFileDialog.FilterIndex = 1;
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string path = Path.GetDirectoryName(saveFileDialog.FileName);
+                    Application.UserAppDataRegistry.SetValue("Excel Export Individual Path", path);
+                    ExportToExcel.Export(dt, saveFileDialog.FileName);
+                    MessageBox.Show("File written to " + saveFileDialog.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void dgIndividuals_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                var ht = dgIndividuals.HitTest(e.X, e.Y);
+                if (ht.Type != DataGridViewHitTestType.ColumnHeader)
+                {
+                    DataGridView.HitTestInfo hti = dgIndividuals.HitTest(e.Location.X, e.Location.Y);
+                    dgIndividuals.CurrentCell = dgIndividuals.Rows[hti.RowIndex].Cells[hti.ColumnIndex];
+                    // Can leave these here - doesn't hurt
+                    dgIndividuals.Rows[hti.RowIndex].Selected = true;
+                    dgIndividuals.Focus();
+                    mnuSetRoot.Show(MousePosition);
+                }
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Application.Exit();
         }
     }
 }

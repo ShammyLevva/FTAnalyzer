@@ -34,15 +34,25 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPrint = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.BirthRegistrationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deathRegistrationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.marriageRegistrationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.childAgeProfilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.olderParentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.individualsToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.familiesToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.factsToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.geocodeLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewOnlineManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,8 +68,6 @@
             this.pbSources = new System.Windows.Forms.ProgressBar();
             this.tabIndividuals = new System.Windows.Forms.TabPage();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
-            this.mnuSetRoot = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.setAsRootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabFamilies = new System.Windows.Forms.TabPage();
             this.dgFamilies = new System.Windows.Forms.DataGridView();
             this.tabLocations = new System.Windows.Forms.TabPage();
@@ -74,6 +82,8 @@
             this.dgParishes = new System.Windows.Forms.DataGridView();
             this.tabAddresses = new System.Windows.Forms.TabPage();
             this.dgAddresses = new System.Windows.Forms.DataGridView();
+            this.tabPlaces = new System.Windows.Forms.TabPage();
+            this.dgPlaces = new System.Windows.Forms.DataGridView();
             this.tabOccupations = new System.Windows.Forms.TabPage();
             this.dgOccupations = new System.Windows.Forms.DataGridView();
             this.tabDataErrors = new System.Windows.Forms.TabPage();
@@ -128,6 +138,7 @@
             this.FamilySearchrelationTypes = new Controls.RelationTypes();
             this.FamilySearchDefaultCountry = new Controls.CensusCountry();
             this.tabTreetops = new System.Windows.Forms.TabPage();
+            this.ckbTTIgnoreLocations = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgTreeTops = new System.Windows.Forms.DataGridView();
             this.btnTreeTops = new System.Windows.Forms.Button();
@@ -136,6 +147,7 @@
             this.treetopsRelation = new Controls.RelationTypes();
             this.treetopsCountry = new Controls.CensusCountry();
             this.tabWarDead = new System.Windows.Forms.TabPage();
+            this.ckbWDIgnoreLocations = new System.Windows.Forms.CheckBox();
             this.btnWWII = new System.Windows.Forms.Button();
             this.btnWWI = new System.Windows.Forms.Button();
             this.dgWarDead = new System.Windows.Forms.DataGridView();
@@ -143,6 +155,8 @@
             this.txtWarDeadSurname = new System.Windows.Forms.TextBox();
             this.wardeadRelation = new Controls.RelationTypes();
             this.wardeadCountry = new Controls.CensusCountry();
+            this.mnuSetRoot = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.setAsRootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -155,7 +169,6 @@
             this.tabDisplayProgress.SuspendLayout();
             this.tabIndividuals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
-            this.mnuSetRoot.SuspendLayout();
             this.tabFamilies.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).BeginInit();
             this.tabLocations.SuspendLayout();
@@ -168,6 +181,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgParishes)).BeginInit();
             this.tabAddresses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).BeginInit();
+            this.tabPlaces.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).BeginInit();
             this.tabOccupations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgOccupations)).BeginInit();
             this.tabDataErrors.SuspendLayout();
@@ -185,6 +200,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).BeginInit();
             this.tabWarDead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWarDead)).BeginInit();
+            this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -196,7 +212,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.reportsToolStripMenuItem,
+            this.mnuReports,
+            this.mnuExport,
             this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -209,7 +226,9 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
-            this.printToolStripMenuItem});
+            this.mnuPrint,
+            this.toolStripSeparator3,
+            this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -221,29 +240,46 @@
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
-            // printToolStripMenuItem
+            // mnuPrint
             // 
-            this.printToolStripMenuItem.Enabled = false;
-            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.printToolStripMenuItem.Text = "Print";
-            this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
+            this.mnuPrint.Enabled = false;
+            this.mnuPrint.Name = "mnuPrint";
+            this.mnuPrint.Size = new System.Drawing.Size(103, 22);
+            this.mnuPrint.Text = "Print";
+            this.mnuPrint.Click += new System.EventHandler(this.mnuPrint_Click);
             // 
-            // reportsToolStripMenuItem
+            // toolStripSeparator3
             // 
-            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(100, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // mnuReports
+            // 
+            this.mnuReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BirthRegistrationToolStripMenuItem,
             this.deathRegistrationsToolStripMenuItem,
-            this.marriageRegistrationsToolStripMenuItem});
-            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
-            this.reportsToolStripMenuItem.Text = "Reports";
+            this.marriageRegistrationsToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.childAgeProfilesToolStripMenuItem,
+            this.olderParentsToolStripMenuItem});
+            this.mnuReports.Name = "mnuReports";
+            this.mnuReports.Size = new System.Drawing.Size(59, 20);
+            this.mnuReports.Text = "Reports";
+            this.mnuReports.Visible = false;
             // 
             // BirthRegistrationToolStripMenuItem
             // 
             this.BirthRegistrationToolStripMenuItem.Name = "BirthRegistrationToolStripMenuItem";
             this.BirthRegistrationToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.BirthRegistrationToolStripMenuItem.Text = "Birth Registrations";
+            this.BirthRegistrationToolStripMenuItem.Visible = false;
             this.BirthRegistrationToolStripMenuItem.Click += new System.EventHandler(this.BirthRegistrationToolStripMenuItem_Click);
             // 
             // deathRegistrationsToolStripMenuItem
@@ -251,6 +287,7 @@
             this.deathRegistrationsToolStripMenuItem.Name = "deathRegistrationsToolStripMenuItem";
             this.deathRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.deathRegistrationsToolStripMenuItem.Text = "Death Registrations";
+            this.deathRegistrationsToolStripMenuItem.Visible = false;
             this.deathRegistrationsToolStripMenuItem.Click += new System.EventHandler(this.deathRegistrationsToolStripMenuItem_Click);
             // 
             // marriageRegistrationsToolStripMenuItem
@@ -259,7 +296,60 @@
             this.marriageRegistrationsToolStripMenuItem.Name = "marriageRegistrationsToolStripMenuItem";
             this.marriageRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.marriageRegistrationsToolStripMenuItem.Text = "Marriage Registrations";
+            this.marriageRegistrationsToolStripMenuItem.Visible = false;
             this.marriageRegistrationsToolStripMenuItem.Click += new System.EventHandler(this.marriageRegistrationsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(189, 6);
+            this.toolStripSeparator2.Visible = false;
+            // 
+            // childAgeProfilesToolStripMenuItem
+            // 
+            this.childAgeProfilesToolStripMenuItem.Name = "childAgeProfilesToolStripMenuItem";
+            this.childAgeProfilesToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.childAgeProfilesToolStripMenuItem.Text = "Child Age Profiles";
+            this.childAgeProfilesToolStripMenuItem.Click += new System.EventHandler(this.childAgeProfilesToolStripMenuItem_Click);
+            // 
+            // olderParentsToolStripMenuItem
+            // 
+            this.olderParentsToolStripMenuItem.Name = "olderParentsToolStripMenuItem";
+            this.olderParentsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.olderParentsToolStripMenuItem.Text = "Older Parents";
+            this.olderParentsToolStripMenuItem.Click += new System.EventHandler(this.olderParentsToolStripMenuItem_Click);
+            // 
+            // mnuExport
+            // 
+            this.mnuExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.individualsToExcelToolStripMenuItem,
+            this.familiesToExcelToolStripMenuItem,
+            this.factsToExcelToolStripMenuItem});
+            this.mnuExport.Name = "mnuExport";
+            this.mnuExport.Size = new System.Drawing.Size(52, 20);
+            this.mnuExport.Text = "Export";
+            this.mnuExport.Visible = false;
+            // 
+            // individualsToExcelToolStripMenuItem
+            // 
+            this.individualsToExcelToolStripMenuItem.Name = "individualsToExcelToolStripMenuItem";
+            this.individualsToExcelToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.individualsToExcelToolStripMenuItem.Text = "Individuals to Excel";
+            this.individualsToExcelToolStripMenuItem.Click += new System.EventHandler(this.individualsToExcelToolStripMenuItem_Click);
+            // 
+            // familiesToExcelToolStripMenuItem
+            // 
+            this.familiesToExcelToolStripMenuItem.Name = "familiesToExcelToolStripMenuItem";
+            this.familiesToExcelToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.familiesToExcelToolStripMenuItem.Text = "Families to Excel";
+            this.familiesToExcelToolStripMenuItem.Click += new System.EventHandler(this.familiesToExcelToolStripMenuItem_Click);
+            // 
+            // factsToExcelToolStripMenuItem
+            // 
+            this.factsToExcelToolStripMenuItem.Name = "factsToExcelToolStripMenuItem";
+            this.factsToExcelToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.factsToExcelToolStripMenuItem.Text = "Facts to Excel";
+            this.factsToExcelToolStripMenuItem.Click += new System.EventHandler(this.factsToExcelToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -288,6 +378,7 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewOnlineManualToolStripMenuItem,
             this.checkForUpdatesToolStripMenuItem,
             this.toolStripSeparator1,
             this.aboutToolStripMenuItem});
@@ -295,22 +386,30 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
+            // viewOnlineManualToolStripMenuItem
+            // 
+            this.viewOnlineManualToolStripMenuItem.Name = "viewOnlineManualToolStripMenuItem";
+            this.viewOnlineManualToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewOnlineManualToolStripMenuItem.Text = "View Online Manual";
+            this.viewOnlineManualToolStripMenuItem.Click += new System.EventHandler(this.viewOnlineManualToolStripMenuItem_Click);
+            // 
             // checkForUpdatesToolStripMenuItem
             // 
             this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
+            this.checkForUpdatesToolStripMenuItem.Visible = false;
             this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(168, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -440,7 +539,6 @@
             this.dgIndividuals.AllowUserToAddRows = false;
             this.dgIndividuals.AllowUserToDeleteRows = false;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgIndividuals.ContextMenuStrip = this.mnuSetRoot;
             this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgIndividuals.Location = new System.Drawing.Point(3, 3);
             this.dgIndividuals.MultiSelect = false;
@@ -449,20 +547,7 @@
             this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgIndividuals.Size = new System.Drawing.Size(925, 396);
             this.dgIndividuals.TabIndex = 0;
-            // 
-            // mnuSetRoot
-            // 
-            this.mnuSetRoot.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.setAsRootToolStripMenuItem});
-            this.mnuSetRoot.Name = "mnuSetRoot";
-            this.mnuSetRoot.Size = new System.Drawing.Size(174, 26);
-            // 
-            // setAsRootToolStripMenuItem
-            // 
-            this.setAsRootToolStripMenuItem.Name = "setAsRootToolStripMenuItem";
-            this.setAsRootToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.setAsRootToolStripMenuItem.Text = "Set As Root Person";
-            this.setAsRootToolStripMenuItem.Click += new System.EventHandler(this.setAsRootToolStripMenuItem_Click);
+            this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgIndividuals_MouseDown);
             // 
             // tabFamilies
             // 
@@ -529,6 +614,7 @@
             this.tabCtrlLocations.Controls.Add(this.tabRegions);
             this.tabCtrlLocations.Controls.Add(this.tabParishes);
             this.tabCtrlLocations.Controls.Add(this.tabAddresses);
+            this.tabCtrlLocations.Controls.Add(this.tabPlaces);
             this.tabCtrlLocations.Location = new System.Drawing.Point(2, 18);
             this.tabCtrlLocations.Name = "tabCtrlLocations";
             this.tabCtrlLocations.SelectedIndex = 0;
@@ -544,6 +630,7 @@
             this.tabCountries.Size = new System.Drawing.Size(921, 362);
             this.tabCountries.TabIndex = 0;
             this.tabCountries.Text = "Countries";
+            this.tabCountries.ToolTipText = "Double click on Country name to see list of individuals with that Country.";
             this.tabCountries.UseVisualStyleBackColor = true;
             // 
             // dgCountries
@@ -571,6 +658,7 @@
             this.tabRegions.Size = new System.Drawing.Size(921, 362);
             this.tabRegions.TabIndex = 1;
             this.tabRegions.Text = "Regions";
+            this.tabRegions.ToolTipText = "Double click on Region name to see list of individuals with that Region.";
             this.tabRegions.UseVisualStyleBackColor = true;
             // 
             // dgRegions
@@ -597,6 +685,7 @@
             this.tabParishes.Size = new System.Drawing.Size(921, 362);
             this.tabParishes.TabIndex = 2;
             this.tabParishes.Text = "Parishes";
+            this.tabParishes.ToolTipText = "Double click on \'Parish\' name to see list of individuals with that parish/area.";
             this.tabParishes.UseVisualStyleBackColor = true;
             // 
             // dgParishes
@@ -622,6 +711,7 @@
             this.tabAddresses.Size = new System.Drawing.Size(921, 362);
             this.tabAddresses.TabIndex = 3;
             this.tabAddresses.Text = "Addresses";
+            this.tabAddresses.ToolTipText = "Double click on Address name to see list of individuals with that Address.";
             this.tabAddresses.UseVisualStyleBackColor = true;
             // 
             // dgAddresses
@@ -638,6 +728,33 @@
             this.dgAddresses.Size = new System.Drawing.Size(921, 362);
             this.dgAddresses.TabIndex = 1;
             this.dgAddresses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAddresses_CellDoubleClick);
+            // 
+            // tabPlaces
+            // 
+            this.tabPlaces.Controls.Add(this.dgPlaces);
+            this.tabPlaces.Location = new System.Drawing.Point(4, 22);
+            this.tabPlaces.Name = "tabPlaces";
+            this.tabPlaces.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPlaces.Size = new System.Drawing.Size(921, 362);
+            this.tabPlaces.TabIndex = 4;
+            this.tabPlaces.Text = "Places";
+            this.tabPlaces.ToolTipText = "Double click on Address name to see list of individuals with that Place";
+            this.tabPlaces.UseVisualStyleBackColor = true;
+            // 
+            // dgPlaces
+            // 
+            this.dgPlaces.AllowUserToAddRows = false;
+            this.dgPlaces.AllowUserToDeleteRows = false;
+            this.dgPlaces.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgPlaces.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgPlaces.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgPlaces.Location = new System.Drawing.Point(3, 3);
+            this.dgPlaces.MultiSelect = false;
+            this.dgPlaces.Name = "dgPlaces";
+            this.dgPlaces.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgPlaces.Size = new System.Drawing.Size(915, 356);
+            this.dgPlaces.TabIndex = 2;
+            this.dgPlaces.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgPlaces_CellDoubleClick);
             // 
             // tabOccupations
             // 
@@ -834,7 +951,7 @@
             0,
             0});
             this.udAgeFilter.Name = "udAgeFilter";
-            this.udAgeFilter.Size = new System.Drawing.Size(41, 20);
+            this.udAgeFilter.Size = new System.Drawing.Size(43, 20);
             this.udAgeFilter.TabIndex = 5;
             this.udAgeFilter.Value = new decimal(new int[] {
             90,
@@ -856,10 +973,10 @@
             // 
             this.cenDate.AutoSize = true;
             this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cenDate.Country = "Scotland";
+            this.cenDate.Country = "";
             this.cenDate.Location = new System.Drawing.Point(272, 81);
             this.cenDate.Name = "cenDate";
-            this.cenDate.Size = new System.Drawing.Size(186, 27);
+            this.cenDate.Size = new System.Drawing.Size(90, 27);
             this.cenDate.TabIndex = 17;
             this.cenDate.CensusChanged += new System.EventHandler(this.cenDate_CensusChanged);
             // 
@@ -1245,6 +1362,7 @@
             // 
             // tabTreetops
             // 
+            this.tabTreetops.Controls.Add(this.ckbTTIgnoreLocations);
             this.tabTreetops.Controls.Add(this.panel1);
             this.tabTreetops.Controls.Add(this.btnTreeTops);
             this.tabTreetops.Controls.Add(this.label8);
@@ -1258,15 +1376,28 @@
             this.tabTreetops.Text = "Treetops";
             this.tabTreetops.UseVisualStyleBackColor = true;
             // 
+            // ckbTTIgnoreLocations
+            // 
+            this.ckbTTIgnoreLocations.AutoSize = true;
+            this.ckbTTIgnoreLocations.Checked = true;
+            this.ckbTTIgnoreLocations.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbTTIgnoreLocations.Location = new System.Drawing.Point(8, 87);
+            this.ckbTTIgnoreLocations.Name = "ckbTTIgnoreLocations";
+            this.ckbTTIgnoreLocations.Size = new System.Drawing.Size(175, 17);
+            this.ckbTTIgnoreLocations.TabIndex = 27;
+            this.ckbTTIgnoreLocations.Text = "Ignore locations in treetops filter";
+            this.ckbTTIgnoreLocations.UseVisualStyleBackColor = true;
+            this.ckbTTIgnoreLocations.CheckedChanged += new System.EventHandler(this.ckbTTIgnoreLocations_CheckedChanged);
+            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.dgTreeTops);
-            this.panel1.Location = new System.Drawing.Point(8, 92);
+            this.panel1.Location = new System.Drawing.Point(8, 110);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(920, 307);
+            this.panel1.Size = new System.Drawing.Size(920, 289);
             this.panel1.TabIndex = 26;
             // 
             // dgTreeTops
@@ -1278,10 +1409,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgTreeTops.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgTreeTops.Location = new System.Drawing.Point(0, 0);
+            this.dgTreeTops.Location = new System.Drawing.Point(0, 3);
             this.dgTreeTops.Name = "dgTreeTops";
             this.dgTreeTops.ReadOnly = true;
-            this.dgTreeTops.Size = new System.Drawing.Size(920, 307);
+            this.dgTreeTops.Size = new System.Drawing.Size(920, 283);
             this.dgTreeTops.TabIndex = 1;
             // 
             // btnTreeTops
@@ -1328,6 +1459,7 @@
             // 
             // tabWarDead
             // 
+            this.tabWarDead.Controls.Add(this.ckbWDIgnoreLocations);
             this.tabWarDead.Controls.Add(this.btnWWII);
             this.tabWarDead.Controls.Add(this.btnWWI);
             this.tabWarDead.Controls.Add(this.dgWarDead);
@@ -1341,6 +1473,19 @@
             this.tabWarDead.TabIndex = 8;
             this.tabWarDead.Text = "War Dead";
             this.tabWarDead.UseVisualStyleBackColor = true;
+            // 
+            // ckbWDIgnoreLocations
+            // 
+            this.ckbWDIgnoreLocations.AutoSize = true;
+            this.ckbWDIgnoreLocations.Checked = true;
+            this.ckbWDIgnoreLocations.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbWDIgnoreLocations.Location = new System.Drawing.Point(10, 92);
+            this.ckbWDIgnoreLocations.Name = "ckbWDIgnoreLocations";
+            this.ckbWDIgnoreLocations.Size = new System.Drawing.Size(181, 17);
+            this.ckbWDIgnoreLocations.TabIndex = 32;
+            this.ckbWDIgnoreLocations.Text = "Ignore locations in war dead filter";
+            this.ckbWDIgnoreLocations.UseVisualStyleBackColor = true;
+            this.ckbWDIgnoreLocations.CheckedChanged += new System.EventHandler(this.ckbWDIgnoreLocations_CheckedChanged);
             // 
             // btnWWII
             // 
@@ -1371,10 +1516,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgWarDead.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgWarDead.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgWarDead.Location = new System.Drawing.Point(3, 92);
+            this.dgWarDead.Location = new System.Drawing.Point(3, 115);
             this.dgWarDead.Name = "dgWarDead";
             this.dgWarDead.ReadOnly = true;
-            this.dgWarDead.Size = new System.Drawing.Size(920, 307);
+            this.dgWarDead.Size = new System.Drawing.Size(920, 284);
             this.dgWarDead.TabIndex = 29;
             // 
             // label9
@@ -1408,6 +1553,20 @@
             this.wardeadCountry.TabIndex = 25;
             this.wardeadCountry.Title = "Default Country";
             this.wardeadCountry.UKEnabled = true;
+            // 
+            // mnuSetRoot
+            // 
+            this.mnuSetRoot.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.setAsRootToolStripMenuItem});
+            this.mnuSetRoot.Name = "mnuSetRoot";
+            this.mnuSetRoot.Size = new System.Drawing.Size(174, 26);
+            // 
+            // setAsRootToolStripMenuItem
+            // 
+            this.setAsRootToolStripMenuItem.Name = "setAsRootToolStripMenuItem";
+            this.setAsRootToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.setAsRootToolStripMenuItem.Text = "Set As Root Person";
+            this.setAsRootToolStripMenuItem.Click += new System.EventHandler(this.setAsRootToolStripMenuItem_Click);
             // 
             // tsCount
             // 
@@ -1452,6 +1611,7 @@
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.tabSelector);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Family Tree Analyzer";
@@ -1465,7 +1625,6 @@
             this.tabDisplayProgress.PerformLayout();
             this.tabIndividuals.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
-            this.mnuSetRoot.ResumeLayout(false);
             this.tabFamilies.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).EndInit();
             this.tabLocations.ResumeLayout(false);
@@ -1478,6 +1637,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgParishes)).EndInit();
             this.tabAddresses.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).EndInit();
+            this.tabPlaces.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).EndInit();
             this.tabOccupations.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgOccupations)).EndInit();
             this.tabDataErrors.ResumeLayout(false);
@@ -1501,6 +1662,7 @@
             this.tabWarDead.ResumeLayout(false);
             this.tabWarDead.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWarDead)).EndInit();
+            this.mnuSetRoot.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -1582,7 +1744,7 @@
         private global::FTAnalyzer.Utilities.ScrollingRichTextBox rtbOutput;
         private global::FTAnalyzer.Utilities.ScrollingRichTextBox rtbFamilySearchResults;
         private System.Windows.Forms.Button btnOpenFolder;
-        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuReports;
         private System.Windows.Forms.ToolStripMenuItem BirthRegistrationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deathRegistrationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem marriageRegistrationsToolStripMenuItem;
@@ -1612,7 +1774,7 @@
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.TabPage tabFamilies;
         private System.Windows.Forms.DataGridView dgFamilies;
-        private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuPrint;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
         private System.Windows.Forms.PrintDialog printDialog;
         private System.Drawing.Printing.PrintDocument printDocument;
@@ -1630,6 +1792,20 @@
         private System.Windows.Forms.DataGridView dgDataErrors;
         private System.Windows.Forms.Button btnLCReport;
         private System.Windows.Forms.Button btnLCReport2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem childAgeProfilesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewOnlineManualToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem olderParentsToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPlaces;
+        private System.Windows.Forms.DataGridView dgPlaces;
+        private System.Windows.Forms.CheckBox ckbTTIgnoreLocations;
+        private System.Windows.Forms.CheckBox ckbWDIgnoreLocations;
+        private System.Windows.Forms.ToolStripMenuItem mnuExport;
+        private System.Windows.Forms.ToolStripMenuItem individualsToExcelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem familiesToExcelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem factsToExcelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }
 

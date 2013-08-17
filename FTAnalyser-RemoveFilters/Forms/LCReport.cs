@@ -20,10 +20,12 @@ namespace FTAnalyzer.Forms
         private Dictionary<int, DataGridViewCellStyle> styles;
         private int c1841ColumnIndex;
         private int c1911ColumnIndex;
+        private SortableBindingList<IDisplayLCReport> reportList;
 
         public LCReport(SortableBindingList<IDisplayLCReport> reportList)
         {
             InitializeComponent();
+            this.reportList = reportList;
             styles = new Dictionary<int, DataGridViewCellStyle>();
             DataGridViewCellStyle notAlive = new DataGridViewCellStyle();
             notAlive.BackColor = notAlive.ForeColor = Color.DarkGray;
@@ -58,15 +60,20 @@ namespace FTAnalyzer.Forms
             c1841ColumnIndex = dgReportSheet.Columns["C1841"].Index;
             c1911ColumnIndex = dgReportSheet.Columns["C1911"].Index;
             ResizeColumns();
-            tsRecords.Text = CountText(reportList);
-
-            cbCensusSearchProvider.SelectedIndex = 0;
+            tsRecords.Text = "Count : " + reportList.Count + " records listed.";
+            string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
+            if (defaultProvider == null)
+            {
+                defaultProvider = "Ancestry";
+            }
+            cbCensusSearchProvider.Text = defaultProvider;
+            cbFilter.Text = "All Individuals";
         }
 
         private string CountText(SortableBindingList<IDisplayLCReport> reportList)
         {
 
-            StringBuilder output = new StringBuilder("Count : " + reportList.Count + " records listed.");
+            StringBuilder output = new StringBuilder();
 
             //Dictionary<int, int> totals = new Dictionary<int, int>();
             //for (int census = 1841; census <= 1911; census += 10)
@@ -182,9 +189,82 @@ namespace FTAnalyzer.Forms
                 IDisplayLCReport person = (IDisplayLCReport)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
                 int censusYear = (1841 + (e.ColumnIndex - c1841ColumnIndex) * 10);
                 FamilyTree ft = FamilyTree.Instance;
-                ft.SearchCensus(censusYear, ft.getIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
+                string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
+                ft.SearchCensus(censusCountry, censusYear, ft.getIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
             }
+        }
 
+        private void cbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Application.UserAppDataRegistry.SetValue("Default Search Provider", cbCensusSearchProvider.SelectedItem.ToString());
+            dgReportSheet.Focus();
+        }
+
+        private List<IDisplayLCReport> BuildFilter(int toFind, bool all)
+        {
+            List<IDisplayLCReport> result = new List<IDisplayLCReport>();
+            foreach(IDisplayLCReport row in this.reportList)
+            {
+                if (all)
+                {
+                    if ((row.C1841 == toFind || row.C1841 == 0) && (row.C1851 == toFind || row.C1851 == 0) &&
+                        (row.C1861 == toFind || row.C1861 == 0) && (row.C1871 == toFind || row.C1871 == 0) &&
+                        (row.C1881 == toFind || row.C1881 == 0) && (row.C1891 == toFind || row.C1891 == 0) &&
+                        (row.C1901 == toFind || row.C1901 == 0) && (row.C1911 == toFind || row.C1911 == 0) &&
+                        !(row.C1841 == 0 && row.C1851 == 0 && row.C1861 == 0 && row.C1871 == 0 && 
+                          row.C1881 == 0 && row.C1891 == 0 && row.C1901 == 0 && row.C1911 == 0 && toFind != 0)) // exclude all greys
+                        result.Add(row);
+                }
+                else
+                {
+                    if (row.C1841 == toFind || row.C1851 == toFind || row.C1861 == toFind || row.C1871 == toFind ||
+                       row.C1881 == toFind || row.C1891 == toFind || row.C1901 == toFind || row.C1911 == toFind)
+                        result.Add(row);
+                }
+
+            }   
+            return result;
+        }
+
+        private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            List<IDisplayLCReport> list;
+            switch (cbFilter.SelectedIndex)
+            {
+                case -1: // nothing selected
+                case 0: // All Individuals
+                    dgReportSheet.DataSource = this.reportList;
+                    break;
+                case 1: // Not Alive (All Grey)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayLCReport>(BuildFilter(0, true));
+                    break;
+                case 2: // None Found (All Red)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayLCReport>(BuildFilter(1, true));
+                    break;
+                case 3: // All Found (All Green)
+                    list = new List<IDisplayLCReport>();
+                    list.AddRange(BuildFilter(3, true));
+                    list.AddRange(BuildFilter(4, true));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayLCReport>(list);
+                    break;
+                case 4: // Lost Cousins (Yellows)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayLCReport>(BuildFilter(2, false));
+                    break;
+                case 5: // Some Missing (Some Red)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayLCReport>(BuildFilter(1, false));
+                    break;
+                case 6:
+                    list = new List<IDisplayLCReport>();
+                    list.AddRange(BuildFilter(3, false));
+                    list.AddRange(BuildFilter(4, false));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayLCReport>(list);
+                    break;
+            }
+            ResizeColumns();
+            dgReportSheet.Focus();
+            tsRecords.Text = "Count : " + dgReportSheet.RowCount + " records listed.";
+            this.Cursor = Cursors.Default;
         }
     }
 }

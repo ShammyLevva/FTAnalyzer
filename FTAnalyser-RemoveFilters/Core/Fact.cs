@@ -9,13 +9,24 @@ namespace FTAnalyzer
 {
     public class Fact
     {
-        public static readonly string BIRTH = "BIRT", CHRISTENING = "CHRI",
-                DEATH = "DEAT", BURIAL = "BURI", CENSUS = "CENS",
-                RESIDENCE = "RESI", MARRIAGE = "MARR", RELIGION = "RELI",
-                MILITARY = "_MILT", RETIREMENT = "RETI", OCCUPATION = "OCCU",
-                SOCIAL_SECURITY_NO = "SSN", WILL = "WILL", ELECTION = "_ELEC",
-                EMIGRATION = "EMIG", IMMIGRATION = "IMMI", CUSTOM_FACT = "EVEN",
-                CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
+        public static readonly string ADOPTION = "ADOP", ANNULMENT = "ANUL", BAPTISM = "BAPM",
+                BAPTISM_LDS = "BAPL", BAR_MITZVAH = "BARM", BAS_MITZVAH = "BASM", BIRTH = "BIRT", 
+                BLESSING = "BLESS", BURIAL = "BURI", CASTE = "CAST", CENSUS = "CENS", 
+                CHRISTENING = "CHR", ADULT_CHRISTENING = "CHRA", CONFIRMATION = "CONF", 
+                CONFIRMATIONLDS = "CONL", CREMATION = "CREM", DEATH = "DEAT", PHYSICAL_DESC = "DSCR",
+                DIVORCE = "DIV", DIVORCE_FILED = "DIVF", EDUCATION = "EDUC", EMIGRATION = "EMIG", 
+                ENDOWMENT = "ENDL", ENGAGEMENT = "ENGA", FIRST_COMMUNION = "FCOM", 
+                GRADUATION = "GRAD", IMMIGRATION = "IMMI", NAT_ID_NO = "IDNO", 
+                NATIONAL_TRIBAL = "NATI", NUM_CHILDREN = "NCHI", NUM_MARRIAGE = "NMR", 
+                LEGATEE = "LEGA", MARRIAGE_BANN = "MARB", MARR_CONTRACT = "MARC",
+                MARR_LICENSE = "MARL", MARRIAGE = "MARR", MARR_SETTLEMENT = "MARS",
+                NATURALIZATION = "NATU", OCCUPATION = "OCCU", POSSESSIONS = "PROP", ORDINANCE = "ORDI",
+                ORDINATION = "ORDN", PROBATE = "PROB", RELIGION = "RELI", RESIDENCE = "RESI",
+                RETIREMENT = "RETI", SEALING_CHILD = "SLGC", SEALING_SPOUSE = "SLGS",
+                SOCIAL_SECURITY_NO = "SSN", NOBILITY_TITLE = "TITL", WILL = "WILL", 
+                MILITARY = "_MILT", ELECTION = "_ELEC", CUSTOM_FACT = "EVEN";
+
+        public static readonly string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSE", FAMILYSEARCH = "*IGI",
                 CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT", 
                 CHANGE = "*CHNG", LOSTCOUSINS = "*LOST";
@@ -46,6 +57,30 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("Record Change", CHANGE);
             CUSTOM_TAGS.Add("Lost Cousins", LOSTCOUSINS);
             CUSTOM_TAGS.Add("LostCousins", LOSTCOUSINS);
+            CUSTOM_TAGS.Add("Census 1841", CENSUS);
+            CUSTOM_TAGS.Add("Census 1851", CENSUS);
+            CUSTOM_TAGS.Add("Census 1861", CENSUS);
+            CUSTOM_TAGS.Add("Census 1871", CENSUS);
+            CUSTOM_TAGS.Add("Census 1881", CENSUS);
+            CUSTOM_TAGS.Add("Census 1891", CENSUS);
+            CUSTOM_TAGS.Add("Census 1901", CENSUS);
+            CUSTOM_TAGS.Add("Census 1911", CENSUS);
+            CUSTOM_TAGS.Add("Census 1790", CENSUS);
+            CUSTOM_TAGS.Add("Census 1800", CENSUS);
+            CUSTOM_TAGS.Add("Census 1810", CENSUS);
+            CUSTOM_TAGS.Add("Census 1820", CENSUS);
+            CUSTOM_TAGS.Add("Census 1830", CENSUS);
+            CUSTOM_TAGS.Add("Census 1840", CENSUS);
+            CUSTOM_TAGS.Add("Census 1850", CENSUS);
+            CUSTOM_TAGS.Add("Census 1860", CENSUS);
+            CUSTOM_TAGS.Add("Census 1870", CENSUS);
+            CUSTOM_TAGS.Add("Census 1880", CENSUS);
+            CUSTOM_TAGS.Add("Census 1890", CENSUS);
+            CUSTOM_TAGS.Add("Census 1900", CENSUS);
+            CUSTOM_TAGS.Add("Census 1910", CENSUS);
+            CUSTOM_TAGS.Add("Census 1920", CENSUS);
+            CUSTOM_TAGS.Add("Census 1930", CENSUS);
+            CUSTOM_TAGS.Add("Census 1940", CENSUS);
             
             COMMENT_FACTS.Add(OCCUPATION);
             COMMENT_FACTS.Add(RELIGION);
@@ -98,7 +133,8 @@ namespace FTAnalyzer
                     }
                     string factDate = FamilyTree.GetText(node, "DATE");
                     date = new FactDate(factDate, factRef);
-                    setCommentAndLocation(factType, FamilyTree.GetText(node), FamilyTree.GetText(node, "PLAC"));
+                    setCommentAndLocation(factType, FamilyTree.GetText(node), FamilyTree.GetText(node, "PLAC"), 
+                        FamilyTree.GetText(node, "PLAC/MAP/LATI"), FamilyTree.GetText(node, "PLAC/MAP/LONG"));
 
                     // now iterate through source elements of the fact finding all sources
                     sources = new List<FactSource>();
@@ -137,7 +173,7 @@ namespace FTAnalyzer
             this.date = date;
             this.comment = "";
             this.place = "";
-            this.location = FamilyTree.Instance.GetLocation(place);
+            this.location = FamilyTree.Instance.GetLocation(place,"","");
         }
 
         #endregion
@@ -193,7 +229,7 @@ namespace FTAnalyzer
             return tag;
         }
 
-        private void setCommentAndLocation (string factType, string factComment, string factPlace) {
+        private void setCommentAndLocation (string factType, string factComment, string factPlace, string latitude, string longitude) {
             if (factComment.Length == 0 && factPlace.Length > 0)
             {
                 int slash = factPlace.IndexOf("/");
@@ -213,7 +249,7 @@ namespace FTAnalyzer
                 comment = factComment;
                 place = factPlace;
             }
-            location = FamilyTree.Instance.GetLocation(place);
+            location = FamilyTree.Instance.GetLocation(place, latitude, longitude);
         }
 
         private bool setCertificatePresent() {

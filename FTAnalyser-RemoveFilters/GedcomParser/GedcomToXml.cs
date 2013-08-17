@@ -14,7 +14,8 @@ namespace FTAnalyzer
         {
             //StreamReader reader = new AnselInputStreamReader(checkInvalidCR(path));
             //StreamReader reader = new AnselInputStreamReader(new FileStream(path, FileMode.Open, FileAccess.Read));
-            StreamReader reader = new StreamReader(new FileStream(path, FileMode.Open, FileAccess.Read));
+            Encoding isoWesternEuropean = Encoding.GetEncoding(28591);
+            StreamReader reader = new StreamReader(new FileStream(path, FileMode.Open, FileAccess.Read), isoWesternEuropean);
             return parse(reader);
         }
 
@@ -80,6 +81,7 @@ namespace FTAnalyzer
                     {
                         try
                         {
+                            line = line.Replace('–', '-').Replace('—', '-');
                             cpos1 = line.IndexOf(' ');
                             if (cpos1 < 0) throw new Exception("No space in line");
 

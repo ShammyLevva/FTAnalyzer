@@ -106,11 +106,13 @@ namespace FTAnalyzer
             dataErrorTypes = new List<DataErrorGroup>();
         }
 
-        public void LoadTree(XmlDocument doc, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
+        public void LoadTree(string filename, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
         {
             _loading = true;
             ResetData();
             Application.DoEvents();
+            XmlDocument doc = GedcomToXml.Load(filename);
+            xmlErrorbox.AppendText("Loading file " + filename + "\n");                        
             // First iterate through attributes of root finding all sources
             XmlNodeList list = doc.SelectNodes("GED/SOUR");
             pbS.Maximum = list.Count;
@@ -158,11 +160,32 @@ namespace FTAnalyzer
                 individuals[0].Name + " as starter person. Please wait.\n\n");
             SetRelations(individuals[0].GedcomID);
             xmlErrorbox.AppendText(PrintRelationCount());
+            CountCensusFacts();
             SetParishes();
             FixIDs();
             SetDataErrorTypes();
             _loading = false;
             _dataloaded = true;
+        }
+
+        private void CountCensusFacts()
+        {
+            int censusFacts = 0;
+            int resiFacts = 0;
+            foreach (Individual ind in individuals)
+            {
+                censusFacts += ind.CensusFactCount;
+                resiFacts += ind.ResiFactCount;
+            }
+            xmlErrorbox.AppendText("\nFound " + censusFacts + " census facts in GEDCOM File.");
+            xmlErrorbox.AppendText("\nFound " + resiFacts + " residence facts in GEDCOM File.\n");
+            if (censusFacts == 0 && resiFacts == 0)
+            {
+                xmlErrorbox.AppendText("\nFound no census or residence facts in GEDCOM File.\n");
+                xmlErrorbox.AppendText("This is probably because you have recorded census facts as notes\n");
+                xmlErrorbox.AppendText("This will mean that the census report will show everyone as not yet found on census\n");
+                xmlErrorbox.AppendText("and the Lost Cousins report will report no-one with a census needing entered to Lost Cousins\n");
+            }
         }
 
         private void AddOccupations(Individual individual)
@@ -225,13 +248,19 @@ namespace FTAnalyzer
             set { xmlErrorbox = value; }
         }
 
-        public List<Fact> AllFacts
+        public List<ExportFacts> AllFacts
         {
             get
             {
-                List<Fact> result = new List<Fact>();
+                List<ExportFacts> result = new List<ExportFacts>();
                 foreach (Individual ind in individuals)
-                    result.AddRange(ind.AllFacts);
+                {
+                    foreach (Fact f in ind.AllFacts)
+                        result.Add(new ExportFacts(ind, f));
+                    foreach (Family fam in ind.FamiliesAsParent)
+                        foreach(Fact famfact in fam.AllFacts)
+                            result.Add(new ExportFacts(ind, famfact));
+                }
                 return result;
             }
         }
@@ -251,25 +280,12 @@ namespace FTAnalyzer
             get { return locations.Values.ToList(); }
         }
 
-        public List<IDisplayLocation> AllDisplayLocations
-        {
-            get
-            {
-                List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in locations.Values.ToList())
-                {
-                    result.Add(loc);
-                }
-                return result;
-            }
-        }
-
         public List<IDisplayLocation> AllCountries
         {
             get
             {
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in AllDisplayLocations)
+                foreach (FactLocation loc in locations.Values.ToList())
                 {
                     if (loc.country != string.Empty)
                     {
@@ -287,7 +303,7 @@ namespace FTAnalyzer
             get
             {
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in AllDisplayLocations)
+                foreach (FactLocation loc in locations.Values.ToList())
                 {
                     if (loc.region != string.Empty)
                     {
@@ -305,7 +321,7 @@ namespace FTAnalyzer
             get
             {
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in AllDisplayLocations)
+                foreach (FactLocation loc in locations.Values.ToList())
                 {
                     if (loc.parish != string.Empty)
                     {
@@ -323,7 +339,7 @@ namespace FTAnalyzer
             get
             {
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in AllDisplayLocations)
+                foreach (FactLocation loc in locations.Values.ToList())
                 {
                     if (loc.address != string.Empty)
                     {
@@ -336,19 +352,33 @@ namespace FTAnalyzer
             }
         }
 
+        public List<IDisplayLocation> AllPlaces
+        {
+            get
+            {
+                List<IDisplayLocation> result = new List<IDisplayLocation>();
+                foreach (FactLocation loc in locations.Values.ToList())
+                {
+                    if (loc.place != string.Empty && !result.Contains(loc))
+                        result.Add(loc);
+                }
+                return result;
+            }
+        }
+        
         public int IndividualCount { get { return individuals.Count; } }
 
         #endregion
 
         #region Property Functions
 
-        public FactLocation GetLocation(string place)
+        public FactLocation GetLocation(string place, string latitude, string longitude)
         {
             FactLocation loc;
             locations.TryGetValue(place, out loc);
             if (loc == null)
             {
-                loc = new FactLocation(place);
+                loc = new FactLocation(place, latitude, longitude);
                 locations.Add(place, loc);
             }
             return loc; // should return object that is in list of locations 
@@ -671,28 +701,33 @@ namespace FTAnalyzer
 
         #region TreeTops
 
-        public IEnumerable<IDisplayTreeTops> GetTreeTops(Func<Individual, bool> filter)
+        public List<IDisplayIndividual> GetTreeTops(Func<Individual, bool> filter)
         {
+            List<IDisplayIndividual> result = new List<IDisplayIndividual>();
             foreach (Individual ind in individuals)
             {
-                if (!ind.HasParents && filter(ind))
+                if (!ind.HasParents)
                 {
-                    yield return ind;
+                    if (filter(ind))
+                        result.Add(ind);
                 }
             }
+            return result;
         }
 
         #endregion
 
         #region WarDead
 
-        public IEnumerable<IDisplayTreeTops> GetWarDead(Func<Individual, bool> filter)
+        public List<IDisplayIndividual> GetWarDead(Func<Individual, bool> filter)
         {
+            List<IDisplayIndividual> result = new List<IDisplayIndividual>();
             foreach (Individual ind in individuals)
             {
                 if (ind.isMale && !ind.isDeathKnown() && filter(ind))
-                    yield return ind;
+                    result.Add(ind);
             }
+            return result;
         }
 
         #endregion
@@ -757,11 +792,35 @@ namespace FTAnalyzer
             }
         }
 
+        private void addChildrenToQueue(Individual indiv, Queue<Individual> queue, bool isRootPerson)
+        {
+            List<Family> families = indiv.FamiliesAsParent;
+            foreach (Family family in families)
+            {
+                foreach (Individual child in family.children)
+                {
+                    // add child to queue
+                    if (child.RelationType == Individual.BLOOD || child.RelationType == Individual.UNKNOWN)
+                    {
+                        child.RelationType = Individual.BLOOD;
+                        if(isRootPerson)
+                            child.Ahnentafel = indiv.Ahnentafel - 2;
+                        else
+                            child.Ahnentafel = indiv.Ahnentafel - 1;
+                        child.BudgieCode = "-" + Math.Abs(child.Ahnentafel).ToString().PadLeft(2, '0') + "c";
+                        queue.Enqueue(child);
+                    }
+                }
+                family.setBudgieCode(indiv, 2);
+            }
+        }
+
         public void SetRelations(string startGed)
         {
             ClearRelations();
             SetFamilies();
-            Individual ind = getGedcomIndividual(startGed);
+            Individual rootPerson = getGedcomIndividual(startGed);
+            Individual ind = rootPerson;
             ind.Ahnentafel = 1;
             maxAhnentafel = 1;
             Queue<Individual> queue = new Queue<Individual>();
@@ -802,6 +861,20 @@ namespace FTAnalyzer
                 Application.DoEvents();
             }
             // we have now set all direct ancestors and all blood relations
+            // now we need to set all descendants of root person's budgie code
+            //queue.Enqueue(rootPerson);
+            //bool isRootPerson = true;
+            //while (queue.Count > 0)
+            //{
+            //    // now take an item from the queue
+            //    ind = queue.Dequeue();
+            //    // set them as a direct relation
+            //    if (ind != rootPerson)
+            //        ind.RelationType = Individual.BLOOD;
+            //    addChildrenToQueue(ind, queue, isRootPerson);
+            //    isRootPerson = false;
+            //    Application.DoEvents();
+            //}
             // all that remains is to loop through the marriage relations
             List<Individual> marriedDBs = getAllRelationsOfType(Individual.MARRIEDTODB);
             AddToQueue(queue, marriedDBs);
@@ -1054,6 +1127,8 @@ namespace FTAnalyzer
                     {
                         if (ind.BirthDate.isAfter(ind.DeathDate))
                             errors[0].Add(new DataError(ind, "Died " + ind.DeathDate + " before born"));
+                        if (ind.BurialDate != null && ind.BirthDate.isAfter(ind.BurialDate))
+                            errors[0].Add(new DataError(ind, "Buried " + ind.BurialDate + " before born"));
                         if (ind.BurialDate != null && ind.BurialDate.isBefore(ind.DeathDate) && !ind.BurialDate.overlaps(ind.DeathDate))
                             errors[7].Add(new DataError(ind, "Buried " + ind.BurialDate + " before died " + ind.DeathDate));
                         int minAge = ind.getMinAge(ind.DeathDate);
@@ -1126,7 +1201,7 @@ namespace FTAnalyzer
                     MessageBox.Show("Unexpected Error Checking for inconsistencies in your data\nPlease report this on the issues page at http://ftanalyzer.codeplex.com \nError was " + e.Message);
                 }
             }            
-            dataErrorTypes.Add(new DataErrorGroup("Birth after death", errors[0]));
+            dataErrorTypes.Add(new DataErrorGroup("Birth after death/burial", errors[0]));
             dataErrorTypes.Add(new DataErrorGroup("Birth after father aged 90+", errors[1]));
             dataErrorTypes.Add(new DataErrorGroup("Birth after mother aged 60+", errors[2]));
             dataErrorTypes.Add(new DataErrorGroup("Birth after mothers death", errors[3]));
@@ -1167,35 +1242,87 @@ namespace FTAnalyzer
 
         #region Census Searching
 
-        public void SearchCensus(int censusYear, Individual person, int censusProvider)
+        public void SearchCensus(string censusCountry, int censusYear, Individual person, int censusProvider)
         {
-            UriBuilder uri = null;
+            string uri = null;
          
             switch (censusProvider)
             {
-                case 0: uri = BuildAncestryQuery(censusYear, person); break;
-                case 1: uri = BuildFindMyPastQuery(censusYear, person); break;
-                case 2: uri = BuildFreeCenQuery(censusYear, person); break;
+                case 0: uri = BuildAncestryQuery(censusCountry, censusYear, person); break;
+                case 1: uri = BuildFindMyPastQuery(censusCountry, censusYear, person); break;
+                case 2: uri = BuildFreeCenQuery(censusCountry, censusYear, person); break;
+                case 3:
+                    string country = person.BestLocation(new FactDate(censusYear.ToString())).Country;
+                    uri = BuildFamilySearchQuery(country, censusYear, person); break;
             }
             if (uri != null)
             {
-                Process.Start(uri.ToString());
+                Process.Start(uri);
             }
         }
 
-        private UriBuilder BuildAncestryQuery(int censusYear, Individual person)
+        private string BuildFamilySearchQuery(string country, int censusYear, Individual person)
+        {
+            FactDate censusFactDate = new FactDate(censusYear.ToString());
+            // bad  https://familysearch.org/search/record/results%23count=20&query=%2Bgivenname%3ACharles~%20%2Bsurname%3AGalloway~%20%2Brecord_type%3A(3)&collection_id=2046756
+            // good https://familysearch.org/search/record/results#count=20&query=%2Bgivenname%3ACharles%7E%20%2Bsurname%3ABisset%7E%20%2Brecord_country%3AScotland%20%2Brecord_type%3A%283%29&collection_id=2046756
+            StringBuilder path = new StringBuilder();
+            path.Append("https://www.familysearch.org/search/record/results#count=20&query=");
+            if (person.Forenames != "?" && person.Forenames.ToUpper() != "UNKNOWN")
+            {
+                path.Append("%2B" + FamilySearch.GIVENNAME + "%3A" + HttpUtility.UrlEncode(person.Forenames) + "%7E%20");
+            }
+            string surname = person.SurnameAtDate(censusFactDate);
+            if (surname != "?" && surname.ToUpper() != "UNKNOWN")
+            {
+                path.Append("%2B" + FamilySearch.SURNAME + "%3A" + HttpUtility.UrlEncode(surname) + "%7E%20");
+            }
+            path.Append("%2B" + FamilySearch.RECORD_TYPE + "%3A%283%29");
+            if (person.BirthDate != FactDate.UNKNOWN_DATE)
+            {
+                int startYear = person.BirthDate.StartDate.Year -1;
+                int endYear = person.BirthDate.EndDate.Year +1;
+                path.Append("%2B" + FamilySearch.BIRTH_YEAR + "%3A" + startYear + "-" + endYear + "%7E%20");
+            }
+            if (person.BirthLocation != null)
+            {
+                string location = person.BirthLocation.getLocation(FactLocation.REGION).ToString().Replace(",","");
+                path.Append("%2B" + FamilySearch.BIRTH_LOCATION + "%3A" + HttpUtility.UrlEncode(location) + "%7E%20");
+            }
+            int collection = FamilySearch.CensusCollectionID(country, censusYear);
+            if(collection > 0)
+                path.Append("&collection_id=" + collection);
+            return path.ToString();
+        }
+
+        private string BuildAncestryQuery(string censusCountry, int censusYear, Individual person)
         {
             UriBuilder uri = new UriBuilder();
             uri.Host = "search.ancestry.co.uk";
             uri.Path = "cgi-bin/sse.dll";
             StringBuilder query = new StringBuilder();
-            query.Append("gl=" + censusYear + "uki&");
+            if (censusCountry.Equals(FactLocation.UNITED_KINGDOM))
+            {
+                query.Append("gl=" + censusYear + "uki&");
+                query.Append("gss=ms_f-68&");
+            }
+            else if (censusCountry.Equals(FactLocation.IRELAND))
+            {
+                MessageBox.Show("Sorry searching the Ireland census on Ancestry for " + censusYear + " is not supported by FTAnalyzer at this time");
+                return null;
+            }
+            else if (censusCountry.Equals(FactLocation.UNITED_STATES))
+            {
+                query.Append("db=" + censusYear + "usfedcen&");
+                query.Append("gss=ms_db&");
+            }
+            else if (censusCountry.Equals(FactLocation.CANADA))
+                query.Append("db=" + censusYear + "canada&");
             query.Append("rank=1&");
             query.Append("new=1&");
             query.Append("so=3&");
             query.Append("MSAV=1&");
             query.Append("msT=1&");
-            query.Append("gss=ms_f-68&");
             if (person.Forenames != "?" && person.Forenames.ToUpper() != "UNKNOWN")
             {
                 query.Append("gsfn=" + HttpUtility.UrlEncode(person.Forenames) + "&");
@@ -1243,11 +1370,16 @@ namespace FTAnalyzer
             }
             query.Append("uidh=2t2");
             uri.Query = query.ToString();
-            return uri;
+            return uri.ToString();
         }
 
-        private UriBuilder BuildFreeCenQuery(int censusYear, Individual person)
+        private string BuildFreeCenQuery(string censusCountry, int censusYear, Individual person)
         {
+            if (!censusCountry.Equals(FactLocation.UNITED_KINGDOM))
+            {
+                MessageBox.Show("Sorry only UK searches can be done on FreeCEN.");
+                return null;
+            }
             FactDate censusFactDate = new FactDate(censusYear.ToString());
             UriBuilder uri = new UriBuilder();
             uri.Host = "www.freecen.org.uk";
@@ -1315,19 +1447,18 @@ namespace FTAnalyzer
             query.Append("c=all&"); // initially set to search all counties need a routine to return FreeCen county codes 
             query.Append("z=Find&"); // executes search
             uri.Query = query.ToString();
-            return uri;
+            return uri.ToString();
         }
 
-        private UriBuilder BuildFindMyPastQuery(int censusYear, Individual person)
+        private string BuildFindMyPastQuery(string censusCountry, int censusYear, Individual person)
         {
-            //POST /CensusPersonSearchResultServlet?censusYear=1881
-            //[truncated] recordPosition=0&pageDirection=&startNewSearch=startNewSearch&basicSearch=false&
-            //    route=&censusYear=1881&forenames=Alexander&fns=fns&lastName=Bisset&yearOfBirth=1863&
-            //    yearOfBirthVariation=2&occupation=&birthPlace=aberdeen&residenc
-
-            //MessageBox.Show("Find My Past searching coming soon in a future version");
-            //return null;
-
+            // bad  http://www.findmypast.co.uk/CensusPersonSearchResultServlet?basicSearch=false&censusYear=1881&occupation=&otherForenames=&otherLastName=&pageDirection=&recordPosition=0&residence=&route=&searchHouseholds=6,15&searchInstitutions=9&searchVessels=11,12&sortOrder=nameAsc&startNewSearch=startNewSearch&forenames=Michael&fns=fns&lastName=Tebbutt&sns=sns&yearOfBirth=1867&yearOfBirthVariation=1&birthPlace=Streatham&country=England&coIdList=Surrey++++++++++++++++++++++++++++++++++%3a3%2c4+++++++++++++++++++++++++++
+            // good http://www.findmypast.co.uk/CensusPersonSearchResultServlet?basicSearch=false&censusYear=1881&occupation=&otherForenames=&otherLastName=&pageDirection=&recordPosition=0&residence=&route=&searchHouseholds=6,15&searchInstitutions=9&searchVessels=11,12&sortOrder=nameAsc&startNewSearch=startNewSearch&forenames=C&fns=fns&lastName=Whitethread&sns=sns&yearOfBirth=1867&yearOfBirthVariation=1&birthPlace=Streatham&country=England&coIdList=Surrey++++++++++++++++++++++++++++++++++%3a3%2c4+++++++++++++++++++++++++++
+            if (!censusCountry.Equals(FactLocation.UNITED_KINGDOM))
+            {
+                MessageBox.Show("Sorry non UK census searching of Find My Past isn't supported in this version of FTAnalyzer");
+                return null;
+            }
             FactDate censusFactDate = new FactDate(censusYear.ToString());
             UriBuilder uri = new UriBuilder();
             uri.Host = "www.findmypast.co.uk";
@@ -1357,16 +1488,20 @@ namespace FTAnalyzer
                 query.Append("forenames=" + HttpUtility.UrlEncode(forenames) + "&");
                 query.Append("fns=fns&");
             }
+            else
+            {
+                query.Append("forenames=&fns=fns&");
+            }
             string surname = person.SurnameAtDate(censusFactDate);
             if (surname != "?" && surname.ToUpper() != "UNKNOWN")
             {
                 query.Append("lastName=" + HttpUtility.UrlEncode(surname) + "&");
                 query.Append("sns=sns&");
             }
-            //if (person.MarriedName != "?" && person.MarriedName.ToUpper() != "UNKNOWN" && person.MarriedName != person.Surname)
-            //{
-            //    query.Append("otherLastName=" + HttpUtility.UrlEncode(surname) + "&");
-            //}
+            else
+            {
+                query.Append("lastName=&sns=sns&");
+            }
             if (person.BirthDate != FactDate.UNKNOWN_DATE)
             {
                 int startYear = person.BirthDate.StartDate.Year;
@@ -1391,18 +1526,31 @@ namespace FTAnalyzer
                 query.Append("yearOfBirth=" + year + "&");
                 query.Append("yearOfBirthVariation=" + range + "&");
             }
+            else
+            {
+                query.Append("yearOfBirth=&yearOfBirthVariation=&");
+            }
             if (person.BirthLocation != null)
             {
-                string location = person.BirthLocation.Parish;
+                query.Append("birthPlace=" + HttpUtility.UrlEncode(person.BirthLocation.Parish) + "&");
                 Tuple<string, string> area = person.BirthLocation.FindMyPastCountyCode;
-                query.Append("birthPlace=" + HttpUtility.UrlEncode(location) + "&");
-                query.Append("country=" + HttpUtility.UrlEncode(area.Item1) + "&");
-                query.Append("coIdList=" + HttpUtility.UrlEncode(area.Item2));
+                if (area != null)
+                {
+                    query.Append("country=" + HttpUtility.UrlEncode(area.Item1) + "&");
+                    query.Append("coIdList=" + HttpUtility.UrlEncode(area.Item2));
+                }
+                else
+                {
+                    query.Append("country=&coIdList=");
+                }
+            }
+            else
+            {
+                query.Append("birthPlace=&country=&coIdList=");
             }
             uri.Query = query.ToString();
-            return uri;
+            return uri.ToString();
         }
         #endregion
-
     }
 }

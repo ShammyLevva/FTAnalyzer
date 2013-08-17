@@ -12,19 +12,6 @@ namespace FTAnalyzer
     public class FamilySearchNewSearchForm : FamilySearchForm
     {
 
-        public static readonly string
-                FATHER_GIVENNAME = "father_givenname",
-                FATHER_SURNAME = "father_surname",
-                GIVENNAME = "givenname",
-                SURNAME = "surname",
-                MOTHER_GIVENNAME = "mother_givenname",
-                MOTHER_SURNAME = "mother_surname",
-                SPOUSE_GIVENNAME = "spouse_givenname",
-                SPOUSE_SURNAME = "spouse_surname",
-                BATCH_NUMBER = "batch_number",
-                FILM_NUMBER = "film_number",
-                RECORD_TYPE = "record_type";
-
 //        private static readonly string SERVERERROR = "java.io.IOException: Server returned HTTP response code";
 //        private static readonly string SERVERUNAVAILABLE = "Search is unavailable due to maintenance";
 
@@ -49,16 +36,16 @@ namespace FTAnalyzer
         protected override void Initialise()
         {
             parameters = new Dictionary<string, string>();
-            parameters.Add(FATHER_GIVENNAME, "");
-            parameters.Add(FATHER_SURNAME, "");
-            parameters.Add(GIVENNAME, "");
-            parameters.Add(SURNAME, "");
-            parameters.Add(MOTHER_GIVENNAME, "");
-            parameters.Add(MOTHER_SURNAME, "");
-            parameters.Add(SPOUSE_GIVENNAME, "");
-            parameters.Add(SPOUSE_SURNAME, "");
-            parameters.Add(BATCH_NUMBER, "");
-            parameters.Add(FILM_NUMBER, "");
+            parameters.Add(FamilySearch.FATHER_GIVENNAME, "");
+            parameters.Add(FamilySearch.FATHER_SURNAME, "");
+            parameters.Add(FamilySearch.GIVENNAME, "");
+            parameters.Add(FamilySearch.SURNAME, "");
+            parameters.Add(FamilySearch.MOTHER_GIVENNAME, "");
+            parameters.Add(FamilySearch.MOTHER_SURNAME, "");
+            parameters.Add(FamilySearch.SPOUSE_GIVENNAME, "");
+            parameters.Add(FamilySearch.SPOUSE_SURNAME, "");
+            parameters.Add(FamilySearch.BATCH_NUMBER, "");
+            parameters.Add(FamilySearch.FILM_NUMBER, "");
 //            parameters.Add(RECORD_TYPE, "");
         }
 
@@ -74,7 +61,7 @@ namespace FTAnalyzer
                 string newFilename = filename;
                 SetLocationParameters(location);
                 if (searchType == FamilySearchForm.CHILDRENSEARCH && location.Country.Equals(FactLocation.SCOTLAND))
-                    setParameter(MOTHER_SURNAME, surname);
+                    setParameter(FamilySearch.MOTHER_SURNAME, surname);
                 //if (level == FactLocation.REGION && parameters[SHIRE] != string.Empty)
                 //{
                 //    newFilename = filename.Substring(0, filename.Length - 5) + FamilyTree.validFilename(" (" + location.getLocation(level) + ").html");
@@ -104,20 +91,20 @@ namespace FTAnalyzer
                 // ie: only search if one partner has full name
                 if (forename2 != string.Empty && surname2 != string.Empty)
                 {
-                    setParameter(GIVENNAME, forename2 + "~");
-                    setParameter(SURNAME, surname2 + "~");
-                    setParameter(SPOUSE_GIVENNAME, forename1 + "~");
-                    setParameter(SPOUSE_SURNAME, surname1 + "~");
+                    setParameter(FamilySearch.GIVENNAME, forename2 + "~");
+                    setParameter(FamilySearch.SURNAME, surname2 + "~");
+                    setParameter(FamilySearch.SPOUSE_GIVENNAME, forename1 + "~");
+                    setParameter(FamilySearch.SPOUSE_SURNAME, surname1 + "~");
 //                    setParameter(RECORD_TYPE, "marriage");
                     return true;
                 }
             }
             else
             {
-                setParameter(GIVENNAME, forename1 + "~");
-                setParameter(SURNAME, surname1 + "~");
-                setParameter(SPOUSE_GIVENNAME, forename2 + "~");
-                setParameter(SPOUSE_SURNAME, surname2 + "~");
+                setParameter(FamilySearch.GIVENNAME, forename1 + "~");
+                setParameter(FamilySearch.SURNAME, surname1 + "~");
+                setParameter(FamilySearch.SPOUSE_GIVENNAME, forename2 + "~");
+                setParameter(FamilySearch.SPOUSE_SURNAME, surname2 + "~");
 //                setParameter(RECORD_TYPE, "marriage");
                 return true;
             }

@@ -54,20 +54,41 @@ namespace Controls
             Func<FactLocation, string> country = x => x.Country;
             if (Scotland)
                 locationFilter = FilterUtils.LocationFilter<T>(location, country, FactLocation.SCOTLAND);
-            if (England)
+            else if (England)
                 locationFilter = FilterUtils.LocationFilter<T>(location, country, FactLocation.ENGLAND);
-            if (Wales)
+            else if (Wales)
                 locationFilter = FilterUtils.LocationFilter<T>(location, country, FactLocation.WALES);
-            if (UK)
+            else if (UK)
                 locationFilter = FilterUtils.OrFilter<FactDate, T>(FilterUtils.LocationFilter<T>(location, country, FactLocation.SCOTLAND),
                                         FilterUtils.LocationFilter<T>(location, country, FactLocation.ENGLAND),
                                         FilterUtils.LocationFilter<T>(location, country, FactLocation.WALES));
-            if (Canada)
+            else if (Canada)
                 locationFilter = FilterUtils.LocationFilter<T>(location, country, FactLocation.CANADA);
-            if (USA)
-                locationFilter = FilterUtils.LocationFilter<T>(location, country, FactLocation.USA);
+            else if (USA)
+                locationFilter = FilterUtils.LocationFilter<T>(location, country, FactLocation.UNITED_STATES);
             return locationFilter;
         }
+
+        public FactLocation GetLocation
+        {
+            get {
+
+                if (Scotland)
+                    return new FactLocation(FactLocation.SCOTLAND);
+                else if (England)
+                    return new FactLocation(FactLocation.ENGLAND);
+                else if (Wales)
+                    return new FactLocation(FactLocation.WALES);
+                else if (UK)
+                    return new FactLocation(FactLocation.UNITED_KINGDOM);
+                else if (Canada)
+                    return new FactLocation(FactLocation.CANADA);
+                else if (USA)
+                    return new FactLocation(FactLocation.UNITED_STATES);
+                else
+                    return null;
+            }
+       }
 
         public event EventHandler CountryChanged;
 

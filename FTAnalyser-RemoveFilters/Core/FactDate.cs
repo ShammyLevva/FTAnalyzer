@@ -18,17 +18,20 @@ namespace FTAnalyzer
         private static readonly int HIGH = 1;
         private static readonly IFormatProvider CULTURE = new CultureInfo("en-GB", true);
 
-        public static readonly string YEAR = "yyyy";
-        public static readonly string MONTHYEAR = "MMM yyyy";
-        public static readonly string DAYMONTH = "d MMM";
-        public static readonly string MONTH = "MMM";
+        private static readonly string YEAR = "yyyy";
+        private static readonly string MONTHYEAR = "MMM yyyy";
+        private static readonly string DAYMONTH = "d MMM";
+        private static readonly string MONTH = "MMM";
         public static readonly string FULL = "d MMM yyyy";
-        public static readonly string DISPLAY = "d MMM yyyy";
-        public static readonly string CHECKING = "d MMM";
-        public static readonly string DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})$";
-        public static readonly string DOUBLE_DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})/*(\\d{0,2})$";
-        public static readonly string POSTFIX = "(\\d{1,2})(?:ST|ND|RD|TH)(.*)";
-
+        private static readonly string DISPLAY = "d MMM yyyy";
+        private static readonly string CHECKING = "d MMM";
+        private static readonly string DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})$";
+        private static readonly string DOUBLE_DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})/(\\d{0,2})$";
+        private static readonly string POSTFIX = "(\\d{1,2})(?:ST|ND|RD|TH)(.*)";
+        private static readonly string BETWEENFIX = "(\\d{4})-(\\d{4})";
+        private static readonly string USDATEFIX = "^([A-Za-z]{3}) *(\\d{1,2} )(\\d{4})$";
+        private static readonly string SPACEFIX = "^(\\d{1,2}) *([A-Za-z]{3}) *(\\d{0,4})$";
+        
         public static readonly FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
 
         public enum FactDateType
@@ -86,6 +89,12 @@ namespace FTAnalyzer
             str = str.Replace(",", string.Empty);
             str = str.Replace("(", string.Empty);
             str = str.Replace(")", string.Empty);
+            str = str.Replace("?", string.Empty);
+            str = str.Replace(".", " ");
+            str = str.Replace("&", " AND ");
+            str = str.Replace(" / ", "/");
+            str = str.Replace("   ", " ");
+            str = str.Replace("  ", " ");
 
             str = str.Replace("JANUARY", "JAN");
             str = str.Replace("FEBRUARY", "FEB"); 
@@ -95,41 +104,73 @@ namespace FTAnalyzer
             str = str.Replace("JULY", "JUL");
             str = str.Replace("AUGUST", "AUG");
             str = str.Replace("SEPTEMBER", "SEP");
+            str = str.Replace("SEPT", "SEP");
             str = str.Replace("OCTOBER", "OCT");
             str = str.Replace("NOVEMBER", "NOV");
             str = str.Replace("DECEMBER", "DEC");
 
-            str = str.Replace("ABT.", "ABT");
-            str = str.Replace("AFT.", "AFT");
-            str = str.Replace("BEF.", "BEF");
-            str = str.Replace("BET.", "BET");
-            str = str.Replace("CAL.", "ABT");
-            str = str.Replace("EST.", "ABT");
-            str = str.Replace("CIR.", "ABT"); 
+            str = str.Replace("M01", "JAN");
+            str = str.Replace("M02", "FEB");
+            str = str.Replace("M03", "MAR");
+            str = str.Replace("M04", "APR");
+            str = str.Replace("M05", "MAY");
+            str = str.Replace("M06", "JUN");
+            str = str.Replace("M07", "JUL");
+            str = str.Replace("M08", "AUG");
+            str = str.Replace("M09", "SEP");
+            str = str.Replace("M10", "OCT");
+            str = str.Replace("M11", "NOV");
+            str = str.Replace("M12", "DEC");
+
             str = str.Replace("CAL", "ABT");
             str = str.Replace("EST", "ABT");
             str = str.Replace("CIR", "ABT");
+            str = str.Replace("PRE", "BEF");
+            str = str.Replace("POST", "AFT");
 
+            str = str.Replace("ABOUT", "ABT");
+            str = str.Replace("AFTER", "AFT");
+            str = str.Replace("BEFORE", "BEF");
+            str = str.Replace("BETWEEN", "BET");
+
+            str = str.Replace("QUARTER", "QTR");
             str = str.Replace("MAR QTR", "ABT MAR");
-            str = str.Replace("MAR QUARTER", "ABT MAR");
             str = str.Replace("MAR Q ", "ABT MAR ");
             str = str.Replace("JAN FEB MAR", "ABT MAR");
             str = str.Replace("JAN-FEB-MAR", "ABT MAR");
+            str = str.Replace("JAN/FEB/MAR", "ABT MAR");
+            str = str.Replace("JAN\\FEB\\MAR", "ABT MAR");
+            str = str.Replace("Q1", "ABT MAR");
+            str = str.Replace("QTR1", "ABT MAR");
+            str = str.Replace("QTR 1", "ABT MAR");
             str = str.Replace("JUN QTR", "ABT JUN");
-            str = str.Replace("JUN QUARTER", "ABT JUN");
             str = str.Replace("JUN Q ", "ABT JUN ");
             str = str.Replace("APR MAY JUN", "ABT JUN");
             str = str.Replace("APR-MAY-JUN", "ABT JUN");
+            str = str.Replace("APR/MAY/JUN", "ABT JUN");
+            str = str.Replace("APR\\MAY\\JUN", "ABT JUN");
+            str = str.Replace("Q2", "ABT JUN");
+            str = str.Replace("QTR2", "ABT JUN");
+            str = str.Replace("QTR 2", "ABT JUN");
             str = str.Replace("SEP QTR", "ABT SEP");
-            str = str.Replace("SEP QUARTER", "ABT SEP");
             str = str.Replace("SEP Q ", "ABT SEP ");
             str = str.Replace("JUL AUG SEP", "ABT SEP");
             str = str.Replace("JUL-AUG-SEP", "ABT SEP");
+            str = str.Replace("JUL/AUG/SEP", "ABT SEP");
+            str = str.Replace("JUL\\AUG\\SEP", "ABT SEP");
+            str = str.Replace("Q3", "ABT SEP");
+            str = str.Replace("QTR3", "ABT SEP");
+            str = str.Replace("QTR 3", "ABT SEP");
             str = str.Replace("DEC QTR", "ABT DEC");
-            str = str.Replace("DEC QUARTER", "ABT DEC");
             str = str.Replace("DEC Q ", "ABT DEC ");
             str = str.Replace("OCT NOV DEC", "ABT DEC");
             str = str.Replace("OCT-NOV-DEC", "ABT DEC");
+            str = str.Replace("OCT/NOV/DEC", "ABT DEC");
+            str = str.Replace("OCT\\NOV\\DEC", "ABT DEC");
+            str = str.Replace("Q4", "ABT DEC");
+            str = str.Replace("QTR4", "ABT DEC");
+            str = str.Replace("QTR 4", "ABT DEC");
+            
             str = str.Replace("ABT ABT", "ABT"); // fix any ABT X QTR's that will have been changed to ABT ABT
 
             if (str.StartsWith("FROM"))
@@ -146,7 +187,25 @@ namespace FTAnalyzer
                 string result = matcher.Groups[1].ToString() + matcher.Groups[2].ToString();
                 return result.Trim();
             }
-            return str;
+            matcher = Regex.Match(str, BETWEENFIX);
+            if (matcher.Success)
+            {
+                string result = "BET " + matcher.Groups[1].ToString() + " AND " + matcher.Groups[2].ToString();
+                return result.Trim();
+            }
+            matcher = Regex.Match(str, USDATEFIX);
+            if (matcher.Success)
+            {
+                string result = matcher.Groups[2].ToString() + matcher.Groups[1].ToString() + " " + matcher.Groups[3].ToString();
+                return result.Trim();
+            }
+            matcher = Regex.Match(str, SPACEFIX);
+            if (matcher.Success)
+            {
+                string result = matcher.Groups[1].ToString() + " " + matcher.Groups[2].ToString() + " " + matcher.Groups[3].ToString();
+                return result.Trim();
+            }
+            return str.Trim();
         }
 
         #region Process Dates
@@ -198,6 +257,10 @@ namespace FTAnalyzer
                     type = FactDateType.AFT;
                     output.Append("AFT ");
                 }
+                else if (startdate == enddate)
+                {
+                    type = FactDateType.EXT;
+                }
                 else
                 {
                     type = FactDateType.BET;
@@ -210,7 +273,7 @@ namespace FTAnalyzer
                 if (type == FactDateType.BET)
                     output.Append(" AND ");
             }
-            if (enddate != MAXDATE)
+            if (enddate != MAXDATE && enddate != startdate)
             {
                 check = Format(CHECKING, enddate);
                 if (check.Equals("31 DEC"))
@@ -261,18 +324,32 @@ namespace FTAnalyzer
                 }
                 else if (processDate.StartsWith("BET"))
                 {
+                    string fromdate;
+                    string todate;
                     type = FactDateType.BET;
-                    int andpos = processDate.IndexOf(" AND ");
-                    string fromdate = processDate.Substring(4, andpos - 4);
-                    string todate = processDate.Substring(andpos + 5);
+                    int pos = processDate.IndexOf(" AND ");
+                    if (pos == -1)
+                    {
+                        pos = processDate.IndexOf("-");
+                        if(pos == -1)
+                            throw new Exception("Invalid BETween date no AND found");
+                        fromdate = processDate.Substring(4, pos - 4);
+                        todate = processDate.Substring(pos + 1);
+                        pos = pos - 4; // from to code in next block expects to jump 5 chars not 1.
+                    }
+                    else
+                    {
+                        fromdate = processDate.Substring(4, pos - 4);
+                        todate = processDate.Substring(pos + 5);
+                    }
                     if (fromdate.Length < 3)
-                        fromdate = fromdate + processDate.Substring(andpos + 7);
+                        fromdate = fromdate + processDate.Substring(pos + 7);
                     else if (fromdate.Length == 3)
-                        fromdate = "01 " + fromdate + processDate.Substring(andpos + 8);
+                        fromdate = "01 " + fromdate + processDate.Substring(pos + 8);
                     else if (fromdate.Length == 4)
                         fromdate = "01 JAN " + fromdate;
                     else if (fromdate.Length < 7 && fromdate.IndexOf(" ") > 0)
-                        fromdate = fromdate + processDate.Substring(andpos + 11);
+                        fromdate = fromdate + processDate.Substring(pos + 11);
                     startdate = parseDate(fromdate, LOW, 0, enddate.Year);
                     enddate = parseDate(todate, HIGH, 0);
                 }
@@ -286,7 +363,7 @@ namespace FTAnalyzer
             }
             catch (Exception e)
             {
-                FamilyTree.Instance.XmlErrorBox.AppendText("Error parsing date '" + processDate + "' error message was : " + e.Message + "\n");
+                FamilyTree.Instance.XmlErrorBox.AppendText("Error parsing date '" + processDate + "' for " + factRef + "' error message was : " + e.Message + "\n");
             }
         }
 
@@ -323,7 +400,7 @@ namespace FTAnalyzer
                         gYear = matcher.Groups[3];
                         gDouble = matcher.Groups[4];
                         if (dateValue.Length > 3)
-                            dateValue = dateValue.Substring(0, dateValue.Length - 3); // remove the trailing / and 2 digits
+                            dateValue = dateValue.Substring(0, dateValue.Length - gDouble.ToString().Length - 1); // remove the trailing / and 1 or 2 digits
                     }
                     else
                         throw new Exception("Unrecognised date format for : " + dateValue);
@@ -395,7 +472,7 @@ namespace FTAnalyzer
             catch (Exception e2)
             {
                 dt = (highlow == HIGH) ? MAXDATE : MINDATE;
-                FamilyTree.Instance.XmlErrorBox.AppendText("Error parsing date '" + dateValue + "' for " + factRef + " error message was : " + e2.Message + "\n");
+                throw e2;
             }
             return dt;
         }
@@ -407,6 +484,8 @@ namespace FTAnalyzer
                 return true;
             // check if valid double date if so set double date to true
             string doubleyear = gDouble.ToString().Trim();
+            if (doubleyear.Length == 1 && year.Length >= 2)
+                doubleyear = year.Substring(year.Length - 2,1) + doubleyear;
             if (doubleyear == null || doubleyear.Length != 2 || year.Length < 3)
                 return false;
             int iYear = Convert.ToInt32(year);
@@ -449,6 +528,23 @@ namespace FTAnalyzer
         public bool DoubleDate
         {
             get { return this.doubledate; }
+        }
+
+        public FactDate AverageDate
+        {
+            get
+            {
+                if (this.datestring.Equals("UNKNOWN"))
+                    return UNKNOWN_DATE;
+                if (this.startdate == MINDATE)
+                    return new FactDate(this.enddate, this.enddate);
+                if (this.enddate == MAXDATE)
+                    return new FactDate(this.startdate, this.startdate);
+                TimeSpan ts = this.enddate.Subtract(this.startdate);
+                double midPointSeconds = ts.TotalSeconds / 2.0;
+                DateTime average = this.startdate.AddSeconds(midPointSeconds);
+                return new FactDate(average, average);
+            }
         }
 
         #endregion
@@ -512,22 +608,6 @@ namespace FTAnalyzer
         }
 
         #endregion
-
-        public int getMaximumYear(FactDate that)
-        {
-            //Debug.WriteLine("Max: This start date is " + Format(FULL, startdate));
-            //Debug.WriteLine("Max: That end date is " + (that == null ? "null" : Format(FULL, enddate)));
-            int diff = ((that == null) ? MAXDATE.Year : that.enddate.Year) - this.startdate.Year;
-            return Math.Min(diff, MAXYEARS);
-        }
-
-        public int getMinimumYear(FactDate that)
-        {
-            //Debug.WriteLine("Min: This end date is " + Format(FULL, enddate));
-            //Debug.WriteLine("Min: That start date is " + (that == null ? "null" : Format(FULL, startdate)));
-            int diff = ((that == null) ? MINDATE.Year : that.startdate.Year) - this.enddate.Year;
-            return Math.Max(diff, MINYEARS);
-        }
 
         public override bool Equals(Object that) 
         {

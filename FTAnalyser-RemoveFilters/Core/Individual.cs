@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace FTAnalyzer
 {
     public class Individual : IComparable<Individual>, 
-        IDisplayIndividual, IDisplayLooseDeath, IDisplayTreeTops, IDisplayLCReport
+        IDisplayIndividual, IDisplayLooseDeath, IDisplayLCReport, IExportIndividual
     {
         
         // define relation type from direct ancestor to related by marriage and 
@@ -100,7 +100,7 @@ namespace FTAnalyzer
 
         public bool HasRangedBirthDate
         {
-            get { return BirthDate.Type == FactDate.FactDateType.BET && BirthDate.getMinimumYear(null) != BirthDate.getMaximumYear(null);  }
+            get { return BirthDate.Type == FactDate.FactDateType.BET && BirthDate.StartDate.Year != BirthDate.EndDate.Year;  }
         }
         
         public int Ahnentafel
@@ -362,8 +362,7 @@ namespace FTAnalyzer
         {
             get
             {
-                Fact death = getPreferredFact(Fact.DEATH);
-                return (death == null) ? FactDate.MAXYEARS : BirthDate.getMaximumYear(death.FactDate);
+                return getAge(DeathDate).MaxAge;
             }
         }
 
@@ -402,6 +401,64 @@ namespace FTAnalyzer
         {
             get { return familiesAsChild; }
             set { familiesAsChild = value; }
+        }
+
+        public int CensusFactCount
+        {
+            get
+            {
+                int censusFacts = 0;
+                foreach (Fact f in facts)
+                {
+                    if (f.FactType == Fact.CENSUS)
+                        censusFacts++;
+                }
+                return censusFacts;
+            }
+        }
+
+        public int ResiFactCount
+        {
+            get
+            {
+                int resiFacts = 0;
+                foreach (Fact f in facts)
+                {
+                    if (f.FactType == Fact.RESIDENCE)
+                        resiFacts++;
+                }
+                return resiFacts;
+            }
+        }
+
+        public string MarriageDates
+        {
+            get
+            {
+                string output = string.Empty;
+                foreach (Family f in familiesAsParent)
+                    if(f.MarriageDate.ToString() != string.Empty)
+                        output += f.MarriageDate + "; ";
+                if (output.Length > 0)
+                    return output.Substring(0, output.Length - 2); // remove trailing ;
+                else
+                    return output;
+            }
+        }
+
+        public string MarriageLocations
+        {
+            get
+            {
+                string output = string.Empty;
+                foreach (Family f in familiesAsParent)
+                    if(f.MarriageLocation.ToString() != string.Empty)
+                        output += f.MarriageLocation + "; ";
+                if (output.Length > 0)
+                    return output.Substring(0, output.Length - 2); // remove trailing ;
+                else
+                    return output;
+            }
         }
 
         #endregion
@@ -452,30 +509,32 @@ namespace FTAnalyzer
                         if (f.Location.country == FactLocation.ENGLAND || f.Location.country == FactLocation.WALES
                             || f.Location.country == FactLocation.UNITED_KINGDOM || !supportedLocation)
                         {
-                            if (f.FactDate.overlaps(CensusDate.UKCENSUS1841) ||
-                                f.FactDate.overlaps(CensusDate.UKCENSUS1881) ||
-                                f.FactDate.overlaps(CensusDate.UKCENSUS1911))
+                            if ((f.FactDate.overlaps(CensusDate.UKCENSUS1841) ||
+                                 f.FactDate.overlaps(CensusDate.UKCENSUS1881) ||
+                                 f.FactDate.overlaps(CensusDate.UKCENSUS1911)) &&
+                                (when == CensusDate.UKCENSUS1841 || when == CensusDate.UKCENSUS1881 || when == CensusDate.UKCENSUS1911))
                                 return true;
                         }
                         else if (f.Location.country == FactLocation.SCOTLAND)
                         {
-                            if (f.FactDate.overlaps(CensusDate.UKCENSUS1881))
+                            if (f.FactDate.overlaps(CensusDate.UKCENSUS1881) && when == CensusDate.UKCENSUS1881)
                                 return true;
                         }
                         else if (f.Location.country == FactLocation.CANADA)
                         {
-                            if (f.FactDate.overlaps(CensusDate.CANADACENSUS1881))
+                            if (f.FactDate.overlaps(CensusDate.CANADACENSUS1881) && when == CensusDate.CANADACENSUS1881)
                                 return true;
                         }
                         else if (f.Location.country == FactLocation.UNITED_STATES)
                         {
-                            if (f.FactDate.overlaps(CensusDate.USCENSUS1880) ||
-                                f.FactDate.overlaps(CensusDate.USCENSUS1940))
+                            if ((f.FactDate.overlaps(CensusDate.USCENSUS1880) ||
+                                 f.FactDate.overlaps(CensusDate.USCENSUS1940)) && 
+                                (when == CensusDate.USCENSUS1880 || when == CensusDate.USCENSUS1940))
                                 return true;
                         }
                         else if (f.Location.country == FactLocation.IRELAND)
                         {
-                            if (f.FactDate.overlaps(CensusDate.IRELANDCENSUS1911))
+                            if (f.FactDate.overlaps(CensusDate.IRELANDCENSUS1911) && when == CensusDate.IRELANDCENSUS1911)
                                 return true;
                         }
                     }
@@ -518,11 +577,11 @@ namespace FTAnalyzer
         }
         
         public int getMaxAge(FactDate when) {
-            return BirthDate.getMaximumYear(when);
+            return getAge(when).MaxAge;
         }
         
         public int getMinAge(FactDate when) {
-            return BirthDate.getMinimumYear(when);
+            return getAge(when).MinAge;
         }
 
         public int getMaxAge(DateTime when)
@@ -633,7 +692,13 @@ namespace FTAnalyzer
         public FactLocation BestLocation(FactDate when)
         {
             // this returns a Location a person was at for a given period
-            return FactLocation.BestLocation(facts, when);
+            List<Fact> allFacts = new List<Fact>();
+            allFacts.AddRange(facts);
+            foreach (Family f in familiesAsParent)
+            {
+                allFacts.AddRange(f.AllFacts);
+            }
+            return FactLocation.BestLocation(allFacts, when);
         }
 
         public bool isAtLocation(FactLocation loc, int level)

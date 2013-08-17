@@ -13,17 +13,15 @@ namespace FTAnalyzer
 		
 		public static readonly string SCOTLAND = "Scotland", ENGLAND = "England", CANADA = "Canada", UNITED_STATES = "United States",
 			WALES = "Wales", IRELAND = "Ireland", UNITED_KINGDOM = "United Kingdom", NEW_ZEALAND = "New Zealand", AUSTRALIA = "Australia", 
-            UNKNOWN_COUNTRY = "Unknown", USA="USA", EIRE="Eire";
-
-		public static readonly string ABERDEENSHIRE = "Aberdeenshire", AYRSHIRE = "Ayrshire", KINCARDINESHIRE = "Kincardineshire",
-				LANARKSHIRE = "Lanarkshire", BANFFSHIRE = "Banffshire", ANGUS = "Angus", MIDLOTHIAN = "Midlothian", FIFE = "Fife",
-				MIDDLESEX = "Middlesex", LANCASHIRE = "Lancashire";
+            UNKNOWN_COUNTRY = "Unknown", ENG_WALES = "England & Wales", INDIA = "India", FRANCE = "France", GERMANY = "Germany", 
+            ITALY = "Italy", SPAIN = "Spain";
 		
 		public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, PARISH = 2, ADDRESS = 3, PLACE = 4;
 
 		private string location;
         private string fixedLocation;
-		internal string country;
+        private string sortableLocation;
+        internal string country;
 		internal string region;
 		internal string parish;
 		internal string address;
@@ -31,6 +29,9 @@ namespace FTAnalyzer
 		internal string parishID;
 		internal string regionID;
 		private int level;
+        private bool knownCountry;
+        private float latitude;
+        private float longitude;
 
 		private List<Individual> individuals;
 		private static Dictionary<string, string> COUNTRY_TYPOS = new Dictionary<string, string>();
@@ -40,7 +41,6 @@ namespace FTAnalyzer
 		private static Dictionary<string, string> REGION_IDS = new Dictionary<string, string>();
         private static Dictionary<string, string> FREECEN_LOOKUP = new Dictionary<string, string>();
         private static Dictionary<string, Tuple<string, string>> FINDMYPAST_LOOKUP = new Dictionary<string, Tuple<string,string>>();
-        private static Tuple<string, string> FMP_All_Counties;
 		
 		static FactLocation() {
 			// load conversions from XML file
@@ -105,21 +105,42 @@ namespace FTAnalyzer
                         FINDMYPAST_LOOKUP.Add(county, result);
                     }
                 }
-                FMP_All_Counties = new Tuple<string,string>("any_basic_county","Any");
             }
 		}
 		
 		public FactLocation() {
 			this.location = "";
             this.fixedLocation = "";
-			this.country = "";
+            this.sortableLocation = "";
+            this.country = "";
 			this.region = "";
 			this.parish = "";
 			this.address = "";
 			this.place = "";
 			this.parishID = null;
 			this.individuals = new List<Individual>();
+            this.knownCountry = false;
+            this.latitude = 0;
+            this.longitude = 0;
 		}
+
+        public FactLocation(string location, string latitude, string longitude)
+            : this(location)
+        {
+            this.latitude = 0;
+            this.longitude = 0;
+            if (latitude != string.Empty && longitude != string.Empty)
+            {
+                try
+                {
+                    this.latitude = float.Parse(latitude);
+                    this.longitude = float.Parse(longitude);
+                }
+                catch (Exception)
+                {
+                }
+            }
+        }
 
 		public FactLocation(string location) : this() {
 			if (location != null) {
@@ -162,6 +183,7 @@ namespace FTAnalyzer
 				fixEmptyFields();
 				fixCapitalisation();
 				fixRegionFullStops();
+                fixCountryFullStops();
 				fixMultipleSpacesAndAmpersands();
 				fixCountryTypos();
 				country = fixRegionTypos(country);
@@ -170,12 +192,23 @@ namespace FTAnalyzer
 				ShiftRegionToParish();
 				SetRegionID();
                 SetFixedLocation();
+                SetSortableLocation();
+                CheckKnownLocation();
                 //string after = (parish + ", " + region + ", " + country).ToUpper().Trim();
                 //if (!before.Equals(after))
                 //    Console.WriteLine("Debug : '" + before + "'  converted to '" + after + "'");
 			}
 		}
 
+        private void CheckKnownLocation()
+        {
+            if (country.Equals(ENGLAND) || country.Equals(SCOTLAND) || country.Equals(WALES) || country.Equals(IRELAND) || 
+                country.Equals(UNITED_STATES) || country.Equals(UNITED_KINGDOM) || country.Equals(CANADA) ||
+                country.Equals(NEW_ZEALAND) || country.Equals(AUSTRALIA) || country.Equals(INDIA) || country.Equals(GERMANY) ||
+                country.Equals(FRANCE) || country.Equals(SPAIN) || country.Equals(ITALY))
+                knownCountry = true;
+        }
+    
 		#region Fix Location string routines
 		private void fixEmptyFields()
 		{
@@ -233,7 +266,12 @@ namespace FTAnalyzer
 			region = region.Replace(".", " ").Trim();
 		}
 
-		private void fixMultipleSpacesAndAmpersands()
+        private void fixCountryFullStops()
+        {
+            country = country.Replace(".", " ").Trim();
+        }
+
+        private void fixMultipleSpacesAndAmpersands()
 		{
 			while (country.IndexOf("  ") != -1)
 				country = country.Replace("  ", " ");
@@ -312,7 +350,20 @@ namespace FTAnalyzer
                 fixedLocation = place + ", " + fixedLocation;
         }
 
-		#endregion
+        private void SetSortableLocation()
+        {
+            sortableLocation = country;
+            if (!region.Equals(string.Empty))
+                sortableLocation = sortableLocation + ", " + region;
+            if (!parish.Equals(string.Empty))
+                sortableLocation = sortableLocation + ", " + parish;
+            if (!address.Equals(string.Empty))
+                sortableLocation = sortableLocation + ", " + address;
+            if (!place.Equals(string.Empty))
+                sortableLocation = sortableLocation + ", " + place;
+        }
+        
+        #endregion
 
 		private void SetRegionID()
 		{
@@ -345,6 +396,11 @@ namespace FTAnalyzer
 		}
 
 		#region Properties
+
+        public String SortableLocation
+        {
+            get { return sortableLocation; }
+        }
 
 		public string Address {
 			get { return address; }
@@ -397,6 +453,44 @@ namespace FTAnalyzer
 			get { return parishID; }
 		}
 
+        public float Latitude
+        {
+            get { return latitude; }
+            set { latitude = value; }
+        }
+
+        public float Longitude
+        {
+            get { return longitude; }
+            set { longitude = value; }
+        }
+
+        public bool isKnownCountry
+        {
+            get { return knownCountry; }
+        }
+
+        public bool isUnitedKingdom
+        {
+            get
+            {
+                return country.Equals(UNITED_KINGDOM) || country.Equals(ENG_WALES) || country.Equals(ENGLAND) || country.Equals(WALES) || country.Equals(SCOTLAND);
+            }
+        }
+
+        public string CensusCountry
+        {
+            get
+            {
+                if (isUnitedKingdom)
+                    return UNITED_KINGDOM;
+                else if (country.Equals(IRELAND) || country.Equals(UNITED_STATES) || country.Equals(CANADA))
+                    return country;
+                else
+                    return UNKNOWN_COUNTRY;
+            }
+        }
+        
         public string FreeCenCountyCode
         {
             get
@@ -415,8 +509,6 @@ namespace FTAnalyzer
             {
                 Tuple<string,string> result;
                 FINDMYPAST_LOOKUP.TryGetValue(region, out result);
-                if (result == null)
-                    result = FMP_All_Counties;
                 return result;
             }
         }
@@ -547,7 +639,6 @@ namespace FTAnalyzer
 		public override int GetHashCode()
 		{
 			return base.GetHashCode();
-		} 
-
-	}
+		}
+    }
 }
