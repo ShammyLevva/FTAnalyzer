@@ -60,7 +60,7 @@ namespace FTAnalyzer
                 try
                 {
                     HourGlass(true);
-                    closeIndividualForms();
+                    DisposeIndividualForms();
                     mnuReports.Visible = false;
                     mnuExport.Visible = false;
                     tabSelector.SelectTab(tabDisplayProgress);
@@ -97,34 +97,34 @@ namespace FTAnalyzer
             }
         }
 
-        private void closeIndividualForms()
+        private void DisposeIndividualForms()
         {
-            List<Form> toClose = new List<Form>();
+            List<Form> toDispose = new List<Form>();
             foreach (Form f in Application.OpenForms)
             {
                 if (!object.ReferenceEquals(f, this))
-                    toClose.Add(f);
+                    toDispose.Add(f);
             }
-            foreach (Form f in toClose)
-                f.Close();
+            foreach (Form f in toDispose)
+                f.Dispose();
         }
 
-        private void closeDuplicateForms(object form)
+        private void DisposeDuplicateForms(object form)
         {
-            List<Form> toClose = new List<Form>();
+            List<Form> toDispose = new List<Form>();
             foreach (Form f in Application.OpenForms)
             {
                 if (!object.ReferenceEquals(f, form) && f.GetType() == form.GetType())
                     if (form is Census)
                     {
                         if (((Census)f).CensusDate.Equals(((Census)form).CensusDate))
-                            toClose.Add(f);
+                            toDispose.Add(f);
                     }
                     else
-                        toClose.Add(f);
+                        toDispose.Add(f);
             }
-            foreach (Form f in toClose)
-                f.Close();
+            foreach (Form f in toDispose)
+                f.Dispose();
         }
 
         private void HourGlass(bool on)
@@ -295,7 +295,7 @@ namespace FTAnalyzer
             FactLocation loc = (FactLocation)dgCountries.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.COUNTRY);
-            closeDuplicateForms(frmInd);
+            DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
         }
@@ -306,7 +306,7 @@ namespace FTAnalyzer
             FactLocation loc = dgRegions.CurrentRow == null ? new FactLocation() : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.REGION);
-            closeDuplicateForms(frmInd);
+            DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
         }
@@ -317,7 +317,7 @@ namespace FTAnalyzer
             FactLocation loc = (FactLocation)dgParishes.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.PARISH);
-            closeDuplicateForms(frmInd);
+            DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
         }
@@ -328,7 +328,7 @@ namespace FTAnalyzer
             FactLocation loc = (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.ADDRESS);
-            closeDuplicateForms(frmInd);
+            DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
         }
@@ -339,7 +339,7 @@ namespace FTAnalyzer
             FactLocation loc = (FactLocation)dgPlaces.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.PLACE);
-            closeDuplicateForms(frmInd);
+            DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
         }
@@ -366,7 +366,7 @@ namespace FTAnalyzer
             }
             census.setupCensus(censusRP, censusDate, false, ckbCensusResidence.Checked, false, (int)udAgeFilter.Value);
             census.Text = "People missing a " + censusDate.StartDate.Year.ToString() + country + " Census Record that you can search for";
-            closeDuplicateForms(census);
+            DisposeDuplicateForms(census);
             census.Show();
         }
 
@@ -466,7 +466,7 @@ namespace FTAnalyzer
             census.setupCensus(censusRP, censusDate, true, ckbLCResidence.Checked, ckbHideRecorded.Checked, 110);
             census.Text = reportTitle;
             HourGlass(false);
-            closeDuplicateForms(census);
+            DisposeDuplicateForms(census);
             census.Show();
         }
 
@@ -599,7 +599,7 @@ namespace FTAnalyzer
             List<FactLocation> locations = ft.AllLocations;
             locations.Sort();
             locationsForm.BuildLocationTree(locations);
-            closeDuplicateForms(locationsForm);
+            DisposeDuplicateForms(locationsForm);
             locationsForm.Show();
         }
 
@@ -630,7 +630,7 @@ namespace FTAnalyzer
 
             RegistrationReport report = new RegistrationReport();
             report.SetupBirthRegistration(result);
-            closeDuplicateForms(report);
+            DisposeDuplicateForms(report);
             report.Show();
         }
 
@@ -654,7 +654,7 @@ namespace FTAnalyzer
 
             RegistrationReport report = new RegistrationReport();
             report.SetupDeathRegistration(result);
-            closeDuplicateForms(report);
+            DisposeDuplicateForms(report);
             report.Show();
         }
 
@@ -678,7 +678,7 @@ namespace FTAnalyzer
 
             RegistrationReport report = new RegistrationReport();
             report.SetupMarriageRegistration(result);
-            closeDuplicateForms(report);
+            DisposeDuplicateForms(report);
             report.Show();
         }
 
@@ -785,7 +785,7 @@ namespace FTAnalyzer
             FamilySearchResultsViewer frmResults = new FamilySearchResultsViewer(txtFamilySearchfolder.Text);
             if (frmResults.ResultsPresent)
             {
-                closeDuplicateForms(frmResults);
+                DisposeDuplicateForms(frmResults);
                 frmResults.Show();
             }
             else
@@ -993,7 +993,7 @@ namespace FTAnalyzer
             DisplayOccupation occ = (DisplayOccupation)dgOccupations.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setWorkers(occ.Occupation, ft.AllWorkers(occ.Occupation));
-            closeDuplicateForms(frmInd);
+            DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
         }
@@ -1021,7 +1021,7 @@ namespace FTAnalyzer
                 GoogleMap frmGoogleMap = new GoogleMap();
                 if (frmGoogleMap.setLocation(loc, locType))
                 {
-                    closeDuplicateForms(frmGoogleMap);
+                    DisposeDuplicateForms(frmGoogleMap);
                     frmGoogleMap.Show();
                 }
                 else
@@ -1043,7 +1043,7 @@ namespace FTAnalyzer
                 BingOSMap frmBingMap = new BingOSMap();
                 if (frmBingMap.setLocation(loc, locType))
                 {
-                    closeDuplicateForms(frmBingMap);
+                    DisposeDuplicateForms(frmBingMap);
                     frmBingMap.Show();
                 }
                 else
@@ -1153,7 +1153,7 @@ namespace FTAnalyzer
             HourGlass(true);
             SortableBindingList<IDisplayLCReport> list = ft.LCReport(ckbRestrictions.Checked);
             LCReport rs = new LCReport(list);
-            closeDuplicateForms(rs);
+            DisposeDuplicateForms(rs);
             rs.Show();
             HourGlass(false);
         }
@@ -1163,7 +1163,7 @@ namespace FTAnalyzer
             HourGlass(true);
             SortableBindingList<IDisplayLCReport> list = ft.LCReport(ckbRestrictions.Checked);
             LCReport rs = new LCReport(list);
-            closeDuplicateForms(rs);
+            DisposeDuplicateForms(rs);
             rs.Show();
             HourGlass(false);
         }
@@ -1205,7 +1205,7 @@ namespace FTAnalyzer
             {
                 if (frmInd.OlderParents(age))
                 {
-                    closeDuplicateForms(frmInd);
+                    DisposeDuplicateForms(frmInd);
                     frmInd.Show();
                 }
             }
