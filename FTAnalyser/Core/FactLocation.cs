@@ -29,6 +29,8 @@ namespace FTAnalyzer
 		internal string regionID;
 		private int level;
         private bool knownCountry;
+        private float latitude;
+        private float longitude;
 
 		private List<Individual> individuals;
 		private static Dictionary<string, string> COUNTRY_TYPOS = new Dictionary<string, string>();
@@ -117,7 +119,24 @@ namespace FTAnalyzer
 			this.parishID = null;
 			this.individuals = new List<Individual>();
             this.knownCountry = false;
+            this.latitude = 0;
+            this.longitude = 0;
 		}
+
+        public FactLocation(string location, string latitude, string longitude)
+            : this(location)
+        {
+            try
+            {
+                this.latitude = float.Parse(latitude);
+                this.longitude = float.Parse(longitude);
+            }
+            catch (Exception)
+            {
+                this.latitude = 0;
+                this.longitude = 0;
+            }
+        }
 
 		public FactLocation(string location) : this() {
 			if (location != null) {
@@ -428,6 +447,16 @@ namespace FTAnalyzer
 		public string ParishID {
 			get { return parishID; }
 		}
+
+        public float Latitude
+        {
+            get { return latitude; }
+        }
+
+        public float Longitude
+        {
+            get { return longitude; }
+        }
 
         public bool isKnownCountry
         {

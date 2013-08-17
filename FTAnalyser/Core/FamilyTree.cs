@@ -372,13 +372,13 @@ namespace FTAnalyzer
 
         #region Property Functions
 
-        public FactLocation GetLocation(string place)
+        public FactLocation GetLocation(string place, string latitude, string longitude)
         {
             FactLocation loc;
             locations.TryGetValue(place, out loc);
             if (loc == null)
             {
-                loc = new FactLocation(place);
+                loc = new FactLocation(place, latitude, longitude);
                 locations.Add(place, loc);
             }
             return loc; // should return object that is in list of locations 
