@@ -13,7 +13,7 @@ namespace FTAnalyzer
 		
 		public static readonly string SCOTLAND = "Scotland", ENGLAND = "England", CANADA = "Canada", UNITED_STATES = "United States",
 			WALES = "Wales", IRELAND = "Ireland", UNITED_KINGDOM = "United Kingdom", NEW_ZEALAND = "New Zealand", AUSTRALIA = "Australia", 
-            UNKNOWN_COUNTRY = "Unknown", ENG_WALES = "England & Wales";
+            UNKNOWN_COUNTRY = "Unknown", ENG_WALES = "England & Wales", INDIA = "India", FRANCE = "France", GERMANY = "Germany";
 		
 		public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, PARISH = 2, ADDRESS = 3, PLACE = 4;
 
@@ -203,7 +203,8 @@ namespace FTAnalyzer
         {
             if (country.Equals(ENGLAND) || country.Equals(SCOTLAND) || country.Equals(WALES) || country.Equals(IRELAND) || 
                 country.Equals(UNITED_STATES) || country.Equals(UNITED_KINGDOM) || country.Equals(CANADA) ||
-                country.Equals(NEW_ZEALAND) || country.Equals(AUSTRALIA))
+                country.Equals(NEW_ZEALAND) || country.Equals(AUSTRALIA) || country.Equals(INDIA) || country.Equals(GERMANY) ||
+                country.Equals(FRANCE))
                 knownCountry = true;
         }
 
