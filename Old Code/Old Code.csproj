@@ -78,8 +78,11 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registrations\BirthRegistration.cs" />
+    <Compile Include="Registrations\CensusRegistration.cs" />
     <Compile Include="Registrations\DeathRegistration.cs" />
     <Compile Include="Registrations\MarriageRegistration.cs" />
+    <Compile Include="Registrations\Registration.cs" />
+    <Compile Include="Registrations\RegistrationsProcessor.cs" />
     <Compile Include="Still to Process\GROSearch.cs" />
     <Compile Include="Still to Process\GROSSearch.cs" />
     <Compile Include="Still to Process\IGIDocument.cs" />

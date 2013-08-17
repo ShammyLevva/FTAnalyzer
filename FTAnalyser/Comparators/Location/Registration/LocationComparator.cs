@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class LocationComparator : IComparer<Registration>
+    public class LocationComparator : IComparer<CensusIndividual>
     {
         private int level;
         
@@ -17,10 +17,11 @@ namespace FTAnalyzer
         public LocationComparator(int level) {
             this.level = level;
         }
-        
-        public int Compare (Registration r1, Registration r2) {
-            FactLocation l1 = new FactLocation(r1.RegistrationLocation);
-            FactLocation l2 = new FactLocation(r2.RegistrationLocation);
+
+        public int Compare(CensusIndividual r1, CensusIndividual r2)
+        {
+            FactLocation l1 = r1.RegistrationLocation;
+            FactLocation l2 = r2.RegistrationLocation;
             return l1.CompareTo(l2, level);
         }
     }

@@ -5,14 +5,14 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    class CensusIndividualNameComparer : Comparer<DisplayCensus>
+    class CensusIndividualNameComparer : Comparer<CensusIndividual>
     {
-        public override int Compare(DisplayCensus x, DisplayCensus y)
+        public override int Compare(CensusIndividual x, CensusIndividual y)
         {
-            int r = x.Registration.Surname.CompareTo(y.Registration.Surname);
+            int r = x.Surname.CompareTo(y.Surname);
             if (r == 0)
             {
-                r = x.Individual.Forenames.CompareTo(y.Individual.Forenames);
+                r = x.Forenames.CompareTo(y.Forenames);
                 if (r == 0)
                 {
                     r = x.Position - y.Position;

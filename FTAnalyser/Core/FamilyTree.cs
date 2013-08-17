@@ -1032,21 +1032,33 @@ namespace FTAnalyzer
         //    return result;
         //}
 
-        public List<Registration> getAllCensusRegistrations(FactDate censusDate, bool censusDone, bool includeResidence, bool lostCousinsCheck)
+        //public List<Registration> getAllCensusRegistrations(FactDate censusDate, bool censusDone, bool includeResidence, bool lostCousinsCheck)
+        //{
+        //    List<Registration> result = new List<Registration>();
+        //    if (censusDate != null)
+        //    {
+        //        foreach (Family f in families)
+        //        {
+        //            CensusFamily cf = new CensusFamily(f, censusDate);
+        //            if (cf.process(censusDate, censusDone, includeResidence, lostCousinsCheck))
+        //                result.Add(new CensusRegistration(null, censusDate, cf));
+        //        }
+        //    }
+        //    return result;
+        //}
+
+        public IEnumerable<CensusFamily> GetAllCensusFamilies(FactDate censusDate, bool censusDone, bool includeResidence, bool lostCousinsCheck)
         {
-            List<Registration> result = new List<Registration>();
             if (censusDate != null)
             {
                 foreach (Family f in families)
                 {
                     CensusFamily cf = new CensusFamily(f, censusDate);
                     if (cf.process(censusDate, censusDone, includeResidence, lostCousinsCheck))
-                        result.Add(new CensusRegistration(null, censusDate, cf));
+                        yield return cf;
                 }
             }
-            return result;
         }
-
         #endregion
 
         #region Displays

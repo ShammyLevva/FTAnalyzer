@@ -139,6 +139,7 @@
     <Compile Include="Comparators\Individual\IndividualBudgieComparer.cs" />
     <Compile Include="Comparators\Individual\DefaultIndividualComparer.cs" />
     <Compile Include="Comparators\Individual\BirthDateComparer.cs" />
+    <Compile Include="Core\CensusIndividual.cs" />
     <Compile Include="Core\Countries.cs" />
     <Compile Include="Core\DataError.cs" />
     <Compile Include="Core\DataErrorGroup.cs" />
@@ -319,7 +320,6 @@
     <Compile Include="Core\Displays\DisplaySurnamesAtLocation.cs" />
     <Compile Include="Core\Displays\IDisplayCensus.cs" />
     <Compile Include="Core\Displays\IDisplaySurnamesAtLocation.cs" />
-    <Compile Include="Core\Displays\DisplayCensus.cs" />
     <Compile Include="Core\Displays\IDisplayLocation.cs" />
     <Compile Include="Core\Displays\IDisplayLooseDeath.cs" />
     <Compile Include="Core\Displays\IDisplayIndividual.cs" />
@@ -376,9 +376,6 @@
     <Compile Include="Searches\FamilySearchResult.cs" />
     <Compile Include="Searches\FamilySearchOldSearchForm.cs" />
     <Compile Include="Core\ParishBatch.cs" />
-    <Compile Include="Registrations\RegistrationsProcessor.cs" />
-    <Compile Include="Registrations\CensusRegistration.cs" />
-    <Compile Include="Registrations\Registration.cs" />
     <Compile Include="Core\Individual.cs" />
     <Compile Include="Core\FactLocation.cs" />
     <Compile Include="GedcomParser\AnselEncoding.cs" />

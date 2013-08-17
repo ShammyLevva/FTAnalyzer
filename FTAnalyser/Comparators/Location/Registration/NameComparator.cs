@@ -6,11 +6,10 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class NameComparator : IComparer<Registration>
+    public class NameComparator : IComparer<CensusIndividual>
     {
-        public int Compare (Registration r1, Registration r2) {
-            Individual i1 = r1.Individual;
-            Individual i2 = r2.Individual;
+        public int Compare(CensusIndividual i1, CensusIndividual i2)
+        {
             return i1.CompareTo(i2);
         }
     }

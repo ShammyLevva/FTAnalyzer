@@ -6,9 +6,10 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class DateComparator : IComparer<Registration>
+    public class DateComparator : IComparer<CensusIndividual>
     {
-        public int Compare (Registration r1, Registration r2) {
+        public int Compare(CensusIndividual r1, CensusIndividual r2)
+        {
             FactDate d1 = r1.RegistrationDate;
             FactDate d2 = r2.RegistrationDate;
             if (d1 == null)  d1 = FactDate.UNKNOWN_DATE;

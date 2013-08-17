@@ -55,41 +55,18 @@ namespace FTAnalyzer.Forms
             this.location2 = location2;
         }
 
-        public void setupCensus(RegistrationsProcessor rp, FactDate date, bool censusDone, bool includeResidence, bool lostCousinCheck, int maxAge)
+        public void SetupCensus(Func<CensusIndividual, bool> filter, IComparer<CensusIndividual> comparer,
+                FactDate date, bool censusDone, bool includeResidence, bool lostCousinCheck, int maxAge)
         {
             FamilyTree ft = FamilyTree.Instance;
             censusDate = date;
-            List<Registration> regs = ft.getAllCensusRegistrations(date, censusDone, includeResidence, lostCousinCheck);
-            List<Registration> census = rp.processRegistrations(regs);
-            List<IDisplayCensus> ds = new List<IDisplayCensus>();
-            int pos = 0; // position of DisplayCensus object in original list.
-            foreach (CensusRegistration r in census)
-            {
-                foreach (Individual i in r.Members)
-                {
-                    if (i.getAge(date).MinAge <= maxAge)
-                        if (location == null)
-                        {  // no location check TODO check if known location vs censusCountry (United Kingdom, Ireland, United States, Canada)
-                            if(!r.FilterCountry.isKnownCountry)
-                                ds.Add(new DisplayCensus(pos++, r, i)); // if we don't recognise the country and we aren't checking then ignore it
-                            else  if(censusLocation.Country == Countries.UNITED_KINGDOM && (r.FilterCountry.isUnitedKingdom))
-                                ds.Add(new DisplayCensus(pos++, r, i));
-                            else if (censusLocation.Country == Countries.IRELAND || censusLocation.Country == Countries.UNITED_STATES || censusLocation.Country == Countries.CANADA)
-                            {
-                                if(r.FilterCountry.Equals(censusLocation))
-                                    ds.Add(new DisplayCensus(pos++, r, i));
-                            }
-                        }
-                        else if(r.FilterCountry.Equals(location) || (location2 != null && r.FilterCountry.Equals(location2)))
-                        {
-                            ds.Add(new DisplayCensus(pos++, r, i));
-                        }
-                }
-            }
-            dgCensus.DataSource = ds;
+            IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(date, censusDone, includeResidence, lostCousinCheck);
+            List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Where(filter).ToList();
+            individuals.Sort(comparer);
+            dgCensus.DataSource = individuals.ToList<IDisplayCensus>();
             StyleRows();
             ResizeColumns();
-            tsRecords.Text = ds.Count + " Records / " + numFamilies + " Families.";
+            tsRecords.Text = individuals.Count + " Records / " + numFamilies + " Families.";
         }
 
         private void ResizeColumns()
@@ -110,7 +87,7 @@ namespace FTAnalyzer.Forms
 
             foreach (DataGridViewRow r in dgCensus.Rows)
             {
-                DisplayCensus cr = (DisplayCensus)r.DataBoundItem;
+                CensusIndividual cr = (CensusIndividual)r.DataBoundItem;
                 if (cr.FamilyGed != currentFamilyGed)
                 {
                     currentFamilyGed = cr.FamilyGed;
@@ -184,16 +161,19 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private class IDisplayCensusComparerWrapper : Comparer<IDisplayCensus> {
+        private class IDisplayCensusComparerWrapper : Comparer<IDisplayCensus>
+        {
 
-            private Comparer<DisplayCensus> comparer;
+            private Comparer<CensusIndividual> comparer;
 
-            public IDisplayCensusComparerWrapper(Comparer<DisplayCensus> comp) {
+            public IDisplayCensusComparerWrapper(Comparer<CensusIndividual> comp)
+            {
                 this.comparer = comp;
             }
 
-            public override int Compare(IDisplayCensus x, IDisplayCensus y) {
-                return comparer.Compare((DisplayCensus) x, (DisplayCensus) y);
+            public override int Compare(IDisplayCensus x, IDisplayCensus y)
+            {
+                return comparer.Compare((CensusIndividual)x, (CensusIndividual)y);
             }
         }
 
@@ -222,7 +202,7 @@ namespace FTAnalyzer.Forms
         private void tsBtnMapLocation_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            DisplayCensus ds = dgCensus.CurrentRow == null ? null : (DisplayCensus)dgCensus.CurrentRow.DataBoundItem;
+            CensusIndividual ds = dgCensus.CurrentRow == null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
             FactLocation loc = ds == null ? null : ds.RegistrationLocation;
             if (loc != null)
             {   // Do geo coding stuff
@@ -238,7 +218,7 @@ namespace FTAnalyzer.Forms
         private void tsBtnMapOSLocation_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            DisplayCensus ds = dgCensus.CurrentRow == null ? null : (DisplayCensus)dgCensus.CurrentRow.DataBoundItem;
+            CensusIndividual ds = dgCensus.CurrentRow == null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
             FactLocation loc = ds == null ? null : ds.RegistrationLocation;
             if (loc != null)
             {   // Do geo coding stuff
@@ -253,9 +233,9 @@ namespace FTAnalyzer.Forms
 
         private void dgCensus_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            DisplayCensus ds = dgCensus.CurrentRow == null ? null : (DisplayCensus)dgCensus.CurrentRow.DataBoundItem;
+            CensusIndividual ds = dgCensus.CurrentRow == null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
             FamilyTree ft = FamilyTree.Instance;
-            ft.SearchCensus(censusLocation.Country, censusDate.StartDate.Year, ds.Individual, cbCensusSearchProvider.SelectedIndex);
+            ft.SearchCensus(censusLocation.Country, censusDate.StartDate.Year, ds, cbCensusSearchProvider.SelectedIndex);
         }
 
         private void cbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)

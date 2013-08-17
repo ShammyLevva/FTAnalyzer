@@ -122,12 +122,12 @@ namespace FTAnalyzer
         public Fact getPreferredFact(string factType) {
             foreach (Fact f in facts)
             {
-	    	    if (f.FactType == factType)
-	    	        return f;
-	        }
-	        return null;
-	        // return new Fact(factType, FactDate.UNKNOWN_DATE);
-	    }
+                if (f.FactType == factType)
+                    return f;
+            }
+            return null;
+            // return new Fact(factType, FactDate.UNKNOWN_DATE);
+        }
 
         /**
          * @return Returns the first fact of the given type.
@@ -142,13 +142,13 @@ namespace FTAnalyzer
          * @return Returns all facts of the given type.
          */
         public List<Fact> getFacts(string factType) {
-	        List<Fact> result = new List<Fact>();
-	        foreach(Fact f in facts) 
+            List<Fact> result = new List<Fact>();
+            foreach(Fact f in facts) 
             {
-	            if (f.FactType == factType)
-	    	        result.Add(f);
-	        }
-	        return result;
+                if (f.FactType == factType)
+                    result.Add(f);
+            }
+            return result;
         }
 
         #region Properties
