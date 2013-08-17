@@ -821,6 +821,7 @@ namespace FTAnalyzer
             SetFamilies();
             Individual rootPerson = getGedcomIndividual(startGed);
             Individual ind = rootPerson;
+            ind.RelationType = Individual.DIRECT;
             ind.Ahnentafel = 1;
             maxAhnentafel = 1;
             Queue<Individual> queue = new Queue<Individual>();
@@ -903,8 +904,6 @@ namespace FTAnalyzer
                 }
                 Application.DoEvents();
             }
-            ind = getGedcomIndividual(startGed);
-            ind.RelationType = Individual.ROOT;
         }
 
         private void SetFamilies()
