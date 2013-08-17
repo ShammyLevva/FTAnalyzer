@@ -65,8 +65,6 @@
             this.pbSources = new System.Windows.Forms.ProgressBar();
             this.tabIndividuals = new System.Windows.Forms.TabPage();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
-            this.mnuSetRoot = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.setAsRootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabFamilies = new System.Windows.Forms.TabPage();
             this.dgFamilies = new System.Windows.Forms.DataGridView();
             this.tabLocations = new System.Windows.Forms.TabPage();
@@ -144,6 +142,8 @@
             this.dgWarDead = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.txtWarDeadSurname = new System.Windows.Forms.TextBox();
+            this.mnuSetRoot = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.setAsRootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -167,7 +167,6 @@
             this.tabDisplayProgress.SuspendLayout();
             this.tabIndividuals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
-            this.mnuSetRoot.SuspendLayout();
             this.tabFamilies.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).BeginInit();
             this.tabLocations.SuspendLayout();
@@ -199,6 +198,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).BeginInit();
             this.tabWarDead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWarDead)).BeginInit();
+            this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -521,20 +521,6 @@
             this.dgIndividuals.Size = new System.Drawing.Size(925, 396);
             this.dgIndividuals.TabIndex = 0;
             this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgIndividuals_MouseDown);
-            // 
-            // mnuSetRoot
-            // 
-            this.mnuSetRoot.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.setAsRootToolStripMenuItem});
-            this.mnuSetRoot.Name = "mnuSetRoot";
-            this.mnuSetRoot.Size = new System.Drawing.Size(174, 26);
-            // 
-            // setAsRootToolStripMenuItem
-            // 
-            this.setAsRootToolStripMenuItem.Name = "setAsRootToolStripMenuItem";
-            this.setAsRootToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.setAsRootToolStripMenuItem.Text = "Set As Root Person";
-            this.setAsRootToolStripMenuItem.Click += new System.EventHandler(this.setAsRootToolStripMenuItem_Click);
             // 
             // tabFamilies
             // 
@@ -938,7 +924,7 @@
             0,
             0});
             this.udAgeFilter.Name = "udAgeFilter";
-            this.udAgeFilter.Size = new System.Drawing.Size(41, 20);
+            this.udAgeFilter.Size = new System.Drawing.Size(43, 20);
             this.udAgeFilter.TabIndex = 5;
             this.udAgeFilter.Value = new decimal(new int[] {
             90,
@@ -1455,6 +1441,20 @@
             this.txtWarDeadSurname.Size = new System.Drawing.Size(201, 20);
             this.txtWarDeadSurname.TabIndex = 27;
             // 
+            // mnuSetRoot
+            // 
+            this.mnuSetRoot.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.setAsRootToolStripMenuItem});
+            this.mnuSetRoot.Name = "mnuSetRoot";
+            this.mnuSetRoot.Size = new System.Drawing.Size(174, 26);
+            // 
+            // setAsRootToolStripMenuItem
+            // 
+            this.setAsRootToolStripMenuItem.Name = "setAsRootToolStripMenuItem";
+            this.setAsRootToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.setAsRootToolStripMenuItem.Text = "Set As Root Person";
+            this.setAsRootToolStripMenuItem.Click += new System.EventHandler(this.setAsRootToolStripMenuItem_Click);
+            // 
             // tsCount
             // 
             this.tsCount.Name = "tsCount";
@@ -1609,7 +1609,6 @@
             this.tabDisplayProgress.PerformLayout();
             this.tabIndividuals.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
-            this.mnuSetRoot.ResumeLayout(false);
             this.tabFamilies.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).EndInit();
             this.tabLocations.ResumeLayout(false);
@@ -1647,6 +1646,7 @@
             this.tabWarDead.ResumeLayout(false);
             this.tabWarDead.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWarDead)).EndInit();
+            this.mnuSetRoot.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.ResumeLayout(false);

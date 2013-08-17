@@ -126,15 +126,18 @@ namespace FTAnalyzer
         public FactLocation(string location, string latitude, string longitude)
             : this(location)
         {
-            try
+            this.latitude = 0;
+            this.longitude = 0;
+            if (latitude != string.Empty && longitude != string.Empty)
             {
-                this.latitude = float.Parse(latitude);
-                this.longitude = float.Parse(longitude);
-            }
-            catch (Exception)
-            {
-                this.latitude = 0;
-                this.longitude = 0;
+                try
+                {
+                    this.latitude = float.Parse(latitude);
+                    this.longitude = float.Parse(longitude);
+                }
+                catch (Exception)
+                {
+                }
             }
         }
 
