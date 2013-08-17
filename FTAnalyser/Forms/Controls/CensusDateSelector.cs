@@ -111,7 +111,6 @@ namespace Controls
             }
         }
 
-
         #region Properties
 
         public CensusDate SelectedDate
