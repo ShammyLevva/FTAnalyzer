@@ -1301,15 +1301,21 @@ namespace FTAnalyzer
             uri.Host = "search.ancestry.co.uk";
             uri.Path = "cgi-bin/sse.dll";
             StringBuilder query = new StringBuilder();
-            if(censusCountry.Equals(FactLocation.UNITED_KINGDOM))
+            if (censusCountry.Equals(FactLocation.UNITED_KINGDOM))
+            {
                 query.Append("gl=" + censusYear + "uki&");
+                query.Append("gss=ms_f-68&");
+            }
             else if (censusCountry.Equals(FactLocation.IRELAND))
             {
                 MessageBox.Show("Sorry searching the Ireland census on Ancestry for " + censusYear + " is not supported by FTAnalyzer at this time");
                 return null;
             }
             else if (censusCountry.Equals(FactLocation.UNITED_STATES))
-                query.Append("db=" + censusYear + "usfedcenancestry&");
+            {
+                query.Append("db=" + censusYear + "usfedcen&");
+                query.Append("gss=ms_db&");
+            }
             else if (censusCountry.Equals(FactLocation.CANADA))
                 query.Append("db=" + censusYear + "canada&");
             query.Append("rank=1&");
@@ -1317,7 +1323,6 @@ namespace FTAnalyzer
             query.Append("so=3&");
             query.Append("MSAV=1&");
             query.Append("msT=1&");
-            query.Append("gss=ms_f-68&");
             if (person.Forenames != "?" && person.Forenames.ToUpper() != "UNKNOWN")
             {
                 query.Append("gsfn=" + HttpUtility.UrlEncode(person.Forenames) + "&");
