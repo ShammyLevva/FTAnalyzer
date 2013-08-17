@@ -701,14 +701,14 @@ namespace FTAnalyzer
 
         #region TreeTops
 
-        public List<IDisplayIndividual> GetTreeTops(Filter<Individual> filter)
+        public List<IDisplayIndividual> GetTreeTops(Func<Individual, bool> filter)
         {
             List<IDisplayIndividual> result = new List<IDisplayIndividual>();
             foreach (Individual ind in individuals)
             {
                 if (!ind.HasParents)
                 {
-                    if (filter.select(ind))
+                    if (filter(ind))
                         result.Add(ind);
                 }
             }
@@ -719,12 +719,12 @@ namespace FTAnalyzer
 
         #region WarDead
 
-        public List<IDisplayIndividual> GetWarDead(Filter<Individual> filter)
+        public List<IDisplayIndividual> GetWarDead(Func<Individual, bool> filter)
         {
             List<IDisplayIndividual> result = new List<IDisplayIndividual>();
             foreach (Individual ind in individuals)
             {
-                if (ind.isMale && !ind.isDeathKnown() && filter.select(ind))
+                if (ind.isMale && !ind.isDeathKnown() && filter(ind))
                     result.Add(ind);
             }
             return result;
@@ -821,6 +821,7 @@ namespace FTAnalyzer
             SetFamilies();
             Individual rootPerson = getGedcomIndividual(startGed);
             Individual ind = rootPerson;
+            ind.RelationType = Individual.DIRECT;
             ind.Ahnentafel = 1;
             maxAhnentafel = 1;
             Queue<Individual> queue = new Queue<Individual>();
@@ -903,8 +904,6 @@ namespace FTAnalyzer
                 }
                 Application.DoEvents();
             }
-            ind = getGedcomIndividual(startGed);
-            ind.RelationType = Individual.ROOT;
         }
 
         private void SetFamilies()

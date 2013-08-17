@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FTAnalyzer;
+using FTAnalyzer.Filters;
 
 namespace Controls
 {
@@ -42,19 +43,19 @@ namespace Controls
             }
         }
 
-        public Filter<T> BuildFilter<T>() where T: IRelationFilterable
+        public Func<T, bool> BuildFilter<T>(Func<T, int> relationType)
         {
-            Filter<T> relationFilter = new FalseFilter<T>();
+            Func<T, bool> relationFilter = FilterUtils.FalseFilter<T>();
             if (Blood)
-                relationFilter = new OrFilter<T>(new RelationFilter<T>(Individual.BLOOD), relationFilter);
+                relationFilter = FilterUtils.OrFilter<T>(FilterUtils.IntFilter<T>(relationType, Individual.BLOOD), relationFilter);
             if (Directs)
-                relationFilter = new OrFilter<T>(new RelationFilter<T>(Individual.DIRECT), relationFilter);
+                relationFilter = FilterUtils.OrFilter<T>(FilterUtils.IntFilter<T>(relationType, Individual.DIRECT), relationFilter);
             if (Marriage)
-                relationFilter = new OrFilter<T>(new RelationFilter<T>(Individual.MARRIAGE), relationFilter);
+                relationFilter = FilterUtils.OrFilter<T>(FilterUtils.IntFilter<T>(relationType, Individual.MARRIAGE), relationFilter);
             if (MarriedToDB)
-                relationFilter = new OrFilter<T>(new RelationFilter<T>(Individual.MARRIEDTODB), relationFilter);
+                relationFilter = FilterUtils.OrFilter<T>(FilterUtils.IntFilter<T>(relationType, Individual.MARRIEDTODB), relationFilter);
             if (Unknown)
-                relationFilter = new OrFilter<T>(new RelationFilter<T>(Individual.UNKNOWN), relationFilter);
+                relationFilter = FilterUtils.OrFilter<T>(FilterUtils.IntFilter<T>(relationType, Individual.UNKNOWN), relationFilter);
             return relationFilter;
         }
     }
