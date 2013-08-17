@@ -376,17 +376,20 @@ namespace FTAnalyzer
         private Func<CensusIndividual, bool> CreateCensusIndividualFilter()
         {
             Func<CensusIndividual, bool> filter;
-            Func<FactDate, Func<CensusIndividual, bool>> locationFilter = censusCountry.BuildFilter<CensusIndividual>((d, x) => x.BestLocation(d));
             Func<CensusIndividual, bool> relationFilter = relationTypes.BuildFilter<CensusIndividual>(x => x.RelationType);
 
             if (ckbNoLocations.Checked)
+            {
                 filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter,
                         FilterUtils.DateFilter<CensusIndividual>(x => x.RegistrationDate, cenDate.SelectedDate));
+            }
             else
-                filter = FilterUtils.AndFilter<CensusIndividual>(
-                        locationFilter(cenDate.SelectedDate),
-                        relationFilter,
+            {
+                Func<CensusIndividual, bool> locationFilter = censusCountry.BuildFilter<CensusIndividual>(
+                    cenDate.SelectedDate, (d, x) => x.BestLocation(d));
+                filter = FilterUtils.AndFilter<CensusIndividual>(locationFilter, relationFilter,
                         FilterUtils.DateFilter<CensusIndividual>(x => x.RegistrationDate, cenDate.SelectedDate));
+            }
 
             if (txtSurname.Text.Length > 0)
             {
@@ -399,7 +402,7 @@ namespace FTAnalyzer
 
         private Func<Individual, bool> createTreeTopsIndividualFilter()
         {
-            Func<Individual, bool> locationFilter = treetopsCountry.BuildFilter<Individual>((d, x) => x.BestLocation(d))(FactDate.UNKNOWN_DATE);
+            Func<Individual, bool> locationFilter = treetopsCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
             Func<Individual, bool> relationFilter = treetopsRelation.BuildFilter<Individual>(x => x.RelationType);
             Func<Individual, bool> filter = FilterUtils.AndFilter<Individual>(locationFilter, relationFilter);
 
@@ -417,10 +420,10 @@ namespace FTAnalyzer
             return filter;
         }
 
-        private Func<Individual, bool> createWardeadIndividualFilter(FactDate birthRange, FactDate deathRange)
+        private Func<Individual, bool> CreateWardeadIndividualFilter(FactDate birthRange, FactDate deathRange)
         {
             Func<Individual, bool> filter;
-            Func<Individual, bool> locationFilter = wardeadCountry.BuildFilter<Individual>((d, x) => x.BestLocation(d))(FactDate.UNKNOWN_DATE);
+            Func<Individual, bool> locationFilter = wardeadCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
             Func<Individual, bool> relationFilter = wardeadRelation.BuildFilter<Individual>(x => x.RelationType);
             Func<Individual, bool> birthFilter = FilterUtils.DateFilter<Individual>(x => x.BirthDate, birthRange);
             Func<Individual, bool> deathFilter = FilterUtils.DateFilter<Individual>(x => x.DeathDate, deathRange);
@@ -892,7 +895,7 @@ namespace FTAnalyzer
         private void btnWWI_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Func<Individual, bool> filter = createWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("BET 1914 AND 1918"));
+            Func<Individual, bool> filter = CreateWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("BET 1914 AND 1918"));
             List<IDisplayIndividual> warDeadList = ft.GetWarDead(filter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWarDead.DataSource = warDeadList;
@@ -906,7 +909,7 @@ namespace FTAnalyzer
         private void btnWWII_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Func<Individual, bool> filter = createWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("BET 1939 AND 1945"));
+            Func<Individual, bool> filter = CreateWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("BET 1939 AND 1945"));
             List<IDisplayIndividual> warDeadList = ft.GetWarDead(filter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWarDead.DataSource = warDeadList;

@@ -57,9 +57,9 @@ namespace FTAnalyzer.Filters
             return (x => p1(x) && p2(x) && p3(x));
         }
 
-        public static Func<FactDate, Func<T, bool>> LocationFilter<T>(Func<FactDate, T, FactLocation> f, Func<FactLocation, string> g, string s)
+        public static Func<T, bool> LocationFilter<T>(FactDate when, Func<FactDate, T, FactLocation> f, Func<FactLocation, string> g, string s)
         {
-            return d => StringFilter<T>(x => g(f(d, x)), s);
+            return StringFilter<T>(x => g(f(when, x)), s);
         }
 
         public static Func<T, bool> StringFilter<T>(Func<T, string> f, string s)

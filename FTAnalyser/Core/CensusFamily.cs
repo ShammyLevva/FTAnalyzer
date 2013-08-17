@@ -123,18 +123,18 @@ namespace FTAnalyzer
             return true;
         }
 
-        public int Relation
-        {
-            get
-            {
-                int relation = Individual.UNSET;
-                foreach (Individual i in Members)
-                {
-                    if (i.RelationType != Individual.UNKNOWN && i.RelationType < relation)
-                        relation = i.RelationType;
-                }
-                return relation == Individual.UNSET ? Individual.UNKNOWN : relation;
-            }
-        }
+        //public int Relation
+        //{
+        //    get
+        //    {
+        //        int relation = Individual.UNSET;
+        //        foreach (Individual i in Members)
+        //        {
+        //            if (i.RelationType != Individual.UNKNOWN && i.RelationType < relation)
+        //                relation = i.RelationType;
+        //        }
+        //        return relation == Individual.UNSET ? Individual.UNKNOWN : relation;
+        //    }
+        //}
     }
 }
