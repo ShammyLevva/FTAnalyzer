@@ -451,11 +451,13 @@ namespace FTAnalyzer
         public float Latitude
         {
             get { return latitude; }
+            set { latitude = value; }
         }
 
         public float Longitude
         {
             get { return longitude; }
+            set { longitude = value; }
         }
 
         public bool isKnownCountry
