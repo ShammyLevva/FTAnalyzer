@@ -372,12 +372,8 @@
     <Compile Include="Searches\FamilySearch.cs" />
     <Compile Include="Searches\FamilySearchNewSearchForm.cs" />
     <Compile Include="Searches\FamilySearchSearchForm.cs" />
-    <Compile Include="Still to Process\GROSearch.cs" />
-    <Compile Include="Still to Process\GROSSearch.cs" />
     <Compile Include="Searches\FamilySearchResultWriter.cs" />
-    <Compile Include="Still to Process\IGIDocument.cs" />
     <Compile Include="Searches\FamilySearchResult.cs" />
-    <Compile Include="Still to Process\IGISearch.cs" />
     <Compile Include="Searches\FamilySearchOldSearchForm.cs" />
     <Compile Include="Core\ParishBatch.cs" />
     <Compile Include="Registrations\RegistrationsProcessor.cs" />

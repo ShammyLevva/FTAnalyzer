@@ -80,6 +80,10 @@
     <Compile Include="Registrations\BirthRegistration.cs" />
     <Compile Include="Registrations\DeathRegistration.cs" />
     <Compile Include="Registrations\MarriageRegistration.cs" />
+    <Compile Include="Still to Process\GROSearch.cs" />
+    <Compile Include="Still to Process\GROSSearch.cs" />
+    <Compile Include="Still to Process\IGIDocument.cs" />
+    <Compile Include="Still to Process\IGISearch.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\FamilySearchResultsViewer.resx">
