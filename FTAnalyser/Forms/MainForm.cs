@@ -375,21 +375,21 @@ namespace FTAnalyzer
         #region Filters
         private Predicate<CensusIndividual> CreateCensusIndividualFilter()
         {
-            Predicate<CensusIndividual> filter;
             Predicate<CensusIndividual> relationFilter = relationTypes.BuildFilter<CensusIndividual>(x => x.RelationType);
+            Predicate<CensusIndividual> locationFilter;
 
             if (ckbNoLocations.Checked)
             {
-                filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter,
-                        FilterUtils.DateFilter<CensusIndividual>(x => x.RegistrationDate, cenDate.SelectedDate));
+                locationFilter = (x => x.IsValidLocation(cenDate.CensusCountry));
             }
             else
             {
-                Predicate<CensusIndividual> locationFilter = censusCountry.BuildFilter<CensusIndividual>(
+                locationFilter = censusCountry.BuildFilter<CensusIndividual>(
                     cenDate.SelectedDate, (d, x) => x.BestLocation(d));
-                filter = FilterUtils.AndFilter<CensusIndividual>(locationFilter, relationFilter,
-                        FilterUtils.DateFilter<CensusIndividual>(x => x.RegistrationDate, cenDate.SelectedDate));
             }
+
+            Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(locationFilter, relationFilter,
+                    FilterUtils.DateFilter<CensusIndividual>(x => x.RegistrationDate, cenDate.SelectedDate));
 
             if (txtSurname.Text.Length > 0)
             {

@@ -45,5 +45,15 @@ namespace FTAnalyzer
         {
             get { return family.Surname; }
         }
+
+        public bool IsValidLocation(string location)
+        {
+            if (!RegistrationLocation.isKnownCountry)
+                return true;
+            else if (Countries.isUnitedKingdom(location))
+                return RegistrationLocation.isUnitedKingdom;
+            else
+                return RegistrationLocation.Country.Equals(location);
+        }
     }
 }
