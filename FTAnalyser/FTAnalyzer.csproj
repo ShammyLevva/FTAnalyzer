@@ -306,7 +306,6 @@
     <Content Include="System.Data.SQLite.Linq.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Useful URLs.txt" />
     <Compile Include="Core\Displays\IDisplayFamily.cs" />
     <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>
