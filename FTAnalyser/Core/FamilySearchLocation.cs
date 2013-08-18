@@ -7,12 +7,14 @@ namespace FTAnalyzer
 {
     public class FamilySearchLocation : ICloneable
     {
-         
-        private FactLocation location;
-        private int level;
-        private string juris1, juris2, region;
 
-        private static Dictionary<string, FamilySearchLocation> adaptors;
+        public FactLocation Location { get; set; }
+        public int Level { get; private set; }
+        public string Juris1 { get; private set; }
+        public string Juris2 { get; private set; }
+        public string Region { get; private set; }
+
+        private static IDictionary<string, FamilySearchLocation> adaptors;
 
         public static FamilySearchLocation Adapt(FactLocation location, int level)
         {
@@ -151,37 +153,37 @@ namespace FTAnalyzer
             adaptors.Add("Cavan",       new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Carl"));
             adaptors.Add("Carlow",      new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Cava")); 
             adaptors.Add("Clare",       new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Clar"));
-	        adaptors.Add("Connaught",   new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "ConP"));
+            adaptors.Add("Connaught",   new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "ConP"));
             adaptors.Add("Cork",        new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Cork")); 
             adaptors.Add("Donegal",     new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Done")); 
             adaptors.Add("Down",        new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Down")); 
             adaptors.Add("Dublin",      new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Dubl"));
-	        adaptors.Add("Fermanagh",   new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Ferm")); 
+            adaptors.Add("Fermanagh",   new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Ferm")); 
             adaptors.Add("Galway",      new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Galw")); 
             adaptors.Add("Kerry",       new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Kerr")); 
             adaptors.Add("Kildare",     new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Kild")); 
             adaptors.Add("Kilkenny",    new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Kilk"));
-	        adaptors.Add("Laoighis",    new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Laoi")); 
+            adaptors.Add("Laoighis",    new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Laoi")); 
             adaptors.Add("Leinster",    new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "LeiP")); 
             adaptors.Add("Leitrim",     new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Leit")); 
             adaptors.Add("Limerick",    new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Lime")); 
             adaptors.Add("Londonderry", new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Ldry"));
-	        adaptors.Add("Longford",    new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Long")); 
+            adaptors.Add("Longford",    new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Long")); 
             adaptors.Add("Louth",       new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Lout")); 
             adaptors.Add("Mayo",        new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Mayo")); 
             adaptors.Add("Meath",       new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Meat")); 
             adaptors.Add("Monaghan",    new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Mghn"));
-	        adaptors.Add("Munster",     new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "MunP")); 
+            adaptors.Add("Munster",     new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "MunP")); 
             adaptors.Add("Offaly",      new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Offa")); 
             adaptors.Add("Roscommon",   new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Rosc")); 
             adaptors.Add("Sligo",       new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Slig")); 
             adaptors.Add("Tipperary",   new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Tipp"));
-	        adaptors.Add("Tyrone",      new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Tyro")); 
+            adaptors.Add("Tyrone",      new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Tyro")); 
             adaptors.Add("Ulster",      new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "UlsP")); 
             adaptors.Add("Waterford",   new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Wat")); 
             adaptors.Add("Westmeath",   new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Wmea")); 
             adaptors.Add("Wexford",     new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Wexf"));
-	        adaptors.Add("Wicklow",     new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Wick"));
+            adaptors.Add("Wicklow",     new FamilySearchLocation(FactLocation.REGION, "2", "Irel", "Wick"));
 
             // Canadian Provinces
             adaptors.Add("Alberta",                 new FamilySearchLocation(FactLocation.REGION, "11", "CAN", "Alta"));
@@ -253,46 +255,16 @@ namespace FTAnalyzer
 
         private FamilySearchLocation(int level, string region, string juris1, string juris2)
         {
-            this.level = level;
-            this.region = region;
-            this.juris1 = juris1;
-            this.juris2 = juris2;
-            this.location = null;
+            this.Level = level;
+            this.Region = region;
+            this.Juris1 = juris1;
+            this.Juris2 = juris2;
+            this.Location = null;
         }
-
-        #region Properties
-
-        public int Level
-        {
-            get { return level; }
-        }
-
-        public string Region
-        {
-            get { return region; }
-        }
-
-        public string Juris1
-        {
-            get { return juris1; }
-        }
-
-        public string Juris2 {
-            get { return juris2; }
-        }
-
-        private FactLocation Location
-        {
-            get { return location; }
-
-            set { this.location = value; }
-        }
-
-        #endregion
 
         public object Clone()
         {
-            return new FamilySearchLocation(this.level, this.region, this.juris1, this.juris2);
+            return new FamilySearchLocation(this.Level, this.Region, this.Juris1, this.Juris2);
         }
 
     }

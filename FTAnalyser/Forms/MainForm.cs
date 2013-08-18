@@ -239,11 +239,11 @@ namespace FTAnalyzer
                 {
                     tsCountLabel.Text = "";
                     mnuPrint.Enabled = true;
-                    List<IDisplayLocation> countries = ft.AllCountries;
-                    List<IDisplayLocation> regions = ft.AllRegions;
-                    List<IDisplayLocation> parishes = ft.AllParishes;
-                    List<IDisplayLocation> addresses = ft.AllAddresses;
-                    List<IDisplayLocation> places = ft.AllPlaces;
+                    List<IDisplayLocation> countries = ft.AllCountries.ToList();
+                    List<IDisplayLocation> regions = ft.AllRegions.ToList();
+                    List<IDisplayLocation> parishes = ft.AllParishes.ToList();
+                    List<IDisplayLocation> addresses = ft.AllAddresses.ToList();
+                    List<IDisplayLocation> places = ft.AllPlaces.ToList();
                     countries.Sort(new FactLocationComparer(FactLocation.COUNTRY));
                     regions.Sort(new FactLocationComparer(FactLocation.REGION));
                     parishes.Sort(new FactLocationComparer(FactLocation.PARISH));
@@ -631,7 +631,7 @@ namespace FTAnalyzer
         private void showLocationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Locations locationsForm = new Locations();
-            List<FactLocation> locations = ft.AllLocations;
+            List<FactLocation> locations = ft.AllLocations.ToList();
             locations.Sort();
             locationsForm.BuildLocationTree(locations);
             DisposeDuplicateForms(locationsForm);
@@ -761,13 +761,13 @@ namespace FTAnalyzer
             rtbFamilySearchResults.Text = "FamilySearch Marriage Search started.\n";
             int level = rbFamilySearchCountry.Checked ? FactLocation.COUNTRY : FactLocation.REGION;
             FamilySearchForm form = new FamilySearchNewSearchForm(rtbFamilySearchResults, FamilySearchDefaultCountry.Country, level, FamilySearchrelationTypes.Status, txtFamilySearchSurname.Text, webBrowser);
-            List<Family> families = ft.AllFamilies;
+            IList<Family> families = ft.AllFamilies.ToList();
             int counter = 0;
             pbFamilySearch.Visible = true;
             pbFamilySearch.Maximum = families.Count;
             pbFamilySearch.Value = 0;
             stopProcessing = false;
-            foreach (Family f in families)
+            foreach (Family f in ft.AllFamilies)
             {
                 form.SearchFamilySearch(f, txtFamilySearchfolder.Text, FamilySearchForm.MARRIAGESEARCH);
                 pbFamilySearch.Value = counter++;
@@ -794,7 +794,7 @@ namespace FTAnalyzer
             rtbFamilySearchResults.Text = "FamilySearch Children Search started.\n";
             int level = rbFamilySearchCountry.Checked ? FactLocation.COUNTRY : FactLocation.REGION;
             FamilySearchForm form = new FamilySearchOldSearchForm(rtbFamilySearchResults, FamilySearchDefaultCountry.Country, level, FamilySearchrelationTypes.Status, txtFamilySearchSurname.Text);
-            List<Family> families = ft.AllFamilies;
+            IList<Family> families = ft.AllFamilies.ToList();
             int counter = 0;
             pbFamilySearch.Visible = true;
             pbFamilySearch.Maximum = families.Count;
@@ -1138,12 +1138,11 @@ namespace FTAnalyzer
             {
                 SQLiteConnection conn = new SQLiteConnection("Data Source=Geocodes.s3db;Version=3;");
                 conn.Open();
-                List<FactLocation> locations = ft.AllLocations;
                 SQLiteCommand cmd = new SQLiteCommand(conn);
                 int count = 0;
                 int good = 0;
                 int bad = 0;
-                foreach (FactLocation loc in locations)
+                foreach (FactLocation loc in ft.AllLocations)
                 {
                     string sql = string.Format("select location from geocode where location = \"{0}\"", loc.ToString());
                     cmd.CommandText = sql;
@@ -1174,7 +1173,7 @@ namespace FTAnalyzer
                     }
                     reader.Close();
                     count++;
-                    Console.WriteLine("Found " + good + " records and failed to find " + bad + " records from " + count + " of " + locations.Count);
+                    Console.WriteLine("Found " + good + " records and failed to find " + bad + " records from " + count + " of " + ft.AllLocations.Count());
                 }
                 conn.Close();
                 MessageBox.Show("Finished Geocoding");

@@ -54,13 +54,13 @@ namespace FTAnalyzer
                     Husband = null;
                 // update bestLocation by marriage date as husband and wife 
                 // locations are often birth locations
-                Fact marriage = getPreferredFact(Fact.MARRIAGE);
+                Fact marriage = GetPreferredFact(Fact.MARRIAGE);
                 if (marriage != null)
                     facts.Add(marriage);
                 List<Individual> censusChildren = new List<Individual>();
                 // sort children oldest first
-                children.Sort(new CensusAgeComparer());
-                foreach (Individual child in children)
+                Children.Sort(new CensusAgeComparer());
+                foreach (Individual child in Children)
                 {
                     // set location to childs birth location
                     // this will end up setting birth location of last child 
@@ -73,7 +73,7 @@ namespace FTAnalyzer
                         facts.AddRange(child.AllFacts);
                     }
                 }
-                children = censusChildren;
+                Children = censusChildren;
                 this.BestLocation = FactLocation.BestLocation(facts, censusDate);
             }
             return result;
@@ -98,7 +98,7 @@ namespace FTAnalyzer
                 else
                 {
                     // individual is a child so remove if married before census date
-                    return !ft.isMarried(indiv, CensusDate);
+                    return !ft.IsMarried(indiv, CensusDate);
                 }
             }
             else

@@ -33,7 +33,7 @@ namespace FTAnalyzer
             int[,,] stats = new int[2,20,3];
             foreach (Family f in ft.AllFamilies)
             {
-                foreach (Individual child in f.children)
+                foreach (Individual child in f.Children)
                 {
                     if (child.BirthDate != FactDate.UNKNOWN_DATE)
                     {

@@ -488,7 +488,7 @@ namespace FTAnalyzer
             return new FactLocation(location.ToString());
         }
 
-        public static FactLocation BestLocation(List<Fact> facts, FactDate when)
+        public static FactLocation BestLocation(IEnumerable<Fact> facts, FactDate when)
         {
             // this returns a Location a person was at for a given period
             FactLocation result = new FactLocation();

@@ -31,7 +31,7 @@ namespace FTAnalyzer
         {
             if (family != null)
             {
-                if (family.getPreferredFact(Fact.FAMILYSEARCH) == null && family.Husband != null && family.Wife != null)
+                if (family.GetPreferredFact(Fact.FAMILYSEARCH) == null && family.Husband != null && family.Wife != null)
                 {   // or we have already flagged marriage fact as having been searched
                     // or either the husband or wife is not present
                     if (surnameSearch)
@@ -89,7 +89,7 @@ namespace FTAnalyzer
                 string filename = dirname + "\\" + family.MarriageFilename;
                 if (!File.Exists(filename))
                 {
-                    Fact marriage = family.getPreferredFact(Fact.MARRIAGE);
+                    Fact marriage = family.GetPreferredFact(Fact.MARRIAGE);
                     if (marriage == null)
                         marriage = new Fact(Fact.MARRIAGE, FactDate.UNKNOWN_DATE);
                     FactDate marriageDate = marriage.FactDate;
@@ -115,7 +115,7 @@ namespace FTAnalyzer
 
         private void ChildrenSearch(Family family, string dirname)
         {
-            if (family.getPreferredFact(Fact.CHILDLESS) == null)
+            if (family.GetPreferredFact(Fact.CHILDLESS) == null)
             {
                 string filename = dirname + "\\" + family.ChildrenFilename;
                 if (!File.Exists(filename))
@@ -126,7 +126,7 @@ namespace FTAnalyzer
                     {
                         if (husband.BirthDate.StartDate < FAMILYSEARCHPARENTBIRTHMAX.StartDate && wife.BirthDate.StartDate < FAMILYSEARCHPARENTBIRTHMAX.StartDate)
                         {
-                            Fact marriage = family.getPreferredFact(Fact.MARRIAGE);
+                            Fact marriage = family.GetPreferredFact(Fact.MARRIAGE);
                             SearchForChildren(husband, wife, marriage, filename);
                         }
                     }

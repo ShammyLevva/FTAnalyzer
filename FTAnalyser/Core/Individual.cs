@@ -680,7 +680,7 @@ namespace FTAnalyzer
             allFacts.AddRange(facts);
             foreach (Family f in familiesAsParent)
             {
-                allFacts.AddRange(f.AllFacts);
+                allFacts.AddRange(f.Facts);
             }
             return FactLocation.BestLocation(allFacts, when);
         }

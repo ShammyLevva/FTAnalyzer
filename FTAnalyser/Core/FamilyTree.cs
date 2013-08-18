@@ -15,16 +15,16 @@ namespace FTAnalyzer
     {
         private static FamilyTree instance;
 
-        private List<FactSource> sources;
-        private List<Individual> individuals;
-        private List<Family> families;
-        private Dictionary<string, FactLocation> locations;
-        private Dictionary<string, List<Individual>> occupations;
+        private IList<FactSource> sources;
+        private IList<Individual> individuals;
+        private IList<Family> families;
+        private IDictionary<string, FactLocation> locations;
+        private IDictionary<string, List<Individual>> occupations;
         private bool _loading = false;
         private bool _dataloaded = false;
         private RichTextBox xmlErrorbox = new RichTextBox();
         private int maxAhnentafel = 0;
-        private List<DataErrorGroup> dataErrorTypes;
+        private IList<DataErrorGroup> dataErrorTypes;
 
         private FamilyTree()
         {
@@ -215,7 +215,7 @@ namespace FTAnalyzer
                     f.husband.Infamily = true;
                 if (f.wife != null)
                     f.wife.Infamily = true;
-                foreach (Individual c in f.children)
+                foreach (Individual c in f.Children)
                 {
                     c.Infamily = true;
                     if (f.husband != null || f.wife != null)
@@ -258,29 +258,29 @@ namespace FTAnalyzer
                     foreach (Fact f in ind.AllFacts)
                         result.Add(new ExportFacts(ind, f));
                     foreach (Family fam in ind.FamiliesAsParent)
-                        foreach (Fact famfact in fam.AllFacts)
+                        foreach (Fact famfact in fam.Facts)
                             result.Add(new ExportFacts(ind, famfact));
                 }
                 return result;
             }
         }
 
-        public List<Family> AllFamilies
+        public IEnumerable<Family> AllFamilies
         {
             get { return families; }
         }
 
-        public List<Individual> AllIndividuals
+        public IEnumerable<Individual> AllIndividuals
         {
             get { return individuals; }
         }
 
-        public List<FactLocation> AllLocations
+        public IEnumerable<FactLocation> AllLocations
         {
-            get { return locations.Values.ToList(); }
+            get { return locations.Values; }
         }
 
-        public List<IDisplayLocation> AllCountries
+        public IEnumerable<IDisplayLocation> AllCountries
         {
             get
             {
@@ -298,7 +298,7 @@ namespace FTAnalyzer
             }
         }
 
-        public List<IDisplayLocation> AllRegions
+        public IEnumerable<IDisplayLocation> AllRegions
         {
             get
             {
@@ -316,7 +316,7 @@ namespace FTAnalyzer
             }
         }
 
-        public List<IDisplayLocation> AllParishes
+        public IEnumerable<IDisplayLocation> AllParishes
         {
             get
             {
@@ -334,7 +334,7 @@ namespace FTAnalyzer
             }
         }
 
-        public List<IDisplayLocation> AllAddresses
+        public IEnumerable<IDisplayLocation> AllAddresses
         {
             get
             {
@@ -352,7 +352,7 @@ namespace FTAnalyzer
             }
         }
 
-        public List<IDisplayLocation> AllPlaces
+        public IEnumerable<IDisplayLocation> AllPlaces
         {
             get
             {
@@ -402,45 +402,28 @@ namespace FTAnalyzer
             });
         }
 
-        public List<Family> FindFamiliesWhereHusband(Individual ind)
+        public IEnumerable<Family> FindFamiliesWhereHusband(Individual ind)
         {
-            List<Family> result = new List<Family>();
-            foreach (Family f in families)
-            {
-                if (f.Husband != null && f.Husband == ind)
-                    result.Add(f);
-            }
-            return result;
+            return families.Where(f => (f.Husband != null && f.Husband == ind));
         }
 
-        public List<Family> FindFamiliesWhereWife(Individual ind)
+        public IEnumerable<Family> FindFamiliesWhereWife(Individual ind)
         {
-            List<Family> result = new List<Family>();
-            foreach (Family f in families)
-            {
-                if (f.Wife != null && f.Wife == ind)
-                    result.Add(f);
-            }
-            return result;
+            return families.Where(f => (f.Wife != null && f.Wife == ind));
         }
 
-        public FactSource getGedcomSource(string gedcomID)
+        public FactSource GetGedcomSource(string gedcomID)
         {
-            foreach (FactSource s in sources)
-            {
-                if (s.GedcomID == gedcomID)
-                    return s;
-            }
-            return null;
+            return sources.FirstOrDefault(s => s.GedcomID == gedcomID);
         }
 
-        public bool isMarried(Individual ind, FactDate fd)
+        public bool IsMarried(Individual ind, FactDate fd)
         {
             if (ind.isSingleAtDeath())
                 return false;
             return ind.FamiliesAsParent.Any(f =>
             {
-                FactDate marriage = f.getPreferredFactDate(Fact.MARRIAGE);
+                FactDate marriage = f.GetPreferredFactDate(Fact.MARRIAGE);
                 return (marriage != null && marriage.IsBefore(fd));
             });
         }
@@ -467,11 +450,11 @@ namespace FTAnalyzer
 
         public IEnumerable<Family> GetFamiliesAtLocation(FactLocation loc, int level)
         {
-            return families.Where(f => f.isAtLocation(loc, level));
+            return families.Where(f => f.IsAtLocation(loc, level));
         }
 
-        public List<string> getSurnamesAtLocation(FactLocation loc) { return getSurnamesAtLocation(loc, FactLocation.PARISH); }
-        public List<string> getSurnamesAtLocation(FactLocation loc, int level)
+        public List<string> GetSurnamesAtLocation(FactLocation loc) { return GetSurnamesAtLocation(loc, FactLocation.PARISH); }
+        public List<string> GetSurnamesAtLocation(FactLocation loc, int level)
         {
             HashSet<string> result = new HashSet<string>();
             foreach (Individual i in individuals)
@@ -507,12 +490,12 @@ namespace FTAnalyzer
             SortableBindingList<IDisplayLooseDeath> result = new SortableBindingList<IDisplayLooseDeath>();
             foreach (Individual ind in individuals)
             {
-                checkLooseDeath(ind, result);
+                CheckLooseDeath(ind, result);
             }
             return result;
         }
 
-        private void checkLooseDeath(Individual indiv, SortableBindingList<IDisplayLooseDeath> result)
+        private void CheckLooseDeath(Individual indiv, SortableBindingList<IDisplayLooseDeath> result)
         {
             FactDate deathDate = indiv.DeathDate;
             FactDate toAdd = null;
@@ -562,7 +545,7 @@ namespace FTAnalyzer
         private DateTime GetMaxLivingDate(Individual indiv)
         {
             DateTime maxdate = FactDate.MINDATE;
-            List<Family> indfam = new List<Family>();
+            IEnumerable<Family> indfam = new List<Family>();
             if (indiv.isMale)
             {
                 indfam = FindFamiliesWhereHusband(indiv);
@@ -578,7 +561,7 @@ namespace FTAnalyzer
             bool childDate = false;
             foreach (Family fam in indfam)
             {
-                FactDate marriageDate = fam.getPreferredFactDate(Fact.MARRIAGE);
+                FactDate marriageDate = fam.GetPreferredFactDate(Fact.MARRIAGE);
                 if (marriageDate.StartDate > maxdate && !marriageDate.IsLongYearSpan())
                 {
                     maxdate = marriageDate.StartDate;
@@ -690,7 +673,7 @@ namespace FTAnalyzer
             Family f = i.FamiliesAsChild.FirstOrDefault();
             return (f == null) ?
                     new ParentalGroup(i, null, null, null) :
-                    new ParentalGroup(i, f.Husband, f.Wife, f.getPreferredFact(Fact.MARRIAGE));
+                    new ParentalGroup(i, f.Husband, f.Wife, f.GetPreferredFact(Fact.MARRIAGE));
         }
 
         private void ClearRelations()
@@ -745,7 +728,7 @@ namespace FTAnalyzer
             IEnumerable<Family> families = indiv.FamiliesAsParent;
             foreach (Family family in families)
             {
-                foreach (Individual child in family.children)
+                foreach (Individual child in family.Children)
                 {
                     // add child to queue
                     if (child.RelationType == Individual.BLOOD || child.RelationType == Individual.UNKNOWN)
@@ -759,7 +742,7 @@ namespace FTAnalyzer
                         queue.Enqueue(child);
                     }
                 }
-                family.setBudgieCode(indiv, 2);
+                family.SetBudgieCode(indiv, 2);
             }
         }
 
@@ -801,11 +784,11 @@ namespace FTAnalyzer
                 {
                     // if the spouse of a direct ancestor is not a direct
                     // ancestor then they are only related by marriage
-                    family.setSpouseRelation(ind, Individual.MARRIEDTODB);
+                    family.SetSpouseRelation(ind, Individual.MARRIEDTODB);
                     // all children of direct ancestors and blood relations
                     // are blood relations
-                    family.setChildRelation(queue, Individual.BLOOD);
-                    family.setBudgieCode(ind, lenAhnentafel);
+                    family.SetChildRelation(queue, Individual.BLOOD);
+                    family.SetBudgieCode(ind, lenAhnentafel);
                 }
                 Application.DoEvents();
             }
@@ -844,10 +827,10 @@ namespace FTAnalyzer
                     IEnumerable<Family> families = ind.FamiliesAsParent;
                     foreach (Family family in families)
                     {
-                        family.setSpouseRelation(ind, Individual.MARRIAGE);
+                        family.SetSpouseRelation(ind, Individual.MARRIAGE);
                         // children of relatives by marriage that we haven't previously 
                         // identified are also relatives by marriage
-                        family.setChildRelation(queue, Individual.MARRIAGE);
+                        family.SetChildRelation(queue, Individual.MARRIAGE);
                     }
                 }
                 Application.DoEvents();
@@ -901,100 +884,6 @@ namespace FTAnalyzer
 
         #endregion
 
-        #region Registrations
-
-        //public void processRegistration(String filename, RegistrationsProcessor rp,
-        //    List<Registration> sourceRegs, BaseOutputFormatter formatter)
-        //{
-        //    TextWriter output = new StreamWriter(filename + ".csv");
-        //    formatter.printHeader(output);
-        //    List<Registration> regs = rp.processRegistrations(sourceRegs);
-        //    foreach (Registration r in regs)
-        //    {
-        //        formatter.printItem(r, output);
-        //    }
-        //    FamilyTree.Instance.xmlErrorbox.AppendText("written " + regs.Count + " records to " + filename + "\n");
-        //    output.Close();
-        //}
-
-        //public List<Registration> getAllBirthRegistrations()
-        //{
-        //    List<Registration> result = new List<Registration>();
-        //    foreach (Individual i in individuals)
-        //    {
-        //        ParentalGroup pg = CreateFamilyGroup(i);
-        //        result.Add(new BirthRegistration(pg));
-        //    }
-        //    return result;
-        //}
-
-        //public List<Registration> getAllMarriageRegistrations()
-        //{
-        //    List<Registration> result = new List<Registration>();
-        //    foreach (Individual i in individuals)
-        //    {
-        //        if (!i.isSingleAtDeath())
-        //        {
-        //            ParentalGroup pg = CreateFamilyGroup(i);
-        //            List<Family> indfam = i.isMale ? FindFamiliesWhereHusband(i) : FindFamiliesWhereWife(i);
-        //            if (indfam.Count == 0)
-        //                result.Add(new MarriageRegistration(pg, null, null));
-        //            else if (i.isMale)
-        //            {
-        //                foreach (Family f in indfam)
-        //                {
-        //                    ParentalGroup pg2 = CreateFamilyGroup(f.Wife);
-        //                    result.Add(new MarriageRegistration(pg, pg2, f));
-        //                }
-        //            }
-        //        }
-
-        //    }
-        //    return result;
-        //}
-
-        //public List<Registration> getAllDeathRegistrations()
-        //{
-        //    List<Registration> result = new List<Registration>();
-        //    foreach (Individual i in individuals)
-        //    {
-        //        if (i.DeathDate != FactDate.UNKNOWN_DATE)
-        //        {
-        //            // only include dead individuals
-        //            ParentalGroup pg = CreateFamilyGroup(i);
-        //            List<Family> indfam = i.isMale ? FindFamiliesWhereHusband(i) : FindFamiliesWhereWife(i);
-        //            if (indfam.Count == 0)
-        //                result.Add(new DeathRegistration(pg, null, Family.SINGLE));
-        //            else
-        //            {
-        //                foreach (Family f in indfam)
-        //                {
-        //                    if (i.isMale)
-        //                        result.Add(new DeathRegistration(pg, f.Wife, f.MaritalStatus));
-        //                    else
-        //                        result.Add(new DeathRegistration(pg, f.Husband, f.MaritalStatus));
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return result;
-        //}
-
-        //public List<Registration> getAllCensusRegistrations(FactDate censusDate, bool censusDone, bool includeResidence, bool lostCousinsCheck)
-        //{
-        //    List<Registration> result = new List<Registration>();
-        //    if (censusDate != null)
-        //    {
-        //        foreach (Family f in families)
-        //        {
-        //            CensusFamily cf = new CensusFamily(f, censusDate);
-        //            if (cf.process(censusDate, censusDone, includeResidence, lostCousinsCheck))
-        //                result.Add(new CensusRegistration(null, censusDate, cf));
-        //        }
-        //    }
-        //    return result;
-        //}
-
         public IEnumerable<CensusFamily> GetAllCensusFamilies(FactDate censusDate, bool censusDone, bool includeResidence, bool lostCousinsCheck)
         {
             if (censusDate != null)
@@ -1007,7 +896,6 @@ namespace FTAnalyzer
                 }
             }
         }
-        #endregion
 
         #region Displays
 

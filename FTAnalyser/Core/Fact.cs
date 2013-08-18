@@ -141,7 +141,7 @@ namespace FTAnalyzer
                         if (n.Attributes["Ref"] != null)
                         {   // only process sources with a reference
                             string srcref = n.Attributes["REF"].Value;
-                            FactSource source = ft.getGedcomSource(srcref);
+                            FactSource source = ft.GetGedcomSource(srcref);
                             if (source != null)
                                 Sources.Add(source);
                             else

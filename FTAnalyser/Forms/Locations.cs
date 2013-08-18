@@ -35,7 +35,7 @@ namespace FTAnalyzer.Forms
                             TreeNode parishNode = AddChild(regionNode.Nodes, loc.Parish);
                             if (parishNode.Nodes.Count == 0)
                             {
-                                List<string> surnames = ft.getSurnamesAtLocation(loc);
+                                List<string> surnames = ft.GetSurnamesAtLocation(loc);
                                 foreach (string s in surnames)
                                 {
                                     parishNode.Nodes.Add(new TreeNode(s));

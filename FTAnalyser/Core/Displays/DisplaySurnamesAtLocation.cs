@@ -13,7 +13,7 @@ namespace FTAnalyzer
         public DisplaySurnamesAtLocation(FactLocation location)
         {
             this.location = location;
-            this.surnames = FamilyTree.Instance.getSurnamesAtLocation(location);
+            this.surnames = FamilyTree.Instance.GetSurnamesAtLocation(location);
         }
 
         public List<string> Surnames

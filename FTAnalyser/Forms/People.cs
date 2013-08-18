@@ -64,7 +64,7 @@ namespace FTAnalyzer.Forms
             foreach (Family f in ft.AllFamilies)
             {
                 bool added = false;
-                foreach (Individual child in f.children)
+                foreach (Individual child in f.Children)
                 {
                     if (child.BirthDate != FactDate.UNKNOWN_DATE)
                     {
