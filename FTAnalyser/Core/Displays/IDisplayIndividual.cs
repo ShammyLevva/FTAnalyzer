@@ -18,7 +18,9 @@ namespace FTAnalyzer
         string Occupation { get; }          
         FactLocation BestLocation(FactDate when);
         Age CurrentAge { get; }             
-        string Relation { get; }            
+        string Relation { get; }
+        int MarriageCount { get; }
+        int ChildrenCount { get; }
         string BudgieCode { get; }
         int Ahnentafel { get; }
     }

@@ -460,6 +460,10 @@ namespace FTAnalyzer
             }
         }
 
+        public int MarriageCount { get { return familiesAsParent.Count; } }
+
+        public int ChildrenCount { get { return familiesAsParent.Sum(x => x.Children.Count); } }
+
         #endregion
 
         #region Boolean Tests

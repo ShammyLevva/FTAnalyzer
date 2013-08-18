@@ -683,6 +683,8 @@ namespace FTAnalyzer
                 i.RelationType = Individual.UNKNOWN;
                 i.BudgieCode = string.Empty;
                 i.Ahnentafel = 0;
+                i.FamiliesAsChild.Clear();
+                i.FamiliesAsParent.Clear();
             }
         }
 
@@ -847,8 +849,7 @@ namespace FTAnalyzer
                     f.Wife.FamiliesAsParent.Add(f);
                 foreach (Individual child in f.Children)
                 {
-                    if (child != null)
-                        child.FamiliesAsChild.Add(f);
+                    child.FamiliesAsChild.Add(f);
                 }
             }
         }
