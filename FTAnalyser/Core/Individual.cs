@@ -416,12 +416,13 @@ namespace FTAnalyzer
             }
         }
 
-        public FactDate LooseDeath
+        public string LooseDeath
         {
             get
             {
                 Fact loose = GetPreferredFact(Fact.LOOSEDEATH);
-                return loose == null ? new FactDate(FactDate.MINDATE, FactDate.MAXDATE) : loose.FactDate;
+                FactDate fd =  loose == null ? FactDate.UNKNOWN_DATE : loose.FactDate;
+                return (fd.StartDate > fd.EndDate) ? "Start date after end date: check for data errors" : fd.ToString();
             }
         }
 

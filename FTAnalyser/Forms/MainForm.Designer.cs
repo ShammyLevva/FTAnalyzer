@@ -276,46 +276,36 @@
             // 
             // BirthRegistrationToolStripMenuItem
             // 
-            //this.BirthRegistrationToolStripMenuItem.Name = "BirthRegistrationToolStripMenuItem";
-            //this.BirthRegistrationToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            //this.BirthRegistrationToolStripMenuItem.Text = "Birth Registrations";
-            //this.BirthRegistrationToolStripMenuItem.Visible = false;
-            //this.BirthRegistrationToolStripMenuItem.Click += new System.EventHandler(this.BirthRegistrationToolStripMenuItem_Click);
+            this.BirthRegistrationToolStripMenuItem.Name = "BirthRegistrationToolStripMenuItem";
+            this.BirthRegistrationToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             // 
             // deathRegistrationsToolStripMenuItem
             // 
-            //this.deathRegistrationsToolStripMenuItem.Name = "deathRegistrationsToolStripMenuItem";
-            //this.deathRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            //this.deathRegistrationsToolStripMenuItem.Text = "Death Registrations";
-            //this.deathRegistrationsToolStripMenuItem.Visible = false;
-            //this.deathRegistrationsToolStripMenuItem.Click += new System.EventHandler(this.deathRegistrationsToolStripMenuItem_Click);
+            this.deathRegistrationsToolStripMenuItem.Name = "deathRegistrationsToolStripMenuItem";
+            this.deathRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             // 
             // marriageRegistrationsToolStripMenuItem
             // 
-            //this.marriageRegistrationsToolStripMenuItem.Enabled = false;
-            //this.marriageRegistrationsToolStripMenuItem.Name = "marriageRegistrationsToolStripMenuItem";
-            //this.marriageRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            //this.marriageRegistrationsToolStripMenuItem.Text = "Marriage Registrations";
-            //this.marriageRegistrationsToolStripMenuItem.Visible = false;
-            //this.marriageRegistrationsToolStripMenuItem.Click += new System.EventHandler(this.marriageRegistrationsToolStripMenuItem_Click);
+            this.marriageRegistrationsToolStripMenuItem.Name = "marriageRegistrationsToolStripMenuItem";
+            this.marriageRegistrationsToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(189, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(165, 6);
             this.toolStripSeparator2.Visible = false;
             // 
             // childAgeProfilesToolStripMenuItem
             // 
             this.childAgeProfilesToolStripMenuItem.Name = "childAgeProfilesToolStripMenuItem";
-            this.childAgeProfilesToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.childAgeProfilesToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.childAgeProfilesToolStripMenuItem.Text = "Child Age Profiles";
             this.childAgeProfilesToolStripMenuItem.Click += new System.EventHandler(this.childAgeProfilesToolStripMenuItem_Click);
             // 
             // olderParentsToolStripMenuItem
             // 
             this.olderParentsToolStripMenuItem.Name = "olderParentsToolStripMenuItem";
-            this.olderParentsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.olderParentsToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.olderParentsToolStripMenuItem.Text = "Older Parents";
             this.olderParentsToolStripMenuItem.Click += new System.EventHandler(this.olderParentsToolStripMenuItem_Click);
             // 
@@ -844,16 +834,14 @@
             // 
             this.dgLooseDeaths.AllowUserToAddRows = false;
             this.dgLooseDeaths.AllowUserToDeleteRows = false;
-            this.dgLooseDeaths.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgLooseDeaths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgLooseDeaths.Location = new System.Drawing.Point(0, 0);
+            this.dgLooseDeaths.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgLooseDeaths.Location = new System.Drawing.Point(3, 3);
             this.dgLooseDeaths.MultiSelect = false;
             this.dgLooseDeaths.Name = "dgLooseDeaths";
             this.dgLooseDeaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgLooseDeaths.Size = new System.Drawing.Size(931, 402);
+            this.dgLooseDeaths.Size = new System.Drawing.Size(925, 396);
             this.dgLooseDeaths.TabIndex = 0;
             // 
             // tabCensus
@@ -976,7 +964,7 @@
             this.cenDate.Country = "";
             this.cenDate.Location = new System.Drawing.Point(272, 81);
             this.cenDate.Name = "cenDate";
-            this.cenDate.Size = new System.Drawing.Size(90, 27);
+            this.cenDate.Size = new System.Drawing.Size(186, 27);
             this.cenDate.TabIndex = 17;
             this.cenDate.CensusChanged += new System.EventHandler(this.cenDate_CensusChanged);
             // 
@@ -1270,13 +1258,10 @@
             // 
             // btnViewResults
             // 
-            //this.btnViewResults.Location = new System.Drawing.Point(266, 118);
-            //this.btnViewResults.Name = "btnViewResults";
-            //this.btnViewResults.Size = new System.Drawing.Size(123, 27);
-            //this.btnViewResults.TabIndex = 8;
-            //this.btnViewResults.Text = "View Results";
-            //this.btnViewResults.UseVisualStyleBackColor = true;
-            //this.btnViewResults.Click += new System.EventHandler(this.btnViewResults_Click);
+            this.btnViewResults.Location = new System.Drawing.Point(0, 0);
+            this.btnViewResults.Name = "btnViewResults";
+            this.btnViewResults.Size = new System.Drawing.Size(75, 23);
+            this.btnViewResults.TabIndex = 23;
             // 
             // pbFamilySearch
             // 
