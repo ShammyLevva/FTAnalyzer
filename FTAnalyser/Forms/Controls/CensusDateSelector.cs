@@ -28,6 +28,7 @@ namespace Controls
         {
             cbCensusDate.Items.Clear();
             AddCensusItems(Countries.UNITED_KINGDOM);
+            AddCensusItems(Countries.IRELAND);
             AddCensusItems(Countries.UNITED_STATES);
             AddCensusItems(Countries.CANADA);
             defaultDate = CensusDate.UKCENSUS1881;
@@ -76,6 +77,10 @@ namespace Controls
                 cbCensusDate.Items.Add(CensusDate.UKCENSUS1891);
                 cbCensusDate.Items.Add(CensusDate.UKCENSUS1901);
                 cbCensusDate.Items.Add(CensusDate.UKCENSUS1911);
+            }
+            else if (location.Equals(Countries.IRELAND))
+            {
+                //cbCensusDate.Items.Add(CensusDate.IRELANDCENSUS1911);
             }
             else if (location.Equals(Countries.UNITED_STATES))
             {

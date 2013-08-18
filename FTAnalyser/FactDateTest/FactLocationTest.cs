@@ -65,6 +65,9 @@ namespace FactDateTest
         {
             FactLocation fl = new FactLocation("Aberdeen, Scotland");
             Assert.IsTrue(fl.ToString().Equals("Aberdeen, Scotland"));
+
+            fl = new FactLocation("America");
+            Assert.IsTrue(fl.ToString().Equals("United States"));
         }
     }
 }

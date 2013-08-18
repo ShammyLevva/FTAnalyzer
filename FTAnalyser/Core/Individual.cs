@@ -89,7 +89,6 @@ namespace FTAnalyzer
             AddFacts(node, Fact.GRADUATION);
             AddFacts(node, Fact.RETIREMENT);
             AddFacts(node, Fact.MILITARY);
-            AddFacts(node, Fact.MILITARY_SERVICE_ID);
             AddFacts(node, Fact.ELECTION);
             AddFacts(node, Fact.EMPLOYMENT);
 

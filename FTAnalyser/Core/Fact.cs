@@ -23,7 +23,7 @@ namespace FTAnalyzer
                 NATURALIZATION = "NATU", OCCUPATION = "OCCU", POSSESSIONS = "PROP", ORDINANCE = "ORDI",
                 ORDINATION = "ORDN", PROBATE = "PROB", RESIDENCE = "RESI",
                 RETIREMENT = "RETI", SEALING_CHILD = "SLGC", SEALING_SPOUSE = "SLGS",
-                WILL = "WILL", SEPARATION = "_SEPR", MILITARY = "_MILT", MILITARY_SERVICE_ID = "_MILTID",
+                WILL = "WILL", SEPARATION = "_SEPR", MILITARY = "_MILT",
                 ELECTION = "_ELEC", DEGREE = "_DEG", EMPLOYMENT = "_EMPLOY",
                 MEDICAL_CONDITION = "_MDCL", CUSTOM_FACT = "EVEN";
 
@@ -78,7 +78,6 @@ namespace FTAnalyzer
 
             COMMENT_FACTS.Add(OCCUPATION);
             COMMENT_FACTS.Add(MILITARY);
-            COMMENT_FACTS.Add(MILITARY_SERVICE_ID);
             COMMENT_FACTS.Add(RETIREMENT);
             COMMENT_FACTS.Add(WILL);
             COMMENT_FACTS.Add(ELECTION);
@@ -154,7 +153,6 @@ namespace FTAnalyzer
                 case WILL: return "Will";
                 case SEPARATION: return "Separation";
                 case MILITARY: return "Military service";
-                case MILITARY_SERVICE_ID: return "Military service id";
                 case ELECTION: return "Election";
                 case DEGREE: return "Degree";
                 case EMPLOYMENT: return "Employment";

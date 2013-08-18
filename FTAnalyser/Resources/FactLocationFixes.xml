@@ -10,6 +10,9 @@
       <CountryTypo from="U.S."    to="United States" />
       <CountryTypo from="U.S.A"   to="United States" />
       <CountryTypo from="U.S.A."  to="United States" />
+      <CountryTypo from="America" to="United States" />
+      <CountryTypo from="United States of America" to="United States" />
+      <CountryTypo from="US of A" to="United States" />
       <CountryTypo from="NZ"      to="New Zealand" />
       <CountryTypo from="NZ."     to="New Zealand" />
       <CountryTypo from="N.Z"     to="New Zealand" />

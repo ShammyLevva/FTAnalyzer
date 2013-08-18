@@ -1395,6 +1395,7 @@ namespace FTAnalyzer
                     year = (endYear + startYear + 1) / 2;
                     range = (endYear - startYear + 3) / 2;
                     if (range > 5) range = 10;
+                    if (year > censusYear) year = censusYear;
                 }
                 query.Append("yearOfBirth=" + year + "&");
                 query.Append("yearOfBirthVariation=" + range + "&");
