@@ -191,7 +191,7 @@ namespace FTAnalyzer
         private void AddOccupations(Individual individual)
         {
             HashSet<string> jobs = new HashSet<string>();
-            foreach (Fact f in individual.getFacts(Fact.OCCUPATION))
+            foreach (Fact f in individual.GetFacts(Fact.OCCUPATION))
             {
                 if (!jobs.Contains(f.Comment))
                 {
@@ -395,7 +395,7 @@ namespace FTAnalyzer
             {
                 if (ind.RelationType == relationType)
                 {
-                    Fact f = ind.getPreferredFact(factType);
+                    Fact f = ind.GetPreferredFact(factType);
                     return (f != null && !f.CertificatePresent);
                 }
                 return false;
@@ -623,7 +623,7 @@ namespace FTAnalyzer
         private DateTime getMaxFactDate(Individual indiv, string factType)
         {
             DateTime maxdate = FactDate.MINDATE;
-            List<Fact> facts = indiv.getFacts(factType);
+            List<Fact> facts = indiv.GetFacts(factType);
             foreach (Fact f in facts)
             {
                 DateTime d = factType == Fact.BIRTH ? new DateTime(f.FactDate.StartDate.Year, 1, 1) : f.FactDate.StartDate;
@@ -652,7 +652,7 @@ namespace FTAnalyzer
                 if (minDeath > now) // 110 years after birth is after todays date so we set to ignore
                     minDeath = FactDate.MAXDATE;
             }
-            FactDate burialDate = indiv.getPreferredFactDate(Fact.BURIAL);
+            FactDate burialDate = indiv.GetPreferredFactDate(Fact.BURIAL);
             if (burialDate.EndDate < minDeath)
                 minDeath = burialDate.EndDate;
             if (minDeath <= deathDate.EndDate)

@@ -258,7 +258,7 @@ namespace FTAnalyzer
         {
             get
             {
-                Fact f = getPreferredFact(Fact.BIRTH);
+                Fact f = GetPreferredFact(Fact.BIRTH);
                 return (f == null) ? "" : f.Datestring;
             }
         }
@@ -267,7 +267,7 @@ namespace FTAnalyzer
         {
             get 
             { 
-                FactDate f = getPreferredFactDate(Fact.BIRTH);
+                FactDate f = GetPreferredFactDate(Fact.BIRTH);
                 return (f == null) ? FactDate.UNKNOWN_DATE : f;
             }
         }
@@ -276,7 +276,7 @@ namespace FTAnalyzer
         {
             get
             {
-                Fact f = getPreferredFact(Fact.BIRTH);
+                Fact f = GetPreferredFact(Fact.BIRTH);
                 return (f == null) ? null : f.Location;
             }
         }
@@ -285,7 +285,7 @@ namespace FTAnalyzer
         {
             get
             {
-                FactDate f = getPreferredFactDate(Fact.DEATH);
+                FactDate f = GetPreferredFactDate(Fact.DEATH);
                 return (f == null) ? FactDate.UNKNOWN_DATE : f;
             }
         }
@@ -294,7 +294,7 @@ namespace FTAnalyzer
         {
             get
             {
-                Fact f = getPreferredFact(Fact.DEATH);
+                Fact f = GetPreferredFact(Fact.DEATH);
                 return (f == null) ? "" :
                     ((f.Datestring == null) ? "" : f.Datestring);
             }
@@ -304,7 +304,7 @@ namespace FTAnalyzer
         {
             get
             {
-                Fact f = getPreferredFact(Fact.DEATH);
+                Fact f = GetPreferredFact(Fact.DEATH);
                 return (f == null) ? null : f.Location;
             }
         }
@@ -313,7 +313,7 @@ namespace FTAnalyzer
         {
             get
             {
-                Fact f = getPreferredFact(Fact.BURIAL);
+                Fact f = GetPreferredFact(Fact.BURIAL);
                 return (f == null) ? null : f.FactDate;
             }
         }
@@ -322,7 +322,7 @@ namespace FTAnalyzer
         {
             get
             {
-                Fact occupation = getPreferredFact(Fact.OCCUPATION);
+                Fact occupation = GetPreferredFact(Fact.OCCUPATION);
                 return occupation == null ? "" : occupation.Comment;
             }
         }
@@ -377,7 +377,7 @@ namespace FTAnalyzer
         {
             get
             {
-                Fact loose = getPreferredFact(Fact.LOOSEDEATH);
+                Fact loose = GetPreferredFact(Fact.LOOSEDEATH);
                 return loose == null ? new FactDate(FactDate.MINDATE, FactDate.MAXDATE) : loose.FactDate;
             }
         }
@@ -547,7 +547,7 @@ namespace FTAnalyzer
         }
         
         public bool isSingleAtDeath() {
-            Fact single = getPreferredFact(Fact.UNMARRIED);
+            Fact single = GetPreferredFact(Fact.UNMARRIED);
             return single != null || MaxAgeAtDeath < 16 || CurrentAge.MaxAge < 16;
         }
 
@@ -624,32 +624,21 @@ namespace FTAnalyzer
             }
         }
                 
-        public Fact getPreferredFact(string factType) {
+        public Fact GetPreferredFact(string factType) {
             // Returns the first fact of the given type.
             // This assumes the original GEDCOM file has the preferred fact first in the list
             // as per the GEDCOM 5.5 specification.
-            foreach(Fact f in facts)
-            {
-                if (f.FactType == factType)
-                    return f;
-            }
-            return null;
+            return GetFacts(factType).FirstOrDefault();
         }
         
-        public FactDate getPreferredFactDate (string factType) {
-            Fact f = getPreferredFact(factType);
+        public FactDate GetPreferredFactDate (string factType) {
+            Fact f = GetPreferredFact(factType);
             return (f == null) ? FactDate.UNKNOWN_DATE : f.FactDate;
         }
         
-        public List<Fact> getFacts(string factType) {
+        public IEnumerable<Fact> GetFacts(string factType) {
             // Returns all facts of the given type.
-            List<Fact> result = new List<Fact>();
-            foreach(Fact f in facts)
-            {
-                if (f.FactType == factType)
-                    result.Add(f);
-            }
-            return result;
+            return facts.Where(f => f.FactType == factType);
         }
 
         public Family FirstMarriage
@@ -726,8 +715,8 @@ namespace FTAnalyzer
             if (res == 0) {
                 res = this.forenames.CompareTo(that.forenames);
                 if (res == 0) {
-                    Fact b1 = this.getPreferredFact(Fact.BIRTH);
-                    Fact b2 = that.getPreferredFact(Fact.BIRTH);
+                    Fact b1 = this.GetPreferredFact(Fact.BIRTH);
+                    Fact b2 = that.GetPreferredFact(Fact.BIRTH);
                     FactDate d1 = (b1 == null) ? FactDate.UNKNOWN_DATE : b1.FactDate;
                     FactDate d2 = (b2 == null) ? FactDate.UNKNOWN_DATE : b2.FactDate;
                     res = d1.CompareTo(d2);

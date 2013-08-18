@@ -39,7 +39,7 @@ namespace FTAnalyzer
         public string Residence {
             get
             {
-                Fact residence = individual.getPreferredFact(Fact.RESIDENCE);
+                Fact residence = individual.GetPreferredFact(Fact.RESIDENCE);
                 return (residence == null) ? "" : residence.Place;
             }
         }
@@ -94,12 +94,12 @@ namespace FTAnalyzer
 
         public Fact getPreferredFact(string factType)
         {
-            return individual.getPreferredFact(factType);
+            return individual.GetPreferredFact(factType);
         }
 
         public FactDate getPreferredFactDate(string factType)
         {
-            return individual.getPreferredFactDate(factType);
+            return individual.GetPreferredFactDate(factType);
         }
 
     }
