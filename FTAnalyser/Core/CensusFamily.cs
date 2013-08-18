@@ -27,14 +27,14 @@ namespace FTAnalyzer
             }
         }
 
-        public bool process(FactDate censusDate, bool censusDone, bool includeResidence, bool lostCousinsCheck)
+        public bool Process(FactDate censusDate, bool censusDone, bool includeResidence, bool lostCousinsCheck)
         {
             bool result = false;
             this.CensusDate = censusDate;
             List<Fact> facts = new List<Fact>();
-            if (isValidFamily())
+            if (IsValidFamily())
             {
-                if (isValidIndividual(wife, censusDone, includeResidence, lostCousinsCheck, true))
+                if (IsValidIndividual(wife, censusDone, includeResidence, lostCousinsCheck, true))
                 {
                     result = true;
                     wife.Status = Individual.WIFE;
@@ -44,7 +44,7 @@ namespace FTAnalyzer
                     Wife = null;
                 // overwrite bestLocation by husbands as most commonly the family
                 // end up at husbands location after marriage
-                if (isValidIndividual(husband, censusDone, includeResidence, lostCousinsCheck, true))
+                if (IsValidIndividual(husband, censusDone, includeResidence, lostCousinsCheck, true))
                 {
                     result = true;
                     husband.Status = Individual.HUSBAND;
@@ -66,7 +66,7 @@ namespace FTAnalyzer
                     // this will end up setting birth location of last child 
                     // as long as the location is at least Parish level
                     child.Status = Individual.CHILD;
-                    if (isValidIndividual(child, censusDone, includeResidence, lostCousinsCheck, false))
+                    if (IsValidIndividual(child, censusDone, includeResidence, lostCousinsCheck, false))
                     {
                         result = true;
                         censusChildren.Add(child);
@@ -79,7 +79,7 @@ namespace FTAnalyzer
             return result;
         }
 
-        private bool isValidIndividual(Individual indiv, bool censusDone, bool includeResisdence, bool lostCousinsCheck, bool parentCheck)
+        private bool IsValidIndividual(Individual indiv, bool censusDone, bool includeResisdence, bool lostCousinsCheck, bool parentCheck)
         {
             if (indiv == null)
                 return false;
@@ -107,7 +107,7 @@ namespace FTAnalyzer
             }
         }
 
-        private bool isValidFamily()
+        private bool IsValidFamily()
         {
             if (MarriageDate.StartDate > CensusDate.EndDate)
                 return false;
@@ -122,20 +122,6 @@ namespace FTAnalyzer
                 return false;
             return true;
         }
-
-        //public int Relation
-        //{
-        //    get
-        //    {
-        //        int relation = Individual.UNSET;
-        //        foreach (Individual i in Members)
-        //        {
-        //            if (i.RelationType != Individual.UNKNOWN && i.RelationType < relation)
-        //                relation = i.RelationType;
-        //        }
-        //        return relation == Individual.UNSET ? Individual.UNKNOWN : relation;
-        //    }
-        //}
 
         public string Surname
         {

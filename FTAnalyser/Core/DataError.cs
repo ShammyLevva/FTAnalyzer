@@ -7,28 +7,17 @@ namespace FTAnalyzer
 {
     class DataError
     {
-        private Individual ind;
-        private string description;
+        private Individual individual;
+        public string Description { get; private set; }
 
         public DataError(Individual ind, string description)
         {
-            this.ind = ind;
-            this.description = description;
+            this.individual = ind;
+            this.Description = description;
         }
 
-        public string Individual
-        {
-            get { return ind.Name; }
-        }
+        public string Individual { get { return individual.Name; } }
 
-        public FactDate Born
-        {
-            get { return ind.BirthDate; }
-        }
-
-        public string Description
-        {
-            get { return description; }
-        }
+        public FactDate Born { get { return individual.BirthDate; } }
     }
 }

@@ -7,36 +7,36 @@ namespace FTAnalyzer
 {
     public class Age : IComparable<Age>
     {
-        private int minAge;
-        private int maxAge;
+        public int MinAge { get; private set; }
+        public int MaxAge { get; private set; }
         private string age;
 
         public Age(Individual ind, FactDate when)
         {
             if (when.isAfter(ind.DeathDate))
                 when = ind.DeathDate;
-            minAge = getAge(ind.BirthDate.EndDate, when.StartDate, FactDate.MINDATE);
-            maxAge = getAge(ind.BirthDate.StartDate, when.EndDate, FactDate.MAXDATE);
-            if (minAge == FactDate.MINYEARS)
+            MinAge = GetAge(ind.BirthDate.EndDate, when.StartDate, FactDate.MINDATE);
+            MaxAge = GetAge(ind.BirthDate.StartDate, when.EndDate, FactDate.MAXDATE);
+            if (MinAge == FactDate.MINYEARS)
             {
-                if (maxAge == FactDate.MAXYEARS)
+                if (MaxAge == FactDate.MAXYEARS)
                     age = "Unknown";
                 else
-                    age = "<=" + maxAge;
+                    age = "<=" + MaxAge;
             }
-            else if (maxAge < FactDate.MAXYEARS)
+            else if (MaxAge < FactDate.MAXYEARS)
             {
-                age = minAge == maxAge ? minAge.ToString() : minAge + " to " + maxAge;
+                age = MinAge == MaxAge ? MinAge.ToString() : MinAge + " to " + MaxAge;
             }
             else
             {
                 // if age over maximum return maximum
-                age = ">=" + minAge;
+                age = ">=" + MinAge;
             }
             
         }
 
-        private int getAge(DateTime birthDate, DateTime laterDate, DateTime nullValue)
+        private int GetAge(DateTime birthDate, DateTime laterDate, DateTime nullValue)
         {
             int age;
             if (laterDate == null)
@@ -55,16 +55,6 @@ namespace FTAnalyzer
             return age;
         }
 
-        public int MinAge
-        {
-            get { return minAge; }
-        }
-
-        public int MaxAge
-        {
-            get { return maxAge; }
-        }
-
         public override string ToString()
         {
             return age;
@@ -72,9 +62,9 @@ namespace FTAnalyzer
 
         public int CompareTo(Age that)
         {
-            if (this.minAge == that.minAge)
-                return this.maxAge.CompareTo(that.maxAge);
-            return this.minAge.CompareTo(that.minAge);
+            if (this.MinAge == that.MinAge)
+                return this.MaxAge - that.MaxAge;
+            return this.MinAge - that.MinAge;
         }
     }
 }

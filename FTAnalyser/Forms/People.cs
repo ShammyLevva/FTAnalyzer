@@ -70,7 +70,7 @@ namespace FTAnalyzer.Forms
                     {
                         if (f.husband != null && f.husband.BirthDate != FactDate.UNKNOWN_DATE)
                         {
-                            Age age = f.husband.getAge(child.BirthDate);
+                            Age age = f.husband.GetAge(child.BirthDate);
                             if (age.MinAge >= minAge && !dsInd.Contains(f.husband))
                             {
                                 dsInd.Add(f.husband);
@@ -80,7 +80,7 @@ namespace FTAnalyzer.Forms
                         }
                         if (f.wife != null && f.wife.BirthDate != FactDate.UNKNOWN_DATE)
                         {
-                            Age age = f.wife.getAge(child.BirthDate);
+                            Age age = f.wife.GetAge(child.BirthDate);
                             if (age.MinAge >= minAge && !dsInd.Contains(f.wife))
                             {
                                 dsInd.Add(f.wife);

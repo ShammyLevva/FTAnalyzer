@@ -1002,7 +1002,7 @@ namespace FTAnalyzer
                 foreach (Family f in families)
                 {
                     CensusFamily cf = new CensusFamily(f, censusDate);
-                    if (cf.process(censusDate, censusDone, includeResidence, lostCousinsCheck))
+                    if (cf.Process(censusDate, censusDone, includeResidence, lostCousinsCheck))
                         yield return cf;
                 }
             }

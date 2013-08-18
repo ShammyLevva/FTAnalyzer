@@ -39,12 +39,12 @@ namespace FTAnalyzer
                     {
                         if (f.husband != null && f.husband.BirthDate != FactDate.UNKNOWN_DATE)
                         {
-                            Age age = f.husband.getAge(child.BirthDate);
+                            Age age = f.husband.GetAge(child.BirthDate);
                             addAgeData(0, stats, age, child.Gender);
                         }
                         if (f.wife != null && f.wife.BirthDate != FactDate.UNKNOWN_DATE)
                         {
-                            Age age = f.wife.getAge(child.BirthDate);
+                            Age age = f.wife.GetAge(child.BirthDate);
                             addAgeData(1, stats, age, child.Gender);
                         }
                     }

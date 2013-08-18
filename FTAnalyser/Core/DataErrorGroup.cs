@@ -7,13 +7,12 @@ namespace FTAnalyzer
 {
     class DataErrorGroup
     {
-        string errorDescription;
-        List<DataError> errors;
+        private string errorDescription;
 
-        public DataErrorGroup(string description, List<DataError> errors)
+        public DataErrorGroup(string description, IList<DataError> errors)
         {
             this.errorDescription = description;
-            this.errors = errors;
+            this.Errors = errors;
         }
 
         public override string ToString()
@@ -21,6 +20,6 @@ namespace FTAnalyzer
             return errorDescription;
         }
 
-        public List<DataError> Errors { get { return errors; } }
+        public IList<DataError> Errors { get; private set; }
     }
 }

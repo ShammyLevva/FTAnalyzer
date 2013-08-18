@@ -98,7 +98,7 @@ namespace FTAnalyzer.Forms
                 DataGridViewCellStyle style = new DataGridViewCellStyle();
                 style.BackColor = highlighted ? Color.LightGray : Color.White;
                 style.ForeColor = cr.RelationType == Individual.DIRECT ? Color.Red : Color.Black;
-                style.Font = cr.isAlive ? boldFont : regularFont;
+                style.Font = cr.IsAlive ? boldFont : regularFont;
                 rowStyles.Add(r.Index, style);
             }
         }

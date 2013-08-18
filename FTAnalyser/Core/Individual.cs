@@ -361,7 +361,7 @@ namespace FTAnalyzer
         {
             get
             {
-                return getAge(DeathDate).MaxAge;
+                return GetAge(DeathDate).MaxAge;
             }
         }
 
@@ -565,21 +565,21 @@ namespace FTAnalyzer
 
         #region Age Functions
 
-        public Age getAge(FactDate when) {
+        public Age GetAge(FactDate when) {
             return new Age(this, when);
         }
         
         public Age getAge(DateTime when) {
             string now = FactDate.Format(FactDate.FULL, when);
-            return getAge(new FactDate(now));
+            return GetAge(new FactDate(now));
         }
         
         public int getMaxAge(FactDate when) {
-            return getAge(when).MaxAge;
+            return GetAge(when).MaxAge;
         }
         
         public int getMinAge(FactDate when) {
-            return getAge(when).MinAge;
+            return GetAge(when).MinAge;
         }
 
         public int getMaxAge(DateTime when)

@@ -33,10 +33,10 @@ namespace FTAnalyzer
 
         public Age Age
         {
-            get { return getAge(family.CensusDate); }
+            get { return GetAge(family.CensusDate); }
         }
 
-        public bool isAlive
+        public bool IsAlive
         {
             get { return family.CensusDate.isAfter(BirthDate) && family.CensusDate.isBefore(DeathDate); }
         }
@@ -50,7 +50,7 @@ namespace FTAnalyzer
         {
             if (!CensusLocation.isKnownCountry)
                 return true;
-            else if (Countries.isUnitedKingdom(location))
+            else if (Countries.IsUnitedKingdom(location))
                 return CensusLocation.isUnitedKingdom;
             else
                 return CensusLocation.Country.Equals(location);

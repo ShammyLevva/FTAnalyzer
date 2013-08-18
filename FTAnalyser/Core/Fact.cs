@@ -10,39 +10,34 @@ namespace FTAnalyzer
     public class Fact
     {
         public static readonly string ADOPTION = "ADOP", ANNULMENT = "ANUL", BAPTISM = "BAPM",
-                BAPTISM_LDS = "BAPL", BAR_MITZVAH = "BARM", BAS_MITZVAH = "BASM", BIRTH = "BIRT", 
-                BLESSING = "BLESS", BURIAL = "BURI", CASTE = "CAST", CENSUS = "CENS", 
-                CHRISTENING = "CHR", ADULT_CHRISTENING = "CHRA", CONFIRMATION = "CONF", 
+                BAPTISM_LDS = "BAPL", BAR_MITZVAH = "BARM", BAS_MITZVAH = "BASM", BIRTH = "BIRT",
+                BLESSING = "BLESS", BURIAL = "BURI", CASTE = "CAST", CENSUS = "CENS",
+                CHRISTENING = "CHR", ADULT_CHRISTENING = "CHRA", CONFIRMATION = "CONF",
                 CONFIRMATIONLDS = "CONL", CREMATION = "CREM", DEATH = "DEAT", PHYSICAL_DESC = "DSCR",
-                DIVORCE = "DIV", DIVORCE_FILED = "DIVF", EDUCATION = "EDUC", EMIGRATION = "EMIG", 
-                ENDOWMENT = "ENDL", ENGAGEMENT = "ENGA", FIRST_COMMUNION = "FCOM", 
-                GRADUATION = "GRAD", IMMIGRATION = "IMMI", NAT_ID_NO = "IDNO", 
-                NATIONAL_TRIBAL = "NATI", NUM_CHILDREN = "NCHI", NUM_MARRIAGE = "NMR", 
+                DIVORCE = "DIV", DIVORCE_FILED = "DIVF", EDUCATION = "EDUC", EMIGRATION = "EMIG",
+                ENDOWMENT = "ENDL", ENGAGEMENT = "ENGA", FIRST_COMMUNION = "FCOM",
+                GRADUATION = "GRAD", IMMIGRATION = "IMMI", NAT_ID_NO = "IDNO",
+                NATIONAL_TRIBAL = "NATI", NUM_CHILDREN = "NCHI", NUM_MARRIAGE = "NMR",
                 LEGATEE = "LEGA", MARRIAGE_BANN = "MARB", MARR_CONTRACT = "MARC",
                 MARR_LICENSE = "MARL", MARRIAGE = "MARR", MARR_SETTLEMENT = "MARS",
                 NATURALIZATION = "NATU", OCCUPATION = "OCCU", POSSESSIONS = "PROP", ORDINANCE = "ORDI",
                 ORDINATION = "ORDN", PROBATE = "PROB", RELIGION = "RELI", RESIDENCE = "RESI",
                 RETIREMENT = "RETI", SEALING_CHILD = "SLGC", SEALING_SPOUSE = "SLGS",
-                SOCIAL_SECURITY_NO = "SSN", NOBILITY_TITLE = "TITL", WILL = "WILL", 
+                SOCIAL_SECURITY_NO = "SSN", NOBILITY_TITLE = "TITL", WILL = "WILL",
                 MILITARY = "_MILT", ELECTION = "_ELEC", CUSTOM_FACT = "EVEN";
 
         public static readonly string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSE", FAMILYSEARCH = "*IGI",
-                CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT", 
+                CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT",
                 CHANGE = "*CHNG", LOSTCOUSINS = "*LOST";
 
-        private string factType;
         private FactDate date;
-        private string comment;
-        private string place;
-        private FactLocation location;
-        private List<FactSource> sources;
-        private bool certificatePresent;
 
         private static readonly Dictionary<string, string> CUSTOM_TAGS = new Dictionary<string, string>();
         private static readonly HashSet<string> COMMENT_FACTS = new HashSet<string>();
 
-        static Fact() {
+        static Fact()
+        {
             CUSTOM_TAGS.Add("IGI", FAMILYSEARCH);
             CUSTOM_TAGS.Add("Childless", CHILDLESS);
             CUSTOM_TAGS.Add("Contact", CONTACT);
@@ -81,7 +76,7 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("Census 1920", CENSUS);
             CUSTOM_TAGS.Add("Census 1930", CENSUS);
             CUSTOM_TAGS.Add("Census 1940", CENSUS);
-            
+
             COMMENT_FACTS.Add(OCCUPATION);
             COMMENT_FACTS.Add(RELIGION);
             COMMENT_FACTS.Add(MILITARY);
@@ -101,43 +96,47 @@ namespace FTAnalyzer
 
         private Fact()
         {
-            this.factType = "";
+            this.FactType = "";
             this.date = FactDate.UNKNOWN_DATE;
-            this.comment = "";
-            this.place = "";
-            this.location = new FactLocation();
-            this.sources = new List<FactSource>();
-            this.certificatePresent = false;
+            this.Comment = "";
+            this.Place = "";
+            this.Location = new FactLocation();
+            this.Sources = new List<FactSource>();
+            this.CertificatePresent = false;
         }
 
-        public Fact (XmlNode node, string factRef) 
-            :base()
+        public Fact(XmlNode node, string factRef)
+            : base()
         {
-            if (node != null) 
+            if (node != null)
             {
                 FamilyTree ft = FamilyTree.Instance;
                 try
                 {
-                    factType = FixFactTypes(node.Name);
-                    if (factType.Equals("EVEN"))
+                    FactType = FixFactTypes(node.Name);
+                    if (FactType.Equals("EVEN"))
                     {
                         string tag = FamilyTree.GetText(node, "TYPE");
-                        CUSTOM_TAGS.TryGetValue(tag, out factType);
-                        if (factType == null)
-                            factType = FixFactTypes(tag);
-                        if (factType == null)
+                        string factType;
+                        if (CUSTOM_TAGS.TryGetValue(tag, out factType))
+                            FactType = factType;
+                        else
                         {
-                            factType = Fact.UNKNOWN;
-                            FamilyTree.Instance.XmlErrorBox.AppendText("Recorded unknown fact type " + tag + "\n");
+                            FactType = FixFactTypes(tag);
+                            if (FactType == null)
+                            {
+                                FactType = Fact.UNKNOWN;
+                                FamilyTree.Instance.XmlErrorBox.AppendText("Recorded unknown fact type " + tag + "\n");
+                            }
                         }
                     }
                     string factDate = FamilyTree.GetText(node, "DATE");
                     date = new FactDate(factDate, factRef);
-                    setCommentAndLocation(factType, FamilyTree.GetText(node), FamilyTree.GetText(node, "PLAC"), 
+                    SetCommentAndLocation(FactType, FamilyTree.GetText(node), FamilyTree.GetText(node, "PLAC"),
                         FamilyTree.GetText(node, "PLAC/MAP/LATI"), FamilyTree.GetText(node, "PLAC/MAP/LONG"));
 
                     // now iterate through source elements of the fact finding all sources
-                    sources = new List<FactSource>();
+                    Sources = new List<FactSource>();
                     XmlNodeList list = node.SelectNodes("SOUR");
                     foreach (XmlNode n in list)
                     {
@@ -146,17 +145,17 @@ namespace FTAnalyzer
                             string srcref = n.Attributes["REF"].Value;
                             FactSource source = ft.getGedcomSource(srcref);
                             if (source != null)
-                                sources.Add(source);
+                                Sources.Add(source);
                             else
                                 ft.XmlErrorBox.AppendText("Source " + srcref + " not found." + "\n");
                         }
                     }
 
-                    if (factType == DEATH)
+                    if (FactType == DEATH)
                     {
-                        comment = FamilyTree.GetText(node, "CAUS");
+                        Comment = FamilyTree.GetText(node, "CAUS");
                     }
-                    this.certificatePresent = setCertificatePresent();
+                    this.CertificatePresent = SetCertificatePresent();
                 }
                 catch (Exception ex)
                 {
@@ -166,58 +165,43 @@ namespace FTAnalyzer
             }
         }
 
-        public Fact (string factType, FactDate date) 
+        public Fact(string factType, FactDate date)
             : base()
         {
-            this.factType = factType;
+            this.FactType = factType;
             this.date = date;
-            this.comment = "";
-            this.place = "";
-            this.location = FamilyTree.Instance.GetLocation(place,"","");
+            this.Comment = "";
+            this.Place = "";
+            this.Location = FamilyTree.Instance.GetLocation(Place, "", "");
         }
 
         #endregion
 
         #region Properties
 
-        public FactLocation Location {
-            get { return location; }
-        }
+        public FactLocation Location { get; private set; }
 
-        public string Place
+        public string Place { get; private set; }
+
+        public string Comment { get; private set; }
+
+        public FactDate FactDate { get; private set; }
+
+        public string FactType { get; private set; }
+
+        public string Datestring
         {
-            get { return place; }
-        }
-
-        public string Comment
-        {
-            get { return comment; }
-        }
-
-        public FactDate FactDate {
-            get { return date; }
-        }
-
-        public string FactType {
-            get { return factType; }
-        }
-
-        public string Datestring {
             get { return this.date == null ? "" : this.date.Datestring; }
         }
 
-        public List<FactSource> Sources {
-            get { return sources; }
-        }
+        public IList<FactSource> Sources { get; private set; }
 
-        public string Country {
-            get { return location == null ? "Scotland" : location.Country; }
-        }
-
-        public bool CertificatePresent
+        public string Country
         {
-            get { return certificatePresent; }
+            get { return Location == null ? "Scotland" : Location.Country; }
         }
+
+        public bool CertificatePresent { get; private set; }
 
         #endregion
 
@@ -229,38 +213,46 @@ namespace FTAnalyzer
             return tag;
         }
 
-        private void setCommentAndLocation (string factType, string factComment, string factPlace, string latitude, string longitude) {
+        private void SetCommentAndLocation(string factType, string factComment, string factPlace, string latitude, string longitude)
+        {
             if (factComment.Length == 0 && factPlace.Length > 0)
             {
                 int slash = factPlace.IndexOf("/");
-                if (slash >= 0) {
-                    comment = factPlace.Substring(0, slash).Trim();
+                if (slash >= 0)
+                {
+                    Comment = factPlace.Substring(0, slash).Trim();
                     // If slash occurs at end of string, location is empty.
-                    place = (slash == factPlace.Length - 1) ? "" : factPlace.Substring(slash + 1).Trim();
-                } else if (Fact.COMMENT_FACTS.Contains(factType)) {
-                    // we have a comment rather than a location
-                    comment = factPlace;
-                    place = "";
-                } else {
-                    comment = "";
-                    place = factPlace;
+                    Place = (slash == factPlace.Length - 1) ? "" : factPlace.Substring(slash + 1).Trim();
                 }
-            } else {
-                comment = factComment;
-                place = factPlace;
+                else if (Fact.COMMENT_FACTS.Contains(factType))
+                {
+                    // we have a comment rather than a location
+                    Comment = factPlace;
+                    Place = "";
+                }
+                else
+                {
+                    Comment = "";
+                    Place = factPlace;
+                }
             }
-            location = FamilyTree.Instance.GetLocation(place, latitude, longitude);
+            else
+            {
+                Comment = factComment;
+                Place = factPlace;
+            }
+            Location = FamilyTree.Instance.GetLocation(Place, latitude, longitude);
         }
 
-        private bool setCertificatePresent() {
-	        foreach (FactSource fs in sources) {
-	    	    bool result = (factType.Equals(Fact.BIRTH) && fs.isBirthCert()) ||
-	    		    (factType.Equals(Fact.DEATH) && fs.isDeathCert()) ||
-	    		    (factType.Equals(Fact.MARRIAGE) && fs.isMarriageCert()) ||
-	    		    (factType.Equals(Fact.CENSUS) && fs.isCensusCert());
-                if (result) return true;
-	        }
-	        return false;
+        private bool SetCertificatePresent()
+        {
+            return Sources.Any(fs =>
+            {
+                return (FactType.Equals(Fact.BIRTH) && fs.isBirthCert()) ||
+                    (FactType.Equals(Fact.DEATH) && fs.isDeathCert()) ||
+                    (FactType.Equals(Fact.MARRIAGE) && fs.isMarriageCert()) ||
+                    (FactType.Equals(Fact.CENSUS) && fs.isCensusCert());
+            });
         }
     }
 }

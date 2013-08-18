@@ -38,17 +38,17 @@ namespace FTAnalyzer
             return location;
         }
 
-        public static bool isUnitedKingdom(string country)
+        public static bool IsUnitedKingdom(string country)
         {
             return UK_COUNTRIES.Contains(country);
         }
 
-        public static bool isKnownCountry(string country)
+        public static bool IsKnownCountry(string country)
         {
             return KNOWN_COUNTRIES.Contains(country);
         }
 
-        public static bool isCensusCountry(string country)
+        public static bool IsCensusCountry(string country)
         {
             return CENSUS_COUNTRIES.Contains(country);
         }

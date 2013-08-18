@@ -473,14 +473,14 @@ namespace FTAnalyzer
 
         public bool isKnownCountry
         {
-            get { return Countries.isKnownCountry(country); }
+            get { return Countries.IsKnownCountry(country); }
         }
 
         public bool isUnitedKingdom
         {
             get
             {
-                return Countries.isUnitedKingdom(country);
+                return Countries.IsUnitedKingdom(country);
             }
         }
 
@@ -488,9 +488,9 @@ namespace FTAnalyzer
         {
             get
             {
-                if (Countries.isUnitedKingdom(country))
+                if (Countries.IsUnitedKingdom(country))
                     return Countries.UNITED_KINGDOM;
-                else if (Countries.isCensusCountry(country))
+                else if (Countries.IsCensusCountry(country))
                     return country;
                 else
                     return Countries.UNKNOWN_COUNTRY;
@@ -523,7 +523,7 @@ namespace FTAnalyzer
 
         public bool SupportedLocation(int level)
         {
-            if (Countries.isCensusCountry(country))
+            if (Countries.IsCensusCountry(country))
             {
                 if (level == COUNTRY) return true;
                 // check region is valid if so return true
