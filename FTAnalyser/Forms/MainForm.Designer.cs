@@ -577,9 +577,9 @@
             // 
             // btnBingOSMap
             // 
-            this.btnBingOSMap.Location = new System.Drawing.Point(709, 6);
+            this.btnBingOSMap.Location = new System.Drawing.Point(721, 1);
             this.btnBingOSMap.Name = "btnBingOSMap";
-            this.btnBingOSMap.Size = new System.Drawing.Size(98, 23);
+            this.btnBingOSMap.Size = new System.Drawing.Size(98, 22);
             this.btnBingOSMap.TabIndex = 3;
             this.btnBingOSMap.Text = "Show OS Map";
             this.btnBingOSMap.UseVisualStyleBackColor = true;
@@ -587,9 +587,9 @@
             // 
             // btnShowMap
             // 
-            this.btnShowMap.Location = new System.Drawing.Point(813, 6);
+            this.btnShowMap.Location = new System.Drawing.Point(825, 1);
             this.btnShowMap.Name = "btnShowMap";
-            this.btnShowMap.Size = new System.Drawing.Size(98, 23);
+            this.btnShowMap.Size = new System.Drawing.Size(98, 22);
             this.btnShowMap.TabIndex = 2;
             this.btnShowMap.Text = "Show Map";
             this.btnShowMap.UseVisualStyleBackColor = true;
@@ -597,19 +597,18 @@
             // 
             // tabCtrlLocations
             // 
-            this.tabCtrlLocations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabCtrlLocations.Controls.Add(this.tabCountries);
             this.tabCtrlLocations.Controls.Add(this.tabRegions);
             this.tabCtrlLocations.Controls.Add(this.tabParishes);
             this.tabCtrlLocations.Controls.Add(this.tabAddresses);
             this.tabCtrlLocations.Controls.Add(this.tabPlaces);
-            this.tabCtrlLocations.Location = new System.Drawing.Point(2, 18);
+            this.tabCtrlLocations.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabCtrlLocations.Location = new System.Drawing.Point(3, 3);
             this.tabCtrlLocations.Name = "tabCtrlLocations";
             this.tabCtrlLocations.SelectedIndex = 0;
-            this.tabCtrlLocations.Size = new System.Drawing.Size(929, 388);
+            this.tabCtrlLocations.Size = new System.Drawing.Size(925, 396);
             this.tabCtrlLocations.TabIndex = 0;
+            this.tabCtrlLocations.SelectedIndexChanged += new System.EventHandler(this.tabCtrlLocations_SelectedIndexChanged);
             // 
             // tabCountries
             // 
@@ -617,7 +616,7 @@
             this.tabCountries.Location = new System.Drawing.Point(4, 22);
             this.tabCountries.Name = "tabCountries";
             this.tabCountries.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCountries.Size = new System.Drawing.Size(921, 362);
+            this.tabCountries.Size = new System.Drawing.Size(917, 370);
             this.tabCountries.TabIndex = 0;
             this.tabCountries.Text = "Countries";
             this.tabCountries.ToolTipText = "Double click on Country name to see list of individuals with that Country.";
@@ -633,8 +632,9 @@
             this.dgCountries.Location = new System.Drawing.Point(3, 3);
             this.dgCountries.MultiSelect = false;
             this.dgCountries.Name = "dgCountries";
+            this.dgCountries.RowHeadersVisible = false;
             this.dgCountries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCountries.Size = new System.Drawing.Size(915, 356);
+            this.dgCountries.Size = new System.Drawing.Size(911, 364);
             this.dgCountries.TabIndex = 0;
             this.toolTips.SetToolTip(this.dgCountries, "Double click on Country name to see list of individuals with that Country.");
             this.dgCountries.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCountries_CellDoubleClick);
@@ -645,7 +645,7 @@
             this.tabRegions.Location = new System.Drawing.Point(4, 22);
             this.tabRegions.Name = "tabRegions";
             this.tabRegions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRegions.Size = new System.Drawing.Size(921, 362);
+            this.tabRegions.Size = new System.Drawing.Size(917, 370);
             this.tabRegions.TabIndex = 1;
             this.tabRegions.Text = "Regions";
             this.tabRegions.ToolTipText = "Double click on Region name to see list of individuals with that Region.";
@@ -661,8 +661,9 @@
             this.dgRegions.Location = new System.Drawing.Point(3, 3);
             this.dgRegions.MultiSelect = false;
             this.dgRegions.Name = "dgRegions";
+            this.dgRegions.RowHeadersVisible = false;
             this.dgRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgRegions.Size = new System.Drawing.Size(915, 356);
+            this.dgRegions.Size = new System.Drawing.Size(911, 364);
             this.dgRegions.TabIndex = 1;
             this.toolTips.SetToolTip(this.dgRegions, "Double click on Region name to see list of individuals with that Region.");
             this.dgRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgRegions_CellDoubleClick);
@@ -672,7 +673,8 @@
             this.tabParishes.Controls.Add(this.dgParishes);
             this.tabParishes.Location = new System.Drawing.Point(4, 22);
             this.tabParishes.Name = "tabParishes";
-            this.tabParishes.Size = new System.Drawing.Size(921, 362);
+            this.tabParishes.Padding = new System.Windows.Forms.Padding(3);
+            this.tabParishes.Size = new System.Drawing.Size(917, 370);
             this.tabParishes.TabIndex = 2;
             this.tabParishes.Text = "Parishes";
             this.tabParishes.ToolTipText = "Double click on \'Parish\' name to see list of individuals with that parish/area.";
@@ -685,11 +687,12 @@
             this.dgParishes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgParishes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgParishes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgParishes.Location = new System.Drawing.Point(0, 0);
+            this.dgParishes.Location = new System.Drawing.Point(3, 3);
             this.dgParishes.MultiSelect = false;
             this.dgParishes.Name = "dgParishes";
+            this.dgParishes.RowHeadersVisible = false;
             this.dgParishes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgParishes.Size = new System.Drawing.Size(921, 362);
+            this.dgParishes.Size = new System.Drawing.Size(911, 364);
             this.dgParishes.TabIndex = 1;
             this.dgParishes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgParishes_CellDoubleClick);
             // 
@@ -698,7 +701,8 @@
             this.tabAddresses.Controls.Add(this.dgAddresses);
             this.tabAddresses.Location = new System.Drawing.Point(4, 22);
             this.tabAddresses.Name = "tabAddresses";
-            this.tabAddresses.Size = new System.Drawing.Size(921, 362);
+            this.tabAddresses.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAddresses.Size = new System.Drawing.Size(917, 370);
             this.tabAddresses.TabIndex = 3;
             this.tabAddresses.Text = "Addresses";
             this.tabAddresses.ToolTipText = "Double click on Address name to see list of individuals with that Address.";
@@ -711,11 +715,12 @@
             this.dgAddresses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgAddresses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgAddresses.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgAddresses.Location = new System.Drawing.Point(0, 0);
+            this.dgAddresses.Location = new System.Drawing.Point(3, 3);
             this.dgAddresses.MultiSelect = false;
             this.dgAddresses.Name = "dgAddresses";
+            this.dgAddresses.RowHeadersVisible = false;
             this.dgAddresses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgAddresses.Size = new System.Drawing.Size(921, 362);
+            this.dgAddresses.Size = new System.Drawing.Size(911, 364);
             this.dgAddresses.TabIndex = 1;
             this.dgAddresses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAddresses_CellDoubleClick);
             // 
@@ -725,7 +730,7 @@
             this.tabPlaces.Location = new System.Drawing.Point(4, 22);
             this.tabPlaces.Name = "tabPlaces";
             this.tabPlaces.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlaces.Size = new System.Drawing.Size(921, 362);
+            this.tabPlaces.Size = new System.Drawing.Size(917, 370);
             this.tabPlaces.TabIndex = 4;
             this.tabPlaces.Text = "Places";
             this.tabPlaces.ToolTipText = "Double click on Address name to see list of individuals with that Place";
@@ -741,8 +746,9 @@
             this.dgPlaces.Location = new System.Drawing.Point(3, 3);
             this.dgPlaces.MultiSelect = false;
             this.dgPlaces.Name = "dgPlaces";
+            this.dgPlaces.RowHeadersVisible = false;
             this.dgPlaces.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgPlaces.Size = new System.Drawing.Size(915, 356);
+            this.dgPlaces.Size = new System.Drawing.Size(911, 364);
             this.dgPlaces.TabIndex = 2;
             this.dgPlaces.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgPlaces_CellDoubleClick);
             // 
@@ -1265,50 +1271,38 @@
             // 
             // pbFamilySearch
             // 
-            //this.pbFamilySearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            //| System.Windows.Forms.AnchorStyles.Right)));
-            //this.pbFamilySearch.Location = new System.Drawing.Point(8, 151);
-            //this.pbFamilySearch.Name = "pbFamilySearch";
-            //this.pbFamilySearch.Size = new System.Drawing.Size(915, 20);
-            //this.pbFamilySearch.TabIndex = 6;
-            //this.pbFamilySearch.Visible = false;
+            this.pbFamilySearch.Location = new System.Drawing.Point(0, 0);
+            this.pbFamilySearch.Name = "pbFamilySearch";
+            this.pbFamilySearch.Size = new System.Drawing.Size(100, 23);
+            this.pbFamilySearch.TabIndex = 24;
             // 
             // btnFamilySearchMarriageSearch
             // 
-            //this.btnFamilySearchMarriageSearch.Location = new System.Drawing.Point(8, 118);
-            //this.btnFamilySearchMarriageSearch.Name = "btnFamilySearchMarriageSearch";
-            //this.btnFamilySearchMarriageSearch.Size = new System.Drawing.Size(123, 27);
-            //this.btnFamilySearchMarriageSearch.TabIndex = 5;
-            //this.btnFamilySearchMarriageSearch.Text = "Start Marriage Search";
-            //this.btnFamilySearchMarriageSearch.UseVisualStyleBackColor = true;
-            //this.btnFamilySearchMarriageSearch.Click += new System.EventHandler(this.btnFamilySearchMarriageSearch_Click);
+            this.btnFamilySearchMarriageSearch.Location = new System.Drawing.Point(0, 0);
+            this.btnFamilySearchMarriageSearch.Name = "btnFamilySearchMarriageSearch";
+            this.btnFamilySearchMarriageSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnFamilySearchMarriageSearch.TabIndex = 25;
             // 
             // btnFamilySearchChildrenSearch
             // 
-            //this.btnFamilySearchChildrenSearch.Location = new System.Drawing.Point(137, 118);
-            //this.btnFamilySearchChildrenSearch.Name = "btnFamilySearchChildrenSearch";
-            //this.btnFamilySearchChildrenSearch.Size = new System.Drawing.Size(123, 27);
-            //this.btnFamilySearchChildrenSearch.TabIndex = 4;
-            //this.btnFamilySearchChildrenSearch.Text = "Start Children Search";
-            //this.btnFamilySearchChildrenSearch.UseVisualStyleBackColor = true;
-            //this.btnFamilySearchChildrenSearch.Click += new System.EventHandler(this.btnFamilySearchChildrenSearch_Click);
+            this.btnFamilySearchChildrenSearch.Location = new System.Drawing.Point(0, 0);
+            this.btnFamilySearchChildrenSearch.Name = "btnFamilySearchChildrenSearch";
+            this.btnFamilySearchChildrenSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnFamilySearchChildrenSearch.TabIndex = 26;
             // 
             // btnFamilySearchFolderBrowse
             // 
-            //this.btnFamilySearchFolderBrowse.Location = new System.Drawing.Point(515, 11);
-            //this.btnFamilySearchFolderBrowse.Name = "btnFamilySearchFolderBrowse";
-            //this.btnFamilySearchFolderBrowse.Size = new System.Drawing.Size(77, 21);
-            //this.btnFamilySearchFolderBrowse.TabIndex = 2;
-            //this.btnFamilySearchFolderBrowse.Text = "Browse ...";
-            //this.btnFamilySearchFolderBrowse.UseVisualStyleBackColor = true;
-            //this.btnFamilySearchFolderBrowse.Click += new System.EventHandler(this.btnFamilySearchFolderBrowse_Click);
+            this.btnFamilySearchFolderBrowse.Location = new System.Drawing.Point(0, 0);
+            this.btnFamilySearchFolderBrowse.Name = "btnFamilySearchFolderBrowse";
+            this.btnFamilySearchFolderBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btnFamilySearchFolderBrowse.TabIndex = 27;
             // 
             // txtFamilySearchfolder
             // 
-            //this.txtFamilySearchfolder.Location = new System.Drawing.Point(137, 12);
-            //this.txtFamilySearchfolder.Name = "txtFamilySearchfolder";
-            //this.txtFamilySearchfolder.Size = new System.Drawing.Size(372, 20);
-            //this.txtFamilySearchfolder.TabIndex = 1;
+            this.txtFamilySearchfolder.Location = new System.Drawing.Point(0, 0);
+            this.txtFamilySearchfolder.Name = "txtFamilySearchfolder";
+            this.txtFamilySearchfolder.Size = new System.Drawing.Size(100, 20);
+            this.txtFamilySearchfolder.TabIndex = 28;
             // 
             // label3
             // 
@@ -1594,8 +1588,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(939, 480);
             this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.tabSelector);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.tabSelector);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";

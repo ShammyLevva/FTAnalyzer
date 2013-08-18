@@ -280,90 +280,41 @@ namespace FTAnalyzer
             get { return locations.Values; }
         }
 
+        private IEnumerable<IDisplayLocation> GetDisplayLocations(int level)
+        {
+            List<IDisplayLocation> result = new List<IDisplayLocation>();
+            foreach (FactLocation loc in locations.Values)
+            {
+                FactLocation c = loc.GetLocation(level);
+                if (c.Country != string.Empty && !result.Contains(c)) result.Add(c);
+            }
+            return result;
+        }
+
         public IEnumerable<IDisplayLocation> AllCountries
         {
-            get
-            {
-                List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in locations.Values.ToList())
-                {
-                    if (loc.Country != string.Empty)
-                    {
-                        FactLocation c = new FactLocation(loc.Country);
-                        if (!result.Contains(c))
-                            result.Add(c);
-                    }
-                }
-                return result;
-            }
+            get { return GetDisplayLocations(FactLocation.COUNTRY); }
         }
 
         public IEnumerable<IDisplayLocation> AllRegions
         {
-            get
-            {
-                List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in locations.Values.ToList())
-                {
-                    if (loc.Region != string.Empty)
-                    {
-                        FactLocation r = new FactLocation(loc.Region + ", " + loc.Country);
-                        if (!result.Contains(r))
-                            result.Add(r);
-                    }
-                }
-                return result;
-            }
+            get { return GetDisplayLocations(FactLocation.REGION); }
         }
 
         public IEnumerable<IDisplayLocation> AllParishes
         {
-            get
-            {
-                List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in locations.Values.ToList())
-                {
-                    if (loc.Parish != string.Empty)
-                    {
-                        FactLocation p = new FactLocation(loc.Parish + ", " + loc.Region + ", " + loc.Country);
-                        if (!result.Contains(p))
-                            result.Add(p);
-                    }
-                }
-                return result;
-            }
+            get { return GetDisplayLocations(FactLocation.PARISH); }
+
         }
 
         public IEnumerable<IDisplayLocation> AllAddresses
         {
-            get
-            {
-                List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in locations.Values.ToList())
-                {
-                    if (loc.Address != string.Empty)
-                    {
-                        FactLocation a = new FactLocation(loc.Address + ", " + loc.Parish + ", " + loc.Region + ", " + loc.Country);
-                        if (!result.Contains(a))
-                            result.Add(a);
-                    }
-                }
-                return result;
-            }
+            get { return GetDisplayLocations(FactLocation.ADDRESS); }
         }
 
         public IEnumerable<IDisplayLocation> AllPlaces
         {
-            get
-            {
-                List<IDisplayLocation> result = new List<IDisplayLocation>();
-                foreach (FactLocation loc in locations.Values.ToList())
-                {
-                    if (loc.Place != string.Empty && !result.Contains(loc))
-                        result.Add(loc);
-                }
-                return result;
-            }
+            get { return GetDisplayLocations(FactLocation.PLACE); }
         }
 
         public int IndividualCount { get { return individuals.Count; } }

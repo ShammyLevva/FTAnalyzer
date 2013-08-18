@@ -254,6 +254,7 @@ namespace FTAnalyzer
                     dgParishes.DataSource = parishes;
                     dgAddresses.DataSource = addresses;
                     dgPlaces.DataSource = places;
+                    tabCtrlLocations.SelectedTab.Controls[0].Focus();
                 }
                 else if (tabSelector.SelectedTab == tabFamilySearch)
                 {
@@ -1346,6 +1347,12 @@ namespace FTAnalyzer
         {
             this.Close();
             Application.Exit();
+        }
+
+        private void tabCtrlLocations_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TabPage current = tabCtrlLocations.SelectedTab;
+            current.Controls[0].Focus();
         }
     }
 }
