@@ -297,23 +297,32 @@ namespace FTAnalyzer
         {
             if (factComment.Length == 0 && factPlace.Length > 0)
             {
-                int slash = factPlace.IndexOf("/");
-                if (slash >= 0)
+                string c = factPlace.Substring(factPlace.Length - 1);
+                if (c == "/")
                 {
-                    Comment = factPlace.Substring(0, slash).Trim();
-                    // If slash occurs at end of string, location is empty.
-                    Place = (slash == factPlace.Length - 1) ? "" : factPlace.Substring(slash + 1).Trim();
-                }
-                else if (Fact.COMMENT_FACTS.Contains(factType))
-                {
-                    // we have a comment rather than a location
-                    Comment = factPlace;
+                    Comment = factPlace.Substring(0, factPlace.Length - 1);
                     Place = "";
                 }
                 else
                 {
-                    Comment = "";
-                    Place = factPlace;
+                    int slash = factPlace.IndexOf("/");
+                    if (slash >= 0)
+                    {
+                        Comment = factPlace.Substring(0, slash).Trim();
+                        // If slash occurs at end of string, location is empty.
+                        Place = (slash == factPlace.Length - 1) ? "" : factPlace.Substring(slash + 1).Trim();
+                    }
+                    else if (Fact.COMMENT_FACTS.Contains(factType))
+                    {
+                        // we have a comment rather than a location
+                        Comment = factPlace;
+                        Place = "";
+                    }
+                    else
+                    {
+                        Comment = "";
+                        Place = factPlace;
+                    }
                 }
             }
             else
