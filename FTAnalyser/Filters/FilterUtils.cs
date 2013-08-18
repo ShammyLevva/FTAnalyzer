@@ -64,7 +64,7 @@ namespace FTAnalyzer.Filters
 
         public static Predicate<T> DateFilter<T>(Func<T, FactDate> f, FactDate d)
         {
-            return x => f(x).overlaps(d);
+            return x => f(x).Overlaps(d);
         }
 
         public static Predicate<T> IncompleteDataFilter<T>(int level, Predicate<T> certificatePresent,
@@ -75,7 +75,7 @@ namespace FTAnalyzer.Filters
                 if (certificatePresent(t))
                     return false;
                 FactDate fd = filterDate(t);
-                if (fd == null || !fd.isExact())
+                if (fd == null || !fd.IsExact())
                     return true;
                 FactLocation l = filterLocation(fd, t);
                 switch (level)

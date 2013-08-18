@@ -61,7 +61,7 @@ namespace FTAnalyzer
         }
         
         public string ParentsMarriageDate {
-            get { return (parentsMarriage == null) ? "" : parentsMarriage.FactDate.Datestring; }
+            get { return (parentsMarriage == null) ? "" : parentsMarriage.FactDate.DateString; }
         }
         
         public string ParentsMarriageLocation {

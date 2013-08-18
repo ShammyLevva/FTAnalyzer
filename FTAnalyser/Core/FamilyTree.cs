@@ -441,7 +441,7 @@ namespace FTAnalyzer
             return ind.FamiliesAsParent.Any(f =>
             {
                 FactDate marriage = f.getPreferredFactDate(Fact.MARRIAGE);
-                return (marriage != null && marriage.isBefore(fd));
+                return (marriage != null && marriage.IsBefore(fd));
             });
         }
 
@@ -516,7 +516,7 @@ namespace FTAnalyzer
         {
             FactDate deathDate = indiv.DeathDate;
             FactDate toAdd = null;
-            if (deathDate != FactDate.UNKNOWN_DATE && deathDate.Type != FactDate.FactDateType.ABT && !deathDate.isExact())
+            if (deathDate != FactDate.UNKNOWN_DATE && deathDate.DateType != FactDate.FactDateType.ABT && !deathDate.IsExact())
             {
                 DateTime maxLiving = GetMaxLivingDate(indiv);
                 DateTime minDeath = GetMinDeathDate(indiv);
@@ -526,7 +526,7 @@ namespace FTAnalyzer
                     // so add to the list of loose deaths
                     if (minDeath < deathDate.EndDate)
                         toAdd = new FactDate(maxLiving, minDeath);
-                    else if (deathDate.Type == FactDate.FactDateType.BEF && minDeath != FactDate.MAXDATE
+                    else if (deathDate.DateType == FactDate.FactDateType.BEF && minDeath != FactDate.MAXDATE
                           && deathDate.EndDate != FactDate.MAXDATE
                           && deathDate.EndDate.AddYears(1) == minDeath)
                         toAdd = new FactDate(maxLiving, minDeath);
@@ -579,7 +579,7 @@ namespace FTAnalyzer
             foreach (Family fam in indfam)
             {
                 FactDate marriageDate = fam.getPreferredFactDate(Fact.MARRIAGE);
-                if (marriageDate.StartDate > maxdate && !marriageDate.isLongYearSpan())
+                if (marriageDate.StartDate > maxdate && !marriageDate.IsLongYearSpan())
                 {
                     maxdate = marriageDate.StartDate;
                 }
@@ -639,8 +639,8 @@ namespace FTAnalyzer
         {
             FactDate deathDate = indiv.DeathDate;
             DateTime now = DateTime.Now;
-            FactDate.FactDateType deathDateType = deathDate.Type;
-            FactDate.FactDateType birthDateType = indiv.BirthDate.Type;
+            FactDate.FactDateType deathDateType = deathDate.DateType;
+            FactDate.FactDateType birthDateType = indiv.BirthDate.DateType;
             DateTime minDeath = indiv.BirthDate.EndDate;
             if (minDeath.Year == 1) // filter out births where no year specified
                 minDeath = FactDate.MAXDATE;
@@ -1057,7 +1057,7 @@ namespace FTAnalyzer
                 if (!blnDirectBlood || (blnDirectBlood && i.isBloodDirect))
                 {
                     // valid to add check LC status && age within range
-                    if (!i.BirthDate.isAfter(CensusDate.UKCENSUS1911) && !i.DeathDate.isBefore(CensusDate.UKCENSUS1841))
+                    if (!i.BirthDate.IsAfter(CensusDate.UKCENSUS1911) && !i.DeathDate.IsBefore(CensusDate.UKCENSUS1841))
                     {
                         //born & died within census periods so we can add them to result
                         result.Add(i);
@@ -1084,11 +1084,11 @@ namespace FTAnalyzer
                 {
                     if (ind.DeathDate != FactDate.UNKNOWN_DATE)
                     {
-                        if (ind.BirthDate.isAfter(ind.DeathDate))
+                        if (ind.BirthDate.IsAfter(ind.DeathDate))
                             errors[0].Add(new DataError(ind, "Died " + ind.DeathDate + " before born"));
-                        if (ind.BurialDate != null && ind.BirthDate.isAfter(ind.BurialDate))
+                        if (ind.BurialDate != null && ind.BirthDate.IsAfter(ind.BurialDate))
                             errors[0].Add(new DataError(ind, "Buried " + ind.BurialDate + " before born"));
-                        if (ind.BurialDate != null && ind.BurialDate.isBefore(ind.DeathDate) && !ind.BurialDate.overlaps(ind.DeathDate))
+                        if (ind.BurialDate != null && ind.BurialDate.IsBefore(ind.DeathDate) && !ind.BurialDate.Overlaps(ind.DeathDate))
                             errors[7].Add(new DataError(ind, "Buried " + ind.BurialDate + " before died " + ind.DeathDate));
                         int minAge = ind.getMinAge(ind.DeathDate);
                         if (minAge > 110)
@@ -1096,7 +1096,7 @@ namespace FTAnalyzer
                     }
                     foreach (Fact f in ind.AllFacts)
                     {
-                        if (f.FactType != Fact.BIRTH && f.FactDate.isBefore(ind.BirthDate))
+                        if (f.FactType != Fact.BIRTH && f.FactDate.IsBefore(ind.BirthDate))
                             errors[9].Add(new DataError(ind, f.FactType + " fact recorded: " + f.FactDate + " before individual was born"));
                     }
                     foreach (Family asChild in ind.FamiliesAsChild)
@@ -1112,8 +1112,8 @@ namespace FTAnalyzer
                                 errors[5].Add(new DataError(ind, "Father " + father.Name + " born " + father.BirthDate + " is less than 13 yrs old when individual was born"));
                             if (father.DeathDate != FactDate.UNKNOWN_DATE && ind.BirthDate != FactDate.UNKNOWN_DATE)
                             {
-                                FactDate conception = ind.BirthDate.subtractMonths(9);
-                                if (father.DeathDate.isBefore(conception))
+                                FactDate conception = ind.BirthDate.SubtractMonths(9);
+                                if (father.DeathDate.IsBefore(conception))
                                     errors[4].Add(new DataError(ind, "Father " + father.Name + " died " + father.DeathDate + " more than 9 months before individual was born"));
                             }
                         }
@@ -1126,7 +1126,7 @@ namespace FTAnalyzer
                                 errors[2].Add(new DataError(ind, "Mother " + mother.Name + " born " + mother.BirthDate + " is more than 60 yrs old when individual was born"));
                             if (maxAge < 13)
                                 errors[6].Add(new DataError(ind, "Mother " + mother.Name + " born " + mother.BirthDate + " is less than 13 yrs old when individual was born"));
-                            if (mother.DeathDate != FactDate.UNKNOWN_DATE && mother.DeathDate.isBefore(ind.BirthDate))
+                            if (mother.DeathDate != FactDate.UNKNOWN_DATE && mother.DeathDate.IsBefore(ind.BirthDate))
                                 errors[3].Add(new DataError(ind, "Mother " + mother.Name + " died " + mother.DeathDate + " which is before individual was born"));
                         }
                     }
@@ -1135,9 +1135,9 @@ namespace FTAnalyzer
                         Individual spouse = asParent.Spouse(ind);
                         if (asParent.MarriageDate != null && spouse != null)
                         {
-                            if (ind.DeathDate != null && asParent.MarriageDate.isAfter(ind.DeathDate))
+                            if (ind.DeathDate != null && asParent.MarriageDate.IsAfter(ind.DeathDate))
                                 errors[10].Add(new DataError(ind, "Marriage to " + spouse.Name + " in " + asParent.MarriageDate + " is after individual died " + ind.DeathDate));
-                            if (spouse.DeathDate != null && asParent.MarriageDate.isAfter(spouse.DeathDate))
+                            if (spouse.DeathDate != null && asParent.MarriageDate.IsAfter(spouse.DeathDate))
                                 errors[11].Add(new DataError(ind, "Marriage to " + spouse.Name + " in " + asParent.MarriageDate + " is after spouse died " + spouse.DeathDate));
                             int maxAge = ind.getMaxAge(asParent.MarriageDate);
                             if (maxAge < 13)

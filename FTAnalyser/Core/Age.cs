@@ -13,7 +13,7 @@ namespace FTAnalyzer
 
         public Age(Individual ind, FactDate when)
         {
-            if (when.isAfter(ind.DeathDate))
+            if (when.IsAfter(ind.DeathDate))
                 when = ind.DeathDate;
             MinAge = GetAge(ind.BirthDate.EndDate, when.StartDate, FactDate.MINDATE);
             MaxAge = GetAge(ind.BirthDate.StartDate, when.EndDate, FactDate.MAXDATE);

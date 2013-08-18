@@ -38,7 +38,7 @@ namespace FTAnalyzer
 
         public bool IsAlive
         {
-            get { return family.CensusDate.isAfter(BirthDate) && family.CensusDate.isBefore(DeathDate); }
+            get { return family.CensusDate.IsAfter(BirthDate) && family.CensusDate.IsBefore(DeathDate); }
         }
 
         public string CensusSurname

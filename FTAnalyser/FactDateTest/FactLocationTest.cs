@@ -61,7 +61,7 @@ namespace FactDateTest
         #endregion
 
         [TestMethod]
-        public void TestMethod1()
+        public void FactLocationConstructorTest()
         {
             FactLocation fl = new FactLocation("Aberdeen, Scotland");
             Assert.IsTrue(fl.ToString().Equals("Aberdeen, Scotland"));

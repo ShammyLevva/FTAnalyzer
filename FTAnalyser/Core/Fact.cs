@@ -191,7 +191,7 @@ namespace FTAnalyzer
 
         public string Datestring
         {
-            get { return this.date == null ? "" : this.date.Datestring; }
+            get { return this.date == null ? "" : this.date.DateString; }
         }
 
         public IList<FactSource> Sources { get; private set; }

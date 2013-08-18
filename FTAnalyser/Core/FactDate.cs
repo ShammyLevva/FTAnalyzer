@@ -39,43 +39,43 @@ namespace FTAnalyzer
             BEF, AFT, BET, ABT, UNK, EXT,
         }
 
-        private string datestring;
-        private DateTime startdate;
-        private DateTime enddate;
-        private FactDateType type;
-        private bool doubledate = false; // Is a pre 1752 date bet 1 Jan and 25 Mar eg: 1735/36.
-        private string factRef = "";
+        public string DateString { get; private set; }
+        public DateTime StartDate { get; private set; }
+        public DateTime EndDate { get; private set; }
+        public FactDateType DateType { get; private set; }
+
+        public bool DoubleDate { get; private set;} // Is a pre 1752 date bet 1 Jan and 25 Mar eg: 1735/36.
 
         public FactDate(string str, string factRef = "")
         {
-            this.factRef = factRef;
+            this.DoubleDate = false;
             if (str == null)
                 str = string.Empty;
             // remove any commas in date string
             str = FixCommonDateFormats(str);
-            this.type = FactDateType.UNK;
+            this.DateType = FactDateType.UNK;
             if (str == null || str.Length == 0)
             {
-                this.datestring = "UNKNOWN";
+                this.DateString = "UNKNOWN";
             }
             else
             {
-                this.datestring = str.ToUpper();
+                this.DateString = str.ToUpper();
             }
-            startdate = MINDATE;
-            enddate = MAXDATE;
-            if (!this.datestring.Equals("UNKNOWN"))
+            StartDate = MINDATE;
+            EndDate = MAXDATE;
+            if (!this.DateString.Equals("UNKNOWN"))
             {
-                processDate(this.datestring);
+                ProcessDate(this.DateString, factRef);
             }
         }
 
         public FactDate(DateTime startdate, DateTime enddate)
         {
-            this.type = FactDateType.UNK;
-            this.startdate = startdate;
-            this.enddate = enddate;
-            this.datestring = calculateDatestring();
+            this.DateType = FactDateType.UNK;
+            this.StartDate = startdate;
+            this.EndDate = enddate;
+            this.DateString = CalculateDateString();
         }
 
         public static string Format(string format, DateTime date)
@@ -210,10 +210,10 @@ namespace FTAnalyzer
 
         #region Process Dates
 
-        public FactDate addYears(int years)
+        public FactDate AddYears(int years)
         {
-            DateTime start = new DateTime(startdate.Year, startdate.Month, startdate.Day);
-            DateTime end = new DateTime(enddate.Year, enddate.Month, enddate.Day);
+            DateTime start = new DateTime(StartDate.Year, StartDate.Month, StartDate.Day);
+            DateTime end = new DateTime(EndDate.Year, EndDate.Month, EndDate.Day);
             start = start.AddYears(years);
             end = end.AddYears(years);
             if (end > MAXDATE)
@@ -221,11 +221,11 @@ namespace FTAnalyzer
             return new FactDate(start, end);
         }
 
-        public FactDate subtractMonths(int months)
+        public FactDate SubtractMonths(int months)
         {
-            DateTime start = new DateTime(startdate.Year, startdate.Month, startdate.Day);
-            DateTime end = new DateTime(enddate.Year, enddate.Month, enddate.Day);
-            if (startdate != MINDATE)
+            DateTime start = new DateTime(StartDate.Year, StartDate.Month, StartDate.Day);
+            DateTime end = new DateTime(EndDate.Year, EndDate.Month, EndDate.Day);
+            if (StartDate != MINDATE)
                 start = start.AddMonths(-months);
             else
                 start = MINDATE;
@@ -235,61 +235,61 @@ namespace FTAnalyzer
             return new FactDate(start, end);
         }
 
-        private string calculateDatestring()
+        private string CalculateDateString()
         {
             string check;
             StringBuilder output = new StringBuilder();
-            if (startdate == MINDATE)
+            if (StartDate == MINDATE)
             {
-                if (enddate == MAXDATE)
+                if (EndDate == MAXDATE)
                     return "UNKNOWN";
                 else
                 {
-                    type = FactDateType.BEF;
+                    DateType = FactDateType.BEF;
                     output.Append("BEF ");
                 }
             }
             else
             {
-                check = Format(CHECKING, startdate);
-                if (enddate == MAXDATE)
+                check = Format(CHECKING, StartDate);
+                if (EndDate == MAXDATE)
                 {
-                    type = FactDateType.AFT;
+                    DateType = FactDateType.AFT;
                     output.Append("AFT ");
                 }
-                else if (startdate == enddate)
+                else if (StartDate == EndDate)
                 {
-                    type = FactDateType.EXT;
+                    DateType = FactDateType.EXT;
                 }
                 else
                 {
-                    type = FactDateType.BET;
+                    DateType = FactDateType.BET;
                     output.Append("BET ");
                 }
                 if (check.Equals("01 JAN"))
-                    output.Append(Format(YEAR, startdate));
+                    output.Append(Format(YEAR, StartDate));
                 else
-                    output.Append(Format(DISPLAY, startdate));
-                if (type == FactDateType.BET)
+                    output.Append(Format(DISPLAY, StartDate));
+                if (DateType == FactDateType.BET)
                     output.Append(" AND ");
             }
-            if (enddate != MAXDATE && enddate != startdate)
+            if (EndDate != MAXDATE && EndDate != StartDate)
             {
-                check = Format(CHECKING, enddate);
+                check = Format(CHECKING, EndDate);
                 if (check.Equals("31 DEC"))
                 {
                     // add 1 day to take it to 1st Jan following year
                     // this makes the range of "bef 1900" change to 
                     // "bet xxxx and 1900"
-                    output.Append(Format(YEAR, enddate));
+                    output.Append(Format(YEAR, EndDate));
                 }
                 else
-                    output.Append(Format(DISPLAY, enddate));
+                    output.Append(Format(DISPLAY, EndDate));
             }
             return output.ToString().ToUpper();
         }
 
-        private void processDate(string processDate)
+        private void ProcessDate(string processDate, string factRef)
         {
             // takes datestring and works out start and end dates 
             // prefixes are BEF, AFT, BET and nothing
@@ -299,34 +299,34 @@ namespace FTAnalyzer
                 string dateValue = processDate.Substring(4);
                 if (processDate.StartsWith("BEF"))
                 {
-                    type = FactDateType.BEF;
-                    enddate = parseDate(dateValue, HIGH, -1);
+                    DateType = FactDateType.BEF;
+                    EndDate = ParseDate(dateValue, HIGH, -1);
                 }
                 else if (processDate.StartsWith("AFT"))
                 {
-                    type = FactDateType.AFT;
-                    startdate = parseDate(dateValue, LOW, +1);
+                    DateType = FactDateType.AFT;
+                    StartDate = ParseDate(dateValue, LOW, +1);
                 }
                 else if (processDate.StartsWith("ABT"))
                 {
-                    type = FactDateType.ABT;
+                    DateType = FactDateType.ABT;
                     if (processDate.StartsWith("ABT MAR") || processDate.StartsWith("ABT JUN")
                          || processDate.StartsWith("ABT SEP") || processDate.StartsWith("ABT DEC"))
                     {
                         // quarter dates
-                        startdate = parseDate(dateValue, LOW, -2);
+                        StartDate = ParseDate(dateValue, LOW, -2);
                     }
                     else
                     {
-                        startdate = parseDate(dateValue, LOW, -1);
+                        StartDate = ParseDate(dateValue, LOW, -1);
                     }
-                    enddate = parseDate(dateValue, HIGH, 0);
+                    EndDate = ParseDate(dateValue, HIGH, 0);
                 }
                 else if (processDate.StartsWith("BET"))
                 {
                     string fromdate;
                     string todate;
-                    type = FactDateType.BET;
+                    DateType = FactDateType.BET;
                     int pos = processDate.IndexOf(" AND ");
                     if (pos == -1)
                     {
@@ -350,15 +350,15 @@ namespace FTAnalyzer
                         fromdate = "01 JAN " + fromdate;
                     else if (fromdate.Length < 7 && fromdate.IndexOf(" ") > 0)
                         fromdate = fromdate + processDate.Substring(pos + 11);
-                    startdate = parseDate(fromdate, LOW, 0, enddate.Year);
-                    enddate = parseDate(todate, HIGH, 0);
+                    StartDate = ParseDate(fromdate, LOW, 0, EndDate.Year);
+                    EndDate = ParseDate(todate, HIGH, 0);
                 }
                 else
                 {
-                    type = FactDateType.EXT;
+                    DateType = FactDateType.EXT;
                     dateValue = processDate;
-                    startdate = parseDate(dateValue, LOW, 0, 1);
-                    enddate = parseDate(dateValue, HIGH, 0, 9999); // have upper default year as 9999 if no year in date
+                    StartDate = ParseDate(dateValue, LOW, 0, 1);
+                    EndDate = ParseDate(dateValue, HIGH, 0, 9999); // have upper default year as 9999 if no year in date
                 }
             }
             catch (Exception e)
@@ -367,12 +367,12 @@ namespace FTAnalyzer
             }
         }
 
-        private DateTime parseDate(string dateValue, int highlow, int adjustment)
+        private DateTime ParseDate(string dateValue, int highlow, int adjustment)
         {
-            return parseDate(dateValue, highlow, adjustment, 1);
+            return ParseDate(dateValue, highlow, adjustment, 1);
         }
 
-        private DateTime parseDate(string dateValue, int highlow, int adjustment, int defaultYear)
+        private DateTime ParseDate(string dateValue, int highlow, int adjustment, int defaultYear)
         {
             DateTime date;
             Group gDay, gMonth, gYear, gDouble;
@@ -410,7 +410,7 @@ namespace FTAnalyzer
                 if (day == null) day = "";
                 if (month == null) month = "";
                 if (year == null) year = "";
-                if (!validDoubleDate(day, month, year, gDouble))
+                if (!IsValidDoubleDate(day, month, year, gDouble))
                     throw new InvalidDoubleDateException();
                 if (day.Length == 0 && month.Length == 0)
                 {
@@ -477,9 +477,9 @@ namespace FTAnalyzer
             return dt;
         }
 
-        private bool validDoubleDate(string day, string month, string year, Group gDouble)
+        private bool IsValidDoubleDate(string day, string month, string year, Group gDouble)
         {
-            doubledate = false;   // set property
+            DoubleDate = false;   // set property
             if (gDouble == null)  // normal date so its valid double date
                 return true;
             // check if valid double date if so set double date to true
@@ -498,113 +498,89 @@ namespace FTAnalyzer
             int iDoubleYear = Convert.ToInt32(year.Substring(0, 2) + doubleyear);
             if (iDoubleYear - iYear != 1)
                 return false; // must only be 1 year between double years
-            doubledate = true; // passed all checks
-            return doubledate;
+            DoubleDate = true; // passed all checks
+            return DoubleDate;
         }
 
         #endregion
 
         #region Properties
-        public DateTime StartDate
-        {
-            get { return this.startdate; }
-        }
-
-        public DateTime EndDate
-        {
-            get { return this.enddate; }
-        }
-
-        public string Datestring
-        {
-            get { return this.datestring; }
-        }
-
-        public FactDateType Type
-        {
-            get { return this.type; }
-        }
-
-        public bool DoubleDate
-        {
-            get { return this.doubledate; }
-        }
 
         public FactDate AverageDate
         {
             get
             {
-                if (this.datestring.Equals("UNKNOWN"))
+                if (this.DateString.Equals("UNKNOWN"))
                     return UNKNOWN_DATE;
-                if (this.startdate == MINDATE)
-                    return new FactDate(this.enddate, this.enddate);
-                if (this.enddate == MAXDATE)
-                    return new FactDate(this.startdate, this.startdate);
-                TimeSpan ts = this.enddate.Subtract(this.startdate);
+                if (this.StartDate == MINDATE)
+                    return new FactDate(this.EndDate, this.EndDate);
+                if (this.EndDate == MAXDATE)
+                    return new FactDate(this.StartDate, this.StartDate);
+                TimeSpan ts = this.EndDate.Subtract(this.StartDate);
                 double midPointSeconds = ts.TotalSeconds / 2.0;
-                DateTime average = this.startdate.AddSeconds(midPointSeconds);
+                DateTime average = this.StartDate.AddSeconds(midPointSeconds);
                 return new FactDate(average, average);
             }
         }
 
         #endregion
 
-        #region Tests
+        #region Logical operations
         /*
          * @return whether that FactDate is before this FactDate
          */
-        public bool isBefore(FactDate that)
+        public bool IsBefore(FactDate that)
         {
             // easy case is extremes whole of date before other
-            return (that == null) ? true : enddate < that.startdate;
+            return (that == null) ? true : EndDate < that.StartDate;
         }
 
         /*
          * @return whether that FactDate starts before this FactDate
          */
-        public bool startsBefore(FactDate that)
+        public bool StartsBefore(FactDate that)
         {
-            return (that == null) ? true : startdate < that.startdate;
+            return (that == null) ? true : StartDate < that.StartDate;
         }
 
         /*
          * @return whether that FactDate is after this FactDate
          */
-        public bool isAfter(FactDate that)
+        public bool IsAfter(FactDate that)
         {
             // easy case is extremes whole of date after other
-            return (that == null) ? true : startdate > that.enddate;
+            return (that == null) ? true : StartDate > that.EndDate;
         }
 
         /*
          * @return whether that FactDate ends after this FactDate
          */
-        public bool endsAfter(FactDate that)
+        public bool EndsAfter(FactDate that)
         {
-            return (that == null) ? true : enddate > that.enddate;
+            return (that == null) ? true : EndDate > that.EndDate;
         }
 
-        public bool overlaps(FactDate that)
+        public bool Overlaps(FactDate that)
         {
             // two dates overlap if not entirely before or after
-            return (that == null) ? true : !(isBefore(that) || isAfter(that));
+            return (that == null) ? true : !(IsBefore(that) || IsAfter(that));
         }
 
-        public bool contains(FactDate that)
+        public bool Contains(FactDate that)
         {
             return (that == null) ? true :
-                (this.startdate < that.startdate && this.enddate > that.enddate);
+                (this.StartDate < that.StartDate && this.EndDate > that.EndDate);
         }
 
-        public bool isLongYearSpan()
+        public bool IsLongYearSpan()
         {
-            int diff = Math.Abs(startdate.Year - enddate.Year);
+            int diff = Math.Abs(StartDate.Year - EndDate.Year);
             return (diff > 5);
         }
 
-        public bool isExact()
+        public bool IsExact()
         {
-            return this.startdate.Equals(this.enddate);
+            return this.StartDate.Equals(this.EndDate);
         }
 
         #endregion
@@ -615,8 +591,8 @@ namespace FTAnalyzer
                 return false;
             FactDate f = (FactDate) that;
             // two FactDates are equal if same datestring or same start and enddates
-            return (this.datestring.ToUpper().Equals(f.datestring.ToUpper())) ||
-        	       (this.startdate.Equals(f.startdate) && this.enddate.Equals(f.enddate));
+            return (this.DateString.ToUpper().Equals(f.DateString.ToUpper())) ||
+        	       (this.StartDate.Equals(f.StartDate) && this.EndDate.Equals(f.EndDate));
         }
 
         public override int GetHashCode()
@@ -628,18 +604,18 @@ namespace FTAnalyzer
         {
             if (this.Equals(that))
                 return 0;
-            else if (this.startdate.Equals(that.startdate))
-                return this.enddate.CompareTo(that.enddate);
+            else if (this.StartDate.Equals(that.StartDate))
+                return this.EndDate.CompareTo(that.EndDate);
             else
-                return this.startdate.CompareTo(that.startdate);
+                return this.StartDate.CompareTo(that.StartDate);
         }
 
         public override string ToString()
         {
-            if (datestring.StartsWith("BET 1 JAN"))
-                return "BET " + datestring.Substring(10);
+            if (DateString.StartsWith("BET 1 JAN"))
+                return "BET " + DateString.Substring(10);
             else
-                return datestring;
+                return DateString;
         }
     }
 }

@@ -93,11 +93,11 @@ namespace FTAnalyzer
                     if (marriage == null)
                         marriage = new Fact(Fact.MARRIAGE, FactDate.UNKNOWN_DATE);
                     FactDate marriageDate = marriage.FactDate;
-                    if (!marriageDate.isAfter(FAMILYSEARCHMAX) && husband.BirthDate.isBefore(FAMILYSEARCHMAX) && wife.BirthDate.isBefore(FAMILYSEARCHMAX))
+                    if (!marriageDate.IsAfter(FAMILYSEARCHMAX) && husband.BirthDate.IsBefore(FAMILYSEARCHMAX) && wife.BirthDate.IsBefore(FAMILYSEARCHMAX))
                     {
                         // proceed if marriage date within FamilySearch Range and both were alive before FamilySearch max date
                         // but don't bother processing if file already exists.
-                        if (!marriageDate.isExact())
+                        if (!marriageDate.IsExact())
                         {
                             Initialise();
                             if (SetMarriageParameters(husband, wife))

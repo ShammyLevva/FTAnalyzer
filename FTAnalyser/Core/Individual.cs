@@ -100,7 +100,7 @@ namespace FTAnalyzer
 
         public bool HasRangedBirthDate
         {
-            get { return BirthDate.Type == FactDate.FactDateType.BET && BirthDate.StartDate.Year != BirthDate.EndDate.Year;  }
+            get { return BirthDate.DateType == FactDate.FactDateType.BET && BirthDate.StartDate.Year != BirthDate.EndDate.Year;  }
         }
         
         public int Ahnentafel
@@ -478,9 +478,9 @@ namespace FTAnalyzer
         {
             foreach (Fact f in facts)
             {
-                if (f.FactType == Fact.CENSUS && f.FactDate.overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
+                if (f.FactType == Fact.CENSUS && f.FactDate.Overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
                     return true;
-                if (includeResidence && f.FactType == Fact.RESIDENCE && f.FactDate.overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
+                if (includeResidence && f.FactType == Fact.RESIDENCE && f.FactDate.Overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
                     return true; 
             }
             return false;
@@ -490,7 +490,7 @@ namespace FTAnalyzer
         {
             foreach (Fact f in facts)
             {
-                if (f.FactType == Fact.LOSTCOUSINS && f.FactDate.overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
+                if (f.FactType == Fact.LOSTCOUSINS && f.FactDate.Overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
                     return true;
             }
             return false;
@@ -502,37 +502,37 @@ namespace FTAnalyzer
             {
                 if (f.FactType == Fact.CENSUS || f.FactType == Fact.RESIDENCE)
                 {
-                    if (f.FactDate.overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
+                    if (f.FactDate.Overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
                     {
                         bool supportedLocation = f.Location.SupportedLocation(FactLocation.COUNTRY);
                         if (f.Location.isUnitedKingdom || !supportedLocation)
                         {
-                            if ((f.FactDate.overlaps(CensusDate.UKCENSUS1841) ||
-                                 f.FactDate.overlaps(CensusDate.UKCENSUS1881) ||
-                                 f.FactDate.overlaps(CensusDate.UKCENSUS1911)) &&
+                            if ((f.FactDate.Overlaps(CensusDate.UKCENSUS1841) ||
+                                 f.FactDate.Overlaps(CensusDate.UKCENSUS1881) ||
+                                 f.FactDate.Overlaps(CensusDate.UKCENSUS1911)) &&
                                 (when == CensusDate.UKCENSUS1841 || when == CensusDate.UKCENSUS1881 || when == CensusDate.UKCENSUS1911))
                                 return true;
                         }
                         else if (f.Location.country == Countries.SCOTLAND)
                         {
-                            if (f.FactDate.overlaps(CensusDate.UKCENSUS1881) && when == CensusDate.UKCENSUS1881)
+                            if (f.FactDate.Overlaps(CensusDate.UKCENSUS1881) && when == CensusDate.UKCENSUS1881)
                                 return true;
                         }
                         else if (f.Location.country == Countries.CANADA)
                         {
-                            if (f.FactDate.overlaps(CensusDate.CANADACENSUS1881) && when == CensusDate.CANADACENSUS1881)
+                            if (f.FactDate.Overlaps(CensusDate.CANADACENSUS1881) && when == CensusDate.CANADACENSUS1881)
                                 return true;
                         }
                         else if (f.Location.country == Countries.UNITED_STATES)
                         {
-                            if ((f.FactDate.overlaps(CensusDate.USCENSUS1880) ||
-                                 f.FactDate.overlaps(CensusDate.USCENSUS1940)) && 
+                            if ((f.FactDate.Overlaps(CensusDate.USCENSUS1880) ||
+                                 f.FactDate.Overlaps(CensusDate.USCENSUS1940)) && 
                                 (when == CensusDate.USCENSUS1880 || when == CensusDate.USCENSUS1940))
                                 return true;
                         }
                         else if (f.Location.country == Countries.IRELAND)
                         {
-                            if (f.FactDate.overlaps(CensusDate.IRELANDCENSUS1911) && when == CensusDate.IRELANDCENSUS1911)
+                            if (f.FactDate.Overlaps(CensusDate.IRELANDCENSUS1911) && when == CensusDate.IRELANDCENSUS1911)
                                 return true;
                         }
                     }
@@ -543,7 +543,7 @@ namespace FTAnalyzer
 
         public bool isDeceased(FactDate when)
         {
-            return DeathDate != FactDate.UNKNOWN_DATE && DeathDate.isBefore(when);
+            return DeathDate != FactDate.UNKNOWN_DATE && DeathDate.IsBefore(when);
         }
         
         public bool isSingleAtDeath() {
@@ -553,12 +553,12 @@ namespace FTAnalyzer
 
         public bool isBirthKnown()
         {
-            return BirthDate != FactDate.UNKNOWN_DATE && BirthDate.isExact();
+            return BirthDate != FactDate.UNKNOWN_DATE && BirthDate.IsExact();
         }
 
         public bool isDeathKnown()
         {
-            return DeathDate != FactDate.UNKNOWN_DATE && DeathDate.isExact();
+            return DeathDate != FactDate.UNKNOWN_DATE && DeathDate.IsExact();
         }
 
         #endregion
@@ -648,7 +648,7 @@ namespace FTAnalyzer
                 FactDate firstMarriageDate = new FactDate(FactDate.MAXDATE.ToString());
                 foreach (Family marriage in familiesAsParent)
                 {
-                    if (marriage.MarriageDate != null && marriage.MarriageDate.isBefore(firstMarriageDate))
+                    if (marriage.MarriageDate != null && marriage.MarriageDate.IsBefore(firstMarriageDate))
                         return marriage;
                 }
                 return null;
@@ -662,7 +662,7 @@ namespace FTAnalyzer
             {
                 foreach (Family marriage in familiesAsParent.OrderBy(f => f.MarriageDate))
                 {
-                    if (marriage.MarriageDate.isBefore(date) && marriage.husband != null)
+                    if (marriage.MarriageDate.IsBefore(date) && marriage.husband != null)
                         name = marriage.husband.surname;
                 }
             }
@@ -728,7 +728,7 @@ namespace FTAnalyzer
         private int LCReport(FactDate census)
         {
             
-            if (BirthDate.isAfter(census) || DeathDate.isBefore(census))
+            if (BirthDate.IsAfter(census) || DeathDate.IsBefore(census))
                 return 0; // not alive - grey
             if (!isCensusDone(census, true))
                 return 1; // no census - red
