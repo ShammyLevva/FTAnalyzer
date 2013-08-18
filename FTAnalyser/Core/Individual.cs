@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
-using System.Windows.Forms;
 
 namespace FTAnalyzer
 {
@@ -28,10 +28,10 @@ namespace FTAnalyzer
         private bool infamily;
         private bool hasParents;
 
-        private List<Fact> facts;
-        private List<FactLocation> locations;
-        private List<Family> familiesAsParent;
-        private List<Family> familiesAsChild;
+        private IList<Fact> facts;
+        private IList<FactLocation> locations;
+        private IList<Family> familiesAsParent;
+        private IList<Family> familiesAsChild;
         
         public Individual (XmlNode node) {
             gedcomID = node.Attributes["ID"].Value;
@@ -80,8 +80,8 @@ namespace FTAnalyzer
                 this.infamily = i.infamily;
                 this.facts = new List<Fact>(i.facts);
                 this.locations = new List<FactLocation>(i.locations);
-                this.familiesAsChild = i.familiesAsChild;
-                this.familiesAsParent = i.familiesAsParent;
+                this.familiesAsChild = new List<Family>(i.familiesAsChild);
+                this.familiesAsParent = new List<Family>(i.familiesAsParent);
             }
         }
 
@@ -147,12 +147,12 @@ namespace FTAnalyzer
             }
         }
 
-        public List<Fact> AllFacts 
+        public IList<Fact> AllFacts 
         { 
             get { return this.facts; } 
         }
 
-        public List<FactLocation> AllLocations
+        public IList<FactLocation> AllLocations
         {
             get { return this.locations; }
         }
@@ -390,16 +390,16 @@ namespace FTAnalyzer
             }
         }
 
-        public List<Family> FamiliesAsParent
+        public IList<Family> FamiliesAsParent
         {
             get { return familiesAsParent; }
-            set { familiesAsParent = value; }
+            set { familiesAsParent = value.ToList(); }
         }
 
-        public List<Family> FamiliesAsChild
+        public IList<Family> FamiliesAsChild
         {
             get { return familiesAsChild; }
-            set { familiesAsChild = value; }
+            set { familiesAsChild = value.ToList(); }
         }
 
         public int CensusFactCount
@@ -657,13 +657,12 @@ namespace FTAnalyzer
             get
             {
                 FactDate firstMarriageDate = new FactDate(FactDate.MAXDATE.ToString());
-                Family firstMarriage = null;
                 foreach (Family marriage in familiesAsParent)
                 {
                     if (marriage.MarriageDate != null && marriage.MarriageDate.isBefore(firstMarriageDate))
-                        firstMarriage = marriage;
+                        return marriage;
                 }
-                return firstMarriage;
+                return null;
             }
         }
 
@@ -672,9 +671,7 @@ namespace FTAnalyzer
             string name = surname;
             if (!isMale)
             {
-                List<Family> families = familiesAsParent;
-                families.Sort(new FamilyDateComparer());
-                foreach (Family marriage in families)
+                foreach (Family marriage in familiesAsParent.OrderBy(f => f.MarriageDate))
                 {
                     if (marriage.MarriageDate.isBefore(date) && marriage.husband != null)
                         name = marriage.husband.surname;

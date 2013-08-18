@@ -43,20 +43,20 @@ namespace Controls
             }
         }
 
-        public Func<T, bool> BuildFilter<T>(Func<T, int> relationType)
+        public Predicate<T> BuildFilter<T>(Func<T, int> relationType)
         {
-            Func<T, bool> relationFilter = FilterUtils.FalseFilter<T>();
+            List<Predicate<T>> relationFilters = new List<Predicate<T>>();
             if (Blood)
-                relationFilter = FilterUtils.OrFilter<T>(FilterUtils.IntFilter<T>(relationType, Individual.BLOOD), relationFilter);
+                relationFilters.Add(FilterUtils.IntFilter<T>(relationType, Individual.BLOOD));
             if (Directs)
-                relationFilter = FilterUtils.OrFilter<T>(FilterUtils.IntFilter<T>(relationType, Individual.DIRECT), relationFilter);
+                relationFilters.Add(FilterUtils.IntFilter<T>(relationType, Individual.DIRECT));
             if (Marriage)
-                relationFilter = FilterUtils.OrFilter<T>(FilterUtils.IntFilter<T>(relationType, Individual.MARRIAGE), relationFilter);
+                relationFilters.Add(FilterUtils.IntFilter<T>(relationType, Individual.MARRIAGE));
             if (MarriedToDB)
-                relationFilter = FilterUtils.OrFilter<T>(FilterUtils.IntFilter<T>(relationType, Individual.MARRIEDTODB), relationFilter);
+                relationFilters.Add(FilterUtils.IntFilter<T>(relationType, Individual.MARRIEDTODB));
             if (Unknown)
-                relationFilter = FilterUtils.OrFilter<T>(FilterUtils.IntFilter<T>(relationType, Individual.UNKNOWN), relationFilter);
-            return relationFilter;
+                relationFilters.Add(FilterUtils.IntFilter<T>(relationType, Individual.UNKNOWN));
+            return FilterUtils.OrFilter<T>(relationFilters);
         }
     }
 }

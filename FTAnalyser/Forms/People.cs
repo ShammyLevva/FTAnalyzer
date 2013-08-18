@@ -25,14 +25,14 @@ namespace FTAnalyzer.Forms
         {
             this.Text = "Individuals & Families with connection to " + loc.ToString();
             FamilyTree ft = FamilyTree.Instance;
-            List<Individual> listInd = ft.getIndividualsAtLocation(loc, level);
+            IEnumerable<Individual> listInd = ft.GetIndividualsAtLocation(loc, level);
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
             foreach(Individual i in listInd)
                 dsInd.Add(i);
             dgIndividuals.DataSource = dsInd;
             dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
-            
-            List<Family> listFam = ft.getFamiliesAtLocation(loc, level);
+
+            IEnumerable<Family> listFam = ft.GetFamiliesAtLocation(loc, level);
             SortableBindingList<IDisplayFamily> dsFam = new SortableBindingList<IDisplayFamily>();
             foreach (Family f in listFam)
                 dsFam.Add(f);

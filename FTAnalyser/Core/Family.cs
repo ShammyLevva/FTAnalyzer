@@ -44,8 +44,8 @@ namespace FTAnalyzer
                 this.husbandGed = eHusband == null ? null : eHusband.Attributes["REF"].Value;
                 this.wifeGed = eWife == null ? null : eWife.Attributes["REF"].Value;
                 FamilyTree ft = FamilyTree.Instance;
-                this.Husband = ft.getGedcomIndividual(this.husbandGed);
-                this.Wife = ft.getGedcomIndividual(this.wifeGed);
+                this.Husband = ft.GetGedcomIndividual(this.husbandGed);
+                this.Wife = ft.GetGedcomIndividual(this.wifeGed);
                 if (husband != null && wife != null)
                     wife.MarriedName = husband.Surname;
                 // now iterate through child elements of eChildren
@@ -55,7 +55,7 @@ namespace FTAnalyzer
                 {
                     if (n.Attributes["REF"] != null)
                     {
-                        Individual child = ft.getGedcomIndividual(n.Attributes["REF"].Value);
+                        Individual child = ft.GetGedcomIndividual(n.Attributes["REF"].Value);
                         if (child != null)
                             children.Add(child);
                         else

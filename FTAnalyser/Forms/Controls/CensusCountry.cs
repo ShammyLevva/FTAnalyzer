@@ -48,9 +48,9 @@ namespace Controls
             } 
         }
 
-        public Func<T, bool> BuildFilter<T>(FactDate when, Func<FactDate, T, FactLocation> location)
+        public Predicate<T> BuildFilter<T>(FactDate when, Func<FactDate, T, FactLocation> location)
         {
-            Func<T, bool> locationFilter = FilterUtils.TrueFilter<T>();
+            Predicate<T> locationFilter = FilterUtils.TrueFilter<T>();
             Func<FactLocation, string> country = x => x.Country;
             if (Scotland)
                 locationFilter = FilterUtils.LocationFilter<T>(when, location, country, Countries.SCOTLAND);

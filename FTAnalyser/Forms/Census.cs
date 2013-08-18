@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Printing.DataGridViewPrint.Tools;
+using FTAnalyzer.Filters;
 
 namespace FTAnalyzer.Forms
 {
@@ -55,7 +56,7 @@ namespace FTAnalyzer.Forms
             this.location2 = location2;
         }
 
-        public void SetupCensus(Func<CensusIndividual, bool> filter, IComparer<CensusIndividual> comparer,
+        public void SetupCensus(Predicate<CensusIndividual> filter, IComparer<CensusIndividual> comparer,
                 FactDate date, bool censusDone, bool includeResidence, bool lostCousinCheck, int maxAge)
         {
             FamilyTree ft = FamilyTree.Instance;

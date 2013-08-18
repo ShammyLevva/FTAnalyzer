@@ -5,79 +5,69 @@ using System.Text;
 
 namespace FTAnalyzer.Filters
 {
-    public class FilterUtils
+    public static class FilterUtils
     {
-        public static Func<T, bool> TrueFilter<T>()
+        public static Predicate<T> TrueFilter<T>()
         {
             return (x => true);
         }
 
-        public static Func<T, bool> FalseFilter<T>()
+        public static Predicate<T> FalseFilter<T>()
         {
             return (x => false);
         }
 
-        public static Func<T1, T2, bool> FalseFilter<T1, T2>()
-        {
-            return ((x, y) => false);
-        }
-
-        public static Func<T1, T2, bool> TrueFilter<T1, T2>()
-        {
-            return (x, y) => true;
-        }
-
-        public static Func<T, bool> OrFilter<T>(Func<T, bool> p1, Func<T, bool> p2)
+        public static Predicate<T> OrFilter<T>(Predicate<T> p1, Predicate<T> p2)
         {
             return (x => p1(x) || p2(x));
         }
 
-        public static Func<T, bool> OrFilter<T>(Func<T, bool> p1, Func<T, bool> p2, Func<T, bool> p3)
+        public static Predicate<T> OrFilter<T>(Predicate<T> p1, Predicate<T> p2, Predicate<T> p3)
         {
             return (x => p1(x) || p2(x) || p3(x));
         }
 
-        public static Func<T1, Func<T2, bool>> OrFilter<T1, T2>(Func<T1, Func<T2, bool>> p1, Func<T1, Func<T2, bool>> p2)
+        public static Predicate<T> OrFilter<T>(IEnumerable<Predicate<T>> ps)
         {
-            return y => x => p1(y)(x) || p2(y)(x);
+            return (x => ps.Any(p => p(x)));
         }
 
-        public static Func<T1, Func<T2, bool>> OrFilter<T1, T2>(Func<T1, Func<T2, bool>> p1, Func<T1, Func<T2, bool>> p2, Func<T1, Func<T2, bool>> p3)
-        {
-            return y => x => p1(y)(x) || p2(y)(x) || p3(y)(x);
-        }
-
-        public static Func<T, bool> AndFilter<T>(Func<T, bool> p1, Func<T, bool> p2)
+        public static Predicate<T> AndFilter<T>(Predicate<T> p1, Predicate<T> p2)
         {
             return (x => p1(x) && p2(x));
         }
 
-        public static Func<T, bool> AndFilter<T>(Func<T, bool> p1, Func<T, bool> p2, Func<T, bool> p3)
+        public static Predicate<T> AndFilter<T>(Predicate<T> p1, Predicate<T> p2, Predicate<T> p3)
         {
             return (x => p1(x) && p2(x) && p3(x));
         }
 
-        public static Func<T, bool> LocationFilter<T>(FactDate when, Func<FactDate, T, FactLocation> f, Func<FactLocation, string> g, string s)
+        public static Predicate<T> AndFilter<T>(IEnumerable<Predicate<T>> ps)
+        {
+            return (x => ps.All(p => p(x)));
+        }
+
+        public static Predicate<T> LocationFilter<T>(FactDate when, Func<FactDate, T, FactLocation> f, Func<FactLocation, string> g, string s)
         {
             return StringFilter<T>(x => g(f(when, x)), s);
         }
 
-        public static Func<T, bool> StringFilter<T>(Func<T, string> f, string s)
+        public static Predicate<T> StringFilter<T>(Func<T, string> f, string s)
         {
             return (x => StringMatches(f(x), s));
         }
 
-        public static Func<T, bool> IntFilter<T>(Func<T, int> f, int i)
+        public static Predicate<T> IntFilter<T>(Func<T, int> f, int i)
         {
             return x => f(x) == i;
         }
 
-        public static Func<T, bool> DateFilter<T>(Func<T, FactDate> f, FactDate d)
+        public static Predicate<T> DateFilter<T>(Func<T, FactDate> f, FactDate d)
         {
             return x => f(x).overlaps(d);
         }
 
-        public static Func<T, bool> IncompleteDataFilter<T>(int level, Func<T, bool> certificatePresent,
+        public static Predicate<T> IncompleteDataFilter<T>(int level, Predicate<T> certificatePresent,
             Func<T, FactDate> filterDate, Func<FactDate, T, FactLocation> filterLocation)
         {
             return t =>
@@ -98,6 +88,11 @@ namespace FTAnalyzer.Filters
                     default: return true;
                 }
             };
+        }
+
+        public static IEnumerable<T> Where<T>(this IEnumerable<T> l, Predicate<T> p)
+        {
+            return l.Where(new Func<T, bool>(x => p(x)));
         }
 
         private static bool StringMatches(string s1, string s2)

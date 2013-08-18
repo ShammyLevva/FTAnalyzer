@@ -347,7 +347,7 @@ namespace FTAnalyzer
         {
             Census census;
             string country;
-            Func<CensusIndividual, bool> filter = CreateCensusIndividualFilter();
+            Predicate<CensusIndividual> filter = CreateCensusIndividualFilter();
             MultiComparator<CensusIndividual> censusComparator = new MultiComparator<CensusIndividual>();
             if (ckbNoLocations.Checked)
             {
@@ -373,10 +373,10 @@ namespace FTAnalyzer
         }
 
         #region Filters
-        private Func<CensusIndividual, bool> CreateCensusIndividualFilter()
+        private Predicate<CensusIndividual> CreateCensusIndividualFilter()
         {
-            Func<CensusIndividual, bool> filter;
-            Func<CensusIndividual, bool> relationFilter = relationTypes.BuildFilter<CensusIndividual>(x => x.RelationType);
+            Predicate<CensusIndividual> filter;
+            Predicate<CensusIndividual> relationFilter = relationTypes.BuildFilter<CensusIndividual>(x => x.RelationType);
 
             if (ckbNoLocations.Checked)
             {
@@ -385,7 +385,7 @@ namespace FTAnalyzer
             }
             else
             {
-                Func<CensusIndividual, bool> locationFilter = censusCountry.BuildFilter<CensusIndividual>(
+                Predicate<CensusIndividual> locationFilter = censusCountry.BuildFilter<CensusIndividual>(
                     cenDate.SelectedDate, (d, x) => x.BestLocation(d));
                 filter = FilterUtils.AndFilter<CensusIndividual>(locationFilter, relationFilter,
                         FilterUtils.DateFilter<CensusIndividual>(x => x.RegistrationDate, cenDate.SelectedDate));
@@ -393,18 +393,18 @@ namespace FTAnalyzer
 
             if (txtSurname.Text.Length > 0)
             {
-                Func<CensusIndividual, bool> surnameFilter = FilterUtils.StringFilter<CensusIndividual>(x => x.Surname, txtSurname.Text);
+                Predicate<CensusIndividual> surnameFilter = FilterUtils.StringFilter<CensusIndividual>(x => x.Surname, txtSurname.Text);
                 filter = FilterUtils.AndFilter<CensusIndividual>(filter, surnameFilter);
             }
 
             return filter;
         }
 
-        private Func<Individual, bool> createTreeTopsIndividualFilter()
+        private Predicate<Individual> createTreeTopsIndividualFilter()
         {
-            Func<Individual, bool> locationFilter = treetopsCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
-            Func<Individual, bool> relationFilter = treetopsRelation.BuildFilter<Individual>(x => x.RelationType);
-            Func<Individual, bool> filter = FilterUtils.AndFilter<Individual>(locationFilter, relationFilter);
+            Predicate<Individual> locationFilter = treetopsCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
+            Predicate<Individual> relationFilter = treetopsRelation.BuildFilter<Individual>(x => x.RelationType);
+            Predicate<Individual> filter = FilterUtils.AndFilter<Individual>(locationFilter, relationFilter);
 
             if (ckbTTIgnoreLocations.Checked)
                 filter = relationFilter;
@@ -413,20 +413,20 @@ namespace FTAnalyzer
 
             if (txtTreetopsSurname.Text.Length > 0)
             {
-                Func<Individual, bool> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtTreetopsSurname.Text);
+                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtTreetopsSurname.Text);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
 
             return filter;
         }
 
-        private Func<Individual, bool> CreateWardeadIndividualFilter(FactDate birthRange, FactDate deathRange)
+        private Predicate<Individual> CreateWardeadIndividualFilter(FactDate birthRange, FactDate deathRange)
         {
-            Func<Individual, bool> filter;
-            Func<Individual, bool> locationFilter = wardeadCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
-            Func<Individual, bool> relationFilter = wardeadRelation.BuildFilter<Individual>(x => x.RelationType);
-            Func<Individual, bool> birthFilter = FilterUtils.DateFilter<Individual>(x => x.BirthDate, birthRange);
-            Func<Individual, bool> deathFilter = FilterUtils.DateFilter<Individual>(x => x.DeathDate, deathRange);
+            Predicate<Individual> filter;
+            Predicate<Individual> locationFilter = wardeadCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
+            Predicate<Individual> relationFilter = wardeadRelation.BuildFilter<Individual>(x => x.RelationType);
+            Predicate<Individual> birthFilter = FilterUtils.DateFilter<Individual>(x => x.BirthDate, birthRange);
+            Predicate<Individual> deathFilter = FilterUtils.DateFilter<Individual>(x => x.DeathDate, deathRange);
 
             if (ckbWDIgnoreLocations.Checked)
                 filter = FilterUtils.AndFilter<Individual>(
@@ -438,7 +438,7 @@ namespace FTAnalyzer
 
             if (txtWarDeadSurname.Text.Length > 0)
             {
-                Func<Individual, bool> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, tabSelector.Text);
+                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, tabSelector.Text);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
 
@@ -447,13 +447,13 @@ namespace FTAnalyzer
         #endregion
 
         #region Lost Cousins
-        private void LostCousinsCensus(string location, Func<CensusIndividual, bool> filter, FactDate censusDate, string reportTitle)
+        private void LostCousinsCensus(string location, Predicate<CensusIndividual> filter, FactDate censusDate, string reportTitle)
         {
             Func<CensusIndividual, int> relationType = x => x.RelationType;
             Func<CensusIndividual, FactDate> registrationDate = x => x.RegistrationDate;
             HourGlass(true);
             Census census;
-            Func<CensusIndividual, bool> relation =
+            Predicate<CensusIndividual> relation =
                 FilterUtils.OrFilter<CensusIndividual>(
                     FilterUtils.OrFilter<CensusIndividual>(
                         FilterUtils.IntFilter<CensusIndividual>(relationType, Individual.BLOOD),
@@ -494,7 +494,7 @@ namespace FTAnalyzer
         private void btnLC1881EW_Click(object sender, EventArgs e)
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.UKCENSUS1881).Country;
-            Func<CensusIndividual, bool> filter = FilterUtils.OrFilter<CensusIndividual>(
+            Predicate<CensusIndividual> filter = FilterUtils.OrFilter<CensusIndividual>(
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.ENGLAND),
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.WALES));
             string reportTitle = "1881 England & Wales Census Records on file to enter to Lost Cousins";
@@ -504,7 +504,7 @@ namespace FTAnalyzer
         private void btnLC1881Scot_Click(object sender, EventArgs e)
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.UKCENSUS1881).Country;
-            Func<CensusIndividual, bool> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.SCOTLAND);
+            Predicate<CensusIndividual> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.SCOTLAND);
             string reportTitle = "1881 Scotland Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(Countries.SCOTLAND, filter, CensusDate.UKCENSUS1881, reportTitle);
         }
@@ -512,7 +512,7 @@ namespace FTAnalyzer
         private void btnLC1881Canada_Click(object sender, EventArgs e)
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.UKCENSUS1881).Country;
-            Func<CensusIndividual, bool> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.CANADA);
+            Predicate<CensusIndividual> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.CANADA);
             string reportTitle = "1881 Canada Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(Countries.CANADA, filter, CensusDate.CANADACENSUS1881, reportTitle);
         }
@@ -520,7 +520,7 @@ namespace FTAnalyzer
         private void btnLC1841EW_Click(object sender, EventArgs e)
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.UKCENSUS1841).Country;
-            Func<CensusIndividual, bool> filter = FilterUtils.OrFilter<CensusIndividual>(
+            Predicate<CensusIndividual> filter = FilterUtils.OrFilter<CensusIndividual>(
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.ENGLAND),
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.WALES));
             string reportTitle = "1841 England & Wales Census Records on file to enter to Lost Cousins";
@@ -531,7 +531,7 @@ namespace FTAnalyzer
         private void btnLC1911EW_Click(object sender, EventArgs e)
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.UKCENSUS1911).Country;
-            Func<CensusIndividual, bool> filter = FilterUtils.OrFilter<CensusIndividual>(
+            Predicate<CensusIndividual> filter = FilterUtils.OrFilter<CensusIndividual>(
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.ENGLAND),
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.WALES));
             string reportTitle = "1911 England & Wales Census Records on file to enter to Lost Cousins";
@@ -541,7 +541,7 @@ namespace FTAnalyzer
         private void btnLC1880USA_Click(object sender, EventArgs e)
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.USCENSUS1880).Country;
-            Func<CensusIndividual, bool> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.UNITED_STATES);
+            Predicate<CensusIndividual> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.UNITED_STATES);
             string reportTitle = "1880 US Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(Countries.UNITED_STATES, filter, CensusDate.USCENSUS1880, reportTitle);
         }
@@ -549,7 +549,7 @@ namespace FTAnalyzer
         private void btnLC1911Ireland_Click(object sender, EventArgs e)
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.IRELANDCENSUS1911).Country;
-            Func<CensusIndividual, bool> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.IRELAND);
+            Predicate<CensusIndividual> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.IRELAND);
             string reportTitle = "1911 Ireland Census Records on file to enter to Lost Cousins";
             LostCousinsCensus(Countries.IRELAND, filter, CensusDate.IRELANDCENSUS1911, reportTitle);
         }
@@ -881,7 +881,7 @@ namespace FTAnalyzer
         private void btnTreeTops_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Func<Individual, bool> filter = createTreeTopsIndividualFilter();
+            Predicate<Individual> filter = createTreeTopsIndividualFilter();
             List<IDisplayIndividual> treeTopsList = ft.GetTreeTops(filter).ToList();
             treeTopsList.Sort(new BirthDateComparer());
             dgTreeTops.DataSource = treeTopsList;
@@ -895,7 +895,7 @@ namespace FTAnalyzer
         private void btnWWI_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Func<Individual, bool> filter = CreateWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("BET 1914 AND 1918"));
+            Predicate<Individual> filter = CreateWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("BET 1914 AND 1918"));
             List<IDisplayIndividual> warDeadList = ft.GetWarDead(filter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWarDead.DataSource = warDeadList;
@@ -909,7 +909,7 @@ namespace FTAnalyzer
         private void btnWWII_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Func<Individual, bool> filter = CreateWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("BET 1939 AND 1945"));
+            Predicate<Individual> filter = CreateWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("BET 1939 AND 1945"));
             List<IDisplayIndividual> warDeadList = ft.GetWarDead(filter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWarDead.DataSource = warDeadList;

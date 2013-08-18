@@ -112,7 +112,7 @@ namespace FTAnalyzer
             ResetData();
             Application.DoEvents();
             XmlDocument doc = GedcomToXml.Load(filename);
-            xmlErrorbox.AppendText("Loading file " + filename + "\n");                        
+            xmlErrorbox.AppendText("Loading file " + filename + "\n");
             // First iterate through attributes of root finding all sources
             XmlNodeList list = doc.SelectNodes("GED/SOUR");
             pbS.Maximum = list.Count;
@@ -258,7 +258,7 @@ namespace FTAnalyzer
                     foreach (Fact f in ind.AllFacts)
                         result.Add(new ExportFacts(ind, f));
                     foreach (Family fam in ind.FamiliesAsParent)
-                        foreach(Fact famfact in fam.AllFacts)
+                        foreach (Fact famfact in fam.AllFacts)
                             result.Add(new ExportFacts(ind, famfact));
                 }
                 return result;
@@ -365,7 +365,7 @@ namespace FTAnalyzer
                 return result;
             }
         }
-        
+
         public int IndividualCount { get { return individuals.Count; } }
 
         #endregion
@@ -384,26 +384,22 @@ namespace FTAnalyzer
             return loc; // should return object that is in list of locations 
         }
 
-        public List<Individual> getAllRelationsOfType(int relationType)
+        public IEnumerable<Individual> GetAllRelationsOfType(int relationType)
         {
-            List<Individual> result = new List<Individual>();
-            foreach (Individual ind in individuals)
-                if (ind.RelationType == relationType)
-                    result.Add(ind);
-            return result;
+            return individuals.Where(ind => ind.RelationType == relationType);
         }
 
-        public List<Individual> getUncertifiedFacts(string factType, int relationType)
+        public IEnumerable<Individual> GetUncertifiedFacts(string factType, int relationType)
         {
-            List<Individual> result = new List<Individual>();
-            foreach (Individual ind in individuals)
+            return individuals.Where(ind =>
+            {
                 if (ind.RelationType == relationType)
                 {
                     Fact f = ind.getPreferredFact(factType);
-                    if (f != null && !f.CertificatePresent)
-                        result.Add(ind);
+                    return (f != null && !f.CertificatePresent);
                 }
-            return result;
+                return false;
+            });
         }
 
         public List<Family> FindFamiliesWhereHusband(Individual ind)
@@ -442,66 +438,36 @@ namespace FTAnalyzer
         {
             if (ind.isSingleAtDeath())
                 return false;
-            List<Family> families = ind.FamiliesAsParent;
-            foreach (Family f in families)
+            return ind.FamiliesAsParent.Any(f =>
             {
                 FactDate marriage = f.getPreferredFactDate(Fact.MARRIAGE);
-                if (marriage != null && marriage.isBefore(fd))
-                    return true;
-            }
-            return false;
+                return (marriage != null && marriage.isBefore(fd));
+            });
         }
 
-        public Individual getIndividual(string individualID)
+        public Individual GetIndividual(string individualID)
         {
-            foreach (Individual i in individuals)
-            {
-                if (i.IndividualID == individualID)
-                    return i;
-            }
-            return null;
+            return individuals.FirstOrDefault(i => i.IndividualID == individualID);
         }
 
-        public Individual getGedcomIndividual(string gedcomID)
+        public Individual GetGedcomIndividual(string gedcomID)
         {
-            foreach (Individual i in individuals)
-            {
-                if (i.GedcomID == gedcomID)
-                    return i;
-            }
-            return null;
+            return individuals.FirstOrDefault(i => i.GedcomID == gedcomID);
         }
 
-        public Family getGedcomFamily(string gedcomID)
+        public Family GetGedcomFamily(string gedcomID)
         {
-            foreach (Family f in families)
-            {
-                if (f.FamilyGed == gedcomID)
-                    return f;
-            }
-            return null;
+            return families.FirstOrDefault(f => f.FamilyGed == gedcomID);
         }
 
-        public List<Individual> getIndividualsAtLocation(FactLocation loc, int level)
+        public IEnumerable<Individual> GetIndividualsAtLocation(FactLocation loc, int level)
         {
-            List<Individual> result = new List<Individual>();
-            foreach (Individual i in individuals)
-            {
-                if (!result.Contains(i) && i.isAtLocation(loc, level))
-                    result.Add(i);
-            }
-            return result;
+            return individuals.Where(i => i.isAtLocation(loc, level));
         }
 
-        public List<Family> getFamiliesAtLocation(FactLocation loc, int level)
+        public IEnumerable<Family> GetFamiliesAtLocation(FactLocation loc, int level)
         {
-            List<Family> result = new List<Family>();
-            foreach (Family f in families)
-            {
-                if (!result.Contains(f) && f.isAtLocation(loc, level))
-                    result.Add(f);
-            }
-            return result;
+            return families.Where(f => f.isAtLocation(loc, level));
         }
 
         public List<string> getSurnamesAtLocation(FactLocation loc) { return getSurnamesAtLocation(loc, FactLocation.PARISH); }
@@ -701,33 +667,18 @@ namespace FTAnalyzer
 
         #region TreeTops
 
-        public List<IDisplayIndividual> GetTreeTops(Func<Individual, bool> filter)
+        public IEnumerable<IDisplayIndividual> GetTreeTops(Predicate<Individual> filter)
         {
-            List<IDisplayIndividual> result = new List<IDisplayIndividual>();
-            foreach (Individual ind in individuals)
-            {
-                if (!ind.HasParents)
-                {
-                    if (filter(ind))
-                        result.Add(ind);
-                }
-            }
-            return result;
+            return individuals.Where(ind => !ind.HasParents && filter(ind));
         }
 
         #endregion
 
         #region WarDead
 
-        public List<IDisplayIndividual> GetWarDead(Func<Individual, bool> filter)
+        public IEnumerable<IDisplayIndividual> GetWarDead(Predicate<Individual> filter)
         {
-            List<IDisplayIndividual> result = new List<IDisplayIndividual>();
-            foreach (Individual ind in individuals)
-            {
-                if (ind.isMale && !ind.isDeathKnown() && filter(ind))
-                    result.Add(ind);
-            }
-            return result;
+            return individuals.Where(ind => ind.isMale && !ind.isDeathKnown() && filter(ind));
         }
 
         #endregion
@@ -736,13 +687,10 @@ namespace FTAnalyzer
 
         private ParentalGroup CreateFamilyGroup(Individual i)
         {
-            List<Family> list = i.FamiliesAsChild;
-            if (list.Count > 0)
-            {
-                Family f = list.First();
-                return new ParentalGroup(i, f.Husband, f.Wife, f.getPreferredFact(Fact.MARRIAGE));
-            }
-            return new ParentalGroup(i, null, null, null);
+            Family f = i.FamiliesAsChild.FirstOrDefault();
+            return (f == null) ?
+                    new ParentalGroup(i, null, null, null) :
+                    new ParentalGroup(i, f.Husband, f.Wife, f.getPreferredFact(Fact.MARRIAGE));
         }
 
         private void ClearRelations()
@@ -755,7 +703,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void AddToQueue(Queue<Individual> queue, List<Individual> list)
+        private void AddToQueue(Queue<Individual> queue, IEnumerable<Individual> list)
         {
             foreach (Individual i in list)
             {
@@ -763,9 +711,9 @@ namespace FTAnalyzer
             }
         }
 
-        private void addParentsToQueue(Individual indiv, Queue<Individual> queue, bool setAhnenfatel)
+        private void AddParentsToQueue(Individual indiv, Queue<Individual> queue, bool setAhnenfatel)
         {
-            List<Family> families = indiv.FamiliesAsChild;
+            IEnumerable<Family> families = indiv.FamiliesAsChild;
             foreach (Family family in families)
             {
                 // add parents to queue
@@ -774,7 +722,7 @@ namespace FTAnalyzer
                     if (setAhnenfatel && indiv.RelationType == Individual.DIRECT)
                     {
                         family.Husband.Ahnentafel = indiv.Ahnentafel * 2;
-                        if(family.Husband.Ahnentafel > maxAhnentafel)
+                        if (family.Husband.Ahnentafel > maxAhnentafel)
                             maxAhnentafel = family.Husband.Ahnentafel;
                     }
                     queue.Enqueue(family.Husband);
@@ -792,9 +740,9 @@ namespace FTAnalyzer
             }
         }
 
-        private void addChildrenToQueue(Individual indiv, Queue<Individual> queue, bool isRootPerson)
+        private void AddChildrenToQueue(Individual indiv, Queue<Individual> queue, bool isRootPerson)
         {
-            List<Family> families = indiv.FamiliesAsParent;
+            IEnumerable<Family> families = indiv.FamiliesAsParent;
             foreach (Family family in families)
             {
                 foreach (Individual child in family.children)
@@ -803,7 +751,7 @@ namespace FTAnalyzer
                     if (child.RelationType == Individual.BLOOD || child.RelationType == Individual.UNKNOWN)
                     {
                         child.RelationType = Individual.BLOOD;
-                        if(isRootPerson)
+                        if (isRootPerson)
                             child.Ahnentafel = indiv.Ahnentafel - 2;
                         else
                             child.Ahnentafel = indiv.Ahnentafel - 1;
@@ -819,7 +767,7 @@ namespace FTAnalyzer
         {
             ClearRelations();
             SetFamilies();
-            Individual rootPerson = getGedcomIndividual(startGed);
+            Individual rootPerson = GetGedcomIndividual(startGed);
             Individual ind = rootPerson;
             ind.RelationType = Individual.DIRECT;
             ind.Ahnentafel = 1;
@@ -832,23 +780,23 @@ namespace FTAnalyzer
                 ind = queue.Dequeue();
                 // set them as a direct relation
                 ind.RelationType = Individual.DIRECT;
-                addParentsToQueue(ind, queue, true);
+                AddParentsToQueue(ind, queue, true);
                 Application.DoEvents();
             }
             int lenAhnentafel = maxAhnentafel.ToString().Length;
             // we have now added all direct ancestors
-            List<Individual> directs = getAllRelationsOfType(Individual.DIRECT);
-            foreach(Individual i in directs)
+            IEnumerable<Individual> directs = GetAllRelationsOfType(Individual.DIRECT);
+            foreach (Individual i in directs)
             {
                 // add all direct ancestors budgie codes
-                i.BudgieCode = (i.Ahnentafel).ToString().PadLeft(lenAhnentafel,'0') + "d";
+                i.BudgieCode = (i.Ahnentafel).ToString().PadLeft(lenAhnentafel, '0') + "d";
             }
             AddToQueue(queue, directs);
             while (queue.Count > 0)
             {
                 // get the next person
                 ind = queue.Dequeue();
-                List<Family> families = ind.FamiliesAsParent;
+                IEnumerable<Family> families = ind.FamiliesAsParent;
                 foreach (Family family in families)
                 {
                     // if the spouse of a direct ancestor is not a direct
@@ -877,7 +825,7 @@ namespace FTAnalyzer
             //    Application.DoEvents();
             //}
             // all that remains is to loop through the marriage relations
-            List<Individual> marriedDBs = getAllRelationsOfType(Individual.MARRIEDTODB);
+            IEnumerable<Individual> marriedDBs = GetAllRelationsOfType(Individual.MARRIEDTODB);
             AddToQueue(queue, marriedDBs);
             while (queue.Count > 0)
             {
@@ -892,8 +840,8 @@ namespace FTAnalyzer
                     // set this individual to be related by marriage
                     if (relationship == Individual.UNKNOWN)
                         ind.RelationType = Individual.MARRIAGE;
-                    addParentsToQueue(ind, queue, false);
-                    List<Family> families = ind.FamiliesAsParent;
+                    AddParentsToQueue(ind, queue, false);
+                    IEnumerable<Family> families = ind.FamiliesAsParent;
                     foreach (Family family in families)
                     {
                         family.setSpouseRelation(ind, Individual.MARRIAGE);
@@ -1091,7 +1039,7 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayOccupation> result = new SortableBindingList<IDisplayOccupation>();
                 foreach (string occ in occupations.Keys)
-                    result.Add(new DisplayOccupation(occ,occupations[occ].Count));
+                    result.Add(new DisplayOccupation(occ, occupations[occ].Count));
                 return result;
             }
         }
@@ -1130,7 +1078,7 @@ namespace FTAnalyzer
             for (int i = 0; i < 15; i++)
                 errors[i] = new List<DataError>();
             // calculate error lists
-            foreach(Individual ind in AllIndividuals)
+            foreach (Individual ind in AllIndividuals)
             {
                 try
                 {
@@ -1143,12 +1091,12 @@ namespace FTAnalyzer
                         if (ind.BurialDate != null && ind.BurialDate.isBefore(ind.DeathDate) && !ind.BurialDate.overlaps(ind.DeathDate))
                             errors[7].Add(new DataError(ind, "Buried " + ind.BurialDate + " before died " + ind.DeathDate));
                         int minAge = ind.getMinAge(ind.DeathDate);
-                        if(minAge > 110)
+                        if (minAge > 110)
                             errors[8].Add(new DataError(ind, "Aged over 110 before died " + ind.DeathDate));
                     }
                     foreach (Fact f in ind.AllFacts)
                     {
-                        if(f.FactType != Fact.BIRTH && f.FactDate.isBefore(ind.BirthDate))
+                        if (f.FactType != Fact.BIRTH && f.FactDate.isBefore(ind.BirthDate))
                             errors[9].Add(new DataError(ind, f.FactType + " fact recorded: " + f.FactDate + " before individual was born"));
                     }
                     foreach (Family asChild in ind.FamiliesAsChild)
@@ -1185,7 +1133,7 @@ namespace FTAnalyzer
                     foreach (Family asParent in ind.FamiliesAsParent)
                     {
                         Individual spouse = asParent.Spouse(ind);
-                        if (asParent.MarriageDate != null && spouse !=null)
+                        if (asParent.MarriageDate != null && spouse != null)
                         {
                             if (ind.DeathDate != null && asParent.MarriageDate.isAfter(ind.DeathDate))
                                 errors[10].Add(new DataError(ind, "Marriage to " + spouse.Name + " in " + asParent.MarriageDate + " is after individual died " + ind.DeathDate));
@@ -1211,7 +1159,7 @@ namespace FTAnalyzer
                 {
                     MessageBox.Show("Unexpected Error Checking for inconsistencies in your data\nPlease report this on the issues page at http://ftanalyzer.codeplex.com \nError was " + e.Message);
                 }
-            }            
+            }
             dataErrorTypes.Add(new DataErrorGroup("Birth after death/burial", errors[0]));
             dataErrorTypes.Add(new DataErrorGroup("Birth after father aged 90+", errors[1]));
             dataErrorTypes.Add(new DataErrorGroup("Birth after mother aged 60+", errors[2]));
@@ -1220,19 +1168,19 @@ namespace FTAnalyzer
             dataErrorTypes.Add(new DataErrorGroup("Birth before father aged 13", errors[5]));
             dataErrorTypes.Add(new DataErrorGroup("Birth before mother aged 13", errors[6]));
             dataErrorTypes.Add(new DataErrorGroup("Burial before death", errors[7]));
-            dataErrorTypes.Add(new DataErrorGroup("Aged more than 120 at death" , errors[8]));
+            dataErrorTypes.Add(new DataErrorGroup("Aged more than 120 at death", errors[8]));
             dataErrorTypes.Add(new DataErrorGroup("Facts dated before birth", errors[9]));
             dataErrorTypes.Add(new DataErrorGroup("Marriage after death", errors[10]));
             dataErrorTypes.Add(new DataErrorGroup("Marriage after spouse's death", errors[11]));
             dataErrorTypes.Add(new DataErrorGroup("Marriage before aged 13", errors[12]));
             dataErrorTypes.Add(new DataErrorGroup("Marriage before spouse aged 13", errors[13]));
-//            dataErrorTypes.Add(new DataErrorGroup("Later marriage before previous spouse died", errors[14]));
+            //            dataErrorTypes.Add(new DataErrorGroup("Later marriage before previous spouse died", errors[14]));
         }
 
         public void SetDataErrorsCheckedDefaults(CheckedListBox list)
         {
             list.Items.Clear();
-            foreach(DataErrorGroup dataError in dataErrorTypes)
+            foreach (DataErrorGroup dataError in dataErrorTypes)
             {
                 int index = list.Items.Add(dataError);
                 list.SetItemChecked(index, true);
@@ -1244,7 +1192,7 @@ namespace FTAnalyzer
             List<DataError> errors = new List<DataError>();
             foreach (int indexChecked in list.CheckedIndices)
             {
-                DataErrorGroup item = (DataErrorGroup) list.Items[indexChecked];
+                DataErrorGroup item = (DataErrorGroup)list.Items[indexChecked];
                 errors.AddRange(item.Errors);
             }
             return errors;
@@ -1256,7 +1204,7 @@ namespace FTAnalyzer
         public void SearchCensus(string censusCountry, int censusYear, Individual person, int censusProvider)
         {
             string uri = null;
-         
+
             switch (censusProvider)
             {
                 case 0: uri = BuildAncestryQuery(censusCountry, censusYear, person); break;
@@ -1291,17 +1239,17 @@ namespace FTAnalyzer
             path.Append("%2B" + FamilySearch.RECORD_TYPE + "%3A%283%29");
             if (person.BirthDate != FactDate.UNKNOWN_DATE)
             {
-                int startYear = person.BirthDate.StartDate.Year -1;
-                int endYear = person.BirthDate.EndDate.Year +1;
+                int startYear = person.BirthDate.StartDate.Year - 1;
+                int endYear = person.BirthDate.EndDate.Year + 1;
                 path.Append("%2B" + FamilySearch.BIRTH_YEAR + "%3A" + startYear + "-" + endYear + "%7E%20");
             }
             if (person.BirthLocation != null)
             {
-                string location = person.BirthLocation.getLocation(FactLocation.REGION).ToString().Replace(",","");
+                string location = person.BirthLocation.getLocation(FactLocation.REGION).ToString().Replace(",", "");
                 path.Append("%2B" + FamilySearch.BIRTH_LOCATION + "%3A" + HttpUtility.UrlEncode(location) + "%7E%20");
             }
             int collection = FamilySearch.CensusCollectionID(country, censusYear);
-            if(collection > 0)
+            if (collection > 0)
                 path.Append("&collection_id=" + collection);
             return path.ToString();
         }
@@ -1401,8 +1349,8 @@ namespace FTAnalyzer
             {
                 int pos = person.Forenames.IndexOf(" ");
                 string forename = person.Forenames;
-                if(pos>0)
-                    forename = person.Forenames.Substring(0,pos); //strip out any middle names as FreeCen searches better without then
+                if (pos > 0)
+                    forename = person.Forenames.Substring(0, pos); //strip out any middle names as FreeCen searches better without then
                 query.Append("g=" + HttpUtility.UrlEncode(forename) + "&");
             }
             string surname = person.SurnameAtDate(censusFactDate);
@@ -1443,7 +1391,7 @@ namespace FTAnalyzer
                 {
                     query.Append("r=5&");
                 }
-                else 
+                else
                 {
                     query.Append("r=10&");
                 }
@@ -1453,7 +1401,7 @@ namespace FTAnalyzer
             {
                 string location = person.BirthLocation.Parish;
                 query.Append("t=" + HttpUtility.UrlEncode(location) + "&");
-                query.Append("b=" + person.BirthLocation.FreeCenCountyCode + "&"); 
+                query.Append("b=" + person.BirthLocation.FreeCenCountyCode + "&");
             }
             query.Append("c=all&"); // initially set to search all counties need a routine to return FreeCen county codes 
             query.Append("z=Find&"); // executes search
