@@ -1113,9 +1113,7 @@ namespace FTAnalyzer
                 case 0: uri = BuildAncestryQuery(censusCountry, censusYear, person); break;
                 case 1: uri = BuildFindMyPastQuery(censusCountry, censusYear, person); break;
                 case 2: uri = BuildFreeCenQuery(censusCountry, censusYear, person); break;
-                case 3:
-                    string country = person.BestLocation(new FactDate(censusYear.ToString())).Country;
-                    uri = BuildFamilySearchQuery(country, censusYear, person); break;
+                case 3: uri = BuildFamilySearchQuery(censusCountry, censusYear, person); break;
             }
             if (uri != null)
             {
@@ -1132,7 +1130,7 @@ namespace FTAnalyzer
             path.Append("https://www.familysearch.org/search/record/results#count=20&query=");
             if (person.Forenames != "?" && person.Forenames.ToUpper() != "UNKNOWN")
             {
-                path.Append("%2B" + FamilySearch.GIVENNAME + "%3A" + HttpUtility.UrlEncode(person.Forenames) + "%7E%20");
+                path.Append("%2B" + FamilySearch.GIVENNAME + "%3A%22" + HttpUtility.UrlEncode(person.Forenames) + "%22%7E%20");
             }
             string surname = person.SurnameAtDate(censusFactDate);
             if (surname != "?" && surname.ToUpper() != "UNKNOWN")
@@ -1148,13 +1146,26 @@ namespace FTAnalyzer
             }
             if (person.BirthLocation != null)
             {
-                string location = person.BirthLocation.GetLocation(FactLocation.REGION).ToString().Replace(",", "");
+                string location;
+                if (person.BirthLocation.Country != country)
+                {
+                    location = person.BirthLocation.Country;
+                }
+                else
+                {
+                    location = person.BirthLocation.GetLocation(FactLocation.REGION).ToString().Replace(",", "");
+                }
                 path.Append("%2B" + FamilySearch.BIRTH_LOCATION + "%3A" + HttpUtility.UrlEncode(location) + "%7E%20");
             }
             int collection = FamilySearch.CensusCollectionID(country, censusYear);
             if (collection > 0)
                 path.Append("&collection_id=" + collection);
-            return path.ToString();
+            else
+            {
+                MessageBox.Show("Sorry searching the " + country + " census on FamilySearch for " + censusYear + " is not supported by FTAnalyzer at this time");
+                return null;
+            }
+            return path.Replace("+", "%20").ToString();
         }
 
         private string BuildAncestryQuery(string censusCountry, int censusYear, Individual person)
