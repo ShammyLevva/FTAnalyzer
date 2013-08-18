@@ -1074,7 +1074,7 @@ namespace FTAnalyzer
                 else
                 {
                     frmGoogleMap.Dispose();
-                    MessageBox.Show("Unable to find location : " + loc.getLocation(locType));
+                    MessageBox.Show("Unable to find location : " + loc.GetLocation(locType));
                 }
             }
             this.Cursor = Cursors.Default;
@@ -1096,7 +1096,7 @@ namespace FTAnalyzer
                 else
                 {
                     frmBingMap.Dispose();
-                    MessageBox.Show("Unable to find location : " + loc.getLocation(locType));
+                    MessageBox.Show("Unable to find location : " + loc.GetLocation(locType));
                 }
             }
             this.Cursor = Cursors.Default;

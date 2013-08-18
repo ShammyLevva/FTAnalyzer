@@ -9,23 +9,23 @@ namespace FTAnalyzer
     public class Parish : FactLocation {
         
         public Parish() {
-            this.address = "";
-            this.place = "";
-            this.parishID = null;
+            this.Address = "";
+            this.Place = "";
+            this.ParishID = null;
         }
 
         public Parish(string location) : base(location) {
-            this.address = "";
-            this.place = "";
-            this.parishID = null;
+            this.Address = "";
+            this.Place = "";
+            this.ParishID = null;
         }
 
         public override int CompareTo (FactLocation that, int level) {
-            int res = this.country.CompareTo(that.country);
+            int res = this.Country.CompareTo(that.Country);
             if (res == 0 && level > COUNTRY) {
-                res = this.region.CompareTo(that.region);
+                res = this.Region.CompareTo(that.Region);
                 if (res == 0 && level > REGION) {
-                    res = this.parish.CompareTo(that.parish);
+                    res = this.Parish.CompareTo(that.Parish);
                 }
             }
             return res;

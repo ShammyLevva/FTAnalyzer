@@ -61,7 +61,7 @@ namespace FTAnalyzer
             throw new NotImplementedException();
         }
 
-        public FactLocation getLocation(int level)
+        public FactLocation GetLocation(int level)
         {
             throw new NotImplementedException();
         }

@@ -14,7 +14,7 @@ namespace FTAnalyzer
         string Place { get; }
 
         int CompareTo(IDisplayLocation loc, int level);
-        FactLocation getLocation(int level);
+        FactLocation GetLocation(int level);
 
     }
 }

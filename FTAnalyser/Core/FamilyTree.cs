@@ -287,9 +287,9 @@ namespace FTAnalyzer
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
                 foreach (FactLocation loc in locations.Values.ToList())
                 {
-                    if (loc.country != string.Empty)
+                    if (loc.Country != string.Empty)
                     {
-                        FactLocation c = new FactLocation(loc.country);
+                        FactLocation c = new FactLocation(loc.Country);
                         if (!result.Contains(c))
                             result.Add(c);
                     }
@@ -305,9 +305,9 @@ namespace FTAnalyzer
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
                 foreach (FactLocation loc in locations.Values.ToList())
                 {
-                    if (loc.region != string.Empty)
+                    if (loc.Region != string.Empty)
                     {
-                        FactLocation r = new FactLocation(loc.region + ", " + loc.country);
+                        FactLocation r = new FactLocation(loc.Region + ", " + loc.Country);
                         if (!result.Contains(r))
                             result.Add(r);
                     }
@@ -323,9 +323,9 @@ namespace FTAnalyzer
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
                 foreach (FactLocation loc in locations.Values.ToList())
                 {
-                    if (loc.parish != string.Empty)
+                    if (loc.Parish != string.Empty)
                     {
-                        FactLocation p = new FactLocation(loc.parish + ", " + loc.region + ", " + loc.country);
+                        FactLocation p = new FactLocation(loc.Parish + ", " + loc.Region + ", " + loc.Country);
                         if (!result.Contains(p))
                             result.Add(p);
                     }
@@ -341,9 +341,9 @@ namespace FTAnalyzer
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
                 foreach (FactLocation loc in locations.Values.ToList())
                 {
-                    if (loc.address != string.Empty)
+                    if (loc.Address != string.Empty)
                     {
-                        FactLocation a = new FactLocation(loc.Address + ", " + loc.parish + ", " + loc.region + ", " + loc.country);
+                        FactLocation a = new FactLocation(loc.Address + ", " + loc.Parish + ", " + loc.Region + ", " + loc.Country);
                         if (!result.Contains(a))
                             result.Add(a);
                     }
@@ -359,7 +359,7 @@ namespace FTAnalyzer
                 List<IDisplayLocation> result = new List<IDisplayLocation>();
                 foreach (FactLocation loc in locations.Values.ToList())
                 {
-                    if (loc.place != string.Empty && !result.Contains(loc))
+                    if (loc.Place != string.Empty && !result.Contains(loc))
                         result.Add(loc);
                 }
                 return result;
@@ -1245,7 +1245,7 @@ namespace FTAnalyzer
             }
             if (person.BirthLocation != null)
             {
-                string location = person.BirthLocation.getLocation(FactLocation.REGION).ToString().Replace(",", "");
+                string location = person.BirthLocation.GetLocation(FactLocation.REGION).ToString().Replace(",", "");
                 path.Append("%2B" + FamilySearch.BIRTH_LOCATION + "%3A" + HttpUtility.UrlEncode(location) + "%7E%20");
             }
             int collection = FamilySearch.CensusCollectionID(country, censusYear);
@@ -1324,7 +1324,7 @@ namespace FTAnalyzer
             }
             if (person.BirthLocation != null)
             {
-                string location = person.BirthLocation.getLocation(FactLocation.PARISH).ToString();
+                string location = person.BirthLocation.GetLocation(FactLocation.PARISH).ToString();
                 query.Append("msbpn__ftp=" + HttpUtility.UrlEncode(location) + "&");
             }
             query.Append("uidh=2t2");

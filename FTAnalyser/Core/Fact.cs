@@ -31,8 +31,6 @@ namespace FTAnalyzer
                 CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT",
                 CHANGE = "*CHNG", LOSTCOUSINS = "*LOST";
 
-        private FactDate date;
-
         private static readonly Dictionary<string, string> CUSTOM_TAGS = new Dictionary<string, string>();
         private static readonly HashSet<string> COMMENT_FACTS = new HashSet<string>();
 
@@ -97,7 +95,7 @@ namespace FTAnalyzer
         private Fact()
         {
             this.FactType = "";
-            this.date = FactDate.UNKNOWN_DATE;
+            this.FactDate = FactDate.UNKNOWN_DATE;
             this.Comment = "";
             this.Place = "";
             this.Location = new FactLocation();
@@ -131,7 +129,7 @@ namespace FTAnalyzer
                         }
                     }
                     string factDate = FamilyTree.GetText(node, "DATE");
-                    date = new FactDate(factDate, factRef);
+                    this.FactDate = new FactDate(factDate, factRef);
                     SetCommentAndLocation(FactType, FamilyTree.GetText(node), FamilyTree.GetText(node, "PLAC"),
                         FamilyTree.GetText(node, "PLAC/MAP/LATI"), FamilyTree.GetText(node, "PLAC/MAP/LONG"));
 
@@ -169,7 +167,7 @@ namespace FTAnalyzer
             : base()
         {
             this.FactType = factType;
-            this.date = date;
+            this.FactDate = date;
             this.Comment = "";
             this.Place = "";
             this.Location = FamilyTree.Instance.GetLocation(Place, "", "");
@@ -189,9 +187,9 @@ namespace FTAnalyzer
 
         public string FactType { get; private set; }
 
-        public string Datestring
+        public string DateString
         {
-            get { return this.date == null ? "" : this.date.DateString; }
+            get { return this.FactDate == null ? "" : this.FactDate.DateString; }
         }
 
         public IList<FactSource> Sources { get; private set; }

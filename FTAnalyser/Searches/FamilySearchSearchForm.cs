@@ -150,7 +150,7 @@ namespace FTAnalyzer
             List<FactLocation> result = new List<FactLocation>();
             if (marriage != null && marriage.Location != null && marriage.Location.SupportedLocation(level))
             {
-                FactLocation location = marriage.Location.getLocation(level);
+                FactLocation location = marriage.Location.GetLocation(level);
                 result.Add(location);
             }
             //if (i1.BestLocation != null && i1.BestLocation.SupportedLocation(level))

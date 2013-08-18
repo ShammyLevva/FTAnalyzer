@@ -79,7 +79,7 @@ namespace FTAnalyzer.Forms
             int returnlevel = GetFactLocation(res.Results[0].Types);
             if (returnlevel != FactLocation.UNKNOWN)
             {
-                output = "Google found " + loc.getLocation(returnlevel);
+                output = "Google found " + loc.GetLocation(returnlevel);
                 // if we have different input and output levels, assuming it isn't just a more accurate place in the address field
                 // then also show what Google found
                 if (level != returnlevel && !(level == FactLocation.ADDRESS && returnlevel >= FactLocation.ADDRESS))
@@ -87,7 +87,7 @@ namespace FTAnalyzer.Forms
             }
             else
             {
-                output = "Best guess for " + loc.getLocation(level) + " is " + res.Results[0].ReturnAddress;
+                output = "Best guess for " + loc.GetLocation(level) + " is " + res.Results[0].ReturnAddress;
             }
             return output;
         }

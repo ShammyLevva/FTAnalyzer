@@ -259,7 +259,7 @@ namespace FTAnalyzer
             get
             {
                 Fact f = GetPreferredFact(Fact.BIRTH);
-                return (f == null) ? "" : f.Datestring;
+                return (f == null) ? "" : f.DateString;
             }
         }
 
@@ -296,7 +296,7 @@ namespace FTAnalyzer
             {
                 Fact f = GetPreferredFact(Fact.DEATH);
                 return (f == null) ? "" :
-                    ((f.Datestring == null) ? "" : f.Datestring);
+                    ((f.DateString == null) ? "" : f.DateString);
             }
         }
 
@@ -513,24 +513,24 @@ namespace FTAnalyzer
                                 (when == CensusDate.UKCENSUS1841 || when == CensusDate.UKCENSUS1881 || when == CensusDate.UKCENSUS1911))
                                 return true;
                         }
-                        else if (f.Location.country == Countries.SCOTLAND)
+                        else if (f.Location.Country == Countries.SCOTLAND)
                         {
                             if (f.FactDate.Overlaps(CensusDate.UKCENSUS1881) && when == CensusDate.UKCENSUS1881)
                                 return true;
                         }
-                        else if (f.Location.country == Countries.CANADA)
+                        else if (f.Location.Country == Countries.CANADA)
                         {
                             if (f.FactDate.Overlaps(CensusDate.CANADACENSUS1881) && when == CensusDate.CANADACENSUS1881)
                                 return true;
                         }
-                        else if (f.Location.country == Countries.UNITED_STATES)
+                        else if (f.Location.Country == Countries.UNITED_STATES)
                         {
                             if ((f.FactDate.Overlaps(CensusDate.USCENSUS1880) ||
                                  f.FactDate.Overlaps(CensusDate.USCENSUS1940)) && 
                                 (when == CensusDate.USCENSUS1880 || when == CensusDate.USCENSUS1940))
                                 return true;
                         }
-                        else if (f.Location.country == Countries.IRELAND)
+                        else if (f.Location.Country == Countries.IRELAND)
                         {
                             if (f.FactDate.Overlaps(CensusDate.IRELANDCENSUS1911) && when == CensusDate.IRELANDCENSUS1911)
                                 return true;

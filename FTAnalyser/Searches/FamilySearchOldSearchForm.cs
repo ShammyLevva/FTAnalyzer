@@ -174,7 +174,7 @@ namespace FTAnalyzer
                     setParameter(MOTHERS_LAST_NAME, surname);
                 if (level == FactLocation.REGION && parameters[SHIRE] != string.Empty)
                 {
-                    newFilename = filename.Substring(0, filename.Length - 5) + FamilyTree.validFilename(" (" + location.getLocation(level) + ").html");
+                    newFilename = filename.Substring(0, filename.Length - 5) + FamilyTree.validFilename(" (" + location.GetLocation(level) + ").html");
                 }
                 if (!File.Exists(newFilename))
                 {
