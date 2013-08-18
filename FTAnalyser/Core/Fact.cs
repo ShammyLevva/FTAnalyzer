@@ -103,31 +103,65 @@ namespace FTAnalyzer
 
         public static string GetFactTypeDescription(string factType)
         {
-            switch (factType) {
+            switch (factType)
+            {
                 case ADOPTION: return "Adoption";
                 case ANNULMENT: return "Annulment";
-                case BAPTISM:return "Baptism";
+                case BAPTISM: return "Baptism";
+                case BAPTISM_LDS: return "Baptism (LDS)";
+                case BAR_MITZVAH: return "Bar mitzvah";
+                case BAS_MITZVAH: return "Bas mitzvah";
+                case BIRTH: return "Birth";
+                case BLESSING: return "Blessing";
+                case BURIAL: return "Burial";
+                case CENSUS: return "Census";
+                case CHRISTENING: return "Christening";
+                case ADULT_CHRISTENING: return "Adult christening";
+                case CONFIRMATION: return "Confirmation";
+                case CONFIRMATIONLDS: return "Confirmation (LDS)";
+                case CREMATION: return "Cremation";
+                case DEATH: return "Death";
+                case PHYSICAL_DESC: return "Physical description";
+                case DIVORCE: return "Divorce";
+                case DIVORCE_FILED: return "Divorce filed";
+                case EDUCATION: return "Education";
+                case EMIGRATION: return "Emigration";
+                case ENDOWMENT: return "Endowment";
+                case ENGAGEMENT: return "Engagement";
+                case FIRST_COMMUNION: return "First communion";
+                case GRADUATION: return "Graduation";
+                case IMMIGRATION: return "Immigration";
+                case NAT_ID_NO: return "National identity no.";
+                case NATIONAL_TRIBAL: return "Nationality";
+                case NUM_CHILDREN: return "Number of children";
+                case NUM_MARRIAGE: return "Number of marriages";
+                case LEGATEE: return "Legatee";
+                case MARRIAGE_BANN: return "Marriage banns";
+                case MARR_CONTRACT: return "Marriage contract";
+                case MARR_LICENSE: return "Marriage license";
+                case MARRIAGE: return "Marriage";
+                case MARR_SETTLEMENT: return "Marriage settlement";
+                case NATURALIZATION: return "Naturalization";
+                case OCCUPATION: return "Occupation";
+                case POSSESSIONS: return "Property";
+                case ORDINANCE: return "Ordinance (LDS)";
+                case ORDINATION: return "Ordination";
+                case PROBATE: return "Probate";
+                case RESIDENCE: return "Residence";
+                case RETIREMENT: return "Retirement";
+                case SEALING_CHILD: return "Sealing to child (LDS)";
+                case SEALING_SPOUSE: return "Sealing to spouse (LDS)";
+                case WILL: return "Will";
+                case SEPARATION: return "Separation";
+                case MILITARY: return "Military service";
+                case MILITARY_SERVICE_ID: return "Military service id";
+                case ELECTION: return "Election";
+                case DEGREE: return "Degree";
+                case EMPLOYMENT: return "Employment";
+                case MEDICAL_CONDITION: return "Medical condition";
                 default: return factType;
             }
         }
-
-        //public static readonly string ADOPTION = "ADOP", ANNULMENT = "ANUL", BAPTISM = "BAPM",
-        //        BAPTISM_LDS = "BAPL", BAR_MITZVAH = "BARM", BAS_MITZVAH = "BASM", BIRTH = "BIRT",
-        //        BLESSING = "BLESS", BURIAL = "BURI", CENSUS = "CENS",
-        //        CHRISTENING = "CHR", ADULT_CHRISTENING = "CHRA", CONFIRMATION = "CONF",
-        //        CONFIRMATIONLDS = "CONL", CREMATION = "CREM", DEATH = "DEAT", PHYSICAL_DESC = "DSCR",
-        //        DIVORCE = "DIV", DIVORCE_FILED = "DIVF", EDUCATION = "EDUC", EMIGRATION = "EMIG",
-        //        ENDOWMENT = "ENDL", ENGAGEMENT = "ENGA", FIRST_COMMUNION = "FCOM",
-        //        GRADUATION = "GRAD", IMMIGRATION = "IMMI", NAT_ID_NO = "IDNO",
-        //        NATIONAL_TRIBAL = "NATI", NUM_CHILDREN = "NCHI", NUM_MARRIAGE = "NMR",
-        //        LEGATEE = "LEGA", MARRIAGE_BANN = "MARB", MARR_CONTRACT = "MARC",
-        //        MARR_LICENSE = "MARL", MARRIAGE = "MARR", MARR_SETTLEMENT = "MARS",
-        //        NATURALIZATION = "NATU", OCCUPATION = "OCCU", POSSESSIONS = "PROP", ORDINANCE = "ORDI",
-        //        ORDINATION = "ORDN", PROBATE = "PROB", RESIDENCE = "RESI",
-        //        RETIREMENT = "RETI", SEALING_CHILD = "SLGC", SEALING_SPOUSE = "SLGS",
-        //        WILL = "WILL", SEPARATION = "_SEPR", MILITARY = "_MILT", MILITARY_SERVICE_ID = "_MILTID",
-        //        ELECTION = "_ELEC", DEGREE = "_DEG", EMPLOYMENT = "_EMPLOY",
-        //        MEDICAL_CONDITION = "_MDCL", CUSTOM_FACT = "EVEN";
 
         #region Constructors
 
