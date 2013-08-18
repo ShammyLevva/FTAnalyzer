@@ -38,7 +38,7 @@ namespace FTAnalyzer
 
         public string FactType
         {
-            get { return f.FactType; }
+            get { return Fact.GetFactTypeDescription(f.FactType); }
         }
 
         public string FactDate

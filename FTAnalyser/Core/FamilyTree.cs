@@ -999,7 +999,8 @@ namespace FTAnalyzer
                     foreach (Fact f in ind.AllFacts)
                     {
                         if (f.FactType != Fact.BIRTH && f.FactDate.IsBefore(ind.BirthDate))
-                            errors[9].Add(new DataError(ind, f.FactType + " fact recorded: " + f.FactDate + " before individual was born"));
+                            errors[9].Add(new DataError(ind, Fact.GetFactTypeDescription(f.FactType) + " fact recorded: " +
+                                f.FactDate + " before individual was born"));
                     }
                     foreach (Family asChild in ind.FamiliesAsChild)
                     {

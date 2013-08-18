@@ -13,7 +13,8 @@ namespace FTAnalyzer.Utilities
         public static void Export(System.Data.DataTable table, string filename)
         {
             string q = "\"";
-            StreamWriter output = new StreamWriter(filename);
+            Encoding isoWesternEuropean = Encoding.GetEncoding(28591);
+            StreamWriter output = new StreamWriter(new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Write), isoWesternEuropean);
             //am getting my grid's column headers
             int columnscount = table.Columns.Count;
 
@@ -29,7 +30,7 @@ namespace FTAnalyzer.Utilities
                 //write in new row
                 for (int i = 0; i < columnscount; i++)
                 {
-                    output.Write(q + row[i].ToString() + q);
+                    output.Write(q + row[i].ToString().Replace("\"", "")  + q);
                     if (i < columnscount - 1)
                         output.Write(",");
                 }

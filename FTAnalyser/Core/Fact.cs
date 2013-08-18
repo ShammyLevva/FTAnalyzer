@@ -9,7 +9,7 @@ namespace FTAnalyzer
 {
     public class Fact
     {
-        public static readonly string ADOPTION = "ADOP", ANNULMENT = "ANUL", BAPTISM = "BAPM",
+        public const string ADOPTION = "ADOP", ANNULMENT = "ANUL", BAPTISM = "BAPM",
                 BAPTISM_LDS = "BAPL", BAR_MITZVAH = "BARM", BAS_MITZVAH = "BASM", BIRTH = "BIRT",
                 BLESSING = "BLESS", BURIAL = "BURI", CENSUS = "CENS",
                 CHRISTENING = "CHR", ADULT_CHRISTENING = "CHRA", CONFIRMATION = "CONF",
@@ -27,7 +27,7 @@ namespace FTAnalyzer
                 ELECTION = "_ELEC", DEGREE = "_DEG", EMPLOYMENT = "_EMPLOY",
                 MEDICAL_CONDITION = "_MDCL", CUSTOM_FACT = "EVEN";
 
-        public static readonly string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
+        public const string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSE", FAMILYSEARCH = "*IGI",
                 CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT",
                 CHANGE = "*CHNG", LOSTCOUSINS = "*LOST";
@@ -100,6 +100,34 @@ namespace FTAnalyzer
             COMMENT_FACTS.Add(PHYSICAL_DESC);
             COMMENT_FACTS.Add(POSSESSIONS);
         }
+
+        public static string GetFactTypeDescription(string factType)
+        {
+            switch (factType) {
+                case ADOPTION: return "Adoption";
+                case ANNULMENT: return "Annulment";
+                case BAPTISM:return "Baptism";
+                default: return factType;
+            }
+        }
+
+        //public static readonly string ADOPTION = "ADOP", ANNULMENT = "ANUL", BAPTISM = "BAPM",
+        //        BAPTISM_LDS = "BAPL", BAR_MITZVAH = "BARM", BAS_MITZVAH = "BASM", BIRTH = "BIRT",
+        //        BLESSING = "BLESS", BURIAL = "BURI", CENSUS = "CENS",
+        //        CHRISTENING = "CHR", ADULT_CHRISTENING = "CHRA", CONFIRMATION = "CONF",
+        //        CONFIRMATIONLDS = "CONL", CREMATION = "CREM", DEATH = "DEAT", PHYSICAL_DESC = "DSCR",
+        //        DIVORCE = "DIV", DIVORCE_FILED = "DIVF", EDUCATION = "EDUC", EMIGRATION = "EMIG",
+        //        ENDOWMENT = "ENDL", ENGAGEMENT = "ENGA", FIRST_COMMUNION = "FCOM",
+        //        GRADUATION = "GRAD", IMMIGRATION = "IMMI", NAT_ID_NO = "IDNO",
+        //        NATIONAL_TRIBAL = "NATI", NUM_CHILDREN = "NCHI", NUM_MARRIAGE = "NMR",
+        //        LEGATEE = "LEGA", MARRIAGE_BANN = "MARB", MARR_CONTRACT = "MARC",
+        //        MARR_LICENSE = "MARL", MARRIAGE = "MARR", MARR_SETTLEMENT = "MARS",
+        //        NATURALIZATION = "NATU", OCCUPATION = "OCCU", POSSESSIONS = "PROP", ORDINANCE = "ORDI",
+        //        ORDINATION = "ORDN", PROBATE = "PROB", RESIDENCE = "RESI",
+        //        RETIREMENT = "RETI", SEALING_CHILD = "SLGC", SEALING_SPOUSE = "SLGS",
+        //        WILL = "WILL", SEPARATION = "_SEPR", MILITARY = "_MILT", MILITARY_SERVICE_ID = "_MILTID",
+        //        ELECTION = "_ELEC", DEGREE = "_DEG", EMPLOYMENT = "_EMPLOY",
+        //        MEDICAL_CONDITION = "_MDCL", CUSTOM_FACT = "EVEN";
 
         #region Constructors
 
