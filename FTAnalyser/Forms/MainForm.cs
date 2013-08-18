@@ -12,6 +12,7 @@ using FTAnalyzer.Filters;
 using FTAnalyzer.Forms;
 using FTAnalyzer.Utilities;
 using Printing.DataGridViewPrint.Tools;
+using System.Drawing;
 
 namespace FTAnalyzer
 {
@@ -26,6 +27,8 @@ namespace FTAnalyzer
         private FamilyTree ft = FamilyTree.Instance;
         private FactDate censusDate = CensusDate.UKCENSUS1881;
         private bool stopProcessing = false;
+
+        private DataGridViewCellStyle knownCountryStyle = null;
 
         public MainForm()
         {
@@ -1353,6 +1356,26 @@ namespace FTAnalyzer
         {
             TabPage current = tabCtrlLocations.SelectedTab;
             current.Controls[0].Focus();
+        }
+
+        private void dgCountries_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
+            {
+                return;
+            }
+            DataGridViewCellStyle style = dgCountries.DefaultCellStyle;
+            DataGridViewCell cell = dgCountries.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            string country = (string)cell.Value;
+            if (Countries.IsKnownCountry(country))
+            {
+                if (knownCountryStyle == null)
+                {
+                    knownCountryStyle = style.Clone();
+                    knownCountryStyle.Font = new Font(style.Font, FontStyle.Bold);
+                }
+                e.CellStyle = knownCountryStyle;
+            }
         }
     }
 }
