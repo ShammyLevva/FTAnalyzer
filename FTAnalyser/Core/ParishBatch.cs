@@ -8,57 +8,29 @@ namespace FTAnalyzer
     public class ParishBatch
     {
 
-        private String batch;
-        private String parishID;
-        private Parish parish;
-        private String startYear;
-        private String endYear;
-        private String comments;
+        public string Batch { get; private set; }
+        public string ParishID { get; private set; }
+        public Parish Parish { get; set; }
+        public string StartYear { get; set; }
+        public string EndYear { get; set; }
+        private string comments;
 
         public ParishBatch(String batch, String parishID)
         {
-            this.batch = batch;
-            this.parish = null;
-            this.parishID = parishID;
-            this.startYear = "";
-            this.endYear = "";
+            this.Batch = batch;
+            this.Parish = null;
+            this.ParishID = parishID;
+            this.StartYear = "";
+            this.EndYear = "";
             this.comments = "";
         }
 
         #region Properties
 
-        public String Batch
-        {
-            get { return batch; }
-        }
-
-        public Parish Parish
-        {
-            get { return parish; }
-            set { this.parish = value; }
-        }
-
-        public String ParishID
-        {
-            get { return parishID; }
-        }
-
-        public String Comments
+        public string Comments
         {
             get { return comments == null ? "" : "(" + comments + ")"; }
             set { this.comments = value; }
-        }
-
-        public String EndYear
-        {
-            get { return endYear; }
-            set { this.endYear = value; }
-        }
-
-        public String StartYear
-        {
-            get { return startYear; }
-            set { this.startYear = value; }
         }
 
         #endregion

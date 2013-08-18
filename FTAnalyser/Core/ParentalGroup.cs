@@ -7,99 +7,85 @@ using System.Xml;
 namespace FTAnalyzer
 {
     public class ParentalGroup {
-    	
-        private Individual individual;
-        private Individual father, mother;
-        private Fact parentsMarriage;
+
+        public Individual Individual { get; private set; }
+        public Individual Father { get; private set; }
+        public Individual Mother { get; private set; }
+        public Fact ParentsMarriage { get; private set; }
         
         public ParentalGroup (Individual i, Individual f, Individual m, Fact marriage) {
-            this.individual = i;
-            this.father = f;
-            this.mother = m;
-            this.parentsMarriage = marriage;
+            this.Individual = i;
+            this.Father = f;
+            this.Mother = m;
+            this.ParentsMarriage = marriage;
         }
 
         #region Properties 
-        public Individual Father {
-            get { return father; }
-        }
-
-        public Individual Individual {
-            get { return individual; }
-        }
-
-        public Individual Mother {
-            get { return mother; }
-        }
-
-        public Fact ParentsMarriage {
-            get { return parentsMarriage; }
-        }
 
         public string Residence {
             get
             {
-                Fact residence = individual.GetPreferredFact(Fact.RESIDENCE);
+                Fact residence = Individual.GetPreferredFact(Fact.RESIDENCE);
                 return (residence == null) ? "" : residence.Place;
             }
         }
         
         public string FathersName {
-            get { return (father == null) ? ""  : father.Name; }
+            get { return (Father == null) ? ""  : Father.Name; }
         }
 
         public string MothersName {
-            get { return (mother == null) ? ""  : mother.Name; }
+            get { return (Mother == null) ? ""  : Mother.Name; }
         }
 
         public string FathersOccupation {
-            get { return (father == null) ? ""  : father.Occupation; }
+            get { return (Father == null) ? ""  : Father.Occupation; }
         }
 
         public string MothersOccupation {
-            get { return (mother == null) ? ""  : mother.Occupation; }
+            get { return (Mother == null) ? ""  : Mother.Occupation; }
         }
         
         public string ParentsMarriageDate {
-            get { return (parentsMarriage == null) ? "" : parentsMarriage.FactDate.DateString; }
+            get { return (ParentsMarriage == null) ? "" : ParentsMarriage.FactDate.DateString; }
         }
         
         public string ParentsMarriageLocation {
-            get { return (parentsMarriage == null) ? "" : parentsMarriage.Place; }
+            get { return (ParentsMarriage == null) ? "" : ParentsMarriage.Place; }
         }
 
         #endregion
 
         public FactLocation BestLocation(FactDate when)
         {
-            FactLocation i = individual.BestLocation(when);
-            if (parentsMarriage == null)
+            FactLocation i = Individual.BestLocation(when);
+            if (ParentsMarriage == null)
                 return i;
-            FactLocation f = new FactLocation(parentsMarriage.Place);
+            FactLocation f = new FactLocation(ParentsMarriage.Place);
             if (f.Level > i.Level)
                 return f;
             else
                 return i;
         }
 
-        public string isFatherDeceased(FactDate when)
+        public string IsFatherDeceased(FactDate when)
         {
-            return (father == null || !father.isDeceased(when)) ? "" : "(Deceased)";
+            return (Father == null || !Father.isDeceased(when)) ? "" : "(Deceased)";
         }
 
-        public string isMotherDeceased(FactDate when)
+        public string IsMotherDeceased(FactDate when)
         {
-            return (mother == null || !mother.isDeceased(when)) ? "" : "(Deceased)";
+            return (Mother == null || !Mother.isDeceased(when)) ? "" : "(Deceased)";
         }
 
-        public Fact getPreferredFact(string factType)
+        public Fact GetPreferredFact(string factType)
         {
-            return individual.GetPreferredFact(factType);
+            return Individual.GetPreferredFact(factType);
         }
 
-        public FactDate getPreferredFactDate(string factType)
+        public FactDate GetPreferredFactDate(string factType)
         {
-            return individual.GetPreferredFactDate(factType);
+            return Individual.GetPreferredFactDate(factType);
         }
 
     }
