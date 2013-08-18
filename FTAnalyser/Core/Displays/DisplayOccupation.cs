@@ -7,17 +7,14 @@ namespace FTAnalyzer
 {
     public class DisplayOccupation : IDisplayOccupation
     {
-        private string occupation;
-        private int count;
+        public string Occupation { get; private set; }
+        public int Count { get; set; }
 
         public DisplayOccupation(string occupation,int count)
         {
-            this.occupation = occupation;
-            this.count = count;
+            this.Occupation = occupation;
+            this.Count = count;
         }
-
-        public string Occupation { get { return occupation; } }
-        public int Count { get { return count; } set { count = value; } }
 
         public int CompareTo(IDisplayOccupation that)
         {

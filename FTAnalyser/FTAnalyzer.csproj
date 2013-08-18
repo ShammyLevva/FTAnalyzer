@@ -314,9 +314,7 @@
     <Compile Include="Forms\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Displays\DisplaySurnamesAtLocation.cs" />
     <Compile Include="Core\Displays\IDisplayCensus.cs" />
-    <Compile Include="Core\Displays\IDisplaySurnamesAtLocation.cs" />
     <Compile Include="Core\Displays\IDisplayLocation.cs" />
     <Compile Include="Core\Displays\IDisplayLooseDeath.cs" />
     <Compile Include="Core\Displays\IDisplayIndividual.cs" />
@@ -351,11 +349,6 @@
     <Compile Include="Forms\Locations.Designer.cs">
       <DependentUpon>Locations.cs</DependentUpon>
     </Compile>
-    <Compile Include="HTTPParser\Attribute.cs" />
-    <Compile Include="HTTPParser\AttributeList.cs" />
-    <Compile Include="HTTPParser\FindLinks.cs" />
-    <Compile Include="HTTPParser\Parse.cs" />
-    <Compile Include="HTTPParser\ParseHTML.cs" />
     <Compile Include="Properties\GeneralSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

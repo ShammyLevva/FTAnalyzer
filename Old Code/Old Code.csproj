@@ -59,6 +59,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Displays\DisplaySurnamesAtLocation.cs" />
+    <Compile Include="Core\Displays\IDisplaySurnamesAtLocation.cs" />
     <Compile Include="Core\FamilySearchLocation.cs" />
     <Compile Include="Formatters\BaseOutputFormatter.cs" />
     <Compile Include="Formatters\BirthOutputFormatter.cs" />
@@ -77,6 +79,11 @@
     <Compile Include="Forms\RegistrationReport.Designer.cs">
       <DependentUpon>RegistrationReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="HTTPParser\Attribute.cs" />
+    <Compile Include="HTTPParser\AttributeList.cs" />
+    <Compile Include="HTTPParser\FindLinks.cs" />
+    <Compile Include="HTTPParser\Parse.cs" />
+    <Compile Include="HTTPParser\ParseHTML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registrations\BirthRegistration.cs" />
     <Compile Include="Registrations\CensusRegistration.cs" />
