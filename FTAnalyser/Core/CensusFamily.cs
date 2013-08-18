@@ -136,5 +136,23 @@ namespace FTAnalyzer
         //        return relation == Individual.UNSET ? Individual.UNKNOWN : relation;
         //    }
         //}
+
+        public string Surname
+        {
+            get
+            {
+                if (husband != null) return husband.SurnameAtDate(CensusDate);
+                else if (wife != null) return wife.SurnameAtDate(CensusDate);
+                else
+                {
+                    Individual child = Children.FirstOrDefault();
+                    if (child != null)
+                    {
+                        return child.SurnameAtDate(CensusDate);
+                    }
+                }
+                return "UNKNOWN";
+            }
+        }
     }
 }

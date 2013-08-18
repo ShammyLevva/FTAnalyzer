@@ -5,19 +5,12 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    class CensusIndividualNameComparer : Comparer<CensusIndividual>
+    class CensusIndividualNameComparer : DefaultCensusComparer
     {
         public override int Compare(CensusIndividual x, CensusIndividual y)
         {
-            int r = x.Surname.CompareTo(y.Surname);
-            if (r == 0)
-            {
-                r = x.Forenames.CompareTo(y.Forenames);
-                if (r == 0)
-                {
-                    r = x.Position - y.Position;
-                }
-            }
+            int r = x.CensusSurname.CompareTo(y.CensusSurname);
+            if (r == 0) r = base.Compare(x, y);
             return r;
         }
     }

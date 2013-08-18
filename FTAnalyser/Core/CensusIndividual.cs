@@ -40,5 +40,10 @@ namespace FTAnalyzer
         {
             get { return family.CensusDate.isAfter(BirthDate) && family.CensusDate.isBefore(DeathDate); }
         }
+
+        public string CensusSurname
+        {
+            get { return family.Surname; }
+        }
     }
 }
