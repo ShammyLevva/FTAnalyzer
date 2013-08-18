@@ -57,7 +57,7 @@ namespace FTAnalyzer.Forms
         }
 
         public void SetupCensus(Predicate<CensusIndividual> filter, IComparer<CensusIndividual> comparer,
-                FactDate date, bool censusDone, bool includeResidence, bool lostCousinCheck, int maxAge)
+                FactDate date, bool censusDone, bool includeResidence, bool lostCousinCheck)
         {
             FamilyTree ft = FamilyTree.Instance;
             censusDate = date;

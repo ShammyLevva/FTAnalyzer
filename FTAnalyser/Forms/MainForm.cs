@@ -361,7 +361,7 @@ namespace FTAnalyzer
                 country = " " + cenDate.Country;
                 censusComparator = new CensusLocationComparer(FactLocation.PARISH);
             }
-            census.SetupCensus(filter, censusComparator, censusDate, false, ckbCensusResidence.Checked, false, (int)udAgeFilter.Value);
+            census.SetupCensus(filter, censusComparator, censusDate, false, ckbCensusResidence.Checked, false);
             census.Text = "People missing a " + censusDate.StartDate.Year.ToString() + country + " Census Record that you can search for";
             DisposeDuplicateForms(census);
             census.Show();
@@ -397,6 +397,7 @@ namespace FTAnalyzer
                 filter = FilterUtils.AndFilter<CensusIndividual>(filter, surnameFilter);
             }
 
+            filter = FilterUtils.AndFilter<CensusIndividual>(x => x.Age.MinAge < (int)udAgeFilter.Value, filter);
             return filter;
         }
 
@@ -484,7 +485,7 @@ namespace FTAnalyzer
             else
                 filter = FilterUtils.AndFilter<CensusIndividual>(FilterUtils.DateFilter<CensusIndividual>(registrationDate, censusDate), filter);
 
-            census.SetupCensus(filter, comparer, censusDate, true, ckbLCResidence.Checked, ckbHideRecorded.Checked, 110);
+            census.SetupCensus(filter, comparer, censusDate, true, ckbLCResidence.Checked, ckbHideRecorded.Checked);
             census.Text = reportTitle;
             HourGlass(false);
             DisposeDuplicateForms(census);

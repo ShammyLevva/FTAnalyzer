@@ -518,8 +518,8 @@ namespace FTAnalyzer
             FactDate toAdd = null;
             if (deathDate != FactDate.UNKNOWN_DATE && deathDate.Type != FactDate.FactDateType.ABT && !deathDate.isExact())
             {
-                DateTime maxLiving = getMaxLivingDate(indiv);
-                DateTime minDeath = getMinDeathDate(indiv);
+                DateTime maxLiving = GetMaxLivingDate(indiv);
+                DateTime minDeath = GetMinDeathDate(indiv);
                 if (maxLiving > deathDate.StartDate)
                 {
                     // the starting death date is before the last alive date
@@ -544,8 +544,8 @@ namespace FTAnalyzer
             else if (deathDate == FactDate.UNKNOWN_DATE && indiv.CurrentAge.MinAge > 110)
             {
                 // also check for empty death dates for people aged over 110
-                DateTime maxLiving = getMaxLivingDate(indiv);
-                DateTime minDeath = getMinDeathDate(indiv);
+                DateTime maxLiving = GetMaxLivingDate(indiv);
+                DateTime minDeath = GetMinDeathDate(indiv);
                 if (minDeath != FactDate.MAXDATE)
                     toAdd = new FactDate(maxLiving, minDeath);
             }
@@ -559,7 +559,7 @@ namespace FTAnalyzer
             }
         }
 
-        private DateTime getMaxLivingDate(Individual indiv)
+        private DateTime GetMaxLivingDate(Individual indiv)
         {
             DateTime maxdate = FactDate.MINDATE;
             List<Family> indfam = new List<Family>();
@@ -603,27 +603,27 @@ namespace FTAnalyzer
                 // very exact 9 months before dates
                 maxdate = new DateTime(maxdate.Year, 1, 1);
             }
-            maxdate = getMaxDate(maxdate, getMaxFactDate(indiv, Fact.CENSUS));
-            maxdate = getMaxDate(maxdate, getMaxFactDate(indiv, Fact.RESIDENCE));
-            maxdate = getMaxDate(maxdate, getMaxFactDate(indiv, Fact.WITNESS));
-            maxdate = getMaxDate(maxdate, getMaxFactDate(indiv, Fact.EMIGRATION));
-            maxdate = getMaxDate(maxdate, getMaxFactDate(indiv, Fact.IMMIGRATION));
-            maxdate = getMaxDate(maxdate, getMaxFactDate(indiv, Fact.ARRIVAL));
-            maxdate = getMaxDate(maxdate, getMaxFactDate(indiv, Fact.DEPARTURE));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.CENSUS));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.RESIDENCE));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.WITNESS));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.EMIGRATION));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.IMMIGRATION));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.ARRIVAL));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.DEPARTURE));
             // at this point we have the maximum point a person was alive
             // based on their oldest child and last census record and marriage date
             return maxdate;
         }
 
-        private DateTime getMaxDate(DateTime d1, DateTime d2)
+        private DateTime GetMaxDate(DateTime d1, DateTime d2)
         {
             return d1 > d2 ? d1 : d2;
         }
 
-        private DateTime getMaxFactDate(Individual indiv, string factType)
+        private DateTime GetMaxFactDate(Individual indiv, string factType)
         {
             DateTime maxdate = FactDate.MINDATE;
-            List<Fact> facts = indiv.GetFacts(factType);
+            IEnumerable<Fact> facts = indiv.GetFacts(factType);
             foreach (Fact f in facts)
             {
                 DateTime d = factType == Fact.BIRTH ? new DateTime(f.FactDate.StartDate.Year, 1, 1) : f.FactDate.StartDate;
@@ -635,7 +635,7 @@ namespace FTAnalyzer
             return maxdate;
         }
 
-        private DateTime getMinDeathDate(Individual indiv)
+        private DateTime GetMinDeathDate(Individual indiv)
         {
             FactDate deathDate = indiv.DeathDate;
             DateTime now = DateTime.Now;
