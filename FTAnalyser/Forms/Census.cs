@@ -205,7 +205,7 @@ namespace FTAnalyzer.Forms
         {
             this.Cursor = Cursors.WaitCursor;
             CensusIndividual ds = dgCensus.CurrentRow == null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
-            FactLocation loc = ds == null ? null : ds.RegistrationLocation;
+            FactLocation loc = ds == null ? null : ds.CensusLocation;
             if (loc != null)
             {   // Do geo coding stuff
                 GoogleMap frmGoogleMap = new GoogleMap();
@@ -221,7 +221,7 @@ namespace FTAnalyzer.Forms
         {
             this.Cursor = Cursors.WaitCursor;
             CensusIndividual ds = dgCensus.CurrentRow == null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
-            FactLocation loc = ds == null ? null : ds.RegistrationLocation;
+            FactLocation loc = ds == null ? null : ds.CensusLocation;
             if (loc != null)
             {   // Do geo coding stuff
                 BingOSMap frmBingMap = new BingOSMap();

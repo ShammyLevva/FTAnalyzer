@@ -20,8 +20,8 @@ namespace FTAnalyzer
 
         public override int Compare(CensusIndividual r1, CensusIndividual r2)
         {
-            FactLocation l1 = r1.RegistrationLocation;
-            FactLocation l2 = r2.RegistrationLocation;
+            FactLocation l1 = r1.CensusLocation;
+            FactLocation l2 = r2.CensusLocation;
             int comp = l1.CompareTo(l2, level);
             if (comp == 0) comp = base.Compare(r1, r2);
             return comp;

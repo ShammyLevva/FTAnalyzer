@@ -389,7 +389,7 @@ namespace FTAnalyzer
             }
 
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(locationFilter, relationFilter,
-                    FilterUtils.DateFilter<CensusIndividual>(x => x.RegistrationDate, cenDate.SelectedDate));
+                    FilterUtils.DateFilter<CensusIndividual>(x => x.CensusDate, cenDate.SelectedDate));
 
             if (txtSurname.Text.Length > 0)
             {
@@ -451,7 +451,7 @@ namespace FTAnalyzer
         private void LostCousinsCensus(string location, Predicate<CensusIndividual> filter, FactDate censusDate, string reportTitle)
         {
             Func<CensusIndividual, int> relationType = x => x.RelationType;
-            Func<CensusIndividual, FactDate> registrationDate = x => x.RegistrationDate;
+            Func<CensusIndividual, FactDate> registrationDate = x => x.CensusDate;
             HourGlass(true);
             Census census;
             Predicate<CensusIndividual> relation =

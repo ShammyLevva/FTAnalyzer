@@ -21,12 +21,12 @@ namespace FTAnalyzer
             get { return family.FamilyGed; }
         }
 
-        public FactLocation RegistrationLocation
+        public FactLocation CensusLocation
         {
             get { return family.BestLocation; }
         }
 
-        public FactDate RegistrationDate
+        public FactDate CensusDate
         {
             get { return family.CensusDate; }
         }
@@ -48,12 +48,12 @@ namespace FTAnalyzer
 
         public bool IsValidLocation(string location)
         {
-            if (!RegistrationLocation.isKnownCountry)
+            if (!CensusLocation.isKnownCountry)
                 return true;
             else if (Countries.isUnitedKingdom(location))
-                return RegistrationLocation.isUnitedKingdom;
+                return CensusLocation.isUnitedKingdom;
             else
-                return RegistrationLocation.Country.Equals(location);
+                return CensusLocation.Country.Equals(location);
         }
     }
 }

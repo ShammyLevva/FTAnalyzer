@@ -9,7 +9,7 @@ namespace FTAnalyzer
     {
         string FamilyGed { get; }
         string IndividualID { get; }
-        FactLocation RegistrationLocation { get; }
+        FactLocation CensusLocation { get; }
         string CensusName { get; }
         Age Age { get; }
         string Occupation { get; }
