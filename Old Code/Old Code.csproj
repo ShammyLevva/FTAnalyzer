@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\FamilySearchLocation.cs" />
     <Compile Include="Formatters\BaseOutputFormatter.cs" />
     <Compile Include="Formatters\BirthOutputFormatter.cs" />
     <Compile Include="Formatters\CensusOutputFormatter.cs" />
@@ -83,6 +84,11 @@
     <Compile Include="Registrations\MarriageRegistration.cs" />
     <Compile Include="Registrations\Registration.cs" />
     <Compile Include="Registrations\RegistrationsProcessor.cs" />
+    <Compile Include="Searches\FamilySearchNewSearchForm.cs" />
+    <Compile Include="Searches\FamilySearchOldSearchForm.cs" />
+    <Compile Include="Searches\FamilySearchResult.cs" />
+    <Compile Include="Searches\FamilySearchResultWriter.cs" />
+    <Compile Include="Searches\FamilySearchSearchForm.cs" />
     <Compile Include="Still to Process\GROSearch.cs" />
     <Compile Include="Still to Process\GROSSearch.cs" />
     <Compile Include="Still to Process\IGIDocument.cs" />

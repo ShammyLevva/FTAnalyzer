@@ -151,6 +151,7 @@
     <Compile Include="Core\Fact.cs" />
     <Compile Include="Core\FactDate.cs" />
     <Compile Include="Core\FactSource.cs" />
+    <Compile Include="Core\FamilySearch.cs" />
     <Compile Include="Core\Statistics.cs" />
     <Compile Include="Exceptions\InvalidXMLFactException.cs" />
     <Compile Include="Exceptions\InvalidDoubleDateException.cs" />
@@ -307,7 +308,6 @@
     </Content>
     <Content Include="Useful URLs.txt" />
     <Compile Include="Core\Displays\IDisplayFamily.cs" />
-    <Compile Include="Core\FamilySearchLocation.cs" />
     <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -366,12 +366,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>NetworkSettings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Searches\FamilySearch.cs" />
-    <Compile Include="Searches\FamilySearchNewSearchForm.cs" />
-    <Compile Include="Searches\FamilySearchSearchForm.cs" />
-    <Compile Include="Searches\FamilySearchResultWriter.cs" />
-    <Compile Include="Searches\FamilySearchResult.cs" />
-    <Compile Include="Searches\FamilySearchOldSearchForm.cs" />
     <Compile Include="Core\ParishBatch.cs" />
     <Compile Include="Core\Individual.cs" />
     <Compile Include="Core\FactLocation.cs" />

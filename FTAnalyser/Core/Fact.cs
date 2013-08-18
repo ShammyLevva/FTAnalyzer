@@ -159,6 +159,17 @@ namespace FTAnalyzer
                 case DEGREE: return "Degree";
                 case EMPLOYMENT: return "Employment";
                 case MEDICAL_CONDITION: return "Medical condition";
+                case CHILDLESS: return "Childless";
+                case UNMARRIED: return "Dies single";
+                case WITNESS: return "Witness";
+                case UNKNOWN: return "UNKNOWN";
+                case LOOSEDEATH: return "Loose death";
+                case FAMILYSEARCH: return "IGI search";
+                case CONTACT: return "Contact";
+                case ARRIVAL: return "Arrival";
+                case DEPARTURE: return "Departure";
+                case CHANGE: return "Record change";
+                case LOSTCOUSINS: return "Lost Cousins";
                 default: return factType;
             }
         }

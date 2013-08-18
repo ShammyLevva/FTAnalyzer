@@ -1265,50 +1265,50 @@
             // 
             // pbFamilySearch
             // 
-            this.pbFamilySearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbFamilySearch.Location = new System.Drawing.Point(8, 151);
-            this.pbFamilySearch.Name = "pbFamilySearch";
-            this.pbFamilySearch.Size = new System.Drawing.Size(915, 20);
-            this.pbFamilySearch.TabIndex = 6;
-            this.pbFamilySearch.Visible = false;
+            //this.pbFamilySearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //| System.Windows.Forms.AnchorStyles.Right)));
+            //this.pbFamilySearch.Location = new System.Drawing.Point(8, 151);
+            //this.pbFamilySearch.Name = "pbFamilySearch";
+            //this.pbFamilySearch.Size = new System.Drawing.Size(915, 20);
+            //this.pbFamilySearch.TabIndex = 6;
+            //this.pbFamilySearch.Visible = false;
             // 
             // btnFamilySearchMarriageSearch
             // 
-            this.btnFamilySearchMarriageSearch.Location = new System.Drawing.Point(8, 118);
-            this.btnFamilySearchMarriageSearch.Name = "btnFamilySearchMarriageSearch";
-            this.btnFamilySearchMarriageSearch.Size = new System.Drawing.Size(123, 27);
-            this.btnFamilySearchMarriageSearch.TabIndex = 5;
-            this.btnFamilySearchMarriageSearch.Text = "Start Marriage Search";
-            this.btnFamilySearchMarriageSearch.UseVisualStyleBackColor = true;
-            this.btnFamilySearchMarriageSearch.Click += new System.EventHandler(this.btnFamilySearchMarriageSearch_Click);
+            //this.btnFamilySearchMarriageSearch.Location = new System.Drawing.Point(8, 118);
+            //this.btnFamilySearchMarriageSearch.Name = "btnFamilySearchMarriageSearch";
+            //this.btnFamilySearchMarriageSearch.Size = new System.Drawing.Size(123, 27);
+            //this.btnFamilySearchMarriageSearch.TabIndex = 5;
+            //this.btnFamilySearchMarriageSearch.Text = "Start Marriage Search";
+            //this.btnFamilySearchMarriageSearch.UseVisualStyleBackColor = true;
+            //this.btnFamilySearchMarriageSearch.Click += new System.EventHandler(this.btnFamilySearchMarriageSearch_Click);
             // 
             // btnFamilySearchChildrenSearch
             // 
-            this.btnFamilySearchChildrenSearch.Location = new System.Drawing.Point(137, 118);
-            this.btnFamilySearchChildrenSearch.Name = "btnFamilySearchChildrenSearch";
-            this.btnFamilySearchChildrenSearch.Size = new System.Drawing.Size(123, 27);
-            this.btnFamilySearchChildrenSearch.TabIndex = 4;
-            this.btnFamilySearchChildrenSearch.Text = "Start Children Search";
-            this.btnFamilySearchChildrenSearch.UseVisualStyleBackColor = true;
-            this.btnFamilySearchChildrenSearch.Click += new System.EventHandler(this.btnFamilySearchChildrenSearch_Click);
+            //this.btnFamilySearchChildrenSearch.Location = new System.Drawing.Point(137, 118);
+            //this.btnFamilySearchChildrenSearch.Name = "btnFamilySearchChildrenSearch";
+            //this.btnFamilySearchChildrenSearch.Size = new System.Drawing.Size(123, 27);
+            //this.btnFamilySearchChildrenSearch.TabIndex = 4;
+            //this.btnFamilySearchChildrenSearch.Text = "Start Children Search";
+            //this.btnFamilySearchChildrenSearch.UseVisualStyleBackColor = true;
+            //this.btnFamilySearchChildrenSearch.Click += new System.EventHandler(this.btnFamilySearchChildrenSearch_Click);
             // 
             // btnFamilySearchFolderBrowse
             // 
-            this.btnFamilySearchFolderBrowse.Location = new System.Drawing.Point(515, 11);
-            this.btnFamilySearchFolderBrowse.Name = "btnFamilySearchFolderBrowse";
-            this.btnFamilySearchFolderBrowse.Size = new System.Drawing.Size(77, 21);
-            this.btnFamilySearchFolderBrowse.TabIndex = 2;
-            this.btnFamilySearchFolderBrowse.Text = "Browse ...";
-            this.btnFamilySearchFolderBrowse.UseVisualStyleBackColor = true;
-            this.btnFamilySearchFolderBrowse.Click += new System.EventHandler(this.btnFamilySearchFolderBrowse_Click);
+            //this.btnFamilySearchFolderBrowse.Location = new System.Drawing.Point(515, 11);
+            //this.btnFamilySearchFolderBrowse.Name = "btnFamilySearchFolderBrowse";
+            //this.btnFamilySearchFolderBrowse.Size = new System.Drawing.Size(77, 21);
+            //this.btnFamilySearchFolderBrowse.TabIndex = 2;
+            //this.btnFamilySearchFolderBrowse.Text = "Browse ...";
+            //this.btnFamilySearchFolderBrowse.UseVisualStyleBackColor = true;
+            //this.btnFamilySearchFolderBrowse.Click += new System.EventHandler(this.btnFamilySearchFolderBrowse_Click);
             // 
             // txtFamilySearchfolder
             // 
-            this.txtFamilySearchfolder.Location = new System.Drawing.Point(137, 12);
-            this.txtFamilySearchfolder.Name = "txtFamilySearchfolder";
-            this.txtFamilySearchfolder.Size = new System.Drawing.Size(372, 20);
-            this.txtFamilySearchfolder.TabIndex = 1;
+            //this.txtFamilySearchfolder.Location = new System.Drawing.Point(137, 12);
+            //this.txtFamilySearchfolder.Name = "txtFamilySearchfolder";
+            //this.txtFamilySearchfolder.Size = new System.Drawing.Size(372, 20);
+            //this.txtFamilySearchfolder.TabIndex = 1;
             // 
             // label3
             // 
