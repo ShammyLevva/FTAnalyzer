@@ -11,7 +11,7 @@ namespace FTAnalyzer
     {
         public static readonly string ADOPTION = "ADOP", ANNULMENT = "ANUL", BAPTISM = "BAPM",
                 BAPTISM_LDS = "BAPL", BAR_MITZVAH = "BARM", BAS_MITZVAH = "BASM", BIRTH = "BIRT",
-                BLESSING = "BLESS", BURIAL = "BURI", CASTE = "CAST", CENSUS = "CENS",
+                BLESSING = "BLESS", BURIAL = "BURI", CENSUS = "CENS",
                 CHRISTENING = "CHR", ADULT_CHRISTENING = "CHRA", CONFIRMATION = "CONF",
                 CONFIRMATIONLDS = "CONL", CREMATION = "CREM", DEATH = "DEAT", PHYSICAL_DESC = "DSCR",
                 DIVORCE = "DIV", DIVORCE_FILED = "DIVF", EDUCATION = "EDUC", EMIGRATION = "EMIG",
@@ -21,10 +21,11 @@ namespace FTAnalyzer
                 LEGATEE = "LEGA", MARRIAGE_BANN = "MARB", MARR_CONTRACT = "MARC",
                 MARR_LICENSE = "MARL", MARRIAGE = "MARR", MARR_SETTLEMENT = "MARS",
                 NATURALIZATION = "NATU", OCCUPATION = "OCCU", POSSESSIONS = "PROP", ORDINANCE = "ORDI",
-                ORDINATION = "ORDN", PROBATE = "PROB", RELIGION = "RELI", RESIDENCE = "RESI",
+                ORDINATION = "ORDN", PROBATE = "PROB", RESIDENCE = "RESI",
                 RETIREMENT = "RETI", SEALING_CHILD = "SLGC", SEALING_SPOUSE = "SLGS",
-                SOCIAL_SECURITY_NO = "SSN", NOBILITY_TITLE = "TITL", WILL = "WILL",
-                MILITARY = "_MILT", ELECTION = "_ELEC", CUSTOM_FACT = "EVEN";
+                WILL = "WILL", SEPARATION = "_SEPR", MILITARY = "_MILT", MILITARY_SERVICE_ID = "_MILTID",
+                ELECTION = "_ELEC", DEGREE = "_DEG", EMPLOYMENT = "_EMPLOY",
+                MEDICAL_CONDITION = "_MDCL", CUSTOM_FACT = "EVEN";
 
         public static readonly string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSE", FAMILYSEARCH = "*IGI",
@@ -76,10 +77,9 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("Census 1940", CENSUS);
 
             COMMENT_FACTS.Add(OCCUPATION);
-            COMMENT_FACTS.Add(RELIGION);
             COMMENT_FACTS.Add(MILITARY);
+            COMMENT_FACTS.Add(MILITARY_SERVICE_ID);
             COMMENT_FACTS.Add(RETIREMENT);
-            COMMENT_FACTS.Add(SOCIAL_SECURITY_NO);
             COMMENT_FACTS.Add(WILL);
             COMMENT_FACTS.Add(ELECTION);
             COMMENT_FACTS.Add(CHILDLESS);
@@ -88,6 +88,17 @@ namespace FTAnalyzer
             COMMENT_FACTS.Add(UNKNOWN);
             COMMENT_FACTS.Add(FAMILYSEARCH);
             COMMENT_FACTS.Add(LOSTCOUSINS);
+            COMMENT_FACTS.Add(DEGREE);
+            COMMENT_FACTS.Add(EDUCATION);
+            COMMENT_FACTS.Add(GRADUATION);
+            COMMENT_FACTS.Add(DEPARTURE);
+            COMMENT_FACTS.Add(ARRIVAL);
+            COMMENT_FACTS.Add(EMPLOYMENT);
+            COMMENT_FACTS.Add(MEDICAL_CONDITION);
+            COMMENT_FACTS.Add(ORDINANCE);
+            COMMENT_FACTS.Add(ORDINATION);
+            COMMENT_FACTS.Add(PHYSICAL_DESC);
+            COMMENT_FACTS.Add(POSSESSIONS);
         }
 
         #region Constructors

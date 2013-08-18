@@ -593,6 +593,19 @@ namespace FTAnalyzer
             maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.IMMIGRATION));
             maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.ARRIVAL));
             maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.DEPARTURE));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.EDUCATION));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.DEGREE));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.ADOPTION));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.BAR_MITZVAH));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.BAS_MITZVAH));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.ADULT_CHRISTENING));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.CONFIRMATION));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.FIRST_COMMUNION));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.ORDINATION));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.NATURALIZATION));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.GRADUATION));
+            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.RETIREMENT));
+
             // at this point we have the maximum point a person was alive
             // based on their oldest child and last census record and marriage date
             return maxdate;

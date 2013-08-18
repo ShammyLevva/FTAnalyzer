@@ -50,14 +50,57 @@ namespace FTAnalyzer
             familiesAsChild = new List<Family>();
             familiesAsParent = new List<Family>();
 
-            addFacts(node, Fact.BIRTH);
-            addFacts(node, Fact.CHRISTENING);
-            addFacts(node, Fact.DEATH);
-            addFacts(node, Fact.BURIAL);
-            addFacts(node, Fact.CENSUS);
-            addFacts(node, Fact.RESIDENCE);
-            addFacts(node, Fact.OCCUPATION);
-            addFacts(node, Fact.CUSTOM_FACT);
+            // Individual attributes
+            AddFacts(node, Fact.PHYSICAL_DESC);
+            AddFacts(node, Fact.EDUCATION);
+            AddFacts(node, Fact.DEGREE);
+            AddFacts(node, Fact.NAT_ID_NO);
+            AddFacts(node, Fact.NATIONAL_TRIBAL);
+            AddFacts(node, Fact.NUM_CHILDREN);
+            AddFacts(node, Fact.NUM_MARRIAGE);
+            AddFacts(node, Fact.OCCUPATION);
+            AddFacts(node, Fact.POSSESSIONS);
+            AddFacts(node, Fact.RESIDENCE);
+            AddFacts(node, Fact.MEDICAL_CONDITION);
+
+            // Individual events
+            AddFacts(node, Fact.BIRTH);
+            AddFacts(node, Fact.CHRISTENING);
+            AddFacts(node, Fact.DEATH);
+            AddFacts(node, Fact.BURIAL);
+            AddFacts(node, Fact.CREMATION);
+            AddFacts(node, Fact.ADOPTION);
+            AddFacts(node, Fact.BAPTISM);
+            AddFacts(node, Fact.BAR_MITZVAH);
+            AddFacts(node, Fact.BAS_MITZVAH);
+            AddFacts(node, Fact.BLESSING);
+            AddFacts(node, Fact.ADULT_CHRISTENING);
+            AddFacts(node, Fact.CONFIRMATION);
+            AddFacts(node, Fact.FIRST_COMMUNION);
+            AddFacts(node, Fact.ORDINATION);
+            AddFacts(node, Fact.NATURALIZATION);
+            AddFacts(node, Fact.EMIGRATION);
+            AddFacts(node, Fact.IMMIGRATION);
+            AddFacts(node, Fact.CENSUS);
+            AddFacts(node, Fact.PROBATE);
+            AddFacts(node, Fact.WILL);
+            AddFacts(node, Fact.ENDOWMENT);
+            AddFacts(node, Fact.LEGATEE);
+            AddFacts(node, Fact.GRADUATION);
+            AddFacts(node, Fact.RETIREMENT);
+            AddFacts(node, Fact.MILITARY);
+            AddFacts(node, Fact.MILITARY_SERVICE_ID);
+            AddFacts(node, Fact.ELECTION);
+            AddFacts(node, Fact.EMPLOYMENT);
+
+            // LDS facts
+            AddFacts(node, Fact.BAPTISM_LDS);
+            AddFacts(node, Fact.CONFIRMATIONLDS);
+            AddFacts(node, Fact.ORDINANCE);
+            AddFacts(node, Fact.SEALING_CHILD);
+
+            // Custom facts
+            AddFacts(node, Fact.CUSTOM_FACT);
         }
 
         internal Individual(Individual i)
@@ -601,7 +644,7 @@ namespace FTAnalyzer
 
         #region Fact Functions
 
-        private void addFacts(XmlNode node, string factType)
+        private void AddFacts(XmlNode node, string factType)
         {
             XmlNodeList list = node.SelectNodes(factType);
             foreach(XmlNode n in list) {

@@ -65,7 +65,18 @@ namespace FTAnalyzer
                     else
                         ft.XmlErrorBox.AppendText("Child without a reference found in family : " + FamilyRef + "\n");
                 }
+
+                AddFacts(node, Fact.ANNULMENT);
+                AddFacts(node, Fact.DIVORCE);
+                AddFacts(node, Fact.DIVORCE_FILED);
+                AddFacts(node, Fact.ENGAGEMENT);
                 AddFacts(node, Fact.MARRIAGE);
+                AddFacts(node, Fact.MARRIAGE_BANN);
+                AddFacts(node, Fact.MARR_CONTRACT);
+                AddFacts(node, Fact.MARR_LICENSE);
+                AddFacts(node, Fact.MARR_SETTLEMENT);
+                AddFacts(node, Fact.SEPARATION);
+                AddFacts(node, Fact.SEALING_SPOUSE);
                 AddFacts(node, Fact.CUSTOM_FACT);
             }
         }
