@@ -136,15 +136,16 @@ namespace FTAnalyzer.Forms
         private void dgCensus_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             Comparer<IDisplayCensus> comp;
-            switch (e.ColumnIndex)
+            DataGridViewColumn column = dgCensus.Columns[e.ColumnIndex];
+            switch (column.Name)
             {
-                case 0: // Family GED
+                case "FamilyGed": // Family GED
                     comp = new IDisplayCensusComparerWrapper(new CensusFamilyGedComparer());
                     break;
-                case 1: // By location (original sort order)
-                    comp = new IDisplayCensusComparerWrapper(new DefaultCensusComparer());
+                case "RegistrationLocation": // By location (original sort order)
+                    comp = new IDisplayCensusComparerWrapper(new CensusLocationComparer());
                     break;
-                case 2: // Census Name
+                case "CensusName": // Census Name
                     comp = new IDisplayCensusComparerWrapper(new CensusIndividualNameComparer());
                     break;
                 default:

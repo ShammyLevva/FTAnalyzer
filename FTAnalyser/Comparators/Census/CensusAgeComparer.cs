@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class CensusAgeComparator : IComparer<Individual>
+    public class CensusAgeComparer : IComparer<Individual>
     {
         public int Compare(Individual i1, Individual i2)
         {

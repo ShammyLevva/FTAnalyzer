@@ -278,11 +278,8 @@
     <Compile Include="Core\Age.cs" />
     <Compile Include="Core\CensusDate.cs" />
     <Compile Include="Core\CensusFamily.cs" />
-    <Compile Include="Comparators\Location\Registration\CensusAgeComparator.cs" />
-    <Compile Include="Comparators\Location\Registration\DateComparator.cs" />
-    <Compile Include="Comparators\Location\Registration\LocationComparator.cs" />
-    <Compile Include="Comparators\Location\Registration\MultiComparator.cs" />
-    <Compile Include="Comparators\Location\Registration\NameComparator.cs" />
+    <Compile Include="Comparators\Census\CensusAgeComparer.cs" />
+    <Compile Include="Comparators\Census\CensusLocationComparer.cs" />
     <Content Include="Printing.DataGridViewPrint.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -568,7 +565,9 @@
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Comparators\Location\Registration\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

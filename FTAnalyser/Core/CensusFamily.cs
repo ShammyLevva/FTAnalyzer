@@ -59,7 +59,7 @@ namespace FTAnalyzer
                     facts.Add(marriage);
                 List<Individual> censusChildren = new List<Individual>();
                 // sort children oldest first
-                children.Sort(new CensusAgeComparator());
+                children.Sort(new CensusAgeComparer());
                 foreach (Individual child in children)
                 {
                     // set location to childs birth location

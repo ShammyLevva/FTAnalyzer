@@ -6,23 +6,25 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class LocationComparator : IComparer<CensusIndividual>
+    public class CensusLocationComparer : DefaultCensusComparer
     {
         private int level;
         
-        public LocationComparator() {
+        public CensusLocationComparer() {
             level = FactLocation.PLACE;
         }
         
-        public LocationComparator(int level) {
+        public CensusLocationComparer(int level) {
             this.level = level;
         }
 
-        public int Compare(CensusIndividual r1, CensusIndividual r2)
+        public override int Compare(CensusIndividual r1, CensusIndividual r2)
         {
             FactLocation l1 = r1.RegistrationLocation;
             FactLocation l2 = r2.RegistrationLocation;
-            return l1.CompareTo(l2, level);
+            int comp = l1.CompareTo(l2, level);
+            if (comp == 0) comp = base.Compare(r1, r2);
+            return comp;
         }
     }
 }

@@ -348,19 +348,19 @@ namespace FTAnalyzer
             Census census;
             string country;
             Predicate<CensusIndividual> filter = CreateCensusIndividualFilter();
-            MultiComparator<CensusIndividual> censusComparator = new MultiComparator<CensusIndividual>();
+            IComparer<CensusIndividual> censusComparator;
             if (ckbNoLocations.Checked)
             {
                 census = new Census(cenDate.CensusCountry);
                 country = string.Empty;
+                censusComparator = new DefaultCensusComparer();
             }
             else
             {
                 census = new Census(cenDate.CensusCountry, censusCountry.GetLocation);
                 country = " " + cenDate.Country;
-                censusComparator.addComparator(new LocationComparator(FactLocation.PARISH));
+                censusComparator = new CensusLocationComparer(FactLocation.PARISH);
             }
-            censusComparator.addComparator(new DateComparator());
             census.SetupCensus(filter, censusComparator, censusDate, false, ckbCensusResidence.Checked, false, (int)udAgeFilter.Value);
             census.Text = "People missing a " + censusDate.StartDate.Year.ToString() + country + " Census Record that you can search for";
             DisposeDuplicateForms(census);
@@ -459,11 +459,12 @@ namespace FTAnalyzer
                         FilterUtils.IntFilter<CensusIndividual>(relationType, Individual.BLOOD),
                         FilterUtils.IntFilter<CensusIndividual>(relationType, Individual.DIRECT)),
                     FilterUtils.IntFilter<CensusIndividual>(relationType, Individual.MARRIEDTODB));
-            MultiComparator<CensusIndividual> censusComparator = new MultiComparator<CensusIndividual>();
+            IComparer<CensusIndividual> comparer;
             if (ckbLCIgnoreCountry.Checked) // only add the parish location comparator if we are using locations
             {
                 filter = FilterUtils.TrueFilter<CensusIndividual>(); // if we are ignoring locations then ignore what was passed as a filter
                 census = new Census(location);
+                comparer = new DefaultCensusComparer();
             }
             else
             {
@@ -473,7 +474,7 @@ namespace FTAnalyzer
                     census = new Census(Countries.UNITED_KINGDOM, new FactLocation(location));
                 else
                     census = new Census(location, new FactLocation(location));
-                censusComparator.addComparator(new LocationComparator(FactLocation.COUNTRY));
+                comparer = new CensusLocationComparer(FactLocation.COUNTRY);
             }
 
             if (ckbRestrictions.Checked)
@@ -483,8 +484,7 @@ namespace FTAnalyzer
             else
                 filter = FilterUtils.AndFilter<CensusIndividual>(FilterUtils.DateFilter<CensusIndividual>(registrationDate, censusDate), filter);
 
-            censusComparator.addComparator(new DateComparator());
-            census.SetupCensus(filter, censusComparator, censusDate, true, ckbLCResidence.Checked, ckbHideRecorded.Checked, 110);
+            census.SetupCensus(filter, comparer, censusDate, true, ckbLCResidence.Checked, ckbHideRecorded.Checked, 110);
             census.Text = reportTitle;
             HourGlass(false);
             DisposeDuplicateForms(census);
