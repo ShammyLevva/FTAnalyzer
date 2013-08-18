@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace FTAnalyzer
 {
-    public class FactDate: IComparable<FactDate>
+    public class FactDate : IComparable<FactDate>
     {
         public static readonly DateTime MINDATE = new DateTime(1, 1, 1);
         public static readonly DateTime MAXDATE = new DateTime(9999, 12, 31);
@@ -31,7 +31,7 @@ namespace FTAnalyzer
         private static readonly string BETWEENFIX = "(\\d{4})-(\\d{4})";
         private static readonly string USDATEFIX = "^([A-Za-z]{3}) *(\\d{1,2} )(\\d{4})$";
         private static readonly string SPACEFIX = "^(\\d{1,2}) *([A-Za-z]{3}) *(\\d{0,4})$";
-        
+
         public static readonly FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
 
         public enum FactDateType
@@ -44,7 +44,7 @@ namespace FTAnalyzer
         public DateTime EndDate { get; private set; }
         public FactDateType DateType { get; private set; }
 
-        public bool DoubleDate { get; private set;} // Is a pre 1752 date bet 1 Jan and 25 Mar eg: 1735/36.
+        public bool DoubleDate { get; private set; } // Is a pre 1752 date bet 1 Jan and 25 Mar eg: 1735/36.
 
         public FactDate(string str, string factRef = "")
         {
@@ -97,8 +97,8 @@ namespace FTAnalyzer
             str = str.Replace("  ", " ");
 
             str = str.Replace("JANUARY", "JAN");
-            str = str.Replace("FEBRUARY", "FEB"); 
-            str = str.Replace("MARCH", "MAR"); 
+            str = str.Replace("FEBRUARY", "FEB");
+            str = str.Replace("MARCH", "MAR");
             str = str.Replace("APRIL", "APR");
             str = str.Replace("JUNE", "JUN");
             str = str.Replace("JULY", "JUL");
@@ -170,7 +170,7 @@ namespace FTAnalyzer
             str = str.Replace("Q4", "ABT DEC");
             str = str.Replace("QTR4", "ABT DEC");
             str = str.Replace("QTR 4", "ABT DEC");
-            
+
             str = str.Replace("ABT ABT", "ABT"); // fix any ABT X QTR's that will have been changed to ABT ABT
 
             if (str.StartsWith("FROM"))
@@ -331,7 +331,7 @@ namespace FTAnalyzer
                     if (pos == -1)
                     {
                         pos = processDate.IndexOf("-");
-                        if(pos == -1)
+                        if (pos == -1)
                             throw new Exception("Invalid BETween date no AND found");
                         fromdate = processDate.Substring(4, pos - 4);
                         todate = processDate.Substring(pos + 1);
@@ -485,7 +485,7 @@ namespace FTAnalyzer
             // check if valid double date if so set double date to true
             string doubleyear = gDouble.ToString().Trim();
             if (doubleyear.Length == 1 && year.Length >= 2)
-                doubleyear = year.Substring(year.Length - 2,1) + doubleyear;
+                doubleyear = year.Substring(year.Length - 2, 1) + doubleyear;
             if (doubleyear == null || doubleyear.Length != 2 || year.Length < 3)
                 return false;
             int iYear = Convert.ToInt32(year);
@@ -585,14 +585,35 @@ namespace FTAnalyzer
 
         #endregion
 
-        public override bool Equals(Object that) 
+        public override bool Equals(Object that)
         {
-            if (that == null || ! (that is FactDate))
+            if (that == null || !(that is FactDate))
                 return false;
-            FactDate f = (FactDate) that;
-            // two FactDates are equal if same datestring or same start and enddates
+            FactDate f = (FactDate)that;
+            // two FactDates are equal if same datestring or same start and- enddates
             return (this.DateString.ToUpper().Equals(f.DateString.ToUpper())) ||
-        	       (this.StartDate.Equals(f.StartDate) && this.EndDate.Equals(f.EndDate));
+                   (this.StartDate.Equals(f.StartDate) && this.EndDate.Equals(f.EndDate));
+        }
+
+        public static bool operator ==(FactDate a, FactDate b)
+        {
+            // If both are null, or both are same instance, return true.
+            if (System.Object.ReferenceEquals(a, b))
+            {
+                return true;
+            }
+            // If one is null, but not both, return false.
+            if (((object)a == null) || ((object)b == null))
+            {
+                return false;
+            }
+            return a.Equals(b);
+        }
+
+
+        public static bool operator !=(FactDate a, FactDate b)
+        {
+            return !(a == b);
         }
 
         public override int GetHashCode()
