@@ -81,7 +81,6 @@
   <xs:complexType name="countryMove">
     <xs:attribute name="region" type="xs:string"/>
     <xs:attribute name="country" type="xs:string"/>
-    <xs:attribute name="regionID" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="regionMove">
