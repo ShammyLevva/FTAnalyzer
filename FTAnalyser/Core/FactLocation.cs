@@ -498,9 +498,12 @@ namespace FTAnalyzer
                 double distance = Math.Sqrt(Math.Pow((double)(f.FactDate.StartDate.Year - when.StartDate.Year), 2.0) +
                     Math.Pow((double)(f.FactDate.EndDate.Year - when.EndDate.Year), 2.0));
                 if (distance < minDistance && !f.Location.location.Equals(string.Empty))
-                {
-                    result = f.Location;
-                    minDistance = distance;
+                { // this is a closer date but now check to ensure we aren't overwriting a known country with an unknown one.
+                    if (f.Location.isKnownCountry || (!f.Location.isKnownCountry && !result.isKnownCountry))
+                    {
+                        result = f.Location;
+                        minDistance = distance;
+                    }
                 }
             }
             return result;
