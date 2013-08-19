@@ -13,7 +13,7 @@ namespace FTAnalyzer
         string CensusName { get; }
         Age Age { get; }
         string Occupation { get; }
-        string DateOfBirth { get; }
+        FactDate BirthDate { get; }
         FactLocation BirthLocation { get; }
         string Status { get; }
         string Relation { get; }

@@ -295,15 +295,6 @@ namespace FTAnalyzer
         {
             get { return this.status == WIFE ? forenames + " " + marriedName + " (" + surname + ")" : Name; }
         }
-        
-        public string DateOfBirth
-        {
-            get
-            {
-                Fact f = GetPreferredFact(Fact.BIRTH);
-                return (f == null) ? "" : f.DateString;
-            }
-        }
 
         public FactDate BirthDate
         {
