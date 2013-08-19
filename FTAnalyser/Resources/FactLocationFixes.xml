@@ -571,15 +571,61 @@
       <RegionToParish parish="Falkirk"       region="West Lothian" />
       <RegionToParish parish="Stirling"      region="Stirlingshire" />
       <RegionToParish parish="Perth"         region="Perthshire" />
-      <RegionToParish parish="London"        region="Middlesex" />
-      <RegionToParish parish="Manchester"    region="Lancashire" />
-      <RegionToParish parish="Liverpool"     region="Lancashire" />
+      
       <RegionToParish parish="Cardiff"       region="Glamorgan" />
-      <RegionToParish parish="Newcastle"     region="Northumberland" />
-      <RegionToParish parish="Oxford"        region="Oxfordshire" />
-      <RegionToParish parish="Southhampton"  region="Hampshire" />
       <RegionToParish parish="Isle of Wight" region="Hampshire" />
-
+<!--
+      <RegionToParish parish="Bath"
+      <RegionToParish parish="Birmingham"
+      <RegionToParish parish="Bradford"
+      <RegionToParish parish="Brighton"
+      <RegionToParish parish="Bristol"
+      <RegionToParish parish="Cambridge"
+      <RegionToParish parish="Canterbury"
+      <RegionToParish parish="Carlisle"
+      <RegionToParish parish="Chelmsford"
+      <RegionToParish parish="Chester"
+      <RegionToParish parish="Chichester"
+      <RegionToParish parish="London"        region="Middlesex" />
+      <RegionToParish parish="Coventry"
+      <RegionToParish parish="Derby"
+      <RegionToParish parish="Durham"
+      <RegionToParish parish="Ely"
+      <RegionToParish parish="Exeter"
+      <RegionToParish parish="Gloucester"
+      <RegionToParish parish="Hereford"
+      <RegionToParish parish="Kingston"
+      <RegionToParish parish="Lancaster"
+      <RegionToParish parish="Leeds"
+      <RegionToParish parish="Leicester"
+      <RegionToParish parish="Lichfield"
+      <RegionToParish parish="Lincoln"        region="Lincolnshire" />
+      <RegionToParish parish="Manchester"     region="Lancashire" />
+      <RegionToParish parish="Liverpool"      region="Lancashire" />
+      <RegionToParish parish="Newcastle"      region="Northumberland" />
+      <RegionToParish parish="Norwich
+      <RegionToParish parish="Nottingham"     region="Nottinghamshire" />
+      <RegionToParish parish="Oxford"         region="Oxfordshire" />
+      <RegionToParish parish="Peterborough"
+      <RegionToParish parish="Plymouth"
+      <RegionToParish parish="Portsmouth"
+      <RegionToParish parish="Preston"
+      <RegionToParish parish="Ripon"
+      <RegionToParish parish="Salford"
+      <RegionToParish parish="Salisbury"
+      <RegionToParish parish="Sheffield"
+      <RegionToParish parish="Southhampton"  region="Hampshire" />
+      <RegionToParish parish="St Albans
+      <RegionToParish parish="Stoke
+      <RegionToParish parish="Sunderland
+      <RegionToParish parish="Truro
+      <RegionToParish parish="Wakefield
+      <RegionToParish parish="Wells
+      <RegionToParish parish="Winchester
+      <RegionToParish parish="Wolverhampton
+      <RegionToParish parish="Worcester
+      <RegionToParish parish="York"
+-->                      
       <RegionToParish parish="Toronto"    region="Ontario" />
       <RegionToParish parish="Vancouver"  region="British Columbia" />
     </DemoteRegions>
