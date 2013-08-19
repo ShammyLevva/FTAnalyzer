@@ -321,6 +321,9 @@
       <CountryToRegion region="Dundee"              country="Scotland" regionID="Dundee" />
       <CountryToRegion region="Edinburgh"           country="Scotland" regionID="Edinburgh" />
       <CountryToRegion region="Glasgow"             country="Scotland" regionID="Glasgow" />
+      <CountryToRegion region="Inverness"           country="Scotland" regionID="Inverness" />
+      <CountryToRegion region="Perth"               country="Scotland" regionID="Perthshire" />
+      <CountryToRegion region="Stirling"            country="Scotland" regionID="Stirling" />
 
       <!-- English Shires & Counties -->
       <CountryToRegion region="Bedfordshire"        country="England" regionID="Bedford" />
@@ -367,14 +370,66 @@
       <CountryToRegion region="Yorkshire"           country="England" regionID="Yorkshire" />
     
       <!-- English Cities -->
+      <CountryToRegion region="Bath"                country="England" regionID="Bath" />
+      <CountryToRegion region="Birmingham"          country="England" regionID="Birmingham" />
+      <CountryToRegion region="Bradford"            country="England" regionID="Bradford" />
+      <CountryToRegion region="Brighton &amp; Hove" country="England" regionID="Brighton" />
+      <CountryToRegion region="Brighton"            country="England" regionID="Brighton" />
+      <CountryToRegion region="Hove"                country="England" regionID="Brighton" />
+      <CountryToRegion region="Bristol"             country="England" regionID="Bristol" />
+      <CountryToRegion region="Cambridge"           country="England" regionID="Cambridge" />
+      <CountryToRegion region="Canterbury"          country="England" regionID="Canterbury" />
+      <CountryToRegion region="Carlisle"            country="England" regionID="Carlisle" />
+      <CountryToRegion region="Chelmsford"          country="England" regionID="Chelmsford" />
+      <CountryToRegion region="Chester"             country="England" regionID="Chester" />
+      <CountryToRegion region="Chichester"          country="England" regionID="Chichester" />
+      <CountryToRegion region="City of London"      country="England" regionID="London" />
+      <CountryToRegion region="City of Westminster" country="England" regionID="London" />
+      <CountryToRegion region="London"              country="England" regionID="London" />
+      <CountryToRegion region="Coventry"            country="England" regionID="Coventry" />
+      <CountryToRegion region="Derby"               country="England" regionID="Derby" />
+      <CountryToRegion region="Durham"              country="England" regionID="Durham" />
+      <CountryToRegion region="Ely"                 country="England" regionID="Ely" />
+      <CountryToRegion region="Exeter"              country="England" regionID="Exeter" />
+      <CountryToRegion region="Gloucester"          country="England" regionID="Gloucester" />
+      <CountryToRegion region="Hereford"            country="England" regionID="Hereford" />
+      <CountryToRegion region="Kingston upon Hull"  country="England" regionID="Kingston" />
+      <CountryToRegion region="Kingston"            country="England" regionID="Kingston" />
+      <CountryToRegion region="Lancaster"           country="England" regionID="Lancaster" />
+      <CountryToRegion region="Leeds"               country="England" regionID="Leeds" />
+      <CountryToRegion region="Leicester"           country="England" regionID="Leicester" />
+      <CountryToRegion region="Lichfield"           country="England" regionID="Lichfield" />
+      <CountryToRegion region="Lincoln"             country="England" regionID="Lincoln" />
       <CountryToRegion region="Liverpool"           country="England" regionID="Liverpool" />
       <CountryToRegion region="Manchester"          country="England" regionID="Manchester" />
-      <CountryToRegion region="Birmingham"          country="England" regionID="Birmingham" />
-      <CountryToRegion region="London"              country="England" regionID="London" />
-      <CountryToRegion region="Bristol"             country="England" regionID="Bristol" />
-      <CountryToRegion region="Oxford"              country="England" regionID="Oxford" />
+      <CountryToRegion region="Newcastle upon Tyne" country="England" regionID="Newcastle" />
+      <CountryToRegion region="Newcastle-upon-Tyne" country="England" regionID="Newcastle" />
       <CountryToRegion region="Newcastle"           country="England" regionID="Newcastle" />
-
+      <CountryToRegion region="Norwich"             country="England" regionID="Norwich" />
+      <CountryToRegion region="Nottingham"          country="England" regionID="Nottingham" />
+      <CountryToRegion region="Oxford"              country="England" regionID="Oxford" />
+      <CountryToRegion region="Peterborough"        country="England" regionID="Oxford" />
+      <CountryToRegion region="Plymouth"            country="England" regionID="Plymouth" />
+      <CountryToRegion region="Portsmouth"          country="England" regionID="Portsmouth" />
+      <CountryToRegion region="Preston"             country="England" regionID="Preston" />
+      <CountryToRegion region="Ripon"               country="England" regionID="Ripon" />
+      <CountryToRegion region="Salford"             country="England" regionID="Salford" />
+      <CountryToRegion region="Salisbury"           country="England" regionID="Salisbury" />
+      <CountryToRegion region="Sheffield"           country="England" regionID="Sheffield" />
+      <CountryToRegion region="Southampton"         country="England" regionID="Southampton" />
+      <CountryToRegion region="St Albans"           country="England" regionID="St Albans" />
+      <CountryToRegion region="St.Albans"           country="England" regionID="St Albans" />
+      <CountryToRegion region="Stoke-on-Trent"      country="England" regionID="Stoke" />
+      <CountryToRegion region="Stoke"               country="England" regionID="Stoke" />
+      <CountryToRegion region="Sunderland"          country="England" regionID="Sunderland" />
+      <CountryToRegion region="Truro"               country="England" regionID="Truro" />
+      <CountryToRegion region="Wakefield"           country="England" regionID="Wakefield" />
+      <CountryToRegion region="Wells"               country="England" regionID="Wells" />
+      <CountryToRegion region="Winchester"          country="England" regionID="Winchester" />
+      <CountryToRegion region="Wolverhampton"       country="England" regionID="Wolverhampton" />
+      <CountryToRegion region="Worcester"           country="England" regionID="Worcester" />
+      <CountryToRegion region="York"                country="England" regionID="York" />
+                       
       <!-- Welsh Regions -->
       <CountryToRegion region="Anglesey"            country="Wales"    regionID="Anglesey" />
       <CountryToRegion region="Breconshire"         country="Wales"    regionID="Brecon" />
