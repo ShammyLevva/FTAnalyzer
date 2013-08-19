@@ -1109,7 +1109,7 @@ namespace FTAnalyzer
                 path.Append("%2B" + FamilySearch.BIRTH_LOCATION + "%3A" + HttpUtility.UrlEncode(location) + "%7E%20");
             }
             int collection = FamilySearch.CensusCollectionID(country, censusYear);
-            if (collection > 0)
+            if (collection > 0 || country != "Unknown")
                 path.Append("&collection_id=" + collection);
             else
             {
@@ -1199,7 +1199,7 @@ namespace FTAnalyzer
 
         private string BuildFreeCenQuery(string censusCountry, int censusYear, Individual person)
         {
-            if (!censusCountry.Equals(Countries.UNITED_KINGDOM))
+            if (!censusCountry.Equals(Countries.UNITED_KINGDOM) && !censusCountry.Equals("Unknown"))
             {
                 MessageBox.Show("Sorry only UK searches can be done on FreeCEN.");
                 return null;
@@ -1278,7 +1278,7 @@ namespace FTAnalyzer
         {
             // bad  http://www.findmypast.co.uk/CensusPersonSearchResultServlet?basicSearch=false&censusYear=1881&occupation=&otherForenames=&otherLastName=&pageDirection=&recordPosition=0&residence=&route=&searchHouseholds=6,15&searchInstitutions=9&searchVessels=11,12&sortOrder=nameAsc&startNewSearch=startNewSearch&forenames=Michael&fns=fns&lastName=Tebbutt&sns=sns&yearOfBirth=1867&yearOfBirthVariation=1&birthPlace=Streatham&country=England&coIdList=Surrey++++++++++++++++++++++++++++++++++%3a3%2c4+++++++++++++++++++++++++++
             // good http://www.findmypast.co.uk/CensusPersonSearchResultServlet?basicSearch=false&censusYear=1881&occupation=&otherForenames=&otherLastName=&pageDirection=&recordPosition=0&residence=&route=&searchHouseholds=6,15&searchInstitutions=9&searchVessels=11,12&sortOrder=nameAsc&startNewSearch=startNewSearch&forenames=C&fns=fns&lastName=Whitethread&sns=sns&yearOfBirth=1867&yearOfBirthVariation=1&birthPlace=Streatham&country=England&coIdList=Surrey++++++++++++++++++++++++++++++++++%3a3%2c4+++++++++++++++++++++++++++
-            if (!censusCountry.Equals(Countries.UNITED_KINGDOM))
+            if (!censusCountry.Equals(Countries.UNITED_KINGDOM) && !censusCountry.Equals("Unknown"))
             {
                 MessageBox.Show("Sorry non UK census searching of Find My Past isn't supported in this version of FTAnalyzer");
                 return null;
