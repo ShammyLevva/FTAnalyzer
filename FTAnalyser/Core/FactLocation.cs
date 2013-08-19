@@ -23,7 +23,6 @@ namespace FTAnalyzer
         public string Address { get; set; }
         public string Place { get; set; }
         public string ParishID { get; internal set; }
-        public string RegionID { get; private set; }
         public int Level { get; private set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
@@ -33,7 +32,6 @@ namespace FTAnalyzer
         private static Dictionary<string, string> REGION_TYPOS = new Dictionary<string, string>();
         private static Dictionary<string, string> COUNTRY_SHIFTS = new Dictionary<string, string>();
         private static Dictionary<string, string> REGION_SHIFTS = new Dictionary<string, string>();
-        private static Dictionary<string, string> REGION_IDS = new Dictionary<string, string>();
         private static Dictionary<string, string> FREECEN_LOOKUP = new Dictionary<string, string>();
         private static Dictionary<string, Tuple<string, string>> FINDMYPAST_LOOKUP = new Dictionary<string, Tuple<string, string>>();
 
@@ -73,9 +71,6 @@ namespace FTAnalyzer
                         if (COUNTRY_SHIFTS.ContainsKey(from))
                             Console.WriteLine("Error duplicate country shift :" + from);
                         COUNTRY_SHIFTS.Add(from, to);
-                        string regionID = n.Attributes["regionID"].Value;
-                        if (regionID != null && regionID.Length > 0 && !REGION_IDS.ContainsKey(from))
-                            REGION_IDS.Add(from, regionID);
                     }
                 }
                 foreach (XmlNode n in xmlDoc.SelectNodes("Data/Fixes/DemoteRegions/RegionToParish"))
@@ -204,7 +199,6 @@ namespace FTAnalyzer
                 ShiftCountryToRegion();
                 Region = fixRegionTypos(Region);
                 ShiftRegionToParish();
-                SetRegionID();
                 SetFixedLocation();
                 SetSortableLocation();
                 //string after = (parish + ", " + region + ", " + country).ToUpper().Trim();
@@ -368,16 +362,6 @@ namespace FTAnalyzer
         }
 
         #endregion
-
-        private void SetRegionID()
-        {
-            string newRegionID = string.Empty;
-            REGION_IDS.TryGetValue(Region, out newRegionID);
-            if (newRegionID != null && newRegionID.Length > 0)
-                this.RegionID = newRegionID;
-            else
-                this.RegionID = string.Empty;
-        }
 
         public void AddIndividual(Individual ind)
         {
