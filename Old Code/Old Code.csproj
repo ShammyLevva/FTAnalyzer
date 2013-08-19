@@ -100,6 +100,19 @@
     <Compile Include="Still to Process\GROSSearch.cs" />
     <Compile Include="Still to Process\IGIDocument.cs" />
     <Compile Include="Still to Process\IGISearch.cs" />
+    <Compile Include="UserControls\NetworkSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\NetworkSettings.Designer.cs">
+      <DependentUpon>NetworkSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProxySettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ProxySettings.designer.cs">
+      <DependentUpon>ProxySettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\WebRequestWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\FamilySearchResultsViewer.resx">
@@ -111,6 +124,12 @@
     <EmbeddedResource Include="Reports\BirthReport.rdlc" />
     <EmbeddedResource Include="Reports\DeathReport.rdlc" />
     <EmbeddedResource Include="Reports\MarriageReport.rdlc" />
+    <EmbeddedResource Include="UserControls\NetworkSettings.resx">
+      <DependentUpon>NetworkSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ProxySettings.resx">
+      <DependentUpon>ProxySettings.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

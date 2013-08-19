@@ -25,121 +25,13 @@ namespace FTAnalyzer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public int CountGemmingsShown {
-            get {
-                return ((int)(this["CountGemmingsShown"]));
-            }
-            set {
-                this["CountGemmingsShown"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool UseMultithreading {
-            get {
-                return ((bool)(this["UseMultithreading"]));
-            }
-            set {
-                this["UseMultithreading"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("en")]
-        public string Locale {
-            get {
-                return ((string)(this["Locale"]));
-            }
-            set {
-                this["Locale"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool DisplayBuffSource {
+        public bool UseBaptismDates {
             get {
-                return ((bool)(this["DisplayBuffSource"]));
+                return ((bool)(this["UseBaptismDates"]));
             }
             set {
-                this["DisplayBuffSource"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool DisplayGemNames {
-            get {
-                return ((bool)(this["DisplayGemNames"]));
-            }
-            set {
-                this["DisplayGemNames"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public int ProcEffectMode {
-            get {
-                return ((int)(this["ProcEffectMode"]));
-            }
-            set {
-                this["ProcEffectMode"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool DisplayExtraItemInfo {
-            get {
-                return ((bool)(this["DisplayExtraItemInfo"]));
-            }
-            set {
-                this["DisplayExtraItemInfo"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int CombinationEffectMode {
-            get {
-                return ((int)(this["CombinationEffectMode"]));
-            }
-            set {
-                this["CombinationEffectMode"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool HideProfEnchants {
-            get {
-                return ((bool)(this["HideProfEnchants"]));
-            }
-            set {
-                this["HideProfEnchants"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int ItemNameWidthSetting {
-            get {
-                return ((int)(this["ItemNameWidthSetting"]));
-            }
-            set {
-                this["ItemNameWidthSetting"] = value;
+                this["UseBaptismDates"] = value;
             }
         }
     }

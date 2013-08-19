@@ -15,7 +15,7 @@ namespace FTAnalyzer.UserControls
 			InitializeComponent();
 			//cannot be in load, because its possible this tab won't show, and the values will not be initialized.
 			//if this happens, then the users settings will be cleared.
-            CK_Option1.Checked = Properties.GeneralSettings.Default.UseMultithreading;
+            chkUseBaptisms.Checked = Properties.GeneralSettings.Default.UseBaptismDates;
 
         }
 
@@ -25,9 +25,9 @@ namespace FTAnalyzer.UserControls
 		{
             string message = string.Empty;
             string title = string.Empty;
-			Properties.GeneralSettings.Default.UseMultithreading = CK_Option1.Checked;
+			Properties.GeneralSettings.Default.UseBaptismDates = chkUseBaptisms.Checked;
 			Properties.GeneralSettings.Default.Save();
-            OnDisplayBuffChanged();
+            OnUseBaptismDatesChanged();
 		}
 
 		public void Cancel()
@@ -82,11 +82,11 @@ namespace FTAnalyzer.UserControls
 
 		#endregion
 
-        public static event EventHandler DisplayBuffChanged;
-        protected static void OnDisplayBuffChanged()
+        public static event EventHandler UseBaptismDatesChanged;
+        protected static void OnUseBaptismDatesChanged()
         {
-            if (DisplayBuffChanged != null)
-                DisplayBuffChanged(null, EventArgs.Empty);
+            if (UseBaptismDatesChanged != null)
+                UseBaptismDatesChanged(null, EventArgs.Empty);
         }
     }
 }

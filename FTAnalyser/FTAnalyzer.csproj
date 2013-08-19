@@ -229,14 +229,8 @@
     <EmbeddedResource Include="UserControls\GeneralSettings.resx">
       <DependentUpon>GeneralSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\NetworkSettings.resx">
-      <DependentUpon>NetworkSettings.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Options.resx">
       <DependentUpon>Options.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ProxySettings.resx">
-      <DependentUpon>ProxySettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Controls\RelationTypes.resx">
       <DependentUpon>RelationTypes.cs</DependentUpon>
@@ -255,10 +249,6 @@
     <None Include="Properties\GeneralSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>GeneralSettings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\NetworkSettings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>NetworkSettings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -353,11 +343,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>GeneralSettings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Properties\NetworkSettings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>NetworkSettings.settings</DependentUpon>
-    </Compile>
     <Compile Include="Core\ParishBatch.cs" />
     <Compile Include="Core\Individual.cs" />
     <Compile Include="Core\FactLocation.cs" />
@@ -386,23 +371,11 @@
     </Compile>
     <Compile Include="UserControls\InputBox.cs" />
     <Compile Include="UserControls\IOptions.cs" />
-    <Compile Include="UserControls\NetworkSettings.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\NetworkSettings.designer.cs">
-      <DependentUpon>NetworkSettings.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\Options.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserControls\Options.designer.cs">
       <DependentUpon>Options.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\ProxySettings.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\ProxySettings.designer.cs">
-      <DependentUpon>ProxySettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Controls\RelationTypes.cs">
       <SubType>UserControl</SubType>
@@ -421,7 +394,6 @@
     </Compile>
     <Compile Include="Utilities\ShortDoubleMetaphone.cs" />
     <Compile Include="Utilities\SortableBindingList.cs" />
-    <Compile Include="Utilities\WebRequestWrapper.cs" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

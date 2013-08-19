@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeneralSettings));
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.CK_Option1 = new System.Windows.Forms.CheckBox();
+            this.chkUseBaptisms = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -39,17 +39,17 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // CK_Option1
+            // chkUseBaptisms
             // 
-            resources.ApplyResources(this.CK_Option1, "CK_Option1");
-            this.CK_Option1.Name = "CK_Option1";
-            this.CK_Option1.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.chkUseBaptisms, "chkUseBaptisms");
+            this.chkUseBaptisms.Name = "chkUseBaptisms";
+            this.chkUseBaptisms.UseVisualStyleBackColor = true;
             // 
             // GeneralSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.CK_Option1);
+            this.Controls.Add(this.chkUseBaptisms);
             this.Name = "GeneralSettings";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
@@ -60,7 +60,7 @@
 		#endregion
 
 		private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.CheckBox CK_Option1;
+        private System.Windows.Forms.CheckBox chkUseBaptisms;
 
 
 	}

@@ -301,6 +301,15 @@ namespace FTAnalyzer
             get 
             { 
                 FactDate f = GetPreferredFactDate(Fact.BIRTH);
+                if (Properties.GeneralSettings.Default.UseBaptismDates)
+                {
+                    if (f != null && f != FactDate.UNKNOWN_DATE) 
+                        return f;
+                    f = GetPreferredFactDate(Fact.BAPTISM);
+                    if (f != null && f != FactDate.UNKNOWN_DATE) 
+                        return f;
+                    f = GetPreferredFactDate(Fact.CHRISTENING);
+                }
                 return (f == null) ? FactDate.UNKNOWN_DATE : f;
             }
         }
@@ -320,16 +329,6 @@ namespace FTAnalyzer
             {
                 FactDate f = GetPreferredFactDate(Fact.DEATH);
                 return (f == null) ? FactDate.UNKNOWN_DATE : f;
-            }
-        }
-
-        public string DateOfDeath
-        {
-            get
-            {
-                Fact f = GetPreferredFact(Fact.DEATH);
-                return (f == null) ? "" :
-                    ((f.DateString == null) ? "" : f.DateString);
             }
         }
 

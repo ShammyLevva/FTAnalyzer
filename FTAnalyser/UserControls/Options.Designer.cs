@@ -29,7 +29,6 @@
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Network Settings");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Options));
             this.panel1 = new System.Windows.Forms.Panel();
             this.OK = new System.Windows.Forms.Button();
@@ -80,13 +79,6 @@
             this.treeView1.ImageList = this.OptionsMenuImageList;
             this.treeView1.Location = new System.Drawing.Point(12, 12);
             this.treeView1.Name = "treeView1";
-            treeNode1.ImageKey = "wi0064-32.ico";
-            treeNode1.Name = "Node0";
-            treeNode1.SelectedImageKey = "wi0064-32.ico";
-            treeNode1.StateImageKey = "(none)";
-            treeNode1.Text = "Network Settings";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
             this.treeView1.SelectedImageKey = "wi0064-32.ico";
             this.treeView1.ShowNodeToolTips = true;
             this.treeView1.ShowPlusMinus = false;

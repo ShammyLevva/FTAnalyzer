@@ -16,7 +16,6 @@ namespace FTAnalyzer.UserControls
 	/// </summary>
 	public partial class Options : Form
 	{
-		public const string NETWORK_SETTINGS = "Network Settings";
 		public const char MENU_DELIMETER = '|';
 
 		private Dictionary<string, UserControl> _lookupTable;
