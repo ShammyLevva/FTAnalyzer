@@ -242,6 +242,12 @@ namespace FTAnalyzer
                 else if (tabSelector.SelectedTab == tabLocations)
                 {
                     tsCountLabel.Text = "";
+                    dgCountries.DataSource = null;
+                    dgRegions.DataSource = null;
+                    dgParishes.DataSource = null;
+                    dgAddresses.DataSource = null;
+                    dgPlaces.DataSource = null;
+                    Application.DoEvents();
                     mnuPrint.Enabled = true;
                     List<IDisplayLocation> countries = ft.AllCountries.ToList();
                     List<IDisplayLocation> regions = ft.AllRegions.ToList();
@@ -258,23 +264,24 @@ namespace FTAnalyzer
                     dgParishes.DataSource = parishes;
                     dgAddresses.DataSource = addresses;
                     dgPlaces.DataSource = places;
-                    tabCtrlLocations.SelectedTab.Controls[0].Focus();
+                    tsCountLabel.Text = "Count : " + dgCountries.RowCount + " Countries";
+                    tabCtrlLocations.SelectedIndex = 0;
                 }
-                else if (tabSelector.SelectedTab == tabFamilySearch)
-                {
-                    btnCancelFamilySearch.Visible = false;
-                    btnViewResults.Visible = true;
-                    tsCountLabel.Text = "";
-                    btnFamilySearchChildrenSearch.Enabled = btnFamilySearchMarriageSearch.Enabled = ft.IndividualCount > 0;
-                    try
-                    {
-                        txtFamilySearchfolder.Text = (string)Application.UserAppDataRegistry.GetValue("FamilySearch Search Path");
-                    }
-                    catch (Exception)
-                    {
-                        txtFamilySearchfolder.Text = string.Empty;
-                    }
-                }
+                //else if (tabSelector.SelectedTab == tabFamilySearch)
+                //{
+                //    btnCancelFamilySearch.Visible = false;
+                //    btnViewResults.Visible = true;
+                //    tsCountLabel.Text = "";
+                //    btnFamilySearchChildrenSearch.Enabled = btnFamilySearchMarriageSearch.Enabled = ft.IndividualCount > 0;
+                //    try
+                //    {
+                //        txtFamilySearchfolder.Text = (string)Application.UserAppDataRegistry.GetValue("FamilySearch Search Path");
+                //    }
+                //    catch (Exception)
+                //    {
+                //        txtFamilySearchfolder.Text = string.Empty;
+                //    }
+                //}
                 HourGlass(false);
             }
         }
@@ -1357,8 +1364,12 @@ namespace FTAnalyzer
 
         private void tabCtrlLocations_SelectedIndexChanged(object sender, EventArgs e)
         {
+            HourGlass(true);
             TabPage current = tabCtrlLocations.SelectedTab;
-            current.Controls[0].Focus();
+            DataGridView dg = (DataGridView) current.Controls[0];
+            dg.Focus();
+            tsCountLabel.Text = "Count : " + dg.RowCount + " " + dg.Name.Substring(2);
+            HourGlass(false);
         }
 
         private void dgCountries_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
