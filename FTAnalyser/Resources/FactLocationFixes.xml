@@ -289,7 +289,6 @@
       <CountryToRegion region="East Lothian"        country="Scotland" regionID="East Lothian" />
       <CountryToRegion region="Fife"                country="Scotland" regionID="Fife" />
       <CountryToRegion region="Fifeshire"           country="Scotland" regionID="Fife" />
-      <CountryToRegion region="Inverness"           country="Scotland" regionID="Inverness" />
       <CountryToRegion region="Inverness-shire"     country="Scotland" regionID="Inverness" />
       <CountryToRegion region="Kincardineshire"     country="Scotland" regionID="Kincardine" />
       <CountryToRegion region="Kinross"             country="Scotland" regionID="Kinross" />
@@ -338,7 +337,6 @@
       <CountryToRegion region="Devon"               country="England" regionID="Devon" />
       <CountryToRegion region="Dorset"              country="England" regionID="Dorset" />
       <CountryToRegion region="Co Durham"           country="England" regionID="Durham" />
-      <CountryToRegion region="Durham"              country="England" regionID="Durham" />
       <CountryToRegion region="Essex"               country="England" regionID="Essex" />
       <CountryToRegion region="Gloucestershire"     country="England" regionID="Gloucester" />
       <CountryToRegion region="Hampshire"           country="England" regionID="Hampshire" />

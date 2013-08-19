@@ -50,6 +50,8 @@ namespace FTAnalyzer
                 {
                     string from = n.Attributes["from"].Value;
                     string to = n.Attributes["to"].Value;
+                    if (COUNTRY_TYPOS.ContainsKey(from))
+                        Console.WriteLine("Error duplicate country typos :" + from);
                     if (from != null && from.Length > 0 && to != null && to.Length > 0)
                         COUNTRY_TYPOS.Add(from, to);
                 }
@@ -57,6 +59,8 @@ namespace FTAnalyzer
                 {
                     string from = n.Attributes["from"].Value;
                     string to = n.Attributes["to"].Value;
+                    if (REGION_TYPOS.ContainsKey(from))
+                        Console.WriteLine("Error duplicate region typos :" + from);
                     if (from != null && from.Length > 0 && to != null && to.Length > 0)
                         REGION_TYPOS.Add(from, to);
                 }
@@ -66,6 +70,8 @@ namespace FTAnalyzer
                     string to = n.Attributes["country"].Value;
                     if (from != null && from.Length > 0 && to != null && to.Length > 0)
                     {
+                        if (COUNTRY_SHIFTS.ContainsKey(from))
+                            Console.WriteLine("Error duplicate country shift :" + from);
                         COUNTRY_SHIFTS.Add(from, to);
                         string regionID = n.Attributes["regionID"].Value;
                         if (regionID != null && regionID.Length > 0 && !REGION_IDS.ContainsKey(from))
@@ -76,6 +82,8 @@ namespace FTAnalyzer
                 {
                     string from = n.Attributes["parish"].Value;
                     string to = n.Attributes["region"].Value;
+                    if (REGION_SHIFTS.ContainsKey(from))
+                        Console.WriteLine("Error duplicate region shift :" + from);
                     if (from != null && from.Length > 0 && to != null && to.Length > 0)
                     {
                         REGION_SHIFTS.Add(from, to);
@@ -85,6 +93,8 @@ namespace FTAnalyzer
                 {
                     string code = n.Attributes["code"].Value;
                     string county = n.Attributes["county"].Value;
+                    if (FREECEN_LOOKUP.ContainsKey(county))
+                        Console.WriteLine("Error duplicate freecen lookup :" + county);
                     if (code != null && code.Length > 0 && county != null && county.Length > 0)
                     {
                         FREECEN_LOOKUP.Add(county, code);
@@ -95,6 +105,8 @@ namespace FTAnalyzer
                     string code = n.Attributes["code"].Value;
                     string county = n.Attributes["county"].Value;
                     string country = n.Attributes["country"].Value;
+                    if (FINDMYPAST_LOOKUP.ContainsKey(county))
+                        Console.WriteLine("Error duplicate FindMyPast lookup :" + county);
                     if (code != null && code.Length > 0 && county != null && county.Length > 0)
                     {
                         Tuple<string, string> result = new Tuple<string, string>(country, code);
