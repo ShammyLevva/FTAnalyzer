@@ -64,6 +64,8 @@
             // ckbMarriageDB
             // 
             this.ckbMarriageDB.AutoSize = true;
+            this.ckbMarriageDB.Checked = true;
+            this.ckbMarriageDB.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbMarriageDB.Location = new System.Drawing.Point(116, 42);
             this.ckbMarriageDB.Name = "ckbMarriageDB";
             this.ckbMarriageDB.Size = new System.Drawing.Size(146, 17);
