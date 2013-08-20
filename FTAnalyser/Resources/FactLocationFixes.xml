@@ -37,9 +37,9 @@
       <CountryTypo from="SCT"     to="Scotland" />
       <CountryTypo from="Scot"    to="Scotland" />
       <CountryTypo from="Scot."   to="Scotland" />
-      <CountryType from="Holland" to="Netherlands" />
-      <CountryType from="The Netherlands" to="Netherlands" />
-      <CountryType from="CHINA" to="China" />
+      <CountryTypo from="Holland" to="Netherlands" />
+      <CountryTypo from="The Netherlands" to="Netherlands" />
+      <CountryTypo from="CHINA" to="China" />
     </CountryTypos>
     <RegionTypos>
       <!-- Scotland -->
