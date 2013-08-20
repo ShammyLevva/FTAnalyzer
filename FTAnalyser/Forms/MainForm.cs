@@ -37,7 +37,7 @@ namespace FTAnalyzer
             ft.XmlErrorBox = rtbOutput;
             tabSelector.TabPages.RemoveByKey("tabFamilySearch");
             VERSION = PublishVersion();
-            Properties.GeneralSettings.Default.SavePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            SetSavePath();
         }
 
         private string PublishVersion()
@@ -49,6 +49,20 @@ namespace FTAnalyzer
             }
             else
                 return VERSION;
+        }
+
+        private void SetSavePath()
+        {
+            try
+            {
+                Properties.GeneralSettings.Default.SavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Family Tree Analyzer");
+                if (!Directory.Exists(Properties.GeneralSettings.Default.SavePath))
+                    Directory.CreateDirectory(Properties.GeneralSettings.Default.SavePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Found a problem starting up.\nPlease report this at http://ftanalyzer.codeplex.com\nThe error was :" + ex.Message);
+            }
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
