@@ -73,7 +73,7 @@
       <RegionTypo from="Cumb"          to="Cumbria" />
       <RegionTypo from="Derbys"        to="Derbyshire" />
       <RegionTypo from="Derby"         to="Derbyshire" />
-      <RegionTypo from="Co Durham"     to="Durham" />
+      <RegionTypo from="Co Durham"     to="County Durham" />
       <RegionTypo from="Glous"         to="Gloucestershire" />
       <RegionTypo from="Glos"          to="Gloucestershire" />
       <RegionTypo from="Gloucester"    to="Gloucestershire" />
@@ -617,7 +617,7 @@
       <RegionToParish parish="London"         region="Middlesex" />
       <RegionToParish parish="Coventry"       region="Warwickshire" />
       <RegionToParish parish="Derby"          region="Derbyshire" />
-      <RegionToParish parish="Durham"         region="Durham" />
+      <RegionToParish parish="Durham"         region="County Durham" />
       <RegionToParish parish="Ely"            region="Cambridgeshire" />
       <RegionToParish parish="Exeter"         region="Devon" />
       <RegionToParish parish="Gloucester"     region="Gloucestershire" />
@@ -646,7 +646,7 @@
       <RegionToParish parish="Southampton"    region="Hampshire" />
       <RegionToParish parish="St Albans"      region="Hertfordshire" />
       <RegionToParish parish="Stoke"          region="Staffordshire" />
-      <RegionToParish parish="Sunderland"     region="Durham" />
+      <RegionToParish parish="Sunderland"     region="County Durham" />
       <RegionToParish parish="Truro"          region="Cornwall" />
       <RegionToParish parish="Wakefield"      region="Yorkshire" />
       <RegionToParish parish="Wells"          region="Somerset" />
@@ -701,7 +701,7 @@
       <Lookup code="DUB" county="Dublin" />
       <Lookup code="DFS" county="Dumfries-shire" />
       <Lookup code="DNB" county="Dunbarton" />
-      <Lookup code="DUR" county="Durham" />
+      <Lookup code="DUR" county="County Durham" />
       <Lookup code="ELN" county="East Lothian" />
       <Lookup code="ERY" county="East Yorkshire" />
       <Lookup code="ESS" county="Essex" />
@@ -860,7 +860,7 @@
       <Lookup country="England"  code="Derbyshire                              :33                            " county="Derbyshire" />
       <Lookup country="England"  code="Devonshire                              :18                            " county="Devon" />
       <Lookup country="England"  code="Dorsetshire                             :19                            " county="Dorset" />
-      <Lookup country="England"  code="Durham                                  :23                            " county="Durham" />
+      <Lookup country="England"  code="Durham                                  :23                            " county="County Durham" />
       <Lookup country="England"  code="Essex                                   :7                             " county="Essex" />
       <Lookup country="England"  code="Gloucestershire                         :27                            " county="Gloucestershire" />
       <Lookup country="England"  code="Hampshire                               :29                            " county="Hampshire" />

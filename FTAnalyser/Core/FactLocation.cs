@@ -6,6 +6,7 @@ using System.Xml;
 using System.IO;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace FTAnalyzer
 {
@@ -141,7 +142,8 @@ namespace FTAnalyzer
         {
             if (location != null)
             {
-                this.location = location;
+                TextInfo txtInfo = new CultureInfo("en-GB", false).TextInfo;
+                this.location = txtInfo.ToTitleCase(location);
                 // we need to parse the location string from a little injun to a big injun
                 int comma = this.location.LastIndexOf(",");
                 if (comma > 0)
