@@ -383,11 +383,8 @@
             // 
             // checkForUpdatesToolStripMenuItem
             // 
-            //this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            //this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            //this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
-            //this.checkForUpdatesToolStripMenuItem.Visible = false;
-            //this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
+            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             // 
             // toolStripSeparator1
             // 
@@ -403,9 +400,9 @@
             // 
             // tabSelector
             // 
-            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabSelector.Controls.Add(this.tabDisplayProgress);
             this.tabSelector.Controls.Add(this.tabIndividuals);
             this.tabSelector.Controls.Add(this.tabFamilies);
@@ -454,8 +451,8 @@
             // 
             // rtbOutput
             // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbOutput.Location = new System.Drawing.Point(3, 90);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.Size = new System.Drawing.Size(925, 303);
@@ -908,9 +905,9 @@
             this.ckbNoLocations.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbNoLocations.Location = new System.Drawing.Point(272, 114);
             this.ckbNoLocations.Name = "ckbNoLocations";
-            this.ckbNoLocations.Size = new System.Drawing.Size(171, 17);
+            this.ckbNoLocations.Size = new System.Drawing.Size(231, 17);
             this.ckbNoLocations.TabIndex = 18;
-            this.ckbNoLocations.Text = "Ignore locations in census filter";
+            this.ckbNoLocations.Text = "Include Unknown Countries in Census Filter";
             this.ckbNoLocations.UseVisualStyleBackColor = true;
             this.ckbNoLocations.CheckedChanged += new System.EventHandler(this.ckbNoLocations_CheckedChanged);
             // 
@@ -1109,7 +1106,7 @@
             this.ckbRestrictions.Size = new System.Drawing.Size(521, 17);
             this.ckbRestrictions.TabIndex = 9;
             this.ckbRestrictions.Text = "Restrict results to only those direct ancestors, blood relations and those marrie" +
-                "d to direct or blood relations";
+    "d to direct or blood relations";
             this.ckbRestrictions.UseVisualStyleBackColor = true;
             // 
             // btnLC1841EW
@@ -1379,9 +1376,9 @@
             this.ckbTTIgnoreLocations.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbTTIgnoreLocations.Location = new System.Drawing.Point(8, 87);
             this.ckbTTIgnoreLocations.Name = "ckbTTIgnoreLocations";
-            this.ckbTTIgnoreLocations.Size = new System.Drawing.Size(175, 17);
+            this.ckbTTIgnoreLocations.Size = new System.Drawing.Size(238, 17);
             this.ckbTTIgnoreLocations.TabIndex = 27;
-            this.ckbTTIgnoreLocations.Text = "Ignore locations in treetops filter";
+            this.ckbTTIgnoreLocations.Text = "Include Unknown Countries in Treetops Filter";
             this.ckbTTIgnoreLocations.UseVisualStyleBackColor = true;
             this.ckbTTIgnoreLocations.CheckedChanged += new System.EventHandler(this.ckbTTIgnoreLocations_CheckedChanged);
             // 
@@ -1451,9 +1448,9 @@
             this.ckbWDIgnoreLocations.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbWDIgnoreLocations.Location = new System.Drawing.Point(8, 87);
             this.ckbWDIgnoreLocations.Name = "ckbWDIgnoreLocations";
-            this.ckbWDIgnoreLocations.Size = new System.Drawing.Size(181, 17);
+            this.ckbWDIgnoreLocations.Size = new System.Drawing.Size(245, 17);
             this.ckbWDIgnoreLocations.TabIndex = 32;
-            this.ckbWDIgnoreLocations.Text = "Ignore locations in war dead filter";
+            this.ckbWDIgnoreLocations.Text = "Include Unknown Countries in War Dead Filter";
             this.ckbWDIgnoreLocations.UseVisualStyleBackColor = true;
             this.ckbWDIgnoreLocations.CheckedChanged += new System.EventHandler(this.ckbWDIgnoreLocations_CheckedChanged);
             // 

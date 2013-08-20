@@ -454,17 +454,17 @@
       <CountryToRegion region="Swansea"             country="Wales" />  
 
       <!-- Irish Provinces -->
-      <CountryToRegion region="Antrim"      country="Ireland" />
-      <CountryToRegion region="Armagh"      country="Ireland" />
+      <CountryToRegion region="Antrim"      country="Northern Ireland" />
+      <CountryToRegion region="Armagh"      country="Northern Ireland" />
       <CountryToRegion region="Cavan"       country="Ireland" />
       <CountryToRegion region="Carlow"      country="Ireland" />
       <CountryToRegion region="Clare"       country="Ireland" />
       <CountryToRegion region="Connaught"   country="Ireland" />
       <CountryToRegion region="Cork"        country="Ireland" />
       <CountryToRegion region="Donegal"     country="Ireland" />
-      <CountryToRegion region="Down"        country="Ireland" />
+      <CountryToRegion region="Down"        country="Northern Ireland" />
       <CountryToRegion region="Dublin"      country="Ireland" />
-      <CountryToRegion region="Fermanagh"   country="Ireland" />
+      <CountryToRegion region="Fermanagh"   country="Northern Ireland" />
       <CountryToRegion region="Galway"      country="Ireland" />
       <CountryToRegion region="Kerry"       country="Ireland" />
       <CountryToRegion region="Kildare"     country="Ireland" />
@@ -473,7 +473,8 @@
       <CountryToRegion region="Leinster"    country="Ireland" />
       <CountryToRegion region="Leitrim"     country="Ireland" />
       <CountryToRegion region="Limerick"    country="Ireland" />
-      <CountryToRegion region="Londonderry" country="Ireland" />
+      <CountryToRegion region="Londonderry" country="Northern Ireland" />
+      <CountryToRegion region="Derry"       country="Northern Ireland" />
       <CountryToRegion region="Longford"    country="Ireland" />
       <CountryToRegion region="Louth"       country="Ireland" />
       <CountryToRegion region="Mayo"        country="Ireland" />
@@ -485,16 +486,18 @@
       <CountryToRegion region="Sligo"       country="Ireland" />
       <CountryToRegion region="Tipperary"   country="Ireland" />
       <CountryToRegion region="Tyrone"      country="Ireland" />
-      <CountryToRegion region="Ulster"      country="Ireland" />
+      <CountryToRegion region="Ulster"      country="Northern Ireland" />
       <CountryToRegion region="Waterford"   country="Ireland" />
       <CountryToRegion region="Westmeath"   country="Ireland" />
       <CountryToRegion region="Wexford"     country="Ireland" />
       <CountryToRegion region="Wicklow"     country="Ireland" />
 
       <!-- Northern Ireland Cities -->
+      <!-- already present as county
       <CountryToRegion region="Armagh"      country="Northern Ireland" />
-      <CountryToRegion region="Belfast"     country="Northern Ireland" />
       <CountryToRegion region="Derry"       country="Northern Ireland" />
+      -->
+      <CountryToRegion region="Belfast"     country="Northern Ireland" />
       <CountryToRegion region="Lisburn"     country="Northern Ireland" />
       <CountryToRegion region="Newry"       country="Northern Ireland" />
 
