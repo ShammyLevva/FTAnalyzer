@@ -247,7 +247,7 @@ namespace FTAnalyzer.Forms
             dgCensus.Focus();
         }
         
-        private void mnuSaveColumnOrder_Click(object sender, EventArgs e)
+        private void mnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
             DataTable dt = new DataTable("table");
             var query = from DataGridViewColumn col in dgCensus.Columns
@@ -263,7 +263,7 @@ namespace FTAnalyzer.Forms
             MessageBox.Show("Column Sort Order Saved");
         }
 
-        private void mnuLoadCensusColumnOrder_Click(object sender, EventArgs e)
+        private void mnuLoadCensusColumnLayout_Click(object sender, EventArgs e)
         {
             try
             {
@@ -277,6 +277,7 @@ namespace FTAnalyzer.Forms
                     dgCensus.Columns[col.ColumnName].DisplayIndex = i;
                     i++;
                 }
+                MessageBox.Show("Column Sort Order Loaded");
             }
             catch (Exception ex)
             {
