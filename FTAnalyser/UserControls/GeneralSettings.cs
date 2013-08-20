@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace FTAnalyzer.UserControls
 {
@@ -16,7 +17,6 @@ namespace FTAnalyzer.UserControls
 			//cannot be in load, because its possible this tab won't show, and the values will not be initialized.
 			//if this happens, then the users settings will be cleared.
             chkUseBaptisms.Checked = Properties.GeneralSettings.Default.UseBaptismDates;
-
         }
 
 		#region IOptions Members

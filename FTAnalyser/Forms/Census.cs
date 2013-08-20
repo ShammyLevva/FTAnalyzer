@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Printing.DataGridViewPrint.Tools;
 using FTAnalyzer.Filters;
+using System.IO;
 
 namespace FTAnalyzer.Forms
 {
@@ -15,7 +16,7 @@ namespace FTAnalyzer.Forms
     {
         private Dictionary<int, DataGridViewCellStyle> rowStyles;
         private int numFamilies;
-        private FactDate censusDate;
+        public FactDate CensusDate { get; private set; }
         private FactLocation location;
         private FactLocation location2;
         private FactLocation censusLocation;
@@ -60,7 +61,7 @@ namespace FTAnalyzer.Forms
                 FactDate date, bool censusDone, bool includeResidence, bool lostCousinCheck)
         {
             FamilyTree ft = FamilyTree.Instance;
-            censusDate = date;
+            CensusDate = date;
             IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(date, censusDone, includeResidence, lostCousinCheck);
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Where(filter).ToList();
             individuals.Sort(comparer);
@@ -237,7 +238,7 @@ namespace FTAnalyzer.Forms
         {
             CensusIndividual ds = dgCensus.CurrentRow == null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
             FamilyTree ft = FamilyTree.Instance;
-            ft.SearchCensus(censusLocation.Country, censusDate.StartDate.Year, ds, cbCensusSearchProvider.SelectedIndex);
+            ft.SearchCensus(censusLocation.Country, CensusDate.StartDate.Year, ds, cbCensusSearchProvider.SelectedIndex);
         }
 
         private void cbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
@@ -245,10 +246,42 @@ namespace FTAnalyzer.Forms
             Application.UserAppDataRegistry.SetValue("Default Search Provider", cbCensusSearchProvider.SelectedItem.ToString());
             dgCensus.Focus();
         }
-
-        public FactDate CensusDate
+        
+        private void mnuSaveColumnOrder_Click(object sender, EventArgs e)
         {
-            get { return this.censusDate; }
+            DataTable dt = new DataTable("table");
+            var query = from DataGridViewColumn col in dgCensus.Columns
+                        orderby col.DisplayIndex
+                        select col;
+
+            foreach (DataGridViewColumn col in query)
+            {
+                dt.Columns.Add(col.Name);
+            }
+            string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, "CensusColumns.xml");
+            dt.WriteXmlSchema(path);
+            MessageBox.Show("Column Sort Order Saved");
+        }
+
+        private void mnuLoadCensusColumnOrder_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, "CensusColumns.xml");
+                dt.ReadXmlSchema(path);
+
+                int i = 0;
+                foreach (DataColumn col in dt.Columns)
+                {
+                    dgCensus.Columns[col.ColumnName].DisplayIndex = i;
+                    i++;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to load previous column order error was : " + ex.Message);
+            }
         }
     }
 }

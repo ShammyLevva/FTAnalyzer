@@ -19,7 +19,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.1.0.0-test-5";
+        private string VERSION = "2.1.0.0-test-6";
         //private bool _checkForUpdatesEnabled = false;
         //private bool _showNoUpdateMessage = false;
         //private System.Threading.Timer _timerCheckForUpdates;
@@ -37,6 +37,7 @@ namespace FTAnalyzer
             ft.XmlErrorBox = rtbOutput;
             tabSelector.TabPages.RemoveByKey("tabFamilySearch");
             VERSION = PublishVersion();
+            Properties.GeneralSettings.Default.SavePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         }
 
         private string PublishVersion()

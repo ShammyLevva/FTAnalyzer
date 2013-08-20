@@ -280,6 +280,7 @@
     <Content Include="Resources\BingOSMaps.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\OpenHL.bmp" />
     <Content Include="Resources\FTAnalyzer.ico" />
     <Content Include="Resources\GoogleMaps.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -290,6 +291,7 @@
     <Content Include="Resources\FactLocationFixes.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\saveHL.bmp" />
     <Content Include="System.Data.SQLite.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
