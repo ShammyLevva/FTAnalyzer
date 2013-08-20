@@ -19,7 +19,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.1.0.0-test-2";
+        private string VERSION = "2.1.0.0-test-3";
         //private bool _checkForUpdatesEnabled = false;
         //private bool _showNoUpdateMessage = false;
         //private System.Threading.Timer _timerCheckForUpdates;
@@ -1347,11 +1347,14 @@ namespace FTAnalyzer
                 if (ht.Type != DataGridViewHitTestType.ColumnHeader)
                 {
                     DataGridView.HitTestInfo hti = dgIndividuals.HitTest(e.Location.X, e.Location.Y);
-                    dgIndividuals.CurrentCell = dgIndividuals.Rows[hti.RowIndex].Cells[hti.ColumnIndex];
-                    // Can leave these here - doesn't hurt
-                    dgIndividuals.Rows[hti.RowIndex].Selected = true;
-                    dgIndividuals.Focus();
-                    mnuSetRoot.Show(MousePosition);
+                    if (hti.RowIndex >= 0 && hti.ColumnIndex >= 0)
+                    {
+                        dgIndividuals.CurrentCell = dgIndividuals.Rows[hti.RowIndex].Cells[hti.ColumnIndex];
+                        // Can leave these here - doesn't hurt
+                        dgIndividuals.Rows[hti.RowIndex].Selected = true;
+                        dgIndividuals.Focus();
+                        mnuSetRoot.Show(MousePosition);
+                    }
                 }
             }
         }
