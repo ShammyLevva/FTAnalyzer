@@ -16,6 +16,8 @@ namespace FTAnalyzer
             this.Description = description;
         }
 
+        public string IndividualID { get { return individual.IndividualID; } }
+
         public string Individual { get { return individual.Name; } }
 
         public FactDate Born { get { return individual.BirthDate; } }

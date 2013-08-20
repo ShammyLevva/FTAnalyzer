@@ -955,8 +955,17 @@ namespace FTAnalyzer
                     foreach (Fact f in ind.AllFacts)
                     {
                         if (f.FactType != Fact.BIRTH && f.FactDate.IsBefore(ind.BirthDate))
-                            errors[9].Add(new DataError(ind, Fact.GetFactTypeDescription(f.FactType) + " fact recorded: " +
-                                f.FactDate + " before individual was born"));
+                        {
+                            DataError de = new DataError(ind, Fact.GetFactTypeDescription(f.FactType) + " fact recorded: " +
+                                f.FactDate + " before individual was born");
+                            if ((f.FactType == Fact.CHRISTENING || f.FactType == Fact.BAPTISM))
+                            {  //due to possible late birth abt qtr reporting use 3 month fudge factor for bapm/chr
+                                if (f.FactDate.IsBefore(ind.BirthDate.SubtractMonths(4)))
+                                    errors[9].Add(de);
+                            }
+                            else
+                                errors[9].Add(de);
+                        }
                     }
                     foreach (Family asChild in ind.FamiliesAsChild)
                     {
