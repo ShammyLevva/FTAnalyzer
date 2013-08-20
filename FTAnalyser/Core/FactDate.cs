@@ -314,7 +314,7 @@ namespace FTAnalyzer
                          || processDate.StartsWith("ABT SEP") || processDate.StartsWith("ABT DEC"))
                     {
                         // quarter dates
-                        StartDate = ParseDate(dateValue, LOW, -2);
+                        StartDate = ParseDate(dateValue, LOW, -3);
                     }
                     else
                     {
@@ -585,6 +585,7 @@ namespace FTAnalyzer
 
         #endregion
 
+        #region Overrides
         public override bool Equals(Object that)
         {
             if (that == null || !(that is FactDate))
@@ -638,5 +639,6 @@ namespace FTAnalyzer
             else
                 return DateString;
         }
+        #endregion
     }
 }
