@@ -446,7 +446,11 @@
       <CountryToRegion region="Radnorshire"         country="Wales" />  
       
       <!-- Welsh Cities -->
-      <CountryToRegion region="Cardiff"             country="Wales" />  
+      <CountryToRegion region="Bangor"              country="Wales" />
+      <CountryToRegion region="Cardiff"             country="Wales" />
+      <CountryToRegion region="Newport"             country="Wales" />
+      <CountryToRegion region="St Asaph"            country="Wales" />
+      <CountryToRegion region="St David's"          country="Wales" />
       <CountryToRegion region="Swansea"             country="Wales" />  
 
       <!-- Irish Provinces -->
@@ -487,6 +491,12 @@
       <CountryToRegion region="Wexford"     country="Ireland" />
       <CountryToRegion region="Wicklow"     country="Ireland" />
 
+      <!-- Northern Ireland Cities -->
+      <CountryToRegion region="Armagh"      country="Northern Ireland" />
+      <CountryToRegion region="Belfast"     country="Northern Ireland" />
+      <CountryToRegion region="Derry"       country="Northern Ireland" />
+      <CountryToRegion region="Lisburn"     country="Northern Ireland" />
+      <CountryToRegion region="Newry"       country="Northern Ireland" />
 
       <!-- North America -->
       <!-- Canadian Provinces -->
@@ -570,9 +580,24 @@
       <RegionToParish parish="Stirling"      region="Stirlingshire" />
       <RegionToParish parish="Perth"         region="Perthshire" />
       
+      <!-- Welsh Cities -->
+      <RegionToParish parish="Bangor"        region="Caernarvon" />
       <RegionToParish parish="Cardiff"       region="Glamorgan" />
-      <RegionToParish parish="Isle of Wight" region="Hampshire" />
+      <RegionToParish parish="Newport"       region="Monmouth" />
+      <RegionToParish parish="St Asaph"      region="Denbigh" />
+      <RegionToParish parish="St David's"    region="Pembroke" />
+      <RegionToParish parish="Swansea"       region="Glamorgan" />
 
+      <!-- Northern Ireland Cities -->
+      <RegionToParish parish="Armagh"      region="Armagh" />
+      <RegionToParish parish="Belfast"     region="Antrim" />
+      <RegionToParish parish="Derry"       region="Derry" />
+      <RegionToParish parish="Lisburn"     region="Antrim" />
+      <RegionToParish parish="Newry"       region="Newry" />
+
+
+      <!-- English Cities -->
+      <RegionToParish parish="Isle of Wight"  region="Hampshire" />
       <RegionToParish parish="Bath"           region="Somerset" />
       <RegionToParish parish="Birmingham"     region="Warwickshire" />
       <RegionToParish parish="Bradford"       region="Yorkshire" />
