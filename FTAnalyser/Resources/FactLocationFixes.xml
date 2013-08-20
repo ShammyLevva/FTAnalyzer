@@ -269,7 +269,7 @@
       <RegionTypo from="VIC"   to="Victoria" />
     </RegionTypos>
     <DemoteCountries>
-      <!-- Scottish Counties -->
+      <!-- Scottish Counties add the Country -->
       <CountryToRegion region="Aberdeenshire"       country="Scotland" />
       <CountryToRegion region="Angus"               country="Scotland" />
       <CountryToRegion region="Argyll"              country="Scotland" />
@@ -315,7 +315,7 @@
       <CountryToRegion region="West Lothian"        country="Scotland" />
       <CountryToRegion region="Wigtonshire"         country="Scotland" />
     
-      <!-- Scottish Cities -->
+      <!-- Scottish Cities add the Country -->
       <CountryToRegion region="Aberdeen"            country="Scotland" />
       <CountryToRegion region="Dundee"              country="Scotland" />
       <CountryToRegion region="Edinburgh"           country="Scotland" />
@@ -324,7 +324,7 @@
       <CountryToRegion region="Perth"               country="Scotland" />
       <CountryToRegion region="Stirling"            country="Scotland" />
 
-      <!-- English Shires & Counties -->
+      <!-- English Shires & Counties add the Country -->
       <CountryToRegion region="Bedfordshire"        country="England" />
       <CountryToRegion region="Berkshire"           country="England" />
       <CountryToRegion region="Buckinghamshire"     country="England" />
@@ -367,7 +367,7 @@
       <CountryToRegion region="Worcestershire"      country="England" />
       <CountryToRegion region="Yorkshire"           country="England" />
     
-      <!-- English Cities -->
+      <!-- English Cities add the Country -->
       <CountryToRegion region="Bath"                country="England" />
       <CountryToRegion region="Birmingham"          country="England" />
       <CountryToRegion region="Bradford"            country="England" />
@@ -427,8 +427,9 @@
       <CountryToRegion region="Wolverhampton"       country="England" />
       <CountryToRegion region="Worcester"           country="England" />
       <CountryToRegion region="York"                country="England" />
+      <CountryToRegion region="Ipswich"             country="England" />
                        
-      <!-- Welsh Regions -->
+      <!-- Welsh Regions add the Country -->
       <CountryToRegion region="Anglesey"            country="Wales" />
       <CountryToRegion region="Breconshire"         country="Wales" />  
       <CountryToRegion region="Caernarvon"          country="Wales" />  
@@ -445,7 +446,7 @@
       <CountryToRegion region="Pembrokeshire"       country="Wales" />  
       <CountryToRegion region="Radnorshire"         country="Wales" />  
       
-      <!-- Welsh Cities -->
+      <!-- Welsh Cities add the Country -->
       <CountryToRegion region="Bangor"              country="Wales" />
       <CountryToRegion region="Cardiff"             country="Wales" />
       <CountryToRegion region="Newport"             country="Wales" />
@@ -453,7 +454,7 @@
       <CountryToRegion region="St David's"          country="Wales" />
       <CountryToRegion region="Swansea"             country="Wales" />  
 
-      <!-- Irish Provinces -->
+      <!-- Irish Provinces add the Country -->
       <CountryToRegion region="Antrim"      country="Northern Ireland" />
       <CountryToRegion region="Armagh"      country="Northern Ireland" />
       <CountryToRegion region="Cavan"       country="Ireland" />
@@ -492,7 +493,7 @@
       <CountryToRegion region="Wexford"     country="Ireland" />
       <CountryToRegion region="Wicklow"     country="Ireland" />
 
-      <!-- Northern Ireland Cities -->
+      <!-- Northern Ireland Cities add the Country-->
       <!-- already present as county
       <CountryToRegion region="Armagh"      country="Northern Ireland" />
       <CountryToRegion region="Derry"       country="Northern Ireland" />
@@ -502,7 +503,7 @@
       <CountryToRegion region="Newry"       country="Northern Ireland" />
 
       <!-- North America -->
-      <!-- Canadian Provinces -->
+      <!-- Canadian Provinces add the Country -->
       <CountryToRegion region="Alberta"               country="Canada" />
       <CountryToRegion region="British Columbia"      country="Canada" />
       <CountryToRegion region="Manitoba"              country="Canada" />
@@ -516,7 +517,7 @@
       <CountryToRegion region="Saskatchewan"          country="Canada" />
       <CountryToRegion region="Yukon Territory"       country="Canada" />
 
-      <!-- US States -->
+      <!-- US States add the Country -->
       <CountryToRegion region="Alabama"               country="United States" />
       <CountryToRegion region="Alaska"                country="United States" />
       <CountryToRegion region="Arizona"               country="United States" /> 
@@ -583,7 +584,7 @@
       <RegionToParish parish="Stirling"      region="Stirlingshire" />
       <RegionToParish parish="Perth"         region="Perthshire" />
       
-      <!-- Welsh Cities -->
+      <!-- Welsh Cities add the county  -->
       <RegionToParish parish="Bangor"        region="Caernarvon" />
       <RegionToParish parish="Cardiff"       region="Glamorgan" />
       <RegionToParish parish="Newport"       region="Monmouth" />
@@ -591,7 +592,7 @@
       <RegionToParish parish="St David's"    region="Pembroke" />
       <RegionToParish parish="Swansea"       region="Glamorgan" />
 
-      <!-- Northern Ireland Cities -->
+      <!-- Northern Ireland Cities add the county  -->
       <RegionToParish parish="Armagh"      region="Armagh" />
       <RegionToParish parish="Belfast"     region="Antrim" />
       <RegionToParish parish="Derry"       region="Derry" />
@@ -599,7 +600,7 @@
       <RegionToParish parish="Newry"       region="Newry" />
 
 
-      <!-- English Cities -->
+      <!-- English Cities add the county -->
       <RegionToParish parish="Isle of Wight"  region="Hampshire" />
       <RegionToParish parish="Bath"           region="Somerset" />
       <RegionToParish parish="Birmingham"     region="Warwickshire" />
@@ -637,10 +638,11 @@
       <RegionToParish parish="Portsmouth"     region="Hampshire" />
       <RegionToParish parish="Preston"        region="Lancashire" />
       <RegionToParish parish="Ripon"          region="Yorkshire" />
-      <RegionToParish parish="Salford"        region="Lacashire" />
+      <RegionToParish parish="Salford"        region="Lancashire" />
       <RegionToParish parish="Salisbury"      region="Wiltshire" />
       <RegionToParish parish="Sheffield"      region="Yorkshire" />
       <RegionToParish parish="Southhampton"   region="Hampshire" />
+      <RegionToParish parish="Southampton"    region="Hampshire" />
       <RegionToParish parish="St Albans"      region="Hertfordshire" />
       <RegionToParish parish="Stoke"          region="Staffordshire" />
       <RegionToParish parish="Sunderland"     region="Durham" />
@@ -651,6 +653,7 @@
       <RegionToParish parish="Wolverhampton"  region="Staffordshire" />
       <RegionToParish parish="Worcester"      region="Worcestershire" />
       <RegionToParish parish="York"           region="Yorkshire" />
+      <RegionToParish parish="Ipswich"        region="Suffolk" />
                     
       <RegionToParish parish="Toronto"    region="Ontario" />
       <RegionToParish parish="Vancouver"  region="British Columbia" />
