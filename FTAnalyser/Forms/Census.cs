@@ -284,5 +284,11 @@ namespace FTAnalyzer.Forms
                 MessageBox.Show("Unable to load previous column order error was : " + ex.Message);
             }
         }
+
+        private void mnuResetCensusColumns_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dgCensus.Columns.Count; i++)
+                dgCensus.Columns[i].DisplayIndex = i;
+        }
     }
 }

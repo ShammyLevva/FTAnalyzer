@@ -47,6 +47,7 @@
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuResetCensusColumns = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgCensus)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -92,6 +93,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuSaveCensusColumnLayout,
             this.mnuLoadCensusColumnLayout,
+            this.mnuResetCensusColumns,
             this.toolStripSeparator2,
             this.printToolStripButton,
             this.printPreviewToolStripButton,
@@ -216,6 +218,16 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // mnuResetCensusColumns
+            // 
+            this.mnuResetCensusColumns.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mnuResetCensusColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetCensusColumns.Image")));
+            this.mnuResetCensusColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnuResetCensusColumns.Name = "mnuResetCensusColumns";
+            this.mnuResetCensusColumns.Size = new System.Drawing.Size(23, 22);
+            this.mnuResetCensusColumns.Text = "Reset Census Columns";
+            this.mnuResetCensusColumns.Click += new System.EventHandler(this.mnuResetCensusColumns_Click);
+            // 
             // Census
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -258,5 +270,6 @@
         private System.Windows.Forms.ToolStripButton mnuSaveCensusColumnLayout;
         private System.Windows.Forms.ToolStripButton mnuLoadCensusColumnLayout;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton mnuResetCensusColumns;
     }
 }
