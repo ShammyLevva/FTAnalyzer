@@ -25,7 +25,8 @@ namespace FTAnalyzer
         private RichTextBox xmlErrorbox = new RichTextBox();
         private int maxAhnentafel = 0;
         private IList<DataErrorGroup> dataErrorTypes;
-
+        private IEnumerable<IDisplayLocation>[] displayLocations;
+        
         private FamilyTree()
         {
             ResetData();
@@ -104,6 +105,9 @@ namespace FTAnalyzer
             locations = new Dictionary<string, FactLocation>();
             occupations = new Dictionary<string, List<Individual>>();
             dataErrorTypes = new List<DataErrorGroup>();
+            displayLocations = new IEnumerable<IDisplayLocation>[5];
+            for (int i = 0; i < 5; i++)
+                displayLocations[i] = null;
         }
 
         public void LoadTree(string filename, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
@@ -288,33 +292,34 @@ namespace FTAnalyzer
                 FactLocation c = loc.GetLocation(level);
                 if (c.Country != string.Empty && !result.Contains(c)) result.Add(c);
             }
+            displayLocations[level] = result;
             return result;
         }
 
         public IEnumerable<IDisplayLocation> AllCountries
         {
-            get { return GetDisplayLocations(FactLocation.COUNTRY); }
+            get { return displayLocations[FactLocation.COUNTRY] == null ? GetDisplayLocations(FactLocation.COUNTRY) : displayLocations[FactLocation.COUNTRY]; }
         }
 
         public IEnumerable<IDisplayLocation> AllRegions
         {
-            get { return GetDisplayLocations(FactLocation.REGION); }
+            get { return displayLocations[FactLocation.REGION] == null ? GetDisplayLocations(FactLocation.REGION) : displayLocations[FactLocation.REGION]; }
         }
 
         public IEnumerable<IDisplayLocation> AllParishes
         {
-            get { return GetDisplayLocations(FactLocation.PARISH); }
+            get { return displayLocations[FactLocation.PARISH] == null ? GetDisplayLocations(FactLocation.PARISH) : displayLocations[FactLocation.PARISH]; }
 
         }
 
         public IEnumerable<IDisplayLocation> AllAddresses
         {
-            get { return GetDisplayLocations(FactLocation.ADDRESS); }
+            get { return displayLocations[FactLocation.ADDRESS] == null ? GetDisplayLocations(FactLocation.ADDRESS) : displayLocations[FactLocation.ADDRESS]; }
         }
 
         public IEnumerable<IDisplayLocation> AllPlaces
         {
-            get { return GetDisplayLocations(FactLocation.PLACE); }
+            get { return displayLocations[FactLocation.PLACE] == null ? GetDisplayLocations(FactLocation.PLACE) : displayLocations[FactLocation.PLACE]; }
         }
 
         public int IndividualCount { get { return individuals.Count; } }

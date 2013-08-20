@@ -428,7 +428,8 @@
       <CountryToRegion region="Worcester"           country="England" />
       <CountryToRegion region="York"                country="England" />
       <CountryToRegion region="Ipswich"             country="England" />
-                       
+      <CountryToRegion region="Isle of Wight"       country="England" />
+
       <!-- Welsh Regions add the Country -->
       <CountryToRegion region="Anglesey"            country="Wales" />
       <CountryToRegion region="Breconshire"         country="Wales" />  
