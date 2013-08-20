@@ -451,7 +451,7 @@ namespace FTAnalyzer
 
             if (txtWarDeadSurname.Text.Length > 0)
             {
-                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, tabSelector.Text);
+                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtWarDeadSurname.Text);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
 
