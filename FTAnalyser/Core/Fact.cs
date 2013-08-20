@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace FTAnalyzer
 {
@@ -330,6 +331,8 @@ namespace FTAnalyzer
                 Comment = factComment;
                 Place = factPlace;
             }
+            TextInfo txtInfo = new CultureInfo("en-GB", false).TextInfo;
+            Comment = txtInfo.ToTitleCase(Comment);
             Location = FamilyTree.Instance.GetLocation(Place, latitude, longitude);
         }
 

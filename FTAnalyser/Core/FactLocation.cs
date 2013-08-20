@@ -143,7 +143,7 @@ namespace FTAnalyzer
             if (location != null)
             {
                 TextInfo txtInfo = new CultureInfo("en-GB", false).TextInfo;
-                this.location = txtInfo.ToTitleCase(location);
+                this.location = txtInfo.ToTitleCase(location).Replace("(","").Replace(")","");
                 // we need to parse the location string from a little injun to a big injun
                 int comma = this.location.LastIndexOf(",");
                 if (comma > 0)
