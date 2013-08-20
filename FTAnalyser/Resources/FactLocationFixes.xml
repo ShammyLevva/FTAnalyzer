@@ -12,7 +12,7 @@
       <CountryTypo from="U.S.A."  to="United States" />
       <CountryTypo from="America" to="United States" />
       <CountryTypo from="United States of America" to="United States" />
-      <CountryTypo from="US of A" to="United States" />
+      <CountryTypo from="US Of A" to="United States" />
       <CountryTypo from="NZ"      to="New Zealand" />
       <CountryTypo from="NZ."     to="New Zealand" />
       <CountryTypo from="N.Z"     to="New Zealand" />
@@ -39,7 +39,6 @@
       <CountryTypo from="Scot."   to="Scotland" />
       <CountryTypo from="Holland" to="Netherlands" />
       <CountryTypo from="The Netherlands" to="Netherlands" />
-      <CountryTypo from="CHINA" to="China" />
     </CountryTypos>
     <RegionTypos>
       <!-- Scotland -->
@@ -122,70 +121,70 @@
       <RegionTypo from="South Yorkshire"            to="West Yorkshire" />
 
       <!-- Ireland -->
-      <RegionTypo from="Co Antrim"        to="Antrim" />
-      <RegionTypo from="County Antrim"    to="Antrim" />
-      <RegionTypo from="Co Armagh"        to="Armagh" />
-      <RegionTypo from="County Armagh"    to="Armagh" />
-      <RegionTypo from="Co Carlow"        to="Carlow" />
-      <RegionTypo from="County Carlow"    to="Carlow" />
-      <RegionTypo from="Co Cavan"         to="Cavan" />
-      <RegionTypo from="County Cavan"     to="Cavan" />
-      <RegionTypo from="Co Clare"         to="Clare" />
-      <RegionTypo from="County Clare"     to="Clare" />
-      <RegionTypo from="Co Cork"          to="Cork" />
-      <RegionTypo from="County Cork"      to="Cork" />
-      <RegionTypo from="Co Donegal"       to="Donegal" />
-      <RegionTypo from="County Donegal"   to="Donegal" />
-      <RegionTypo from="Co Down"          to="Down" />
-      <RegionTypo from="County Down"      to="Down" />
-      <RegionTypo from="Co Dublin"        to="Dublin" />
-      <RegionTypo from="County Dublin"    to="Dublin" />
-      <RegionTypo from="Co Fermanagh"     to="Fermanagh" />
-      <RegionTypo from="County Fermanagh" to="Fermanagh" />
-      <RegionTypo from="Co Galway"        to="Galway" />
-      <RegionTypo from="County Galway"    to="Galway" />
-      <RegionTypo from="Co Kerry"         to="Kerry" />
-      <RegionTypo from="County Kerry"     to="Kerry" />
-      <RegionTypo from="Co Kildare"       to="Kildare" />
-      <RegionTypo from="County Kildare"   to="Kildare" />
-      <RegionTypo from="Co Kilkenny"      to="Kilkenny" />
-      <RegionTypo from="County Kilkenny"  to="Kilkenny" />
-      <RegionTypo from="Co Laois"         to="Laois" />
-      <RegionTypo from="County Laois"     to="Laois" />
-      <RegionTypo from="Co Leitrim"       to="Leitrim" />
-      <RegionTypo from="County Leitrim"   to="Leitrim" />
-      <RegionTypo from="Co Limerick"      to="Limerick" />
-      <RegionTypo from="County Limerick"  to="Limerick" />
-      <RegionTypo from="Co Londonderry"      to="Londonderry" />
-      <RegionTypo from="County Londonderry"  to="Londonderry" />
-      <RegionTypo from="Co Derry"         to="Londonderry" />
-      <RegionTypo from="County Derry"     to="Londonderry" />
-      <RegionTypo from="Co Longford"      to="Longford" />
-      <RegionTypo from="County Longford"  to="Longford" />
-      <RegionTypo from="Co Louth"         to="Louth" />
-      <RegionTypo from="County Louth"     to="Louth" />
-      <RegionTypo from="Co Mayo"          to="Mayo" />
-      <RegionTypo from="County Mayo"      to="Mayo" />
-      <RegionTypo from="Co Meath"         to="Meath" />
-      <RegionTypo from="County Meath"     to="Meath" />
-      <RegionTypo from="Co Monaghan"      to="Monaghan" />
-      <RegionTypo from="County Monaghan"  to="Monaghan" />
-      <RegionTypo from="Co Offaly"        to="Offaly" />
-      <RegionTypo from="County Offaly"    to="Offaly" />
-      <RegionTypo from="Co Roscommon"     to="Roscommon" />
-      <RegionTypo from="County Roscommon" to="Roscommon" />
-      <RegionTypo from="Co Sligo"         to="Sligo" />
-      <RegionTypo from="County Sligo"     to="Sligo" />
-      <RegionTypo from="Co Tyrone"        to="Tyrone" />
-      <RegionTypo from="County Tyrone"    to="Tyrone" />
-      <RegionTypo from="Co Waterford"     to="Waterford" />
-      <RegionTypo from="County Waterford" to="Waterford" />
-      <RegionTypo from="Co Westmeath"     to="Westmeath" />
-      <RegionTypo from="County Westmeath" to="Westmeath" />
-      <RegionTypo from="Co Wexford"       to="Wexford" />
-      <RegionTypo from="County Wexford"   to="Wexford" />
-      <RegionTypo from="Co Wicklow"       to="Wicklow" />
-      <RegionTypo from="County Wicklow"   to="Wicklow" />
+      <RegionTypo from="Co Antrim"        to="County Antrim" />
+      <RegionTypo from="Antrim"           to="County Antrim" />
+      <RegionTypo from="Co Armagh"        to="County Armagh" />
+      <RegionTypo from="Armagh"           to="County Armagh" />
+      <RegionTypo from="Co Carlow"        to="County Carlow" />
+      <RegionTypo from="Carlow"           to="County Carlow" />
+      <RegionTypo from="Co Cavan"         to="County Cavan" />
+      <RegionTypo from="Cavan"            to="County Cavan" />
+      <RegionTypo from="Co Clare"         to="County Clare" />
+      <RegionTypo from="Clare"            to="County Clare" />
+      <RegionTypo from="Co Cork"          to="County Cork" />
+      <RegionTypo from="Cork"             to="County Cork" />
+      <RegionTypo from="Co Donegal"       to="County Donegal" />
+      <RegionTypo from="Donegal"          to="County Donegal" />
+      <RegionTypo from="Co Down"          to="County Down" />
+      <RegionTypo from="Down"             to="County Down" />
+      <RegionTypo from="Co Dublin"        to="County Dublin" />
+      <RegionTypo from="Dublin"           to="County Dublin" />
+      <RegionTypo from="Co Fermanagh"     to="County Fermanagh" />
+      <RegionTypo from="Fermanagh"        to="County Fermanagh" />
+      <RegionTypo from="Co Galway"        to="County Galway" />
+      <RegionTypo from="Galway"           to="County Galway" />
+      <RegionTypo from="Co Kerry"         to="County Kerry" />
+      <RegionTypo from="Kerry"            to="County Kerry" />
+      <RegionTypo from="Co Kildare"       to="County Kildare" />
+      <RegionTypo from="Kildare"          to="County Kildare" />
+      <RegionTypo from="Co Kilkenny"      to="County Kilkenny" />
+      <RegionTypo from="Kilkenny"         to="County Kilkenny" />
+      <RegionTypo from="Co Laois"         to="County Laois" />
+      <RegionTypo from="Laois"            to="County Laois" />
+      <RegionTypo from="Co Leitrim"       to="County Leitrim" />
+      <RegionTypo from="Leitrim"          to="County Leitrim" />
+      <RegionTypo from="Co Limerick"      to="County Limerick" />
+      <RegionTypo from="Limerick"         to="County Limerick" />
+      <RegionTypo from="Co Londonderry"   to="County Londonderry" />
+      <RegionTypo from="Londonderry"      to="County Londonderry" />
+      <RegionTypo from="Co Derry"         to="County Londonderry" />
+      <RegionTypo from="Derry"            to="County Londonderry" />
+      <RegionTypo from="Co Longford"      to="County Longford" />
+      <RegionTypo from="Longford"         to="County Longford" />
+      <RegionTypo from="Co Louth"         to="County Louth" />
+      <RegionTypo from="Louth"            to="County Louth" />
+      <RegionTypo from="Co Mayo"          to="County Mayo" />
+      <RegionTypo from="Mayo"             to="County Mayo" />
+      <RegionTypo from="Co Meath"         to="County Meath" />
+      <RegionTypo from="Meath"            to="County Meath" />
+      <RegionTypo from="Co Monaghan"      to="County Monaghan" />
+      <RegionTypo from="Monaghan"         to="County Monaghan" />
+      <RegionTypo from="Co Offaly"        to="County Offaly" />
+      <RegionTypo from="Offaly"           to="County Offaly" />
+      <RegionTypo from="Co Roscommon"     to="County Roscommon" />
+      <RegionTypo from="Roscommon"        to="County Roscommon" />
+      <RegionTypo from="Co Sligo"         to="County Sligo" />
+      <RegionTypo from="Sligo"            to="County Sligo" />
+      <RegionTypo from="Co Tyrone"        to="County Tyrone" />
+      <RegionTypo from="Tyrone"           to="County Tyrone" />
+      <RegionTypo from="Co Waterford"     to="County Waterford" />
+      <RegionTypo from="Waterford"        to="County Waterford" />
+      <RegionTypo from="Co Westmeath"     to="County Westmeath" />
+      <RegionTypo from="Westmeath"        to="County Westmeath" />
+      <RegionTypo from="Co Wexford"       to="County Wexford" />
+      <RegionTypo from="Wexford"          to="County Wexford" />
+      <RegionTypo from="Co Wicklow"       to="County Wicklow" />
+      <RegionTypo from="Wicklow"          to="County Wicklow" />  
 
       <!-- Wales -->
       <RegionTypo from="Caernarvonshire"  to="Caernarvon" />
@@ -418,7 +417,9 @@
       <CountryToRegion region="Southampton"         country="England" />
       <CountryToRegion region="St Albans"           country="England" />
       <CountryToRegion region="St.Albans"           country="England" />
+      <CountryToRegion region="Stoke-On-Trent"      country="England" />
       <CountryToRegion region="Stoke-on-Trent"      country="England" />
+      <CountryToRegion region="Stoke On Trent"      country="England" />
       <CountryToRegion region="Stoke"               country="England" />
       <CountryToRegion region="Sunderland"          country="England" />
       <CountryToRegion region="Truro"               country="England" />
@@ -429,7 +430,7 @@
       <CountryToRegion region="Worcester"           country="England" />
       <CountryToRegion region="York"                country="England" />
       <CountryToRegion region="Ipswich"             country="England" />
-      <CountryToRegion region="Isle of Wight"       country="England" />
+      <CountryToRegion region="Isle Of Wight"       country="England" />
 
       <!-- Welsh Regions add the Country -->
       <CountryToRegion region="Anglesey"            country="Wales" />
@@ -457,43 +458,43 @@
       <CountryToRegion region="Swansea"             country="Wales" />  
 
       <!-- Irish Provinces add the Country -->
-      <CountryToRegion region="Antrim"      country="Northern Ireland" />
-      <CountryToRegion region="Armagh"      country="Northern Ireland" />
-      <CountryToRegion region="Cavan"       country="Ireland" />
-      <CountryToRegion region="Carlow"      country="Ireland" />
-      <CountryToRegion region="Clare"       country="Ireland" />
-      <CountryToRegion region="Connaught"   country="Ireland" />
-      <CountryToRegion region="Cork"        country="Ireland" />
-      <CountryToRegion region="Donegal"     country="Ireland" />
-      <CountryToRegion region="Down"        country="Northern Ireland" />
-      <CountryToRegion region="Dublin"      country="Ireland" />
-      <CountryToRegion region="Fermanagh"   country="Northern Ireland" />
-      <CountryToRegion region="Galway"      country="Ireland" />
-      <CountryToRegion region="Kerry"       country="Ireland" />
-      <CountryToRegion region="Kildare"     country="Ireland" />
-      <CountryToRegion region="Kilkenny"    country="Ireland" />
-      <CountryToRegion region="Laoighis"    country="Ireland" />
-      <CountryToRegion region="Leinster"    country="Ireland" />
-      <CountryToRegion region="Leitrim"     country="Ireland" />
-      <CountryToRegion region="Limerick"    country="Ireland" />
-      <CountryToRegion region="Londonderry" country="Northern Ireland" />
-      <CountryToRegion region="Derry"       country="Northern Ireland" />
-      <CountryToRegion region="Longford"    country="Ireland" />
-      <CountryToRegion region="Louth"       country="Ireland" />
-      <CountryToRegion region="Mayo"        country="Ireland" />
-      <CountryToRegion region="Meath"       country="Ireland" />
-      <CountryToRegion region="Monaghan"    country="Ireland" />
-      <CountryToRegion region="Munster"     country="Ireland" />
-      <CountryToRegion region="Offaly"      country="Ireland" />
-      <CountryToRegion region="Roscommon"   country="Ireland" />
-      <CountryToRegion region="Sligo"       country="Ireland" />
-      <CountryToRegion region="Tipperary"   country="Ireland" />
-      <CountryToRegion region="Tyrone"      country="Ireland" />
-      <CountryToRegion region="Ulster"      country="Northern Ireland" />
-      <CountryToRegion region="Waterford"   country="Ireland" />
-      <CountryToRegion region="Westmeath"   country="Ireland" />
-      <CountryToRegion region="Wexford"     country="Ireland" />
-      <CountryToRegion region="Wicklow"     country="Ireland" />
+      <CountryToRegion region="County Antrim"      country="Northern Ireland" />
+      <CountryToRegion region="County Armagh"      country="Northern Ireland" />
+      <CountryToRegion region="County Cavan"       country="Ireland" />
+      <CountryToRegion region="County Carlow"      country="Ireland" />
+      <CountryToRegion region="County Clare"       country="Ireland" />
+      <CountryToRegion region="County Connaught"   country="Ireland" />
+      <CountryToRegion region="County Cork"        country="Ireland" />
+      <CountryToRegion region="County Donegal"     country="Ireland" />
+      <CountryToRegion region="County Down"        country="Northern Ireland" />
+      <CountryToRegion region="County Dublin"      country="Ireland" />
+      <CountryToRegion region="County Fermanagh"   country="Northern Ireland" />
+      <CountryToRegion region="County Galway"      country="Ireland" />
+      <CountryToRegion region="County Kerry"       country="Ireland" />
+      <CountryToRegion region="County Kildare"     country="Ireland" />
+      <CountryToRegion region="County Kilkenny"    country="Ireland" />
+      <CountryToRegion region="County Laoighis"    country="Ireland" />
+      <CountryToRegion region="County Leinster"    country="Ireland" />
+      <CountryToRegion region="County Leitrim"     country="Ireland" />
+      <CountryToRegion region="County Limerick"    country="Ireland" />
+      <CountryToRegion region="County Londonderry" country="Northern Ireland" />
+      <CountryToRegion region="County Derry"       country="Northern Ireland" />
+      <CountryToRegion region="County Longford"    country="Ireland" />
+      <CountryToRegion region="County Louth"       country="Ireland" />
+      <CountryToRegion region="County Mayo"        country="Ireland" />
+      <CountryToRegion region="County Meath"       country="Ireland" />
+      <CountryToRegion region="County Monaghan"    country="Ireland" />
+      <CountryToRegion region="County Munster"     country="Ireland" />
+      <CountryToRegion region="County Offaly"      country="Ireland" />
+      <CountryToRegion region="County Roscommon"   country="Ireland" />
+      <CountryToRegion region="County Sligo"       country="Ireland" />
+      <CountryToRegion region="County Tipperary"   country="Ireland" />
+      <CountryToRegion region="County Tyrone"      country="Ireland" />
+      <CountryToRegion region="County Ulster"      country="Northern Ireland" />
+      <CountryToRegion region="County Waterford"   country="Ireland" />
+      <CountryToRegion region="County Westmeath"   country="Ireland" />
+      <CountryToRegion region="County Wexford"     country="Ireland" />
+      <CountryToRegion region="County Wicklow"     country="Ireland" />
 
       <!-- Northern Ireland Cities add the Country-->
       <!-- already present as county
