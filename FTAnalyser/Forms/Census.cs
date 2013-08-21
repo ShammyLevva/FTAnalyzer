@@ -260,7 +260,7 @@ namespace FTAnalyzer.Forms
             }
             string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, "CensusColumns.xml");
             dt.WriteXmlSchema(path);
-            MessageBox.Show("Column Sort Order Saved");
+            MessageBox.Show("Column Sort Order Saved", "Census Column Sorting");
         }
 
         private void mnuLoadCensusColumnLayout_Click(object sender, EventArgs e)
@@ -277,11 +277,11 @@ namespace FTAnalyzer.Forms
                     dgCensus.Columns[col.ColumnName].DisplayIndex = i;
                     i++;
                 }
-                MessageBox.Show("Column Sort Order Loaded");
+                MessageBox.Show("Column Sort Order Loaded", "Census Column Sorting");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to load previous column order error was : " + ex.Message);
+                MessageBox.Show("Unable to load previous column order error was : " + ex.Message, "Census Column Sorting");
             }
         }
 
