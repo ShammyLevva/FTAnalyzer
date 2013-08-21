@@ -8,11 +8,13 @@ namespace FTAnalyzer
     public interface IDisplayFamily
     {
         string FamilyGed { get; }
+        string HusbandID { get; }
         string Husband { get; }
+        string WifeID { get; }
         string Wife { get; }
         string Marriage { get; }
-        string Children { get; }
         FactLocation Location { get; }
+        string Children { get; }
         int Count { get; }
     }
 }

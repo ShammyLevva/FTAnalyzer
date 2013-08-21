@@ -378,9 +378,9 @@ namespace FTAnalyzer
                 if (marriage == null)
                     return string.Empty;
                 if (marriage.Location.IsBlank())
-                    return "m." + MarriageDate;
+                    return MarriageDate.ToString();
                 else
-                    return "m." + MarriageDate + " at " + marriage.Location;
+                    return MarriageDate.ToString() + " at " + marriage.Location;
             }
         }
 

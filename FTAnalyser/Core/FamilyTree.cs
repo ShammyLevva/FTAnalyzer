@@ -886,7 +886,8 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayFamily> result = new SortableBindingList<IDisplayFamily>();
                 foreach (IDisplayFamily f in families)
-                    result.Add(f);
+                    if(f.FamilyGed != "Unlinked")
+                        result.Add(f);
                 return result;
             }
         }
