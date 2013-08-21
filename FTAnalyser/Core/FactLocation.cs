@@ -15,6 +15,7 @@ namespace FTAnalyzer
 
         public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, PARISH = 2, ADDRESS = 3, PLACE = 4;
 
+        private TextInfo txtInfo;
         private string location;
         private string fixedLocation;
         public string SortableLocation { get; private set; }
@@ -142,9 +143,8 @@ namespace FTAnalyzer
         {
             if (location != null)
             {
-                TextInfo txtInfo = new CultureInfo("en-GB", false).TextInfo;
+                txtInfo = new CultureInfo("en-GB", false).TextInfo;
                 this.location = location;
-                location = txtInfo.ToTitleCase(location.ToLower()).Replace("(", "").Replace(")", "");
                 // we need to parse the location string from a little injun to a big injun
                 int comma = this.location.LastIndexOf(",");
                 if (comma > 0)
@@ -198,7 +198,7 @@ namespace FTAnalyzer
                 fixCountryFullStops();
                 fixMultipleSpacesAndAmpersands();
                 fixCountryTypos();
-                Country = fixRegionTypos(Country);
+                Country = txtInfo.ToTitleCase(fixRegionTypos(Country).ToLower());
                 ShiftCountryToRegion();
                 Region = fixRegionTypos(Region);
                 ShiftRegionToParish();
@@ -293,10 +293,17 @@ namespace FTAnalyzer
 
         private void fixCountryTypos()
         {
-            string newCountry = string.Empty;
-            COUNTRY_TYPOS.TryGetValue(Country, out newCountry);
-            if (newCountry != null && newCountry.Length > 0)
-                Country = newCountry;
+            string result = string.Empty;
+            COUNTRY_TYPOS.TryGetValue(Country, out result);
+            if (result != null && result.Length > 0)
+                Country = result;
+            else
+            {
+                string fixCase = txtInfo.ToTitleCase(Country.ToLower());
+                COUNTRY_TYPOS.TryGetValue(fixCase, out result);
+                if (result != null && result.Length > 0)
+                    Country = result;
+            }
         }
 
         private string fixRegionTypos(string toFix)
@@ -306,34 +313,51 @@ namespace FTAnalyzer
             if (result != null && result.Length > 0)
                 return result;
             else
-                return toFix;
+            {
+                string fixCase = txtInfo.ToTitleCase(toFix.ToLower());
+                REGION_TYPOS.TryGetValue(fixCase, out result);
+                if (result != null && result.Length > 0)
+                    return result;
+                else
+                    return toFix;
+            }
         }
 
         private void ShiftCountryToRegion()
         {
-            string newCountry = string.Empty;
-            COUNTRY_SHIFTS.TryGetValue(Country, out newCountry);
-            if (newCountry != null && newCountry.Length > 0)
+            string result = string.Empty;
+            COUNTRY_SHIFTS.TryGetValue(Country, out result);
+            if (result == null || result.Length == 0)
+            {
+                string fixCase = txtInfo.ToTitleCase(Country.ToLower());
+                COUNTRY_SHIFTS.TryGetValue(Country, out result);
+            }
+            if (result != null && result.Length > 0)
             {
                 Place = (Place + " " + Address).Trim();
                 Address = Parish;
                 Parish = Region;
                 Region = Country;
-                Country = newCountry;
+                Country = result;
                 if (Level < PLACE) Level++; // we have moved up a level
             }
         }
 
         private void ShiftRegionToParish()
         {
-            string newRegion = string.Empty;
-            REGION_SHIFTS.TryGetValue(Region, out newRegion);
-            if (newRegion != null && newRegion.Length > 0)
+            string result = string.Empty;
+            REGION_SHIFTS.TryGetValue(Region, out result);
+            if (result == null || result.Length == 0)
+            {
+                string fixCase = txtInfo.ToTitleCase(Region.ToLower());
+                REGION_TYPOS.TryGetValue(fixCase, out result);
+            }
+            if (result != null && result.Length > 0)
             {
                 Place = (Place + " " + Address).Trim();
                 Address = Parish;
                 Parish = Region;
-                Region = newRegion;
+                Region = result;
                 if (Level < PLACE) Level++; // we have moved up a level
             }
         }
