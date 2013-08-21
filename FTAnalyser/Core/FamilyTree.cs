@@ -26,7 +26,9 @@ namespace FTAnalyzer
         private int maxAhnentafel = 0;
         private IList<DataErrorGroup> dataErrorTypes;
         private IEnumerable<IDisplayLocation>[] displayLocations;
-        
+        private static int DATA_ERROR_GROUPS = 17;
+
+
         private FamilyTree()
         {
             ResetData();
@@ -886,7 +888,7 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayFamily> result = new SortableBindingList<IDisplayFamily>();
                 foreach (IDisplayFamily f in families)
-                    if(f.FamilyGed != "Unlinked")
+                    if (f.FamilyGed != "Unlinked")
                         result.Add(f);
                 return result;
             }
@@ -933,8 +935,8 @@ namespace FTAnalyzer
         private void SetDataErrorTypes()
         {
             dataErrorTypes = new List<DataErrorGroup>();
-            List<DataError>[] errors = new List<DataError>[15];
-            for (int i = 0; i < 15; i++)
+            List<DataError>[] errors = new List<DataError>[DATA_ERROR_GROUPS];
+            for (int i = 0; i < DATA_ERROR_GROUPS; i++)
                 errors[i] = new List<DataError>();
             // calculate error lists
             foreach (Individual ind in AllIndividuals)
@@ -966,6 +968,13 @@ namespace FTAnalyzer
                             }
                             else
                                 errors[9].Add(de);
+                        }
+                        if (f.FactType == Fact.LOSTCOUSINS)
+                        {
+                            if (!CensusDate.IsCensusYear(f.FactDate))
+                                errors[14].Add(new DataError(ind, "Lost Cousins event for " + f.FactDate + " which isn't a census year"));
+                            else if (!CensusDate.IsLostCousinsCensusYear(f.FactDate))
+                                errors[15].Add(new DataError(ind, "Lost Cousins event for " + f.FactDate + " which isn't a Lost Cousins census year"));
                         }
                     }
                     foreach (Family asChild in ind.FamiliesAsChild)
@@ -1043,6 +1052,8 @@ namespace FTAnalyzer
             dataErrorTypes.Add(new DataErrorGroup("Marriage after spouse's death", errors[11]));
             dataErrorTypes.Add(new DataErrorGroup("Marriage before aged 13", errors[12]));
             dataErrorTypes.Add(new DataErrorGroup("Marriage before spouse aged 13", errors[13]));
+            dataErrorTypes.Add(new DataErrorGroup("Lost Cousins tag in non Census Year", errors[14]));
+            dataErrorTypes.Add(new DataErrorGroup("Lost Cousins tag in non supported Year", errors[15]));
             //            dataErrorTypes.Add(new DataErrorGroup("Later marriage before previous spouse died", errors[14]));
         }
 
