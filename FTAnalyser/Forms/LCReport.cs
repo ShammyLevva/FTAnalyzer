@@ -43,7 +43,7 @@ namespace FTAnalyzer.Forms
             allEntered.BackColor = allEntered.ForeColor = Color.Green;
             styles.Add(4, allEntered);
             DataGridViewCellStyle lcNoCensus = new DataGridViewCellStyle();
-            lcNoCensus.BackColor = lcNoCensus.ForeColor = Color.Orange;
+            lcNoCensus.BackColor = lcNoCensus.ForeColor = Color.DarkOrange;
             styles.Add(5, lcNoCensus);
 
             printDocument.DefaultPageSettings.Margins =
