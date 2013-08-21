@@ -9,7 +9,7 @@ namespace FTAnalyzer
     {
         string Country { get; }
         string Region { get; }
-        string Parish { get; }
+        string SubRegion { get; }
         string Address { get; }
         string Place { get; }
 

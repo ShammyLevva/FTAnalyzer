@@ -77,7 +77,7 @@
             this.dgCountries = new System.Windows.Forms.DataGridView();
             this.tabRegions = new System.Windows.Forms.TabPage();
             this.dgRegions = new System.Windows.Forms.DataGridView();
-            this.tabParishes = new System.Windows.Forms.TabPage();
+            this.tabSubRegions = new System.Windows.Forms.TabPage();
             this.dgParishes = new System.Windows.Forms.DataGridView();
             this.tabAddresses = new System.Windows.Forms.TabPage();
             this.dgAddresses = new System.Windows.Forms.DataGridView();
@@ -176,7 +176,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgCountries)).BeginInit();
             this.tabRegions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRegions)).BeginInit();
-            this.tabParishes.SuspendLayout();
+            this.tabSubRegions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgParishes)).BeginInit();
             this.tabAddresses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).BeginInit();
@@ -400,9 +400,9 @@
             // 
             // tabSelector
             // 
-            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabSelector.Controls.Add(this.tabDisplayProgress);
             this.tabSelector.Controls.Add(this.tabIndividuals);
             this.tabSelector.Controls.Add(this.tabFamilies);
@@ -585,7 +585,7 @@
             // 
             this.tabCtrlLocations.Controls.Add(this.tabCountries);
             this.tabCtrlLocations.Controls.Add(this.tabRegions);
-            this.tabCtrlLocations.Controls.Add(this.tabParishes);
+            this.tabCtrlLocations.Controls.Add(this.tabSubRegions);
             this.tabCtrlLocations.Controls.Add(this.tabAddresses);
             this.tabCtrlLocations.Controls.Add(this.tabPlaces);
             this.tabCtrlLocations.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -656,18 +656,19 @@
             this.dgRegions.TabIndex = 1;
             this.toolTips.SetToolTip(this.dgRegions, "Double click on Region name to see list of individuals with that Region.");
             this.dgRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgRegions_CellDoubleClick);
+            this.dgRegions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgRegions_CellFormatting);
             // 
-            // tabParishes
+            // tabSubRegions
             // 
-            this.tabParishes.Controls.Add(this.dgParishes);
-            this.tabParishes.Location = new System.Drawing.Point(4, 22);
-            this.tabParishes.Name = "tabParishes";
-            this.tabParishes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabParishes.Size = new System.Drawing.Size(917, 370);
-            this.tabParishes.TabIndex = 2;
-            this.tabParishes.Text = "Parishes";
-            this.tabParishes.ToolTipText = "Double click on \'Parish\' name to see list of individuals with that parish/area.";
-            this.tabParishes.UseVisualStyleBackColor = true;
+            this.tabSubRegions.Controls.Add(this.dgParishes);
+            this.tabSubRegions.Location = new System.Drawing.Point(4, 22);
+            this.tabSubRegions.Name = "tabSubRegions";
+            this.tabSubRegions.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSubRegions.Size = new System.Drawing.Size(917, 370);
+            this.tabSubRegions.TabIndex = 2;
+            this.tabSubRegions.Text = "SubRegions";
+            this.tabSubRegions.ToolTipText = "Double click on \'Parish\' name to see list of individuals with that parish/area.";
+            this.tabSubRegions.UseVisualStyleBackColor = true;
             // 
             // dgParishes
             // 
@@ -685,6 +686,7 @@
             this.dgParishes.Size = new System.Drawing.Size(911, 364);
             this.dgParishes.TabIndex = 1;
             this.dgParishes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgParishes_CellDoubleClick);
+            this.dgParishes.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgParishes_CellFormatting);
             // 
             // tabAddresses
             // 
@@ -714,6 +716,7 @@
             this.dgAddresses.Size = new System.Drawing.Size(911, 364);
             this.dgAddresses.TabIndex = 1;
             this.dgAddresses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAddresses_CellDoubleClick);
+            this.dgAddresses.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgAddresses_CellFormatting);
             // 
             // tabPlaces
             // 
@@ -743,6 +746,7 @@
             this.dgPlaces.Size = new System.Drawing.Size(911, 364);
             this.dgPlaces.TabIndex = 2;
             this.dgPlaces.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgPlaces_CellDoubleClick);
+            this.dgPlaces.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgPlaces_CellFormatting);
             // 
             // tabOccupations
             // 
@@ -1069,7 +1073,7 @@
             this.ckbRestrictions.Size = new System.Drawing.Size(521, 17);
             this.ckbRestrictions.TabIndex = 9;
             this.ckbRestrictions.Text = "Restrict results to only those direct ancestors, blood relations and those marrie" +
-    "d to direct or blood relations";
+                "d to direct or blood relations";
             this.ckbRestrictions.UseVisualStyleBackColor = true;
             // 
             // btnLC1841EW
@@ -1475,8 +1479,8 @@
             // 
             // rtbOutput
             // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbOutput.Location = new System.Drawing.Point(3, 90);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.Size = new System.Drawing.Size(925, 303);
@@ -1601,7 +1605,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgCountries)).EndInit();
             this.tabRegions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgRegions)).EndInit();
-            this.tabParishes.ResumeLayout(false);
+            this.tabSubRegions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgParishes)).EndInit();
             this.tabAddresses.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).EndInit();
@@ -1663,7 +1667,7 @@
         private System.Windows.Forms.TabControl tabCtrlLocations;
         private System.Windows.Forms.TabPage tabCountries;
         private System.Windows.Forms.TabPage tabRegions;
-        private System.Windows.Forms.TabPage tabParishes;
+        private System.Windows.Forms.TabPage tabSubRegions;
         private System.Windows.Forms.TabPage tabAddresses;
         private System.Windows.Forms.DataGridView dgCountries;
         private System.Windows.Forms.DataGridView dgRegions;

@@ -30,9 +30,9 @@ namespace FTAnalyzer.Forms
                     if (loc.Region.Length > 0)
                     {
                         TreeNode regionNode = AddChild(countryNode.Nodes, loc.Region);
-                        if (loc.Parish.Length > 0)
+                        if (loc.SubRegion.Length > 0)
                         {
-                            TreeNode parishNode = AddChild(regionNode.Nodes, loc.Parish);
+                            TreeNode parishNode = AddChild(regionNode.Nodes, loc.SubRegion);
                             if (parishNode.Nodes.Count == 0)
                             {
                                 List<string> surnames = ft.GetSurnamesAtLocation(loc);

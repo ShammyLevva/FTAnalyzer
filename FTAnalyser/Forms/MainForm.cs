@@ -996,7 +996,7 @@ namespace FTAnalyzer
                     PrintDataGrid(false, dgCountries);
                 if (tabCtrlLocations.SelectedTab == tabRegions)
                     PrintDataGrid(false, dgRegions);
-                if (tabCtrlLocations.SelectedTab == tabParishes)
+                if (tabCtrlLocations.SelectedTab == tabSubRegions)
                     PrintDataGrid(false, dgParishes);
                 if (tabCtrlLocations.SelectedTab == tabAddresses)
                     PrintDataGrid(false, dgAddresses);
@@ -1390,14 +1390,10 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void dgCountries_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void FormatCellLocations(DataGridView grid, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex == -1 || e.ColumnIndex == -1)
-            {
-                return;
-            }
-            DataGridViewCellStyle style = dgCountries.DefaultCellStyle;
-            DataGridViewCell cell = dgCountries.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            DataGridViewCellStyle style = grid.DefaultCellStyle;
+            DataGridViewCell cell = grid.Rows[e.RowIndex].Cells[e.ColumnIndex];
             string country = (string)cell.Value;
             if (Countries.IsKnownCountry(country))
             {
@@ -1407,6 +1403,46 @@ namespace FTAnalyzer
                     knownCountryStyle.Font = new Font(style.Font, FontStyle.Bold);
                 }
                 e.CellStyle = knownCountryStyle;
+            }
+        }
+
+        private void dgCountries_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                FormatCellLocations(dgCountries, e);
+            }
+        }
+
+        private void dgRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                FormatCellLocations(dgRegions, e);
+            }
+        }
+
+        private void dgParishes_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                FormatCellLocations(dgParishes, e);
+            }
+        }
+
+        private void dgAddresses_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                FormatCellLocations(dgAddresses, e);
+            }
+        }
+
+        private void dgPlaces_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                FormatCellLocations(dgPlaces, e);
             }
         }
 

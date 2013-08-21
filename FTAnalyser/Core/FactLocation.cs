@@ -21,7 +21,7 @@ namespace FTAnalyzer
         public string SortableLocation { get; private set; }
         public string Country { get; set; }
         public string Region { get; set; }
-        public string Parish { get; set; }
+        public string SubRegion { get; set; }
         public string Address { get; set; }
         public string Place { get; set; }
         public string ParishID { get; internal set; }
@@ -121,7 +121,7 @@ namespace FTAnalyzer
             this.SortableLocation = "";
             this.Country = "";
             this.Region = "";
-            this.Parish = "";
+            this.SubRegion = "";
             this.Address = "";
             this.Place = "";
             this.ParishID = null;
@@ -159,7 +159,7 @@ namespace FTAnalyzer
                         comma = location.LastIndexOf(",", comma);
                         if (comma > 0)
                         {
-                            Parish = location.Substring(comma + 1).Trim();
+                            SubRegion = location.Substring(comma + 1).Trim();
                             location = location.Substring(0, comma);
                             comma = location.LastIndexOf(",", comma);
                             if (comma > 0)
@@ -176,7 +176,7 @@ namespace FTAnalyzer
                         }
                         else
                         {
-                            Parish = location.Trim();
+                            SubRegion = location.Trim();
                             Level = PARISH;
                         }
                     }
@@ -216,28 +216,28 @@ namespace FTAnalyzer
             // first remove extraneous spaces
             Country = Country.Trim();
             Region = Region.Trim();
-            Parish = Parish.Trim();
+            SubRegion = SubRegion.Trim();
             Address = Address.Trim();
             Place = Place.Trim();
 
             if (Country.Length == 0)
             {
                 Country = Region;
-                Region = Parish;
-                Parish = Address;
+                Region = SubRegion;
+                SubRegion = Address;
                 Address = Place;
                 Place = "";
             }
             if (Region.Length == 0)
             {
-                Region = Parish;
-                Parish = Address;
+                Region = SubRegion;
+                SubRegion = Address;
                 Address = Place;
                 Place = "";
             }
-            if (Parish.Length == 0)
+            if (SubRegion.Length == 0)
             {
-                Parish = Address;
+                SubRegion = Address;
                 Address = Place;
                 Place = "";
             }
@@ -254,8 +254,8 @@ namespace FTAnalyzer
                 Country = char.ToUpper(Country[0]) + Country.Substring(1);
             if (Region.Length > 1)
                 Region = char.ToUpper(Region[0]) + Region.Substring(1);
-            if (Parish.Length > 1)
-                Parish = char.ToUpper(Parish[0]) + Parish.Substring(1);
+            if (SubRegion.Length > 1)
+                SubRegion = char.ToUpper(SubRegion[0]) + SubRegion.Substring(1);
             if (Address.Length > 1)
                 Address = char.ToUpper(Address[0]) + Address.Substring(1);
             if (Place.Length > 1)
@@ -278,15 +278,15 @@ namespace FTAnalyzer
                 Country = Country.Replace("  ", " ");
             while (Region.IndexOf("  ") != -1)
                 Region = Region.Replace("  ", " ");
-            while (Parish.IndexOf("  ") != -1)
-                Parish = Parish.Replace("  ", " ");
+            while (SubRegion.IndexOf("  ") != -1)
+                SubRegion = SubRegion.Replace("  ", " ");
             while (Address.IndexOf("  ") != -1)
                 Address = Address.Replace("  ", " ");
             while (Place.IndexOf("  ") != -1)
                 Place = Place.Replace("  ", " ");
             Country = Country.Replace("&", "and");
             Region = Region.Replace("&", "and");
-            Parish = Parish.Replace("&", "and");
+            SubRegion = SubRegion.Replace("&", "and");
             Address = Address.Replace("&", "and");
             Place = Place.Replace("&", "and");
         }
@@ -335,8 +335,8 @@ namespace FTAnalyzer
             if (result != null && result.Length > 0)
             {
                 Place = (Place + " " + Address).Trim();
-                Address = Parish;
-                Parish = Region;
+                Address = SubRegion;
+                SubRegion = Region;
                 Region = Country;
                 Country = result;
                 if (Level < PLACE) Level++; // we have moved up a level
@@ -355,8 +355,8 @@ namespace FTAnalyzer
             if (result != null && result.Length > 0)
             {
                 Place = (Place + " " + Address).Trim();
-                Address = Parish;
-                Parish = Region;
+                Address = SubRegion;
+                SubRegion = Region;
                 Region = result;
                 if (Level < PLACE) Level++; // we have moved up a level
             }
@@ -367,8 +367,8 @@ namespace FTAnalyzer
             fixedLocation = Country;
             if (!Region.Equals(string.Empty))
                 fixedLocation = Region + ", " + fixedLocation;
-            if (!Parish.Equals(string.Empty))
-                fixedLocation = Parish + ", " + fixedLocation;
+            if (!SubRegion.Equals(string.Empty))
+                fixedLocation = SubRegion + ", " + fixedLocation;
             if (!Address.Equals(string.Empty))
                 fixedLocation = Address + ", " + fixedLocation;
             if (!Place.Equals(string.Empty))
@@ -380,8 +380,8 @@ namespace FTAnalyzer
             SortableLocation = Country;
             if (!Region.Equals(string.Empty))
                 SortableLocation = SortableLocation + ", " + Region;
-            if (!Parish.Equals(string.Empty))
-                SortableLocation = SortableLocation + ", " + Parish;
+            if (!SubRegion.Equals(string.Empty))
+                SortableLocation = SortableLocation + ", " + SubRegion;
             if (!Address.Equals(string.Empty))
                 SortableLocation = SortableLocation + ", " + Address;
             if (!Place.Equals(string.Empty))
@@ -502,8 +502,8 @@ namespace FTAnalyzer
             StringBuilder location = new StringBuilder(this.Country);
             if (level > COUNTRY && Region.Length > 0)
                 location.Insert(0, this.Region + ", ");
-            if (level > REGION && Parish.Length > 0)
-                location.Insert(0, this.Parish + ", ");
+            if (level > REGION && SubRegion.Length > 0)
+                location.Insert(0, this.SubRegion + ", ");
             if (level > PARISH && Address.Length > 0)
                 location.Insert(0, fixNumerics ? FixNumerics(this.Address) : this.Address + ", ");
             if (level > ADDRESS && Place.Length > 0)
@@ -544,7 +544,7 @@ namespace FTAnalyzer
             {
                 case COUNTRY: return this.Country.ToUpper().CompareTo(s.ToUpper()) == 0;
                 case REGION: return this.Region.ToUpper().CompareTo(s.ToUpper()) == 0;
-                case PARISH: return this.Parish.ToUpper().CompareTo(s.ToUpper()) == 0;
+                case PARISH: return this.SubRegion.ToUpper().CompareTo(s.ToUpper()) == 0;
                 case ADDRESS: return this.Address.ToUpper().CompareTo(s.ToUpper()) == 0;
                 case PLACE: return this.Place.ToUpper().CompareTo(s.ToUpper()) == 0;
                 default: return false;
@@ -569,7 +569,7 @@ namespace FTAnalyzer
                 res = this.Region.CompareTo(that.Region);
                 if (res == 0 && level > REGION)
                 {
-                    res = this.Parish.CompareTo(that.Parish);
+                    res = this.SubRegion.CompareTo(that.SubRegion);
                     if (res == 0 && level > PARISH)
                     {
                         res = this.Address.CompareTo(that.Address);

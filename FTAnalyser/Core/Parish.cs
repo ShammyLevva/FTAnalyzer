@@ -25,7 +25,7 @@ namespace FTAnalyzer
             if (res == 0 && level > COUNTRY) {
                 res = this.Region.CompareTo(that.Region);
                 if (res == 0 && level > REGION) {
-                    res = this.Parish.CompareTo(that.Parish);
+                    res = this.SubRegion.CompareTo(that.SubRegion);
                 }
             }
             return res;

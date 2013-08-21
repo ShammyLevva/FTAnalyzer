@@ -1279,7 +1279,7 @@ namespace FTAnalyzer
             }
             if (person.BirthLocation != null)
             {
-                string location = person.BirthLocation.Parish;
+                string location = person.BirthLocation.SubRegion;
                 query.Append("t=" + HttpUtility.UrlEncode(location) + "&");
                 query.Append("b=" + person.BirthLocation.FreeCenCountyCode + "&");
             }
@@ -1372,7 +1372,7 @@ namespace FTAnalyzer
             }
             if (person.BirthLocation != null)
             {
-                query.Append("birthPlace=" + HttpUtility.UrlEncode(person.BirthLocation.Parish) + "&");
+                query.Append("birthPlace=" + HttpUtility.UrlEncode(person.BirthLocation.SubRegion) + "&");
                 Tuple<string, string> area = person.BirthLocation.FindMyPastCountyCode;
                 if (area != null)
                 {
