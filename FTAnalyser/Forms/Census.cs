@@ -284,17 +284,22 @@ namespace FTAnalyzer.Forms
                     i++;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Unable to load previous column order error was : " + ex.Message, "Census Column Sorting");
+                ResetCensusColumnLayout();
             }
         }
 
-        private void mnuResetCensusColumns_Click(object sender, EventArgs e)
+        private void ResetCensusColumnLayout()
         {
             for (int i = 0; i < dgCensus.Columns.Count; i++)
                 dgCensus.Columns[i].DisplayIndex = i;
             SaveCensusColumnLayout();
+        }
+
+        private void mnuResetCensusColumns_Click(object sender, EventArgs e)
+        {
+            ResetCensusColumnLayout();
         }
     }
 }

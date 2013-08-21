@@ -19,7 +19,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.1.0.0";
+        private string VERSION = "2.1.0.1";
         //private bool _checkForUpdatesEnabled = false;
         //private bool _showNoUpdateMessage = false;
         //private System.Threading.Timer _timerCheckForUpdates;
@@ -262,11 +262,13 @@ namespace FTAnalyzer
                     dgParishes.DataSource = null;
                     dgAddresses.DataSource = null;
                     dgPlaces.DataSource = null;
+                    //treeViewLocations = ft.AllLocationsTree;
+                    tabCtrlLocations.TabPages.RemoveByKey("tabTreeView");  // TODO fix treeview
                     Application.DoEvents();
                     mnuPrint.Enabled = true;
                     List<IDisplayLocation> countries = ft.AllCountries.ToList();
                     List<IDisplayLocation> regions = ft.AllRegions.ToList();
-                    List<IDisplayLocation> parishes = ft.AllParishes.ToList();
+                    List<IDisplayLocation> parishes = ft.AllSubRegions.ToList();
                     List<IDisplayLocation> addresses = ft.AllAddresses.ToList();
                     List<IDisplayLocation> places = ft.AllPlaces.ToList();
                     countries.Sort(new FactLocationComparer(FactLocation.COUNTRY));
