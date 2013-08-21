@@ -42,6 +42,9 @@ namespace FTAnalyzer.Forms
             DataGridViewCellStyle allEntered = new DataGridViewCellStyle();
             allEntered.BackColor = allEntered.ForeColor = Color.Green;
             styles.Add(4, allEntered);
+            DataGridViewCellStyle lcNoCensus = new DataGridViewCellStyle();
+            lcNoCensus.BackColor = lcNoCensus.ForeColor = Color.Orange;
+            styles.Add(5, lcNoCensus);
 
             printDocument.DefaultPageSettings.Margins =
                new System.Drawing.Printing.Margins(40, 40, 40, 40);
@@ -158,6 +161,9 @@ namespace FTAnalyzer.Forms
                         case 4:
                             cell.ToolTipText = "Census entered and flagged as entered on Lost Cousins.";
                             break;
+                        case 5:
+                            cell.ToolTipText = "Lost Cousins flagged but no Census entered.";
+                            break;
                     }
                 }
             }
@@ -248,13 +254,16 @@ namespace FTAnalyzer.Forms
                     list.AddRange(BuildFilter(4, true));
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayLCReport>(list);
                     break;
-                case 4: // Lost Cousins (Yellows)
+                case 4: // Lost Cousins Missing (Yellows)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayLCReport>(BuildFilter(2, false));
                     break;
-                case 5: // Some Missing (Some Red)
+                case 5: // Lost Cousins Present (Orange)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayLCReport>(BuildFilter(5, false));
+                    break;
+                case 6: // Some Missing (Some Red)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayLCReport>(BuildFilter(1, false));
                     break;
-                case 6:
+                case 7:
                     list = new List<IDisplayLCReport>();
                     list.AddRange(BuildFilter(3, false));
                     list.AddRange(BuildFilter(4, false));

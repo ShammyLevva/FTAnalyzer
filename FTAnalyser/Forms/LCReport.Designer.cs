@@ -149,17 +149,18 @@
             // cbFilter
             // 
             this.cbFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFilter.DropDownWidth = 150;
+            this.cbFilter.DropDownWidth = 170;
             this.cbFilter.Items.AddRange(new object[] {
             "All Individuals",
             "Not Alive (All Grey)",
             "None Found (All Red)",
             "All Found (All Green)",
-            "Lost Cousins (Yellows)",
+            "Lost Cousins Missing (Yellow)",
+            "Lost Cousins Present (Orange)",
             "Some Missing (Some Red)",
             "Some Found (Some Green)"});
             this.cbFilter.Name = "cbFilter";
-            this.cbFilter.Size = new System.Drawing.Size(121, 25);
+            this.cbFilter.Size = new System.Drawing.Size(185, 25);
             this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.cbFilter_SelectedIndexChanged);
             // 
             // printDialog
