@@ -67,6 +67,7 @@ namespace FTAnalyzer.Forms
             individuals.Sort(comparer);
             dgCensus.DataSource = individuals.ToList<IDisplayCensus>();
             StyleRows();
+            LoadCensusColumnLayout();
             ResizeColumns();
             tsRecords.Text = individuals.Count + " Records / " + numFamilies + " Families.";
         }
@@ -249,6 +250,12 @@ namespace FTAnalyzer.Forms
         
         private void mnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
+            SaveCensusColumnLayout();
+            MessageBox.Show("Column Sort Order Saved", "Census Column Sorting");
+        }
+
+        private void SaveCensusColumnLayout()
+        {
             DataTable dt = new DataTable("table");
             var query = from DataGridViewColumn col in dgCensus.Columns
                         orderby col.DisplayIndex
@@ -260,10 +267,9 @@ namespace FTAnalyzer.Forms
             }
             string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, "CensusColumns.xml");
             dt.WriteXmlSchema(path);
-            MessageBox.Show("Column Sort Order Saved", "Census Column Sorting");
         }
 
-        private void mnuLoadCensusColumnLayout_Click(object sender, EventArgs e)
+        private void LoadCensusColumnLayout()
         {
             try
             {
@@ -277,7 +283,6 @@ namespace FTAnalyzer.Forms
                     dgCensus.Columns[col.ColumnName].DisplayIndex = i;
                     i++;
                 }
-                MessageBox.Show("Column Sort Order Loaded", "Census Column Sorting");
             }
             catch (Exception ex)
             {
@@ -289,6 +294,7 @@ namespace FTAnalyzer.Forms
         {
             for (int i = 0; i < dgCensus.Columns.Count; i++)
                 dgCensus.Columns[i].DisplayIndex = i;
+            SaveCensusColumnLayout();
         }
     }
 }
