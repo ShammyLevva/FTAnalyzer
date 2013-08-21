@@ -274,11 +274,11 @@ namespace FTAnalyzer
                     parishes.Sort(new FactLocationComparer(FactLocation.PARISH));
                     addresses.Sort(new FactLocationComparer(FactLocation.ADDRESS));
                     places.Sort(new FactLocationComparer(FactLocation.PLACE));
-                    dgCountries.DataSource = countries;
-                    dgRegions.DataSource = regions;
-                    dgParishes.DataSource = parishes;
-                    dgAddresses.DataSource = addresses;
-                    dgPlaces.DataSource = places;
+                    dgCountries.DataSource = new SortableBindingList<IDisplayLocation>(countries);
+                    dgRegions.DataSource = new SortableBindingList<IDisplayLocation>(regions);
+                    dgParishes.DataSource = new SortableBindingList<IDisplayLocation>(parishes);
+                    dgAddresses.DataSource = new SortableBindingList<IDisplayLocation>(addresses);
+                    dgPlaces.DataSource = new SortableBindingList<IDisplayLocation>(places);
                     tsCountLabel.Text = "Count : " + dgCountries.RowCount + " Countries";
                     tabCtrlLocations.SelectedIndex = 0;
                 }
