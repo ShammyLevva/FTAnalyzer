@@ -259,46 +259,21 @@ namespace FTAnalyzer
                     tsCountLabel.Text = "";
                     dgCountries.DataSource = null;
                     dgRegions.DataSource = null;
-                    dgParishes.DataSource = null;
+                    dgSubRegions.DataSource = null;
                     dgAddresses.DataSource = null;
                     dgPlaces.DataSource = null;
                     //treeViewLocations = ft.AllLocationsTree;
                     tabCtrlLocations.TabPages.RemoveByKey("tabTreeView");  // TODO fix treeview
                     Application.DoEvents();
                     mnuPrint.Enabled = true;
-                    List<IDisplayLocation> countries = ft.AllCountries.ToList();
-                    List<IDisplayLocation> regions = ft.AllRegions.ToList();
-                    List<IDisplayLocation> parishes = ft.AllSubRegions.ToList();
-                    List<IDisplayLocation> addresses = ft.AllAddresses.ToList();
-                    List<IDisplayLocation> places = ft.AllPlaces.ToList();
-                    countries.Sort(new FactLocationComparer(FactLocation.COUNTRY));
-                    regions.Sort(new FactLocationComparer(FactLocation.REGION));
-                    parishes.Sort(new FactLocationComparer(FactLocation.PARISH));
-                    addresses.Sort(new FactLocationComparer(FactLocation.ADDRESS));
-                    places.Sort(new FactLocationComparer(FactLocation.PLACE));
-                    dgCountries.DataSource = new SortableBindingList<IDisplayLocation>(countries);
-                    dgRegions.DataSource = new SortableBindingList<IDisplayLocation>(regions);
-                    dgParishes.DataSource = new SortableBindingList<IDisplayLocation>(parishes);
-                    dgAddresses.DataSource = new SortableBindingList<IDisplayLocation>(addresses);
-                    dgPlaces.DataSource = new SortableBindingList<IDisplayLocation>(places);
+                    dgCountries.DataSource = ft.AllDisplayCountries;
+                    dgRegions.DataSource = ft.AllDisplayRegions;
+                    dgSubRegions.DataSource = ft.AllDisplaySubRegions;
+                    dgAddresses.DataSource = ft.AllDisplayAddresses;
+                    dgPlaces.DataSource = ft.AllDisplayPlaces;
                     tsCountLabel.Text = "Count : " + dgCountries.RowCount + " Countries";
                     tabCtrlLocations.SelectedIndex = 0;
                 }
-                //else if (tabSelector.SelectedTab == tabFamilySearch)
-                //{
-                //    btnCancelFamilySearch.Visible = false;
-                //    btnViewResults.Visible = true;
-                //    tsCountLabel.Text = "";
-                //    btnFamilySearchChildrenSearch.Enabled = btnFamilySearchMarriageSearch.Enabled = ft.IndividualCount > 0;
-                //    try
-                //    {
-                //        txtFamilySearchfolder.Text = (string)Application.UserAppDataRegistry.GetValue("FamilySearch Search Path");
-                //    }
-                //    catch (Exception)
-                //    {
-                //        txtFamilySearchfolder.Text = string.Empty;
-                //    }
-                //}
                 HourGlass(false);
             }
         }
@@ -342,7 +317,7 @@ namespace FTAnalyzer
         private void dgParishes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             HourGlass(true);
-            FactLocation loc = (FactLocation)dgParishes.CurrentRow.DataBoundItem;
+            FactLocation loc = (FactLocation)dgSubRegions.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.setLocation(loc, FactLocation.PARISH);
             DisposeDuplicateForms(frmInd);
@@ -999,7 +974,7 @@ namespace FTAnalyzer
                 if (tabCtrlLocations.SelectedTab == tabRegions)
                     PrintDataGrid(false, dgRegions);
                 if (tabCtrlLocations.SelectedTab == tabSubRegions)
-                    PrintDataGrid(false, dgParishes);
+                    PrintDataGrid(false, dgSubRegions);
                 if (tabCtrlLocations.SelectedTab == tabAddresses)
                     PrintDataGrid(false, dgAddresses);
                 if (tabCtrlLocations.SelectedTab == tabPlaces)
@@ -1149,7 +1124,7 @@ namespace FTAnalyzer
                     locType = FactLocation.REGION;
                     break;
                 case "Parishes":
-                    loc = dgParishes.CurrentRow == null ? null : (FactLocation)dgParishes.CurrentRow.DataBoundItem;
+                    loc = dgSubRegions.CurrentRow == null ? null : (FactLocation)dgSubRegions.CurrentRow.DataBoundItem;
                     locType = FactLocation.PARISH;
                     break;
                 case "Addresses":
@@ -1428,7 +1403,7 @@ namespace FTAnalyzer
         {
             if (e.ColumnIndex == 0)
             {
-                FormatCellLocations(dgParishes, e);
+                FormatCellLocations(dgSubRegions, e);
             }
         }
 

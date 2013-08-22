@@ -67,6 +67,7 @@
     <Compile Include="Formatters\CensusOutputFormatter.cs" />
     <Compile Include="Formatters\DeathOutputFormatter.cs" />
     <Compile Include="Formatters\MarriageOutputFormatter.cs" />
+    <Compile Include="Forms\FamilySearchMainFormCode.cs" />
     <Compile Include="Forms\FamilySearchResultsViewer.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -25,7 +25,7 @@ namespace FTAnalyzer
         private RichTextBox xmlErrorbox = new RichTextBox();
         private int maxAhnentafel = 0;
         private IList<DataErrorGroup> dataErrorTypes;
-        private IEnumerable<IDisplayLocation>[] displayLocations;
+        private SortableBindingList<IDisplayLocation>[] displayLocations;
         private TreeView displayTree;
         private static int DATA_ERROR_GROUPS = 17;
 
@@ -108,7 +108,7 @@ namespace FTAnalyzer
             locations = new Dictionary<string, FactLocation>();
             occupations = new Dictionary<string, List<Individual>>();
             dataErrorTypes = new List<DataErrorGroup>();
-            displayLocations = new IEnumerable<IDisplayLocation>[5];
+            displayLocations = new SortableBindingList<IDisplayLocation>[5];
             for (int i = 0; i < 5; i++)
                 displayLocations[i] = null;
         }
@@ -285,44 +285,6 @@ namespace FTAnalyzer
         public IEnumerable<FactLocation> AllLocations
         {
             get { return locations.Values; }
-        }
-
-        private IEnumerable<IDisplayLocation> GetDisplayLocations(int level)
-        {
-            List<IDisplayLocation> result = new List<IDisplayLocation>();
-            foreach (FactLocation loc in locations.Values)
-            {
-                FactLocation c = loc.GetLocation(level);
-                if (c.Country != string.Empty && !result.Contains(c)) result.Add(c);
-            }
-            displayLocations[level] = result;
-            return result;
-        }
-
-        public IEnumerable<IDisplayLocation> AllCountries
-        {
-            get { return displayLocations[FactLocation.COUNTRY] == null ? GetDisplayLocations(FactLocation.COUNTRY) : displayLocations[FactLocation.COUNTRY]; }
-        }
-
-        public IEnumerable<IDisplayLocation> AllRegions
-        {
-            get { return displayLocations[FactLocation.REGION] == null ? GetDisplayLocations(FactLocation.REGION) : displayLocations[FactLocation.REGION]; }
-        }
-
-        public IEnumerable<IDisplayLocation> AllSubRegions
-        {
-            get { return displayLocations[FactLocation.PARISH] == null ? GetDisplayLocations(FactLocation.PARISH) : displayLocations[FactLocation.PARISH]; }
-
-        }
-
-        public IEnumerable<IDisplayLocation> AllAddresses
-        {
-            get { return displayLocations[FactLocation.ADDRESS] == null ? GetDisplayLocations(FactLocation.ADDRESS) : displayLocations[FactLocation.ADDRESS]; }
-        }
-
-        public IEnumerable<IDisplayLocation> AllPlaces
-        {
-            get { return displayLocations[FactLocation.PLACE] == null ? GetDisplayLocations(FactLocation.PLACE) : displayLocations[FactLocation.PLACE]; }
         }
 
         public int IndividualCount { get { return individuals.Count; } }
@@ -872,6 +834,45 @@ namespace FTAnalyzer
 
         #region Displays
 
+        private SortableBindingList<IDisplayLocation> GetDisplayLocations(int level)
+        {
+            List<IDisplayLocation> result = new List<IDisplayLocation>();
+            foreach (FactLocation loc in locations.Values)
+            {
+                FactLocation c = loc.GetLocation(level);
+                if (c.Country != string.Empty && !result.Contains(c)) result.Add(c);
+            }
+            result.Sort(new FactLocationComparer(level));
+            displayLocations[level] = new SortableBindingList<IDisplayLocation>(result);
+            return displayLocations[level];
+        }
+
+        public SortableBindingList<IDisplayLocation> AllDisplayCountries
+        {
+            get { return displayLocations[FactLocation.COUNTRY] == null ? GetDisplayLocations(FactLocation.COUNTRY) : displayLocations[FactLocation.COUNTRY]; }
+        }
+
+        public SortableBindingList<IDisplayLocation> AllDisplayRegions
+        {
+            get { return displayLocations[FactLocation.REGION] == null ? GetDisplayLocations(FactLocation.REGION) : displayLocations[FactLocation.REGION]; }
+        }
+
+        public SortableBindingList<IDisplayLocation> AllDisplaySubRegions
+        {
+            get { return displayLocations[FactLocation.PARISH] == null ? GetDisplayLocations(FactLocation.PARISH) : displayLocations[FactLocation.PARISH]; }
+
+        }
+
+        public SortableBindingList<IDisplayLocation> AllDisplayAddresses
+        {
+            get { return displayLocations[FactLocation.ADDRESS] == null ? GetDisplayLocations(FactLocation.ADDRESS) : displayLocations[FactLocation.ADDRESS]; }
+        }
+
+        public SortableBindingList<IDisplayLocation> AllDisplayPlaces
+        {
+            get { return displayLocations[FactLocation.PLACE] == null ? GetDisplayLocations(FactLocation.PLACE) : displayLocations[FactLocation.PLACE]; }
+        }
+
         public SortableBindingList<IDisplayIndividual> AllDisplayIndividuals
         {
             get
@@ -1409,29 +1410,28 @@ namespace FTAnalyzer
         {
             get 
             {
-                return null;
                 if (displayTree !=null)
                     return displayTree;
                 displayTree = new TreeView();
-                foreach(FactLocation c in AllCountries)
+                foreach(FactLocation c in AllDisplayCountries)
                 {
                     TreeNode country = displayTree.Nodes.Add(c.ToString());
-                    foreach (FactLocation r in AllRegions)
+                    foreach (FactLocation r in AllDisplayRegions)
                     {
                         if (r.Country == c.Country)
                         {
                             TreeNode region = country.Nodes.Add(r.ToString());
-                            foreach (FactLocation s in AllSubRegions)
+                            foreach (FactLocation s in AllDisplaySubRegions)
                             {
                                 if (s.Region == r.Region)
                                 {
                                     TreeNode subregion = region.Nodes.Add(s.ToString());
-                                    foreach (FactLocation a in AllAddresses)
+                                    foreach (FactLocation a in AllDisplayAddresses)
                                     {
                                         if (a.SubRegion == s.SubRegion)
                                         {
                                             TreeNode address = subregion.Nodes.Add(a.ToString());
-                                            foreach (FactLocation p in AllPlaces)
+                                            foreach (FactLocation p in AllDisplayPlaces)
                                             {
                                                 if (p.Address == a.Address)
                                                 {
