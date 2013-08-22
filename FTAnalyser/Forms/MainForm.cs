@@ -75,43 +75,48 @@ namespace FTAnalyzer
 
             if (openGedcom.ShowDialog() == DialogResult.OK)
             {
-                try
+                LoadFile(openGedcom.FileName);
+            }
+        }
+
+        private void LoadFile(string filename)
+        {
+            try
+            {
+                HourGlass(true);
+                DisposeIndividualForms();
+                mnuReports.Visible = false;
+                mnuExport.Visible = false;
+                tabSelector.SelectTab(tabDisplayProgress);
+                rtbOutput.Text = "";
+                rtbFamilySearchResults.Text = "";
+                pbSources.Value = pbIndividuals.Value = pbFamilies.Value = 0;
+                Application.DoEvents();
+                if (!stopProcessing)
                 {
-                    HourGlass(true);
-                    DisposeIndividualForms();
-                    mnuReports.Visible = false;
-                    mnuExport.Visible = false;
-                    tabSelector.SelectTab(tabDisplayProgress);
-                    rtbOutput.Text = "";
-                    rtbFamilySearchResults.Text = "";
-                    pbSources.Value = pbIndividuals.Value = pbFamilies.Value = 0;
-                    Application.DoEvents();
-                    if (!stopProcessing)
-                    {
-                        //document.Save("GedcomOutput.xml");
-                        ft.LoadTree(openGedcom.FileName, pbSources, pbIndividuals, pbFamilies);
-                        ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
-                        Application.UseWaitCursor = false;
-                        HourGlass(false);
-                        mnuReports.Visible = true;
-                        mnuExport.Visible = true;
-                        mnuPrint.Enabled = true;
-                        MessageBox.Show("Gedcom File Loaded");
-                    }
-                }
-                catch (IOException ex)
-                {
-                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
-                }
-                catch (Exception ex2)
-                {
-                    MessageBox.Show("Error: Problem processing your file.\n" +
-                        "Please report this at http://ftanalyzer.codeplex.com. Error was: " + ex2.Message);
-                }
-                finally
-                {
+                    //document.Save("GedcomOutput.xml");
+                    ft.LoadTree(filename, pbSources, pbIndividuals, pbFamilies);
+                    ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
+                    Application.UseWaitCursor = false;
                     HourGlass(false);
+                    mnuReports.Visible = true;
+                    mnuExport.Visible = true;
+                    mnuPrint.Enabled = true;
+                    MessageBox.Show("Gedcom File Loaded");
                 }
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+            }
+            catch (Exception ex2)
+            {
+                MessageBox.Show("Error: Problem processing your file.\n" +
+                    "Please report this at http://ftanalyzer.codeplex.com. Error was: " + ex2.Message);
+            }
+            finally
+            {
+                HourGlass(false);
             }
         }
 
@@ -1469,6 +1474,25 @@ namespace FTAnalyzer
         private void treeViewLocations_MouseDown(object sender, MouseEventArgs e)
         {
             preventExpand = e.Clicks > 1;
+        }
+
+        private void mainForm_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
+            foreach (string filename in files)
+            {
+                if (Path.GetExtension(filename) == ".ged")
+                {
+                    LoadFile(filename);
+                    break;
+                }
+            }
+        }
+
+        private void mainForm_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
         }
 
 

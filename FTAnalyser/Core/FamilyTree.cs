@@ -112,6 +112,7 @@ namespace FTAnalyzer
             displayLocations = new SortableBindingList<IDisplayLocation>[5];
             for (int i = 0; i < 5; i++)
                 displayLocations[i] = null;
+            displayTreeRootNode = null;
         }
 
         public void LoadTree(string filename, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
