@@ -298,8 +298,7 @@ namespace FTAnalyzer
         {
             if (factComment.Length == 0 && factPlace.Length > 0)
             {
-                string c = factPlace.Substring(factPlace.Length - 1);
-                if (c == "/")
+                if (factPlace.EndsWith("/"))
                 {
                     Comment = factPlace.Substring(0, factPlace.Length - 1);
                     Place = "";
