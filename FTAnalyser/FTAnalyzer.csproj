@@ -384,6 +384,7 @@
       <DependentUpon>RelationTypes.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities\DoubleMetaphone.cs" />
+    <Compile Include="Utilities\EnhancedTextInfo.cs" />
     <Compile Include="Utilities\ExportToExcel.cs" />
     <Compile Include="Utilities\HttpUtility.cs" />
     <Compile Include="Utilities\ListtoDataTableConvertor.cs" />

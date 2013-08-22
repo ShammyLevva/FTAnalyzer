@@ -7,6 +7,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer
 {
@@ -15,7 +16,6 @@ namespace FTAnalyzer
 
         public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, PARISH = 2, ADDRESS = 3, PLACE = 4;
 
-        private TextInfo txtInfo;
         private string location;
         private string fixedLocation;
         public string SortableLocation { get; private set; }
@@ -148,7 +148,6 @@ namespace FTAnalyzer
         {
             if (location != null)
             {
-                txtInfo = new CultureInfo("en-GB", false).TextInfo;
                 this.location = location;
                 // we need to parse the location string from a little injun to a big injun
                 int comma = this.location.LastIndexOf(",");
@@ -203,7 +202,7 @@ namespace FTAnalyzer
                 fixCountryFullStops();
                 fixMultipleSpacesAndAmpersands();
                 fixCountryTypos();
-                Country = txtInfo.ToTitleCase(fixRegionTypos(Country).ToLower());
+                Country = EnhancedTextInfo.ToTitleCase(fixRegionTypos(Country).ToLower());
                 ShiftCountryToRegion();
                 Region = fixRegionTypos(Region);
                 ShiftRegionToParish();
@@ -304,7 +303,7 @@ namespace FTAnalyzer
                 Country = result;
             else
             {
-                string fixCase = txtInfo.ToTitleCase(Country.ToLower());
+                string fixCase = EnhancedTextInfo.ToTitleCase(Country.ToLower());
                 COUNTRY_TYPOS.TryGetValue(fixCase, out result);
                 if (result != null && result.Length > 0)
                     Country = result;
@@ -319,7 +318,7 @@ namespace FTAnalyzer
                 return result;
             else
             {
-                string fixCase = txtInfo.ToTitleCase(toFix.ToLower());
+                string fixCase = EnhancedTextInfo.ToTitleCase(toFix.ToLower());
                 REGION_TYPOS.TryGetValue(fixCase, out result);
                 if (result != null && result.Length > 0)
                     return result;
@@ -334,7 +333,7 @@ namespace FTAnalyzer
             COUNTRY_SHIFTS.TryGetValue(Country, out result);
             if (result == null || result.Length == 0)
             {
-                string fixCase = txtInfo.ToTitleCase(Country.ToLower());
+                string fixCase = EnhancedTextInfo.ToTitleCase(Country.ToLower());
                 COUNTRY_SHIFTS.TryGetValue(Country, out result);
             }
             if (result != null && result.Length > 0)
@@ -354,7 +353,7 @@ namespace FTAnalyzer
             REGION_SHIFTS.TryGetValue(Region, out result);
             if (result == null || result.Length == 0)
             {
-                string fixCase = txtInfo.ToTitleCase(Region.ToLower());
+                string fixCase = EnhancedTextInfo.ToTitleCase(Region.ToLower());
                 REGION_TYPOS.TryGetValue(fixCase, out result);
             }
             if (result != null && result.Length > 0)
