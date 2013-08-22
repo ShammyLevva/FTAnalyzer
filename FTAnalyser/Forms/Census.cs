@@ -144,7 +144,7 @@ namespace FTAnalyzer.Forms
                 case "FamilyGed": // Family GED
                     comp = new IDisplayCensusComparerWrapper(new CensusFamilyGedComparer());
                     break;
-                case "RegistrationLocation": // By location (original sort order)
+                case "CensusLocation": // By location (original sort order)
                     comp = new IDisplayCensusComparerWrapper(new CensusLocationComparer());
                     break;
                 case "CensusName": // Census Name
@@ -237,9 +237,12 @@ namespace FTAnalyzer.Forms
 
         private void dgCensus_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            CensusIndividual ds = dgCensus.CurrentRow == null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
-            FamilyTree ft = FamilyTree.Instance;
-            ft.SearchCensus(censusLocation.Country, CensusDate.StartDate.Year, ds, cbCensusSearchProvider.SelectedIndex);
+            if (e.RowIndex >= 0)
+            {
+                CensusIndividual ds = dgCensus.CurrentRow == null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
+                FamilyTree ft = FamilyTree.Instance;
+                ft.SearchCensus(censusLocation.Country, CensusDate.StartDate.Year, ds, cbCensusSearchProvider.SelectedIndex);
+            }
         }
 
         private void cbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
