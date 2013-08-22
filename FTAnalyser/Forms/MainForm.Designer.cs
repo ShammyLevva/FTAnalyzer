@@ -396,9 +396,9 @@
             // 
             // tabSelector
             // 
-            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabSelector.Controls.Add(this.tabDisplayProgress);
             this.tabSelector.Controls.Add(this.tabIndividuals);
             this.tabSelector.Controls.Add(this.tabFamilies);
@@ -433,7 +433,7 @@
             this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(3);
             this.tabDisplayProgress.Size = new System.Drawing.Size(931, 402);
             this.tabDisplayProgress.TabIndex = 1;
-            this.tabDisplayProgress.Text = "Load Gedcom";
+            this.tabDisplayProgress.Text = "Gedcom Stats";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
             // 
             // webBrowser
@@ -447,8 +447,8 @@
             // 
             // rtbOutput
             // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbOutput.Location = new System.Drawing.Point(3, 90);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
@@ -1134,7 +1134,7 @@
             this.ckbRestrictions.Size = new System.Drawing.Size(521, 17);
             this.ckbRestrictions.TabIndex = 9;
             this.ckbRestrictions.Text = "Restrict results to only those direct ancestors, blood relations and those marrie" +
-    "d to direct or blood relations";
+                "d to direct or blood relations";
             this.ckbRestrictions.UseVisualStyleBackColor = true;
             // 
             // btnLC1841EW
