@@ -483,7 +483,7 @@ namespace FTAnalyzer
                     toAdd = new FactDate(deathDate.StartDate, minDeath);
                 }
             }
-            else if (deathDate == FactDate.UNKNOWN_DATE && indiv.CurrentAge.MinAge > 110)
+            else if (deathDate == FactDate.UNKNOWN_DATE && indiv.LifeSpan.MinAge > 110)
             {
                 // also check for empty death dates for people aged over 110
                 DateTime maxLiving = GetMaxLivingDate(indiv);

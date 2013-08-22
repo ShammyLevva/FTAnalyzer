@@ -397,7 +397,7 @@ namespace FTAnalyzer
             }
         }
 
-        public Age CurrentAge
+        public Age LifeSpan
         {
             get
             {
@@ -585,7 +585,7 @@ namespace FTAnalyzer
         
         public bool isSingleAtDeath() {
             Fact single = GetPreferredFact(Fact.UNMARRIED);
-            return single != null || MaxAgeAtDeath < 16 || CurrentAge.MaxAge < 16;
+            return single != null || MaxAgeAtDeath < 16 || LifeSpan.MaxAge < 16;
         }
 
         public bool isBirthKnown()

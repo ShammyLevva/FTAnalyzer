@@ -17,7 +17,7 @@ namespace FTAnalyzer
         FactDate DeathDate { get; }
         FactLocation DeathLocation { get; }
         string Occupation { get; }
-        Age CurrentAge { get; }
+        Age LifeSpan { get; }
         string Relation { get; }
         string BudgieCode { get; }
         int Ahnentafel { get; }
