@@ -8,6 +8,7 @@ using System.IO;
 using FTAnalyzer.Utilities;
 using System.Web;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace FTAnalyzer
 {
@@ -1405,35 +1406,39 @@ namespace FTAnalyzer
             return uri.ToString();
         }
         #endregion
-        
-        public TreeNode[] AllLocationsTreeNodes
+
+        public TreeNode[] GetAllLocationsTreeNodes(Font defaultFont)
         {
-            get 
-            {
-                if (displayTreeRootNode != null)
-                    return BuildTreeNodeArray();
-
-                displayTreeRootNode = new TreeNode();
-                foreach (FactLocation location in AllDisplayPlaces)
-                {
-                    string[] parts = location.Parts;
-                    TreeNode current = displayTreeRootNode;
-                    foreach (string part in parts)
-                    {
-                        if (part.Length == 0) break;
-                        TreeNode child = current.Nodes.Find(part, false).FirstOrDefault();
-                        if (child == null)
-                        {
-                            child = new TreeNode(part);
-                            child.Name = part;
-                            current.Nodes.Add(child);
-                        }
-                        current = child;
-                    }
-                }
-
+            if (displayTreeRootNode != null)
                 return BuildTreeNodeArray();
+
+            displayTreeRootNode = new TreeNode();
+            Font regularFont = new Font(defaultFont, FontStyle.Regular);
+            foreach (FactLocation location in AllDisplayPlaces)
+            {
+                string[] parts = location.Parts;
+                TreeNode current = displayTreeRootNode;
+                foreach (string part in parts)
+                {
+                    if (part.Length == 0) break;
+                    TreeNode child = current.Nodes.Find(part, false).FirstOrDefault();
+                    if (child == null)
+                    {
+                        child = new TreeNode(part);
+                        child.Name = part;
+                        child.Tag = location;
+                        // Set everything other than known countries to regular
+                        if (current != displayTreeRootNode || !Countries.IsKnownCountry(part))
+                        {
+                            child.NodeFont = regularFont;
+                        }
+                        current.Nodes.Add(child);
+                    }
+                    current = child;
+                }
             }
+
+            return BuildTreeNodeArray();
         }
 
         private TreeNode[] BuildTreeNodeArray()

@@ -263,15 +263,14 @@ namespace FTAnalyzer
                     dgAddresses.DataSource = null;
                     dgPlaces.DataSource = null;
                     treeViewLocations.Nodes.Clear();
-                    treeViewLocations.Nodes.AddRange(ft.AllLocationsTreeNodes);
+                    treeViewLocations.Nodes.AddRange(ft.GetAllLocationsTreeNodes(treeViewLocations.Font));
                     Application.DoEvents();
-                    mnuPrint.Enabled = true;
+                    mnuPrint.Enabled = false;
                     dgCountries.DataSource = ft.AllDisplayCountries;
                     dgRegions.DataSource = ft.AllDisplayRegions;
                     dgSubRegions.DataSource = ft.AllDisplaySubRegions;
                     dgAddresses.DataSource = ft.AllDisplayAddresses;
                     dgPlaces.DataSource = ft.AllDisplayPlaces;
-                    tsCountLabel.Text = "Count : " + dgCountries.RowCount + " Countries";
                     tabCtrlLocations.SelectedIndex = 0;
                 }
                 HourGlass(false);
@@ -1367,10 +1366,12 @@ namespace FTAnalyzer
             {
                 DataGridView dg = control as DataGridView;
                 tsCountLabel.Text = "Count : " + dg.RowCount + " " + dg.Name.Substring(2);
+                mnuPrint.Enabled = true;
             }
             else
             {
                 tsCountLabel.Text = string.Empty;
+                mnuPrint.Enabled = false;
             }
             HourGlass(false);
         }
@@ -1438,5 +1439,38 @@ namespace FTAnalyzer
             else
                 MessageBox.Show("If no birth date is present, unknown will be shown");
         }
+
+        private bool preventExpand;
+
+        private void treeViewLocations_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            HourGlass(true);
+            FactLocation location = e.Node.Tag as FactLocation;
+            if (location != null)
+            {
+                Forms.People frmInd = new Forms.People();
+                frmInd.setLocation(location, e.Node.Level);
+                DisposeDuplicateForms(frmInd);
+                frmInd.Show();
+            }
+            HourGlass(false);
+        }
+
+        private void treeViewLocations_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
+        {
+            e.Cancel = (preventExpand && e.Action == TreeViewAction.Collapse);
+        }
+
+        private void treeViewLocations_BeforeExpand(object sender, TreeViewCancelEventArgs e)
+        {
+            e.Cancel = (preventExpand && e.Action == TreeViewAction.Expand);
+        }
+
+        private void treeViewLocations_MouseDown(object sender, MouseEventArgs e)
+        {
+            preventExpand = e.Clicks > 1;
+        }
+
+
     }
 }
