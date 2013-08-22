@@ -29,6 +29,11 @@ namespace FTAnalyzer
         public double Latitude { get; set; }
         public double Longitude { get; set; }
 
+        public string[] Parts
+        {
+            get { return new string[] { Country, Region, SubRegion, Address, Place }; }
+        }
+
         private List<Individual> individuals;
         private static Dictionary<string, string> COUNTRY_TYPOS = new Dictionary<string, string>();
         private static Dictionary<string, string> REGION_TYPOS = new Dictionary<string, string>();

@@ -26,7 +26,7 @@ namespace FTAnalyzer
         private int maxAhnentafel = 0;
         private IList<DataErrorGroup> dataErrorTypes;
         private SortableBindingList<IDisplayLocation>[] displayLocations;
-        private TreeView displayTree;
+        private TreeNode displayTreeRootNode;
         private static int DATA_ERROR_GROUPS = 17;
 
 
@@ -1406,47 +1406,42 @@ namespace FTAnalyzer
         }
         #endregion
         
-        public TreeView AllLocationsTree
+        public TreeNode[] AllLocationsTreeNodes
         {
             get 
             {
-                if (displayTree !=null)
-                    return displayTree;
-                displayTree = new TreeView();
-                foreach(FactLocation c in AllDisplayCountries)
+                if (displayTreeRootNode != null)
+                    return BuildTreeNodeArray();
+
+                displayTreeRootNode = new TreeNode();
+                foreach (FactLocation location in AllDisplayPlaces)
                 {
-                    TreeNode country = displayTree.Nodes.Add(c.ToString());
-                    foreach (FactLocation r in AllDisplayRegions)
+                    string[] parts = location.Parts;
+                    TreeNode current = displayTreeRootNode;
+                    foreach (string part in parts)
                     {
-                        if (r.Country == c.Country)
+                        if (part.Length == 0) break;
+                        TreeNode child = current.Nodes.Find(part, false).FirstOrDefault();
+                        if (child == null)
                         {
-                            TreeNode region = country.Nodes.Add(r.ToString());
-                            foreach (FactLocation s in AllDisplaySubRegions)
-                            {
-                                if (s.Region == r.Region)
-                                {
-                                    TreeNode subregion = region.Nodes.Add(s.ToString());
-                                    foreach (FactLocation a in AllDisplayAddresses)
-                                    {
-                                        if (a.SubRegion == s.SubRegion)
-                                        {
-                                            TreeNode address = subregion.Nodes.Add(a.ToString());
-                                            foreach (FactLocation p in AllDisplayPlaces)
-                                            {
-                                                if (p.Address == a.Address)
-                                                {
-                                                    address.Nodes.Add(p.ToString());
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            child = new TreeNode(part);
+                            child.Name = part;
+                            current.Nodes.Add(child);
                         }
+                        current = child;
                     }
                 }
-                return displayTree;
+
+                return BuildTreeNodeArray();
             }
+        }
+
+        private TreeNode[] BuildTreeNodeArray()
+        {
+            TreeNodeCollection nodes = displayTreeRootNode.Nodes;
+            TreeNode[] result = new TreeNode[nodes.Count];
+            nodes.CopyTo(result, 0);
+            return result;
         }
     }
 }

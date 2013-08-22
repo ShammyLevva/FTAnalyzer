@@ -19,7 +19,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.1.0.1";
+        private string VERSION = "2.1.1.0";
         //private bool _checkForUpdatesEnabled = false;
         //private bool _showNoUpdateMessage = false;
         //private System.Threading.Timer _timerCheckForUpdates;
@@ -262,8 +262,8 @@ namespace FTAnalyzer
                     dgSubRegions.DataSource = null;
                     dgAddresses.DataSource = null;
                     dgPlaces.DataSource = null;
-                    //treeViewLocations = ft.AllLocationsTree;
-                    tabCtrlLocations.TabPages.RemoveByKey("tabTreeView");  // TODO fix treeview
+                    treeViewLocations.Nodes.Clear();
+                    treeViewLocations.Nodes.AddRange(ft.AllLocationsTreeNodes);
                     Application.DoEvents();
                     mnuPrint.Enabled = true;
                     dgCountries.DataSource = ft.AllDisplayCountries;
@@ -1361,9 +1361,17 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             TabPage current = tabCtrlLocations.SelectedTab;
-            DataGridView dg = (DataGridView) current.Controls[0];
-            dg.Focus();
-            tsCountLabel.Text = "Count : " + dg.RowCount + " " + dg.Name.Substring(2);
+            Control control = current.Controls[0];
+            control.Focus();
+            if (control is DataGridView)
+            {
+                DataGridView dg = control as DataGridView;
+                tsCountLabel.Text = "Count : " + dg.RowCount + " " + dg.Name.Substring(2);
+            }
+            else
+            {
+                tsCountLabel.Text = string.Empty;
+            }
             HourGlass(false);
         }
 
