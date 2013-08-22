@@ -67,7 +67,10 @@ namespace FTAnalyzer
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openGedcom.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (string.IsNullOrEmpty(Properties.Settings.Default.LoadLocation))
+                openGedcom.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            else
+                openGedcom.InitialDirectory = Properties.Settings.Default.LoadLocation;
             openGedcom.FileName = "*.ged";
             openGedcom.Filter = "GED files (*.ged)|*.ged|All files (*.*)|*.*";
             openGedcom.FilterIndex = 1;
@@ -76,6 +79,8 @@ namespace FTAnalyzer
             if (openGedcom.ShowDialog() == DialogResult.OK)
             {
                 LoadFile(openGedcom.FileName);
+                Properties.Settings.Default.LoadLocation = Path.GetFullPath(openGedcom.FileName);
+                Properties.Settings.Default.Save();
             }
         }
 
