@@ -188,15 +188,18 @@ namespace FTAnalyzer.Forms
 
         private void dgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            int value = (int)cell.Value;
-            if (value == 1 || value == 2)
+            if (e.ColumnIndex >= c1841ColumnIndex && e.ColumnIndex <= c1911ColumnIndex)
             {
-                IDisplayLCReport person = (IDisplayLCReport)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
-                int censusYear = (1841 + (e.ColumnIndex - c1841ColumnIndex) * 10);
-                FamilyTree ft = FamilyTree.Instance;
-                string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
-                ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
+                DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                int value = (int)cell.Value;
+                if (value == 1 || value == 2)
+                {
+                    IDisplayLCReport person = (IDisplayLCReport)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
+                    int censusYear = (1841 + (e.ColumnIndex - c1841ColumnIndex) * 10);
+                    FamilyTree ft = FamilyTree.Instance;
+                    string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
+                    ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
+                }
             }
         }
 
