@@ -9,6 +9,7 @@ using FTAnalyzer.Utilities;
 using System.Web;
 using System.Diagnostics;
 using System.Drawing;
+using System.Resources;
 
 namespace FTAnalyzer
 {
@@ -29,8 +30,7 @@ namespace FTAnalyzer
         private SortableBindingList<IDisplayLocation>[] displayLocations;
         private TreeNode displayTreeRootNode;
         private static int DATA_ERROR_GROUPS = 17;
-
-
+        
         private FamilyTree()
         {
             ResetData();
@@ -1047,7 +1047,7 @@ namespace FTAnalyzer
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Unexpected Error Checking for inconsistencies in your data\nPlease report this on the issues page at http://ftanalyzer.codeplex.com \nError was " + e.Message);
+                    MessageBox.Show(Properties.ErrorMessages.FTA_0001 + e.Message, "Error : FTA_0001");
                 }
             }
             dataErrorTypes.Add(new DataErrorGroup("Birth after death/burial", errors[0]));
