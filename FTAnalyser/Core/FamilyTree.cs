@@ -126,7 +126,7 @@ namespace FTAnalyzer
             XmlNode header = doc.SelectSingleNode("GED/HEAD");
             if (header == null)
             {
-                xmlErrorbox.AppendText("\n\nUnable to find GEDCOM HEADer record in file aborting load. Is " + filename + " really a GEDCOM file");
+                xmlErrorbox.AppendText("\n\nUnable to find GEDCOM 'HEAD' record in first line of file aborting load.\nIs " + filename + " really a GEDCOM file");
                 return false;
             }
             // First iterate through attributes of root finding all sources
