@@ -19,7 +19,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.1.1.0";
+        private string VERSION = "2.1.1.1";
         //private bool _checkForUpdatesEnabled = false;
         //private bool _showNoUpdateMessage = false;
         //private System.Threading.Timer _timerCheckForUpdates;
@@ -107,7 +107,7 @@ namespace FTAnalyzer
                     mnuReports.Visible = true;
                     mnuExport.Visible = true;
                     mnuPrint.Enabled = true;
-                    MessageBox.Show("Gedcom File Loaded");
+                    MessageBox.Show("Gedcom File " + filename + " Loaded");
                 }
             }
             catch (IOException ex)
@@ -1483,15 +1483,22 @@ namespace FTAnalyzer
 
         private void mainForm_DragDrop(object sender, DragEventArgs e)
         {
+            bool fileLoaded = false;
             string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
             foreach (string filename in files)
             {
-                if (Path.GetExtension(filename) == ".ged")
+                if (Path.GetExtension(filename.ToLower()) == ".ged")
                 {
+                    fileLoaded = true;
                     LoadFile(filename);
                     break;
                 }
             }
+            if (!fileLoaded)
+                if(files.Length > 1)
+                    MessageBox.Show("Unable to load File. None of the files dragged and dropped were *.ged files");
+                else
+                    MessageBox.Show("Unable to load File. The file dragged and dropped wasn't a *.ged file");
         }
 
         private void mainForm_DragEnter(object sender, DragEventArgs e)
