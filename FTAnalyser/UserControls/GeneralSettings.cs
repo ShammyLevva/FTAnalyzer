@@ -17,6 +17,7 @@ namespace FTAnalyzer.UserControls
 			//cannot be in load, because its possible this tab won't show, and the values will not be initialized.
 			//if this happens, then the users settings will be cleared.
             chkUseBaptisms.Checked = Properties.GeneralSettings.Default.UseBaptismDates;
+            chkAllowEmptyLocations.Checked = Properties.GeneralSettings.Default.AllowEmptyLocations;
         }
 
 		#region IOptions Members
@@ -26,6 +27,7 @@ namespace FTAnalyzer.UserControls
             string message = string.Empty;
             string title = string.Empty;
 			Properties.GeneralSettings.Default.UseBaptismDates = chkUseBaptisms.Checked;
+            Properties.GeneralSettings.Default.AllowEmptyLocations = chkAllowEmptyLocations.Checked;
 			Properties.GeneralSettings.Default.Save();
             OnUseBaptismDatesChanged();
 		}
@@ -87,6 +89,13 @@ namespace FTAnalyzer.UserControls
         {
             if (UseBaptismDatesChanged != null)
                 UseBaptismDatesChanged(null, EventArgs.Empty);
+        }
+
+        public static event EventHandler AllowEmptyLocationsChanged;
+        protected static void OnAllowEmptyLocationsChanged()
+        {
+            if (AllowEmptyLocationsChanged != null)
+                AllowEmptyLocationsChanged(null, EventArgs.Empty);
         }
     }
 }

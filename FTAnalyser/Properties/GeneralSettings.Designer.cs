@@ -13,7 +13,7 @@ namespace FTAnalyzer.Properties {
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "10.0.0.0")]
-    internal sealed partial class GeneralSettings : global::System.Configuration.ApplicationSettingsBase {
+    public sealed partial class GeneralSettings : global::System.Configuration.ApplicationSettingsBase {
         
         private static GeneralSettings defaultInstance = ((GeneralSettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new GeneralSettings())));
         
@@ -44,6 +44,18 @@ namespace FTAnalyzer.Properties {
             }
             set {
                 this["SavePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AllowEmptyLocations {
+            get {
+                return ((bool)(this["AllowEmptyLocations"]));
+            }
+            set {
+                this["AllowEmptyLocations"] = value;
             }
         }
     }

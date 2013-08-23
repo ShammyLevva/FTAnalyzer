@@ -632,7 +632,8 @@ namespace FTAnalyzer
             //_timerCheckForUpdates = new System.Threading.Timer(new System.Threading.TimerCallback(_timerCheckForUpdates_Callback));
             //_timerCheckForUpdates.Change(3000, 1000 * 60 * 60 * 8); //Check for updates 3 sec after the form loads, and then again every 8 hours
             GeneralSettings.UseBaptismDatesChanged += new EventHandler(Options_BaptismChanged);
-                
+            GeneralSettings.AllowEmptyLocationsChanged += new EventHandler(Options_AllowEmptyLocationsChanged);
+    
             this.Text = "Family Tree Analyzer v" + VERSION;
         }
 
@@ -1450,6 +1451,14 @@ namespace FTAnalyzer
                 MessageBox.Show("Baptism dates will now be used if no birth date is present");
             else
                 MessageBox.Show("If no birth date is present, unknown will be shown");
+        }
+
+        private void Options_AllowEmptyLocationsChanged(object sender, EventArgs e)
+        {
+            if (FTAnalyzer.Properties.GeneralSettings.Default.AllowEmptyLocations)
+                MessageBox.Show("Empty parts of a location will be allowed when you load the next GEDCOM file");
+            else
+                MessageBox.Show("Locations with empty parts will be ignored when you load the next GEDCOM file");
         }
 
         private bool preventExpand;

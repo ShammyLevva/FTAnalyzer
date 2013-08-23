@@ -201,15 +201,16 @@ namespace FTAnalyzer
                     Level = COUNTRY;
                 }
                 //string before = (parish + ", " + region + ", " + country).ToUpper().Trim();
-                fixEmptyFields();
-                fixCapitalisation();
-                fixRegionFullStops();
-                fixCountryFullStops();
-                fixMultipleSpacesAndAmpersands();
-                fixCountryTypos();
-                Country = EnhancedTextInfo.ToTitleCase(fixRegionTypos(Country).ToLower());
+                if(!Properties.GeneralSettings.Default.AllowEmptyLocations)
+                    FixEmptyFields();
+                FixCapitalisation();
+                FixRegionFullStops();
+                FixCountryFullStops();
+                FixMultipleSpacesAmpersandsCommas();
+                FixCountryTypos();
+                Country = EnhancedTextInfo.ToTitleCase(FixRegionTypos(Country).ToLower());
                 ShiftCountryToRegion();
-                Region = fixRegionTypos(Region);
+                Region = FixRegionTypos(Region);
                 ShiftRegionToParish();
                 SetFixedLocation();
                 SetSortableLocation();
@@ -220,9 +221,9 @@ namespace FTAnalyzer
         }
 
         #region Fix Location string routines
-        private void fixEmptyFields()
+        private void FixEmptyFields()
         {
-            // first remove extraneous spaces
+            // first remove extraneous spaces and extraneous commas
             Country = Country.Trim();
             Region = Region.Trim();
             SubRegion = SubRegion.Trim();
@@ -257,7 +258,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void fixCapitalisation()
+        private void FixCapitalisation()
         {
             if (Country.Length > 1)
                 Country = char.ToUpper(Country[0]) + Country.Substring(1);
@@ -271,17 +272,17 @@ namespace FTAnalyzer
                 Place = char.ToUpper(Place[0]) + Place.Substring(1);
         }
 
-        private void fixRegionFullStops()
+        private void FixRegionFullStops()
         {
             Region = Region.Replace(".", " ").Trim();
         }
 
-        private void fixCountryFullStops()
+        private void FixCountryFullStops()
         {
             Country = Country.Replace(".", " ").Trim();
         }
 
-        private void fixMultipleSpacesAndAmpersands()
+        private void FixMultipleSpacesAmpersandsCommas()
         {
             while (Country.IndexOf("  ") != -1)
                 Country = Country.Replace("  ", " ");
@@ -293,14 +294,14 @@ namespace FTAnalyzer
                 Address = Address.Replace("  ", " ");
             while (Place.IndexOf("  ") != -1)
                 Place = Place.Replace("  ", " ");
-            Country = Country.Replace("&", "and");
-            Region = Region.Replace("&", "and");
-            SubRegion = SubRegion.Replace("&", "and");
-            Address = Address.Replace("&", "and");
-            Place = Place.Replace("&", "and");
+            Country = Country.Replace("&", "and").Replace(",", "");
+            Region = Region.Replace("&", "and").Replace(",", "");
+            SubRegion = SubRegion.Replace("&", "and").Replace(",", "");
+            Address = Address.Replace("&", "and").Replace(",", "");
+            Place = Place.Replace("&", "and").Replace(",", "");
         }
 
-        private void fixCountryTypos()
+        private void FixCountryTypos()
         {
             string result = string.Empty;
             COUNTRY_TYPOS.TryGetValue(Country, out result);
@@ -315,7 +316,7 @@ namespace FTAnalyzer
             }
         }
 
-        private string fixRegionTypos(string toFix)
+        private string FixRegionTypos(string toFix)
         {
             string result = string.Empty;
             REGION_TYPOS.TryGetValue(toFix, out result);
@@ -374,27 +375,33 @@ namespace FTAnalyzer
         private void SetFixedLocation()
         {
             fixedLocation = Country;
-            if (!Region.Equals(string.Empty))
+            if (!Region.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
                 fixedLocation = Region + ", " + fixedLocation;
-            if (!SubRegion.Equals(string.Empty))
+            if (!SubRegion.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
                 fixedLocation = SubRegion + ", " + fixedLocation;
-            if (!Address.Equals(string.Empty))
+            if (!Address.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
                 fixedLocation = Address + ", " + fixedLocation;
             if (!Place.Equals(string.Empty))
                 fixedLocation = Place + ", " + fixedLocation;
+            while (fixedLocation.StartsWith(", "))
+                fixedLocation = fixedLocation.Substring(2);
+            fixedLocation = fixedLocation.Trim();
         }
 
         private void SetSortableLocation()
         {
             SortableLocation = Country;
-            if (!Region.Equals(string.Empty))
+            if (!Region.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
                 SortableLocation = SortableLocation + ", " + Region;
-            if (!SubRegion.Equals(string.Empty))
+            if (!SubRegion.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
                 SortableLocation = SortableLocation + ", " + SubRegion;
-            if (!Address.Equals(string.Empty))
+            if (!Address.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
                 SortableLocation = SortableLocation + ", " + Address;
             if (!Place.Equals(string.Empty))
                 SortableLocation = SortableLocation + ", " + Place;
+            while (SortableLocation.StartsWith(", "))
+                SortableLocation = SortableLocation.Substring(2);
+            SortableLocation = SortableLocation.Trim();
         }
 
         #endregion

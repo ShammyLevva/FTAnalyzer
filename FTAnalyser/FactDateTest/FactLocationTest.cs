@@ -63,11 +63,37 @@ namespace FactDateTest
         [TestMethod]
         public void FactLocationConstructorTest()
         {
-            FactLocation fl = new FactLocation("Aberdeen, Scotland");
-            Assert.IsTrue(fl.ToString().Equals("Aberdeen, Aberdeenshire, Scotland"));
+            FactLocation factLocation;
+//            factLocation = new FactLocation("Aberdeen, Scotland");
+//            Assert.IsTrue(factLocation.ToString().Equals("Aberdeen, Aberdeenshire, Scotland"));
 
-            fl = new FactLocation("America");
-            Assert.IsTrue(fl.ToString().Equals("United States"));
+//            factLocation = new FactLocation("America");
+//            Assert.IsTrue(factLocation.ToString().Equals("United States"));
+
+            // check for default strip empty locations
+            FTAnalyzer.Properties.GeneralSettings.Default.AllowEmptyLocations = false;
+            factLocation = new FactLocation("Parish Church of St Mary, , South Stoneham, Hampshire, ENG");
+            Assert.IsTrue(factLocation.ToString().Equals("Parish Church of St Mary, South Stoneham, Hampshire, England"));
+
+            factLocation = new FactLocation(", , West End, Hampshire, ENG");
+            Assert.IsTrue(factLocation.ToString().Equals("West End, Hampshire, England"));
+
+            factLocation = new FactLocation(", Fareham Registration District, , Hampshire, ENG");
+            Assert.IsTrue(factLocation.ToString().Equals("Fareham Registration District, Hampshire, England"));
+
+            // check when allowing empty locations
+            FTAnalyzer.Properties.GeneralSettings.Default.AllowEmptyLocations = true;
+            factLocation = new FactLocation("Parish Church of St Mary, , South Stoneham, Hampshire, ENG");
+            Assert.IsTrue(factLocation.ToString().Equals("Parish Church of St Mary, , South Stoneham, Hampshire, England"));
+
+            factLocation = new FactLocation(", , West End, Hampshire, ENG");
+            Assert.IsTrue(factLocation.ToString().Equals("West End, Hampshire, England"));
+
+            factLocation = new FactLocation(", Fareham Registration District, , Hampshire, ENG");
+            Assert.IsTrue(factLocation.ToString().Equals("Fareham Registration District, , Hampshire, England"));
+
+            
+            
         }
     }
 }

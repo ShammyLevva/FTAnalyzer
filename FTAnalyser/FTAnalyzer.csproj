@@ -256,7 +256,7 @@
     <None Include="Properties\DataSources\DeathRegistration.datasource" />
     <None Include="Properties\DataSources\MarriageRegistration.datasource" />
     <None Include="Properties\GeneralSettings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>GeneralSettings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Properties\Settings.settings">
