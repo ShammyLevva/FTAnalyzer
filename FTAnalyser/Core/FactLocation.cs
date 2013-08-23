@@ -294,11 +294,11 @@ namespace FTAnalyzer
                 Address = Address.Replace("  ", " ");
             while (Place.IndexOf("  ") != -1)
                 Place = Place.Replace("  ", " ");
-            Country = Country.Replace("&", "and").Replace(",", "");
-            Region = Region.Replace("&", "and").Replace(",", "");
-            SubRegion = SubRegion.Replace("&", "and").Replace(",", "");
-            Address = Address.Replace("&", "and").Replace(",", "");
-            Place = Place.Replace("&", "and").Replace(",", "");
+            Country = Country.Replace("&", "and").Replace(",", "").Trim();
+            Region = Region.Replace("&", "and").Replace(",", "").Trim();
+            SubRegion = SubRegion.Replace("&", "and").Replace(",", "").Trim();
+            Address = Address.Replace("&", "and").Replace(",", "").Trim();
+            Place = Place.Replace("&", "and").Replace(",", "").Trim();
         }
 
         private void FixCountryTypos()
@@ -383,9 +383,7 @@ namespace FTAnalyzer
                 fixedLocation = Address + ", " + fixedLocation;
             if (!Place.Equals(string.Empty))
                 fixedLocation = Place + ", " + fixedLocation;
-            while (fixedLocation.StartsWith(", "))
-                fixedLocation = fixedLocation.Substring(2);
-            fixedLocation = fixedLocation.Trim();
+            fixedLocation = TrimLeadingCommas(fixedLocation);
         }
 
         private void SetSortableLocation()
@@ -399,9 +397,14 @@ namespace FTAnalyzer
                 SortableLocation = SortableLocation + ", " + Address;
             if (!Place.Equals(string.Empty))
                 SortableLocation = SortableLocation + ", " + Place;
-            while (SortableLocation.StartsWith(", "))
-                SortableLocation = SortableLocation.Substring(2);
-            SortableLocation = SortableLocation.Trim();
+            SortableLocation = TrimLeadingCommas(SortableLocation);
+        }
+
+        private string TrimLeadingCommas(string toChange)
+        {
+            while (toChange.StartsWith(", "))
+                toChange = toChange.Substring(2);
+            return toChange.Trim();
         }
 
         #endregion
@@ -516,11 +519,11 @@ namespace FTAnalyzer
         public FactLocation GetLocation(int level, bool fixNumerics)
         {
             StringBuilder location = new StringBuilder(this.Country);
-            if (level > COUNTRY && Region.Length > 0)
+            if (level > COUNTRY && (Region.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
                 location.Insert(0, this.Region + ", ");
-            if (level > REGION && SubRegion.Length > 0)
+            if (level > REGION && (SubRegion.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
                 location.Insert(0, this.SubRegion + ", ");
-            if (level > PARISH && Address.Length > 0)
+            if (level > PARISH && (Address.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
                 location.Insert(0, fixNumerics ? FixNumerics(this.Address) : this.Address + ", ");
             if (level > ADDRESS && Place.Length > 0)
                 location.Insert(0, fixNumerics ? FixNumerics(this.Place) : this.Place + ", ");

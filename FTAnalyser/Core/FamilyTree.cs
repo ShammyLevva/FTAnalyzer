@@ -177,7 +177,6 @@ namespace FTAnalyzer
             SetRelations(individuals[0].GedcomID);
             xmlErrorbox.AppendText(PrintRelationCount());
             CountCensusFacts();
-            SetParishes();
             FixIDs();
             SetDataErrorTypes();
             _loading = false;
@@ -816,19 +815,6 @@ namespace FTAnalyzer
 
         #endregion
 
-        #region Parish Functions
-
-        private void SetParishes()
-        {
-            foreach (FactLocation loc in locations.Values)
-            {
-                // do something with parishes
-
-            }
-        }
-
-        #endregion
-
         public IEnumerable<CensusFamily> GetAllCensusFamilies(FactDate censusDate, bool censusDone, bool includeResidence, bool lostCousinsCheck)
         {
             if (censusDate != null)
@@ -1429,7 +1415,7 @@ namespace FTAnalyzer
                 TreeNode current = displayTreeRootNode;
                 foreach (string part in parts)
                 {
-                    if (part.Length == 0) break;
+                    if (part.Length == 0 && !Properties.GeneralSettings.Default.AllowEmptyLocations) break;
                     TreeNode child = current.Nodes.Find(part, false).FirstOrDefault();
                     if (child == null)
                     {
@@ -1446,7 +1432,10 @@ namespace FTAnalyzer
                     current = child;
                 }
             }
-
+            if (Properties.GeneralSettings.Default.AllowEmptyLocations)
+            { // trim empty end nodes
+                
+            }
             return BuildTreeNodeArray();
         }
 

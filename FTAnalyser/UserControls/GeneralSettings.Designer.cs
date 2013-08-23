@@ -45,12 +45,14 @@
             resources.ApplyResources(this.chkUseBaptisms, "chkUseBaptisms");
             this.chkUseBaptisms.Name = "chkUseBaptisms";
             this.chkUseBaptisms.UseVisualStyleBackColor = true;
+            this.chkUseBaptisms.CheckedChanged += new System.EventHandler(this.chkUseBaptisms_CheckedChanged);
             // 
             // chkAllowEmptyLocations
             // 
             resources.ApplyResources(this.chkAllowEmptyLocations, "chkAllowEmptyLocations");
             this.chkAllowEmptyLocations.Name = "chkAllowEmptyLocations";
             this.chkAllowEmptyLocations.UseVisualStyleBackColor = true;
+            this.chkAllowEmptyLocations.CheckedChanged += new System.EventHandler(this.chkAllowEmptyLocations_CheckedChanged);
             // 
             // GeneralSettings
             // 

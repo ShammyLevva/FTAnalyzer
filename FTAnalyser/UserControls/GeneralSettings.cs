@@ -97,5 +97,21 @@ namespace FTAnalyzer.UserControls
             if (AllowEmptyLocationsChanged != null)
                 AllowEmptyLocationsChanged(null, EventArgs.Empty);
         }
+
+        private void chkUseBaptisms_CheckedChanged(object sender, EventArgs e)
+        {
+            //if (FTAnalyzer.Properties.GeneralSettings.Default.UseBaptismDates)
+            //    MessageBox.Show("Baptism dates will now be used if no birth date is present");
+            //else
+            //    MessageBox.Show("If no birth date is present, unknown will be shown");
+        }
+
+        private void chkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)
+        {
+            if (FTAnalyzer.Properties.GeneralSettings.Default.AllowEmptyLocations)
+                MessageBox.Show("Empty parts of a location will be allowed when you load the next GEDCOM file");
+            else
+                MessageBox.Show("Locations with empty parts will be ignored when you load the next GEDCOM file");
+        }
     }
 }
