@@ -45,7 +45,12 @@ namespace FTAnalyzer
         static FactLocation()
         {
             // load conversions from XML file
-            string filename = Path.Combine(Application.StartupPath, @"Resources\FactLocationFixes.xml");
+            string startPath;
+            if (Application.StartupPath.Contains("Common7\\IDE")) // running unit tests
+                startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
+            else
+                startPath = Application.StartupPath;
+            string filename = Path.Combine(startPath, @"Resources\FactLocationFixes.xml");
             if (File.Exists(filename))
             {
                 XmlDocument xmlDoc = new XmlDocument();
