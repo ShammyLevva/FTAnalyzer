@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.IO;
+using System.Windows.Forms;
 
 namespace FTAnalyzer
 {
@@ -44,6 +45,7 @@ namespace FTAnalyzer
         private static XmlDocument parse(StreamReader reader)
         {
             long lineNr = 0;
+            int badLineCount = 0;
 
             string line, nextline, token1, token2;
             string level;
@@ -174,10 +176,21 @@ namespace FTAnalyzer
                         {
                             FamilyTree.Instance.XmlErrorBox.AppendText("Found bad line " + lineNr + ": '" + line + "'. " +
                                 "Error was : " + e.Message + "\n");
+                            badLineCount++;
                         }
                     }
                     line = nextline;
                     System.Windows.Forms.Application.DoEvents();
+                    if (badLineCount > 20)
+                    {
+                        DialogResult result = MessageBox.Show("Found more than 20 errrs in the GEDCOM file.\nContinue Loading?",
+                                                         "Continue Loading?", MessageBoxButtons.YesNo);
+                        if (result == DialogResult.Yes)
+                            badLineCount = 0;
+                        else
+                            break;
+                    }
+                        
                 } // end while
 
             }

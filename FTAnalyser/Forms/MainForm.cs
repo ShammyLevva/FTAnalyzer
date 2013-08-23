@@ -100,14 +100,16 @@ namespace FTAnalyzer
                 if (!stopProcessing)
                 {
                     //document.Save("GedcomOutput.xml");
-                    ft.LoadTree(filename, pbSources, pbIndividuals, pbFamilies);
-                    ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
-                    Application.UseWaitCursor = false;
-                    HourGlass(false);
-                    mnuReports.Visible = true;
-                    mnuExport.Visible = true;
-                    mnuPrint.Enabled = true;
-                    MessageBox.Show("Gedcom File " + filename + " Loaded");
+                    if (ft.LoadTree(filename, pbSources, pbIndividuals, pbFamilies))
+                    {
+                        ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
+                        Application.UseWaitCursor = false;
+                        HourGlass(false);
+                        mnuReports.Visible = true;
+                        mnuExport.Visible = true;
+                        mnuPrint.Enabled = true;
+                        MessageBox.Show("Gedcom File " + filename + " Loaded");
+                    }
                 }
             }
             catch (IOException ex)

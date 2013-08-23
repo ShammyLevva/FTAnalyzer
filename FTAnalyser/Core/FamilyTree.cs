@@ -115,13 +115,20 @@ namespace FTAnalyzer
             displayTreeRootNode = null;
         }
 
-        public void LoadTree(string filename, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
+        public bool LoadTree(string filename, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
         {
             _loading = true;
             ResetData();
             Application.DoEvents();
             XmlDocument doc = GedcomToXml.Load(filename);
             xmlErrorbox.AppendText("Loading file " + filename + "\n");
+            // First check if file has a valid header record ie: it is actually a GEDCOM file
+            XmlNode header = doc.SelectSingleNode("GED/HEAD");
+            if (header == null)
+            {
+                xmlErrorbox.AppendText("\n\nUnable to find GEDCOM HEADer record in file aborting load. Is " + filename + " really a GEDCOM file");
+                return false;
+            }
             // First iterate through attributes of root finding all sources
             XmlNodeList list = doc.SelectNodes("GED/SOUR");
             pbS.Maximum = list.Count;
@@ -175,6 +182,7 @@ namespace FTAnalyzer
             SetDataErrorTypes();
             _loading = false;
             _dataloaded = true;
+            return true;
         }
 
         private void CountCensusFacts()
