@@ -283,7 +283,8 @@ namespace FTAnalyzer.Forms
         {
             this.Cursor = Cursors.WaitCursor;
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            DataTable dt = convertor.ToDataTable(dgReportSheet.DataSource as List<IDisplayLCReport>);
+            List<IDisplayLCReport> export = (dgReportSheet.DataSource as SortableBindingList<IDisplayLCReport>).ToList<IDisplayLCReport>();
+            DataTable dt = convertor.ToDataTable(export);
             ExportToExcel.Export(dt);
             this.Cursor = Cursors.Default;
         }

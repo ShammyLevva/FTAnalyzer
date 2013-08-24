@@ -19,18 +19,20 @@ namespace FTAnalyzer.Utilities
                 //Setting column names as Property names
                 dataTable.Columns.Add(prop.Name);
             }
-
-            foreach (T item in items)
+            if (items != null)
             {
-                var values = new object[Props.Length];
-                for (int i = 0; i < Props.Length; i++)
+                foreach (T item in items)
                 {
-                    //inserting property values to datatable rows
-                    values[i] = Props[i].GetValue(item, null);
+                    var values = new object[Props.Length];
+                    for (int i = 0; i < Props.Length; i++)
+                    {
+                        //inserting property values to datatable rows
+                        values[i] = Props[i].GetValue(item, null);
+                    }
+
+                    dataTable.Rows.Add(values);
+
                 }
-
-                dataTable.Rows.Add(values);
-
             }
             //put a breakpoint here and check datatable
             return dataTable;

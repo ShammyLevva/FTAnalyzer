@@ -36,6 +36,8 @@
             this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.cbCensusSearchProvider = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
@@ -43,8 +45,6 @@
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
-            this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -126,6 +126,21 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
+            // mnuExportToExcel
+            // 
+            this.mnuExportToExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
+            this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnuExportToExcel.Name = "mnuExportToExcel";
+            this.mnuExportToExcel.Size = new System.Drawing.Size(23, 22);
+            this.mnuExportToExcel.Text = "Export to Excel";
+            this.mnuExportToExcel.Click += new System.EventHandler(this.mnuExportToExcel_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
@@ -182,21 +197,6 @@
             this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
             this.printPreviewDialog.Name = "printPreviewDialog";
             this.printPreviewDialog.Visible = false;
-            // 
-            // mnuExportToExcel
-            // 
-            this.mnuExportToExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
-            this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuExportToExcel.Name = "mnuExportToExcel";
-            this.mnuExportToExcel.Size = new System.Drawing.Size(23, 22);
-            this.mnuExportToExcel.Text = "Export to Excel";
-            this.mnuExportToExcel.Click += new System.EventHandler(this.mnuExportToExcel_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // LCReport
             // 
