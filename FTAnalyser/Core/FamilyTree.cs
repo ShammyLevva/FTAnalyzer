@@ -119,6 +119,7 @@ namespace FTAnalyzer
         {
             _loading = true;
             ResetData();
+            string rootIndividual = string.Empty;
             Application.DoEvents();
             XmlDocument doc = GedcomToXml.Load(filename);
             xmlErrorbox.AppendText("Loading file " + filename + "\n");
@@ -128,6 +129,17 @@ namespace FTAnalyzer
             {
                 xmlErrorbox.AppendText("\n\nUnable to find GEDCOM 'HEAD' record in first line of file aborting load.\nIs " + filename + " really a GEDCOM file");
                 return false;
+            }
+            XmlNode root = doc.SelectSingleNode("GED/HEAD/_ROOT");
+            if (root != null)
+            {
+                // file has a root individual
+                try
+                {
+                    rootIndividual = root.Attributes["REF"].Value;
+                }
+                catch (Exception)
+                { } // don't crash if can't set root individual
             }
             // First iterate through attributes of root finding all sources
             XmlNodeList list = doc.SelectNodes("GED/SOUR");
@@ -172,9 +184,11 @@ namespace FTAnalyzer
             xmlErrorbox.AppendText("Loaded " + counter + " families.\n");
             pbF.Value = pbF.Maximum;
             CheckAllIndividualsAreInAFamily();
-            xmlErrorbox.AppendText("Calculating Relationships using " + individuals[0].GedcomID + ": " +
-                individuals[0].Name + " as starter person. Please wait.\n\n");
-            SetRelations(individuals[0].GedcomID);
+            if (rootIndividual == string.Empty)
+                rootIndividual = individuals[0].GedcomID;
+            xmlErrorbox.AppendText("Calculating Relationships using " + rootIndividual + ": " +
+                GetIndividual(rootIndividual).Name + " as starter person. Please wait.\n\n");
+            SetRelations(rootIndividual);
             xmlErrorbox.AppendText(PrintRelationCount());
             CountCensusFacts();
             FixIDs();
