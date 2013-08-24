@@ -68,5 +68,14 @@ namespace FTAnalyzer.Properties {
                 return ResourceManager.GetString("FTA_0001", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Family Tree Analyzer Error.
+        /// </summary>
+        internal static string FTA_0002 {
+            get {
+                return ResourceManager.GetString("FTA_0002", resourceCulture);
+            }
+        }
     }
 }

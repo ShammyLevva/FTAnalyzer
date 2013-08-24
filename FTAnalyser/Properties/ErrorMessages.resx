@@ -120,4 +120,7 @@
   <data name="FTA_0001" xml:space="preserve">
     <value>Unexpected Error Checking for inconsistencies in your data\nPlease report this on the issues page at http://ftanalyzer.codeplex.com \nError was</value>
   </data>
+  <data name="FTA_0002" xml:space="preserve">
+    <value>Family Tree Analyzer Error</value>
+  </data>
 </root>
