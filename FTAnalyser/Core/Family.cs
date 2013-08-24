@@ -11,7 +11,7 @@ namespace FTAnalyzer
 {
     public class Family : IDisplayFamily
     {
-        public static readonly string SINGLE = "Single", MARRIED = "Married";
+        public static readonly string SINGLE = "Single", MARRIED = "Married", SOLOINDIVIDUAL = "Unrelated";
 
         public string FamilyID { get; private set; }
         public IList<Fact> Facts { get; private set; }
@@ -71,13 +71,12 @@ namespace FTAnalyzer
                 AddFacts(node, Fact.MARR_LICENSE);
                 AddFacts(node, Fact.MARR_SETTLEMENT);
                 AddFacts(node, Fact.SEPARATION);
-                AddFacts(node, Fact.SEALING_SPOUSE);
                 AddFacts(node, Fact.CUSTOM_FACT);
             }
         }
 
         public Family(Individual ind)
-            : this("IND")
+            : this(SOLOINDIVIDUAL)
         {
             if (ind.isMale)
                 this.Husband = ind;
@@ -108,8 +107,8 @@ namespace FTAnalyzer
         {
             try
             {
-                if (FamilyID == null || FamilyID == "")
-                    FamilyID = "Unlinked";
+                if (FamilyID == null || FamilyID == "" || FamilyID == SOLOINDIVIDUAL)
+                    FamilyID = SOLOINDIVIDUAL;
                 else
                     FamilyID = FamilyID.Substring(0, 1) + FamilyID.Substring(1).PadLeft(length, '0');
             }

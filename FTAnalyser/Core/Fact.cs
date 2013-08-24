@@ -23,10 +23,11 @@ namespace FTAnalyzer
                 LEGATEE = "LEGA", MARRIAGE_BANN = "MARB", MARR_CONTRACT = "MARC",
                 MARR_LICENSE = "MARL", MARRIAGE = "MARR", MARR_SETTLEMENT = "MARS",
                 NATURALIZATION = "NATU", OCCUPATION = "OCCU", POSSESSIONS = "PROP", 
-                ORDINANCE = "ORDI", ORDINATION = "ORDN", PROBATE = "PROB", RESIDENCE = "RESI",
-                RETIREMENT = "RETI", WILL = "WILL", SEPARATION = "_SEPR", MILITARY = "_MILT",
-                ELECTION = "_ELEC", DEGREE = "_DEG", EMPLOYMENT = "_EMPLOY",
-                MEDICAL_CONDITION = "_MDCL", CUSTOM_FACT = "EVEN";
+                ORDINATION = "ORDN", PROBATE = "PROB", RESIDENCE = "RESI",
+                RETIREMENT = "RETI", WILL = "WILL", SEPARATION = "_SEPR", 
+                MILITARY = "_MILT", ELECTION = "_ELEC", DEGREE = "_DEG", 
+                EMPLOYMENT = "_EMPLOY", MEDICAL_CONDITION = "_MDCL", 
+                CUSTOM_FACT = "EVEN";
 
         public const string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSE", FAMILYSEARCH = "*IGI",
@@ -95,7 +96,6 @@ namespace FTAnalyzer
             COMMENT_FACTS.Add(ARRIVAL);
             COMMENT_FACTS.Add(EMPLOYMENT);
             COMMENT_FACTS.Add(MEDICAL_CONDITION);
-            COMMENT_FACTS.Add(ORDINANCE);
             COMMENT_FACTS.Add(ORDINATION);
             COMMENT_FACTS.Add(PHYSICAL_DESC);
             COMMENT_FACTS.Add(POSSESSIONS);
@@ -108,7 +108,6 @@ namespace FTAnalyzer
                 case ADOPTION: return "Adoption";
                 case ANNULMENT: return "Annulment";
                 case BAPTISM: return "Baptism";
-                case BAPTISM_LDS: return "Baptism (LDS)";
                 case BAR_MITZVAH: return "Bar mitzvah";
                 case BAS_MITZVAH: return "Bas mitzvah";
                 case BIRTH: return "Birth";
@@ -118,7 +117,6 @@ namespace FTAnalyzer
                 case CHRISTENING: return "Christening";
                 case ADULT_CHRISTENING: return "Adult christening";
                 case CONFIRMATION: return "Confirmation";
-                case CONFIRMATIONLDS: return "Confirmation (LDS)";
                 case CREMATION: return "Cremation";
                 case DEATH: return "Death";
                 case PHYSICAL_DESC: return "Physical description";
@@ -126,7 +124,6 @@ namespace FTAnalyzer
                 case DIVORCE_FILED: return "Divorce filed";
                 case EDUCATION: return "Education";
                 case EMIGRATION: return "Emigration";
-                case ENDOWMENT: return "Endowment";
                 case ENGAGEMENT: return "Engagement";
                 case FIRST_COMMUNION: return "First communion";
                 case GRADUATION: return "Graduation";
@@ -144,13 +141,10 @@ namespace FTAnalyzer
                 case NATURALIZATION: return "Naturalization";
                 case OCCUPATION: return "Occupation";
                 case POSSESSIONS: return "Property";
-                case ORDINANCE: return "Ordinance (LDS)";
                 case ORDINATION: return "Ordination";
                 case PROBATE: return "Probate";
                 case RESIDENCE: return "Residence";
                 case RETIREMENT: return "Retirement";
-                case SEALING_CHILD: return "Sealing to child (LDS)";
-                case SEALING_SPOUSE: return "Sealing to spouse (LDS)";
                 case WILL: return "Will";
                 case SEPARATION: return "Separation";
                 case MILITARY: return "Military service";

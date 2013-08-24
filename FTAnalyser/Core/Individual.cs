@@ -83,19 +83,12 @@ namespace FTAnalyzer
             AddFacts(node, Fact.CENSUS);
             AddFacts(node, Fact.PROBATE);
             AddFacts(node, Fact.WILL);
-            AddFacts(node, Fact.ENDOWMENT);
             AddFacts(node, Fact.LEGATEE);
             AddFacts(node, Fact.GRADUATION);
             AddFacts(node, Fact.RETIREMENT);
             AddFacts(node, Fact.MILITARY);
             AddFacts(node, Fact.ELECTION);
             AddFacts(node, Fact.EMPLOYMENT);
-
-            // LDS facts
-            AddFacts(node, Fact.BAPTISM_LDS);
-            AddFacts(node, Fact.CONFIRMATIONLDS);
-            AddFacts(node, Fact.ORDINANCE);
-            AddFacts(node, Fact.SEALING_CHILD);
 
             // Custom facts
             AddFacts(node, Fact.CUSTOM_FACT);
