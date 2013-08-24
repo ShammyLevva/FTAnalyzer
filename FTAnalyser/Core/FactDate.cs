@@ -45,6 +45,7 @@ namespace FTAnalyzer
         public FactDateType DateType { get; private set; }
 
         public bool DoubleDate { get; private set; } // Is a pre 1752 date bet 1 Jan and 25 Mar eg: 1735/36.
+        private int yearfix = 0;
 
         public FactDate(string str, string factRef = "")
         {
@@ -52,6 +53,7 @@ namespace FTAnalyzer
             if (str == null)
                 str = string.Empty;
             // remove any commas in date string
+            this.yearfix = 0;
             str = FixCommonDateFormats(str);
             this.DateType = FactDateType.UNK;
             if (str == null || str.Length == 0)
@@ -132,6 +134,7 @@ namespace FTAnalyzer
             str = str.Replace("AFTER", "AFT");
             str = str.Replace("BEFORE", "BEF");
             str = str.Replace("BETWEEN", "BET");
+            str = str.Replace("BTW", "BET");
 
             str = str.Replace("QUARTER", "QTR");
             str = str.Replace("MAR QTR", "ABT MAR");
@@ -178,7 +181,15 @@ namespace FTAnalyzer
                 if (str.IndexOf("TO") > 0)
                     str = str.Replace("FROM", "BET").Replace("TO", "AND");
                 else
-                    str = str.Replace("FROM", "AFT");
+                {
+                    str = str.Replace("FROM", "AFT"); // year will be one out
+                    yearfix = -1;
+                }
+            }
+            if (str.StartsWith("TO"))
+            {
+                str = str.Replace("TO", "BEF"); // year will be one out
+                yearfix = +1;
             }
 
             Match matcher = Regex.Match(str, POSTFIX);
@@ -300,12 +311,12 @@ namespace FTAnalyzer
                 if (processDate.StartsWith("BEF"))
                 {
                     DateType = FactDateType.BEF;
-                    EndDate = ParseDate(dateValue, HIGH, -1);
+                    EndDate = ParseDate(dateValue, HIGH, -1 + yearfix);
                 }
                 else if (processDate.StartsWith("AFT"))
                 {
                     DateType = FactDateType.AFT;
-                    StartDate = ParseDate(dateValue, LOW, +1);
+                    StartDate = ParseDate(dateValue, LOW, +1 + yearfix);
                 }
                 else if (processDate.StartsWith("ABT"))
                 {

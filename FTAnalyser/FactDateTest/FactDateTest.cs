@@ -231,6 +231,22 @@ namespace FactDateTest
             target = new FactDate("BET JAN-MAR 1966");
             Assert.AreEqual(new DateTime(1966, 1, 1), target.StartDate);
             Assert.AreEqual(new DateTime(1966, 3, 31), target.EndDate);
+
+            target = new FactDate("BTW 1914-1918");
+            Assert.AreEqual(new DateTime(1914, 1, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1918, 12, 31), target.EndDate);
+
+            target = new FactDate("FROM 1915");
+            Assert.AreEqual(new DateTime(1915, 1, 1), target.StartDate);
+            Assert.AreEqual(FactDate.MAXDATE, target.EndDate);
+
+            target = new FactDate("TO 1915");
+            Assert.AreEqual(FactDate.MINDATE, target.StartDate);
+            Assert.AreEqual(new DateTime(1915, 12, 31), target.EndDate);
+
+            target = new FactDate("FROM 1914 TO 1918");
+            Assert.AreEqual(new DateTime(1914, 1, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1918, 12, 31), target.EndDate);
         }
     }
 }
