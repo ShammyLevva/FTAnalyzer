@@ -37,14 +37,14 @@ namespace FTAnalyzer
                 {
                     if (child.BirthDate != FactDate.UNKNOWN_DATE)
                     {
-                        if (f.husband != null && f.husband.BirthDate != FactDate.UNKNOWN_DATE)
+                        if (f.Husband != null && f.Husband.BirthDate != FactDate.UNKNOWN_DATE)
                         {
-                            Age age = f.husband.GetAge(child.BirthDate);
+                            Age age = f.Husband.GetAge(child.BirthDate);
                             addAgeData(0, stats, age, child.Gender);
                         }
-                        if (f.wife != null && f.wife.BirthDate != FactDate.UNKNOWN_DATE)
+                        if (f.Wife != null && f.Wife.BirthDate != FactDate.UNKNOWN_DATE)
                         {
-                            Age age = f.wife.GetAge(child.BirthDate);
+                            Age age = f.Wife.GetAge(child.BirthDate);
                             addAgeData(1, stats, age, child.Gender);
                         }
                     }

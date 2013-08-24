@@ -68,23 +68,23 @@ namespace FTAnalyzer.Forms
                 {
                     if (child.BirthDate != FactDate.UNKNOWN_DATE)
                     {
-                        if (f.husband != null && f.husband.BirthDate != FactDate.UNKNOWN_DATE)
+                        if (f.Husband != null && f.Husband.BirthDate != FactDate.UNKNOWN_DATE)
                         {
-                            Age age = f.husband.GetAge(child.BirthDate);
-                            if (age.MinAge >= minAge && !dsInd.Contains(f.husband))
+                            Age age = f.Husband.GetAge(child.BirthDate);
+                            if (age.MinAge >= minAge && !dsInd.Contains(f.Husband))
                             {
-                                dsInd.Add(f.husband);
-                                families.Add(f.husband, f);
+                                dsInd.Add(f.Husband);
+                                families.Add(f.Husband, f);
                                 added = true;
                             }
                         }
-                        if (f.wife != null && f.wife.BirthDate != FactDate.UNKNOWN_DATE)
+                        if (f.Wife != null && f.Wife.BirthDate != FactDate.UNKNOWN_DATE)
                         {
-                            Age age = f.wife.GetAge(child.BirthDate);
-                            if (age.MinAge >= minAge && !dsInd.Contains(f.wife))
+                            Age age = f.Wife.GetAge(child.BirthDate);
+                            if (age.MinAge >= minAge && !dsInd.Contains(f.Wife))
                             {
-                                dsInd.Add(f.wife);
-                                families.Add(f.wife, f);
+                                dsInd.Add(f.Wife);
+                                families.Add(f.Wife, f);
                                 added = true;
                             }
                         }

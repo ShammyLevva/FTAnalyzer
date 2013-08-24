@@ -13,8 +13,8 @@ namespace FTAnalyzer
         // MARRIAGEDB ie: married to a direct or blood relation
         public const int UNKNOWN = 1, DIRECT = 2, BLOOD = 4, MARRIEDTODB = 8, MARRIAGE = 16, UNSET = 32;
         public static readonly string HUSBAND = "Husband", WIFE = "Wife", CHILD = "Child", UNKNOWNSTATUS = "Unknown";
-        
-        private string individualID;
+
+        public string IndividualID { get; private set; }
         //private string gedcomID;
         private string forenames;
         private string surname;
@@ -34,7 +34,7 @@ namespace FTAnalyzer
         private IList<Family> familiesAsChild;
         
         public Individual (XmlNode node) {
-            individualID = node.Attributes["ID"].Value;
+            IndividualID = node.Attributes["ID"].Value;
             Name =   FamilyTree.GetText(node, "NAME");
             Gender = FamilyTree.GetText(node, "SEX");
             alias =  FamilyTree.GetText(node, "ALIA");
@@ -107,7 +107,7 @@ namespace FTAnalyzer
                 FamilyTree.Instance.XmlErrorBox.AppendText("ERROR: Individual copy constructor called with null individual");
             else
             {
-                this.individualID = i.individualID;
+                this.IndividualID = i.IndividualID;
                 this.forenames = i.forenames;
                 this.surname = i.surname;
                 this.marriedName = i.marriedName;
@@ -153,11 +153,6 @@ namespace FTAnalyzer
         {
             get { return budgieCode; }
             set { budgieCode = value; }
-        }
-
-        public string IndividualID 
-        { 
-            get { return individualID; }
         }
 
         public int RelationType 
@@ -412,7 +407,7 @@ namespace FTAnalyzer
         {
             get
             {
-                return individualID + ": " + Name;
+                return IndividualID + ": " + Name;
             }
         }
 
@@ -692,8 +687,8 @@ namespace FTAnalyzer
             {
                 foreach (Family marriage in familiesAsParent.OrderBy(f => f.MarriageDate))
                 {
-                    if (marriage.MarriageDate.IsBefore(date) && marriage.husband != null)
-                        name = marriage.husband.surname;
+                    if (marriage.MarriageDate.IsBefore(date) && marriage.Husband != null)
+                        name = marriage.Husband.surname;
                 }
             }
             return name;
@@ -730,7 +725,7 @@ namespace FTAnalyzer
         {
             try
             {
-                individualID = individualID.Substring(0, 1) + individualID.Substring(1).PadLeft(length, '0');
+                IndividualID = IndividualID.Substring(0, 1) + IndividualID.Substring(1).PadLeft(length, '0');
             }
             catch (Exception)
             {  // don't error if Individual isn't of type Ixxxx

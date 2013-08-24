@@ -34,25 +34,25 @@ namespace FTAnalyzer
             List<Fact> facts = new List<Fact>();
             if (IsValidFamily())
             {
-                if (IsValidIndividual(wife, censusDone, includeResidence, lostCousinsCheck, true))
+                if (IsValidIndividual(Wife, censusDone, includeResidence, lostCousinsCheck, true))
                 {
                     result = true;
-                    wife.Status = Individual.WIFE;
-                    facts.AddRange(wife.AllFacts);
+                    Wife.Status = Individual.WIFE;
+                    facts.AddRange(Wife.AllFacts);
                 }
                 else
                     Wife = null;
                 // overwrite bestLocation by husbands as most commonly the family
                 // end up at husbands location after marriage
-                if (IsValidIndividual(husband, censusDone, includeResidence, lostCousinsCheck, true))
+                if (IsValidIndividual(Husband, censusDone, includeResidence, lostCousinsCheck, true))
                 {
                     result = true;
-                    husband.Status = Individual.HUSBAND;
-                    facts.AddRange(husband.AllFacts);
+                    Husband.Status = Individual.HUSBAND;
+                    facts.AddRange(Husband.AllFacts);
                 }
                 else
                     Husband = null;
-                // update bestLocation by marriage date as husband and wife 
+                // update bestLocation by marriage date as Husband and Wife 
                 // locations are often birth locations
                 Fact marriage = GetPreferredFact(Fact.MARRIAGE);
                 if (marriage != null)
@@ -92,7 +92,7 @@ namespace FTAnalyzer
                     return false;
                 if (parentCheck)
                 {
-                    // husband or wife with valid date range
+                    // Husband or Wife with valid date range
                     return true;
                 }
                 else
@@ -114,11 +114,11 @@ namespace FTAnalyzer
             if (FamilyID == "IND")
                 return true; // allow solo individual families to be processed
             // don't process family if either parent is under 16
-            //if(husband != null) rtb.AppendText("husband : " + husband.getAge(censusDate) + "\n");
-            if (husband != null && husband.getMaxAge(CensusDate) < 16)
+            //if(Husband != null) rtb.AppendText("Husband : " + Husband.getAge(censusDate) + "\n");
+            if (Husband != null && Husband.getMaxAge(CensusDate) < 16)
                 return false;
-            //if(wife  != null) rtb.AppendText("wife : " + wife.getAge(censusDate) + "\n");
-            if (wife != null && wife.getMaxAge(CensusDate) < 16)
+            //if(Wife  != null) rtb.AppendText("Wife : " + Wife.getAge(censusDate) + "\n");
+            if (Wife != null && Wife.getMaxAge(CensusDate) < 16)
                 return false;
             return true;
         }
@@ -127,8 +127,8 @@ namespace FTAnalyzer
         {
             get
             {
-                if (husband != null) return husband.SurnameAtDate(CensusDate);
-                else if (wife != null) return wife.SurnameAtDate(CensusDate);
+                if (Husband != null) return Husband.SurnameAtDate(CensusDate);
+                else if (Wife != null) return Wife.SurnameAtDate(CensusDate);
                 else
                 {
                     Individual child = Children.FirstOrDefault();

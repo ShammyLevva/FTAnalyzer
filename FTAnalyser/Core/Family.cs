@@ -14,12 +14,11 @@ namespace FTAnalyzer
         public static readonly string SINGLE = "Single", MARRIED = "Married";
 
         public string FamilyID { get; private set; }
-        public string HusbandID { get; private set; }
-        public string WifeID { get; private set; }
         public IList<Fact> Facts { get; private set; }
-        internal Individual husband;
-        internal Individual wife;
         public List<Individual> Children { get; internal set; }
+
+        public Individual Husband { get; internal set; }
+        public Individual Wife { get; internal set; }
 
         private Family(string familyID)
         {
@@ -38,13 +37,13 @@ namespace FTAnalyzer
                 XmlNode eHusband = node.SelectSingleNode("HUSB");
                 XmlNode eWife = node.SelectSingleNode("WIFE");
                 this.FamilyID = node.Attributes["ID"].Value;
-                this.HusbandID = eHusband == null ? null : eHusband.Attributes["REF"].Value;
-                this.WifeID = eWife == null ? null : eWife.Attributes["REF"].Value;
+                string husbandID = eHusband == null ? null : eHusband.Attributes["REF"].Value;
+                string wifeID = eWife == null ? null : eWife.Attributes["REF"].Value;
                 FamilyTree ft = FamilyTree.Instance;
-                this.Husband = ft.GetIndividual(this.HusbandID);
-                this.Wife = ft.GetIndividual(this.WifeID);
-                if (husband != null && wife != null)
-                    wife.MarriedName = husband.Surname;
+                this.Husband = ft.GetIndividual(husbandID);
+                this.Wife = ft.GetIndividual(wifeID);
+                if (Husband != null && Wife != null)
+                    Wife.MarriedName = Husband.Surname;
                 // now iterate through child elements of eChildren
                 // finding all individuals
                 XmlNodeList list = node.SelectNodes("CHIL");
@@ -81,20 +80,18 @@ namespace FTAnalyzer
             : this("IND")
         {
             if (ind.isMale)
-                this.husband = ind;
+                this.Husband = ind;
             else
-                this.wife = ind;
+                this.Wife = ind;
 
         }
 
         internal Family(Family f)
         {
             this.FamilyID = f.FamilyID;
-            this.HusbandID = f.HusbandID;
-            this.WifeID = f.WifeID;
             this.Facts = new List<Fact>(f.Facts);
-            this.husband = f.husband == null ? null : new Individual(f.husband);
-            this.wife = f.wife == null ? null : new Individual(f.wife);
+            this.Husband = f.Husband == null ? null : new Individual(f.Husband);
+            this.Wife = f.Wife == null ? null : new Individual(f.Wife);
             this.Children = new List<Individual>(f.Children);
         }
 
@@ -153,9 +150,9 @@ namespace FTAnalyzer
             get
             {
                 int count = Children.Count;
-                if (husband != null)
+                if (Husband != null)
                     count++;
-                if (wife != null)
+                if (Wife != null)
                     count++;
                 return count;
             }
@@ -179,7 +176,7 @@ namespace FTAnalyzer
         {
             get
             {
-                if (husband == null || wife == null)
+                if (Husband == null || Wife == null)
                     return SINGLE;
                 else
                     // very crude at the moment needs to check marriage facts 
@@ -188,37 +185,15 @@ namespace FTAnalyzer
             }
         }
 
-        public Individual Husband
+        public string HusbandID
         {
-            get { return this.husband; }
-            internal set
-            {
-                this.husband = value;
-                if (this.husband == null)
-                {
-                    this.HusbandID = "";
-                }
-                else
-                {
-                    this.HusbandID = value.IndividualID;
-                }
+            get { return (Husband == null) ? "" : Husband.IndividualID;
             }
         }
 
-        public Individual Wife
+        public string WifeID
         {
-            get { return this.wife; }
-            internal set
-            {
-                this.wife = value;
-                if (this.wife == null)
-                {
-                    this.WifeID = "";
-                }
-                else
-                {
-                    this.WifeID = value.IndividualID;
-                }
+            get { return (Wife == null) ? "" : Wife.IndividualID;
             }
         }
 
@@ -226,8 +201,8 @@ namespace FTAnalyzer
         {
             get
             {
-                if (husband != null) yield return husband;
-                if (wife != null) yield return wife;
+                if (Husband != null) yield return Husband;
+                if (Wife != null) yield return Wife;
                 foreach (Individual child in Children) yield return child;
             }
         }
@@ -236,8 +211,8 @@ namespace FTAnalyzer
         {
             get
             {
-                string husbandsName = husband == null ? "Unknown" : husband.Name;
-                string wifesName = wife == null ? "Unknown" : wife.Name;
+                string husbandsName = Husband == null ? "Unknown" : Husband.Name;
+                string wifesName = Wife == null ? "Unknown" : Wife.Name;
                 return husbandsName + " and " + wifesName;
             }
         }
@@ -268,10 +243,10 @@ namespace FTAnalyzer
 
         public Individual Spouse(Individual ind)
         {
-            if (ind.Equals(husband))
-                return wife;
-            if (ind.Equals(wife))
-                return husband;
+            if (ind.Equals(Husband))
+                return Wife;
+            if (ind.Equals(Wife))
+                return Husband;
             return null;
         }
 
@@ -351,12 +326,12 @@ namespace FTAnalyzer
 
         string IDisplayFamily.Husband
         {
-            get { return husband == null ? string.Empty : husband.Name + " (b." + husband.BirthDate + ")"; }
+            get { return Husband == null ? string.Empty : Husband.Name + " (b." + Husband.BirthDate + ")"; }
         }
 
         string IDisplayFamily.Wife
         {
-            get { return wife == null ? string.Empty : wife.Name + " (b." + wife.BirthDate + ")"; }
+            get { return Wife == null ? string.Empty : Wife.Name + " (b." + Wife.BirthDate + ")"; }
         }
 
         string IDisplayFamily.Marriage
@@ -392,17 +367,17 @@ namespace FTAnalyzer
         {
             get
             {
-                // return "central" date of family - use marriage facts, husband/wife facts, children birth facts
+                // return "central" date of family - use marriage facts, Husband/Wife facts, children birth facts
                 List<FactDate> dates = new List<FactDate>();
                 foreach (Fact f in Facts)
                     if (f.FactDate.AverageDate != FactDate.UNKNOWN_DATE)
                         dates.Add(f.FactDate.AverageDate);
-                if (husband != null)
-                    foreach (Fact f in husband.AllFacts)
+                if (Husband != null)
+                    foreach (Fact f in Husband.AllFacts)
                         if (f.FactDate.AverageDate != FactDate.UNKNOWN_DATE)
                             dates.Add(f.FactDate.AverageDate);
-                if (wife != null)
-                    foreach (Fact f in wife.AllFacts)
+                if (Wife != null)
+                    foreach (Fact f in Wife.AllFacts)
                         if (f.FactDate.AverageDate != FactDate.UNKNOWN_DATE)
                             dates.Add(f.FactDate.AverageDate);
                 foreach (Individual c in Children)
@@ -452,10 +427,10 @@ namespace FTAnalyzer
                 List<IList<Fact>> results = new List<IList<Fact>>();
                 // add the family facts then the facts from each individual
                 results.Add(Facts);
-                if (husband != null)
-                    results.Add(husband.AllFacts);
-                if (wife != null)
-                    results.Add(wife.AllFacts);
+                if (Husband != null)
+                    results.Add(Husband.AllFacts);
+                if (Wife != null)
+                    results.Add(Wife.AllFacts);
                 foreach (Individual c in Children)
                     results.Add(c.AllFacts);
                 return results.SelectMany(x => x);

@@ -241,14 +241,14 @@ namespace FTAnalyzer
         {
             foreach (Family f in families)
             {
-                if (f.husband != null)
-                    f.husband.Infamily = true;
-                if (f.wife != null)
-                    f.wife.Infamily = true;
+                if (f.Husband != null)
+                    f.Husband.Infamily = true;
+                if (f.Wife != null)
+                    f.Wife.Infamily = true;
                 foreach (Individual c in f.Children)
                 {
                     c.Infamily = true;
-                    if (f.husband != null || f.wife != null)
+                    if (f.Husband != null || f.Wife != null)
                         c.HasParents = true;
                 }
             }
@@ -408,15 +408,15 @@ namespace FTAnalyzer
 
         private void FixIDs()
         {
-            int lenID = individuals.Count.ToString().Length;
+            int indLen = individuals.Count.ToString().Length;
             foreach (Individual ind in individuals)
             {
-                ind.FixIndividualID(lenID);
+                ind.FixIndividualID(indLen);
             }
-            lenID = families.Count.ToString().Length;
+            int famLen = families.Count.ToString().Length;
             foreach (Family f in families)
             {
-                f.FixFamilyID(lenID);
+                f.FixFamilyID(famLen);
             }
         }
 
