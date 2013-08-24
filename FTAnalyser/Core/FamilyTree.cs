@@ -184,6 +184,7 @@ namespace FTAnalyzer
             xmlErrorbox.AppendText("Loaded " + counter + " families.\n");
             pbF.Value = pbF.Maximum;
             CheckAllIndividualsAreInAFamily();
+            RemoveFamiliesWithNoIndividuals();
             if (rootIndividual == string.Empty)
                 rootIndividual = individuals[0].IndividualID;
             xmlErrorbox.AppendText("Calculating Relationships using " + rootIndividual + ": " +
@@ -196,6 +197,11 @@ namespace FTAnalyzer
             _loading = false;
             _dataloaded = true;
             return true;
+        }
+
+        private void RemoveFamiliesWithNoIndividuals()
+        {
+            (families as List<Family>).RemoveAll(x => x.FamilySize == 0);
         }
 
         private void CountCensusFacts()
@@ -895,8 +901,7 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayFamily> result = new SortableBindingList<IDisplayFamily>();
                 foreach (IDisplayFamily f in families)
-                    if (f.FamilyID != "Unlinked")
-                        result.Add(f);
+                    result.Add(f);
                 return result;
             }
         }
