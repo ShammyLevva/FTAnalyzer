@@ -232,7 +232,7 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -240,19 +240,19 @@
             // 
             this.mnuPrint.Enabled = false;
             this.mnuPrint.Name = "mnuPrint";
-            this.mnuPrint.Size = new System.Drawing.Size(152, 22);
+            this.mnuPrint.Size = new System.Drawing.Size(103, 22);
             this.mnuPrint.Text = "Print";
             this.mnuPrint.Click += new System.EventHandler(this.mnuPrint_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(100, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -424,7 +424,7 @@
             this.rtbOutput.ReadOnly = true;
             this.rtbOutput.Size = new System.Drawing.Size(925, 303);
             this.rtbOutput.TabIndex = 6;
-            this.rtbOutput.Text = "";
+            this.rtbOutput.Text = string.Empty;
             this.rtbOutput.TextChanged += new System.EventHandler(this.rtbOutput_TextChanged);
             // 
             // label6
@@ -966,7 +966,7 @@
             // 
             this.cenDate.AutoSize = true;
             this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cenDate.Country = "";
+            this.cenDate.Country = string.Empty;
             this.cenDate.Location = new System.Drawing.Point(272, 81);
             this.cenDate.Name = "cenDate";
             this.cenDate.Size = new System.Drawing.Size(186, 27);
@@ -1318,7 +1318,7 @@
             this.rtbFamilySearchResults.Name = "rtbFamilySearchResults";
             this.rtbFamilySearchResults.Size = new System.Drawing.Size(931, 229);
             this.rtbFamilySearchResults.TabIndex = 12;
-            this.rtbFamilySearchResults.Text = "";
+            this.rtbFamilySearchResults.Text = string.Empty;
             this.rtbFamilySearchResults.TextChanged += new System.EventHandler(this.rtbFamilySearchResults_TextChanged);
             // 
             // FamilySearchrelationTypes
@@ -1478,8 +1478,7 @@
             this.dgWarDead.AllowUserToDeleteRows = false;
             this.dgWarDead.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgWarDead.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgWarDead.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgWarDead.Location = new System.Drawing.Point(0, 110);
+            this.dgWarDead.Location = new System.Drawing.Point(3, 107);
             this.dgWarDead.Name = "dgWarDead";
             this.dgWarDead.ReadOnly = true;
             this.dgWarDead.Size = new System.Drawing.Size(931, 292);

@@ -153,6 +153,12 @@
     <Compile Include="Core\FactSource.cs" />
     <Compile Include="Core\FamilySearch.cs" />
     <Compile Include="Core\Statistics.cs" />
+    <Compile Include="Forms\Facts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Facts.Designer.cs">
+      <DependentUpon>Facts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\ErrorMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -193,6 +199,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Facts.resx">
+      <DependentUpon>Facts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\ErrorMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
