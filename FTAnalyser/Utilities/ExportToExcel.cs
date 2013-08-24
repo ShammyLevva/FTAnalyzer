@@ -5,12 +5,37 @@ using System.Text;
 using System.Web;
 using System.Data;
 using System.IO;
+using System.Windows.Forms;
 
 namespace FTAnalyzer.Utilities
 {
     public class ExportToExcel
     {
-        public static void Export(System.Data.DataTable table, string filename)
+        public static void Export(DataTable dt)
+        {
+            try
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                string initialDir = (string)Application.UserAppDataRegistry.GetValue("Excel Export Individual Path");
+                saveFileDialog.InitialDirectory = initialDir == null ? Environment.SpecialFolder.MyDocuments.ToString() : initialDir;
+                saveFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv";
+                saveFileDialog.FilterIndex = 1;
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string path = Path.GetDirectoryName(saveFileDialog.FileName);
+                    Application.UserAppDataRegistry.SetValue("Excel Export Individual Path", path);
+                    WriteFile(dt, saveFileDialog.FileName);
+                    MessageBox.Show("File written to " + saveFileDialog.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private static void WriteFile(DataTable table, string filename)
         {
             string q = "\"";
             Encoding isoWesternEuropean = Encoding.GetEncoding(28591);

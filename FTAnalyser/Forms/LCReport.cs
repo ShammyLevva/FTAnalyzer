@@ -278,5 +278,14 @@ namespace FTAnalyzer.Forms
             tsRecords.Text = "Count : " + dgReportSheet.RowCount + " records listed.";
             this.Cursor = Cursors.Default;
         }
+
+        private void mnuExportToExcel_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            DataTable dt = convertor.ToDataTable(dgReportSheet.DataSource as List<IDisplayLCReport>);
+            ExportToExcel.Export(dt);
+            this.Cursor = Cursors.Default;
+        }
     }
 }

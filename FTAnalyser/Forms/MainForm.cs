@@ -1297,7 +1297,7 @@ namespace FTAnalyzer
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
             DataTable dt = convertor.ToDataTable(new List<IExportIndividual>(ft.AllIndividuals));
-            ExportFile(dt);
+            ExportToExcel.Export(dt);
             HourGlass(false);
         }
 
@@ -1306,7 +1306,7 @@ namespace FTAnalyzer
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
             DataTable dt = convertor.ToDataTable(new List<IDisplayFamily>(ft.AllFamilies));
-            ExportFile(dt);
+            ExportToExcel.Export(dt);
             HourGlass(false);
         }
 
@@ -1315,32 +1315,8 @@ namespace FTAnalyzer
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
             DataTable dt = convertor.ToDataTable(new List<ExportFacts>(ft.AllFacts));
-            ExportFile(dt);
+            ExportToExcel.Export(dt);
             HourGlass(false);
-        }
-
-        private void ExportFile(DataTable dt)
-        {
-            try
-            {
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                string initialDir = (string)Application.UserAppDataRegistry.GetValue("Excel Export Individual Path");
-                saveFileDialog.InitialDirectory = initialDir == null ? Environment.SpecialFolder.MyDocuments.ToString() : initialDir;
-                saveFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv";
-                saveFileDialog.FilterIndex = 1;
-
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    string path = Path.GetDirectoryName(saveFileDialog.FileName);
-                    Application.UserAppDataRegistry.SetValue("Excel Export Individual Path", path);
-                    ExportToExcel.Export(dt, saveFileDialog.FileName);
-                    MessageBox.Show("File written to " + saveFileDialog.FileName);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void dgIndividuals_MouseDown(object sender, MouseEventArgs e)

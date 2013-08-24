@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Printing.DataGridViewPrint.Tools;
 using FTAnalyzer.Filters;
 using System.IO;
+using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer.Forms
 {
@@ -303,6 +304,15 @@ namespace FTAnalyzer.Forms
         private void mnuResetCensusColumns_Click(object sender, EventArgs e)
         {
             ResetCensusColumnLayout();
+        }
+
+        private void mnuExportToExcel_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            DataTable dt = convertor.ToDataTable(dgCensus.DataSource as List<IDisplayCensus>);
+            ExportToExcel.Export(dt);
+            this.Cursor = Cursors.Default;
         }
     }
 }
