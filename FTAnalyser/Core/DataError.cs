@@ -21,5 +21,7 @@ namespace FTAnalyzer
         public string Individual { get { return individual.Name; } }
 
         public FactDate Born { get { return individual.BirthDate; } }
+
+        public FactDate Died { get { return individual.DeathDate; } }
     }
 }

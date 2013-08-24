@@ -477,7 +477,7 @@ namespace FTAnalyzer
                 if (minDeath != FactDate.MAXDATE)
                     toAdd = new FactDate(maxLiving, minDeath);
             }
-            if (toAdd != null && toAdd != deathDate)
+            if (toAdd != null && toAdd != deathDate && toAdd.Distance(deathDate) > 1)
             {
                 // we have a date to change and its not the same 
                 // range as the existing death date
@@ -531,26 +531,10 @@ namespace FTAnalyzer
                 // very exact 9 months before dates
                 maxdate = new DateTime(maxdate.Year, 1, 1);
             }
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.CENSUS));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.RESIDENCE));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.WITNESS));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.EMIGRATION));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.IMMIGRATION));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.ARRIVAL));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.DEPARTURE));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.EDUCATION));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.DEGREE));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.ADOPTION));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.BAR_MITZVAH));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.BAS_MITZVAH));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.ADULT_CHRISTENING));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.CONFIRMATION));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.FIRST_COMMUNION));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.ORDINATION));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.NATURALIZATION));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.GRADUATION));
-            maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, Fact.RETIREMENT));
-
+            foreach(string facttype in Fact.LOOSE_DEATH_FACTS)
+            {
+                maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, facttype));
+            }
             // at this point we have the maximum point a person was alive
             // based on their oldest child and last census record and marriage date
             return maxdate;
@@ -958,14 +942,14 @@ namespace FTAnalyzer
                     if (ind.DeathDate != FactDate.UNKNOWN_DATE)
                     {
                         if (ind.BirthDate.IsAfter(ind.DeathDate))
-                            errors[0].Add(new DataError(ind, "Died " + ind.DeathDate + " before born"));
+                            errors[(int)dataerror.BIRTH_AFTER_DEATH].Add(new DataError(ind, "Died " + ind.DeathDate + " before born"));
                         if (ind.BurialDate != null && ind.BirthDate.IsAfter(ind.BurialDate))
-                            errors[0].Add(new DataError(ind, "Buried " + ind.BurialDate + " before born"));
+                            errors[(int)dataerror.BIRTH_AFTER_DEATH].Add(new DataError(ind, "Buried " + ind.BurialDate + " before born"));
                         if (ind.BurialDate != null && ind.BurialDate.IsBefore(ind.DeathDate) && !ind.BurialDate.Overlaps(ind.DeathDate))
-                            errors[7].Add(new DataError(ind, "Buried " + ind.BurialDate + " before died " + ind.DeathDate));
+                            errors[(int)dataerror.BURIAL_BEFORE_DEATH].Add(new DataError(ind, "Buried " + ind.BurialDate + " before died " + ind.DeathDate));
                         int minAge = ind.getMinAge(ind.DeathDate);
                         if (minAge > 110)
-                            errors[8].Add(new DataError(ind, "Aged over 110 before died " + ind.DeathDate));
+                            errors[(int)dataerror.AGED_MORE_THAN_110].Add(new DataError(ind, "Aged over 110 before died " + ind.DeathDate));
                     }
                     foreach (Fact f in ind.AllFacts)
                     {
@@ -976,17 +960,22 @@ namespace FTAnalyzer
                             if ((f.FactType == Fact.CHRISTENING || f.FactType == Fact.BAPTISM))
                             {  //due to possible late birth abt qtr reporting use 3 month fudge factor for bapm/chr
                                 if (f.FactDate.IsBefore(ind.BirthDate.SubtractMonths(4)))
-                                    errors[9].Add(de);
+                                    errors[(int)dataerror.FACTS_BEFORE_BIRTH].Add(de);
                             }
                             else
-                                errors[9].Add(de);
+                                errors[(int)dataerror.FACTS_BEFORE_BIRTH].Add(de);
+                        }
+                        if (Fact.LOOSE_DEATH_FACTS.Contains(f.FactType) && f.FactDate.IsAfter(ind.DeathDate))
+                        {
+                            errors[(int)dataerror.FACTS_AFTER_DEATH].Add(new DataError(ind, Fact.GetFactTypeDescription(f.FactType) + " fact recorded: " +
+                               f.FactDate + " after individual died"));
                         }
                         if (f.FactType == Fact.LOSTCOUSINS)
                         {
                             if (!CensusDate.IsCensusYear(f.FactDate))
-                                errors[14].Add(new DataError(ind, "Lost Cousins event for " + f.FactDate + " which isn't a census year"));
+                                errors[(int)dataerror.LOST_COUSINS_NON_CENSUS].Add(new DataError(ind, "Lost Cousins event for " + f.FactDate + " which isn't a census year"));
                             else if (!CensusDate.IsLostCousinsCensusYear(f.FactDate))
-                                errors[15].Add(new DataError(ind, "Lost Cousins event for " + f.FactDate + " which isn't a Lost Cousins census year"));
+                                errors[(int)dataerror.LOST_COUSINS_NOT_SUPPORTED_YEAR].Add(new DataError(ind, "Lost Cousins event for " + f.FactDate + " which isn't a Lost Cousins census year"));
                         }
                     }
                     foreach (Family asChild in ind.FamiliesAsChild)
@@ -997,14 +986,14 @@ namespace FTAnalyzer
                             int minAge = father.getMinAge(ind.BirthDate);
                             int maxAge = father.getMaxAge(ind.BirthDate);
                             if (minAge > 90)
-                                errors[1].Add(new DataError(ind, "Father " + father.Name + " born " + father.BirthDate + " is more than 90 yrs old when individual was born"));
+                                errors[(int)dataerror.BIRTH_AFTER_FATHER_90].Add(new DataError(ind, "Father " + father.Name + " born " + father.BirthDate + " is more than 90 yrs old when individual was born"));
                             if (maxAge < 13)
-                                errors[5].Add(new DataError(ind, "Father " + father.Name + " born " + father.BirthDate + " is less than 13 yrs old when individual was born"));
+                                errors[(int)dataerror.BIRTH_BEFORE_FATHER_13].Add(new DataError(ind, "Father " + father.Name + " born " + father.BirthDate + " is less than 13 yrs old when individual was born"));
                             if (father.DeathDate != FactDate.UNKNOWN_DATE && ind.BirthDate != FactDate.UNKNOWN_DATE)
                             {
                                 FactDate conception = ind.BirthDate.SubtractMonths(9);
                                 if (father.DeathDate.IsBefore(conception))
-                                    errors[4].Add(new DataError(ind, "Father " + father.Name + " died " + father.DeathDate + " more than 9 months before individual was born"));
+                                    errors[(int)dataerror.BIRTH_AFTER_FATHER_DEATH].Add(new DataError(ind, "Father " + father.Name + " died " + father.DeathDate + " more than 9 months before individual was born"));
                             }
                         }
                         Individual mother = asChild.Wife;
@@ -1013,11 +1002,11 @@ namespace FTAnalyzer
                             int minAge = mother.getMinAge(ind.BirthDate);
                             int maxAge = mother.getMaxAge(ind.BirthDate);
                             if (minAge > 60)
-                                errors[2].Add(new DataError(ind, "Mother " + mother.Name + " born " + mother.BirthDate + " is more than 60 yrs old when individual was born"));
+                                errors[(int)dataerror.BIRTH_AFTER_MOTHER_60].Add(new DataError(ind, "Mother " + mother.Name + " born " + mother.BirthDate + " is more than 60 yrs old when individual was born"));
                             if (maxAge < 13)
-                                errors[6].Add(new DataError(ind, "Mother " + mother.Name + " born " + mother.BirthDate + " is less than 13 yrs old when individual was born"));
+                                errors[(int)dataerror.BIRTH_BEFORE_MOTHER_13].Add(new DataError(ind, "Mother " + mother.Name + " born " + mother.BirthDate + " is less than 13 yrs old when individual was born"));
                             if (mother.DeathDate != FactDate.UNKNOWN_DATE && mother.DeathDate.IsBefore(ind.BirthDate))
-                                errors[3].Add(new DataError(ind, "Mother " + mother.Name + " died " + mother.DeathDate + " which is before individual was born"));
+                                errors[(int)dataerror.BIRTH_AFTER_MOTHER_DEATH].Add(new DataError(ind, "Mother " + mother.Name + " died " + mother.DeathDate + " which is before individual was born"));
                         }
                     }
                     foreach (Family asParent in ind.FamiliesAsParent)
@@ -1026,15 +1015,15 @@ namespace FTAnalyzer
                         if (asParent.MarriageDate != null && spouse != null)
                         {
                             if (ind.DeathDate != null && asParent.MarriageDate.IsAfter(ind.DeathDate))
-                                errors[10].Add(new DataError(ind, "Marriage to " + spouse.Name + " in " + asParent.MarriageDate + " is after individual died " + ind.DeathDate));
+                                errors[(int)dataerror.MARRIAGE_AFTER_DEATH].Add(new DataError(ind, "Marriage to " + spouse.Name + " in " + asParent.MarriageDate + " is after individual died " + ind.DeathDate));
                             if (spouse.DeathDate != null && asParent.MarriageDate.IsAfter(spouse.DeathDate))
-                                errors[11].Add(new DataError(ind, "Marriage to " + spouse.Name + " in " + asParent.MarriageDate + " is after spouse died " + spouse.DeathDate));
+                                errors[(int)dataerror.MARRIAGE_AFTER_SPOUSE_DEAD].Add(new DataError(ind, "Marriage to " + spouse.Name + " in " + asParent.MarriageDate + " is after spouse died " + spouse.DeathDate));
                             int maxAge = ind.getMaxAge(asParent.MarriageDate);
                             if (maxAge < 13)
-                                errors[12].Add(new DataError(ind, "Marriage to " + spouse.Name + " in " + asParent.MarriageDate + " is before individual was 13 years old"));
+                                errors[(int)dataerror.MARRIAGE_BEFORE_13].Add(new DataError(ind, "Marriage to " + spouse.Name + " in " + asParent.MarriageDate + " is before individual was 13 years old"));
                             maxAge = spouse.getMaxAge(asParent.MarriageDate);
                             if (maxAge < 13)
-                                errors[13].Add(new DataError(ind, "Marriage to " + spouse.Name + " in " + asParent.MarriageDate + " is before spouse born " + spouse.BirthDate + " was 13 years old"));
+                                errors[(int)dataerror.MARRIAGE_BEFORE_SPOUSE_13].Add(new DataError(ind, "Marriage to " + spouse.Name + " in " + asParent.MarriageDate + " is before spouse born " + spouse.BirthDate + " was 13 years old"));
                             //if (ind.FirstMarriage != null && ind.FirstMarriage.MarriageDate != null)
                             //{
                             //    if (asParent.MarriageDate.isAfter(ind.FirstMarriage.MarriageDate))
@@ -1050,24 +1039,33 @@ namespace FTAnalyzer
                     MessageBox.Show(Properties.ErrorMessages.FTA_0001 + e.Message, "Error : FTA_0001");
                 }
             }
-            dataErrorTypes.Add(new DataErrorGroup("Birth after death/burial", errors[0]));
-            dataErrorTypes.Add(new DataErrorGroup("Birth after father aged 90+", errors[1]));
-            dataErrorTypes.Add(new DataErrorGroup("Birth after mother aged 60+", errors[2]));
-            dataErrorTypes.Add(new DataErrorGroup("Birth after mothers death", errors[3]));
-            dataErrorTypes.Add(new DataErrorGroup("Birth more than 9m after fathers death", errors[4]));
-            dataErrorTypes.Add(new DataErrorGroup("Birth before father aged 13", errors[5]));
-            dataErrorTypes.Add(new DataErrorGroup("Birth before mother aged 13", errors[6]));
-            dataErrorTypes.Add(new DataErrorGroup("Burial before death", errors[7]));
-            dataErrorTypes.Add(new DataErrorGroup("Aged more than 120 at death", errors[8]));
-            dataErrorTypes.Add(new DataErrorGroup("Facts dated before birth", errors[9]));
-            dataErrorTypes.Add(new DataErrorGroup("Marriage after death", errors[10]));
-            dataErrorTypes.Add(new DataErrorGroup("Marriage after spouse's death", errors[11]));
-            dataErrorTypes.Add(new DataErrorGroup("Marriage before aged 13", errors[12]));
-            dataErrorTypes.Add(new DataErrorGroup("Marriage before spouse aged 13", errors[13]));
-            dataErrorTypes.Add(new DataErrorGroup("Lost Cousins tag in non Census Year", errors[14]));
-            dataErrorTypes.Add(new DataErrorGroup("Lost Cousins tag in non supported Year", errors[15]));
+            dataErrorTypes.Add(new DataErrorGroup("Birth after death/burial", errors[(int)dataerror.BIRTH_AFTER_DEATH]));
+            dataErrorTypes.Add(new DataErrorGroup("Birth after father aged 90+", errors[(int)dataerror.BIRTH_AFTER_FATHER_90]));
+            dataErrorTypes.Add(new DataErrorGroup("Birth after mother aged 60+", errors[(int)dataerror.BIRTH_AFTER_MOTHER_60]));
+            dataErrorTypes.Add(new DataErrorGroup("Birth after mothers death", errors[(int)dataerror.BIRTH_AFTER_MOTHER_DEATH]));
+            dataErrorTypes.Add(new DataErrorGroup("Birth more than 9m after fathers death", errors[(int)dataerror.BIRTH_AFTER_FATHER_DEATH]));
+            dataErrorTypes.Add(new DataErrorGroup("Birth before father aged 13", errors[(int)dataerror.BIRTH_BEFORE_FATHER_13]));
+            dataErrorTypes.Add(new DataErrorGroup("Birth before mother aged 13", errors[(int)dataerror.BIRTH_BEFORE_MOTHER_13]));
+            dataErrorTypes.Add(new DataErrorGroup("Burial before death", errors[(int)dataerror.BURIAL_BEFORE_DEATH]));
+            dataErrorTypes.Add(new DataErrorGroup("Aged more than 110 at death", errors[(int)dataerror.AGED_MORE_THAN_110]));
+            dataErrorTypes.Add(new DataErrorGroup("Facts dated before birth", errors[(int)dataerror.FACTS_BEFORE_BIRTH]));
+            dataErrorTypes.Add(new DataErrorGroup("Facts dated after death", errors[(int)dataerror.FACTS_AFTER_DEATH]));
+            dataErrorTypes.Add(new DataErrorGroup("Marriage after death", errors[(int)dataerror.MARRIAGE_AFTER_DEATH]));
+            dataErrorTypes.Add(new DataErrorGroup("Marriage after spouse's death", errors[(int)dataerror.MARRIAGE_AFTER_SPOUSE_DEAD]));
+            dataErrorTypes.Add(new DataErrorGroup("Marriage before aged 13", errors[(int)dataerror.MARRIAGE_BEFORE_13]));
+            dataErrorTypes.Add(new DataErrorGroup("Marriage before spouse aged 13", errors[(int)dataerror.MARRIAGE_BEFORE_SPOUSE_13]));
+            dataErrorTypes.Add(new DataErrorGroup("Lost Cousins tag in non Census Year", errors[(int)dataerror.LOST_COUSINS_NON_CENSUS]));
+            dataErrorTypes.Add(new DataErrorGroup("Lost Cousins tag in non supported Year", errors[(int)dataerror.LOST_COUSINS_NOT_SUPPORTED_YEAR]));
             //            dataErrorTypes.Add(new DataErrorGroup("Later marriage before previous spouse died", errors[14]));
         }
+        private enum dataerror : int
+        {
+            BIRTH_AFTER_DEATH = 0, BIRTH_AFTER_FATHER_90 = 1, BIRTH_AFTER_MOTHER_60 = 2, BIRTH_AFTER_MOTHER_DEATH = 3,
+            BIRTH_AFTER_FATHER_DEATH = 4, BIRTH_BEFORE_FATHER_13 = 5, BIRTH_BEFORE_MOTHER_13 = 6, BURIAL_BEFORE_DEATH = 7,
+            AGED_MORE_THAN_110 = 8, FACTS_BEFORE_BIRTH = 9, MARRIAGE_AFTER_DEATH = 10, MARRIAGE_AFTER_SPOUSE_DEAD = 11,
+            MARRIAGE_BEFORE_13 = 12, MARRIAGE_BEFORE_SPOUSE_13 = 13, LOST_COUSINS_NON_CENSUS = 14, 
+            LOST_COUSINS_NOT_SUPPORTED_YEAR = 15, FACTS_AFTER_DEATH = 16
+        };
 
         public void SetDataErrorsCheckedDefaults(CheckedListBox list)
         {

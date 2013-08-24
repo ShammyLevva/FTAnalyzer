@@ -594,6 +594,13 @@ namespace FTAnalyzer
             return this.StartDate.Equals(this.EndDate);
         }
 
+        public double Distance(FactDate when)
+        {
+            double startDiff = ((this.StartDate.Year - when.StartDate.Year) * 12) + (this.StartDate.Month - when.StartDate.Month);
+            double endDiff = ((this.EndDate.Year - when.EndDate.Year) * 12) + (this.EndDate.Month - when.EndDate.Month);
+            double difference = Math.Sqrt(Math.Pow(startDiff, 2.0) + Math.Pow(endDiff, 2.0));
+            return difference;
+        }
         #endregion
 
         #region Overrides
@@ -651,5 +658,6 @@ namespace FTAnalyzer
                 return DateString;
         }
         #endregion
+
     }
 }

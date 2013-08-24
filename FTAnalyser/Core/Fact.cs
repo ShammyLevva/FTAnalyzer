@@ -16,23 +16,29 @@ namespace FTAnalyzer
                 BLESSING = "BLESS", BURIAL = "BURI", CENSUS = "CENS",
                 CHRISTENING = "CHR", ADULT_CHRISTENING = "CHRA", CONFIRMATION = "CONF",
                 CREMATION = "CREM", DEATH = "DEAT", PHYSICAL_DESC = "DSCR",
-                DIVORCE = "DIV", DIVORCE_FILED = "DIVF", EDUCATION = "EDUC", 
+                DIVORCE = "DIV", DIVORCE_FILED = "DIVF", EDUCATION = "EDUC",
                 EMIGRATION = "EMIG", ENGAGEMENT = "ENGA", FIRST_COMMUNION = "FCOM",
                 GRADUATION = "GRAD", IMMIGRATION = "IMMI", NAT_ID_NO = "IDNO",
                 NATIONAL_TRIBAL = "NATI", NUM_CHILDREN = "NCHI", NUM_MARRIAGE = "NMR",
                 LEGATEE = "LEGA", MARRIAGE_BANN = "MARB", MARR_CONTRACT = "MARC",
                 MARR_LICENSE = "MARL", MARRIAGE = "MARR", MARR_SETTLEMENT = "MARS",
-                NATURALIZATION = "NATU", OCCUPATION = "OCCU", POSSESSIONS = "PROP", 
+                NATURALIZATION = "NATU", OCCUPATION = "OCCU", POSSESSIONS = "PROP",
                 ORDINATION = "ORDN", PROBATE = "PROB", RESIDENCE = "RESI",
-                RETIREMENT = "RETI", WILL = "WILL", SEPARATION = "_SEPR", 
-                MILITARY = "_MILT", ELECTION = "_ELEC", DEGREE = "_DEG", 
-                EMPLOYMENT = "_EMPLOY", MEDICAL_CONDITION = "_MDCL", 
+                RETIREMENT = "RETI", WILL = "WILL", SEPARATION = "_SEPR",
+                MILITARY = "_MILT", ELECTION = "_ELEC", DEGREE = "_DEG",
+                EMPLOYMENT = "_EMPLOY", MEDICAL_CONDITION = "_MDCL",
                 CUSTOM_FACT = "EVEN";
 
         public const string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSE", FAMILYSEARCH = "*IGI",
                 CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT",
                 CHANGE = "*CHNG", LOSTCOUSINS = "*LOST";
+
+        public static readonly ISet<string> LOOSE_DEATH_FACTS = new HashSet<string>(new string[] {
+            CENSUS, RESIDENCE, WITNESS, EMIGRATION, IMMIGRATION, ARRIVAL, DEPARTURE, EDUCATION,
+            DEGREE, ADOPTION, BAR_MITZVAH, BAS_MITZVAH, ADULT_CHRISTENING, CONFIRMATION, FIRST_COMMUNION,
+            ORDINATION, NATURALIZATION, GRADUATION, RETIREMENT
+                    });
 
         private static readonly Dictionary<string, string> CUSTOM_TAGS = new Dictionary<string, string>();
         private static readonly HashSet<string> COMMENT_FACTS = new HashSet<string>();
