@@ -5,11 +5,11 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    public class FamilyCountComparer : Comparer<IDisplayFamily>
+    public class FamilySizeComparer : Comparer<IDisplayFamily>
     {
         private bool countSortLow;
 
-        public FamilyCountComparer(bool countSortLow)
+        public FamilySizeComparer(bool countSortLow)
         {
             this.countSortLow = countSortLow;
         }
@@ -17,9 +17,9 @@ namespace FTAnalyzer
         public override int Compare(IDisplayFamily x, IDisplayFamily y)
         {
             if (countSortLow)
-                return x.Count.CompareTo(y.Count);
+                return x.FamilySize.CompareTo(y.FamilySize);
             else
-                return y.Count.CompareTo(x.Count);
+                return y.FamilySize.CompareTo(x.FamilySize);
         }
     }
 }

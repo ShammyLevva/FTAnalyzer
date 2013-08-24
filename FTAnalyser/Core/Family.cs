@@ -155,7 +155,7 @@ namespace FTAnalyzer
 
         #region Properties
 
-        public int Count
+        public int FamilySize
         {
             get
             {

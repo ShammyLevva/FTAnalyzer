@@ -15,6 +15,6 @@ namespace FTAnalyzer
         string Marriage { get; }
         FactLocation Location { get; }
         string Children { get; }
-        int Count { get; }
+        int FamilySize { get; }
     }
 }
