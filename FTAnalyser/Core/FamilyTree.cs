@@ -1434,7 +1434,20 @@ namespace FTAnalyzer
             }
             if (Properties.GeneralSettings.Default.AllowEmptyLocations)
             { // trim empty end nodes
-                
+                bool recheck = true;
+                while (recheck)
+                {
+                    TreeNode[] emptyNodes = displayTreeRootNode.Nodes.Find(string.Empty, true);
+                    recheck = false;
+                    foreach (TreeNode node in emptyNodes)
+                    {
+                        if (node.FirstNode == null)
+                        {
+                            node.Remove();
+                            recheck = true;
+                        }
+                    }
+                }
             }
             return BuildTreeNodeArray();
         }
