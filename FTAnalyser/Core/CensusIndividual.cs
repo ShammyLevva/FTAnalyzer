@@ -16,9 +16,9 @@ namespace FTAnalyzer
             this.family = family;
         }
 
-        public string FamilyGed
+        public string FamilyID
         {
-            get { return family.FamilyGed; }
+            get { return family.FamilyID; }
         }
 
         public FactLocation CensusLocation

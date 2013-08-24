@@ -7,7 +7,7 @@ namespace FTAnalyzer
 {
     public interface IDisplayFamily
     {
-        string FamilyGed { get; }
+        string FamilyID { get; }
         string HusbandID { get; }
         string Husband { get; }
         string WifeID { get; }

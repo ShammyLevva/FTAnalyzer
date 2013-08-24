@@ -15,7 +15,7 @@ namespace FTAnalyzer
         public static readonly string HUSBAND = "Husband", WIFE = "Wife", CHILD = "Child", UNKNOWNSTATUS = "Unknown";
         
         private string individualID;
-        private string gedcomID;
+        //private string gedcomID;
         private string forenames;
         private string surname;
         private string marriedName;
@@ -34,8 +34,7 @@ namespace FTAnalyzer
         private IList<Family> familiesAsChild;
         
         public Individual (XmlNode node) {
-            gedcomID = node.Attributes["ID"].Value;
-            individualID = gedcomID;
+            individualID = node.Attributes["ID"].Value;
             Name =   FamilyTree.GetText(node, "NAME");
             Gender = FamilyTree.GetText(node, "SEX");
             alias =  FamilyTree.GetText(node, "ALIA");
@@ -109,7 +108,6 @@ namespace FTAnalyzer
             else
             {
                 this.individualID = i.individualID;
-                this.gedcomID = i.gedcomID;
                 this.forenames = i.forenames;
                 this.surname = i.surname;
                 this.marriedName = i.marriedName;
@@ -159,7 +157,7 @@ namespace FTAnalyzer
 
         public string IndividualID 
         { 
-            get { return individualID; } 
+            get { return individualID; }
         }
 
         public int RelationType 
@@ -215,11 +213,6 @@ namespace FTAnalyzer
             }
         }
         
-        public string GedcomID
-        {
-            get { return gedcomID; }
-        }
-
         public string Name
         {
             get { return (forenames + " " + surname).Trim(); }
@@ -419,7 +412,7 @@ namespace FTAnalyzer
         {
             get
             {
-                return gedcomID + ": " + Name;
+                return individualID + ": " + Name;
             }
         }
 

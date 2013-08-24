@@ -185,7 +185,7 @@ namespace FTAnalyzer
             pbF.Value = pbF.Maximum;
             CheckAllIndividualsAreInAFamily();
             if (rootIndividual == string.Empty)
-                rootIndividual = individuals[0].GedcomID;
+                rootIndividual = individuals[0].IndividualID;
             xmlErrorbox.AppendText("Calculating Relationships using " + rootIndividual + ": " +
                 GetIndividual(rootIndividual).Name + " as starter person. Please wait.\n\n");
             SetRelations(rootIndividual);
@@ -377,14 +377,9 @@ namespace FTAnalyzer
             return individuals.FirstOrDefault(i => i.IndividualID == individualID);
         }
 
-        public Individual GetGedcomIndividual(string gedcomID)
+        public Family GetFamily(string familyID)
         {
-            return individuals.FirstOrDefault(i => i.GedcomID == gedcomID);
-        }
-
-        public Family GetGedcomFamily(string gedcomID)
-        {
-            return families.FirstOrDefault(f => f.FamilyGed == gedcomID);
+            return families.FirstOrDefault(f => f.FamilyID == familyID);
         }
 
         public IEnumerable<Individual> GetIndividualsAtLocation(FactLocation loc, int level)
@@ -421,7 +416,7 @@ namespace FTAnalyzer
             lenID = families.Count.ToString().Length;
             foreach (Family f in families)
             {
-                f.FixFamilyGed(lenID);
+                f.FixFamilyID(lenID);
             }
         }
 
@@ -709,7 +704,7 @@ namespace FTAnalyzer
         {
             ClearRelations();
             SetFamilies();
-            Individual rootPerson = GetGedcomIndividual(startGed);
+            Individual rootPerson = GetIndividual(startGed);
             Individual ind = rootPerson;
             ind.RelationType = Individual.DIRECT;
             ind.Ahnentafel = 1;
@@ -900,7 +895,7 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayFamily> result = new SortableBindingList<IDisplayFamily>();
                 foreach (IDisplayFamily f in families)
-                    if (f.FamilyGed != "Unlinked")
+                    if (f.FamilyID != "Unlinked")
                         result.Add(f);
                 return result;
             }

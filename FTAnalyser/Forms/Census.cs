@@ -81,7 +81,7 @@ namespace FTAnalyzer.Forms
 
         private void StyleRows()
         {
-            string currentFamilyGed = "";
+            string currentFamilyID = "";
             bool highlighted = true;
             numFamilies = 0;
             rowStyles = new Dictionary<int, DataGridViewCellStyle>();
@@ -92,9 +92,9 @@ namespace FTAnalyzer.Forms
             foreach (DataGridViewRow r in dgCensus.Rows)
             {
                 CensusIndividual cr = (CensusIndividual)r.DataBoundItem;
-                if (cr.FamilyGed != currentFamilyGed)
+                if (cr.FamilyID != currentFamilyID)
                 {
-                    currentFamilyGed = cr.FamilyGed;
+                    currentFamilyID = cr.FamilyID;
                     highlighted = !highlighted;
                     numFamilies++;
                 }

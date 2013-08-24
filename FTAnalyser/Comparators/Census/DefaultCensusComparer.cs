@@ -9,7 +9,7 @@ namespace FTAnalyzer
     {
         public override int Compare(CensusIndividual c1, CensusIndividual c2)
         {
-            int result = c1.FamilyGed.CompareTo(c2.FamilyGed);
+            int result = c1.FamilyID.CompareTo(c2.FamilyID);
             if (result == 0) result = c1.Position - c2.Position;
             return result;
         }

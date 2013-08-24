@@ -14,39 +14,35 @@ namespace FTAnalyzer
         public static readonly string SINGLE = "Single", MARRIED = "Married";
 
         public string FamilyID { get; private set; }
-        public string FamilyGed { get; private set; }
         public string HusbandID { get; private set; }
-        public string HusbandGed { get; private set; }
         public string WifeID { get; private set; }
-        public string WifeGed { get; private set; }
         public IList<Fact> Facts { get; private set; }
         internal Individual husband;
         internal Individual wife;
         public List<Individual> Children { get; internal set; }
 
-        private Family(string familyID, string familyGed)
+        private Family(string familyID)
         {
             this.FamilyID = familyID;
-            this.FamilyGed = familyGed;
             this.Facts = new List<Fact>();
             this.Children = new List<Individual>();
         }
 
-        public Family() : this("", "") { }
+        public Family() : this("") { }
 
         public Family(XmlNode node)
-            : this("", "")
+            : this("")
         {
             if (node != null)
             {
                 XmlNode eHusband = node.SelectSingleNode("HUSB");
                 XmlNode eWife = node.SelectSingleNode("WIFE");
-                this.FamilyGed = node.Attributes["ID"].Value;
-                this.HusbandGed = eHusband == null ? null : eHusband.Attributes["REF"].Value;
-                this.WifeGed = eWife == null ? null : eWife.Attributes["REF"].Value;
+                this.FamilyID = node.Attributes["ID"].Value;
+                this.HusbandID = eHusband == null ? null : eHusband.Attributes["REF"].Value;
+                this.WifeID = eWife == null ? null : eWife.Attributes["REF"].Value;
                 FamilyTree ft = FamilyTree.Instance;
-                this.Husband = ft.GetGedcomIndividual(this.HusbandGed);
-                this.Wife = ft.GetGedcomIndividual(this.WifeGed);
+                this.Husband = ft.GetIndividual(this.HusbandID);
+                this.Wife = ft.GetIndividual(this.WifeID);
                 if (husband != null && wife != null)
                     wife.MarriedName = husband.Surname;
                 // now iterate through child elements of eChildren
@@ -56,7 +52,7 @@ namespace FTAnalyzer
                 {
                     if (n.Attributes["REF"] != null)
                     {
-                        Individual child = ft.GetGedcomIndividual(n.Attributes["REF"].Value);
+                        Individual child = ft.GetIndividual(n.Attributes["REF"].Value);
                         if (child != null)
                             Children.Add(child);
                         else
@@ -82,7 +78,7 @@ namespace FTAnalyzer
         }
 
         public Family(Individual ind)
-            : this("IND", "")
+            : this("IND")
         {
             if (ind.isMale)
                 this.husband = ind;
@@ -94,11 +90,8 @@ namespace FTAnalyzer
         internal Family(Family f)
         {
             this.FamilyID = f.FamilyID;
-            this.FamilyGed = f.FamilyGed;
             this.HusbandID = f.HusbandID;
-            this.HusbandGed = f.HusbandGed;
             this.WifeID = f.WifeID;
-            this.WifeGed = f.WifeGed;
             this.Facts = new List<Fact>(f.Facts);
             this.husband = f.husband == null ? null : new Individual(f.husband);
             this.wife = f.wife == null ? null : new Individual(f.wife);
@@ -114,14 +107,14 @@ namespace FTAnalyzer
             }
         }
 
-        public void FixFamilyGed(int length)
+        public void FixFamilyID(int length)
         {
             try
             {
-                if (FamilyGed == null || FamilyGed == "")
-                    FamilyGed = "Unlinked";
+                if (FamilyID == null || FamilyID == "")
+                    FamilyID = "Unlinked";
                 else
-                    FamilyGed = FamilyGed.Substring(0, 1) + FamilyGed.Substring(1).PadLeft(length, '0');
+                    FamilyID = FamilyID.Substring(0, 1) + FamilyID.Substring(1).PadLeft(length, '0');
             }
             catch (Exception)
             { // don't error if family ID is not of format Fxxxx
@@ -204,12 +197,10 @@ namespace FTAnalyzer
                 if (this.husband == null)
                 {
                     this.HusbandID = "";
-                    this.HusbandGed = "";
                 }
                 else
                 {
                     this.HusbandID = value.IndividualID;
-                    this.HusbandGed = value.GedcomID;
                 }
             }
         }
@@ -223,12 +214,10 @@ namespace FTAnalyzer
                 if (this.wife == null)
                 {
                     this.WifeID = "";
-                    this.WifeGed = "";
                 }
                 else
                 {
                     this.WifeID = value.IndividualID;
-                    this.WifeGed = value.GedcomID;
                 }
             }
         }
@@ -257,7 +246,7 @@ namespace FTAnalyzer
         {
             get
             {
-                return FamilyTree.validFilename(FamilyGed + " - Marriage of " + FamilyName + ".html");
+                return FamilyTree.validFilename(FamilyID + " - Marriage of " + FamilyName + ".html");
             }
         }
 
@@ -265,7 +254,7 @@ namespace FTAnalyzer
         {
             get
             {
-                return FamilyTree.validFilename(FamilyGed + " - Children of " + FamilyName + ".html");
+                return FamilyTree.validFilename(FamilyID + " - Children of " + FamilyName + ".html");
             }
         }
 
@@ -273,7 +262,7 @@ namespace FTAnalyzer
         {
             get
             {
-                return FamilyGed + ": " + FamilyName;
+                return FamilyID + ": " + FamilyName;
             }
         }
 

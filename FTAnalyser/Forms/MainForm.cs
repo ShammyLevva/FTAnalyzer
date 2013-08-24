@@ -1069,7 +1069,7 @@ namespace FTAnalyzer
             Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
             if (ind != null)
             {
-                ft.SetRelations(ind.GedcomID);
+                ft.SetRelations(ind.IndividualID);
                 dgIndividuals.Refresh();
                 MessageBox.Show("Root person set as " + ind.Name + "\n\n" + ft.PrintRelationCount());
             }

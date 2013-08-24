@@ -124,7 +124,7 @@ namespace FTAnalyzer.Forms
                 {
                     foreach (DataGridViewRow r in dgFamilies.Rows)
                     {
-                        if (r.Cells[0].Value.ToString() == f.FamilyGed)
+                        if (r.Cells[0].Value.ToString() == f.FamilyID)
                         {
                             dgFamilies.CurrentCell = r.Cells[0];
                             break;
