@@ -17,9 +17,19 @@ namespace FTAnalyzer
         public override int Compare(IDisplayFamily x, IDisplayFamily y)
         {
             if (countSortLow)
-                return x.FamilySize.CompareTo(y.FamilySize);
+            {
+                if (x.FamilySize == y.FamilySize)
+                    return x.FamilyID.CompareTo(y.FamilyID);
+                else
+                    return x.FamilySize.CompareTo(y.FamilySize);
+            }
             else
-                return y.FamilySize.CompareTo(x.FamilySize);
+            {
+                if (x.FamilySize == y.FamilySize)
+                    return y.FamilyID.CompareTo(x.FamilyID);
+                else
+                    return y.FamilySize.CompareTo(x.FamilySize);
+            }
         }
     }
 }
