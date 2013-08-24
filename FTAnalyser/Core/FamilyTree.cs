@@ -356,9 +356,9 @@ namespace FTAnalyzer
             return families.Where(f => (f.Wife != null && f.Wife == ind));
         }
 
-        public FactSource GetGedcomSource(string gedcomID)
+        public FactSource GetSourceID(string sourceID)
         {
-            return sources.FirstOrDefault(s => s.GedcomID == gedcomID);
+            return sources.FirstOrDefault(s => s.SourceID == sourceID);
         }
 
         public bool IsMarried(Individual ind, FactDate fd)
@@ -700,11 +700,11 @@ namespace FTAnalyzer
             }
         }
 
-        public void SetRelations(string startGed)
+        public void SetRelations(string startID)
         {
             ClearRelations();
             SetFamilies();
-            Individual rootPerson = GetIndividual(startGed);
+            Individual rootPerson = GetIndividual(startID);
             Individual ind = rootPerson;
             ind.RelationType = Individual.DIRECT;
             ind.Ahnentafel = 1;

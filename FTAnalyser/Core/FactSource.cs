@@ -11,15 +11,13 @@ namespace FTAnalyzer
         private static readonly string BIRTHCERT = "BIRTH", DEATHCERT = "DEATH",
                 MARRIAGECERT = "MARRIAGE", CENSUSCERT = "CENSUS";
 
-        public string SourceID { get; set;}
-        public string GedcomID { get; set; }
+        public string SourceID { get; set; }
         private string SourceTitle { get; set; }
         private string SourceMedium { get; set; }
 
         public FactSource(XmlNode node)
         {
-            this.SourceID = "";
-            this.GedcomID = node.Attributes["ID"].Value;
+            this.SourceID = node.Attributes["ID"].Value;
             this.SourceTitle = FamilyTree.GetText(node, "TITL");
             this.SourceMedium = FamilyTree.GetText(node, "REPO/CALN/MEDI");
         }

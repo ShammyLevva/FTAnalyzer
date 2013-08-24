@@ -70,7 +70,7 @@ namespace FTAnalyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Family Tree Analyzer Error.
+        ///   Looks up a localized string similar to You need to load your GEDCOM file before the program can display results.\nClick File | Open..
         /// </summary>
         internal static string FTA_0002 {
             get {

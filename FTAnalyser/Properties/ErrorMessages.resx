@@ -121,6 +121,6 @@
     <value>Unexpected Error Checking for inconsistencies in your data\nPlease report this on the issues page at http://ftanalyzer.codeplex.com \nError was</value>
   </data>
   <data name="FTA_0002" xml:space="preserve">
-    <value>Family Tree Analyzer Error</value>
+    <value>You need to load your GEDCOM file before the program can display results.\nClick File | Open.</value>
   </data>
 </root>

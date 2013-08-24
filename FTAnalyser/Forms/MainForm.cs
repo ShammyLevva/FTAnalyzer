@@ -186,7 +186,7 @@ namespace FTAnalyzer
                     {
                         tabSelector.SelectedTab = tabDisplayProgress;
                         tsCountLabel.Text = "";
-                        MessageBox.Show("You need to load your GEDCOM file before the program can display results.\nClick File | Open.");
+                        MessageBox.Show(Properties.ErrorMessages.FTA_0002, "Error : FTA_0002");
                     }
                     return;
                 }
@@ -208,7 +208,7 @@ namespace FTAnalyzer
                 {
                     SortableBindingList<IDisplayFamily> list = ft.AllDisplayFamilies;
                     dgFamilies.DataSource = list;
-                    dgFamilies.Sort(dgFamilies.Columns["FamilyGed"], ListSortDirection.Ascending);
+                    dgFamilies.Sort(dgFamilies.Columns["FamilyID"], ListSortDirection.Ascending);
                     mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
