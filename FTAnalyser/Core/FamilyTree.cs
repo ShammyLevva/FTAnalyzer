@@ -1432,7 +1432,7 @@ namespace FTAnalyzer
                     TreeNode child = current.Nodes.Find(part, false).FirstOrDefault();
                     if (child == null)
                     {
-                        child = new TreeNode(part);
+                        child = new TreeNode((part.Length == 0 ? "<blank>" : part));
                         child.Name = part;
                         child.Tag = location;
                         // Set everything other than known countries to regular
