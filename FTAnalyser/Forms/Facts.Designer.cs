@@ -40,6 +40,9 @@
             this.dgFacts = new System.Windows.Forms.DataGridView();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
+            this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.printDialog = new System.Windows.Forms.PrintDialog();
+            this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -69,6 +72,7 @@
             this.mnuSaveColumnLayout.Name = "mnuSaveColumnLayout";
             this.mnuSaveColumnLayout.Size = new System.Drawing.Size(23, 22);
             this.mnuSaveColumnLayout.Text = "Save Column Sort Order";
+            this.mnuSaveColumnLayout.Visible = false;
             this.mnuSaveColumnLayout.Click += new System.EventHandler(this.mnuSaveColumnLayout_Click);
             // 
             // mnuResetColumns
@@ -79,12 +83,14 @@
             this.mnuResetColumns.Name = "mnuResetColumns";
             this.mnuResetColumns.Size = new System.Drawing.Size(23, 22);
             this.mnuResetColumns.Text = "Reset Column Sort Order to Default";
+            this.mnuResetColumns.Visible = false;
             this.mnuResetColumns.Click += new System.EventHandler(this.mnuResetColumns_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator2.Visible = false;
             // 
             // printToolStripButton
             // 
@@ -152,6 +158,24 @@
             this.tsRecords.Size = new System.Drawing.Size(118, 17);
             this.tsRecords.Text = "toolStripStatusLabel1";
             // 
+            // printDialog
+            // 
+            this.printDialog.AllowSelection = true;
+            this.printDialog.AllowSomePages = true;
+            this.printDialog.Document = this.printDocument;
+            this.printDialog.UseEXDialog = true;
+            // 
+            // printPreviewDialog
+            // 
+            this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog.Document = this.printDocument;
+            this.printPreviewDialog.Enabled = true;
+            this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
+            this.printPreviewDialog.Name = "printPreviewDialog";
+            this.printPreviewDialog.Visible = false;
+            // 
             // Facts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -163,6 +187,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Facts";
             this.Text = "Facts";
+            this.TextChanged += new System.EventHandler(this.Facts_TextChanged);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).EndInit();
@@ -186,5 +211,8 @@
         private System.Windows.Forms.ToolStripButton mnuExportToExcel;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel tsRecords;
+        private System.Drawing.Printing.PrintDocument printDocument;
+        private System.Windows.Forms.PrintDialog printDialog;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
     }
 }

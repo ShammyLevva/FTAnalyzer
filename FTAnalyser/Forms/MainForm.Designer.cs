@@ -1471,6 +1471,8 @@
             // 
             // printDialog
             // 
+            this.printDialog.AllowSelection = true;
+            this.printDialog.AllowSomePages = true;
             this.printDialog.UseEXDialog = true;
             // 
             // rtbOutput

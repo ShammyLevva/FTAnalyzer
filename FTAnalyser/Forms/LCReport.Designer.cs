@@ -184,6 +184,8 @@
             // 
             // printDialog
             // 
+            this.printDialog.AllowSelection = true;
+            this.printDialog.AllowSomePages = true;
             this.printDialog.Document = this.printDocument;
             this.printDialog.UseEXDialog = true;
             // 
