@@ -633,7 +633,7 @@ namespace FTAnalyzer
             //_timerCheckForUpdates.Change(3000, 1000 * 60 * 60 * 8); //Check for updates 3 sec after the form loads, and then again every 8 hours
             GeneralSettings.UseBaptismDatesChanged += new EventHandler(Options_BaptismChanged);
             GeneralSettings.AllowEmptyLocationsChanged += new EventHandler(Options_AllowEmptyLocationsChanged);
-    
+
             this.Text = "Family Tree Analyzer v" + VERSION;
         }
 
@@ -1337,6 +1337,14 @@ namespace FTAnalyzer
                     }
                 }
             }
+            if (e.Clicks == 2)
+            {
+                string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+                Individual ind = ft.GetIndividual(indID);
+                Facts factForm = new Facts(ind);
+                DisposeDuplicateForms(factForm);
+                factForm.Show();
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1476,7 +1484,7 @@ namespace FTAnalyzer
                 }
             }
             if (!fileLoaded)
-                if(files.Length > 1)
+                if (files.Length > 1)
                     MessageBox.Show("Unable to load File. None of the files dragged and dropped were *.ged files");
                 else
                     MessageBox.Show("Unable to load File. The file dragged and dropped wasn't a *.ged file");
@@ -1487,7 +1495,5 @@ namespace FTAnalyzer
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.Copy;
         }
-
-
     }
 }

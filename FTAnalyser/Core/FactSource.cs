@@ -45,5 +45,10 @@ namespace FTAnalyzer
             return SourceMedium.Equals("Official Document") &&
                    SourceTitle.ToUpper().IndexOf(CENSUSCERT) >= 0;
         }
+
+        public override string ToString()
+        {
+            return SourceTitle;
+        }
     }
 }

@@ -9,7 +9,7 @@ using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer
 {
-    public class Fact
+    public class Fact : IDisplayFact
     {
         public const string ADOPTION = "ADOP", ANNULMENT = "ANUL", BAPTISM = "BAPM",
                 BAR_MITZVAH = "BARM", BAS_MITZVAH = "BASM", BIRTH = "BIRT",
@@ -270,16 +270,28 @@ namespace FTAnalyzer
 
         public string FactType { get; private set; }
 
+        public string TypeOfFact { get { return GetFactTypeDescription(FactType); } }
+
         public string DateString
         {
             get { return this.FactDate == null ? "" : this.FactDate.DateString; }
+        }
+
+        public string SourceList
+        {
+            get
+            {
+                StringBuilder result = new StringBuilder();
+                Sources.Select(s => result.Append(s + "; "));
+                return result.ToString();
+            }
         }
 
         public IList<FactSource> Sources { get; private set; }
 
         public string Country
         {
-            get { return Location == null ? "Scotland" : Location.Country; }
+            get { return Location == null ? "UNKNOWN" : Location.Country; }
         }
 
         public bool CertificatePresent { get; private set; }

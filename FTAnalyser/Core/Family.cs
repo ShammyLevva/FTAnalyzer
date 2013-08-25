@@ -419,7 +419,7 @@ namespace FTAnalyzer
             return false;
         }
 
-        private IEnumerable<Fact> AllFamilyFacts
+        public IEnumerable<Fact> AllFamilyFacts
         {
             get
             {

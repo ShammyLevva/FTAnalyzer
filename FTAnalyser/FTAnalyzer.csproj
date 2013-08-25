@@ -132,6 +132,7 @@
     <Compile Include="Comparators\Census\CensusIndividualNameComparer.cs" />
     <Compile Include="Comparators\Census\CensusFamilyGedComparer.cs" />
     <Compile Include="Comparators\Census\DefaultCensusComparer.cs" />
+    <Compile Include="Comparators\Fact\FactComparer.cs" />
     <Compile Include="Comparators\Family\DefaultFamilyComparer.cs" />
     <Compile Include="Comparators\Family\FamilySizeComparer.cs" />
     <Compile Include="Comparators\Family\FamilyDateComparer.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Core\Countries.cs" />
     <Compile Include="Core\DataError.cs" />
     <Compile Include="Core\DataErrorGroup.cs" />
+    <Compile Include="Core\Displays\IDisplayFact.cs" />
     <Compile Include="Core\Displays\IDisplayLCReport.cs" />
     <Compile Include="Core\Displays\DisplayOccupation.cs" />
     <Compile Include="Core\Displays\IDisplayOccupation.cs" />

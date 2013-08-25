@@ -30,23 +30,26 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Facts));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.dgCensus = new System.Windows.Forms.DataGridView();
-            this.mnuSaveCensusColumnLayout = new System.Windows.Forms.ToolStripButton();
+            this.mnuSaveColumnLayout = new System.Windows.Forms.ToolStripButton();
+            this.mnuResetColumns = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.mnuResetCensusColumns = new System.Windows.Forms.ToolStripButton();
             this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
+            this.dgFacts = new System.Windows.Forms.DataGridView();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCensus)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).BeginInit();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuSaveCensusColumnLayout,
-            this.mnuResetCensusColumns,
+            this.mnuSaveColumnLayout,
+            this.mnuResetColumns,
             this.toolStripSeparator2,
             this.printToolStripButton,
             this.printPreviewToolStripButton,
@@ -58,28 +61,25 @@
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // dgCensus
+            // mnuSaveColumnLayout
             // 
-            this.dgCensus.AllowUserToAddRows = false;
-            this.dgCensus.AllowUserToDeleteRows = false;
-            this.dgCensus.AllowUserToOrderColumns = true;
-            this.dgCensus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCensus.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dgCensus.Location = new System.Drawing.Point(0, 25);
-            this.dgCensus.Name = "dgCensus";
-            this.dgCensus.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCensus.Size = new System.Drawing.Size(857, 530);
-            this.dgCensus.TabIndex = 2;
+            this.mnuSaveColumnLayout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mnuSaveColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveColumnLayout.Image")));
+            this.mnuSaveColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnuSaveColumnLayout.Name = "mnuSaveColumnLayout";
+            this.mnuSaveColumnLayout.Size = new System.Drawing.Size(23, 22);
+            this.mnuSaveColumnLayout.Text = "Save Column Sort Order";
+            this.mnuSaveColumnLayout.Click += new System.EventHandler(this.mnuSaveColumnLayout_Click);
             // 
-            // mnuSaveCensusColumnLayout
+            // mnuResetColumns
             // 
-            this.mnuSaveCensusColumnLayout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuSaveCensusColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveCensusColumnLayout.Image")));
-            this.mnuSaveCensusColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
-            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(23, 22);
-            this.mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
-            this.mnuSaveCensusColumnLayout.Click += new System.EventHandler(this.mnuSaveCensusColumnLayout_Click);
+            this.mnuResetColumns.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mnuResetColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetColumns.Image")));
+            this.mnuResetColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnuResetColumns.Name = "mnuResetColumns";
+            this.mnuResetColumns.Size = new System.Drawing.Size(23, 22);
+            this.mnuResetColumns.Text = "Reset Column Sort Order to Default";
+            this.mnuResetColumns.Click += new System.EventHandler(this.mnuResetColumns_Click);
             // 
             // toolStripSeparator2
             // 
@@ -95,16 +95,6 @@
             this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.printToolStripButton.Text = "&Print";
             this.printToolStripButton.Click += new System.EventHandler(this.printToolStripButton_Click);
-            // 
-            // mnuResetCensusColumns
-            // 
-            this.mnuResetCensusColumns.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuResetCensusColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetCensusColumns.Image")));
-            this.mnuResetCensusColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuResetCensusColumns.Name = "mnuResetCensusColumns";
-            this.mnuResetCensusColumns.Size = new System.Drawing.Size(23, 22);
-            this.mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
-            this.mnuResetCensusColumns.Click += new System.EventHandler(this.mnuResetCensusColumns_Click);
             // 
             // printPreviewToolStripButton
             // 
@@ -131,19 +121,53 @@
             this.mnuExportToExcel.Text = "Export to Excel";
             this.mnuExportToExcel.Click += new System.EventHandler(this.mnuExportToExcel_Click);
             // 
+            // dgFacts
+            // 
+            this.dgFacts.AllowUserToAddRows = false;
+            this.dgFacts.AllowUserToDeleteRows = false;
+            this.dgFacts.AllowUserToOrderColumns = true;
+            this.dgFacts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgFacts.Location = new System.Drawing.Point(0, 25);
+            this.dgFacts.Name = "dgFacts";
+            this.dgFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgFacts.Size = new System.Drawing.Size(857, 337);
+            this.dgFacts.TabIndex = 2;
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsRecords});
+            this.statusStrip.Location = new System.Drawing.Point(0, 365);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(857, 22);
+            this.statusStrip.TabIndex = 3;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // tsRecords
+            // 
+            this.tsRecords.Name = "tsRecords";
+            this.tsRecords.Size = new System.Drawing.Size(118, 17);
+            this.tsRecords.Text = "toolStripStatusLabel1";
+            // 
             // Facts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(857, 387);
-            this.Controls.Add(this.dgCensus);
+            this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.dgFacts);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Facts";
             this.Text = "Facts";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCensus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).EndInit();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,13 +176,15 @@
         #endregion
 
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.DataGridView dgCensus;
-        private System.Windows.Forms.ToolStripButton mnuSaveCensusColumnLayout;
-        private System.Windows.Forms.ToolStripButton mnuResetCensusColumns;
+        private System.Windows.Forms.DataGridView dgFacts;
+        private System.Windows.Forms.ToolStripButton mnuSaveColumnLayout;
+        private System.Windows.Forms.ToolStripButton mnuResetColumns;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton printToolStripButton;
         private System.Windows.Forms.ToolStripButton printPreviewToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripButton mnuExportToExcel;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel tsRecords;
     }
 }
