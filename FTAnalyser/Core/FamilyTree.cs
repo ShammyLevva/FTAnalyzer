@@ -28,6 +28,7 @@ namespace FTAnalyzer
         private int maxAhnentafel = 0;
         private IList<DataErrorGroup> dataErrorTypes;
         private SortableBindingList<IDisplayLocation>[] displayLocations;
+        private SortableBindingList<IDisplayLooseDeath> looseDeaths;
         private TreeNode displayTreeRootNode;
         private static int DATA_ERROR_GROUPS = 17;
         
@@ -431,14 +432,20 @@ namespace FTAnalyzer
 
         #region Loose Deaths
 
-        public SortableBindingList<IDisplayLooseDeath> GetLooseDeaths()
+        public SortableBindingList<IDisplayLooseDeath> LooseDeaths
         {
-            SortableBindingList<IDisplayLooseDeath> result = new SortableBindingList<IDisplayLooseDeath>();
-            foreach (Individual ind in individuals)
+            get
             {
-                CheckLooseDeath(ind, result);
+                if (looseDeaths != null)
+                    return looseDeaths;
+                SortableBindingList<IDisplayLooseDeath> result = new SortableBindingList<IDisplayLooseDeath>();
+                foreach (Individual ind in individuals)
+                {
+                    CheckLooseDeath(ind, result);
+                }
+                looseDeaths = result;
+                return result;
             }
-            return result;
         }
 
         private void CheckLooseDeath(Individual indiv, SortableBindingList<IDisplayLooseDeath> result)

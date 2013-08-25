@@ -274,7 +274,7 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabLooseDeaths)
                 {
-                    SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.GetLooseDeaths();
+                    SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.LooseDeaths;
                     dgLooseDeaths.DataSource = looseDeathList;
                     mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + looseDeathList.Count;
@@ -973,53 +973,54 @@ namespace FTAnalyzer
                     Utilities.Printing p = new Utilities.Printing(rtbOutput);
                     printDocument.PrintPage += new PrintPageEventHandler(p.PrintPage);
                     printDocument.PrinterSettings = printDialog.PrinterSettings;
+                    printDocument.DocumentName = "GEDCOM Load Results";
                     printDocument.Print();
                 }
             }
             if (tabSelector.SelectedTab == tabIndividuals)
             {
-                PrintDataGrid(true, dgIndividuals);
+                PrintDataGrid(true, dgIndividuals, "List of Individuals");
             }
             if (tabSelector.SelectedTab == tabFamilies)
             {
-                PrintDataGrid(true, dgFamilies);
+                PrintDataGrid(true, dgFamilies, "List of Families");
             }
             if (tabSelector.SelectedTab == tabOccupations)
             {
-                PrintDataGrid(false, dgOccupations);
+                PrintDataGrid(false, dgOccupations, "List of Occupations");
             }
             if (tabSelector.SelectedTab == tabLocations)
             {
                 if (tabCtrlLocations.SelectedTab == tabCountries)
-                    PrintDataGrid(false, dgCountries);
+                    PrintDataGrid(false, dgCountries, "List of Countries");
                 if (tabCtrlLocations.SelectedTab == tabRegions)
-                    PrintDataGrid(false, dgRegions);
+                    PrintDataGrid(false, dgRegions, "List of Regions");
                 if (tabCtrlLocations.SelectedTab == tabSubRegions)
-                    PrintDataGrid(false, dgSubRegions);
+                    PrintDataGrid(false, dgSubRegions, "List of Sub Regions");
                 if (tabCtrlLocations.SelectedTab == tabAddresses)
-                    PrintDataGrid(false, dgAddresses);
+                    PrintDataGrid(false, dgAddresses, "List of Addresses");
                 if (tabCtrlLocations.SelectedTab == tabPlaces)
-                    PrintDataGrid(false, dgPlaces);
+                    PrintDataGrid(false, dgPlaces, "List of Places");
             }
             if (tabSelector.SelectedTab == tabDataErrors)
             {
-                PrintDataGrid(false, dgDataErrors);
+                PrintDataGrid(false, dgDataErrors, "List of Data Errors");
             }
             else if (tabSelector.SelectedTab == tabLooseDeaths)
             {
-                PrintDataGrid(true, dgLooseDeaths);
+                PrintDataGrid(true, dgLooseDeaths, "List of Loose Deaths");
             }
             else if (tabSelector.SelectedTab == tabTreetops)
             {
-                PrintDataGrid(true, dgTreeTops);
+                PrintDataGrid(true, dgTreeTops, "List of People at Top of Tree");
             }
             else if (tabSelector.SelectedTab == tabWarDead)
             {
-                PrintDataGrid(true, dgWarDead);
+                PrintDataGrid(true, dgWarDead, "List of Possible War Dead");
             }
         }
 
-        private void PrintDataGrid(bool landscape, DataGridView dg)
+        private void PrintDataGrid(bool landscape, DataGridView dg, string title)
         {
             PrintingDataGridViewProvider printProvider = PrintingDataGridViewProvider.Create(
                 printDocument, dg, true, true, true,
@@ -1027,6 +1028,7 @@ namespace FTAnalyzer
             printDialog.PrinterSettings.DefaultPageSettings.Landscape = landscape;
             if (printDialog.ShowDialog(this) == DialogResult.OK)
             {
+                printDocument.DocumentName = title;
                 printDocument.PrinterSettings = printDialog.PrinterSettings;
                 printDocument.Print();
             }
