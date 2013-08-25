@@ -12,6 +12,7 @@ namespace FTAnalyzer
         FactDate FactDate { get; }
         FactLocation Location { get; }
         string Comment { get; }
+        Age AgeAtFact { get; }
     }
 }
  

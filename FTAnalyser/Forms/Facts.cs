@@ -27,7 +27,7 @@ namespace FTAnalyzer.Forms
             this.individual = individual;
             this.facts = new SortableBindingList<IDisplayFact>();
             foreach (Fact f in individual.AllFacts)
-                facts.Add(new DisplayFact(individual.Name, f));
+                facts.Add(new DisplayFact(individual, individual.Name, f));
             this.Text = "Facts Report for " + individual.Name;
             SetupFacts();
         }

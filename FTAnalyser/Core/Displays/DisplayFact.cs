@@ -7,11 +7,14 @@ namespace FTAnalyzer
 {
     public class DisplayFact : IDisplayFact
     {
+        
         public string Name { get; private set; }
+        private Individual Ind { get; set; }
         private Fact Fact { get; set; }
 
-        public DisplayFact(string name, Fact fact)
+        public DisplayFact(Individual ind, string name, Fact fact)
         {
+            this.Ind = ind;
             this.Name = name;
             this.Fact = fact;
         }
@@ -20,5 +23,6 @@ namespace FTAnalyzer
         public FactDate FactDate { get { return Fact.FactDate; } }
         public FactLocation Location { get { return Fact.Location; } }
         public string Comment { get { return Fact.Comment; } }
+        public Age AgeAtFact { get { return Ind == null ? null : Ind.GetAge(Fact.FactDate); } }
     }
 }

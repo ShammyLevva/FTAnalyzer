@@ -463,21 +463,21 @@ namespace FTAnalyzer
                         name = Husband.Name + " & " + Wife.Name;
 
                 foreach(Fact f in Facts)
-                    results.Add(new DisplayFact(name, f));
+                    results.Add(new DisplayFact(null, name, f));
                 if (Husband != null)
                     foreach(Fact f in Husband.Facts)
-                        results.Add(new DisplayFact(Husband.Name, f));
+                        results.Add(new DisplayFact(Husband, Husband.Name, f));
                 if (Wife != null)
                     foreach (Fact f in Wife.Facts)
-                        results.Add(new DisplayFact(Wife.Name, f));
+                        results.Add(new DisplayFact(Wife, Wife.Name, f));
                 foreach (Individual c in Children)
                 {
                     foreach (Fact f in c.GetFacts(Fact.BIRTH))
-                        results.Add(new DisplayFact(c.Name, f));
+                        results.Add(new DisplayFact(c, c.Name, f));
                     foreach (Fact f in c.GetFacts(Fact.BAPTISM))
-                        results.Add(new DisplayFact(c.Name, f));
+                        results.Add(new DisplayFact(c, c.Name, f));
                     foreach (Fact f in c.GetFacts(Fact.CHRISTENING))
-                        results.Add(new DisplayFact(c.Name, f));
+                        results.Add(new DisplayFact(c, c.Name, f));
                 }
                 return results;
             }
