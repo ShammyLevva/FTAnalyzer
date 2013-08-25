@@ -92,7 +92,9 @@ namespace FactDateTest
             factLocation = new FactLocation(", Fareham Registration District, , Hampshire, ENG");
             Assert.IsTrue(factLocation.ToString().Equals("Fareham Registration District, , Hampshire, England"));
 
-            
+            factLocation = new FactLocation("U.S.A.");
+            Assert.IsTrue(factLocation.ToString().Equals("United States"));
+
             
         }
     }

@@ -6,37 +6,25 @@
       <CountryTypo from="CAN"     to="Canada" />
       <CountryTypo from="USA"     to="United States" />
       <CountryTypo from="US"      to="United States" />
-      <CountryTypo from="U.S"     to="United States" />
-      <CountryTypo from="U.S."    to="United States" />
-      <CountryTypo from="U.S.A"   to="United States" />
-      <CountryTypo from="U.S.A."  to="United States" />
+      <CountryTypo from="U S "    to="United States" />
+      <CountryTypo from="U S A"   to="United States" />
       <CountryTypo from="America" to="United States" />
       <CountryTypo from="United States of America" to="United States" />
       <CountryTypo from="US Of A" to="United States" />
       <CountryTypo from="NZ"      to="New Zealand" />
-      <CountryTypo from="NZ."     to="New Zealand" />
-      <CountryTypo from="N.Z"     to="New Zealand" />
-      <CountryTypo from="N.Z."    to="New Zealand" />
+      <CountryTypo from="N Z"     to="New Zealand" />
       <CountryTypo from="UK"      to="England" />
-      <CountryTypo from="UK."     to="England" />
-      <CountryTypo from="U.K"     to="England" />
-      <CountryTypo from="U.K."    to="England" />
-      <CountryTypo from="Eng."    to="England" />
+      <CountryTypo from="U K"     to="England" />
       <CountryTypo from="Eng"     to="England" />
-      <CountryTypo from="ENG."    to="England" />
       <CountryTypo from="ENG"     to="England" />
       <CountryTypo from="GB"      to="England" />
-      <CountryTypo from="GB."     to="England" />
       <CountryTypo from="G B"     to="England" />
-      <CountryTypo from="G.B."    to="England" />
       <CountryTypo from="Great Britain"    to="England" />
       <CountryTypo from="Aust"    to="Australia" />
-      <CountryTypo from="Aust."   to="Australia" />
       <CountryTypo from="AUS"     to="Australia" />
       <CountryTypo from="Eire"    to="Ireland" />
       <CountryTypo from="SCT"     to="Scotland" />
       <CountryTypo from="Scot"    to="Scotland" />
-      <CountryTypo from="Scot."   to="Scotland" />
       <CountryTypo from="Holland" to="Netherlands" />
       <CountryTypo from="The Netherlands" to="Netherlands" />
     </CountryTypos>
