@@ -29,11 +29,11 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
 
             printDocument.DefaultPageSettings.Margins =
-               new System.Drawing.Printing.Margins(40, 40, 40, 40);
+               new System.Drawing.Printing.Margins(15,15,15,15);
 
             printProvider = PrintingDataGridViewProvider.Create(
                 printDocument, dgCensus, true, true, true,
-                new TitlePrintBlock(this.Text), null, null);
+                new TitlePrintBlock("Missing from Census Report"), null, null);
 
             printDocument.DefaultPageSettings.Landscape = true;
             this.censusLocation = new FactLocation(censusCountry);
@@ -187,6 +187,7 @@ namespace FTAnalyzer.Forms
             if (printDialog.ShowDialog(this) == DialogResult.OK)
             {
                 printDocument.PrinterSettings = printDialog.PrinterSettings;
+                printDocument.DocumentName = "Missing from Census Report";
                 printDocument.Print();
             }
         }

@@ -28,7 +28,7 @@ namespace FTAnalyzer.Forms
             this.facts = new SortableBindingList<IDisplayFact>();
             foreach (Fact f in individual.AllFacts)
                 facts.Add(new DisplayFact(individual.Name, f));
-            this.Text = "All Facts for " + individual.Name;
+            this.Text = "Facts Report for " + individual.Name;
             SetupFacts();
         }
 
@@ -40,14 +40,14 @@ namespace FTAnalyzer.Forms
             this.facts = new SortableBindingList<IDisplayFact>();
             foreach (DisplayFact f in family.AllDisplayFacts)
                 facts.Add(f);
-            this.Text = "All Facts for " + family.FamilyRef;
+            this.Text = "Facts Report for " + family.FamilyRef;
             SetupFacts();
         }
 
         private void SetupPrinting()
         {
             printDocument.DefaultPageSettings.Margins =
-                new System.Drawing.Printing.Margins(40, 40, 40, 40);
+                new System.Drawing.Printing.Margins(15,15,15,15);
 
             printProvider = PrintingDataGridViewProvider.Create(
                 printDocument, dgFacts, true, true, true,
@@ -76,6 +76,7 @@ namespace FTAnalyzer.Forms
             if (printDialog.ShowDialog(this) == DialogResult.OK)
             {
                 printDocument.PrinterSettings = printDialog.PrinterSettings;
+                printDocument.DocumentName = this.Text;
                 printDocument.Print();
             }
         }

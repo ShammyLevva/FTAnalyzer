@@ -47,11 +47,11 @@ namespace FTAnalyzer.Forms
             styles.Add(5, lcNoCensus);
 
             printDocument.DefaultPageSettings.Margins =
-               new System.Drawing.Printing.Margins(40, 40, 40, 40);
+               new System.Drawing.Printing.Margins(15,15,15,15);
 
             printProvider = PrintingDataGridViewProvider.Create(
                 printDocument, dgReportSheet, true, true, true,
-                new TitlePrintBlock(this.Text), null, null);
+                new TitlePrintBlock("Lost Cousins Census Report"), null, null);
 
             printDocument.DefaultPageSettings.Landscape = true;
 
@@ -174,6 +174,7 @@ namespace FTAnalyzer.Forms
             if (printDialog.ShowDialog(this) == DialogResult.OK)
             {
                 printDocument.PrinterSettings = printDialog.PrinterSettings;
+                printDocument.DocumentName = "Lost Cousins Census Report";
                 printDocument.Print();
             }
         }

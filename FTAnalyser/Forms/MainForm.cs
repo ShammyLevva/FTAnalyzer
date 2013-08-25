@@ -962,7 +962,7 @@ namespace FTAnalyzer
         {
             printDocument = new PrintDocument();
             printDocument.DefaultPageSettings.Margins =
-               new System.Drawing.Printing.Margins(20, 20, 40, 40);
+               new System.Drawing.Printing.Margins(20, 20, 20, 20);
             printDocument.DefaultPageSettings.Landscape = true;
             printDialog.PrinterSettings.DefaultPageSettings.Landscape = true;
 
@@ -1024,7 +1024,7 @@ namespace FTAnalyzer
         {
             PrintingDataGridViewProvider printProvider = PrintingDataGridViewProvider.Create(
                 printDocument, dg, true, true, true,
-                new TitlePrintBlock(this.Text), null, null);
+                new TitlePrintBlock(title), null, null);
             printDialog.PrinterSettings.DefaultPageSettings.Landscape = landscape;
             if (printDialog.ShowDialog(this) == DialogResult.OK)
             {

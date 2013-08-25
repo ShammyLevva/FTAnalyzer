@@ -407,6 +407,7 @@
     <Compile Include="Utilities\DoubleMetaphone.cs" />
     <Compile Include="Utilities\EnhancedTextInfo.cs" />
     <Compile Include="Utilities\ExportToExcel.cs" />
+    <Compile Include="Utilities\FooterPrintBlock.cs" />
     <Compile Include="Utilities\HttpUtility.cs" />
     <Compile Include="Utilities\ListtoDataTableConvertor.cs" />
     <Compile Include="Utilities\Printing.cs" />
