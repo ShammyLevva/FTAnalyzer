@@ -92,7 +92,7 @@ namespace FTAnalyzer.Forms
         {
             this.Cursor = Cursors.WaitCursor;
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            DataTable dt = convertor.ToDataTable(dgFacts.DataSource as List<IDisplayFact>);
+            DataTable dt = convertor.ToDataTable((dgFacts.DataSource as SortableBindingList<IDisplayFact>).ToList());
             ExportToExcel.Export(dt);
             this.Cursor = Cursors.Default;
         }
