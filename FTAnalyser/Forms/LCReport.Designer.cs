@@ -208,7 +208,7 @@
             this.Controls.Add(this.dgReportSheet);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LCReport";
-            this.Text = "Census Report Result";
+            this.Text = "Lost Cousins Census Report Result";
             ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
