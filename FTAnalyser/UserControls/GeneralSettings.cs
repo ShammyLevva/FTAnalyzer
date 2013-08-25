@@ -108,10 +108,10 @@ namespace FTAnalyzer.UserControls
 
         private void chkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)
         {
-            if (FTAnalyzer.Properties.GeneralSettings.Default.AllowEmptyLocations)
-                MessageBox.Show("Empty parts of a location will be allowed when you load the next GEDCOM file");
-            else
-                MessageBox.Show("Locations with empty parts will be ignored when you load the next GEDCOM file");
+            //if (FTAnalyzer.Properties.GeneralSettings.Default.AllowEmptyLocations)
+            //    MessageBox.Show("Empty parts of a location will be allowed when you load the next GEDCOM file");
+            //else
+            //    MessageBox.Show("Locations with empty parts will be ignored when you load the next GEDCOM file");
         }
     }
 }
