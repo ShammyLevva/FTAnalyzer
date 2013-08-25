@@ -38,7 +38,7 @@ namespace FTAnalyzer
                 {
                     result = true;
                     Wife.Status = Individual.WIFE;
-                    facts.AddRange(Wife.AllFacts);
+                    facts.AddRange(Wife.Facts);
                 }
                 else
                     Wife = null;
@@ -48,7 +48,7 @@ namespace FTAnalyzer
                 {
                     result = true;
                     Husband.Status = Individual.HUSBAND;
-                    facts.AddRange(Husband.AllFacts);
+                    facts.AddRange(Husband.Facts);
                 }
                 else
                     Husband = null;
@@ -70,7 +70,7 @@ namespace FTAnalyzer
                     {
                         result = true;
                         censusChildren.Add(child);
-                        facts.AddRange(child.AllFacts);
+                        facts.AddRange(child.Facts);
                     }
                 }
                 Children = censusChildren;

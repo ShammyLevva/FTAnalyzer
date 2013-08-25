@@ -292,7 +292,7 @@ namespace FTAnalyzer
                 List<ExportFacts> result = new List<ExportFacts>();
                 foreach (Individual ind in individuals)
                 {
-                    foreach (Fact f in ind.AllFacts)
+                    foreach (Fact f in ind.Facts)
                         result.Add(new ExportFacts(ind, f));
                     foreach (Family fam in ind.FamiliesAsParent)
                         foreach (Fact famfact in fam.Facts)
@@ -952,7 +952,7 @@ namespace FTAnalyzer
                         if (minAge > 110)
                             errors[(int)dataerror.AGED_MORE_THAN_110].Add(new DataError(ind, "Aged over 110 before died " + ind.DeathDate));
                     }
-                    foreach (Fact f in ind.AllFacts)
+                    foreach (Fact f in ind.Facts)
                     {
                         if (f.FactType != Fact.BIRTH && f.FactDate.IsBefore(ind.BirthDate))
                         {

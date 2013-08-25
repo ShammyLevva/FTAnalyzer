@@ -372,11 +372,11 @@ namespace FTAnalyzer
                     if (f.FactDate.AverageDate != FactDate.UNKNOWN_DATE)
                         dates.Add(f.FactDate.AverageDate);
                 if (Husband != null)
-                    foreach (Fact f in Husband.AllFacts)
+                    foreach (Fact f in Husband.Facts)
                         if (f.FactDate.AverageDate != FactDate.UNKNOWN_DATE)
                             dates.Add(f.FactDate.AverageDate);
                 if (Wife != null)
-                    foreach (Fact f in Wife.AllFacts)
+                    foreach (Fact f in Wife.Facts)
                         if (f.FactDate.AverageDate != FactDate.UNKNOWN_DATE)
                             dates.Add(f.FactDate.AverageDate);
                 foreach (Individual c in Children)
@@ -427,11 +427,11 @@ namespace FTAnalyzer
                 // add the family facts then the facts from each individual
                 results.Add(Facts);
                 if (Husband != null)
-                    results.Add(Husband.AllFacts);
+                    results.Add(Husband.Facts);
                 if (Wife != null)
-                    results.Add(Wife.AllFacts);
+                    results.Add(Wife.Facts);
                 foreach (Individual c in Children)
-                    results.Add(c.AllFacts);
+                    results.Add(c.Facts);
                 return results.SelectMany(x => x);
             }
         }

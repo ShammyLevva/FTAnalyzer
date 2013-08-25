@@ -175,12 +175,24 @@ namespace FTAnalyzer
             }
         }
 
-        public IList<Fact> AllFacts 
+        public IList<Fact> Facts 
         { 
             get { return this.facts; } 
         }
 
-        public IList<FactLocation> AllLocations
+        public IList<Fact> AllFacts
+        {
+            get
+            {
+                List<Fact> allfacts = new List<Fact>();
+                allfacts.AddRange(this.facts);
+                foreach (Family f in familiesAsParent)
+                    allfacts.AddRange(f.Facts);
+                return allfacts;
+            }
+        }
+
+        public IList<FactLocation> Locations
         {
             get { return this.locations; }
         }
