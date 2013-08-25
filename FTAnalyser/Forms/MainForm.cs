@@ -96,6 +96,19 @@ namespace FTAnalyzer
                 rtbOutput.Text = "";
                 rtbFamilySearchResults.Text = "";
                 pbSources.Value = pbIndividuals.Value = pbFamilies.Value = 0;
+                dgCountries.DataSource = null;
+                dgRegions.DataSource = null;
+                dgSubRegions.DataSource = null;
+                dgAddresses.DataSource = null;
+                dgPlaces.DataSource = null;
+                dgIndividuals.DataSource = null;
+                dgFamilies.DataSource = null;
+                dgTreeTops.DataSource = null;
+                dgWarDead.DataSource = null;
+                dgLooseDeaths.DataSource = null;
+                dgDataErrors.DataSource = null;
+                dgOccupations.DataSource = null;
+                treeViewLocations.Nodes.Clear();
                 Application.DoEvents();
                 if (!stopProcessing)
                 {
@@ -268,22 +281,18 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabLocations)
                 {
+                    HourGlass(true);
+                    tabCtrlLocations.SelectedIndex = 0;
                     tsCountLabel.Text = "";
-                    dgCountries.DataSource = null;
-                    dgRegions.DataSource = null;
-                    dgSubRegions.DataSource = null;
-                    dgAddresses.DataSource = null;
-                    dgPlaces.DataSource = null;
-                    treeViewLocations.Nodes.Clear();
-                    treeViewLocations.Nodes.AddRange(ft.GetAllLocationsTreeNodes(treeViewLocations.Font));
                     Application.DoEvents();
+                    treeViewLocations.Nodes.AddRange(ft.GetAllLocationsTreeNodes(treeViewLocations.Font));
                     mnuPrint.Enabled = false;
                     dgCountries.DataSource = ft.AllDisplayCountries;
                     dgRegions.DataSource = ft.AllDisplayRegions;
                     dgSubRegions.DataSource = ft.AllDisplaySubRegions;
                     dgAddresses.DataSource = ft.AllDisplayAddresses;
                     dgPlaces.DataSource = ft.AllDisplayPlaces;
-                    tabCtrlLocations.SelectedIndex = 0;
+                    HourGlass(false);
                 }
                 HourGlass(false);
             }
@@ -325,7 +334,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void dgParishes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgSubRegions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             HourGlass(true);
             FactLocation loc = (FactLocation)dgSubRegions.CurrentRow.DataBoundItem;
@@ -1408,7 +1417,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void dgParishes_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgSubRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {
