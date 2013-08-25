@@ -220,7 +220,8 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("\nFound no census or residence facts in GEDCOM File.\n");
                 xmlErrorbox.AppendText("This is probably because you have recorded census facts as notes\n");
                 xmlErrorbox.AppendText("This will mean that the census report will show everyone as not yet found on census\n");
-                xmlErrorbox.AppendText("and the Lost Cousins report will report no-one with a census needing entered to Lost Cousins\n");
+                xmlErrorbox.AppendText("and the Lost Cousins report will report no-one with a census needing to be entered\n");
+                xmlErrorbox.AppendText("onto your Lost Cousins My Ancestors page.\n");
             }
         }
 

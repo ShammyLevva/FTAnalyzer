@@ -183,7 +183,7 @@ namespace FTAnalyzer
                     System.Windows.Forms.Application.DoEvents();
                     if (badLineCount > 20)
                     {
-                        DialogResult result = MessageBox.Show("Found more than 20 errrs in the GEDCOM file.\nContinue Loading?",
+                        DialogResult result = MessageBox.Show("Found more than 20 errors in the GEDCOM file.\nContinue Loading?",
                                                          "Continue Loading?", MessageBoxButtons.YesNo);
                         if (result == DialogResult.Yes)
                             badLineCount = 0;
