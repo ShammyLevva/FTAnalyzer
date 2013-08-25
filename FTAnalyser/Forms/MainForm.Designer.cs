@@ -523,6 +523,7 @@
             this.dgFamilies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgFamilies.Size = new System.Drawing.Size(931, 402);
             this.dgFamilies.TabIndex = 1;
+            this.dgFamilies.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFamilies_CellContentDoubleClick);
             // 
             // tabLocations
             // 

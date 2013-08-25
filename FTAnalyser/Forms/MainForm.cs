@@ -1495,5 +1495,15 @@ namespace FTAnalyzer
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.Copy;
         }
+
+        private void dgFamilies_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string famID = (string)dgIndividuals.CurrentRow.Cells["FamilyID"].Value;
+            Family fam = ft.GetFamily(famID);
+            Facts factForm = new Facts(fam);
+            DisposeDuplicateForms(factForm);
+            factForm.Show();
+
+        }
     }
 }
