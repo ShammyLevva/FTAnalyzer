@@ -59,5 +59,14 @@ namespace FTAnalyzer.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string FTA_0002 {
+            get {
+                return ResourceManager.GetString("FTA_0002", resourceCulture);
+            }
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.1.2.0";
+        private string VERSION = "2.1.3.0";
         //private bool _checkForUpdatesEnabled = false;
         //private bool _showNoUpdateMessage = false;
         //private System.Threading.Timer _timerCheckForUpdates;
@@ -1321,12 +1321,12 @@ namespace FTAnalyzer
 
         private void dgIndividuals_MouseDown(object sender, MouseEventArgs e)
         {
+            DataGridView.HitTestInfo hti = dgIndividuals.HitTest(e.Location.X, e.Location.Y);
             if (e.Button == MouseButtons.Right)
             {
                 var ht = dgIndividuals.HitTest(e.X, e.Y);
                 if (ht.Type != DataGridViewHitTestType.ColumnHeader)
                 {
-                    DataGridView.HitTestInfo hti = dgIndividuals.HitTest(e.Location.X, e.Location.Y);
                     if (hti.RowIndex >= 0 && hti.ColumnIndex >= 0)
                     {
                         dgIndividuals.CurrentCell = dgIndividuals.Rows[hti.RowIndex].Cells[hti.ColumnIndex];
@@ -1339,11 +1339,14 @@ namespace FTAnalyzer
             }
             if (e.Clicks == 2)
             {
-                string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
-                Individual ind = ft.GetIndividual(indID);
-                Facts factForm = new Facts(ind);
-                DisposeDuplicateForms(factForm);
-                factForm.Show();
+                if (hti.RowIndex >= 0 && hti.ColumnIndex >= 0)
+                {
+                    string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+                    Individual ind = ft.GetIndividual(indID);
+                    Facts factForm = new Facts(ind);
+                    DisposeDuplicateForms(factForm);
+                    factForm.Show();
+                }
             }
         }
 
@@ -1496,14 +1499,40 @@ namespace FTAnalyzer
                 e.Effect = DragDropEffects.Copy;
         }
 
-        private void dgFamilies_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgFamilies_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            string famID = (string)dgIndividuals.CurrentRow.Cells["FamilyID"].Value;
-            Family fam = ft.GetFamily(famID);
-            Facts factForm = new Facts(fam);
-            DisposeDuplicateForms(factForm);
-            factForm.Show();
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                string famID = (string)dgFamilies.CurrentRow.Cells["FamilyID"].Value;
+                Family fam = ft.GetFamily(famID);
+                Facts factForm = new Facts(fam);
+                DisposeDuplicateForms(factForm);
+                factForm.Show();
+            }
+        }
 
+        private void dgDataErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                string indID = (string)dgDataErrors.CurrentRow.Cells["IndividualID"].Value;
+                Individual ind = ft.GetIndividual(indID);
+                Facts factForm = new Facts(ind);
+                DisposeDuplicateForms(factForm);
+                factForm.Show();
+            }
+        }
+
+        private void dgLooseDeaths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                string indID = (string)dgLooseDeaths.CurrentRow.Cells["IndividualID"].Value;
+                Individual ind = ft.GetIndividual(indID);
+                Facts factForm = new Facts(ind);
+                DisposeDuplicateForms(factForm);
+                factForm.Show();
+            }
         }
     }
 }

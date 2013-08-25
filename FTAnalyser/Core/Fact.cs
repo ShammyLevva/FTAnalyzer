@@ -9,7 +9,7 @@ using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer
 {
-    public class Fact : IDisplayFact
+    public class Fact
     {
         public const string ADOPTION = "ADOP", ANNULMENT = "ANUL", BAPTISM = "BAPM",
                 BAR_MITZVAH = "BARM", BAS_MITZVAH = "BASM", BIRTH = "BIRT",
@@ -269,8 +269,6 @@ namespace FTAnalyzer
         public FactDate FactDate { get; private set; }
 
         public string FactType { get; private set; }
-
-        public string TypeOfFact { get { return GetFactTypeDescription(FactType); } }
 
         public string DateString
         {

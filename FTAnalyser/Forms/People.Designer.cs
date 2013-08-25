@@ -46,6 +46,7 @@
             this.dgIndividuals.Name = "dgIndividuals";
             this.dgIndividuals.Size = new System.Drawing.Size(1038, 283);
             this.dgIndividuals.TabIndex = 1;
+            this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgIndividuals_CellDoubleClick);
             this.dgIndividuals.SelectionChanged += new System.EventHandler(this.dgIndividuals_SelectionChanged);
             // 
             // dgFamilies
@@ -57,6 +58,7 @@
             this.dgFamilies.Name = "dgFamilies";
             this.dgFamilies.Size = new System.Drawing.Size(1038, 283);
             this.dgFamilies.TabIndex = 2;
+            this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFamilies_CellDoubleClick);
             // 
             // People
             // 

@@ -419,7 +419,7 @@ namespace FTAnalyzer
             return false;
         }
 
-        public IEnumerable<Fact> AllFamilyFacts
+        private IEnumerable<Fact> AllFamilyFacts
         {
             get
             {
@@ -433,6 +433,53 @@ namespace FTAnalyzer
                 foreach (Individual c in Children)
                     results.Add(c.Facts);
                 return results.SelectMany(x => x);
+            }
+        }
+
+        public IEnumerable<DisplayFact> AllDisplayFacts
+        {
+            get
+            {
+                List<DisplayFact> results = new List<DisplayFact>();
+                // add the family facts then the facts from each individual
+                //Facts.Select(f => results.Add(new DisplayFact(null, f)));
+                //if (Husband != null)
+                //    Husband.Facts.Select(f => results.Add(new DisplayFact(Husband, f)));
+                //if (Wife != null)
+                //    results.Add(Wife.Facts);
+                //foreach (Individual c in Children)
+                //    results.Add(c.Facts);
+                //return results.SelectMany(x => x);
+                string name;
+                if(Husband == null)
+                    if(Wife == null)
+                        name = string.Empty;
+                    else
+                        name = Wife.Name;
+                else
+                    if(Wife == null)
+                        name = Husband.Name;
+                    else
+                        name = Husband.Name + " & " + Wife.Name;
+
+                foreach(Fact f in Facts)
+                    results.Add(new DisplayFact(name, f));
+                if (Husband != null)
+                    foreach(Fact f in Husband.Facts)
+                        results.Add(new DisplayFact(Husband.Name, f));
+                if (Wife != null)
+                    foreach (Fact f in Wife.Facts)
+                        results.Add(new DisplayFact(Wife.Name, f));
+                foreach (Individual c in Children)
+                {
+                    foreach (Fact f in c.GetFacts(Fact.BIRTH))
+                        results.Add(new DisplayFact(c.Name, f));
+                    foreach (Fact f in c.GetFacts(Fact.BAPTISM))
+                        results.Add(new DisplayFact(c.Name, f));
+                    foreach (Fact f in c.GetFacts(Fact.CHRISTENING))
+                        results.Add(new DisplayFact(c.Name, f));
+                }
+                return results;
             }
         }
     }

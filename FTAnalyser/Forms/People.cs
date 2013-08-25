@@ -13,12 +13,12 @@ namespace FTAnalyzer.Forms
     public partial class People : Form
     {
         private bool selectRow = false;
-        private Dictionary<IDisplayIndividual,IDisplayFamily> families;
+        private Dictionary<IDisplayIndividual, IDisplayFamily> families;
 
         public People()
         {
             InitializeComponent();
-            People_Resize(this, null); 
+            People_Resize(this, null);
         }
 
         public void setLocation(FactLocation loc, int level)
@@ -27,7 +27,7 @@ namespace FTAnalyzer.Forms
             FamilyTree ft = FamilyTree.Instance;
             IEnumerable<Individual> listInd = ft.GetIndividualsAtLocation(loc, level);
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
-            foreach(Individual i in listInd)
+            foreach (Individual i in listInd)
                 dsInd.Add(i);
             dgIndividuals.DataSource = dsInd;
             dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
@@ -139,6 +139,28 @@ namespace FTAnalyzer.Forms
             int height = (this.Height - 40) / 2;
             dgIndividuals.Height = height;
             dgFamilies.Height = height;
+        }
+
+        private void dgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+                Individual ind = FamilyTree.Instance.GetIndividual(indID);
+                Facts factForm = new Facts(ind);
+                factForm.Show();
+            }
+        }
+
+        private void dgFamilies_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                string famID = (string)dgFamilies.CurrentRow.Cells["FamilyID"].Value;
+                Family fam = FamilyTree.Instance.GetFamily(famID);
+                Facts factForm = new Facts(fam);
+                factForm.Show();
+            }
         }
     }
 }

@@ -22,8 +22,8 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
             this.individual = individual;
             this.facts = new SortableBindingList<IDisplayFact>();
-            foreach (IDisplayFact f in individual.AllFacts)
-                facts.Add(f);
+            foreach (Fact f in individual.AllFacts)
+                facts.Add(new DisplayFact(individual.Name,f));
             this.Text = "All Facts for " + individual.Name;
             SetupFacts();
         }
@@ -33,7 +33,7 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
             this.family = family;
             this.facts = new SortableBindingList<IDisplayFact>();
-            foreach (IDisplayFact f in family.AllFamilyFacts)
+            foreach (DisplayFact f in family.AllDisplayFacts)
                 facts.Add(f);
             this.Text = "All Facts for " + family.FamilyRef;
             SetupFacts();

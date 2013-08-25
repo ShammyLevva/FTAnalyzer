@@ -144,6 +144,7 @@
     <Compile Include="Core\Countries.cs" />
     <Compile Include="Core\DataError.cs" />
     <Compile Include="Core\DataErrorGroup.cs" />
+    <Compile Include="Core\Displays\DisplayFact.cs" />
     <Compile Include="Core\Displays\IDisplayFact.cs" />
     <Compile Include="Core\Displays\IDisplayLCReport.cs" />
     <Compile Include="Core\Displays\DisplayOccupation.cs" />

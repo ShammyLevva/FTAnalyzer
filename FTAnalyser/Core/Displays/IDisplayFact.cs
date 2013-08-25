@@ -7,6 +7,7 @@ namespace FTAnalyzer
 {
     public interface IDisplayFact
     {
+        string Name { get; }
         string TypeOfFact { get; }
         FactDate FactDate { get; }
         FactLocation Location { get; }
