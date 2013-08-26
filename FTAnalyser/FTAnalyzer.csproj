@@ -146,7 +146,7 @@
     <Compile Include="Core\DataErrorGroup.cs" />
     <Compile Include="Core\Displays\DisplayFact.cs" />
     <Compile Include="Core\Displays\IDisplayFact.cs" />
-    <Compile Include="Core\Displays\IDisplayLCReport.cs" />
+    <Compile Include="Core\Displays\IDisplayColouredCensus.cs" />
     <Compile Include="Core\Displays\DisplayOccupation.cs" />
     <Compile Include="Core\Displays\IDisplayOccupation.cs" />
     <Compile Include="Core\Exports\ExportFacts.cs" />
@@ -182,11 +182,11 @@
     <Compile Include="Forms\Chart.Designer.cs">
       <DependentUpon>Chart.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LCReport.cs">
+    <Compile Include="Forms\ColouredCensus.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LCReport.Designer.cs">
-      <DependentUpon>LCReport.cs</DependentUpon>
+    <Compile Include="Forms\ColouredCensus.Designer.cs">
+      <DependentUpon>ColouredCensus.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\GoogleMap.cs">
       <SubType>Form</SubType>
@@ -215,8 +215,8 @@
     <EmbeddedResource Include="Forms\Chart.resx">
       <DependentUpon>Chart.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LCReport.resx">
-      <DependentUpon>LCReport.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ColouredCensus.resx">
+      <DependentUpon>ColouredCensus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GoogleMap.resx">
       <DependentUpon>GoogleMap.cs</DependentUpon>

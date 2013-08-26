@@ -90,7 +90,6 @@
             this.tabLooseDeaths = new System.Windows.Forms.TabPage();
             this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
             this.tabCensus = new System.Windows.Forms.TabPage();
-            this.btnLCReport2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSurname = new System.Windows.Forms.TextBox();
             this.ckbNoLocations = new System.Windows.Forms.CheckBox();
@@ -100,9 +99,8 @@
             this.btnShowResults = new System.Windows.Forms.Button();
             this.cenDate = new Controls.CensusDateSelector();
             this.censusCountry = new Controls.CensusCountry();
-            this.relationTypes = new Controls.RelationTypes();
+            this.relTypesCensus = new Controls.RelationTypes();
             this.tabLostCousins = new System.Windows.Forms.TabPage();
-            this.btnLCReport = new System.Windows.Forms.Button();
             this.ckbLCIgnoreCountry = new System.Windows.Forms.CheckBox();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.btnLC1911EW = new System.Windows.Forms.Button();
@@ -116,6 +114,12 @@
             this.btnLC1881EW = new System.Windows.Forms.Button();
             this.btnLC1881Canada = new System.Windows.Forms.Button();
             this.btnLC1881Scot = new System.Windows.Forms.Button();
+            this.tabColoured = new System.Windows.Forms.TabPage();
+            this.btnColouredCensus = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtColouredSurname = new System.Windows.Forms.TextBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.relTypesColoured = new Controls.RelationTypes();
             this.tabFamilySearch = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
             this.txtFamilySearchSurname = new System.Windows.Forms.TextBox();
@@ -190,6 +194,7 @@
             this.tabCensus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
             this.tabLostCousins.SuspendLayout();
+            this.tabColoured.SuspendLayout();
             this.tabFamilySearch.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabTreetops.SuspendLayout();
@@ -379,6 +384,7 @@
             this.tabSelector.Controls.Add(this.tabLooseDeaths);
             this.tabSelector.Controls.Add(this.tabCensus);
             this.tabSelector.Controls.Add(this.tabLostCousins);
+            this.tabSelector.Controls.Add(this.tabColoured);
             this.tabSelector.Controls.Add(this.tabFamilySearch);
             this.tabSelector.Controls.Add(this.tabTreetops);
             this.tabSelector.Controls.Add(this.tabWarDead);
@@ -854,7 +860,6 @@
             // 
             // tabCensus
             // 
-            this.tabCensus.Controls.Add(this.btnLCReport2);
             this.tabCensus.Controls.Add(this.label1);
             this.tabCensus.Controls.Add(this.txtSurname);
             this.tabCensus.Controls.Add(this.ckbNoLocations);
@@ -864,7 +869,7 @@
             this.tabCensus.Controls.Add(this.btnShowResults);
             this.tabCensus.Controls.Add(this.cenDate);
             this.tabCensus.Controls.Add(this.censusCountry);
-            this.tabCensus.Controls.Add(this.relationTypes);
+            this.tabCensus.Controls.Add(this.relTypesCensus);
             this.tabCensus.Location = new System.Drawing.Point(4, 22);
             this.tabCensus.Name = "tabCensus";
             this.tabCensus.Padding = new System.Windows.Forms.Padding(3);
@@ -872,16 +877,6 @@
             this.tabCensus.TabIndex = 0;
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
-            // 
-            // btnLCReport2
-            // 
-            this.btnLCReport2.Location = new System.Drawing.Point(606, 82);
-            this.btnLCReport2.Name = "btnLCReport2";
-            this.btnLCReport2.Size = new System.Drawing.Size(185, 23);
-            this.btnLCReport2.TabIndex = 21;
-            this.btnLCReport2.Text = "View Lost Cousins census Report";
-            this.btnLCReport2.UseVisualStyleBackColor = true;
-            this.btnLCReport2.Click += new System.EventHandler(this.btnLCReport2_Click);
             // 
             // label1
             // 
@@ -959,9 +954,9 @@
             // 
             this.btnShowResults.Location = new System.Drawing.Point(6, 134);
             this.btnShowResults.Name = "btnShowResults";
-            this.btnShowResults.Size = new System.Drawing.Size(82, 25);
+            this.btnShowResults.Size = new System.Drawing.Size(150, 25);
             this.btnShowResults.TabIndex = 4;
-            this.btnShowResults.Text = "Show Results";
+            this.btnShowResults.Text = "Show Missing from Census";
             this.btnShowResults.UseVisualStyleBackColor = true;
             this.btnShowResults.Click += new System.EventHandler(this.btnShowResults_Click);
             // 
@@ -986,16 +981,15 @@
             this.censusCountry.UKEnabled = false;
             this.censusCountry.CountryChanged += new System.EventHandler(this.censusCountry_CountryChanged);
             // 
-            // relationTypes
+            // relTypesCensus
             // 
-            this.relationTypes.Location = new System.Drawing.Point(272, 6);
-            this.relationTypes.Name = "relationTypes";
-            this.relationTypes.Size = new System.Drawing.Size(325, 78);
-            this.relationTypes.TabIndex = 15;
+            this.relTypesCensus.Location = new System.Drawing.Point(272, 6);
+            this.relTypesCensus.Name = "relTypesCensus";
+            this.relTypesCensus.Size = new System.Drawing.Size(325, 78);
+            this.relTypesCensus.TabIndex = 15;
             // 
             // tabLostCousins
             // 
-            this.tabLostCousins.Controls.Add(this.btnLCReport);
             this.tabLostCousins.Controls.Add(this.ckbLCIgnoreCountry);
             this.tabLostCousins.Controls.Add(this.linkLabel2);
             this.tabLostCousins.Controls.Add(this.btnLC1911EW);
@@ -1016,16 +1010,6 @@
             this.tabLostCousins.TabIndex = 5;
             this.tabLostCousins.Text = "Lost Cousins";
             this.tabLostCousins.UseVisualStyleBackColor = true;
-            // 
-            // btnLCReport
-            // 
-            this.btnLCReport.Location = new System.Drawing.Point(22, 273);
-            this.btnLCReport.Name = "btnLCReport";
-            this.btnLCReport.Size = new System.Drawing.Size(185, 23);
-            this.btnLCReport.TabIndex = 17;
-            this.btnLCReport.Text = "View Lost Cousins census Report";
-            this.btnLCReport.UseVisualStyleBackColor = true;
-            this.btnLCReport.Click += new System.EventHandler(this.btnLCReport_Click);
             // 
             // ckbLCIgnoreCountry
             // 
@@ -1169,6 +1153,65 @@
             this.btnLC1881Scot.Text = "1881 Scotland Census";
             this.btnLC1881Scot.UseVisualStyleBackColor = true;
             this.btnLC1881Scot.Click += new System.EventHandler(this.btnLC1881Scot_Click);
+            // 
+            // tabColoured
+            // 
+            this.tabColoured.Controls.Add(this.btnColouredCensus);
+            this.tabColoured.Controls.Add(this.label10);
+            this.tabColoured.Controls.Add(this.txtColouredSurname);
+            this.tabColoured.Controls.Add(this.checkBox2);
+            this.tabColoured.Controls.Add(this.relTypesColoured);
+            this.tabColoured.Location = new System.Drawing.Point(4, 22);
+            this.tabColoured.Name = "tabColoured";
+            this.tabColoured.Size = new System.Drawing.Size(931, 402);
+            this.tabColoured.TabIndex = 12;
+            this.tabColoured.Text = "Coloured Charts";
+            this.tabColoured.UseVisualStyleBackColor = true;
+            // 
+            // btnColouredCensus
+            // 
+            this.btnColouredCensus.Location = new System.Drawing.Point(8, 61);
+            this.btnColouredCensus.Name = "btnColouredCensus";
+            this.btnColouredCensus.Size = new System.Drawing.Size(185, 23);
+            this.btnColouredCensus.TabIndex = 32;
+            this.btnColouredCensus.Text = "View Census Years Report";
+            this.btnColouredCensus.UseVisualStyleBackColor = true;
+            this.btnColouredCensus.Click += new System.EventHandler(this.btnColouredCensus_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(603, 17);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(49, 13);
+            this.label10.TabIndex = 31;
+            this.label10.Text = "Surname";
+            // 
+            // txtColouredSurname
+            // 
+            this.txtColouredSurname.Location = new System.Drawing.Point(658, 14);
+            this.txtColouredSurname.Name = "txtColouredSurname";
+            this.txtColouredSurname.Size = new System.Drawing.Size(201, 20);
+            this.txtColouredSurname.TabIndex = 30;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.Location = new System.Drawing.Point(8, 17);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(213, 17);
+            this.checkBox2.TabIndex = 25;
+            this.checkBox2.Text = "Treat \'Residence\' facts as Census facts";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // relTypesColoured
+            // 
+            this.relTypesColoured.Location = new System.Drawing.Point(272, 6);
+            this.relTypesColoured.Name = "relTypesColoured";
+            this.relTypesColoured.Size = new System.Drawing.Size(325, 78);
+            this.relTypesColoured.TabIndex = 26;
             // 
             // tabFamilySearch
             // 
@@ -1628,6 +1671,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).EndInit();
             this.tabLostCousins.ResumeLayout(false);
             this.tabLostCousins.PerformLayout();
+            this.tabColoured.ResumeLayout(false);
+            this.tabColoured.PerformLayout();
             this.tabFamilySearch.ResumeLayout(false);
             this.tabFamilySearch.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1705,7 +1750,7 @@
         private System.Windows.Forms.ProgressBar pbFamilySearch;
         private System.Windows.Forms.CheckBox ckbLCResidence;
         private System.Windows.Forms.CheckBox ckbCensusResidence;
-        private Controls.RelationTypes relationTypes;
+        private Controls.RelationTypes relTypesCensus;
         private Controls.CensusCountry censusCountry;
         private Controls.CensusDateSelector cenDate;
         private Controls.CensusCountry FamilySearchDefaultCountry;
@@ -1760,8 +1805,6 @@
         private System.Windows.Forms.GroupBox gbDataErrorTypes;
         private System.Windows.Forms.CheckedListBox ckbDataErrors;
         private System.Windows.Forms.DataGridView dgDataErrors;
-        private System.Windows.Forms.Button btnLCReport;
-        private System.Windows.Forms.Button btnLCReport2;
         private System.Windows.Forms.ToolStripMenuItem childAgeProfilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewOnlineManualToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem olderParentsToolStripMenuItem;
@@ -1778,6 +1821,12 @@
         private System.Windows.Forms.DataGridView dgTreeTops;
         private System.Windows.Forms.TabPage tabTreeView;
         private System.Windows.Forms.TreeView treeViewLocations;
+        private System.Windows.Forms.TabPage tabColoured;
+        private System.Windows.Forms.Button btnColouredCensus;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtColouredSurname;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private Controls.RelationTypes relTypesColoured;
     }
 }
 

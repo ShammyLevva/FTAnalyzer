@@ -914,22 +914,36 @@ namespace FTAnalyzer
             return new SortableBindingList<Individual>(occupations[job]);
         }
 
-        public SortableBindingList<IDisplayLCReport> LCReport(bool blnDirectBlood)
+        public SortableBindingList<IDisplayColouredCensus> ColouredCensus(Controls.RelationTypes relType, string surname)
         {
-            SortableBindingList<IDisplayLCReport> result = new SortableBindingList<IDisplayLCReport>();
-            foreach (Individual i in individuals)
+            Predicate<Individual> filter = relType.BuildFilter<Individual>(x => x.RelationType);
+            if (surname.Length > 0)
             {
-                if (!blnDirectBlood || (blnDirectBlood && i.isBloodDirect))
-                {
-                    // valid to add check LC status && age within range
-                    if (!i.BirthDate.IsAfter(CensusDate.UKCENSUS1911) && !i.DeathDate.IsBefore(CensusDate.UKCENSUS1841))
-                    {
-                        //born & died within census periods so we can add them to result
-                        result.Add(i);
-                    }
-                }
+                Predicate<Individual> surnameFilter = Filters.FilterUtils.StringFilter<Individual>(x => x.Surname, surname);
+                filter = Filters.FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            return result;
+            //Predicate<Individual> dateFilter = Filters.FilterUtils.TrueFilter<Individual>(x => x.BirthDate.IsAfter(CensusDate.UKCENSUS1911), true);
+
+            IList<Individual> aliveOnCensus =
+                        individuals.Where(i => (!i.BirthDate.IsAfter(CensusDate.UKCENSUS1911) && 
+                                                !i.DeathDate.IsBefore(CensusDate.UKCENSUS1841))).ToList();
+//            IEnumerable<Individual> filtered = aliveOnCensus.Where(filter);
+            return new SortableBindingList<IDisplayColouredCensus>(aliveOnCensus.ToList());
+
+            //old code
+            //foreach (Individual i in individuals)
+            //{
+            //    if (!blnDirectBlood || (blnDirectBlood && i.isBloodDirect))
+            //    {
+            //        // valid to add check LC status && age within range
+            //        if (!i.BirthDate.IsAfter(CensusDate.UKCENSUS1911) && !i.DeathDate.IsBefore(CensusDate.UKCENSUS1841)))
+            //        {
+            //            //born & died within census periods so we can add them to result
+            //            result.Add(i);
+            //        }
+            //    }
+            //}
+            // return result;
         }
 
         #endregion

@@ -399,7 +399,7 @@ namespace FTAnalyzer
         #region Filters
         private Predicate<CensusIndividual> CreateCensusIndividualFilter()
         {
-            Predicate<CensusIndividual> relationFilter = relationTypes.BuildFilter<CensusIndividual>(x => x.RelationType);
+            Predicate<CensusIndividual> relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
             Predicate<CensusIndividual> locationFilter;
 
             if (ckbNoLocations.Checked)
@@ -1223,26 +1223,6 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void btnLCReport_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            SortableBindingList<IDisplayLCReport> list = ft.LCReport(ckbRestrictions.Checked);
-            LCReport rs = new LCReport(list);
-            DisposeDuplicateForms(rs);
-            rs.Show();
-            HourGlass(false);
-        }
-
-        private void btnLCReport2_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            SortableBindingList<IDisplayLCReport> list = ft.LCReport(ckbRestrictions.Checked);
-            LCReport rs = new LCReport(list);
-            DisposeDuplicateForms(rs);
-            rs.Show();
-            HourGlass(false);
-        }
-
         private void childAgeProfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Statistics s = Statistics.Instance;
@@ -1544,6 +1524,16 @@ namespace FTAnalyzer
                 DisposeDuplicateForms(factForm);
                 factForm.Show();
             }
+        }
+
+        private void btnColouredCensus_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            SortableBindingList<IDisplayColouredCensus> list = ft.ColouredCensus(relTypesColoured, txtColouredSurname.Text);
+            ColouredCensus rs = new ColouredCensus(list);
+            DisposeDuplicateForms(rs);
+            rs.Show();
+            HourGlass(false);
         }
     }
 }

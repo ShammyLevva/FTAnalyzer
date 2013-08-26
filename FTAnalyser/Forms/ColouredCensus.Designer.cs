@@ -1,6 +1,6 @@
 ﻿namespace FTAnalyzer.Forms
 {
-    partial class LCReport
+    partial class ColouredCensus
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LCReport));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColouredCensus));
             this.dgReportSheet = new System.Windows.Forms.DataGridView();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();

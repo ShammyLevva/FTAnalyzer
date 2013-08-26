@@ -13,16 +13,16 @@ using System.Diagnostics;
 
 namespace FTAnalyzer.Forms
 {
-    public partial class LCReport : Form
+    public partial class ColouredCensus : Form
     {
 
         private PrintingDataGridViewProvider printProvider;
         private Dictionary<int, DataGridViewCellStyle> styles;
         private int c1841ColumnIndex;
         private int c1911ColumnIndex;
-        private SortableBindingList<IDisplayLCReport> reportList;
+        private SortableBindingList<IDisplayColouredCensus> reportList;
 
-        public LCReport(SortableBindingList<IDisplayLCReport> reportList)
+        public ColouredCensus(SortableBindingList<IDisplayColouredCensus> reportList)
         {
             InitializeComponent();
             this.reportList = reportList;
@@ -73,7 +73,7 @@ namespace FTAnalyzer.Forms
             cbFilter.Text = "All Individuals";
         }
 
-        private string CountText(SortableBindingList<IDisplayLCReport> reportList)
+        private string CountText(SortableBindingList<IDisplayColouredCensus> reportList)
         {
 
             StringBuilder output = new StringBuilder();
@@ -195,7 +195,7 @@ namespace FTAnalyzer.Forms
                 int value = (int)cell.Value;
                 if (value == 1 || value == 2)
                 {
-                    IDisplayLCReport person = (IDisplayLCReport)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
+                    IDisplayColouredCensus person = (IDisplayColouredCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
                     int censusYear = (1841 + (e.ColumnIndex - c1841ColumnIndex) * 10);
                     FamilyTree ft = FamilyTree.Instance;
                     string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
@@ -210,10 +210,10 @@ namespace FTAnalyzer.Forms
             dgReportSheet.Focus();
         }
 
-        private List<IDisplayLCReport> BuildFilter(int toFind, bool all)
+        private List<IDisplayColouredCensus> BuildFilter(int toFind, bool all)
         {
-            List<IDisplayLCReport> result = new List<IDisplayLCReport>();
-            foreach(IDisplayLCReport row in this.reportList)
+            List<IDisplayColouredCensus> result = new List<IDisplayColouredCensus>();
+            foreach(IDisplayColouredCensus row in this.reportList)
             {
                 if (all)
                 {
@@ -239,7 +239,7 @@ namespace FTAnalyzer.Forms
         private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            List<IDisplayLCReport> list;
+            List<IDisplayColouredCensus> list;
             switch (cbFilter.SelectedIndex)
             {
                 case -1: // nothing selected
@@ -247,31 +247,31 @@ namespace FTAnalyzer.Forms
                     dgReportSheet.DataSource = this.reportList;
                     break;
                 case 1: // Not Alive (All Grey)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayLCReport>(BuildFilter(0, true));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(0, true));
                     break;
                 case 2: // None Found (All Red)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayLCReport>(BuildFilter(1, true));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(1, true));
                     break;
                 case 3: // All Found (All Green)
-                    list = new List<IDisplayLCReport>();
+                    list = new List<IDisplayColouredCensus>();
                     list.AddRange(BuildFilter(3, true));
                     list.AddRange(BuildFilter(4, true));
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayLCReport>(list);
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(list);
                     break;
                 case 4: // Lost Cousins Missing (Yellows)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayLCReport>(BuildFilter(2, false));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(2, false));
                     break;
                 case 5: // Lost Cousins Present (Orange)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayLCReport>(BuildFilter(5, false));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(5, false));
                     break;
                 case 6: // Some Missing (Some Red)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayLCReport>(BuildFilter(1, false));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(1, false));
                     break;
                 case 7:
-                    list = new List<IDisplayLCReport>();
+                    list = new List<IDisplayColouredCensus>();
                     list.AddRange(BuildFilter(3, false));
                     list.AddRange(BuildFilter(4, false));
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayLCReport>(list);
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(list);
                     break;
             }
             ResizeColumns();
@@ -284,7 +284,7 @@ namespace FTAnalyzer.Forms
         {
             this.Cursor = Cursors.WaitCursor;
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            List<IDisplayLCReport> export = (dgReportSheet.DataSource as SortableBindingList<IDisplayLCReport>).ToList<IDisplayLCReport>();
+            List<IDisplayColouredCensus> export = (dgReportSheet.DataSource as SortableBindingList<IDisplayColouredCensus>).ToList<IDisplayColouredCensus>();
             DataTable dt = convertor.ToDataTable(export);
             ExportToExcel.Export(dt);
             this.Cursor = Cursors.Default;

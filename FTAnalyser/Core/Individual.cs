@@ -6,7 +6,7 @@ using System.Xml;
 namespace FTAnalyzer
 {
     public class Individual : IComparable<Individual>, 
-        IDisplayIndividual, IDisplayLooseDeath, IDisplayLCReport, IExportIndividual
+        IDisplayIndividual, IDisplayLooseDeath, IDisplayColouredCensus, IExportIndividual
     {
         
         // define relation type from direct ancestor to related by marriage and 
