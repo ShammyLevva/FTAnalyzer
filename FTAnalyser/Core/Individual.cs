@@ -814,5 +814,10 @@ namespace FTAnalyzer
         {
             get { return LCReport(CensusDate.UKCENSUS1911); }
         }
+
+        public bool AliveOnAnyCensus
+        {
+            get { return (C1841 + C1851 + C1861 + C1871 + C1881 + C1891 + C1901 + C1911) > 0; }
+        }
     }
 }

@@ -52,9 +52,9 @@
             // 
             // dgReportSheet
             // 
-            this.dgReportSheet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgReportSheet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgReportSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgReportSheet.Location = new System.Drawing.Point(0, 28);
             this.dgReportSheet.MultiSelect = false;
@@ -171,7 +171,6 @@
             this.cbFilter.DropDownWidth = 170;
             this.cbFilter.Items.AddRange(new object[] {
             "All Individuals",
-            "Not Alive (All Grey)",
             "None Found (All Red)",
             "All Found (All Green)",
             "Lost Cousins Missing (Yellow)",
@@ -200,7 +199,7 @@
             this.printPreviewDialog.Name = "printPreviewDialog";
             this.printPreviewDialog.Visible = false;
             // 
-            // LCReport
+            // ColouredCensus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -209,7 +208,7 @@
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dgReportSheet);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "LCReport";
+            this.Name = "ColouredCensus";
             this.Text = "Lost Cousins Census Report Result";
             ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).EndInit();
             this.statusStrip.ResumeLayout(false);

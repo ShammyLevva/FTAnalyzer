@@ -95,6 +95,11 @@ namespace FTAnalyzer.Filters
             return l.Where(new Func<T, bool>(x => p(x)));
         }
 
+        public static IEnumerable<T> Where<T>(this IList<T> l, Predicate<T> p)
+        {
+            return (l as IEnumerable<T>).Where(p);
+        }
+
         private static bool StringMatches(string s1, string s2)
         {
             return s1 == null ? false : s1.Equals(s2, StringComparison.InvariantCultureIgnoreCase);

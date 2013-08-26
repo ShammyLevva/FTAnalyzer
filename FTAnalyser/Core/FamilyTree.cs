@@ -10,6 +10,7 @@ using System.Web;
 using System.Diagnostics;
 using System.Drawing;
 using System.Resources;
+using FTAnalyzer.Filters;
 
 namespace FTAnalyzer
 {
@@ -916,34 +917,18 @@ namespace FTAnalyzer
 
         public SortableBindingList<IDisplayColouredCensus> ColouredCensus(Controls.RelationTypes relType, string surname)
         {
+            Predicate<Individual> aliveOnAnyCensus = x => x.AliveOnAnyCensus;
             Predicate<Individual> filter = relType.BuildFilter<Individual>(x => x.RelationType);
             if (surname.Length > 0)
             {
-                Predicate<Individual> surnameFilter = Filters.FilterUtils.StringFilter<Individual>(x => x.Surname, surname);
-                filter = Filters.FilterUtils.AndFilter<Individual>(filter, surnameFilter);
+                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, surname);
+                filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            //Predicate<Individual> dateFilter = Filters.FilterUtils.TrueFilter<Individual>(x => x.BirthDate.IsAfter(CensusDate.UKCENSUS1911), true);
-
-            IList<Individual> aliveOnCensus =
-                        individuals.Where(i => (!i.BirthDate.IsAfter(CensusDate.UKCENSUS1911) && 
-                                                !i.DeathDate.IsBefore(CensusDate.UKCENSUS1841))).ToList();
-//            IEnumerable<Individual> filtered = aliveOnCensus.Where(filter);
-            return new SortableBindingList<IDisplayColouredCensus>(aliveOnCensus.ToList());
-
-            //old code
-            //foreach (Individual i in individuals)
-            //{
-            //    if (!blnDirectBlood || (blnDirectBlood && i.isBloodDirect))
-            //    {
-            //        // valid to add check LC status && age within range
-            //        if (!i.BirthDate.IsAfter(CensusDate.UKCENSUS1911) && !i.DeathDate.IsBefore(CensusDate.UKCENSUS1841)))
-            //        {
-            //            //born & died within census periods so we can add them to result
-            //            result.Add(i);
-            //        }
-            //    }
-            //}
-            // return result;
+            Predicate<Individual> dateFilter = i => (i.BirthDate.IsBefore(CensusDate.UKCENSUS1911) &&
+                                                     i.DeathDate.IsAfter(CensusDate.UKCENSUS1841));
+            filter = FilterUtils.AndFilter<Individual>(filter, dateFilter, aliveOnAnyCensus);
+            IEnumerable<Individual> aliveOnCensus = individuals.Where(filter);
+            return new SortableBindingList<IDisplayColouredCensus>(aliveOnCensus);
         }
 
         #endregion

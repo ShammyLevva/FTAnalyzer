@@ -246,28 +246,25 @@ namespace FTAnalyzer.Forms
                 case 0: // All Individuals
                     dgReportSheet.DataSource = this.reportList;
                     break;
-                case 1: // Not Alive (All Grey)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(0, true));
-                    break;
-                case 2: // None Found (All Red)
+                case 1: // None Found (All Red)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(1, true));
                     break;
-                case 3: // All Found (All Green)
+                case 2: // All Found (All Green)
                     list = new List<IDisplayColouredCensus>();
                     list.AddRange(BuildFilter(3, true));
                     list.AddRange(BuildFilter(4, true));
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(list);
                     break;
-                case 4: // Lost Cousins Missing (Yellows)
+                case 3: // Lost Cousins Missing (Yellows)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(2, false));
                     break;
-                case 5: // Lost Cousins Present (Orange)
+                case 4: // Lost Cousins Present (Orange)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(5, false));
                     break;
-                case 6: // Some Missing (Some Red)
+                case 5: // Some Missing (Some Red)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(1, false));
                     break;
-                case 7:
+                case 6:
                     list = new List<IDisplayColouredCensus>();
                     list.AddRange(BuildFilter(3, false));
                     list.AddRange(BuildFilter(4, false));
