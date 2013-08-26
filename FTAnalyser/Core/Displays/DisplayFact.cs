@@ -24,5 +24,6 @@ namespace FTAnalyzer
         public FactLocation Location { get { return Fact.Location; } }
         public string Comment { get { return Fact.Comment; } }
         public Age AgeAtFact { get { return Ind == null ? null : Ind.GetAge(Fact.FactDate); } }
+        public string SourceList { get { return Fact.SourceList;  } }
     }
 }

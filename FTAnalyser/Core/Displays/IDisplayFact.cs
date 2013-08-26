@@ -13,6 +13,7 @@ namespace FTAnalyzer
         FactLocation Location { get; }
         string Comment { get; }
         Age AgeAtFact { get; }
+        string SourceList { get; }
     }
 }
  

@@ -221,7 +221,7 @@ namespace FTAnalyzer
                     XmlNodeList list = node.SelectNodes("SOUR");
                     foreach (XmlNode n in list)
                     {
-                        if (n.Attributes["Ref"] != null)
+                        if (n.Attributes["REF"] != null)
                         {   // only process sources with a reference
                             string srcref = n.Attributes["REF"].Value;
                             FactSource source = ft.GetSourceID(srcref);
@@ -279,9 +279,13 @@ namespace FTAnalyzer
         {
             get
             {
-                StringBuilder result = new StringBuilder();
-                Sources.Select(s => result.Append(s + "; "));
-                return result.ToString();
+                StringBuilder sb = new StringBuilder();
+                foreach (FactSource s in Sources)
+                {
+                    if (sb.Length > 0) sb.Append("\n");
+                    sb.Append(s.ToString());
+                }
+                return sb.ToString();
             }
         }
 
