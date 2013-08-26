@@ -118,9 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FTA_0001" xml:space="preserve">
-    <value>Unexpected Error Checking for inconsistencies in your data\nPlease report this on the issues page at http://ftanalyzer.codeplex.com \nError was</value>
+    <value>Unexpected Error Checking for inconsistencies in your data
+Please report this on the issues page at http://ftanalyzer.codeplex.com
+Error was:</value>
   </data>
   <data name="FTA_0002" xml:space="preserve">
-    <value>You need to load your GEDCOM file before the program can display results.\nClick File | Open.</value>
+    <value>You need to load your GEDCOM file before the program can display results.
+Click File | Open.</value>
   </data>
 </root>

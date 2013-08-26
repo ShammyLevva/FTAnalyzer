@@ -32,7 +32,7 @@ namespace FTAnalyzer
         private SortableBindingList<IDisplayLooseDeath> looseDeaths;
         private TreeNode displayTreeRootNode;
         private static int DATA_ERROR_GROUPS = 17;
-        
+
         private FamilyTree()
         {
             ResetData();
@@ -540,7 +540,7 @@ namespace FTAnalyzer
                 // very exact 9 months before dates
                 maxdate = new DateTime(maxdate.Year, 1, 1);
             }
-            foreach(string facttype in Fact.LOOSE_DEATH_FACTS)
+            foreach (string facttype in Fact.LOOSE_DEATH_FACTS)
             {
                 maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, facttype));
             }
@@ -974,7 +974,7 @@ namespace FTAnalyzer
                         }
                         if (Fact.LOOSE_DEATH_FACTS.Contains(f.FactType) && f.FactDate.IsAfter(ind.DeathDate))
                         {
-                            errors[(int)dataerror.FACTS_AFTER_DEATH].Add(new DataError(ind, Fact.GetFactTypeDescription(f.FactType) + " fact recorded: " +
+                            errors[(int)dataerror.FACTS_AFTER_DEATH+20].Add(new DataError(ind, Fact.GetFactTypeDescription(f.FactType) + " fact recorded: " +
                                f.FactDate + " after individual died"));
                         }
                         if (f.FactType == Fact.LOSTCOUSINS)
@@ -1043,7 +1043,7 @@ namespace FTAnalyzer
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(Properties.ErrorMessages.FTA_0001 + e.Message, "Error : FTA_0001");
+                    ErrorHandler.Show("FTA_0001", e);
                 }
             }
             dataErrorTypes.Add(new DataErrorGroup("Birth after death/burial", errors[(int)dataerror.BIRTH_AFTER_DEATH]));
@@ -1070,7 +1070,7 @@ namespace FTAnalyzer
             BIRTH_AFTER_DEATH = 0, BIRTH_AFTER_FATHER_90 = 1, BIRTH_AFTER_MOTHER_60 = 2, BIRTH_AFTER_MOTHER_DEATH = 3,
             BIRTH_AFTER_FATHER_DEATH = 4, BIRTH_BEFORE_FATHER_13 = 5, BIRTH_BEFORE_MOTHER_13 = 6, BURIAL_BEFORE_DEATH = 7,
             AGED_MORE_THAN_110 = 8, FACTS_BEFORE_BIRTH = 9, MARRIAGE_AFTER_DEATH = 10, MARRIAGE_AFTER_SPOUSE_DEAD = 11,
-            MARRIAGE_BEFORE_13 = 12, MARRIAGE_BEFORE_SPOUSE_13 = 13, LOST_COUSINS_NON_CENSUS = 14, 
+            MARRIAGE_BEFORE_13 = 12, MARRIAGE_BEFORE_SPOUSE_13 = 13, LOST_COUSINS_NON_CENSUS = 14,
             LOST_COUSINS_NOT_SUPPORTED_YEAR = 15, FACTS_AFTER_DEATH = 16
         };
 

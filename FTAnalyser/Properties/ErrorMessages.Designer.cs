@@ -61,7 +61,9 @@ namespace FTAnalyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unexpected Error Checking for inconsistencies in your data\nPlease report this on the issues page at http://ftanalyzer.codeplex.com \nError was.
+        ///   Looks up a localized string similar to Unexpected Error Checking for inconsistencies in your data
+        ///Please report this on the issues page at http://ftanalyzer.codeplex.com
+        ///Error was:.
         /// </summary>
         internal static string FTA_0001 {
             get {
@@ -70,7 +72,8 @@ namespace FTAnalyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You need to load your GEDCOM file before the program can display results.\nClick File | Open..
+        ///   Looks up a localized string similar to You need to load your GEDCOM file before the program can display results.
+        ///Click File | Open..
         /// </summary>
         internal static string FTA_0002 {
             get {
