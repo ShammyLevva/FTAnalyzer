@@ -284,6 +284,7 @@ namespace FTAnalyzer
                     HourGlass(true);
                     tabCtrlLocations.SelectedIndex = 0;
                     tsCountLabel.Text = "";
+                    treeViewLocations.Nodes.Clear();
                     Application.DoEvents();
                     treeViewLocations.Nodes.AddRange(ft.GetAllLocationsTreeNodes(treeViewLocations.Font));
                     mnuPrint.Enabled = false;
