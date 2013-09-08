@@ -24,7 +24,9 @@ namespace FTAnalyzer
                       "Marriage before aged 13", 
                       "Marriage before spouse aged 13", 
                       "Lost Cousins tag in non Census Year", 
-                      "Lost Cousins tag in non supported Year" };
+                      "Lost Cousins tag in non supported Year",
+                      "Census fact date range too wide"
+                    };
 
         //"Later marriage before previous spouse died"
 

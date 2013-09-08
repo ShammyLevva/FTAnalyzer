@@ -31,7 +31,7 @@ namespace FTAnalyzer
         private SortableBindingList<IDisplayLocation>[] displayLocations;
         private SortableBindingList<IDisplayLooseDeath> looseDeaths;
         private TreeNode displayTreeRootNode;
-        private static int DATA_ERROR_GROUPS = 17;
+        private static int DATA_ERROR_GROUPS = 18;
 
         private FamilyTree()
         {
@@ -997,6 +997,13 @@ namespace FTAnalyzer
                                     new DataError((int)dataerror.LOST_COUSINS_NOT_SUPPORTED_YEAR, ind, "Lost Cousins event for " + f.FactDate + " which isn't a Lost Cousins census year"));
                             }
                         }
+                        if (f.FactType == Fact.CENSUS)
+                        {
+                            TimeSpan ts = f.FactDate.EndDate - f.FactDate.StartDate;
+                            if(ts.Days > 3650)
+                                errors[(int)dataerror.CENSUS_COVERAGE].Add(
+                                    new DataError((int)dataerror.CENSUS_COVERAGE, ind, "Census date " + f.FactDate + " covers more than one census event."));
+                        }
                     }
                     foreach (Family asChild in ind.FamiliesAsChild)
                     {
@@ -1069,7 +1076,7 @@ namespace FTAnalyzer
             BIRTH_AFTER_FATHER_DEATH = 4, BIRTH_BEFORE_FATHER_13 = 5, BIRTH_BEFORE_MOTHER_13 = 6, BURIAL_BEFORE_DEATH = 7,
             AGED_MORE_THAN_110 = 8, FACTS_BEFORE_BIRTH = 9, FACTS_AFTER_DEATH = 10, MARRIAGE_AFTER_DEATH = 11, 
             MARRIAGE_AFTER_SPOUSE_DEAD = 12, MARRIAGE_BEFORE_13 = 13, MARRIAGE_BEFORE_SPOUSE_13 = 14, LOST_COUSINS_NON_CENSUS = 15,
-            LOST_COUSINS_NOT_SUPPORTED_YEAR = 16
+            LOST_COUSINS_NOT_SUPPORTED_YEAR = 16, CENSUS_COVERAGE = 17
         };
 
         public void SetDataErrorsCheckedDefaults(CheckedListBox list)
@@ -1419,6 +1426,7 @@ namespace FTAnalyzer
         }
         #endregion
 
+        #region Location Tree Building
         public TreeNode[] GetAllLocationsTreeNodes(Font defaultFont)
         {
             if (displayTreeRootNode != null)
@@ -1476,5 +1484,6 @@ namespace FTAnalyzer
             nodes.CopyTo(result, 0);
             return result;
         }
+        #endregion
     }
 }
