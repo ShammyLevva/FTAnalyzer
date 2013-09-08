@@ -267,7 +267,7 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabDataErrors)
                 {
-                    List<DataError> errors = ft.DataErrors(ckbDataErrors);
+                    SortableBindingList<DataError> errors = ft.DataErrors(ckbDataErrors);
                     dgDataErrors.DataSource = errors;
                     mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + errors.Count;
@@ -1217,7 +1217,7 @@ namespace FTAnalyzer
         private void ckbDataErrors_SelectedIndexChanged(object sender, EventArgs e)
         {
             HourGlass(true);
-            List<DataError> errors = ft.DataErrors(ckbDataErrors);
+            SortableBindingList<DataError> errors = ft.DataErrors(ckbDataErrors);
             dgDataErrors.DataSource = errors;
             tsCountLabel.Text = "Count : " + errors.Count;
             HourGlass(false);

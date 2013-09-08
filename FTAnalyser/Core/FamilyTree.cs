@@ -1082,7 +1082,7 @@ namespace FTAnalyzer
             }
         }
 
-        public List<DataError> DataErrors(CheckedListBox list)
+        public SortableBindingList<DataError> DataErrors(CheckedListBox list)
         {
             List<DataError> errors = new List<DataError>();
             foreach (int indexChecked in list.CheckedIndices)
@@ -1090,7 +1090,7 @@ namespace FTAnalyzer
                 DataErrorGroup item = (DataErrorGroup)list.Items[indexChecked];
                 errors.AddRange(item.Errors);
             }
-            return errors;
+            return new SortableBindingList<DataError>(errors);
         }
         #endregion
 
