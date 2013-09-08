@@ -1216,6 +1216,11 @@ namespace FTAnalyzer
 
         private void ckbDataErrors_SelectedIndexChanged(object sender, EventArgs e)
         {
+            UpdateDataErrorsDisplay();
+        }
+
+        private void UpdateDataErrorsDisplay()
+        {
             HourGlass(true);
             SortableBindingList<DataError> errors = ft.DataErrors(ckbDataErrors);
             dgDataErrors.DataSource = errors;
@@ -1534,6 +1539,24 @@ namespace FTAnalyzer
             DisposeDuplicateForms(rs);
             rs.Show();
             HourGlass(false);
+        }
+
+        private void btnSelectAll_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < ckbDataErrors.Items.Count; i++ )
+            {
+                ckbDataErrors.SetItemChecked(i, true);
+            }
+            UpdateDataErrorsDisplay();
+        }
+
+        private void btnClearAll_Click(object sender, EventArgs e)
+        {
+            foreach (int indexChecked in ckbDataErrors.CheckedIndices)
+            {
+                ckbDataErrors.SetItemChecked(indexChecked, false);
+            }
+            UpdateDataErrorsDisplay();
         }
     }
 }
