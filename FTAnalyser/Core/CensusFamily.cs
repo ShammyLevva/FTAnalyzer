@@ -27,14 +27,14 @@ namespace FTAnalyzer
             }
         }
 
-        public bool Process(FactDate censusDate, bool censusDone, bool includeResidence, bool lostCousinsCheck)
+        public bool Process(FactDate censusDate, bool censusDone, bool lostCousinsCheck)
         {
             bool result = false;
             this.CensusDate = censusDate;
             List<Fact> facts = new List<Fact>();
             if (IsValidFamily())
             {
-                if (IsValidIndividual(Wife, censusDone, includeResidence, lostCousinsCheck, true))
+                if (IsValidIndividual(Wife, censusDone, lostCousinsCheck, true))
                 {
                     result = true;
                     Wife.Status = Individual.WIFE;
@@ -44,7 +44,7 @@ namespace FTAnalyzer
                     Wife = null;
                 // overwrite bestLocation by husbands as most commonly the family
                 // end up at husbands location after marriage
-                if (IsValidIndividual(Husband, censusDone, includeResidence, lostCousinsCheck, true))
+                if (IsValidIndividual(Husband, censusDone, lostCousinsCheck, true))
                 {
                     result = true;
                     Husband.Status = Individual.HUSBAND;
@@ -66,7 +66,7 @@ namespace FTAnalyzer
                     // this will end up setting birth location of last child 
                     // as long as the location is at least Parish level
                     child.Status = Individual.CHILD;
-                    if (IsValidIndividual(child, censusDone, includeResidence, lostCousinsCheck, false))
+                    if (IsValidIndividual(child, censusDone, lostCousinsCheck, false))
                     {
                         result = true;
                         censusChildren.Add(child);
@@ -79,14 +79,14 @@ namespace FTAnalyzer
             return result;
         }
 
-        private bool IsValidIndividual(Individual indiv, bool censusDone, bool includeResisdence, bool lostCousinsCheck, bool parentCheck)
+        private bool IsValidIndividual(Individual indiv, bool censusDone, bool lostCousinsCheck, bool parentCheck)
         {
             if (indiv == null)
                 return false;
             FamilyTree ft = FamilyTree.Instance;
             DateTime birth = indiv.BirthDate.StartDate;
             DateTime death = indiv.DeathDate.EndDate;
-            if (birth < CensusDate.StartDate && death > CensusDate.StartDate && indiv.isCensusDone(CensusDate, includeResisdence) == censusDone)
+            if (birth < CensusDate.StartDate && death > CensusDate.StartDate && indiv.isCensusDone(CensusDate) == censusDone)
             {
                 if (lostCousinsCheck && indiv.isLostCousinEntered(CensusDate))
                     return false;

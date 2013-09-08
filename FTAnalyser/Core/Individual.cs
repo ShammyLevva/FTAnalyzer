@@ -504,13 +504,14 @@ namespace FTAnalyzer
             get { return infamily; }
         }
 
-        public bool isCensusDone(FactDate when, bool includeResidence)
+        public bool isCensusDone(FactDate when)
         {
             foreach (Fact f in facts)
             {
                 if (f.FactType == Fact.CENSUS && f.FactDate.Overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
                     return true;
-                if (includeResidence && f.FactType == Fact.RESIDENCE && f.FactDate.Overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
+                if (Properties.GeneralSettings.Default.UseResidenceAsCensus && f.FactType == Fact.RESIDENCE && 
+                    f.FactDate.Overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
                     return true; 
             }
             return false;
@@ -760,7 +761,7 @@ namespace FTAnalyzer
             
             if (BirthDate.IsAfter(census) || DeathDate.IsBefore(census))
                 return 0; // not alive - grey
-            if (!isCensusDone(census, true))
+            if (!isCensusDone(census))
             {
                 if (CensusDate.IsLostCousinsCensusYear(census) && isLostCousinEntered(census))
                     return 5; // LC entered but no census entered - orange

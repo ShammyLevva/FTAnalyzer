@@ -18,6 +18,8 @@ namespace FTAnalyzer.UserControls
 			//if this happens, then the users settings will be cleared.
             chkUseBaptisms.Checked = Properties.GeneralSettings.Default.UseBaptismDates;
             chkAllowEmptyLocations.Checked = Properties.GeneralSettings.Default.AllowEmptyLocations;
+            chkCensusResidence.Checked = Properties.GeneralSettings.Default.UseResidenceAsCensus;
+            chkStrictResidenceYears.Checked = Properties.GeneralSettings.Default.StrictResidenceDates;
         }
 
 		#region IOptions Members
@@ -28,8 +30,12 @@ namespace FTAnalyzer.UserControls
             string title = string.Empty;
 			Properties.GeneralSettings.Default.UseBaptismDates = chkUseBaptisms.Checked;
             Properties.GeneralSettings.Default.AllowEmptyLocations = chkAllowEmptyLocations.Checked;
-			Properties.GeneralSettings.Default.Save();
+            Properties.GeneralSettings.Default.UseResidenceAsCensus = chkCensusResidence.Checked;
+            Properties.GeneralSettings.Default.StrictResidenceDates = chkStrictResidenceYears.Checked;
+            Properties.GeneralSettings.Default.Save();
             OnUseBaptismDatesChanged();
+            OnAllowEmptyLocationsChanged();
+            OnUseResidenceAsCensusChanged();
 		}
 
 		public void Cancel()
@@ -71,7 +77,6 @@ namespace FTAnalyzer.UserControls
 			get { return "General Settings"; }
 		}
 
-
 		public string TreePosition
 		{
 			get { return DisplayName; }
@@ -98,20 +103,18 @@ namespace FTAnalyzer.UserControls
                 AllowEmptyLocationsChanged(null, EventArgs.Empty);
         }
 
-        private void chkUseBaptisms_CheckedChanged(object sender, EventArgs e)
+        public static event EventHandler UseResidenceAsCensusChanged;
+        protected static void OnUseResidenceAsCensusChanged()
         {
-            //if (FTAnalyzer.Properties.GeneralSettings.Default.UseBaptismDates)
-            //    MessageBox.Show("Baptism dates will now be used if no birth date is present");
-            //else
-            //    MessageBox.Show("If no birth date is present, unknown will be shown");
+            if (UseResidenceAsCensusChanged != null)
+                UseResidenceAsCensusChanged(null, EventArgs.Empty);
         }
 
-        private void chkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)
+        public static event EventHandler StrictResidenceDatesChanged;
+        protected static void OnStrictResidenceDatesChanged()
         {
-            //if (FTAnalyzer.Properties.GeneralSettings.Default.AllowEmptyLocations)
-            //    MessageBox.Show("Empty parts of a location will be allowed when you load the next GEDCOM file");
-            //else
-            //    MessageBox.Show("Locations with empty parts will be ignored when you load the next GEDCOM file");
+            if (StrictResidenceDatesChanged != null)
+                StrictResidenceDatesChanged(null, EventArgs.Empty);
         }
     }
 }

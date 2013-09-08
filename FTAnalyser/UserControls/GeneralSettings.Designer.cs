@@ -33,6 +33,8 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.chkUseBaptisms = new System.Windows.Forms.CheckBox();
             this.chkAllowEmptyLocations = new System.Windows.Forms.CheckBox();
+            this.chkCensusResidence = new System.Windows.Forms.CheckBox();
+            this.chkStrictResidenceYears = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,19 +47,35 @@
             resources.ApplyResources(this.chkUseBaptisms, "chkUseBaptisms");
             this.chkUseBaptisms.Name = "chkUseBaptisms";
             this.chkUseBaptisms.UseVisualStyleBackColor = true;
-            this.chkUseBaptisms.CheckedChanged += new System.EventHandler(this.chkUseBaptisms_CheckedChanged);
             // 
             // chkAllowEmptyLocations
             // 
             resources.ApplyResources(this.chkAllowEmptyLocations, "chkAllowEmptyLocations");
             this.chkAllowEmptyLocations.Name = "chkAllowEmptyLocations";
             this.chkAllowEmptyLocations.UseVisualStyleBackColor = true;
-            this.chkAllowEmptyLocations.CheckedChanged += new System.EventHandler(this.chkAllowEmptyLocations_CheckedChanged);
+            // 
+            // chkCensusResidence
+            // 
+            resources.ApplyResources(this.chkCensusResidence, "chkCensusResidence");
+            this.chkCensusResidence.Checked = true;
+            this.chkCensusResidence.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCensusResidence.Name = "chkCensusResidence";
+            this.chkCensusResidence.UseVisualStyleBackColor = true;
+            // 
+            // chkStrictResidenceYears
+            // 
+            resources.ApplyResources(this.chkStrictResidenceYears, "chkStrictResidenceYears");
+            this.chkStrictResidenceYears.Checked = true;
+            this.chkStrictResidenceYears.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkStrictResidenceYears.Name = "chkStrictResidenceYears";
+            this.chkStrictResidenceYears.UseVisualStyleBackColor = true;
             // 
             // GeneralSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkStrictResidenceYears);
+            this.Controls.Add(this.chkCensusResidence);
             this.Controls.Add(this.chkAllowEmptyLocations);
             this.Controls.Add(this.chkUseBaptisms);
             this.Name = "GeneralSettings";
@@ -72,6 +90,8 @@
 		private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.CheckBox chkUseBaptisms;
         private System.Windows.Forms.CheckBox chkAllowEmptyLocations;
+        private System.Windows.Forms.CheckBox chkCensusResidence;
+        private System.Windows.Forms.CheckBox chkStrictResidenceYears;
 
 
 	}

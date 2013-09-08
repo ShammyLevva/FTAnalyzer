@@ -19,7 +19,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.1.3.0";
+        private string VERSION = "2.1.4.0";
         //private bool _checkForUpdatesEnabled = false;
         //private bool _showNoUpdateMessage = false;
         //private System.Threading.Timer _timerCheckForUpdates;
@@ -386,7 +386,7 @@ namespace FTAnalyzer
                 country = " " + cenDate.Country;
                 censusComparator = new CensusLocationComparer(FactLocation.PARISH);
             }
-            census.SetupCensus(filter, censusComparator, censusDate, false, ckbCensusResidence.Checked, false);
+            census.SetupCensus(filter, censusComparator, censusDate, false, false);
             census.Text = "People missing a " + censusDate.StartDate.Year.ToString() + country + " Census Record that you can search for";
             DisposeDuplicateForms(census);
             census.Show();
@@ -510,7 +510,7 @@ namespace FTAnalyzer
             else
                 filter = FilterUtils.AndFilter<CensusIndividual>(FilterUtils.DateFilter<CensusIndividual>(registrationDate, censusDate), filter);
 
-            census.SetupCensus(filter, comparer, censusDate, true, ckbLCResidence.Checked, ckbHideRecorded.Checked);
+            census.SetupCensus(filter, comparer, censusDate, true, ckbHideRecorded.Checked);
             census.Text = reportTitle;
             HourGlass(false);
             DisposeDuplicateForms(census);
@@ -643,7 +643,8 @@ namespace FTAnalyzer
             //_timerCheckForUpdates.Change(3000, 1000 * 60 * 60 * 8); //Check for updates 3 sec after the form loads, and then again every 8 hours
             //GeneralSettings.UseBaptismDatesChanged += new EventHandler(Options_BaptismChanged);
             //GeneralSettings.AllowEmptyLocationsChanged += new EventHandler(Options_AllowEmptyLocationsChanged);
-
+            GeneralSettings.UseResidenceAsCensusChanged += new EventHandler(Options_UseResidenceAsCensusChanged);
+            GeneralSettings.StrictResidenceDatesChanged += new EventHandler(Options_StrictResidenceDatesChanged);
             this.Text = "Family Tree Analyzer v" + VERSION;
         }
 
@@ -1437,6 +1438,16 @@ namespace FTAnalyzer
         private void Options_AllowEmptyLocationsChanged(object sender, EventArgs e)
         {
             // do anything that needs doing when option changes
+        }
+
+        private void Options_UseResidenceAsCensusChanged(object sender, EventArgs e)
+        {
+            // need to refresh any census reports when option changes
+        }
+
+        private void Options_StrictResidenceDatesChanged(object sender, EventArgs e)
+        {
+            // need to refresh any census reports when option changes
         }
 
         private bool preventExpand;

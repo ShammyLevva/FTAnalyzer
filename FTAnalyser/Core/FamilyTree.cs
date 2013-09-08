@@ -823,14 +823,14 @@ namespace FTAnalyzer
 
         #endregion
 
-        public IEnumerable<CensusFamily> GetAllCensusFamilies(FactDate censusDate, bool censusDone, bool includeResidence, bool lostCousinsCheck)
+        public IEnumerable<CensusFamily> GetAllCensusFamilies(FactDate censusDate, bool censusDone, bool lostCousinsCheck)
         {
             if (censusDate != null)
             {
                 foreach (Family f in families)
                 {
                     CensusFamily cf = new CensusFamily(f, censusDate);
-                    if (cf.Process(censusDate, censusDone, includeResidence, lostCousinsCheck))
+                    if (cf.Process(censusDate, censusDone, lostCousinsCheck))
                         yield return cf;
                 }
             }
@@ -997,12 +997,15 @@ namespace FTAnalyzer
                                     new DataError((int)dataerror.LOST_COUSINS_NOT_SUPPORTED_YEAR, ind, "Lost Cousins event for " + f.FactDate + " which isn't a Lost Cousins census year"));
                             }
                         }
-                        if (f.FactType == Fact.CENSUS)
+                        if (f.FactType == Fact.CENSUS || 
+                           (f.FactType == Fact.RESIDENCE && 
+                                Properties.GeneralSettings.Default.UseResidenceAsCensus && Properties.GeneralSettings.Default.StrictResidenceDates))
                         {
                             TimeSpan ts = f.FactDate.EndDate - f.FactDate.StartDate;
+                            string comment = f.FactType == Fact.CENSUS ? "Census date " : "Residence date ";
                             if(ts.Days > 3650)
                                 errors[(int)dataerror.CENSUS_COVERAGE].Add(
-                                    new DataError((int)dataerror.CENSUS_COVERAGE, ind, "Census date " + f.FactDate + " covers more than one census event."));
+                                    new DataError((int)dataerror.CENSUS_COVERAGE, ind, comment + f.FactDate + " covers more than one census event."));
                         }
                     }
                     foreach (Family asChild in ind.FamiliesAsChild)

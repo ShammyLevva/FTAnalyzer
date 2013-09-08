@@ -58,5 +58,29 @@ namespace FTAnalyzer.Properties {
                 this["AllowEmptyLocations"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseResidenceAsCensus {
+            get {
+                return ((bool)(this["UseResidenceAsCensus"]));
+            }
+            set {
+                this["UseResidenceAsCensus"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool StrictResidenceDates {
+            get {
+                return ((bool)(this["StrictResidenceDates"]));
+            }
+            set {
+                this["StrictResidenceDates"] = value;
+            }
+        }
     }
 }

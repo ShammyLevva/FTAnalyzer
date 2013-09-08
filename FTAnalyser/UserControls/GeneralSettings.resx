@@ -134,10 +134,67 @@
   <data name="$this.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="chkAllowEmptyLocations.AutoSize" type="System.Boolean, mscorlib">
+  <data name="chkStrictResidenceYears.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkStrictResidenceYears.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkStrictResidenceYears.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 72</value>
+  </data>
+  <data name="chkStrictResidenceYears.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 17</value>
+  </data>
+  <data name="chkStrictResidenceYears.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="chkStrictResidenceYears.Text" xml:space="preserve">
+    <value>Require Residence years to match Census years</value>
+  </data>
+  <data name="&gt;&gt;chkStrictResidenceYears.Name" xml:space="preserve">
+    <value>chkStrictResidenceYears</value>
+  </data>
+  <data name="&gt;&gt;chkStrictResidenceYears.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkStrictResidenceYears.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkStrictResidenceYears.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkCensusResidence.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkCensusResidence.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 49</value>
+  </data>
+  <data name="chkCensusResidence.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 17</value>
+  </data>
+  <data name="chkCensusResidence.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="chkCensusResidence.Text" xml:space="preserve">
+    <value>Treat 'Residence' facts as Census facts</value>
+  </data>
+  <data name="&gt;&gt;chkCensusResidence.Name" xml:space="preserve">
+    <value>chkCensusResidence</value>
+  </data>
+  <data name="&gt;&gt;chkCensusResidence.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkCensusResidence.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkCensusResidence.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="chkAllowEmptyLocations.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="chkAllowEmptyLocations.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -163,7 +220,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkAllowEmptyLocations.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="chkUseBaptisms.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -190,7 +247,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkUseBaptisms.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>312, 333</value>
