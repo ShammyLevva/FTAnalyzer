@@ -5,13 +5,15 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    class DataError
+    public class DataError
     {
         private Individual individual;
+        public string ErrorType { get; private set; }
         public string Description { get; private set; }
 
-        public DataError(Individual ind, string description)
+        public DataError(int errorType, Individual ind, string description)
         {
+            this.ErrorType = DataErrorGroup.ErrorDescription(errorType);
             this.individual = ind;
             this.Description = description;
         }
