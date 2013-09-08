@@ -633,7 +633,7 @@ namespace FTAnalyzer
             foreach(XmlNode n in list) {
                 try
                 {
-                    addFact(new Fact(n, IndividualRef));
+                    AddFact(new Fact(n, IndividualRef));
                 }
                 catch (InvalidXMLFactException ex)
                 {
@@ -644,7 +644,7 @@ namespace FTAnalyzer
             }
         }
 
-        public void addFact(Fact fact) {
+        public void AddFact(Fact fact) {
             facts.Add(fact);
             FactLocation loc = fact.Location;
             if (loc != null && !locations.Contains(loc))

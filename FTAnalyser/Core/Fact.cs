@@ -177,13 +177,14 @@ namespace FTAnalyzer
 
         private Fact()
         {
-            this.FactType = "";
+            this.FactType = string.Empty;
             this.FactDate = FactDate.UNKNOWN_DATE;
-            this.Comment = "";
-            this.Place = "";
+            this.Comment = string.Empty;
+            this.Place = string.Empty;
             this.Location = new FactLocation();
             this.Sources = new List<FactSource>();
             this.CertificatePresent = false;
+            this.FactError = false;
         }
 
         public Fact(XmlNode node, string factRef)
@@ -195,7 +196,9 @@ namespace FTAnalyzer
                 try
                 {
                     FactType = FixFactTypes(node.Name);
-                    if (FactType.Equals("EVEN"))
+                    string factDate = FamilyTree.GetText(node, "DATE");
+                    this.FactDate = new FactDate(factDate, factRef);
+                    if (FactType.Equals(CUSTOM_FACT))
                     {
                         string tag = FamilyTree.GetText(node, "TYPE");
                         string factType;
@@ -210,9 +213,12 @@ namespace FTAnalyzer
                                 FamilyTree.Instance.XmlErrorBox.AppendText("Recorded unknown fact type " + tag + "\n");
                             }
                         }
+                        CheckCensusDate(tag);
                     }
-                    string factDate = FamilyTree.GetText(node, "DATE");
-                    this.FactDate = new FactDate(factDate, factRef);
+                    else if (FactType.Equals(CENSUS))
+                    {
+                        CheckCensusDate("Census");
+                    }
                     SetCommentAndLocation(FactType, FamilyTree.GetText(node), FamilyTree.GetText(node, "PLAC"),
                         FamilyTree.GetText(node, "PLAC/MAP/LATI"), FamilyTree.GetText(node, "PLAC/MAP/LONG"));
 
@@ -241,9 +247,26 @@ namespace FTAnalyzer
                 catch (Exception ex)
                 {
                     string message = (node == null) ? "" : node.InnerText + ". ";
-                    throw new InvalidXMLFactException(message + "Error " + ex.Message + "\n    With:" + factRef);
+                    throw new InvalidXMLFactException(message + "\n            Error " + ex.Message + "\n");
                 }
             }
+        }
+
+        private void CheckCensusDate(string tag)
+        {
+            if ((tag == "Census 1841" && !FactDate.Overlaps(CensusDate.UKCENSUS1841)) ||
+                (tag == "Census 1851" && !FactDate.Overlaps(CensusDate.UKCENSUS1851)) ||
+                (tag == "Census 1861" && !FactDate.Overlaps(CensusDate.UKCENSUS1861)) ||
+                (tag == "Census 1871" && !FactDate.Overlaps(CensusDate.UKCENSUS1871)) ||
+                (tag == "Census 1881" && !FactDate.Overlaps(CensusDate.UKCENSUS1881)) ||
+                (tag == "Census 1891" && !FactDate.Overlaps(CensusDate.UKCENSUS1891)) ||
+                (tag == "Census 1901" && !FactDate.Overlaps(CensusDate.UKCENSUS1901)) ||
+                (tag == "Census 1911" && !FactDate.Overlaps(CensusDate.UKCENSUS1911)))
+            {
+                throw new InvalidXMLFactException("Census fact error date '" + FactDate + "' doesn't match '" + tag + "' tag. Check for incorrect date entered.");
+            }
+            if(tag == "Census" && !CensusDate.IsCensusYear(FactDate))
+                throw new InvalidXMLFactException("Census fact error date '" + FactDate + "' isn't a supported census date. Check for incorrect date entered.");
         }
 
         public Fact(string factType, FactDate date)
@@ -269,6 +292,8 @@ namespace FTAnalyzer
         public FactDate FactDate { get; private set; }
 
         public string FactType { get; private set; }
+
+        public bool FactError { get; private set; }
 
         public string DateString
         {

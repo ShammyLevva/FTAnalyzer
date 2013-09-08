@@ -491,7 +491,7 @@ namespace FTAnalyzer
                 // we have a date to change and its not the same 
                 // range as the existing death date
                 Fact looseDeath = new Fact(Fact.LOOSEDEATH, toAdd);
-                indiv.addFact(looseDeath);
+                indiv.AddFact(looseDeath);
                 result.Add(indiv);
             }
         }
