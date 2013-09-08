@@ -254,6 +254,20 @@ namespace FTAnalyzer
 
         private void CheckCensusDate(string tag)
         {
+            FactDate dateFromFile = FactDate;
+            if (((tag == "Census 1841" && !FactDate.Overlaps(CensusDate.UKCENSUS1841)) ||
+                (tag == "Census 1851" && !FactDate.Overlaps(CensusDate.UKCENSUS1851)) ||
+                (tag == "Census 1861" && !FactDate.Overlaps(CensusDate.UKCENSUS1861)) ||
+                (tag == "Census 1871" && !FactDate.Overlaps(CensusDate.UKCENSUS1871)) ||
+                (tag == "Census 1881" && !FactDate.Overlaps(CensusDate.UKCENSUS1881)) ||
+                (tag == "Census 1891" && !FactDate.Overlaps(CensusDate.UKCENSUS1891)) ||
+                (tag == "Census 1901" && !FactDate.Overlaps(CensusDate.UKCENSUS1901)) ||
+                (tag == "Census 1911" && !FactDate.Overlaps(CensusDate.UKCENSUS1911)) ||
+                (tag == "Census" && !CensusDate.IsCensusYear(FactDate))) &&
+                FactDate.DateString.Length >=4)
+            {
+                FactDate = new FactDate(FactDate.DateString.Substring(FactDate.DateString.Length - 4));
+            }
             if ((tag == "Census 1841" && !FactDate.Overlaps(CensusDate.UKCENSUS1841)) ||
                 (tag == "Census 1851" && !FactDate.Overlaps(CensusDate.UKCENSUS1851)) ||
                 (tag == "Census 1861" && !FactDate.Overlaps(CensusDate.UKCENSUS1861)) ||
@@ -263,10 +277,10 @@ namespace FTAnalyzer
                 (tag == "Census 1901" && !FactDate.Overlaps(CensusDate.UKCENSUS1901)) ||
                 (tag == "Census 1911" && !FactDate.Overlaps(CensusDate.UKCENSUS1911)))
             {
-                throw new InvalidXMLFactException("Census fact error date '" + FactDate + "' doesn't match '" + tag + "' tag. Check for incorrect date entered.");
+                throw new InvalidXMLFactException("UK Census fact error date '" + dateFromFile + "' doesn't match '" + tag + "' tag. Check for incorrect date entered.");
             }
-            if(tag == "Census" && !CensusDate.IsCensusYear(FactDate))
-                throw new InvalidXMLFactException("Census fact error date '" + FactDate + "' isn't a supported census date. Check for incorrect date entered.");
+            if (tag == "Census" && !CensusDate.IsCensusYear(FactDate))
+                throw new InvalidXMLFactException("Census fact error date '" + dateFromFile + "' isn't a supported census date. Check for incorrect date entered.");
         }
 
         public Fact(string factType, FactDate date)
