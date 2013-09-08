@@ -95,7 +95,8 @@ namespace FactDateTest
             factLocation = new FactLocation("U.S.A.");
             Assert.IsTrue(factLocation.ToString().Equals("United States"));
 
-            
+            factLocation = new FactLocation("4 Old Grey Street, Sunderland, Co Durham");
+            Assert.IsTrue(factLocation.ToString().Equals("4 Old Grey Street, Sunderland, County Durham, England"));
         }
     }
 }
