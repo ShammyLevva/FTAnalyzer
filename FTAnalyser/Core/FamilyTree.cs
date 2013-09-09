@@ -31,7 +31,7 @@ namespace FTAnalyzer
         private SortableBindingList<IDisplayLocation>[] displayLocations;
         private SortableBindingList<IDisplayLooseDeath> looseDeaths;
         private TreeNode displayTreeRootNode;
-        private static int DATA_ERROR_GROUPS = 18;
+        private static int DATA_ERROR_GROUPS = 19;
 
         private FamilyTree()
         {
@@ -210,13 +210,16 @@ namespace FTAnalyzer
         {
             int censusFacts = 0;
             int resiFacts = 0;
+            int lostCousinsFacts = 0;
             foreach (Individual ind in individuals)
             {
                 censusFacts += ind.CensusFactCount;
                 resiFacts += ind.ResiFactCount;
+                lostCousinsFacts += ind.LostCousinsFactCount;
             }
             xmlErrorbox.AppendText("\nFound " + censusFacts + " census facts in GEDCOM File.");
-            xmlErrorbox.AppendText("\nFound " + resiFacts + " residence facts in GEDCOM File.\n");
+            xmlErrorbox.AppendText("\nFound " + resiFacts + " residence facts in GEDCOM File.");
+            xmlErrorbox.AppendText("\nFound " + lostCousinsFacts + " Lost Cousins facts in GEDCOM File.\n");
             if (censusFacts == 0 && resiFacts == 0)
             {
                 xmlErrorbox.AppendText("\nFound no census or residence facts in GEDCOM File.\n");
@@ -294,7 +297,7 @@ namespace FTAnalyzer
                 List<ExportFacts> result = new List<ExportFacts>();
                 foreach (Individual ind in individuals)
                 {
-                    foreach (Fact f in ind.Facts)
+                    foreach (Fact f in ind.PersonalFacts)
                         result.Add(new ExportFacts(ind, f));
                     foreach (Family fam in ind.FamiliesAsParent)
                         foreach (Fact famfact in fam.Facts)
@@ -393,7 +396,7 @@ namespace FTAnalyzer
 
         public IEnumerable<Individual> GetIndividualsAtLocation(FactLocation loc, int level)
         {
-            return individuals.Where(i => i.isAtLocation(loc, level));
+            return individuals.Where(i => i.IsAtLocation(loc, level));
         }
 
         public IEnumerable<Family> GetFamiliesAtLocation(FactLocation loc, int level)
@@ -407,7 +410,7 @@ namespace FTAnalyzer
             HashSet<string> result = new HashSet<string>();
             foreach (Individual i in individuals)
             {
-                if (!result.Contains(i.Surname) && i.isAtLocation(loc, level))
+                if (!result.Contains(i.Surname) && i.IsAtLocation(loc, level))
                     result.Add(i.Surname);
             }
             List<string> ls = result.ToList();
@@ -823,6 +826,8 @@ namespace FTAnalyzer
 
         #endregion
 
+        #region Displays
+
         public IEnumerable<CensusFamily> GetAllCensusFamilies(FactDate censusDate, bool censusDone, bool lostCousinsCheck)
         {
             if (censusDate != null)
@@ -835,8 +840,6 @@ namespace FTAnalyzer
                 }
             }
         }
-
-        #region Displays
 
         private SortableBindingList<IDisplayLocation> GetDisplayLocations(int level)
         {
@@ -958,7 +961,11 @@ namespace FTAnalyzer
                         if (minAge > 110)
                             errors[(int)dataerror.AGED_MORE_THAN_110].Add(new DataError((int)dataerror.AGED_MORE_THAN_110, ind, "Aged over 110 before died " + ind.DeathDate));
                     }
-                    foreach (Fact f in ind.Facts)
+                    foreach (Fact f in ind.ErrorFacts)
+                    {
+                        errors[(int)dataerror.FACT_ERROR].Add(new DataError((int)dataerror.FACT_ERROR, ind, f.FactErrorMessage)); 
+                    }
+                    foreach (Fact f in ind.PersonalFacts)
                     {
                         if (f.FactType != Fact.BIRTH && f.FactDate.IsBefore(ind.BirthDate))
                         {
@@ -1001,11 +1008,19 @@ namespace FTAnalyzer
                            (f.FactType == Fact.RESIDENCE && 
                                 Properties.GeneralSettings.Default.UseResidenceAsCensus && Properties.GeneralSettings.Default.StrictResidenceDates))
                         {
-                            TimeSpan ts = f.FactDate.EndDate - f.FactDate.StartDate;
                             string comment = f.FactType == Fact.CENSUS ? "Census date " : "Residence date ";
-                            if(ts.Days > 3650)
+                            if (f.FactDate.Equals(FactDate.UNKNOWN_DATE))
+                            {
                                 errors[(int)dataerror.CENSUS_COVERAGE].Add(
-                                    new DataError((int)dataerror.CENSUS_COVERAGE, ind, comment + f.FactDate + " covers more than one census event."));
+                                        new DataError((int)dataerror.CENSUS_COVERAGE, ind, comment + "is blank."));
+                            }
+                            else
+                            {
+                                TimeSpan ts = f.FactDate.EndDate - f.FactDate.StartDate;
+                                if (ts.Days > 3650)
+                                    errors[(int)dataerror.CENSUS_COVERAGE].Add(
+                                        new DataError((int)dataerror.CENSUS_COVERAGE, ind, comment + f.FactDate + " covers more than one census event."));
+                            }
                         }
                     }
                     foreach (Family asChild in ind.FamiliesAsChild)
@@ -1079,7 +1094,7 @@ namespace FTAnalyzer
             BIRTH_AFTER_FATHER_DEATH = 4, BIRTH_BEFORE_FATHER_13 = 5, BIRTH_BEFORE_MOTHER_13 = 6, BURIAL_BEFORE_DEATH = 7,
             AGED_MORE_THAN_110 = 8, FACTS_BEFORE_BIRTH = 9, FACTS_AFTER_DEATH = 10, MARRIAGE_AFTER_DEATH = 11, 
             MARRIAGE_AFTER_SPOUSE_DEAD = 12, MARRIAGE_BEFORE_13 = 13, MARRIAGE_BEFORE_SPOUSE_13 = 14, LOST_COUSINS_NON_CENSUS = 15,
-            LOST_COUSINS_NOT_SUPPORTED_YEAR = 16, CENSUS_COVERAGE = 17
+            LOST_COUSINS_NOT_SUPPORTED_YEAR = 16, CENSUS_COVERAGE = 17, FACT_ERROR = 18
         };
 
         public void SetDataErrorsCheckedDefaults(CheckedListBox list)

@@ -372,11 +372,11 @@ namespace FTAnalyzer
                     if (f.FactDate.AverageDate != FactDate.UNKNOWN_DATE)
                         dates.Add(f.FactDate.AverageDate);
                 if (Husband != null)
-                    foreach (Fact f in Husband.Facts)
+                    foreach (Fact f in Husband.PersonalFacts)
                         if (f.FactDate.AverageDate != FactDate.UNKNOWN_DATE)
                             dates.Add(f.FactDate.AverageDate);
                 if (Wife != null)
-                    foreach (Fact f in Wife.Facts)
+                    foreach (Fact f in Wife.PersonalFacts)
                         if (f.FactDate.AverageDate != FactDate.UNKNOWN_DATE)
                             dates.Add(f.FactDate.AverageDate);
                 foreach (Individual c in Children)
@@ -427,11 +427,11 @@ namespace FTAnalyzer
                 // add the family facts then the facts from each individual
                 results.Add(Facts);
                 if (Husband != null)
-                    results.Add(Husband.Facts);
+                    results.Add(Husband.PersonalFacts);
                 if (Wife != null)
-                    results.Add(Wife.Facts);
+                    results.Add(Wife.PersonalFacts);
                 foreach (Individual c in Children)
-                    results.Add(c.Facts);
+                    results.Add(c.PersonalFacts);
                 return results.SelectMany(x => x);
             }
         }
@@ -465,10 +465,10 @@ namespace FTAnalyzer
                 foreach(Fact f in Facts)
                     results.Add(new DisplayFact(null, name, f));
                 if (Husband != null)
-                    foreach(Fact f in Husband.Facts)
+                    foreach(Fact f in Husband.PersonalFacts)
                         results.Add(new DisplayFact(Husband, Husband.Name, f));
                 if (Wife != null)
-                    foreach (Fact f in Wife.Facts)
+                    foreach (Fact f in Wife.PersonalFacts)
                         results.Add(new DisplayFact(Wife, Wife.Name, f));
                 foreach (Individual c in Children)
                 {

@@ -29,6 +29,7 @@ namespace FTAnalyzer
         private bool hasParents;
 
         private IList<Fact> facts;
+        private IList<Fact> errorFacts;
         private IList<FactLocation> locations;
         private IList<Family> familiesAsParent;
         private IList<Family> familiesAsChild;
@@ -45,6 +46,7 @@ namespace FTAnalyzer
             infamily = false;
             hasParents = false;
             facts = new List<Fact>();
+            errorFacts = new List<Fact>();
             locations = new List<FactLocation>();
             familiesAsChild = new List<Family>();
             familiesAsParent = new List<Family>();
@@ -112,6 +114,7 @@ namespace FTAnalyzer
                 this.relationType = i.relationType;
                 this.infamily = i.infamily;
                 this.facts = new List<Fact>(i.facts);
+                this.errorFacts = new List<Fact>(i.errorFacts);
                 this.locations = new List<FactLocation>(i.locations);
                 this.familiesAsChild = new List<Family>(i.familiesAsChild);
                 this.familiesAsParent = new List<Family>(i.familiesAsParent);
@@ -175,9 +178,14 @@ namespace FTAnalyzer
             }
         }
 
-        public IList<Fact> Facts 
+        public IList<Fact> PersonalFacts 
         { 
             get { return this.facts; } 
+        }
+
+        public IList<Fact> ErrorFacts
+        {
+            get { return this.errorFacts; }
         }
 
         public IList<Fact> AllFacts
@@ -456,6 +464,21 @@ namespace FTAnalyzer
             }
         }
 
+        public int LostCousinsFactCount
+        {
+            get
+            {
+                int lostCousinsFacts = 0;
+                foreach (Fact f in facts)
+                {
+                    if (f.FactType == Fact.LOSTCOUSINS)
+                        lostCousinsFacts++;
+                }
+                return lostCousinsFacts;
+            }
+        }
+
+
         public string MarriageDates
         {
             get
@@ -634,7 +657,11 @@ namespace FTAnalyzer
             foreach(XmlNode n in list) {
                 try
                 {
-                    AddFact(new Fact(n, IndividualRef));
+                    Fact f = new Fact(n, IndividualRef);
+                    if (f.FactError)
+                        errorFacts.Add(f);
+                    else
+                        AddFact(f);
                 }
                 catch (InvalidXMLFactException ex)
                 {
@@ -707,18 +734,12 @@ namespace FTAnalyzer
         public FactLocation BestLocation(FactDate when)
         {
             // this returns a Location a person was at for a given period
-            List<Fact> allFacts = new List<Fact>();
-            allFacts.AddRange(facts);
-            foreach (Family f in familiesAsParent)
-            {
-                allFacts.AddRange(f.Facts);
-            }
-            return FactLocation.BestLocation(allFacts, when);
+            return FactLocation.BestLocation(AllFacts, when);
         }
 
-        public bool isAtLocation(FactLocation loc, int level)
+        public bool IsAtLocation(FactLocation loc, int level)
         {
-            foreach (Fact f in facts)
+            foreach (Fact f in AllFacts)
             {
                 if (f.Location.Equals(loc, level))
                     return true;

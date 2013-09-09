@@ -185,6 +185,7 @@ namespace FTAnalyzer
             this.Sources = new List<FactSource>();
             this.CertificatePresent = false;
             this.FactError = false;
+            this.FactErrorMessage = string.Empty;
         }
 
         public Fact(XmlNode node, string factRef)
@@ -277,10 +278,14 @@ namespace FTAnalyzer
                 (tag == "Census 1901" && !FactDate.Overlaps(CensusDate.UKCENSUS1901)) ||
                 (tag == "Census 1911" && !FactDate.Overlaps(CensusDate.UKCENSUS1911)))
             {
-                throw new InvalidXMLFactException("UK Census fact error date '" + dateFromFile + "' doesn't match '" + tag + "' tag. Check for incorrect date entered.");
+                this.FactErrorMessage = "UK Census fact error date '" + dateFromFile + "' doesn't match '" + tag + "' tag. Check for incorrect date entered.";
+                this.FactError = true;
             }
             if (tag == "Census" && !CensusDate.IsCensusYear(FactDate))
-                throw new InvalidXMLFactException("Census fact error date '" + dateFromFile + "' isn't a supported census date. Check for incorrect date entered.");
+            {
+                this.FactErrorMessage = "Census fact error date '" + dateFromFile + "' isn't a supported census date. Check for incorrect date entered.";
+                this.FactError = true;
+            }
         }
 
         public Fact(string factType, FactDate date)
@@ -308,6 +313,8 @@ namespace FTAnalyzer
         public string FactType { get; private set; }
 
         public bool FactError { get; private set; }
+
+        public string FactErrorMessage { get; private set; }
 
         public string DateString
         {

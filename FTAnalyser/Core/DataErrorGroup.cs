@@ -25,7 +25,8 @@ namespace FTAnalyzer
                       "Marriage before spouse aged 13", 
                       "Lost Cousins tag in non Census Year", 
                       "Lost Cousins tag in non supported Year",
-                      "Census fact date range too wide"
+                      "Census date range too wide/Unknown",
+                      "Fact error detected"
                     };
 
         //"Later marriage before previous spouse died"
