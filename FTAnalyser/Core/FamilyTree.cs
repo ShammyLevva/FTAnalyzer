@@ -111,6 +111,7 @@ namespace FTAnalyzer
             locations = new Dictionary<string, FactLocation>();
             occupations = new Dictionary<string, List<Individual>>();
             dataErrorTypes = new List<DataErrorGroup>();
+            looseDeaths = new SortableBindingList<IDisplayLooseDeath>();
             displayLocations = new SortableBindingList<IDisplayLocation>[5];
             for (int i = 0; i < 5; i++)
                 displayLocations[i] = null;

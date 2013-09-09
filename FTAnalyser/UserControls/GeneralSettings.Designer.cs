@@ -35,6 +35,7 @@
             this.chkAllowEmptyLocations = new System.Windows.Forms.CheckBox();
             this.chkCensusResidence = new System.Windows.Forms.CheckBox();
             this.chkStrictResidenceYears = new System.Windows.Forms.CheckBox();
+            this.chkTolerateInaccurateCensus = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,10 +71,19 @@
             this.chkStrictResidenceYears.Name = "chkStrictResidenceYears";
             this.chkStrictResidenceYears.UseVisualStyleBackColor = true;
             // 
+            // chkTolerateInaccurateCensus
+            // 
+            resources.ApplyResources(this.chkTolerateInaccurateCensus, "chkTolerateInaccurateCensus");
+            this.chkTolerateInaccurateCensus.Checked = true;
+            this.chkTolerateInaccurateCensus.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTolerateInaccurateCensus.Name = "chkTolerateInaccurateCensus";
+            this.chkTolerateInaccurateCensus.UseVisualStyleBackColor = true;
+            // 
             // GeneralSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkTolerateInaccurateCensus);
             this.Controls.Add(this.chkStrictResidenceYears);
             this.Controls.Add(this.chkCensusResidence);
             this.Controls.Add(this.chkAllowEmptyLocations);
@@ -92,6 +102,7 @@
         private System.Windows.Forms.CheckBox chkAllowEmptyLocations;
         private System.Windows.Forms.CheckBox chkCensusResidence;
         private System.Windows.Forms.CheckBox chkStrictResidenceYears;
+        private System.Windows.Forms.CheckBox chkTolerateInaccurateCensus;
 
 
 	}

@@ -265,7 +265,7 @@ namespace FTAnalyzer
                 (tag == "Census 1901" && !FactDate.Overlaps(CensusDate.UKCENSUS1901)) ||
                 (tag == "Census 1911" && !FactDate.Overlaps(CensusDate.UKCENSUS1911)) ||
                 (tag == "Census" && !CensusDate.IsCensusYear(FactDate))) &&
-                FactDate.DateString.Length >=4)
+                FactDate.DateString.Length >=4 && Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
             {
                 FactDate = new FactDate(FactDate.DateString.Substring(FactDate.DateString.Length - 4));
             }

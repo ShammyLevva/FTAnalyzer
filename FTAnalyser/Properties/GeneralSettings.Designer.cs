@@ -82,5 +82,17 @@ namespace FTAnalyzer.Properties {
                 this["StrictResidenceDates"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool TolerateInaccurateCensusDate {
+            get {
+                return ((bool)(this["TolerateInaccurateCensusDate"]));
+            }
+            set {
+                this["TolerateInaccurateCensusDate"] = value;
+            }
+        }
     }
 }

@@ -20,6 +20,7 @@ namespace FTAnalyzer.UserControls
             chkAllowEmptyLocations.Checked = Properties.GeneralSettings.Default.AllowEmptyLocations;
             chkCensusResidence.Checked = Properties.GeneralSettings.Default.UseResidenceAsCensus;
             chkStrictResidenceYears.Checked = Properties.GeneralSettings.Default.StrictResidenceDates;
+            chkTolerateInaccurateCensus.Checked = Properties.GeneralSettings.Default.TolerateInaccurateCensusDate;
         }
 
 		#region IOptions Members
@@ -32,10 +33,13 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.AllowEmptyLocations = chkAllowEmptyLocations.Checked;
             Properties.GeneralSettings.Default.UseResidenceAsCensus = chkCensusResidence.Checked;
             Properties.GeneralSettings.Default.StrictResidenceDates = chkStrictResidenceYears.Checked;
+            Properties.GeneralSettings.Default.TolerateInaccurateCensusDate = chkTolerateInaccurateCensus.Checked;
             Properties.GeneralSettings.Default.Save();
             OnUseBaptismDatesChanged();
             OnAllowEmptyLocationsChanged();
             OnUseResidenceAsCensusChanged();
+            OnStrictResidenceDatesChanged();
+            OnTolerateInaccurateCensusChanged();
 		}
 
 		public void Cancel()
@@ -115,6 +119,13 @@ namespace FTAnalyzer.UserControls
         {
             if (StrictResidenceDatesChanged != null)
                 StrictResidenceDatesChanged(null, EventArgs.Empty);
+        }
+
+        public static event EventHandler TolerateInaccurateCensusChanged;
+        protected static void OnTolerateInaccurateCensusChanged()
+        {
+            if (TolerateInaccurateCensusChanged != null)
+                TolerateInaccurateCensusChanged(null, EventArgs.Empty);
         }
     }
 }
