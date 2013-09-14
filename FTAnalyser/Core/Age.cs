@@ -23,8 +23,8 @@ namespace FTAnalyzer
         {
             if (when.IsAfter(ind.DeathDate))
                 when = ind.DeathDate;
-            MinAge = GetAge(ind.BirthDate.EndDate, when.StartDate, FactDate.MINDATE);
-            MaxAge = GetAge(ind.BirthDate.StartDate, when.EndDate, FactDate.MAXDATE);
+            MinAge = GetAge(ind.BirthDate.EndDate, when.StartDate);
+            MaxAge = GetAge(ind.BirthDate.StartDate, when.EndDate);
             if (MinAge == FactDate.MINYEARS)
             {
                 if (MaxAge == FactDate.MAXYEARS)
@@ -43,11 +43,9 @@ namespace FTAnalyzer
             }
         }
 
-        private int GetAge(DateTime birthDate, DateTime laterDate, DateTime nullValue)
+        private int GetAge(DateTime birthDate, DateTime laterDate)
         {
             int age;
-            if (laterDate == null)
-                laterDate = nullValue;
             age = laterDate.Year - birthDate.Year;
             if (age > 0)
             {
