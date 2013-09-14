@@ -914,7 +914,7 @@ namespace FTAnalyzer
             Predicate<Individual> filter = createTreeTopsIndividualFilter();
             List<IDisplayIndividual> treeTopsList = ft.GetTreeTops(filter).ToList();
             treeTopsList.Sort(new BirthDateComparer());
-            dgTreeTops.DataSource = treeTopsList;
+            dgTreeTops.DataSource = new SortableBindingList<IDisplayIndividual>(treeTopsList);
             foreach (DataGridViewColumn c in dgTreeTops.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = "Count : " + treeTopsList.Count;
@@ -928,7 +928,7 @@ namespace FTAnalyzer
             Predicate<Individual> filter = CreateWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("BET 1914 AND 1918"));
             List<IDisplayIndividual> warDeadList = ft.GetWarDead(filter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
-            dgWarDead.DataSource = warDeadList;
+            dgWarDead.DataSource = new SortableBindingList<IDisplayIndividual>(warDeadList);
             foreach (DataGridViewColumn c in dgWarDead.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = "Count : " + warDeadList.Count;
@@ -942,7 +942,7 @@ namespace FTAnalyzer
             Predicate<Individual> filter = CreateWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("BET 1939 AND 1945"));
             List<IDisplayIndividual> warDeadList = ft.GetWarDead(filter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
-            dgWarDead.DataSource = warDeadList;
+            dgWarDead.DataSource = new SortableBindingList<IDisplayIndividual>(warDeadList);
             foreach (DataGridViewColumn c in dgWarDead.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = "Count : " + warDeadList.Count;
