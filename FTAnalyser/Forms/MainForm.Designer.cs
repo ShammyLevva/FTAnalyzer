@@ -53,7 +53,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabSelector = new System.Windows.Forms.TabControl();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
-            this.webBrowser = new System.Windows.Forms.WebBrowser();
+            //this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.pbFamilies = new System.Windows.Forms.ProgressBar();
@@ -396,7 +396,7 @@
             // 
             // tabDisplayProgress
             // 
-            this.tabDisplayProgress.Controls.Add(this.webBrowser);
+            //this.tabDisplayProgress.Controls.Add(this.webBrowser);
             this.tabDisplayProgress.Controls.Add(this.rtbOutput);
             this.tabDisplayProgress.Controls.Add(this.label6);
             this.tabDisplayProgress.Controls.Add(this.pbFamilies);
@@ -414,12 +414,12 @@
             // 
             // webBrowser
             // 
-            this.webBrowser.Location = new System.Drawing.Point(867, 3);
-            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(61, 54);
-            this.webBrowser.TabIndex = 7;
-            this.webBrowser.Visible = false;
+            //this.webBrowser.Location = new System.Drawing.Point(867, 3);
+            //this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            //this.webBrowser.Name = "webBrowser";
+            //this.webBrowser.Size = new System.Drawing.Size(61, 54);
+            //this.webBrowser.TabIndex = 7;
+            //this.webBrowser.Visible = false;
             // 
             // rtbOutput
             // 
