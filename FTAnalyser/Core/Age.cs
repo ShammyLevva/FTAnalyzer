@@ -22,7 +22,7 @@ namespace FTAnalyzer
                 if (MaxAge == FactDate.MAXYEARS)
                     age = "Unknown";
                 else
-                    age = "<=" + MaxAge;
+                    age = MaxAge == 0 ? "< 1" : "<=" + MaxAge;
             }
             else if (MaxAge < FactDate.MAXYEARS)
             {
@@ -33,7 +33,6 @@ namespace FTAnalyzer
                 // if age over maximum return maximum
                 age = ">=" + MinAge;
             }
-            
         }
 
         private int GetAge(DateTime birthDate, DateTime laterDate, DateTime nullValue)
