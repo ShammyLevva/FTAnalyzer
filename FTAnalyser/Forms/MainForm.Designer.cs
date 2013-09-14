@@ -1772,7 +1772,7 @@
         private System.Windows.Forms.Button btnWWII;
         private System.Windows.Forms.Button btnWWI;
         private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.WebBrowser webBrowser;
+        //private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.TabPage tabFamilies;
         private System.Windows.Forms.DataGridView dgFamilies;
         private System.Windows.Forms.ToolStripMenuItem mnuPrint;

@@ -156,6 +156,12 @@
     <Compile Include="Core\FactSource.cs" />
     <Compile Include="Core\FamilySearch.cs" />
     <Compile Include="Core\Statistics.cs" />
+    <Compile Include="Forms\ColouredBMD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ColouredBMD.Designer.cs">
+      <DependentUpon>ColouredBMD.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Facts.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +208,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\ColouredBMD.resx">
+      <DependentUpon>ColouredBMD.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Facts.resx">
       <DependentUpon>Facts.cs</DependentUpon>
     </EmbeddedResource>
