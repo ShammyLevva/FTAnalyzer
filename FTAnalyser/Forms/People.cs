@@ -66,9 +66,9 @@ namespace FTAnalyzer.Forms
                 bool added = false;
                 foreach (Individual child in f.Children)
                 {
-                    if (child.BirthDate != FactDate.UNKNOWN_DATE)
+                    if (child.BirthDate.IsKnown())
                     {
-                        if (f.Husband != null && f.Husband.BirthDate != FactDate.UNKNOWN_DATE)
+                        if (f.Husband != null && f.Husband.BirthDate.IsKnown())
                         {
                             Age age = f.Husband.GetAge(child.BirthDate);
                             if (age.MinAge >= minAge && !dsInd.Contains(f.Husband))
@@ -78,7 +78,7 @@ namespace FTAnalyzer.Forms
                                 added = true;
                             }
                         }
-                        if (f.Wife != null && f.Wife.BirthDate != FactDate.UNKNOWN_DATE)
+                        if (f.Wife != null && f.Wife.BirthDate.IsKnown())
                         {
                             Age age = f.Wife.GetAge(child.BirthDate);
                             if (age.MinAge >= minAge && !dsInd.Contains(f.Wife))

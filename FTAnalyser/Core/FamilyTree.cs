@@ -457,7 +457,7 @@ namespace FTAnalyzer
         {
             FactDate deathDate = indiv.DeathDate;
             FactDate toAdd = null;
-            if (deathDate != FactDate.UNKNOWN_DATE && deathDate.DateType != FactDate.FactDateType.ABT && !deathDate.IsExact())
+            if (deathDate.IsKnown() && deathDate.DateType != FactDate.FactDateType.ABT && !deathDate.IsExact())
             {
                 DateTime maxLiving = GetMaxLivingDate(indiv);
                 DateTime minDeath = GetMinDeathDate(indiv);
@@ -482,7 +482,7 @@ namespace FTAnalyzer
                     toAdd = new FactDate(deathDate.StartDate, minDeath);
                 }
             }
-            else if (deathDate == FactDate.UNKNOWN_DATE && indiv.LifeSpan.MinAge > 110)
+            else if (deathDate.IsKnown() && indiv.LifeSpan.MinAge > 110)
             {
                 // also check for empty death dates for people aged over 110
                 DateTime maxLiving = GetMaxLivingDate(indiv);
@@ -928,8 +928,8 @@ namespace FTAnalyzer
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, surname);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            Predicate<Individual> dateFilter = i => ((i.BirthDate.IsBefore(CensusDate.UKCENSUS1911) || i.BirthDate.IsUnknown()) &&
-                                                     (i.DeathDate.IsAfter(CensusDate.UKCENSUS1841) || i.DeathDate.IsUnknown()));
+            Predicate<Individual> dateFilter = i => ((i.BirthDate.IsBefore(CensusDate.UKCENSUS1911) || !i.BirthDate.IsKnown()) &&
+                                                     (i.DeathDate.IsAfter(CensusDate.UKCENSUS1841) || !i.DeathDate.IsKnown()));
             filter = FilterUtils.AndFilter<Individual>(filter, dateFilter, aliveOnAnyCensus);
             IEnumerable<Individual> aliveOnCensus = individuals.Where(filter);
             return new SortableBindingList<IDisplayColouredCensus>(aliveOnCensus);
@@ -950,7 +950,7 @@ namespace FTAnalyzer
             {
                 try
                 {
-                    if (ind.DeathDate != FactDate.UNKNOWN_DATE)
+                    if (ind.DeathDate.IsKnown())
                     {
                         if (ind.BirthDate.IsAfter(ind.DeathDate))
                             errors[(int)dataerror.BIRTH_AFTER_DEATH].Add(new DataError((int)dataerror.BIRTH_AFTER_DEATH, ind, "Died " + ind.DeathDate + " before born"));
@@ -1010,7 +1010,7 @@ namespace FTAnalyzer
                                 Properties.GeneralSettings.Default.UseResidenceAsCensus && Properties.GeneralSettings.Default.StrictResidenceDates))
                         {
                             string comment = f.FactType == Fact.CENSUS ? "Census date " : "Residence date ";
-                            if (f.FactDate.IsUnknown())
+                            if (!f.FactDate.IsKnown())
                             {
                                 errors[(int)dataerror.CENSUS_COVERAGE].Add(
                                         new DataError((int)dataerror.CENSUS_COVERAGE, ind, comment + "is blank."));
@@ -1035,7 +1035,7 @@ namespace FTAnalyzer
                                 errors[(int)dataerror.BIRTH_AFTER_FATHER_90].Add(new DataError((int)dataerror.BIRTH_AFTER_FATHER_90, ind, "Father " + father.Name + " born " + father.BirthDate + " is more than 90 yrs old when individual was born"));
                             if (maxAge < 13)
                                 errors[(int)dataerror.BIRTH_BEFORE_FATHER_13].Add(new DataError((int)dataerror.BIRTH_BEFORE_FATHER_13, ind, "Father " + father.Name + " born " + father.BirthDate + " is less than 13 yrs old when individual was born"));
-                            if (!father.DeathDate.IsUnknown() && !ind.BirthDate.IsUnknown())
+                            if (father.DeathDate.IsKnown() && ind.BirthDate.IsKnown())
                             {
                                 FactDate conception = ind.BirthDate.SubtractMonths(9);
                                 if (father.DeathDate.IsBefore(conception))
@@ -1051,7 +1051,7 @@ namespace FTAnalyzer
                                 errors[(int)dataerror.BIRTH_AFTER_MOTHER_60].Add(new DataError((int)dataerror.BIRTH_AFTER_MOTHER_60, ind, "Mother " + mother.Name + " born " + mother.BirthDate + " is more than 60 yrs old when individual was born"));
                             if (maxAge < 13)
                                 errors[(int)dataerror.BIRTH_BEFORE_MOTHER_13].Add(new DataError((int)dataerror.BIRTH_BEFORE_MOTHER_13, ind, "Mother " + mother.Name + " born " + mother.BirthDate + " is less than 13 yrs old when individual was born"));
-                            if (!mother.DeathDate.IsUnknown() && mother.DeathDate.IsBefore(ind.BirthDate))
+                            if (mother.DeathDate.IsKnown() && mother.DeathDate.IsBefore(ind.BirthDate))
                                 errors[(int)dataerror.BIRTH_AFTER_MOTHER_DEATH].Add(new DataError((int)dataerror.BIRTH_AFTER_MOTHER_DEATH, ind, "Mother " + mother.Name + " died " + mother.DeathDate + " which is before individual was born"));
                         }
                     }
@@ -1156,7 +1156,7 @@ namespace FTAnalyzer
                 path.Append("%2B" + FamilySearch.SURNAME + "%3A" + HttpUtility.UrlEncode(surname) + "%7E%20");
             }
             path.Append("%2B" + FamilySearch.RECORD_TYPE + "%3A%283%29");
-            if (person.BirthDate != FactDate.UNKNOWN_DATE)
+            if (person.BirthDate.IsKnown())
             {
                 int startYear = person.BirthDate.StartDate.Year - 1;
                 int endYear = person.BirthDate.EndDate.Year + 1;
@@ -1229,7 +1229,7 @@ namespace FTAnalyzer
             }
             surname = surname.Trim();
             query.Append("gsln=" + HttpUtility.UrlEncode(surname) + "&");
-            if (person.BirthDate != FactDate.UNKNOWN_DATE)
+            if (person.BirthDate.IsKnown())
             {
                 int startYear = person.BirthDate.StartDate.Year;
                 int endYear = person.BirthDate.EndDate.Year;
@@ -1291,7 +1291,7 @@ namespace FTAnalyzer
                 query.Append("s=" + HttpUtility.UrlEncode(surname) + "&");
                 query.Append("p=on&");
             }
-            if (person.BirthDate != FactDate.UNKNOWN_DATE)
+            if (person.BirthDate.IsKnown())
             {
                 int startYear = person.BirthDate.StartDate.Year;
                 int endYear = person.BirthDate.EndDate.Year;
@@ -1393,7 +1393,7 @@ namespace FTAnalyzer
             {
                 query.Append("lastName=&sns=sns&");
             }
-            if (person.BirthDate != FactDate.UNKNOWN_DATE)
+            if (person.BirthDate.IsKnown())
             {
                 int startYear = person.BirthDate.StartDate.Year;
                 int endYear = person.BirthDate.EndDate.Year;

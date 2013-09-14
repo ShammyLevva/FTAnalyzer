@@ -35,14 +35,14 @@ namespace FTAnalyzer
             {
                 foreach (Individual child in f.Children)
                 {
-                    if (child.BirthDate != FactDate.UNKNOWN_DATE)
+                    if (child.BirthDate.IsKnown())
                     {
-                        if (f.Husband != null && f.Husband.BirthDate != FactDate.UNKNOWN_DATE)
+                        if (f.Husband != null && f.Husband.BirthDate.IsKnown())
                         {
                             Age age = f.Husband.GetAge(child.BirthDate);
                             addAgeData(0, stats, age, child.Gender);
                         }
-                        if (f.Wife != null && f.Wife.BirthDate != FactDate.UNKNOWN_DATE)
+                        if (f.Wife != null && f.Wife.BirthDate.IsKnown())
                         {
                             Age age = f.Wife.GetAge(child.BirthDate);
                             addAgeData(1, stats, age, child.Gender);
