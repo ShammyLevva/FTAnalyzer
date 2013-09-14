@@ -369,18 +369,18 @@ namespace FTAnalyzer
                 // return "central" date of family - use marriage facts, Husband/Wife facts, children birth facts
                 List<FactDate> dates = new List<FactDate>();
                 foreach (Fact f in Facts)
-                    if (f.FactDate.AverageDate != FactDate.UNKNOWN_DATE)
+                    if (!f.FactDate.AverageDate.IsUnknown())
                         dates.Add(f.FactDate.AverageDate);
                 if (Husband != null)
                     foreach (Fact f in Husband.PersonalFacts)
-                        if (f.FactDate.AverageDate != FactDate.UNKNOWN_DATE)
+                        if (!f.FactDate.AverageDate.IsUnknown())
                             dates.Add(f.FactDate.AverageDate);
                 if (Wife != null)
                     foreach (Fact f in Wife.PersonalFacts)
-                        if (f.FactDate.AverageDate != FactDate.UNKNOWN_DATE)
+                        if (!f.FactDate.AverageDate.IsUnknown())
                             dates.Add(f.FactDate.AverageDate);
                 foreach (Individual c in Children)
-                    if (c.BirthDate.AverageDate != FactDate.UNKNOWN_DATE)
+                    if (!c.BirthDate.AverageDate.IsUnknown())
                         dates.Add(c.BirthDate.AverageDate);
                 if (dates.Count == 0)
                     return FactDate.UNKNOWN_DATE;

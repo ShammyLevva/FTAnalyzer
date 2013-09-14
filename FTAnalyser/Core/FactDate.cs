@@ -594,6 +594,11 @@ namespace FTAnalyzer
             return this.StartDate.Equals(this.EndDate);
         }
 
+        public bool IsUnknown()
+        {
+            return this.Equals(UNKNOWN_DATE);
+        }
+
         public double Distance(FactDate when)
         {
             double startDiff = ((this.StartDate.Year - when.StartDate.Year) * 12) + (this.StartDate.Month - when.StartDate.Month);

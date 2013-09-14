@@ -928,8 +928,8 @@ namespace FTAnalyzer
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, surname);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            Predicate<Individual> dateFilter = i => (i.BirthDate.IsBefore(CensusDate.UKCENSUS1911) &&
-                                                     i.DeathDate.IsAfter(CensusDate.UKCENSUS1841));
+            Predicate<Individual> dateFilter = i => ((i.BirthDate.IsBefore(CensusDate.UKCENSUS1911) || i.BirthDate.IsUnknown()) &&
+                                                     (i.DeathDate.IsAfter(CensusDate.UKCENSUS1841) || i.DeathDate.IsUnknown()));
             filter = FilterUtils.AndFilter<Individual>(filter, dateFilter, aliveOnAnyCensus);
             IEnumerable<Individual> aliveOnCensus = individuals.Where(filter);
             return new SortableBindingList<IDisplayColouredCensus>(aliveOnCensus);
@@ -1010,7 +1010,7 @@ namespace FTAnalyzer
                                 Properties.GeneralSettings.Default.UseResidenceAsCensus && Properties.GeneralSettings.Default.StrictResidenceDates))
                         {
                             string comment = f.FactType == Fact.CENSUS ? "Census date " : "Residence date ";
-                            if (f.FactDate.Equals(FactDate.UNKNOWN_DATE))
+                            if (f.FactDate.IsUnknown())
                             {
                                 errors[(int)dataerror.CENSUS_COVERAGE].Add(
                                         new DataError((int)dataerror.CENSUS_COVERAGE, ind, comment + "is blank."));
@@ -1035,7 +1035,7 @@ namespace FTAnalyzer
                                 errors[(int)dataerror.BIRTH_AFTER_FATHER_90].Add(new DataError((int)dataerror.BIRTH_AFTER_FATHER_90, ind, "Father " + father.Name + " born " + father.BirthDate + " is more than 90 yrs old when individual was born"));
                             if (maxAge < 13)
                                 errors[(int)dataerror.BIRTH_BEFORE_FATHER_13].Add(new DataError((int)dataerror.BIRTH_BEFORE_FATHER_13, ind, "Father " + father.Name + " born " + father.BirthDate + " is less than 13 yrs old when individual was born"));
-                            if (father.DeathDate != FactDate.UNKNOWN_DATE && ind.BirthDate != FactDate.UNKNOWN_DATE)
+                            if (!father.DeathDate.IsUnknown() && !ind.BirthDate.IsUnknown())
                             {
                                 FactDate conception = ind.BirthDate.SubtractMonths(9);
                                 if (father.DeathDate.IsBefore(conception))
@@ -1051,7 +1051,7 @@ namespace FTAnalyzer
                                 errors[(int)dataerror.BIRTH_AFTER_MOTHER_60].Add(new DataError((int)dataerror.BIRTH_AFTER_MOTHER_60, ind, "Mother " + mother.Name + " born " + mother.BirthDate + " is more than 60 yrs old when individual was born"));
                             if (maxAge < 13)
                                 errors[(int)dataerror.BIRTH_BEFORE_MOTHER_13].Add(new DataError((int)dataerror.BIRTH_BEFORE_MOTHER_13, ind, "Mother " + mother.Name + " born " + mother.BirthDate + " is less than 13 yrs old when individual was born"));
-                            if (mother.DeathDate != FactDate.UNKNOWN_DATE && mother.DeathDate.IsBefore(ind.BirthDate))
+                            if (!mother.DeathDate.IsUnknown() && mother.DeathDate.IsBefore(ind.BirthDate))
                                 errors[(int)dataerror.BIRTH_AFTER_MOTHER_DEATH].Add(new DataError((int)dataerror.BIRTH_AFTER_MOTHER_DEATH, ind, "Mother " + mother.Name + " died " + mother.DeathDate + " which is before individual was born"));
                         }
                     }
