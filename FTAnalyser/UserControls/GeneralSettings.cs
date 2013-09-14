@@ -27,9 +27,7 @@ namespace FTAnalyzer.UserControls
 
 		public void Save()
 		{
-            string message = string.Empty;
-            string title = string.Empty;
-			Properties.GeneralSettings.Default.UseBaptismDates = chkUseBaptisms.Checked;
+            Properties.GeneralSettings.Default.UseBaptismDates = chkUseBaptisms.Checked;
             Properties.GeneralSettings.Default.AllowEmptyLocations = chkAllowEmptyLocations.Checked;
             Properties.GeneralSettings.Default.UseResidenceAsCensus = chkCensusResidence.Checked;
             Properties.GeneralSettings.Default.StrictResidenceDates = chkStrictResidenceYears.Checked;
