@@ -189,7 +189,7 @@ namespace FTAnalyzer
         }
 
         public Fact(XmlNode node, string factRef)
-            : base()
+            : this()
         {
             if (node != null)
             {
@@ -224,7 +224,6 @@ namespace FTAnalyzer
                         FamilyTree.GetText(node, "PLAC/MAP/LATI"), FamilyTree.GetText(node, "PLAC/MAP/LONG"));
 
                     // now iterate through source elements of the fact finding all sources
-                    Sources = new List<FactSource>();
                     XmlNodeList list = node.SelectNodes("SOUR");
                     foreach (XmlNode n in list)
                     {
@@ -253,48 +252,13 @@ namespace FTAnalyzer
             }
         }
 
-        private void CheckCensusDate(string tag)
-        {
-            FactDate dateFromFile = FactDate;
-            if (((tag == "Census 1841" && !FactDate.Overlaps(CensusDate.UKCENSUS1841)) ||
-                (tag == "Census 1851" && !FactDate.Overlaps(CensusDate.UKCENSUS1851)) ||
-                (tag == "Census 1861" && !FactDate.Overlaps(CensusDate.UKCENSUS1861)) ||
-                (tag == "Census 1871" && !FactDate.Overlaps(CensusDate.UKCENSUS1871)) ||
-                (tag == "Census 1881" && !FactDate.Overlaps(CensusDate.UKCENSUS1881)) ||
-                (tag == "Census 1891" && !FactDate.Overlaps(CensusDate.UKCENSUS1891)) ||
-                (tag == "Census 1901" && !FactDate.Overlaps(CensusDate.UKCENSUS1901)) ||
-                (tag == "Census 1911" && !FactDate.Overlaps(CensusDate.UKCENSUS1911)) ||
-                (tag == "Census" && !CensusDate.IsCensusYear(FactDate))) &&
-                FactDate.DateString.Length >=4 && Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
-            {
-                FactDate = new FactDate(FactDate.DateString.Substring(FactDate.DateString.Length - 4));
-            }
-            if ((tag == "Census 1841" && !FactDate.Overlaps(CensusDate.UKCENSUS1841)) ||
-                (tag == "Census 1851" && !FactDate.Overlaps(CensusDate.UKCENSUS1851)) ||
-                (tag == "Census 1861" && !FactDate.Overlaps(CensusDate.UKCENSUS1861)) ||
-                (tag == "Census 1871" && !FactDate.Overlaps(CensusDate.UKCENSUS1871)) ||
-                (tag == "Census 1881" && !FactDate.Overlaps(CensusDate.UKCENSUS1881)) ||
-                (tag == "Census 1891" && !FactDate.Overlaps(CensusDate.UKCENSUS1891)) ||
-                (tag == "Census 1901" && !FactDate.Overlaps(CensusDate.UKCENSUS1901)) ||
-                (tag == "Census 1911" && !FactDate.Overlaps(CensusDate.UKCENSUS1911)))
-            {
-                this.FactErrorMessage = "UK Census fact error date '" + dateFromFile + "' doesn't match '" + tag + "' tag. Check for incorrect date entered.";
-                this.FactError = true;
-            }
-            if (tag == "Census" && !CensusDate.IsCensusYear(FactDate))
-            {
-                this.FactErrorMessage = "Census fact error date '" + dateFromFile + "' isn't a supported census date. Check for incorrect date entered.";
-                this.FactError = true;
-            }
-        }
-
         public Fact(string factType, FactDate date)
-            : base()
+            : this()
         {
             this.FactType = factType;
             this.FactDate = date;
-            this.Comment = "";
-            this.Place = "";
+            this.Comment = string.Empty;
+            this.Place = string.Empty;
             this.Location = FamilyTree.Instance.GetLocation(Place, "", "");
         }
 
@@ -352,6 +316,41 @@ namespace FTAnalyzer
             if (initialChars == "BIRT" || initialChars == "MARR" || initialChars == "DEAT")
                 return initialChars;
             return tag;
+        }
+
+        private void CheckCensusDate(string tag)
+        {
+            FactDate dateFromFile = FactDate;
+            if (((tag == "Census 1841" && !FactDate.Overlaps(CensusDate.UKCENSUS1841)) ||
+                (tag == "Census 1851" && !FactDate.Overlaps(CensusDate.UKCENSUS1851)) ||
+                (tag == "Census 1861" && !FactDate.Overlaps(CensusDate.UKCENSUS1861)) ||
+                (tag == "Census 1871" && !FactDate.Overlaps(CensusDate.UKCENSUS1871)) ||
+                (tag == "Census 1881" && !FactDate.Overlaps(CensusDate.UKCENSUS1881)) ||
+                (tag == "Census 1891" && !FactDate.Overlaps(CensusDate.UKCENSUS1891)) ||
+                (tag == "Census 1901" && !FactDate.Overlaps(CensusDate.UKCENSUS1901)) ||
+                (tag == "Census 1911" && !FactDate.Overlaps(CensusDate.UKCENSUS1911)) ||
+                (tag == "Census" && !CensusDate.IsCensusYear(FactDate))) &&
+                FactDate.DateString.Length >= 4 && Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
+            {
+                FactDate = new FactDate(FactDate.DateString.Substring(FactDate.DateString.Length - 4));
+            }
+            if ((tag == "Census 1841" && !FactDate.Overlaps(CensusDate.UKCENSUS1841)) ||
+                (tag == "Census 1851" && !FactDate.Overlaps(CensusDate.UKCENSUS1851)) ||
+                (tag == "Census 1861" && !FactDate.Overlaps(CensusDate.UKCENSUS1861)) ||
+                (tag == "Census 1871" && !FactDate.Overlaps(CensusDate.UKCENSUS1871)) ||
+                (tag == "Census 1881" && !FactDate.Overlaps(CensusDate.UKCENSUS1881)) ||
+                (tag == "Census 1891" && !FactDate.Overlaps(CensusDate.UKCENSUS1891)) ||
+                (tag == "Census 1901" && !FactDate.Overlaps(CensusDate.UKCENSUS1901)) ||
+                (tag == "Census 1911" && !FactDate.Overlaps(CensusDate.UKCENSUS1911)))
+            {
+                this.FactErrorMessage = "UK Census fact error date '" + dateFromFile + "' doesn't match '" + tag + "' tag. Check for incorrect date entered.";
+                this.FactError = true;
+            }
+            if (tag == "Census" && !CensusDate.IsCensusYear(FactDate))
+            {
+                this.FactErrorMessage = "Census fact error date '" + dateFromFile + "' isn't a supported census date. Check for incorrect date entered.";
+                this.FactError = true;
+            }
         }
 
         private void SetCommentAndLocation(string factType, string factComment, string factPlace, string latitude, string longitude)
