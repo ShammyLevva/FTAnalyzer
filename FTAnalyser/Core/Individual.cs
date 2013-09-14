@@ -530,11 +530,14 @@ namespace FTAnalyzer
         {
             foreach (Fact f in facts)
             {
-                if (f.FactType == Fact.CENSUS && f.FactDate.Overlaps(when) && f.FactDate.IsKnown())
-                    return true;
-                if (Properties.GeneralSettings.Default.UseResidenceAsCensus && f.FactType == Fact.RESIDENCE &&
-                    f.FactDate.Overlaps(when) && f.FactDate.IsKnown())
-                    return true; 
+                if (f.FactDate.IsKnown())
+                {
+                    if (f.FactType == Fact.CENSUS && f.FactDate.Overlaps(when))
+                        return true;
+                    if (Properties.GeneralSettings.Default.UseResidenceAsCensus && 
+                            f.FactType == Fact.RESIDENCE && f.FactDate.Overlaps(when))
+                        return true;
+                }
             }
             return false;
         }
@@ -543,7 +546,7 @@ namespace FTAnalyzer
         {
             foreach (Fact f in facts)
             {
-                if (f.FactType == Fact.LOSTCOUSINS && f.FactDate.Overlaps(when) && f.FactDate.IsKnown())
+                if (f.FactType == Fact.LOSTCOUSINS && f.FactDate.IsKnown() && f.FactDate.Overlaps(when))
                     return true;
             }
             return false;
