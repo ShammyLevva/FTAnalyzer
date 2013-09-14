@@ -411,7 +411,7 @@ namespace FTAnalyzer
             {
                 Fact loose = GetPreferredFact(Fact.LOOSEDEATH);
                 FactDate fd =  loose == null ? FactDate.UNKNOWN_DATE : loose.FactDate;
-                return (fd.StartDate > fd.EndDate) ? "Alive facts after death, check data errors tab" : fd.ToString();
+                return (fd.StartDate > fd.EndDate) ? "Alive facts after death, check data errors tab and children's births" : fd.ToString();
             }
         }
 
