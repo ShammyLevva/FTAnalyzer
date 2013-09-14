@@ -146,7 +146,7 @@ namespace FTAnalyzer
             }
             // First iterate through attributes of root finding all sources
             XmlNodeList list = doc.SelectNodes("GED/SOUR");
-            pbS.Maximum = list.Count;
+            pbS.Maximum = list.Count == 0 ? 1 : list.Count;
             int counter = 0;
             foreach (XmlNode n in list)
             {
@@ -175,7 +175,7 @@ namespace FTAnalyzer
             // now iterate through child elements of root
             // finding all families
             list = doc.SelectNodes("GED/FAM");
-            pbF.Maximum = list.Count;
+            pbF.Maximum = list.Count == 0 ? 1 : list.Count;
             counter = 0;
             foreach (XmlNode n in list)
             {
