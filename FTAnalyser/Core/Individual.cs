@@ -444,7 +444,7 @@ namespace FTAnalyzer
             int factCount = 0;
             foreach (Fact f in facts)
             {
-                if (f.FactType == factType)
+                if (f.FactType == factType && f.FactErrorLevel == Fact.FactError.GOOD)
                     factCount++;
             }
             return factCount;

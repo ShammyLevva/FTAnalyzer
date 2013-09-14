@@ -230,9 +230,9 @@ namespace FTAnalyzer
                 lostCousinsErrors += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNING);
                 lostCousinsWarnings += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.ERROR);
             }
-            xmlErrorbox.AppendText("\nFound " + censusFacts + " census facts in GEDCOM File (" + censusWarnings + " warnings, " + censusErrors + " errors)");
-            xmlErrorbox.AppendText("\nFound " + resiFacts + " residence facts in GEDCOM File (" + resiWarnings + " warnings, " + resiErrors + " errors)");
-            xmlErrorbox.AppendText("\nFound " + lostCousinsFacts + " Lost Cousins facts in GEDCOM File (" + lostCousinsWarnings + " warnings, " + lostCousinsErrors + " errors)\n");
+            xmlErrorbox.AppendText("\nFound " + censusFacts + " good census facts in GEDCOM File (" + censusWarnings + " warnings, " + censusErrors + " errors)");
+            xmlErrorbox.AppendText("\nFound " + resiFacts  + " good residence facts in GEDCOM File (" + resiWarnings + " warnings, " + resiErrors + " errors)");
+            xmlErrorbox.AppendText("\nFound " + lostCousinsFacts + " good Lost Cousins facts in GEDCOM File (" + lostCousinsWarnings + " warnings, " + lostCousinsErrors + " errors)\n");
             if (censusFacts == 0 && resiFacts == 0)
             {
                 xmlErrorbox.AppendText("\nFound no census or residence facts in GEDCOM File.\n");
