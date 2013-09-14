@@ -966,7 +966,7 @@ namespace FTAnalyzer
                     {
                         errors[(int)dataerror.FACT_ERROR].Add(new DataError((int)dataerror.FACT_ERROR, ind, f.FactErrorMessage)); 
                     }
-                    foreach (Fact f in ind.PersonalFacts)
+                    foreach (Fact f in ind.AllFacts)
                     {
                         if (f.FactType != Fact.BIRTH && f.FactDate.IsBefore(ind.BirthDate))
                         {
