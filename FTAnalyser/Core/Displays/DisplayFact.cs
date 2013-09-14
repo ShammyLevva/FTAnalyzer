@@ -23,7 +23,7 @@ namespace FTAnalyzer
         public FactDate FactDate { get { return Fact.FactDate; } }
         public FactLocation Location { get { return Fact.Location; } }
         public string Comment { get { return Fact.Comment; } }
-        public Age AgeAtFact { get { return Ind == null ? null : Ind.GetAge(Fact.FactDate); } }
+        public Age AgeAtFact { get { return Ind == null ? null : Ind.GetAge(Fact.FactDate, Fact.FactType); } }
         public string SourceList { get { return Fact.SourceList;  } }
     }
 }

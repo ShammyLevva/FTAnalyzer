@@ -402,7 +402,7 @@ namespace FTAnalyzer
         {
             get
             {
-                return getAge(DateTime.Now);
+                return GetAge(DateTime.Now);
             }
         }
 
@@ -622,30 +622,36 @@ namespace FTAnalyzer
         public Age GetAge(FactDate when) {
             return new Age(this, when);
         }
-        
-        public Age getAge(DateTime when) {
+
+        public Age GetAge(FactDate when, string factType)
+        {
+            return factType == Fact.BIRTH ? Age.BIRTH : new Age(this, when);
+        }
+
+        public Age GetAge(DateTime when)
+        {
             string now = FactDate.Format(FactDate.FULL, when);
             return GetAge(new FactDate(now));
         }
         
-        public int getMaxAge(FactDate when) {
+        public int GetMaxAge(FactDate when) {
             return GetAge(when).MaxAge;
         }
         
-        public int getMinAge(FactDate when) {
+        public int GetMinAge(FactDate when) {
             return GetAge(when).MinAge;
         }
 
         public int getMaxAge(DateTime when)
         {
             string now = FactDate.Format(FactDate.FULL, when);
-            return getMaxAge(new FactDate(now));
+            return GetMaxAge(new FactDate(now));
         }
 
         public int getMinAge(DateTime when)
         {
             string now = FactDate.Format(FactDate.FULL, when);
-            return getMinAge(new FactDate(now));
+            return GetMinAge(new FactDate(now));
         }
         #endregion
 

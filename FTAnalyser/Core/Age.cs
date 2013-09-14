@@ -10,6 +10,14 @@ namespace FTAnalyzer
         public int MinAge { get; private set; }
         public int MaxAge { get; private set; }
         private string age;
+        public static Age BIRTH = new Age();
+
+        private Age()
+        {
+            MinAge = 0;
+            MaxAge = 0;
+            age = "0";
+        }
 
         public Age(Individual ind, FactDate when)
         {
