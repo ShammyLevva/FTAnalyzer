@@ -594,9 +594,9 @@ namespace FTAnalyzer
             return this.StartDate.Equals(this.EndDate);
         }
 
-        public bool IsUnknown()
+        public bool IsKnown()
         {
-            return this.Equals(UNKNOWN_DATE);
+            return !this.Equals(UNKNOWN_DATE);
         }
 
         public double Distance(FactDate when)
