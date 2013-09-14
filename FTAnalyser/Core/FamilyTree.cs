@@ -212,15 +212,27 @@ namespace FTAnalyzer
             int censusFacts = 0;
             int resiFacts = 0;
             int lostCousinsFacts = 0;
+            int censusWarnings = 0;
+            int resiWarnings = 0;
+            int lostCousinsWarnings = 0;
+            int censusErrors = 0;
+            int resiErrors = 0;
+            int lostCousinsErrors = 0;
             foreach (Individual ind in individuals)
             {
-                censusFacts += ind.CensusFactCount;
-                resiFacts += ind.ResiFactCount;
-                lostCousinsFacts += ind.LostCousinsFactCount;
+                censusFacts += ind.FactCount(Fact.CENSUS);
+                censusWarnings += ind.ErrorFactCount(Fact.CENSUS, Fact.FactError.WARNING);
+                censusErrors += ind.ErrorFactCount(Fact.CENSUS, Fact.FactError.ERROR);
+                resiFacts += ind.FactCount(Fact.RESIDENCE);
+                resiWarnings += ind.ErrorFactCount(Fact.RESIDENCE, Fact.FactError.WARNING);
+                resiErrors += ind.ErrorFactCount(Fact.RESIDENCE, Fact.FactError.ERROR);
+                lostCousinsFacts += ind.FactCount(Fact.LOSTCOUSINS);
+                lostCousinsErrors += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNING);
+                lostCousinsWarnings += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.ERROR);
             }
-            xmlErrorbox.AppendText("\nFound " + censusFacts + " census facts in GEDCOM File.");
-            xmlErrorbox.AppendText("\nFound " + resiFacts + " residence facts in GEDCOM File.");
-            xmlErrorbox.AppendText("\nFound " + lostCousinsFacts + " Lost Cousins facts in GEDCOM File.\n");
+            xmlErrorbox.AppendText("\nFound " + censusFacts + " census facts in GEDCOM File (" + censusWarnings + " warnings, " + censusErrors + " errors)");
+            xmlErrorbox.AppendText("\nFound " + resiFacts + " residence facts in GEDCOM File (" + resiWarnings + " warnings, " + resiErrors + " errors)");
+            xmlErrorbox.AppendText("\nFound " + lostCousinsFacts + " Lost Cousins facts in GEDCOM File (" + lostCousinsWarnings + " warnings, " + lostCousinsErrors + " errors)\n");
             if (censusFacts == 0 && resiFacts == 0)
             {
                 xmlErrorbox.AppendText("\nFound no census or residence facts in GEDCOM File.\n");

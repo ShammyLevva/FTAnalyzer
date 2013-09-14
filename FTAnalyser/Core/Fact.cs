@@ -173,6 +173,8 @@ namespace FTAnalyzer
             }
         }
 
+        public enum FactError { GOOD = 0, WARNING = 1, ERROR = 2 };
+
         #region Constructors
 
         private Fact()
@@ -184,7 +186,7 @@ namespace FTAnalyzer
             this.Location = new FactLocation();
             this.Sources = new List<FactSource>();
             this.CertificatePresent = false;
-            this.FactError = false;
+            this.FactErrorLevel = FactError.GOOD;
             this.FactErrorMessage = string.Empty;
         }
 
@@ -276,7 +278,7 @@ namespace FTAnalyzer
 
         public string FactType { get; private set; }
 
-        public bool FactError { get; private set; }
+        public FactError FactErrorLevel { get; private set; }
 
         public string FactErrorMessage { get; private set; }
 
@@ -333,6 +335,8 @@ namespace FTAnalyzer
                 FactDate.DateString.Length >= 4 && Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
             {
                 FactDate = new FactDate(FactDate.DateString.Substring(FactDate.DateString.Length - 4));
+                this.FactErrorMessage = "Inaccurate Census date " + dateFromFile + " treated as " + FactDate;
+                this.FactErrorLevel = Fact.FactError.WARNING;
             }
             if ((tag == "Census 1841" && !FactDate.Overlaps(CensusDate.UKCENSUS1841)) ||
                 (tag == "Census 1851" && !FactDate.Overlaps(CensusDate.UKCENSUS1851)) ||
@@ -344,12 +348,12 @@ namespace FTAnalyzer
                 (tag == "Census 1911" && !FactDate.Overlaps(CensusDate.UKCENSUS1911)))
             {
                 this.FactErrorMessage = "UK Census fact error date '" + dateFromFile + "' doesn't match '" + tag + "' tag. Check for incorrect date entered.";
-                this.FactError = true;
+                this.FactErrorLevel = Fact.FactError.ERROR;
             }
             if (tag == "Census" && !CensusDate.IsCensusYear(FactDate))
             {
                 this.FactErrorMessage = "Census fact error date '" + dateFromFile + "' isn't a supported census date. Check for incorrect date entered.";
-                this.FactError = true;
+                this.FactErrorLevel = Fact.FactError.ERROR;
             }
         }
 

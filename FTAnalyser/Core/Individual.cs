@@ -5,10 +5,10 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class Individual : IComparable<Individual>, 
+    public class Individual : IComparable<Individual>,
         IDisplayIndividual, IDisplayLooseDeath, IDisplayColouredCensus, IExportIndividual
     {
-        
+
         // define relation type from direct ancestor to related by marriage and 
         // MARRIAGEDB ie: married to a direct or blood relation
         public const int UNKNOWN = 1, DIRECT = 2, BLOOD = 4, MARRIEDTODB = 8, MARRIAGE = 16, UNSET = 32;
@@ -33,12 +33,13 @@ namespace FTAnalyzer
         private IList<FactLocation> locations;
         private IList<Family> familiesAsParent;
         private IList<Family> familiesAsChild;
-        
-        public Individual (XmlNode node) {
+
+        public Individual(XmlNode node)
+        {
             IndividualID = node.Attributes["ID"].Value;
-            Name =   FamilyTree.GetText(node, "NAME");
+            Name = FamilyTree.GetText(node, "NAME");
             Gender = FamilyTree.GetText(node, "SEX");
-            alias =  FamilyTree.GetText(node, "ALIA");
+            alias = FamilyTree.GetText(node, "ALIA");
             relationType = UNSET;
             status = UNKNOWNSTATUS;
             ahnentafel = 0;
@@ -136,12 +137,12 @@ namespace FTAnalyzer
 
         public bool HasRangedBirthDate
         {
-            get { return BirthDate.DateType == FactDate.FactDateType.BET && BirthDate.StartDate.Year != BirthDate.EndDate.Year;  }
+            get { return BirthDate.DateType == FactDate.FactDateType.BET && BirthDate.StartDate.Year != BirthDate.EndDate.Year; }
         }
-        
+
         public int Ahnentafel
-        { 
-            get { return ahnentafel; } 
+        {
+            get { return ahnentafel; }
             set { ahnentafel = value; }
         }
 
@@ -151,22 +152,25 @@ namespace FTAnalyzer
             set { budgieCode = value; }
         }
 
-        public int RelationType 
-        { 
+        public int RelationType
+        {
             get { return relationType; }
             set { relationType = value; }
         }
 
         public bool isBloodDirect
         {
-            get { return relationType == BLOOD ||
-                    relationType == DIRECT || relationType == MARRIEDTODB;
+            get
+            {
+                return relationType == BLOOD ||
+                  relationType == DIRECT || relationType == MARRIEDTODB;
             }
         }
 
         public string Relation
         {
-            get {
+            get
+            {
                 switch (relationType)
                 {
                     case DIRECT: return ahnentafel == 1 ? "Root Person" : "Direct Ancestor";
@@ -178,9 +182,9 @@ namespace FTAnalyzer
             }
         }
 
-        public IList<Fact> PersonalFacts 
-        { 
-            get { return this.facts; } 
+        public IList<Fact> PersonalFacts
+        {
+            get { return this.facts; }
         }
 
         public IList<Fact> ErrorFacts
@@ -220,7 +224,7 @@ namespace FTAnalyzer
                     gender = "U";
             }
         }
-        
+
         public string Name
         {
             get { return (forenames + " " + surname).Trim(); }
@@ -260,18 +264,18 @@ namespace FTAnalyzer
 
         public string ForenameMetaphone
         {
-            get 
+            get
             {
                 DoubleMetaphone mp = new DoubleMetaphone(Forename);
                 return mp.PrimaryKey;
             }
         }
 
-        public string Forenames 
-        { 
-            get { return forenames; } 
+        public string Forenames
+        {
+            get { return forenames; }
         }
-        
+
         public string Surname
         {
             get { return surname; }
@@ -299,15 +303,15 @@ namespace FTAnalyzer
 
         public FactDate BirthDate
         {
-            get 
-            { 
+            get
+            {
                 FactDate f = GetPreferredFactDate(Fact.BIRTH);
                 if (Properties.GeneralSettings.Default.UseBaptismDates)
                 {
-                    if (f.IsKnown()) 
+                    if (f.IsKnown())
                         return f;
                     f = GetPreferredFactDate(Fact.BAPTISM);
-                    if (f.IsKnown()) 
+                    if (f.IsKnown())
                         return f;
                     f = GetPreferredFactDate(Fact.CHRISTENING);
                 }
@@ -410,7 +414,7 @@ namespace FTAnalyzer
             get
             {
                 Fact loose = GetPreferredFact(Fact.LOOSEDEATH);
-                FactDate fd =  loose == null ? FactDate.UNKNOWN_DATE : loose.FactDate;
+                FactDate fd = loose == null ? FactDate.UNKNOWN_DATE : loose.FactDate;
                 return (fd.StartDate > fd.EndDate) ? "Alive facts after death, check data errors tab and children's births" : fd.ToString();
             }
         }
@@ -435,48 +439,27 @@ namespace FTAnalyzer
             set { familiesAsChild = value.ToList(); }
         }
 
-        public int CensusFactCount
+        public int FactCount(string factType)
         {
-            get
+            int factCount = 0;
+            foreach (Fact f in facts)
             {
-                int censusFacts = 0;
-                foreach (Fact f in facts)
-                {
-                    if (f.FactType == Fact.CENSUS)
-                        censusFacts++;
-                }
-                return censusFacts;
+                if (f.FactType == factType)
+                    factCount++;
             }
+            return factCount;
         }
 
-        public int ResiFactCount
+        public int ErrorFactCount(string factType, Fact.FactError errorLevel)
         {
-            get
+            int factCount = 0;
+            foreach (Fact f in errorFacts)
             {
-                int resiFacts = 0;
-                foreach (Fact f in facts)
-                {
-                    if (f.FactType == Fact.RESIDENCE)
-                        resiFacts++;
-                }
-                return resiFacts;
+                if (f.FactType == factType && f.FactErrorLevel == errorLevel)
+                    factCount++;
             }
+            return factCount;
         }
-
-        public int LostCousinsFactCount
-        {
-            get
-            {
-                int lostCousinsFacts = 0;
-                foreach (Fact f in facts)
-                {
-                    if (f.FactType == Fact.LOSTCOUSINS)
-                        lostCousinsFacts++;
-                }
-                return lostCousinsFacts;
-            }
-        }
-
 
         public string MarriageDates
         {
@@ -484,7 +467,7 @@ namespace FTAnalyzer
             {
                 string output = string.Empty;
                 foreach (Family f in familiesAsParent)
-                    if(f.MarriageDate.ToString() != string.Empty)
+                    if (f.MarriageDate.ToString() != string.Empty)
                         output += f.MarriageDate + "; ";
                 if (output.Length > 0)
                     return output.Substring(0, output.Length - 2); // remove trailing ;
@@ -499,7 +482,7 @@ namespace FTAnalyzer
             {
                 string output = string.Empty;
                 foreach (Family f in familiesAsParent)
-                    if(f.MarriageLocation.ToString() != string.Empty)
+                    if (f.MarriageLocation.ToString() != string.Empty)
                         output += f.MarriageLocation + "; ";
                 if (output.Length > 0)
                     return output.Substring(0, output.Length - 2); // remove trailing ;
@@ -534,7 +517,7 @@ namespace FTAnalyzer
                 {
                     if (f.FactType == Fact.CENSUS && f.FactDate.Overlaps(when))
                         return true;
-                    if (Properties.GeneralSettings.Default.UseResidenceAsCensus && 
+                    if (Properties.GeneralSettings.Default.UseResidenceAsCensus &&
                             f.FactType == Fact.RESIDENCE && f.FactDate.Overlaps(when))
                         return true;
                 }
@@ -601,8 +584,9 @@ namespace FTAnalyzer
         {
             return DeathDate.IsKnown() && DeathDate.IsBefore(when);
         }
-        
-        public bool IsSingleAtDeath() {
+
+        public bool IsSingleAtDeath()
+        {
             Fact single = GetPreferredFact(Fact.UNMARRIED);
             return single != null || MaxAgeAtDeath < 16 || LifeSpan.MaxAge < 16;
         }
@@ -621,7 +605,8 @@ namespace FTAnalyzer
 
         #region Age Functions
 
-        public Age GetAge(FactDate when) {
+        public Age GetAge(FactDate when)
+        {
             return new Age(this, when);
         }
 
@@ -635,12 +620,14 @@ namespace FTAnalyzer
             string now = FactDate.Format(FactDate.FULL, when);
             return GetAge(new FactDate(now));
         }
-        
-        public int GetMaxAge(FactDate when) {
+
+        public int GetMaxAge(FactDate when)
+        {
             return GetAge(when).MaxAge;
         }
-        
-        public int GetMinAge(FactDate when) {
+
+        public int GetMinAge(FactDate when)
+        {
             return GetAge(when).MinAge;
         }
 
@@ -662,14 +649,24 @@ namespace FTAnalyzer
         private void AddFacts(XmlNode node, string factType)
         {
             XmlNodeList list = node.SelectNodes(factType);
-            foreach(XmlNode n in list) {
+            foreach (XmlNode n in list)
+            {
                 try
                 {
                     Fact f = new Fact(n, IndividualRef);
-                    if (f.FactError)
-                        errorFacts.Add(f);
-                    else
-                        AddFact(f);
+                    switch (f.FactErrorLevel)
+                    {
+                        case Fact.FactError.GOOD:
+                            AddFact(f);
+                            break;
+                        case Fact.FactError.WARNING:
+                            AddFact(f);
+                            errorFacts.Add(f);
+                            break;
+                        case Fact.FactError.ERROR:
+                            errorFacts.Add(f);
+                            break;
+                    }
                 }
                 catch (InvalidXMLFactException ex)
                 {
@@ -680,7 +677,8 @@ namespace FTAnalyzer
             }
         }
 
-        public void AddFact(Fact fact) {
+        public void AddFact(Fact fact)
+        {
             facts.Add(fact);
             FactLocation loc = fact.Location;
             if (loc != null && !locations.Contains(loc))
@@ -689,20 +687,23 @@ namespace FTAnalyzer
                 loc.AddIndividual(this);
             }
         }
-                
-        public Fact GetPreferredFact(string factType) {
+
+        public Fact GetPreferredFact(string factType)
+        {
             // Returns the first fact of the given type.
             // This assumes the original GEDCOM file has the preferred fact first in the list
             // as per the GEDCOM 5.5 specification.
             return GetFacts(factType).FirstOrDefault();
         }
-        
-        public FactDate GetPreferredFactDate (string factType) {
+
+        public FactDate GetPreferredFactDate(string factType)
+        {
             Fact f = GetPreferredFact(factType);
             return (f == null || f.FactDate == null) ? FactDate.UNKNOWN_DATE : f.FactDate;
         }
-        
-        public IEnumerable<Fact> GetFacts(string factType) {
+
+        public IEnumerable<Fact> GetFacts(string factType)
+        {
             // Returns all facts of the given type.
             return facts.Where(f => f.FactType == factType);
         }
@@ -738,7 +739,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Location functions
-        
+
         public FactLocation BestLocation(FactDate when)
         {
             // this returns a Location a person was at for a given period
@@ -772,9 +773,11 @@ namespace FTAnalyzer
             // Individuals are naturally ordered by surname, then forenames,
             // then date of birth.
             int res = this.surname.CompareTo(that.surname);
-            if (res == 0) {
+            if (res == 0)
+            {
                 res = this.forenames.CompareTo(that.forenames);
-                if (res == 0) {
+                if (res == 0)
+                {
                     Fact b1 = this.GetPreferredFact(Fact.BIRTH);
                     Fact b2 = that.GetPreferredFact(Fact.BIRTH);
                     FactDate d1 = (b1 == null) ? FactDate.UNKNOWN_DATE : b1.FactDate;
@@ -787,7 +790,7 @@ namespace FTAnalyzer
 
         private int LCReport(FactDate census)
         {
-            
+
             if (BirthDate.IsAfter(census) || DeathDate.IsBefore(census))
                 return 0; // not alive - grey
             if (!IsCensusDone(census))
@@ -799,7 +802,7 @@ namespace FTAnalyzer
             }
             if (!CensusDate.IsLostCousinsCensusYear(census))
                 return 3; // census entered but not LCyear - green
-            if(IsLostCousinEntered(census))
+            if (IsLostCousinEntered(census))
                 return 4; // census + Lost cousins entered - green
             else
                 return 2; // census entered LC not entered - yellow
@@ -848,6 +851,11 @@ namespace FTAnalyzer
         public bool AliveOnAnyCensus
         {
             get { return (C1841 + C1851 + C1861 + C1871 + C1881 + C1891 + C1901 + C1911) > 0; }
+        }
+
+        public int CensusFactCount
+        {
+            get { return FactCount(Fact.CENSUS); }
         }
     }
 }
