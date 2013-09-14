@@ -115,7 +115,7 @@ namespace FTAnalyzer.Forms
             else if (style.ForeColor == Color.Red)
                 return "This is a direct ancestor that may be alive on this census.";
             else
-                return string.Empty;
+                return "Double click to search " + cbCensusSearchProvider.Text + " for this person's census record";
         }
 
         private void dgCensus_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
