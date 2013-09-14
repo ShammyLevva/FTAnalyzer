@@ -304,14 +304,14 @@ namespace FTAnalyzer
                 FactDate f = GetPreferredFactDate(Fact.BIRTH);
                 if (Properties.GeneralSettings.Default.UseBaptismDates)
                 {
-                    if (f != null && f != FactDate.UNKNOWN_DATE) 
+                    if (f.IsKnown()) 
                         return f;
                     f = GetPreferredFactDate(Fact.BAPTISM);
-                    if (f != null && f != FactDate.UNKNOWN_DATE) 
+                    if (f.IsKnown()) 
                         return f;
                     f = GetPreferredFactDate(Fact.CHRISTENING);
                 }
-                return (f == null) ? FactDate.UNKNOWN_DATE : f;
+                return f;
             }
         }
 
@@ -328,8 +328,7 @@ namespace FTAnalyzer
         {
             get
             {
-                FactDate f = GetPreferredFactDate(Fact.DEATH);
-                return (f == null) ? FactDate.UNKNOWN_DATE : f;
+                return GetPreferredFactDate(Fact.DEATH);
             }
         }
 
@@ -531,10 +530,10 @@ namespace FTAnalyzer
         {
             foreach (Fact f in facts)
             {
-                if (f.FactType == Fact.CENSUS && f.FactDate.Overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
+                if (f.FactType == Fact.CENSUS && f.FactDate.Overlaps(when) && f.FactDate.IsKnown())
                     return true;
-                if (Properties.GeneralSettings.Default.UseResidenceAsCensus && f.FactType == Fact.RESIDENCE && 
-                    f.FactDate.Overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
+                if (Properties.GeneralSettings.Default.UseResidenceAsCensus && f.FactType == Fact.RESIDENCE &&
+                    f.FactDate.Overlaps(when) && f.FactDate.IsKnown())
                     return true; 
             }
             return false;
@@ -544,7 +543,7 @@ namespace FTAnalyzer
         {
             foreach (Fact f in facts)
             {
-                if (f.FactType == Fact.LOSTCOUSINS && f.FactDate.Overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
+                if (f.FactType == Fact.LOSTCOUSINS && f.FactDate.Overlaps(when) && f.FactDate.IsKnown())
                     return true;
             }
             return false;
@@ -597,7 +596,7 @@ namespace FTAnalyzer
 
         public bool isDeceased(FactDate when)
         {
-            return DeathDate != FactDate.UNKNOWN_DATE && DeathDate.IsBefore(when);
+            return DeathDate.IsKnown() && DeathDate.IsBefore(when);
         }
         
         public bool isSingleAtDeath() {
@@ -607,12 +606,12 @@ namespace FTAnalyzer
 
         public bool isBirthKnown()
         {
-            return BirthDate != FactDate.UNKNOWN_DATE && BirthDate.IsExact();
+            return BirthDate.IsKnown() && BirthDate.IsExact();
         }
 
         public bool isDeathKnown()
         {
-            return DeathDate != FactDate.UNKNOWN_DATE && DeathDate.IsExact();
+            return DeathDate.IsKnown() && DeathDate.IsExact();
         }
 
         #endregion
@@ -697,7 +696,7 @@ namespace FTAnalyzer
         
         public FactDate GetPreferredFactDate (string factType) {
             Fact f = GetPreferredFact(factType);
-            return (f == null) ? FactDate.UNKNOWN_DATE : f.FactDate;
+            return (f == null || f.FactDate == null) ? FactDate.UNKNOWN_DATE : f.FactDate;
         }
         
         public IEnumerable<Fact> GetFacts(string factType) {
