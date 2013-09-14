@@ -340,7 +340,7 @@ namespace FTAnalyzer
             if (result == null || result.Length == 0)
             {
                 string fixCase = EnhancedTextInfo.ToTitleCase(Country.ToLower());
-                COUNTRY_SHIFTS.TryGetValue(Country, out result);
+                COUNTRY_SHIFTS.TryGetValue(fixCase, out result);
             }
             if (result != null && result.Length > 0)
             {

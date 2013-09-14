@@ -19,7 +19,6 @@ namespace FTAnalyzer.Forms
         public void BuildLocationTree(List<FactLocation> locations)
         {
             FamilyTree ft = FamilyTree.Instance;
-            FactLocation currentLocation = new FactLocation();
             tvLocations.BeginUpdate();
             tvLocations.Nodes.Clear();
             foreach(FactLocation loc in locations)
