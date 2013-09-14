@@ -86,9 +86,9 @@ namespace FTAnalyzer
             FamilyTree ft = FamilyTree.Instance;
             DateTime birth = indiv.BirthDate.StartDate;
             DateTime death = indiv.DeathDate.EndDate;
-            if (birth < CensusDate.StartDate && death > CensusDate.StartDate && indiv.isCensusDone(CensusDate) == censusDone)
+            if (birth < CensusDate.StartDate && death > CensusDate.StartDate && indiv.IsCensusDone(CensusDate) == censusDone)
             {
-                if (lostCousinsCheck && indiv.isLostCousinEntered(CensusDate))
+                if (lostCousinsCheck && indiv.IsLostCousinEntered(CensusDate))
                     return false;
                 if (parentCheck)
                 {

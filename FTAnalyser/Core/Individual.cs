@@ -516,17 +516,17 @@ namespace FTAnalyzer
 
         #region Boolean Tests
 
-        public bool isMale
+        public bool IsMale
         {
             get { return this.gender.Equals("M"); }
         }
 
-        public bool isInFamily
+        public bool IsInFamily
         {
             get { return infamily; }
         }
 
-        public bool isCensusDone(FactDate when)
+        public bool IsCensusDone(FactDate when)
         {
             foreach (Fact f in facts)
             {
@@ -542,7 +542,7 @@ namespace FTAnalyzer
             return false;
         }
 
-        public bool isLostCousinEntered(FactDate when)
+        public bool IsLostCousinEntered(FactDate when)
         {
             foreach (Fact f in facts)
             {
@@ -597,22 +597,22 @@ namespace FTAnalyzer
         //    return false;
         //}
 
-        public bool isDeceased(FactDate when)
+        public bool IsDeceased(FactDate when)
         {
             return DeathDate.IsKnown() && DeathDate.IsBefore(when);
         }
         
-        public bool isSingleAtDeath() {
+        public bool IsSingleAtDeath() {
             Fact single = GetPreferredFact(Fact.UNMARRIED);
             return single != null || MaxAgeAtDeath < 16 || LifeSpan.MaxAge < 16;
         }
 
-        public bool isBirthKnown()
+        public bool IsBirthKnown()
         {
             return BirthDate.IsKnown() && BirthDate.IsExact();
         }
 
-        public bool isDeathKnown()
+        public bool IsDeathKnown()
         {
             return DeathDate.IsKnown() && DeathDate.IsExact();
         }
@@ -644,13 +644,13 @@ namespace FTAnalyzer
             return GetAge(when).MinAge;
         }
 
-        public int getMaxAge(DateTime when)
+        public int GetMaxAge(DateTime when)
         {
             string now = FactDate.Format(FactDate.FULL, when);
             return GetMaxAge(new FactDate(now));
         }
 
-        public int getMinAge(DateTime when)
+        public int GetMinAge(DateTime when)
         {
             string now = FactDate.Format(FactDate.FULL, when);
             return GetMinAge(new FactDate(now));
@@ -724,7 +724,7 @@ namespace FTAnalyzer
         public string SurnameAtDate(FactDate date)
         {
             string name = surname;
-            if (!isMale)
+            if (!IsMale)
             {
                 foreach (Family marriage in familiesAsParent.OrderBy(f => f.MarriageDate))
                 {
@@ -790,16 +790,16 @@ namespace FTAnalyzer
             
             if (BirthDate.IsAfter(census) || DeathDate.IsBefore(census))
                 return 0; // not alive - grey
-            if (!isCensusDone(census))
+            if (!IsCensusDone(census))
             {
-                if (CensusDate.IsLostCousinsCensusYear(census) && isLostCousinEntered(census))
+                if (CensusDate.IsLostCousinsCensusYear(census) && IsLostCousinEntered(census))
                     return 5; // LC entered but no census entered - orange
                 else
                     return 1; // no census - red
             }
             if (!CensusDate.IsLostCousinsCensusYear(census))
                 return 3; // census entered but not LCyear - green
-            if(isLostCousinEntered(census))
+            if(IsLostCousinEntered(census))
                 return 4; // census + Lost cousins entered - green
             else
                 return 2; // census entered LC not entered - yellow

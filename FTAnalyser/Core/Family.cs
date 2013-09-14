@@ -78,7 +78,7 @@ namespace FTAnalyzer
         public Family(Individual ind)
             : this(SOLOINDIVIDUAL)
         {
-            if (ind.isMale)
+            if (ind.IsMale)
                 this.Husband = ind;
             else
                 this.Wife = ind;
@@ -253,7 +253,7 @@ namespace FTAnalyzer
 
         public void SetBudgieCode(Individual ind, int lenAhnentafel)
         {
-            Individual spouse = ind.isMale ? Wife : Husband;
+            Individual spouse = ind.IsMale ? Wife : Husband;
             if (spouse != null && spouse.BudgieCode == string.Empty)
             {
                 spouse.BudgieCode = ind.BudgieCode + "*s";
@@ -300,7 +300,7 @@ namespace FTAnalyzer
 
         public void SetSpouseRelation(Individual ind, int relationType)
         {
-            Individual spouse = ind.isMale ? Wife : Husband;
+            Individual spouse = ind.IsMale ? Wife : Husband;
             if (spouse != null && spouse.RelationType == Individual.UNKNOWN)
             {
                 spouse.RelationType = relationType;

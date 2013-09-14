@@ -70,12 +70,12 @@ namespace FTAnalyzer
 
         public string IsFatherDeceased(FactDate when)
         {
-            return (Father == null || !Father.isDeceased(when)) ? "" : "(Deceased)";
+            return (Father == null || !Father.IsDeceased(when)) ? "" : "(Deceased)";
         }
 
         public string IsMotherDeceased(FactDate when)
         {
-            return (Mother == null || !Mother.isDeceased(when)) ? "" : "(Deceased)";
+            return (Mother == null || !Mother.IsDeceased(when)) ? "" : "(Deceased)";
         }
 
         public Fact GetPreferredFact(string factType)

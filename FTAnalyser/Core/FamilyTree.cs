@@ -268,7 +268,7 @@ namespace FTAnalyzer
             int added = 0;
             foreach (Individual ind in individuals)
             {
-                if (!ind.isInFamily)
+                if (!ind.IsInFamily)
                 {
                     families.Add(new Family(ind));
                     added++;
@@ -376,7 +376,7 @@ namespace FTAnalyzer
 
         public bool IsMarried(Individual ind, FactDate fd)
         {
-            if (ind.isSingleAtDeath())
+            if (ind.IsSingleAtDeath())
                 return false;
             return ind.FamiliesAsParent.Any(f =>
             {
@@ -504,7 +504,7 @@ namespace FTAnalyzer
         {
             DateTime maxdate = FactDate.MINDATE;
             IEnumerable<Family> indfam = new List<Family>();
-            if (indiv.isMale)
+            if (indiv.IsMale)
             {
                 indfam = FindFamiliesWhereHusband(indiv);
             }
@@ -534,7 +534,7 @@ namespace FTAnalyzer
                     }
                 }
             }
-            if (childDate && indiv.isMale && maxdate > FactDate.MINDATE)
+            if (childDate && indiv.IsMale && maxdate > FactDate.MINDATE)
             {
                 // set to 9 months before birth if indiv is a father 
                 // and we have changed maxdate from the MINDATE default
@@ -616,7 +616,7 @@ namespace FTAnalyzer
 
         public IEnumerable<IDisplayIndividual> GetWarDead(Predicate<Individual> filter)
         {
-            return individuals.Where(ind => ind.isMale && !ind.isDeathKnown() && filter(ind));
+            return individuals.Where(ind => ind.IsMale && !ind.IsDeathKnown() && filter(ind));
         }
 
         #endregion
