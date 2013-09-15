@@ -374,7 +374,7 @@ namespace FTAnalyzer
             }
             if (tag == "Census")
             {
-                if (FactDate.IsKnown() && !CensusDate.IsCensusYear(FactDate, true))
+                if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && FactDate.IsKnown() && !CensusDate.IsCensusYear(FactDate, true))
                 {
                     this.FactErrorMessage = "Warning : Census fact error date '" + dateFromFile + "' overlaps census date but is vague. Check for incorrect date entered.";
                     this.FactErrorLevel = Fact.FactError.WARNING;
@@ -388,7 +388,7 @@ namespace FTAnalyzer
             }
             if (tag == "Lost Cousins" || tag == "LostCousins")
             {
-                if (FactDate.IsKnown() && !CensusDate.IsLostCousinsCensusYear(FactDate, true))
+                if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && FactDate.IsKnown() && !CensusDate.IsLostCousinsCensusYear(FactDate, true))
                 {
                     this.FactErrorMessage = "Lost Cousins fact error date '" + dateFromFile + "' overlaps Lost Cousins census year but is vague. Check for incorrect date entered.";
                     this.FactErrorLevel = Fact.FactError.WARNING;
