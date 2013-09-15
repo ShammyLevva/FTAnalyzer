@@ -19,7 +19,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.1.4.0-test-4";
+        private string VERSION = "2.1.4.0-test-5";
         //private bool _checkForUpdatesEnabled = false;
         //private bool _showNoUpdateMessage = false;
         //private System.Threading.Timer _timerCheckForUpdates;
@@ -860,23 +860,23 @@ namespace FTAnalyzer
         //    }
         //}
 
-        private void btnCancelFamilySearch_Click(object sender, EventArgs e)
-        {
-            stopProcessing = true;
-        }
+        //private void btnCancelFamilySearch_Click(object sender, EventArgs e)
+        //{
+        //    stopProcessing = true;
+        //}
 
-        private void FamilySearchDefaultCountry_CountryChanged(object sender, EventArgs e)
-        {
-            if (FamilySearchDefaultCountry.Country == Countries.SCOTLAND)
-                rbFamilySearchCountry.Checked = true;
-            else
-                rbFamilySearchRegion.Checked = true;
-        }
+        //private void FamilySearchDefaultCountry_CountryChanged(object sender, EventArgs e)
+        //{
+        //    if (FamilySearchDefaultCountry.Country == Countries.SCOTLAND)
+        //        rbFamilySearchCountry.Checked = true;
+        //    else
+        //        rbFamilySearchRegion.Checked = true;
+        //}
 
-        private void rtbFamilySearchResults_TextChanged(object sender, EventArgs e)
-        {
-            rtbFamilySearchResults.ScrollToBottom();
-        }
+        //private void rtbFamilySearchResults_TextChanged(object sender, EventArgs e)
+        //{
+        //    rtbFamilySearchResults.ScrollToBottom();
+        //}
 
         private void rtbOutput_TextChanged(object sender, EventArgs e)
         {

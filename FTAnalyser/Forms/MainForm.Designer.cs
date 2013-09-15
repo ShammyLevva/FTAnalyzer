@@ -1174,36 +1174,36 @@
             // 
             // rbFamilySearchRegion
             // 
-            this.rbFamilySearchRegion.AutoSize = true;
-            this.rbFamilySearchRegion.Location = new System.Drawing.Point(7, 44);
-            this.rbFamilySearchRegion.Name = "rbFamilySearchRegion";
-            this.rbFamilySearchRegion.Size = new System.Drawing.Size(147, 17);
-            this.rbFamilySearchRegion.TabIndex = 1;
-            this.rbFamilySearchRegion.TabStop = true;
-            this.rbFamilySearchRegion.Text = "County / State / Province";
-            this.rbFamilySearchRegion.UseVisualStyleBackColor = true;
+            //this.rbFamilySearchRegion.AutoSize = true;
+            //this.rbFamilySearchRegion.Location = new System.Drawing.Point(7, 44);
+            //this.rbFamilySearchRegion.Name = "rbFamilySearchRegion";
+            //this.rbFamilySearchRegion.Size = new System.Drawing.Size(147, 17);
+            //this.rbFamilySearchRegion.TabIndex = 1;
+            //this.rbFamilySearchRegion.TabStop = true;
+            //this.rbFamilySearchRegion.Text = "County / State / Province";
+            //this.rbFamilySearchRegion.UseVisualStyleBackColor = true;
             // 
             // rbFamilySearchCountry
             // 
-            this.rbFamilySearchCountry.AutoSize = true;
-            this.rbFamilySearchCountry.Checked = true;
-            this.rbFamilySearchCountry.Location = new System.Drawing.Point(7, 20);
-            this.rbFamilySearchCountry.Name = "rbFamilySearchCountry";
-            this.rbFamilySearchCountry.Size = new System.Drawing.Size(61, 17);
-            this.rbFamilySearchCountry.TabIndex = 0;
-            this.rbFamilySearchCountry.TabStop = true;
-            this.rbFamilySearchCountry.Text = "Country";
-            this.rbFamilySearchCountry.UseVisualStyleBackColor = true;
+            //this.rbFamilySearchCountry.AutoSize = true;
+            //this.rbFamilySearchCountry.Checked = true;
+            //this.rbFamilySearchCountry.Location = new System.Drawing.Point(7, 20);
+            //this.rbFamilySearchCountry.Name = "rbFamilySearchCountry";
+            //this.rbFamilySearchCountry.Size = new System.Drawing.Size(61, 17);
+            //this.rbFamilySearchCountry.TabIndex = 0;
+            //this.rbFamilySearchCountry.TabStop = true;
+            //this.rbFamilySearchCountry.Text = "Country";
+            //this.rbFamilySearchCountry.UseVisualStyleBackColor = true;
             // 
             // btnCancelFamilySearch
             // 
-            this.btnCancelFamilySearch.Location = new System.Drawing.Point(266, 118);
-            this.btnCancelFamilySearch.Name = "btnCancelFamilySearch";
-            this.btnCancelFamilySearch.Size = new System.Drawing.Size(123, 27);
-            this.btnCancelFamilySearch.TabIndex = 9;
-            this.btnCancelFamilySearch.Text = "Cancel Search";
-            this.btnCancelFamilySearch.UseVisualStyleBackColor = true;
-            this.btnCancelFamilySearch.Click += new System.EventHandler(this.btnCancelFamilySearch_Click);
+            //this.btnCancelFamilySearch.Location = new System.Drawing.Point(266, 118);
+            //this.btnCancelFamilySearch.Name = "btnCancelFamilySearch";
+            //this.btnCancelFamilySearch.Size = new System.Drawing.Size(123, 27);
+            //this.btnCancelFamilySearch.TabIndex = 9;
+            //this.btnCancelFamilySearch.Text = "Cancel Search";
+            //this.btnCancelFamilySearch.UseVisualStyleBackColor = true;
+            //this.btnCancelFamilySearch.Click += new System.EventHandler(this.btnCancelFamilySearch_Click);
             // 
             // btnViewResults
             // 
@@ -1498,30 +1498,30 @@
             // 
             // rtbFamilySearchResults
             // 
-            this.rtbFamilySearchResults.Location = new System.Drawing.Point(0, 177);
-            this.rtbFamilySearchResults.Name = "rtbFamilySearchResults";
-            this.rtbFamilySearchResults.Size = new System.Drawing.Size(931, 229);
-            this.rtbFamilySearchResults.TabIndex = 12;
-            this.rtbFamilySearchResults.Text = global::FTAnalyzer.Properties.Resources.FTA_0002;
-            this.rtbFamilySearchResults.TextChanged += new System.EventHandler(this.rtbFamilySearchResults_TextChanged);
-            // 
-            // FamilySearchrelationTypes
-            // 
-            this.FamilySearchrelationTypes.Location = new System.Drawing.Point(270, 38);
-            this.FamilySearchrelationTypes.Name = "FamilySearchrelationTypes";
-            this.FamilySearchrelationTypes.Size = new System.Drawing.Size(322, 74);
-            this.FamilySearchrelationTypes.TabIndex = 10;
-            // 
-            // FamilySearchDefaultCountry
-            // 
-            this.FamilySearchDefaultCountry.Location = new System.Drawing.Point(8, 38);
-            this.FamilySearchDefaultCountry.Name = "FamilySearchDefaultCountry";
-            this.FamilySearchDefaultCountry.Size = new System.Drawing.Size(256, 74);
-            this.FamilySearchDefaultCountry.TabIndex = 7;
-            this.FamilySearchDefaultCountry.Title = "Default Country";
-            this.FamilySearchDefaultCountry.UKEnabled = false;
-            this.FamilySearchDefaultCountry.CountryChanged += new System.EventHandler(this.FamilySearchDefaultCountry_CountryChanged);
-            // 
+            //this.rtbFamilySearchResults.Location = new System.Drawing.Point(0, 177);
+            //this.rtbFamilySearchResults.Name = "rtbFamilySearchResults";
+            //this.rtbFamilySearchResults.Size = new System.Drawing.Size(931, 229);
+            //this.rtbFamilySearchResults.TabIndex = 12;
+            //this.rtbFamilySearchResults.Text = global::FTAnalyzer.Properties.Resources.FTA_0002;
+            //this.rtbFamilySearchResults.TextChanged += new System.EventHandler(this.rtbFamilySearchResults_TextChanged);
+            //// 
+            //// FamilySearchrelationTypes
+            //// 
+            //this.FamilySearchrelationTypes.Location = new System.Drawing.Point(270, 38);
+            //this.FamilySearchrelationTypes.Name = "FamilySearchrelationTypes";
+            //this.FamilySearchrelationTypes.Size = new System.Drawing.Size(322, 74);
+            //this.FamilySearchrelationTypes.TabIndex = 10;
+            //// 
+            //// FamilySearchDefaultCountry
+            //// 
+            //this.FamilySearchDefaultCountry.Location = new System.Drawing.Point(8, 38);
+            //this.FamilySearchDefaultCountry.Name = "FamilySearchDefaultCountry";
+            //this.FamilySearchDefaultCountry.Size = new System.Drawing.Size(256, 74);
+            //this.FamilySearchDefaultCountry.TabIndex = 7;
+            //this.FamilySearchDefaultCountry.Title = "Default Country";
+            //this.FamilySearchDefaultCountry.UKEnabled = false;
+            //this.FamilySearchDefaultCountry.CountryChanged += new System.EventHandler(this.FamilySearchDefaultCountry_CountryChanged);
+            //// 
             // treetopsRelation
             // 
             this.treetopsRelation.Location = new System.Drawing.Point(270, 12);
