@@ -48,6 +48,22 @@ namespace FTAnalyzer
         public static readonly CensusDate CANADACENSUS1911 = new CensusDate("1 JUN 1911", "Canadian Census 1911", Countries.CANADA);
         public static readonly CensusDate CANADACENSUS1916 = new CensusDate("1916", "Canadian Census 1916", Countries.CANADA);
 
+        private static readonly ISet<CensusDate> UK_CENSUS = new HashSet<CensusDate>(new CensusDate[] { 
+            UKCENSUS1841, UKCENSUS1851, UKCENSUS1861, UKCENSUS1871, UKCENSUS1881, UKCENSUS1891, UKCENSUS1901, UKCENSUS1911
+        });
+
+        private static readonly ISet<CensusDate> SUPPORTED_CENSUS = new HashSet<CensusDate>(new CensusDate[] { 
+            UKCENSUS1841, UKCENSUS1851, UKCENSUS1861, UKCENSUS1871, UKCENSUS1881, UKCENSUS1891, UKCENSUS1901, UKCENSUS1911,
+            USCENSUS1790, USCENSUS1800, USCENSUS1810, USCENSUS1820, USCENSUS1830, USCENSUS1840, USCENSUS1850, USCENSUS1860,
+            USCENSUS1870, USCENSUS1880, USCENSUS1890, USCENSUS1900, USCENSUS1910, USCENSUS1920, USCENSUS1930, USCENSUS1940,
+            CANADACENSUS1851, CANADACENSUS1861, CANADACENSUS1871, CANADACENSUS1881, CANADACENSUS1891, CANADACENSUS1901,
+            CANADACENSUS1906, CANADACENSUS1911, CANADACENSUS1916, IRELANDCENSUS1911
+        });
+
+        private static readonly ISet<CensusDate> LOSTCOUSINS_CENSUS = new HashSet<CensusDate>(new CensusDate[] { 
+            UKCENSUS1841, UKCENSUS1881, UKCENSUS1911, USCENSUS1880, USCENSUS1940, CANADACENSUS1881, IRELANDCENSUS1911
+        });
+
         private CensusDate(string str, string displayName, string country)
             : base(str)
         {
@@ -55,23 +71,36 @@ namespace FTAnalyzer
             this.Country = country;
         }
 
-        public static bool IsCensusYear(FactDate fd)
+        public static bool IsCensusYear(FactDate fd, bool exactYear)
         {
-            return (fd.Overlaps(UKCENSUS1841) || fd.Overlaps(UKCENSUS1851) || fd.Overlaps(UKCENSUS1861) || fd.Overlaps(UKCENSUS1871) ||
-                fd.Overlaps(UKCENSUS1881) || fd.Overlaps(UKCENSUS1891) || fd.Overlaps(UKCENSUS1901) || fd.Overlaps(UKCENSUS1911) ||
-                fd.Overlaps(USCENSUS1790) || fd.Overlaps(USCENSUS1800) || fd.Overlaps(USCENSUS1810) || fd.Overlaps(USCENSUS1820) ||
-                fd.Overlaps(USCENSUS1830) || fd.Overlaps(USCENSUS1840) || fd.Overlaps(USCENSUS1850) || fd.Overlaps(USCENSUS1860) ||
-                fd.Overlaps(USCENSUS1870) || fd.Overlaps(USCENSUS1880) || fd.Overlaps(USCENSUS1890) || fd.Overlaps(USCENSUS1900) ||
-                fd.Overlaps(USCENSUS1910) || fd.Overlaps(USCENSUS1920) || fd.Overlaps(USCENSUS1930) || fd.Overlaps(USCENSUS1940) ||
-                fd.Overlaps(CANADACENSUS1851) || fd.Overlaps(CANADACENSUS1861) || fd.Overlaps(CANADACENSUS1871) || fd.Overlaps(CANADACENSUS1881) ||
-                fd.Overlaps(CANADACENSUS1891) || fd.Overlaps(CANADACENSUS1901) || fd.Overlaps(CANADACENSUS1906) || fd.Overlaps(CANADACENSUS1911) ||
-                fd.Overlaps(CANADACENSUS1916) || fd.Overlaps(IRELANDCENSUS1911));
+            if(exactYear)
+            {
+                foreach(CensusDate cd in SUPPORTED_CENSUS)
+                {
+                    if(fd.YearMatches(cd)) 
+                        return true;
+                }
+                return false;
+            }
+            else
+            {
+                foreach(CensusDate cd in SUPPORTED_CENSUS)
+                {
+                    if(fd.Overlaps(cd)) 
+                        return true;
+                }
+                return false;
+            }
         }
 
-        public static bool IsLostCousinsCensusYear(FactDate fd)
+        public static bool IsLostCousinsCensusYear(FactDate fd, bool exactYear)
         {
-            return (fd.Overlaps(UKCENSUS1841) || fd.Overlaps(UKCENSUS1881) || fd.Overlaps(UKCENSUS1911) ||
-                fd.Overlaps(USCENSUS1880) || fd.Overlaps(USCENSUS1940) || fd.Overlaps(CANADACENSUS1881) || fd.Overlaps(IRELANDCENSUS1911));
+            if(exactYear)
+                return (fd.YearMatches(UKCENSUS1841) || fd.YearMatches(UKCENSUS1881) || fd.YearMatches(UKCENSUS1911) ||
+                    fd.YearMatches(USCENSUS1880) || fd.YearMatches(USCENSUS1940) || fd.YearMatches(CANADACENSUS1881) || fd.YearMatches(IRELANDCENSUS1911));
+            else
+                return (fd.Overlaps(UKCENSUS1841) || fd.Overlaps(UKCENSUS1881) || fd.Overlaps(UKCENSUS1911) ||
+                    fd.Overlaps(USCENSUS1880) || fd.Overlaps(USCENSUS1940) || fd.Overlaps(CANADACENSUS1881) || fd.Overlaps(IRELANDCENSUS1911));
         }
 
         public override string ToString()

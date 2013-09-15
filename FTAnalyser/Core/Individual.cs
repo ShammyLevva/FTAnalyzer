@@ -795,12 +795,12 @@ namespace FTAnalyzer
                 return 0; // not alive - grey
             if (!IsCensusDone(census))
             {
-                if (CensusDate.IsLostCousinsCensusYear(census) && IsLostCousinEntered(census))
+                if (CensusDate.IsLostCousinsCensusYear(census, true) && IsLostCousinEntered(census))
                     return 5; // LC entered but no census entered - orange
                 else
                     return 1; // no census - red
             }
-            if (!CensusDate.IsLostCousinsCensusYear(census))
+            if (!CensusDate.IsLostCousinsCensusYear(census, true))
                 return 3; // census entered but not LCyear - green
             if (IsLostCousinEntered(census))
                 return 4; // census + Lost cousins entered - green

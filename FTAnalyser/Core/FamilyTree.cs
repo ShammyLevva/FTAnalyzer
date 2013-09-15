@@ -1006,12 +1006,12 @@ namespace FTAnalyzer
                         }
                         if (f.FactType == Fact.LOSTCOUSINS)
                         {
-                            if (!CensusDate.IsCensusYear(f.FactDate))
+                            if (!CensusDate.IsCensusYear(f.FactDate, false))
                             {
                                 errors[(int)dataerror.LOST_COUSINS_NON_CENSUS].Add(
                                     new DataError((int)dataerror.LOST_COUSINS_NON_CENSUS, ind, "Lost Cousins event for " + f.FactDate + " which isn't a census year"));
                             }
-                            else if (!CensusDate.IsLostCousinsCensusYear(f.FactDate))
+                            else if (!CensusDate.IsLostCousinsCensusYear(f.FactDate, false))
                             {
                                 errors[(int)dataerror.LOST_COUSINS_NOT_SUPPORTED_YEAR].Add(
                                     new DataError((int)dataerror.LOST_COUSINS_NOT_SUPPORTED_YEAR, ind, "Lost Cousins event for " + f.FactDate + " which isn't a Lost Cousins census year"));
