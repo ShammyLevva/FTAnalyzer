@@ -323,7 +323,8 @@ namespace FTAnalyzer
         private void CheckCensusDate(string tag)
         {
             FactDate dateFromFile = FactDate;
-            if (((tag == "Census 1841" && !FactDate.Overlaps(CensusDate.UKCENSUS1841)) ||
+            if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate &&
+                ((tag == "Census 1841" && !FactDate.Overlaps(CensusDate.UKCENSUS1841)) ||
                 (tag == "Census 1851" && !FactDate.Overlaps(CensusDate.UKCENSUS1851)) ||
                 (tag == "Census 1861" && !FactDate.Overlaps(CensusDate.UKCENSUS1861)) ||
                 (tag == "Census 1871" && !FactDate.Overlaps(CensusDate.UKCENSUS1871)) ||
@@ -333,11 +334,16 @@ namespace FTAnalyzer
                 (tag == "Census 1911" && !FactDate.Overlaps(CensusDate.UKCENSUS1911)) ||
                 (tag == "Census" && !CensusDate.IsCensusYear(FactDate)) ||
                 ((tag == "Lost Cousins" || tag == "LostCousins") && !CensusDate.IsLostCousinsCensusYear(FactDate))) &&
-                FactDate.DateString.Length >= 4 && Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
+                FactDate.DateString.Length >= 4)
             {
-                FactDate = new FactDate(FactDate.DateString.Substring(FactDate.DateString.Length - 4));
-                this.FactErrorMessage = "Warning: Inaccurate Census date '" + dateFromFile + "' treated as '" + FactDate + "'";
-                this.FactErrorLevel = Fact.FactError.WARNING;
+                string year = FactDate.DateString.Substring(FactDate.DateString.Length - 4);
+                int result = 0;
+                if (Int32.TryParse(year, out result))
+                {
+                    FactDate = new FactDate(year);
+                    this.FactErrorMessage = "Warning: Inaccurate Census date '" + dateFromFile + "' treated as '" + FactDate + "'";
+                    this.FactErrorLevel = Fact.FactError.WARNING;
+                }
             }
             if ((tag == "Census 1841" && !FactDate.Overlaps(CensusDate.UKCENSUS1841)) ||
                 (tag == "Census 1851" && !FactDate.Overlaps(CensusDate.UKCENSUS1851)) ||
