@@ -37,6 +37,20 @@ namespace Controls
             SetControlWidth();
         }
 
+        public void AddLCCensusItems()
+        {
+            cbCensusDate.Items.Clear();
+            cbCensusDate.Items.Add(CensusDate.UKCENSUS1841);
+            cbCensusDate.Items.Add(CensusDate.UKCENSUS1881);
+            cbCensusDate.Items.Add(CensusDate.UKCENSUS1911);
+            cbCensusDate.Items.Add(CensusDate.USCENSUS1880);
+            cbCensusDate.Items.Add(CensusDate.CANADACENSUS1881);
+            cbCensusDate.Items.Add(CensusDate.IRELANDCENSUS1911);
+            previousDate = defaultDate;
+            RevertToDefaultDate();
+            SetControlWidth();
+        }
+
         public string Country
         {
             get { return country; }

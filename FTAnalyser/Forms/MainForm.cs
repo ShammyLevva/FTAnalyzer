@@ -238,7 +238,7 @@ namespace FTAnalyzer
                     cenDate.RevertToDefaultDate();
                     tsCountLabel.Text = "";
                     btnShowResults.Enabled = ft.IndividualCount > 0;
-                    SetCensusDateSelector();
+                    cenDate.AddAllCensusItems();
                 }
                 else if (tabSelector.SelectedTab == tabTreetops)
                 {
@@ -296,20 +296,6 @@ namespace FTAnalyzer
                     HourGlass(false);
                 }
                 HourGlass(false);
-            }
-        }
-
-        private void SetCensusDateSelector()
-        {
-            if (ckbNoLocations.Checked)
-            {
-                censusCountry.Enabled = false;
-                cenDate.AddAllCensusItems();
-            }
-            else
-            {
-                censusCountry.Enabled = true;
-                cenDate.Country = censusCountry.Country;
             }
         }
 
@@ -374,18 +360,18 @@ namespace FTAnalyzer
             string country;
             Predicate<CensusIndividual> filter = CreateCensusIndividualFilter();
             IComparer<CensusIndividual> censusComparator;
-            if (ckbNoLocations.Checked)
-            {
+//            if (ckbNoLocations.Checked)
+//            {
                 census = new Census(cenDate.CensusCountry);
                 country = string.Empty;
                 censusComparator = new DefaultCensusComparer();
-            }
-            else
-            {
-                census = new Census(cenDate.CensusCountry, censusCountry.GetLocation);
-                country = " " + cenDate.Country;
-                censusComparator = new CensusLocationComparer(FactLocation.PARISH);
-            }
+            //}
+            //else
+            //{
+            //    census = new Census(cenDate.CensusCountry, censusCountry.GetLocation);
+            //    country = " " + cenDate.Country;
+            //    censusComparator = new CensusLocationComparer(FactLocation.PARISH);
+            //}
             census.SetupCensus(filter, censusComparator, censusDate, false, false);
             census.Text = "People missing a " + censusDate.StartDate.Year.ToString() + country + " Census Record that you can search for";
             DisposeDuplicateForms(census);
@@ -403,15 +389,15 @@ namespace FTAnalyzer
             Predicate<CensusIndividual> relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
             Predicate<CensusIndividual> locationFilter;
 
-            if (ckbNoLocations.Checked)
-            {
+//            if (ckbNoLocations.Checked)
+//            {
                 locationFilter = (x => x.IsValidLocation(cenDate.CensusCountry));
-            }
-            else
-            {
-                locationFilter = censusCountry.BuildFilter<CensusIndividual>(
-                    cenDate.SelectedDate, (d, x) => x.BestLocation(d));
-            }
+            //}
+            //else
+            //{
+            //    locationFilter = censusCountry.BuildFilter<CensusIndividual>(
+            //        cenDate.SelectedDate, (d, x) => x.BestLocation(d));
+            //}
 
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(locationFilter, relationFilter,
                     FilterUtils.DateFilter<CensusIndividual>(x => x.CensusDate, cenDate.SelectedDate));
@@ -486,22 +472,22 @@ namespace FTAnalyzer
                         FilterUtils.IntFilter<CensusIndividual>(relationType, Individual.DIRECT)),
                     FilterUtils.IntFilter<CensusIndividual>(relationType, Individual.MARRIEDTODB));
             IComparer<CensusIndividual> comparer;
-            if (ckbLCIgnoreCountry.Checked) // only add the parish location comparator if we are using locations
-            {
+            //if (ckbLCIgnoreCountry.Checked) // only add the parish location comparator if we are using locations
+            //{
                 filter = FilterUtils.TrueFilter<CensusIndividual>(); // if we are ignoring locations then ignore what was passed as a filter
                 census = new Census(location);
                 comparer = new DefaultCensusComparer();
-            }
-            else
-            {
-                if (location == Countries.ENG_WALES)
-                    census = new Census(Countries.UNITED_KINGDOM, Countries.FactLocation(Countries.ENGLAND), Countries.FactLocation(Countries.WALES));
-                else if (location == Countries.SCOTLAND)
-                    census = new Census(Countries.UNITED_KINGDOM, new FactLocation(location));
-                else
-                    census = new Census(location, new FactLocation(location));
-                comparer = new CensusLocationComparer(FactLocation.COUNTRY);
-            }
+            //}
+            //else
+            //{
+            //    if (location == Countries.ENG_WALES)
+            //        census = new Census(Countries.UNITED_KINGDOM, Countries.FactLocation(Countries.ENGLAND), Countries.FactLocation(Countries.WALES));
+            //    else if (location == Countries.SCOTLAND)
+            //        census = new Census(Countries.UNITED_KINGDOM, new FactLocation(location));
+            //    else
+            //        census = new Census(location, new FactLocation(location));
+            //    comparer = new CensusLocationComparer(FactLocation.COUNTRY);
+            //}
 
             if (ckbRestrictions.Checked)
                 filter = FilterUtils.AndFilter<CensusIndividual>(
@@ -846,10 +832,10 @@ namespace FTAnalyzer
         //    HourGlass(false);
         //}
 
-        private void censusCountry_CountryChanged(object sender, EventArgs e)
-        {
-            cenDate.Country = censusCountry.Country;
-        }
+        //private void censusCountry_CountryChanged(object sender, EventArgs e)
+        //{
+        //    cenDate.Country = censusCountry.Country;
+        //}
 
         private void cenDate_CensusChanged(object sender, EventArgs e)
         {
@@ -955,11 +941,6 @@ namespace FTAnalyzer
             System.Diagnostics.Process.Start("http://forums.lc");
         }
 
-        private void ckbNoLocations_CheckedChanged(object sender, EventArgs e)
-        {
-            SetCensusDateSelector();
-        }
-
         private void mnuPrint_Click(object sender, EventArgs e)
         {
             printDocument = new PrintDocument();
@@ -1033,30 +1014,6 @@ namespace FTAnalyzer
                 printDocument.DocumentName = title;
                 printDocument.PrinterSettings = printDialog.PrinterSettings;
                 printDocument.Print();
-            }
-        }
-
-        private void ckbLCIgnoreCountry_CheckedChanged(object sender, EventArgs e)
-        {
-            if (ckbLCIgnoreCountry.Checked)
-            {
-                btnLC1841EW.Text = "1841 Census";
-                btnLC1880USA.Text = "1880 Census";
-                btnLC1881EW.Text = "1881 Census";
-                btnLC1911EW.Text = "1911 Census";
-                btnLC1881Scot.Visible = false;
-                btnLC1911Ireland.Visible = false;
-                btnLC1881Canada.Visible = false;
-            }
-            else
-            {
-                btnLC1880USA.Text = "1880 US Census";
-                btnLC1841EW.Text = "1841 England && Wales Census";
-                btnLC1881EW.Text = "1881 England && Wales Census";
-                btnLC1911EW.Text = "1911 England && Wales Census";
-                btnLC1881Scot.Visible = true;
-                btnLC1911Ireland.Visible = true;
-                btnLC1881Canada.Visible = true;
             }
         }
 

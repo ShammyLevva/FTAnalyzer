@@ -18,8 +18,6 @@ namespace FTAnalyzer.Forms
         private Dictionary<int, DataGridViewCellStyle> rowStyles;
         private int numFamilies;
         public FactDate CensusDate { get; private set; }
-        private FactLocation location;
-        private FactLocation location2;
         private FactLocation censusLocation;
 
         private PrintingDataGridViewProvider printProvider;
@@ -43,19 +41,6 @@ namespace FTAnalyzer.Forms
                 defaultProvider = "Ancestry";
             }
             cbCensusSearchProvider.Text = defaultProvider;
-        }
-
-        public Census(string censusCountry, FactLocation location)
-            : this(censusCountry)
-        {
-            this.location = location;
-        }
-
-        public Census(string censusCountry, FactLocation location, FactLocation location2)
-            : this(censusCountry)
-        {
-            this.location = location;
-            this.location2 = location2;
         }
 
         public void SetupCensus(Predicate<CensusIndividual> filter, IComparer<CensusIndividual> comparer,
