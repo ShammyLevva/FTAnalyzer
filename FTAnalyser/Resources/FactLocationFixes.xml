@@ -97,16 +97,20 @@
       <RegionTypo from="Yorkshire East Riding"      to="East Yorkshire" />
       <RegionTypo from="East Riding of Yorkshire"   to="East Yorkshire" />
       <RegionTypo from="Yorkshire (East)"           to="East Yorkshire" />
+      <RegionTypo from="E Yorks"                    to="East Yorkshire" />
       <RegionTypo from="North Riding Yorkshire"     to="North Yorkshire" />
       <RegionTypo from="Yorkshire North Riding"     to="North Yorkshire" />
       <RegionTypo from="North Riding of Yorkshire"  to="North Yorkshire" />
       <RegionTypo from="Yorkshire (North)"          to="North Yorkshire" />
+      <RegionTypo from="N Yorks"                    to="North Yorkshire" />
       <RegionTypo from="West Riding Yorkshire"      to="West Yorkshire" />
       <RegionTypo from="Yorkshire West Riding"      to="West Yorkshire" />
       <RegionTypo from="West Riding of Yorkshire"   to="West Yorkshire" />
       <RegionTypo from="Yorkshire (West)"           to="West Yorkshire" />
       <RegionTypo from="Yorkshire (South)"          to="West Yorkshire" />
       <RegionTypo from="South Yorkshire"            to="West Yorkshire" />
+      <RegionTypo from="W Yorks"                    to="West Yorkshire" />
+      <RegionTypo from="S Yorks"                    to="West Yorkshire" />
 
       <!-- Ireland -->
       <RegionTypo from="Co Antrim"        to="County Antrim" />
@@ -422,20 +426,20 @@
 
       <!-- Welsh Regions add the Country -->
       <CountryToRegion region="Anglesey"            country="Wales" />
-      <CountryToRegion region="Breconshire"         country="Wales" />  
+      <CountryToRegion region="Brecon"              country="Wales" />  
       <CountryToRegion region="Caernarvon"          country="Wales" />  
-      <CountryToRegion region="Cardiganshire"       country="Wales" />  
-      <CountryToRegion region="Carmarthenshire"     country="Wales" />  
-      <CountryToRegion region="Denbighshire"        country="Wales" />  
-      <CountryToRegion region="Flintshire"          country="Wales" />  
-      <CountryToRegion region="Glamorganshire"      country="Wales" />  
+      <CountryToRegion region="Cardigan"            country="Wales" />  
+      <CountryToRegion region="Carmarthen"          country="Wales" />  
+      <CountryToRegion region="Denbigh"             country="Wales" />  
+      <CountryToRegion region="Flint"               country="Wales" />  
+      <CountryToRegion region="Glamorgan"           country="Wales" />  
       <CountryToRegion region="Gwynedd"             country="Wales" />  
-      <CountryToRegion region="Merionethshire"      country="Wales" />  
+      <CountryToRegion region="Merioneth"           country="Wales" />  
       <CountryToRegion region="Mid-Glamorgan"       country="Wales" />  
-      <CountryToRegion region="Monmouthshire"       country="Wales" />  
-      <CountryToRegion region="Montgomeryshire"     country="Wales" />  
-      <CountryToRegion region="Pembrokeshire"       country="Wales" />  
-      <CountryToRegion region="Radnorshire"         country="Wales" />  
+      <CountryToRegion region="Monmouth"            country="Wales" />  
+      <CountryToRegion region="Montgomery"          country="Wales" />  
+      <CountryToRegion region="Pembroke"            country="Wales" />  
+      <CountryToRegion region="Radnor"              country="Wales" />  
       
       <!-- Welsh Cities add the Country -->
       <CountryToRegion region="Bangor"              country="Wales" />
