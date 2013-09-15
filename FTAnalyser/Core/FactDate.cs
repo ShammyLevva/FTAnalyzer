@@ -577,6 +577,15 @@ namespace FTAnalyzer
             return (that == null) ? true : !(IsBefore(that) || IsAfter(that));
         }
 
+        public bool YearMatches(FactDate that)
+        {
+            if (that == null ||
+                that.StartDate.Year != that.EndDate.Year || 
+                this.StartDate.Year != this.EndDate.Year) return false;
+            // both this & that have exact years now return whether this and that match
+            return this.StartDate.Year == that.StartDate.Year;
+        }
+
         public bool Contains(FactDate that)
         {
             return (that == null) ? true :

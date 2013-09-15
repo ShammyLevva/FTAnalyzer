@@ -336,7 +336,7 @@ namespace FTAnalyzer
                 FactDate.DateString.Length >= 4 && Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
             {
                 FactDate = new FactDate(FactDate.DateString.Substring(FactDate.DateString.Length - 4));
-                this.FactErrorMessage = "Inaccurate Census date '" + dateFromFile + "' treated as '" + FactDate + "'";
+                this.FactErrorMessage = "Warning: Inaccurate Census date '" + dateFromFile + "' treated as '" + FactDate + "'";
                 this.FactErrorLevel = Fact.FactError.WARNING;
             }
             if ((tag == "Census 1841" && !FactDate.Overlaps(CensusDate.UKCENSUS1841)) ||

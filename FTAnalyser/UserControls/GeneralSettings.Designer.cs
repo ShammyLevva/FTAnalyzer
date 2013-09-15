@@ -66,8 +66,6 @@
             // chkStrictResidenceYears
             // 
             resources.ApplyResources(this.chkStrictResidenceYears, "chkStrictResidenceYears");
-            this.chkStrictResidenceYears.Checked = true;
-            this.chkStrictResidenceYears.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkStrictResidenceYears.Name = "chkStrictResidenceYears";
             this.chkStrictResidenceYears.UseVisualStyleBackColor = true;
             // 
