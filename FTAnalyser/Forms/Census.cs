@@ -20,10 +20,12 @@ namespace FTAnalyzer.Forms
         public FactDate CensusDate { get; private set; }
         private FactLocation censusLocation;
         private PrintingDataGridViewProvider printProvider;
+        public bool LostCousins { get; private set; }
 
-        public Census(string censusCountry)
+        public Census(bool lostCousins, string censusCountry)
         {
             InitializeComponent();
+            LostCousins = lostCousins;
 
             printDocument.DefaultPageSettings.Margins =
                new System.Drawing.Printing.Margins(15,15,15,15);

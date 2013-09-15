@@ -160,7 +160,9 @@ namespace FTAnalyzer
                 if (!object.ReferenceEquals(f, form) && f.GetType() == form.GetType())
                     if (form is Census)
                     {
-                        if (((Census)f).CensusDate.Equals(((Census)form).CensusDate))
+                        Census newForm = form as Census;
+                        Census oldForm = f as Census;
+                        if (oldForm.CensusDate.Equals(newForm.CensusDate) && oldForm.LostCousins == newForm.LostCousins)
                             toDispose.Add(f);
                     }
                     else
@@ -362,7 +364,7 @@ namespace FTAnalyzer
             IComparer<CensusIndividual> censusComparator;
 //            if (ckbNoLocations.Checked)
 //            {
-                census = new Census(cenDate.CensusCountry);
+                census = new Census(false, cenDate.CensusCountry);
                 country = string.Empty;
                 censusComparator = new DefaultCensusComparer();
             //}
@@ -475,7 +477,7 @@ namespace FTAnalyzer
             //if (ckbLCIgnoreCountry.Checked) // only add the parish location comparator if we are using locations
             //{
                 filter = FilterUtils.TrueFilter<CensusIndividual>(); // if we are ignoring locations then ignore what was passed as a filter
-                census = new Census(location);
+                census = new Census(true, location);
                 comparer = new DefaultCensusComparer();
             //}
             //else
