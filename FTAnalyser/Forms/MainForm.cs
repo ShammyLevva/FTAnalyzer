@@ -497,7 +497,10 @@ namespace FTAnalyzer
                 filter = FilterUtils.AndFilter<CensusIndividual>(FilterUtils.DateFilter<CensusIndividual>(registrationDate, censusDate), filter);
 
             census.SetupCensus(filter, comparer, censusDate, true, ckbHideRecorded.Checked);
-            census.Text = reportTitle;
+            if(ckbHideRecorded.Checked)
+                census.Text =  reportTitle + " to enter into Lost Cousins website";
+            else
+                census.Text = reportTitle + " already entered into Lost Cousins website";
             HourGlass(false);
             DisposeDuplicateForms(census);
             census.Show();
@@ -509,7 +512,7 @@ namespace FTAnalyzer
             Predicate<CensusIndividual> filter = FilterUtils.OrFilter<CensusIndividual>(
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.ENGLAND),
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.WALES));
-            string reportTitle = "1881 England & Wales Census Records on file to enter to Lost Cousins";
+            string reportTitle = "1881 England & Wales Census Records on file";
             LostCousinsCensus(Countries.ENG_WALES, filter, CensusDate.UKCENSUS1881, reportTitle);
         }
 
@@ -517,7 +520,7 @@ namespace FTAnalyzer
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.UKCENSUS1881).Country;
             Predicate<CensusIndividual> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.SCOTLAND);
-            string reportTitle = "1881 Scotland Census Records on file to enter to Lost Cousins";
+            string reportTitle = "1881 Scotland Census Records on file";
             LostCousinsCensus(Countries.SCOTLAND, filter, CensusDate.UKCENSUS1881, reportTitle);
         }
 
@@ -525,7 +528,7 @@ namespace FTAnalyzer
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.UKCENSUS1881).Country;
             Predicate<CensusIndividual> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.CANADA);
-            string reportTitle = "1881 Canada Census Records on file to enter to Lost Cousins";
+            string reportTitle = "1881 Canada Census Records on file";
             LostCousinsCensus(Countries.CANADA, filter, CensusDate.CANADACENSUS1881, reportTitle);
         }
 
@@ -535,7 +538,7 @@ namespace FTAnalyzer
             Predicate<CensusIndividual> filter = FilterUtils.OrFilter<CensusIndividual>(
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.ENGLAND),
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.WALES));
-            string reportTitle = "1841 England & Wales Census Records on file to enter to Lost Cousins";
+            string reportTitle = "1841 England & Wales Census Records on file";
             LostCousinsCensus(Countries.ENG_WALES, filter, CensusDate.UKCENSUS1841, reportTitle);
         }
 
@@ -546,7 +549,7 @@ namespace FTAnalyzer
             Predicate<CensusIndividual> filter = FilterUtils.OrFilter<CensusIndividual>(
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.ENGLAND),
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.WALES));
-            string reportTitle = "1911 England & Wales Census Records on file to enter to Lost Cousins";
+            string reportTitle = "1911 England & Wales Census Records on file";
             LostCousinsCensus(Countries.ENG_WALES, filter, CensusDate.UKCENSUS1911, reportTitle);
         }
 
@@ -554,7 +557,7 @@ namespace FTAnalyzer
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.USCENSUS1880).Country;
             Predicate<CensusIndividual> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.UNITED_STATES);
-            string reportTitle = "1880 US Census Records on file to enter to Lost Cousins";
+            string reportTitle = "1880 US Census Records on file";
             LostCousinsCensus(Countries.UNITED_STATES, filter, CensusDate.USCENSUS1880, reportTitle);
         }
 
@@ -562,7 +565,7 @@ namespace FTAnalyzer
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.IRELANDCENSUS1911).Country;
             Predicate<CensusIndividual> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.IRELAND);
-            string reportTitle = "1911 Ireland Census Records on file to enter to Lost Cousins";
+            string reportTitle = "1911 Ireland Census Records on file";
             LostCousinsCensus(Countries.IRELAND, filter, CensusDate.IRELANDCENSUS1911, reportTitle);
         }
 

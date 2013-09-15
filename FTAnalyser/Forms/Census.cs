@@ -19,7 +19,6 @@ namespace FTAnalyzer.Forms
         private int numFamilies;
         public FactDate CensusDate { get; private set; }
         private FactLocation censusLocation;
-
         private PrintingDataGridViewProvider printProvider;
 
         public Census(string censusCountry)
