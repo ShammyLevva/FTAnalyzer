@@ -167,6 +167,9 @@
     <None Include="MailMerge\Marriages.doc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Properties\DataSources\BirthRegistration.datasource" />
+    <None Include="Properties\DataSources\DeathRegistration.datasource" />
+    <None Include="Properties\DataSources\MarriageRegistration.datasource" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Useful URLs.txt" />

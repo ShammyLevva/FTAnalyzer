@@ -273,9 +273,6 @@
     <None Include="app.config" />
     <None Include="FTAnalyzer_TemporaryKey.pfx" />
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\BirthRegistration.datasource" />
-    <None Include="Properties\DataSources\DeathRegistration.datasource" />
-    <None Include="Properties\DataSources\MarriageRegistration.datasource" />
     <None Include="Properties\GeneralSettings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>GeneralSettings.Designer.cs</LastGenOutput>
