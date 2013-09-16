@@ -39,7 +39,7 @@
             this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.cbCensusSearchProvider = new System.Windows.Forms.ToolStripComboBox();
+            this.cbBMDSearchProvider = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.cbFilter = new System.Windows.Forms.ToolStripComboBox();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -91,7 +91,7 @@
             this.mnuExportToExcel,
             this.toolStripSeparator2,
             this.toolStripLabel1,
-            this.cbCensusSearchProvider,
+            this.cbBMDSearchProvider,
             this.toolStripLabel2,
             this.cbFilter});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -146,17 +146,17 @@
             this.toolStripLabel1.Size = new System.Drawing.Size(106, 22);
             this.toolStripLabel1.Text = "BMD Search using:";
             // 
-            // cbCensusSearchProvider
+            // cbBMDSearchProvider
             // 
-            this.cbCensusSearchProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCensusSearchProvider.Items.AddRange(new object[] {
+            this.cbBMDSearchProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBMDSearchProvider.Items.AddRange(new object[] {
             "Ancestry",
             "Find My Past",
             "FreeCen",
             "FamilySearch"});
-            this.cbCensusSearchProvider.Name = "cbCensusSearchProvider";
-            this.cbCensusSearchProvider.Size = new System.Drawing.Size(121, 25);
-            this.cbCensusSearchProvider.SelectedIndexChanged += new System.EventHandler(this.cbCensusSearchProvider_SelectedIndexChanged);
+            this.cbBMDSearchProvider.Name = "cbBMDSearchProvider";
+            this.cbBMDSearchProvider.Size = new System.Drawing.Size(121, 25);
+            this.cbBMDSearchProvider.SelectedIndexChanged += new System.EventHandler(this.cbCensusSearchProvider_SelectedIndexChanged);
             // 
             // toolStripLabel2
             // 
@@ -234,7 +234,7 @@
         private System.Windows.Forms.ToolStripButton printPreviewToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripComboBox cbCensusSearchProvider;
+        private System.Windows.Forms.ToolStripComboBox cbBMDSearchProvider;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripComboBox cbFilter;
         private System.Windows.Forms.ToolStripButton mnuExportToExcel;
