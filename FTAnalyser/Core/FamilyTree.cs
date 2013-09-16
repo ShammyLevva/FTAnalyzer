@@ -233,15 +233,20 @@ namespace FTAnalyzer
             int censusTotal = censusFacts + censusWarnings + censusErrors;
             int resiTotal = resiFacts + resiWarnings + resiErrors;
             int lostCousinsTotal = lostCousinsFacts + lostCousinsWarnings + lostCousinsErrors;
-            xmlErrorbox.AppendText("\nFound " + censusTotal + " census facts in GEDCOM File ");
-            xmlErrorbox.AppendText("(" + censusFacts + " good, " + censusWarnings + " warnings (data tolerated), " + censusErrors + " errors (data discarded), ");
-            xmlErrorbox.AppendText((censusFacts + censusWarnings) + " usable facts loaded)");
-            xmlErrorbox.AppendText("\nFound " + resiTotal + " residence facts in GEDCOM File ");
-            xmlErrorbox.AppendText("(" + resiFacts  + " good, " + resiWarnings + " warnings (data tolerated), " + resiErrors + " errors (data discarded), ");
-            xmlErrorbox.AppendText((resiFacts + resiWarnings) + " usable facts loaded)");
-            xmlErrorbox.AppendText("\nFound " + lostCousinsTotal + " Lost Cousins facts in GEDCOM File ");
-            xmlErrorbox.AppendText("(" + lostCousinsFacts + " good, " + lostCousinsWarnings + " warnings (data tolerated), " + lostCousinsErrors + " errors (data discarded), ");
-            xmlErrorbox.AppendText((lostCousinsFacts + lostCousinsWarnings) + " usable facts loaded)\n");
+            xmlErrorbox.AppendText("\nFound " + censusTotal + " census facts in GEDCOM File (" + censusFacts + " good, ");
+            if(Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
+                xmlErrorbox.AppendText(censusWarnings + " warnings (data tolerated), ");
+            xmlErrorbox.AppendText(censusErrors + " errors (data discarded), " + (censusFacts + censusWarnings) + " usable facts loaded)");
+            
+            xmlErrorbox.AppendText("\nFound " + resiTotal + " residence facts in GEDCOM File (" + resiFacts  + " good, ");
+            if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
+                xmlErrorbox.AppendText(resiWarnings + " warnings (data tolerated), ");
+            xmlErrorbox.AppendText(resiErrors + " errors (data discarded), " + (resiFacts + resiWarnings) + " usable facts loaded)");
+            
+            xmlErrorbox.AppendText("\nFound " + lostCousinsTotal + " Lost Cousins facts in GEDCOM File (" + lostCousinsFacts + " good, ");
+            if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
+                xmlErrorbox.AppendText(lostCousinsWarnings + " warnings (data tolerated), ");
+            xmlErrorbox.AppendText(lostCousinsErrors + " errors (data discarded), " + (lostCousinsFacts + lostCousinsWarnings) + " usable facts loaded)\n");
             if (censusFacts == 0 && resiFacts == 0)  
             {
                 xmlErrorbox.AppendText("\nFound no census or residence facts in GEDCOM File.\n");
