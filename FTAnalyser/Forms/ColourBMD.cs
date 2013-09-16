@@ -70,43 +70,6 @@ namespace FTAnalyzer.Forms
             cbFilter.Text = "All Individuals";
         }
 
-        private string CountText(SortableBindingList<IDisplayColourCensus> reportList)
-        {
-
-            StringBuilder output = new StringBuilder();
-
-            //Dictionary<int, int> totals = new Dictionary<int, int>();
-            //for (int census = 1841; census <= 1911; census += 10)
-            //    for (int i = 0; i <= 4; i++)
-            //        totals[census * 10 + i] = 0;
-
-            //foreach (IDisplayLCReport r in reportList)
-            //{
-            //    totals[18410 + r.C1841]++;
-            //    totals[18510 + r.C1851]++;
-            //    totals[18610 + r.C1861]++;
-            //    totals[18710 + r.C1871]++;
-            //    totals[18810 + r.C1881]++;
-            //    totals[18910 + r.C1891]++;
-            //    totals[19010 + r.C1901]++;
-            //    totals[19110 + r.C1911]++;
-            //}
-
-            //for (int census = 1841; census <= 1911; census += 10)
-            //{
-            //    output.Append(census);
-            //    output.Append(":");
-            //    output.Append(totals[census * 10 + 1]);
-            //    output.Append("/");
-            //    output.Append(totals[census * 10 + 2]);
-            //    output.Append("/");
-            //    output.Append(totals[census * 10 + 3] + totals[census * 10 + 4]);
-            //    output.Append(" ");
-            //}
-
-            return output.ToString();
-        }
-
         private void ResizeColumns()
         {
             foreach (DataGridViewColumn c in dgReportSheet.Columns)
@@ -143,19 +106,19 @@ namespace FTAnalyzer.Forms
                     e.CellStyle.SelectionForeColor = e.CellStyle.SelectionBackColor;
                     switch (value)
                     {
-                        case 0:
+                        case 0: // Grey
                             cell.ToolTipText = "Not required.";
                             break;
-                        case 1:
+                        case 1: // Red
                             cell.ToolTipText = "Unknown date.";
                             break;
-                        case 2:
+                        case 2: // Orange
                             cell.ToolTipText = "Wide date range.";
                             break;
-                        case 3:
+                        case 3: // Yellow
                             cell.ToolTipText = "Approximate date.";
                             break;
-                        case 4:
+                        case 4: // Green
                             cell.ToolTipText = "Exact date.";
                             break;
                     }
@@ -181,22 +144,22 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        //private void dgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    if (e.ColumnIndex >= birthColumnIndex && e.ColumnIndex <= burialColumnIndex)
-        //    {
-        //        DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
-        //        int value = (int)cell.Value;
-        //        if (value == 1 || value == 2)
-        //        {
-        //            IDisplayColourCensus person = (IDisplayColourCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
-        //            int censusYear = (1841 + (e.ColumnIndex - birthColumnIndex) * 10);
-        //            FamilyTree ft = FamilyTree.Instance;
-        //            string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
-        //            ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
-        //        }
-        //    }
-        //}
+        private void dgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex >= birthColumnIndex && e.ColumnIndex <= burialColumnIndex)
+            {
+                DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                int value = (int)cell.Value;
+                if (value == 1 || value == 2)
+                {
+                    IDisplayColourBMD person = (IDisplayColourBMD)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
+                    FamilyTree ft = FamilyTree.Instance;
+                    //string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
+                    //ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
+                    MessageBox.Show("Not yet available.");
+                }
+            }
+        }
 
         private void cbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -204,28 +167,25 @@ namespace FTAnalyzer.Forms
             dgReportSheet.Focus();
         }
 
-        private List<IDisplayColourCensus> BuildFilter(int toFind, bool all)
+        private List<IDisplayColourBMD> BuildFilter(int toFind, bool all)
         {
-            List<IDisplayColourCensus> result = new List<IDisplayColourCensus>();
-            foreach(IDisplayColourCensus row in this.reportList)
+            List<IDisplayColourBMD> result = new List<IDisplayColourBMD>();
+            foreach(IDisplayColourBMD row in this.reportList)
             {
-                //if (all)
-                //{
-                //    if ((row.C1841 == toFind || row.C1841 == 0) && (row.C1851 == toFind || row.C1851 == 0) &&
-                //        (row.C1861 == toFind || row.C1861 == 0) && (row.C1871 == toFind || row.C1871 == 0) &&
-                //        (row.C1881 == toFind || row.C1881 == 0) && (row.C1891 == toFind || row.C1891 == 0) &&
-                //        (row.C1901 == toFind || row.C1901 == 0) && (row.C1911 == toFind || row.C1911 == 0) &&
-                //        !(row.C1841 == 0 && row.C1851 == 0 && row.C1861 == 0 && row.C1871 == 0 && 
-                //          row.C1881 == 0 && row.C1891 == 0 && row.C1901 == 0 && row.C1911 == 0 && toFind != 0)) // exclude all greys
-                //        result.Add(row);
-                //}
-                //else
-                //{
-                //    if (row.C1841 == toFind || row.C1851 == toFind || row.C1861 == toFind || row.C1871 == toFind ||
-                //       row.C1881 == toFind || row.C1891 == toFind || row.C1901 == toFind || row.C1911 == toFind)
-                //        result.Add(row);
-                //}
-
+                if (all)
+                {
+                    if ((row.Birth == toFind || row.Birth == 0) && (row.BaptChri == toFind || row.BaptChri == 0) &&
+                        (row.Marriage1 == toFind || row.Marriage1 == 0) && (row.Marriage2 == toFind || row.Marriage2 == 0) &&
+                        (row.Marriage3 == toFind || row.Marriage3 == 0) && (row.Death == toFind || row.Death == 0) &&
+                        (row.CremBuri == toFind || row.CremBuri == 0))
+                            result.Add(row);
+                }
+                else
+                {
+                    if (row.Birth == toFind || row.BaptChri == toFind || row.Marriage1 == toFind || row.Marriage2 == toFind ||
+                        row.Marriage3 == toFind || row.Death == toFind || row.CremBuri == toFind)
+                            result.Add(row);
+                }
             }   
             return result;
         }
@@ -233,37 +193,36 @@ namespace FTAnalyzer.Forms
         private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            //List<IDisplayColourCensus> list;
             switch (cbFilter.SelectedIndex)
             {
                 case -1: // nothing selected
                 case 0: // All Individuals
                     dgReportSheet.DataSource = this.reportList;
                     break;
-                //case 1: // None Found (All Red)
-                //    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(1, true));
-                //    break;
-                //case 2: // All Found (All Green)
-                //    list = new List<IDisplayColourCensus>();
-                //    list.AddRange(BuildFilter(3, true));
-                //    list.AddRange(BuildFilter(4, true));
-                //    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list);
-                //    break;
-                //case 3: // Lost Cousins Missing (Yellows)
-                //    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(2, false));
-                //    break;
-                //case 4: // Lost Cousins Present (Orange)
-                //    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(5, false));
-                //    break;
-                //case 5: // Some Missing (Some Red)
-                //    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(1, false));
-                //    break;
-                //case 6:
-                //    list = new List<IDisplayColourCensus>();
-                //    list.AddRange(BuildFilter(3, false));
-                //    list.AddRange(BuildFilter(4, false));
-                //    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list);
-                //    break;
+                case 1: // None Found (All Red)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(1, true));
+                    break;
+                case 2: // All Found (All Green)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(4, true));
+                    break;
+                case 3: // All Wide date ranges (Orange)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(2, true));
+                    break;
+                case 4: // All Narrow date ranges (Yellow)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(3, true));
+                    break;
+                case 5: // Some Missing (Some Red)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(1, false));
+                    break;
+                case 6: // Some found (Some Green)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(4, false));
+                    break;
+                case 7: // All Wide date ranges (Orange)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(2, false));
+                    break;
+                case 8: // All Narrow date ranges (Yellow)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(3, false));
+                    break;
             }
             ResizeColumns();
             dgReportSheet.Focus();
@@ -275,7 +234,7 @@ namespace FTAnalyzer.Forms
         {
             this.Cursor = Cursors.WaitCursor;
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            List<IDisplayColourCensus> export = (dgReportSheet.DataSource as SortableBindingList<IDisplayColourCensus>).ToList<IDisplayColourCensus>();
+            List<IDisplayColourBMD> export = (dgReportSheet.DataSource as SortableBindingList<IDisplayColourBMD>).ToList<IDisplayColourBMD>();
             DataTable dt = convertor.ToDataTable(export);
             ExportToExcel.Export(dt);
             this.Cursor = Cursors.Default;

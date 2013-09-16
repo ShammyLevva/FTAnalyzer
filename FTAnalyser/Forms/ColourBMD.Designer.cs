@@ -168,15 +168,16 @@
             // 
             this.cbFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFilter.DropDownWidth = 170;
-            this.cbFilter.Enabled = false;
             this.cbFilter.Items.AddRange(new object[] {
             "All Individuals",
             "None Found (All Red)",
             "All Found (All Green)",
-            "Wide Date Range (Orange)",
-            "Narrow Date Range (Yellow)",
+            "All Wide Date Range (Orange)",
+            "All Narrow Date Range (Yellow)",
             "Some Missing (Some Red)",
-            "Some Found (Some Green)"});
+            "Some Found (Some Green)",
+            "Some Wide Date Range (Orange)",
+            "SomeNarrow Date Range (Yellow)"});
             this.cbFilter.Name = "cbFilter";
             this.cbFilter.Size = new System.Drawing.Size(185, 25);
             this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.cbFilter_SelectedIndexChanged);

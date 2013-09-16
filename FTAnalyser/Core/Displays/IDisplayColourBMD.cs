@@ -22,6 +22,9 @@ namespace FTAnalyzer
         
         FactDate BirthDate { get; }
         FactLocation BirthLocation { get; }
+        string FirstMarriage { get; }
+        string SecondMarriage { get; }
+        string ThirdMarriage { get; }
         FactLocation BestLocation(FactDate when);
         FactDate DeathDate { get; }
         int Ahnentafel { get; }

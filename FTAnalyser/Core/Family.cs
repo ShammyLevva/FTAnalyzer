@@ -333,17 +333,11 @@ namespace FTAnalyzer
             get { return Wife == null ? string.Empty : Wife.Name + " (b." + Wife.BirthDate + ")"; }
         }
 
-        string IDisplayFamily.Marriage
+        public string Marriage
         {
             get
             {
-                Fact marriage = GetPreferredFact(Fact.MARRIAGE);
-                if (marriage == null)
-                    return string.Empty;
-                if (marriage.Location.IsBlank())
-                    return MarriageDate.ToString();
-                else
-                    return MarriageDate.ToString() + " at " + marriage.Location;
+                return this.ToString();
             }
         }
 
@@ -481,6 +475,17 @@ namespace FTAnalyzer
                 }
                 return results;
             }
+        }
+
+        public override string ToString()
+        {
+            Fact marriage = GetPreferredFact(Fact.MARRIAGE);
+            if (marriage == null)
+                return string.Empty;
+            if (marriage.Location.IsBlank())
+                return MarriageDate.ToString();
+            else
+                return MarriageDate.ToString() + " at " + marriage.Location;
         }
     }
 }

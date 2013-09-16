@@ -714,20 +714,6 @@ namespace FTAnalyzer
             return facts.Where(f => f.FactType == factType);
         }
 
-        public Family FirstMarriage
-        {
-            get
-            {
-                FactDate firstMarriageDate = new FactDate(FactDate.MAXDATE.ToString());
-                foreach (Family marriage in familiesAsParent)
-                {
-                    if (marriage.MarriageDate != null && marriage.MarriageDate.IsBefore(firstMarriageDate))
-                        return marriage;
-                }
-                return null;
-            }
-        }
-
         public string SurnameAtDate(FactDate date)
         {
             string name = surname;
@@ -872,7 +858,8 @@ namespace FTAnalyzer
 
         public int BaptChri
         {
-            get {
+            get
+            {
                 FactDate baptism = GetPreferredFactDate(Fact.BAPTISM);
                 FactDate christening = GetPreferredFactDate(Fact.CHRISTENING);
                 return Math.Max(baptism.DateStatus(true), christening.DateStatus(true));
@@ -881,17 +868,69 @@ namespace FTAnalyzer
 
         public int Marriage1
         {
-            get { return 0; }
+            get
+            {
+                Family marriage = Marriages(0);
+                if (marriage == null)
+                    return 0;
+                else
+                    return marriage.MarriageDate.DateStatus(false);
+            }
         }
 
         public int Marriage2
         {
-            get { return 0; }
+            get
+            {
+                Family marriage = Marriages(1);
+                if (marriage == null)
+                    return 0;
+                else
+                    return marriage.MarriageDate.DateStatus(false);
+            }
         }
 
         public int Marriage3
         {
-            get { return 0; }
+            get
+            {
+                Family marriage = Marriages(2);
+                if (marriage == null)
+                    return 0;
+                else
+                    return marriage.MarriageDate.DateStatus(false);
+            }
+        }
+
+        private string MarriageString(int number)
+        {
+            Family marriage = Marriages(number);
+            if (marriage == null)
+                return string.Empty;
+            else
+            {
+                if (this.IndividualID == marriage.HusbandID && marriage.Wife != null)
+                    return "To " + marriage.Wife.Name + " : " + marriage.ToString();
+                else if (this.IndividualID == marriage.WifeID && marriage.Husband != null)
+                    return "To " + marriage.Husband.Name + " : " + marriage.ToString();
+                else
+                    return "Married : " + marriage.ToString();
+            }
+        }
+
+        public string FirstMarriage
+        {
+            get { return MarriageString(0); }
+        }
+
+        public string SecondMarriage
+        {
+            get { return MarriageString(1); }
+        }
+
+        public string ThirdMarriage
+        {
+            get { return MarriageString(2); }
         }
 
         public int Death
@@ -907,6 +946,16 @@ namespace FTAnalyzer
                 FactDate burial = GetPreferredFactDate(Fact.BURIAL);
                 return Math.Max(cremation.DateStatus(true), burial.DateStatus(true));
             }
+        }
+
+        private Family Marriages(int number)
+        {
+            if(number < FamiliesAsParent.Count)
+            {
+                Family f = FamiliesAsParent.OrderBy(d => d.MarriageDate).ElementAt(number);
+                return f;
+            }
+            return null;
         }
     }
 }
