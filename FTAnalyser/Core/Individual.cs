@@ -659,7 +659,7 @@ namespace FTAnalyzer
                         case Fact.FactError.GOOD:
                             AddFact(f);
                             break;
-                        case Fact.FactError.WARNING:
+                        case Fact.FactError.WARNINGALLOW:
                             AddFact(f);
                             errorFacts.Add(f);
                             break;

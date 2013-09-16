@@ -173,7 +173,7 @@ namespace FTAnalyzer
             }
         }
 
-        public enum FactError { GOOD = 0, WARNING = 1, ERROR = 2 };
+        public enum FactError { GOOD = 0, WARNINGALLOW = 1, WARNINGIGNORE = 2, ERROR = 3 };
 
         #region Constructors
 
@@ -356,7 +356,7 @@ namespace FTAnalyzer
                     {
                         FactDate = new FactDate(year);
                         this.FactErrorMessage = "Warning: Inaccurate Census date '" + dateFromFile + "' treated as '" + FactDate + "'";
-                        this.FactErrorLevel = Fact.FactError.WARNING;
+                        this.FactErrorLevel = Fact.FactError.WARNINGALLOW;
                     }
                 }
             }
@@ -377,7 +377,7 @@ namespace FTAnalyzer
                 if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && FactDate.IsKnown() && !CensusDate.IsCensusYear(FactDate, true))
                 {
                     this.FactErrorMessage = "Warning : Census fact error date '" + dateFromFile + "' overlaps census date but is vague. Check for incorrect date entered.";
-                    this.FactErrorLevel = Fact.FactError.WARNING;
+                    this.FactErrorLevel = Fact.FactError.WARNINGALLOW;
                 }
                 if (!CensusDate.IsCensusYear(FactDate, false))
                 {
@@ -391,7 +391,7 @@ namespace FTAnalyzer
                 if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && FactDate.IsKnown() && !CensusDate.IsLostCousinsCensusYear(FactDate, true))
                 {
                     this.FactErrorMessage = "Lost Cousins fact error date '" + dateFromFile + "' overlaps Lost Cousins census year but is vague. Check for incorrect date entered.";
-                    this.FactErrorLevel = Fact.FactError.WARNING;
+                    this.FactErrorLevel = Fact.FactError.WARNINGALLOW;
                 } 
                 if (!CensusDate.IsLostCousinsCensusYear(FactDate, false))
                 {

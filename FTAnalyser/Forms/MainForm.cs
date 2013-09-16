@@ -1532,5 +1532,27 @@ namespace FTAnalyzer
             }
             UpdateDataErrorsDisplay();
         }
+
+        private void dgDataErrors_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex > -1 && e.ColumnIndex == this.dgDataErrors.Columns["Icon"].Index)
+            {
+                if (this.dgDataErrors["c2", e.RowIndex].Value != null)
+                {
+                    string s = this.dgDataErrors["c2", e.RowIndex].Value.ToString();
+                    switch (s)
+                    {
+                        case "Laptop":
+                            e.Value = Image.FromFile(@"c:\test\Laptop.gif");
+                            break;
+                        case "Desktop":
+                            e.Value = Image.FromFile(@"c:\test\Desktop.gif");
+                            break;
+ 
+                        // ....etc....
+                    }
+                }
+
+        }
     }
 }

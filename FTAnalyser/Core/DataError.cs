@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace FTAnalyzer
 {
@@ -9,7 +11,14 @@ namespace FTAnalyzer
     {
         private Individual individual;
         public string ErrorType { get; private set; }
+        public MessageBoxIcon Icon { get; private set; }
         public string Description { get; private set; }
+
+        public DataError(int errorType, Fact.FactError errorLevel, Individual ind, string description) :
+            this(errorType, ind, description)
+        {
+            this.Icon = DataErrorGroup.ErrorIcon(errorLevel);
+        }
 
         public DataError(int errorType, Individual ind, string description)
         {

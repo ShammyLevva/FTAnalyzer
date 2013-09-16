@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace FTAnalyzer
 {
     public class DataErrorGroup
     {
-        private static string[] DATAERROR =  new string[] 
+        private static string[] DATAERROR = new string[] 
                     { "Birth after death/burial",
                       "Birth after father aged 90+", 
                       "Birth after mother aged 60+", 
@@ -35,10 +37,24 @@ namespace FTAnalyzer
         private int errorNumber;
 
         public static string ErrorDescription(int errorNumber)
-        { 
-            return DATAERROR[errorNumber]; 
+        {
+            return DATAERROR[errorNumber];
         }
-        
+
+        public static MessageBoxIcon ErrorIcon(Fact.FactError errorLevel)
+        {
+            switch (errorLevel)
+            {
+                case Fact.FactError.GOOD:
+                    return MessageBoxIcon.None;
+                case Fact.FactError.WARNINGALLOW:
+                    return MessageBoxIcon.Warning;
+                case Fact.FactError.ERROR:
+                    return MessageBoxIcon.Error;
+            }
+            return MessageBoxIcon.None;
+        }
+
         public DataErrorGroup(int errorNumber, IList<DataError> errors)
         {
             this.errorNumber = errorNumber;

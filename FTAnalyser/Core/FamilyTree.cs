@@ -221,13 +221,13 @@ namespace FTAnalyzer
             foreach (Individual ind in individuals)
             {
                 censusFacts += ind.FactCount(Fact.CENSUS);
-                censusWarnings += ind.ErrorFactCount(Fact.CENSUS, Fact.FactError.WARNING);
+                censusWarnings += ind.ErrorFactCount(Fact.CENSUS, Fact.FactError.WARNINGALLOW);
                 censusErrors += ind.ErrorFactCount(Fact.CENSUS, Fact.FactError.ERROR);
                 resiFacts += ind.FactCount(Fact.RESIDENCE);
-                resiWarnings += ind.ErrorFactCount(Fact.RESIDENCE, Fact.FactError.WARNING);
+                resiWarnings += ind.ErrorFactCount(Fact.RESIDENCE, Fact.FactError.WARNINGALLOW);
                 resiErrors += ind.ErrorFactCount(Fact.RESIDENCE, Fact.FactError.ERROR);
                 lostCousinsFacts += ind.FactCount(Fact.LOSTCOUSINS);
-                lostCousinsWarnings += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNING);
+                lostCousinsWarnings += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNINGALLOW);
                 lostCousinsErrors += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.ERROR);
             }
             int censusTotal = censusFacts + censusWarnings + censusErrors;
@@ -990,7 +990,7 @@ namespace FTAnalyzer
                     }
                     foreach (Fact f in ind.ErrorFacts)
                     {
-                        errors[(int)dataerror.FACT_ERROR].Add(new DataError((int)dataerror.FACT_ERROR, ind, f.FactErrorMessage)); 
+                        errors[(int)dataerror.FACT_ERROR].Add(new DataError((int)dataerror.FACT_ERROR, f.FactErrorLevel, ind, f.FactErrorMessage)); 
                     }
                     foreach (Fact f in ind.AllFacts)
                     {
