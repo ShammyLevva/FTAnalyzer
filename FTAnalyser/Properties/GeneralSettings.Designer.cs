@@ -94,5 +94,17 @@ namespace FTAnalyzer.Properties {
                 this["TolerateInaccurateCensusDate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ReloadRequired {
+            get {
+                return ((bool)(this["ReloadRequired"]));
+            }
+            set {
+                this["ReloadRequired"] = value;
+            }
+        }
     }
 }

@@ -36,6 +36,7 @@
             this.chkCensusResidence = new System.Windows.Forms.CheckBox();
             this.chkStrictResidenceYears = new System.Windows.Forms.CheckBox();
             this.chkTolerateInaccurateCensus = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,10 +78,16 @@
             this.chkTolerateInaccurateCensus.Name = "chkTolerateInaccurateCensus";
             this.chkTolerateInaccurateCensus.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
             // GeneralSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.chkTolerateInaccurateCensus);
             this.Controls.Add(this.chkStrictResidenceYears);
             this.Controls.Add(this.chkCensusResidence);
@@ -101,6 +108,7 @@
         private System.Windows.Forms.CheckBox chkCensusResidence;
         private System.Windows.Forms.CheckBox chkStrictResidenceYears;
         private System.Windows.Forms.CheckBox chkTolerateInaccurateCensus;
+        private System.Windows.Forms.Label label1;
 
 
 	}
