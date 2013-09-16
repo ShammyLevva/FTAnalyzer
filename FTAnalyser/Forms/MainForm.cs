@@ -28,6 +28,7 @@ namespace FTAnalyzer
         private FamilyTree ft = FamilyTree.Instance;
         private FactDate censusDate = CensusDate.UKCENSUS1881;
         private bool stopProcessing = false;
+        private string filename;
 
         private DataGridViewCellStyle knownCountryStyle = null;
 
@@ -89,6 +90,7 @@ namespace FTAnalyzer
             try
             {
                 HourGlass(true);
+                this.filename = filename;
                 DisposeIndividualForms();
                 mnuReports.Visible = false;
                 mnuExport.Visible = false;
@@ -633,9 +635,10 @@ namespace FTAnalyzer
             //_timerCheckForUpdates = new System.Threading.Timer(new System.Threading.TimerCallback(_timerCheckForUpdates_Callback));
             //_timerCheckForUpdates.Change(3000, 1000 * 60 * 60 * 8); //Check for updates 3 sec after the form loads, and then again every 8 hours
             //GeneralSettings.UseBaptismDatesChanged += new EventHandler(Options_BaptismChanged);
-            //GeneralSettings.AllowEmptyLocationsChanged += new EventHandler(Options_AllowEmptyLocationsChanged);
+            GeneralSettings.AllowEmptyLocationsChanged += new EventHandler(Options_AllowEmptyLocationsChanged);
             GeneralSettings.UseResidenceAsCensusChanged += new EventHandler(Options_UseResidenceAsCensusChanged);
-            GeneralSettings.StrictResidenceDatesChanged += new EventHandler(Options_StrictResidenceDatesChanged);
+            //GeneralSettings.StrictResidenceDatesChanged += new EventHandler(Options_StrictResidenceDatesChanged);
+            GeneralSettings.TolerateInaccurateCensusChanged += new EventHandler(Options_TolerateInaccurateCensusChanged);
             this.Text = "Family Tree Analyzer v" + VERSION;
         }
 
@@ -1399,7 +1402,7 @@ namespace FTAnalyzer
 
         private void Options_AllowEmptyLocationsChanged(object sender, EventArgs e)
         {
-            // do anything that needs doing when option changes
+            ReloadData();
         }
 
         private void Options_UseResidenceAsCensusChanged(object sender, EventArgs e)
@@ -1410,6 +1413,25 @@ namespace FTAnalyzer
         private void Options_StrictResidenceDatesChanged(object sender, EventArgs e)
         {
             // need to refresh any census reports when option changes
+        }
+
+        private void Options_TolerateInaccurateCensusChanged(object sender, EventArgs e)
+        {
+            ReloadData();
+        }
+
+        private void ReloadData()
+        {
+            if (Properties.GeneralSettings.Default.ReloadRequired)
+            {
+                DialogResult dr = MessageBox.Show("This option requires the data to be refreshed.\n\nDo you want to reload now?\n\nClicking no will keep the data with the old option.", "Reload GEDCOM File", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    Properties.GeneralSettings.Default.ReloadRequired = false;
+                    Properties.GeneralSettings.Default.Save();
+                    LoadFile(filename);
+                }
+            }
         }
 
         private bool preventExpand;
@@ -1531,28 +1553,6 @@ namespace FTAnalyzer
                 ckbDataErrors.SetItemChecked(indexChecked, false);
             }
             UpdateDataErrorsDisplay();
-        }
-
-        private void dgDataErrors_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.RowIndex > -1 && e.ColumnIndex == this.dgDataErrors.Columns["Icon"].Index)
-            {
-                if (this.dgDataErrors["c2", e.RowIndex].Value != null)
-                {
-                    string s = this.dgDataErrors["c2", e.RowIndex].Value.ToString();
-                    switch (s)
-                    {
-                        case "Laptop":
-                            e.Value = Image.FromFile(@"c:\test\Laptop.gif");
-                            break;
-                        case "Desktop":
-                            e.Value = Image.FromFile(@"c:\test\Desktop.gif");
-                            break;
- 
-                        // ....etc....
-                    }
-                }
-
         }
     }
 }

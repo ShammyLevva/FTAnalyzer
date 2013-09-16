@@ -55,6 +55,7 @@
             resources.ApplyResources(this.chkAllowEmptyLocations, "chkAllowEmptyLocations");
             this.chkAllowEmptyLocations.Name = "chkAllowEmptyLocations";
             this.chkAllowEmptyLocations.UseVisualStyleBackColor = true;
+            this.chkAllowEmptyLocations.CheckedChanged += new System.EventHandler(this.chkAllowEmptyLocations_CheckedChanged);
             // 
             // chkCensusResidence
             // 
@@ -77,6 +78,7 @@
             this.chkTolerateInaccurateCensus.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkTolerateInaccurateCensus.Name = "chkTolerateInaccurateCensus";
             this.chkTolerateInaccurateCensus.UseVisualStyleBackColor = true;
+            this.chkTolerateInaccurateCensus.CheckedChanged += new System.EventHandler(this.chkTolerateInaccurateCensus_CheckedChanged);
             // 
             // label1
             // 

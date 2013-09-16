@@ -241,23 +241,23 @@ namespace FTAnalyzer
             int lostCousinsTotal = lostCousinsFacts + lostCousinsWarnAllow + lostCousinsWarnIgnore + lostCousinsErrors;
 
             xmlErrorbox.AppendText("\nFound " + censusTotal + " census facts in GEDCOM File (" + censusFacts + " good, ");
-            if(censusWarnAllow > 0)
+            if (censusWarnAllow > 0)
                 xmlErrorbox.AppendText(censusWarnIgnore + " warnings (data tolerated), ");
             if (censusWarnIgnore > 0)
                 xmlErrorbox.AppendText(censusWarnIgnore + " warnings (data ignored), ");
             if (censusErrors > 0)
                 xmlErrorbox.AppendText(censusErrors + " errors (data discarded), ");
             xmlErrorbox.AppendText((censusFacts + censusWarnAllow) + " usable facts loaded)");
-            
-            xmlErrorbox.AppendText("\nFound " + resiTotal + " residence facts in GEDCOM File (" + resiFacts  + " good, ");
+
+            xmlErrorbox.AppendText("\nFound " + resiTotal + " residence facts in GEDCOM File (" + resiFacts + " good, ");
             if (resiWarnAllow > 0)
                 xmlErrorbox.AppendText(resiWarnIgnore + " warnings (data tolerated),");
             if (resiWarnIgnore > 0)
                 xmlErrorbox.AppendText(resiWarnIgnore + " warnings (data ignored),");
-            if(resiErrors > 0)
+            if (resiErrors > 0)
                 xmlErrorbox.AppendText(resiErrors + " errors (data discarded), ");
             xmlErrorbox.AppendText((resiFacts + resiWarnAllow) + " usable facts loaded)");
-            
+
             xmlErrorbox.AppendText("\nFound " + lostCousinsTotal + " Lost Cousins facts in GEDCOM File (" + lostCousinsFacts + " good, ");
             if (lostCousinsWarnAllow > 0)
                 xmlErrorbox.AppendText(lostCousinsWarnIgnore + " warnings (data tolerated), ");
@@ -266,7 +266,7 @@ namespace FTAnalyzer
             if (lostCousinsErrors > 0)
                 xmlErrorbox.AppendText(lostCousinsErrors + " errors (data discarded), ");
             xmlErrorbox.AppendText((lostCousinsFacts + lostCousinsWarnAllow) + " usable facts loaded)\n");
-            if (censusFacts == 0 && resiFacts == 0 && censusWarnAllow == 0 && resiWarnAllow == 0)  
+            if (censusFacts == 0 && resiFacts == 0 && censusWarnAllow == 0 && resiWarnAllow == 0)
             {
                 xmlErrorbox.AppendText("\nFound no census or residence facts in GEDCOM File.\n");
                 xmlErrorbox.AppendText("This is probably because you have recorded census facts as notes\n");
@@ -1009,7 +1009,7 @@ namespace FTAnalyzer
                     }
                     foreach (Fact f in ind.ErrorFacts)
                     {
-                        errors[(int)dataerror.FACT_ERROR].Add(new DataError((int)dataerror.FACT_ERROR, f.FactErrorLevel, ind, f.FactErrorMessage)); 
+                        errors[(int)dataerror.FACT_ERROR].Add(new DataError((int)dataerror.FACT_ERROR, f.FactErrorLevel, ind, f.FactErrorMessage));
                     }
                     foreach (Fact f in ind.AllFacts)
                     {
@@ -1050,8 +1050,8 @@ namespace FTAnalyzer
                                     new DataError((int)dataerror.LOST_COUSINS_NOT_SUPPORTED_YEAR, ind, "Lost Cousins event for " + f.FactDate + " which isn't a Lost Cousins census year"));
                             }
                         }
-                        if (f.FactType == Fact.CENSUS || 
-                           (f.FactType == Fact.RESIDENCE && 
+                        if (f.FactType == Fact.CENSUS ||
+                           (f.FactType == Fact.RESIDENCE &&
                                 Properties.GeneralSettings.Default.UseResidenceAsCensus && Properties.GeneralSettings.Default.StrictResidenceDates))
                         {
                             string comment = f.FactType == Fact.CENSUS ? "Census date " : "Residence date ";
@@ -1130,7 +1130,7 @@ namespace FTAnalyzer
                     ErrorHandler.Show("FTA_0001", e);
                 }
             }
-            for(int i=0; i < DATA_ERROR_GROUPS; i++)
+            for (int i = 0; i < DATA_ERROR_GROUPS; i++)
                 dataErrorTypes.Add(new DataErrorGroup(i, errors[i]));
         }
 
@@ -1138,7 +1138,7 @@ namespace FTAnalyzer
         {
             BIRTH_AFTER_DEATH = 0, BIRTH_AFTER_FATHER_90 = 1, BIRTH_AFTER_MOTHER_60 = 2, BIRTH_AFTER_MOTHER_DEATH = 3,
             BIRTH_AFTER_FATHER_DEATH = 4, BIRTH_BEFORE_FATHER_13 = 5, BIRTH_BEFORE_MOTHER_13 = 6, BURIAL_BEFORE_DEATH = 7,
-            AGED_MORE_THAN_110 = 8, FACTS_BEFORE_BIRTH = 9, FACTS_AFTER_DEATH = 10, MARRIAGE_AFTER_DEATH = 11, 
+            AGED_MORE_THAN_110 = 8, FACTS_BEFORE_BIRTH = 9, FACTS_AFTER_DEATH = 10, MARRIAGE_AFTER_DEATH = 11,
             MARRIAGE_AFTER_SPOUSE_DEAD = 12, MARRIAGE_BEFORE_13 = 13, MARRIAGE_BEFORE_SPOUSE_13 = 14, LOST_COUSINS_NON_CENSUS = 15,
             LOST_COUSINS_NOT_SUPPORTED_YEAR = 16, CENSUS_COVERAGE = 17, FACT_ERROR = 18
         };

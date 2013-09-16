@@ -126,5 +126,15 @@ namespace FTAnalyzer.UserControls
             if (TolerateInaccurateCensusChanged != null)
                 TolerateInaccurateCensusChanged(null, EventArgs.Empty);
         }
+
+        private void chkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.GeneralSettings.Default.ReloadRequired = true;
+        }
+
+        private void chkTolerateInaccurateCensus_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.GeneralSettings.Default.ReloadRequired = true;
+        }
     }
 }
