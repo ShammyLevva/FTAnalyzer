@@ -133,9 +133,9 @@
             this.dgFacts.AllowUserToAddRows = false;
             this.dgFacts.AllowUserToDeleteRows = false;
             this.dgFacts.AllowUserToOrderColumns = true;
-            this.dgFacts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgFacts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgFacts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -149,6 +149,7 @@
             this.dgFacts.Location = new System.Drawing.Point(0, 25);
             this.dgFacts.Name = "dgFacts";
             this.dgFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgFacts.ShowEditingIcon = false;
             this.dgFacts.Size = new System.Drawing.Size(857, 337);
             this.dgFacts.TabIndex = 2;
             // 

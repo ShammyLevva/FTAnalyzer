@@ -25,7 +25,7 @@ namespace FTAnalyzer
         public DataError(int errorType, Individual ind, string description)
             : this(errorType, Fact.FactError.ERROR, ind, description) {}
        
-        public string IndividualID { get { return individual.IndividualID; } }
+        public string Ind_ID { get { return individual.IndividualID; } }
 
         public string Individual { get { return individual.Name; } }
 

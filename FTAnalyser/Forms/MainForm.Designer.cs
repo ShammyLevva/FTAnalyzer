@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -108,6 +109,7 @@
             this.btnLC1881Canada = new System.Windows.Forms.Button();
             this.btnLC1881Scot = new System.Windows.Forms.Button();
             this.tabColourReports = new System.Windows.Forms.TabPage();
+            this.btnColourBMD = new System.Windows.Forms.Button();
             this.btnColourCensus = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.txtColouredSurname = new System.Windows.Forms.TextBox();
@@ -159,7 +161,6 @@
             this.treetopsCountry = new Controls.CensusCountry();
             this.wardeadRelation = new Controls.RelationTypes();
             this.wardeadCountry = new Controls.CensusCountry();
-            this.btnColourBMD = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabSelector.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -777,12 +778,22 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgDataErrors.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 138);
-            this.dgDataErrors.MultiSelect = false;
             this.dgDataErrors.Name = "dgDataErrors";
+            this.dgDataErrors.ReadOnly = true;
             this.dgDataErrors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgDataErrors.ShowCellToolTips = false;
+            this.dgDataErrors.ShowEditingIcon = false;
             this.dgDataErrors.Size = new System.Drawing.Size(931, 264);
             this.dgDataErrors.TabIndex = 3;
             this.toolTips.SetToolTip(this.dgDataErrors, "Double click to see list of facts for that individual");
@@ -1086,6 +1097,16 @@
             this.tabColourReports.TabIndex = 12;
             this.tabColourReports.Text = "Colour Reports";
             this.tabColourReports.UseVisualStyleBackColor = true;
+            // 
+            // btnColourBMD
+            // 
+            this.btnColourBMD.Location = new System.Drawing.Point(8, 92);
+            this.btnColourBMD.Name = "btnColourBMD";
+            this.btnColourBMD.Size = new System.Drawing.Size(143, 23);
+            this.btnColourBMD.TabIndex = 33;
+            this.btnColourBMD.Text = "View BMD Report";
+            this.btnColourBMD.UseVisualStyleBackColor = true;
+            this.btnColourBMD.Click += new System.EventHandler(this.btnColourBMD_Click);
             // 
             // btnColourCensus
             // 
@@ -1541,16 +1562,6 @@
             this.wardeadCountry.TabIndex = 25;
             this.wardeadCountry.Title = "Default Country";
             this.wardeadCountry.UKEnabled = true;
-            // 
-            // btnColourBMD
-            // 
-            this.btnColourBMD.Location = new System.Drawing.Point(8, 92);
-            this.btnColourBMD.Name = "btnColourBMD";
-            this.btnColourBMD.Size = new System.Drawing.Size(143, 23);
-            this.btnColourBMD.TabIndex = 33;
-            this.btnColourBMD.Text = "View BMD Report";
-            this.btnColourBMD.UseVisualStyleBackColor = true;
-            this.btnColourBMD.Click += new System.EventHandler(this.btnColourBMD_Click);
             // 
             // MainForm
             // 

@@ -145,7 +145,7 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+                string indID = (string)dgIndividuals.CurrentRow.Cells["Ind_ID"].Value;
                 Individual ind = FamilyTree.Instance.GetIndividual(indID);
                 Facts factForm = new Facts(ind);
                 factForm.Show();

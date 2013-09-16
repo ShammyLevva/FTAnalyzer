@@ -19,7 +19,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.1.4.0-test-6";
+        private string VERSION = "2.2.0.0-test-1";
         //private bool _checkForUpdatesEnabled = false;
         //private bool _showNoUpdateMessage = false;
         //private System.Threading.Timer _timerCheckForUpdates;
@@ -217,7 +217,7 @@ namespace FTAnalyzer
                 {
                     SortableBindingList<IDisplayIndividual> list = ft.AllDisplayIndividuals;
                     dgIndividuals.DataSource = list;
-                    dgIndividuals.Sort(dgIndividuals.Columns["IndividualID"], ListSortDirection.Ascending);
+                    dgIndividuals.Sort(dgIndividuals.Columns["Ind_ID"], ListSortDirection.Ascending);
                     mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
@@ -1304,7 +1304,7 @@ namespace FTAnalyzer
             {
                 if (hti.RowIndex >= 0 && hti.ColumnIndex >= 0)
                 {
-                    string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+                    string indID = (string)dgIndividuals.CurrentRow.Cells["Ind_ID"].Value;
                     Individual ind = ft.GetIndividual(indID);
                     Facts factForm = new Facts(ind);
                     DisposeDuplicateForms(factForm);
@@ -1507,7 +1507,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string indID = (string)dgDataErrors.CurrentRow.Cells["IndividualID"].Value;
+                string indID = (string)dgDataErrors.CurrentRow.Cells["Ind_ID"].Value;
                 Individual ind = ft.GetIndividual(indID);
                 Facts factForm = new Facts(ind);
                 DisposeDuplicateForms(factForm);
@@ -1519,7 +1519,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string indID = (string)dgLooseDeaths.CurrentRow.Cells["IndividualID"].Value;
+                string indID = (string)dgLooseDeaths.CurrentRow.Cells["Ind_ID"].Value;
                 Individual ind = ft.GetIndividual(indID);
                 Facts factForm = new Facts(ind);
                 DisposeDuplicateForms(factForm);

@@ -199,7 +199,7 @@ namespace FTAnalyzer.Forms
                     int censusYear = (1841 + (e.ColumnIndex - c1841ColumnIndex) * 10);
                     FamilyTree ft = FamilyTree.Instance;
                     string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
-                    ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
+                    ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.Ind_ID), cbCensusSearchProvider.SelectedIndex);
                 }
             }
         }

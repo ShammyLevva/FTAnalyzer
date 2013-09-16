@@ -7,7 +7,7 @@ namespace FTAnalyzer
 {
     public interface IDisplayIndividual
     {
-        string IndividualID { get; }        
+        string Ind_ID { get; }        
         string Forenames { get; }           
         string Surname { get; }             
         string Gender { get; }              
