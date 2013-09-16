@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
+using System.IO;
 
 namespace FTAnalyzer
 {
@@ -41,18 +42,23 @@ namespace FTAnalyzer
             return DATAERROR[errorNumber];
         }
 
-        public static MessageBoxIcon ErrorIcon(Fact.FactError errorLevel)
+        public static Image ErrorIcon(Fact.FactError errorLevel)
         {
+            string startPath;
+            if (Application.StartupPath.Contains("Common7\\IDE")) // running unit tests
+                startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
+            else
+                startPath = Application.StartupPath;
             switch (errorLevel)
             {
                 case Fact.FactError.GOOD:
-                    return MessageBoxIcon.None;
+                    return Image.FromFile(Path.Combine(startPath, @"Resources\Icons\Complete_OK.png"));
                 case Fact.FactError.WARNINGALLOW:
-                    return MessageBoxIcon.Warning;
+                    return Image.FromFile(Path.Combine(startPath, @"Resources\Icons\Warning.png"));
                 case Fact.FactError.ERROR:
-                    return MessageBoxIcon.Error;
+                    return Image.FromFile(Path.Combine(startPath, @"Resources\Icons\CriticalError.png"));
             }
-            return MessageBoxIcon.None;
+            return Image.FromFile(Path.Combine(startPath, @"Resources\Icons\Complete_OK.png"));
         }
 
         public DataErrorGroup(int errorNumber, IList<DataError> errors)
