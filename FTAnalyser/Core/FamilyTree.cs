@@ -227,13 +227,22 @@ namespace FTAnalyzer
                 resiWarnings += ind.ErrorFactCount(Fact.RESIDENCE, Fact.FactError.WARNING);
                 resiErrors += ind.ErrorFactCount(Fact.RESIDENCE, Fact.FactError.ERROR);
                 lostCousinsFacts += ind.FactCount(Fact.LOSTCOUSINS);
-                lostCousinsErrors += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNING);
-                lostCousinsWarnings += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.ERROR);
+                lostCousinsWarnings += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNING);
+                lostCousinsErrors += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.ERROR);
             }
-            xmlErrorbox.AppendText("\nFound " + censusFacts + " good census facts in GEDCOM File (" + censusWarnings + " warnings, " + censusErrors + " errors)");
-            xmlErrorbox.AppendText("\nFound " + resiFacts  + " good residence facts in GEDCOM File (" + resiWarnings + " warnings, " + resiErrors + " errors)");
-            xmlErrorbox.AppendText("\nFound " + lostCousinsFacts + " good Lost Cousins facts in GEDCOM File (" + lostCousinsWarnings + " warnings, " + lostCousinsErrors + " errors)\n");
-            if (censusFacts == 0 && resiFacts == 0)
+            int censusTotal = censusFacts + censusWarnings + censusErrors;
+            int resiTotal = resiFacts + resiWarnings + resiErrors;
+            int lostCousinsTotal = lostCousinsFacts + lostCousinsWarnings + lostCousinsErrors;
+            xmlErrorbox.AppendText("\nFound " + censusTotal + " census facts in GEDCOM File ");
+            xmlErrorbox.AppendText("(" + censusFacts + " good, " + censusWarnings + " warnings (data tolerated), " + censusErrors + " errors (data discarded), ");
+            xmlErrorbox.AppendText((censusFacts + censusWarnings) + " usable facts loaded)");
+            xmlErrorbox.AppendText("\nFound " + resiTotal + " residence facts in GEDCOM File ");
+            xmlErrorbox.AppendText("(" + resiFacts  + " good, " + resiWarnings + " warnings (data tolerated), " + resiErrors + " errors (data discarded), ");
+            xmlErrorbox.AppendText((resiFacts + resiWarnings) + " usable facts loaded)");
+            xmlErrorbox.AppendText("\nFound " + lostCousinsTotal + " Lost Cousins facts in GEDCOM File ");
+            xmlErrorbox.AppendText("(" + lostCousinsFacts + " good, " + lostCousinsWarnings + " warnings (data tolerated), " + lostCousinsErrors + " errors (data discarded), ");
+            xmlErrorbox.AppendText((lostCousinsFacts + lostCousinsWarnings) + " usable facts loaded)\n");
+            if (censusFacts == 0 && resiFacts == 0)  
             {
                 xmlErrorbox.AppendText("\nFound no census or residence facts in GEDCOM File.\n");
                 xmlErrorbox.AppendText("This is probably because you have recorded census facts as notes\n");
