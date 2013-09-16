@@ -860,12 +860,12 @@ namespace FTAnalyzer
         }
 
 
-        public int BirthStatus
+        public int Birth
         {
             get { return BirthDate.DateStatus(false); }
         }
 
-        public int BaptismChristeningStatus
+        public int BaptChri
         {
             get {
                 FactDate baptism = GetPreferredFactDate(Fact.BAPTISM);
@@ -874,27 +874,27 @@ namespace FTAnalyzer
             }
         }
 
-        public int FirstMarriageStatus
+        public int Marriage1
         {
-            get { throw new NotImplementedException(); }
+            get { return 0; }
         }
 
-        public int SecondMarriageStatus
+        public int Marriage2
         {
-            get { throw new NotImplementedException(); }
+            get { return 0; }
         }
 
-        public int ThirdMarriageStatus
+        public int Marriage3
         {
-            get { throw new NotImplementedException(); }
+            get { return 0; }
         }
 
-        public int DeathStatus
+        public int Death
         {
             get { return DeathDate.DateStatus(false); }
         }
 
-        public int CremationBurialStatus
+        public int CremBuri
         {
             get
             {

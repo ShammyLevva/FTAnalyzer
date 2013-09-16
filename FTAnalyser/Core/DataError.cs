@@ -10,8 +10,8 @@ namespace FTAnalyzer
     public class DataError
     {
         private Individual individual;
-        public string ErrorType { get; private set; }
         public Image Icon { get; private set; }
+        public string ErrorType { get; private set; }
         public string Description { get; private set; }
 
         public DataError(int errorType, Fact.FactError errorLevel, Individual ind, string description)

@@ -48,7 +48,7 @@ namespace FTAnalyzer.Forms
 
             printProvider = PrintingDataGridViewProvider.Create(
                 printDocument, dgReportSheet, true, true, true,
-                new TitlePrintBlock("Lost Cousins Census Report"), null, null);
+                new TitlePrintBlock("Colour BMD Report"), null, null);
 
             printDocument.DefaultPageSettings.Landscape = true;
 
@@ -57,8 +57,8 @@ namespace FTAnalyzer.Forms
             dgReportSheet.Sort(dgReportSheet.Columns["BirthDate"], ListSortDirection.Ascending);
             dgReportSheet.Sort(dgReportSheet.Columns["Forenames"], ListSortDirection.Ascending);
             dgReportSheet.Sort(dgReportSheet.Columns["Surname"], ListSortDirection.Ascending);
-            birthColumnIndex = dgReportSheet.Columns["C1841"].Index;
-            burialColumnIndex = dgReportSheet.Columns["C1911"].Index;
+            birthColumnIndex = dgReportSheet.Columns["Birth"].Index;
+            burialColumnIndex = dgReportSheet.Columns["CremBuri"].Index;
             ResizeColumns();
             tsRecords.Text = "Count : " + reportList.Count + " records listed.";
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
@@ -112,7 +112,7 @@ namespace FTAnalyzer.Forms
             foreach (DataGridViewColumn c in dgReportSheet.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             for (int i = birthColumnIndex; i <= burialColumnIndex; i++)
-                dgReportSheet.Columns[i].Width = 50;
+                dgReportSheet.Columns[i].Width = 60;
         }
 
         private void dgReportSheet_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -144,22 +144,19 @@ namespace FTAnalyzer.Forms
                     switch (value)
                     {
                         case 0:
-                            cell.ToolTipText = "Not alive at time of census.";
+                            cell.ToolTipText = "Not required.";
                             break;
                         case 1:
-                            cell.ToolTipText = "No census information entered. Double click to search " + cbCensusSearchProvider.SelectedItem + ".";
+                            cell.ToolTipText = "Unknown date.";
                             break;
                         case 2:
-                            cell.ToolTipText = "Census entered but no Lost Cousins flag set.";
+                            cell.ToolTipText = "Wide date range.";
                             break;
                         case 3:
-                            cell.ToolTipText = "Census entered and not a Lost Cousins year.";
+                            cell.ToolTipText = "Approximate date.";
                             break;
                         case 4:
-                            cell.ToolTipText = "Census entered and flagged as entered on Lost Cousins.";
-                            break;
-                        case 5:
-                            cell.ToolTipText = "Lost Cousins flagged but no Census entered.";
+                            cell.ToolTipText = "Exact date.";
                             break;
                     }
                 }
@@ -171,7 +168,7 @@ namespace FTAnalyzer.Forms
             if (printDialog.ShowDialog(this) == DialogResult.OK)
             {
                 printDocument.PrinterSettings = printDialog.PrinterSettings;
-                printDocument.DocumentName = "Lost Cousins Census Report";
+                printDocument.DocumentName = "Colour BDM Report";
                 printDocument.Print();
             }
         }
@@ -184,22 +181,22 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void dgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex >= birthColumnIndex && e.ColumnIndex <= burialColumnIndex)
-            {
-                DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                int value = (int)cell.Value;
-                if (value == 1 || value == 2)
-                {
-                    IDisplayColourCensus person = (IDisplayColourCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
-                    int censusYear = (1841 + (e.ColumnIndex - birthColumnIndex) * 10);
-                    FamilyTree ft = FamilyTree.Instance;
-                    string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
-                    ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
-                }
-            }
-        }
+        //private void dgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.ColumnIndex >= birthColumnIndex && e.ColumnIndex <= burialColumnIndex)
+        //    {
+        //        DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
+        //        int value = (int)cell.Value;
+        //        if (value == 1 || value == 2)
+        //        {
+        //            IDisplayColourCensus person = (IDisplayColourCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
+        //            int censusYear = (1841 + (e.ColumnIndex - birthColumnIndex) * 10);
+        //            FamilyTree ft = FamilyTree.Instance;
+        //            string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
+        //            ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
+        //        }
+        //    }
+        //}
 
         private void cbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -212,22 +209,22 @@ namespace FTAnalyzer.Forms
             List<IDisplayColourCensus> result = new List<IDisplayColourCensus>();
             foreach(IDisplayColourCensus row in this.reportList)
             {
-                if (all)
-                {
-                    if ((row.C1841 == toFind || row.C1841 == 0) && (row.C1851 == toFind || row.C1851 == 0) &&
-                        (row.C1861 == toFind || row.C1861 == 0) && (row.C1871 == toFind || row.C1871 == 0) &&
-                        (row.C1881 == toFind || row.C1881 == 0) && (row.C1891 == toFind || row.C1891 == 0) &&
-                        (row.C1901 == toFind || row.C1901 == 0) && (row.C1911 == toFind || row.C1911 == 0) &&
-                        !(row.C1841 == 0 && row.C1851 == 0 && row.C1861 == 0 && row.C1871 == 0 && 
-                          row.C1881 == 0 && row.C1891 == 0 && row.C1901 == 0 && row.C1911 == 0 && toFind != 0)) // exclude all greys
-                        result.Add(row);
-                }
-                else
-                {
-                    if (row.C1841 == toFind || row.C1851 == toFind || row.C1861 == toFind || row.C1871 == toFind ||
-                       row.C1881 == toFind || row.C1891 == toFind || row.C1901 == toFind || row.C1911 == toFind)
-                        result.Add(row);
-                }
+                //if (all)
+                //{
+                //    if ((row.C1841 == toFind || row.C1841 == 0) && (row.C1851 == toFind || row.C1851 == 0) &&
+                //        (row.C1861 == toFind || row.C1861 == 0) && (row.C1871 == toFind || row.C1871 == 0) &&
+                //        (row.C1881 == toFind || row.C1881 == 0) && (row.C1891 == toFind || row.C1891 == 0) &&
+                //        (row.C1901 == toFind || row.C1901 == 0) && (row.C1911 == toFind || row.C1911 == 0) &&
+                //        !(row.C1841 == 0 && row.C1851 == 0 && row.C1861 == 0 && row.C1871 == 0 && 
+                //          row.C1881 == 0 && row.C1891 == 0 && row.C1901 == 0 && row.C1911 == 0 && toFind != 0)) // exclude all greys
+                //        result.Add(row);
+                //}
+                //else
+                //{
+                //    if (row.C1841 == toFind || row.C1851 == toFind || row.C1861 == toFind || row.C1871 == toFind ||
+                //       row.C1881 == toFind || row.C1891 == toFind || row.C1901 == toFind || row.C1911 == toFind)
+                //        result.Add(row);
+                //}
 
             }   
             return result;
@@ -236,37 +233,37 @@ namespace FTAnalyzer.Forms
         private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            List<IDisplayColourCensus> list;
+            //List<IDisplayColourCensus> list;
             switch (cbFilter.SelectedIndex)
             {
                 case -1: // nothing selected
                 case 0: // All Individuals
                     dgReportSheet.DataSource = this.reportList;
                     break;
-                case 1: // None Found (All Red)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(1, true));
-                    break;
-                case 2: // All Found (All Green)
-                    list = new List<IDisplayColourCensus>();
-                    list.AddRange(BuildFilter(3, true));
-                    list.AddRange(BuildFilter(4, true));
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list);
-                    break;
-                case 3: // Lost Cousins Missing (Yellows)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(2, false));
-                    break;
-                case 4: // Lost Cousins Present (Orange)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(5, false));
-                    break;
-                case 5: // Some Missing (Some Red)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(1, false));
-                    break;
-                case 6:
-                    list = new List<IDisplayColourCensus>();
-                    list.AddRange(BuildFilter(3, false));
-                    list.AddRange(BuildFilter(4, false));
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list);
-                    break;
+                //case 1: // None Found (All Red)
+                //    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(1, true));
+                //    break;
+                //case 2: // All Found (All Green)
+                //    list = new List<IDisplayColourCensus>();
+                //    list.AddRange(BuildFilter(3, true));
+                //    list.AddRange(BuildFilter(4, true));
+                //    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list);
+                //    break;
+                //case 3: // Lost Cousins Missing (Yellows)
+                //    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(2, false));
+                //    break;
+                //case 4: // Lost Cousins Present (Orange)
+                //    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(5, false));
+                //    break;
+                //case 5: // Some Missing (Some Red)
+                //    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(1, false));
+                //    break;
+                //case 6:
+                //    list = new List<IDisplayColourCensus>();
+                //    list.AddRange(BuildFilter(3, false));
+                //    list.AddRange(BuildFilter(4, false));
+                //    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list);
+                //    break;
             }
             ResizeColumns();
             dgReportSheet.Focus();

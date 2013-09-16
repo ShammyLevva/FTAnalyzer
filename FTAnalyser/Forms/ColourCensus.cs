@@ -51,7 +51,7 @@ namespace FTAnalyzer.Forms
 
             printProvider = PrintingDataGridViewProvider.Create(
                 printDocument, dgReportSheet, true, true, true,
-                new TitlePrintBlock("Lost Cousins Census Report"), null, null);
+                new TitlePrintBlock("Colour Census Report"), null, null);
 
             printDocument.DefaultPageSettings.Landscape = true;
 
@@ -174,7 +174,7 @@ namespace FTAnalyzer.Forms
             if (printDialog.ShowDialog(this) == DialogResult.OK)
             {
                 printDocument.PrinterSettings = printDialog.PrinterSettings;
-                printDocument.DocumentName = "Lost Cousins Census Report";
+                printDocument.DocumentName = "Colour Census Report";
                 printDocument.Print();
             }
         }

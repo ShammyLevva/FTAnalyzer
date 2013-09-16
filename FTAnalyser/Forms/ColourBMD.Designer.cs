@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColourCensus));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColourBMD));
             this.dgReportSheet = new System.Windows.Forms.DataGridView();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
@@ -52,9 +52,9 @@
             // 
             // dgReportSheet
             // 
-            this.dgReportSheet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgReportSheet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgReportSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgReportSheet.Location = new System.Drawing.Point(0, 28);
             this.dgReportSheet.MultiSelect = false;
@@ -63,7 +63,6 @@
             this.dgReportSheet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgReportSheet.Size = new System.Drawing.Size(1038, 530);
             this.dgReportSheet.TabIndex = 1;
-            this.dgReportSheet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportSheet_CellDoubleClick);
             this.dgReportSheet.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgReportSheet_CellFormatting);
             // 
             // statusStrip
@@ -144,8 +143,8 @@
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(117, 22);
-            this.toolStripLabel1.Text = "Census search using:";
+            this.toolStripLabel1.Size = new System.Drawing.Size(106, 22);
+            this.toolStripLabel1.Text = "BMD Search using:";
             // 
             // cbCensusSearchProvider
             // 
@@ -169,12 +168,13 @@
             // 
             this.cbFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFilter.DropDownWidth = 170;
+            this.cbFilter.Enabled = false;
             this.cbFilter.Items.AddRange(new object[] {
             "All Individuals",
             "None Found (All Red)",
             "All Found (All Green)",
-            "Lost Cousins Missing (Yellow)",
-            "Lost Cousins Present (Orange)",
+            "Wide Date Range (Orange)",
+            "Narrow Date Range (Yellow)",
             "Some Missing (Some Red)",
             "Some Found (Some Green)"});
             this.cbFilter.Name = "cbFilter";
@@ -199,7 +199,7 @@
             this.printPreviewDialog.Name = "printPreviewDialog";
             this.printPreviewDialog.Visible = false;
             // 
-            // ColouredCensus
+            // ColourBMD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -208,8 +208,8 @@
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dgReportSheet);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "ColouredCensus";
-            this.Text = "Lost Cousins Census Report Result";
+            this.Name = "ColourBMD";
+            this.Text = "Colour BMD Report Result";
             ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
