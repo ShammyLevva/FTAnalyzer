@@ -364,7 +364,7 @@ namespace FTAnalyzer
                     else
                     {
                         this.FactErrorLevel = Fact.FactError.WARNINGIGNORE;
-                        this.FactErrorMessage = "Warning: Inaccurate Census date '" + dateFromFile + "' fact ignored in strict mode.\nCheck for incorrect date entered or try Tolerate slightly inaccurate census date option.";
+                        this.FactErrorMessage = "Warning: Inaccurate Census date '" + dateFromFile + "' fact ignored in strict mode. Check for incorrect date entered or try Tolerate slightly inaccurate census date option.";
                         return; // we've got a error ignore warning set so we don't need to check if an error
                     }
                 }
@@ -390,7 +390,7 @@ namespace FTAnalyzer
                 }
                 if (!CensusDate.IsCensusYear(FactDate, false))
                 {
-                    this.FactErrorMessage = "Census fact error date '" + dateFromFile + "' isn't a supported census date.\nCheck for incorrect date entered or try Tolerate slightly inaccurate census date option.";
+                    this.FactErrorMessage = "Census fact error date '" + dateFromFile + "' isn't a supported census date. Check for incorrect date entered or try Tolerate slightly inaccurate census date option.";
                     this.FactErrorLevel = Fact.FactError.ERROR;
                 }
 
@@ -404,7 +404,7 @@ namespace FTAnalyzer
                 }
                 if (!CensusDate.IsLostCousinsCensusYear(FactDate, false))
                 {
-                    this.FactErrorMessage = "Lost Cousins fact error date '" + dateFromFile + "' isn't a supported Lost Cousins census year.\nCheck for incorrect date entered or try Tolerate slightly inaccurate census date option.";
+                    this.FactErrorMessage = "Lost Cousins fact error date '" + dateFromFile + "' isn't a supported Lost Cousins census year. Check for incorrect date entered or try Tolerate slightly inaccurate census date option.";
                     this.FactErrorLevel = Fact.FactError.ERROR;
                 }
             }
