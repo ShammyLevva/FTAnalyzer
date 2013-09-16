@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    public interface IDisplayColouredCensus
+    public interface IDisplayColourCensus
     {
         string IndividualID { get; }        
         string Forenames { get; }           

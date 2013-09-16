@@ -144,9 +144,10 @@
     <Compile Include="Core\Countries.cs" />
     <Compile Include="Core\DataError.cs" />
     <Compile Include="Core\DataErrorGroup.cs" />
+    <Compile Include="Core\Displays\IDisplayColourBMD.cs" />
     <Compile Include="Core\Displays\DisplayFact.cs" />
     <Compile Include="Core\Displays\IDisplayFact.cs" />
-    <Compile Include="Core\Displays\IDisplayColouredCensus.cs" />
+    <Compile Include="Core\Displays\IDisplayColourCensus.cs" />
     <Compile Include="Core\Displays\DisplayOccupation.cs" />
     <Compile Include="Core\Displays\IDisplayOccupation.cs" />
     <Compile Include="Core\Exports\ExportFacts.cs" />
@@ -156,11 +157,11 @@
     <Compile Include="Core\FactSource.cs" />
     <Compile Include="Core\FamilySearch.cs" />
     <Compile Include="Core\Statistics.cs" />
-    <Compile Include="Forms\ColouredBMD.cs">
+    <Compile Include="Forms\ColourBMD.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ColouredBMD.Designer.cs">
-      <DependentUpon>ColouredBMD.cs</DependentUpon>
+    <Compile Include="Forms\ColourBMD.Designer.cs">
+      <DependentUpon>ColourBMD.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Facts.cs">
       <SubType>Form</SubType>
@@ -188,11 +189,11 @@
     <Compile Include="Forms\Chart.Designer.cs">
       <DependentUpon>Chart.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ColouredCensus.cs">
+    <Compile Include="Forms\ColourCensus.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ColouredCensus.Designer.cs">
-      <DependentUpon>ColouredCensus.cs</DependentUpon>
+    <Compile Include="Forms\ColourCensus.Designer.cs">
+      <DependentUpon>ColourCensus.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\GoogleMap.cs">
       <SubType>Form</SubType>
@@ -208,8 +209,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\ColouredBMD.resx">
-      <DependentUpon>ColouredBMD.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ColourBMD.resx">
+      <DependentUpon>ColourBMD.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Facts.resx">
       <DependentUpon>Facts.cs</DependentUpon>
@@ -224,8 +225,8 @@
     <EmbeddedResource Include="Forms\Chart.resx">
       <DependentUpon>Chart.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ColouredCensus.resx">
-      <DependentUpon>ColouredCensus.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ColourCensus.resx">
+      <DependentUpon>ColourCensus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GoogleMap.resx">
       <DependentUpon>GoogleMap.cs</DependentUpon>

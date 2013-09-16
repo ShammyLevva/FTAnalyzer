@@ -580,7 +580,7 @@ namespace FTAnalyzer
         public bool YearMatches(FactDate that)
         {
             if (that == null ||
-                that.StartDate.Year != that.EndDate.Year || 
+                that.StartDate.Year != that.EndDate.Year ||
                 this.StartDate.Year != this.EndDate.Year) return false;
             // both this & that have exact years now return whether this and that match
             return this.StartDate.Year == that.StartDate.Year;
@@ -615,6 +615,21 @@ namespace FTAnalyzer
             double difference = Math.Sqrt(Math.Pow(startDiff, 2.0) + Math.Pow(endDiff, 2.0));
             return difference;
         }
+
+        public int DateStatus(bool ignoreUnknown)
+        {
+            // 0 = grey, 1 = red, 2 = orange, 3 = yellow, 4=green
+            if (DateType == FactDateType.UNK)
+                return ignoreUnknown ? 0 : 1; 
+            if (DateType == FactDateType.EXT)
+                    return 4;
+            TimeSpan ts = EndDate - StartDate;
+            if (ts.Days > 365.25 * 2)
+                return 2;
+            else
+                return 3;
+        }
+
         #endregion
 
         #region Overrides

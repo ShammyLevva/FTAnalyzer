@@ -964,7 +964,7 @@ namespace FTAnalyzer
             return new SortableBindingList<Individual>(occupations[job]);
         }
 
-        public SortableBindingList<IDisplayColouredCensus> ColouredCensus(Controls.RelationTypes relType, string surname)
+        public SortableBindingList<IDisplayColourCensus> ColourCensus(Controls.RelationTypes relType, string surname)
         {
             Predicate<Individual> aliveOnAnyCensus = x => x.AliveOnAnyCensus;
             Predicate<Individual> filter = relType.BuildFilter<Individual>(x => x.RelationType);
@@ -977,7 +977,19 @@ namespace FTAnalyzer
                                                      (i.DeathDate.IsAfter(CensusDate.UKCENSUS1841) || !i.DeathDate.IsKnown()));
             filter = FilterUtils.AndFilter<Individual>(filter, dateFilter, aliveOnAnyCensus);
             IEnumerable<Individual> aliveOnCensus = individuals.Where(filter);
-            return new SortableBindingList<IDisplayColouredCensus>(aliveOnCensus);
+            return new SortableBindingList<IDisplayColourCensus>(aliveOnCensus);
+        }
+
+        public SortableBindingList<IDisplayColourBMD> ColourBMD(Controls.RelationTypes relType, string surname)
+        {
+            Predicate<Individual> filter = relType.BuildFilter<Individual>(x => x.RelationType);
+            if (surname.Length > 0)
+            {
+                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, surname);
+                filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
+            }
+            IEnumerable<Individual> bmd = individuals.Where(filter);
+            return new SortableBindingList<IDisplayColourBMD>(bmd);
         }
 
         #endregion

@@ -107,8 +107,8 @@
             this.btnLC1881EW = new System.Windows.Forms.Button();
             this.btnLC1881Canada = new System.Windows.Forms.Button();
             this.btnLC1881Scot = new System.Windows.Forms.Button();
-            this.tabColoured = new System.Windows.Forms.TabPage();
-            this.btnColouredCensus = new System.Windows.Forms.Button();
+            this.tabColourReports = new System.Windows.Forms.TabPage();
+            this.btnColourCensus = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.txtColouredSurname = new System.Windows.Forms.TextBox();
             this.tabFamilySearch = new System.Windows.Forms.TabPage();
@@ -159,6 +159,7 @@
             this.treetopsCountry = new Controls.CensusCountry();
             this.wardeadRelation = new Controls.RelationTypes();
             this.wardeadCountry = new Controls.CensusCountry();
+            this.btnColourBMD = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabSelector.SuspendLayout();
             this.tabDisplayProgress.SuspendLayout();
@@ -189,7 +190,7 @@
             this.tabCensus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
             this.tabLostCousins.SuspendLayout();
-            this.tabColoured.SuspendLayout();
+            this.tabColourReports.SuspendLayout();
             this.tabFamilySearch.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabTreetops.SuspendLayout();
@@ -206,6 +207,12 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.mnuReports,
+            this.mnuExport,
+            this.toolsToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(939, 24);
@@ -373,7 +380,7 @@
             this.tabSelector.Controls.Add(this.tabLooseDeaths);
             this.tabSelector.Controls.Add(this.tabCensus);
             this.tabSelector.Controls.Add(this.tabLostCousins);
-            this.tabSelector.Controls.Add(this.tabColoured);
+            this.tabSelector.Controls.Add(this.tabColourReports);
             this.tabSelector.Controls.Add(this.tabFamilySearch);
             this.tabSelector.Controls.Add(this.tabTreetops);
             this.tabSelector.Controls.Add(this.tabWarDead);
@@ -772,6 +779,7 @@
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 138);
+            this.dgDataErrors.MultiSelect = false;
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgDataErrors.ShowCellToolTips = false;
@@ -779,7 +787,6 @@
             this.dgDataErrors.TabIndex = 3;
             this.toolTips.SetToolTip(this.dgDataErrors, "Double click to see list of facts for that individual");
             this.dgDataErrors.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDataErrors_CellDoubleClick);
-            this.dgDataErrors.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgDataErrors_CellFormatting);
             // 
             // gbDataErrorTypes
             // 
@@ -1066,28 +1073,29 @@
             this.btnLC1881Scot.UseVisualStyleBackColor = true;
             this.btnLC1881Scot.Click += new System.EventHandler(this.btnLC1881Scot_Click);
             // 
-            // tabColoured
+            // tabColourReports
             // 
-            this.tabColoured.Controls.Add(this.btnColouredCensus);
-            this.tabColoured.Controls.Add(this.label10);
-            this.tabColoured.Controls.Add(this.txtColouredSurname);
-            this.tabColoured.Controls.Add(this.relTypesColoured);
-            this.tabColoured.Location = new System.Drawing.Point(4, 22);
-            this.tabColoured.Name = "tabColoured";
-            this.tabColoured.Size = new System.Drawing.Size(931, 402);
-            this.tabColoured.TabIndex = 12;
-            this.tabColoured.Text = "Coloured Charts";
-            this.tabColoured.UseVisualStyleBackColor = true;
+            this.tabColourReports.Controls.Add(this.btnColourBMD);
+            this.tabColourReports.Controls.Add(this.btnColourCensus);
+            this.tabColourReports.Controls.Add(this.label10);
+            this.tabColourReports.Controls.Add(this.txtColouredSurname);
+            this.tabColourReports.Controls.Add(this.relTypesColoured);
+            this.tabColourReports.Location = new System.Drawing.Point(4, 22);
+            this.tabColourReports.Name = "tabColourReports";
+            this.tabColourReports.Size = new System.Drawing.Size(931, 402);
+            this.tabColourReports.TabIndex = 12;
+            this.tabColourReports.Text = "Colour Reports";
+            this.tabColourReports.UseVisualStyleBackColor = true;
             // 
-            // btnColouredCensus
+            // btnColourCensus
             // 
-            this.btnColouredCensus.Location = new System.Drawing.Point(8, 92);
-            this.btnColouredCensus.Name = "btnColouredCensus";
-            this.btnColouredCensus.Size = new System.Drawing.Size(185, 23);
-            this.btnColouredCensus.TabIndex = 32;
-            this.btnColouredCensus.Text = "View Census Years Report";
-            this.btnColouredCensus.UseVisualStyleBackColor = true;
-            this.btnColouredCensus.Click += new System.EventHandler(this.btnColouredCensus_Click);
+            this.btnColourCensus.Location = new System.Drawing.Point(157, 92);
+            this.btnColourCensus.Name = "btnColourCensus";
+            this.btnColourCensus.Size = new System.Drawing.Size(143, 23);
+            this.btnColourCensus.TabIndex = 32;
+            this.btnColourCensus.Text = "View Census Years Report";
+            this.btnColourCensus.UseVisualStyleBackColor = true;
+            this.btnColourCensus.Click += new System.EventHandler(this.btnColouredCensus_Click);
             // 
             // label10
             // 
@@ -1411,6 +1419,8 @@
             // 
             // statusStrip
             // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsCountLabel});
             this.statusStrip.Location = new System.Drawing.Point(0, 458);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(939, 22);
@@ -1532,6 +1542,16 @@
             this.wardeadCountry.Title = "Default Country";
             this.wardeadCountry.UKEnabled = true;
             // 
+            // btnColourBMD
+            // 
+            this.btnColourBMD.Location = new System.Drawing.Point(8, 92);
+            this.btnColourBMD.Name = "btnColourBMD";
+            this.btnColourBMD.Size = new System.Drawing.Size(143, 23);
+            this.btnColourBMD.TabIndex = 33;
+            this.btnColourBMD.Text = "View BMD Report";
+            this.btnColourBMD.UseVisualStyleBackColor = true;
+            this.btnColourBMD.Click += new System.EventHandler(this.btnColourBMD_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1585,8 +1605,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).EndInit();
             this.tabLostCousins.ResumeLayout(false);
             this.tabLostCousins.PerformLayout();
-            this.tabColoured.ResumeLayout(false);
-            this.tabColoured.PerformLayout();
+            this.tabColourReports.ResumeLayout(false);
+            this.tabColourReports.PerformLayout();
             this.tabFamilySearch.ResumeLayout(false);
             this.tabFamilySearch.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1729,13 +1749,14 @@
         private System.Windows.Forms.DataGridView dgTreeTops;
         private System.Windows.Forms.TabPage tabTreeView;
         private System.Windows.Forms.TreeView treeViewLocations;
-        private System.Windows.Forms.TabPage tabColoured;
-        private System.Windows.Forms.Button btnColouredCensus;
+        private System.Windows.Forms.TabPage tabColourReports;
+        private System.Windows.Forms.Button btnColourCensus;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtColouredSurname;
         private Controls.RelationTypes relTypesColoured;
         private System.Windows.Forms.Button btnSelectAll;
         private System.Windows.Forms.Button btnClearAll;
+        private System.Windows.Forms.Button btnColourBMD;
     }
 }
 

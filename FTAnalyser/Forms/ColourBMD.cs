@@ -13,39 +13,36 @@ using System.Diagnostics;
 
 namespace FTAnalyzer.Forms
 {
-    public partial class ColouredCensus : Form
+    public partial class ColourBMD : Form
     {
 
         private PrintingDataGridViewProvider printProvider;
         private Dictionary<int, DataGridViewCellStyle> styles;
-        private int c1841ColumnIndex;
-        private int c1911ColumnIndex;
-        private SortableBindingList<IDisplayColouredCensus> reportList;
+        private int birthColumnIndex;
+        private int burialColumnIndex;
+        private SortableBindingList<IDisplayColourBMD> reportList;
 
-        public ColouredCensus(SortableBindingList<IDisplayColouredCensus> reportList)
+        public ColourBMD(SortableBindingList<IDisplayColourBMD> reportList)
         {
             InitializeComponent();
             this.reportList = reportList;
             styles = new Dictionary<int, DataGridViewCellStyle>();
-            DataGridViewCellStyle notAlive = new DataGridViewCellStyle();
-            notAlive.BackColor = notAlive.ForeColor = Color.DarkGray;
-            styles.Add(0, notAlive);
-            DataGridViewCellStyle missingCensus = new DataGridViewCellStyle();
-            missingCensus.BackColor = missingCensus.ForeColor = Color.Red;
-            styles.Add(1, missingCensus);
-            DataGridViewCellStyle censusMissingLC = new DataGridViewCellStyle();
-            censusMissingLC.BackColor = censusMissingLC.ForeColor = Color.Yellow;
-            styles.Add(2, censusMissingLC);
-            DataGridViewCellStyle notCensusEnterednotLCYear = new DataGridViewCellStyle();
-            notCensusEnterednotLCYear.BackColor = notCensusEnterednotLCYear.ForeColor = Color.Green;
-            styles.Add(3, notCensusEnterednotLCYear);
-            DataGridViewCellStyle allEntered = new DataGridViewCellStyle();
-            allEntered.BackColor = allEntered.ForeColor = Color.Green;
-            styles.Add(4, allEntered);
-            DataGridViewCellStyle lcNoCensus = new DataGridViewCellStyle();
-            lcNoCensus.BackColor = lcNoCensus.ForeColor = Color.DarkOrange;
-            styles.Add(5, lcNoCensus);
-
+            DataGridViewCellStyle notRequired = new DataGridViewCellStyle();
+            notRequired.BackColor = notRequired.ForeColor = Color.DarkGray;
+            styles.Add(0, notRequired);
+            DataGridViewCellStyle missingData = new DataGridViewCellStyle();
+            missingData.BackColor = missingData.ForeColor = Color.Red;
+            styles.Add(1, missingData);
+            DataGridViewCellStyle dateRange = new DataGridViewCellStyle();
+            dateRange.BackColor = dateRange.ForeColor = Color.DarkOrange;
+            styles.Add(2, dateRange);
+            DataGridViewCellStyle approxDate = new DataGridViewCellStyle();
+            approxDate.BackColor = approxDate.ForeColor = Color.Yellow;
+            styles.Add(3, approxDate);
+            DataGridViewCellStyle exactDate = new DataGridViewCellStyle();
+            exactDate.BackColor = exactDate.ForeColor = Color.Green;
+            styles.Add(4, exactDate);
+            
             printDocument.DefaultPageSettings.Margins =
                new System.Drawing.Printing.Margins(15,15,15,15);
 
@@ -60,8 +57,8 @@ namespace FTAnalyzer.Forms
             dgReportSheet.Sort(dgReportSheet.Columns["BirthDate"], ListSortDirection.Ascending);
             dgReportSheet.Sort(dgReportSheet.Columns["Forenames"], ListSortDirection.Ascending);
             dgReportSheet.Sort(dgReportSheet.Columns["Surname"], ListSortDirection.Ascending);
-            c1841ColumnIndex = dgReportSheet.Columns["C1841"].Index;
-            c1911ColumnIndex = dgReportSheet.Columns["C1911"].Index;
+            birthColumnIndex = dgReportSheet.Columns["C1841"].Index;
+            burialColumnIndex = dgReportSheet.Columns["C1911"].Index;
             ResizeColumns();
             tsRecords.Text = "Count : " + reportList.Count + " records listed.";
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
@@ -73,7 +70,7 @@ namespace FTAnalyzer.Forms
             cbFilter.Text = "All Individuals";
         }
 
-        private string CountText(SortableBindingList<IDisplayColouredCensus> reportList)
+        private string CountText(SortableBindingList<IDisplayColourCensus> reportList)
         {
 
             StringBuilder output = new StringBuilder();
@@ -114,7 +111,7 @@ namespace FTAnalyzer.Forms
         {
             foreach (DataGridViewColumn c in dgReportSheet.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
-            for (int i = c1841ColumnIndex; i <= c1911ColumnIndex; i++)
+            for (int i = birthColumnIndex; i <= burialColumnIndex; i++)
                 dgReportSheet.Columns[i].Width = 50;
         }
 
@@ -124,7 +121,7 @@ namespace FTAnalyzer.Forms
             {
                 return;
             }
-            if (e.ColumnIndex < c1841ColumnIndex || e.ColumnIndex > c1911ColumnIndex)
+            if (e.ColumnIndex < birthColumnIndex || e.ColumnIndex > burialColumnIndex)
             {
                 DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells["Relation"];
                 string relation = (string)cell.Value;
@@ -189,14 +186,14 @@ namespace FTAnalyzer.Forms
 
         private void dgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex >= c1841ColumnIndex && e.ColumnIndex <= c1911ColumnIndex)
+            if (e.ColumnIndex >= birthColumnIndex && e.ColumnIndex <= burialColumnIndex)
             {
                 DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 int value = (int)cell.Value;
                 if (value == 1 || value == 2)
                 {
-                    IDisplayColouredCensus person = (IDisplayColouredCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
-                    int censusYear = (1841 + (e.ColumnIndex - c1841ColumnIndex) * 10);
+                    IDisplayColourCensus person = (IDisplayColourCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
+                    int censusYear = (1841 + (e.ColumnIndex - birthColumnIndex) * 10);
                     FamilyTree ft = FamilyTree.Instance;
                     string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
                     ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
@@ -210,10 +207,10 @@ namespace FTAnalyzer.Forms
             dgReportSheet.Focus();
         }
 
-        private List<IDisplayColouredCensus> BuildFilter(int toFind, bool all)
+        private List<IDisplayColourCensus> BuildFilter(int toFind, bool all)
         {
-            List<IDisplayColouredCensus> result = new List<IDisplayColouredCensus>();
-            foreach(IDisplayColouredCensus row in this.reportList)
+            List<IDisplayColourCensus> result = new List<IDisplayColourCensus>();
+            foreach(IDisplayColourCensus row in this.reportList)
             {
                 if (all)
                 {
@@ -239,7 +236,7 @@ namespace FTAnalyzer.Forms
         private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            List<IDisplayColouredCensus> list;
+            List<IDisplayColourCensus> list;
             switch (cbFilter.SelectedIndex)
             {
                 case -1: // nothing selected
@@ -247,28 +244,28 @@ namespace FTAnalyzer.Forms
                     dgReportSheet.DataSource = this.reportList;
                     break;
                 case 1: // None Found (All Red)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(1, true));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(1, true));
                     break;
                 case 2: // All Found (All Green)
-                    list = new List<IDisplayColouredCensus>();
+                    list = new List<IDisplayColourCensus>();
                     list.AddRange(BuildFilter(3, true));
                     list.AddRange(BuildFilter(4, true));
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(list);
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list);
                     break;
                 case 3: // Lost Cousins Missing (Yellows)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(2, false));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(2, false));
                     break;
                 case 4: // Lost Cousins Present (Orange)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(5, false));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(5, false));
                     break;
                 case 5: // Some Missing (Some Red)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(1, false));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(1, false));
                     break;
                 case 6:
-                    list = new List<IDisplayColouredCensus>();
+                    list = new List<IDisplayColourCensus>();
                     list.AddRange(BuildFilter(3, false));
                     list.AddRange(BuildFilter(4, false));
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(list);
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list);
                     break;
             }
             ResizeColumns();
@@ -281,7 +278,7 @@ namespace FTAnalyzer.Forms
         {
             this.Cursor = Cursors.WaitCursor;
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            List<IDisplayColouredCensus> export = (dgReportSheet.DataSource as SortableBindingList<IDisplayColouredCensus>).ToList<IDisplayColouredCensus>();
+            List<IDisplayColourCensus> export = (dgReportSheet.DataSource as SortableBindingList<IDisplayColourCensus>).ToList<IDisplayColourCensus>();
             DataTable dt = convertor.ToDataTable(export);
             ExportToExcel.Export(dt);
             this.Cursor = Cursors.Default;

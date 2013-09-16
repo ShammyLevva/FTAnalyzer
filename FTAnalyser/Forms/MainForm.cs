@@ -1530,13 +1530,23 @@ namespace FTAnalyzer
         private void btnColouredCensus_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            SortableBindingList<IDisplayColouredCensus> list = ft.ColouredCensus(relTypesColoured, txtColouredSurname.Text);
-            ColouredCensus rs = new ColouredCensus(list);
+            SortableBindingList<IDisplayColourCensus> list = ft.ColourCensus(relTypesColoured, txtColouredSurname.Text);
+            ColourCensus rs = new ColourCensus(list);
             DisposeDuplicateForms(rs);
             rs.Show();
             HourGlass(false);
         }
 
+        private void btnColourBMD_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            SortableBindingList<IDisplayColourBMD> list = ft.ColourBMD(relTypesColoured, txtColouredSurname.Text);
+            ColourBMD rs = new ColourBMD(list);
+            DisposeDuplicateForms(rs);
+            rs.Show();
+            HourGlass(false);
+        }
+        
         private void btnSelectAll_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < ckbDataErrors.Items.Count; i++ )

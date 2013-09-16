@@ -13,16 +13,16 @@ using System.Diagnostics;
 
 namespace FTAnalyzer.Forms
 {
-    public partial class ColouredBMD : Form
+    public partial class ColourCensus : Form
     {
 
         private PrintingDataGridViewProvider printProvider;
         private Dictionary<int, DataGridViewCellStyle> styles;
         private int c1841ColumnIndex;
         private int c1911ColumnIndex;
-        private SortableBindingList<IDisplayColouredCensus> reportList;
+        private SortableBindingList<IDisplayColourCensus> reportList;
 
-        public ColouredBMD(SortableBindingList<IDisplayColouredCensus> reportList)
+        public ColourCensus(SortableBindingList<IDisplayColourCensus> reportList)
         {
             InitializeComponent();
             this.reportList = reportList;
@@ -73,7 +73,7 @@ namespace FTAnalyzer.Forms
             cbFilter.Text = "All Individuals";
         }
 
-        private string CountText(SortableBindingList<IDisplayColouredCensus> reportList)
+        private string CountText(SortableBindingList<IDisplayColourCensus> reportList)
         {
 
             StringBuilder output = new StringBuilder();
@@ -195,7 +195,7 @@ namespace FTAnalyzer.Forms
                 int value = (int)cell.Value;
                 if (value == 1 || value == 2)
                 {
-                    IDisplayColouredCensus person = (IDisplayColouredCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
+                    IDisplayColourCensus person = (IDisplayColourCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
                     int censusYear = (1841 + (e.ColumnIndex - c1841ColumnIndex) * 10);
                     FamilyTree ft = FamilyTree.Instance;
                     string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
@@ -210,10 +210,10 @@ namespace FTAnalyzer.Forms
             dgReportSheet.Focus();
         }
 
-        private List<IDisplayColouredCensus> BuildFilter(int toFind, bool all)
+        private List<IDisplayColourCensus> BuildFilter(int toFind, bool all)
         {
-            List<IDisplayColouredCensus> result = new List<IDisplayColouredCensus>();
-            foreach(IDisplayColouredCensus row in this.reportList)
+            List<IDisplayColourCensus> result = new List<IDisplayColourCensus>();
+            foreach(IDisplayColourCensus row in this.reportList)
             {
                 if (all)
                 {
@@ -239,7 +239,7 @@ namespace FTAnalyzer.Forms
         private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            List<IDisplayColouredCensus> list;
+            List<IDisplayColourCensus> list;
             switch (cbFilter.SelectedIndex)
             {
                 case -1: // nothing selected
@@ -247,28 +247,28 @@ namespace FTAnalyzer.Forms
                     dgReportSheet.DataSource = this.reportList;
                     break;
                 case 1: // None Found (All Red)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(1, true));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(1, true));
                     break;
                 case 2: // All Found (All Green)
-                    list = new List<IDisplayColouredCensus>();
+                    list = new List<IDisplayColourCensus>();
                     list.AddRange(BuildFilter(3, true));
                     list.AddRange(BuildFilter(4, true));
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(list);
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list);
                     break;
                 case 3: // Lost Cousins Missing (Yellows)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(2, false));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(2, false));
                     break;
                 case 4: // Lost Cousins Present (Orange)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(5, false));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(5, false));
                     break;
                 case 5: // Some Missing (Some Red)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(BuildFilter(1, false));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(1, false));
                     break;
                 case 6:
-                    list = new List<IDisplayColouredCensus>();
+                    list = new List<IDisplayColourCensus>();
                     list.AddRange(BuildFilter(3, false));
                     list.AddRange(BuildFilter(4, false));
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColouredCensus>(list);
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list);
                     break;
             }
             ResizeColumns();
@@ -281,7 +281,7 @@ namespace FTAnalyzer.Forms
         {
             this.Cursor = Cursors.WaitCursor;
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            List<IDisplayColouredCensus> export = (dgReportSheet.DataSource as SortableBindingList<IDisplayColouredCensus>).ToList<IDisplayColouredCensus>();
+            List<IDisplayColourCensus> export = (dgReportSheet.DataSource as SortableBindingList<IDisplayColourCensus>).ToList<IDisplayColourCensus>();
             DataTable dt = convertor.ToDataTable(export);
             ExportToExcel.Export(dt);
             this.Cursor = Cursors.Default;

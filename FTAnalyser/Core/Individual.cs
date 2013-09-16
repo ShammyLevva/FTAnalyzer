@@ -6,7 +6,7 @@ using System.Xml;
 namespace FTAnalyzer
 {
     public class Individual : IComparable<Individual>,
-        IDisplayIndividual, IDisplayLooseDeath, IDisplayColouredCensus, IExportIndividual
+        IDisplayIndividual, IDisplayLooseDeath, IDisplayColourCensus, IDisplayColourBMD, IExportIndividual
     {
 
         // define relation type from direct ancestor to related by marriage and 
@@ -789,7 +789,7 @@ namespace FTAnalyzer
             return res;
         }
 
-        private int LCReport(FactDate census)
+        private int ColourCensusReport(FactDate census)
         {
 
             if (BirthDate.IsAfter(census) || DeathDate.IsBefore(census))
@@ -811,42 +811,42 @@ namespace FTAnalyzer
 
         public int C1841
         {
-            get { return LCReport(CensusDate.UKCENSUS1841); }
+            get { return ColourCensusReport(CensusDate.UKCENSUS1841); }
         }
 
         public int C1851
         {
-            get { return LCReport(CensusDate.UKCENSUS1851); }
+            get { return ColourCensusReport(CensusDate.UKCENSUS1851); }
         }
 
         public int C1861
         {
-            get { return LCReport(CensusDate.UKCENSUS1861); }
+            get { return ColourCensusReport(CensusDate.UKCENSUS1861); }
         }
 
         public int C1871
         {
-            get { return LCReport(CensusDate.UKCENSUS1871); }
+            get { return ColourCensusReport(CensusDate.UKCENSUS1871); }
         }
 
         public int C1881
         {
-            get { return LCReport(CensusDate.UKCENSUS1881); }
+            get { return ColourCensusReport(CensusDate.UKCENSUS1881); }
         }
 
         public int C1891
         {
-            get { return LCReport(CensusDate.UKCENSUS1891); }
+            get { return ColourCensusReport(CensusDate.UKCENSUS1891); }
         }
 
         public int C1901
         {
-            get { return LCReport(CensusDate.UKCENSUS1901); }
+            get { return ColourCensusReport(CensusDate.UKCENSUS1901); }
         }
 
         public int C1911
         {
-            get { return LCReport(CensusDate.UKCENSUS1911); }
+            get { return ColourCensusReport(CensusDate.UKCENSUS1911); }
         }
 
         public bool AliveOnAnyCensus
@@ -857,6 +857,51 @@ namespace FTAnalyzer
         public int CensusFactCount
         {
             get { return FactCount(Fact.CENSUS); }
+        }
+
+
+        public int BirthStatus
+        {
+            get { return BirthDate.DateStatus(false); }
+        }
+
+        public int BaptismChristeningStatus
+        {
+            get {
+                FactDate baptism = GetPreferredFactDate(Fact.BAPTISM);
+                FactDate christening = GetPreferredFactDate(Fact.CHRISTENING);
+                return Math.Max(baptism.DateStatus(true), christening.DateStatus(true));
+            }
+        }
+
+        public int FirstMarriageStatus
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public int SecondMarriageStatus
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public int ThirdMarriageStatus
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public int DeathStatus
+        {
+            get { return DeathDate.DateStatus(false); }
+        }
+
+        public int CremationBurialStatus
+        {
+            get
+            {
+                FactDate cremation = GetPreferredFactDate(Fact.CREMATION);
+                FactDate burial = GetPreferredFactDate(Fact.BURIAL);
+                return Math.Max(cremation.DateStatus(true), burial.DateStatus(true));
+            }
         }
     }
 }
