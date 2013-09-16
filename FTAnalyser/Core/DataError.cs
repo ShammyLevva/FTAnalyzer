@@ -14,19 +14,17 @@ namespace FTAnalyzer
         public Image Icon { get; private set; }
         public string Description { get; private set; }
 
-        public DataError(int errorType, Fact.FactError errorLevel, Individual ind, string description) :
-            this(errorType, ind, description)
-        {
-            this.Icon = DataErrorGroup.ErrorIcon(errorLevel);
-        }
-
-        public DataError(int errorType, Individual ind, string description)
+        public DataError(int errorType, Fact.FactError errorLevel, Individual ind, string description)
         {
             this.ErrorType = DataErrorGroup.ErrorDescription(errorType);
+            this.Icon = DataErrorGroup.ErrorIcon(errorLevel);
             this.individual = ind;
             this.Description = description;
         }
 
+        public DataError(int errorType, Individual ind, string description)
+            : this(errorType, Fact.FactError.ERROR, ind, description) {}
+       
         public string IndividualID { get { return individual.IndividualID; } }
 
         public string Individual { get { return individual.Name; } }
