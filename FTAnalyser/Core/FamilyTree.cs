@@ -212,42 +212,61 @@ namespace FTAnalyzer
             int censusFacts = 0;
             int resiFacts = 0;
             int lostCousinsFacts = 0;
-            int censusWarnings = 0;
-            int resiWarnings = 0;
-            int lostCousinsWarnings = 0;
+            int censusWarnAllow = 0;
+            int resiWarnAllow = 0;
+            int lostCousinsWarnAllow = 0;
+            int censusWarnIgnore = 0;
+            int resiWarnIgnore = 0;
+            int lostCousinsWarnIgnore = 0;
             int censusErrors = 0;
             int resiErrors = 0;
             int lostCousinsErrors = 0;
             foreach (Individual ind in individuals)
             {
                 censusFacts += ind.FactCount(Fact.CENSUS);
-                censusWarnings += ind.ErrorFactCount(Fact.CENSUS, Fact.FactError.WARNINGALLOW);
+                censusWarnAllow += ind.ErrorFactCount(Fact.CENSUS, Fact.FactError.WARNINGALLOW);
+                censusWarnIgnore += ind.ErrorFactCount(Fact.CENSUS, Fact.FactError.WARNINGIGNORE);
                 censusErrors += ind.ErrorFactCount(Fact.CENSUS, Fact.FactError.ERROR);
                 resiFacts += ind.FactCount(Fact.RESIDENCE);
-                resiWarnings += ind.ErrorFactCount(Fact.RESIDENCE, Fact.FactError.WARNINGALLOW);
+                resiWarnAllow += ind.ErrorFactCount(Fact.RESIDENCE, Fact.FactError.WARNINGALLOW);
+                resiWarnIgnore += ind.ErrorFactCount(Fact.RESIDENCE, Fact.FactError.WARNINGIGNORE);
                 resiErrors += ind.ErrorFactCount(Fact.RESIDENCE, Fact.FactError.ERROR);
                 lostCousinsFacts += ind.FactCount(Fact.LOSTCOUSINS);
-                lostCousinsWarnings += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNINGALLOW);
+                lostCousinsWarnAllow += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNINGALLOW);
+                lostCousinsWarnIgnore += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNINGIGNORE);
                 lostCousinsErrors += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.ERROR);
             }
-            int censusTotal = censusFacts + censusWarnings + censusErrors;
-            int resiTotal = resiFacts + resiWarnings + resiErrors;
-            int lostCousinsTotal = lostCousinsFacts + lostCousinsWarnings + lostCousinsErrors;
+            int censusTotal = censusFacts + censusWarnAllow + censusWarnIgnore + censusErrors;
+            int resiTotal = resiFacts + resiWarnAllow + resiWarnIgnore + resiErrors;
+            int lostCousinsTotal = lostCousinsFacts + lostCousinsWarnAllow + lostCousinsWarnIgnore + lostCousinsErrors;
+
             xmlErrorbox.AppendText("\nFound " + censusTotal + " census facts in GEDCOM File (" + censusFacts + " good, ");
-            if(Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
-                xmlErrorbox.AppendText(censusWarnings + " warnings (data tolerated), ");
-            xmlErrorbox.AppendText(censusErrors + " errors (data discarded), " + (censusFacts + censusWarnings) + " usable facts loaded)");
+            if(censusWarnAllow > 0)
+                xmlErrorbox.AppendText(censusWarnIgnore + " warnings (data tolerated), ");
+            if (censusWarnIgnore > 0)
+                xmlErrorbox.AppendText(censusWarnIgnore + " warnings (data ignored), ");
+            if (censusErrors > 0)
+                xmlErrorbox.AppendText(censusErrors + " errors (data discarded), ");
+            xmlErrorbox.AppendText((censusFacts + censusWarnAllow) + " usable facts loaded)");
             
             xmlErrorbox.AppendText("\nFound " + resiTotal + " residence facts in GEDCOM File (" + resiFacts  + " good, ");
-            if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
-                xmlErrorbox.AppendText(resiWarnings + " warnings (data tolerated), ");
-            xmlErrorbox.AppendText(resiErrors + " errors (data discarded), " + (resiFacts + resiWarnings) + " usable facts loaded)");
+            if (resiWarnAllow > 0)
+                xmlErrorbox.AppendText(resiWarnIgnore + " warnings (data tolerated),");
+            if (resiWarnIgnore > 0)
+                xmlErrorbox.AppendText(resiWarnIgnore + " warnings (data ignored),");
+            if(resiErrors > 0)
+                xmlErrorbox.AppendText(resiErrors + " errors (data discarded), ");
+            xmlErrorbox.AppendText((resiFacts + resiWarnAllow) + " usable facts loaded)");
             
             xmlErrorbox.AppendText("\nFound " + lostCousinsTotal + " Lost Cousins facts in GEDCOM File (" + lostCousinsFacts + " good, ");
-            if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
-                xmlErrorbox.AppendText(lostCousinsWarnings + " warnings (data tolerated), ");
-            xmlErrorbox.AppendText(lostCousinsErrors + " errors (data discarded), " + (lostCousinsFacts + lostCousinsWarnings) + " usable facts loaded)\n");
-            if (censusFacts == 0 && resiFacts == 0)  
+            if (lostCousinsWarnAllow > 0)
+                xmlErrorbox.AppendText(lostCousinsWarnIgnore + " warnings (data tolerated), ");
+            if (lostCousinsWarnIgnore > 0)
+                xmlErrorbox.AppendText(lostCousinsWarnIgnore + " warnings (data ignored), ");
+            if (lostCousinsErrors > 0)
+                xmlErrorbox.AppendText(lostCousinsErrors + " errors (data discarded), ");
+            xmlErrorbox.AppendText((lostCousinsFacts + lostCousinsWarnAllow) + " usable facts loaded)\n");
+            if (censusFacts == 0 && resiFacts == 0 && censusWarnAllow == 0 && resiWarnAllow == 0)  
             {
                 xmlErrorbox.AppendText("\nFound no census or residence facts in GEDCOM File.\n");
                 xmlErrorbox.AppendText("This is probably because you have recorded census facts as notes\n");

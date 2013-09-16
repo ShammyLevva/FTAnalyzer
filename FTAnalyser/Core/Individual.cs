@@ -663,6 +663,7 @@ namespace FTAnalyzer
                             AddFact(f);
                             errorFacts.Add(f);
                             break;
+                        case Fact.FactError.WARNINGIGNORE:
                         case Fact.FactError.ERROR:
                             errorFacts.Add(f);
                             break;
