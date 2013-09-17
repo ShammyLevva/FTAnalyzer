@@ -34,15 +34,18 @@ namespace FTAnalyzer.Forms
             DataGridViewCellStyle missingData = new DataGridViewCellStyle();
             missingData.BackColor = missingData.ForeColor = Color.Red;
             styles.Add(1, missingData);
-            DataGridViewCellStyle dateRange = new DataGridViewCellStyle();
-            dateRange.BackColor = dateRange.ForeColor = Color.DarkOrange;
-            styles.Add(2, dateRange);
+            DataGridViewCellStyle wideDateRange = new DataGridViewCellStyle();
+            wideDateRange.BackColor = wideDateRange.ForeColor = Color.DarkOrange;
+            styles.Add(2, wideDateRange);
+            DataGridViewCellStyle narrowDateRange = new DataGridViewCellStyle();
+            narrowDateRange.BackColor = narrowDateRange.ForeColor = Color.Yellow;
+            styles.Add(3, narrowDateRange);
             DataGridViewCellStyle approxDate = new DataGridViewCellStyle();
-            approxDate.BackColor = approxDate.ForeColor = Color.Yellow;
-            styles.Add(3, approxDate);
+            approxDate.BackColor = approxDate.ForeColor = Color.PaleGreen;
+            styles.Add(4, approxDate);
             DataGridViewCellStyle exactDate = new DataGridViewCellStyle();
             exactDate.BackColor = exactDate.ForeColor = Color.Green;
-            styles.Add(4, exactDate);
+            styles.Add(5, exactDate);
 
             printDocument.DefaultPageSettings.Margins =
                new System.Drawing.Printing.Margins(15, 15, 15, 15);
@@ -123,9 +126,12 @@ namespace FTAnalyzer.Forms
                             cell.ToolTipText = "Wide date range.";
                             break;
                         case 3: // Yellow
+                            cell.ToolTipText = "Narrow date range.";
+                            break;
+                        case 4: // Pale Green 
                             cell.ToolTipText = "Approximate date.";
                             break;
-                        case 4: // Green
+                        case 5: // Green
                             cell.ToolTipText = "Exact date.";
                             break;
                     }

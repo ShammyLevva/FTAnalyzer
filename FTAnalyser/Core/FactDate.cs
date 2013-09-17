@@ -621,13 +621,15 @@ namespace FTAnalyzer
             // 0 = grey, 1 = red, 2 = orange, 3 = yellow, 4=green
             if (DateType == FactDateType.UNK)
                 return ignoreUnknown ? 0 : 1; 
-            if (DateType == FactDateType.EXT)
-                    return 4;
             TimeSpan ts = EndDate - StartDate;
             if (ts.Days > 365.25 * 2)
-                return 2;
+                return 2; // more than 2 years
+            else if (ts.Days > 125)
+                return 3; // more than 4 months
+            else if (ts.Days > 0)
+                return 4; // less than 4 months not exact
             else
-                return 3;
+                return 5; // exact date
         }
 
         #endregion
