@@ -97,11 +97,23 @@ namespace FTAnalyzer
         public static bool IsLostCousinsCensusYear(FactDate fd, bool exactYear)
         {
             if(exactYear)
-                return (fd.YearMatches(UKCENSUS1841) || fd.YearMatches(UKCENSUS1881) || fd.YearMatches(UKCENSUS1911) ||
-                    fd.YearMatches(USCENSUS1880) || fd.YearMatches(USCENSUS1940) || fd.YearMatches(CANADACENSUS1881) || fd.YearMatches(IRELANDCENSUS1911));
+            {
+                foreach(CensusDate cd in LOSTCOUSINS_CENSUS)
+                {
+                    if(fd.YearMatches(cd)) 
+                        return true;
+                }
+                return false;
+            }
             else
-                return (fd.Overlaps(UKCENSUS1841) || fd.Overlaps(UKCENSUS1881) || fd.Overlaps(UKCENSUS1911) ||
-                    fd.Overlaps(USCENSUS1880) || fd.Overlaps(USCENSUS1940) || fd.Overlaps(CANADACENSUS1881) || fd.Overlaps(IRELANDCENSUS1911));
+            {
+                foreach (CensusDate cd in LOSTCOUSINS_CENSUS)
+                {
+                    if (fd.Overlaps(cd))
+                        return true;
+                }
+                return false;
+            }
         }
 
         public override string ToString()
