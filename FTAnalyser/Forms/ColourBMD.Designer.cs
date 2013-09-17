@@ -67,6 +67,7 @@
             this.dgReportSheet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgReportSheet.Size = new System.Drawing.Size(1038, 530);
             this.dgReportSheet.TabIndex = 1;
+            this.dgReportSheet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportSheet_CellDoubleClick);
             this.dgReportSheet.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgReportSheet_CellFormatting);
             // 
             // statusStrip

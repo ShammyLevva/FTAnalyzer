@@ -189,17 +189,27 @@ namespace FTAnalyzer.Forms
 
         private void dgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex >= c1841ColumnIndex && e.ColumnIndex <= c1911ColumnIndex)
+            if (e.RowIndex >= 0)
             {
-                DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                int value = (int)cell.Value;
-                if (value == 1 || value == 2)
+                FamilyTree ft = FamilyTree.Instance;
+                if (e.ColumnIndex >= c1841ColumnIndex && e.ColumnIndex <= c1911ColumnIndex)
                 {
-                    IDisplayColourCensus person = (IDisplayColourCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
-                    int censusYear = (1841 + (e.ColumnIndex - c1841ColumnIndex) * 10);
-                    FamilyTree ft = FamilyTree.Instance;
-                    string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
-                    ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.Ind_ID), cbCensusSearchProvider.SelectedIndex);
+                    DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    int value = (int)cell.Value;
+                    if (value == 1 || value == 2)
+                    {
+                        IDisplayColourCensus person = (IDisplayColourCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
+                        int censusYear = (1841 + (e.ColumnIndex - c1841ColumnIndex) * 10);
+                        string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
+                        ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.Ind_ID), cbCensusSearchProvider.SelectedIndex);
+                    }
+                }
+                else if (e.ColumnIndex >= 0)
+                {
+                    string indID = (string)dgReportSheet.CurrentRow.Cells["Ind_ID"].Value;
+                    Individual ind = ft.GetIndividual(indID);
+                    Facts factForm = new Facts(ind);
+                    factForm.Show();
                 }
             }
         }

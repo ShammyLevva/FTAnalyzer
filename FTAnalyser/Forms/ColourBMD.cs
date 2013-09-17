@@ -43,9 +43,9 @@ namespace FTAnalyzer.Forms
             DataGridViewCellStyle exactDate = new DataGridViewCellStyle();
             exactDate.BackColor = exactDate.ForeColor = Color.Green;
             styles.Add(4, exactDate);
-            
+
             printDocument.DefaultPageSettings.Margins =
-               new System.Drawing.Printing.Margins(15,15,15,15);
+               new System.Drawing.Printing.Margins(15, 15, 15, 15);
 
             printProvider = PrintingDataGridViewProvider.Create(
                 printDocument, dgReportSheet, true, true, true,
@@ -153,17 +153,27 @@ namespace FTAnalyzer.Forms
 
         private void dgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex >= birthColumnIndex && e.ColumnIndex <= burialColumnIndex)
+            if (e.RowIndex >= 0)
             {
-                DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                int value = (int)cell.Value;
-                if (value == 1 || value == 2)
+                FamilyTree ft = FamilyTree.Instance;
+                if (e.ColumnIndex >= birthColumnIndex && e.ColumnIndex <= burialColumnIndex)
                 {
-                    IDisplayColourBMD person = (IDisplayColourBMD)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
-                    FamilyTree ft = FamilyTree.Instance;
-                    //string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
-                    //ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
-                    MessageBox.Show("Not yet available.");
+                    DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    int value = (int)cell.Value;
+                    if (value == 1 || value == 2)
+                    {
+                        IDisplayColourBMD person = (IDisplayColourBMD)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
+                        //string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
+                        //ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
+                        MessageBox.Show("Not yet available.");
+                    }
+                }
+                else if (e.ColumnIndex >= 0)
+                {
+                    string indID = (string)dgReportSheet.CurrentRow.Cells["Ind_ID"].Value;
+                    Individual ind = ft.GetIndividual(indID);
+                    Facts factForm = new Facts(ind);
+                    factForm.Show();
                 }
             }
         }
@@ -177,7 +187,7 @@ namespace FTAnalyzer.Forms
         private List<IDisplayColourBMD> BuildFilter(int toFind, bool all)
         {
             List<IDisplayColourBMD> result = new List<IDisplayColourBMD>();
-            foreach(IDisplayColourBMD row in this.reportList)
+            foreach (IDisplayColourBMD row in this.reportList)
             {
                 if (all)
                 {
@@ -185,15 +195,15 @@ namespace FTAnalyzer.Forms
                         (row.Marriage1 == toFind || row.Marriage1 == 0) && (row.Marriage2 == toFind || row.Marriage2 == 0) &&
                         (row.Marriage3 == toFind || row.Marriage3 == 0) && (row.Death == toFind || row.Death == 0) &&
                         (row.CremBuri == toFind || row.CremBuri == 0))
-                            result.Add(row);
+                        result.Add(row);
                 }
                 else
                 {
                     if (row.Birth == toFind || row.BaptChri == toFind || row.Marriage1 == toFind || row.Marriage2 == toFind ||
                         row.Marriage3 == toFind || row.Death == toFind || row.CremBuri == toFind)
-                            result.Add(row);
+                        result.Add(row);
                 }
-            }   
+            }
             return result;
         }
 
