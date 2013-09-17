@@ -10,6 +10,7 @@ using Printing.DataGridViewPrint.Tools;
 using FTAnalyzer.Utilities;
 using System.Web;
 using System.Diagnostics;
+using System.IO;
 
 namespace FTAnalyzer.Forms
 {
@@ -59,6 +60,7 @@ namespace FTAnalyzer.Forms
             dgReportSheet.Sort(dgReportSheet.Columns["Surname"], ListSortDirection.Ascending);
             birthColumnIndex = dgReportSheet.Columns["Birth"].Index;
             burialColumnIndex = dgReportSheet.Columns["CremBuri"].Index;
+            LoadColumnLayout();
             ResizeColumns();
             tsRecords.Text = "Count : " + reportList.Count + " records listed.";
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
@@ -92,6 +94,11 @@ namespace FTAnalyzer.Forms
                 {
                     e.CellStyle.Font = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
                 }
+                if (relation == "Root Person")
+                {
+                    e.CellStyle.Font = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
+                    e.CellStyle.ForeColor = Color.Red;
+                }
             }
             else
             {
@@ -107,7 +114,7 @@ namespace FTAnalyzer.Forms
                     switch (value)
                     {
                         case 0: // Grey
-                            cell.ToolTipText = "Not required.";
+                            cell.ToolTipText = string.Empty;
                             break;
                         case 1: // Red
                             cell.ToolTipText = "Unknown date.";
@@ -238,6 +245,60 @@ namespace FTAnalyzer.Forms
             DataTable dt = convertor.ToDataTable(export);
             ExportToExcel.Export(dt);
             this.Cursor = Cursors.Default;
+        }
+
+        private void SaveColumnLayout()
+        {
+            DataTable dt = new DataTable("table");
+            var query = from DataGridViewColumn col in dgReportSheet.Columns
+                        orderby col.DisplayIndex
+                        select col;
+
+            foreach (DataGridViewColumn col in query)
+            {
+                dt.Columns.Add(col.Name);
+            }
+            string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, "ColourBMDColumns.xml");
+            dt.WriteXmlSchema(path);
+        }
+
+        private void LoadColumnLayout()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, "ColourBMDColumns.xml");
+                dt.ReadXmlSchema(path);
+
+                int i = 0;
+                foreach (DataColumn col in dt.Columns)
+                {
+                    dgReportSheet.Columns[col.ColumnName].DisplayIndex = i;
+                    i++;
+                }
+            }
+            catch (Exception)
+            {
+                ResetColumnLayout();
+            }
+        }
+
+        private void ResetColumnLayout()
+        {
+            for (int i = 0; i < dgReportSheet.Columns.Count; i++)
+                dgReportSheet.Columns[i].DisplayIndex = i;
+            SaveColumnLayout();
+        }
+
+        private void mnuResetCensusColumns_Click(object sender, EventArgs e)
+        {
+            ResetColumnLayout();
+        }
+
+        private void mnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
+        {
+            SaveColumnLayout();
+            MessageBox.Show("Column Sort Order Saved", "BMD Colour Column Sorting");
         }
     }
 }
