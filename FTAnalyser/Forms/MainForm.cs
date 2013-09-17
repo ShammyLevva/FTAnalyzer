@@ -1535,6 +1535,7 @@ namespace FTAnalyzer
             ColourCensus rs = new ColourCensus(list);
             DisposeDuplicateForms(rs);
             rs.Show();
+            rs.Focus();
             HourGlass(false);
         }
 
@@ -1545,6 +1546,7 @@ namespace FTAnalyzer
             ColourBMD rs = new ColourBMD(list);
             DisposeDuplicateForms(rs);
             rs.Show();
+            rs.Focus();
             HourGlass(false);
         }
         
@@ -1575,6 +1577,11 @@ namespace FTAnalyzer
         private void reportAnIssueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("http://ftanalyzer.codeplex.com/workitem/list/basic");
+        }
+
+        private void btnLCReport_Click(object sender, EventArgs e)
+        {
+            tabSelector.SelectedTab = tabSelector.TabPages["tabColourReports"];
         }
     }
 }

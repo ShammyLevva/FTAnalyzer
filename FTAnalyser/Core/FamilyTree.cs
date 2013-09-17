@@ -257,7 +257,7 @@ namespace FTAnalyzer
 
             xmlErrorbox.AppendText("\nFound " + censusTotal + " census facts in GEDCOM File (" + censusFacts + " good, ");
             if (censusWarnAllow > 0)
-                xmlErrorbox.AppendText(censusWarnIgnore + " warnings (data tolerated), ");
+                xmlErrorbox.AppendText(censusWarnAllow + " warnings (data tolerated), ");
             if (censusWarnIgnore > 0)
                 xmlErrorbox.AppendText(censusWarnIgnore + " warnings (data ignored), ");
             if (censusErrors > 0)
@@ -266,7 +266,7 @@ namespace FTAnalyzer
 
             xmlErrorbox.AppendText("\nFound " + resiTotal + " residence facts in GEDCOM File (" + resiFacts + " good, ");
             if (resiWarnAllow > 0)
-                xmlErrorbox.AppendText(resiWarnIgnore + " warnings (data tolerated),");
+                xmlErrorbox.AppendText(resiWarnAllow + " warnings (data tolerated),");
             if (resiWarnIgnore > 0)
                 xmlErrorbox.AppendText(resiWarnIgnore + " warnings (data ignored),");
             if (resiErrors > 0)
@@ -275,7 +275,7 @@ namespace FTAnalyzer
 
             xmlErrorbox.AppendText("\nFound " + lostCousinsTotal + " Lost Cousins facts in GEDCOM File (" + lostCousinsFacts + " good, ");
             if (lostCousinsWarnAllow > 0)
-                xmlErrorbox.AppendText(lostCousinsWarnIgnore + " warnings (data tolerated), ");
+                xmlErrorbox.AppendText(lostCousinsWarnAllow + " warnings (data tolerated), ");
             if (lostCousinsWarnIgnore > 0)
                 xmlErrorbox.AppendText(lostCousinsWarnIgnore + " warnings (data ignored), ");
             if (lostCousinsErrors > 0)
