@@ -106,5 +106,17 @@ namespace FTAnalyzer.Properties {
                 this["ReloadRequired"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ReportOptions {
+            get {
+                return ((bool)(this["ReportOptions"]));
+            }
+            set {
+                this["ReportOptions"] = value;
+            }
+        }
     }
 }

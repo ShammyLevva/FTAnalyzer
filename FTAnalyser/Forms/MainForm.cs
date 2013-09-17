@@ -35,6 +35,7 @@ namespace FTAnalyzer
         public MainForm()
         {
             InitializeComponent();
+            displayOptionsOnLoadToolStripMenuItem.Checked = Properties.GeneralSettings.Default.ReportOptions;
             ft.XmlErrorBox = rtbOutput;
             tabSelector.TabPages.RemoveByKey("tabFamilySearch");
             VERSION = PublishVersion();
@@ -1563,6 +1564,12 @@ namespace FTAnalyzer
                 ckbDataErrors.SetItemChecked(indexChecked, false);
             }
             UpdateDataErrorsDisplay();
+        }
+
+        private void displayOptionsOnLoadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.GeneralSettings.Default.ReportOptions = displayOptionsOnLoadToolStripMenuItem.Checked;
+            Properties.GeneralSettings.Default.Save();
         }
     }
 }
