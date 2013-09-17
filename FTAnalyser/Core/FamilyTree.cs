@@ -1013,6 +1013,7 @@ namespace FTAnalyzer
 
         private void SetDataErrorTypes()
         {
+            int catchCount = 0;
             dataErrorTypes = new List<DataErrorGroup>();
             List<DataError>[] errors = new List<DataError>[DATA_ERROR_GROUPS];
             for (int i = 0; i < DATA_ERROR_GROUPS; i++)
@@ -1154,7 +1155,11 @@ namespace FTAnalyzer
                 }
                 catch (Exception e)
                 {
-                    ErrorHandler.Show("FTA_0001", e);
+                    if (catchCount == 0) // prevent multiple displays of the same error - usually resource icon load failures
+                    {
+                        ErrorHandler.Show("FTA_0001", e);
+                        catchCount++;
+                    }
                 }
             }
             for (int i = 0; i < DATA_ERROR_GROUPS; i++)
