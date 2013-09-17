@@ -19,7 +19,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.2.0.0-test-1";
+        private string VERSION = "2.2.0.0-test-2";
         //private bool _checkForUpdatesEnabled = false;
         //private bool _showNoUpdateMessage = false;
         //private System.Threading.Timer _timerCheckForUpdates;
@@ -577,7 +577,7 @@ namespace FTAnalyzer
         private void labLostCousinsWeb_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Help.ShowHelp(null, "http://www.lostcousins.com/?ref=LC585149");
+            Process.Start(null, "http://www.lostcousins.com/?ref=LC585149");
             HourGlass(false);
         }
 
@@ -1423,13 +1423,13 @@ namespace FTAnalyzer
 
         private void ReloadData()
         {
-            if (Properties.GeneralSettings.Default.ReloadRequired)
+            if (Properties.GeneralSettings.Default.ReloadRequired && ft.DataLoaded)
             {
                 DialogResult dr = MessageBox.Show("This option requires the data to be refreshed.\n\nDo you want to reload now?\n\nClicking no will keep the data with the old option.", "Reload GEDCOM File", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                Properties.GeneralSettings.Default.ReloadRequired = false;
+                Properties.GeneralSettings.Default.Save();
                 if (dr == DialogResult.Yes)
                 {
-                    Properties.GeneralSettings.Default.ReloadRequired = false;
-                    Properties.GeneralSettings.Default.Save();
                     LoadFile(filename);
                 }
             }
