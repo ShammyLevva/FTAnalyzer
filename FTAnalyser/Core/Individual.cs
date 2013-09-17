@@ -866,15 +866,34 @@ namespace FTAnalyzer
             }
         }
 
+        private int CheckMarriageStatus(Family fam)
+        {
+            // individual is a member of a family as parent so check family status
+            if ((this.IndividualID == fam.HusbandID && fam.Wife == null) ||
+                (this.IndividualID == fam.WifeID && fam.Husband == null))
+                return 7; // no partner but has children
+            else if (fam.GetPreferredFact(Fact.MARRIAGE) == null)
+                return 8; // has a partner but no marriage fact
+            else
+                return fam.MarriageDate.DateStatus(false); // has a partner and a marriage so return date status
+        }
+
         public int Marriage1
         {
             get
             {
-                Family marriage = Marriages(0);
-                if (marriage == null)
-                    return 0;
+                Family fam = Marriages(0);
+                if (fam == null)
+                {
+                    if (MaxAgeAtDeath > 13 && GetPreferredFact(Fact.DIED_SINGLE) == null)
+                        return 6; // of marrying age but hasn't a partner nor died single
+                    else
+                        return 0;
+                }
                 else
-                    return marriage.MarriageDate.DateStatus(false);
+                {
+                    return CheckMarriageStatus(fam);
+                }
             }
         }
 
@@ -882,11 +901,11 @@ namespace FTAnalyzer
         {
             get
             {
-                Family marriage = Marriages(1);
-                if (marriage == null)
+                Family fam = Marriages(1);
+                if (fam == null)
                     return 0;
                 else
-                    return marriage.MarriageDate.DateStatus(false);
+                    return CheckMarriageStatus(fam);
             }
         }
 
@@ -894,27 +913,11 @@ namespace FTAnalyzer
         {
             get
             {
-                Family marriage = Marriages(2);
-                if (marriage == null)
+                Family fam = Marriages(2);
+                if (fam == null)
                     return 0;
                 else
-                    return marriage.MarriageDate.DateStatus(false);
-            }
-        }
-
-        private string MarriageString(int number)
-        {
-            Family marriage = Marriages(number);
-            if (marriage == null)
-                return string.Empty;
-            else
-            {
-                if (this.IndividualID == marriage.HusbandID && marriage.Wife != null)
-                    return "To " + marriage.Wife.Name + " : " + marriage.ToString();
-                else if (this.IndividualID == marriage.WifeID && marriage.Husband != null)
-                    return "To " + marriage.Husband.Name + " : " + marriage.ToString();
-                else
-                    return "Married : " + marriage.ToString();
+                    return CheckMarriageStatus(fam);
             }
         }
 
@@ -950,12 +953,28 @@ namespace FTAnalyzer
 
         private Family Marriages(int number)
         {
-            if(number < FamiliesAsParent.Count)
+            if (number < FamiliesAsParent.Count)
             {
                 Family f = FamiliesAsParent.OrderBy(d => d.MarriageDate).ElementAt(number);
                 return f;
             }
             return null;
+        }
+
+        private string MarriageString(int number)
+        {
+            Family marriage = Marriages(number);
+            if (marriage == null)
+                return string.Empty;
+            else
+            {
+                if (this.IndividualID == marriage.HusbandID && marriage.Wife != null)
+                    return "To " + marriage.Wife.Name + " : " + marriage.ToString();
+                else if (this.IndividualID == marriage.WifeID && marriage.Husband != null)
+                    return "To " + marriage.Husband.Name + " : " + marriage.ToString();
+                else
+                    return "Married : " + marriage.ToString();
+            }
         }
     }
 }

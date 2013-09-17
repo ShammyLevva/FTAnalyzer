@@ -46,6 +46,15 @@ namespace FTAnalyzer.Forms
             DataGridViewCellStyle exactDate = new DataGridViewCellStyle();
             exactDate.BackColor = exactDate.ForeColor = Color.Green;
             styles.Add(5, exactDate);
+            DataGridViewCellStyle noSpouse = new DataGridViewCellStyle();
+            noSpouse.BackColor = noSpouse.ForeColor = Color.PeachPuff;
+            styles.Add(6, noSpouse);
+            DataGridViewCellStyle hasChildren = new DataGridViewCellStyle();
+            hasChildren.BackColor = hasChildren.ForeColor = Color.SkyBlue;
+            styles.Add(7, hasChildren);
+            DataGridViewCellStyle noMarriage = new DataGridViewCellStyle();
+            noMarriage.BackColor = noMarriage.ForeColor = Color.DarkTurquoise;
+            styles.Add(8, noMarriage);
 
             printDocument.DefaultPageSettings.Margins =
                new System.Drawing.Printing.Margins(15, 15, 15, 15);
@@ -133,6 +142,15 @@ namespace FTAnalyzer.Forms
                             break;
                         case 5: // Green
                             cell.ToolTipText = "Exact date.";
+                            break;
+                        case 6: // pale grey
+                            cell.ToolTipText = "Of marrying age but no spouse recorded";
+                            break;
+                        case 7: // medium red
+                            cell.ToolTipText = "No partner but has children";
+                            break;
+                        case 8: // not sure of colour
+                            cell.ToolTipText = "Has partner but no marriage fact";
                             break;
                     }
                 }

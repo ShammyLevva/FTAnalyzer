@@ -32,7 +32,7 @@ namespace FTAnalyzer
         public const string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSE", FAMILYSEARCH = "*IGI",
                 CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT",
-                CHANGE = "*CHNG", LOSTCOUSINS = "*LOST";
+                CHANGE = "*CHNG", LOSTCOUSINS = "*LOST", DIED_SINGLE = "*SINGLE";
 
         public static readonly ISet<string> LOOSE_DEATH_FACTS = new HashSet<string>(new string[] {
             CENSUS, RESIDENCE, WITNESS, EMIGRATION, IMMIGRATION, ARRIVAL, DEPARTURE, EDUCATION,
@@ -59,6 +59,7 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("Record Change", CHANGE);
             CUSTOM_TAGS.Add("Lost Cousins", LOSTCOUSINS);
             CUSTOM_TAGS.Add("LostCousins", LOSTCOUSINS);
+            CUSTOM_TAGS.Add("Died Single", DIED_SINGLE);
             CUSTOM_TAGS.Add("Census 1841", CENSUS);
             CUSTOM_TAGS.Add("Census 1851", CENSUS);
             CUSTOM_TAGS.Add("Census 1861", CENSUS);
@@ -169,6 +170,7 @@ namespace FTAnalyzer
                 case DEPARTURE: return "Departure";
                 case CHANGE: return "Record change";
                 case LOSTCOUSINS: return "Lost Cousins";
+                case DIED_SINGLE: return "Died Single";
                 default: return factType;
             }
         }
