@@ -21,12 +21,13 @@ namespace FTAnalyzer
         int CremBuri { get; }
         
         FactDate BirthDate { get; }
-        FactLocation BirthLocation { get; }
+        FactDate DeathDate { get; }
         string FirstMarriage { get; }
         string SecondMarriage { get; }
         string ThirdMarriage { get; }
+        FactLocation BirthLocation { get; }
+        FactLocation DeathLocation { get; }
         FactLocation BestLocation(FactDate when);
-        FactDate DeathDate { get; }
         int Ahnentafel { get; }
     }
 }
