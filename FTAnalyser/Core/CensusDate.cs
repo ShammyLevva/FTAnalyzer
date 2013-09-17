@@ -47,6 +47,7 @@ namespace FTAnalyzer
         public static readonly CensusDate CANADACENSUS1906 = new CensusDate("1906", "Canadian Census 1906", Countries.CANADA);
         public static readonly CensusDate CANADACENSUS1911 = new CensusDate("1 JUN 1911", "Canadian Census 1911", Countries.CANADA);
         public static readonly CensusDate CANADACENSUS1916 = new CensusDate("1916", "Canadian Census 1916", Countries.CANADA);
+        public static readonly CensusDate CANADACENSUS1921 = new CensusDate("1 JUN 1921", "Canadian Census 1921", Countries.CANADA);
 
         private static readonly ISet<CensusDate> UK_CENSUS = new HashSet<CensusDate>(new CensusDate[] { 
             UKCENSUS1841, UKCENSUS1851, UKCENSUS1861, UKCENSUS1871, UKCENSUS1881, UKCENSUS1891, UKCENSUS1901, UKCENSUS1911
@@ -57,7 +58,7 @@ namespace FTAnalyzer
             USCENSUS1790, USCENSUS1800, USCENSUS1810, USCENSUS1820, USCENSUS1830, USCENSUS1840, USCENSUS1850, USCENSUS1860,
             USCENSUS1870, USCENSUS1880, USCENSUS1890, USCENSUS1900, USCENSUS1910, USCENSUS1920, USCENSUS1930, USCENSUS1940,
             CANADACENSUS1851, CANADACENSUS1861, CANADACENSUS1871, CANADACENSUS1881, CANADACENSUS1891, CANADACENSUS1901,
-            CANADACENSUS1906, CANADACENSUS1911, CANADACENSUS1916, IRELANDCENSUS1911
+            CANADACENSUS1906, CANADACENSUS1911, CANADACENSUS1916, CANADACENSUS1921, IRELANDCENSUS1911
         });
 
         private static readonly ISet<CensusDate> LOSTCOUSINS_CENSUS = new HashSet<CensusDate>(new CensusDate[] { 
