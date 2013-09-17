@@ -1571,5 +1571,10 @@ namespace FTAnalyzer
             Properties.GeneralSettings.Default.ReportOptions = displayOptionsOnLoadToolStripMenuItem.Checked;
             Properties.GeneralSettings.Default.Save();
         }
+
+        private void reportAnIssueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://ftanalyzer.codeplex.com/workitem/list/basic");
+        }
     }
 }
