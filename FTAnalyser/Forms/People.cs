@@ -21,7 +21,7 @@ namespace FTAnalyzer.Forms
             People_Resize(this, null);
         }
 
-        public void setLocation(FactLocation loc, int level)
+        public void SetLocation(FactLocation loc, int level)
         {
             this.Text = "Individuals & Families with connection to " + loc.ToString();
             FamilyTree ft = FamilyTree.Instance;

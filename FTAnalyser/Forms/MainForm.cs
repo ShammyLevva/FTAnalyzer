@@ -19,7 +19,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.2.0.0-test-2";
+        private string VERSION = "2.2.0.0-test-3";
         //private bool _checkForUpdatesEnabled = false;
         //private bool _showNoUpdateMessage = false;
         //private System.Threading.Timer _timerCheckForUpdates;
@@ -309,7 +309,7 @@ namespace FTAnalyzer
             HourGlass(true);
             FactLocation loc = (FactLocation)dgCountries.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
-            frmInd.setLocation(loc, FactLocation.COUNTRY);
+            frmInd.SetLocation(loc, FactLocation.COUNTRY);
             DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
@@ -320,7 +320,7 @@ namespace FTAnalyzer
             HourGlass(true);
             FactLocation loc = dgRegions.CurrentRow == null ? new FactLocation() : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
-            frmInd.setLocation(loc, FactLocation.REGION);
+            frmInd.SetLocation(loc, FactLocation.REGION);
             DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
@@ -331,7 +331,7 @@ namespace FTAnalyzer
             HourGlass(true);
             FactLocation loc = (FactLocation)dgSubRegions.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
-            frmInd.setLocation(loc, FactLocation.PARISH);
+            frmInd.SetLocation(loc, FactLocation.PARISH);
             DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
@@ -342,7 +342,7 @@ namespace FTAnalyzer
             HourGlass(true);
             FactLocation loc = (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
-            frmInd.setLocation(loc, FactLocation.ADDRESS);
+            frmInd.SetLocation(loc, FactLocation.ADDRESS);
             DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
@@ -353,7 +353,7 @@ namespace FTAnalyzer
             HourGlass(true);
             FactLocation loc = (FactLocation)dgPlaces.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
-            frmInd.setLocation(loc, FactLocation.PLACE);
+            frmInd.SetLocation(loc, FactLocation.PLACE);
             DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
@@ -1106,6 +1106,11 @@ namespace FTAnalyzer
             loc = null;
             switch (tabCtrlLocations.SelectedTab.Text)
             {
+                case "Tree View":
+                    TreeNode node = treeViewLocations.SelectedNode;
+                    loc = node.Text == "<blank>" ? null : ((FactLocation)node.Tag).GetLocation(node.Level);
+                    locType = node.Level;
+                    break;
                 case "Countries":
                     loc = dgCountries.CurrentRow == null ? null : (FactLocation)dgCountries.CurrentRow.DataBoundItem;
                     locType = FactLocation.COUNTRY;
@@ -1124,7 +1129,12 @@ namespace FTAnalyzer
                     break;
             }
             if (loc == null)
-                MessageBox.Show("Please select a location to show on the map.");
+            {
+                if (tabCtrlLocations.SelectedTab.Text == "Tree View")
+                    MessageBox.Show("Location selected isn't valid to show on the map.");
+                else
+                    MessageBox.Show("Please select a location to show on the map.");
+            }
             return locType;
         }
 
@@ -1444,7 +1454,7 @@ namespace FTAnalyzer
             if (location != null)
             {
                 Forms.People frmInd = new Forms.People();
-                frmInd.setLocation(location, e.Node.Level);
+                frmInd.SetLocation(location, e.Node.Level);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
             }
