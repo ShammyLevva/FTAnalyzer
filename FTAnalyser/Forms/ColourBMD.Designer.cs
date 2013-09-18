@@ -64,7 +64,6 @@
             this.dgReportSheet.MultiSelect = false;
             this.dgReportSheet.Name = "dgReportSheet";
             this.dgReportSheet.ReadOnly = true;
-            this.dgReportSheet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgReportSheet.Size = new System.Drawing.Size(1038, 530);
             this.dgReportSheet.TabIndex = 1;
             this.dgReportSheet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportSheet_CellDoubleClick);
@@ -210,7 +209,7 @@
             "Some Missing (Some Red)",
             "Some Found (Some Green)",
             "Some Wide Date Range (Orange)",
-            "SomeNarrow Date Range (Yellow)"});
+            "Some Narrow Date Range (Yellow)"});
             this.cbFilter.Name = "cbFilter";
             this.cbFilter.Size = new System.Drawing.Size(185, 25);
             this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.cbFilter_SelectedIndexChanged);

@@ -244,7 +244,7 @@ namespace FTAnalyzer.Forms
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(1, true));
                     break;
                 case 2: // All Found (All Green)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(4, true));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(5, true));
                     break;
                 case 3: // All Wide date ranges (Orange)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(2, true));
@@ -256,7 +256,7 @@ namespace FTAnalyzer.Forms
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(1, false));
                     break;
                 case 6: // Some found (Some Green)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(4, false));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(5, false));
                     break;
                 case 7: // All Wide date ranges (Orange)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(2, false));
