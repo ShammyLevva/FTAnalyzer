@@ -169,7 +169,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkTolerateInaccurateCensus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 95</value>
+    <value>3, 72</value>
   </data>
   <data name="chkTolerateInaccurateCensus.Size" type="System.Drawing.Size, System.Drawing">
     <value>231, 17</value>
@@ -191,36 +191,6 @@
   </data>
   <data name="&gt;&gt;chkTolerateInaccurateCensus.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="chkStrictResidenceYears.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="chkStrictResidenceYears.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="chkStrictResidenceYears.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 72</value>
-  </data>
-  <data name="chkStrictResidenceYears.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 17</value>
-  </data>
-  <data name="chkStrictResidenceYears.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="chkStrictResidenceYears.Text" xml:space="preserve">
-    <value>Require Residence years to match Census years</value>
-  </data>
-  <data name="&gt;&gt;chkStrictResidenceYears.Name" xml:space="preserve">
-    <value>chkStrictResidenceYears</value>
-  </data>
-  <data name="&gt;&gt;chkStrictResidenceYears.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chkStrictResidenceYears.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;chkStrictResidenceYears.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="chkCensusResidence.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -247,7 +217,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkCensusResidence.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="chkAllowEmptyLocations.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -277,7 +247,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkAllowEmptyLocations.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="chkUseBaptisms.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -304,7 +274,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkUseBaptisms.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>312, 377</value>

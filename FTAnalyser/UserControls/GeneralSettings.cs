@@ -19,7 +19,6 @@ namespace FTAnalyzer.UserControls
             chkUseBaptisms.Checked = Properties.GeneralSettings.Default.UseBaptismDates;
             chkAllowEmptyLocations.Checked = Properties.GeneralSettings.Default.AllowEmptyLocations;
             chkCensusResidence.Checked = Properties.GeneralSettings.Default.UseResidenceAsCensus;
-            chkStrictResidenceYears.Checked = Properties.GeneralSettings.Default.StrictResidenceDates;
             chkTolerateInaccurateCensus.Checked = Properties.GeneralSettings.Default.TolerateInaccurateCensusDate;
             // Strict residence years means any residence fact which is not a census year is treated as a fact error
         }
@@ -31,13 +30,11 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.UseBaptismDates = chkUseBaptisms.Checked;
             Properties.GeneralSettings.Default.AllowEmptyLocations = chkAllowEmptyLocations.Checked;
             Properties.GeneralSettings.Default.UseResidenceAsCensus = chkCensusResidence.Checked;
-            Properties.GeneralSettings.Default.StrictResidenceDates = chkStrictResidenceYears.Checked;
             Properties.GeneralSettings.Default.TolerateInaccurateCensusDate = chkTolerateInaccurateCensus.Checked;
             Properties.GeneralSettings.Default.Save();
             OnUseBaptismDatesChanged();
             OnAllowEmptyLocationsChanged();
             OnUseResidenceAsCensusChanged();
-            OnStrictResidenceDatesChanged();
             OnTolerateInaccurateCensusChanged();
 		}
 
@@ -111,13 +108,6 @@ namespace FTAnalyzer.UserControls
         {
             if (UseResidenceAsCensusChanged != null)
                 UseResidenceAsCensusChanged(null, EventArgs.Empty);
-        }
-
-        public static event EventHandler StrictResidenceDatesChanged;
-        protected static void OnStrictResidenceDatesChanged()
-        {
-            if (StrictResidenceDatesChanged != null)
-                StrictResidenceDatesChanged(null, EventArgs.Empty);
         }
 
         public static event EventHandler TolerateInaccurateCensusChanged;

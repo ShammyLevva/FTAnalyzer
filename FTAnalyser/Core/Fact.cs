@@ -337,7 +337,7 @@ namespace FTAnalyzer
 
         private void CheckCensusDate(string tag)
         {
-            FactDate dateFromFile = FactDate;
+            FactDate yearAdjusted = FactDate;
             // check if census fails to overlaps a census date
             if ((tag == "Census 1841" && !FactDate.Overlaps(CensusDate.UKCENSUS1841)) ||
                 (tag == "Census 1851" && !FactDate.Overlaps(CensusDate.UKCENSUS1851)) ||
@@ -356,59 +356,67 @@ namespace FTAnalyzer
                 int result = 0;
                 if (Int32.TryParse(year, out result))
                 {
-                    FactDate fd = new FactDate(year);
+                    yearAdjusted = new FactDate(year);
                     if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
                     {
-                        FactDate = fd;
-                        this.FactErrorMessage = "Warning: Inaccurate Census date '" + dateFromFile + "' treated as '" + fd + "'";
+                        this.FactErrorMessage = "Warning: Inaccurate Census date '" + FactDate + "' treated as '" + yearAdjusted + "'";
                         this.FactErrorLevel = Fact.FactError.WARNINGALLOW;
                     }
                     else
                     {
                         this.FactErrorLevel = Fact.FactError.WARNINGIGNORE;
-                        this.FactErrorMessage = "Warning: Inaccurate Census date '" + dateFromFile + "' fact ignored in strict mode. Check for incorrect date entered or try Tolerate slightly inaccurate census date option.";
-                        return; // we've got a error ignore warning set so we don't need to check if an error
+                        this.FactErrorMessage = "Inaccurate Census date '" + FactDate + "' fact ignored in strict mode. Check for incorrect date entered or try Tolerate slightly inaccurate census date option.";
                     }
                 }
             }
-            if ((tag == "Census 1841" && !FactDate.Overlaps(CensusDate.UKCENSUS1841)) ||
-                (tag == "Census 1851" && !FactDate.Overlaps(CensusDate.UKCENSUS1851)) ||
-                (tag == "Census 1861" && !FactDate.Overlaps(CensusDate.UKCENSUS1861)) ||
-                (tag == "Census 1871" && !FactDate.Overlaps(CensusDate.UKCENSUS1871)) ||
-                (tag == "Census 1881" && !FactDate.Overlaps(CensusDate.UKCENSUS1881)) ||
-                (tag == "Census 1891" && !FactDate.Overlaps(CensusDate.UKCENSUS1891)) ||
-                (tag == "Census 1901" && !FactDate.Overlaps(CensusDate.UKCENSUS1901)) ||
-                (tag == "Census 1911" && !FactDate.Overlaps(CensusDate.UKCENSUS1911)))
+            if ((tag == "Census 1841" && !yearAdjusted.Overlaps(CensusDate.UKCENSUS1841)) ||
+                (tag == "Census 1851" && !yearAdjusted.Overlaps(CensusDate.UKCENSUS1851)) ||
+                (tag == "Census 1861" && !yearAdjusted.Overlaps(CensusDate.UKCENSUS1861)) ||
+                (tag == "Census 1871" && !yearAdjusted.Overlaps(CensusDate.UKCENSUS1871)) ||
+                (tag == "Census 1881" && !yearAdjusted.Overlaps(CensusDate.UKCENSUS1881)) ||
+                (tag == "Census 1891" && !yearAdjusted.Overlaps(CensusDate.UKCENSUS1891)) ||
+                (tag == "Census 1901" && !yearAdjusted.Overlaps(CensusDate.UKCENSUS1901)) ||
+                (tag == "Census 1911" && !yearAdjusted.Overlaps(CensusDate.UKCENSUS1911)))
             {
-                this.FactErrorMessage = "UK Census fact error date '" + dateFromFile + "' doesn't match '" + tag + "' tag. Check for incorrect date entered.";
-                this.FactErrorLevel = Fact.FactError.ERROR;
+                this.FactErrorMessage = "UK Census fact error date '" + FactDate + "' doesn't match '" + tag + "' tag. Check for incorrect date entered.";
+                this.FactErrorLevel = FactError.ERROR;
+                return;
+            }
+            if (!CensusDate.IsCensusYear(yearAdjusted, false))
+            {
+                this.FactErrorMessage = "Census fact error date '" + FactDate + "' isn't a supported census date. Check for incorrect date entered or try Tolerate slightly inaccurate census date option.";
+                this.FactErrorLevel = FactError.ERROR;
+                return;
+            }
+            TimeSpan ts = FactDate.EndDate - FactDate.StartDate;
+            if (ts.Days > 3650)
+            {
+                this.FactErrorLevel = FactError.ERROR;
+                this.FactErrorMessage = "Date covers more than one census.";
+                return;
             }
             if (tag == "Census")
             {
-                if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && FactDate.IsKnown() && !CensusDate.IsCensusYear(FactDate, true))
+                if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && yearAdjusted.IsKnown() && !CensusDate.IsCensusYear(yearAdjusted, true))
                 {
-                    this.FactErrorMessage = "Warning : Census fact error date '" + dateFromFile + "' overlaps census date but is vague. Check for incorrect date entered.";
-                    this.FactErrorLevel = Fact.FactError.WARNINGALLOW;
+                    this.FactErrorMessage = "Warning : Census fact error date '" + FactDate + "' overlaps census date but is vague. Check for incorrect date entered.";
+                    this.FactErrorLevel = FactError.WARNINGALLOW;
                 }
-                if (!CensusDate.IsCensusYear(FactDate, false))
-                {
-                    this.FactErrorMessage = "Census fact error date '" + dateFromFile + "' isn't a supported census date. Check for incorrect date entered or try Tolerate slightly inaccurate census date option.";
-                    this.FactErrorLevel = Fact.FactError.ERROR;
-                }
-
             }
             if (tag == "Lost Cousins" || tag == "LostCousins")
             {
-                if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && FactDate.IsKnown() && !CensusDate.IsLostCousinsCensusYear(FactDate, true))
+                if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && yearAdjusted.IsKnown() && !CensusDate.IsLostCousinsCensusYear(yearAdjusted, true))
                 {
-                    this.FactErrorMessage = "Lost Cousins fact error date '" + dateFromFile + "' overlaps Lost Cousins census year but is vague. Check for incorrect date entered.";
+                    this.FactErrorMessage = "Lost Cousins fact error date '" + FactDate + "' overlaps Lost Cousins census year but is vague. Check for incorrect date entered.";
                     this.FactErrorLevel = Fact.FactError.WARNINGALLOW;
                 }
-                if (!CensusDate.IsLostCousinsCensusYear(FactDate, false))
+                if (!CensusDate.IsLostCousinsCensusYear(yearAdjusted, false))
                 {
-                    this.FactErrorMessage = "Lost Cousins fact error date '" + dateFromFile + "' isn't a supported Lost Cousins census year. Check for incorrect date entered or try Tolerate slightly inaccurate census date option.";
+                    this.FactErrorMessage = "Lost Cousins fact error date '" + FactDate + "' isn't a supported Lost Cousins census year. Check for incorrect date entered or try Tolerate slightly inaccurate census date option.";
                     this.FactErrorLevel = Fact.FactError.ERROR;
                 }
+                if (!FactDate.Equals(yearAdjusted))
+                    FactDate = yearAdjusted;
             }
         }
 

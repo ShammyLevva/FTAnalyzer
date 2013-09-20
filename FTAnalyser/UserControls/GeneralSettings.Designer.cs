@@ -34,7 +34,6 @@
             this.chkUseBaptisms = new System.Windows.Forms.CheckBox();
             this.chkAllowEmptyLocations = new System.Windows.Forms.CheckBox();
             this.chkCensusResidence = new System.Windows.Forms.CheckBox();
-            this.chkStrictResidenceYears = new System.Windows.Forms.CheckBox();
             this.chkTolerateInaccurateCensus = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -65,12 +64,6 @@
             this.chkCensusResidence.Name = "chkCensusResidence";
             this.chkCensusResidence.UseVisualStyleBackColor = true;
             // 
-            // chkStrictResidenceYears
-            // 
-            resources.ApplyResources(this.chkStrictResidenceYears, "chkStrictResidenceYears");
-            this.chkStrictResidenceYears.Name = "chkStrictResidenceYears";
-            this.chkStrictResidenceYears.UseVisualStyleBackColor = true;
-            // 
             // chkTolerateInaccurateCensus
             // 
             resources.ApplyResources(this.chkTolerateInaccurateCensus, "chkTolerateInaccurateCensus");
@@ -91,7 +84,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chkTolerateInaccurateCensus);
-            this.Controls.Add(this.chkStrictResidenceYears);
             this.Controls.Add(this.chkCensusResidence);
             this.Controls.Add(this.chkAllowEmptyLocations);
             this.Controls.Add(this.chkUseBaptisms);
@@ -108,7 +100,6 @@
         private System.Windows.Forms.CheckBox chkUseBaptisms;
         private System.Windows.Forms.CheckBox chkAllowEmptyLocations;
         private System.Windows.Forms.CheckBox chkCensusResidence;
-        private System.Windows.Forms.CheckBox chkStrictResidenceYears;
         private System.Windows.Forms.CheckBox chkTolerateInaccurateCensus;
         private System.Windows.Forms.Label label1;
 

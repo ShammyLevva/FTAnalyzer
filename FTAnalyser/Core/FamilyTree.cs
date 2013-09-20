@@ -211,7 +211,6 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("\n    Use Baptism/Christening date if no birth date : " +  Properties.GeneralSettings.Default.UseBaptismDates);
                 xmlErrorbox.AppendText("\n    Allow Empty values in Locations : " + Properties.GeneralSettings.Default.AllowEmptyLocations);
                 xmlErrorbox.AppendText("\n    Treat 'Residence' facts as Census facts : " + Properties.GeneralSettings.Default.UseResidenceAsCensus);
-                xmlErrorbox.AppendText("\n    Require Residence years to match Census years : " + Properties.GeneralSettings.Default.StrictResidenceDates);
                 xmlErrorbox.AppendText("\n    Tolerate slightly inaccurate census dates : " + Properties.GeneralSettings.Default.TolerateInaccurateCensusDate);
                 xmlErrorbox.AppendText("\n\n");
             }
@@ -259,7 +258,7 @@ namespace FTAnalyzer
             if (censusWarnAllow > 0)
                 xmlErrorbox.AppendText(censusWarnAllow + " warnings (data tolerated), ");
             if (censusWarnIgnore > 0)
-                xmlErrorbox.AppendText(censusWarnIgnore + " warnings (data ignored), ");
+                xmlErrorbox.AppendText(censusWarnIgnore + " warnings (data ignored in strict mode), ");
             if (censusErrors > 0)
                 xmlErrorbox.AppendText(censusErrors + " errors (data discarded), ");
             xmlErrorbox.AppendText((censusFacts + censusWarnAllow) + " usable facts loaded)");
@@ -268,7 +267,7 @@ namespace FTAnalyzer
             if (resiWarnAllow > 0)
                 xmlErrorbox.AppendText(resiWarnAllow + " warnings (data tolerated),");
             if (resiWarnIgnore > 0)
-                xmlErrorbox.AppendText(resiWarnIgnore + " warnings (data ignored),");
+                xmlErrorbox.AppendText(resiWarnIgnore + " warnings (data ignored in strict mode),");
             if (resiErrors > 0)
                 xmlErrorbox.AppendText(resiErrors + " errors (data discarded), ");
             xmlErrorbox.AppendText((resiFacts + resiWarnAllow) + " usable facts loaded)");
@@ -277,7 +276,7 @@ namespace FTAnalyzer
             if (lostCousinsWarnAllow > 0)
                 xmlErrorbox.AppendText(lostCousinsWarnAllow + " warnings (data tolerated), ");
             if (lostCousinsWarnIgnore > 0)
-                xmlErrorbox.AppendText(lostCousinsWarnIgnore + " warnings (data ignored), ");
+                xmlErrorbox.AppendText(lostCousinsWarnIgnore + " warnings (data ignored in strict mode), ");
             if (lostCousinsErrors > 0)
                 xmlErrorbox.AppendText(lostCousinsErrors + " errors (data discarded), ");
             xmlErrorbox.AppendText((lostCousinsFacts + lostCousinsWarnAllow) + " usable facts loaded)\n");
@@ -1037,7 +1036,44 @@ namespace FTAnalyzer
                     }
                     foreach (Fact f in ind.ErrorFacts)
                     {
-                        errors[(int)dataerror.FACT_ERROR].Add(new DataError((int)dataerror.FACT_ERROR, f.FactErrorLevel, ind, f.FactErrorMessage));
+                        bool added = false;
+                        if (f.FactType == Fact.LOSTCOUSINS)
+                        {
+                            if (!CensusDate.IsCensusYear(f.FactDate, false))
+                            {
+                                errors[(int)dataerror.LOST_COUSINS_NON_CENSUS].Add(
+                                    new DataError((int)dataerror.LOST_COUSINS_NON_CENSUS, ind, "Lost Cousins event for " + f.FactDate + " which isn't a census year"));
+                                added = true;
+                            }
+                            else if (!CensusDate.IsLostCousinsCensusYear(f.FactDate, false))
+                            {
+                                errors[(int)dataerror.LOST_COUSINS_NOT_SUPPORTED_YEAR].Add(
+                                    new DataError((int)dataerror.LOST_COUSINS_NOT_SUPPORTED_YEAR, ind, "Lost Cousins event for " + f.FactDate + " which isn't a Lost Cousins census year"));
+                                added = true;
+                            }
+                        }
+                        else if (f.IsCensusFact)
+                        {
+                            string comment = f.FactType == Fact.CENSUS ? "Census date " : "Residence date ";
+                            if (!f.FactDate.IsKnown())
+                            {
+                                errors[(int)dataerror.CENSUS_COVERAGE].Add(
+                                        new DataError((int)dataerror.CENSUS_COVERAGE, ind, comment + "is blank."));
+                                added = true;
+                            }
+                            else
+                            {
+                                TimeSpan ts = f.FactDate.EndDate - f.FactDate.StartDate;
+                                if (ts.Days > 3650)
+                                {
+                                    errors[(int)dataerror.CENSUS_COVERAGE].Add(
+                                        new DataError((int)dataerror.CENSUS_COVERAGE, ind, comment + f.FactDate + " covers more than one census event."));
+                                    added = true;
+                                }
+                            }
+                        }
+                        if(!added)
+                            errors[(int)dataerror.FACT_ERROR].Add(new DataError((int)dataerror.FACT_ERROR, f.FactErrorLevel, ind, f.FactErrorMessage));
                     }
                     foreach (Fact f in ind.AllFacts)
                     {
@@ -1064,37 +1100,6 @@ namespace FTAnalyzer
                             errors[(int)dataerror.FACTS_AFTER_DEATH].Add(
                                 new DataError((int)dataerror.FACTS_AFTER_DEATH, ind, Fact.GetFactTypeDescription(f.FactType) + " fact recorded: " +
                                             f.FactDate + " after individual died"));
-                        }
-                        if (f.FactType == Fact.LOSTCOUSINS)
-                        {
-                            if (!CensusDate.IsCensusYear(f.FactDate, false))
-                            {
-                                errors[(int)dataerror.LOST_COUSINS_NON_CENSUS].Add(
-                                    new DataError((int)dataerror.LOST_COUSINS_NON_CENSUS, ind, "Lost Cousins event for " + f.FactDate + " which isn't a census year"));
-                            }
-                            else if (!CensusDate.IsLostCousinsCensusYear(f.FactDate, false))
-                            {
-                                errors[(int)dataerror.LOST_COUSINS_NOT_SUPPORTED_YEAR].Add(
-                                    new DataError((int)dataerror.LOST_COUSINS_NOT_SUPPORTED_YEAR, ind, "Lost Cousins event for " + f.FactDate + " which isn't a Lost Cousins census year"));
-                            }
-                        }
-                        if (f.FactType == Fact.CENSUS ||
-                           (f.FactType == Fact.RESIDENCE &&
-                                Properties.GeneralSettings.Default.UseResidenceAsCensus && Properties.GeneralSettings.Default.StrictResidenceDates))
-                        {
-                            string comment = f.FactType == Fact.CENSUS ? "Census date " : "Residence date ";
-                            if (!f.FactDate.IsKnown())
-                            {
-                                errors[(int)dataerror.CENSUS_COVERAGE].Add(
-                                        new DataError((int)dataerror.CENSUS_COVERAGE, ind, comment + "is blank."));
-                            }
-                            else
-                            {
-                                TimeSpan ts = f.FactDate.EndDate - f.FactDate.StartDate;
-                                if (ts.Days > 3650)
-                                    errors[(int)dataerror.CENSUS_COVERAGE].Add(
-                                        new DataError((int)dataerror.CENSUS_COVERAGE, ind, comment + f.FactDate + " covers more than one census event."));
-                            }
                         }
                     }
                     foreach (Family asChild in ind.FamiliesAsChild)

@@ -74,18 +74,6 @@ namespace FTAnalyzer.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool StrictResidenceDates {
-            get {
-                return ((bool)(this["StrictResidenceDates"]));
-            }
-            set {
-                this["StrictResidenceDates"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool TolerateInaccurateCensusDate {
             get {
                 return ((bool)(this["TolerateInaccurateCensusDate"]));
