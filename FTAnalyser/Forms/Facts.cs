@@ -28,6 +28,8 @@ namespace FTAnalyzer.Forms
             this.facts = new SortableBindingList<IDisplayFact>();
             foreach (Fact f in individual.AllFacts)
                 facts.Add(new DisplayFact(individual, individual.Name, f));
+            foreach (Fact f in individual.ErrorFacts)
+                facts.Add(new DisplayFact(individual, individual.Name, f)); 
             this.Text = "Facts Report for " + individual.Name;
             SetupFacts();
         }
@@ -111,6 +113,20 @@ namespace FTAnalyzer.Forms
         private void Facts_TextChanged(object sender, EventArgs e)
         {
             printProvider.Drawer.TitlePrintBlock = new TitlePrintBlock(this.Text);
+        }
+
+        private void dgFacts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            
+        }
+
+        private void dgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex == 0)
+            {
+                DisplayFact f = dgFacts.Rows[e.RowIndex].DataBoundItem as DisplayFact;
+                e.ToolTipText = f.Fact.FactErrorMessage;
+            }
         }
     }
 }

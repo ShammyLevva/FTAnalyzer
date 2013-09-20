@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 namespace FTAnalyzer
 {
     public class DisplayFact : IDisplayFact
     {
-        
+        public Image Icon { get; private set; }
         public string Name { get; private set; }
         private Individual Ind { get; set; }
-        private Fact Fact { get; set; }
-
+        public Fact Fact { get; set; }
+        
         public DisplayFact(Individual ind, string name, Fact fact)
         {
             this.Ind = ind;
             this.Name = name;
             this.Fact = fact;
+            this.Icon = DataErrorGroup.ErrorIcon(fact.FactErrorLevel);
         }
 
         public string TypeOfFact { get { return Fact.GetFactTypeDescription(Fact.FactType); } }

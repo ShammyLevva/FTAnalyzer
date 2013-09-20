@@ -152,6 +152,8 @@
             this.dgFacts.ShowEditingIcon = false;
             this.dgFacts.Size = new System.Drawing.Size(857, 337);
             this.dgFacts.TabIndex = 2;
+            this.dgFacts.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgFacts_CellFormatting);
+            this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgFacts_CellToolTipTextNeeded);
             // 
             // statusStrip
             // 
