@@ -227,13 +227,11 @@ namespace FTAnalyzer
             int resiFacts = 0;
             int lostCousinsFacts = 0;
             int censusWarnAllow = 0;
-            int resiWarnAllow = 0;
+            int resiCensus = 0;
             int lostCousinsWarnAllow = 0;
             int censusWarnIgnore = 0;
-            int resiWarnIgnore = 0;
             int lostCousinsWarnIgnore = 0;
             int censusErrors = 0;
-            int resiErrors = 0;
             int lostCousinsErrors = 0;
             foreach (Individual ind in individuals)
             {
@@ -242,16 +240,14 @@ namespace FTAnalyzer
                 censusWarnIgnore += ind.ErrorFactCount(Fact.CENSUS, Fact.FactError.WARNINGIGNORE);
                 censusErrors += ind.ErrorFactCount(Fact.CENSUS, Fact.FactError.ERROR);
                 resiFacts += ind.FactCount(Fact.RESIDENCE);
-                resiWarnAllow += ind.ErrorFactCount(Fact.RESIDENCE, Fact.FactError.WARNINGALLOW);
-                resiWarnIgnore += ind.ErrorFactCount(Fact.RESIDENCE, Fact.FactError.WARNINGIGNORE);
-                resiErrors += ind.ErrorFactCount(Fact.RESIDENCE, Fact.FactError.ERROR);
+                resiCensus += ind.ResidenceCensusFactCount;
                 lostCousinsFacts += ind.FactCount(Fact.LOSTCOUSINS);
                 lostCousinsWarnAllow += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNINGALLOW);
                 lostCousinsWarnIgnore += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNINGIGNORE);
                 lostCousinsErrors += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.ERROR);
             }
             int censusTotal = censusFacts + censusWarnAllow + censusWarnIgnore + censusErrors;
-            int resiTotal = resiFacts + resiWarnAllow + resiWarnIgnore + resiErrors;
+            int resiTotal = resiFacts;
             int lostCousinsTotal = lostCousinsFacts + lostCousinsWarnAllow + lostCousinsWarnIgnore + lostCousinsErrors;
 
             xmlErrorbox.AppendText("\nFound " + censusTotal + " census facts in GEDCOM File (" + censusFacts + " good, ");
@@ -263,15 +259,8 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText(censusErrors + " errors (data discarded), ");
             xmlErrorbox.AppendText((censusFacts + censusWarnAllow) + " usable facts loaded)");
 
-            xmlErrorbox.AppendText("\nFound " + resiTotal + " residence facts in GEDCOM File (" + resiFacts + " good, ");
-            if (resiWarnAllow > 0)
-                xmlErrorbox.AppendText(resiWarnAllow + " warnings (data tolerated),");
-            if (resiWarnIgnore > 0)
-                xmlErrorbox.AppendText(resiWarnIgnore + " warnings (data ignored in strict mode),");
-            if (resiErrors > 0)
-                xmlErrorbox.AppendText(resiErrors + " errors (data discarded), ");
-            xmlErrorbox.AppendText((resiFacts + resiWarnAllow) + " usable facts loaded)");
-
+            xmlErrorbox.AppendText("\nFound " + resiTotal + " residence facts in GEDCOM File (" + resiCensus + " treated as Census facts)");
+            
             xmlErrorbox.AppendText("\nFound " + lostCousinsTotal + " Lost Cousins facts in GEDCOM File (" + lostCousinsFacts + " good, ");
             if (lostCousinsWarnAllow > 0)
                 xmlErrorbox.AppendText(lostCousinsWarnAllow + " warnings (data tolerated), ");
@@ -280,9 +269,9 @@ namespace FTAnalyzer
             if (lostCousinsErrors > 0)
                 xmlErrorbox.AppendText(lostCousinsErrors + " errors (data discarded), ");
             xmlErrorbox.AppendText((lostCousinsFacts + lostCousinsWarnAllow) + " usable facts loaded)\n");
-            if (censusFacts == 0 && resiFacts == 0 && censusWarnAllow == 0 && resiWarnAllow == 0)
+            if (censusFacts == 0 && resiCensus == 0 && censusWarnAllow == 0)
             {
-                xmlErrorbox.AppendText("\nFound no census or residence facts in GEDCOM File.\n");
+                xmlErrorbox.AppendText("\nFound no census or suitable residence facts in GEDCOM File.\n");
                 xmlErrorbox.AppendText("This is probably because you have recorded census facts as notes\n");
                 xmlErrorbox.AppendText("This will mean that the census report will show everyone as not yet found on census\n");
                 xmlErrorbox.AppendText("and the Lost Cousins report will report no-one with a census needing to be entered\n");

@@ -446,24 +446,17 @@ namespace FTAnalyzer
 
         public int FactCount(string factType)
         {
-            int factCount = 0;
-            foreach (Fact f in facts)
-            {
-                if (f.FactType == factType && f.FactErrorLevel == Fact.FactError.GOOD)
-                    factCount++;
-            }
-            return factCount;
+            return facts.Count(f => f.FactType == factType && f.FactErrorLevel == Fact.FactError.GOOD);
+        }
+
+        public int ResidenceCensusFactCount
+        {
+            get { return facts.Count(f => f.FactType == Fact.RESIDENCE && f.IsCensusFact); }
         }
 
         public int ErrorFactCount(string factType, Fact.FactError errorLevel)
         {
-            int factCount = 0;
-            foreach (Fact f in errorFacts)
-            {
-                if (f.FactType == factType && f.FactErrorLevel == errorLevel)
-                    factCount++;
-            }
-            return factCount;
+            return errorFacts.Count(f => f.FactType == factType && f.FactErrorLevel == errorLevel);
         }
 
         public string MarriageDates
@@ -520,10 +513,7 @@ namespace FTAnalyzer
             {
                 if (f.FactDate.IsKnown())
                 {
-                    if (f.FactType == Fact.CENSUS && f.FactDate.Overlaps(when))
-                        return true;
-                    if (Properties.GeneralSettings.Default.UseResidenceAsCensus &&
-                            f.FactType == Fact.RESIDENCE && f.FactDate.Overlaps(when))
+                    if (f.IsCensusFact && f.FactDate.Overlaps(when))
                         return true;
                 }
             }
