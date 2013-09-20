@@ -29,7 +29,7 @@ namespace FTAnalyzer
                       "Lost Cousins tag in non Census Year", 
                       "Lost Cousins tag in non supported Year",
                       "Census date range too wide/Unknown",
-                      "Fact error detected"
+                      "Fact warning/error detected"
                     };
 
         //"Later marriage before previous spouse died"

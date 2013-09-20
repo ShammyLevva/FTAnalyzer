@@ -224,6 +224,10 @@ namespace FTAnalyzer
                     {
                         CheckCensusDate("Census");
                     }
+                    else if (FactType.Equals(RESIDENCE) && Properties.GeneralSettings.Default.UseResidenceAsCensus)
+                    {
+                        CheckResidenceCensusDate();
+                    }
                     SetCommentAndLocation(FactType, FamilyTree.GetText(node), FamilyTree.GetText(node, "PLAC"),
                         FamilyTree.GetText(node, "PLAC/MAP/LATI"), FamilyTree.GetText(node, "PLAC/MAP/LONG"));
 
@@ -335,6 +339,18 @@ namespace FTAnalyzer
             return tag;
         }
 
+        private void CheckResidenceCensusDate()
+        {
+            if (FactDate.IsKnown() && CensusDate.IsCensusYear(FactDate, true) && !CensusDate.IsCensusYear(FactDate, false))
+            {
+                // residence isn't a normal census year but it is a census year if tolerate is on
+                this.FactErrorLevel = Fact.FactError.WARNINGALLOW;
+                this.FactErrorMessage = "Warning : Residence date " + FactDate + " is in a census year but doesn't overlap census date.";
+                if (!Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
+                    this.FactErrorMessage += " This would be accepted as a census fact with Tolerate slightly inaccurate census dates option.";
+            }
+        }
+
         private void CheckCensusDate(string tag)
         {
             FactDate yearAdjusted = FactDate;
@@ -348,7 +364,7 @@ namespace FTAnalyzer
                 (tag == "Census 1901" && !FactDate.Overlaps(CensusDate.UKCENSUS1901)) ||
                 (tag == "Census 1911" && !FactDate.Overlaps(CensusDate.UKCENSUS1911)) ||
                 (tag == "Census" && !CensusDate.IsCensusYear(FactDate, false)) ||
-                ((tag == "Lost Cousins" || tag == "LostCousins") && !CensusDate.IsLostCousinsCensusYear(FactDate, false)) 
+                ((tag == "Lost Cousins" || tag == "LostCousins") && !CensusDate.IsLostCousinsCensusYear(FactDate, false))
                 && FactDate.DateString.Length >= 4)
             {
                 // if not a census overlay then set date to year and try that instead
@@ -382,18 +398,21 @@ namespace FTAnalyzer
                 this.FactErrorLevel = FactError.ERROR;
                 return;
             }
-            if (!CensusDate.IsCensusYear(yearAdjusted, false))
+            if (tag == "Census" || tag == "LostCousins" || tag == "Lost Cousins")
             {
-                this.FactErrorMessage = "Census fact error date '" + FactDate + "' isn't a supported census date. Check for incorrect date entered or try Tolerate slightly inaccurate census date option.";
-                this.FactErrorLevel = FactError.ERROR;
-                return;
-            }
-            TimeSpan ts = FactDate.EndDate - FactDate.StartDate;
-            if (ts.Days > 3650)
-            {
-                this.FactErrorLevel = FactError.ERROR;
-                this.FactErrorMessage = "Date covers more than one census.";
-                return;
+                if (!CensusDate.IsCensusYear(yearAdjusted, false))
+                {
+                    this.FactErrorMessage = "Census fact error date '" + FactDate + "' isn't a supported census date. Check for incorrect date entered or try Tolerate slightly inaccurate census date option.";
+                    this.FactErrorLevel = FactError.ERROR;
+                    return;
+                }
+                TimeSpan ts = FactDate.EndDate - FactDate.StartDate;
+                if (ts.Days > 3650)
+                {
+                    this.FactErrorLevel = FactError.ERROR;
+                    this.FactErrorMessage = "Date covers more than one census.";
+                    return;
+                }
             }
             if (tag == "Census")
             {

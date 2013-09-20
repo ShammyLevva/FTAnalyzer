@@ -228,6 +228,7 @@ namespace FTAnalyzer
             int lostCousinsFacts = 0;
             int censusWarnAllow = 0;
             int resiCensus = 0;
+            int resiWarnAllow = 0;
             int lostCousinsWarnAllow = 0;
             int censusWarnIgnore = 0;
             int lostCousinsWarnIgnore = 0;
@@ -240,6 +241,7 @@ namespace FTAnalyzer
                 censusWarnIgnore += ind.ErrorFactCount(Fact.CENSUS, Fact.FactError.WARNINGIGNORE);
                 censusErrors += ind.ErrorFactCount(Fact.CENSUS, Fact.FactError.ERROR);
                 resiFacts += ind.FactCount(Fact.RESIDENCE);
+                resiWarnAllow += ind.ErrorFactCount(Fact.RESIDENCE, Fact.FactError.WARNINGALLOW);
                 resiCensus += ind.ResidenceCensusFactCount;
                 lostCousinsFacts += ind.FactCount(Fact.LOSTCOUSINS);
                 lostCousinsWarnAllow += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNINGALLOW);
@@ -247,7 +249,7 @@ namespace FTAnalyzer
                 lostCousinsErrors += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.ERROR);
             }
             int censusTotal = censusFacts + censusWarnAllow + censusWarnIgnore + censusErrors;
-            int resiTotal = resiFacts;
+            int resiTotal = resiFacts + resiWarnAllow;
             int lostCousinsTotal = lostCousinsFacts + lostCousinsWarnAllow + lostCousinsWarnIgnore + lostCousinsErrors;
 
             xmlErrorbox.AppendText("\nFound " + censusTotal + " census facts in GEDCOM File (" + censusFacts + " good, ");
@@ -259,7 +261,14 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText(censusErrors + " errors (data discarded), ");
             xmlErrorbox.AppendText((censusFacts + censusWarnAllow) + " usable facts loaded)");
 
-            xmlErrorbox.AppendText("\nFound " + resiTotal + " residence facts in GEDCOM File (" + resiCensus + " treated as Census facts)");
+            xmlErrorbox.AppendText("\nFound " + resiTotal + " residence facts in GEDCOM File (" + resiCensus + " treated as Census facts) ");
+            if (resiWarnAllow > 0)
+            {
+                if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
+                    xmlErrorbox.AppendText(resiWarnAllow + " warnings (data tolerated), ");
+                else
+                    xmlErrorbox.AppendText(resiWarnAllow + " warnings (data ignored in strict mode), ");
+            }
             
             xmlErrorbox.AppendText("\nFound " + lostCousinsTotal + " Lost Cousins facts in GEDCOM File (" + lostCousinsFacts + " good, ");
             if (lostCousinsWarnAllow > 0)

@@ -32,7 +32,11 @@ namespace FTAnalyzer.Forms
             foreach (Fact f in individual.AllFacts)
                 facts.Add(new DisplayFact(individual, individual.Name, f));
             foreach (Fact f in individual.ErrorFacts)
-                facts.Add(new DisplayFact(individual, individual.Name, f)); 
+            {
+                // only add ignored and errors as allowed have are in AllFacts
+                if(f.FactErrorLevel != Fact.FactError.WARNINGALLOW)
+                    facts.Add(new DisplayFact(individual, individual.Name, f));
+            }
             this.Text = "Facts Report for " + individual.Name;
             SetupFacts();
             italicFont =  new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
