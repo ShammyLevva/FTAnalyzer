@@ -73,7 +73,6 @@
             this.mnuSaveColumnLayout.Name = "mnuSaveColumnLayout";
             this.mnuSaveColumnLayout.Size = new System.Drawing.Size(23, 22);
             this.mnuSaveColumnLayout.Text = "Save Column Sort Order";
-            this.mnuSaveColumnLayout.Visible = false;
             this.mnuSaveColumnLayout.Click += new System.EventHandler(this.mnuSaveColumnLayout_Click);
             // 
             // mnuResetColumns
@@ -84,14 +83,12 @@
             this.mnuResetColumns.Name = "mnuResetColumns";
             this.mnuResetColumns.Size = new System.Drawing.Size(23, 22);
             this.mnuResetColumns.Text = "Reset Column Sort Order to Default";
-            this.mnuResetColumns.Visible = false;
             this.mnuResetColumns.Click += new System.EventHandler(this.mnuResetColumns_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            this.toolStripSeparator2.Visible = false;
             // 
             // printToolStripButton
             // 

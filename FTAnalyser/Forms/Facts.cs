@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using FTAnalyzer.Utilities;
 using Printing.DataGridViewPrint.Tools;
+using System.IO;
 
 namespace FTAnalyzer.Forms
 {
@@ -17,6 +18,8 @@ namespace FTAnalyzer.Forms
         private Family family;
         private FamilyTree ft = FamilyTree.Instance;
         private SortableBindingList<IDisplayFact> facts;
+        private Font italicFont;
+            
 
         private PrintingDataGridViewProvider printProvider;
 
@@ -32,6 +35,7 @@ namespace FTAnalyzer.Forms
                 facts.Add(new DisplayFact(individual, individual.Name, f)); 
             this.Text = "Facts Report for " + individual.Name;
             SetupFacts();
+            italicFont =  new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
         }
 
         public Facts(Family family)
@@ -62,7 +66,7 @@ namespace FTAnalyzer.Forms
         {
             dgFacts.DataSource = facts;
             dgFacts.Sort(dgFacts.Columns["FactDate"], ListSortDirection.Ascending);
-            //LoadColumnLayout();
+            LoadColumnLayout();
             ResizeColumns();
             tsRecords.Text = facts.Count + " Records";
         }
@@ -100,32 +104,90 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void mnuResetColumns_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Facts_TextChanged(object sender, EventArgs e)
         {
             printProvider.Drawer.TitlePrintBlock = new TitlePrintBlock(this.Text);
         }
 
-        private void dgFacts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void SaveColumnLayout()
         {
-            
+            DataTable dt = new DataTable("table");
+            var query = from DataGridViewColumn col in dgFacts.Columns
+                        orderby col.DisplayIndex
+                        select col;
+
+            foreach (DataGridViewColumn col in query)
+            {
+                dt.Columns.Add(col.Name);
+            }
+            string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, "FactsColumns.xml");
+            dt.WriteXmlSchema(path);
         }
 
+        private void LoadColumnLayout()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, "FactsColumns.xml");
+                dt.ReadXmlSchema(path);
+
+                int i = 0;
+                foreach (DataColumn col in dt.Columns)
+                {
+                    dgFacts.Columns[col.ColumnName].DisplayIndex = i;
+                    i++;
+                }
+            }
+            catch (Exception)
+            {
+                ResetColumnLayout();
+            }
+        }
+
+        private void ResetColumnLayout()
+        {
+            for (int i = 0; i < dgFacts.Columns.Count; i++)
+                dgFacts.Columns[i].DisplayIndex = i;
+            SaveColumnLayout();
+        }
+
+        private void mnuResetColumns_Click(object sender, EventArgs e)
+        {
+            ResetColumnLayout();
+        }
+
+        private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
+        {
+            SaveColumnLayout();
+            MessageBox.Show("Column Sort Order Saved", "Fact Column Sorting");
+        }
+        
         private void dgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 0)
             {
                 DisplayFact f = dgFacts.Rows[e.RowIndex].DataBoundItem as DisplayFact;
                 e.ToolTipText = f.Fact.FactErrorMessage;
+            }
+        }
+
+        private void dgFacts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex > 0)
+            {
+                DisplayFact f = dgFacts.Rows[e.RowIndex].DataBoundItem as DisplayFact;
+                DataGridViewCell cell = dgFacts.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                if (f.Fact.FactErrorLevel != Fact.FactError.GOOD)
+                {
+                    cell.Style.Font = italicFont;
+                    cell.ToolTipText = "Fact is inaccurate but is being used due to Tolerate slightly inaccurate census dates option.";
+                    if (f.Fact.FactErrorLevel != Fact.FactError.WARNINGALLOW)
+                    {
+                        cell.Style.ForeColor = Color.Red; // if ignoring facts then set as red
+                        cell.ToolTipText = "Fact is an error and isn't being used";
+                    }   
+                }
             }
         }
     }
