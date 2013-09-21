@@ -13,16 +13,18 @@ namespace FTAnalyzer
             WALES = "Wales", IRELAND = "Ireland", UNITED_KINGDOM = "United Kingdom", NEW_ZEALAND = "New Zealand", AUSTRALIA = "Australia",
             UNKNOWN_COUNTRY = "Unknown", ENG_WALES = "England & Wales", INDIA = "India", FRANCE = "France", GERMANY = "Germany",
             ITALY = "Italy", SPAIN = "Spain", BELGIUM = "Belgium", SOUTH_AFRICA = "South Africa", NORTHERN_IRELAND = "Northern Ireland",
-            EGYPT = "Egypt", HUNGARY = "Hungary", MALTA = "Malta", DENMARK = "Denmark", SWEDEN = "Sweden", NORWAY = "Norway", 
-            FINLAND = "Finland", ICELAND = "Iceland", SWITZERLAND = "Switzerland", AUSTRIA = "Austria", NETHERLANDS = "Netherlands", 
+            EGYPT = "Egypt", HUNGARY = "Hungary", MALTA = "Malta", DENMARK = "Denmark", SWEDEN = "Sweden", NORWAY = "Norway",
+            FINLAND = "Finland", ICELAND = "Iceland", SWITZERLAND = "Switzerland", AUSTRIA = "Austria", NETHERLANDS = "Netherlands",
             CHINA = "China", ZIMBABWE = "Zimbabwe", JAPAN = "Japan", RUSSIA = "Russia", POLAND = "Poland", ST_LUCIA = "Saint Lucia",
-            LUXEMBOURG = "Luxembourg", ISLE_OF_MAN="Isle of Man", GREECE = "Greece", LIBYA = "Libya", NIGERIA = "Nigeria", 
-            BULGARIA = "Bulgaria", CYPRUS = "Cyprus", ESTONIA = "Estonia", GEORGIA = "Georgia", LATVIA = "Latvia", 
+            LUXEMBOURG = "Luxembourg", ISLE_OF_MAN = "Isle of Man", GREECE = "Greece", LIBYA = "Libya", NIGERIA = "Nigeria",
+            BULGARIA = "Bulgaria", CYPRUS = "Cyprus", ESTONIA = "Estonia", GEORGIA = "Georgia", LATVIA = "Latvia",
             LIECHTENSTIEN = "Liechtenstien", LITHUANIA = "Lithuania", ALBANIA = "Albania", ANDORRA = "Andorra", ARMENIA = "Armenia",
-            AZERBAIJAN = "Azerbaijan", BELARUS = "Belarus", MACEDONIA = "Macedonia", MOLDOVA = "Moldova", MONACO = "Monaco", 
-            MONTENEGRO = "Montenegro", PORTUGAL = "Portugal", ROMANIA ="Romania", SAN_MARINO = "San Marino", TURKEY = "Turkey",
+            AZERBAIJAN = "Azerbaijan", BELARUS = "Belarus", MACEDONIA = "Macedonia", MOLDOVA = "Moldova", MONACO = "Monaco",
+            MONTENEGRO = "Montenegro", PORTUGAL = "Portugal", ROMANIA = "Romania", SAN_MARINO = "San Marino", TURKEY = "Turkey",
             UKRAINE = "Ukraine", BRAZIL = "Brazil", MAURITIUS = "Mauritius", UAE = "United Arab Emirates", AFGHANISTAN = "Afghanistan",
-            ARGENTINA = "Argentina", BARBADOS = "Barbados", BANGLADESH = "Bangladesh", BAHAMAS = "Bahamas", SRI_LANKA = "Sri Lanka";
+            ARGENTINA = "Argentina", BARBADOS = "Barbados", BANGLADESH = "Bangladesh", BAHAMAS = "Bahamas", SRI_LANKA = "Sri Lanka",
+            CUBA = "Cuba", INDONESIA = "Indonesia", ISRAEL = "Israel", IRAQ = "Iraq", IRAN = "Iran", JORDAN = "Jordan",
+            JAMAICA = "Jamaica", KENYA = "Kenya";
 
             //AG  Antigua and Barbuda
             //AO  Angola
@@ -44,7 +46,6 @@ namespace FTAnalyzer
             //CM  Cameroon
             //CO  Colombia
             //CR  Costa Rica
-            //CU  Cuba
             //CV  Cape Verde
             //CZ  Czech Republic
             //DJ  Djibouti
@@ -68,13 +69,6 @@ namespace FTAnalyzer
             //HN  Honduras
             //HR  Croatia
             //HT  Haiti
-            //ID  Indonesia
-            //IL  Israel
-            //IQ  Iraq
-            //IR  Iran (Islamic Republic of)
-            //JM  Jamaica
-            //JO  Jordan
-            //KE  Kenya
             //KG  Kyrgyzstan
             //KH  Cambodia
             //KI  Kiribati
@@ -88,11 +82,7 @@ namespace FTAnalyzer
             //LB  Lebanon
             //LR  Liberia
             //LS  Lesotho
-            //LT  Lithuania
             //MA  Morocco
-            //MC  Monaco
-            //MD  Republic of Moldova
-            //ME  Montenegro
             //MG  Madagascar
             //MH  Marshall Islands
             //MK  The former Yugoslav Republic of Macedonia
@@ -108,7 +98,6 @@ namespace FTAnalyzer
             //MZ  Mozambique
             //NA  Namibia
             //NE  Niger
-            //NG  Nigeria
             //NI  Nicaragua
             //NP  Nepal
             //NR  Nauru
@@ -118,11 +107,9 @@ namespace FTAnalyzer
             //PG  Papua New Guinea
             //PH  Philippines
             //PK  Pakistan
-            //PT  Portugal
             //PW  Palau
             //PY  Paraguay
             //QA  Qatar
-            //RO  Romania
             //RS  Serbia
             //RW  Rwanda
             //SA  Saudi Arabia
@@ -133,7 +120,6 @@ namespace FTAnalyzer
             //SI  Slovenia
             //SK  Slovakia
             //SL  Sierra Leone
-            //SM  San Marino
             //SN  Senegal
             //SO  Somalia
             //SR  Suriname
@@ -150,11 +136,9 @@ namespace FTAnalyzer
             //TM  Turkmenistan
             //TN  Tunisia
             //TO  Tonga
-            //TR  Turkey
             //TT  Trinidad and Tobago
             //TV  Tuvalu
             //TZ  United Republic of Tanzania
-            //UA  Ukraine
             //UG  Uganda
             //UY  Uruguay
             //UZ  Uzbekistan
@@ -171,8 +155,9 @@ namespace FTAnalyzer
             ITALY, SPAIN, BELGIUM, SOUTH_AFRICA, NORTHERN_IRELAND, EGYPT, HUNGARY, MALTA, DENMARK, SWEDEN, NORWAY, FINLAND, ICELAND,
             SWITZERLAND, AUSTRIA, NETHERLANDS, CHINA, ZIMBABWE, JAPAN, RUSSIA, POLAND, ST_LUCIA, LUXEMBOURG, ISLE_OF_MAN, GREECE,
             LIBYA, NIGERIA, BULGARIA, CYPRUS, ESTONIA, GEORGIA, LATVIA, LIECHTENSTIEN, LITHUANIA, ALBANIA, ARMENIA, ANDORRA,
-            AZERBAIJAN, BELARUS,MOLDOVA, MONACO, MONTENEGRO, PORTUGAL, ROMANIA, SAN_MARINO, TURKEY, UKRAINE, BRAZIL, MAURITIUS,
-            UAE, AFGHANISTAN, ARGENTINA, BARBADOS, BANGLADESH, BAHAMAS, SRI_LANKA
+            AZERBAIJAN, BELARUS, MOLDOVA, MONACO, MONTENEGRO, PORTUGAL, ROMANIA, SAN_MARINO, TURKEY, UKRAINE, BRAZIL, MAURITIUS,
+            UAE, AFGHANISTAN, ARGENTINA, BARBADOS, BANGLADESH, BAHAMAS, SRI_LANKA, CUBA, INDONESIA, ISRAEL, IRAN, IRAQ, JORDAN,
+            JAMAICA, KENYA
         });
 
         private static readonly ISet<string> UK_COUNTRIES = new HashSet<string>(new string[] { 
