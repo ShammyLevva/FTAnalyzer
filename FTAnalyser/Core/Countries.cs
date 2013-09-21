@@ -21,27 +21,20 @@ namespace FTAnalyzer
             LIECHTENSTIEN = "Liechtenstien", LITHUANIA = "Lithuania", ALBANIA = "Albania", ANDORRA = "Andorra", ARMENIA = "Armenia",
             AZERBAIJAN = "Azerbaijan", BELARUS = "Belarus", MACEDONIA = "Macedonia", MOLDOVA = "Moldova", MONACO = "Monaco", 
             MONTENEGRO = "Montenegro", PORTUGAL = "Portugal", ROMANIA ="Romania", SAN_MARINO = "San Marino", TURKEY = "Turkey",
-            UKRAINE = "Ukraine", BRAZIL = "Brazil";
+            UKRAINE = "Ukraine", BRAZIL = "Brazil", MAURITIUS = "Mauritius", UAE = "United Arab Emirates", AFGHANISTAN = "Afghanistan",
+            ARGENTINA = "Argentina", BARBADOS = "Barbados", BANGLADESH = "Bangladesh", BAHAMAS = "Bahamas";
 
-            //AE  United Arab Emirates
-            //AF  Afghanistan
             //AG  Antigua and Barbuda
-            //AL  Albania
             //AO  Angola
-            //AR  Argentina
             //BA  Bosnia and Herzegovina
-            //BB  Barbados
-            //BD  Bangladesh
             //BF  Burkina Faso
             //BH  Bahrain
             //BI  Burundi
             //BJ  Benin
             //BN  Brunei Darussalam
             //BO  Bolivia (Plurinational State of)
-            //BS  Bahamas
             //BT  Bhutan
             //BW  Botswana
-            //BY  Belarus
             //BZ  Belize
             //CD  Democratic Republic of the Congo
             //CF  Central African Republic
@@ -123,7 +116,6 @@ namespace FTAnalyzer
             //MN  Mongolia
             //MR  Mauritania
             //MT  Malta
-            //MU  Mauritius
             //MV  Maldives
             //MW  Malawi
             //MX  Mexico
@@ -200,7 +192,8 @@ namespace FTAnalyzer
             ITALY, SPAIN, BELGIUM, SOUTH_AFRICA, NORTHERN_IRELAND, EGYPT, HUNGARY, MALTA, DENMARK, SWEDEN, NORWAY, FINLAND, ICELAND,
             SWITZERLAND, AUSTRIA, NETHERLANDS, CHINA, CEYLON, ZIMBABWE, JAPAN, RUSSIA, POLAND, LUXEMBOURG, ISLE_OF_MAN, GREECE,
             LIBYA, NIGERIA, BULGARIA, CYPRUS, ESTONIA, GEORGIA, LATVIA, LIECHTENSTIEN, LITHUANIA, ALBANIA, ARMENIA, ANDORRA,
-            AZERBAIJAN, BELARUS,MOLDOVA, MONACO, MONTENEGRO, PORTUGAL, ROMANIA, SAN_MARINO, TURKEY, UKRAINE
+            AZERBAIJAN, BELARUS,MOLDOVA, MONACO, MONTENEGRO, PORTUGAL, ROMANIA, SAN_MARINO, TURKEY, UKRAINE, BRAZIL, MAURITIUS,
+            UAE, AFGHANISTAN, ARGENTINA, BARBADOS, BANGLADESH, BAHAMAS
         });
 
         private static readonly ISet<string> UK_COUNTRIES = new HashSet<string>(new string[] { 
