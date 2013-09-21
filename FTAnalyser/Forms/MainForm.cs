@@ -19,7 +19,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.2.0.0";
+        private string VERSION = "2.2.0.1";
         //private bool _checkForUpdatesEnabled = false;
         //private bool _showNoUpdateMessage = false;
         //private System.Threading.Timer _timerCheckForUpdates;
@@ -954,7 +954,7 @@ namespace FTAnalyzer
         {
             printDocument = new PrintDocument();
             printDocument.DefaultPageSettings.Margins =
-               new System.Drawing.Printing.Margins(20, 20, 20, 20);
+               new System.Drawing.Printing.Margins(15, 15, 15, 15);
             printDocument.DefaultPageSettings.Landscape = true;
             printDialog.PrinterSettings.DefaultPageSettings.Landscape = true;
 
