@@ -23,6 +23,7 @@ namespace FTAnalyzer.Utilities
                            .Replace(" An ", " an ")
                            .Replace(" To ", " to ")
                            .Replace(" On ", " on ")
+                           .Replace(" Or ", " or ")
                            .Replace(" As ", " as ")
                            .Replace(" Is ", " is ")
                            .Replace(" No ", " no ")
