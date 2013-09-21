@@ -19,14 +19,18 @@ namespace FTAnalyzer.Forms
         private FamilyTree ft = FamilyTree.Instance;
         private SortableBindingList<IDisplayFact> facts;
         private Font italicFont;
-            
+        private ReportFormHelper reportFormHelper;
 
-        private PrintingDataGridViewProvider printProvider;
-
-        public Facts(Individual individual)
+        public Facts()
         {
             InitializeComponent();
-            SetupPrinting();
+            reportFormHelper = new ReportFormHelper(this.Text, dgFacts);
+            italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
+        }
+
+        public Facts(Individual individual)
+            : this()
+        {
             this.individual = individual;
             this.facts = new SortableBindingList<IDisplayFact>();
             foreach (Fact f in individual.AllFacts)
@@ -39,31 +43,17 @@ namespace FTAnalyzer.Forms
             }
             this.Text = "Facts Report for " + individual.Name;
             SetupFacts();
-            italicFont =  new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
         }
 
         public Facts(Family family)
+            : this()
         {
-            InitializeComponent();
-            SetupPrinting();
             this.family = family;
             this.facts = new SortableBindingList<IDisplayFact>();
             foreach (DisplayFact f in family.AllDisplayFacts)
                 facts.Add(f);
             this.Text = "Facts Report for " + family.FamilyRef;
             SetupFacts();
-        }
-
-        private void SetupPrinting()
-        {
-            printDocument.DefaultPageSettings.Margins =
-                new System.Drawing.Printing.Margins(15,15,15,15);
-
-            printProvider = PrintingDataGridViewProvider.Create(
-                printDocument, dgFacts, true, true, true,
-                new TitlePrintBlock(this.Text), null, null);
-
-            printDocument.DefaultPageSettings.Landscape = true;
         }
 
         private void SetupFacts()
@@ -83,20 +73,22 @@ namespace FTAnalyzer.Forms
 
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
-            if (printDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                printDocument.PrinterSettings = printDialog.PrinterSettings;
-                printDocument.DocumentName = this.Text;
-                printDocument.Print();
-            }
+            dgFacts.Columns[0].Visible = false;
+            reportFormHelper.PrintReport(this);
+            dgFacts.Columns[0].Visible = true;
         }
 
         private void printPreviewToolStripButton_Click(object sender, EventArgs e)
         {
-            if (printDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                printPreviewDialog.ShowDialog(this);
-            }
+            DataGridViewColumn column = dgFacts.Columns[0];
+            dgFacts.Columns.RemoveAt(0);
+            reportFormHelper.PrintPreviewReport(this);
+            dgFacts.Columns.Insert(0, column);
+        }
+
+        private void Facts_TextChanged(object sender, EventArgs e)
+        {
+            reportFormHelper.PrintTitle = this.Text;
         }
 
         private void mnuExportToExcel_Click(object sender, EventArgs e)
@@ -106,11 +98,6 @@ namespace FTAnalyzer.Forms
             DataTable dt = convertor.ToDataTable((dgFacts.DataSource as SortableBindingList<IDisplayFact>).ToList());
             ExportToExcel.Export(dt);
             this.Cursor = Cursors.Default;
-        }
-
-        private void Facts_TextChanged(object sender, EventArgs e)
-        {
-            printProvider.Drawer.TitlePrintBlock = new TitlePrintBlock(this.Text);
         }
 
         private void SaveColumnLayout()

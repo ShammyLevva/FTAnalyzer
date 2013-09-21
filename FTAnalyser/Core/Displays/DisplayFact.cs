@@ -18,7 +18,7 @@ namespace FTAnalyzer
             this.Ind = ind;
             this.Name = name;
             this.Fact = fact;
-            this.Icon = DataErrorGroup.ErrorIcon(fact.FactErrorLevel);
+            this.Icon = FactImage.ErrorIcon(fact.FactErrorLevel).Icon;
         }
 
         public string TypeOfFact { get { return Fact.GetFactTypeDescription(Fact.FactType); } }

@@ -12,7 +12,7 @@ namespace FTAnalyzer
         public DataError(int errorType, Fact.FactError errorLevel, Individual ind, string description)
         {
             this.ErrorType = DataErrorGroup.ErrorDescription(errorType);
-            this.Icon = DataErrorGroup.ErrorIcon(errorLevel);
+            this.Icon = FactImage.ErrorIcon(errorLevel).Icon;
             this.individual = ind;
             this.Description = description;
         }

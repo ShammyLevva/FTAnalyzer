@@ -43,22 +43,6 @@ namespace FTAnalyzer
             return DATAERROR[errorNumber];
         }
 
-        public static Image ErrorIcon(Fact.FactError errorLevel)
-        {
-            switch (errorLevel)
-            {
-                case Fact.FactError.GOOD:
-                    return Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Complete_OK.png"));
-                case Fact.FactError.WARNINGALLOW:
-                    return Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Warning.png"));
-                case Fact.FactError.WARNINGIGNORE:
-                    return Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\SeriousWarning.png"));
-                case Fact.FactError.ERROR:
-                    return Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\CriticalError.png"));
-            }
-            return Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Complete_OK.png"));
-        }
-
         public DataErrorGroup(int errorNumber, IList<DataError> errors)
         {
             this.errorNumber = errorNumber;
