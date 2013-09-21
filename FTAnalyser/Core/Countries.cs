@@ -15,14 +15,14 @@ namespace FTAnalyzer
             ITALY = "Italy", SPAIN = "Spain", BELGIUM = "Belgium", SOUTH_AFRICA = "South Africa", NORTHERN_IRELAND = "Northern Ireland",
             EGYPT = "Egypt", HUNGARY = "Hungary", MALTA = "Malta", DENMARK = "Denmark", SWEDEN = "Sweden", NORWAY = "Norway", 
             FINLAND = "Finland", ICELAND = "Iceland", SWITZERLAND = "Switzerland", AUSTRIA = "Austria", NETHERLANDS = "Netherlands", 
-            CHINA = "China", CEYLON = "Ceylon", ZIMBABWE = "Zimbabwe", JAPAN = "Japan", RUSSIA = "Russia", POLAND = "Poland", 
+            CHINA = "China", ZIMBABWE = "Zimbabwe", JAPAN = "Japan", RUSSIA = "Russia", POLAND = "Poland", ST_LUCIA = "Saint Lucia",
             LUXEMBOURG = "Luxembourg", ISLE_OF_MAN="Isle of Man", GREECE = "Greece", LIBYA = "Libya", NIGERIA = "Nigeria", 
             BULGARIA = "Bulgaria", CYPRUS = "Cyprus", ESTONIA = "Estonia", GEORGIA = "Georgia", LATVIA = "Latvia", 
             LIECHTENSTIEN = "Liechtenstien", LITHUANIA = "Lithuania", ALBANIA = "Albania", ANDORRA = "Andorra", ARMENIA = "Armenia",
             AZERBAIJAN = "Azerbaijan", BELARUS = "Belarus", MACEDONIA = "Macedonia", MOLDOVA = "Moldova", MONACO = "Monaco", 
             MONTENEGRO = "Montenegro", PORTUGAL = "Portugal", ROMANIA ="Romania", SAN_MARINO = "San Marino", TURKEY = "Turkey",
             UKRAINE = "Ukraine", BRAZIL = "Brazil", MAURITIUS = "Mauritius", UAE = "United Arab Emirates", AFGHANISTAN = "Afghanistan",
-            ARGENTINA = "Argentina", BARBADOS = "Barbados", BANGLADESH = "Bangladesh", BAHAMAS = "Bahamas";
+            ARGENTINA = "Argentina", BARBADOS = "Barbados", BANGLADESH = "Bangladesh", BAHAMAS = "Bahamas", SRI_LANKA = "Sri Lanka";
 
             //AG  Antigua and Barbuda
             //AO  Angola
@@ -52,37 +52,28 @@ namespace FTAnalyzer
             //DO  Dominican Republic
             //DZ  Algeria
             //EC  Ecuador
-            //EE  Estonia
             //ER  Eritrea
             //ET  Ethiopia
             //FJ  Fiji
             //FM  Micronesia (Federated States of)
             //GA  Gabon
             //GD  Grenada
-            //GE  Georgia
             //GH  Ghana
             //GM  Gambia
             //GN  Guinea
             //GQ  Equatorial Guinea
-            //GR  Greece
             //GT  Guatemala
             //GW  Guinea-Bissau
             //GY  Guyana
             //HN  Honduras
             //HR  Croatia
             //HT  Haiti
-            //HU  Hungary
             //ID  Indonesia
-            //IE  Ireland
             //IL  Israel
-            //IN  India
             //IQ  Iraq
             //IR  Iran (Islamic Republic of)
-            //IS  Iceland
-            //IT  Italy
             //JM  Jamaica
             //JO  Jordan
-            //JP  Japan
             //KE  Kenya
             //KG  Kyrgyzstan
             //KH  Cambodia
@@ -95,15 +86,9 @@ namespace FTAnalyzer
             //KZ  Kazakhstan
             //LA  Lao People's Democratic Republic
             //LB  Lebanon
-            //LC  Saint Lucia
-            //LI  Liechtenstein
-            //LK  Sri Lanka
             //LR  Liberia
             //LS  Lesotho
             //LT  Lithuania
-            //LU  Luxembourg
-            //LV  Latvia
-            //LY  Libyan Arab Jamahiriya
             //MA  Morocco
             //MC  Monaco
             //MD  Republic of Moldova
@@ -133,20 +118,17 @@ namespace FTAnalyzer
             //PG  Papua New Guinea
             //PH  Philippines
             //PK  Pakistan
-            //PL  Poland
             //PT  Portugal
             //PW  Palau
             //PY  Paraguay
             //QA  Qatar
             //RO  Romania
             //RS  Serbia
-            //RU  Russian Federation
             //RW  Rwanda
             //SA  Saudi Arabia
             //SB  Solomon Islands
             //SC  Seychelles
             //SD  Sudan
-            //SE  Sweden
             //SG  Singapore
             //SI  Slovenia
             //SK  Slovakia
@@ -174,7 +156,6 @@ namespace FTAnalyzer
             //TZ  United Republic of Tanzania
             //UA  Ukraine
             //UG  Uganda
-            //US  United States of America
             //UY  Uruguay
             //UZ  Uzbekistan
             //VC  Saint Vincent and the Grenadines
@@ -183,17 +164,15 @@ namespace FTAnalyzer
             //VU  Vanuatu
             //WS  Samoa
             //YE  Yemen
-            //ZA  South Africa
             //ZM  Zambia
-            //ZW  Zimbabwe
-
+            
         private static readonly ISet<string> KNOWN_COUNTRIES = new HashSet<string>(new string[] {
             SCOTLAND, ENGLAND, CANADA, UNITED_STATES, WALES, IRELAND, UNITED_KINGDOM, NEW_ZEALAND, AUSTRALIA, INDIA, FRANCE, GERMANY,
             ITALY, SPAIN, BELGIUM, SOUTH_AFRICA, NORTHERN_IRELAND, EGYPT, HUNGARY, MALTA, DENMARK, SWEDEN, NORWAY, FINLAND, ICELAND,
-            SWITZERLAND, AUSTRIA, NETHERLANDS, CHINA, CEYLON, ZIMBABWE, JAPAN, RUSSIA, POLAND, LUXEMBOURG, ISLE_OF_MAN, GREECE,
+            SWITZERLAND, AUSTRIA, NETHERLANDS, CHINA, ZIMBABWE, JAPAN, RUSSIA, POLAND, ST_LUCIA, LUXEMBOURG, ISLE_OF_MAN, GREECE,
             LIBYA, NIGERIA, BULGARIA, CYPRUS, ESTONIA, GEORGIA, LATVIA, LIECHTENSTIEN, LITHUANIA, ALBANIA, ARMENIA, ANDORRA,
             AZERBAIJAN, BELARUS,MOLDOVA, MONACO, MONTENEGRO, PORTUGAL, ROMANIA, SAN_MARINO, TURKEY, UKRAINE, BRAZIL, MAURITIUS,
-            UAE, AFGHANISTAN, ARGENTINA, BARBADOS, BANGLADESH, BAHAMAS
+            UAE, AFGHANISTAN, ARGENTINA, BARBADOS, BANGLADESH, BAHAMAS, SRI_LANKA
         });
 
         private static readonly ISet<string> UK_COUNTRIES = new HashSet<string>(new string[] { 

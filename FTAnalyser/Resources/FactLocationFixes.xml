@@ -27,6 +27,9 @@
       <CountryTypo from="Scot"    to="Scotland" />
       <CountryTypo from="Holland" to="Netherlands" />
       <CountryTypo from="The Netherlands" to="Netherlands" />
+      <CountryTypo from="St Lucia" to="Saint Lucia" />
+      <CountryTypo from="Ceylon"   to="Sri Lanka" />
+
     </CountryTypos>
     <RegionTypos>
       <!-- Scotland -->
