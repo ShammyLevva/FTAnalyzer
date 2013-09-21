@@ -20,7 +20,7 @@ namespace FTAnalyzer.UserControls
             chkAllowEmptyLocations.Checked = Properties.GeneralSettings.Default.AllowEmptyLocations;
             chkCensusResidence.Checked = Properties.GeneralSettings.Default.UseResidenceAsCensus;
             chkTolerateInaccurateCensus.Checked = Properties.GeneralSettings.Default.TolerateInaccurateCensusDate;
-            // Strict residence years means any residence fact which is not a census year is treated as a fact error
+            Properties.GeneralSettings.Default.ReloadRequired = false;
         }
 
 		#region IOptions Members
