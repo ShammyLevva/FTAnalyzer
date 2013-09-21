@@ -21,7 +21,7 @@ namespace Controls
         public bool Directs { get { return ckbDirects.Checked; } }
         public bool Blood { get { return ckbBlood.Checked; } }
         public bool Marriage { get { return ckbMarriage.Checked; } }
-        public bool MarriedToDB { get { return ckbMarriageDB.Checked; } }
+        public bool MarriedToDB { get { return ckbMarriageDB.Checked; } set { ckbMarriageDB.Checked = value; } }
         public bool Unknown { get { return ckbUnknown.Checked; } }
 
         public int Status

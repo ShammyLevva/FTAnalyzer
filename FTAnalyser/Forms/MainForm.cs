@@ -39,6 +39,7 @@ namespace FTAnalyzer
             ft.XmlErrorBox = rtbOutput;
             tabSelector.TabPages.RemoveByKey("tabFamilySearch");
             VERSION = PublishVersion();
+            treetopsRelation.MarriedToDB = false;
             SetSavePath();
         }
 
@@ -1533,25 +1534,33 @@ namespace FTAnalyzer
         private void dgDataErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                string indID = (string)dgDataErrors.CurrentRow.Cells["Ind_ID"].Value;
-                Individual ind = ft.GetIndividual(indID);
-                Facts factForm = new Facts(ind);
-                DisposeDuplicateForms(factForm);
-                factForm.Show();
-            }
+                ShowFacts((string)dgDataErrors.CurrentRow.Cells["Ind_ID"].Value);
         }
 
         private void dgLooseDeaths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                string indID = (string)dgLooseDeaths.CurrentRow.Cells["Ind_ID"].Value;
-                Individual ind = ft.GetIndividual(indID);
-                Facts factForm = new Facts(ind);
-                DisposeDuplicateForms(factForm);
-                factForm.Show();
-            }
+                ShowFacts((string)dgLooseDeaths.CurrentRow.Cells["Ind_ID"].Value);
+        }
+
+        private void dgTreeTops_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                ShowFacts((string)dgTreeTops.CurrentRow.Cells["Ind_ID"].Value);
+        }
+
+        private void dgWarDead_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                ShowFacts((string)dgWarDead.CurrentRow.Cells["Ind_ID"].Value);
+        }
+
+        private void ShowFacts(string indID)
+        {
+            Individual ind = ft.GetIndividual(indID);
+            Facts factForm = new Facts(ind);
+            DisposeDuplicateForms(factForm);
+            factForm.Show();
         }
 
         private void btnColouredCensus_Click(object sender, EventArgs e)

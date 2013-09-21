@@ -1406,6 +1406,7 @@
             this.dgTreeTops.ReadOnly = true;
             this.dgTreeTops.Size = new System.Drawing.Size(931, 292);
             this.dgTreeTops.TabIndex = 28;
+            this.dgTreeTops.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTreeTops_CellDoubleClick);
             // 
             // ckbTTIgnoreLocations
             // 
@@ -1526,6 +1527,7 @@
             this.dgWarDead.ReadOnly = true;
             this.dgWarDead.Size = new System.Drawing.Size(931, 292);
             this.dgWarDead.TabIndex = 29;
+            this.dgWarDead.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgWarDead_CellDoubleClick);
             // 
             // label9
             // 
