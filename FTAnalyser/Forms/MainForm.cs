@@ -220,6 +220,7 @@ namespace FTAnalyzer
                     SortableBindingList<IDisplayIndividual> list = ft.AllDisplayIndividuals;
                     dgIndividuals.DataSource = list;
                     dgIndividuals.Sort(dgIndividuals.Columns["Ind_ID"], ListSortDirection.Ascending);
+                    dgIndividuals.Focus();
                     mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
@@ -228,6 +229,7 @@ namespace FTAnalyzer
                     SortableBindingList<IDisplayFamily> list = ft.AllDisplayFamilies;
                     dgFamilies.DataSource = list;
                     dgFamilies.Sort(dgFamilies.Columns["FamilyID"], ListSortDirection.Ascending);
+                    dgFamilies.Focus();
                     mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
@@ -236,6 +238,7 @@ namespace FTAnalyzer
                     SortableBindingList<IDisplayOccupation> list = ft.AllDisplayOccupations;
                     dgOccupations.DataSource = list;
                     dgOccupations.Sort(dgOccupations.Columns["Occupation"], ListSortDirection.Ascending);
+                    dgOccupations.Focus();
                     mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + list.Count;
                 }
@@ -275,6 +278,7 @@ namespace FTAnalyzer
                 {
                     SortableBindingList<DataError> errors = ft.DataErrors(ckbDataErrors);
                     dgDataErrors.DataSource = errors;
+                    dgDataErrors.Focus();
                     mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + errors.Count;
                 }
@@ -282,6 +286,7 @@ namespace FTAnalyzer
                 {
                     SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.LooseDeaths;
                     dgLooseDeaths.DataSource = looseDeathList;
+                    dgLooseDeaths.Focus();
                     mnuPrint.Enabled = true;
                     tsCountLabel.Text = "Count : " + looseDeathList.Count;
                 }
@@ -1037,7 +1042,7 @@ namespace FTAnalyzer
             HourGlass(true);
             DisplayOccupation occ = (DisplayOccupation)dgOccupations.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
-            frmInd.setWorkers(occ.Occupation, ft.AllWorkers(occ.Occupation));
+            frmInd.SetWorkers(occ.Occupation, ft.AllWorkers(occ.Occupation));
             DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
