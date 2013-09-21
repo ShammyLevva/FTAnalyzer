@@ -124,6 +124,7 @@ namespace FTAnalyzer
                         mnuReports.Visible = true;
                         mnuExport.Visible = true;
                         mnuPrint.Enabled = true;
+                        mnuReload.Enabled = true;
                         MessageBox.Show("Gedcom File " + filename + " Loaded");
                     }
                 }
@@ -1443,6 +1444,13 @@ namespace FTAnalyzer
                     LoadFile(filename);
                 }
             }
+        }
+
+        private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.GeneralSettings.Default.ReloadRequired = false;
+            Properties.GeneralSettings.Default.Save();
+            LoadFile(filename);
         }
 
         private bool preventExpand;
