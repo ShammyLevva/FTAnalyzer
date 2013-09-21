@@ -786,7 +786,6 @@
             this.dgOccupations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgOccupations.Size = new System.Drawing.Size(931, 402);
             this.dgOccupations.TabIndex = 2;
-            this.dgOccupations.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgOccupations_CellContentClick);
             this.dgOccupations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgOccupations_CellDoubleClick);
             // 
             // tabDataErrors
