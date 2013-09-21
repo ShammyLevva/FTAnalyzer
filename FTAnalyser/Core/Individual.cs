@@ -426,22 +426,17 @@ namespace FTAnalyzer
 
         public string IndividualRef
         {
-            get
-            {
-                return IndividualID + ": " + Name;
-            }
+            get { return IndividualID + ": " + Name; }
         }
 
         public IList<Family> FamiliesAsParent
         {
             get { return familiesAsParent; }
-            set { familiesAsParent = value.ToList(); }
         }
 
         public IList<Family> FamiliesAsChild
         {
             get { return familiesAsChild; }
-            set { familiesAsChild = value.ToList(); }
         }
 
         public int FactCount(string factType)
