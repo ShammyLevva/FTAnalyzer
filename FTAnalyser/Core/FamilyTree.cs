@@ -206,9 +206,9 @@ namespace FTAnalyzer
         private void ReportOptions()
         {
             if (Properties.GeneralSettings.Default.ReportOptions)
-            {   
+            {
                 xmlErrorbox.AppendText("\nThe current options are set :");
-                xmlErrorbox.AppendText("\n    Use Baptism/Christening date if no birth date : " +  Properties.GeneralSettings.Default.UseBaptismDates);
+                xmlErrorbox.AppendText("\n    Use Baptism/Christening date if no birth date : " + Properties.GeneralSettings.Default.UseBaptismDates);
                 xmlErrorbox.AppendText("\n    Allow Empty values in Locations : " + Properties.GeneralSettings.Default.AllowEmptyLocations);
                 xmlErrorbox.AppendText("\n    Treat 'Residence' facts as Census facts : " + Properties.GeneralSettings.Default.UseResidenceAsCensus);
                 xmlErrorbox.AppendText("\n    Tolerate slightly inaccurate census dates : " + Properties.GeneralSettings.Default.TolerateInaccurateCensusDate);
@@ -269,7 +269,7 @@ namespace FTAnalyzer
                 else
                     xmlErrorbox.AppendText(resiWarnAllow + " warnings (data ignored in strict mode), ");
             }
-            
+
             xmlErrorbox.AppendText("\nFound " + lostCousinsTotal + " Lost Cousins facts in GEDCOM File (" + lostCousinsFacts + " good, ");
             if (lostCousinsWarnAllow > 0)
                 xmlErrorbox.AppendText(lostCousinsWarnAllow + " warnings (data tolerated), ");
@@ -1069,14 +1069,14 @@ namespace FTAnalyzer
                                     added = true;
                                 }
                             }
-                            if (f.FactErrorLevel == Fact.FactError.WARNINGALLOW && f.FactType == Fact.RESIDENCE)
-                            {
-                                errors[(int)dataerror.RESIDENCE_CENSUS_DATE].Add(
-                                        new DataError((int)dataerror.RESIDENCE_CENSUS_DATE, f.FactErrorLevel, ind, f.FactErrorMessage));
-                                added = true;
-                            }
                         }
-                        if(!added)
+                        if (f.FactErrorLevel == Fact.FactError.WARNINGALLOW && f.FactType == Fact.RESIDENCE)
+                        {
+                            errors[(int)dataerror.RESIDENCE_CENSUS_DATE].Add(
+                                    new DataError((int)dataerror.RESIDENCE_CENSUS_DATE, f.FactErrorLevel, ind, f.FactErrorMessage));
+                            added = true;
+                        }
+                        if (!added)
                             errors[(int)dataerror.FACT_ERROR].Add(new DataError((int)dataerror.FACT_ERROR, f.FactErrorLevel, ind, f.FactErrorMessage));
                     }
                     foreach (Fact f in ind.AllFacts)
