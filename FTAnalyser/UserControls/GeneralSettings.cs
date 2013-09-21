@@ -11,31 +11,31 @@ namespace FTAnalyzer.UserControls
 {
 	public partial class GeneralSettings : UserControl, IOptions
 	{
-        public GeneralSettings()
+		public GeneralSettings()
 		{
 			InitializeComponent();
 			//cannot be in load, because its possible this tab won't show, and the values will not be initialized.
 			//if this happens, then the users settings will be cleared.
-            chkUseBaptisms.Checked = Properties.GeneralSettings.Default.UseBaptismDates;
-            chkAllowEmptyLocations.Checked = Properties.GeneralSettings.Default.AllowEmptyLocations;
-            chkCensusResidence.Checked = Properties.GeneralSettings.Default.UseResidenceAsCensus;
-            chkTolerateInaccurateCensus.Checked = Properties.GeneralSettings.Default.TolerateInaccurateCensusDate;
-            Properties.GeneralSettings.Default.ReloadRequired = false;
-        }
+			chkUseBaptisms.Checked = Properties.GeneralSettings.Default.UseBaptismDates;
+			chkAllowEmptyLocations.Checked = Properties.GeneralSettings.Default.AllowEmptyLocations;
+			chkCensusResidence.Checked = Properties.GeneralSettings.Default.UseResidenceAsCensus;
+			chkTolerateInaccurateCensus.Checked = Properties.GeneralSettings.Default.TolerateInaccurateCensusDate;
+			Properties.GeneralSettings.Default.ReloadRequired = false;
+		}
 
 		#region IOptions Members
 
 		public void Save()
 		{
-            Properties.GeneralSettings.Default.UseBaptismDates = chkUseBaptisms.Checked;
-            Properties.GeneralSettings.Default.AllowEmptyLocations = chkAllowEmptyLocations.Checked;
-            Properties.GeneralSettings.Default.UseResidenceAsCensus = chkCensusResidence.Checked;
-            Properties.GeneralSettings.Default.TolerateInaccurateCensusDate = chkTolerateInaccurateCensus.Checked;
-            Properties.GeneralSettings.Default.Save();
-            OnUseBaptismDatesChanged();
-            OnAllowEmptyLocationsChanged();
-            OnUseResidenceAsCensusChanged();
-            OnTolerateInaccurateCensusChanged();
+			Properties.GeneralSettings.Default.UseBaptismDates = chkUseBaptisms.Checked;
+			Properties.GeneralSettings.Default.AllowEmptyLocations = chkAllowEmptyLocations.Checked;
+			Properties.GeneralSettings.Default.UseResidenceAsCensus = chkCensusResidence.Checked;
+			Properties.GeneralSettings.Default.TolerateInaccurateCensusDate = chkTolerateInaccurateCensus.Checked;
+			Properties.GeneralSettings.Default.Save();
+			OnUseBaptismDatesChanged();
+			OnAllowEmptyLocationsChanged();
+			OnUseResidenceAsCensusChanged();
+			OnTolerateInaccurateCensusChanged();
 		}
 
 		public void Cancel()
@@ -89,42 +89,42 @@ namespace FTAnalyzer.UserControls
 
 		#endregion
 
-        public static event EventHandler UseBaptismDatesChanged;
-        protected static void OnUseBaptismDatesChanged()
-        {
-            if (UseBaptismDatesChanged != null)
-                UseBaptismDatesChanged(null, EventArgs.Empty);
-        }
+		public static event EventHandler UseBaptismDatesChanged;
+		protected static void OnUseBaptismDatesChanged()
+		{
+			if (UseBaptismDatesChanged != null)
+				UseBaptismDatesChanged(null, EventArgs.Empty);
+		}
 
-        public static event EventHandler AllowEmptyLocationsChanged;
-        protected static void OnAllowEmptyLocationsChanged()
-        {
-            if (AllowEmptyLocationsChanged != null)
-                AllowEmptyLocationsChanged(null, EventArgs.Empty);
-        }
+		public static event EventHandler AllowEmptyLocationsChanged;
+		protected static void OnAllowEmptyLocationsChanged()
+		{
+			if (AllowEmptyLocationsChanged != null)
+				AllowEmptyLocationsChanged(null, EventArgs.Empty);
+		}
 
-        public static event EventHandler UseResidenceAsCensusChanged;
-        protected static void OnUseResidenceAsCensusChanged()
-        {
-            if (UseResidenceAsCensusChanged != null)
-                UseResidenceAsCensusChanged(null, EventArgs.Empty);
-        }
+		public static event EventHandler UseResidenceAsCensusChanged;
+		protected static void OnUseResidenceAsCensusChanged()
+		{
+			if (UseResidenceAsCensusChanged != null)
+				UseResidenceAsCensusChanged(null, EventArgs.Empty);
+		}
 
-        public static event EventHandler TolerateInaccurateCensusChanged;
-        protected static void OnTolerateInaccurateCensusChanged()
-        {
-            if (TolerateInaccurateCensusChanged != null)
-                TolerateInaccurateCensusChanged(null, EventArgs.Empty);
-        }
+		public static event EventHandler TolerateInaccurateCensusChanged;
+		protected static void OnTolerateInaccurateCensusChanged()
+		{
+			if (TolerateInaccurateCensusChanged != null)
+				TolerateInaccurateCensusChanged(null, EventArgs.Empty);
+		}
 
-        private void chkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.GeneralSettings.Default.ReloadRequired = true;
-        }
+		private void chkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)
+		{
+			Properties.GeneralSettings.Default.ReloadRequired = true;
+		}
 
-        private void chkTolerateInaccurateCensus_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.GeneralSettings.Default.ReloadRequired = true;
-        }
-    }
+		private void chkTolerateInaccurateCensus_CheckedChanged(object sender, EventArgs e)
+		{
+			Properties.GeneralSettings.Default.ReloadRequired = true;
+		}
+	}
 }
