@@ -53,7 +53,7 @@ namespace FTAnalyzer.Forms
             hasChildren.BackColor = hasChildren.ForeColor = Color.SkyBlue;
             styles.Add(7, hasChildren);
             DataGridViewCellStyle noMarriage = new DataGridViewCellStyle();
-            noMarriage.BackColor = noMarriage.ForeColor = Color.DarkTurquoise;
+            noMarriage.BackColor = noMarriage.ForeColor = Color.RoyalBlue;
             styles.Add(8, noMarriage);
 
             printDocument.DefaultPageSettings.Margins =
@@ -132,13 +132,13 @@ namespace FTAnalyzer.Forms
                             cell.ToolTipText = "Unknown date.";
                             break;
                         case 2: // Orange
-                            cell.ToolTipText = "Wide date range.";
+                            cell.ToolTipText = "Wide date range (>2 years).";
                             break;
                         case 3: // Yellow
-                            cell.ToolTipText = "Narrow date range.";
+                            cell.ToolTipText = "Narrow date range (over Quarter/Month up to 2y).";
                             break;
                         case 4: // Pale Green 
-                            cell.ToolTipText = "Approximate date.";
+                            cell.ToolTipText = "Approximate date. (Quarter/Month)";
                             break;
                         case 5: // Green
                             cell.ToolTipText = "Exact date.";
@@ -146,10 +146,10 @@ namespace FTAnalyzer.Forms
                         case 6: // pale grey
                             cell.ToolTipText = "Of marrying age but no spouse recorded";
                             break;
-                        case 7: // medium red
-                            cell.ToolTipText = "No partner but has children";
+                        case 7: // light blue
+                            cell.ToolTipText = "No partner but has shared fact or children";
                             break;
-                        case 8: // not sure of colour
+                        case 8: // dark blue
                             cell.ToolTipText = "Has partner but no marriage fact";
                             break;
                     }
