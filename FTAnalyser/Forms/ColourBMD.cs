@@ -252,17 +252,32 @@ namespace FTAnalyzer.Forms
                 case 4: // All Narrow date ranges (Yellow)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(3, true));
                     break;
-                case 5: // Some Missing (Some Red)
+                case 5: // All Approx date ranges (Light Green)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(4, true));
+                    break;
+                case 6: // Some Missing (Some Red)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(1, false));
                     break;
-                case 6: // Some found (Some Green)
+                case 7: // Some found (Some Green)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(5, false));
                     break;
-                case 7: // All Wide date ranges (Orange)
+                case 8: // Some Wide date ranges (Orange)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(2, false));
                     break;
-                case 8: // All Narrow date ranges (Yellow)
+                case 9: // Some Narrow date ranges (Yellow)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(3, false));
+                    break;
+                case 10: // Some Approx date ranges (Light Green)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(4, false));
+                    break;
+                case 11: // Of Marrying age (Peach)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(6, false));
+                    break;
+                case 12: // No Partner shared fact/children (Light Blue)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(7, false));
+                    break;
+                case 13: // Partner but no marriage (Dark Blue)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(8, false));
                     break;
             }
             ResizeColumns();

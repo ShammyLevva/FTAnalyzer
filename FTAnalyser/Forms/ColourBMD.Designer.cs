@@ -199,19 +199,24 @@
             // cbFilter
             // 
             this.cbFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFilter.DropDownWidth = 170;
+            this.cbFilter.DropDownWidth = 220;
             this.cbFilter.Items.AddRange(new object[] {
             "All Individuals",
             "None Found (All Red)",
             "All Found (All Green)",
             "All Wide Date Range (Orange)",
+            "All Approx Date Range (Light Green)",
             "All Narrow Date Range (Yellow)",
             "Some Missing (Some Red)",
             "Some Found (Some Green)",
             "Some Wide Date Range (Orange)",
-            "Some Narrow Date Range (Yellow)"});
+            "Some Narrow Date Range (Yellow)",
+            "Some Approx Date Range (Light Green)",
+            "Of Marrying Age no partner (Peach)",
+            "No Partner shared fact/children (Light Blue)",
+            "Partner but no marriage (Dark Blue)"});
             this.cbFilter.Name = "cbFilter";
-            this.cbFilter.Size = new System.Drawing.Size(185, 25);
+            this.cbFilter.Size = new System.Drawing.Size(235, 25);
             this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.cbFilter_SelectedIndexChanged);
             // 
             // printDialog
