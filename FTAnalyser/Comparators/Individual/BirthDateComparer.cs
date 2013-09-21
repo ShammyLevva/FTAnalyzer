@@ -12,7 +12,7 @@ namespace FTAnalyzer
         public static bool DESCENDING = false;
         private bool direction = ASCENDING;
 
-        public BirthDateComparer() : this(ASCENDING) {}
+        public BirthDateComparer() : this(ASCENDING) { }
 
         public BirthDateComparer(bool direction)
         {
@@ -21,7 +21,21 @@ namespace FTAnalyzer
 
         public override int Compare(IDisplayIndividual x, IDisplayIndividual y)
         {
-            return direction ? x.BirthDate.CompareTo(y.BirthDate) : y.BirthDate.CompareTo(x.BirthDate);
+            IDisplayIndividual a = x, b=y;
+            if(direction == DESCENDING)
+            {
+                a = y;
+                b = x;
+            }
+            if (a.BirthDate.Equals(b.BirthDate))
+            {
+                if (a.Surname.Equals(b.Surname))
+                    return a.Forenames.CompareTo(b.Forenames);
+                else
+                    return a.Surname.CompareTo(b.Surname);
+            }
+            else
+                return a.BirthDate.CompareTo(b.BirthDate);
         }
     }
 }
