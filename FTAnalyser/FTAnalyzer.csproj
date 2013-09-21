@@ -169,6 +169,7 @@
     <Compile Include="Forms\Facts.Designer.cs">
       <DependentUpon>Facts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ReportFormHelper.cs" />
     <Compile Include="Properties\ErrorMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

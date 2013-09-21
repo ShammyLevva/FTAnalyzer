@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Printing.DataGridViewPrint.Tools;
 using FTAnalyzer.Filters;
 using System.IO;
 using FTAnalyzer.Utilities;
@@ -19,22 +18,17 @@ namespace FTAnalyzer.Forms
         private int numFamilies;
         public FactDate CensusDate { get; private set; }
         private FactLocation censusLocation;
-        private PrintingDataGridViewProvider printProvider;
+        private ReportFormHelper reportFormHelper;
+
         public bool LostCousins { get; private set; }
 
         public Census(bool lostCousins, string censusCountry)
         {
             InitializeComponent();
+            reportFormHelper = new ReportFormHelper("Missing from Census Report", dgCensus);
+
             LostCousins = lostCousins;
 
-            printDocument.DefaultPageSettings.Margins =
-               new System.Drawing.Printing.Margins(15,15,15,15);
-
-            printProvider = PrintingDataGridViewProvider.Create(
-                printDocument, dgCensus, true, true, true,
-                new TitlePrintBlock("Missing from Census Report"), null, null);
-
-            printDocument.DefaultPageSettings.Landscape = true;
             this.censusLocation = new FactLocation(censusCountry);
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
@@ -170,25 +164,17 @@ namespace FTAnalyzer.Forms
 
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
-            if (printDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                printDocument.PrinterSettings = printDialog.PrinterSettings;
-                printDocument.DocumentName = "Missing from Census Report";
-                printDocument.Print();
-            }
+            reportFormHelper.PrintReport(this);
         }
 
         private void printPreviewToolStripButton_Click(object sender, EventArgs e)
         {
-            if (printDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                printPreviewDialog.ShowDialog(this);
-            }
+            reportFormHelper.PrintPreviewReport(this);
         }
 
         private void Census_TextChanged(object sender, EventArgs e)
         {
-            printProvider.Drawer.TitlePrintBlock = new TitlePrintBlock(this.Text);
+            reportFormHelper.PrintTitle = this.Text;
         }
 
         private void tsBtnMapLocation_Click(object sender, EventArgs e)
