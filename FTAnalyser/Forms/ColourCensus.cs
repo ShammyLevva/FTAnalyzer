@@ -21,11 +21,14 @@ namespace FTAnalyzer.Forms
         private int c1841ColumnIndex;
         private int c1911ColumnIndex;
         private SortableBindingList<IDisplayColourCensus> reportList;
+        private Font boldFont;
 
         public ColourCensus(SortableBindingList<IDisplayColourCensus> reportList)
         {
             InitializeComponent();
             this.reportList = reportList;
+
+            boldFont = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
             styles = new Dictionary<int, DataGridViewCellStyle>();
             DataGridViewCellStyle notAlive = new DataGridViewCellStyle();
             notAlive.BackColor = notAlive.ForeColor = Color.DarkGray;
@@ -107,8 +110,6 @@ namespace FTAnalyzer.Forms
 
         private void ResizeColumns()
         {
-            foreach (DataGridViewColumn c in dgReportSheet.Columns)
-                c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             for (int i = c1841ColumnIndex; i <= c1911ColumnIndex; i++)
                 dgReportSheet.Columns[i].Width = 50;
         }
@@ -125,7 +126,7 @@ namespace FTAnalyzer.Forms
                 string relation = (string)cell.Value;
                 if (relation == "Direct Ancestor")
                 {
-                    e.CellStyle.Font = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
+                    e.CellStyle.Font = boldFont;
                 }
             }
             else

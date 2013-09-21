@@ -22,11 +22,14 @@ namespace FTAnalyzer.Forms
         private int birthColumnIndex;
         private int burialColumnIndex;
         private SortableBindingList<IDisplayColourBMD> reportList;
+        private Font boldFont;
 
         public ColourBMD(SortableBindingList<IDisplayColourBMD> reportList)
         {
             InitializeComponent();
             this.reportList = reportList;
+            
+            boldFont = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
             styles = new Dictionary<int, DataGridViewCellStyle>();
             DataGridViewCellStyle notRequired = new DataGridViewCellStyle();
             notRequired.BackColor = notRequired.ForeColor = Color.DarkGray;
@@ -81,8 +84,6 @@ namespace FTAnalyzer.Forms
 
         private void ResizeColumns()
         {
-            foreach (DataGridViewColumn c in dgReportSheet.Columns)
-                c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             for (int i = birthColumnIndex; i <= burialColumnIndex; i++)
                 dgReportSheet.Columns[i].Width = 60;
         }
@@ -99,11 +100,11 @@ namespace FTAnalyzer.Forms
                 string relation = (string)cell.Value;
                 if (relation == "Direct Ancestor")
                 {
-                    e.CellStyle.Font = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
+                    e.CellStyle.Font = boldFont;
                 }
                 if (relation == "Root Person")
                 {
-                    e.CellStyle.Font = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
+                    e.CellStyle.Font = boldFont;
                     e.CellStyle.ForeColor = Color.Red;
                 }
             }
