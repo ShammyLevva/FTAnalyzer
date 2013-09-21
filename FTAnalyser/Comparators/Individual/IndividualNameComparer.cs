@@ -11,7 +11,11 @@ namespace FTAnalyzer
         public override int Compare(IDisplayIndividual x, IDisplayIndividual y)
         {
             int i = x.Surname.CompareTo(y.Surname);
-            return (i==0) ? x.Forenames.CompareTo(y.Forenames) : i;
+            int j = x.Forenames.CompareTo(y.Forenames);
+            if(i==0)
+                return (j==0) ? x.BirthDate.CompareTo(y.BirthDate) : j;
+            else
+                return i;
         }
     }
 }

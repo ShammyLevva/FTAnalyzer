@@ -988,7 +988,8 @@ namespace FTAnalyzer
             Predicate<Individual> dateFilter = i => ((i.BirthDate.IsBefore(CensusDate.UKCENSUS1911) || !i.BirthDate.IsKnown()) &&
                                                      (i.DeathDate.IsAfter(CensusDate.UKCENSUS1841) || !i.DeathDate.IsKnown()));
             filter = FilterUtils.AndFilter<Individual>(filter, dateFilter, aliveOnAnyCensus);
-            IEnumerable<Individual> aliveOnCensus = individuals.Where(filter);
+            List<Individual> aliveOnCensus = individuals.Where(filter).ToList();
+            aliveOnCensus.Sort(new IndividualNameComparer());
             return new SortableBindingList<IDisplayColourCensus>(aliveOnCensus);
         }
 
@@ -1000,7 +1001,8 @@ namespace FTAnalyzer
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, surname);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            IEnumerable<Individual> bmd = individuals.Where(filter);
+            List<Individual> bmd = individuals.Where(filter).ToList();
+            bmd.Sort(new IndividualNameComparer());
             return new SortableBindingList<IDisplayColourBMD>(bmd);
         }
 

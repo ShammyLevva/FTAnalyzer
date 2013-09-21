@@ -56,13 +56,8 @@ namespace FTAnalyzer.Forms
             printDocument.DefaultPageSettings.Landscape = true;
 
             dgReportSheet.DataSource = reportList;
-            // Sort by birth date, then forenames, then surname to get the final order required.
-            dgReportSheet.Sort(dgReportSheet.Columns["BirthDate"], ListSortDirection.Ascending);
-            dgReportSheet.Sort(dgReportSheet.Columns["Forenames"], ListSortDirection.Ascending);
-            dgReportSheet.Sort(dgReportSheet.Columns["Surname"], ListSortDirection.Ascending);
             c1841ColumnIndex = dgReportSheet.Columns["C1841"].Index;
             c1911ColumnIndex = dgReportSheet.Columns["C1911"].Index;
-            ResizeColumns();
             tsRecords.Text = "Count : " + reportList.Count + " records listed.";
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
