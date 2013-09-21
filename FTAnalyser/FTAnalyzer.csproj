@@ -425,6 +425,7 @@
     <Compile Include="Forms\Controls\RelationTypes.Designer.cs">
       <DependentUpon>RelationTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\Countries.cs" />
     <Compile Include="Utilities\DoubleMetaphone.cs" />
     <Compile Include="Utilities\EnhancedTextInfo.cs" />
     <Compile Include="Utilities\ErrorHandler.cs" />
