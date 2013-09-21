@@ -224,13 +224,14 @@ namespace FTAnalyzer
                     {
                         CheckCensusDate("Census");
                     }
-                    else if (FactType.Equals(RESIDENCE) && Properties.GeneralSettings.Default.UseResidenceAsCensus)
-                    {
-                        CheckResidenceCensusDate();
-                    }
                     SetCommentAndLocation(FactType, FamilyTree.GetText(node), FamilyTree.GetText(node, "PLAC"),
                         FamilyTree.GetText(node, "PLAC/MAP/LATI"), FamilyTree.GetText(node, "PLAC/MAP/LONG"));
 
+                    // need to check residence after setting location
+                    if (FactType.Equals(RESIDENCE) && Properties.GeneralSettings.Default.UseResidenceAsCensus)
+                    {
+                        CheckResidenceCensusDate();
+                    }
                     // now iterate through source elements of the fact finding all sources
                     XmlNodeList list = node.SelectNodes("SOUR");
                     foreach (XmlNode n in list)
@@ -344,10 +345,13 @@ namespace FTAnalyzer
             if (FactDate.IsKnown() && CensusDate.IsCensusYear(FactDate, true) && !CensusDate.IsCensusYear(FactDate, false))
             {
                 // residence isn't a normal census year but it is a census year if tolerate is on
-                this.FactErrorLevel = Fact.FactError.WARNINGALLOW;
-                this.FactErrorMessage = "Warning : Residence date " + FactDate + " is in a census year but doesn't overlap census date.";
-                if (!Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
-                    this.FactErrorMessage += " This would be accepted as a census fact with Tolerate slightly inaccurate census dates option.";
+                if (CensusDate.IsCensusCountry(FactDate, Location) || !Location.isKnownCountry)
+                {
+                    this.FactErrorLevel = Fact.FactError.WARNINGALLOW;
+                    this.FactErrorMessage = "Warning : Residence date " + FactDate + " is in a census year but doesn't overlap census date.";
+                    if (!Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
+                        this.FactErrorMessage += " This would be accepted as a census fact with Tolerate slightly inaccurate census dates option.";
+                }
             }
         }
 

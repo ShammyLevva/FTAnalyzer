@@ -74,46 +74,37 @@ namespace FTAnalyzer
 
         public static bool IsCensusYear(FactDate fd, bool exactYear)
         {
-            if(exactYear)
+            foreach (CensusDate cd in SUPPORTED_CENSUS)
             {
-                foreach(CensusDate cd in SUPPORTED_CENSUS)
-                {
-                    if(fd.YearMatches(cd)) 
-                        return true;
-                }
-                return false;
+                if (exactYear && fd.YearMatches(cd))
+                    return true;
+                if (!exactYear && fd.Overlaps(cd))
+                    return true;
             }
-            else
-            {
-                foreach(CensusDate cd in SUPPORTED_CENSUS)
-                {
-                    if(fd.Overlaps(cd)) 
-                        return true;
-                }
-                return false;
-            }
+            return false;
         }
 
         public static bool IsLostCousinsCensusYear(FactDate fd, bool exactYear)
         {
-            if(exactYear)
+            foreach (CensusDate cd in LOSTCOUSINS_CENSUS)
             {
-                foreach(CensusDate cd in LOSTCOUSINS_CENSUS)
-                {
-                    if(fd.YearMatches(cd)) 
-                        return true;
-                }
-                return false;
+                if (exactYear && fd.YearMatches(cd))
+                    return true;
+                if (!exactYear && fd.Overlaps(cd))
+                    return true;
             }
-            else
+            return false;
+        }
+
+        public static bool IsCensusCountry(FactDate fd, FactLocation location)
+        {
+            List<CensusDate> matches = SUPPORTED_CENSUS.Where(cd => cd.Country.Equals(location.CensusCountry)).ToList();
+            foreach (CensusDate cd in matches)
             {
-                foreach (CensusDate cd in LOSTCOUSINS_CENSUS)
-                {
-                    if (fd.Overlaps(cd))
-                        return true;
-                }
-                return false;
+                if (fd.YearMatches(cd))
+                    return true;
             }
+            return false;
         }
 
         public override string ToString()
