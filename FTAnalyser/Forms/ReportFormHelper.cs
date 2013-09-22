@@ -6,6 +6,9 @@ using Printing.DataGridViewPrint.Tools;
 using System.Drawing.Printing;
 using System.Windows.Forms;
 using System.Drawing;
+using FTAnalyzer.Utilities;
+using System.Data;
+using System.IO;
 
 namespace FTAnalyzer.Forms
 {
@@ -63,5 +66,58 @@ namespace FTAnalyzer.Forms
             printProvider.Drawer.TitlePrintBlock = new TitlePrintBlock(PrintTitle);
             printPreviewDialog.ShowDialog(parent);
         }
+
+        public void DoExportToExcel(Form parent)
+        {
+            parent.Cursor = Cursors.WaitCursor;
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            DataTable dt = convertor.ToDataTable((ReportGrid.DataSource as SortableBindingList<IDisplayFact>).ToList());
+            ExportToExcel.Export(dt);
+            parent.Cursor = Cursors.Default;
+        }
+
+        public void SaveColumnLayout(string filename)
+        {
+            DataTable dt = new DataTable("table");
+            var query = from DataGridViewColumn col in ReportGrid.Columns
+                        orderby col.DisplayIndex
+                        select col;
+
+            foreach (DataGridViewColumn col in query)
+            {
+                dt.Columns.Add(col.Name);
+            }
+            string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, filename);
+            dt.WriteXmlSchema(path);
+        }
+
+        public void LoadColumnLayout(string filename)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, filename);
+                dt.ReadXmlSchema(path);
+
+                int i = 0;
+                foreach (DataColumn col in dt.Columns)
+                {
+                    ReportGrid.Columns[col.ColumnName].DisplayIndex = i;
+                    i++;
+                }
+            }
+            catch (Exception)
+            {
+                ResetColumnLayout(filename);
+            }
+        }
+
+        public void ResetColumnLayout(string filename)
+        {
+            for (int i = 0; i < ReportGrid.Columns.Count; i++)
+                ReportGrid.Columns[i].DisplayIndex = i;
+            SaveColumnLayout(filename);
+        }
+
     }
 }

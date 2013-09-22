@@ -60,7 +60,7 @@ namespace FTAnalyzer.Forms
         {
             dgFacts.DataSource = facts;
             dgFacts.Sort(dgFacts.Columns["FactDate"], ListSortDirection.Ascending);
-            LoadColumnLayout();
+            reportFormHelper.LoadColumnLayout("FactsColumns.xml");
             ResizeColumns();
             tsRecords.Text = facts.Count + " Records";
         }
@@ -88,64 +88,17 @@ namespace FTAnalyzer.Forms
 
         private void mnuExportToExcel_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            DataTable dt = convertor.ToDataTable((dgFacts.DataSource as SortableBindingList<IDisplayFact>).ToList());
-            ExportToExcel.Export(dt);
-            this.Cursor = Cursors.Default;
-        }
-
-        private void SaveColumnLayout()
-        {
-            DataTable dt = new DataTable("table");
-            var query = from DataGridViewColumn col in dgFacts.Columns
-                        orderby col.DisplayIndex
-                        select col;
-
-            foreach (DataGridViewColumn col in query)
-            {
-                dt.Columns.Add(col.Name);
-            }
-            string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, "FactsColumns.xml");
-            dt.WriteXmlSchema(path);
-        }
-
-        private void LoadColumnLayout()
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, "FactsColumns.xml");
-                dt.ReadXmlSchema(path);
-
-                int i = 0;
-                foreach (DataColumn col in dt.Columns)
-                {
-                    dgFacts.Columns[col.ColumnName].DisplayIndex = i;
-                    i++;
-                }
-            }
-            catch (Exception)
-            {
-                ResetColumnLayout();
-            }
-        }
-
-        private void ResetColumnLayout()
-        {
-            for (int i = 0; i < dgFacts.Columns.Count; i++)
-                dgFacts.Columns[i].DisplayIndex = i;
-            SaveColumnLayout();
+            reportFormHelper.DoExportToExcel(this);
         }
 
         private void mnuResetColumns_Click(object sender, EventArgs e)
         {
-            ResetColumnLayout();
+            reportFormHelper.ResetColumnLayout("FactsColumns.xml");
         }
 
         private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
-            SaveColumnLayout();
+            reportFormHelper.SaveColumnLayout("FactsColumns.xml");
             MessageBox.Show("Column Sort Order Saved", "Fact Column Sorting");
         }
         
