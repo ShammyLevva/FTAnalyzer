@@ -134,6 +134,11 @@ namespace FTAnalyzer.Forms
                     e.CellStyle.BackColor = style.BackColor;
                     e.CellStyle.ForeColor = style.ForeColor;
                     e.CellStyle.SelectionForeColor = e.CellStyle.SelectionBackColor;
+
+                    cell.Style.BackColor = style.BackColor;
+                    cell.Style.ForeColor = style.ForeColor;
+                    cell.Style.SelectionForeColor = cell.Style.SelectionBackColor;
+
                     switch (value)
                     {
                         case 0:

@@ -582,6 +582,8 @@ namespace Printing.DataGridViewPrint
 
                     RectangleF CellBounds = new RectangleF(currentX, currentY, columnWidths[column.Index], rowHeight);
 
+                    g.FillRectangle(new SolidBrush(cell.BackColor()), CellBounds);
+
                     if (cell is DataGridViewImageCell)
                     {
                         Bitmap bm = cell.Value as Bitmap;
@@ -595,7 +597,7 @@ namespace Printing.DataGridViewPrint
                         g.DrawString(
                             cell.EditedFormattedValue.ToString(),
                             cell.Font(scale),
-                            new SolidBrush(row.ForeColor()),
+                            new SolidBrush(cell.ForeColor()),
                             CellBounds,
                             CellFormat);
                     }
