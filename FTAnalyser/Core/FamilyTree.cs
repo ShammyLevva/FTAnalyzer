@@ -976,7 +976,7 @@ namespace FTAnalyzer
             return new SortableBindingList<Individual>(occupations[job]);
         }
 
-        public SortableBindingList<IDisplayColourCensus> ColourCensus(Controls.RelationTypes relType, string surname)
+        public List<IDisplayColourCensus> ColourCensus(Controls.RelationTypes relType, string surname)
         {
             Predicate<Individual> aliveOnAnyCensus = x => x.AliveOnAnyCensus;
             Predicate<Individual> filter = relType.BuildFilter<Individual>(x => x.RelationType);
@@ -988,12 +988,10 @@ namespace FTAnalyzer
             Predicate<Individual> dateFilter = i => ((i.BirthDate.IsBefore(CensusDate.UKCENSUS1911) || !i.BirthDate.IsKnown()) &&
                                                      (i.DeathDate.IsAfter(CensusDate.UKCENSUS1841) || !i.DeathDate.IsKnown()));
             filter = FilterUtils.AndFilter<Individual>(filter, dateFilter, aliveOnAnyCensus);
-            List<Individual> aliveOnCensus = individuals.Where(filter).ToList();
-            aliveOnCensus.Sort(new IndividualNameComparer());
-            return new SortableBindingList<IDisplayColourCensus>(aliveOnCensus);
+            return individuals.Where(filter).ToList < IDisplayColourCensus>();
         }
 
-        public SortableBindingList<IDisplayColourBMD> ColourBMD(Controls.RelationTypes relType, string surname)
+        public List<IDisplayColourBMD> ColourBMD(Controls.RelationTypes relType, string surname)
         {
             Predicate<Individual> filter = relType.BuildFilter<Individual>(x => x.RelationType);
             if (surname.Length > 0)
@@ -1001,9 +999,7 @@ namespace FTAnalyzer
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, surname);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            List<Individual> bmd = individuals.Where(filter).ToList();
-            bmd.Sort(new IndividualNameComparer());
-            return new SortableBindingList<IDisplayColourBMD>(bmd);
+            return individuals.Where(filter).ToList<IDisplayColourBMD>();
         }
 
         #endregion

@@ -24,7 +24,7 @@ namespace FTAnalyzer.Forms
         public Facts()
         {
             InitializeComponent();
-            reportFormHelper = new ReportFormHelper(this.Text, dgFacts);
+            reportFormHelper = new ReportFormHelper(this.Text, dgFacts, this.ResetTable);
             italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
         }
 
@@ -59,14 +59,13 @@ namespace FTAnalyzer.Forms
         private void SetupFacts()
         {
             dgFacts.DataSource = facts;
-            dgFacts.Sort(dgFacts.Columns["FactDate"], ListSortDirection.Ascending);
             reportFormHelper.LoadColumnLayout("FactsColumns.xml");
-            ResizeColumns();
             tsRecords.Text = facts.Count + " Records";
         }
 
-        private void ResizeColumns()
+        private void ResetTable()
         {
+            dgFacts.Sort(dgFacts.Columns["FactDate"], ListSortDirection.Ascending);
             foreach (DataGridViewColumn c in dgFacts.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
         }
@@ -99,7 +98,7 @@ namespace FTAnalyzer.Forms
         private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("FactsColumns.xml");
-            MessageBox.Show("Column Sort Order Saved", "Fact Column Sorting");
+            MessageBox.Show("Column Settings Saved", "Facts");
         }
         
         private void dgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)

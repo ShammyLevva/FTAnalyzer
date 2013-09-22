@@ -1563,7 +1563,7 @@ namespace FTAnalyzer
         private void btnColouredCensus_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            SortableBindingList<IDisplayColourCensus> list = ft.ColourCensus(relTypesColoured, txtColouredSurname.Text);
+            List<IDisplayColourCensus> list = ft.ColourCensus(relTypesColoured, txtColouredSurname.Text);
             ColourCensus rs = new ColourCensus(list);
             DisposeDuplicateForms(rs);
             rs.Show();
@@ -1574,7 +1574,7 @@ namespace FTAnalyzer
         private void btnColourBMD_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            SortableBindingList<IDisplayColourBMD> list = ft.ColourBMD(relTypesColoured, txtColouredSurname.Text);
+            List<IDisplayColourBMD> list = ft.ColourBMD(relTypesColoured, txtColouredSurname.Text);
             ColourBMD rs = new ColourBMD(list);
             DisposeDuplicateForms(rs);
             rs.Show();

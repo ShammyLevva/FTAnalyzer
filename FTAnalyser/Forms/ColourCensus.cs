@@ -24,11 +24,11 @@ namespace FTAnalyzer.Forms
         private SortableBindingList<IDisplayColourCensus> reportList;
         private Font boldFont;
 
-        public ColourCensus(SortableBindingList<IDisplayColourCensus> reportList)
+        public ColourCensus(List<IDisplayColourCensus> reportList)
         {
             InitializeComponent();
-            this.reportList = reportList;
-            reportFormHelper = new ReportFormHelper("Colour Census Report", dgReportSheet);
+            this.reportList = new SortableBindingList<IDisplayColourCensus>(reportList);
+            reportFormHelper = new ReportFormHelper("Colour Census Report", dgReportSheet, this.ResetTable);
 
             boldFont = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
             styles = new Dictionary<int, DataGridViewCellStyle>();
@@ -102,8 +102,9 @@ namespace FTAnalyzer.Forms
             return output.ToString();
         }
 
-        private void ResizeColumns()
+        private void ResetTable()
         {
+            dgReportSheet.Sort(new IndividualNameComparer());
             for (int i = c1841ColumnIndex; i <= c1911ColumnIndex; i++)
                 dgReportSheet.Columns[i].Width = 50;
         }
@@ -269,7 +270,7 @@ namespace FTAnalyzer.Forms
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list);
                     break;
             }
-            ResizeColumns();
+            ResetTable();
             dgReportSheet.Focus();
             tsRecords.Text = Properties.Messages.Count + dgReportSheet.RowCount + " records listed.";
             this.Cursor = Cursors.Default;
@@ -283,7 +284,7 @@ namespace FTAnalyzer.Forms
         private void mnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("ColourCensusLayout.xml");
-            MessageBox.Show("Column Sort Order Saved", "Colour Census Column Sorting");
+            MessageBox.Show("Column Settings Saved", "Colour Census");
         }
 
         private void mnuResetCensusColumns_Click(object sender, EventArgs e)

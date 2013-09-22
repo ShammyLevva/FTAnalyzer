@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using FTAnalyzer.Filters;
 using System.IO;
 using FTAnalyzer.Utilities;
+using System.Collections;
 
 namespace FTAnalyzer.Forms
 {
@@ -19,13 +20,14 @@ namespace FTAnalyzer.Forms
         public FactDate CensusDate { get; private set; }
         private FactLocation censusLocation;
         private ReportFormHelper reportFormHelper;
+        private IComparer comparer;
 
         public bool LostCousins { get; private set; }
 
         public Census(bool lostCousins, string censusCountry)
         {
             InitializeComponent();
-            reportFormHelper = new ReportFormHelper("Missing from Census Report", dgCensus);
+            reportFormHelper = new ReportFormHelper("Missing from Census Report", dgCensus, this.ResetTable);
 
             LostCousins = lostCousins;
 
@@ -43,18 +45,18 @@ namespace FTAnalyzer.Forms
         {
             FamilyTree ft = FamilyTree.Instance;
             CensusDate = date;
+            this.comparer = (IComparer) comparer;
             IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(date, censusDone, lostCousinCheck);
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Where(filter).ToList();
-            individuals.Sort(comparer);
             dgCensus.DataSource = individuals.ToList<IDisplayCensus>();
             StyleRows();
             reportFormHelper.LoadColumnLayout("CensusColumns.xml");
-            ResizeColumns();
             tsRecords.Text = individuals.Count + " Records / " + numFamilies + " Families.";
         }
 
-        private void ResizeColumns()
+        private void ResetTable()
         {
+            dgCensus.Sort(comparer);
             foreach (DataGridViewColumn c in dgCensus.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
         }
@@ -81,7 +83,7 @@ namespace FTAnalyzer.Forms
                 DataGridViewCellStyle style = new DataGridViewCellStyle();
                 style.BackColor = highlighted ? Color.LightGray : Color.White;
                 style.ForeColor = cr.RelationType == Individual.DIRECT ? Color.Red : Color.Black;
-                style.Font = cr.IsAlive ? boldFont : regularFont;
+                style.Font = cr.IsAlive(cr.CensusDate) ? boldFont : regularFont;
                 rowStyles.Add(r.Index, style);
             }
         }
@@ -228,7 +230,7 @@ namespace FTAnalyzer.Forms
         private void mnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("CensusColumns.xml");
-            MessageBox.Show("Column Sort Order Saved", "Census Column Sorting");
+            MessageBox.Show("Column Settings Saved", "Census");
         }
 
         private void mnuResetCensusColumns_Click(object sender, EventArgs e)

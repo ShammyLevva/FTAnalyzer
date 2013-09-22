@@ -9,6 +9,7 @@ using System.Drawing;
 using FTAnalyzer.Utilities;
 using System.Data;
 using System.IO;
+using System.ComponentModel;
 
 namespace FTAnalyzer.Forms
 {
@@ -18,14 +19,16 @@ namespace FTAnalyzer.Forms
         private PrintDocument printDocument;
         private PrintDialog printDialog;
         private PrintPreviewDialog printPreviewDialog;
+        private Action resetTable;
 
         public DataGridView ReportGrid { get; private set; }
         public String PrintTitle { get; set; }
 
-        public ReportFormHelper(string title, DataGridView report)
+        public ReportFormHelper(string title, DataGridView report, Action resetTable)
         {
             this.PrintTitle = title;
             this.ReportGrid = report;
+            this.resetTable = resetTable;
 
             printDocument = new PrintDocument();
             printDocument.DefaultPageSettings.Landscape = true;
@@ -85,7 +88,11 @@ namespace FTAnalyzer.Forms
 
             foreach (DataGridViewColumn col in query)
             {
-                dt.Columns.Add(col.Name);
+                DataColumn dc = new DataColumn(col.Name);
+                dc.ExtendedProperties["Width"] = col.Width;
+                if (col == ReportGrid.SortedColumn)
+                    dc.ExtendedProperties["Sort"] = ReportGrid.SortOrder;
+                dt.Columns.Add(dc);
             }
             string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, filename);
             dt.WriteXmlSchema(path);
@@ -95,6 +102,7 @@ namespace FTAnalyzer.Forms
         {
             try
             {
+                this.resetTable();
                 DataTable dt = new DataTable();
                 string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, filename);
                 dt.ReadXmlSchema(path);
@@ -103,6 +111,19 @@ namespace FTAnalyzer.Forms
                 foreach (DataColumn col in dt.Columns)
                 {
                     ReportGrid.Columns[col.ColumnName].DisplayIndex = i;
+                    if (col.ExtendedProperties.Contains("Width"))
+                    {
+                        int width = 0;
+                        if (int.TryParse((string)col.ExtendedProperties["Width"], out width))
+                            ReportGrid.Columns[col.ColumnName].Width = width;
+                    }
+                    if (col.ExtendedProperties.Contains("Sort"))
+                    {
+                        ListSortDirection direction = "Ascending".Equals(col.ExtendedProperties["Sort"]) ?
+                                ListSortDirection.Ascending :
+                                ListSortDirection.Descending;
+                        ReportGrid.Sort(ReportGrid.Columns[col.ColumnName], direction);
+                    }
                     i++;
                 }
             }
@@ -114,6 +135,7 @@ namespace FTAnalyzer.Forms
 
         public void ResetColumnLayout(string filename)
         {
+            resetTable();
             for (int i = 0; i < ReportGrid.Columns.Count; i++)
                 ReportGrid.Columns[i].DisplayIndex = i;
             SaveColumnLayout(filename);

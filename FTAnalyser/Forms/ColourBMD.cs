@@ -24,11 +24,11 @@ namespace FTAnalyzer.Forms
         private SortableBindingList<IDisplayColourBMD> reportList;
         private Font boldFont;
 
-        public ColourBMD(SortableBindingList<IDisplayColourBMD> reportList)
+        public ColourBMD(List<IDisplayColourBMD> reportList)
         {
             InitializeComponent();
-            this.reportList = reportList;
-            reportFormHelper = new ReportFormHelper("Colour BMD Report", dgReportSheet);
+            this.reportList = new SortableBindingList<IDisplayColourBMD>(reportList);
+            reportFormHelper = new ReportFormHelper("Colour BMD Report", dgReportSheet, this.ResetTable);
     
             boldFont = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
             styles = new Dictionary<int, DataGridViewCellStyle>();
@@ -74,8 +74,9 @@ namespace FTAnalyzer.Forms
             cbFilter.Text = "All Individuals";
         }
 
-        private void ResizeColumns()
+        private void ResetTable()
         {
+            dgReportSheet.Sort(new IndividualNameComparer());
             for (int i = birthColumnIndex; i <= burialColumnIndex; i++)
                 dgReportSheet.Columns[i].Width = 60;
         }
@@ -266,7 +267,7 @@ namespace FTAnalyzer.Forms
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(8, false));
                     break;
             }
-            ResizeColumns();
+            ResetTable();
             dgReportSheet.Focus();
             tsRecords.Text = Properties.Messages.Count + dgReportSheet.RowCount + " records listed.";
             this.Cursor = Cursors.Default;
@@ -285,7 +286,7 @@ namespace FTAnalyzer.Forms
         private void mnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("ColourBMDColumns.xml");
-            MessageBox.Show("Column Sort Order Saved", "BMD Colour Column Sorting");
+            MessageBox.Show("Column Settings Saved", "BMD Colour");
         }
     }
 }

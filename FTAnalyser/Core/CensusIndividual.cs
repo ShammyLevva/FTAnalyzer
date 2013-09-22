@@ -36,10 +36,10 @@ namespace FTAnalyzer
             get { return GetAge(family.CensusDate); }
         }
 
-        public bool IsAlive
-        {
-            get { return family.CensusDate.IsAfter(BirthDate) && family.CensusDate.IsBefore(DeathDate); }
-        }
+        //public bool IsAlive
+        //{
+        //    get { return family.CensusDate.IsAfter(BirthDate) && family.CensusDate.IsBefore(DeathDate); }
+        //}
 
         public string CensusSurname
         {
