@@ -506,7 +506,7 @@ namespace Printing.DataGridViewPrint
 
 
             // Printing each visible cell of the header row
-            foreach (var column in partition.GetColumns())
+            foreach (var column in partition.GetColumns().OrderBy(x => x.DisplayIndex))
             {
                 DataGridViewHeaderCell cell = column.HeaderCell;
 

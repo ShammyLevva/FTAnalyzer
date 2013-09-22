@@ -16,7 +16,8 @@ namespace FTAnalyzer.Forms
     public partial class ColourCensus : Form
     {
 
-        private PrintingDataGridViewProvider printProvider;
+        private ReportFormHelper reportFormHelper;
+
         private Dictionary<int, DataGridViewCellStyle> styles;
         private int c1841ColumnIndex;
         private int c1911ColumnIndex;
@@ -27,6 +28,7 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             this.reportList = reportList;
+            reportFormHelper = new ReportFormHelper("Colour Census Report", dgReportSheet);
 
             boldFont = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
             styles = new Dictionary<int, DataGridViewCellStyle>();
@@ -49,18 +51,10 @@ namespace FTAnalyzer.Forms
             lcNoCensus.BackColor = lcNoCensus.ForeColor = Color.DarkOrange;
             styles.Add(5, lcNoCensus);
 
-            printDocument.DefaultPageSettings.Margins =
-               new System.Drawing.Printing.Margins(15,15,15,15);
-
-            printProvider = PrintingDataGridViewProvider.Create(
-                printDocument, dgReportSheet, true, true, true,
-                new TitlePrintBlock("Colour Census Report"), null, null);
-
-            printDocument.DefaultPageSettings.Landscape = true;
-
             dgReportSheet.DataSource = reportList;
             c1841ColumnIndex = dgReportSheet.Columns["C1841"].Index;
             c1911ColumnIndex = dgReportSheet.Columns["C1911"].Index;
+            reportFormHelper.LoadColumnLayout("ColourCensusLayout.xml");
             tsRecords.Text = "Count : " + reportList.Count + " records listed.";
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
@@ -167,20 +161,13 @@ namespace FTAnalyzer.Forms
 
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
-            if (printDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                printDocument.PrinterSettings = printDialog.PrinterSettings;
-                printDocument.DocumentName = "Colour Census Report";
-                printDocument.Print();
-            }
+            reportFormHelper.PrintTitle = "Colour Census Report";
+            reportFormHelper.PrintReport(this);
         }
 
         private void printPreviewToolStripButton_Click(object sender, EventArgs e)
         {
-            if (printDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                printPreviewDialog.ShowDialog(this);
-            }
+            reportFormHelper.PrintPreviewReport(this);
         }
 
         private void dgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -285,12 +272,18 @@ namespace FTAnalyzer.Forms
 
         private void mnuExportToExcel_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            List<IDisplayColourCensus> export = (dgReportSheet.DataSource as SortableBindingList<IDisplayColourCensus>).ToList<IDisplayColourCensus>();
-            DataTable dt = convertor.ToDataTable(export);
-            ExportToExcel.Export(dt);
-            this.Cursor = Cursors.Default;
+            reportFormHelper.DoExportToExcel(this);
+        }
+
+        private void mnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
+        {
+            reportFormHelper.SaveColumnLayout("ColourCensusLayout.xml");
+            MessageBox.Show("Column Sort Order Saved", "Colour Census Column Sorting");
+        }
+
+        private void mnuResetCensusColumns_Click(object sender, EventArgs e)
+        {
+            reportFormHelper.ResetColumnLayout("ColourCensusLayout.xml");
         }
     }
 }
