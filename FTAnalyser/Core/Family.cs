@@ -71,6 +71,7 @@ namespace FTAnalyzer
                 AddFacts(node, Fact.MARR_LICENSE);
                 AddFacts(node, Fact.MARR_SETTLEMENT);
                 AddFacts(node, Fact.SEPARATION);
+                AddFacts(node, Fact.CENSUS);
                 AddFacts(node, Fact.CUSTOM_FACT);
             }
         }
@@ -99,7 +100,18 @@ namespace FTAnalyzer
             XmlNodeList list = node.SelectNodes(factType);
             foreach (XmlNode n in list)
             {
-                Facts.Add(new Fact(n, FamilyRef));
+                Fact f = new Fact(n, FamilyRef);
+                if (f.FactType != Fact.CENSUS)
+                    Facts.Add(f);
+                else
+                {
+                    // Handle a census fact on a family.
+                    foreach (Individual person in Members)
+                    {
+                        if (person.IsAlive(f.FactDate))
+                            person.AddFact(f);
+                    }
+                }
             }
         }
 

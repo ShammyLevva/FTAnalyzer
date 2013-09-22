@@ -570,6 +570,16 @@ namespace FTAnalyzer
         //    return false;
         //}
 
+        public bool IsAlive(FactDate when)
+        {
+            return IsBorn(when) && !IsDeceased(when);
+        }
+
+        public bool IsBorn(FactDate when)
+        {
+            return BirthDate.IsKnown() && BirthDate.IsBefore(when);
+        }
+
         public bool IsDeceased(FactDate when)
         {
             return DeathDate.IsKnown() && DeathDate.IsBefore(when);
