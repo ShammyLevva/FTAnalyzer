@@ -55,7 +55,7 @@ namespace FTAnalyzer.Forms
             c1841ColumnIndex = dgReportSheet.Columns["C1841"].Index;
             c1911ColumnIndex = dgReportSheet.Columns["C1911"].Index;
             reportFormHelper.LoadColumnLayout("ColourCensusLayout.xml");
-            tsRecords.Text = "Count : " + reportList.Count + " records listed.";
+            tsRecords.Text = Properties.Messages.Count + reportList.Count + " records listed.";
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
             {
@@ -271,7 +271,7 @@ namespace FTAnalyzer.Forms
             }
             ResizeColumns();
             dgReportSheet.Focus();
-            tsRecords.Text = "Count : " + dgReportSheet.RowCount + " records listed.";
+            tsRecords.Text = Properties.Messages.Count + dgReportSheet.RowCount + " records listed.";
             this.Cursor = Cursors.Default;
         }
 

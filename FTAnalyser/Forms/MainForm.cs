@@ -19,7 +19,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.2.0.1";
+        private string VERSION = "2.2.0.2";
         //private bool _checkForUpdatesEnabled = false;
         //private bool _showNoUpdateMessage = false;
         //private System.Threading.Timer _timerCheckForUpdates;
@@ -197,6 +197,7 @@ namespace FTAnalyzer
             {
                 tabSelector.SelectedTab = tabDisplayProgress;
                 tsCountLabel.Text = "";
+                tsHintsLabel.Text = "";
             }
             else
             {
@@ -206,6 +207,7 @@ namespace FTAnalyzer
                     {
                         tabSelector.SelectedTab = tabDisplayProgress;
                         tsCountLabel.Text = "";
+                        tsHintsLabel.Text = "";
                         MessageBox.Show(Properties.ErrorMessages.FTA_0002, "Error : FTA_0002");
                     }
                     return;
@@ -214,6 +216,7 @@ namespace FTAnalyzer
                 if (tabSelector.SelectedTab == tabDisplayProgress)
                 {
                     tsCountLabel.Text = "";
+                    tsHintsLabel.Text = "";
                     mnuPrint.Enabled = true;
                 }
                 else if (tabSelector.SelectedTab == tabIndividuals)
@@ -223,7 +226,8 @@ namespace FTAnalyzer
                     dgIndividuals.Sort(dgIndividuals.Columns["Ind_ID"], ListSortDirection.Ascending);
                     dgIndividuals.Focus();
                     mnuPrint.Enabled = true;
-                    tsCountLabel.Text = "Count : " + list.Count;
+                    tsCountLabel.Text = Properties.Messages.Count + list.Count;
+                    tsHintsLabel.Text = Properties.Messages.Hints_Individual;
                 }
                 else if (tabSelector.SelectedTab == tabFamilies)
                 {
@@ -232,7 +236,8 @@ namespace FTAnalyzer
                     dgFamilies.Sort(dgFamilies.Columns["FamilyID"], ListSortDirection.Ascending);
                     dgFamilies.Focus();
                     mnuPrint.Enabled = true;
-                    tsCountLabel.Text = "Count : " + list.Count;
+                    tsCountLabel.Text = Properties.Messages.Count + list.Count;
+                    tsHintsLabel.Text = Properties.Messages.Hints_Family;
                 }
                 else if (tabSelector.SelectedTab == tabOccupations)
                 {
@@ -241,18 +246,21 @@ namespace FTAnalyzer
                     dgOccupations.Sort(dgOccupations.Columns["Occupation"], ListSortDirection.Ascending);
                     dgOccupations.Focus();
                     mnuPrint.Enabled = true;
-                    tsCountLabel.Text = "Count : " + list.Count;
+                    tsCountLabel.Text = Properties.Messages.Count + list.Count;
+                    tsHintsLabel.Text = Properties.Messages.Hints_Occupation;
                 }
                 else if (tabSelector.SelectedTab == tabCensus)
                 {
                     cenDate.RevertToDefaultDate();
                     tsCountLabel.Text = "";
+                    tsHintsLabel.Text = "";
                     btnShowResults.Enabled = ft.IndividualCount > 0;
                     cenDate.AddAllCensusItems();
                 }
                 else if (tabSelector.SelectedTab == tabTreetops)
                 {
                     tsCountLabel.Text = "";
+                    tsHintsLabel.Text = "";
                     dgTreeTops.DataSource = null;
                     if (ckbTTIgnoreLocations.Checked)
                         treetopsCountry.Enabled = false;
@@ -262,6 +270,7 @@ namespace FTAnalyzer
                 else if (tabSelector.SelectedTab == tabWarDead)
                 {
                     tsCountLabel.Text = "";
+                    tsHintsLabel.Text = "";
                     dgWarDead.DataSource = null;
                     if (ckbWDIgnoreLocations.Checked)
                         wardeadCountry.Enabled = false;
@@ -271,6 +280,7 @@ namespace FTAnalyzer
                 else if (tabSelector.SelectedTab == tabLostCousins)
                 {
                     tsCountLabel.Text = "";
+                    tsHintsLabel.Text = "";
                     btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled =
                         btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled =
                         btnLC1911EW.Enabled = ft.IndividualCount > 0;
@@ -281,7 +291,8 @@ namespace FTAnalyzer
                     dgDataErrors.DataSource = errors;
                     dgDataErrors.Focus();
                     mnuPrint.Enabled = true;
-                    tsCountLabel.Text = "Count : " + errors.Count;
+                    tsCountLabel.Text = Properties.Messages.Count + errors.Count;
+                    tsHintsLabel.Text = Properties.Messages.Hints_Individual;
                 }
                 else if (tabSelector.SelectedTab == tabLooseDeaths)
                 {
@@ -289,13 +300,15 @@ namespace FTAnalyzer
                     dgLooseDeaths.DataSource = looseDeathList;
                     dgLooseDeaths.Focus();
                     mnuPrint.Enabled = true;
-                    tsCountLabel.Text = "Count : " + looseDeathList.Count;
+                    tsCountLabel.Text = Properties.Messages.Count + looseDeathList.Count;
+                    tsHintsLabel.Text = Properties.Messages.Hints_Individual;
                 }
                 else if (tabSelector.SelectedTab == tabLocations)
                 {
                     HourGlass(true);
                     tabCtrlLocations.SelectedIndex = 0;
                     tsCountLabel.Text = "";
+                    tsHintsLabel.Text = Properties.Messages.Hints_Location;
                     treeViewLocations.Nodes.Clear();
                     Application.DoEvents();
                     treeViewLocations.Nodes.AddRange(ft.GetAllLocationsTreeNodes(treeViewLocations.Font));
@@ -910,7 +923,8 @@ namespace FTAnalyzer
             dgTreeTops.Focus();
             foreach (DataGridViewColumn c in dgTreeTops.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
-            tsCountLabel.Text = "Count : " + treeTopsList.Count;
+            tsCountLabel.Text = Properties.Messages.Count + treeTopsList.Count;
+            tsHintsLabel.Text = Properties.Messages.Hints_Individual;
             mnuPrint.Enabled = true;
             HourGlass(false);
         }
@@ -925,7 +939,8 @@ namespace FTAnalyzer
             dgWarDead.Focus();
             foreach (DataGridViewColumn c in dgWarDead.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
-            tsCountLabel.Text = "Count : " + warDeadList.Count;
+            tsCountLabel.Text = Properties.Messages.Count + warDeadList.Count;
+            tsHintsLabel.Text = Properties.Messages.Hints_Individual;
             mnuPrint.Enabled = true;
             HourGlass(false);
         }
@@ -940,7 +955,8 @@ namespace FTAnalyzer
             dgWarDead.Focus();
             foreach (DataGridViewColumn c in dgWarDead.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
-            tsCountLabel.Text = "Count : " + warDeadList.Count;
+            tsCountLabel.Text = Properties.Messages.Count + warDeadList.Count;
+            tsHintsLabel.Text = Properties.Messages.Hints_Individual;
             mnuPrint.Enabled = true;
             HourGlass(false);
         }
@@ -1202,7 +1218,8 @@ namespace FTAnalyzer
             HourGlass(true);
             SortableBindingList<DataError> errors = ft.DataErrors(ckbDataErrors);
             dgDataErrors.DataSource = errors;
-            tsCountLabel.Text = "Count : " + errors.Count;
+            tsCountLabel.Text = Properties.Messages.Count + errors.Count;
+            tsHintsLabel.Text = Properties.Messages.Hints_Individual;
             HourGlass(false);
         }
 
@@ -1339,7 +1356,7 @@ namespace FTAnalyzer
             if (control is DataGridView)
             {
                 DataGridView dg = control as DataGridView;
-                tsCountLabel.Text = "Count : " + dg.RowCount + " " + dg.Name.Substring(2);
+                tsCountLabel.Text = Properties.Messages.Count + dg.RowCount + " " + dg.Name.Substring(2);
                 mnuPrint.Enabled = true;
             }
             else
@@ -1347,6 +1364,7 @@ namespace FTAnalyzer
                 tsCountLabel.Text = string.Empty;
                 mnuPrint.Enabled = false;
             }
+            tsHintsLabel.Text = Properties.Messages.Hints_Location;
             HourGlass(false);
         }
 
