@@ -20,13 +20,15 @@ namespace FTAnalyzer.Forms
         public FactDate CensusDate { get; private set; }
         private FactLocation censusLocation;
         private ReportFormHelper reportFormHelper;
-        private IComparer comparer;
+        private IComparer<CensusIndividual> comparer;
 
         public bool LostCousins { get; private set; }
 
         public Census(bool lostCousins, string censusCountry)
         {
             InitializeComponent();
+            dgCensus.AutoGenerateColumns = false;
+
             reportFormHelper = new ReportFormHelper("Missing from Census Report", dgCensus, this.ResetTable);
 
             LostCousins = lostCousins;
@@ -45,10 +47,10 @@ namespace FTAnalyzer.Forms
         {
             FamilyTree ft = FamilyTree.Instance;
             CensusDate = date;
-            this.comparer = (IComparer) comparer;
+            this.comparer = comparer;
             IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(date, censusDone, lostCousinCheck);
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Where(filter).ToList();
-            dgCensus.DataSource = individuals.ToList<IDisplayCensus>();
+            dgCensus.DataSource = individuals;
             StyleRows();
             reportFormHelper.LoadColumnLayout("CensusColumns.xml");
             tsRecords.Text = individuals.Count + " Records / " + numFamilies + " Families.";
@@ -56,9 +58,8 @@ namespace FTAnalyzer.Forms
 
         private void ResetTable()
         {
-            dgCensus.Sort(comparer);
-            foreach (DataGridViewColumn c in dgCensus.Columns)
-                c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+            (dgCensus.DataSource as List<CensusIndividual>).Sort(comparer);
+            dgCensus.AutoResizeColumns();
         }
 
         private void StyleRows()
@@ -83,7 +84,7 @@ namespace FTAnalyzer.Forms
                 DataGridViewCellStyle style = new DataGridViewCellStyle();
                 style.BackColor = highlighted ? Color.LightGray : Color.White;
                 style.ForeColor = cr.RelationType == Individual.DIRECT ? Color.Red : Color.Black;
-                style.Font = cr.IsAlive(cr.CensusDate) ? boldFont : regularFont;
+                style.Font = cr.IsAlive() ? boldFont : regularFont;
                 rowStyles.Add(r.Index, style);
             }
         }
