@@ -582,14 +582,23 @@ namespace Printing.DataGridViewPrint
 
                     RectangleF CellBounds = new RectangleF(currentX, currentY, columnWidths[column.Index], rowHeight);
 
-                    // Printing the cell text
-                    g.DrawString(
-                        cell.EditedFormattedValue.ToString(),
-                        cell.Font(scale),
-                        new SolidBrush(row.ForeColor()),
-                        CellBounds,
-                        CellFormat);
-
+                    if (cell is DataGridViewImageCell)
+                    {
+                        Bitmap bm = cell.Value as Bitmap;
+                        PointF pos = new PointF(currentX + (columnWidths[column.Index] - bm.Width) / 2,
+                            currentY + (rowHeight - bm.Height) / 2);
+                        g.DrawImage(bm, pos);
+                    }
+                    else
+                    {
+                        // Printing the cell text
+                        g.DrawString(
+                            cell.EditedFormattedValue.ToString(),
+                            cell.Font(scale),
+                            new SolidBrush(row.ForeColor()),
+                            CellBounds,
+                            CellFormat);
+                    }
                     // Drawing the cell bounds
                     if (GridView.CellBorderStyle != DataGridViewCellBorderStyle.None) // Draw the cell border only if the CellBorderStyle is not None
                         g.DrawRectangle(linePen, currentX, currentY, columnWidths[column.Index], rowHeight);

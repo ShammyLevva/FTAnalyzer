@@ -73,17 +73,12 @@ namespace FTAnalyzer.Forms
 
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
-            dgFacts.Columns[0].Visible = false;
             reportFormHelper.PrintReport(this);
-            dgFacts.Columns[0].Visible = true;
         }
 
         private void printPreviewToolStripButton_Click(object sender, EventArgs e)
         {
-            DataGridViewColumn column = dgFacts.Columns[0];
-            dgFacts.Columns.RemoveAt(0);
             reportFormHelper.PrintPreviewReport(this);
-            dgFacts.Columns.Insert(0, column);
         }
 
         private void Facts_TextChanged(object sender, EventArgs e)
