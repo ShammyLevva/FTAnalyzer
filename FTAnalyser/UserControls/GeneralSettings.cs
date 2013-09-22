@@ -126,5 +126,10 @@ namespace FTAnalyzer.UserControls
 		{
 			Properties.GeneralSettings.Default.ReloadRequired = true;
 		}
+
+		private void chkCensusResidence_CheckedChanged(object sender, EventArgs e)
+		{
+			Properties.GeneralSettings.Default.ReloadRequired = true;
+		}
 	}
 }

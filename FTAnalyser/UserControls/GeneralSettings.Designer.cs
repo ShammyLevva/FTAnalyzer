@@ -63,6 +63,7 @@
             this.chkCensusResidence.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkCensusResidence.Name = "chkCensusResidence";
             this.chkCensusResidence.UseVisualStyleBackColor = true;
+            this.chkCensusResidence.CheckedChanged += new System.EventHandler(this.chkCensusResidence_CheckedChanged);
             // 
             // chkTolerateInaccurateCensus
             // 

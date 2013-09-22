@@ -37,7 +37,6 @@ namespace FTAnalyzer
             InitializeComponent();
             displayOptionsOnLoadToolStripMenuItem.Checked = Properties.GeneralSettings.Default.ReportOptions;
             ft.XmlErrorBox = rtbOutput;
-            tabSelector.TabPages.RemoveByKey("tabFamilySearch");
             VERSION = PublishVersion();
             treetopsRelation.MarriedToDB = false;
             SetSavePath();
@@ -98,7 +97,6 @@ namespace FTAnalyzer
                 mnuExport.Visible = false;
                 tabSelector.SelectTab(tabDisplayProgress);
                 rtbOutput.Text = "";
-                rtbFamilySearchResults.Text = "";
                 pbSources.Value = pbIndividuals.Value = pbFamilies.Value = 0;
                 dgCountries.DataSource = null;
                 dgRegions.DataSource = null;
@@ -902,15 +900,6 @@ namespace FTAnalyzer
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             stopProcessing = true;
-        }
-
-        private void btnOpenFolder_Click(object sender, EventArgs e)
-        {
-            string windir = Environment.GetEnvironmentVariable("WINDIR");
-            System.Diagnostics.Process prc = new System.Diagnostics.Process();
-            prc.StartInfo.FileName = windir + @"\explorer.exe";
-            prc.StartInfo.Arguments = txtFamilySearchfolder.Text;
-            prc.Start();
         }
 
         private void btnTreeTops_Click(object sender, EventArgs e)

@@ -208,10 +208,10 @@ namespace FTAnalyzer
             if (Properties.GeneralSettings.Default.ReportOptions)
             {
                 xmlErrorbox.AppendText("\nThe current options are set :");
-                xmlErrorbox.AppendText("\n    Use Baptism/Christening date if no birth date : " + Properties.GeneralSettings.Default.UseBaptismDates);
-                xmlErrorbox.AppendText("\n    Allow Empty values in Locations : " + Properties.GeneralSettings.Default.AllowEmptyLocations);
-                xmlErrorbox.AppendText("\n    Treat 'Residence' facts as Census facts : " + Properties.GeneralSettings.Default.UseResidenceAsCensus);
-                xmlErrorbox.AppendText("\n    Tolerate slightly inaccurate census dates : " + Properties.GeneralSettings.Default.TolerateInaccurateCensusDate);
+                xmlErrorbox.AppendText("\n    Use Baptism/Christening date if no birth date: " + Properties.GeneralSettings.Default.UseBaptismDates);
+                xmlErrorbox.AppendText("\n    Allow Empty values in Locations: " + Properties.GeneralSettings.Default.AllowEmptyLocations);
+                xmlErrorbox.AppendText("\n    Treat Residence facts as Census facts: " + Properties.GeneralSettings.Default.UseResidenceAsCensus);
+                xmlErrorbox.AppendText("\n    Tolerate slightly inaccurate census dates: " + Properties.GeneralSettings.Default.TolerateInaccurateCensusDate);
                 xmlErrorbox.AppendText("\n\n");
             }
         }

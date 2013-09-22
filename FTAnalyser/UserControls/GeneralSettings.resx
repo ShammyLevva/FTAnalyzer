@@ -199,13 +199,13 @@
     <value>3, 49</value>
   </data>
   <data name="chkCensusResidence.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 17</value>
+    <value>222, 17</value>
   </data>
   <data name="chkCensusResidence.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
   <data name="chkCensusResidence.Text" xml:space="preserve">
-    <value>Treat 'Residence' facts as Census facts</value>
+    <value>Treat Residence facts as Census facts (*)</value>
   </data>
   <data name="&gt;&gt;chkCensusResidence.Name" xml:space="preserve">
     <value>chkCensusResidence</value>
