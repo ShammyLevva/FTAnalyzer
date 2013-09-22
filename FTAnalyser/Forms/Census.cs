@@ -48,7 +48,7 @@ namespace FTAnalyzer.Forms
             individuals.Sort(comparer);
             dgCensus.DataSource = individuals.ToList<IDisplayCensus>();
             StyleRows();
-            LoadCensusColumnLayout();
+            reportFormHelper.LoadColumnLayout("CensusColumns.xml");
             ResizeColumns();
             tsRecords.Text = individuals.Count + " Records / " + numFamilies + " Families.";
         }
@@ -227,65 +227,18 @@ namespace FTAnalyzer.Forms
         
         private void mnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
-            SaveCensusColumnLayout();
+            reportFormHelper.SaveColumnLayout("CensusColumns.xml");
             MessageBox.Show("Column Sort Order Saved", "Census Column Sorting");
-        }
-
-        private void SaveCensusColumnLayout()
-        {
-            DataTable dt = new DataTable("table");
-            var query = from DataGridViewColumn col in dgCensus.Columns
-                        orderby col.DisplayIndex
-                        select col;
-
-            foreach (DataGridViewColumn col in query)
-            {
-                dt.Columns.Add(col.Name);
-            }
-            string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, "CensusColumns.xml");
-            dt.WriteXmlSchema(path);
-        }
-
-        private void LoadCensusColumnLayout()
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, "CensusColumns.xml");
-                dt.ReadXmlSchema(path);
-
-                int i = 0;
-                foreach (DataColumn col in dt.Columns)
-                {
-                    dgCensus.Columns[col.ColumnName].DisplayIndex = i;
-                    i++;
-                }
-            }
-            catch (Exception)
-            {
-                ResetCensusColumnLayout();
-            }
-        }
-
-        private void ResetCensusColumnLayout()
-        {
-            for (int i = 0; i < dgCensus.Columns.Count; i++)
-                dgCensus.Columns[i].DisplayIndex = i;
-            SaveCensusColumnLayout();
         }
 
         private void mnuResetCensusColumns_Click(object sender, EventArgs e)
         {
-            ResetCensusColumnLayout();
+            reportFormHelper.ResetColumnLayout("CensusColumns.xml");
         }
 
         private void mnuExportToExcel_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            DataTable dt = convertor.ToDataTable(dgCensus.DataSource as List<IDisplayCensus>);
-            ExportToExcel.Export(dt);
-            this.Cursor = Cursors.Default;
+            reportFormHelper.DoExportToExcel(this);
         }
     }
 }

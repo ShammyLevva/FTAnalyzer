@@ -16,8 +16,8 @@ namespace FTAnalyzer.Forms
 {
     public partial class ColourBMD : Form
     {
+        private ReportFormHelper reportFormHelper;
 
-        private PrintingDataGridViewProvider printProvider;
         private Dictionary<int, DataGridViewCellStyle> styles;
         private int birthColumnIndex;
         private int burialColumnIndex;
@@ -28,7 +28,8 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             this.reportList = reportList;
-            
+            reportFormHelper = new ReportFormHelper("Colour BMD Report", dgReportSheet);
+    
             boldFont = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
             styles = new Dictionary<int, DataGridViewCellStyle>();
             DataGridViewCellStyle notRequired = new DataGridViewCellStyle();
@@ -59,19 +60,10 @@ namespace FTAnalyzer.Forms
             noMarriage.BackColor = noMarriage.ForeColor = Color.RoyalBlue;
             styles.Add(8, noMarriage);
 
-            printDocument.DefaultPageSettings.Margins =
-               new System.Drawing.Printing.Margins(15, 15, 15, 15);
-
-            printProvider = PrintingDataGridViewProvider.Create(
-                printDocument, dgReportSheet, true, true, true,
-                new TitlePrintBlock("Colour BMD Report"), null, null);
-
-            printDocument.DefaultPageSettings.Landscape = true;
-
             dgReportSheet.DataSource = reportList;
             birthColumnIndex = dgReportSheet.Columns["Birth"].Index;
             burialColumnIndex = dgReportSheet.Columns["CremBuri"].Index;
-            LoadColumnLayout();
+            reportFormHelper.LoadColumnLayout("ColourBMDColumns.xml");
             tsRecords.Text = "Count : " + reportList.Count + " records listed.";
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
@@ -155,20 +147,13 @@ namespace FTAnalyzer.Forms
 
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
-            if (printDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                printDocument.PrinterSettings = printDialog.PrinterSettings;
-                printDocument.DocumentName = "Colour BDM Report";
-                printDocument.Print();
-            }
+            reportFormHelper.PrintTitle = "Colour BDM Report";
+            reportFormHelper.PrintReport(this);
         }
 
         private void printPreviewToolStripButton_Click(object sender, EventArgs e)
         {
-            if (printDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                printPreviewDialog.ShowDialog(this);
-            }
+            reportFormHelper.PrintPreviewReport(this);
         }
 
         private void dgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -284,65 +269,17 @@ namespace FTAnalyzer.Forms
 
         private void mnuExportToExcel_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            List<IDisplayColourBMD> export = (dgReportSheet.DataSource as SortableBindingList<IDisplayColourBMD>).ToList<IDisplayColourBMD>();
-            DataTable dt = convertor.ToDataTable(export);
-            ExportToExcel.Export(dt);
-            this.Cursor = Cursors.Default;
-        }
-
-        private void SaveColumnLayout()
-        {
-            DataTable dt = new DataTable("table");
-            var query = from DataGridViewColumn col in dgReportSheet.Columns
-                        orderby col.DisplayIndex
-                        select col;
-
-            foreach (DataGridViewColumn col in query)
-            {
-                dt.Columns.Add(col.Name);
-            }
-            string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, "ColourBMDColumns.xml");
-            dt.WriteXmlSchema(path);
-        }
-
-        private void LoadColumnLayout()
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, "ColourBMDColumns.xml");
-                dt.ReadXmlSchema(path);
-
-                int i = 0;
-                foreach (DataColumn col in dt.Columns)
-                {
-                    dgReportSheet.Columns[col.ColumnName].DisplayIndex = i;
-                    i++;
-                }
-            }
-            catch (Exception)
-            {
-                ResetColumnLayout();
-            }
-        }
-
-        private void ResetColumnLayout()
-        {
-            for (int i = 0; i < dgReportSheet.Columns.Count; i++)
-                dgReportSheet.Columns[i].DisplayIndex = i;
-            SaveColumnLayout();
+            reportFormHelper.DoExportToExcel(this);
         }
 
         private void mnuResetCensusColumns_Click(object sender, EventArgs e)
         {
-            ResetColumnLayout();
+            reportFormHelper.ResetColumnLayout("ColourBMDColumns.xml");
         }
 
         private void mnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
-            SaveColumnLayout();
+            reportFormHelper.SaveColumnLayout("ColourBMDColumns.xml");
             MessageBox.Show("Column Sort Order Saved", "BMD Colour Column Sorting");
         }
     }

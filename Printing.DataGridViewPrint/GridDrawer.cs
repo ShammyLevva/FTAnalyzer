@@ -574,7 +574,7 @@ namespace Printing.DataGridViewPrint
 
                 g.FillRectangle(new SolidBrush(row.BackColor()), RowBounds);
 
-                foreach (var column in partition.GetColumns())
+                foreach (var column in partition.GetColumns().OrderBy(x => x.DisplayIndex))
                 {
                     var cell = row.Cells[column.Index];
 
