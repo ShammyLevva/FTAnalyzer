@@ -31,7 +31,7 @@ namespace FTAnalyzer.Forms
 
             this.reportList = new SortableBindingList<IDisplayColourBMD>(reportList);
             reportFormHelper = new ReportFormHelper("Colour BMD Report", dgReportSheet, this.ResetTable);
-    
+
             boldFont = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
             styles = new Dictionary<int, DataGridViewCellStyle>();
             DataGridViewCellStyle notRequired = new DataGridViewCellStyle();
@@ -175,12 +175,21 @@ namespace FTAnalyzer.Forms
                 {
                     DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
                     int value = (int)cell.Value;
-                    if (value == 1 || value == 2)
+                    if (value != 5)
                     {
                         IDisplayColourBMD person = (IDisplayColourBMD)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
-                        //string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
-                        //ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
-                        MessageBox.Show("Not yet available.");
+                        if (e.ColumnIndex == birthColumnIndex || e.ColumnIndex == birthColumnIndex + 1)
+                        {
+                            ft.SearchBMD(FamilyTree.SearchType.BIRTH, ft.GetIndividual(person.Ind_ID), cbBMDSearchProvider.SelectedIndex);
+                        }
+                        else if (e.ColumnIndex >= birthColumnIndex + 2 && e.ColumnIndex <= birthColumnIndex + 5)
+                        {
+                            ft.SearchBMD(FamilyTree.SearchType.MARRIAGE, ft.GetIndividual(person.Ind_ID), cbBMDSearchProvider.SelectedIndex);
+                        }
+                        else if (e.ColumnIndex == burialColumnIndex || e.ColumnIndex == burialColumnIndex - 1)
+                        {
+                            ft.SearchBMD(FamilyTree.SearchType.DEATH, ft.GetIndividual(person.Ind_ID), cbBMDSearchProvider.SelectedIndex);
+                        }
                     }
                 }
                 else if (e.ColumnIndex >= 0)

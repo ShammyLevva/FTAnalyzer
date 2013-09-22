@@ -104,5 +104,14 @@ namespace FTAnalyzer.Properties {
                 return ResourceManager.GetString("Hints_Occupation", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not Implemented Yet. Coming Soon in a future version.
+        /// </summary>
+        internal static string NotYet {
+            get {
+                return ResourceManager.GetString("NotYet", resourceCulture);
+            }
+        }
     }
 }

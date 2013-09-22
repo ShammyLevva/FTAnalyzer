@@ -1320,12 +1320,12 @@ namespace FTAnalyzer
                 int year, range;
                 if (startYear == FactDate.MINDATE.Year)
                 {
-                    year = endYear + 1;
+                    year = endYear - 9;
                     range = 10;
                 }
                 else if (endYear == FactDate.MAXDATE.Year)
                 {
-                    year = startYear - 1;
+                    year = startYear + 9;
                     range = 10;
                 }
                 else
@@ -1382,12 +1382,12 @@ namespace FTAnalyzer
                 int year, range;
                 if (startYear == FactDate.MINDATE.Year)
                 {
-                    year = endYear + 1;
+                    year = endYear - 9;
                     range = 10;
                 }
                 else if (endYear == FactDate.MAXDATE.Year)
                 {
-                    year = startYear - 1;
+                    year = startYear + 9;
                     range = 10;
                 }
                 else
@@ -1484,12 +1484,12 @@ namespace FTAnalyzer
                 int year, range;
                 if (startYear == FactDate.MINDATE.Year)
                 {
-                    year = endYear + 1;
+                    year = endYear - 9;
                     range = 10;
                 }
                 else if (endYear == FactDate.MAXDATE.Year)
                 {
-                    year = startYear - 1;
+                    year = startYear + 9;
                     range = 10;
                 }
                 else
@@ -1527,6 +1527,111 @@ namespace FTAnalyzer
             uri.Query = query.ToString();
             return uri.ToString();
         }
+        #endregion
+
+        #region Birth/Marriage/Death Searching
+
+        public enum SearchType { BIRTH = 0, MARRIAGE = 1, DEATH = 2 };
+
+        public void SearchBMD(SearchType st, Individual individual, int searchProvider)
+        {
+            string uri = null;
+
+            switch (searchProvider)
+            {
+                case 0: uri = BuildAncestryQuery(st, individual); break;
+                case 1: uri = BuildFindMyPastQuery(st, individual); break;
+                case 2: uri = BuildFreeCenQuery(st, individual); break;
+                case 3: uri = BuildFamilySearchQuery(st, individual); break;
+            }
+            if (uri != null)
+            {
+                Process.Start(uri);
+            }
+        }
+
+        private string BuildFamilySearchQuery(SearchType st, Individual individual)
+        {
+            MessageBox.Show(Properties.Messages.NotYet);
+            return null;
+        }
+
+        private string BuildFreeCenQuery(SearchType st, Individual individual)
+        {
+            MessageBox.Show(Properties.Messages.NotYet);
+            return null;
+        }
+
+        private string BuildFindMyPastQuery(SearchType st, Individual individual)
+        {
+            MessageBox.Show(Properties.Messages.NotYet);
+            return null;
+        }
+
+        private string BuildAncestryQuery(SearchType st, Individual individual)
+        {
+            UriBuilder uri = new UriBuilder();
+            uri.Host = "search.ancestry.co.uk";
+            uri.Path = "cgi-bin/sse.dll";
+            //gsln_x=NP&
+            StringBuilder query = new StringBuilder();
+            query.Append("gl=34&");
+            query.Append("gss=ms_f-34&");
+            query.Append("rank=1&");
+            query.Append("new=1&");
+            query.Append("so=3&");
+            query.Append("MSAV=1&");
+            query.Append("msT=1&");
+            if (individual.Forenames != "?" && individual.Forenames.ToUpper() != "UNKNOWN")
+            {
+                query.Append("gsfn=" + HttpUtility.UrlEncode(individual.Forenames) + "&");
+            }
+            string surname = string.Empty;
+            if (individual.Surname != "?" && individual.Surname.ToUpper() != "UNKNOWN")
+            {
+                surname = individual.Surname;
+            }
+            if (individual.MarriedName != "?" && individual.MarriedName.ToUpper() != "UNKNOWN" && individual.MarriedName != individual.Surname)
+            {
+                surname += " " + individual.MarriedName;
+            }
+            surname = surname.Trim();
+            query.Append("gsln=" + HttpUtility.UrlEncode(surname) + "&");
+            if (individual.BirthDate.IsKnown())
+            {
+                int startYear = individual.BirthDate.StartDate.Year;
+                int endYear = individual.BirthDate.EndDate.Year;
+                int year, range;
+                if (startYear == FactDate.MINDATE.Year)
+                {
+                    year = endYear - 9;
+                    range = 10;
+                }
+                else if (endYear == FactDate.MAXDATE.Year)
+                {
+                    year = startYear + 9;
+                    range = 10;
+                }
+                else
+                {
+                    year = (endYear + startYear + 1) / 2;
+                    range = (endYear - startYear + 1) / 2;
+                    if (2 < range && range < 5) range = 5;
+                    if (range > 5) range = 10;
+                }
+                query.Append("msbdy=" + year + "&");
+                query.Append("msbdp=" + range + "&");
+            }
+            if (individual.BirthLocation != null)
+            {
+                string location = individual.BirthLocation.GetLocation(FactLocation.PARISH).ToString();
+                query.Append("msbpn__ftp=" + HttpUtility.UrlEncode(location) + "&");
+            }
+            query.Append("cpxt=1&uidh=6b2&cp=11");
+            uri.Query = query.ToString();
+            return uri.ToString();
+        }
+
         #endregion
 
         #region Location Tree Building
