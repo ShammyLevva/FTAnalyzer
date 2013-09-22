@@ -24,6 +24,7 @@ namespace FTAnalyzer.Forms
         public Facts()
         {
             InitializeComponent();
+            dgFacts.AutoGenerateColumns = false;
             reportFormHelper = new ReportFormHelper(this.Text, dgFacts, this.ResetTable);
             italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
         }
@@ -66,8 +67,7 @@ namespace FTAnalyzer.Forms
         private void ResetTable()
         {
             dgFacts.Sort(dgFacts.Columns["FactDate"], ListSortDirection.Ascending);
-            foreach (DataGridViewColumn c in dgFacts.Columns)
-                c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+            dgFacts.AutoResizeColumns();
         }
 
         private void printToolStripButton_Click(object sender, EventArgs e)

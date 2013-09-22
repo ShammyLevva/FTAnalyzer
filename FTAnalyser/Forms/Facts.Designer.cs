@@ -41,6 +41,14 @@
             this.dgFacts = new System.Windows.Forms.DataGridView();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
+            this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
+            this.FactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TypeOfFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FactDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AgeAtFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SourceList = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -127,11 +135,20 @@
             this.dgFacts.AllowUserToAddRows = false;
             this.dgFacts.AllowUserToDeleteRows = false;
             this.dgFacts.AllowUserToOrderColumns = true;
-            this.dgFacts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgFacts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgFacts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgFacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FactIcon,
+            this.FactName,
+            this.TypeOfFact,
+            this.FactDate,
+            this.FactLocation,
+            this.Comment,
+            this.AgeAtFact,
+            this.SourceList});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -142,6 +159,7 @@
             this.dgFacts.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgFacts.Location = new System.Drawing.Point(0, 25);
             this.dgFacts.Name = "dgFacts";
+            this.dgFacts.ReadOnly = true;
             this.dgFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgFacts.ShowEditingIcon = false;
             this.dgFacts.Size = new System.Drawing.Size(857, 337);
@@ -164,6 +182,86 @@
             this.tsRecords.Name = "tsRecords";
             this.tsRecords.Size = new System.Drawing.Size(118, 17);
             this.tsRecords.Text = "toolStripStatusLabel1";
+            // 
+            // FactIcon
+            // 
+            this.FactIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.FactIcon.DataPropertyName = "Icon";
+            this.FactIcon.HeaderText = "";
+            this.FactIcon.MinimumWidth = 20;
+            this.FactIcon.Name = "FactIcon";
+            this.FactIcon.ReadOnly = true;
+            this.FactIcon.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.FactIcon.Width = 20;
+            // 
+            // FactName
+            // 
+            this.FactName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.FactName.DataPropertyName = "Name";
+            this.FactName.HeaderText = "Name";
+            this.FactName.MinimumWidth = 150;
+            this.FactName.Name = "FactName";
+            this.FactName.ReadOnly = true;
+            this.FactName.Width = 150;
+            // 
+            // TypeOfFact
+            // 
+            this.TypeOfFact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.TypeOfFact.DataPropertyName = "TypeOfFact";
+            this.TypeOfFact.HeaderText = "Fact Type";
+            this.TypeOfFact.MinimumWidth = 80;
+            this.TypeOfFact.Name = "TypeOfFact";
+            this.TypeOfFact.ReadOnly = true;
+            this.TypeOfFact.Width = 80;
+            // 
+            // FactDate
+            // 
+            this.FactDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.FactDate.DataPropertyName = "FactDate";
+            this.FactDate.HeaderText = "Fact Date";
+            this.FactDate.MinimumWidth = 150;
+            this.FactDate.Name = "FactDate";
+            this.FactDate.ReadOnly = true;
+            this.FactDate.Width = 150;
+            // 
+            // FactLocation
+            // 
+            this.FactLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.FactLocation.DataPropertyName = "Location";
+            this.FactLocation.HeaderText = "Location";
+            this.FactLocation.MinimumWidth = 120;
+            this.FactLocation.Name = "FactLocation";
+            this.FactLocation.ReadOnly = true;
+            this.FactLocation.Width = 123;
+            // 
+            // Comment
+            // 
+            this.Comment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Comment.DataPropertyName = "Comment";
+            this.Comment.HeaderText = "Comment";
+            this.Comment.MinimumWidth = 120;
+            this.Comment.Name = "Comment";
+            this.Comment.ReadOnly = true;
+            this.Comment.Width = 120;
+            // 
+            // AgeAtFact
+            // 
+            this.AgeAtFact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.AgeAtFact.DataPropertyName = "AgeAtFact";
+            this.AgeAtFact.HeaderText = "Age";
+            this.AgeAtFact.MinimumWidth = 50;
+            this.AgeAtFact.Name = "AgeAtFact";
+            this.AgeAtFact.ReadOnly = true;
+            this.AgeAtFact.Width = 50;
+            // 
+            // SourceList
+            // 
+            this.SourceList.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SourceList.DataPropertyName = "SourceList";
+            this.SourceList.HeaderText = "Sources";
+            this.SourceList.MinimumWidth = 120;
+            this.SourceList.Name = "SourceList";
+            this.SourceList.ReadOnly = true;
             // 
             // Facts
             // 
@@ -200,5 +298,13 @@
         private System.Windows.Forms.ToolStripButton mnuExportToExcel;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel tsRecords;
+        private System.Windows.Forms.DataGridViewImageColumn FactIcon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FactName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TypeOfFact;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FactDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FactLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AgeAtFact;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;
     }
 }
