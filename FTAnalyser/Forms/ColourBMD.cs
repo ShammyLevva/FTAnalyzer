@@ -27,6 +27,8 @@ namespace FTAnalyzer.Forms
         public ColourBMD(List<IDisplayColourBMD> reportList)
         {
             InitializeComponent();
+            dgReportSheet.AutoGenerateColumns = false;
+
             this.reportList = new SortableBindingList<IDisplayColourBMD>(reportList);
             reportFormHelper = new ReportFormHelper("Colour BMD Report", dgReportSheet, this.ResetTable);
     
@@ -60,7 +62,7 @@ namespace FTAnalyzer.Forms
             noMarriage.BackColor = noMarriage.ForeColor = Color.RoyalBlue;
             styles.Add(8, noMarriage);
 
-            dgReportSheet.DataSource = reportList;
+            dgReportSheet.DataSource = this.reportList;
             birthColumnIndex = dgReportSheet.Columns["Birth"].Index;
             burialColumnIndex = dgReportSheet.Columns["CremBuri"].Index;
             reportFormHelper.LoadColumnLayout("ColourBMDColumns.xml");
@@ -76,9 +78,11 @@ namespace FTAnalyzer.Forms
 
         private void ResetTable()
         {
-            dgReportSheet.Sort(new IndividualNameComparer());
-            for (int i = birthColumnIndex; i <= burialColumnIndex; i++)
-                dgReportSheet.Columns[i].Width = 60;
+            dgReportSheet.Sort(dgReportSheet.Columns["BirthDate"], ListSortDirection.Ascending);
+            dgReportSheet.Sort(dgReportSheet.Columns["Forenames"], ListSortDirection.Ascending);
+            dgReportSheet.Sort(dgReportSheet.Columns["Surname"], ListSortDirection.Ascending);
+            foreach (DataGridViewColumn column in dgReportSheet.Columns)
+                column.Width = column.MinimumWidth;
         }
 
         private void dgReportSheet_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

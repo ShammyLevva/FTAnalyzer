@@ -104,9 +104,10 @@ namespace FTAnalyzer.Forms
 
         private void ResetTable()
         {
-            dgReportSheet.Sort(new IndividualNameComparer());
-            for (int i = c1841ColumnIndex; i <= c1911ColumnIndex; i++)
-                dgReportSheet.Columns[i].Width = 50;
+            dgReportSheet.Sort(dgReportSheet.Columns["BirthDate"], ListSortDirection.Ascending);
+            dgReportSheet.Sort(dgReportSheet.Columns["Forenames"], ListSortDirection.Ascending);
+            dgReportSheet.Sort(dgReportSheet.Columns["Surname"], ListSortDirection.Ascending);
+            dgReportSheet.AutoResizeColumns();
         }
 
         private void dgReportSheet_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

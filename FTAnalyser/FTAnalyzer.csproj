@@ -298,7 +298,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Comparators\Individual\IndividualNameComparer.cs" />
     <Compile Include="Comparators\Location\FactLocationComparer.cs" />
     <Compile Include="Core\Age.cs" />
     <Compile Include="Core\CensusDate.cs" />
