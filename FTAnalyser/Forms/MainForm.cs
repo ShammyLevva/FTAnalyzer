@@ -659,16 +659,6 @@ namespace FTAnalyzer
         //    _showNoUpdateMessage = false;
         //}
 
-        private void showLocationsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Locations locationsForm = new Locations();
-            List<FactLocation> locations = ft.AllLocations.ToList();
-            locations.Sort();
-            locationsForm.BuildLocationTree(locations);
-            DisposeDuplicateForms(locationsForm);
-            locationsForm.Show();
-        }
-
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UserControls.Options options = new UserControls.Options();
