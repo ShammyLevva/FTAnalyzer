@@ -18,9 +18,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Old Code", "..\Old Code\Old Code.csproj", "{63028B09-0EC2-45FA-BBC2-9B5F863C0E63}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Printing.DataGridViewPrint", "..\Printing.DataGridViewPrint\Printing.DataGridViewPrint.csproj", "{FDFCB41B-C75D-476F-A4AA-EFD8C875A677}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
 		SccLocalPath0 = .
@@ -38,6 +40,9 @@ Global
 		SccProjectUniqueName5 = ..\\Old\u0020Code\\Old\u0020Code.csproj
 		SccProjectName5 = ../Old\u0020Code
 		SccLocalPath5 = ..\\Old\u0020Code
+		SccProjectUniqueName6 = ..\\Printing.DataGridViewPrint\\Printing.DataGridViewPrint.csproj
+		SccProjectName6 = ../Printing.DataGridViewPrint
+		SccLocalPath6 = ..\\Printing.DataGridViewPrint
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FTAnalyzer.vsmdi
@@ -77,6 +82,12 @@ Global
 		{63028B09-0EC2-45FA-BBC2-9B5F863C0E63}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{63028B09-0EC2-45FA-BBC2-9B5F863C0E63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63028B09-0EC2-45FA-BBC2-9B5F863C0E63}.Release|x86.ActiveCfg = Release|Any CPU
+		{FDFCB41B-C75D-476F-A4AA-EFD8C875A677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDFCB41B-C75D-476F-A4AA-EFD8C875A677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDFCB41B-C75D-476F-A4AA-EFD8C875A677}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FDFCB41B-C75D-476F-A4AA-EFD8C875A677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDFCB41B-C75D-476F-A4AA-EFD8C875A677}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDFCB41B-C75D-476F-A4AA-EFD8C875A677}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
