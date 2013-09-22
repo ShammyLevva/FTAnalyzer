@@ -70,11 +70,11 @@ namespace FTAnalyzer.Forms
             printPreviewDialog.ShowDialog(parent);
         }
 
-        public void DoExportToExcel(Form parent)
+        public void DoExportToExcel<T>(Form parent)
         {
             parent.Cursor = Cursors.WaitCursor;
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            DataTable dt = convertor.ToDataTable((ReportGrid.DataSource as SortableBindingList<IDisplayFact>).ToList());
+            DataTable dt = convertor.ToDataTable((ReportGrid.DataSource as SortableBindingList<T>).ToList());
             ExportToExcel.Export(dt);
             parent.Cursor = Cursors.Default;
         }

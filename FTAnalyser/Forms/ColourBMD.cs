@@ -275,7 +275,7 @@ namespace FTAnalyzer.Forms
 
         private void mnuExportToExcel_Click(object sender, EventArgs e)
         {
-            reportFormHelper.DoExportToExcel(this);
+            reportFormHelper.DoExportToExcel<IDisplayColourBMD>(this);
         }
 
         private void mnuResetCensusColumns_Click(object sender, EventArgs e)

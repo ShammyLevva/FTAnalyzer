@@ -39,7 +39,7 @@ namespace FTAnalyzer.Utilities
         {
             string q = "\"";
             Encoding isoWesternEuropean = Encoding.GetEncoding(28591);
-            StreamWriter output = new StreamWriter(new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Write), isoWesternEuropean);
+            StreamWriter output = new StreamWriter(new FileStream(filename, FileMode.Create, FileAccess.Write), isoWesternEuropean);
             //am getting my grid's column headers
             int columnscount = table.Columns.Count;
 
