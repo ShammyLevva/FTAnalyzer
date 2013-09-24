@@ -11,6 +11,7 @@ namespace FTAnalyzer
         string Forenames { get; }           
         string Surname { get; }
         string Relation { get; }
+
         int C1841 { get; }
         int C1851 { get; }
         int C1861 { get; }
@@ -19,6 +20,7 @@ namespace FTAnalyzer
         int C1891 { get; }
         int C1901 { get; }
         int C1911 { get; }
+
         FactDate BirthDate { get; }
         FactLocation BirthLocation { get; }
         FactDate DeathDate { get; }

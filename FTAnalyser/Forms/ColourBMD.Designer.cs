@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColourBMD));
-            this.dgReportSheet = new System.Windows.Forms.DataGridView();
+            this.dgBMDReportSheet = new System.Windows.Forms.DataGridView();
             this.Ind_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Forenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,22 +68,22 @@
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
-            ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBMDReportSheet)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dgReportSheet
+            // dgBMDReportSheet
             // 
-            this.dgReportSheet.AllowUserToAddRows = false;
-            this.dgReportSheet.AllowUserToDeleteRows = false;
-            this.dgReportSheet.AllowUserToOrderColumns = true;
-            this.dgReportSheet.AllowUserToResizeRows = false;
-            this.dgReportSheet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.dgBMDReportSheet.AllowUserToAddRows = false;
+            this.dgBMDReportSheet.AllowUserToDeleteRows = false;
+            this.dgBMDReportSheet.AllowUserToOrderColumns = true;
+            this.dgBMDReportSheet.AllowUserToResizeRows = false;
+            this.dgBMDReportSheet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgReportSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgReportSheet.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgBMDReportSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgBMDReportSheet.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Ind_ID,
             this.Forenames,
             this.Surname,
@@ -104,14 +104,14 @@
             this.DeathLocation,
             this.BestLocation,
             this.Ahnentafel});
-            this.dgReportSheet.Location = new System.Drawing.Point(0, 28);
-            this.dgReportSheet.MultiSelect = false;
-            this.dgReportSheet.Name = "dgReportSheet";
-            this.dgReportSheet.ReadOnly = true;
-            this.dgReportSheet.Size = new System.Drawing.Size(1038, 530);
-            this.dgReportSheet.TabIndex = 1;
-            this.dgReportSheet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportSheet_CellDoubleClick);
-            this.dgReportSheet.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgReportSheet_CellFormatting);
+            this.dgBMDReportSheet.Location = new System.Drawing.Point(0, 28);
+            this.dgBMDReportSheet.MultiSelect = false;
+            this.dgBMDReportSheet.Name = "dgBMDReportSheet";
+            this.dgBMDReportSheet.ReadOnly = true;
+            this.dgBMDReportSheet.Size = new System.Drawing.Size(1038, 530);
+            this.dgBMDReportSheet.TabIndex = 1;
+            this.dgBMDReportSheet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportSheet_CellDoubleClick);
+            this.dgBMDReportSheet.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgReportSheet_CellFormatting);
             // 
             // Ind_ID
             // 
@@ -491,11 +491,11 @@
             this.ClientSize = new System.Drawing.Size(1038, 583);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.dgReportSheet);
+            this.Controls.Add(this.dgBMDReportSheet);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ColourBMD";
             this.Text = "Colour BMD Report Result";
-            ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBMDReportSheet)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -507,7 +507,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgReportSheet;
+        private System.Windows.Forms.DataGridView dgBMDReportSheet;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel tsRecords;
         private System.Windows.Forms.ToolStrip toolStrip1;

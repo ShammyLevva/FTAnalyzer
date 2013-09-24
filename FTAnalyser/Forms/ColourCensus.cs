@@ -53,7 +53,7 @@ namespace FTAnalyzer.Forms
             lcNoCensus.BackColor = lcNoCensus.ForeColor = Color.DarkOrange;
             styles.Add(5, lcNoCensus);
 
-            dgReportSheet.DataSource = reportList;
+            dgReportSheet.DataSource = this.reportList;
             c1841ColumnIndex = dgReportSheet.Columns["C1841"].Index;
             c1911ColumnIndex = dgReportSheet.Columns["C1911"].Index;
             reportFormHelper.LoadColumnLayout("ColourCensusLayout.xml");

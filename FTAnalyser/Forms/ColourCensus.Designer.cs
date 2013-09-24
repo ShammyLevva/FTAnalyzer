@@ -76,6 +76,7 @@
             this.dgReportSheet.AllowUserToAddRows = false;
             this.dgReportSheet.AllowUserToDeleteRows = false;
             this.dgReportSheet.AllowUserToOrderColumns = true;
+            this.dgReportSheet.AllowUserToResizeRows = false;
             this.dgReportSheet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
@@ -103,7 +104,6 @@
             this.dgReportSheet.MultiSelect = false;
             this.dgReportSheet.Name = "dgReportSheet";
             this.dgReportSheet.ReadOnly = true;
-            this.dgReportSheet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgReportSheet.Size = new System.Drawing.Size(1038, 530);
             this.dgReportSheet.TabIndex = 1;
             this.dgReportSheet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportSheet_CellDoubleClick);

@@ -27,12 +27,12 @@ namespace FTAnalyzer.Forms
         public ColourBMD(List<IDisplayColourBMD> reportList)
         {
             InitializeComponent();
-            dgReportSheet.AutoGenerateColumns = false;
+            dgBMDReportSheet.AutoGenerateColumns = false;
 
             this.reportList = new SortableBindingList<IDisplayColourBMD>(reportList);
-            reportFormHelper = new ReportFormHelper("Colour BMD Report", dgReportSheet, this.ResetTable);
+            reportFormHelper = new ReportFormHelper("Colour BMD Report", dgBMDReportSheet, this.ResetTable);
 
-            boldFont = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
+            boldFont = new Font(dgBMDReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
             styles = new Dictionary<int, DataGridViewCellStyle>();
             DataGridViewCellStyle notRequired = new DataGridViewCellStyle();
             notRequired.BackColor = notRequired.ForeColor = Color.DarkGray;
@@ -62,9 +62,9 @@ namespace FTAnalyzer.Forms
             noMarriage.BackColor = noMarriage.ForeColor = Color.RoyalBlue;
             styles.Add(8, noMarriage);
 
-            dgReportSheet.DataSource = this.reportList;
-            birthColumnIndex = dgReportSheet.Columns["Birth"].Index;
-            burialColumnIndex = dgReportSheet.Columns["CremBuri"].Index;
+            dgBMDReportSheet.DataSource = this.reportList;
+            birthColumnIndex = dgBMDReportSheet.Columns["Birth"].Index;
+            burialColumnIndex = dgBMDReportSheet.Columns["CremBuri"].Index;
             reportFormHelper.LoadColumnLayout("ColourBMDColumns.xml");
             tsRecords.Text = Properties.Messages.Count + reportList.Count + " records listed.";
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
@@ -78,10 +78,10 @@ namespace FTAnalyzer.Forms
 
         private void ResetTable()
         {
-            dgReportSheet.Sort(dgReportSheet.Columns["BirthDate"], ListSortDirection.Ascending);
-            dgReportSheet.Sort(dgReportSheet.Columns["Forenames"], ListSortDirection.Ascending);
-            dgReportSheet.Sort(dgReportSheet.Columns["Surname"], ListSortDirection.Ascending);
-            foreach (DataGridViewColumn column in dgReportSheet.Columns)
+            dgBMDReportSheet.Sort(dgBMDReportSheet.Columns["BirthDate"], ListSortDirection.Ascending);
+            dgBMDReportSheet.Sort(dgBMDReportSheet.Columns["Forenames"], ListSortDirection.Ascending);
+            dgBMDReportSheet.Sort(dgBMDReportSheet.Columns["Surname"], ListSortDirection.Ascending);
+            foreach (DataGridViewColumn column in dgBMDReportSheet.Columns)
                 column.Width = column.MinimumWidth;
         }
 
@@ -93,7 +93,7 @@ namespace FTAnalyzer.Forms
             }
             if (e.ColumnIndex < birthColumnIndex || e.ColumnIndex > burialColumnIndex)
             {
-                DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells["Relation"];
+                DataGridViewCell cell = dgBMDReportSheet.Rows[e.RowIndex].Cells["Relation"];
                 string relation = (string)cell.Value;
                 if (relation == "Direct Ancestor")
                 {
@@ -107,8 +107,8 @@ namespace FTAnalyzer.Forms
             }
             else
             {
-                DataGridViewCellStyle style = dgReportSheet.DefaultCellStyle;
-                DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                DataGridViewCellStyle style = dgBMDReportSheet.DefaultCellStyle;
+                DataGridViewCell cell = dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 int value = (int)cell.Value;
                 styles.TryGetValue(value, out style);
                 if (style != null)
@@ -173,11 +173,11 @@ namespace FTAnalyzer.Forms
                 FamilyTree ft = FamilyTree.Instance;
                 if (e.ColumnIndex >= birthColumnIndex && e.ColumnIndex <= burialColumnIndex)
                 {
-                    DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    DataGridViewCell cell = dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
                     int value = (int)cell.Value;
                     if (value != 5)
                     {
-                        IDisplayColourBMD person = (IDisplayColourBMD)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
+                        IDisplayColourBMD person = (IDisplayColourBMD)dgBMDReportSheet.Rows[e.RowIndex].DataBoundItem;
                         if (e.ColumnIndex == birthColumnIndex || e.ColumnIndex == birthColumnIndex + 1)
                         {
                             ft.SearchBMD(FamilyTree.SearchType.BIRTH, ft.GetIndividual(person.Ind_ID), cbBMDSearchProvider.SelectedIndex);
@@ -194,7 +194,7 @@ namespace FTAnalyzer.Forms
                 }
                 else if (e.ColumnIndex >= 0)
                 {
-                    string indID = (string)dgReportSheet.CurrentRow.Cells["Ind_ID"].Value;
+                    string indID = (string)dgBMDReportSheet.CurrentRow.Cells["Ind_ID"].Value;
                     Individual ind = ft.GetIndividual(indID);
                     Facts factForm = new Facts(ind);
                     factForm.Show();
@@ -205,7 +205,7 @@ namespace FTAnalyzer.Forms
         private void cbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
             Application.UserAppDataRegistry.SetValue("Default Search Provider", cbBMDSearchProvider.SelectedItem.ToString());
-            dgReportSheet.Focus();
+            dgBMDReportSheet.Focus();
         }
 
         private List<IDisplayColourBMD> BuildFilter(int toFind, bool all)
@@ -238,51 +238,51 @@ namespace FTAnalyzer.Forms
             {
                 case -1: // nothing selected
                 case 0: // All Individuals
-                    dgReportSheet.DataSource = this.reportList;
+                    dgBMDReportSheet.DataSource = this.reportList;
                     break;
                 case 1: // None Found (All Red)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(1, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(1, true));
                     break;
                 case 2: // All Found (All Green)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(5, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(5, true));
                     break;
                 case 3: // All Wide date ranges (Orange)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(2, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(2, true));
                     break;
                 case 4: // All Narrow date ranges (Yellow)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(3, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(3, true));
                     break;
                 case 5: // All Approx date ranges (Light Green)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(4, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(4, true));
                     break;
                 case 6: // Some Missing (Some Red)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(1, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(1, false));
                     break;
                 case 7: // Some found (Some Green)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(5, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(5, false));
                     break;
                 case 8: // Some Wide date ranges (Orange)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(2, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(2, false));
                     break;
                 case 9: // Some Narrow date ranges (Yellow)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(3, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(3, false));
                     break;
                 case 10: // Some Approx date ranges (Light Green)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(4, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(4, false));
                     break;
                 case 11: // Of Marrying age (Peach)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(6, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(6, false));
                     break;
                 case 12: // No Partner shared fact/children (Light Blue)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(7, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(7, false));
                     break;
                 case 13: // Partner but no marriage (Dark Blue)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(8, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(8, false));
                     break;
             }
             ResetTable();
-            dgReportSheet.Focus();
-            tsRecords.Text = Properties.Messages.Count + dgReportSheet.RowCount + " records listed.";
+            dgBMDReportSheet.Focus();
+            tsRecords.Text = Properties.Messages.Count + dgBMDReportSheet.RowCount + " records listed.";
             this.Cursor = Cursors.Default;
         }
 
