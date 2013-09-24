@@ -27,6 +27,8 @@ namespace FTAnalyzer.Forms
         public ColourCensus(List<IDisplayColourCensus> reportList)
         {
             InitializeComponent();
+            dgReportSheet.AutoGenerateColumns = false;
+            
             this.reportList = new SortableBindingList<IDisplayColourCensus>(reportList);
             reportFormHelper = new ReportFormHelper("Colour Census Report", dgReportSheet, this.ResetTable);
 
@@ -107,7 +109,8 @@ namespace FTAnalyzer.Forms
             dgReportSheet.Sort(dgReportSheet.Columns["BirthDate"], ListSortDirection.Ascending);
             dgReportSheet.Sort(dgReportSheet.Columns["Forenames"], ListSortDirection.Ascending);
             dgReportSheet.Sort(dgReportSheet.Columns["Surname"], ListSortDirection.Ascending);
-            dgReportSheet.AutoResizeColumns();
+            foreach (DataGridViewColumn column in dgReportSheet.Columns)
+                column.Width = column.MinimumWidth;
         }
 
         private void dgReportSheet_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

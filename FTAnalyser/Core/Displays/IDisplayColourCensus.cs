@@ -21,8 +21,9 @@ namespace FTAnalyzer
         int C1911 { get; }
         FactDate BirthDate { get; }
         FactLocation BirthLocation { get; }
-        FactLocation BestLocation(FactDate when);
         FactDate DeathDate { get; }
+        FactLocation DeathLocation { get; }
+        FactLocation BestLocation(FactDate when);
         int Ahnentafel { get; }
     }
 }
