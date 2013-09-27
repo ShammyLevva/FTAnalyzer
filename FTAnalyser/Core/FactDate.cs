@@ -144,6 +144,7 @@ namespace FTAnalyzer
             str = str.Replace("JAN/FEB/MAR", "ABT MAR");
             str = str.Replace("JAN\\FEB\\MAR", "ABT MAR");
             str = str.Replace("Q1", "ABT MAR");
+            str = str.Replace("1Q", "ABT MAR");
             str = str.Replace("QTR1", "ABT MAR");
             str = str.Replace("QTR 1 ", "ABT MAR ");
             str = str.Replace("JUN QTR", "ABT JUN");
@@ -153,6 +154,7 @@ namespace FTAnalyzer
             str = str.Replace("APR/MAY/JUN", "ABT JUN");
             str = str.Replace("APR\\MAY\\JUN", "ABT JUN");
             str = str.Replace("Q2", "ABT JUN");
+            str = str.Replace("2Q", "ABT JUN");
             str = str.Replace("QTR2", "ABT JUN");
             str = str.Replace("QTR 2 ", "ABT JUN ");
             str = str.Replace("SEP QTR", "ABT SEP");
@@ -162,6 +164,7 @@ namespace FTAnalyzer
             str = str.Replace("JUL/AUG/SEP", "ABT SEP");
             str = str.Replace("JUL\\AUG\\SEP", "ABT SEP");
             str = str.Replace("Q3", "ABT SEP");
+            str = str.Replace("3Q", "ABT SEP");
             str = str.Replace("QTR3", "ABT SEP");
             str = str.Replace("QTR 3 ", "ABT SEP ");
             str = str.Replace("DEC QTR", "ABT DEC");
@@ -171,6 +174,7 @@ namespace FTAnalyzer
             str = str.Replace("OCT/NOV/DEC", "ABT DEC");
             str = str.Replace("OCT\\NOV\\DEC", "ABT DEC");
             str = str.Replace("Q4", "ABT DEC");
+            str = str.Replace("4Q", "ABT DEC");
             str = str.Replace("QTR4", "ABT DEC");
             str = str.Replace("QTR 4 ", "ABT DEC ");
 
