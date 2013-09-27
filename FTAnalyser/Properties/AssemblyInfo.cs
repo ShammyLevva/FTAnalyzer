@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("FTAnalyzer")]
 [assembly: AssemblyDescription("Family Tree Analyzer")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Alexander Bisset & Deryck Brown")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("FTAnalyzer")]
-[assembly: AssemblyCopyright("Copyright © Alexander Bisset & Deryck Brown 2010")]
+[assembly: AssemblyCopyright("Copyright © Alexander Bisset & Deryck Brown 2010-2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
