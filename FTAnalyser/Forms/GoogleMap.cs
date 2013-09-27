@@ -58,7 +58,7 @@ namespace FTAnalyzer.Forms
             {
                 this.Cursor = Cursors.Default;
                 return false;
-            }            
+            }
             double lat = res.Results[0].Geometry.Location.Lat;
             double lng = res.Results[0].Geometry.Location.Lng;
             Object[] args = new Object[] { lat, lng };
@@ -136,6 +136,15 @@ namespace FTAnalyzer.Forms
         // Call geocoding routine but account for throttling by Google geocoding engine
         public static GeoResponse CallGeoWSCount(string address, int badtries, ToolStripStatusLabel label)
         {
+            Console.WriteLine("waiting " + sleepinterval);
+            double seconds = sleepinterval / 1000;
+            if (sleepinterval > 500)
+                label.Text = "Querying too fast. Google imposed wait of: " + seconds + " seconds.";
+            if (sleepinterval > 30000)
+            {
+                label.Text = "Maximum Google GeoLocations exceeded. No more possible just now.";
+                return null;
+            }
             Thread.Sleep(sleepinterval);
             GeoResponse res;
             try
@@ -150,9 +159,7 @@ namespace FTAnalyzer.Forms
             if (res == null || res.Status == "OVER_QUERY_LIMIT")
             {
                 // we're hitting Google too fast, increase interval
-                sleepinterval = Math.Min(sleepinterval + ++badtries * 1000, 60000);
-
-                if (sleepinterval > 500) label.Text = "Querying too fast. Google imposed wait of:" + sleepinterval / 1000 + " seconds."; 
+                sleepinterval = Math.Min(sleepinterval + ++badtries * 750, 30000);
                 return CallGeoWSCount(address, badtries, label);
             }
             else
@@ -162,8 +169,6 @@ namespace FTAnalyzer.Forms
                     sleepinterval = 200;
                 else
                     sleepinterval = Math.Max(sleepinterval / 2, 100);
-
-                if(sleepinterval > 500) label.Text = "Querying too fast. Google imposed wait of:" + sleepinterval/ 1000 + " seconds.";
                 return res;
             }
         }

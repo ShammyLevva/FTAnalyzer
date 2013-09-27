@@ -86,7 +86,7 @@ namespace FTAnalyzer.Forms
                 SQLiteConnection conn = GetDatabaseConnection();
                 conn.Open();
                 SQLiteCommand cmd = new SQLiteCommand(conn);
-                int count = ft.AllLocations.Count(l => l.GeoCoded);
+                int count = 0;
                 int good = 0;
                 int bad = 0;
                 pbGeocoding.Minimum = 0;
@@ -102,7 +102,7 @@ namespace FTAnalyzer.Forms
                         if (!reader.Read() && loc.ToString().Length > 0)
                         {  // location isn't found so add it
                             GoogleMap.GeoResponse res = GoogleMap.CallGeoWSCount(loc.ToString(), 10, txtGoogleWait);
-                            if (res.Status == "OK" && res.Results.Length > 0)
+                            if (res != null && res.Status == "OK" && res.Results.Length > 0)
                             {
                                 double latitude = 0;
                                 double longitude = 0;
