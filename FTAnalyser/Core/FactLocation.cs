@@ -499,6 +499,11 @@ namespace FTAnalyzer
             return false;
         }
 
+        public bool GeoCoded
+        {
+            get { return Longitude != 0 && Latitude != 0; }
+        }
+
         private string FixNumerics(string addressField)
         {
             int pos = addressField.IndexOf(" ");

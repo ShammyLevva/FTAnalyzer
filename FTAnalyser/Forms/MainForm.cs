@@ -149,7 +149,6 @@ namespace FTAnalyzer
             mnuFamiliesToExcel.Enabled = enabled;
             mnuChildAgeProfiles.Enabled = enabled;
             mnuOlderParents.Enabled = enabled;
-            mnuGeocodeLocations.Enabled = enabled;
             mnuShowTimeline.Enabled = enabled;
         }
 
@@ -1156,60 +1155,6 @@ namespace FTAnalyzer
             return locType;
         }
 
-        private void mnuGeocodeLocations_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            try
-            {
-                SQLiteConnection conn = new SQLiteConnection("Data Source=Geocodes.s3db;Version=3;");
-                conn.Open();
-                SQLiteCommand cmd = new SQLiteCommand(conn);
-                int count = 0;
-                int good = 0;
-                int bad = 0;
-                foreach (FactLocation loc in ft.AllLocations)
-                {
-                    string sql = string.Format("select location from geocode where location = \"{0}\"", loc.ToString());
-                    cmd.CommandText = sql;
-                    SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
-                    if (!reader.Read())
-                    {  // location isn't found so add it
-                        GoogleMap.GeoResponse res = GoogleMap.CallGeoWSCount(loc.ToString(), 10);
-                        if (res.Status == "OK" && res.Results.Length > 0)
-                        {
-                            int foundLevel = GoogleMap.GetFactLocation(res.Results[0].Types);
-                            if (foundLevel >= loc.Level)
-                            {
-                                sql = string.Format("insert into geocode (location, level, latitude, longitude, founddate, foundlocation, foundlevel)" +
-                                        "values (\"{0}\",{1},{2},{3},date('now'),\"{4}\",{5})", loc.ToString(), loc.Level,
-                                        res.Results[0].Geometry.Location.Lat, res.Results[0].Geometry.Location.Lng,
-                                        res.Results[0].ReturnAddress, foundLevel);
-                                good++;
-                            }
-                            else
-                            {
-                                sql = string.Format("insert into geocode (location, level, latitude, longitude, founddate, foundlocation, foundlevel)" +
-                                        "values (\"{0}\",{1},{2},{3},date('now'),\"{4}\",{5})", loc.ToString(), loc.Level, 0, 0, "", foundLevel);
-                                bad++;
-                            }
-                            cmd = new SQLiteCommand(sql, conn);
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-                    reader.Close();
-                    count++;
-                    Console.WriteLine("Found " + good + " records and failed to find " + bad + " records from " + count + " of " + ft.AllLocations.Count());
-                }
-                conn.Close();
-                MessageBox.Show("Finished Geocoding");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error geocoding : " + ex.Message);
-            }
-            HourGlass(false);
-        }
-
         private void ckbDataErrors_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateDataErrorsDisplay();
@@ -1627,6 +1572,13 @@ namespace FTAnalyzer
         private void btnLCReport_Click(object sender, EventArgs e)
         {
             tabSelector.SelectedTab = tabSelector.TabPages["tabColourReports"];
+        }
+
+        private void mnuShowTimeline_Click(object sender, EventArgs e)
+        {
+            TimeLine tl = new TimeLine();
+            tl.Show();
+            DisposeDuplicateForms(tl);
         }
     }
 }
