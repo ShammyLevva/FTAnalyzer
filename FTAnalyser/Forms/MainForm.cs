@@ -39,6 +39,7 @@ namespace FTAnalyzer
             ft.XmlErrorBox = rtbOutput;
             VERSION = PublishVersion();
             treetopsRelation.MarriedToDB = false;
+            ShowMenus(false);
             SetSavePath();
         }
 
@@ -93,8 +94,7 @@ namespace FTAnalyzer
                 HourGlass(true);
                 this.filename = filename;
                 DisposeIndividualForms();
-                mnuReports.Visible = false;
-                mnuExport.Visible = false;
+                ShowMenus(false);
                 tabSelector.SelectTab(tabDisplayProgress);
                 rtbOutput.Text = "";
                 pbSources.Value = pbIndividuals.Value = pbFamilies.Value = 0;
@@ -119,11 +119,8 @@ namespace FTAnalyzer
                     {
                         ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
                         Application.UseWaitCursor = false;
+                        ShowMenus(true);
                         HourGlass(false);
-                        mnuReports.Visible = true;
-                        mnuExport.Visible = true;
-                        mnuPrint.Enabled = true;
-                        mnuReload.Enabled = true;
                         MessageBox.Show("Gedcom File " + filename + " Loaded");
                     }
                 }
@@ -141,6 +138,19 @@ namespace FTAnalyzer
             {
                 HourGlass(false);
             }
+        }
+
+        private void ShowMenus(bool enabled)
+        {
+            mnuPrint.Enabled = enabled;
+            mnuReload.Enabled = enabled;
+            mnuFactsToExcel.Enabled = enabled;
+            mnuIndividualsToExcel.Enabled = enabled;
+            mnuFamiliesToExcel.Enabled = enabled;
+            mnuChildAgeProfiles.Enabled = enabled;
+            mnuOlderParents.Enabled = enabled;
+            mnuGeocodeLocations.Enabled = enabled;
+            mnuShowTimeline.Enabled = enabled;
         }
 
         private void DisposeIndividualForms()
@@ -1113,8 +1123,11 @@ namespace FTAnalyzer
             {
                 case "Tree View":
                     TreeNode node = treeViewLocations.SelectedNode;
-                    loc = node.Text == "<blank>" ? null : ((FactLocation)node.Tag).GetLocation(node.Level);
-                    locType = node.Level;
+                    if (node != null)
+                    {
+                        loc = node.Text == "<blank>" ? null : ((FactLocation)node.Tag).GetLocation(node.Level);
+                        locType = node.Level;
+                    }
                     break;
                 case "Countries":
                     loc = dgCountries.CurrentRow == null ? null : (FactLocation)dgCountries.CurrentRow.DataBoundItem;
@@ -1143,7 +1156,7 @@ namespace FTAnalyzer
             return locType;
         }
 
-        private void geocodeLocationsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void mnuGeocodeLocations_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             try
