@@ -34,6 +34,7 @@
             this.geocodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.geocodeLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pbGeocoding = new System.Windows.Forms.ToolStripProgressBar();
+            this.txtGoogleWait = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -42,7 +43,8 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.txtLocations,
-            this.pbGeocoding});
+            this.pbGeocoding,
+            this.txtGoogleWait});
             this.statusStrip1.Location = new System.Drawing.Point(0, 335);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(852, 22);
@@ -87,6 +89,12 @@
             this.pbGeocoding.Size = new System.Drawing.Size(100, 16);
             this.pbGeocoding.Visible = false;
             // 
+            // txtGoogleWait
+            // 
+            this.txtGoogleWait.Name = "txtGoogleWait";
+            this.txtGoogleWait.Size = new System.Drawing.Size(118, 17);
+            this.txtGoogleWait.Text = "toolStripStatusLabel1";
+            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -114,5 +122,6 @@
         private System.Windows.Forms.ToolStripMenuItem geocodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem geocodeLocationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripProgressBar pbGeocoding;
+        private System.Windows.Forms.ToolStripStatusLabel txtGoogleWait;
     }
 }

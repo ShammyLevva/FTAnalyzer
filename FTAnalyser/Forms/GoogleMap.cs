@@ -134,7 +134,7 @@ namespace FTAnalyzer.Forms
         private static int sleepinterval = 200;
 
         // Call geocoding routine but account for throttling by Google geocoding engine
-        public static GeoResponse CallGeoWSCount(string address, int badtries)
+        public static GeoResponse CallGeoWSCount(string address, int badtries, ToolStripStatusLabel label)
         {
             Thread.Sleep(sleepinterval);
             GeoResponse res;
@@ -144,7 +144,7 @@ namespace FTAnalyzer.Forms
             }
             catch (Exception e)
             {
-                Console.WriteLine("Caught exception: " + e);
+                label.Text = "Caught exception: " + e;
                 res = null;
             }
             if (res == null || res.Status == "OVER_QUERY_LIMIT")
@@ -152,8 +152,8 @@ namespace FTAnalyzer.Forms
                 // we're hitting Google too fast, increase interval
                 sleepinterval = Math.Min(sleepinterval + ++badtries * 1000, 60000);
 
-                Console.WriteLine("Interval:" + sleepinterval + "                           \r");
-                return CallGeoWSCount(address, badtries);
+                if (sleepinterval > 500) label.Text = "Querying too fast. Google imposed wait of:" + sleepinterval / 1000 + " seconds."; 
+                return CallGeoWSCount(address, badtries, label);
             }
             else
             {
@@ -161,9 +161,9 @@ namespace FTAnalyzer.Forms
                 if (sleepinterval > 10000)
                     sleepinterval = 200;
                 else
-                    sleepinterval = Math.Max(sleepinterval / 2, 50);
+                    sleepinterval = Math.Max(sleepinterval / 2, 100);
 
-                Console.WriteLine("Interval:" + sleepinterval);
+                if(sleepinterval > 500) label.Text = "Querying too fast. Google imposed wait of:" + sleepinterval/ 1000 + " seconds.";
                 return res;
             }
         }
