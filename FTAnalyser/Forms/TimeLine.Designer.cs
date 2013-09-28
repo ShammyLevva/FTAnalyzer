@@ -35,11 +35,11 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.geocodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.geocodeLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.tbYears = new System.Windows.Forms.TrackBar();
             this.labMin = new System.Windows.Forms.Label();
             this.labMax = new System.Windows.Forms.Label();
             this.labValue = new System.Windows.Forms.Label();
+            this.mapBox1 = new SharpMap.Forms.MapBox();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -101,17 +101,6 @@
             this.geocodeLocationsToolStripMenuItem.ToolTipText = "Looks up map co-ordinates for locations in your file";
             this.geocodeLocationsToolStripMenuItem.Click += new System.EventHandler(this.geocodeLocationsToolStripMenuItem_Click);
             // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.webBrowser1.Location = new System.Drawing.Point(0, 78);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(849, 254);
-            this.webBrowser1.TabIndex = 2;
-            // 
             // tbYears
             // 
             this.tbYears.Dock = System.Windows.Forms.DockStyle.Top;
@@ -155,16 +144,36 @@
             this.labValue.Text = "label1";
             this.labValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // mapBox1
+            // 
+            this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.None;
+            this.mapBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.mapBox1.FineZoomFactor = 10D;
+            this.mapBox1.Location = new System.Drawing.Point(0, 75);
+            this.mapBox1.MapQueryMode = SharpMap.Forms.MapBox.MapQueryType.LayerByIndex;
+            this.mapBox1.Name = "mapBox1";
+            this.mapBox1.QueryGrowFactor = 5F;
+            this.mapBox1.QueryLayerIndex = 0;
+            this.mapBox1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.mapBox1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.mapBox1.ShowProgressUpdate = false;
+            this.mapBox1.Size = new System.Drawing.Size(849, 257);
+            this.mapBox1.TabIndex = 7;
+            this.mapBox1.Text = "mapBox1";
+            this.mapBox1.WheelZoomMagnitude = -2D;
+            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 357);
+            this.Controls.Add(this.mapBox1);
             this.Controls.Add(this.labValue);
             this.Controls.Add(this.labMax);
             this.Controls.Add(this.labMin);
             this.Controls.Add(this.tbYears);
-            this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -189,10 +198,10 @@
         private System.Windows.Forms.ToolStripMenuItem geocodeLocationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripProgressBar pbGeocoding;
         private System.Windows.Forms.ToolStripStatusLabel txtGoogleWait;
-        private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.TrackBar tbYears;
         private System.Windows.Forms.Label labMin;
         private System.Windows.Forms.Label labMax;
         private System.Windows.Forms.Label labValue;
+        private SharpMap.Forms.MapBox mapBox1;
     }
 }
