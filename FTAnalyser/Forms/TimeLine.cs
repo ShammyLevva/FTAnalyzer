@@ -17,6 +17,7 @@ using GeoAPI.CoordinateSystems;
 using SharpMap.Data.Providers;
 using SharpMap.Data;
 using SharpMap.Styles;
+using GeoAPI.Geometries;
 
 namespace FTAnalyzer.Forms
 {
@@ -57,12 +58,18 @@ namespace FTAnalyzer.Forms
             txtLocations.Text = "Already Geocoded " + ft.AllLocations.Count(l => l.IsGeoCoded) + " of " + ft.AllLocations.Count() + " locations";
             txtGoogleWait.Text = string.Empty;
             SetGeoCodedYearRange();
+            SetupMap();
+            DisplayLocationsForYear(labValue.Text);
+        }
 
+        private void SetupMap()
+        {
             // Add Google maps layer to map control.
             mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
                 new GoogleTileSource(GoogleMapType.GoogleMap), "Google"));
 
             factLocations = new FeatureDataTable();
+            factLocations.Columns.Add("Location", typeof(string));
             VectorLayer factLocationLayer = new VectorLayer("Locations");
             factLocationLayer.DataSource = new GeometryFeatureProvider(factLocations);
 
@@ -291,21 +298,33 @@ namespace FTAnalyzer.Forms
 
         }
 
+        public void DisplayLocationsForYear(string year)
+        {
+            int result =0;
+            int.TryParse(year, out result);
+            if (year.Length == 4 && result != 0)
+            {
+                FactDate yearDate = new FactDate(year);
+                // now load up map with all the facts for that year and display them
+                List<Fact> facts = ft.AllFacts.Where(x => x.Location.IsGeoCoded && x.FactDate.IsKnown() && x.FactDate.Overlaps(yearDate)).ToList();
+                factLocations.Clear();
+                foreach (Fact f in facts)
+                {
+                    FeatureDataRow r = factLocations.NewRow();
+                    r["Location"] = f.Location.ToString();
+                    r.Geometry = new NetTopologySuite.Geometries.Point(f.Location.Longitude, f.Location.Latitude);
+                    factLocations.AddRow(r);
+                }
+                mapBox1.Map.ZoomToExtents();
+                mapBox1.Refresh();
+            }
+        }
+
         private void tbYears_Scroll(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
             labValue.Text = tbYears.Value.ToString();
-            FactDate year = new FactDate(tbYears.Value.ToString());
-            // now load up map with all the facts for that year and display them
-            List<Fact> facts = ft.AllFacts.Where(x => x.Location.IsGeoCoded && x.FactDate.IsKnown() && x.FactDate.Overlaps(year)).ToList();
-            factLocations.Clear();
-            foreach (Fact f in facts)
-            {
-                FeatureDataRow r = factLocations.NewRow();
-                r.Geometry = new NetTopologySuite.Geometries.Point(f.Location.Longitude, f.Location.Latitude);
-                factLocations.AddRow(r);
-            }
-            mapBox1.Refresh();
+            DisplayLocationsForYear(labValue.Text);
             this.Cursor = Cursors.Default;
         }
 
