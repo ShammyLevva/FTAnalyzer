@@ -1252,7 +1252,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            DataTable dt = convertor.ToDataTable(new List<ExportFacts>(ft.AllFacts));
+            DataTable dt = convertor.ToDataTable(new List<ExportFacts>(ft.AllExportFacts));
             ExportToExcel.Export(dt);
             HourGlass(false);
         }
@@ -1576,9 +1576,11 @@ namespace FTAnalyzer
 
         private void mnuShowTimeline_Click(object sender, EventArgs e)
         {
+            HourGlass(true);
             TimeLine tl = new TimeLine();
             tl.Show();
             DisposeDuplicateForms(tl);
+            HourGlass(false);
         }
     }
 }

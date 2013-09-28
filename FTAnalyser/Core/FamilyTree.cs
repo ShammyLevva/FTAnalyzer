@@ -349,7 +349,20 @@ namespace FTAnalyzer
             set { xmlErrorbox = value; }
         }
 
-        public List<ExportFacts> AllFacts
+        public List<Fact> AllFacts
+        {
+            get
+            {
+                List<Fact> result = new List<Fact>();
+                foreach (Individual ind in individuals)
+                {
+                    result.AddRange(ind.AllFacts);
+                }
+                return result;
+            }
+        }
+
+        public List<ExportFacts> AllExportFacts
         {
             get
             {
@@ -989,7 +1002,7 @@ namespace FTAnalyzer
             Predicate<Individual> dateFilter = i => ((i.BirthDate.IsBefore(CensusDate.UKCENSUS1911) || !i.BirthDate.IsKnown()) &&
                                                      (i.DeathDate.IsAfter(CensusDate.UKCENSUS1841) || !i.DeathDate.IsKnown()));
             filter = FilterUtils.AndFilter<Individual>(filter, dateFilter, aliveOnAnyCensus);
-            return individuals.Where(filter).ToList < IDisplayColourCensus>();
+            return individuals.Where(filter).ToList<IDisplayColourCensus>();
         }
 
         public List<IDisplayColourBMD> ColourBMD(Controls.RelationTypes relType, string surname)

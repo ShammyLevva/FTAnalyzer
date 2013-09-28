@@ -15,14 +15,47 @@ namespace FTAnalyzer.Forms
     public partial class TimeLine : Form
     {
         private FamilyTree ft;
+        private int minGeoCodedYear;
+        private int maxGeoCodedYear;
 
         public TimeLine()
         {
             InitializeComponent();
             ft = FamilyTree.Instance;
             LoadGeoLocationsFromDataBase();
-            txtLocations.Text = "Already Geocoded " + ft.AllLocations.Count(l => l.GeoCoded) + " of " + ft.AllLocations.Count() + " locations";
+            txtLocations.Text = "Already Geocoded " + ft.AllLocations.Count(l => l.IsGeoCoded) + " of " + ft.AllLocations.Count() + " locations";
             txtGoogleWait.Text = string.Empty;
+            SetGeoCodedYearRange();
+        }
+
+        private void SetGeoCodedYearRange()
+        {
+            //List<Fact> geoCodedFacts = ft.AllFacts.Where(x => x.Location.IsGeoCoded).ToList();
+            //return geoCodedFacts.Min(x => x.FactDate.);
+            minGeoCodedYear = FactDate.MAXDATE.Year;
+            maxGeoCodedYear = FactDate.MINDATE.Year;
+            foreach (Fact f in ft.AllFacts)
+            {
+                if (f.Location.IsGeoCoded && f.FactDate.IsKnown())
+                {
+                    if (f.FactDate.StartDate != FactDate.MINDATE && f.FactDate.StartDate.Year < minGeoCodedYear)
+                        minGeoCodedYear = f.FactDate.StartDate.Year;
+                    if (f.FactDate.EndDate != FactDate.MAXDATE && f.FactDate.EndDate.Year > maxGeoCodedYear)
+                        maxGeoCodedYear = f.FactDate.EndDate.Year;
+                }
+            }
+            if (minGeoCodedYear == FactDate.MAXDATE.Year || maxGeoCodedYear == FactDate.MINDATE.Year)
+                tbYears.Visible = false;
+            else
+            {
+                tbYears.Visible = true;
+                tbYears.Minimum = minGeoCodedYear;
+                tbYears.Maximum = maxGeoCodedYear;
+                tbYears.Value = minGeoCodedYear + (maxGeoCodedYear - minGeoCodedYear) / 2;
+                labMin.Text = minGeoCodedYear.ToString();
+                labMax.Text = maxGeoCodedYear.ToString();
+                labValue.Text = tbYears.Value.ToString();
+            }
         }
 
         private void geocodeLocationsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -42,7 +75,7 @@ namespace FTAnalyzer.Forms
                 SQLiteCommand cmd = new SQLiteCommand(conn);
                 foreach (FactLocation loc in ft.AllLocations)
                 {
-                    string sql = string.Format("select location, latitude, longitude from geocode where location = \"{0}\"", loc.ToString());
+                    string sql = string.Format("select latitude, longitude, level from geocode where location = \"{0}\"", loc.ToString());
                     cmd.CommandText = sql;
                     SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
                     if (reader.Read() && loc.ToString().Length > 0)
@@ -94,7 +127,7 @@ namespace FTAnalyzer.Forms
                 pbGeocoding.Value = count;
                 foreach (FactLocation loc in ft.AllLocations)
                 {
-                    if (!loc.GeoCoded)
+                    if (!loc.IsGeoCoded)
                     {
                         string sql = string.Format("select location from geocode where location = \"{0}\"", loc.ToString());
                         cmd.CommandText = sql;
@@ -133,7 +166,7 @@ namespace FTAnalyzer.Forms
                     Application.DoEvents();
                     pbGeocoding.Value = count;
                     txtLocations.Text = "Google found " + good + " failed on " + bad + " records. Geocoded " +
-                        ft.AllLocations.Count(l => l.GeoCoded) + " locations so far. " + count + " of " + pbGeocoding.Maximum + " processed.";
+                        ft.AllLocations.Count(l => l.IsGeoCoded) + " locations so far. " + count + " of " + pbGeocoding.Maximum + " processed.";
                 }
                 conn.Close();
                 MessageBox.Show("Finished Geocoding");
@@ -143,6 +176,14 @@ namespace FTAnalyzer.Forms
                 MessageBox.Show("Error geocoding : " + ex.Message);
             }
 
+        }
+
+        private void tbYears_Scroll(object sender, EventArgs e)
+        {
+            labValue.Text = tbYears.Value.ToString();
+            FactDate year = new FactDate(tbYears.Value.ToString());
+            // now load up map with all the facts for that year and display them
+            List<Fact> facts = ft.AllFacts.Where(x => x.Location.IsGeoCoded && x.FactDate.Overlaps(year)).ToList();
         }
 
     }

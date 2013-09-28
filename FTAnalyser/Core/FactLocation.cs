@@ -499,9 +499,9 @@ namespace FTAnalyzer
             return false;
         }
 
-        public bool GeoCoded
+        public bool IsGeoCoded
         {
-            get { return Longitude != 0 && Latitude != 0; }
+            get { return Longitude != 0 || Latitude != 0; }
         }
 
         private string FixNumerics(string addressField)
