@@ -52,9 +52,9 @@
             this.txtLocations,
             this.pbGeocoding,
             this.txtGoogleWait});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 335);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 562);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(852, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(920, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -82,7 +82,7 @@
             this.geocodeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(852, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(920, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -107,7 +107,7 @@
             this.tbYears.Dock = System.Windows.Forms.DockStyle.Top;
             this.tbYears.Location = new System.Drawing.Point(0, 24);
             this.tbYears.Name = "tbYears";
-            this.tbYears.Size = new System.Drawing.Size(852, 45);
+            this.tbYears.Size = new System.Drawing.Size(920, 45);
             this.tbYears.TabIndex = 3;
             this.tbYears.TickFrequency = 5;
             this.tbYears.Scroll += new System.EventHandler(this.tbYears_Scroll);
@@ -126,7 +126,7 @@
             // 
             this.labMax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labMax.AutoSize = true;
-            this.labMax.Location = new System.Drawing.Point(814, 56);
+            this.labMax.Location = new System.Drawing.Point(882, 56);
             this.labMax.Name = "labMax";
             this.labMax.Size = new System.Drawing.Size(35, 13);
             this.labMax.TabIndex = 5;
@@ -161,7 +161,7 @@
             this.mapBox1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.ShowProgressUpdate = false;
-            this.mapBox1.Size = new System.Drawing.Size(849, 257);
+            this.mapBox1.Size = new System.Drawing.Size(917, 484);
             this.mapBox1.TabIndex = 7;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
@@ -178,7 +178,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(852, 357);
+            this.ClientSize = new System.Drawing.Size(920, 584);
             this.Controls.Add(this.mapBox1);
             this.Controls.Add(this.labValue);
             this.Controls.Add(this.labMax);
