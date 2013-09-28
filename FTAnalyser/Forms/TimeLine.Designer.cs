@@ -103,10 +103,13 @@
             // 
             // webBrowser1
             // 
+            this.webBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.webBrowser1.Location = new System.Drawing.Point(0, 78);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(852, 398);
+            this.webBrowser1.Size = new System.Drawing.Size(849, 254);
             this.webBrowser1.TabIndex = 2;
             // 
             // tbYears
@@ -131,7 +134,7 @@
             // 
             // labMax
             // 
-            this.labMax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labMax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labMax.AutoSize = true;
             this.labMax.Location = new System.Drawing.Point(814, 56);
             this.labMax.Name = "labMax";
@@ -142,6 +145,8 @@
             // 
             // labValue
             // 
+            this.labValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.labValue.AutoSize = true;
             this.labValue.Location = new System.Drawing.Point(412, 56);
             this.labValue.Name = "labValue";

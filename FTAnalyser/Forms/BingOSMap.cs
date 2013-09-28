@@ -58,7 +58,7 @@ namespace FTAnalyzer.Forms
                 return false;
             }
 
-            labMapLevel.Text = GoogleMap.locationText(res, loc, level);
+            labMapLevel.Text = GoogleMap.LocationText(res, loc, level);
             var viewport = res.Results[0].Geometry.ViewPort;
             Object[] args = new Object[] { viewport.NorthEast.Lat, viewport.NorthEast.Lng, viewport.SouthWest.Lat, viewport.SouthWest.Lng };
             webBrowser.Document.InvokeScript("setBounds", args);

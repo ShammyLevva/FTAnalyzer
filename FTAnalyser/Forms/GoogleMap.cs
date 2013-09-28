@@ -40,7 +40,7 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             loaded = false;
-            string filename = Application.StartupPath + "\\Resources\\GoogleMaps.htm";
+            string filename = Path.Combine(Application.StartupPath + @"Resources\GoogleMaps.htm");
             webBrowser.Navigate(filename);
             webBrowser.Hide();
         }
@@ -64,7 +64,7 @@ namespace FTAnalyzer.Forms
             Object[] args = new Object[] { lat, lng };
             Object marker = webBrowser.Document.InvokeScript("frontAndCenter", args);
 
-            labMapLevel.Text = locationText(res, loc, level);
+            labMapLevel.Text = LocationText(res, loc, level);
             var viewport = res.Results[0].Geometry.ViewPort;
             args = new Object[] { viewport.NorthEast.Lat, viewport.NorthEast.Lng, viewport.SouthWest.Lat, viewport.SouthWest.Lng };
             webBrowser.Document.InvokeScript("setViewport", args);
@@ -73,7 +73,7 @@ namespace FTAnalyzer.Forms
             return true;
         }
 
-        public static string locationText(GeoResponse res, FactLocation loc, int level)
+        public static string LocationText(GeoResponse res, FactLocation loc, int level)
         {
             string output = string.Empty;
             int returnlevel = GetFactLocation(res.Results[0].Types);

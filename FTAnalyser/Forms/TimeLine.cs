@@ -180,10 +180,13 @@ namespace FTAnalyzer.Forms
 
         private void tbYears_Scroll(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             labValue.Text = tbYears.Value.ToString();
             FactDate year = new FactDate(tbYears.Value.ToString());
             // now load up map with all the facts for that year and display them
-            List<Fact> facts = ft.AllFacts.Where(x => x.Location.IsGeoCoded && x.FactDate.Overlaps(year)).ToList();
+            List<Fact> facts = ft.AllFacts.Where(x => x.Location.IsGeoCoded && x.FactDate.IsKnown() && x.FactDate.Overlaps(year)).ToList();
+
+            this.Cursor = Cursors.Default;
         }
 
     }
