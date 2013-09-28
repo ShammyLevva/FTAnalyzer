@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.txtLocations = new System.Windows.Forms.ToolStripStatusLabel();
             this.pbGeocoding = new System.Windows.Forms.ToolStripProgressBar();
@@ -41,6 +42,7 @@
             this.labValue = new System.Windows.Forms.Label();
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -115,7 +117,7 @@
             // labMin
             // 
             this.labMin.AutoSize = true;
-            this.labMin.Location = new System.Drawing.Point(3, 56);
+            this.labMin.Location = new System.Drawing.Point(3, 54);
             this.labMin.Name = "labMin";
             this.labMin.Size = new System.Drawing.Size(35, 13);
             this.labMin.TabIndex = 4;
@@ -126,7 +128,7 @@
             // 
             this.labMax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labMax.AutoSize = true;
-            this.labMax.Location = new System.Drawing.Point(882, 56);
+            this.labMax.Location = new System.Drawing.Point(882, 52);
             this.labMax.Name = "labMax";
             this.labMax.Size = new System.Drawing.Size(35, 13);
             this.labMax.TabIndex = 5;
@@ -138,7 +140,7 @@
             this.labValue.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labValue.AutoSize = true;
             this.labValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labValue.Location = new System.Drawing.Point(439, 54);
+            this.labValue.Location = new System.Drawing.Point(439, 52);
             this.labValue.Name = "labValue";
             this.labValue.Size = new System.Drawing.Size(47, 15);
             this.labValue.TabIndex = 6;
@@ -174,11 +176,20 @@
             this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
             this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
+            // mapZoomToolStrip
+            // 
+            this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 69);
+            this.mapZoomToolStrip.MapControl = this.mapBox1;
+            this.mapZoomToolStrip.Name = "mapZoomToolStrip";
+            this.mapZoomToolStrip.Size = new System.Drawing.Size(920, 25);
+            this.mapZoomToolStrip.TabIndex = 8;
+            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(920, 584);
+            this.Controls.Add(this.mapZoomToolStrip);
             this.Controls.Add(this.mapBox1);
             this.Controls.Add(this.labValue);
             this.Controls.Add(this.labMax);
@@ -215,5 +226,6 @@
         private System.Windows.Forms.Label labValue;
         private SharpMap.Forms.MapBox mapBox1;
         private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private SharpMap.Forms.ToolBar.MapZoomToolStrip mapZoomToolStrip;
     }
 }

@@ -94,7 +94,7 @@ namespace FTAnalyzer.Forms
             factLocationLayer.Style = s;
 
             mapBox1.Map.Layers.Add(factLocationLayer);
-
+            mapBox1.Map.Decorations.Add(new SharpMap.Rendering.Decoration.GoogleMapsDisclaimer());
             mapBox1.Map.ZoomToExtents();
             mapBox1.Refresh();
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
@@ -102,8 +102,6 @@ namespace FTAnalyzer.Forms
 
         private void SetGeoCodedYearRange()
         {
-            //List<Fact> geoCodedFacts = ft.AllFacts.Where(x => x.Location.IsGeoCoded).ToList();
-            //return geoCodedFacts.Min(x => x.FactDate.);
             minGeoCodedYear = FactDate.MAXDATE.Year;
             maxGeoCodedYear = FactDate.MINDATE.Year;
             foreach (MapFact mf in ft.AllMapFacts)
@@ -281,7 +279,7 @@ namespace FTAnalyzer.Forms
 
                     count++;
                     int percent = (int)Math.Truncate(count * 100.0 / total);
-                    string status = "Google found " + good + " failed on " + bad + " records. Geocoded " +
+                    string status = "Google found " + good + ", but failed to find " + bad + " records. Geocoded " +
                             ft.AllLocations.Count(l => l.IsGeoCoded) + " locations so far. " + count +
                             " of " + total + " processed.";
                     worker.ReportProgress(percent, status);
