@@ -17,6 +17,7 @@ namespace FTAnalyzer.Forms
         private FamilyTree ft;
         private int minGeoCodedYear;
         private int maxGeoCodedYear;
+        private bool formClosing;
 
         public TimeLine()
         {
@@ -45,10 +46,15 @@ namespace FTAnalyzer.Forms
                 }
             }
             if (minGeoCodedYear == FactDate.MAXDATE.Year || maxGeoCodedYear == FactDate.MINDATE.Year)
-                tbYears.Visible = false;
+            {
+                tbYears.Enabled = false;
+                labMin.Text = string.Empty;
+                labMax.Text = string.Empty;
+                labValue.Text = string.Empty;
+            }
             else
             {
-                tbYears.Visible = true;
+                tbYears.Enabled = true;
                 tbYears.Minimum = minGeoCodedYear;
                 tbYears.Maximum = maxGeoCodedYear;
                 tbYears.Value = minGeoCodedYear + (maxGeoCodedYear - minGeoCodedYear) / 2;
@@ -62,7 +68,7 @@ namespace FTAnalyzer.Forms
         {
             this.Cursor = Cursors.WaitCursor;
             pbGeocoding.Visible = true;
-            GeoCode();
+            backgroundWorker.RunWorkerAsync();
             this.Cursor = Cursors.Default;
         }
 
@@ -70,13 +76,18 @@ namespace FTAnalyzer.Forms
         {
             try
             {
+
                 SQLiteConnection conn = GetDatabaseConnection();
                 conn.Open();
-                SQLiteCommand cmd = new SQLiteCommand(conn);
+                SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, level from geocode where location = ?", conn);
+                SQLiteParameter param = cmd.CreateParameter();
+                param.DbType = DbType.String;
+                cmd.Parameters.Add(param);
+                cmd.Prepare();
+
                 foreach (FactLocation loc in ft.AllLocations)
                 {
-                    string sql = string.Format("select latitude, longitude, level from geocode where location = \"{0}\"", loc.ToString());
-                    cmd.CommandText = sql;
+                    cmd.Parameters[0].Value = loc.ToString();
                     SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
                     if (reader.Read() && loc.ToString().Length > 0)
                     {
@@ -112,25 +123,56 @@ namespace FTAnalyzer.Forms
             return null;
         }
 
-        public void GeoCode()
+        public void GeoCode(BackgroundWorker worker, DoWorkEventArgs e)
         {
             try
             {
                 SQLiteConnection conn = GetDatabaseConnection();
                 conn.Open();
-                SQLiteCommand cmd = new SQLiteCommand(conn);
+                SQLiteCommand cmd = new SQLiteCommand("select location from geocode where location = ?", conn);
+                SQLiteParameter param = cmd.CreateParameter();
+                param.DbType = DbType.String;
+                cmd.Parameters.Add(param);
+                cmd.Prepare();
+
+                SQLiteCommand insertCmd = new SQLiteCommand("insert into geocode (location, level, latitude, longitude, founddate, foundlocation, foundlevel) values(?,?,?,?,date('now'),?,?)", conn);
+
+                param = insertCmd.CreateParameter();
+                param.DbType = DbType.String;
+                insertCmd.Parameters.Add(param);
+
+                param = insertCmd.CreateParameter();
+                param.DbType = DbType.Int32;
+                insertCmd.Parameters.Add(param);
+
+                param = insertCmd.CreateParameter();
+                param.DbType = DbType.Double;
+                insertCmd.Parameters.Add(param);
+
+                param = insertCmd.CreateParameter();
+                param.DbType = DbType.Double;
+                insertCmd.Parameters.Add(param);
+
+                param = insertCmd.CreateParameter();
+                param.DbType = DbType.String;
+                insertCmd.Parameters.Add(param);
+
+                param = insertCmd.CreateParameter();
+                param.DbType = DbType.Int32;
+                insertCmd.Parameters.Add(param);
+
+                insertCmd.Prepare();
+
                 int count = 0;
                 int good = 0;
                 int bad = 0;
-                pbGeocoding.Minimum = 0;
-                pbGeocoding.Maximum = ft.AllLocations.Count();
-                pbGeocoding.Value = count;
+                int total = ft.AllLocations.Count();
+
                 foreach (FactLocation loc in ft.AllLocations)
                 {
                     if (!loc.IsGeoCoded)
                     {
-                        string sql = string.Format("select location from geocode where location = \"{0}\"", loc.ToString());
-                        cmd.CommandText = sql;
+                        cmd.Parameters[0].Value = loc.ToString();
                         SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
                         if (!reader.Read() && loc.ToString().Length > 0)
                         {  // location isn't found so add it
@@ -152,21 +194,32 @@ namespace FTAnalyzer.Forms
                                 {
                                     bad++;
                                 }
-                                sql = string.Format("insert into geocode (location, level, latitude, longitude, founddate, foundlocation, foundlevel)" +
-                                        "values (\"{0}\",{1},{2},{3},date('now'),\"{4}\",{5})", loc.ToString(), loc.Level, latitude, longitude, address, foundLevel);
-                                cmd = new SQLiteCommand(sql, conn);
-                                cmd.ExecuteNonQuery();
+                                insertCmd.Parameters[0].Value = loc.ToString();
+                                insertCmd.Parameters[1].Value = loc.Level;
+                                insertCmd.Parameters[2].Value = latitude;
+                                insertCmd.Parameters[3].Value = longitude;
+                                insertCmd.Parameters[4].Value = address;
+                                insertCmd.Parameters[5].Value = foundLevel;
+                                insertCmd.ExecuteNonQuery();
                                 loc.Latitude = latitude;
                                 loc.Longitude = longitude;
                             }
                         }
                         reader.Close();
                     }
+
                     count++;
-                    Application.DoEvents();
-                    pbGeocoding.Value = count;
-                    txtLocations.Text = "Google found " + good + " failed on " + bad + " records. Geocoded " +
-                        ft.AllLocations.Count(l => l.IsGeoCoded) + " locations so far. " + count + " of " + pbGeocoding.Maximum + " processed.";
+                    int percent = (int)Math.Truncate(count * 100.0 / total);
+                    string status = "Google found " + good + " failed on " + bad + " records. Geocoded " +
+                            ft.AllLocations.Count(l => l.IsGeoCoded) + " locations so far. " + count +
+                            " of " + total + " processed.";
+                    worker.ReportProgress(percent, status);
+
+                    if (worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
                 }
                 conn.Close();
                 MessageBox.Show("Finished Geocoding");
@@ -187,6 +240,33 @@ namespace FTAnalyzer.Forms
             List<Fact> facts = ft.AllFacts.Where(x => x.Location.IsGeoCoded && x.FactDate.IsKnown() && x.FactDate.Overlaps(year)).ToList();
 
             this.Cursor = Cursors.Default;
+        }
+
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            GeoCode(backgroundWorker, e);
+        }
+
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            pbGeocoding.Value = e.ProgressPercentage;
+            txtLocations.Text = (string)e.UserState;
+        }
+
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            pbGeocoding.Value = 100;
+            if (formClosing) this.Close();
+        }
+
+        private void TimeLine_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (backgroundWorker.IsBusy)
+            {
+                backgroundWorker.CancelAsync();
+                e.Cancel = true;
+                formClosing = true;
+            }
         }
 
     }

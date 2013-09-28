@@ -40,6 +40,7 @@
             this.labMax = new System.Windows.Forms.Label();
             this.labValue = new System.Windows.Forms.Label();
             this.mapBox1 = new SharpMap.Forms.MapBox();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -134,8 +135,8 @@
             // 
             // labValue
             // 
-            this.labValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.labValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labValue.AutoSize = true;
             this.labValue.Location = new System.Drawing.Point(412, 56);
             this.labValue.Name = "labValue";
@@ -147,9 +148,10 @@
             // mapBox1
             // 
             this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.None;
-            this.mapBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.mapBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mapBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.mapBox1.FineZoomFactor = 10D;
             this.mapBox1.Location = new System.Drawing.Point(0, 75);
             this.mapBox1.MapQueryMode = SharpMap.Forms.MapBox.MapQueryType.LayerByIndex;
@@ -163,6 +165,14 @@
             this.mapBox1.TabIndex = 7;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
+            // 
+            // backgroundWorker
+            // 
+            this.backgroundWorker.WorkerReportsProgress = true;
+            this.backgroundWorker.WorkerSupportsCancellation = true;
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
             // TimeLine
             // 
@@ -179,6 +189,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "TimeLine";
             this.Text = "Timeline";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TimeLine_FormClosing);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -203,5 +214,6 @@
         private System.Windows.Forms.Label labMax;
         private System.Windows.Forms.Label labValue;
         private SharpMap.Forms.MapBox mapBox1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }
