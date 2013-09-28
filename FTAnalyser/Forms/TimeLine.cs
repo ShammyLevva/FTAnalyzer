@@ -18,6 +18,7 @@ using SharpMap.Data.Providers;
 using SharpMap.Data;
 using SharpMap.Styles;
 using GeoAPI.Geometries;
+using GeoAPI.CoordinateSystems.Transformations;
 
 namespace FTAnalyzer.Forms
 {
@@ -28,6 +29,7 @@ namespace FTAnalyzer.Forms
         private int maxGeoCodedYear;
         private bool formClosing;
         private FeatureDataTable factLocations;
+        private VectorLayer factLocationLayer;
 
         private static IProjectedCoordinateSystem GetEPSG900913(CoordinateSystemFactory csFact)
         {
@@ -69,8 +71,10 @@ namespace FTAnalyzer.Forms
                 new GoogleTileSource(GoogleMapType.GoogleMap), "Google"));
 
             factLocations = new FeatureDataTable();
-            factLocations.Columns.Add("Location", typeof(string));
-            VectorLayer factLocationLayer = new VectorLayer("Locations");
+            factLocations.Columns.Add("Location", typeof(FactLocation));
+            factLocations.Columns.Add("Individual", typeof(Individual));
+
+            factLocationLayer = new VectorLayer("Locations");
             factLocationLayer.DataSource = new GeometryFeatureProvider(factLocations);
 
             CoordinateTransformationFactory ctFact = new CoordinateTransformationFactory();
@@ -308,14 +312,21 @@ namespace FTAnalyzer.Forms
                 // now load up map with all the facts for that year and display them
                 List<MapFact> facts = ft.AllMapFacts.Where(x => x.Location.IsGeoCoded && x.FactDate.IsKnown && x.FactDate.Overlaps(yearDate)).ToList();
                 factLocations.Clear();
+                Envelope box = new Envelope();
                 foreach (MapFact f in facts)
                 {
                     FeatureDataRow r = factLocations.NewRow();
-                    r["Location"] = f.Location.ToString();
+                    r["Location"] = f.Location;
+                    r["Individual"] = f.Individual;
                     r.Geometry = new NetTopologySuite.Geometries.Point(f.Location.Longitude, f.Location.Latitude);
                     factLocations.AddRow(r);
+                    if (!box.Covers(f.Location.Longitude, f.Location.Latitude))
+                        box.ExpandToInclude(f.Location.Longitude, f.Location.Latitude);
                 }
-                mapBox1.Map.ZoomToExtents();
+                IMathTransform transform = factLocationLayer.CoordinateTransformation.MathTransform;
+                box = new Envelope(transform.Transform(box.TopLeft()), transform.Transform(box.BottomRight()));
+                box.ExpandBy(mapBox1.Map.PixelSize * 5);
+                mapBox1.Map.ZoomToBox(box);
                 mapBox1.Refresh();
             }
         }
