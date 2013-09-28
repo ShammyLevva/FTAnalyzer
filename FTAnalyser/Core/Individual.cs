@@ -313,10 +313,10 @@ namespace FTAnalyzer
                 FactDate f = GetPreferredFactDate(Fact.BIRTH);
                 if (Properties.GeneralSettings.Default.UseBaptismDates)
                 {
-                    if (f.IsKnown())
+                    if (f.IsKnown)
                         return f;
                     f = GetPreferredFactDate(Fact.BAPTISM);
-                    if (f.IsKnown())
+                    if (f.IsKnown)
                         return f;
                     f = GetPreferredFactDate(Fact.CHRISTENING);
                 }
@@ -506,7 +506,7 @@ namespace FTAnalyzer
         {
             foreach (Fact f in facts)
             {
-                if (f.FactDate.IsKnown())
+                if (f.FactDate.IsKnown)
                 {
                     if (f.IsCensusFact && f.FactDate.Overlaps(when))
                         return true;
@@ -519,7 +519,7 @@ namespace FTAnalyzer
         {
             foreach (Fact f in facts)
             {
-                if (f.FactType == Fact.LOSTCOUSINS && f.FactDate.IsKnown() && f.FactDate.Overlaps(when))
+                if (f.FactType == Fact.LOSTCOUSINS && f.FactDate.IsKnown && f.FactDate.Overlaps(when))
                     return true;
             }
             return false;
@@ -577,12 +577,12 @@ namespace FTAnalyzer
 
         public bool IsBorn(FactDate when)
         {
-            return BirthDate.IsKnown() && BirthDate.IsBefore(when);
+            return BirthDate.IsKnown && BirthDate.IsBefore(when);
         }
 
         public bool IsDeceased(FactDate when)
         {
-            return DeathDate.IsKnown() && DeathDate.IsBefore(when);
+            return DeathDate.IsKnown && DeathDate.IsBefore(when);
         }
 
         public bool IsSingleAtDeath()
@@ -593,12 +593,12 @@ namespace FTAnalyzer
 
         public bool IsBirthKnown()
         {
-            return BirthDate.IsKnown() && BirthDate.IsExact();
+            return BirthDate.IsKnown && BirthDate.IsExact;
         }
 
         public bool IsDeathKnown()
         {
-            return DeathDate.IsKnown() && DeathDate.IsExact();
+            return DeathDate.IsKnown && DeathDate.IsExact;
         }
 
         #endregion

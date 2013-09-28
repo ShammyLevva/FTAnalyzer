@@ -596,20 +596,23 @@ namespace FTAnalyzer
                 (this.StartDate < that.StartDate && this.EndDate > that.EndDate);
         }
 
-        public bool IsLongYearSpan()
+        public bool IsLongYearSpan
         {
-            int diff = Math.Abs(StartDate.Year - EndDate.Year);
-            return (diff > 5);
+            get
+            {
+                int diff = Math.Abs(StartDate.Year - EndDate.Year);
+                return (diff > 5);
+            }
         }
 
-        public bool IsExact()
+        public bool IsExact
         {
-            return this.StartDate.Equals(this.EndDate);
+            get { return this.StartDate.Equals(this.EndDate); }
         }
 
-        public bool IsKnown()
+        public bool IsKnown
         {
-            return !this.Equals(UNKNOWN_DATE);
+            get { return !this.Equals(UNKNOWN_DATE); }
         }
 
         public double Distance(FactDate when)

@@ -75,7 +75,7 @@ namespace FTAnalyzer.Filters
                 if (certificatePresent(t))
                     return false;
                 FactDate fd = filterDate(t);
-                if (fd == null || !fd.IsExact())
+                if (fd == null || !fd.IsExact)
                     return true;
                 FactLocation l = filterLocation(fd, t);
                 switch (level)

@@ -342,7 +342,7 @@ namespace FTAnalyzer
 
         private void CheckResidenceCensusDate()
         {
-            if (FactDate.IsKnown() && CensusDate.IsCensusYear(FactDate, true) && !CensusDate.IsCensusYear(FactDate, false))
+            if (FactDate.IsKnown && CensusDate.IsCensusYear(FactDate, true) && !CensusDate.IsCensusYear(FactDate, false))
             {
                 // residence isn't a normal census year but it is a census year if tolerate is on
                 if (CensusDate.IsCensusCountry(FactDate, Location) || !Location.isKnownCountry)
@@ -420,7 +420,7 @@ namespace FTAnalyzer
             }
             if (tag == "Census")
             {
-                if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && yearAdjusted.IsKnown() && !CensusDate.IsCensusYear(yearAdjusted, true))
+                if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && yearAdjusted.IsKnown && !CensusDate.IsCensusYear(yearAdjusted, true))
                 {
                     this.FactErrorMessage = "Warning : Census fact error date '" + FactDate + "' overlaps census date but is vague. Check for incorrect date entered.";
                     this.FactErrorLevel = FactError.WARNINGALLOW;
@@ -428,7 +428,7 @@ namespace FTAnalyzer
             }
             if (tag == "Lost Cousins" || tag == "LostCousins")
             {
-                if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && yearAdjusted.IsKnown() && !CensusDate.IsLostCousinsCensusYear(yearAdjusted, true))
+                if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && yearAdjusted.IsKnown && !CensusDate.IsLostCousinsCensusYear(yearAdjusted, true))
                 {
                     this.FactErrorMessage = "Lost Cousins fact error date '" + FactDate + "' overlaps Lost Cousins census year but is vague. Check for incorrect date entered.";
                     this.FactErrorLevel = Fact.FactError.WARNINGALLOW;

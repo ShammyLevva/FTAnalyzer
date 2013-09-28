@@ -104,7 +104,7 @@ namespace FTAnalyzer.Forms
             maxGeoCodedYear = FactDate.MINDATE.Year;
             foreach (MapFact mf in ft.AllMapFacts)
             {
-                if (mf.Location.IsGeoCoded && mf.FactDate.IsKnown())
+                if (mf.Location.IsGeoCoded && mf.FactDate.IsKnown)
                 {
                     if (mf.FactDate.StartDate != FactDate.MINDATE && mf.FactDate.StartDate.Year < minGeoCodedYear)
                         minGeoCodedYear = mf.FactDate.StartDate.Year;
@@ -306,7 +306,7 @@ namespace FTAnalyzer.Forms
             {
                 FactDate yearDate = new FactDate(year);
                 // now load up map with all the facts for that year and display them
-                List<MapFact> facts = ft.AllMapFacts.Where(x => x.Location.IsGeoCoded && x.FactDate.IsKnown() && x.FactDate.Overlaps(yearDate)).ToList();
+                List<MapFact> facts = ft.AllMapFacts.Where(x => x.Location.IsGeoCoded && x.FactDate.IsKnown && x.FactDate.Overlaps(yearDate)).ToList();
                 factLocations.Clear();
                 foreach (MapFact f in facts)
                 {
