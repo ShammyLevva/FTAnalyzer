@@ -86,7 +86,7 @@ namespace FTAnalyzer.Forms
 
             VectorStyle s = new VectorStyle();
             s.PointColor = new SolidBrush(Color.Red);
-            s.PointSize = 24;
+            s.PointSize = 12;
             factLocationLayer.Style = s;
 
             mapBox1.Map.Layers.Add(factLocationLayer);

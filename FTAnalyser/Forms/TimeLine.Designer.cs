@@ -135,12 +135,12 @@
             // 
             // labValue
             // 
-            this.labValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labValue.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labValue.AutoSize = true;
-            this.labValue.Location = new System.Drawing.Point(412, 56);
+            this.labValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labValue.Location = new System.Drawing.Point(439, 54);
             this.labValue.Name = "labValue";
-            this.labValue.Size = new System.Drawing.Size(35, 13);
+            this.labValue.Size = new System.Drawing.Size(47, 15);
             this.labValue.TabIndex = 6;
             this.labValue.Text = "label1";
             this.labValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -148,9 +148,9 @@
             // mapBox1
             // 
             this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.None;
-            this.mapBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mapBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.mapBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.mapBox1.FineZoomFactor = 10D;
             this.mapBox1.Location = new System.Drawing.Point(0, 75);
