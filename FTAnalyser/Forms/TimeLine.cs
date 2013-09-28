@@ -9,6 +9,14 @@ using System.Windows.Forms;
 using FTAnalyzer.Filters;
 using System.Data.SQLite;
 using System.IO;
+using SharpMap.Layers;
+using BruTile.Web;
+using ProjNet.CoordinateSystems.Transformations;
+using ProjNet.CoordinateSystems;
+using GeoAPI.CoordinateSystems;
+using SharpMap.Data.Providers;
+using SharpMap.Data;
+using SharpMap.Styles;
 
 namespace FTAnalyzer.Forms
 {
@@ -18,6 +26,28 @@ namespace FTAnalyzer.Forms
         private int minGeoCodedYear;
         private int maxGeoCodedYear;
         private bool formClosing;
+        private FeatureDataTable factLocations;
+
+        private static IProjectedCoordinateSystem GetEPSG900913(CoordinateSystemFactory csFact)
+        {
+            List<ProjectionParameter> parameters = new List<ProjectionParameter>();
+            parameters.Add(new ProjectionParameter("semi_major", 6378137.0));
+            parameters.Add(new ProjectionParameter("semi_minor", 6378137.0));
+            parameters.Add(new ProjectionParameter("latitude_of_origin", 0.0));
+            parameters.Add(new ProjectionParameter("central_meridian", 0.0));
+            parameters.Add(new ProjectionParameter("scale_factor", 1.0));
+            parameters.Add(new ProjectionParameter("false_easting", 0.0));
+            parameters.Add(new ProjectionParameter("false_northing", 0.0));
+            IProjection projection = csFact.CreateProjection("Google Mercator", "mercator_1sp", parameters);
+            IGeographicCoordinateSystem wgs84 = csFact.CreateGeographicCoordinateSystem(
+                "WGS 84", AngularUnit.Degrees, HorizontalDatum.WGS84, PrimeMeridian.Greenwich,
+                new AxisInfo("north", AxisOrientationEnum.North), new AxisInfo("east", AxisOrientationEnum.East)
+            );
+
+            IProjectedCoordinateSystem epsg900913 = csFact.CreateProjectedCoordinateSystem("Google Mercator", wgs84, projection, LinearUnit.Metre,
+              new AxisInfo("East", AxisOrientationEnum.East), new AxisInfo("North", AxisOrientationEnum.North));
+            return epsg900913;
+        }
 
         public TimeLine()
         {
@@ -27,6 +57,36 @@ namespace FTAnalyzer.Forms
             txtLocations.Text = "Already Geocoded " + ft.AllLocations.Count(l => l.IsGeoCoded) + " of " + ft.AllLocations.Count() + " locations";
             txtGoogleWait.Text = string.Empty;
             SetGeoCodedYearRange();
+
+            // Add Google maps layer to map control.
+            mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                new GoogleTileSource(GoogleMapType.GoogleMap), "Google"));
+
+            factLocations = new FeatureDataTable();
+            VectorLayer factLocationLayer = new VectorLayer("Locations");
+            factLocationLayer.DataSource = new GeometryFeatureProvider(factLocations);
+
+            CoordinateTransformationFactory ctFact = new CoordinateTransformationFactory();
+            CoordinateSystemFactory csFact = new CoordinateSystemFactory();
+
+            factLocationLayer.CoordinateTransformation = ctFact.CreateFromCoordinateSystems(
+                GeographicCoordinateSystem.WGS84,
+                GetEPSG900913(csFact));
+
+            factLocationLayer.ReverseCoordinateTransformation = ctFact.CreateFromCoordinateSystems(
+                GetEPSG900913(csFact),
+                GeographicCoordinateSystem.WGS84);
+
+            VectorStyle s = new VectorStyle();
+            s.PointColor = new SolidBrush(Color.Red);
+            s.PointSize = 24;
+            factLocationLayer.Style = s;
+
+            mapBox1.Map.Layers.Add(factLocationLayer);
+
+            mapBox1.Map.ZoomToExtents();
+            mapBox1.Refresh();
+            mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
         }
 
         private void SetGeoCodedYearRange()
@@ -238,7 +298,14 @@ namespace FTAnalyzer.Forms
             FactDate year = new FactDate(tbYears.Value.ToString());
             // now load up map with all the facts for that year and display them
             List<Fact> facts = ft.AllFacts.Where(x => x.Location.IsGeoCoded && x.FactDate.IsKnown() && x.FactDate.Overlaps(year)).ToList();
-
+            factLocations.Clear();
+            foreach (Fact f in facts)
+            {
+                FeatureDataRow r = factLocations.NewRow();
+                r.Geometry = new NetTopologySuite.Geometries.Point(f.Location.Longitude, f.Location.Latitude);
+                factLocations.AddRow(r);
+            }
+            mapBox1.Refresh();
             this.Cursor = Cursors.Default;
         }
 
