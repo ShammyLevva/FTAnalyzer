@@ -349,14 +349,18 @@ namespace FTAnalyzer
             set { xmlErrorbox = value; }
         }
 
-        public List<Fact> AllFacts
+        public List<MapFact> AllMapFacts
         {
             get
             {
-                List<Fact> result = new List<Fact>();
+                List<MapFact> result = new List<MapFact>();
                 foreach (Individual ind in individuals)
                 {
-                    result.AddRange(ind.AllFacts);
+                    foreach (Fact f in ind.PersonalFacts)
+                        result.Add(new MapFact(ind, f));
+                    foreach (Family fam in ind.FamiliesAsParent)
+                        foreach (Fact famfact in fam.Facts)
+                            result.Add(new MapFact(ind, famfact));
                 }
                 return result;
             }

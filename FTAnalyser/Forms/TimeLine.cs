@@ -102,14 +102,14 @@ namespace FTAnalyzer.Forms
             //return geoCodedFacts.Min(x => x.FactDate.);
             minGeoCodedYear = FactDate.MAXDATE.Year;
             maxGeoCodedYear = FactDate.MINDATE.Year;
-            foreach (Fact f in ft.AllFacts)
+            foreach (MapFact mf in ft.AllMapFacts)
             {
-                if (f.Location.IsGeoCoded && f.FactDate.IsKnown())
+                if (mf.Location.IsGeoCoded && mf.FactDate.IsKnown())
                 {
-                    if (f.FactDate.StartDate != FactDate.MINDATE && f.FactDate.StartDate.Year < minGeoCodedYear)
-                        minGeoCodedYear = f.FactDate.StartDate.Year;
-                    if (f.FactDate.EndDate != FactDate.MAXDATE && f.FactDate.EndDate.Year > maxGeoCodedYear)
-                        maxGeoCodedYear = f.FactDate.EndDate.Year;
+                    if (mf.FactDate.StartDate != FactDate.MINDATE && mf.FactDate.StartDate.Year < minGeoCodedYear)
+                        minGeoCodedYear = mf.FactDate.StartDate.Year;
+                    if (mf.FactDate.EndDate != FactDate.MAXDATE && mf.FactDate.EndDate.Year > maxGeoCodedYear)
+                        maxGeoCodedYear = mf.FactDate.EndDate.Year;
                 }
             }
             if (minGeoCodedYear == FactDate.MAXDATE.Year || maxGeoCodedYear == FactDate.MINDATE.Year)
@@ -306,9 +306,9 @@ namespace FTAnalyzer.Forms
             {
                 FactDate yearDate = new FactDate(year);
                 // now load up map with all the facts for that year and display them
-                List<Fact> facts = ft.AllFacts.Where(x => x.Location.IsGeoCoded && x.FactDate.IsKnown() && x.FactDate.Overlaps(yearDate)).ToList();
+                List<MapFact> facts = ft.AllMapFacts.Where(x => x.Location.IsGeoCoded && x.FactDate.IsKnown() && x.FactDate.Overlaps(yearDate)).ToList();
                 factLocations.Clear();
-                foreach (Fact f in facts)
+                foreach (MapFact f in facts)
                 {
                     FeatureDataRow r = factLocations.NewRow();
                     r["Location"] = f.Location.ToString();
