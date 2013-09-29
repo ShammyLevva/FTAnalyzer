@@ -20,6 +20,9 @@ using SharpMap.Styles;
 using GeoAPI.Geometries;
 using GeoAPI.CoordinateSystems.Transformations;
 using FTAnalyzer.Events;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
+using SharpMap.Rendering.Decoration;
 
 namespace FTAnalyzer.Forms
 {
@@ -74,9 +77,11 @@ namespace FTAnalyzer.Forms
             factLocations.Columns.Add("Location", typeof(FactLocation));
             factLocations.Columns.Add("Individual", typeof(Individual));
             factLocations.Columns.Add("Relation", typeof(int));
+            factLocations.Columns.Add("Label", typeof(string));
+            GeometryFeatureProvider factLocationGFP = new GeometryFeatureProvider(factLocations);
 
             factLocationLayer = new VectorLayer("Locations");
-            factLocationLayer.DataSource = new GeometryFeatureProvider(factLocations);
+            factLocationLayer.DataSource = factLocationGFP;
 
             CoordinateTransformationFactory ctFact = new CoordinateTransformationFactory();
             CoordinateSystemFactory csFact = new CoordinateSystemFactory();
@@ -121,9 +126,32 @@ namespace FTAnalyzer.Forms
             unknownToolStripMenuItem.ForeColor = Color.Black;
 
             factLocationLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<int>("Relation", styles, unknown);
-
             mapBox1.Map.Layers.Add(factLocationLayer);
-            mapBox1.Map.Decorations.Add(new SharpMap.Rendering.Decoration.GoogleMapsDisclaimer());
+
+            LabelLayer labelLayer = new LabelLayer("Label");
+             labelLayer.CoordinateTransformation = ctFact.CreateFromCoordinateSystems(
+                GeographicCoordinateSystem.WGS84,
+                GetEPSG900913(csFact));
+
+            labelLayer.ReverseCoordinateTransformation = ctFact.CreateFromCoordinateSystems(
+                GetEPSG900913(csFact),
+                GeographicCoordinateSystem.WGS84);
+            labelLayer.DataSource = factLocationGFP;
+            labelLayer.Enabled = true;
+            //Specifiy field that contains the label string.
+            labelLayer.LabelColumn = "Label";
+            labelLayer.Style = new LabelStyle();
+            labelLayer.Style.ForeColor = Color.Black;
+            labelLayer.Style.Font = new Font(FontFamily.GenericSerif, 11);
+            labelLayer.Style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left;
+            labelLayer.Style.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom;
+            labelLayer.Style.Offset = new PointF(3, 3);
+            labelLayer.Style.Halo = new Pen(Color.Yellow, 2);
+            labelLayer.TextRenderingHint = TextRenderingHint.AntiAlias;
+            labelLayer.SmoothingMode = SmoothingMode.AntiAlias;
+            mapBox1.Map.Layers.Add(labelLayer);
+
+            mapBox1.Map.Decorations.Add(new GoogleMapsDisclaimer());
             mapBox1.Map.ZoomToExtents();
             mapBox1.Refresh();
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
@@ -308,6 +336,7 @@ namespace FTAnalyzer.Forms
                         r["Location"] = loc.Location;
                         r["Individual"] = loc.Individual;
                         r["Relation"] = loc.Individual.RelationType;
+                        r["Label"] = loc.Individual.Name + " at " + loc.Location;
                         r.Geometry = new NetTopologySuite.Geometries.Point(loc.Location.Longitude, loc.Location.Latitude);
                         factLocations.AddRow(r);
                         if (!box.Covers(loc.Location.Longitude, loc.Location.Latitude))
@@ -417,5 +446,17 @@ namespace FTAnalyzer.Forms
         {
             DisplayLocationsForYear(labValue.Text);
         }
+
+        private void mapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Envelope box = mapBox1.Map.Envelope;
+            if (e.Button == MouseButtons.Left)
+                box.ExpandBy(mapBox1.Map.PixelSize * 250);
+            else if (e.Button == MouseButtons.Right)
+                box.ExpandBy(mapBox1.Map.PixelSize * -250);
+            mapBox1.Map.ZoomToBox(box);
+            mapBox1.Refresh();
+        }
+
     }
 }

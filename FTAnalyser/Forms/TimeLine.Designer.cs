@@ -214,15 +214,16 @@
             // 
             // mapBox1
             // 
-            this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.None;
+            this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             this.mapBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.mapBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.mapBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.mapBox1.FineZoomFactor = 10D;
             this.mapBox1.Location = new System.Drawing.Point(0, 75);
             this.mapBox1.MapQueryMode = SharpMap.Forms.MapBox.MapQueryType.LayerByIndex;
             this.mapBox1.Name = "mapBox1";
+            this.mapBox1.PanOnClick = false;
             this.mapBox1.QueryGrowFactor = 5F;
             this.mapBox1.QueryLayerIndex = 0;
             this.mapBox1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
@@ -232,6 +233,7 @@
             this.mapBox1.TabIndex = 7;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
+            this.mapBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mapBox1_MouseDoubleClick);
             // 
             // backgroundWorker
             // 
