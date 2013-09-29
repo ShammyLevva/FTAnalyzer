@@ -43,12 +43,12 @@ namespace FTAnalyzer.Forms
         }
 
         public void SetupCensus(Predicate<CensusIndividual> filter, IComparer<CensusIndividual> comparer,
-                FactDate date, bool censusDone, bool lostCousinCheck)
+                FactDate date, bool censusDone, bool showEnteredLostCousins)
         {
             FamilyTree ft = FamilyTree.Instance;
             CensusDate = date;
             this.comparer = comparer;
-            IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(date, censusDone, lostCousinCheck);
+            IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(date, censusDone, showEnteredLostCousins);
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Where(filter).ToList();
             dgCensus.DataSource = individuals;
             StyleRows();

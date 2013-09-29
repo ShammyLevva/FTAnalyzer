@@ -496,7 +496,6 @@ namespace FTAnalyzer
             Func<CensusIndividual, int> relationType = x => x.RelationType;
             Func<CensusIndividual, FactDate> registrationDate = x => x.CensusDate;
             HourGlass(true);
-            Census census;
             Predicate<CensusIndividual> relation =
                 FilterUtils.OrFilter<CensusIndividual>(
                     FilterUtils.OrFilter<CensusIndividual>(
@@ -504,22 +503,9 @@ namespace FTAnalyzer
                         FilterUtils.IntFilter<CensusIndividual>(relationType, Individual.DIRECT)),
                     FilterUtils.IntFilter<CensusIndividual>(relationType, Individual.MARRIEDTODB));
             IComparer<CensusIndividual> comparer;
-            //if (ckbLCIgnoreCountry.Checked) // only add the parish location comparator if we are using locations
-            //{
-                filter = FilterUtils.TrueFilter<CensusIndividual>(); // if we are ignoring locations then ignore what was passed as a filter
-                census = new Census(true, location);
-                comparer = new DefaultCensusComparer();
-            //}
-            //else
-            //{
-            //    if (location == Countries.ENG_WALES)
-            //        census = new Census(Countries.UNITED_KINGDOM, Countries.FactLocation(Countries.ENGLAND), Countries.FactLocation(Countries.WALES));
-            //    else if (location == Countries.SCOTLAND)
-            //        census = new Census(Countries.UNITED_KINGDOM, new FactLocation(location));
-            //    else
-            //        census = new Census(location, new FactLocation(location));
-            //    comparer = new CensusLocationComparer(FactLocation.COUNTRY);
-            //}
+            filter = FilterUtils.TrueFilter<CensusIndividual>();
+            Census census = new Census(true, location);
+            comparer = new DefaultCensusComparer();
 
             if (ckbRestrictions.Checked)
                 filter = FilterUtils.AndFilter<CensusIndividual>(
@@ -528,11 +514,11 @@ namespace FTAnalyzer
             else
                 filter = FilterUtils.AndFilter<CensusIndividual>(FilterUtils.DateFilter<CensusIndividual>(registrationDate, censusDate), filter);
 
-            census.SetupCensus(filter, comparer, censusDate, true, ckbHideRecorded.Checked);
-            if(ckbHideRecorded.Checked)
-                census.Text =  reportTitle + " to enter into Lost Cousins website";
-            else
+            census.SetupCensus(filter, comparer, censusDate, true, ckbShowLCEntered.Checked);
+            if(ckbShowLCEntered.Checked)
                 census.Text = reportTitle + " already entered into Lost Cousins website";
+            else
+                census.Text = reportTitle + " to enter into Lost Cousins website";
             HourGlass(false);
             DisposeDuplicateForms(census);
             census.Show();

@@ -98,7 +98,7 @@
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.btnLC1911EW = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.ckbHideRecorded = new System.Windows.Forms.CheckBox();
+            this.ckbShowLCEntered = new System.Windows.Forms.CheckBox();
             this.ckbRestrictions = new System.Windows.Forms.CheckBox();
             this.btnLC1841EW = new System.Windows.Forms.Button();
             this.btnLC1911Ireland = new System.Windows.Forms.Button();
@@ -767,7 +767,7 @@
             this.tabLostCousins.Controls.Add(this.linkLabel2);
             this.tabLostCousins.Controls.Add(this.btnLC1911EW);
             this.tabLostCousins.Controls.Add(this.linkLabel1);
-            this.tabLostCousins.Controls.Add(this.ckbHideRecorded);
+            this.tabLostCousins.Controls.Add(this.ckbShowLCEntered);
             this.tabLostCousins.Controls.Add(this.ckbRestrictions);
             this.tabLostCousins.Controls.Add(this.btnLC1841EW);
             this.tabLostCousins.Controls.Add(this.btnLC1911Ireland);
@@ -827,17 +827,16 @@
             this.linkLabel1.Text = "Visit the Lost Cousins Website";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // ckbHideRecorded
+            // ckbShowLCEntered
             // 
-            this.ckbHideRecorded.AutoSize = true;
-            this.ckbHideRecorded.Checked = true;
-            this.ckbHideRecorded.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbHideRecorded.Location = new System.Drawing.Point(22, 45);
-            this.ckbHideRecorded.Name = "ckbHideRecorded";
-            this.ckbHideRecorded.Size = new System.Drawing.Size(311, 17);
-            this.ckbHideRecorded.TabIndex = 10;
-            this.ckbHideRecorded.Text = "Hide results for individuals tagged as entered in Lost Cousins";
-            this.ckbHideRecorded.UseVisualStyleBackColor = true;
+            this.ckbShowLCEntered.AutoSize = true;
+            this.ckbShowLCEntered.Location = new System.Drawing.Point(22, 45);
+            this.ckbShowLCEntered.Name = "ckbShowLCEntered";
+            this.ckbShowLCEntered.Size = new System.Drawing.Size(415, 17);
+            this.ckbShowLCEntered.TabIndex = 10;
+            this.ckbShowLCEntered.Text = "Show already entered to Lost Cousins (unticked = show those to yet to be entered)" +
+                "";
+            this.ckbShowLCEntered.UseVisualStyleBackColor = true;
             // 
             // ckbRestrictions
             // 
@@ -1587,7 +1586,7 @@
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.Button btnLC1911EW;
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.CheckBox ckbHideRecorded;
+        private System.Windows.Forms.CheckBox ckbShowLCEntered;
         private System.Windows.Forms.CheckBox ckbRestrictions;
         private System.Windows.Forms.Button btnLC1841EW;
         private System.Windows.Forms.Button btnLC1911Ireland;
