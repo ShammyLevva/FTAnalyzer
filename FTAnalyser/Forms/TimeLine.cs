@@ -74,6 +74,7 @@ namespace FTAnalyzer.Forms
             factLocations = new FeatureDataTable();
             factLocations.Columns.Add("Location", typeof(FactLocation));
             factLocations.Columns.Add("Individual", typeof(Individual));
+            factLocations.Columns.Add("Relation", typeof(int));
 
             factLocationLayer = new VectorLayer("Locations");
             factLocationLayer.DataSource = new GeometryFeatureProvider(factLocations);
@@ -89,10 +90,33 @@ namespace FTAnalyzer.Forms
                 GetEPSG900913(csFact),
                 GeographicCoordinateSystem.WGS84);
 
-            VectorStyle s = new VectorStyle();
-            s.PointColor = new SolidBrush(Color.Red);
-            s.PointSize = 12;
-            factLocationLayer.Style = s;
+            Dictionary<int, IStyle> styles = new Dictionary<int, IStyle>();
+            VectorStyle blood = new VectorStyle();
+            blood.PointColor = new SolidBrush(Color.Red);
+            blood.PointSize = 10;
+            styles.Add(Individual.BLOOD, blood);
+
+            VectorStyle direct = new VectorStyle();
+            direct.PointColor = new SolidBrush(Color.ForestGreen);
+            direct.PointSize = 10;
+            styles.Add(Individual.DIRECT, direct);
+
+            VectorStyle marriage = new VectorStyle();
+            marriage.PointColor = new SolidBrush(Color.Pink);
+            marriage.PointSize = 10;
+            styles.Add(Individual.MARRIAGE, marriage);
+
+            VectorStyle marriagedb = new VectorStyle();
+            marriagedb.PointColor = new SolidBrush(Color.Blue);
+            marriagedb.PointSize = 10;
+            styles.Add(Individual.MARRIEDTODB, marriagedb);
+
+            VectorStyle unknown = new VectorStyle();
+            unknown.PointColor = new SolidBrush(Color.Black);
+            unknown.PointSize = 10;
+            styles.Add(Individual.UNKNOWN, unknown);
+
+            factLocationLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<int>("Relation", styles, unknown);
 
             mapBox1.Map.Layers.Add(factLocationLayer);
             mapBox1.Map.Decorations.Add(new SharpMap.Rendering.Decoration.GoogleMapsDisclaimer());
@@ -309,7 +333,7 @@ namespace FTAnalyzer.Forms
 
         public void DisplayLocationsForYear(string year)
         {
-            int result =0;
+            int result = 0;
             int.TryParse(year, out result);
             if (year.Length == 4 && result != 0)
             {
@@ -319,19 +343,41 @@ namespace FTAnalyzer.Forms
                 Envelope box = new Envelope();
                 foreach (MapLocation loc in locations)
                 {
-                    FeatureDataRow r = factLocations.NewRow();
-                    r["Location"] = loc.Location;
-                    r["Individual"] = loc.Individual;
-                    r.Geometry = new NetTopologySuite.Geometries.Point(loc.Location.Longitude, loc.Location.Latitude);
-                    factLocations.AddRow(r);
-                    if (!box.Covers(loc.Location.Longitude, loc.Location.Latitude))
-                        box.ExpandToInclude(loc.Location.Longitude, loc.Location.Latitude);
+                    if (RelationIncluded(loc.Individual.RelationType))
+                    {
+                        FeatureDataRow r = factLocations.NewRow();
+                        r["Location"] = loc.Location;
+                        r["Individual"] = loc.Individual;
+                        r["Relation"] = loc.Individual.RelationType;
+                        r.Geometry = new NetTopologySuite.Geometries.Point(loc.Location.Longitude, loc.Location.Latitude);
+                        factLocations.AddRow(r);
+                        if (!box.Covers(loc.Location.Longitude, loc.Location.Latitude))
+                            box.ExpandToInclude(loc.Location.Longitude, loc.Location.Latitude);
+                    }
                 }
                 IMathTransform transform = factLocationLayer.CoordinateTransformation.MathTransform;
                 box = new Envelope(transform.Transform(box.TopLeft()), transform.Transform(box.BottomRight()));
                 box.ExpandBy(mapBox1.Map.PixelSize * 5);
                 mapBox1.Map.ZoomToBox(box);
                 mapBox1.Refresh();
+            }
+        }
+
+        private bool RelationIncluded(int relationtype)
+        {
+            switch (relationtype)
+            {
+                case Individual.DIRECT:
+                    return directAncestorsToolStripMenuItem.Checked;
+                case Individual.BLOOD:
+                    return bloodRelativesToolStripMenuItem.Checked;
+                case Individual.MARRIAGE:
+                    return relatedByMarriageToolStripMenuItem.Checked;
+                case Individual.MARRIEDTODB:
+                    return marriedToDirectOrBloodToolStripMenuItem.Checked;
+                case Individual.UNKNOWN:
+                default:
+                    return unknownToolStripMenuItem.Checked;
             }
         }
 
@@ -380,6 +426,31 @@ namespace FTAnalyzer.Forms
                 return;
             }
             txtGoogleWait.Text = args.Message;
+        }
+
+        private void directAncestorsToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            DisplayLocationsForYear(labValue.Text);
+        }
+
+        private void bloodRelativesToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            DisplayLocationsForYear(labValue.Text);
+        }
+
+        private void marriedToDirectOrBloodToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            DisplayLocationsForYear(labValue.Text);
+        }
+
+        private void relatedByMarriageToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            DisplayLocationsForYear(labValue.Text);
+        }
+
+        private void unknownToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            DisplayLocationsForYear(labValue.Text);
         }
     }
 }

@@ -36,6 +36,12 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.geocodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.geocodeLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.relationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.directAncestorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bloodRelativesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.marriedToDirectOrBloodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.relatedByMarriageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unknownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbYears = new System.Windows.Forms.TrackBar();
             this.labMin = new System.Windows.Forms.Label();
             this.labMax = new System.Windows.Forms.Label();
@@ -81,7 +87,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.geocodeToolStripMenuItem});
+            this.geocodeToolStripMenuItem,
+            this.relationsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(920, 24);
@@ -103,6 +110,64 @@
             this.geocodeLocationsToolStripMenuItem.Text = "Geocode Locations";
             this.geocodeLocationsToolStripMenuItem.ToolTipText = "Looks up map co-ordinates for locations in your file";
             this.geocodeLocationsToolStripMenuItem.Click += new System.EventHandler(this.geocodeLocationsToolStripMenuItem_Click);
+            // 
+            // relationsToolStripMenuItem
+            // 
+            this.relationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.directAncestorsToolStripMenuItem,
+            this.bloodRelativesToolStripMenuItem,
+            this.marriedToDirectOrBloodToolStripMenuItem,
+            this.relatedByMarriageToolStripMenuItem,
+            this.unknownToolStripMenuItem});
+            this.relationsToolStripMenuItem.Name = "relationsToolStripMenuItem";
+            this.relationsToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.relationsToolStripMenuItem.Text = "Relations";
+            // 
+            // directAncestorsToolStripMenuItem
+            // 
+            this.directAncestorsToolStripMenuItem.Checked = true;
+            this.directAncestorsToolStripMenuItem.CheckOnClick = true;
+            this.directAncestorsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.directAncestorsToolStripMenuItem.Name = "directAncestorsToolStripMenuItem";
+            this.directAncestorsToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.directAncestorsToolStripMenuItem.Text = "Direct Ancestors";
+            this.directAncestorsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.directAncestorsToolStripMenuItem_CheckedChanged);
+            // 
+            // bloodRelativesToolStripMenuItem
+            // 
+            this.bloodRelativesToolStripMenuItem.Checked = true;
+            this.bloodRelativesToolStripMenuItem.CheckOnClick = true;
+            this.bloodRelativesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.bloodRelativesToolStripMenuItem.Name = "bloodRelativesToolStripMenuItem";
+            this.bloodRelativesToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.bloodRelativesToolStripMenuItem.Text = "Blood Relatives";
+            this.bloodRelativesToolStripMenuItem.CheckedChanged += new System.EventHandler(this.bloodRelativesToolStripMenuItem_CheckedChanged);
+            // 
+            // marriedToDirectOrBloodToolStripMenuItem
+            // 
+            this.marriedToDirectOrBloodToolStripMenuItem.Checked = true;
+            this.marriedToDirectOrBloodToolStripMenuItem.CheckOnClick = true;
+            this.marriedToDirectOrBloodToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.marriedToDirectOrBloodToolStripMenuItem.Name = "marriedToDirectOrBloodToolStripMenuItem";
+            this.marriedToDirectOrBloodToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.marriedToDirectOrBloodToolStripMenuItem.Text = "Married to Direct or Blood";
+            this.marriedToDirectOrBloodToolStripMenuItem.CheckedChanged += new System.EventHandler(this.marriedToDirectOrBloodToolStripMenuItem_CheckedChanged);
+            // 
+            // relatedByMarriageToolStripMenuItem
+            // 
+            this.relatedByMarriageToolStripMenuItem.CheckOnClick = true;
+            this.relatedByMarriageToolStripMenuItem.Name = "relatedByMarriageToolStripMenuItem";
+            this.relatedByMarriageToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.relatedByMarriageToolStripMenuItem.Text = "Related by Marriage";
+            this.relatedByMarriageToolStripMenuItem.CheckedChanged += new System.EventHandler(this.relatedByMarriageToolStripMenuItem_CheckedChanged);
+            // 
+            // unknownToolStripMenuItem
+            // 
+            this.unknownToolStripMenuItem.CheckOnClick = true;
+            this.unknownToolStripMenuItem.Name = "unknownToolStripMenuItem";
+            this.unknownToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.unknownToolStripMenuItem.Text = "Unknown";
+            this.unknownToolStripMenuItem.CheckedChanged += new System.EventHandler(this.unknownToolStripMenuItem_CheckedChanged);
             // 
             // tbYears
             // 
@@ -201,7 +266,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "TimeLine";
-            this.Text = "Timeline of Facts";
+            this.Text = "Timeline of Individuals";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TimeLine_FormClosing);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -229,5 +294,11 @@
         private SharpMap.Forms.MapBox mapBox1;
         private System.ComponentModel.BackgroundWorker backgroundWorker;
         private SharpMap.Forms.ToolBar.MapZoomToolStrip mapZoomToolStrip;
+        private System.Windows.Forms.ToolStripMenuItem relationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem directAncestorsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bloodRelativesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem marriedToDirectOrBloodToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem relatedByMarriageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem unknownToolStripMenuItem;
     }
 }
