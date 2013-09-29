@@ -101,18 +101,20 @@ namespace FTAnalyzer.Forms
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
         }
 
+        #region Geocoding
+
         private void SetGeoCodedYearRange()
         {
             minGeoCodedYear = FactDate.MAXDATE.Year;
             maxGeoCodedYear = FactDate.MINDATE.Year;
-            foreach (MapFact mf in ft.AllMapFacts)
+            foreach (MapLocation ml in ft.AllMapLocations)
             {
-                if (mf.Location.IsGeoCoded && mf.FactDate.IsKnown)
+                if (ml.Location.IsGeoCoded && ml.FactDate.IsKnown)
                 {
-                    if (mf.FactDate.StartDate != FactDate.MINDATE && mf.FactDate.StartDate.Year < minGeoCodedYear)
-                        minGeoCodedYear = mf.FactDate.StartDate.Year;
-                    if (mf.FactDate.EndDate != FactDate.MAXDATE && mf.FactDate.EndDate.Year > maxGeoCodedYear)
-                        maxGeoCodedYear = mf.FactDate.EndDate.Year;
+                    if (ml.FactDate.StartDate != FactDate.MINDATE && ml.FactDate.StartDate.Year < minGeoCodedYear)
+                        minGeoCodedYear = ml.FactDate.StartDate.Year;
+                    if (ml.FactDate.EndDate != FactDate.MAXDATE && ml.FactDate.EndDate.Year > maxGeoCodedYear)
+                        maxGeoCodedYear = ml.FactDate.EndDate.Year;
                 }
             }
             if (minGeoCodedYear == FactDate.MAXDATE.Year || maxGeoCodedYear == FactDate.MINDATE.Year)
@@ -303,6 +305,8 @@ namespace FTAnalyzer.Forms
 
         }
 
+        #endregion
+
         public void DisplayLocationsForYear(string year)
         {
             int result =0;
@@ -310,19 +314,18 @@ namespace FTAnalyzer.Forms
             if (year.Length == 4 && result != 0)
             {
                 FactDate yearDate = new FactDate(year);
-                // now load up map with all the facts for that year and display them
-                List<MapFact> facts = ft.AllMapFacts.Where(x => x.Location.IsGeoCoded && x.FactDate.IsKnown && x.FactDate.Overlaps(yearDate)).ToList();
+                List<MapLocation> locations = ft.AllIndividualLocations(yearDate);
                 factLocations.Clear();
                 Envelope box = new Envelope();
-                foreach (MapFact f in facts)
+                foreach (MapLocation loc in locations)
                 {
                     FeatureDataRow r = factLocations.NewRow();
-                    r["Location"] = f.Location;
-                    r["Individual"] = f.Individual;
-                    r.Geometry = new NetTopologySuite.Geometries.Point(f.Location.Longitude, f.Location.Latitude);
+                    r["Location"] = loc.Location;
+                    r["Individual"] = loc.Individual;
+                    r.Geometry = new NetTopologySuite.Geometries.Point(loc.Location.Longitude, loc.Location.Latitude);
                     factLocations.AddRow(r);
-                    if (!box.Covers(f.Location.Longitude, f.Location.Latitude))
-                        box.ExpandToInclude(f.Location.Longitude, f.Location.Latitude);
+                    if (!box.Covers(loc.Location.Longitude, loc.Location.Latitude))
+                        box.ExpandToInclude(loc.Location.Longitude, loc.Location.Latitude);
                 }
                 IMathTransform transform = factLocationLayer.CoordinateTransformation.MathTransform;
                 box = new Envelope(transform.Transform(box.TopLeft()), transform.Transform(box.BottomRight()));

@@ -193,7 +193,7 @@
     <Compile Include="Core\FactImage.cs" />
     <Compile Include="Core\FactSource.cs" />
     <Compile Include="Core\FamilySearch.cs" />
-    <Compile Include="Core\MapFact.cs" />
+    <Compile Include="Core\MapLocation.cs" />
     <Compile Include="Core\Statistics.cs" />
     <Compile Include="Events\GoogleWaitingEventArgs.cs" />
     <Compile Include="Forms\ColourBMD.cs">

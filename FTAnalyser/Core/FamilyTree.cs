@@ -349,21 +349,34 @@ namespace FTAnalyzer
             set { xmlErrorbox = value; }
         }
 
-        public List<MapFact> AllMapFacts
+        public List<MapLocation> AllMapLocations
         {
             get
             {
-                List<MapFact> result = new List<MapFact>();
+                List<MapLocation> result = new List<MapLocation>();
                 foreach (Individual ind in individuals)
                 {
-                    foreach (Fact f in ind.PersonalFacts)
-                        result.Add(new MapFact(ind, f));
-                    foreach (Family fam in ind.FamiliesAsParent)
-                        foreach (Fact famfact in fam.Facts)
-                            result.Add(new MapFact(ind, famfact));
+                    foreach (Fact f in ind.AllFacts)
+                        if(f.Location.IsGeoCoded)
+                            result.Add(new MapLocation(ind, f.Location, f.FactDate));
                 }
                 return result;
             }
+        }
+
+        public List<MapLocation> AllIndividualLocations(FactDate when)
+        {
+            List<MapLocation> result = new List<MapLocation>();
+            foreach (Individual ind in individuals)
+            {
+                if (ind.IsAlive(when))
+                {
+                    FactLocation loc = ind.BestLocation(when);
+                    if (loc.IsGeoCoded)
+                        result.Add(new MapLocation(ind, loc, when));
+                }
+            }
+            return result;
         }
 
         public List<ExportFacts> AllExportFacts
