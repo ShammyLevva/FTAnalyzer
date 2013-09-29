@@ -201,7 +201,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "TimeLine";
-            this.Text = "v       v";
+            this.Text = "TimeLine";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TimeLine_FormClosing);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
