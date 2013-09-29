@@ -192,8 +192,14 @@ namespace FTAnalyzer
             RemoveFamiliesWithNoIndividuals();
             if (rootIndividual == string.Empty)
                 rootIndividual = individuals[0].IndividualID;
-            xmlErrorbox.AppendText("Calculating Relationships using " + rootIndividual + ": " +
-                GetIndividual(rootIndividual).Name + " as starter person. Please wait.\n\n");
+            int start = xmlErrorbox.TextLength;
+            xmlErrorbox.AppendText("\nCalculating Relationships using " + rootIndividual + ": " +
+                GetIndividual(rootIndividual).Name + " as starter person.\n\n");
+            int end = xmlErrorbox.TextLength;
+            xmlErrorbox.SelectionStart = start;
+            xmlErrorbox.SelectionLength = end - start;
+            xmlErrorbox.SelectionFont = new Font(xmlErrorbox.Font, FontStyle.Bold);
+            xmlErrorbox.SelectionLength = 0;
             SetRelations(rootIndividual);
             xmlErrorbox.AppendText(PrintRelationCount());
             CountCensusFacts();
