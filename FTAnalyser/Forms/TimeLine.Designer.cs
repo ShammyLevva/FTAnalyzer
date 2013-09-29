@@ -75,8 +75,8 @@
             // txtGoogleWait
             // 
             this.txtGoogleWait.Name = "txtGoogleWait";
-            this.txtGoogleWait.Size = new System.Drawing.Size(69, 17);
-            this.txtGoogleWait.Text = "GoogleWait";
+            this.txtGoogleWait.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.txtGoogleWait.Size = new System.Drawing.Size(0, 17);
             // 
             // menuStrip1
             // 

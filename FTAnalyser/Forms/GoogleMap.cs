@@ -37,7 +37,9 @@ namespace FTAnalyzer.Forms
         private String location;
         private bool loaded;
 
-        public static event EventHandler WaitingForGoogle;
+        public delegate void GoogleEventHandler(object sender, GoogleWaitingEventArgs args);
+        public static event GoogleEventHandler WaitingForGoogle;
+        public static bool ThreadCancelled { get; set; }
 
         public GoogleMap()
         {
@@ -145,7 +147,7 @@ namespace FTAnalyzer.Forms
         private static int sleepinterval = 200;
 
         // Call geocoding routine but account for throttling by Google geocoding engine
-        public static GeoResponse CallGeoWSCount(string address, int badtries, ToolStripStatusLabel label)
+        public static GeoResponse CallGeoWSCount(string address, int badtries)
         {
             Console.WriteLine("waiting " + sleepinterval);
             double seconds = sleepinterval / 1000;
@@ -156,7 +158,11 @@ namespace FTAnalyzer.Forms
                 OnWaitingForGoogle("Maximum Google GeoLocations exceeded. No more possible just now.");
                 return null;
             }
-            Thread.Sleep(sleepinterval);
+            for (int interval = 0; interval < sleepinterval; interval += 1000)
+            {
+                Thread.Sleep(1000);
+                if (ThreadCancelled) return null;
+            }
             GeoResponse res;
             try
             {
@@ -164,14 +170,14 @@ namespace FTAnalyzer.Forms
             }
             catch (Exception e)
             {
-                label.Text = "Caught exception: " + e;
+                OnWaitingForGoogle("Caught exception: " + e);
                 res = null;
             }
             if (res == null || res.Status == "OVER_QUERY_LIMIT")
             {
                 // we're hitting Google too fast, increase interval
                 sleepinterval = Math.Min(sleepinterval + ++badtries * 750, 30000);
-                return CallGeoWSCount(address, badtries, label);
+                return CallGeoWSCount(address, badtries);
             }
             else
             {

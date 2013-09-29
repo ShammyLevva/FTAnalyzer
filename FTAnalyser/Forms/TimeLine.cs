@@ -197,7 +197,7 @@ namespace FTAnalyzer.Forms
         {
             try
             {
-                GoogleMap.WaitingForGoogle += new EventHandler(GoogleMap_WaitingForGoogle);
+                GoogleMap.WaitingForGoogle += new GoogleMap.GoogleEventHandler(GoogleMap_WaitingForGoogle);
                 SQLiteConnection conn = GetDatabaseConnection();
                 conn.Open();
                 SQLiteCommand cmd = new SQLiteCommand("select location from geocode where location = ?", conn);
@@ -238,6 +238,7 @@ namespace FTAnalyzer.Forms
                 int good = 0;
                 int bad = 0;
                 int total = ft.AllLocations.Count();
+                GoogleMap.ThreadCancelled = false;
 
                 foreach (FactLocation loc in ft.AllLocations)
                 {
@@ -247,7 +248,7 @@ namespace FTAnalyzer.Forms
                         SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
                         if (!reader.Read() && loc.ToString().Length > 0)
                         {  // location isn't found so add it
-                            GoogleMap.GeoResponse res = GoogleMap.CallGeoWSCount(loc.ToString(), 10, txtGoogleWait);
+                            GoogleMap.GeoResponse res = GoogleMap.CallGeoWSCount(loc.ToString(), 10);
                             if (res != null && res.Status == "OK" && res.Results.Length > 0)
                             {
                                 double latitude = 0;
@@ -281,9 +282,9 @@ namespace FTAnalyzer.Forms
 
                     count++;
                     int percent = (int)Math.Truncate(count * 100.0 / total);
-                    string status = "Google found " + good + ", but failed to find " + bad + " records. Geocoded " +
-                            ft.AllLocations.Count(l => l.IsGeoCoded) + " locations so far. " + count +
-                            " of " + total + " processed.";
+                    string status = "Google found " + good + ", didn't find " + bad + " places. Geocoded " +
+                            ft.AllLocations.Count(l => l.IsGeoCoded) + " locations. " + count +
+                            " of " + total + ".  ";
                     worker.ReportProgress(percent, status);
 
                     if (worker.CancellationPending)
@@ -353,6 +354,7 @@ namespace FTAnalyzer.Forms
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             pbGeocoding.Value = 100;
+            txtGoogleWait.Text = string.Empty;
             if (formClosing) this.Close();
         }
 
@@ -361,6 +363,7 @@ namespace FTAnalyzer.Forms
             if (backgroundWorker.IsBusy)
             {
                 backgroundWorker.CancelAsync();
+                GoogleMap.ThreadCancelled = true;
                 e.Cancel = true;
                 formClosing = true;
             }
@@ -368,6 +371,11 @@ namespace FTAnalyzer.Forms
 
         public void GoogleMap_WaitingForGoogle(object sender, GoogleWaitingEventArgs args)
         {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => GoogleMap_WaitingForGoogle(sender, args)));
+                return;
+            }
             txtGoogleWait.Text = args.Message;
         }
     }
