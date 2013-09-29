@@ -6,6 +6,7 @@ using System.Xml;
 using System.Windows.Forms;
 using System.Globalization;
 using FTAnalyzer.Utilities;
+using System.Text.RegularExpressions;
 
 namespace FTAnalyzer
 {
@@ -42,6 +43,13 @@ namespace FTAnalyzer
 
         private static readonly Dictionary<string, string> CUSTOM_TAGS = new Dictionary<string, string>();
         private static readonly HashSet<string> COMMENT_FACTS = new HashSet<string>();
+
+        //Database online. Class: HO107; Piece: 1782; Folio: 719; Page: 25; GSU
+        //Database online. Class: RG9; Piece: 1105; Folio: 90; Page: 21; GSU
+        //RG14PN22623 RG78PN1327 RD455 SD10 ED13 SN183
+        private static readonly string CENSUS_PATTERN = "Class: ([RGHO]{1,3}\\d{2,3}); Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3}); GSU";
+        private static readonly string CENSUS_1911_PATTERN = "^RG14PN(\\d{1,6}) .*SN(\\d{1,3})$";
+
 
         static Fact()
         {
@@ -177,6 +185,11 @@ namespace FTAnalyzer
 
         public enum FactError { GOOD = 0, WARNINGALLOW = 1, WARNINGIGNORE = 2, ERROR = 3 };
 
+        public string Piece { get; private set; }
+        public string Folio { get; private set; }
+        public string Page { get; private set; }
+        public string Schedule { get; private set; }
+
         #region Constructors
 
         private Fact()
@@ -190,6 +203,10 @@ namespace FTAnalyzer
             this.CertificatePresent = false;
             this.FactErrorLevel = FactError.GOOD;
             this.FactErrorMessage = string.Empty;
+            this.Piece = string.Empty;
+            this.Folio = string.Empty;
+            this.Page = string.Empty;
+            this.Schedule = string.Empty;
         }
 
         public Fact(XmlNode node, string factRef)
@@ -244,6 +261,23 @@ namespace FTAnalyzer
                                 Sources.Add(source);
                             else
                                 ft.XmlErrorBox.AppendText("Source " + srcref + " not found." + "\n");
+                        }
+                        string text = FamilyTree.GetText(n, "PAGE");
+                        if (text.Length > 0)
+                        {
+                            Match matcher = Regex.Match(text, CENSUS_PATTERN);
+                            if (matcher.Success)
+                            {
+                                this.Piece = matcher.Groups[2].ToString();
+                                this.Folio = matcher.Groups[3].ToString();
+                                this.Page = matcher.Groups[4].ToString();
+                            }
+                            matcher = Regex.Match(text, CENSUS_1911_PATTERN);
+                            if (matcher.Success)
+                            {
+                                this.Page = matcher.Groups[1].ToString();
+                                this.Schedule = matcher.Groups[2].ToString();
+                            }
                         }
                     }
 
