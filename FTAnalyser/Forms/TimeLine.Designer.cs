@@ -150,9 +150,9 @@
             // mapBox1
             // 
             this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.None;
-            this.mapBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.mapBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.mapBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.mapBox1.FineZoomFactor = 10D;
             this.mapBox1.Location = new System.Drawing.Point(0, 75);
@@ -178,11 +178,13 @@
             // 
             // mapZoomToolStrip
             // 
+            this.mapZoomToolStrip.Enabled = false;
             this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 69);
             this.mapZoomToolStrip.MapControl = this.mapBox1;
             this.mapZoomToolStrip.Name = "mapZoomToolStrip";
             this.mapZoomToolStrip.Size = new System.Drawing.Size(920, 25);
             this.mapZoomToolStrip.TabIndex = 8;
+            this.mapZoomToolStrip.Text = "MapZoomToolStrip";
             // 
             // TimeLine
             // 
@@ -199,7 +201,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "TimeLine";
-            this.Text = "Timeline";
+            this.Text = "v       v";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TimeLine_FormClosing);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
