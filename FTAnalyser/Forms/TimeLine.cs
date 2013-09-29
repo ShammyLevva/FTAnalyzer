@@ -145,8 +145,8 @@ namespace FTAnalyzer.Forms
             labelLayer.Style.Font = new Font(FontFamily.GenericSerif, 11);
             labelLayer.Style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left;
             labelLayer.Style.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom;
-            labelLayer.Style.Offset = new PointF(3, 3);
-            labelLayer.Style.Halo = new Pen(Color.Yellow, 2);
+            //labelLayer.Style.Offset = new PointF(3, 3);
+            //labelLayer.Style.Halo = new Pen(Color.Yellow, 2);
             labelLayer.TextRenderingHint = TextRenderingHint.AntiAlias;
             labelLayer.SmoothingMode = SmoothingMode.AntiAlias;
             mapBox1.Map.Layers.Add(labelLayer);
@@ -449,12 +449,14 @@ namespace FTAnalyzer.Forms
 
         private void mapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            Envelope box = mapBox1.Map.Envelope;
             if (e.Button == MouseButtons.Left)
-                box.ExpandBy(mapBox1.Map.PixelSize * 250);
+                mapBox1.Map.Zoom -= mapBox1.Map.Zoom * 0.3;
             else if (e.Button == MouseButtons.Right)
-                box.ExpandBy(mapBox1.Map.PixelSize * -250);
-            mapBox1.Map.ZoomToBox(box);
+                mapBox1.Map.Zoom += mapBox1.Map.Zoom * 0.3;
+            
+            Coordinate p = mapBox1.Map.ImageToWorld(new PointF(e.X, e.Y));
+            mapBox1.Map.Center.X = p.X;
+            mapBox1.Map.Center.Y = p.Y;
             mapBox1.Refresh();
         }
 
