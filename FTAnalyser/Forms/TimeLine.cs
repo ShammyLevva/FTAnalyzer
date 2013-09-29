@@ -167,9 +167,14 @@ namespace FTAnalyzer.Forms
         private void geocodeLocationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
+            StartGeoCoding();
+            this.Cursor = Cursors.Default;
+        }
+
+        public void StartGeoCoding()
+        {
             pbGeocoding.Visible = true;
             backgroundWorker.RunWorkerAsync();
-            this.Cursor = Cursors.Default;
         }
 
         public void GeoCode(BackgroundWorker worker, DoWorkEventArgs e)

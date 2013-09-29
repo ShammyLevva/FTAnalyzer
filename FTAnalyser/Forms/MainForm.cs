@@ -151,6 +151,7 @@ namespace FTAnalyzer
             mnuChildAgeProfiles.Enabled = enabled;
             mnuOlderParents.Enabled = enabled;
             mnuShowTimeline.Enabled = enabled;
+            mnuGeocodeLocations.Enabled = enabled;
         }
 
         private void DisposeIndividualForms()
@@ -1567,6 +1568,16 @@ namespace FTAnalyzer
             TimeLine tl = new TimeLine();
             tl.Show();
             DisposeDuplicateForms(tl);
+            HourGlass(false);
+        }
+
+        private void mnuGeocodeLocations_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            TimeLine tl = new TimeLine();
+            tl.Show();
+            DisposeDuplicateForms(tl);
+            tl.StartGeoCoding();
             HourGlass(false);
         }
     }

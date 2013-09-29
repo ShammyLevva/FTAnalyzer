@@ -12,6 +12,9 @@ namespace FTAnalyzer
         string SubRegion { get; }
         string Address { get; }
         string Place { get; }
+        double Latitude { get; }
+        double Longitude { get; }
+        string Geocoded { get; }
 
         int CompareTo(IDisplayLocation loc, int level);
         FactLocation GetLocation(int level);

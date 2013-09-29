@@ -374,30 +374,6 @@ namespace FTAnalyzer
             set { this.status = value; }
         }
 
-        //public FactLocation BestLocation
-        //{
-        //    get
-        //    {
-        //        int bestLevel = -1;
-        //        FactLocation result = new FactLocation();
-        //        foreach (Fact f in facts)
-        //        {
-        //            FactLocation l = new FactLocation(f.Place);
-        //            if (l.Level > bestLevel)
-        //            {
-        //                result = l;
-        //                bestLevel = l.Level;
-        //            }
-        //        }
-        //        return result;
-        //    }
-        //}
-
-        //public FactLocation FilterLocation
-        //{
-        //    get { return BestLocation; }
-        //}
-
         private int MaxAgeAtDeath
         {
             get

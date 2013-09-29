@@ -15,7 +15,7 @@ namespace FTAnalyzer
     {
 
         public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, PARISH = 2, ADDRESS = 3, PLACE = 4;
-        public enum Geocode { NOTSEARCHED = 0, FOUND = 1, NOTFOUND = 0 };
+        public enum Geocode { NOTSEARCHED = 0, FOUND = 1, NOTFOUND = 2, GEDCOM = 3 };
 
         private string location;
         private string fixedLocation;
@@ -149,6 +149,8 @@ namespace FTAnalyzer
             double temp;
             this.Latitude = double.TryParse(latitude, out temp) ? temp : 0;
             this.Longitude = double.TryParse(longitude, out temp) ? temp : 0;
+            if (IsGeoCoded)
+                this.GeocodeStatus = Geocode.GEDCOM;
         }
 
         public FactLocation(string location)
@@ -204,7 +206,7 @@ namespace FTAnalyzer
                     Level = COUNTRY;
                 }
                 //string before = (parish + ", " + region + ", " + country).ToUpper().Trim();
-                if(!Properties.GeneralSettings.Default.AllowEmptyLocations)
+                if (!Properties.GeneralSettings.Default.AllowEmptyLocations)
                     FixEmptyFields();
                 FixCapitalisation();
                 FixRegionFullStops();
@@ -454,6 +456,26 @@ namespace FTAnalyzer
             get { return Countries.IsUnitedKingdom(Country); }
         }
 
+        public string Geocoded
+        {
+            get
+            {
+                switch (GeocodeStatus)
+                {
+                    case Geocode.FOUND:
+                        return "Found";
+                    case Geocode.NOTFOUND:
+                        return "Not Found";
+                    case Geocode.NOTSEARCHED:
+                        return "Not Searched";
+                    case Geocode.GEDCOM:
+                        return "GEDCOM data";
+                    default:
+                        return "Unknown";
+                }
+            }
+        }
+
         public string CensusCountry
         {
             get
@@ -535,7 +557,11 @@ namespace FTAnalyzer
                 location.Insert(0, fixNumerics ? FixNumerics(this.Address) : this.Address + ", ");
             if (level > ADDRESS && Place.Length > 0)
                 location.Insert(0, fixNumerics ? FixNumerics(this.Place) : this.Place + ", ");
-            return new FactLocation(location.ToString());
+            FactLocation newLocation = new FactLocation(location.ToString());
+            newLocation.Latitude = this.Latitude;
+            newLocation.Longitude = this.Longitude;
+            newLocation.GeocodeStatus = this.GeocodeStatus;
+            return newLocation;
         }
 
         public static FactLocation BestLocation(IEnumerable<Fact> facts, FactDate when)
