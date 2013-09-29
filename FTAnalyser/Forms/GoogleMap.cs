@@ -12,6 +12,7 @@ using System.Web;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using FTAnalyzer.Events;
 
 namespace FTAnalyzer.Forms
 {
@@ -35,6 +36,8 @@ namespace FTAnalyzer.Forms
 
         private String location;
         private bool loaded;
+
+        public static event EventHandler WaitingForGoogle;
 
         public GoogleMap()
         {
@@ -110,6 +113,14 @@ namespace FTAnalyzer.Forms
             return FactLocation.UNKNOWN;
         }
 
+        public static void OnWaitingForGoogle(string message)
+        {
+            if (WaitingForGoogle != null)
+            {
+                WaitingForGoogle(null, new GoogleWaitingEventArgs(message));
+            }
+        }
+
         public static GeoResponse CallGeoWS(string address)
         {
             string url = string.Format(
@@ -139,10 +150,10 @@ namespace FTAnalyzer.Forms
             Console.WriteLine("waiting " + sleepinterval);
             double seconds = sleepinterval / 1000;
             if (sleepinterval > 500)
-                label.Text = "Querying too fast. Google imposed wait of: " + seconds + " seconds.";
+                OnWaitingForGoogle("Querying too fast. Google imposed wait of: " + seconds + " seconds.");
             if (sleepinterval > 30000)
             {
-                label.Text = "Maximum Google GeoLocations exceeded. No more possible just now.";
+                OnWaitingForGoogle("Maximum Google GeoLocations exceeded. No more possible just now.");
                 return null;
             }
             Thread.Sleep(sleepinterval);

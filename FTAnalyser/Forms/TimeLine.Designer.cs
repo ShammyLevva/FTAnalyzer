@@ -75,8 +75,8 @@
             // txtGoogleWait
             // 
             this.txtGoogleWait.Name = "txtGoogleWait";
-            this.txtGoogleWait.Size = new System.Drawing.Size(118, 17);
-            this.txtGoogleWait.Text = "toolStripStatusLabel1";
+            this.txtGoogleWait.Size = new System.Drawing.Size(69, 17);
+            this.txtGoogleWait.Text = "GoogleWait";
             // 
             // menuStrip1
             // 
@@ -150,9 +150,9 @@
             // mapBox1
             // 
             this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.None;
-            this.mapBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mapBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.mapBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.mapBox1.FineZoomFactor = 10D;
             this.mapBox1.Location = new System.Drawing.Point(0, 75);
@@ -201,7 +201,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "TimeLine";
-            this.Text = "TimeLine";
+            this.Text = "Timeline of Facts";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TimeLine_FormClosing);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

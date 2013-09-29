@@ -19,6 +19,7 @@ using SharpMap.Data;
 using SharpMap.Styles;
 using GeoAPI.Geometries;
 using GeoAPI.CoordinateSystems.Transformations;
+using FTAnalyzer.Events;
 
 namespace FTAnalyzer.Forms
 {
@@ -196,6 +197,7 @@ namespace FTAnalyzer.Forms
         {
             try
             {
+                GoogleMap.WaitingForGoogle += new EventHandler(GoogleMap_WaitingForGoogle);
                 SQLiteConnection conn = GetDatabaseConnection();
                 conn.Open();
                 SQLiteCommand cmd = new SQLiteCommand("select location from geocode where location = ?", conn);
@@ -364,5 +366,9 @@ namespace FTAnalyzer.Forms
             }
         }
 
+        public void GoogleMap_WaitingForGoogle(object sender, GoogleWaitingEventArgs args)
+        {
+            txtGoogleWait.Text = args.Message;
+        }
     }
 }
