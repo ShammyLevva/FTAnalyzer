@@ -194,7 +194,7 @@ namespace FTAnalyzer
                 rootIndividual = individuals[0].IndividualID;
             int start = xmlErrorbox.TextLength;
             xmlErrorbox.AppendText("\nCalculating Relationships using " + rootIndividual + ": " +
-                GetIndividual(rootIndividual).Name + " as starter person.\n\n");
+                GetIndividual(rootIndividual).Name + " as starter person. Please wait\n\n");
             int end = xmlErrorbox.TextLength;
             xmlErrorbox.SelectionStart = start;
             xmlErrorbox.SelectionLength = end - start;

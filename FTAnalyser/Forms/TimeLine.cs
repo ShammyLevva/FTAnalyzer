@@ -95,26 +95,31 @@ namespace FTAnalyzer.Forms
             blood.PointColor = new SolidBrush(Color.Red);
             blood.PointSize = 10;
             styles.Add(Individual.BLOOD, blood);
+            bloodRelativesToolStripMenuItem.ForeColor = Color.Red;
 
             VectorStyle direct = new VectorStyle();
             direct.PointColor = new SolidBrush(Color.ForestGreen);
             direct.PointSize = 10;
             styles.Add(Individual.DIRECT, direct);
+            directAncestorsToolStripMenuItem.ForeColor = Color.ForestGreen;
 
             VectorStyle marriage = new VectorStyle();
             marriage.PointColor = new SolidBrush(Color.Pink);
             marriage.PointSize = 10;
             styles.Add(Individual.MARRIAGE, marriage);
+            relatedByMarriageToolStripMenuItem.ForeColor = Color.Pink;
 
             VectorStyle marriagedb = new VectorStyle();
-            marriagedb.PointColor = new SolidBrush(Color.Blue);
+            marriagedb.PointColor = new SolidBrush(Color.MediumBlue);
             marriagedb.PointSize = 10;
             styles.Add(Individual.MARRIEDTODB, marriagedb);
+            marriedToDirectOrBloodToolStripMenuItem.ForeColor = Color.MediumBlue;
 
             VectorStyle unknown = new VectorStyle();
             unknown.PointColor = new SolidBrush(Color.Black);
             unknown.PointSize = 10;
             styles.Add(Individual.UNKNOWN, unknown);
+            unknownToolStripMenuItem.ForeColor = Color.Black;
 
             factLocationLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<int>("Relation", styles, unknown);
 
