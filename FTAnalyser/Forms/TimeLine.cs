@@ -299,6 +299,7 @@ namespace FTAnalyzer.Forms
                 List<MapLocation> locations = ft.AllIndividualLocations(yearDate);
                 factLocations.Clear();
                 Envelope box = new Envelope();
+                bool updated = false;
                 foreach (MapLocation loc in locations)
                 {
                     if (RelationIncluded(loc.Individual.RelationType))
@@ -310,13 +311,19 @@ namespace FTAnalyzer.Forms
                         r.Geometry = new NetTopologySuite.Geometries.Point(loc.Location.Longitude, loc.Location.Latitude);
                         factLocations.AddRow(r);
                         if (!box.Covers(loc.Location.Longitude, loc.Location.Latitude))
+                        {
+                            updated = true;
                             box.ExpandToInclude(loc.Location.Longitude, loc.Location.Latitude);
+                        }
                     }
                 }
-                IMathTransform transform = factLocationLayer.CoordinateTransformation.MathTransform;
-                box = new Envelope(transform.Transform(box.TopLeft()), transform.Transform(box.BottomRight()));
-                box.ExpandBy(mapBox1.Map.PixelSize * 5);
-                mapBox1.Map.ZoomToBox(box);
+                if (updated)
+                {
+                    IMathTransform transform = factLocationLayer.CoordinateTransformation.MathTransform;
+                    box = new Envelope(transform.Transform(box.TopLeft()), transform.Transform(box.BottomRight()));
+                    box.ExpandBy(mapBox1.Map.PixelSize * 5);
+                    mapBox1.Map.ZoomToBox(box);
+                }
                 mapBox1.Refresh();
             }
         }
