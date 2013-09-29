@@ -15,6 +15,7 @@ namespace FTAnalyzer
     {
 
         public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, PARISH = 2, ADDRESS = 3, PLACE = 4;
+        public enum Geocode { NOTSEARCHED = 0, FOUND = 1, NOTFOUND = 0 };
 
         private string location;
         private string fixedLocation;
@@ -28,6 +29,7 @@ namespace FTAnalyzer
         public int Level { get; private set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public Geocode GeocodeStatus { get; set; }
 
         public string[] Parts
         {
@@ -138,6 +140,7 @@ namespace FTAnalyzer
             this.individuals = new List<Individual>();
             this.Latitude = 0;
             this.Longitude = 0;
+            this.GeocodeStatus = Geocode.NOTSEARCHED;
         }
 
         public FactLocation(string location, string latitude, string longitude)

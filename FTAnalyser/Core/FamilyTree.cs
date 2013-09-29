@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Resources;
 using System.Data;
 using FTAnalyzer.Filters;
+using System.Data.SQLite;
 
 namespace FTAnalyzer
 {
@@ -1730,6 +1731,65 @@ namespace FTAnalyzer
             return result;
         }
         #endregion
+
+        public void LoadGeoLocationsFromDataBase()
+        {
+            try
+            {
+                SQLiteConnection conn = GetDatabaseConnection();
+                conn.Open();
+                SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, level, foundlevel from geocode where location = ?", conn);
+                SQLiteParameter param = cmd.CreateParameter();
+                param.DbType = DbType.String;
+                cmd.Parameters.Add(param);
+                cmd.Prepare();
+                foreach (FactLocation loc in AllLocations)
+                {
+                    loc.GeocodeStatus = FactLocation.Geocode.NOTSEARCHED;
+                    cmd.Parameters[0].Value = loc.ToString();
+                    SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
+                    if (reader.Read() && loc.ToString().Length > 0)
+                    {
+                        // location is in database so update location object
+                        loc.Latitude = (double)reader["latitude"];
+                        loc.Longitude = (double)reader["longitude"];
+                        if(reader["foundlevel"] != null)
+                        {
+                            long level = (long)reader["level"];
+                            long foundLevel = (long)reader["foundlevel"];
+                            if(foundLevel >= level)
+                                loc.GeocodeStatus= FactLocation.Geocode.FOUND;
+                            else
+                                loc.GeocodeStatus = FactLocation.Geocode.NOTFOUND;
+                        }
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading previously geocoded data. " + ex.Message);
+            }
+        }
+
+        public SQLiteConnection GetDatabaseConnection()
+        {
+            try
+            {
+                String filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\Geocodes.s3db");
+                if (!File.Exists(filename))
+                {
+                    File.Copy(Path.Combine(Application.StartupPath, @"Resources\Geocodes-Empty.s3db"), filename);
+                }
+                SQLiteConnection conn = new SQLiteConnection("Data Source=" + filename + ";Version=3;");
+                return conn;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error opening database error is :" + ex.Message);
+            }
+            return null;
+        }
 
     }
 }

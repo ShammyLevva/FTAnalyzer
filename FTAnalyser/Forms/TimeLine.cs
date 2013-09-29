@@ -57,7 +57,6 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             ft = FamilyTree.Instance;
-            LoadGeoLocationsFromDataBase();
             txtLocations.Text = "Already Geocoded " + ft.AllLocations.Count(l => l.IsGeoCoded) + " of " + ft.AllLocations.Count() + " locations";
             txtGoogleWait.Text = string.Empty;
             SetGeoCodedYearRange();
@@ -173,63 +172,12 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        public void LoadGeoLocationsFromDataBase()
-        {
-            try
-            {
-
-                SQLiteConnection conn = GetDatabaseConnection();
-                conn.Open();
-                SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, level from geocode where location = ?", conn);
-                SQLiteParameter param = cmd.CreateParameter();
-                param.DbType = DbType.String;
-                cmd.Parameters.Add(param);
-                cmd.Prepare();
-
-                foreach (FactLocation loc in ft.AllLocations)
-                {
-                    cmd.Parameters[0].Value = loc.ToString();
-                    SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
-                    if (reader.Read() && loc.ToString().Length > 0)
-                    {
-                        // location is in database so update location object
-                        loc.Latitude = (double)reader["latitude"];
-                        loc.Longitude = (double)reader["longitude"];
-                    }
-                    reader.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error loading previously geocoded data. " + ex.Message);
-            }
-        }
-
-        public SQLiteConnection GetDatabaseConnection()
-        {
-            try
-            {
-                String filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\Geocodes.s3db");
-                if (!File.Exists(filename))
-                {
-                    File.Copy(Path.Combine(Application.StartupPath, @"Resources\Geocodes-Empty.s3db"), filename);
-                }
-                SQLiteConnection conn = new SQLiteConnection("Data Source=" + filename + ";Version=3;");
-                return conn;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error opening database error is :" + ex.Message);
-            }
-            return null;
-        }
-
         public void GeoCode(BackgroundWorker worker, DoWorkEventArgs e)
         {
             try
             {
                 GoogleMap.WaitingForGoogle += new GoogleMap.GoogleEventHandler(GoogleMap_WaitingForGoogle);
-                SQLiteConnection conn = GetDatabaseConnection();
+                SQLiteConnection conn = ft.GetDatabaseConnection();
                 conn.Open();
                 SQLiteCommand cmd = new SQLiteCommand("select location from geocode where location = ?", conn);
                 SQLiteParameter param = cmd.CreateParameter();
