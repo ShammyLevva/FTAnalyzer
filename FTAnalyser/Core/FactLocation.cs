@@ -43,9 +43,15 @@ namespace FTAnalyzer
         private static Dictionary<string, string> REGION_SHIFTS = new Dictionary<string, string>();
         private static Dictionary<string, string> FREECEN_LOOKUP = new Dictionary<string, string>();
         private static Dictionary<string, Tuple<string, string>> FINDMYPAST_LOOKUP = new Dictionary<string, Tuple<string, string>>();
-
+        
+        private static IList<FactLocation> locations;
+        public static FactLocation UNKNOWN_LOCATION;
+        
         static FactLocation()
         {
+            locations = new List<FactLocation>();
+            UNKNOWN_LOCATION = GetLocation(string.Empty);
+
             // load conversions from XML file
             string startPath;
             if (Application.StartupPath.Contains("Common7\\IDE")) // running unit tests
@@ -125,8 +131,50 @@ namespace FTAnalyzer
             }
         }
 
+        public static FactLocation GetLocation(string place)
+        {
+            return GetLocation(place, string.Empty, string.Empty);
+        }
+        
+        public static FactLocation GetLocation(string place, string latitude, string longitude)
+        {
+            FactLocation loc = new FactLocation(place, latitude, longitude);
+            if (!locations.Contains(loc))
+            {
+                locations.Add(loc);
+                if (loc.Level > COUNTRY)
+                {   // recusive call to GetLocation forces create of lower level objects and stores in locations
+                    loc.GetLocation(loc.Level - 1);
+                }
+            }
+            return loc; // should return object that is in list of locations 
+        }
 
-        public FactLocation()
+        public FactLocation GetLocation(int level) { return GetLocation(level, false); }
+        public FactLocation GetLocation(int level, bool fixNumerics)
+        {
+            StringBuilder location = new StringBuilder(this.Country);
+            if (level > COUNTRY && (Region.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
+                location.Insert(0, this.Region + ", ");
+            if (level > REGION && (SubRegion.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
+                location.Insert(0, this.SubRegion + ", ");
+            if (level > PARISH && (Address.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
+                location.Insert(0, fixNumerics ? FixNumerics(this.Address) : this.Address + ", ");
+            if (level > ADDRESS && Place.Length > 0)
+                location.Insert(0, fixNumerics ? FixNumerics(this.Place) : this.Place + ", ");
+            FactLocation newLocation = GetLocation(location.ToString());
+            //newLocation.Latitude = this.Latitude;
+            //newLocation.Longitude = this.Longitude;
+            //newLocation.GeocodeStatus = this.GeocodeStatus;
+            return newLocation;
+        }
+
+        public static IEnumerable<FactLocation> AllLocations
+        {
+            get { return locations; }
+        }
+
+        private FactLocation()
         {
             this.location = "";
             this.fixedLocation = "";
@@ -143,7 +191,7 @@ namespace FTAnalyzer
             this.GeocodeStatus = Geocode.NOTSEARCHED;
         }
 
-        public FactLocation(string location, string latitude, string longitude)
+        private FactLocation(string location, string latitude, string longitude)
             : this(location)
         {
             double temp;
@@ -153,7 +201,7 @@ namespace FTAnalyzer
                 this.GeocodeStatus = Geocode.GEDCOM;
         }
 
-        public FactLocation(string location)
+        private FactLocation(string location)
             : this()
         {
             if (location != null)
@@ -545,29 +593,10 @@ namespace FTAnalyzer
             return addressField;
         }
 
-        public FactLocation GetLocation(int level) { return GetLocation(level, false); }
-        public FactLocation GetLocation(int level, bool fixNumerics)
-        {
-            StringBuilder location = new StringBuilder(this.Country);
-            if (level > COUNTRY && (Region.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
-                location.Insert(0, this.Region + ", ");
-            if (level > REGION && (SubRegion.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
-                location.Insert(0, this.SubRegion + ", ");
-            if (level > PARISH && (Address.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
-                location.Insert(0, fixNumerics ? FixNumerics(this.Address) : this.Address + ", ");
-            if (level > ADDRESS && Place.Length > 0)
-                location.Insert(0, fixNumerics ? FixNumerics(this.Place) : this.Place + ", ");
-            FactLocation newLocation = new FactLocation(location.ToString());
-            newLocation.Latitude = this.Latitude;
-            newLocation.Longitude = this.Longitude;
-            newLocation.GeocodeStatus = this.GeocodeStatus;
-            return newLocation;
-        }
-
         public static FactLocation BestLocation(IEnumerable<Fact> facts, FactDate when)
         {
             // this returns a Location a person was at for a given period
-            FactLocation result = new FactLocation();
+            FactLocation result = FactLocation.UNKNOWN_LOCATION;
             double minDistance = float.MaxValue;
             foreach (Fact f in facts)
             {

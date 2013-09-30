@@ -168,17 +168,6 @@ namespace FTAnalyzer
             SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM, UNITED_STATES, CANADA
         });
 
-        public static FactLocation FactLocation(string country)
-        {
-            FactLocation location;
-            if (!locationCache.TryGetValue(country, out location))
-            {
-                location = new FactLocation(country);
-                locationCache.Add(country, location);
-            }
-            return location;
-        }
-
         public static bool IsUnitedKingdom(string country)
         {
             return UK_COUNTRIES.Contains(country);

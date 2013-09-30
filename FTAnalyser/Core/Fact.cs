@@ -198,7 +198,7 @@ namespace FTAnalyzer
             this.FactDate = FactDate.UNKNOWN_DATE;
             this.Comment = string.Empty;
             this.Place = string.Empty;
-            this.Location = new FactLocation();
+            this.Location = FactLocation.UNKNOWN_LOCATION;
             this.Sources = new List<FactSource>();
             this.CertificatePresent = false;
             this.FactErrorLevel = FactError.GOOD;
@@ -302,7 +302,7 @@ namespace FTAnalyzer
             this.FactDate = date;
             this.Comment = string.Empty;
             this.Place = string.Empty;
-            this.Location = FamilyTree.Instance.GetLocation(Place, "", "");
+            this.Location = FactLocation.GetLocation(Place);
         }
 
         #endregion
@@ -514,7 +514,7 @@ namespace FTAnalyzer
                 Place = factPlace;
             }
             Comment = EnhancedTextInfo.ToTitleCase(Comment);
-            Location = FamilyTree.Instance.GetLocation(Place, latitude, longitude);
+            Location = FactLocation.GetLocation(Place, latitude, longitude);
         }
 
         private bool SetCertificatePresent()

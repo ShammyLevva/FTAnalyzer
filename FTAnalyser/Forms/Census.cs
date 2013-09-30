@@ -33,7 +33,7 @@ namespace FTAnalyzer.Forms
 
             LostCousins = lostCousins;
 
-            this.censusLocation = new FactLocation(censusCountry);
+            this.censusLocation = FactLocation.GetLocation(censusCountry);
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
             {

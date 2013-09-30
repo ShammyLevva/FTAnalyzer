@@ -396,7 +396,6 @@
     <Compile Include="Core\Displays\IDisplayLocation.cs" />
     <Compile Include="Core\Displays\IDisplayLooseDeath.cs" />
     <Compile Include="Core\Displays\IDisplayIndividual.cs" />
-    <Compile Include="Core\Parish.cs" />
     <Compile Include="Core\FamilyTree.cs" />
     <Compile Include="Exceptions\BadFamilySearchDataException.cs" />
     <Compile Include="Exceptions\MissingPrimaryKeyException.cs" />
@@ -426,7 +425,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>GeneralSettings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Core\ParishBatch.cs" />
     <Compile Include="Core\Individual.cs" />
     <Compile Include="Core\FactLocation.cs" />
     <Compile Include="GedcomParser\AnselEncoding.cs" />

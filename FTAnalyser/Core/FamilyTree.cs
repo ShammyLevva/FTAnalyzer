@@ -23,7 +23,6 @@ namespace FTAnalyzer
         private IList<FactSource> sources;
         private IList<Individual> individuals;
         private IList<Family> families;
-        private IDictionary<string, FactLocation> locations;
         private IDictionary<string, List<Individual>> occupations;
         private bool _loading = false;
         private bool _dataloaded = false;
@@ -110,7 +109,6 @@ namespace FTAnalyzer
             sources = new List<FactSource>();
             individuals = new List<Individual>();
             families = new List<Family>();
-            locations = new Dictionary<string, FactLocation>();
             occupations = new Dictionary<string, List<Individual>>();
             dataErrorTypes = new List<DataErrorGroup>();
             displayLocations = new SortableBindingList<IDisplayLocation>[5];
@@ -413,28 +411,11 @@ namespace FTAnalyzer
             get { return individuals; }
         }
 
-        public IEnumerable<FactLocation> AllLocations
-        {
-            get { return locations.Values; }
-        }
-
         public int IndividualCount { get { return individuals.Count; } }
 
         #endregion
 
         #region Property Functions
-
-        public FactLocation GetLocation(string place, string latitude, string longitude)
-        {
-            FactLocation loc;
-            locations.TryGetValue(place, out loc);
-            if (loc == null)
-            {
-                loc = new FactLocation(place, latitude, longitude);
-                locations.Add(place, loc);
-            }
-            return loc; // should return object that is in list of locations 
-        }
 
         public IEnumerable<Individual> GetAllRelationsOfType(int relationType)
         {
@@ -940,10 +921,11 @@ namespace FTAnalyzer
         private SortableBindingList<IDisplayLocation> GetDisplayLocations(int level)
         {
             List<IDisplayLocation> result = new List<IDisplayLocation>();
-            foreach (FactLocation loc in locations.Values)
+            foreach (FactLocation loc in FactLocation.AllLocations)
             {
                 FactLocation c = loc.GetLocation(level);
-                if (c.Country != string.Empty && !result.Contains(c)) result.Add(c);
+                if (c.Country != string.Empty && !result.Contains(c)) 
+                    result.Add(c);
             }
             result.Sort(new FactLocationComparer(level));
             displayLocations[level] = new SortableBindingList<IDisplayLocation>(result);
@@ -1743,7 +1725,7 @@ namespace FTAnalyzer
                 param.DbType = DbType.String;
                 cmd.Parameters.Add(param);
                 cmd.Prepare();
-                foreach (FactLocation loc in AllLocations)
+                foreach (FactLocation loc in FactLocation.AllLocations)
                 {
                     loc.GeocodeStatus = FactLocation.Geocode.NOTSEARCHED;
                     cmd.Parameters[0].Value = loc.ToString();

@@ -61,7 +61,7 @@ namespace FTAnalyzer
             FactLocation i = Individual.BestLocation(when);
             if (ParentsMarriage == null)
                 return i;
-            FactLocation f = new FactLocation(ParentsMarriage.Place);
+            FactLocation f = FactLocation.GetLocation(ParentsMarriage.Place);
             if (f.Level > i.Level)
                 return f;
             else

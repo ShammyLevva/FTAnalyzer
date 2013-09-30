@@ -61,7 +61,7 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             ft = FamilyTree.Instance;
-            txtLocations.Text = "Already Geocoded " + ft.AllLocations.Count(l => l.IsGeoCoded) + " of " + ft.AllLocations.Count() + " locations";
+            txtLocations.Text = "Already Geocoded " + FactLocation.AllLocations.Count(l => l.IsGeoCoded) + " of " + FactLocation.AllLocations.Count() + " locations";
             txtGoogleWait.Text = string.Empty;
             SetGeoCodedYearRange();
             SetupMap();
@@ -254,10 +254,10 @@ namespace FTAnalyzer.Forms
                 int count = 0;
                 int good = 0;
                 int bad = 0;
-                int total = ft.AllLocations.Count();
+                int total = FactLocation.AllLocations.Count();
                 GoogleMap.ThreadCancelled = false;
 
-                foreach (FactLocation loc in ft.AllLocations)
+                foreach (FactLocation loc in FactLocation.AllLocations)
                 {
                     if (!loc.IsGeoCoded)
                     {
@@ -300,7 +300,7 @@ namespace FTAnalyzer.Forms
                     count++;
                     int percent = (int)Math.Truncate(count * 100.0 / total);
                     string status = "Google found " + good + ", didn't find " + bad + " places. Geocoded " +
-                            ft.AllLocations.Count(l => l.IsGeoCoded) + " locations. " + count +
+                            FactLocation.AllLocations.Count(l => l.IsGeoCoded) + " locations. " + count +
                             " of " + total + ".  ";
                     worker.ReportProgress(percent, status);
 

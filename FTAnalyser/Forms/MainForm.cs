@@ -347,7 +347,7 @@ namespace FTAnalyzer
         private void dgRegions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             HourGlass(true);
-            FactLocation loc = dgRegions.CurrentRow == null ? new FactLocation() : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
+            FactLocation loc = dgRegions.CurrentRow == null ? FactLocation.UNKNOWN_LOCATION : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
             frmInd.SetLocation(loc, FactLocation.REGION);
             DisposeDuplicateForms(frmInd);
