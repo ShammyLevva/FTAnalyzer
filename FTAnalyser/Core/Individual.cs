@@ -95,6 +95,7 @@ namespace FTAnalyzer
 
             // Custom facts
             AddFacts(node, Fact.CUSTOM_FACT);
+            AddFacts(node, Fact.CUSTOM_FACT2);
         }
 
         internal Individual(Individual i)

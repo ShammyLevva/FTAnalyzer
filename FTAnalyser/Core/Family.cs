@@ -73,6 +73,7 @@ namespace FTAnalyzer
                 AddFacts(node, Fact.SEPARATION);
                 AddFacts(node, Fact.CENSUS);
                 AddFacts(node, Fact.CUSTOM_FACT);
+                AddFacts(node, Fact.CUSTOM_FACT2);
             }
         }
 

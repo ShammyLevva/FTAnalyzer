@@ -43,13 +43,13 @@ namespace FTAnalyzer
         private static Dictionary<string, string> REGION_SHIFTS = new Dictionary<string, string>();
         private static Dictionary<string, string> FREECEN_LOOKUP = new Dictionary<string, string>();
         private static Dictionary<string, Tuple<string, string>> FINDMYPAST_LOOKUP = new Dictionary<string, Tuple<string, string>>();
-        
-        private static IList<FactLocation> locations;
+
+        private static IDictionary<string, FactLocation> locations;
         public static FactLocation UNKNOWN_LOCATION;
-        
+
         static FactLocation()
         {
-            locations = new List<FactLocation>();
+            locations = new Dictionary<string, FactLocation>();
             UNKNOWN_LOCATION = GetLocation(string.Empty);
 
             // load conversions from XML file
@@ -133,21 +133,28 @@ namespace FTAnalyzer
 
         public static FactLocation GetLocation(string place)
         {
-            return GetLocation(place, string.Empty, string.Empty);
+            return GetLocation(place, string.Empty, string.Empty, Geocode.NOTSEARCHED);
         }
-        
-        public static FactLocation GetLocation(string place, string latitude, string longitude)
+
+        public static FactLocation GetLocation(string place, string latitude, string longitude, Geocode status)
         {
-            FactLocation loc = new FactLocation(place, latitude, longitude);
-            if (!locations.Contains(loc))
+            FactLocation result;
+            FactLocation temp;
+            if (!locations.TryGetValue(place, out result))
             {
-                locations.Add(loc);
-                if (loc.Level > COUNTRY)
-                {   // recusive call to GetLocation forces create of lower level objects and stores in locations
-                    loc.GetLocation(loc.Level - 1);
+                result = new FactLocation(place, latitude, longitude, status);
+                if (locations.TryGetValue(result.ToString(), out temp))
+                    return temp;
+                else
+                {
+                    locations.Add(result.ToString(), result);
+                    if (result.Level > COUNTRY)
+                    {   // recusive call to GetLocation forces create of lower level objects and stores in locations
+                        result.GetLocation(result.Level - 1);
+                    }
                 }
             }
-            return loc; // should return object that is in list of locations 
+            return result; // should return object that is in list of locations 
         }
 
         public FactLocation GetLocation(int level) { return GetLocation(level, false); }
@@ -162,16 +169,13 @@ namespace FTAnalyzer
                 location.Insert(0, fixNumerics ? FixNumerics(this.Address) : this.Address + ", ");
             if (level > ADDRESS && Place.Length > 0)
                 location.Insert(0, fixNumerics ? FixNumerics(this.Place) : this.Place + ", ");
-            FactLocation newLocation = GetLocation(location.ToString());
-            //newLocation.Latitude = this.Latitude;
-            //newLocation.Longitude = this.Longitude;
-            //newLocation.GeocodeStatus = this.GeocodeStatus;
+            FactLocation newLocation = GetLocation(location.ToString(), this.Latitude.ToString(), this.Longitude.ToString(), this.GeocodeStatus);
             return newLocation;
         }
 
         public static IEnumerable<FactLocation> AllLocations
         {
-            get { return locations; }
+            get { return locations.Values; }
         }
 
         private FactLocation()
@@ -191,14 +195,15 @@ namespace FTAnalyzer
             this.GeocodeStatus = Geocode.NOTSEARCHED;
         }
 
-        private FactLocation(string location, string latitude, string longitude)
+        private FactLocation(string location, string latitude, string longitude, Geocode status)
             : this(location)
         {
             double temp;
             this.Latitude = double.TryParse(latitude, out temp) ? temp : 0;
             this.Longitude = double.TryParse(longitude, out temp) ? temp : 0;
-            if (IsGeoCoded)
-                this.GeocodeStatus = Geocode.GEDCOM;
+            this.GeocodeStatus = status;
+            if (status == Geocode.NOTSEARCHED && (Latitude != 0 || Longitude != 0))
+                status = Geocode.GEDCOM;
         }
 
         private FactLocation(string location)
@@ -574,7 +579,11 @@ namespace FTAnalyzer
 
         public bool IsGeoCoded
         {
-            get { return Longitude != 0 || Latitude != 0; }
+            get
+            {
+                return GeocodeStatus == Geocode.FOUND ||
+                      (GeocodeStatus == Geocode.GEDCOM && (Longitude != 0 || Latitude != 0));
+            }
         }
 
         private string FixNumerics(string addressField)

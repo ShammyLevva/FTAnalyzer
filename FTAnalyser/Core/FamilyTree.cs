@@ -204,6 +204,7 @@ namespace FTAnalyzer
             CountCensusFacts();
             FixIDs();
             SetDataErrorTypes();
+            LoadGeoLocationsFromDataBase(xmlErrorbox);
             _loading = false;
             _dataloaded = true;
             return true;
@@ -1714,7 +1715,7 @@ namespace FTAnalyzer
         }
         #endregion
 
-        public void LoadGeoLocationsFromDataBase()
+        public void LoadGeoLocationsFromDataBase(RichTextBox rtb)
         {
             try
             {
@@ -1747,6 +1748,11 @@ namespace FTAnalyzer
                     }
                     reader.Close();
                 }
+                rtb.AppendText(FactLocation.AllLocations.Count() + " locations in file.\n");
+                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM)) + " have geocoding from GEDCOM file.\n");
+                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.FOUND)) + " have geocoding from Google.\n");
+                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTFOUND)) + " couldn't be found on Google.\n");
+                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTSEARCHED)) + " haven't been searched on Google.\n");
             }
             catch (Exception ex)
             {

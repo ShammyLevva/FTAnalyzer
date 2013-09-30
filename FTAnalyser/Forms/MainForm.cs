@@ -118,7 +118,6 @@ namespace FTAnalyzer
                     if (ft.LoadTree(filename, pbSources, pbIndividuals, pbFamilies))
                     {
                         ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
-                        ft.LoadGeoLocationsFromDataBase();
                         Application.UseWaitCursor = false;
                         ShowMenus(true);
                         HourGlass(false);

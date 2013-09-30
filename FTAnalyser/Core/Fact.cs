@@ -28,7 +28,7 @@ namespace FTAnalyzer
                 RETIREMENT = "RETI", WILL = "WILL", SEPARATION = "_SEPR",
                 MILITARY = "_MILT", ELECTION = "_ELEC", DEGREE = "_DEG",
                 EMPLOYMENT = "_EMPLOY", MEDICAL_CONDITION = "_MDCL",
-                CUSTOM_FACT = "EVEN";
+                CUSTOM_FACT = "EVEN", CUSTOM_FACT2 = "FACT";
 
         public const string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSE", FAMILYSEARCH = "*IGI",
@@ -220,7 +220,7 @@ namespace FTAnalyzer
                     FactType = FixFactTypes(node.Name);
                     string factDate = FamilyTree.GetText(node, "DATE");
                     this.FactDate = new FactDate(factDate, factRef);
-                    if (FactType.Equals(CUSTOM_FACT))
+                    if (FactType.Equals(CUSTOM_FACT) || FactType.Equals(CUSTOM_FACT2))
                     {
                         string tag = FamilyTree.GetText(node, "TYPE");
                         string factType;
@@ -514,7 +514,7 @@ namespace FTAnalyzer
                 Place = factPlace;
             }
             Comment = EnhancedTextInfo.ToTitleCase(Comment);
-            Location = FactLocation.GetLocation(Place, latitude, longitude);
+            Location = FactLocation.GetLocation(Place, latitude, longitude, FactLocation.Geocode.NOTSEARCHED);
         }
 
         private bool SetCertificatePresent()
