@@ -1676,6 +1676,8 @@ namespace FTAnalyzer
                         child = new TreeNode((part.Length == 0 ? "<blank>" : part));
                         child.Name = part;
                         child.Tag = location;
+                        //if (location.GeocodeStatus == FactLocation.Geocode.FOUND)
+                        //    child.ImageIndex = 0;
                         // Set everything other than known countries to regular
                         if (current != displayTreeRootNode || !Countries.IsKnownCountry(part))
                         {
@@ -1715,6 +1717,8 @@ namespace FTAnalyzer
         }
         #endregion
 
+        #region Geocoding
+
         public void LoadGeoLocationsFromDataBase(RichTextBox rtb)
         {
             try
@@ -1748,7 +1752,7 @@ namespace FTAnalyzer
                     }
                     reader.Close();
                 }
-                rtb.AppendText(FactLocation.AllLocations.Count() + " locations in file.\n");
+                rtb.AppendText("Found " + FactLocation.AllLocations.Count() + " locations in file.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM)) + " have geocoding from GEDCOM file.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.FOUND)) + " have geocoding from Google.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTFOUND)) + " couldn't be found on Google.\n");
@@ -1778,6 +1782,6 @@ namespace FTAnalyzer
             }
             return null;
         }
-
+        #endregion
     }
 }

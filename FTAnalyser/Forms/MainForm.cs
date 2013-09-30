@@ -393,11 +393,11 @@ namespace FTAnalyzer
             string country;
             Predicate<CensusIndividual> filter = CreateCensusIndividualFilter();
             IComparer<CensusIndividual> censusComparator;
-//            if (ckbNoLocations.Checked)
-//            {
-                census = new Census(false, cenDate.CensusCountry);
-                country = string.Empty;
-                censusComparator = new DefaultCensusComparer();
+            //            if (ckbNoLocations.Checked)
+            //            {
+            census = new Census(false, cenDate.CensusCountry);
+            country = string.Empty;
+            censusComparator = new DefaultCensusComparer();
             //}
             //else
             //{
@@ -422,9 +422,9 @@ namespace FTAnalyzer
             Predicate<CensusIndividual> relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
             Predicate<CensusIndividual> locationFilter;
 
-//            if (ckbNoLocations.Checked)
-//            {
-                locationFilter = (x => x.IsValidLocation(cenDate.CensusCountry));
+            //            if (ckbNoLocations.Checked)
+            //            {
+            locationFilter = (x => x.IsValidLocation(cenDate.CensusCountry));
             //}
             //else
             //{
@@ -516,7 +516,7 @@ namespace FTAnalyzer
                 filter = FilterUtils.AndFilter<CensusIndividual>(FilterUtils.DateFilter<CensusIndividual>(registrationDate, censusDate), filter);
 
             census.SetupCensus(filter, comparer, censusDate, true, ckbShowLCEntered.Checked);
-            if(ckbShowLCEntered.Checked)
+            if (ckbShowLCEntered.Checked)
                 census.Text = reportTitle + " already entered into Lost Cousins website";
             else
                 census.Text = reportTitle + " to enter into Lost Cousins website";
@@ -1526,10 +1526,10 @@ namespace FTAnalyzer
             rs.Focus();
             HourGlass(false);
         }
-        
+
         private void btnSelectAll_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < ckbDataErrors.Items.Count; i++ )
+            for (int i = 0; i < ckbDataErrors.Items.Count; i++)
             {
                 ckbDataErrors.SetItemChecked(i, true);
             }
