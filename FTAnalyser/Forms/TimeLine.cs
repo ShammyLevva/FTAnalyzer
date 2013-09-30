@@ -23,6 +23,7 @@ using FTAnalyzer.Events;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using SharpMap.Rendering.Decoration;
+using SharpMap.Rendering;
 
 namespace FTAnalyzer.Forms
 {
@@ -145,8 +146,12 @@ namespace FTAnalyzer.Forms
             labelLayer.Style.Font = new Font(FontFamily.GenericSerif, 11);
             labelLayer.Style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left;
             labelLayer.Style.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom;
-            //labelLayer.Style.Offset = new PointF(3, 3);
-            //labelLayer.Style.Halo = new Pen(Color.Yellow, 2);
+            labelLayer.Style.CollisionDetection = true;
+            //labelLayer.Style.CollisionBuffer = new SizeF(5, 5);
+            labelLayer.LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection;
+            //labelLayer.MultipartGeometryBehaviour = LabelLayer.MultipartGeometryBehaviourEnum.Largest;
+            labelLayer.Style.Offset = new PointF(3, 3);
+            labelLayer.Style.Halo = new Pen(Color.LightGray, 2);
             labelLayer.TextRenderingHint = TextRenderingHint.AntiAlias;
             labelLayer.SmoothingMode = SmoothingMode.AntiAlias;
             mapBox1.Map.Layers.Add(labelLayer);
