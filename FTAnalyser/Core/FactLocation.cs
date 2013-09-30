@@ -169,7 +169,7 @@ namespace FTAnalyzer
                 location.Insert(0, fixNumerics ? FixNumerics(this.Address) : this.Address + ", ");
             if (level > ADDRESS && Place.Length > 0)
                 location.Insert(0, fixNumerics ? FixNumerics(this.Place) : this.Place + ", ");
-            FactLocation newLocation = GetLocation(location.ToString(), this.Latitude.ToString(), this.Longitude.ToString(), this.GeocodeStatus);
+            FactLocation newLocation = GetLocation(location.ToString());
             return newLocation;
         }
 

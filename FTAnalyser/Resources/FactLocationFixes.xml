@@ -525,8 +525,10 @@
       <CountryToRegion region="Connecticut"           country="United States" /> 
       <CountryToRegion region="Delaware"              country="United States" /> 
       <CountryToRegion region="District of Columbia"  country="United States" /> 
-      <CountryToRegion region="Florida"               country="United States" /> 
+      <CountryToRegion region="Florida"               country="United States" />
+      <!--      
       <CountryToRegion region="Georgia"               country="United States" /> 
+      -->
       <CountryToRegion region="Hawaii"                country="United States" /> 
       <CountryToRegion region="Idaho"                 country="United States" /> 
       <CountryToRegion region="Illinois"              country="United States" /> 
