@@ -34,6 +34,8 @@ namespace FTAnalyzer
         private TreeNode displayTreeRootNode;
         private static int DATA_ERROR_GROUPS = 20;
 
+        public bool Geocoding { get; set; }
+
         private FamilyTree()
         {
             ResetData();
@@ -1803,8 +1805,10 @@ namespace FTAnalyzer
             try
             {
                 conn.Open();
-                SQLiteCommand cmd = new SQLiteCommand("select database from versions", conn);
-                Version dbVersion = (Version)cmd.ExecuteScalar();
+                SQLiteCommand cmd = new SQLiteCommand("select Database from versions", conn);
+                string db = (string)cmd.ExecuteScalar();
+                cmd.Dispose();
+                Version dbVersion = db == null ? new Version("0.0.0.0") : new Version(db);
                 if (dbVersion < programVersion)
                     UpgradeDatabase(conn, dbVersion);
             }
@@ -1828,9 +1832,12 @@ namespace FTAnalyzer
                 {
                     // Version is less than 2.3 or none existent so copy v2.3 database from empty database
                     conn.Close();
+                    GC.Collect(); // needed to force a cleanup of connections prior to replacing the file.
                     String filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\Geocodes.s3db");
                     if (File.Exists(filename))
+                    {
                         File.Delete(filename);
+                    }
                     File.Copy(Path.Combine(Application.StartupPath, @"Resources\Geocodes-Empty.s3db"), filename);
                 }
             }

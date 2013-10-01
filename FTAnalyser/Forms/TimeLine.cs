@@ -207,6 +207,8 @@ namespace FTAnalyzer.Forms
         public void StartGeoCoding()
         {
             pbGeocoding.Visible = true;
+            geocodeLocationsToolStripMenuItem.Enabled = false;
+            ft.Geocoding = true;
             backgroundWorker.RunWorkerAsync();
         }
 
@@ -404,6 +406,8 @@ namespace FTAnalyzer.Forms
         {
             pbGeocoding.Value = 100;
             txtGoogleWait.Text = string.Empty;
+            geocodeLocationsToolStripMenuItem.Enabled = true;
+            ft.Geocoding = false;
             if (formClosing) this.Close();
         }
 

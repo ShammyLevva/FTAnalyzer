@@ -1575,12 +1575,15 @@ namespace FTAnalyzer
 
         private void mnuGeocodeLocations_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
-            TimeLine tl = new TimeLine();
-            tl.Show();
-            DisposeDuplicateForms(tl);
-            tl.StartGeoCoding();
-            HourGlass(false);
+            if (!ft.Geocoding) // don't geocode if another geocode session in progress
+            {
+                HourGlass(true);
+                TimeLine tl = new TimeLine();
+                tl.Show();
+                DisposeDuplicateForms(tl);
+                tl.StartGeoCoding();
+                HourGlass(false);
+            }
         }
     }
 }
