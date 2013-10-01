@@ -272,11 +272,11 @@ namespace FTAnalyzer.Forms
                                 double longitude = 0;
                                 string address = string.Empty;
                                 int foundLevel = GoogleMap.GetFactLocation(res.Results[0].Types);
+                                address = res.Results[0].ReturnAddress;
                                 if (foundLevel >= loc.Level)
                                 {
                                     latitude = res.Results[0].Geometry.Location.Lat;
                                     longitude = res.Results[0].Geometry.Location.Lng;
-                                    address = res.Results[0].ReturnAddress;
                                     good++;
                                 }
                                 else
@@ -292,6 +292,7 @@ namespace FTAnalyzer.Forms
                                 insertCmd.ExecuteNonQuery();
                                 loc.Latitude = latitude;
                                 loc.Longitude = longitude;
+                                loc.GoogleLocation = address;
                             }
                         }
                         reader.Close();

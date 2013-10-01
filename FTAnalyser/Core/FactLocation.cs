@@ -30,6 +30,7 @@ namespace FTAnalyzer
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public Geocode GeocodeStatus { get; set; }
+        public string GoogleLocation { get; set; }
 
         public string[] Parts
         {

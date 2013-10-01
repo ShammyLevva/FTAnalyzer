@@ -1676,8 +1676,21 @@ namespace FTAnalyzer
                         child = new TreeNode((part.Length == 0 ? "<blank>" : part));
                         child.Name = part;
                         child.Tag = location;
-                        //if (location.GeocodeStatus == FactLocation.Geocode.FOUND)
-                        //    child.ImageIndex = 0;
+                        switch (location.GeocodeStatus)
+                        {
+                            case FactLocation.Geocode.NOTSEARCHED:
+                                child.ImageIndex = 0;
+                                break;
+                            case FactLocation.Geocode.FOUND:
+                                child.ImageIndex = 1;
+                                break;
+                            case FactLocation.Geocode.NOTFOUND:
+                                child.ImageIndex = 2;
+                                break;
+                            case FactLocation.Geocode.GEDCOM:
+                                child.ImageIndex = 3;
+                                break;
+                        }
                         // Set everything other than known countries to regular
                         if (current != displayTreeRootNode || !Countries.IsKnownCountry(part))
                         {

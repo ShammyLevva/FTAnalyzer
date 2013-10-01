@@ -15,6 +15,7 @@ namespace FTAnalyzer
         double Latitude { get; }
         double Longitude { get; }
         string Geocoded { get; }
+        string GoogleLocation { get; }
 
         int CompareTo(IDisplayLocation loc, int level);
         FactLocation GetLocation(int level);
