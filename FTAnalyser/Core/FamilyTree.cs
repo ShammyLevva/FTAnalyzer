@@ -1791,10 +1791,53 @@ namespace FTAnalyzer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error opening database error is :" + ex.Message);
+                MessageBox.Show("Error opening database. Error is :" + ex.Message);
             }
             return null;
         }
         #endregion
+
+        public void CheckDatabaseVersion(Version programVersion)
+        {
+            SQLiteConnection conn = GetDatabaseConnection();
+            try
+            {
+                conn.Open();
+                SQLiteCommand cmd = new SQLiteCommand("select database from versions", conn);
+                Version dbVersion = (Version)cmd.ExecuteScalar();
+                if (dbVersion < programVersion)
+                    UpgradeDatabase(conn, dbVersion);
+            }
+            catch (SQLiteException ex)
+            {
+                Console.WriteLine(ex.Message);
+                UpgradeDatabase(conn, new Version("0.0.0.0"));
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void UpgradeDatabase(SQLiteConnection conn, Version dbVersion)
+        {
+            try
+            {
+                Version v2_3 = new Version("2.3.0.0");
+                if (dbVersion < v2_3)
+                {
+                    // Version is less than 2.3 or none existent so copy v2.3 database from empty database
+                    conn.Close();
+                    String filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\Geocodes.s3db");
+                    if (File.Exists(filename))
+                        File.Delete(filename);
+                    File.Copy(Path.Combine(Application.StartupPath, @"Resources\Geocodes-Empty.s3db"), filename);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error upgrading database. Error is :" + ex.Message);
+            }
+        }
     }
 }

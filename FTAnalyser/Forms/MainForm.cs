@@ -19,7 +19,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.3.0.0-beta-test1";
+        private string VERSION = "2.3.0.0-beta-test2";
         //private bool _checkForUpdatesEnabled = false;
         //private bool _showNoUpdateMessage = false;
         //private System.Threading.Timer _timerCheckForUpdates;
@@ -41,6 +41,9 @@ namespace FTAnalyzer
             treetopsRelation.MarriedToDB = false;
             ShowMenus(false);
             SetSavePath();
+            int pos =VERSION.IndexOf('-');
+            string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
+            ft.CheckDatabaseVersion(new Version(ver));
         }
 
         private string PublishVersion()
