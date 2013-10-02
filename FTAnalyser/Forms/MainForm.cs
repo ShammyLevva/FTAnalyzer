@@ -1559,6 +1559,11 @@ namespace FTAnalyzer
             Process.Start("http://ftanalyzer.codeplex.com/workitem/list/basic");
         }
 
+        private void whatsNewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://ftanalyzer.codeplex.com/wikipage?title=What%27s%20New%20in%20this%20Release%3f");
+        }
+        
         private void btnLCReport_Click(object sender, EventArgs e)
         {
             tabSelector.SelectedTab = tabSelector.TabPages["tabColourReports"];
