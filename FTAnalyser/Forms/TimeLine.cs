@@ -350,7 +350,7 @@ namespace FTAnalyzer.Forms
                     count++;
 
                     int percent = (int)Math.Truncate(count * 100.0 / total);
-                    string status = "Google found " + good + ", didn't find " + bad + ", skipped " + skipped + " previously found " + geocoded + " places. " + count +
+                    string status = "Google found " + good + ", didn't find " + bad + ", Skip " + skipped + " previously not found, " + geocoded + " found. Done " + count +
                             " of " + total + ".  ";
                     worker.ReportProgress(percent, status);
 
