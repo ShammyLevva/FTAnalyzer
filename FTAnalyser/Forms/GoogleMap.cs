@@ -168,10 +168,10 @@ namespace FTAnalyzer.Forms
             //Console.WriteLine("waiting " + sleepinterval);
             double seconds = sleepinterval / 1000;
             if (sleepinterval > 500)
-                OnWaitingForGoogle("Querying too fast. Google imposed wait of: " + seconds + " seconds.");
-            if (sleepinterval > 30000)
+                OnWaitingForGoogle("Over Google limit. Waiting " + seconds + " seconds.");
+            if (sleepinterval >= 20000)
             {
-                OnWaitingForGoogle("Maximum Google GeoLocations exceeded. No more possible just now.");
+                OnWaitingForGoogle("Max Google GeoLocations exceeded for today.");
                 return null;
             }
             for (int interval = 0; interval < sleepinterval; interval += 1000)
@@ -192,7 +192,7 @@ namespace FTAnalyzer.Forms
             if (res == null || res.Status == "OVER_QUERY_LIMIT")
             {
                 // we're hitting Google too fast, increase interval
-                sleepinterval = Math.Min(sleepinterval + ++badtries * 750, 30000);
+                sleepinterval = Math.Min(sleepinterval + ++badtries * 750, 20000);
                 return CallGeoWSCount(address, badtries);
             }
             else

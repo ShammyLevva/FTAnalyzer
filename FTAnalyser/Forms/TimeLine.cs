@@ -339,7 +339,7 @@ namespace FTAnalyzer.Forms
                         {   
                             GoogleMap.GeoResponse res = null;
                             if(!(!mnuRetryNotFound.Checked && inDatabase))
-                                res = GoogleMap.CallGeoWSCount(loc.ToString(), 10);
+                                res = GoogleMap.CallGeoWSCount(loc.ToString(), 5);
                             if (res != null && res.Status == "OK" && res.Results.Length > 0)
                             {
                                 double latitude = 0;
