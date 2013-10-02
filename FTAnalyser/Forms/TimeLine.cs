@@ -410,7 +410,7 @@ namespace FTAnalyzer.Forms
                     }
                 }
                 conn.Close();
-                if(txtGoogleWait.Text.Substring(1,4).Equals("Over"))
+                if(txtGoogleWait.Text.Substring(0,3).Equals("Max"))
                     MessageBox.Show("Finished Geocoding.\n" + txtGoogleWait.Text);
                 else
                     MessageBox.Show("Finished Geocoding.");
