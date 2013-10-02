@@ -297,7 +297,7 @@ namespace FTAnalyzer.Forms
                         if (loc.ToString().Length > 0)
                         {   
                             GoogleMap.GeoResponse res = null;
-                            if(!(mnuSkipNotFound.Checked && inDatabase))
+                            if(!(!mnuRetryNotFound.Checked && inDatabase))
                                 res = GoogleMap.CallGeoWSCount(loc.ToString(), 10);
                             if (res != null && res.Status == "OK" && res.Results.Length > 0)
                             {

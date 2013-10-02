@@ -1740,7 +1740,7 @@ namespace FTAnalyzer
             {
                 SQLiteConnection conn = GetDatabaseConnection();
                 conn.Open();
-                SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, level, foundlevel from geocode where location = ?", conn);
+                SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, level, foundlevel, foundlocation from geocode where location = ?", conn);
                 SQLiteParameter param = cmd.CreateParameter();
                 param.DbType = DbType.String;
                 cmd.Parameters.Add(param);
@@ -1755,6 +1755,7 @@ namespace FTAnalyzer
                         // location is in database so update location object
                         loc.Latitude = (double)reader["latitude"];
                         loc.Longitude = (double)reader["longitude"];
+                        loc.GoogleLocation = (string)reader["foundlocation"];
                         if(reader["foundlevel"] != null)
                         {
                             long level = (long)reader["level"];
@@ -1771,7 +1772,7 @@ namespace FTAnalyzer
                 rtb.AppendText("Found " + (FactLocation.AllLocations.Count()-1) + " locations in file.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM)) + " have geocoding from GEDCOM file.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.FOUND)) + " have geocoding from Google.\n");
-                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTFOUND)) + " couldn't be found on Google.\n");
+                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTFOUND)) + " could not be found on Google.\n");
                 rtb.AppendText("    " + (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTSEARCHED))-1) + " haven't been searched on Google.\n");
             }
             catch (Exception ex)
