@@ -118,6 +118,7 @@ namespace FTAnalyzer
                 displayLocations[i] = null;
             displayTreeRootNode = null;
             looseDeaths = null;
+            FactLocation.ResetLocations();
         }
 
         public bool LoadTree(string filename, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)

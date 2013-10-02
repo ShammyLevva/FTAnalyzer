@@ -185,7 +185,7 @@ namespace FTAnalyzer.Forms
             labelLayer.LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection;
             //labelLayer.MultipartGeometryBehaviour = LabelLayer.MultipartGeometryBehaviourEnum.Largest;
             labelLayer.Style.Offset = new PointF(3, 3);
-            labelLayer.Style.Halo = new Pen(Color.LightGray, 2);
+            labelLayer.Style.Halo = new Pen(Color.Yellow, 1);
             labelLayer.TextRenderingHint = TextRenderingHint.AntiAlias;
             labelLayer.SmoothingMode = SmoothingMode.AntiAlias;
             mapBox1.Map.Layers.Add(labelLayer);
@@ -338,8 +338,16 @@ namespace FTAnalyzer.Forms
                         if (loc.ToString().Length > 0)
                         {   
                             GoogleMap.GeoResponse res = null;
-                            if(!(!mnuRetryNotFound.Checked && inDatabase))
-                                res = GoogleMap.CallGeoWSCount(loc.ToString(), 5);
+                            if (!(!mnuRetryNotFound.Checked && inDatabase))
+                            {
+                                res = GoogleMap.CallGeoWSCount(loc.ToString(), 8);
+                                if (res != null && res.Status == "Maxed")
+                                {
+                                    backgroundWorker.CancelAsync();
+                                    GoogleMap.ThreadCancelled = true;
+                                    res = null;
+                                }
+                            }
                             if (res != null && res.Status == "OK" && res.Results.Length > 0)
                             {
                                 double latitude = 0;
@@ -402,7 +410,10 @@ namespace FTAnalyzer.Forms
                     }
                 }
                 conn.Close();
-                MessageBox.Show("Finished Geocoding");
+                if(txtGoogleWait.Text.Substring(1,4).Equals("Over"))
+                    MessageBox.Show("Finished Geocoding.\n" + txtGoogleWait.Text);
+                else
+                    MessageBox.Show("Finished Geocoding.");
             }
             catch (Exception ex)
             {

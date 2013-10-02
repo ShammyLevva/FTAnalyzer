@@ -129,7 +129,7 @@ namespace FTAnalyzer.Forms
             try
             {
                 string url = string.Format(
-                        "http://maps.google.com/maps/api/geocode/json?address={0}&region=dk&sensor=false",
+                        "http://maps.googleapis.com/maps/api/geocode/json?address={0}&region=uk&sensor=false",
                         HttpUtility.UrlEncode(address)
                         );
                 HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
@@ -172,7 +172,9 @@ namespace FTAnalyzer.Forms
             if (sleepinterval >= 20000)
             {
                 OnWaitingForGoogle("Max Google GeoLocations exceeded for today.");
-                return null;
+                GeoResponse response = new GeoResponse();
+                response.Status = "Maxed";
+                return response;
             }
             for (int interval = 0; interval < sleepinterval; interval += 1000)
             {

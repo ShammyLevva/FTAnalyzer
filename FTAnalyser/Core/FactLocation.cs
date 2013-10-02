@@ -50,9 +50,7 @@ namespace FTAnalyzer
 
         static FactLocation()
         {
-            locations = new Dictionary<string, FactLocation>();
-            UNKNOWN_LOCATION = GetLocation(string.Empty);
-
+            ResetLocations();
             // load conversions from XML file
             string startPath;
             if (Application.StartupPath.Contains("Common7\\IDE")) // running unit tests
@@ -177,6 +175,12 @@ namespace FTAnalyzer
         public static IEnumerable<FactLocation> AllLocations
         {
             get { return locations.Values; }
+        }
+
+        public static void ResetLocations()
+        {
+            locations = new Dictionary<string, FactLocation>();
+            UNKNOWN_LOCATION = GetLocation(string.Empty);
         }
 
         private FactLocation()
