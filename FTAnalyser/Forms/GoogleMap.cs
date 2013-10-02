@@ -45,7 +45,7 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             loaded = false;
-            string filename = Path.Combine(Application.StartupPath + @"Resources\GoogleMaps.htm");
+            string filename = Path.Combine(Application.StartupPath + @"\Resources\GoogleMaps.htm");
             webBrowser.Navigate(filename);
             webBrowser.Hide();
         }

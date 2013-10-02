@@ -40,7 +40,7 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             loaded = false;
-            string filename = Application.StartupPath + "\\Resources\\BingOSMaps.htm";
+            string filename = Path.Combine(Application.StartupPath + @"\Resources\BingOSMaps.htm");
             webBrowser.Navigate(filename);
             webBrowser.Hide();
         }
