@@ -238,12 +238,19 @@ namespace FTAnalyzer.Forms
 
         public void StartGeoCoding()
         {
-            this.Cursor = Cursors.WaitCursor;
-            pbGeocoding.Visible = true;
-            geocodeLocationsToolStripMenuItem.Enabled = false;
-            ft.Geocoding = true;
-            backgroundWorker.RunWorkerAsync();
-            this.Cursor = Cursors.Default;
+            if (backgroundWorker.IsBusy)
+            {
+                MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.");
+            }
+            else
+            {
+                this.Cursor = Cursors.WaitCursor;
+                pbGeocoding.Visible = true;
+                geocodeLocationsToolStripMenuItem.Enabled = false;
+                ft.Geocoding = true;
+                backgroundWorker.RunWorkerAsync();
+                this.Cursor = Cursors.Default;
+            }
         }
 
         public void GeoCode(BackgroundWorker worker, DoWorkEventArgs e)
@@ -380,11 +387,11 @@ namespace FTAnalyzer.Forms
                             }
                         }
                         reader.Close();
+                        count++;
                     }
-                    count++;
 
                     int percent = (int)Math.Truncate(count * 100.0 / total);
-                    string status = "Google found " + good + ", didn't find " + bad + ", Skip " + skipped + " previously not found, " + geocoded + " found. Done " + count +
+                    string status = "Google found " + good + ", didn't find " + bad + ", Skip " + geocoded + " previously found, " + skipped + "  not found. Done " + count +
                             " of " + total + ".  ";
                     worker.ReportProgress(percent, status);
 
@@ -490,8 +497,8 @@ namespace FTAnalyzer.Forms
             txtGoogleWait.Text = string.Empty;
             geocodeLocationsToolStripMenuItem.Enabled = true;
             ft.Geocoding = false;
-            if (formClosing) // we clicked close to stop geocoding don't close form though
-                formClosing = false;
+            if (formClosing)
+                this.Close();
         }
 
         private void TimeLine_FormClosing(object sender, FormClosingEventArgs e)
@@ -552,6 +559,5 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.Center.Y = p.Y;
             mapBox1.Refresh();
         }
-
     }
 }
