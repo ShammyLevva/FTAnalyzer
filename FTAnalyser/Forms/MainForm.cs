@@ -1590,5 +1590,21 @@ namespace FTAnalyzer
                 HourGlass(false);
             }
         }
+
+        private void mnuGeocodeSingleLocation_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void treeViewLocations_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            // force node selected to update image
+            treeViewLocations.ImageIndex = e.Node.ImageIndex;
+            if (treeViewLocations.SelectedNode != e.Node)
+            {
+                treeViewLocations.SelectedNode = e.Node;
+                treeViewLocations.SelectedImageIndex = e.Node.ImageIndex;
+            }
+        }
     }
 }
