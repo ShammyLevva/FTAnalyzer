@@ -125,22 +125,38 @@ namespace FTAnalyzer.Forms
 
         public static GeoResponse CallGeoWS(string address)
         {
-            string url = string.Format(
-                    "http://maps.google.com/maps/api/geocode/json?address={0}&region=dk&sensor=false",
-                    HttpUtility.UrlEncode(address)
-                    );
-            var request = (HttpWebRequest)HttpWebRequest.Create(url);
-            request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
-            request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(GeoResponse));
-            var stream = request.GetResponse().GetResponseStream();
-            //string result;
-            //using (StreamReader sr = new StreamReader(stream))
-            //{
-            //    result = sr.ReadToEnd();
-            //}
-            //stream.Seek(0L, SeekOrigin.Begin);
-            var res = (GeoResponse)serializer.ReadObject(stream);
+            GeoResponse res = null;
+            try
+            {
+                string url = string.Format(
+                        "http://maps.google.com/maps/api/geocode/json?address={0}&region=dk&sensor=false",
+                        HttpUtility.UrlEncode(address)
+                        );
+                HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
+                request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
+                request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(GeoResponse));
+                IWebProxy proxy = request.Proxy;
+                if (proxy != null)
+                {
+                    string proxyuri = proxy.GetProxy(request.RequestUri).ToString();
+                    request.UseDefaultCredentials = true;
+                    request.Proxy = new WebProxy(proxyuri, false);
+                    request.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                } 
+                Stream stream = request.GetResponse().GetResponseStream();
+                //string result;
+                //using (StreamReader sr = new StreamReader(stream))
+                //{
+                //    result = sr.ReadToEnd();
+                //}
+                //stream.Seek(0L, SeekOrigin.Begin);
+                res = (GeoResponse)serializer.ReadObject(stream);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to contact http://maps.google.com error was : " + ex.Message);
+            }
             return res;
         }
 
