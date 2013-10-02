@@ -149,7 +149,7 @@ namespace FTAnalyzer.Forms
         // Call geocoding routine but account for throttling by Google geocoding engine
         public static GeoResponse CallGeoWSCount(string address, int badtries)
         {
-            Console.WriteLine("waiting " + sleepinterval);
+            //Console.WriteLine("waiting " + sleepinterval);
             double seconds = sleepinterval / 1000;
             if (sleepinterval > 500)
                 OnWaitingForGoogle("Querying too fast. Google imposed wait of: " + seconds + " seconds.");

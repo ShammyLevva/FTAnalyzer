@@ -530,6 +530,14 @@ namespace FTAnalyzer
             }
         }
 
+        public static int GeocodedLocations
+        {
+            get
+            {
+                return FactLocation.AllLocations.Count(l => l.IsGeoCoded);
+            }
+        }
+
         public string CensusCountry
         {
             get

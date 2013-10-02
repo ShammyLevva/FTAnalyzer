@@ -1767,11 +1767,12 @@ namespace FTAnalyzer
                     }
                     reader.Close();
                 }
-                rtb.AppendText("Found " + FactLocation.AllLocations.Count() + " locations in file.\n");
+                // write geocode results - ignore UNKNOWN entry
+                rtb.AppendText("Found " + (FactLocation.AllLocations.Count()-1) + " locations in file.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM)) + " have geocoding from GEDCOM file.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.FOUND)) + " have geocoding from Google.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTFOUND)) + " couldn't be found on Google.\n");
-                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTSEARCHED)) + " haven't been searched on Google.\n");
+                rtb.AppendText("    " + (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTSEARCHED))-1) + " haven't been searched on Google.\n");
             }
             catch (Exception ex)
             {

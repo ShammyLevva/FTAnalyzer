@@ -226,6 +226,7 @@ namespace FTAnalyzer.Forms
                 cmd.Prepare();
 
                 SQLiteCommand insertCmd = new SQLiteCommand("insert into geocode (location, level, latitude, longitude, founddate, foundlocation, foundlevel) values(?,?,?,?,date('now'),?,?)", conn);
+                SQLiteCommand updateCmd = new SQLiteCommand("update geocode set level = ?, latitude = ?, longitude = ?, founddate = date('now'), foundlocation = ?, foundlevel = ? where location = ?", conn);
 
                 param = insertCmd.CreateParameter();
                 param.DbType = DbType.String;
@@ -251,30 +252,59 @@ namespace FTAnalyzer.Forms
                 param.DbType = DbType.Int32;
                 insertCmd.Parameters.Add(param);
 
+                param = updateCmd.CreateParameter();
+                param.DbType = DbType.Int32;
+                updateCmd.Parameters.Add(param);
+                param = updateCmd.CreateParameter();
+                param.DbType = DbType.Double;
+                updateCmd.Parameters.Add(param);
+                param = updateCmd.CreateParameter();
+                param.DbType = DbType.Double;
+                updateCmd.Parameters.Add(param);
+                param = updateCmd.CreateParameter();
+                param.DbType = DbType.String;
+                updateCmd.Parameters.Add(param);
+                param = updateCmd.CreateParameter();
+                param.DbType = DbType.Int32;
+                updateCmd.Parameters.Add(param);
+                param = updateCmd.CreateParameter();
+                param.DbType = DbType.String;
+                updateCmd.Parameters.Add(param);
+                
                 insertCmd.Prepare();
+                updateCmd.Prepare();
 
                 int count = 0;
                 int good = 0;
                 int bad = 0;
-                int total = FactLocation.AllLocations.Count();
+                int geocoded = 0;
+                int skipped = 0;
+                int total = FactLocation.AllLocations.Count() -1;
                 GoogleMap.ThreadCancelled = false;
 
                 foreach (FactLocation loc in FactLocation.AllLocations)
                 {
-                    if (!loc.IsGeoCoded)
+                    if (loc.IsGeoCoded)
+                    {
+                        geocoded++;
+                        Console.WriteLine("Already Geocoded : " + loc.ToString());
+                    }
+                    else
                     {
                         cmd.Parameters[0].Value = loc.ToString();
                         SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
-                        if (!reader.Read() && loc.ToString().Length > 0)
-                        {  // location isn't found so add it
-                            GoogleMap.GeoResponse res = GoogleMap.CallGeoWSCount(loc.ToString(), 10);
+                        bool inDatabase = reader.Read();
+                        if (loc.ToString().Length > 0)
+                        {   
+                            GoogleMap.GeoResponse res = null;
+                            if(!(mnuSkipNotFound.Checked && inDatabase))
+                                res = GoogleMap.CallGeoWSCount(loc.ToString(), 10);
                             if (res != null && res.Status == "OK" && res.Results.Length > 0)
                             {
                                 double latitude = 0;
                                 double longitude = 0;
-                                string address = string.Empty;
                                 int foundLevel = GoogleMap.GetFactLocation(res.Results[0].Types);
-                                address = res.Results[0].ReturnAddress;
+                                string address = res.Results[0].ReturnAddress;
                                 if (foundLevel >= loc.Level)
                                 {
                                     latitude = res.Results[0].Geometry.Location.Lat;
@@ -285,25 +315,42 @@ namespace FTAnalyzer.Forms
                                 {
                                     bad++;
                                 }
-                                insertCmd.Parameters[0].Value = loc.ToString();
-                                insertCmd.Parameters[1].Value = loc.Level;
-                                insertCmd.Parameters[2].Value = latitude;
-                                insertCmd.Parameters[3].Value = longitude;
-                                insertCmd.Parameters[4].Value = address;
-                                insertCmd.Parameters[5].Value = foundLevel;
-                                insertCmd.ExecuteNonQuery();
+                                if (inDatabase)
+                                {
+                                    updateCmd.Parameters[0].Value = loc.Level;
+                                    updateCmd.Parameters[1].Value = latitude;
+                                    updateCmd.Parameters[2].Value = longitude;
+                                    updateCmd.Parameters[3].Value = address;
+                                    updateCmd.Parameters[4].Value = foundLevel;
+                                    updateCmd.Parameters[5].Value = loc.ToString();
+                                    updateCmd.ExecuteNonQuery();
+                                }
+                                else
+                                {
+                                    insertCmd.Parameters[0].Value = loc.ToString();
+                                    insertCmd.Parameters[1].Value = loc.Level;
+                                    insertCmd.Parameters[2].Value = latitude;
+                                    insertCmd.Parameters[3].Value = longitude;
+                                    insertCmd.Parameters[4].Value = address;
+                                    insertCmd.Parameters[5].Value = foundLevel;
+                                    insertCmd.ExecuteNonQuery();
+                                }
                                 loc.Latitude = latitude;
                                 loc.Longitude = longitude;
                                 loc.GoogleLocation = address;
                             }
+                            else
+                            {
+                                skipped++;
+                                Console.WriteLine("Skipped : " + loc.ToString());
+                            }
                         }
                         reader.Close();
                     }
-
                     count++;
+
                     int percent = (int)Math.Truncate(count * 100.0 / total);
-                    string status = "Google found " + good + ", didn't find " + bad + " places. Geocoded " +
-                            FactLocation.AllLocations.Count(l => l.IsGeoCoded) + " locations. " + count +
+                    string status = "Google found " + good + ", didn't find " + bad + ", skipped " + skipped + " previously found " + geocoded + " places. " + count +
                             " of " + total + ".  ";
                     worker.ReportProgress(percent, status);
 

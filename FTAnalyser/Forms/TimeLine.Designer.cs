@@ -49,6 +49,7 @@
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
+            this.mnuSkipNotFound = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -98,7 +99,8 @@
             // geocodeToolStripMenuItem
             // 
             this.geocodeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.geocodeLocationsToolStripMenuItem});
+            this.geocodeLocationsToolStripMenuItem,
+            this.mnuSkipNotFound});
             this.geocodeToolStripMenuItem.Name = "geocodeToolStripMenuItem";
             this.geocodeToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.geocodeToolStripMenuItem.Text = "Process";
@@ -253,6 +255,15 @@
             this.mapZoomToolStrip.TabIndex = 8;
             this.mapZoomToolStrip.Text = "MapZoomToolStrip";
             // 
+            // mnuSkipNotFound
+            // 
+            this.mnuSkipNotFound.Checked = true;
+            this.mnuSkipNotFound.CheckOnClick = true;
+            this.mnuSkipNotFound.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mnuSkipNotFound.Name = "mnuSkipNotFound";
+            this.mnuSkipNotFound.Size = new System.Drawing.Size(175, 22);
+            this.mnuSkipNotFound.Text = "Skip Not Found";
+            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -302,5 +313,6 @@
         private System.Windows.Forms.ToolStripMenuItem marriedToDirectOrBloodToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem relatedByMarriageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unknownToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuSkipNotFound;
     }
 }
