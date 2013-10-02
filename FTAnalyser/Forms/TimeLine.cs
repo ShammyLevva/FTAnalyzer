@@ -24,6 +24,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using SharpMap.Rendering.Decoration;
 using SharpMap.Rendering;
+using System.Net;
 
 namespace FTAnalyzer.Forms
 {
@@ -61,16 +62,49 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             ft = FamilyTree.Instance;
-            txtLocations.Text = "Already Geocoded " + FactLocation.AllLocations.Count(l => l.IsGeoCoded) + " of " + FactLocation.AllLocations.Count() + " locations";
-            txtGoogleWait.Text = string.Empty;
             SetGeoCodedYearRange();
             SetupMap();
             DisplayLocationsForYear(labValue.Text);
+            SetLocationsText();
+        }
+
+        private void SetLocationsText()
+        {
+            int gedcom = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM));
+            int found = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.FOUND));
+            int notfound = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTFOUND));
+            int notsearched = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTSEARCHED)) - 1);
+            int total = FactLocation.AllLocations.Count() -1;
+
+            txtGoogleWait.Text = string.Empty;
+            txtLocations.Text = "Already Geocoded: " + (gedcom + found) + ", not found: " + notfound + " yet to search: " + notsearched + " of " + total + " locations";
+            if (notsearched > 0)
+            {
+                DialogResult res = MessageBox.Show("You have " + notsearched + " places with no map location do you want to search Google for the locations?",
+                                                   "Geocode Locations", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                    StartGeoCoding();
+            }
+        }
+
+        private void SetDefaultProxy()
+        {
+            HttpWebRequest request = HttpWebRequest.Create("http://www.google.com") as HttpWebRequest;
+            IWebProxy proxy = request.Proxy;
+            if (proxy != null)
+            {
+                string proxyuri = proxy.GetProxy(request.RequestUri).ToString();
+                request.UseDefaultCredentials = true;
+                proxy = new WebProxy(proxyuri, false);
+                proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                WebRequest.DefaultWebProxy = proxy;
+            }
         }
 
         private void SetupMap()
         {
             // Add Google maps layer to map control.
+            SetDefaultProxy();
             mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
                 new GoogleTileSource(GoogleMapType.GoogleMap), "Google"));
 
@@ -199,17 +233,17 @@ namespace FTAnalyzer.Forms
 
         private void geocodeLocationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
             StartGeoCoding();
-            this.Cursor = Cursors.Default;
         }
 
         public void StartGeoCoding()
         {
+            this.Cursor = Cursors.WaitCursor;
             pbGeocoding.Visible = true;
             geocodeLocationsToolStripMenuItem.Enabled = false;
             ft.Geocoding = true;
             backgroundWorker.RunWorkerAsync();
+            this.Cursor = Cursors.Default;
         }
 
         public void GeoCode(BackgroundWorker worker, DoWorkEventArgs e)
@@ -452,10 +486,12 @@ namespace FTAnalyzer.Forms
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             pbGeocoding.Value = 100;
+            pbGeocoding.Visible = false;
             txtGoogleWait.Text = string.Empty;
             geocodeLocationsToolStripMenuItem.Enabled = true;
             ft.Geocoding = false;
-            if (formClosing) this.Close();
+            if (formClosing) // we clicked close to stop geocoding don't close form though
+                formClosing = false;
         }
 
         private void TimeLine_FormClosing(object sender, FormClosingEventArgs e)
