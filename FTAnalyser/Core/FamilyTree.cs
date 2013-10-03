@@ -365,7 +365,7 @@ namespace FTAnalyzer
                 foreach (Individual ind in individuals)
                 {
                     foreach (Fact f in ind.AllFacts)
-                        if(f.Location.IsGeoCoded)
+                        if (f.Location.IsGeoCoded)
                             result.Add(new MapLocation(ind, f.Location, f.FactDate));
                 }
                 return result;
@@ -933,7 +933,7 @@ namespace FTAnalyzer
             foreach (FactLocation loc in FactLocation.AllLocations)
             {
                 FactLocation c = loc.GetLocation(level);
-                if (c.Country != string.Empty && !result.Contains(c)) 
+                if (c.Country != string.Empty && !result.Contains(c))
                     result.Add(c);
             }
             result.Sort(new FactLocationComparer(level));
@@ -1762,12 +1762,12 @@ namespace FTAnalyzer
                         loc.Latitude = (double)reader["latitude"];
                         loc.Longitude = (double)reader["longitude"];
                         loc.GoogleLocation = (string)reader["foundlocation"];
-                        if(reader["foundlevel"] != null)
+                        if (reader["foundlevel"] != null)
                         {
                             long level = (long)reader["level"];
                             long foundLevel = (long)reader["foundlevel"];
-                            if(foundLevel >= level)
-                                loc.GeocodeStatus= FactLocation.Geocode.FOUND;
+                            if (foundLevel >= level)
+                                loc.GeocodeStatus = FactLocation.Geocode.FOUND;
                             else
                                 loc.GeocodeStatus = FactLocation.Geocode.NOTFOUND;
                         }
@@ -1775,11 +1775,11 @@ namespace FTAnalyzer
                     reader.Close();
                 }
                 // write geocode results - ignore UNKNOWN entry
-                rtb.AppendText("Found " + (FactLocation.AllLocations.Count()-1) + " locations in file.\n");
+                rtb.AppendText("Found " + (FactLocation.AllLocations.Count() - 1) + " locations in file.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM)) + " have geocoding from GEDCOM file.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.FOUND)) + " have geocoding from Google.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTFOUND)) + " could not be found on Google.\n");
-                rtb.AppendText("    " + (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTSEARCHED))-1) + " haven't been searched on Google.\n");
+                rtb.AppendText("    " + (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTSEARCHED)) - 1) + " haven't been searched on Google.\n");
             }
             catch (Exception ex)
             {
@@ -1849,6 +1849,23 @@ namespace FTAnalyzer
                         File.Delete(filename);
                     }
                     File.Copy(Path.Combine(Application.StartupPath, @"Resources\Geocodes-Empty.s3db"), filename);
+                }
+                Version v2_3_0_1 = new Version("2.3.0.1");
+                if (dbVersion < v2_3_0_1)
+                {
+                    conn = GetDatabaseConnection();
+                    conn.Open();
+                    SQLiteCommand cmd = new SQLiteCommand("alter table geocode add column viewport_x_ne real default 0.0", conn);
+                    cmd.ExecuteNonQuery();
+                    cmd = new SQLiteCommand("alter table geocode add column viewport_y_ne real default 0.0", conn);
+                    cmd.ExecuteNonQuery();
+                    cmd = new SQLiteCommand("alter table geocode add column viewport_s_sw real default 0.0", conn);
+                    cmd.ExecuteNonQuery();
+                    cmd = new SQLiteCommand("alter table geocode add column viewport_y_sw real default 0.0", conn);
+                    cmd.ExecuteNonQuery();
+                    cmd = new SQLiteCommand("update versions set Database = '2.3.0.1'", conn);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
                 }
             }
             catch (Exception ex)

@@ -53,14 +53,22 @@ namespace FTAnalyzer.Forms
             }
             location = loc.ToString();
             GoogleMap.GeoResponse res = GoogleMap.CallGeoWS(location);
-            if (res.Status != "OK")
+            Object[] args;
+            if (res.Status == "OK")
+            {
+                labMapLevel.Text = GoogleMap.LocationText(res, loc, level);
+                var viewport = res.Results[0].Geometry.ViewPort;
+                args = new Object[] { viewport.NorthEast.Lat, viewport.NorthEast.Lng, viewport.SouthWest.Lat, viewport.SouthWest.Lng };
+            }
+            else if (res.Status == "OVER_QUERY_LIMIT" && loc.IsGeoCoded)
+            {
+                labMapLevel.Text = "Previously Geocoded: " + loc.ToString();
+                args = new Object[] { loc.Latitude + 10, loc.Longitude + 10, loc.Latitude - 10, loc.Longitude - 10 };
+            }
+            else
             {
                 return false;
             }
-
-            labMapLevel.Text = GoogleMap.LocationText(res, loc, level);
-            var viewport = res.Results[0].Geometry.ViewPort;
-            Object[] args = new Object[] { viewport.NorthEast.Lat, viewport.NorthEast.Lng, viewport.SouthWest.Lat, viewport.SouthWest.Lng };
             webBrowser.Document.InvokeScript("setBounds", args);
             webBrowser.Show();
             return true;
