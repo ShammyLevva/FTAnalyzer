@@ -38,7 +38,7 @@ namespace FTAnalyzer.Utilities
                     [DataMember(Name = "lat")]
                     public double Lat { get; set; }
                     [DataMember(Name = "lng")]
-                    public double Lng { get; set; }
+                    public double Long { get; set; }
                 }
 
                 [DataContract]

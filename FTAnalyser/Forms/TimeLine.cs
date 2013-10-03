@@ -383,7 +383,7 @@ namespace FTAnalyzer.Forms
                                 if (foundLevel >= loc.Level)
                                 {
                                     latitude = res.Results[0].Geometry.Location.Lat;
-                                    longitude = res.Results[0].Geometry.Location.Lng;
+                                    longitude = res.Results[0].Geometry.Location.Long;
                                     loc.GeocodeStatus = FactLocation.Geocode.FOUND;
                                     loc.ViewPort = viewport; 
                                     good++;
@@ -401,9 +401,9 @@ namespace FTAnalyzer.Forms
                                     updateCmd.Parameters[3].Value = address;
                                     updateCmd.Parameters[4].Value = foundLevel;
                                     updateCmd.Parameters[5].Value = viewport.NorthEast.Lat;
-                                    updateCmd.Parameters[6].Value = viewport.NorthEast.Lng;
+                                    updateCmd.Parameters[6].Value = viewport.NorthEast.Long;
                                     updateCmd.Parameters[7].Value = viewport.SouthWest.Lat;
-                                    updateCmd.Parameters[8].Value = viewport.SouthWest.Lng;
+                                    updateCmd.Parameters[8].Value = viewport.SouthWest.Long;
                                     updateCmd.Parameters[9].Value = loc.ToString();
                                     updateCmd.ExecuteNonQuery();
                                 }
@@ -416,9 +416,9 @@ namespace FTAnalyzer.Forms
                                     insertCmd.Parameters[4].Value = address;
                                     insertCmd.Parameters[5].Value = foundLevel;
                                     insertCmd.Parameters[6].Value = viewport.NorthEast.Lat;
-                                    insertCmd.Parameters[7].Value = viewport.NorthEast.Lng;
+                                    insertCmd.Parameters[7].Value = viewport.NorthEast.Long;
                                     insertCmd.Parameters[8].Value = viewport.SouthWest.Lat;
-                                    insertCmd.Parameters[9].Value = viewport.SouthWest.Lng;
+                                    insertCmd.Parameters[9].Value = viewport.SouthWest.Long;
                                     insertCmd.ExecuteNonQuery();
                                 }
                                 loc.Latitude = latitude;

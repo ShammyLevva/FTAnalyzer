@@ -72,16 +72,16 @@ namespace FTAnalyzer.Forms
                     labMapLevel.Text = "Previously Geocoded: " + loc.ToString();
                     viewport = new GeoResponse.CResult.CGeometry.CViewPort();
                     viewport.NorthEast.Lat = loc.Latitude + 2;
-                    viewport.NorthEast.Lng = loc.Longitude + 2;
+                    viewport.NorthEast.Long = loc.Longitude + 2;
                     viewport.SouthWest.Lat = loc.Latitude + 2;
-                    viewport.SouthWest.Lng = loc.Longitude + 2;
+                    viewport.SouthWest.Long = loc.Longitude + 2;
                 }
                 else
                 {
                     return false;
                 }
             }
-            Object[] args = new Object[] { viewport.NorthEast.Lat, viewport.NorthEast.Lng, viewport.SouthWest.Lat, viewport.SouthWest.Lng };
+            Object[] args = new Object[] { viewport.NorthEast.Lat, viewport.NorthEast.Long, viewport.SouthWest.Lat, viewport.SouthWest.Long };
             webBrowser.Document.InvokeScript("setBounds", args);
             webBrowser.Show();
             return true;

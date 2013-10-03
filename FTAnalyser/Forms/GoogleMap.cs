@@ -74,7 +74,7 @@ namespace FTAnalyzer.Forms
                     labMapLevel.Text = GoogleMap.LocationText(res, loc, level);
                     viewport = res.Results[0].Geometry.ViewPort;
                     double lat = res.Results[0].Geometry.Location.Lat;
-                    double lng = res.Results[0].Geometry.Location.Lng;
+                    double lng = res.Results[0].Geometry.Location.Long;
                     args = new Object[] { lat, lng };
                 }
                 else if (res.Status == "OVER_QUERY_LIMIT" && loc.IsGeoCoded)
@@ -82,9 +82,9 @@ namespace FTAnalyzer.Forms
                     labMapLevel.Text = "Previously Geocoded: " + loc.ToString();
                     viewport = new GeoResponse.CResult.CGeometry.CViewPort();
                     viewport.NorthEast.Lat = loc.Latitude + 2;
-                    viewport.NorthEast.Lng = loc.Longitude + 2;
+                    viewport.NorthEast.Long = loc.Longitude + 2;
                     viewport.SouthWest.Lat = loc.Latitude + 2;
-                    viewport.SouthWest.Lng = loc.Longitude + 2;
+                    viewport.SouthWest.Long = loc.Longitude + 2;
                     args= new Object[] { loc.Latitude, loc.Longitude };
                 }
                 else
@@ -94,7 +94,7 @@ namespace FTAnalyzer.Forms
             }
             Object marker = webBrowser.Document.InvokeScript("frontAndCenter", args);
 
-            args = new Object[] { viewport.NorthEast.Lat, viewport.NorthEast.Lng, viewport.SouthWest.Lat, viewport.SouthWest.Lng };
+            args = new Object[] { viewport.NorthEast.Lat, viewport.NorthEast.Long, viewport.SouthWest.Lat, viewport.SouthWest.Long };
             webBrowser.Document.InvokeScript("setViewport", args);
             webBrowser.Show();
             return true;

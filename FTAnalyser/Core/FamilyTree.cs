@@ -1772,9 +1772,9 @@ namespace FTAnalyzer
                                 loc.GeocodeStatus = FactLocation.Geocode.NOTFOUND;
                         }
                         loc.ViewPort.NorthEast.Lat = (double)reader["viewport_x_ne"];
-                        loc.ViewPort.NorthEast.Lng = (double)reader["viewport_y_ne"];
+                        loc.ViewPort.NorthEast.Long = (double)reader["viewport_y_ne"];
                         loc.ViewPort.SouthWest.Lat = (double)reader["viewport_x_sw"];
-                        loc.ViewPort.SouthWest.Lng = (double)reader["viewport_y_sw"];
+                        loc.ViewPort.SouthWest.Long = (double)reader["viewport_y_sw"];
                     }
                     reader.Close();
                 }
