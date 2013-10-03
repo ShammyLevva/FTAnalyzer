@@ -1782,6 +1782,9 @@ namespace FTAnalyzer
             }
         }
 
+        #endregion
+
+        #region Database Functions
         public SQLiteConnection GetDatabaseConnection()
         {
             try
@@ -1800,7 +1803,6 @@ namespace FTAnalyzer
             }
             return null;
         }
-        #endregion
 
         public void CheckDatabaseVersion(Version programVersion)
         {
@@ -1849,5 +1851,6 @@ namespace FTAnalyzer
                 MessageBox.Show("Error upgrading database. Error is :" + ex.Message);
             }
         }
+        #endregion
     }
 }

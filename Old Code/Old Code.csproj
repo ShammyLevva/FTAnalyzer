@@ -67,6 +67,7 @@
     <Compile Include="Formatters\CensusOutputFormatter.cs" />
     <Compile Include="Formatters\DeathOutputFormatter.cs" />
     <Compile Include="Formatters\MarriageOutputFormatter.cs" />
+    <Compile Include="Forms\CheckForUpdatesMainFormCode.cs" />
     <Compile Include="Forms\FamilySearchMainFormCode.cs" />
     <Compile Include="Forms\FamilySearchResultsViewer.cs">
       <SubType>Form</SubType>
@@ -74,9 +75,7 @@
     <Compile Include="Forms\FamilySearchResultsViewer.Designer.cs">
       <DependentUpon>FamilySearchResultsViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RegistrationReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\RegistrationReport.cs" />
     <Compile Include="Forms\RegistrationReport.Designer.cs">
       <DependentUpon>RegistrationReport.cs</DependentUpon>
     </Compile>

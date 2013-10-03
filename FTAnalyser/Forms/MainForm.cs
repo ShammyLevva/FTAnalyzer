@@ -19,7 +19,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "2.3.0.0-beta-test2";
+        private string VERSION = "2.3.0.0-beta-test3";
         //private bool _checkForUpdatesEnabled = false;
         //private bool _showNoUpdateMessage = false;
         //private System.Threading.Timer _timerCheckForUpdates;
@@ -650,8 +650,6 @@ namespace FTAnalyzer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //_timerCheckForUpdates = new System.Threading.Timer(new System.Threading.TimerCallback(_timerCheckForUpdates_Callback));
-            //_timerCheckForUpdates.Change(3000, 1000 * 60 * 60 * 8); //Check for updates 3 sec after the form loads, and then again every 8 hours
             //GeneralSettings.UseBaptismDatesChanged += new EventHandler(Options_BaptismChanged);
             GeneralSettings.AllowEmptyLocationsChanged += new EventHandler(Options_AllowEmptyLocationsChanged);
             GeneralSettings.UseResidenceAsCensusChanged += new EventHandler(Options_UseResidenceAsCensusChanged);
@@ -661,13 +659,6 @@ namespace FTAnalyzer
         }
 
         #region ToolStrip Clicks
-        //private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    _checkForUpdatesEnabled = true;
-        //    _showNoUpdateMessage = true;
-        //    _timerCheckForUpdates_Callback(null);
-        //    _showNoUpdateMessage = false;
-        //}
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -676,220 +667,16 @@ namespace FTAnalyzer
             options.Dispose();
         }
 
-        //private void BirthRegistrationToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    MultiComparator<Registration> birthComparator = new MultiComparator<Registration>();
-        //    birthComparator.addComparator(new LocationComparator(FactLocation.PARISH));
-        //    birthComparator.addComparator(new DateComparator());
-
-        //    Func<Registration, bool> partialEnglishData =
-        //        FilterUtils.AndFilter<Registration>(
-        //            FilterUtils.IncompleteDataFilter<Registration>(
-        //                FactLocation.PARISH, x => x.isCertificatePresent(), x => x.FilterDate, (d, x) => x.BestLocation(d)),
-        //            FilterUtils.StringFilter<Registration>(x => x.BestLocation(FactDate.UNKNOWN_DATE).Country, Countries.ENGLAND));
-
-        //    Func<Registration, bool> directOrBlood = FilterUtils.OrFilter<Registration>(
-        //            FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.DIRECT),
-        //            FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.BLOOD));
-
-        //    RegistrationsProcessor onlineBirthsRP = new RegistrationsProcessor(
-        //            FilterUtils.AndFilter<Registration>(directOrBlood, partialEnglishData), birthComparator);
-
-        //    List<Registration> regs = ft.getAllBirthRegistrations();
-        //    List<Registration> result = onlineBirthsRP.processRegistrations(regs);
-
-        //    RegistrationReport report = new RegistrationReport();
-        //    report.SetupBirthRegistration(result);
-        //    DisposeDuplicateForms(report);
-        //    report.Show();
-        //}
-
-        //private void deathRegistrationsToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    MultiComparator<Registration> deathComparator = new MultiComparator<Registration>();
-        //    deathComparator.addComparator(new LocationComparator(FactLocation.PARISH));
-        //    deathComparator.addComparator(new DateComparator());
-
-        //    Func<Registration, bool> partialEnglishData =
-        //        FilterUtils.AndFilter<Registration>(
-        //            FilterUtils.IncompleteDataFilter<Registration>(
-        //                FactLocation.PARISH, x => x.isCertificatePresent(), x => x.FilterDate, (d, x) => x.BestLocation(d)),
-        //            FilterUtils.StringFilter<Registration>(x => x.BestLocation(FactDate.UNKNOWN_DATE).Country, Countries.ENGLAND));
-
-        //    Func<Registration, bool> directOrBlood = FilterUtils.OrFilter<Registration>(
-        //            FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.DIRECT),
-        //            FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.BLOOD));
-
-        //    RegistrationsProcessor onlineDeathsRP = new RegistrationsProcessor(
-        //            FilterUtils.AndFilter<Registration>(directOrBlood, partialEnglishData), deathComparator);
-
-        //    List<Registration> regs = ft.getAllDeathRegistrations();
-        //    List<Registration> result = onlineDeathsRP.processRegistrations(regs);
-
-        //    RegistrationReport report = new RegistrationReport();
-        //    report.SetupDeathRegistration(result);
-        //    DisposeDuplicateForms(report);
-        //    report.Show();
-        //}
-
-        //private void marriageRegistrationsToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    MultiComparator<Registration> marriageComparator = new MultiComparator<Registration>();
-        //    marriageComparator.addComparator(new LocationComparator(FactLocation.PARISH));
-        //    marriageComparator.addComparator(new DateComparator());
-
-        //    Func<Registration, bool> partialEnglishData =
-        //        FilterUtils.AndFilter<Registration>(
-        //            FilterUtils.IncompleteDataFilter<Registration>(
-        //                FactLocation.PARISH, x => x.isCertificatePresent(), x => x.FilterDate, (d, x) => x.BestLocation(d)),
-        //            FilterUtils.StringFilter<Registration>(x => x.BestLocation(FactDate.UNKNOWN_DATE).Country, Countries.ENGLAND));
-
-        //    Func<Registration, bool> directOrBlood = FilterUtils.OrFilter<Registration>(
-        //            FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.DIRECT),
-        //            FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.BLOOD));
-
-        //    RegistrationsProcessor onlineMarriagesRP = new RegistrationsProcessor(
-        //            FilterUtils.AndFilter<Registration>(directOrBlood, partialEnglishData), marriageComparator);
-
-        //    List<Registration> regs = ft.getAllMarriageRegistrations();
-        //    List<Registration> result = onlineMarriagesRP.processRegistrations(regs);
-
-        //    RegistrationReport report = new RegistrationReport();
-        //    report.SetupMarriageRegistration(result);
-        //    DisposeDuplicateForms(report);
-        //    report.Show();
-        //}
-
         #endregion
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("http://www.lostcousins.com/?ref=LC585149");
         }
-
-        //private void btnFamilySearchFolderBrowse_Click(object sender, EventArgs e)
-        //{
-        //    FolderBrowserDialog browse = new FolderBrowserDialog();
-        //    browse.ShowNewFolderButton = true;
-        //    browse.Description = "Please select a folder where the results of the FamilySearch search will be placed";
-        //    browse.RootFolder = Environment.SpecialFolder.Desktop;
-        //    if (txtFamilySearchfolder.Text != string.Empty)
-        //        browse.SelectedPath = txtFamilySearchfolder.Text;
-        //    if (browse.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-        //    {
-        //        Application.UserAppDataRegistry.SetValue("FamilySearch Search Path", browse.SelectedPath);
-        //        txtFamilySearchfolder.Text = browse.SelectedPath;
-        //    }
-        //}
-
-        //private void btnFamilySearchMarriageSearch_Click(object sender, EventArgs e)
-        //{
-        //    HourGlass(true);
-        //    btnCancelFamilySearch.Visible = true;
-        //    btnViewResults.Visible = false;
-        //    btnFamilySearchChildrenSearch.Enabled = false;
-        //    btnFamilySearchMarriageSearch.Enabled = false;
-        //    rtbFamilySearchResults.Text = "FamilySearch Marriage Search started.\n";
-        //    int level = rbFamilySearchCountry.Checked ? FactLocation.COUNTRY : FactLocation.REGION;
-        //    FamilySearchForm form = new FamilySearchNewSearchForm(rtbFamilySearchResults, FamilySearchDefaultCountry.Country, level, FamilySearchrelationTypes.Status, txtFamilySearchSurname.Text, webBrowser);
-        //    IList<Family> families = ft.AllFamilies.ToList();
-        //    int counter = 0;
-        //    pbFamilySearch.Visible = true;
-        //    pbFamilySearch.Maximum = families.Count;
-        //    pbFamilySearch.Value = 0;
-        //    stopProcessing = false;
-        //    foreach (Family f in ft.AllFamilies)
-        //    {
-        //        form.SearchFamilySearch(f, txtFamilySearchfolder.Text, FamilySearchForm.MARRIAGESEARCH);
-        //        pbFamilySearch.Value = counter++;
-        //        Application.DoEvents();
-        //        if (stopProcessing)
-        //            break;
-        //    }
-        //    pbFamilySearch.Visible = false;
-        //    btnCancelFamilySearch.Visible = false;
-        //    btnViewResults.Visible = true;
-        //    btnFamilySearchChildrenSearch.Enabled = true;
-        //    btnFamilySearchMarriageSearch.Enabled = true;
-        //    rtbFamilySearchResults.AppendText("\nFamilySearch Marriage Search finished.\n");
-        //    HourGlass(false);
-        //}
-
-        //private void btnFamilySearchChildrenSearch_Click(object sender, EventArgs e)
-        //{
-        //    HourGlass(true);
-        //    btnCancelFamilySearch.Visible = true;
-        //    btnViewResults.Visible = false;
-        //    btnFamilySearchChildrenSearch.Enabled = false;
-        //    btnFamilySearchMarriageSearch.Enabled = false;
-        //    rtbFamilySearchResults.Text = "FamilySearch Children Search started.\n";
-        //    int level = rbFamilySearchCountry.Checked ? FactLocation.COUNTRY : FactLocation.REGION;
-        //    FamilySearchForm form = new FamilySearchOldSearchForm(rtbFamilySearchResults, FamilySearchDefaultCountry.Country, level, FamilySearchrelationTypes.Status, txtFamilySearchSurname.Text);
-        //    IList<Family> families = ft.AllFamilies.ToList();
-        //    int counter = 0;
-        //    pbFamilySearch.Visible = true;
-        //    pbFamilySearch.Maximum = families.Count;
-        //    pbFamilySearch.Value = 0;
-        //    stopProcessing = false;
-        //    foreach (Family f in families)
-        //    {
-        //        pbFamilySearch.Value = counter++;
-        //        form.SearchFamilySearch(f, txtFamilySearchfolder.Text, FamilySearchForm.CHILDRENSEARCH);
-        //        Application.DoEvents();
-        //        if (stopProcessing)
-        //            break;
-        //    }
-        //    pbFamilySearch.Visible = false;
-        //    btnCancelFamilySearch.Visible = false;
-        //    btnViewResults.Visible = true;
-        //    btnFamilySearchChildrenSearch.Enabled = true;
-        //    btnFamilySearchMarriageSearch.Enabled = true;
-        //    rtbFamilySearchResults.AppendText("\nFamilySearch Children Search finished.\n");
-        //    HourGlass(false);
-        //}
-
-        //private void censusCountry_CountryChanged(object sender, EventArgs e)
-        //{
-        //    cenDate.Country = censusCountry.Country;
-        //}
-
         private void cenDate_CensusChanged(object sender, EventArgs e)
         {
             censusDate = cenDate.SelectedDate;
         }
-
-        //private void btnViewResults_Click(object sender, EventArgs e)
-        //{
-        //    FamilySearchResultsViewer frmResults = new FamilySearchResultsViewer(txtFamilySearchfolder.Text);
-        //    if (frmResults.ResultsPresent)
-        //    {
-        //        DisposeDuplicateForms(frmResults);
-        //        frmResults.Show();
-        //    }
-        //    else
-        //    {
-        //        frmResults.Dispose();
-        //        MessageBox.Show("Sorry there are no results files in the selected folder.");
-        //    }
-        //}
-
-        //private void btnCancelFamilySearch_Click(object sender, EventArgs e)
-        //{
-        //    stopProcessing = true;
-        //}
-
-        //private void FamilySearchDefaultCountry_CountryChanged(object sender, EventArgs e)
-        //{
-        //    if (FamilySearchDefaultCountry.Country == Countries.SCOTLAND)
-        //        rbFamilySearchCountry.Checked = true;
-        //    else
-        //        rbFamilySearchRegion.Checked = true;
-        //}
-
-        //private void rtbFamilySearchResults_TextChanged(object sender, EventArgs e)
-        //{
-        //    rtbFamilySearchResults.ScrollToBottom();
-        //}
 
         private void rtbOutput_TextChanged(object sender, EventArgs e)
         {

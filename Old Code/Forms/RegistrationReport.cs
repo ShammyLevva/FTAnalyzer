@@ -62,5 +62,89 @@ namespace FTAnalyzer
             reportViewer.LocalReport.ReportEmbeddedResource = reportName;
             reportViewer.RefreshReport();
         }
+        //private void BirthRegistrationToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    MultiComparator<Registration> birthComparator = new MultiComparator<Registration>();
+        //    birthComparator.addComparator(new LocationComparator(FactLocation.PARISH));
+        //    birthComparator.addComparator(new DateComparator());
+
+        //    Func<Registration, bool> partialEnglishData =
+        //        FilterUtils.AndFilter<Registration>(
+        //            FilterUtils.IncompleteDataFilter<Registration>(
+        //                FactLocation.PARISH, x => x.isCertificatePresent(), x => x.FilterDate, (d, x) => x.BestLocation(d)),
+        //            FilterUtils.StringFilter<Registration>(x => x.BestLocation(FactDate.UNKNOWN_DATE).Country, Countries.ENGLAND));
+
+        //    Func<Registration, bool> directOrBlood = FilterUtils.OrFilter<Registration>(
+        //            FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.DIRECT),
+        //            FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.BLOOD));
+
+        //    RegistrationsProcessor onlineBirthsRP = new RegistrationsProcessor(
+        //            FilterUtils.AndFilter<Registration>(directOrBlood, partialEnglishData), birthComparator);
+
+        //    List<Registration> regs = ft.getAllBirthRegistrations();
+        //    List<Registration> result = onlineBirthsRP.processRegistrations(regs);
+
+        //    RegistrationReport report = new RegistrationReport();
+        //    report.SetupBirthRegistration(result);
+        //    DisposeDuplicateForms(report);
+        //    report.Show();
+        //}
+
+        //private void deathRegistrationsToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    MultiComparator<Registration> deathComparator = new MultiComparator<Registration>();
+        //    deathComparator.addComparator(new LocationComparator(FactLocation.PARISH));
+        //    deathComparator.addComparator(new DateComparator());
+
+        //    Func<Registration, bool> partialEnglishData =
+        //        FilterUtils.AndFilter<Registration>(
+        //            FilterUtils.IncompleteDataFilter<Registration>(
+        //                FactLocation.PARISH, x => x.isCertificatePresent(), x => x.FilterDate, (d, x) => x.BestLocation(d)),
+        //            FilterUtils.StringFilter<Registration>(x => x.BestLocation(FactDate.UNKNOWN_DATE).Country, Countries.ENGLAND));
+
+        //    Func<Registration, bool> directOrBlood = FilterUtils.OrFilter<Registration>(
+        //            FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.DIRECT),
+        //            FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.BLOOD));
+
+        //    RegistrationsProcessor onlineDeathsRP = new RegistrationsProcessor(
+        //            FilterUtils.AndFilter<Registration>(directOrBlood, partialEnglishData), deathComparator);
+
+        //    List<Registration> regs = ft.getAllDeathRegistrations();
+        //    List<Registration> result = onlineDeathsRP.processRegistrations(regs);
+
+        //    RegistrationReport report = new RegistrationReport();
+        //    report.SetupDeathRegistration(result);
+        //    DisposeDuplicateForms(report);
+        //    report.Show();
+        //}
+
+        //private void marriageRegistrationsToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    MultiComparator<Registration> marriageComparator = new MultiComparator<Registration>();
+        //    marriageComparator.addComparator(new LocationComparator(FactLocation.PARISH));
+        //    marriageComparator.addComparator(new DateComparator());
+
+        //    Func<Registration, bool> partialEnglishData =
+        //        FilterUtils.AndFilter<Registration>(
+        //            FilterUtils.IncompleteDataFilter<Registration>(
+        //                FactLocation.PARISH, x => x.isCertificatePresent(), x => x.FilterDate, (d, x) => x.BestLocation(d)),
+        //            FilterUtils.StringFilter<Registration>(x => x.BestLocation(FactDate.UNKNOWN_DATE).Country, Countries.ENGLAND));
+
+        //    Func<Registration, bool> directOrBlood = FilterUtils.OrFilter<Registration>(
+        //            FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.DIRECT),
+        //            FilterUtils.IntFilter<Registration>(x => x.RelationType, Individual.BLOOD));
+
+        //    RegistrationsProcessor onlineMarriagesRP = new RegistrationsProcessor(
+        //            FilterUtils.AndFilter<Registration>(directOrBlood, partialEnglishData), marriageComparator);
+
+        //    List<Registration> regs = ft.getAllMarriageRegistrations();
+        //    List<Registration> result = onlineMarriagesRP.processRegistrations(regs);
+
+        //    RegistrationReport report = new RegistrationReport();
+        //    report.SetupMarriageRegistration(result);
+        //    DisposeDuplicateForms(report);
+        //    report.Show();
+        //}
+
     }
 }
