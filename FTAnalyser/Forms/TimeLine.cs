@@ -415,7 +415,7 @@ namespace FTAnalyzer.Forms
                 }
                 conn.Close();
                 FamilyTree.Instance.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
-                if(txtGoogleWait.Text.Substring(0,3).Equals("Max"))
+                if(txtGoogleWait.Text.Length > 3 &&  txtGoogleWait.Text.Substring(0,3).Equals("Max"))
                     MessageBox.Show("Finished Geocoding.\n" + txtGoogleWait.Text);
                 else
                     MessageBox.Show("Finished Geocoding.");
