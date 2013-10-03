@@ -188,7 +188,7 @@ namespace FTAnalyzer.Forms
             if (loc != null)
             {   // Do geo coding stuff
                 GoogleMap frmGoogleMap = new GoogleMap();
-                if (frmGoogleMap.setLocation(loc, loc.Level))
+                if (frmGoogleMap.SetLocation(loc, loc.Level))
                     frmGoogleMap.Show();
                 else
                     MessageBox.Show("Unable to find location : " + loc.ToString());

@@ -813,7 +813,7 @@ namespace FTAnalyzer
             if (loc != null)
             {   // Do geo coding stuff
                 GoogleMap frmGoogleMap = new GoogleMap();
-                if (frmGoogleMap.setLocation(loc, locType))
+                if (frmGoogleMap.SetLocation(loc, locType))
                 {
                     DisposeDuplicateForms(frmGoogleMap);
                     frmGoogleMap.Show();

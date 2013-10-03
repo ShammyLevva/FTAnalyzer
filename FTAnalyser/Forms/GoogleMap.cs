@@ -51,31 +51,52 @@ namespace FTAnalyzer.Forms
             webBrowser.Hide();
         }
 
-        public bool setLocation(FactLocation loc, int level)
+        public bool SetLocation(FactLocation loc, int level)
         {
-            this.Cursor = Cursors.WaitCursor;
             while (!loaded)
             {
                 Application.DoEvents();
             }
-            location = loc.ToString();
-            GeoResponse res = CallGeoWS(location);
-            if (res.Status != "OK")
+            GeoResponse.CResult.CGeometry.CViewPort viewport = null;
+            GeoResponse res = null;
+            Object[] args = new Object[] { 0, 0 };
+            if (loc.IsGeoCoded && loc.ViewPort != null)
             {
-                this.Cursor = Cursors.Default;
-                return false;
+                labMapLevel.Text = "Previously Geocoded: " + loc.ToString();
+                viewport = loc.ViewPort;
             }
-            double lat = res.Results[0].Geometry.Location.Lat;
-            double lng = res.Results[0].Geometry.Location.Lng;
-            Object[] args = new Object[] { lat, lng };
+            else
+            {
+                location = loc.ToString();
+                res = CallGeoWS(location);
+                if (res.Status == "OK")
+                {
+                    labMapLevel.Text = GoogleMap.LocationText(res, loc, level);
+                    viewport = res.Results[0].Geometry.ViewPort;
+                    double lat = res.Results[0].Geometry.Location.Lat;
+                    double lng = res.Results[0].Geometry.Location.Lng;
+                    args = new Object[] { lat, lng };
+                }
+                else if (res.Status == "OVER_QUERY_LIMIT" && loc.IsGeoCoded)
+                {
+                    labMapLevel.Text = "Previously Geocoded: " + loc.ToString();
+                    viewport = new GeoResponse.CResult.CGeometry.CViewPort();
+                    viewport.NorthEast.Lat = loc.Latitude + 2;
+                    viewport.NorthEast.Lng = loc.Longitude + 2;
+                    viewport.SouthWest.Lat = loc.Latitude + 2;
+                    viewport.SouthWest.Lng = loc.Longitude + 2;
+                    args= new Object[] { loc.Latitude, loc.Longitude };
+                }
+                else
+                {
+                    return false;
+                }
+            }
             Object marker = webBrowser.Document.InvokeScript("frontAndCenter", args);
 
-            labMapLevel.Text = LocationText(res, loc, level);
-            var viewport = res.Results[0].Geometry.ViewPort;
             args = new Object[] { viewport.NorthEast.Lat, viewport.NorthEast.Lng, viewport.SouthWest.Lat, viewport.SouthWest.Lng };
             webBrowser.Document.InvokeScript("setViewport", args);
             webBrowser.Show();
-            this.Cursor = Cursors.Default;
             return true;
         }
 
@@ -144,7 +165,7 @@ namespace FTAnalyzer.Forms
                     request.UseDefaultCredentials = true;
                     request.Proxy = new WebProxy(proxyuri, false);
                     request.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
-                } 
+                }
                 Stream stream = request.GetResponse().GetResponseStream();
                 //string result;
                 //using (StreamReader sr = new StreamReader(stream))
