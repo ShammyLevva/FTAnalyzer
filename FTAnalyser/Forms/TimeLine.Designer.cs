@@ -50,9 +50,6 @@
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
-            this.mnuFilter = new System.Windows.Forms.ToolStripMenuItem();
-            this.surnameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnutxtSurname = new System.Windows.Forms.ToolStripTextBox();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -92,8 +89,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.geocodeToolStripMenuItem,
-            this.relationsToolStripMenuItem,
-            this.mnuFilter});
+            this.relationsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(920, 24);
@@ -266,27 +262,6 @@
             this.mapZoomToolStrip.TabIndex = 8;
             this.mapZoomToolStrip.Text = "MapZoomToolStrip";
             // 
-            // mnuFilter
-            // 
-            this.mnuFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.surnameToolStripMenuItem});
-            this.mnuFilter.Name = "mnuFilter";
-            this.mnuFilter.Size = new System.Drawing.Size(45, 20);
-            this.mnuFilter.Text = "Filter";
-            // 
-            // surnameToolStripMenuItem
-            // 
-            this.surnameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnutxtSurname});
-            this.surnameToolStripMenuItem.Name = "surnameToolStripMenuItem";
-            this.surnameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.surnameToolStripMenuItem.Text = "Surname";
-            // 
-            // mnutxtSurname
-            // 
-            this.mnutxtSurname.Name = "mnutxtSurname";
-            this.mnutxtSurname.Size = new System.Drawing.Size(100, 23);
-            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -337,8 +312,5 @@
         private System.Windows.Forms.ToolStripMenuItem relatedByMarriageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unknownToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuRetryNotFound;
-        private System.Windows.Forms.ToolStripMenuItem mnuFilter;
-        private System.Windows.Forms.ToolStripMenuItem surnameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripTextBox mnutxtSurname;
     }
 }
