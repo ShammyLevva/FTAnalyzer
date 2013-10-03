@@ -847,7 +847,7 @@ namespace FTAnalyzer
         {
             this.Cursor = Cursors.WaitCursor;
             FactLocation loc = null;
-            int locType = getMapLocationType(out loc);
+            int locType = GetMapLocationType(out loc);
             if (loc != null)
             {   // Do geo coding stuff
                 GoogleMap frmGoogleMap = new GoogleMap();
@@ -869,7 +869,7 @@ namespace FTAnalyzer
         {
             this.Cursor = Cursors.WaitCursor;
             FactLocation loc = null;
-            int locType = getMapLocationType(out loc);
+            int locType = GetMapLocationType(out loc);
             if (loc != null)
             {   // Do geo coding stuff
                 BingOSMap frmBingMap = new BingOSMap();
@@ -887,10 +887,10 @@ namespace FTAnalyzer
             this.Cursor = Cursors.Default;
         }
 
-        private int getMapLocationType(out FactLocation loc)
+        private int GetMapLocationType(out FactLocation loc)
         {
             // get the tab
-            int locType = FactLocation.COUNTRY;
+            int locType = FactLocation.UNKNOWN;
             loc = null;
             switch (tabCtrlLocations.SelectedTab.Text)
             {
@@ -904,23 +904,18 @@ namespace FTAnalyzer
                     break;
                 case "Countries":
                     loc = dgCountries.CurrentRow == null ? null : (FactLocation)dgCountries.CurrentRow.DataBoundItem;
-                    locType = FactLocation.COUNTRY;
                     break;
                 case "Regions":
                     loc = dgRegions.CurrentRow == null ? null : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
-                    locType = FactLocation.REGION;
                     break;
                 case "SubRegions":
                     loc = dgSubRegions.CurrentRow == null ? null : (FactLocation)dgSubRegions.CurrentRow.DataBoundItem;
-                    locType = FactLocation.SUBREGION;
                     break;
                 case "Addresses":
                     loc = dgAddresses.CurrentRow == null ? null : (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
-                    locType = FactLocation.ADDRESS;
                     break;
                 case "Places":
                     loc = dgPlaces.CurrentRow == null ? null : (FactLocation)dgPlaces.CurrentRow.DataBoundItem;
-                    locType = FactLocation.PLACE;
                     break;
             }
             if (loc == null)
@@ -929,8 +924,12 @@ namespace FTAnalyzer
                     MessageBox.Show("Location selected isn't valid to show on the map.");
                 else
                     MessageBox.Show("Nothing selected. Please select a location to show on the map.");
+                return locType;
             }
-            return locType;
+            if (locType == FactLocation.UNKNOWN)
+                return loc.Level;
+            else
+                return locType;
         }
 
         private void ckbDataErrors_SelectedIndexChanged(object sender, EventArgs e)

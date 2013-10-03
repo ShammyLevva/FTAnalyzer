@@ -25,6 +25,7 @@ namespace FTAnalyzer.Forms
         {
             this.Text = "Individuals & Families with connection to " + loc.ToString();
             FamilyTree ft = FamilyTree.Instance;
+            level = Math.Min(loc.Level, level); // if location level isn't as detailed as level on tab use location level
             IEnumerable<Individual> listInd = ft.GetIndividualsAtLocation(loc, level);
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
             foreach (Individual i in listInd)
