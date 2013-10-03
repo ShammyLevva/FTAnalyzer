@@ -22,5 +22,44 @@ namespace Old_Code.Forms
         //    _timerCheckForUpdates_Callback(null);
         //    _showNoUpdateMessage = false;
         //}
+
+        //private void _timerCheckForUpdates_Callback(object data)
+        //{
+        //    if (_checkForUpdatesEnabled)
+        //    {
+        //        Version currentVersion = new Version(VERSION);
+        //        string strLatestVersion = new Utilities.WebRequestWrapper().GetLatestVersionString();
+        //        if (!string.IsNullOrEmpty(strLatestVersion))
+        //        {
+        //            Version latestVersion = new Version(strLatestVersion);
+        //            if (currentVersion < latestVersion)
+        //            {
+        //                _checkForUpdatesEnabled = false;
+        //                DialogResult result = MessageBox.Show(string.Format("A new version of FTAnalyzer has been released, version {0}!\nWould you like to go to the FTAnalyzer site to download the new version?",
+        //                    strLatestVersion), "New Version Released!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+        //                if (result == DialogResult.Yes)
+        //                    Process.Start("http://FTAnalyzer.codeplex.com/");
+        //            }
+        //            else if (_showNoUpdateMessage)
+        //            {
+        //                MessageBox.Show("You are running the latest version of FTAnalyzer");
+        //            }
+        //        }
+        //        string strBetaVersion = new Utilities.WebRequestWrapper().GetBetaVersionString();
+        //        if (!string.IsNullOrEmpty(strBetaVersion))
+        //        {
+        //            Version betaVersion = new Version(strBetaVersion);
+        //            if (currentVersion < betaVersion)
+        //            {
+        //                _checkForUpdatesEnabled = false;
+        //                DialogResult result = MessageBox.Show(string.Format("A new TEST version of FTAnalyzer has been released, version {0}!\nWould you like to go to the FTAnalyzer site to download the new version?\nPlease note this version is possibly unstable and should only be used by testers.",
+        //                    strBetaVersion), "New TEST Version Released!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        //                if (result == DialogResult.Yes)
+        //                    Process.Start("http://FTAnalyzer.codeplex.com/");
+        //            }
+        //        }
+        //    }
+        //}
+
     }
 }
