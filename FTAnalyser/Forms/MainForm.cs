@@ -1598,13 +1598,13 @@ namespace FTAnalyzer
 
         private void treeViewLocations_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            // force node selected to update image
-            treeViewLocations.ImageIndex = e.Node.ImageIndex;
             if (treeViewLocations.SelectedNode != e.Node)
-            {
                 treeViewLocations.SelectedNode = e.Node;
-                treeViewLocations.SelectedImageIndex = e.Node.ImageIndex;
-            }
+        }
+
+        private void treeViewLocations_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            treeViewLocations.SelectedImageIndex = e.Node.ImageIndex;
         }
     }
 }
