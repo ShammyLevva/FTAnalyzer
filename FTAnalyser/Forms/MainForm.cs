@@ -873,7 +873,7 @@ namespace FTAnalyzer
             if (loc != null)
             {   // Do geo coding stuff
                 BingOSMap frmBingMap = new BingOSMap();
-                if (frmBingMap.setLocation(loc, locType))
+                if (frmBingMap.SetLocation(loc, locType))
                 {
                     DisposeDuplicateForms(frmBingMap);
                     frmBingMap.Show();

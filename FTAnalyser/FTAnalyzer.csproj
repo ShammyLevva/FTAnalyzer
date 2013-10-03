@@ -469,6 +469,7 @@
     <Compile Include="Utilities\ErrorHandler.cs" />
     <Compile Include="Utilities\ExportToExcel.cs" />
     <Compile Include="Utilities\FooterPrintBlock.cs" />
+    <Compile Include="Utilities\GeoResponse.cs" />
     <Compile Include="Utilities\HttpUtility.cs" />
     <Compile Include="Utilities\ListtoDataTableConvertor.cs" />
     <Compile Include="Utilities\Printing.cs" />

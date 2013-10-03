@@ -204,7 +204,7 @@ namespace FTAnalyzer.Forms
             if (loc != null)
             {   // Do geo coding stuff
                 BingOSMap frmBingMap = new BingOSMap();
-                if (frmBingMap.setLocation(loc, loc.Level))
+                if (frmBingMap.SetLocation(loc, loc.Level))
                     frmBingMap.Show();
                 else
                     MessageBox.Show("Unable to find location : " + loc.ToString());

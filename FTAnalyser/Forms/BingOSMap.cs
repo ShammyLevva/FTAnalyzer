@@ -12,6 +12,7 @@ using System.Web;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer.Forms
 {
@@ -45,30 +46,42 @@ namespace FTAnalyzer.Forms
             webBrowser.Hide();
         }
 
-        public bool setLocation(FactLocation loc, int level)
+        public bool SetLocation(FactLocation loc, int level)
         {
             while (!loaded)
             {
                 Application.DoEvents();
             }
-            location = loc.ToString();
-            GoogleMap.GeoResponse res = GoogleMap.CallGeoWS(location);
-            Object[] args;
-            if (res.Status == "OK")
-            {
-                labMapLevel.Text = GoogleMap.LocationText(res, loc, level);
-                var viewport = res.Results[0].Geometry.ViewPort;
-                args = new Object[] { viewport.NorthEast.Lat, viewport.NorthEast.Lng, viewport.SouthWest.Lat, viewport.SouthWest.Lng };
-            }
-            else if (res.Status == "OVER_QUERY_LIMIT" && loc.IsGeoCoded)
+            GeoResponse.CResult.CGeometry.CViewPort viewport = null;
+            if (loc.IsGeoCoded && loc.ViewPort != null)
             {
                 labMapLevel.Text = "Previously Geocoded: " + loc.ToString();
-                args = new Object[] { loc.Latitude + 10, loc.Longitude + 10, loc.Latitude - 10, loc.Longitude - 10 };
+                viewport = loc.ViewPort;
             }
             else
             {
-                return false;
+                location = loc.ToString();
+                GeoResponse res = GoogleMap.CallGeoWS(location);
+                if (res.Status == "OK")
+                {
+                    labMapLevel.Text = GoogleMap.LocationText(res, loc, level);
+                    viewport = res.Results[0].Geometry.ViewPort;
+                }
+                else if (res.Status == "OVER_QUERY_LIMIT" && loc.IsGeoCoded)
+                {
+                    labMapLevel.Text = "Previously Geocoded: " + loc.ToString();
+                    viewport = new GeoResponse.CResult.CGeometry.CViewPort();
+                    viewport.NorthEast.Lat = loc.Latitude + 2;
+                    viewport.NorthEast.Lng = loc.Longitude + 2;
+                    viewport.SouthWest.Lat = loc.Latitude + 2;
+                    viewport.SouthWest.Lng = loc.Longitude + 2;
+                }
+                else
+                {
+                    return false;
+                }
             }
+            Object[] args = new Object[] { viewport.NorthEast.Lat, viewport.NorthEast.Lng, viewport.SouthWest.Lat, viewport.SouthWest.Lng };
             webBrowser.Document.InvokeScript("setBounds", args);
             webBrowser.Show();
             return true;

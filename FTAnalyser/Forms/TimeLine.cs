@@ -25,6 +25,7 @@ using System.Drawing.Text;
 using SharpMap.Rendering.Decoration;
 using SharpMap.Rendering;
 using System.Net;
+using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer.Forms
 {
@@ -337,7 +338,7 @@ namespace FTAnalyzer.Forms
                         bool inDatabase = reader.Read();
                         if (loc.ToString().Length > 0)
                         {   
-                            GoogleMap.GeoResponse res = null;
+                            GeoResponse res = null;
                             if (!(!mnuRetryNotFound.Checked && inDatabase))
                             {
                                 res = GoogleMap.CallGeoWSCount(loc.ToString(), 8);
@@ -389,6 +390,7 @@ namespace FTAnalyzer.Forms
                                 loc.Latitude = latitude;
                                 loc.Longitude = longitude;
                                 loc.GoogleLocation = address;
+                                loc.ViewPort = res.Results[0].Geometry.ViewPort;
                             }
                             else
                             {
