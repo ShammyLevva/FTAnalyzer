@@ -20,9 +20,6 @@ namespace FTAnalyzer
     public partial class MainForm : Form
     {
         private string VERSION = "2.3.0.0-beta-test3";
-        //private bool _checkForUpdatesEnabled = false;
-        //private bool _showNoUpdateMessage = false;
-        //private System.Threading.Timer _timerCheckForUpdates;
 
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;

@@ -114,8 +114,7 @@ namespace FTAnalyzer
             occupations = new Dictionary<string, List<Individual>>();
             dataErrorTypes = new List<DataErrorGroup>();
             displayLocations = new SortableBindingList<IDisplayLocation>[5];
-            for (int i = 0; i < 5; i++)
-                displayLocations[i] = null;
+            ClearLocations();
             displayTreeRootNode = null;
             looseDeaths = null;
             FactLocation.ResetLocations();
@@ -920,6 +919,12 @@ namespace FTAnalyzer
                         yield return cf;
                 }
             }
+        }
+
+        public void ClearLocations()
+        {
+            for (int i = 0; i < 5; i++)
+                displayLocations[i] = null;
         }
 
         private SortableBindingList<IDisplayLocation> GetDisplayLocations(int level)

@@ -7,6 +7,9 @@ namespace Old_Code.Forms
 {
     class CheckForUpdatesMainFormCode
     {
+        //private bool _checkForUpdatesEnabled = false;
+        //private bool _showNoUpdateMessage = false;
+        //private System.Threading.Timer _timerCheckForUpdates;
         public void Mainform_Load()
         {
             //_timerCheckForUpdates = new System.Threading.Timer(new System.Threading.TimerCallback(_timerCheckForUpdates_Callback));

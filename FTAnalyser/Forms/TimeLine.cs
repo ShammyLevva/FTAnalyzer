@@ -358,10 +358,12 @@ namespace FTAnalyzer.Forms
                                 {
                                     latitude = res.Results[0].Geometry.Location.Lat;
                                     longitude = res.Results[0].Geometry.Location.Lng;
+                                    loc.GeocodeStatus = FactLocation.Geocode.FOUND;
                                     good++;
                                 }
                                 else
                                 {
+                                    loc.GeocodeStatus = FactLocation.Geocode.NOTFOUND;
                                     bad++;
                                 }
                                 if (inDatabase)
@@ -410,6 +412,7 @@ namespace FTAnalyzer.Forms
                     }
                 }
                 conn.Close();
+                FamilyTree.Instance.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
                 if(txtGoogleWait.Text.Substring(0,3).Equals("Max"))
                     MessageBox.Show("Finished Geocoding.\n" + txtGoogleWait.Text);
                 else
