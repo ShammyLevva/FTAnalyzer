@@ -924,7 +924,7 @@ namespace FTAnalyzer
                 if (tabCtrlLocations.SelectedTab.Text == "Tree View")
                     MessageBox.Show("Location selected isn't valid to show on the map.");
                 else
-                    MessageBox.Show("Please select a location to show on the map.");
+                    MessageBox.Show("Nothing selected. Please select a location to show on the map.");
             }
             return locType;
         }
