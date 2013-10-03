@@ -14,7 +14,7 @@ namespace FTAnalyzer
     public class FactLocation : IComparable<FactLocation>, IDisplayLocation
     {
 
-        public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, PARISH = 2, ADDRESS = 3, PLACE = 4;
+        public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, SUBREGION = 2, ADDRESS = 3, PLACE = 4;
         public enum Geocode { NOTSEARCHED = 0, FOUND = 1, NOTFOUND = 2, GEDCOM = 3 };
 
         private string location;
@@ -165,7 +165,7 @@ namespace FTAnalyzer
                 location.Insert(0, this.Region + ", ");
             if (level > REGION && (SubRegion.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
                 location.Insert(0, this.SubRegion + ", ");
-            if (level > PARISH && (Address.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
+            if (level > SUBREGION && (Address.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
                 location.Insert(0, fixNumerics ? FixNumerics(this.Address) : this.Address + ", ");
             if (level > ADDRESS && Place.Length > 0)
                 location.Insert(0, fixNumerics ? FixNumerics(this.Place) : this.Place + ", ");
@@ -250,7 +250,7 @@ namespace FTAnalyzer
                         else
                         {
                             SubRegion = location.Trim();
-                            Level = PARISH;
+                            Level = SUBREGION;
                         }
                     }
                     else
@@ -649,7 +649,7 @@ namespace FTAnalyzer
             {
                 case COUNTRY: return this.Country.ToUpper().CompareTo(s.ToUpper()) == 0;
                 case REGION: return this.Region.ToUpper().CompareTo(s.ToUpper()) == 0;
-                case PARISH: return this.SubRegion.ToUpper().CompareTo(s.ToUpper()) == 0;
+                case SUBREGION: return this.SubRegion.ToUpper().CompareTo(s.ToUpper()) == 0;
                 case ADDRESS: return this.Address.ToUpper().CompareTo(s.ToUpper()) == 0;
                 case PLACE: return this.Place.ToUpper().CompareTo(s.ToUpper()) == 0;
                 default: return false;
@@ -675,7 +675,7 @@ namespace FTAnalyzer
                 if (res == 0 && level > REGION)
                 {
                     res = this.SubRegion.CompareTo(that.SubRegion);
-                    if (res == 0 && level > PARISH)
+                    if (res == 0 && level > SUBREGION)
                     {
                         res = this.Address.CompareTo(that.Address);
                         if (res == 0 && level > ADDRESS)

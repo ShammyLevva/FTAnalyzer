@@ -484,7 +484,7 @@ namespace FTAnalyzer
             return families.Where(f => f.IsAtLocation(loc, level));
         }
 
-        public List<string> GetSurnamesAtLocation(FactLocation loc) { return GetSurnamesAtLocation(loc, FactLocation.PARISH); }
+        public List<string> GetSurnamesAtLocation(FactLocation loc) { return GetSurnamesAtLocation(loc, FactLocation.SUBREGION); }
         public List<string> GetSurnamesAtLocation(FactLocation loc, int level)
         {
             HashSet<string> result = new HashSet<string>();
@@ -953,7 +953,7 @@ namespace FTAnalyzer
 
         public SortableBindingList<IDisplayLocation> AllDisplaySubRegions
         {
-            get { return displayLocations[FactLocation.PARISH] == null ? GetDisplayLocations(FactLocation.PARISH) : displayLocations[FactLocation.PARISH]; }
+            get { return displayLocations[FactLocation.SUBREGION] == null ? GetDisplayLocations(FactLocation.SUBREGION) : displayLocations[FactLocation.SUBREGION]; }
 
         }
 
@@ -1369,7 +1369,7 @@ namespace FTAnalyzer
             }
             if (person.BirthLocation != null)
             {
-                string location = person.BirthLocation.GetLocation(FactLocation.PARISH).ToString();
+                string location = person.BirthLocation.GetLocation(FactLocation.SUBREGION).ToString();
                 query.Append("msbpn__ftp=" + HttpUtility.UrlEncode(location) + "&");
             }
             query.Append("uidh=2t2");
@@ -1653,7 +1653,7 @@ namespace FTAnalyzer
             }
             if (individual.BirthLocation != null)
             {
-                string location = individual.BirthLocation.GetLocation(FactLocation.PARISH).ToString();
+                string location = individual.BirthLocation.GetLocation(FactLocation.SUBREGION).ToString();
                 query.Append("msbpn__ftp=" + HttpUtility.UrlEncode(location) + "&");
             }
             query.Append("cpxt=1&uidh=6b2&cp=11");

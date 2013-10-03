@@ -82,7 +82,7 @@ namespace FTAnalyzer.Filters
                 {
                     case FactLocation.COUNTRY: return (l.Country.Length == 0);
                     case FactLocation.REGION: return (l.Region.Length == 0);
-                    case FactLocation.PARISH: return (l.SubRegion.Length == 0);
+                    case FactLocation.SUBREGION: return (l.SubRegion.Length == 0);
                     case FactLocation.ADDRESS: return (l.Address.Length == 0);
                     case FactLocation.PLACE: return (l.Place.Length == 0);
                     default: return true;

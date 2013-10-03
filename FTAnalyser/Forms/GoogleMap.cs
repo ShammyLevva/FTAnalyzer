@@ -108,7 +108,7 @@ namespace FTAnalyzer.Forms
             if (types.Contains(ADMIN3) || types.Contains(SUBLOCALITY))
                 return FactLocation.ADDRESS;
             if (types.Contains(ADMIN2) || types.Contains(NEIGHBOURHOOD) || types.Contains(LOCALITY))
-                return FactLocation.PARISH;
+                return FactLocation.SUBREGION;
             if (types.Contains(ADMIN1))
                 return FactLocation.REGION;
             if (types.Contains(COUNTRY))

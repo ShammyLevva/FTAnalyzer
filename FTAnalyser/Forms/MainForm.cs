@@ -359,7 +359,7 @@ namespace FTAnalyzer
             HourGlass(true);
             FactLocation loc = (FactLocation)dgSubRegions.CurrentRow.DataBoundItem;
             Forms.People frmInd = new Forms.People();
-            frmInd.SetLocation(loc, FactLocation.PARISH);
+            frmInd.SetLocation(loc, FactLocation.SUBREGION);
             DisposeDuplicateForms(frmInd);
             frmInd.Show();
             HourGlass(false);
@@ -910,13 +910,17 @@ namespace FTAnalyzer
                     loc = dgRegions.CurrentRow == null ? null : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
                     locType = FactLocation.REGION;
                     break;
-                case "Parishes":
+                case "SubRegions":
                     loc = dgSubRegions.CurrentRow == null ? null : (FactLocation)dgSubRegions.CurrentRow.DataBoundItem;
-                    locType = FactLocation.PARISH;
+                    locType = FactLocation.SUBREGION;
                     break;
                 case "Addresses":
                     loc = dgAddresses.CurrentRow == null ? null : (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
                     locType = FactLocation.ADDRESS;
+                    break;
+                case "Places":
+                    loc = dgPlaces.CurrentRow == null ? null : (FactLocation)dgPlaces.CurrentRow.DataBoundItem;
+                    locType = FactLocation.PLACE;
                     break;
             }
             if (loc == null)
