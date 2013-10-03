@@ -1746,7 +1746,7 @@ namespace FTAnalyzer
             {
                 SQLiteConnection conn = GetDatabaseConnection();
                 conn.Open();
-                SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, level, foundlevel, foundlocation from geocode where location = ?", conn);
+                SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, level, foundlevel, foundlocation, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw from geocode where location = ?", conn);
                 SQLiteParameter param = cmd.CreateParameter();
                 param.DbType = DbType.String;
                 cmd.Parameters.Add(param);
@@ -1771,6 +1771,10 @@ namespace FTAnalyzer
                             else
                                 loc.GeocodeStatus = FactLocation.Geocode.NOTFOUND;
                         }
+                        loc.ViewPort.NorthEast.Lat = (double)reader["viewport_x_ne"];
+                        loc.ViewPort.NorthEast.Lng = (double)reader["viewport_y_ne"];
+                        loc.ViewPort.SouthWest.Lat = (double)reader["viewport_x_sw"];
+                        loc.ViewPort.SouthWest.Lng = (double)reader["viewport_y_sw"];
                     }
                     reader.Close();
                 }
@@ -1837,8 +1841,8 @@ namespace FTAnalyzer
         {
             try
             {
-                Version v2_3 = new Version("2.3.0.0");
-                if (dbVersion < v2_3)
+                Version v2_3_0_1 = new Version("2.3.0.1");
+                if (dbVersion < v2_3_0_1)
                 {
                     // Version is less than 2.3 or none existent so copy v2.3 database from empty database
                     conn.Close();
@@ -1849,10 +1853,8 @@ namespace FTAnalyzer
                         File.Delete(filename);
                     }
                     File.Copy(Path.Combine(Application.StartupPath, @"Resources\Geocodes-Empty.s3db"), filename);
-                }
-                Version v2_3_0_1 = new Version("2.3.0.1");
-                if (dbVersion < v2_3_0_1)
-                {
+                    
+                    // Then apply v2.3.0.1 changes
                     conn = GetDatabaseConnection();
                     conn.Open();
                     SQLiteCommand cmd = new SQLiteCommand("alter table geocode add column viewport_x_ne real default 0.0", conn);

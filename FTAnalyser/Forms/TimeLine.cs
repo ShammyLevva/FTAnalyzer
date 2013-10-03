@@ -267,8 +267,8 @@ namespace FTAnalyzer.Forms
                 cmd.Parameters.Add(param);
                 cmd.Prepare();
 
-                SQLiteCommand insertCmd = new SQLiteCommand("insert into geocode (location, level, latitude, longitude, founddate, foundlocation, foundlevel) values(?,?,?,?,date('now'),?,?)", conn);
-                SQLiteCommand updateCmd = new SQLiteCommand("update geocode set level = ?, latitude = ?, longitude = ?, founddate = date('now'), foundlocation = ?, foundlevel = ? where location = ?", conn);
+                SQLiteCommand insertCmd = new SQLiteCommand("insert into geocode (location, level, latitude, longitude, founddate, foundlocation, foundlevel, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw) values(?,?,?,?,date('now'),?,?,?,?,?,?)", conn);
+                SQLiteCommand updateCmd = new SQLiteCommand("update geocode set level = ?, latitude = ?, longitude = ?, founddate = date('now'), foundlocation = ?, foundlevel = ? viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ? where location = ?", conn);
 
                 param = insertCmd.CreateParameter();
                 param.DbType = DbType.String;
@@ -293,6 +293,18 @@ namespace FTAnalyzer.Forms
                 param = insertCmd.CreateParameter();
                 param.DbType = DbType.Int32;
                 insertCmd.Parameters.Add(param);
+                param = insertCmd.CreateParameter();
+                param.DbType = DbType.Double;
+                insertCmd.Parameters.Add(param);
+                param = insertCmd.CreateParameter();
+                param.DbType = DbType.Double;
+                insertCmd.Parameters.Add(param);
+                param = insertCmd.CreateParameter();
+                param.DbType = DbType.Double;
+                insertCmd.Parameters.Add(param);
+                param = insertCmd.CreateParameter();
+                param.DbType = DbType.Double;
+                insertCmd.Parameters.Add(param);
 
                 param = updateCmd.CreateParameter();
                 param.DbType = DbType.Int32;
@@ -308,6 +320,18 @@ namespace FTAnalyzer.Forms
                 updateCmd.Parameters.Add(param);
                 param = updateCmd.CreateParameter();
                 param.DbType = DbType.Int32;
+                updateCmd.Parameters.Add(param);
+                param = updateCmd.CreateParameter();
+                param.DbType = DbType.Double;
+                updateCmd.Parameters.Add(param);
+                param = updateCmd.CreateParameter();
+                param.DbType = DbType.Double;
+                updateCmd.Parameters.Add(param);
+                param = updateCmd.CreateParameter();
+                param.DbType = DbType.Double;
+                updateCmd.Parameters.Add(param);
+                param = updateCmd.CreateParameter();
+                param.DbType = DbType.Double;
                 updateCmd.Parameters.Add(param);
                 param = updateCmd.CreateParameter();
                 param.DbType = DbType.String;
@@ -355,11 +379,13 @@ namespace FTAnalyzer.Forms
                                 double longitude = 0;
                                 int foundLevel = GoogleMap.GetFactLocation(res.Results[0].Types);
                                 string address = res.Results[0].ReturnAddress;
+                                GeoResponse.CResult.CGeometry.CViewPort viewport = res.Results[0].Geometry.ViewPort;
                                 if (foundLevel >= loc.Level)
                                 {
                                     latitude = res.Results[0].Geometry.Location.Lat;
                                     longitude = res.Results[0].Geometry.Location.Lng;
                                     loc.GeocodeStatus = FactLocation.Geocode.FOUND;
+                                    loc.ViewPort = viewport; 
                                     good++;
                                 }
                                 else
@@ -374,7 +400,11 @@ namespace FTAnalyzer.Forms
                                     updateCmd.Parameters[2].Value = longitude;
                                     updateCmd.Parameters[3].Value = address;
                                     updateCmd.Parameters[4].Value = foundLevel;
-                                    updateCmd.Parameters[5].Value = loc.ToString();
+                                    updateCmd.Parameters[5].Value = viewport.NorthEast.Lat;
+                                    updateCmd.Parameters[6].Value = viewport.NorthEast.Lng;
+                                    updateCmd.Parameters[7].Value = viewport.SouthWest.Lat;
+                                    updateCmd.Parameters[8].Value = viewport.SouthWest.Lng;
+                                    updateCmd.Parameters[9].Value = loc.ToString();
                                     updateCmd.ExecuteNonQuery();
                                 }
                                 else
@@ -385,12 +415,16 @@ namespace FTAnalyzer.Forms
                                     insertCmd.Parameters[3].Value = longitude;
                                     insertCmd.Parameters[4].Value = address;
                                     insertCmd.Parameters[5].Value = foundLevel;
+                                    insertCmd.Parameters[6].Value = viewport.NorthEast.Lat;
+                                    insertCmd.Parameters[7].Value = viewport.NorthEast.Lng;
+                                    insertCmd.Parameters[8].Value = viewport.SouthWest.Lat;
+                                    insertCmd.Parameters[9].Value = viewport.SouthWest.Lng;
                                     insertCmd.ExecuteNonQuery();
                                 }
                                 loc.Latitude = latitude;
                                 loc.Longitude = longitude;
                                 loc.GoogleLocation = address;
-                                loc.ViewPort = res.Results[0].Geometry.ViewPort;
+                                loc.ViewPort = viewport;
                             }
                             else
                             {
