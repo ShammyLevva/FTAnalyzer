@@ -943,7 +943,10 @@ namespace FTAnalyzer
         private SortableBindingList<IDisplayLocation> GetDisplayLocations(int level)
         {
             List<IDisplayLocation> result = new List<IDisplayLocation>();
-            foreach (FactLocation loc in FactLocation.AllLocations)
+            //copy to list so that any GetLocation(level) that creates a new location 
+            //won't cause an error due to collection changing
+            List<FactLocation> allLocations = FactLocation.AllLocations.ToList();
+            foreach (FactLocation loc in allLocations)
             {
                 FactLocation c = loc.GetLocation(level);
                 if (c.Country != string.Empty && !result.Contains(c))

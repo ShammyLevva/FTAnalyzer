@@ -5,6 +5,8 @@ using System.Text;
 using System.Collections;
 using NetTopologySuite.Geometries;
 using SharpMap;
+using GeoAPI.Geometries;
+using GeoAPI.CoordinateSystems.Transformations;
 
 namespace FTAnalyzer.Utilities
 {
@@ -14,27 +16,42 @@ namespace FTAnalyzer.Utilities
         private List<MapLocation> markers;
         private List<MapCluster> clusters;
         private int gridsize;
-        private int mincluster;
+        private int minClusterSize;
+        private Envelope box;
        
         public MarkerClusterer(Map map, List<MapLocation> markers)
         {
             this.map = map;
             this.markers = markers;
-            this.clusters = new List<MapCluster>(mincluster);
+            this.clusters = new List<MapCluster>(minClusterSize);
             this.gridsize = 60;
-            this.mincluster = 2;
+            this.minClusterSize = 2;
+            this.box = map.GetExtents();
         }
 
-        private double DistanceBetweenPoints(GeoResponse.CResult.CGeometry.CLocation p1, GeoResponse.CResult.CGeometry.CLocation p2)
+        private void FitMaptoMarkers()
+        {
+            foreach (MapLocation ml in markers)
+            {
+                if (!box.Covers(ml.Location.Longitude, ml.Location.Latitude))
+                    box.ExpandToInclude(ml.Location.Longitude, ml.Location.Latitude);
+            }
+            IMathTransform transform = MapTransforms.MathTransform;
+            box = new Envelope(transform.Transform(box.TopLeft()), transform.Transform(box.BottomRight()));
+            box.ExpandBy(this.map.PixelSize * 5);
+            this.map.ZoomToBox(box);
+        }
+
+        private double DistanceBetweenPoints(Point p1, Point p2)
         {
             if (p1 == null || p2 == null)
                 return 0;
 
             double R = 6371; // Radius of the Earth in km
-            double dLat = (p2.Lat - p1.Lat) * Math.PI / 180;
-            double dLon = (p2.Long - p1.Long) * Math.PI / 180;
+            double dLat = (p2.X - p1.X) * Math.PI / 180;
+            double dLon = (p2.Y - p1.Y) * Math.PI / 180;
             double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
-                       Math.Cos(p1.Lat * Math.PI / 180) * Math.Cos(p2.Lat * Math.PI / 180) *
+                       Math.Cos(p1.X * Math.PI / 180) * Math.Cos(p2.X * Math.PI / 180) *
                        Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
             double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
             double d = R * c;
@@ -45,13 +62,12 @@ namespace FTAnalyzer.Utilities
         {
             double distance = 40000; // Some large number
             MapCluster clusterToAddTo = null;
-            GeoResponse.CResult.CGeometry.CLocation pos = marker.GetPosition();
             foreach(MapCluster cluster in this.clusters) 
             {
-                GeoResponse.CResult.CGeometry.CLocation centre = cluster.GetPosition();
-                if (centre.Lat != 0 && centre.Long != 0) 
+                Point centre = cluster.Centre;
+                if (centre.X != 0 && centre.Y != 0) 
                 {
-                    double d = DistanceBetweenPoints(centre, marker.GetPosition());
+                    double d = DistanceBetweenPoints(centre, marker.Point);
                     if (d < distance)
                     {
                         distance = d;
@@ -65,9 +81,9 @@ namespace FTAnalyzer.Utilities
             }
             else
             {
-                var cluster = new Cluster(this);
-                cluster.addMarker(marker);
-                this.clusters_.push(cluster);
+                MapCluster cluster = new MapCluster(minClusterSize);
+                cluster.AddMarker(marker);
+                clusters.Add(cluster);
             }
         }
     }

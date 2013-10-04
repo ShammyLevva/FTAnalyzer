@@ -12,11 +12,8 @@ using System.Windows.Forms;
 using BruTile.Web;
 using FTAnalyzer.Events;
 using FTAnalyzer.Utilities;
-using GeoAPI.CoordinateSystems;
 using GeoAPI.CoordinateSystems.Transformations;
 using GeoAPI.Geometries;
-using ProjNet.CoordinateSystems;
-using ProjNet.CoordinateSystems.Transformations;
 using SharpMap.Data;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
@@ -34,27 +31,6 @@ namespace FTAnalyzer.Forms
         private bool formClosing;
         private FeatureDataTable factLocations;
         private VectorLayer factLocationLayer;
-
-        private static IProjectedCoordinateSystem GetEPSG900913(CoordinateSystemFactory csFact)
-        {
-            List<ProjectionParameter> parameters = new List<ProjectionParameter>();
-            parameters.Add(new ProjectionParameter("semi_major", 6378137.0));
-            parameters.Add(new ProjectionParameter("semi_minor", 6378137.0));
-            parameters.Add(new ProjectionParameter("latitude_of_origin", 0.0));
-            parameters.Add(new ProjectionParameter("central_meridian", 0.0));
-            parameters.Add(new ProjectionParameter("scale_factor", 1.0));
-            parameters.Add(new ProjectionParameter("false_easting", 0.0));
-            parameters.Add(new ProjectionParameter("false_northing", 0.0));
-            IProjection projection = csFact.CreateProjection("Google Mercator", "mercator_1sp", parameters);
-            IGeographicCoordinateSystem wgs84 = csFact.CreateGeographicCoordinateSystem(
-                "WGS 84", AngularUnit.Degrees, HorizontalDatum.WGS84, PrimeMeridian.Greenwich,
-                new AxisInfo("north", AxisOrientationEnum.North), new AxisInfo("east", AxisOrientationEnum.East)
-            );
-
-            IProjectedCoordinateSystem epsg900913 = csFact.CreateProjectedCoordinateSystem("Google Mercator", wgs84, projection, LinearUnit.Metre,
-              new AxisInfo("East", AxisOrientationEnum.East), new AxisInfo("North", AxisOrientationEnum.North));
-            return epsg900913;
-        }
 
         public TimeLine()
         {
@@ -116,17 +92,8 @@ namespace FTAnalyzer.Forms
 
             factLocationLayer = new VectorLayer("Locations");
             factLocationLayer.DataSource = factLocationGFP;
-
-            CoordinateTransformationFactory ctFact = new CoordinateTransformationFactory();
-            CoordinateSystemFactory csFact = new CoordinateSystemFactory();
-
-            factLocationLayer.CoordinateTransformation = ctFact.CreateFromCoordinateSystems(
-                GeographicCoordinateSystem.WGS84,
-                GetEPSG900913(csFact));
-
-            factLocationLayer.ReverseCoordinateTransformation = ctFact.CreateFromCoordinateSystems(
-                GetEPSG900913(csFact),
-                GeographicCoordinateSystem.WGS84);
+            factLocationLayer.CoordinateTransformation = MapTransforms.Transform();
+            factLocationLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
 
             Dictionary<int, IStyle> styles = new Dictionary<int, IStyle>();
             VectorStyle blood = new VectorStyle();
@@ -163,13 +130,8 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.Layers.Add(factLocationLayer);
 
             LabelLayer labelLayer = new LabelLayer("Label");
-             labelLayer.CoordinateTransformation = ctFact.CreateFromCoordinateSystems(
-                GeographicCoordinateSystem.WGS84,
-                GetEPSG900913(csFact));
-
-            labelLayer.ReverseCoordinateTransformation = ctFact.CreateFromCoordinateSystems(
-                GetEPSG900913(csFact),
-                GeographicCoordinateSystem.WGS84);
+            labelLayer.CoordinateTransformation = MapTransforms.Transform();
+            labelLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
             labelLayer.DataSource = factLocationGFP;
             labelLayer.Enabled = true;
             //Specifiy field that contains the label string.

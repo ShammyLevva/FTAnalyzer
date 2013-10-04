@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FTAnalyzer.Utilities;
+using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 
 namespace FTAnalyzer
 {
@@ -10,61 +12,56 @@ namespace FTAnalyzer
     {
         private List<MapLocation> cluster;
         private int minSize;
-        public GeoResponse.CResult.CGeometry.CLocation Centre { get; private set; }
+        public Point Centre { get; private set; }
+        public Envelope Bounds { get; private set; }
+        private IMultiPoint multiPoint;
 
         public MapCluster(int minSize)
         {
             this.cluster = new List<MapLocation>();
             this.Centre = null;
             this.minSize = minSize;
+            this.Bounds = new Envelope();
+            multiPoint = MultiPoint.Empty;
         }
 
         public bool AddMarker(MapLocation marker)
         {
             if (this.cluster.Contains(marker))
                 return false;
-
-            if (this.Centre == null)
-            {
-                this.Centre = marker.GetPosition();
-                CalculateBounds();
-            }
-            else
-            {
-                if (AverageCenter != null)
-                {
-                    int l = cluster.Count + 1;
-                    double lat = (Centre.Lat * (l - 1) + marker.GetPosition().Lat) / l;
-                    double lng = (Centre.Long * (l - 1) + marker.GetPosition().Long) / l;
-                    Centre.Lat = lat;
-                    Centre.Long = lng;
-                    CalculateBounds();
-                }
-            }
-
             cluster.Add(marker);
+
+            Point[] points = new Point[cluster.Count];
+            int index = 0;
+            foreach (MapLocation ml in cluster)
+                points[index++] = ml.Point;
+            multiPoint = MultiPoint.DefaultFactory.CreateMultiPoint(points);
+            Centre = multiPoint.Centroid as Point;
+            Bounds = multiPoint.Envelope as Envelope;
+
             if (cluster.Count < minSize)
-            {
-                // Min cluster size not reached so show the marker.
-                marker.setMap(this.map_);
+            {   // Min cluster size not reached so show the marker.
+                marker.DrawPoint = true;
             }
-
             if (cluster.Count == this.minSize)
-            {
-                // Hide the markers that were showing.
+            {   // Hide the markers that were showing.
                 foreach(MapLocation ml in cluster)
-                {
-                    ml.setMap(null);
-                }
+                    ml.DrawPoint = false;
             }
-
             if (cluster.Count >= this.minSize)
-            {
-                marker.setMap(null);
-            }
-
-            this.updateIcon();
+                marker.DrawPoint = false;
+            this.UpdateIcon();
             return true;
+        }
+
+        private void UpdateIcon()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsMarkerInClusterBounds(MapLocation marker)
+        {
+            return Bounds.Covers(marker.Point.X, marker.Point.Y);
         }
     }
 }
