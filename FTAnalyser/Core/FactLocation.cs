@@ -199,6 +199,7 @@ namespace FTAnalyzer
             this.Latitude = 0;
             this.Longitude = 0;
             this.GeocodeStatus = Geocode.NOTSEARCHED;
+            this.ViewPort = new GeoResponse.CResult.CGeometry.CViewPort();
         }
 
         private FactLocation(string location, string latitude, string longitude, Geocode status)

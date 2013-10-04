@@ -1844,7 +1844,7 @@ namespace FTAnalyzer
                 Version v2_3_0_1 = new Version("2.3.0.1");
                 if (dbVersion < v2_3_0_1)
                 {
-                    // Version is less than 2.3 or none existent so copy v2.3 database from empty database
+                    // Version is less than 2.3.0.1 or none existent so copy v2.3.0.1 database from empty database
                     conn.Close();
                     GC.Collect(); // needed to force a cleanup of connections prior to replacing the file.
                     String filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\Geocodes.s3db");
@@ -1854,20 +1854,20 @@ namespace FTAnalyzer
                     }
                     File.Copy(Path.Combine(Application.StartupPath, @"Resources\Geocodes-Empty.s3db"), filename);
                     
-                    // Then apply v2.3.0.1 changes
-                    conn = GetDatabaseConnection();
-                    conn.Open();
-                    SQLiteCommand cmd = new SQLiteCommand("alter table geocode add column viewport_x_ne real default 0.0", conn);
-                    cmd.ExecuteNonQuery();
-                    cmd = new SQLiteCommand("alter table geocode add column viewport_y_ne real default 0.0", conn);
-                    cmd.ExecuteNonQuery();
-                    cmd = new SQLiteCommand("alter table geocode add column viewport_s_sw real default 0.0", conn);
-                    cmd.ExecuteNonQuery();
-                    cmd = new SQLiteCommand("alter table geocode add column viewport_y_sw real default 0.0", conn);
-                    cmd.ExecuteNonQuery();
-                    cmd = new SQLiteCommand("update versions set Database = '2.3.0.1'", conn);
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
+                    // Then apply v2.3.0.2 changes
+                    //conn = GetDatabaseConnection();
+                    //conn.Open();
+                    //SQLiteCommand cmd = new SQLiteCommand("alter table geocode add column viewport_x_ne real default 0.0", conn);
+                    //cmd.ExecuteNonQuery();
+                    //cmd = new SQLiteCommand("alter table geocode add column viewport_y_ne real default 0.0", conn);
+                    //cmd.ExecuteNonQuery();
+                    //cmd = new SQLiteCommand("alter table geocode add column viewport_s_sw real default 0.0", conn);
+                    //cmd.ExecuteNonQuery();
+                    //cmd = new SQLiteCommand("alter table geocode add column viewport_y_sw real default 0.0", conn);
+                    //cmd.ExecuteNonQuery();
+                    //cmd = new SQLiteCommand("update versions set Database = '2.3.0.1'", conn);
+                    //cmd.ExecuteNonQuery();
+                    //conn.Close();
                 }
             }
             catch (Exception ex)

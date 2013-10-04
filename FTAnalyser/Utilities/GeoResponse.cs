@@ -48,6 +48,12 @@ namespace FTAnalyzer.Utilities
                     public CLocation SouthWest { get; set; }
                     [DataMember(Name = "northeast")]
                     public CLocation NorthEast { get; set; }
+
+                    public CViewPort()
+                    {
+                        this.NorthEast = new CLocation();
+                        this.SouthWest = new CLocation();
+                    }
                 }
             }
         }
