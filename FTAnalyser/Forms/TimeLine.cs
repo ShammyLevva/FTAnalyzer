@@ -4,11 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using FTAnalyzer.Filters;
 using System.Data.SQLite;
-using System.IO;
 using SharpMap.Layers;
 using BruTile.Web;
 using ProjNet.CoordinateSystems.Transformations;
@@ -260,86 +257,10 @@ namespace FTAnalyzer.Forms
             try
             {
                 GoogleMap.WaitingForGoogle += new GoogleMap.GoogleEventHandler(GoogleMap_WaitingForGoogle);
-                SQLiteConnection conn = ft.GetDatabaseConnection();
-                conn.Open();
-                SQLiteCommand cmd = new SQLiteCommand("select location from geocode where location = ?", conn);
-                SQLiteParameter param = cmd.CreateParameter();
-                param.DbType = DbType.String;
-                cmd.Parameters.Add(param);
-                cmd.Prepare();
-
-                SQLiteCommand insertCmd = new SQLiteCommand("insert into geocode (location, level, latitude, longitude, founddate, foundlocation, foundlevel, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw) values(?,?,?,?,date('now'),?,?,?,?,?,?)", conn);
-                SQLiteCommand updateCmd = new SQLiteCommand("update geocode set level = ?, latitude = ?, longitude = ?, founddate = date('now'), foundlocation = ?, foundlevel = ? viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ? where location = ?", conn);
-
-                param = insertCmd.CreateParameter();
-                param.DbType = DbType.String;
-                insertCmd.Parameters.Add(param);
-
-                param = insertCmd.CreateParameter();
-                param.DbType = DbType.Int32;
-                insertCmd.Parameters.Add(param);
-
-                param = insertCmd.CreateParameter();
-                param.DbType = DbType.Double;
-                insertCmd.Parameters.Add(param);
-
-                param = insertCmd.CreateParameter();
-                param.DbType = DbType.Double;
-                insertCmd.Parameters.Add(param);
-
-                param = insertCmd.CreateParameter();
-                param.DbType = DbType.String;
-                insertCmd.Parameters.Add(param);
-
-                param = insertCmd.CreateParameter();
-                param.DbType = DbType.Int32;
-                insertCmd.Parameters.Add(param);
-                param = insertCmd.CreateParameter();
-                param.DbType = DbType.Double;
-                insertCmd.Parameters.Add(param);
-                param = insertCmd.CreateParameter();
-                param.DbType = DbType.Double;
-                insertCmd.Parameters.Add(param);
-                param = insertCmd.CreateParameter();
-                param.DbType = DbType.Double;
-                insertCmd.Parameters.Add(param);
-                param = insertCmd.CreateParameter();
-                param.DbType = DbType.Double;
-                insertCmd.Parameters.Add(param);
-
-                param = updateCmd.CreateParameter();
-                param.DbType = DbType.Int32;
-                updateCmd.Parameters.Add(param);
-                param = updateCmd.CreateParameter();
-                param.DbType = DbType.Double;
-                updateCmd.Parameters.Add(param);
-                param = updateCmd.CreateParameter();
-                param.DbType = DbType.Double;
-                updateCmd.Parameters.Add(param);
-                param = updateCmd.CreateParameter();
-                param.DbType = DbType.String;
-                updateCmd.Parameters.Add(param);
-                param = updateCmd.CreateParameter();
-                param.DbType = DbType.Int32;
-                updateCmd.Parameters.Add(param);
-                param = updateCmd.CreateParameter();
-                param.DbType = DbType.Double;
-                updateCmd.Parameters.Add(param);
-                param = updateCmd.CreateParameter();
-                param.DbType = DbType.Double;
-                updateCmd.Parameters.Add(param);
-                param = updateCmd.CreateParameter();
-                param.DbType = DbType.Double;
-                updateCmd.Parameters.Add(param);
-                param = updateCmd.CreateParameter();
-                param.DbType = DbType.Double;
-                updateCmd.Parameters.Add(param);
-                param = updateCmd.CreateParameter();
-                param.DbType = DbType.String;
-                updateCmd.Parameters.Add(param);
-                
-                insertCmd.Prepare();
-                updateCmd.Prepare();
+                DatabaseHelper dbh = new DatabaseHelper();
+                SQLiteCommand cmd = dbh.GetLocation();
+                SQLiteCommand insertCmd = dbh.InsertGeocode();
+                SQLiteCommand updateCmd = dbh.UpdateGeocode();
 
                 int count = 0;
                 int good = 0;
@@ -448,7 +369,6 @@ namespace FTAnalyzer.Forms
                         break;
                     }
                 }
-                conn.Close();
                 FamilyTree.Instance.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
                 if(txtGoogleWait.Text.Length > 3 &&  txtGoogleWait.Text.Substring(0,3).Equals("Max"))
                     MessageBox.Show("Finished Geocoding.\n" + txtGoogleWait.Text, "Timeline Geocoding");
