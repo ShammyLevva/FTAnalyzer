@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer
 {
@@ -16,6 +17,14 @@ namespace FTAnalyzer
             this.Individual = ind;
             this.Location = loc;
             this.FactDate = date;
+        }
+
+        public GeoResponse.CResult.CGeometry.CLocation GetPosition()
+        {
+            GeoResponse.CResult.CGeometry.CLocation result = new GeoResponse.CResult.CGeometry.CLocation();
+            result.Lat = Location.Latitude;
+            result.Long = Location.Longitude;
+            return result;
         }
     }
 }
