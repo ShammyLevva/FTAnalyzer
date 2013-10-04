@@ -474,6 +474,7 @@
     <Compile Include="Utilities\GeoResponse.cs" />
     <Compile Include="Utilities\HttpUtility.cs" />
     <Compile Include="Utilities\ListtoDataTableConvertor.cs" />
+    <Compile Include="Utilities\MarkerClusterer.cs" />
     <Compile Include="Utilities\Printing.cs" />
     <Compile Include="Utilities\PropertyComparer.cs" />
     <Compile Include="Utilities\ScrollingRichTextBox.cs">
@@ -481,6 +482,7 @@
     </Compile>
     <Compile Include="Utilities\ShortDoubleMetaphone.cs" />
     <Compile Include="Utilities\SortableBindingList.cs" />
+    <Content Include="Utilities\MarkerClusterer.js" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
