@@ -62,6 +62,7 @@ namespace FTAnalyzer.Forms
         public TimeLine()
         {
             InitializeComponent();
+            mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             ft = FamilyTree.Instance;
             SetGeoCodedYearRange();
             SetupMap();
