@@ -1342,7 +1342,7 @@ namespace FTAnalyzer
 
         private void treeViewLocations_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (treeViewLocations.SelectedNode != e.Node)
+            if (treeViewLocations.SelectedNode != e.Node && e.Button.Equals(MouseButtons.Right))
                 treeViewLocations.SelectedNode = e.Node;
         }
 
