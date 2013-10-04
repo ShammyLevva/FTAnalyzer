@@ -391,7 +391,7 @@ namespace FTAnalyzer.Forms
             if (year.Length == 4 && result != 0)
             {
                 FactDate yearDate = new FactDate(year);
-                List<MapLocation> locations = ft.AllIndividualLocations(yearDate);
+                List<MapLocation> locations = ft.YearMapLocations(yearDate);
                 factLocations.Clear();
                 Envelope box = new Envelope();
                 bool updated = false;

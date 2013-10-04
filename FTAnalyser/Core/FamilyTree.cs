@@ -372,7 +372,7 @@ namespace FTAnalyzer
             }
         }
 
-        public List<MapLocation> AllIndividualLocations(FactDate when)
+        public List<MapLocation> YearMapLocations(FactDate when)
         {
             List<MapLocation> result = new List<MapLocation>();
             foreach (Individual ind in individuals)
@@ -382,6 +382,19 @@ namespace FTAnalyzer
                     FactLocation loc = ind.BestLocation(when);
                     if (loc.IsGeoCoded)
                         result.Add(new MapLocation(ind, loc, when));
+                    else
+                    {
+                        int startlevel = loc.Level -1;
+                        for (int level = startlevel; level > FactLocation.UNKNOWN; level--)
+                        {
+                            loc = loc.GetLocation(level);
+                            if (loc.IsGeoCoded)
+                            {
+                                result.Add(new MapLocation(ind, loc, when));
+                                break;
+                            }
+                        }
+                    }
                 }
             }
             return result;
