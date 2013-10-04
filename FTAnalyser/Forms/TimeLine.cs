@@ -353,13 +353,15 @@ namespace FTAnalyzer.Forms
             if (year.Length == 4 && result != 0)
             {
                 FactDate yearDate = new FactDate(year);
-                List<MapLocation> locations = ft.YearMapLocations(yearDate);
+                List<MapLocation> locations = FilterToRelationsIncluded(ft.YearMapLocations(yearDate));
                 factLocations.Clear();
                 Envelope box = new Envelope();
                 bool updated = false;
+
+                MarkerClusterer mc = new MarkerClusterer(mapBox1.Map, locations);
                 foreach (MapLocation loc in locations)
                 {
-                    if (RelationIncluded(loc.Individual.RelationType))
+                    if (loc.DrawPoint)
                     {
                         FeatureDataRow r = factLocations.NewRow();
                         r["Location"] = loc.Location;
@@ -384,6 +386,15 @@ namespace FTAnalyzer.Forms
                 }
                 mapBox1.Refresh();
             }
+        }
+
+        private List<MapLocation> FilterToRelationsIncluded(List<MapLocation> locations)
+        {
+            List<MapLocation> result = new List<MapLocation>();
+            foreach (MapLocation ml in locations)
+                if (RelationIncluded(ml.Individual.RelationType))
+                    result.Add(ml);
+            return result;
         }
 
         private bool RelationIncluded(int relationtype)

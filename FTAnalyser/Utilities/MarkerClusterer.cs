@@ -15,7 +15,7 @@ namespace FTAnalyzer.Utilities
         private SharpMap.Map map;
         private List<MapLocation> markers;
         private List<MapCluster> clusters;
-        private int gridsize;
+        private double gridsize;
         private int minClusterSize;
         private Envelope box;
        
@@ -24,11 +24,15 @@ namespace FTAnalyzer.Utilities
             this.map = map;
             this.markers = markers;
             this.clusters = new List<MapCluster>(minClusterSize);
-            this.gridsize = 60;
+            this.gridsize = map.PixelSize * 3;
             this.minClusterSize = 2;
             this.box = map.GetExtents();
+            this.box.ExpandBy(gridsize);
+            foreach (MapLocation ml in markers)
+                if (box.Covers(ml.Point.X, ml.Point.Y))
+                    AddToClosestCluster(ml);
         }
-
+        
         private void FitMaptoMarkers()
         {
             foreach (MapLocation ml in markers)
@@ -58,6 +62,11 @@ namespace FTAnalyzer.Utilities
             return d;
         }
 
+        public void CreateCluster()
+        {
+
+        }
+
         private void AddToClosestCluster(MapLocation marker) 
         {
             double distance = 40000; // Some large number
@@ -81,7 +90,7 @@ namespace FTAnalyzer.Utilities
             }
             else
             {
-                MapCluster cluster = new MapCluster(minClusterSize);
+                MapCluster cluster = new MapCluster(minClusterSize, gridsize);
                 cluster.AddMarker(marker);
                 clusters.Add(cluster);
             }

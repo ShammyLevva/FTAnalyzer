@@ -12,15 +12,17 @@ namespace FTAnalyzer
     {
         private List<MapLocation> cluster;
         private int minSize;
+        private double gridSize;
         public Point Centre { get; private set; }
         public Envelope Bounds { get; private set; }
         private IMultiPoint multiPoint;
 
-        public MapCluster(int minSize)
+        public MapCluster(int minSize, double gridSize)
         {
             this.cluster = new List<MapLocation>();
             this.Centre = null;
             this.minSize = minSize;
+            this.gridSize = gridSize;
             this.Bounds = new Envelope();
             multiPoint = MultiPoint.Empty;
         }
@@ -38,6 +40,7 @@ namespace FTAnalyzer
             multiPoint = MultiPoint.DefaultFactory.CreateMultiPoint(points);
             Centre = multiPoint.Centroid as Point;
             Bounds = multiPoint.Envelope as Envelope;
+            Bounds.ExpandBy(gridSize);
 
             if (cluster.Count < minSize)
             {   // Min cluster size not reached so show the marker.
@@ -56,7 +59,7 @@ namespace FTAnalyzer
 
         private void UpdateIcon()
         {
-            throw new NotImplementedException();
+            // TODO needs to update icon
         }
 
         public bool IsMarkerInClusterBounds(MapLocation marker)
