@@ -40,7 +40,7 @@ namespace FTAnalyzer
             SetSavePath();
             int pos = VERSION.IndexOf('-');
             string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
-            ft.CheckDatabaseVersion(new Version(ver));
+            DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
         }
 
         private string PublishVersion()

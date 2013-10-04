@@ -257,7 +257,7 @@ namespace FTAnalyzer.Forms
             try
             {
                 GoogleMap.WaitingForGoogle += new GoogleMap.GoogleEventHandler(GoogleMap_WaitingForGoogle);
-                DatabaseHelper dbh = new DatabaseHelper();
+                DatabaseHelper dbh = DatabaseHelper.Instance;
                 SQLiteCommand cmd = dbh.GetLocation();
                 SQLiteCommand insertCmd = dbh.InsertGeocode();
                 SQLiteCommand updateCmd = dbh.UpdateGeocode();
