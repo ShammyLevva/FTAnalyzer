@@ -413,7 +413,7 @@ namespace FTAnalyzer.Forms
                         }
                     }
                 }
-                if (updated)
+                if (updated && !mnuKeepZoom.Checked)
                 {
                     IMathTransform transform = factLocationLayer.CoordinateTransformation.MathTransform;
                     box = new Envelope(transform.Transform(box.TopLeft()), transform.Transform(box.BottomRight()));

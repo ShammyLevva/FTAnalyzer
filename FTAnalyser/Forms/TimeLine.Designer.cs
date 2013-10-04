@@ -50,6 +50,8 @@
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuKeepZoom = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -89,7 +91,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.geocodeToolStripMenuItem,
-            this.relationsToolStripMenuItem});
+            this.relationsToolStripMenuItem,
+            this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(920, 24);
@@ -262,6 +265,21 @@
             this.mapZoomToolStrip.TabIndex = 8;
             this.mapZoomToolStrip.Text = "MapZoomToolStrip";
             // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuKeepZoom});
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // mnuKeepZoom
+            // 
+            this.mnuKeepZoom.CheckOnClick = true;
+            this.mnuKeepZoom.Name = "mnuKeepZoom";
+            this.mnuKeepZoom.Size = new System.Drawing.Size(231, 22);
+            this.mnuKeepZoom.Text = "Keep Zoom on changing Year";
+            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -312,5 +330,7 @@
         private System.Windows.Forms.ToolStripMenuItem relatedByMarriageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unknownToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuRetryNotFound;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuKeepZoom;
     }
 }
