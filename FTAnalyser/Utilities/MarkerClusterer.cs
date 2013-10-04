@@ -12,7 +12,7 @@ namespace FTAnalyzer.Utilities
     {
         private SharpMap.Map map;
         private List<MapLocation> markers;
-        private List<MapLocation> clusters;
+        private List<MapCluster> clusters;
         private int gridsize;
         private int mincluster;
        
@@ -20,7 +20,7 @@ namespace FTAnalyzer.Utilities
         {
             this.map = map;
             this.markers = markers;
-            this.clusters = new List<MapLocation>();
+            this.clusters = new List<MapCluster>(mincluster);
             this.gridsize = 60;
             this.mincluster = 2;
         }
@@ -44,9 +44,9 @@ namespace FTAnalyzer.Utilities
         private void AddToClosestCluster(MapLocation marker) 
         {
             double distance = 40000; // Some large number
-            MapLocation clusterToAddTo = null;
+            MapCluster clusterToAddTo = null;
             GeoResponse.CResult.CGeometry.CLocation pos = marker.GetPosition();
-            foreach(MapLocation cluster in this.clusters) 
+            foreach(MapCluster cluster in this.clusters) 
             {
                 GeoResponse.CResult.CGeometry.CLocation centre = cluster.GetPosition();
                 if (centre.Lat != 0 && centre.Long != 0) 
@@ -59,7 +59,7 @@ namespace FTAnalyzer.Utilities
                     }
                 }
             }
-            if (clusterToAddTo && clusterToAddTo.IsMarkerInClusterBounds(marker))
+            if (clusterToAddTo != null && clusterToAddTo.IsMarkerInClusterBounds(marker))
             {
                 clusterToAddTo.AddMarker(marker);
             }
