@@ -32,6 +32,7 @@ namespace FTAnalyzer.Forms
         private FeatureDataTable factLocations;
         private VectorLayer factLocationLayer;
         private LabelLayer labelLayer;
+        private MarkerClusterer clusterer;
 
         public TimeLine()
         {
@@ -85,7 +86,9 @@ namespace FTAnalyzer.Forms
             factLocations.Columns.Add("Individual", typeof(Individual));
             factLocations.Columns.Add("Relation", typeof(int));
             factLocations.Columns.Add("Label", typeof(string));
-            GeometryFeatureProvider factLocationGFP = new GeometryFeatureProvider(factLocations);
+
+            clusterer = new MarkerClusterer(factLocations);
+            GeometryFeatureProvider factLocationGFP = new GeometryFeatureProvider(clusterer.FeatureDataTable);
 
             factLocationLayer = new VectorLayer("Locations");
             factLocationLayer.DataSource = factLocationGFP;
@@ -135,15 +138,15 @@ namespace FTAnalyzer.Forms
             labelLayer.LabelColumn = "Label";
             labelLayer.Style = new LabelStyle();
             labelLayer.Style.ForeColor = Color.Black;
-            labelLayer.Style.Font = new Font(FontFamily.GenericSerif, 11);
+            labelLayer.Style.Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold);
             labelLayer.Style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left;
             labelLayer.Style.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom;
             labelLayer.Style.CollisionDetection = true;
             //labelLayer.Style.CollisionBuffer = new SizeF(5, 5);
             labelLayer.LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection;
             //labelLayer.MultipartGeometryBehaviour = LabelLayer.MultipartGeometryBehaviourEnum.Largest;
-            labelLayer.Style.Offset = new PointF(3, 3);
-            labelLayer.Style.Halo = new Pen(Color.Yellow, 1);
+            labelLayer.Style.Offset = new PointF(0, 0);
+            labelLayer.Style.Halo = new Pen(Color.Yellow, 2);
             labelLayer.TextRenderingHint = TextRenderingHint.AntiAlias;
             labelLayer.SmoothingMode = SmoothingMode.AntiAlias;
             mapBox1.Map.Layers.Add(labelLayer);
@@ -363,20 +366,21 @@ namespace FTAnalyzer.Forms
                 FactDate yearDate = new FactDate(year);
                 List<MapLocation> locations = FilterToRelationsIncluded(ft.YearMapLocations(yearDate));
                 factLocations.Clear();
+                Envelope bbox = new Envelope();
                 foreach (MapLocation loc in locations)
                 {
-                    factLocations.AddRow(loc.GetFeatureDataRow(factLocations));
+                    FeatureDataRow row = loc.GetFeatureDataRow(factLocations);
+                    factLocations.AddRow(row);
+                    bbox.ExpandToInclude(row.Geometry.Coordinate);
                 }
-                MarkerClusterer mc = new MarkerClusterer(factLocations, 1.0 / 6.0);
-                GeometryFeatureProvider gfp = new GeometryFeatureProvider(mc.FeatureDataTable);
-                factLocationLayer.DataSource = gfp;
-                labelLayer.DataSource = gfp;
                 if (!mnuKeepZoom.Checked)
                 {
-                    Envelope env = factLocationLayer.Envelope;
-                    mapBox1.Map.ZoomToBox(env);
-                    env.ExpandBy(mapBox1.Map.PixelSize * 10);
-                    mapBox1.Map.ZoomToBox(env);
+                    IMathTransform transform = factLocationLayer.CoordinateTransformation.MathTransform;
+                    bbox = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
+                    mapBox1.Map.ZoomToBox(bbox);
+                    bbox.ExpandBy(mapBox1.Map.PixelSize * 10);
+                    mapBox1.Map.ZoomToBox(bbox);
+                    mapBox1_MapZoomChanged(mapBox1.Map.Zoom);
                 }
                 mapBox1.Refresh();
             }
@@ -504,5 +508,15 @@ namespace FTAnalyzer.Forms
             SetupMap();
             DisplayLocationsForYear(labValue.Text);
         }
+
+        private void mapBox1_MapZoomChanged(double zoom)
+        {
+            Console.WriteLine("Map zoom changed: " + zoom + " pixels:" + mapBox1.Map.PixelSize);
+            Envelope env = mapBox1.Map.Envelope;
+            IMathTransform transform = factLocationLayer.ReverseCoordinateTransformation.MathTransform;
+            env = new Envelope(transform.Transform(env.TopLeft()), transform.Transform(env.BottomRight()));
+            clusterer.Recluster(Math.Max(env.Width, env.Height) / 16.0);
+        }
+
     }
 }

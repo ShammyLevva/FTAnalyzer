@@ -17,14 +17,35 @@ namespace FTAnalyzer.Utilities
         private List<MapCluster> clusters;
         private double gridsize;
         private int minClusterSize;
+        private FeatureDataTable clusteredDataTable;
+        private FeatureDataTable sourceDataTable;
+        private bool reclustering;
 
-        public MarkerClusterer(FeatureDataTable source, double gridSize)
+        public MarkerClusterer(FeatureDataTable source)
         {
-            this.gridsize = gridSize;
+            this.sourceDataTable = source;
             this.minClusterSize = 2;
             this.clusters = new List<MapCluster>();
-            foreach (FeatureDataRow row in source)
-                AddToClosestCluster(row);
+            clusteredDataTable = new FeatureDataTable();
+            clusteredDataTable.Columns.Add("Features");
+            clusteredDataTable.Columns.Add("Count", typeof(int));
+            clusteredDataTable.Columns.Add("Label", typeof(string));
+            clusteredDataTable.Columns.Add("Relation", typeof(int));
+            reclustering = false;
+        }
+
+        public void Recluster(double gridSize)
+        {
+            if (!reclustering)
+            {
+                reclustering = true;
+                this.gridsize = gridSize;
+                this.clusters.Clear();
+                foreach (FeatureDataRow row in sourceDataTable)
+                    AddToClosestCluster(row);
+                BuildClusteredFeatureTable();
+                reclustering = false;
+            }
         }
 
         private void AddToClosestCluster(FeatureDataRow row)
@@ -56,26 +77,20 @@ namespace FTAnalyzer.Utilities
             }
         }
 
-        public FeatureDataTable FeatureDataTable
+        public FeatureDataTable FeatureDataTable { get { return clusteredDataTable; } }
+
+        private void BuildClusteredFeatureTable()
         {
-            get
+            clusteredDataTable.Clear();
+            foreach (MapCluster cluster in this.clusters)
             {
-                FeatureDataTable result = new FeatureDataTable();
-                result.Columns.Add("Features");
-                result.Columns.Add("Count", typeof(int));
-                result.Columns.Add("Label", typeof(string));
-                result.Columns.Add("Relation", typeof(int));
-                foreach (MapCluster cluster in this.clusters)
-                {
-                    FeatureDataRow row = result.NewRow();
-                    row.Geometry = cluster.Geometry;
-                    row["Features"] = cluster.Features;
-                    row["Count"] = cluster.Features.Count;
-                    row["Label"] = cluster.Features.Count.ToString();
-                    row["Relation"] = Individual.DIRECT;
-                    result.AddRow(row);
-                }
-                return result;
+                FeatureDataRow row = clusteredDataTable.NewRow();
+                row.Geometry = cluster.Geometry;
+                row["Features"] = cluster.Features;
+                row["Count"] = cluster.Features.Count;
+                row["Label"] = cluster.Features.Count.ToString();
+                row["Relation"] = Individual.DIRECT;
+                clusteredDataTable.AddRow(row);
             }
         }
 
