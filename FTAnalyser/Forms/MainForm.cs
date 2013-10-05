@@ -1035,6 +1035,11 @@ namespace FTAnalyzer
             Application.Exit();
         }
 
+        private void tabCtrlLocations_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            HourGlass(true); // turn on when tab selected so all the formatting gets hourglass
+        }
+
         private void tabCtrlLocations_SelectedIndexChanged(object sender, EventArgs e)
         {
             HourGlass(true);
