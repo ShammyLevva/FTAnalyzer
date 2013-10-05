@@ -514,7 +514,7 @@ namespace FTAnalyzer
                 Place = factPlace;
             }
             Comment = EnhancedTextInfo.ToTitleCase(Comment);
-            Location = FactLocation.GetLocation(Place, latitude, longitude, FactLocation.Geocode.NOTSEARCHED);
+            Location = FactLocation.GetLocation(Place, latitude, longitude, FactLocation.Geocode.NOT_SEARCHED);
         }
 
         private bool SetCertificatePresent()

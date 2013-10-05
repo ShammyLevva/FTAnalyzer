@@ -15,7 +15,7 @@ namespace FTAnalyzer
     {
 
         public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, SUBREGION = 2, ADDRESS = 3, PLACE = 4;
-        public enum Geocode { NOTSEARCHED = 0, FOUND = 1, NOTFOUND = 2, GEDCOM = 3 };
+        public enum Geocode { NOT_SEARCHED = 0, EXACT_MATCH = 1, PARTIAL_MATCH = 2, GEDCOM = 3, NO_MATCH = 4 };
 
         private string location;
         private string fixedLocation;
@@ -133,7 +133,7 @@ namespace FTAnalyzer
 
         public static FactLocation GetLocation(string place)
         {
-            return GetLocation(place, string.Empty, string.Empty, Geocode.NOTSEARCHED);
+            return GetLocation(place, string.Empty, string.Empty, Geocode.NOT_SEARCHED);
         }
 
         public static FactLocation GetLocation(string place, string latitude, string longitude, Geocode status)
@@ -182,7 +182,7 @@ namespace FTAnalyzer
         {
             locations = new Dictionary<string, FactLocation>();
             // set unknown location as found so it doesn't keep hassling to be searched
-            UNKNOWN_LOCATION = GetLocation(string.Empty, "0.0", "0.0", Geocode.FOUND);
+            UNKNOWN_LOCATION = GetLocation(string.Empty, "0.0", "0.0", Geocode.EXACT_MATCH);
         }
 
         private FactLocation()
@@ -199,7 +199,7 @@ namespace FTAnalyzer
             this.individuals = new List<Individual>();
             this.Latitude = 0;
             this.Longitude = 0;
-            this.GeocodeStatus = Geocode.NOTSEARCHED;
+            this.GeocodeStatus = Geocode.NOT_SEARCHED;
             this.ViewPort = new GeoResponse.CResult.CGeometry.CViewPort();
         }
 
@@ -210,7 +210,7 @@ namespace FTAnalyzer
             this.Latitude = double.TryParse(latitude, out temp) ? temp : 0;
             this.Longitude = double.TryParse(longitude, out temp) ? temp : 0;
             this.GeocodeStatus = status;
-            if (status == Geocode.NOTSEARCHED && (Latitude != 0 || Longitude != 0))
+            if (status == Geocode.NOT_SEARCHED && (Latitude != 0 || Longitude != 0))
                 status = Geocode.GEDCOM;
         }
 
@@ -523,14 +523,16 @@ namespace FTAnalyzer
             {
                 switch (GeocodeStatus)
                 {
-                    case Geocode.FOUND:
-                        return "Found";
-                    case Geocode.NOTFOUND:
-                        return "Not Found";
-                    case Geocode.NOTSEARCHED:
+                    case Geocode.EXACT_MATCH:
+                        return "Exact Match";
+                    case Geocode.PARTIAL_MATCH:
+                        return "Partial Match";
+                    case Geocode.NOT_SEARCHED:
                         return "Not Searched";
                     case Geocode.GEDCOM:
-                        return "GEDCOM data";
+                        return "GEDCOM/User data";
+                    case Geocode.NO_MATCH:
+                        return "No Match";
                     default:
                         return "Unknown";
                 }
@@ -597,7 +599,7 @@ namespace FTAnalyzer
         {
             get
             {
-                return GeocodeStatus == Geocode.FOUND ||
+                return GeocodeStatus == Geocode.EXACT_MATCH ||
                       (GeocodeStatus == Geocode.GEDCOM && (Longitude != 0 || Latitude != 0));
             }
         }

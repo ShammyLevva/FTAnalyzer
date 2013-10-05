@@ -79,6 +79,7 @@ namespace FTAnalyzer.Utilities
             try
             {
                 Version v2_3_0_1 = new Version("2.3.0.1");
+                Version v2_3_0_2 = new Version("2.3.0.2");
                 if (dbVersion < v2_3_0_1)
                 {
                     // Version is less than 2.3.0.1 or none existent so copy v2.3.0.1 database from empty database
@@ -90,16 +91,17 @@ namespace FTAnalyzer.Utilities
                         File.Delete(filename);
                     }
                     File.Copy(Path.Combine(Application.StartupPath, @"Resources\Geocodes-Empty.s3db"), filename);
-
-                    // Then apply v2.3.0.2 changes
-                    //SQLiteCommand cmd = new SQLiteCommand("alter table geocode add column viewport_x_ne real default 0.0", conn);
-                    //cmd.ExecuteNonQuery();
-                    //cmd = new SQLiteCommand("update versions set Database = '2.3.0.1'", conn);
-                    //cmd.ExecuteNonQuery();
-
                     // Now re-open upgraded database
                     OpenDatabaseConnection();
                 }
+                //if(dbVersion < v2_3_0_2)
+                //{
+                //    // Then apply v2.3.0.2 changes
+                //    SQLiteCommand cmd = new SQLiteCommand("update geocode set foundlevel = 2 where foundlevel =-1", conn);
+                //    cmd.ExecuteNonQuery();
+                //    cmd = new SQLiteCommand("update versions set Database = '2.3.0.2'", conn);
+                //    cmd.ExecuteNonQuery();
+                //}
             }
             catch (Exception ex)
             {

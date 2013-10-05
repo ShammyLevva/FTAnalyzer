@@ -1702,17 +1702,20 @@ namespace FTAnalyzer
                         child.Tag = location;
                         switch (location.GeocodeStatus)
                         {
-                            case FactLocation.Geocode.NOTSEARCHED:
+                            case FactLocation.Geocode.NOT_SEARCHED:
                                 child.ImageIndex = 0;
                                 break;
-                            case FactLocation.Geocode.FOUND:
+                            case FactLocation.Geocode.EXACT_MATCH:
                                 child.ImageIndex = 1;
                                 break;
-                            case FactLocation.Geocode.NOTFOUND:
+                            case FactLocation.Geocode.PARTIAL_MATCH:
                                 child.ImageIndex = 2;
                                 break;
                             case FactLocation.Geocode.GEDCOM:
                                 child.ImageIndex = 3;
+                                break;
+                            case FactLocation.Geocode.NO_MATCH:
+                                child.ImageIndex = 4;
                                 break;
                         }
                         // Set everything other than known countries to regular
@@ -1765,7 +1768,7 @@ namespace FTAnalyzer
 
                 foreach (FactLocation loc in FactLocation.AllLocations)
                 {
-                    loc.GeocodeStatus = FactLocation.Geocode.NOTSEARCHED;
+                    loc.GeocodeStatus = FactLocation.Geocode.NOT_SEARCHED;
                     cmd.Parameters[0].Value = loc.ToString();
                     SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
                     if (reader.Read() && loc.ToString().Length > 0)
@@ -1779,9 +1782,11 @@ namespace FTAnalyzer
                             long level = (long)reader["level"];
                             long foundLevel = (long)reader["foundlevel"];
                             if (foundLevel >= level)
-                                loc.GeocodeStatus = FactLocation.Geocode.FOUND;
+                                loc.GeocodeStatus = FactLocation.Geocode.EXACT_MATCH;
+                            else if (foundLevel == -2)
+                                loc.GeocodeStatus = FactLocation.Geocode.NO_MATCH;
                             else
-                                loc.GeocodeStatus = FactLocation.Geocode.NOTFOUND;
+                                loc.GeocodeStatus = FactLocation.Geocode.PARTIAL_MATCH;
                         }
                         loc.ViewPort.NorthEast.Lat = (double)reader["viewport_x_ne"];
                         loc.ViewPort.NorthEast.Long = (double)reader["viewport_y_ne"];
@@ -1793,9 +1798,10 @@ namespace FTAnalyzer
                 // write geocode results - ignore UNKNOWN entry
                 rtb.AppendText("Found " + (FactLocation.AllLocations.Count() - 1) + " locations in file.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM)) + " have geocoding from GEDCOM file.\n");
-                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.FOUND)) + " have geocoding from Google.\n");
-                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTFOUND)) + " could not be found on Google.\n");
-                rtb.AppendText("    " + (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTSEARCHED)) - 1) + " haven't been searched on Google.\n");
+                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.EXACT_MATCH)) + " have exact geocoding match from Google.\n");
+                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH)) + " have partial geocoding match from Google.\n"); 
+                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NO_MATCH)) + " could not be found on Google.\n");
+                rtb.AppendText("    " + (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1) + " haven't been searched on Google.\n");
             }
             catch (Exception ex)
             {

@@ -46,9 +46,9 @@ namespace FTAnalyzer.Forms
         private void SetLocationsText(bool showNeedsGeocoding)
         {
             int gedcom = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM));
-            int found = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.FOUND));
-            int notfound = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTFOUND));
-            int notsearched = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOTSEARCHED)) - 1);
+            int found = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.EXACT_MATCH));
+            int notfound = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH));
+            int notsearched = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1);
             int total = FactLocation.AllLocations.Count() -1;
 
             txtGoogleWait.Text = string.Empty;
@@ -257,25 +257,37 @@ namespace FTAnalyzer.Forms
                                     res = null;
                                 }
                             }
-                            if (res != null && res.Status == "OK" && res.Results.Length > 0)
+                            if (res != null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
                             {
                                 double latitude = 0;
                                 double longitude = 0;
-                                int foundLevel = GoogleMap.GetFactLocation(res.Results[0].Types);
-                                string address = res.Results[0].ReturnAddress;
-                                GeoResponse.CResult.CGeometry.CViewPort viewport = res.Results[0].Geometry.ViewPort;
-                                if (foundLevel >= loc.Level)
+                                int foundLevel = -1;
+                                string address = string.Empty;
+                                GeoResponse.CResult.CGeometry.CViewPort viewport = new GeoResponse.CResult.CGeometry.CViewPort();
+                                if (res.Status == "OK")
                                 {
-                                    latitude = res.Results[0].Geometry.Location.Lat;
-                                    longitude = res.Results[0].Geometry.Location.Long;
-                                    loc.GeocodeStatus = FactLocation.Geocode.FOUND;
-                                    loc.ViewPort = viewport; 
-                                    good++;
+                                    foundLevel = GoogleMap.GetFactLocation(res.Results[0].Types);
+                                    address = res.Results[0].ReturnAddress;
+                                    viewport = res.Results[0].Geometry.ViewPort;
+                                    if (foundLevel >= loc.Level)
+                                    {
+                                        latitude = res.Results[0].Geometry.Location.Lat;
+                                        longitude = res.Results[0].Geometry.Location.Long;
+                                        loc.GeocodeStatus = FactLocation.Geocode.EXACT_MATCH;
+                                        loc.ViewPort = viewport;
+                                        good++;
+                                    }
+                                    else
+                                    {
+                                        loc.GeocodeStatus = FactLocation.Geocode.PARTIAL_MATCH;
+                                        bad++;
+                                    }
                                 }
-                                else
+                                else if (res.Status == "ZERO_RESULTS")
                                 {
-                                    loc.GeocodeStatus = FactLocation.Geocode.NOTFOUND;
-                                    bad++;
+                                    skipped++;
+                                    foundLevel = -2;
+                                    loc.GeocodeStatus = FactLocation.Geocode.NO_MATCH;
                                 }
                                 if (inDatabase)
                                 {
@@ -320,7 +332,7 @@ namespace FTAnalyzer.Forms
                     }
                     count++;
                     int percent = (int)Math.Truncate((count-1) * 100.0 / total);
-                    string status = "Google found " + good + ", didn't find " + bad + ", Skip " + geocoded + " previously found, " + skipped + "  not found. Done " + (count-1) +
+                    string status = "Google found " + good + ", partial matched " + bad + ", Skip " + geocoded + " previously found, " + skipped + "  not found. Done " + (count-1) +
                             " of " + total + ".  ";
                     worker.ReportProgress(percent, status);
 
