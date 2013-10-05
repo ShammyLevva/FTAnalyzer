@@ -30,7 +30,7 @@ namespace FTAnalyzer.Utilities
             clusteredDataTable.Columns.Add("Features");
             clusteredDataTable.Columns.Add("Count", typeof(int));
             clusteredDataTable.Columns.Add("Label", typeof(string));
-            clusteredDataTable.Columns.Add("Relation", typeof(int));
+            clusteredDataTable.Columns.Add("Cluster", typeof(bool));
             reclustering = false;
         }
 
@@ -89,7 +89,7 @@ namespace FTAnalyzer.Utilities
                 row["Features"] = cluster.Features;
                 row["Count"] = cluster.Features.Count;
                 row["Label"] = cluster.Features.Count.ToString();
-                row["Relation"] = Individual.DIRECT;
+                row["Cluster"] = cluster.IsCluster;
                 clusteredDataTable.AddRow(row);
             }
         }

@@ -20,6 +20,7 @@ using SharpMap.Layers;
 using SharpMap.Rendering;
 using SharpMap.Rendering.Decoration;
 using SharpMap.Styles;
+using System.IO;
 
 namespace FTAnalyzer.Forms
 {
@@ -95,38 +96,46 @@ namespace FTAnalyzer.Forms
             factLocationLayer.CoordinateTransformation = MapTransforms.Transform();
             factLocationLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
 
-            Dictionary<int, IStyle> styles = new Dictionary<int, IStyle>();
-            VectorStyle blood = new VectorStyle();
-            blood.PointColor = new SolidBrush(Color.Red);
-            blood.PointSize = 10;
-            styles.Add(Individual.BLOOD, blood);
-            bloodRelativesToolStripMenuItem.ForeColor = Color.Red;
+            Dictionary<bool, IStyle> styles = new Dictionary<bool, IStyle>();
 
-            VectorStyle direct = new VectorStyle();
-            direct.PointColor = new SolidBrush(Color.ForestGreen);
-            direct.PointSize = 10;
-            styles.Add(Individual.DIRECT, direct);
+            VectorStyle feature = new VectorStyle();
+            feature.PointColor = new SolidBrush(Color.ForestGreen);
+            feature.PointSize = 20;
+            styles.Add(false, feature);
+
+            VectorStyle cluster = new VectorStyle();
+            cluster.PointColor = new SolidBrush(Color.ForestGreen);
+            cluster.PointSize = 20;
+            cluster.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\people35.png"));
+            styles.Add(true, feature);
+            
             directAncestorsToolStripMenuItem.ForeColor = Color.ForestGreen;
 
-            VectorStyle marriage = new VectorStyle();
-            marriage.PointColor = new SolidBrush(Color.Pink);
-            marriage.PointSize = 10;
-            styles.Add(Individual.MARRIAGE, marriage);
+            //VectorStyle blood = new VectorStyle();
+            //blood.PointColor = new SolidBrush(Color.Red);
+            //blood.PointSize = 10;
+            //styles.Add(Individual.BLOOD, blood);
+            bloodRelativesToolStripMenuItem.ForeColor = Color.Red;
+
+            //VectorStyle marriage = new VectorStyle();
+            //marriage.PointColor = new SolidBrush(Color.Pink);
+            //marriage.PointSize = 10;
+            //styles.Add(Individual.MARRIAGE, marriage);
             relatedByMarriageToolStripMenuItem.ForeColor = Color.Pink;
 
-            VectorStyle marriagedb = new VectorStyle();
-            marriagedb.PointColor = new SolidBrush(Color.MediumBlue);
-            marriagedb.PointSize = 10;
-            styles.Add(Individual.MARRIEDTODB, marriagedb);
+            //VectorStyle marriagedb = new VectorStyle();
+            //marriagedb.PointColor = new SolidBrush(Color.MediumBlue);
+            //marriagedb.PointSize = 10;
+            //styles.Add(Individual.MARRIEDTODB, marriagedb);
             marriedToDirectOrBloodToolStripMenuItem.ForeColor = Color.MediumBlue;
 
-            VectorStyle unknown = new VectorStyle();
-            unknown.PointColor = new SolidBrush(Color.Black);
-            unknown.PointSize = 10;
-            styles.Add(Individual.UNKNOWN, unknown);
+            //VectorStyle unknown = new VectorStyle();
+            //unknown.PointColor = new SolidBrush(Color.Black);
+            //unknown.PointSize = 10;
+            //styles.Add(Individual.UNKNOWN, unknown);
             unknownToolStripMenuItem.ForeColor = Color.Black;
 
-            factLocationLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<int>("Relation", styles, unknown);
+            factLocationLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<bool>("Cluster", styles, feature);
             mapBox1.Map.Layers.Add(factLocationLayer);
 
             labelLayer = new LabelLayer("Label");

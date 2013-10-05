@@ -26,16 +26,9 @@ namespace FTAnalyzer
             multiPoint = MultiPoint.Empty;
         }
 
-        public IGeometry Geometry
-        {
-            get
-            {
-                if (cluster.Count <= minSize) 
-                    return multiPoint.Centroid;
-                else
-                    return multiPoint.Envelope;
-            }
-        }
+        public IGeometry Geometry { get { return multiPoint.Centroid; } }
+
+        public bool IsCluster { get { return (cluster.Count >= minSize); } }
 
         public bool AddFeature(FeatureDataRow row)
         {
