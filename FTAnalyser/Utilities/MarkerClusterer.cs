@@ -8,91 +8,39 @@ using SharpMap;
 using GeoAPI.Geometries;
 using GeoAPI.CoordinateSystems.Transformations;
 using SharpMap.Data;
-using System.Data;
 
 namespace FTAnalyzer.Utilities
 {
-    public class MarkerClusterer : FeatureDataTable
+    public class MarkerClusterer
     {
-        private SharpMap.Map map;
-        private List<MapLocation> markers;
+
         private List<MapCluster> clusters;
         private double gridsize;
         private int minClusterSize;
-        private Envelope box;
+        private Envelope bounds;
 
-        public MarkerClusterer(FeatureDataTable source)
+        public MarkerClusterer(FeatureDataTable source, double gridSize, Envelope bounds)
         {
-            foreach (DataColumn column in source.Columns)
-                this.Columns.Add(new DataColumn(column.ColumnName, column.DataType));
-            foreach (FeatureDataRow row in source.Rows)
-            {
-                FeatureDataRow r = this.NewRow();
-                r.Geometry = row.Geometry;
-                foreach (DataColumn c in source.Columns)
-                    r[c.ColumnName] = row[c.ColumnName];
-                this.AddRow(r);
-            }
-        }
-
-        public MarkerClusterer(Map map, List<MapLocation> markers)
-        {
-            this.map = map;
-            this.markers = markers;
-            this.clusters = new List<MapCluster>(minClusterSize);
-            this.gridsize = map.PixelSize * 3;
+            this.gridsize = gridSize;
             this.minClusterSize = 2;
-            this.box = map.GetExtents();
-            this.box.ExpandBy(gridsize);
-            foreach (MapLocation ml in markers)
-                if (box.Covers(ml.Point.X, ml.Point.Y))
-                    AddToClosestCluster(ml);
-        }
-        
-        private void FitMaptoMarkers()
-        {
-            foreach (MapLocation ml in markers)
-            {
-                if (!box.Covers(ml.Location.Longitude, ml.Location.Latitude))
-                    box.ExpandToInclude(ml.Location.Longitude, ml.Location.Latitude);
-            }
-            IMathTransform transform = MapTransforms.MathTransform;
-            box = new Envelope(transform.Transform(box.TopLeft()), transform.Transform(box.BottomRight()));
-            box.ExpandBy(this.map.PixelSize * 5);
-            this.map.ZoomToBox(box);
+            this.clusters = new List<MapCluster>();
+            this.bounds = bounds;
+            this.bounds.ExpandBy(gridsize);
+            foreach (FeatureDataRow row in source)
+                if (bounds.Covers((Envelope)row.Geometry.Envelope))
+                    AddToClosestCluster(row);
         }
 
-        private double DistanceBetweenPoints(Point p1, Point p2)
-        {
-            if (p1 == null || p2 == null)
-                return 0;
-
-            double R = 6371; // Radius of the Earth in km
-            double dLat = (p2.X - p1.X) * Math.PI / 180;
-            double dLon = (p2.Y - p1.Y) * Math.PI / 180;
-            double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
-                       Math.Cos(p1.X * Math.PI / 180) * Math.Cos(p2.X * Math.PI / 180) *
-                       Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
-            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
-            double d = R * c;
-            return d;
-        }
-
-        public void CreateCluster()
-        {
-
-        }
-
-        private void AddToClosestCluster(MapLocation marker) 
+        private void AddToClosestCluster(FeatureDataRow row)
         {
             double distance = 40000; // Some large number
             MapCluster clusterToAddTo = null;
-            foreach(MapCluster cluster in this.clusters) 
+            foreach (MapCluster cluster in this.clusters)
             {
                 Point centre = cluster.Centre;
-                if (centre.X != 0 && centre.Y != 0) 
+                if (centre.X != 0 && centre.Y != 0)
                 {
-                    double d = DistanceBetweenPoints(centre, marker.Point);
+                    double d = centre.Distance(row.Geometry.Centroid);
                     if (d < distance)
                     {
                         distance = d;
@@ -100,16 +48,38 @@ namespace FTAnalyzer.Utilities
                     }
                 }
             }
-            if (clusterToAddTo != null && clusterToAddTo.IsMarkerInClusterBounds(marker))
+            if (clusterToAddTo != null && clusterToAddTo.IsFeatureInClusterBounds(row))
             {
-                clusterToAddTo.AddMarker(marker);
+                clusterToAddTo.AddFeature(row);
             }
             else
             {
                 MapCluster cluster = new MapCluster(minClusterSize, gridsize);
-                cluster.AddMarker(marker);
+                cluster.AddFeature(row);
                 clusters.Add(cluster);
             }
         }
+
+        public FeatureDataTable FeatureDataTable
+        {
+            get
+            {
+                FeatureDataTable result = new FeatureDataTable();
+                return result;
+            }
+        }
+
+        //private void FitMaptoMarkers()
+        //{
+        //    foreach (MapLocation ml in markers)
+        //    {
+        //        if (!bounds.Covers(ml.Location.Longitude, ml.Location.Latitude))
+        //            bounds.ExpandToInclude(ml.Location.Longitude, ml.Location.Latitude);
+        //    }
+        //    IMathTransform transform = MapTransforms.MathTransform;
+        //    bounds = new Envelope(transform.Transform(bounds.TopLeft()), transform.Transform(bounds.BottomRight()));
+        //    bounds.ExpandBy(this.map.PixelSize * 5);
+        //    this.map.ZoomToBox(bounds);
+        //}
     }
 }

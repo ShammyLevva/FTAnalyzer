@@ -356,7 +356,6 @@ namespace FTAnalyzer.Forms
 
         public void DisplayLocationsForYear(string year)
         {
-            Console.WriteLine("DisplayLocationsForYear" + year + ": starting");
             int result = 0;
             int.TryParse(year, out result);
             if (year.Length == 4 && result != 0)
@@ -368,20 +367,19 @@ namespace FTAnalyzer.Forms
                 {
                     factLocations.AddRow(loc.GetFeatureDataRow(factLocations));
                 }
-                //MarkerClusterer mc = new MarkerClusterer(factLocations);
-                GeometryFeatureProvider gfp = new GeometryFeatureProvider(factLocations);
+                MarkerClusterer mc = new MarkerClusterer(factLocations, mapBox1.Map.PixelSize * 5, factLocationLayer.Envelope);
+                GeometryFeatureProvider gfp = new GeometryFeatureProvider(mc.FeatureDataTable);
                 factLocationLayer.DataSource = gfp;
                 labelLayer.DataSource = gfp;
                 if (!mnuKeepZoom.Checked)
                 {
                     Envelope env = factLocationLayer.Envelope;
                     mapBox1.Map.ZoomToBox(env);
-                    env.ExpandBy(mapBox1.Map.PixelSize * 5);
+                    env.ExpandBy(mapBox1.Map.PixelSize * 10);
                     mapBox1.Map.ZoomToBox(env);
                 }
                 mapBox1.Refresh();
             }
-            Console.WriteLine("DisplayLocationsForYear" + year + ": ending");
         }
 
         private List<MapLocation> FilterToRelationsIncluded(List<MapLocation> locations)

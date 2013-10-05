@@ -5,12 +5,13 @@ using System.Text;
 using FTAnalyzer.Utilities;
 using GeoAPI.Geometries;
 using NetTopologySuite.Geometries;
+using SharpMap.Data;
 
 namespace FTAnalyzer
 {
     class MapCluster
     {
-        private List<MapLocation> cluster;
+        private List<FeatureDataRow> cluster;
         private int minSize;
         private double gridSize;
         public Point Centre { get; private set; }
@@ -19,7 +20,7 @@ namespace FTAnalyzer
 
         public MapCluster(int minSize, double gridSize)
         {
-            this.cluster = new List<MapLocation>();
+            this.cluster = new List<FeatureDataRow>();
             this.Centre = null;
             this.minSize = minSize;
             this.gridSize = gridSize;
@@ -27,44 +28,25 @@ namespace FTAnalyzer
             multiPoint = MultiPoint.Empty;
         }
 
-        public bool AddMarker(MapLocation marker)
+        public bool AddFeature(FeatureDataRow row)
         {
-            if (this.cluster.Contains(marker))
+            if (this.cluster.Contains(row))
                 return false;
-            cluster.Add(marker);
+            cluster.Add(row);
 
-            Point[] points = new Point[cluster.Count];
+            IPoint[] points = new IPoint[cluster.Count];
             int index = 0;
-            foreach (MapLocation ml in cluster)
-                points[index++] = ml.Point;
-            multiPoint = MultiPoint.DefaultFactory.CreateMultiPoint(points);
+            foreach (FeatureDataRow ml in cluster)
+                points[index++] = (IPoint)ml.Geometry;
+            multiPoint = new MultiPoint(points);
             Centre = multiPoint.Centroid as Point;
             Bounds = multiPoint.Envelope as Envelope;
-            Bounds.ExpandBy(gridSize);
-
-            if (cluster.Count < minSize)
-            {   // Min cluster size not reached so show the marker.
-                marker.DrawPoint = true;
-            }
-            if (cluster.Count == this.minSize)
-            {   // Hide the markers that were showing.
-                foreach(MapLocation ml in cluster)
-                    ml.DrawPoint = false;
-            }
-            if (cluster.Count >= this.minSize)
-                marker.DrawPoint = false;
-            this.UpdateIcon();
             return true;
         }
 
-        private void UpdateIcon()
+        public bool IsFeatureInClusterBounds(FeatureDataRow row)
         {
-            // TODO needs to update icon
-        }
-
-        public bool IsMarkerInClusterBounds(MapLocation marker)
-        {
-            return Bounds.Covers(marker.Point.X, marker.Point.Y);
+            return Bounds.Covers((Envelope)row.Geometry.Envelope);
         }
     }
 }
