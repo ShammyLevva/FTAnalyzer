@@ -31,6 +31,7 @@ namespace FTAnalyzer.Forms
         private bool formClosing;
         private FeatureDataTable factLocations;
         private VectorLayer factLocationLayer;
+        private LabelLayer labelLayer;
 
         public TimeLine(bool showNeedsGeocoding)
         {
@@ -129,7 +130,7 @@ namespace FTAnalyzer.Forms
             factLocationLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<int>("Relation", styles, unknown);
             mapBox1.Map.Layers.Add(factLocationLayer);
 
-            LabelLayer labelLayer = new LabelLayer("Label");
+            labelLayer = new LabelLayer("Label");
             labelLayer.CoordinateTransformation = MapTransforms.Transform();
             labelLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
             labelLayer.DataSource = factLocationGFP;
@@ -359,6 +360,7 @@ namespace FTAnalyzer.Forms
 
         public void DisplayLocationsForYear(string year)
         {
+            Console.WriteLine("DisplayLocationsForYear" + year + ": starting");
             int result = 0;
             int.TryParse(year, out result);
             if (year.Length == 4 && result != 0)
@@ -366,37 +368,24 @@ namespace FTAnalyzer.Forms
                 FactDate yearDate = new FactDate(year);
                 List<MapLocation> locations = FilterToRelationsIncluded(ft.YearMapLocations(yearDate));
                 factLocations.Clear();
-                Envelope box = new Envelope();
-                bool updated = false;
-
-                //MarkerClusterer mc = new MarkerClusterer(mapBox1.Map, locations);
                 foreach (MapLocation loc in locations)
                 {
-                    if (loc.DrawPoint)
-                    {
-                        FeatureDataRow r = factLocations.NewRow();
-                        r["Location"] = loc.Location;
-                        r["Individual"] = loc.Individual;
-                        r["Relation"] = loc.Individual.RelationType;
-                        r["Label"] = loc.Individual.Name + " at " + loc.Location;
-                        r.Geometry = new NetTopologySuite.Geometries.Point(loc.Location.Longitude, loc.Location.Latitude);
-                        factLocations.AddRow(r);
-                        if (!box.Covers(loc.Location.Longitude, loc.Location.Latitude))
-                        {
-                            updated = true;
-                            box.ExpandToInclude(loc.Location.Longitude, loc.Location.Latitude);
-                        }
-                    }
+                    factLocations.AddRow(loc.GetFeatureDataRow(factLocations));
                 }
-                if (updated && !mnuKeepZoom.Checked)
+                //MarkerClusterer mc = new MarkerClusterer(factLocations);
+                GeometryFeatureProvider gfp = new GeometryFeatureProvider(factLocations);
+                factLocationLayer.DataSource = gfp;
+                labelLayer.DataSource = gfp;
+                if (!mnuKeepZoom.Checked)
                 {
-                    IMathTransform transform = factLocationLayer.CoordinateTransformation.MathTransform;
-                    box = new Envelope(transform.Transform(box.TopLeft()), transform.Transform(box.BottomRight()));
-                    box.ExpandBy(mapBox1.Map.PixelSize * 5);
-                    mapBox1.Map.ZoomToBox(box);
+                    Envelope env = factLocationLayer.Envelope;
+                    mapBox1.Map.ZoomToBox(env);
+                    env.ExpandBy(mapBox1.Map.PixelSize * 5);
+                    mapBox1.Map.ZoomToBox(env);
                 }
                 mapBox1.Refresh();
             }
+            Console.WriteLine("DisplayLocationsForYear" + year + ": ending");
         }
 
         private List<MapLocation> FilterToRelationsIncluded(List<MapLocation> locations)

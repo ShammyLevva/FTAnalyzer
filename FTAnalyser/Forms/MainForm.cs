@@ -194,7 +194,7 @@ namespace FTAnalyzer
             {
                 this.Cursor = Cursors.Default;
             }
-            Application.DoEvents();
+            //Application.DoEvents();
         }
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)

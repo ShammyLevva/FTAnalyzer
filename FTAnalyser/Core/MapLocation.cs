@@ -1,4 +1,5 @@
 ﻿using NetTopologySuite.Geometries;
+using SharpMap.Data;
 
 namespace FTAnalyzer
 {
@@ -17,6 +18,17 @@ namespace FTAnalyzer
             this.FactDate = date;
             this.Point = new Point(Location.Latitude, Location.Longitude);
             this.DrawPoint = true;
+        }
+
+        public FeatureDataRow GetFeatureDataRow(FeatureDataTable table)
+        {
+            FeatureDataRow r = table.NewRow();
+            r["Location"] = Location;
+            r["Individual"] = Individual;
+            r["Relation"] = Individual.RelationType;
+            r["Label"] = Individual.Name + " at " + Location;
+            r.Geometry = new NetTopologySuite.Geometries.Point(Location.Longitude, Location.Latitude);
+            return r;
         }
     }
 }

@@ -7,10 +7,12 @@ using NetTopologySuite.Geometries;
 using SharpMap;
 using GeoAPI.Geometries;
 using GeoAPI.CoordinateSystems.Transformations;
+using SharpMap.Data;
+using System.Data;
 
 namespace FTAnalyzer.Utilities
 {
-    public class MarkerClusterer
+    public class MarkerClusterer : FeatureDataTable
     {
         private SharpMap.Map map;
         private List<MapLocation> markers;
@@ -18,7 +20,21 @@ namespace FTAnalyzer.Utilities
         private double gridsize;
         private int minClusterSize;
         private Envelope box;
-       
+
+        public MarkerClusterer(FeatureDataTable source)
+        {
+            foreach (DataColumn column in source.Columns)
+                this.Columns.Add(new DataColumn(column.ColumnName, column.DataType));
+            foreach (FeatureDataRow row in source.Rows)
+            {
+                FeatureDataRow r = this.NewRow();
+                r.Geometry = row.Geometry;
+                foreach (DataColumn c in source.Columns)
+                    r[c.ColumnName] = row[c.ColumnName];
+                this.AddRow(r);
+            }
+        }
+
         public MarkerClusterer(Map map, List<MapLocation> markers)
         {
             this.map = map;

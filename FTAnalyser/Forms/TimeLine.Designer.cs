@@ -43,6 +43,8 @@
             this.marriedToDirectOrBloodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.relatedByMarriageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unknownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuKeepZoom = new System.Windows.Forms.ToolStripMenuItem();
             this.tbYears = new System.Windows.Forms.TrackBar();
             this.labMin = new System.Windows.Forms.Label();
             this.labMax = new System.Windows.Forms.Label();
@@ -50,8 +52,6 @@
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuKeepZoom = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -181,6 +181,21 @@
             this.unknownToolStripMenuItem.Text = "Unknown";
             this.unknownToolStripMenuItem.CheckedChanged += new System.EventHandler(this.unknownToolStripMenuItem_CheckedChanged);
             // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuKeepZoom});
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // mnuKeepZoom
+            // 
+            this.mnuKeepZoom.CheckOnClick = true;
+            this.mnuKeepZoom.Name = "mnuKeepZoom";
+            this.mnuKeepZoom.Size = new System.Drawing.Size(231, 22);
+            this.mnuKeepZoom.Text = "Keep Zoom on changing Year";
+            // 
             // tbYears
             // 
             this.tbYears.Dock = System.Windows.Forms.DockStyle.Top;
@@ -227,21 +242,21 @@
             // mapBox1
             // 
             this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
-            this.mapBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.mapBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.mapBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapBox1.FineZoomFactor = 10D;
-            this.mapBox1.Location = new System.Drawing.Point(0, 75);
+            this.mapBox1.Location = new System.Drawing.Point(0, 94);
             this.mapBox1.MapQueryMode = SharpMap.Forms.MapBox.MapQueryType.LayerByIndex;
             this.mapBox1.Name = "mapBox1";
             this.mapBox1.PanOnClick = false;
+            this.mapBox1.PreviewMode = SharpMap.Forms.MapBox.PreviewModes.Fast;
             this.mapBox1.QueryGrowFactor = 5F;
             this.mapBox1.QueryLayerIndex = 0;
             this.mapBox1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.mapBox1.ShowProgressUpdate = false;
-            this.mapBox1.Size = new System.Drawing.Size(917, 484);
+            this.mapBox1.SetToolsNoneWhileRedrawing = true;
+            this.mapBox1.ShowProgressUpdate = true;
+            this.mapBox1.Size = new System.Drawing.Size(920, 468);
             this.mapBox1.TabIndex = 7;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
@@ -265,28 +280,13 @@
             this.mapZoomToolStrip.TabIndex = 8;
             this.mapZoomToolStrip.Text = "MapZoomToolStrip";
             // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuKeepZoom});
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.optionsToolStripMenuItem.Text = "Options";
-            // 
-            // mnuKeepZoom
-            // 
-            this.mnuKeepZoom.CheckOnClick = true;
-            this.mnuKeepZoom.Name = "mnuKeepZoom";
-            this.mnuKeepZoom.Size = new System.Drawing.Size(231, 22);
-            this.mnuKeepZoom.Text = "Keep Zoom on changing Year";
-            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(920, 584);
-            this.Controls.Add(this.mapZoomToolStrip);
             this.Controls.Add(this.mapBox1);
+            this.Controls.Add(this.mapZoomToolStrip);
             this.Controls.Add(this.labValue);
             this.Controls.Add(this.labMax);
             this.Controls.Add(this.labMin);
