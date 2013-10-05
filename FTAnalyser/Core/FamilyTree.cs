@@ -380,17 +380,18 @@ namespace FTAnalyzer
                 if (ind.IsAlive(when))
                 {
                     FactLocation loc = ind.BestLocation(when);
-                    if (loc.IsGeoCoded)
-                        result.Add(new MapLocation(ind, loc, when));
+                    MapLocation mapLoc = new MapLocation(ind, loc, when);
+                    if (loc.IsGeoCoded && !result.Contains(mapLoc))
+                        result.Add(mapLoc);
                     else
                     {
                         int startlevel = loc.Level -1;
                         for (int level = startlevel; level > FactLocation.UNKNOWN; level--)
                         {
                             loc = loc.GetLocation(level);
-                            if (loc.IsGeoCoded)
+                            if (loc.IsGeoCoded && !result.Contains(mapLoc))
                             {
-                                result.Add(new MapLocation(ind, loc, when));
+                                result.Add(mapLoc);
                                 break;
                             }
                         }
