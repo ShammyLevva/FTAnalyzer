@@ -86,6 +86,7 @@ namespace FTAnalyzer.Forms
             factLocations.Columns.Add("Location", typeof(FactLocation));
             factLocations.Columns.Add("Individual", typeof(Individual));
             factLocations.Columns.Add("Relation", typeof(int));
+            factLocations.Columns.Add("Cluster", typeof(string));
             factLocations.Columns.Add("Label", typeof(string));
 
             clusterer = new MarkerClusterer(factLocations);
@@ -96,18 +97,18 @@ namespace FTAnalyzer.Forms
             factLocationLayer.CoordinateTransformation = MapTransforms.Transform();
             factLocationLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
 
-            Dictionary<bool, IStyle> styles = new Dictionary<bool, IStyle>();
+            Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
 
             VectorStyle feature = new VectorStyle();
-            feature.PointColor = new SolidBrush(Color.ForestGreen);
+            feature.PointColor = new SolidBrush(Color.Red);
             feature.PointSize = 20;
-            styles.Add(false, feature);
+            styles.Add(MapCluster.FEATURE, feature);
 
             VectorStyle cluster = new VectorStyle();
             cluster.PointColor = new SolidBrush(Color.ForestGreen);
             cluster.PointSize = 20;
             cluster.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\people35.png"));
-            styles.Add(true, feature);
+            styles.Add(MapCluster.CLUSTER, feature);
             
             directAncestorsToolStripMenuItem.ForeColor = Color.ForestGreen;
 
@@ -129,13 +130,13 @@ namespace FTAnalyzer.Forms
             //styles.Add(Individual.MARRIEDTODB, marriagedb);
             marriedToDirectOrBloodToolStripMenuItem.ForeColor = Color.MediumBlue;
 
-            //VectorStyle unknown = new VectorStyle();
-            //unknown.PointColor = new SolidBrush(Color.Black);
-            //unknown.PointSize = 10;
-            //styles.Add(Individual.UNKNOWN, unknown);
+            VectorStyle unknown = new VectorStyle();
+            unknown.PointColor = new SolidBrush(Color.Black);
+            unknown.PointSize = 10;
+            styles.Add(MapCluster.UNKNOWN, unknown);
             unknownToolStripMenuItem.ForeColor = Color.Black;
 
-            factLocationLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<bool>("Cluster", styles, feature);
+            factLocationLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<string>("Cluster", styles, unknown);
             mapBox1.Map.Layers.Add(factLocationLayer);
 
             labelLayer = new LabelLayer("Label");
@@ -473,27 +474,7 @@ namespace FTAnalyzer.Forms
             txtGoogleWait.Text = args.Message;
         }
 
-        private void directAncestorsToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
-        {
-            DisplayLocationsForYear(labValue.Text);
-        }
-
-        private void bloodRelativesToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
-        {
-            DisplayLocationsForYear(labValue.Text);
-        }
-
-        private void marriedToDirectOrBloodToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
-        {
-            DisplayLocationsForYear(labValue.Text);
-        }
-
-        private void relatedByMarriageToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
-        {
-            DisplayLocationsForYear(labValue.Text);
-        }
-
-        private void unknownToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        private void Relations_CheckedChanged(object sender, EventArgs e)
         {
             DisplayLocationsForYear(labValue.Text);
         }

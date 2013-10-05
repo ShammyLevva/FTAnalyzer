@@ -143,7 +143,7 @@
             this.directAncestorsToolStripMenuItem.Name = "directAncestorsToolStripMenuItem";
             this.directAncestorsToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.directAncestorsToolStripMenuItem.Text = "Direct Ancestors";
-            this.directAncestorsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.directAncestorsToolStripMenuItem_CheckedChanged);
+            this.directAncestorsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.Relations_CheckedChanged);
             // 
             // bloodRelativesToolStripMenuItem
             // 
@@ -153,7 +153,7 @@
             this.bloodRelativesToolStripMenuItem.Name = "bloodRelativesToolStripMenuItem";
             this.bloodRelativesToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.bloodRelativesToolStripMenuItem.Text = "Blood Relatives";
-            this.bloodRelativesToolStripMenuItem.CheckedChanged += new System.EventHandler(this.bloodRelativesToolStripMenuItem_CheckedChanged);
+            this.bloodRelativesToolStripMenuItem.CheckedChanged += new System.EventHandler(this.Relations_CheckedChanged);
             // 
             // marriedToDirectOrBloodToolStripMenuItem
             // 
@@ -163,7 +163,7 @@
             this.marriedToDirectOrBloodToolStripMenuItem.Name = "marriedToDirectOrBloodToolStripMenuItem";
             this.marriedToDirectOrBloodToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.marriedToDirectOrBloodToolStripMenuItem.Text = "Married to Direct or Blood";
-            this.marriedToDirectOrBloodToolStripMenuItem.CheckedChanged += new System.EventHandler(this.marriedToDirectOrBloodToolStripMenuItem_CheckedChanged);
+            this.marriedToDirectOrBloodToolStripMenuItem.CheckedChanged += new System.EventHandler(this.Relations_CheckedChanged);
             // 
             // relatedByMarriageToolStripMenuItem
             // 
@@ -171,7 +171,7 @@
             this.relatedByMarriageToolStripMenuItem.Name = "relatedByMarriageToolStripMenuItem";
             this.relatedByMarriageToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.relatedByMarriageToolStripMenuItem.Text = "Related by Marriage";
-            this.relatedByMarriageToolStripMenuItem.CheckedChanged += new System.EventHandler(this.relatedByMarriageToolStripMenuItem_CheckedChanged);
+            this.relatedByMarriageToolStripMenuItem.CheckedChanged += new System.EventHandler(this.Relations_CheckedChanged);
             // 
             // unknownToolStripMenuItem
             // 
@@ -179,7 +179,7 @@
             this.unknownToolStripMenuItem.Name = "unknownToolStripMenuItem";
             this.unknownToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.unknownToolStripMenuItem.Text = "Unknown";
-            this.unknownToolStripMenuItem.CheckedChanged += new System.EventHandler(this.unknownToolStripMenuItem_CheckedChanged);
+            this.unknownToolStripMenuItem.CheckedChanged += new System.EventHandler(this.Relations_CheckedChanged);
             // 
             // optionsToolStripMenuItem
             // 

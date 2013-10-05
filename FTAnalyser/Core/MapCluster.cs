@@ -16,6 +16,8 @@ namespace FTAnalyzer
         private double gridSize;
         private IMultiPoint multiPoint;
 
+        public static readonly string CLUSTER = "Cluster", FEATURE = "Feature", UNKNOWN = "Unknown";
+
         public IList<FeatureDataRow> Features { get { return cluster; } }
 
         public MapCluster(int minSize, double gridSize)
@@ -28,7 +30,7 @@ namespace FTAnalyzer
 
         public IGeometry Geometry { get { return multiPoint.Centroid; } }
 
-        public bool IsCluster { get { return (cluster.Count >= minSize); } }
+        public string ClusterType { get { return (cluster.Count < minSize) ? FEATURE : CLUSTER; } }
 
         public bool AddFeature(FeatureDataRow row)
         {
