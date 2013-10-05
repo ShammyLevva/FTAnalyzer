@@ -297,6 +297,7 @@
             this.Name = "TimeLine";
             this.Text = "Timeline of Individuals";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TimeLine_FormClosing);
+            this.Load += new System.EventHandler(this.TimeLine_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);

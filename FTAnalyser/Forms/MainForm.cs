@@ -181,7 +181,10 @@ namespace FTAnalyzer
                         toDispose.Add(f);
             }
             foreach (Form f in toDispose)
+            {
+                GC.SuppressFinalize(f);
                 f.Dispose();
+            }
         }
 
         private void HourGlass(bool on)
@@ -1321,7 +1324,8 @@ namespace FTAnalyzer
         private void mnuShowTimeline_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            TimeLine tl = new TimeLine(true);
+            TimeLine tl = new TimeLine();
+            tl.SetLocationsText(true);
             tl.Show();
             DisposeDuplicateForms(tl);
             HourGlass(false);
@@ -1332,7 +1336,8 @@ namespace FTAnalyzer
             if (!ft.Geocoding) // don't geocode if another geocode session in progress
             {
                 HourGlass(true);
-                TimeLine tl = new TimeLine(false);
+                TimeLine tl = new TimeLine();
+                tl.SetLocationsText(false);
                 tl.Show();
                 DisposeDuplicateForms(tl);
                 tl.StartGeoCoding();

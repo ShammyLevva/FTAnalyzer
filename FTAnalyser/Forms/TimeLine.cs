@@ -33,18 +33,14 @@ namespace FTAnalyzer.Forms
         private VectorLayer factLocationLayer;
         private LabelLayer labelLayer;
 
-        public TimeLine(bool showNeedsGeocoding)
+        public TimeLine()
         {
             InitializeComponent();
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             ft = FamilyTree.Instance;
-            SetGeoCodedYearRange();
-            SetupMap();
-            DisplayLocationsForYear(labValue.Text);
-            SetLocationsText(showNeedsGeocoding);
         }
 
-        private void SetLocationsText(bool showNeedsGeocoding)
+        public void SetLocationsText(bool showNeedsGeocoding)
         {
             int gedcom = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM));
             int found = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.EXACT_MATCH));
@@ -502,6 +498,13 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.Center.X = p.X;
             mapBox1.Map.Center.Y = p.Y;
             mapBox1.Refresh();
+        }
+
+        private void TimeLine_Load(object sender, EventArgs e)
+        {
+            SetGeoCodedYearRange();
+            SetupMap();
+            DisplayLocationsForYear(labValue.Text);
         }
     }
 }
