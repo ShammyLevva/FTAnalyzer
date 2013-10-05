@@ -148,7 +148,7 @@ namespace FTAnalyzer.Forms
             labelLayer.SmoothingMode = SmoothingMode.AntiAlias;
             mapBox1.Map.Layers.Add(labelLayer);
 
-            mapBox1.Map.Decorations.Add(new GoogleMapsDisclaimer());
+            //mapBox1.Map.Decorations.Add(new GoogleMapsDisclaimer());
             mapBox1.Map.ZoomToExtents();
             mapBox1.Refresh();
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
