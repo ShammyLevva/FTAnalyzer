@@ -28,8 +28,6 @@ namespace FTAnalyzer
         private string filename;
         private Font boldFont;
 
-        private DataGridViewCellStyle knownCountryStyle = null;
-
         public MainForm()
         {
             InitializeComponent();
