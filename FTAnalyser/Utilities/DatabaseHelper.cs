@@ -31,7 +31,12 @@ namespace FTAnalyzer.Utilities
 
         public void Dispose()
         {
-            conn.Close();
+            try
+            {
+                if (conn != null) conn.Close();
+            }
+            catch (Exception) { }
+            conn = null;
         }
 
         private void OpenDatabaseConnection()
