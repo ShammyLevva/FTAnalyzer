@@ -26,6 +26,7 @@ namespace FTAnalyzer
         private FactDate censusDate = CensusDate.UKCENSUS1881;
         private bool stopProcessing = false;
         private string filename;
+        private Font boldFont;
 
         private DataGridViewCellStyle knownCountryStyle = null;
 
@@ -318,6 +319,7 @@ namespace FTAnalyzer
                     tsCountLabel.Text = "";
                     tsHintsLabel.Text = Properties.Messages.Hints_Location;
                     treeViewLocations.Nodes.Clear();
+                    boldFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Bold);
                     Application.DoEvents();
                     treeViewLocations.Nodes.AddRange(ft.GetAllLocationsTreeNodes(treeViewLocations.Font));
                     mnuPrint.Enabled = false;
@@ -1036,6 +1038,7 @@ namespace FTAnalyzer
         private void tabCtrlLocations_SelectedIndexChanged(object sender, EventArgs e)
         {
             HourGlass(true);
+            Application.DoEvents();
             TabPage current = tabCtrlLocations.SelectedTab;
             Control control = current.Controls[0];
             control.Focus();
@@ -1056,17 +1059,11 @@ namespace FTAnalyzer
 
         private void FormatCellLocations(DataGridView grid, DataGridViewCellFormattingEventArgs e)
         {
-            DataGridViewCellStyle style = grid.DefaultCellStyle;
             DataGridViewCell cell = grid.Rows[e.RowIndex].Cells[e.ColumnIndex];
             string country = (string)cell.Value;
             if (Countries.IsKnownCountry(country))
             {
-                if (knownCountryStyle == null)
-                {
-                    knownCountryStyle = style.Clone();
-                    knownCountryStyle.Font = new Font(style.Font, FontStyle.Bold);
-                }
-                e.CellStyle = knownCountryStyle;
+                e.CellStyle.Font = boldFont;
             }
         }
 
