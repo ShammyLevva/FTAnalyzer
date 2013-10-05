@@ -181,7 +181,8 @@ namespace FTAnalyzer
         public static void ResetLocations()
         {
             locations = new Dictionary<string, FactLocation>();
-            UNKNOWN_LOCATION = GetLocation(string.Empty);
+            // set unknown location as found so it doesn't keep hassling to be searched
+            UNKNOWN_LOCATION = GetLocation(string.Empty, "0.0", "0.0", Geocode.FOUND);
         }
 
         private FactLocation()

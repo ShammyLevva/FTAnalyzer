@@ -32,7 +32,7 @@ namespace FTAnalyzer.Forms
         private FeatureDataTable factLocations;
         private VectorLayer factLocationLayer;
 
-        public TimeLine()
+        public TimeLine(bool showNeedsGeocoding)
         {
             InitializeComponent();
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
@@ -40,10 +40,10 @@ namespace FTAnalyzer.Forms
             SetGeoCodedYearRange();
             SetupMap();
             DisplayLocationsForYear(labValue.Text);
-            SetLocationsText();
+            SetLocationsText(showNeedsGeocoding);
         }
 
-        private void SetLocationsText()
+        private void SetLocationsText(bool showNeedsGeocoding)
         {
             int gedcom = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM));
             int found = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.FOUND));
@@ -53,7 +53,7 @@ namespace FTAnalyzer.Forms
 
             txtGoogleWait.Text = string.Empty;
             txtLocations.Text = "Already Geocoded: " + (gedcom + found) + ", not found: " + notfound + " yet to search: " + notsearched + " of " + total + " locations";
-            if (notsearched > 0)
+            if (showNeedsGeocoding && notsearched > 0)
             {
                 DialogResult res = MessageBox.Show("You have " + notsearched + " places with no map location do you want to search Google for the locations?",
                                                    "Geocode Locations", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -317,9 +317,8 @@ namespace FTAnalyzer.Forms
                             }
                         }
                         reader.Close();
-                        count++;
                     }
-
+                    count++;
                     int percent = (int)Math.Truncate((count-1) * 100.0 / total);
                     string status = "Google found " + good + ", didn't find " + bad + ", Skip " + geocoded + " previously found, " + skipped + "  not found. Done " + (count-1) +
                             " of " + total + ".  ";
@@ -358,7 +357,7 @@ namespace FTAnalyzer.Forms
                 Envelope box = new Envelope();
                 bool updated = false;
 
-                MarkerClusterer mc = new MarkerClusterer(mapBox1.Map, locations);
+                //MarkerClusterer mc = new MarkerClusterer(mapBox1.Map, locations);
                 foreach (MapLocation loc in locations)
                 {
                     if (loc.DrawPoint)
