@@ -14,18 +14,27 @@ namespace FTAnalyzer
         private List<FeatureDataRow> cluster;
         private int minSize;
         private double gridSize;
-        public Point Centre { get; private set; }
-        public Envelope Bounds { get; private set; }
         private IMultiPoint multiPoint;
+
+        public IList<FeatureDataRow> Features { get { return cluster; } }
 
         public MapCluster(int minSize, double gridSize)
         {
             this.cluster = new List<FeatureDataRow>();
-            this.Centre = null;
             this.minSize = minSize;
             this.gridSize = gridSize;
-            this.Bounds = new Envelope();
             multiPoint = MultiPoint.Empty;
+        }
+
+        public IGeometry Geometry
+        {
+            get
+            {
+                if (cluster.Count <= minSize) 
+                    return multiPoint.Centroid;
+                else
+                    return multiPoint.Envelope;
+            }
         }
 
         public bool AddFeature(FeatureDataRow row)
@@ -39,14 +48,12 @@ namespace FTAnalyzer
             foreach (FeatureDataRow ml in cluster)
                 points[index++] = (IPoint)ml.Geometry;
             multiPoint = new MultiPoint(points);
-            Centre = multiPoint.Centroid as Point;
-            Bounds = multiPoint.Envelope as Envelope;
             return true;
         }
 
         public bool IsFeatureInClusterBounds(FeatureDataRow row)
         {
-            return Bounds.Covers((Envelope)row.Geometry.Envelope);
+            return multiPoint.Distance(row.Geometry) <= gridSize;
         }
     }
 }

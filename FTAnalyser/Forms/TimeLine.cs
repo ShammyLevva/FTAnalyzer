@@ -46,7 +46,7 @@ namespace FTAnalyzer.Forms
             int found = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.EXACT_MATCH));
             int notfound = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH));
             int notsearched = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1);
-            int total = FactLocation.AllLocations.Count() -1;
+            int total = FactLocation.AllLocations.Count() - 1;
 
             txtGoogleWait.Text = string.Empty;
             txtLocations.Text = "Already Geocoded: " + (gedcom + found) + ", not found: " + notfound + " yet to search: " + notsearched + " of " + total + " locations";
@@ -226,7 +226,7 @@ namespace FTAnalyzer.Forms
                 int bad = 0;
                 int geocoded = 0;
                 int skipped = 0;
-                int total = FactLocation.AllLocations.Count() -1;
+                int total = FactLocation.AllLocations.Count() - 1;
                 GoogleMap.ThreadCancelled = false;
 
                 foreach (FactLocation loc in FactLocation.AllLocations)
@@ -242,7 +242,7 @@ namespace FTAnalyzer.Forms
                         SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
                         bool inDatabase = reader.Read();
                         if (loc.ToString().Length > 0)
-                        {   
+                        {
                             GeoResponse res = null;
                             if (!(!mnuRetryNotFound.Checked && inDatabase))
                             {
@@ -328,8 +328,8 @@ namespace FTAnalyzer.Forms
                         reader.Close();
                     }
                     count++;
-                    int percent = (int)Math.Truncate((count-1) * 100.0 / total);
-                    string status = "Google found " + good + ", partial matched " + bad + ", Skip " + geocoded + " previously found, " + skipped + "  not found. Done " + (count-1) +
+                    int percent = (int)Math.Truncate((count - 1) * 100.0 / total);
+                    string status = "Google found " + good + ", partial matched " + bad + ", Skip " + geocoded + " previously found, " + skipped + "  not found. Done " + (count - 1) +
                             " of " + total + ".  ";
                     worker.ReportProgress(percent, status);
 
@@ -340,7 +340,7 @@ namespace FTAnalyzer.Forms
                     }
                 }
                 FamilyTree.Instance.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
-                if(txtGoogleWait.Text.Length > 3 &&  txtGoogleWait.Text.Substring(0,3).Equals("Max"))
+                if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text.Substring(0, 3).Equals("Max"))
                     MessageBox.Show("Finished Geocoding.\n" + txtGoogleWait.Text, "Timeline Geocoding");
                 else
                     MessageBox.Show("Finished Geocoding.", "Timeline Geocoding");
@@ -367,7 +367,7 @@ namespace FTAnalyzer.Forms
                 {
                     factLocations.AddRow(loc.GetFeatureDataRow(factLocations));
                 }
-                MarkerClusterer mc = new MarkerClusterer(factLocations, mapBox1.Map.PixelSize * 5, factLocationLayer.Envelope);
+                MarkerClusterer mc = new MarkerClusterer(factLocations, 1.0 / 6.0);
                 GeometryFeatureProvider gfp = new GeometryFeatureProvider(mc.FeatureDataTable);
                 factLocationLayer.DataSource = gfp;
                 labelLayer.DataSource = gfp;
@@ -491,7 +491,7 @@ namespace FTAnalyzer.Forms
                 mapBox1.Map.Zoom -= mapBox1.Map.Zoom * 0.3;
             else if (e.Button == MouseButtons.Right)
                 mapBox1.Map.Zoom += mapBox1.Map.Zoom * 0.3;
-            
+
             Coordinate p = mapBox1.Map.ImageToWorld(new PointF(e.X, e.Y));
             mapBox1.Map.Center.X = p.X;
             mapBox1.Map.Center.Y = p.Y;

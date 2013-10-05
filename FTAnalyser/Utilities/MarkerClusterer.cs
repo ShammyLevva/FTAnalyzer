@@ -17,27 +17,23 @@ namespace FTAnalyzer.Utilities
         private List<MapCluster> clusters;
         private double gridsize;
         private int minClusterSize;
-        private Envelope bounds;
 
-        public MarkerClusterer(FeatureDataTable source, double gridSize, Envelope bounds)
+        public MarkerClusterer(FeatureDataTable source, double gridSize)
         {
             this.gridsize = gridSize;
             this.minClusterSize = 2;
             this.clusters = new List<MapCluster>();
-            this.bounds = bounds;
-            this.bounds.ExpandBy(gridsize);
             foreach (FeatureDataRow row in source)
-                if (bounds.Covers((Envelope)row.Geometry.Envelope))
-                    AddToClosestCluster(row);
+                AddToClosestCluster(row);
         }
 
         private void AddToClosestCluster(FeatureDataRow row)
         {
-            double distance = 40000; // Some large number
+            double distance = double.MaxValue;
             MapCluster clusterToAddTo = null;
             foreach (MapCluster cluster in this.clusters)
             {
-                Point centre = cluster.Centre;
+                IPoint centre = cluster.Geometry.Centroid;
                 if (centre.X != 0 && centre.Y != 0)
                 {
                     double d = centre.Distance(row.Geometry.Centroid);
@@ -65,6 +61,20 @@ namespace FTAnalyzer.Utilities
             get
             {
                 FeatureDataTable result = new FeatureDataTable();
+                result.Columns.Add("Features");
+                result.Columns.Add("Count", typeof(int));
+                result.Columns.Add("Label", typeof(string));
+                result.Columns.Add("Relation", typeof(int));
+                foreach (MapCluster cluster in this.clusters)
+                {
+                    FeatureDataRow row = result.NewRow();
+                    row.Geometry = cluster.Geometry;
+                    row["Features"] = cluster.Features;
+                    row["Count"] = cluster.Features.Count;
+                    row["Label"] = cluster.Features.Count.ToString();
+                    row["Relation"] = Individual.DIRECT;
+                    result.AddRow(row);
+                }
                 return result;
             }
         }
