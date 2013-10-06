@@ -39,6 +39,9 @@ namespace FTAnalyzer.Mapping
         public string TypeOfFact { get { return Fact.GetFactTypeDescription(Fact.FactType); } }
 
         public Age AgeAtFact { get { return Individual == null ? null : Individual.GetAge(year); } }
+
+        public string Relation { get { return Individual.Relation; } }
+        
     }
 }
 

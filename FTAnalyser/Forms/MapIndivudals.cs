@@ -21,7 +21,7 @@ namespace FTAnalyzer
         private ReportFormHelper reportFormHelper;
         private SortableBindingList<MapLocation> locations;
 
-        public MapIndividuals(List<MapLocation> locations)
+        public MapIndividuals(List<MapLocation> locations, string year)
         {
             InitializeComponent();
             this.locations = new SortableBindingList<MapLocation>(locations);
@@ -32,7 +32,8 @@ namespace FTAnalyzer
             reportFormHelper.LoadColumnLayout("MapIndividualColumns.xml");
             tsRecords.Text = locations.Count + " Records";
             MapLocation mostCommon = locations.MostCommon();
-            this.Text = locations.Count > 1 ? mostCommon.Location.ToString() : "Centred near " + mostCommon.Location.ToString();
+            string titleText = mostCommon.Location.ToString() + " in " + year;
+            this.Text = locations.Count < 2 ? titleText : "Centred near " + titleText;
         }
 
         private void ResetTable()

@@ -566,7 +566,7 @@ namespace FTAnalyzer.Forms
                     locations.Add((MapLocation)feature["MapLocation"]);
                 }
             }
-            MapIndividuals ind = new MapIndividuals(locations);
+            MapIndividuals ind = new MapIndividuals(locations, labValue.Text);
             ind.Show();
         }
 
