@@ -182,7 +182,7 @@ namespace FTAnalyzer
         {
             locations = new Dictionary<string, FactLocation>();
             // set unknown location as found so it doesn't keep hassling to be searched
-            UNKNOWN_LOCATION = GetLocation(string.Empty, "0.0", "0.0", Geocode.EXACT_MATCH);
+            UNKNOWN_LOCATION = GetLocation(string.Empty, "0.0", "0.0", Geocode.NO_MATCH);
         }
 
         private FactLocation()
@@ -599,8 +599,12 @@ namespace FTAnalyzer
         {
             get
             {
-                return GeocodeStatus == Geocode.EXACT_MATCH ||
-                      (GeocodeStatus == Geocode.GEDCOM && (Longitude != 0 || Latitude != 0));
+                bool includePartials = false;
+                if (Longitude == 0.0 && Latitude == 0.0)
+                    return false;
+                if (includePartials && GeocodeStatus == Geocode.PARTIAL_MATCH)
+                    return true;
+                return GeocodeStatus == Geocode.EXACT_MATCH || GeocodeStatus == Geocode.GEDCOM;
             }
         }
 
