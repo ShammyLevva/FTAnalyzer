@@ -193,9 +193,6 @@
     <Compile Include="Core\FactImage.cs" />
     <Compile Include="Core\FactSource.cs" />
     <Compile Include="Core\FamilySearch.cs" />
-    <Compile Include="Mapping\LocationFeatureDataTable.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Mapping\MapCluster.cs" />
     <Compile Include="Mapping\MapLocation.cs" />
     <Compile Include="Core\Statistics.cs" />
