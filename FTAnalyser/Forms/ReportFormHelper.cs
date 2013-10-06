@@ -11,7 +11,7 @@ using System.Data;
 using System.IO;
 using System.ComponentModel;
 
-namespace FTAnalyzer.Forms
+namespace FTAnalyzer
 {
     class ReportFormHelper
     {

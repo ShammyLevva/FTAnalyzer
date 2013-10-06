@@ -1,4 +1,4 @@
-﻿namespace FTAnalyzer.Forms
+﻿namespace FTAnalyzer
 {
     partial class MapIndividuals
     {
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Facts));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MapIndividuals));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.mnuSaveColumnLayout = new System.Windows.Forms.ToolStripButton();
@@ -38,17 +38,18 @@
             this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
-            this.dgFacts = new System.Windows.Forms.DataGridView();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.dgIndividuals = new System.Windows.Forms.DataGridView();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeOfFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AgeAtFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,7 +62,8 @@
             this.printToolStripButton,
             this.printPreviewToolStripButton,
             this.toolStripSeparator,
-            this.mnuExportToExcel});
+            this.mnuExportToExcel,
+            this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(857, 25);
@@ -128,17 +130,26 @@
             this.mnuExportToExcel.Text = "Export to Excel";
             this.mnuExportToExcel.Click += new System.EventHandler(this.mnuExportToExcel_Click);
             // 
-            // dgFacts
+            // toolStripButton1
             // 
-            this.dgFacts.AllowUserToAddRows = false;
-            this.dgFacts.AllowUserToDeleteRows = false;
-            this.dgFacts.AllowUserToOrderColumns = true;
-            this.dgFacts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgFacts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgFacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
+            // 
+            // dgIndividuals
+            // 
+            this.dgIndividuals.AllowUserToAddRows = false;
+            this.dgIndividuals.AllowUserToDeleteRows = false;
+            this.dgIndividuals.AllowUserToOrderColumns = true;
+            this.dgIndividuals.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgIndividuals.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgIndividuals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FactIcon,
             this.FactLocation,
             this.FactName,
@@ -152,32 +163,16 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgFacts.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgFacts.Location = new System.Drawing.Point(0, 25);
-            this.dgFacts.Name = "dgFacts";
-            this.dgFacts.ReadOnly = true;
-            this.dgFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgFacts.ShowEditingIcon = false;
-            this.dgFacts.Size = new System.Drawing.Size(857, 337);
-            this.dgFacts.TabIndex = 2;
-            this.dgFacts.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgFacts_CellFormatting);
-            this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgFacts_CellToolTipTextNeeded);
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsRecords});
-            this.statusStrip.Location = new System.Drawing.Point(0, 365);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(857, 22);
-            this.statusStrip.TabIndex = 3;
-            this.statusStrip.Text = "statusStrip1";
-            // 
-            // tsRecords
-            // 
-            this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(118, 17);
-            this.tsRecords.Text = "toolStripStatusLabel1";
+            this.dgIndividuals.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgIndividuals.Location = new System.Drawing.Point(0, 25);
+            this.dgIndividuals.Name = "dgIndividuals";
+            this.dgIndividuals.ReadOnly = true;
+            this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgIndividuals.ShowEditingIcon = false;
+            this.dgIndividuals.Size = new System.Drawing.Size(857, 337);
+            this.dgIndividuals.TabIndex = 2;
+            this.dgIndividuals.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgIndividuals_CellFormatting);
+            this.dgIndividuals.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgIndividuals_CellToolTipTextNeeded);
             // 
             // FactIcon
             // 
@@ -240,21 +235,37 @@
             this.AgeAtFact.ReadOnly = true;
             this.AgeAtFact.Width = 50;
             // 
-            // Facts
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsRecords});
+            this.statusStrip.Location = new System.Drawing.Point(0, 365);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(857, 22);
+            this.statusStrip.TabIndex = 3;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // tsRecords
+            // 
+            this.tsRecords.Name = "tsRecords";
+            this.tsRecords.Size = new System.Drawing.Size(118, 17);
+            this.tsRecords.Text = "toolStripStatusLabel1";
+            // 
+            // MapIndividuals
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(857, 387);
             this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.dgFacts);
+            this.Controls.Add(this.dgIndividuals);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Facts";
+            this.Name = "MapIndividuals";
             this.Text = "Individuals";
             this.TextChanged += new System.EventHandler(this.Facts_TextChanged);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -265,7 +276,7 @@
         #endregion
 
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.DataGridView dgFacts;
+        private System.Windows.Forms.DataGridView dgIndividuals;
         private System.Windows.Forms.ToolStripButton mnuSaveColumnLayout;
         private System.Windows.Forms.ToolStripButton mnuResetColumns;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -281,5 +292,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeOfFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn AgeAtFact;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

@@ -9,65 +9,37 @@ using System.Windows.Forms;
 using FTAnalyzer.Utilities;
 using Printing.DataGridViewPrint.Tools;
 using System.IO;
+using FTAnalyzer.Mapping;
 
-namespace FTAnalyzer.Forms
+namespace FTAnalyzer
 {
     public partial class MapIndividuals : Form
     {
-        private Individual individual;
-        private Family family;
         private FamilyTree ft = FamilyTree.Instance;
-        private SortableBindingList<IDisplayFact> facts;
         private Font italicFont;
         private ReportFormHelper reportFormHelper;
+        private SortableBindingList<MapLocation> locations;
 
-        public MapIndividuals()
+        public MapIndividuals(List<MapLocation> locations)
         {
             InitializeComponent();
-            dgFacts.AutoGenerateColumns = false;
-            reportFormHelper = new ReportFormHelper(this.Text, dgFacts, this.ResetTable);
-            italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
-        }
-
-        public MapIndividuals(Individual individual)
-            : this()
-        {
-            this.individual = individual;
-            this.facts = new SortableBindingList<IDisplayFact>();
-            foreach (Fact f in individual.AllFacts)
-                facts.Add(new DisplayFact(individual, individual.Name, f));
-            foreach (Fact f in individual.ErrorFacts)
-            {
-                // only add ignored and errors as allowed have are in AllFacts
-                if(f.FactErrorLevel != Fact.FactError.WARNINGALLOW)
-                    facts.Add(new DisplayFact(individual, individual.Name, f));
-            }
-            this.Text = "Facts Report for " + individual.Name;
-            SetupFacts();
-        }
-
-        public MapIndividuals(Family family)
-            : this()
-        {
-            this.family = family;
-            this.facts = new SortableBindingList<IDisplayFact>();
-            foreach (DisplayFact f in family.AllDisplayFacts)
-                facts.Add(f);
-            this.Text = "Facts Report for " + family.FamilyRef;
-            SetupFacts();
+            this.locations = new SortableBindingList<MapLocation>(locations);
+            dgIndividuals.AutoGenerateColumns = false;
+            reportFormHelper = new ReportFormHelper(this.Text, dgIndividuals, this.ResetTable);
+            italicFont = new Font(dgIndividuals.DefaultCellStyle.Font, FontStyle.Italic);
         }
 
         private void SetupFacts()
         {
-            dgFacts.DataSource = facts;
-            reportFormHelper.LoadColumnLayout("FactsColumns.xml");
-            tsRecords.Text = facts.Count + " Records";
+            dgIndividuals.DataSource = locations;
+            reportFormHelper.LoadColumnLayout("MapIndividualColumns.xml");
+            tsRecords.Text = locations.Count + " Records";
         }
 
         private void ResetTable()
         {
-            dgFacts.Sort(dgFacts.Columns["FactDate"], ListSortDirection.Ascending);
-            dgFacts.AutoResizeColumns();
+            dgIndividuals.Sort(dgIndividuals.Columns["FactDate"], ListSortDirection.Ascending);
+            dgIndividuals.AutoResizeColumns();
         }
 
         private void printToolStripButton_Click(object sender, EventArgs e)
@@ -92,35 +64,35 @@ namespace FTAnalyzer.Forms
 
         private void mnuResetColumns_Click(object sender, EventArgs e)
         {
-            reportFormHelper.ResetColumnLayout("FactsColumns.xml");
+            reportFormHelper.ResetColumnLayout("MapIndividualColumns.xml");
         }
 
         private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
-            reportFormHelper.SaveColumnLayout("FactsColumns.xml");
-            MessageBox.Show("Column Settings Saved", "Facts");
+            reportFormHelper.SaveColumnLayout("MapIndividualColumns.xml");
+            MessageBox.Show("Column Settings Saved", "Map Individuals");
         }
-        
-        private void dgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+
+        private void dgIndividuals_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 0)
             {
-                DisplayFact f = dgFacts.Rows[e.RowIndex].DataBoundItem as DisplayFact;
+                DisplayFact f = dgIndividuals.Rows[e.RowIndex].DataBoundItem as DisplayFact;
                 e.ToolTipText = f.Fact.FactErrorMessage;
             }
         }
 
-        private void dgFacts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgIndividuals_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex > 0)
             {
-                DisplayFact f = dgFacts.Rows[e.RowIndex].DataBoundItem as DisplayFact;
-                DataGridViewCell cell = dgFacts.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                if (f.Fact.FactErrorLevel != Fact.FactError.GOOD)
+                MapLocation loc = dgIndividuals.Rows[e.RowIndex].DataBoundItem as MapLocation;
+                DataGridViewCell cell = dgIndividuals.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                if (loc.Fact.FactErrorLevel != Fact.FactError.GOOD)
                 {
                     cell.Style.Font = italicFont;
                     cell.ToolTipText = "Fact is inaccurate but is being used due to Tolerate slightly inaccurate census dates option.";
-                    if (f.Fact.FactErrorLevel != Fact.FactError.WARNINGALLOW)
+                    if (loc.Fact.FactErrorLevel != Fact.FactError.WARNINGALLOW)
                     {
                         cell.Style.ForeColor = Color.Red; // if ignoring facts then set as red
                         cell.ToolTipText = "Fact is an error and isn't being used";

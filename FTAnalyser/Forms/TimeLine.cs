@@ -22,6 +22,7 @@ using SharpMap.Rendering.Decoration;
 using SharpMap.Styles;
 using System.IO;
 using FTAnalyzer.Mapping;
+using SharpMap.Forms.ToolBar;
 
 namespace FTAnalyzer.Forms
 {
@@ -162,6 +163,7 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.Layers.Add(labelLayer);
 
             mapBox1.Map.MinimumZoom = 1000;
+            mapBox1.Map.MaximumZoom = 50000000;
             //mapBox1.Map.Decorations.Add(new GoogleMapsDisclaimer());
             mapBox1.Map.ZoomToExtents();
             mapBox1.Refresh();
@@ -391,7 +393,7 @@ namespace FTAnalyzer.Forms
                     mapBox1.Map.ZoomToBox(bbox);
                     bbox.ExpandBy(mapBox1.Map.PixelSize * 10);
                     mapBox1.Map.ZoomToBox(bbox);
-                    mapBox1_MapZoomChanged(mapBox1.Map.Zoom);
+                    RefreshClusters();
                 }
                 mapBox1.Refresh();
             }
@@ -487,15 +489,33 @@ namespace FTAnalyzer.Forms
 
         private void mapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-                mapBox1.Map.Zoom -= mapBox1.Map.Zoom * 0.3;
-            else if (e.Button == MouseButtons.Right)
-                mapBox1.Map.Zoom += mapBox1.Map.Zoom * 0.3;
+            bool zoomed = false;
+            if (e.Button == MouseButtons.Left && mapBox1.Map.Zoom > mapBox1.Map.MinimumZoom)
+            {
+                zoomed = true;
+                mapBox1.Map.Zoom -= mapBox1.Map.Zoom * 0.5;
+            }
+            else if (e.Button == MouseButtons.Right && mapBox1.Map.Zoom < mapBox1.Map.MaximumZoom)
+            {
+                zoomed = true;
+                mapBox1.Map.Zoom += mapBox1.Map.Zoom * 0.5;
+            }
+            if (zoomed)
+            {
+                Coordinate p = mapBox1.Map.ImageToWorld(new PointF(e.X, e.Y));
+                mapBox1.Map.Center.X = p.X;
+                mapBox1.Map.Center.Y = p.Y;
+                RefreshClusters();
+                mapBox1.Refresh();
+            }
+        }
 
-            Coordinate p = mapBox1.Map.ImageToWorld(new PointF(e.X, e.Y));
-            mapBox1.Map.Center.X = p.X;
-            mapBox1.Map.Center.Y = p.Y;
-            mapBox1.Refresh();
+        private void RefreshClusters()
+        {
+            Envelope env = mapBox1.Map.Envelope;
+            IMathTransform transform = clusterLayer.ReverseCoordinateTransformation.MathTransform;
+            env = new Envelope(transform.Transform(env.TopLeft()), transform.Transform(env.BottomRight()));
+            clusterer.Recluster(Math.Max(env.Width, env.Height) / 20.0);
         }
 
         private void TimeLine_Load(object sender, EventArgs e)
@@ -507,11 +527,7 @@ namespace FTAnalyzer.Forms
 
         private void mapBox1_MapZoomChanged(double zoom)
         {
-            Console.WriteLine("Map zoom changed: " + zoom + " pixels:" + mapBox1.Map.PixelSize);
-            Envelope env = mapBox1.Map.Envelope;
-            IMathTransform transform = clusterLayer.ReverseCoordinateTransformation.MathTransform;
-            env = new Envelope(transform.Transform(env.TopLeft()), transform.Transform(env.BottomRight()));
-            clusterer.Recluster(Math.Max(env.Width, env.Height) / 20.0);
+            RefreshClusters();
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -543,13 +559,13 @@ namespace FTAnalyzer.Forms
             List<MapLocation> locations = new List<MapLocation>();
             foreach (FeatureDataRow row in data)
             {
-                IList<FeatureDataRow> features = (List<FeatureDataRow>)row["Features"]; 
+                IList<FeatureDataRow> features = (List<FeatureDataRow>)row["Features"];
                 foreach (FeatureDataRow feature in features)
                 {
                     locations.Add((MapLocation)feature["MapLocation"]);
                 }
             }
+            MapIndividuals ind = new MapIndividuals(locations);
         }
-
     }
 }

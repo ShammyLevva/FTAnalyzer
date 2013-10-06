@@ -53,11 +53,11 @@
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.menuMap = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSatellite = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -266,6 +266,9 @@
             this.mapBox1.TabIndex = 7;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
+            this.mapBox1.MapRefreshed += new System.EventHandler(this.mapBox1_MapRefreshed);
+            this.mapBox1.MapChanging += new System.ComponentModel.CancelEventHandler(this.mapBox1_MapChanging);
+            this.mapBox1.MapChanged += new System.EventHandler(this.mapBox1_MapChanged);
             this.mapBox1.MapZoomChanged += new SharpMap.Forms.MapBox.MapZoomHandler(this.mapBox1_MapZoomChanged);
             this.mapBox1.MapQueried += new SharpMap.Forms.MapBox.MapQueryHandler(this.mapBox1_MapQueried);
             this.mapBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mapBox1_MouseDoubleClick);
@@ -290,16 +293,6 @@
             this.mapZoomToolStrip.Size = new System.Drawing.Size(920, 25);
             this.mapZoomToolStrip.TabIndex = 8;
             this.mapZoomToolStrip.Text = "MapZoomToolStrip";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(328, 54);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Currently Viewing:";
             // 
             // toolStripButton1
             // 
@@ -328,7 +321,7 @@
             // 
             this.menuMap.CheckOnClick = true;
             this.menuMap.Name = "menuMap";
-            this.menuMap.Size = new System.Drawing.Size(152, 22);
+            this.menuMap.Size = new System.Drawing.Size(115, 22);
             this.menuMap.Text = "Map";
             this.menuMap.Click += new System.EventHandler(this.googleMapToolStripMenuItem_Click);
             // 
@@ -338,9 +331,19 @@
             this.menuSatellite.CheckOnClick = true;
             this.menuSatellite.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menuSatellite.Name = "menuSatellite";
-            this.menuSatellite.Size = new System.Drawing.Size(152, 22);
+            this.menuSatellite.Size = new System.Drawing.Size(115, 22);
             this.menuSatellite.Text = "Satellite";
             this.menuSatellite.Click += new System.EventHandler(this.googleMapToolStripMenuItem_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(328, 54);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Currently Viewing:";
             // 
             // TimeLine
             // 
@@ -401,7 +404,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem menuMap;
         private System.Windows.Forms.ToolStripMenuItem menuSatellite;
     }
