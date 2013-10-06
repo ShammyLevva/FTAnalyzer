@@ -193,6 +193,7 @@
     <Compile Include="Core\FactImage.cs" />
     <Compile Include="Core\FactSource.cs" />
     <Compile Include="Core\FamilySearch.cs" />
+    <Compile Include="Core\FactILocationmage.cs" />
     <Compile Include="Forms\MapIndivudals.cs">
       <SubType>Form</SubType>
     </Compile>

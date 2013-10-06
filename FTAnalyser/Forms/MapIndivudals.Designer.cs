@@ -40,14 +40,14 @@
             this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeOfFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AgeAtFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -167,12 +167,28 @@
             this.dgIndividuals.Location = new System.Drawing.Point(0, 25);
             this.dgIndividuals.Name = "dgIndividuals";
             this.dgIndividuals.ReadOnly = true;
+            this.dgIndividuals.RowHeadersVisible = false;
             this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgIndividuals.ShowEditingIcon = false;
             this.dgIndividuals.Size = new System.Drawing.Size(857, 337);
             this.dgIndividuals.TabIndex = 2;
-            this.dgIndividuals.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgIndividuals_CellFormatting);
             this.dgIndividuals.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgIndividuals_CellToolTipTextNeeded);
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsRecords});
+            this.statusStrip.Location = new System.Drawing.Point(0, 365);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(857, 22);
+            this.statusStrip.TabIndex = 3;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // tsRecords
+            // 
+            this.tsRecords.Name = "tsRecords";
+            this.tsRecords.Size = new System.Drawing.Size(118, 17);
+            this.tsRecords.Text = "toolStripStatusLabel1";
             // 
             // FactIcon
             // 
@@ -190,20 +206,20 @@
             this.FactLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.FactLocation.DataPropertyName = "Location";
             this.FactLocation.HeaderText = "Location";
-            this.FactLocation.MinimumWidth = 120;
+            this.FactLocation.MinimumWidth = 300;
             this.FactLocation.Name = "FactLocation";
             this.FactLocation.ReadOnly = true;
-            this.FactLocation.Width = 123;
+            this.FactLocation.Width = 300;
             // 
             // FactName
             // 
             this.FactName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.FactName.DataPropertyName = "Name";
             this.FactName.HeaderText = "Name";
-            this.FactName.MinimumWidth = 150;
+            this.FactName.MinimumWidth = 200;
             this.FactName.Name = "FactName";
             this.FactName.ReadOnly = true;
-            this.FactName.Width = 150;
+            this.FactName.Width = 200;
             // 
             // TypeOfFact
             // 
@@ -234,22 +250,6 @@
             this.AgeAtFact.Name = "AgeAtFact";
             this.AgeAtFact.ReadOnly = true;
             this.AgeAtFact.Width = 50;
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsRecords});
-            this.statusStrip.Location = new System.Drawing.Point(0, 365);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(857, 22);
-            this.statusStrip.TabIndex = 3;
-            this.statusStrip.Text = "statusStrip1";
-            // 
-            // tsRecords
-            // 
-            this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(118, 17);
-            this.tsRecords.Text = "toolStripStatusLabel1";
             // 
             // MapIndividuals
             // 
@@ -286,12 +286,12 @@
         private System.Windows.Forms.ToolStripButton mnuExportToExcel;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel tsRecords;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.DataGridViewImageColumn FactIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactName;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeOfFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn AgeAtFact;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

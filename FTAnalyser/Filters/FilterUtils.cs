@@ -104,5 +104,13 @@ namespace FTAnalyzer.Filters
         {
             return s1 == null ? false : s1.Equals(s2, StringComparison.InvariantCultureIgnoreCase);
         }
+
+        public static T MostCommon<T>(this IEnumerable<T> list)
+        {
+            return (from i in list
+                    group i by i into grp
+                    orderby grp.Count() descending
+                    select grp.Key).First();
+        }
     }
 }

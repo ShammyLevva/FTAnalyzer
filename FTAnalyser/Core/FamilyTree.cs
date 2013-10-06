@@ -367,7 +367,7 @@ namespace FTAnalyzer
                 {
                     foreach (Fact f in ind.AllFacts)
                         if (f.Location.IsGeoCoded)
-                            result.Add(new MapLocation(ind, f));
+                            result.Add(new MapLocation(ind, f, f.FactDate));
                 }
                 return result;
             }
@@ -383,7 +383,7 @@ namespace FTAnalyzer
                     Fact fact = ind.BestFact(when);
                     FactLocation loc = fact.Location;
                     if (loc.IsGeoCoded)
-                        result.Add(new MapLocation(ind, fact));
+                        result.Add(new MapLocation(ind, fact, when));
                     else
                     {
                         int startlevel = loc.Level -1;
@@ -392,7 +392,7 @@ namespace FTAnalyzer
                             loc = loc.GetLocation(level);
                             if (loc.IsGeoCoded)
                             {
-                                result.Add(new MapLocation(ind, fact, loc));
+                                result.Add(new MapLocation(ind, fact, loc, when));
                                 break;
                             }
                         }

@@ -10,6 +10,7 @@ using FTAnalyzer.Utilities;
 using Printing.DataGridViewPrint.Tools;
 using System.IO;
 using FTAnalyzer.Mapping;
+using FTAnalyzer.Filters;
 
 namespace FTAnalyzer
 {
@@ -25,20 +26,18 @@ namespace FTAnalyzer
             InitializeComponent();
             this.locations = new SortableBindingList<MapLocation>(locations);
             dgIndividuals.AutoGenerateColumns = false;
+            dgIndividuals.DataSource = this.locations;
             reportFormHelper = new ReportFormHelper(this.Text, dgIndividuals, this.ResetTable);
             italicFont = new Font(dgIndividuals.DefaultCellStyle.Font, FontStyle.Italic);
-        }
-
-        private void SetupFacts()
-        {
-            dgIndividuals.DataSource = locations;
             reportFormHelper.LoadColumnLayout("MapIndividualColumns.xml");
             tsRecords.Text = locations.Count + " Records";
+            MapLocation mostCommon = locations.MostCommon();
+            this.Text = locations.Count > 1 ? mostCommon.Location.ToString() : "Centred near " + mostCommon.Location.ToString();
         }
 
         private void ResetTable()
         {
-            dgIndividuals.Sort(dgIndividuals.Columns["FactDate"], ListSortDirection.Ascending);
+            //dgIndividuals.Sort(dgIndividuals.Columns["Location"], ListSortDirection.Ascending);
             dgIndividuals.AutoResizeColumns();
         }
 
@@ -75,29 +74,10 @@ namespace FTAnalyzer
 
         private void dgIndividuals_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex == 0)
-            {
-                DisplayFact f = dgIndividuals.Rows[e.RowIndex].DataBoundItem as DisplayFact;
-                e.ToolTipText = f.Fact.FactErrorMessage;
-            }
-        }
-
-        private void dgIndividuals_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex > 0)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 MapLocation loc = dgIndividuals.Rows[e.RowIndex].DataBoundItem as MapLocation;
-                DataGridViewCell cell = dgIndividuals.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                if (loc.Fact.FactErrorLevel != Fact.FactError.GOOD)
-                {
-                    cell.Style.Font = italicFont;
-                    cell.ToolTipText = "Fact is inaccurate but is being used due to Tolerate slightly inaccurate census dates option.";
-                    if (loc.Fact.FactErrorLevel != Fact.FactError.WARNINGALLOW)
-                    {
-                        cell.Style.ForeColor = Color.Red; // if ignoring facts then set as red
-                        cell.ToolTipText = "Fact is an error and isn't being used";
-                    }   
-                }
+                e.ToolTipText = loc.Location.Geocoded;
             }
         }
     }

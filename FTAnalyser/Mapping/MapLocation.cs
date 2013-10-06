@@ -1,24 +1,28 @@
 ﻿using NetTopologySuite.Geometries;
 using SharpMap.Data;
+using System.Drawing;
 
 namespace FTAnalyzer.Mapping
 {
     public class MapLocation
     {
-        public Individual Individual { get; private set;}
+        public Image Icon { get; private set; }
+        public Individual Individual { get; private set; }
         public Fact Fact { get; private set; }
         public FactLocation Location { get; private set; }
+        private FactDate year;
 
-        public MapLocation(Individual ind, Fact fact) : this(ind, fact, fact.Location) { }
+        public MapLocation(Individual ind, Fact fact, FactDate year) : this(ind, fact, fact.Location, year) { }
 
-        public MapLocation(Individual ind, Fact fact, FactLocation loc)
+        public MapLocation(Individual ind, Fact fact, FactLocation loc, FactDate year)
         {
             this.Individual = ind;
             this.Fact = fact;
             this.Location = loc;
+            this.year = year;
+            this.Icon = FactLocationImage.ErrorIcon(loc.GeocodeStatus).Icon;
         }
         
-
         public FeatureDataRow GetFeatureDataRow(FeatureDataTable table)
         {
             FeatureDataRow r = table.NewRow();
@@ -29,6 +33,12 @@ namespace FTAnalyzer.Mapping
         }
 
         public FactDate FactDate { get { return Fact.FactDate; } }
+
+        public string Name { get { return Individual.Name; } }
+
+        public string TypeOfFact { get { return Fact.GetFactTypeDescription(Fact.FactType); } }
+
+        public Age AgeAtFact { get { return Individual == null ? null : Individual.GetAge(year); } }
     }
 }
 
