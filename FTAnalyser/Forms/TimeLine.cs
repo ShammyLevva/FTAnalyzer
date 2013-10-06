@@ -505,7 +505,7 @@ namespace FTAnalyzer.Forms
             Envelope env = mapBox1.Map.Envelope;
             IMathTransform transform = factLocationLayer.ReverseCoordinateTransformation.MathTransform;
             env = new Envelope(transform.Transform(env.TopLeft()), transform.Transform(env.BottomRight()));
-            clusterer.Recluster(Math.Max(env.Width, env.Height) / 16.0);
+            clusterer.Recluster(Math.Max(env.Width, env.Height) / 20.0);
         }
 
     }

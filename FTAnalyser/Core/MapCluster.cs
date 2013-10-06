@@ -48,7 +48,8 @@ namespace FTAnalyzer
 
         public bool IsFeatureInClusterBounds(FeatureDataRow row)
         {
-            return multiPoint.Distance(row.Geometry) <= gridSize;
+            double d = multiPoint.Distance(row.Geometry);
+            return d <= gridSize;
         }
     }
 }

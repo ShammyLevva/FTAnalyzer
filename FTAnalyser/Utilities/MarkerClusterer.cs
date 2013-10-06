@@ -67,9 +67,7 @@ namespace FTAnalyzer.Utilities
                 }
             }
             if (clusterToAddTo != null && clusterToAddTo.IsFeatureInClusterBounds(row))
-            {
                 clusterToAddTo.AddFeature(row);
-            }
             else
             {
                 MapCluster cluster = new MapCluster(minClusterSize, gridsize);
