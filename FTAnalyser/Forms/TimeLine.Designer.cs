@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TimeLine));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.txtLocations = new System.Windows.Forms.ToolStripStatusLabel();
             this.pbGeocoding = new System.Windows.Forms.ToolStripProgressBar();
@@ -53,9 +54,14 @@
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.menuMap = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSatellite = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
+            this.mapZoomToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -261,6 +267,7 @@
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
             this.mapBox1.MapZoomChanged += new SharpMap.Forms.MapBox.MapZoomHandler(this.mapBox1_MapZoomChanged);
+            this.mapBox1.MapQueried += new SharpMap.Forms.MapBox.MapQueryHandler(this.mapBox1_MapQueried);
             this.mapBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mapBox1_MouseDoubleClick);
             // 
             // backgroundWorker
@@ -274,6 +281,9 @@
             // mapZoomToolStrip
             // 
             this.mapZoomToolStrip.Enabled = false;
+            this.mapZoomToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
+            this.toolStripDropDownButton1});
             this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 69);
             this.mapZoomToolStrip.MapControl = this.mapBox1;
             this.mapZoomToolStrip.Name = "mapZoomToolStrip";
@@ -290,6 +300,47 @@
             this.label1.Size = new System.Drawing.Size(109, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "Currently Viewing:";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuMap,
+            this.menuSatellite});
+            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(71, 22);
+            this.toolStripDropDownButton1.Text = "Map style";
+            this.toolStripDropDownButton1.Visible = false;
+            // 
+            // menuMap
+            // 
+            this.menuMap.CheckOnClick = true;
+            this.menuMap.Name = "menuMap";
+            this.menuMap.Size = new System.Drawing.Size(152, 22);
+            this.menuMap.Text = "Map";
+            this.menuMap.Click += new System.EventHandler(this.googleMapToolStripMenuItem_Click);
+            // 
+            // menuSatellite
+            // 
+            this.menuSatellite.Checked = true;
+            this.menuSatellite.CheckOnClick = true;
+            this.menuSatellite.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.menuSatellite.Name = "menuSatellite";
+            this.menuSatellite.Size = new System.Drawing.Size(152, 22);
+            this.menuSatellite.Text = "Satellite";
+            this.menuSatellite.Click += new System.EventHandler(this.googleMapToolStripMenuItem_Click);
             // 
             // TimeLine
             // 
@@ -315,6 +366,8 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).EndInit();
+            this.mapZoomToolStrip.ResumeLayout(false);
+            this.mapZoomToolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -346,5 +399,10 @@
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuKeepZoom;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem menuMap;
+        private System.Windows.Forms.ToolStripMenuItem menuSatellite;
     }
 }

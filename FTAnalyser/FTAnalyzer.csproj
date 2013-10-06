@@ -193,6 +193,12 @@
     <Compile Include="Core\FactImage.cs" />
     <Compile Include="Core\FactSource.cs" />
     <Compile Include="Core\FamilySearch.cs" />
+    <Compile Include="Forms\MapIndivudals.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MapIndivudals.Designer.cs">
+      <DependentUpon>MapIndivudals.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mapping\MapCluster.cs" />
     <Compile Include="Mapping\MapLocation.cs" />
     <Compile Include="Core\Statistics.cs" />
@@ -264,6 +270,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\ColourBMD.resx">
       <DependentUpon>ColourBMD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MapIndivudals.resx">
+      <DependentUpon>MapIndivudals.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Facts.resx">
       <DependentUpon>Facts.cs</DependentUpon>
@@ -385,12 +394,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\people45.png" />
-    <Content Include="Resources\Icons\Pointer.bmp" />
-    <Content Include="Resources\Icons\QuestionMark.png" />
+    <Content Include="Resources\Icons\Pointer.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\QuestionMark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Icons\SeriousWarning.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Icons\Validate.png" />
+    <Content Include="Resources\Icons\Validate.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Icons\Warning.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

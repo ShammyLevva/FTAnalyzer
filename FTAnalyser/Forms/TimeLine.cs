@@ -41,6 +41,7 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
             tbYears.MouseWheel += new MouseEventHandler(tbYears_MouseWheel);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
+            mapZoomToolStrip.Items[10].Visible = false;
             ft = FamilyTree.Instance;
         }
 
@@ -82,12 +83,10 @@ namespace FTAnalyzer.Forms
             // Add Google maps layer to map control.
             SetDefaultProxy();
             mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                new GoogleTileSource(GoogleMapType.GoogleMap), "Google"));
+                new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap"));
 
             factLocations = new FeatureDataTable();
-            factLocations.Columns.Add("Location", typeof(FactLocation));
-            factLocations.Columns.Add("Individual", typeof(Individual));
-            factLocations.Columns.Add("Relation", typeof(int));
+            factLocations.Columns.Add("MapLocation", typeof(MapLocation));
             factLocations.Columns.Add("Label", typeof(string));
 
             clusterer = new MarkerClusterer(factLocations);
@@ -110,7 +109,7 @@ namespace FTAnalyzer.Forms
             cluster.PointSize = 20;
             cluster.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\people35.png"));
             styles.Add(MapCluster.CLUSTER, cluster);
-            
+
             directAncestorsToolStripMenuItem.ForeColor = Color.ForestGreen;
 
             //VectorStyle blood = new VectorStyle();
@@ -162,7 +161,7 @@ namespace FTAnalyzer.Forms
             labelLayer.SmoothingMode = SmoothingMode.AntiAlias;
             mapBox1.Map.Layers.Add(labelLayer);
 
-            mapBox1.Map.MinimumZoom = 10000;
+            mapBox1.Map.MinimumZoom = 1000;
             //mapBox1.Map.Decorations.Add(new GoogleMapsDisclaimer());
             mapBox1.Map.ZoomToExtents();
             mapBox1.Refresh();
@@ -513,6 +512,43 @@ namespace FTAnalyzer.Forms
             IMathTransform transform = clusterLayer.ReverseCoordinateTransformation.MathTransform;
             env = new Envelope(transform.Transform(env.TopLeft()), transform.Transform(env.BottomRight()));
             clusterer.Recluster(Math.Max(env.Width, env.Height) / 20.0);
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
+        }
+
+        private void googleMapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            mapBox1.Map.BackgroundLayer.RemoveAt(0);
+            if (sender == menuMap)
+            {
+                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                        new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap"));
+                menuSatellite.Checked = false;
+            }
+            else if (sender == menuSatellite)
+            {
+                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                        new GoogleTileSource(GoogleMapType.GoogleSatellite), "GoogleSatellite"));
+                menuMap.Checked = false;
+            }
+
+        }
+
+        private void mapBox1_MapQueried(FeatureDataTable data)
+        {
+            Console.WriteLine("Map Queried");
+            List<MapLocation> locations = new List<MapLocation>();
+            foreach (FeatureDataRow row in data)
+            {
+                IList<FeatureDataRow> features = (List<FeatureDataRow>)row["Features"]; 
+                foreach (FeatureDataRow feature in features)
+                {
+                    locations.Add((MapLocation)feature["MapLocation"]);
+                }
+            }
         }
 
     }
