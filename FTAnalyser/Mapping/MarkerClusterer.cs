@@ -26,7 +26,12 @@ namespace FTAnalyzer.Mapping
             this.sourceDataTable = source;
             this.minClusterSize = 2;
             this.clusters = new List<MapCluster>();
-            clusteredDataTable = new LocationFeatureDataTable();
+            clusteredDataTable = new FeatureDataTable();
+            clusteredDataTable.Columns.Add("Features"); ;
+            clusteredDataTable.Columns.Add("Count", typeof(int));
+            clusteredDataTable.Columns.Add("Label", typeof(string));
+            clusteredDataTable.Columns.Add("Cluster", typeof(string));
+
             reclustering = false;
         }
 
@@ -83,7 +88,6 @@ namespace FTAnalyzer.Mapping
                 row["Features"] = cluster.Features;
                 row["Count"] = cluster.Features.Count;
                 row["Label"] = cluster.Features.Count.ToString();
-                row["Relation"] = Individual.UNKNOWN;
                 row["Cluster"] = cluster.ClusterType;
                 clusteredDataTable.AddRow(row);
             }

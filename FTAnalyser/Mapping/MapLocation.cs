@@ -26,7 +26,6 @@ namespace FTAnalyzer.Mapping
             r["Location"] = Location;
             r["Individual"] = Individual;
             r["Relation"] = Individual.RelationType;
-            r["Cluster"] = MapCluster.FEATURE;
             r["Label"] = Individual.Name + " at " + Location;
             r.Geometry = new NetTopologySuite.Geometries.Point(Location.Longitude, Location.Latitude);
             return r;

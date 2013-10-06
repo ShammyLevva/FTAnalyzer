@@ -32,7 +32,7 @@ namespace FTAnalyzer.Forms
         private int maxGeoCodedYear;
         private bool formClosing;
         private FeatureDataTable factLocations;
-        private VectorLayer factLocationLayer;
+        private VectorLayer clusterLayer;
         private LabelLayer labelLayer;
         private MarkerClusterer clusterer;
 
@@ -83,15 +83,19 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
                 new GoogleTileSource(GoogleMapType.GoogleMap), "Google"));
 
-            factLocations = new LocationFeatureDataTable();
+            factLocations = new FeatureDataTable();
+            factLocations.Columns.Add("Location", typeof(FactLocation));
+            factLocations.Columns.Add("Individual", typeof(Individual));
+            factLocations.Columns.Add("Relation", typeof(int));
+            factLocations.Columns.Add("Label", typeof(string));
 
             clusterer = new MarkerClusterer(factLocations);
             GeometryFeatureProvider factLocationGFP = new GeometryFeatureProvider(clusterer.FeatureDataTable);
 
-            factLocationLayer = new VectorLayer("Locations");
-            factLocationLayer.DataSource = factLocationGFP;
-            factLocationLayer.CoordinateTransformation = MapTransforms.Transform();
-            factLocationLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
+            clusterLayer = new VectorLayer("Clusters");
+            clusterLayer.DataSource = factLocationGFP;
+            clusterLayer.CoordinateTransformation = MapTransforms.Transform();
+            clusterLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
 
             Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
 
@@ -104,7 +108,7 @@ namespace FTAnalyzer.Forms
             cluster.PointColor = new SolidBrush(Color.ForestGreen);
             cluster.PointSize = 20;
             cluster.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\people35.png"));
-            styles.Add(MapCluster.CLUSTER, feature);
+            styles.Add(MapCluster.CLUSTER, cluster);
             
             directAncestorsToolStripMenuItem.ForeColor = Color.ForestGreen;
 
@@ -132,8 +136,8 @@ namespace FTAnalyzer.Forms
             styles.Add(MapCluster.UNKNOWN, unknown);
             unknownToolStripMenuItem.ForeColor = Color.Black;
 
-            factLocationLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<string>("Cluster", styles, unknown);
-            mapBox1.Map.Layers.Add(factLocationLayer);
+            clusterLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<string>("Cluster", styles, unknown);
+            mapBox1.Map.Layers.Add(clusterLayer);
 
             labelLayer = new LabelLayer("Label");
             labelLayer.CoordinateTransformation = MapTransforms.Transform();
@@ -381,7 +385,7 @@ namespace FTAnalyzer.Forms
                 }
                 if (!mnuKeepZoom.Checked)
                 {
-                    IMathTransform transform = factLocationLayer.CoordinateTransformation.MathTransform;
+                    IMathTransform transform = clusterLayer.CoordinateTransformation.MathTransform;
                     bbox = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
                     mapBox1.Map.ZoomToBox(bbox);
                     bbox.ExpandBy(mapBox1.Map.PixelSize * 10);
@@ -499,7 +503,7 @@ namespace FTAnalyzer.Forms
         {
             Console.WriteLine("Map zoom changed: " + zoom + " pixels:" + mapBox1.Map.PixelSize);
             Envelope env = mapBox1.Map.Envelope;
-            IMathTransform transform = factLocationLayer.ReverseCoordinateTransformation.MathTransform;
+            IMathTransform transform = clusterLayer.ReverseCoordinateTransformation.MathTransform;
             env = new Envelope(transform.Transform(env.TopLeft()), transform.Transform(env.BottomRight()));
             clusterer.Recluster(Math.Max(env.Width, env.Height) / 20.0);
         }
