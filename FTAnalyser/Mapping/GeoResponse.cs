@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
 
-namespace FTAnalyzer.Utilities
+namespace FTAnalyzer.Mapping
 {
     [DataContract]
     public class GeoResponse

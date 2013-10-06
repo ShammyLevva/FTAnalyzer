@@ -9,7 +9,7 @@ using GeoAPI.Geometries;
 using GeoAPI.CoordinateSystems.Transformations;
 using SharpMap.Data;
 
-namespace FTAnalyzer.Utilities
+namespace FTAnalyzer.Mapping
 {
     public class MarkerClusterer
     {
@@ -26,12 +26,7 @@ namespace FTAnalyzer.Utilities
             this.sourceDataTable = source;
             this.minClusterSize = 2;
             this.clusters = new List<MapCluster>();
-            clusteredDataTable = new FeatureDataTable();
-            clusteredDataTable.Columns.Add("Features");
-            clusteredDataTable.Columns.Add("Count", typeof(int));
-            clusteredDataTable.Columns.Add("Relation", typeof(int));
-            clusteredDataTable.Columns.Add("Cluster", typeof(string));
-            clusteredDataTable.Columns.Add("Label", typeof(string));
+            clusteredDataTable = new LocationFeatureDataTable();
             reclustering = false;
         }
 

@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Globalization;
 using FTAnalyzer.Utilities;
+using FTAnalyzer.Mapping;
 
 namespace FTAnalyzer
 {

@@ -21,6 +21,7 @@ using SharpMap.Rendering;
 using SharpMap.Rendering.Decoration;
 using SharpMap.Styles;
 using System.IO;
+using FTAnalyzer.Mapping;
 
 namespace FTAnalyzer.Forms
 {
@@ -82,12 +83,7 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
                 new GoogleTileSource(GoogleMapType.GoogleMap), "Google"));
 
-            factLocations = new FeatureDataTable();
-            factLocations.Columns.Add("Location", typeof(FactLocation));
-            factLocations.Columns.Add("Individual", typeof(Individual));
-            factLocations.Columns.Add("Relation", typeof(int));
-            factLocations.Columns.Add("Cluster", typeof(string));
-            factLocations.Columns.Add("Label", typeof(string));
+            factLocations = new LocationFeatureDataTable();
 
             clusterer = new MarkerClusterer(factLocations);
             GeometryFeatureProvider factLocationGFP = new GeometryFeatureProvider(clusterer.FeatureDataTable);
@@ -342,7 +338,7 @@ namespace FTAnalyzer.Forms
                     }
                     count++;
                     int percent = (int)Math.Truncate((count - 1) * 100.0 / total);
-                    string status = "Googled " + good + " good, " + bad + "partial matched. Skip " + geocoded + " previously found, " + skipped + " partial/not found. Done " + (count - 1) +
+                    string status = "Googled " + good + " good, " + bad + "partial. Skip " + geocoded + " prev found, " + skipped + " partial/not found. Done " + (count - 1) +
                             " of " + total + ".  ";
                     worker.ReportProgress(percent, status);
 

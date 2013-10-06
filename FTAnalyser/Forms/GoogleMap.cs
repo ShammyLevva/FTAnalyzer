@@ -14,6 +14,7 @@ using System.IO;
 using System.Threading;
 using FTAnalyzer.Events;
 using FTAnalyzer.Utilities;
+using FTAnalyzer.Mapping;
 
 namespace FTAnalyzer.Forms
 {

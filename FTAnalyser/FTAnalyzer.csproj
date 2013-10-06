@@ -193,8 +193,11 @@
     <Compile Include="Core\FactImage.cs" />
     <Compile Include="Core\FactSource.cs" />
     <Compile Include="Core\FamilySearch.cs" />
-    <Compile Include="Core\MapCluster.cs" />
-    <Compile Include="Core\MapLocation.cs" />
+    <Compile Include="Mapping\LocationFeatureDataTable.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Mapping\MapCluster.cs" />
+    <Compile Include="Mapping\MapLocation.cs" />
     <Compile Include="Core\Statistics.cs" />
     <Compile Include="Events\GoogleWaitingEventArgs.cs" />
     <Compile Include="Exceptions\OpenDatabaseException.cs" />
@@ -476,11 +479,11 @@
     <Compile Include="Utilities\ErrorHandler.cs" />
     <Compile Include="Utilities\ExportToExcel.cs" />
     <Compile Include="Utilities\FooterPrintBlock.cs" />
-    <Compile Include="Utilities\GeoResponse.cs" />
+    <Compile Include="Mapping\GeoResponse.cs" />
     <Compile Include="Utilities\HttpUtility.cs" />
     <Compile Include="Utilities\ListtoDataTableConvertor.cs" />
-    <Compile Include="Utilities\MapTransforms.cs" />
-    <Compile Include="Utilities\MarkerClusterer.cs" />
+    <Compile Include="Mapping\MapTransforms.cs" />
+    <Compile Include="Mapping\MarkerClusterer.cs" />
     <Compile Include="Utilities\Printing.cs" />
     <Compile Include="Utilities\PropertyComparer.cs" />
     <Compile Include="Utilities\ScrollingRichTextBox.cs">
@@ -488,7 +491,7 @@
     </Compile>
     <Compile Include="Utilities\ShortDoubleMetaphone.cs" />
     <Compile Include="Utilities\SortableBindingList.cs" />
-    <None Include="Utilities\MarkerClusterer.js" />
+    <None Include="Mapping\MarkerClusterer.js" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

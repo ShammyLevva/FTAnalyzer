@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using FTAnalyzer.Utilities;
+using FTAnalyzer.Mapping;
 
 namespace FTAnalyzer.Forms
 {
