@@ -39,6 +39,7 @@ namespace FTAnalyzer.Forms
         public TimeLine()
         {
             InitializeComponent();
+            tbYears.MouseWheel += new MouseEventHandler(tbYears_MouseWheel);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             ft = FamilyTree.Instance;
         }
@@ -161,6 +162,7 @@ namespace FTAnalyzer.Forms
             labelLayer.SmoothingMode = SmoothingMode.AntiAlias;
             mapBox1.Map.Layers.Add(labelLayer);
 
+            mapBox1.Map.MinimumZoom = 10000;
             //mapBox1.Map.Decorations.Add(new GoogleMapsDisclaimer());
             mapBox1.Map.ZoomToExtents();
             mapBox1.Refresh();
@@ -429,6 +431,11 @@ namespace FTAnalyzer.Forms
             labValue.Text = tbYears.Value.ToString();
             DisplayLocationsForYear(labValue.Text);
             this.Cursor = Cursors.Default;
+        }
+
+        private void tbYears_MouseWheel(object sender, EventArgs e)
+        {
+            // do nothing if using mousewheel this prevents year scrolling when map should scroll
         }
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
