@@ -266,9 +266,6 @@
             this.mapBox1.TabIndex = 7;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
-            this.mapBox1.MapRefreshed += new System.EventHandler(this.mapBox1_MapRefreshed);
-            this.mapBox1.MapChanging += new System.ComponentModel.CancelEventHandler(this.mapBox1_MapChanging);
-            this.mapBox1.MapChanged += new System.EventHandler(this.mapBox1_MapChanged);
             this.mapBox1.MapZoomChanged += new SharpMap.Forms.MapBox.MapZoomHandler(this.mapBox1_MapZoomChanged);
             this.mapBox1.MapQueried += new SharpMap.Forms.MapBox.MapQueryHandler(this.mapBox1_MapQueried);
             this.mapBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mapBox1_MouseDoubleClick);

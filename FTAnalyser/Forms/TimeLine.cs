@@ -43,6 +43,7 @@ namespace FTAnalyzer.Forms
             tbYears.MouseWheel += new MouseEventHandler(tbYears_MouseWheel);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[10].Visible = false;
+            mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(mapBox1_MapViewOnChange);
             ft = FamilyTree.Instance;
         }
 
@@ -156,8 +157,8 @@ namespace FTAnalyzer.Forms
             //labelLayer.Style.CollisionBuffer = new SizeF(5, 5);
             labelLayer.LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection;
             //labelLayer.MultipartGeometryBehaviour = LabelLayer.MultipartGeometryBehaviourEnum.Largest;
-            labelLayer.Style.Offset = new PointF(0, 0);
-            labelLayer.Style.Halo = new Pen(Color.Yellow, 2);
+            labelLayer.Style.Offset = new PointF(-12, 22);
+            labelLayer.Style.Halo = new Pen(Color.Yellow, 3);
             labelLayer.TextRenderingHint = TextRenderingHint.AntiAlias;
             labelLayer.SmoothingMode = SmoothingMode.AntiAlias;
             mapBox1.Map.Layers.Add(labelLayer);
@@ -391,7 +392,7 @@ namespace FTAnalyzer.Forms
                     IMathTransform transform = clusterLayer.CoordinateTransformation.MathTransform;
                     bbox = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
                     mapBox1.Map.ZoomToBox(bbox);
-                    bbox.ExpandBy(mapBox1.Map.PixelSize * 10);
+                    bbox.ExpandBy(mapBox1.Map.PixelSize * 15);
                     mapBox1.Map.ZoomToBox(bbox);
                     RefreshClusters();
                 }
@@ -566,6 +567,12 @@ namespace FTAnalyzer.Forms
                 }
             }
             MapIndividuals ind = new MapIndividuals(locations);
+            ind.Show();
+        }
+
+        private void mapBox1_MapViewOnChange()
+        {
+            RefreshClusters();
         }
     }
 }
