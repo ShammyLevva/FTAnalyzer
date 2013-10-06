@@ -193,6 +193,9 @@
     <Compile Include="Core\FactImage.cs" />
     <Compile Include="Core\FactSource.cs" />
     <Compile Include="Core\FamilySearch.cs" />
+    <Compile Include="Mapping\LocationFeatureDataTable.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Mapping\MapCluster.cs" />
     <Compile Include="Mapping\MapLocation.cs" />
     <Compile Include="Core\Statistics.cs" />
@@ -385,9 +388,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\people45.png" />
+    <Content Include="Resources\Icons\Pointer.bmp" />
+    <Content Include="Resources\Icons\QuestionMark.png" />
     <Content Include="Resources\Icons\SeriousWarning.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Icons\Validate.png" />
     <Content Include="Resources\Icons\Warning.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
