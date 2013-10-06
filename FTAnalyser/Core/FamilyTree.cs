@@ -13,6 +13,7 @@ using System.Resources;
 using System.Data;
 using FTAnalyzer.Filters;
 using System.Data.SQLite;
+using FTAnalyzer.Mapping;
 
 namespace FTAnalyzer
 {

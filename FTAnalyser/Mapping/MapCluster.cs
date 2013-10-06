@@ -7,7 +7,7 @@ using GeoAPI.Geometries;
 using NetTopologySuite.Geometries;
 using SharpMap.Data;
 
-namespace FTAnalyzer
+namespace FTAnalyzer.Mapping
 {
     class MapCluster
     {

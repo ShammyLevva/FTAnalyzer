@@ -7,7 +7,7 @@ using ProjNet.CoordinateSystems;
 using ProjNet.CoordinateSystems.Transformations;
 using GeoAPI.CoordinateSystems.Transformations;
 
-namespace FTAnalyzer.Utilities
+namespace FTAnalyzer.Mapping
 {
     class MapTransforms
     {

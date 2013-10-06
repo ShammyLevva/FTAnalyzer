@@ -1,7 +1,7 @@
 ﻿using NetTopologySuite.Geometries;
 using SharpMap.Data;
 
-namespace FTAnalyzer
+namespace FTAnalyzer.Mapping
 {
     public class MapLocation
     {
