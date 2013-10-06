@@ -710,6 +710,12 @@ namespace FTAnalyzer
             return FactLocation.BestLocation(AllFacts, when);
         }
 
+        public Fact BestFact(FactDate when)
+        {
+            // this returns a Location a person was at for a given period
+            return FactLocation.BestFact(AllFacts, when);
+        }
+
         public bool IsAtLocation(FactLocation loc, int level)
         {
             foreach (Fact f in AllFacts)

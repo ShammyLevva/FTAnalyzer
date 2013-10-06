@@ -625,10 +625,10 @@ namespace FTAnalyzer
             return addressField;
         }
 
-        public static FactLocation BestLocation(IEnumerable<Fact> facts, FactDate when)
+        public static Fact BestFact(IEnumerable<Fact> facts, FactDate when)
         {
-            // this returns a Location a person was at for a given period
-            FactLocation result = FactLocation.UNKNOWN_LOCATION;
+            // this returns a Fact for a FactLocation a person was at for a given period
+            Fact result = new Fact(Fact.UNKNOWN, FactDate.UNKNOWN_DATE);
             double minDistance = float.MaxValue;
             foreach (Fact f in facts)
             {
@@ -636,14 +636,20 @@ namespace FTAnalyzer
                     Math.Pow((double)(f.FactDate.EndDate.Year - when.EndDate.Year), 2.0));
                 if (distance < minDistance && !f.Location.location.Equals(string.Empty))
                 { // this is a closer date but now check to ensure we aren't overwriting a known country with an unknown one.
-                    if (f.Location.isKnownCountry || (!f.Location.isKnownCountry && !result.isKnownCountry))
+                    if (f.Location.isKnownCountry || (!f.Location.isKnownCountry && !result.Location.isKnownCountry))
                     {
-                        result = f.Location;
+                        result = f;
                         minDistance = distance;
                     }
                 }
             }
             return result;
+        }
+
+        public static FactLocation BestLocation(IEnumerable<Fact> facts, FactDate when)
+        {
+            Fact result = BestFact(facts,when);
+            return result.Location;
         }
 
 
