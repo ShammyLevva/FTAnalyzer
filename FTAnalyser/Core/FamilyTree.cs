@@ -1235,7 +1235,8 @@ namespace FTAnalyzer
             foreach (DataErrorGroup dataError in dataErrorTypes)
             {
                 int index = list.Items.Add(dataError);
-                list.SetItemChecked(index, true);
+                bool itemChecked = Application.UserAppDataRegistry.GetValue(dataError.ToString(), "True").Equals("True");
+                list.SetItemChecked(index, itemChecked);
             }
         }
 

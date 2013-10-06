@@ -216,26 +216,26 @@
             this.FactName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.FactName.DataPropertyName = "Name";
             this.FactName.HeaderText = "Name";
-            this.FactName.MinimumWidth = 200;
+            this.FactName.MinimumWidth = 150;
             this.FactName.Name = "FactName";
             this.FactName.ReadOnly = true;
-            this.FactName.Width = 200;
+            this.FactName.Width = 150;
             // 
             // TypeOfFact
             // 
             this.TypeOfFact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.TypeOfFact.DataPropertyName = "TypeOfFact";
-            this.TypeOfFact.HeaderText = "Fact Type";
-            this.TypeOfFact.MinimumWidth = 80;
+            this.TypeOfFact.HeaderText = "Closest Fact Type";
+            this.TypeOfFact.MinimumWidth = 120;
             this.TypeOfFact.Name = "TypeOfFact";
             this.TypeOfFact.ReadOnly = true;
-            this.TypeOfFact.Width = 80;
+            this.TypeOfFact.Width = 120;
             // 
             // FactDate
             // 
             this.FactDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.FactDate.DataPropertyName = "FactDate";
-            this.FactDate.HeaderText = "Fact Date";
+            this.FactDate.HeaderText = "Closest Fact Date";
             this.FactDate.MinimumWidth = 150;
             this.FactDate.Name = "FactDate";
             this.FactDate.ReadOnly = true;

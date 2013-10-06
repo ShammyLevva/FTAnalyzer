@@ -77,7 +77,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 MapLocation loc = dgIndividuals.Rows[e.RowIndex].DataBoundItem as MapLocation;
-                e.ToolTipText = loc.Location.Geocoded;
+                e.ToolTipText = "Geocoding status: " + loc.Location.Geocoded;
             }
         }
     }

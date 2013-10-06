@@ -9,11 +9,11 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using FTAnalyzer.Filters;
-using FTAnalyzer.Forms;
 using FTAnalyzer.Utilities;
 using FTAnalyzer.UserControls;
 using Printing.DataGridViewPrint.Tools;
 using System.Drawing;
+using FTAnalyzer.Forms;
 
 namespace FTAnalyzer
 {
@@ -909,6 +909,12 @@ namespace FTAnalyzer
             dgDataErrors.DataSource = errors;
             tsCountLabel.Text = Properties.Messages.Count + errors.Count;
             tsHintsLabel.Text = Properties.Messages.Hints_Individual;
+            int index=0;
+            foreach (DataErrorGroup dataError in ckbDataErrors.Items)
+            {
+                bool itemChecked = ckbDataErrors.GetItemChecked(index++);
+                Application.UserAppDataRegistry.SetValue(dataError.ToString(), itemChecked);
+            }
             HourGlass(false);
         }
 
