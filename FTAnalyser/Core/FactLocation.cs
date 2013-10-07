@@ -16,7 +16,7 @@ namespace FTAnalyzer
     {
 
         public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, SUBREGION = 2, ADDRESS = 3, PLACE = 4;
-        public enum Geocode { NOT_SEARCHED = 0, EXACT_MATCH = 1, PARTIAL_MATCH = 2, GEDCOM = 3, NO_MATCH = 4 };
+        public enum Geocode { NOT_SEARCHED = 0, MATCHED = 1, PARTIAL_MATCH = 2, GEDCOM = 3, NO_MATCH = 4 };
 
         private string location;
         private string fixedLocation;
@@ -524,8 +524,8 @@ namespace FTAnalyzer
             {
                 switch (GeocodeStatus)
                 {
-                    case Geocode.EXACT_MATCH:
-                        return "Exact Match";
+                    case Geocode.MATCHED:
+                        return "Matched";
                     case Geocode.PARTIAL_MATCH:
                         return "Partial Match";
                     case Geocode.NOT_SEARCHED:
@@ -605,7 +605,7 @@ namespace FTAnalyzer
                     return false;
                 if (includePartials && GeocodeStatus == Geocode.PARTIAL_MATCH)
                     return true;
-                return GeocodeStatus == Geocode.EXACT_MATCH || GeocodeStatus == Geocode.GEDCOM;
+                return GeocodeStatus == Geocode.MATCHED || GeocodeStatus == Geocode.GEDCOM;
             }
         }
 

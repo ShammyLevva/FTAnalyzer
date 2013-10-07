@@ -50,7 +50,7 @@ namespace FTAnalyzer.Forms
         public void SetLocationsText(bool showNeedsGeocoding)
         {
             int gedcom = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM));
-            int found = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.EXACT_MATCH));
+            int found = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.MATCHED));
             int notfound = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH));
             int notsearched = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1);
             int total = FactLocation.AllLocations.Count() - 1;
@@ -278,30 +278,39 @@ namespace FTAnalyzer.Forms
                                 int foundLevel = -1;
                                 string address = string.Empty;
                                 GeoResponse.CResult.CGeometry.CViewPort viewport = new GeoResponse.CResult.CGeometry.CViewPort();
+                                loc.GeocodeStatus = FactLocation.Geocode.NO_MATCH;
                                 if (res.Status == "OK")
                                 {
-                                    foundLevel = GoogleMap.GetFactLocation(res.Results[0].Types);
-                                    address = res.Results[0].ReturnAddress;
-                                    viewport = res.Results[0].Geometry.ViewPort;
-                                    if (foundLevel >= loc.Level)
+                                    foreach (GeoResponse.CResult result in res.Results)
                                     {
+                                        foundLevel = GoogleMap.GetFactLocation(result.Types);
+                                        address = result.ReturnAddress;
+                                        viewport = result.Geometry.ViewPort;
+                                        if (foundLevel >= loc.Level)
+                                        {
+                                            latitude = result.Geometry.Location.Lat;
+                                            longitude = result.Geometry.Location.Long;
+                                            loc.GeocodeStatus = FactLocation.Geocode.MATCHED;
+                                            loc.ViewPort = viewport;
+                                            good++;
+                                            break;
+                                        }
+                                    }
+                                    if (loc.GeocodeStatus != FactLocation.Geocode.MATCHED)
+                                    {   // we checked all the google results and no joy so take first result as partial match
                                         latitude = res.Results[0].Geometry.Location.Lat;
                                         longitude = res.Results[0].Geometry.Location.Long;
-                                        loc.GeocodeStatus = FactLocation.Geocode.EXACT_MATCH;
-                                        loc.ViewPort = viewport;
-                                        good++;
-                                    }
-                                    else
-                                    {
+                                        viewport = res.Results[0].Geometry.ViewPort;
                                         loc.GeocodeStatus = FactLocation.Geocode.PARTIAL_MATCH;
                                         bad++;
                                     }
+
                                 }
                                 else if (res.Status == "ZERO_RESULTS")
                                 {
                                     skipped++;
                                     foundLevel = -2;
-                                    loc.GeocodeStatus = FactLocation.Geocode.NO_MATCH;
+
                                 }
                                 if (inDatabase)
                                 {

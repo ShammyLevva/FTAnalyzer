@@ -84,8 +84,8 @@ namespace FTAnalyzer.Forms
                     viewport = new GeoResponse.CResult.CGeometry.CViewPort();
                     viewport.NorthEast.Lat = loc.Latitude + 2;
                     viewport.NorthEast.Long = loc.Longitude + 2;
-                    viewport.SouthWest.Lat = loc.Latitude + 2;
-                    viewport.SouthWest.Long = loc.Longitude + 2;
+                    viewport.SouthWest.Lat = loc.Latitude - 2;
+                    viewport.SouthWest.Long = loc.Longitude - 2;
                     args= new Object[] { loc.Latitude, loc.Longitude };
                 }
                 else
@@ -125,7 +125,7 @@ namespace FTAnalyzer.Forms
             HashSet<string> types = new HashSet<string>(locationTypes);
             if (types.Contains(PREMISE) || types.Contains(STREET_ADDRESS) || types.Contains(CEMETERY) ||
                 types.Contains(HOSPITAL) || types.Contains(PLACE_OF_WORSHIP) || types.Contains(ROUTE) ||
-                types.Contains(INTERSECTION))
+                types.Contains(INTERSECTION) || types.Contains(ESTABLISHMENT))
                 return FactLocation.PLACE;
             if (types.Contains(ADMIN3) || types.Contains(SUBLOCALITY))
                 return FactLocation.ADDRESS;
@@ -168,17 +168,11 @@ namespace FTAnalyzer.Forms
                     request.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
                 }
                 Stream stream = request.GetResponse().GetResponseStream();
-                //string result;
-                //using (StreamReader sr = new StreamReader(stream))
-                //{
-                //    result = sr.ReadToEnd();
-                //}
-                //stream.Seek(0L, SeekOrigin.Begin);
                 res = (GeoResponse)serializer.ReadObject(stream);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to contact http://maps.google.com error was : " + ex.Message);
+                MessageBox.Show("Unable to contact http://maps.googleapis.com error was : " + ex.Message);
             }
             return res;
         }
@@ -188,7 +182,6 @@ namespace FTAnalyzer.Forms
         // Call geocoding routine but account for throttling by Google geocoding engine
         public static GeoResponse CallGeoWSCount(string address, int badtries)
         {
-            //Console.WriteLine("waiting " + sleepinterval);
             double seconds = sleepinterval / 1000;
             if (sleepinterval > 500)
                 OnWaitingForGoogle("Over Google limit. Waiting " + seconds + " seconds.");

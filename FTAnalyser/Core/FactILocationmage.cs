@@ -15,7 +15,7 @@ namespace FTAnalyzer
 
         private static FactLocationImage NOT_SEARCHED = new FactLocationImage(FactLocation.Geocode.NOT_SEARCHED,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\QuestionMark.png")));
-        private static FactLocationImage EXACT_MATCH = new FactLocationImage(FactLocation.Geocode.EXACT_MATCH,
+        private static FactLocationImage MATCHED = new FactLocationImage(FactLocation.Geocode.MATCHED,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Validate.png")));
         private static FactLocationImage PARTIAL_MATCH = new FactLocationImage(FactLocation.Geocode.PARTIAL_MATCH,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Warning.png")));
@@ -36,8 +36,8 @@ namespace FTAnalyzer
             {
                 case FactLocation.Geocode.NOT_SEARCHED:
                     return NOT_SEARCHED;
-                case FactLocation.Geocode.EXACT_MATCH:
-                    return EXACT_MATCH;
+                case FactLocation.Geocode.MATCHED:
+                    return MATCHED;
                 case FactLocation.Geocode.PARTIAL_MATCH:
                     return PARTIAL_MATCH;
                 case FactLocation.Geocode.GEDCOM:

@@ -1708,7 +1708,7 @@ namespace FTAnalyzer
                             case FactLocation.Geocode.NOT_SEARCHED:
                                 child.ImageIndex = 0;
                                 break;
-                            case FactLocation.Geocode.EXACT_MATCH:
+                            case FactLocation.Geocode.MATCHED:
                                 child.ImageIndex = 1;
                                 break;
                             case FactLocation.Geocode.PARTIAL_MATCH:
@@ -1785,7 +1785,7 @@ namespace FTAnalyzer
                             long level = (long)reader["level"];
                             long foundLevel = (long)reader["foundlevel"];
                             if (foundLevel >= level)
-                                loc.GeocodeStatus = FactLocation.Geocode.EXACT_MATCH;
+                                loc.GeocodeStatus = FactLocation.Geocode.MATCHED;
                             else if (foundLevel == -2)
                                 loc.GeocodeStatus = FactLocation.Geocode.NO_MATCH;
                             else
@@ -1801,7 +1801,7 @@ namespace FTAnalyzer
                 // write geocode results - ignore UNKNOWN entry
                 rtb.AppendText("Found " + (FactLocation.AllLocations.Count() - 1) + " locations in file.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM)) + " have geocoding from GEDCOM file.\n");
-                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.EXACT_MATCH)) + " have exact geocoding match from Google.\n");
+                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.MATCHED)) + " have a geocoding match from Google.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH)) + " have partial geocoding match from Google.\n"); 
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NO_MATCH)) + " could not be found on Google.\n");
                 rtb.AppendText("    " + (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1) + " haven't been searched on Google.\n");
