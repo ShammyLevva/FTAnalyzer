@@ -16,7 +16,7 @@ namespace FTAnalyzer
     {
 
         public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, SUBREGION = 2, ADDRESS = 3, PLACE = 4;
-        public enum Geocode { NOT_SEARCHED = 0, MATCHED = 1, PARTIAL_MATCH = 2, GEDCOM = 3, NO_MATCH = 4 };
+        public enum Geocode { NOT_SEARCHED = 0, MATCHED = 1, PARTIAL_MATCH = 2, GEDCOM_USER = 3, NO_MATCH = 4 };
 
         private string location;
         private string fixedLocation;
@@ -212,7 +212,7 @@ namespace FTAnalyzer
             this.Longitude = double.TryParse(longitude, out temp) ? temp : 0;
             this.GeocodeStatus = status;
             if (status == Geocode.NOT_SEARCHED && (Latitude != 0 || Longitude != 0))
-                status = Geocode.GEDCOM;
+                status = Geocode.GEDCOM_USER;
         }
 
         private FactLocation(string location)
@@ -530,7 +530,7 @@ namespace FTAnalyzer
                         return "Partial Match";
                     case Geocode.NOT_SEARCHED:
                         return "Not Searched";
-                    case Geocode.GEDCOM:
+                    case Geocode.GEDCOM_USER:
                         return "GEDCOM/User data";
                     case Geocode.NO_MATCH:
                         return "No Match";
@@ -605,7 +605,7 @@ namespace FTAnalyzer
                     return false;
                 if (includePartials && GeocodeStatus == Geocode.PARTIAL_MATCH)
                     return true;
-                return GeocodeStatus == Geocode.MATCHED || GeocodeStatus == Geocode.GEDCOM;
+                return GeocodeStatus == Geocode.MATCHED || GeocodeStatus == Geocode.GEDCOM_USER;
             }
         }
 

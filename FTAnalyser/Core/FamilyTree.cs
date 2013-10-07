@@ -1714,7 +1714,7 @@ namespace FTAnalyzer
                             case FactLocation.Geocode.PARTIAL_MATCH:
                                 child.ImageIndex = 2;
                                 break;
-                            case FactLocation.Geocode.GEDCOM:
+                            case FactLocation.Geocode.GEDCOM_USER:
                                 child.ImageIndex = 3;
                                 break;
                             case FactLocation.Geocode.NO_MATCH:
@@ -1800,7 +1800,7 @@ namespace FTAnalyzer
                 }
                 // write geocode results - ignore UNKNOWN entry
                 rtb.AppendText("Found " + (FactLocation.AllLocations.Count() - 1) + " locations in file.\n");
-                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM)) + " have geocoding from GEDCOM file.\n");
+                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER)) + " have geocoding from GEDCOM file.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.MATCHED)) + " have a geocoding match from Google.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH)) + " have partial geocoding match from Google.\n"); 
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NO_MATCH)) + " could not be found on Google.\n");

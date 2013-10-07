@@ -19,7 +19,7 @@ namespace FTAnalyzer
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Validate.png")));
         private static FactLocationImage PARTIAL_MATCH = new FactLocationImage(FactLocation.Geocode.PARTIAL_MATCH,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Warning.png")));
-        private static FactLocationImage GEDCOM = new FactLocationImage(FactLocation.Geocode.GEDCOM,
+        private static FactLocationImage GEDCOM_USER = new FactLocationImage(FactLocation.Geocode.GEDCOM_USER,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Complete_OK.png")));
         private static FactLocationImage NO_MATCH = new FactLocationImage(FactLocation.Geocode.NO_MATCH,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\CriticalError.png")));
@@ -40,8 +40,8 @@ namespace FTAnalyzer
                     return MATCHED;
                 case FactLocation.Geocode.PARTIAL_MATCH:
                     return PARTIAL_MATCH;
-                case FactLocation.Geocode.GEDCOM:
-                    return GEDCOM;
+                case FactLocation.Geocode.GEDCOM_USER:
+                    return GEDCOM_USER;
                 case FactLocation.Geocode.NO_MATCH:
                     return NO_MATCH;
             }
