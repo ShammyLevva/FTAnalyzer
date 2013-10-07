@@ -1784,17 +1784,12 @@ namespace FTAnalyzer
                         {
                             long level = (long)reader["level"];
                             long foundLevel = (long)reader["foundlevel"];
-                            if (foundLevel >= level)
-                                loc.GeocodeStatus = FactLocation.Geocode.MATCHED;
-                            else if (foundLevel == -2)
-                                loc.GeocodeStatus = FactLocation.Geocode.NO_MATCH;
-                            else
-                                loc.GeocodeStatus = FactLocation.Geocode.PARTIAL_MATCH;
                         }
                         loc.ViewPort.NorthEast.Lat = (double)reader["viewport_x_ne"];
                         loc.ViewPort.NorthEast.Long = (double)reader["viewport_y_ne"];
                         loc.ViewPort.SouthWest.Lat = (double)reader["viewport_x_sw"];
-                        loc.ViewPort.SouthWest.Long = (double)reader["viewport_y_sw"];
+                        loc.ViewPort.SouthWest.Long = (double)reader["viewport_y_sw"]; 
+                        loc.GeocodeStatus = (FactLocation.Geocode) Enum.Parse(typeof(FactLocation.Geocode),reader["GeocodeStatus"].ToString());
                     }
                     reader.Close();
                 }

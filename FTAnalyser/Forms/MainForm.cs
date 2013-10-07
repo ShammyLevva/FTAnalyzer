@@ -164,7 +164,7 @@ namespace FTAnalyzer
                 f.Dispose();
         }
 
-        private void DisposeDuplicateForms(object form)
+        public static void DisposeDuplicateForms(object form)
         {
             List<Form> toDispose = new List<Form>();
             foreach (Form f in Application.OpenForms)
@@ -396,18 +396,9 @@ namespace FTAnalyzer
             string country;
             Predicate<CensusIndividual> filter = CreateCensusIndividualFilter();
             IComparer<CensusIndividual> censusComparator;
-            //            if (ckbNoLocations.Checked)
-            //            {
             census = new Census(false, cenDate.CensusCountry);
             country = string.Empty;
             censusComparator = new DefaultCensusComparer();
-            //}
-            //else
-            //{
-            //    census = new Census(cenDate.CensusCountry, censusCountry.GetLocation);
-            //    country = " " + cenDate.Country;
-            //    censusComparator = new CensusLocationComparer(FactLocation.PARISH);
-            //}
             census.SetupCensus(filter, censusComparator, censusDate, false, false);
             census.Text = "People missing a " + censusDate.StartDate.Year.ToString() + country + " Census Record that you can search for";
             DisposeDuplicateForms(census);

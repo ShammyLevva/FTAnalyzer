@@ -178,6 +178,7 @@
             this.dgIndividuals.ShowEditingIcon = false;
             this.dgIndividuals.Size = new System.Drawing.Size(938, 337);
             this.dgIndividuals.TabIndex = 2;
+            this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgIndividuals_CellDoubleClick);
             this.dgIndividuals.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgIndividuals_CellToolTipTextNeeded);
             // 
             // statusStrip

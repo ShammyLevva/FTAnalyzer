@@ -323,7 +323,8 @@ namespace FTAnalyzer.Forms
                                     updateCmd.Parameters[6].Value = viewport.NorthEast.Long;
                                     updateCmd.Parameters[7].Value = viewport.SouthWest.Lat;
                                     updateCmd.Parameters[8].Value = viewport.SouthWest.Long;
-                                    updateCmd.Parameters[9].Value = loc.ToString();
+                                    updateCmd.Parameters[9].Value = loc.GeocodeStatus;
+                                    updateCmd.Parameters[10].Value = loc.ToString();
                                     updateCmd.ExecuteNonQuery();
                                 }
                                 else
@@ -338,6 +339,7 @@ namespace FTAnalyzer.Forms
                                     insertCmd.Parameters[7].Value = viewport.NorthEast.Long;
                                     insertCmd.Parameters[8].Value = viewport.SouthWest.Lat;
                                     insertCmd.Parameters[9].Value = viewport.SouthWest.Long;
+                                    insertCmd.Parameters[10].Value = loc.GeocodeStatus;
                                     insertCmd.ExecuteNonQuery();
                                 }
                                 loc.Latitude = latitude;

@@ -11,6 +11,7 @@ using Printing.DataGridViewPrint.Tools;
 using System.IO;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Filters;
+using FTAnalyzer.Forms;
 
 namespace FTAnalyzer
 {
@@ -80,6 +81,15 @@ namespace FTAnalyzer
                 MapLocation loc = dgIndividuals.Rows[e.RowIndex].DataBoundItem as MapLocation;
                 e.ToolTipText = "Geocoding status: " + loc.Location.Geocoded;
             }
+        }
+
+        private void dgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string indID = (string)dgIndividuals.CurrentRow.Cells["Ind_ID"].Value;
+            Individual ind = ft.GetIndividual(indID);
+            Facts factForm = new Facts(ind);
+            MainForm.DisposeDuplicateForms(factForm);
+            factForm.Show();
         }
     }
 }
