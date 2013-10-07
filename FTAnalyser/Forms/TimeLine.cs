@@ -443,6 +443,7 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.WaitCursor;
             labValue.Text = tbYears.Value.ToString();
             DisplayLocationsForYear(labValue.Text);
+            RefreshClusters();
             this.Cursor = Cursors.Default;
         }
 
