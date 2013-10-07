@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MapIndividuals));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.mnuSaveColumnLayout = new System.Windows.Forms.ToolStripButton();
             this.mnuResetColumns = new System.Windows.Forms.ToolStripButton();
@@ -44,11 +44,13 @@
             this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ind_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Relaton = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeOfFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AgeAtFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -67,7 +69,7 @@
             this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(884, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(938, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -153,26 +155,28 @@
             this.dgIndividuals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FactIcon,
             this.FactLocation,
+            this.Ind_ID,
             this.FactName,
             this.Relaton,
             this.TypeOfFact,
             this.FactDate,
-            this.AgeAtFact});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgIndividuals.DefaultCellStyle = dataGridViewCellStyle2;
+            this.AgeAtFact,
+            this.Ahnentafel});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgIndividuals.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgIndividuals.Location = new System.Drawing.Point(0, 25);
             this.dgIndividuals.Name = "dgIndividuals";
             this.dgIndividuals.ReadOnly = true;
             this.dgIndividuals.RowHeadersVisible = false;
             this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgIndividuals.ShowEditingIcon = false;
-            this.dgIndividuals.Size = new System.Drawing.Size(884, 337);
+            this.dgIndividuals.Size = new System.Drawing.Size(938, 337);
             this.dgIndividuals.TabIndex = 2;
             this.dgIndividuals.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgIndividuals_CellToolTipTextNeeded);
             // 
@@ -182,7 +186,7 @@
             this.tsRecords});
             this.statusStrip.Location = new System.Drawing.Point(0, 365);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(884, 22);
+            this.statusStrip.Size = new System.Drawing.Size(938, 22);
             this.statusStrip.TabIndex = 3;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -211,6 +215,16 @@
             this.FactLocation.Name = "FactLocation";
             this.FactLocation.ReadOnly = true;
             this.FactLocation.Width = 300;
+            // 
+            // Ind_ID
+            // 
+            this.Ind_ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Ind_ID.DataPropertyName = "Ind_ID";
+            this.Ind_ID.HeaderText = "Ind_ID";
+            this.Ind_ID.MinimumWidth = 50;
+            this.Ind_ID.Name = "Ind_ID";
+            this.Ind_ID.ReadOnly = true;
+            this.Ind_ID.Width = 50;
             // 
             // FactName
             // 
@@ -261,11 +275,20 @@
             this.AgeAtFact.ReadOnly = true;
             this.AgeAtFact.Width = 50;
             // 
+            // Ahnentafel
+            // 
+            this.Ahnentafel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Ahnentafel.HeaderText = "Ahnentafel";
+            this.Ahnentafel.MinimumWidth = 50;
+            this.Ahnentafel.Name = "Ahnentafel";
+            this.Ahnentafel.ReadOnly = true;
+            this.Ahnentafel.Width = 50;
+            // 
             // MapIndividuals
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 387);
+            this.ClientSize = new System.Drawing.Size(938, 387);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dgIndividuals);
             this.Controls.Add(this.toolStrip1);
@@ -299,10 +322,12 @@
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.DataGridViewImageColumn FactIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ind_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Relaton;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeOfFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn AgeAtFact;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ahnentafel;
     }
 }

@@ -34,14 +34,17 @@ namespace FTAnalyzer.Mapping
 
         public FactDate FactDate { get { return Fact.FactDate; } }
 
+        public string Ind_ID { get { return Individual.Ind_ID; } }
+        
         public string Name { get { return Individual.Name; } }
 
         public string TypeOfFact { get { return Fact.GetFactTypeDescription(Fact.FactType); } }
 
         public Age AgeAtFact { get { return Individual == null ? null : Individual.GetAge(year); } }
-
-        public string Relation { get { return Individual.Relation; } }
         
+        public string Relation { get { return Individual.Relation; } }
+
+        public int Ahnentafel { get { return Individual.Ahnentafel; } }
     }
 }
 

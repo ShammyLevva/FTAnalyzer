@@ -187,7 +187,7 @@ namespace FTAnalyzer.Utilities
 
         public SQLiteCommand UpdateGeocode()
         {
-            SQLiteCommand updateCmd = new SQLiteCommand("update geocode set level = ?, latitude = ?, longitude = ?, founddate = date('now'), foundlocation = ?, foundlevel = ? viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ? where location = ?", conn);
+            SQLiteCommand updateCmd = new SQLiteCommand("update geocode set level = ?, latitude = ?, longitude = ?, founddate = date('now'), foundlocation = ?, foundlevel = ?, viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ? where location = ?", conn);
 
             SQLiteParameter param = updateCmd.CreateParameter();
             param = updateCmd.CreateParameter();

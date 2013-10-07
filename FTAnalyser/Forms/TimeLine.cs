@@ -355,7 +355,7 @@ namespace FTAnalyzer.Forms
                     }
                     count++;
                     int percent = (int)Math.Truncate((count - 1) * 100.0 / total);
-                    string status = "Googled " + good + " good, " + bad + "partial. Skip " + geocoded + " prev found, " + skipped + " partial/not found. Done " + (count - 1) +
+                    string status = "Googled " + good + " good, " + bad + " partial. Skip " + geocoded + " prev found, " + skipped + " partial/not found. Done " + (count - 1) +
                             " of " + total + ".  ";
                     worker.ReportProgress(percent, status);
 
