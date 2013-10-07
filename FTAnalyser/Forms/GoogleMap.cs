@@ -30,12 +30,14 @@ namespace FTAnalyzer.Forms
         public static readonly string NEIGHBOURHOOD = "neighborhood";
         public static readonly string STREET_ADDRESS = "street_address";
         public static readonly string PREMISE = "premise";
+        public static readonly string SUBPREMISE = "subpremise";
         public static readonly string CEMETERY = "cemetery";
         public static readonly string HOSPITAL = "hospital";
         public static readonly string PLACE_OF_WORSHIP = "place_of_worship";
         public static readonly string ROUTE = "route";
         public static readonly string INTERSECTION = "intersection";
         public static readonly string POLITICAL = "political";
+        public static readonly string POSTALCODE = "postalcode";
 
         private String location;
         private bool loaded;
@@ -126,7 +128,8 @@ namespace FTAnalyzer.Forms
             HashSet<string> types = new HashSet<string>(locationTypes);
             if (types.Contains(PREMISE) || types.Contains(STREET_ADDRESS) || types.Contains(CEMETERY) ||
                 types.Contains(HOSPITAL) || types.Contains(PLACE_OF_WORSHIP) || types.Contains(ROUTE) ||
-                types.Contains(INTERSECTION) || types.Contains(ESTABLISHMENT))
+                types.Contains(INTERSECTION) || types.Contains(ESTABLISHMENT) || types.Contains(SUBPREMISE) ||
+                types.Contains(POSTALCODE))
                 return FactLocation.PLACE;
             if (types.Contains(ADMIN3) || types.Contains(SUBLOCALITY))
                 return FactLocation.ADDRESS;
