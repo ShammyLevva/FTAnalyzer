@@ -251,7 +251,7 @@ namespace FTAnalyzer.Forms
                     if (loc.IsGeoCoded)
                     {
                         geocoded++;
-                        Console.WriteLine("Already Geocoded : " + loc.ToString());
+                        //Console.WriteLine("Already Geocoded : " + loc.ToString());
                     }
                     else
                     {
@@ -348,7 +348,7 @@ namespace FTAnalyzer.Forms
                             else
                             {
                                 skipped++;
-                                Console.WriteLine("Skipped : " + loc.ToString());
+                                //Console.WriteLine("Skipped : " + loc.ToString());
                             }
                         }
                         reader.Close();
@@ -565,7 +565,6 @@ namespace FTAnalyzer.Forms
 
         private void mapBox1_MapQueried(FeatureDataTable data)
         {
-            Console.WriteLine("Map Queried");
             List<MapLocation> locations = new List<MapLocation>();
             foreach (FeatureDataRow row in data)
             {
