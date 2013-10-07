@@ -35,6 +35,7 @@ namespace FTAnalyzer.Forms
         public static readonly string PLACE_OF_WORSHIP = "place_of_worship";
         public static readonly string ROUTE = "route";
         public static readonly string INTERSECTION = "intersection";
+        public static readonly string POLITICAL = "political";
 
         private String location;
         private bool loaded;
@@ -129,7 +130,8 @@ namespace FTAnalyzer.Forms
                 return FactLocation.PLACE;
             if (types.Contains(ADMIN3) || types.Contains(SUBLOCALITY))
                 return FactLocation.ADDRESS;
-            if (types.Contains(ADMIN2) || types.Contains(NEIGHBOURHOOD) || types.Contains(LOCALITY))
+            if (types.Contains(ADMIN2) || types.Contains(NEIGHBOURHOOD) || 
+                types.Contains(LOCALITY) || types.Contains(POLITICAL))
                 return FactLocation.SUBREGION;
             if (types.Contains(ADMIN1))
                 return FactLocation.REGION;

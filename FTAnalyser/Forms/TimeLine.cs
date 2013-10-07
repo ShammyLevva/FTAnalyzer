@@ -261,7 +261,7 @@ namespace FTAnalyzer.Forms
                         if (loc.ToString().Length > 0)
                         {
                             GeoResponse res = null;
-                            if (!(!mnuRetryNotFound.Checked && inDatabase))
+                            if (!(!mnuRetryPartial.Checked && inDatabase))
                             {
                                 res = GoogleMap.CallGeoWSCount(loc.ToString(), 8);
                                 if (res != null && res.Status == "Maxed")

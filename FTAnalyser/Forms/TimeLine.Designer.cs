@@ -37,14 +37,14 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.geocodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.geocodeLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuRetryNotFound = new System.Windows.Forms.ToolStripMenuItem();
             this.relationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.directAncestorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bloodRelativesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.marriedToDirectOrBloodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.relatedByMarriageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unknownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOptions = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRetryPartial = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuKeepZoom = new System.Windows.Forms.ToolStripMenuItem();
             this.tbYears = new System.Windows.Forms.TrackBar();
             this.labMin = new System.Windows.Forms.Label();
@@ -99,7 +99,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.geocodeToolStripMenuItem,
             this.relationsToolStripMenuItem,
-            this.optionsToolStripMenuItem});
+            this.mnuOptions});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(920, 24);
@@ -109,8 +109,7 @@
             // geocodeToolStripMenuItem
             // 
             this.geocodeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.geocodeLocationsToolStripMenuItem,
-            this.mnuRetryNotFound});
+            this.geocodeLocationsToolStripMenuItem});
             this.geocodeToolStripMenuItem.Name = "geocodeToolStripMenuItem";
             this.geocodeToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.geocodeToolStripMenuItem.Text = "Process";
@@ -122,13 +121,6 @@
             this.geocodeLocationsToolStripMenuItem.Text = "Geocode Locations";
             this.geocodeLocationsToolStripMenuItem.ToolTipText = "Looks up map co-ordinates for locations in your file";
             this.geocodeLocationsToolStripMenuItem.Click += new System.EventHandler(this.geocodeLocationsToolStripMenuItem_Click);
-            // 
-            // mnuRetryNotFound
-            // 
-            this.mnuRetryNotFound.CheckOnClick = true;
-            this.mnuRetryNotFound.Name = "mnuRetryNotFound";
-            this.mnuRetryNotFound.Size = new System.Drawing.Size(175, 22);
-            this.mnuRetryNotFound.Text = "Retry Not Found";
             // 
             // relationsToolStripMenuItem
             // 
@@ -188,13 +180,21 @@
             this.unknownToolStripMenuItem.Text = "Unknown";
             this.unknownToolStripMenuItem.CheckedChanged += new System.EventHandler(this.Relations_CheckedChanged);
             // 
-            // optionsToolStripMenuItem
+            // mnuOptions
             // 
-            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuOptions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuRetryPartial,
             this.mnuKeepZoom});
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.optionsToolStripMenuItem.Text = "Options";
+            this.mnuOptions.Name = "mnuOptions";
+            this.mnuOptions.Size = new System.Drawing.Size(61, 20);
+            this.mnuOptions.Text = "Options";
+            // 
+            // mnuRetryPartial
+            // 
+            this.mnuRetryPartial.CheckOnClick = true;
+            this.mnuRetryPartial.Name = "mnuRetryPartial";
+            this.mnuRetryPartial.Size = new System.Drawing.Size(231, 22);
+            this.mnuRetryPartial.Text = "Retry Partially Geocoded";
             // 
             // mnuKeepZoom
             // 
@@ -396,8 +396,8 @@
         private System.Windows.Forms.ToolStripMenuItem marriedToDirectOrBloodToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem relatedByMarriageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unknownToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuRetryNotFound;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuRetryPartial;
+        private System.Windows.Forms.ToolStripMenuItem mnuOptions;
         private System.Windows.Forms.ToolStripMenuItem mnuKeepZoom;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
