@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Globalization;
 using FTAnalyzer.Utilities;
 using FTAnalyzer.Mapping;
+using System.Drawing;
 
 namespace FTAnalyzer
 {
@@ -497,6 +498,11 @@ namespace FTAnalyzer
         }
 
         #region Properties
+
+        public Image Icon
+        {
+            get { return FactLocationImage.ErrorIcon(GeocodeStatus).Icon; }
+        }
 
         public string AddressNumeric
         {
