@@ -18,7 +18,7 @@ using SharpMap.Data;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
 using SharpMap.Rendering;
-using SharpMap.Rendering.Decoration;
+using SharpMap.Rendering.Thematics;
 using SharpMap.Styles;
 using System.IO;
 using FTAnalyzer.Mapping;
@@ -104,6 +104,7 @@ namespace FTAnalyzer.Forms
             VectorStyle feature = new VectorStyle();
             feature.PointColor = new SolidBrush(Color.Red);
             feature.PointSize = 20;
+            feature.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\teardrop_blue.png"));
             styles.Add(MapCluster.FEATURE, feature);
 
             VectorStyle cluster = new VectorStyle();
@@ -112,32 +113,11 @@ namespace FTAnalyzer.Forms
             cluster.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\people35.png"));
             styles.Add(MapCluster.CLUSTER, cluster);
 
-            directAncestorsToolStripMenuItem.ForeColor = Color.ForestGreen;
-
-            //VectorStyle blood = new VectorStyle();
-            //blood.PointColor = new SolidBrush(Color.Red);
-            //blood.PointSize = 10;
-            //styles.Add(Individual.BLOOD, blood);
-            bloodRelativesToolStripMenuItem.ForeColor = Color.Red;
-
-            //VectorStyle marriage = new VectorStyle();
-            //marriage.PointColor = new SolidBrush(Color.Pink);
-            //marriage.PointSize = 10;
-            //styles.Add(Individual.MARRIAGE, marriage);
-            relatedByMarriageToolStripMenuItem.ForeColor = Color.Pink;
-
-            //VectorStyle marriagedb = new VectorStyle();
-            //marriagedb.PointColor = new SolidBrush(Color.MediumBlue);
-            //marriagedb.PointSize = 10;
-            //styles.Add(Individual.MARRIEDTODB, marriagedb);
-            marriedToDirectOrBloodToolStripMenuItem.ForeColor = Color.MediumBlue;
-
             VectorStyle unknown = new VectorStyle();
             unknown.PointColor = new SolidBrush(Color.Black);
             unknown.PointSize = 10;
             styles.Add(MapCluster.UNKNOWN, unknown);
-            unknownToolStripMenuItem.ForeColor = Color.Black;
-
+            
             clusterLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<string>("Cluster", styles, unknown);
             mapBox1.Map.Layers.Add(clusterLayer);
 
@@ -148,19 +128,17 @@ namespace FTAnalyzer.Forms
             labelLayer.Enabled = true;
             //Specifiy field that contains the label string.
             labelLayer.LabelColumn = "Label";
-            labelLayer.Style = new LabelStyle();
-            labelLayer.Style.ForeColor = Color.Black;
-            labelLayer.Style.Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold);
-            labelLayer.Style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left;
-            labelLayer.Style.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom;
-            labelLayer.Style.CollisionDetection = true;
-            //labelLayer.Style.CollisionBuffer = new SizeF(5, 5);
-            labelLayer.LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection;
-            //labelLayer.MultipartGeometryBehaviour = LabelLayer.MultipartGeometryBehaviourEnum.Largest;
-            labelLayer.Style.Offset = new PointF(-12, 22);
-            labelLayer.Style.Halo = new Pen(Color.Yellow, 3);
             labelLayer.TextRenderingHint = TextRenderingHint.AntiAlias;
             labelLayer.SmoothingMode = SmoothingMode.AntiAlias;
+            LabelStyle style = new LabelStyle();
+            style.ForeColor = Color.Black;
+            style.Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold);
+            style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left;
+            style.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom;
+            style.CollisionDetection = true;
+            style.Offset = new PointF(-12, 22);
+            style.Halo = new Pen(Color.Yellow, 3);
+            labelLayer.Style = style;
             mapBox1.Map.Layers.Add(labelLayer);
 
             mapBox1.Map.MinimumZoom = 1000;
@@ -171,6 +149,7 @@ namespace FTAnalyzer.Forms
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
         }
 
+       
         #region Geocoding
 
         private void SetGeoCodedYearRange()
@@ -584,6 +563,12 @@ namespace FTAnalyzer.Forms
         private void mapBox1_MapViewOnChange()
         {
             RefreshClusters();
+        }
+
+        private void mapBox1_MapCenterChanged(Coordinate center)
+        {
+            //Maybe panning doesn't need refresh?
+            //RefreshClusters();
         }
     }
 }

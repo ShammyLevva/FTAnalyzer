@@ -31,7 +31,7 @@ namespace FTAnalyzer
             reportFormHelper = new ReportFormHelper(this.Text, dgIndividuals, this.ResetTable);
             italicFont = new Font(dgIndividuals.DefaultCellStyle.Font, FontStyle.Italic);
             reportFormHelper.LoadColumnLayout("MapIndividualColumns.xml");
-            tsRecords.Text = locations.Count + " Records";
+            tsRecords.Text = locations.Count + " Records. " + Properties.Messages.Hints_Individual;
             MapLocation mostCommon = locations.MostCommon();
             string titleText = mostCommon.Location.ToString() + " in " + year;
             this.Text = locations.Count < 2 ? titleText : "Centred near " + titleText;
