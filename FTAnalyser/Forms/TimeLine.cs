@@ -1,29 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SQLite;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.IO;
 using System.Linq;
-using System.Net;
+using System.Web;
 using System.Windows.Forms;
 using BruTile.Web;
-using FTAnalyzer.Events;
-using FTAnalyzer.Utilities;
+using FTAnalyzer.Mapping;
 using GeoAPI.CoordinateSystems.Transformations;
 using GeoAPI.Geometries;
 using SharpMap.Data;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
-using SharpMap.Rendering;
-using SharpMap.Rendering.Thematics;
 using SharpMap.Styles;
-using System.IO;
-using FTAnalyzer.Mapping;
-using SharpMap.Forms.ToolBar;
-using System.Web;
 
 namespace FTAnalyzer.Forms
 {
@@ -47,10 +38,10 @@ namespace FTAnalyzer.Forms
             backgroundColour = mapZoomToolStrip.Items[0].BackColor; 
             mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(mapBox1_MapViewOnChange);
             ft = FamilyTree.Instance;
-            SetLocationsText();
+            CheckIfGeocodingNeeded();
         }
 
-        private void SetLocationsText()
+        private void CheckIfGeocodingNeeded()
         {
             int notsearched = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1);
             if (notsearched > 0)
@@ -64,7 +55,15 @@ namespace FTAnalyzer.Forms
 
         private void StartGeocoding()
         {
-            // needs to open geocoding form
+            if (!ft.Geocoding) // don't geocode if another geocode session in progress
+            {
+                this.Cursor = Cursors.WaitCursor;
+                GeocodeLocations geo = new GeocodeLocations();
+                geo.Show();
+                MainForm.DisposeDuplicateForms(geo);
+                geo.StartGeoCoding();
+                this.Cursor = Cursors.Default;
+            }
         }
 
         private void SetupMap()
@@ -136,9 +135,6 @@ namespace FTAnalyzer.Forms
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
         }
 
-       
-        #region Geocoding
-
         private void SetGeoCodedYearRange()
         {
             minGeoCodedYear = FactDate.MAXDATE.Year;
@@ -177,8 +173,6 @@ namespace FTAnalyzer.Forms
             StartGeocoding();
         }
 
-        #endregion
-
         public void DisplayLocationsForYear(string year)
         {
             int result = 0;
@@ -187,6 +181,7 @@ namespace FTAnalyzer.Forms
             {
                 FactDate yearDate = new FactDate(year);
                 List<MapLocation> locations = FilterToRelationsIncluded(ft.YearMapLocations(yearDate));
+                txtLocations.Text = locations.Count() + " Locations";
                 factLocations.Clear();
                 Envelope bbox = new Envelope();
                 foreach (MapLocation loc in locations)
@@ -354,7 +349,8 @@ namespace FTAnalyzer.Forms
             while(tbYears.Value < tbYears.Maximum)
             {
                 tbYears.Value++;
-                Application.DoEvents();
+                // wait for a bit before moving onto next year. Wait needs to be under user control
+                // ie: user must be able to stop the playing of timeline
             }
         }
     }
