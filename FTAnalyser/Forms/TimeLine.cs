@@ -258,6 +258,7 @@ namespace FTAnalyzer.Forms
                                 double longitude = 0;
                                 int foundLevel = -1;
                                 string address = string.Empty;
+                                string resultType = string.Empty;
                                 GeoResponse.CResult.CGeometry.CViewPort viewport = new GeoResponse.CResult.CGeometry.CViewPort();
                                 loc.GeocodeStatus = FactLocation.Geocode.NO_MATCH;
                                 if (res.Status == "OK")
@@ -267,6 +268,7 @@ namespace FTAnalyzer.Forms
                                         foundLevel = GoogleMap.GetFactLocation(result.Types);
                                         address = result.ReturnAddress;
                                         viewport = result.Geometry.ViewPort;
+                                        resultType = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
                                         if (foundLevel >= loc.Level)
                                         {
                                             latitude = result.Geometry.Location.Lat;
@@ -282,6 +284,7 @@ namespace FTAnalyzer.Forms
                                         latitude = res.Results[0].Geometry.Location.Lat;
                                         longitude = res.Results[0].Geometry.Location.Long;
                                         viewport = res.Results[0].Geometry.ViewPort;
+                                        resultType = EnhancedTextInfo.ConvertStringArrayToString(res.Results[0].Types);
                                         loc.GeocodeStatus = FactLocation.Geocode.PARTIAL_MATCH;
                                         bad++;
                                     }
@@ -305,7 +308,8 @@ namespace FTAnalyzer.Forms
                                     updateCmd.Parameters[7].Value = viewport.SouthWest.Lat;
                                     updateCmd.Parameters[8].Value = viewport.SouthWest.Long;
                                     updateCmd.Parameters[9].Value = loc.GeocodeStatus;
-                                    updateCmd.Parameters[10].Value = loc.ToString();
+                                    updateCmd.Parameters[10].Value = resultType;
+                                    updateCmd.Parameters[11].Value = loc.ToString();
                                     updateCmd.ExecuteNonQuery();
                                 }
                                 else
@@ -321,6 +325,7 @@ namespace FTAnalyzer.Forms
                                     insertCmd.Parameters[8].Value = viewport.SouthWest.Lat;
                                     insertCmd.Parameters[9].Value = viewport.SouthWest.Long;
                                     insertCmd.Parameters[10].Value = loc.GeocodeStatus;
+                                    insertCmd.Parameters[11].Value = resultType;
                                     insertCmd.ExecuteNonQuery();
                                 }
                                 loc.Latitude = latitude;

@@ -137,7 +137,7 @@ namespace FTAnalyzer.Utilities
 
         public SQLiteCommand InsertGeocode()
         {
-            SQLiteCommand insertCmd = new SQLiteCommand("insert into geocode (location, level, latitude, longitude, founddate, foundlocation, foundlevel, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw, geocodestatus) values(?,?,?,?,date('now'),?,?,?,?,?,?,?)", conn);
+            SQLiteCommand insertCmd = new SQLiteCommand("insert into geocode (location, level, latitude, longitude, founddate, foundlocation, foundlevel, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw, geocodestatus, foundresulttype) values(?,?,?,?,date('now'),?,?,?,?,?,?,?,?)", conn);
             SQLiteParameter param = insertCmd.CreateParameter();
 
             param = insertCmd.CreateParameter();
@@ -184,13 +184,17 @@ namespace FTAnalyzer.Utilities
             param.DbType = DbType.Int32;
             insertCmd.Parameters.Add(param);
 
+            param = insertCmd.CreateParameter();
+            param.DbType = DbType.String;
+            insertCmd.Parameters.Add(param);
+
             insertCmd.Prepare();
             return insertCmd;
         }
 
         public SQLiteCommand UpdateGeocode()
         {
-            SQLiteCommand updateCmd = new SQLiteCommand("update geocode set level = ?, latitude = ?, longitude = ?, founddate = date('now'), foundlocation = ?, foundlevel = ?, viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ?, geocodestatus = ? where location = ?", conn);
+            SQLiteCommand updateCmd = new SQLiteCommand("update geocode set level = ?, latitude = ?, longitude = ?, founddate = date('now'), foundlocation = ?, foundlevel = ?, viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ?, geocodestatus = ?, foundresulttype = ? where location = ?", conn);
 
             SQLiteParameter param = updateCmd.CreateParameter();
             param = updateCmd.CreateParameter();
@@ -235,6 +239,10 @@ namespace FTAnalyzer.Utilities
 
             param = updateCmd.CreateParameter();
             param.DbType = DbType.Int32;
+            updateCmd.Parameters.Add(param);
+
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.String;
             updateCmd.Parameters.Add(param);
 
             updateCmd.Prepare();

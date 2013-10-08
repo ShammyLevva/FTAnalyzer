@@ -38,5 +38,17 @@ namespace FTAnalyzer.Utilities
                            .Replace("9Th", "9th");
             return output;
         }
+
+        public static string ConvertStringArrayToString(string[] array)
+        {
+            char[] charsToTrim = {',', '.', ' '};
+            StringBuilder builder = new StringBuilder();
+            foreach (string value in array)
+            {
+                builder.Append(value);
+                builder.Append(", ");
+            }
+            return builder.ToString().TrimEnd(charsToTrim);
+        }
     }
 }

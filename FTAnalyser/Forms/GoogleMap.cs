@@ -38,6 +38,7 @@ namespace FTAnalyzer.Forms
         public static readonly string INTERSECTION = "intersection";
         public static readonly string POLITICAL = "political";
         public static readonly string POSTALCODE = "postalcode";
+        public static readonly string POSTALTOWN = "postal_town";
         public static readonly string NATURALFEATURE = "natural_feature";
         public static readonly string AIRPORT = "airport";
         public static readonly string PARK = "park";
@@ -140,7 +141,7 @@ namespace FTAnalyzer.Forms
             if (types.Contains(ADMIN3) || types.Contains(SUBLOCALITY))
                 return FactLocation.ADDRESS;
             if (types.Contains(ADMIN2) || types.Contains(NEIGHBOURHOOD) || 
-                types.Contains(LOCALITY) || types.Contains(POLITICAL))
+                types.Contains(LOCALITY) || types.Contains(POLITICAL) || types.Contains(POSTALTOWN))
                 return FactLocation.SUBREGION;
             if (types.Contains(ADMIN1))
                 return FactLocation.REGION;
