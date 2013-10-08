@@ -135,10 +135,10 @@ namespace FTAnalyzer.Forms
             LabelStyle style = new LabelStyle();
             style.ForeColor = Color.Black;
             style.Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold);
-            style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left;
+            style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center;
             style.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom;
             style.CollisionDetection = true;
-            style.Offset = new PointF(-12, 22);
+            style.Offset = new PointF(2, 22);
             style.Halo = new Pen(Color.Yellow, 3);
             labelLayer.Style = style;
             mapBox1.Map.Layers.Add(labelLayer);
