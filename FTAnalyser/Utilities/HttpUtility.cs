@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Net;
 
 namespace System.Web
 {
@@ -536,6 +537,20 @@ namespace System.Web
                 return (UrlPathEncode(str.Substring(0, index)) + str.Substring(index));
             }
             return UrlEncodeSpaces(UrlEncodeNonAscii(str, Encoding.UTF8));
+        }
+
+        public static void SetDefaultProxy()
+        {
+            HttpWebRequest request = HttpWebRequest.Create("http://www.google.com") as HttpWebRequest;
+            IWebProxy proxy = request.Proxy;
+            if (proxy != null)
+            {
+                string proxyuri = proxy.GetProxy(request.RequestUri).ToString();
+                request.UseDefaultCredentials = true;
+                proxy = new WebProxy(proxyuri, false);
+                proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                WebRequest.DefaultWebProxy = proxy;
+            }
         }
 
         // Nested Types

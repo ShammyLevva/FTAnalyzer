@@ -1322,7 +1322,6 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             TimeLine tl = new TimeLine();
-            tl.SetLocationsText(true);
             tl.Show();
             DisposeDuplicateForms(tl);
             HourGlass(false);
@@ -1334,7 +1333,6 @@ namespace FTAnalyzer
             {
                 HourGlass(true);
                 GeocodeLocations geo = new GeocodeLocations();
-                geo.SetLocationsText(false);
                 geo.Show();
                 DisposeDuplicateForms(geo);
                 geo.StartGeoCoding();

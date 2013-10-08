@@ -200,6 +200,7 @@
     <Compile Include="Forms\GeocodeLocations.Designer.cs">
       <DependentUpon>GeocodeLocations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\Displays\IDisplayGeocodedLocation.cs" />
     <Compile Include="Forms\MapIndivudals.cs">
       <SubType>Form</SubType>
     </Compile>

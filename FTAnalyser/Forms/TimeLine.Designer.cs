@@ -32,11 +32,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TimeLine));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.txtLocations = new System.Windows.Forms.ToolStripStatusLabel();
-            this.pbGeocoding = new System.Windows.Forms.ToolStripProgressBar();
-            this.txtGoogleWait = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.geocodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.geocodeLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.playTimelineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.relationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.directAncestorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bloodRelativesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,15 +51,12 @@
             this.labMax = new System.Windows.Forms.Label();
             this.labValue = new System.Windows.Forms.Label();
             this.mapBox1 = new SharpMap.Forms.MapBox();
-            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.menuMap = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSatellite = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.playTimelineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -69,9 +66,7 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.txtLocations,
-            this.pbGeocoding,
-            this.txtGoogleWait});
+            this.txtLocations});
             this.statusStrip1.Location = new System.Drawing.Point(0, 562);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(920, 22);
@@ -83,18 +78,6 @@
             this.txtLocations.Name = "txtLocations";
             this.txtLocations.Size = new System.Drawing.Size(58, 17);
             this.txtLocations.Text = "Locations";
-            // 
-            // pbGeocoding
-            // 
-            this.pbGeocoding.Name = "pbGeocoding";
-            this.pbGeocoding.Size = new System.Drawing.Size(100, 16);
-            this.pbGeocoding.Visible = false;
-            // 
-            // txtGoogleWait
-            // 
-            this.txtGoogleWait.Name = "txtGoogleWait";
-            this.txtGoogleWait.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.txtGoogleWait.Size = new System.Drawing.Size(0, 17);
             // 
             // menuStrip1
             // 
@@ -125,6 +108,20 @@
             this.geocodeLocationsToolStripMenuItem.Text = "Geocode Locations";
             this.geocodeLocationsToolStripMenuItem.ToolTipText = "Looks up map co-ordinates for locations in your file";
             this.geocodeLocationsToolStripMenuItem.Click += new System.EventHandler(this.geocodeLocationsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(172, 6);
+            this.toolStripSeparator1.Visible = false;
+            // 
+            // playTimelineToolStripMenuItem
+            // 
+            this.playTimelineToolStripMenuItem.Name = "playTimelineToolStripMenuItem";
+            this.playTimelineToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.playTimelineToolStripMenuItem.Text = "Play Timeline";
+            this.playTimelineToolStripMenuItem.Visible = false;
+            this.playTimelineToolStripMenuItem.Click += new System.EventHandler(this.playTimelineToolStripMenuItem_Click);
             // 
             // relationsToolStripMenuItem
             // 
@@ -275,14 +272,6 @@
             this.mapBox1.MapCenterChanged += new SharpMap.Forms.MapBox.MapCenterChangedHandler(this.mapBox1_MapCenterChanged);
             this.mapBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mapBox1_MouseDoubleClick);
             // 
-            // backgroundWorker
-            // 
-            this.backgroundWorker.WorkerReportsProgress = true;
-            this.backgroundWorker.WorkerSupportsCancellation = true;
-            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
-            // 
             // mapZoomToolStrip
             // 
             this.mapZoomToolStrip.Enabled = false;
@@ -349,20 +338,6 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Currently Viewing:";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(172, 6);
-            this.toolStripSeparator1.Visible = false;
-            // 
-            // playTimelineToolStripMenuItem
-            // 
-            this.playTimelineToolStripMenuItem.Name = "playTimelineToolStripMenuItem";
-            this.playTimelineToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.playTimelineToolStripMenuItem.Text = "Play Timeline";
-            this.playTimelineToolStripMenuItem.Visible = false;
-            this.playTimelineToolStripMenuItem.Click += new System.EventHandler(this.playTimelineToolStripMenuItem_Click);
-            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -380,7 +355,6 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "TimeLine";
             this.Text = "Timeline of Individuals";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TimeLine_FormClosing);
             this.Load += new System.EventHandler(this.TimeLine_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -401,14 +375,11 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem geocodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem geocodeLocationsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripProgressBar pbGeocoding;
-        private System.Windows.Forms.ToolStripStatusLabel txtGoogleWait;
         private System.Windows.Forms.TrackBar tbYears;
         private System.Windows.Forms.Label labMin;
         private System.Windows.Forms.Label labMax;
         private System.Windows.Forms.Label labValue;
         private SharpMap.Forms.MapBox mapBox1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker;
         private SharpMap.Forms.ToolBar.MapZoomToolStrip mapZoomToolStrip;
         private System.Windows.Forms.ToolStripMenuItem relationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem directAncestorsToolStripMenuItem;

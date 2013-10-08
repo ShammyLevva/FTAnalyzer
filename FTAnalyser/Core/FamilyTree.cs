@@ -386,7 +386,7 @@ namespace FTAnalyzer
                         result.Add(new MapLocation(ind, fact, when));
                     else
                     {
-                        int startlevel = loc.Level -1;
+                        int startlevel = loc.Level - 1;
                         for (int level = startlevel; level > FactLocation.UNKNOWN; level--)
                         {
                             loc = loc.GetLocation(level);
@@ -983,6 +983,17 @@ namespace FTAnalyzer
         public SortableBindingList<IDisplayLocation> AllDisplayPlaces
         {
             get { return displayLocations[FactLocation.PLACE] == null ? GetDisplayLocations(FactLocation.PLACE) : displayLocations[FactLocation.PLACE]; }
+        }
+
+        public SortableBindingList<IDisplayGeocodedLocation> AllGeocodingLocations
+        {
+            get
+            {
+                SortableBindingList<IDisplayGeocodedLocation> result = new SortableBindingList<IDisplayGeocodedLocation>();
+                foreach (IDisplayGeocodedLocation loc in AllDisplayPlaces)
+                    result.Add(loc);
+                return result;
+            }
         }
 
         public SortableBindingList<IDisplayIndividual> AllDisplayIndividuals
@@ -1788,8 +1799,8 @@ namespace FTAnalyzer
                         loc.ViewPort.NorthEast.Lat = (double)reader["viewport_x_ne"];
                         loc.ViewPort.NorthEast.Long = (double)reader["viewport_y_ne"];
                         loc.ViewPort.SouthWest.Lat = (double)reader["viewport_x_sw"];
-                        loc.ViewPort.SouthWest.Long = (double)reader["viewport_y_sw"]; 
-                        loc.GeocodeStatus = (FactLocation.Geocode) Enum.Parse(typeof(FactLocation.Geocode),reader["GeocodeStatus"].ToString());
+                        loc.ViewPort.SouthWest.Long = (double)reader["viewport_y_sw"];
+                        loc.GeocodeStatus = (FactLocation.Geocode)Enum.Parse(typeof(FactLocation.Geocode), reader["GeocodeStatus"].ToString());
                     }
                     reader.Close();
                 }
@@ -1797,7 +1808,7 @@ namespace FTAnalyzer
                 rtb.AppendText("Found " + (FactLocation.AllLocations.Count() - 1) + " locations in file.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER)) + " have geocoding from GEDCOM file.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.MATCHED)) + " have a geocoding match from Google.\n");
-                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH)) + " have partial geocoding match from Google.\n"); 
+                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH)) + " have partial geocoding match from Google.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NO_MATCH)) + " could not be found on Google.\n");
                 rtb.AppendText("    " + (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1) + " haven't been searched on Google.\n");
             }
