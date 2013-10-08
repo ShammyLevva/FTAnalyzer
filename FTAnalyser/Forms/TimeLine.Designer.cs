@@ -58,6 +58,8 @@
             this.menuMap = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSatellite = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.playTimelineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -109,7 +111,9 @@
             // geocodeToolStripMenuItem
             // 
             this.geocodeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.geocodeLocationsToolStripMenuItem});
+            this.geocodeLocationsToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.playTimelineToolStripMenuItem});
             this.geocodeToolStripMenuItem.Name = "geocodeToolStripMenuItem";
             this.geocodeToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.geocodeToolStripMenuItem.Text = "Process";
@@ -345,6 +349,20 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Currently Viewing:";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(172, 6);
+            this.toolStripSeparator1.Visible = false;
+            // 
+            // playTimelineToolStripMenuItem
+            // 
+            this.playTimelineToolStripMenuItem.Name = "playTimelineToolStripMenuItem";
+            this.playTimelineToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.playTimelineToolStripMenuItem.Text = "Play Timeline";
+            this.playTimelineToolStripMenuItem.Visible = false;
+            this.playTimelineToolStripMenuItem.Click += new System.EventHandler(this.playTimelineToolStripMenuItem_Click);
+            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -406,5 +424,7 @@
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem menuMap;
         private System.Windows.Forms.ToolStripMenuItem menuSatellite;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem playTimelineToolStripMenuItem;
     }
 }

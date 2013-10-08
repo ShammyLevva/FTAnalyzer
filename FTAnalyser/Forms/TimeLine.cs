@@ -36,6 +36,7 @@ namespace FTAnalyzer.Forms
         private VectorLayer clusterLayer;
         private LabelLayer labelLayer;
         private MarkerClusterer clusterer;
+        private Color backgroundColour;
 
         public TimeLine()
         {
@@ -43,6 +44,7 @@ namespace FTAnalyzer.Forms
             tbYears.MouseWheel += new MouseEventHandler(tbYears_MouseWheel);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[10].Visible = false;
+            backgroundColour = mapZoomToolStrip.Items[0].BackColor; 
             mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(mapBox1_MapViewOnChange);
             ft = FamilyTree.Instance;
         }
@@ -382,7 +384,7 @@ namespace FTAnalyzer.Forms
                     IMathTransform transform = clusterLayer.CoordinateTransformation.MathTransform;
                     bbox = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
                     mapBox1.Map.ZoomToBox(bbox);
-                    bbox.ExpandBy(mapBox1.Map.PixelSize * 15);
+                    bbox.ExpandBy(mapBox1.Map.PixelSize * 20);
                     mapBox1.Map.ZoomToBox(bbox);
                     RefreshClusters();
                 }
@@ -423,6 +425,7 @@ namespace FTAnalyzer.Forms
             labValue.Text = tbYears.Value.ToString();
             DisplayLocationsForYear(labValue.Text);
             RefreshClusters();
+            mapBox1.Refresh();
             this.Cursor = Cursors.Default;
         }
 
@@ -520,6 +523,7 @@ namespace FTAnalyzer.Forms
         private void mapBox1_MapZoomChanged(double zoom)
         {
             RefreshClusters();
+            mapBox1.Refresh();
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -567,8 +571,18 @@ namespace FTAnalyzer.Forms
 
         private void mapBox1_MapCenterChanged(Coordinate center)
         {
-            //Maybe panning doesn't need refresh?
-            //RefreshClusters();
+            RefreshClusters();
+            mapBox1.Refresh();
+        }
+
+        private void playTimelineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tbYears.Value = tbYears.Minimum;
+            while(tbYears.Value < tbYears.Maximum)
+            {
+                tbYears.Value++;
+                Application.DoEvents();
+            }
         }
     }
 }
