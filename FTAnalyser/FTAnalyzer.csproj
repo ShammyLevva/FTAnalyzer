@@ -194,6 +194,12 @@
     <Compile Include="Core\FactSource.cs" />
     <Compile Include="Core\FamilySearch.cs" />
     <Compile Include="Core\FactILocationmage.cs" />
+    <Compile Include="Forms\GeocodeLocations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GeocodeLocations.Designer.cs">
+      <DependentUpon>GeocodeLocations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MapIndivudals.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -271,6 +277,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\ColourBMD.resx">
       <DependentUpon>ColourBMD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GeocodeLocations.resx">
+      <DependentUpon>GeocodeLocations.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MapIndivudals.resx">
       <DependentUpon>MapIndivudals.cs</DependentUpon>

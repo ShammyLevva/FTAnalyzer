@@ -1333,11 +1333,11 @@ namespace FTAnalyzer
             if (!ft.Geocoding) // don't geocode if another geocode session in progress
             {
                 HourGlass(true);
-                TimeLine tl = new TimeLine();
-                tl.SetLocationsText(false);
-                tl.Show();
-                DisposeDuplicateForms(tl);
-                tl.StartGeoCoding();
+                GeocodeLocations geo = new GeocodeLocations();
+                geo.SetLocationsText(false);
+                geo.Show();
+                DisposeDuplicateForms(geo);
+                geo.StartGeoCoding();
                 HourGlass(false);
             }
         }
