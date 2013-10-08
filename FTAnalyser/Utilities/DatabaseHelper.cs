@@ -127,7 +127,7 @@ namespace FTAnalyzer.Utilities
 
         public SQLiteCommand GetLocationDetails()
         {
-            SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, level, foundlevel, foundlocation, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw, geocodestatus from geocode where location = ?", conn);
+            SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, level, foundlevel, foundlocation, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw, geocodestatus, foundresulttype from geocode where location = ?", conn);
             SQLiteParameter param = cmd.CreateParameter();
             param.DbType = DbType.String;
             cmd.Parameters.Add(param);

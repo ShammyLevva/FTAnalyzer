@@ -62,6 +62,8 @@ namespace FTAnalyzer.Forms
                 geo.Show();
                 MainForm.DisposeDuplicateForms(geo);
                 geo.StartGeoCoding();
+                geo.BringToFront();
+                geo.Focus();
                 this.Cursor = Cursors.Default;
             }
         }

@@ -32,6 +32,7 @@ namespace FTAnalyzer
         public double Longitude { get; set; }
         public Geocode GeocodeStatus { get; set; }
         public string GoogleLocation { get; set; }
+        public string GoogleResultType { get; set; }
         public GeoResponse.CResult.CGeometry.CViewPort ViewPort { get; set; }
         
         public string[] Parts

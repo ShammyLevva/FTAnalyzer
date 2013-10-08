@@ -1800,6 +1800,7 @@ namespace FTAnalyzer
                         loc.ViewPort.NorthEast.Long = (double)reader["viewport_y_ne"];
                         loc.ViewPort.SouthWest.Lat = (double)reader["viewport_x_sw"];
                         loc.ViewPort.SouthWest.Long = (double)reader["viewport_y_sw"];
+                        loc.GoogleResultType = (string)reader["foundresulttype"];
                         loc.GeocodeStatus = (FactLocation.Geocode)Enum.Parse(typeof(FactLocation.Geocode), reader["GeocodeStatus"].ToString());
                     }
                     reader.Close();

@@ -49,11 +49,11 @@
             this.geocodeLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRetryPartial = new System.Windows.Forms.ToolStripMenuItem();
-            this.LocationIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.GeocodedLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Longitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GoogleLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LocationIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.GeocodeStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GoogleResultType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgLocations)).BeginInit();
@@ -70,11 +70,11 @@
             this.dgLocations.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgLocations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLocations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.LocationIcon,
             this.GeocodedLocation,
             this.Latitude,
             this.Longitude,
             this.GoogleLocation,
+            this.LocationIcon,
             this.GeocodeStatus,
             this.GoogleResultType});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -132,6 +132,7 @@
             this.mnuSaveColumnLayout.Name = "mnuSaveColumnLayout";
             this.mnuSaveColumnLayout.Size = new System.Drawing.Size(23, 22);
             this.mnuSaveColumnLayout.Text = "Save Column Sort Order";
+            this.mnuSaveColumnLayout.Click += new System.EventHandler(this.mnuSaveColumnLayout_Click);
             // 
             // mnuExportToExcel
             // 
@@ -141,6 +142,7 @@
             this.mnuExportToExcel.Name = "mnuExportToExcel";
             this.mnuExportToExcel.Size = new System.Drawing.Size(23, 22);
             this.mnuExportToExcel.Text = "Export to Excel";
+            this.mnuExportToExcel.Click += new System.EventHandler(this.mnuExportToExcel_Click);
             // 
             // mnuResetColumns
             // 
@@ -150,6 +152,7 @@
             this.mnuResetColumns.Name = "mnuResetColumns";
             this.mnuResetColumns.Size = new System.Drawing.Size(23, 22);
             this.mnuResetColumns.Text = "Reset Column Sort Order to Default";
+            this.mnuResetColumns.Click += new System.EventHandler(this.mnuResetColumns_Click);
             // 
             // toolStrip1
             // 
@@ -180,6 +183,7 @@
             this.printToolStripButton.Name = "printToolStripButton";
             this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.printToolStripButton.Text = "&Print";
+            this.printToolStripButton.Click += new System.EventHandler(this.printToolStripButton_Click);
             // 
             // printPreviewToolStripButton
             // 
@@ -189,6 +193,7 @@
             this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
             this.printPreviewToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.printPreviewToolStripButton.Text = "Print Preview...";
+            this.printPreviewToolStripButton.Click += new System.EventHandler(this.printPreviewToolStripButton_Click);
             // 
             // toolStripSeparator
             // 
@@ -244,26 +249,15 @@
             this.mnuRetryPartial.Size = new System.Drawing.Size(203, 22);
             this.mnuRetryPartial.Text = "Retry Partially Geocoded";
             // 
-            // LocationIcon
-            // 
-            this.LocationIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.LocationIcon.DataPropertyName = "Icon";
-            this.LocationIcon.HeaderText = global::FTAnalyzer.Properties.Resources.FTA_0002;
-            this.LocationIcon.MinimumWidth = 20;
-            this.LocationIcon.Name = "LocationIcon";
-            this.LocationIcon.ReadOnly = true;
-            this.LocationIcon.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.LocationIcon.Width = 20;
-            // 
             // GeocodedLocation
             // 
             this.GeocodedLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.GeocodedLocation.DataPropertyName = "Location";
+            this.GeocodedLocation.DataPropertyName = "SortableLocation";
             this.GeocodedLocation.HeaderText = "Location";
-            this.GeocodedLocation.MinimumWidth = 250;
+            this.GeocodedLocation.MinimumWidth = 350;
             this.GeocodedLocation.Name = "GeocodedLocation";
             this.GeocodedLocation.ReadOnly = true;
-            this.GeocodedLocation.Width = 250;
+            this.GeocodedLocation.Width = 350;
             // 
             // Latitude
             // 
@@ -295,23 +289,36 @@
             this.GoogleLocation.ReadOnly = true;
             this.GoogleLocation.Width = 250;
             // 
+            // LocationIcon
+            // 
+            this.LocationIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.LocationIcon.DataPropertyName = "Icon";
+            this.LocationIcon.HeaderText = global::FTAnalyzer.Properties.Resources.FTA_0002;
+            this.LocationIcon.MinimumWidth = 20;
+            this.LocationIcon.Name = "LocationIcon";
+            this.LocationIcon.ReadOnly = true;
+            this.LocationIcon.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.LocationIcon.Width = 20;
+            // 
             // GeocodeStatus
             // 
             this.GeocodeStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.GeocodeStatus.DataPropertyName = "GeocodeStatus";
+            this.GeocodeStatus.DataPropertyName = "Geocoded";
             this.GeocodeStatus.HeaderText = "Geocode Status";
-            this.GeocodeStatus.MinimumWidth = 100;
+            this.GeocodeStatus.MinimumWidth = 110;
             this.GeocodeStatus.Name = "GeocodeStatus";
             this.GeocodeStatus.ReadOnly = true;
+            this.GeocodeStatus.Width = 110;
             // 
             // GoogleResultType
             // 
             this.GoogleResultType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.GoogleResultType.DataPropertyName = "GoogleResultType";
             this.GoogleResultType.HeaderText = "Google Result Type";
-            this.GoogleResultType.MinimumWidth = 100;
+            this.GoogleResultType.MinimumWidth = 300;
             this.GoogleResultType.Name = "GoogleResultType";
             this.GoogleResultType.ReadOnly = true;
+            this.GoogleResultType.Width = 300;
             // 
             // GeocodeLocations
             // 
@@ -358,11 +365,11 @@
         private System.Windows.Forms.ToolStripMenuItem geocodeLocationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuOptions;
         private System.Windows.Forms.ToolStripMenuItem mnuRetryPartial;
-        private System.Windows.Forms.DataGridViewImageColumn LocationIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn GeocodedLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn Latitude;
         private System.Windows.Forms.DataGridViewTextBoxColumn Longitude;
         private System.Windows.Forms.DataGridViewTextBoxColumn GoogleLocation;
+        private System.Windows.Forms.DataGridViewImageColumn LocationIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn GeocodeStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn GoogleResultType;
     }

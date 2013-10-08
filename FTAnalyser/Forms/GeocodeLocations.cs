@@ -306,13 +306,14 @@ namespace FTAnalyzer.Forms
                             " of " + total + ".  ";
                     worker.ReportProgress(percent, status);
 
-                    if (worker.CancellationPending)
+                    if (worker.CancellationPending ||
+                        ((txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text.Substring(0, 3).Equals("Max"))))
                     {
                         e.Cancel = true;
                         break;
                     }
                 }
-                FamilyTree.Instance.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
+                ft.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
                 if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text.Substring(0, 3).Equals("Max"))
                     MessageBox.Show("Finished Geocoding.\n" + txtGoogleWait.Text, "Timeline Geocoding");
                 else
