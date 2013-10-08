@@ -21,7 +21,7 @@ namespace FTAnalyzer.Forms
         private ReportFormHelper reportFormHelper;
         private SortableBindingList<IDisplayGeocodedLocation> locations;
         private bool formClosing;
-        
+
         public GeocodeLocations()
         {
             InitializeComponent();
@@ -32,6 +32,7 @@ namespace FTAnalyzer.Forms
             reportFormHelper = new ReportFormHelper(this.Text, dgLocations, this.ResetTable);
             italicFont = new Font(dgLocations.DefaultCellStyle.Font, FontStyle.Italic);
             reportFormHelper.LoadColumnLayout("GeocodeLocationsColumns.xml");
+            mnuGeocodeLocations.Enabled = !ft.Geocoding; // disable menu if already geocoding
             SetStatusText();
         }
 
@@ -49,7 +50,6 @@ namespace FTAnalyzer.Forms
 
         private void ResetTable()
         {
-            //dgLocations.Sort(dgLocations.Columns["Location"], ListSortDirection.Ascending);
             dgLocations.AutoResizeColumns();
         }
 
@@ -95,11 +95,7 @@ namespace FTAnalyzer.Forms
 
         private void dgLocations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            string indID = (string)dgLocations.CurrentRow.Cells["Ind_ID"].Value;
-            Individual ind = ft.GetIndividual(indID);
-            Facts factForm = new Facts(ind);
-            MainForm.DisposeDuplicateForms(factForm);
-            factForm.Show();
+            
         }
 
         #region Threading
@@ -119,7 +115,7 @@ namespace FTAnalyzer.Forms
             pbGeocoding.Value = 100;
             pbGeocoding.Visible = false;
             txtGoogleWait.Text = string.Empty;
-            geocodeLocationsToolStripMenuItem.Enabled = true;
+            mnuGeocodeLocations.Enabled = true;
             ft.Geocoding = false;
             if (formClosing)
                 this.Close();
@@ -161,7 +157,7 @@ namespace FTAnalyzer.Forms
             {
                 this.Cursor = Cursors.WaitCursor;
                 pbGeocoding.Visible = true;
-                geocodeLocationsToolStripMenuItem.Enabled = false;
+                mnuGeocodeLocations.Enabled = false;
                 ft.Geocoding = true;
                 backgroundWorker.RunWorkerAsync();
                 this.Cursor = Cursors.Default;
@@ -324,7 +320,6 @@ namespace FTAnalyzer.Forms
                 MessageBox.Show("Error geocoding : " + ex.Message);
             }
         }
-
 
         #endregion
     }

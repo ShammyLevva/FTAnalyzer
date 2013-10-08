@@ -150,6 +150,7 @@ namespace FTAnalyzer
             mnuOlderParents.Enabled = enabled;
             mnuShowTimeline.Enabled = enabled;
             mnuGeocodeLocations.Enabled = enabled;
+            mnuLocationsGeocodeReport.Enabled = enabled;
         }
 
         private void DisposeIndividualForms()
@@ -1338,6 +1339,15 @@ namespace FTAnalyzer
                 geo.StartGeoCoding();
                 HourGlass(false);
             }
+        }
+
+        private void locationsGeocodeReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            GeocodeLocations geo = new GeocodeLocations();
+            geo.Show();
+            DisposeDuplicateForms(geo);
+            HourGlass(false);
         }
 
         private void treeViewLocations_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)

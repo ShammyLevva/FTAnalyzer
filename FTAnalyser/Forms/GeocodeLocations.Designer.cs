@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeocodeLocations));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgLocations = new System.Windows.Forms.DataGridView();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.txtLocations = new System.Windows.Forms.ToolStripStatusLabel();
@@ -46,15 +48,15 @@
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.geocodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.geocodeLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuGeocodeLocations = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRetryPartial = new System.Windows.Forms.ToolStripMenuItem();
             this.GeocodedLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Longitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GoogleLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LocationIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.GeocodeStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GoogleLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GoogleResultType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgLocations)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -73,18 +75,18 @@
             this.GeocodedLocation,
             this.Latitude,
             this.Longitude,
-            this.GoogleLocation,
             this.LocationIcon,
             this.GeocodeStatus,
+            this.GoogleLocation,
             this.GoogleResultType});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgLocations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgLocations.Location = new System.Drawing.Point(0, 49);
             this.dgLocations.Name = "dgLocations";
@@ -94,6 +96,7 @@
             this.dgLocations.ShowEditingIcon = false;
             this.dgLocations.Size = new System.Drawing.Size(894, 300);
             this.dgLocations.TabIndex = 5;
+            this.dgLocations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgLocations_CellDoubleClick);
             // 
             // statusStrip
             // 
@@ -222,17 +225,17 @@
             // geocodeToolStripMenuItem
             // 
             this.geocodeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.geocodeLocationsToolStripMenuItem});
+            this.mnuGeocodeLocations});
             this.geocodeToolStripMenuItem.Name = "geocodeToolStripMenuItem";
             this.geocodeToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.geocodeToolStripMenuItem.Text = "Process";
             // 
-            // geocodeLocationsToolStripMenuItem
+            // mnuGeocodeLocations
             // 
-            this.geocodeLocationsToolStripMenuItem.Name = "geocodeLocationsToolStripMenuItem";
-            this.geocodeLocationsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.geocodeLocationsToolStripMenuItem.Text = "Geocode Locations";
-            this.geocodeLocationsToolStripMenuItem.ToolTipText = "Looks up map co-ordinates for locations in your file";
+            this.mnuGeocodeLocations.Name = "mnuGeocodeLocations";
+            this.mnuGeocodeLocations.Size = new System.Drawing.Size(175, 22);
+            this.mnuGeocodeLocations.Text = "Geocode Locations";
+            this.mnuGeocodeLocations.ToolTipText = "Looks up map co-ordinates for locations in your file";
             // 
             // mnuOptions
             // 
@@ -254,40 +257,36 @@
             this.GeocodedLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.GeocodedLocation.DataPropertyName = "SortableLocation";
             this.GeocodedLocation.HeaderText = "Location";
-            this.GeocodedLocation.MinimumWidth = 350;
+            this.GeocodedLocation.MinimumWidth = 450;
             this.GeocodedLocation.Name = "GeocodedLocation";
             this.GeocodedLocation.ReadOnly = true;
-            this.GeocodedLocation.Width = 350;
+            this.GeocodedLocation.Width = 450;
             // 
             // Latitude
             // 
             this.Latitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Latitude.DataPropertyName = "Latitude";
+            dataGridViewCellStyle1.Format = "N7";
+            this.Latitude.DefaultCellStyle = dataGridViewCellStyle1;
             this.Latitude.HeaderText = "Latitude";
-            this.Latitude.MinimumWidth = 80;
+            this.Latitude.MinimumWidth = 60;
             this.Latitude.Name = "Latitude";
             this.Latitude.ReadOnly = true;
-            this.Latitude.Width = 80;
+            this.Latitude.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Latitude.Width = 60;
             // 
             // Longitude
             // 
             this.Longitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Longitude.DataPropertyName = "Longitude";
+            dataGridViewCellStyle2.Format = "N7";
+            this.Longitude.DefaultCellStyle = dataGridViewCellStyle2;
             this.Longitude.HeaderText = "Longitude";
-            this.Longitude.MinimumWidth = 80;
+            this.Longitude.MinimumWidth = 60;
             this.Longitude.Name = "Longitude";
             this.Longitude.ReadOnly = true;
-            this.Longitude.Width = 80;
-            // 
-            // GoogleLocation
-            // 
-            this.GoogleLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.GoogleLocation.DataPropertyName = "GoogleLocation";
-            this.GoogleLocation.HeaderText = "Google Location";
-            this.GoogleLocation.MinimumWidth = 250;
-            this.GoogleLocation.Name = "GoogleLocation";
-            this.GoogleLocation.ReadOnly = true;
-            this.GoogleLocation.Width = 250;
+            this.Longitude.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Longitude.Width = 60;
             // 
             // LocationIcon
             // 
@@ -309,6 +308,16 @@
             this.GeocodeStatus.Name = "GeocodeStatus";
             this.GeocodeStatus.ReadOnly = true;
             this.GeocodeStatus.Width = 110;
+            // 
+            // GoogleLocation
+            // 
+            this.GoogleLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.GoogleLocation.DataPropertyName = "GoogleLocation";
+            this.GoogleLocation.HeaderText = "Google Location";
+            this.GoogleLocation.MinimumWidth = 250;
+            this.GoogleLocation.Name = "GoogleLocation";
+            this.GoogleLocation.ReadOnly = true;
+            this.GoogleLocation.Width = 250;
             // 
             // GoogleResultType
             // 
@@ -362,15 +371,15 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem geocodeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem geocodeLocationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuGeocodeLocations;
         private System.Windows.Forms.ToolStripMenuItem mnuOptions;
         private System.Windows.Forms.ToolStripMenuItem mnuRetryPartial;
         private System.Windows.Forms.DataGridViewTextBoxColumn GeocodedLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn Latitude;
         private System.Windows.Forms.DataGridViewTextBoxColumn Longitude;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GoogleLocation;
         private System.Windows.Forms.DataGridViewImageColumn LocationIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn GeocodeStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GoogleLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn GoogleResultType;
     }
 }

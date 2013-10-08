@@ -34,7 +34,7 @@ namespace FTAnalyzer
         public string GoogleLocation { get; set; }
         public string GoogleResultType { get; set; }
         public GeoResponse.CResult.CGeometry.CViewPort ViewPort { get; set; }
-        
+
         public string[] Parts
         {
             get { return new string[] { Country, Region, SubRegion, Address, Place }; }
@@ -654,7 +654,7 @@ namespace FTAnalyzer
 
         public static FactLocation BestLocation(IEnumerable<Fact> facts, FactDate when)
         {
-            Fact result = BestFact(facts,when);
+            Fact result = BestFact(facts, when);
             return result.Location;
         }
 
