@@ -87,7 +87,7 @@ namespace FTAnalyzer.Mapping
                 row.Geometry = cluster.Geometry;
                 row["Features"] = cluster.Features;
                 row["Count"] = cluster.Features.Count;
-                row["Label"] = cluster.Features.Count > minClusterSize ? cluster.Features.Count.ToString() : string.Empty;
+                row["Label"] = cluster.Features.Count >= minClusterSize ? cluster.Features.Count.ToString() : string.Empty;
                 row["Cluster"] = cluster.ClusterType;
                 clusteredDataTable.AddRow(row);
             }
