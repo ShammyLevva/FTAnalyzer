@@ -510,7 +510,7 @@ namespace FTAnalyzer.Forms
             Envelope env = mapBox1.Map.Envelope;
             IMathTransform transform = clusterLayer.ReverseCoordinateTransformation.MathTransform;
             env = new Envelope(transform.Transform(env.TopLeft()), transform.Transform(env.BottomRight()));
-            clusterer.Recluster(Math.Max(env.Width, env.Height) / 20.0);
+            clusterer.Recluster(Math.Max(env.Width, env.Height) / 35.0);
         }
 
         private void TimeLine_Load(object sender, EventArgs e)
