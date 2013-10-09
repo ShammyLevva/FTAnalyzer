@@ -41,9 +41,9 @@
             // 
             // mapBox1
             // 
-            this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
+            this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             this.mapBox1.AllowDrop = true;
-            this.mapBox1.Cursor = System.Windows.Forms.Cursors.Help;
+            this.mapBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.mapBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapBox1.FineZoomFactor = 10D;
             this.mapBox1.Location = new System.Drawing.Point(0, 25);
@@ -60,7 +60,6 @@
             this.mapBox1.TabIndex = 9;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
-            this.mapBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.mapBox1_DragDrop);
             // 
             // mapZoomToolStrip
             // 
@@ -84,6 +83,7 @@
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.Text = "toolStripButton1";
             this.toolStripButton1.ToolTipText = "Location Selection ";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripDropDownButton1
             // 
@@ -102,7 +102,7 @@
             // 
             this.menuMap.CheckOnClick = true;
             this.menuMap.Name = "menuMap";
-            this.menuMap.Size = new System.Drawing.Size(152, 22);
+            this.menuMap.Size = new System.Drawing.Size(115, 22);
             this.menuMap.Text = "Map";
             // 
             // menuSatellite
@@ -111,7 +111,7 @@
             this.menuSatellite.CheckOnClick = true;
             this.menuSatellite.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menuSatellite.Name = "menuSatellite";
-            this.menuSatellite.Size = new System.Drawing.Size(152, 22);
+            this.menuSatellite.Size = new System.Drawing.Size(115, 22);
             this.menuSatellite.Text = "Satellite";
             // 
             // EditLocation

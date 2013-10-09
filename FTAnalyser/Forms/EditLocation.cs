@@ -44,8 +44,8 @@ namespace FTAnalyzer.Forms
             FeatureDataRow row = pointTable.NewRow();
             row["Label"] = fl.ToString();
             row.Geometry = new NetTopologySuite.Geometries.Point(fl.Longitude, fl.Latitude);
-            pointTable.AddRow(row); 
-             
+            pointTable.AddRow(row);
+
             GeometryFeatureProvider pointGFP = new GeometryFeatureProvider(pointTable);
 
             pointLayer = new VectorLayer("Point to Edit");
@@ -56,20 +56,23 @@ namespace FTAnalyzer.Forms
 
             IMathTransform transform = pointLayer.CoordinateTransformation.MathTransform;
             GeoResponse.CResult.CGeometry.CViewPort vp = fl.ViewPort;
-            Envelope bbox = new Envelope(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
-            Envelope expand = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
-                    
+            Envelope expand;
+            if (vp.NorthEast.Lat == 0 && vp.NorthEast.Long == 0 && vp.SouthWest.Lat == 0 && vp.SouthWest.Long == 0)
+                expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
+            else
+            {
+                Envelope bbox = new Envelope(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
+                expand = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
+            }
             mapBox1.Map.Layers.Add(pointLayer);
             mapBox1.Map.MinimumZoom = 1000;
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.Map.ZoomToBox(expand);
             mapBox1.Refresh();
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
-
-
         }
 
-        private void mapBox1_DragDrop(object sender, DragEventArgs e)
+        private void toolStripButton1_Click(object sender, EventArgs e)
         {
 
         }
