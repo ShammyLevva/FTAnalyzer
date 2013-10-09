@@ -27,6 +27,8 @@ namespace FTAnalyzer.Forms
         public EditLocation(FactLocation location)
         {
             InitializeComponent();
+            mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
+            mapZoomToolStrip.Items[10].Visible = false;
             this.Text = "Editing : " + location.ToString();
             SetupMap(location);
         }
@@ -75,6 +77,21 @@ namespace FTAnalyzer.Forms
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void mapBox1_MouseDown(Coordinate worldPos, MouseEventArgs imagePos)
+        {
+            Console.WriteLine("MouseDown");
+        }
+
+        private void mapBox1_MouseMove(Coordinate worldPos, MouseEventArgs imagePos)
+        {
+            Console.WriteLine("MouseMove");
+        }
+
+        private void mapBox1_MouseUp(Coordinate worldPos, MouseEventArgs imagePos)
+        {
+            Console.WriteLine("MouseUp");
         }
     }
 }
