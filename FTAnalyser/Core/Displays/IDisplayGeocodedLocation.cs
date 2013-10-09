@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using FTAnalyzer.Mapping;
 
 namespace FTAnalyzer
 {
@@ -15,5 +16,6 @@ namespace FTAnalyzer
         string Geocoded { get; }
         string GoogleLocation { get; }
         string GoogleResultType { get; }
+        GeoResponse.CResult.CGeometry.CViewPort ViewPort { get; }
     }
 }

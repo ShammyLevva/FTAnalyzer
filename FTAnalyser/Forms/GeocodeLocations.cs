@@ -88,14 +88,19 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                MapLocation loc = dgLocations.Rows[e.RowIndex].DataBoundItem as MapLocation;
-                e.ToolTipText = "Geocoding status: " + loc.Location.Geocoded;
+                IDisplayGeocodedLocation loc = dgLocations.Rows[e.RowIndex].DataBoundItem as IDisplayGeocodedLocation;
+                e.ToolTipText = "Geocoding status: " + loc.Geocoded;
             }
         }
 
         private void dgLocations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                FactLocation loc = dgLocations.Rows[e.RowIndex].DataBoundItem as FactLocation;
+                EditLocation editform = new EditLocation(loc);
+                editform.Show();
+            }
         }
 
         #region Threading
@@ -319,6 +324,11 @@ namespace FTAnalyzer.Forms
             {
                 MessageBox.Show("Error geocoding : " + ex.Message);
             }
+        }
+
+        private void mnuGeocodeLocations_Click(object sender, EventArgs e)
+        {
+            StartGeoCoding();
         }
 
         #endregion

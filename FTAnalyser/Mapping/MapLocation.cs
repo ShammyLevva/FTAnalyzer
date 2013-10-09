@@ -22,13 +22,14 @@ namespace FTAnalyzer.Mapping
             this.year = year;
             this.Icon = FactLocationImage.ErrorIcon(loc.GeocodeStatus).Icon;
         }
-        
-        public FeatureDataRow GetFeatureDataRow(FeatureDataTable table)
+
+        public FeatureDataRow AddFeatureDataRow(FeatureDataTable table)
         {
             FeatureDataRow r = table.NewRow();
             r["MapLocation"] = this;
             r["Label"] = Individual.Name + " at " + Location;
             r.Geometry = new NetTopologySuite.Geometries.Point(Location.Longitude, Location.Latitude);
+            table.AddRow(r);
             return r;
         }
 

@@ -188,8 +188,7 @@ namespace FTAnalyzer.Forms
                 Envelope bbox = new Envelope();
                 foreach (MapLocation loc in locations)
                 {
-                    FeatureDataRow row = loc.GetFeatureDataRow(factLocations);
-                    factLocations.AddRow(row);
+                    FeatureDataRow row = loc.AddFeatureDataRow(factLocations);
                     bbox.ExpandToInclude(row.Geometry.Coordinate);
                 }
                 if (!mnuKeepZoom.Checked)

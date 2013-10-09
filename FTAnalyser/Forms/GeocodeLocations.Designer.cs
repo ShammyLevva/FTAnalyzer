@@ -236,6 +236,7 @@
             this.mnuGeocodeLocations.Size = new System.Drawing.Size(175, 22);
             this.mnuGeocodeLocations.Text = "Geocode Locations";
             this.mnuGeocodeLocations.ToolTipText = "Looks up map co-ordinates for locations in your file";
+            this.mnuGeocodeLocations.Click += new System.EventHandler(this.mnuGeocodeLocations_Click);
             // 
             // mnuOptions
             // 
@@ -269,11 +270,11 @@
             dataGridViewCellStyle1.Format = "N7";
             this.Latitude.DefaultCellStyle = dataGridViewCellStyle1;
             this.Latitude.HeaderText = "Latitude";
-            this.Latitude.MinimumWidth = 60;
+            this.Latitude.MinimumWidth = 75;
             this.Latitude.Name = "Latitude";
             this.Latitude.ReadOnly = true;
             this.Latitude.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Latitude.Width = 60;
+            this.Latitude.Width = 75;
             // 
             // Longitude
             // 
@@ -282,11 +283,11 @@
             dataGridViewCellStyle2.Format = "N7";
             this.Longitude.DefaultCellStyle = dataGridViewCellStyle2;
             this.Longitude.HeaderText = "Longitude";
-            this.Longitude.MinimumWidth = 60;
+            this.Longitude.MinimumWidth = 75;
             this.Longitude.Name = "Longitude";
             this.Longitude.ReadOnly = true;
             this.Longitude.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Longitude.Width = 60;
+            this.Longitude.Width = 75;
             // 
             // LocationIcon
             // 
@@ -314,10 +315,10 @@
             this.GoogleLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.GoogleLocation.DataPropertyName = "GoogleLocation";
             this.GoogleLocation.HeaderText = "Google Location";
-            this.GoogleLocation.MinimumWidth = 250;
+            this.GoogleLocation.MinimumWidth = 400;
             this.GoogleLocation.Name = "GoogleLocation";
             this.GoogleLocation.ReadOnly = true;
-            this.GoogleLocation.Width = 250;
+            this.GoogleLocation.Width = 400;
             // 
             // GoogleResultType
             // 
