@@ -23,6 +23,7 @@ namespace FTAnalyzer.Forms
     {
         private FeatureDataTable pointTable;
         private VectorLayer pointLayer;
+        private bool dragging;
 
         public EditLocation(FactLocation location)
         {
@@ -30,6 +31,7 @@ namespace FTAnalyzer.Forms
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[10].Visible = false;
             this.Text = "Editing : " + location.ToString();
+            dragging = false;
             SetupMap(location);
         }
 
@@ -82,16 +84,35 @@ namespace FTAnalyzer.Forms
         private void mapBox1_MouseDown(Coordinate worldPos, MouseEventArgs imagePos)
         {
             Console.WriteLine("MouseDown");
+            //select point if reasonably near mouse and flag drag started
+            // update mouse pointer to show teardrop
+            Cursor.Current = new Cursor(Path.Combine(Application.StartupPath, @"Resources\Icons\teardrop_blue.cur"));
+            dragging = true;
+
         }
 
         private void mapBox1_MouseMove(Coordinate worldPos, MouseEventArgs imagePos)
         {
-            Console.WriteLine("MouseMove");
+            // only do anything if dragging active
+            // https://sharpmap.codeplex.com/discussions/347771 suggests 
+            // "repen edited geometry to point of mousemove" not sure what that means
+            if (dragging)
+            {
+                Console.WriteLine("MouseMove - Dragging");
+            }
         }
 
         private void mapBox1_MouseUp(Coordinate worldPos, MouseEventArgs imagePos)
         {
             Console.WriteLine("MouseUp");
+            // if dragging then update geometry to new mouse position
+            // revert mouse point to default
+            if (dragging)
+            {
+                Console.WriteLine("Arrived :" + worldPos.X + ", " + worldPos.Y);
+                Cursor.Current = Cursors.Default;
+                dragging = false;
+            }
         }
     }
 }
