@@ -64,7 +64,14 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.Map.ZoomToBox(expand);
             mapBox1.Refresh();
-            mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
+            mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
+
+
+        }
+
+        private void mapBox1_DragDrop(object sender, DragEventArgs e)
+        {
+
         }
     }
 }
