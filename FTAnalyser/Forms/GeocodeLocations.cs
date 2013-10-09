@@ -70,7 +70,7 @@ namespace FTAnalyzer.Forms
 
         private void mnuExportToExcel_Click(object sender, EventArgs e)
         {
-            reportFormHelper.DoExportToExcel<IDisplayFact>(this);
+            reportFormHelper.DoExportToExcel<IDisplayGeocodedLocation>(this);
         }
 
         private void mnuResetColumns_Click(object sender, EventArgs e)
