@@ -97,9 +97,11 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
+                this.Cursor = Cursors.WaitCursor;
                 FactLocation loc = dgLocations.Rows[e.RowIndex].DataBoundItem as FactLocation;
                 EditLocation editform = new EditLocation(loc);
                 editform.Show();
+                this.Cursor = Cursors.Default;
             }
         }
 

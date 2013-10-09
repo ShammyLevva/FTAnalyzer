@@ -27,6 +27,7 @@ namespace FTAnalyzer.Forms
         public EditLocation(FactLocation location)
         {
             InitializeComponent();
+            this.Text = "Editing : " + location.ToString();
             SetupMap(location);
         }
 
@@ -54,8 +55,8 @@ namespace FTAnalyzer.Forms
             pointLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
 
             IMathTransform transform = pointLayer.CoordinateTransformation.MathTransform;
-            GeoResponse.CResult.CGeometry.CViewPort vp = location.Location.ViewPort;
-            Envelope bbox = new Envelope(vp.NorthEast.Lat, vp.NorthEast.Long, vp.SouthWest.Lat, vp.SouthWest.Long);
+            GeoResponse.CResult.CGeometry.CViewPort vp = fl.ViewPort;
+            Envelope bbox = new Envelope(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
             Envelope expand = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
                     
             mapBox1.Map.Layers.Add(pointLayer);
