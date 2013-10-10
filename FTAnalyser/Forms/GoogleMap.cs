@@ -45,6 +45,13 @@ namespace FTAnalyzer.Forms
         public static readonly string POINT_OF_INTEREST = "point_of_interest";
         public static readonly string STREET_NUMBER = "street_number";
 
+        public static readonly ISet<string> RESULT_TYPES = new HashSet<string>(new string[] {
+            STREET_ADDRESS, ROUTE, COUNTRY, ESTABLISHMENT, ADMIN1, ADMIN2, ADMIN3, LOCALITY,
+            SUBLOCALITY, NEIGHBOURHOOD, PREMISE, SUBPREMISE, CEMETERY, HOSPITAL, PLACE_OF_WORSHIP,
+            INTERSECTION, POLITICAL, POSTALCODE, POSTALTOWN, NATURALFEATURE, AIRPORT, PARK,
+            POINT_OF_INTEREST, STREET_NUMBER
+        });
+
         private String location;
         private bool loaded;
 

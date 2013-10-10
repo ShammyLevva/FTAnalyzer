@@ -34,6 +34,7 @@ namespace FTAnalyzer.Forms
             reportFormHelper.LoadColumnLayout("GeocodeLocationsColumns.xml");
             mnuGeocodeLocations.Enabled = !ft.Geocoding; // disable menu if already geocoding
             SetStatusText();
+            SetupFilterMenu();
         }
 
         private void SetStatusText()
@@ -46,6 +47,28 @@ namespace FTAnalyzer.Forms
 
             txtGoogleWait.Text = string.Empty;
             txtLocations.Text = "Already Geocoded: " + (gedcom + found) + ", not found: " + notfound + " yet to search: " + notsearched + " of " + total + " locations";
+        }
+
+        private void SetupFilterMenu()
+        {
+            foreach (string resultType in GoogleMap.RESULT_TYPES)
+            {
+                ToolStripMenuItem menu = new ToolStripMenuItem(resultType);
+                menu.Name = resultType;
+                menu.Checked = Application.UserAppDataRegistry.GetValue(resultType, "True").Equals("True");
+                menu.CheckOnClick = true;
+                menu.CheckedChanged += new EventHandler(menu_CheckedChanged);
+                mnuGoogleResultType.DropDownItems.Add(menu);
+            }
+        }
+
+        void menu_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
+            {
+                Application.UserAppDataRegistry.SetValue(menu.Name, menu.Checked.ToString()); // remember checked state for next time
+                // filter locations ono menu items and refresh grid
+            }
         }
 
         private void ResetTable()
