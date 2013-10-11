@@ -475,7 +475,7 @@ namespace FTAnalyzer
             return ind.FamiliesAsParent.Any(f =>
             {
                 FactDate marriage = f.GetPreferredFactDate(Fact.MARRIAGE);
-                return (marriage != null && marriage.IsBefore(fd));
+                return (marriage != null && marriage.StartsBefore(fd));
             });
         }
 
@@ -1043,8 +1043,8 @@ namespace FTAnalyzer
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, surname);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            Predicate<Individual> dateFilter = i => ((i.BirthDate.IsBefore(CensusDate.UKCENSUS1911) || !i.BirthDate.IsKnown) &&
-                                                     (i.DeathDate.IsAfter(CensusDate.UKCENSUS1841) || !i.DeathDate.IsKnown));
+            Predicate<Individual> dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.UKCENSUS1911) || !i.BirthDate.IsKnown) &&
+                                                     (i.DeathDate.EndsAfter(CensusDate.UKCENSUS1841) || !i.DeathDate.IsKnown));
             filter = FilterUtils.AndFilter<Individual>(filter, dateFilter, aliveOnAnyCensus);
             return individuals.Where(filter).ToList<IDisplayColourCensus>();
         }
