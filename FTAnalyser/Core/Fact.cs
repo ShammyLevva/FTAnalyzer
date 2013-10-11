@@ -190,6 +190,7 @@ namespace FTAnalyzer
         public string Page { get; private set; }
         public string Schedule { get; private set; }
         public Age GedcomAge { get; private set; }
+        public bool Created { get; protected set; }
 
         #region Constructors
 
@@ -209,6 +210,7 @@ namespace FTAnalyzer
             this.Page = string.Empty;
             this.Schedule = string.Empty;
             this.GedcomAge = null;
+            this.Created = false;
         }
 
         public Fact(XmlNode node, string factRef)
@@ -288,7 +290,7 @@ namespace FTAnalyzer
                     }
                     string age = FamilyTree.GetText(node, "AGE");
                     if (age.Length > 0)
-                        this.GedcomAge = new Age(age);
+                        this.GedcomAge = new Age(age, FactDate);
                     this.CertificatePresent = SetCertificatePresent();
                 }
                 catch (Exception ex)
