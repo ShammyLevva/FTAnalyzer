@@ -37,6 +37,9 @@ namespace FTAnalyzer.Forms
             mnuGeocodeLocations.Enabled = !ft.Geocoding; // disable menu if already geocoding
             SetStatusText();
             SetupFilterMenu();
+            ApplyGeocodeStatusFilter();
+            ApplyGoogleResultTypeFilter();
+            dgLocations.Refresh();
         }
 
         private void SetStatusText()
@@ -64,15 +67,29 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void menu_CheckedChanged(object sender, EventArgs e)
+        private void ApplyGeocodeStatusFilter()
+        { 
+        }
+            
+        private void ApplyGoogleResultTypeFilter()
         {
-            filteredLocations = new SortableBindingList<IDisplayGeocodedLocation>();
+            // first add those without a status
+            filteredLocations.Concat(locations.Where(x => x.GoogleResultType.Length == 0));
+            foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
+            {
+                // filter locations ono menu items and refresh grid
+                IEnumerable<IDisplayGeocodedLocation> temp = locations.Where(x => x.GoogleResultType.Contains(menu.Name));
+                filteredLocations.Concat(temp);
+            }
+        }
+
+        private void menu_CheckedChanged(object sender, EventArgs e)
+        {
             foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
             {
                 Application.UserAppDataRegistry.SetValue(menu.Name, menu.Checked.ToString()); // remember checked state for next time
-                // filter locations ono menu items and refresh grid
-                filteredLocations.Concat(locations.Where(x => x.GoogleResultType.Contains(menu.Name)));
             }
+            ApplyGoogleResultTypeFilter();
             dgLocations.Refresh();
         }
 
@@ -323,6 +340,7 @@ namespace FTAnalyzer.Forms
                                 loc.Latitude = latitude;
                                 loc.Longitude = longitude;
                                 loc.GoogleLocation = address;
+                                loc.GoogleResultType = resultType;
                                 loc.ViewPort = viewport;
                             }
                             else
