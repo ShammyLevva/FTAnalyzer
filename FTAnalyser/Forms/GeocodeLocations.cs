@@ -30,7 +30,6 @@ namespace FTAnalyzer.Forms
             this.locations = ft.AllGeocodingLocations;
             this.filteredLocations = this.locations;
             dgLocations.AutoGenerateColumns = false;
-            dgLocations.DataSource = this.filteredLocations;
             reportFormHelper = new ReportFormHelper(this.Text, dgLocations, this.ResetTable);
             italicFont = new Font(dgLocations.DefaultCellStyle.Font, FontStyle.Italic);
             reportFormHelper.LoadColumnLayout("GeocodeLocationsColumns.xml");
@@ -38,7 +37,7 @@ namespace FTAnalyzer.Forms
             SetStatusText();
             SetupFilterMenu();
             ApplyGeocodeStatusFilter();
-            ApplyGoogleResultTypeFilter();
+            dgLocations.DataSource = new SortableBindingList<IDisplayGeocodedLocation>(ApplyGoogleResultTypeFilter());
             dgLocations.Refresh();
         }
 
@@ -51,7 +50,7 @@ namespace FTAnalyzer.Forms
             int total = FactLocation.AllLocations.Count() - 1;
 
             txtGoogleWait.Text = string.Empty;
-            txtLocations.Text = "Already Geocoded: " + (gedcom + found) + ", not found: " + notfound + " yet to search: " + notsearched + " of " + total + " locations";
+            txtLocations.Text = "Already Geocoded: " + (gedcom + found) + ", not found: " + notfound + " yet to search: " + notsearched + " of " + total + " locations. Displaying: " + dgLocations.RowCount;
         }
 
         private void SetupFilterMenu()
@@ -68,19 +67,31 @@ namespace FTAnalyzer.Forms
         }
 
         private void ApplyGeocodeStatusFilter()
-        { 
-        }
-            
-        private void ApplyGoogleResultTypeFilter()
         {
+        }
+
+        private List<IDisplayGeocodedLocation> ApplyGoogleResultTypeFilter()
+        {
+            List<IDisplayGeocodedLocation> results = new List<IDisplayGeocodedLocation>();
             // first add those without a status
-            filteredLocations.Concat(locations.Where(x => x.GoogleResultType.Length == 0));
-            foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
+            foreach (IDisplayGeocodedLocation loc in locations)
             {
-                // filter locations ono menu items and refresh grid
-                IEnumerable<IDisplayGeocodedLocation> temp = locations.Where(x => x.GoogleResultType.Contains(menu.Name));
-                filteredLocations.Concat(temp);
+                if (loc.GoogleResultType == null)
+                    results.Add(loc);
+                else
+                {
+                    foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
+                    {
+                        // filter locations on menu items that are ticked
+                        if (menu.Checked && loc.GoogleResultType.Contains(menu.Name))
+                        {
+                            results.Add(loc);
+                            break;
+                        }
+                    }
+                }
             }
+            return results;
         }
 
         private void menu_CheckedChanged(object sender, EventArgs e)
@@ -89,8 +100,9 @@ namespace FTAnalyzer.Forms
             {
                 Application.UserAppDataRegistry.SetValue(menu.Name, menu.Checked.ToString()); // remember checked state for next time
             }
-            ApplyGoogleResultTypeFilter();
+            dgLocations.DataSource = new SortableBindingList<IDisplayGeocodedLocation>(ApplyGoogleResultTypeFilter());
             dgLocations.Refresh();
+            SetStatusText();
         }
 
         private void ResetTable()
@@ -140,7 +152,7 @@ namespace FTAnalyzer.Forms
 
         private void dgLocations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            if (!ft.Geocoding && e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 this.Cursor = Cursors.WaitCursor;
                 FactLocation loc = dgLocations.Rows[e.RowIndex].DataBoundItem as FactLocation;
