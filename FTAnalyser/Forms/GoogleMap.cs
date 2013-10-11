@@ -234,11 +234,12 @@ namespace FTAnalyzer.Forms
             }
             else
             {
+                OnWaitingForGoogle(string.Empty); // going well clear any previous message
                 // no throttling, go a little bit faster
                 if (sleepinterval > 10000)
                     sleepinterval = 200;
                 else
-                    sleepinterval = Math.Max(sleepinterval / 2, 100);
+                    sleepinterval = Math.Max(sleepinterval / 2, 75);
                 return res;
             }
         }

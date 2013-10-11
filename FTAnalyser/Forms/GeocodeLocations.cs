@@ -20,6 +20,7 @@ namespace FTAnalyzer.Forms
         private Font italicFont;
         private ReportFormHelper reportFormHelper;
         private SortableBindingList<IDisplayGeocodedLocation> locations;
+        private SortableBindingList<IDisplayGeocodedLocation> filteredLocations;
         private bool formClosing;
 
         public GeocodeLocations()
@@ -27,8 +28,9 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
             ft = FamilyTree.Instance;
             this.locations = ft.AllGeocodingLocations;
+            this.filteredLocations = this.locations;
             dgLocations.AutoGenerateColumns = false;
-            dgLocations.DataSource = this.locations;
+            dgLocations.DataSource = this.filteredLocations;
             reportFormHelper = new ReportFormHelper(this.Text, dgLocations, this.ResetTable);
             italicFont = new Font(dgLocations.DefaultCellStyle.Font, FontStyle.Italic);
             reportFormHelper.LoadColumnLayout("GeocodeLocationsColumns.xml");
@@ -64,11 +66,14 @@ namespace FTAnalyzer.Forms
 
         void menu_CheckedChanged(object sender, EventArgs e)
         {
+            filteredLocations = new SortableBindingList<IDisplayGeocodedLocation>();
             foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
             {
                 Application.UserAppDataRegistry.SetValue(menu.Name, menu.Checked.ToString()); // remember checked state for next time
                 // filter locations ono menu items and refresh grid
+                filteredLocations.Concat(locations.Where(x => x.GoogleResultType.Contains(menu.Name)));
             }
+            dgLocations.Refresh();
         }
 
         private void ResetTable()
@@ -149,6 +154,8 @@ namespace FTAnalyzer.Forms
             ft.Geocoding = false;
             if (formClosing)
                 this.Close();
+            else
+                dgLocations.Refresh();
         }
 
         private void GeocodeLocations_FormClosing(object sender, FormClosingEventArgs e)
