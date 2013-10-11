@@ -74,6 +74,8 @@ namespace FTAnalyzer
                 AddFacts(node, Fact.CENSUS);
                 AddFacts(node, Fact.CUSTOM_FACT);
                 AddFacts(node, Fact.CUSTOM_FACT2);
+
+                //TODO: need to think about family facts having AGE tags in GEDCOM
             }
         }
 

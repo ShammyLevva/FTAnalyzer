@@ -96,6 +96,12 @@ namespace FTAnalyzer
             // Custom facts
             AddFacts(node, Fact.CUSTOM_FACT);
             AddFacts(node, Fact.CUSTOM_FACT2);
+
+            IEnumerable<Fact> gedcomAges = facts.Where(x => x.GedcomAge != null);
+            if (gedcomAges.Count() > 0)
+            {
+                // we have gedcom ages so add them to birth facts
+            }
         }
 
         internal Individual(Individual i)

@@ -23,19 +23,21 @@ namespace FTAnalyzer.Forms
     {
         private FeatureDataTable pointTable;
         private VectorLayer pointLayer;
-        private bool dragging;
+        private FactLocation location;
+        private bool iconSelected;
 
         public EditLocation(FactLocation location)
         {
             InitializeComponent();
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[10].Visible = false;
+            this.location = location;
             this.Text = "Editing : " + location.ToString();
-            dragging = false;
-            SetupMap(location);
+            iconSelected = false;
+            SetupMap();
         }
 
-        private void SetupMap(FactLocation fl)
+        private void SetupMap()
         {
             // Add Google maps layer to map control.
             HttpUtility.SetDefaultProxy();
@@ -44,11 +46,7 @@ namespace FTAnalyzer.Forms
 
             pointTable = new FeatureDataTable();
             pointTable.Columns.Add("Label", typeof(string));
-
-            FeatureDataRow row = pointTable.NewRow();
-            row["Label"] = fl.ToString();
-            row.Geometry = new NetTopologySuite.Geometries.Point(fl.Longitude, fl.Latitude);
-            pointTable.AddRow(row);
+            pointTable.AddRow(GetRow(location.Longitude, location.Latitude));
 
             GeometryFeatureProvider pointGFP = new GeometryFeatureProvider(pointTable);
 
@@ -59,7 +57,7 @@ namespace FTAnalyzer.Forms
             pointLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
 
             IMathTransform transform = pointLayer.CoordinateTransformation.MathTransform;
-            GeoResponse.CResult.CGeometry.CViewPort vp = fl.ViewPort;
+            GeoResponse.CResult.CGeometry.CViewPort vp = location.ViewPort;
             Envelope expand;
             if (vp.NorthEast.Lat == 0 && vp.NorthEast.Long == 0 && vp.SouthWest.Lat == 0 && vp.SouthWest.Long == 0)
                 expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
@@ -76,43 +74,43 @@ namespace FTAnalyzer.Forms
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
         }
 
+        private FeatureDataRow GetRow(double p1, double p2)
+        {
+            FeatureDataRow row = pointTable.NewRow();
+            row["Label"] = location.ToString();
+            row.Geometry = new NetTopologySuite.Geometries.Point(p1, p2);
+            return row;
+        }
+        
+        private void mapBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (iconSelected)
+            {
+                // we have finished and are saving icon
+                Console.WriteLine("Arrived :" + e.X + ", " + e.Y);
+                Cursor.Current = Cursors.Default;
+                GeoAPI.Geometries.Coordinate p = mapBox1.Map.ImageToWorld(new PointF(e.X, e.Y));
+                pointTable.Clear();
+                pointTable.AddRow(GetRow(p.X, p.Y));
+            
+                iconSelected = false;
+            }
+        }
+
+        private void mapBox1_MapQueried(FeatureDataTable data)
+        {
+            // if we haven't already selected the point then update cursor
+            if (!iconSelected)
+            {   
+                mapBox1.Cursor = new Cursor(Path.Combine(Application.StartupPath, @"Resources\Icons\teardrop_blue.cur"));
+                mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
+                iconSelected = true;
+            }
+        }
+
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void mapBox1_MouseDown(Coordinate worldPos, MouseEventArgs imagePos)
-        {
-            Console.WriteLine("MouseDown");
-            //select point if reasonably near mouse and flag drag started
-            // update mouse pointer to show teardrop
-            Cursor.Current = new Cursor(Path.Combine(Application.StartupPath, @"Resources\Icons\teardrop_blue.cur"));
-            dragging = true;
-
-        }
-
-        private void mapBox1_MouseMove(Coordinate worldPos, MouseEventArgs imagePos)
-        {
-            // only do anything if dragging active
-            // https://sharpmap.codeplex.com/discussions/347771 suggests 
-            // "repen edited geometry to point of mousemove" not sure what that means
-            if (dragging)
-            {
-                Console.WriteLine("MouseMove - Dragging");
-            }
-        }
-
-        private void mapBox1_MouseUp(Coordinate worldPos, MouseEventArgs imagePos)
-        {
-            Console.WriteLine("MouseUp");
-            // if dragging then update geometry to new mouse position
-            // revert mouse point to default
-            if (dragging)
-            {
-                Console.WriteLine("Arrived :" + worldPos.X + ", " + worldPos.Y);
-                Cursor.Current = Cursors.Default;
-                dragging = false;
-            }
+            mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
         }
     }
 }

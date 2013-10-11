@@ -189,6 +189,7 @@ namespace FTAnalyzer
         public string Folio { get; private set; }
         public string Page { get; private set; }
         public string Schedule { get; private set; }
+        public Age GedcomAge { get; private set; }
 
         #region Constructors
 
@@ -207,6 +208,7 @@ namespace FTAnalyzer
             this.Folio = string.Empty;
             this.Page = string.Empty;
             this.Schedule = string.Empty;
+            this.GedcomAge = null;
         }
 
         public Fact(XmlNode node, string factRef)
@@ -280,11 +282,13 @@ namespace FTAnalyzer
                             }
                         }
                     }
-
                     if (FactType == DEATH)
                     {
                         Comment = FamilyTree.GetText(node, "CAUS");
                     }
+                    string age = FamilyTree.GetText(node, "AGE");
+                    if (age.Length > 0)
+                        this.GedcomAge = new Age(age);
                     this.CertificatePresent = SetCertificatePresent();
                 }
                 catch (Exception ex)

@@ -43,6 +43,11 @@ namespace FTAnalyzer
             }
         }
 
+        public Age(string gedcomAge) : this()
+        {
+            // parse ages from gedcom
+        }
+
         private int GetAge(DateTime birthDate, DateTime laterDate)
         {
             int age;

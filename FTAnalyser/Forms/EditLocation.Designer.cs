@@ -41,9 +41,9 @@
             // 
             // mapBox1
             // 
-            this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
+            this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             this.mapBox1.AllowDrop = true;
-            this.mapBox1.Cursor = System.Windows.Forms.Cursors.Help;
+            this.mapBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.mapBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapBox1.FineZoomFactor = 10D;
             this.mapBox1.Location = new System.Drawing.Point(0, 25);
@@ -60,9 +60,8 @@
             this.mapBox1.TabIndex = 9;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
-            this.mapBox1.MouseMove += new SharpMap.Forms.MapBox.MouseEventHandler(this.mapBox1_MouseMove);
-            this.mapBox1.MouseDown += new SharpMap.Forms.MapBox.MouseEventHandler(this.mapBox1_MouseDown);
-            this.mapBox1.MouseUp += new SharpMap.Forms.MapBox.MouseEventHandler(this.mapBox1_MouseUp);
+            this.mapBox1.MapQueried += new SharpMap.Forms.MapBox.MapQueryHandler(this.mapBox1_MapQueried);
+            this.mapBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.mapBox1_MouseClick);
             // 
             // mapZoomToolStrip
             // 
