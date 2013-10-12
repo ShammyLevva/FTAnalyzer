@@ -197,8 +197,12 @@ namespace FTAnalyzer.Forms
                 this.Cursor = Cursors.Default;
                 editform.ShowDialog(this);
                 // force refresh of locations from new edited data
-                //this.locations = ft.AllGeocodingLocations;
                 UpdateGridWithFilters(locations);
+                for (int i = 0; i < dgLocations.RowCount; i++)
+                {
+                    dgLocations.Rows[i].Selected = (dgLocations.Rows[i].DataBoundItem.Equals(loc));
+                }
+                dgLocations.FirstDisplayedScrollingRowIndex = dgLocations.SelectedRows[0].Index;
             }
         }
 
