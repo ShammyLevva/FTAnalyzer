@@ -195,7 +195,7 @@
     <Compile Include="Core\FactImage.cs" />
     <Compile Include="Core\FactSource.cs" />
     <Compile Include="Core\FamilySearch.cs" />
-    <Compile Include="Core\FactILocationmage.cs" />
+    <Compile Include="Core\FactLocationImage.cs" />
     <Compile Include="Forms\EditLocation.cs">
       <SubType>Form</SubType>
     </Compile>
