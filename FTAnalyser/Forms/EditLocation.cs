@@ -16,6 +16,8 @@ using SharpMap.Styles;
 using System.IO;
 using GeoAPI.Geometries;
 using GeoAPI.CoordinateSystems.Transformations;
+using FTAnalyzer.Utilities;
+using System.Data.SQLite;
 
 namespace FTAnalyzer.Forms
 {
@@ -135,7 +137,31 @@ namespace FTAnalyzer.Forms
 
         private void UpdateDatabase()
         {
-            
+            //"update geocode set latitude = ?, longitude = ?, viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ?, geocodestatus = ? where location = ?", conn);
+
+            IMathTransform transform = pointLayer.ReverseCoordinateTransformation.MathTransform;
+            Envelope env = new Envelope(transform.Transform(mapBox1.Map.Envelope.TopLeft()),
+                                        transform.Transform(mapBox1.Map.Envelope.BottomRight()));
+
+            DatabaseHelper dbh = DatabaseHelper.Instance;
+            SQLiteCommand updateCmd = dbh.UpdatePointGeocode();
+            location.Latitude = pointFeature.Geometry.Coordinate.Y;
+            location.Longitude = pointFeature.Geometry.Coordinate.X;
+            location.ViewPort.NorthEast.Lat = env.Top();
+            location.ViewPort.NorthEast.Long = env.Right();
+            location.ViewPort.SouthWest.Lat = env.Bottom();
+            location.ViewPort.SouthWest.Long = env.Left();
+            location.GeocodeStatus = FactLocation.Geocode.GEDCOM_USER;
+
+            updateCmd.Parameters[0].Value = location.Latitude;
+            updateCmd.Parameters[1].Value = location.Longitude;
+            updateCmd.Parameters[2].Value = location.ViewPort.NorthEast.Lat;
+            updateCmd.Parameters[3].Value = location.ViewPort.NorthEast.Long;
+            updateCmd.Parameters[4].Value = location.ViewPort.SouthWest.Lat;
+            updateCmd.Parameters[5].Value = location.ViewPort.SouthWest.Long;
+            updateCmd.Parameters[6].Value = location.GeocodeStatus;
+            updateCmd.Parameters[7].Value = location.ToString();
+            updateCmd.ExecuteNonQuery();
         }
     }
 }

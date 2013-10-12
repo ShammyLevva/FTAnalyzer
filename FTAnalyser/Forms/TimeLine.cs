@@ -93,6 +93,7 @@ namespace FTAnalyzer.Forms
             feature.PointColor = new SolidBrush(Color.Red);
             feature.PointSize = 20;
             feature.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\teardrop_blue.png"));
+            feature.SymbolOffset = new PointF(0.0f, -17.0f);
             styles.Add(MapCluster.FEATURE, feature);
 
             VectorStyle cluster = new VectorStyle();

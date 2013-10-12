@@ -194,8 +194,11 @@ namespace FTAnalyzer.Forms
                 this.Cursor = Cursors.WaitCursor;
                 FactLocation loc = dgLocations.Rows[e.RowIndex].DataBoundItem as FactLocation;
                 EditLocation editform = new EditLocation(loc);
-                editform.Show();
                 this.Cursor = Cursors.Default;
+                editform.ShowDialog(this);
+                // force refresh of locations from new edited data
+                //this.locations = ft.AllGeocodingLocations;
+                UpdateGridWithFilters(locations);
             }
         }
 

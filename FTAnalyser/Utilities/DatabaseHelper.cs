@@ -248,6 +248,48 @@ namespace FTAnalyzer.Utilities
             updateCmd.Prepare();
             return updateCmd;
         }
+
+        public SQLiteCommand UpdatePointGeocode()
+        {
+            SQLiteCommand updatePointCmd = new SQLiteCommand("update geocode set founddate=date('now'), latitude = ?, longitude = ?, viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ?, geocodestatus = ? where location = ?", conn);
+
+            SQLiteParameter param = updatePointCmd.CreateParameter();
+
+            param = updatePointCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updatePointCmd.Parameters.Add(param);
+
+            param = updatePointCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updatePointCmd.Parameters.Add(param);
+
+            param = updatePointCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updatePointCmd.Parameters.Add(param);
+
+            param = updatePointCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updatePointCmd.Parameters.Add(param);
+
+            param = updatePointCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updatePointCmd.Parameters.Add(param);
+
+            param = updatePointCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updatePointCmd.Parameters.Add(param);
+
+            param = updatePointCmd.CreateParameter();
+            param.DbType = DbType.Int32;
+            updatePointCmd.Parameters.Add(param);
+
+            param = updatePointCmd.CreateParameter();
+            param.DbType = DbType.String;
+            updatePointCmd.Parameters.Add(param);
+
+            updatePointCmd.Prepare();
+            return updatePointCmd;
+        }
         #endregion
     }
 }
