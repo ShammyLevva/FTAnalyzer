@@ -19,26 +19,23 @@ namespace FTAnalyzer.Forms
         private FamilyTree ft = FamilyTree.Instance;
         private Font italicFont;
         private ReportFormHelper reportFormHelper;
-        private SortableBindingList<IDisplayGeocodedLocation> locations;
-        private SortableBindingList<IDisplayGeocodedLocation> filteredLocations;
+        private List<IDisplayGeocodedLocation> locations;
         private bool formClosing;
+        private string statusText;
 
         public GeocodeLocations()
         {
             InitializeComponent();
             ft = FamilyTree.Instance;
             this.locations = ft.AllGeocodingLocations;
-            this.filteredLocations = this.locations;
             dgLocations.AutoGenerateColumns = false;
             reportFormHelper = new ReportFormHelper(this.Text, dgLocations, this.ResetTable);
             italicFont = new Font(dgLocations.DefaultCellStyle.Font, FontStyle.Italic);
             reportFormHelper.LoadColumnLayout("GeocodeLocationsColumns.xml");
             mnuGeocodeLocations.Enabled = !ft.Geocoding; // disable menu if already geocoding
-            SetStatusText();
             SetupFilterMenu();
-            ApplyGeocodeStatusFilter();
-            dgLocations.DataSource = new SortableBindingList<IDisplayGeocodedLocation>(ApplyGoogleResultTypeFilter());
-            dgLocations.Refresh();
+            SetStatusText();
+            UpdateGridWithFilters(locations);
         }
 
         private void SetStatusText()
@@ -50,7 +47,8 @@ namespace FTAnalyzer.Forms
             int total = FactLocation.AllLocations.Count() - 1;
 
             txtGoogleWait.Text = string.Empty;
-            txtLocations.Text = "Already Geocoded: " + (gedcom + found) + ", not found: " + notfound + " yet to search: " + notsearched + " of " + total + " locations. Displaying: " + dgLocations.RowCount;
+            statusText = "Already Geocoded: " + (gedcom + found) + ", not found: " + notfound + " yet to search: " + notsearched + " of " + total + " locations.";
+            txtLocations.Text = statusText;
         }
 
         private void SetupFilterMenu()
@@ -66,17 +64,29 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void ApplyGeocodeStatusFilter()
+        private void UpdateGridWithFilters(List<IDisplayGeocodedLocation> input)
         {
+            this.Cursor = Cursors.WaitCursor;
+            List<IDisplayGeocodedLocation> result = ApplyGeocodeStatusFilter(input);
+            SortableBindingList<IDisplayGeocodedLocation> filteredLocations =
+                new SortableBindingList<IDisplayGeocodedLocation>(ApplyGoogleResultTypeFilter(result));
+            dgLocations.DataSource = filteredLocations;
+            dgLocations.Refresh();
+            txtLocations.Text = statusText + " Displaying: " + dgLocations.RowCount;
+            this.Cursor = Cursors.Default;
         }
 
-        private List<IDisplayGeocodedLocation> ApplyGoogleResultTypeFilter()
+        private List<IDisplayGeocodedLocation> ApplyGeocodeStatusFilter(List<IDisplayGeocodedLocation> input)
+        {
+            return input;
+        }
+
+        private List<IDisplayGeocodedLocation> ApplyGoogleResultTypeFilter(List<IDisplayGeocodedLocation> input)
         {
             List<IDisplayGeocodedLocation> results = new List<IDisplayGeocodedLocation>();
-            // first add those without a status
-            foreach (IDisplayGeocodedLocation loc in locations)
+            foreach (IDisplayGeocodedLocation loc in input)
             {
-                if (loc.GoogleResultType == null)
+                if (loc.GoogleResultType == null || loc.GoogleResultType.Length == 0)
                     results.Add(loc);
                 else
                 {
@@ -100,9 +110,7 @@ namespace FTAnalyzer.Forms
             {
                 Application.UserAppDataRegistry.SetValue(menu.Name, menu.Checked.ToString()); // remember checked state for next time
             }
-            dgLocations.DataSource = new SortableBindingList<IDisplayGeocodedLocation>(ApplyGoogleResultTypeFilter());
-            dgLocations.Refresh();
-            SetStatusText();
+            UpdateGridWithFilters(locations);
         }
 
         private void ResetTable()

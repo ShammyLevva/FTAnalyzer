@@ -985,11 +985,11 @@ namespace FTAnalyzer
             get { return displayLocations[FactLocation.PLACE] == null ? GetDisplayLocations(FactLocation.PLACE) : displayLocations[FactLocation.PLACE]; }
         }
 
-        public SortableBindingList<IDisplayGeocodedLocation> AllGeocodingLocations
+        public List<IDisplayGeocodedLocation> AllGeocodingLocations
         {
             get
             {
-                SortableBindingList<IDisplayGeocodedLocation> result = new SortableBindingList<IDisplayGeocodedLocation>();
+                List<IDisplayGeocodedLocation> result = new List<IDisplayGeocodedLocation>();
                 foreach (IDisplayGeocodedLocation loc in AllDisplayPlaces)
                     result.Add(loc);
                 return result;
