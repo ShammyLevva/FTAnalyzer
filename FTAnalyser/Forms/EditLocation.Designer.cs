@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditLocation));
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.menuMap = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSatellite = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,14 +59,12 @@
             this.mapBox1.TabIndex = 9;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
-            this.mapBox1.MapQueried += new SharpMap.Forms.MapBox.MapQueryHandler(this.mapBox1_MapQueried);
             this.mapBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.mapBox1_MouseClick);
             // 
             // mapZoomToolStrip
             // 
             this.mapZoomToolStrip.Enabled = false;
             this.mapZoomToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
             this.toolStripDropDownButton1});
             this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
             this.mapZoomToolStrip.MapControl = this.mapBox1;
@@ -75,17 +72,6 @@
             this.mapZoomToolStrip.Size = new System.Drawing.Size(754, 25);
             this.mapZoomToolStrip.TabIndex = 10;
             this.mapZoomToolStrip.Text = "MapZoomToolStrip";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.ToolTipText = "Location Selection ";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripDropDownButton1
             // 
@@ -104,7 +90,7 @@
             // 
             this.menuMap.CheckOnClick = true;
             this.menuMap.Name = "menuMap";
-            this.menuMap.Size = new System.Drawing.Size(115, 22);
+            this.menuMap.Size = new System.Drawing.Size(152, 22);
             this.menuMap.Text = "Map";
             // 
             // menuSatellite
@@ -113,7 +99,7 @@
             this.menuSatellite.CheckOnClick = true;
             this.menuSatellite.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menuSatellite.Name = "menuSatellite";
-            this.menuSatellite.Size = new System.Drawing.Size(115, 22);
+            this.menuSatellite.Size = new System.Drawing.Size(152, 22);
             this.menuSatellite.Text = "Satellite";
             // 
             // EditLocation
@@ -125,6 +111,7 @@
             this.Controls.Add(this.mapZoomToolStrip);
             this.Name = "EditLocation";
             this.Text = "EditLocation";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditLocation_FormClosing);
             this.mapZoomToolStrip.ResumeLayout(false);
             this.mapZoomToolStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -136,7 +123,6 @@
 
         private SharpMap.Forms.MapBox mapBox1;
         private SharpMap.Forms.ToolBar.MapZoomToolStrip mapZoomToolStrip;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem menuMap;
         private System.Windows.Forms.ToolStripMenuItem menuSatellite;

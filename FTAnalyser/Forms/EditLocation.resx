@@ -121,18 +121,6 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="toolStripButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFJSURBVDhPpdLNS8JgAMfx/VlRQYcgCCKjgt6EDpG4qBSK
-        IhiIRVFRB1HCIgp7hV5AeqHD0KAwYtIg0IJQhCKiiLCttubUX5vuYBfd1ve0w/P7wMMzorSNkyi0T3Op
-        wL8QdZzmBfOIOlT7/BIROGaMI2vB6wKgluYEeLdDxpDlg0ttXuzp5R1u775+xLcT0qbFcrk84g+PcEyu
-        6EMW18+QV4ZZZZiRcxB/ZPBCBmw8hZ7h2crIjD8IKZOFIMrgviV8cCKsjjlUNdlQ2zKARutYecTl2VNe
-        QMJNLInOwWk8v/EgKR/YWELfFcbnNxG9TaCubQi2CQ8ibBJ05A5dCqYdKZ9zahWt/S6cX7E4DTMFhL1/
-        haWP0geQ1NKfg70jCwgzKfh3Q6jvcOpDSgsc0mi3u7F1xKC62W4cUGvoHkWNhQR9YeLXrhxB/AL+GfTN
-        mdJRIAAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="toolStripDropDownButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
