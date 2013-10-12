@@ -49,10 +49,13 @@ namespace FTAnalyzer
         private static Dictionary<string, Tuple<string, string>> FINDMYPAST_LOOKUP = new Dictionary<string, Tuple<string, string>>();
 
         private static IDictionary<string, FactLocation> locations;
+        public static Dictionary<Geocode, string> Geocodes;
+
         public static FactLocation UNKNOWN_LOCATION;
 
         static FactLocation()
         {
+            SetupGeocodes();
             ResetLocations();
             // load conversions from XML file
             string startPath;
@@ -131,6 +134,16 @@ namespace FTAnalyzer
                     }
                 }
             }
+        }
+
+        private static void SetupGeocodes()
+        {
+            Geocodes = new Dictionary<Geocode, string>();
+            Geocodes.Add(Geocode.NOT_SEARCHED, "Not Searched");
+            Geocodes.Add(Geocode.GEDCOM_USER, "GEDCOM/User data");
+            Geocodes.Add(Geocode.PARTIAL_MATCH, "Partial Match");
+            Geocodes.Add(Geocode.MATCHED, "Matched");
+            Geocodes.Add(Geocode.NO_MATCH, "No Match");
         }
 
         public static FactLocation GetLocation(string place)
@@ -528,21 +541,11 @@ namespace FTAnalyzer
         {
             get
             {
-                switch (GeocodeStatus)
-                {
-                    case Geocode.MATCHED:
-                        return "Matched";
-                    case Geocode.PARTIAL_MATCH:
-                        return "Partial Match";
-                    case Geocode.NOT_SEARCHED:
-                        return "Not Searched";
-                    case Geocode.GEDCOM_USER:
-                        return "GEDCOM/User data";
-                    case Geocode.NO_MATCH:
-                        return "No Match";
-                    default:
-                        return "Unknown";
-                }
+                string result;
+                if (Geocodes.TryGetValue(GeocodeStatus, out result))
+                    return result;
+                else
+                    return "Unknown";
             }
         }
 

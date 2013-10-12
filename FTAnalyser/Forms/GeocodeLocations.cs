@@ -53,13 +53,23 @@ namespace FTAnalyzer.Forms
 
         private void SetupFilterMenu()
         {
+            foreach(string geocode in FactLocation.Geocodes.Values)
+            {
+                ToolStripMenuItem menu = new ToolStripMenuItem(geocode);
+                menu.Name = geocode;
+                menu.Checked = Application.UserAppDataRegistry.GetValue(geocode, "True").Equals("True");
+                menu.CheckOnClick = true;
+                menu.CheckedChanged += new EventHandler(menuGeocode_CheckedChanged);
+                mnuGeocodeStatus.DropDownItems.Add(menu);
+            }
+
             foreach (string resultType in GoogleMap.RESULT_TYPES)
             {
                 ToolStripMenuItem menu = new ToolStripMenuItem(resultType);
                 menu.Name = resultType;
                 menu.Checked = Application.UserAppDataRegistry.GetValue(resultType, "True").Equals("True");
                 menu.CheckOnClick = true;
-                menu.CheckedChanged += new EventHandler(menu_CheckedChanged);
+                menu.CheckedChanged += new EventHandler(menuResultType_CheckedChanged);
                 mnuGoogleResultType.DropDownItems.Add(menu);
             }
         }
@@ -67,44 +77,63 @@ namespace FTAnalyzer.Forms
         private void UpdateGridWithFilters(List<IDisplayGeocodedLocation> input)
         {
             this.Cursor = Cursors.WaitCursor;
-            List<IDisplayGeocodedLocation> result = ApplyGeocodeStatusFilter(input);
-            SortableBindingList<IDisplayGeocodedLocation> filteredLocations =
-                new SortableBindingList<IDisplayGeocodedLocation>(ApplyGoogleResultTypeFilter(result));
+            SortableBindingList<IDisplayGeocodedLocation> filteredLocations = ApplyFilters(input);
             dgLocations.DataSource = filteredLocations;
             dgLocations.Refresh();
             txtLocations.Text = statusText + " Displaying: " + dgLocations.RowCount;
             this.Cursor = Cursors.Default;
         }
 
-        private List<IDisplayGeocodedLocation> ApplyGeocodeStatusFilter(List<IDisplayGeocodedLocation> input)
+        private bool StatusFilter(IDisplayGeocodedLocation loc)
         {
-            return input;
+            bool result = false;
+            foreach (ToolStripMenuItem menu in mnuGeocodeStatus.DropDownItems)
+            {
+                if (menu.Checked && loc.Geocoded == menu.Name)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
         }
 
-        private List<IDisplayGeocodedLocation> ApplyGoogleResultTypeFilter(List<IDisplayGeocodedLocation> input)
+        private SortableBindingList<IDisplayGeocodedLocation> ApplyFilters(List<IDisplayGeocodedLocation> input)
         {
             List<IDisplayGeocodedLocation> results = new List<IDisplayGeocodedLocation>();
             foreach (IDisplayGeocodedLocation loc in input)
             {
-                if (loc.GoogleResultType == null || loc.GoogleResultType.Length == 0)
-                    results.Add(loc);
-                else
+                if (StatusFilter(loc))
                 {
-                    foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
+                    if (loc.GoogleResultType == null || loc.GoogleResultType.Length == 0)
+                        results.Add(loc);
+                    else
                     {
-                        // filter locations on menu items that are ticked
-                        if (menu.Checked && loc.GoogleResultType.Contains(menu.Name))
+                        foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
                         {
-                            results.Add(loc);
-                            break;
+                            // filter locations on menu items that are ticked
+                            if (menu.Checked && loc.GoogleResultType.Contains(menu.Name))
+                            {
+                                results.Add(loc);
+                                break;
+                            }
                         }
                     }
                 }
             }
-            return results;
+            return new SortableBindingList<IDisplayGeocodedLocation>(results);
         }
 
-        private void menu_CheckedChanged(object sender, EventArgs e)
+        private void menuGeocode_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem menu in mnuGeocodeStatus.DropDownItems)
+            {
+                Application.UserAppDataRegistry.SetValue(menu.Name, menu.Checked.ToString()); // remember checked state for next time
+            }
+            UpdateGridWithFilters(locations);
+        }
+
+        private void menuResultType_CheckedChanged(object sender, EventArgs e)
         {
             foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
             {

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeocodeLocations));
             this.dgLocations = new System.Windows.Forms.DataGridView();
             this.GeocodedLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,13 +59,8 @@
             this.mnuOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRetryPartial = new System.Windows.Forms.ToolStripMenuItem();
             this.filtersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.geocodeStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuGeocodeStatus = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGoogleResultType = new System.Windows.Forms.ToolStripMenuItem();
-            this.notSearchedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.matchedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.partialMatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gEDCOMUserEnteredToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.noMatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgLocations)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -87,14 +82,14 @@
             this.GeocodeStatus,
             this.GoogleLocation,
             this.GoogleResultType});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgLocations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgLocations.Location = new System.Drawing.Point(0, 49);
             this.dgLocations.Name = "dgLocations";
@@ -120,8 +115,8 @@
             // 
             this.Latitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Latitude.DataPropertyName = "Latitude";
-            dataGridViewCellStyle1.Format = "N7";
-            this.Latitude.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Format = "N7";
+            this.Latitude.DefaultCellStyle = dataGridViewCellStyle4;
             this.Latitude.HeaderText = "Latitude";
             this.Latitude.MinimumWidth = 75;
             this.Latitude.Name = "Latitude";
@@ -133,8 +128,8 @@
             // 
             this.Longitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Longitude.DataPropertyName = "Longitude";
-            dataGridViewCellStyle2.Format = "N7";
-            this.Longitude.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Format = "N7";
+            this.Longitude.DefaultCellStyle = dataGridViewCellStyle5;
             this.Longitude.HeaderText = "Longitude";
             this.Longitude.MinimumWidth = 75;
             this.Longitude.Name = "Longitude";
@@ -342,74 +337,23 @@
             // filtersToolStripMenuItem
             // 
             this.filtersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.geocodeStatusToolStripMenuItem,
+            this.mnuGeocodeStatus,
             this.mnuGoogleResultType});
             this.filtersToolStripMenuItem.Name = "filtersToolStripMenuItem";
             this.filtersToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.filtersToolStripMenuItem.Text = "Filters";
             // 
-            // geocodeStatusToolStripMenuItem
+            // mnuGeocodeStatus
             // 
-            this.geocodeStatusToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.notSearchedToolStripMenuItem,
-            this.matchedToolStripMenuItem,
-            this.partialMatchToolStripMenuItem,
-            this.gEDCOMUserEnteredToolStripMenuItem,
-            this.noMatchToolStripMenuItem});
-            this.geocodeStatusToolStripMenuItem.Name = "geocodeStatusToolStripMenuItem";
-            this.geocodeStatusToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.geocodeStatusToolStripMenuItem.Text = "Geocode Status";
+            this.mnuGeocodeStatus.Name = "mnuGeocodeStatus";
+            this.mnuGeocodeStatus.Size = new System.Drawing.Size(176, 22);
+            this.mnuGeocodeStatus.Text = "Geocode Status";
             // 
             // mnuGoogleResultType
             // 
             this.mnuGoogleResultType.Name = "mnuGoogleResultType";
             this.mnuGoogleResultType.Size = new System.Drawing.Size(176, 22);
             this.mnuGoogleResultType.Text = "Google Result Type";
-            // 
-            // notSearchedToolStripMenuItem
-            // 
-            this.notSearchedToolStripMenuItem.Checked = true;
-            this.notSearchedToolStripMenuItem.CheckOnClick = true;
-            this.notSearchedToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.notSearchedToolStripMenuItem.Name = "notSearchedToolStripMenuItem";
-            this.notSearchedToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.notSearchedToolStripMenuItem.Text = "Not Searched";
-            // 
-            // matchedToolStripMenuItem
-            // 
-            this.matchedToolStripMenuItem.Checked = true;
-            this.matchedToolStripMenuItem.CheckOnClick = true;
-            this.matchedToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.matchedToolStripMenuItem.Name = "matchedToolStripMenuItem";
-            this.matchedToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.matchedToolStripMenuItem.Text = "Matched";
-            // 
-            // partialMatchToolStripMenuItem
-            // 
-            this.partialMatchToolStripMenuItem.Checked = true;
-            this.partialMatchToolStripMenuItem.CheckOnClick = true;
-            this.partialMatchToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.partialMatchToolStripMenuItem.Name = "partialMatchToolStripMenuItem";
-            this.partialMatchToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.partialMatchToolStripMenuItem.Text = "Partial Match";
-            // 
-            // gEDCOMUserEnteredToolStripMenuItem
-            // 
-            this.gEDCOMUserEnteredToolStripMenuItem.Checked = true;
-            this.gEDCOMUserEnteredToolStripMenuItem.CheckOnClick = true;
-            this.gEDCOMUserEnteredToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.gEDCOMUserEnteredToolStripMenuItem.Name = "gEDCOMUserEnteredToolStripMenuItem";
-            this.gEDCOMUserEnteredToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.gEDCOMUserEnteredToolStripMenuItem.Text = "GEDCOM/User entered";
-            // 
-            // noMatchToolStripMenuItem
-            // 
-            this.noMatchToolStripMenuItem.Checked = true;
-            this.noMatchToolStripMenuItem.CheckOnClick = true;
-            this.noMatchToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.noMatchToolStripMenuItem.Name = "noMatchToolStripMenuItem";
-            this.noMatchToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.noMatchToolStripMenuItem.Text = "No Match";
             // 
             // GeocodeLocations
             // 
@@ -464,12 +408,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn GoogleLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn GoogleResultType;
         private System.Windows.Forms.ToolStripMenuItem filtersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem geocodeStatusToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem notSearchedToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem matchedToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem partialMatchToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gEDCOMUserEnteredToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem noMatchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuGeocodeStatus;
         private System.Windows.Forms.ToolStripMenuItem mnuGoogleResultType;
     }
 }
