@@ -59,6 +59,12 @@ namespace FactDateTest
             FactDate baseDate = new FactDate("19 Nov 1988");
             Age age = new Age("22y", baseDate);
             Assert.AreEqual(age.GetBirthDate(baseDate), new FactDate("19 Nov 1966"));
+
+            age = new Age("22y 2m", baseDate);
+            Assert.AreEqual(age.GetBirthDate(baseDate), new FactDate("19 Sep 1966"));
+
+            age = new Age("22y 2m 5d", baseDate);
+            Assert.AreEqual(age.GetBirthDate(baseDate), new FactDate("14 Sep 1966"));
         }
     }
 }

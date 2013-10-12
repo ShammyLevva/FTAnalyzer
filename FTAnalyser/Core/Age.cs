@@ -10,7 +10,7 @@ namespace FTAnalyzer
     {
         public int MinAge { get; private set; }
         public int MaxAge { get; private set; }
-        private TimeSpan daysOld;
+        private FactDate birthDate;
         private string age;
 
         public static Age BIRTH = new Age();
@@ -20,7 +20,7 @@ namespace FTAnalyzer
             MinAge = 0;
             MaxAge = 0;
             age = "0";
-            daysOld = TimeSpan.MaxValue;
+            birthDate = FactDate.UNKNOWN_DATE;
         }
 
         public Age(Individual ind, FactDate when)
@@ -52,15 +52,33 @@ namespace FTAnalyzer
             : this()
         {
             // parse ages from gedcom
-            string pattern = @"^(\d{1,3}y)? ?(\d{1,2}m)? ?(\d{1,2}d)?$";
+            string pattern = @"^(?<year>\d{1,3}y)? ?(?<month>\d{1,2}m)? ?(?<day>\d{1,2}d)?$";
             Match matcher = Regex.Match(gedcomAge, pattern);
             if (matcher.Success)
             {
-                string year = matcher.Groups[0].ToString().TrimEnd('y');
-                string month = matcher.Groups[1].ToString();
-                string day = matcher.Groups[2].ToString();
+                string year = matcher.Groups["year"].ToString().TrimEnd('y');
+                string month = matcher.Groups["month"].ToString().TrimEnd('m');
+                string day = matcher.Groups["day"].ToString().TrimEnd('d');
 
-                int yearno = int.Parse(year);
+                int yearno, monthno, dayno;
+                DateTime startDate = when.StartDate;
+                DateTime endDate = when.EndDate;
+                if (int.TryParse(year, out yearno))
+                {
+                    startDate = startDate.AddYears(-yearno);
+                    endDate = endDate.AddYears(-yearno);
+                }
+                if (int.TryParse(month, out monthno))
+                {
+                    startDate = startDate.AddMonths(-monthno);
+                    endDate = endDate.AddMonths(-monthno);
+                }
+                if (int.TryParse(day, out dayno))
+                {
+                    startDate = startDate.AddDays(-dayno);
+                    endDate = endDate.AddDays(-dayno);
+                }
+                birthDate = new FactDate(startDate, endDate);
             }
         }
 
@@ -83,14 +101,14 @@ namespace FTAnalyzer
 
         public FactDate GetBirthDate(FactDate when)
         {
-            if (daysOld == TimeSpan.MaxValue)
+            if (birthDate.IsKnown)
+                return birthDate;
+            else
             {
                 DateTime startDate = when.StartDate.AddYears(-MaxAge);
                 DateTime endDate = when.EndDate.AddYears(-MinAge);
                 return new FactDate(startDate, endDate);
             }
-            else
-                return new FactDate(when.StartDate - daysOld, when.EndDate - daysOld);
         }
 
         public override string ToString()

@@ -98,7 +98,7 @@ namespace FTAnalyzer
             AddFacts(node, Fact.CUSTOM_FACT2);
 
             IEnumerable<Fact> gedcomAges = facts.Where(x => x.GedcomAge != null);
-            if (gedcomAges.Count() > 0 && !BirthDate.IsKnown)
+            if (gedcomAges.Count() > 0 && !BirthDate.IsKnown && BirthDate.IsExact)
             {
                 // we have gedcom ages so add them to birth facts
                 foreach (Fact f in gedcomAges)
