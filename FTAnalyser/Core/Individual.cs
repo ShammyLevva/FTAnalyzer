@@ -513,51 +513,6 @@ namespace FTAnalyzer
             return false;
         }
 
-        //public bool isLostCousinsCensus(FactDate when)
-        //{
-        //    foreach (Fact f in facts)
-        //    {
-        //        if (f.FactType == Fact.CENSUS || f.FactType == Fact.RESIDENCE)
-        //        {
-        //            if (f.FactDate.Overlaps(when) && !f.FactDate.Equals(FactDate.UNKNOWN_DATE))
-        //            {
-        //                bool supportedLocation = f.Location.SupportedLocation(FactLocation.COUNTRY);
-        //                if (f.Location.isUnitedKingdom || !supportedLocation)
-        //                {
-        //                    if ((f.FactDate.Overlaps(CensusDate.UKCENSUS1841) ||
-        //                         f.FactDate.Overlaps(CensusDate.UKCENSUS1881) ||
-        //                         f.FactDate.Overlaps(CensusDate.UKCENSUS1911)) &&
-        //                        (when == CensusDate.UKCENSUS1841 || when == CensusDate.UKCENSUS1881 || when == CensusDate.UKCENSUS1911))
-        //                        return true;
-        //                }
-        //                else if (f.Location.Country == Countries.SCOTLAND)
-        //                {
-        //                    if (f.FactDate.Overlaps(CensusDate.UKCENSUS1881) && when == CensusDate.UKCENSUS1881)
-        //                        return true;
-        //                }
-        //                else if (f.Location.Country == Countries.CANADA)
-        //                {
-        //                    if (f.FactDate.Overlaps(CensusDate.CANADACENSUS1881) && when == CensusDate.CANADACENSUS1881)
-        //                        return true;
-        //                }
-        //                else if (f.Location.Country == Countries.UNITED_STATES)
-        //                {
-        //                    if ((f.FactDate.Overlaps(CensusDate.USCENSUS1880) ||
-        //                         f.FactDate.Overlaps(CensusDate.USCENSUS1940)) && 
-        //                        (when == CensusDate.USCENSUS1880 || when == CensusDate.USCENSUS1940))
-        //                        return true;
-        //                }
-        //                else if (f.Location.Country == Countries.IRELAND)
-        //                {
-        //                    if (f.FactDate.Overlaps(CensusDate.IRELANDCENSUS1911) && when == CensusDate.IRELANDCENSUS1911)
-        //                        return true;
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return false;
-        //}
-
         public bool IsAlive(FactDate when)
         {
             return IsBorn(when) && !IsDeceased(when);
