@@ -195,7 +195,8 @@ namespace FTAnalyzer.Forms
                 FactLocation loc = dgLocations.Rows[e.RowIndex].DataBoundItem as FactLocation;
                 EditLocation editform = new EditLocation(loc);
                 this.Cursor = Cursors.Default;
-                editform.ShowDialog(this);
+                DialogResult result = editform.ShowDialog(this);
+                editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
                 // force refresh of locations from new edited data
                 UpdateGridWithFilters(locations);
                 for (int i = 0; i < dgLocations.RowCount; i++)

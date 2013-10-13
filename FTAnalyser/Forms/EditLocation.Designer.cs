@@ -35,6 +35,8 @@
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.menuMap = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSatellite = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.btnReload = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.mapZoomToolStrip.SuspendLayout();
@@ -68,7 +70,9 @@
             // 
             this.mapZoomToolStrip.Enabled = false;
             this.mapZoomToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripDropDownButton1});
+            this.toolStripDropDownButton1,
+            this.btnSave,
+            this.btnReload});
             this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
             this.mapZoomToolStrip.MapControl = this.mapBox1;
             this.mapZoomToolStrip.Name = "mapZoomToolStrip";
@@ -93,7 +97,7 @@
             // 
             this.menuMap.CheckOnClick = true;
             this.menuMap.Name = "menuMap";
-            this.menuMap.Size = new System.Drawing.Size(152, 22);
+            this.menuMap.Size = new System.Drawing.Size(115, 22);
             this.menuMap.Text = "Map";
             // 
             // menuSatellite
@@ -102,8 +106,28 @@
             this.menuSatellite.CheckOnClick = true;
             this.menuSatellite.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menuSatellite.Name = "menuSatellite";
-            this.menuSatellite.Size = new System.Drawing.Size(152, 22);
+            this.menuSatellite.Size = new System.Drawing.Size(115, 22);
             this.menuSatellite.Text = "Satellite";
+            // 
+            // btnSave
+            // 
+            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSave.Image = global::FTAnalyzer.Properties.Resources.Save;
+            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(23, 22);
+            this.btnSave.Text = "toolStripButton1";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnReload
+            // 
+            this.btnReload.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnReload.Image = global::FTAnalyzer.Properties.Resources.Restart;
+            this.btnReload.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnReload.Name = "btnReload";
+            this.btnReload.Size = new System.Drawing.Size(23, 22);
+            this.btnReload.Text = "toolStripButton2";
+            this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
             // 
             // statusStrip1
             // 
@@ -150,5 +174,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuSatellite;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripButton btnSave;
+        private System.Windows.Forms.ToolStripButton btnReload;
     }
 }

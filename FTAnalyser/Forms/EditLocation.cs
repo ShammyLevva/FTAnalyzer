@@ -48,11 +48,10 @@ namespace FTAnalyzer.Forms
             HttpUtility.SetDefaultProxy();
             mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
                 new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap"));
-
+            //      new BingTileSource(BingRequest.UrlBing, "", BingMapType.Roads),"BingMap"));
             pointTable = new FeatureDataTable();
             pointTable.Columns.Add("Label", typeof(string));
-            pointTable.AddRow(GetRow(location.Longitude, location.Latitude));
-
+            
             GeometryFeatureProvider pointGFP = new GeometryFeatureProvider(pointTable);
 
             pointLayer = new VectorLayer("Point to Edit");
@@ -61,6 +60,18 @@ namespace FTAnalyzer.Forms
             pointLayer.DataSource = pointGFP;
             pointLayer.CoordinateTransformation = MapTransforms.Transform();
             pointLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
+
+            mapBox1.Map.Layers.Add(pointLayer);
+            mapBox1.Map.MinimumZoom = 1000;
+            mapBox1.Map.MaximumZoom = 50000000;
+            mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
+            ResetMap();
+        }
+
+        private void ResetMap()
+        {
+            pointTable.Clear();
+            pointTable.AddRow(GetRow(location.Longitude, location.Latitude));
 
             IMathTransform transform = pointLayer.CoordinateTransformation.MathTransform;
             GeoResponse.CResult.CGeometry.CViewPort vp = location.ViewPort;
@@ -72,12 +83,8 @@ namespace FTAnalyzer.Forms
                 Envelope bbox = new Envelope(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
                 expand = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
             }
-            mapBox1.Map.Layers.Add(pointLayer);
-            mapBox1.Map.MinimumZoom = 1000;
-            mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.Map.ZoomToBox(expand);
             mapBox1.Refresh();
-            mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
         }
 
         private FeatureDataRow GetRow(double p1, double p2)
@@ -162,6 +169,19 @@ namespace FTAnalyzer.Forms
             updateCmd.Parameters[6].Value = location.GeocodeStatus;
             updateCmd.Parameters[7].Value = location.ToString();
             updateCmd.ExecuteNonQuery();
+            pointUpdated = false;
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            UpdateDatabase();
+            MessageBox.Show("Data for " + location.ToString() + " updated.", "Save new location");
+        }
+
+        private void btnReload_Click(object sender, EventArgs e)
+        {
+            ResetMap();
+        }
+
     }
 }

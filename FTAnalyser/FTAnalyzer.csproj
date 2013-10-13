@@ -548,6 +548,8 @@
     <Compile Include="Utilities\ShortDoubleMetaphone.cs" />
     <Compile Include="Utilities\SortableBindingList.cs" />
     <None Include="Mapping\MarkerClusterer.js" />
+    <None Include="Resources\Save.bmp" />
+    <None Include="Resources\Restart.bmp" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
