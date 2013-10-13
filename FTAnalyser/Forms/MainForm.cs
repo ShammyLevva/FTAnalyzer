@@ -344,7 +344,7 @@ namespace FTAnalyzer
             rtbLostCousins.AppendText("Lost Cousins facts recorded:\n\n");
             if (ckbRestrictions.Checked)
             {
-                Predicate<Individual> predicate = new Predicate<Individual>(x => x.isBloodDirect);
+                Predicate<Individual> predicate = new Predicate<Individual>(x => x.IsBloodDirect);
                 IEnumerable<Individual> bloodDirect = ft.AllIndividuals.Where(predicate);
                 count1841 = bloodDirect.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1841));
                 count1881 = bloodDirect.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1881) || x.IsLostCousinEntered(CensusDate.CANADACENSUS1881));
@@ -520,26 +520,17 @@ namespace FTAnalyzer
         #region Lost Cousins
         private void LostCousinsCensus(string location, Predicate<CensusIndividual> filter, FactDate censusDate, string reportTitle)
         {
-            Func<CensusIndividual, int> relationType = x => x.RelationType;
-            Func<CensusIndividual, FactDate> registrationDate = x => x.CensusDate;
             HourGlass(true);
-            Predicate<CensusIndividual> relation =
-                FilterUtils.OrFilter<CensusIndividual>(
-                    FilterUtils.OrFilter<CensusIndividual>(
-                        FilterUtils.IntFilter<CensusIndividual>(relationType, Individual.BLOOD),
-                        FilterUtils.IntFilter<CensusIndividual>(relationType, Individual.DIRECT)),
-                    FilterUtils.IntFilter<CensusIndividual>(relationType, Individual.MARRIEDTODB));
-            IComparer<CensusIndividual> comparer;
-            filter = FilterUtils.TrueFilter<CensusIndividual>();
+            Func<CensusIndividual, FactDate> registrationDate = x => x.CensusDate;
+            Predicate<CensusIndividual> relation = x => x.IsBloodDirect;
+            Predicate<CensusIndividual> dateFilter = FilterUtils.DateFilter<CensusIndividual>(registrationDate, censusDate);
+            IComparer<CensusIndividual> comparer = new DefaultCensusComparer();
             Census census = new Census(true, location);
-            comparer = new DefaultCensusComparer();
-
+            
             if (ckbRestrictions.Checked)
-                filter = FilterUtils.AndFilter<CensusIndividual>(
-                    FilterUtils.DateFilter<CensusIndividual>(registrationDate, censusDate),
-                    filter, relation);
+                filter = FilterUtils.AndFilter<CensusIndividual>(dateFilter, filter, relation);
             else
-                filter = FilterUtils.AndFilter<CensusIndividual>(FilterUtils.DateFilter<CensusIndividual>(registrationDate, censusDate), filter);
+                filter = FilterUtils.AndFilter<CensusIndividual>(dateFilter, filter);
 
             census.SetupCensus(filter, comparer, censusDate, true, ckbShowLCEntered.Checked);
             if (ckbShowLCEntered.Checked)

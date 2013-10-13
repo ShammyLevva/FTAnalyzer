@@ -170,7 +170,7 @@ namespace FTAnalyzer
             set { relationType = value; }
         }
 
-        public bool isBloodDirect
+        public bool IsBloodDirect
         {
             get
             {
