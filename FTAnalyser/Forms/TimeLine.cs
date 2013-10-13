@@ -355,5 +355,28 @@ namespace FTAnalyzer.Forms
                 // ie: user must be able to stop the playing of timeline
             }
         }
+
+        private void btnPlay_Click(object sender, EventArgs e)
+        {
+            btnPlay.Visible = false;
+            btnStop.Visible = true;
+            btnPause.Enabled = true;
+            timer.Start();
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            btnPlay.Visible = true;
+            btnStop.Visible = false;
+            btnPause.Enabled = false;
+            timer.Stop();
+        }
+
+        private void btnPause_Click(object sender, EventArgs e)
+        {
+            btnPlay.Visible = true;
+            btnStop.Visible = false;
+            btnPause.Enabled = false;
+        }
     }
 }
