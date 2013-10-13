@@ -117,6 +117,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(23, 22);
             this.btnSave.Text = "toolStripButton1";
+            this.btnSave.ToolTipText = "Save location to database";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnReload
@@ -127,6 +128,7 @@
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(23, 22);
             this.btnReload.Text = "toolStripButton2";
+            this.btnReload.ToolTipText = "Reset Point to previous position";
             this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
             // 
             // statusStrip1

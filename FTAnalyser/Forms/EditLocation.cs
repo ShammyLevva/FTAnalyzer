@@ -26,9 +26,11 @@ namespace FTAnalyzer.Forms
         private FeatureDataTable pointTable;
         private VectorLayer pointLayer;
         private FactLocation location;
+        private FactLocation originalLocation;
         private FeatureDataRow pointFeature;
         private bool iconSelected;
         private bool pointUpdated;
+        private bool dataUpdated;
 
         public EditLocation(FactLocation location)
         {
@@ -36,10 +38,24 @@ namespace FTAnalyzer.Forms
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[10].Visible = false;
             this.location = location;
+            this.originalLocation = FactLocation.TEMP;
+            CopyLocationDetails(location, originalLocation);
             this.Text = "Editing : " + location.ToString();
             iconSelected = false;
             pointUpdated = false;
+            dataUpdated = false;
             SetupMap();
+        }
+
+        private void CopyLocationDetails(FactLocation from, FactLocation to)
+        {
+            to.Latitude = from.Latitude;
+            to.Longitude = from.Longitude;
+            to.ViewPort.NorthEast.Lat = from.ViewPort.NorthEast.Lat;
+            to.ViewPort.NorthEast.Long = from.ViewPort.NorthEast.Long;
+            to.ViewPort.SouthWest.Lat = from.ViewPort.SouthWest.Lat;
+            to.ViewPort.SouthWest.Long = from.ViewPort.SouthWest.Long;
+            to.GeocodeStatus = from.GeocodeStatus;
         }
 
         private void SetupMap()
@@ -70,6 +86,7 @@ namespace FTAnalyzer.Forms
 
         private void ResetMap()
         {
+            CopyLocationDetails(originalLocation, location); 
             pointTable.Clear();
             pointTable.AddRow(GetRow(location.Longitude, location.Latitude));
 
@@ -170,6 +187,7 @@ namespace FTAnalyzer.Forms
             updateCmd.Parameters[7].Value = location.ToString();
             updateCmd.ExecuteNonQuery();
             pointUpdated = false;
+            dataUpdated = true;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -181,7 +199,10 @@ namespace FTAnalyzer.Forms
         private void btnReload_Click(object sender, EventArgs e)
         {
             ResetMap();
+            if (dataUpdated)
+                UpdateDatabase();
+            dataUpdated = false;
+            pointUpdated = false;
         }
-
     }
 }

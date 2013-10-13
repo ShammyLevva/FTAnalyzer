@@ -34,24 +34,24 @@ namespace FTAnalyzer
         public string GoogleLocation { get; set; }
         public string GoogleResultType { get; set; }
         public GeoResponse.CResult.CGeometry.CViewPort ViewPort { get; set; }
-
+        private List<Individual> individuals;
+        
         public string[] Parts
         {
             get { return new string[] { Country, Region, SubRegion, Address, Place }; }
         }
 
-        private List<Individual> individuals;
         private static Dictionary<string, string> COUNTRY_TYPOS = new Dictionary<string, string>();
         private static Dictionary<string, string> REGION_TYPOS = new Dictionary<string, string>();
         private static Dictionary<string, string> COUNTRY_SHIFTS = new Dictionary<string, string>();
         private static Dictionary<string, string> REGION_SHIFTS = new Dictionary<string, string>();
         private static Dictionary<string, string> FREECEN_LOOKUP = new Dictionary<string, string>();
         private static Dictionary<string, Tuple<string, string>> FINDMYPAST_LOOKUP = new Dictionary<string, Tuple<string, string>>();
-
         private static IDictionary<string, FactLocation> locations;
+        
         public static Dictionary<Geocode, string> Geocodes;
-
         public static FactLocation UNKNOWN_LOCATION;
+        public static FactLocation TEMP = new FactLocation();
 
         static FactLocation()
         {
@@ -202,19 +202,22 @@ namespace FTAnalyzer
 
         private FactLocation()
         {
-            this.location = "";
-            this.fixedLocation = "";
-            this.SortableLocation = "";
-            this.Country = "";
-            this.Region = "";
-            this.SubRegion = "";
-            this.Address = "";
-            this.Place = "";
+            this.location = string.Empty;
+            this.fixedLocation = string.Empty;
+            this.SortableLocation = string.Empty;
+            this.Country = string.Empty;
+            this.Region = string.Empty;
+            this.SubRegion = string.Empty;
+            this.Address = string.Empty;
+            this.Place = string.Empty;
             this.ParishID = null;
             this.individuals = new List<Individual>();
             this.Latitude = 0;
             this.Longitude = 0;
+            this.Level = UNKNOWN;
             this.GeocodeStatus = Geocode.NOT_SEARCHED;
+            this.GoogleLocation = string.Empty;
+            this.GoogleResultType = string.Empty;
             this.ViewPort = new GeoResponse.CResult.CGeometry.CViewPort();
         }
 
