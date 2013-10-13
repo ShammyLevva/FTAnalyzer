@@ -234,6 +234,11 @@ namespace FTAnalyzer.Forms
 
         private void tbYears_Scroll(object sender, EventArgs e)
         {
+            UpdateMap();
+        }
+
+        private void UpdateMap()
+        {
             this.Cursor = Cursors.WaitCursor;
             labValue.Text = tbYears.Value.ToString();
             DisplayLocationsForYear(labValue.Text);
@@ -344,39 +349,59 @@ namespace FTAnalyzer.Forms
             RefreshClusters();
             mapBox1.Refresh();
         }
-
-        private void playTimelineToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            tbYears.Value = tbYears.Minimum;
-            while(tbYears.Value < tbYears.Maximum)
-            {
-                tbYears.Value++;
-                // wait for a bit before moving onto next year. Wait needs to be under user control
-                // ie: user must be able to stop the playing of timeline
-            }
-        }
-
+        
         private void btnPlay_Click(object sender, EventArgs e)
         {
             btnPlay.Visible = false;
             btnStop.Visible = true;
-            btnPause.Enabled = true;
-            timer.Start();
+            timer.Enabled = true;
+            txtTimeInterval.Enabled = false;
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            btnPlay.Visible = true;
-            btnStop.Visible = false;
-            btnPause.Enabled = false;
-            timer.Stop();
+            StopTimer();
         }
 
         private void btnPause_Click(object sender, EventArgs e)
         {
+            StopTimer();
+        }
+
+        private void StopTimer()
+        {
             btnPlay.Visible = true;
             btnStop.Visible = false;
-            btnPause.Enabled = false;
+            timer.Enabled = false;
+            txtTimeInterval.Enabled = true;
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            if (tbYears.Value < tbYears.Maximum)
+            {
+                tbYears.Value++;
+                UpdateMap();
+            }
+            else
+                StopTimer();
+        }
+
+        private void txtTimeInterval_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar) || e.KeyChar == '\b')
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
+
+        private void txtTimeInterval_Validated(object sender, EventArgs e)
+        {
+            int result;
+            if (Int32.TryParse(txtTimeInterval.Text, out result))
+            {
+                timer.Interval = result;
+            }
         }
     }
 }

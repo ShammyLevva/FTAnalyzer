@@ -56,7 +56,15 @@
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.menuMap = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSatellite = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnPlay = new System.Windows.Forms.ToolStripButton();
+            this.btnStop = new System.Windows.Forms.ToolStripButton();
             this.label1 = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.txtTimeInterval = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -121,7 +129,6 @@
             this.playTimelineToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.playTimelineToolStripMenuItem.Text = "Play Timeline";
             this.playTimelineToolStripMenuItem.Visible = false;
-            this.playTimelineToolStripMenuItem.Click += new System.EventHandler(this.playTimelineToolStripMenuItem_Click);
             // 
             // relationsToolStripMenuItem
             // 
@@ -277,7 +284,14 @@
             this.mapZoomToolStrip.Enabled = false;
             this.mapZoomToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
-            this.toolStripDropDownButton1});
+            this.toolStripDropDownButton1,
+            this.toolStripSeparator2,
+            this.btnPlay,
+            this.btnStop,
+            this.toolStripLabel1,
+            this.txtTimeInterval,
+            this.toolStripLabel2,
+            this.toolStripSeparator3});
             this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 69);
             this.mapZoomToolStrip.MapControl = this.mapBox1;
             this.mapZoomToolStrip.Name = "mapZoomToolStrip";
@@ -327,6 +341,29 @@
             this.menuSatellite.Text = "Satellite";
             this.menuSatellite.Click += new System.EventHandler(this.googleMapToolStripMenuItem_Click);
             // 
+            // btnPlay
+            // 
+            this.btnPlay.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnPlay.Image = ((System.Drawing.Image)(resources.GetObject("btnPlay.Image")));
+            this.btnPlay.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(23, 22);
+            this.btnPlay.Text = "toolStripButton2";
+            this.btnPlay.ToolTipText = "Play Timeline from current year";
+            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
+            // 
+            // btnStop
+            // 
+            this.btnStop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnStop.Image = ((System.Drawing.Image)(resources.GetObject("btnStop.Image")));
+            this.btnStop.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(23, 22);
+            this.btnStop.Text = "toolStripButton3";
+            this.btnStop.ToolTipText = "Stop Timeline Playback";
+            this.btnStop.Visible = false;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -337,6 +374,41 @@
             this.label1.Size = new System.Drawing.Size(109, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "Currently Viewing:";
+            // 
+            // timer
+            // 
+            this.timer.Interval = 2000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(79, 22);
+            this.toolStripLabel1.Text = "Time Interval:";
+            // 
+            // txtTimeInterval
+            // 
+            this.txtTimeInterval.Name = "txtTimeInterval";
+            this.txtTimeInterval.Size = new System.Drawing.Size(35, 25);
+            this.txtTimeInterval.Text = "2000";
+            this.txtTimeInterval.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimeInterval_KeyPress);
+            this.txtTimeInterval.Validated += new System.EventHandler(this.txtTimeInterval_Validated);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(23, 22);
+            this.toolStripLabel2.Text = "ms";
             // 
             // TimeLine
             // 
@@ -398,5 +470,13 @@
         private System.Windows.Forms.ToolStripMenuItem menuSatellite;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem playTimelineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton btnPlay;
+        private System.Windows.Forms.ToolStripButton btnStop;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripTextBox txtTimeInterval;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
     }
 }
