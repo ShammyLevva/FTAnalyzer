@@ -35,7 +35,7 @@ namespace FTAnalyzer.Forms
             tbYears.MouseWheel += new MouseEventHandler(tbYears_MouseWheel);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[10].Visible = false;
-            backgroundColour = mapZoomToolStrip.Items[0].BackColor; 
+            backgroundColour = mapZoomToolStrip.Items[0].BackColor;
             mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(mapBox1_MapViewOnChange);
             ft = FamilyTree.Instance;
             CheckIfGeocodingNeeded();
@@ -106,7 +106,7 @@ namespace FTAnalyzer.Forms
             unknown.PointColor = new SolidBrush(Color.Black);
             unknown.PointSize = 10;
             styles.Add(MapCluster.UNKNOWN, unknown);
-            
+
             clusterLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<string>("Cluster", styles, unknown);
             mapBox1.Map.Layers.Add(clusterLayer);
 
@@ -142,7 +142,8 @@ namespace FTAnalyzer.Forms
         {
             minGeoCodedYear = FactDate.MAXDATE.Year;
             maxGeoCodedYear = FactDate.MINDATE.Year;
-            foreach (MapLocation ml in ft.AllMapLocations)
+            List<MapLocation> yearRange = FilterToRelationsIncluded(ft.AllMapLocations);
+            foreach (MapLocation ml in yearRange)
             {
                 if (ml.Location.IsGeoCoded && ml.FactDate.IsKnown)
                 {
@@ -195,10 +196,14 @@ namespace FTAnalyzer.Forms
                 if (!mnuKeepZoom.Checked)
                 {
                     IMathTransform transform = clusterLayer.CoordinateTransformation.MathTransform;
-                    bbox = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
-                    mapBox1.Map.ZoomToBox(bbox);
-                    bbox.ExpandBy(mapBox1.Map.PixelSize * 20);
-                    mapBox1.Map.ZoomToBox(bbox);
+                    Envelope expand;
+                    if (bbox.Centre == null)
+                        expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
+                    else
+                        expand = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
+                    mapBox1.Map.ZoomToBox(expand);
+                    expand.ExpandBy(mapBox1.Map.PixelSize * 20);
+                    mapBox1.Map.ZoomToBox(expand);
                     RefreshClusters();
                 }
                 mapBox1.Refresh();
@@ -254,6 +259,7 @@ namespace FTAnalyzer.Forms
 
         private void Relations_CheckedChanged(object sender, EventArgs e)
         {
+            SetGeoCodedYearRange(); // need to refresh range of years when filters change
             DisplayLocationsForYear(labValue.Text);
         }
 
@@ -349,7 +355,7 @@ namespace FTAnalyzer.Forms
             RefreshClusters();
             mapBox1.Refresh();
         }
-        
+
         private void btnPlay_Click(object sender, EventArgs e)
         {
             btnPlay.Visible = false;

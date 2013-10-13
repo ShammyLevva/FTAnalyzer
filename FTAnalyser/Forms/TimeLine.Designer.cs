@@ -56,15 +56,15 @@
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.menuMap = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSatellite = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnPlay = new System.Windows.Forms.ToolStripButton();
             this.btnStop = new System.Windows.Forms.ToolStripButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.txtTimeInterval = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.label1 = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -286,12 +286,12 @@
             this.toolStripButton1,
             this.toolStripDropDownButton1,
             this.toolStripSeparator2,
-            this.btnPlay,
-            this.btnStop,
             this.toolStripLabel1,
             this.txtTimeInterval,
             this.toolStripLabel2,
-            this.toolStripSeparator3});
+            this.toolStripSeparator3,
+            this.btnPlay,
+            this.btnStop});
             this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 69);
             this.mapZoomToolStrip.MapControl = this.mapBox1;
             this.mapZoomToolStrip.Name = "mapZoomToolStrip";
@@ -341,6 +341,11 @@
             this.menuSatellite.Text = "Satellite";
             this.menuSatellite.Click += new System.EventHandler(this.googleMapToolStripMenuItem_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // btnPlay
             // 
             this.btnPlay.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -364,6 +369,31 @@
             this.btnStop.Visible = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(79, 22);
+            this.toolStripLabel1.Text = "Time Interval:";
+            // 
+            // txtTimeInterval
+            // 
+            this.txtTimeInterval.Name = "txtTimeInterval";
+            this.txtTimeInterval.Size = new System.Drawing.Size(35, 25);
+            this.txtTimeInterval.Text = "2000";
+            this.txtTimeInterval.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimeInterval_KeyPress);
+            this.txtTimeInterval.Validated += new System.EventHandler(this.txtTimeInterval_Validated);
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(23, 22);
+            this.toolStripLabel2.Text = "ms";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -379,36 +409,6 @@
             // 
             this.timer.Interval = 2000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(79, 22);
-            this.toolStripLabel1.Text = "Time Interval:";
-            // 
-            // txtTimeInterval
-            // 
-            this.txtTimeInterval.Name = "txtTimeInterval";
-            this.txtTimeInterval.Size = new System.Drawing.Size(35, 25);
-            this.txtTimeInterval.Text = "2000";
-            this.txtTimeInterval.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimeInterval_KeyPress);
-            this.txtTimeInterval.Validated += new System.EventHandler(this.txtTimeInterval_Validated);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripLabel2.Text = "ms";
             // 
             // TimeLine
             // 
