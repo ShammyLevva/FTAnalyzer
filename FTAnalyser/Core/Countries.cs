@@ -182,5 +182,10 @@ namespace FTAnalyzer
         {
             return CENSUS_COUNTRIES.Contains(country);
         }
+
+        public static bool IsEnglandWales(string country)
+        {
+            return country.Equals(ENG_WALES) || country.Equals(ENGLAND) || country.Equals(WALES);
+        }
     }
 }

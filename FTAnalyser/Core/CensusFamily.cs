@@ -88,7 +88,7 @@ namespace FTAnalyzer
             DateTime death = indiv.DeathDate.EndDate;
             if (birth < CensusDate.StartDate && death > CensusDate.StartDate && indiv.IsCensusDone(CensusDate) == censusDone)
             {
-                if (!showEnteredLostCousins && indiv.IsLostCousinEntered(CensusDate) == censusDone)
+                if (!showEnteredLostCousins && indiv.IsLostCousinEntered(CensusDate, Countries.UNKNOWN_COUNTRY) == censusDone)
                     return false;
                 if (parentCheck) // Husband or Wife with valid date range
                     return true;
