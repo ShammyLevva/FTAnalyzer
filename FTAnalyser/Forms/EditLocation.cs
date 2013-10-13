@@ -161,8 +161,6 @@ namespace FTAnalyzer.Forms
 
         private void UpdateDatabase()
         {
-            //"update geocode set latitude = ?, longitude = ?, viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ?, geocodestatus = ? where location = ?", conn);
-
             IMathTransform transform = pointLayer.ReverseCoordinateTransformation.MathTransform;
             Envelope env = new Envelope(transform.Transform(mapBox1.Map.Envelope.TopLeft()),
                                         transform.Transform(mapBox1.Map.Envelope.BottomRight()));

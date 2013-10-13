@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeocodeLocations));
             this.dgLocations = new System.Windows.Forms.DataGridView();
             this.GeocodedLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +61,7 @@
             this.filtersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGeocodeStatus = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGoogleResultType = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateChangesWithoutAskingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgLocations)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -82,14 +83,14 @@
             this.GeocodeStatus,
             this.GoogleLocation,
             this.GoogleResultType});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgLocations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgLocations.Location = new System.Drawing.Point(0, 49);
             this.dgLocations.Name = "dgLocations";
@@ -115,8 +116,8 @@
             // 
             this.Latitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Latitude.DataPropertyName = "Latitude";
-            dataGridViewCellStyle4.Format = "N7";
-            this.Latitude.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Format = "N7";
+            this.Latitude.DefaultCellStyle = dataGridViewCellStyle7;
             this.Latitude.HeaderText = "Latitude";
             this.Latitude.MinimumWidth = 75;
             this.Latitude.Name = "Latitude";
@@ -128,8 +129,8 @@
             // 
             this.Longitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Longitude.DataPropertyName = "Longitude";
-            dataGridViewCellStyle5.Format = "N7";
-            this.Longitude.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.Format = "N7";
+            this.Longitude.DefaultCellStyle = dataGridViewCellStyle8;
             this.Longitude.HeaderText = "Longitude";
             this.Longitude.MinimumWidth = 75;
             this.Longitude.Name = "Longitude";
@@ -322,7 +323,8 @@
             // mnuOptions
             // 
             this.mnuOptions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuRetryPartial});
+            this.mnuRetryPartial,
+            this.updateChangesWithoutAskingToolStripMenuItem});
             this.mnuOptions.Name = "mnuOptions";
             this.mnuOptions.Size = new System.Drawing.Size(61, 20);
             this.mnuOptions.Text = "Options";
@@ -354,6 +356,15 @@
             this.mnuGoogleResultType.Name = "mnuGoogleResultType";
             this.mnuGoogleResultType.Size = new System.Drawing.Size(176, 22);
             this.mnuGoogleResultType.Text = "Google Result Type";
+            // 
+            // updateChangesWithoutAskingToolStripMenuItem
+            // 
+            this.updateChangesWithoutAskingToolStripMenuItem.CheckOnClick = true;
+            this.updateChangesWithoutAskingToolStripMenuItem.Name = "updateChangesWithoutAskingToolStripMenuItem";
+            this.updateChangesWithoutAskingToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.updateChangesWithoutAskingToolStripMenuItem.Text = "Update Changes without asking";
+            this.updateChangesWithoutAskingToolStripMenuItem.ToolTipText = "No longer asks if you want to save changes to locations";
+            this.updateChangesWithoutAskingToolStripMenuItem.Click += new System.EventHandler(this.updateChangesWithoutAskingToolStripMenuItem_Click);
             // 
             // GeocodeLocations
             // 
@@ -410,5 +421,6 @@
         private System.Windows.Forms.ToolStripMenuItem filtersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuGeocodeStatus;
         private System.Windows.Forms.ToolStripMenuItem mnuGoogleResultType;
+        private System.Windows.Forms.ToolStripMenuItem updateChangesWithoutAskingToolStripMenuItem;
     }
 }

@@ -439,5 +439,10 @@ namespace FTAnalyzer.Forms
         }
 
         #endregion
+
+        private void updateChangesWithoutAskingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.UserAppDataRegistry.SetValue("Ask to update database", updateChangesWithoutAskingToolStripMenuItem.Checked);
+        }
     }
 }
