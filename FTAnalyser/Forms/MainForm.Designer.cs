@@ -52,7 +52,9 @@
             this.displayOptionsOnLoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMaps = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuShowTimeline = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuGeocodeLocations = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuLocationsGeocodeReport = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewOnlineManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportAnIssueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -145,8 +147,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.pbSources = new System.Windows.Forms.ProgressBar();
             this.tabSelector = new System.Windows.Forms.TabControl();
-            this.mnuLocationsGeocodeReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.rtbLostCousins = new System.Windows.Forms.RichTextBox();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.cenDate = new Controls.CensusDateSelector();
             this.relTypesCensus = new Controls.RelationTypes();
@@ -362,12 +363,24 @@
             this.mnuShowTimeline.Text = "Show Timeline";
             this.mnuShowTimeline.Click += new System.EventHandler(this.mnuShowTimeline_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(210, 6);
+            // 
             // mnuGeocodeLocations
             // 
             this.mnuGeocodeLocations.Name = "mnuGeocodeLocations";
             this.mnuGeocodeLocations.Size = new System.Drawing.Size(213, 22);
             this.mnuGeocodeLocations.Text = "Geocode Locations";
             this.mnuGeocodeLocations.Click += new System.EventHandler(this.mnuGeocodeLocations_Click);
+            // 
+            // mnuLocationsGeocodeReport
+            // 
+            this.mnuLocationsGeocodeReport.Name = "mnuLocationsGeocodeReport";
+            this.mnuLocationsGeocodeReport.Size = new System.Drawing.Size(213, 22);
+            this.mnuLocationsGeocodeReport.Text = "Locations Geocode Report";
+            this.mnuLocationsGeocodeReport.Click += new System.EventHandler(this.locationsGeocodeReportToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -744,6 +757,7 @@
             // 
             // tabLostCousins
             // 
+            this.tabLostCousins.Controls.Add(this.rtbLostCousins);
             this.tabLostCousins.Controls.Add(this.btnLCReport);
             this.tabLostCousins.Controls.Add(this.linkLabel2);
             this.tabLostCousins.Controls.Add(this.btnLC1911EW);
@@ -1418,17 +1432,15 @@
             this.tabSelector.TabIndex = 9;
             this.tabSelector.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
-            // mnuLocationsGeocodeReport
+            // rtbLostCousins
             // 
-            this.mnuLocationsGeocodeReport.Name = "mnuLocationsGeocodeReport";
-            this.mnuLocationsGeocodeReport.Size = new System.Drawing.Size(213, 22);
-            this.mnuLocationsGeocodeReport.Text = "Locations Geocode Report";
-            this.mnuLocationsGeocodeReport.Click += new System.EventHandler(this.locationsGeocodeReportToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(210, 6);
+            this.rtbLostCousins.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtbLostCousins.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbLostCousins.Location = new System.Drawing.Point(556, 68);
+            this.rtbLostCousins.Name = "rtbLostCousins";
+            this.rtbLostCousins.Size = new System.Drawing.Size(340, 187);
+            this.rtbLostCousins.TabIndex = 17;
+            this.rtbLostCousins.Text = global::FTAnalyzer.Properties.Resources.FTA_0002;
             // 
             // rtbOutput
             // 
@@ -1700,6 +1712,7 @@
         private System.Windows.Forms.ToolStripMenuItem whatsNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem mnuLocationsGeocodeReport;
+        private System.Windows.Forms.RichTextBox rtbLostCousins;
     }
 }
 

@@ -295,6 +295,7 @@ namespace FTAnalyzer
                     btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled =
                         btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled =
                         btnLC1911EW.Enabled = ft.IndividualCount > 0;
+                    UpdateLostCousinsReport();
                 }
                 else if (tabSelector.SelectedTab == tabDataErrors)
                 {
@@ -334,6 +335,20 @@ namespace FTAnalyzer
                 }
                 HourGlass(false);
             }
+        }
+
+        private void UpdateLostCousinsReport()
+        {
+            rtbLostCousins.Clear();
+            rtbLostCousins.AppendText("Lost Cousins facts recorded:\n\n");
+            int count = ft.AllIndividuals.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1841));
+            rtbLostCousins.AppendText("1841 Census: " + count + "\n");
+            count = ft.AllIndividuals.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1881) || x.IsLostCousinEntered(CensusDate.CANADACENSUS1881));
+            rtbLostCousins.AppendText("1881 Census: " + count + "\n");
+            count = ft.AllIndividuals.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1911));
+            rtbLostCousins.AppendText("1911 Census: " + count + "\n");
+            count = ft.AllIndividuals.Count(x => x.IsLostCousinEntered(CensusDate.USCENSUS1880));
+            rtbLostCousins.AppendText("1880 US Census: " + count + "\n"); 
         }
 
         private void dgCountries_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
