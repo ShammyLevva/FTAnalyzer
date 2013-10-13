@@ -339,7 +339,7 @@ namespace FTAnalyzer
 
         private void UpdateLostCousinsReport()
         {
-            int count1841, count1881, count1911, count1880;
+            int count1841, count1881, count1911, count1880, count1940;
             rtbLostCousins.Clear();
             rtbLostCousins.AppendText("Lost Cousins facts recorded:\n\n");
             if (ckbRestrictions.Checked)
@@ -350,6 +350,7 @@ namespace FTAnalyzer
                 count1881 = bloodDirect.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1881) || x.IsLostCousinEntered(CensusDate.CANADACENSUS1881));
                 count1911 = bloodDirect.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1911));
                 count1880 = bloodDirect.Count(x => x.IsLostCousinEntered(CensusDate.USCENSUS1880));
+                count1940 = bloodDirect.Count(x => x.IsLostCousinEntered(CensusDate.USCENSUS1940));
             }
             else
             {
@@ -357,11 +358,13 @@ namespace FTAnalyzer
                 count1881 = ft.AllIndividuals.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1881) || x.IsLostCousinEntered(CensusDate.CANADACENSUS1881));
                 count1911 = ft.AllIndividuals.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1911));
                 count1880 = ft.AllIndividuals.Count(x => x.IsLostCousinEntered(CensusDate.USCENSUS1880));
+                count1940 = ft.AllIndividuals.Count(x => x.IsLostCousinEntered(CensusDate.USCENSUS1940));
             }
             rtbLostCousins.AppendText("1841 Census: " + count1841 + "\n");
             rtbLostCousins.AppendText("1881 Census: " + count1881 + "\n");
             rtbLostCousins.AppendText("1911 Census: " + count1911 + "\n");
             rtbLostCousins.AppendText("1880 US Census: " + count1880 + "\n");
+            rtbLostCousins.AppendText("1940 US Census: " + count1940 + "\n");
         }
 
         private void dgCountries_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -609,6 +612,14 @@ namespace FTAnalyzer
             Predicate<CensusIndividual> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.IRELAND);
             string reportTitle = "1911 Ireland Census Records on file";
             LostCousinsCensus(Countries.IRELAND, filter, CensusDate.IRELANDCENSUS1911, reportTitle);
+        }
+
+        private void btnLC1940USA_Click(object sender, EventArgs e)
+        {
+            Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.USCENSUS1940).Country;
+            Predicate<CensusIndividual> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.UNITED_STATES);
+            string reportTitle = "1940 US Census Records on file";
+            LostCousinsCensus(Countries.UNITED_STATES, filter, CensusDate.USCENSUS1940, reportTitle);
         }
 
         private void labLostCousinsWeb_Click(object sender, EventArgs e)
