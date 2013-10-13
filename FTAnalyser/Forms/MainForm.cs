@@ -339,16 +339,29 @@ namespace FTAnalyzer
 
         private void UpdateLostCousinsReport()
         {
+            int count1841, count1881, count1911, count1880;
             rtbLostCousins.Clear();
             rtbLostCousins.AppendText("Lost Cousins facts recorded:\n\n");
-            int count = ft.AllIndividuals.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1841));
-            rtbLostCousins.AppendText("1841 Census: " + count + "\n");
-            count = ft.AllIndividuals.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1881) || x.IsLostCousinEntered(CensusDate.CANADACENSUS1881));
-            rtbLostCousins.AppendText("1881 Census: " + count + "\n");
-            count = ft.AllIndividuals.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1911));
-            rtbLostCousins.AppendText("1911 Census: " + count + "\n");
-            count = ft.AllIndividuals.Count(x => x.IsLostCousinEntered(CensusDate.USCENSUS1880));
-            rtbLostCousins.AppendText("1880 US Census: " + count + "\n"); 
+            if (ckbRestrictions.Checked)
+            {
+                Predicate<Individual> predicate = new Predicate<Individual>(x => x.isBloodDirect);
+                IEnumerable<Individual> bloodDirect = ft.AllIndividuals.Where(predicate);
+                count1841 = bloodDirect.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1841));
+                count1881 = bloodDirect.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1881) || x.IsLostCousinEntered(CensusDate.CANADACENSUS1881));
+                count1911 = bloodDirect.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1911));
+                count1880 = bloodDirect.Count(x => x.IsLostCousinEntered(CensusDate.USCENSUS1880));
+            }
+            else
+            {
+                count1841 = ft.AllIndividuals.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1841));
+                count1881 = ft.AllIndividuals.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1881) || x.IsLostCousinEntered(CensusDate.CANADACENSUS1881));
+                count1911 = ft.AllIndividuals.Count(x => x.IsLostCousinEntered(CensusDate.UKCENSUS1911));
+                count1880 = ft.AllIndividuals.Count(x => x.IsLostCousinEntered(CensusDate.USCENSUS1880));
+            }
+            rtbLostCousins.AppendText("1841 Census: " + count1841 + "\n");
+            rtbLostCousins.AppendText("1881 Census: " + count1881 + "\n");
+            rtbLostCousins.AppendText("1911 Census: " + count1911 + "\n");
+            rtbLostCousins.AppendText("1880 US Census: " + count1880 + "\n");
         }
 
         private void dgCountries_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -1374,6 +1387,11 @@ namespace FTAnalyzer
         private void treeViewLocations_AfterSelect(object sender, TreeViewEventArgs e)
         {
             treeViewLocations.SelectedImageIndex = e.Node.ImageIndex;
+        }
+
+        private void ckbRestrictions_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateLostCousinsReport();
         }
     }
 }

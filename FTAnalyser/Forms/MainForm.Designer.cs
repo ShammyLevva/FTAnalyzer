@@ -845,6 +845,7 @@
             this.ckbRestrictions.Text = "Restrict results to only those direct ancestors, blood relations and those marrie" +
                 "d to direct or blood relations";
             this.ckbRestrictions.UseVisualStyleBackColor = true;
+            this.ckbRestrictions.CheckedChanged += new System.EventHandler(this.ckbRestrictions_CheckedChanged);
             // 
             // btnLC1841EW
             // 
