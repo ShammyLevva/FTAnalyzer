@@ -196,6 +196,7 @@
     <Compile Include="Core\FactSource.cs" />
     <Compile Include="Core\FamilySearch.cs" />
     <Compile Include="Core\FactLocationImage.cs" />
+    <Compile Include="Utilities\CustomToolStripRenderer.cs" />
     <Compile Include="Forms\EditLocation.cs">
       <SubType>Form</SubType>
     </Compile>

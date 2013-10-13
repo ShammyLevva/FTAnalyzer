@@ -32,6 +32,7 @@ namespace FTAnalyzer.Forms
         public TimeLine()
         {
             InitializeComponent();
+            mapZoomToolStrip.Renderer = new CustomToolStripRenderer();
             tbYears.MouseWheel += new MouseEventHandler(tbYears_MouseWheel);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[10].Visible = false;
@@ -306,12 +307,7 @@ namespace FTAnalyzer.Forms
             RefreshClusters();
             mapBox1.Refresh();
         }
-
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
-        }
-
+        
         private void googleMapToolStripMenuItem_Click(object sender, EventArgs e)
         {
             mapBox1.Map.BackgroundLayer.RemoveAt(0);
@@ -408,6 +404,17 @@ namespace FTAnalyzer.Forms
             {
                 timer.Interval = result;
             }
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            btnSelect.Checked = true;
+            mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
+        }
+
+        private void mapZoomToolStrip_Click(object sender, EventArgs e)
+        {
+            btnSelect.Checked = false;
         }
     }
 }
