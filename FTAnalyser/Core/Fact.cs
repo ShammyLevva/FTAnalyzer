@@ -38,7 +38,7 @@ namespace FTAnalyzer
         public static readonly ISet<string> LOOSE_DEATH_FACTS = new HashSet<string>(new string[] {
             CENSUS, RESIDENCE, WITNESS, EMIGRATION, IMMIGRATION, ARRIVAL, DEPARTURE, EDUCATION,
             DEGREE, ADOPTION, BAR_MITZVAH, BAS_MITZVAH, ADULT_CHRISTENING, CONFIRMATION, FIRST_COMMUNION,
-            ORDINATION, NATURALIZATION, GRADUATION, RETIREMENT
+            ORDINATION, NATURALIZATION, GRADUATION, RETIREMENT, LOSTCOUSINS
                     });
 
         private static readonly Dictionary<string, string> CUSTOM_TAGS = new Dictionary<string, string>();

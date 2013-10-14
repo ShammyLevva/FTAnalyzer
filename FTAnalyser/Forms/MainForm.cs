@@ -549,7 +549,7 @@ namespace FTAnalyzer
             //        if (f.FactType == Fact.LOSTCOUSINS)
             //        {
             //            LCcount++;
-            //            Console.WriteLine("LC fact in " + f.FactDate + " at " + ind.BestLocation(f.FactDate).SortableLocation);
+            //            Console.WriteLine("LC fact for " + ind.Name + " " + f.FactDate + " at " + ind.BestLocation(f.FactDate).SortableLocation);
             //        }
             //    }
             //}
