@@ -104,7 +104,6 @@
             this.dgReportSheet.MultiSelect = false;
             this.dgReportSheet.Name = "dgReportSheet";
             this.dgReportSheet.ReadOnly = true;
-            this.dgReportSheet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgReportSheet.Size = new System.Drawing.Size(1038, 530);
             this.dgReportSheet.TabIndex = 1;
             this.dgReportSheet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportSheet_CellDoubleClick);
