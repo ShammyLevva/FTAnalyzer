@@ -144,8 +144,9 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(297, 17);
-            this.toolStripStatusLabel1.Text = "Click to select point and click to drop it at new location";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(633, 17);
+            this.toolStripStatusLabel1.Text = "Left click to select pointer, move to the correct place (using zoom/pan) then rig" +
+                "ht click to place pointer in new location";
             // 
             // EditLocation
             // 

@@ -120,7 +120,7 @@ namespace FTAnalyzer.Forms
             c1 = transform.Transform(c1);
             c2 = transform.Transform(c2);
             Envelope env = new Envelope(c1, c2);
-            if (iconSelected)
+            if (iconSelected && e.Button == MouseButtons.Right)
             {
                 // we have finished and are saving icon
                 Console.WriteLine("Arrived :" + e.X + ", " + e.Y);
