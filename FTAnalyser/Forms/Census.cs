@@ -18,7 +18,7 @@ namespace FTAnalyzer.Forms
         private Dictionary<int, DataGridViewCellStyle> rowStyles;
         private int numFamilies;
         public FactDate CensusDate { get; private set; }
-        private FactLocation censusLocation;
+        private string censusCountry;
         private ReportFormHelper reportFormHelper;
         private IComparer<CensusIndividual> comparer;
 
@@ -31,9 +31,9 @@ namespace FTAnalyzer.Forms
 
             reportFormHelper = new ReportFormHelper("Missing from Census Report", dgCensus, this.ResetTable);
 
-            LostCousins = lostCousins;
+            this.LostCousins = lostCousins;
 
-            this.censusLocation = FactLocation.GetLocation(censusCountry);
+            this.censusCountry = censusCountry;
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
             {
@@ -218,7 +218,7 @@ namespace FTAnalyzer.Forms
             {
                 CensusIndividual ds = dgCensus.CurrentRow == null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
                 FamilyTree ft = FamilyTree.Instance;
-                ft.SearchCensus(censusLocation.Country, CensusDate.StartDate.Year, ds, cbCensusSearchProvider.SelectedIndex);
+                ft.SearchCensus(censusCountry, CensusDate.StartDate.Year, ds, cbCensusSearchProvider.SelectedIndex);
             }
         }
 
