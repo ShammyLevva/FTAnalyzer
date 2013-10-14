@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeocodeLocations));
             this.dgLocations = new System.Windows.Forms.DataGridView();
             this.GeocodedLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,10 +58,10 @@
             this.mnuGeocodeLocations = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRetryPartial = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateChangesWithoutAskingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filtersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGeocodeStatus = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGoogleResultType = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateChangesWithoutAskingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgLocations)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -83,14 +83,14 @@
             this.GeocodeStatus,
             this.GoogleLocation,
             this.GoogleResultType});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgLocations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgLocations.Location = new System.Drawing.Point(0, 49);
             this.dgLocations.Name = "dgLocations";
@@ -101,6 +101,7 @@
             this.dgLocations.Size = new System.Drawing.Size(894, 300);
             this.dgLocations.TabIndex = 5;
             this.dgLocations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgLocations_CellDoubleClick);
+            this.dgLocations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgLocations_CellFormatting);
             // 
             // GeocodedLocation
             // 
@@ -116,8 +117,8 @@
             // 
             this.Latitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Latitude.DataPropertyName = "Latitude";
-            dataGridViewCellStyle10.Format = "N7";
-            this.Latitude.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Format = "N7";
+            this.Latitude.DefaultCellStyle = dataGridViewCellStyle1;
             this.Latitude.HeaderText = "Latitude";
             this.Latitude.MinimumWidth = 75;
             this.Latitude.Name = "Latitude";
@@ -129,8 +130,8 @@
             // 
             this.Longitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Longitude.DataPropertyName = "Longitude";
-            dataGridViewCellStyle11.Format = "N7";
-            this.Longitude.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Format = "N7";
+            this.Longitude.DefaultCellStyle = dataGridViewCellStyle2;
             this.Longitude.HeaderText = "Longitude";
             this.Longitude.MinimumWidth = 75;
             this.Longitude.Name = "Longitude";
@@ -333,8 +334,17 @@
             // 
             this.mnuRetryPartial.CheckOnClick = true;
             this.mnuRetryPartial.Name = "mnuRetryPartial";
-            this.mnuRetryPartial.Size = new System.Drawing.Size(203, 22);
+            this.mnuRetryPartial.Size = new System.Drawing.Size(242, 22);
             this.mnuRetryPartial.Text = "Retry Partially Geocoded";
+            // 
+            // updateChangesWithoutAskingToolStripMenuItem
+            // 
+            this.updateChangesWithoutAskingToolStripMenuItem.CheckOnClick = true;
+            this.updateChangesWithoutAskingToolStripMenuItem.Name = "updateChangesWithoutAskingToolStripMenuItem";
+            this.updateChangesWithoutAskingToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.updateChangesWithoutAskingToolStripMenuItem.Text = "Update Changes without asking";
+            this.updateChangesWithoutAskingToolStripMenuItem.ToolTipText = "No longer asks if you want to save changes to locations";
+            this.updateChangesWithoutAskingToolStripMenuItem.Click += new System.EventHandler(this.updateChangesWithoutAskingToolStripMenuItem_Click);
             // 
             // filtersToolStripMenuItem
             // 
@@ -356,15 +366,6 @@
             this.mnuGoogleResultType.Name = "mnuGoogleResultType";
             this.mnuGoogleResultType.Size = new System.Drawing.Size(176, 22);
             this.mnuGoogleResultType.Text = "Google Result Type";
-            // 
-            // updateChangesWithoutAskingToolStripMenuItem
-            // 
-            this.updateChangesWithoutAskingToolStripMenuItem.CheckOnClick = true;
-            this.updateChangesWithoutAskingToolStripMenuItem.Name = "updateChangesWithoutAskingToolStripMenuItem";
-            this.updateChangesWithoutAskingToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
-            this.updateChangesWithoutAskingToolStripMenuItem.Text = "Update Changes without asking";
-            this.updateChangesWithoutAskingToolStripMenuItem.ToolTipText = "No longer asks if you want to save changes to locations";
-            this.updateChangesWithoutAskingToolStripMenuItem.Click += new System.EventHandler(this.updateChangesWithoutAskingToolStripMenuItem_Click);
             // 
             // GeocodeLocations
             // 

@@ -444,5 +444,14 @@ namespace FTAnalyzer.Forms
         {
             Application.UserAppDataRegistry.SetValue("Ask to update database", updateChangesWithoutAskingToolStripMenuItem.Checked);
         }
+
+        private void dgLocations_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                DataGridViewCell cell = dgLocations.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                cell.ToolTipText = "Double click to edit location.";
+            }
+        }
     }
 }
