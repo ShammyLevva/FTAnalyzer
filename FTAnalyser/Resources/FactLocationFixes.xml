@@ -613,7 +613,6 @@
       <RegionToParish parish="Chelmsford"     region="Essex" />
       <RegionToParish parish="Chester"        region="Cheshire" />
       <RegionToParish parish="Chichester"     region="Sussex" />
-      <RegionToParish parish="London"         region="Middlesex" />
       <RegionToParish parish="Coventry"       region="Warwickshire" />
       <RegionToParish parish="Derby"          region="Derbyshire" />
       <RegionToParish parish="Durham"         region="County Durham" />
