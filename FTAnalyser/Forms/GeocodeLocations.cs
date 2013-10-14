@@ -53,7 +53,7 @@ namespace FTAnalyzer.Forms
 
         private void SetupFilterMenu()
         {
-            foreach(string geocode in FactLocation.Geocodes.Values)
+            foreach (string geocode in FactLocation.Geocodes.Values)
             {
                 ToolStripMenuItem menu = new ToolStripMenuItem(geocode);
                 menu.Name = geocode;
@@ -78,7 +78,13 @@ namespace FTAnalyzer.Forms
         {
             this.Cursor = Cursors.WaitCursor;
             SortableBindingList<IDisplayGeocodedLocation> filteredLocations = ApplyFilters(input);
+            // store sort order
+            DataGridViewColumn sortCol = dgLocations.SortedColumn;
+            ListSortDirection sortOrder = dgLocations.SortOrder == SortOrder.Descending ? ListSortDirection.Descending : ListSortDirection.Ascending;
             dgLocations.DataSource = filteredLocations;
+            //restore sort order
+            if (sortCol != null)
+                dgLocations.Sort(sortCol, sortOrder);
             dgLocations.Refresh();
             txtLocations.Text = statusText + " Displaying: " + dgLocations.RowCount;
             this.Cursor = Cursors.Default;
