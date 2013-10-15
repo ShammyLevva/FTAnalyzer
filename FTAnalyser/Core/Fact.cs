@@ -50,7 +50,6 @@ namespace FTAnalyzer
         private static readonly string CENSUS_PATTERN = "Class: ([RGHO]{1,3}\\d{2,3}); Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3}); GSU";
         private static readonly string CENSUS_1911_PATTERN = "^RG14PN(\\d{1,6}) .*SN(\\d{1,3})$";
 
-
         static Fact()
         {
             CUSTOM_TAGS.Add("IGI", FAMILYSEARCH);
@@ -532,6 +531,31 @@ namespace FTAnalyzer
                     (FactType.Equals(Fact.MARRIAGE) && fs.isMarriageCert()) ||
                     (FactType.Equals(Fact.CENSUS) && fs.isCensusCert());
             });
+        }
+
+        public string CensusDetails
+        {
+            get
+            {
+                string result = string.Empty;
+                if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1881))
+                    return "Piece: " + Piece + ", Folio: " + Folio + ", Page: " + Page;
+                if (Location.Country.Equals(Countries.SCOTLAND) && FactDate.Overlaps(CensusDate.UKCENSUS1881))
+                    return "Not yet available"; // "Volume/Registration number: 
+                if (Location.Country.Equals(Countries.CANADA) && FactDate.Overlaps(CensusDate.CANADACENSUS1881))
+                    return "Not yet available";
+                if (Location.Country.Equals(Countries.UNITED_STATES) && FactDate.Overlaps(CensusDate.USCENSUS1880))
+                    return "Not yet available";
+                if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1841))
+                    return "Piece: " + Piece + ", Book: see census image (stamped on the census page after the piece number), Folio: " + Folio + ", Page: " + Page;
+                if (Location.Country.Equals(Countries.IRELAND) && FactDate.Overlaps(CensusDate.IRELANDCENSUS1911))
+                    return "Not yet available";
+                if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1911))
+                    return "Piece: " + Piece + ", Schedule: " + Schedule;
+                if (Location.Country.Equals(Countries.UNITED_STATES) && FactDate.Overlaps(CensusDate.USCENSUS1940))
+                    return "Not yet available";
+                return result;
+            }
         }
     }
 }

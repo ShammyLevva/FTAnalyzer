@@ -16,6 +16,7 @@ namespace FTAnalyzer
         FactDate BirthDate { get; }
         FactLocation BirthLocation { get; }
         string Status { get; }
+        string CensusDetails(FactDate when);
         string Relation { get; }
         int Ahnentafel { get; }
     }
