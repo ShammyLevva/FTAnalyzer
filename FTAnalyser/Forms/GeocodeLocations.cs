@@ -16,7 +16,7 @@ namespace FTAnalyzer.Forms
 {
     public partial class GeocodeLocations : Form
     {
-        private FamilyTree ft = FamilyTree.Instance;
+        private FamilyTree ft;
         private Font italicFont;
         private ReportFormHelper reportFormHelper;
         private List<IDisplayGeocodedLocation> locations;
