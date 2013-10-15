@@ -1811,7 +1811,7 @@ namespace FTAnalyzer
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.MATCHED)) + " have a geocoding match from Google.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH)) + " have partial geocoding match from Google.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NO_MATCH)) + " could not be found on Google.\n");
-                rtb.AppendText("    " + (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1) + " haven't been searched on Google.\n");
+                rtb.AppendText("    " + (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1) + " haven't been searched on Google. Use the 'Run Geocoder' option (under Maps menu) to find them.\n");
             }
             catch (Exception ex)
             {

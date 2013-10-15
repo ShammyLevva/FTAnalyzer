@@ -56,6 +56,7 @@
             this.BirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CensusStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Relation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CensusReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgCensus)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -67,9 +68,9 @@
             this.dgCensus.AllowUserToAddRows = false;
             this.dgCensus.AllowUserToDeleteRows = false;
             this.dgCensus.AllowUserToOrderColumns = true;
-            this.dgCensus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgCensus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCensus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCensus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FamilyID,
@@ -82,6 +83,7 @@
             this.BirthLocation,
             this.CensusStatus,
             this.Relation,
+            this.CensusReference,
             this.Ahnentafel});
             this.dgCensus.Location = new System.Drawing.Point(0, 28);
             this.dgCensus.Name = "dgCensus";
@@ -310,6 +312,15 @@
             this.Relation.Name = "Relation";
             this.Relation.ReadOnly = true;
             // 
+            // CensusReference
+            // 
+            this.CensusReference.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CensusReference.DataPropertyName = "CensusReference";
+            this.CensusReference.HeaderText = "Census Reference";
+            this.CensusReference.MinimumWidth = 250;
+            this.CensusReference.Name = "CensusReference";
+            this.CensusReference.ReadOnly = true;
+            // 
             // Ahnentafel
             // 
             this.Ahnentafel.DataPropertyName = "Ahnentafel";
@@ -368,6 +379,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn BirthLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn CensusStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn Relation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CensusReference;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ahnentafel;
     }
 }

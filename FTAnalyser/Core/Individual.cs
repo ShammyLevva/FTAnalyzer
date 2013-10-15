@@ -520,19 +520,6 @@ namespace FTAnalyzer
             return false;
         }
 
-        public string CensusDetails(FactDate when)
-        {
-            foreach (Fact f in facts)
-            {
-                if (f.FactDate.IsKnown)
-                {
-                    if (f.IsCensusFact && f.FactDate.Overlaps(when))
-                        return f.CensusDetails;
-                }
-            }
-            return string.Empty;
-        }
-
         public bool IsAlive(FactDate when)
         {
             return IsBorn(when) && !IsDeceased(when);

@@ -45,12 +45,14 @@ namespace FTAnalyzer.Forms
         public void SetupCensus(Predicate<CensusIndividual> filter, IComparer<CensusIndividual> comparer,
                 FactDate date, bool censusDone)
         {
-            FamilyTree ft = FamilyTree.Instance;
             CensusDate = date;
             this.comparer = comparer;
-            IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(date, censusDone);
+            rowStyles = new Dictionary<int, DataGridViewCellStyle>();
+            IEnumerable<CensusFamily> censusFamilies = FamilyTree.Instance.GetAllCensusFamilies(date, censusDone);
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Where(filter).ToList();
             dgCensus.DataSource = individuals;
+            if (!censusDone)
+                dgCensus.Columns["CensusReference"].Visible = false;
             StyleRows();
             reportFormHelper.LoadColumnLayout("CensusColumns.xml");
             tsRecords.Text = individuals.Count + " Records / " + numFamilies + " Families.";
@@ -72,7 +74,6 @@ namespace FTAnalyzer.Forms
             string currentFamilyID = "";
             bool highlighted = true;
             numFamilies = 0;
-            rowStyles = new Dictionary<int, DataGridViewCellStyle>();
 
             Font boldFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Bold);
             Font regularFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Regular);

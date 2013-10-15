@@ -10,7 +10,8 @@ namespace FTAnalyzer
         private CensusFamily family;
         public int Position { get; private set; }
 
-        public CensusIndividual(int position, Individual individual, CensusFamily family) : base(individual)
+        public CensusIndividual(int position, Individual individual, CensusFamily family)
+            : base(individual)
         {
             this.Position = position;
             this.family = family;
@@ -44,6 +45,22 @@ namespace FTAnalyzer
         public string CensusSurname
         {
             get { return family.Surname; }
+        }
+
+        public string CensusReference
+        {
+            get 
+            {
+                foreach (Fact f in AllFacts)
+                {
+                    if (f.FactDate.IsKnown)
+                    {
+                        if (f.IsCensusFact && f.FactDate.Overlaps(family.CensusDate))
+                            return f.CensusDetails;
+                    }
+                }
+                return string.Empty;
+            }
         }
 
         public bool IsValidLocation(string location)

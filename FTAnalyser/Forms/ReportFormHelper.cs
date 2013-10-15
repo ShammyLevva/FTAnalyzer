@@ -106,26 +106,31 @@ namespace FTAnalyzer
                 DataTable dt = new DataTable();
                 string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, filename);
                 dt.ReadXmlSchema(path);
-
-                int i = 0;
-                foreach (DataColumn col in dt.Columns)
-                {
-                    ReportGrid.Columns[col.ColumnName].DisplayIndex = i;
-                    if (col.ExtendedProperties.Contains("Width"))
+                if (dt.Columns.Count == ReportGrid.Columns.Count)
+                {   // only load column layout and sort order if save file has same number of columns as current form
+                    // this allows for upgrades that add extra columns
+                    int i = 0;
+                    foreach (DataColumn col in dt.Columns)
                     {
-                        int width = 0;
-                        if (int.TryParse((string)col.ExtendedProperties["Width"], out width))
-                            ReportGrid.Columns[col.ColumnName].Width = width;
+                        ReportGrid.Columns[col.ColumnName].DisplayIndex = i;
+                        if (col.ExtendedProperties.Contains("Width"))
+                        {
+                            int width = 0;
+                            if (int.TryParse((string)col.ExtendedProperties["Width"], out width))
+                                ReportGrid.Columns[col.ColumnName].Width = width;
+                        }
+                        if (col.ExtendedProperties.Contains("Sort"))
+                        {
+                            ListSortDirection direction = "Ascending".Equals(col.ExtendedProperties["Sort"]) ?
+                                    ListSortDirection.Ascending :
+                                    ListSortDirection.Descending;
+                            ReportGrid.Sort(ReportGrid.Columns[col.ColumnName], direction);
+                        }
+                        i++;
                     }
-                    if (col.ExtendedProperties.Contains("Sort"))
-                    {
-                        ListSortDirection direction = "Ascending".Equals(col.ExtendedProperties["Sort"]) ?
-                                ListSortDirection.Ascending :
-                                ListSortDirection.Descending;
-                        ReportGrid.Sort(ReportGrid.Columns[col.ColumnName], direction);
-                    }
-                    i++;
                 }
+                else
+                    ResetColumnLayout(filename);
             }
             catch (Exception)
             {
