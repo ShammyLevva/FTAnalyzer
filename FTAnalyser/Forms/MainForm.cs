@@ -401,7 +401,7 @@ namespace FTAnalyzer
             census = new Census(false, cenDate.CensusCountry);
             country = string.Empty;
             censusComparator = new DefaultCensusComparer();
-            census.SetupCensus(filter, censusComparator, censusDate, false, false);
+            census.SetupCensus(filter, censusComparator, censusDate, false);
             census.Text = "People missing a " + censusDate.StartDate.Year.ToString() + country + " Census Record that you can search for";
             DisposeDuplicateForms(census);
             census.Show();
@@ -570,7 +570,7 @@ namespace FTAnalyzer
             else
                 filter = FilterUtils.AndFilter<CensusIndividual>(dateFilter, filter);
 
-            census.SetupCensus(filter, comparer, censusDate, true, ckbShowLCEntered.Checked);
+            census.SetupLCCensus(filter, comparer, censusDate, true, ckbShowLCEntered.Checked);
             if (ckbShowLCEntered.Checked)
                 census.Text = reportTitle + " already entered into Lost Cousins website";
             else

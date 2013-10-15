@@ -923,14 +923,14 @@ namespace FTAnalyzer
 
         #region Displays
 
-        public IEnumerable<CensusFamily> GetAllCensusFamilies(FactDate censusDate, bool censusDone, bool showEnteredLostCousins)
+        public IEnumerable<CensusFamily> GetAllCensusFamilies(FactDate censusDate, bool censusDone)
         {
             if (censusDate != null)
             {
                 foreach (Family f in families)
                 {
                     CensusFamily cf = new CensusFamily(f, censusDate);
-                    if (cf.Process(censusDate, censusDone, showEnteredLostCousins))
+                    if (cf.Process(censusDate, censusDone))
                         yield return cf;
                 }
             }
