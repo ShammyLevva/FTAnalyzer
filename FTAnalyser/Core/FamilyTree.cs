@@ -1714,10 +1714,12 @@ namespace FTAnalyzer
                         child = new TreeNode((part.Length == 0 ? "<blank>" : part));
                         child.Name = part;
                         child.Tag = location;
+                        child.ToolTipText = "Geocoding Status : " + location.Geocoded;
                         switch (location.GeocodeStatus)
                         {
                             case FactLocation.Geocode.NOT_SEARCHED:
                                 child.ImageIndex = 0;
+                                child.ToolTipText += "\nUse 'Run Geocoder' option under Maps menu to search Google for location.";
                                 break;
                             case FactLocation.Geocode.MATCHED:
                                 child.ImageIndex = 1;
