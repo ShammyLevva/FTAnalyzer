@@ -1407,9 +1407,19 @@ namespace FTAnalyzer
             if (!ft.Geocoding) // don't geocode if another geocode session in progress
             {
                 HourGlass(true);
-                GeocodeLocations geo = new GeocodeLocations();
+                GeocodeLocations geo = null;
+                foreach (Form f in Application.OpenForms)
+                {
+                    if (f.GetType() == typeof(GeocodeLocations))
+                    {
+                        geo = f as GeocodeLocations;
+                        break;
+                    }
+                }
+                if (geo == null)
+                    geo = new GeocodeLocations();
                 geo.Show();
-                DisposeDuplicateForms(geo);
+                geo.Focus();
                 geo.StartGeoCoding();
                 HourGlass(false);
             }

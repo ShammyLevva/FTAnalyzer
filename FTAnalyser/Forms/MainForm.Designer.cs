@@ -53,7 +53,6 @@
             this.mnuMaps = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuShowTimeline = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuGeocodeLocations = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuLocationsGeocodeReport = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewOnlineManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -157,6 +156,7 @@
             this.treetopsCountry = new Controls.CensusCountry();
             this.wardeadRelation = new Controls.RelationTypes();
             this.wardeadCountry = new Controls.CensusCountry();
+            this.mnuGeocodeLocations = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -368,13 +368,6 @@
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(240, 6);
-            // 
-            // mnuGeocodeLocations
-            // 
-            this.mnuGeocodeLocations.Name = "mnuGeocodeLocations";
-            this.mnuGeocodeLocations.Size = new System.Drawing.Size(243, 22);
-            this.mnuGeocodeLocations.Text = "Run Geocoder to Find Locations";
-            this.mnuGeocodeLocations.Click += new System.EventHandler(this.mnuGeocodeLocations_Click);
             // 
             // mnuLocationsGeocodeReport
             // 
@@ -1530,6 +1523,13 @@
             this.wardeadCountry.Title = "Default Country";
             this.wardeadCountry.UKEnabled = true;
             // 
+            // mnuGeocodeLocations
+            // 
+            this.mnuGeocodeLocations.Name = "mnuGeocodeLocations";
+            this.mnuGeocodeLocations.Size = new System.Drawing.Size(243, 22);
+            this.mnuGeocodeLocations.Text = "Run Geocoder to Find Locations";
+            this.mnuGeocodeLocations.Click += new System.EventHandler(this.mnuGeocodeLocations_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1721,13 +1721,13 @@
         private System.Windows.Forms.ToolStripMenuItem mnuMaps;
         private System.Windows.Forms.Button btnBingOSMap;
         private System.Windows.Forms.ToolStripMenuItem mnuShowTimeline;
-        private System.Windows.Forms.ToolStripMenuItem mnuGeocodeLocations;
         private System.Windows.Forms.ImageList imageList;
         private System.Windows.Forms.ToolStripMenuItem whatsNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem mnuLocationsGeocodeReport;
         private System.Windows.Forms.RichTextBox rtbLostCousins;
         private System.Windows.Forms.Button btnLC1940USA;
+        private System.Windows.Forms.ToolStripMenuItem mnuGeocodeLocations;
     }
 }
 
