@@ -500,7 +500,7 @@ namespace FTAnalyzer
             rtbLostCousins.SelectionLength = rtbLostCousins.TextLength;
             rtbLostCousins.SelectionFont = new Font(rtbLostCousins.Font, FontStyle.Bold);
             rtbLostCousins.SelectionLength = 0;
-            
+
             if (ckbRestrictions.Checked)
             {
                 Predicate<Individual> predicate = new Predicate<Individual>(x => x.IsBloodDirect);
@@ -564,7 +564,7 @@ namespace FTAnalyzer
             Predicate<CensusIndividual> dateFilter = FilterUtils.DateFilter<CensusIndividual>(registrationDate, censusDate);
             IComparer<CensusIndividual> comparer = new DefaultCensusComparer();
             Census census = new Census(true, location);
-            
+
             if (ckbRestrictions.Checked)
                 filter = FilterUtils.AndFilter<CensusIndividual>(dateFilter, filter, relation);
             else
@@ -969,7 +969,7 @@ namespace FTAnalyzer
             dgDataErrors.DataSource = errors;
             tsCountLabel.Text = Properties.Messages.Count + errors.Count;
             tsHintsLabel.Text = Properties.Messages.Hints_Individual;
-            int index=0;
+            int index = 0;
             foreach (DataErrorGroup dataError in ckbDataErrors.Items)
             {
                 bool itemChecked = ckbDataErrors.GetItemChecked(index++);
@@ -1132,16 +1132,22 @@ namespace FTAnalyzer
         private void FormatCellLocations(DataGridView grid, DataGridViewCellFormattingEventArgs e)
         {
             DataGridViewCell cell = grid.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            string country = (string)cell.Value;
-            if (Countries.IsKnownCountry(country))
+            if (e.ColumnIndex == 0)
             {
-                e.CellStyle.Font = boldFont;
+                string country = (string)cell.Value;
+                if (Countries.IsKnownCountry(country))
+                    e.CellStyle.Font = boldFont;
+            }
+            else
+            {
+                FactLocation loc = grid.Rows[e.RowIndex].DataBoundItem as FactLocation;
+                cell.ToolTipText = "Geocoding Status : " + loc.Geocoded;
             }
         }
 
         private void dgCountries_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 0)
+            if (e.ColumnIndex == 0 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
             {
                 FormatCellLocations(dgCountries, e);
             }
@@ -1149,7 +1155,7 @@ namespace FTAnalyzer
 
         private void dgRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 0)
+            if (e.ColumnIndex == 0 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
             {
                 FormatCellLocations(dgRegions, e);
             }
@@ -1157,7 +1163,7 @@ namespace FTAnalyzer
 
         private void dgSubRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 0)
+            if (e.ColumnIndex == 0 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
             {
                 FormatCellLocations(dgSubRegions, e);
             }
@@ -1165,7 +1171,7 @@ namespace FTAnalyzer
 
         private void dgAddresses_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 0)
+            if (e.ColumnIndex == 0 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
             {
                 FormatCellLocations(dgAddresses, e);
             }
@@ -1173,7 +1179,7 @@ namespace FTAnalyzer
 
         private void dgPlaces_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 0)
+            if (e.ColumnIndex == 0 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
             {
                 FormatCellLocations(dgPlaces, e);
             }
