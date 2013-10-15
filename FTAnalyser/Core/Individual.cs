@@ -315,7 +315,12 @@ namespace FTAnalyzer
 
         public string CensusName
         {
-            get { return this.status == WIFE ? forenames + " " + marriedName + " (" + surname + ")" : Name; }
+            get { 
+                if (this.status == WIFE)
+                    return forenames + " " + marriedName + (Surname.Length > 0 ? " (" + Surname + ")" : string.Empty); 
+                else
+                    return Name;
+            }
         }
 
         public FactDate BirthDate
