@@ -395,18 +395,16 @@ namespace FTAnalyzer
         private void btnShowCensus_Click(object sender, EventArgs e)
         {
             Census census;
-            string country;
             Predicate<CensusIndividual> filter = CreateCensusIndividualFilter();
             IComparer<CensusIndividual> censusComparator;
             census = new Census(false, cenDate.CensusCountry);
-            country = string.Empty;
             censusComparator = new DefaultCensusComparer();
             bool censusDone = sender == btnShowCensusEntered;
             census.SetupCensus(filter, censusComparator, censusDate, censusDone);
             if(censusDone)
-                census.Text = "People entered with a " + censusDate.StartDate.Year.ToString() + country + " Census Record";
+                census.Text = "People entered with a " + censusDate.StartDate.Year.ToString() + " " + cenDate.CensusCountry + " Census Record";
             else
-                census.Text = "People missing a " + censusDate.StartDate.Year.ToString() + country + " Census Record that you can search for";
+                census.Text = "People missing a " + censusDate.StartDate.Year.ToString() + " " + cenDate.CensusCountry + " Census Record that you can search for";
             DisposeDuplicateForms(census);
             census.Show();
         }
