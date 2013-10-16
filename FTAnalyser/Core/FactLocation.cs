@@ -612,10 +612,9 @@ namespace FTAnalyzer
         {
             get
             {
-                bool includePartials = false;
                 if (Longitude == 0.0 && Latitude == 0.0)
                     return false;
-                if (includePartials && GeocodeStatus == Geocode.PARTIAL_MATCH)
+                if (Properties.GeneralSettings.Default.IncludePartials && GeocodeStatus == Geocode.PARTIAL_MATCH)
                     return true;
                 return GeocodeStatus == Geocode.MATCHED || GeocodeStatus == Geocode.GEDCOM_USER;
             }

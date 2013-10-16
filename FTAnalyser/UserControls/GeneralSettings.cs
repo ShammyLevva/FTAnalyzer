@@ -20,6 +20,7 @@ namespace FTAnalyzer.UserControls
 			chkAllowEmptyLocations.Checked = Properties.GeneralSettings.Default.AllowEmptyLocations;
 			chkCensusResidence.Checked = Properties.GeneralSettings.Default.UseResidenceAsCensus;
 			chkTolerateInaccurateCensus.Checked = Properties.GeneralSettings.Default.TolerateInaccurateCensusDate;
+            chkIncludePartialGeocoded.Checked = Properties.GeneralSettings.Default.IncludePartials;
 			Properties.GeneralSettings.Default.ReloadRequired = false;
 		}
 
@@ -31,11 +32,13 @@ namespace FTAnalyzer.UserControls
 			Properties.GeneralSettings.Default.AllowEmptyLocations = chkAllowEmptyLocations.Checked;
 			Properties.GeneralSettings.Default.UseResidenceAsCensus = chkCensusResidence.Checked;
 			Properties.GeneralSettings.Default.TolerateInaccurateCensusDate = chkTolerateInaccurateCensus.Checked;
+            Properties.GeneralSettings.Default.IncludePartials = chkIncludePartialGeocoded.Checked;
 			Properties.GeneralSettings.Default.Save();
 			OnUseBaptismDatesChanged();
 			OnAllowEmptyLocationsChanged();
 			OnUseResidenceAsCensusChanged();
 			OnTolerateInaccurateCensusChanged();
+            OnIncludePartialGeocodedChanged();
 		}
 
 		public void Cancel()
@@ -117,7 +120,14 @@ namespace FTAnalyzer.UserControls
 				TolerateInaccurateCensusChanged(null, EventArgs.Empty);
 		}
 
-		private void chkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)
+        public static event EventHandler IncludePartialGeocodedChanged;
+        protected static void OnIncludePartialGeocodedChanged()
+        {
+            if (IncludePartialGeocodedChanged != null)
+                IncludePartialGeocodedChanged(null, EventArgs.Empty);
+        }
+
+        private void chkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)
 		{
 			Properties.GeneralSettings.Default.ReloadRequired = true;
 		}
