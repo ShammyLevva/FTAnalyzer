@@ -990,7 +990,7 @@ namespace FTAnalyzer
             get
             {
                 List<IDisplayGeocodedLocation> result = new List<IDisplayGeocodedLocation>();
-                foreach (IDisplayGeocodedLocation loc in AllDisplayPlaces)
+                foreach (IDisplayGeocodedLocation loc in FactLocation.AllLocations)
                     result.Add(loc);
                 return result;
             }
