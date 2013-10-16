@@ -15,7 +15,6 @@ namespace FTAnalyzer.Forms
 {
     public partial class Census : Form
     {
-        private Dictionary<int, DataGridViewCellStyle> rowStyles;
         private int numFamilies;
         public FactDate CensusDate { get; private set; }
         private string censusCountry;
@@ -43,23 +42,21 @@ namespace FTAnalyzer.Forms
         }
 
         public void SetupCensus(Predicate<CensusIndividual> filter, IComparer<CensusIndividual> comparer,
-                FactDate date, bool censusDone)
+                FactDate censusDate, bool censusDone)
         {
-            CensusDate = date;
+            this.CensusDate = censusDate;
             this.comparer = comparer;
-            rowStyles = new Dictionary<int, DataGridViewCellStyle>();
-            IEnumerable<CensusFamily> censusFamilies = FamilyTree.Instance.GetAllCensusFamilies(date, censusDone);
+            IEnumerable<CensusFamily> censusFamilies = FamilyTree.Instance.GetAllCensusFamilies(censusDate, censusDone);
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Where(filter).ToList();
             dgCensus.DataSource = individuals;
             if (!censusDone)
                 dgCensus.Columns["CensusReference"].Visible = false;
-            StyleRows();
             reportFormHelper.LoadColumnLayout("CensusColumns.xml");
             tsRecords.Text = individuals.Count + " Records / " + numFamilies + " Families.";
         }
 
         public void SetupLCCensus(Predicate<CensusIndividual> filter, IComparer<CensusIndividual> comparer,
-                FactDate date, bool censusDone, bool showEnteredLostCousins)
+                                    FactDate date, bool censusDone, bool showEnteredLostCousins)
         {
         }
 
@@ -67,6 +64,7 @@ namespace FTAnalyzer.Forms
         {
             (dgCensus.DataSource as List<CensusIndividual>).Sort(comparer);
             dgCensus.AutoResizeColumns();
+            StyleRows();
         }
 
         private void StyleRows()
@@ -78,20 +76,20 @@ namespace FTAnalyzer.Forms
             Font boldFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Bold);
             Font regularFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Regular);
 
-            foreach (DataGridViewRow r in dgCensus.Rows)
+            foreach (DataGridViewRow row in dgCensus.Rows)
             {
-                CensusIndividual cr = (CensusIndividual)r.DataBoundItem;
+                CensusIndividual cr = (CensusIndividual)row.DataBoundItem;
                 if (cr.FamilyID != currentFamilyID)
                 {
                     currentFamilyID = cr.FamilyID;
                     highlighted = !highlighted;
                     numFamilies++;
                 }
-                DataGridViewCellStyle style = new DataGridViewCellStyle();
+                DataGridViewCellStyle style = new DataGridViewCellStyle(dgCensus.DefaultCellStyle);
                 style.BackColor = highlighted ? Color.LightGray : Color.White;
                 style.ForeColor = cr.RelationType == Individual.DIRECT ? Color.Red : Color.Black;
-                style.Font = cr.IsAlive() ? boldFont : regularFont;
-                rowStyles.Add(r.Index, style);
+                style.Font = (cr.IsAlive(CensusDate) && !cr.DeathDate.StartsBefore(CensusDate)) ? boldFont : regularFont;
+                cr.CellStyle = style;
             }
         }
 
@@ -109,19 +107,15 @@ namespace FTAnalyzer.Forms
 
         private void dgCensus_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex == -1 || e.ColumnIndex == -1)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                return;
-            }
-            DataGridViewCellStyle style = dgCensus.DefaultCellStyle;
-            DataGridViewCell cell = dgCensus.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            rowStyles.TryGetValue(e.RowIndex, out style);
-            if (style != null)
-            {
-                e.CellStyle.BackColor = style.BackColor;
-                e.CellStyle.ForeColor = style.ForeColor;
-                e.CellStyle.Font = style.Font;
-                cell.ToolTipText = GetTooltipText(style);
+                DataGridViewCell cell = dgCensus.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                CensusIndividual ind = dgCensus.Rows[e.RowIndex].DataBoundItem as CensusIndividual;
+                if (ind.CellStyle != null)
+                {
+                    e.CellStyle = ind.CellStyle;
+                    cell.ToolTipText = GetTooltipText(ind.CellStyle);
+                }
             }
         }
 
@@ -150,8 +144,8 @@ namespace FTAnalyzer.Forms
                 List<IDisplayCensus> list = (List<IDisplayCensus>)dgCensus.DataSource;
                 list.Sort(comp);
                 dgCensus.DataSource = list;
-                StyleRows();
                 dgCensus.Refresh();
+                StyleRows();
             }
         }
 

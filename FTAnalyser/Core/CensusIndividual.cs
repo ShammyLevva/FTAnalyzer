@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace FTAnalyzer
 {
@@ -37,11 +38,6 @@ namespace FTAnalyzer
             get { return GetAge(family.CensusDate); }
         }
 
-        public bool IsAlive()
-        {
-            return family.CensusDate.IsAfter(BirthDate) && family.CensusDate.IsBefore(DeathDate);
-        }
-
         public string CensusSurname
         {
             get { return family.Surname; }
@@ -62,6 +58,8 @@ namespace FTAnalyzer
                 return string.Empty;
             }
         }
+
+        public DataGridViewCellStyle CellStyle { get; set; } 
 
         public bool IsValidLocation(string location)
         {

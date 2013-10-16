@@ -54,6 +54,8 @@
             this.Occupation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DeathDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DeathLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CensusStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Relation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CensusReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,6 +83,8 @@
             this.Occupation,
             this.BirthDate,
             this.BirthLocation,
+            this.DeathDate,
+            this.DeathLocation,
             this.CensusStatus,
             this.Relation,
             this.CensusReference,
@@ -88,7 +92,8 @@
             this.dgCensus.Location = new System.Drawing.Point(0, 28);
             this.dgCensus.Name = "dgCensus";
             this.dgCensus.ReadOnly = true;
-            this.dgCensus.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgCensus.ShowEditingIcon = false;
+            this.dgCensus.ShowRowErrors = false;
             this.dgCensus.Size = new System.Drawing.Size(1038, 530);
             this.dgCensus.TabIndex = 1;
             this.dgCensus.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCensus_CellDoubleClick);
@@ -298,6 +303,20 @@
             this.BirthLocation.Name = "BirthLocation";
             this.BirthLocation.ReadOnly = true;
             // 
+            // DeathDate
+            // 
+            this.DeathDate.DataPropertyName = "DeathDate";
+            this.DeathDate.HeaderText = "Death Date";
+            this.DeathDate.Name = "DeathDate";
+            this.DeathDate.ReadOnly = true;
+            // 
+            // DeathLocation
+            // 
+            this.DeathLocation.DataPropertyName = "DeathLocation";
+            this.DeathLocation.HeaderText = "DeathLocation";
+            this.DeathLocation.Name = "DeathLocation";
+            this.DeathLocation.ReadOnly = true;
+            // 
             // CensusStatus
             // 
             this.CensusStatus.DataPropertyName = "Status";
@@ -377,6 +396,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Occupation;
         private System.Windows.Forms.DataGridViewTextBoxColumn BirthDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn BirthLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DeathDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DeathLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn CensusStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn Relation;
         private System.Windows.Forms.DataGridViewTextBoxColumn CensusReference;
