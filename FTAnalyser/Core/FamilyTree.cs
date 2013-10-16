@@ -378,7 +378,7 @@ namespace FTAnalyzer
             List<MapLocation> result = new List<MapLocation>();
             foreach (Individual ind in individuals)
             {
-                if (ind.IsAlive(when))
+                if (ind.IsAlive(when) && ind.GetMaxAge(when) < 110)
                 {
                     Fact fact = ind.BestFact(when);
                     FactLocation loc = fact.Location;
