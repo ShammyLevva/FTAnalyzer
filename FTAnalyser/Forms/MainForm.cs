@@ -19,7 +19,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "3.0.0.0";
+        private string VERSION = "3.0.0.0-beta-test1";
 
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
