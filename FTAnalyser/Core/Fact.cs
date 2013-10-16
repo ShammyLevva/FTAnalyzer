@@ -538,22 +538,25 @@ namespace FTAnalyzer
             get
             {
                 string result = string.Empty;
-                if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1881))
-                    return "Piece: " + Piece + ", Folio: " + Folio + ", Page: " + Page;
-                if (Location.Country.Equals(Countries.SCOTLAND) && FactDate.Overlaps(CensusDate.UKCENSUS1881))
-                    return "Not yet available"; // "Volume/Registration number: 
-                if (Location.Country.Equals(Countries.CANADA) && FactDate.Overlaps(CensusDate.CANADACENSUS1881))
-                    return "Not yet available";
-                if (Location.Country.Equals(Countries.UNITED_STATES) && FactDate.Overlaps(CensusDate.USCENSUS1880))
-                    return "Not yet available";
-                if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1841))
-                    return "Piece: " + Piece + ", Book: see census image (stamped on the census page after the piece number), Folio: " + Folio + ", Page: " + Page;
-                if (Location.Country.Equals(Countries.IRELAND) && FactDate.Overlaps(CensusDate.IRELANDCENSUS1911))
-                    return "Not yet available";
-                if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1911))
-                    return "Piece: " + Piece + ", Schedule: " + Schedule;
-                if (Location.Country.Equals(Countries.UNITED_STATES) && FactDate.Overlaps(CensusDate.USCENSUS1940))
-                    return "Not yet available";
+                if (Piece.Length > 0)
+                {
+                    if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1881))
+                        return "Piece: " + Piece + ", Folio: " + Folio + ", Page: " + Page;
+                    if (Location.Country.Equals(Countries.SCOTLAND) && FactDate.Overlaps(CensusDate.UKCENSUS1881))
+                        return "Scotland Census references not yet available"; // "Volume/Registration number: 
+                    if (Location.Country.Equals(Countries.CANADA) && FactDate.Overlaps(CensusDate.CANADACENSUS1881))
+                        return "Canada Census references not yet available";
+                    if (Location.Country.Equals(Countries.UNITED_STATES) && FactDate.Overlaps(CensusDate.USCENSUS1880))
+                        return "US Census references not yet available";
+                    if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1841))
+                        return "Piece: " + Piece + ", Book: see census image (stamped on the census page after the piece number), Folio: " + Folio + ", Page: " + Page;
+                    if (Location.Country.Equals(Countries.IRELAND) && FactDate.Overlaps(CensusDate.IRELANDCENSUS1911))
+                        return "Irish Census references not yet available";
+                    if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1911))
+                        return "Piece: " + Piece + ", Schedule: " + Schedule;
+                    if (Location.Country.Equals(Countries.UNITED_STATES) && FactDate.Overlaps(CensusDate.USCENSUS1940))
+                        return "US Census references not yet available";
+                }
                 return result;
             }
         }
