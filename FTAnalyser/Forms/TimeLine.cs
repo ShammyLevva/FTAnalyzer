@@ -328,6 +328,7 @@ namespace FTAnalyzer.Forms
 
         private void mapBox1_MapQueried(FeatureDataTable data)
         {
+            this.Cursor = Cursors.WaitCursor;
             List<MapLocation> locations = new List<MapLocation>();
             foreach (FeatureDataRow row in data)
             {
@@ -339,6 +340,7 @@ namespace FTAnalyzer.Forms
             }
             MapIndividuals ind = new MapIndividuals(locations, labValue.Text);
             ind.Show();
+            this.Cursor = Cursors.Default;
         }
 
         private void mapBox1_MapViewOnChange()
