@@ -265,7 +265,7 @@ namespace FTAnalyzer
                     cenDate.RevertToDefaultDate();
                     tsCountLabel.Text = "";
                     tsHintsLabel.Text = "";
-                    btnShowResults.Enabled = ft.IndividualCount > 0;
+                    btnShowCensusMissing.Enabled = ft.IndividualCount > 0;
                     cenDate.AddAllCensusItems();
                 }
                 else if (tabSelector.SelectedTab == tabTreetops)
@@ -392,7 +392,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void btnShowResults_Click(object sender, EventArgs e)
+        private void btnShowCensus_Click(object sender, EventArgs e)
         {
             Census census;
             string country;
@@ -401,8 +401,12 @@ namespace FTAnalyzer
             census = new Census(false, cenDate.CensusCountry);
             country = string.Empty;
             censusComparator = new DefaultCensusComparer();
-            census.SetupCensus(filter, censusComparator, censusDate, false);
-            census.Text = "People missing a " + censusDate.StartDate.Year.ToString() + country + " Census Record that you can search for";
+            bool censusDone = sender == btnShowCensusEntered;
+            census.SetupCensus(filter, censusComparator, censusDate, censusDone);
+            if(censusDone)
+                census.Text = "People entered with a " + censusDate.StartDate.Year.ToString() + country + " Census Record";
+            else
+                census.Text = "People missing a " + censusDate.StartDate.Year.ToString() + country + " Census Record that you can search for";
             DisposeDuplicateForms(census);
             census.Show();
         }

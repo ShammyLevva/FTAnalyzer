@@ -29,7 +29,7 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
             dgCensus.AutoGenerateColumns = false;
 
-            reportFormHelper = new ReportFormHelper("Missing from Census Report", dgCensus, this.ResetTable);
+            reportFormHelper = new ReportFormHelper("Census Report", dgCensus, this.ResetTable);
 
             this.LostCousins = lostCousins;
 
