@@ -65,6 +65,10 @@
             this.btnStop = new System.Windows.Forms.ToolStripButton();
             this.label1 = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.btnBack1 = new System.Windows.Forms.Button();
+            this.btnForward1 = new System.Windows.Forms.Button();
+            this.btnBack10 = new System.Windows.Forms.Button();
+            this.btnForward10 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -247,7 +251,7 @@
             this.labValue.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labValue.AutoSize = true;
             this.labValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labValue.Location = new System.Drawing.Point(439, 52);
+            this.labValue.Location = new System.Drawing.Point(439, 50);
             this.labValue.Name = "labValue";
             this.labValue.Size = new System.Drawing.Size(47, 15);
             this.labValue.TabIndex = 6;
@@ -400,7 +404,7 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(328, 54);
+            this.label1.Location = new System.Drawing.Point(328, 52);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 13);
             this.label1.TabIndex = 9;
@@ -411,11 +415,59 @@
             this.timer.Interval = 2000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // btnBack1
+            // 
+            this.btnBack1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack1.Location = new System.Drawing.Point(299, 47);
+            this.btnBack1.Name = "btnBack1";
+            this.btnBack1.Size = new System.Drawing.Size(23, 22);
+            this.btnBack1.TabIndex = 10;
+            this.btnBack1.Text = "<";
+            this.btnBack1.UseVisualStyleBackColor = true;
+            this.btnBack1.Click += new System.EventHandler(this.btnBack1_Click);
+            // 
+            // btnForward1
+            // 
+            this.btnForward1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnForward1.Location = new System.Drawing.Point(492, 47);
+            this.btnForward1.Name = "btnForward1";
+            this.btnForward1.Size = new System.Drawing.Size(23, 22);
+            this.btnForward1.TabIndex = 11;
+            this.btnForward1.Text = ">";
+            this.btnForward1.UseVisualStyleBackColor = true;
+            this.btnForward1.Click += new System.EventHandler(this.btnForward1_Click);
+            // 
+            // btnBack10
+            // 
+            this.btnBack10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack10.Location = new System.Drawing.Point(264, 47);
+            this.btnBack10.Name = "btnBack10";
+            this.btnBack10.Size = new System.Drawing.Size(29, 22);
+            this.btnBack10.TabIndex = 12;
+            this.btnBack10.Text = "<<";
+            this.btnBack10.UseVisualStyleBackColor = true;
+            this.btnBack10.Click += new System.EventHandler(this.btnBack10_Click);
+            // 
+            // btnForward10
+            // 
+            this.btnForward10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnForward10.Location = new System.Drawing.Point(521, 47);
+            this.btnForward10.Name = "btnForward10";
+            this.btnForward10.Size = new System.Drawing.Size(29, 22);
+            this.btnForward10.TabIndex = 13;
+            this.btnForward10.Text = ">>";
+            this.btnForward10.UseVisualStyleBackColor = true;
+            this.btnForward10.Click += new System.EventHandler(this.btnForward10_Click);
+            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(920, 584);
+            this.Controls.Add(this.btnForward10);
+            this.Controls.Add(this.btnBack10);
+            this.Controls.Add(this.btnForward1);
+            this.Controls.Add(this.btnBack1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.mapBox1);
             this.Controls.Add(this.mapZoomToolStrip);
@@ -479,5 +531,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.Button btnBack1;
+        private System.Windows.Forms.Button btnForward1;
+        private System.Windows.Forms.Button btnBack10;
+        private System.Windows.Forms.Button btnForward10;
     }
 }

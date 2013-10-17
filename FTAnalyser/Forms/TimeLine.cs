@@ -420,5 +420,37 @@ namespace FTAnalyzer.Forms
         {
             btnSelect.Checked = false;
         }
+
+        private void btnBack10_Click(object sender, EventArgs e)
+        {
+            tbYears.Value -= 10;
+            if (tbYears.Value < tbYears.Minimum)
+                tbYears.Value = tbYears.Minimum;
+            UpdateMap();
+        }
+
+        private void btnBack1_Click(object sender, EventArgs e)
+        {
+            tbYears.Value -= 1;
+            if (tbYears.Value < tbYears.Minimum)
+                tbYears.Value = tbYears.Minimum;
+            UpdateMap();
+        }
+
+        private void btnForward1_Click(object sender, EventArgs e)
+        {
+            tbYears.Value += 1;
+            if (tbYears.Value > tbYears.Maximum)
+                tbYears.Value = tbYears.Maximum;
+            UpdateMap();
+        }
+
+        private void btnForward10_Click(object sender, EventArgs e)
+        {
+            tbYears.Value += 10;
+            if (tbYears.Value > tbYears.Maximum)
+                tbYears.Value = tbYears.Maximum;
+            UpdateMap();
+        }
     }
 }
