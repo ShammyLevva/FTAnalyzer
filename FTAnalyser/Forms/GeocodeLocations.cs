@@ -42,12 +42,13 @@ namespace FTAnalyzer.Forms
         {
             int gedcom = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER));
             int found = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.MATCHED));
-            int notfound = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH));
+            int partial = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH));
             int notsearched = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1);
+            int notfound = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NO_MATCH)));
             int total = FactLocation.AllLocations.Count() - 1;
 
             txtGoogleWait.Text = string.Empty;
-            statusText = "Already Geocoded: " + (gedcom + found) + ", not found: " + notfound + ", yet to search: " + notsearched + " of " + total + " locations.";
+            statusText = "Already Geocoded: " + (gedcom + found) + ", partial/not found: " + (partial + notfound) + ", yet to search: " + notsearched + " of " + total + " locations.";
             txtLocations.Text = statusText;
         }
 
@@ -72,6 +73,25 @@ namespace FTAnalyzer.Forms
                 menu.CheckedChanged += new EventHandler(menuResultType_CheckedChanged);
                 mnuGoogleResultType.DropDownItems.Add(menu);
             }
+        }
+
+        private bool AllFiltersActive()
+        {
+            int count = 0;
+            int menus = 0;
+            foreach (ToolStripMenuItem menu in mnuGeocodeStatus.DropDownItems)
+            {
+                menus++;
+                if (menu.Checked)
+                    count++;
+            }
+            foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
+            {
+                menus++;
+                if (menu.Checked)
+                    count++;
+            }
+            return (count == menus);
         }
 
         private void UpdateGridWithFilters(List<IDisplayGeocodedLocation> input)
@@ -106,6 +126,8 @@ namespace FTAnalyzer.Forms
 
         private SortableBindingList<IDisplayGeocodedLocation> ApplyFilters(List<IDisplayGeocodedLocation> input)
         {
+            if (AllFiltersActive())
+                return new SortableBindingList<IDisplayGeocodedLocation>(input);
             List<IDisplayGeocodedLocation> results = new List<IDisplayGeocodedLocation>();
             foreach (IDisplayGeocodedLocation loc in input)
             {

@@ -394,10 +394,9 @@ namespace FTAnalyzer
 
         private void btnShowCensus_Click(object sender, EventArgs e)
         {
-            Census census;
             Predicate<CensusIndividual> filter = CreateCensusIndividualFilter();
             IComparer<CensusIndividual> censusComparator;
-            census = new Census(false, cenDate.CensusCountry);
+            Census census = new Census(false, cenDate.CensusCountry);
             censusComparator = new DefaultCensusComparer();
             bool censusDone = sender == btnShowCensusEntered;
             census.SetupCensus(filter, censusComparator, censusDate, censusDone);

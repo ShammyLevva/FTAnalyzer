@@ -991,7 +991,8 @@ namespace FTAnalyzer
             {
                 List<IDisplayGeocodedLocation> result = new List<IDisplayGeocodedLocation>();
                 foreach (IDisplayGeocodedLocation loc in FactLocation.AllLocations)
-                    result.Add(loc);
+                    if(!loc.Equals(FactLocation.UNKNOWN_LOCATION))
+                        result.Add(loc);
                 return result;
             }
         }
