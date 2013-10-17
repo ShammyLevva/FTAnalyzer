@@ -38,10 +38,9 @@
             this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuEditLocation = new System.Windows.Forms.ToolStripButton();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ind_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,6 +50,8 @@
             this.FactDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AgeAtFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -66,7 +67,8 @@
             this.printPreviewToolStripButton,
             this.toolStripSeparator,
             this.mnuExportToExcel,
-            this.toolStripButton1});
+            this.toolStripSeparator1,
+            this.mnuEditLocation});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(938, 25);
@@ -133,23 +135,29 @@
             this.mnuExportToExcel.Text = "Export to Excel";
             this.mnuExportToExcel.Click += new System.EventHandler(this.mnuExportToExcel_Click);
             // 
-            // toolStripButton1
+            // toolStripSeparator1
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // mnuEditLocation
+            // 
+            this.mnuEditLocation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mnuEditLocation.Image = ((System.Drawing.Image)(resources.GetObject("mnuEditLocation.Image")));
+            this.mnuEditLocation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnuEditLocation.Name = "mnuEditLocation";
+            this.mnuEditLocation.Size = new System.Drawing.Size(23, 22);
+            this.mnuEditLocation.Text = "Edit Location";
+            this.mnuEditLocation.Click += new System.EventHandler(this.mnuEditLocation_Click);
             // 
             // dgIndividuals
             // 
             this.dgIndividuals.AllowUserToAddRows = false;
             this.dgIndividuals.AllowUserToDeleteRows = false;
             this.dgIndividuals.AllowUserToOrderColumns = true;
-            this.dgIndividuals.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgIndividuals.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgIndividuals.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -180,21 +188,6 @@
             this.dgIndividuals.TabIndex = 2;
             this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgIndividuals_CellDoubleClick);
             this.dgIndividuals.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgIndividuals_CellToolTipTextNeeded);
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsRecords});
-            this.statusStrip.Location = new System.Drawing.Point(0, 365);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(938, 22);
-            this.statusStrip.TabIndex = 3;
-            this.statusStrip.Text = "statusStrip1";
-            // 
-            // tsRecords
-            // 
-            this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(0, 17);
             // 
             // FactIcon
             // 
@@ -285,6 +278,21 @@
             this.Ahnentafel.ReadOnly = true;
             this.Ahnentafel.Width = 50;
             // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsRecords});
+            this.statusStrip.Location = new System.Drawing.Point(0, 365);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(938, 22);
+            this.statusStrip.TabIndex = 3;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // tsRecords
+            // 
+            this.tsRecords.Name = "tsRecords";
+            this.tsRecords.Size = new System.Drawing.Size(0, 17);
+            // 
             // MapIndividuals
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -320,7 +328,7 @@
         private System.Windows.Forms.ToolStripButton mnuExportToExcel;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel tsRecords;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton mnuEditLocation;
         private System.Windows.Forms.DataGridViewImageColumn FactIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ind_ID;
@@ -330,5 +338,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FactDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn AgeAtFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ahnentafel;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

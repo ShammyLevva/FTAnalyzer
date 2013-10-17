@@ -33,6 +33,11 @@ namespace FTAnalyzer.Mapping
             return r;
         }
 
+        public void UpdateIcon()
+        {
+            this.Icon = FactLocationImage.ErrorIcon(Location.GeocodeStatus).Icon;
+        }
+
         public FactDate FactDate { get { return Fact.FactDate; } }
 
         public string Ind_ID { get { return Individual.Ind_ID; } }

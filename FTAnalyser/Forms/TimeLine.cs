@@ -248,8 +248,7 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.WaitCursor;
             labValue.Text = tbYears.Value.ToString();
             DisplayLocationsForYear(labValue.Text);
-            RefreshClusters();
-            mapBox1.Refresh();
+            RefreshTimeline();
             this.Cursor = Cursors.Default;
         }
 
@@ -282,8 +281,7 @@ namespace FTAnalyzer.Forms
                 Coordinate p = mapBox1.Map.ImageToWorld(new PointF(e.X, e.Y));
                 mapBox1.Map.Center.X = p.X;
                 mapBox1.Map.Center.Y = p.Y;
-                RefreshClusters();
-                mapBox1.Refresh();
+                RefreshTimeline();
             }
         }
 
@@ -302,12 +300,6 @@ namespace FTAnalyzer.Forms
             DisplayLocationsForYear(labValue.Text);
         }
 
-        private void mapBox1_MapZoomChanged(double zoom)
-        {
-            RefreshClusters();
-            mapBox1.Refresh();
-        }
-        
         private void googleMapToolStripMenuItem_Click(object sender, EventArgs e)
         {
             mapBox1.Map.BackgroundLayer.RemoveAt(0);
@@ -338,7 +330,7 @@ namespace FTAnalyzer.Forms
                     locations.Add((MapLocation)feature["MapLocation"]);
                 }
             }
-            MapIndividuals ind = new MapIndividuals(locations, labValue.Text);
+            MapIndividuals ind = new MapIndividuals(locations, labValue.Text, this);
             ind.Show();
             this.Cursor = Cursors.Default;
         }
@@ -348,10 +340,20 @@ namespace FTAnalyzer.Forms
             RefreshClusters();
         }
 
-        private void mapBox1_MapCenterChanged(Coordinate center)
+        private void mapBox1_MapZoomChanged(double zoom)
+        {
+            RefreshTimeline();
+        }
+
+        public void RefreshTimeline()
         {
             RefreshClusters();
             mapBox1.Refresh();
+        }
+
+        private void mapBox1_MapCenterChanged(Coordinate center)
+        {
+            RefreshTimeline();
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
