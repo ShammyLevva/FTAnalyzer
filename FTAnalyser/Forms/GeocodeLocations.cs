@@ -35,6 +35,7 @@ namespace FTAnalyzer.Forms
             mnuGeocodeLocations.Enabled = !ft.Geocoding; // disable menu if already geocoding
             SetupFilterMenu();
             SetStatusText();
+            CheckGoogleStatusCodes(locations);
             UpdateGridWithFilters(locations);
         }
 
@@ -150,6 +151,29 @@ namespace FTAnalyzer.Forms
                 }
             }
             return new SortableBindingList<IDisplayGeocodedLocation>(results);
+        }
+
+        private void CheckGoogleStatusCodes(List<IDisplayGeocodedLocation> input)
+        {
+            Dictionary<string, List<IDisplayGeocodedLocation>> results = new Dictionary<string, List<IDisplayGeocodedLocation>>();
+            foreach (IDisplayGeocodedLocation loc in input)
+            {
+                if (loc.GoogleResultType.Length > 0)
+                {
+                    string[] parts = loc.GoogleResultType.Split(',');
+                    foreach (string part in parts)
+                    {
+                        string key = part.Trim();
+                        if (!results.ContainsKey(key))
+                        {
+                            results[key] = new List<IDisplayGeocodedLocation>();
+                            if (!GoogleMap.RESULT_TYPES.Contains(key))
+                                Console.WriteLine("Adding new type : " + key);
+                        }
+                        results[key].Add(loc);
+                    }
+                }
+            }
         }
 
         private void menuGeocode_CheckedChanged(object sender, EventArgs e)

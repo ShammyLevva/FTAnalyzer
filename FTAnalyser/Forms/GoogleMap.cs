@@ -37,19 +37,33 @@ namespace FTAnalyzer.Forms
         public static readonly string PLACE_OF_WORSHIP = "place_of_worship";
         public static readonly string INTERSECTION = "intersection";
         public static readonly string POLITICAL = "political";
-        public static readonly string POSTALCODE = "postalcode";
+        public static readonly string POSTALCODE = "postal_code";
         public static readonly string POSTALTOWN = "postal_town";
         public static readonly string NATURALFEATURE = "natural_feature";
         public static readonly string AIRPORT = "airport";
         public static readonly string PARK = "park";
+        public static readonly string BUS_STATION = "bus_station";
         public static readonly string POINT_OF_INTEREST = "point_of_interest";
         public static readonly string STREET_NUMBER = "street_number";
+        public static readonly string TRANSIT_STATION = "transit_station";
+        public static readonly string CHURCH = "church";
+        public static readonly string SUBWAY_STATION = "subway_station";
+        public static readonly string TRAIN_STATION = "train_station";
+        public static readonly string UNIVERSITY = "university";
+        public static readonly string POLICE = "police";
+        public static readonly string MUSEUM = "museum";
+        public static readonly string POST_OFFICE = "post_office";
+        public static readonly string COURTHOUSE = "courthouse";
+        public static readonly string FINANCE = "finance";
+        public static readonly string COLLOQUIAL_AREA = "colloquial_area";
 
         public static readonly ISet<string> RESULT_TYPES = new HashSet<string>(new string[] {
             STREET_ADDRESS, ROUTE, COUNTRY, ESTABLISHMENT, ADMIN1, ADMIN2, ADMIN3, LOCALITY,
             SUBLOCALITY, NEIGHBOURHOOD, PREMISE, SUBPREMISE, CEMETERY, HOSPITAL, PLACE_OF_WORSHIP,
             INTERSECTION, POLITICAL, POSTALCODE, POSTALTOWN, NATURALFEATURE, AIRPORT, PARK,
-            POINT_OF_INTEREST, STREET_NUMBER
+            POINT_OF_INTEREST, STREET_NUMBER, BUS_STATION, TRANSIT_STATION, CHURCH,
+            SUBWAY_STATION, TRAIN_STATION, UNIVERSITY, POLICE, MUSEUM, POST_OFFICE, 
+            COURTHOUSE, FINANCE, COLLOQUIAL_AREA
         });
 
         private String location;
@@ -143,12 +157,16 @@ namespace FTAnalyzer.Forms
                 types.Contains(HOSPITAL) || types.Contains(PLACE_OF_WORSHIP) || types.Contains(ROUTE) ||
                 types.Contains(INTERSECTION) || types.Contains(ESTABLISHMENT) || types.Contains(SUBPREMISE) ||
                 types.Contains(POSTALCODE) || types.Contains(NATURALFEATURE) || types.Contains(PARK) ||
-                types.Contains(AIRPORT) || types.Contains(POINT_OF_INTEREST) || types.Contains(STREET_NUMBER))
-                return FactLocation.PLACE;
+                types.Contains(AIRPORT) || types.Contains(POINT_OF_INTEREST) || types.Contains(STREET_NUMBER) ||
+                types.Contains(BUS_STATION) || types.Contains(TRANSIT_STATION) || types.Contains(CHURCH) ||
+                types.Contains(SUBWAY_STATION) || types.Contains(TRAIN_STATION) || types.Contains(UNIVERSITY) || 
+                types.Contains(POLICE) || types.Contains(MUSEUM) || types.Contains(POST_OFFICE) ||
+                types.Contains(COURTHOUSE)|| types.Contains(FINANCE))
+                    return FactLocation.PLACE;
             if (types.Contains(ADMIN3) || types.Contains(SUBLOCALITY))
                 return FactLocation.ADDRESS;
-            if (types.Contains(ADMIN2) || types.Contains(NEIGHBOURHOOD) || 
-                types.Contains(LOCALITY) || types.Contains(POLITICAL) || types.Contains(POSTALTOWN))
+            if (types.Contains(ADMIN2) || types.Contains(NEIGHBOURHOOD) || types.Contains(LOCALITY) || 
+                types.Contains(POLITICAL) || types.Contains(POSTALTOWN) || types.Contains(COLLOQUIAL_AREA))
                 return FactLocation.SUBREGION;
             if (types.Contains(ADMIN1))
                 return FactLocation.REGION;
