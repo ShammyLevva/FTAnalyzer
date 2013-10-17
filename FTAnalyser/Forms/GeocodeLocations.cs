@@ -22,11 +22,13 @@ namespace FTAnalyzer.Forms
         private List<IDisplayGeocodedLocation> locations;
         private bool formClosing;
         private string statusText;
+        private bool refreshingMenus;
 
         public GeocodeLocations()
         {
             InitializeComponent();
             ft = FamilyTree.Instance;
+            this.refreshingMenus = false;
             this.locations = ft.AllGeocodingLocations;
             dgLocations.AutoGenerateColumns = false;
             reportFormHelper = new ReportFormHelper(this.Text, dgLocations, this.ResetTable);
@@ -74,6 +76,10 @@ namespace FTAnalyzer.Forms
                 menu.CheckedChanged += new EventHandler(menuResultType_CheckedChanged);
                 mnuGoogleResultType.DropDownItems.Add(menu);
             }
+            if (AllFiltersActive())
+                mnuSelectClear.Text = "Clear All";
+            else
+                mnuSelectClear.Text = "Select All";
         }
 
         private bool AllFiltersActive()
@@ -92,7 +98,7 @@ namespace FTAnalyzer.Forms
                 if (menu.Checked)
                     count++;
             }
-            return (count == menus);
+            return (count == menus - 1); //one less due to select/clear all
         }
 
         private void UpdateGridWithFilters(List<IDisplayGeocodedLocation> input)
@@ -187,11 +193,37 @@ namespace FTAnalyzer.Forms
 
         private void menuResultType_CheckedChanged(object sender, EventArgs e)
         {
+            if(!refreshingMenus)
+                UpdateGoogleStatusMenus();
+        }
+
+        private void UpdateGoogleStatusMenus()
+        {
             foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
             {
                 Application.UserAppDataRegistry.SetValue(menu.Name, menu.Checked.ToString()); // remember checked state for next time
             }
             UpdateGridWithFilters(locations);
+        }
+
+        private void mnuSelectClear_Click(object sender, EventArgs e)
+        {
+            refreshingMenus = true;
+            if (AllFiltersActive())
+            {
+                mnuSelectClear.Text = "Select All";
+                foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
+                    menu.Checked = false;
+            }
+            else
+            {
+                mnuSelectClear.Text = "Clear All";
+                foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
+                    menu.Checked = true;
+                mnuSelectClear.Checked = false; // make sure the clear all isn't checked
+            }
+            refreshingMenus = false;
+            UpdateGoogleStatusMenus();
         }
 
         private void ResetTable()
