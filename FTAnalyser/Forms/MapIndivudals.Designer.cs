@@ -148,6 +148,7 @@
             this.mnuEditLocation.Name = "mnuEditLocation";
             this.mnuEditLocation.Size = new System.Drawing.Size(23, 22);
             this.mnuEditLocation.Text = "Edit Location";
+            this.mnuEditLocation.ToolTipText = "Edit Selected Location";
             this.mnuEditLocation.Click += new System.EventHandler(this.mnuEditLocation_Click);
             // 
             // dgIndividuals
@@ -155,9 +156,9 @@
             this.dgIndividuals.AllowUserToAddRows = false;
             this.dgIndividuals.AllowUserToDeleteRows = false;
             this.dgIndividuals.AllowUserToOrderColumns = true;
-            this.dgIndividuals.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgIndividuals.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgIndividuals.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
