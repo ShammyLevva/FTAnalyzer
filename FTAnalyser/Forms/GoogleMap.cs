@@ -56,14 +56,30 @@ namespace FTAnalyzer.Forms
         public static readonly string COURTHOUSE = "courthouse";
         public static readonly string FINANCE = "finance";
         public static readonly string COLLOQUIAL_AREA = "colloquial_area";
-
+        public static readonly string LIBRARY = "library";
+        public static readonly string AQUARIUM = "aquarium";
+        public static readonly string FIRE_STATION = "fire_station";
+        public static readonly string CAMPGROUND = "campground";
+        public static readonly string LODGING = "lodging";
+        public static readonly string VETERINARY_CARE = "veterinary_care";
+        
         public static readonly ISet<string> RESULT_TYPES = new HashSet<string>(new string[] {
             STREET_ADDRESS, ROUTE, COUNTRY, ESTABLISHMENT, ADMIN1, ADMIN2, ADMIN3, LOCALITY,
             SUBLOCALITY, NEIGHBOURHOOD, PREMISE, SUBPREMISE, CEMETERY, HOSPITAL, PLACE_OF_WORSHIP,
             INTERSECTION, POLITICAL, POSTALCODE, POSTALTOWN, NATURALFEATURE, AIRPORT, PARK,
             POINT_OF_INTEREST, STREET_NUMBER, BUS_STATION, TRANSIT_STATION, CHURCH,
             SUBWAY_STATION, TRAIN_STATION, UNIVERSITY, POLICE, MUSEUM, POST_OFFICE, 
-            COURTHOUSE, FINANCE, COLLOQUIAL_AREA
+            COURTHOUSE, FINANCE, COLLOQUIAL_AREA, LIBRARY, AQUARIUM, FIRE_STATION,
+            CAMPGROUND, LODGING, VETERINARY_CARE
+        });
+
+        public static readonly ISet<string> PLACES = new HashSet<string>(new string[] {
+            PREMISE, STREET_ADDRESS, CEMETERY, HOSPITAL, PLACE_OF_WORSHIP, ROUTE, 
+            INTERSECTION, ESTABLISHMENT, SUBPREMISE, POSTALCODE, NATURALFEATURE, 
+            PARK, AIRPORT, POINT_OF_INTEREST, STREET_NUMBER, BUS_STATION, CHURCH, 
+            TRANSIT_STATION, SUBWAY_STATION, TRAIN_STATION, UNIVERSITY, POLICE, 
+            MUSEUM, POST_OFFICE, COURTHOUSE, FINANCE, LIBRARY, AQUARIUM, FIRE_STATION,
+            CAMPGROUND, LODGING, VETERINARY_CARE
         });
 
         private String location;
@@ -153,15 +169,8 @@ namespace FTAnalyzer.Forms
         public static int GetFactLocation(string[] locationTypes)
         {
             HashSet<string> types = new HashSet<string>(locationTypes);
-            if (types.Contains(PREMISE) || types.Contains(STREET_ADDRESS) || types.Contains(CEMETERY) ||
-                types.Contains(HOSPITAL) || types.Contains(PLACE_OF_WORSHIP) || types.Contains(ROUTE) ||
-                types.Contains(INTERSECTION) || types.Contains(ESTABLISHMENT) || types.Contains(SUBPREMISE) ||
-                types.Contains(POSTALCODE) || types.Contains(NATURALFEATURE) || types.Contains(PARK) ||
-                types.Contains(AIRPORT) || types.Contains(POINT_OF_INTEREST) || types.Contains(STREET_NUMBER) ||
-                types.Contains(BUS_STATION) || types.Contains(TRANSIT_STATION) || types.Contains(CHURCH) ||
-                types.Contains(SUBWAY_STATION) || types.Contains(TRAIN_STATION) || types.Contains(UNIVERSITY) || 
-                types.Contains(POLICE) || types.Contains(MUSEUM) || types.Contains(POST_OFFICE) ||
-                types.Contains(COURTHOUSE)|| types.Contains(FINANCE))
+            foreach(string place in PLACES)
+                if (types.Contains(place))
                     return FactLocation.PLACE;
             if (types.Contains(ADMIN3) || types.Contains(SUBLOCALITY))
                 return FactLocation.ADDRESS;
