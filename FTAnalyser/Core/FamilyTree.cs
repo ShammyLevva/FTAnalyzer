@@ -1809,12 +1809,15 @@ namespace FTAnalyzer
                     reader.Close();
                 }
                 // write geocode results - ignore UNKNOWN entry
+                int notsearched = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1);
                 rtb.AppendText("\nFound " + (FactLocation.AllLocations.Count() - 1) + " locations in file.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER)) + " have geocoding from GEDCOM/User Entered.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.MATCHED)) + " have a geocoding match from Google.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH)) + " have partial geocoding match from Google.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NO_MATCH)) + " could not be found on Google.\n");
-                rtb.AppendText("    " + (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1) + " haven't been searched on Google. Use the 'Run Geocoder' option (under Maps menu) to find them.\n");
+                rtb.AppendText("    " + notsearched + " haven't been searched on Google.");
+                if (notsearched > 0)
+                    rtb.AppendText(" Use the 'Run Geocoder' option (under Maps menu) to find them.\n");
             }
             catch (Exception ex)
             {
