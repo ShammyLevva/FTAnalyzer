@@ -192,10 +192,15 @@ namespace FTAnalyzer.Forms
             {
                 List<MapLocation> locations;
                 if (result == 9999)
+                {
                     locations = FilterToRelationsIncluded(ft.AllMapLocations);
+                    txtLocations.Text = locations.Count() + " Locations";
+                }
                 else
+                {
                     locations = FilterToRelationsIncluded(ft.YearMapLocations(new FactDate(year), yearLimit));
-                txtLocations.Text = locations.Count() + " Locations";
+                    txtLocations.Text = locations.Count() + " Locations for year " + year;
+                }
                 factLocations.Clear();
                 Envelope bbox = new Envelope();
                 foreach (MapLocation loc in locations)
