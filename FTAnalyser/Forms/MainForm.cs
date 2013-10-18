@@ -42,6 +42,16 @@ namespace FTAnalyzer
             DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
         }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            //GeneralSettings.UseBaptismDatesChanged += new EventHandler(Options_BaptismChanged);
+            GeneralSettings.AllowEmptyLocationsChanged += new EventHandler(Options_AllowEmptyLocationsChanged);
+            GeneralSettings.UseResidenceAsCensusChanged += new EventHandler(Options_UseResidenceAsCensusChanged);
+            //GeneralSettings.StrictResidenceDatesChanged += new EventHandler(Options_StrictResidenceDatesChanged);
+            GeneralSettings.TolerateInaccurateCensusChanged += new EventHandler(Options_TolerateInaccurateCensusChanged);
+            this.Text = "Family Tree Analyzer v" + VERSION;
+        }
+
         private string PublishVersion()
         {
             if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
@@ -555,98 +565,97 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void LostCousinsCensus(string location, Predicate<CensusIndividual> filter, FactDate censusDate, string reportTitle)
+        private void LostCousinsCensus(string location, Predicate<CensusIndividual> countryFilter, FactDate censusDate, string reportTitle)
         {
             HourGlass(true);
-            Func<CensusIndividual, FactDate> registrationDate = x => x.CensusDate;
-            Predicate<CensusIndividual> relation = x => x.IsBloodDirect;
-            Predicate<CensusIndividual> dateFilter = FilterUtils.DateFilter<CensusIndividual>(registrationDate, censusDate);
+            Predicate<CensusIndividual> dateFilter = FilterUtils.DateFilter<CensusIndividual>(x => x.CensusDate, censusDate);
             Census census = new Census(censusDate, location);
 
             if (ckbRestrictions.Checked)
-                filter = FilterUtils.AndFilter<CensusIndividual>(dateFilter, filter, relation);
-            else
-                filter = FilterUtils.AndFilter<CensusIndividual>(dateFilter, filter);
+            {
+                Predicate<CensusIndividual> relation = x => x.IsBloodDirect;
+                countryFilter = FilterUtils.AndFilter<CensusIndividual>(countryFilter, relation);
+            }
 
-            census.SetupLCCensus(filter, ckbShowLCEntered.Checked);
+            census.SetupLCCensus(countryFilter, dateFilter, ckbShowLCEntered.Checked);
             if (ckbShowLCEntered.Checked)
                 census.Text = reportTitle + " already entered into Lost Cousins website";
             else
                 census.Text = reportTitle + " to enter into Lost Cousins website";
-            HourGlass(false);
             DisposeDuplicateForms(census);
             census.Show();
+            HourGlass(false);
         }
 
         private void btnLC1881EW_Click(object sender, EventArgs e)
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.UKCENSUS1881).Country;
-            Predicate<CensusIndividual> filter = FilterUtils.OrFilter<CensusIndividual>(
+            Predicate<CensusIndividual> countryFilter = FilterUtils.OrFilter<CensusIndividual>(
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.ENGLAND),
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.WALES));
             string reportTitle = "1881 England & Wales Census Records on file";
-            LostCousinsCensus(Countries.ENG_WALES, filter, CensusDate.UKCENSUS1881, reportTitle);
+            LostCousinsCensus(Countries.ENG_WALES, countryFilter, CensusDate.UKCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Scot_Click(object sender, EventArgs e)
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.UKCENSUS1881).Country;
-            Predicate<CensusIndividual> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.SCOTLAND);
+            Predicate<CensusIndividual> countryFilter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.SCOTLAND);
             string reportTitle = "1881 Scotland Census Records on file";
-            LostCousinsCensus(Countries.SCOTLAND, filter, CensusDate.UKCENSUS1881, reportTitle);
+            LostCousinsCensus(Countries.SCOTLAND, countryFilter, CensusDate.UKCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Canada_Click(object sender, EventArgs e)
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.UKCENSUS1881).Country;
-            Predicate<CensusIndividual> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.CANADA);
+            Predicate<CensusIndividual> countryFilter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.CANADA);
             string reportTitle = "1881 Canada Census Records on file";
-            LostCousinsCensus(Countries.CANADA, filter, CensusDate.CANADACENSUS1881, reportTitle);
+            LostCousinsCensus(Countries.CANADA, countryFilter, CensusDate.CANADACENSUS1881, reportTitle);
         }
 
         private void btnLC1841EW_Click(object sender, EventArgs e)
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.UKCENSUS1841).Country;
-            Predicate<CensusIndividual> filter = FilterUtils.OrFilter<CensusIndividual>(
+            Predicate<CensusIndividual> countryFilter = FilterUtils.OrFilter<CensusIndividual>(
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.ENGLAND),
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.WALES));
             string reportTitle = "1841 England & Wales Census Records on file";
-            LostCousinsCensus(Countries.ENG_WALES, filter, CensusDate.UKCENSUS1841, reportTitle);
+            LostCousinsCensus(Countries.ENG_WALES, countryFilter, CensusDate.UKCENSUS1841, reportTitle);
         }
 
 
         private void btnLC1911EW_Click(object sender, EventArgs e)
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.UKCENSUS1911).Country;
-            Predicate<CensusIndividual> filter = FilterUtils.OrFilter<CensusIndividual>(
+            Predicate<CensusIndividual> countryFilter = FilterUtils.OrFilter<CensusIndividual>(
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.ENGLAND),
                 FilterUtils.StringFilter<CensusIndividual>(country, Countries.WALES));
             string reportTitle = "1911 England & Wales Census Records on file";
-            LostCousinsCensus(Countries.ENG_WALES, filter, CensusDate.UKCENSUS1911, reportTitle);
+            LostCousinsCensus(Countries.ENG_WALES, countryFilter, CensusDate.UKCENSUS1911, reportTitle);
         }
 
         private void btnLC1880USA_Click(object sender, EventArgs e)
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.USCENSUS1880).Country;
-            Predicate<CensusIndividual> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.UNITED_STATES);
+            Predicate<CensusIndividual> countryFilter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.UNITED_STATES);
             string reportTitle = "1880 US Census Records on file";
-            LostCousinsCensus(Countries.UNITED_STATES, filter, CensusDate.USCENSUS1880, reportTitle);
+            LostCousinsCensus(Countries.UNITED_STATES, countryFilter, CensusDate.USCENSUS1880, reportTitle);
         }
 
         private void btnLC1911Ireland_Click(object sender, EventArgs e)
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.IRELANDCENSUS1911).Country;
-            Predicate<CensusIndividual> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.IRELAND);
+            Predicate<CensusIndividual> countryFilter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.IRELAND);
             string reportTitle = "1911 Ireland Census Records on file";
-            LostCousinsCensus(Countries.IRELAND, filter, CensusDate.IRELANDCENSUS1911, reportTitle);
+            LostCousinsCensus(Countries.IRELAND, countryFilter, CensusDate.IRELANDCENSUS1911, reportTitle);
         }
 
         private void btnLC1940USA_Click(object sender, EventArgs e)
         {
             Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.USCENSUS1940).Country;
-            Predicate<CensusIndividual> filter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.UNITED_STATES);
+            Predicate<CensusIndividual> countryFilter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.UNITED_STATES);
             string reportTitle = "1940 US Census Records on file";
-            LostCousinsCensus(Countries.UNITED_STATES, filter, CensusDate.USCENSUS1940, reportTitle);
+            LostCousinsCensus(Countries.UNITED_STATES, countryFilter, CensusDate.USCENSUS1940, reportTitle);
         }
 
         private void labLostCousinsWeb_Click(object sender, EventArgs e)
@@ -667,16 +676,6 @@ namespace FTAnalyzer
             this.Cursor = storedCursor;
         }
         #endregion
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            //GeneralSettings.UseBaptismDatesChanged += new EventHandler(Options_BaptismChanged);
-            GeneralSettings.AllowEmptyLocationsChanged += new EventHandler(Options_AllowEmptyLocationsChanged);
-            GeneralSettings.UseResidenceAsCensusChanged += new EventHandler(Options_UseResidenceAsCensusChanged);
-            //GeneralSettings.StrictResidenceDatesChanged += new EventHandler(Options_StrictResidenceDatesChanged);
-            GeneralSettings.TolerateInaccurateCensusChanged += new EventHandler(Options_TolerateInaccurateCensusChanged);
-            this.Text = "Family Tree Analyzer v" + VERSION;
-        }
 
         #region ToolStrip Clicks
 

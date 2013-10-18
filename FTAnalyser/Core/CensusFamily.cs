@@ -21,10 +21,7 @@ namespace FTAnalyzer
 
         public new IEnumerable<CensusIndividual> Members
         {
-            get
-            {
-                return base.Members.Select((i, pos) => new CensusIndividual(pos, i, this));
-            }
+            get { return base.Members.Select((i, pos) => new CensusIndividual(pos, i, this)); }
         }
 
         public bool Process(FactDate censusDate, bool censusDone)

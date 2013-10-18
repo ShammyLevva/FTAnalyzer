@@ -50,25 +50,26 @@ namespace FTAnalyzer.Forms
             SetupDataGridView(censusDone, individuals);
         }
 
-        public void SetupLCCensus(Predicate<CensusIndividual> filter, bool showEnteredLostCousins)
+        public void SetupLCCensus(Predicate<CensusIndividual> countryFilter, Predicate<CensusIndividual> dateFilter, bool showEnteredLostCousins)
         {
             this.LostCousins = true;
             IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, true);
+            Predicate<CensusIndividual> filter = FilterUtils.AndFilter(countryFilter, dateFilter);
             IEnumerable<CensusIndividual> onCensus = censusFamilies.SelectMany(f => f.Members).Where(filter);
             List<CensusIndividual> individuals;
-            if (!showEnteredLostCousins)
+            if (showEnteredLostCousins)
             {
-                Predicate<CensusIndividual> predicate = x => !x.IsLostCousinEntered(CensusDate, censusCountry);
-                individuals = onCensus.Where(predicate).ToList<CensusIndividual>();
-            }
-            else
-            {
-                censusFamilies = ft.GetAllCensusFamilies(CensusDate, false);
-                IEnumerable<CensusIndividual> notOnCensus = censusFamilies.SelectMany(f => f.Members).Where(filter);
+                IEnumerable<CensusFamily> notOnCensusFamilies = ft.GetAllCensusFamilies(CensusDate, false);
+                IEnumerable<CensusIndividual> notOnCensus = notOnCensusFamilies.SelectMany(f => f.Members).Where(countryFilter);
                 IEnumerable<CensusIndividual> allEligible = onCensus.Union(notOnCensus);
 
                 Predicate<CensusIndividual> predicate = x => x.IsLostCousinEntered(CensusDate, censusCountry);
                 individuals = allEligible.Where(predicate).ToList<CensusIndividual>();
+            }
+            else
+            {
+                Predicate<CensusIndividual> predicate = x => !x.IsLostCousinEntered(CensusDate, censusCountry);
+                individuals = onCensus.Where(predicate).ToList<CensusIndividual>();
             }
             SetupDataGridView(true, individuals);
         }
