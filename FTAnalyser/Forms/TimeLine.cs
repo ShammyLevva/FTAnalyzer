@@ -423,33 +423,33 @@ namespace FTAnalyzer.Forms
 
         private void btnBack10_Click(object sender, EventArgs e)
         {
-            tbYears.Value -= 10;
-            if (tbYears.Value < tbYears.Minimum)
+            if (tbYears.Value < tbYears.Minimum + 10)
                 tbYears.Value = tbYears.Minimum;
+            else
+                tbYears.Value -= 10;
             UpdateMap();
         }
 
         private void btnBack1_Click(object sender, EventArgs e)
         {
-            tbYears.Value -= 1;
-            if (tbYears.Value < tbYears.Minimum)
-                tbYears.Value = tbYears.Minimum;
+            if (tbYears.Value != tbYears.Minimum)
+                tbYears.Value -= 1;
             UpdateMap();
         }
 
         private void btnForward1_Click(object sender, EventArgs e)
         {
-            tbYears.Value += 1;
-            if (tbYears.Value > tbYears.Maximum)
-                tbYears.Value = tbYears.Maximum;
+            if (tbYears.Value != tbYears.Maximum)
+                tbYears.Value += 1;     
             UpdateMap();
         }
 
         private void btnForward10_Click(object sender, EventArgs e)
         {
-            tbYears.Value += 10;
-            if (tbYears.Value > tbYears.Maximum)
+            if (tbYears.Value > tbYears.Maximum -10)
                 tbYears.Value = tbYears.Maximum;
+            else
+                tbYears.Value += 10;
             UpdateMap();
         }
     }
