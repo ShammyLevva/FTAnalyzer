@@ -70,6 +70,8 @@
             this.btnBack10 = new System.Windows.Forms.Button();
             this.btnForward10 = new System.Windows.Forms.Button();
             this.mnuDisableTimeline = new System.Windows.Forms.ToolStripMenuItem();
+            this.limitFactDatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbLimitFactDates = new System.Windows.Forms.ToolStripComboBox();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -198,7 +200,8 @@
             this.mnuOptions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuRetryPartial,
             this.mnuKeepZoom,
-            this.mnuDisableTimeline});
+            this.mnuDisableTimeline,
+            this.limitFactDatesToolStripMenuItem});
             this.mnuOptions.Name = "mnuOptions";
             this.mnuOptions.Size = new System.Drawing.Size(61, 20);
             this.mnuOptions.Text = "Options";
@@ -473,6 +476,30 @@
             this.mnuDisableTimeline.Text = "Disable Timeline Show All Locations";
             this.mnuDisableTimeline.Click += new System.EventHandler(this.mnuDisableTimeline_Click);
             // 
+            // limitFactDatesToolStripMenuItem
+            // 
+            this.limitFactDatesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cbLimitFactDates});
+            this.limitFactDatesToolStripMenuItem.Name = "limitFactDatesToolStripMenuItem";
+            this.limitFactDatesToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
+            this.limitFactDatesToolStripMenuItem.Text = "Limit Fact Dates";
+            // 
+            // cbLimitFactDates
+            // 
+            this.cbLimitFactDates.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbLimitFactDates.Items.AddRange(new object[] {
+            "No Limit",
+            "Exact year only",
+            "+/- 2 years",
+            "+/- 5 years",
+            "+/-10 years",
+            "+/-20 years",
+            "+/-50 years",
+            "+/-100 years"});
+            this.cbLimitFactDates.Name = "cbLimitFactDates";
+            this.cbLimitFactDates.Size = new System.Drawing.Size(121, 23);
+            this.cbLimitFactDates.Text = "No Limit";
+            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -550,5 +577,7 @@
         private System.Windows.Forms.Button btnBack10;
         private System.Windows.Forms.Button btnForward10;
         private System.Windows.Forms.ToolStripMenuItem mnuDisableTimeline;
+        private System.Windows.Forms.ToolStripMenuItem limitFactDatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox cbLimitFactDates;
     }
 }

@@ -23,6 +23,7 @@ namespace FTAnalyzer.Forms
         private FamilyTree ft;
         private int minGeoCodedYear;
         private int maxGeoCodedYear;
+        private int geocodedRange;
         private FeatureDataTable factLocations;
         private VectorLayer clusterLayer;
         private LabelLayer labelLayer;
@@ -161,6 +162,7 @@ namespace FTAnalyzer.Forms
                 labMin.Text = string.Empty;
                 labMax.Text = string.Empty;
                 labValue.Text = string.Empty;
+                geocodedRange = 0;
             }
             else
             {
@@ -171,6 +173,7 @@ namespace FTAnalyzer.Forms
                 labMin.Text = minGeoCodedYear.ToString();
                 labMax.Text = maxGeoCodedYear.ToString();
                 labValue.Text = tbYears.Value.ToString();
+                geocodedRange = maxGeoCodedYear - minGeoCodedYear;
             }
         }
 
@@ -428,10 +431,13 @@ namespace FTAnalyzer.Forms
 
         private void btnBack10_Click(object sender, EventArgs e)
         {
-            if (tbYears.Value < tbYears.Minimum + 10)
+            int step = 10;
+            if (geocodedRange <= 150)
+                step = 5;
+            if (tbYears.Value < tbYears.Minimum + step)
                 tbYears.Value = tbYears.Minimum;
             else
-                tbYears.Value -= 10;
+                tbYears.Value -= step;
             UpdateMap();
         }
 
@@ -451,10 +457,13 @@ namespace FTAnalyzer.Forms
 
         private void btnForward10_Click(object sender, EventArgs e)
         {
-            if (tbYears.Value > tbYears.Maximum - 10)
+            int step = 10;
+            if (geocodedRange <= 150)
+                step = 5;
+            if (tbYears.Value > tbYears.Maximum - step)
                 tbYears.Value = tbYears.Maximum;
             else
-                tbYears.Value += 10;
+                tbYears.Value += step;
             UpdateMap();
         }
 
