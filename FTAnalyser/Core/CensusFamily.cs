@@ -101,7 +101,7 @@ namespace FTAnalyzer
         {
             if (MarriageDate.StartDate > CensusDate.EndDate)
                 return false;
-            if (FamilyID == "IND")
+            if (FamilyID == Family.SOLOINDIVIDUAL)
                 return true; // allow solo individual families to be processed
             // don't process family if either parent is under 16
             //if(Husband != null) rtb.AppendText("Husband : " + Husband.getAge(censusDate) + "\n");
