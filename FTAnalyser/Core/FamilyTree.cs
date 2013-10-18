@@ -37,6 +37,8 @@ namespace FTAnalyzer
 
         public bool Geocoding { get; set; }
 
+        #region Static Functions
+
         private FamilyTree()
         {
             ResetData();
@@ -53,8 +55,6 @@ namespace FTAnalyzer
                 return instance;
             }
         }
-
-        #region Static Functions
 
         public static string GetText(XmlNode node)
         {

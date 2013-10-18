@@ -646,7 +646,6 @@ namespace FTAnalyzer
                 if (f.FactDate.IsKnown)
                 {
                     double distance = Math.Abs(f.FactDate.BestYear - when.BestYear);
-                    Console.WriteLine(f.FactDate + " : " + distance);
                     if (distance < limit)
                     {
                         if (distance < minDistance && !f.Location.location.Equals(string.Empty))

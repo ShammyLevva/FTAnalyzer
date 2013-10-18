@@ -92,6 +92,7 @@
             this.dgCensus.Location = new System.Drawing.Point(0, 28);
             this.dgCensus.Name = "dgCensus";
             this.dgCensus.ReadOnly = true;
+            this.dgCensus.RowHeadersWidth = 23;
             this.dgCensus.ShowEditingIcon = false;
             this.dgCensus.ShowRowErrors = false;
             this.dgCensus.Size = new System.Drawing.Size(1038, 530);

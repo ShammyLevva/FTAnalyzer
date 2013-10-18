@@ -173,8 +173,8 @@ namespace FTAnalyzer.Forms
                         if (!results.ContainsKey(key))
                         {
                             results[key] = new List<IDisplayGeocodedLocation>();
-                            if (!GoogleMap.RESULT_TYPES.Contains(key))
-                                Console.WriteLine("Adding new type : " + key);
+                            //if (!GoogleMap.RESULT_TYPES.Contains(key))
+                            //    Console.WriteLine("Adding new type : " + key);
                         }
                         results[key].Add(loc);
                     }
@@ -380,10 +380,7 @@ namespace FTAnalyzer.Forms
                 foreach (FactLocation loc in FactLocation.AllLocations)
                 {
                     if (loc.IsGeoCoded)
-                    {
                         geocoded++;
-                        //Console.WriteLine("Already Geocoded : " + loc.ToString());
-                    }
                     else
                     {
                         cmd.Parameters[0].Value = loc.ToString();
@@ -488,7 +485,6 @@ namespace FTAnalyzer.Forms
                             else
                             {
                                 skipped++;
-                                //Console.WriteLine("Skipped : " + loc.ToString());
                             }
                         }
                         reader.Close();

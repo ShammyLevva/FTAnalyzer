@@ -395,11 +395,9 @@ namespace FTAnalyzer
         private void btnShowCensus_Click(object sender, EventArgs e)
         {
             Predicate<CensusIndividual> filter = CreateCensusIndividualFilter();
-            IComparer<CensusIndividual> censusComparator;
-            Census census = new Census(false, cenDate.CensusCountry);
-            censusComparator = new DefaultCensusComparer();
+            Census census = new Census(censusDate, cenDate.CensusCountry);
             bool censusDone = sender == btnShowCensusEntered;
-            census.SetupCensus(filter, censusComparator, censusDate, censusDone);
+            census.SetupCensus(filter, censusDone);
             if(censusDone)
                 census.Text = "People entered with a " + censusDate.StartDate.Year.ToString() + " " + cenDate.CensusCountry + " Census Record";
             else
@@ -563,15 +561,14 @@ namespace FTAnalyzer
             Func<CensusIndividual, FactDate> registrationDate = x => x.CensusDate;
             Predicate<CensusIndividual> relation = x => x.IsBloodDirect;
             Predicate<CensusIndividual> dateFilter = FilterUtils.DateFilter<CensusIndividual>(registrationDate, censusDate);
-            IComparer<CensusIndividual> comparer = new DefaultCensusComparer();
-            Census census = new Census(true, location);
+            Census census = new Census(censusDate, location);
 
             if (ckbRestrictions.Checked)
                 filter = FilterUtils.AndFilter<CensusIndividual>(dateFilter, filter, relation);
             else
                 filter = FilterUtils.AndFilter<CensusIndividual>(dateFilter, filter);
 
-            census.SetupLCCensus(filter, comparer, censusDate, true, ckbShowLCEntered.Checked);
+            census.SetupLCCensus(filter, ckbShowLCEntered.Checked);
             if (ckbShowLCEntered.Checked)
                 census.Text = reportTitle + " already entered into Lost Cousins website";
             else

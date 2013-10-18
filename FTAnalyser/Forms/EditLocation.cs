@@ -123,7 +123,6 @@ namespace FTAnalyzer.Forms
             if (iconSelected && e.Button == MouseButtons.Right)
             {
                 // we have finished and are saving icon
-                Console.WriteLine("Arrived :" + e.X + ", " + e.Y);
                 mapBox1.Cursor = Cursors.Default;
                 GeoAPI.Geometries.Coordinate c = mapBox1.Map.ImageToWorld(new PointF(e.X, e.Y + 17.0f));
                 c = transform.Transform(c);

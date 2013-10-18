@@ -20,19 +20,21 @@ namespace FTAnalyzer.Forms
         private string censusCountry;
         private ReportFormHelper reportFormHelper;
         private IComparer<CensusIndividual> comparer;
+        private FamilyTree ft;
 
         public bool LostCousins { get; private set; }
 
-        public Census(bool lostCousins, string censusCountry)
+        public Census(FactDate censusDate, string censusCountry)
         {
             InitializeComponent();
             dgCensus.AutoGenerateColumns = false;
-
+            ft = FamilyTree.Instance;
             reportFormHelper = new ReportFormHelper("Census Report", dgCensus, this.ResetTable);
 
-            this.LostCousins = lostCousins;
-
+            this.LostCousins = false;
+            this.CensusDate = censusDate;
             this.censusCountry = censusCountry;
+            this.comparer = new DefaultCensusComparer();
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
             {
@@ -41,23 +43,33 @@ namespace FTAnalyzer.Forms
             cbCensusSearchProvider.Text = defaultProvider;
         }
 
-        public void SetupCensus(Predicate<CensusIndividual> filter, IComparer<CensusIndividual> comparer,
-                FactDate censusDate, bool censusDone)
+        public void SetupCensus(Predicate<CensusIndividual> filter, bool censusDone)
         {
-            this.CensusDate = censusDate;
-            this.comparer = comparer;
-            IEnumerable<CensusFamily> censusFamilies = FamilyTree.Instance.GetAllCensusFamilies(censusDate, censusDone);
+            IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, censusDone);
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Where(filter).ToList();
+            SetupDataGridView(censusDone, individuals);
+        }
+
+        public void SetupLCCensus(Predicate<CensusIndividual> filter, bool showEnteredLostCousins)
+        {
+            this.LostCousins = true;
+            if (!showEnteredLostCousins)
+            {
+                IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, true);
+                IEnumerable<CensusIndividual> onCensus = censusFamilies.SelectMany(f => f.Members).Where(filter);
+                Predicate<CensusIndividual> predicate = x => x.IsLostCousinEntered(CensusDate, censusCountry);
+                List<CensusIndividual> individuals = onCensus.Where(predicate).ToList<CensusIndividual>();
+                SetupDataGridView(true, individuals);
+            }
+        }
+
+        private void SetupDataGridView(bool censusDone, List<CensusIndividual> individuals)
+        {
             dgCensus.DataSource = individuals;
             if (!censusDone)
                 dgCensus.Columns["CensusReference"].Visible = false;
             reportFormHelper.LoadColumnLayout("CensusColumns.xml");
             tsRecords.Text = individuals.Count + " Records / " + numFamilies + " Families.";
-        }
-
-        public void SetupLCCensus(Predicate<CensusIndividual> filter, IComparer<CensusIndividual> comparer,
-                                    FactDate date, bool censusDone, bool showEnteredLostCousins)
-        {
         }
 
         private void ResetTable()
