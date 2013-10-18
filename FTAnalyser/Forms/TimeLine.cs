@@ -185,8 +185,11 @@ namespace FTAnalyzer.Forms
             int.TryParse(year, out result);
             if (year.Length == 4 && result != 0)
             {
-                FactDate yearDate = new FactDate(year);
-                List<MapLocation> locations = FilterToRelationsIncluded(ft.YearMapLocations(yearDate));
+                List<MapLocation> locations;
+                if (result == 9999)
+                    locations = FilterToRelationsIncluded(ft.AllMapLocations);
+                else
+                    locations = FilterToRelationsIncluded(ft.YearMapLocations(new FactDate(year)));
                 txtLocations.Text = locations.Count() + " Locations";
                 factLocations.Clear();
                 Envelope bbox = new Envelope();
@@ -206,9 +209,8 @@ namespace FTAnalyzer.Forms
                     mapBox1.Map.ZoomToBox(expand);
                     expand.ExpandBy(mapBox1.Map.PixelSize * 20);
                     mapBox1.Map.ZoomToBox(expand);
-                    RefreshClusters();
                 }
-                mapBox1.Refresh();
+                RefreshTimeline();
             }
         }
 
@@ -248,8 +250,10 @@ namespace FTAnalyzer.Forms
         {
             this.Cursor = Cursors.WaitCursor;
             labValue.Text = tbYears.Value.ToString();
-            DisplayLocationsForYear(labValue.Text);
-            RefreshTimeline();
+            if (mnuDisableTimeline.Checked)
+                DisplayLocationsForYear("9999");
+            else
+                DisplayLocationsForYear(labValue.Text);
             this.Cursor = Cursors.Default;
         }
 
@@ -441,16 +445,39 @@ namespace FTAnalyzer.Forms
         private void btnForward1_Click(object sender, EventArgs e)
         {
             if (tbYears.Value != tbYears.Maximum)
-                tbYears.Value += 1;     
+                tbYears.Value += 1;
             UpdateMap();
         }
 
         private void btnForward10_Click(object sender, EventArgs e)
         {
-            if (tbYears.Value > tbYears.Maximum -10)
+            if (tbYears.Value > tbYears.Maximum - 10)
                 tbYears.Value = tbYears.Maximum;
             else
                 tbYears.Value += 10;
+            UpdateMap();
+        }
+
+        private void mnuDisableTimeline_Click(object sender, EventArgs e)
+        {
+            tbYears.Visible = !mnuDisableTimeline.Checked;
+            btnBack1.Visible = !mnuDisableTimeline.Checked;
+            btnBack10.Visible = !mnuDisableTimeline.Checked;
+            btnForward1.Visible = !mnuDisableTimeline.Checked;
+            btnForward10.Visible = !mnuDisableTimeline.Checked;
+            btnPlay.Visible = !mnuDisableTimeline.Checked;
+            btnStop.Visible = !mnuDisableTimeline.Checked;
+            labValue.Visible = !mnuDisableTimeline.Checked;
+            labMin.Visible = !mnuDisableTimeline.Checked;
+            labMax.Visible = !mnuDisableTimeline.Checked;
+            label1.Visible = !mnuDisableTimeline.Checked;
+            toolStripLabel1.Visible = !mnuDisableTimeline.Checked;
+            toolStripLabel2.Visible = !mnuDisableTimeline.Checked;
+            txtTimeInterval.Visible = !mnuDisableTimeline.Checked;
+            if (mnuDisableTimeline.Checked)
+                StopTimer(); // make sure we aren't playing timeline if we disable timeline
+            txtLocations.Text = string.Empty; // set empty so looks better during redraw
+            Application.DoEvents(); // force screen refresh
             UpdateMap();
         }
     }

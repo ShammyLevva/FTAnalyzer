@@ -69,6 +69,7 @@
             this.btnForward1 = new System.Windows.Forms.Button();
             this.btnBack10 = new System.Windows.Forms.Button();
             this.btnForward10 = new System.Windows.Forms.Button();
+            this.mnuDisableTimeline = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -196,7 +197,8 @@
             // 
             this.mnuOptions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuRetryPartial,
-            this.mnuKeepZoom});
+            this.mnuKeepZoom,
+            this.mnuDisableTimeline});
             this.mnuOptions.Name = "mnuOptions";
             this.mnuOptions.Size = new System.Drawing.Size(61, 20);
             this.mnuOptions.Text = "Options";
@@ -205,14 +207,14 @@
             // 
             this.mnuRetryPartial.CheckOnClick = true;
             this.mnuRetryPartial.Name = "mnuRetryPartial";
-            this.mnuRetryPartial.Size = new System.Drawing.Size(231, 22);
+            this.mnuRetryPartial.Size = new System.Drawing.Size(264, 22);
             this.mnuRetryPartial.Text = "Retry Partially Geocoded";
             // 
             // mnuKeepZoom
             // 
             this.mnuKeepZoom.CheckOnClick = true;
             this.mnuKeepZoom.Name = "mnuKeepZoom";
-            this.mnuKeepZoom.Size = new System.Drawing.Size(231, 22);
+            this.mnuKeepZoom.Size = new System.Drawing.Size(264, 22);
             this.mnuKeepZoom.Text = "Keep Zoom on changing Year";
             // 
             // tbYears
@@ -463,6 +465,14 @@
             this.btnForward10.UseVisualStyleBackColor = true;
             this.btnForward10.Click += new System.EventHandler(this.btnForward10_Click);
             // 
+            // mnuDisableTimeline
+            // 
+            this.mnuDisableTimeline.CheckOnClick = true;
+            this.mnuDisableTimeline.Name = "mnuDisableTimeline";
+            this.mnuDisableTimeline.Size = new System.Drawing.Size(264, 22);
+            this.mnuDisableTimeline.Text = "Disable Timeline Show All Locations";
+            this.mnuDisableTimeline.Click += new System.EventHandler(this.mnuDisableTimeline_Click);
+            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -539,5 +549,6 @@
         private System.Windows.Forms.Button btnForward1;
         private System.Windows.Forms.Button btnBack10;
         private System.Windows.Forms.Button btnForward10;
+        private System.Windows.Forms.ToolStripMenuItem mnuDisableTimeline;
     }
 }
