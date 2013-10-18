@@ -897,7 +897,6 @@
             this.ckbShowLCEntered.Text = "Show already entered to Lost Cousins (unticked = show those to yet to be entered)" +
                 "";
             this.ckbShowLCEntered.UseVisualStyleBackColor = true;
-            this.ckbShowLCEntered.Visible = false;
             // 
             // ckbRestrictions
             // 
