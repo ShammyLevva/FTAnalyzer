@@ -1,6 +1,7 @@
 ﻿using NetTopologySuite.Geometries;
 using SharpMap.Data;
 using System.Drawing;
+using GeoAPI.Geometries;
 
 namespace FTAnalyzer.Mapping
 {
