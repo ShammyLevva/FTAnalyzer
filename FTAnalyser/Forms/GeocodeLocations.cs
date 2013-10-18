@@ -371,7 +371,7 @@ namespace FTAnalyzer.Forms
 
                 int count = 0;
                 int good = 0;
-                int bad = 0;
+                int partial = 0;
                 int geocoded = 0;
                 int skipped = 0;
                 int total = FactLocation.AllLocations.Count() - 1;
@@ -431,12 +431,14 @@ namespace FTAnalyzer.Forms
                                     }
                                     if (loc.GeocodeStatus != FactLocation.Geocode.MATCHED)
                                     {   // we checked all the google results and no joy so take first result as partial match
+                                        foundLevel = GoogleMap.GetFactLocation(res.Results[0].Types);
+                                        address = res.Results[0].ReturnAddress;
                                         latitude = res.Results[0].Geometry.Location.Lat;
                                         longitude = res.Results[0].Geometry.Location.Long;
                                         viewport = res.Results[0].Geometry.ViewPort;
                                         resultType = EnhancedTextInfo.ConvertStringArrayToString(res.Results[0].Types);
                                         loc.GeocodeStatus = FactLocation.Geocode.PARTIAL_MATCH;
-                                        bad++;
+                                        partial++;
                                     }
 
                                 }
@@ -444,7 +446,6 @@ namespace FTAnalyzer.Forms
                                 {
                                     skipped++;
                                     foundLevel = -2;
-
                                 }
                                 if (inDatabase)
                                 {
@@ -494,7 +495,7 @@ namespace FTAnalyzer.Forms
                     }
                     count++;
                     int percent = (int)Math.Truncate((count - 1) * 100.0 / total);
-                    string status = "Googled " + good + " good, " + bad + " partial. Skip " + geocoded + " prev found and " + skipped + " partial/not found. Done " + (count - 1) +
+                    string status = "Googled " + good + " good, " + partial + " partial. Skip " + geocoded + " prev found and " + skipped + " partial/not found. Done " + (count - 1) +
                             " of " + total + ".  ";
                     worker.ReportProgress(percent, status);
 
