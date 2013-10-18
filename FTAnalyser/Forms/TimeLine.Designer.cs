@@ -487,6 +487,7 @@
             // cbLimitFactDates
             // 
             this.cbLimitFactDates.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbLimitFactDates.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLimitFactDates.Items.AddRange(new object[] {
             "No Limit",
             "Exact year only",
@@ -498,7 +499,7 @@
             "+/-100 years"});
             this.cbLimitFactDates.Name = "cbLimitFactDates";
             this.cbLimitFactDates.Size = new System.Drawing.Size(121, 23);
-            this.cbLimitFactDates.Text = "No Limit";
+            this.cbLimitFactDates.SelectedIndexChanged += new System.EventHandler(this.cbLimitFactDates_SelectedIndexChanged);
             // 
             // TimeLine
             // 

@@ -615,6 +615,20 @@ namespace FTAnalyzer
             get { return !this.Equals(UNKNOWN_DATE); }
         }
 
+        public int BestYear
+        {
+            get
+            {
+                if (!IsKnown)
+                    return 0;
+                if (StartDate == MINDATE)
+                    return EndDate.Year;
+                if (EndDate == MAXDATE)
+                    return StartDate.Year;
+                return StartDate.Year + (int)((EndDate.Year - StartDate.Year) / 2);
+            }
+        }
+
         public double Distance(FactDate when)
         {
             double startDiff = ((this.StartDate.Year - when.StartDate.Year) * 12) + (this.StartDate.Month - when.StartDate.Month);

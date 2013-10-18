@@ -24,6 +24,7 @@ namespace FTAnalyzer.Forms
         private int minGeoCodedYear;
         private int maxGeoCodedYear;
         private int geocodedRange;
+        private int yearLimit;
         private FeatureDataTable factLocations;
         private VectorLayer clusterLayer;
         private LabelLayer labelLayer;
@@ -40,6 +41,7 @@ namespace FTAnalyzer.Forms
             backgroundColour = mapZoomToolStrip.Items[0].BackColor;
             mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(mapBox1_MapViewOnChange);
             ft = FamilyTree.Instance;
+            cbLimitFactDates.Text = "No Limit";
             CheckIfGeocodingNeeded();
         }
 
@@ -192,7 +194,7 @@ namespace FTAnalyzer.Forms
                 if (result == 9999)
                     locations = FilterToRelationsIncluded(ft.AllMapLocations);
                 else
-                    locations = FilterToRelationsIncluded(ft.YearMapLocations(new FactDate(year)));
+                    locations = FilterToRelationsIncluded(ft.YearMapLocations(new FactDate(year), yearLimit));
                 txtLocations.Text = locations.Count() + " Locations";
                 factLocations.Clear();
                 Envelope bbox = new Envelope();
@@ -488,6 +490,38 @@ namespace FTAnalyzer.Forms
             txtLocations.Text = string.Empty; // set empty so looks better during redraw
             Application.DoEvents(); // force screen refresh
             UpdateMap();
+        }
+
+        private void cbLimitFactDates_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            yearLimit = GetYearLimit();
+            UpdateMap();
+        }
+
+        private int GetYearLimit()
+        {
+            //check the 
+            switch (cbLimitFactDates.Text)
+            {
+                case "No Limit":
+                    return int.MaxValue;
+                case "Exact year only":
+                    return 1;
+                case "+/- 2 years":
+                    return 2;
+                case "+/- 5 years":
+                    return 5;
+                case "+/-10 years":
+                    return 10;
+                case "+/-20 years":
+                    return 20;
+                case "+/-50 years":
+                    return 50;
+                case "+/-100 years":
+                    return 100;
+                default:
+                    return int.MaxValue;
+            }
         }
     }
 }

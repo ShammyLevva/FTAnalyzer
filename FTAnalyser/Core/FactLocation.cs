@@ -636,21 +636,27 @@ namespace FTAnalyzer
             return addressField;
         }
 
-        public static Fact BestFact(IEnumerable<Fact> facts, FactDate when)
+        public static Fact BestFact(IEnumerable<Fact> facts, FactDate when, int limit)
         {
             // this returns a Fact for a FactLocation a person was at for a given period
             Fact result = new Fact(Fact.UNKNOWN, FactDate.UNKNOWN_DATE);
             double minDistance = float.MaxValue;
             foreach (Fact f in facts)
             {
-                double distance = Math.Sqrt(Math.Pow((double)(f.FactDate.StartDate.Year - when.StartDate.Year), 2.0) +
-                    Math.Pow((double)(f.FactDate.EndDate.Year - when.EndDate.Year), 2.0));
-                if (distance < minDistance && !f.Location.location.Equals(string.Empty))
-                { // this is a closer date but now check to ensure we aren't overwriting a known country with an unknown one.
-                    if (f.Location.isKnownCountry || (!f.Location.isKnownCountry && !result.Location.isKnownCountry))
+                if (f.FactDate.IsKnown)
+                {
+                    double distance = Math.Abs(f.FactDate.BestYear - when.BestYear);
+                    Console.WriteLine(f.FactDate + " : " + distance);
+                    if (distance < limit)
                     {
-                        result = f;
-                        minDistance = distance;
+                        if (distance < minDistance && !f.Location.location.Equals(string.Empty))
+                        { // this is a closer date but now check to ensure we aren't overwriting a known country with an unknown one.
+                            if (f.Location.isKnownCountry || (!f.Location.isKnownCountry && !result.Location.isKnownCountry))
+                            {
+                                result = f;
+                                minDistance = distance;
+                            }
+                        }
                     }
                 }
             }
@@ -659,7 +665,7 @@ namespace FTAnalyzer
 
         public static FactLocation BestLocation(IEnumerable<Fact> facts, FactDate when)
         {
-            Fact result = BestFact(facts, when);
+            Fact result = BestFact(facts, when, int.MaxValue);
             return result.Location;
         }
 

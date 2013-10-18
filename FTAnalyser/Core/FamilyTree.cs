@@ -373,14 +373,14 @@ namespace FTAnalyzer
             }
         }
 
-        public List<MapLocation> YearMapLocations(FactDate when)
+        public List<MapLocation> YearMapLocations(FactDate when, int limit)
         {
             List<MapLocation> result = new List<MapLocation>();
             foreach (Individual ind in individuals)
             {
                 if (ind.IsAlive(when) && ind.GetMaxAge(when) < 110)
                 {
-                    Fact fact = ind.BestFact(when);
+                    Fact fact = ind.BestFact(when, limit);
                     FactLocation loc = fact.Location;
                     if (loc.IsGeoCoded)
                         result.Add(new MapLocation(ind, fact, when));
