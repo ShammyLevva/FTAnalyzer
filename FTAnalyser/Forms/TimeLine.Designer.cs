@@ -417,6 +417,7 @@
             // 
             // btnBack1
             // 
+            this.btnBack1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnBack1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack1.Location = new System.Drawing.Point(299, 47);
             this.btnBack1.Name = "btnBack1";
@@ -428,6 +429,7 @@
             // 
             // btnForward1
             // 
+            this.btnForward1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnForward1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnForward1.Location = new System.Drawing.Point(492, 47);
             this.btnForward1.Name = "btnForward1";
@@ -439,6 +441,7 @@
             // 
             // btnBack10
             // 
+            this.btnBack10.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnBack10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack10.Location = new System.Drawing.Point(264, 47);
             this.btnBack10.Name = "btnBack10";
@@ -450,6 +453,7 @@
             // 
             // btnForward10
             // 
+            this.btnForward10.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnForward10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnForward10.Location = new System.Drawing.Point(521, 47);
             this.btnForward10.Name = "btnForward10";
