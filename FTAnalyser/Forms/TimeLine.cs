@@ -491,6 +491,7 @@ namespace FTAnalyzer.Forms
             toolStripLabel2.Visible = !mnuDisableTimeline.Checked;
             txtTimeInterval.Visible = !mnuDisableTimeline.Checked;
             mnuLimitFactDates.Enabled = !mnuDisableTimeline.Checked;
+            mnuKeepZoom.Enabled = !mnuDisableTimeline.Checked;
             if (mnuDisableTimeline.Checked)
                 StopTimer(); // make sure we aren't playing timeline if we disable timeline
             txtLocations.Text = string.Empty; // set empty so looks better during redraw

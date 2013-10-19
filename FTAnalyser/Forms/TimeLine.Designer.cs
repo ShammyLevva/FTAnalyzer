@@ -199,8 +199,8 @@
             // 
             this.mnuOptions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuRetryPartial,
-            this.mnuKeepZoom,
             this.mnuDisableTimeline,
+            this.mnuKeepZoom,
             this.mnuLimitFactDates});
             this.mnuOptions.Name = "mnuOptions";
             this.mnuOptions.Size = new System.Drawing.Size(61, 20);
@@ -210,8 +210,8 @@
             // 
             this.mnuRetryPartial.CheckOnClick = true;
             this.mnuRetryPartial.Name = "mnuRetryPartial";
-            this.mnuRetryPartial.Size = new System.Drawing.Size(264, 22);
-            this.mnuRetryPartial.Text = "Retry Partially Geocoded";
+            this.mnuRetryPartial.Size = new System.Drawing.Size(296, 22);
+            this.mnuRetryPartial.Text = "Retry Partially Geocoded when Geocoding";
             // 
             // mnuKeepZoom
             // 
