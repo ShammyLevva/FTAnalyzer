@@ -47,8 +47,11 @@ namespace FTAnalyzer
         //Database online. Class: HO107; Piece: 1782; Folio: 719; Page: 25; GSU
         //Database online. Class: RG9; Piece: 1105; Folio: 90; Page: 21; GSU
         //RG14PN22623 RG78PN1327 RD455 SD10 ED13 SN183
-        private static readonly string CENSUS_PATTERN = "Class: ([RGHO]{1,3}\\d{2,3}); Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3}); GSU";
-        private static readonly string CENSUS_1911_PATTERN = "^RG14PN(\\d{1,6}) .*SN(\\d{1,3})$";
+        //Parish: Inverurie; ED: 4; Page: 12; Line: 3; Roll: CSSCT1901_69
+        private static readonly string EW_CENSUS_PATTERN = "Class: ([RGHO]{1,3}\\d{2,3}); Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3}); GSU";
+        private static readonly string EW_CENSUS_1911_PATTERN = "^RG14PN(\\d{1,6}) .*SN(\\d{1,3})$";
+        private static readonly string SCOT_CENSUS_PATTERN = "Parish: ([A-Za-z]+); ED: (\\d{1,3}); Page: (\\d{1,4}); Line: (\\d{1,2}); Roll: CSSCT";
+        private static readonly string SCOT_CENSUS_PATTERN2 = "(\\d{3}/\\d{2}) (\\d{3}/\\d{2}) (\\d{3,4})";
 
         static Fact()
         {
@@ -188,6 +191,8 @@ namespace FTAnalyzer
         public string Folio { get; private set; }
         public string Page { get; private set; }
         public string Schedule { get; private set; }
+        public string Parish { get; private set; }
+        public string ED { get; private set; }
         public Age GedcomAge { get; private set; }
         public bool Created { get; protected set; }
 
@@ -208,6 +213,8 @@ namespace FTAnalyzer
             this.Folio = string.Empty;
             this.Page = string.Empty;
             this.Schedule = string.Empty;
+            this.Parish = string.Empty;
+            this.ED = string.Empty;
             this.GedcomAge = null;
             this.Created = false;
         }
@@ -265,23 +272,7 @@ namespace FTAnalyzer
                             else
                                 ft.XmlErrorBox.AppendText("Source " + srcref + " not found." + "\n");
                         }
-                        string text = FamilyTree.GetText(n, "PAGE");
-                        if (text.Length > 0)
-                        {
-                            Match matcher = Regex.Match(text, CENSUS_PATTERN);
-                            if (matcher.Success)
-                            {
-                                this.Piece = matcher.Groups[2].ToString();
-                                this.Folio = matcher.Groups[3].ToString();
-                                this.Page = matcher.Groups[4].ToString();
-                            }
-                            matcher = Regex.Match(text, CENSUS_1911_PATTERN);
-                            if (matcher.Success)
-                            {
-                                this.Page = matcher.Groups[1].ToString();
-                                this.Schedule = matcher.Groups[2].ToString();
-                            }
-                        }
+                        GetCensusReference(n);
                     }
                     if (FactType == DEATH)
                     {
@@ -296,6 +287,41 @@ namespace FTAnalyzer
                 {
                     string message = (node == null) ? "" : node.InnerText + ". ";
                     throw new InvalidXMLFactException(message + "\n            Error " + ex.Message + "\n");
+                }
+            }
+        }
+
+        private void GetCensusReference(XmlNode n)
+        {
+            string text = FamilyTree.GetText(n, "PAGE");
+            if (text.Length > 0)
+            {
+                Match matcher = Regex.Match(text, SCOT_CENSUS_PATTERN);
+                if (matcher.Success)
+                {
+                    this.Parish = matcher.Groups[1].ToString();
+                    this.ED = matcher.Groups[2].ToString();
+                    this.Page = matcher.Groups[3].ToString();
+                }
+                matcher = Regex.Match(text, SCOT_CENSUS_PATTERN2);
+                if (matcher.Success)
+                {
+                    this.Parish = matcher.Groups[1].ToString().Replace("/00","").Replace("/","-");
+                    this.ED = matcher.Groups[2].ToString().Replace("/00", "").TrimStart('0');
+                    this.Page = matcher.Groups[3].ToString().TrimStart('0');
+                }
+                matcher = Regex.Match(text, EW_CENSUS_PATTERN);
+                if (matcher.Success)
+                {
+                    this.Piece = matcher.Groups[2].ToString();
+                    this.Folio = matcher.Groups[3].ToString();
+                    this.Page = matcher.Groups[4].ToString();
+                }
+                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN);
+                if (matcher.Success)
+                {
+                    this.Page = matcher.Groups[1].ToString();
+                    this.Schedule = matcher.Groups[2].ToString();
                 }
             }
         }
@@ -543,7 +569,7 @@ namespace FTAnalyzer
                     if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1881))
                         return "Piece: " + Piece + ", Folio: " + Folio + ", Page: " + Page;
                     if (Location.Country.Equals(Countries.SCOTLAND) && FactDate.Overlaps(CensusDate.UKCENSUS1881))
-                        return "Scotland Census references not yet available"; // "Volume/Registration number: 
+                        return "Parish: " + Parish + Parishes.Reference(Parish) + " ED: " + ED + ", Page: " + Page;
                     if (Location.Country.Equals(Countries.CANADA) && FactDate.Overlaps(CensusDate.CANADACENSUS1881))
                         return "Canada Census references not yet available";
                     if (Location.Country.Equals(Countries.UNITED_STATES) && FactDate.Overlaps(CensusDate.USCENSUS1880))

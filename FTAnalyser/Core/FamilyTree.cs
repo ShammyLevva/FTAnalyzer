@@ -62,7 +62,10 @@ namespace FTAnalyzer
             {
                 return "";
             }
-            return node.FirstChild.Value.Trim();
+            if (node.Name.Equals("PAGE"))
+                return node.InnerText.Trim();
+            else
+                return node.FirstChild.Value.Trim();
         }
 
         public static string GetText(XmlNode node, string tag)
