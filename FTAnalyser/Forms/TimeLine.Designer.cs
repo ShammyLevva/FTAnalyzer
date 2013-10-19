@@ -66,7 +66,6 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnPlay = new System.Windows.Forms.ToolStripButton();
             this.btnStop = new System.Windows.Forms.ToolStripButton();
-            this.label1 = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.btnBack1 = new System.Windows.Forms.Button();
             this.btnForward1 = new System.Windows.Forms.Button();
@@ -84,7 +83,7 @@
             this.txtLocations});
             this.statusStrip1.Location = new System.Drawing.Point(0, 562);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(920, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(921, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -102,7 +101,7 @@
             this.mnuOptions});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(920, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(921, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -258,7 +257,7 @@
             this.tbYears.Dock = System.Windows.Forms.DockStyle.Top;
             this.tbYears.Location = new System.Drawing.Point(0, 24);
             this.tbYears.Name = "tbYears";
-            this.tbYears.Size = new System.Drawing.Size(920, 45);
+            this.tbYears.Size = new System.Drawing.Size(921, 45);
             this.tbYears.TabIndex = 3;
             this.tbYears.TickFrequency = 5;
             this.tbYears.Scroll += new System.EventHandler(this.tbYears_Scroll);
@@ -277,7 +276,7 @@
             // 
             this.labMax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labMax.AutoSize = true;
-            this.labMax.Location = new System.Drawing.Point(882, 52);
+            this.labMax.Location = new System.Drawing.Point(883, 52);
             this.labMax.Name = "labMax";
             this.labMax.Size = new System.Drawing.Size(35, 13);
             this.labMax.TabIndex = 5;
@@ -312,7 +311,7 @@
             this.mapBox1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.ShowProgressUpdate = true;
-            this.mapBox1.Size = new System.Drawing.Size(920, 468);
+            this.mapBox1.Size = new System.Drawing.Size(921, 468);
             this.mapBox1.TabIndex = 7;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
@@ -338,7 +337,7 @@
             this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 69);
             this.mapZoomToolStrip.MapControl = this.mapBox1;
             this.mapZoomToolStrip.Name = "mapZoomToolStrip";
-            this.mapZoomToolStrip.Size = new System.Drawing.Size(920, 25);
+            this.mapZoomToolStrip.Size = new System.Drawing.Size(921, 25);
             this.mapZoomToolStrip.TabIndex = 8;
             this.mapZoomToolStrip.Text = "MapZoomToolStrip";
             // 
@@ -437,17 +436,6 @@
             this.btnStop.Visible = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(328, 52);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Currently Viewing:";
-            // 
             // timer
             // 
             this.timer.Interval = 2000;
@@ -457,7 +445,7 @@
             // 
             this.btnBack1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnBack1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBack1.Location = new System.Drawing.Point(299, 47);
+            this.btnBack1.Location = new System.Drawing.Point(410, 47);
             this.btnBack1.Name = "btnBack1";
             this.btnBack1.Size = new System.Drawing.Size(23, 22);
             this.btnBack1.TabIndex = 10;
@@ -481,7 +469,7 @@
             // 
             this.btnBack10.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnBack10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBack10.Location = new System.Drawing.Point(264, 47);
+            this.btnBack10.Location = new System.Drawing.Point(375, 47);
             this.btnBack10.Name = "btnBack10";
             this.btnBack10.Size = new System.Drawing.Size(29, 22);
             this.btnBack10.TabIndex = 12;
@@ -505,12 +493,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(920, 584);
+            this.ClientSize = new System.Drawing.Size(921, 584);
             this.Controls.Add(this.btnForward10);
             this.Controls.Add(this.btnBack10);
             this.Controls.Add(this.btnForward1);
             this.Controls.Add(this.btnBack1);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.mapBox1);
             this.Controls.Add(this.mapZoomToolStrip);
             this.Controls.Add(this.labValue);
@@ -558,7 +545,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuRetryPartial;
         private System.Windows.Forms.ToolStripMenuItem mnuOptions;
         private System.Windows.Forms.ToolStripMenuItem mnuKeepZoom;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripButton btnSelect;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem menuMap;

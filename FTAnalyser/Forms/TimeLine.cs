@@ -433,7 +433,6 @@ namespace FTAnalyzer.Forms
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
         }
 
-
         private void mapBox1_ActiveToolChanged(SharpMap.Forms.MapBox.Tools tool)
         {
             if (mapBox1.ActiveTool != SharpMap.Forms.MapBox.Tools.QueryPoint)
@@ -490,7 +489,6 @@ namespace FTAnalyzer.Forms
             labValue.Visible = !mnuDisableTimeline.Checked;
             labMin.Visible = !mnuDisableTimeline.Checked;
             labMax.Visible = !mnuDisableTimeline.Checked;
-            label1.Visible = !mnuDisableTimeline.Checked;
             toolStripLabel1.Visible = !mnuDisableTimeline.Checked;
             toolStripLabel2.Visible = !mnuDisableTimeline.Checked;
             txtTimeInterval.Visible = !mnuDisableTimeline.Checked;
