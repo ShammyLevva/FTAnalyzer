@@ -41,7 +41,7 @@ namespace FTAnalyzer
 
         private void ResetTable()
         {
-            //dgIndividuals.Sort(dgIndividuals.Columns["Location"], ListSortDirection.Ascending);
+            dgIndividuals.Sort(dgIndividuals.Columns["Ind_ID"], ListSortDirection.Ascending);
             dgIndividuals.AutoResizeColumns();
         }
 

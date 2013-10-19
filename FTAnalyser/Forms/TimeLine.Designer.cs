@@ -35,8 +35,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.geocodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.geocodeLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.playTimelineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.relationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.directAncestorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bloodRelativesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,9 +106,7 @@
             // geocodeToolStripMenuItem
             // 
             this.geocodeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.geocodeLocationsToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.playTimelineToolStripMenuItem});
+            this.geocodeLocationsToolStripMenuItem});
             this.geocodeToolStripMenuItem.Name = "geocodeToolStripMenuItem";
             this.geocodeToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.geocodeToolStripMenuItem.Text = "Process";
@@ -122,19 +118,6 @@
             this.geocodeLocationsToolStripMenuItem.Text = "Geocode Locations";
             this.geocodeLocationsToolStripMenuItem.ToolTipText = "Looks up map co-ordinates for locations in your file";
             this.geocodeLocationsToolStripMenuItem.Click += new System.EventHandler(this.geocodeLocationsToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(172, 6);
-            this.toolStripSeparator1.Visible = false;
-            // 
-            // playTimelineToolStripMenuItem
-            // 
-            this.playTimelineToolStripMenuItem.Name = "playTimelineToolStripMenuItem";
-            this.playTimelineToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.playTimelineToolStripMenuItem.Text = "Play Timeline";
-            this.playTimelineToolStripMenuItem.Visible = false;
             // 
             // relationsToolStripMenuItem
             // 
@@ -549,8 +532,6 @@
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem menuMap;
         private System.Windows.Forms.ToolStripMenuItem menuSatellite;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem playTimelineToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton btnPlay;
         private System.Windows.Forms.ToolStripButton btnStop;
         private System.Windows.Forms.Timer timer;

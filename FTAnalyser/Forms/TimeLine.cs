@@ -199,12 +199,12 @@ namespace FTAnalyzer.Forms
                 if (result == 9999)
                 {
                     locations = FilterToRelationsIncluded(ft.AllMapLocations);
-                    txtLocations.Text = locations.Count() + " Locations in total (you may need to zoom to see them all)";
+                    txtLocations.Text = locations.Count() + " Locations in total (you may need to zoom out to see them all)";
                 }
                 else
                 {
                     locations = FilterToRelationsIncluded(ft.YearMapLocations(new FactDate(year), yearLimit));
-                    txtLocations.Text = locations.Count() + " Locations in total for year " + year + "  (you may need to zoom to see them all)";
+                    txtLocations.Text = locations.Count() + " Locations in total for year " + year + "  (you may need to zoom out to see them all)";
                 }
                 factLocations.Clear();
                 Envelope bbox = new Envelope();
@@ -389,14 +389,9 @@ namespace FTAnalyzer.Forms
             StopTimer();
         }
 
-        private void btnPause_Click(object sender, EventArgs e)
-        {
-            StopTimer();
-        }
-
         private void StopTimer()
         {
-            btnPlay.Visible = true;
+            btnPlay.Visible = !mnuDisableTimeline.Checked; // don't make visible if showing all locations
             btnStop.Visible = false;
             timer.Enabled = false;
             txtTimeInterval.Enabled = true;
@@ -489,6 +484,8 @@ namespace FTAnalyzer.Forms
             btnForward10.Visible = !mnuDisableTimeline.Checked;
             btnPlay.Visible = !mnuDisableTimeline.Checked;
             btnStop.Visible = !mnuDisableTimeline.Checked;
+            toolStripSeparator2.Visible = !mnuDisableTimeline.Checked;
+            toolStripSeparator3.Visible = !mnuDisableTimeline.Checked;
             labValue.Visible = !mnuDisableTimeline.Checked;
             labMin.Visible = !mnuDisableTimeline.Checked;
             labMax.Visible = !mnuDisableTimeline.Checked;
@@ -508,6 +505,7 @@ namespace FTAnalyzer.Forms
         {
             yearLimit = GetYearLimit();
             UpdateMap();
+            mnuOptions.HideDropDown();
         }
 
         private int GetYearLimit()
