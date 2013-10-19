@@ -112,5 +112,11 @@ namespace FTAnalyzer.Filters
                     orderby grp.Count() descending
                     select grp.Key).First();
         }
+
+        public static int CountUnique<T>(this IEnumerable<T> list)
+        {
+            return (from x in list
+                    select x).Distinct().Count();
+        }
     }
 }

@@ -80,7 +80,7 @@ namespace FTAnalyzer.Forms
             if (!censusDone)
                 dgCensus.Columns["CensusReference"].Visible = false;
             reportFormHelper.LoadColumnLayout("CensusColumns.xml");
-            tsRecords.Text = individuals.Count + " Records / " + numFamilies + " Families.";
+            tsRecords.Text = individuals.Count + " Rows containing " + individuals.CountUnique() + " Individuals and " + numFamilies + " Families.";
         }
 
         private void ResetTable()

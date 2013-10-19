@@ -194,12 +194,12 @@ namespace FTAnalyzer.Forms
                 if (result == 9999)
                 {
                     locations = FilterToRelationsIncluded(ft.AllMapLocations);
-                    txtLocations.Text = locations.Count() + " Locations";
+                    txtLocations.Text = locations.Count() + " Locations in total (you may need to zoom to see them all)";
                 }
                 else
                 {
                     locations = FilterToRelationsIncluded(ft.YearMapLocations(new FactDate(year), yearLimit));
-                    txtLocations.Text = locations.Count() + " Locations for year " + year;
+                    txtLocations.Text = locations.Count() + " Locations in total for year " + year + "  (you may need to zoom to see them all)";
                 }
                 factLocations.Clear();
                 Envelope bbox = new Envelope();
