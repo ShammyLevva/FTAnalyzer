@@ -211,11 +211,11 @@
       <DependentUpon>GeocodeLocations.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Displays\IDisplayGeocodedLocation.cs" />
-    <Compile Include="Forms\MapIndivudals.cs">
+    <Compile Include="Forms\MapIndividals.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MapIndivudals.Designer.cs">
-      <DependentUpon>MapIndivudals.cs</DependentUpon>
+    <Compile Include="Forms\MapIndividals.Designer.cs">
+      <DependentUpon>MapIndividals.cs</DependentUpon>
     </Compile>
     <Compile Include="Mapping\MapCluster.cs" />
     <Compile Include="Mapping\MapLocation.cs" />
@@ -295,8 +295,8 @@
     <EmbeddedResource Include="Forms\GeocodeLocations.resx">
       <DependentUpon>GeocodeLocations.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MapIndivudals.resx">
-      <DependentUpon>MapIndivudals.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\MapIndividals.resx">
+      <DependentUpon>MapIndividals.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Facts.resx">
       <DependentUpon>Facts.cs</DependentUpon>

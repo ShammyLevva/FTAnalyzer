@@ -45,8 +45,8 @@
             this.unknownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRetryPartial = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuKeepZoom = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDisableTimeline = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuKeepZoom = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuLimitFactDates = new System.Windows.Forms.ToolStripMenuItem();
             this.cbLimitFactDates = new System.Windows.Forms.ToolStripComboBox();
             this.tbYears = new System.Windows.Forms.TrackBar();
@@ -213,27 +213,27 @@
             this.mnuRetryPartial.Size = new System.Drawing.Size(296, 22);
             this.mnuRetryPartial.Text = "Retry Partially Geocoded when Geocoding";
             // 
-            // mnuKeepZoom
-            // 
-            this.mnuKeepZoom.CheckOnClick = true;
-            this.mnuKeepZoom.Name = "mnuKeepZoom";
-            this.mnuKeepZoom.Size = new System.Drawing.Size(264, 22);
-            this.mnuKeepZoom.Text = "Keep Zoom on changing Year";
-            // 
             // mnuDisableTimeline
             // 
             this.mnuDisableTimeline.CheckOnClick = true;
             this.mnuDisableTimeline.Name = "mnuDisableTimeline";
-            this.mnuDisableTimeline.Size = new System.Drawing.Size(264, 22);
+            this.mnuDisableTimeline.Size = new System.Drawing.Size(296, 22);
             this.mnuDisableTimeline.Text = "Disable Timeline Show All Locations";
             this.mnuDisableTimeline.Click += new System.EventHandler(this.mnuDisableTimeline_Click);
+            // 
+            // mnuKeepZoom
+            // 
+            this.mnuKeepZoom.CheckOnClick = true;
+            this.mnuKeepZoom.Name = "mnuKeepZoom";
+            this.mnuKeepZoom.Size = new System.Drawing.Size(296, 22);
+            this.mnuKeepZoom.Text = "Keep Zoom on changing Year";
             // 
             // mnuLimitFactDates
             // 
             this.mnuLimitFactDates.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cbLimitFactDates});
             this.mnuLimitFactDates.Name = "mnuLimitFactDates";
-            this.mnuLimitFactDates.Size = new System.Drawing.Size(264, 22);
+            this.mnuLimitFactDates.Size = new System.Drawing.Size(296, 22);
             this.mnuLimitFactDates.Text = "Limit Fact Dates";
             // 
             // cbLimitFactDates
@@ -319,6 +319,7 @@
             this.mapBox1.MapZoomChanged += new SharpMap.Forms.MapBox.MapZoomHandler(this.mapBox1_MapZoomChanged);
             this.mapBox1.MapQueried += new SharpMap.Forms.MapBox.MapQueryHandler(this.mapBox1_MapQueried);
             this.mapBox1.MapCenterChanged += new SharpMap.Forms.MapBox.MapCenterChangedHandler(this.mapBox1_MapCenterChanged);
+            this.mapBox1.ActiveToolChanged += new SharpMap.Forms.MapBox.ActiveToolChangedHandler(this.mapBox1_ActiveToolChanged);
             this.mapBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mapBox1_MouseDoubleClick);
             // 
             // mapZoomToolStrip
@@ -340,7 +341,6 @@
             this.mapZoomToolStrip.Size = new System.Drawing.Size(920, 25);
             this.mapZoomToolStrip.TabIndex = 8;
             this.mapZoomToolStrip.Text = "MapZoomToolStrip";
-            this.mapZoomToolStrip.Click += new System.EventHandler(this.mapZoomToolStrip_Click);
             // 
             // btnSelect
             // 

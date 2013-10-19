@@ -37,7 +37,9 @@ namespace FTAnalyzer.Forms
             mapZoomToolStrip.Renderer = new CustomToolStripRenderer();
             tbYears.MouseWheel += new MouseEventHandler(tbYears_MouseWheel);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
-            mapZoomToolStrip.Items[10].Visible = false;
+            mapZoomToolStrip.Items[4].ToolTipText = "Draw rectangle by dragging mouse to specify zoom area";
+            for(int i = 7; i <=10; i++)
+                mapZoomToolStrip.Items[i].Visible = false;
             backgroundColour = mapZoomToolStrip.Items[0].BackColor;
             mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(mapBox1_MapViewOnChange);
             ft = FamilyTree.Instance;
@@ -431,9 +433,11 @@ namespace FTAnalyzer.Forms
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
         }
 
-        private void mapZoomToolStrip_Click(object sender, EventArgs e)
+
+        private void mapBox1_ActiveToolChanged(SharpMap.Forms.MapBox.Tools tool)
         {
-            btnSelect.Checked = false;
+            if (mapBox1.ActiveTool != SharpMap.Forms.MapBox.Tools.QueryPoint)
+                btnSelect.Checked = false;
         }
 
         private void btnBack10_Click(object sender, EventArgs e)
