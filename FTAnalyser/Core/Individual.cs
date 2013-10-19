@@ -932,5 +932,18 @@ namespace FTAnalyzer
                     return "Married : " + marriage.ToString();
             }
         }
+
+        public override bool Equals(object that)
+        {
+            if (that is Individual)
+                return this.Ind_ID.Equals(((Individual)that).Ind_ID);
+            else
+                return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
