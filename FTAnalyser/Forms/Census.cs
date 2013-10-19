@@ -19,7 +19,6 @@ namespace FTAnalyzer.Forms
         public FactDate CensusDate { get; private set; }
         private string censusCountry;
         private ReportFormHelper reportFormHelper;
-        private IComparer<CensusIndividual> comparer;
         private FamilyTree ft;
 
         public bool LostCousins { get; private set; }
@@ -34,7 +33,6 @@ namespace FTAnalyzer.Forms
             this.LostCousins = false;
             this.CensusDate = censusDate;
             this.censusCountry = censusCountry;
-            this.comparer = new DefaultCensusComparer();
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
             {
@@ -76,16 +74,18 @@ namespace FTAnalyzer.Forms
 
         private void SetupDataGridView(bool censusDone, List<CensusIndividual> individuals)
         {
-            dgCensus.DataSource = individuals;
+            dgCensus.DataSource = new SortableBindingList<CensusIndividual>(individuals);
             if (!censusDone)
                 dgCensus.Columns["CensusReference"].Visible = false;
             reportFormHelper.LoadColumnLayout("CensusColumns.xml");
-            tsRecords.Text = individuals.Count + " Rows containing " + individuals.CountUnique() + " Individuals and " + numFamilies + " Families.";
+            int numIndividuals = (from x in individuals select x.Ind_ID).Distinct().Count();
+            tsRecords.Text = individuals.Count + " Rows containing " + numIndividuals + " Individuals and " + numFamilies + " Families.";
         }
 
         private void ResetTable()
         {
-            (dgCensus.DataSource as List<CensusIndividual>).Sort(comparer);
+            dgCensus.Sort(dgCensus.Columns["Position"], ListSortDirection.Ascending);
+            dgCensus.Sort(dgCensus.Columns["FamilyID"], ListSortDirection.Ascending);
             dgCensus.AutoResizeColumns();
             StyleRows();
         }
@@ -139,36 +139,6 @@ namespace FTAnalyzer.Forms
                     e.CellStyle = ind.CellStyle;
                     cell.ToolTipText = GetTooltipText(ind.CellStyle);
                 }
-            }
-        }
-
-        private void dgCensus_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            Comparer<IDisplayCensus> comp;
-            DataGridViewColumn column = dgCensus.Columns[e.ColumnIndex];
-            switch (column.Name)
-            {
-                case "FamilyGed": // Family GED
-                    comp = new IDisplayCensusComparerWrapper(new CensusFamilyGedComparer());
-                    break;
-                case "CensusLocation": // By location (original sort order)
-                    comp = new IDisplayCensusComparerWrapper(new CensusLocationComparer());
-                    break;
-                case "CensusName": // Census Name
-                    comp = new IDisplayCensusComparerWrapper(new CensusIndividualNameComparer());
-                    break;
-                default:
-                    comp = null;
-                    break;
-            }
-
-            if (comp != null)
-            {
-                List<IDisplayCensus> list = (List<IDisplayCensus>)dgCensus.DataSource;
-                list.Sort(comp);
-                dgCensus.DataSource = list;
-                dgCensus.Refresh();
-                StyleRows();
             }
         }
 
@@ -250,7 +220,7 @@ namespace FTAnalyzer.Forms
             Application.UserAppDataRegistry.SetValue("Default Search Provider", cbCensusSearchProvider.SelectedItem.ToString());
             dgCensus.Focus();
         }
-        
+
         private void mnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("CensusColumns.xml");
