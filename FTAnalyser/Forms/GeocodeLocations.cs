@@ -67,6 +67,9 @@ namespace FTAnalyzer.Forms
                 mnuGeocodeStatus.DropDownItems.Add(menu);
             }
 
+            ToolStripMenuItem placesMenu = new ToolStripMenuItem("Places");
+            placesMenu.Name = "Places";
+
             foreach (string resultType in GoogleMap.RESULT_TYPES)
             {
                 ToolStripMenuItem menu = new ToolStripMenuItem(resultType);
@@ -74,23 +77,30 @@ namespace FTAnalyzer.Forms
                 menu.Checked = Application.UserAppDataRegistry.GetValue(resultType, "True").Equals("True");
                 menu.CheckOnClick = true;
                 menu.CheckedChanged += new EventHandler(menuResultType_CheckedChanged);
-                mnuGoogleResultType.DropDownItems.Add(menu);
+                if (GoogleMap.PLACES.Contains(resultType))
+                    placesMenu.DropDownItems.Add(menu);
+                else
+                    mnuGoogleResultType.DropDownItems.Add(menu);
             }
-            if (AllFiltersActive())
+            mnuGoogleResultType.DropDownItems.Add(placesMenu);
+            if (AllFiltersActive(true))
                 mnuSelectClear.Text = "Clear All";
             else
                 mnuSelectClear.Text = "Select All";
         }
 
-        private bool AllFiltersActive()
+        private bool AllFiltersActive(bool GoogleOnly)
         {
             int count = 0;
             int menus = 0;
-            foreach (ToolStripMenuItem menu in mnuGeocodeStatus.DropDownItems)
+            if (!GoogleOnly)
             {
-                menus++;
-                if (menu.Checked)
-                    count++;
+                foreach (ToolStripMenuItem menu in mnuGeocodeStatus.DropDownItems)
+                {
+                    menus++;
+                    if (menu.Checked)
+                        count++;
+                }
             }
             foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
             {
@@ -98,7 +108,14 @@ namespace FTAnalyzer.Forms
                 if (menu.Checked)
                     count++;
             }
-            return (count == menus - 1); //one less due to select/clear all
+            ToolStripMenuItem places = mnuGoogleResultType.DropDownItems["Places"] as ToolStripMenuItem;
+            foreach (ToolStripMenuItem menu in places.DropDownItems)
+            {
+                menus++;
+                if (menu.Checked)
+                    count++;
+            }
+            return (count == menus - 2); //two less due to select/clear all & Places
         }
 
         private void UpdateGridWithFilters(List<IDisplayGeocodedLocation> input)
@@ -133,9 +150,13 @@ namespace FTAnalyzer.Forms
 
         private SortableBindingList<IDisplayGeocodedLocation> ApplyFilters(List<IDisplayGeocodedLocation> input)
         {
-            if (AllFiltersActive())
+            if (AllFiltersActive(false))
                 return new SortableBindingList<IDisplayGeocodedLocation>(input);
             List<IDisplayGeocodedLocation> results = new List<IDisplayGeocodedLocation>();
+            ToolStripMenuItem places = mnuGoogleResultType.DropDownItems["Places"] as ToolStripMenuItem;
+            ToolStripMenuItem[] list = new ToolStripMenuItem[places.DropDownItems.Count + mnuGoogleResultType.DropDownItems.Count];
+            places.DropDownItems.CopyTo(list, 0);
+            mnuGoogleResultType.DropDownItems.CopyTo(list, places.DropDownItems.Count);
             foreach (IDisplayGeocodedLocation loc in input)
             {
                 if (StatusFilter(loc))
@@ -144,7 +165,7 @@ namespace FTAnalyzer.Forms
                         results.Add(loc);
                     else
                     {
-                        foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
+                        foreach (ToolStripMenuItem menu in list)
                         {
                             // filter locations on menu items that are ticked
                             if (menu.Checked && loc.GoogleResultType.Contains(menu.Name))
@@ -209,10 +230,13 @@ namespace FTAnalyzer.Forms
         private void mnuSelectClear_Click(object sender, EventArgs e)
         {
             refreshingMenus = true;
-            if (AllFiltersActive())
+            ToolStripMenuItem places = mnuGoogleResultType.DropDownItems["Places"] as ToolStripMenuItem;
+            if (AllFiltersActive(true))
             {
                 mnuSelectClear.Text = "Select All";
                 foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
+                    menu.Checked = false;
+                foreach (ToolStripMenuItem menu in places.DropDownItems)
                     menu.Checked = false;
             }
             else
@@ -221,6 +245,7 @@ namespace FTAnalyzer.Forms
                 foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
                     menu.Checked = true;
                 mnuSelectClear.Checked = false; // make sure the clear all isn't checked
+                places.Checked = false;
             }
             refreshingMenus = false;
             UpdateGoogleStatusMenus();

@@ -46,6 +46,9 @@
             this.mnuOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRetryPartial = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuKeepZoom = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuDisableTimeline = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuLimitFactDates = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbLimitFactDates = new System.Windows.Forms.ToolStripComboBox();
             this.tbYears = new System.Windows.Forms.TrackBar();
             this.labMin = new System.Windows.Forms.Label();
             this.labMax = new System.Windows.Forms.Label();
@@ -69,9 +72,6 @@
             this.btnForward1 = new System.Windows.Forms.Button();
             this.btnBack10 = new System.Windows.Forms.Button();
             this.btnForward10 = new System.Windows.Forms.Button();
-            this.mnuDisableTimeline = new System.Windows.Forms.ToolStripMenuItem();
-            this.limitFactDatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbLimitFactDates = new System.Windows.Forms.ToolStripComboBox();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -201,7 +201,7 @@
             this.mnuRetryPartial,
             this.mnuKeepZoom,
             this.mnuDisableTimeline,
-            this.limitFactDatesToolStripMenuItem});
+            this.mnuLimitFactDates});
             this.mnuOptions.Name = "mnuOptions";
             this.mnuOptions.Size = new System.Drawing.Size(61, 20);
             this.mnuOptions.Text = "Options";
@@ -219,6 +219,39 @@
             this.mnuKeepZoom.Name = "mnuKeepZoom";
             this.mnuKeepZoom.Size = new System.Drawing.Size(264, 22);
             this.mnuKeepZoom.Text = "Keep Zoom on changing Year";
+            // 
+            // mnuDisableTimeline
+            // 
+            this.mnuDisableTimeline.CheckOnClick = true;
+            this.mnuDisableTimeline.Name = "mnuDisableTimeline";
+            this.mnuDisableTimeline.Size = new System.Drawing.Size(264, 22);
+            this.mnuDisableTimeline.Text = "Disable Timeline Show All Locations";
+            this.mnuDisableTimeline.Click += new System.EventHandler(this.mnuDisableTimeline_Click);
+            // 
+            // mnuLimitFactDates
+            // 
+            this.mnuLimitFactDates.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cbLimitFactDates});
+            this.mnuLimitFactDates.Name = "mnuLimitFactDates";
+            this.mnuLimitFactDates.Size = new System.Drawing.Size(264, 22);
+            this.mnuLimitFactDates.Text = "Limit Fact Dates";
+            // 
+            // cbLimitFactDates
+            // 
+            this.cbLimitFactDates.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbLimitFactDates.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLimitFactDates.Items.AddRange(new object[] {
+            "No Limit",
+            "Exact year only",
+            "+/- 2 years",
+            "+/- 5 years",
+            "+/-10 years",
+            "+/-20 years",
+            "+/-50 years",
+            "+/-100 years"});
+            this.cbLimitFactDates.Name = "cbLimitFactDates";
+            this.cbLimitFactDates.Size = new System.Drawing.Size(121, 23);
+            this.cbLimitFactDates.SelectedIndexChanged += new System.EventHandler(this.cbLimitFactDates_SelectedIndexChanged);
             // 
             // tbYears
             // 
@@ -468,39 +501,6 @@
             this.btnForward10.UseVisualStyleBackColor = true;
             this.btnForward10.Click += new System.EventHandler(this.btnForward10_Click);
             // 
-            // mnuDisableTimeline
-            // 
-            this.mnuDisableTimeline.CheckOnClick = true;
-            this.mnuDisableTimeline.Name = "mnuDisableTimeline";
-            this.mnuDisableTimeline.Size = new System.Drawing.Size(264, 22);
-            this.mnuDisableTimeline.Text = "Disable Timeline Show All Locations";
-            this.mnuDisableTimeline.Click += new System.EventHandler(this.mnuDisableTimeline_Click);
-            // 
-            // limitFactDatesToolStripMenuItem
-            // 
-            this.limitFactDatesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cbLimitFactDates});
-            this.limitFactDatesToolStripMenuItem.Name = "limitFactDatesToolStripMenuItem";
-            this.limitFactDatesToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
-            this.limitFactDatesToolStripMenuItem.Text = "Limit Fact Dates";
-            // 
-            // cbLimitFactDates
-            // 
-            this.cbLimitFactDates.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbLimitFactDates.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbLimitFactDates.Items.AddRange(new object[] {
-            "No Limit",
-            "Exact year only",
-            "+/- 2 years",
-            "+/- 5 years",
-            "+/-10 years",
-            "+/-20 years",
-            "+/-50 years",
-            "+/-100 years"});
-            this.cbLimitFactDates.Name = "cbLimitFactDates";
-            this.cbLimitFactDates.Size = new System.Drawing.Size(121, 23);
-            this.cbLimitFactDates.SelectedIndexChanged += new System.EventHandler(this.cbLimitFactDates_SelectedIndexChanged);
-            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -578,7 +578,7 @@
         private System.Windows.Forms.Button btnBack10;
         private System.Windows.Forms.Button btnForward10;
         private System.Windows.Forms.ToolStripMenuItem mnuDisableTimeline;
-        private System.Windows.Forms.ToolStripMenuItem limitFactDatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuLimitFactDates;
         private System.Windows.Forms.ToolStripComboBox cbLimitFactDates;
     }
 }
