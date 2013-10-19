@@ -45,10 +45,13 @@ namespace FTAnalyzer
         private static readonly HashSet<string> COMMENT_FACTS = new HashSet<string>();
 
         //Database online. Class: HO107; Piece: 1782; Folio: 719; Page: 25; GSU
+        //Database online. Class: HO107; Piece 709; Book: 6; Civil Parish: StLeonard Shoreditch; County: Middlesex; Enumeration District: 19;Folio: 53; Page: 15; Line: 16; GSU roll: 438819.
         //Database online. Class: RG9; Piece: 1105; Folio: 90; Page: 21; GSU
         //RG14PN22623 RG78PN1327 RD455 SD10 ED13 SN183
         //Parish: Inverurie; ED: 4; Page: 12; Line: 3; Roll: CSSCT1901_69
-        private static readonly string EW_CENSUS_PATTERN = "Class: ([RGHO]{1,3}\\d{2,3}); Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3}); GSU";
+        private static readonly string EW_CENSUS_PATTERN = "Class: RG(\\d{2,3}); Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3}); GSU";
+        private static readonly string EW_CENSUS_1841_PATTERN = "Class: HO107; Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3}); GSU";
+        private static readonly string EW_CENSUS_1841_PATTERN2 = "Class: HO107; Piece:? (\\d{1,5}); Book: (\\d{1,3});.*?Folio: (\\d{1,4}); Page: (\\d{1,3});";
         private static readonly string EW_CENSUS_1911_PATTERN = "^RG14PN(\\d{1,6}) .*SN(\\d{1,3})$";
         private static readonly string SCOT_CENSUS_PATTERN = "Parish: ([A-Za-z]+); ED: (\\d{1,3}); Page: (\\d{1,4}); Line: (\\d{1,2}); Roll: CSSCT";
         private static readonly string SCOT_CENSUS_PATTERN2 = "(\\d{3}/\\d{2}) (\\d{3}/\\d{2}) (\\d{3,4})";
@@ -190,6 +193,7 @@ namespace FTAnalyzer
         public string Piece { get; private set; }
         public string Folio { get; private set; }
         public string Page { get; private set; }
+        public string Book { get; private set; }
         public string Schedule { get; private set; }
         public string Parish { get; private set; }
         public string ED { get; private set; }
@@ -211,6 +215,7 @@ namespace FTAnalyzer
             this.FactErrorMessage = string.Empty;
             this.Piece = string.Empty;
             this.Folio = string.Empty;
+            this.Book = string.Empty;
             this.Page = string.Empty;
             this.Schedule = string.Empty;
             this.Parish = string.Empty;
@@ -314,6 +319,21 @@ namespace FTAnalyzer
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[2].ToString();
+                    this.Folio = matcher.Groups[3].ToString();
+                    this.Page = matcher.Groups[4].ToString();
+                }
+                matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN);
+                if (matcher.Success)
+                {
+                    this.Piece = matcher.Groups[1].ToString();
+                    this.Folio = matcher.Groups[2].ToString();
+                    this.Page = matcher.Groups[3].ToString();
+                }
+                matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN2);
+                if (matcher.Success)
+                {
+                    this.Piece = matcher.Groups[1].ToString();
+                    this.Book = matcher.Groups[2].ToString();
                     this.Folio = matcher.Groups[3].ToString();
                     this.Page = matcher.Groups[4].ToString();
                 }
@@ -575,7 +595,12 @@ namespace FTAnalyzer
                     if (Location.Country.Equals(Countries.UNITED_STATES) && FactDate.Overlaps(CensusDate.USCENSUS1880))
                         return "US Census references not yet available";
                     if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1841))
-                        return "Piece: " + Piece + ", Book: see census image (stamped on the census page after the piece number), Folio: " + Folio + ", Page: " + Page;
+                    {
+                        if(Book.Length > 0)
+                            return "Piece: " + Piece + ", Book: " + Book + ", Folio: " + Folio + ", Page: " + Page;
+                        else
+                            return "Piece: " + Piece + ", Book: see census image (stamped on the census page after the piece number), Folio: " + Folio + ", Page: " + Page;
+                    }
                     if (Location.Country.Equals(Countries.IRELAND) && FactDate.Overlaps(CensusDate.IRELANDCENSUS1911))
                         return "Irish Census references not yet available";
                     if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1911))
