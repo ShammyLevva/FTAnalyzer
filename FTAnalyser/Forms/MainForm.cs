@@ -404,9 +404,9 @@ namespace FTAnalyzer
 
         private void btnShowCensus_Click(object sender, EventArgs e)
         {
-            Predicate<CensusIndividual> filter = CreateCensusIndividualFilter();
-            Census census = new Census(censusDate);
             bool censusDone = sender == btnShowCensusEntered;
+            Predicate<CensusIndividual> filter = CreateCensusIndividualFilter(censusDone);
+            Census census = new Census(censusDate);
             census.SetupCensus(filter, censusDone);
             if(censusDone)
                 census.Text = "People entered with a " + censusDate.StartDate.Year.ToString() + " " + cenDate.CensusCountry + " Census Record";
@@ -422,24 +422,14 @@ namespace FTAnalyzer
         }
 
         #region Filters
-        private Predicate<CensusIndividual> CreateCensusIndividualFilter()
+        private Predicate<CensusIndividual> CreateCensusIndividualFilter(bool censusDone)
         {
             Predicate<CensusIndividual> relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
-            Predicate<CensusIndividual> locationFilter;
+            Predicate<CensusIndividual> dateFilter = censusDone ? 
+                new Predicate<CensusIndividual>(x => x.IsCensusDone(cenDate.SelectedDate)) : 
+                new Predicate<CensusIndividual>(x => !x.IsCensusDone(cenDate.SelectedDate));
 
-            //            if (ckbNoLocations.Checked)
-            //            {
-            locationFilter = (x => x.IsValidLocation(cenDate.CensusCountry));
-            //}
-            //else
-            //{
-            //    locationFilter = censusCountry.BuildFilter<CensusIndividual>(
-            //        cenDate.SelectedDate, (d, x) => x.BestLocation(d));
-            //}
-
-            Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(locationFilter, relationFilter,
-                    FilterUtils.DateFilter<CensusIndividual>(x => x.CensusDate, cenDate.SelectedDate));
-
+            Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, dateFilter);
             if (txtSurname.Text.Length > 0)
             {
                 Predicate<CensusIndividual> surnameFilter = FilterUtils.StringFilter<CensusIndividual>(x => x.Surname, txtSurname.Text);

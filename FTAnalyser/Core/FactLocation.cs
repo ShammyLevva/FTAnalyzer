@@ -695,6 +695,10 @@ namespace FTAnalyzer
                 return true;
             if (Countries.IsEnglandWales(Country) && Countries.IsEnglandWales(s))
                 return true;
+            if (Country == Countries.UNITED_KINGDOM && Countries.IsUnitedKingdom(s))
+                return true;
+            if (s == Countries.UNITED_KINGDOM && Countries.IsUnitedKingdom(Country))
+                return true;
             if (Country == Countries.SCOTLAND  || s == Countries.SCOTLAND)
                 return false; // Either Country or s is not Scotland at this point, so not matching census country.
             if (Countries.IsUnitedKingdom(Country) && Countries.IsUnitedKingdom(s))
