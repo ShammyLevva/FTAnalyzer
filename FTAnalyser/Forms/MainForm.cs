@@ -521,10 +521,10 @@ namespace FTAnalyzer
             count1841 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1841));
             countEW1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1881));
 
-            foreach (Individual i in listToCheck.Where(new Predicate<Individual>(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1881))))
-            {
-                Console.WriteLine(i.Name + " " + i.BirthDate + " " + i.BirthLocation);
-            }
+            //foreach (Individual i in listToCheck.Where(new Predicate<Individual>(x => x.IsLostCousinEntered(CensusDate.SCOTCENSUS1881))))
+            //{
+            //    Console.WriteLine(i.Ind_ID + "," + i.Name + "," + i.BirthDate + "," + i.BirthLocation);
+            //}
 
             countSco1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.SCOTCENSUS1881));
             countCan1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.CANADACENSUS1881));

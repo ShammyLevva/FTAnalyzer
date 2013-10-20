@@ -75,6 +75,16 @@ namespace FTAnalyzer.Forms
                 Predicate<CensusIndividual> predicate = x => !x.IsLostCousinEntered(CensusDate);
                 individuals = onCensus.Where(predicate).ToList<CensusIndividual>();
             }
+
+            //// Test code
+            //HashSet<string> test = new HashSet<string>(ft.AllIndividuals.Where(
+            //    new Predicate<Individual>(x => x.IsBloodDirect && x.IsLostCousinEntered(CensusDate.SCOTCENSUS1881))).Select(x => x.Ind_ID));
+            //HashSet<string> test2 = new HashSet<string>(individuals.Select(x => x.Ind_ID));
+            //foreach (string id in test)
+            //{
+            //    if (!test2.Contains(id)) Console.WriteLine(id);
+            //}
+
             SetupDataGridView(true, individuals);
         }
 

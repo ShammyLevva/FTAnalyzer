@@ -95,7 +95,8 @@ namespace FTAnalyzer
 
         private bool IsValidFamily()
         {
-            if (MarriageDate.StartDate > CensusDate.EndDate)
+            Individual eldestChild = Children.OrderBy(x => x.BirthDate).FirstOrDefault();
+            if (MarriageDate.IsAfter(CensusDate) && (eldestChild == null || eldestChild.BirthDate.IsAfter(CensusDate)))
                 return false;
             if (FamilyID == Family.SOLOINDIVIDUAL)
                 return true; // allow solo individual families to be processed
