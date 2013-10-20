@@ -507,19 +507,18 @@ namespace FTAnalyzer
             }
             else
                 listToCheck= ft.AllIndividuals;
-        
-            count1841 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1841));
-            countEW1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1881));
 
             //foreach (Individual i in listToCheck.Where(new Predicate<Individual>(x => x.IsLostCousinEntered(CensusDate.SCOTCENSUS1881))))
             //{
             //    Console.WriteLine(i.Ind_ID + "," + i.Name + "," + i.BirthDate + "," + i.BirthLocation);
             //}
 
+            count1841 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1841));
+            countEW1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1881));
             countSco1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.SCOTCENSUS1881));
-            countCan1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.CANADACENSUS1881));
+            countCan1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.CANADACENSUS1881, false));
             countEW1911 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1911));
-            countIre1911 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.IRELANDCENSUS1911));
+            countIre1911 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.IRELANDCENSUS1911, false));
             count1880 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.USCENSUS1880));
             count1940 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.USCENSUS1940));
 
