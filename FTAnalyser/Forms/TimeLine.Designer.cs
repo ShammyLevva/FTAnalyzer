@@ -69,6 +69,7 @@
             this.btnForward1 = new System.Windows.Forms.Button();
             this.btnBack10 = new System.Windows.Forms.Button();
             this.btnForward10 = new System.Windows.Forms.Button();
+            this.mnuHideScaleBar = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -182,6 +183,7 @@
             this.mnuOptions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuRetryPartial,
             this.mnuDisableTimeline,
+            this.mnuHideScaleBar,
             this.mnuKeepZoom,
             this.mnuLimitFactDates});
             this.mnuOptions.Name = "mnuOptions";
@@ -472,6 +474,14 @@
             this.btnForward10.UseVisualStyleBackColor = true;
             this.btnForward10.Click += new System.EventHandler(this.btnForward10_Click);
             // 
+            // mnuHideScaleBar
+            // 
+            this.mnuHideScaleBar.CheckOnClick = true;
+            this.mnuHideScaleBar.Name = "mnuHideScaleBar";
+            this.mnuHideScaleBar.Size = new System.Drawing.Size(296, 22);
+            this.mnuHideScaleBar.Text = "Hide Scale Bar";
+            this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
+            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -547,5 +557,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuDisableTimeline;
         private System.Windows.Forms.ToolStripMenuItem mnuLimitFactDates;
         private System.Windows.Forms.ToolStripComboBox cbLimitFactDates;
+        private System.Windows.Forms.ToolStripMenuItem mnuHideScaleBar;
     }
 }

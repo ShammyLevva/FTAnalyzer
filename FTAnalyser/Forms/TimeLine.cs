@@ -140,12 +140,24 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.MinimumZoom = 1000;
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.QueryGrowFactor = 30;
+            mapBox1.Map.ZoomToExtents();
+            AddScaleBar();
+            mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
+        }
+
+        private void AddScaleBar()
+        {
             ScaleBar scalebar = new ScaleBar();
             scalebar.BackgroundColor = Color.White;
+            scalebar.RoundedEdges = true; 
             mapBox1.Map.Decorations.Add(scalebar);
-            mapBox1.Map.ZoomToExtents();
             mapBox1.Refresh();
-            mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
+        }
+
+        private void RemoveScaleBar()
+        {
+            mapBox1.Map.Decorations.RemoveAt(0);
+            mapBox1.Refresh();
         }
 
         private void SetGeoCodedYearRange()
@@ -532,6 +544,14 @@ namespace FTAnalyzer.Forms
                 default:
                     return int.MaxValue;
             }
+        }
+
+        private void mnuHideScaleBar_Click(object sender, EventArgs e)
+        {
+            if (mnuHideScaleBar.Checked)
+                RemoveScaleBar();
+            else
+                AddScaleBar();
         }
     }
 }
