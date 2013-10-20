@@ -16,14 +16,14 @@ namespace FTAnalyzer.Forms
     public partial class Census : Form
     {
         private int numFamilies;
-        public FactDate CensusDate { get; private set; }
+        public CensusDate CensusDate { get; private set; }
         private string censusCountry;
         private ReportFormHelper reportFormHelper;
         private FamilyTree ft;
 
         public bool LostCousins { get; private set; }
 
-        public Census(FactDate censusDate, string censusCountry)
+        public Census(CensusDate censusDate, string censusCountry)
         {
             InitializeComponent();
             dgCensus.AutoGenerateColumns = false;
@@ -61,12 +61,12 @@ namespace FTAnalyzer.Forms
                 IEnumerable<CensusIndividual> notOnCensus = notOnCensusFamilies.SelectMany(f => f.Members).Where(countryFilter);
                 IEnumerable<CensusIndividual> allEligible = onCensus.Union(notOnCensus);
 
-                Predicate<CensusIndividual> predicate = x => x.IsLostCousinEntered(CensusDate, censusCountry);
+                Predicate<CensusIndividual> predicate = x => x.IsLostCousinEntered(CensusDate);
                 individuals = allEligible.Where(predicate).ToList<CensusIndividual>();
             }
             else
             {
-                Predicate<CensusIndividual> predicate = x => !x.IsLostCousinEntered(CensusDate, censusCountry);
+                Predicate<CensusIndividual> predicate = x => !x.IsLostCousinEntered(CensusDate);
                 individuals = onCensus.Where(predicate).ToList<CensusIndividual>();
             }
             SetupDataGridView(true, individuals);

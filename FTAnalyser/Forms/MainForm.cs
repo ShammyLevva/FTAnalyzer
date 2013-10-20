@@ -23,7 +23,7 @@ namespace FTAnalyzer
 
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
-        private FactDate censusDate = CensusDate.UKCENSUS1881;
+        private CensusDate censusDate = CensusDate.UKCENSUS1881;
         private bool stopProcessing = false;
         private string filename;
         private Font boldFont;
@@ -570,7 +570,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void LostCousinsCensus(string location, Predicate<CensusIndividual> countryFilter, FactDate censusDate, string reportTitle)
+        private void LostCousinsCensus(string location, Predicate<CensusIndividual> countryFilter, CensusDate censusDate, string reportTitle)
         {
             HourGlass(true);
             Predicate<CensusIndividual> dateFilter = FilterUtils.DateFilter<CensusIndividual>(x => x.CensusDate, censusDate);
