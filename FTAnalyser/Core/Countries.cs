@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GeoAPI.Geometries;
 
 namespace FTAnalyzer
 {
@@ -18,138 +19,138 @@ namespace FTAnalyzer
             CHINA = "China", ZIMBABWE = "Zimbabwe", JAPAN = "Japan", RUSSIA = "Russia", POLAND = "Poland", ST_LUCIA = "Saint Lucia",
             LUXEMBOURG = "Luxembourg", ISLE_OF_MAN = "Isle of Man", GREECE = "Greece", LIBYA = "Libya", NIGERIA = "Nigeria",
             BULGARIA = "Bulgaria", CYPRUS = "Cyprus", ESTONIA = "Estonia", LATVIA = "Latvia", LIECHTENSTIEN = "Liechtenstien",
-            LITHUANIA = "Lithuania", ALBANIA = "Albania", ANDORRA = "Andorra", ARMENIA = "Armenia", AZERBAIJAN = "Azerbaijan", 
-            BELARUS = "Belarus", MACEDONIA = "Macedonia", MOLDOVA = "Moldova", MONACO = "Monaco", MONTENEGRO = "Montenegro", 
-            PORTUGAL = "Portugal", ROMANIA = "Romania", SAN_MARINO = "San Marino", TURKEY = "Turkey", UKRAINE = "Ukraine", 
-            BRAZIL = "Brazil", MAURITIUS = "Mauritius", UAE = "United Arab Emirates", AFGHANISTAN = "Afghanistan", 
+            LITHUANIA = "Lithuania", ALBANIA = "Albania", ANDORRA = "Andorra", ARMENIA = "Armenia", AZERBAIJAN = "Azerbaijan",
+            BELARUS = "Belarus", MACEDONIA = "Macedonia", MOLDOVA = "Moldova", MONACO = "Monaco", MONTENEGRO = "Montenegro",
+            PORTUGAL = "Portugal", ROMANIA = "Romania", SAN_MARINO = "San Marino", TURKEY = "Turkey", UKRAINE = "Ukraine",
+            BRAZIL = "Brazil", MAURITIUS = "Mauritius", UAE = "United Arab Emirates", AFGHANISTAN = "Afghanistan",
             ARGENTINA = "Argentina", BARBADOS = "Barbados", BANGLADESH = "Bangladesh", BAHAMAS = "Bahamas", SRI_LANKA = "Sri Lanka",
             CUBA = "Cuba", INDONESIA = "Indonesia", ISRAEL = "Israel", IRAQ = "Iraq", IRAN = "Iran", JORDAN = "Jordan",
             JAMAICA = "Jamaica", KENYA = "Kenya";
 
-            //AG  Antigua and Barbuda
-            //AO  Angola
-            //BA  Bosnia and Herzegovina
-            //BF  Burkina Faso
-            //BH  Bahrain
-            //BI  Burundi
-            //BJ  Benin
-            //BN  Brunei Darussalam
-            //BO  Bolivia (Plurinational State of)
-            //BT  Bhutan
-            //BW  Botswana
-            //BZ  Belize
-            //CD  Democratic Republic of the Congo
-            //CF  Central African Republic
-            //CG  Congo
-            //CI  Côte d'Ivoire
-            //CL  Chile
-            //CM  Cameroon
-            //CO  Colombia
-            //CR  Costa Rica
-            //CV  Cape Verde
-            //CZ  Czech Republic
-            //DJ  Djibouti
-            //DM  Dominica
-            //DO  Dominican Republic
-            //DZ  Algeria
-            //EC  Ecuador
-            //ER  Eritrea
-            //ET  Ethiopia
-            //FJ  Fiji
-            //FM  Micronesia (Federated States of)
-            //GA  Gabon
-            //GD  Grenada
-            //GH  Ghana
-            //GM  Gambia
-            //GN  Guinea
-            //GQ  Equatorial Guinea
-            //GT  Guatemala
-            //GW  Guinea-Bissau
-            //GY  Guyana
-            //HN  Honduras
-            //HR  Croatia
-            //HT  Haiti
-            //KG  Kyrgyzstan
-            //KH  Cambodia
-            //KI  Kiribati
-            //KM  Comoros
-            //KN  Saint Kitts and Nevis
-            //KP  Democratic People's Republic of Korea
-            //KR  Republic of Korea
-            //KW  Kuwait
-            //KZ  Kazakhstan
-            //LA  Lao People's Democratic Republic
-            //LB  Lebanon
-            //LR  Liberia
-            //LS  Lesotho
-            //MA  Morocco
-            //MG  Madagascar
-            //MH  Marshall Islands
-            //MK  The former Yugoslav Republic of Macedonia
-            //ML  Mali
-            //MM  Myanmar
-            //MN  Mongolia
-            //MR  Mauritania
-            //MT  Malta
-            //MV  Maldives
-            //MW  Malawi
-            //MX  Mexico
-            //MY  Malaysia
-            //MZ  Mozambique
-            //NA  Namibia
-            //NE  Niger
-            //NI  Nicaragua
-            //NP  Nepal
-            //NR  Nauru
-            //OM  Oman
-            //PA  Panama
-            //PE  Peru
-            //PG  Papua New Guinea
-            //PH  Philippines
-            //PK  Pakistan
-            //PW  Palau
-            //PY  Paraguay
-            //QA  Qatar
-            //RS  Serbia
-            //RW  Rwanda
-            //SA  Saudi Arabia
-            //SB  Solomon Islands
-            //SC  Seychelles
-            //SD  Sudan
-            //SG  Singapore
-            //SI  Slovenia
-            //SK  Slovakia
-            //SL  Sierra Leone
-            //SN  Senegal
-            //SO  Somalia
-            //SR  Suriname
-            //SS  South Sudan
-            //ST  Sao Tome and Principe
-            //SV  El Salvador
-            //SY  Syrian Arab Republic
-            //SZ  Swaziland
-            //TD  Chad
-            //TG  Togo
-            //TH  Thailand
-            //TJ  Tajikistan
-            //TL  Timor-Leste
-            //TM  Turkmenistan
-            //TN  Tunisia
-            //TO  Tonga
-            //TT  Trinidad and Tobago
-            //TV  Tuvalu
-            //TZ  United Republic of Tanzania
-            //UG  Uganda
-            //UY  Uruguay
-            //UZ  Uzbekistan
-            //VC  Saint Vincent and the Grenadines
-            //VE  Venezuela (Bolivarian Republic of)
-            //VN  Viet Nam
-            //VU  Vanuatu
-            //WS  Samoa
-            //YE  Yemen
-            //ZM  Zambia
-            
+        //AG  Antigua and Barbuda
+        //AO  Angola
+        //BA  Bosnia and Herzegovina
+        //BF  Burkina Faso
+        //BH  Bahrain
+        //BI  Burundi
+        //BJ  Benin
+        //BN  Brunei Darussalam
+        //BO  Bolivia (Plurinational State of)
+        //BT  Bhutan
+        //BW  Botswana
+        //BZ  Belize
+        //CD  Democratic Republic of the Congo
+        //CF  Central African Republic
+        //CG  Congo
+        //CI  Côte d'Ivoire
+        //CL  Chile
+        //CM  Cameroon
+        //CO  Colombia
+        //CR  Costa Rica
+        //CV  Cape Verde
+        //CZ  Czech Republic
+        //DJ  Djibouti
+        //DM  Dominica
+        //DO  Dominican Republic
+        //DZ  Algeria
+        //EC  Ecuador
+        //ER  Eritrea
+        //ET  Ethiopia
+        //FJ  Fiji
+        //FM  Micronesia (Federated States of)
+        //GA  Gabon
+        //GD  Grenada
+        //GH  Ghana
+        //GM  Gambia
+        //GN  Guinea
+        //GQ  Equatorial Guinea
+        //GT  Guatemala
+        //GW  Guinea-Bissau
+        //GY  Guyana
+        //HN  Honduras
+        //HR  Croatia
+        //HT  Haiti
+        //KG  Kyrgyzstan
+        //KH  Cambodia
+        //KI  Kiribati
+        //KM  Comoros
+        //KN  Saint Kitts and Nevis
+        //KP  Democratic People's Republic of Korea
+        //KR  Republic of Korea
+        //KW  Kuwait
+        //KZ  Kazakhstan
+        //LA  Lao People's Democratic Republic
+        //LB  Lebanon
+        //LR  Liberia
+        //LS  Lesotho
+        //MA  Morocco
+        //MG  Madagascar
+        //MH  Marshall Islands
+        //MK  The former Yugoslav Republic of Macedonia
+        //ML  Mali
+        //MM  Myanmar
+        //MN  Mongolia
+        //MR  Mauritania
+        //MT  Malta
+        //MV  Maldives
+        //MW  Malawi
+        //MX  Mexico
+        //MY  Malaysia
+        //MZ  Mozambique
+        //NA  Namibia
+        //NE  Niger
+        //NI  Nicaragua
+        //NP  Nepal
+        //NR  Nauru
+        //OM  Oman
+        //PA  Panama
+        //PE  Peru
+        //PG  Papua New Guinea
+        //PH  Philippines
+        //PK  Pakistan
+        //PW  Palau
+        //PY  Paraguay
+        //QA  Qatar
+        //RS  Serbia
+        //RW  Rwanda
+        //SA  Saudi Arabia
+        //SB  Solomon Islands
+        //SC  Seychelles
+        //SD  Sudan
+        //SG  Singapore
+        //SI  Slovenia
+        //SK  Slovakia
+        //SL  Sierra Leone
+        //SN  Senegal
+        //SO  Somalia
+        //SR  Suriname
+        //SS  South Sudan
+        //ST  Sao Tome and Principe
+        //SV  El Salvador
+        //SY  Syrian Arab Republic
+        //SZ  Swaziland
+        //TD  Chad
+        //TG  Togo
+        //TH  Thailand
+        //TJ  Tajikistan
+        //TL  Timor-Leste
+        //TM  Turkmenistan
+        //TN  Tunisia
+        //TO  Tonga
+        //TT  Trinidad and Tobago
+        //TV  Tuvalu
+        //TZ  United Republic of Tanzania
+        //UG  Uganda
+        //UY  Uruguay
+        //UZ  Uzbekistan
+        //VC  Saint Vincent and the Grenadines
+        //VE  Venezuela (Bolivarian Republic of)
+        //VN  Viet Nam
+        //VU  Vanuatu
+        //WS  Samoa
+        //YE  Yemen
+        //ZM  Zambia
+
         private static readonly ISet<string> KNOWN_COUNTRIES = new HashSet<string>(new string[] {
             SCOTLAND, ENGLAND, CANADA, UNITED_STATES, WALES, IRELAND, UNITED_KINGDOM, NEW_ZEALAND, AUSTRALIA, INDIA, FRANCE, GERMANY,
             ITALY, SPAIN, BELGIUM, SOUTH_AFRICA, NORTHERN_IRELAND, EGYPT, HUNGARY, MALTA, DENMARK, SWEDEN, NORWAY, FINLAND, ICELAND,
@@ -167,6 +168,23 @@ namespace FTAnalyzer
         private static readonly ISet<string> CENSUS_COUNTRIES = new HashSet<string>(new string[] { 
             SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM, UNITED_STATES, CANADA
         });
+
+        private static Dictionary<string, Envelope> BOUNDING_BOXES;
+        private static Envelope WHOLE_WORLD = new Envelope(-180, 180, -90, 90);
+
+        static Countries()
+        {   // generate position at http://imeasuremap.com/?e=57.4552937099324,-4.98779296874996:0::rectangle:0
+            BOUNDING_BOXES = new Dictionary<string, Envelope>();
+            BOUNDING_BOXES.Add(SCOTLAND, new Envelope(-7.974074, -0.463426, 54.571547, 60.970872));
+            BOUNDING_BOXES.Add(ENGLAND, new Envelope(-6.523879, 1.879409, 49.814376, 55.865022));
+            BOUNDING_BOXES.Add(WALES, new Envelope(-5.561202, -2.596147, 51.296580, 53.450153));
+            BOUNDING_BOXES.Add(IRELAND, new Envelope(-10.746749, -5.298783, 51.296580, 55.467681));
+            BOUNDING_BOXES.Add(NORTHERN_IRELAND, new Envelope(-8.329757, -5.298783, 53.872250, 55.467681));
+            BOUNDING_BOXES.Add(CANADA, new Envelope(-141, -52, 41.129387, 83.232810));
+            BOUNDING_BOXES.Add(UNITED_STATES, new Envelope(-169.136641, -66.086137, 17.665423, 71.626319));
+            BOUNDING_BOXES.Add(AUSTRALIA, new Envelope(112.728595, 154.343553, -44.134565, -9.219173));
+            BOUNDING_BOXES.Add(NEW_ZEALAND, new Envelope(166.199058, 178.689262, -47.405457, -34.187216));
+        }
 
         public static bool IsUnitedKingdom(string country)
         {
@@ -186,6 +204,14 @@ namespace FTAnalyzer
         public static bool IsEnglandWales(string country)
         {
             return country.Equals(ENG_WALES) || country.Equals(ENGLAND) || country.Equals(WALES);
+        }
+
+        public static Envelope BoundingBox(string country)
+        {
+            if (BOUNDING_BOXES.ContainsKey(country))
+                return BOUNDING_BOXES[country];
+            else
+                return WHOLE_WORLD;
         }
     }
 }

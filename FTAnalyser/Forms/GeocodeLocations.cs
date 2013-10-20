@@ -11,6 +11,7 @@ using FTAnalyzer.Utilities;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Events;
 using System.Data.SQLite;
+using GeoAPI.Geometries;
 
 namespace FTAnalyzer.Forms
 {
@@ -449,6 +450,7 @@ namespace FTAnalyzer.Forms
                                 string resultType = string.Empty;
                                 GeoResponse.CResult.CGeometry.CViewPort viewport = new GeoResponse.CResult.CGeometry.CViewPort();
                                 loc.GeocodeStatus = FactLocation.Geocode.NO_MATCH;
+                                Envelope bbox = Countries.BoundingBox(loc.Country);
                                 if (res.Status == "OK")
                                 {
                                     foreach (GeoResponse.CResult result in res.Results)
@@ -457,7 +459,7 @@ namespace FTAnalyzer.Forms
                                         address = result.ReturnAddress;
                                         viewport = result.Geometry.ViewPort;
                                         resultType = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
-                                        if (foundLevel >= loc.Level)
+                                        if (foundLevel >= loc.Level && bbox.Covers(new Coordinate(result.Geometry.Location.Long, result.Geometry.Location.Lat)))
                                         {
                                             latitude = result.Geometry.Location.Lat;
                                             longitude = result.Geometry.Location.Long;
