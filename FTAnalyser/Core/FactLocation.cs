@@ -691,7 +691,7 @@ namespace FTAnalyzer
         {
             if (Country.Equals(s))
                 return true;
-            if (!Countries.IsKnownCountry(Country)) // if we have an unknown country then say it matches
+            if (!Countries.IsKnownCountry(Country) || !Countries.IsKnownCountry(s)) // if we have an unknown country then say it matches
                 return true;
             if (Countries.IsEnglandWales(Country) && Countries.IsEnglandWales(s))
                 return true;
