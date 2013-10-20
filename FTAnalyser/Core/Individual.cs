@@ -508,8 +508,9 @@ namespace FTAnalyzer
             return false;
         }
 
-        public bool IsLostCousinEntered(FactDate when, string countryToCheck)
+        public bool IsLostCousinEntered(CensusDate when)
         {
+            string countryToCheck = when.Country;
             string dateCountry = BestLocation(when).Country;
             bool isEnglandWales = Countries.IsEnglandWales(dateCountry) && Countries.IsEnglandWales(countryToCheck);
             bool isUK = countryToCheck.Equals(Countries.UNITED_KINGDOM) && Countries.IsUnitedKingdom(dateCountry);
@@ -736,21 +737,21 @@ namespace FTAnalyzer
             return res;
         }
 
-        private int ColourCensusReport(FactDate census, string country)
+        private int ColourCensusReport(CensusDate census)
         {
 
             if (BirthDate.IsAfter(census) || DeathDate.IsBefore(census))
                 return 0; // not alive - grey
             if (!IsCensusDone(census))
             {
-                if (CensusDate.IsLostCousinsCensusYear(census, true) && IsLostCousinEntered(census, country))
+                if (CensusDate.IsLostCousinsCensusYear(census, true) && IsLostCousinEntered(census))
                     return 5; // LC entered but no census entered - orange
                 else
                     return 1; // no census - red
             }
             if (!CensusDate.IsLostCousinsCensusYear(census, true))
                 return 3; // census entered but not LCyear - green
-            if (IsLostCousinEntered(census, country))
+            if (IsLostCousinEntered(census))
                 return 4; // census + Lost cousins entered - green
             else
                 return 2; // census entered LC not entered - yellow
@@ -758,42 +759,42 @@ namespace FTAnalyzer
 
         public int C1841
         {
-            get { return ColourCensusReport(CensusDate.UKCENSUS1841, Countries.ENG_WALES); }
+            get { return ColourCensusReport(CensusDate.UKCENSUS1841); }
         }
 
         public int C1851
         {
-            get { return ColourCensusReport(CensusDate.UKCENSUS1851, Countries.ENG_WALES); }
+            get { return ColourCensusReport(CensusDate.UKCENSUS1851); }
         }
 
         public int C1861
         {
-            get { return ColourCensusReport(CensusDate.UKCENSUS1861, Countries.ENG_WALES); }
+            get { return ColourCensusReport(CensusDate.UKCENSUS1861); }
         }
 
         public int C1871
         {
-            get { return ColourCensusReport(CensusDate.UKCENSUS1871, Countries.ENG_WALES); }
+            get { return ColourCensusReport(CensusDate.UKCENSUS1871); }
         }
 
         public int C1881
         {
-            get { return ColourCensusReport(CensusDate.UKCENSUS1881, Countries.UNITED_KINGDOM); }
+            get { return ColourCensusReport(CensusDate.UKCENSUS1881); } 
         }
 
         public int C1891
         {
-            get { return ColourCensusReport(CensusDate.UKCENSUS1891, Countries.ENG_WALES); }
+            get { return ColourCensusReport(CensusDate.UKCENSUS1891); }
         }
 
         public int C1901
         {
-            get { return ColourCensusReport(CensusDate.UKCENSUS1901, Countries.ENG_WALES); }
+            get { return ColourCensusReport(CensusDate.UKCENSUS1901); }
         }
 
         public int C1911
         {
-            get { return ColourCensusReport(CensusDate.UKCENSUS1911, Countries.ENG_WALES); }
+            get { return ColourCensusReport(CensusDate.UKCENSUS1911); }
         }
 
         public bool AliveOnAnyCensus

@@ -839,7 +839,7 @@
             this.rtbLostCousins.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbLostCousins.Location = new System.Drawing.Point(564, 22);
             this.rtbLostCousins.Name = "rtbLostCousins";
-            this.rtbLostCousins.Size = new System.Drawing.Size(340, 265);
+            this.rtbLostCousins.Size = new System.Drawing.Size(340, 329);
             this.rtbLostCousins.TabIndex = 17;
             this.rtbLostCousins.Text = global::FTAnalyzer.Properties.Resources.FTA_0002;
             // 
