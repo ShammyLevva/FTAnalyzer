@@ -23,6 +23,8 @@ namespace FTAnalyzer.Forms
         private bool formClosing;
         private string statusText;
         private bool refreshingMenus;
+        private ISet<string> noneOfTheAbove;
+        private ToolStripMenuItem[] noneOfTheAboveMenus;
 
         public GeocodeLocations()
         {
@@ -154,9 +156,10 @@ namespace FTAnalyzer.Forms
                 return new SortableBindingList<IDisplayGeocodedLocation>(input);
             List<IDisplayGeocodedLocation> results = new List<IDisplayGeocodedLocation>();
             ToolStripMenuItem places = mnuGoogleResultType.DropDownItems["Places"] as ToolStripMenuItem;
-            ToolStripMenuItem[] list = new ToolStripMenuItem[places.DropDownItems.Count + mnuGoogleResultType.DropDownItems.Count];
-            places.DropDownItems.CopyTo(list, 0);
-            mnuGoogleResultType.DropDownItems.CopyTo(list, places.DropDownItems.Count);
+            ToolStripMenuItem[] list = new ToolStripMenuItem[places.DropDownItems.Count + mnuGoogleResultType.DropDownItems.Count + noneOfTheAboveMenus.Count()];
+            mnuGoogleResultType.DropDownItems.CopyTo(list, 0);
+            places.DropDownItems.CopyTo(list, mnuGoogleResultType.DropDownItems.Count);
+            noneOfTheAboveMenus.CopyTo(list, mnuGoogleResultType.DropDownItems.Count + places.DropDownItems.Count); // add any missing elements to always display them
             foreach (IDisplayGeocodedLocation loc in input)
             {
                 if (StatusFilter(loc))
@@ -182,6 +185,7 @@ namespace FTAnalyzer.Forms
 
         private void CheckGoogleStatusCodes(List<IDisplayGeocodedLocation> input)
         {
+            noneOfTheAbove = new HashSet<string>();
             Dictionary<string, List<IDisplayGeocodedLocation>> results = new Dictionary<string, List<IDisplayGeocodedLocation>>();
             foreach (IDisplayGeocodedLocation loc in input)
             {
@@ -194,11 +198,23 @@ namespace FTAnalyzer.Forms
                         if (!results.ContainsKey(key))
                         {
                             results[key] = new List<IDisplayGeocodedLocation>();
-                            //if (!GoogleMap.RESULT_TYPES.Contains(key))
-                            //    Console.WriteLine("Adding new type : " + key);
+                            if (!GoogleMap.RESULT_TYPES.Contains(key))
+                                noneOfTheAbove.Add(key);
                         }
                         results[key].Add(loc);
                     }
+                }
+            }
+            noneOfTheAboveMenus = new ToolStripMenuItem[noneOfTheAbove.Count];
+            if (noneOfTheAbove.Count > 0)
+            {
+                int index = 0;
+                foreach (string resultType in noneOfTheAbove)
+                {
+                    ToolStripMenuItem menu = new ToolStripMenuItem(resultType);
+                    menu.Name = resultType;
+                    menu.Checked = true;
+                    noneOfTheAboveMenus[index++] = menu;
                 }
             }
         }
@@ -214,7 +230,7 @@ namespace FTAnalyzer.Forms
 
         private void menuResultType_CheckedChanged(object sender, EventArgs e)
         {
-            if(!refreshingMenus)
+            if (!refreshingMenus)
                 UpdateGoogleStatusMenus();
         }
 
@@ -231,7 +247,7 @@ namespace FTAnalyzer.Forms
         {
             refreshingMenus = true;
             ToolStripMenuItem places = mnuGoogleResultType.DropDownItems["Places"] as ToolStripMenuItem;
-            if (AllFiltersActive(true))
+            if (mnuSelectClear.Text.Equals("Clear All"))
             {
                 mnuSelectClear.Text = "Select All";
                 foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)

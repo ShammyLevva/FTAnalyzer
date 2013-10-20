@@ -62,6 +62,7 @@ namespace FTAnalyzer.Forms
         public static readonly string CAMPGROUND = "campground";
         public static readonly string LODGING = "lodging";
         public static readonly string VETERINARY_CARE = "veterinary_care";
+        public static readonly string AMUSEMENT_PARK = "amusement_park";
         
         public static readonly ISet<string> RESULT_TYPES = new HashSet<string>(new string[] {
             STREET_ADDRESS, ROUTE, COUNTRY, ESTABLISHMENT, ADMIN1, ADMIN2, ADMIN3, LOCALITY,
@@ -70,7 +71,7 @@ namespace FTAnalyzer.Forms
             POINT_OF_INTEREST, STREET_NUMBER, BUS_STATION, TRANSIT_STATION, CHURCH,
             SUBWAY_STATION, TRAIN_STATION, UNIVERSITY, POLICE, MUSEUM, POST_OFFICE, 
             COURTHOUSE, FINANCE, COLLOQUIAL_AREA, LIBRARY, AQUARIUM, FIRE_STATION,
-            CAMPGROUND, LODGING, VETERINARY_CARE
+            CAMPGROUND, LODGING, VETERINARY_CARE, AMUSEMENT_PARK
         });
 
         public static readonly ISet<string> PLACES = new HashSet<string>(new string[] {
@@ -79,7 +80,7 @@ namespace FTAnalyzer.Forms
             PARK, AIRPORT, POINT_OF_INTEREST, STREET_NUMBER, BUS_STATION, CHURCH, 
             TRANSIT_STATION, SUBWAY_STATION, TRAIN_STATION, UNIVERSITY, POLICE, 
             MUSEUM, POST_OFFICE, COURTHOUSE, FINANCE, LIBRARY, AQUARIUM, FIRE_STATION,
-            CAMPGROUND, LODGING, VETERINARY_CARE
+            CAMPGROUND, LODGING, VETERINARY_CARE, AMUSEMENT_PARK
         });
 
         private String location;
