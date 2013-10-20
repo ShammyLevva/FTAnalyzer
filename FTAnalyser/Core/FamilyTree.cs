@@ -926,7 +926,7 @@ namespace FTAnalyzer
 
         #region Displays
 
-        public IEnumerable<CensusFamily> GetAllCensusFamilies(FactDate censusDate, bool censusDone)
+        public IEnumerable<CensusFamily> GetAllCensusFamilies(CensusDate censusDate, bool censusDone)
         {
             if (censusDate != null)
             {

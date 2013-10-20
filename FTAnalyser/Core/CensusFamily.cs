@@ -9,10 +9,10 @@ namespace FTAnalyzer
     public class CensusFamily : Family
     {
 
-        public FactDate CensusDate { get; private set; }
+        public CensusDate CensusDate { get; private set; }
         public FactLocation BestLocation { get; private set; }
 
-        public CensusFamily(Family f, FactDate censusDate)
+        public CensusFamily(Family f, CensusDate censusDate)
             : base(f)
         {
             this.CensusDate = censusDate;
@@ -24,7 +24,7 @@ namespace FTAnalyzer
             get { return base.Members.Select((i, pos) => new CensusIndividual(pos, i, this)); }
         }
 
-        public bool Process(FactDate censusDate, bool censusDone)
+        public bool Process(CensusDate censusDate, bool censusDone)
         {
             bool result = false;
             this.CensusDate = censusDate;

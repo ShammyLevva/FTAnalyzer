@@ -687,6 +687,19 @@ namespace FTAnalyzer
             }
         }
 
+        public bool CountryMatches(string s)
+        {
+            if (Country.Equals(s))
+                return true;
+            if (!Countries.IsKnownCountry(Country)) // if we have an unknown country then say it matches
+                return true;
+            if (Countries.IsEnglandWales(Country) == Countries.IsEnglandWales(s))
+                return true;
+            if (Countries.IsUnitedKingdom(Country) == Countries.IsUnitedKingdom(s))
+                return true;
+            return false;
+        }
+
         public int CompareTo(FactLocation that)
         {
             return CompareTo(that, PLACE);

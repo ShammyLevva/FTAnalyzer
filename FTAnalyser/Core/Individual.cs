@@ -315,9 +315,10 @@ namespace FTAnalyzer
 
         public string CensusName
         {
-            get { 
+            get
+            {
                 if (this.status == WIFE)
-                    return forenames + " " + marriedName + (Surname.Length > 0 ? " (" + Surname + ")" : string.Empty); 
+                    return forenames + " " + marriedName + (Surname.Length > 0 ? " (" + Surname + ")" : string.Empty);
                 else
                     return Name;
             }
@@ -495,14 +496,17 @@ namespace FTAnalyzer
             get { return infamily; }
         }
 
-        public bool IsCensusDone(FactDate when)
+        public bool IsCensusDone(CensusDate when)
         {
             foreach (Fact f in facts)
             {
                 if (f.FactDate.IsKnown)
                 {
                     if (f.IsCensusFact && f.FactDate.Overlaps(when))
-                        return true;
+                    {
+                        if (f.Location.CountryMatches(when.Country))
+                            return true;
+                    }
                 }
             }
             return false;
@@ -779,7 +783,7 @@ namespace FTAnalyzer
 
         public int C1881
         {
-            get { return ColourCensusReport(CensusDate.UKCENSUS1881); } 
+            get { return ColourCensusReport(CensusDate.UKCENSUS1881); }
         }
 
         public int C1891
