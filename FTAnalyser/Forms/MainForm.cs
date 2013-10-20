@@ -520,6 +520,12 @@ namespace FTAnalyzer
         
             count1841 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1841));
             countEW1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1881));
+
+            foreach (Individual i in listToCheck.Where(new Predicate<Individual>(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1881))))
+            {
+                Console.WriteLine(i.Name + " " + i.BirthDate + " " + i.BirthLocation);
+            }
+
             countSco1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.SCOTCENSUS1881));
             countCan1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.CANADACENSUS1881));
             countEW1911 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1911));
@@ -572,36 +578,24 @@ namespace FTAnalyzer
 
         private void btnLC1881EW_Click(object sender, EventArgs e)
         {
-            Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.EWCENSUS1881).Country;
-            Predicate<CensusIndividual> countryFilter = FilterUtils.OrFilter<CensusIndividual>(
-                FilterUtils.StringFilter<CensusIndividual>(country, Countries.ENGLAND),
-                FilterUtils.StringFilter<CensusIndividual>(country, Countries.WALES));
             string reportTitle = "1881 England & Wales Census Records on file";
             LostCousinsCensus(CensusDate.EWCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Scot_Click(object sender, EventArgs e)
         {
-            Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.SCOTCENSUS1881).Country;
-            Predicate<CensusIndividual> countryFilter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.SCOTLAND);
             string reportTitle = "1881 Scotland Census Records on file";
             LostCousinsCensus(CensusDate.SCOTCENSUS1881, reportTitle);
         }
 
         private void btnLC1881Canada_Click(object sender, EventArgs e)
         {
-            Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.CANADACENSUS1881).Country;
-            Predicate<CensusIndividual> countryFilter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.CANADA);
             string reportTitle = "1881 Canada Census Records on file";
             LostCousinsCensus(CensusDate.CANADACENSUS1881, reportTitle);
         }
 
         private void btnLC1841EW_Click(object sender, EventArgs e)
         {
-            Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.EWCENSUS1841).Country;
-            Predicate<CensusIndividual> countryFilter = FilterUtils.OrFilter<CensusIndividual>(
-                FilterUtils.StringFilter<CensusIndividual>(country, Countries.ENGLAND),
-                FilterUtils.StringFilter<CensusIndividual>(country, Countries.WALES));
             string reportTitle = "1841 England & Wales Census Records on file";
             LostCousinsCensus(CensusDate.EWCENSUS1841, reportTitle);
         }
@@ -609,34 +603,24 @@ namespace FTAnalyzer
 
         private void btnLC1911EW_Click(object sender, EventArgs e)
         {
-            Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.EWCENSUS1911).Country;
-            Predicate<CensusIndividual> countryFilter = FilterUtils.OrFilter<CensusIndividual>(
-                FilterUtils.StringFilter<CensusIndividual>(country, Countries.ENGLAND),
-                FilterUtils.StringFilter<CensusIndividual>(country, Countries.WALES));
             string reportTitle = "1911 England & Wales Census Records on file";
             LostCousinsCensus(CensusDate.EWCENSUS1911, reportTitle);
         }
 
         private void btnLC1880USA_Click(object sender, EventArgs e)
         {
-            Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.USCENSUS1880).Country;
-            Predicate<CensusIndividual> countryFilter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.UNITED_STATES);
             string reportTitle = "1880 US Census Records on file";
             LostCousinsCensus(CensusDate.USCENSUS1880, reportTitle);
         }
 
         private void btnLC1911Ireland_Click(object sender, EventArgs e)
         {
-            Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.IRELANDCENSUS1911).Country;
-            Predicate<CensusIndividual> countryFilter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.IRELAND);
             string reportTitle = "1911 Ireland Census Records on file";
             LostCousinsCensus(CensusDate.IRELANDCENSUS1911, reportTitle);
         }
 
         private void btnLC1940USA_Click(object sender, EventArgs e)
         {
-            Func<CensusIndividual, string> country = x => x.BestLocation(CensusDate.USCENSUS1940).Country;
-            Predicate<CensusIndividual> countryFilter = FilterUtils.StringFilter<CensusIndividual>(country, Countries.UNITED_STATES);
             string reportTitle = "1940 US Census Records on file";
             LostCousinsCensus(CensusDate.USCENSUS1940, reportTitle);
         }

@@ -478,7 +478,7 @@ namespace FTAnalyzer
             return ind.FamiliesAsParent.Any(f =>
             {
                 FactDate marriage = f.GetPreferredFactDate(Fact.MARRIAGE);
-                return (marriage != null && marriage.StartsBefore(fd));
+                return (marriage != null && marriage.IsBefore(fd));
             });
         }
 
