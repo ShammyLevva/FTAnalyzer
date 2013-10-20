@@ -925,6 +925,13 @@ namespace FTAnalyzer
                     if (cf.Process(censusDate, censusDone))
                         yield return cf;
                 }
+                // also add all individuals that don't ever appear as a child as they may have census facts for when they are children
+                foreach (Individual ind in individuals.Where(x => x.FamiliesAsChild.Count == 0))
+                {
+                    CensusFamily cf = new CensusFamily(new Family(ind), censusDate);
+                    if (cf.Process(censusDate, censusDone))
+                        yield return cf;
+                }
             }
         }
 

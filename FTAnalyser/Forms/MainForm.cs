@@ -549,6 +549,15 @@ namespace FTAnalyzer
             rtbLostCousins.AppendText("___________________________________\n");
             rtbLostCousins.AppendText("Total: " + total);
 
+            foreach (Individual i in listToCheck)
+            {
+                int missing = i.NumMissingLostCousins;
+                if (missing > 0)
+                {
+                    Console.WriteLine(i.Ind_ID + " " + i.Name + " " + i.BirthDate + " " + missing);
+                }
+            }
+
             int LCMissingCount = listToCheck.Sum(x => x.NumMissingLostCousins);
             if (LCMissingCount > 0)
             {
