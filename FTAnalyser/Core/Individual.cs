@@ -496,6 +496,17 @@ namespace FTAnalyzer
             get { return infamily; }
         }
 
+        public bool IsMarried(FactDate fd)
+        {
+            if (IsSingleAtDeath())
+                return false;
+            return FamiliesAsParent.Any(f =>
+            {
+                FactDate marriage = f.GetPreferredFactDate(Fact.MARRIAGE);
+                return (marriage != null && marriage.IsBefore(fd));
+            });
+        }
+        
         public bool IsCensusDone(CensusDate when)
         {
             foreach (Fact f in facts)

@@ -471,17 +471,6 @@ namespace FTAnalyzer
             return sources.FirstOrDefault(s => s.SourceID == sourceID);
         }
 
-        public bool IsMarried(Individual ind, FactDate fd)
-        {
-            if (ind.IsSingleAtDeath())
-                return false;
-            return ind.FamiliesAsParent.Any(f =>
-            {
-                FactDate marriage = f.GetPreferredFactDate(Fact.MARRIAGE);
-                return (marriage != null && marriage.IsBefore(fd));
-            });
-        }
-
         public Individual GetIndividual(string individualID)
         {
             return individuals.FirstOrDefault(i => i.IndividualID == individualID);

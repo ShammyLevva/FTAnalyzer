@@ -80,7 +80,6 @@ namespace FTAnalyzer
         {
             if (indiv == null)
                 return false;
-            FamilyTree ft = FamilyTree.Instance;
             DateTime birth = indiv.BirthDate.StartDate;
             DateTime death = indiv.DeathDate.EndDate;
             if (birth < CensusDate.StartDate && death > CensusDate.StartDate && indiv.IsCensusDone(CensusDate) == censusDone)
@@ -88,7 +87,7 @@ namespace FTAnalyzer
                 if (parentCheck) // Husband or Wife with valid date range
                     return true;
                 else // individual is a child so remove if married before census date
-                    return !ft.IsMarried(indiv, CensusDate);
+                    return !indiv.IsMarried(CensusDate);
             }
             else
                 return false;
