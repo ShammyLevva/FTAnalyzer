@@ -19,9 +19,9 @@ namespace FTAnalyzer
         public static readonly CensusDate UKCENSUS1901 = new CensusDate("31 MAR 1901", "UK Census 1901", Countries.UNITED_KINGDOM);
         public static readonly CensusDate UKCENSUS1911 = new CensusDate("02 APR 1911", "UK Census 1911", Countries.UNITED_KINGDOM);
 
-        public static readonly CensusDate EWCENSUS1841 = new CensusDate("06 JUN 1841", "E&W Census 1841", Countries.ENG_WALES);
-        public static readonly CensusDate EWCENSUS1881 = new CensusDate("03 APR 1881", "E&W Census 1881", Countries.ENG_WALES);
-        public static readonly CensusDate EWCENSUS1911 = new CensusDate("02 APR 1911", "E&W Census 1911", Countries.ENG_WALES);
+        public static readonly CensusDate EWCENSUS1841 = new CensusDate("06 JUN 1841", "England & Wales Census 1841", Countries.ENG_WALES);
+        public static readonly CensusDate EWCENSUS1881 = new CensusDate("03 APR 1881", "England & Wales Census 1881", Countries.ENG_WALES);
+        public static readonly CensusDate EWCENSUS1911 = new CensusDate("02 APR 1911", "England & Wales Census 1911", Countries.ENG_WALES);
         public static readonly CensusDate SCOTCENSUS1881 = new CensusDate("03 APR 1881", "Scotland Census 1881", Countries.SCOTLAND);
 
         public static readonly CensusDate IRELANDCENSUS1911 = new CensusDate("02 APR 1911", "Ireland Census 1911", Countries.IRELAND);
@@ -63,7 +63,8 @@ namespace FTAnalyzer
             USCENSUS1790, USCENSUS1800, USCENSUS1810, USCENSUS1820, USCENSUS1830, USCENSUS1840, USCENSUS1850, USCENSUS1860,
             USCENSUS1870, USCENSUS1880, USCENSUS1890, USCENSUS1900, USCENSUS1910, USCENSUS1920, USCENSUS1930, USCENSUS1940,
             CANADACENSUS1851, CANADACENSUS1861, CANADACENSUS1871, CANADACENSUS1881, CANADACENSUS1891, CANADACENSUS1901,
-            CANADACENSUS1906, CANADACENSUS1911, CANADACENSUS1916, CANADACENSUS1921, IRELANDCENSUS1911
+            CANADACENSUS1906, CANADACENSUS1911, CANADACENSUS1916, CANADACENSUS1921, IRELANDCENSUS1911,
+            EWCENSUS1841, EWCENSUS1881, EWCENSUS1911, SCOTCENSUS1881
         });
 
         public static readonly ISet<CensusDate> LOSTCOUSINS_CENSUS = new HashSet<CensusDate>(new CensusDate[] { 

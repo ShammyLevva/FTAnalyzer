@@ -693,7 +693,7 @@ namespace FTAnalyzer
                 return true;
             if (includeUnknownCountries)
             {
-                if (!Countries.IsKnownCountry(Country) || !Countries.IsKnownCountry(s)) // if we have an unknown country then say it matches
+                if (!Countries.IsKnownCountry(Country)) // if we have an unknown country then say it matches
                     return true;
             }
             if (Country == Countries.UNITED_KINGDOM && Countries.IsUnitedKingdom(s))
