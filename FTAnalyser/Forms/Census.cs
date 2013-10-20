@@ -23,7 +23,7 @@ namespace FTAnalyzer.Forms
 
         public bool LostCousins { get; private set; }
 
-        public Census(CensusDate censusDate, string censusCountry)
+        public Census(CensusDate censusDate)
         {
             InitializeComponent();
             dgCensus.AutoGenerateColumns = false;
@@ -32,7 +32,7 @@ namespace FTAnalyzer.Forms
 
             this.LostCousins = false;
             this.CensusDate = censusDate;
-            this.censusCountry = censusCountry;
+            this.censusCountry = CensusDate.Country;
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
             {
@@ -48,17 +48,23 @@ namespace FTAnalyzer.Forms
             SetupDataGridView(censusDone, individuals);
         }
 
-        public void SetupLCCensus(Predicate<CensusIndividual> countryFilter, Predicate<CensusIndividual> dateFilter, bool showEnteredLostCousins)
+        public void SetupLCCensus(bool onlyBloodOrDirect, bool showEnteredLostCousins)
         {
             this.LostCousins = true;
             IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, true);
-            Predicate<CensusIndividual> filter = FilterUtils.AndFilter(countryFilter, dateFilter);
+            Func<CensusIndividual, bool> filter = onlyBloodOrDirect ?
+                new Func<CensusIndividual, bool>(x => x.IsBloodDirect && x.IsCensusDone(CensusDate)) :
+                x => x.IsCensusDone(CensusDate);
+
             IEnumerable<CensusIndividual> onCensus = censusFamilies.SelectMany(f => f.Members).Where(filter);
             List<CensusIndividual> individuals;
             if (showEnteredLostCousins)
             {
                 IEnumerable<CensusFamily> notOnCensusFamilies = ft.GetAllCensusFamilies(CensusDate, false);
-                IEnumerable<CensusIndividual> notOnCensus = notOnCensusFamilies.SelectMany(f => f.Members).Where(countryFilter);
+                filter = onlyBloodOrDirect ?
+                    new Func<CensusIndividual, bool>(x => x.IsBloodDirect && !x.IsCensusDone(CensusDate)) :
+                    x => !x.IsCensusDone(CensusDate);
+                IEnumerable<CensusIndividual> notOnCensus = notOnCensusFamilies.SelectMany(f => f.Members).Where(filter);
                 IEnumerable<CensusIndividual> allEligible = onCensus.Union(notOnCensus);
 
                 Predicate<CensusIndividual> predicate = x => x.IsLostCousinEntered(CensusDate);
