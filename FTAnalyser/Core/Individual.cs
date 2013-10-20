@@ -504,7 +504,7 @@ namespace FTAnalyzer
                 {
                     if (f.IsCensusFact && f.FactDate.Overlaps(when))
                     {
-                        if (f.Location.CountryMatches(when.Country))
+                        if (f.Location.CensusCountryMatches(when.Country))
                             return true;
                     }
                 }
@@ -514,20 +514,8 @@ namespace FTAnalyzer
 
         public bool IsLostCousinEntered(CensusDate when)
         {
-            string countryToCheck = when.Country;
-            string dateCountry = BestLocation(when).Country;
-            bool isEnglandWales = Countries.IsEnglandWales(dateCountry) && Countries.IsEnglandWales(countryToCheck);
-            bool isUK = countryToCheck.Equals(Countries.UNITED_KINGDOM) && Countries.IsUnitedKingdom(dateCountry);
-            bool isUnknown = countryToCheck.Equals(Countries.UNKNOWN_COUNTRY); // don't check for country if pass unknown
-            foreach (Fact f in facts)
-            {
-                if (f.FactType == Fact.LOSTCOUSINS && f.FactDate.IsKnown && f.FactDate.Overlaps(when))
-                {
-                    if (isUK || isUnknown || isEnglandWales || dateCountry == countryToCheck)
-                        return true;
-                }
-            }
-            return false;
+            Predicate<Fact> p = new Predicate<Fact>(f => f.FactType == Fact.LOSTCOUSINS && f.FactDate.IsKnown && f.FactDate.Overlaps(when));
+            return facts.Any<Fact>(f => p(f) && this.BestLocation(when).CensusCountryMatches(when.Country));
         }
 
         public bool IsAlive(FactDate when)
@@ -935,6 +923,16 @@ namespace FTAnalyzer
                     return "To " + marriage.Husband.Name + " : " + marriage.ToString();
                 else
                     return "Married : " + marriage.ToString();
+            }
+        }
+
+        public int NumMissingLostCousins
+        {
+            get
+            {
+                if (!AliveOnAnyCensus) return 0;
+                int numMissing = CensusDate.LOSTCOUSINS_CENSUS.Count(x => this.IsCensusDone(x) && !this.IsLostCousinEntered(x));
+                return numMissing;
             }
         }
 

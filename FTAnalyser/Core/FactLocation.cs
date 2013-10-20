@@ -687,15 +687,17 @@ namespace FTAnalyzer
             }
         }
 
-        public bool CountryMatches(string s)
+        public bool CensusCountryMatches(string s)
         {
             if (Country.Equals(s))
                 return true;
             if (!Countries.IsKnownCountry(Country)) // if we have an unknown country then say it matches
                 return true;
-            if (Countries.IsEnglandWales(Country) == Countries.IsEnglandWales(s))
+            if (Countries.IsEnglandWales(Country) && Countries.IsEnglandWales(s))
                 return true;
-            if (Countries.IsUnitedKingdom(Country) == Countries.IsUnitedKingdom(s))
+            if (Country == Countries.SCOTLAND  || s == Countries.SCOTLAND)
+                return false; // Either Country or s is not Scotland at this point, so not matching census country.
+            if (Countries.IsUnitedKingdom(Country) && Countries.IsUnitedKingdom(s))
                 return true;
             return false;
         }

@@ -542,23 +542,8 @@ namespace FTAnalyzer
             rtbLostCousins.AppendText("1940 US Census: " + count1940 + "\n");
             rtbLostCousins.AppendText("___________________________________\n");
             rtbLostCousins.AppendText("Total: " + total);
-            
-            int LCMissingCount = 0;
-            foreach (Individual ind in listToCheck)
-            {
-                if (ind.AliveOnAnyCensus)
-                {
-                    foreach (CensusDate censusDate in CensusDate.LOSTCOUSINS_CENSUS)
-                    {
-                        if (ind.IsCensusDone(censusDate))
-                        {
-                            Fact census = ind.BestFact(censusDate, int.MaxValue);
-                            if (census.Location.Country == censusDate.Country && !ind.IsLostCousinEntered(censusDate))
-                                LCMissingCount++;
-                        }
-                    }
-                }
-            }
+
+            int LCMissingCount = listToCheck.Sum(x => x.NumMissingLostCousins);
             if (LCMissingCount > 0)
             {
                 int startpos = rtbLostCousins.TextLength;
