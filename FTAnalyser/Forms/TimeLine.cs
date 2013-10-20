@@ -483,7 +483,7 @@ namespace FTAnalyzer.Forms
             btnForward1.Visible = !mnuDisableTimeline.Checked;
             btnForward10.Visible = !mnuDisableTimeline.Checked;
             btnPlay.Visible = !mnuDisableTimeline.Checked;
-            btnStop.Visible = !mnuDisableTimeline.Checked;
+            btnStop.Visible = !btnPlay.Visible;
             toolStripSeparator2.Visible = !mnuDisableTimeline.Checked;
             toolStripSeparator3.Visible = !mnuDisableTimeline.Checked;
             labValue.Visible = !mnuDisableTimeline.Checked;
