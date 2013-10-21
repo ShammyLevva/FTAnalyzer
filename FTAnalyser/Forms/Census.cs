@@ -227,7 +227,14 @@ namespace FTAnalyzer.Forms
             {
                 CensusIndividual ds = dgCensus.CurrentRow == null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
                 FamilyTree ft = FamilyTree.Instance;
-                ft.SearchCensus(censusCountry, CensusDate.StartDate.Year, ds, cbCensusSearchProvider.SelectedIndex);
+                if (LostCousins)
+                {
+                    Facts factForm = new Facts(ds);
+                    MainForm.DisposeDuplicateForms(factForm);
+                    factForm.Show();
+                }
+                else
+                    ft.SearchCensus(censusCountry, CensusDate.StartDate.Year, ds, cbCensusSearchProvider.SelectedIndex);
             }
         }
 
