@@ -186,6 +186,11 @@ namespace FTAnalyzer
             BOUNDING_BOXES.Add(NEW_ZEALAND, new Envelope(166.199058, 178.689262, -47.405457, -34.187216));
             BOUNDING_BOXES.Add(FRANCE, new Envelope(-5.231600, 8.357236, 42.237011, 51.173873));
             BOUNDING_BOXES.Add(BELGIUM, new Envelope(2.436859, 6.533508, 49.389841, 51.530658));
+            BOUNDING_BOXES.Add(NETHERLANDS, new Envelope(3.205904, 7.324528, 50.886015, 53.756544));
+            BOUNDING_BOXES.Add(GERMANY, new Envelope(5.732761, 15.212713, 47.126544, 55.048204));
+            BOUNDING_BOXES.Add(SPAIN, new Envelope(-9.428367, 4.709787, 35.867189, 43.875768));
+            BOUNDING_BOXES.Add(PORTUGAL, new Envelope(-17.360492, -6.100757, 32.487006, 42.254591));
+            BOUNDING_BOXES.Add(ITALY, new Envelope(6.523787, 18.662428, 36.523271, 47.168847));
         }
 
         public static bool IsUnitedKingdom(string country)
