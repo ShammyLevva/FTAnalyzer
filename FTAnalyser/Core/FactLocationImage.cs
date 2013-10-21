@@ -23,6 +23,8 @@ namespace FTAnalyzer
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Complete_OK.png")));
         private static FactLocationImage NO_MATCH = new FactLocationImage(FactLocation.Geocode.NO_MATCH,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\CriticalError.png")));
+        private static FactLocationImage INCORRECT = new FactLocationImage(FactLocation.Geocode.INCORRECT,
+            Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Flagged.png")));
 
         public FactLocationImage(FactLocation.Geocode errorLevel, Image img)
         {
@@ -44,6 +46,8 @@ namespace FTAnalyzer
                     return GEDCOM_USER;
                 case FactLocation.Geocode.NO_MATCH:
                     return NO_MATCH;
+                case FactLocation.Geocode.INCORRECT:
+                    return INCORRECT;
             }
             return NO_MATCH;
         }

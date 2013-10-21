@@ -51,10 +51,11 @@ namespace FTAnalyzer.Forms
             int partial = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH));
             int notsearched = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1);
             int notfound = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NO_MATCH)));
+            int incorrect = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.INCORRECT)));
             int total = FactLocation.AllLocations.Count() - 1;
 
             txtGoogleWait.Text = string.Empty;
-            statusText = "Already Geocoded: " + (gedcom + found) + ", partial/not found: " + (partial + notfound) + ", yet to search: " + notsearched + " of " + total + " locations.";
+            statusText = "Already Geocoded: " + (gedcom + found) + ", partial/not found/incorrect: " + (partial + notfound + incorrect) + ", yet to search: " + notsearched + " of " + total + " locations.";
             txtLocations.Text = statusText;
         }
 
@@ -321,18 +322,28 @@ namespace FTAnalyzer.Forms
             {
                 this.Cursor = Cursors.WaitCursor;
                 FactLocation loc = dgLocations.Rows[e.RowIndex].DataBoundItem as FactLocation;
-                EditLocation editform = new EditLocation(loc);
-                this.Cursor = Cursors.Default;
-                DialogResult result = editform.ShowDialog(this);
-                editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
-                // force refresh of locations from new edited data
-                UpdateGridWithFilters(locations);
-                for (int i = 0; i < dgLocations.RowCount; i++)
-                {
-                    dgLocations.Rows[i].Selected = (dgLocations.Rows[i].DataBoundItem.Equals(loc));
-                }
-                dgLocations.FirstDisplayedScrollingRowIndex = dgLocations.SelectedRows[0].Index;
+                EditLocation(loc);
             }
+        }
+
+        private void mnuEditLocation_Click(object sender, EventArgs e)
+        {
+            if (!ft.Geocoding)
+            {
+                this.Cursor = Cursors.WaitCursor;
+                FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
+                EditLocation(loc);
+            }
+        }
+
+        private void EditLocation(FactLocation loc)
+        {
+            EditLocation editform = new EditLocation(loc);
+            this.Cursor = Cursors.Default;
+            DialogResult result = editform.ShowDialog(this);
+            editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
+            // force refresh of locations from new edited data
+            dgLocations.Refresh();
         }
 
         #region Threading
@@ -425,6 +436,8 @@ namespace FTAnalyzer.Forms
                 {
                     if (loc.IsGeoCoded)
                         geocoded++;
+                    else if(loc.GeocodeStatus == FactLocation.Geocode.INCORRECT)
+                        skipped++; // don't re-geocode incorrect ones as that would reset incorrect flag back to what user already identified was wrong
                     else
                     {
                         cmd.Parameters[0].Value = loc.ToString();
@@ -577,6 +590,38 @@ namespace FTAnalyzer.Forms
             {
                 DataGridViewCell cell = dgLocations.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 cell.ToolTipText = "Double click to edit location.";
+            }
+        }
+
+        private void mnuVerified_Click(object sender, EventArgs e)
+        {
+            FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
+            loc.GeocodeStatus = FactLocation.Geocode.GEDCOM_USER;
+            DatabaseHelper.Instance.UpdateGeocodeStatus(loc.ToString(), loc.GeocodeStatus);
+            dgLocations.Refresh();
+        }
+
+        private void mnuIncorrect_Click(object sender, EventArgs e)
+        {
+            FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
+            loc.GeocodeStatus = FactLocation.Geocode.INCORRECT;
+            DatabaseHelper.Instance.UpdateGeocodeStatus(loc.ToString(), loc.GeocodeStatus);
+            dgLocations.Refresh();
+        }
+
+        private void mnuNotSearched_Click(object sender, EventArgs e)
+        {
+            FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
+            loc.GeocodeStatus = FactLocation.Geocode.NOT_SEARCHED;
+            DatabaseHelper.Instance.UpdateGeocodeStatus(loc.ToString(), loc.GeocodeStatus);
+            dgLocations.Refresh();
+        }
+
+        private void dgLocations_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                dgLocations.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
             }
         }
     }

@@ -16,7 +16,7 @@ namespace FTAnalyzer
     public class FactLocation : IComparable<FactLocation>, IDisplayLocation, IDisplayGeocodedLocation
     {
         public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, SUBREGION = 2, ADDRESS = 3, PLACE = 4;
-        public enum Geocode { NOT_SEARCHED = 0, MATCHED = 1, PARTIAL_MATCH = 2, GEDCOM_USER = 3, NO_MATCH = 4 };
+        public enum Geocode { NOT_SEARCHED = 0, MATCHED = 1, PARTIAL_MATCH = 2, GEDCOM_USER = 3, NO_MATCH = 4, INCORRECT = 5 };
 
         private string location;
         private string fixedLocation;
@@ -144,6 +144,7 @@ namespace FTAnalyzer
             Geocodes.Add(Geocode.PARTIAL_MATCH, "Partial Match");
             Geocodes.Add(Geocode.MATCHED, "Matched");
             Geocodes.Add(Geocode.NO_MATCH, "No Match");
+            Geocodes.Add(Geocode.INCORRECT, "Incorrect (User)");
         }
 
         public static FactLocation GetLocation(string place)

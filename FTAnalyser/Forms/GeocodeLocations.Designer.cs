@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -40,6 +41,12 @@
             this.GeocodeStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GoogleLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GoogleResultType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuVerified = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuIncorrect = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNotSearched = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuEditLocation = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.txtLocations = new System.Windows.Forms.ToolStripStatusLabel();
             this.pbGeocoding = new System.Windows.Forms.ToolStripProgressBar();
@@ -64,6 +71,7 @@
             this.mnuGoogleResultType = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSelectClear = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgLocations)).BeginInit();
+            this.contextMenuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -84,6 +92,7 @@
             this.GeocodeStatus,
             this.GoogleLocation,
             this.GoogleResultType});
+            this.dgLocations.ContextMenuStrip = this.contextMenuStrip;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -94,6 +103,7 @@
             this.dgLocations.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgLocations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgLocations.Location = new System.Drawing.Point(0, 49);
+            this.dgLocations.MultiSelect = false;
             this.dgLocations.Name = "dgLocations";
             this.dgLocations.ReadOnly = true;
             this.dgLocations.RowHeadersVisible = false;
@@ -101,6 +111,7 @@
             this.dgLocations.ShowEditingIcon = false;
             this.dgLocations.Size = new System.Drawing.Size(894, 300);
             this.dgLocations.TabIndex = 5;
+            this.dgLocations.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgLocations_CellContextMenuStripNeeded);
             this.dgLocations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgLocations_CellDoubleClick);
             this.dgLocations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgLocations_CellFormatting);
             // 
@@ -180,6 +191,53 @@
             this.GoogleResultType.Name = "GoogleResultType";
             this.GoogleResultType.ReadOnly = true;
             this.GoogleResultType.Width = 300;
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuVerified,
+            this.mnuIncorrect,
+            this.mnuNotSearched,
+            this.toolStripSeparator1,
+            this.mnuEditLocation});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(240, 120);
+            // 
+            // mnuVerified
+            // 
+            this.mnuVerified.Image = ((System.Drawing.Image)(resources.GetObject("mnuVerified.Image")));
+            this.mnuVerified.Name = "mnuVerified";
+            this.mnuVerified.Size = new System.Drawing.Size(239, 22);
+            this.mnuVerified.Text = "Mark Location as Verified";
+            this.mnuVerified.Click += new System.EventHandler(this.mnuVerified_Click);
+            // 
+            // mnuIncorrect
+            // 
+            this.mnuIncorrect.Image = ((System.Drawing.Image)(resources.GetObject("mnuIncorrect.Image")));
+            this.mnuIncorrect.Name = "mnuIncorrect";
+            this.mnuIncorrect.Size = new System.Drawing.Size(239, 22);
+            this.mnuIncorrect.Text = "Mark Location as Incorrect";
+            this.mnuIncorrect.Click += new System.EventHandler(this.mnuIncorrect_Click);
+            // 
+            // mnuNotSearched
+            // 
+            this.mnuNotSearched.Image = ((System.Drawing.Image)(resources.GetObject("mnuNotSearched.Image")));
+            this.mnuNotSearched.Name = "mnuNotSearched";
+            this.mnuNotSearched.Size = new System.Drawing.Size(239, 22);
+            this.mnuNotSearched.Text = "Reset Location to Not Searched";
+            this.mnuNotSearched.Click += new System.EventHandler(this.mnuNotSearched_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(236, 6);
+            // 
+            // mnuEditLocation
+            // 
+            this.mnuEditLocation.Name = "mnuEditLocation";
+            this.mnuEditLocation.Size = new System.Drawing.Size(239, 22);
+            this.mnuEditLocation.Text = "Edit Location";
+            this.mnuEditLocation.Click += new System.EventHandler(this.mnuEditLocation_Click);
             // 
             // statusStrip
             // 
@@ -373,7 +431,7 @@
             // mnuSelectClear
             // 
             this.mnuSelectClear.Name = "mnuSelectClear";
-            this.mnuSelectClear.Size = new System.Drawing.Size(152, 22);
+            this.mnuSelectClear.Size = new System.Drawing.Size(122, 22);
             this.mnuSelectClear.Text = "Select All";
             this.mnuSelectClear.Click += new System.EventHandler(this.mnuSelectClear_Click);
             // 
@@ -391,6 +449,7 @@
             this.Text = "Locations Geocoding  Status Report";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GeocodeLocations_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dgLocations)).EndInit();
+            this.contextMenuStrip.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -435,5 +494,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn GoogleLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn GoogleResultType;
         private System.Windows.Forms.ToolStripMenuItem mnuSelectClear;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem mnuVerified;
+        private System.Windows.Forms.ToolStripMenuItem mnuIncorrect;
+        private System.Windows.Forms.ToolStripMenuItem mnuNotSearched;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem mnuEditLocation;
     }
 }

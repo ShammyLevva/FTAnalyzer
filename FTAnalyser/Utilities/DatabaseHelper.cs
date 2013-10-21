@@ -192,6 +192,26 @@ namespace FTAnalyzer.Utilities
             return insertCmd;
         }
 
+        public void UpdateGeocodeStatus(string location, FactLocation.Geocode status)
+        {
+            SQLiteCommand updateCmd = new SQLiteCommand("update geocode set founddate = date('now'), geocodestatus = ? where location = ?", conn);
+
+            SQLiteParameter param = updateCmd.CreateParameter();
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.Int32;
+            updateCmd.Parameters.Add(param);
+
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.String;
+            updateCmd.Parameters.Add(param);
+
+            updateCmd.Prepare();
+            updateCmd.Parameters[0].Value = status;
+            updateCmd.Parameters[1].Value = location;
+
+            updateCmd.ExecuteNonQuery();
+        }
+
         public SQLiteCommand UpdateGeocode()
         {
             SQLiteCommand updateCmd = new SQLiteCommand("update geocode set level = ?, latitude = ?, longitude = ?, founddate = date('now'), foundlocation = ?, foundlevel = ?, viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ?, geocodestatus = ?, foundresulttype = ? where location = ?", conn);
