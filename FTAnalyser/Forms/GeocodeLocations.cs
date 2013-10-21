@@ -261,6 +261,8 @@ namespace FTAnalyzer.Forms
                 mnuSelectClear.Text = "Clear All";
                 foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
                     menu.Checked = true;
+                foreach (ToolStripMenuItem menu in places.DropDownItems)
+                    menu.Checked = true;
                 mnuSelectClear.Checked = false; // make sure the clear all isn't checked
                 places.Checked = false;
             }
