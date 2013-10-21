@@ -507,52 +507,55 @@ namespace FTAnalyzer
             else
                 listToCheck= ft.AllIndividuals;
 
-            //foreach (Individual i in listToCheck.Where(new Predicate<Individual>(x => x.IsLostCousinEntered(CensusDate.SCOTCENSUS1881))))
-            //{
-            //    Console.WriteLine(i.Ind_ID + "," + i.Name + "," + i.BirthDate + "," + i.BirthLocation);
-            //}
+            int count1841, countEW1881, countSco1881, countCan1881, countEW1911, countIre1911, count1880, count1940;
+            int location1841, locationEW1881, locationSco1881, locationCan1881, locationEW1911, locationIre1911, location1880, location1940;
+            count1841 = countEW1881 = countSco1881 = countCan1881 = countEW1911 = countIre1911 = count1880 = count1940 = 0;
+            location1841 = locationEW1881 = locationSco1881 = locationCan1881 = locationEW1911 = locationIre1911 = location1880 = location1940 = 0;
+            foreach (Individual ind in listToCheck)
+            {
+                count1841 += (ind.IsLostCousinEntered(CensusDate.EWCENSUS1841, false) ? 1 : 0);
+                countEW1881 += (ind.IsLostCousinEntered(CensusDate.EWCENSUS1881, false) ? 1 : 0);
+                countSco1881 += (ind.IsLostCousinEntered(CensusDate.SCOTCENSUS1881, false) ? 1 : 0);
+                countCan1881 += (ind.IsLostCousinEntered(CensusDate.CANADACENSUS1881, false) ? 1 : 0);
+                countEW1911 += (ind.IsLostCousinEntered(CensusDate.EWCENSUS1911, false) ? 1 : 0);
+                countIre1911 += (ind.IsLostCousinEntered(CensusDate.IRELANDCENSUS1911, false) ? 1 : 0);
+                count1880 += (ind.IsLostCousinEntered(CensusDate.USCENSUS1880, false) ? 1 : 0);
+                count1940 += (ind.IsLostCousinEntered(CensusDate.USCENSUS1940, false) ? 1 : 0);
 
-            int count1841 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1841, false));
-            int countEW1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1881, false));
-            int countSco1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.SCOTCENSUS1881, false));
-            int countCan1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.CANADACENSUS1881, false));
-            int countEW1911 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1911, false));
-            int countIre1911 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.IRELANDCENSUS1911, false));
-            int count1880 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.USCENSUS1880, false));
-            int count1940 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.USCENSUS1940, false));
+                location1841 += (ind.MissingLostCousins(CensusDate.EWCENSUS1841, false) ? 1 : 0);
+                locationEW1881 += (ind.MissingLostCousins(CensusDate.EWCENSUS1881, false) ? 1 : 0);
+                locationSco1881 += (ind.MissingLostCousins(CensusDate.SCOTCENSUS1881, false) ? 1 : 0);
+                locationCan1881 += (ind.MissingLostCousins(CensusDate.CANADACENSUS1881, false) ? 1 : 0);
+                locationEW1911 += (ind.MissingLostCousins(CensusDate.EWCENSUS1911, false) ? 1 : 0);
+                locationIre1911 += (ind.MissingLostCousins(CensusDate.IRELANDCENSUS1911, false) ? 1 : 0);
+                location1880 += (ind.MissingLostCousins(CensusDate.USCENSUS1880, false) ? 1 : 0);
+                location1940 += (ind.MissingLostCousins(CensusDate.USCENSUS1940, false) ? 1 : 0);
+            }
+
             
             int total = count1841 + countEW1881 + countSco1881 + countCan1881 + countEW1911 + countIre1911 + count1880 + count1940;
             int LCtotal = listToCheck.Sum(i => i.LostCousinsFacts);
+            int missingtotal = location1841 + locationEW1881 + locationSco1881 + locationCan1881 + locationEW1911 + locationIre1911 + location1880 + location1940;
 
-            rtbLostCousins.AppendText("1881 England & Wales Census: " + countEW1881 + "\n");
-            rtbLostCousins.AppendText("1841 England & Wales Census: " + count1841 + "\n");
-            rtbLostCousins.AppendText("1911 England & Wales Census: " + countEW1911 + "\n");
-            rtbLostCousins.AppendText("___________________________________\n");
-            rtbLostCousins.AppendText("1881 Scotland Census: " + countSco1881 + "\n");
-            rtbLostCousins.AppendText("___________________________________\n");
-            rtbLostCousins.AppendText("1911 Ireland Census: " + countIre1911 + "\n");
-            rtbLostCousins.AppendText("___________________________________\n");
-            rtbLostCousins.AppendText("1881 Canada Census: " + countCan1881 + "\n");
-            rtbLostCousins.AppendText("___________________________________\n");
-            rtbLostCousins.AppendText("1880 US Census: " + count1880 + "\n");
-            rtbLostCousins.AppendText("1940 US Census: " + count1940 + "\n");
-            rtbLostCousins.AppendText("___________________________________\n");
+            rtbLostCousins.AppendText("1881 England & Wales Census: " + countEW1881 + " Found, " + locationEW1881 + " Missing\n");
+            rtbLostCousins.AppendText("1841 England & Wales Census: " + count1841 + " Found, " + location1841 + " Missing\n");
+            rtbLostCousins.AppendText("1911 England & Wales Census: " + countEW1911 + " Found, " + locationEW1911 + " Missing\n");
+            rtbLostCousins.AppendText("_____________________________________________\n");
+            rtbLostCousins.AppendText("1881 Scotland Census: " + countSco1881 + " Found, " + locationSco1881 + " Missing\n");
+            rtbLostCousins.AppendText("_____________________________________________\n");
+            rtbLostCousins.AppendText("1911 Ireland Census: " + countIre1911 + " Found, " + locationIre1911 + " Missing\n");
+            rtbLostCousins.AppendText("_____________________________________________\n");
+            rtbLostCousins.AppendText("1881 Canada Census: " + countCan1881 + " Found, " + locationCan1881 + " Missing\n");
+            rtbLostCousins.AppendText("_____________________________________________\n");
+            rtbLostCousins.AppendText("1880 US Census: " + count1880 + " Found, " + location1880 + " Missing\n");
+            rtbLostCousins.AppendText("1940 US Census: " + count1940 + " Found, " + location1940 + " Missing\n");
+            rtbLostCousins.AppendText("_____________________________________________\n");
             if (LCtotal > total)
             {
                 rtbLostCousins.AppendText("LostCousins fact with no country: " + (LCtotal - total));
-                rtbLostCousins.AppendText("___________________________________\n");
+                rtbLostCousins.AppendText("_____________________________________________\n");
             }
-            rtbLostCousins.AppendText("Total: " + LCtotal);
-
-
-            //foreach (Individual i in listToCheck)
-            //{
-            //    int missing = i.NumMissingLostCousins;
-            //    if (missing > 0)
-            //    {
-            //        Console.WriteLine(i.Ind_ID + " " + i.Name + " " + i.BirthDate + " " + missing);
-            //    }
-            //}
+            rtbLostCousins.AppendText("Totals: " + LCtotal + " Found, " + missingtotal + " Missing");
 
             int LCMissingCount = listToCheck.Sum(x => x.NumMissingLostCousins);
             if (LCMissingCount > 0)
