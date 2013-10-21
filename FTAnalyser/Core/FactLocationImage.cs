@@ -25,6 +25,8 @@ namespace FTAnalyzer
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\CriticalError.png")));
         private static FactLocationImage INCORRECT = new FactLocationImage(FactLocation.Geocode.INCORRECT,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Flagged.png")));
+        private static FactLocationImage OUT_OF_BOUNDS = new FactLocationImage(FactLocation.Geocode.OUT_OF_BOUNDS,
+            Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\OutOfBounds.png")));
 
         public FactLocationImage(FactLocation.Geocode errorLevel, Image img)
         {
@@ -48,6 +50,8 @@ namespace FTAnalyzer
                     return NO_MATCH;
                 case FactLocation.Geocode.INCORRECT:
                     return INCORRECT;
+                case FactLocation.Geocode.OUT_OF_BOUNDS:
+                    return OUT_OF_BOUNDS;
             }
             return NO_MATCH;
         }

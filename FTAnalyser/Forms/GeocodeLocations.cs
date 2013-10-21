@@ -51,11 +51,12 @@ namespace FTAnalyzer.Forms
             int partial = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH));
             int notsearched = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1);
             int notfound = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NO_MATCH)));
+            int outofbounds = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OUT_OF_BOUNDS)));
             int incorrect = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.INCORRECT)));
             int total = FactLocation.AllLocations.Count() - 1;
 
             txtGoogleWait.Text = string.Empty;
-            statusText = "Already Geocoded: " + (gedcom + found) + ", partial/not found/incorrect: " + (partial + notfound + incorrect) + ", yet to search: " + notsearched + " of " + total + " locations.";
+            statusText = "Already Geocoded: " + (gedcom + found) + ", inaccurate: " + (partial + notfound + incorrect + outofbounds) + ", yet to search: " + notsearched + " of " + total + " locations.";
             txtLocations.Text = statusText;
         }
 
@@ -426,7 +427,7 @@ namespace FTAnalyzer.Forms
 
                 int count = 0;
                 int good = 0;
-                int partial = 0;
+                int inaccurate = 0;
                 int geocoded = 0;
                 int skipped = 0;
                 int total = FactLocation.AllLocations.Count() - 1;
@@ -436,7 +437,7 @@ namespace FTAnalyzer.Forms
                 {
                     if (loc.IsGeoCoded)
                         geocoded++;
-                    else if(loc.GeocodeStatus == FactLocation.Geocode.INCORRECT)
+                    else if (loc.GeocodeStatus == FactLocation.Geocode.INCORRECT)
                         skipped++; // don't re-geocode incorrect ones as that would reset incorrect flag back to what user already identified was wrong
                     else
                     {
@@ -492,8 +493,11 @@ namespace FTAnalyzer.Forms
                                         longitude = res.Results[0].Geometry.Location.Long;
                                         viewport = res.Results[0].Geometry.ViewPort;
                                         resultType = EnhancedTextInfo.ConvertStringArrayToString(res.Results[0].Types);
-                                        loc.GeocodeStatus = FactLocation.Geocode.PARTIAL_MATCH;
-                                        partial++;
+                                        if (bbox.Covers(new Coordinate(res.Results[0].Geometry.Location.Long, res.Results[0].Geometry.Location.Lat)))
+                                            loc.GeocodeStatus = FactLocation.Geocode.PARTIAL_MATCH;
+                                        else
+                                            loc.GeocodeStatus = FactLocation.Geocode.OUT_OF_BOUNDS;
+                                        inaccurate++;
                                     }
 
                                 }
@@ -549,8 +553,8 @@ namespace FTAnalyzer.Forms
                     }
                     count++;
                     int percent = (int)Math.Truncate((count - 1) * 100.0 / total);
-                    string status = "Googled " + good + " good, " + partial + " partial. Skip " + geocoded + " prev found and " + skipped + " partial/not found. Done " + (count - 1) +
-                            " of " + total + ".  ";
+                    string status = "Previously " + geocoded + " found, " + skipped + " inaccurate. " +
+                                    "Googled " + good + " good, " + inaccurate + " inaccurate. Done " + (count - 1) + " of " + total + ".  ";
                     worker.ReportProgress(percent, status);
 
                     if (worker.CancellationPending ||

@@ -1736,6 +1736,9 @@ namespace FTAnalyzer
                             case FactLocation.Geocode.INCORRECT:
                                 child.ImageIndex = 5;
                                 break;
+                            case FactLocation.Geocode.OUT_OF_BOUNDS:
+                                child.ImageIndex = 6;
+                                break;
                         }
                         // Set everything other than known countries to regular
                         if (current != displayTreeRootNode || !Countries.IsKnownCountry(part))
@@ -1816,6 +1819,7 @@ namespace FTAnalyzer
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER)) + " have geocoding from GEDCOM/User Entered.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.MATCHED)) + " have a geocoding match from Google.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH)) + " have partial geocoding match from Google.\n");
+                rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OUT_OF_BOUNDS)) + " found by Google but outside country boundary.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.INCORRECT)) + " marked as incorrect by user.\n");
                 rtb.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NO_MATCH)) + " could not be found on Google.\n");
                 rtb.AppendText("    " + notsearched + " haven't been searched on Google.");

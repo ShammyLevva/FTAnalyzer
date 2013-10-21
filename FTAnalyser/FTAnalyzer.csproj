@@ -419,6 +419,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\GoToNextRecord.bmp" />
+    <Content Include="Resources\Icons\OutOfBounds.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Icons\Pause.bmp" />
     <Content Include="Resources\Icons\people35.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
