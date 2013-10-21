@@ -254,11 +254,11 @@ namespace FTAnalyzer.Utilities
             updateCmd.Parameters.Add(param);
 
             param = updateCmd.CreateParameter();
-            param.DbType = DbType.String;
+            param.DbType = DbType.Int32;
             updateCmd.Parameters.Add(param);
 
             param = updateCmd.CreateParameter();
-            param.DbType = DbType.Int32;
+            param.DbType = DbType.String;
             updateCmd.Parameters.Add(param);
 
             param = updateCmd.CreateParameter();
