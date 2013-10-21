@@ -393,14 +393,14 @@
             // 
             this.mnuRetryPartial.CheckOnClick = true;
             this.mnuRetryPartial.Name = "mnuRetryPartial";
-            this.mnuRetryPartial.Size = new System.Drawing.Size(242, 22);
-            this.mnuRetryPartial.Text = "Retry Partially Geocoded";
+            this.mnuRetryPartial.Size = new System.Drawing.Size(306, 22);
+            this.mnuRetryPartial.Text = "Retry Partially Geocoded on new Geocoding";
             // 
             // updateChangesWithoutAskingToolStripMenuItem
             // 
             this.updateChangesWithoutAskingToolStripMenuItem.CheckOnClick = true;
             this.updateChangesWithoutAskingToolStripMenuItem.Name = "updateChangesWithoutAskingToolStripMenuItem";
-            this.updateChangesWithoutAskingToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.updateChangesWithoutAskingToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
             this.updateChangesWithoutAskingToolStripMenuItem.Text = "Update Changes without asking";
             this.updateChangesWithoutAskingToolStripMenuItem.ToolTipText = "No longer asks if you want to save changes to locations";
             this.updateChangesWithoutAskingToolStripMenuItem.Click += new System.EventHandler(this.updateChangesWithoutAskingToolStripMenuItem_Click);
