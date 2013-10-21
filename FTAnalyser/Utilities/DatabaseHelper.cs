@@ -98,14 +98,14 @@ namespace FTAnalyzer.Utilities
                     // Now re-open upgraded database
                     OpenDatabaseConnection();
                 }
-                //if (dbVersion < v2_3_0_2)
-                //{
-                    //// Then apply v2.3.0.2 changes
+                if (dbVersion == v2_3_0_2)
+                {
+                    // Version v2.3.0.2 is now known as v3.0.0.0
                     //SQLiteCommand cmd = new SQLiteCommand("alter table geocode add column GeocodeStatus integer default 0", conn);
                     //cmd.ExecuteNonQuery();
-                    //cmd = new SQLiteCommand("update versions set Database = '2.3.0.2'", conn);
-                    //cmd.ExecuteNonQuery();
-                //}
+                    SQLiteCommand cmd = new SQLiteCommand("update versions set Database = '3.0.0.0'", conn);
+                    cmd.ExecuteNonQuery();
+                }
             }
             catch (Exception ex)
             {
