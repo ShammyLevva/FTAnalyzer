@@ -39,7 +39,7 @@ namespace FTAnalyzer.Forms
             tbYears.MouseWheel += new MouseEventHandler(tbYears_MouseWheel);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[4].ToolTipText = "Draw rectangle by dragging mouse to specify zoom area";
-            for(int i = 7; i <=10; i++)
+            for (int i = 7; i <= 10; i++)
                 mapZoomToolStrip.Items[i].Visible = false;
             backgroundColour = mapZoomToolStrip.Items[0].BackColor;
             mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(mapBox1_MapViewOnChange);
@@ -149,7 +149,7 @@ namespace FTAnalyzer.Forms
         {
             ScaleBar scalebar = new ScaleBar();
             scalebar.BackgroundColor = Color.White;
-            scalebar.RoundedEdges = true; 
+            scalebar.RoundedEdges = true;
             mapBox1.Map.Decorations.Add(scalebar);
             mapBox1.Refresh();
         }

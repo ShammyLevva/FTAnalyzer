@@ -42,8 +42,8 @@
             this.relatedByMarriageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unknownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptions = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuRetryPartial = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDisableTimeline = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuHideScaleBar = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuKeepZoom = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuLimitFactDates = new System.Windows.Forms.ToolStripMenuItem();
             this.cbLimitFactDates = new System.Windows.Forms.ToolStripComboBox();
@@ -69,7 +69,6 @@
             this.btnForward1 = new System.Windows.Forms.Button();
             this.btnBack10 = new System.Windows.Forms.Button();
             this.btnForward10 = new System.Windows.Forms.Button();
-            this.mnuHideScaleBar = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -181,7 +180,6 @@
             // mnuOptions
             // 
             this.mnuOptions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuRetryPartial,
             this.mnuDisableTimeline,
             this.mnuHideScaleBar,
             this.mnuKeepZoom,
@@ -190,26 +188,27 @@
             this.mnuOptions.Size = new System.Drawing.Size(61, 20);
             this.mnuOptions.Text = "Options";
             // 
-            // mnuRetryPartial
-            // 
-            this.mnuRetryPartial.CheckOnClick = true;
-            this.mnuRetryPartial.Name = "mnuRetryPartial";
-            this.mnuRetryPartial.Size = new System.Drawing.Size(296, 22);
-            this.mnuRetryPartial.Text = "Retry Partially Geocoded when Geocoding";
-            // 
             // mnuDisableTimeline
             // 
             this.mnuDisableTimeline.CheckOnClick = true;
             this.mnuDisableTimeline.Name = "mnuDisableTimeline";
-            this.mnuDisableTimeline.Size = new System.Drawing.Size(296, 22);
-            this.mnuDisableTimeline.Text = "Disable Timeline Show All Locations";
+            this.mnuDisableTimeline.Size = new System.Drawing.Size(272, 22);
+            this.mnuDisableTimeline.Text = "Disable Timeline: Shows All Locations";
             this.mnuDisableTimeline.Click += new System.EventHandler(this.mnuDisableTimeline_Click);
+            // 
+            // mnuHideScaleBar
+            // 
+            this.mnuHideScaleBar.CheckOnClick = true;
+            this.mnuHideScaleBar.Name = "mnuHideScaleBar";
+            this.mnuHideScaleBar.Size = new System.Drawing.Size(264, 22);
+            this.mnuHideScaleBar.Text = "Hide Scale Bar";
+            this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
             // 
             // mnuKeepZoom
             // 
             this.mnuKeepZoom.CheckOnClick = true;
             this.mnuKeepZoom.Name = "mnuKeepZoom";
-            this.mnuKeepZoom.Size = new System.Drawing.Size(296, 22);
+            this.mnuKeepZoom.Size = new System.Drawing.Size(264, 22);
             this.mnuKeepZoom.Text = "Keep Zoom on changing Year";
             // 
             // mnuLimitFactDates
@@ -217,7 +216,7 @@
             this.mnuLimitFactDates.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cbLimitFactDates});
             this.mnuLimitFactDates.Name = "mnuLimitFactDates";
-            this.mnuLimitFactDates.Size = new System.Drawing.Size(296, 22);
+            this.mnuLimitFactDates.Size = new System.Drawing.Size(264, 22);
             this.mnuLimitFactDates.Text = "Limit Fact Dates";
             // 
             // cbLimitFactDates
@@ -474,14 +473,6 @@
             this.btnForward10.UseVisualStyleBackColor = true;
             this.btnForward10.Click += new System.EventHandler(this.btnForward10_Click);
             // 
-            // mnuHideScaleBar
-            // 
-            this.mnuHideScaleBar.CheckOnClick = true;
-            this.mnuHideScaleBar.Name = "mnuHideScaleBar";
-            this.mnuHideScaleBar.Size = new System.Drawing.Size(296, 22);
-            this.mnuHideScaleBar.Text = "Hide Scale Bar";
-            this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
-            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -535,7 +526,6 @@
         private System.Windows.Forms.ToolStripMenuItem marriedToDirectOrBloodToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem relatedByMarriageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unknownToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuRetryPartial;
         private System.Windows.Forms.ToolStripMenuItem mnuOptions;
         private System.Windows.Forms.ToolStripMenuItem mnuKeepZoom;
         private System.Windows.Forms.ToolStripButton btnSelect;
