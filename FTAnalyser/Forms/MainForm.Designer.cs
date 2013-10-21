@@ -1271,10 +1271,12 @@
             this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList.Images.SetKeyName(0, "QuestionMark.png");
-            this.imageList.Images.SetKeyName(1, "Validate.png");
+            this.imageList.Images.SetKeyName(1, "GoogleMatch.png");
             this.imageList.Images.SetKeyName(2, "Warning.png");
             this.imageList.Images.SetKeyName(3, "Complete_OK.png");
             this.imageList.Images.SetKeyName(4, "CriticalError.png");
+            this.imageList.Images.SetKeyName(5, "Flagged.png");
+            this.imageList.Images.SetKeyName(6, "OutOfBounds.png");
             // 
             // tabCountries
             // 
