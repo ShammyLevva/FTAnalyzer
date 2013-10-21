@@ -532,7 +532,6 @@ namespace FTAnalyzer
                 location1940 += (ind.MissingLostCousins(CensusDate.USCENSUS1940, false) ? 1 : 0);
             }
 
-            
             int total = count1841 + countEW1881 + countSco1881 + countCan1881 + countEW1911 + countIre1911 + count1880 + count1940;
             int LCtotal = listToCheck.Sum(i => i.LostCousinsFacts);
             int missingtotal = location1841 + locationEW1881 + locationSco1881 + locationCan1881 + locationEW1911 + locationIre1911 + location1880 + location1940;
@@ -557,11 +556,11 @@ namespace FTAnalyzer
             }
             rtbLostCousins.AppendText("Totals: " + LCtotal + " Found, " + missingtotal + " Missing");
 
-            int LCMissingCount = listToCheck.Sum(x => x.NumMissingLostCousins);
-            if (LCMissingCount > 0)
+            if (missingtotal > 0)
             {
                 int startpos = rtbLostCousins.TextLength;
-                rtbLostCousins.AppendText("\n\nCensus facts with no LostCousins fact: " + LCMissingCount);
+                rtbLostCousins.AppendText("\n\nYou have " + missingtotal + " Census facts with no LostCousins fact");
+                rtbLostCousins.AppendText("\nClick the Lost Cousins website link to add them today.");
                 int endpos = rtbLostCousins.TextLength;
                 rtbLostCousins.Select(startpos, endpos);
                 rtbLostCousins.SelectionColor = Color.Red;

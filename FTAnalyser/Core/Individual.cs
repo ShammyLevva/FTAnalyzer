@@ -533,7 +533,9 @@ namespace FTAnalyzer
 
         public bool MissingLostCousins(CensusDate censusDate, bool includeUnknownCountries)
         {
-            return IsCensusDone(censusDate, includeUnknownCountries) && !IsLostCousinEntered(censusDate, includeUnknownCountries);
+            bool isCensusDone = IsCensusDone(censusDate, includeUnknownCountries);
+            bool isLostCousinsEntered = IsLostCousinEntered(censusDate, includeUnknownCountries);
+            return isCensusDone && !isLostCousinsEntered;
         }
 
         public int LostCousinsFacts
