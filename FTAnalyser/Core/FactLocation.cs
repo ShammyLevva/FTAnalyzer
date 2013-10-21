@@ -142,7 +142,7 @@ namespace FTAnalyzer
             Geocodes.Add(Geocode.NOT_SEARCHED, "Not Searched");
             Geocodes.Add(Geocode.GEDCOM_USER, "GEDCOM/User Data");
             Geocodes.Add(Geocode.PARTIAL_MATCH, "Partial Match");
-            Geocodes.Add(Geocode.MATCHED, "Matched");
+            Geocodes.Add(Geocode.MATCHED, "Google Matched");
             Geocodes.Add(Geocode.NO_MATCH, "No Match");
             Geocodes.Add(Geocode.INCORRECT, "Incorrect (User)");
             Geocodes.Add(Geocode.OUT_OF_BOUNDS, "Outside Country Area");
