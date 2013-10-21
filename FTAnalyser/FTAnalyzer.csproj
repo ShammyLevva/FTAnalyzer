@@ -373,9 +373,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Resources\FactLocationFixesSchema.xsd">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Content Include="Resources\FactLocationFixesSchema.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -393,20 +393,22 @@
     <Compile Include="Comparators\Census\CensusAgeComparer.cs" />
     <Compile Include="Comparators\Census\CensusLocationComparer.cs" />
     <Content Include="Resources\BingOSMaps.htm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\BingOSMaps.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\FTAnalyzer.ico" />
+    <Content Include="Resources\FTAnalyzer.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\GoogleMaps.htm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\GoogleMaps.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\FactLocationFixes.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\Complete_OK.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -414,18 +416,18 @@
     <Content Include="Resources\Icons\CriticalError.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Icons\EditLocation.png" />
+    <Content Include="Resources\Icons\EditLocation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Icons\Flagged.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\GoogleMatch.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Icons\GoToNextRecord.bmp" />
     <Content Include="Resources\Icons\OutOfBounds.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Icons\Pause.bmp" />
     <Content Include="Resources\Icons\people35.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -438,26 +440,15 @@
     <Content Include="Resources\Icons\SeriousWarning.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Icons\Stop.bmp" />
-    <Content Include="Resources\Icons\teardrop_black.png" />
+    <Content Include="Resources\Icons\Stop.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Icons\teardrop_blue.cur">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\teardrop_blue.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Icons\teardrop_brown.png" />
-    <Content Include="Resources\Icons\teardrop_darkblue.png" />
-    <Content Include="Resources\Icons\teardrop_grey.png" />
-    <Content Include="Resources\Icons\teardrop_orange.png" />
-    <Content Include="Resources\Icons\teardrop_pink.png" />
-    <Content Include="Resources\Icons\teardrop_purple.png" />
-    <Content Include="Resources\Icons\teardrop_red.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Icons\teardrop_teal.png" />
-    <Content Include="Resources\Icons\teardrop_white.png" />
-    <Content Include="Resources\Icons\teardrop_yellow.png" />
     <Content Include="Resources\Icons\Validate.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -562,8 +553,12 @@
     <Compile Include="Utilities\ShortDoubleMetaphone.cs" />
     <Compile Include="Utilities\SortableBindingList.cs" />
     <None Include="Mapping\MarkerClusterer.js" />
-    <None Include="Resources\Save.bmp" />
-    <None Include="Resources\Restart.bmp" />
+    <Content Include="Resources\Save.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Restart.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
