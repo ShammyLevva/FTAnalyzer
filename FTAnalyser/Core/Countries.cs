@@ -25,7 +25,7 @@ namespace FTAnalyzer
             BRAZIL = "Brazil", MAURITIUS = "Mauritius", UAE = "United Arab Emirates", AFGHANISTAN = "Afghanistan",
             ARGENTINA = "Argentina", BARBADOS = "Barbados", BANGLADESH = "Bangladesh", BAHAMAS = "Bahamas", SRI_LANKA = "Sri Lanka",
             CUBA = "Cuba", INDONESIA = "Indonesia", ISRAEL = "Israel", IRAQ = "Iraq", IRAN = "Iran", JORDAN = "Jordan",
-            JAMAICA = "Jamaica", KENYA = "Kenya";
+            JAMAICA = "Jamaica", KENYA = "Kenya", MEXICO = "Mexico";
 
         //AG  Antigua and Barbuda
         //AO  Angola
@@ -91,10 +91,8 @@ namespace FTAnalyzer
         //MM  Myanmar
         //MN  Mongolia
         //MR  Mauritania
-        //MT  Malta
         //MV  Maldives
         //MW  Malawi
-        //MX  Mexico
         //MY  Malaysia
         //MZ  Mozambique
         //NA  Namibia
@@ -158,7 +156,7 @@ namespace FTAnalyzer
             LIBYA, NIGERIA, BULGARIA, CYPRUS, ESTONIA, LATVIA, LIECHTENSTIEN, LITHUANIA, ALBANIA, ARMENIA, ANDORRA,
             AZERBAIJAN, BELARUS, MOLDOVA, MONACO, MONTENEGRO, PORTUGAL, ROMANIA, SAN_MARINO, TURKEY, UKRAINE, BRAZIL, MAURITIUS,
             UAE, AFGHANISTAN, ARGENTINA, BARBADOS, BANGLADESH, BAHAMAS, SRI_LANKA, CUBA, INDONESIA, ISRAEL, IRAN, IRAQ, JORDAN,
-            JAMAICA, KENYA
+            JAMAICA, KENYA, MEXICO
         });
 
         private static readonly ISet<string> UK_COUNTRIES = new HashSet<string>(new string[] { 
@@ -191,6 +189,7 @@ namespace FTAnalyzer
             BOUNDING_BOXES.Add(SPAIN, new Envelope(-9.428367, 4.709787, 35.867189, 43.875768));
             BOUNDING_BOXES.Add(PORTUGAL, new Envelope(-17.360492, -6.100757, 32.487006, 42.254591));
             BOUNDING_BOXES.Add(ITALY, new Envelope(6.523787, 18.662428, 36.523271, 47.168847));
+            BOUNDING_BOXES.Add(MEXICO, new Envelope(-117.314102, -86.630537, 14.216935, 32.927605));
         }
 
         public static bool IsUnitedKingdom(string country)
