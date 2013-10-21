@@ -512,14 +512,14 @@ namespace FTAnalyzer
             //    Console.WriteLine(i.Ind_ID + "," + i.Name + "," + i.BirthDate + "," + i.BirthLocation);
             //}
 
-            int count1841 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1841));
-            int countEW1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1881));
+            int count1841 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1841, false));
+            int countEW1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1881, false));
             int countSco1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.SCOTCENSUS1881, false));
             int countCan1881 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.CANADACENSUS1881, false));
-            int countEW1911 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1911));
+            int countEW1911 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.EWCENSUS1911, false));
             int countIre1911 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.IRELANDCENSUS1911, false));
-            int count1880 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.USCENSUS1880));
-            int count1940 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.USCENSUS1940));
+            int count1880 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.USCENSUS1880, false));
+            int count1940 = listToCheck.Count(x => x.IsLostCousinEntered(CensusDate.USCENSUS1940, false));
             
             int total = count1841 + countEW1881 + countSco1881 + countCan1881 + countEW1911 + countIre1911 + count1880 + count1940;
             int LCtotal = listToCheck.Sum(i => i.LostCousinsFacts);
