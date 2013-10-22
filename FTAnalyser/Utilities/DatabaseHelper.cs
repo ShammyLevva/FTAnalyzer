@@ -10,6 +10,7 @@ namespace FTAnalyzer.Utilities
     {
         private static SQLiteConnection conn;
         private static DatabaseHelper instance;
+        public string Filename { get; private set; }
 
         #region Constructor/Destructor
         private DatabaseHelper()
@@ -44,12 +45,12 @@ namespace FTAnalyzer.Utilities
             conn = null;
             try
             {
-                String filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\Geocodes.s3db");
-                if (!File.Exists(filename))
+                Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\Geocodes.s3db");
+                if (!File.Exists(Filename))
                 {
-                    File.Copy(Path.Combine(Application.StartupPath, @"Resources\Geocodes-Empty.s3db"), filename);
+                    File.Copy(Path.Combine(Application.StartupPath, @"Resources\Geocodes-Empty.s3db"), Filename);
                 }
-                conn = new SQLiteConnection("Data Source=" + filename + ";Version=3;");
+                conn = new SQLiteConnection("Data Source=" + Filename + ";Version=3;");
                 conn.Open();
             }
             catch (Exception ex)
@@ -89,12 +90,11 @@ namespace FTAnalyzer.Utilities
                     // Version is less than 2.3.0.2 or none existent so copy v2.3.0.2 database from empty database
                     conn.Close();
                     GC.Collect(); // needed to force a cleanup of connections prior to replacing the file.
-                    String filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\Geocodes.s3db");
-                    if (File.Exists(filename))
+                    if (File.Exists(Filename))
                     {
-                        File.Delete(filename);
+                        File.Delete(Filename);
                     }
-                    File.Copy(Path.Combine(Application.StartupPath, @"Resources\Geocodes-Empty.s3db"), filename);
+                    File.Copy(Path.Combine(Application.StartupPath, @"Resources\Geocodes-Empty.s3db"), Filename);
                     // Now re-open upgraded database
                     OpenDatabaseConnection();
                 }
@@ -311,5 +311,25 @@ namespace FTAnalyzer.Utilities
             return updatePointCmd;
         }
         #endregion
+
+        public bool StartBackupDatabase()
+        {
+            try
+            {
+                conn.Close();
+                GC.Collect(); // needed to force a cleanup of connections prior to replacing the file.
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public void EndBackupDatabase()
+        {
+            if(conn.State != ConnectionState.Open)
+                OpenDatabaseConnection();
+        }
     }
 }

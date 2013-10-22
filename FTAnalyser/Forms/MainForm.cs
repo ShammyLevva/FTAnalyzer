@@ -14,6 +14,7 @@ using FTAnalyzer.UserControls;
 using Printing.DataGridViewPrint.Tools;
 using System.Drawing;
 using FTAnalyzer.Forms;
+using Ionic.Zip;
 
 namespace FTAnalyzer
 {
@@ -1419,6 +1420,29 @@ namespace FTAnalyzer
         private void ckbRestrictions_CheckedChanged(object sender, EventArgs e)
         {
             UpdateLostCousinsReport();
+        }
+
+        private void backupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ft.Geocoding)
+                MessageBox.Show("You need to stop Geocoding before you can export the database");
+            else
+            {
+                DatabaseHelper dbh = DatabaseHelper.Instance;
+                dbh.StartBackupDatabase();
+                saveDatabase.FileName = "FTAnalyzer-Geocodes-" + DateTime.Now.ToString("yyyy-MM-dd") + ".zip";
+                saveDatabase.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                DialogResult result = saveDatabase.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    ZipFile zip = new ZipFile(saveDatabase.FileName);
+                    zip.AddFile(dbh.Filename,string.Empty);
+                    zip.Comment = "FT Analyzer zip file created by v" + PublishVersion() + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm");
+                    zip.Save();
+                }
+                dbh.EndBackupDatabase();
+                MessageBox.Show("Database exported to " + saveDatabase.FileName);
+            }
         }
     }
 }

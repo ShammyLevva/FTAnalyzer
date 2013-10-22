@@ -158,6 +158,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.pbSources = new System.Windows.Forms.ProgressBar();
             this.tabSelector = new System.Windows.Forms.TabControl();
+            this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
+            this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -223,6 +229,8 @@
             this.mnuReload,
             this.mnuPrint,
             this.toolStripSeparator3,
+            this.databaseToolStripMenuItem,
+            this.toolStripSeparator5,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -231,7 +239,7 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -239,7 +247,7 @@
             // 
             this.mnuReload.Enabled = false;
             this.mnuReload.Name = "mnuReload";
-            this.mnuReload.Size = new System.Drawing.Size(110, 22);
+            this.mnuReload.Size = new System.Drawing.Size(172, 22);
             this.mnuReload.Text = "Reload";
             this.mnuReload.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
             // 
@@ -247,19 +255,19 @@
             // 
             this.mnuPrint.Enabled = false;
             this.mnuPrint.Name = "mnuPrint";
-            this.mnuPrint.Size = new System.Drawing.Size(110, 22);
+            this.mnuPrint.Size = new System.Drawing.Size(172, 22);
             this.mnuPrint.Text = "Print";
             this.mnuPrint.Click += new System.EventHandler(this.mnuPrint_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(107, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(169, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -474,9 +482,9 @@
             // 
             this.dgDataErrors.AllowUserToAddRows = false;
             this.dgDataErrors.AllowUserToDeleteRows = false;
-            this.dgDataErrors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgDataErrors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -606,9 +614,9 @@
             // 
             this.dgWarDead.AllowUserToAddRows = false;
             this.dgWarDead.AllowUserToDeleteRows = false;
-            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgWarDead.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgWarDead.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgWarDead.Location = new System.Drawing.Point(0, 110);
@@ -672,9 +680,9 @@
             // 
             this.dgTreeTops.AllowUserToAddRows = false;
             this.dgTreeTops.AllowUserToDeleteRows = false;
-            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgTreeTops.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgTreeTops.Location = new System.Drawing.Point(0, 110);
@@ -895,7 +903,7 @@
             this.ckbShowLCEntered.Size = new System.Drawing.Size(415, 17);
             this.ckbShowLCEntered.TabIndex = 10;
             this.ckbShowLCEntered.Text = "Show already entered to Lost Cousins (unticked = show those to yet to be entered)" +
-                "";
+    "";
             this.ckbShowLCEntered.UseVisualStyleBackColor = true;
             // 
             // ckbRestrictions
@@ -908,7 +916,7 @@
             this.ckbRestrictions.Size = new System.Drawing.Size(521, 17);
             this.ckbRestrictions.TabIndex = 9;
             this.ckbRestrictions.Text = "Restrict results to only those direct ancestors, blood relations and those marrie" +
-                "d to direct or blood relations";
+    "d to direct or blood relations";
             this.ckbRestrictions.UseVisualStyleBackColor = true;
             this.ckbRestrictions.CheckedChanged += new System.EventHandler(this.ckbRestrictions_CheckedChanged);
             // 
@@ -1461,9 +1469,9 @@
             // 
             // rtbOutput
             // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbOutput.Location = new System.Drawing.Point(3, 96);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
@@ -1522,9 +1530,9 @@
             // 
             // tabSelector
             // 
-            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabSelector.Controls.Add(this.tabDisplayProgress);
             this.tabSelector.Controls.Add(this.tabIndividuals);
             this.tabSelector.Controls.Add(this.tabFamilies);
@@ -1543,6 +1551,44 @@
             this.tabSelector.Size = new System.Drawing.Size(939, 428);
             this.tabSelector.TabIndex = 9;
             this.tabSelector.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
+            // 
+            // databaseToolStripMenuItem
+            // 
+            this.databaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.backupToolStripMenuItem,
+            this.restoreToolStripMenuItem});
+            this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
+            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.databaseToolStripMenuItem.Text = "Geocode Database";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(169, 6);
+            // 
+            // backupToolStripMenuItem
+            // 
+            this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
+            this.backupToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.backupToolStripMenuItem.Text = "Backup";
+            this.backupToolStripMenuItem.Click += new System.EventHandler(this.backupToolStripMenuItem_Click);
+            // 
+            // restoreToolStripMenuItem
+            // 
+            this.restoreToolStripMenuItem.Name = "restoreToolStripMenuItem";
+            this.restoreToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.restoreToolStripMenuItem.Text = "Restore";
+            this.restoreToolStripMenuItem.Visible = false;
+            // 
+            // saveDatabase
+            // 
+            this.saveDatabase.DefaultExt = "zip";
+            this.saveDatabase.Filter = "Zip Files | *.zip";
+            // 
+            // restoreDatabase
+            // 
+            this.restoreDatabase.FileName = "Geocodes.s3db";
+            this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
             // MainForm
             // 
@@ -1743,6 +1789,12 @@
         private System.Windows.Forms.Button btnLC1940USA;
         private System.Windows.Forms.ToolStripMenuItem mnuGeocodeLocations;
         private System.Windows.Forms.Button btnShowCensusEntered;
+        private System.Windows.Forms.ToolStripMenuItem databaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem backupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem restoreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.SaveFileDialog saveDatabase;
+        private System.Windows.Forms.OpenFileDialog restoreDatabase;
     }
 }
 
