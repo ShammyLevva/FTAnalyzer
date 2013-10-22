@@ -70,7 +70,7 @@ namespace FTAnalyzer.Forms
                 MainForm.DisposeDuplicateForms(geo);
                 geo.StartGeoCoding();
                 geo.BringToFront();
-                geo.Focus();
+                geo.Focus(); 
                 this.Cursor = Cursors.Default;
             }
         }
