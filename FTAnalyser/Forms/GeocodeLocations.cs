@@ -447,7 +447,7 @@ namespace FTAnalyzer.Forms
                         if (loc.ToString().Length > 0)
                         {
                             GeoResponse res = null;
-                            if (!(!mnuRetryPartial.Checked && inDatabase))
+                            if (loc.GeocodeStatus == FactLocation.Geocode.NOT_SEARCHED || (mnuRetryPartial.Checked && loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH))
                             {
                                 res = GoogleMap.CallGeoWSCount(loc.ToString(), 8);
                                 if (res != null && res.Status == "Maxed")
