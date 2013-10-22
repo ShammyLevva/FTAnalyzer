@@ -546,7 +546,9 @@ namespace FTAnalyzer
             FactDate toAdd = null;
             if (birthDate.IsKnown && birthDate.DateType != FactDate.FactDateType.ABT && !birthDate.IsExact)
             {
-                FactDate looseBirth = BaseLivingDate(indiv);
+                toAdd = BaseLivingDate(indiv);
+                if (toAdd.IsBefore(indiv.BirthDate))
+                    Console.WriteLine(indiv.Name + " born: " + indiv.BirthDate + " loose?: " + toAdd);
             //    DateTime minLiving = GetMinLivingDate(indiv);
             //    DateTime minDeath = GetMinDeathDate(indiv);
             //    if (maxLiving > birthDate.StartDate)
@@ -593,7 +595,7 @@ namespace FTAnalyzer
         {
             DateTime mindate = FactDate.MAXDATE;
             DateTime maxdate = GetMaxLivingDate(indiv);
-            DateTime startdate = maxdate.AddYears(-110);
+            DateTime startdate = new DateTime(maxdate.Year - 110, 1, 1);
             foreach (Fact f in indiv.AllFacts)
             {
                 if (Fact.LOOSE_BIRTH_FACTS.Contains(f.FactType))
