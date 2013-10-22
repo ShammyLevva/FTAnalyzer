@@ -32,6 +32,7 @@ namespace FTAnalyzer
         private IList<DataErrorGroup> dataErrorTypes;
         private SortableBindingList<IDisplayLocation>[] displayLocations;
         private SortableBindingList<IDisplayLooseDeath> looseDeaths;
+        private SortableBindingList<IDisplayLooseBirth> looseBirths;
         private TreeNode displayTreeRootNode;
         private static int DATA_ERROR_GROUPS = 20;
 
@@ -517,6 +518,99 @@ namespace FTAnalyzer
             {
                 f.FixFamilyID(famLen);
             }
+        }
+
+        #endregion
+
+        #region Loose Births
+
+        public SortableBindingList<IDisplayLooseBirth> LooseBirths
+        {
+            get
+            {
+                if (looseBirths != null)
+                    return looseBirths;
+                SortableBindingList<IDisplayLooseBirth> result = new SortableBindingList<IDisplayLooseBirth>();
+                foreach (Individual ind in individuals)
+                {
+                    CheckLooseBirth(ind, result);
+                }
+                looseBirths = result;
+                return result;
+            }
+        }
+
+        private void CheckLooseBirth(Individual indiv, SortableBindingList<IDisplayLooseBirth> result)
+        {
+            FactDate birthDate = indiv.BirthDate;
+            FactDate toAdd = null;
+            if (birthDate.IsKnown && birthDate.DateType != FactDate.FactDateType.ABT && !birthDate.IsExact)
+            {
+                FactDate looseBirth = BaseLivingDate(indiv);
+            //    DateTime minLiving = GetMinLivingDate(indiv);
+            //    DateTime minDeath = GetMinDeathDate(indiv);
+            //    if (maxLiving > birthDate.StartDate)
+            //    {
+            //        // the starting death date is before the last alive date
+            //        // so add to the list of loose deaths
+            //        if (minDeath < birthDate.EndDate)
+            //            toAdd = new FactDate(maxLiving, minDeath);
+            //        else if (birthDate.DateType == FactDate.FactDateType.BEF && minDeath != FactDate.MAXDATE
+            //              && birthDate.EndDate != FactDate.MAXDATE
+            //              && birthDate.EndDate.AddYears(1) == minDeath)
+            //            toAdd = new FactDate(maxLiving, minDeath);
+            //        else
+            //            toAdd = new FactDate(maxLiving, birthDate.EndDate);
+            //    }
+            //    else if (minDeath < birthDate.EndDate)
+            //    {
+            //        // earliest death date before current latest death
+            //        // or they were two BEF dates (flagged by hour == 1)
+            //        // so add to the list of loose deaths
+            //        toAdd = new FactDate(birthDate.StartDate, minDeath);
+            //    }
+            //}
+            //else if (!birthDate.IsKnown && indiv.LifeSpan.MinAge >= 110)
+            //{
+            //    // also check for empty death dates for people aged over 110
+            //    DateTime maxLiving = GetMaxLivingDate(indiv);
+            //    DateTime minDeath = GetMinDeathDate(indiv);
+            //    if (minDeath != FactDate.MAXDATE)
+            //        toAdd = new FactDate(maxLiving, minDeath);
+            //
+            }
+            if (toAdd != null && toAdd != birthDate && toAdd.Distance(birthDate) > 1)
+            {
+                // we have a date to change and its not the same 
+                // range as the existing death date
+                Fact looseBirth = new Fact(Fact.LOOSEBIRTH, toAdd);
+                indiv.AddFact(looseBirth);
+                result.Add(indiv);
+            }
+        }
+
+        private FactDate BaseLivingDate(Individual indiv)
+        {
+            DateTime mindate = FactDate.MAXDATE;
+            DateTime maxdate = GetMaxLivingDate(indiv);
+            DateTime startdate = maxdate.AddYears(-110);
+            foreach (Fact f in indiv.AllFacts)
+            {
+                if (Fact.LOOSE_BIRTH_FACTS.Contains(f.FactType))
+                {
+                    if (f.FactDate.IsKnown)
+                    {
+                        if (f.FactDate.StartDate != FactDate.MINDATE && f.FactDate.StartDate < mindate)
+                            mindate = f.FactDate.StartDate;
+                        if (f.FactDate.EndDate != FactDate.MAXDATE && f.FactDate.EndDate < mindate) //copes with BEF dates
+                            mindate = f.FactDate.EndDate;
+                    }
+                }
+            }
+            if (startdate < mindate)
+                return new FactDate(startdate, mindate);
+            else
+                return new FactDate(mindate, startdate);
         }
 
         #endregion

@@ -319,6 +319,8 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabLooseDeaths)
                 {
+                    SortableBindingList<IDisplayLooseBirth> looseBirthList = ft.LooseBirths;
+                    
                     SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.LooseDeaths;
                     dgLooseDeaths.DataSource = looseDeathList;
                     dgLooseDeaths.Focus();

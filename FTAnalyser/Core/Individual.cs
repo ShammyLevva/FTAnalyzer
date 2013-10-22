@@ -6,7 +6,7 @@ using System.Xml;
 namespace FTAnalyzer
 {
     public class Individual : IComparable<Individual>,
-        IDisplayIndividual, IDisplayLooseDeath, IDisplayColourCensus, IDisplayColourBMD, IExportIndividual
+        IDisplayIndividual, IDisplayLooseDeath, IDisplayLooseBirth, IDisplayColourCensus, IDisplayColourBMD, IExportIndividual
     {
 
         // define relation type from direct ancestor to related by marriage and 
@@ -405,6 +405,16 @@ namespace FTAnalyzer
             get
             {
                 return GetAge(DateTime.Now);
+            }
+        }
+
+        public string LooseBirth
+        {
+            get
+            {
+                Fact loose = GetPreferredFact(Fact.LOOSEBIRTH);
+                FactDate fd = loose == null ? FactDate.UNKNOWN_DATE : loose.FactDate;
+                return (fd.StartDate > fd.EndDate) ? "Alive facts after death, check data errors tab and children's births" : fd.ToString();
             }
         }
 

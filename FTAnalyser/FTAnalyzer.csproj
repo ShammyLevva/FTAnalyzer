@@ -184,6 +184,7 @@
     <Compile Include="Core\Countries.cs" />
     <Compile Include="Core\DataError.cs" />
     <Compile Include="Core\DataErrorGroup.cs" />
+    <Compile Include="Core\Displays\IDisplayLooseBirth.cs" />
     <Compile Include="Core\Displays\IDisplayColourBMD.cs" />
     <Compile Include="Core\Displays\DisplayFact.cs" />
     <Compile Include="Core\Displays\IDisplayFact.cs" />

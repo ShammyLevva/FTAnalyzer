@@ -31,9 +31,16 @@ namespace FTAnalyzer
                 CUSTOM_FACT = "EVEN", CUSTOM_FACT2 = "FACT";
 
         public const string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
-                UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSE", FAMILYSEARCH = "*IGI",
+                UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSED", LOOSEBIRTH = "*LOOSEB", FAMILYSEARCH = "*IGI",
                 CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT",
                 CHANGE = "*CHNG", LOSTCOUSINS = "*LOST", DIED_SINGLE = "*SINGLE";
+
+        public static readonly ISet<string> LOOSE_BIRTH_FACTS = new HashSet<string>(new string[] {
+            BIRTH, CHRISTENING, BAPTISM, RESIDENCE, WITNESS, EMIGRATION, IMMIGRATION, ARRIVAL, DEPARTURE, 
+            EDUCATION, DEGREE, ADOPTION, BAR_MITZVAH, BAS_MITZVAH, ADULT_CHRISTENING, CONFIRMATION, 
+            FIRST_COMMUNION, ORDINATION, NATURALIZATION, GRADUATION, RETIREMENT, LOSTCOUSINS, MARR_CONTRACT,
+            MARR_LICENSE, MARR_SETTLEMENT, MARRIAGE, MARRIAGE_BANN, DEATH, CREMATION, BURIAL
+                    });
 
         public static readonly ISet<string> LOOSE_DEATH_FACTS = new HashSet<string>(new string[] {
             CENSUS, RESIDENCE, WITNESS, EMIGRATION, IMMIGRATION, ARRIVAL, DEPARTURE, EDUCATION,
@@ -311,7 +318,7 @@ namespace FTAnalyzer
                 matcher = Regex.Match(text, SCOT_CENSUS_PATTERN2);
                 if (matcher.Success)
                 {
-                    this.Parish = matcher.Groups[1].ToString().Replace("/00","").Replace("/","-");
+                    this.Parish = matcher.Groups[1].ToString().Replace("/00", "").Replace("/", "-");
                     this.ED = matcher.Groups[2].ToString().Replace("/00", "").TrimStart('0');
                     this.Page = matcher.Groups[3].ToString().TrimStart('0');
                 }
@@ -596,7 +603,7 @@ namespace FTAnalyzer
                         return "US Census references not yet available";
                     if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1841))
                     {
-                        if(Book.Length > 0)
+                        if (Book.Length > 0)
                             return "Piece: " + Piece + ", Book: " + Book + ", Folio: " + Folio + ", Page: " + Page;
                         else
                             return "Piece: " + Piece + ", Book: see census image (stamped on the census page after the piece number), Folio: " + Folio + ", Page: " + Page;
