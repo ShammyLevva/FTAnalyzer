@@ -317,16 +317,17 @@ namespace FTAnalyzer
                     tsCountLabel.Text = Properties.Messages.Count + errors.Count;
                     tsHintsLabel.Text = Properties.Messages.Hints_Individual;
                 }
-                else if (tabSelector.SelectedTab == tabLooseDeaths)
+                else if (tabSelector.SelectedTab == tabLooseBirthDeaths)
                 {
                     SortableBindingList<IDisplayLooseBirth> looseBirthList = ft.LooseBirths;
                     
                     SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.LooseDeaths;
                     dgLooseDeaths.DataSource = looseDeathList;
-                    dgLooseDeaths.Focus();
+                    dgLooseBirths.DataSource = looseBirthList;
+                    dgLooseBirths.Focus();
                     mnuPrint.Enabled = true;
-                    tsCountLabel.Text = Properties.Messages.Count + looseDeathList.Count;
-                    tsHintsLabel.Text = Properties.Messages.Hints_Individual;
+                    tsCountLabel.Text = Properties.Messages.Count + looseBirthList.Count;
+                    tsHintsLabel.Text = Properties.Messages.Hints_Loose_Births + Properties.Messages.Hints_Individual;
                 }
                 else if (tabSelector.SelectedTab == tabLocations)
                 {
@@ -350,6 +351,23 @@ namespace FTAnalyzer
             }
         }
 
+        private void tabCtrlLooseBDs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabCtrlLooseBDs.SelectedTab == tabLooseBirths)
+            {
+                dgLooseBirths.Focus();
+                tsCountLabel.Text = Properties.Messages.Count + dgLooseBirths.RowCount;
+                tsHintsLabel.Text = Properties.Messages.Hints_Loose_Births + Properties.Messages.Hints_Individual;
+            }
+            else if (tabCtrlLooseBDs.SelectedTab == tabLooseDeaths)
+            {
+                dgLooseDeaths.Focus();
+                tsCountLabel.Text = Properties.Messages.Count + dgLooseDeaths.RowCount;
+                tsHintsLabel.Text = Properties.Messages.Hints_Loose_Deaths + Properties.Messages.Hints_Individual;
+            }
+                    
+        }
+        
         private void dgCountries_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             HourGlass(true);
@@ -785,7 +803,7 @@ namespace FTAnalyzer
             {
                 PrintDataGrid(false, dgDataErrors, "List of Data Errors");
             }
-            else if (tabSelector.SelectedTab == tabLooseDeaths)
+            else if (tabSelector.SelectedTab == tabLooseBirthDeaths)
             {
                 PrintDataGrid(true, dgLooseDeaths, "List of Loose Deaths");
             }

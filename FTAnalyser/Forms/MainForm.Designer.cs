@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -38,6 +38,10 @@
             this.mnuReload = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrint = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuChildAgeProfiles = new System.Windows.Forms.ToolStripMenuItem();
@@ -121,8 +125,7 @@
             this.btnShowCensusMissing = new System.Windows.Forms.Button();
             this.cenDate = new Controls.CensusDateSelector();
             this.relTypesCensus = new Controls.RelationTypes();
-            this.tabLooseDeaths = new System.Windows.Forms.TabPage();
-            this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
+            this.tabLooseBirthDeaths = new System.Windows.Forms.TabPage();
             this.tabDataErrors = new System.Windows.Forms.TabPage();
             this.gbDataErrorTypes = new System.Windows.Forms.GroupBox();
             this.btnSelectAll = new System.Windows.Forms.Button();
@@ -158,12 +161,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.pbSources = new System.Windows.Forms.ProgressBar();
             this.tabSelector = new System.Windows.Forms.TabControl();
-            this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.restoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.tabCtrlLooseBDs = new System.Windows.Forms.TabControl();
+            this.tabLooseDeaths = new System.Windows.Forms.TabPage();
+            this.tabLooseBirths = new System.Windows.Forms.TabPage();
+            this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
+            this.dgLooseBirths = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -178,8 +182,7 @@
             this.tabLostCousins.SuspendLayout();
             this.tabCensus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
-            this.tabLooseDeaths.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).BeginInit();
+            this.tabLooseBirthDeaths.SuspendLayout();
             this.tabDataErrors.SuspendLayout();
             this.gbDataErrorTypes.SuspendLayout();
             this.tabOccupations.SuspendLayout();
@@ -201,6 +204,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.tabDisplayProgress.SuspendLayout();
             this.tabSelector.SuspendLayout();
+            this.tabCtrlLooseBDs.SuspendLayout();
+            this.tabLooseDeaths.SuspendLayout();
+            this.tabLooseBirths.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgLooseBirths)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -263,6 +271,34 @@
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(169, 6);
+            // 
+            // databaseToolStripMenuItem
+            // 
+            this.databaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.backupToolStripMenuItem,
+            this.restoreToolStripMenuItem});
+            this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
+            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.databaseToolStripMenuItem.Text = "Geocode Database";
+            // 
+            // backupToolStripMenuItem
+            // 
+            this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
+            this.backupToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.backupToolStripMenuItem.Text = "Backup";
+            this.backupToolStripMenuItem.Click += new System.EventHandler(this.backupToolStripMenuItem_Click);
+            // 
+            // restoreToolStripMenuItem
+            // 
+            this.restoreToolStripMenuItem.Name = "restoreToolStripMenuItem";
+            this.restoreToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.restoreToolStripMenuItem.Text = "Restore";
+            this.restoreToolStripMenuItem.Visible = false;
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(169, 6);
             // 
             // exitToolStripMenuItem
             // 
@@ -487,14 +523,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 138);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1084,31 +1120,16 @@
             this.relTypesCensus.Size = new System.Drawing.Size(325, 78);
             this.relTypesCensus.TabIndex = 15;
             // 
-            // tabLooseDeaths
+            // tabLooseBirthDeaths
             // 
-            this.tabLooseDeaths.Controls.Add(this.dgLooseDeaths);
-            this.tabLooseDeaths.Location = new System.Drawing.Point(4, 22);
-            this.tabLooseDeaths.Name = "tabLooseDeaths";
-            this.tabLooseDeaths.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLooseDeaths.Size = new System.Drawing.Size(931, 402);
-            this.tabLooseDeaths.TabIndex = 3;
-            this.tabLooseDeaths.Text = "Loose Deaths";
-            this.tabLooseDeaths.UseVisualStyleBackColor = true;
-            // 
-            // dgLooseDeaths
-            // 
-            this.dgLooseDeaths.AllowUserToAddRows = false;
-            this.dgLooseDeaths.AllowUserToDeleteRows = false;
-            this.dgLooseDeaths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgLooseDeaths.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgLooseDeaths.Location = new System.Drawing.Point(3, 3);
-            this.dgLooseDeaths.MultiSelect = false;
-            this.dgLooseDeaths.Name = "dgLooseDeaths";
-            this.dgLooseDeaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgLooseDeaths.Size = new System.Drawing.Size(925, 396);
-            this.dgLooseDeaths.TabIndex = 0;
-            this.dgLooseDeaths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgLooseDeaths_CellDoubleClick);
+            this.tabLooseBirthDeaths.Controls.Add(this.tabCtrlLooseBDs);
+            this.tabLooseBirthDeaths.Location = new System.Drawing.Point(4, 22);
+            this.tabLooseBirthDeaths.Name = "tabLooseBirthDeaths";
+            this.tabLooseBirthDeaths.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLooseBirthDeaths.Size = new System.Drawing.Size(931, 402);
+            this.tabLooseBirthDeaths.TabIndex = 3;
+            this.tabLooseBirthDeaths.Text = "Birth/Deaths";
+            this.tabLooseBirthDeaths.UseVisualStyleBackColor = true;
             // 
             // tabDataErrors
             // 
@@ -1539,7 +1560,7 @@
             this.tabSelector.Controls.Add(this.tabLocations);
             this.tabSelector.Controls.Add(this.tabOccupations);
             this.tabSelector.Controls.Add(this.tabDataErrors);
-            this.tabSelector.Controls.Add(this.tabLooseDeaths);
+            this.tabSelector.Controls.Add(this.tabLooseBirthDeaths);
             this.tabSelector.Controls.Add(this.tabCensus);
             this.tabSelector.Controls.Add(this.tabLostCousins);
             this.tabSelector.Controls.Add(this.tabColourReports);
@@ -1552,34 +1573,6 @@
             this.tabSelector.TabIndex = 9;
             this.tabSelector.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
-            // databaseToolStripMenuItem
-            // 
-            this.databaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.backupToolStripMenuItem,
-            this.restoreToolStripMenuItem});
-            this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
-            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.databaseToolStripMenuItem.Text = "Geocode Database";
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(169, 6);
-            // 
-            // backupToolStripMenuItem
-            // 
-            this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
-            this.backupToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.backupToolStripMenuItem.Text = "Backup";
-            this.backupToolStripMenuItem.Click += new System.EventHandler(this.backupToolStripMenuItem_Click);
-            // 
-            // restoreToolStripMenuItem
-            // 
-            this.restoreToolStripMenuItem.Name = "restoreToolStripMenuItem";
-            this.restoreToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.restoreToolStripMenuItem.Text = "Restore";
-            this.restoreToolStripMenuItem.Visible = false;
-            // 
             // saveDatabase
             // 
             this.saveDatabase.DefaultExt = "zip";
@@ -1589,6 +1582,68 @@
             // 
             this.restoreDatabase.FileName = "Geocodes.s3db";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
+            // 
+            // tabCtrlLooseBDs
+            // 
+            this.tabCtrlLooseBDs.Controls.Add(this.tabLooseBirths);
+            this.tabCtrlLooseBDs.Controls.Add(this.tabLooseDeaths);
+            this.tabCtrlLooseBDs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabCtrlLooseBDs.Location = new System.Drawing.Point(3, 3);
+            this.tabCtrlLooseBDs.Name = "tabCtrlLooseBDs";
+            this.tabCtrlLooseBDs.SelectedIndex = 0;
+            this.tabCtrlLooseBDs.Size = new System.Drawing.Size(925, 396);
+            this.tabCtrlLooseBDs.TabIndex = 1;
+            this.tabCtrlLooseBDs.SelectedIndexChanged += new System.EventHandler(this.tabCtrlLooseBDs_SelectedIndexChanged);
+            // 
+            // tabLooseDeaths
+            // 
+            this.tabLooseDeaths.Controls.Add(this.dgLooseDeaths);
+            this.tabLooseDeaths.Location = new System.Drawing.Point(4, 22);
+            this.tabLooseDeaths.Name = "tabLooseDeaths";
+            this.tabLooseDeaths.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLooseDeaths.Size = new System.Drawing.Size(917, 370);
+            this.tabLooseDeaths.TabIndex = 0;
+            this.tabLooseDeaths.Text = "Loose Deaths";
+            this.tabLooseDeaths.UseVisualStyleBackColor = true;
+            // 
+            // tabLooseBirths
+            // 
+            this.tabLooseBirths.Controls.Add(this.dgLooseBirths);
+            this.tabLooseBirths.Location = new System.Drawing.Point(4, 22);
+            this.tabLooseBirths.Name = "tabLooseBirths";
+            this.tabLooseBirths.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLooseBirths.Size = new System.Drawing.Size(917, 370);
+            this.tabLooseBirths.TabIndex = 1;
+            this.tabLooseBirths.Text = "Loose Births";
+            this.tabLooseBirths.UseVisualStyleBackColor = true;
+            // 
+            // dgLooseDeaths
+            // 
+            this.dgLooseDeaths.AllowUserToAddRows = false;
+            this.dgLooseDeaths.AllowUserToDeleteRows = false;
+            this.dgLooseDeaths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgLooseDeaths.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgLooseDeaths.Location = new System.Drawing.Point(3, 3);
+            this.dgLooseDeaths.MultiSelect = false;
+            this.dgLooseDeaths.Name = "dgLooseDeaths";
+            this.dgLooseDeaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgLooseDeaths.Size = new System.Drawing.Size(911, 364);
+            this.dgLooseDeaths.TabIndex = 1;
+            // 
+            // dgLooseBirths
+            // 
+            this.dgLooseBirths.AllowUserToAddRows = false;
+            this.dgLooseBirths.AllowUserToDeleteRows = false;
+            this.dgLooseBirths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgLooseBirths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgLooseBirths.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgLooseBirths.Location = new System.Drawing.Point(3, 3);
+            this.dgLooseBirths.MultiSelect = false;
+            this.dgLooseBirths.Name = "dgLooseBirths";
+            this.dgLooseBirths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgLooseBirths.Size = new System.Drawing.Size(911, 364);
+            this.dgLooseBirths.TabIndex = 2;
             // 
             // MainForm
             // 
@@ -1630,8 +1685,7 @@
             this.tabCensus.ResumeLayout(false);
             this.tabCensus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).EndInit();
-            this.tabLooseDeaths.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).EndInit();
+            this.tabLooseBirthDeaths.ResumeLayout(false);
             this.tabDataErrors.ResumeLayout(false);
             this.gbDataErrorTypes.ResumeLayout(false);
             this.tabOccupations.ResumeLayout(false);
@@ -1654,6 +1708,11 @@
             this.tabDisplayProgress.ResumeLayout(false);
             this.tabDisplayProgress.PerformLayout();
             this.tabSelector.ResumeLayout(false);
+            this.tabCtrlLooseBDs.ResumeLayout(false);
+            this.tabLooseDeaths.ResumeLayout(false);
+            this.tabLooseBirths.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgLooseBirths)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1740,8 +1799,7 @@
         private System.Windows.Forms.Button btnShowCensusMissing;
         private Controls.CensusDateSelector cenDate;
         private Controls.RelationTypes relTypesCensus;
-        private System.Windows.Forms.TabPage tabLooseDeaths;
-        private System.Windows.Forms.DataGridView dgLooseDeaths;
+        private System.Windows.Forms.TabPage tabLooseBirthDeaths;
         private System.Windows.Forms.TabPage tabDataErrors;
         private System.Windows.Forms.DataGridView dgDataErrors;
         private System.Windows.Forms.GroupBox gbDataErrorTypes;
@@ -1795,6 +1853,11 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.SaveFileDialog saveDatabase;
         private System.Windows.Forms.OpenFileDialog restoreDatabase;
+        private System.Windows.Forms.TabControl tabCtrlLooseBDs;
+        private System.Windows.Forms.TabPage tabLooseDeaths;
+        private System.Windows.Forms.DataGridView dgLooseDeaths;
+        private System.Windows.Forms.TabPage tabLooseBirths;
+        private System.Windows.Forms.DataGridView dgLooseBirths;
     }
 }
 

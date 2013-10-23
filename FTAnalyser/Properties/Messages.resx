@@ -129,6 +129,12 @@
   <data name="Hints_Location" xml:space="preserve">
     <value>Double click to show a list of individuals and families at the selected location.</value>
   </data>
+  <data name="Hints_Loose_Births" xml:space="preserve">
+    <value>List of Births where you could limit the date range. </value>
+  </data>
+  <data name="Hints_Loose_Deaths" xml:space="preserve">
+    <value>List of Deaths where you could limit the date range. </value>
+  </data>
   <data name="Hints_Occupation" xml:space="preserve">
     <value>Double click to show a list of individuals with the selected occupation.</value>
   </data>

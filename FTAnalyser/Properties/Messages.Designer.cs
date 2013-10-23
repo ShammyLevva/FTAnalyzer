@@ -97,6 +97,24 @@ namespace FTAnalyzer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to List of Births where you could limit the date range. .
+        /// </summary>
+        internal static string Hints_Loose_Births {
+            get {
+                return ResourceManager.GetString("Hints_Loose_Births", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List of Deaths where you could limit the date range. .
+        /// </summary>
+        internal static string Hints_Loose_Deaths {
+            get {
+                return ResourceManager.GetString("Hints_Loose_Deaths", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Double click to show a list of individuals with the selected occupation..
         /// </summary>
         internal static string Hints_Occupation {
