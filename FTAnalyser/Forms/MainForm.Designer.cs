@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -126,6 +126,11 @@
             this.cenDate = new Controls.CensusDateSelector();
             this.relTypesCensus = new Controls.RelationTypes();
             this.tabLooseBirthDeaths = new System.Windows.Forms.TabPage();
+            this.tabCtrlLooseBDs = new System.Windows.Forms.TabControl();
+            this.tabLooseBirths = new System.Windows.Forms.TabPage();
+            this.dgLooseBirths = new System.Windows.Forms.DataGridView();
+            this.tabLooseDeaths = new System.Windows.Forms.TabPage();
+            this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
             this.tabDataErrors = new System.Windows.Forms.TabPage();
             this.gbDataErrorTypes = new System.Windows.Forms.GroupBox();
             this.btnSelectAll = new System.Windows.Forms.Button();
@@ -163,11 +168,6 @@
             this.tabSelector = new System.Windows.Forms.TabControl();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.tabCtrlLooseBDs = new System.Windows.Forms.TabControl();
-            this.tabLooseDeaths = new System.Windows.Forms.TabPage();
-            this.tabLooseBirths = new System.Windows.Forms.TabPage();
-            this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
-            this.dgLooseBirths = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -183,6 +183,11 @@
             this.tabCensus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
             this.tabLooseBirthDeaths.SuspendLayout();
+            this.tabCtrlLooseBDs.SuspendLayout();
+            this.tabLooseBirths.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgLooseBirths)).BeginInit();
+            this.tabLooseDeaths.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).BeginInit();
             this.tabDataErrors.SuspendLayout();
             this.gbDataErrorTypes.SuspendLayout();
             this.tabOccupations.SuspendLayout();
@@ -204,11 +209,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.tabDisplayProgress.SuspendLayout();
             this.tabSelector.SuspendLayout();
-            this.tabCtrlLooseBDs.SuspendLayout();
-            this.tabLooseDeaths.SuspendLayout();
-            this.tabLooseBirths.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgLooseBirths)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -523,14 +523,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 138);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1131,6 +1131,70 @@
             this.tabLooseBirthDeaths.Text = "Birth/Deaths";
             this.tabLooseBirthDeaths.UseVisualStyleBackColor = true;
             // 
+            // tabCtrlLooseBDs
+            // 
+            this.tabCtrlLooseBDs.Controls.Add(this.tabLooseBirths);
+            this.tabCtrlLooseBDs.Controls.Add(this.tabLooseDeaths);
+            this.tabCtrlLooseBDs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabCtrlLooseBDs.Location = new System.Drawing.Point(3, 3);
+            this.tabCtrlLooseBDs.Name = "tabCtrlLooseBDs";
+            this.tabCtrlLooseBDs.SelectedIndex = 0;
+            this.tabCtrlLooseBDs.Size = new System.Drawing.Size(925, 396);
+            this.tabCtrlLooseBDs.TabIndex = 1;
+            this.tabCtrlLooseBDs.SelectedIndexChanged += new System.EventHandler(this.tabCtrlLooseBDs_SelectedIndexChanged);
+            // 
+            // tabLooseBirths
+            // 
+            this.tabLooseBirths.Controls.Add(this.dgLooseBirths);
+            this.tabLooseBirths.Location = new System.Drawing.Point(4, 22);
+            this.tabLooseBirths.Name = "tabLooseBirths";
+            this.tabLooseBirths.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLooseBirths.Size = new System.Drawing.Size(917, 370);
+            this.tabLooseBirths.TabIndex = 1;
+            this.tabLooseBirths.Text = "Loose Births";
+            this.tabLooseBirths.UseVisualStyleBackColor = true;
+            // 
+            // dgLooseBirths
+            // 
+            this.dgLooseBirths.AllowUserToAddRows = false;
+            this.dgLooseBirths.AllowUserToDeleteRows = false;
+            this.dgLooseBirths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgLooseBirths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgLooseBirths.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgLooseBirths.Location = new System.Drawing.Point(3, 3);
+            this.dgLooseBirths.MultiSelect = false;
+            this.dgLooseBirths.Name = "dgLooseBirths";
+            this.dgLooseBirths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgLooseBirths.Size = new System.Drawing.Size(911, 364);
+            this.dgLooseBirths.TabIndex = 2;
+            this.dgLooseBirths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgLooseBirths_CellDoubleClick);
+            // 
+            // tabLooseDeaths
+            // 
+            this.tabLooseDeaths.Controls.Add(this.dgLooseDeaths);
+            this.tabLooseDeaths.Location = new System.Drawing.Point(4, 22);
+            this.tabLooseDeaths.Name = "tabLooseDeaths";
+            this.tabLooseDeaths.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLooseDeaths.Size = new System.Drawing.Size(917, 370);
+            this.tabLooseDeaths.TabIndex = 0;
+            this.tabLooseDeaths.Text = "Loose Deaths";
+            this.tabLooseDeaths.UseVisualStyleBackColor = true;
+            // 
+            // dgLooseDeaths
+            // 
+            this.dgLooseDeaths.AllowUserToAddRows = false;
+            this.dgLooseDeaths.AllowUserToDeleteRows = false;
+            this.dgLooseDeaths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgLooseDeaths.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgLooseDeaths.Location = new System.Drawing.Point(3, 3);
+            this.dgLooseDeaths.MultiSelect = false;
+            this.dgLooseDeaths.Name = "dgLooseDeaths";
+            this.dgLooseDeaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgLooseDeaths.Size = new System.Drawing.Size(911, 364);
+            this.dgLooseDeaths.TabIndex = 1;
+            this.dgLooseDeaths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgLooseDeaths_CellDoubleClick);
+            // 
             // tabDataErrors
             // 
             this.tabDataErrors.Controls.Add(this.dgDataErrors);
@@ -1583,68 +1647,6 @@
             this.restoreDatabase.FileName = "Geocodes.s3db";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // tabCtrlLooseBDs
-            // 
-            this.tabCtrlLooseBDs.Controls.Add(this.tabLooseBirths);
-            this.tabCtrlLooseBDs.Controls.Add(this.tabLooseDeaths);
-            this.tabCtrlLooseBDs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabCtrlLooseBDs.Location = new System.Drawing.Point(3, 3);
-            this.tabCtrlLooseBDs.Name = "tabCtrlLooseBDs";
-            this.tabCtrlLooseBDs.SelectedIndex = 0;
-            this.tabCtrlLooseBDs.Size = new System.Drawing.Size(925, 396);
-            this.tabCtrlLooseBDs.TabIndex = 1;
-            this.tabCtrlLooseBDs.SelectedIndexChanged += new System.EventHandler(this.tabCtrlLooseBDs_SelectedIndexChanged);
-            // 
-            // tabLooseDeaths
-            // 
-            this.tabLooseDeaths.Controls.Add(this.dgLooseDeaths);
-            this.tabLooseDeaths.Location = new System.Drawing.Point(4, 22);
-            this.tabLooseDeaths.Name = "tabLooseDeaths";
-            this.tabLooseDeaths.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLooseDeaths.Size = new System.Drawing.Size(917, 370);
-            this.tabLooseDeaths.TabIndex = 0;
-            this.tabLooseDeaths.Text = "Loose Deaths";
-            this.tabLooseDeaths.UseVisualStyleBackColor = true;
-            // 
-            // tabLooseBirths
-            // 
-            this.tabLooseBirths.Controls.Add(this.dgLooseBirths);
-            this.tabLooseBirths.Location = new System.Drawing.Point(4, 22);
-            this.tabLooseBirths.Name = "tabLooseBirths";
-            this.tabLooseBirths.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLooseBirths.Size = new System.Drawing.Size(917, 370);
-            this.tabLooseBirths.TabIndex = 1;
-            this.tabLooseBirths.Text = "Loose Births";
-            this.tabLooseBirths.UseVisualStyleBackColor = true;
-            // 
-            // dgLooseDeaths
-            // 
-            this.dgLooseDeaths.AllowUserToAddRows = false;
-            this.dgLooseDeaths.AllowUserToDeleteRows = false;
-            this.dgLooseDeaths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgLooseDeaths.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgLooseDeaths.Location = new System.Drawing.Point(3, 3);
-            this.dgLooseDeaths.MultiSelect = false;
-            this.dgLooseDeaths.Name = "dgLooseDeaths";
-            this.dgLooseDeaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgLooseDeaths.Size = new System.Drawing.Size(911, 364);
-            this.dgLooseDeaths.TabIndex = 1;
-            // 
-            // dgLooseBirths
-            // 
-            this.dgLooseBirths.AllowUserToAddRows = false;
-            this.dgLooseBirths.AllowUserToDeleteRows = false;
-            this.dgLooseBirths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgLooseBirths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgLooseBirths.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgLooseBirths.Location = new System.Drawing.Point(3, 3);
-            this.dgLooseBirths.MultiSelect = false;
-            this.dgLooseBirths.Name = "dgLooseBirths";
-            this.dgLooseBirths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgLooseBirths.Size = new System.Drawing.Size(911, 364);
-            this.dgLooseBirths.TabIndex = 2;
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1686,6 +1688,11 @@
             this.tabCensus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).EndInit();
             this.tabLooseBirthDeaths.ResumeLayout(false);
+            this.tabCtrlLooseBDs.ResumeLayout(false);
+            this.tabLooseBirths.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgLooseBirths)).EndInit();
+            this.tabLooseDeaths.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).EndInit();
             this.tabDataErrors.ResumeLayout(false);
             this.gbDataErrorTypes.ResumeLayout(false);
             this.tabOccupations.ResumeLayout(false);
@@ -1708,11 +1715,6 @@
             this.tabDisplayProgress.ResumeLayout(false);
             this.tabDisplayProgress.PerformLayout();
             this.tabSelector.ResumeLayout(false);
-            this.tabCtrlLooseBDs.ResumeLayout(false);
-            this.tabLooseDeaths.ResumeLayout(false);
-            this.tabLooseBirths.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgLooseBirths)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

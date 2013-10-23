@@ -117,6 +117,7 @@ namespace FTAnalyzer
                 dgFamilies.DataSource = null;
                 dgTreeTops.DataSource = null;
                 dgWarDead.DataSource = null;
+                dgLooseBirths.DataSource = null;
                 dgLooseDeaths.DataSource = null;
                 dgDataErrors.DataSource = null;
                 dgOccupations.DataSource = null;
@@ -320,7 +321,6 @@ namespace FTAnalyzer
                 else if (tabSelector.SelectedTab == tabLooseBirthDeaths)
                 {
                     SortableBindingList<IDisplayLooseBirth> looseBirthList = ft.LooseBirths;
-                    
                     SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.LooseDeaths;
                     dgLooseDeaths.DataSource = looseDeathList;
                     dgLooseBirths.DataSource = looseBirthList;
@@ -805,7 +805,10 @@ namespace FTAnalyzer
             }
             else if (tabSelector.SelectedTab == tabLooseBirthDeaths)
             {
-                PrintDataGrid(true, dgLooseDeaths, "List of Loose Deaths");
+                if(tabCtrlLooseBDs.SelectedTab == tabLooseBirths)
+                    PrintDataGrid(true, dgLooseBirths, "List of Loose Births");
+                else if(tabCtrlLooseBDs.SelectedTab == tabLooseDeaths)
+                    PrintDataGrid(true, dgLooseDeaths, "List of Loose Deaths");
             }
             else if (tabSelector.SelectedTab == tabTreetops)
             {
@@ -1302,6 +1305,12 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 ShowFacts((string)dgLooseDeaths.CurrentRow.Cells["Ind_ID"].Value);
+        }
+
+        private void dgLooseBirths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                ShowFacts((string)dgLooseBirths.CurrentRow.Cells["Ind_ID"].Value);
         }
 
         private void dgTreeTops_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
