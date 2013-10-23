@@ -200,20 +200,20 @@
   <data name="mnuEditLocation.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMcSURBVDhPlZNdTJJRHMbfaq1Ws3KledGsDMzlBy0/QHGV
+        Ir1ooWlgEgrqi0Ary5QPJdcrKVh+VUompUxNqFmZfQhaNs20ttxqhlZXtXVbq7Zu257A3uVaXdSz/S/O
+        2fk9z/nv/A/xPwJBLPIXs/y7ACzqHJwMyKtwpB7UdevyK3t15Weuk+NOJ9tD63cMGUqi+43q1TRNL2aQ
+        BUml0iUSS0GF3Hb0o7y3GodcTSgbvoSSc6OgT7Z9HdAfe+PWqR64y1VyvwmDMfI5ik9LHaVDKmhu1UB5
+        tQemexPQ3nTB4nLA1dCC51Y9xvTU90GNbMSlyov8rR2BMePEkXsFsHopnPfSuOw1o2PqAro8/XC7HRi5
+        1o6xsybcVMvRmiN+fUUsivllwBKVLktvSv9U+kiG2heHcXGmGvRdJ7rdQ5gYs2H2WQ3GBg04V6mBWZEH
+        ZYHyW61CsWUe9oudqd5Jtomh6NNC0WUFdfkOOu6OYnz0PF4/O4lpjwo2yz7kyeXYX2ZAavUp7JIIJQxO
+        EMF84/G0ZhLhxTcgqp0B3f0QnuFWzD01YdpNod0iQoEyB5m6Wkj6spHizEZsFt/I4D8NeNV7kVpXD23D
+        AG4NNGB2ygd7KFz0wfmFB3Cw0gFxqxHF9/MR1b4HnIzYBYPQFEMSS0SjtFGF/ttH4J2qmE+21ZHIzZci
+        S9eNzHovkqwWKJ0ybDYKESXiZDO4/wUbQrJV5k/29grMTJQzyQLkKDjgFh/DLtNLcI1vsZV6gk1FFNi5
+        cZ85WZw187Ddbl/a0dmTaLN3zD32tGB6+DhsViGyZDHYW8XHnnoJwouuI1Q+ibXkIFbxGhG2m7tw/aqq
+        qiBz3ZmjVzp73g/f70PzaRnScyIR50vfUc4HryYFYWUCrExoQUBCG9Ylmep9I7uEwQkiJCRkYzw30UxR
+        2lcareYdlxc1G568/UuEjAdWUTLCCpOxIYNEUGLJhyC+Qelr+I8/wFq+fIUpImIbvTtVqGGz2Qnrw2KC
+        I4U8cSQZp48mOYataWmkf9iY839opa9YgYGBofECwdpYtXrpz+1/EUH8ACY0ialC7+E+AAAAAElFTkSu
         QmCC
 </value>
   </data>
@@ -243,6 +243,12 @@
   </metadata>
   <metadata name="Ahnentafel.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="SortDistance.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>231, 17</value>
   </metadata>
   <metadata name="statusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>122, 17</value>

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MapIndividuals));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -52,9 +53,13 @@
             this.FactDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AgeAtFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SortDistance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.statusStrip.SuspendLayout();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -170,7 +175,9 @@
             this.TypeOfFact,
             this.FactDate,
             this.AgeAtFact,
-            this.Ahnentafel});
+            this.Ahnentafel,
+            this.SortDistance});
+            this.dgIndividuals.ContextMenuStrip = this.contextMenuStrip;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -188,6 +195,7 @@
             this.dgIndividuals.ShowEditingIcon = false;
             this.dgIndividuals.Size = new System.Drawing.Size(993, 337);
             this.dgIndividuals.TabIndex = 2;
+            this.dgIndividuals.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgIndividuals_CellContextMenuStripNeeded);
             this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgIndividuals_CellDoubleClick);
             this.dgIndividuals.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgIndividuals_CellToolTipTextNeeded);
             // 
@@ -295,6 +303,27 @@
             this.Ahnentafel.ReadOnly = true;
             this.Ahnentafel.Width = 60;
             // 
+            // SortDistance
+            // 
+            this.SortDistance.DataPropertyName = "SortDistance";
+            this.SortDistance.HeaderText = "Geometry";
+            this.SortDistance.Name = "SortDistance";
+            this.SortDistance.ReadOnly = true;
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editLocationToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(144, 26);
+            // 
+            // editLocationToolStripMenuItem
+            // 
+            this.editLocationToolStripMenuItem.Name = "editLocationToolStripMenuItem";
+            this.editLocationToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.editLocationToolStripMenuItem.Text = "Edit Location";
+            this.editLocationToolStripMenuItem.Click += new System.EventHandler(this.editLocationToolStripMenuItem_Click);
+            // 
             // MapIndividuals
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -312,6 +341,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -341,5 +371,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FactDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn AgeAtFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ahnentafel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SortDistance;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem editLocationToolStripMenuItem;
     }
 }

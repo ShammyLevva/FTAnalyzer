@@ -116,5 +116,31 @@ namespace FTAnalyzer
                     loc.UpdateIcon();
             }
         }
+
+        private void editLocationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!ft.Geocoding)
+            {
+                this.Cursor = Cursors.WaitCursor;
+                MapLocation loc = dgIndividuals.CurrentRow.DataBoundItem as MapLocation;
+                EditLocation(loc.Location);
+            }
+        }
+
+        private void EditLocation(FactLocation loc)
+        {
+            EditLocation editform = new EditLocation(loc);
+            this.Cursor = Cursors.Default;
+            DialogResult result = editform.ShowDialog(this);
+            editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
+            // force refresh of locations from new edited data
+            dgIndividuals.Refresh();
+        }
+
+        private void dgIndividuals_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                dgIndividuals.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+        }
     }
 }

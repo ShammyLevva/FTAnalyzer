@@ -624,9 +624,7 @@ namespace FTAnalyzer.Forms
         private void dgLocations_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
                 dgLocations.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
-            }
         }
     }
 }
