@@ -19,7 +19,7 @@ namespace FTAnalyzer
                       "Birth before father aged 13", 
                       "Birth before mother aged 13", 
                       "Burial before death", 
-                      "Aged more than 110 at death", 
+                      "Aged more than " + FactDate.MAXYEARS + " at death", 
                       "Facts dated before birth", 
                       "Facts dated after death", 
                       "Marriage after death", 

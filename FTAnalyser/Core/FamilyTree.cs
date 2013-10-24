@@ -382,7 +382,7 @@ namespace FTAnalyzer
             List<MapLocation> result = new List<MapLocation>();
             foreach (Individual ind in individuals)
             {
-                if (ind.IsAlive(when) && ind.GetMaxAge(when) < 110)
+                if (ind.IsAlive(when) && ind.GetMaxAge(when) < FactDate.MAXYEARS)
                 {
                     Fact fact = ind.BestFact(when, limit);
                     FactLocation loc = fact.Location;
@@ -455,16 +455,6 @@ namespace FTAnalyzer
                 }
                 return false;
             });
-        }
-
-        public IEnumerable<Family> FindFamiliesWhereHusband(Individual ind)
-        {
-            return families.Where(f => (f.Husband != null && f.Husband == ind));
-        }
-
-        public IEnumerable<Family> FindFamiliesWhereWife(Individual ind)
-        {
-            return families.Where(f => (f.Wife != null && f.Wife == ind));
         }
 
         public FactSource GetSourceID(string sourceID)
@@ -544,40 +534,32 @@ namespace FTAnalyzer
         {
             FactDate birthDate = indiv.BirthDate;
             FactDate toAdd = null;
-            if (birthDate.IsKnown && birthDate.DateType != FactDate.FactDateType.ABT && !birthDate.IsExact)
+            if (birthDate.DateType != FactDate.FactDateType.ABT && !birthDate.IsExact)
             {
-                toAdd = BaseLivingDate(indiv);
-            //    DateTime minLiving = GetMinLivingDate(indiv);
-            //    DateTime minDeath = GetMinDeathDate(indiv);
-            //    if (maxLiving > birthDate.StartDate)
-            //    {
-            //        // the starting death date is before the last alive date
-            //        // so add to the list of loose deaths
-            //        if (minDeath < birthDate.EndDate)
-            //            toAdd = new FactDate(maxLiving, minDeath);
-            //        else if (birthDate.DateType == FactDate.FactDateType.BEF && minDeath != FactDate.MAXDATE
-            //              && birthDate.EndDate != FactDate.MAXDATE
-            //              && birthDate.EndDate.AddYears(1) == minDeath)
-            //            toAdd = new FactDate(maxLiving, minDeath);
-            //        else
-            //            toAdd = new FactDate(maxLiving, birthDate.EndDate);
-            //    }
-            //    else if (minDeath < birthDate.EndDate)
-            //    {
-            //        // earliest death date before current latest death
-            //        // or they were two BEF dates (flagged by hour == 1)
-            //        // so add to the list of loose deaths
-            //        toAdd = new FactDate(birthDate.StartDate, minDeath);
-            //    }
-            //}
-            //else if (!birthDate.IsKnown && indiv.LifeSpan.MinAge >= 110)
-            //{
-            //    // also check for empty death dates for people aged over 110
-            //    DateTime maxLiving = GetMaxLivingDate(indiv);
-            //    DateTime minDeath = GetMinDeathDate(indiv);
-            //    if (minDeath != FactDate.MAXDATE)
-            //        toAdd = new FactDate(maxLiving, minDeath);
-            //
+                FactDate baseDate = BaseLivingDate(indiv);
+                foreach (Family fam in indiv.FamiliesAsParent)
+                {
+                    FactDate marriageDate = fam.GetPreferredFactDate(Fact.MARRIAGE);
+                    if (marriageDate.StartDate.Year > Properties.GeneralSettings.Default.BirthYears && !marriageDate.IsLongYearSpan)
+                    {  // set maximum birthdate as X years before earliest marriage
+                        DateTime preMarriage = marriageDate.StartDate.AddYears(-Properties.GeneralSettings.Default.BirthYears);
+                        if (preMarriage < baseDate.EndDate && preMarriage >= baseDate.StartDate)
+                            baseDate = new FactDate(baseDate.StartDate, preMarriage);
+                    }
+                    if(fam.Children.Count > 0)
+                    {   // must be at least X years old at birth of child
+                        DateTime minChild = fam.Children.Min(child => child.BirthDate.EndDate);
+                        if (minChild < baseDate.EndDate && minChild >= baseDate.StartDate)
+                            baseDate = new FactDate(baseDate.StartDate, minChild);
+                    }
+                }
+                foreach (Family fam in indiv.FamiliesAsChild)
+                {
+                }
+                if (baseDate.StartDate < birthDate.StartDate || birthDate.EndDate < birthDate.EndDate)
+                {
+                    toAdd = baseDate;
+                }
             }
             if (toAdd != null && toAdd != birthDate && toAdd.Distance(birthDate) > 1)
             {
@@ -593,7 +575,7 @@ namespace FTAnalyzer
         {
             DateTime mindate = FactDate.MAXDATE;
             DateTime maxdate = GetMaxLivingDate(indiv);
-            DateTime startdate = maxdate.Year < 110 ? FactDate.MINDATE : new DateTime(maxdate.Year - 110, 1, 1);
+            DateTime startdate = maxdate.Year < FactDate.MAXYEARS ? FactDate.MINDATE : new DateTime(maxdate.Year - FactDate.MAXYEARS, 1, 1);
             foreach (Fact f in indiv.AllFacts)
             {
                 if (Fact.LOOSE_BIRTH_FACTS.Contains(f.FactType))
@@ -609,8 +591,10 @@ namespace FTAnalyzer
             }
             if (startdate < mindate)
                 return new FactDate(startdate, mindate);
+            else if (mindate <= maxdate)
+                return new FactDate(mindate, maxdate);
             else
-                return new FactDate(mindate, startdate);
+                return FactDate.UNKNOWN_DATE;
         }
 
         #endregion
@@ -637,7 +621,7 @@ namespace FTAnalyzer
         {
             FactDate deathDate = indiv.DeathDate;
             FactDate toAdd = null;
-            if (deathDate.IsKnown && deathDate.DateType != FactDate.FactDateType.ABT && !deathDate.IsExact)
+            if (deathDate.DateType != FactDate.FactDateType.ABT && !deathDate.IsExact)
             {
                 DateTime maxLiving = GetMaxLivingDate(indiv);
                 DateTime minDeath = GetMinDeathDate(indiv);
@@ -662,7 +646,7 @@ namespace FTAnalyzer
                     toAdd = new FactDate(deathDate.StartDate, minDeath);
                 }
             }
-            else if (!deathDate.IsKnown && indiv.LifeSpan.MinAge >= 110)
+            else if (!deathDate.IsKnown && indiv.LifeSpan.MinAge >= FactDate.MAXYEARS)
             {
                 // also check for empty death dates for people aged over 110
                 DateTime maxLiving = GetMaxLivingDate(indiv);
@@ -683,33 +667,22 @@ namespace FTAnalyzer
         private DateTime GetMaxLivingDate(Individual indiv)
         {
             DateTime maxdate = FactDate.MINDATE;
-            IEnumerable<Family> indfam = new List<Family>();
-            if (indiv.IsMale)
-            {
-                indfam = FindFamiliesWhereHusband(indiv);
-            }
-            else
-            {
-                indfam = FindFamiliesWhereWife(indiv);
-            }
             // having got the families the individual is a parent of
             // get the max startdate of the birthdate of the youngest child
             // this then is the minimum point they were alive
             // subtract 9 months for a male
             bool childDate = false;
-            foreach (Family fam in indfam)
+            foreach (Family fam in indiv.FamiliesAsParent)
             {
                 FactDate marriageDate = fam.GetPreferredFactDate(Fact.MARRIAGE);
                 if (marriageDate.StartDate > maxdate && !marriageDate.IsLongYearSpan)
-                {
                     maxdate = marriageDate.StartDate;
-                }
-                foreach (Individual child in fam.Children)
+                if (fam.Children.Count > 0)
                 {
-                    FactDate birthday = child.BirthDate;
-                    if (birthday.StartDate > maxdate)
+                    DateTime maxChildBirthDate = fam.Children.Max(child => child.BirthDate.StartDate);
+                    if (maxChildBirthDate > maxdate)
                     {
-                        maxdate = birthday.StartDate;
+                        maxdate = maxChildBirthDate;
                         childDate = true;
                     }
                 }
@@ -759,12 +732,10 @@ namespace FTAnalyzer
             DateTime now = DateTime.Now;
             FactDate.FactDateType deathDateType = deathDate.DateType;
             FactDate.FactDateType birthDateType = indiv.BirthDate.DateType;
-            DateTime minDeath = indiv.BirthDate.EndDate;
-            if (minDeath.Year == 1) // filter out births where no year specified
-                minDeath = FactDate.MAXDATE;
-            if (minDeath != FactDate.MAXDATE)
+            DateTime minDeath = FactDate.MAXDATE;
+            if (indiv.BirthDate.IsKnown && indiv.BirthDate.EndDate != FactDate.MAXDATE) // filter out births where no year specified
             {
-                minDeath = new DateTime(minDeath.Year + 110, 12, 31);
+                minDeath = new DateTime(indiv.BirthDate.EndDate.Year + FactDate.MAXYEARS, 12, 31);
                 if (birthDateType == FactDate.FactDateType.BEF)
                     minDeath = minDeath.AddYears(1);
                 if (minDeath > now) // 110 years after birth is after todays date so we set to ignore
@@ -1084,7 +1055,7 @@ namespace FTAnalyzer
             {
                 List<IDisplayGeocodedLocation> result = new List<IDisplayGeocodedLocation>();
                 foreach (IDisplayGeocodedLocation loc in FactLocation.AllLocations)
-                    if(!loc.Equals(FactLocation.UNKNOWN_LOCATION))
+                    if (!loc.Equals(FactLocation.UNKNOWN_LOCATION))
                         result.Add(loc);
                 return result;
             }
@@ -1179,8 +1150,8 @@ namespace FTAnalyzer
                         if (ind.BurialDate != null && ind.BurialDate.IsBefore(ind.DeathDate) && !ind.BurialDate.Overlaps(ind.DeathDate))
                             errors[(int)dataerror.BURIAL_BEFORE_DEATH].Add(new DataError((int)dataerror.BURIAL_BEFORE_DEATH, ind, "Buried " + ind.BurialDate + " before died " + ind.DeathDate));
                         int minAge = ind.GetMinAge(ind.DeathDate);
-                        if (minAge > 110)
-                            errors[(int)dataerror.AGED_MORE_THAN_110].Add(new DataError((int)dataerror.AGED_MORE_THAN_110, ind, "Aged over 110 before died " + ind.DeathDate));
+                        if (minAge > FactDate.MAXYEARS)
+                            errors[(int)dataerror.AGED_MORE_THAN_110].Add(new DataError((int)dataerror.AGED_MORE_THAN_110, ind, "Aged over " + FactDate.MAXYEARS + " before died " + ind.DeathDate));
                     }
                     foreach (Fact f in ind.ErrorFacts)
                     {

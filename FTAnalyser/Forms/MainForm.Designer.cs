@@ -1073,7 +1073,7 @@
             // 
             this.udAgeFilter.Location = new System.Drawing.Point(520, 50);
             this.udAgeFilter.Maximum = new decimal(new int[] {
-            110,
+            FactDate.MAXYEARS,
             0,
             0,
             0});
