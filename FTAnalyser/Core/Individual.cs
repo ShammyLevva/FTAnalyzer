@@ -517,8 +517,9 @@ namespace FTAnalyzer
             });
         }
 
-        public bool IsCensusDone(CensusDate when) { return IsCensusDone(when, true); }
-        public bool IsCensusDone(CensusDate when, bool includeUnknownCountries)
+        public bool IsCensusDone(CensusDate when) { return IsCensusDone(when, true, true); }
+        public bool IsCensusDone(CensusDate when, bool includeUnknownCountries) { return IsCensusDone(when, includeUnknownCountries, true); }
+        public bool IsCensusDone(CensusDate when, bool includeUnknownCountries, bool checkCountry)
         {
             foreach (Fact f in facts)
             {
@@ -526,6 +527,7 @@ namespace FTAnalyzer
                 {
                     if (f.IsCensusFact && f.FactDate.Overlaps(when))
                     {
+                        if (!checkCountry) return true;
                         if (f.Location.CensusCountryMatches(when.Country, includeUnknownCountries))
                             return true;
                     }
@@ -771,6 +773,8 @@ namespace FTAnalyzer
                 return 0; // not alive - grey
             if (!IsCensusDone(census))
             {
+                if (IsCensusDone(census, true, false))
+                    return 6;
                 if (CensusDate.IsLostCousinsCensusYear(census, true) && IsLostCousinEntered(census))
                     return 5; // LC entered but no census entered - orange
                 else

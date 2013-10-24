@@ -433,6 +433,7 @@
             "All Found (All Green)",
             "Lost Cousins Missing (Yellow)",
             "Lost Cousins Present (Orange)",
+            "Outside UK (Dark Grey)",
             "Some Missing (Some Red)",
             "Some Found (Some Green)"});
             this.cbFilter.Name = "cbFilter";

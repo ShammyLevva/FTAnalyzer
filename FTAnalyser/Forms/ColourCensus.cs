@@ -52,6 +52,9 @@ namespace FTAnalyzer.Forms
             DataGridViewCellStyle lcNoCensus = new DataGridViewCellStyle();
             lcNoCensus.BackColor = lcNoCensus.ForeColor = Color.DarkOrange;
             styles.Add(5, lcNoCensus);
+            DataGridViewCellStyle onOtherCensus = new DataGridViewCellStyle();
+            onOtherCensus.BackColor = onOtherCensus.ForeColor = Color.DarkSlateGray;
+            styles.Add(6, onOtherCensus);
 
             dgReportSheet.DataSource = this.reportList;
             c1841ColumnIndex = dgReportSheet.Columns["C1841"].Index;
@@ -164,6 +167,9 @@ namespace FTAnalyzer.Forms
                         case 5:
                             cell.ToolTipText = "Lost Cousins flagged but no Census entered.";
                             break;
+                        case 6:
+                            cell.ToolTipText = "On Census outside UK.";
+                            break;
                     }
                 }
             }
@@ -264,10 +270,13 @@ namespace FTAnalyzer.Forms
                 case 4: // Lost Cousins Present (Orange)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(5, false));
                     break;
-                case 5: // Some Missing (Some Red)
+                case 5: // Some Outside UK (Some Dark Grey)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(6, false));
+                    break;
+                case 6: // Some Missing (Some Red)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(1, false));
                     break;
-                case 6:
+                case 7:
                     list = new List<IDisplayColourCensus>();
                     list.AddRange(BuildFilter(3, false));
                     list.AddRange(BuildFilter(4, false));
