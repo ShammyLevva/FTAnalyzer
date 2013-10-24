@@ -534,7 +534,7 @@ namespace FTAnalyzer
         {
             FactDate birthDate = indiv.BirthDate;
             FactDate toAdd = null;
-            if (birthDate.DateType != FactDate.FactDateType.ABT && !birthDate.IsExact)
+            if (birthDate.EndDate.Year - birthDate.StartDate.Year > 1)
             {
                 FactDate baseDate = BaseLivingDate(indiv);
                 foreach (Family fam in indiv.FamiliesAsParent)
@@ -556,10 +556,12 @@ namespace FTAnalyzer
                 foreach (Family fam in indiv.FamiliesAsChild)
                 {
                 }
-                if (baseDate.StartDate < birthDate.StartDate || birthDate.EndDate < birthDate.EndDate)
-                {
-                    toAdd = baseDate;
-                }
+                if (birthDate.EndDate < baseDate.EndDate)
+                    baseDate = new FactDate(baseDate.StartDate, birthDate.EndDate);
+                if (birthDate.StartDate > baseDate.StartDate)
+                    baseDate = new FactDate(birthDate.StartDate, baseDate.EndDate);
+                if (birthDate != baseDate)
+                     toAdd = baseDate;
             }
             if (toAdd != null && toAdd != birthDate && toAdd.Distance(birthDate) > 1)
             {
@@ -733,7 +735,7 @@ namespace FTAnalyzer
             FactDate.FactDateType deathDateType = deathDate.DateType;
             FactDate.FactDateType birthDateType = indiv.BirthDate.DateType;
             DateTime minDeath = FactDate.MAXDATE;
-            if (indiv.BirthDate.IsKnown && indiv.BirthDate.EndDate != FactDate.MAXDATE) // filter out births where no year specified
+            if (indiv.BirthDate.IsKnown && indiv.BirthDate.EndDate.Year < 9999) // filter out births where no year specified
             {
                 minDeath = new DateTime(indiv.BirthDate.EndDate.Year + FactDate.MAXYEARS, 12, 31);
                 if (birthDateType == FactDate.FactDateType.BEF)
