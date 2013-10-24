@@ -537,29 +537,38 @@ namespace FTAnalyzer
             if (birthDate.EndDate.Year - birthDate.StartDate.Year > 1)
             {
                 FactDate baseDate = BaseLivingDate(indiv);
+                DateTime minStart = baseDate.StartDate;
+                DateTime minEnd = baseDate.EndDate;
                 foreach (Family fam in indiv.FamiliesAsParent)
                 {
                     FactDate marriageDate = fam.GetPreferredFactDate(Fact.MARRIAGE);
                     if (marriageDate.StartDate.Year > Properties.GeneralSettings.Default.BirthYears && !marriageDate.IsLongYearSpan)
                     {  // set maximum birthdate as X years before earliest marriage
                         DateTime preMarriage = marriageDate.StartDate.AddYears(-Properties.GeneralSettings.Default.BirthYears);
-                        if (preMarriage < baseDate.EndDate && preMarriage >= baseDate.StartDate)
-                            baseDate = new FactDate(baseDate.StartDate, preMarriage);
+                        if (preMarriage < minEnd && preMarriage >= minStart)
+                            minEnd = preMarriage;
                     }
                     if(fam.Children.Count > 0)
                     {   // must be at least X years old at birth of child
                         DateTime minChild = fam.Children.Min(child => child.BirthDate.EndDate);
-                        if (minChild < baseDate.EndDate && minChild >= baseDate.StartDate)
-                            baseDate = new FactDate(baseDate.StartDate, minChild);
+                        if (minChild < minEnd && minChild >= minStart)
+                            minEnd = minChild;
                     }
                 }
                 foreach (Family fam in indiv.FamiliesAsChild)
-                {
+                {  // check min date at least X years after parent
+                    if (fam.Husband != null && fam.Husband.BirthDate.IsKnown)
+                        if(fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.BirthYears) > minStart)
+                            minStart = fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.BirthYears);
+                    if (fam.Wife != null && fam.Wife.BirthDate.IsKnown)
+                        if (fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.BirthYears) > minStart)
+                            minStart = fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.BirthYears);
                 }
-                if (birthDate.EndDate < baseDate.EndDate)
-                    baseDate = new FactDate(baseDate.StartDate, birthDate.EndDate);
-                if (birthDate.StartDate > baseDate.StartDate)
-                    baseDate = new FactDate(birthDate.StartDate, baseDate.EndDate);
+                if (birthDate.EndDate < minEnd)
+                    minEnd = birthDate.EndDate;
+                if (birthDate.StartDate > minStart)
+                    minStart = birthDate.StartDate;
+                baseDate = new FactDate(minStart, minEnd);
                 if (birthDate != baseDate)
                      toAdd = baseDate;
             }

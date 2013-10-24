@@ -185,7 +185,8 @@ namespace FTAnalyzer
                 case WITNESS: return "Witness";
                 case UNKNOWN: return "UNKNOWN";
                 case LOOSEDEATH: return "Loose death";
-                case FAMILYSEARCH: return "IGI search";
+                case LOOSEBIRTH: return "Loose birth";
+                case FAMILYSEARCH: return "Familysearch";
                 case CONTACT: return "Contact";
                 case ARRIVAL: return "Arrival";
                 case DEPARTURE: return "Departure";
