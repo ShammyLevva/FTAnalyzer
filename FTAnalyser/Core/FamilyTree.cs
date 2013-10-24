@@ -632,38 +632,33 @@ namespace FTAnalyzer
         {
             FactDate deathDate = indiv.DeathDate;
             FactDate toAdd = null;
-            if (deathDate.DateType != FactDate.FactDateType.ABT && !deathDate.IsExact)
+            if (deathDate.EndDate.Year - deathDate.StartDate.Year > 1)
             {
-                DateTime maxLiving = GetMaxLivingDate(indiv);
-                DateTime minDeath = GetMinDeathDate(indiv);
-                if (maxLiving > deathDate.StartDate)
-                {
-                    // the starting death date is before the last alive date
-                    // so add to the list of loose deaths
-                    if (minDeath < deathDate.EndDate)
-                        toAdd = new FactDate(maxLiving, minDeath);
-                    else if (deathDate.DateType == FactDate.FactDateType.BEF && minDeath != FactDate.MAXDATE
-                          && deathDate.EndDate != FactDate.MAXDATE
-                          && deathDate.EndDate.AddYears(1) == minDeath)
-                        toAdd = new FactDate(maxLiving, minDeath);
-                    else
-                        toAdd = new FactDate(maxLiving, deathDate.EndDate);
-                }
-                else if (minDeath < deathDate.EndDate)
-                {
-                    // earliest death date before current latest death
-                    // or they were two BEF dates (flagged by hour == 1)
-                    // so add to the list of loose deaths
-                    toAdd = new FactDate(deathDate.StartDate, minDeath);
-                }
-            }
-            else if (!deathDate.IsKnown && indiv.LifeSpan.MinAge >= FactDate.MAXYEARS)
-            {
-                // also check for empty death dates for people aged over 110
                 DateTime maxLiving = GetMaxLivingDate(indiv);
                 DateTime minDeath = GetMinDeathDate(indiv);
                 if (minDeath != FactDate.MAXDATE)
-                    toAdd = new FactDate(maxLiving, minDeath);
+                {   // we don't have a minimum death date so can't proceed - individual may still be alive
+                    if (maxLiving > deathDate.StartDate)
+                    {
+                        // the starting death date is before the last alive date
+                        // so add to the list of loose deaths
+                        if (minDeath < deathDate.EndDate)
+                            toAdd = new FactDate(maxLiving, minDeath);
+                        else if (deathDate.DateType == FactDate.FactDateType.BEF && minDeath != FactDate.MAXDATE
+                              && deathDate.EndDate != FactDate.MAXDATE
+                              && deathDate.EndDate.AddYears(1) == minDeath)
+                            toAdd = new FactDate(maxLiving, minDeath);
+                        else
+                            toAdd = new FactDate(maxLiving, deathDate.EndDate);
+                    }
+                    else if (minDeath < deathDate.EndDate)
+                    {
+                        // earliest death date before current latest death
+                        // or they were two BEF dates 
+                        // so add to the list of loose deaths
+                        toAdd = new FactDate(deathDate.StartDate, minDeath);
+                    }
+                }
             }
             if (toAdd != null && toAdd != deathDate && toAdd.Distance(deathDate) > 1)
             {
