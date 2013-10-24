@@ -121,6 +121,8 @@ namespace FTAnalyzer
                 dgLooseDeaths.DataSource = null;
                 dgDataErrors.DataSource = null;
                 dgOccupations.DataSource = null;
+                tabCtrlLooseBDs.SelectedTab = tabLooseBirths; // force back to first tab
+                tabCtrlLocations.SelectedTab = tabTreeView; // otherwise totals etc look wrong
                 treeViewLocations.Nodes.Clear();
                 Application.DoEvents();
                 if (!stopProcessing)
