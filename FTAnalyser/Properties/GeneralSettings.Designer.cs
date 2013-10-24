@@ -25,7 +25,7 @@ namespace FTAnalyzer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool UseBaptismDates {
             get {
                 return ((bool)(this["UseBaptismDates"]));
@@ -128,6 +128,18 @@ namespace FTAnalyzer.Properties {
             }
             set {
                 this["BirthYears"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OnlyCensusParents {
+            get {
+                return ((bool)(this["OnlyCensusParents"]));
+            }
+            set {
+                this["OnlyCensusParents"] = value;
             }
         }
     }

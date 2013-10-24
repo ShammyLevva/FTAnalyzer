@@ -21,6 +21,7 @@ namespace FTAnalyzer.UserControls
 			chkCensusResidence.Checked = Properties.GeneralSettings.Default.UseResidenceAsCensus;
 			chkTolerateInaccurateCensus.Checked = Properties.GeneralSettings.Default.TolerateInaccurateCensusDate;
             chkIncludePartialGeocoded.Checked = Properties.GeneralSettings.Default.IncludePartials;
+            chkFamilyCensus.Checked = Properties.GeneralSettings.Default.OnlyCensusParents;
 			Properties.GeneralSettings.Default.ReloadRequired = false;
 		}
 
@@ -33,12 +34,14 @@ namespace FTAnalyzer.UserControls
 			Properties.GeneralSettings.Default.UseResidenceAsCensus = chkCensusResidence.Checked;
 			Properties.GeneralSettings.Default.TolerateInaccurateCensusDate = chkTolerateInaccurateCensus.Checked;
             Properties.GeneralSettings.Default.IncludePartials = chkIncludePartialGeocoded.Checked;
+            Properties.GeneralSettings.Default.OnlyCensusParents = chkFamilyCensus.Checked;
 			Properties.GeneralSettings.Default.Save();
 			OnUseBaptismDatesChanged();
 			OnAllowEmptyLocationsChanged();
 			OnUseResidenceAsCensusChanged();
 			OnTolerateInaccurateCensusChanged();
             OnIncludePartialGeocodedChanged();
+            OnOnlyCensusParentsChanged();
 		}
 
 		public void Cancel()
@@ -127,6 +130,13 @@ namespace FTAnalyzer.UserControls
                 IncludePartialGeocodedChanged(null, EventArgs.Empty);
         }
 
+        public static event EventHandler OnlyCensusParentsChanged;
+        protected static void OnOnlyCensusParentsChanged()
+        {
+            if (OnlyCensusParentsChanged != null)
+                OnlyCensusParentsChanged(null, EventArgs.Empty);
+        }
+
         private void chkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)
 		{
 			Properties.GeneralSettings.Default.ReloadRequired = true;
@@ -141,5 +151,10 @@ namespace FTAnalyzer.UserControls
 		{
 			Properties.GeneralSettings.Default.ReloadRequired = true;
 		}
+
+        private void chkFamilyCensus_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.GeneralSettings.Default.ReloadRequired = true;
+        }
 	}
 }

@@ -37,6 +37,7 @@
             this.chkTolerateInaccurateCensus = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.chkIncludePartialGeocoded = new System.Windows.Forms.CheckBox();
+            this.chkFamilyCensus = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,6 +48,8 @@
             // chkUseBaptisms
             // 
             resources.ApplyResources(this.chkUseBaptisms, "chkUseBaptisms");
+            this.chkUseBaptisms.Checked = true;
+            this.chkUseBaptisms.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkUseBaptisms.Name = "chkUseBaptisms";
             this.chkUseBaptisms.UseVisualStyleBackColor = true;
             // 
@@ -88,10 +91,18 @@
             this.chkIncludePartialGeocoded.Name = "chkIncludePartialGeocoded";
             this.chkIncludePartialGeocoded.UseVisualStyleBackColor = true;
             // 
+            // chkFamilyCensus
+            // 
+            resources.ApplyResources(this.chkFamilyCensus, "chkFamilyCensus");
+            this.chkFamilyCensus.Name = "chkFamilyCensus";
+            this.chkFamilyCensus.UseVisualStyleBackColor = true;
+            this.chkFamilyCensus.CheckedChanged += new System.EventHandler(this.chkFamilyCensus_CheckedChanged);
+            // 
             // GeneralSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkFamilyCensus);
             this.Controls.Add(this.chkIncludePartialGeocoded);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chkTolerateInaccurateCensus);
@@ -114,6 +125,7 @@
         private System.Windows.Forms.CheckBox chkTolerateInaccurateCensus;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkIncludePartialGeocoded;
+        private System.Windows.Forms.CheckBox chkFamilyCensus;
 
 
 	}

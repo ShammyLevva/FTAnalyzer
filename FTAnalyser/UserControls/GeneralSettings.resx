@@ -134,10 +134,40 @@
   <data name="$this.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="chkIncludePartialGeocoded.AutoSize" type="System.Boolean, mscorlib">
+  <data name="chkFamilyCensus.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkFamilyCensus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkFamilyCensus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 118</value>
+  </data>
+  <data name="chkFamilyCensus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 17</value>
+  </data>
+  <data name="chkFamilyCensus.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="chkFamilyCensus.Text" xml:space="preserve">
+    <value>Family Census Facts apply to only parents (*)</value>
+  </data>
+  <data name="&gt;&gt;chkFamilyCensus.Name" xml:space="preserve">
+    <value>chkFamilyCensus</value>
+  </data>
+  <data name="&gt;&gt;chkFamilyCensus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkFamilyCensus.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkFamilyCensus.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkIncludePartialGeocoded.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="chkIncludePartialGeocoded.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -163,7 +193,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkIncludePartialGeocoded.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -190,7 +220,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="chkTolerateInaccurateCensus.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -220,7 +250,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkTolerateInaccurateCensus.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="chkCensusResidence.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -247,7 +277,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkCensusResidence.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="chkAllowEmptyLocations.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -277,7 +307,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkAllowEmptyLocations.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="chkUseBaptisms.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -304,7 +334,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkUseBaptisms.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>312, 377</value>

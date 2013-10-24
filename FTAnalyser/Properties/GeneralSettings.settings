@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="UseBaptismDates" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="SavePath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -28,6 +28,9 @@
     </Setting>
     <Setting Name="BirthYears" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="OnlyCensusParents" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

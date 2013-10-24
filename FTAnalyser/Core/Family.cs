@@ -27,10 +27,10 @@ namespace FTAnalyzer
             this.Children = new List<Individual>();
         }
 
-        public Family() : this("") { }
+        public Family() : this(string.Empty) { }
 
         public Family(XmlNode node)
-            : this("")
+            : this(string.Empty)
         {
             if (node != null)
             {
@@ -109,10 +109,18 @@ namespace FTAnalyzer
                 else
                 {
                     // Handle a census fact on a family.
-                    foreach (Individual person in Members)
+                    if (Properties.GeneralSettings.Default.OnlyCensusParents)
                     {
-                        if (person.IsAlive(f.FactDate))
-                            person.AddFact(f);
+                        if (Husband != null && Husband.IsAlive(f.FactDate))
+                            Husband.AddFact(f);
+                        if (Wife != null && Wife.IsAlive(f.FactDate))
+                            Wife.AddFact(f);
+                    }
+                    else
+                    {  // all members of the family who are alive get the census fact
+                        foreach (Individual person in Members)
+                            if (person.IsAlive(f.FactDate))
+                                person.AddFact(f);
                     }
                 }
             }
