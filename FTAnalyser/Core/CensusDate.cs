@@ -78,6 +78,33 @@ namespace FTAnalyzer
             this.Country = country;
         }
 
+        public CensusDate EquivalentUSCensus
+        {
+            get
+            {
+                switch (StartDate.Year)
+                {
+                    case 1841:
+                        return USCENSUS1840;
+                    case 1851:
+                        return USCENSUS1850;
+                    case 1861:
+                        return USCENSUS1860;
+                    case 1871:
+                        return USCENSUS1870;
+                    case 1881:
+                        return USCENSUS1880;
+                    case 1891:
+                        return USCENSUS1890;
+                    case 1901:
+                        return USCENSUS1900;
+                    case 1911:
+                        return USCENSUS1910;
+                }
+                return null;
+            }
+        }
+
         public static bool IsCensusYear(FactDate fd, bool exactYear)
         {
             foreach (CensusDate cd in SUPPORTED_CENSUS)

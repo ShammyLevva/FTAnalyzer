@@ -521,6 +521,7 @@ namespace FTAnalyzer
         public bool IsCensusDone(CensusDate when, bool includeUnknownCountries) { return IsCensusDone(when, includeUnknownCountries, true); }
         public bool IsCensusDone(CensusDate when, bool includeUnknownCountries, bool checkCountry)
         {
+            if (when == null) return false;
             foreach (Fact f in facts)
             {
                 if (f.FactDate.IsKnown)
@@ -773,8 +774,8 @@ namespace FTAnalyzer
                 return 0; // not alive - grey
             if (!IsCensusDone(census))
             {
-                if (IsCensusDone(census, true, false))
-                    return 6;
+                if (IsCensusDone(census, true, false) || IsCensusDone(census.EquivalentUSCensus,true,false))
+                    return 6; // checks if on census outside UK in census year or on prior year (to check US census)
                 if (CensusDate.IsLostCousinsCensusYear(census, true) && IsLostCousinEntered(census))
                     return 5; // LC entered but no census entered - orange
                 else
