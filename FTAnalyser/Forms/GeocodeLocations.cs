@@ -49,6 +49,7 @@ namespace FTAnalyzer.Forms
             int gedcom = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER));
             int found = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.MATCHED));
             int partial = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH));
+            int levelpartial = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.LEVEL_MISMATCH));
             int notsearched = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1);
             int notfound = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NO_MATCH)));
             int outofbounds = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OUT_OF_BOUNDS)));
@@ -56,7 +57,7 @@ namespace FTAnalyzer.Forms
             int total = FactLocation.AllLocations.Count() - 1;
 
             txtGoogleWait.Text = string.Empty;
-            statusText = "Already Geocoded: " + (gedcom + found) + ", inaccurate: " + (partial + notfound + incorrect + outofbounds) + ", yet to search: " + notsearched + " of " + total + " locations.";
+            statusText = "Already Geocoded: " + (gedcom + found) + ", inaccurate: " + (partial + levelpartial + notfound + incorrect + outofbounds) + ", yet to search: " + notsearched + " of " + total + " locations.";
             txtLocations.Text = statusText;
         }
 
@@ -490,7 +491,7 @@ namespace FTAnalyzer.Forms
                                         }
                                     }
                                     if (loc.GeocodeStatus != FactLocation.Geocode.MATCHED)
-                                    {   // we checked all the google results and no joy so take first result as partial match
+                                    {   // we checked all the google results and no joy so take first result as level partial match
                                         foundLevel = GoogleMap.GetFactLocation(res.Results[0].Types);
                                         address = res.Results[0].ReturnAddress;
                                         latitude = res.Results[0].Geometry.Location.Lat;
@@ -498,7 +499,7 @@ namespace FTAnalyzer.Forms
                                         viewport = res.Results[0].Geometry.ViewPort;
                                         resultType = EnhancedTextInfo.ConvertStringArrayToString(res.Results[0].Types);
                                         if (bbox.Covers(new Coordinate(res.Results[0].Geometry.Location.Long, res.Results[0].Geometry.Location.Lat)))
-                                            loc.GeocodeStatus = FactLocation.Geocode.PARTIAL_MATCH;
+                                            loc.GeocodeStatus = FactLocation.Geocode.LEVEL_MISMATCH;
                                         else
                                             loc.GeocodeStatus = FactLocation.Geocode.OUT_OF_BOUNDS;
                                         inaccurate++;

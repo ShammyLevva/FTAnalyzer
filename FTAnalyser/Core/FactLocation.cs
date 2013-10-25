@@ -16,7 +16,7 @@ namespace FTAnalyzer
     public class FactLocation : IComparable<FactLocation>, IDisplayLocation, IDisplayGeocodedLocation
     {
         public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, SUBREGION = 2, ADDRESS = 3, PLACE = 4;
-        public enum Geocode { NOT_SEARCHED = 0, MATCHED = 1, PARTIAL_MATCH = 2, GEDCOM_USER = 3, NO_MATCH = 4, INCORRECT = 5, OUT_OF_BOUNDS = 6 };
+        public enum Geocode { NOT_SEARCHED = 0, MATCHED = 1, PARTIAL_MATCH = 2, GEDCOM_USER = 3, NO_MATCH = 4, INCORRECT = 5, OUT_OF_BOUNDS = 6, LEVEL_MISMATCH = 7 };
 
         private string fixedLocation;
         public string GEDCOMLocation { get; private set; }
@@ -141,11 +141,12 @@ namespace FTAnalyzer
             Geocodes = new Dictionary<Geocode, string>();
             Geocodes.Add(Geocode.NOT_SEARCHED, "Not Searched");
             Geocodes.Add(Geocode.GEDCOM_USER, "GEDCOM/User Data");
-            Geocodes.Add(Geocode.PARTIAL_MATCH, "Partial Match");
+            Geocodes.Add(Geocode.PARTIAL_MATCH, "Partial Match (Google)");
             Geocodes.Add(Geocode.MATCHED, "Google Matched");
             Geocodes.Add(Geocode.NO_MATCH, "No Match");
             Geocodes.Add(Geocode.INCORRECT, "Incorrect (User)");
             Geocodes.Add(Geocode.OUT_OF_BOUNDS, "Outside Country Area");
+            Geocodes.Add(Geocode.LEVEL_MISMATCH, "Partial Match (FTAnalyzer)");
         }
 
         public static FactLocation GetLocation(string place)
@@ -616,7 +617,7 @@ namespace FTAnalyzer
             {
                 if (Longitude == 0.0 && Latitude == 0.0)
                     return false;
-                if (Properties.GeneralSettings.Default.IncludePartials && GeocodeStatus == Geocode.PARTIAL_MATCH)
+                if (Properties.GeneralSettings.Default.IncludePartials && (GeocodeStatus == Geocode.PARTIAL_MATCH || GeocodeStatus == Geocode.LEVEL_MISMATCH))
                     return true;
                 return GeocodeStatus == Geocode.MATCHED || GeocodeStatus == Geocode.GEDCOM_USER;
             }
