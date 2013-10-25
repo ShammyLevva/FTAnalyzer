@@ -63,8 +63,9 @@ namespace FTAnalyzer.Forms
 
         private void SetupFilterMenu()
         {
-            foreach (string geocode in FactLocation.Geocodes.Values)
+            foreach (KeyValuePair<FactLocation.Geocode,string> item in FactLocation.Geocodes.OrderBy(x => x.Value))
             {
+                string geocode = item.Value;
                 ToolStripMenuItem menu = new ToolStripMenuItem(geocode);
                 menu.Name = geocode;
                 menu.Checked = Application.UserAppDataRegistry.GetValue(geocode, "True").Equals("True");

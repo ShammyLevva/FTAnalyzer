@@ -144,7 +144,7 @@ namespace FTAnalyzer
             Geocodes.Add(Geocode.PARTIAL_MATCH, "Partial Match (Google)");
             Geocodes.Add(Geocode.MATCHED, "Google Matched");
             Geocodes.Add(Geocode.NO_MATCH, "No Match");
-            Geocodes.Add(Geocode.INCORRECT, "Incorrect (User)");
+            Geocodes.Add(Geocode.INCORRECT, "Incorrect (User Marked)");
             Geocodes.Add(Geocode.OUT_OF_BOUNDS, "Outside Country Area");
             Geocodes.Add(Geocode.LEVEL_MISMATCH, "Partial Match (FTAnalyzer)");
         }
