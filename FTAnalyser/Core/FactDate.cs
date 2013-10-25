@@ -33,7 +33,7 @@ namespace FTAnalyzer
         private static readonly string SPACEFIX = "^(\\d{1,2}) *([A-Za-z]{3}) *(\\d{0,4})$";
 
         public static readonly FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
-
+        
         public enum FactDateType
         {
             BEF, AFT, BET, ABT, UNK, EXT,

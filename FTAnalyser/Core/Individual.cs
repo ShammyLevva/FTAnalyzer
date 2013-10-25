@@ -937,7 +937,12 @@ namespace FTAnalyzer
 
         public int Death
         {
-            get { return DeathDate.DateStatus(false); }
+            get {
+                if (!DeathDate.IsKnown && GetMaxAge(DateTime.Now) < 110)
+                    return 0;
+                else
+                    return DeathDate.DateStatus(false);
+            }
         }
 
         public int CremBuri
