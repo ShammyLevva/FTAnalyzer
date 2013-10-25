@@ -620,9 +620,7 @@ namespace FTAnalyzer
                     return looseDeaths;
                 SortableBindingList<IDisplayLooseDeath> result = new SortableBindingList<IDisplayLooseDeath>();
                 foreach (Individual ind in individuals)
-                {
                     CheckLooseDeath(ind, result);
-                }
                 looseDeaths = result;
                 return result;
             }
@@ -703,32 +701,11 @@ namespace FTAnalyzer
                 // very exact 9 months before dates
                 maxdate = new DateTime(maxdate.Year, 1, 1);
             }
-            foreach (string facttype in Fact.LOOSE_DEATH_FACTS)
-            {
-                maxdate = GetMaxDate(maxdate, GetMaxFactDate(indiv, facttype));
-            }
+            foreach (Fact f in indiv.AllFacts)
+                if (Fact.LOOSE_DEATH_FACTS.Contains(f.FactType) && f.FactDate.StartDate > maxdate)
+                    maxdate = f.FactDate.StartDate;
             // at this point we have the maximum point a person was alive
-            // based on their oldest child and last census record and marriage date
-            return maxdate;
-        }
-
-        private DateTime GetMaxDate(DateTime d1, DateTime d2)
-        {
-            return d1 > d2 ? d1 : d2;
-        }
-
-        private DateTime GetMaxFactDate(Individual indiv, string factType)
-        {
-            DateTime maxdate = FactDate.MINDATE;
-            IEnumerable<Fact> facts = indiv.GetFacts(factType);
-            foreach (Fact f in facts)
-            {
-                DateTime d = factType == Fact.BIRTH ? new DateTime(f.FactDate.StartDate.Year, 1, 1) : f.FactDate.StartDate;
-                if (d > maxdate)
-                {
-                    maxdate = d;
-                }
-            }
+            // based on their oldest child and last living fact record and marriage date
             return maxdate;
         }
 
