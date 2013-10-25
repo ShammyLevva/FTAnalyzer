@@ -21,6 +21,8 @@ namespace FTAnalyzer.Mapping
             public string[] Types { get; set; }
             [DataMember(Name = "formatted_address")]
             public string ReturnAddress { get; set; }
+            [DataMember(Name = "address_components")]
+            public CAddress[] Addresses { get; set; }
             [DataMember(Name = "geometry")]
             public CGeometry Geometry { get; set; }
 
@@ -56,6 +58,20 @@ namespace FTAnalyzer.Mapping
                     }
                 }
             }
+
+            [DataMember(Name = "partial_match")]
+            public bool PartialMatch { get; set; }
+        }
+
+        [DataContract]
+        public class CAddress
+        {
+            [DataMember(Name = "types")]
+            public string[] Types { get; set; }
+            [DataMember(Name = "long_name")]
+            public string LongName { get; set; }
+            [DataMember(Name = "short_name")]
+            public string ShortName { get; set; }
         }
     }
 }
