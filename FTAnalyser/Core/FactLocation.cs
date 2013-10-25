@@ -18,8 +18,8 @@ namespace FTAnalyzer
         public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, SUBREGION = 2, ADDRESS = 3, PLACE = 4;
         public enum Geocode { NOT_SEARCHED = 0, MATCHED = 1, PARTIAL_MATCH = 2, GEDCOM_USER = 3, NO_MATCH = 4, INCORRECT = 5, OUT_OF_BOUNDS = 6 };
 
-        private string location;
         private string fixedLocation;
+        public string GEDCOMLocation { get; private set; }
         public string SortableLocation { get; private set; }
         public string Country { get; set; }
         public string Region { get; set; }
@@ -204,7 +204,7 @@ namespace FTAnalyzer
 
         private FactLocation()
         {
-            this.location = string.Empty;
+            this.GEDCOMLocation = string.Empty;
             this.fixedLocation = string.Empty;
             this.SortableLocation = string.Empty;
             this.Country = string.Empty;
@@ -239,9 +239,9 @@ namespace FTAnalyzer
         {
             if (location != null)
             {
-                this.location = location;
+                this.GEDCOMLocation = location;
                 // we need to parse the location string from a little injun to a big injun
-                int comma = this.location.LastIndexOf(",");
+                int comma = location.LastIndexOf(",");
                 if (comma > 0)
                 {
                     Country = location.Substring(comma + 1).Trim();
@@ -532,12 +532,12 @@ namespace FTAnalyzer
             get { return FixNumerics(this.Place); }
         }
 
-        public bool isKnownCountry
+        public bool IsKnownCountry
         {
             get { return Countries.IsKnownCountry(Country); }
         }
 
-        public bool isUnitedKingdom
+        public bool IsUnitedKingdom
         {
             get { return Countries.IsUnitedKingdom(Country); }
         }
@@ -650,9 +650,9 @@ namespace FTAnalyzer
                     double distance = Math.Abs(f.FactDate.BestYear - when.BestYear);
                     if (distance < limit)
                     {
-                        if (distance < minDistance && !f.Location.location.Equals(string.Empty))
+                        if (distance < minDistance && !f.Location.Equals(string.Empty))
                         { // this is a closer date but now check to ensure we aren't overwriting a known country with an unknown one.
-                            if (f.Location.isKnownCountry || (!f.Location.isKnownCountry && !result.Location.isKnownCountry))
+                            if (f.Location.IsKnownCountry || (!f.Location.IsKnownCountry && !result.Location.IsKnownCountry))
                             {
                                 result = f;
                                 minDistance = distance;

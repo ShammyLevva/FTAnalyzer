@@ -439,7 +439,7 @@ namespace FTAnalyzer
             if (FactDate.IsKnown && CensusDate.IsCensusYear(FactDate, true) && !CensusDate.IsCensusYear(FactDate, false))
             {
                 // residence isn't a normal census year but it is a census year if tolerate is on
-                if (CensusDate.IsCensusCountry(FactDate, Location) || !Location.isKnownCountry)
+                if (CensusDate.IsCensusCountry(FactDate, Location) || !Location.IsKnownCountry)
                 {
                     this.FactErrorLevel = Fact.FactError.WARNINGALLOW;
                     this.FactErrorMessage = "Warning : Residence date " + FactDate + " is in a census year but doesn't overlap census date.";

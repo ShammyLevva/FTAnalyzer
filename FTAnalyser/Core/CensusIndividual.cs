@@ -63,10 +63,10 @@ namespace FTAnalyzer
 
         public bool IsValidLocation(string location)
         {
-            if (!CensusLocation.isKnownCountry)
+            if (!CensusLocation.IsKnownCountry)
                 return true;
             else if (Countries.IsUnitedKingdom(location))
-                return CensusLocation.isUnitedKingdom;
+                return CensusLocation.IsUnitedKingdom;
             else
                 return CensusLocation.Country.Equals(location);
         }
