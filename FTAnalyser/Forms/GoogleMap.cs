@@ -76,11 +76,11 @@ namespace FTAnalyzer.Forms
 
         public static readonly ISet<string> PLACES = new HashSet<string>(new string[] {
             PREMISE, STREET_ADDRESS, CEMETERY, HOSPITAL, PLACE_OF_WORSHIP, ROUTE, 
-            INTERSECTION, ESTABLISHMENT, SUBPREMISE, POSTALCODE, NATURALFEATURE, 
-            PARK, AIRPORT, POINT_OF_INTEREST, STREET_NUMBER, BUS_STATION, CHURCH, 
-            TRANSIT_STATION, SUBWAY_STATION, TRAIN_STATION, UNIVERSITY, POLICE, 
-            MUSEUM, POST_OFFICE, COURTHOUSE, FINANCE, LIBRARY, AQUARIUM, FIRE_STATION,
-            CAMPGROUND, LODGING, VETERINARY_CARE, AMUSEMENT_PARK
+            INTERSECTION, ESTABLISHMENT, SUBPREMISE, NATURALFEATURE,PARK, AIRPORT,
+            POINT_OF_INTEREST, STREET_NUMBER, BUS_STATION, CHURCH, TRANSIT_STATION, 
+            SUBWAY_STATION, TRAIN_STATION, UNIVERSITY, POLICE, MUSEUM, POST_OFFICE,
+            COURTHOUSE, FINANCE, LIBRARY, AQUARIUM, FIRE_STATION, CAMPGROUND, LODGING,
+            VETERINARY_CARE, AMUSEMENT_PARK
         });
 
         private String location;
@@ -170,10 +170,10 @@ namespace FTAnalyzer.Forms
         public static int GetFactLocation(string[] locationTypes)
         {
             HashSet<string> types = new HashSet<string>(locationTypes);
-            foreach(string place in PLACES)
-                if (types.Contains(place))
+            foreach(string type in types)
+                if (PLACES.Contains(type))
                     return FactLocation.PLACE;
-            if (types.Contains(ADMIN3) || types.Contains(SUBLOCALITY))
+            if (types.Contains(ADMIN3) || types.Contains(SUBLOCALITY) || types.Contains(POSTALCODE))
                 return FactLocation.ADDRESS;
             if (types.Contains(ADMIN2) || types.Contains(NEIGHBOURHOOD) || types.Contains(LOCALITY) || 
                 types.Contains(POLITICAL) || types.Contains(POSTALTOWN) || types.Contains(COLLOQUIAL_AREA))
