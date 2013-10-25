@@ -107,7 +107,9 @@ namespace FTAnalyzer
                 DisposeIndividualForms();
                 ShowMenus(false);
                 tabSelector.SelectTab(tabDisplayProgress);
-                rtbOutput.Text = "";
+                rtbOutput.Text = string.Empty;
+                tsCountLabel.Text = string.Empty;
+                tsHintsLabel.Text = string.Empty;
                 pbSources.Value = pbIndividuals.Value = pbFamilies.Value = 0;
                 dgCountries.DataSource = null;
                 dgRegions.DataSource = null;
@@ -1195,7 +1197,7 @@ namespace FTAnalyzer
 
         private void Options_AllowEmptyLocationsChanged(object sender, EventArgs e)
         {
-            ReloadData();
+            QueryReloadData();
         }
 
         private void Options_UseResidenceAsCensusChanged(object sender, EventArgs e)
@@ -1210,7 +1212,7 @@ namespace FTAnalyzer
 
         private void Options_TolerateInaccurateCensusChanged(object sender, EventArgs e)
         {
-            ReloadData();
+            QueryReloadData();
         }
 
         private void Options_MinimumParentalAgeChanged(object sender, EventArgs e)
@@ -1220,7 +1222,7 @@ namespace FTAnalyzer
                 UpdateLooseBirthDeaths();
         }
 
-        private void ReloadData()
+        private void QueryReloadData()
         {
             if (Properties.GeneralSettings.Default.ReloadRequired && ft.DataLoaded)
             {
