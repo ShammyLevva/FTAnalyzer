@@ -38,7 +38,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.chkIncludePartialGeocoded = new System.Windows.Forms.CheckBox();
             this.chkFamilyCensus = new System.Windows.Forms.CheckBox();
+            this.upDownAge = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownAge)).BeginInit();
             this.SuspendLayout();
             // 
             // errorProvider1
@@ -98,10 +101,37 @@
             this.chkFamilyCensus.UseVisualStyleBackColor = true;
             this.chkFamilyCensus.CheckedChanged += new System.EventHandler(this.chkFamilyCensus_CheckedChanged);
             // 
+            // upDownAge
+            // 
+            resources.ApplyResources(this.upDownAge, "upDownAge");
+            this.upDownAge.Maximum = new decimal(new int[] {
+            18,
+            0,
+            0,
+            0});
+            this.upDownAge.Minimum = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            this.upDownAge.Name = "upDownAge";
+            this.upDownAge.Value = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
             // GeneralSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.upDownAge);
             this.Controls.Add(this.chkFamilyCensus);
             this.Controls.Add(this.chkIncludePartialGeocoded);
             this.Controls.Add(this.label1);
@@ -111,6 +141,7 @@
             this.Controls.Add(this.chkUseBaptisms);
             this.Name = "GeneralSettings";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownAge)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -126,6 +157,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkIncludePartialGeocoded;
         private System.Windows.Forms.CheckBox chkFamilyCensus;
+        private System.Windows.Forms.NumericUpDown upDownAge;
+        private System.Windows.Forms.Label label2;
 
 
 	}

@@ -50,6 +50,7 @@ namespace FTAnalyzer
             GeneralSettings.UseResidenceAsCensusChanged += new EventHandler(Options_UseResidenceAsCensusChanged);
             //GeneralSettings.StrictResidenceDatesChanged += new EventHandler(Options_StrictResidenceDatesChanged);
             GeneralSettings.TolerateInaccurateCensusChanged += new EventHandler(Options_TolerateInaccurateCensusChanged);
+            GeneralSettings.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
             this.Text = "Family Tree Analyzer v" + VERSION;
         }
 
@@ -322,14 +323,7 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabLooseBirthDeaths)
                 {
-                    SortableBindingList<IDisplayLooseBirth> looseBirthList = ft.LooseBirths;
-                    SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.LooseDeaths;
-                    dgLooseDeaths.DataSource = looseDeathList;
-                    dgLooseBirths.DataSource = looseBirthList;
-                    dgLooseBirths.Focus();
-                    mnuPrint.Enabled = true;
-                    tsCountLabel.Text = Properties.Messages.Count + looseBirthList.Count;
-                    tsHintsLabel.Text = Properties.Messages.Hints_Loose_Births + Properties.Messages.Hints_Individual;
+                    UpdateLooseBirthDeaths();
                 }
                 else if (tabSelector.SelectedTab == tabLocations)
                 {
@@ -351,6 +345,18 @@ namespace FTAnalyzer
                 }
                 HourGlass(false);
             }
+        }
+
+        private void UpdateLooseBirthDeaths()
+        {
+            SortableBindingList<IDisplayLooseBirth> looseBirthList = ft.LooseBirths;
+            SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.LooseDeaths;
+            dgLooseDeaths.DataSource = looseDeathList;
+            dgLooseBirths.DataSource = looseBirthList;
+            dgLooseBirths.Focus();
+            mnuPrint.Enabled = true;
+            tsCountLabel.Text = Properties.Messages.Count + looseBirthList.Count;
+            tsHintsLabel.Text = Properties.Messages.Hints_Loose_Births + Properties.Messages.Hints_Individual;
         }
 
         private void tabCtrlLooseBDs_SelectedIndexChanged(object sender, EventArgs e)
@@ -1205,6 +1211,13 @@ namespace FTAnalyzer
         private void Options_TolerateInaccurateCensusChanged(object sender, EventArgs e)
         {
             ReloadData();
+        }
+
+        private void Options_MinimumParentalAgeChanged(object sender, EventArgs e)
+        {
+            ft.ResetLooseFacts();
+            if(tabSelector.SelectedTab == tabLooseBirthDeaths)
+                UpdateLooseBirthDeaths();
         }
 
         private void ReloadData()

@@ -122,12 +122,12 @@ namespace FTAnalyzer.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("16")]
-        public int BirthYears {
+        public int MinParentalAge {
             get {
-                return ((int)(this["BirthYears"]));
+                return ((int)(this["MinParentalAge"]));
             }
             set {
-                this["BirthYears"] = value;
+                this["MinParentalAge"] = value;
             }
         }
         

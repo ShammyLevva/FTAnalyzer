@@ -22,6 +22,7 @@ namespace FTAnalyzer.UserControls
 			chkTolerateInaccurateCensus.Checked = Properties.GeneralSettings.Default.TolerateInaccurateCensusDate;
             chkIncludePartialGeocoded.Checked = Properties.GeneralSettings.Default.IncludePartials;
             chkFamilyCensus.Checked = Properties.GeneralSettings.Default.OnlyCensusParents;
+            upDownAge.Value = Properties.GeneralSettings.Default.MinParentalAge;
 			Properties.GeneralSettings.Default.ReloadRequired = false;
 		}
 
@@ -35,6 +36,7 @@ namespace FTAnalyzer.UserControls
 			Properties.GeneralSettings.Default.TolerateInaccurateCensusDate = chkTolerateInaccurateCensus.Checked;
             Properties.GeneralSettings.Default.IncludePartials = chkIncludePartialGeocoded.Checked;
             Properties.GeneralSettings.Default.OnlyCensusParents = chkFamilyCensus.Checked;
+            Properties.GeneralSettings.Default.MinParentalAge = (int)upDownAge.Value;
 			Properties.GeneralSettings.Default.Save();
 			OnUseBaptismDatesChanged();
 			OnAllowEmptyLocationsChanged();
@@ -42,6 +44,7 @@ namespace FTAnalyzer.UserControls
 			OnTolerateInaccurateCensusChanged();
             OnIncludePartialGeocodedChanged();
             OnOnlyCensusParentsChanged();
+            OnMinParentalAgeChanged();
 		}
 
 		public void Cancel()
@@ -135,6 +138,13 @@ namespace FTAnalyzer.UserControls
         {
             if (OnlyCensusParentsChanged != null)
                 OnlyCensusParentsChanged(null, EventArgs.Empty);
+        }
+
+        public static event EventHandler MinParentalAgeChanged;
+                protected static void OnMinParentalAgeChanged()
+        {
+            if (MinParentalAgeChanged != null)
+                MinParentalAgeChanged(null, EventArgs.Empty);
         }
 
         private void chkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)

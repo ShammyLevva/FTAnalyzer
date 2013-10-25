@@ -122,7 +122,14 @@ namespace FTAnalyzer
             ClearLocations();
             displayTreeRootNode = null;
             looseDeaths = null;
+            looseBirths = null;
             FactLocation.ResetLocations();
+        }
+
+        public void ResetLooseFacts()
+        {
+            looseBirths = null;
+            looseDeaths = null;
         }
 
         public bool LoadTree(string filename, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
@@ -542,9 +549,9 @@ namespace FTAnalyzer
                 foreach (Family fam in indiv.FamiliesAsParent)
                 {
                     FactDate marriageDate = fam.GetPreferredFactDate(Fact.MARRIAGE);
-                    if (marriageDate.StartDate.Year > Properties.GeneralSettings.Default.BirthYears && !marriageDate.IsLongYearSpan)
+                    if (marriageDate.StartDate.Year > Properties.GeneralSettings.Default.MinParentalAge && !marriageDate.IsLongYearSpan)
                     {  // set maximum birthdate as X years before earliest marriage
-                        DateTime preMarriage = marriageDate.StartDate.AddYears(-Properties.GeneralSettings.Default.BirthYears);
+                        DateTime preMarriage = marriageDate.StartDate.AddYears(-Properties.GeneralSettings.Default.MinParentalAge);
                         if (preMarriage < minEnd && preMarriage >= minStart)
                             minEnd = preMarriage;
                     }
@@ -558,11 +565,11 @@ namespace FTAnalyzer
                 foreach (Family fam in indiv.FamiliesAsChild)
                 {  // check min date at least X years after parent
                     if (fam.Husband != null && fam.Husband.BirthDate.IsKnown)
-                        if(fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.BirthYears) > minStart)
-                            minStart = fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.BirthYears);
+                        if(fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
+                            minStart = fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge);
                     if (fam.Wife != null && fam.Wife.BirthDate.IsKnown)
-                        if (fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.BirthYears) > minStart)
-                            minStart = fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.BirthYears);
+                        if (fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
+                            minStart = fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge);
                 }
                 if (birthDate.EndDate < minEnd)
                     minEnd = birthDate.EndDate;
