@@ -26,33 +26,33 @@ namespace FTAnalyzer
 
         public static readonly CensusDate IRELANDCENSUS1911 = new CensusDate("02 APR 1911", "Ireland Census 1911", Countries.IRELAND);
 
-        public static readonly CensusDate USCENSUS1790 = new CensusDate("AUG 1790", "US Federal Census 1790", Countries.UNITED_STATES);
-        public static readonly CensusDate USCENSUS1800 = new CensusDate("AUG 1800", "US Federal Census 1800", Countries.UNITED_STATES);
-        public static readonly CensusDate USCENSUS1810 = new CensusDate("AUG 1810", "US Federal Census 1810", Countries.UNITED_STATES);
-        public static readonly CensusDate USCENSUS1820 = new CensusDate("AUG 1820", "US Federal Census 1820", Countries.UNITED_STATES);
-        public static readonly CensusDate USCENSUS1830 = new CensusDate("1 JUN 1830", "US Federal Census 1830", Countries.UNITED_STATES);
-        public static readonly CensusDate USCENSUS1840 = new CensusDate("1 JUN 1840", "US Federal Census 1840", Countries.UNITED_STATES);
-        public static readonly CensusDate USCENSUS1850 = new CensusDate("1 JUN 1850", "US Federal Census 1850", Countries.UNITED_STATES);
-        public static readonly CensusDate USCENSUS1860 = new CensusDate("1 JUN 1860", "US Federal Census 1860", Countries.UNITED_STATES);
-        public static readonly CensusDate USCENSUS1870 = new CensusDate("1 JUN 1870", "US Federal Census 1870", Countries.UNITED_STATES);
-        public static readonly CensusDate USCENSUS1880 = new CensusDate("1 JUN 1880", "US Federal Census 1880", Countries.UNITED_STATES);
-        public static readonly CensusDate USCENSUS1890 = new CensusDate("JUN 1890", "US Federal Census 1890", Countries.UNITED_STATES);
-        public static readonly CensusDate USCENSUS1900 = new CensusDate("1 JUN 1900", "US Federal Census 1900", Countries.UNITED_STATES);
-        public static readonly CensusDate USCENSUS1910 = new CensusDate("15 APR 1910", "US Federal Census 1910", Countries.UNITED_STATES);
-        public static readonly CensusDate USCENSUS1920 = new CensusDate("1 JAN 1920", "US Federal Census 1920", Countries.UNITED_STATES);
-        public static readonly CensusDate USCENSUS1930 = new CensusDate("1 APR 1930", "US Federal Census 1930", Countries.UNITED_STATES);
-        public static readonly CensusDate USCENSUS1940 = new CensusDate("1 APR 1940", "US Federal Census 1940", Countries.UNITED_STATES);
+        public static readonly CensusDate USCENSUS1790 = new CensusDate("AUG-OCT 1790", "US Federal Census 1790", Countries.UNITED_STATES);
+        public static readonly CensusDate USCENSUS1800 = new CensusDate("AUG-OCT 1800", "US Federal Census 1800", Countries.UNITED_STATES);
+        public static readonly CensusDate USCENSUS1810 = new CensusDate("AUG-OCT 1810", "US Federal Census 1810", Countries.UNITED_STATES);
+        public static readonly CensusDate USCENSUS1820 = new CensusDate("AUG-OCT 1820", "US Federal Census 1820", Countries.UNITED_STATES);
+        public static readonly CensusDate USCENSUS1830 = new CensusDate("JUN-AUG 1830", "US Federal Census 1830", Countries.UNITED_STATES);
+        public static readonly CensusDate USCENSUS1840 = new CensusDate("JUN-AUG 1840", "US Federal Census 1840", Countries.UNITED_STATES);
+        public static readonly CensusDate USCENSUS1850 = new CensusDate("JUN-AUG 1850", "US Federal Census 1850", Countries.UNITED_STATES);
+        public static readonly CensusDate USCENSUS1860 = new CensusDate("JUN-AUG 1860", "US Federal Census 1860", Countries.UNITED_STATES);
+        public static readonly CensusDate USCENSUS1870 = new CensusDate("JUN-AUG 1870", "US Federal Census 1870", Countries.UNITED_STATES);
+        public static readonly CensusDate USCENSUS1880 = new CensusDate("JUN-AUG 1880", "US Federal Census 1880", Countries.UNITED_STATES);
+        public static readonly CensusDate USCENSUS1890 = new CensusDate("JUN-AUG 1890", "US Federal Census 1890", Countries.UNITED_STATES);
+        public static readonly CensusDate USCENSUS1900 = new CensusDate("JUN-AUG 1900", "US Federal Census 1900", Countries.UNITED_STATES);
+        public static readonly CensusDate USCENSUS1910 = new CensusDate("APR-JUL 1910", "US Federal Census 1910", Countries.UNITED_STATES);
+        public static readonly CensusDate USCENSUS1920 = new CensusDate("JAN-MAR 1920", "US Federal Census 1920", Countries.UNITED_STATES);
+        public static readonly CensusDate USCENSUS1930 = new CensusDate("APR-JUL 1930", "US Federal Census 1930", Countries.UNITED_STATES);
+        public static readonly CensusDate USCENSUS1940 = new CensusDate("APR-JUL 1940", "US Federal Census 1940", Countries.UNITED_STATES);
 
         public static readonly CensusDate CANADACENSUS1851 = new CensusDate("BET 1851 AND 1852", "Canadian Census 1851/2", Countries.CANADA);
         public static readonly CensusDate CANADACENSUS1861 = new CensusDate("1861", "Canadian Census 1861", Countries.CANADA);
-        public static readonly CensusDate CANADACENSUS1871 = new CensusDate("2 APR 1871", "Canadian Census 1871", Countries.CANADA);
-        public static readonly CensusDate CANADACENSUS1881 = new CensusDate("4 APR 1881", "Canadian Census 1881", Countries.CANADA);
-        public static readonly CensusDate CANADACENSUS1891 = new CensusDate("6 APR 1891", "Canadian Census 1891", Countries.CANADA);
-        public static readonly CensusDate CANADACENSUS1901 = new CensusDate("31 MAR 1901", "Canadian Census 1901", Countries.CANADA);
+        public static readonly CensusDate CANADACENSUS1871 = new CensusDate("APR-JUL 1871", "Canadian Census 1871", Countries.CANADA);
+        public static readonly CensusDate CANADACENSUS1881 = new CensusDate("APR-JUL 1881", "Canadian Census 1881", Countries.CANADA);
+        public static readonly CensusDate CANADACENSUS1891 = new CensusDate("APR-JUL 1891", "Canadian Census 1891", Countries.CANADA);
+        public static readonly CensusDate CANADACENSUS1901 = new CensusDate("MAR-JUL 1901", "Canadian Census 1901", Countries.CANADA);
         public static readonly CensusDate CANADACENSUS1906 = new CensusDate("1906", "Canadian Census 1906", Countries.CANADA);
-        public static readonly CensusDate CANADACENSUS1911 = new CensusDate("1 JUN 1911", "Canadian Census 1911", Countries.CANADA);
+        public static readonly CensusDate CANADACENSUS1911 = new CensusDate("JUN-AUG 1911", "Canadian Census 1911", Countries.CANADA);
         public static readonly CensusDate CANADACENSUS1916 = new CensusDate("1916", "Canadian Census 1916", Countries.CANADA);
-        public static readonly CensusDate CANADACENSUS1921 = new CensusDate("1 JUN 1921", "Canadian Census 1921", Countries.CANADA);
+        public static readonly CensusDate CANADACENSUS1921 = new CensusDate("JUN-AUG 1921", "Canadian Census 1921", Countries.CANADA);
 
         private static readonly ISet<CensusDate> UK_CENSUS = new HashSet<CensusDate>(new CensusDate[] { 
             UKCENSUS1841, UKCENSUS1851, UKCENSUS1861, UKCENSUS1871, UKCENSUS1881, UKCENSUS1891, UKCENSUS1901, UKCENSUS1911
