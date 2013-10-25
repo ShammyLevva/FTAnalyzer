@@ -70,6 +70,7 @@
             this.mnuGeocodeStatus = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGoogleResultType = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSelectClear = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuStatusSelectAll = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgLocations)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -113,7 +114,7 @@
             this.dgLocations.TabIndex = 5;
             this.dgLocations.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgLocations_CellContextMenuStripNeeded);
             this.dgLocations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgLocations_CellDoubleClick);
-            this.dgLocations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgLocations_CellFormatting);
+            this.dgLocations.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgLocations_CellToolTipTextNeeded_1);
             // 
             // LocationIcon
             // 
@@ -201,7 +202,7 @@
             this.toolStripSeparator1,
             this.mnuEditLocation});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(240, 120);
+            this.contextMenuStrip.Size = new System.Drawing.Size(240, 98);
             // 
             // mnuVerified
             // 
@@ -416,6 +417,8 @@
             // 
             // mnuGeocodeStatus
             // 
+            this.mnuGeocodeStatus.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuStatusSelectAll});
             this.mnuGeocodeStatus.Name = "mnuGeocodeStatus";
             this.mnuGeocodeStatus.Size = new System.Drawing.Size(176, 22);
             this.mnuGeocodeStatus.Text = "Geocode Status";
@@ -431,9 +434,16 @@
             // mnuSelectClear
             // 
             this.mnuSelectClear.Name = "mnuSelectClear";
-            this.mnuSelectClear.Size = new System.Drawing.Size(122, 22);
+            this.mnuSelectClear.Size = new System.Drawing.Size(152, 22);
             this.mnuSelectClear.Text = "Select All";
             this.mnuSelectClear.Click += new System.EventHandler(this.mnuSelectClear_Click);
+            // 
+            // mnuStatusSelectAll
+            // 
+            this.mnuStatusSelectAll.Name = "mnuStatusSelectAll";
+            this.mnuStatusSelectAll.Size = new System.Drawing.Size(152, 22);
+            this.mnuStatusSelectAll.Text = "Select All";
+            this.mnuStatusSelectAll.Click += new System.EventHandler(this.mnuStatusSelectAll_Click);
             // 
             // GeocodeLocations
             // 
@@ -500,5 +510,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuNotSearched;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem mnuEditLocation;
+        private System.Windows.Forms.ToolStripMenuItem mnuStatusSelectAll;
     }
 }

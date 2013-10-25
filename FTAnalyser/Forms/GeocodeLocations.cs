@@ -63,7 +63,7 @@ namespace FTAnalyzer.Forms
 
         private void SetupFilterMenu()
         {
-            foreach (KeyValuePair<FactLocation.Geocode,string> item in FactLocation.Geocodes.OrderBy(x => x.Value))
+            foreach (KeyValuePair<FactLocation.Geocode, string> item in FactLocation.Geocodes.OrderBy(x => x.Value))
             {
                 string geocode = item.Value;
                 ToolStripMenuItem menu = new ToolStripMenuItem(geocode);
@@ -122,7 +122,7 @@ namespace FTAnalyzer.Forms
                 if (menu.Checked)
                     count++;
             }
-            return (count == menus - 2); //two less due to select/clear all & Places
+            return (count == menus - 3); //three less due to 2x select/clear all & Places
         }
 
         private void UpdateGridWithFilters(List<IDisplayGeocodedLocation> input)
@@ -226,6 +226,12 @@ namespace FTAnalyzer.Forms
 
         private void menuGeocode_CheckedChanged(object sender, EventArgs e)
         {
+            if (!refreshingMenus)
+                UpdateGeocodeStatusMenus();
+        }
+
+        private void UpdateGeocodeStatusMenus()
+        {
             foreach (ToolStripMenuItem menu in mnuGeocodeStatus.DropDownItems)
             {
                 Application.UserAppDataRegistry.SetValue(menu.Name, menu.Checked.ToString()); // remember checked state for next time
@@ -268,10 +274,31 @@ namespace FTAnalyzer.Forms
                 foreach (ToolStripMenuItem menu in places.DropDownItems)
                     menu.Checked = true;
                 mnuSelectClear.Checked = false; // make sure the clear all isn't checked
+                mnuStatusSelectAll.Checked = false;
                 places.Checked = false;
             }
             refreshingMenus = false;
             UpdateGoogleStatusMenus();
+        }
+
+        private void mnuStatusSelectAll_Click(object sender, EventArgs e)
+        {
+            refreshingMenus = true;
+            if (mnuStatusSelectAll.Text.Equals("Clear All"))
+            {
+                mnuStatusSelectAll.Text = "Select All";
+                foreach (ToolStripMenuItem menu in mnuGeocodeStatus.DropDownItems)
+                    menu.Checked = false;
+            }
+            else
+            {
+                mnuStatusSelectAll.Text = "Clear All";
+                foreach (ToolStripMenuItem menu in mnuGeocodeStatus.DropDownItems)
+                    menu.Checked = true;
+                mnuStatusSelectAll.Checked = false; // make sure clear all isn't checked
+            }
+            refreshingMenus = false;
+            UpdateGeocodeStatusMenus();
         }
 
         private void ResetTable()
@@ -594,7 +621,7 @@ namespace FTAnalyzer.Forms
             Application.UserAppDataRegistry.SetValue("Ask to update database", updateChangesWithoutAskingToolStripMenuItem.Checked);
         }
 
-        private void dgLocations_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgLocations_CellToolTipTextNeeded_1(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
