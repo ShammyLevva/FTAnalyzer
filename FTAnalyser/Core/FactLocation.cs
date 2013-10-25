@@ -146,7 +146,7 @@ namespace FTAnalyzer
             Geocodes.Add(Geocode.NO_MATCH, "No Match");
             Geocodes.Add(Geocode.INCORRECT, "Incorrect (User Marked)");
             Geocodes.Add(Geocode.OUT_OF_BOUNDS, "Outside Country Area");
-            Geocodes.Add(Geocode.LEVEL_MISMATCH, "Partial Match (FTAnalyzer)");
+            Geocodes.Add(Geocode.LEVEL_MISMATCH, "Partial Match (Levels)");
         }
 
         public static FactLocation GetLocation(string place)
