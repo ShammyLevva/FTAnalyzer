@@ -17,6 +17,7 @@ namespace FTAnalyzer.UserControls
 			//cannot be in load, because its possible this tab won't show, and the values will not be initialized.
 			//if this happens, then the users settings will be cleared.
 			chkUseBaptisms.Checked = Properties.GeneralSettings.Default.UseBaptismDates;
+            chkUseBurials.Checked = Properties.GeneralSettings.Default.UseBurialDates;
 			chkAllowEmptyLocations.Checked = Properties.GeneralSettings.Default.AllowEmptyLocations;
 			chkCensusResidence.Checked = Properties.GeneralSettings.Default.UseResidenceAsCensus;
 			chkTolerateInaccurateCensus.Checked = Properties.GeneralSettings.Default.TolerateInaccurateCensusDate;
@@ -31,7 +32,8 @@ namespace FTAnalyzer.UserControls
 		public void Save()
 		{
 			Properties.GeneralSettings.Default.UseBaptismDates = chkUseBaptisms.Checked;
-			Properties.GeneralSettings.Default.AllowEmptyLocations = chkAllowEmptyLocations.Checked;
+            Properties.GeneralSettings.Default.UseBurialDates = chkUseBurials.Checked;
+            Properties.GeneralSettings.Default.AllowEmptyLocations = chkAllowEmptyLocations.Checked;
 			Properties.GeneralSettings.Default.UseResidenceAsCensus = chkCensusResidence.Checked;
 			Properties.GeneralSettings.Default.TolerateInaccurateCensusDate = chkTolerateInaccurateCensus.Checked;
             Properties.GeneralSettings.Default.IncludePartials = chkIncludePartialGeocoded.Checked;
@@ -105,7 +107,14 @@ namespace FTAnalyzer.UserControls
 				UseBaptismDatesChanged(null, EventArgs.Empty);
 		}
 
-		public static event EventHandler AllowEmptyLocationsChanged;
+        public static event EventHandler UseBurialDatesChanged;
+        protected static void OnUseBurialDatesChanged()
+        {
+            if (UseBurialDatesChanged != null)
+                UseBurialDatesChanged(null, EventArgs.Empty);
+        }
+
+        public static event EventHandler AllowEmptyLocationsChanged;
 		protected static void OnAllowEmptyLocationsChanged()
 		{
 			if (AllowEmptyLocationsChanged != null)

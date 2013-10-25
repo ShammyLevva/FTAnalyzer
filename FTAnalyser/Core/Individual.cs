@@ -355,7 +355,17 @@ namespace FTAnalyzer
         {
             get
             {
-                return GetPreferredFactDate(Fact.DEATH);
+                FactDate f = GetPreferredFactDate(Fact.DEATH);
+                if (Properties.GeneralSettings.Default.UseBurialDates)
+                {
+                    if (f.IsKnown)
+                        return f;
+                    f = GetPreferredFactDate(Fact.BURIAL);
+                    if (f.IsKnown)
+                        return f;
+                    f = GetPreferredFactDate(Fact.CREMATION);
+                }
+                return f;
             }
         }
 

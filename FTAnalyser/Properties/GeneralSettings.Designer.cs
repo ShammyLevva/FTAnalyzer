@@ -142,5 +142,17 @@ namespace FTAnalyzer.Properties {
                 this["OnlyCensusParents"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseBurialDates {
+            get {
+                return ((bool)(this["UseBurialDates"]));
+            }
+            set {
+                this["UseBurialDates"] = value;
+            }
+        }
     }
 }

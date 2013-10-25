@@ -40,6 +40,7 @@
             this.chkFamilyCensus = new System.Windows.Forms.CheckBox();
             this.upDownAge = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
+            this.chkUseBurials = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownAge)).BeginInit();
             this.SuspendLayout();
@@ -126,10 +127,19 @@
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
+            // chkUseBurials
+            // 
+            resources.ApplyResources(this.chkUseBurials, "chkUseBurials");
+            this.chkUseBurials.Checked = true;
+            this.chkUseBurials.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUseBurials.Name = "chkUseBurials";
+            this.chkUseBurials.UseVisualStyleBackColor = true;
+            // 
             // GeneralSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkUseBurials);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.upDownAge);
             this.Controls.Add(this.chkFamilyCensus);
@@ -159,6 +169,7 @@
         private System.Windows.Forms.CheckBox chkFamilyCensus;
         private System.Windows.Forms.NumericUpDown upDownAge;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox chkUseBurials;
 
 
 	}
