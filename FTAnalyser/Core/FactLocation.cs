@@ -651,7 +651,7 @@ namespace FTAnalyzer
                     double distance = Math.Abs(f.FactDate.BestYear - when.BestYear);
                     if (distance < limit)
                     {
-                        if (distance < minDistance && !f.Location.Equals(string.Empty))
+                        if (distance < minDistance && !f.Location.GEDCOMLocation.Equals(string.Empty))
                         { // this is a closer date but now check to ensure we aren't overwriting a known country with an unknown one.
                             if (f.Location.IsKnownCountry || (!f.Location.IsKnownCountry && !result.Location.IsKnownCountry))
                             {
