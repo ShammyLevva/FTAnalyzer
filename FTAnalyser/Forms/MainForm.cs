@@ -1474,20 +1474,20 @@ namespace FTAnalyzer
                 MessageBox.Show("You need to stop Geocoding before you can export the database");
             else
             {
-                DatabaseHelper dbh = DatabaseHelper.Instance;
-                dbh.StartBackupDatabase();
                 saveDatabase.FileName = "FTAnalyzer-Geocodes-" + DateTime.Now.ToString("yyyy-MM-dd") + ".zip";
                 saveDatabase.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 DialogResult result = saveDatabase.ShowDialog();
                 if (result == DialogResult.OK)
                 {
+                    DatabaseHelper dbh = DatabaseHelper.Instance;
+                    dbh.StartBackupDatabase();
                     ZipFile zip = new ZipFile(saveDatabase.FileName);
                     zip.AddFile(dbh.Filename,string.Empty);
                     zip.Comment = "FT Analyzer zip file created by v" + PublishVersion() + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm");
                     zip.Save();
+                    dbh.EndBackupDatabase(); 
+                    MessageBox.Show("Database exported to " + saveDatabase.FileName);
                 }
-                dbh.EndBackupDatabase();
-                MessageBox.Show("Database exported to " + saveDatabase.FileName);
             }
         }
     }
