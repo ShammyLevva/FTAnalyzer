@@ -15,7 +15,7 @@ namespace FTAnalyzer.Forms
 {
     public partial class Census : Form
     {
-        private int numFamilies;
+        //private int numFamilies;
         public CensusDate CensusDate { get; private set; }
         private string censusCountry;
         private ReportFormHelper reportFormHelper;
@@ -95,6 +95,8 @@ namespace FTAnalyzer.Forms
                 dgCensus.Columns["CensusReference"].Visible = false;
             reportFormHelper.LoadColumnLayout("CensusColumns.xml");
             int numIndividuals = (from x in individuals select x.Ind_ID).Distinct().Count();
+            int numFamilies = (from x in individuals select x.FamilyID).Distinct().Count();
+
             tsRecords.Text = individuals.Count + " Rows containing " + numIndividuals + " Individuals and " + numFamilies + " Families.";
         }
 
@@ -108,21 +110,19 @@ namespace FTAnalyzer.Forms
 
         private void StyleRows()
         {
-            string currentFamilyID = "";
+            string currentRowText = "";
             bool highlighted = true;
-            numFamilies = 0;
-
+            
             Font boldFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Bold);
             Font regularFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Regular);
-
+            int sortColumn = dgCensus.SortedColumn.Index;
             foreach (DataGridViewRow row in dgCensus.Rows)
             {
                 CensusIndividual cr = (CensusIndividual)row.DataBoundItem;
-                if (cr.FamilyID != currentFamilyID)
+                if (row.Cells[sortColumn].Value.ToString() != currentRowText)
                 {
-                    currentFamilyID = cr.FamilyID;
+                    currentRowText = row.Cells[sortColumn].Value.ToString();
                     highlighted = !highlighted;
-                    numFamilies++;
                 }
                 DataGridViewCellStyle style = new DataGridViewCellStyle(dgCensus.DefaultCellStyle);
                 style.BackColor = highlighted ? Color.LightGray : Color.White;
