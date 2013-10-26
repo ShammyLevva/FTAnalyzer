@@ -391,7 +391,7 @@ namespace FTAnalyzer
             {
                 if (ind.IsAlive(when) && ind.GetMaxAge(when) < FactDate.MAXYEARS)
                 {
-                    Fact fact = ind.BestFact(when, limit);
+                    Fact fact = ind.BestLocationFact(when, limit);
                     FactLocation loc = fact.Location;
                     if (loc.IsGeoCoded)
                         result.Add(new MapLocation(ind, fact, when));

@@ -639,19 +639,19 @@ namespace FTAnalyzer
             return addressField;
         }
 
-        public static Fact BestFact(IEnumerable<Fact> facts, FactDate when, int limit)
+        public static Fact BestLocationFact(IEnumerable<Fact> facts, FactDate when, int limit)
         {
             // this returns a Fact for a FactLocation a person was at for a given period
             Fact result = new Fact(Fact.UNKNOWN, FactDate.UNKNOWN_DATE);
             double minDistance = float.MaxValue;
             foreach (Fact f in facts)
             {
-                if (f.FactDate.IsKnown)
-                {
+                if (f.FactDate.IsKnown && !f.Location.GEDCOMLocation.Equals(string.Empty))
+                {  // only deal with known dates and non empty locations
                     double distance = Math.Abs(f.FactDate.BestYear - when.BestYear);
                     if (distance < limit)
                     {
-                        if (distance < minDistance && !f.Location.GEDCOMLocation.Equals(string.Empty))
+                        if (distance < minDistance)
                         { // this is a closer date but now check to ensure we aren't overwriting a known country with an unknown one.
                             if (f.Location.IsKnownCountry || (!f.Location.IsKnownCountry && !result.Location.IsKnownCountry))
                             {
@@ -667,7 +667,7 @@ namespace FTAnalyzer
 
         public static FactLocation BestLocation(IEnumerable<Fact> facts, FactDate when)
         {
-            Fact result = BestFact(facts, when, int.MaxValue);
+            Fact result = BestLocationFact(facts, when, int.MaxValue);
             return result.Location;
         }
 

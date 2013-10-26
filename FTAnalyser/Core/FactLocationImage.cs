@@ -18,7 +18,7 @@ namespace FTAnalyzer
         private static FactLocationImage MATCHED = new FactLocationImage(FactLocation.Geocode.MATCHED,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\GoogleMatch.png")));
         private static FactLocationImage PARTIAL_MATCH = new FactLocationImage(FactLocation.Geocode.PARTIAL_MATCH,
-            Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Warning.png")));
+            Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\GooglePartial.png")));
         private static FactLocationImage GEDCOM_USER = new FactLocationImage(FactLocation.Geocode.GEDCOM_USER,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Complete_OK.png")));
         private static FactLocationImage NO_MATCH = new FactLocationImage(FactLocation.Geocode.NO_MATCH,

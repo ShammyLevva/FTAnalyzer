@@ -455,8 +455,7 @@ namespace FTAnalyzer.Forms
                 SQLiteCommand updateCmd = dbh.UpdateGeocode();
 
                 int count = 0;
-                int good = 0;
-                int partial = 0;
+                int googled = 0;
                 int geocoded = 0;
                 int skipped = 0;
                 int total = FactLocation.AllLocations.Count() - 1;
@@ -512,10 +511,7 @@ namespace FTAnalyzer.Forms
                                             loc.GeocodeStatus = result.PartialMatch ? FactLocation.Geocode.PARTIAL_MATCH : FactLocation.Geocode.MATCHED;
                                             loc.ViewPort = viewport;
                                             if (!result.PartialMatch)
-                                            {
-                                                good++;
                                                 break; // we've got a good match so exit
-                                            }
                                         }
                                     }
                                     if (loc.GeocodeStatus != FactLocation.Geocode.MATCHED)
@@ -533,9 +529,8 @@ namespace FTAnalyzer.Forms
                                             else
                                                 loc.GeocodeStatus = FactLocation.Geocode.OUT_OF_BOUNDS;
                                         }
-                                        partial++;
                                     }
-
+                                    googled++;
                                 }
                                 else if (res.Status == "ZERO_RESULTS")
                                 {
@@ -589,8 +584,8 @@ namespace FTAnalyzer.Forms
                     }
                     count++;
                     int percent = (int)Math.Truncate((count - 1) * 100.0 / total);
-                    string status = "Previously " + geocoded + " found, " + skipped + " skipped. " +
-                                    "Googled " + good + " good, " + partial + " partial. Done " + (count - 1) + " of " + total + ".  ";
+                    string status = "Previously geocoded: " + geocoded + ", skipped: " + skipped +
+                                    "Googled: " + googled + ". Done " + (count - 1) + " of " + total + ".  ";
                     worker.ReportProgress(percent, status);
 
                     if (worker.CancellationPending ||
