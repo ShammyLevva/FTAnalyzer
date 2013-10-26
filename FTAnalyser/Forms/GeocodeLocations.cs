@@ -585,7 +585,7 @@ namespace FTAnalyzer.Forms
                     count++;
                     int percent = (int)Math.Truncate((count - 1) * 100.0 / total);
                     string status = "Previously geocoded: " + geocoded + ", skipped: " + skipped +
-                                    "Googled: " + googled + ". Done " + (count - 1) + " of " + total + ".  ";
+                                    " Googled: " + googled + ". Done " + (count - 1) + " of " + total + ".  ";
                     worker.ReportProgress(percent, status);
 
                     if (worker.CancellationPending ||

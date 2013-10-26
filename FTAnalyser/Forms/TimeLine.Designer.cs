@@ -200,7 +200,7 @@
             // 
             this.mnuHideScaleBar.CheckOnClick = true;
             this.mnuHideScaleBar.Name = "mnuHideScaleBar";
-            this.mnuHideScaleBar.Size = new System.Drawing.Size(264, 22);
+            this.mnuHideScaleBar.Size = new System.Drawing.Size(272, 22);
             this.mnuHideScaleBar.Text = "Hide Scale Bar";
             this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
             // 
@@ -208,7 +208,7 @@
             // 
             this.mnuKeepZoom.CheckOnClick = true;
             this.mnuKeepZoom.Name = "mnuKeepZoom";
-            this.mnuKeepZoom.Size = new System.Drawing.Size(264, 22);
+            this.mnuKeepZoom.Size = new System.Drawing.Size(272, 22);
             this.mnuKeepZoom.Text = "Keep Zoom on changing Year";
             // 
             // mnuLimitFactDates
@@ -216,7 +216,7 @@
             this.mnuLimitFactDates.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cbLimitFactDates});
             this.mnuLimitFactDates.Name = "mnuLimitFactDates";
-            this.mnuLimitFactDates.Size = new System.Drawing.Size(264, 22);
+            this.mnuLimitFactDates.Size = new System.Drawing.Size(272, 22);
             this.mnuLimitFactDates.Text = "Limit Fact Dates";
             // 
             // cbLimitFactDates
