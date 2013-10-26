@@ -259,5 +259,15 @@ namespace FTAnalyzer.Forms
         {
             reportFormHelper.DoExportToExcel<IDisplayCensus>(this);
         }
+
+        private void dgCensus_ColumnSortModeChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            StyleRows();
+        }
+
+        private void dgCensus_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            StyleRows();
+        }
     }
 }
