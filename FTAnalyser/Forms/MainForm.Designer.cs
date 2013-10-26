@@ -123,6 +123,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
             this.btnShowCensusMissing = new System.Windows.Forms.Button();
+            this.cenDate = new Controls.CensusDateSelector(); 
             this.relTypesCensus = new Controls.RelationTypes();
             this.tabLooseBirthDeaths = new System.Windows.Forms.TabPage();
             this.tabCtrlLooseBDs = new System.Windows.Forms.TabControl();
@@ -1023,6 +1024,7 @@
             this.tabCensus.Controls.Add(this.label2);
             this.tabCensus.Controls.Add(this.udAgeFilter);
             this.tabCensus.Controls.Add(this.btnShowCensusMissing);
+            this.tabCensus.Controls.Add(this.cenDate);
             this.tabCensus.Controls.Add(this.relTypesCensus);
             this.tabCensus.Location = new System.Drawing.Point(4, 22);
             this.tabCensus.Name = "tabCensus";
@@ -1098,6 +1100,16 @@
             this.btnShowCensusMissing.Text = "Show Missing from Census";
             this.btnShowCensusMissing.UseVisualStyleBackColor = true;
             this.btnShowCensusMissing.Click += new System.EventHandler(this.btnShowCensus_Click);
+            // 
+            // cenDate
+            // 
+            this.cenDate.AutoSize = true;
+            this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cenDate.Country = global::FTAnalyzer.Properties.Resources.FTA_0002;
+            this.cenDate.Location = new System.Drawing.Point(8, 92);
+            this.cenDate.Name = "cenDate";
+            this.cenDate.Size = new System.Drawing.Size(186, 27);
+            this.cenDate.TabIndex = 17;
             // 
             // relTypesCensus
             // 
