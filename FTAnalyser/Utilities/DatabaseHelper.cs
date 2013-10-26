@@ -75,7 +75,6 @@ namespace FTAnalyzer.Utilities
             }
             catch (SQLiteException ex)
             {
-                Console.WriteLine(ex.Message);
                 UpgradeDatabase(new Version("0.0.0.0"));
             }
         }
@@ -84,10 +83,11 @@ namespace FTAnalyzer.Utilities
         {
             try
             {
-                Version v2_3_0_2 = new Version("2.3.0.2");
-                if (dbVersion < v2_3_0_2)
+                Version v3_0_0_0 = new Version("3.0.0.0");
+                Version v3_0_2_0 = new Version("3.0.2.0");
+                if (dbVersion < v3_0_0_0)
                 {
-                    // Version is less than 2.3.0.2 or none existent so copy v2.3.0.2 database from empty database
+                    // Version is less than 3.0.0.0 or none existent so copy latest database from empty database
                     conn.Close();
                     GC.Collect(); // needed to force a cleanup of connections prior to replacing the file.
                     if (File.Exists(Filename))
@@ -98,13 +98,17 @@ namespace FTAnalyzer.Utilities
                     // Now re-open upgraded database
                     OpenDatabaseConnection();
                 }
-                if (dbVersion == v2_3_0_2)
+                if (dbVersion < v3_0_2_0)
                 {
-                    // Version v2.3.0.2 is now known as v3.0.0.0
+                    // Version v3.0.2.0 needs to reset Google Matches to not searched and set partials to level
                     //SQLiteCommand cmd = new SQLiteCommand("alter table geocode add column GeocodeStatus integer default 0", conn);
-                    //cmd.ExecuteNonQuery();
-                    SQLiteCommand cmd = new SQLiteCommand("update versions set Database = '3.0.0.0'", conn);
+                    SQLiteCommand cmd = new SQLiteCommand("update geocode set geocodestatus=0 where geocodestatus=1", conn);
+                    cmd.ExecuteNonQuery(); // reset Google Match to Not Searched
+                    cmd = new SQLiteCommand("update geocode set geocodestatus=7 where geocodestatus=2", conn);
+                    cmd.ExecuteNonQuery(); // set to level mismatch if partial
+                    cmd = new SQLiteCommand("update versions set Database = '3.0.2.0'", conn);
                     cmd.ExecuteNonQuery();
+                    MessageBox.Show("Please note that due to fixes in the way Google reports\nlocations your 'Google Matched' geocodes have been reset."); 
                 }
             }
             catch (Exception ex)
