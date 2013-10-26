@@ -27,6 +27,7 @@ namespace FTAnalyzer
         private static readonly string CHECKING = "d MMM";
         private static readonly string DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})$";
         private static readonly string DOUBLE_DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})/(\\d{0,2})$";
+        private static readonly string DOUBLE_DATE_PATTERN2 = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{4})/(\\d{4})$";
         private static readonly string POSTFIX = "(\\d{1,2})(?:ST|ND|RD|TH)(.*)";
         private static readonly string BETWEENFIX = "(\\d{4})-(\\d{4})";
         private static readonly string USDATEFIX = "^([A-Za-z]{3}) *(\\d{1,2} )(\\d{4})$";
@@ -408,6 +409,7 @@ namespace FTAnalyzer
                 else
                 {   // Try matching double date pattern
                     matcher = Regex.Match(dateValue, DOUBLE_DATE_PATTERN);
+                    Match matcher2 = Regex.Match(dateValue, DOUBLE_DATE_PATTERN2);
                     if (matcher.Success)
                     {
                         gDay = matcher.Groups[1];
@@ -416,6 +418,15 @@ namespace FTAnalyzer
                         gDouble = matcher.Groups[4];
                         if (dateValue.Length > 3)
                             dateValue = dateValue.Substring(0, dateValue.Length - gDouble.ToString().Length - 1); // remove the trailing / and 1 or 2 digits
+                    }
+                    else if (matcher2.Success)
+                    {
+                        gDay = matcher2.Groups[1];
+                        gMonth = matcher2.Groups[2];
+                        gYear = matcher2.Groups[3];
+                        gDouble = matcher2.Groups[4];
+                        if (dateValue.Length > 5)
+                            dateValue = dateValue.Substring(0, dateValue.Length - 5); // remove the trailing / and 4 digits
                     }
                     else
                         throw new Exception("Unrecognised date format for : " + dateValue);
@@ -499,9 +510,11 @@ namespace FTAnalyzer
                 return true;
             // check if valid double date if so set double date to true
             string doubleyear = gDouble.ToString().Trim();
+            if (doubleyear.Length == 4)
+                doubleyear = doubleyear.Substring(2);
             if (doubleyear.Length == 1 && year.Length >= 2)
                 doubleyear = year.Substring(year.Length - 2, 1) + doubleyear;
-            if (doubleyear == null || doubleyear.Length != 2 || year.Length < 3)
+            if (doubleyear == null || (doubleyear.Length != 2 && doubleyear.Length != 4) || year.Length < 3)
                 return false;
             int iYear = Convert.ToInt32(year);
             if (iYear >= 1752)
