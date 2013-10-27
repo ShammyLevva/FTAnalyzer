@@ -61,7 +61,7 @@ namespace FTAnalyzer.Forms
         private void SetupMap()
         {
             // Add Google maps layer to map control.
-            HttpUtility.SetDefaultProxy();
+            //HttpUtility.SetDefaultProxy();
             mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
                 new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap"));
             //      new BingTileSource(BingRequest.UrlBing, "", BingMapType.Roads),"BingMap"));
@@ -200,6 +200,56 @@ namespace FTAnalyzer.Forms
                 UpdateDatabase();
             dataUpdated = false;
             pointUpdated = false;
+        }
+
+        private void mnuMapStyle_Click(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem menu in mnuMapStyle.DropDownItems)
+                menu.Checked = false;
+            mapBox1.Map.BackgroundLayer.RemoveAt(0);
+            if (sender == mnuGoogleMap)
+            {
+                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                        new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap"));
+                mnuGoogleMap.Checked = true;
+            }
+            else if (sender == mnuGoogleSatellite)
+            {
+                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                        new GoogleTileSource(GoogleMapType.GoogleSatellite), "GoogleSatellite"));
+                mnuGoogleSatellite.Checked = true;
+            }
+            else if (sender == mnuOpenStreetMap)
+            {
+                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                    new BruTile.Web.OsmTileSource(), "OpenStreetMap"));
+                mnuOpenStreetMap.Checked = true;
+            }
+            else if (sender == mnuBingMapAerial)
+            {
+                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                    new BruTile.Web.BingTileSource(BingRequest.UrlBing, null, BingMapType.Aerial), "BingMapAerial"));
+                mnuBingMapAerial.Checked = true;
+            }
+            else if (sender == mnuBingMapRoads)
+            {
+                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                    new BruTile.Web.BingTileSource(BingRequest.UrlBing, null, BingMapType.Roads), "BingMapRoads"));
+                mnuBingMapRoads.Checked = true;
+            }
+            else if (sender == mnuBingMapHybrid)
+            {
+                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                    new BruTile.Web.BingTileSource(BingRequest.UrlBing, null, BingMapType.Hybrid), "BingMapHybrid"));
+                mnuBingMapHybrid.Checked = true;
+            }
+            else if (sender == mnuBingMapOS)
+            {
+                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                    new BingOSTileSource(), "BingMapRoads"));
+                mnuBingMapHybrid.Checked = true;
+            }
+            mapBox1.Refresh();
         }
     }
 }

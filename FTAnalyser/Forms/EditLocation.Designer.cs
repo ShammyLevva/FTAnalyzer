@@ -32,13 +32,18 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditLocation));
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.menuMap = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuSatellite = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnReload = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.mnuMapStyle = new System.Windows.Forms.ToolStripDropDownButton();
+            this.mnuGoogleMap = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuGoogleSatellite = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOpenStreetMap = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBingMapAerial = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBingMapRoads = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBingMapHybrid = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBingMapOS = new System.Windows.Forms.ToolStripMenuItem();
             this.mapZoomToolStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -70,7 +75,7 @@
             // 
             this.mapZoomToolStrip.Enabled = false;
             this.mapZoomToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripDropDownButton1,
+            this.mnuMapStyle,
             this.btnSave,
             this.btnReload});
             this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
@@ -79,35 +84,6 @@
             this.mapZoomToolStrip.Size = new System.Drawing.Size(754, 25);
             this.mapZoomToolStrip.TabIndex = 10;
             this.mapZoomToolStrip.Text = "MapZoomToolStrip";
-            // 
-            // toolStripDropDownButton1
-            // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuMap,
-            this.menuSatellite});
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(71, 22);
-            this.toolStripDropDownButton1.Text = "Map style";
-            this.toolStripDropDownButton1.Visible = false;
-            // 
-            // menuMap
-            // 
-            this.menuMap.CheckOnClick = true;
-            this.menuMap.Name = "menuMap";
-            this.menuMap.Size = new System.Drawing.Size(115, 22);
-            this.menuMap.Text = "Map";
-            // 
-            // menuSatellite
-            // 
-            this.menuSatellite.Checked = true;
-            this.menuSatellite.CheckOnClick = true;
-            this.menuSatellite.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.menuSatellite.Name = "menuSatellite";
-            this.menuSatellite.Size = new System.Drawing.Size(115, 22);
-            this.menuSatellite.Text = "Satellite";
             // 
             // btnSave
             // 
@@ -148,6 +124,82 @@
             this.toolStripStatusLabel1.Text = "Left click to select pointer, move to the correct place (using zoom/pan) then rig" +
                 "ht click to place pointer in new location";
             // 
+            // mnuMapStyle
+            // 
+            this.mnuMapStyle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.mnuMapStyle.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuGoogleMap,
+            this.mnuGoogleSatellite,
+            this.mnuOpenStreetMap,
+            this.mnuBingMapAerial,
+            this.mnuBingMapRoads,
+            this.mnuBingMapHybrid,
+            this.mnuBingMapOS});
+            this.mnuMapStyle.Image = ((System.Drawing.Image)(resources.GetObject("mnuMapStyle.Image")));
+            this.mnuMapStyle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnuMapStyle.Name = "mnuMapStyle";
+            this.mnuMapStyle.Size = new System.Drawing.Size(71, 22);
+            this.mnuMapStyle.Text = "Map style";
+            // 
+            // mnuGoogleMap
+            // 
+            this.mnuGoogleMap.Checked = true;
+            this.mnuGoogleMap.CheckOnClick = true;
+            this.mnuGoogleMap.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mnuGoogleMap.Name = "mnuGoogleMap";
+            this.mnuGoogleMap.Size = new System.Drawing.Size(164, 22);
+            this.mnuGoogleMap.Text = "Google Map";
+            this.mnuGoogleMap.Click += new System.EventHandler(this.mnuMapStyle_Click);
+            // 
+            // mnuGoogleSatellite
+            // 
+            this.mnuGoogleSatellite.CheckOnClick = true;
+            this.mnuGoogleSatellite.Name = "mnuGoogleSatellite";
+            this.mnuGoogleSatellite.Size = new System.Drawing.Size(164, 22);
+            this.mnuGoogleSatellite.Text = "Google Satellite";
+            this.mnuGoogleSatellite.Visible = false;
+            this.mnuGoogleSatellite.Click += new System.EventHandler(this.mnuMapStyle_Click);
+            // 
+            // mnuOpenStreetMap
+            // 
+            this.mnuOpenStreetMap.CheckOnClick = true;
+            this.mnuOpenStreetMap.Name = "mnuOpenStreetMap";
+            this.mnuOpenStreetMap.Size = new System.Drawing.Size(164, 22);
+            this.mnuOpenStreetMap.Text = "Open Street Map";
+            this.mnuOpenStreetMap.Click += new System.EventHandler(this.mnuMapStyle_Click);
+            // 
+            // mnuBingMapAerial
+            // 
+            this.mnuBingMapAerial.CheckOnClick = true;
+            this.mnuBingMapAerial.Name = "mnuBingMapAerial";
+            this.mnuBingMapAerial.Size = new System.Drawing.Size(164, 22);
+            this.mnuBingMapAerial.Text = "Aerial Bing Map";
+            this.mnuBingMapAerial.Click += new System.EventHandler(this.mnuMapStyle_Click);
+            // 
+            // mnuBingMapRoads
+            // 
+            this.mnuBingMapRoads.CheckOnClick = true;
+            this.mnuBingMapRoads.Name = "mnuBingMapRoads";
+            this.mnuBingMapRoads.Size = new System.Drawing.Size(164, 22);
+            this.mnuBingMapRoads.Text = "Roads Bing Map";
+            this.mnuBingMapRoads.Click += new System.EventHandler(this.mnuMapStyle_Click);
+            // 
+            // mnuBingMapHybrid
+            // 
+            this.mnuBingMapHybrid.CheckOnClick = true;
+            this.mnuBingMapHybrid.Name = "mnuBingMapHybrid";
+            this.mnuBingMapHybrid.Size = new System.Drawing.Size(164, 22);
+            this.mnuBingMapHybrid.Text = "Hybrid Bing Map";
+            this.mnuBingMapHybrid.Click += new System.EventHandler(this.mnuMapStyle_Click);
+            // 
+            // mnuBingMapOS
+            // 
+            this.mnuBingMapOS.Name = "mnuBingMapOS";
+            this.mnuBingMapOS.Size = new System.Drawing.Size(164, 22);
+            this.mnuBingMapOS.Text = "OS Bing Map";
+            this.mnuBingMapOS.Visible = false;
+            this.mnuBingMapOS.Click += new System.EventHandler(this.mnuMapStyle_Click);
+            // 
             // EditLocation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -173,12 +225,17 @@
 
         private SharpMap.Forms.MapBox mapBox1;
         private SharpMap.Forms.ToolBar.MapZoomToolStrip mapZoomToolStrip;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ToolStripMenuItem menuMap;
-        private System.Windows.Forms.ToolStripMenuItem menuSatellite;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripButton btnReload;
+        private System.Windows.Forms.ToolStripDropDownButton mnuMapStyle;
+        private System.Windows.Forms.ToolStripMenuItem mnuGoogleMap;
+        private System.Windows.Forms.ToolStripMenuItem mnuGoogleSatellite;
+        private System.Windows.Forms.ToolStripMenuItem mnuOpenStreetMap;
+        private System.Windows.Forms.ToolStripMenuItem mnuBingMapAerial;
+        private System.Windows.Forms.ToolStripMenuItem mnuBingMapRoads;
+        private System.Windows.Forms.ToolStripMenuItem mnuBingMapHybrid;
+        private System.Windows.Forms.ToolStripMenuItem mnuBingMapOS;
     }
 }
