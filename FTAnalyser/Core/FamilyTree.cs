@@ -551,7 +551,7 @@ namespace FTAnalyzer
                     FactDate marriageDate = fam.GetPreferredFactDate(Fact.MARRIAGE);
                     if (marriageDate.StartDate.Year > Properties.GeneralSettings.Default.MinParentalAge && !marriageDate.IsLongYearSpan)
                     {  // set maximum birthdate as X years before earliest marriage
-                        DateTime preMarriage = marriageDate.StartDate.AddYears(-Properties.GeneralSettings.Default.MinParentalAge);
+                        DateTime preMarriage = new DateTime(marriageDate.StartDate.Year - Properties.GeneralSettings.Default.MinParentalAge, 12, 31);
                         if (preMarriage < minEnd && preMarriage >= minStart)
                             minEnd = preMarriage;
                     }
@@ -566,10 +566,10 @@ namespace FTAnalyzer
                 {  // check min date at least X years after parent
                     if (fam.Husband != null && fam.Husband.BirthDate.IsKnown && fam.Husband.BirthDate.StartDate != FactDate.MINDATE)
                         if(fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
-                            minStart = fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge);
+                            minStart = new DateTime(fam.Husband.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
                     if (fam.Wife != null && fam.Wife.BirthDate.IsKnown && fam.Wife.BirthDate.StartDate != FactDate.MINDATE)
                         if (fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
-                            minStart = fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge);
+                            minStart = new DateTime(fam.Wife.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
                 }
                 if (birthDate.EndDate < minEnd)
                     minEnd = birthDate.EndDate;
