@@ -577,6 +577,12 @@ namespace FTAnalyzer.Forms
                     new BruTile.Web.BingTileSource(BingRequest.UrlBing, null, BingMapType.Hybrid), "BingMapHybrid"));
                 mnuBingMapHybrid.Checked = true;
             }
+            else if (sender == mnuBingMapOS)
+            {
+                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                    new BingOSTileSource(), "BingMapRoads"));
+                mnuBingMapHybrid.Checked = true;
+            }
             mapBox1.Refresh();
         }
     }

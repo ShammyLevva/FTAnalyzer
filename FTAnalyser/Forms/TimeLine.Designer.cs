@@ -57,6 +57,11 @@
             this.mnuMapStyle = new System.Windows.Forms.ToolStripDropDownButton();
             this.mnuGoogleMap = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGoogleSatellite = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOpenStreetMap = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBingMapAerial = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBingMapRoads = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBingMapHybrid = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBingMapOS = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.txtTimeInterval = new System.Windows.Forms.ToolStripTextBox();
@@ -69,10 +74,6 @@
             this.btnForward1 = new System.Windows.Forms.Button();
             this.btnBack10 = new System.Windows.Forms.Button();
             this.btnForward10 = new System.Windows.Forms.Button();
-            this.mnuOpenStreetMap = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuBingMapAerial = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuBingMapRoads = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuBingMapHybrid = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -349,7 +350,8 @@
             this.mnuOpenStreetMap,
             this.mnuBingMapAerial,
             this.mnuBingMapRoads,
-            this.mnuBingMapHybrid});
+            this.mnuBingMapHybrid,
+            this.mnuBingMapOS});
             this.mnuMapStyle.Image = ((System.Drawing.Image)(resources.GetObject("mnuMapStyle.Image")));
             this.mnuMapStyle.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuMapStyle.Name = "mnuMapStyle";
@@ -372,7 +374,48 @@
             this.mnuGoogleSatellite.Name = "mnuGoogleSatellite";
             this.mnuGoogleSatellite.Size = new System.Drawing.Size(164, 22);
             this.mnuGoogleSatellite.Text = "Google Satellite";
+            this.mnuGoogleSatellite.Visible = false;
             this.mnuGoogleSatellite.Click += new System.EventHandler(this.mnuMapStyle_Click);
+            // 
+            // mnuOpenStreetMap
+            // 
+            this.mnuOpenStreetMap.CheckOnClick = true;
+            this.mnuOpenStreetMap.Name = "mnuOpenStreetMap";
+            this.mnuOpenStreetMap.Size = new System.Drawing.Size(164, 22);
+            this.mnuOpenStreetMap.Text = "Open Street Map";
+            this.mnuOpenStreetMap.Click += new System.EventHandler(this.mnuMapStyle_Click);
+            // 
+            // mnuBingMapAerial
+            // 
+            this.mnuBingMapAerial.CheckOnClick = true;
+            this.mnuBingMapAerial.Name = "mnuBingMapAerial";
+            this.mnuBingMapAerial.Size = new System.Drawing.Size(164, 22);
+            this.mnuBingMapAerial.Text = "Aerial Bing Map";
+            this.mnuBingMapAerial.Click += new System.EventHandler(this.mnuMapStyle_Click);
+            // 
+            // mnuBingMapRoads
+            // 
+            this.mnuBingMapRoads.CheckOnClick = true;
+            this.mnuBingMapRoads.Name = "mnuBingMapRoads";
+            this.mnuBingMapRoads.Size = new System.Drawing.Size(164, 22);
+            this.mnuBingMapRoads.Text = "Roads Bing Map";
+            this.mnuBingMapRoads.Click += new System.EventHandler(this.mnuMapStyle_Click);
+            // 
+            // mnuBingMapHybrid
+            // 
+            this.mnuBingMapHybrid.CheckOnClick = true;
+            this.mnuBingMapHybrid.Name = "mnuBingMapHybrid";
+            this.mnuBingMapHybrid.Size = new System.Drawing.Size(164, 22);
+            this.mnuBingMapHybrid.Text = "Hybrid Bing Map";
+            this.mnuBingMapHybrid.Click += new System.EventHandler(this.mnuMapStyle_Click);
+            // 
+            // mnuBingMapOS
+            // 
+            this.mnuBingMapOS.Name = "mnuBingMapOS";
+            this.mnuBingMapOS.Size = new System.Drawing.Size(164, 22);
+            this.mnuBingMapOS.Text = "OS Bing Map";
+            this.mnuBingMapOS.Visible = false;
+            this.mnuBingMapOS.Click += new System.EventHandler(this.mnuMapStyle_Click);
             // 
             // toolStripSeparator2
             // 
@@ -480,38 +523,6 @@
             this.btnForward10.UseVisualStyleBackColor = true;
             this.btnForward10.Click += new System.EventHandler(this.btnForward10_Click);
             // 
-            // mnuOpenStreetMap
-            // 
-            this.mnuOpenStreetMap.CheckOnClick = true;
-            this.mnuOpenStreetMap.Name = "mnuOpenStreetMap";
-            this.mnuOpenStreetMap.Size = new System.Drawing.Size(164, 22);
-            this.mnuOpenStreetMap.Text = "Open Street Map";
-            this.mnuOpenStreetMap.Click += new System.EventHandler(this.mnuMapStyle_Click);
-            // 
-            // mnuBingMapAerial
-            // 
-            this.mnuBingMapAerial.CheckOnClick = true;
-            this.mnuBingMapAerial.Name = "mnuBingMapAerial";
-            this.mnuBingMapAerial.Size = new System.Drawing.Size(164, 22);
-            this.mnuBingMapAerial.Text = "Aerial Bing Map";
-            this.mnuBingMapAerial.Click += new System.EventHandler(this.mnuMapStyle_Click);
-            // 
-            // mnuBingMapRoads
-            // 
-            this.mnuBingMapRoads.CheckOnClick = true;
-            this.mnuBingMapRoads.Name = "mnuBingMapRoads";
-            this.mnuBingMapRoads.Size = new System.Drawing.Size(164, 22);
-            this.mnuBingMapRoads.Text = "Roads Bing Map";
-            this.mnuBingMapRoads.Click += new System.EventHandler(this.mnuMapStyle_Click);
-            // 
-            // mnuBingMapHybrid
-            // 
-            this.mnuBingMapHybrid.CheckOnClick = true;
-            this.mnuBingMapHybrid.Name = "mnuBingMapHybrid";
-            this.mnuBingMapHybrid.Size = new System.Drawing.Size(164, 22);
-            this.mnuBingMapHybrid.Text = "Hybrid Bing Map";
-            this.mnuBingMapHybrid.Click += new System.EventHandler(this.mnuMapStyle_Click);
-            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -591,5 +602,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuBingMapAerial;
         private System.Windows.Forms.ToolStripMenuItem mnuBingMapRoads;
         private System.Windows.Forms.ToolStripMenuItem mnuBingMapHybrid;
+        private System.Windows.Forms.ToolStripMenuItem mnuBingMapOS;
     }
 }
