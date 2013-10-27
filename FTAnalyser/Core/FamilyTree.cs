@@ -572,7 +572,12 @@ namespace FTAnalyzer
                             minStart = new DateTime(fam.Wife.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
                 }
                 if (birthDate.EndDate < minEnd)
-                    minEnd = birthDate.EndDate;
+                {  // check for BEF XXXX types that are prevalent in my tree
+                    if (birthDate.StartDate == FactDate.MINDATE && birthDate.EndDate.AddYears(1) < minEnd)
+                        minEnd = birthDate.EndDate.AddYears(1);
+                    else
+                        minEnd = birthDate.EndDate;
+                }
                 if (birthDate.StartDate > minStart)
                     minStart = birthDate.StartDate;
                 baseDate = new FactDate(minStart, minEnd);

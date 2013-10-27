@@ -357,7 +357,11 @@ namespace FTAnalyzer
             SortableBindingList<IDisplayLooseBirth> looseBirthList = ft.LooseBirths;
             SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.LooseDeaths;
             dgLooseDeaths.DataSource = looseDeathList;
+            dgLooseDeaths.Sort(dgLooseDeaths.Columns["Forenames"], ListSortDirection.Ascending);
+            dgLooseDeaths.Sort(dgLooseDeaths.Columns["Surname"], ListSortDirection.Ascending);
             dgLooseBirths.DataSource = looseBirthList;
+            dgLooseBirths.Sort(dgLooseBirths.Columns["Forenames"], ListSortDirection.Ascending);
+            dgLooseBirths.Sort(dgLooseBirths.Columns["Surname"], ListSortDirection.Ascending);
             dgLooseBirths.Focus();
             mnuPrint.Enabled = true;
             tsCountLabel.Text = Properties.Messages.Count + looseBirthList.Count;
