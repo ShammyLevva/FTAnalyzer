@@ -37,6 +37,15 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuReload = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrint = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuRecent = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRecent1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRecent2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRecent3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRecent4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRecent5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.clearRecentFileListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,7 +132,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
             this.btnShowCensusMissing = new System.Windows.Forms.Button();
-            this.cenDate = new Controls.CensusDateSelector(); 
+            this.cenDate = new Controls.CensusDateSelector();
             this.relTypesCensus = new Controls.RelationTypes();
             this.tabLooseBirthDeaths = new System.Windows.Forms.TabPage();
             this.tabCtrlLooseBDs = new System.Windows.Forms.TabControl();
@@ -236,6 +245,8 @@
             this.openToolStripMenuItem,
             this.mnuReload,
             this.mnuPrint,
+            this.toolStripSeparator6,
+            this.mnuRecent,
             this.toolStripSeparator3,
             this.databaseToolStripMenuItem,
             this.toolStripSeparator5,
@@ -247,15 +258,15 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.openToolStripMenuItem.Text = "Open GEDCOM file...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // mnuReload
             // 
             this.mnuReload.Enabled = false;
             this.mnuReload.Name = "mnuReload";
-            this.mnuReload.Size = new System.Drawing.Size(172, 22);
+            this.mnuReload.Size = new System.Drawing.Size(184, 22);
             this.mnuReload.Text = "Reload";
             this.mnuReload.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
             // 
@@ -263,14 +274,80 @@
             // 
             this.mnuPrint.Enabled = false;
             this.mnuPrint.Name = "mnuPrint";
-            this.mnuPrint.Size = new System.Drawing.Size(172, 22);
+            this.mnuPrint.Size = new System.Drawing.Size(184, 22);
             this.mnuPrint.Text = "Print";
             this.mnuPrint.Click += new System.EventHandler(this.mnuPrint_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(181, 6);
+            // 
+            // mnuRecent
+            // 
+            this.mnuRecent.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuRecent1,
+            this.mnuRecent2,
+            this.mnuRecent3,
+            this.mnuRecent4,
+            this.mnuRecent5,
+            this.toolStripSeparator7,
+            this.clearRecentFileListToolStripMenuItem});
+            this.mnuRecent.Name = "mnuRecent";
+            this.mnuRecent.Size = new System.Drawing.Size(184, 22);
+            this.mnuRecent.Text = "Recent Files";
+            // 
+            // mnuRecent1
+            // 
+            this.mnuRecent1.Name = "mnuRecent1";
+            this.mnuRecent1.Size = new System.Drawing.Size(182, 22);
+            this.mnuRecent1.Text = "1.";
+            this.mnuRecent1.Click += new System.EventHandler(this.OpenRecentFile_Click);
+            // 
+            // mnuRecent2
+            // 
+            this.mnuRecent2.Name = "mnuRecent2";
+            this.mnuRecent2.Size = new System.Drawing.Size(182, 22);
+            this.mnuRecent2.Text = "2.";
+            this.mnuRecent2.Click += new System.EventHandler(this.OpenRecentFile_Click);
+            // 
+            // mnuRecent3
+            // 
+            this.mnuRecent3.Name = "mnuRecent3";
+            this.mnuRecent3.Size = new System.Drawing.Size(182, 22);
+            this.mnuRecent3.Text = "3.";
+            this.mnuRecent3.Click += new System.EventHandler(this.OpenRecentFile_Click);
+            // 
+            // mnuRecent4
+            // 
+            this.mnuRecent4.Name = "mnuRecent4";
+            this.mnuRecent4.Size = new System.Drawing.Size(182, 22);
+            this.mnuRecent4.Text = "4.";
+            this.mnuRecent4.Click += new System.EventHandler(this.OpenRecentFile_Click);
+            // 
+            // mnuRecent5
+            // 
+            this.mnuRecent5.Name = "mnuRecent5";
+            this.mnuRecent5.Size = new System.Drawing.Size(182, 22);
+            this.mnuRecent5.Text = "5.";
+            this.mnuRecent5.Click += new System.EventHandler(this.OpenRecentFile_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(179, 6);
+            // 
+            // clearRecentFileListToolStripMenuItem
+            // 
+            this.clearRecentFileListToolStripMenuItem.Name = "clearRecentFileListToolStripMenuItem";
+            this.clearRecentFileListToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.clearRecentFileListToolStripMenuItem.Text = "Clear Recent File List";
+            this.clearRecentFileListToolStripMenuItem.Click += new System.EventHandler(this.clearRecentFileListToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(169, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(181, 6);
             // 
             // databaseToolStripMenuItem
             // 
@@ -278,7 +355,7 @@
             this.backupToolStripMenuItem,
             this.restoreToolStripMenuItem});
             this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
-            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.databaseToolStripMenuItem.Text = "Geocode Database";
             // 
             // backupToolStripMenuItem
@@ -298,12 +375,12 @@
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(169, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(181, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -518,9 +595,9 @@
             // 
             this.dgDataErrors.AllowUserToAddRows = false;
             this.dgDataErrors.AllowUserToDeleteRows = false;
-            this.dgDataErrors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgDataErrors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -650,9 +727,9 @@
             // 
             this.dgWarDead.AllowUserToAddRows = false;
             this.dgWarDead.AllowUserToDeleteRows = false;
-            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgWarDead.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgWarDead.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgWarDead.Location = new System.Drawing.Point(0, 110);
@@ -716,9 +793,9 @@
             // 
             this.dgTreeTops.AllowUserToAddRows = false;
             this.dgTreeTops.AllowUserToDeleteRows = false;
-            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgTreeTops.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgTreeTops.Location = new System.Drawing.Point(0, 110);
@@ -939,7 +1016,7 @@
             this.ckbShowLCEntered.Size = new System.Drawing.Size(415, 17);
             this.ckbShowLCEntered.TabIndex = 10;
             this.ckbShowLCEntered.Text = "Show already entered to Lost Cousins (unticked = show those to yet to be entered)" +
-                "";
+    "";
             this.ckbShowLCEntered.UseVisualStyleBackColor = true;
             // 
             // ckbRestrictions
@@ -952,7 +1029,7 @@
             this.ckbRestrictions.Size = new System.Drawing.Size(521, 17);
             this.ckbRestrictions.TabIndex = 9;
             this.ckbRestrictions.Text = "Restrict results to only those direct ancestors, blood relations and those marrie" +
-                "d to direct or blood relations";
+    "d to direct or blood relations";
             this.ckbRestrictions.UseVisualStyleBackColor = true;
             this.ckbRestrictions.CheckedChanged += new System.EventHandler(this.ckbRestrictions_CheckedChanged);
             // 
@@ -1554,9 +1631,9 @@
             // 
             // rtbOutput
             // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbOutput.Location = new System.Drawing.Point(3, 96);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
@@ -1615,9 +1692,9 @@
             // 
             // tabSelector
             // 
-            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabSelector.Controls.Add(this.tabDisplayProgress);
             this.tabSelector.Controls.Add(this.tabIndividuals);
             this.tabSelector.Controls.Add(this.tabFamilies);
@@ -1860,6 +1937,15 @@
         private System.Windows.Forms.DataGridView dgLooseDeaths;
         private System.Windows.Forms.TabPage tabLooseBirths;
         private System.Windows.Forms.DataGridView dgLooseBirths;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem mnuRecent;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem clearRecentFileListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuRecent1;
+        private System.Windows.Forms.ToolStripMenuItem mnuRecent2;
+        private System.Windows.Forms.ToolStripMenuItem mnuRecent3;
+        private System.Windows.Forms.ToolStripMenuItem mnuRecent4;
+        private System.Windows.Forms.ToolStripMenuItem mnuRecent5;
     }
 }
 

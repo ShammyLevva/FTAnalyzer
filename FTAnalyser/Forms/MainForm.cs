@@ -15,6 +15,7 @@ using Printing.DataGridViewPrint.Tools;
 using System.Drawing;
 using FTAnalyzer.Forms;
 using Ionic.Zip;
+using System.Collections.Specialized;
 
 namespace FTAnalyzer
 {
@@ -41,6 +42,7 @@ namespace FTAnalyzer
             int pos = VERSION.IndexOf('-');
             string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
             DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
+            BuildRecentList();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -137,6 +139,7 @@ namespace FTAnalyzer
                         Application.UseWaitCursor = false;
                         ShowMenus(true);
                         HourGlass(false);
+                        AddFileToRecentList(filename);
                         MessageBox.Show("Gedcom File " + filename + " Loaded");
                     }
                 }
@@ -375,9 +378,9 @@ namespace FTAnalyzer
                 tsCountLabel.Text = Properties.Messages.Count + dgLooseDeaths.RowCount;
                 tsHintsLabel.Text = Properties.Messages.Hints_Loose_Deaths + Properties.Messages.Hints_Individual;
             }
-                    
+
         }
-        
+
         private void dgCountries_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             HourGlass(true);
@@ -439,7 +442,7 @@ namespace FTAnalyzer
             Predicate<CensusIndividual> filter = CreateCensusIndividualFilter(censusDone);
             Census census = new Census(censusDate);
             census.SetupCensus(filter, censusDone);
-            if(censusDone)
+            if (censusDone)
                 census.Text = "People entered with a " + censusDate.StartDate.Year.ToString() + " " + cenDate.CensusCountry + " Census Record";
             else
                 census.Text = "People missing a " + censusDate.StartDate.Year.ToString() + " " + cenDate.CensusCountry + " Census Record that you can search for";
@@ -456,8 +459,8 @@ namespace FTAnalyzer
         private Predicate<CensusIndividual> CreateCensusIndividualFilter(bool censusDone)
         {
             Predicate<CensusIndividual> relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
-            Predicate<CensusIndividual> dateFilter = censusDone ? 
-                new Predicate<CensusIndividual>(x => x.IsCensusDone(cenDate.SelectedDate)) : 
+            Predicate<CensusIndividual> dateFilter = censusDone ?
+                new Predicate<CensusIndividual>(x => x.IsCensusDone(cenDate.SelectedDate)) :
                 new Predicate<CensusIndividual>(x => !x.IsCensusDone(cenDate.SelectedDate));
 
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, dateFilter);
@@ -536,7 +539,7 @@ namespace FTAnalyzer
                 listToCheck = ft.AllIndividuals.Where(predicate);
             }
             else
-                listToCheck= ft.AllIndividuals;
+                listToCheck = ft.AllIndividuals;
 
             int count1841, countEW1881, countSco1881, countCan1881, countEW1911, countIre1911, count1880, count1940;
             int location1841, locationEW1881, locationSco1881, locationCan1881, locationEW1911, locationIre1911, location1880, location1940;
@@ -815,9 +818,9 @@ namespace FTAnalyzer
             }
             else if (tabSelector.SelectedTab == tabLooseBirthDeaths)
             {
-                if(tabCtrlLooseBDs.SelectedTab == tabLooseBirths)
+                if (tabCtrlLooseBDs.SelectedTab == tabLooseBirths)
                     PrintDataGrid(true, dgLooseBirths, "List of Loose Births");
-                else if(tabCtrlLooseBDs.SelectedTab == tabLooseDeaths)
+                else if (tabCtrlLooseBDs.SelectedTab == tabLooseDeaths)
                     PrintDataGrid(true, dgLooseDeaths, "List of Loose Deaths");
             }
             else if (tabSelector.SelectedTab == tabTreetops)
@@ -1218,7 +1221,7 @@ namespace FTAnalyzer
         private void Options_MinimumParentalAgeChanged(object sender, EventArgs e)
         {
             ft.ResetLooseFacts();
-            if(tabSelector.SelectedTab == tabLooseBirthDeaths)
+            if (tabSelector.SelectedTab == tabLooseBirthDeaths)
                 UpdateLooseBirthDeaths();
         }
 
@@ -1482,13 +1485,88 @@ namespace FTAnalyzer
                     DatabaseHelper dbh = DatabaseHelper.Instance;
                     dbh.StartBackupDatabase();
                     ZipFile zip = new ZipFile(saveDatabase.FileName);
-                    zip.AddFile(dbh.Filename,string.Empty);
+                    zip.AddFile(dbh.Filename, string.Empty);
                     zip.Comment = "FT Analyzer zip file created by v" + PublishVersion() + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm");
                     zip.Save();
-                    dbh.EndBackupDatabase(); 
+                    dbh.EndBackupDatabase();
                     MessageBox.Show("Database exported to " + saveDatabase.FileName);
                 }
             }
+        }
+
+        private void clearRecentFileListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClearRecentList();
+            BuildRecentList();
+        }
+
+        private static void ClearRecentList()
+        {
+            Properties.Settings.Default.RecentFiles.Clear();
+            for (int i = 0; i < 5; i++)
+            {
+                Properties.Settings.Default.RecentFiles.Add(string.Empty);
+            }
+            Properties.Settings.Default.Save();
+        }
+
+        private void BuildRecentList()
+        {
+            if (Properties.Settings.Default.RecentFiles == null || Properties.Settings.Default.RecentFiles.Count != 5)
+            {
+                ClearRecentList();
+            }
+
+            bool added = false;
+            for (int i = 0; i < 5; i++)
+            {
+                string name = Properties.Settings.Default.RecentFiles[i];
+                if (name != null && name.Length > 0)
+                {
+                    added = true;
+                    mnuRecent.DropDownItems[i].Visible = true;
+                    mnuRecent.DropDownItems[i].Text = (i + 1) + ". " + name;
+                    mnuRecent.DropDownItems[i].Tag = name;
+                }
+                else
+                {
+                    mnuRecent.DropDownItems[i].Visible = false;
+                }
+            }
+
+            toolStripSeparator7.Visible = added;
+            clearRecentFileListToolStripMenuItem.Visible = added;
+        }
+
+        private void AddFileToRecentList(string filename)
+        {
+            string[] recent = new string[5];
+
+            if (Properties.Settings.Default.RecentFiles != null)
+            {
+                int j = 1;
+                for (int i = 0; i < Properties.Settings.Default.RecentFiles.Count; i++)
+                {
+                    if (Properties.Settings.Default.RecentFiles[i] != filename)
+                    {
+                        recent[j++] = Properties.Settings.Default.RecentFiles[i];
+                        if (j == 5) break;
+                    }
+                }
+            }
+
+            recent[0] = filename;
+            Properties.Settings.Default.RecentFiles = new StringCollection();
+            Properties.Settings.Default.RecentFiles.AddRange(recent);
+            Properties.Settings.Default.Save();
+
+            BuildRecentList();
+        }
+
+        private void OpenRecentFile_Click(object sender, EventArgs e)
+        {
+            string filename = (string)(sender as ToolStripMenuItem).Tag;
+            LoadFile(filename);
         }
     }
 }

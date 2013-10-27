@@ -73,7 +73,7 @@ namespace FTAnalyzer.Utilities
                 if (dbVersion < programVersion)
                     UpgradeDatabase(dbVersion);
             }
-            catch (SQLiteException ex)
+            catch (SQLiteException)
             {
                 UpgradeDatabase(new Version("0.0.0.0"));
             }
