@@ -117,6 +117,18 @@ namespace FTAnalyzer
             return false;
         }
 
+        public static bool IsUKCensusYear(FactDate fd, bool exactYear)
+        {
+            foreach (CensusDate cd in UK_CENSUS)
+            {
+                if (exactYear && fd.YearMatches(cd))
+                    return true;
+                if (!exactYear && fd.Overlaps(cd))
+                    return true;
+            }
+            return false;
+        }
+
         public static bool IsLostCousinsCensusYear(FactDate fd, bool exactYear)
         {
             foreach (CensusDate cd in LOSTCOUSINS_CENSUS)

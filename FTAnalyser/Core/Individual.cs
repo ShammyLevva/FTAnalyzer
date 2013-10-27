@@ -1006,7 +1006,7 @@ namespace FTAnalyzer
 
         public override string ToString()
         {
-            return Ind_ID + ": " + Name;
+            return Ind_ID + ": " + Name + " b." + BirthDate;
         }
     }
 }
