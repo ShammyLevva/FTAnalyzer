@@ -304,5 +304,23 @@ namespace FTAnalyzer.Forms
         {
             reportFormHelper.ResetColumnLayout("ColourCensusLayout.xml");
         }
+
+        private void mnuViewFacts_Click(object sender, EventArgs e)
+        {
+            if (dgReportSheet.CurrentRow != null)
+            {
+                IDisplayColourCensus ds = (IDisplayColourCensus)dgReportSheet.CurrentRow.DataBoundItem;
+                Individual ind = FamilyTree.Instance.GetIndividual(ds.Ind_ID);
+                Facts factForm = new Facts(ind);
+                MainForm.DisposeDuplicateForms(factForm);
+                factForm.Show();
+            }
+        }
+
+        private void dgReportSheet_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+        }
     }
 }

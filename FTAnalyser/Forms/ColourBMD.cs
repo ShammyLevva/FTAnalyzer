@@ -301,5 +301,23 @@ namespace FTAnalyzer.Forms
             reportFormHelper.SaveColumnLayout("ColourBMDColumns.xml");
             MessageBox.Show("Column Settings Saved", "BMD Colour");
         }
+
+        private void mnuViewFacts_Click(object sender, EventArgs e)
+        {
+            if (dgBMDReportSheet.CurrentRow != null)
+            {
+                IDisplayColourBMD ds = (IDisplayColourBMD)dgBMDReportSheet.CurrentRow.DataBoundItem;
+                Individual ind = FamilyTree.Instance.GetIndividual(ds.Ind_ID);
+                Facts factForm = new Facts(ind);
+                MainForm.DisposeDuplicateForms(factForm);
+                factForm.Show();
+            }
+        }
+
+        private void dgBMDReportSheet_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+        }
     }
 }

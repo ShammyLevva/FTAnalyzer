@@ -112,7 +112,7 @@ namespace FTAnalyzer.Forms
         {
             string currentRowText = "";
             bool highlighted = true;
-            
+
             Font boldFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Bold);
             Font regularFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Regular);
             int sortColumn = dgCensus.SortedColumn.Index;
@@ -223,9 +223,9 @@ namespace FTAnalyzer.Forms
 
         private void dgCensus_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && dgCensus.CurrentRow != null)
             {
-                CensusIndividual ds = dgCensus.CurrentRow == null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
+                CensusIndividual ds = (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
                 FamilyTree ft = FamilyTree.Instance;
                 if (LostCousins)
                 {
@@ -268,6 +268,23 @@ namespace FTAnalyzer.Forms
         private void dgCensus_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             StyleRows();
+        }
+
+        private void mnuViewFacts_Click(object sender, EventArgs e)
+        {
+            if (dgCensus.CurrentRow != null)
+            {
+                CensusIndividual ds = (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
+                Facts factForm = new Facts(ds);
+                MainForm.DisposeDuplicateForms(factForm);
+                factForm.Show();
+            }
+        }
+
+        private void dgCensus_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        {
+             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                dgCensus.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
         }
     }
 }
