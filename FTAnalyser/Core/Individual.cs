@@ -1003,5 +1003,10 @@ namespace FTAnalyzer
         {
             return base.GetHashCode();
         }
+
+        public override string ToString()
+        {
+            return Ind_ID + ": " + Name;
+        }
     }
 }
