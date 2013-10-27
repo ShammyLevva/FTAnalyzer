@@ -78,7 +78,7 @@ namespace FTAnalyzer.Forms
             pointLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
 
             mapBox1.Map.Layers.Add(pointLayer);
-            mapBox1.Map.MinimumZoom = 1000;
+            mapBox1.Map.MinimumZoom = 500;
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             ResetMap();
