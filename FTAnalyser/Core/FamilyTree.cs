@@ -564,10 +564,10 @@ namespace FTAnalyzer
                 }
                 foreach (Family fam in indiv.FamiliesAsChild)
                 {  // check min date at least X years after parent
-                    if (fam.Husband != null && fam.Husband.BirthDate.IsKnown)
+                    if (fam.Husband != null && fam.Husband.BirthDate.IsKnown && fam.Husband.BirthDate.StartDate != FactDate.MINDATE)
                         if(fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
                             minStart = fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge);
-                    if (fam.Wife != null && fam.Wife.BirthDate.IsKnown)
+                    if (fam.Wife != null && fam.Wife.BirthDate.IsKnown && fam.Wife.BirthDate.StartDate != FactDate.MINDATE)
                         if (fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
                             minStart = fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge);
                 }
@@ -592,7 +592,7 @@ namespace FTAnalyzer
         private FactDate BaseLivingDate(Individual indiv)
         {
             DateTime mindate = FactDate.MAXDATE;
-            DateTime maxdate = GetMaxLivingDate(indiv);
+            DateTime maxdate = GetMaxLivingDate(indiv, Fact.LOOSE_BIRTH_FACTS);
             DateTime startdate = maxdate.Year < FactDate.MAXYEARS ? FactDate.MINDATE : new DateTime(maxdate.Year - FactDate.MAXYEARS, 1, 1);
             foreach (Fact f in indiv.AllFacts)
             {
@@ -639,7 +639,7 @@ namespace FTAnalyzer
             FactDate toAdd = null;
             if (deathDate.EndDate.Year - deathDate.StartDate.Year > 1)
             {
-                DateTime maxLiving = GetMaxLivingDate(indiv);
+                DateTime maxLiving = GetMaxLivingDate(indiv, Fact.LOOSE_DEATH_FACTS);
                 DateTime minDeath = GetMinDeathDate(indiv);
                 if (minDeath != FactDate.MAXDATE)
                 {   // we don't have a minimum death date so can't proceed - individual may still be alive
@@ -675,7 +675,7 @@ namespace FTAnalyzer
             }
         }
 
-        private DateTime GetMaxLivingDate(Individual indiv)
+        private DateTime GetMaxLivingDate(Individual indiv, ISet<string> factTypes)
         {
             DateTime maxdate = FactDate.MINDATE;
             // having got the families the individual is a parent of
@@ -709,7 +709,7 @@ namespace FTAnalyzer
                 maxdate = new DateTime(maxdate.Year, 1, 1);
             }
             foreach (Fact f in indiv.AllFacts)
-                if (Fact.LOOSE_DEATH_FACTS.Contains(f.FactType) && f.FactDate.StartDate > maxdate)
+                if (factTypes.Contains(f.FactType) && f.FactDate.StartDate > maxdate)
                     maxdate = f.FactDate.StartDate;
             // at this point we have the maximum point a person was alive
             // based on their oldest child and last living fact record and marriage date
