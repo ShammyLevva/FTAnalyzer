@@ -78,7 +78,7 @@ namespace FTAnalyzer.Forms
         private void SetupMap()
         {
             // Add Google maps layer to map control.
-            HttpUtility.SetDefaultProxy();
+            //HttpUtility.SetDefaultProxy();
             mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
                 new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap"));
 
@@ -332,24 +332,6 @@ namespace FTAnalyzer.Forms
             DisplayLocationsForYear(labValue.Text);
         }
 
-        private void googleMapToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            mapBox1.Map.BackgroundLayer.RemoveAt(0);
-            if (sender == menuMap)
-            {
-                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                        new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap"));
-                menuSatellite.Checked = false;
-            }
-            else if (sender == menuSatellite)
-            {
-                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                        new GoogleTileSource(GoogleMapType.GoogleSatellite), "GoogleSatellite"));
-                menuMap.Checked = false;
-            }
-
-        }
-
         private void mapBox1_MapQueried(FeatureDataTable data)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -552,6 +534,50 @@ namespace FTAnalyzer.Forms
                 RemoveScaleBar();
             else
                 AddScaleBar();
+        }
+
+        private void mnuMapStyle_Click(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem menu in mnuMapStyle.DropDownItems)
+                menu.Checked = false;
+            mapBox1.Map.BackgroundLayer.RemoveAt(0);
+            if (sender == mnuGoogleMap)
+            {
+                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                        new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap"));
+                mnuGoogleMap.Checked = true;
+            }
+            else if (sender == mnuGoogleSatellite)
+            {
+                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                        new GoogleTileSource(GoogleMapType.GoogleSatellite), "GoogleSatellite"));
+                mnuGoogleSatellite.Checked = true;
+            }
+            else if (sender == mnuOpenStreetMap)
+            {
+                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                    new BruTile.Web.OsmTileSource(), "OpenStreetMap"));
+                mnuOpenStreetMap.Checked = true;
+            }
+            else if (sender == mnuBingMapAerial)
+            {
+                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                    new BruTile.Web.BingTileSource(BingRequest.UrlBing, null, BingMapType.Aerial), "BingMapAerial"));
+                mnuBingMapAerial.Checked = true;
+            }
+            else if (sender == mnuBingMapRoads)
+            {
+                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                    new BruTile.Web.BingTileSource(BingRequest.UrlBing, null, BingMapType.Roads), "BingMapRoads"));
+                mnuBingMapRoads.Checked = true;
+            }
+            else if (sender == mnuBingMapHybrid)
+            {
+                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                    new BruTile.Web.BingTileSource(BingRequest.UrlBing, null, BingMapType.Hybrid), "BingMapHybrid"));
+                mnuBingMapHybrid.Checked = true;
+            }
+            mapBox1.Refresh();
         }
     }
 }
