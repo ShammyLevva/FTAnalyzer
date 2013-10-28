@@ -207,6 +207,7 @@
     <Compile Include="Core\FamilySearch.cs" />
     <Compile Include="Core\FactLocationImage.cs" />
     <Compile Include="Core\Parishes.cs" />
+    <Compile Include="Mapping\BingOSRequest.cs" />
     <Compile Include="Mapping\BingOSTileSource.cs" />
     <Compile Include="Utilities\CustomToolStripRenderer.cs" />
     <Compile Include="Forms\EditLocation.cs">

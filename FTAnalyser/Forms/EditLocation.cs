@@ -246,8 +246,8 @@ namespace FTAnalyzer.Forms
             else if (sender == mnuBingMapOS)
             {
                 mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BingOSTileSource(), "BingMapRoads"));
-                mnuBingMapHybrid.Checked = true;
+                    new BingOSTileSource(BingRequest.UrlBing, null, BingMapType.Roads), "BingMapOS"));
+                mnuBingMapOS.Checked = true;
             }
             mapBox1.Refresh();
         }

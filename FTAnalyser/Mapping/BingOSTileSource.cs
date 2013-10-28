@@ -8,8 +8,9 @@ namespace FTAnalyzer.Mapping
 {
     public class BingOSTileSource : BingTileSource
     {
-        public BingOSTileSource() :
-            base(BingRequest.UrlBing, null, BingMapType.Roads) 
-        {}
+        public BingOSTileSource(String url, string token, BingMapType mapType)
+            : base(new BingOSRequest(url, token, mapType))
+        {
+        }
     }
 }
