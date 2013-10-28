@@ -35,6 +35,8 @@ namespace FTAnalyzer.Forms
         public TimeLine()
         {
             InitializeComponent();
+            linkLabel1.Links[0].LinkData = "Terms of Use";
+            linkLabel1.Links.Add(24,12,"http://www.google.com/intl/en_ALL/help/terms_maps.html");
             mapZoomToolStrip.Renderer = new CustomToolStripRenderer();
             tbYears.MouseWheel += new MouseEventHandler(tbYears_MouseWheel);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component

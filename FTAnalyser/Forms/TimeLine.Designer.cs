@@ -74,6 +74,7 @@
             this.btnForward1 = new System.Windows.Forms.Button();
             this.btnBack10 = new System.Windows.Forms.Button();
             this.btnForward10 = new System.Windows.Forms.Button();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -523,11 +524,23 @@
             this.btnForward10.UseVisualStyleBackColor = true;
             this.btnForward10.Click += new System.EventHandler(this.btnForward10_Click);
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(848, 94);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(70, 13);
+            this.linkLabel1.TabIndex = 15;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Terms of Use";
+            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 584);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.btnForward10);
             this.Controls.Add(this.btnBack10);
             this.Controls.Add(this.btnForward1);
@@ -603,5 +616,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuBingMapRoads;
         private System.Windows.Forms.ToolStripMenuItem mnuBingMapHybrid;
         private System.Windows.Forms.ToolStripMenuItem mnuBingMapOS;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
