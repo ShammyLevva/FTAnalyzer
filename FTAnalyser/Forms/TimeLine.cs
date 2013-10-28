@@ -16,6 +16,7 @@ using SharpMap.Data.Providers;
 using SharpMap.Layers;
 using SharpMap.Styles;
 using SharpMap.Rendering.Decoration.ScaleBar;
+using System.Diagnostics;
 
 namespace FTAnalyzer.Forms
 {
@@ -35,8 +36,9 @@ namespace FTAnalyzer.Forms
         public TimeLine()
         {
             InitializeComponent();
-            linkLabel1.Links[0].LinkData = "Terms of Use";
-            linkLabel1.Links.Add(24,12,"http://www.google.com/intl/en_ALL/help/terms_maps.html");
+            LinkLabel.Link link = new LinkLabel.Link();
+            link.LinkData = "http://www.google.com/intl/en_ALL/help/terms_maps.html";
+            linkLabel1.Links.Add(link);
             mapZoomToolStrip.Renderer = new CustomToolStripRenderer();
             tbYears.MouseWheel += new MouseEventHandler(tbYears_MouseWheel);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
@@ -586,6 +588,11 @@ namespace FTAnalyzer.Forms
                 mnuBingMapOS.Checked = true;
             }
             mapBox1.Refresh();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(e.Link.LinkData as string);
         }
     }
 }

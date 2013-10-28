@@ -18,6 +18,7 @@ using GeoAPI.Geometries;
 using GeoAPI.CoordinateSystems.Transformations;
 using FTAnalyzer.Utilities;
 using System.Data.SQLite;
+using System.Diagnostics;
 
 namespace FTAnalyzer.Forms
 {
@@ -35,6 +36,9 @@ namespace FTAnalyzer.Forms
         public EditLocation(FactLocation location)
         {
             InitializeComponent();
+            LinkLabel.Link link = new LinkLabel.Link();
+            link.LinkData = "http://www.google.com/intl/en_ALL/help/terms_maps.html";
+            linkLabel1.Links.Add(link);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[10].Visible = false;
             this.location = location;
@@ -250,6 +254,11 @@ namespace FTAnalyzer.Forms
                 mnuBingMapOS.Checked = true;
             }
             mapBox1.Refresh();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(e.Link.LinkData as string);
         }
     }
 }
