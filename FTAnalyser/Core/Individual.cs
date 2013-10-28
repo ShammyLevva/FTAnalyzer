@@ -563,7 +563,7 @@ namespace FTAnalyzer
 
         public int LostCousinsFacts
         {
-            get { return facts.Count(f => f.FactType == Fact.LOSTCOUSINS);  }
+            get { return facts.Count(f => f.FactType == Fact.LOSTCOUSINS); }
         }
 
         public bool IsAlive(FactDate when)
@@ -650,20 +650,7 @@ namespace FTAnalyzer
                 try
                 {
                     Fact f = new Fact(n, IndividualRef);
-                    switch (f.FactErrorLevel)
-                    {
-                        case Fact.FactError.GOOD:
-                            AddFact(f);
-                            break;
-                        case Fact.FactError.WARNINGALLOW:
-                            AddFact(f);
-                            errorFacts.Add(f);
-                            break;
-                        case Fact.FactError.WARNINGIGNORE:
-                        case Fact.FactError.ERROR:
-                            errorFacts.Add(f);
-                            break;
-                    }
+                    AddFact(f);
                 }
                 catch (InvalidXMLFactException ex)
                 {
@@ -676,7 +663,26 @@ namespace FTAnalyzer
 
         public void AddFact(Fact fact)
         {
-            facts.Add(fact);
+            switch (fact.FactErrorLevel)
+            {
+                case Fact.FactError.GOOD:
+                    facts.Add(fact);
+                    AddLocation(fact);
+                    break;
+                case Fact.FactError.WARNINGALLOW:
+                    facts.Add(fact);
+                    AddLocation(fact);
+                    errorFacts.Add(fact);
+                    break;
+                case Fact.FactError.WARNINGIGNORE:
+                case Fact.FactError.ERROR:
+                    errorFacts.Add(fact);
+                    break;
+            }
+        }
+
+        private void AddLocation(Fact fact)
+        {
             FactLocation loc = fact.Location;
             if (loc != null && !locations.Contains(loc))
             {
@@ -784,7 +790,7 @@ namespace FTAnalyzer
                 return 0; // not alive - grey
             if (!IsCensusDone(census))
             {
-                if (IsCensusDone(census, true, false) || IsCensusDone(census.EquivalentUSCensus,true,false))
+                if (IsCensusDone(census, true, false) || IsCensusDone(census.EquivalentUSCensus, true, false))
                     return 6; // checks if on census outside UK in census year or on prior year (to check US census)
                 if (CensusDate.IsLostCousinsCensusYear(census, true) && IsLostCousinEntered(census))
                     return 5; // LC entered but no census entered - orange
@@ -937,7 +943,8 @@ namespace FTAnalyzer
 
         public int Death
         {
-            get {
+            get
+            {
                 if (!DeathDate.IsKnown && GetMaxAge(DateTime.Now) < 110)
                     return 0;
                 else
