@@ -414,6 +414,7 @@
             this.mnuBingMapOS.Name = "mnuBingMapOS";
             this.mnuBingMapOS.Size = new System.Drawing.Size(164, 22);
             this.mnuBingMapOS.Text = "OS Bing Map";
+            this.mnuBingMapOS.Visible = false;
             this.mnuBingMapOS.Click += new System.EventHandler(this.mnuMapStyle_Click);
             // 
             // toolStripSeparator2

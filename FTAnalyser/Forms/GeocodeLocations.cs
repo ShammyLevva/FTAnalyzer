@@ -38,6 +38,7 @@ namespace FTAnalyzer.Forms
             italicFont = new Font(dgLocations.DefaultCellStyle.Font, FontStyle.Italic);
             reportFormHelper.LoadColumnLayout("GeocodeLocationsColumns.xml");
             mnuGeocodeLocations.Enabled = !ft.Geocoding; // disable menu if already geocoding
+            mnuEditLocation.Enabled = !ft.Geocoding;
             SetupFilterMenu();
             SetStatusText();
             CheckGoogleStatusCodes(locations);
@@ -104,25 +105,38 @@ namespace FTAnalyzer.Forms
             {
                 foreach (ToolStripMenuItem menu in mnuGeocodeStatus.DropDownItems)
                 {
+                    if (menu.Text != "Select All" && menu.Text != "Clear All")
+                    {
+                        menus++;
+                        if (menu.Checked)
+                            count++;
+                    }
+                }
+                if (menus == count)
+                    mnuStatusSelectAll.Text = "Clear All";
+                else
+                    mnuStatusSelectAll.Text = "Select All";
+            }
+            foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
+            {
+                if (menu.Text != "Places" && menu.Text != "Select All" && menu.Text != "Clear All")
+                {
                     menus++;
                     if (menu.Checked)
                         count++;
                 }
             }
-            foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
-            {
-                menus++;
-                if (menu.Checked)
-                    count++;
-            }
             ToolStripMenuItem places = mnuGoogleResultType.DropDownItems["Places"] as ToolStripMenuItem;
             foreach (ToolStripMenuItem menu in places.DropDownItems)
             {
-                menus++;
-                if (menu.Checked)
-                    count++;
+                if (menu.Text != "Select All" && menu.Text != "Clear All")
+                {
+                    menus++;
+                    if (menu.Checked)
+                        count++;
+                }
             }
-            return (count == menus - 3); //three less due to 2x select/clear all & Places
+            return count == menus;
         }
 
         private void UpdateGridWithFilters(List<IDisplayGeocodedLocation> input)
@@ -394,6 +408,8 @@ namespace FTAnalyzer.Forms
             pbGeocoding.Visible = false;
             txtGoogleWait.Text = string.Empty;
             mnuGeocodeLocations.Enabled = true;
+            mnuEditLocation.Enabled = true;
+            ft.WriteGeocodeStatstoRTB(true);
             ft.Geocoding = false;
             if (formClosing)
                 this.Close();
@@ -438,6 +454,7 @@ namespace FTAnalyzer.Forms
                 this.Cursor = Cursors.WaitCursor;
                 pbGeocoding.Visible = true;
                 mnuGeocodeLocations.Enabled = false;
+                mnuEditLocation.Enabled = false;
                 ft.Geocoding = true;
                 backgroundWorker.RunWorkerAsync();
                 this.Cursor = Cursors.Default;
