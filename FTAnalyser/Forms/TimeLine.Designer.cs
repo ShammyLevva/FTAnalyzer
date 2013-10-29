@@ -309,7 +309,6 @@ namespace FTAnalyzer.Forms
             this.mapZoomToolStrip.Enabled = false;
             this.mapZoomToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSelect,
-            this.mnuMapStyle,
             this.toolStripSeparator2,
             this.toolStripLabel1,
             this.txtTimeInterval,
@@ -334,15 +333,6 @@ namespace FTAnalyzer.Forms
             this.btnSelect.Text = "toolStripButton1";
             this.btnSelect.ToolTipText = "Location Selection ";
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
-            // 
-            // mnuMapStyle
-            // 
-            this.mnuMapStyle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.mnuMapStyle.Image = ((System.Drawing.Image)(resources.GetObject("mnuMapStyle.Image")));
-            this.mnuMapStyle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuMapStyle.Name = "mnuMapStyle";
-            this.mnuMapStyle.Size = new System.Drawing.Size(71, 22);
-            this.mnuMapStyle.Text = "Map style";
             // 
             // toolStripSeparator2
             // 
@@ -536,5 +526,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripComboBox cbLimitFactDates;
         private System.Windows.Forms.ToolStripMenuItem mnuHideScaleBar;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private ToolStripMapSelector mnuMapStyle = new ToolStripMapSelector();
     }
 }

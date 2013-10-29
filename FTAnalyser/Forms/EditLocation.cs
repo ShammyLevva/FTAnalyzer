@@ -33,13 +33,12 @@ namespace FTAnalyzer.Forms
         private bool iconSelected;
         private bool pointUpdated;
         private bool dataUpdated;
-        private ToolStripMapSelector mnuMapStyle;
 
         public EditLocation(FactLocation location)
         {
-            mnuMapStyle = new ToolStripMapSelector();
             InitializeComponent();
             mnuMapStyle.Setup(linkLabel1, mapBox1);
+            mapZoomToolStrip.Items.Add(mnuMapStyle);
             AddLinks();
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[10].Visible = false;

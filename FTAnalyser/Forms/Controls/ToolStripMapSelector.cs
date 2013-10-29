@@ -25,8 +25,14 @@ namespace FTAnalyzer.Forms.Controls
         private ToolStripMenuItem mnuBingMapOS;
 
         public ToolStripMapSelector()
-            : base() { }
-        
+            : base()
+        {
+            this.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Name = "mnuMapStyle";
+            this.Size = new System.Drawing.Size(71, 22);
+            this.Text = "Map style";
+        }
 
         public void Setup(LinkLabel label, MapBox mapbox)
         {
@@ -45,7 +51,7 @@ namespace FTAnalyzer.Forms.Controls
             this.mnuBingMapRoads = new ToolStripMenuItem();
             this.mnuBingMapHybrid = new ToolStripMenuItem();
             this.mnuBingMapOS = new ToolStripMenuItem();
-            
+
             // Setup map selector menu
             this.DisplayStyle = ToolStripItemDisplayStyle.Text;
             this.DropDownItems.AddRange(new ToolStripItem[] {

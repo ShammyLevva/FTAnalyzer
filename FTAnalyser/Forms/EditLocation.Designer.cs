@@ -69,7 +69,6 @@ namespace FTAnalyzer.Forms
             // 
             this.mapZoomToolStrip.Enabled = false;
             this.mapZoomToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuMapStyle,
             this.btnSave,
             this.btnReload});
             this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
@@ -91,15 +90,6 @@ namespace FTAnalyzer.Forms
             this.linkLabel1.Text = "© Google - Terms of Use";
             this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // mnuMapStyle
-            // 
-            this.mnuMapStyle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.mnuMapStyle.Image = ((System.Drawing.Image)(resources.GetObject("mnuMapStyle.Image")));
-            this.mnuMapStyle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuMapStyle.Name = "mnuMapStyle";
-            this.mnuMapStyle.Size = new System.Drawing.Size(71, 22);
-            this.mnuMapStyle.Text = "Map style";
             // 
             // btnSave
             // 
@@ -171,5 +161,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripButton btnReload;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private ToolStripMapSelector mnuMapStyle = new ToolStripMapSelector();
     }
 }
