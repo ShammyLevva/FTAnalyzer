@@ -25,6 +25,7 @@ namespace FTAnalyzer
         private IList<Individual> individuals;
         private IList<Family> families;
         private IDictionary<string, List<Individual>> occupations;
+        private ISet<string> unknownFactTypes;
         private bool _loading = false;
         private bool _dataloaded = false;
         private RichTextBox xmlErrorbox = new RichTextBox();
@@ -119,6 +120,7 @@ namespace FTAnalyzer
             occupations = new Dictionary<string, List<Individual>>();
             dataErrorTypes = new List<DataErrorGroup>();
             displayLocations = new SortableBindingList<IDisplayLocation>[5];
+            unknownFactTypes = new HashSet<string>();
             ClearLocations();
             displayTreeRootNode = null;
             looseDeaths = null;
@@ -130,6 +132,15 @@ namespace FTAnalyzer
         {
             looseBirths = null;
             looseDeaths = null;
+        }
+
+        public void CheckUnknownFactTypes(string factType)
+        {
+            if (!unknownFactTypes.Contains(factType))
+            {
+                unknownFactTypes.Add(factType);
+                xmlErrorbox.AppendText("Recorded unknown fact type " + factType + "\n");
+            }
         }
 
         public bool LoadTree(string filename, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)

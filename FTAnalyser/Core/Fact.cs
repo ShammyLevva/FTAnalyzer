@@ -66,7 +66,7 @@ namespace FTAnalyzer
 
         static Fact()
         {
-            CUSTOM_TAGS.Add("IGI", FAMILYSEARCH);
+            //CUSTOM_TAGS.Add("IGI Search", FAMILYSEARCH);
             CUSTOM_TAGS.Add("Childless", CHILDLESS);
             CUSTOM_TAGS.Add("Contact", CONTACT);
             CUSTOM_TAGS.Add("Witness", WITNESS);
@@ -258,7 +258,7 @@ namespace FTAnalyzer
                         else
                         {
                             FactType = Fact.UNKNOWN;
-                            FamilyTree.Instance.XmlErrorBox.AppendText("Recorded unknown fact type " + tag + "\n");
+                            FamilyTree.Instance.CheckUnknownFactTypes(tag);
                             Tag = tag;
                         }
                     }
