@@ -55,7 +55,6 @@ namespace FTAnalyzer.Forms
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
             this.btnSelect = new System.Windows.Forms.ToolStripButton();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.txtTimeInterval = new System.Windows.Forms.ToolStripTextBox();
@@ -63,6 +62,7 @@ namespace FTAnalyzer.Forms
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnPlay = new System.Windows.Forms.ToolStripButton();
             this.btnStop = new System.Windows.Forms.ToolStripButton();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.btnBack1 = new System.Windows.Forms.Button();
             this.btnForward1 = new System.Windows.Forms.Button();
@@ -387,6 +387,19 @@ namespace FTAnalyzer.Forms
             this.btnStop.Visible = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(793, 94);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(125, 13);
+            this.linkLabel1.TabIndex = 15;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "© Google - Terms of Use";
+            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // timer
             // 
             this.timer.Interval = 2000;
@@ -439,18 +452,6 @@ namespace FTAnalyzer.Forms
             this.btnForward10.Text = ">>";
             this.btnForward10.UseVisualStyleBackColor = true;
             this.btnForward10.Click += new System.EventHandler(this.btnForward10_Click);
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(848, 94);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(70, 13);
-            this.linkLabel1.TabIndex = 15;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Terms of Use";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // TimeLine
             // 
