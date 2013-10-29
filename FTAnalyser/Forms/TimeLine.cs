@@ -17,6 +17,7 @@ using SharpMap.Layers;
 using SharpMap.Styles;
 using SharpMap.Rendering.Decoration.ScaleBar;
 using System.Diagnostics;
+using FTAnalyzer.Forms.Controls;
 
 namespace FTAnalyzer.Forms
 {
@@ -36,9 +37,6 @@ namespace FTAnalyzer.Forms
         public TimeLine()
         {
             InitializeComponent();
-            LinkLabel.Link link = new LinkLabel.Link();
-            link.LinkData = "http://www.google.com/intl/en_ALL/help/terms_maps.html";
-            linkLabel1.Links.Add(link);
             mapZoomToolStrip.Renderer = new CustomToolStripRenderer();
             tbYears.MouseWheel += new MouseEventHandler(tbYears_MouseWheel);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
@@ -74,7 +72,7 @@ namespace FTAnalyzer.Forms
                 MainForm.DisposeDuplicateForms(geo);
                 geo.StartGeoCoding();
                 geo.BringToFront();
-                geo.Focus(); 
+                geo.Focus();
                 this.Cursor = Cursors.Default;
             }
         }
@@ -538,56 +536,6 @@ namespace FTAnalyzer.Forms
                 RemoveScaleBar();
             else
                 AddScaleBar();
-        }
-
-        private void mnuMapStyle_Click(object sender, EventArgs e)
-        {
-            foreach (ToolStripMenuItem menu in mnuMapStyle.DropDownItems)
-                menu.Checked = false;
-            mapBox1.Map.BackgroundLayer.RemoveAt(0);
-            if (sender == mnuGoogleMap)
-            {
-                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                        new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap"));
-                mnuGoogleMap.Checked = true;
-            }
-            else if (sender == mnuGoogleSatellite)
-            {
-                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                        new GoogleTileSource(GoogleMapType.GoogleSatellite), "GoogleSatellite"));
-                mnuGoogleSatellite.Checked = true;
-            }
-            else if (sender == mnuOpenStreetMap)
-            {
-                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BruTile.Web.OsmTileSource(), "OpenStreetMap"));
-                mnuOpenStreetMap.Checked = true;
-            }
-            else if (sender == mnuBingMapAerial)
-            {
-                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BruTile.Web.BingTileSource(BingRequest.UrlBing, null, BingMapType.Aerial), "BingMapAerial"));
-                mnuBingMapAerial.Checked = true;
-            }
-            else if (sender == mnuBingMapRoads)
-            {
-                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BruTile.Web.BingTileSource(BingRequest.UrlBing, null, BingMapType.Roads), "BingMapRoads"));
-                mnuBingMapRoads.Checked = true;
-            }
-            else if (sender == mnuBingMapHybrid)
-            {
-                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BruTile.Web.BingTileSource(BingRequest.UrlBing, null, BingMapType.Hybrid), "BingMapHybrid"));
-                mnuBingMapHybrid.Checked = true;
-            }
-            else if (sender == mnuBingMapOS)
-            {
-                mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BingOSTileSource(BingRequest.UrlBing, null, BingMapType.Roads), "BingMapOS"));
-                mnuBingMapOS.Checked = true;
-            }
-            mapBox1.Refresh();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
