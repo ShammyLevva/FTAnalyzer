@@ -116,7 +116,7 @@ namespace FTAnalyzer.Forms
             else
             {
                 location = loc.ToString();
-                res = CallGeoWS(location);
+                res = CallGoogleGeocode(location);
                 if (res.Status == "OK")
                 {
                     labMapLevel.Text = GoogleMap.LocationText(res, loc, level);
@@ -193,15 +193,29 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        public static GeoResponse CallGeoWS(string address)
+        public static GeoResponse CallGoogleGeocode(string address)
+        {
+            string url = string.Format(
+                    "http://maps.googleapis.com/maps/api/geocode/json?address={0}&region=uk&sensor=false",
+                    HttpUtility.UrlEncode(address)
+                    );
+            return GetGeoResponse(url);
+        }
+
+        public static GeoResponse CallGoogleReverseGeocode(double latitude, double longitude)
+        {
+            string url = string.Format(
+                    "http://maps.googleapis.com/maps/api/geocode/json?latlng={0},{1}&region=uk&sensor=false",
+                    HttpUtility.UrlEncode(latitude.ToString()), HttpUtility.UrlEncode(longitude.ToString())
+                    );
+            return GetGeoResponse(url);
+        }
+
+        private static GeoResponse GetGeoResponse(string url)
         {
             GeoResponse res = null;
             try
             {
-                string url = string.Format(
-                        "http://maps.googleapis.com/maps/api/geocode/json?address={0}&region=uk&sensor=false",
-                        HttpUtility.UrlEncode(address)
-                        );
                 HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
                 request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
                 request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
@@ -227,7 +241,7 @@ namespace FTAnalyzer.Forms
         private static int sleepinterval = 200;
 
         // Call geocoding routine but account for throttling by Google geocoding engine
-        public static GeoResponse CallGeoWSCount(string address, int badtries)
+        public static GeoResponse GoogleGeocode(string address, int badtries)
         {
             double seconds = sleepinterval / 1000;
             if (sleepinterval > 500)
@@ -247,7 +261,7 @@ namespace FTAnalyzer.Forms
             GeoResponse res;
             try
             {
-                res = CallGeoWS(address);
+                res = CallGoogleGeocode(address);
             }
             catch (Exception e)
             {
@@ -258,7 +272,53 @@ namespace FTAnalyzer.Forms
             {
                 // we're hitting Google too fast, increase interval
                 sleepinterval = Math.Min(sleepinterval + ++badtries * 750, 20000);
-                return CallGeoWSCount(address, badtries);
+                return GoogleGeocode(address, badtries);
+            }
+            else
+            {
+                OnWaitingForGoogle(string.Empty); // going well clear any previous message
+                // no throttling, go a little bit faster
+                if (sleepinterval > 10000)
+                    sleepinterval = 200;
+                else
+                    sleepinterval = Math.Max(sleepinterval / 2, 75);
+                return res;
+            }
+        }
+
+        // Call geocoding routine but account for throttling by Google geocoding engine
+        public static GeoResponse GoogleReverseGeocode(double latitude, double longitude, int badtries)
+        {
+            double seconds = sleepinterval / 1000;
+            if (sleepinterval > 500)
+                OnWaitingForGoogle("Over Google limit. Waiting " + seconds + " seconds.");
+            if (sleepinterval >= 20000)
+            {
+                OnWaitingForGoogle("Max Google GeoLocations exceeded for today.");
+                GeoResponse response = new GeoResponse();
+                response.Status = "Maxed";
+                return response;
+            }
+            for (int interval = 0; interval < sleepinterval; interval += 1000)
+            {
+                Thread.Sleep(1000);
+                if (ThreadCancelled) return null;
+            }
+            GeoResponse res;
+            try
+            {
+                res = CallGoogleReverseGeocode(latitude, longitude);
+            }
+            catch (Exception e)
+            {
+                OnWaitingForGoogle("Caught exception: " + e);
+                res = null;
+            }
+            if (res == null || res.Status == "OVER_QUERY_LIMIT")
+            {
+                // we're hitting Google too fast, increase interval
+                sleepinterval = Math.Min(sleepinterval + ++badtries * 750, 20000);
+                return GoogleReverseGeocode(latitude, longitude, badtries);
             }
             else
             {
@@ -277,6 +337,5 @@ namespace FTAnalyzer.Forms
             loaded = true;
             System.Diagnostics.Debug.Print("DocumentCompleted called");
         }
-
     }
 }

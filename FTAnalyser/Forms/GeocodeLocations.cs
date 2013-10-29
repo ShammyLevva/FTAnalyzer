@@ -495,7 +495,7 @@ namespace FTAnalyzer.Forms
                             if (loc.GeocodeStatus == FactLocation.Geocode.NOT_SEARCHED || (mnuRetryPartial.Checked && loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH))
                             {
                                 // This call is the real workhorse that does the actual Google lookup
-                                res = GoogleMap.CallGeoWSCount(loc.ToString(), 8);
+                                res = GoogleMap.GoogleGeocode(loc.ToString(), 8);
                                 if (res != null && res.Status == "Maxed")
                                 {
                                     backgroundWorker.CancelAsync();

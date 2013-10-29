@@ -62,7 +62,7 @@ namespace FTAnalyzer.Forms
             else
             {
                 location = loc.ToString();
-                GeoResponse res = GoogleMap.CallGeoWS(location);
+                GeoResponse res = GoogleMap.CallGoogleGeocode(location);
                 if (res.Status == "OK")
                 {
                     labMapLevel.Text = GoogleMap.LocationText(res, loc, level);
