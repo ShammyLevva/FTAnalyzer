@@ -85,6 +85,7 @@ namespace FTAnalyzer.Utilities
             {
                 Version v3_0_0_0 = new Version("3.0.0.0");
                 Version v3_0_2_0 = new Version("3.0.2.0");
+                Version v3_0_2_2 = new Version("3.0.2.2");
                 if (dbVersion < v3_0_0_0)
                 {
                     // Version is less than 3.0.0.0 or none existent so copy latest database from empty database
@@ -109,6 +110,14 @@ namespace FTAnalyzer.Utilities
                     cmd = new SQLiteCommand("update versions set Database = '3.0.2.0'", conn);
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Please note that due to fixes in the way Google reports\nlocations your 'Google Matched' geocodes have been reset."); 
+                }
+                if (dbVersion < v3_0_2_2)
+                {
+                    // Version v3.0.2.2 needs to reset Google locations & found level to unknown where status is user entered
+                    SQLiteCommand cmd = new SQLiteCommand("update geocode set foundlocation='', foundlevel=-2 where geocodestatus=3", conn);
+                    cmd.ExecuteNonQuery(); 
+                    cmd = new SQLiteCommand("update versions set Database = '3.0.2.2'", conn);
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
@@ -198,7 +207,7 @@ namespace FTAnalyzer.Utilities
 
         public void UpdateGeocodeStatus(string location, FactLocation.Geocode status)
         {
-            SQLiteCommand updateCmd = new SQLiteCommand("update geocode set founddate = date('now'), geocodestatus = ? where location = ?", conn);
+            SQLiteCommand updateCmd = new SQLiteCommand("update geocode set founddate = date('now'), geocodestatus = ?, foundlocation = '', foundlevel = -2 where location = ?", conn);
 
             SQLiteParameter param = updateCmd.CreateParameter();
             param = updateCmd.CreateParameter();
