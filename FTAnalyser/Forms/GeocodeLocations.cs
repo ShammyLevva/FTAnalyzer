@@ -39,6 +39,7 @@ namespace FTAnalyzer.Forms
             reportFormHelper.LoadColumnLayout("GeocodeLocationsColumns.xml");
             mnuGeocodeLocations.Enabled = !ft.Geocoding; // disable menu if already geocoding
             mnuEditLocation.Enabled = !ft.Geocoding;
+            mnuReverseGeocode.Enabled = !ft.Geocoding;
             SetupFilterMenu();
             SetStatusText();
             CheckGoogleStatusCodes(locations);
@@ -390,26 +391,28 @@ namespace FTAnalyzer.Forms
             dgLocations.Refresh();
         }
 
-        #region Threading
-        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        #region Geocode Threading
+        private void geocodingBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            GeoCode(backgroundWorker, e);
+            GeoCode(geocodeBackgroundWorker, e);
         }
 
-        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void geocodingBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             pbGeocoding.Value = e.ProgressPercentage;
             txtLocations.Text = (string)e.UserState;
         }
 
-        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void geocodingBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             pbGeocoding.Value = 100;
             pbGeocoding.Visible = false;
             txtGoogleWait.Text = string.Empty;
             mnuGeocodeLocations.Enabled = true;
             mnuEditLocation.Enabled = true;
-            ft.WriteGeocodeStatstoRTB(true);
+            mnuReverseGeocode.Enabled = true;
+            if(sender == geocodeBackgroundWorker)
+                ft.WriteGeocodeStatstoRTB(true);
             ft.Geocoding = false;
             if (formClosing)
                 this.Close();
@@ -419,9 +422,16 @@ namespace FTAnalyzer.Forms
 
         private void GeocodeLocations_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (backgroundWorker.IsBusy)
+            if (geocodeBackgroundWorker.IsBusy)
             {
-                backgroundWorker.CancelAsync();
+                geocodeBackgroundWorker.CancelAsync();
+                GoogleMap.ThreadCancelled = true;
+                e.Cancel = true;
+                formClosing = true;
+            }
+            if (reverseGeocodeBackgroundWorker.IsBusy)
+            {
+                reverseGeocodeBackgroundWorker.CancelAsync();
                 GoogleMap.ThreadCancelled = true;
                 e.Cancel = true;
                 formClosing = true;
@@ -438,6 +448,10 @@ namespace FTAnalyzer.Forms
             txtGoogleWait.Text = args.Message;
         }
 
+        private void reverseGeocodeBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            ReverseGeoCode(reverseGeocodeBackgroundWorker, e);
+        }
 
         #endregion
 
@@ -445,7 +459,7 @@ namespace FTAnalyzer.Forms
 
         public void StartGeoCoding()
         {
-            if (backgroundWorker.IsBusy)
+            if (geocodeBackgroundWorker.IsBusy)
             {
                 MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.");
             }
@@ -455,8 +469,9 @@ namespace FTAnalyzer.Forms
                 pbGeocoding.Visible = true;
                 mnuGeocodeLocations.Enabled = false;
                 mnuEditLocation.Enabled = false;
+                mnuReverseGeocode.Enabled = false;
                 ft.Geocoding = true;
-                backgroundWorker.RunWorkerAsync();
+                geocodeBackgroundWorker.RunWorkerAsync();
                 this.Cursor = Cursors.Default;
             }
         }
@@ -498,7 +513,7 @@ namespace FTAnalyzer.Forms
                                 res = GoogleMap.GoogleGeocode(loc.ToString(), 8);
                                 if (res != null && res.Status == "Maxed")
                                 {
-                                    backgroundWorker.CancelAsync();
+                                    geocodeBackgroundWorker.CancelAsync();
                                     GoogleMap.ThreadCancelled = true;
                                     res = null;
                                 }
@@ -674,5 +689,192 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 dgLocations.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
         }
+
+        private void mnuReverseGeocde_Click(object sender, EventArgs e)
+        {
+            StartReverseGeoCoding();
+        }
+
+        public void StartReverseGeoCoding()
+        {
+            if (reverseGeocodeBackgroundWorker.IsBusy)
+            {
+                MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.");
+            }
+            else
+            {
+                this.Cursor = Cursors.WaitCursor;
+                pbGeocoding.Visible = true;
+                mnuGeocodeLocations.Enabled = false;
+                mnuEditLocation.Enabled = false;
+                mnuReverseGeocode.Enabled = false;
+                ft.Geocoding = true;
+                reverseGeocodeBackgroundWorker.RunWorkerAsync();
+                this.Cursor = Cursors.Default;
+            }
+        }
+        public void ReverseGeoCode(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            //try
+            //{
+            //    GoogleMap.WaitingForGoogle += new GoogleMap.GoogleEventHandler(GoogleMap_WaitingForGoogle);
+            //    DatabaseHelper dbh = DatabaseHelper.Instance;
+            //    SQLiteCommand cmd = dbh.GetLocation();
+            //    SQLiteCommand insertCmd = dbh.InsertGeocode();
+            //    SQLiteCommand updateCmd = dbh.UpdateGeocode();
+
+            //    int count = 0;
+            //    int googled = 0;
+            //    int geocoded = 0;
+            //    int skipped = 0;
+            //    int total = FactLocation.AllLocations.Count() - 1;
+            //    GoogleMap.ThreadCancelled = false;
+
+            //    foreach (FactLocation loc in FactLocation.AllLocations)
+            //    {
+            //        if (loc.IsGeoCoded)
+            //            geocoded++;
+            //        else if (loc.GeocodeStatus == FactLocation.Geocode.INCORRECT)
+            //            skipped++; // don't re-geocode incorrect ones as that would reset incorrect flag back to what user already identified was wrong
+            //        else
+            //        {
+            //            cmd.Parameters[0].Value = loc.ToString();
+            //            SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
+            //            bool inDatabase = reader.Read();
+            //            if (loc.ToString().Length > 0)
+            //            {
+            //                GeoResponse res = null;
+            //                if (loc.GeocodeStatus == FactLocation.Geocode.NOT_SEARCHED || (mnuRetryPartial.Checked && loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH))
+            //                {
+            //                    // This call is the real workhorse that does the actual Google lookup
+            //                    res = GoogleMap.GoogleGeocode(loc.ToString(), 8);
+            //                    if (res != null && res.Status == "Maxed")
+            //                    {
+            //                        geocodeBackgroundWorker.CancelAsync();
+            //                        GoogleMap.ThreadCancelled = true;
+            //                        res = null;
+            //                    }
+            //                }
+            //                if (res != null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
+            //                {
+            //                    double latitude = 0;
+            //                    double longitude = 0;
+            //                    int foundLevel = -1;
+            //                    string address = string.Empty;
+            //                    string resultType = string.Empty;
+            //                    GeoResponse.CResult.CGeometry.CViewPort viewport = new GeoResponse.CResult.CGeometry.CViewPort();
+            //                    loc.GeocodeStatus = FactLocation.Geocode.NO_MATCH;
+            //                    Envelope bbox = Countries.BoundingBox(loc.Country);
+            //                    if (res.Status == "OK")
+            //                    {
+            //                        foreach (GeoResponse.CResult result in res.Results)
+            //                        {
+            //                            foundLevel = GoogleMap.GetFactLocation(result.Types);
+            //                            address = result.ReturnAddress;
+            //                            viewport = result.Geometry.ViewPort;
+            //                            resultType = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
+            //                            if (foundLevel >= loc.Level && bbox.Covers(new Coordinate(result.Geometry.Location.Long, result.Geometry.Location.Lat)))
+            //                            {
+            //                                latitude = result.Geometry.Location.Lat;
+            //                                longitude = result.Geometry.Location.Long;
+            //                                loc.GeocodeStatus = result.PartialMatch ? FactLocation.Geocode.PARTIAL_MATCH : FactLocation.Geocode.MATCHED;
+            //                                loc.ViewPort = viewport;
+            //                                if (!result.PartialMatch)
+            //                                    break; // we've got a good match so exit
+            //                            }
+            //                        }
+            //                        if (loc.GeocodeStatus != FactLocation.Geocode.MATCHED)
+            //                        {   // we checked all the google results and no joy so take first result as level partial match
+            //                            foundLevel = GoogleMap.GetFactLocation(res.Results[0].Types);
+            //                            address = res.Results[0].ReturnAddress;
+            //                            latitude = res.Results[0].Geometry.Location.Lat;
+            //                            longitude = res.Results[0].Geometry.Location.Long;
+            //                            viewport = res.Results[0].Geometry.ViewPort;
+            //                            resultType = EnhancedTextInfo.ConvertStringArrayToString(res.Results[0].Types);
+            //                            if (loc.GeocodeStatus == FactLocation.Geocode.NO_MATCH) // we are still on no match so we don't even have a Google partial
+            //                            {
+            //                                if (bbox.Covers(new Coordinate(res.Results[0].Geometry.Location.Long, res.Results[0].Geometry.Location.Lat)))
+            //                                    loc.GeocodeStatus = FactLocation.Geocode.LEVEL_MISMATCH;
+            //                                else
+            //                                    loc.GeocodeStatus = FactLocation.Geocode.OUT_OF_BOUNDS;
+            //                            }
+            //                        }
+            //                        googled++;
+            //                    }
+            //                    else if (res.Status == "ZERO_RESULTS")
+            //                    {
+            //                        skipped++;
+            //                        foundLevel = -2;
+            //                    }
+            //                    if (inDatabase)
+            //                    {
+            //                        updateCmd.Parameters[0].Value = loc.Level;
+            //                        updateCmd.Parameters[1].Value = latitude;
+            //                        updateCmd.Parameters[2].Value = longitude;
+            //                        updateCmd.Parameters[3].Value = address;
+            //                        updateCmd.Parameters[4].Value = foundLevel;
+            //                        updateCmd.Parameters[5].Value = viewport.NorthEast.Lat;
+            //                        updateCmd.Parameters[6].Value = viewport.NorthEast.Long;
+            //                        updateCmd.Parameters[7].Value = viewport.SouthWest.Lat;
+            //                        updateCmd.Parameters[8].Value = viewport.SouthWest.Long;
+            //                        updateCmd.Parameters[9].Value = loc.GeocodeStatus;
+            //                        updateCmd.Parameters[10].Value = resultType;
+            //                        updateCmd.Parameters[11].Value = loc.ToString();
+            //                        updateCmd.ExecuteNonQuery();
+            //                    }
+            //                    else
+            //                    {
+            //                        insertCmd.Parameters[0].Value = loc.ToString();
+            //                        insertCmd.Parameters[1].Value = loc.Level;
+            //                        insertCmd.Parameters[2].Value = latitude;
+            //                        insertCmd.Parameters[3].Value = longitude;
+            //                        insertCmd.Parameters[4].Value = address;
+            //                        insertCmd.Parameters[5].Value = foundLevel;
+            //                        insertCmd.Parameters[6].Value = viewport.NorthEast.Lat;
+            //                        insertCmd.Parameters[7].Value = viewport.NorthEast.Long;
+            //                        insertCmd.Parameters[8].Value = viewport.SouthWest.Lat;
+            //                        insertCmd.Parameters[9].Value = viewport.SouthWest.Long;
+            //                        insertCmd.Parameters[10].Value = loc.GeocodeStatus;
+            //                        insertCmd.Parameters[11].Value = resultType;
+            //                        insertCmd.ExecuteNonQuery();
+            //                    }
+            //                    loc.Latitude = latitude;
+            //                    loc.Longitude = longitude;
+            //                    loc.GoogleLocation = address;
+            //                    loc.GoogleResultType = resultType;
+            //                    loc.ViewPort = viewport;
+            //                }
+            //                else
+            //                {
+            //                    skipped++;
+            //                }
+            //            }
+            //            reader.Close();
+            //        }
+            //        count++;
+            //        int percent = (int)Math.Truncate((count - 1) * 100.0 / total);
+            //        string status = "Previously geocoded: " + geocoded + ", skipped: " + skipped +
+            //                        " Googled: " + googled + ". Done " + (count - 1) + " of " + total + ".  ";
+            //        worker.ReportProgress(percent, status);
+
+            //        if (worker.CancellationPending ||
+            //            ((txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text.Substring(0, 3).Equals("Max"))))
+            //        {
+            //            e.Cancel = true;
+            //            break;
+            //        }
+            //    }
+            //    ft.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
+            //    if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text.Substring(0, 3).Equals("Max"))
+            //        MessageBox.Show("Finished Geocoding.\n" + txtGoogleWait.Text + "\nPlease wait 24hrs before trying again as Google\nwill not allow further geocoding before then.", "Timeline Geocoding");
+            //    else
+            //        MessageBox.Show("Finished Geocoding.", "Timeline Geocoding");
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error geocoding : " + ex.Message);
+            //}
+        }
+
     }
 }

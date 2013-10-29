@@ -59,18 +59,20 @@
             this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.geocodeBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.geocodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGeocodeLocations = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuReverseGeocode = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRetryPartial = new System.Windows.Forms.ToolStripMenuItem();
             this.updateChangesWithoutAskingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filtersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGeocodeStatus = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuStatusSelectAll = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGoogleResultType = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSelectClear = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuStatusSelectAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.reverseGeocodeBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.dgLocations)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -345,13 +347,13 @@
             this.toolStripSeparator.Name = "toolStripSeparator";
             this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
             // 
-            // backgroundWorker
+            // geocodeBackgroundWorker
             // 
-            this.backgroundWorker.WorkerReportsProgress = true;
-            this.backgroundWorker.WorkerSupportsCancellation = true;
-            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
+            this.geocodeBackgroundWorker.WorkerReportsProgress = true;
+            this.geocodeBackgroundWorker.WorkerSupportsCancellation = true;
+            this.geocodeBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.geocodingBackgroundWorker_DoWork);
+            this.geocodeBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.geocodingBackgroundWorker_ProgressChanged);
+            this.geocodeBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.geocodingBackgroundWorker_RunWorkerCompleted);
             // 
             // menuStrip1
             // 
@@ -368,7 +370,8 @@
             // geocodeToolStripMenuItem
             // 
             this.geocodeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuGeocodeLocations});
+            this.mnuGeocodeLocations,
+            this.mnuReverseGeocode});
             this.geocodeToolStripMenuItem.Name = "geocodeToolStripMenuItem";
             this.geocodeToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.geocodeToolStripMenuItem.Text = "Geocoder";
@@ -376,10 +379,17 @@
             // mnuGeocodeLocations
             // 
             this.mnuGeocodeLocations.Name = "mnuGeocodeLocations";
-            this.mnuGeocodeLocations.Size = new System.Drawing.Size(241, 22);
+            this.mnuGeocodeLocations.Size = new System.Drawing.Size(281, 22);
             this.mnuGeocodeLocations.Text = "Run Geocoder to find Locations";
             this.mnuGeocodeLocations.ToolTipText = "Looks up map co-ordinates for locations in your file";
             this.mnuGeocodeLocations.Click += new System.EventHandler(this.mnuGeocodeLocations_Click);
+            // 
+            // mnuReverseGeocode
+            // 
+            this.mnuReverseGeocode.Name = "mnuReverseGeocode";
+            this.mnuReverseGeocode.Size = new System.Drawing.Size(281, 22);
+            this.mnuReverseGeocode.Text = "Lookup Locations for User entered data";
+            this.mnuReverseGeocode.Click += new System.EventHandler(this.mnuReverseGeocde_Click);
             // 
             // mnuOptions
             // 
@@ -423,6 +433,13 @@
             this.mnuGeocodeStatus.Size = new System.Drawing.Size(176, 22);
             this.mnuGeocodeStatus.Text = "Geocode Status";
             // 
+            // mnuStatusSelectAll
+            // 
+            this.mnuStatusSelectAll.Name = "mnuStatusSelectAll";
+            this.mnuStatusSelectAll.Size = new System.Drawing.Size(122, 22);
+            this.mnuStatusSelectAll.Text = "Select All";
+            this.mnuStatusSelectAll.Click += new System.EventHandler(this.mnuStatusSelectAll_Click);
+            // 
             // mnuGoogleResultType
             // 
             this.mnuGoogleResultType.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -434,16 +451,15 @@
             // mnuSelectClear
             // 
             this.mnuSelectClear.Name = "mnuSelectClear";
-            this.mnuSelectClear.Size = new System.Drawing.Size(152, 22);
+            this.mnuSelectClear.Size = new System.Drawing.Size(122, 22);
             this.mnuSelectClear.Text = "Select All";
             this.mnuSelectClear.Click += new System.EventHandler(this.mnuSelectClear_Click);
             // 
-            // mnuStatusSelectAll
+            // reverseGeocodeBackgroundWorker
             // 
-            this.mnuStatusSelectAll.Name = "mnuStatusSelectAll";
-            this.mnuStatusSelectAll.Size = new System.Drawing.Size(152, 22);
-            this.mnuStatusSelectAll.Text = "Select All";
-            this.mnuStatusSelectAll.Click += new System.EventHandler(this.mnuStatusSelectAll_Click);
+            this.reverseGeocodeBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.reverseGeocodeBackgroundWorker_DoWork);
+            this.reverseGeocodeBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.geocodingBackgroundWorker_ProgressChanged);
+            this.reverseGeocodeBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.geocodingBackgroundWorker_RunWorkerCompleted);
             // 
             // GeocodeLocations
             // 
@@ -486,7 +502,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripProgressBar pbGeocoding;
         private System.Windows.Forms.ToolStripStatusLabel txtGoogleWait;
-        private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private System.ComponentModel.BackgroundWorker geocodeBackgroundWorker;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem geocodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuGeocodeLocations;
@@ -511,5 +527,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem mnuEditLocation;
         private System.Windows.Forms.ToolStripMenuItem mnuStatusSelectAll;
+        private System.Windows.Forms.ToolStripMenuItem mnuReverseGeocode;
+        private System.ComponentModel.BackgroundWorker reverseGeocodeBackgroundWorker;
     }
 }
