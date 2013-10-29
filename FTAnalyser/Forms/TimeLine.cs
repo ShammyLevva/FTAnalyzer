@@ -33,10 +33,13 @@ namespace FTAnalyzer.Forms
         private LabelLayer labelLayer;
         private MarkerClusterer clusterer;
         private Color backgroundColour;
-
+        private ToolStripMapSelector mnuMapStyle;
+        
         public TimeLine()
         {
+            mnuMapStyle = new ToolStripMapSelector();
             InitializeComponent();
+            mnuMapStyle.Setup(linkLabel1, mapBox1);
             mapZoomToolStrip.Renderer = new CustomToolStripRenderer();
             tbYears.MouseWheel += new MouseEventHandler(tbYears_MouseWheel);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component

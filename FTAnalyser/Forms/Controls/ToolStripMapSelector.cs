@@ -14,7 +14,7 @@ namespace FTAnalyzer.Forms.Controls
 {
     public class ToolStripMapSelector : ToolStripDropDownButton
     {
-        public static LinkLabel CopyrightLabel { get; private set; }
+        private LinkLabel copyrightLabel;
         private MapBox mapbox;
         private ToolStripMenuItem mnuGoogleMap;
         private ToolStripMenuItem mnuGoogleSatellite;
@@ -23,13 +23,17 @@ namespace FTAnalyzer.Forms.Controls
         private ToolStripMenuItem mnuBingMapRoads;
         private ToolStripMenuItem mnuBingMapHybrid;
         private ToolStripMenuItem mnuBingMapOS;
-       
-        public ToolStripMapSelector(LinkLabel label, MapBox mapbox)
-            : base()
+
+        public ToolStripMapSelector()
+            : base() { }
+        
+
+        public void Setup(LinkLabel label, MapBox mapbox)
         {
-            CopyrightLabel = label;
+            this.copyrightLabel = label;
             this.mapbox = mapbox;
             SetupDropdown();
+            UpdateLinkLabel(LinkLabelType.GOOGLE);
         }
 
         private void SetupDropdown()
@@ -42,7 +46,7 @@ namespace FTAnalyzer.Forms.Controls
             this.mnuBingMapHybrid = new ToolStripMenuItem();
             this.mnuBingMapOS = new ToolStripMenuItem();
             
-            
+            // Setup map selector menu
             this.DisplayStyle = ToolStripItemDisplayStyle.Text;
             this.DropDownItems.AddRange(new ToolStripItem[] {
             this.mnuGoogleMap,
@@ -119,26 +123,26 @@ namespace FTAnalyzer.Forms.Controls
 
         public enum LinkLabelType { GOOGLE, BING, OSM }
 
-        public static void UpdateLinkLabel(LinkLabelType type)
+        public void UpdateLinkLabel(LinkLabelType type)
         {
             LinkLabel.Link link = new LinkLabel.Link();
-            CopyrightLabel.Links.Clear();
+            copyrightLabel.Links.Clear();
             switch (type)
             {
                 case LinkLabelType.GOOGLE:
                     link.LinkData = "http://www.google.com/intl/en_ALL/help/terms_maps.html";
-                    CopyrightLabel.Text = "© Google - Terms of Use";
+                    copyrightLabel.Text = "© Google - Terms of Use";
                     break;
                 case LinkLabelType.BING:
                     link.LinkData = "http://www.bing.com";
-                    CopyrightLabel.Text = "© Bing Maps";
+                    copyrightLabel.Text = "© Bing Maps";
                     break;
                 case LinkLabelType.OSM:
                     link.LinkData = "http://www.openstreetmap.org/copyright";
-                    CopyrightLabel.Text = "© OpenStreetMap";
+                    copyrightLabel.Text = "© OpenStreetMap";
                     break;
             }
-            CopyrightLabel.Links.Add(link);
+            copyrightLabel.Links.Add(link);
         }
 
         private void _Click(object sender, EventArgs e)
