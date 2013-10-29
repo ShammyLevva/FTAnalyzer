@@ -49,7 +49,7 @@ namespace FTAnalyzer.Mapping
 
         public string Name { get { return Individual.Name; } }
 
-        public string TypeOfFact { get { return Fact.GetFactTypeDescription(Fact.FactType); } }
+        public string TypeOfFact { get { return Fact.FactTypeDescription; } }
 
         public Age AgeAtFact { get { return Individual == null ? null : Individual.GetAge(year); } }
 

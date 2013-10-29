@@ -129,7 +129,7 @@ namespace FTAnalyzer
             COMMENT_FACTS.Add(POSSESSIONS);
         }
 
-        public static string GetFactTypeDescription(string factType)
+        private string GetFactTypeDescription(string factType)
         {
             switch (factType)
             {
@@ -183,7 +183,6 @@ namespace FTAnalyzer
                 case CHILDLESS: return "Childless";
                 case UNMARRIED: return "Dies single";
                 case WITNESS: return "Witness";
-                case UNKNOWN: return "UNKNOWN";
                 case LOOSEDEATH: return "Loose death";
                 case LOOSEBIRTH: return "Loose birth";
                 case FAMILYSEARCH: return "Familysearch";
@@ -193,6 +192,7 @@ namespace FTAnalyzer
                 case CHANGE: return "Record change";
                 case LOSTCOUSINS: return "Lost Cousins";
                 case DIED_SINGLE: return "Died Single";
+                case UNKNOWN: return "UNKNOWN";
                 default: return factType;
             }
         }
@@ -208,6 +208,7 @@ namespace FTAnalyzer
         public string ED { get; private set; }
         public Age GedcomAge { get; private set; }
         public bool Created { get; protected set; }
+        private string Tag { get; set; }
 
         #region Constructors
 
@@ -231,6 +232,7 @@ namespace FTAnalyzer
             this.ED = string.Empty;
             this.GedcomAge = null;
             this.Created = false;
+            this.Tag = string.Empty;
         }
 
         public Fact(XmlNode node, string factRef)
@@ -257,6 +259,7 @@ namespace FTAnalyzer
                         {
                             FactType = Fact.UNKNOWN;
                             FamilyTree.Instance.XmlErrorBox.AppendText("Recorded unknown fact type " + tag + "\n");
+                            Tag = tag;
                         }
                     }
                     else if (FactType.Equals(CENSUS))
@@ -380,6 +383,8 @@ namespace FTAnalyzer
         public FactError FactErrorLevel { get; private set; }
 
         public string FactErrorMessage { get; private set; }
+
+        public string FactTypeDescription { get { return FactType == Fact.UNKNOWN ? Tag : GetFactTypeDescription(FactType); } }
 
         public bool IsCensusFact
         {

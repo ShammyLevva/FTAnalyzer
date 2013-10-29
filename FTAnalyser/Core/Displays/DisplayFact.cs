@@ -21,7 +21,7 @@ namespace FTAnalyzer
             this.Icon = FactImage.ErrorIcon(fact.FactErrorLevel).Icon;
         }
 
-        public string TypeOfFact { get { return Fact.GetFactTypeDescription(Fact.FactType); } }
+        public string TypeOfFact { get { return Fact.FactTypeDescription; } }
         public FactDate FactDate { get { return Fact.FactDate; } }
         public FactLocation Location { get { return Fact.Location; } }
         public string Comment { get { return Fact.Comment; } }

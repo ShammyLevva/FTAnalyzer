@@ -1204,21 +1204,21 @@ namespace FTAnalyzer
                                 if (f.FactDate.IsBefore(ind.BirthDate.SubtractMonths(4)))
                                 {
                                     errors[(int)dataerror.FACTS_BEFORE_BIRTH].Add(
-                                        new DataError((int)dataerror.FACTS_BEFORE_BIRTH, ind, Fact.GetFactTypeDescription(f.FactType) + " fact recorded: " +
+                                        new DataError((int)dataerror.FACTS_BEFORE_BIRTH, ind, f.FactTypeDescription + " fact recorded: " +
                                                     f.FactDate + " before individual was born"));
                                 }
                             }
                             else
                             {
                                 errors[(int)dataerror.FACTS_BEFORE_BIRTH].Add(
-                                    new DataError((int)dataerror.FACTS_BEFORE_BIRTH, ind, Fact.GetFactTypeDescription(f.FactType) + " fact recorded: " +
+                                    new DataError((int)dataerror.FACTS_BEFORE_BIRTH, ind, f.FactTypeDescription + " fact recorded: " +
                                                     f.FactDate + " before individual was born"));
                             }
                         }
                         if (Fact.LOOSE_DEATH_FACTS.Contains(f.FactType) && f.FactDate.IsAfter(ind.DeathDate))
                         {
                             errors[(int)dataerror.FACTS_AFTER_DEATH].Add(
-                                new DataError((int)dataerror.FACTS_AFTER_DEATH, ind, Fact.GetFactTypeDescription(f.FactType) + " fact recorded: " +
+                                new DataError((int)dataerror.FACTS_AFTER_DEATH, ind, f.FactTypeDescription + " fact recorded: " +
                                             f.FactDate + " after individual died"));
                         }
                     }
