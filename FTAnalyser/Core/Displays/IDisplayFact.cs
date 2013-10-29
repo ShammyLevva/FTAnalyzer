@@ -9,6 +9,7 @@ namespace FTAnalyzer
     public interface IDisplayFact
     {
         Image Icon { get; }
+        string Ind_ID { get; }
         string Name { get; }
         string TypeOfFact { get; }
         FactDate FactDate { get; }
