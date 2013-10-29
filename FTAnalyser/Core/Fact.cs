@@ -249,17 +249,15 @@ namespace FTAnalyzer
                         string tag = FamilyTree.GetText(node, "TYPE");
                         string factType;
                         if (CUSTOM_TAGS.TryGetValue(tag, out factType))
+                        {
                             FactType = factType;
+                            CheckCensusDate(tag);
+                        }
                         else
                         {
-                            FactType = FixFactTypes(tag);
-                            if (FactType == null)
-                            {
-                                FactType = Fact.UNKNOWN;
-                                FamilyTree.Instance.XmlErrorBox.AppendText("Recorded unknown fact type " + tag + "\n");
-                            }
+                            FactType = Fact.UNKNOWN;
+                            FamilyTree.Instance.XmlErrorBox.AppendText("Recorded unknown fact type " + tag + "\n");
                         }
-                        CheckCensusDate(tag);
                     }
                     else if (FactType.Equals(CENSUS))
                     {
