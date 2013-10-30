@@ -58,5 +58,18 @@ namespace Controls
                 relationFilters.Add(FilterUtils.IntFilter<T>(relationType, Individual.UNKNOWN));
             return FilterUtils.OrFilter<T>(relationFilters);
         }
+
+        public event EventHandler RelationTypesChanged;
+        protected void OnRelationTypesChanged()
+        {
+            if (RelationTypesChanged != null)
+                RelationTypesChanged(this, EventArgs.Empty);
+        }
+
+        private void tickbox_CheckedChanged(object sender, EventArgs e)
+        {
+            OnRelationTypesChanged();
+        }
+
     }
 }

@@ -16,6 +16,7 @@ using System.Drawing;
 using FTAnalyzer.Forms;
 using Ionic.Zip;
 using System.Collections.Specialized;
+using Controls;
 
 namespace FTAnalyzer
 {
@@ -52,7 +53,13 @@ namespace FTAnalyzer
             //GeneralSettings.StrictResidenceDatesChanged += new EventHandler(Options_StrictResidenceDatesChanged);
             GeneralSettings.TolerateInaccurateCensusChanged += new EventHandler(Options_TolerateInaccurateCensusChanged);
             GeneralSettings.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
+            relTypesLC.RelationTypesChanged += new EventHandler(RelationTypes_RelationTypesChanged);
             this.Text = "Family Tree Analyzer v" + VERSION;
+        }
+
+        void RelationTypes_RelationTypesChanged(object sender, EventArgs e)
+        {
+            UpdateLostCousinsReport();
         }
 
         private string PublishVersion()
@@ -610,6 +617,7 @@ namespace FTAnalyzer
                 census.Text = reportTitle + " already entered into Lost Cousins website";
             else
                 census.Text = reportTitle + " to enter into Lost Cousins website";
+
             DisposeDuplicateForms(census);
             census.Show();
             HourGlass(false);
