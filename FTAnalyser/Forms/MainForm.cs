@@ -53,13 +53,7 @@ namespace FTAnalyzer
             //GeneralSettings.StrictResidenceDatesChanged += new EventHandler(Options_StrictResidenceDatesChanged);
             GeneralSettings.TolerateInaccurateCensusChanged += new EventHandler(Options_TolerateInaccurateCensusChanged);
             GeneralSettings.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
-            relTypesLC.RelationTypesChanged += new EventHandler(RelationTypes_RelationTypesChanged);
             this.Text = "Family Tree Analyzer v" + VERSION;
-        }
-
-        void RelationTypes_RelationTypesChanged(object sender, EventArgs e)
-        {
-            UpdateLostCousinsReport();
         }
 
         private string PublishVersion()
@@ -483,7 +477,7 @@ namespace FTAnalyzer
             filter = FilterUtils.AndFilter<CensusIndividual>(x => x.Age.MinAge < (int)udAgeFilter.Value, filter);
             return filter;
         }
-        
+
         private Predicate<Individual> createTreeTopsIndividualFilter()
         {
             Predicate<Individual> locationFilter = treetopsCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
@@ -543,7 +537,7 @@ namespace FTAnalyzer
             rtbLostCousins.SelectionFont = new Font(rtbLostCousins.Font, FontStyle.Bold);
             rtbLostCousins.SelectionLength = 0;
 
-            Predicate<Individual> relationFilter = relTypesCensus.BuildFilter<Individual>(x => x.RelationType);
+            Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
             IEnumerable<Individual> listToCheck = ft.AllIndividuals.Where(relationFilter).ToList();
 
             int count1841, countEW1881, countSco1881, countCan1881, countEW1911, countIre1911, count1880, count1940;
@@ -611,7 +605,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Census census = new Census(censusDate);
-            Predicate<CensusIndividual> relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
+            Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType);
             census.SetupLCCensus(relationFilter, ckbShowLCEntered.Checked);
             if (ckbShowLCEntered.Checked)
                 census.Text = reportTitle + " already entered into Lost Cousins website";
@@ -1564,6 +1558,11 @@ namespace FTAnalyzer
         {
             string filename = (string)(sender as ToolStripMenuItem).Tag;
             LoadFile(filename);
+        }
+
+        private void relTypesLC_RelationTypesChanged(object sender, EventArgs e)
+        {
+            UpdateLostCousinsReport();
         }
     }
 }
