@@ -572,13 +572,14 @@ namespace FTAnalyzer
                         DateTime minChild = new DateTime(minChildYear - Properties.GeneralSettings.Default.MinParentalAge, 12, 31);
                         if (minChild < minEnd && minChild >= minStart)
                             minEnd = minChild;
-                        if (!indiv.IsMale)
-                        {  // for females check that not over 60 when child is born
-                            int maxChildYear = fam.Children.Max(child => child.BirthDate.StartDate).Year;
-                            DateTime maxChild = new DateTime(minChildYear - 60, 1, 1);
-                            if (maxChild > minStart)
-                                minStart = maxChild;
-                        }
+                        int maxChildYear = fam.Children.Max(child => child.BirthDate.StartDate).Year;
+                        DateTime maxChild;
+                        if (indiv.IsMale) // for males check that not over MAXYEARS when oldest child is born
+                            maxChild = new DateTime(minChildYear - FactDate.MAXYEARS, 1, 1);
+                        else // for females check that not over 60 when oldest child is born
+                            maxChild = new DateTime(minChildYear - 60, 1, 1);
+                        if (maxChild > minStart)
+                            minStart = maxChild;
                     }
                 }
                 foreach (Family fam in indiv.FamiliesAsChild)
