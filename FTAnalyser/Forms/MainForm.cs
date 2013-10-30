@@ -21,11 +21,10 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "3.0.2.2";
+        private string VERSION = "3.0.2.3";
 
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
-        private CensusDate censusDate = CensusDate.UKCENSUS1881;
         private bool stopProcessing = false;
         private string filename;
         private Font boldFont;
@@ -444,12 +443,12 @@ namespace FTAnalyzer
         {
             bool censusDone = sender == btnShowCensusEntered;
             Predicate<CensusIndividual> filter = CreateCensusIndividualFilter(censusDone);
-            Census census = new Census(censusDate);
+            Census census = new Census(cenDate.SelectedDate);
             census.SetupCensus(filter, censusDone);
             if (censusDone)
-                census.Text = "People entered with a " + censusDate.StartDate.Year.ToString() + " " + cenDate.CensusCountry + " Census Record";
+                census.Text = "People entered with a " + cenDate.SelectedDate.StartDate.Year.ToString() + " " + cenDate.CensusCountry + " Census Record";
             else
-                census.Text = "People missing a " + censusDate.StartDate.Year.ToString() + " " + cenDate.CensusCountry + " Census Record that you can search for";
+                census.Text = "People missing a " + cenDate.SelectedDate.StartDate.Year.ToString() + " " + cenDate.CensusCountry + " Census Record that you can search for";
             DisposeDuplicateForms(census);
             census.Show();
         }
@@ -460,21 +459,21 @@ namespace FTAnalyzer
         }
 
         #region Filters
-        private Predicate<CensusIndividual> CreateCensusIndividualFilter(bool censusDone)
+        private Predicate<Individual> CreateCensusIndividualFilter(bool censusDone)
         {
-            Predicate<CensusIndividual> relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
-            Predicate<CensusIndividual> dateFilter = censusDone ?
-                new Predicate<CensusIndividual>(x => x.IsCensusDone(cenDate.SelectedDate)) :
-                new Predicate<CensusIndividual>(x => !x.IsCensusDone(cenDate.SelectedDate));
+            Predicate<Individual> relationFilter = relTypesCensus.BuildFilter<Individual>(x => x.RelationType);
+            Predicate<Individual> dateFilter = censusDone ?
+                new Predicate<Individual>(x => x.IsCensusDone(cenDate.SelectedDate)) :
+                new Predicate<Individual>(x => !x.IsCensusDone(cenDate.SelectedDate));
 
-            Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, dateFilter);
+            Predicate<Individual> filter = FilterUtils.AndFilter<Individual>(relationFilter, dateFilter);
             if (txtSurname.Text.Length > 0)
             {
-                Predicate<CensusIndividual> surnameFilter = FilterUtils.StringFilter<CensusIndividual>(x => x.Surname, txtSurname.Text);
-                filter = FilterUtils.AndFilter<CensusIndividual>(filter, surnameFilter);
+                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtSurname.Text);
+                filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
 
-            filter = FilterUtils.AndFilter<CensusIndividual>(x => x.Age.MinAge < (int)udAgeFilter.Value, filter);
+            filter = FilterUtils.AndFilter<Individual>(x => x.GetAge(cenDate.SelectedDate).MinAge < (int)udAgeFilter.Value, filter);
             return filter;
         }
 
@@ -536,14 +535,9 @@ namespace FTAnalyzer
             rtbLostCousins.SelectionLength = rtbLostCousins.TextLength;
             rtbLostCousins.SelectionFont = new Font(rtbLostCousins.Font, FontStyle.Bold);
             rtbLostCousins.SelectionLength = 0;
-            IEnumerable<Individual> listToCheck;
-            if (ckbRestrictions.Checked)
-            {
-                Predicate<Individual> predicate = new Predicate<Individual>(x => x.IsBloodDirect);
-                listToCheck = ft.AllIndividuals.Where(predicate);
-            }
-            else
-                listToCheck = ft.AllIndividuals;
+
+            Predicate<Individual> relationFilter = CreateCensusIndividualFilter(true);
+            IEnumerable<Individual> listToCheck = ft.AllIndividuals.Where(relationFilter).ToList();
 
             int count1841, countEW1881, countSco1881, countCan1881, countEW1911, countIre1911, count1880, count1940;
             int location1841, locationEW1881, locationSco1881, locationCan1881, locationEW1911, locationIre1911, location1880, location1940;
@@ -610,8 +604,8 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Census census = new Census(censusDate);
-
-            census.SetupLCCensus(ckbRestrictions.Checked, ckbShowLCEntered.Checked);
+            Predicate<CensusIndividual> relationFilter = CreateCensusIndividualFilter(true);
+            census.SetupLCCensus(relationFilter, ckbShowLCEntered.Checked);
             if (ckbShowLCEntered.Checked)
                 census.Text = reportTitle + " already entered into Lost Cousins website";
             else
@@ -703,10 +697,6 @@ namespace FTAnalyzer
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("http://www.lostcousins.com/?ref=LC585149");
-        }
-        private void cenDate_CensusChanged(object sender, EventArgs e)
-        {
-            censusDate = cenDate.SelectedDate;
         }
 
         private void rtbOutput_TextChanged(object sender, EventArgs e)

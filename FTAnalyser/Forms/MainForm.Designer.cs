@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -117,7 +117,6 @@
             this.btnLC1911EW = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.ckbShowLCEntered = new System.Windows.Forms.CheckBox();
-            this.ckbRestrictions = new System.Windows.Forms.CheckBox();
             this.btnLC1841EW = new System.Windows.Forms.Button();
             this.btnLC1911Ireland = new System.Windows.Forms.Button();
             this.btnLC1880USA = new System.Windows.Forms.Button();
@@ -176,6 +175,7 @@
             this.tabSelector = new System.Windows.Forms.TabControl();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.relTypesLC = new Controls.RelationTypes();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -600,14 +600,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 138);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -922,13 +922,13 @@
             // 
             // tabLostCousins
             // 
+            this.tabLostCousins.Controls.Add(this.relTypesLC);
             this.tabLostCousins.Controls.Add(this.btnLC1940USA);
             this.tabLostCousins.Controls.Add(this.rtbLostCousins);
             this.tabLostCousins.Controls.Add(this.linkLabel2);
             this.tabLostCousins.Controls.Add(this.btnLC1911EW);
             this.tabLostCousins.Controls.Add(this.linkLabel1);
             this.tabLostCousins.Controls.Add(this.ckbShowLCEntered);
-            this.tabLostCousins.Controls.Add(this.ckbRestrictions);
             this.tabLostCousins.Controls.Add(this.btnLC1841EW);
             this.tabLostCousins.Controls.Add(this.btnLC1911Ireland);
             this.tabLostCousins.Controls.Add(this.btnLC1880USA);
@@ -945,9 +945,9 @@
             // 
             // btnLC1940USA
             // 
-            this.btnLC1940USA.Location = new System.Drawing.Point(358, 152);
+            this.btnLC1940USA.Location = new System.Drawing.Point(344, 158);
             this.btnLC1940USA.Name = "btnLC1940USA";
-            this.btnLC1940USA.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1940USA.Size = new System.Drawing.Size(162, 27);
             this.btnLC1940USA.TabIndex = 18;
             this.btnLC1940USA.Text = "1940 US Census";
             this.btnLC1940USA.UseVisualStyleBackColor = true;
@@ -957,9 +957,9 @@
             // 
             this.rtbLostCousins.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbLostCousins.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbLostCousins.Location = new System.Drawing.Point(564, 22);
+            this.rtbLostCousins.Location = new System.Drawing.Point(535, 8);
             this.rtbLostCousins.Name = "rtbLostCousins";
-            this.rtbLostCousins.Size = new System.Drawing.Size(340, 329);
+            this.rtbLostCousins.Size = new System.Drawing.Size(388, 388);
             this.rtbLostCousins.TabIndex = 17;
             this.rtbLostCousins.Text = global::FTAnalyzer.Properties.Resources.FTA_0002;
             // 
@@ -967,7 +967,7 @@
             // 
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel2.Location = new System.Drawing.Point(211, 200);
+            this.linkLabel2.Location = new System.Drawing.Point(205, 233);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(174, 16);
             this.linkLabel2.TabIndex = 15;
@@ -977,9 +977,9 @@
             // 
             // btnLC1911EW
             // 
-            this.btnLC1911EW.Location = new System.Drawing.Point(22, 152);
+            this.btnLC1911EW.Location = new System.Drawing.Point(8, 158);
             this.btnLC1911EW.Name = "btnLC1911EW";
-            this.btnLC1911EW.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1911EW.Size = new System.Drawing.Size(162, 27);
             this.btnLC1911EW.TabIndex = 14;
             this.btnLC1911EW.Text = "1911 England && Wales Census";
             this.btnLC1911EW.UseVisualStyleBackColor = true;
@@ -989,7 +989,7 @@
             // 
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(19, 200);
+            this.linkLabel1.Location = new System.Drawing.Point(13, 233);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(186, 16);
             this.linkLabel1.TabIndex = 12;
@@ -1000,7 +1000,7 @@
             // ckbShowLCEntered
             // 
             this.ckbShowLCEntered.AutoSize = true;
-            this.ckbShowLCEntered.Location = new System.Drawing.Point(22, 45);
+            this.ckbShowLCEntered.Location = new System.Drawing.Point(8, 191);
             this.ckbShowLCEntered.Name = "ckbShowLCEntered";
             this.ckbShowLCEntered.Size = new System.Drawing.Size(415, 17);
             this.ckbShowLCEntered.TabIndex = 10;
@@ -1008,25 +1008,11 @@
     "";
             this.ckbShowLCEntered.UseVisualStyleBackColor = true;
             // 
-            // ckbRestrictions
-            // 
-            this.ckbRestrictions.AutoSize = true;
-            this.ckbRestrictions.Checked = true;
-            this.ckbRestrictions.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbRestrictions.Location = new System.Drawing.Point(22, 22);
-            this.ckbRestrictions.Name = "ckbRestrictions";
-            this.ckbRestrictions.Size = new System.Drawing.Size(521, 17);
-            this.ckbRestrictions.TabIndex = 9;
-            this.ckbRestrictions.Text = "Restrict results to only those direct ancestors, blood relations and those marrie" +
-    "d to direct or blood relations";
-            this.ckbRestrictions.UseVisualStyleBackColor = true;
-            this.ckbRestrictions.CheckedChanged += new System.EventHandler(this.ckbRestrictions_CheckedChanged);
-            // 
             // btnLC1841EW
             // 
-            this.btnLC1841EW.Location = new System.Drawing.Point(22, 68);
+            this.btnLC1841EW.Location = new System.Drawing.Point(8, 92);
             this.btnLC1841EW.Name = "btnLC1841EW";
-            this.btnLC1841EW.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1841EW.Size = new System.Drawing.Size(162, 27);
             this.btnLC1841EW.TabIndex = 8;
             this.btnLC1841EW.Text = "1841 England && Wales Census";
             this.btnLC1841EW.UseVisualStyleBackColor = true;
@@ -1034,9 +1020,9 @@
             // 
             // btnLC1911Ireland
             // 
-            this.btnLC1911Ireland.Location = new System.Drawing.Point(190, 152);
+            this.btnLC1911Ireland.Location = new System.Drawing.Point(176, 158);
             this.btnLC1911Ireland.Name = "btnLC1911Ireland";
-            this.btnLC1911Ireland.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1911Ireland.Size = new System.Drawing.Size(162, 27);
             this.btnLC1911Ireland.TabIndex = 7;
             this.btnLC1911Ireland.Text = "1911 Ireland Census";
             this.btnLC1911Ireland.UseVisualStyleBackColor = true;
@@ -1044,9 +1030,9 @@
             // 
             // btnLC1880USA
             // 
-            this.btnLC1880USA.Location = new System.Drawing.Point(190, 68);
+            this.btnLC1880USA.Location = new System.Drawing.Point(176, 92);
             this.btnLC1880USA.Name = "btnLC1880USA";
-            this.btnLC1880USA.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1880USA.Size = new System.Drawing.Size(162, 27);
             this.btnLC1880USA.TabIndex = 6;
             this.btnLC1880USA.Text = "1880 US Census";
             this.btnLC1880USA.UseVisualStyleBackColor = true;
@@ -1054,9 +1040,9 @@
             // 
             // btnLC1881EW
             // 
-            this.btnLC1881EW.Location = new System.Drawing.Point(22, 110);
+            this.btnLC1881EW.Location = new System.Drawing.Point(8, 125);
             this.btnLC1881EW.Name = "btnLC1881EW";
-            this.btnLC1881EW.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1881EW.Size = new System.Drawing.Size(162, 27);
             this.btnLC1881EW.TabIndex = 5;
             this.btnLC1881EW.Text = "1881 England && Wales Census";
             this.btnLC1881EW.UseVisualStyleBackColor = true;
@@ -1064,9 +1050,9 @@
             // 
             // btnLC1881Canada
             // 
-            this.btnLC1881Canada.Location = new System.Drawing.Point(358, 110);
+            this.btnLC1881Canada.Location = new System.Drawing.Point(344, 125);
             this.btnLC1881Canada.Name = "btnLC1881Canada";
-            this.btnLC1881Canada.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1881Canada.Size = new System.Drawing.Size(162, 27);
             this.btnLC1881Canada.TabIndex = 4;
             this.btnLC1881Canada.Text = "1881 Canada Census";
             this.btnLC1881Canada.UseVisualStyleBackColor = true;
@@ -1074,9 +1060,9 @@
             // 
             // btnLC1881Scot
             // 
-            this.btnLC1881Scot.Location = new System.Drawing.Point(190, 110);
+            this.btnLC1881Scot.Location = new System.Drawing.Point(176, 125);
             this.btnLC1881Scot.Name = "btnLC1881Scot";
-            this.btnLC1881Scot.Size = new System.Drawing.Size(162, 36);
+            this.btnLC1881Scot.Size = new System.Drawing.Size(162, 27);
             this.btnLC1881Scot.TabIndex = 0;
             this.btnLC1881Scot.Text = "1881 Scotland Census";
             this.btnLC1881Scot.UseVisualStyleBackColor = true;
@@ -1713,6 +1699,14 @@
             this.restoreDatabase.FileName = "Geocodes.s3db";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // relTypesLC
+            // 
+            this.relTypesLC.Location = new System.Drawing.Point(8, 8);
+            this.relTypesLC.MarriedToDB = true;
+            this.relTypesLC.Name = "relTypesLC";
+            this.relTypesLC.Size = new System.Drawing.Size(325, 78);
+            this.relTypesLC.TabIndex = 19;
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1851,7 +1845,6 @@
         private System.Windows.Forms.Button btnLC1911EW;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.CheckBox ckbShowLCEntered;
-        private System.Windows.Forms.CheckBox ckbRestrictions;
         private System.Windows.Forms.Button btnLC1841EW;
         private System.Windows.Forms.Button btnLC1911Ireland;
         private System.Windows.Forms.Button btnLC1880USA;
@@ -1934,6 +1927,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuRecent3;
         private System.Windows.Forms.ToolStripMenuItem mnuRecent4;
         private System.Windows.Forms.ToolStripMenuItem mnuRecent5;
+        private Controls.RelationTypes relTypesLC;
     }
 }
 

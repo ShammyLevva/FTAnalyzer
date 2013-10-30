@@ -48,22 +48,20 @@ namespace FTAnalyzer.Forms
             SetupDataGridView(censusDone, individuals);
         }
 
-        public void SetupLCCensus(bool onlyBloodOrDirect, bool showEnteredLostCousins)
+        public void SetupLCCensus(Predicate<CensusIndividual> relationFilter, bool showEnteredLostCousins)
         {
             this.LostCousins = true;
             IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, true);
-            Func<CensusIndividual, bool> filter = onlyBloodOrDirect ?
-                new Func<CensusIndividual, bool>(x => x.IsBloodDirect && x.IsCensusDone(CensusDate)) :
-                x => x.IsCensusDone(CensusDate);
-
+            Predicate<CensusIndividual> censusDone = x => x.IsCensusDone(CensusDate);
+            Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, censusDone);
             IEnumerable<CensusIndividual> onCensus = censusFamilies.SelectMany(f => f.Members).Where(filter);
+
             List<CensusIndividual> individuals;
             if (showEnteredLostCousins)
             {
                 IEnumerable<CensusFamily> notOnCensusFamilies = ft.GetAllCensusFamilies(CensusDate, false);
-                filter = onlyBloodOrDirect ?
-                    new Func<CensusIndividual, bool>(x => x.IsBloodDirect && !x.IsCensusDone(CensusDate)) :
-                    x => !x.IsCensusDone(CensusDate);
+                Predicate<CensusIndividual> censusNotDone = x => !x.IsCensusDone(CensusDate);
+                filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, censusNotDone);
                 IEnumerable<CensusIndividual> notOnCensus = notOnCensusFamilies.SelectMany(f => f.Members).Where(filter);
                 IEnumerable<CensusIndividual> allEligible = onCensus.Union(notOnCensus);
 
@@ -75,16 +73,6 @@ namespace FTAnalyzer.Forms
                 Predicate<CensusIndividual> predicate = x => !x.IsLostCousinEntered(CensusDate);
                 individuals = onCensus.Where(predicate).ToList<CensusIndividual>();
             }
-
-            //// Test code
-            //HashSet<string> test = new HashSet<string>(ft.AllIndividuals.Where(
-            //    new Predicate<Individual>(x => x.IsBloodDirect && x.IsLostCousinEntered(CensusDate.SCOTCENSUS1881))).Select(x => x.Ind_ID));
-            //HashSet<string> test2 = new HashSet<string>(individuals.Select(x => x.Ind_ID));
-            //foreach (string id in test)
-            //{
-            //    if (!test2.Contains(id)) Console.WriteLine(id);
-            //}
-
             SetupDataGridView(true, individuals);
         }
 
