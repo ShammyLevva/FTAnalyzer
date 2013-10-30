@@ -11,7 +11,7 @@ namespace FTAnalyzer
 {
     public class Family : IDisplayFamily
     {
-        public static readonly string SINGLE = "Single", MARRIED = "Married", SOLOINDIVIDUAL = "Unrelated";
+        public static readonly string SINGLE = "Single", MARRIED = "Married", SOLOINDIVIDUAL = "Solo";
 
         public string FamilyID { get; private set; }
         public IList<Fact> Facts { get; private set; }
