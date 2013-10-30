@@ -459,24 +459,24 @@ namespace FTAnalyzer
         }
 
         #region Filters
-        private Predicate<Individual> CreateCensusIndividualFilter(bool censusDone)
+        private Predicate<CensusIndividual> CreateCensusIndividualFilter(bool censusDone)
         {
-            Predicate<Individual> relationFilter = relTypesCensus.BuildFilter<Individual>(x => x.RelationType);
-            Predicate<Individual> dateFilter = censusDone ?
-                new Predicate<Individual>(x => x.IsCensusDone(cenDate.SelectedDate)) :
-                new Predicate<Individual>(x => !x.IsCensusDone(cenDate.SelectedDate));
+            Predicate<CensusIndividual> relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
+            Predicate<CensusIndividual> dateFilter = censusDone ?
+                new Predicate<CensusIndividual>(x => x.IsCensusDone(cenDate.SelectedDate)) :
+                new Predicate<CensusIndividual>(x => !x.IsCensusDone(cenDate.SelectedDate));
 
-            Predicate<Individual> filter = FilterUtils.AndFilter<Individual>(relationFilter, dateFilter);
+            Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, dateFilter);
             if (txtSurname.Text.Length > 0)
             {
-                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtSurname.Text);
-                filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
+                Predicate<CensusIndividual> surnameFilter = FilterUtils.StringFilter<CensusIndividual>(x => x.Surname, txtSurname.Text);
+                filter = FilterUtils.AndFilter<CensusIndividual>(filter, surnameFilter);
             }
 
-            filter = FilterUtils.AndFilter<Individual>(x => x.GetAge(cenDate.SelectedDate).MinAge < (int)udAgeFilter.Value, filter);
+            filter = FilterUtils.AndFilter<CensusIndividual>(x => x.Age.MinAge < (int)udAgeFilter.Value, filter);
             return filter;
         }
-
+        
         private Predicate<Individual> createTreeTopsIndividualFilter()
         {
             Predicate<Individual> locationFilter = treetopsCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
@@ -536,7 +536,7 @@ namespace FTAnalyzer
             rtbLostCousins.SelectionFont = new Font(rtbLostCousins.Font, FontStyle.Bold);
             rtbLostCousins.SelectionLength = 0;
 
-            Predicate<Individual> relationFilter = CreateCensusIndividualFilter(true);
+            Predicate<Individual> relationFilter = relTypesCensus.BuildFilter<Individual>(x => x.RelationType);
             IEnumerable<Individual> listToCheck = ft.AllIndividuals.Where(relationFilter).ToList();
 
             int count1841, countEW1881, countSco1881, countCan1881, countEW1911, countIre1911, count1880, count1940;
@@ -604,7 +604,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Census census = new Census(censusDate);
-            Predicate<CensusIndividual> relationFilter = CreateCensusIndividualFilter(true);
+            Predicate<CensusIndividual> relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
             census.SetupLCCensus(relationFilter, ckbShowLCEntered.Checked);
             if (ckbShowLCEntered.Checked)
                 census.Text = reportTitle + " already entered into Lost Cousins website";
