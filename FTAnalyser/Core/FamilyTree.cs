@@ -574,6 +574,7 @@ namespace FTAnalyzer
                             minEnd = minChild;
                         if (!indiv.IsMale)
                         {  // for females check that not over 60 when child is born
+                            int maxChildYear = fam.Children.Max(child => child.BirthDate.StartDate).Year;
                             DateTime maxChild = new DateTime(minChildYear - 60, 1, 1);
                             if (maxChild > minStart)
                                 minStart = maxChild;
