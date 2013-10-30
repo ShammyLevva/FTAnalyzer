@@ -271,7 +271,7 @@ namespace FTAnalyzer.Forms
 
         private void dgCensus_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
         {
-             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 dgCensus.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
         }
     }

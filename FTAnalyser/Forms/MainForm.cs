@@ -617,6 +617,14 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        private void btnLCMissingCountry_Click(object sender, EventArgs e)
+        {
+            Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
+            People people = new People();
+            people.SetupLCNoCountry(relationFilter);
+            people.Show();
+        }
+
         private void btnLC1881EW_Click(object sender, EventArgs e)
         {
             string reportTitle = "1881 England & Wales Census Records on file";

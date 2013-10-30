@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FTAnalyzer.Utilities;
+using FTAnalyzer.Filters;
 
 namespace FTAnalyzer.Forms
 {
@@ -49,6 +50,35 @@ namespace FTAnalyzer.Forms
                 dsInd.Add(i);
             dgIndividuals.DataSource = dsInd;
             dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
+            dgIndividuals.Dock = DockStyle.Fill;
+
+            dgFamilies.Visible = false;
+        }
+
+        public void SetupLCNoCountry(Predicate<Individual> relationFilter)
+        {
+            Predicate<Individual> lcFacts = x => x.LostCousinsFacts > 0;
+            Predicate<Individual> filter = FilterUtils.AndFilter<Individual>(relationFilter, lcFacts);
+            IEnumerable<Individual> listToCheck = FamilyTree.Instance.AllIndividuals.Where(filter).ToList();
+           
+            Predicate<Individual> missing = x => !x.IsLostCousinEntered(CensusDate.EWCENSUS1841, false)
+                                              && !x.IsLostCousinEntered(CensusDate.EWCENSUS1881, false)
+                                              && !x.IsLostCousinEntered(CensusDate.SCOTCENSUS1881, false)
+                                              && !x.IsLostCousinEntered(CensusDate.CANADACENSUS1881, false)
+                                              && !x.IsLostCousinEntered(CensusDate.EWCENSUS1911, false)
+                                              && !x.IsLostCousinEntered(CensusDate.IRELANDCENSUS1911, false)
+                                              && !x.IsLostCousinEntered(CensusDate.USCENSUS1880, false)
+                                              && !x.IsLostCousinEntered(CensusDate.USCENSUS1940, false);
+            List<Individual> individuals = listToCheck.Where(missing).ToList<Individual>();
+            SetIndividuals(individuals, "Lost Cousins with No Country");
+        }
+
+        public void SetIndividuals(List<Individual> individuals, string reportTitle)
+        {
+            this.Text = reportTitle;
+            dgIndividuals.DataSource = new SortableBindingList<IDisplayIndividual>(individuals);
+            dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
+            dgIndividuals.Sort(dgIndividuals.Columns[1], ListSortDirection.Ascending);
             dgIndividuals.Dock = DockStyle.Fill;
 
             dgFamilies.Visible = false;
@@ -137,9 +167,20 @@ namespace FTAnalyzer.Forms
 
         private void People_Resize(object sender, EventArgs e)
         {
-            int height = (this.Height - 40) / 2;
-            dgIndividuals.Height = height;
-            dgFamilies.Height = height;
+            int height;
+            if (families == null)
+            {
+                dgIndividuals.Height = this.Height;
+                dgFamilies.Visible = false;
+            }
+            else
+            {
+                height = (this.Height - 40) / 2;
+                dgIndividuals.Height = height;
+                dgFamilies.Visible = true;
+                dgFamilies.Height = height;
+            }
+
         }
 
         private void dgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

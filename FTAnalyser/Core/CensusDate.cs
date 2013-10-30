@@ -10,6 +10,8 @@ namespace FTAnalyzer
         private string displayName;
         public string Country { get; private set; }
 
+        public static readonly CensusDate ANYCENSUS = new CensusDate("BET 1790 AND 1940", "Any Census", Countries.UNKNOWN_COUNTRY);
+
         public static readonly CensusDate UKCENSUS1841 = new CensusDate("06 JUN 1841", "UK Census 1841", Countries.UNITED_KINGDOM);
         public static readonly CensusDate UKCENSUS1851 = new CensusDate("30 MAR 1851", "UK Census 1851", Countries.UNITED_KINGDOM);
         public static readonly CensusDate UKCENSUS1861 = new CensusDate("07 APR 1861", "UK Census 1861", Countries.UNITED_KINGDOM);

@@ -568,9 +568,16 @@ namespace FTAnalyzer
                     }
                     if(fam.Children.Count > 0)
                     {   // must be at least X years old at birth of child
-                        DateTime minChild = fam.Children.Min(child => child.BirthDate.EndDate);
+                        int minChildYear = fam.Children.Min(child => child.BirthDate.EndDate).Year;
+                        DateTime minChild = new DateTime(minChildYear - Properties.GeneralSettings.Default.MinParentalAge, 12, 31);
                         if (minChild < minEnd && minChild >= minStart)
                             minEnd = minChild;
+                        if (!indiv.IsMale)
+                        {  // for females check that not over 60 when child is born
+                            DateTime maxChild = new DateTime(minChildYear - 60, 1, 1);
+                            if (maxChild > minStart)
+                                minStart = maxChild;
+                        }
                     }
                 }
                 foreach (Family fam in indiv.FamiliesAsChild)
