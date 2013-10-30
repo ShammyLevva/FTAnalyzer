@@ -1413,11 +1413,6 @@ namespace FTAnalyzer
             Process.Start("http://ftanalyzer.codeplex.com/wikipage?title=What%27s%20New%20in%20this%20Release%3f");
         }
 
-        private void btnLCReport_Click(object sender, EventArgs e)
-        {
-            tabSelector.SelectedTab = tabSelector.TabPages["tabColourReports"];
-        }
-
         private void mnuShowTimeline_Click(object sender, EventArgs e)
         {
             HourGlass(true);
