@@ -65,20 +65,28 @@ namespace FTAnalyzer.Forms
             UpdateStatusCount();
         }
 
+        public void SetupLCDuplicates(Predicate<Individual> relationFilter)
+        {
+            Predicate<Individual> lcFacts = i => i.DuplicateLCFacts > 0;
+            Predicate<Individual> filter = FilterUtils.AndFilter<Individual>(relationFilter, lcFacts);
+            List<Individual> individuals = FamilyTree.Instance.AllIndividuals.Where(filter).ToList();
+            SetIndividuals(individuals, "Lost Cousins with Duplicate Facts");
+        }
+
         public void SetupLCNoCountry(Predicate<Individual> relationFilter)
         {
             Predicate<Individual> lcFacts = x => x.LostCousinsFacts > 0;
             Predicate<Individual> filter = FilterUtils.AndFilter<Individual>(relationFilter, lcFacts);
             IEnumerable<Individual> listToCheck = FamilyTree.Instance.AllIndividuals.Where(filter).ToList();
            
-            Predicate<Individual> missing = x => !x.IsLostCousinEntered(CensusDate.EWCENSUS1841, false)
-                                              && !x.IsLostCousinEntered(CensusDate.EWCENSUS1881, false)
-                                              && !x.IsLostCousinEntered(CensusDate.SCOTCENSUS1881, false)
-                                              && !x.IsLostCousinEntered(CensusDate.CANADACENSUS1881, false)
-                                              && !x.IsLostCousinEntered(CensusDate.EWCENSUS1911, false)
-                                              && !x.IsLostCousinEntered(CensusDate.IRELANDCENSUS1911, false)
-                                              && !x.IsLostCousinEntered(CensusDate.USCENSUS1880, false)
-                                              && !x.IsLostCousinEntered(CensusDate.USCENSUS1940, false);
+            Predicate<Individual> missing = x => !x.IsLostCousinsEntered(CensusDate.EWCENSUS1841, false)
+                                              && !x.IsLostCousinsEntered(CensusDate.EWCENSUS1881, false)
+                                              && !x.IsLostCousinsEntered(CensusDate.SCOTCENSUS1881, false)
+                                              && !x.IsLostCousinsEntered(CensusDate.CANADACENSUS1881, false)
+                                              && !x.IsLostCousinsEntered(CensusDate.EWCENSUS1911, false)
+                                              && !x.IsLostCousinsEntered(CensusDate.IRELANDCENSUS1911, false)
+                                              && !x.IsLostCousinsEntered(CensusDate.USCENSUS1880, false)
+                                              && !x.IsLostCousinsEntered(CensusDate.USCENSUS1940, false);
             List<Individual> individuals = listToCheck.Where(missing).ToList<Individual>();
             SetIndividuals(individuals, "Lost Cousins with No Country");
         }

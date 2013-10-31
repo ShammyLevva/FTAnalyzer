@@ -995,21 +995,21 @@ namespace FTAnalyzer
 
         #region Displays
 
-        public IEnumerable<CensusFamily> GetAllCensusFamilies(CensusDate censusDate, bool censusDone)
+        public IEnumerable<CensusFamily> GetAllCensusFamilies(CensusDate censusDate, bool censusDone, bool checkCensus)
         {
             if (censusDate != null)
             {
                 foreach (Family f in families)
                 {
                     CensusFamily cf = new CensusFamily(f, censusDate);
-                    if (cf.Process(censusDate, censusDone))
+                    if (cf.Process(censusDate, censusDone, checkCensus))
                         yield return cf;
                 }
                 // also add all individuals that don't ever appear as a child as they may have census facts for when they are children
                 foreach (Individual ind in individuals.Where(x => x.FamiliesAsChild.Count == 0))
                 {
                     CensusFamily cf = new CensusFamily(new Family(ind), censusDate);
-                    if (cf.Process(censusDate, censusDone))
+                    if (cf.Process(censusDate, censusDone, checkCensus))
                         yield return cf;
                 }
             }

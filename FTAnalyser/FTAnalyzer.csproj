@@ -380,6 +380,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ClassDiagram1.cd" />
     <None Include="FTAnalyzer_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\GeneralSettings.settings">

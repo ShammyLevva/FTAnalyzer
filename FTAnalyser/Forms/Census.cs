@@ -43,7 +43,7 @@ namespace FTAnalyzer.Forms
 
         public void SetupCensus(Predicate<CensusIndividual> filter, bool censusDone)
         {
-            IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, censusDone);
+            IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, censusDone, true);
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Where(filter).ToList();
             SetupDataGridView(censusDone, individuals);
         }
@@ -51,28 +51,14 @@ namespace FTAnalyzer.Forms
         public void SetupLCCensus(Predicate<CensusIndividual> relationFilter, bool showEnteredLostCousins)
         {
             this.LostCousins = true;
-            IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, true);
-            Predicate<CensusIndividual> censusDone = x => x.IsCensusDone(CensusDate);
-            Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, censusDone);
-            IEnumerable<CensusIndividual> onCensus = censusFamilies.SelectMany(f => f.Members).Where(filter);
-
-            List<CensusIndividual> individuals;
+            Predicate<CensusIndividual> predicate;
             if (showEnteredLostCousins)
-            {
-                IEnumerable<CensusFamily> notOnCensusFamilies = ft.GetAllCensusFamilies(CensusDate, false);
-                Predicate<CensusIndividual> censusNotDone = x => !x.IsCensusDone(CensusDate);
-                filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, censusNotDone);
-                IEnumerable<CensusIndividual> notOnCensus = notOnCensusFamilies.SelectMany(f => f.Members).Where(filter);
-                IEnumerable<CensusIndividual> allEligible = onCensus.Union(notOnCensus);
-
-                Predicate<CensusIndividual> predicate = x => x.IsLostCousinEntered(CensusDate);
-                individuals = allEligible.Where(predicate).ToList<CensusIndividual>();
-            }
+                predicate = x => x.IsLostCousinsEntered(CensusDate);
             else
-            {
-                Predicate<CensusIndividual> predicate = x => !x.IsLostCousinEntered(CensusDate);
-                individuals = onCensus.Where(predicate).ToList<CensusIndividual>();
-            }
+                predicate = x => !x.IsLostCousinsEntered(CensusDate);
+            IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, true, !showEnteredLostCousins);
+            Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, predicate);
+            List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Where(filter).ToList();
             SetupDataGridView(true, individuals);
         }
 

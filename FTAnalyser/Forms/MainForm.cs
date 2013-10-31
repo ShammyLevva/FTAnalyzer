@@ -546,14 +546,14 @@ namespace FTAnalyzer
             location1841 = locationEW1881 = locationSco1881 = locationCan1881 = locationEW1911 = locationIre1911 = location1880 = location1940 = 0;
             foreach (Individual ind in listToCheck)
             {
-                count1841 += (ind.IsLostCousinEntered(CensusDate.EWCENSUS1841, false) ? 1 : 0);
-                countEW1881 += (ind.IsLostCousinEntered(CensusDate.EWCENSUS1881, false) ? 1 : 0);
-                countSco1881 += (ind.IsLostCousinEntered(CensusDate.SCOTCENSUS1881, false) ? 1 : 0);
-                countCan1881 += (ind.IsLostCousinEntered(CensusDate.CANADACENSUS1881, false) ? 1 : 0);
-                countEW1911 += (ind.IsLostCousinEntered(CensusDate.EWCENSUS1911, false) ? 1 : 0);
-                countIre1911 += (ind.IsLostCousinEntered(CensusDate.IRELANDCENSUS1911, false) ? 1 : 0);
-                count1880 += (ind.IsLostCousinEntered(CensusDate.USCENSUS1880, false) ? 1 : 0);
-                count1940 += (ind.IsLostCousinEntered(CensusDate.USCENSUS1940, false) ? 1 : 0);
+                count1841 += (ind.IsLostCousinsEntered(CensusDate.EWCENSUS1841, false) ? 1 : 0);
+                countEW1881 += (ind.IsLostCousinsEntered(CensusDate.EWCENSUS1881, false) ? 1 : 0);
+                countSco1881 += (ind.IsLostCousinsEntered(CensusDate.SCOTCENSUS1881, false) ? 1 : 0);
+                countCan1881 += (ind.IsLostCousinsEntered(CensusDate.CANADACENSUS1881, false) ? 1 : 0);
+                countEW1911 += (ind.IsLostCousinsEntered(CensusDate.EWCENSUS1911, false) ? 1 : 0);
+                countIre1911 += (ind.IsLostCousinsEntered(CensusDate.IRELANDCENSUS1911, false) ? 1 : 0);
+                count1880 += (ind.IsLostCousinsEntered(CensusDate.USCENSUS1880, false) ? 1 : 0);
+                count1940 += (ind.IsLostCousinsEntered(CensusDate.USCENSUS1940, false) ? 1 : 0);
 
                 location1841 += (ind.MissingLostCousins(CensusDate.EWCENSUS1841, false) ? 1 : 0);
                 locationEW1881 += (ind.MissingLostCousins(CensusDate.EWCENSUS1881, false) ? 1 : 0);
@@ -611,7 +611,7 @@ namespace FTAnalyzer
             Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType);
             census.SetupLCCensus(relationFilter, ckbShowLCEntered.Checked);
             if (ckbShowLCEntered.Checked)
-                census.Text = reportTitle + " already entered into Lost Cousins website";
+                census.Text = reportTitle + " already entered into Lost Cousins website (includes entries with no country)";
             else
                 census.Text = reportTitle + " to enter into Lost Cousins website";
 
@@ -626,6 +626,20 @@ namespace FTAnalyzer
             People people = new People();
             people.SetupLCNoCountry(relationFilter);
             DisposeDuplicateForms(people); 
+            people.Show();
+        }
+
+        private void relTypesLC_RelationTypesChanged(object sender, EventArgs e)
+        {
+            UpdateLostCousinsReport();
+        }
+
+        private void btnLCDuplicates_Click(object sender, EventArgs e)
+        {
+            Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
+            People people = new People();
+            people.SetupLCDuplicates(relationFilter);
+            DisposeDuplicateForms(people);
             people.Show();
         }
 
@@ -1570,11 +1584,6 @@ namespace FTAnalyzer
         {
             string filename = (string)(sender as ToolStripMenuItem).Tag;
             LoadFile(filename);
-        }
-
-        private void relTypesLC_RelationTypesChanged(object sender, EventArgs e)
-        {
-            UpdateLostCousinsReport();
         }
     }
 }

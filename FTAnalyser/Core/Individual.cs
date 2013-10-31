@@ -547,8 +547,8 @@ namespace FTAnalyzer
             return false;
         }
 
-        public bool IsLostCousinEntered(CensusDate when) { return IsLostCousinEntered(when, true); }
-        public bool IsLostCousinEntered(CensusDate when, bool includeUnknownCountries)
+        public bool IsLostCousinsEntered(CensusDate when) { return IsLostCousinsEntered(when, true); }
+        public bool IsLostCousinsEntered(CensusDate when, bool includeUnknownCountries)
         {
             Predicate<Fact> p = new Predicate<Fact>(f => f.FactType == Fact.LOSTCOUSINS && f.FactDate.IsKnown && f.FactDate.Overlaps(when));
             return facts.Any<Fact>(f => p(f) && this.BestLocation(when).CensusCountryMatches(when.Country, includeUnknownCountries));
@@ -575,7 +575,7 @@ namespace FTAnalyzer
         public bool MissingLostCousins(CensusDate censusDate, bool includeUnknownCountries)
         {
             bool isCensusDone = IsCensusDone(censusDate, includeUnknownCountries);
-            bool isLostCousinsEntered = IsLostCousinEntered(censusDate, includeUnknownCountries);
+            bool isLostCousinsEntered = IsLostCousinsEntered(censusDate, includeUnknownCountries);
             return isCensusDone && !isLostCousinsEntered;
         }
 
@@ -810,14 +810,14 @@ namespace FTAnalyzer
             {
                 if (IsCensusDone(census, true, false) || IsCensusDone(census.EquivalentUSCensus, true, false))
                     return 6; // checks if on census outside UK in census year or on prior year (to check US census)
-                if (CensusDate.IsLostCousinsCensusYear(census, true) && IsLostCousinEntered(census))
+                if (CensusDate.IsLostCousinsCensusYear(census, true) && IsLostCousinsEntered(census))
                     return 5; // LC entered but no census entered - orange
                 else
                     return 1; // no census - red
             }
             if (!CensusDate.IsLostCousinsCensusYear(census, true))
                 return 3; // census entered but not LCyear - green
-            if (IsLostCousinEntered(census))
+            if (IsLostCousinsEntered(census))
                 return 4; // census + Lost cousins entered - green
             else
                 return 2; // census entered LC not entered - yellow
@@ -1011,7 +1011,7 @@ namespace FTAnalyzer
             get
             {
                 if (!AliveOnAnyCensus) return 0;
-                int numMissing = CensusDate.LOSTCOUSINS_CENSUS.Count(x => this.IsCensusDone(x) && !this.IsLostCousinEntered(x));
+                int numMissing = CensusDate.LOSTCOUSINS_CENSUS.Count(x => this.IsCensusDone(x) && !this.IsLostCousinsEntered(x));
                 return numMissing;
             }
         }

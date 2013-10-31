@@ -11,12 +11,22 @@ namespace FTAnalyzer
 
         public CensusDate CensusDate { get; private set; }
         public FactLocation BestLocation { get; private set; }
+        public new CensusIndividual Husband { get; private set; }
+        public new CensusIndividual Wife { get; private set; }
+        public new List<CensusIndividual> Children { get; private set; }
 
         public CensusFamily(Family f, CensusDate censusDate)
             : base(f)
         {
             this.CensusDate = censusDate;
             this.BestLocation = null;
+            this.Wife = Members.FirstOrDefault(x => x.Ind_ID == f.WifeID);
+            this.Husband = Members.FirstOrDefault(x => x.Ind_ID == f.HusbandID);
+            this.Children = new List<CensusIndividual>();
+            foreach (Individual child in f.Children)
+            {
+                this.Children.Add(Members.FirstOrDefault(x => x.Ind_ID == child.Ind_ID));
+            }
         }
 
         public new IEnumerable<CensusIndividual> Members
@@ -24,14 +34,14 @@ namespace FTAnalyzer
             get { return base.Members.Select((i, pos) => new CensusIndividual(pos, i, this)); }
         }
 
-        public bool Process(CensusDate censusDate, bool censusDone)
+        public bool Process(CensusDate censusDate, bool censusDone, bool checkCensus)
         {
             bool result = false;
             this.CensusDate = censusDate;
             List<Fact> facts = new List<Fact>();
             if (IsValidFamily())
             {
-                if (IsValidIndividual(Wife, censusDone, true))
+                if (IsValidIndividual(this.Wife, censusDone, true, checkCensus))
                 {
                     result = true;
                     Wife.Status = Individual.WIFE;
@@ -41,7 +51,7 @@ namespace FTAnalyzer
                     Wife = null;
                 // overwrite bestLocation by husbands as most commonly the family
                 // end up at husbands location after marriage
-                if (IsValidIndividual(Husband, censusDone, true))
+                if (IsValidIndividual(Husband, censusDone, true, checkCensus))
                 {
                     result = true;
                     Husband.Status = Individual.HUSBAND;
@@ -54,16 +64,16 @@ namespace FTAnalyzer
                 Fact marriage = GetPreferredFact(Fact.MARRIAGE);
                 if (marriage != null)
                     facts.Add(marriage);
-                List<Individual> censusChildren = new List<Individual>();
+                List<CensusIndividual> censusChildren = new List<CensusIndividual>();
                 // sort children oldest first
                 Children.Sort(new CensusAgeComparer());
-                foreach (Individual child in Children)
+                foreach (CensusIndividual child in Children)
                 {
                     // set location to childs birth location
                     // this will end up setting birth location of last child 
                     // as long as the location is at least Parish level
                     child.Status = Individual.CHILD;
-                    if (IsValidIndividual(child, censusDone, false))
+                    if (IsValidIndividual(child, censusDone, false, checkCensus))
                     {
                         result = true;
                         censusChildren.Add(child);
@@ -76,18 +86,25 @@ namespace FTAnalyzer
             return result;
         }
 
-        private bool IsValidIndividual(Individual indiv, bool censusDone, bool parentCheck)
+        private bool IsValidIndividual(CensusIndividual indiv, bool censusDone, bool parentCheck, bool checkCensus)
         {
             if (indiv == null)
                 return false;
             DateTime birth = indiv.BirthDate.StartDate;
             DateTime death = indiv.DeathDate.EndDate;
-            if (birth < CensusDate.StartDate && death > CensusDate.StartDate && indiv.IsCensusDone(CensusDate) == censusDone)
+            FactLocation bestLocation = indiv.BestLocation(CensusDate);
+            if (birth < CensusDate.StartDate && death > CensusDate.StartDate && 
+                (!bestLocation.IsKnownCountry || CensusDate.IsCensusCountry(CensusDate, bestLocation)))
             {
-                if (parentCheck) // Husband or Wife with valid date range
-                    return true;
-                else // individual is a child so remove if married before census date
-                    return !indiv.IsMarried(CensusDate);
+                if ((checkCensus && indiv.IsCensusDone(CensusDate) == censusDone) || !checkCensus)
+                {
+                    if (parentCheck) // Husband or Wife with valid date range
+                        return true;
+                    else // individual is a child so remove if married before census date
+                        return !indiv.IsMarried(CensusDate);
+                }
+                else
+                    return false;
             }
             else
                 return false;
