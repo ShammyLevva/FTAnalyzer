@@ -78,7 +78,7 @@ namespace FTAnalyzer.Forms
 
         private void SetupDataGridView(bool censusDone, List<CensusIndividual> individuals)
         {
-            dgCensus.DataSource = new SortableBindingList<CensusIndividual>(individuals);
+            dgCensus.DataSource = new SortableBindingList<IDisplayCensus>(individuals);
             if (!censusDone)
                 dgCensus.Columns["CensusReference"].Visible = false;
             reportFormHelper.LoadColumnLayout("CensusColumns.xml");

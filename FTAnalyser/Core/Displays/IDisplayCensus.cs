@@ -8,6 +8,7 @@ namespace FTAnalyzer
     public interface IDisplayCensus
     {
         string FamilyID { get; }
+        int Position { get; }
         string Ind_ID { get; }
         FactLocation CensusLocation { get; }
         string CensusName { get; }

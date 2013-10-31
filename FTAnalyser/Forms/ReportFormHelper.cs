@@ -74,7 +74,8 @@ namespace FTAnalyzer
         {
             parent.Cursor = Cursors.WaitCursor;
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            DataTable dt = convertor.ToDataTable((ReportGrid.DataSource as SortableBindingList<T>).ToList());
+            SortableBindingList<T> gridDatasource = ReportGrid.DataSource as SortableBindingList<T>;
+            DataTable dt = convertor.ToDataTable(gridDatasource.ToList());
             ExportToExcel.Export(dt);
             parent.Cursor = Cursors.Default;
         }
