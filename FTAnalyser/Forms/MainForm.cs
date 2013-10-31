@@ -622,6 +622,7 @@ namespace FTAnalyzer
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
             People people = new People();
             people.SetupLCNoCountry(relationFilter);
+            DisposeDuplicateForms(people); 
             people.Show();
         }
 

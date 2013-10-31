@@ -25,7 +25,7 @@ namespace FTAnalyzer
 
         public FactLocation CensusLocation
         {
-            get { return family.BestLocation; }
+            get { return IsCensusDone(family.CensusDate) ? BestLocation(family.CensusDate) : family.BestLocation; }
         }
 
         public FactDate CensusDate
