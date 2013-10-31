@@ -560,6 +560,18 @@ namespace FTAnalyzer
             return facts.Any<Fact>(f => p(f) && !this.BestLocation(when).IsKnownCountry);
         }
 
+        private FactComparer factComparer = new FactComparer();
+
+        public int DuplicateLCFacts
+        {
+            get
+            {
+                IEnumerable<Fact> lcFacts = AllFacts.Where(f => f.FactType == Fact.LOSTCOUSINS);
+                int distinctFacts = lcFacts.Distinct(factComparer).Count();
+                return LostCousinsFacts - distinctFacts;
+            }
+        }
+
         public bool MissingLostCousins(CensusDate censusDate, bool includeUnknownCountries)
         {
             bool isCensusDone = IsCensusDone(censusDate, includeUnknownCountries);

@@ -565,19 +565,9 @@ namespace FTAnalyzer
                 location1940 += (ind.MissingLostCousins(CensusDate.USCENSUS1940, false) ? 1 : 0);
             }
 
-            int total = count1841 + countEW1881 + countSco1881 + countCan1881 + countEW1911 + countIre1911 + count1880 + count1940;
-            Predicate<Individual> lcf = i => i.LostCousinsFacts > 0;
+            int moreThanOneLCfact = listToCheck.Sum(i => i.DuplicateLCFacts);
             int LCtotal = listToCheck.Sum(i => i.LostCousinsFacts);
-            //List<Individual> lcfacts = listToCheck.Where(lcf).ToList();
-            //int index = 1;
-            //foreach (Individual ind in lcfacts)
-            //{
-            //    foreach (Fact f in ind.AllFacts)
-            //    {
-            //        if (f.FactType == Fact.LOSTCOUSINS)
-            //            Console.WriteLine(index++ + ": " + ind.ToString() + " " + f.ToString());
-            //    }
-            //}
+            int total = count1841 + countEW1881 + countSco1881 + countCan1881 + countEW1911 + countIre1911 + count1880 + count1940 + moreThanOneLCfact;
             int missingtotal = location1841 + locationEW1881 + locationSco1881 + locationCan1881 + locationEW1911 + locationIre1911 + location1880 + location1940;
 
             rtbLostCousins.AppendText("1881 England & Wales Census: " + countEW1881 + " Found, " + locationEW1881 + " Missing\n");
@@ -593,6 +583,8 @@ namespace FTAnalyzer
             rtbLostCousins.AppendText("1880 US Census: " + count1880 + " Found, " + location1880 + " Missing\n");
             rtbLostCousins.AppendText("1940 US Census: " + count1940 + " Found, " + location1940 + " Missing\n");
             rtbLostCousins.AppendText("_____________________________________________\n");
+            if(moreThanOneLCfact > 0)
+                rtbLostCousins.AppendText("Duplicate LostCousins facts: " + moreThanOneLCfact + "\n");
             if (LCtotal > total)
             {
                 rtbLostCousins.AppendText("LostCousins fact with no country: " + (LCtotal - total));

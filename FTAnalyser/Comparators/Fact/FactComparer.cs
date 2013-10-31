@@ -5,11 +5,23 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    public class FactComparer : Comparer<IDisplayFact>
+    public class FactComparer : IEqualityComparer<Fact>
     {
-        public override int Compare(IDisplayFact f1, IDisplayFact f2)
+        public bool Equals(Fact x, Fact y)
         {
-            return f1.FactDate.CompareTo(f2.FactDate);
+            return x.FactType == y.FactType && x.FactDate == y.FactDate && x.Location == y.Location;
+        }
+
+        public int GetHashCode(Fact obj)
+        {
+            int code = IntDate(obj.FactDate.StartDate) * 10 + IntDate(obj.FactDate.EndDate);
+            return code;
+        }
+
+        private int IntDate(DateTime date)
+        {
+            int dayhash = (date.Year * 100 + date.Month) * 100 + date.Day;
+            return dayhash;
         }
     }
 }
