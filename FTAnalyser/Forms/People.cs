@@ -22,6 +22,14 @@ namespace FTAnalyzer.Forms
             People_Resize(this, null);
         }
 
+        private void UpdateStatusCount()
+        {
+            if (dgFamilies.Visible)
+                txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals and " + dgFamilies.RowCount + " Families.";
+            else
+                txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals.";
+        }
+
         public void SetLocation(FactLocation loc, int level)
         {
             this.Text = "Individuals & Families with connection to " + loc.ToString();
@@ -40,6 +48,7 @@ namespace FTAnalyzer.Forms
                 dsFam.Add(f);
             dgFamilies.DataSource = dsFam;
             dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
+            UpdateStatusCount();
         }
 
         public void SetWorkers(string job, SortableBindingList<Individual> workers)
@@ -53,6 +62,7 @@ namespace FTAnalyzer.Forms
             dgIndividuals.Dock = DockStyle.Fill;
 
             dgFamilies.Visible = false;
+            UpdateStatusCount();
         }
 
         public void SetupLCNoCountry(Predicate<Individual> relationFilter)
@@ -82,6 +92,7 @@ namespace FTAnalyzer.Forms
             dgIndividuals.Dock = DockStyle.Fill;
 
             dgFamilies.Visible = false;
+            UpdateStatusCount();
         }
 
         public bool OlderParents(int minAge)
@@ -170,12 +181,12 @@ namespace FTAnalyzer.Forms
             int height;
             if (families == null)
             {
-                dgIndividuals.Height = this.Height;
+                dgIndividuals.Height = this.Height - statusStrip1.Height;
                 dgFamilies.Visible = false;
             }
             else
             {
-                height = (this.Height - 40) / 2;
+                height = (this.Height - 40 - statusStrip1.Height) / 2;
                 dgIndividuals.Height = height;
                 dgFamilies.Visible = true;
                 dgFamilies.Height = height;

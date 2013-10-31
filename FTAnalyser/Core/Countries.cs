@@ -160,11 +160,11 @@ namespace FTAnalyzer
         });
 
         private static readonly ISet<string> UK_COUNTRIES = new HashSet<string>(new string[] { 
-            SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM, NORTHERN_IRELAND
+            SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM, NORTHERN_IRELAND, ISLE_OF_MAN
         });
 
         private static readonly ISet<string> CENSUS_COUNTRIES = new HashSet<string>(new string[] { 
-            SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM, UNITED_STATES, CANADA
+            SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM, UNITED_STATES, CANADA, ISLE_OF_MAN
         });
 
         private static Dictionary<string, Envelope> BOUNDING_BOXES;
@@ -209,7 +209,7 @@ namespace FTAnalyzer
 
         public static bool IsEnglandWales(string country)
         {
-            return country.Equals(ENG_WALES) || country.Equals(ENGLAND) || country.Equals(WALES);
+            return country.Equals(ENG_WALES) || country.Equals(ENGLAND) || country.Equals(WALES) || country.Equals(ISLE_OF_MAN);
         }
 
         public static Envelope BoundingBox(string country)
