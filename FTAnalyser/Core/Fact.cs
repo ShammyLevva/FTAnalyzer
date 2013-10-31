@@ -262,12 +262,13 @@ namespace FTAnalyzer
                             Tag = tag;
                         }
                     }
-                    else if (FactType.Equals(CENSUS))
-                    {
-                        CheckCensusDate("Census");
-                    }
                     SetCommentAndLocation(FactType, FamilyTree.GetText(node), FamilyTree.GetText(node, "PLAC"),
                         FamilyTree.GetText(node, "PLAC/MAP/LATI"), FamilyTree.GetText(node, "PLAC/MAP/LONG"));
+                    
+                    if (FactType.Equals(CENSUS) && Location.IsUnitedKingdom)
+                    {  // only check UK census dates for errors as those are used for colour census
+                        CheckCensusDate("Census");
+                    }
 
                     // need to check residence after setting location
                     if (FactType.Equals(RESIDENCE) && Properties.GeneralSettings.Default.UseResidenceAsCensus)
