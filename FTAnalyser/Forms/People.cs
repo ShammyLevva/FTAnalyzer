@@ -84,7 +84,7 @@ namespace FTAnalyzer.Forms
                 individuals.AddRange(censusMissing);
             }
             individuals = individuals.Distinct<Individual>().ToList();
-            SetIndividuals(individuals, "Lost Cousins with Duplicate Facts");
+            SetIndividuals(individuals, "Lost Cousins with no corresponding census entry");
         }
 
         public void SetupLCNoCountry(Predicate<Individual> relationFilter)

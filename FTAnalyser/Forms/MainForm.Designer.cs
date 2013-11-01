@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -128,12 +128,13 @@
             this.btnLC1881Canada = new System.Windows.Forms.Button();
             this.btnLC1881Scot = new System.Windows.Forms.Button();
             this.tabCensus = new System.Windows.Forms.TabPage();
-            this.btnShowCensusEntered = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnDuplicateCensus = new System.Windows.Forms.Button();
+            this.btnMissingCensusLocation = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSurname = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
-            this.btnShowCensusMissing = new System.Windows.Forms.Button();
             this.cenDate = new Controls.CensusDateSelector();
             this.relTypesCensus = new Controls.RelationTypes();
             this.tabLooseBirthDeaths = new System.Windows.Forms.TabPage();
@@ -179,9 +180,9 @@
             this.tabSelector = new System.Windows.Forms.TabControl();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnMissingCensusLocation = new System.Windows.Forms.Button();
-            this.btnDuplicateCensus = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnShowCensusMissing = new System.Windows.Forms.Button();
+            this.btnShowCensusEntered = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -195,6 +196,7 @@
             this.tabColourReports.SuspendLayout();
             this.tabLostCousins.SuspendLayout();
             this.tabCensus.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
             this.tabLooseBirthDeaths.SuspendLayout();
             this.tabCtrlLooseBDs.SuspendLayout();
@@ -223,7 +225,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.tabDisplayProgress.SuspendLayout();
             this.tabSelector.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -607,14 +609,14 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 138);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1123,13 +1125,12 @@
             // 
             // tabCensus
             // 
+            this.tabCensus.Controls.Add(this.groupBox2);
             this.tabCensus.Controls.Add(this.groupBox1);
-            this.tabCensus.Controls.Add(this.btnShowCensusEntered);
             this.tabCensus.Controls.Add(this.label1);
             this.tabCensus.Controls.Add(this.txtSurname);
             this.tabCensus.Controls.Add(this.label2);
             this.tabCensus.Controls.Add(this.udAgeFilter);
-            this.tabCensus.Controls.Add(this.btnShowCensusMissing);
             this.tabCensus.Controls.Add(this.cenDate);
             this.tabCensus.Controls.Add(this.relTypesCensus);
             this.tabCensus.Location = new System.Drawing.Point(4, 22);
@@ -1140,15 +1141,36 @@
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
             // 
-            // btnShowCensusEntered
+            // groupBox1
             // 
-            this.btnShowCensusEntered.Location = new System.Drawing.Point(520, 92);
-            this.btnShowCensusEntered.Name = "btnShowCensusEntered";
-            this.btnShowCensusEntered.Size = new System.Drawing.Size(150, 25);
-            this.btnShowCensusEntered.TabIndex = 21;
-            this.btnShowCensusEntered.Text = "Show Entered on Census";
-            this.btnShowCensusEntered.UseVisualStyleBackColor = true;
-            this.btnShowCensusEntered.Click += new System.EventHandler(this.btnShowCensus_Click);
+            this.groupBox1.Controls.Add(this.btnDuplicateCensus);
+            this.groupBox1.Controls.Add(this.btnMissingCensusLocation);
+            this.groupBox1.Location = new System.Drawing.Point(342, 125);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(325, 61);
+            this.groupBox1.TabIndex = 22;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Census Fact Problems";
+            // 
+            // btnDuplicateCensus
+            // 
+            this.btnDuplicateCensus.Location = new System.Drawing.Point(162, 19);
+            this.btnDuplicateCensus.Name = "btnDuplicateCensus";
+            this.btnDuplicateCensus.Size = new System.Drawing.Size(150, 25);
+            this.btnDuplicateCensus.TabIndex = 6;
+            this.btnDuplicateCensus.Text = "Duplicate Census Facts";
+            this.btnDuplicateCensus.UseVisualStyleBackColor = true;
+            this.btnDuplicateCensus.Click += new System.EventHandler(this.btnDuplicateCensus_Click);
+            // 
+            // btnMissingCensusLocation
+            // 
+            this.btnMissingCensusLocation.Location = new System.Drawing.Point(6, 19);
+            this.btnMissingCensusLocation.Name = "btnMissingCensusLocation";
+            this.btnMissingCensusLocation.Size = new System.Drawing.Size(150, 25);
+            this.btnMissingCensusLocation.TabIndex = 5;
+            this.btnMissingCensusLocation.Text = "Missing Census Locations";
+            this.btnMissingCensusLocation.UseVisualStyleBackColor = true;
+            this.btnMissingCensusLocation.Click += new System.EventHandler(this.btnMissingCensusLocation_Click);
             // 
             // label1
             // 
@@ -1196,16 +1218,6 @@
             0,
             0,
             0});
-            // 
-            // btnShowCensusMissing
-            // 
-            this.btnShowCensusMissing.Location = new System.Drawing.Point(342, 92);
-            this.btnShowCensusMissing.Name = "btnShowCensusMissing";
-            this.btnShowCensusMissing.Size = new System.Drawing.Size(150, 25);
-            this.btnShowCensusMissing.TabIndex = 4;
-            this.btnShowCensusMissing.Text = "Show Missing from Census";
-            this.btnShowCensusMissing.UseVisualStyleBackColor = true;
-            this.btnShowCensusMissing.Click += new System.EventHandler(this.btnShowCensus_Click);
             // 
             // cenDate
             // 
@@ -1753,36 +1765,34 @@
             this.restoreDatabase.FileName = "Geocodes.s3db";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // groupBox1
+            // groupBox2
             // 
-            this.groupBox1.Controls.Add(this.btnDuplicateCensus);
-            this.groupBox1.Controls.Add(this.btnMissingCensusLocation);
-            this.groupBox1.Location = new System.Drawing.Point(8, 125);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(915, 271);
-            this.groupBox1.TabIndex = 22;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Census Fact Problems";
+            this.groupBox2.Controls.Add(this.btnShowCensusEntered);
+            this.groupBox2.Controls.Add(this.btnShowCensusMissing);
+            this.groupBox2.Location = new System.Drawing.Point(8, 125);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(325, 60);
+            this.groupBox2.TabIndex = 23;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Census Search Reports";
             // 
-            // btnMissingCensusLocation
+            // btnShowCensusMissing
             // 
-            this.btnMissingCensusLocation.Location = new System.Drawing.Point(6, 19);
-            this.btnMissingCensusLocation.Name = "btnMissingCensusLocation";
-            this.btnMissingCensusLocation.Size = new System.Drawing.Size(150, 25);
-            this.btnMissingCensusLocation.TabIndex = 5;
-            this.btnMissingCensusLocation.Text = "Missing Census Locations";
-            this.btnMissingCensusLocation.UseVisualStyleBackColor = true;
-            this.btnMissingCensusLocation.Click += new System.EventHandler(this.btnMissingCensusLocation_Click);
+            this.btnShowCensusMissing.Location = new System.Drawing.Point(6, 19);
+            this.btnShowCensusMissing.Name = "btnShowCensusMissing";
+            this.btnShowCensusMissing.Size = new System.Drawing.Size(150, 25);
+            this.btnShowCensusMissing.TabIndex = 5;
+            this.btnShowCensusMissing.Text = "Show Missing from Census";
+            this.btnShowCensusMissing.UseVisualStyleBackColor = true;
             // 
-            // btnDuplicateCensus
+            // btnShowCensusEntered
             // 
-            this.btnDuplicateCensus.Location = new System.Drawing.Point(162, 19);
-            this.btnDuplicateCensus.Name = "btnDuplicateCensus";
-            this.btnDuplicateCensus.Size = new System.Drawing.Size(150, 25);
-            this.btnDuplicateCensus.TabIndex = 6;
-            this.btnDuplicateCensus.Text = "Duplicate Census Facts";
-            this.btnDuplicateCensus.UseVisualStyleBackColor = true;
-            this.btnDuplicateCensus.Click += new System.EventHandler(this.btnDuplicateCensus_Click);
+            this.btnShowCensusEntered.Location = new System.Drawing.Point(162, 19);
+            this.btnShowCensusEntered.Name = "btnShowCensusEntered";
+            this.btnShowCensusEntered.Size = new System.Drawing.Size(150, 25);
+            this.btnShowCensusEntered.TabIndex = 22;
+            this.btnShowCensusEntered.Text = "Show Entered on Census";
+            this.btnShowCensusEntered.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -1823,6 +1833,7 @@
             this.tabLostCousins.PerformLayout();
             this.tabCensus.ResumeLayout(false);
             this.tabCensus.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).EndInit();
             this.tabLooseBirthDeaths.ResumeLayout(false);
             this.tabCtrlLooseBDs.ResumeLayout(false);
@@ -1852,7 +1863,7 @@
             this.tabDisplayProgress.ResumeLayout(false);
             this.tabDisplayProgress.PerformLayout();
             this.tabSelector.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1934,7 +1945,6 @@
         private System.Windows.Forms.TextBox txtSurname;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown udAgeFilter;
-        private System.Windows.Forms.Button btnShowCensusMissing;
         private Controls.CensusDateSelector cenDate;
         private Controls.RelationTypes relTypesCensus;
         private System.Windows.Forms.TabPage tabLooseBirthDeaths;
@@ -1984,7 +1994,6 @@
         private System.Windows.Forms.RichTextBox rtbLostCousins;
         private System.Windows.Forms.Button btnLC1940USA;
         private System.Windows.Forms.ToolStripMenuItem mnuGeocodeLocations;
-        private System.Windows.Forms.Button btnShowCensusEntered;
         private System.Windows.Forms.ToolStripMenuItem databaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem restoreToolStripMenuItem;
@@ -2012,6 +2021,9 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnDuplicateCensus;
         private System.Windows.Forms.Button btnMissingCensusLocation;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btnShowCensusEntered;
+        private System.Windows.Forms.Button btnShowCensusMissing;
     }
 }
 
