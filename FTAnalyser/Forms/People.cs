@@ -73,6 +73,20 @@ namespace FTAnalyzer.Forms
             SetIndividuals(individuals, "Lost Cousins with Duplicate Facts");
         }
 
+        public void SetupLCnoCensus(Predicate<Individual> relationFilter)
+        {
+            List<Individual> listtoCheck = FamilyTree.Instance.AllIndividuals.Where(relationFilter).ToList();
+            List<Individual> individuals = new List<Individual>();
+            foreach (CensusDate censusDate in CensusDate.LOSTCOUSINS_CENSUS)
+            {
+                Predicate<Individual> lcFacts = new Predicate<Individual>(i => i.IsLostCousinsEntered(censusDate) && !i.IsCensusDone(censusDate));
+                IEnumerable<Individual> censusMissing = listtoCheck.Where(lcFacts);
+                individuals.AddRange(censusMissing);
+            }
+            individuals = individuals.Distinct<Individual>().ToList();
+            SetIndividuals(individuals, "Lost Cousins with Duplicate Facts");
+        }
+
         public void SetupLCNoCountry(Predicate<Individual> relationFilter)
         {
             Predicate<Individual> lcFacts = x => x.LostCousinsFacts > 0;

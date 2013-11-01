@@ -643,6 +643,15 @@ namespace FTAnalyzer
             people.Show();
         }
 
+        private void btnLCnoCensus_Click(object sender, EventArgs e)
+        {
+            Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
+            People people = new People();
+            people.SetupLCnoCensus(relationFilter);
+            DisposeDuplicateForms(people);
+            people.Show();
+        }
+
         private void btnLC1881EW_Click(object sender, EventArgs e)
         {
             string reportTitle = "1881 England & Wales Census Records on file";
