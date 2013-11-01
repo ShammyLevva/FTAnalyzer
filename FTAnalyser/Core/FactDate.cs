@@ -594,6 +594,11 @@ namespace FTAnalyzer
             return (that == null) ? true : !(IsBefore(that) || IsAfter(that));
         }
 
+        public bool IsNotBEForeOrAFTer
+        {
+            get { return StartDate != MINDATE && EndDate != MAXDATE; }
+        }
+
         public bool YearMatches(FactDate that)
         {
             if (that == null ||

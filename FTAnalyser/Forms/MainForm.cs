@@ -22,7 +22,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "3.0.3.0-beta-test1";
+        private string VERSION = "3.0.3.0-beta-test2";
 
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
@@ -564,6 +564,7 @@ namespace FTAnalyzer
             int location1841, locationEW1881, locationSco1881, locationCan1881, locationEW1911, locationIre1911, location1880, location1940;
             count1841 = countEW1881 = countSco1881 = countCan1881 = countEW1911 = countIre1911 = count1880 = count1940 = 0;
             location1841 = locationEW1881 = locationSco1881 = locationCan1881 = locationEW1911 = locationIre1911 = location1880 = location1940 = 0;
+
             foreach (Individual ind in listToCheck)
             {
                 count1841 += (ind.IsLostCousinsEntered(CensusDate.EWCENSUS1841, false) ? 1 : 0);
