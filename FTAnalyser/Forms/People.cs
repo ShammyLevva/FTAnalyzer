@@ -248,7 +248,7 @@ namespace FTAnalyzer.Forms
                 individuals.AddRange(censusMissing);
             }
             individuals = individuals.Distinct<Individual>().ToList();
-            SetIndividuals(individuals, "Lost Cousins with Duplicate Facts");
+            SetIndividuals(individuals, "Indiviudals with census records with no census location");
         }
 
         public void SetupDuplicateCensus()
@@ -261,7 +261,7 @@ namespace FTAnalyzer.Forms
                 individuals.AddRange(censusMissing);
             }
             individuals = individuals.Distinct<Individual>().ToList();
-            SetIndividuals(individuals, "Lost Cousins with Duplicate Facts");
+            SetIndividuals(individuals, "Individuals that have more than once census record for a census year");
         }
     }
 }
