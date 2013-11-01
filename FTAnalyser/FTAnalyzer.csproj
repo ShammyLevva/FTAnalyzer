@@ -575,7 +575,6 @@
     </Compile>
     <Compile Include="Utilities\ShortDoubleMetaphone.cs" />
     <Compile Include="Utilities\SortableBindingList.cs" />
-    <None Include="Mapping\MarkerClusterer.js" />
     <Content Include="Resources\Icons\Save.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

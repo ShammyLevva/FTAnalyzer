@@ -171,6 +171,7 @@
     <None Include="Properties\DataSources\MarriageRegistration.datasource" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="MarkerClusterer.js" />
     <Content Include="Useful URLs.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
