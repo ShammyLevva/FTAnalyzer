@@ -79,8 +79,8 @@ namespace FTAnalyzer
             }
         }
 
-        public Family(Individual ind)
-            : this(SOLOINDIVIDUAL)
+        public Family(Individual ind, string familyID)
+            : this(familyID)
         {
             if (ind.IsMale)
                 this.Husband = ind;

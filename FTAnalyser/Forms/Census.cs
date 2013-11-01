@@ -55,7 +55,7 @@ namespace FTAnalyzer.Forms
             if (showEnteredLostCousins)
                 predicate = x => x.IsLostCousinsEntered(CensusDate, false);
             else
-                predicate = x => !x.IsLostCousinsEntered(CensusDate, false) && x.IsCensusDone(CensusDate, false);
+                predicate = x => x.MissingLostCousins(CensusDate, false);
             IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, true, false);
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, predicate);
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Where(filter).ToList();
