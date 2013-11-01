@@ -120,11 +120,11 @@ namespace FTAnalyzer.Forms
                 DataGridViewCell cell = dgFacts.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 if (f.Fact.FactErrorLevel != Fact.FactError.GOOD)
                 {
-                    cell.Style.Font = italicFont;
+                    cell.InheritedStyle.Font = italicFont;
                     cell.ToolTipText = "Fact is inaccurate but is being used due to Tolerate slightly inaccurate census dates option.";
                     if (f.Fact.FactErrorLevel != Fact.FactError.WARNINGALLOW)
                     {
-                        cell.Style.ForeColor = Color.Red; // if ignoring facts then set as red
+                        cell.InheritedStyle.ForeColor = Color.Red; // if ignoring facts then set as red
                         cell.ToolTipText = "Fact is an error and isn't being used";
                     }   
                 }
