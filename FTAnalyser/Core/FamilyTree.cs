@@ -1002,12 +1002,16 @@ namespace FTAnalyzer
                 foreach (Family f in families)
                 {
                     CensusFamily cf = new CensusFamily(f, censusDate);
+                    if(cf.Members.Any(x => x.IndividualID == "I0282"))
+                        Console.WriteLine("found it");
                     if (cf.Process(censusDate, censusDone, checkCensus))
                         yield return cf;
                 }
                 // also add all individuals that don't ever appear as a child as they may have census facts for when they are children
                 foreach (Individual ind in individuals.Where(x => x.FamiliesAsChild.Count == 0))
                 {
+                    if (ind.IndividualID == "I0282")
+                        Console.WriteLine("found it");
                     CensusFamily cf = new CensusFamily(new Family(ind, Family.PRE_MARRIAGE), censusDate);
                     if (cf.Process(censusDate, censusDone, checkCensus))
                         yield return cf;

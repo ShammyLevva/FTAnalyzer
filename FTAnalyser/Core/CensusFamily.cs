@@ -93,7 +93,7 @@ namespace FTAnalyzer
             DateTime birth = indiv.BirthDate.StartDate;
             DateTime death = indiv.DeathDate.EndDate;
             FactLocation bestLocation = indiv.BestLocation(CensusDate);
-            if (birth < CensusDate.StartDate && death > CensusDate.StartDate && 
+            if (birth <= CensusDate.StartDate && death >= CensusDate.StartDate && 
                 (!bestLocation.IsKnownCountry || CensusDate.IsCensusCountry(CensusDate, bestLocation)))
             {
                 if ((checkCensus && indiv.IsCensusDone(CensusDate) == censusDone) || !checkCensus)
