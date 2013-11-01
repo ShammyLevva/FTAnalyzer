@@ -606,10 +606,9 @@ namespace FTAnalyzer
             if(moreThanOneLCfact > 0)
                 rtbLostCousins.AppendText("Duplicate LostCousins facts: " + moreThanOneLCfact + "\n");
             if (LCtotal > total)
-            {
-                rtbLostCousins.AppendText("LostCousins fact with no country: " + (LCtotal - total));
+                rtbLostCousins.AppendText("LostCousins fact with no country: " + (LCtotal - total) + "\n");
+            if(moreThanOneLCfact > 0 || LCtotal > total)
                 rtbLostCousins.AppendText("_____________________________________________\n");
-            }
             rtbLostCousins.AppendText("Totals: " + LCtotal + " Found, " + missingtotal + " Missing");
 
             if (missingtotal > 0)
