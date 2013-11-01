@@ -205,6 +205,7 @@ namespace FTAnalyzer.Forms
         private void cbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
             Application.UserAppDataRegistry.SetValue("Default Search Provider", cbBMDSearchProvider.SelectedItem.ToString());
+            dgBMDReportSheet.Refresh(); // forces refresh of tooltips
             dgBMDReportSheet.Focus();
         }
 

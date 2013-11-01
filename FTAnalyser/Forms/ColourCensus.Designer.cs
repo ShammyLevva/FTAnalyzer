@@ -49,6 +49,8 @@
             this.DeathLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BestLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuViewFacts = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -67,12 +69,10 @@
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnuViewFacts = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).BeginInit();
+            this.contextMenuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgReportSheet
@@ -302,6 +302,20 @@
             this.Ahnentafel.ReadOnly = true;
             this.Ahnentafel.Width = 83;
             // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuViewFacts});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(190, 26);
+            // 
+            // mnuViewFacts
+            // 
+            this.mnuViewFacts.Name = "mnuViewFacts";
+            this.mnuViewFacts.Size = new System.Drawing.Size(189, 22);
+            this.mnuViewFacts.Text = "View Individuals Facts";
+            this.mnuViewFacts.Click += new System.EventHandler(this.mnuViewFacts_Click);
+            // 
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -464,20 +478,6 @@
             this.printPreviewDialog.Name = "printPreviewDialog";
             this.printPreviewDialog.Visible = false;
             // 
-            // contextMenuStrip
-            // 
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuViewFacts});
-            this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(190, 26);
-            // 
-            // mnuViewFacts
-            // 
-            this.mnuViewFacts.Name = "mnuViewFacts";
-            this.mnuViewFacts.Size = new System.Drawing.Size(189, 22);
-            this.mnuViewFacts.Text = "View Individuals Facts";
-            this.mnuViewFacts.Click += new System.EventHandler(this.mnuViewFacts_Click);
-            // 
             // ColourCensus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -490,11 +490,11 @@
             this.Name = "ColourCensus";
             this.Text = "Colour Census Report Result";
             ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).EndInit();
+            this.contextMenuStrip.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
