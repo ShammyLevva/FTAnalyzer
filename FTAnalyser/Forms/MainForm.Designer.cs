@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,20 +94,27 @@
             this.dgWarDead = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.txtWarDeadSurname = new System.Windows.Forms.TextBox();
+            this.wardeadRelation = new Controls.RelationTypes();
+            this.wardeadCountry = new Controls.CensusCountry();
             this.tabTreetops = new System.Windows.Forms.TabPage();
             this.dgTreeTops = new System.Windows.Forms.DataGridView();
             this.ckbTTIgnoreLocations = new System.Windows.Forms.CheckBox();
             this.btnTreeTops = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.txtTreetopsSurname = new System.Windows.Forms.TextBox();
+            this.treetopsRelation = new Controls.RelationTypes();
+            this.treetopsCountry = new Controls.CensusCountry();
             this.tabColourReports = new System.Windows.Forms.TabPage();
             this.btnColourBMD = new System.Windows.Forms.Button();
             this.btnColourCensus = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.txtColouredSurname = new System.Windows.Forms.TextBox();
+            this.relTypesColoured = new Controls.RelationTypes();
             this.tabLostCousins = new System.Windows.Forms.TabPage();
+            this.btnLCnoCensus = new System.Windows.Forms.Button();
             this.btnLCDuplicates = new System.Windows.Forms.Button();
             this.btnLCMissingCountry = new System.Windows.Forms.Button();
+            this.relTypesLC = new Controls.RelationTypes();
             this.btnLC1940USA = new System.Windows.Forms.Button();
             this.rtbLostCousins = new System.Windows.Forms.RichTextBox();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
@@ -127,6 +134,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
             this.btnShowCensusMissing = new System.Windows.Forms.Button();
+            this.cenDate = new Controls.CensusDateSelector();
+            this.relTypesCensus = new Controls.RelationTypes();
             this.tabLooseBirthDeaths = new System.Windows.Forms.TabPage();
             this.tabCtrlLooseBDs = new System.Windows.Forms.TabControl();
             this.tabLooseBirths = new System.Windows.Forms.TabPage();
@@ -160,6 +169,7 @@
             this.tabIndividuals = new System.Windows.Forms.TabPage();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
+            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.pbFamilies = new System.Windows.Forms.ProgressBar();
             this.label5 = new System.Windows.Forms.Label();
@@ -169,16 +179,9 @@
             this.tabSelector = new System.Windows.Forms.TabControl();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
-            this.cenDate = new Controls.CensusDateSelector();
-            this.relTypesCensus = new Controls.RelationTypes();
-            this.relTypesLC = new Controls.RelationTypes();
-            this.relTypesColoured = new Controls.RelationTypes();
-            this.treetopsRelation = new Controls.RelationTypes();
-            this.treetopsCountry = new Controls.CensusCountry();
-            this.wardeadRelation = new Controls.RelationTypes();
-            this.wardeadCountry = new Controls.CensusCountry();
-            this.btnLCnoCensus = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnMissingCensusLocation = new System.Windows.Forms.Button();
+            this.btnDuplicateCensus = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -220,6 +223,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.tabDisplayProgress.SuspendLayout();
             this.tabSelector.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -603,14 +607,14 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 138);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -759,6 +763,23 @@
             this.txtWarDeadSurname.Size = new System.Drawing.Size(201, 20);
             this.txtWarDeadSurname.TabIndex = 27;
             // 
+            // wardeadRelation
+            // 
+            this.wardeadRelation.Location = new System.Drawing.Point(270, 12);
+            this.wardeadRelation.MarriedToDB = true;
+            this.wardeadRelation.Name = "wardeadRelation";
+            this.wardeadRelation.Size = new System.Drawing.Size(322, 74);
+            this.wardeadRelation.TabIndex = 26;
+            // 
+            // wardeadCountry
+            // 
+            this.wardeadCountry.Location = new System.Drawing.Point(8, 12);
+            this.wardeadCountry.Name = "wardeadCountry";
+            this.wardeadCountry.Size = new System.Drawing.Size(256, 74);
+            this.wardeadCountry.TabIndex = 25;
+            this.wardeadCountry.Title = "Default Country";
+            this.wardeadCountry.UKEnabled = true;
+            // 
             // tabTreetops
             // 
             this.tabTreetops.Controls.Add(this.dgTreeTops);
@@ -831,6 +852,23 @@
             this.txtTreetopsSurname.Size = new System.Drawing.Size(201, 20);
             this.txtTreetopsSurname.TabIndex = 23;
             // 
+            // treetopsRelation
+            // 
+            this.treetopsRelation.Location = new System.Drawing.Point(270, 12);
+            this.treetopsRelation.MarriedToDB = true;
+            this.treetopsRelation.Name = "treetopsRelation";
+            this.treetopsRelation.Size = new System.Drawing.Size(322, 74);
+            this.treetopsRelation.TabIndex = 12;
+            // 
+            // treetopsCountry
+            // 
+            this.treetopsCountry.Location = new System.Drawing.Point(8, 12);
+            this.treetopsCountry.Name = "treetopsCountry";
+            this.treetopsCountry.Size = new System.Drawing.Size(256, 74);
+            this.treetopsCountry.TabIndex = 11;
+            this.treetopsCountry.Title = "Default Country";
+            this.treetopsCountry.UKEnabled = true;
+            // 
             // tabColourReports
             // 
             this.tabColourReports.Controls.Add(this.btnColourBMD);
@@ -881,6 +919,14 @@
             this.txtColouredSurname.Size = new System.Drawing.Size(201, 20);
             this.txtColouredSurname.TabIndex = 30;
             // 
+            // relTypesColoured
+            // 
+            this.relTypesColoured.Location = new System.Drawing.Point(8, 8);
+            this.relTypesColoured.MarriedToDB = true;
+            this.relTypesColoured.Name = "relTypesColoured";
+            this.relTypesColoured.Size = new System.Drawing.Size(325, 78);
+            this.relTypesColoured.TabIndex = 26;
+            // 
             // tabLostCousins
             // 
             this.tabLostCousins.BackColor = System.Drawing.SystemColors.HighlightText;
@@ -907,6 +953,16 @@
             this.tabLostCousins.TabIndex = 5;
             this.tabLostCousins.Text = "Lost Cousins";
             // 
+            // btnLCnoCensus
+            // 
+            this.btnLCnoCensus.Location = new System.Drawing.Point(344, 233);
+            this.btnLCnoCensus.Name = "btnLCnoCensus";
+            this.btnLCnoCensus.Size = new System.Drawing.Size(162, 27);
+            this.btnLCnoCensus.TabIndex = 22;
+            this.btnLCnoCensus.Text = "Lost Cousins but no Census";
+            this.btnLCnoCensus.UseVisualStyleBackColor = true;
+            this.btnLCnoCensus.Click += new System.EventHandler(this.btnLCnoCensus_Click);
+            // 
             // btnLCDuplicates
             // 
             this.btnLCDuplicates.Location = new System.Drawing.Point(176, 233);
@@ -926,6 +982,15 @@
             this.btnLCMissingCountry.Text = "Lost Cousins with no Country";
             this.btnLCMissingCountry.UseVisualStyleBackColor = true;
             this.btnLCMissingCountry.Click += new System.EventHandler(this.btnLCMissingCountry_Click);
+            // 
+            // relTypesLC
+            // 
+            this.relTypesLC.Location = new System.Drawing.Point(8, 8);
+            this.relTypesLC.MarriedToDB = true;
+            this.relTypesLC.Name = "relTypesLC";
+            this.relTypesLC.Size = new System.Drawing.Size(325, 78);
+            this.relTypesLC.TabIndex = 19;
+            this.relTypesLC.RelationTypesChanged += new System.EventHandler(this.relTypesLC_RelationTypesChanged);
             // 
             // btnLC1940USA
             // 
@@ -1058,6 +1123,7 @@
             // 
             // tabCensus
             // 
+            this.tabCensus.Controls.Add(this.groupBox1);
             this.tabCensus.Controls.Add(this.btnShowCensusEntered);
             this.tabCensus.Controls.Add(this.label1);
             this.tabCensus.Controls.Add(this.txtSurname);
@@ -1140,6 +1206,24 @@
             this.btnShowCensusMissing.Text = "Show Missing from Census";
             this.btnShowCensusMissing.UseVisualStyleBackColor = true;
             this.btnShowCensusMissing.Click += new System.EventHandler(this.btnShowCensus_Click);
+            // 
+            // cenDate
+            // 
+            this.cenDate.AutoSize = true;
+            this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cenDate.Country = global::FTAnalyzer.Properties.Resources.FTA_0002;
+            this.cenDate.Location = new System.Drawing.Point(8, 92);
+            this.cenDate.Name = "cenDate";
+            this.cenDate.Size = new System.Drawing.Size(186, 27);
+            this.cenDate.TabIndex = 17;
+            // 
+            // relTypesCensus
+            // 
+            this.relTypesCensus.Location = new System.Drawing.Point(8, 8);
+            this.relTypesCensus.MarriedToDB = true;
+            this.relTypesCensus.Name = "relTypesCensus";
+            this.relTypesCensus.Size = new System.Drawing.Size(325, 78);
+            this.relTypesCensus.TabIndex = 15;
             // 
             // tabLooseBirthDeaths
             // 
@@ -1574,6 +1658,19 @@
             this.tabDisplayProgress.Text = "Gedcom Stats";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
             // 
+            // rtbOutput
+            // 
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Location = new System.Drawing.Point(3, 96);
+            this.rtbOutput.Name = "rtbOutput";
+            this.rtbOutput.ReadOnly = true;
+            this.rtbOutput.Size = new System.Drawing.Size(925, 303);
+            this.rtbOutput.TabIndex = 6;
+            this.rtbOutput.Text = global::FTAnalyzer.Properties.Resources.FTA_0002;
+            this.rtbOutput.TextChanged += new System.EventHandler(this.rtbOutput_TextChanged);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -1656,97 +1753,36 @@
             this.restoreDatabase.FileName = "Geocodes.s3db";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // rtbOutput
+            // groupBox1
             // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbOutput.Location = new System.Drawing.Point(3, 96);
-            this.rtbOutput.Name = "rtbOutput";
-            this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(925, 303);
-            this.rtbOutput.TabIndex = 6;
-            this.rtbOutput.Text = global::FTAnalyzer.Properties.Resources.FTA_0002;
-            this.rtbOutput.TextChanged += new System.EventHandler(this.rtbOutput_TextChanged);
+            this.groupBox1.Controls.Add(this.btnDuplicateCensus);
+            this.groupBox1.Controls.Add(this.btnMissingCensusLocation);
+            this.groupBox1.Location = new System.Drawing.Point(8, 125);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(915, 271);
+            this.groupBox1.TabIndex = 22;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Census Fact Problems";
             // 
-            // cenDate
+            // btnMissingCensusLocation
             // 
-            this.cenDate.AutoSize = true;
-            this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cenDate.Country = global::FTAnalyzer.Properties.Resources.FTA_0002;
-            this.cenDate.Location = new System.Drawing.Point(8, 92);
-            this.cenDate.Name = "cenDate";
-            this.cenDate.Size = new System.Drawing.Size(186, 27);
-            this.cenDate.TabIndex = 17;
+            this.btnMissingCensusLocation.Location = new System.Drawing.Point(6, 19);
+            this.btnMissingCensusLocation.Name = "btnMissingCensusLocation";
+            this.btnMissingCensusLocation.Size = new System.Drawing.Size(150, 25);
+            this.btnMissingCensusLocation.TabIndex = 5;
+            this.btnMissingCensusLocation.Text = "Missing Census Locations";
+            this.btnMissingCensusLocation.UseVisualStyleBackColor = true;
+            this.btnMissingCensusLocation.Click += new System.EventHandler(this.btnMissingCensusLocation_Click);
             // 
-            // relTypesCensus
+            // btnDuplicateCensus
             // 
-            this.relTypesCensus.Location = new System.Drawing.Point(8, 8);
-            this.relTypesCensus.MarriedToDB = true;
-            this.relTypesCensus.Name = "relTypesCensus";
-            this.relTypesCensus.Size = new System.Drawing.Size(325, 78);
-            this.relTypesCensus.TabIndex = 15;
-            // 
-            // relTypesLC
-            // 
-            this.relTypesLC.Location = new System.Drawing.Point(8, 8);
-            this.relTypesLC.MarriedToDB = true;
-            this.relTypesLC.Name = "relTypesLC";
-            this.relTypesLC.Size = new System.Drawing.Size(325, 78);
-            this.relTypesLC.TabIndex = 19;
-            this.relTypesLC.RelationTypesChanged += new System.EventHandler(this.relTypesLC_RelationTypesChanged);
-            // 
-            // relTypesColoured
-            // 
-            this.relTypesColoured.Location = new System.Drawing.Point(8, 8);
-            this.relTypesColoured.MarriedToDB = true;
-            this.relTypesColoured.Name = "relTypesColoured";
-            this.relTypesColoured.Size = new System.Drawing.Size(325, 78);
-            this.relTypesColoured.TabIndex = 26;
-            // 
-            // treetopsRelation
-            // 
-            this.treetopsRelation.Location = new System.Drawing.Point(270, 12);
-            this.treetopsRelation.MarriedToDB = true;
-            this.treetopsRelation.Name = "treetopsRelation";
-            this.treetopsRelation.Size = new System.Drawing.Size(322, 74);
-            this.treetopsRelation.TabIndex = 12;
-            // 
-            // treetopsCountry
-            // 
-            this.treetopsCountry.Location = new System.Drawing.Point(8, 12);
-            this.treetopsCountry.Name = "treetopsCountry";
-            this.treetopsCountry.Size = new System.Drawing.Size(256, 74);
-            this.treetopsCountry.TabIndex = 11;
-            this.treetopsCountry.Title = "Default Country";
-            this.treetopsCountry.UKEnabled = true;
-            // 
-            // wardeadRelation
-            // 
-            this.wardeadRelation.Location = new System.Drawing.Point(270, 12);
-            this.wardeadRelation.MarriedToDB = true;
-            this.wardeadRelation.Name = "wardeadRelation";
-            this.wardeadRelation.Size = new System.Drawing.Size(322, 74);
-            this.wardeadRelation.TabIndex = 26;
-            // 
-            // wardeadCountry
-            // 
-            this.wardeadCountry.Location = new System.Drawing.Point(8, 12);
-            this.wardeadCountry.Name = "wardeadCountry";
-            this.wardeadCountry.Size = new System.Drawing.Size(256, 74);
-            this.wardeadCountry.TabIndex = 25;
-            this.wardeadCountry.Title = "Default Country";
-            this.wardeadCountry.UKEnabled = true;
-            // 
-            // btnLCnoCensus
-            // 
-            this.btnLCnoCensus.Location = new System.Drawing.Point(344, 233);
-            this.btnLCnoCensus.Name = "btnLCnoCensus";
-            this.btnLCnoCensus.Size = new System.Drawing.Size(162, 27);
-            this.btnLCnoCensus.TabIndex = 22;
-            this.btnLCnoCensus.Text = "Lost Cousins but no Census";
-            this.btnLCnoCensus.UseVisualStyleBackColor = true;
-            this.btnLCnoCensus.Click += new System.EventHandler(this.btnLCnoCensus_Click);
+            this.btnDuplicateCensus.Location = new System.Drawing.Point(162, 19);
+            this.btnDuplicateCensus.Name = "btnDuplicateCensus";
+            this.btnDuplicateCensus.Size = new System.Drawing.Size(150, 25);
+            this.btnDuplicateCensus.TabIndex = 6;
+            this.btnDuplicateCensus.Text = "Duplicate Census Facts";
+            this.btnDuplicateCensus.UseVisualStyleBackColor = true;
+            this.btnDuplicateCensus.Click += new System.EventHandler(this.btnDuplicateCensus_Click);
             // 
             // MainForm
             // 
@@ -1816,6 +1852,7 @@
             this.tabDisplayProgress.ResumeLayout(false);
             this.tabDisplayProgress.PerformLayout();
             this.tabSelector.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1972,6 +2009,9 @@
         private System.Windows.Forms.Button btnLCMissingCountry;
         private System.Windows.Forms.Button btnLCDuplicates;
         private System.Windows.Forms.Button btnLCnoCensus;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnDuplicateCensus;
+        private System.Windows.Forms.Button btnMissingCensusLocation;
     }
 }
 

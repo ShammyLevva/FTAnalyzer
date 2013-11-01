@@ -237,5 +237,31 @@ namespace FTAnalyzer.Forms
                 factForm.Show();
             }
         }
+
+        public void SetupMissingCensusLocation()
+        {
+            List<Individual> individuals = new List<Individual>();
+            foreach (CensusDate censusDate in CensusDate.SUPPORTED_CENSUS)
+            {
+                Predicate<Individual> censusFacts = new Predicate<Individual>(x => x.IsCensusDone(censusDate) && !x.HasCensusLocation(censusDate));
+                IEnumerable<Individual> censusMissing = FamilyTree.Instance.AllIndividuals.Where(censusFacts);
+                individuals.AddRange(censusMissing);
+            }
+            individuals = individuals.Distinct<Individual>().ToList();
+            SetIndividuals(individuals, "Lost Cousins with Duplicate Facts");
+        }
+
+        public void SetupDuplicateCensus()
+        {
+            List<Individual> individuals = new List<Individual>();
+            foreach (CensusDate censusDate in CensusDate.SUPPORTED_CENSUS)
+            {
+                Predicate<Individual> censusFacts = new Predicate<Individual>(i => i.CensusDateFactCount(censusDate) > 1);
+                IEnumerable<Individual> censusMissing = FamilyTree.Instance.AllIndividuals.Where(censusFacts);
+                individuals.AddRange(censusMissing);
+            }
+            individuals = individuals.Distinct<Individual>().ToList();
+            SetIndividuals(individuals, "Lost Cousins with Duplicate Facts");
+        }
     }
 }

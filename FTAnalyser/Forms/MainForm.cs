@@ -22,7 +22,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "3.0.2.4";
+        private string VERSION = "3.0.3.0-beta-test1";
 
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
@@ -454,6 +454,26 @@ namespace FTAnalyzer
             census.Show();
         }
 
+        private void btnMissingCensusLocation_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            People people = new People();
+            people.SetupMissingCensusLocation();
+            DisposeDuplicateForms(people);
+            people.Show();
+            HourGlass(false);
+        }
+
+        private void btnDuplicateCensus_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            People people = new People();
+            people.SetupDuplicateCensus();
+            DisposeDuplicateForms(people);
+            people.Show();
+            HourGlass(false);
+        }
+
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This is Family Tree Analyzer version " + VERSION);
@@ -478,7 +498,7 @@ namespace FTAnalyzer
             return filter;
         }
 
-        private Predicate<Individual> createTreeTopsIndividualFilter()
+        private Predicate<Individual> CreateTreeTopsIndividualFilter()
         {
             Predicate<Individual> locationFilter = treetopsCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
             Predicate<Individual> relationFilter = treetopsRelation.BuildFilter<Individual>(x => x.RelationType);
@@ -622,11 +642,13 @@ namespace FTAnalyzer
 
         private void btnLCMissingCountry_Click(object sender, EventArgs e)
         {
+            HourGlass(true);
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
             People people = new People();
             people.SetupLCNoCountry(relationFilter);
             DisposeDuplicateForms(people); 
             people.Show();
+            HourGlass(false);
         }
 
         private void relTypesLC_RelationTypesChanged(object sender, EventArgs e)
@@ -636,20 +658,24 @@ namespace FTAnalyzer
 
         private void btnLCDuplicates_Click(object sender, EventArgs e)
         {
+            HourGlass(true);
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
             People people = new People();
             people.SetupLCDuplicates(relationFilter);
             DisposeDuplicateForms(people);
             people.Show();
+            HourGlass(false);
         }
 
         private void btnLCnoCensus_Click(object sender, EventArgs e)
         {
+            HourGlass(true); 
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
             People people = new People();
             people.SetupLCnoCensus(relationFilter);
             DisposeDuplicateForms(people);
             people.Show();
+            HourGlass(false);
         }
 
         private void btnLC1881EW_Click(object sender, EventArgs e)
@@ -749,7 +775,7 @@ namespace FTAnalyzer
         private void btnTreeTops_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Predicate<Individual> filter = createTreeTopsIndividualFilter();
+            Predicate<Individual> filter = CreateTreeTopsIndividualFilter();
             List<IDisplayIndividual> treeTopsList = ft.GetTreeTops(filter).ToList();
             treeTopsList.Sort(new BirthDateComparer());
             dgTreeTops.DataSource = new SortableBindingList<IDisplayIndividual>(treeTopsList);

@@ -527,6 +527,17 @@ namespace FTAnalyzer
             });
         }
 
+        public bool HasCensusLocation(CensusDate when)
+        {
+            if (when == null) return false;
+            foreach (Fact f in facts)
+            {
+                if (f.FactDate.IsKnown && f.IsCensusFact && f.FactDate.Overlaps(when) && f.Location.ToString().Length > 0)
+                    return true;
+            }
+            return false;                    
+        }
+
         public bool IsCensusDone(CensusDate when) { return IsCensusDone(when, true, true); }
         public bool IsCensusDone(CensusDate when, bool includeUnknownCountries) { return IsCensusDone(when, includeUnknownCountries, true); }
         public bool IsCensusDone(CensusDate when, bool includeUnknownCountries, bool checkCountry)
@@ -873,6 +884,10 @@ namespace FTAnalyzer
             get { return FactCount(Fact.CENSUS); }
         }
 
+        public int CensusDateFactCount(CensusDate censusDate)
+        {
+            return facts.Count(f => f.FactType == Fact.CENSUS && f.FactDate.Overlaps(censusDate) && f.FactErrorLevel == Fact.FactError.GOOD);
+        }
 
         public int Birth
         {
