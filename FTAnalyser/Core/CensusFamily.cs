@@ -115,7 +115,7 @@ namespace FTAnalyzer
             Individual eldestChild = Children.OrderBy(x => x.BirthDate).FirstOrDefault();
             if (MarriageDate.IsAfter(CensusDate) && (eldestChild == null || eldestChild.BirthDate.IsAfter(CensusDate)))
                 return false;
-            if (FamilyID == Family.SOLOINDIVIDUAL)
+            if (FamilyID == Family.SOLOINDIVIDUAL || FamilyID == Family.PRE_MARRIAGE)
                 return true; // allow solo individual families to be processed
             // don't process family if either parent is under 16
             //if(Husband != null) rtb.AppendText("Husband : " + Husband.getAge(censusDate) + "\n");
