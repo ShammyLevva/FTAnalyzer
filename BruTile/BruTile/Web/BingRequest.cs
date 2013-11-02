@@ -22,23 +22,22 @@ namespace BruTile.Web
         public const string QuadKeyTag = "{quadkey}";
         public const string UserKeyTag = "{userkey}";
         public const string ApiVersionTag = "{apiversion}";
+        public const string OSTag = "{ostag}";
         private readonly string _urlFormatter;
         private readonly string _userKey;
         private int _nodeCounter;
+        private BingMapType _mapType;
         private readonly IList<string> _serverNodes = new List<string> { "0", "1", "2", "3", "4", "5", "6", "7" };
 
         /// <remarks>You need a token for the the staging and the proper bing maps server, see:
         /// http://msdn.microsoft.com/en-us/library/cc980844.aspx</remarks>
         public BingRequest(string baseUrl, string token, BingMapType mapType, string apiVersion = DefaultApiVersion)
         {
-            if(mapType == BingMapType.OS)
-                _urlFormatter = baseUrl + "/" + ToMapTypeChar(mapType) + QuadKeyTag + ".jpeg?g=" +
-                    ApiVersionTag + "&productSet=mmOS&token=" + UserKeyTag;
-            else
-                _urlFormatter = baseUrl + "/" + ToMapTypeChar(mapType) +  QuadKeyTag + ".jpeg?g=" + 
-                    ApiVersionTag + "&token=" + UserKeyTag;
+            _urlFormatter = baseUrl + "/" + ToMapTypeChar(mapType) + QuadKeyTag + ".jpeg?g=" +
+                    ApiVersionTag + OSTag + "&token=" + UserKeyTag;
             _userKey = token;
             ApiVersion = apiVersion;
+            _mapType = mapType;
         }
 
         public BingRequest(string urlFormatter, string userKey, string apiVersion = DefaultApiVersion, IEnumerable<string> serverNodes = null)
@@ -71,6 +70,10 @@ namespace BruTile.Web
             var stringBuilder = new StringBuilder(_urlFormatter);
             stringBuilder.Replace(QuadKeyTag, TileXyToQuadKey(info.Index.Col, info.Index.Row, info.Index.Level));
             stringBuilder.Replace(ApiVersionTag, ApiVersion);
+            if (_mapType == BingMapType.OS && info.Index.Level >= 12)
+                stringBuilder.Replace(OSTag, "&productSet=mmOS");
+            else
+                stringBuilder.Replace(OSTag, string.Empty);
             stringBuilder.Replace(UserKeyTag, _userKey);
             InsertServerNode(stringBuilder, _serverNodes, ref _nodeCounter);
             return new Uri(stringBuilder.ToString());
@@ -81,6 +84,7 @@ namespace BruTile.Web
             switch (mapType)
             {
                 case BingMapType.Roads:
+                case BingMapType.OS:
                     return 'r';
                 case BingMapType.Aerial:
                     return 'a';

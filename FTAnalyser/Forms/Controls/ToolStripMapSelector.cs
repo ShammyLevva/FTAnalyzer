@@ -202,7 +202,7 @@ namespace FTAnalyzer.Forms.Controls
             {
                 mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
                     new BruTile.Web.BingTileSource(
-                        new BruTile.Web.BingRequest(BingRequest.UrlBing, null, BingMapType.Roads, "517"), null),
+                        new BruTile.Web.BingRequest(BingRequest.UrlBing, null, BingMapType.OS, "517"), null),
                         "BingMapOS"));
                 mnuBingMapOS.Checked = true;
                 UpdateLinkLabel(LinkLabelType.BING);
