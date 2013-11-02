@@ -39,10 +39,8 @@ namespace FTAnalyzer.Mapping
         {
             get
             {
-
                 if (wgs84toGoogle == null)
                 {
-
                     CoordinateSystemFactory csFac = new ProjNet.CoordinateSystems.CoordinateSystemFactory();
                     CoordinateTransformationFactory ctFac = new CoordinateTransformationFactory();
 
