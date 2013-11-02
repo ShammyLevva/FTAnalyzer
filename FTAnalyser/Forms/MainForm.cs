@@ -1623,5 +1623,14 @@ namespace FTAnalyzer
             string filename = (string)(sender as ToolStripMenuItem).Tag;
             LoadFile(filename);
         }
+
+        private void dgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string indID = (string)dgIndividuals.CurrentRow.Cells["Ind_ID"].Value;
+            Individual ind = ft.GetIndividual(indID);
+            Facts factForm = new Facts(ind);
+            DisposeDuplicateForms(factForm);
+            factForm.Show();
+        }
     }
 }
