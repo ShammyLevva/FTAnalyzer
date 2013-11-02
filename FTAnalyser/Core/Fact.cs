@@ -209,6 +209,7 @@ namespace FTAnalyzer
         public Age GedcomAge { get; private set; }
         public bool Created { get; protected set; }
         private string Tag { get; set; }
+        public bool Preferred { get; private set; }
 
         #region Constructors
 
@@ -233,6 +234,7 @@ namespace FTAnalyzer
             this.GedcomAge = null;
             this.Created = false;
             this.Tag = string.Empty;
+            this.Preferred = false;
         }
 
         public Fact(XmlNode node, string factRef)

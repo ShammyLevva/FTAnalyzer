@@ -16,15 +16,17 @@ namespace FTAnalyzer
         public string FamilyID { get; private set; }
         public IList<Fact> Facts { get; private set; }
         public List<Individual> Children { get; internal set; }
-
         public Individual Husband { get; internal set; }
         public Individual Wife { get; internal set; }
+
+        private Dictionary<string, Fact> preferredFacts;
 
         private Family(string familyID)
         {
             this.FamilyID = familyID;
             this.Facts = new List<Fact>();
             this.Children = new List<Individual>();
+            this.preferredFacts = new Dictionary<string, Fact>();
         }
 
         public Family() : this(string.Empty) { }
@@ -86,7 +88,6 @@ namespace FTAnalyzer
                 this.Husband = ind;
             else
                 this.Wife = ind;
-
         }
 
         internal Family(Family f)
@@ -96,6 +97,7 @@ namespace FTAnalyzer
             this.Husband = f.Husband == null ? null : new Individual(f.Husband);
             this.Wife = f.Wife == null ? null : new Individual(f.Wife);
             this.Children = new List<Individual>(f.Children);
+            this.preferredFacts = new Dictionary<string, Fact>(f.preferredFacts);
         }
 
         private void AddFacts(XmlNode node, string factType)
@@ -105,7 +107,11 @@ namespace FTAnalyzer
             {
                 Fact f = new Fact(n, FamilyRef);
                 if (f.FactType != Fact.CENSUS)
+                {
                     Facts.Add(f);
+                    if (!preferredFacts.ContainsKey(f.FactType))
+                        preferredFacts.Add(f.FactType, f);
+                }
                 else
                 {
                     // Handle a census fact on a family.
@@ -145,7 +151,7 @@ namespace FTAnalyzer
          */
         public Fact GetPreferredFact(string factType)
         {
-            return Facts.Where(f => (f.FactType == factType)).FirstOrDefault();
+            return preferredFacts.ContainsKey(factType) ? preferredFacts[factType] : null;
         }
 
         /**

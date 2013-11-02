@@ -33,6 +33,7 @@ namespace FTAnalyzer
         private IList<FactLocation> locations;
         private IList<Family> familiesAsParent;
         private IList<Family> familiesAsChild;
+        private Dictionary<string, Fact> preferredFacts;
 
         public Individual(XmlNode node)
         {
@@ -51,6 +52,7 @@ namespace FTAnalyzer
             locations = new List<FactLocation>();
             familiesAsChild = new List<Family>();
             familiesAsParent = new List<Family>();
+            preferredFacts = new Dictionary<string, Fact>();
 
             // Individual attributes
             AddFacts(node, Fact.PHYSICAL_DESC);
@@ -97,16 +99,16 @@ namespace FTAnalyzer
             AddFacts(node, Fact.CUSTOM_FACT);
             AddFacts(node, Fact.CUSTOM_FACT2);
 
-            IEnumerable<Fact> gedcomAges = facts.Where(x => x.GedcomAge != null);
-            if (gedcomAges.Count() > 0 && !BirthDate.IsKnown && BirthDate.IsExact)
-            {
-                // we have gedcom ages so add them to birth facts
-                foreach (Fact f in gedcomAges)
-                {
-                    Fact newFact = new BirthFact(f.GedcomAge.GetBirthDate(f.FactDate));
-                    facts.Add(newFact);
-                }
-            }
+            //IEnumerable<Fact> gedcomAges = facts.Where(x => x.GedcomAge != null);
+            //if (gedcomAges.Count() > 0 && !BirthDate.IsKnown && BirthDate.IsExact)
+            //{
+            //    // we have gedcom ages so add them to birth facts
+            //    foreach (Fact f in gedcomAges)
+            //    {
+            //        Fact newFact = new BirthFact(f.GedcomAge.GetBirthDate(f.FactDate));
+            //        facts.Add(newFact);
+            //    }
+            //}
         }
 
         internal Individual(Individual i)
@@ -131,6 +133,7 @@ namespace FTAnalyzer
                 this.locations = new List<FactLocation>(i.locations);
                 this.familiesAsChild = new List<Family>(i.familiesAsChild);
                 this.familiesAsParent = new List<Family>(i.familiesAsParent);
+                this.preferredFacts = new Dictionary<string, Fact>(i.preferredFacts);
             }
         }
 
@@ -695,12 +698,10 @@ namespace FTAnalyzer
             switch (fact.FactErrorLevel)
             {
                 case Fact.FactError.GOOD:
-                    facts.Add(fact);
-                    AddLocation(fact);
+                    AddGoodFact(fact);
                     break;
                 case Fact.FactError.WARNINGALLOW:
-                    facts.Add(fact);
-                    AddLocation(fact);
+                    AddGoodFact(fact);
                     errorFacts.Add(fact);
                     break;
                 case Fact.FactError.WARNINGIGNORE:
@@ -708,6 +709,14 @@ namespace FTAnalyzer
                     errorFacts.Add(fact);
                     break;
             }
+        }
+
+        private void AddGoodFact(Fact fact)
+        {
+            facts.Add(fact);
+            if (!preferredFacts.ContainsKey(fact.FactType))
+                preferredFacts.Add(fact.FactType, fact);
+            AddLocation(fact);
         }
 
         private void AddLocation(Fact fact)
@@ -722,10 +731,7 @@ namespace FTAnalyzer
 
         public Fact GetPreferredFact(string factType)
         {
-            // Returns the first fact of the given type.
-            // This assumes the original GEDCOM file has the preferred fact first in the list
-            // as per the GEDCOM 5.5 specification.
-            return GetFacts(factType).FirstOrDefault();
+            return preferredFacts.ContainsKey(factType) ? preferredFacts[factType] : null;
         }
 
         public FactDate GetPreferredFactDate(string factType)
