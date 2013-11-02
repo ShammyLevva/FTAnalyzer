@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTAnalyzer", "FTAnalyzer.csproj", "{799ECA65-6748-4B7C-BBD5-429C19E02161}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3D793607-BF4F-4E49-870F-191E187C2EAD} = {3D793607-BF4F-4E49-870F-191E187C2EAD}
+		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F} = {2DDE32B6-2BC5-44D3-8BE2-E7705645558F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Old Java Code", "..\Old Java Code\Old Java Code.csproj", "{19F9AC73-3B92-4656-9280-6CB638CB88E2}"
 EndProject
@@ -29,9 +33,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{918894
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTile", "..\BruTile\BruTile\BruTile.csproj", "{3D793607-BF4F-4E49-870F-191E187C2EAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTile.Desktop", "..\BruTile\BruTile.Desktop\BruTile.Desktop.csproj", "{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 10
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
 		SccLocalPath0 = .
@@ -55,6 +63,12 @@ Global
 		SccProjectUniqueName7 = ..\\DgvFilterPopup\\DgvFilterPopup.csproj
 		SccProjectName7 = ../DgvFilterPopup
 		SccLocalPath7 = ..\\DgvFilterPopup
+		SccProjectUniqueName8 = ..\\BruTile\\BruTile\\BruTile.csproj
+		SccProjectName8 = ../BruTile/BruTile
+		SccLocalPath8 = ..\\BruTile\\BruTile
+		SccProjectUniqueName9 = ..\\BruTile\\BruTile.Desktop\\BruTile.Desktop.csproj
+		SccProjectName9 = ../BruTile/BruTile.Desktop
+		SccLocalPath9 = ..\\BruTile\\BruTile.Desktop
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FTAnalyzer.vsmdi
@@ -105,6 +119,18 @@ Global
 		{4B9BE5FD-303E-4270-9C4D-FA3BDE6C34EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B9BE5FD-303E-4270-9C4D-FA3BDE6C34EB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4B9BE5FD-303E-4270-9C4D-FA3BDE6C34EB}.Release|x86.ActiveCfg = Release|Any CPU
+		{3D793607-BF4F-4E49-870F-191E187C2EAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D793607-BF4F-4E49-870F-191E187C2EAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D793607-BF4F-4E49-870F-191E187C2EAD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3D793607-BF4F-4E49-870F-191E187C2EAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D793607-BF4F-4E49-870F-191E187C2EAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D793607-BF4F-4E49-870F-191E187C2EAD}.Release|x86.ActiveCfg = Release|Any CPU
+		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

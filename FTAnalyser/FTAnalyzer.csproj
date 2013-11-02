@@ -107,14 +107,6 @@
     <ApplicationIcon>Resources\FTAnalyzer.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\DotNet\Projects\BruTile\BruTile.Desktop\bin\Debug\BruTile.dll</HintPath>
-    </Reference>
-    <Reference Include="BruTile.Desktop, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\DotNet\Projects\BruTile\BruTile.Desktop\bin\Debug\BruTile.Desktop.dll</HintPath>
-    </Reference>
     <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
@@ -148,10 +140,10 @@
     <Reference Include="ProjNet, Version=1.3.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\ProjNET4GeoAPI.1.3.0.2\lib\net40-client\ProjNet.dll</HintPath>
     </Reference>
-    <Reference Include="SharpMap, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SharpMap">
       <HintPath>..\..\..\..\..\..\..\DotNet\Projects\SharpMap\SharpMap.UI\bin\Debug\SharpMap.dll</HintPath>
     </Reference>
-    <Reference Include="SharpMap.UI, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SharpMap.UI">
       <HintPath>..\..\..\..\..\..\..\DotNet\Projects\SharpMap\SharpMap.UI\bin\Debug\SharpMap.UI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -680,6 +672,14 @@
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BruTile\BruTile.Desktop\BruTile.Desktop.csproj">
+      <Project>{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}</Project>
+      <Name>BruTile.Desktop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BruTile\BruTile\BruTile.csproj">
+      <Project>{3D793607-BF4F-4E49-870F-191E187C2EAD}</Project>
+      <Name>BruTile</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Printing.DataGridViewPrint\Printing.DataGridViewPrint.csproj">
       <Project>{FDFCB41B-C75D-476F-A4AA-EFD8C875A677}</Project>
       <Name>Printing.DataGridViewPrint</Name>
