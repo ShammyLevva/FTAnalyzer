@@ -42,6 +42,7 @@ namespace SharpMap.Forms.ToolBar
 
         public void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MapZoomToolStrip));
             this._zoomToExtents = new System.Windows.Forms.ToolStripButton();
             this._fixedZoomIn = new System.Windows.Forms.ToolStripButton();
             this._fixedZoomOut = new System.Windows.Forms.ToolStripButton();
@@ -58,31 +59,28 @@ namespace SharpMap.Forms.ToolBar
             // _zoomToExtents
             // 
             this._zoomToExtents.Enabled = false;
-            this._zoomToExtents.Image = global::SharpMap.Properties.Resources.zoom_extent;
+            this._zoomToExtents.Image = ((System.Drawing.Image)(resources.GetObject("_zoomToExtents.Image")));
             this._zoomToExtents.Name = "_zoomToExtents";
             this._zoomToExtents.Size = new System.Drawing.Size(23, 22);
             this._zoomToExtents.ToolTipText = "Zoom to the map\'s extent";
-            this._zoomToExtents.Click += OnFixedZoom;
             // 
             // _fixedZoomIn
             // 
             this._fixedZoomIn.Enabled = false;
-            this._fixedZoomIn.Image = global::SharpMap.Properties.Resources.zoom_in;
+            this._fixedZoomIn.Image = ((System.Drawing.Image)(resources.GetObject("_fixedZoomIn.Image")));
             this._fixedZoomIn.Name = "_fixedZoomIn";
             this._fixedZoomIn.Size = new System.Drawing.Size(23, 22);
             this._fixedZoomIn.ToolTipText = "Zoom into map";
-            this._fixedZoomIn.Click += OnFixedZoom;
             // 
             // _fixedZoomOut
             // 
             this._fixedZoomOut.Enabled = false;
-            this._fixedZoomOut.Image = global::SharpMap.Properties.Resources.zoom_out;
+            this._fixedZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("_fixedZoomOut.Image")));
             this._fixedZoomOut.Name = "_fixedZoomOut";
             this._fixedZoomOut.Size = new System.Drawing.Size(23, 22);
             this._fixedZoomOut.ToolTipText = "Zoom out of map";
-            this._fixedZoomOut.Click += OnFixedZoom;
             // 
-            // sep1
+            // _sep1
             // 
             this._sep1.Name = "_sep1";
             this._sep1.Size = new System.Drawing.Size(6, 6);
@@ -91,21 +89,19 @@ namespace SharpMap.Forms.ToolBar
             // 
             this._zoomToWindow.CheckOnClick = true;
             this._zoomToWindow.Enabled = false;
-            this._zoomToWindow.Image = global::SharpMap.Properties.Resources.zoom_region;
+            this._zoomToWindow.Image = ((System.Drawing.Image)(resources.GetObject("_zoomToWindow.Image")));
             this._zoomToWindow.Name = "_zoomToWindow";
             this._zoomToWindow.Size = new System.Drawing.Size(23, 20);
             this._zoomToWindow.ToolTipText = "Specify viewport by mouse selection";
-            this._zoomToWindow.CheckedChanged += OnCheckedChanged;
             // 
             // _pan
             // 
             this._pan.CheckOnClick = true;
             this._pan.Enabled = false;
-            this._pan.Image = global::SharpMap.Properties.Resources.pan;
+            this._pan.Image = ((System.Drawing.Image)(resources.GetObject("_pan.Image")));
             this._pan.Name = "_pan";
             this._pan.Size = new System.Drawing.Size(23, 20);
             this._pan.ToolTipText = "Drag the map\'s content around and scoll by mouse wheel";
-            this._pan.CheckedChanged += OnCheckedChanged;
             // 
             // _sep2
             // 
@@ -115,22 +111,20 @@ namespace SharpMap.Forms.ToolBar
             // _zoomPrev
             // 
             this._zoomPrev.Enabled = false;
-            this._zoomPrev.Image = global::SharpMap.Properties.Resources.zoom_last;
+            this._zoomPrev.Image = ((System.Drawing.Image)(resources.GetObject("_zoomPrev.Image")));
             this._zoomPrev.Name = "_zoomPrev";
-            this._zoomPrev.Size = new System.Drawing.Size(23, 22);
+            this._zoomPrev.Size = new System.Drawing.Size(23, 20);
             this._zoomPrev.ToolTipText = "Zoom to previous viewport";
-            this._zoomPrev.Click += OnFixedZoom;
             // 
             // _zoomNext
             // 
             this._zoomNext.Enabled = false;
-            this._zoomNext.Image = global::SharpMap.Properties.Resources.zoom_next;
+            this._zoomNext.Image = ((System.Drawing.Image)(resources.GetObject("_zoomNext.Image")));
             this._zoomNext.Name = "_zoomNext";
-            this._zoomNext.Size = new System.Drawing.Size(23, 22);
+            this._zoomNext.Size = new System.Drawing.Size(23, 20);
             this._zoomNext.ToolTipText = "Restore last viewport";
-            this._zoomNext.Click += OnFixedZoom;
             // 
-            // sep3
+            // _sep3
             // 
             this._sep3.Name = "_sep3";
             this._sep3.Size = new System.Drawing.Size(6, 6);
@@ -138,7 +132,7 @@ namespace SharpMap.Forms.ToolBar
             // _predefinedScales
             // 
             this._predefinedScales.Name = "_predefinedScales";
-            this._predefinedScales.Size = new System.Drawing.Size(121, 21);
+            this._predefinedScales.Size = new System.Drawing.Size(121, 23);
             // 
             // MapZoomToolStrip
             // 
@@ -154,7 +148,6 @@ namespace SharpMap.Forms.ToolBar
             this._zoomNext,
             this._sep3,
             this._predefinedScales});
-            this.Name = "MapZoomToolStrip";
             this.Text = "MapZoomToolStrip";
             this.ResumeLayout(false);
 
