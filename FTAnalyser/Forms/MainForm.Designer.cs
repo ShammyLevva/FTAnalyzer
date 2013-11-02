@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -609,14 +609,14 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 138);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -684,7 +684,6 @@
             // 
             // tabWarDead
             // 
-            this.tabWarDead.UseVisualStyleBackColor = true; 
             this.tabWarDead.Controls.Add(this.ckbWDIgnoreLocations);
             this.tabWarDead.Controls.Add(this.btnWWII);
             this.tabWarDead.Controls.Add(this.btnWWI);
@@ -698,6 +697,7 @@
             this.tabWarDead.Size = new System.Drawing.Size(931, 402);
             this.tabWarDead.TabIndex = 8;
             this.tabWarDead.Text = "War Dead";
+            this.tabWarDead.UseVisualStyleBackColor = true;
             // 
             // ckbWDIgnoreLocations
             // 
@@ -784,7 +784,6 @@
             // 
             // tabTreetops
             // 
-            this.tabTreetops.UseVisualStyleBackColor = true;
             this.tabTreetops.Controls.Add(this.dgTreeTops);
             this.tabTreetops.Controls.Add(this.ckbTTIgnoreLocations);
             this.tabTreetops.Controls.Add(this.btnTreeTops);
@@ -797,6 +796,7 @@
             this.tabTreetops.Size = new System.Drawing.Size(931, 402);
             this.tabTreetops.TabIndex = 7;
             this.tabTreetops.Text = "Treetops";
+            this.tabTreetops.UseVisualStyleBackColor = true;
             // 
             // dgTreeTops
             // 
@@ -873,7 +873,6 @@
             // 
             // tabColourReports
             // 
-            this.tabColourReports.UseVisualStyleBackColor = true;
             this.tabColourReports.Controls.Add(this.btnColourBMD);
             this.tabColourReports.Controls.Add(this.btnColourCensus);
             this.tabColourReports.Controls.Add(this.label10);
@@ -884,6 +883,7 @@
             this.tabColourReports.Size = new System.Drawing.Size(931, 402);
             this.tabColourReports.TabIndex = 12;
             this.tabColourReports.Text = "Search Summaries";
+            this.tabColourReports.UseVisualStyleBackColor = true;
             // 
             // btnColourBMD
             // 
@@ -931,7 +931,6 @@
             // 
             // tabLostCousins
             // 
-            this.tabLostCousins.UseVisualStyleBackColor = true;
             this.tabLostCousins.Controls.Add(this.btnLCnoCensus);
             this.tabLostCousins.Controls.Add(this.btnLCDuplicates);
             this.tabLostCousins.Controls.Add(this.btnLCMissingCountry);
@@ -954,6 +953,7 @@
             this.tabLostCousins.Size = new System.Drawing.Size(931, 402);
             this.tabLostCousins.TabIndex = 5;
             this.tabLostCousins.Text = "Lost Cousins";
+            this.tabLostCousins.UseVisualStyleBackColor = true;
             // 
             // btnLCnoCensus
             // 
@@ -997,6 +997,7 @@
             // 
             // rtbLostCousins
             // 
+            this.rtbLostCousins.BackColor = System.Drawing.SystemColors.Window;
             this.rtbLostCousins.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbLostCousins.Cursor = System.Windows.Forms.Cursors.Default;
             this.rtbLostCousins.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1124,7 +1125,6 @@
             // 
             // tabCensus
             // 
-            this.tabCensus.UseVisualStyleBackColor = true;
             this.tabCensus.Controls.Add(this.groupBox2);
             this.tabCensus.Controls.Add(this.groupBox1);
             this.tabCensus.Controls.Add(this.label1);
@@ -1139,6 +1139,7 @@
             this.tabCensus.Size = new System.Drawing.Size(931, 402);
             this.tabCensus.TabIndex = 0;
             this.tabCensus.Text = "Census";
+            this.tabCensus.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -1685,7 +1686,6 @@
             // 
             // tabDisplayProgress
             // 
-            this.tabDisplayProgress.UseVisualStyleBackColor = true;
             this.tabDisplayProgress.Controls.Add(this.rtbOutput);
             this.tabDisplayProgress.Controls.Add(this.label6);
             this.tabDisplayProgress.Controls.Add(this.pbFamilies);
@@ -1699,6 +1699,7 @@
             this.tabDisplayProgress.Size = new System.Drawing.Size(931, 402);
             this.tabDisplayProgress.TabIndex = 1;
             this.tabDisplayProgress.Text = "Gedcom Stats";
+            this.tabDisplayProgress.UseVisualStyleBackColor = true;
             // 
             // rtbOutput
             // 
