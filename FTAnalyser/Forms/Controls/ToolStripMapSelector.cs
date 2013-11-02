@@ -123,7 +123,7 @@ namespace FTAnalyzer.Forms.Controls
             this.mnuBingMapOS.Name = "mnuBingMapOS";
             this.mnuBingMapOS.Size = new System.Drawing.Size(164, 22);
             this.mnuBingMapOS.Text = "OS Bing Map";
-            this.mnuBingMapOS.Visible = false;
+            this.mnuBingMapOS.Visible = true;
             this.mnuBingMapOS.Click += new System.EventHandler(this._Click);
         }
 
@@ -201,7 +201,9 @@ namespace FTAnalyzer.Forms.Controls
             else if (sender == mnuBingMapOS)
             {
                 mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BingOSTileSource(BingRequest.UrlBing, null, BingMapType.Roads), "BingMapOS"));
+                    new BruTile.Web.BingTileSource(
+                        new BruTile.Web.BingRequest(BingRequest.UrlBing, null, BingMapType.Roads, "517"), null),
+                        "BingMapOS"));
                 mnuBingMapOS.Checked = true;
                 UpdateLinkLabel(LinkLabelType.BING);
             }

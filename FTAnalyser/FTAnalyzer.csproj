@@ -107,17 +107,13 @@
     <ApplicationIcon>Resources\FTAnalyzer.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=0.7.6.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BruTile, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\BruTile.0.7.6\lib\net40\BruTile.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\DotNet\Projects\BruTile\BruTile.Desktop\bin\Debug\BruTile.dll</HintPath>
     </Reference>
-    <Reference Include="BruTile.Desktop, Version=0.7.6.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BruTile.Desktop, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\BruTile.0.7.6\lib\net40\BruTile.Desktop.dll</HintPath>
-    </Reference>
-    <Reference Include="BruTile.MbTiles, Version=0.7.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\BruTile.0.7.6\lib\net40\BruTile.MbTiles.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\DotNet\Projects\BruTile\BruTile.Desktop\bin\Debug\BruTile.Desktop.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -215,8 +211,6 @@
     <Compile Include="Forms\Controls\ToolStripMapSelector.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Mapping\BingOSRequest.cs" />
-    <Compile Include="Mapping\BingOSTileSource.cs" />
     <Compile Include="Utilities\CustomToolStripRenderer.cs" />
     <Compile Include="Forms\EditLocation.cs">
       <SubType>Form</SubType>
