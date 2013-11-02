@@ -140,7 +140,7 @@ namespace FTAnalyzer.Forms.Controls
                     copyrightLabel.Text = "© Google - Terms of Use";
                     break;
                 case LinkLabelType.BING:
-                    link.LinkData = "http://www.bing.com";
+                    link.LinkData = "http://www.microsoft.com/maps/product/terms.html";
                     copyrightLabel.Text = "© Bing Maps";
                     break;
                 case LinkLabelType.OSM:
