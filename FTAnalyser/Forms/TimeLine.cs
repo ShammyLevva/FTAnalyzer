@@ -215,13 +215,14 @@ namespace FTAnalyzer.Forms
                 if (result == 9999)
                 {
                     locations = FilterToRelationsIncluded(ft.AllMapLocations);
-                    txtLocations.Text = locations.Count() + " Locations in total (you may need to zoom out to see them all)";
+                    txtLocations.Text = locations.Count() + " Locations in total";
                 }
                 else
                 {
                     locations = FilterToRelationsIncluded(ft.YearMapLocations(new FactDate(year), yearLimit));
-                    txtLocations.Text = locations.Count() + " Locations in total for year " + year + "  (you may need to zoom out to see them all)";
+                    txtLocations.Text = locations.Count() + " Locations in total for year " + year;
                 }
+                txtLocations.Text += " (you may need to zoom out to see them all). Use arrow tool then select icon to view ancestors at location";
                 factLocations.Clear();
                 Envelope bbox = new Envelope();
                 foreach (MapLocation loc in locations)
