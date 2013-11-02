@@ -678,6 +678,10 @@
       <Project>{FDFCB41B-C75D-476F-A4AA-EFD8C875A677}</Project>
       <Name>Printing.DataGridViewPrint</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SharpMap.UI\SharpMap.UI.csproj">
+      <Project>{DD1CC1DB-4BF9-4C88-A100-733D84795F3A}</Project>
+      <Name>SharpMap.UI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SharpMap\SharpMap.csproj">
       <Project>{86BD01F1-A460-4068-98E6-72691C1D8333}</Project>
       <Name>SharpMap</Name>
