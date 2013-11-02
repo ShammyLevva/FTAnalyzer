@@ -5,7 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTAnalyzer", "FTAnalyzer.cs
 	ProjectSection(ProjectDependencies) = postProject
 		{3D793607-BF4F-4E49-870F-191E187C2EAD} = {3D793607-BF4F-4E49-870F-191E187C2EAD}
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F} = {2DDE32B6-2BC5-44D3-8BE2-E7705645558F}
-		{DD1CC1DB-4BF9-4C88-A100-733D84795F3A} = {DD1CC1DB-4BF9-4C88-A100-733D84795F3A}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Old Java Code", "..\Old Java Code\Old Java Code.csproj", "{19F9AC73-3B92-4656-9280-6CB638CB88E2}"
@@ -38,13 +37,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTile", "..\BruTile\BruTi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTile.Desktop", "..\BruTile\BruTile.Desktop\BruTile.Desktop.csproj", "{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap", "..\SharpMap\SharpMap.csproj", "{86BD01F1-A460-4068-98E6-72691C1D8333}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap.UI", "..\SharpMap.UI\SharpMap.UI.csproj", "{DD1CC1DB-4BF9-4C88-A100-733D84795F3A}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 12
+		SccNumberOfProjects = 10
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
 		SccLocalPath0 = .
@@ -74,12 +69,6 @@ Global
 		SccProjectUniqueName9 = ..\\BruTile\\BruTile.Desktop\\BruTile.Desktop.csproj
 		SccProjectName9 = ../BruTile/BruTile.Desktop
 		SccLocalPath9 = ..\\BruTile\\BruTile.Desktop
-		SccProjectUniqueName10 = ..\\SharpMap\\SharpMap.csproj
-		SccProjectName10 = ../SharpMap
-		SccLocalPath10 = ..\\SharpMap
-		SccProjectUniqueName11 = ..\\SharpMap.UI\\SharpMap.UI.csproj
-		SccProjectName11 = ../SharpMap.UI
-		SccLocalPath11 = ..\\SharpMap.UI
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FTAnalyzer.vsmdi
@@ -200,30 +189,6 @@ Global
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.ReleaseDSProjection|Any CPU.ActiveCfg = Release|Any CPU
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.ReleaseDSProjection|Any CPU.Build.0 = Release|Any CPU
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.ReleaseDSProjection|x86.ActiveCfg = Release|Any CPU
-		{86BD01F1-A460-4068-98E6-72691C1D8333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{86BD01F1-A460-4068-98E6-72691C1D8333}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{86BD01F1-A460-4068-98E6-72691C1D8333}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{86BD01F1-A460-4068-98E6-72691C1D8333}.DebugDSProjection|Any CPU.ActiveCfg = Debug|Any CPU
-		{86BD01F1-A460-4068-98E6-72691C1D8333}.DebugDSProjection|Any CPU.Build.0 = Debug|Any CPU
-		{86BD01F1-A460-4068-98E6-72691C1D8333}.DebugDSProjection|x86.ActiveCfg = Debug|Any CPU
-		{86BD01F1-A460-4068-98E6-72691C1D8333}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{86BD01F1-A460-4068-98E6-72691C1D8333}.Release|Any CPU.Build.0 = Release|Any CPU
-		{86BD01F1-A460-4068-98E6-72691C1D8333}.Release|x86.ActiveCfg = Release|Any CPU
-		{86BD01F1-A460-4068-98E6-72691C1D8333}.ReleaseDSProjection|Any CPU.ActiveCfg = Release|Any CPU
-		{86BD01F1-A460-4068-98E6-72691C1D8333}.ReleaseDSProjection|Any CPU.Build.0 = Release|Any CPU
-		{86BD01F1-A460-4068-98E6-72691C1D8333}.ReleaseDSProjection|x86.ActiveCfg = Release|Any CPU
-		{DD1CC1DB-4BF9-4C88-A100-733D84795F3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD1CC1DB-4BF9-4C88-A100-733D84795F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DD1CC1DB-4BF9-4C88-A100-733D84795F3A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DD1CC1DB-4BF9-4C88-A100-733D84795F3A}.DebugDSProjection|Any CPU.ActiveCfg = DebugDSProjection|Any CPU
-		{DD1CC1DB-4BF9-4C88-A100-733D84795F3A}.DebugDSProjection|Any CPU.Build.0 = DebugDSProjection|Any CPU
-		{DD1CC1DB-4BF9-4C88-A100-733D84795F3A}.DebugDSProjection|x86.ActiveCfg = DebugDSProjection|Any CPU
-		{DD1CC1DB-4BF9-4C88-A100-733D84795F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DD1CC1DB-4BF9-4C88-A100-733D84795F3A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DD1CC1DB-4BF9-4C88-A100-733D84795F3A}.Release|x86.ActiveCfg = Release|Any CPU
-		{DD1CC1DB-4BF9-4C88-A100-733D84795F3A}.ReleaseDSProjection|Any CPU.ActiveCfg = ReleaseDSProjection|Any CPU
-		{DD1CC1DB-4BF9-4C88-A100-733D84795F3A}.ReleaseDSProjection|Any CPU.Build.0 = ReleaseDSProjection|Any CPU
-		{DD1CC1DB-4BF9-4C88-A100-733D84795F3A}.ReleaseDSProjection|x86.ActiveCfg = ReleaseDSProjection|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
