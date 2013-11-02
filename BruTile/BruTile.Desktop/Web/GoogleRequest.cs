@@ -202,7 +202,7 @@ namespace BruTile.Web
 
         // Google version strings
         private static string _versionGoogleMap = "m@130";
-        private static string _versionGoogleSatellite = "66";
+        private static string _versionGoogleSatellite = "90";
         private static string _versionGoogleLabels = "h@130";
         private static string _versionGoogleTerrain = "t@125,r@130";
         private const string SecGoogleWord = "Galileo";
@@ -310,11 +310,11 @@ namespace BruTile.Web
             GetSecGoogleWords(tileInfo.Index, out sec1, out sec2);
 
             TileIndex tileIndex = tileInfo.Index;
-
-            return new Uri(
-                string.Format(FormatProvider, UrlFormatString,
+            string url = string.Format(FormatProvider, UrlFormatString,
                               _server, GetServerNum(tileIndex, 4), _request, _version, _language.AsString(),
-                              tileIndex.Col, sec1, tileIndex.Row, tileIndex.Level, sec2, _versionKey));
+                              tileIndex.Col, sec1, tileIndex.Row, tileIndex.Level, sec2, _versionKey);
+            Console.WriteLine(url);
+            return new Uri(url);
         }
 
         /// <summary>

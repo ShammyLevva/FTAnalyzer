@@ -83,7 +83,6 @@ namespace FTAnalyzer.Forms.Controls
             this.mnuGoogleSatellite.Name = "mnuGoogleSatellite";
             this.mnuGoogleSatellite.Size = new System.Drawing.Size(164, 22);
             this.mnuGoogleSatellite.Text = "Google Satellite";
-            this.mnuGoogleSatellite.Visible = false;
             this.mnuGoogleSatellite.Click += new System.EventHandler(this._Click);
             // 
             // mnuOpenStreetMap
@@ -120,10 +119,10 @@ namespace FTAnalyzer.Forms.Controls
             // 
             // mnuBingMapOS
             // 
+            this.mnuBingMapOS.CheckOnClick = true;
             this.mnuBingMapOS.Name = "mnuBingMapOS";
             this.mnuBingMapOS.Size = new System.Drawing.Size(164, 22);
             this.mnuBingMapOS.Text = "OS Bing Map";
-            this.mnuBingMapOS.Visible = true;
             this.mnuBingMapOS.Click += new System.EventHandler(this._Click);
         }
 
@@ -169,6 +168,7 @@ namespace FTAnalyzer.Forms.Controls
                         new GoogleTileSource(GoogleMapType.GoogleSatellite), "GoogleSatellite"));
                 mnuGoogleSatellite.Checked = true;
                 UpdateLinkLabel(LinkLabelType.GOOGLE);
+                mnuGoogleSatellite.Visible = false;
             }
             else if (sender == mnuOpenStreetMap)
             {
@@ -202,7 +202,7 @@ namespace FTAnalyzer.Forms.Controls
             {
                 mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
                     new BruTile.Web.BingTileSource(
-                        new BruTile.Web.BingRequest(BingRequest.UrlBing, null, BingMapType.OS, "517"), null),
+                        new BruTile.Web.BingRequest(BingRequest.UrlBing, null, BingMapType.OS), null),
                         "BingMapOS"));
                 mnuBingMapOS.Checked = true;
                 UpdateLinkLabel(LinkLabelType.BING);
