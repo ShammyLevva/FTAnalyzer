@@ -19,15 +19,14 @@ namespace FTAnalyzer.Forms
         public People()
         {
             InitializeComponent();
-            People_Resize(this, null);
         }
 
         private void UpdateStatusCount()
         {
-            if (dgFamilies.Visible)
-                txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals and " + dgFamilies.RowCount + " Families.";
-            else
+            if (splitContainer.Panel2Collapsed)
                 txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals.";
+            else
+                txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals and " + dgFamilies.RowCount + " Families.";
         }
 
         public void SetLocation(FactLocation loc, int level)
@@ -48,6 +47,7 @@ namespace FTAnalyzer.Forms
                 dsFam.Add(f);
             dgFamilies.DataSource = dsFam;
             dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
+            splitContainer.Panel2Collapsed = false;
             UpdateStatusCount();
         }
 
@@ -60,8 +60,7 @@ namespace FTAnalyzer.Forms
             dgIndividuals.DataSource = dsInd;
             dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
             dgIndividuals.Dock = DockStyle.Fill;
-
-            dgFamilies.Visible = false;
+            splitContainer.Panel2Collapsed = true;
             UpdateStatusCount();
         }
 
@@ -113,7 +112,7 @@ namespace FTAnalyzer.Forms
             dgIndividuals.Sort(dgIndividuals.Columns[1], ListSortDirection.Ascending);
             dgIndividuals.Dock = DockStyle.Fill;
 
-            dgFamilies.Visible = false;
+            splitContainer.Panel2Collapsed = true;
             UpdateStatusCount();
         }
 
@@ -198,24 +197,6 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void People_Resize(object sender, EventArgs e)
-        {
-            int height;
-            if (families == null)
-            {
-                dgIndividuals.Height = this.Height - statusStrip1.Height;
-                dgFamilies.Visible = false;
-            }
-            else
-            {
-                height = (this.Height - 40 - statusStrip1.Height) / 2;
-                dgIndividuals.Height = height;
-                dgFamilies.Visible = true;
-                dgFamilies.Height = height;
-            }
-
-        }
-
         private void dgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
@@ -262,6 +243,30 @@ namespace FTAnalyzer.Forms
             }
             individuals = individuals.Distinct<Individual>().ToList();
             SetIndividuals(individuals, "Individuals that have more than once census record for a census year");
+        }
+
+        private void dgIndividuals_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                string indID = (string)dgIndividuals.CurrentRow.Cells["Ind_ID"].Value;
+                Individual ind = FamilyTree.Instance.GetIndividual(indID);
+                Facts factForm = new Facts(ind);
+                MainForm.DisposeDuplicateForms(factForm);
+                factForm.Show();
+            }
+        }
+
+        private void dgFamilies_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                string famID = (string)dgFamilies.CurrentRow.Cells["FamilyID"].Value;
+                Family fam = FamilyTree.Instance.GetFamily(famID);
+                Facts factForm = new Facts(fam);
+                MainForm.DisposeDuplicateForms(factForm);
+                factForm.Show();
+            }
         }
     }
 }

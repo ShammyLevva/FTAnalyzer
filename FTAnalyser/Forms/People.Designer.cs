@@ -29,28 +29,19 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(People));
-            this.dgIndividuals = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.dgFamilies = new System.Windows.Forms.DataGridView();
             this.txtCount = new System.Windows.Forms.ToolStripStatusLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
+            this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.dgIndividuals = new System.Windows.Forms.DataGridView();
+            this.dgFamilies = new System.Windows.Forms.DataGridView();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
+            this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.Panel2.SuspendLayout();
+            this.splitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dgIndividuals
-            // 
-            this.dgIndividuals.AllowUserToAddRows = false;
-            this.dgIndividuals.AllowUserToDeleteRows = false;
-            this.dgIndividuals.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dgIndividuals.Location = new System.Drawing.Point(0, 0);
-            this.dgIndividuals.Name = "dgIndividuals";
-            this.dgIndividuals.Size = new System.Drawing.Size(1038, 283);
-            this.dgIndividuals.TabIndex = 1;
-            this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgIndividuals_CellDoubleClick);
-            this.dgIndividuals.SelectionChanged += new System.EventHandler(this.dgIndividuals_SelectionChanged);
             // 
             // statusStrip1
             // 
@@ -62,39 +53,73 @@
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // dgFamilies
-            // 
-            this.dgFamilies.AllowUserToAddRows = false;
-            this.dgFamilies.AllowUserToDeleteRows = false;
-            this.dgFamilies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgFamilies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgFamilies.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgFamilies.Location = new System.Drawing.Point(0, 289);
-            this.dgFamilies.Name = "dgFamilies";
-            this.dgFamilies.Size = new System.Drawing.Size(1038, 272);
-            this.dgFamilies.TabIndex = 4;
-            // 
             // txtCount
             // 
             this.txtCount.Name = "txtCount";
             this.txtCount.Size = new System.Drawing.Size(118, 17);
             this.txtCount.Text = "toolStripStatusLabel1";
             // 
+            // splitContainer
+            // 
+            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer.Name = "splitContainer";
+            this.splitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer.Panel1
+            // 
+            this.splitContainer.Panel1.Controls.Add(this.dgIndividuals);
+            // 
+            // splitContainer.Panel2
+            // 
+            this.splitContainer.Panel2.Controls.Add(this.dgFamilies);
+            this.splitContainer.Size = new System.Drawing.Size(1038, 561);
+            this.splitContainer.SplitterDistance = 286;
+            this.splitContainer.TabIndex = 5;
+            // 
+            // dgIndividuals
+            // 
+            this.dgIndividuals.AllowUserToAddRows = false;
+            this.dgIndividuals.AllowUserToDeleteRows = false;
+            this.dgIndividuals.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgIndividuals.Location = new System.Drawing.Point(0, 0);
+            this.dgIndividuals.Name = "dgIndividuals";
+            this.dgIndividuals.Size = new System.Drawing.Size(1038, 286);
+            this.dgIndividuals.TabIndex = 2;
+            this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgIndividuals_CellDoubleClick_1);
+            // 
+            // dgFamilies
+            // 
+            this.dgFamilies.AllowUserToAddRows = false;
+            this.dgFamilies.AllowUserToDeleteRows = false;
+            this.dgFamilies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgFamilies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgFamilies.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgFamilies.Location = new System.Drawing.Point(0, 0);
+            this.dgFamilies.Name = "dgFamilies";
+            this.dgFamilies.Size = new System.Drawing.Size(1038, 271);
+            this.dgFamilies.TabIndex = 5;
+            this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFamilies_CellDoubleClick_1);
+            // 
             // People
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1038, 583);
-            this.Controls.Add(this.dgFamilies);
+            this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.dgIndividuals);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "People";
             this.Text = "Individuals & Families";
-            this.Resize += new System.EventHandler(this.People_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
+            this.splitContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -103,9 +128,10 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgIndividuals;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.DataGridView dgFamilies;
         private System.Windows.Forms.ToolStripStatusLabel txtCount;
+        private System.Windows.Forms.SplitContainer splitContainer;
+        private System.Windows.Forms.DataGridView dgIndividuals;
+        private System.Windows.Forms.DataGridView dgFamilies;
     }
 }
