@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{86BD01F1-A460-4068-98E6-72691C1D8333}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SharpMap</RootNamespace>
+    <AssemblyName>SharpMap</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\FTAnalyser\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>BruTile.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\FTAnalyser\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="GeoAPI">
+      <HintPath>..\FTAnalyser\packages\GeoAPI.1.7.1.1\lib\net40-client\GeoAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="NetTopologySuite">
+      <HintPath>..\FTAnalyser\packages\NetTopologySuite.1.13.1\lib\net40-client\NetTopologySuite.dll</HintPath>
+    </Reference>
+    <Reference Include="NetTopologySuite.IO.GeoTools">
+      <HintPath>..\FTAnalyser\packages\NetTopologySuite.IO.1.13.1\lib\net40-client\NetTopologySuite.IO.GeoTools.dll</HintPath>
+    </Reference>
+    <Reference Include="NetTopologySuite.IO.MsSqlSpatial">
+      <HintPath>..\FTAnalyser\packages\NetTopologySuite.IO.1.13.1\lib\net40-client\NetTopologySuite.IO.MsSqlSpatial.dll</HintPath>
+    </Reference>
+    <Reference Include="NetTopologySuite.IO.PostGis">
+      <HintPath>..\FTAnalyser\packages\NetTopologySuite.IO.1.13.1\lib\net40-client\NetTopologySuite.IO.PostGis.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\FTAnalyser\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PowerCollections">
+      <HintPath>..\FTAnalyser\packages\NetTopologySuite.1.13.1\lib\net40-client\PowerCollections.dll</HintPath>
+    </Reference>
+    <Reference Include="ProjNet">
+      <HintPath>..\FTAnalyser\packages\ProjNET4GeoAPI.1.3.0.2\lib\net40-client\ProjNet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\DisposableObject.cs" />
+    <Compile Include="Converters\GeoJSON\GeoJSON.cs" />
+    <Compile Include="Converters\GeoJSON\GeoJSONHelper.cs" />
+    <Compile Include="Converters\GeoJSON\GeoJSONWriter.cs" />
+    <Compile Include="Converters\SpatiaLite\GeometryFromSpatiaLite.cs" />
+    <Compile Include="Converters\WellKnownBinary\GeometryFromWKB.cs" />
+    <Compile Include="Converters\WellKnownBinary\GeometryToWKB.cs" />
+    <Compile Include="Converters\WellKnownBinary\WKBByteOrder.cs" />
+    <Compile Include="Converters\WellKnownBinary\WKBGeometryType.cs" />
+    <Compile Include="Converters\WellKnownText\GeometryFromWKT.cs" />
+    <Compile Include="Converters\WellKnownText\GeometryToWKT.cs" />
+    <Compile Include="Converters\WellKnownText\SpatialReference.cs" />
+    <Compile Include="Converters\WellKnownText\StreamTokenizer.cs" />
+    <Compile Include="Converters\WellKnownText\TokenType.cs" />
+    <Compile Include="Converters\WellKnownText\WKTStreamTokenizer.cs" />
+    <Compile Include="CoordinateSystems\Transformations\GeometryTransform.cs" />
+    <Compile Include="CoordinateSystems\Transformations\GeometryTransformDotSpatial.cs" />
+    <Compile Include="Data\FeatureDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Data\Providers\BaseProvider.cs" />
+    <Compile Include="Data\Providers\Database\SharpMapFeatureColumn.cs" />
+    <Compile Include="Data\Providers\Database\SharpMapFeatureColumns.cs" />
+    <Compile Include="Data\Providers\Database\SpatialDbProvider.cs" />
+    <Compile Include="Data\Providers\Database\SpatialDbUtility.cs" />
+    <Compile Include="Data\Providers\DbaseReader.cs" />
+    <Compile Include="Data\Providers\FilterProvider.cs" />
+    <Compile Include="Data\Providers\GeometryFeatureProvider.cs" />
+    <Compile Include="Data\Providers\GeometryProvider.cs" />
+    <Compile Include="Data\Providers\IProvider.cs" />
+    <Compile Include="Data\Providers\IProviderConfiguration.cs" />
+    <Compile Include="Data\Providers\MsSql.cs" />
+    <Compile Include="Data\Providers\MsSqlSpatial.cs" />
+    <Compile Include="Data\Providers\OleDbPoint.cs" />
+    <Compile Include="Data\Providers\OleDbTwoPointLine.cs" />
+    <Compile Include="Data\Providers\Pooling\Connector.cs" />
+    <Compile Include="Data\Providers\Pooling\ConnectorPool.cs" />
+    <Compile Include="Data\Providers\PreparedGeometryProvider.cs" />
+    <Compile Include="Data\Providers\ShapeFile.cs" />
+    <Compile Include="Data\Providers\ShapeFileHeader.cs" />
+    <Compile Include="Data\Providers\ShapeFileIndex.cs" />
+    <Compile Include="Data\Providers\ShapeType.cs" />
+    <Compile Include="Data\Providers\SqlServer2008.cs" />
+    <Compile Include="Data\Providers\WFSClient.cs" />
+    <Compile Include="Geometries\GeoAPIEx.cs" />
+    <Compile Include="Layers\DuplicateLayerException.cs" />
+    <Compile Include="Layers\IAsyncLayer.cs" />
+    <Compile Include="Layers\ICanQueryLayer.cs" />
+    <Compile Include="Layers\ILayer.cs" />
+    <Compile Include="Layers\LabelLayer.cs" />
+    <Compile Include="Layers\Layer.cs" />
+    <Compile Include="Layers\LayerCollection.cs" />
+    <Compile Include="Layers\LayerGroup.cs" />
+    <Compile Include="Layers\Symbolizer\AnyGeometryVectorLayer.cs" />
+    <Compile Include="Layers\Symbolizer\BaseVectorLayer.cs" />
+    <Compile Include="Layers\Symbolizer\LinealVectorLayer.cs" />
+    <Compile Include="Layers\Symbolizer\PolygonalVectorLayer.cs" />
+    <Compile Include="Layers\Symbolizer\PuntalVectorLayer.cs" />
+    <Compile Include="Layers\TileAsyncLayer.cs" />
+    <Compile Include="Layers\TiledWmsLayer.cs" />
+    <Compile Include="Layers\TileLayer.cs" />
+    <Compile Include="Layers\VariableLayerCollection.cs" />
+    <Compile Include="Layers\VectorLayer.cs" />
+    <Compile Include="Layers\WmsLayer.cs" />
+    <Compile Include="Map\Map.cs" />
+    <Compile Include="Map\MapViewportGuard.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rendering\Decoration\Disclaimer.cs" />
+    <Compile Include="Rendering\Decoration\EyeOfSight.cs" />
+    <Compile Include="Rendering\Decoration\GoogleMapsDisclamer.cs" />
+    <Compile Include="Rendering\Decoration\IMapDecoration.cs" />
+    <Compile Include="Rendering\Decoration\MapDecoration.cs" />
+    <Compile Include="Rendering\Decoration\MapDecorationAnchor.cs" />
+    <Compile Include="Rendering\Decoration\MapDecorationAnchorFlags.cs" />
+    <Compile Include="Rendering\Decoration\NorthArrow.cs" />
+    <Compile Include="Rendering\Decoration\ScaleBar\ScaleBar.cs" />
+    <Compile Include="Rendering\Decoration\ScaleBar\ScaleBarLabelText.cs" />
+    <Compile Include="Rendering\Decoration\ScaleBar\ScaleBarStyle.cs" />
+    <Compile Include="Rendering\Decoration\ScaleBar\Unit.cs" />
+    <Compile Include="Rendering\Label.cs" />
+    <Compile Include="Rendering\LabelCollisionDetection.cs" />
+    <Compile Include="Rendering\RenderExceptions.cs" />
+    <Compile Include="Rendering\Symbolizer\BaseSymbolizer.cs" />
+    <Compile Include="Rendering\Symbolizer\BasicLineSymbolizer.cs" />
+    <Compile Include="Rendering\Symbolizer\BasicPolygonSymbolizer.cs" />
+    <Compile Include="Rendering\Symbolizer\CachedLineSymbolizer.cs" />
+    <Compile Include="Rendering\Symbolizer\CharacterPointSymbolizer.cs" />
+    <Compile Include="Rendering\Symbolizer\CohenSutherlandLineClipping.cs" />
+    <Compile Include="Rendering\Symbolizer\GeometrySymbolizer.cs" />
+    <Compile Include="Rendering\Symbolizer\ILineSymbolizer.cs" />
+    <Compile Include="Rendering\Symbolizer\IPointSymbolizer.cs" />
+    <Compile Include="Rendering\Symbolizer\IPolygonSymbolizer.cs" />
+    <Compile Include="Rendering\Symbolizer\ISymbolizer.cs" />
+    <Compile Include="Rendering\Symbolizer\LineSymbolizer.cs" />
+    <Compile Include="Rendering\Symbolizer\ListPointSymbolizer.cs" />
+    <Compile Include="Rendering\Symbolizer\PathPointSymbolizer.cs" />
+    <Compile Include="Rendering\Symbolizer\PointSymbolizer.cs" />
+    <Compile Include="Rendering\Symbolizer\PolygonSymbolizer.cs" />
+    <Compile Include="Rendering\Symbolizer\RasterPointSymbolizer.cs" />
+    <Compile Include="Rendering\Symbolizer\Utility.cs" />
+    <Compile Include="Rendering\Symbolizer\WarpedLineSymbolizer.cs" />
+    <Compile Include="Rendering\Symbolizer\WarpPathToPath.cs" />
+    <Compile Include="Rendering\TextOnPath.cs" />
+    <Compile Include="Rendering\Thematics\ColorBlend.cs" />
+    <Compile Include="Rendering\Thematics\CustomTheme.cs" />
+    <Compile Include="Rendering\Thematics\GradientTheme.cs" />
+    <Compile Include="Rendering\Thematics\ITheme.cs" />
+    <Compile Include="Rendering\Thematics\UniqueValuesTheme.cs" />
+    <Compile Include="Rendering\VectorRenderer.cs" />
+    <Compile Include="Styles\GroupStyle.cs" />
+    <Compile Include="Styles\IStyle.cs" />
+    <Compile Include="Styles\LabelStyle.cs" />
+    <Compile Include="Styles\Style.cs" />
+    <Compile Include="Styles\VectorStyle.cs" />
+    <Compile Include="Utilities\GeoSpatialMath.cs" />
+    <Compile Include="Utilities\Indexing\BinaryTree.cs" />
+    <Compile Include="Utilities\Indexing\SpatialIndexing.cs" />
+    <Compile Include="Utilities\LeastSquaresTransform.cs" />
+    <Compile Include="Utilities\LineOffset.cs" />
+    <Compile Include="Utilities\Providers.cs" />
+    <Compile Include="Utilities\ReflectionUtility.cs" />
+    <Compile Include="Utilities\Surrogates.Brushes.cs" />
+    <Compile Include="Utilities\Surrogates.cs" />
+    <Compile Include="Utilities\Surrogates.Helper.cs" />
+    <Compile Include="Utilities\Transform.cs" />
+    <Compile Include="Utilities\Version.cs" />
+    <Compile Include="Utilities\Wfs\FeatureTypeInfo.cs" />
+    <Compile Include="Utilities\Wfs\GeometryFactories.cs" />
+    <Compile Include="Utilities\Wfs\HttpClientUtil.cs" />
+    <Compile Include="Utilities\Wfs\IWFS_TextResources.cs" />
+    <Compile Include="Utilities\Wfs\IXPathQueryManager.cs" />
+    <Compile Include="Utilities\Wfs\OGCFilter_FE1_1_0.cs" />
+    <Compile Include="Utilities\Wfs\PathNode.cs" />
+    <Compile Include="Utilities\Wfs\WFS1_0_0_XPathTextResources.cs" />
+    <Compile Include="Utilities\Wfs\WFS1_1_0_XPathTextResources.cs" />
+    <Compile Include="Utilities\Wfs\WFS_1_0_0_TextResources.cs" />
+    <Compile Include="Utilities\Wfs\WFS_1_1_0_TextResources.cs" />
+    <Compile Include="Utilities\Wfs\WFS_XPathTextResourcesBase.cs" />
+    <Compile Include="Utilities\Wfs\XPathQueryManager.cs" />
+    <Compile Include="Utilities\Wfs\XPathQueryManager_CompiledExpressionsDecorator.cs" />
+    <Compile Include="Utilities\Wfs\XPathQueryManager_DecoratorBase.cs" />
+    <Compile Include="Web\IClient.cs" />
+    <Compile Include="Web\OgcException.cs" />
+    <Compile Include="Web\Wcs\Capabilities.cs" />
+    <Compile Include="Web\Wcs\Client.cs" />
+    <Compile Include="Web\WebUtilities.cs" />
+    <Compile Include="Web\Wfs\Capabilities.cs" />
+    <Compile Include="Web\Wfs\Client.cs" />
+    <Compile Include="Web\Wms\Capabilities.cs" />
+    <Compile Include="Web\Wms\Client.cs" />
+    <Compile Include="Web\Wms\SpatialReferencedBoundingBox.cs" />
+    <Compile Include="Web\Wms\Tiling\ITileCache.cs" />
+    <Compile Include="Web\Wms\Tiling\TileCacheFileStorage.cs" />
+    <Compile Include="Web\Wms\Tiling\TileExtents.cs" />
+    <Compile Include="Web\Wms\Tiling\TileSet.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="COPYING.txt" />
+    <Content Include="Styles\DefaultSymbol.png" />
+    <Content Include="Uml\SharpMap-small.png" />
+    <Content Include="Uml\SharpMap.png" />
+    <Content Include="Web\Wcs\Schemas\WebCoverageService.txt" />
+    <Content Include="Web\Wfs\Schemas\1.1.0\examples\WFS_Capabilities_Sample.xml" />
+    <Content Include="Web\Wfs\Schemas\1.1.0\ReadMe.txt" />
+    <Content Include="Web\Wfs\Schemas\1.1.0\wsdl\readme.txt" />
+    <Content Include="Web\Wfs\Schemas\2.0.0\examples\Common\BuildingInstance.xml" />
+    <Content Include="Web\Wfs\Schemas\2.0.0\examples\Common\Exception.xml" />
+    <Content Include="Web\Wfs\Schemas\2.0.0\examples\Common\PersonInstance.xml" />
+    <Content Include="Web\Wfs\Schemas\2.0.0\examples\Common\SampleData.xml" />
+    <Content Include="Web\Wfs\Schemas\2.0.0\examples\GetCapabilities\GetCapabilities_Req_01.xml" />
+    <Content Include="Web\Wfs\Schemas\2.0.0\examples\GetCapabilities\GetCapabilities_Res_01.xml" />
+    <Content Include="Web\Wfs\Schemas\2.0.0\examples\GetCapabilities\GetCapabilities_Res_02.xml" />
+    <Content Include="Web\Wfs\Schemas\2.0.0\examples\GetCapabilities\GetCapabilities_Res_Min.xml" />
+    <Content Include="Web\Wfs\Schemas\2.0.0\ReadMe.txt" />
+    <Content Include="Web\Wfs\Schemas\2.0.0\wsdl\readme.txt" />
+    <Content Include="Web\Wms\Schemas\1.1.0\capabilities_1_1_0.xml" />
+    <Content Include="Web\Wms\Schemas\1.1.0\exception_1_1_0.xml" />
+    <Content Include="Web\Wms\Schemas\1.1.1\capabilities_1_1_1.xml" />
+    <Content Include="Web\Wms\Schemas\1.1.1\exception_1_1_1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="BruTile.snk" />
+    <None Include="packages.config" />
+    <None Include="SRID.csv" />
+    <None Include="Uml\SharpMap.cd" />
+    <None Include="Uml\SharpMap.pdf" />
+    <None Include="Web\Wcs\Schemas\1.0.0\describeCoverage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wcs\Schemas\1.0.0\getCoverage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wcs\Schemas\1.0.0\gml4wcs.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wcs\Schemas\1.0.0\OGC-exception.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wcs\Schemas\1.0.0\owsBase.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wcs\Schemas\1.0.0\values.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wcs\Schemas\1.0.0\wcsAll.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wcs\Schemas\1.0.0\wcsCapabilities.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wfs\Schemas\1.0.0\OGC-exception.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wfs\Schemas\1.0.0\WFS-basic.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wfs\Schemas\1.0.0\WFS-capabilities.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wfs\Schemas\1.0.0\WFS-transaction.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wfs\Schemas\1.1.0\wfs.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wfs\Schemas\1.1.0\wsdl\example-endpoints.wsdl" />
+    <None Include="Web\Wfs\Schemas\1.1.0\wsdl\example-GET-endpoints.wsdl" />
+    <None Include="Web\Wfs\Schemas\1.1.0\wsdl\example-POST-endpoints.wsdl" />
+    <None Include="Web\Wfs\Schemas\1.1.0\wsdl\example-SOAP-endpoints.wsdl" />
+    <None Include="Web\Wfs\Schemas\1.1.0\wsdl\wfs-http-bindings.wsdl" />
+    <None Include="Web\Wfs\Schemas\1.1.0\wsdl\wfs-kvp-bindings.wsdl" />
+    <None Include="Web\Wfs\Schemas\1.1.0\wsdl\wfs-kvp-interfaces.wsdl" />
+    <None Include="Web\Wfs\Schemas\1.1.0\wsdl\wfs-kvp.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wfs\Schemas\1.1.0\wsdl\wfs-responses.wsdl" />
+    <None Include="Web\Wfs\Schemas\1.1.0\wsdl\wfs-soap-bindings.wsdl" />
+    <None Include="Web\Wfs\Schemas\1.1.0\wsdl\wfs-util.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wfs\Schemas\1.1.0\wsdl\wfs-xml-interfaces.wsdl" />
+    <None Include="Web\Wfs\Schemas\1.1.0\wsdl\WSDL2Java.bat" />
+    <None Include="Web\Wfs\Schemas\2.0.0\examples\Common\BuildingSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wfs\Schemas\2.0.0\examples\Common\PersonSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wfs\Schemas\2.0.0\examples\Common\RoadSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wfs\Schemas\2.0.0\examples\Common\SampleSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wfs\Schemas\2.0.0\wfs.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wfs\Schemas\2.0.0\wsdl\example-endpoints.wsdl" />
+    <None Include="Web\Wfs\Schemas\2.0.0\wsdl\example-GET-endpoints.wsdl" />
+    <None Include="Web\Wfs\Schemas\2.0.0\wsdl\example-POST-endpoints.wsdl" />
+    <None Include="Web\Wfs\Schemas\2.0.0\wsdl\example-SOAP-endpoints.wsdl" />
+    <None Include="Web\Wfs\Schemas\2.0.0\wsdl\wfs-http-bindings.wsdl" />
+    <None Include="Web\Wfs\Schemas\2.0.0\wsdl\wfs-kvp-bindings.wsdl" />
+    <None Include="Web\Wfs\Schemas\2.0.0\wsdl\wfs-kvp-interfaces.wsdl" />
+    <None Include="Web\Wfs\Schemas\2.0.0\wsdl\wfs-kvp.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wfs\Schemas\2.0.0\wsdl\wfs-responses.wsdl" />
+    <None Include="Web\Wfs\Schemas\2.0.0\wsdl\wfs-soap-bindings.wsdl" />
+    <None Include="Web\Wfs\Schemas\2.0.0\wsdl\wfs-util.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wfs\Schemas\2.0.0\wsdl\wfs-xml-interfaces.wsdl" />
+    <None Include="Web\Wfs\Schemas\2.0.0\wsdl\WSDL2Java.bat" />
+    <None Include="Web\Wms\Schemas\1.1.0\capabilities_1_1_0.dtd" />
+    <None Include="Web\Wms\Schemas\1.1.0\exception_1_1_0.dtd" />
+    <None Include="Web\Wms\Schemas\1.1.1\capabilities_1_1_1.dtd" />
+    <None Include="Web\Wms\Schemas\1.1.1\exception_1_1_1.dtd" />
+    <None Include="Web\Wms\Schemas\1.1.1\OGC-exception.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wms\Schemas\1.1.1\WMS_DescribeLayerResponse.dtd" />
+    <None Include="Web\Wms\Schemas\1.1.1\WMS_exception_1_1_1.dtd" />
+    <None Include="Web\Wms\Schemas\1.1.1\WMS_MS_Capabilities.dtd" />
+    <None Include="Web\Wms\Schemas\1.3.0\capabilities_1_3_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wms\Schemas\1.3.0\capabilities_1_3_0.xsx">
+      <DependentUpon>capabilities_1_3_0.xsd</DependentUpon>
+    </None>
+    <None Include="Web\Wms\Schemas\1.3.0\exceptions_1_3_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web\Wms\Schemas\1.3.0\exceptions_1_3_0.xsx">
+      <DependentUpon>exceptions_1_3_0.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Web\Wcs\1.0.0\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BruTile\BruTile.Desktop\BruTile.Desktop.csproj">
+      <Project>{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}</Project>
+      <Name>BruTile.Desktop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BruTile\BruTile\BruTile.csproj">
+      <Project>{3D793607-BF4F-4E49-870F-191E187C2EAD}</Project>
+      <Name>BruTile</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

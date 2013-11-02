@@ -37,9 +37,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTile", "..\BruTile\BruTi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTile.Desktop", "..\BruTile\BruTile.Desktop\BruTile.Desktop.csproj", "{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap", "..\SharpMap\SharpMap.csproj", "{86BD01F1-A460-4068-98E6-72691C1D8333}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap.UI", "..\SharpMap.UI\SharpMap.UI.csproj", "{C65F6871-F250-4F61-9C1C-5F4BEAD76B41}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
+		SccNumberOfProjects = 12
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
 		SccLocalPath0 = .
@@ -69,6 +73,12 @@ Global
 		SccProjectUniqueName9 = ..\\BruTile\\BruTile.Desktop\\BruTile.Desktop.csproj
 		SccProjectName9 = ../BruTile/BruTile.Desktop
 		SccLocalPath9 = ..\\BruTile\\BruTile.Desktop
+		SccProjectUniqueName10 = ..\\SharpMap\\SharpMap.csproj
+		SccProjectName10 = ../SharpMap
+		SccLocalPath10 = ..\\SharpMap
+		SccProjectUniqueName11 = ..\\SharpMap.UI\\SharpMap.UI.csproj
+		SccProjectName11 = ../SharpMap.UI
+		SccLocalPath11 = ..\\SharpMap.UI
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FTAnalyzer.vsmdi
@@ -131,6 +141,18 @@ Global
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.Release|x86.ActiveCfg = Release|Any CPU
+		{86BD01F1-A460-4068-98E6-72691C1D8333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86BD01F1-A460-4068-98E6-72691C1D8333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86BD01F1-A460-4068-98E6-72691C1D8333}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{86BD01F1-A460-4068-98E6-72691C1D8333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86BD01F1-A460-4068-98E6-72691C1D8333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86BD01F1-A460-4068-98E6-72691C1D8333}.Release|x86.ActiveCfg = Release|Any CPU
+		{C65F6871-F250-4F61-9C1C-5F4BEAD76B41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C65F6871-F250-4F61-9C1C-5F4BEAD76B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C65F6871-F250-4F61-9C1C-5F4BEAD76B41}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C65F6871-F250-4F61-9C1C-5F4BEAD76B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C65F6871-F250-4F61-9C1C-5F4BEAD76B41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C65F6871-F250-4F61-9C1C-5F4BEAD76B41}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
