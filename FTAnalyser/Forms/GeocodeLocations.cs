@@ -665,7 +665,7 @@ namespace FTAnalyzer.Forms
             FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
             loc.GoogleLocation = string.Empty;
             loc.GeocodeStatus = FactLocation.Geocode.GEDCOM_USER;
-            DatabaseHelper.Instance.UpdateGeocodeStatus(loc.ToString(), loc.GeocodeStatus);
+            DatabaseHelper.Instance.UpdateGeocodeStatus(loc);
             dgLocations.Refresh();
         }
 
@@ -673,7 +673,7 @@ namespace FTAnalyzer.Forms
         {
             FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
             loc.GeocodeStatus = FactLocation.Geocode.INCORRECT;
-            DatabaseHelper.Instance.UpdateGeocodeStatus(loc.ToString(), loc.GeocodeStatus);
+            DatabaseHelper.Instance.UpdateGeocodeStatus(loc);
             dgLocations.Refresh();
         }
 
@@ -681,7 +681,8 @@ namespace FTAnalyzer.Forms
         {
             FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
             loc.GeocodeStatus = FactLocation.Geocode.NOT_SEARCHED;
-            DatabaseHelper.Instance.UpdateGeocodeStatus(loc.ToString(), loc.GeocodeStatus);
+            loc.GoogleLocation = string.Empty;
+            DatabaseHelper.Instance.UpdateGeocodeStatus(loc);
             dgLocations.Refresh();
         }
 

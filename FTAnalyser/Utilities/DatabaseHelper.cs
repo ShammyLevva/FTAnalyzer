@@ -3,6 +3,7 @@ using System.Data;
 using System;
 using System.Windows.Forms;
 using System.IO;
+using FTAnalyzer.Forms;
 
 namespace FTAnalyzer.Utilities
 {
@@ -205,9 +206,9 @@ namespace FTAnalyzer.Utilities
             return insertCmd;
         }
 
-        public void UpdateGeocodeStatus(string location, FactLocation.Geocode status)
+        public void UpdateGeocodeStatus(FactLocation loc)
         {
-            SQLiteCommand updateCmd = new SQLiteCommand("update geocode set founddate = date('now'), geocodestatus = ?, foundlocation = '', foundlevel = -2 where location = ?", conn);
+            SQLiteCommand updateCmd = new SQLiteCommand("update geocode set founddate = date('now'), geocodestatus = ?, foundlocation = ? where location = ?", conn);
 
             SQLiteParameter param = updateCmd.CreateParameter();
             param = updateCmd.CreateParameter();
@@ -218,9 +219,14 @@ namespace FTAnalyzer.Utilities
             param.DbType = DbType.String;
             updateCmd.Parameters.Add(param);
 
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.String;
+            updateCmd.Parameters.Add(param);
+            
             updateCmd.Prepare();
-            updateCmd.Parameters[0].Value = status;
-            updateCmd.Parameters[1].Value = location;
+            updateCmd.Parameters[0].Value = loc.GeocodeStatus;
+            updateCmd.Parameters[1].Value = loc.GoogleLocation;
+            updateCmd.Parameters[3].Value = loc.ToString();
 
             updateCmd.ExecuteNonQuery();
         }
