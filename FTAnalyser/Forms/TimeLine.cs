@@ -50,6 +50,7 @@ namespace FTAnalyzer.Forms
             ft = FamilyTree.Instance;
             cbLimitFactDates.Text = "No Limit";
             CheckIfGeocodingNeeded();
+            mapBox1.Refresh();
         }
 
         private void CheckIfGeocodingNeeded()
@@ -83,8 +84,8 @@ namespace FTAnalyzer.Forms
         {
             // Add Google maps layer to map control.
             //HttpUtility.SetDefaultProxy();
-            mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap"));
+            //mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+            //    new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap"));
 
             factLocations = new FeatureDataTable();
             factLocations.Columns.Add("MapLocation", typeof(MapLocation));

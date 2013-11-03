@@ -39,7 +39,6 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
             mnuMapStyle.Setup(linkLabel1, mapBox1);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
-            AddLinks();
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[10].Visible = false;
             this.location = location;
@@ -51,20 +50,7 @@ namespace FTAnalyzer.Forms
             dataUpdated = false;
             SetupMap();
         }
-
-        private void AddLinks()
-        {
-            LinkLabel.Link googleLink = new LinkLabel.Link();
-            googleLink.LinkData = "http://www.google.com/intl/en_ALL/help/terms_maps.html";
-            linkLabel1.Links.Add(googleLink);
-            LinkLabel.Link bingLink = new LinkLabel.Link();
-            bingLink.LinkData = "http://www.bing.com";
-            linkLabel1.Links.Add(bingLink);
-            LinkLabel.Link osmLink = new LinkLabel.Link();
-            osmLink.LinkData = "http://www.openstreetmap.org/copyright";
-            linkLabel1.Links.Add(osmLink);
-        }
-
+        
         private void CopyLocationDetails(FactLocation from, FactLocation to)
         {
             to.Latitude = from.Latitude;
@@ -80,9 +66,9 @@ namespace FTAnalyzer.Forms
         {
             // Add Google maps layer to map control.
             //HttpUtility.SetDefaultProxy();
-            mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap"));
-            //      new BingTileSource(BingRequest.UrlBing, "", BingMapType.Roads),"BingMap"));
+            //mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
+            //    new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap"));
+            ////      new BingTileSource(BingRequest.UrlBing, "", BingMapType.Roads),"BingMap"));
             pointTable = new FeatureDataTable();
             pointTable.Columns.Add("Label", typeof(string));
             

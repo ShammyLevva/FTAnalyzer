@@ -39,7 +39,20 @@ namespace FTAnalyzer.Forms.Controls
             this.copyrightLabel = label;
             this.mapbox = mapbox;
             SetupDropdown();
-            UpdateLinkLabel(LinkLabelType.GOOGLE);
+            GetCurrentMapPreference();
+        }
+
+        public void GetCurrentMapPreference()
+        {
+            string mapPreference = Application.UserAppDataRegistry.GetValue("Default Map Background", "mnuGoogleMap").ToString();
+            foreach (ToolStripMenuItem menu in this.DropDownItems)
+            {
+                if (mapPreference.Equals(menu.Name))
+                {
+                    _Click(menu, null);
+                    break;
+                }
+            }
         }
 
         private void SetupDropdown()
@@ -69,12 +82,11 @@ namespace FTAnalyzer.Forms.Controls
             // 
             // mnuGoogleMap
             // 
-            this.mnuGoogleMap.Checked = true;
             this.mnuGoogleMap.CheckOnClick = true;
-            this.mnuGoogleMap.CheckState = CheckState.Checked;
             this.mnuGoogleMap.Name = "mnuGoogleMap";
             this.mnuGoogleMap.Size = new System.Drawing.Size(164, 22);
             this.mnuGoogleMap.Text = "Google Map";
+            this.mnuGoogleMap.Tag = LinkLabelType.GOOGLE;
             this.mnuGoogleMap.Click += new System.EventHandler(this._Click);
             // 
             // mnuGoogleSatellite
@@ -83,6 +95,7 @@ namespace FTAnalyzer.Forms.Controls
             this.mnuGoogleSatellite.Name = "mnuGoogleSatellite";
             this.mnuGoogleSatellite.Size = new System.Drawing.Size(164, 22);
             this.mnuGoogleSatellite.Text = "Google Satellite";
+            this.mnuGoogleSatellite.Tag = LinkLabelType.GOOGLE;
             this.mnuGoogleSatellite.Click += new System.EventHandler(this._Click);
             // 
             // mnuOpenStreetMap
@@ -91,6 +104,7 @@ namespace FTAnalyzer.Forms.Controls
             this.mnuOpenStreetMap.Name = "mnuOpenStreetMap";
             this.mnuOpenStreetMap.Size = new System.Drawing.Size(164, 22);
             this.mnuOpenStreetMap.Text = "Open Street Map";
+            this.mnuOpenStreetMap.Tag = LinkLabelType.OSM;
             this.mnuOpenStreetMap.Click += new System.EventHandler(this._Click);
             // 
             // mnuBingMapAerial
@@ -99,6 +113,7 @@ namespace FTAnalyzer.Forms.Controls
             this.mnuBingMapAerial.Name = "mnuBingMapAerial";
             this.mnuBingMapAerial.Size = new System.Drawing.Size(164, 22);
             this.mnuBingMapAerial.Text = "Aerial Bing Map";
+            this.mnuBingMapAerial.Tag = LinkLabelType.BING;
             this.mnuBingMapAerial.Click += new System.EventHandler(this._Click);
             // 
             // mnuBingMapRoads
@@ -107,6 +122,7 @@ namespace FTAnalyzer.Forms.Controls
             this.mnuBingMapRoads.Name = "mnuBingMapRoads";
             this.mnuBingMapRoads.Size = new System.Drawing.Size(164, 22);
             this.mnuBingMapRoads.Text = "Roads Bing Map";
+            this.mnuBingMapRoads.Tag = LinkLabelType.BING;
             this.mnuBingMapRoads.Click += new System.EventHandler(this._Click);
             // 
             // mnuBingMapHybrid
@@ -115,6 +131,7 @@ namespace FTAnalyzer.Forms.Controls
             this.mnuBingMapHybrid.Name = "mnuBingMapHybrid";
             this.mnuBingMapHybrid.Size = new System.Drawing.Size(164, 22);
             this.mnuBingMapHybrid.Text = "Hybrid Bing Map";
+            this.mnuBingMapHybrid.Tag = LinkLabelType.BING;
             this.mnuBingMapHybrid.Click += new System.EventHandler(this._Click);
             // 
             // mnuBingMapOS
@@ -122,11 +139,12 @@ namespace FTAnalyzer.Forms.Controls
             this.mnuBingMapOS.CheckOnClick = true;
             this.mnuBingMapOS.Name = "mnuBingMapOS";
             this.mnuBingMapOS.Size = new System.Drawing.Size(164, 22);
-            this.mnuBingMapOS.Text = "OS Bing Map";
+            this.mnuBingMapOS.Text = "OS Bing Map (UK)";
+            this.mnuBingMapOS.Tag = LinkLabelType.BING;
             this.mnuBingMapOS.Click += new System.EventHandler(this._Click);
         }
 
-        public enum LinkLabelType { GOOGLE, BING, OSM }
+        public enum LinkLabelType { GOOGLE, BING, OSM, NLS }
 
         public void UpdateLinkLabel(LinkLabelType type)
         {
@@ -146,6 +164,10 @@ namespace FTAnalyzer.Forms.Controls
                     link.LinkData = "http://www.openstreetmap.org/copyright";
                     copyrightLabel.Text = "© OpenStreetMap";
                     break;
+                case LinkLabelType.NLS:
+                    link.LinkData = "http://maps.nls.uk/projects/api/index.html#licence";
+                    copyrightLabel.Text = "© NLS";
+                    break;
             }
             copyrightLabel.Links.Add(link);
         }
@@ -154,7 +176,8 @@ namespace FTAnalyzer.Forms.Controls
         {
             foreach (ToolStripMenuItem menu in this.DropDownItems)
                 menu.Checked = false;
-            mapbox.Map.BackgroundLayer.RemoveAt(0);
+            if(mapbox.Map.BackgroundLayer.Count > 0)
+                mapbox.Map.BackgroundLayer.RemoveAt(0);
             if (sender == mnuGoogleMap)
             {
                 mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
@@ -207,6 +230,7 @@ namespace FTAnalyzer.Forms.Controls
                 mnuBingMapOS.Checked = true;
                 UpdateLinkLabel(LinkLabelType.BING);
             }
+            Application.UserAppDataRegistry.SetValue("Default Map Background", ((ToolStripMenuItem) sender).Name);
             mapbox.Refresh();
         }
     }
