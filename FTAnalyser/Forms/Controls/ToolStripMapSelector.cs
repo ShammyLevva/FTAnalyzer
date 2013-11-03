@@ -100,6 +100,7 @@ namespace FTAnalyzer.Forms.Controls
             this.mnuGoogleSatellite.Text = "Google Satellite";
             this.mnuGoogleSatellite.Tag = LinkLabelType.GOOGLE;
             this.mnuGoogleSatellite.Click += new System.EventHandler(this._Click);
+            this.mnuGoogleSatellite.Visible = false;
             // 
             // mnuOpenStreetMap
             // 
