@@ -566,26 +566,34 @@ namespace FTAnalyzer
                         if (preMarriage < minEnd && preMarriage >= minStart)
                             minEnd = preMarriage;
                     }
-                    if(fam.Children.Count > 0)
+                    if (fam.Children.Count > 0)
                     {   // must be at least X years old at birth of child
-                        int minChildYear = fam.Children.Min(child => child.BirthDate.EndDate).Year;
-                        DateTime minChild = new DateTime(minChildYear - Properties.GeneralSettings.Default.MinParentalAge, 12, 31);
-                        if (minChild < minEnd && minChild >= minStart)
-                            minEnd = minChild;
-                        int maxChildYear = fam.Children.Max(child => child.BirthDate.StartDate).Year;
-                        DateTime maxChild;
-                        if (indiv.IsMale) // for males check that not over MAXYEARS when oldest child is born
-                            maxChild = new DateTime(minChildYear - FactDate.MAXYEARS, 1, 1);
-                        else // for females check that not over 60 when oldest child is born
-                            maxChild = new DateTime(minChildYear - 60, 1, 1);
-                        if (maxChild > minStart)
-                            minStart = maxChild;
+                        List<Individual> childrenNoAFT = fam.Children.Where(child => child.BirthDate.EndDate != FactDate.MAXDATE).ToList();
+                        if (childrenNoAFT.Count > 0)
+                        {
+                            int minChildYear = childrenNoAFT.Min(child => child.BirthDate.EndDate).Year;
+                            DateTime minChild = new DateTime(minChildYear - Properties.GeneralSettings.Default.MinParentalAge, 12, 31);
+                            if (minChild < minEnd && minChild >= minStart)
+                                minEnd = minChild;
+                        }
+                        List<Individual> childrenNoBEF = fam.Children.Where(child => child.BirthDate.StartDate != FactDate.MINDATE).ToList();
+                        if (childrenNoBEF.Count > 0)
+                        {
+                            int maxChildYear = childrenNoBEF.Max(child => child.BirthDate.StartDate).Year;
+                            DateTime maxChild;
+                            if (indiv.IsMale) // for males check that not over MAXYEARS when oldest child is born
+                                maxChild = new DateTime(maxChildYear - FactDate.MAXYEARS, 1, 1);
+                            else // for females check that not over 60 when oldest child is born
+                                maxChild = new DateTime(maxChildYear - 60, 1, 1);
+                            if (maxChild > minStart)
+                                minStart = maxChild;
+                        }
                     }
                 }
                 foreach (Family fam in indiv.FamiliesAsChild)
                 {  // check min date at least X years after parent
                     if (fam.Husband != null && fam.Husband.BirthDate.IsKnown && fam.Husband.BirthDate.StartDate != FactDate.MINDATE)
-                        if(fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
+                        if (fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
                             minStart = new DateTime(fam.Husband.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
                     if (fam.Wife != null && fam.Wife.BirthDate.IsKnown && fam.Wife.BirthDate.StartDate != FactDate.MINDATE)
                         if (fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
@@ -602,7 +610,7 @@ namespace FTAnalyzer
                     minStart = birthDate.StartDate;
                 baseDate = new FactDate(minStart, minEnd);
                 if (birthDate != baseDate)
-                     toAdd = baseDate;
+                    toAdd = baseDate;
             }
             if (toAdd != null && toAdd != birthDate && toAdd.Distance(birthDate) > 1)
             {
