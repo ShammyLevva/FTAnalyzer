@@ -78,7 +78,7 @@ namespace FTAnalyzer.Forms
             List<Individual> individuals = new List<Individual>();
             foreach (CensusDate censusDate in CensusDate.LOSTCOUSINS_CENSUS)
             {
-                Predicate<Individual> lcFacts = new Predicate<Individual>(i => i.IsLostCousinsEntered(censusDate) && !i.IsCensusDone(censusDate));
+                Predicate<Individual> lcFacts = new Predicate<Individual>(i => i.IsLostCousinsEntered(censusDate) && !i.IsCensusDone(censusDate, true, false));
                 IEnumerable<Individual> censusMissing = listtoCheck.Where(lcFacts);
                 individuals.AddRange(censusMissing);
             }
