@@ -42,6 +42,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuEditLocation = new System.Windows.Forms.ToolStripButton();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
@@ -51,15 +53,14 @@
             this.Relaton = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeOfFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GoogleLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AgeAtFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SortDistance = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.editLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
-            this.statusStrip.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -161,9 +162,9 @@
             this.dgIndividuals.AllowUserToAddRows = false;
             this.dgIndividuals.AllowUserToDeleteRows = false;
             this.dgIndividuals.AllowUserToOrderColumns = true;
-            this.dgIndividuals.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgIndividuals.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgIndividuals.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -174,6 +175,7 @@
             this.Relaton,
             this.TypeOfFact,
             this.FactDate,
+            this.GoogleLocation,
             this.AgeAtFact,
             this.Ahnentafel,
             this.SortDistance});
@@ -198,6 +200,20 @@
             this.dgIndividuals.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgIndividuals_CellContextMenuStripNeeded);
             this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgIndividuals_CellDoubleClick);
             this.dgIndividuals.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgIndividuals_CellToolTipTextNeeded);
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editLocationToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(144, 26);
+            // 
+            // editLocationToolStripMenuItem
+            // 
+            this.editLocationToolStripMenuItem.Name = "editLocationToolStripMenuItem";
+            this.editLocationToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.editLocationToolStripMenuItem.Text = "Edit Location";
+            this.editLocationToolStripMenuItem.Click += new System.EventHandler(this.editLocationToolStripMenuItem_Click);
             // 
             // statusStrip
             // 
@@ -284,6 +300,13 @@
             this.FactDate.ReadOnly = true;
             this.FactDate.Width = 150;
             // 
+            // GoogleLocation
+            // 
+            this.GoogleLocation.DataPropertyName = "GoogleLocation";
+            this.GoogleLocation.HeaderText = "Google Location";
+            this.GoogleLocation.Name = "GoogleLocation";
+            this.GoogleLocation.ReadOnly = true;
+            // 
             // AgeAtFact
             // 
             this.AgeAtFact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -310,20 +333,6 @@
             this.SortDistance.Name = "SortDistance";
             this.SortDistance.ReadOnly = true;
             // 
-            // contextMenuStrip
-            // 
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editLocationToolStripMenuItem});
-            this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(144, 26);
-            // 
-            // editLocationToolStripMenuItem
-            // 
-            this.editLocationToolStripMenuItem.Name = "editLocationToolStripMenuItem";
-            this.editLocationToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.editLocationToolStripMenuItem.Text = "Edit Location";
-            this.editLocationToolStripMenuItem.Click += new System.EventHandler(this.editLocationToolStripMenuItem_Click);
-            // 
             // MapIndividuals
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -339,9 +348,9 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
+            this.contextMenuStrip.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -362,6 +371,8 @@
         private System.Windows.Forms.ToolStripStatusLabel tsRecords;
         private System.Windows.Forms.ToolStripButton mnuEditLocation;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem editLocationToolStripMenuItem;
         private System.Windows.Forms.DataGridViewImageColumn FactIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ind_ID;
@@ -369,10 +380,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Relaton;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeOfFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GoogleLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn AgeAtFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ahnentafel;
         private System.Windows.Forms.DataGridViewTextBoxColumn SortDistance;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem editLocationToolStripMenuItem;
     }
 }

@@ -313,7 +313,6 @@ namespace BruTile.Web
             string url = string.Format(FormatProvider, UrlFormatString,
                               _server, GetServerNum(tileIndex, 4), _request, _version, _language.AsString(),
                               tileIndex.Col, sec1, tileIndex.Row, tileIndex.Level, sec2, _versionKey);
-            Console.WriteLine(url);
             return new Uri(url);
         }
 

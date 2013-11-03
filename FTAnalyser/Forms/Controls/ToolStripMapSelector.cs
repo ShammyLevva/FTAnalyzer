@@ -151,7 +151,7 @@ namespace FTAnalyzer.Forms.Controls
             this.mnuNLSOSHistoric.CheckOnClick = true;
             this.mnuNLSOSHistoric.Name = "mnuNLSOSHistoric";
             this.mnuNLSOSHistoric.Size = new System.Drawing.Size(164, 22);
-            this.mnuNLSOSHistoric.Text = "NLS OS 1920-1947";
+            this.mnuNLSOSHistoric.Text = "NLS OS 1920-1947 (UK)";
             this.mnuNLSOSHistoric.Tag = LinkLabelType.NLS;
             this.mnuNLSOSHistoric.Click += new System.EventHandler(this._Click);
         }
