@@ -176,6 +176,7 @@ namespace FTAnalyzer.Forms
             location.ViewPort.NorthEast.Long = env.Right();
             location.ViewPort.SouthWest.Lat = env.Bottom();
             location.ViewPort.SouthWest.Long = env.Left();
+            location.GoogleLocation = string.Empty;
             location.GeocodeStatus = FactLocation.Geocode.GEDCOM_USER;
 
             updateCmd.Parameters[0].Value = location.Latitude;

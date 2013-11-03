@@ -1722,7 +1722,6 @@
             this.buildLocationsToolStripMenuItem.Name = "buildLocationsToolStripMenuItem";
             this.buildLocationsToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.buildLocationsToolStripMenuItem.Text = "Build Locations";
-            this.buildLocationsToolStripMenuItem.Visible = false;
             this.buildLocationsToolStripMenuItem.Click += new System.EventHandler(this.buildLocationsToolStripMenuItem_Click);
             // 
             // rtbOutput

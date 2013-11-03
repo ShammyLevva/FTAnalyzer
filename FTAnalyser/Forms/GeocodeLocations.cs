@@ -663,6 +663,7 @@ namespace FTAnalyzer.Forms
         private void mnuVerified_Click(object sender, EventArgs e)
         {
             FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
+            loc.GoogleLocation = string.Empty;
             loc.GeocodeStatus = FactLocation.Geocode.GEDCOM_USER;
             DatabaseHelper.Instance.UpdateGeocodeStatus(loc.ToString(), loc.GeocodeStatus);
             dgLocations.Refresh();
@@ -875,6 +876,5 @@ namespace FTAnalyzer.Forms
             //    MessageBox.Show("Error geocoding : " + ex.Message);
             //}
         }
-
     }
 }

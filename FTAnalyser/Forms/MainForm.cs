@@ -1643,6 +1643,7 @@ namespace FTAnalyzer
             {
                 FactLocation.GetLocation(shift.Key + ", " + shift.Value);
             }
+            ft.LoadGeoLocationsFromDataBase();
             GeocodeLocations gl = new GeocodeLocations();
             gl.Show();
         }
