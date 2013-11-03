@@ -203,6 +203,7 @@
     <Compile Include="Forms\Controls\ToolStripMapSelector.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Mapping\NLSRequest.cs" />
     <Compile Include="Utilities\CustomToolStripRenderer.cs" />
     <Compile Include="Forms\EditLocation.cs">
       <SubType>Form</SubType>

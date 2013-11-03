@@ -23,6 +23,7 @@ namespace FTAnalyzer.Forms.Controls
         private ToolStripMenuItem mnuBingMapRoads;
         private ToolStripMenuItem mnuBingMapHybrid;
         private ToolStripMenuItem mnuBingMapOS;
+        private ToolStripMenuItem mnuNLSOSHistoric;
 
         public ToolStripMapSelector()
             : base()
@@ -64,6 +65,7 @@ namespace FTAnalyzer.Forms.Controls
             this.mnuBingMapRoads = new ToolStripMenuItem();
             this.mnuBingMapHybrid = new ToolStripMenuItem();
             this.mnuBingMapOS = new ToolStripMenuItem();
+            this.mnuNLSOSHistoric = new ToolStripMenuItem();
 
             // Setup map selector menu
             this.DisplayStyle = ToolStripItemDisplayStyle.Text;
@@ -74,7 +76,8 @@ namespace FTAnalyzer.Forms.Controls
             this.mnuBingMapAerial,
             this.mnuBingMapRoads,
             this.mnuBingMapHybrid,
-            this.mnuBingMapOS});
+            this.mnuBingMapOS,
+            this.mnuNLSOSHistoric});
             this.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Name = "mnuMapStyle";
             this.Size = new System.Drawing.Size(71, 22);
@@ -142,6 +145,15 @@ namespace FTAnalyzer.Forms.Controls
             this.mnuBingMapOS.Text = "OS Bing Map (UK)";
             this.mnuBingMapOS.Tag = LinkLabelType.BING;
             this.mnuBingMapOS.Click += new System.EventHandler(this._Click);
+            // 
+            // mnuNLSOSHistoric
+            // 
+            this.mnuNLSOSHistoric.CheckOnClick = true;
+            this.mnuNLSOSHistoric.Name = "mnuNLSOSHistoric";
+            this.mnuNLSOSHistoric.Size = new System.Drawing.Size(164, 22);
+            this.mnuNLSOSHistoric.Text = "NLS OS 1920-1947";
+            this.mnuNLSOSHistoric.Tag = LinkLabelType.NLS;
+            this.mnuNLSOSHistoric.Click += new System.EventHandler(this._Click);
         }
 
         public enum LinkLabelType { GOOGLE, BING, OSM, NLS }
@@ -230,7 +242,16 @@ namespace FTAnalyzer.Forms.Controls
                 mnuBingMapOS.Checked = true;
                 UpdateLinkLabel(LinkLabelType.BING);
             }
-            Application.UserAppDataRegistry.SetValue("Default Map Background", ((ToolStripMenuItem) sender).Name);
+            else if (sender == mnuNLSOSHistoric)
+            {
+                mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
+                    new BruTile.Web.OsmTileSource(
+                        new NLSRequest(), null),
+                        "NLSOSHistoric"));
+                mnuNLSOSHistoric.Checked = true;
+                UpdateLinkLabel(LinkLabelType.NLS);
+            }
+            Application.UserAppDataRegistry.SetValue("Default Map Background", ((ToolStripMenuItem)sender).Name);
             mapbox.Refresh();
         }
     }
