@@ -22,7 +22,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "3.0.3.0";
+        private string VERSION = "3.1.0.0";
 
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
@@ -1532,18 +1532,22 @@ namespace FTAnalyzer
                 MessageBox.Show("You need to stop Geocoding before you can export the database");
             else
             {
+                string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();
                 saveDatabase.FileName = "FTAnalyzer-Geocodes-" + DateTime.Now.ToString("yyyy-MM-dd") + ".zip";
-                saveDatabase.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                saveDatabase.InitialDirectory = directory;
                 DialogResult result = saveDatabase.ShowDialog();
                 if (result == DialogResult.OK)
                 {
                     DatabaseHelper dbh = DatabaseHelper.Instance;
                     dbh.StartBackupDatabase();
+                    if (File.Exists(saveDatabase.FileName))
+                        File.Delete(saveDatabase.FileName);
                     ZipFile zip = new ZipFile(saveDatabase.FileName);
                     zip.AddFile(dbh.Filename, string.Empty);
                     zip.Comment = "FT Analyzer zip file created by v" + PublishVersion() + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm");
                     zip.Save();
                     dbh.EndBackupDatabase();
+                    Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName));
                     MessageBox.Show("Database exported to " + saveDatabase.FileName);
                 }
             }
