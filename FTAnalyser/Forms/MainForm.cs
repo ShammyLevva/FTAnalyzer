@@ -1636,5 +1636,15 @@ namespace FTAnalyzer
             DisposeDuplicateForms(factForm);
             factForm.Show();
         }
+
+        private void buildLocationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (KeyValuePair<string, string> shift in FactLocation.COUNTRY_SHIFTS)
+            {
+                FactLocation.GetLocation(shift.Key + ", " + shift.Value);
+            }
+            GeocodeLocations gl = new GeocodeLocations();
+            gl.Show();
+        }
     }
 }

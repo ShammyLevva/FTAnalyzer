@@ -43,7 +43,7 @@ namespace FTAnalyzer
 
         private static Dictionary<string, string> COUNTRY_TYPOS = new Dictionary<string, string>();
         private static Dictionary<string, string> REGION_TYPOS = new Dictionary<string, string>();
-        private static Dictionary<string, string> COUNTRY_SHIFTS = new Dictionary<string, string>();
+        public static Dictionary<string, string> COUNTRY_SHIFTS = new Dictionary<string, string>();
         private static Dictionary<string, string> REGION_SHIFTS = new Dictionary<string, string>();
         private static Dictionary<string, string> FREECEN_LOOKUP = new Dictionary<string, string>();
         private static Dictionary<string, Tuple<string, string>> FINDMYPAST_LOOKUP = new Dictionary<string, Tuple<string, string>>();

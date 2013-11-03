@@ -174,6 +174,7 @@
             this.tabSelector = new System.Windows.Forms.TabControl();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.buildLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.cenDate = new Controls.CensusDateSelector();
             this.relTypesCensus = new Controls.RelationTypes();
@@ -258,7 +259,8 @@
             this.toolStripSeparator3,
             this.databaseToolStripMenuItem,
             this.toolStripSeparator5,
-            this.exitToolStripMenuItem});
+            this.exitToolStripMenuItem,
+            this.buildLocationsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -1715,6 +1717,14 @@
             this.restoreDatabase.FileName = "Geocodes.s3db";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // buildLocationsToolStripMenuItem
+            // 
+            this.buildLocationsToolStripMenuItem.Name = "buildLocationsToolStripMenuItem";
+            this.buildLocationsToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.buildLocationsToolStripMenuItem.Text = "Build Locations";
+            this.buildLocationsToolStripMenuItem.Visible = false;
+            this.buildLocationsToolStripMenuItem.Click += new System.EventHandler(this.buildLocationsToolStripMenuItem_Click);
+            // 
             // rtbOutput
             // 
             this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -2027,6 +2037,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnShowCensusEntered;
         private System.Windows.Forms.Button btnShowCensusMissing;
+        private System.Windows.Forms.ToolStripMenuItem buildLocationsToolStripMenuItem;
     }
 }
 
