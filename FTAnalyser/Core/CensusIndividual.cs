@@ -25,17 +25,17 @@ namespace FTAnalyzer
 
         public FactLocation CensusLocation
         {
-            get { return IsCensusDone(family.CensusDate) ? BestLocation(family.CensusDate) : family.BestLocation; }
+            get { return IsCensusDone(CensusDate) ? BestLocation(CensusDate) : family.BestLocation; }
         }
 
-        public FactDate CensusDate
+        public CensusDate CensusDate
         {
             get { return family.CensusDate; }
         }
 
         public Age Age
         {
-            get { return GetAge(family.CensusDate); }
+            get { return GetAge(CensusDate); }
         }
 
         public string CensusSurname
@@ -48,13 +48,8 @@ namespace FTAnalyzer
             get 
             {
                 foreach (Fact f in AllFacts)
-                {
-                    if (f.FactDate.IsKnown)
-                    {
-                        if (f.IsCensusFact && f.FactDate.Overlaps(family.CensusDate))
+                    if (f.IsValidCensus(family.CensusDate))
                             return f.CensusDetails;
-                    }
-                }
                 return string.Empty;
             }
         }

@@ -612,6 +612,16 @@ namespace FTAnalyzer
             });
         }
 
+        public bool IsValidCensus(FactDate when)
+        {
+            return FactDate.IsKnown && IsCensusFact && FactDate.Overlaps(when) && FactDate.IsNotBEForeOrAFTer && FactErrorLevel == Fact.FactError.GOOD;
+        }
+
+        public bool IsValidLostCousins(FactDate when)
+        {
+            return FactDate.IsKnown && FactType == Fact.LOSTCOUSINS && FactDate.Overlaps(when) && FactDate.IsNotBEForeOrAFTer && FactErrorLevel == Fact.FactError.GOOD;
+        }
+
         public string CensusDetails
         {
             get

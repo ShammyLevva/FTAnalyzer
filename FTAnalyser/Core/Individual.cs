@@ -535,10 +535,10 @@ namespace FTAnalyzer
             if (when == null) return false;
             foreach (Fact f in facts)
             {
-                if (f.FactDate.IsKnown && f.IsCensusFact && f.FactDate.Overlaps(when) && f.FactDate.IsNotBEForeOrAFTer && f.Location.ToString().Length > 0)
+                if (f.IsValidCensus(when) && f.Location.ToString().Length > 0)
                     return true;
             }
-            return false;                    
+            return false;
         }
 
         public bool IsCensusDone(CensusDate when) { return IsCensusDone(when, true, true); }
@@ -548,14 +548,11 @@ namespace FTAnalyzer
             if (when == null) return false;
             foreach (Fact f in facts)
             {
-                if (f.FactDate.IsKnown)
+                if (f.IsValidCensus(when))
                 {
-                    if (f.IsCensusFact && f.FactDate.Overlaps(when) && f.FactDate.IsNotBEForeOrAFTer)
-                    {
-                        if (!checkCountry) return true;
-                        if (f.Location.CensusCountryMatches(when.Country, includeUnknownCountries))
-                            return true;
-                    }
+                    if (!checkCountry) return true;
+                    if (f.Location.CensusCountryMatches(when.Country, includeUnknownCountries))
+                        return true;
                 }
             }
             return false;
@@ -564,13 +561,13 @@ namespace FTAnalyzer
         public bool IsLostCousinsEntered(CensusDate when) { return IsLostCousinsEntered(when, true); }
         public bool IsLostCousinsEntered(CensusDate when, bool includeUnknownCountries)
         {
-            Predicate<Fact> p = new Predicate<Fact>(f => f.FactType == Fact.LOSTCOUSINS && f.FactDate.IsKnown && f.FactDate.Overlaps(when) && f.FactDate.IsNotBEForeOrAFTer);
+            Predicate<Fact> p = new Predicate<Fact>(f => f.IsValidLostCousins(when));
             return facts.Any<Fact>(f => p(f) && this.BestLocation(when).CensusCountryMatches(when.Country, includeUnknownCountries));
         }
 
         public bool IsLostCousinsMissingCountry(CensusDate when)
         {
-            Predicate<Fact> p = new Predicate<Fact>(f => f.FactType == Fact.LOSTCOUSINS && f.FactDate.IsKnown && f.FactDate.Overlaps(when) && f.FactDate.IsNotBEForeOrAFTer);
+            Predicate<Fact> p = new Predicate<Fact>(f => f.IsValidLostCousins(when));
             return facts.Any<Fact>(f => p(f) && !this.BestLocation(when).IsKnownCountry);
         }
 
@@ -892,7 +889,7 @@ namespace FTAnalyzer
 
         public int CensusDateFactCount(CensusDate censusDate)
         {
-            return facts.Count(f => f.FactType == Fact.CENSUS && f.FactDate.Overlaps(censusDate) && f.FactDate.IsNotBEForeOrAFTer && f.FactErrorLevel == Fact.FactError.GOOD);
+            return facts.Count(f => f.IsValidCensus(censusDate));
         }
 
         public int Birth
