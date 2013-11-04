@@ -142,7 +142,7 @@ namespace FTAnalyzer.Forms
             labelLayer.Style = style;
             mapBox1.Map.Layers.Add(labelLayer);
 
-            mapBox1.Map.MinimumZoom = 500;
+            mapBox1.Map.MinimumZoom = 100;
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.QueryGrowFactor = 30;
             mapBox1.Map.ZoomToExtents();
@@ -307,12 +307,12 @@ namespace FTAnalyzer.Forms
             if (e.Button == MouseButtons.Left && mapBox1.Map.Zoom > mapBox1.Map.MinimumZoom)
             {
                 zoomed = true;
-                mapBox1.Map.Zoom -= mapBox1.Map.Zoom * 0.5;
+                mapBox1.Map.Zoom *= 1.5d;
             }
             else if (e.Button == MouseButtons.Right && mapBox1.Map.Zoom < mapBox1.Map.MaximumZoom)
             {
                 zoomed = true;
-                mapBox1.Map.Zoom += mapBox1.Map.Zoom * 0.5;
+                mapBox1.Map.Zoom *= 1d / 1.5d;
             }
             if (zoomed)
             {

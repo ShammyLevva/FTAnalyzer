@@ -50,7 +50,7 @@ namespace FTAnalyzer.Forms
             dataUpdated = false;
             SetupMap();
         }
-        
+
         private void CopyLocationDetails(FactLocation from, FactLocation to)
         {
             to.Latitude = from.Latitude;
@@ -71,7 +71,7 @@ namespace FTAnalyzer.Forms
             ////      new BingTileSource(BingRequest.UrlBing, "", BingMapType.Roads),"BingMap"));
             pointTable = new FeatureDataTable();
             pointTable.Columns.Add("Label", typeof(string));
-            
+
             GeometryFeatureProvider pointGFP = new GeometryFeatureProvider(pointTable);
 
             pointLayer = new VectorLayer("Point to Edit");
@@ -82,7 +82,7 @@ namespace FTAnalyzer.Forms
             pointLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
 
             mapBox1.Map.Layers.Add(pointLayer);
-            mapBox1.Map.MinimumZoom = 500;
+            mapBox1.Map.MinimumZoom = 100;
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             ResetMap();
@@ -90,7 +90,7 @@ namespace FTAnalyzer.Forms
 
         private void ResetMap()
         {
-            CopyLocationDetails(originalLocation, location); 
+            CopyLocationDetails(originalLocation, location);
             pointTable.Clear();
             pointTable.AddRow(GetRow(location.Longitude, location.Latitude));
 
@@ -115,7 +115,7 @@ namespace FTAnalyzer.Forms
             pointFeature.Geometry = new NetTopologySuite.Geometries.Point(p1, p2);
             return pointFeature;
         }
-        
+
         private void mapBox1_MouseClick(object sender, MouseEventArgs e)
         {
             GeoAPI.Geometries.Coordinate c1 = mapBox1.Map.ImageToWorld(new PointF(e.X - 21.0f, e.Y - 34.0f));
@@ -150,7 +150,7 @@ namespace FTAnalyzer.Forms
                 DialogResult result = DialogResult.Yes;
                 if (Application.UserAppDataRegistry.GetValue("Ask to update database", "True").Equals("True"))
                 {
-                    result = MessageBox.Show("Do you want to save this new position", "Save changes", 
+                    result = MessageBox.Show("Do you want to save this new position", "Save changes",
                         MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 }
                 if (result == DialogResult.Cancel)
@@ -210,6 +210,27 @@ namespace FTAnalyzer.Forms
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(e.Link.LinkData as string);
+        }
+
+        private void mapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            bool zoomed = false;
+            if (e.Button == MouseButtons.Left && mapBox1.Map.Zoom > mapBox1.Map.MinimumZoom)
+            {
+                zoomed = true;
+                mapBox1.Map.Zoom *= 1.5d;
+            }
+            else if (e.Button == MouseButtons.Right && mapBox1.Map.Zoom < mapBox1.Map.MaximumZoom)
+            {
+                zoomed = true;
+                mapBox1.Map.Zoom *= 1d / 1.5d;
+            }
+            if (zoomed)
+            {
+                Coordinate p = mapBox1.Map.ImageToWorld(new PointF(e.X, e.Y));
+                mapBox1.Map.Center.X = p.X;
+                mapBox1.Map.Center.Y = p.Y;
+            }
         }
     }
 }
