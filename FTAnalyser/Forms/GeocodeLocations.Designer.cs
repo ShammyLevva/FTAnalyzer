@@ -204,8 +204,7 @@
             this.toolStripSeparator1,
             this.mnuEditLocation});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(240, 120);
-            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
+            this.contextMenuStrip.Size = new System.Drawing.Size(240, 98);
             // 
             // mnuVerified
             // 
@@ -390,7 +389,6 @@
             this.mnuReverseGeocode.Name = "mnuReverseGeocode";
             this.mnuReverseGeocode.Size = new System.Drawing.Size(281, 22);
             this.mnuReverseGeocode.Text = "Lookup Locations for User entered data";
-            this.mnuReverseGeocode.Visible = false;
             this.mnuReverseGeocode.Click += new System.EventHandler(this.mnuReverseGeocde_Click);
             // 
             // mnuOptions

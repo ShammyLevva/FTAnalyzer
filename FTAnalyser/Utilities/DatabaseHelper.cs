@@ -331,6 +331,15 @@ namespace FTAnalyzer.Utilities
         }
         #endregion
 
+        #region Cursor Queries
+
+        public SQLiteCommand NeedsReverseGeocode()
+        {
+            return new SQLiteCommand("select location, latitude, longitude from geocode where foundlocation='' and geocodestatus=3", conn);
+        }
+
+        #endregion
+
         public bool StartBackupDatabase()
         {
             try
