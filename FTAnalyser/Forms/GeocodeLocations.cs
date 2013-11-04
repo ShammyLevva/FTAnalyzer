@@ -710,6 +710,8 @@ namespace FTAnalyzer.Forms
                 mnuGeocodeLocations.Enabled = false;
                 mnuEditLocation.Enabled = false;
                 mnuReverseGeocode.Enabled = false;
+                txtLocations.Text = string.Empty;
+                txtGoogleWait.Text = string.Empty;
                 ft.Geocoding = true;
                 reverseGeocodeBackgroundWorker.RunWorkerAsync();
                 this.Cursor = Cursors.Default;
@@ -750,7 +752,6 @@ namespace FTAnalyzer.Forms
                         {
                             int foundLevel = -1;
                             GeoResponse.CResult.CGeometry.CViewPort viewport = new GeoResponse.CResult.CGeometry.CViewPort();
-                            loc.GeocodeStatus = FactLocation.Geocode.NO_MATCH;
                             if (res.Status == "OK")
                             {
                                 foreach (GeoResponse.CResult result in res.Results)
@@ -760,6 +761,7 @@ namespace FTAnalyzer.Forms
                                     if (foundLevel == loc.Level)
                                     {
                                         loc.GoogleLocation = result.ReturnAddress;
+                                        loc.GoogleResultType = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
                                         break;
                                     }
                                 }
@@ -773,6 +775,7 @@ namespace FTAnalyzer.Forms
                                         if (foundLevel <= loc.Level)
                                         {
                                             loc.GoogleLocation = result.ReturnAddress;
+                                            loc.GoogleResultType = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
                                             break;
                                         }
                                     }
@@ -786,8 +789,8 @@ namespace FTAnalyzer.Forms
                         }
                     }
                     count++;
-                    int percent = (int)Math.Truncate((count - 1) * 100.0 / total);
-                    string status = "Done " + (count - 1) + " of " + total + ".  ";
+                    int percent = (int)Math.Truncate(count * 100.0 / total);
+                    string status = "Done " + count + " of " + total + ".  ";
                     worker.ReportProgress(percent, status);
 
                     if (worker.CancellationPending ||

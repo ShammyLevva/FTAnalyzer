@@ -110,13 +110,13 @@ namespace FTAnalyzer.Utilities
                     cmd.ExecuteNonQuery(); // set to level mismatch if partial
                     cmd = new SQLiteCommand("update versions set Database = '3.0.2.0'", conn);
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Please note that due to fixes in the way Google reports\nlocations your 'Google Matched' geocodes have been reset."); 
+                    MessageBox.Show("Please note that due to fixes in the way Google reports\nlocations your 'Google Matched' geocodes have been reset.");
                 }
                 if (dbVersion < v3_1_0_2)
                 {
                     // Version v3.1.0.2 needs to reset Google locations & found level to unknown where status is user entered
                     SQLiteCommand cmd = new SQLiteCommand("update geocode set foundlocation='', foundlevel=-2 where geocodestatus=3", conn);
-                    cmd.ExecuteNonQuery(); 
+                    cmd.ExecuteNonQuery();
                     cmd = new SQLiteCommand("update versions set Database = '3.1.0.2'", conn);
                     cmd.ExecuteNonQuery();
                 }
@@ -208,7 +208,7 @@ namespace FTAnalyzer.Utilities
 
         public void UpdateGeocodeStatus(FactLocation loc)
         {
-            SQLiteCommand updateCmd = new SQLiteCommand("update geocode set founddate = date('now'), geocodestatus = ?, foundlocation = ? where location = ?", conn);
+            SQLiteCommand updateCmd = new SQLiteCommand("update geocode set founddate = date('now'), geocodestatus = ?, foundlocation = ?, foundresulttype = ? where location = ?", conn);
 
             SQLiteParameter param = updateCmd.CreateParameter();
             param = updateCmd.CreateParameter();
@@ -222,11 +222,16 @@ namespace FTAnalyzer.Utilities
             param = updateCmd.CreateParameter();
             param.DbType = DbType.String;
             updateCmd.Parameters.Add(param);
-            
+
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.String;
+            updateCmd.Parameters.Add(param);
+
             updateCmd.Prepare();
             updateCmd.Parameters[0].Value = loc.GeocodeStatus;
             updateCmd.Parameters[1].Value = loc.GoogleLocation;
-            updateCmd.Parameters[2].Value = loc.ToString();
+            updateCmd.Parameters[2].Value = loc.GoogleResultType;
+            updateCmd.Parameters[3].Value = loc.ToString();
 
             updateCmd.ExecuteNonQuery();
         }
@@ -356,7 +361,7 @@ namespace FTAnalyzer.Utilities
 
         public void EndBackupDatabase()
         {
-            if(conn.State != ConnectionState.Open)
+            if (conn.State != ConnectionState.Open)
                 OpenDatabaseConnection();
         }
     }
