@@ -790,7 +790,7 @@ namespace FTAnalyzer.Forms
                     }
                     count++;
                     int percent = (int)Math.Truncate(count * 100.0 / total);
-                    string status = "Done " + count + " of " + total + ".  ";
+                    string status = "Looking up location names from Latitude/Longitudes. Done " + count + " of " + total + ".  ";
                     worker.ReportProgress(percent, status);
 
                     if (worker.CancellationPending ||

@@ -218,12 +218,12 @@ namespace FTAnalyzer.Forms
             if (e.Button == MouseButtons.Left && mapBox1.Map.Zoom > mapBox1.Map.MinimumZoom)
             {
                 zoomed = true;
-                mapBox1.Map.Zoom *= 1.5d;
+                mapBox1.Map.Zoom *= 1d / 1.5d;
             }
             else if (e.Button == MouseButtons.Right && mapBox1.Map.Zoom < mapBox1.Map.MaximumZoom)
             {
                 zoomed = true;
-                mapBox1.Map.Zoom *= 1d / 1.5d;
+                mapBox1.Map.Zoom *= 1.5d;
             }
             if (zoomed)
             {
