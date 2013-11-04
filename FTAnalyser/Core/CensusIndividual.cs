@@ -45,16 +45,16 @@ namespace FTAnalyzer
 
         public string CensusReference
         {
-            get 
+            get
             {
                 foreach (Fact f in AllFacts)
-                    if (f.IsValidCensus(family.CensusDate))
-                            return f.CensusDetails;
+                    if (f.IsValidCensus(CensusDate))
+                        return f.CensusReference;
                 return string.Empty;
             }
         }
 
-        public DataGridViewCellStyle CellStyle { get; set; } 
+        public DataGridViewCellStyle CellStyle { get; set; }
 
         public bool IsValidLocation(string location)
         {

@@ -270,7 +270,7 @@ namespace FTAnalyzer
                     }
                     SetCommentAndLocation(FactType, FamilyTree.GetText(node), FamilyTree.GetText(node, "PLAC"),
                         FamilyTree.GetText(node, "PLAC/MAP/LATI"), FamilyTree.GetText(node, "PLAC/MAP/LONG"));
-                    
+
                     if (FactType.Equals(CENSUS) && Location.IsUnitedKingdom)
                     {  // only check UK census dates for errors as those are used for colour census
                         CheckCensusDate("Census");
@@ -357,19 +357,19 @@ namespace FTAnalyzer
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN);
                 if (matcher.Success)
                 {
-                    this.Page = matcher.Groups[1].ToString();
+                    this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN2);
                 if (matcher.Success)
                 {
-                    this.Page = matcher.Groups[1].ToString();
+                    this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = "Missing";
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3);
                 if (matcher.Success)
                 {
-                    this.Page = matcher.Groups[1].ToString();
+                    this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
                 }
             }
@@ -622,21 +622,23 @@ namespace FTAnalyzer
             return FactDate.IsKnown && FactType == Fact.LOSTCOUSINS && FactDate.Overlaps(when) && FactDate.IsNotBEForeOrAFTer && FactErrorLevel == Fact.FactError.GOOD;
         }
 
-        public string CensusDetails
+        public string CensusReference
         {
             get
             {
                 string result = string.Empty;
-                if (Piece.Length > 0)
+                if (Location.Country.Equals(Countries.CANADA) && FactDate.Overlaps(CensusDate.CANADACENSUS1881))
+                    return "Canada Census references not yet available";
+                else if (Location.Country.Equals(Countries.UNITED_STATES) && FactDate.Overlaps(CensusDate.USCENSUS1880))
+                    return "US Census references not yet available";
+                else if (Location.Country.Equals(Countries.IRELAND) && FactDate.Overlaps(CensusDate.IRELANDCENSUS1911))
+                    return "Irish Census references not yet available";
+                else if (Location.Country.Equals(Countries.UNITED_STATES) && FactDate.Overlaps(CensusDate.USCENSUS1940))
+                    return "US Census references not yet available";
+                else if (Piece.Length > 0)
                 {
                     if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1881))
                         return "Piece: " + Piece + ", Folio: " + Folio + ", Page: " + Page;
-                    if (Location.Country.Equals(Countries.SCOTLAND) && FactDate.Overlaps(CensusDate.UKCENSUS1881))
-                        return "Parish: " + Parish + Parishes.Reference(Parish) + " ED: " + ED + ", Page: " + Page;
-                    if (Location.Country.Equals(Countries.CANADA) && FactDate.Overlaps(CensusDate.CANADACENSUS1881))
-                        return "Canada Census references not yet available";
-                    if (Location.Country.Equals(Countries.UNITED_STATES) && FactDate.Overlaps(CensusDate.USCENSUS1880))
-                        return "US Census references not yet available";
                     if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1841))
                     {
                         if (Book.Length > 0)
@@ -644,13 +646,15 @@ namespace FTAnalyzer
                         else
                             return "Piece: " + Piece + ", Book: see census image (stamped on the census page after the piece number), Folio: " + Folio + ", Page: " + Page;
                     }
-                    if (Location.Country.Equals(Countries.IRELAND) && FactDate.Overlaps(CensusDate.IRELANDCENSUS1911))
-                        return "Irish Census references not yet available";
                     if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1911))
                         return "Piece: " + Piece + ", Schedule: " + Schedule;
-                    if (Location.Country.Equals(Countries.UNITED_STATES) && FactDate.Overlaps(CensusDate.USCENSUS1940))
-                        return "US Census references not yet available";
                 }
+                else if (Parish.Length > 0)
+                {
+                    if (Location.Country.Equals(Countries.SCOTLAND) && FactDate.Overlaps(CensusDate.UKCENSUS1881))
+                        return "Parish: " + Parish + Parishes.Reference(Parish) + " ED: " + ED + ", Page: " + Page;
+                }
+
                 return result;
             }
         }
