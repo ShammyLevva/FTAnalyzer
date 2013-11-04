@@ -57,10 +57,14 @@ namespace FTAnalyzer
         //Database online. Class: RG9; Piece: 1105; Folio: 90; Page: 21; GSU
         //RG14PN22623 RG78PN1327 RD455 SD10 ED13 SN183
         //Parish: Inverurie; ED: 4; Page: 12; Line: 3; Roll: CSSCT1901_69
+        //Class: RG14; Piece: 21983
+        //Class: RG14; Piece: 12577; Schedule Number: 103
         private static readonly string EW_CENSUS_PATTERN = "Class: RG(\\d{2,3}); Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3}); GSU";
         private static readonly string EW_CENSUS_1841_PATTERN = "Class: HO107; Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3}); GSU";
         private static readonly string EW_CENSUS_1841_PATTERN2 = "Class: HO107; Piece:? (\\d{1,5}); Book: (\\d{1,3});.*?Folio: (\\d{1,4}); Page: (\\d{1,3});";
         private static readonly string EW_CENSUS_1911_PATTERN = "^RG14PN(\\d{1,6}) .*SN(\\d{1,3})$";
+        private static readonly string EW_CENSUS_1911_PATTERN2 = "Class: RG14; Piece: (\\d{1,6})$";
+        private static readonly string EW_CENSUS_1911_PATTERN3 = "Class: RG14; Piece: (\\d{1,6}); Schedule Number: (\\d{1,3})$";
         private static readonly string SCOT_CENSUS_PATTERN = "Parish: ([A-Za-z]+); ED: (\\d{1,3}); Page: (\\d{1,4}); Line: (\\d{1,2}); Roll: CSSCT";
         private static readonly string SCOT_CENSUS_PATTERN2 = "(\\d{3}/\\d{2}) (\\d{3}/\\d{2}) (\\d{3,4})";
 
@@ -351,6 +355,18 @@ namespace FTAnalyzer
                     this.Page = matcher.Groups[4].ToString();
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN);
+                if (matcher.Success)
+                {
+                    this.Page = matcher.Groups[1].ToString();
+                    this.Schedule = matcher.Groups[2].ToString();
+                }
+                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN2);
+                if (matcher.Success)
+                {
+                    this.Page = matcher.Groups[1].ToString();
+                    this.Schedule = "Missing";
+                }
+                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3);
                 if (matcher.Success)
                 {
                     this.Page = matcher.Groups[1].ToString();
