@@ -760,20 +760,21 @@ namespace FTAnalyzer.Forms
                                     if (foundLevel == loc.Level)
                                     {
                                         loc.GoogleLocation = result.ReturnAddress;
-                                        loc.ViewPort = viewport;
                                         break;
                                     }
                                 }
-                                // we haven't got a good match so try again with <=
-                                foreach (GeoResponse.CResult result in res.Results)
+                                if (loc.GoogleLocation.Length == 0)
                                 {
-                                    foundLevel = GoogleMap.GetFactLocation(result.Types);
-                                    viewport = result.Geometry.ViewPort;
-                                    if (foundLevel <= loc.Level)
+                                    // we haven't got a good match so try again with level <=
+                                    foreach (GeoResponse.CResult result in res.Results)
                                     {
-                                        loc.GoogleLocation = result.ReturnAddress;
-                                        loc.ViewPort = viewport;
-                                        break;
+                                        foundLevel = GoogleMap.GetFactLocation(result.Types);
+                                        viewport = result.Geometry.ViewPort;
+                                        if (foundLevel <= loc.Level)
+                                        {
+                                            loc.GoogleLocation = result.ReturnAddress;
+                                            break;
+                                        }
                                     }
                                 }
                             }

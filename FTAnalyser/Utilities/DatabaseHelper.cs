@@ -226,7 +226,7 @@ namespace FTAnalyzer.Utilities
             updateCmd.Prepare();
             updateCmd.Parameters[0].Value = loc.GeocodeStatus;
             updateCmd.Parameters[1].Value = loc.GoogleLocation;
-            updateCmd.Parameters[3].Value = loc.ToString();
+            updateCmd.Parameters[2].Value = loc.ToString();
 
             updateCmd.ExecuteNonQuery();
         }
