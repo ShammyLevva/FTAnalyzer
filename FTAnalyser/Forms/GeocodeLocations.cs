@@ -389,7 +389,7 @@ namespace FTAnalyzer.Forms
             EditLocation editform = new EditLocation(loc);
             this.Cursor = Cursors.Default;
             DialogResult result = editform.ShowDialog(this);
-            if(result == DialogResult.OK)
+            if(editform.DataUpdated)
                 AddLocationToQueue(loc);  // we have edited the location so add reverse geocode to queue
             editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
             // force refresh of locations from new edited data
@@ -781,10 +781,14 @@ namespace FTAnalyzer.Forms
                                     {
                                         foundLevel = GoogleMap.GetFactLocation(result.Types);
                                         viewport = result.Geometry.ViewPort;
-                                        if (foundLevel == loc.Level)
+                                        string resultTypes = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
+                                        if (foundLevel == loc.Level && 
+                                            resultTypes != GoogleMap.POSTALCODE && 
+                                            resultTypes != GoogleMap.POSTALCODEPREFIX &&
+                                            resultTypes != GoogleMap.POSTALTOWN) // prefer more detailed results than postal codes
                                         {
                                             loc.GoogleLocation = result.ReturnAddress;
-                                            loc.GoogleResultType = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
+                                            loc.GoogleResultType = resultTypes;
                                             break;
                                         }
                                     }

@@ -32,7 +32,7 @@ namespace FTAnalyzer.Forms
         private FeatureDataRow pointFeature;
         private bool iconSelected;
         private bool pointUpdated;
-        private bool dataUpdated;
+        public bool DataUpdated { get; private set; }
 
         public EditLocation(FactLocation location)
         {
@@ -47,7 +47,7 @@ namespace FTAnalyzer.Forms
             this.Text = "Editing : " + location.ToString();
             iconSelected = false;
             pointUpdated = false;
-            dataUpdated = false;
+            DataUpdated = false;
             SetupMap();
         }
 
@@ -189,7 +189,7 @@ namespace FTAnalyzer.Forms
             updateCmd.Parameters[7].Value = location.ToString();
             updateCmd.ExecuteNonQuery();
             pointUpdated = false;
-            dataUpdated = true;
+            DataUpdated = true;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -201,9 +201,9 @@ namespace FTAnalyzer.Forms
         private void btnReload_Click(object sender, EventArgs e)
         {
             ResetMap();
-            if (dataUpdated)
+            if (DataUpdated)
                 UpdateDatabase();
-            dataUpdated = false;
+            DataUpdated = false;
             pointUpdated = false;
         }
 
