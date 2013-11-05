@@ -316,17 +316,6 @@ namespace FTAnalyzer
             set { this.marriedName = value; }
         }
 
-        public string CensusName
-        {
-            get
-            {
-                if (this.status == WIFE)
-                    return forenames + " " + marriedName + (Surname.Length > 0 ? " (" + Surname + ")" : string.Empty);
-                else
-                    return Name;
-            }
-        }
-
         public FactDate BirthDate
         {
             get

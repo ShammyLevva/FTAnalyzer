@@ -33,6 +33,17 @@ namespace FTAnalyzer
             get { return family.CensusDate; }
         }
 
+        public string CensusName
+        {
+            get
+            {
+                if (Status == WIFE)
+                    return Forenames + " " + MarriedName + (Surname.Length > 0 ? " (" + Surname + ")" : string.Empty);
+                else
+                    return Name;
+            }
+        }
+
         public Age Age
         {
             get { return GetAge(CensusDate); }
