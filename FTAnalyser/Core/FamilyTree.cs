@@ -1930,7 +1930,8 @@ namespace FTAnalyzer
             // write geocode results - ignore UNKNOWN entry
             int notsearched = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1);
             xmlErrorbox.AppendText("\nFound " + (FactLocation.AllLocations.Count() - 1) + " locations in file.\n");
-            xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER)) + " have geocoding from GEDCOM/User Entered.\n");
+            xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER) && x.GoogleLocation.Length > 0) + " are GEDCOM/User Entered and have been geocoded.\n");
+            xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER) && x.GoogleLocation.Length == 0) + " are GEDCOM/User Entered but lack a Google Location.\n");
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.MATCHED)) + " have a geocoding match from Google.\n");
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH)) + " have partial geocoding match from Google.\n");
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.LEVEL_MISMATCH)) + " have partial geocoding match at lower level of detail.\n");
