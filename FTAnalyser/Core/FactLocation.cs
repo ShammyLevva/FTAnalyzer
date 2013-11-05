@@ -175,6 +175,13 @@ namespace FTAnalyzer
             return result; // should return object that is in list of locations 
         }
 
+        public static FactLocation LookupLocation(string place)
+        {
+            FactLocation result = null;
+            locations.TryGetValue(place, out result);
+            return result;
+        }
+
         public FactLocation GetLocation(int level) { return GetLocation(level, false); }
         public FactLocation GetLocation(int level, bool fixNumerics)
         {

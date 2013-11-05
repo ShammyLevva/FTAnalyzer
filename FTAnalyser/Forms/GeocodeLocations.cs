@@ -389,7 +389,7 @@ namespace FTAnalyzer.Forms
             EditLocation editform = new EditLocation(loc);
             this.Cursor = Cursors.Default;
             DialogResult result = editform.ShowDialog(this);
-            if(editform.DataUpdated)
+            if (editform.DataUpdated)
                 AddLocationToQueue(loc);  // we have edited the location so add reverse geocode to queue
             editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
             // force refresh of locations from new edited data
@@ -741,7 +741,7 @@ namespace FTAnalyzer.Forms
             while (reader.Read())
             {
                 FactLocation loc = FactLocation.GetLocation(reader[0].ToString());
-                if(!queue.Contains(loc))
+                if (!queue.Contains(loc))
                     queue.Enqueue(loc);
             }
         }
@@ -773,45 +773,7 @@ namespace FTAnalyzer.Forms
                             }
                             if (res != null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
                             {
-                                int foundLevel = -1;
-                                GeoResponse.CResult.CGeometry.CViewPort viewport = new GeoResponse.CResult.CGeometry.CViewPort();
-                                if (res.Status == "OK")
-                                {
-                                    foreach (GeoResponse.CResult result in res.Results)
-                                    {
-                                        foundLevel = GoogleMap.GetFactLocation(result.Types);
-                                        viewport = result.Geometry.ViewPort;
-                                        string resultTypes = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
-                                        if (foundLevel == loc.Level && 
-                                            resultTypes != GoogleMap.POSTALCODE && 
-                                            resultTypes != GoogleMap.POSTALCODEPREFIX &&
-                                            resultTypes != GoogleMap.POSTALTOWN) // prefer more detailed results than postal codes
-                                        {
-                                            loc.GoogleLocation = result.ReturnAddress;
-                                            loc.GoogleResultType = resultTypes;
-                                            break;
-                                        }
-                                    }
-                                    if (loc.GoogleLocation.Length == 0)
-                                    {
-                                        // we haven't got a good match so try again with level <=
-                                        foreach (GeoResponse.CResult result in res.Results)
-                                        {
-                                            foundLevel = GoogleMap.GetFactLocation(result.Types);
-                                            viewport = result.Geometry.ViewPort;
-                                            if (foundLevel <= loc.Level)
-                                            {
-                                                loc.GoogleLocation = result.ReturnAddress;
-                                                loc.GoogleResultType = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
-                                                break;
-                                            }
-                                        }
-                                    }
-                                }
-                                else if (res.Status == "ZERO_RESULTS")
-                                {
-                                    foundLevel = -2;
-                                }
+                                ProcessResult(loc, res);
                                 DatabaseHelper.Instance.UpdateGeocodeStatus(loc);
                             }
                         }
@@ -838,6 +800,49 @@ namespace FTAnalyzer.Forms
             catch (Exception ex)
             {
                 MessageBox.Show("Error reverse geocoding : " + ex.Message);
+            }
+        }
+
+        public static void ProcessResult(FactLocation loc, GeoResponse res)
+        {
+            int foundLevel = -1;
+            GeoResponse.CResult.CGeometry.CViewPort viewport = new GeoResponse.CResult.CGeometry.CViewPort();
+            if (res.Status == "OK")
+            {
+                foreach (GeoResponse.CResult result in res.Results)
+                {
+                    foundLevel = GoogleMap.GetFactLocation(result.Types);
+                    viewport = result.Geometry.ViewPort;
+                    string resultTypes = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
+                    if (foundLevel == loc.Level &&
+                        resultTypes != GoogleMap.POSTALCODE &&
+                        resultTypes != GoogleMap.POSTALCODEPREFIX &&
+                        resultTypes != GoogleMap.POSTALTOWN) // prefer more detailed results than postal codes
+                    {
+                        loc.GoogleLocation = result.ReturnAddress;
+                        loc.GoogleResultType = resultTypes;
+                        break;
+                    }
+                }
+                if (loc.GoogleLocation.Length == 0)
+                {
+                    // we haven't got a good match so try again with level <=
+                    foreach (GeoResponse.CResult result in res.Results)
+                    {
+                        foundLevel = GoogleMap.GetFactLocation(result.Types);
+                        viewport = result.Geometry.ViewPort;
+                        if (foundLevel <= loc.Level)
+                        {
+                            loc.GoogleLocation = result.ReturnAddress;
+                            loc.GoogleResultType = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
+                            break;
+                        }
+                    }
+                }
+            }
+            else if (res.Status == "ZERO_RESULTS")
+            {
+                foundLevel = -2;
             }
         }
         #endregion

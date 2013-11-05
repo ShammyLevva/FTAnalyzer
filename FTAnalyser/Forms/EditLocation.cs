@@ -82,7 +82,7 @@ namespace FTAnalyzer.Forms
             pointLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
 
             mapBox1.Map.Layers.Add(pointLayer);
-            mapBox1.Map.MinimumZoom = 100;
+            mapBox1.Map.MinimumZoom = 500;
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             ResetMap();
@@ -91,21 +91,7 @@ namespace FTAnalyzer.Forms
         private void ResetMap()
         {
             CopyLocationDetails(originalLocation, location);
-            pointTable.Clear();
-            pointTable.AddRow(GetRow(location.Longitude, location.Latitude));
-
-            IMathTransform transform = pointLayer.CoordinateTransformation.MathTransform;
-            GeoResponse.CResult.CGeometry.CViewPort vp = location.ViewPort;
-            Envelope expand;
-            if (vp.NorthEast.Lat == 0 && vp.NorthEast.Long == 0 && vp.SouthWest.Lat == 0 && vp.SouthWest.Long == 0)
-                expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
-            else
-            {
-                Envelope bbox = new Envelope(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
-                expand = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
-            }
-            mapBox1.Map.ZoomToBox(expand);
-            mapBox1.Refresh();
+            SetLocation();
         }
 
         private FeatureDataRow GetRow(double p1, double p2)
@@ -231,6 +217,48 @@ namespace FTAnalyzer.Forms
                 mapBox1.Map.Center.X = p.X;
                 mapBox1.Map.Center.Y = p.Y;
             }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (txtSearch.Text.Length > 0)
+            {
+                FactLocation loc = FactLocation.LookupLocation(txtSearch.Text);
+                if (loc != null && loc.IsGeoCoded)
+                {
+                    location = loc;
+                    SetLocation();
+                }
+                else
+                {
+                    GeoResponse res = GoogleMap.GoogleGeocode(txtSearch.Text, 8);
+                    if (res.Status == "OK")
+                    {
+                        GeocodeLocations.ProcessResult(loc, res);
+                        location = loc;
+                        SetLocation();
+                    }
+                }
+            }
+        }
+
+        private void SetLocation()
+        {
+            pointTable.Clear();
+            pointTable.AddRow(GetRow(location.Longitude, location.Latitude));
+
+            IMathTransform transform = pointLayer.CoordinateTransformation.MathTransform;
+            GeoResponse.CResult.CGeometry.CViewPort vp = location.ViewPort;
+            Envelope expand;
+            if (vp.NorthEast.Lat == 0 && vp.NorthEast.Long == 0 && vp.SouthWest.Lat == 0 && vp.SouthWest.Long == 0)
+                expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
+            else
+            {
+                Envelope bbox = new Envelope(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
+                expand = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
+            }
+            mapBox1.Map.ZoomToBox(expand);
+            mapBox1.Refresh();
         }
     }
 }

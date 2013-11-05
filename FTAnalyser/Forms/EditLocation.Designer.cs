@@ -35,6 +35,9 @@ namespace FTAnalyzer.Forms
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnReload = new System.Windows.Forms.ToolStripButton();
+            this.labSearch = new System.Windows.Forms.ToolStripLabel();
+            this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
+            this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -71,7 +74,10 @@ namespace FTAnalyzer.Forms
             this.mapZoomToolStrip.Enabled = false;
             this.mapZoomToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSave,
-            this.btnReload});
+            this.btnReload,
+            this.labSearch,
+            this.txtSearch,
+            this.btnSearch});
             this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
             this.mapZoomToolStrip.MapControl = this.mapBox1;
             this.mapZoomToolStrip.Name = "mapZoomToolStrip";
@@ -100,6 +106,28 @@ namespace FTAnalyzer.Forms
             this.btnReload.Text = "toolStripButton2";
             this.btnReload.ToolTipText = "Reset Point to previous position";
             this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
+            // 
+            // labSearch
+            // 
+            this.labSearch.Name = "labSearch";
+            this.labSearch.Size = new System.Drawing.Size(48, 22);
+            this.labSearch.Text = "Search: ";
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(250, 25);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
+            this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(23, 22);
+            this.btnSearch.Text = "toolStripButton1";
+            this.btnSearch.ToolTipText = "Search Google for Location Text";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // linkLabel1
             // 
@@ -163,5 +191,8 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripButton btnReload;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private ToolStripMapSelector mnuMapStyle = new ToolStripMapSelector();
+        private System.Windows.Forms.ToolStripLabel labSearch;
+        private System.Windows.Forms.ToolStripTextBox txtSearch;
+        private System.Windows.Forms.ToolStripButton btnSearch;
     }
 }

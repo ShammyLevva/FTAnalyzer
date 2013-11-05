@@ -120,10 +120,28 @@
   <metadata name="mapZoomToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnSearch.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALKSURBVDhPlZLrSxNQGIf9X/oQQQlRQUUfuhAz8oJKW2oW
+        WstbmblMrUxF5yxzji11y0tueVlaZk5nq3Tz2kqsiMxLKSZeW2qUsS7Kk4eiJQTR7/P5Peec9328/sz4
+        9AL3u4cwmHtQGh6QV9ZKcU03zY6XjE3O8evY3/Po+RgakwNTRycP3vRhnWjBNJJJgjUKqfI6F9QNtD8Z
+        /jtElC9X2bjd38zTjy8Z+DJFUkMOmtdpxN71Z7cqjzClk4h0E3bnwGqIeLba2IahV0vLjBHHfC99i/0M
+        uF3UTVqI0quQ6F+xTdfA9iI5CaoKRsffeSC2rkGyTFb0z/IoGknGOK7DNKGi+IWJuOo6YgxzhOWP4V0T
+        zLoqX3Zmn6LO6vQACqu7MDS9RWnVcOJxAKd7/VAYU0mqtKIsvYNSW05qXgFHtLGsL5Sw/nIQaWqzB3Cu
+        wErJ/S9klJTgXyNhvzUUebGWwhsWHnZ0Me16z/iMi8r6Rg5fiGdNjg+hp9QeQEq+BW2Tm/OVLo6kyvEt
+        OYqiMgubvQOR70vwyb3M1PwSuvJadsQHI4vN9QA0Rgeni0aJL/1KjHaEoHPxXNRdYXLW9bs88+E7Q5Pf
+        sHQOEnw4HEXWNQ+gaUWSuNx2jl39TIRmntDsblJylUzMzv0sLyytlL/iHHJjuO0kUCqjotbmAQjDhCSR
+        OU8JuTSDJLMXabaCRpud6YWVm6e+8WjYTXPfIieT0zkYEYvlzk0PQEQYJk+r5uDFbrzPqNioCCdakUiZ
+        uYmGzgH09U5Onk1HFnIAsyacRn0CPY57qyHCsERlFfsStOyVx+Efo0IanYH0UCRB0hDCZIHoFHuYrpCw
+        3BOBUa1gZLh/NUQYJiQRexarEtMWAxN/brxlJtpvM8/TtzCh38WcRcbZqIDVgH+lr+shUb6baE3eynGf
+        DTzpsf8fQERAdmxcS2dby0rZy+sH4iIliUchLGsAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>174, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAQEAAAAEAGAAoMgAAFgAAACgAAABAAAAAgAAAAAEAGAAAAAAAAAAAAGAAAABgAAAAAAAAAAAA
