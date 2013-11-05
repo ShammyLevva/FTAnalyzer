@@ -12,8 +12,7 @@ namespace FTAnalyzer
         // define relation type from direct ancestor to related by marriage and 
         // MARRIAGEDB ie: married to a direct or blood relation
         public const int UNKNOWN = 1, DIRECT = 2, BLOOD = 4, MARRIEDTODB = 8, MARRIAGE = 16, UNSET = 32;
-        public static readonly string HUSBAND = "Husband", WIFE = "Wife", CHILD = "Child", UNKNOWNSTATUS = "Unknown";
-
+        
         public string IndividualID { get; private set; }
         //private string gedcomID;
         private string forenames;
@@ -21,7 +20,6 @@ namespace FTAnalyzer
         private string marriedName;
         private string gender;
         private string alias;
-        private string status;
         private int relationType;
         private int ahnentafel;
         private string budgieCode;
@@ -42,7 +40,6 @@ namespace FTAnalyzer
             Gender = FamilyTree.GetText(node, "SEX");
             alias = FamilyTree.GetText(node, "ALIA");
             relationType = UNSET;
-            status = UNKNOWNSTATUS;
             ahnentafel = 0;
             budgieCode = string.Empty;
             infamily = false;
@@ -123,7 +120,6 @@ namespace FTAnalyzer
                 this.marriedName = i.marriedName;
                 this.gender = i.gender;
                 this.alias = i.alias;
-                this.status = i.status;
                 this.ahnentafel = i.ahnentafel;
                 this.budgieCode = i.budgieCode;
                 this.relationType = i.relationType;
@@ -386,12 +382,6 @@ namespace FTAnalyzer
                 Fact occupation = GetPreferredFact(Fact.OCCUPATION);
                 return occupation == null ? "" : occupation.Comment;
             }
-        }
-
-        public string Status
-        {
-            get { return status; }
-            set { this.status = value; }
         }
 
         private int MaxAgeAtDeath

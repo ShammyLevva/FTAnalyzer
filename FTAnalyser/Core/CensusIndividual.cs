@@ -8,14 +8,18 @@ namespace FTAnalyzer
 {
     public class CensusIndividual : Individual, IDisplayCensus
     {
+        public static readonly string HUSBAND = "Husband", WIFE = "Wife", CHILD = "Child", UNKNOWNSTATUS = "Unknown";
+        
         private CensusFamily family;
         public int Position { get; private set; }
+        public string CensusStatus { get; set; }
 
         public CensusIndividual(int position, Individual individual, CensusFamily family)
             : base(individual)
         {
             this.Position = position;
             this.family = family;
+            this.CensusStatus = UNKNOWNSTATUS;
         }
 
         public string FamilyID
@@ -37,7 +41,7 @@ namespace FTAnalyzer
         {
             get
             {
-                if (Status == WIFE)
+                if (CensusStatus == WIFE)
                     return Forenames + " " + MarriedName + (Surname.Length > 0 ? " (" + Surname + ")" : string.Empty);
                 else
                     return Name;

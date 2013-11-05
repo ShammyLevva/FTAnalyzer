@@ -44,7 +44,7 @@ namespace FTAnalyzer
                 if (IsValidIndividual(this.Wife, censusDone, true, checkCensus))
                 {
                     result = true;
-                    Wife.Status = Individual.WIFE;
+                    Wife.CensusStatus = CensusIndividual.WIFE;
                     facts.AddRange(Wife.PersonalFacts);
                 }
                 else
@@ -54,7 +54,7 @@ namespace FTAnalyzer
                 if (IsValidIndividual(Husband, censusDone, true, checkCensus))
                 {
                     result = true;
-                    Husband.Status = Individual.HUSBAND;
+                    Husband.CensusStatus = CensusIndividual.HUSBAND;
                     facts.AddRange(Husband.PersonalFacts);
                 }
                 else
@@ -72,7 +72,7 @@ namespace FTAnalyzer
                     // set location to childs birth location
                     // this will end up setting birth location of last child 
                     // as long as the location is at least Parish level
-                    child.Status = Individual.CHILD;
+                    child.CensusStatus = CensusIndividual.CHILD;
                     if (IsValidIndividual(child, censusDone, false, checkCensus))
                     {
                         result = true;

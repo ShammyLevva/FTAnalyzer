@@ -18,7 +18,7 @@ namespace FTAnalyzer
         FactLocation BirthLocation { get; }
         FactDate DeathDate { get; }
         FactLocation DeathLocation { get; }
-        string Status { get; }
+        string CensusStatus { get; }
         string CensusReference { get; }
         string Relation { get; }
         int Ahnentafel { get; }
