@@ -12,6 +12,7 @@ using FTAnalyzer.Mapping;
 using FTAnalyzer.Events;
 using System.Data.SQLite;
 using GeoAPI.Geometries;
+using System.Collections.Concurrent;
 
 namespace FTAnalyzer.Forms
 {
@@ -26,6 +27,7 @@ namespace FTAnalyzer.Forms
         private bool refreshingMenus;
         private ISet<string> noneOfTheAbove;
         private ToolStripMenuItem[] noneOfTheAboveMenus;
+        private ConcurrentQueue<FactLocation> queue;
 
         public GeocodeLocations()
         {
@@ -33,6 +35,7 @@ namespace FTAnalyzer.Forms
             ft = FamilyTree.Instance;
             this.refreshingMenus = false;
             this.locations = ft.AllGeocodingLocations;
+            this.queue = new ConcurrentQueue<FactLocation>();
             dgLocations.AutoGenerateColumns = false;
             reportFormHelper = new ReportFormHelper(this.Text, dgLocations, this.ResetTable);
             italicFont = new Font(dgLocations.DefaultCellStyle.Font, FontStyle.Italic);
@@ -386,6 +389,8 @@ namespace FTAnalyzer.Forms
             EditLocation editform = new EditLocation(loc);
             this.Cursor = Cursors.Default;
             DialogResult result = editform.ShowDialog(this);
+            if(result == DialogResult.OK)
+                AddLocationToQueue(loc);  // we have edited the location so add reverse geocode to queue
             editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
             // force refresh of locations from new edited data
             dgLocations.Refresh();
@@ -666,6 +671,7 @@ namespace FTAnalyzer.Forms
             loc.GoogleLocation = string.Empty;
             loc.GeocodeStatus = FactLocation.Geocode.GEDCOM_USER;
             DatabaseHelper.Instance.UpdateGeocodeStatus(loc);
+            AddLocationToQueue(loc);
             dgLocations.Refresh();
         }
 
@@ -697,6 +703,15 @@ namespace FTAnalyzer.Forms
             StartReverseGeoCoding();
         }
 
+        #region Reverse Geocoding
+
+        public void AddLocationToQueue(FactLocation loc)
+        {
+            queue.Enqueue(loc);
+            if (!ft.Geocoding)
+                StartReverseGeoCoding();
+        }
+
         public void StartReverseGeoCoding()
         {
             if (reverseGeocodeBackgroundWorker.IsBusy)
@@ -713,84 +728,94 @@ namespace FTAnalyzer.Forms
                 txtLocations.Text = string.Empty;
                 txtGoogleWait.Text = string.Empty;
                 ft.Geocoding = true;
+                AddEmptyLocationsToQueue();
                 reverseGeocodeBackgroundWorker.RunWorkerAsync();
                 this.Cursor = Cursors.Default;
             }
         }
+
+        public void AddEmptyLocationsToQueue()
+        {
+            SQLiteCommand cmd = DatabaseHelper.Instance.NeedsReverseGeocode();
+            SQLiteDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                FactLocation loc = FactLocation.GetLocation(reader[0].ToString());
+                if(!queue.Contains(loc))
+                    queue.Enqueue(loc);
+            }
+        }
+
         public void ReverseGeoCode(BackgroundWorker worker, DoWorkEventArgs e)
         {
             try
             {
                 GoogleMap.WaitingForGoogle += new GoogleMap.GoogleEventHandler(GoogleMap_WaitingForGoogle);
-                DatabaseHelper dbh = DatabaseHelper.Instance;
-                SQLiteCommand cmd = dbh.NeedsReverseGeocode();
-                SQLiteDataReader reader = cmd.ExecuteReader();
                 GoogleMap.ThreadCancelled = false;
+                FactLocation loc;
                 int count = 0;
-                DataTable dt = new DataTable();
-                dt.Load(reader);
-                int total = dt.Rows.Count;
-                reader.Close();
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
+                int total = queue.Count;
+                while (!queue.IsEmpty)
                 {
-                    FactLocation loc = FactLocation.GetLocation(reader[0].ToString());
-                    if (loc.ToString().Length > 0)
+                    if (queue.TryDequeue(out loc))
                     {
-                        GeoResponse res = null;
-                        double latitude, longitude;
-                        double.TryParse(reader[1].ToString(), out latitude);
-                        double.TryParse(reader[2].ToString(), out longitude);
-                        res = GoogleMap.GoogleReverseGeocode(latitude, longitude, 8);
-                        if (res != null && res.Status == "Maxed")
+                        if (loc.ToString().Length > 0)
                         {
-                            geocodeBackgroundWorker.CancelAsync();
-                            GoogleMap.ThreadCancelled = true;
-                            res = null;
-                        }
-                        if (res != null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
-                        {
-                            int foundLevel = -1;
-                            GeoResponse.CResult.CGeometry.CViewPort viewport = new GeoResponse.CResult.CGeometry.CViewPort();
-                            if (res.Status == "OK")
+                            GeoResponse res = null;
+                            double latitude = loc.Latitude;
+                            double longitude = loc.Longitude;
+                            res = GoogleMap.GoogleReverseGeocode(latitude, longitude, 8);
+                            if (res != null && res.Status == "Maxed")
                             {
-                                foreach (GeoResponse.CResult result in res.Results)
+                                geocodeBackgroundWorker.CancelAsync();
+                                GoogleMap.ThreadCancelled = true;
+                                res = null;
+                            }
+                            if (res != null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
+                            {
+                                int foundLevel = -1;
+                                GeoResponse.CResult.CGeometry.CViewPort viewport = new GeoResponse.CResult.CGeometry.CViewPort();
+                                if (res.Status == "OK")
                                 {
-                                    foundLevel = GoogleMap.GetFactLocation(result.Types);
-                                    viewport = result.Geometry.ViewPort;
-                                    if (foundLevel == loc.Level)
-                                    {
-                                        loc.GoogleLocation = result.ReturnAddress;
-                                        loc.GoogleResultType = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
-                                        break;
-                                    }
-                                }
-                                if (loc.GoogleLocation.Length == 0)
-                                {
-                                    // we haven't got a good match so try again with level <=
                                     foreach (GeoResponse.CResult result in res.Results)
                                     {
                                         foundLevel = GoogleMap.GetFactLocation(result.Types);
                                         viewport = result.Geometry.ViewPort;
-                                        if (foundLevel <= loc.Level)
+                                        if (foundLevel == loc.Level)
                                         {
                                             loc.GoogleLocation = result.ReturnAddress;
                                             loc.GoogleResultType = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
                                             break;
                                         }
                                     }
+                                    if (loc.GoogleLocation.Length == 0)
+                                    {
+                                        // we haven't got a good match so try again with level <=
+                                        foreach (GeoResponse.CResult result in res.Results)
+                                        {
+                                            foundLevel = GoogleMap.GetFactLocation(result.Types);
+                                            viewport = result.Geometry.ViewPort;
+                                            if (foundLevel <= loc.Level)
+                                            {
+                                                loc.GoogleLocation = result.ReturnAddress;
+                                                loc.GoogleResultType = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
+                                                break;
+                                            }
+                                        }
+                                    }
                                 }
+                                else if (res.Status == "ZERO_RESULTS")
+                                {
+                                    foundLevel = -2;
+                                }
+                                DatabaseHelper.Instance.UpdateGeocodeStatus(loc);
                             }
-                            else if (res.Status == "ZERO_RESULTS")
-                            {
-                                foundLevel = -2;
-                            }
-                            dbh.UpdateGeocodeStatus(loc);
                         }
                     }
                     count++;
+                    if (count > total) total = count; // incase main thread has added extra items to queue
                     int percent = (int)Math.Truncate(count * 100.0 / total);
-                    string status = "Looking up location names from Latitude/Longitudes. Done " + count + " of " + total + ".  ";
+                    string status = "Looking up location names from Latitude/Longitude. Done " + count + " of " + total + ".  ";
                     worker.ReportProgress(percent, status);
 
                     if (worker.CancellationPending ||
@@ -811,5 +836,6 @@ namespace FTAnalyzer.Forms
                 MessageBox.Show("Error reverse geocoding : " + ex.Message);
             }
         }
+        #endregion
     }
 }
