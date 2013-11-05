@@ -6,26 +6,26 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class CensusAgeComparer : IComparer<Individual>
+    public class CensusAgeComparer : IComparer<CensusIndividual>
     {
-        public int Compare(Individual i1, Individual i2)
+        public int Compare(CensusIndividual i1, CensusIndividual i2)
         {
-            if (i1.Status.Equals(i2.Status))
+            if (i1.CensusStatus.Equals(i2.CensusStatus))
                 // same status so sort by date
                 return sortBirthdate(i1, i2);
-            if (i1.Status.Equals(Individual.HUSBAND))
+            if (i1.CensusStatus.Equals(CensusIndividual.HUSBAND))
                 return -1;
-            if (i2.Status.Equals(Individual.HUSBAND))
+            if (i2.CensusStatus.Equals(CensusIndividual.HUSBAND))
                 return 1;
             // neither is husband so is one a wife
-            if (i1.Status.Equals(Individual.WIFE))
+            if (i1.CensusStatus.Equals(CensusIndividual.WIFE))
                 return -1;
-            if (i2.Status.Equals(Individual.WIFE))
+            if (i2.CensusStatus.Equals(CensusIndividual.WIFE))
                 return 1;
             // neither is husband or wife so is one a child
-            if (i1.Status.Equals(Individual.CHILD))
+            if (i1.CensusStatus.Equals(CensusIndividual.CHILD))
                 return -1;
-            if (i2.Status.Equals(Individual.CHILD))
+            if (i2.CensusStatus.Equals(CensusIndividual.CHILD))
                 return 1;
             return 0;
         }
