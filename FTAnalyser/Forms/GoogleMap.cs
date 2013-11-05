@@ -39,6 +39,7 @@ namespace FTAnalyzer.Forms
         public static readonly string POLITICAL = "political";
         public static readonly string POSTALCODE = "postal_code";
         public static readonly string POSTALTOWN = "postal_town";
+        public static readonly string POSTALCODEPREFIX = "postal_code_prefix";
         public static readonly string NATURALFEATURE = "natural_feature";
         public static readonly string AIRPORT = "airport";
         public static readonly string PARK = "park";
@@ -67,9 +68,9 @@ namespace FTAnalyzer.Forms
         public static readonly ISet<string> RESULT_TYPES = new HashSet<string>(new string[] {
             STREET_ADDRESS, ROUTE, COUNTRY, ESTABLISHMENT, ADMIN1, ADMIN2, ADMIN3, LOCALITY,
             SUBLOCALITY, NEIGHBOURHOOD, PREMISE, SUBPREMISE, CEMETERY, HOSPITAL, PLACE_OF_WORSHIP,
-            INTERSECTION, POLITICAL, POSTALCODE, POSTALTOWN, NATURALFEATURE, AIRPORT, PARK,
-            POINT_OF_INTEREST, STREET_NUMBER, BUS_STATION, TRANSIT_STATION, CHURCH,
-            SUBWAY_STATION, TRAIN_STATION, UNIVERSITY, POLICE, MUSEUM, POST_OFFICE, 
+            INTERSECTION, POLITICAL, POSTALCODE, POSTALTOWN, POSTALCODEPREFIX, NATURALFEATURE, 
+            AIRPORT, PARK, POINT_OF_INTEREST, STREET_NUMBER, BUS_STATION, TRANSIT_STATION, 
+            CHURCH, SUBWAY_STATION, TRAIN_STATION, UNIVERSITY, POLICE, MUSEUM, POST_OFFICE, 
             COURTHOUSE, FINANCE, COLLOQUIAL_AREA, LIBRARY, AQUARIUM, FIRE_STATION,
             CAMPGROUND, LODGING, VETERINARY_CARE, AMUSEMENT_PARK
         });
@@ -173,14 +174,14 @@ namespace FTAnalyzer.Forms
             foreach(string type in types)
                 if (PLACES.Contains(type))
                     return FactLocation.PLACE;
-            if (types.Contains(ADMIN3) || types.Contains(SUBLOCALITY) || types.Contains(POSTALCODE))
+            if (types.Contains(SUBLOCALITY) || types.Contains(POSTALCODE) || types.Contains(NEIGHBOURHOOD))
                 return FactLocation.ADDRESS;
-            if (types.Contains(ADMIN2) || types.Contains(NEIGHBOURHOOD) || types.Contains(LOCALITY) || 
-                types.Contains(POLITICAL) || types.Contains(POSTALTOWN) || types.Contains(COLLOQUIAL_AREA))
+            if (types.Contains(ADMIN3) || types.Contains(LOCALITY) || types.Contains(POSTALCODEPREFIX) ||
+                types.Contains(POSTALTOWN) || types.Contains(COLLOQUIAL_AREA))
                 return FactLocation.SUBREGION;
-            if (types.Contains(ADMIN1))
+            if (types.Contains(ADMIN2))
                 return FactLocation.REGION;
-            if (types.Contains(COUNTRY))
+            if (types.Contains(COUNTRY) || types.Contains(ADMIN1))
                 return FactLocation.COUNTRY;
             return FactLocation.UNKNOWN;
         }
