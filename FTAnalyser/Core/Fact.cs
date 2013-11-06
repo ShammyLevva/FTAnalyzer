@@ -65,6 +65,7 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1911_PATTERN = "^RG14PN(\\d{1,6}) .*SN(\\d{1,3})$";
         private static readonly string EW_CENSUS_1911_PATTERN2 = "Class: RG14; Piece: (\\d{1,6})$";
         private static readonly string EW_CENSUS_1911_PATTERN3 = "Class: RG14; Piece: (\\d{1,6}); Schedule Number: (\\d{1,3})$";
+        private static readonly string EW_CENSUS_1911_PATTERN4 = "Class: RG14; Piece: (\\d{1,6}); Page: (\\d{1,3})$";
         private static readonly string SCOT_CENSUS_PATTERN = "Parish: ([A-Za-z]+); ED: (\\d{1,3}); Page: (\\d{1,4}); Line: (\\d{1,2}); Roll: CSSCT";
         private static readonly string SCOT_CENSUS_PATTERN2 = "(\\d{3}/\\d{2}) (\\d{3}/\\d{2}) (\\d{3,4})";
 
@@ -372,6 +373,12 @@ namespace FTAnalyzer
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
                 }
+                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN4);
+                if (matcher.Success)
+                {
+                    this.Piece = matcher.Groups[1].ToString();
+                    this.Page = matcher.Groups[2].ToString();
+                }
             }
         }
 
@@ -647,7 +654,12 @@ namespace FTAnalyzer
                             return "Piece: " + Piece + ", Book: see census image (stamped on the census page after the piece number), Folio: " + Folio + ", Page: " + Page;
                     }
                     if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1911))
-                        return "Piece: " + Piece + ", Schedule: " + Schedule;
+                    {
+                        if (Schedule.Length > 0)
+                            return "Piece: " + Piece + ", Schedule: " + Schedule;
+                        else
+                            return "Piece: " + Piece + ", Page: " + Page;
+                    }
                 }
                 else if (Parish.Length > 0)
                 {
