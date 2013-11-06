@@ -96,7 +96,7 @@ namespace BruTile.Extensions
         {
             HttpWebRequest request = HttpWebRequest.Create("http://www.google.com") as HttpWebRequest;
             IWebProxy proxy = request.Proxy;
-            if (proxy != null)
+            if (proxy.Credentials == null)
             {
                 string proxyuri = proxy.GetProxy(request.RequestUri).ToString();
                 request.UseDefaultCredentials = true;
