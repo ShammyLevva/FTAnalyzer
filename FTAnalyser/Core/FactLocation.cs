@@ -35,7 +35,7 @@ namespace FTAnalyzer
         public string GoogleResultType { get; set; }
         public GeoResponse.CResult.CGeometry.CViewPort ViewPort { get; set; }
         private List<Individual> individuals;
-        
+
         public string[] Parts
         {
             get { return new string[] { Country, Region, SubRegion, Address, Place }; }
@@ -48,7 +48,7 @@ namespace FTAnalyzer
         private static Dictionary<string, string> FREECEN_LOOKUP = new Dictionary<string, string>();
         private static Dictionary<string, Tuple<string, string>> FINDMYPAST_LOOKUP = new Dictionary<string, Tuple<string, string>>();
         private static IDictionary<string, FactLocation> locations;
-        
+
         public static Dictionary<Geocode, string> Geocodes;
         public static FactLocation UNKNOWN_LOCATION;
         public static FactLocation TEMP = new FactLocation();
@@ -712,13 +712,26 @@ namespace FTAnalyzer
                 return true;
             if (s == Countries.UNITED_KINGDOM && Countries.IsUnitedKingdom(Country))
                 return true;
-            if (Country == Countries.SCOTLAND  || s == Countries.SCOTLAND)
+            if (Country == Countries.SCOTLAND || s == Countries.SCOTLAND)
                 return false; // Either Country or s is not Scotland at this point, so not matching census country.
             if (Countries.IsEnglandWales(Country) && Countries.IsEnglandWales(s))
                 return true;
             if (Countries.IsUnitedKingdom(Country) && Countries.IsUnitedKingdom(s))
                 return true;
             return false;
+        }
+
+        public static void CopyLocationDetails(FactLocation from, FactLocation to)
+        {
+            from.Latitude = to.Latitude;
+            from.Longitude = to.Longitude;
+            from.ViewPort.NorthEast.Lat = to.ViewPort.NorthEast.Lat;
+            from.ViewPort.NorthEast.Long = to.ViewPort.NorthEast.Long;
+            from.ViewPort.SouthWest.Lat = to.ViewPort.SouthWest.Lat;
+            from.ViewPort.SouthWest.Long = to.ViewPort.SouthWest.Long;
+            from.GeocodeStatus = to.GeocodeStatus;
+            from.GoogleLocation = to.GoogleLocation;
+            from.GoogleResultType = to.GoogleResultType;
         }
 
         public int CompareTo(FactLocation that)

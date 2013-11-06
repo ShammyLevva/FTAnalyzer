@@ -43,24 +43,13 @@ namespace FTAnalyzer.Forms
             mapZoomToolStrip.Items[10].Visible = false;
             this.location = location;
             this.originalLocation = FactLocation.TEMP;
-            CopyLocationDetails(location, originalLocation);
+            FactLocation.CopyLocationDetails(location, originalLocation);
             this.Text = "Editing : " + location.ToString();
             iconSelected = false;
             pointUpdated = false;
             DataUpdated = false;
             SetupMap();
             SetLocation();
-        }
-
-        private void CopyLocationDetails(FactLocation from, FactLocation to)
-        {
-            to.Latitude = from.Latitude;
-            to.Longitude = from.Longitude;
-            to.ViewPort.NorthEast.Lat = from.ViewPort.NorthEast.Lat;
-            to.ViewPort.NorthEast.Long = from.ViewPort.NorthEast.Long;
-            to.ViewPort.SouthWest.Lat = from.ViewPort.SouthWest.Lat;
-            to.ViewPort.SouthWest.Long = from.ViewPort.SouthWest.Long;
-            to.GeocodeStatus = from.GeocodeStatus;
         }
 
         private void SetupMap()
@@ -90,7 +79,7 @@ namespace FTAnalyzer.Forms
 
         private void ResetMap()
         {
-            CopyLocationDetails(originalLocation, location);
+            FactLocation.CopyLocationDetails(originalLocation, location);
             SetLocation();
         }
 
@@ -233,7 +222,7 @@ namespace FTAnalyzer.Forms
                     DatabaseHelper.Instance.GetLatLong(loc);
                 if (loc.IsGeoCoded)
                 {
-                    CopyLocationDetails(loc, location);
+                    FactLocation.CopyLocationDetails(loc, location);
                     SetLocation();
                     pointUpdated = true;
                 }
@@ -246,7 +235,7 @@ namespace FTAnalyzer.Forms
                         loc.Latitude = res.Results[0].Geometry.Location.Lat;
                         loc.Longitude = res.Results[0].Geometry.Location.Long;
                         loc.GeocodeStatus = res.Results[0].PartialMatch ? FactLocation.Geocode.PARTIAL_MATCH : FactLocation.Geocode.MATCHED;
-                        CopyLocationDetails(loc, location);
+                        FactLocation.CopyLocationDetails(loc, location);
                         SetLocation();
                         pointUpdated = true;
                     }

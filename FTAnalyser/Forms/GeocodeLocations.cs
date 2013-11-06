@@ -413,13 +413,7 @@ namespace FTAnalyzer.Forms
             if (CopyLocation.IsGeoCoded)
             {
                 FactLocation pasteLocation = dgLocations.CurrentRow.DataBoundItem as FactLocation;
-                pasteLocation.Latitude = CopyLocation.Latitude;
-                pasteLocation.Longitude = CopyLocation.Longitude;
-                pasteLocation.ViewPort.NorthEast.Lat = CopyLocation.ViewPort.NorthEast.Lat;
-                pasteLocation.ViewPort.NorthEast.Long = CopyLocation.ViewPort.NorthEast.Long;
-                pasteLocation.ViewPort.SouthWest.Lat = CopyLocation.ViewPort.SouthWest.Lat;
-                pasteLocation.ViewPort.SouthWest.Long = CopyLocation.ViewPort.SouthWest.Long;
-                pasteLocation.GeocodeStatus = CopyLocation.GeocodeStatus;
+                FactLocation.CopyLocationDetails(CopyLocation, pasteLocation);
                 DatabaseHelper.Instance.UpdateGeocodeStatus(pasteLocation);
                 dgLocations.Refresh();
             }
