@@ -723,15 +723,15 @@ namespace FTAnalyzer
 
         public static void CopyLocationDetails(FactLocation from, FactLocation to)
         {
-            from.Latitude = to.Latitude;
-            from.Longitude = to.Longitude;
-            from.ViewPort.NorthEast.Lat = to.ViewPort.NorthEast.Lat;
-            from.ViewPort.NorthEast.Long = to.ViewPort.NorthEast.Long;
-            from.ViewPort.SouthWest.Lat = to.ViewPort.SouthWest.Lat;
-            from.ViewPort.SouthWest.Long = to.ViewPort.SouthWest.Long;
-            from.GeocodeStatus = to.GeocodeStatus;
-            from.GoogleLocation = to.GoogleLocation;
-            from.GoogleResultType = to.GoogleResultType;
+            to.Latitude = from.Latitude;
+            to.Longitude = from.Longitude;
+            to.ViewPort.NorthEast.Lat = from.ViewPort.NorthEast.Lat;
+            to.ViewPort.NorthEast.Long = from.ViewPort.NorthEast.Long;
+            to.ViewPort.SouthWest.Lat = from.ViewPort.SouthWest.Lat;
+            to.ViewPort.SouthWest.Long = from.ViewPort.SouthWest.Long;
+            to.GeocodeStatus = from.GeocodeStatus;
+            to.GoogleLocation = from.GoogleLocation;
+            to.GoogleResultType = from.GoogleResultType;
         }
 
         public int CompareTo(FactLocation that)
