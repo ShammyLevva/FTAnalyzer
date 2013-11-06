@@ -18,20 +18,31 @@ namespace FTAnalyzer
         public CensusFamily(Family f, CensusDate censusDate)
             : base(f)
         {
+            FamilyTree ft = FamilyTree.Instance;
             this.CensusDate = censusDate;
             this.BestLocation = null;
-            this.Wife = Members.FirstOrDefault(x => x.Ind_ID == f.WifeID);
-            this.Husband = Members.FirstOrDefault(x => x.Ind_ID == f.HusbandID);
+            int position = 1;
+            if(f.Wife != null)
+                this.Wife = new CensusIndividual(position++, f.Wife, this, CensusIndividual.WIFE);
+            if(f.Husband != null)
+                this.Husband = new CensusIndividual(position++, f.Husband, this, CensusIndividual.HUSBAND);
             this.Children = new List<CensusIndividual>();
             foreach (Individual child in f.Children)
             {
-                this.Children.Add(Members.FirstOrDefault(x => x.Ind_ID == child.Ind_ID));
+                CensusIndividual toAdd = new CensusIndividual(position++, child, this, CensusIndividual.CHILD);
+                this.Children.Add(toAdd);
             }
         }
 
         public new IEnumerable<CensusIndividual> Members
         {
-            get { return base.Members.Select((i, pos) => new CensusIndividual(pos, i, this)); }
+            get 
+            {             
+                if (Husband != null) yield return Husband;
+                if (Wife != null) yield return Wife;
+                if(Children != null && Children.Count > 0)
+                    foreach (CensusIndividual child in Children) yield return child;
+            }
         }
 
         public bool Process(CensusDate censusDate, bool censusDone, bool checkCensus)
@@ -44,7 +55,6 @@ namespace FTAnalyzer
                 if (IsValidIndividual(this.Wife, censusDone, true, checkCensus))
                 {
                     result = true;
-                    Wife.CensusStatus = CensusIndividual.WIFE;
                     facts.AddRange(Wife.PersonalFacts);
                 }
                 else
@@ -54,7 +64,6 @@ namespace FTAnalyzer
                 if (IsValidIndividual(Husband, censusDone, true, checkCensus))
                 {
                     result = true;
-                    Husband.CensusStatus = CensusIndividual.HUSBAND;
                     facts.AddRange(Husband.PersonalFacts);
                 }
                 else
@@ -72,7 +81,6 @@ namespace FTAnalyzer
                     // set location to childs birth location
                     // this will end up setting birth location of last child 
                     // as long as the location is at least Parish level
-                    child.CensusStatus = CensusIndividual.CHILD;
                     if (IsValidIndividual(child, censusDone, false, checkCensus))
                     {
                         result = true;
@@ -135,7 +143,7 @@ namespace FTAnalyzer
                 else if (Wife != null) return Wife.SurnameAtDate(CensusDate);
                 else
                 {
-                    Individual child = Children.FirstOrDefault();
+                    CensusIndividual child = Children.FirstOrDefault();
                     if (child != null)
                     {
                         return child.SurnameAtDate(CensusDate);

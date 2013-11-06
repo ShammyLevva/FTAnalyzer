@@ -12,14 +12,14 @@ namespace FTAnalyzer
         
         private CensusFamily family;
         public int Position { get; private set; }
-        public string CensusStatus { get; set; }
+        public string CensusStatus { get; private set; }
 
-        public CensusIndividual(int position, Individual individual, CensusFamily family)
+        public CensusIndividual(int position, Individual individual, CensusFamily family, string CensusStatus)
             : base(individual)
         {
             this.Position = position;
             this.family = family;
-            this.CensusStatus = UNKNOWNSTATUS;
+            this.CensusStatus = CensusStatus;
         }
 
         public string FamilyID
