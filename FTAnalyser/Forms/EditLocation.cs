@@ -257,6 +257,15 @@ namespace FTAnalyzer.Forms
                 Envelope bbox = new Envelope(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
                 expand = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
             }
+            Coordinate p = transform.Transform(new Coordinate(location.Longitude, location.Latitude));
+            Envelope point = new Envelope(p, p);
+            point.ExpandBy(mapBox1.Map.PixelSize * 40);
+            if (!expand.Contains(point))
+            {
+                mapBox1.Map.ZoomToBox(expand);
+                expand.ExpandToInclude(point);
+                expand.ExpandBy(mapBox1.Map.PixelSize * 40);
+            }
             mapBox1.Map.ZoomToBox(expand);
             mapBox1.Refresh();
         }
