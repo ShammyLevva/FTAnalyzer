@@ -400,7 +400,6 @@ namespace FTAnalyzer.Forms
             editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
             // force refresh of locations from new edited data
             dgLocations.Refresh();
-            
         }
 
         private void mnuCopyLocation_Click(object sender, EventArgs e)

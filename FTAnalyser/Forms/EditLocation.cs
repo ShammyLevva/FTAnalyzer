@@ -49,7 +49,7 @@ namespace FTAnalyzer.Forms
             pointUpdated = false;
             DataUpdated = false;
             SetupMap();
-            SetLocation(location);
+            SetLocation();
         }
 
         private void CopyLocationDetails(FactLocation from, FactLocation to)
@@ -91,7 +91,7 @@ namespace FTAnalyzer.Forms
         private void ResetMap()
         {
             CopyLocationDetails(originalLocation, location);
-            SetLocation(location);
+            SetLocation();
         }
 
         private FeatureDataRow GetRow(double p1, double p2)
@@ -232,7 +232,11 @@ namespace FTAnalyzer.Forms
                 if (!loc.IsGeoCoded) // if not geocoded then try database
                     DatabaseHelper.Instance.GetLatLong(loc);
                 if (loc.IsGeoCoded)
-                    SetLocation(loc);
+                {
+                    CopyLocationDetails(loc, location);
+                    SetLocation();
+                    pointUpdated = true;
+                }
                 else
                 {
                     GeoResponse res = GoogleMap.GoogleGeocode(txtSearch.Text, 8);
@@ -242,7 +246,9 @@ namespace FTAnalyzer.Forms
                         loc.Latitude = res.Results[0].Geometry.Location.Lat;
                         loc.Longitude = res.Results[0].Geometry.Location.Long;
                         loc.GeocodeStatus = res.Results[0].PartialMatch ? FactLocation.Geocode.PARTIAL_MATCH : FactLocation.Geocode.MATCHED;
-                        SetLocation(loc);
+                        CopyLocationDetails(loc, location);
+                        SetLocation();
+                        pointUpdated = true;
                     }
                     else
                         MessageBox.Show("Google didn't find " + txtSearch.Text, "Failed Google Lookup");
@@ -250,9 +256,8 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void SetLocation(FactLocation loc)
+        private void SetLocation()
         {
-            location = loc;
             pointTable.Clear();
             pointTable.AddRow(GetRow(location.Longitude, location.Latitude));
 
@@ -283,6 +288,12 @@ namespace FTAnalyzer.Forms
         {
             if (e.KeyData == Keys.Enter)
                 GoogleLocationSearch();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            mapBox1.Cursor = new Cursor(Path.Combine(Application.StartupPath, @"Resources\Icons\teardrop_blue.cur"));
+            iconSelected = true;
         }
     }
 }

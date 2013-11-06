@@ -41,6 +41,7 @@ namespace FTAnalyzer.Forms
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.mapZoomToolStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -73,6 +74,7 @@ namespace FTAnalyzer.Forms
             // 
             this.mapZoomToolStrip.Enabled = false;
             this.mapZoomToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnEdit,
             this.btnSave,
             this.btnReload,
             this.labSearch,
@@ -160,6 +162,17 @@ namespace FTAnalyzer.Forms
             this.toolStripStatusLabel1.Text = "Left click to select pointer, move to the correct place (using zoom/pan) then rig" +
                 "ht click to place pointer in new location";
             // 
+            // btnEdit
+            // 
+            this.btnEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(23, 22);
+            this.btnEdit.Text = "toolStripButton1";
+            this.btnEdit.ToolTipText = "Pickup point to edit location";
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
             // EditLocation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -195,5 +208,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripLabel labSearch;
         private System.Windows.Forms.ToolStripTextBox txtSearch;
         private System.Windows.Forms.ToolStripButton btnSearch;
+        private System.Windows.Forms.ToolStripButton btnEdit;
     }
 }
