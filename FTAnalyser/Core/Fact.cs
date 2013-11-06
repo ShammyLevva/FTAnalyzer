@@ -300,6 +300,10 @@ namespace FTAnalyzer
                     if (FactType == DEATH)
                     {
                         Comment = FamilyTree.GetText(node, "CAUS");
+                        if (node.FirstChild.Value == "Y" && !FactDate.IsKnown)
+                        {
+                            FactDate = new FactDate(FactDate.MINDATE, DateTime.Now); // if death flag set as Y then death before today.
+                        }
                     }
                     string age = FamilyTree.GetText(node, "AGE");
                     if (age.Length > 0)
