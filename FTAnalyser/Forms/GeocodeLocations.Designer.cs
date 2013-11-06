@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeocodeLocations));
             this.dgLocations = new System.Windows.Forms.DataGridView();
             this.LocationIcon = new System.Windows.Forms.DataGridViewImageColumn();
@@ -47,6 +47,8 @@
             this.mnuNotSearched = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuEditLocation = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCopyLocation = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPasteLocation = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.txtLocations = new System.Windows.Forms.ToolStripStatusLabel();
             this.pbGeocoding = new System.Windows.Forms.ToolStripProgressBar();
@@ -96,14 +98,14 @@
             this.GoogleLocation,
             this.GoogleResultType});
             this.dgLocations.ContextMenuStrip = this.contextMenuStrip;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgLocations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgLocations.Location = new System.Drawing.Point(0, 49);
             this.dgLocations.MultiSelect = false;
@@ -143,8 +145,8 @@
             // 
             this.Latitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Latitude.DataPropertyName = "Latitude";
-            dataGridViewCellStyle4.Format = "N7";
-            this.Latitude.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Format = "N7";
+            this.Latitude.DefaultCellStyle = dataGridViewCellStyle1;
             this.Latitude.HeaderText = "Latitude";
             this.Latitude.MinimumWidth = 75;
             this.Latitude.Name = "Latitude";
@@ -156,8 +158,8 @@
             // 
             this.Longitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Longitude.DataPropertyName = "Longitude";
-            dataGridViewCellStyle5.Format = "N7";
-            this.Longitude.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Format = "N7";
+            this.Longitude.DefaultCellStyle = dataGridViewCellStyle2;
             this.Longitude.HeaderText = "Longitude";
             this.Longitude.MinimumWidth = 75;
             this.Longitude.Name = "Longitude";
@@ -202,9 +204,11 @@
             this.mnuIncorrect,
             this.mnuNotSearched,
             this.toolStripSeparator1,
-            this.mnuEditLocation});
+            this.mnuEditLocation,
+            this.mnuCopyLocation,
+            this.mnuPasteLocation});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(240, 98);
+            this.contextMenuStrip.Size = new System.Drawing.Size(240, 164);
             // 
             // mnuVerified
             // 
@@ -241,6 +245,21 @@
             this.mnuEditLocation.Size = new System.Drawing.Size(239, 22);
             this.mnuEditLocation.Text = "Edit Location";
             this.mnuEditLocation.Click += new System.EventHandler(this.mnuEditLocation_Click);
+            // 
+            // mnuCopyLocation
+            // 
+            this.mnuCopyLocation.Name = "mnuCopyLocation";
+            this.mnuCopyLocation.Size = new System.Drawing.Size(239, 22);
+            this.mnuCopyLocation.Text = "Copy Location";
+            this.mnuCopyLocation.Click += new System.EventHandler(this.mnuCopyLocation_Click);
+            // 
+            // mnuPasteLocation
+            // 
+            this.mnuPasteLocation.Enabled = false;
+            this.mnuPasteLocation.Name = "mnuPasteLocation";
+            this.mnuPasteLocation.Size = new System.Drawing.Size(239, 22);
+            this.mnuPasteLocation.Text = "Paste Location";
+            this.mnuPasteLocation.Click += new System.EventHandler(this.mnuPasteLocation_Click);
             // 
             // statusStrip
             // 
@@ -531,5 +550,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuStatusSelectAll;
         private System.Windows.Forms.ToolStripMenuItem mnuReverseGeocode;
         private System.ComponentModel.BackgroundWorker reverseGeocodeBackgroundWorker;
+        private System.Windows.Forms.ToolStripMenuItem mnuCopyLocation;
+        private System.Windows.Forms.ToolStripMenuItem mnuPasteLocation;
     }
 }

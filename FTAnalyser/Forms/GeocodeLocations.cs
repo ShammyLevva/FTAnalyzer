@@ -29,6 +29,8 @@ namespace FTAnalyzer.Forms
         private ToolStripMenuItem[] noneOfTheAboveMenus;
         private ConcurrentQueue<FactLocation> queue;
 
+        private FactLocation CopyLocation;
+
         public GeocodeLocations()
         {
             InitializeComponent();
@@ -36,6 +38,8 @@ namespace FTAnalyzer.Forms
             this.refreshingMenus = false;
             this.locations = ft.AllGeocodingLocations;
             this.queue = new ConcurrentQueue<FactLocation>();
+            this.CopyLocation = FactLocation.UNKNOWN_LOCATION;
+            mnuPasteLocation.Enabled = false;
             dgLocations.AutoGenerateColumns = false;
             reportFormHelper = new ReportFormHelper(this.Text, dgLocations, this.ResetTable);
             italicFont = new Font(dgLocations.DefaultCellStyle.Font, FontStyle.Italic);
@@ -388,12 +392,38 @@ namespace FTAnalyzer.Forms
         {
             EditLocation editform = new EditLocation(loc);
             this.Cursor = Cursors.Default;
+            mnuPasteLocation.Enabled = false;
+            CopyLocation = FactLocation.UNKNOWN_LOCATION;
             DialogResult result = editform.ShowDialog(this);
             if (editform.DataUpdated)
                 AddLocationToQueue(loc);  // we have edited the location so add reverse geocode to queue
             editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
             // force refresh of locations from new edited data
             dgLocations.Refresh();
+            
+        }
+
+        private void mnuCopyLocation_Click(object sender, EventArgs e)
+        {
+            CopyLocation = dgLocations.CurrentRow.DataBoundItem as FactLocation;
+            mnuPasteLocation.Enabled = true;
+        }
+
+        private void mnuPasteLocation_Click(object sender, EventArgs e)
+        {
+            if (CopyLocation.IsGeoCoded)
+            {
+                FactLocation pasteLocation = dgLocations.CurrentRow.DataBoundItem as FactLocation;
+                pasteLocation.Latitude = CopyLocation.Latitude;
+                pasteLocation.Longitude = CopyLocation.Longitude;
+                pasteLocation.ViewPort.NorthEast.Lat = CopyLocation.ViewPort.NorthEast.Lat;
+                pasteLocation.ViewPort.NorthEast.Long = CopyLocation.ViewPort.NorthEast.Long;
+                pasteLocation.ViewPort.SouthWest.Lat = CopyLocation.ViewPort.SouthWest.Lat;
+                pasteLocation.ViewPort.SouthWest.Long = CopyLocation.ViewPort.SouthWest.Long;
+                pasteLocation.GeocodeStatus = CopyLocation.GeocodeStatus;
+                DatabaseHelper.Instance.UpdateGeocodeStatus(pasteLocation);
+                dgLocations.Refresh();
+            }
         }
 
         #region Geocode Threading
@@ -695,7 +725,12 @@ namespace FTAnalyzer.Forms
         private void dgLocations_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
                 dgLocations.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+                FactLocation loc = dgLocations.Rows[e.RowIndex].DataBoundItem as FactLocation;
+                mnuCopyLocation.Enabled = loc.IsGeoCoded;
+            }
+            
         }
 
         private void mnuReverseGeocde_Click(object sender, EventArgs e)

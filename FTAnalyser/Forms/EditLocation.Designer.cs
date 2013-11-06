@@ -104,7 +104,7 @@ namespace FTAnalyzer.Forms
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(23, 22);
             this.btnReload.Text = "toolStripButton2";
-            this.btnReload.ToolTipText = "Reset Point to previous position";
+            this.btnReload.ToolTipText = "Reset Point to original position";
             this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
             // 
             // labSearch
@@ -158,7 +158,7 @@ namespace FTAnalyzer.Forms
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(633, 17);
             this.toolStripStatusLabel1.Text = "Left click to select pointer, move to the correct place (using zoom/pan) then rig" +
-    "ht click to place pointer in new location";
+                "ht click to place pointer in new location";
             // 
             // EditLocation
             // 

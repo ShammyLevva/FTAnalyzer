@@ -49,6 +49,7 @@ namespace FTAnalyzer.Forms
             pointUpdated = false;
             DataUpdated = false;
             SetupMap();
+            SetLocation(location);
         }
 
         private void CopyLocationDetails(FactLocation from, FactLocation to)
@@ -85,7 +86,6 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.MinimumZoom = 500;
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
-            ResetMap();
         }
 
         private void ResetMap()
