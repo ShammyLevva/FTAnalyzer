@@ -91,7 +91,7 @@ namespace FTAnalyzer.Forms
         private void ResetMap()
         {
             CopyLocationDetails(originalLocation, location);
-            SetLocation();
+            SetLocation(location);
         }
 
         private FeatureDataRow GetRow(double p1, double p2)
@@ -221,29 +221,38 @@ namespace FTAnalyzer.Forms
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            GoogleLocationSearch();
+        }
+
+        private void GoogleLocationSearch()
+        {
             if (txtSearch.Text.Length > 0)
             {
                 FactLocation loc = FactLocation.LookupLocation(txtSearch.Text);
-                if (loc != null && loc.IsGeoCoded)
-                {
-                    location = loc;
-                    SetLocation();
-                }
+                if (!loc.IsGeoCoded) // if not geocoded then try database
+                    DatabaseHelper.Instance.GetLatLong(loc);
+                if (loc.IsGeoCoded)
+                    SetLocation(loc);
                 else
                 {
                     GeoResponse res = GoogleMap.GoogleGeocode(txtSearch.Text, 8);
                     if (res.Status == "OK")
                     {
-                        GeocodeLocations.ProcessResult(loc, res);
-                        location = loc;
-                        SetLocation();
+                        loc.ViewPort = res.Results[0].Geometry.ViewPort;
+                        loc.Latitude = res.Results[0].Geometry.Location.Lat;
+                        loc.Longitude = res.Results[0].Geometry.Location.Long;
+                        loc.GeocodeStatus = res.Results[0].PartialMatch ? FactLocation.Geocode.PARTIAL_MATCH : FactLocation.Geocode.MATCHED;
+                        SetLocation(loc);
                     }
+                    else
+                        MessageBox.Show("Google didn't find " + txtSearch.Text, "Failed Google Lookup");
                 }
             }
         }
 
-        private void SetLocation()
+        private void SetLocation(FactLocation loc)
         {
+            location = loc;
             pointTable.Clear();
             pointTable.AddRow(GetRow(location.Longitude, location.Latitude));
 
@@ -268,6 +277,12 @@ namespace FTAnalyzer.Forms
             }
             mapBox1.Map.ZoomToBox(expand);
             mapBox1.Refresh();
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+                GoogleLocationSearch();
         }
     }
 }

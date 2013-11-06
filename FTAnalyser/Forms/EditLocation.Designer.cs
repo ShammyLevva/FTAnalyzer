@@ -117,6 +117,7 @@ namespace FTAnalyzer.Forms
             // 
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(250, 25);
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             // 
             // btnSearch
             // 
@@ -157,7 +158,7 @@ namespace FTAnalyzer.Forms
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(633, 17);
             this.toolStripStatusLabel1.Text = "Left click to select pointer, move to the correct place (using zoom/pan) then rig" +
-                "ht click to place pointer in new location";
+    "ht click to place pointer in new location";
             // 
             // EditLocation
             // 

@@ -179,6 +179,8 @@ namespace FTAnalyzer
         {
             FactLocation result = null;
             locations.TryGetValue(place, out result);
+            if (result == null)
+                result = new FactLocation(place);
             return result;
         }
 

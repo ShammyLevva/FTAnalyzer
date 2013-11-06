@@ -574,6 +574,11 @@ namespace FTAnalyzer.Forms
                                     skipped++;
                                     foundLevel = -2;
                                 }
+                                loc.Latitude = latitude;
+                                loc.Longitude = longitude;
+                                loc.GoogleLocation = address;
+                                loc.GoogleResultType = resultType;
+                                loc.ViewPort = viewport;
                                 if (inDatabase)
                                 {
                                     updateCmd.Parameters[0].Value = loc.Level;
@@ -606,11 +611,6 @@ namespace FTAnalyzer.Forms
                                     insertCmd.Parameters[11].Value = resultType;
                                     insertCmd.ExecuteNonQuery();
                                 }
-                                loc.Latitude = latitude;
-                                loc.Longitude = longitude;
-                                loc.GoogleLocation = address;
-                                loc.GoogleResultType = resultType;
-                                loc.ViewPort = viewport;
                             }
                             else
                             {
@@ -773,7 +773,7 @@ namespace FTAnalyzer.Forms
                             }
                             if (res != null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
                             {
-                                ProcessResult(loc, res);
+                                ProcessReverseResult(loc, res);
                                 DatabaseHelper.Instance.UpdateGeocodeStatus(loc);
                             }
                         }
@@ -803,7 +803,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        public static void ProcessResult(FactLocation loc, GeoResponse res)
+        public static void ProcessReverseResult(FactLocation loc, GeoResponse res)
         {
             int foundLevel = -1;
             GeoResponse.CResult.CGeometry.CViewPort viewport = new GeoResponse.CResult.CGeometry.CViewPort();

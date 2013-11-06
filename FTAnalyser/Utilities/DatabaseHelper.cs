@@ -139,6 +139,42 @@ namespace FTAnalyzer.Utilities
             return cmd;
         }
 
+        public void GetLatLong(FactLocation location)
+        {
+            if (location.ToString().Length == 0) return;
+            SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw, geocodestatus from geocode where location = ?", conn);
+            SQLiteParameter param = cmd.CreateParameter();
+            param.DbType = DbType.String;
+            cmd.Parameters.Add(param);
+            cmd.Prepare();
+            cmd.Parameters[0].Value = location.ToString();
+            SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleRow);
+            if (reader.Read())
+            {
+                double latitude, longitude, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw;
+                double.TryParse(reader["latitude"].ToString(), out latitude);
+                double.TryParse(reader["longitude"].ToString(), out longitude);
+                double.TryParse(reader["viewport_x_ne"].ToString(), out viewport_x_ne);
+                double.TryParse(reader["viewport_y_ne"].ToString(), out viewport_y_ne);
+                double.TryParse(reader["viewport_x_sw"].ToString(), out viewport_x_sw);
+                double.TryParse(reader["viewport_y_sw"].ToString(), out viewport_y_sw);
+                location.Latitude = latitude;
+                location.Longitude = longitude;
+                if (location.ViewPort == null)
+                {
+                    location.ViewPort = new Mapping.GeoResponse.CResult.CGeometry.CViewPort();
+                    location.ViewPort.NorthEast = new Mapping.GeoResponse.CResult.CGeometry.CLocation();
+                    location.ViewPort.SouthWest = new Mapping.GeoResponse.CResult.CGeometry.CLocation();
+                }
+                location.ViewPort.NorthEast.Lat = viewport_x_ne;
+                location.ViewPort.NorthEast.Long = viewport_y_ne;
+                location.ViewPort.SouthWest.Lat = viewport_x_sw;
+                location.ViewPort.SouthWest.Long = viewport_y_sw;
+                location.GeocodeStatus = (FactLocation.Geocode)Enum.Parse(typeof(FactLocation.Geocode), reader["geocodestatus"].ToString());
+            }
+            reader.Close();
+        }
+
         public SQLiteCommand GetLocationDetails()
         {
             SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, level, foundlevel, foundlocation, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw, geocodestatus, foundresulttype from geocode where location = ?", conn);
