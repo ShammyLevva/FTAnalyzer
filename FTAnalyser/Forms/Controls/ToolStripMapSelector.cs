@@ -255,5 +255,14 @@ namespace FTAnalyzer.Forms.Controls
             Application.UserAppDataRegistry.SetValue("Default Map Background", ((ToolStripMenuItem)sender).Name);
             mapbox.Refresh();
         }
+
+        public BruTile.TileSchema Schema
+        {
+            get 
+            {
+                //BruTile.TileLayer layer = mapbox.Map.BackgroundLayer[0];
+                return null;
+            }
+        }
     }
 }

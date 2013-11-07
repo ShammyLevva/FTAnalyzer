@@ -54,11 +54,6 @@ namespace FTAnalyzer.Forms
 
         private void SetupMap()
         {
-            // Add Google maps layer to map control.
-            //HttpUtility.SetDefaultProxy();
-            //mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
-            //    new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap"));
-            ////      new BingTileSource(BingRequest.UrlBing, "", BingMapType.Roads),"BingMap"));
             pointTable = new FeatureDataTable();
             pointTable.Columns.Add("Label", typeof(string));
 
@@ -151,6 +146,7 @@ namespace FTAnalyzer.Forms
             location.ViewPort.NorthEast.Long = env.Right();
             location.ViewPort.SouthWest.Lat = env.Bottom();
             location.ViewPort.SouthWest.Long = env.Left();
+            location.PixelSize = mapBox1.Map.PixelSize;
             location.GoogleLocation = string.Empty;
             location.GeocodeStatus = FactLocation.Geocode.GEDCOM_USER;
 
@@ -206,6 +202,7 @@ namespace FTAnalyzer.Forms
                 mapBox1.Map.Center.X = p.X;
                 mapBox1.Map.Center.Y = p.Y;
             }
+            //Console.WriteLine("Pixel : " + mapBox1.Map.PixelSize);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

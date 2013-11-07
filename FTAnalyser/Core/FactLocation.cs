@@ -33,6 +33,7 @@ namespace FTAnalyzer
         public Geocode GeocodeStatus { get; set; }
         public string GoogleLocation { get; set; }
         public string GoogleResultType { get; set; }
+        public double PixelSize { get; set; }
         public GeoResponse.CResult.CGeometry.CViewPort ViewPort { get; set; }
         private List<Individual> individuals;
 

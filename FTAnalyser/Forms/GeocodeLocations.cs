@@ -721,7 +721,6 @@ namespace FTAnalyzer.Forms
                 FactLocation loc = dgLocations.Rows[e.RowIndex].DataBoundItem as FactLocation;
                 mnuCopyLocation.Enabled = loc.IsGeoCoded;
             }
-            
         }
 
         private void mnuReverseGeocde_Click(object sender, EventArgs e)
@@ -766,7 +765,7 @@ namespace FTAnalyzer.Forms
             SQLiteDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                FactLocation loc = FactLocation.GetLocation(reader[0].ToString());
+                FactLocation loc = FactLocation.LookupLocation(reader[0].ToString());
                 if (!queue.Contains(loc))
                     queue.Enqueue(loc);
             }
@@ -840,10 +839,12 @@ namespace FTAnalyzer.Forms
                     foundLevel = GoogleMap.GetFactLocation(result.Types);
                     viewport = result.Geometry.ViewPort;
                     string resultTypes = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
-                    if (foundLevel == loc.Level &&
+                    if ((foundLevel == FactLocation.PLACE && loc.PixelSize < 10) ||
+                        (foundLevel == FactLocation.ADDRESS && loc.PixelSize < 100) ||
+                       (foundLevel == loc.Level &&
                         resultTypes != GoogleMap.POSTALCODE &&
                         resultTypes != GoogleMap.POSTALCODEPREFIX &&
-                        resultTypes != GoogleMap.POSTALTOWN) // prefer more detailed results than postal codes
+                        resultTypes != GoogleMap.POSTALTOWN)) // prefer more detailed results than postal codes
                     {
                         loc.GoogleLocation = result.ReturnAddress;
                         loc.GoogleResultType = resultTypes;
