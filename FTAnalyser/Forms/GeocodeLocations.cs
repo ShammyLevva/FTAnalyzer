@@ -691,10 +691,8 @@ namespace FTAnalyzer.Forms
         private void mnuVerified_Click(object sender, EventArgs e)
         {
             FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
-            loc.GoogleLocation = string.Empty;
             loc.GeocodeStatus = FactLocation.Geocode.GEDCOM_USER;
             DatabaseHelper.Instance.UpdateGeocodeStatus(loc);
-            AddLocationToQueue(loc);
             dgLocations.Refresh();
         }
 
