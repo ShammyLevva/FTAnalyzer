@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "3.1.2.0-bata test 1";
+        private string VERSION = "3.1.2.0-bata test 2";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -33,7 +33,6 @@ namespace FTAnalyzer
         public MainForm()
         {
             InitializeComponent();
-            log.Info("Started FTAnalyzer version " + VERSION);
             displayOptionsOnLoadToolStripMenuItem.Checked = Properties.GeneralSettings.Default.ReportOptions;
             ft.XmlErrorBox = rtbOutput;
             VERSION = PublishVersion();
