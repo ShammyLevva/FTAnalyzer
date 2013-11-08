@@ -32,7 +32,8 @@ namespace FTAnalyzer.Forms
         private FeatureDataRow pointFeature;
         private bool iconSelected;
         private bool pointUpdated;
-        public bool DataUpdated { get; private set; }
+        private bool dataUpdated;
+        public bool UserSavedPoint { get; private set; }
 
         public EditLocation(FactLocation location)
         {
@@ -47,7 +48,8 @@ namespace FTAnalyzer.Forms
             this.Text = "Editing : " + location.ToString();
             iconSelected = false;
             pointUpdated = false;
-            DataUpdated = false;
+            dataUpdated = false;
+            UserSavedPoint = false;
             SetupMap();
             SetLocation();
         }
@@ -128,6 +130,7 @@ namespace FTAnalyzer.Forms
                 else if (result == DialogResult.Yes)
                 {
                     UpdateDatabase();
+                    UserSavedPoint = true;
                 }
             }
         }
@@ -160,22 +163,24 @@ namespace FTAnalyzer.Forms
             updateCmd.Parameters[7].Value = location.ToString();
             updateCmd.ExecuteNonQuery();
             pointUpdated = false;
-            DataUpdated = true;
+            dataUpdated = true;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             UpdateDatabase();
+            UserSavedPoint = true;
             MessageBox.Show("Data for " + location.ToString() + " updated.", "Save new location");
         }
 
         private void btnReload_Click(object sender, EventArgs e)
         {
             ResetMap();
-            if (DataUpdated)
+            if (dataUpdated)
                 UpdateDatabase();
-            DataUpdated = false;
+            dataUpdated = false;
             pointUpdated = false;
+            UserSavedPoint = false;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

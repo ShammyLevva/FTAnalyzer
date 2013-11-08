@@ -395,7 +395,7 @@ namespace FTAnalyzer.Forms
             mnuPasteLocation.Enabled = false;
             CopyLocation = FactLocation.UNKNOWN_LOCATION;
             DialogResult result = editform.ShowDialog(this);
-            if (editform.DataUpdated)
+            if (editform.UserSavedPoint)
                 AddLocationToQueue(loc);  // we have edited the location so add reverse geocode to queue
             editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
             // force refresh of locations from new edited data
