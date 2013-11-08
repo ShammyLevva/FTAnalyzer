@@ -281,5 +281,10 @@ namespace FTAnalyzer.Forms
             mapBox1.Cursor = new Cursor(Path.Combine(Application.StartupPath, @"Resources\Icons\teardrop_blue.cur"));
             iconSelected = true;
         }
+        
+        private void mapBox1_Paint(object sender, PaintEventArgs e)
+        {
+             this.Text = "Editing : " + location.ToString() + "    - Beta pixelsize = " + mapBox1.Map.PixelSize;
+        }
     }
 }

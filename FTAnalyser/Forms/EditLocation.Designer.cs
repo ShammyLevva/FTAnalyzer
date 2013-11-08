@@ -33,6 +33,7 @@ namespace FTAnalyzer.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditLocation));
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
+            this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnReload = new System.Windows.Forms.ToolStripButton();
             this.labSearch = new System.Windows.Forms.ToolStripLabel();
@@ -41,7 +42,6 @@ namespace FTAnalyzer.Forms
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.mapZoomToolStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -67,6 +67,7 @@ namespace FTAnalyzer.Forms
             this.mapBox1.TabIndex = 9;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
+            this.mapBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.mapBox1_Paint);
             this.mapBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.mapBox1_MouseClick);
             this.mapBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mapBox1_MouseDoubleClick);
             // 
@@ -86,6 +87,17 @@ namespace FTAnalyzer.Forms
             this.mapZoomToolStrip.Size = new System.Drawing.Size(754, 25);
             this.mapZoomToolStrip.TabIndex = 10;
             this.mapZoomToolStrip.Text = "MapZoomToolStrip";
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(23, 22);
+            this.btnEdit.Text = "toolStripButton1";
+            this.btnEdit.ToolTipText = "Pickup point to edit location";
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnSave
             // 
@@ -161,17 +173,6 @@ namespace FTAnalyzer.Forms
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(633, 17);
             this.toolStripStatusLabel1.Text = "Left click to select pointer, move to the correct place (using zoom/pan) then rig" +
                 "ht click to place pointer in new location";
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(23, 22);
-            this.btnEdit.Text = "toolStripButton1";
-            this.btnEdit.ToolTipText = "Pickup point to edit location";
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // EditLocation
             // 

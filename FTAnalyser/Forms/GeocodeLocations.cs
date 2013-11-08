@@ -840,7 +840,8 @@ namespace FTAnalyzer.Forms
                     viewport = result.Geometry.ViewPort;
                     string resultTypes = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
                     if ((foundLevel == FactLocation.PLACE && loc.PixelSize < 10) ||
-                        (foundLevel == FactLocation.ADDRESS && loc.PixelSize < 100) ||
+                        (foundLevel == FactLocation.ADDRESS && loc.PixelSize < 30) ||
+                        (foundLevel == FactLocation.SUBREGION && loc.PixelSize < 100) ||
                        (foundLevel == loc.Level &&
                         resultTypes != GoogleMap.POSTALCODE &&
                         resultTypes != GoogleMap.POSTALCODEPREFIX &&
