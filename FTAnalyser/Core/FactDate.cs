@@ -29,8 +29,8 @@ namespace FTAnalyzer
         private static readonly string DOUBLE_DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})/(\\d{0,2})$";
         private static readonly string DOUBLE_DATE_PATTERN2 = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{4})/(\\d{4})$";
         private static readonly string POSTFIX = "(\\d{1,2})(?:ST|ND|RD|TH)(.*)";
-        private static readonly string BETWEENFIX = "(\\d{4})-(\\d{4})";
-        private static readonly string BETWEENFIX2 = "([A-Za-z]{0,3}) *(\\d{4})-([A-Za-z]{0,3}) *(\\d{4})";
+        private static readonly string BETWEENFIX = "(\\d{4}) *- *(\\d{4})";
+        private static readonly string BETWEENFIX2 = "([A-Za-z]{0,3}) *(\\d{4}) *- *([A-Za-z]{0,3}) *(\\d{4})";
         private static readonly string USDATEFIX = "^([A-Za-z]{3}) *(\\d{1,2} )(\\d{4})$";
         private static readonly string SPACEFIX = "^(\\d{1,2}) *([A-Za-z]{3}) *(\\d{0,4})$";
 
