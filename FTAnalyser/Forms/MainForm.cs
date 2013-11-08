@@ -1,29 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SQLite;
 using System.Diagnostics;
+using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using FTAnalyzer.Filters;
-using FTAnalyzer.Utilities;
-using FTAnalyzer.UserControls;
-using Printing.DataGridViewPrint.Tools;
-using System.Drawing;
 using FTAnalyzer.Forms;
+using FTAnalyzer.UserControls;
+using FTAnalyzer.Utilities;
 using Ionic.Zip;
-using System.Collections.Specialized;
-using Controls;
+using Printing.DataGridViewPrint.Tools;
 
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
         private string VERSION = "3.1.2.0-bata test 1";
 
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
         private bool stopProcessing = false;
@@ -33,9 +33,11 @@ namespace FTAnalyzer
         public MainForm()
         {
             InitializeComponent();
+            log.Info("Started FTAnalyzer version " + VERSION);
             displayOptionsOnLoadToolStripMenuItem.Checked = Properties.GeneralSettings.Default.ReportOptions;
             ft.XmlErrorBox = rtbOutput;
             VERSION = PublishVersion();
+            log.Info("Started FTAnalyzer version " + VERSION);
             treetopsRelation.MarriedToDB = false;
             ShowMenus(false);
             SetSavePath();

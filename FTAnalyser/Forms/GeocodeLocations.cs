@@ -18,6 +18,7 @@ namespace FTAnalyzer.Forms
 {
     public partial class GeocodeLocations : Form
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private FamilyTree ft;
         private Font italicFont;
         private ReportFormHelper reportFormHelper;
@@ -834,6 +835,7 @@ namespace FTAnalyzer.Forms
             GeoResponse.CResult.CGeometry.CViewPort viewport = new GeoResponse.CResult.CGeometry.CViewPort();
             if (res.Status == "OK")
             {
+                LogResults(loc, res);
                 foreach (GeoResponse.CResult result in res.Results)
                 {
                     foundLevel = GoogleMap.GetFactLocation(result.Types);
@@ -849,6 +851,7 @@ namespace FTAnalyzer.Forms
                     {
                         loc.GoogleLocation = result.ReturnAddress;
                         loc.GoogleResultType = resultTypes;
+                        log.Info("Decided to use: Pixelsize: " + loc.PixelSize + ", level: " + foundLevel + "=" + result.ReturnAddress + ". Type: " + resultTypes);
                         break;
                     }
                 }
@@ -871,6 +874,15 @@ namespace FTAnalyzer.Forms
             else if (res.Status == "ZERO_RESULTS")
             {
                 foundLevel = -2;
+            }
+        }
+
+        private static void LogResults(FactLocation loc, GeoResponse res)
+        {
+            log.Info("Pixelsize: " + loc.PixelSize + ", Found " + res.Results.Count() + " results for " + loc.ToString());
+            foreach (GeoResponse.CResult result in res.Results)
+            {
+                log.Info("Level: " + GoogleMap.GetFactLocation(result.Types) + "=" + result.ReturnAddress + ". Type: " + EnhancedTextInfo.ConvertStringArrayToString(result.Types));
             }
         }
         #endregion
