@@ -141,6 +141,7 @@ namespace FTAnalyzer
                         ShowMenus(true);
                         HourGlass(false);
                         AddFileToRecentList(filename);
+                        mnuRestore.Enabled = false;
                         MessageBox.Show("Gedcom File " + filename + " Loaded");
                     }
                 }
@@ -240,6 +241,7 @@ namespace FTAnalyzer
                         tabSelector.SelectedTab = tabDisplayProgress;
                         tsCountLabel.Text = "";
                         tsHintsLabel.Text = "";
+                        mnuRestore.Enabled = true;
                         MessageBox.Show(Properties.ErrorMessages.FTA_0002, "Error : FTA_0002");
                     }
                     return;
@@ -1566,22 +1568,27 @@ namespace FTAnalyzer
                 DialogResult result = restoreDatabase.ShowDialog();
                 if (result == DialogResult.OK && File.Exists(restoreDatabase.FileName))
                 {
+                    HourGlass(true);
                     bool failed = false;
                     ZipFile zip = new ZipFile(restoreDatabase.FileName);
                     if (zip.Count == 1 && zip.ContainsEntry("Geocodes.s3db"))
                     {
                         DatabaseHelper dbh = DatabaseHelper.Instance;
-                        dbh.StartBackupRestoreDatabase();
-                        File.Copy(dbh.Filename, dbh.TempFilename, true); // copy exisiting file to safety
-                        zip.ExtractAll(dbh.DatabasePath, ExtractExistingFileAction.OverwriteSilently);
-                        if (dbh.RestoreDatabase())
-                            MessageBox.Show("Database restored from " + restoreDatabase.FileName);
-                        else
+                        if (dbh.StartBackupRestoreDatabase())
                         {
-                            File.Copy(dbh.TempFilename, dbh.Filename, true);
-                            dbh.RestoreDatabase(); // restore original database
-                            failed = true;
+                            File.Copy(dbh.Filename, dbh.CurrentFilename, true); // copy exisiting file to safety
+                            zip.ExtractAll(dbh.DatabasePath, ExtractExistingFileAction.OverwriteSilently);
+                            if (dbh.RestoreDatabase())
+                                MessageBox.Show("Database restored from " + restoreDatabase.FileName);
+                            else
+                            {
+                                File.Copy(dbh.CurrentFilename, dbh.Filename, true);
+                                dbh.RestoreDatabase(); // restore original database
+                                failed = true;
+                            }
                         }
+                        else
+                            MessageBox.Show("Database file could not be extracted");
                     }
                     else
                     {
@@ -1589,6 +1596,7 @@ namespace FTAnalyzer
                     }
                     if(failed)
                         MessageBox.Show(restoreDatabase.FileName + " doesn't appear to be an FTAnalyzer database");
+                    HourGlass(false);
                 }
             }
         }

@@ -12,7 +12,7 @@ namespace FTAnalyzer.Utilities
         private static SQLiteConnection conn;
         private static DatabaseHelper instance;
         public string Filename { get; private set; }
-        public string TempFilename { get; private set; }
+        public string CurrentFilename { get; private set; }
         public string DatabasePath { get; private set; }
         private Version ProgramVersion { get; set; }
 
@@ -20,7 +20,7 @@ namespace FTAnalyzer.Utilities
         private DatabaseHelper()
         {
             DatabasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer");
-            TempFilename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\FTA-RestoreTemp.s3db");
+            CurrentFilename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\FTA-RestoreTemp.s3db");
             OpenDatabaseConnection();
         }
 
@@ -389,10 +389,13 @@ namespace FTAnalyzer.Utilities
 
         public bool StartBackupRestoreDatabase()
         {
+            string tempFilename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\Geocodes.s3db.tmp");
             try
             {
                 conn.Close();
                 GC.Collect(); // needed to force a cleanup of connections prior to replacing the file.
+                if (File.Exists(tempFilename))
+                    File.Delete(tempFilename);
                 return true;
             }
             catch (Exception)
@@ -416,6 +419,9 @@ namespace FTAnalyzer.Utilities
                 if (conn.State != ConnectionState.Open)
                     OpenDatabaseConnection();
                 UpgradeDatabase(ProgramVersion);
+                FamilyTree ft = FamilyTree.Instance;
+                if(ft.DataLoaded)
+                    ft.LoadGeoLocationsFromDataBase();
             }
             catch (Exception)
             {
