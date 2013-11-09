@@ -1,4 +1,5 @@
-﻿namespace FTAnalyzer.Forms
+﻿using FTAnalyzer.Forms.Controls;
+namespace FTAnalyzer.Forms
 {
     partial class LifeLine
     {
@@ -32,10 +33,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LifeLine));
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.mapZoomToolStrip1 = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
-            this.mapBox1 = new SharpMap.Forms.MapBox();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
-            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mapBox1 = new SharpMap.Forms.MapBox();
+            this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.IndividualName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DateofBirth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -56,25 +58,35 @@
             // 
             // splitContainer.Panel2
             // 
+            this.splitContainer.Panel2.Controls.Add(this.linkLabel1);
             this.splitContainer.Panel2.Controls.Add(this.mapBox1);
-            this.splitContainer.Panel2.Controls.Add(this.mapZoomToolStrip1);
+            this.splitContainer.Panel2.Controls.Add(this.mapZoomToolStrip);
             this.splitContainer.Size = new System.Drawing.Size(1113, 482);
             this.splitContainer.SplitterDistance = 250;
             this.splitContainer.TabIndex = 1;
             // 
-            // mapZoomToolStrip1
+            // dgIndividuals
             // 
-            this.mapZoomToolStrip1.Enabled = false;
-            this.mapZoomToolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.mapZoomToolStrip1.MapControl = null;
-            this.mapZoomToolStrip1.Name = "mapZoomToolStrip1";
-            this.mapZoomToolStrip1.Size = new System.Drawing.Size(859, 25);
-            this.mapZoomToolStrip1.TabIndex = 1;
-            this.mapZoomToolStrip1.Text = "mapZoomToolStrip1";
+            this.dgIndividuals.AllowUserToAddRows = false;
+            this.dgIndividuals.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgIndividuals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgIndividuals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IndividualName,
+            this.DateofBirth});
+            this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgIndividuals.Location = new System.Drawing.Point(0, 0);
+            this.dgIndividuals.Name = "dgIndividuals";
+            this.dgIndividuals.ReadOnly = true;
+            this.dgIndividuals.RowHeadersWidth = 4;
+            this.dgIndividuals.Size = new System.Drawing.Size(250, 482);
+            this.dgIndividuals.TabIndex = 0;
             // 
             // mapBox1
             // 
             this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.None;
+            this.mapBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.mapBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapBox1.FineZoomFactor = 10D;
             this.mapBox1.Location = new System.Drawing.Point(0, 25);
@@ -90,34 +102,41 @@
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
             // 
-            // dgIndividuals
+            // mapZoomToolStrip
             // 
-            this.dgIndividuals.AllowUserToAddRows = false;
-            this.dgIndividuals.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgIndividuals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgIndividuals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Name,
-            this.DateofBirth});
-            this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgIndividuals.Location = new System.Drawing.Point(0, 0);
-            this.dgIndividuals.Name = "dgIndividuals";
-            this.dgIndividuals.ReadOnly = true;
-            this.dgIndividuals.RowHeadersWidth = 4;
-            this.dgIndividuals.Size = new System.Drawing.Size(250, 482);
-            this.dgIndividuals.TabIndex = 0;
+            this.mapZoomToolStrip.Enabled = false;
+            this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.mapZoomToolStrip.MapControl = null;
+            this.mapZoomToolStrip.Name = "mapZoomToolStrip";
+            this.mapZoomToolStrip.Size = new System.Drawing.Size(859, 25);
+            this.mapZoomToolStrip.TabIndex = 1;
+            this.mapZoomToolStrip.Text = "mapZoomToolStrip1";
             // 
-            // Name
+            // linkLabel1
             // 
-            this.Name.DataPropertyName = "Name";
-            this.Name.HeaderText = "Name";
-            this.Name.Name = "Name";
-            this.Name.ReadOnly = true;
+            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(731, 25);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(125, 13);
+            this.linkLabel1.TabIndex = 16;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "© Google - Terms of Use";
+            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // IndividualName
+            // 
+            this.IndividualName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.IndividualName.DataPropertyName = "SortedName";
+            this.IndividualName.HeaderText = "Name";
+            this.IndividualName.MinimumWidth = 50;
+            this.IndividualName.Name = "IndividualName";
+            this.IndividualName.ReadOnly = true;
+            this.IndividualName.Width = 120;
             // 
             // DateofBirth
             // 
-            this.DateofBirth.DataPropertyName = "DateofBirth";
+            this.DateofBirth.DataPropertyName = "BirthDate";
             this.DateofBirth.HeaderText = "Date of Birth";
             this.DateofBirth.Name = "DateofBirth";
             this.DateofBirth.ReadOnly = true;
@@ -145,10 +164,11 @@
 
         private System.Windows.Forms.SplitContainer splitContainer;
         private SharpMap.Forms.MapBox mapBox1;
-        private SharpMap.Forms.ToolBar.MapZoomToolStrip mapZoomToolStrip1;
+        private SharpMap.Forms.ToolBar.MapZoomToolStrip mapZoomToolStrip;
         private System.Windows.Forms.DataGridView dgIndividuals;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Name;
+        private ToolStripMapSelector mnuMapStyle = new ToolStripMapSelector();
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IndividualName;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateofBirth;
-
     }
 }

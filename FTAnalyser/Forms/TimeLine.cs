@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Windows.Forms;
-using BruTile.Web;
 using FTAnalyzer.Mapping;
 using GeoAPI.CoordinateSystems.Transformations;
 using GeoAPI.Geometries;
 using SharpMap.Data;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
-using SharpMap.Styles;
 using SharpMap.Rendering.Decoration.ScaleBar;
-using System.Diagnostics;
-using FTAnalyzer.Forms.Controls;
+using SharpMap.Styles;
 
 namespace FTAnalyzer.Forms
 {
@@ -82,11 +79,6 @@ namespace FTAnalyzer.Forms
 
         private void SetupMap()
         {
-            // Add Google maps layer to map control.
-            //HttpUtility.SetDefaultProxy();
-            //mapBox1.Map.BackgroundLayer.Add(new TileAsyncLayer(
-            //    new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap"));
-
             factLocations = new FeatureDataTable();
             factLocations.Columns.Add("MapLocation", typeof(MapLocation));
             factLocations.Columns.Add("Label", typeof(string));

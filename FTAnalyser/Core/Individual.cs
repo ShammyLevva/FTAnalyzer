@@ -241,6 +241,11 @@ namespace FTAnalyzer
             }
         }
 
+        public string SortedName
+        {
+            get { return (surname + ", " + forenames).Trim(); }
+        }
+
         public string Name
         {
             get { return (forenames + " " + surname).Trim(); }
@@ -1016,7 +1021,7 @@ namespace FTAnalyzer
         public override bool Equals(object that)
         {
             if (that is Individual)
-                return this.Ind_ID.Equals(((Individual)that).Ind_ID);
+                return this.IndividualID.Equals(((Individual)that).IndividualID);
             else
                 return false;
         }
@@ -1028,7 +1033,7 @@ namespace FTAnalyzer
 
         public override string ToString()
         {
-            return Ind_ID + ": " + Name + " b." + BirthDate;
+            return IndividualID + ": " + Name + " b." + BirthDate;
         }
     }
 }

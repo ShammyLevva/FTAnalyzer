@@ -213,6 +213,7 @@
     <Compile Include="Forms\LifeLine.Designer.cs">
       <DependentUpon>LifeLine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\MapLifeLine.cs" />
     <Compile Include="Mapping\NLSRequest.cs" />
     <Compile Include="Utilities\CustomToolStripRenderer.cs" />
     <Compile Include="Forms\EditLocation.cs">
