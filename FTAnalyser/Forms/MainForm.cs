@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string VERSION = "3.1.2.0-bata test 2";
+        public string VERSION = "3.1.2.0-bata test 2";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -608,11 +608,11 @@ namespace FTAnalyzer
             rtbLostCousins.AppendText("1880 US Census: " + countUS1880 + " Found, " + missingUS1880 + " Missing\n");
             rtbLostCousins.AppendText("1940 US Census: " + countUS1940 + " Found, " + missingUS1940 + " Missing\n");
             rtbLostCousins.AppendText("_____________________________________________\n");
-            if(moreThanOneLCfact > 0)
+            if (moreThanOneLCfact > 0)
                 rtbLostCousins.AppendText("Duplicate LostCousins facts: " + moreThanOneLCfact + "\n");
             if (LCtotal > total)
                 rtbLostCousins.AppendText("LostCousins fact with no country: " + (LCtotal - total) + "\n");
-            if(moreThanOneLCfact > 0 || LCtotal > total)
+            if (moreThanOneLCfact > 0 || LCtotal > total)
                 rtbLostCousins.AppendText("_____________________________________________\n");
             rtbLostCousins.AppendText("Totals: " + LCtotal + " Found, " + missingtotal + " Missing");
 
@@ -650,7 +650,7 @@ namespace FTAnalyzer
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
             People people = new People();
             people.SetupLCNoCountry(relationFilter);
-            DisposeDuplicateForms(people); 
+            DisposeDuplicateForms(people);
             people.Show();
             HourGlass(false);
         }
@@ -673,7 +673,7 @@ namespace FTAnalyzer
 
         private void btnLCnoCensus_Click(object sender, EventArgs e)
         {
-            HourGlass(true); 
+            HourGlass(true);
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
             People people = new People();
             people.SetupLCnoCensus(relationFilter);
@@ -1540,7 +1540,7 @@ namespace FTAnalyzer
                 if (result == DialogResult.OK)
                 {
                     DatabaseHelper dbh = DatabaseHelper.Instance;
-                    dbh.StartBackupDatabase();
+                    dbh.StartBackupRestoreDatabase();
                     if (File.Exists(saveDatabase.FileName))
                         File.Delete(saveDatabase.FileName);
                     ZipFile zip = new ZipFile(saveDatabase.FileName);
@@ -1550,6 +1550,40 @@ namespace FTAnalyzer
                     dbh.EndBackupDatabase();
                     Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName));
                     MessageBox.Show("Database exported to " + saveDatabase.FileName);
+                }
+            }
+        }
+
+        private void restoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ft.Geocoding)
+                MessageBox.Show("You need to stop Geocoding before you can import the database");
+            else
+            {
+                string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();
+                restoreDatabase.FileName = "*.zip";
+                restoreDatabase.InitialDirectory = directory;
+                DialogResult result = restoreDatabase.ShowDialog();
+                if (result == DialogResult.OK && File.Exists(restoreDatabase.FileName))
+                {
+                    ZipFile zip = new ZipFile(restoreDatabase.FileName);
+                    if (zip.Count == 1 && zip.ContainsEntry("Geocodes.s3db"))
+                    {
+                        DatabaseHelper dbh = DatabaseHelper.Instance;
+                        dbh.StartBackupRestoreDatabase();
+                        File.Copy(dbh.Filename, dbh.TempFilename, true); // copy exisiting file to safety
+                        zip.ExtractAll(dbh.DatabasePath, ExtractExistingFileAction.OverwriteSilently);
+                        if (dbh.RestoreDatabase())
+                            MessageBox.Show("Database restored from " + saveDatabase.FileName);
+                        else
+                        {
+                            File.Copy(dbh.TempFilename, dbh.Filename, true);
+                            dbh.RestoreDatabase(); // restore original database
+                            MessageBox.Show("File doesn't appear to be an FTAnalyzer database");
+                        }
+                    }
+                    else
+                        MessageBox.Show("File doesn't appear to be an FTAnalyzer database");
                 }
             }
         }

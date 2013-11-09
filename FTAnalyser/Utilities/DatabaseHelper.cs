@@ -12,10 +12,15 @@ namespace FTAnalyzer.Utilities
         private static SQLiteConnection conn;
         private static DatabaseHelper instance;
         public string Filename { get; private set; }
+        public string TempFilename { get; private set; }
+        public string DatabasePath { get; private set; }
+        private Version ProgramVersion { get; set; }
 
         #region Constructor/Destructor
         private DatabaseHelper()
         {
+            DatabasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer");
+            TempFilename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\FTA-RestoreTemp.s3db");
             OpenDatabaseConnection();
         }
 
@@ -67,6 +72,7 @@ namespace FTAnalyzer.Utilities
         {
             try
             {
+                ProgramVersion = programVersion;
                 SQLiteCommand cmd = new SQLiteCommand("select Database from versions", conn);
                 string db = (string)cmd.ExecuteScalar();
                 cmd.Dispose();
@@ -381,7 +387,7 @@ namespace FTAnalyzer.Utilities
 
         #endregion
 
-        public bool StartBackupDatabase()
+        public bool StartBackupRestoreDatabase()
         {
             try
             {
@@ -399,6 +405,23 @@ namespace FTAnalyzer.Utilities
         {
             if (conn.State != ConnectionState.Open)
                 OpenDatabaseConnection();
+        }
+
+        public bool RestoreDatabase()
+        {
+            bool result = true;
+            try
+            {
+                // finally re-open database and check for updates
+                if (conn.State != ConnectionState.Open)
+                    OpenDatabaseConnection();
+                UpgradeDatabase(ProgramVersion);
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            return result;
         }
     }
 }
