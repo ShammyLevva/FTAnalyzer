@@ -321,7 +321,11 @@ namespace FTAnalyzer
             // dates are "YYYY" or "MMM YYYY" or "DD MMM YYYY"
             try
             {
-                string dateValue = processDate.Substring(4);
+                string dateValue;
+                if (processDate.Length >= 4)
+                    dateValue = processDate.Substring(4);
+                else
+                    dateValue = processDate;
                 if (processDate.StartsWith("BEF"))
                 {
                     DateType = FactDateType.BEF;
