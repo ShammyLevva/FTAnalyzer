@@ -1566,6 +1566,7 @@ namespace FTAnalyzer
                 DialogResult result = restoreDatabase.ShowDialog();
                 if (result == DialogResult.OK && File.Exists(restoreDatabase.FileName))
                 {
+                    bool failed = false;
                     ZipFile zip = new ZipFile(restoreDatabase.FileName);
                     if (zip.Count == 1 && zip.ContainsEntry("Geocodes.s3db"))
                     {
@@ -1574,16 +1575,20 @@ namespace FTAnalyzer
                         File.Copy(dbh.Filename, dbh.TempFilename, true); // copy exisiting file to safety
                         zip.ExtractAll(dbh.DatabasePath, ExtractExistingFileAction.OverwriteSilently);
                         if (dbh.RestoreDatabase())
-                            MessageBox.Show("Database restored from " + saveDatabase.FileName);
+                            MessageBox.Show("Database restored from " + restoreDatabase.FileName);
                         else
                         {
                             File.Copy(dbh.TempFilename, dbh.Filename, true);
                             dbh.RestoreDatabase(); // restore original database
-                            MessageBox.Show("File doesn't appear to be an FTAnalyzer database");
+                            failed = true;
                         }
                     }
                     else
-                        MessageBox.Show("File doesn't appear to be an FTAnalyzer database");
+                    {
+                        failed = true;
+                    }
+                    if(failed)
+                        MessageBox.Show(restoreDatabase.FileName + " doesn't appear to be an FTAnalyzer database");
                 }
             }
         }
