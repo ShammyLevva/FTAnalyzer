@@ -203,6 +203,7 @@
     <Compile Include="Core\FactSource.cs" />
     <Compile Include="Core\FamilySearch.cs" />
     <Compile Include="Core\FactLocationImage.cs" />
+    <Compile Include="Core\ParentalRelationship.cs" />
     <Compile Include="Core\Parishes.cs" />
     <Compile Include="Forms\Controls\ToolStripMapSelector.cs">
       <SubType>Component</SubType>
