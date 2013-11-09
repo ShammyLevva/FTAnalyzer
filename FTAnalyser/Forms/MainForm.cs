@@ -930,7 +930,7 @@ namespace FTAnalyzer
             Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
             if (ind != null)
             {
-                ft.SetRelations(ind.IndividualID);
+                ft.SetRelations(ind.Ind_ID);
                 dgIndividuals.Refresh();
                 MessageBox.Show("Root person set as " + ind.Name + "\n\n" + ft.PrintRelationCount());
             }
@@ -1647,6 +1647,15 @@ namespace FTAnalyzer
             ft.LoadGeoLocationsFromDataBase();
             GeocodeLocations gl = new GeocodeLocations();
             gl.Show();
+        }
+
+        private void mnuLifelines_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            LifeLine l = new LifeLine();
+            l.Show();
+            DisposeDuplicateForms(l);
+            HourGlass(false);
         }
     }
 }

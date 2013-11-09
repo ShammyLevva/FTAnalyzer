@@ -207,6 +207,12 @@
     <Compile Include="Forms\Controls\ToolStripMapSelector.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\LifeLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LifeLine.Designer.cs">
+      <DependentUpon>LifeLine.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mapping\NLSRequest.cs" />
     <Compile Include="Utilities\CustomToolStripRenderer.cs" />
     <Compile Include="Forms\EditLocation.cs">
@@ -317,6 +323,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GeocodeLocations.resx">
       <DependentUpon>GeocodeLocations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LifeLine.resx">
+      <DependentUpon>LifeLine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MapIndividals.resx">
       <DependentUpon>MapIndividals.cs</DependentUpon>
