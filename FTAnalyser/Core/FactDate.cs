@@ -19,6 +19,7 @@ namespace FTAnalyzer
         private static readonly IFormatProvider CULTURE = new CultureInfo("en-GB", true);
 
         private static readonly string YEAR = "yyyy";
+        private static readonly string EARLYYEAR = "yyy";
         private static readonly string MONTHYEAR = "MMM yyyy";
         private static readonly string DAYMONTH = "d MMM";
         private static readonly string MONTH = "MMM";
@@ -26,6 +27,7 @@ namespace FTAnalyzer
         private static readonly string DISPLAY = "d MMM yyyy";
         private static readonly string CHECKING = "d MMM";
         private static readonly string DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})$";
+        private static readonly string EARLY_DATE_PATTERN = "^(\\d{3})$";
         private static readonly string DOUBLE_DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})/(\\d{0,2})$";
         private static readonly string DOUBLE_DATE_PATTERN2 = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{4})/(\\d{4})$";
         private static readonly string POSTFIX = "(\\d{1,2})(?:ST|ND|RD|TH)(.*)";
@@ -35,7 +37,7 @@ namespace FTAnalyzer
         private static readonly string SPACEFIX = "^(\\d{1,2}) *([A-Za-z]{3}) *(\\d{0,4})$";
 
         public static readonly FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
-        
+
         public enum FactDateType
         {
             BEF, AFT, BET, ABT, UNK, EXT,
@@ -406,7 +408,15 @@ namespace FTAnalyzer
             {
                 // Match the regular expression pattern against a text string.
                 Match matcher = Regex.Match(dateValue, DATE_PATTERN);
-                if (matcher.Success)
+                Match matcher2 = Regex.Match(dateValue, EARLY_DATE_PATTERN);
+                if (matcher2.Success)
+                {  // first check match vs 
+                    gDay = null;
+                    gMonth = null;
+                    gYear = matcher2.Groups[1];
+                    gDouble = null;
+                }
+                else if (matcher.Success)
                 {
                     gDay = matcher.Groups[1];
                     gMonth = matcher.Groups[2];
@@ -416,7 +426,7 @@ namespace FTAnalyzer
                 else
                 {   // Try matching double date pattern
                     matcher = Regex.Match(dateValue, DOUBLE_DATE_PATTERN);
-                    Match matcher2 = Regex.Match(dateValue, DOUBLE_DATE_PATTERN2);
+                    matcher2 = Regex.Match(dateValue, DOUBLE_DATE_PATTERN2);
                     if (matcher.Success)
                     {
                         gDay = matcher.Groups[1];
@@ -439,15 +449,18 @@ namespace FTAnalyzer
                         throw new Exception("Unrecognised date format for : " + dateValue);
                 }
                 // Now process matched string - if gDouble is not null we have a double date to check
-                string day = gDay.ToString().Trim(), month = gMonth.ToString().Trim(), year = gYear.ToString().Trim();
-                if (day == null) day = "";
-                if (month == null) month = "";
-                if (year == null) year = "";
+                string day = gDay == null ? string.Empty : gDay.ToString().Trim();
+                string month = gMonth == null ? string.Empty : gMonth.ToString().Trim();
+                string year = gYear == null ? string.Empty : gYear.ToString().Trim();
+                
                 if (!IsValidDoubleDate(day, month, year, gDouble))
                     throw new InvalidDoubleDateException();
                 if (day.Length == 0 && month.Length == 0)
                 {
-                    date = DateTime.ParseExact(dateValue, YEAR, CULTURE);
+                    if (year.Length == 4)
+                        date = DateTime.ParseExact(dateValue, YEAR, CULTURE);
+                    else
+                        date = DateTime.ParseExact(dateValue, EARLYYEAR, CULTURE);
                     if (highlow == HIGH)
                     {
                         dt = new DateTime(date.Year + adjustment, 12, 31);
@@ -666,7 +679,7 @@ namespace FTAnalyzer
         {
             // 0 = grey, 1 = red, 2 = orange, 3 = yellow, 4=green
             if (DateType == FactDateType.UNK)
-                return ignoreUnknown ? 0 : 1; 
+                return ignoreUnknown ? 0 : 1;
             TimeSpan ts = EndDate - StartDate;
             if (ts.Days > 365.25 * 2)
                 return 2; // more than 2 years
