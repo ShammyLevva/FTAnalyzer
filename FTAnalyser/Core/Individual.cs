@@ -30,7 +30,7 @@ namespace FTAnalyzer
         private IList<Fact> errorFacts;
         private IList<FactLocation> locations;
         private IList<Family> familiesAsParent;
-        private IList<Family> familiesAsChild;
+        private IList<ParentalRelationship> familiesAsChild;
         private Dictionary<string, Fact> preferredFacts;
 
         public Individual(XmlNode node)
@@ -47,7 +47,7 @@ namespace FTAnalyzer
             facts = new List<Fact>();
             errorFacts = new List<Fact>();
             locations = new List<FactLocation>();
-            familiesAsChild = new List<Family>();
+            familiesAsChild = new List<ParentalRelationship>();
             familiesAsParent = new List<Family>();
             preferredFacts = new Dictionary<string, Fact>();
 
@@ -127,7 +127,7 @@ namespace FTAnalyzer
                 this.facts = new List<Fact>(i.facts);
                 this.errorFacts = new List<Fact>(i.errorFacts);
                 this.locations = new List<FactLocation>(i.locations);
-                this.familiesAsChild = new List<Family>(i.familiesAsChild);
+                this.familiesAsChild = new List<ParentalRelationship>(i.familiesAsChild);
                 this.familiesAsParent = new List<Family>(i.familiesAsParent);
                 this.preferredFacts = new Dictionary<string, Fact>(i.preferredFacts);
             }
@@ -435,7 +435,7 @@ namespace FTAnalyzer
             get { return familiesAsParent; }
         }
 
-        public IList<Family> FamiliesAsChild
+        public IList<ParentalRelationship> FamiliesAsChild
         {
             get { return familiesAsChild; }
         }

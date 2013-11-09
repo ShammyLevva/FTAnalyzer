@@ -46,6 +46,10 @@ namespace FTAnalyzer
                 this.Wife = ft.GetIndividual(wifeID);
                 if (Husband != null && Wife != null)
                     Wife.MarriedName = Husband.Surname;
+                if (Husband != null)
+                    Husband.FamiliesAsParent.Add(this);
+                if (Wife != null)
+                    Wife.FamiliesAsParent.Add(this);
                 // now iterate through child elements of eChildren
                 // finding all individuals
                 XmlNodeList list = node.SelectNodes("CHIL");
@@ -55,7 +59,15 @@ namespace FTAnalyzer
                     {
                         Individual child = ft.GetIndividual(n.Attributes["REF"].Value);
                         if (child != null)
+                        {
+                            XmlNode fatherNode = node.SelectSingleNode("CHIL/_FREL");
+                            XmlNode motherNode = node.SelectSingleNode("CHIL/_MREL");
+                            ParentalRelationship.ParentalRelationshipType father = ParentalRelationship.GetRelationshipType(fatherNode);
+                            ParentalRelationship.ParentalRelationshipType mother = ParentalRelationship.GetRelationshipType(motherNode);
                             Children.Add(child);
+                            ParentalRelationship parent = new ParentalRelationship(this, father, mother);
+                            child.FamiliesAsChild.Add(parent);
+                        }
                         else
                             ft.XmlErrorBox.AppendText("Child not found in family :" + FamilyRef + "\n");
                     }
@@ -99,7 +111,7 @@ namespace FTAnalyzer
             this.Children = new List<Individual>(f.Children);
             this.preferredFacts = new Dictionary<string, Fact>(f.preferredFacts);
         }
-
+        
         private void AddFacts(XmlNode node, string factType)
         {
             XmlNodeList list = node.SelectNodes(factType);

@@ -590,8 +590,9 @@ namespace FTAnalyzer
                         }
                     }
                 }
-                foreach (Family fam in indiv.FamiliesAsChild)
+                foreach (ParentalRelationship parents in indiv.FamiliesAsChild)
                 {  // check min date at least X years after parent
+                    Family fam = parents.Family;
                     if (fam.Husband != null && fam.Husband.BirthDate.IsKnown && fam.Husband.BirthDate.StartDate != FactDate.MINDATE)
                         if (fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
                             minStart = new DateTime(fam.Husband.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
@@ -797,13 +798,13 @@ namespace FTAnalyzer
 
         #region Relationship Functions
 
-        private ParentalGroup CreateFamilyGroup(Individual i)
-        {
-            Family f = i.FamiliesAsChild.FirstOrDefault();
-            return (f == null) ?
-                    new ParentalGroup(i, null, null, null) :
-                    new ParentalGroup(i, f.Husband, f.Wife, f.GetPreferredFact(Fact.MARRIAGE));
-        }
+        //private ParentalGroup CreateFamilyGroup(Individual i)
+        //{
+        //    Family f = i.FamiliesAsChild.FirstOrDefault().Family;
+        //    return (f == null) ?
+        //            new ParentalGroup(i, null, null, null) :
+        //            new ParentalGroup(i, f.Husband, f.Wife, f.GetPreferredFact(Fact.MARRIAGE));
+        //}
 
         private void ClearRelations()
         {
@@ -812,8 +813,8 @@ namespace FTAnalyzer
                 i.RelationType = Individual.UNKNOWN;
                 i.BudgieCode = string.Empty;
                 i.Ahnentafel = 0;
-                i.FamiliesAsChild.Clear();
-                i.FamiliesAsParent.Clear();
+                //i.FamiliesAsChild.Clear();
+                //i.FamiliesAsParent.Clear();
             }
         }
 
@@ -827,9 +828,9 @@ namespace FTAnalyzer
 
         private void AddParentsToQueue(Individual indiv, Queue<Individual> queue, bool setAhnenfatel)
         {
-            IEnumerable<Family> families = indiv.FamiliesAsChild;
-            foreach (Family family in families)
+            foreach (ParentalRelationship parents in indiv.FamiliesAsChild)
             {
+                Family family = parents.Family;
                 // add parents to queue
                 if (family.Husband != null && family.Husband.RelationType == Individual.UNKNOWN)
                 {
@@ -880,7 +881,7 @@ namespace FTAnalyzer
         public void SetRelations(string startID)
         {
             ClearRelations();
-            SetFamilies();
+            //SetFamilies();
             Individual rootPerson = GetIndividual(startID);
             Individual ind = rootPerson;
             ind.RelationType = Individual.DIRECT;
@@ -968,20 +969,21 @@ namespace FTAnalyzer
             }
         }
 
-        private void SetFamilies()
-        {
-            foreach (Family f in families)
-            {
-                if (f.Husband != null)
-                    f.Husband.FamiliesAsParent.Add(f);
-                if (f.Wife != null)
-                    f.Wife.FamiliesAsParent.Add(f);
-                foreach (Individual child in f.Children)
-                {
-                    child.FamiliesAsChild.Add(f);
-                }
-            }
-        }
+        //private void SetFamilies()
+        //{
+        //    foreach (Family f in families)
+        //    {
+        //        if (f.Husband != null)
+        //            f.Husband.FamiliesAsParent.Add(f);
+        //        if (f.Wife != null)
+        //            f.Wife.FamiliesAsParent.Add(f);
+        //        foreach (Individual child in f.Children)
+        //        {
+        //            ParentalRelationship parent = new ParentalRelationship(f, ParentalRelationship.ParentalRelationshipType.UNKNOWN, ParentalRelationship.ParentalRelationshipType.UNKNOWN);
+        //            child.FamiliesAsChild.Add(parent);
+        //        }
+        //    }
+        //}
 
         public string PrintRelationCount()
         {
@@ -1261,10 +1263,11 @@ namespace FTAnalyzer
                                             f.FactDate + " after individual died"));
                         }
                     }
-                    foreach (Family asChild in ind.FamiliesAsChild)
+                    foreach (ParentalRelationship parents in ind.FamiliesAsChild)
                     {
+                        Family asChild = parents.Family;
                         Individual father = asChild.Husband;
-                        if (father != null && ind.BirthDate.StartDate.Year != 1)
+                        if (father != null && ind.BirthDate.StartDate.Year != 1 && parents.IsNaturalFather)
                         {
                             int minAge = father.GetMinAge(ind.BirthDate);
                             int maxAge = father.GetMaxAge(ind.BirthDate);
@@ -1280,7 +1283,7 @@ namespace FTAnalyzer
                             }
                         }
                         Individual mother = asChild.Wife;
-                        if (mother != null && ind.BirthDate.StartDate.Year != 1)
+                        if (mother != null && ind.BirthDate.StartDate.Year != 1 && parents.IsNaturalMother)
                         {
                             int minAge = mother.GetMinAge(ind.BirthDate);
                             int maxAge = mother.GetMaxAge(ind.BirthDate);

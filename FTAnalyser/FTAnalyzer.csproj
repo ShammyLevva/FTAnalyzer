@@ -543,7 +543,6 @@
     <Compile Include="GedcomParser\AnselInputStreamReader.cs" />
     <Compile Include="GedcomParser\AnselOutputStreamWriter.cs" />
     <Compile Include="GedcomParser\GedcomToXml.cs" />
-    <Compile Include="Core\ParentalGroup.cs" />
     <Compile Include="Forms\Controls\CensusCountry.cs">
       <SubType>UserControl</SubType>
     </Compile>
