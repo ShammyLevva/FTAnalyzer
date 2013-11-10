@@ -35,7 +35,7 @@ namespace FTAnalyzer
         private SortableBindingList<IDisplayLooseDeath> looseDeaths;
         private SortableBindingList<IDisplayLooseBirth> looseBirths;
         private TreeNode displayTreeRootNode;
-        private static int DATA_ERROR_GROUPS = 20;
+        private static int DATA_ERROR_GROUPS = 21;
 
         public bool Geocoding { get; set; }
 
@@ -258,7 +258,7 @@ namespace FTAnalyzer
         {
             foreach (string tag in unknownFactTypes)
             {
-                int count = AllExportFacts.Count(f => f.Tag == tag);
+                int count = AllExportFacts.Count(f => f.FactType == tag);
                 xmlErrorbox.AppendText("\nFound " + count + " facts of unknown fact type " + tag);
             }
         }
@@ -1199,6 +1199,7 @@ namespace FTAnalyzer
                         if (minAge > FactDate.MAXYEARS)
                             errors[(int)dataerror.AGED_MORE_THAN_110].Add(new DataError((int)dataerror.AGED_MORE_THAN_110, ind, "Aged over " + FactDate.MAXYEARS + " before died " + ind.DeathDate));
                     }
+                    #region Error facts
                     foreach (Fact f in ind.ErrorFacts)
                     {
                         bool added = false;
@@ -1246,6 +1247,8 @@ namespace FTAnalyzer
                         if (!added)
                             errors[(int)dataerror.FACT_ERROR].Add(new DataError((int)dataerror.FACT_ERROR, f.FactErrorLevel, ind, f.FactErrorMessage));
                     }
+                    #endregion
+                    #region All Facts
                     foreach (Fact f in ind.AllFacts)
                     {
                         if (f.FactType != Fact.BIRTH && f.FactDate.IsBefore(ind.BirthDate))
@@ -1272,7 +1275,17 @@ namespace FTAnalyzer
                                 new DataError((int)dataerror.FACTS_AFTER_DEATH, ind, f.FactTypeDescription + " fact recorded: " +
                                             f.FactDate + " after individual died"));
                         }
+                        foreach(string tag in unknownFactTypes)
+                        {
+                            if (f.FactTypeDescription == tag)
+                            {
+                                errors[(int)dataerror.UNKNOWN_FACT_TYPE].Add(
+                                    new DataError((int)dataerror.UNKNOWN_FACT_TYPE,Fact.FactError.QUESTIONABLE,
+                                        ind, "Unknown fact type " + f.FactTypeDescription + " recorded"));
+                            }
+                        }
                     }
+                    #endregion
                     foreach (ParentalRelationship parents in ind.FamiliesAsChild)
                     {
                         Family asChild = parents.Family;
@@ -1349,7 +1362,8 @@ namespace FTAnalyzer
             BIRTH_AFTER_FATHER_DEATH = 4, BIRTH_BEFORE_FATHER_13 = 5, BIRTH_BEFORE_MOTHER_13 = 6, BURIAL_BEFORE_DEATH = 7,
             AGED_MORE_THAN_110 = 8, FACTS_BEFORE_BIRTH = 9, FACTS_AFTER_DEATH = 10, MARRIAGE_AFTER_DEATH = 11,
             MARRIAGE_AFTER_SPOUSE_DEAD = 12, MARRIAGE_BEFORE_13 = 13, MARRIAGE_BEFORE_SPOUSE_13 = 14, LOST_COUSINS_NON_CENSUS = 15,
-            LOST_COUSINS_NOT_SUPPORTED_YEAR = 16, RESIDENCE_CENSUS_DATE = 17, CENSUS_COVERAGE = 18, FACT_ERROR = 19
+            LOST_COUSINS_NOT_SUPPORTED_YEAR = 16, RESIDENCE_CENSUS_DATE = 17, CENSUS_COVERAGE = 18, FACT_ERROR = 19, 
+            UNKNOWN_FACT_TYPE = 20
         };
 
         public void SetDataErrorsCheckedDefaults(CheckedListBox list)

@@ -21,6 +21,8 @@ namespace FTAnalyzer
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\SeriousWarning.png")));
         private static FactImage ERROR = new FactImage(Fact.FactError.ERROR,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\CriticalError.png")));
+        private static FactImage QUESTIONABLE = new FactImage(Fact.FactError.QUESTIONABLE,
+            Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\QuestionMark.png")));
 
         public FactImage(Fact.FactError errorLevel, Image img)
         {
@@ -40,6 +42,8 @@ namespace FTAnalyzer
                     return WARNINGIGNORE;
                 case Fact.FactError.ERROR:
                     return ERROR;
+                case Fact.FactError.QUESTIONABLE:
+                    return QUESTIONABLE;
             }
             return GOOD;
         }

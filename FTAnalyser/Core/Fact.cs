@@ -71,7 +71,7 @@ namespace FTAnalyzer
 
         static Fact()
         {
-            //CUSTOM_TAGS.Add("IGI Search", FAMILYSEARCH);
+            CUSTOM_TAGS.Add("IGI Search", FAMILYSEARCH);
             CUSTOM_TAGS.Add("Childless", CHILDLESS);
             CUSTOM_TAGS.Add("Contact", CONTACT);
             CUSTOM_TAGS.Add("Witness", WITNESS);
@@ -202,7 +202,7 @@ namespace FTAnalyzer
             }
         }
 
-        public enum FactError { GOOD = 0, WARNINGALLOW = 1, WARNINGIGNORE = 2, ERROR = 3 };
+        public enum FactError { GOOD = 0, WARNINGALLOW = 1, WARNINGIGNORE = 2, ERROR = 3, QUESTIONABLE = 4 };
 
         public string Piece { get; private set; }
         public string Folio { get; private set; }
@@ -213,9 +213,9 @@ namespace FTAnalyzer
         public string ED { get; private set; }
         public Age GedcomAge { get; private set; }
         public bool Created { get; protected set; }
-        public string Tag { get; private set; }
         public bool Preferred { get; private set; }
-
+        private string Tag { get; set; }
+        
         #region Constructors
 
         private Fact()

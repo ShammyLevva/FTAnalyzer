@@ -70,10 +70,5 @@ namespace FTAnalyzer
         {
             get { return f.FactDate.EndDate; }
         }
-
-        public string Tag
-        {
-            get { return f.Tag; }
-        }
     }
 }
