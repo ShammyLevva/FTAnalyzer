@@ -18,6 +18,7 @@ using System.Drawing.Drawing2D;
 using SharpMap.Rendering.Decoration.ScaleBar;
 using GeoAPI.Geometries;
 using GeoAPI.CoordinateSystems.Transformations;
+using System.Diagnostics;
 
 namespace FTAnalyzer.Forms
 {
@@ -34,6 +35,8 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
             mnuMapStyle.Setup(linkLabel1, mapBox1);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
+            foreach (ToolStripItem item in mapZoomToolStrip.Items)
+                item.Enabled = true;
             mapZoomToolStrip.Renderer = new CustomToolStripRenderer();
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[4].ToolTipText = "Draw rectangle by dragging mouse to specify zoom area";
@@ -42,7 +45,7 @@ namespace FTAnalyzer.Forms
             backgroundColour = mapZoomToolStrip.Items[0].BackColor;
             SetupMap();
             dgIndividuals.AutoGenerateColumns = false;
-            dgIndividuals.DataSource = new SortableBindingList<Individual>(ft.AllIndividuals);
+            dgIndividuals.DataSource = new SortableBindingList<Individual>(ft.AllIndividuals.Where(i => i.AllGeocodedFacts.Count > 0));
             dgIndividuals.Sort(dgIndividuals.Columns["BirthDate"], ListSortDirection.Ascending);
             dgIndividuals.Sort(dgIndividuals.Columns["SortedName"], ListSortDirection.Ascending);
         }
@@ -119,15 +122,18 @@ namespace FTAnalyzer.Forms
         private void BuildMap()
         {
             lifelines.Clear();
+            List<IDisplayFact> displayFacts = new List<IDisplayFact>();
             Envelope bbox = new Envelope();
             foreach (DataGridViewRow row in dgIndividuals.SelectedRows)
             {
                 Individual ind = row.DataBoundItem as Individual;
+                displayFacts.AddRange(ind.AllGeocodedFacts);
                 MapLifeLine line = new MapLifeLine(ind);
                 FeatureDataRow fdr = line.AddFeatureDataRow(lifelines);
                 foreach(Coordinate c in fdr.Geometry.Coordinates)
                     bbox.ExpandToInclude(c);
             }
+            dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
             IMathTransform transform = linesLayer.CoordinateTransformation.MathTransform;
             Envelope expand;
             if (bbox.Centre == null)
@@ -139,6 +145,11 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.ZoomToBox(expand);
             mapBox1.Map.MinimumZoom = 500;
             mapBox1.Refresh();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(e.Link.LinkData as string);
         }
     }
 }
