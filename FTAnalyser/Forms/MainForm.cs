@@ -48,6 +48,7 @@ namespace FTAnalyzer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            boldFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Bold);
             //GeneralSettings.UseBaptismDatesChanged += new EventHandler(Options_BaptismChanged);
             GeneralSettings.AllowEmptyLocationsChanged += new EventHandler(Options_AllowEmptyLocationsChanged);
             GeneralSettings.UseResidenceAsCensusChanged += new EventHandler(Options_UseResidenceAsCensusChanged);
@@ -346,7 +347,6 @@ namespace FTAnalyzer
                     tsCountLabel.Text = "";
                     tsHintsLabel.Text = Properties.Messages.Hints_Location;
                     treeViewLocations.Nodes.Clear();
-                    boldFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Bold);
                     Application.DoEvents();
                     treeViewLocations.Nodes.AddRange(ft.GetAllLocationsTreeNodes(treeViewLocations.Font));
                     mnuPrint.Enabled = false;

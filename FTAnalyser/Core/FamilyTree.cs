@@ -1827,6 +1827,7 @@ namespace FTAnalyzer
 
             displayTreeRootNode = new TreeNode();
             Font regularFont = new Font(defaultFont, FontStyle.Regular);
+            Font boldFont = new Font(defaultFont, FontStyle.Bold);
             foreach (FactLocation location in AllDisplayPlaces)
             {
                 string[] parts = location.Parts;
@@ -1870,11 +1871,12 @@ namespace FTAnalyzer
                                 break;
                         }
                         // Set everything other than known countries to regular
-                        if (current != displayTreeRootNode || !Countries.IsKnownCountry(part))
-                        {
+                        if (current == displayTreeRootNode || Countries.IsKnownCountry(part))
+                            child.NodeFont = boldFont;
+                        else
                             child.NodeFont = regularFont;
-                        }
                         current.Nodes.Add(child);
+                        child.Text = child.Text; // forces recalculation of fontsize
                     }
                     current = child;
                 }
