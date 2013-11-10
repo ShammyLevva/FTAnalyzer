@@ -215,6 +215,18 @@ namespace FTAnalyzer
             }
         }
 
+        public IList<Fact> AllGeocodedFacts
+        {
+            get
+            {
+                List<Fact> allGeocodedFacts = new List<Fact>();
+                foreach (Fact f in AllFacts)
+                    if(f.Location.IsGeoCoded)
+                        allGeocodedFacts.Add(f);
+                return allGeocodedFacts;
+            }
+        }
+
         public IList<FactLocation> Locations
         {
             get { return this.locations; }

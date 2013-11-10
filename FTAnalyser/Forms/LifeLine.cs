@@ -16,6 +16,8 @@ using SharpMap.Data.Providers;
 using System.Drawing.Text;
 using System.Drawing.Drawing2D;
 using SharpMap.Rendering.Decoration.ScaleBar;
+using GeoAPI.Geometries;
+using GeoAPI.CoordinateSystems.Transformations;
 
 namespace FTAnalyzer.Forms
 {
@@ -38,11 +40,11 @@ namespace FTAnalyzer.Forms
             for (int i = 7; i <= 10; i++)
                 mapZoomToolStrip.Items[i].Visible = false;
             backgroundColour = mapZoomToolStrip.Items[0].BackColor;
+            SetupMap();
             dgIndividuals.AutoGenerateColumns = false;
             dgIndividuals.DataSource = new SortableBindingList<Individual>(ft.AllIndividuals);
             dgIndividuals.Sort(dgIndividuals.Columns["BirthDate"], ListSortDirection.Ascending);
             dgIndividuals.Sort(dgIndividuals.Columns["SortedName"], ListSortDirection.Ascending);
-            SetupMap();
         }
 
         private void SetupMap()
@@ -62,6 +64,8 @@ namespace FTAnalyzer.Forms
 
             VectorStyle line = new VectorStyle();
             line.Line = new Pen(Color.Red);
+            line.PointColor = new SolidBrush(Color.Red);
+            line.PointSize = 20; // for single fact individuals
             mapBox1.Map.Layers.Add(linesLayer);
 
             labelLayer = new LabelLayer("Label");
@@ -107,6 +111,34 @@ namespace FTAnalyzer.Forms
             mapBox1.Refresh();
         }
 
+        private void dgIndividuals_SelectionChanged(object sender, EventArgs e)
+        {
+            BuildMap();
+        }
 
+        private void BuildMap()
+        {
+            lifelines.Clear();
+            Envelope bbox = new Envelope();
+            foreach (DataGridViewRow row in dgIndividuals.SelectedRows)
+            {
+                Individual ind = row.DataBoundItem as Individual;
+                MapLifeLine line = new MapLifeLine(ind);
+                FeatureDataRow fdr = line.AddFeatureDataRow(lifelines);
+                foreach(Coordinate c in fdr.Geometry.Coordinates)
+                    bbox.ExpandToInclude(c);
+            }
+            IMathTransform transform = linesLayer.CoordinateTransformation.MathTransform;
+            Envelope expand;
+            if (bbox.Centre == null)
+                expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
+            else
+                expand = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
+            mapBox1.Map.ZoomToBox(expand);
+            expand.ExpandBy(mapBox1.Map.PixelSize * 20);
+            mapBox1.Map.ZoomToBox(expand);
+            mapBox1.Map.MinimumZoom = 500;
+            mapBox1.Refresh();
+        }
     }
 }

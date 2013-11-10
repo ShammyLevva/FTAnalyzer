@@ -34,11 +34,11 @@ namespace FTAnalyzer.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LifeLine));
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.IndividualName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DateofBirth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SortedName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -73,15 +73,29 @@ namespace FTAnalyzer.Forms
             this.dgIndividuals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IndividualName,
-            this.DateofBirth});
+            this.SortedName,
+            this.BirthDate});
             this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgIndividuals.Location = new System.Drawing.Point(0, 0);
             this.dgIndividuals.Name = "dgIndividuals";
             this.dgIndividuals.ReadOnly = true;
             this.dgIndividuals.RowHeadersWidth = 4;
+            this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgIndividuals.Size = new System.Drawing.Size(250, 482);
             this.dgIndividuals.TabIndex = 0;
+            this.dgIndividuals.SelectionChanged += new System.EventHandler(this.dgIndividuals_SelectionChanged);
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(731, 25);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(125, 13);
+            this.linkLabel1.TabIndex = 16;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "© Google - Terms of Use";
+            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // mapBox1
             // 
@@ -112,34 +126,22 @@ namespace FTAnalyzer.Forms
             this.mapZoomToolStrip.TabIndex = 1;
             this.mapZoomToolStrip.Text = "mapZoomToolStrip1";
             // 
-            // linkLabel1
+            // SortedName
             // 
-            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(731, 25);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(125, 13);
-            this.linkLabel1.TabIndex = 16;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "© Google - Terms of Use";
-            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.SortedName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.SortedName.DataPropertyName = "SortedName";
+            this.SortedName.HeaderText = "Name";
+            this.SortedName.MinimumWidth = 50;
+            this.SortedName.Name = "SortedName";
+            this.SortedName.ReadOnly = true;
+            this.SortedName.Width = 130;
             // 
-            // IndividualName
+            // BirthDate
             // 
-            this.IndividualName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.IndividualName.DataPropertyName = "SortedName";
-            this.IndividualName.HeaderText = "Name";
-            this.IndividualName.MinimumWidth = 50;
-            this.IndividualName.Name = "IndividualName";
-            this.IndividualName.ReadOnly = true;
-            this.IndividualName.Width = 120;
-            // 
-            // DateofBirth
-            // 
-            this.DateofBirth.DataPropertyName = "BirthDate";
-            this.DateofBirth.HeaderText = "Date of Birth";
-            this.DateofBirth.Name = "DateofBirth";
-            this.DateofBirth.ReadOnly = true;
+            this.BirthDate.DataPropertyName = "BirthDate";
+            this.BirthDate.HeaderText = "Date of Birth";
+            this.BirthDate.Name = "BirthDate";
+            this.BirthDate.ReadOnly = true;
             // 
             // LifeLine
             // 
@@ -168,7 +170,7 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridView dgIndividuals;
         private ToolStripMapSelector mnuMapStyle = new ToolStripMapSelector();
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IndividualName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DateofBirth;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SortedName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BirthDate;
     }
 }

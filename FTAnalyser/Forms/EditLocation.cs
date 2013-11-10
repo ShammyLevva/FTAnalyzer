@@ -280,7 +280,7 @@ namespace FTAnalyzer.Forms
         
         private void mapBox1_Paint(object sender, PaintEventArgs e)
         {
-             //this.Text = "Editing : " + location.ToString() + "    - Beta pixelsize = " + mapBox1.Map.PixelSize;
+             this.Text = "Editing : " + location.ToString() + "    - Beta pixelsize = " + mapBox1.Map.PixelSize;
         }
     }
 }
