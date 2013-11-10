@@ -57,6 +57,8 @@ namespace FTAnalyzer.Forms
         {
             lifelines = new FeatureDataTable();
             lifelines.Columns.Add("MapLifeLine", typeof(MapLifeLine));
+            lifelines.Columns.Add("StartPoint", typeof(bool));
+            lifelines.Columns.Add("EndPoint", typeof(bool));
             lifelines.Columns.Add("Label", typeof(string));
 
             GeometryFeatureProvider lifelinesGFP = new GeometryFeatureProvider(lifelines);
@@ -71,8 +73,8 @@ namespace FTAnalyzer.Forms
             VectorStyle linestyle = new VectorStyle();
             linestyle.Line = new Pen(Color.Red, 2f);
             linestyle.Line.EndCap = LineCap.Triangle;
-            linestyle.PointColor = new SolidBrush(Color.Red);
-            linestyle.PointSize = 20; // for single fact individuals
+            linestyle.PointColor = new SolidBrush(Color.Green);
+            linestyle.PointSize = 10; // for single fact individuals, start & end points
             linesLayer.Style = linestyle;
             mapBox1.Map.Layers.Add(linesLayer);
 
@@ -127,19 +129,21 @@ namespace FTAnalyzer.Forms
 
         private void BuildMap()
         {
+            this.Cursor = Cursors.WaitCursor;
             lifelines.Clear();
             List<IDisplayFact> displayFacts = new List<IDisplayFact>();
-            Envelope bbox = new Envelope();
             foreach (DataGridViewRow row in dgIndividuals.SelectedRows)
             {
                 Individual ind = row.DataBoundItem as Individual;
                 displayFacts.AddRange(ind.AllGeocodedFacts);
                 MapLifeLine line = new MapLifeLine(ind);
                 FeatureDataRow fdr = line.AddFeatureDataRow(lifelines);
-                foreach(Coordinate c in fdr.Geometry.Coordinates)
-                    bbox.ExpandToInclude(c);
             }
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
+            Envelope bbox = new Envelope();
+            foreach (FeatureDataRow row in lifelines)
+                foreach (Coordinate c in row.Geometry.Coordinates)
+                    bbox.ExpandToInclude(c);
             IMathTransform transform = linesLayer.CoordinateTransformation.MathTransform;
             Envelope expand;
             if (bbox.Centre == null)
@@ -154,6 +158,8 @@ namespace FTAnalyzer.Forms
             if (mapBox1.Map.Zoom > mapBox1.Map.MaximumZoom)
                 mapBox1.Map.Zoom = mapBox1.Map.MaximumZoom;
             mapBox1.Refresh();
+            this.Cursor = Cursors.Default;
+            mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
