@@ -223,6 +223,7 @@ namespace FTAnalyzer
                 foreach (Fact f in AllFacts)
                     if(f.Location.IsGeoCoded)
                         allGeocodedFacts.Add(new DisplayFact(this, Name, f));
+                allGeocodedFacts.Sort();
                 return allGeocodedFacts;
             }
         }

@@ -29,10 +29,12 @@ namespace FTAnalyzer.Forms
         private FeatureDataTable lifelines;
         private VectorLayer linesLayer;
         private LabelLayer labelLayer;
-        
+        private bool isloading;
+
         public LifeLine()
         {
             InitializeComponent();
+            isloading = true;
             mnuMapStyle.Setup(linkLabel1, mapBox1);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             foreach (ToolStripItem item in mapZoomToolStrip.Items)
@@ -48,6 +50,7 @@ namespace FTAnalyzer.Forms
             dgIndividuals.DataSource = new SortableBindingList<Individual>(ft.AllIndividuals.Where(i => i.AllGeocodedFacts.Count > 0));
             dgIndividuals.Sort(dgIndividuals.Columns["BirthDate"], ListSortDirection.Ascending);
             dgIndividuals.Sort(dgIndividuals.Columns["SortedName"], ListSortDirection.Ascending);
+            isloading = false;
         }
 
         private void SetupMap()
@@ -66,7 +69,9 @@ namespace FTAnalyzer.Forms
             Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
 
             VectorStyle line = new VectorStyle();
-            line.Line = new Pen(Color.Red);
+            line.Line = new Pen(Color.Red, 4f);
+            line.Line.Width = 4;
+            line.Line.EndCap = LineCap.Triangle;
             line.PointColor = new SolidBrush(Color.Red);
             line.PointSize = 20; // for single fact individuals
             mapBox1.Map.Layers.Add(linesLayer);
@@ -116,7 +121,8 @@ namespace FTAnalyzer.Forms
 
         private void dgIndividuals_SelectionChanged(object sender, EventArgs e)
         {
-            BuildMap();
+            if(!isloading)
+                BuildMap();
         }
 
         private void BuildMap()
@@ -143,7 +149,10 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.ZoomToBox(expand);
             expand.ExpandBy(mapBox1.Map.PixelSize * 20);
             mapBox1.Map.ZoomToBox(expand);
-            mapBox1.Map.MinimumZoom = 500;
+            if (mapBox1.Map.Zoom < mapBox1.Map.MinimumZoom)
+                mapBox1.Map.Zoom = mapBox1.Map.MinimumZoom;
+            if (mapBox1.Map.Zoom > mapBox1.Map.MaximumZoom)
+                mapBox1.Map.Zoom = mapBox1.Map.MaximumZoom;
             mapBox1.Refresh();
         }
 

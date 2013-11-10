@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace FTAnalyzer
 {
-    public class DisplayFact : IDisplayFact
+    public class DisplayFact : IDisplayFact, IComparable
     {
         public Image Icon { get; private set; }
         public string Name { get; private set; }
@@ -28,5 +28,13 @@ namespace FTAnalyzer
         public string Ind_ID { get { return Ind == null ? string.Empty : Ind.Ind_ID; } }
         public Age AgeAtFact { get { return Ind == null ? null : Ind.GetAge(Fact.FactDate, Fact.FactType); } }
         public string SourceList { get { return Fact.SourceList;  } }
+
+        public int CompareTo(object obj)
+        {
+            DisplayFact that = (DisplayFact)obj;
+            if (this.FactDate == that.FactDate)
+                return this.Ind.CompareTo(that.Ind);
+            return this.FactDate.CompareTo(that.FactDate);
+        }
     }
 }

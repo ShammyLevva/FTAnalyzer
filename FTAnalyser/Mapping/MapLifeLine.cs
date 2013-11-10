@@ -20,7 +20,7 @@ namespace FTAnalyzer.Mapping
             {
                 Coordinate[] points = new Coordinate[ind.AllGeocodedFacts.Count];
                 int index = 0;
-                foreach (Fact f in ind.AllGeocodedFacts)
+                foreach (IDisplayFact f in ind.AllGeocodedFacts)
                     points[index++] = new Coordinate(f.Location.Longitude, f.Location.Latitude);
                 this.Geometry = new NetTopologySuite.Geometries.LineString(points);
             }
