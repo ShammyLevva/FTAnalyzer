@@ -55,6 +55,12 @@ namespace FTAnalyzer
             GeneralSettings.TolerateInaccurateCensusChanged += new EventHandler(Options_TolerateInaccurateCensusChanged);
             GeneralSettings.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
             this.Text = "Family Tree Analyzer v" + VERSION;
+            // load height & width from registry - note need to use temp variables as setting them causes form
+            // to resize thus setting the values for both
+            int Width = (int) Application.UserAppDataRegistry.GetValue("Mainform size - width", this.Width);
+            int Height = (int) Application.UserAppDataRegistry.GetValue("Mainform size - height", this.Height);
+            this.Width = Width;
+            this.Height = Height;
         }
 
         private string PublishVersion()
@@ -913,6 +919,11 @@ namespace FTAnalyzer
         private void MainForm_Resize(object sender, EventArgs e)
         {
             rtbOutput.Top = pbFamilies.Top + 30;
+            if (this.WindowState == FormWindowState.Normal)
+            {  //only save window size if not maximised or minimised
+                Application.UserAppDataRegistry.SetValue("Mainform size - width", this.Width);
+                Application.UserAppDataRegistry.SetValue("Mainform size - height", this.Height);
+            }
         }
 
         private void dgOccupations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -1703,6 +1714,12 @@ namespace FTAnalyzer
             l.Show();
             DisposeDuplicateForms(l);
             HourGlass(false);
+        }
+
+        private void resetToDefaultFormSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Height = 561;
+            this.Width = 955;
         }
     }
 }
