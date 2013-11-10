@@ -68,12 +68,12 @@ namespace FTAnalyzer.Forms
 
             Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
 
-            VectorStyle line = new VectorStyle();
-            line.Line = new Pen(Color.Red, 4f);
-            line.Line.Width = 4;
-            line.Line.EndCap = LineCap.Triangle;
-            line.PointColor = new SolidBrush(Color.Red);
-            line.PointSize = 20; // for single fact individuals
+            VectorStyle linestyle = new VectorStyle();
+            linestyle.Line = new Pen(Color.Red, 2f);
+            linestyle.Line.EndCap = LineCap.Triangle;
+            linestyle.PointColor = new SolidBrush(Color.Red);
+            linestyle.PointSize = 20; // for single fact individuals
+            linesLayer.Style = linestyle;
             mapBox1.Map.Layers.Add(linesLayer);
 
             labelLayer = new LabelLayer("Label");
