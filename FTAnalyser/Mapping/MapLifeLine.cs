@@ -20,21 +20,24 @@ namespace FTAnalyzer.Mapping
         {
             this.ind = ind;
             int index = 1;
-            Count = 0;
-            Coordinate[] points = new Coordinate[ind.AllGeocodedFacts.Count];
+            List<Coordinate> points = new List<Coordinate>();
+            Coordinate previousPoint = null;
             foreach (IDisplayFact f in ind.AllGeocodedFacts)
             {
-                Coordinate c = new Coordinate(f.Location.Longitude, f.Location.Latitude);
+                Coordinate point = new Coordinate(f.Location.Longitude, f.Location.Latitude);
                 if(index == 1) 
-                    StartPoint = new NetTopologySuite.Geometries.Point(c);
+                    StartPoint = new NetTopologySuite.Geometries.Point(point);
                 if(index == ind.AllGeocodedFacts.Count)
-                    EndPoint = new NetTopologySuite.Geometries.Point(c);
+                    EndPoint = new NetTopologySuite.Geometries.Point(point);
                 index++;
-                if (Count == 0 || (Count > 0 && !points[Count - 1].Equals2D(c)))
-                    points[Count++] = c; // don't add point if same as last one
+                if (points.Count == 0 || (points.Count > 0 && !point.Equals2D(previousPoint)))
+                {
+                    points.Add(point); // don't add point if same as last one
+                    previousPoint = point;
+                }
             }
-            if (Count > 1)
-                this.Geometry = new NetTopologySuite.Geometries.LineString(points);
+            if (points.Count > 1)
+                this.Geometry = new NetTopologySuite.Geometries.LineString(points.ToArray());
             else
                 this.Geometry = StartPoint;
         }

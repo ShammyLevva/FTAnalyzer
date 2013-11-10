@@ -93,7 +93,7 @@ namespace FTAnalyzer.Forms
             style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center;
             style.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom;
             style.CollisionDetection = true;
-            style.Offset = new PointF(2, 22);
+            style.Offset = new PointF(0, 25);
             style.Halo = new Pen(Color.Yellow, 3);
             labelLayer.Style = style;
             mapBox1.Map.Layers.Add(labelLayer);
@@ -143,7 +143,8 @@ namespace FTAnalyzer.Forms
             Envelope bbox = new Envelope();
             foreach (FeatureDataRow row in lifelines)
                 foreach (Coordinate c in row.Geometry.Coordinates)
-                    bbox.ExpandToInclude(c);
+                    if(c != null)
+                        bbox.ExpandToInclude(c);
             IMathTransform transform = linesLayer.CoordinateTransformation.MathTransform;
             Envelope expand;
             if (bbox.Centre == null)
