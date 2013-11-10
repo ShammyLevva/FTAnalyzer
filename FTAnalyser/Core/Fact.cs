@@ -213,7 +213,7 @@ namespace FTAnalyzer
         public string ED { get; private set; }
         public Age GedcomAge { get; private set; }
         public bool Created { get; protected set; }
-        private string Tag { get; set; }
+        public string Tag { get; private set; }
         public bool Preferred { get; private set; }
 
         #region Constructors
