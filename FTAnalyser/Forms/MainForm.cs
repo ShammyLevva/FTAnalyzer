@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.1.2.0-bata test 2";
+        public string VERSION = "3.1.2.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;

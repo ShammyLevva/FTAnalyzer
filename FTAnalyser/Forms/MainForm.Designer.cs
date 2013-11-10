@@ -176,6 +176,7 @@
             this.tabSelector = new System.Windows.Forms.TabControl();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.resetToDefaultFormSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.cenDate = new Controls.CensusDateSelector();
             this.relTypesCensus = new Controls.RelationTypes();
@@ -185,7 +186,6 @@
             this.treetopsCountry = new Controls.CensusCountry();
             this.wardeadRelation = new Controls.RelationTypes();
             this.wardeadCountry = new Controls.CensusCountry();
-            this.resetToDefaultFormSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -514,6 +514,7 @@
             this.mnuLifelines.Name = "mnuLifelines";
             this.mnuLifelines.Size = new System.Drawing.Size(243, 22);
             this.mnuLifelines.Text = "Show Lifelines";
+            this.mnuLifelines.Visible = false;
             this.mnuLifelines.Click += new System.EventHandler(this.mnuLifelines_Click);
             // 
             // toolStripSeparator4
@@ -1736,6 +1737,13 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // resetToDefaultFormSizeToolStripMenuItem
+            // 
+            this.resetToDefaultFormSizeToolStripMenuItem.Name = "resetToDefaultFormSizeToolStripMenuItem";
+            this.resetToDefaultFormSizeToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.resetToDefaultFormSizeToolStripMenuItem.Text = "Reset to Default form size";
+            this.resetToDefaultFormSizeToolStripMenuItem.Click += new System.EventHandler(this.resetToDefaultFormSizeToolStripMenuItem_Click);
+            // 
             // rtbOutput
             // 
             this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -1817,13 +1825,6 @@
             this.wardeadCountry.TabIndex = 25;
             this.wardeadCountry.Title = "Default Country";
             this.wardeadCountry.UKEnabled = true;
-            // 
-            // resetToDefaultFormSizeToolStripMenuItem
-            // 
-            this.resetToDefaultFormSizeToolStripMenuItem.Name = "resetToDefaultFormSizeToolStripMenuItem";
-            this.resetToDefaultFormSizeToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.resetToDefaultFormSizeToolStripMenuItem.Text = "Reset to Default form size";
-            this.resetToDefaultFormSizeToolStripMenuItem.Click += new System.EventHandler(this.resetToDefaultFormSizeToolStripMenuItem_Click);
             // 
             // MainForm
             // 

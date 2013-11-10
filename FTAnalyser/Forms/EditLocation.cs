@@ -1,25 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using FTAnalyzer.Mapping;
-using System.Web;
-using SharpMap.Data;
-using BruTile.Web;
-using SharpMap.Layers;
-using SharpMap.Data.Providers;
-using SharpMap.Styles;
-using System.IO;
-using GeoAPI.Geometries;
-using GeoAPI.CoordinateSystems.Transformations;
-using FTAnalyzer.Utilities;
 using System.Data.SQLite;
 using System.Diagnostics;
-using FTAnalyzer.Forms.Controls;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
+using FTAnalyzer.Mapping;
+using FTAnalyzer.Utilities;
+using GeoAPI.CoordinateSystems.Transformations;
+using GeoAPI.Geometries;
+using SharpMap.Data;
+using SharpMap.Data.Providers;
+using SharpMap.Layers;
 
 namespace FTAnalyzer.Forms
 {
@@ -289,7 +280,7 @@ namespace FTAnalyzer.Forms
         
         private void mapBox1_Paint(object sender, PaintEventArgs e)
         {
-             this.Text = "Editing : " + location.ToString() + "    - Beta pixelsize = " + mapBox1.Map.PixelSize;
+             //this.Text = "Editing : " + location.ToString() + "    - Beta pixelsize = " + mapBox1.Map.PixelSize;
         }
     }
 }
