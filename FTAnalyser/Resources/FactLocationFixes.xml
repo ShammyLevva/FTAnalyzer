@@ -615,7 +615,6 @@
       <RegionToParish parish="Chichester"     region="Sussex" />
       <RegionToParish parish="Coventry"       region="Warwickshire" />
       <RegionToParish parish="Derby"          region="Derbyshire" />
-      <RegionToParish parish="Durham"         region="County Durham" />
       <RegionToParish parish="Ely"            region="Cambridgeshire" />
       <RegionToParish parish="Exeter"         region="Devon" />
       <RegionToParish parish="Gloucester"     region="Gloucestershire" />
@@ -644,7 +643,7 @@
       <RegionToParish parish="Southampton"    region="Hampshire" />
       <RegionToParish parish="St Albans"      region="Hertfordshire" />
       <RegionToParish parish="Stoke"          region="Staffordshire" />
-      <RegionToParish parish="Sunderland"     region="County Durham" />
+      <RegionToParish parish="Sunderland"     region="Durham" />
       <RegionToParish parish="Truro"          region="Cornwall" />
       <RegionToParish parish="Wakefield"      region="Yorkshire" />
       <RegionToParish parish="Wells"          region="Somerset" />
