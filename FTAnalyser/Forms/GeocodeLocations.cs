@@ -568,6 +568,8 @@ namespace FTAnalyzer.Forms
                                                 loc.ViewPort = viewport;
                                                 if (!result.PartialMatch)
                                                 {
+                                                    if (checkresultsPass == 2)
+                                                        log.Info("Geocoding found a match with " + loc.GEDCOMLocation + " previously failed with " + loc.ToString());
                                                     checkresultsPass = 3; // force exit
                                                     break; // we've got a good match so exit
                                                 }
