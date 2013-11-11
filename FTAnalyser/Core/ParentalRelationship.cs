@@ -25,17 +25,19 @@ namespace FTAnalyzer
         {
             get
             {
-                return FatherRelationship == ParentalRelationshipType.NATURAL ||
+                return Family.Husband !=null && 
+                      (FatherRelationship == ParentalRelationshipType.NATURAL ||
                        FatherRelationship == ParentalRelationshipType.UNKNOWN ||
-                       FatherRelationship == ParentalRelationshipType.PRIVATE;
+                       FatherRelationship == ParentalRelationshipType.PRIVATE);
             }
         }
 
         public bool IsNaturalMother
         {
-            get { return MotherRelationship == ParentalRelationshipType.NATURAL || 
+            get { return Family.Wife !=null && 
+                        (MotherRelationship == ParentalRelationshipType.NATURAL || 
                          MotherRelationship == ParentalRelationshipType.UNKNOWN ||
-                         MotherRelationship == ParentalRelationshipType.PRIVATE;
+                         MotherRelationship == ParentalRelationshipType.PRIVATE);
             }
         }
 

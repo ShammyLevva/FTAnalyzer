@@ -123,8 +123,7 @@ namespace FTAnalyzer
             unknownFactTypes = new HashSet<string>();
             ClearLocations();
             displayTreeRootNode = null;
-            looseDeaths = null;
-            looseBirths = null;
+            ResetLooseFacts();
             FactLocation.ResetLocations();
         }
 
@@ -823,8 +822,6 @@ namespace FTAnalyzer
                 i.RelationType = Individual.UNKNOWN;
                 i.BudgieCode = string.Empty;
                 i.Ahnentafel = 0;
-                //i.FamiliesAsChild.Clear();
-                //i.FamiliesAsParent.Clear();
             }
         }
 
@@ -844,23 +841,27 @@ namespace FTAnalyzer
                 // add parents to queue
                 if (family.Husband != null && family.Husband.RelationType == Individual.UNKNOWN)
                 {
-                    if (setAhnenfatel && indiv.RelationType == Individual.DIRECT)
+                    if (setAhnenfatel && indiv.RelationType == Individual.DIRECT && parents.IsNaturalFather)
                     {
                         family.Husband.Ahnentafel = indiv.Ahnentafel * 2;
                         if (family.Husband.Ahnentafel > maxAhnentafel)
                             maxAhnentafel = family.Husband.Ahnentafel;
+                        queue.Enqueue(family.Husband); // add to directs queue only if natural father of direct
                     }
-                    queue.Enqueue(family.Husband);
+                    if(!setAhnenfatel)
+                        queue.Enqueue(family.Husband); // add if not checking directs
                 }
                 if (family.Wife != null && family.Wife.RelationType == Individual.UNKNOWN)
                 {
-                    if (setAhnenfatel && indiv.RelationType == Individual.DIRECT)
+                    if (setAhnenfatel && indiv.RelationType == Individual.DIRECT && parents.IsNaturalMother)
                     {
                         family.Wife.Ahnentafel = indiv.Ahnentafel * 2 + 1;
                         if (family.Wife.Ahnentafel > maxAhnentafel)
                             maxAhnentafel = family.Wife.Ahnentafel;
+                        queue.Enqueue(family.Wife);
                     }
-                    queue.Enqueue(family.Wife);
+                    if (!setAhnenfatel) // add to directs queue only if natural father of direct
+                        queue.Enqueue(family.Wife); // add if not checking directs
                 }
             }
         }
@@ -1974,5 +1975,40 @@ namespace FTAnalyzer
 
         #endregion
 
+        #region Relationship Groups
+        public List<Individual> GetAncestors(Individual startIndividual)
+        {
+            List<Individual> results = new List<Individual>();
+            results.Add(startIndividual);
+            Queue<Individual> queue = new Queue<Individual>();
+            queue.Enqueue(startIndividual);
+            while (queue.Count > 0)
+            {
+                Individual ind = queue.Dequeue();
+                foreach (ParentalRelationship parents in ind.FamiliesAsChild)
+                {
+                    if (parents.IsNaturalFather)
+                    {
+                        queue.Enqueue(parents.Family.Husband);
+                        results.Add(parents.Family.Husband);
+                    }
+                }
+
+            }
+            return results;
+        }
+
+        public List<Individual> GetDescendants(Individual ind)
+        {
+            List<Individual> results = new List<Individual>();
+            results.Add(ind);
+            return results;
+        }
+
+        public List<Individual> GetRelations(Individual ind)
+        {
+            return GetAncestors(ind).Union(GetDescendants(ind)).ToList<Individual>();
+        }
+        #endregion
     }
 }
