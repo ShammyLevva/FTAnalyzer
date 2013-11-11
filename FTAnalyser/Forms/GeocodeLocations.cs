@@ -16,7 +16,7 @@ namespace FTAnalyzer.Forms
 {
     public partial class GeocodeLocations : Form
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private FamilyTree ft;
         private Font italicFont;
         private ReportFormHelper reportFormHelper;
@@ -409,7 +409,7 @@ namespace FTAnalyzer.Forms
 
         private void mnuPasteLocation_Click(object sender, EventArgs e)
         {
-            if (CopyLocation.IsGeoCoded)
+            if (CopyLocation.IsGeoCoded(false))
             {
                 FactLocation pasteLocation = dgLocations.CurrentRow.DataBoundItem as FactLocation;
                 FactLocation.CopyLocationDetails(CopyLocation, pasteLocation);
@@ -510,8 +510,6 @@ namespace FTAnalyzer.Forms
                 GoogleMap.WaitingForGoogle += new GoogleMap.GoogleEventHandler(GoogleMap_WaitingForGoogle);
                 DatabaseHelper dbh = DatabaseHelper.Instance;
                 SQLiteCommand cmd = dbh.GetLocation();
-                SQLiteCommand insertCmd = dbh.InsertGeocode();
-                SQLiteCommand updateCmd = dbh.UpdateGeocode();
 
                 int count = 0;
                 int googled = 0;
@@ -522,7 +520,7 @@ namespace FTAnalyzer.Forms
 
                 foreach (FactLocation loc in FactLocation.AllLocations)
                 {
-                    if (loc.IsGeoCoded)
+                    if (loc.IsGeoCoded(mnuRetryPartial.Checked))
                         geocoded++;
                     else if (loc.GeocodeStatus == FactLocation.Geocode.INCORRECT)
                         skipped++; // don't re-geocode incorrect ones as that would reset incorrect flag back to what user already identified was wrong
@@ -534,16 +532,11 @@ namespace FTAnalyzer.Forms
                         if (loc.ToString().Length > 0)
                         {
                             GeoResponse res = null;
-                            if (loc.GeocodeStatus == FactLocation.Geocode.NOT_SEARCHED || (mnuRetryPartial.Checked && loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH))
+                            if (loc.GeocodeStatus == FactLocation.Geocode.NOT_SEARCHED || 
+                                (mnuRetryPartial.Checked && 
+                                    (loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH || loc.GeocodeStatus == FactLocation.Geocode.LEVEL_MISMATCH)))
                             {
-                                // This call is the real workhorse that does the actual Google lookup
-                                res = GoogleMap.GoogleGeocode(loc.ToString(), 8);
-                                if (res != null && res.Status == "Maxed")
-                                {
-                                    geocodeBackgroundWorker.CancelAsync();
-                                    GoogleMap.ThreadCancelled = true;
-                                    res = null;
-                                }
+                                res = SearchGoogle(loc.ToString());
                             }
                             if (res != null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
                             {
@@ -557,33 +550,50 @@ namespace FTAnalyzer.Forms
                                 Envelope bbox = Countries.BoundingBox(loc.Country);
                                 if (res.Status == "OK")
                                 {
-                                    foreach (GeoResponse.CResult result in res.Results)
+                                    int checkresultsPass = 1;
+                                    GeoResponse.CResult originalResult = res.Results[0];
+                                    while (checkresultsPass <= 2 && res.Status == "OK") // check for ok on second pass
                                     {
-                                        foundLevel = GoogleMap.GetFactLocation(result.Types);
-                                        address = result.ReturnAddress;
-                                        viewport = result.Geometry.ViewPort;
-                                        resultType = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
-                                        if (foundLevel >= loc.Level && bbox.Covers(new Coordinate(result.Geometry.Location.Long, result.Geometry.Location.Lat)))
+                                        foreach (GeoResponse.CResult result in res.Results)
                                         {
-                                            latitude = result.Geometry.Location.Lat;
-                                            longitude = result.Geometry.Location.Long;
-                                            loc.GeocodeStatus = result.PartialMatch ? FactLocation.Geocode.PARTIAL_MATCH : FactLocation.Geocode.MATCHED;
-                                            loc.ViewPort = viewport;
-                                            if (!result.PartialMatch)
-                                                break; // we've got a good match so exit
+                                            foundLevel = GoogleMap.GetFactLocation(result.Types);
+                                            address = result.ReturnAddress;
+                                            viewport = result.Geometry.ViewPort;
+                                            resultType = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
+                                            if (foundLevel >= loc.Level && bbox.Covers(new Coordinate(result.Geometry.Location.Long, result.Geometry.Location.Lat)))
+                                            {
+                                                latitude = result.Geometry.Location.Lat;
+                                                longitude = result.Geometry.Location.Long;
+                                                loc.GeocodeStatus = result.PartialMatch ? FactLocation.Geocode.PARTIAL_MATCH : FactLocation.Geocode.MATCHED;
+                                                loc.ViewPort = viewport;
+                                                if (!result.PartialMatch)
+                                                {
+                                                    checkresultsPass = 3; // force exit
+                                                    break; // we've got a good match so exit
+                                                }
+                                            }
                                         }
+                                        if (loc.GeocodeStatus != FactLocation.Geocode.MATCHED && checkresultsPass == 1)
+                                        {
+                                            if (loc.GEDCOMLocation.Equals(loc.ToString()))
+                                                checkresultsPass++;  // if we have the same string skip checking GEDCOM location
+                                            else
+                                                res = SearchGoogle(loc.GEDCOMLocation);
+                                        }
+                                        checkresultsPass++;
                                     }
                                     if (loc.GeocodeStatus != FactLocation.Geocode.MATCHED)
-                                    {   // we checked all the google results and no joy so take first result as level partial match
-                                        foundLevel = GoogleMap.GetFactLocation(res.Results[0].Types);
-                                        address = res.Results[0].ReturnAddress;
-                                        latitude = res.Results[0].Geometry.Location.Lat;
-                                        longitude = res.Results[0].Geometry.Location.Long;
-                                        viewport = res.Results[0].Geometry.ViewPort;
-                                        resultType = EnhancedTextInfo.ConvertStringArrayToString(res.Results[0].Types);
+                                    {
+                                        // we checked all the google results and no joy so take first result as level partial match
+                                        foundLevel = GoogleMap.GetFactLocation(originalResult.Types);
+                                        address = originalResult.ReturnAddress;
+                                        latitude = originalResult.Geometry.Location.Lat;
+                                        longitude = originalResult.Geometry.Location.Long;
+                                        viewport = originalResult.Geometry.ViewPort;
+                                        resultType = EnhancedTextInfo.ConvertStringArrayToString(originalResult.Types);
                                         if (loc.GeocodeStatus == FactLocation.Geocode.NO_MATCH) // we are still on no match so we don't even have a Google partial
                                         {
-                                            if (bbox.Covers(new Coordinate(res.Results[0].Geometry.Location.Long, res.Results[0].Geometry.Location.Lat)))
+                                            if (bbox.Covers(new Coordinate(originalResult.Geometry.Location.Long, originalResult.Geometry.Location.Lat)))
                                                 loc.GeocodeStatus = FactLocation.Geocode.LEVEL_MISMATCH;
                                             else
                                                 loc.GeocodeStatus = FactLocation.Geocode.OUT_OF_BOUNDS;
@@ -601,38 +611,7 @@ namespace FTAnalyzer.Forms
                                 loc.GoogleLocation = address;
                                 loc.GoogleResultType = resultType;
                                 loc.ViewPort = viewport;
-                                if (inDatabase)
-                                {
-                                    updateCmd.Parameters[0].Value = loc.Level;
-                                    updateCmd.Parameters[1].Value = latitude;
-                                    updateCmd.Parameters[2].Value = longitude;
-                                    updateCmd.Parameters[3].Value = address;
-                                    updateCmd.Parameters[4].Value = foundLevel;
-                                    updateCmd.Parameters[5].Value = viewport.NorthEast.Lat;
-                                    updateCmd.Parameters[6].Value = viewport.NorthEast.Long;
-                                    updateCmd.Parameters[7].Value = viewport.SouthWest.Lat;
-                                    updateCmd.Parameters[8].Value = viewport.SouthWest.Long;
-                                    updateCmd.Parameters[9].Value = loc.GeocodeStatus;
-                                    updateCmd.Parameters[10].Value = resultType;
-                                    updateCmd.Parameters[11].Value = loc.ToString();
-                                    updateCmd.ExecuteNonQuery();
-                                }
-                                else
-                                {
-                                    insertCmd.Parameters[0].Value = loc.ToString();
-                                    insertCmd.Parameters[1].Value = loc.Level;
-                                    insertCmd.Parameters[2].Value = latitude;
-                                    insertCmd.Parameters[3].Value = longitude;
-                                    insertCmd.Parameters[4].Value = address;
-                                    insertCmd.Parameters[5].Value = foundLevel;
-                                    insertCmd.Parameters[6].Value = viewport.NorthEast.Lat;
-                                    insertCmd.Parameters[7].Value = viewport.NorthEast.Long;
-                                    insertCmd.Parameters[8].Value = viewport.SouthWest.Lat;
-                                    insertCmd.Parameters[9].Value = viewport.SouthWest.Long;
-                                    insertCmd.Parameters[10].Value = loc.GeocodeStatus;
-                                    insertCmd.Parameters[11].Value = resultType;
-                                    insertCmd.ExecuteNonQuery();
-                                }
+                                UpdateDatabase(loc, inDatabase, latitude, longitude, foundLevel, address, resultType, viewport);
                             }
                             else
                             {
@@ -663,6 +642,59 @@ namespace FTAnalyzer.Forms
             catch (Exception ex)
             {
                 MessageBox.Show("Error geocoding : " + ex.Message);
+            }
+        }
+
+        private GeoResponse SearchGoogle(string location)
+        {
+            // This call is the real workhorse that does the actual Google lookup
+            GeoResponse res = GoogleMap.GoogleGeocode(location, 8);
+            if (res != null && res.Status == "Maxed")
+            {
+                geocodeBackgroundWorker.CancelAsync();
+                GoogleMap.ThreadCancelled = true;
+                res = null;
+            }
+            return res;
+        }
+
+        private static void UpdateDatabase(FactLocation loc, bool inDatabase, double latitude, double longitude, int foundLevel, string address, string resultType, GeoResponse.CResult.CGeometry.CViewPort viewport)
+        {
+            DatabaseHelper dbh = DatabaseHelper.Instance;
+            SQLiteCommand insertCmd = dbh.InsertGeocode();
+            SQLiteCommand updateCmd = dbh.UpdateGeocode();
+
+            if (inDatabase)
+            {
+                updateCmd.Parameters[0].Value = loc.Level;
+                updateCmd.Parameters[1].Value = latitude;
+                updateCmd.Parameters[2].Value = longitude;
+                updateCmd.Parameters[3].Value = address;
+                updateCmd.Parameters[4].Value = foundLevel;
+                updateCmd.Parameters[5].Value = viewport.NorthEast.Lat;
+                updateCmd.Parameters[6].Value = viewport.NorthEast.Long;
+                updateCmd.Parameters[7].Value = viewport.SouthWest.Lat;
+                updateCmd.Parameters[8].Value = viewport.SouthWest.Long;
+                updateCmd.Parameters[9].Value = loc.GeocodeStatus;
+                updateCmd.Parameters[10].Value = resultType;
+                updateCmd.Parameters[11].Value = loc.ToString();
+                updateCmd.ExecuteNonQuery();
+            }
+            else
+            {
+                insertCmd.Parameters[0].Value = loc.ToString();
+                insertCmd.Parameters[1].Value = loc.Level;
+                insertCmd.Parameters[2].Value = latitude;
+                insertCmd.Parameters[3].Value = longitude;
+                insertCmd.Parameters[4].Value = address;
+                insertCmd.Parameters[5].Value = foundLevel;
+                insertCmd.Parameters[6].Value = viewport.NorthEast.Lat;
+                insertCmd.Parameters[7].Value = viewport.NorthEast.Long;
+                insertCmd.Parameters[8].Value = viewport.SouthWest.Lat;
+                insertCmd.Parameters[9].Value = viewport.SouthWest.Long;
+                insertCmd.Parameters[10].Value = loc.GeocodeStatus;
+                insertCmd.Parameters[11].Value = resultType;
+                insertCmd.ExecuteNonQuery();
             }
         }
 
@@ -718,7 +750,7 @@ namespace FTAnalyzer.Forms
             {
                 dgLocations.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
                 FactLocation loc = dgLocations.Rows[e.RowIndex].DataBoundItem as FactLocation;
-                mnuCopyLocation.Enabled = loc.IsGeoCoded;
+                mnuCopyLocation.Enabled = loc.IsGeoCoded(false);
             }
         }
 

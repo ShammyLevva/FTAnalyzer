@@ -569,7 +569,7 @@ namespace FTAnalyzer
         {
             get
             {
-                return FactLocation.AllLocations.Count(l => l.IsGeoCoded);
+                return FactLocation.AllLocations.Count(l => l.IsGeoCoded(false));
             }
         }
 
@@ -621,16 +621,13 @@ namespace FTAnalyzer
             return false;
         }
 
-        public bool IsGeoCoded
+        public bool IsGeoCoded(bool recheckPartials)
         {
-            get
-            {
-                if (Longitude == 0.0 && Latitude == 0.0)
-                    return false;
-                if (Properties.GeneralSettings.Default.IncludePartials && (GeocodeStatus == Geocode.PARTIAL_MATCH || GeocodeStatus == Geocode.LEVEL_MISMATCH))
-                    return true;
-                return GeocodeStatus == Geocode.MATCHED || GeocodeStatus == Geocode.GEDCOM_USER;
-            }
+            if (Longitude == 0.0 && Latitude == 0.0)
+                return false;
+            if (!recheckPartials && Properties.GeneralSettings.Default.IncludePartials && (GeocodeStatus == Geocode.PARTIAL_MATCH || GeocodeStatus == Geocode.LEVEL_MISMATCH))
+                return true;
+            return GeocodeStatus == Geocode.MATCHED || GeocodeStatus == Geocode.GEDCOM_USER;
         }
 
         private string FixNumerics(string addressField)

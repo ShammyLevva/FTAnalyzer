@@ -54,7 +54,7 @@ namespace FTAnalyzer.Forms
                 Application.DoEvents();
             }
             GeoResponse.CResult.CGeometry.CViewPort viewport = null;
-            if (loc.IsGeoCoded && loc.ViewPort != null)
+            if (loc.IsGeoCoded(false) && loc.ViewPort != null)
             {
                 labMapLevel.Text = "Previously Geocoded: " + loc.ToString();
                 viewport = loc.ViewPort;
@@ -68,7 +68,7 @@ namespace FTAnalyzer.Forms
                     labMapLevel.Text = GoogleMap.LocationText(res, loc, level);
                     viewport = res.Results[0].Geometry.ViewPort;
                 }
-                else if (res.Status == "OVER_QUERY_LIMIT" && loc.IsGeoCoded)
+                else if (res.Status == "OVER_QUERY_LIMIT" && loc.IsGeoCoded(false))
                 {
                     labMapLevel.Text = "Previously Geocoded: " + loc.ToString();
                     viewport = new GeoResponse.CResult.CGeometry.CViewPort();

@@ -164,7 +164,7 @@ namespace FTAnalyzer.Forms
             List<MapLocation> yearRange = FilterToRelationsIncluded(ft.AllMapLocations);
             foreach (MapLocation ml in yearRange)
             {
-                if (ml.Location.IsGeoCoded && ml.FactDate.IsKnown)
+                if (ml.Location.IsGeoCoded(false) && ml.FactDate.IsKnown)
                 {
                     if (ml.FactDate.StartDate != FactDate.MINDATE && ml.FactDate.StartDate.Year < minGeoCodedYear)
                         minGeoCodedYear = ml.FactDate.StartDate.Year;

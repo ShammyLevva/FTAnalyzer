@@ -109,7 +109,7 @@ namespace FTAnalyzer.Forms
             GeoResponse.CResult.CGeometry.CViewPort viewport = null;
             GeoResponse res = null;
             Object[] args = new Object[] { 0, 0 };
-            if (loc.IsGeoCoded && loc.ViewPort != null)
+            if (loc.IsGeoCoded(false) && loc.ViewPort != null)
             {
                 labMapLevel.Text = "Previously Geocoded: " + loc.ToString();
                 viewport = loc.ViewPort;
@@ -126,7 +126,7 @@ namespace FTAnalyzer.Forms
                     double lng = res.Results[0].Geometry.Location.Long;
                     args = new Object[] { lat, lng };
                 }
-                else if (res.Status == "OVER_QUERY_LIMIT" && loc.IsGeoCoded)
+                else if (res.Status == "OVER_QUERY_LIMIT" && loc.IsGeoCoded(false))
                 {
                     labMapLevel.Text = "Previously Geocoded: " + loc.ToString();
                     viewport = new GeoResponse.CResult.CGeometry.CViewPort();

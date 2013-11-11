@@ -211,9 +211,9 @@ namespace FTAnalyzer.Forms
             if (txtSearch.Text.Length > 0)
             {
                 FactLocation loc = FactLocation.LookupLocation(txtSearch.Text);
-                if (!loc.IsGeoCoded) // if not geocoded then try database
+                if (!loc.IsGeoCoded(false)) // if not geocoded then try database
                     DatabaseHelper.Instance.GetLatLong(loc);
-                if (loc.IsGeoCoded)
+                if (loc.IsGeoCoded(false))
                 {
                     FactLocation.CopyLocationDetails(loc, location);
                     SetLocation();
