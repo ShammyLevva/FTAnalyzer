@@ -145,6 +145,12 @@ namespace FTAnalyzer.Utilities
             return cmd;
         }
 
+        public void ResetPartials()
+        {
+            SQLiteCommand cmd = new SQLiteCommand("update geocode set latitude = 0, longitude = 0, founddate = date('now'), foundlocation = '', foundlevel = -2, viewport_x_ne = 0, viewport_y_ne = 0, viewport_x_sw = 0, viewport_y_sw = 0, geocodestatus = 0, foundresulttype = '' where geocodestatus = 2 or geocodestatus=7", conn);
+            cmd.ExecuteNonQuery();
+        }
+
         public void GetLatLong(FactLocation location)
         {
             if (location.ToString().Length == 0) return;

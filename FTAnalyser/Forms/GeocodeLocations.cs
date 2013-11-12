@@ -484,7 +484,7 @@ namespace FTAnalyzer.Forms
 
         #region Google Geocoding
 
-        public void StartGeoCoding()
+        public void StartGeoCoding(bool retryPartials)
         {
             if (geocodeBackgroundWorker.IsBusy)
             {
@@ -498,15 +498,16 @@ namespace FTAnalyzer.Forms
                 mnuEditLocation.Enabled = false;
                 mnuReverseGeocode.Enabled = false;
                 ft.Geocoding = true;
-                geocodeBackgroundWorker.RunWorkerAsync();
+                geocodeBackgroundWorker.RunWorkerAsync(retryPartials);
                 this.Cursor = Cursors.Default;
             }
         }
 
-        public void GeoCode(BackgroundWorker worker, DoWorkEventArgs e)
+        public void GeoCode( BackgroundWorker worker, DoWorkEventArgs e)
         {
             try
             {
+                bool retryPartial = (bool)e.Argument;
                 GoogleMap.WaitingForGoogle += new GoogleMap.GoogleEventHandler(GoogleMap_WaitingForGoogle);
                 DatabaseHelper dbh = DatabaseHelper.Instance;
                 SQLiteCommand cmd = dbh.GetLocation();
@@ -520,7 +521,7 @@ namespace FTAnalyzer.Forms
 
                 foreach (FactLocation loc in FactLocation.AllLocations)
                 {
-                    if (loc.IsGeoCoded(mnuRetryPartial.Checked))
+                    if (loc.IsGeoCoded(retryPartial))
                         geocoded++;
                     else if (loc.GeocodeStatus == FactLocation.Geocode.INCORRECT)
                         skipped++; // don't re-geocode incorrect ones as that would reset incorrect flag back to what user already identified was wrong
@@ -532,8 +533,8 @@ namespace FTAnalyzer.Forms
                         if (loc.ToString().Length > 0)
                         {
                             GeoResponse res = null;
-                            if (loc.GeocodeStatus == FactLocation.Geocode.NOT_SEARCHED || 
-                                (mnuRetryPartial.Checked && 
+                            if (loc.GeocodeStatus == FactLocation.Geocode.NOT_SEARCHED ||
+                                (retryPartial && 
                                     (loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH || loc.GeocodeStatus == FactLocation.Geocode.LEVEL_MISMATCH)))
                             {
                                 res = SearchGoogle(loc.ToString());
@@ -613,7 +614,7 @@ namespace FTAnalyzer.Forms
                                 loc.GoogleLocation = address;
                                 loc.GoogleResultType = resultType;
                                 loc.ViewPort = viewport;
-                                UpdateDatabase(loc, inDatabase, latitude, longitude, foundLevel, address, resultType, viewport);
+                                UpdateDatabase(loc, inDatabase, foundLevel);
                             }
                             else
                             {
@@ -660,49 +661,48 @@ namespace FTAnalyzer.Forms
             return res;
         }
 
-        private static void UpdateDatabase(FactLocation loc, bool inDatabase, double latitude, double longitude, int foundLevel, string address, string resultType, GeoResponse.CResult.CGeometry.CViewPort viewport)
+        private static void UpdateDatabase(FactLocation loc, bool inDatabase, int foundLevel)
         {
             DatabaseHelper dbh = DatabaseHelper.Instance;
-            SQLiteCommand insertCmd = dbh.InsertGeocode();
-            SQLiteCommand updateCmd = dbh.UpdateGeocode();
-
             if (inDatabase)
             {
+                SQLiteCommand updateCmd = dbh.UpdateGeocode();
                 updateCmd.Parameters[0].Value = loc.Level;
-                updateCmd.Parameters[1].Value = latitude;
-                updateCmd.Parameters[2].Value = longitude;
-                updateCmd.Parameters[3].Value = address;
+                updateCmd.Parameters[1].Value = loc.Latitude;
+                updateCmd.Parameters[2].Value = loc.Longitude;
+                updateCmd.Parameters[3].Value = loc.GoogleLocation;
                 updateCmd.Parameters[4].Value = foundLevel;
-                updateCmd.Parameters[5].Value = viewport.NorthEast.Lat;
-                updateCmd.Parameters[6].Value = viewport.NorthEast.Long;
-                updateCmd.Parameters[7].Value = viewport.SouthWest.Lat;
-                updateCmd.Parameters[8].Value = viewport.SouthWest.Long;
+                updateCmd.Parameters[5].Value = loc.ViewPort.NorthEast.Lat;
+                updateCmd.Parameters[6].Value = loc.ViewPort.NorthEast.Long;
+                updateCmd.Parameters[7].Value = loc.ViewPort.SouthWest.Lat;
+                updateCmd.Parameters[8].Value = loc.ViewPort.SouthWest.Long;
                 updateCmd.Parameters[9].Value = loc.GeocodeStatus;
-                updateCmd.Parameters[10].Value = resultType;
+                updateCmd.Parameters[10].Value = loc.GoogleResultType;
                 updateCmd.Parameters[11].Value = loc.ToString();
                 updateCmd.ExecuteNonQuery();
             }
             else
             {
+                SQLiteCommand insertCmd = dbh.InsertGeocode();
                 insertCmd.Parameters[0].Value = loc.ToString();
                 insertCmd.Parameters[1].Value = loc.Level;
-                insertCmd.Parameters[2].Value = latitude;
-                insertCmd.Parameters[3].Value = longitude;
-                insertCmd.Parameters[4].Value = address;
+                insertCmd.Parameters[2].Value = loc.Latitude;
+                insertCmd.Parameters[3].Value = loc.Longitude;
+                insertCmd.Parameters[4].Value = loc.GoogleLocation;
                 insertCmd.Parameters[5].Value = foundLevel;
-                insertCmd.Parameters[6].Value = viewport.NorthEast.Lat;
-                insertCmd.Parameters[7].Value = viewport.NorthEast.Long;
-                insertCmd.Parameters[8].Value = viewport.SouthWest.Lat;
-                insertCmd.Parameters[9].Value = viewport.SouthWest.Long;
+                insertCmd.Parameters[6].Value = loc.ViewPort.NorthEast.Lat;
+                insertCmd.Parameters[7].Value = loc.ViewPort.NorthEast.Long;
+                insertCmd.Parameters[8].Value = loc.ViewPort.SouthWest.Lat;
+                insertCmd.Parameters[9].Value = loc.ViewPort.SouthWest.Long;
                 insertCmd.Parameters[10].Value = loc.GeocodeStatus;
-                insertCmd.Parameters[11].Value = resultType;
+                insertCmd.Parameters[11].Value = loc.GoogleResultType;
                 insertCmd.ExecuteNonQuery();
             }
         }
 
         private void mnuGeocodeLocations_Click(object sender, EventArgs e)
         {
-            StartGeoCoding();
+            StartGeoCoding(false);
         }
 
         #endregion
@@ -742,7 +742,14 @@ namespace FTAnalyzer.Forms
             FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
             loc.GeocodeStatus = FactLocation.Geocode.NOT_SEARCHED;
             loc.GoogleLocation = string.Empty;
-            DatabaseHelper.Instance.UpdateGeocodeStatus(loc);
+            loc.GoogleResultType = string.Empty;
+            loc.Latitude = 0d;
+            loc.Longitude = 0d;
+            loc.ViewPort.NorthEast.Lat = 0d;
+            loc.ViewPort.NorthEast.Long = 0d;
+            loc.ViewPort.SouthWest.Lat = 0d;
+            loc.ViewPort.SouthWest.Long = 0d;
+            UpdateDatabase(loc, true, -2);
             dgLocations.Refresh();
         }
 
@@ -918,5 +925,23 @@ namespace FTAnalyzer.Forms
             }
         }
         #endregion
+
+        private void mnuRetryPartial_Click(object sender, EventArgs e)
+        {
+            StartGeoCoding(true);
+        }
+
+        private void resetAllPartialMatchesToNotSearchedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to reset all Google Partials and Level Mismatch Partials to not searched?",
+                "Reset ALL Partials", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                DatabaseHelper.Instance.ResetPartials();
+                ft.LoadGeoLocationsFromDataBase();
+                ft.WriteGeocodeStatstoRTB(true);
+                MessageBox.Show("Partials have been reset");
+            }
+        }
     }
 }

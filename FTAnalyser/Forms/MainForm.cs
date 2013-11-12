@@ -1510,7 +1510,7 @@ namespace FTAnalyzer
                     geo = new GeocodeLocations();
                 geo.Show();
                 geo.Focus();
-                geo.StartGeoCoding();
+                geo.StartGeoCoding(false);
                 HourGlass(false);
             }
         }

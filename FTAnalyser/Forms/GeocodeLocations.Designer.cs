@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeocodeLocations));
             this.dgLocations = new System.Windows.Forms.DataGridView();
             this.LocationIcon = new System.Windows.Forms.DataGridViewImageColumn();
@@ -65,9 +65,9 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.geocodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGeocodeLocations = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRetryPartial = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuReverseGeocode = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptions = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuRetryPartial = new System.Windows.Forms.ToolStripMenuItem();
             this.updateChangesWithoutAskingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filtersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGeocodeStatus = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,6 +75,7 @@
             this.mnuGoogleResultType = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSelectClear = new System.Windows.Forms.ToolStripMenuItem();
             this.reverseGeocodeBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.resetAllPartialMatchesToNotSearchedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgLocations)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -98,14 +99,14 @@
             this.GoogleLocation,
             this.GoogleResultType});
             this.dgLocations.ContextMenuStrip = this.contextMenuStrip;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgLocations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgLocations.Location = new System.Drawing.Point(0, 49);
             this.dgLocations.MultiSelect = false;
@@ -145,8 +146,8 @@
             // 
             this.Latitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Latitude.DataPropertyName = "Latitude";
-            dataGridViewCellStyle1.Format = "N7";
-            this.Latitude.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Format = "N7";
+            this.Latitude.DefaultCellStyle = dataGridViewCellStyle6;
             this.Latitude.HeaderText = "Latitude";
             this.Latitude.MinimumWidth = 75;
             this.Latitude.Name = "Latitude";
@@ -158,8 +159,8 @@
             // 
             this.Longitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Longitude.DataPropertyName = "Longitude";
-            dataGridViewCellStyle2.Format = "N7";
-            this.Longitude.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle9.Format = "N7";
+            this.Longitude.DefaultCellStyle = dataGridViewCellStyle9;
             this.Longitude.HeaderText = "Longitude";
             this.Longitude.MinimumWidth = 75;
             this.Longitude.Name = "Longitude";
@@ -390,6 +391,7 @@
             // 
             this.geocodeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuGeocodeLocations,
+            this.mnuRetryPartial,
             this.mnuReverseGeocode});
             this.geocodeToolStripMenuItem.Name = "geocodeToolStripMenuItem";
             this.geocodeToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
@@ -403,6 +405,13 @@
             this.mnuGeocodeLocations.ToolTipText = "Looks up map co-ordinates for locations in your file";
             this.mnuGeocodeLocations.Click += new System.EventHandler(this.mnuGeocodeLocations_Click);
             // 
+            // mnuRetryPartial
+            // 
+            this.mnuRetryPartial.Name = "mnuRetryPartial";
+            this.mnuRetryPartial.Size = new System.Drawing.Size(281, 22);
+            this.mnuRetryPartial.Text = "Run Geocoder retrying Partials";
+            this.mnuRetryPartial.Click += new System.EventHandler(this.mnuRetryPartial_Click);
+            // 
             // mnuReverseGeocode
             // 
             this.mnuReverseGeocode.Name = "mnuReverseGeocode";
@@ -413,24 +422,17 @@
             // mnuOptions
             // 
             this.mnuOptions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuRetryPartial,
-            this.updateChangesWithoutAskingToolStripMenuItem});
+            this.updateChangesWithoutAskingToolStripMenuItem,
+            this.resetAllPartialMatchesToNotSearchedToolStripMenuItem});
             this.mnuOptions.Name = "mnuOptions";
             this.mnuOptions.Size = new System.Drawing.Size(61, 20);
             this.mnuOptions.Text = "Options";
-            // 
-            // mnuRetryPartial
-            // 
-            this.mnuRetryPartial.CheckOnClick = true;
-            this.mnuRetryPartial.Name = "mnuRetryPartial";
-            this.mnuRetryPartial.Size = new System.Drawing.Size(306, 22);
-            this.mnuRetryPartial.Text = "Retry Partially Geocoded on new Geocoding";
             // 
             // updateChangesWithoutAskingToolStripMenuItem
             // 
             this.updateChangesWithoutAskingToolStripMenuItem.CheckOnClick = true;
             this.updateChangesWithoutAskingToolStripMenuItem.Name = "updateChangesWithoutAskingToolStripMenuItem";
-            this.updateChangesWithoutAskingToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
+            this.updateChangesWithoutAskingToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.updateChangesWithoutAskingToolStripMenuItem.Text = "Update Changes without asking";
             this.updateChangesWithoutAskingToolStripMenuItem.ToolTipText = "No longer asks if you want to save changes to locations";
             this.updateChangesWithoutAskingToolStripMenuItem.Click += new System.EventHandler(this.updateChangesWithoutAskingToolStripMenuItem_Click);
@@ -481,6 +483,13 @@
             this.reverseGeocodeBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.reverseGeocodeBackgroundWorker_DoWork);
             this.reverseGeocodeBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.geocodingBackgroundWorker_ProgressChanged);
             this.reverseGeocodeBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.geocodingBackgroundWorker_RunWorkerCompleted);
+            // 
+            // resetAllPartialMatchesToNotSearchedToolStripMenuItem
+            // 
+            this.resetAllPartialMatchesToNotSearchedToolStripMenuItem.Name = "resetAllPartialMatchesToNotSearchedToolStripMenuItem";
+            this.resetAllPartialMatchesToNotSearchedToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
+            this.resetAllPartialMatchesToNotSearchedToolStripMenuItem.Text = "Reset all partial matches to not searched";
+            this.resetAllPartialMatchesToNotSearchedToolStripMenuItem.Click += new System.EventHandler(this.resetAllPartialMatchesToNotSearchedToolStripMenuItem_Click);
             // 
             // GeocodeLocations
             // 
@@ -552,5 +561,6 @@
         private System.ComponentModel.BackgroundWorker reverseGeocodeBackgroundWorker;
         private System.Windows.Forms.ToolStripMenuItem mnuCopyLocation;
         private System.Windows.Forms.ToolStripMenuItem mnuPasteLocation;
+        private System.Windows.Forms.ToolStripMenuItem resetAllPartialMatchesToNotSearchedToolStripMenuItem;
     }
 }

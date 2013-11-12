@@ -70,7 +70,7 @@ namespace FTAnalyzer.Forms
                 GeocodeLocations geo = new GeocodeLocations();
                 geo.Show();
                 MainForm.DisposeDuplicateForms(geo);
-                geo.StartGeoCoding();
+                geo.StartGeoCoding(false);
                 geo.BringToFront();
                 geo.Focus();
                 this.Cursor = Cursors.Default;
