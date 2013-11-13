@@ -51,6 +51,10 @@ namespace FTAnalyzer.Forms
             this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AgeAtFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SourceList = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LocationIcon = new System.Windows.Forms.DataGridViewImageColumn();
+            this.GeocodeStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GoogleLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GoogleResultTypes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFacts)).BeginInit();
             this.splitContainerFacts.Panel1.SuspendLayout();
             this.splitContainerFacts.Panel2.SuspendLayout();
@@ -171,6 +175,7 @@ namespace FTAnalyzer.Forms
             // 
             // mapZoomToolStrip
             // 
+            this.mapZoomToolStrip.Enabled = false;
             this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
             this.mapZoomToolStrip.MapControl = this.mapBox1;
             this.mapZoomToolStrip.Name = "mapZoomToolStrip";
@@ -194,7 +199,11 @@ namespace FTAnalyzer.Forms
             this.FactLocation,
             this.Comment,
             this.AgeAtFact,
-            this.SourceList});
+            this.SourceList,
+            this.LocationIcon,
+            this.GeocodeStatus,
+            this.GoogleLocation,
+            this.GoogleResultTypes});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -207,6 +216,7 @@ namespace FTAnalyzer.Forms
             this.dgFacts.Location = new System.Drawing.Point(0, 0);
             this.dgFacts.Name = "dgFacts";
             this.dgFacts.ReadOnly = true;
+            this.dgFacts.RowHeadersWidth = 16;
             this.dgFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgFacts.ShowEditingIcon = false;
             this.dgFacts.Size = new System.Drawing.Size(1113, 127);
@@ -294,12 +304,43 @@ namespace FTAnalyzer.Forms
             // 
             // SourceList
             // 
-            this.SourceList.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SourceList.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.SourceList.DataPropertyName = "SourceList";
             this.SourceList.HeaderText = "Sources";
             this.SourceList.MinimumWidth = 120;
             this.SourceList.Name = "SourceList";
             this.SourceList.ReadOnly = true;
+            this.SourceList.Width = 250;
+            // 
+            // LocationIcon
+            // 
+            this.LocationIcon.DataPropertyName = "LocationIcon";
+            this.LocationIcon.HeaderText = "";
+            this.LocationIcon.Name = "LocationIcon";
+            this.LocationIcon.ReadOnly = true;
+            this.LocationIcon.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.LocationIcon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // GeocodeStatus
+            // 
+            this.GeocodeStatus.DataPropertyName = "GeocodeStatus";
+            this.GeocodeStatus.HeaderText = "Geocode Status";
+            this.GeocodeStatus.Name = "GeocodeStatus";
+            this.GeocodeStatus.ReadOnly = true;
+            // 
+            // GoogleLocation
+            // 
+            this.GoogleLocation.DataPropertyName = "GoogleLocation";
+            this.GoogleLocation.HeaderText = "GoogleLocation";
+            this.GoogleLocation.Name = "GoogleLocation";
+            this.GoogleLocation.ReadOnly = true;
+            // 
+            // GoogleResultTypes
+            // 
+            this.GoogleResultTypes.DataPropertyName = "GoogleResultTypes";
+            this.GoogleResultTypes.HeaderText = "Google Result Types";
+            this.GoogleResultTypes.Name = "GoogleResultTypes";
+            this.GoogleResultTypes.ReadOnly = true;
             // 
             // LifeLine
             // 
@@ -346,5 +387,9 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
         private System.Windows.Forms.DataGridViewTextBoxColumn AgeAtFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;
+        private System.Windows.Forms.DataGridViewImageColumn LocationIcon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GeocodeStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GoogleLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GoogleResultTypes;
     }
 }

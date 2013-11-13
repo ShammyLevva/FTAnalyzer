@@ -28,6 +28,10 @@ namespace FTAnalyzer
         public string Ind_ID { get { return Ind == null ? string.Empty : Ind.Ind_ID; } }
         public Age AgeAtFact { get { return Ind == null ? null : Ind.GetAge(Fact.FactDate, Fact.FactType); } }
         public string SourceList { get { return Fact.SourceList;  } }
+        public string GoogleLocation { get { return Fact.Location.GoogleLocation; } }
+        public string GoogleResultType { get { return Fact.Location.GoogleResultType; } }
+        public string GeocodeStatus { get { return Fact.Location.Geocoded; } }
+        public Image LocationIcon { get { return FactLocationImage.ErrorIcon(Fact.Location.GeocodeStatus).Icon; } }
 
         public int CompareTo(object obj)
         {
