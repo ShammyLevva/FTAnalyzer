@@ -17,6 +17,10 @@ namespace FTAnalyzer
         string Comment { get; }
         Age AgeAtFact { get; }
         string SourceList { get; }
+        string GoogleLocation { get; }
+        string GoogleResultType { get; }
+        string GeocodeStatus { get; }
+        Image LocationIcon { get; }
     }
 }
  

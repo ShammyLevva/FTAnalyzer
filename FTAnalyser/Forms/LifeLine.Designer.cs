@@ -47,14 +47,14 @@ namespace FTAnalyzer.Forms
             this.FactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeOfFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AgeAtFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SourceList = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LocationIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.GeocodeStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GoogleLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GoogleResultTypes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SourceList = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFacts)).BeginInit();
             this.splitContainerFacts.Panel1.SuspendLayout();
             this.splitContainerFacts.Panel2.SuspendLayout();
@@ -196,14 +196,14 @@ namespace FTAnalyzer.Forms
             this.FactName,
             this.TypeOfFact,
             this.FactDate,
-            this.FactLocation,
-            this.Comment,
             this.AgeAtFact,
-            this.SourceList,
+            this.FactLocation,
             this.LocationIcon,
             this.GeocodeStatus,
             this.GoogleLocation,
-            this.GoogleResultTypes});
+            this.GoogleResultTypes,
+            this.Comment,
+            this.SourceList});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -272,6 +272,16 @@ namespace FTAnalyzer.Forms
             this.FactDate.ReadOnly = true;
             this.FactDate.Width = 150;
             // 
+            // AgeAtFact
+            // 
+            this.AgeAtFact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.AgeAtFact.DataPropertyName = "AgeAtFact";
+            this.AgeAtFact.HeaderText = "Age";
+            this.AgeAtFact.MinimumWidth = 50;
+            this.AgeAtFact.Name = "AgeAtFact";
+            this.AgeAtFact.ReadOnly = true;
+            this.AgeAtFact.Width = 50;
+            // 
             // FactLocation
             // 
             this.FactLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -281,6 +291,43 @@ namespace FTAnalyzer.Forms
             this.FactLocation.Name = "FactLocation";
             this.FactLocation.ReadOnly = true;
             this.FactLocation.Width = 123;
+            // 
+            // LocationIcon
+            // 
+            this.LocationIcon.DataPropertyName = "LocationIcon";
+            this.LocationIcon.HeaderText = global::FTAnalyzer.Properties.Resources.FTA_0002;
+            this.LocationIcon.MinimumWidth = 20;
+            this.LocationIcon.Name = "LocationIcon";
+            this.LocationIcon.ReadOnly = true;
+            this.LocationIcon.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.LocationIcon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.LocationIcon.Width = 20;
+            // 
+            // GeocodeStatus
+            // 
+            this.GeocodeStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.GeocodeStatus.DataPropertyName = "GeocodeStatus";
+            this.GeocodeStatus.HeaderText = "Geocode Status";
+            this.GeocodeStatus.Name = "GeocodeStatus";
+            this.GeocodeStatus.ReadOnly = true;
+            // 
+            // GoogleLocation
+            // 
+            this.GoogleLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.GoogleLocation.DataPropertyName = "GoogleLocation";
+            this.GoogleLocation.HeaderText = "GoogleLocation";
+            this.GoogleLocation.MinimumWidth = 120;
+            this.GoogleLocation.Name = "GoogleLocation";
+            this.GoogleLocation.ReadOnly = true;
+            this.GoogleLocation.Width = 120;
+            // 
+            // GoogleResultTypes
+            // 
+            this.GoogleResultTypes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.GoogleResultTypes.DataPropertyName = "GoogleResultTypes";
+            this.GoogleResultTypes.HeaderText = "Google Result Types";
+            this.GoogleResultTypes.Name = "GoogleResultTypes";
+            this.GoogleResultTypes.ReadOnly = true;
             // 
             // Comment
             // 
@@ -292,16 +339,6 @@ namespace FTAnalyzer.Forms
             this.Comment.ReadOnly = true;
             this.Comment.Width = 120;
             // 
-            // AgeAtFact
-            // 
-            this.AgeAtFact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.AgeAtFact.DataPropertyName = "AgeAtFact";
-            this.AgeAtFact.HeaderText = "Age";
-            this.AgeAtFact.MinimumWidth = 50;
-            this.AgeAtFact.Name = "AgeAtFact";
-            this.AgeAtFact.ReadOnly = true;
-            this.AgeAtFact.Width = 50;
-            // 
             // SourceList
             // 
             this.SourceList.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -311,36 +348,6 @@ namespace FTAnalyzer.Forms
             this.SourceList.Name = "SourceList";
             this.SourceList.ReadOnly = true;
             this.SourceList.Width = 250;
-            // 
-            // LocationIcon
-            // 
-            this.LocationIcon.DataPropertyName = "LocationIcon";
-            this.LocationIcon.HeaderText = "";
-            this.LocationIcon.Name = "LocationIcon";
-            this.LocationIcon.ReadOnly = true;
-            this.LocationIcon.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.LocationIcon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // GeocodeStatus
-            // 
-            this.GeocodeStatus.DataPropertyName = "GeocodeStatus";
-            this.GeocodeStatus.HeaderText = "Geocode Status";
-            this.GeocodeStatus.Name = "GeocodeStatus";
-            this.GeocodeStatus.ReadOnly = true;
-            // 
-            // GoogleLocation
-            // 
-            this.GoogleLocation.DataPropertyName = "GoogleLocation";
-            this.GoogleLocation.HeaderText = "GoogleLocation";
-            this.GoogleLocation.Name = "GoogleLocation";
-            this.GoogleLocation.ReadOnly = true;
-            // 
-            // GoogleResultTypes
-            // 
-            this.GoogleResultTypes.DataPropertyName = "GoogleResultTypes";
-            this.GoogleResultTypes.HeaderText = "Google Result Types";
-            this.GoogleResultTypes.Name = "GoogleResultTypes";
-            this.GoogleResultTypes.ReadOnly = true;
             // 
             // LifeLine
             // 
@@ -383,13 +390,13 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn FactName;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeOfFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FactLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
         private System.Windows.Forms.DataGridViewTextBoxColumn AgeAtFact;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FactLocation;
         private System.Windows.Forms.DataGridViewImageColumn LocationIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn GeocodeStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn GoogleLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn GoogleResultTypes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;
     }
 }
