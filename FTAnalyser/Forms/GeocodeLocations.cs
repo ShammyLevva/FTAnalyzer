@@ -885,8 +885,7 @@ namespace FTAnalyzer.Forms
                          (foundLevel == FactLocation.SUBREGION && loc.PixelSize < 100) ||
                          (foundLevel == loc.Level)) &&
                         (resultTypes != GoogleMap.POSTALCODE &&
-                         resultTypes != GoogleMap.POSTALCODEPREFIX &&
-                         resultTypes != GoogleMap.POSTALTOWN)) // prefer more detailed results than postal codes
+                         resultTypes != GoogleMap.POSTALCODEPREFIX)) // prefer more detailed results than postal codes
                     {
                         loc.GoogleLocation = result.ReturnAddress;
                         loc.GoogleResultType = resultTypes;
