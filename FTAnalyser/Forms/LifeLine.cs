@@ -51,7 +51,18 @@ namespace FTAnalyzer.Forms
             dgIndividuals.DataSource = new SortableBindingList<Individual>(ft.AllIndividuals.Where(i => i.GeoLocationCount > 0));
             dgIndividuals.Sort(dgIndividuals.Columns["BirthDate"], ListSortDirection.Ascending);
             dgIndividuals.Sort(dgIndividuals.Columns["SortedName"], ListSortDirection.Ascending);
+            DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
             isloading = false;
+        }
+
+        private void DatabaseHelper_GeoLocationUpdated(object location, EventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => DatabaseHelper_GeoLocationUpdated(location, e)));
+                return;
+            }
+            BuildMap();
         }
 
         private void SetupMap()

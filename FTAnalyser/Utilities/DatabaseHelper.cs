@@ -282,6 +282,7 @@ namespace FTAnalyzer.Utilities
             updateCmd.Parameters[3].Value = loc.ToString();
 
             updateCmd.ExecuteNonQuery();
+            OnGeoLocationUpdated(loc);
         }
 
         public SQLiteCommand UpdateGeocode()
@@ -393,6 +394,7 @@ namespace FTAnalyzer.Utilities
 
         #endregion
 
+        #region BackupRestore
         public bool StartBackupRestoreDatabase()
         {
             string tempFilename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\Geocodes.s3db.tmp");
@@ -435,5 +437,16 @@ namespace FTAnalyzer.Utilities
             }
             return result;
         }
+        #endregion
+
+        #region EventHandler
+        public static event EventHandler GeoLocationUpdated;
+        protected static void OnGeoLocationUpdated(FactLocation loc)
+        {
+            if (GeoLocationUpdated != null)
+                GeoLocationUpdated(loc, EventArgs.Empty);
+        }
+
+        #endregion
     }
 }
