@@ -911,6 +911,7 @@ namespace FTAnalyzer.Forms
             }
             else if (res.Status == "ZERO_RESULTS")
             {
+                loc.GoogleLocation = "Not Found";
                 foundLevel = -2;
             }
         }

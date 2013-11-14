@@ -48,7 +48,7 @@ namespace FTAnalyzer.Forms
             SetupMap();
             dgFacts.AutoGenerateColumns = false;
             dgIndividuals.AutoGenerateColumns = false;
-            dgIndividuals.DataSource = new SortableBindingList<Individual>(ft.AllIndividuals.Where(i => i.GeoLocationCount > 0));
+            dgIndividuals.DataSource = new SortableBindingList<Individual>(ft.AllIndividuals);
             dgIndividuals.Sort(dgIndividuals.Columns["BirthDate"], ListSortDirection.Ascending);
             dgIndividuals.Sort(dgIndividuals.Columns["SortedName"], ListSortDirection.Ascending);
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
@@ -147,9 +147,12 @@ namespace FTAnalyzer.Forms
             foreach (DataGridViewRow row in dgIndividuals.SelectedRows)
             {
                 Individual ind = row.DataBoundItem as Individual;
-                displayFacts.AddRange(ind.AllGeocodedFacts);
-                MapLifeLine line = new MapLifeLine(ind);
-                FeatureDataRow fdr = line.AddFeatureDataRow(lifelines);
+                if (ind.AllGeocodedFacts.Count > 0)
+                {
+                    displayFacts.AddRange(ind.AllGeocodedFacts);
+                    MapLifeLine line = new MapLifeLine(ind);
+                    FeatureDataRow fdr = line.AddFeatureDataRow(lifelines);
+                }
             }
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
             Envelope bbox = new Envelope();
