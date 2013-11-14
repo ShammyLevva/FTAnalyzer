@@ -38,6 +38,7 @@ namespace FTAnalyzer.Forms
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
             this.SortedName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GeoLocationCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
@@ -101,7 +102,7 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap.Panel2.Controls.Add(this.mapBox1);
             this.splitContainerMap.Panel2.Controls.Add(this.mapZoomToolStrip);
             this.splitContainerMap.Size = new System.Drawing.Size(1113, 459);
-            this.splitContainerMap.SplitterDistance = 253;
+            this.splitContainerMap.SplitterDistance = 290;
             this.splitContainerMap.TabIndex = 2;
             // 
             // dgIndividuals
@@ -113,14 +114,15 @@ namespace FTAnalyzer.Forms
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SortedName,
-            this.BirthDate});
+            this.BirthDate,
+            this.GeoLocationCount});
             this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgIndividuals.Location = new System.Drawing.Point(0, 0);
             this.dgIndividuals.Name = "dgIndividuals";
             this.dgIndividuals.ReadOnly = true;
             this.dgIndividuals.RowHeadersWidth = 4;
             this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgIndividuals.Size = new System.Drawing.Size(253, 459);
+            this.dgIndividuals.Size = new System.Drawing.Size(290, 459);
             this.dgIndividuals.TabIndex = 0;
             this.dgIndividuals.SelectionChanged += new System.EventHandler(this.dgIndividuals_SelectionChanged);
             // 
@@ -141,11 +143,20 @@ namespace FTAnalyzer.Forms
             this.BirthDate.Name = "BirthDate";
             this.BirthDate.ReadOnly = true;
             // 
+            // GeoLocationCount
+            // 
+            this.GeoLocationCount.DataPropertyName = "GeoLocationCount";
+            this.GeoLocationCount.HeaderText = "Facts";
+            this.GeoLocationCount.MinimumWidth = 37;
+            this.GeoLocationCount.Name = "GeoLocationCount";
+            this.GeoLocationCount.ReadOnly = true;
+            this.GeoLocationCount.Width = 37;
+            // 
             // linkLabel1
             // 
             this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(728, 25);
+            this.linkLabel1.Location = new System.Drawing.Point(691, 25);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(125, 13);
             this.linkLabel1.TabIndex = 16;
@@ -168,7 +179,7 @@ namespace FTAnalyzer.Forms
             this.mapBox1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.ShowProgressUpdate = false;
-            this.mapBox1.Size = new System.Drawing.Size(856, 434);
+            this.mapBox1.Size = new System.Drawing.Size(819, 434);
             this.mapBox1.TabIndex = 2;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
@@ -179,7 +190,7 @@ namespace FTAnalyzer.Forms
             this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
             this.mapZoomToolStrip.MapControl = this.mapBox1;
             this.mapZoomToolStrip.Name = "mapZoomToolStrip";
-            this.mapZoomToolStrip.Size = new System.Drawing.Size(856, 25);
+            this.mapZoomToolStrip.Size = new System.Drawing.Size(819, 25);
             this.mapZoomToolStrip.TabIndex = 1;
             this.mapZoomToolStrip.Text = "mapZoomToolStrip1";
             // 
@@ -221,6 +232,7 @@ namespace FTAnalyzer.Forms
             this.dgFacts.ShowEditingIcon = false;
             this.dgFacts.Size = new System.Drawing.Size(1113, 127);
             this.dgFacts.TabIndex = 3;
+            this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFacts_CellDoubleClick);
             // 
             // FactIcon
             // 
@@ -379,8 +391,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.SplitContainer splitContainerFacts;
         private System.Windows.Forms.SplitContainer splitContainerMap;
         private System.Windows.Forms.DataGridView dgIndividuals;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SortedName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BirthDate;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private SharpMap.Forms.MapBox mapBox1;
         private SharpMap.Forms.ToolBar.MapZoomToolStrip mapZoomToolStrip;
@@ -398,5 +408,8 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn GoogleResultTypes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SortedName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BirthDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GeoLocationCount;
     }
 }

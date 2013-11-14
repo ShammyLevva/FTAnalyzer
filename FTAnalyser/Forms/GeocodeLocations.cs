@@ -503,7 +503,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        public void GeoCode( BackgroundWorker worker, DoWorkEventArgs e)
+        public void GeoCode(BackgroundWorker worker, DoWorkEventArgs e)
         {
             try
             {
@@ -534,7 +534,7 @@ namespace FTAnalyzer.Forms
                         {
                             GeoResponse res = null;
                             if (loc.GeocodeStatus == FactLocation.Geocode.NOT_SEARCHED ||
-                                (retryPartial && 
+                                (retryPartial &&
                                     (loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH || loc.GeocodeStatus == FactLocation.Geocode.LEVEL_MISMATCH)))
                             {
                                 res = SearchGoogle(loc.ToString());
@@ -940,6 +940,16 @@ namespace FTAnalyzer.Forms
                 ft.LoadGeoLocationsFromDataBase();
                 ft.WriteGeocodeStatstoRTB(true);
                 MessageBox.Show("Partials have been reset");
+            }
+        }
+
+        public void SelectLocation(string location)
+        {
+            DataGridViewRow row = dgLocations.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["GeocodedLocation"].Value.ToString().Equals(location)).FirstOrDefault();
+            if (row != null)
+            {
+                dgLocations.Rows[row.Index].Selected = true;
+                dgLocations.FirstDisplayedScrollingRowIndex = row.Index;
             }
         }
     }

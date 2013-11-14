@@ -46,8 +46,9 @@ namespace FTAnalyzer.Forms
                 mapZoomToolStrip.Items[i].Visible = false;
             backgroundColour = mapZoomToolStrip.Items[0].BackColor;
             SetupMap();
+            dgFacts.AutoGenerateColumns = false;
             dgIndividuals.AutoGenerateColumns = false;
-            dgIndividuals.DataSource = new SortableBindingList<Individual>(ft.AllIndividuals.Where(i => i.AllGeocodedFacts.Count > 0));
+            dgIndividuals.DataSource = new SortableBindingList<Individual>(ft.AllIndividuals.Where(i => i.GeoLocationCount > 0));
             dgIndividuals.Sort(dgIndividuals.Columns["BirthDate"], ListSortDirection.Ascending);
             dgIndividuals.Sort(dgIndividuals.Columns["SortedName"], ListSortDirection.Ascending);
             isloading = false;
@@ -152,7 +153,7 @@ namespace FTAnalyzer.Forms
             else
                 expand = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
             mapBox1.Map.ZoomToBox(expand);
-            expand.ExpandBy(mapBox1.Map.PixelSize * 20);
+            expand.ExpandBy(mapBox1.Map.PixelSize * 40);
             mapBox1.Map.ZoomToBox(expand);
             if (mapBox1.Map.Zoom < mapBox1.Map.MinimumZoom)
                 mapBox1.Map.Zoom = mapBox1.Map.MinimumZoom;
@@ -166,6 +167,14 @@ namespace FTAnalyzer.Forms
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(e.Link.LinkData as string);
+        }
+
+        private void dgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            IDisplayFact fact = (IDisplayFact) dgFacts.CurrentRow.DataBoundItem;
+            ft.OpenGeoLocations(fact.Location);
+            this.Cursor = Cursors.Default;
         }
     }
 }

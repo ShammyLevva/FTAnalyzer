@@ -228,6 +228,11 @@ namespace FTAnalyzer
             }
         }
 
+        public int GeoLocationCount
+        {
+            get { return AllGeocodedFacts.Count; }
+        }
+
         public IList<FactLocation> Locations
         {
             get { return this.locations; }

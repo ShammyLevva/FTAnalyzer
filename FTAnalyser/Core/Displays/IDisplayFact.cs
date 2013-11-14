@@ -14,13 +14,13 @@ namespace FTAnalyzer
         string TypeOfFact { get; }
         FactDate FactDate { get; }
         FactLocation Location { get; }
-        string Comment { get; }
         Age AgeAtFact { get; }
-        string SourceList { get; }
+        Image LocationIcon { get; }
+        string GeocodeStatus { get; }
         string GoogleLocation { get; }
         string GoogleResultType { get; }
-        string GeocodeStatus { get; }
-        Image LocationIcon { get; }
+        string Comment { get; }
+        string SourceList { get; }
     }
 }
  

@@ -14,6 +14,7 @@ using System.Data;
 using FTAnalyzer.Filters;
 using System.Data.SQLite;
 using FTAnalyzer.Mapping;
+using FTAnalyzer.Forms;
 
 namespace FTAnalyzer
 {
@@ -1971,6 +1972,28 @@ namespace FTAnalyzer
             xmlErrorbox.AppendText("    " + notsearched + " haven't been searched on Google.");
             if (notsearched > 0)
                 xmlErrorbox.AppendText(" Use the 'Run Geocoder' option (under Maps menu) to find them.\n");
+        }
+
+        public void OpenGeoLocations(FactLocation location)
+        {
+            GeocodeLocations loc = null;
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.GetType() == typeof(GeocodeLocations))
+                {
+                    f.BringToFront();
+                    f.Focus();
+                    loc = (GeocodeLocations)f;
+                    break;
+                }
+            }
+            if (loc == null)
+            {
+                loc = new GeocodeLocations();
+                loc.Show();
+            }
+            // we now have opened form
+            loc.SelectLocation(location.SortableLocation);
         }
 
         #endregion
