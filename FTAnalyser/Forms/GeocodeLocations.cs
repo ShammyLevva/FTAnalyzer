@@ -880,13 +880,13 @@ namespace FTAnalyzer.Forms
                     foundLevel = GoogleMap.GetFactLocation(result.Types);
                     viewport = result.Geometry.ViewPort;
                     string resultTypes = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
-                    if ((foundLevel == FactLocation.PLACE && loc.PixelSize < 10) ||
-                        (foundLevel == FactLocation.ADDRESS && loc.PixelSize < 30) ||
-                        (foundLevel == FactLocation.SUBREGION && loc.PixelSize < 100) ||
-                       (foundLevel == loc.Level &&
-                        resultTypes != GoogleMap.POSTALCODE &&
-                        resultTypes != GoogleMap.POSTALCODEPREFIX &&
-                        resultTypes != GoogleMap.POSTALTOWN)) // prefer more detailed results than postal codes
+                    if (((foundLevel == FactLocation.PLACE && loc.PixelSize < 10) ||
+                         (foundLevel == FactLocation.ADDRESS && loc.PixelSize < 30) ||
+                         (foundLevel == FactLocation.SUBREGION && loc.PixelSize < 100) ||
+                         (foundLevel == loc.Level)) &&
+                        (resultTypes != GoogleMap.POSTALCODE &&
+                         resultTypes != GoogleMap.POSTALCODEPREFIX &&
+                         resultTypes != GoogleMap.POSTALTOWN)) // prefer more detailed results than postal codes
                     {
                         loc.GoogleLocation = result.ReturnAddress;
                         loc.GoogleResultType = resultTypes;
