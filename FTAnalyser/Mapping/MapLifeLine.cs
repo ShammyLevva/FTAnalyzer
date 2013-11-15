@@ -40,6 +40,7 @@ namespace FTAnalyzer.Mapping
                 this.Geometry = new NetTopologySuite.Geometries.LineString(points.ToArray());
             else
                 this.Geometry = StartPoint;
+            Count = points.Count;
         }
 
         public FeatureDataRow AddFeatureDataRow(FeatureDataTable table)

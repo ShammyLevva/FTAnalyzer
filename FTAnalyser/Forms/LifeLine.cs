@@ -197,16 +197,8 @@ namespace FTAnalyzer.Forms
         {
             Individual ind = dgIndividuals.CurrentRow.DataBoundItem as Individual;
             isloading = true;
-            foreach (Family f in ind.FamiliesAsParent)
-            {
-                foreach (Individual i in f.Members)
-                    SelectIndividual(i);
-            }
-            foreach (ParentalRelationship pr in ind.FamiliesAsChild)
-            {
-                foreach (Individual i in pr.Family.Members)
-                    SelectIndividual(i);
-            }
+            foreach (Individual i in ft.GetFamily(ind))
+                SelectIndividual(i);
             isloading = false;
             BuildMap();
         }
@@ -218,14 +210,31 @@ namespace FTAnalyzer.Forms
                 dgIndividuals.Rows[row.Index].Selected = true;
         }
 
+        private void SelectIndividuals(Func<Individual,List<Individual>> method)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            isloading = true; 
+            Individual ind = dgIndividuals.CurrentRow.DataBoundItem as Individual;
+            foreach (Individual i in method(ind))
+                SelectIndividual(i);
+            isloading = false;
+            BuildMap();
+            this.Cursor = Cursors.Default;
+        }
+
         private void selectAllAncestorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Individual ind = dgIndividuals.CurrentRow.DataBoundItem as Individual;
+            SelectIndividuals(ft.GetAncestors);
         }
 
         private void selectAllDescendantsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Individual ind = dgIndividuals.CurrentRow.DataBoundItem as Individual;
+            SelectIndividuals(ft.GetDescendants);
+        }
+
+        private void selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SelectIndividuals(ft.GetAllRelations);
         }
     }
 }

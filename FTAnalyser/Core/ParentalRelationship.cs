@@ -14,18 +14,18 @@ namespace FTAnalyzer
         public ParentalRelationshipType FatherRelationship { get; private set; }
         public ParentalRelationshipType MotherRelationship { get; private set; }
 
-        public ParentalRelationship(Family family, ParentalRelationshipType father, ParentalRelationshipType mother)
+        public ParentalRelationship(Family family, ParentalRelationshipType fatherRel, ParentalRelationshipType motherRel)
         {
             this.Family = family;
-            this.FatherRelationship = father;
-            this.MotherRelationship = mother;
+            this.FatherRelationship = fatherRel;
+            this.MotherRelationship = motherRel;
         }
 
         public bool IsNaturalFather
         {
             get
             {
-                return Family.Husband !=null && 
+                return Father !=null && 
                       (FatherRelationship == ParentalRelationshipType.NATURAL ||
                        FatherRelationship == ParentalRelationshipType.UNKNOWN ||
                        FatherRelationship == ParentalRelationshipType.PRIVATE);
@@ -34,12 +34,17 @@ namespace FTAnalyzer
 
         public bool IsNaturalMother
         {
-            get { return Family.Wife !=null && 
+            get
+            {
+                return Mother != null && 
                         (MotherRelationship == ParentalRelationshipType.NATURAL || 
                          MotherRelationship == ParentalRelationshipType.UNKNOWN ||
                          MotherRelationship == ParentalRelationshipType.PRIVATE);
             }
         }
+
+        public Individual Father { get { return Family == null ? null : Family.Husband; } }
+        public Individual Mother { get { return Family == null ? null : Family.Wife; } }
 
         public static ParentalRelationshipType GetRelationshipType(XmlNode node)
         {

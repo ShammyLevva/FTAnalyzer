@@ -458,6 +458,21 @@ namespace FTAnalyzer
             get { return familiesAsChild; }
         }
 
+        public bool IsNaturalChildOf(Individual parent)
+        {
+            foreach (ParentalRelationship pr in FamiliesAsChild)
+            {
+                if (pr.Family != null)
+                {
+                    if (pr.IsNaturalFather && parent.IsMale && parent.Equals(pr.Father))
+                        return true;
+                    if (pr.IsNaturalMother && !parent.IsMale && parent.Equals(pr.Mother))
+                        return true;
+                }
+            }
+            return false;
+        }
+        
         public int FactCount(string factType)
         {
             return facts.Count(f => f.FactType == factType && f.FactErrorLevel == Fact.FactError.GOOD);

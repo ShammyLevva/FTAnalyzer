@@ -63,6 +63,7 @@ namespace FTAnalyzer.Forms
             this.GoogleResultTypes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SourceList = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFacts)).BeginInit();
             this.splitContainerFacts.Panel1.SuspendLayout();
             this.splitContainerFacts.Panel2.SuspendLayout();
@@ -179,28 +180,29 @@ namespace FTAnalyzer.Forms
             this.ctxmnuSelectOthers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addAllFamilyMembersToolStripMenuItem,
             this.selectAllAncestorsToolStripMenuItem,
-            this.selectAllDescendantsToolStripMenuItem});
+            this.selectAllDescendantsToolStripMenuItem,
+            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem});
             this.ctxmnuSelectOthers.Name = "ctxmnuSelectOthers";
-            this.ctxmnuSelectOthers.Size = new System.Drawing.Size(212, 70);
+            this.ctxmnuSelectOthers.Size = new System.Drawing.Size(244, 114);
             // 
             // addAllFamilyMembersToolStripMenuItem
             // 
             this.addAllFamilyMembersToolStripMenuItem.Name = "addAllFamilyMembersToolStripMenuItem";
-            this.addAllFamilyMembersToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.addAllFamilyMembersToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
             this.addAllFamilyMembersToolStripMenuItem.Text = "Select all Family Members";
             this.addAllFamilyMembersToolStripMenuItem.Click += new System.EventHandler(this.addAllFamilyMembersToolStripMenuItem_Click);
             // 
             // selectAllAncestorsToolStripMenuItem
             // 
             this.selectAllAncestorsToolStripMenuItem.Name = "selectAllAncestorsToolStripMenuItem";
-            this.selectAllAncestorsToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.selectAllAncestorsToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
             this.selectAllAncestorsToolStripMenuItem.Text = "Select all Ancestors";
             this.selectAllAncestorsToolStripMenuItem.Click += new System.EventHandler(this.selectAllAncestorsToolStripMenuItem_Click);
             // 
             // selectAllDescendantsToolStripMenuItem
             // 
             this.selectAllDescendantsToolStripMenuItem.Name = "selectAllDescendantsToolStripMenuItem";
-            this.selectAllDescendantsToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.selectAllDescendantsToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
             this.selectAllDescendantsToolStripMenuItem.Text = "Select all Descendants";
             this.selectAllDescendantsToolStripMenuItem.Click += new System.EventHandler(this.selectAllDescendantsToolStripMenuItem_Click);
             // 
@@ -428,6 +430,13 @@ namespace FTAnalyzer.Forms
             this.SourceList.ReadOnly = true;
             this.SourceList.Width = 250;
             // 
+            // selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem
+            // 
+            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Name = "selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem";
+            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Text = "Select all Relations (all of above)";
+            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Click += new System.EventHandler(this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem_Click);
+            // 
             // LifeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -489,5 +498,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn GeoLocationCount;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel txtCount;
+        private System.Windows.Forms.ToolStripMenuItem selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem;
     }
 }

@@ -1999,11 +1999,27 @@ namespace FTAnalyzer
         #endregion
 
         #region Relationship Groups
+        public List<Individual> GetFamily(Individual startIndividiual)
+        {
+            List<Individual> results = new List<Individual>();
+            foreach (Family f in startIndividiual.FamiliesAsParent)
+            {
+                foreach (Individual i in f.Members)
+                    results.Add(i);
+            }
+            foreach (ParentalRelationship pr in startIndividiual.FamiliesAsChild)
+            {
+                foreach (Individual i in pr.Family.Members)
+                    results.Add(i);
+            }
+            return results;
+        }
+
         public List<Individual> GetAncestors(Individual startIndividual)
         {
             List<Individual> results = new List<Individual>();
-            results.Add(startIndividual);
             Queue<Individual> queue = new Queue<Individual>();
+            results.Add(startIndividual);
             queue.Enqueue(startIndividual);
             while (queue.Count > 0)
             {
@@ -2012,25 +2028,55 @@ namespace FTAnalyzer
                 {
                     if (parents.IsNaturalFather)
                     {
-                        queue.Enqueue(parents.Family.Husband);
-                        results.Add(parents.Family.Husband);
+                        queue.Enqueue(parents.Father);
+                        results.Add(parents.Father);
+                    }
+                    if (parents.IsNaturalMother)
+                    {
+                        queue.Enqueue(parents.Mother);
+                        results.Add(parents.Mother);
                     }
                 }
-
             }
             return results;
         }
 
-        public List<Individual> GetDescendants(Individual ind)
+        public List<Individual> GetDescendants(Individual startIndividual)
         {
             List<Individual> results = new List<Individual>();
-            results.Add(ind);
+            List<Individual> processed = new List<Individual>();
+            Queue<Individual> queue = new Queue<Individual>();
+            results.Add(startIndividual);
+            queue.Enqueue(startIndividual);
+            while (queue.Count > 0)
+            {
+                Individual parent = queue.Dequeue();
+                processed.Add(parent);
+                foreach (Family f in parent.FamiliesAsParent)
+                {
+                    Individual spouse = f.Spouse(parent);
+                    if (spouse != null && !processed.Contains(spouse))
+                    {
+                        queue.Enqueue(spouse);
+                        results.Add(spouse);
+                    }
+                    foreach(Individual child in f.Children)
+                    {
+                        // we have a child and we have a parent check if natural child
+                        if (!processed.Contains(child) && child.IsNaturalChildOf(parent))
+                        {
+                            queue.Enqueue(child);
+                            results.Add(child);
+                        }
+                    }
+                }
+            }
             return results;
         }
 
-        public List<Individual> GetRelations(Individual ind)
+        public List<Individual> GetAllRelations(Individual ind)
         {
-            return GetAncestors(ind).Union(GetDescendants(ind)).ToList<Individual>();
+            return GetFamily(ind).Union(GetAncestors(ind).Union(GetDescendants(ind))).ToList<Individual>();
         }
         #endregion
     }
