@@ -155,7 +155,7 @@ namespace FTAnalyzer.Forms
                 }
             }
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
-            txtCount.Text = dgIndividuals.SelectedRows.Count + " Individual(s) selected, " + dgFacts.RowCount + " Geolocated facts displayed");
+            txtCount.Text = dgIndividuals.SelectedRows.Count + " Individual(s) selected, " + dgFacts.RowCount + " Geolocated fact(s) displayed";
 
             Envelope bbox = new Envelope();
             foreach (FeatureDataRow row in lifelines)

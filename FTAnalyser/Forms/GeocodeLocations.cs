@@ -324,7 +324,7 @@ namespace FTAnalyzer.Forms
 
         private void ResetTable()
         {
-            dgLocations.AutoResizeColumns();
+            dgLocations.Sort(dgLocations.Columns["GeocodedLocation"], ListSortDirection.Ascending);
         }
 
         private void printToolStripButton_Click(object sender, EventArgs e)
