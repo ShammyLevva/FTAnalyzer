@@ -135,7 +135,7 @@ namespace FTAnalyzer.Forms
 
         private void dgIndividuals_SelectionChanged(object sender, EventArgs e)
         {
-            if(!isloading)
+            if (!isloading)
                 BuildMap();
         }
 
@@ -155,10 +155,12 @@ namespace FTAnalyzer.Forms
                 }
             }
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
+            txtCount.Text = dgIndividuals.SelectedRows.Count + " Individual(s) selected, " + dgFacts.RowCount + " Geolocated facts displayed");
+
             Envelope bbox = new Envelope();
             foreach (FeatureDataRow row in lifelines)
                 foreach (Coordinate c in row.Geometry.Coordinates)
-                    if(c != null)
+                    if (c != null)
                         bbox.ExpandToInclude(c);
             IMathTransform transform = linesLayer.CoordinateTransformation.MathTransform;
             Envelope expand;
@@ -186,9 +188,44 @@ namespace FTAnalyzer.Forms
         private void dgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            IDisplayFact fact = (IDisplayFact) dgFacts.CurrentRow.DataBoundItem;
+            IDisplayFact fact = (IDisplayFact)dgFacts.CurrentRow.DataBoundItem;
             ft.OpenGeoLocations(fact.Location);
             this.Cursor = Cursors.Default;
+        }
+
+        private void addAllFamilyMembersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Individual ind = dgIndividuals.CurrentRow.DataBoundItem as Individual;
+            isloading = true;
+            foreach (Family f in ind.FamiliesAsParent)
+            {
+                foreach (Individual i in f.Members)
+                    SelectIndividual(i);
+            }
+            foreach (ParentalRelationship pr in ind.FamiliesAsChild)
+            {
+                foreach (Individual i in pr.Family.Members)
+                    SelectIndividual(i);
+            }
+            isloading = false;
+            BuildMap();
+        }
+
+        private void SelectIndividual(Individual i)
+        {
+            DataGridViewRow row = dgIndividuals.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["IndividualID"].Value.ToString().Equals(i.IndividualID)).FirstOrDefault();
+            if (row != null)
+                dgIndividuals.Rows[row.Index].Selected = true;
+        }
+
+        private void selectAllAncestorsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Individual ind = dgIndividuals.CurrentRow.DataBoundItem as Individual;
+        }
+
+        private void selectAllDescendantsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Individual ind = dgIndividuals.CurrentRow.DataBoundItem as Individual;
         }
     }
 }

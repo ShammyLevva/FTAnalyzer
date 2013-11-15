@@ -36,12 +36,19 @@ namespace FTAnalyzer.Forms
             this.splitContainerFacts = new System.Windows.Forms.SplitContainer();
             this.splitContainerMap = new System.Windows.Forms.SplitContainer();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
+            this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SortedName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GeoLocationCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ctxmnuSelectOthers = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addAllFamilyMembersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectAllAncestorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectAllDescendantsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.txtCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgFacts = new System.Windows.Forms.DataGridView();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.Ind_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,6 +72,8 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap.Panel2.SuspendLayout();
             this.splitContainerMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
+            this.ctxmnuSelectOthers.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,6 +90,7 @@ namespace FTAnalyzer.Forms
             // 
             // splitContainerFacts.Panel2
             // 
+            this.splitContainerFacts.Panel2.Controls.Add(this.statusStrip);
             this.splitContainerFacts.Panel2.Controls.Add(this.dgFacts);
             this.splitContainerFacts.Size = new System.Drawing.Size(1113, 590);
             this.splitContainerFacts.SplitterDistance = 459;
@@ -102,7 +112,7 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap.Panel2.Controls.Add(this.mapBox1);
             this.splitContainerMap.Panel2.Controls.Add(this.mapZoomToolStrip);
             this.splitContainerMap.Size = new System.Drawing.Size(1113, 459);
-            this.splitContainerMap.SplitterDistance = 290;
+            this.splitContainerMap.SplitterDistance = 330;
             this.splitContainerMap.TabIndex = 2;
             // 
             // dgIndividuals
@@ -113,18 +123,30 @@ namespace FTAnalyzer.Forms
             this.dgIndividuals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IndividualID,
             this.SortedName,
             this.BirthDate,
             this.GeoLocationCount});
+            this.dgIndividuals.ContextMenuStrip = this.ctxmnuSelectOthers;
             this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgIndividuals.Location = new System.Drawing.Point(0, 0);
             this.dgIndividuals.Name = "dgIndividuals";
             this.dgIndividuals.ReadOnly = true;
             this.dgIndividuals.RowHeadersWidth = 4;
             this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgIndividuals.Size = new System.Drawing.Size(290, 459);
+            this.dgIndividuals.Size = new System.Drawing.Size(330, 459);
             this.dgIndividuals.TabIndex = 0;
             this.dgIndividuals.SelectionChanged += new System.EventHandler(this.dgIndividuals_SelectionChanged);
+            // 
+            // IndividualID
+            // 
+            this.IndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.IndividualID.DataPropertyName = "IndividualID";
+            this.IndividualID.HeaderText = "Ind_ID";
+            this.IndividualID.MinimumWidth = 40;
+            this.IndividualID.Name = "IndividualID";
+            this.IndividualID.ReadOnly = true;
+            this.IndividualID.Width = 40;
             // 
             // SortedName
             // 
@@ -152,11 +174,41 @@ namespace FTAnalyzer.Forms
             this.GeoLocationCount.ReadOnly = true;
             this.GeoLocationCount.Width = 37;
             // 
+            // ctxmnuSelectOthers
+            // 
+            this.ctxmnuSelectOthers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addAllFamilyMembersToolStripMenuItem,
+            this.selectAllAncestorsToolStripMenuItem,
+            this.selectAllDescendantsToolStripMenuItem});
+            this.ctxmnuSelectOthers.Name = "ctxmnuSelectOthers";
+            this.ctxmnuSelectOthers.Size = new System.Drawing.Size(212, 70);
+            // 
+            // addAllFamilyMembersToolStripMenuItem
+            // 
+            this.addAllFamilyMembersToolStripMenuItem.Name = "addAllFamilyMembersToolStripMenuItem";
+            this.addAllFamilyMembersToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.addAllFamilyMembersToolStripMenuItem.Text = "Select all Family Members";
+            this.addAllFamilyMembersToolStripMenuItem.Click += new System.EventHandler(this.addAllFamilyMembersToolStripMenuItem_Click);
+            // 
+            // selectAllAncestorsToolStripMenuItem
+            // 
+            this.selectAllAncestorsToolStripMenuItem.Name = "selectAllAncestorsToolStripMenuItem";
+            this.selectAllAncestorsToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.selectAllAncestorsToolStripMenuItem.Text = "Select all Ancestors";
+            this.selectAllAncestorsToolStripMenuItem.Click += new System.EventHandler(this.selectAllAncestorsToolStripMenuItem_Click);
+            // 
+            // selectAllDescendantsToolStripMenuItem
+            // 
+            this.selectAllDescendantsToolStripMenuItem.Name = "selectAllDescendantsToolStripMenuItem";
+            this.selectAllDescendantsToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.selectAllDescendantsToolStripMenuItem.Text = "Select all Descendants";
+            this.selectAllDescendantsToolStripMenuItem.Click += new System.EventHandler(this.selectAllDescendantsToolStripMenuItem_Click);
+            // 
             // linkLabel1
             // 
             this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(691, 25);
+            this.linkLabel1.Location = new System.Drawing.Point(651, 25);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(125, 13);
             this.linkLabel1.TabIndex = 16;
@@ -179,7 +231,7 @@ namespace FTAnalyzer.Forms
             this.mapBox1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.ShowProgressUpdate = false;
-            this.mapBox1.Size = new System.Drawing.Size(819, 434);
+            this.mapBox1.Size = new System.Drawing.Size(779, 434);
             this.mapBox1.TabIndex = 2;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
@@ -190,9 +242,24 @@ namespace FTAnalyzer.Forms
             this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
             this.mapZoomToolStrip.MapControl = this.mapBox1;
             this.mapZoomToolStrip.Name = "mapZoomToolStrip";
-            this.mapZoomToolStrip.Size = new System.Drawing.Size(819, 25);
+            this.mapZoomToolStrip.Size = new System.Drawing.Size(779, 25);
             this.mapZoomToolStrip.TabIndex = 1;
             this.mapZoomToolStrip.Text = "mapZoomToolStrip1";
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.txtCount});
+            this.statusStrip.Location = new System.Drawing.Point(0, 105);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(1113, 22);
+            this.statusStrip.TabIndex = 4;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // txtCount
+            // 
+            this.txtCount.Name = "txtCount";
+            this.txtCount.Size = new System.Drawing.Size(0, 17);
             // 
             // dgFacts
             // 
@@ -372,6 +439,7 @@ namespace FTAnalyzer.Forms
             this.Text = "Lifeline";
             this.splitContainerFacts.Panel1.ResumeLayout(false);
             this.splitContainerFacts.Panel2.ResumeLayout(false);
+            this.splitContainerFacts.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFacts)).EndInit();
             this.splitContainerFacts.ResumeLayout(false);
             this.splitContainerMap.Panel1.ResumeLayout(false);
@@ -380,6 +448,9 @@ namespace FTAnalyzer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMap)).EndInit();
             this.splitContainerMap.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
+            this.ctxmnuSelectOthers.ResumeLayout(false);
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).EndInit();
             this.ResumeLayout(false);
 
@@ -408,8 +479,15 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn GoogleResultTypes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;
+        private System.Windows.Forms.ContextMenuStrip ctxmnuSelectOthers;
+        private System.Windows.Forms.ToolStripMenuItem addAllFamilyMembersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem selectAllAncestorsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem selectAllDescendantsToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
         private System.Windows.Forms.DataGridViewTextBoxColumn SortedName;
         private System.Windows.Forms.DataGridViewTextBoxColumn BirthDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn GeoLocationCount;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel txtCount;
     }
 }
