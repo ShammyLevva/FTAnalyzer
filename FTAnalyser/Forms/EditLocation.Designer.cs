@@ -67,7 +67,6 @@ namespace FTAnalyzer.Forms
             this.mapBox1.TabIndex = 9;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
-            this.mapBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.mapBox1_Paint);
             this.mapBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.mapBox1_MouseClick);
             this.mapBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mapBox1_MouseDoubleClick);
             // 
