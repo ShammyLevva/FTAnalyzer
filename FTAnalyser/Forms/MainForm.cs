@@ -1728,7 +1728,10 @@ namespace FTAnalyzer
 
         private void factReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            HourGlass(true);
+            Facts facts = new Facts(ft.AllIndividuals);
+            facts.Show();
+            HourGlass(false);
         }
     }
 }

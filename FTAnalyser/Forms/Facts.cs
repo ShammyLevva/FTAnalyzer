@@ -21,9 +21,10 @@ namespace FTAnalyzer.Forms
         private Font italicFont;
         private ReportFormHelper reportFormHelper;
 
-        public Facts()
+        private Facts()
         {
             InitializeComponent();
+            this.facts = new SortableBindingList<IDisplayFact>();
             dgFacts.AutoGenerateColumns = false;
             reportFormHelper = new ReportFormHelper(this.Text, dgFacts, this.ResetTable);
             italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
@@ -33,15 +34,7 @@ namespace FTAnalyzer.Forms
             : this()
         {
             this.individual = individual;
-            this.facts = new SortableBindingList<IDisplayFact>();
-            foreach (Fact f in individual.AllFacts)
-                facts.Add(new DisplayFact(individual, individual.Name, f));
-            foreach (Fact f in individual.ErrorFacts)
-            {
-                // only add ignored and errors as allowed have are in AllFacts
-                if(f.FactErrorLevel != Fact.FactError.WARNINGALLOW)
-                    facts.Add(new DisplayFact(individual, individual.Name, f));
-            }
+            AddIndividualsFacts(individual);
             this.Text = "Facts Report for " + individual.IndividualID + ": " + individual.Name;
             SetupFacts();
             dgFacts.Columns["IndividualID"].Visible = false;
@@ -51,12 +44,33 @@ namespace FTAnalyzer.Forms
             : this()
         {
             this.family = family;
-            this.facts = new SortableBindingList<IDisplayFact>();
             foreach (DisplayFact f in family.AllDisplayFacts)
                 facts.Add(f);
             this.Text = "Facts Report for " + family.FamilyRef;
             SetupFacts();
             dgFacts.Columns["IndividualID"].Visible = true;
+        }
+
+        public Facts(IEnumerable<Individual> individuals)
+            : this()
+        {
+            foreach (Individual ind in individuals)
+                AddIndividualsFacts(ind);
+            this.Text = "Facts Report for all " + individuals.Count() + " individuals. Facts count: " + facts.Count;
+            SetupFacts();
+            dgFacts.Columns["IndividualID"].Visible = true;
+        }
+
+        private void AddIndividualsFacts(Individual individual)
+        {
+            foreach (Fact f in individual.AllFacts)
+                facts.Add(new DisplayFact(individual, individual.Name, f));
+            foreach (Fact f in individual.ErrorFacts)
+            {
+                // only add ignored and errors as allowed have are in AllFacts
+                if (f.FactErrorLevel != Fact.FactError.WARNINGALLOW)
+                    facts.Add(new DisplayFact(individual, individual.Name, f));
+            }
         }
 
         private void SetupFacts()
@@ -69,7 +83,7 @@ namespace FTAnalyzer.Forms
         private void ResetTable()
         {
             dgFacts.Sort(dgFacts.Columns["FactDate"], ListSortDirection.Ascending);
-            dgFacts.AutoResizeColumns();
+            //dgFacts.AutoResizeColumns();
         }
 
         private void printToolStripButton_Click(object sender, EventArgs e)
