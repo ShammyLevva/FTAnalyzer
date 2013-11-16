@@ -236,5 +236,11 @@ namespace FTAnalyzer.Forms
         {
             SelectIndividuals(ft.GetAllRelations);
         }
+
+        private void LifeLine_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DatabaseHelper.GeoLocationUpdated -= DatabaseHelper_GeoLocationUpdated;
+            this.Dispose();
+        }
     }
 }

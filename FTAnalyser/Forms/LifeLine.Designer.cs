@@ -36,6 +36,10 @@ namespace FTAnalyzer.Forms
             this.splitContainerFacts = new System.Windows.Forms.SplitContainer();
             this.splitContainerMap = new System.Windows.Forms.SplitContainer();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
+            this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SortedName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GeoLocationCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ctxmnuSelectOthers = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addAllFamilyMembersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectAllAncestorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,10 +51,6 @@ namespace FTAnalyzer.Forms
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.txtCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgFacts = new System.Windows.Forms.DataGridView();
-            this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SortedName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GeoLocationCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.FactsIndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -138,6 +138,42 @@ namespace FTAnalyzer.Forms
             this.dgIndividuals.Size = new System.Drawing.Size(330, 459);
             this.dgIndividuals.TabIndex = 0;
             this.dgIndividuals.SelectionChanged += new System.EventHandler(this.dgIndividuals_SelectionChanged);
+            // 
+            // IndividualID
+            // 
+            this.IndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.IndividualID.DataPropertyName = "IndividualID";
+            this.IndividualID.HeaderText = "Ind. ID";
+            this.IndividualID.MinimumWidth = 40;
+            this.IndividualID.Name = "IndividualID";
+            this.IndividualID.ReadOnly = true;
+            this.IndividualID.Width = 40;
+            // 
+            // SortedName
+            // 
+            this.SortedName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.SortedName.DataPropertyName = "SortedName";
+            this.SortedName.HeaderText = "Name";
+            this.SortedName.MinimumWidth = 50;
+            this.SortedName.Name = "SortedName";
+            this.SortedName.ReadOnly = true;
+            this.SortedName.Width = 130;
+            // 
+            // BirthDate
+            // 
+            this.BirthDate.DataPropertyName = "BirthDate";
+            this.BirthDate.HeaderText = "Date of Birth";
+            this.BirthDate.Name = "BirthDate";
+            this.BirthDate.ReadOnly = true;
+            // 
+            // GeoLocationCount
+            // 
+            this.GeoLocationCount.DataPropertyName = "GeoLocationCount";
+            this.GeoLocationCount.HeaderText = "Facts";
+            this.GeoLocationCount.MinimumWidth = 37;
+            this.GeoLocationCount.Name = "GeoLocationCount";
+            this.GeoLocationCount.ReadOnly = true;
+            this.GeoLocationCount.Width = 37;
             // 
             // ctxmnuSelectOthers
             // 
@@ -273,42 +309,6 @@ namespace FTAnalyzer.Forms
             this.dgFacts.Size = new System.Drawing.Size(1113, 127);
             this.dgFacts.TabIndex = 3;
             this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFacts_CellDoubleClick);
-            // 
-            // IndividualID
-            // 
-            this.IndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.IndividualID.DataPropertyName = "IndividualID";
-            this.IndividualID.HeaderText = "Ind. ID";
-            this.IndividualID.MinimumWidth = 40;
-            this.IndividualID.Name = "IndividualID";
-            this.IndividualID.ReadOnly = true;
-            this.IndividualID.Width = 40;
-            // 
-            // SortedName
-            // 
-            this.SortedName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.SortedName.DataPropertyName = "SortedName";
-            this.SortedName.HeaderText = "Name";
-            this.SortedName.MinimumWidth = 50;
-            this.SortedName.Name = "SortedName";
-            this.SortedName.ReadOnly = true;
-            this.SortedName.Width = 130;
-            // 
-            // BirthDate
-            // 
-            this.BirthDate.DataPropertyName = "BirthDate";
-            this.BirthDate.HeaderText = "Date of Birth";
-            this.BirthDate.Name = "BirthDate";
-            this.BirthDate.ReadOnly = true;
-            // 
-            // GeoLocationCount
-            // 
-            this.GeoLocationCount.DataPropertyName = "GeoLocationCount";
-            this.GeoLocationCount.HeaderText = "Facts";
-            this.GeoLocationCount.MinimumWidth = 37;
-            this.GeoLocationCount.Name = "GeoLocationCount";
-            this.GeoLocationCount.ReadOnly = true;
-            this.GeoLocationCount.Width = 37;
             // 
             // FactIcon
             // 
@@ -446,6 +446,7 @@ namespace FTAnalyzer.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LifeLine";
             this.Text = "Lifeline";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LifeLine_FormClosed);
             this.splitContainerFacts.Panel1.ResumeLayout(false);
             this.splitContainerFacts.Panel2.ResumeLayout(false);
             this.splitContainerFacts.Panel2.PerformLayout();
