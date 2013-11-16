@@ -51,7 +51,7 @@
             this.mnuViewFacts = new System.Windows.Forms.ToolStripMenuItem();
             this.FamilyID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ind_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CensusLoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CensusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,14 +75,14 @@
             this.dgCensus.AllowUserToAddRows = false;
             this.dgCensus.AllowUserToDeleteRows = false;
             this.dgCensus.AllowUserToOrderColumns = true;
-            this.dgCensus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgCensus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCensus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCensus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FamilyID,
             this.Position,
-            this.Ind_ID,
+            this.IndividualID,
             this.CensusLoc,
             this.CensusName,
             this.Age,
@@ -287,12 +287,12 @@
             this.Position.Visible = false;
             this.Position.Width = 5;
             // 
-            // Ind_ID
+            // IndividualID
             // 
-            this.Ind_ID.DataPropertyName = "Ind_ID";
-            this.Ind_ID.HeaderText = "Ind. ID";
-            this.Ind_ID.Name = "Ind_ID";
-            this.Ind_ID.ReadOnly = true;
+            this.IndividualID.DataPropertyName = "IndividualID";
+            this.IndividualID.HeaderText = "Ind. ID";
+            this.IndividualID.Name = "IndividualID";
+            this.IndividualID.ReadOnly = true;
             // 
             // CensusLoc
             // 
@@ -426,7 +426,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuViewFacts;
         private System.Windows.Forms.DataGridViewTextBoxColumn FamilyID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Position;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ind_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
         private System.Windows.Forms.DataGridViewTextBoxColumn CensusLoc;
         private System.Windows.Forms.DataGridViewTextBoxColumn CensusName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Age;

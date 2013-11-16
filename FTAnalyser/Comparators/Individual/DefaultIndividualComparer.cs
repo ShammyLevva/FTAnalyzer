@@ -10,7 +10,7 @@ namespace FTAnalyzer
 
         public override int Compare(IDisplayIndividual x, IDisplayIndividual y)
         {
-            return x.Ind_ID.CompareTo(y.Ind_ID);
+            return x.IndividualID.CompareTo(y.IndividualID);
         }
     }
 }

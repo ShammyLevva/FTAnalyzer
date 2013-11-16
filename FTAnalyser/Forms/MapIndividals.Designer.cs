@@ -48,7 +48,7 @@
             this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ind_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Relaton = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeOfFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -162,15 +162,15 @@
             this.dgIndividuals.AllowUserToAddRows = false;
             this.dgIndividuals.AllowUserToDeleteRows = false;
             this.dgIndividuals.AllowUserToOrderColumns = true;
-            this.dgIndividuals.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgIndividuals.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgIndividuals.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FactIcon,
             this.FactLocation,
-            this.Ind_ID,
+            this.IndividualID,
             this.FactName,
             this.Relaton,
             this.TypeOfFact,
@@ -251,15 +251,15 @@
             this.FactLocation.ReadOnly = true;
             this.FactLocation.Width = 300;
             // 
-            // Ind_ID
+            // IndividualID
             // 
-            this.Ind_ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Ind_ID.DataPropertyName = "Ind_ID";
-            this.Ind_ID.HeaderText = "Ind_ID";
-            this.Ind_ID.MinimumWidth = 50;
-            this.Ind_ID.Name = "Ind_ID";
-            this.Ind_ID.ReadOnly = true;
-            this.Ind_ID.Width = 50;
+            this.IndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.IndividualID.DataPropertyName = "IndividualID";
+            this.IndividualID.HeaderText = "Ind. ID";
+            this.IndividualID.MinimumWidth = 50;
+            this.IndividualID.Name = "IndividualID";
+            this.IndividualID.ReadOnly = true;
+            this.IndividualID.Width = 50;
             // 
             // FactName
             // 
@@ -375,7 +375,7 @@
         private System.Windows.Forms.ToolStripMenuItem editLocationToolStripMenuItem;
         private System.Windows.Forms.DataGridViewImageColumn FactIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ind_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Relaton;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeOfFact;

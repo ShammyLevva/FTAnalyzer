@@ -7,7 +7,7 @@ namespace FTAnalyzer
 {
     public interface IDisplayColourCensus
     {
-        string Ind_ID { get; }        
+        string IndividualID { get; }        
         string Forenames { get; }           
         string Surname { get; }
         string Relation { get; }

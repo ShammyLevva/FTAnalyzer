@@ -201,7 +201,7 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string indID = (string)dgIndividuals.CurrentRow.Cells["Ind_ID"].Value;
+                string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
                 Individual ind = FamilyTree.Instance.GetIndividual(indID);
                 Facts factForm = new Facts(ind);
                 factForm.Show();
@@ -249,7 +249,7 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string indID = (string)dgIndividuals.CurrentRow.Cells["Ind_ID"].Value;
+                string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
                 Individual ind = FamilyTree.Instance.GetIndividual(indID);
                 Facts factForm = new Facts(ind);
                 MainForm.DisposeDuplicateForms(factForm);

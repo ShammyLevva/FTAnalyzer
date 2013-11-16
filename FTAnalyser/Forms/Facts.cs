@@ -42,9 +42,9 @@ namespace FTAnalyzer.Forms
                 if(f.FactErrorLevel != Fact.FactError.WARNINGALLOW)
                     facts.Add(new DisplayFact(individual, individual.Name, f));
             }
-            this.Text = "Facts Report for " + individual.Ind_ID + ": " + individual.Name;
+            this.Text = "Facts Report for " + individual.IndividualID + ": " + individual.Name;
             SetupFacts();
-            dgFacts.Columns["Ind_ID"].Visible = false;
+            dgFacts.Columns["IndividualID"].Visible = false;
         }
 
         public Facts(Family family)
@@ -56,7 +56,7 @@ namespace FTAnalyzer.Forms
                 facts.Add(f);
             this.Text = "Facts Report for " + family.FamilyRef;
             SetupFacts();
-            dgFacts.Columns["Ind_ID"].Visible = true;
+            dgFacts.Columns["IndividualID"].Visible = true;
         }
 
         private void SetupFacts()

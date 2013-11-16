@@ -23,7 +23,7 @@ namespace FTAnalyzer
         private Individual individual;
         public Image Icon { get; private set; }
         public string ErrorType { get; private set; }
-        public string Ind_ID { get { return individual.IndividualID; } }
+        public string IndividualID { get { return individual.IndividualID; } }
         public string Individual { get { return individual.Name; } }
         public string Description { get; private set; }
         public FactDate Born { get { return individual.BirthDate; } }

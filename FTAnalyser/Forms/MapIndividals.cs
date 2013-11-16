@@ -41,7 +41,7 @@ namespace FTAnalyzer
 
         private void ResetTable()
         {
-            dgIndividuals.Sort(dgIndividuals.Columns["Ind_ID"], ListSortDirection.Ascending);
+            dgIndividuals.Sort(dgIndividuals.Columns["IndividualID"], ListSortDirection.Ascending);
             dgIndividuals.AutoResizeColumns();
         }
 
@@ -87,7 +87,7 @@ namespace FTAnalyzer
 
         private void dgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            string indID = (string)dgIndividuals.CurrentRow.Cells["Ind_ID"].Value;
+            string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
             Individual ind = ft.GetIndividual(indID);
             Facts factForm = new Facts(ind);
             MainForm.DisposeDuplicateForms(factForm);

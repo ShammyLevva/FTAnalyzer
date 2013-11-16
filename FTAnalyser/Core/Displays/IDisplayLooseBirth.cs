@@ -7,7 +7,7 @@ namespace FTAnalyzer
 {
     public interface IDisplayLooseBirth
     {
-        string Ind_ID { get; }
+        string IndividualID { get; }
         string Forenames { get; }
         string Surname { get; }
         FactDate BirthDate { get; }

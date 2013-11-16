@@ -238,11 +238,6 @@ namespace FTAnalyzer
             get { return this.locations; }
         }
 
-        public string Ind_ID
-        {
-            get { return this.IndividualID; }
-        }
-
         public string Alias
         {
             get { return this.alias; }

@@ -200,12 +200,12 @@ namespace FTAnalyzer.Forms
                         IDisplayColourCensus person = (IDisplayColourCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
                         int censusYear = (1841 + (e.ColumnIndex - c1841ColumnIndex) * 10);
                         string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
-                        ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.Ind_ID), cbCensusSearchProvider.SelectedIndex);
+                        ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
                     }
                 }
                 else if (e.ColumnIndex >= 0)
                 {
-                    string indID = (string)dgReportSheet.CurrentRow.Cells["Ind_ID"].Value;
+                    string indID = (string)dgReportSheet.CurrentRow.Cells["IndividualID"].Value;
                     Individual ind = ft.GetIndividual(indID);
                     Facts factForm = new Facts(ind);
                     factForm.Show();
@@ -311,7 +311,7 @@ namespace FTAnalyzer.Forms
             if (dgReportSheet.CurrentRow != null)
             {
                 IDisplayColourCensus ds = (IDisplayColourCensus)dgReportSheet.CurrentRow.DataBoundItem;
-                Individual ind = FamilyTree.Instance.GetIndividual(ds.Ind_ID);
+                Individual ind = FamilyTree.Instance.GetIndividual(ds.IndividualID);
                 Facts factForm = new Facts(ind);
                 MainForm.DisposeDuplicateForms(factForm);
                 factForm.Show();

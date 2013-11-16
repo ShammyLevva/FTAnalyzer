@@ -266,7 +266,7 @@ namespace FTAnalyzer
                 {
                     SortableBindingList<IDisplayIndividual> list = ft.AllDisplayIndividuals;
                     dgIndividuals.DataSource = list;
-                    dgIndividuals.Sort(dgIndividuals.Columns["Ind_ID"], ListSortDirection.Ascending);
+                    dgIndividuals.Sort(dgIndividuals.Columns["IndividualID"], ListSortDirection.Ascending);
                     dgIndividuals.Focus();
                     mnuPrint.Enabled = true;
                     tsCountLabel.Text = Properties.Messages.Count + list.Count;
@@ -945,7 +945,7 @@ namespace FTAnalyzer
             Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
             if (ind != null)
             {
-                ft.SetRelations(ind.Ind_ID);
+                ft.SetRelations(ind.IndividualID);
                 dgIndividuals.Refresh();
                 MessageBox.Show("Root person set as " + ind.Name + "\n\n" + ft.PrintRelationCount());
             }
@@ -1171,7 +1171,7 @@ namespace FTAnalyzer
             {
                 if (hti.RowIndex >= 0 && hti.ColumnIndex >= 0)
                 {
-                    string indID = (string)dgIndividuals.CurrentRow.Cells["Ind_ID"].Value;
+                    string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
                     Individual ind = ft.GetIndividual(indID);
                     Facts factForm = new Facts(ind);
                     DisposeDuplicateForms(factForm);
@@ -1396,31 +1396,31 @@ namespace FTAnalyzer
         private void dgDataErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgDataErrors.CurrentRow.Cells["Ind_ID"].Value);
+                ShowFacts((string)dgDataErrors.CurrentRow.Cells["IndividualID"].Value);
         }
 
         private void dgLooseDeaths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgLooseDeaths.CurrentRow.Cells["Ind_ID"].Value);
+                ShowFacts((string)dgLooseDeaths.CurrentRow.Cells["IndividualID"].Value);
         }
 
         private void dgLooseBirths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgLooseBirths.CurrentRow.Cells["Ind_ID"].Value);
+                ShowFacts((string)dgLooseBirths.CurrentRow.Cells["IndividualID"].Value);
         }
 
         private void dgTreeTops_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgTreeTops.CurrentRow.Cells["Ind_ID"].Value);
+                ShowFacts((string)dgTreeTops.CurrentRow.Cells["IndividualID"].Value);
         }
 
         private void dgWarDead_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgWarDead.CurrentRow.Cells["Ind_ID"].Value);
+                ShowFacts((string)dgWarDead.CurrentRow.Cells["IndividualID"].Value);
         }
 
         private void ShowFacts(string indID)
@@ -1693,7 +1693,7 @@ namespace FTAnalyzer
 
         private void dgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            string indID = (string)dgIndividuals.CurrentRow.Cells["Ind_ID"].Value;
+            string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
             Individual ind = ft.GetIndividual(indID);
             Facts factForm = new Facts(ind);
             DisposeDuplicateForms(factForm);
@@ -1724,6 +1724,11 @@ namespace FTAnalyzer
         {
             this.Height = 561;
             this.Width = 955;
+        }
+
+        private void factReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

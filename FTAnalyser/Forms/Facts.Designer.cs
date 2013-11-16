@@ -42,7 +42,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Ind_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeOfFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -143,7 +143,7 @@
             this.dgFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FactIcon,
-            this.Ind_ID,
+            this.IndividualID,
             this.FactName,
             this.TypeOfFact,
             this.FactDate,
@@ -196,14 +196,14 @@
             this.FactIcon.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.FactIcon.Width = 20;
             // 
-            // Ind_ID
+            // IndividualID
             // 
-            this.Ind_ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Ind_ID.DataPropertyName = "Ind_ID";
-            this.Ind_ID.HeaderText = "Ind ID";
-            this.Ind_ID.Name = "Ind_ID";
-            this.Ind_ID.ReadOnly = true;
-            this.Ind_ID.Width = 50;
+            this.IndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.IndividualID.DataPropertyName = "IndividualID";
+            this.IndividualID.HeaderText = "Ind ID";
+            this.IndividualID.Name = "IndividualID";
+            this.IndividualID.ReadOnly = true;
+            this.IndividualID.Width = 50;
             // 
             // FactName
             // 
@@ -310,7 +310,7 @@
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel tsRecords;
         private System.Windows.Forms.DataGridViewImageColumn FactIcon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ind_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactName;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeOfFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactDate;

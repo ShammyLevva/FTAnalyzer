@@ -36,22 +36,23 @@ namespace FTAnalyzer.Forms
             this.splitContainerFacts = new System.Windows.Forms.SplitContainer();
             this.splitContainerMap = new System.Windows.Forms.SplitContainer();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
-            this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SortedName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GeoLocationCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ctxmnuSelectOthers = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addAllFamilyMembersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectAllAncestorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectAllDescendantsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.txtCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgFacts = new System.Windows.Forms.DataGridView();
+            this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SortedName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GeoLocationCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Ind_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FactsIndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeOfFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,7 +64,6 @@ namespace FTAnalyzer.Forms
             this.GoogleResultTypes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SourceList = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFacts)).BeginInit();
             this.splitContainerFacts.Panel1.SuspendLayout();
             this.splitContainerFacts.Panel2.SuspendLayout();
@@ -139,42 +139,6 @@ namespace FTAnalyzer.Forms
             this.dgIndividuals.TabIndex = 0;
             this.dgIndividuals.SelectionChanged += new System.EventHandler(this.dgIndividuals_SelectionChanged);
             // 
-            // IndividualID
-            // 
-            this.IndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.IndividualID.DataPropertyName = "IndividualID";
-            this.IndividualID.HeaderText = "Ind_ID";
-            this.IndividualID.MinimumWidth = 40;
-            this.IndividualID.Name = "IndividualID";
-            this.IndividualID.ReadOnly = true;
-            this.IndividualID.Width = 40;
-            // 
-            // SortedName
-            // 
-            this.SortedName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.SortedName.DataPropertyName = "SortedName";
-            this.SortedName.HeaderText = "Name";
-            this.SortedName.MinimumWidth = 50;
-            this.SortedName.Name = "SortedName";
-            this.SortedName.ReadOnly = true;
-            this.SortedName.Width = 130;
-            // 
-            // BirthDate
-            // 
-            this.BirthDate.DataPropertyName = "BirthDate";
-            this.BirthDate.HeaderText = "Date of Birth";
-            this.BirthDate.Name = "BirthDate";
-            this.BirthDate.ReadOnly = true;
-            // 
-            // GeoLocationCount
-            // 
-            this.GeoLocationCount.DataPropertyName = "GeoLocationCount";
-            this.GeoLocationCount.HeaderText = "Facts";
-            this.GeoLocationCount.MinimumWidth = 37;
-            this.GeoLocationCount.Name = "GeoLocationCount";
-            this.GeoLocationCount.ReadOnly = true;
-            this.GeoLocationCount.Width = 37;
-            // 
             // ctxmnuSelectOthers
             // 
             this.ctxmnuSelectOthers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -205,6 +169,13 @@ namespace FTAnalyzer.Forms
             this.selectAllDescendantsToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
             this.selectAllDescendantsToolStripMenuItem.Text = "Select all Descendants";
             this.selectAllDescendantsToolStripMenuItem.Click += new System.EventHandler(this.selectAllDescendantsToolStripMenuItem_Click);
+            // 
+            // selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem
+            // 
+            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Name = "selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem";
+            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Text = "Select all Relations (all of above)";
+            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Click += new System.EventHandler(this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem_Click);
             // 
             // linkLabel1
             // 
@@ -272,7 +243,7 @@ namespace FTAnalyzer.Forms
             this.dgFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FactIcon,
-            this.Ind_ID,
+            this.FactsIndividualID,
             this.FactName,
             this.TypeOfFact,
             this.FactDate,
@@ -303,6 +274,42 @@ namespace FTAnalyzer.Forms
             this.dgFacts.TabIndex = 3;
             this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFacts_CellDoubleClick);
             // 
+            // IndividualID
+            // 
+            this.IndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.IndividualID.DataPropertyName = "IndividualID";
+            this.IndividualID.HeaderText = "Ind. ID";
+            this.IndividualID.MinimumWidth = 40;
+            this.IndividualID.Name = "IndividualID";
+            this.IndividualID.ReadOnly = true;
+            this.IndividualID.Width = 40;
+            // 
+            // SortedName
+            // 
+            this.SortedName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.SortedName.DataPropertyName = "SortedName";
+            this.SortedName.HeaderText = "Name";
+            this.SortedName.MinimumWidth = 50;
+            this.SortedName.Name = "SortedName";
+            this.SortedName.ReadOnly = true;
+            this.SortedName.Width = 130;
+            // 
+            // BirthDate
+            // 
+            this.BirthDate.DataPropertyName = "BirthDate";
+            this.BirthDate.HeaderText = "Date of Birth";
+            this.BirthDate.Name = "BirthDate";
+            this.BirthDate.ReadOnly = true;
+            // 
+            // GeoLocationCount
+            // 
+            this.GeoLocationCount.DataPropertyName = "GeoLocationCount";
+            this.GeoLocationCount.HeaderText = "Facts";
+            this.GeoLocationCount.MinimumWidth = 37;
+            this.GeoLocationCount.Name = "GeoLocationCount";
+            this.GeoLocationCount.ReadOnly = true;
+            this.GeoLocationCount.Width = 37;
+            // 
             // FactIcon
             // 
             this.FactIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -314,14 +321,14 @@ namespace FTAnalyzer.Forms
             this.FactIcon.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.FactIcon.Width = 20;
             // 
-            // Ind_ID
+            // FactsIndividualID
             // 
-            this.Ind_ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Ind_ID.DataPropertyName = "Ind_ID";
-            this.Ind_ID.HeaderText = "Ind ID";
-            this.Ind_ID.Name = "Ind_ID";
-            this.Ind_ID.ReadOnly = true;
-            this.Ind_ID.Width = 50;
+            this.FactsIndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.FactsIndividualID.DataPropertyName = "IndividualID";
+            this.FactsIndividualID.HeaderText = "Ind. ID";
+            this.FactsIndividualID.Name = "FactsIndividualID";
+            this.FactsIndividualID.ReadOnly = true;
+            this.FactsIndividualID.Width = 50;
             // 
             // FactName
             // 
@@ -430,13 +437,6 @@ namespace FTAnalyzer.Forms
             this.SourceList.ReadOnly = true;
             this.SourceList.Width = 250;
             // 
-            // selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem
-            // 
-            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Name = "selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem";
-            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
-            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Text = "Select all Relations (all of above)";
-            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Click += new System.EventHandler(this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem_Click);
-            // 
             // LifeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -475,8 +475,19 @@ namespace FTAnalyzer.Forms
         private SharpMap.Forms.MapBox mapBox1;
         private SharpMap.Forms.ToolBar.MapZoomToolStrip mapZoomToolStrip;
         private System.Windows.Forms.DataGridView dgFacts;
+        private System.Windows.Forms.ContextMenuStrip ctxmnuSelectOthers;
+        private System.Windows.Forms.ToolStripMenuItem addAllFamilyMembersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem selectAllAncestorsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem selectAllDescendantsToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel txtCount;
+        private System.Windows.Forms.ToolStripMenuItem selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SortedName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BirthDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GeoLocationCount;
         private System.Windows.Forms.DataGridViewImageColumn FactIcon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ind_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FactsIndividualID;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactName;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeOfFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactDate;
@@ -488,16 +499,5 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn GoogleResultTypes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;
-        private System.Windows.Forms.ContextMenuStrip ctxmnuSelectOthers;
-        private System.Windows.Forms.ToolStripMenuItem addAllFamilyMembersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem selectAllAncestorsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem selectAllDescendantsToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SortedName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BirthDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GeoLocationCount;
-        private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel txtCount;
-        private System.Windows.Forms.ToolStripMenuItem selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem;
     }
 }

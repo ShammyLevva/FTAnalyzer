@@ -180,21 +180,21 @@ namespace FTAnalyzer.Forms
                         IDisplayColourBMD person = (IDisplayColourBMD)dgBMDReportSheet.Rows[e.RowIndex].DataBoundItem;
                         if (e.ColumnIndex == birthColumnIndex || e.ColumnIndex == birthColumnIndex + 1)
                         {
-                            ft.SearchBMD(FamilyTree.SearchType.BIRTH, ft.GetIndividual(person.Ind_ID), cbBMDSearchProvider.SelectedIndex);
+                            ft.SearchBMD(FamilyTree.SearchType.BIRTH, ft.GetIndividual(person.IndividualID), cbBMDSearchProvider.SelectedIndex);
                         }
                         else if (e.ColumnIndex >= birthColumnIndex + 2 && e.ColumnIndex <= birthColumnIndex + 5)
                         {
-                            ft.SearchBMD(FamilyTree.SearchType.MARRIAGE, ft.GetIndividual(person.Ind_ID), cbBMDSearchProvider.SelectedIndex);
+                            ft.SearchBMD(FamilyTree.SearchType.MARRIAGE, ft.GetIndividual(person.IndividualID), cbBMDSearchProvider.SelectedIndex);
                         }
                         else if (e.ColumnIndex == burialColumnIndex || e.ColumnIndex == burialColumnIndex - 1)
                         {
-                            ft.SearchBMD(FamilyTree.SearchType.DEATH, ft.GetIndividual(person.Ind_ID), cbBMDSearchProvider.SelectedIndex);
+                            ft.SearchBMD(FamilyTree.SearchType.DEATH, ft.GetIndividual(person.IndividualID), cbBMDSearchProvider.SelectedIndex);
                         }
                     }
                 }
                 else if (e.ColumnIndex >= 0)
                 {
-                    string indID = (string)dgBMDReportSheet.CurrentRow.Cells["Ind_ID"].Value;
+                    string indID = (string)dgBMDReportSheet.CurrentRow.Cells["IndividualID"].Value;
                     Individual ind = ft.GetIndividual(indID);
                     Facts factForm = new Facts(ind);
                     factForm.Show();
@@ -308,7 +308,7 @@ namespace FTAnalyzer.Forms
             if (dgBMDReportSheet.CurrentRow != null)
             {
                 IDisplayColourBMD ds = (IDisplayColourBMD)dgBMDReportSheet.CurrentRow.DataBoundItem;
-                Individual ind = FamilyTree.Instance.GetIndividual(ds.Ind_ID);
+                Individual ind = FamilyTree.Instance.GetIndividual(ds.IndividualID);
                 Facts factForm = new Facts(ind);
                 MainForm.DisposeDuplicateForms(factForm);
                 factForm.Show();

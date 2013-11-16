@@ -186,6 +186,7 @@
             this.tabSelector = new System.Windows.Forms.TabControl();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.factReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -409,7 +410,8 @@
             // 
             this.mnuReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuChildAgeProfiles,
-            this.mnuOlderParents});
+            this.mnuOlderParents,
+            this.factReportToolStripMenuItem});
             this.mnuReports.Name = "mnuReports";
             this.mnuReports.Size = new System.Drawing.Size(59, 20);
             this.mnuReports.Text = "Reports";
@@ -1825,6 +1827,13 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // factReportToolStripMenuItem
+            // 
+            this.factReportToolStripMenuItem.Name = "factReportToolStripMenuItem";
+            this.factReportToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.factReportToolStripMenuItem.Text = "Fact Report";
+            this.factReportToolStripMenuItem.Click += new System.EventHandler(this.factReportToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -2058,6 +2067,7 @@
         private System.Windows.Forms.ToolStripMenuItem buildLocationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuLifelines;
         private System.Windows.Forms.ToolStripMenuItem resetToDefaultFormSizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem factReportToolStripMenuItem;
     }
 }
 

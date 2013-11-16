@@ -47,7 +47,7 @@ namespace FTAnalyzer.Mapping
 
         public FactDate FactDate { get { return Fact.FactDate; } }
 
-        public string Ind_ID { get { return Individual.Ind_ID; } }
+        public string IndividualID { get { return Individual.IndividualID; } }
 
         public string Name { get { return Individual.Name; } }
 
