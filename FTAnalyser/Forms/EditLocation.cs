@@ -117,7 +117,10 @@ namespace FTAnalyzer.Forms
                         MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 }
                 if (result == DialogResult.Cancel)
+                {
                     e.Cancel = true;
+                    FactLocation.CopyLocationDetails(originalLocation, location);
+                }
                 else if (result == DialogResult.Yes)
                 {
                     UpdateDatabase();

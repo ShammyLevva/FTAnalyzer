@@ -128,8 +128,11 @@ namespace FTAnalyzer.Forms
             // 
             // txtSearch
             // 
+            this.txtSearch.BackColor = System.Drawing.SystemColors.Window;
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(250, 25);
+            this.txtSearch.ToolTipText = "Enter text to move pin to location found by Google";
             this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             // 
             // btnSearch
