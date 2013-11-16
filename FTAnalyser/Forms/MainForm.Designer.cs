@@ -56,6 +56,7 @@
             this.mnuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuChildAgeProfiles = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOlderParents = new System.Windows.Forms.ToolStripMenuItem();
+            this.factReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuIndividualsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFamiliesToExcel = new System.Windows.Forms.ToolStripMenuItem();
@@ -186,7 +187,6 @@
             this.tabSelector = new System.Windows.Forms.TabControl();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.factReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -430,6 +430,13 @@
             this.mnuOlderParents.Text = "Older Parents";
             this.mnuOlderParents.Click += new System.EventHandler(this.olderParentsToolStripMenuItem_Click);
             // 
+            // factReportToolStripMenuItem
+            // 
+            this.factReportToolStripMenuItem.Name = "factReportToolStripMenuItem";
+            this.factReportToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.factReportToolStripMenuItem.Text = "Fact Report";
+            this.factReportToolStripMenuItem.Click += new System.EventHandler(this.factReportToolStripMenuItem_Click);
+            // 
             // mnuExport
             // 
             this.mnuExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -634,9 +641,9 @@
             // 
             this.dgDataErrors.AllowUserToAddRows = false;
             this.dgDataErrors.AllowUserToDeleteRows = false;
-            this.dgDataErrors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgDataErrors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -766,16 +773,16 @@
             // 
             this.dgWarDead.AllowUserToAddRows = false;
             this.dgWarDead.AllowUserToDeleteRows = false;
-            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgWarDead.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgWarDead.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgWarDead.Location = new System.Drawing.Point(0, 110);
             this.dgWarDead.Name = "dgWarDead";
             this.dgWarDead.ReadOnly = true;
             this.dgWarDead.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgWarDead.Size = new System.Drawing.Size(931, 292);
+            this.dgWarDead.Size = new System.Drawing.Size(931, 332);
             this.dgWarDead.TabIndex = 29;
             this.dgWarDead.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgWarDead_CellDoubleClick);
             // 
@@ -832,16 +839,16 @@
             // 
             this.dgTreeTops.AllowUserToAddRows = false;
             this.dgTreeTops.AllowUserToDeleteRows = false;
-            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgTreeTops.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgTreeTops.Location = new System.Drawing.Point(0, 110);
             this.dgTreeTops.Name = "dgTreeTops";
             this.dgTreeTops.ReadOnly = true;
             this.dgTreeTops.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgTreeTops.Size = new System.Drawing.Size(931, 292);
+            this.dgTreeTops.Size = new System.Drawing.Size(931, 332);
             this.dgTreeTops.TabIndex = 28;
             this.dgTreeTops.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTreeTops_CellDoubleClick);
             // 
@@ -1081,7 +1088,7 @@
             this.ckbShowLCEntered.Size = new System.Drawing.Size(415, 17);
             this.ckbShowLCEntered.TabIndex = 10;
             this.ckbShowLCEntered.Text = "Show already entered to Lost Cousins (unticked = show those to yet to be entered)" +
-                "";
+    "";
             this.ckbShowLCEntered.UseVisualStyleBackColor = true;
             // 
             // btnLC1841EW
@@ -1734,9 +1741,9 @@
             // 
             // rtbOutput
             // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbOutput.Location = new System.Drawing.Point(3, 96);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
@@ -1795,9 +1802,9 @@
             // 
             // tabSelector
             // 
-            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabSelector.Controls.Add(this.tabDisplayProgress);
             this.tabSelector.Controls.Add(this.tabIndividuals);
             this.tabSelector.Controls.Add(this.tabFamilies);
@@ -1826,13 +1833,6 @@
             // 
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
-            // 
-            // factReportToolStripMenuItem
-            // 
-            this.factReportToolStripMenuItem.Name = "factReportToolStripMenuItem";
-            this.factReportToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.factReportToolStripMenuItem.Text = "Fact Report";
-            this.factReportToolStripMenuItem.Click += new System.EventHandler(this.factReportToolStripMenuItem_Click);
             // 
             // MainForm
             // 
