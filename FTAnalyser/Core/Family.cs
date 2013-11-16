@@ -477,43 +477,49 @@ namespace FTAnalyzer
             get
             {
                 List<DisplayFact> results = new List<DisplayFact>();
-                // add the family facts then the facts from each individual
-                //Facts.Select(f => results.Add(new DisplayFact(null, f)));
-                //if (Husband != null)
-                //    Husband.Facts.Select(f => results.Add(new DisplayFact(Husband, f)));
-                //if (Wife != null)
-                //    results.Add(Wife.Facts);
-                //foreach (Individual c in Children)
-                //    results.Add(c.Facts);
-                //return results.SelectMany(x => x);
-                string name;
-                if(Husband == null)
-                    if(Wife == null)
-                        name = string.Empty;
+                string surname, forenames;
+                if (Husband == null)
+                {
+                    if (Wife == null)
+                    {
+                        surname = string.Empty;
+                        forenames = string.Empty;
+                    }
                     else
-                        name = Wife.Name;
+                    {
+                        surname = Wife.Surname;
+                        forenames = Wife.Forenames;
+                    }
+                }
                 else
-                    if(Wife == null)
-                        name = Husband.Name;
+                {
+                    if (Wife == null)
+                    {
+                        surname = Husband.Surname;
+                        forenames = Husband.Forenames;
+                    }
                     else
-                        name = Husband.Name + " & " + Wife.Name;
-
+                    {
+                        surname = Husband.Surname;
+                        forenames = Husband.Forenames + " & " + Wife.Forenames;
+                    }
+                }
                 foreach(Fact f in Facts)
-                    results.Add(new DisplayFact(null, name, f));
+                    results.Add(new DisplayFact(null, surname, forenames, f));
                 if (Husband != null)
                     foreach(Fact f in Husband.PersonalFacts)
-                        results.Add(new DisplayFact(Husband, Husband.Name, f));
+                        results.Add(new DisplayFact(Husband, f));
                 if (Wife != null)
                     foreach (Fact f in Wife.PersonalFacts)
-                        results.Add(new DisplayFact(Wife, Wife.Name, f));
-                foreach (Individual c in Children)
+                        results.Add(new DisplayFact(Wife, f));
+                foreach (Individual child in Children)
                 {
-                    foreach (Fact f in c.GetFacts(Fact.BIRTH))
-                        results.Add(new DisplayFact(c, c.Name, f));
-                    foreach (Fact f in c.GetFacts(Fact.BAPTISM))
-                        results.Add(new DisplayFact(c, c.Name, f));
-                    foreach (Fact f in c.GetFacts(Fact.CHRISTENING))
-                        results.Add(new DisplayFact(c, c.Name, f));
+                    foreach (Fact f in child.GetFacts(Fact.BIRTH))
+                        results.Add(new DisplayFact(child, f));
+                    foreach (Fact f in child.GetFacts(Fact.BAPTISM))
+                        results.Add(new DisplayFact(child, f));
+                    foreach (Fact f in child.GetFacts(Fact.CHRISTENING))
+                        results.Add(new DisplayFact(child, f));
                 }
                 return results;
             }

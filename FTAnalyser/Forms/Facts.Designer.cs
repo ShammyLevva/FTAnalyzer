@@ -43,7 +43,8 @@
             this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Forenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeOfFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -143,7 +144,8 @@
             this.dgFacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FactIcon,
             this.IndividualID,
-            this.FactName,
+            this.Forenames,
+            this.Surname,
             this.TypeOfFact,
             this.FactDate,
             this.FactLocation,
@@ -161,6 +163,7 @@
             this.dgFacts.Location = new System.Drawing.Point(0, 25);
             this.dgFacts.Name = "dgFacts";
             this.dgFacts.ReadOnly = true;
+            this.dgFacts.RowHeadersWidth = 4;
             this.dgFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgFacts.ShowEditingIcon = false;
             this.dgFacts.Size = new System.Drawing.Size(857, 337);
@@ -204,15 +207,24 @@
             this.IndividualID.ReadOnly = true;
             this.IndividualID.Width = 50;
             // 
-            // FactName
+            // Forenames
             // 
-            this.FactName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.FactName.DataPropertyName = "Name";
-            this.FactName.HeaderText = "Name";
-            this.FactName.MinimumWidth = 150;
-            this.FactName.Name = "FactName";
-            this.FactName.ReadOnly = true;
-            this.FactName.Width = 150;
+            this.Forenames.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Forenames.DataPropertyName = "Forenames";
+            this.Forenames.HeaderText = "Forenames";
+            this.Forenames.MinimumWidth = 100;
+            this.Forenames.Name = "Forenames";
+            this.Forenames.ReadOnly = true;
+            // 
+            // Surname
+            // 
+            this.Surname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Surname.DataPropertyName = "Surname";
+            this.Surname.HeaderText = "Surname";
+            this.Surname.MinimumWidth = 75;
+            this.Surname.Name = "Surname";
+            this.Surname.ReadOnly = true;
+            this.Surname.Width = 75;
             // 
             // TypeOfFact
             // 
@@ -310,7 +322,8 @@
         private System.Windows.Forms.ToolStripStatusLabel tsRecords;
         private System.Windows.Forms.DataGridViewImageColumn FactIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FactName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Forenames;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Surname;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeOfFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactLocation;

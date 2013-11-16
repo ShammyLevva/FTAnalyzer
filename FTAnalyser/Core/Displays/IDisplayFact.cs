@@ -10,7 +10,8 @@ namespace FTAnalyzer
     {
         Image Icon { get; }
         string IndividualID { get; }
-        string Name { get; }
+        string Surname { get; }
+        string Forenames { get; }
         string TypeOfFact { get; }
         FactDate FactDate { get; }
         FactLocation Location { get; }

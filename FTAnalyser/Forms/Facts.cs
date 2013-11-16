@@ -19,12 +19,14 @@ namespace FTAnalyzer.Forms
         private FamilyTree ft = FamilyTree.Instance;
         private SortableBindingList<IDisplayFact> facts;
         private Font italicFont;
+        private bool allFacts;
         private ReportFormHelper reportFormHelper;
 
         private Facts()
         {
             InitializeComponent();
             this.facts = new SortableBindingList<IDisplayFact>();
+            this.allFacts = false;
             dgFacts.AutoGenerateColumns = false;
             reportFormHelper = new ReportFormHelper(this.Text, dgFacts, this.ResetTable);
             italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
@@ -59,31 +61,39 @@ namespace FTAnalyzer.Forms
             this.Text = "Facts Report for all " + individuals.Count() + " individuals. Facts count: " + facts.Count;
             SetupFacts();
             dgFacts.Columns["IndividualID"].Visible = true;
+            this.allFacts = true;
         }
 
         private void AddIndividualsFacts(Individual individual)
         {
             foreach (Fact f in individual.AllFacts)
-                facts.Add(new DisplayFact(individual, individual.Name, f));
+                facts.Add(new DisplayFact(individual, f));
             foreach (Fact f in individual.ErrorFacts)
             {
                 // only add ignored and errors as allowed have are in AllFacts
                 if (f.FactErrorLevel != Fact.FactError.WARNINGALLOW)
-                    facts.Add(new DisplayFact(individual, individual.Name, f));
+                    facts.Add(new DisplayFact(individual, f));
             }
         }
 
         private void SetupFacts()
         {
             dgFacts.DataSource = facts;
+            ResetTable();
             reportFormHelper.LoadColumnLayout("FactsColumns.xml");
             tsRecords.Text = facts.Count + " Records";
         }
 
         private void ResetTable()
         {
-            dgFacts.Sort(dgFacts.Columns["FactDate"], ListSortDirection.Ascending);
-            //dgFacts.AutoResizeColumns();
+            if (allFacts)
+            {
+                dgFacts.Sort(dgFacts.Columns["FactDate"], ListSortDirection.Ascending);
+                dgFacts.Sort(dgFacts.Columns["Forenames"], ListSortDirection.Ascending);
+                dgFacts.Sort(dgFacts.Columns["Surname"], ListSortDirection.Ascending);
+            }
+            else
+                dgFacts.Sort(dgFacts.Columns["FactDate"], ListSortDirection.Ascending);
         }
 
         private void printToolStripButton_Click(object sender, EventArgs e)

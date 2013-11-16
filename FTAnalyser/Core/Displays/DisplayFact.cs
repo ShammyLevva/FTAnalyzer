@@ -9,14 +9,18 @@ namespace FTAnalyzer
     public class DisplayFact : IDisplayFact, IComparable
     {
         public Image Icon { get; private set; }
-        public string Name { get; private set; }
+        public string Surname { get; private set; }
+        public string Forenames { get; private set; }
         private Individual Ind { get; set; }
         public Fact Fact { get; set; }
-        
-        public DisplayFact(Individual ind, string name, Fact fact)
+
+
+        public DisplayFact(Individual ind, Fact fact) : this(ind, ind.Surname, ind.Forenames, fact) { }
+        public DisplayFact(Individual ind, string surname, string forenames, Fact fact)
         {
             this.Ind = ind;
-            this.Name = name;
+            this.Surname = surname;
+            this.Forenames = forenames;
             this.Fact = fact;
             this.Icon = FactImage.ErrorIcon(fact.FactErrorLevel).Icon;
         }
