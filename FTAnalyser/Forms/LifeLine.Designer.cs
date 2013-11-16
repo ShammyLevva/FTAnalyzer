@@ -81,6 +81,7 @@ namespace FTAnalyzer.Forms
             // splitContainerFacts
             // 
             this.splitContainerFacts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerFacts.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitContainerFacts.Location = new System.Drawing.Point(0, 0);
             this.splitContainerFacts.Name = "splitContainerFacts";
             this.splitContainerFacts.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -100,6 +101,7 @@ namespace FTAnalyzer.Forms
             // splitContainerMap
             // 
             this.splitContainerMap.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerMap.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainerMap.Location = new System.Drawing.Point(0, 0);
             this.splitContainerMap.Name = "splitContainerMap";
             // 
