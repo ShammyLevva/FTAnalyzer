@@ -139,7 +139,6 @@
             this.dgFacts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgFacts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FactIcon,
@@ -270,7 +269,7 @@
             this.SourceList.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.SourceList.DataPropertyName = "SourceList";
             this.SourceList.HeaderText = "Sources";
-            this.SourceList.MinimumWidth = 120;
+            this.SourceList.MinimumWidth = 300;
             this.SourceList.Name = "SourceList";
             this.SourceList.ReadOnly = true;
             // 
