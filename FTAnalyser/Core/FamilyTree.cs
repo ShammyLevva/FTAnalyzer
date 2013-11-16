@@ -1873,7 +1873,7 @@ namespace FTAnalyzer
                                 break;
                         }
                         // Set everything other than known countries to regular
-                        if (current == displayTreeRootNode || Countries.IsKnownCountry(part))
+                        if (current == displayTreeRootNode && Countries.IsKnownCountry(part))
                             child.NodeFont = boldFont;
                         else
                             child.NodeFont = regularFont;

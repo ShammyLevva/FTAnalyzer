@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.2.0.0-beta-test2";
+        public string VERSION = "3.2.0.0-beta-test3";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -29,6 +29,7 @@ namespace FTAnalyzer
         private bool stopProcessing = false;
         private string filename;
         private Font boldFont;
+        private Font normalFont;
 
         public MainForm()
         {
@@ -49,6 +50,7 @@ namespace FTAnalyzer
         private void MainForm_Load(object sender, EventArgs e)
         {
             boldFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Bold);
+            normalFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Regular);
             //GeneralSettings.UseBaptismDatesChanged += new EventHandler(Options_BaptismChanged);
             GeneralSettings.AllowEmptyLocationsChanged += new EventHandler(Options_AllowEmptyLocationsChanged);
             GeneralSettings.UseResidenceAsCensusChanged += new EventHandler(Options_UseResidenceAsCensusChanged);
@@ -1219,6 +1221,8 @@ namespace FTAnalyzer
                 string country = (string)cell.Value;
                 if (Countries.IsKnownCountry(country))
                     e.CellStyle.Font = boldFont;
+                else
+                    e.CellStyle.Font = normalFont;
             }
             else
             {
