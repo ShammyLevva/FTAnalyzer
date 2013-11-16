@@ -137,6 +137,7 @@ namespace FTAnalyzer.Forms
             this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgIndividuals.Size = new System.Drawing.Size(330, 459);
             this.dgIndividuals.TabIndex = 0;
+            this.dgIndividuals.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgIndividuals_CellToolTipTextNeeded);
             this.dgIndividuals.SelectionChanged += new System.EventHandler(this.dgIndividuals_SelectionChanged);
             // 
             // IndividualID
@@ -309,6 +310,7 @@ namespace FTAnalyzer.Forms
             this.dgFacts.Size = new System.Drawing.Size(1113, 127);
             this.dgFacts.TabIndex = 3;
             this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFacts_CellDoubleClick);
+            this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgFacts_CellToolTipTextNeeded);
             // 
             // FactIcon
             // 

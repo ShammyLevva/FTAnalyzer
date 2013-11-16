@@ -242,5 +242,25 @@ namespace FTAnalyzer.Forms
             DatabaseHelper.GeoLocationUpdated -= DatabaseHelper_GeoLocationUpdated;
             this.Dispose();
         }
+
+        private void dgIndividuals_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                Individual ind = (Individual)dgIndividuals.Rows[e.RowIndex].DataBoundItem;
+                if (ind.GeoLocationCount == 0)
+                    e.ToolTipText = ind.Name + " has no geolocated facts to show on map";
+                else
+                    e.ToolTipText = "Click to display " + ind.Name + "'s geolocated facts on the map. Right click to add their relatives";
+            }
+        }
+
+        private void dgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                e.ToolTipText = "Double click to edit location.";
+            }
+        }
     }
 }
