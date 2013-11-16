@@ -182,6 +182,8 @@ namespace FTAnalyzer
             mnuShowTimeline.Enabled = enabled;
             mnuGeocodeLocations.Enabled = enabled;
             mnuLocationsGeocodeReport.Enabled = enabled;
+            mnuLifelines.Enabled = enabled;
+            mnuFactReport.Enabled = enabled;
         }
 
         private void DisposeIndividualForms()
