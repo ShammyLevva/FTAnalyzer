@@ -18,6 +18,7 @@ namespace FTAnalyzer.Forms
     {
         private FeatureDataTable pointTable;
         private VectorLayer pointLayer;
+        private GdalRasterLayer customMapLayer;
         private FactLocation location;
         private FactLocation originalLocation;
         private FeatureDataRow pointFeature;
@@ -280,6 +281,11 @@ namespace FTAnalyzer.Forms
         {
             mapBox1.Cursor = new Cursor(Path.Combine(Application.StartupPath, @"Resources\Icons\teardrop_blue.cur"));
             iconSelected = true;
+        }
+
+        private void btnCustomMap_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

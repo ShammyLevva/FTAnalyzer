@@ -187,6 +187,7 @@ namespace FTAnalyzer.Forms
             this.btnCustomMap.Name = "btnCustomMap";
             this.btnCustomMap.Size = new System.Drawing.Size(23, 22);
             this.btnCustomMap.Text = "Enable Custom Map Overlay";
+            this.btnCustomMap.Click += new System.EventHandler(this.btnCustomMap_Click);
             // 
             // EditLocation
             // 
