@@ -175,9 +175,6 @@
     <Reference Include="SharpMap.Extensions">
       <HintPath>Resources\Lib\SharpMap.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="SharpMap.Extensions.x86">
-      <HintPath>Resources\Lib\SharpMap.Extensions.x86.dll</HintPath>
-    </Reference>
     <Reference Include="SharpMap.UI, Version=1.0.4.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Resources\Lib\SharpMap.UI.dll</HintPath>
@@ -358,6 +355,9 @@
     <Content Include="GdalConfiguration.vb" />
     <Content Include="GdalNativeConfiguration.vb" />
     <Content Include="Resources\Icons\Scroll_NoText.png" />
+    <Resource Include="Resources\Lib\SharpMap.Extensions.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

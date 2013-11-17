@@ -11,6 +11,7 @@ using GeoAPI.Geometries;
 using SharpMap.Data;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
+using System.Collections.Generic;
 
 namespace FTAnalyzer.Forms
 {
@@ -18,7 +19,7 @@ namespace FTAnalyzer.Forms
     {
         private FeatureDataTable pointTable;
         private VectorLayer pointLayer;
-        private GdalRasterLayer customMapLayer;
+        private List<GdalRasterLayer> customMapLayers;
         private FactLocation location;
         private FactLocation originalLocation;
         private FeatureDataRow pointFeature;
@@ -30,6 +31,7 @@ namespace FTAnalyzer.Forms
         public EditLocation(FactLocation location)
         {
             InitializeComponent();
+            customMapLayers = new List<GdalRasterLayer>();
             mnuMapStyle.Setup(linkLabel1, mapBox1);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
@@ -285,7 +287,30 @@ namespace FTAnalyzer.Forms
 
         private void btnCustomMap_Click(object sender, EventArgs e)
         {
+            RemoveCustomMapLayers();
+            customMapLayers = btnCustomMap.Checked ? LoadGeoReferencedImages() : new List<GdalRasterLayer>();
+        }
 
+        private void RemoveCustomMapLayers()
+        {
+            if (customMapLayers.Count > 0)
+            {
+                foreach (GdalRasterLayer layer in customMapLayers)
+                    mapBox1.Map.Layers.Remove(layer);
+            }
+        }
+
+        private List<GdalRasterLayer> LoadGeoReferencedImages()
+        {
+            List<GdalRasterLayer> layers = new List<GdalRasterLayer>();
+            string[] files = Directory.GetFiles(Properties.MappingSettings.Default.CustomMapPath, "*.tif", SearchOption.TopDirectoryOnly);
+            foreach (string filename in files)
+            {
+                GdalRasterLayer layer = new GdalRasterLayer(filename, filename);
+                layers.Add(layer);
+                mapBox1.Map.Layers.Add(layer);
+            }
+            return layers;
         }
     }
 }
