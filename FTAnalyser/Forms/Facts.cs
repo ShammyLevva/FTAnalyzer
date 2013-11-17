@@ -56,12 +56,12 @@ namespace FTAnalyzer.Forms
         public Facts(IEnumerable<Individual> individuals)
             : this()
         {
+            this.allFacts = true;
             foreach (Individual ind in individuals)
                 AddIndividualsFacts(ind);
             this.Text = "Facts Report for all " + individuals.Count() + " individuals. Facts count: " + facts.Count;
             SetupFacts();
             dgFacts.Columns["IndividualID"].Visible = true;
-            this.allFacts = true;
         }
 
         private void AddIndividualsFacts(Individual individual)
@@ -79,7 +79,6 @@ namespace FTAnalyzer.Forms
         private void SetupFacts()
         {
             dgFacts.DataSource = facts;
-            ResetTable();
             reportFormHelper.LoadColumnLayout("FactsColumns.xml");
             tsRecords.Text = facts.Count + " Records";
         }
