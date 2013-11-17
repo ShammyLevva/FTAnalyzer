@@ -846,7 +846,15 @@ namespace FTAnalyzer
             if (IsLostCousinsEntered(census))
                 return 4; // census + Lost cousins entered - green
             else
-                return 2; // census entered LC not entered - yellow
+            {
+                // we have a census in a LC year but no LC event check if country is a LC country.
+                int year = census.StartDate.Year;
+                if(year == 1841 && IsCensusDone(CensusDate.EWCENSUS1841, false))
+                    return 2; // census entered LC not entered - yellow
+                if(year == 1911 && (IsCensusDone(CensusDate.EWCENSUS1911, false) || IsCensusDone(CensusDate.IRELANDCENSUS1911, false)))
+                    return 2; // census entered LC not entered - yellow
+                return 3;  // census entered and LCyear but not LC country - green
+            }
         }
 
         public int C1841
