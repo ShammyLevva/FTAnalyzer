@@ -278,12 +278,13 @@
             // 
             // SourceList
             // 
-            this.SourceList.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SourceList.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.SourceList.DataPropertyName = "SourceList";
             this.SourceList.HeaderText = "Sources";
             this.SourceList.MinimumWidth = 300;
             this.SourceList.Name = "SourceList";
             this.SourceList.ReadOnly = true;
+            this.SourceList.Width = 300;
             // 
             // Facts
             // 
