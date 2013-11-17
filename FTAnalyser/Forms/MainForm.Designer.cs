@@ -188,7 +188,7 @@
             this.btnShowFacts = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtFactsSurname = new System.Windows.Forms.TextBox();
-            this.relationTypes1 = new Controls.RelationTypes();
+            this.relTypesFacts = new Controls.RelationTypes();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
@@ -1827,7 +1827,7 @@
             this.tabFacts.Controls.Add(this.btnShowFacts);
             this.tabFacts.Controls.Add(this.label3);
             this.tabFacts.Controls.Add(this.txtFactsSurname);
-            this.tabFacts.Controls.Add(this.relationTypes1);
+            this.tabFacts.Controls.Add(this.relTypesFacts);
             this.tabFacts.Location = new System.Drawing.Point(4, 22);
             this.tabFacts.Name = "tabFacts";
             this.tabFacts.Size = new System.Drawing.Size(931, 445);
@@ -1861,13 +1861,13 @@
             this.txtFactsSurname.Size = new System.Drawing.Size(201, 20);
             this.txtFactsSurname.TabIndex = 22;
             // 
-            // relationTypes1
+            // relTypesFacts
             // 
-            this.relationTypes1.Location = new System.Drawing.Point(8, 8);
-            this.relationTypes1.MarriedToDB = true;
-            this.relationTypes1.Name = "relationTypes1";
-            this.relationTypes1.Size = new System.Drawing.Size(325, 78);
-            this.relationTypes1.TabIndex = 21;
+            this.relTypesFacts.Location = new System.Drawing.Point(8, 8);
+            this.relTypesFacts.MarriedToDB = true;
+            this.relTypesFacts.Name = "relTypesFacts";
+            this.relTypesFacts.Size = new System.Drawing.Size(325, 78);
+            this.relTypesFacts.TabIndex = 21;
             // 
             // saveDatabase
             // 
@@ -2118,7 +2118,7 @@
         private System.Windows.Forms.Button btnShowFacts;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtFactsSurname;
-        private Controls.RelationTypes relationTypes1;
+        private Controls.RelationTypes relTypesFacts;
     }
 }
 

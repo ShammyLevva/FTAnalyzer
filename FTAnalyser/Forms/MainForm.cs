@@ -1735,7 +1735,7 @@ namespace FTAnalyzer
         private void btnShowFacts_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Predicate<Individual> filter = relTypesCensus.BuildFilter<Individual>(x => x.RelationType);
+            Predicate<Individual> filter = relTypesFacts.BuildFilter<Individual>(x => x.RelationType);
             if (txtSurname.Text.Length > 0)
             {
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
