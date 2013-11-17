@@ -114,6 +114,7 @@ namespace FTAnalyzer.Forms
             // If point updated and we are warning then warn
             if (pointUpdated)
             {
+                UserSavedPoint = false;
                 DialogResult result = DialogResult.Yes;
                 if (Application.UserAppDataRegistry.GetValue("Ask to update database", "True").Equals("True"))
                 {
