@@ -42,6 +42,7 @@ namespace FTAnalyzer.Forms
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnCustomMap = new System.Windows.Forms.ToolStripButton();
             this.mapZoomToolStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -63,7 +64,7 @@ namespace FTAnalyzer.Forms
             this.mapBox1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.ShowProgressUpdate = true;
-            this.mapBox1.Size = new System.Drawing.Size(754, 513);
+            this.mapBox1.Size = new System.Drawing.Size(859, 557);
             this.mapBox1.TabIndex = 9;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
@@ -79,11 +80,12 @@ namespace FTAnalyzer.Forms
             this.btnReload,
             this.labSearch,
             this.txtSearch,
-            this.btnSearch});
+            this.btnSearch,
+            this.btnCustomMap});
             this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
             this.mapZoomToolStrip.MapControl = this.mapBox1;
             this.mapZoomToolStrip.Name = "mapZoomToolStrip";
-            this.mapZoomToolStrip.Size = new System.Drawing.Size(754, 25);
+            this.mapZoomToolStrip.Size = new System.Drawing.Size(859, 25);
             this.mapZoomToolStrip.TabIndex = 10;
             this.mapZoomToolStrip.Text = "MapZoomToolStrip";
             // 
@@ -151,7 +153,7 @@ namespace FTAnalyzer.Forms
             this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.LinkArea = new System.Windows.Forms.LinkArea(0, 0);
-            this.linkLabel1.Location = new System.Drawing.Point(617, 25);
+            this.linkLabel1.Location = new System.Drawing.Point(722, 25);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(125, 13);
             this.linkLabel1.TabIndex = 15;
@@ -163,9 +165,9 @@ namespace FTAnalyzer.Forms
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 516);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 560);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(754, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(859, 22);
             this.statusStrip1.TabIndex = 11;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -176,11 +178,21 @@ namespace FTAnalyzer.Forms
             this.toolStripStatusLabel1.Text = "Left click to select pointer, move to the correct place (using zoom/pan) then rig" +
                 "ht click to place pointer in new location";
             // 
+            // btnCustomMap
+            // 
+            this.btnCustomMap.CheckOnClick = true;
+            this.btnCustomMap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnCustomMap.Image = ((System.Drawing.Image)(resources.GetObject("btnCustomMap.Image")));
+            this.btnCustomMap.ImageTransparentColor = System.Drawing.Color.White;
+            this.btnCustomMap.Name = "btnCustomMap";
+            this.btnCustomMap.Size = new System.Drawing.Size(23, 22);
+            this.btnCustomMap.Text = "Enable Custom Map Overlay";
+            // 
             // EditLocation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(754, 538);
+            this.ClientSize = new System.Drawing.Size(859, 582);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.mapBox1);
@@ -212,5 +224,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripTextBox txtSearch;
         private System.Windows.Forms.ToolStripButton btnSearch;
         private System.Windows.Forms.ToolStripButton btnEdit;
+        private System.Windows.Forms.ToolStripButton btnCustomMap;
     }
 }

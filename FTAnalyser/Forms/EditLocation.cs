@@ -35,6 +35,7 @@ namespace FTAnalyzer.Forms
             mapZoomToolStrip.Items[10].Visible = false;
             this.location = location;
             this.originalLocation = FactLocation.TEMP;
+            btnCustomMap.Visible = (Properties.MappingSettings.Default.CustomMapPath.Length > 0);
             FactLocation.CopyLocationDetails(location, originalLocation);
             this.Text = "Editing : " + location.ToString();
             iconSelected = false;
