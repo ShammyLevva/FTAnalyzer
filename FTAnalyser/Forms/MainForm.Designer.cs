@@ -56,7 +56,6 @@
             this.mnuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuChildAgeProfiles = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOlderParents = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFactReport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuIndividualsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFamiliesToExcel = new System.Windows.Forms.ToolStripMenuItem();
@@ -185,6 +184,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.pbSources = new System.Windows.Forms.ProgressBar();
             this.tabSelector = new System.Windows.Forms.TabControl();
+            this.tabFacts = new System.Windows.Forms.TabPage();
+            this.btnShowFacts = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtFactsSurname = new System.Windows.Forms.TextBox();
+            this.relationTypes1 = new Controls.RelationTypes();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
@@ -230,6 +234,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.tabDisplayProgress.SuspendLayout();
             this.tabSelector.SuspendLayout();
+            this.tabFacts.SuspendLayout();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -410,8 +415,7 @@
             // 
             this.mnuReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuChildAgeProfiles,
-            this.mnuOlderParents,
-            this.mnuFactReport});
+            this.mnuOlderParents});
             this.mnuReports.Name = "mnuReports";
             this.mnuReports.Size = new System.Drawing.Size(59, 20);
             this.mnuReports.Text = "Reports";
@@ -429,13 +433,6 @@
             this.mnuOlderParents.Size = new System.Drawing.Size(170, 22);
             this.mnuOlderParents.Text = "Older Parents";
             this.mnuOlderParents.Click += new System.EventHandler(this.olderParentsToolStripMenuItem_Click);
-            // 
-            // mnuFactReport
-            // 
-            this.mnuFactReport.Name = "mnuFactReport";
-            this.mnuFactReport.Size = new System.Drawing.Size(170, 22);
-            this.mnuFactReport.Text = "Fact Report";
-            this.mnuFactReport.Click += new System.EventHandler(this.factReportToolStripMenuItem_Click);
             // 
             // mnuExport
             // 
@@ -1810,6 +1807,7 @@
             this.tabSelector.Controls.Add(this.tabFamilies);
             this.tabSelector.Controls.Add(this.tabLocations);
             this.tabSelector.Controls.Add(this.tabOccupations);
+            this.tabSelector.Controls.Add(this.tabFacts);
             this.tabSelector.Controls.Add(this.tabDataErrors);
             this.tabSelector.Controls.Add(this.tabLooseBirthDeaths);
             this.tabSelector.Controls.Add(this.tabCensus);
@@ -1823,6 +1821,53 @@
             this.tabSelector.Size = new System.Drawing.Size(939, 471);
             this.tabSelector.TabIndex = 9;
             this.tabSelector.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
+            // 
+            // tabFacts
+            // 
+            this.tabFacts.Controls.Add(this.btnShowFacts);
+            this.tabFacts.Controls.Add(this.label3);
+            this.tabFacts.Controls.Add(this.txtFactsSurname);
+            this.tabFacts.Controls.Add(this.relationTypes1);
+            this.tabFacts.Location = new System.Drawing.Point(4, 22);
+            this.tabFacts.Name = "tabFacts";
+            this.tabFacts.Size = new System.Drawing.Size(931, 445);
+            this.tabFacts.TabIndex = 13;
+            this.tabFacts.Text = "Facts";
+            this.tabFacts.UseVisualStyleBackColor = true;
+            // 
+            // btnShowFacts
+            // 
+            this.btnShowFacts.Location = new System.Drawing.Point(8, 92);
+            this.btnShowFacts.Name = "btnShowFacts";
+            this.btnShowFacts.Size = new System.Drawing.Size(75, 23);
+            this.btnShowFacts.TabIndex = 24;
+            this.btnShowFacts.Text = "Show Facts";
+            this.btnShowFacts.UseVisualStyleBackColor = true;
+            this.btnShowFacts.Click += new System.EventHandler(this.btnShowFacts_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(339, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "Surname";
+            // 
+            // txtFactsSurname
+            // 
+            this.txtFactsSurname.Location = new System.Drawing.Point(394, 16);
+            this.txtFactsSurname.Name = "txtFactsSurname";
+            this.txtFactsSurname.Size = new System.Drawing.Size(201, 20);
+            this.txtFactsSurname.TabIndex = 22;
+            // 
+            // relationTypes1
+            // 
+            this.relationTypes1.Location = new System.Drawing.Point(8, 8);
+            this.relationTypes1.MarriedToDB = true;
+            this.relationTypes1.Name = "relationTypes1";
+            this.relationTypes1.Size = new System.Drawing.Size(325, 78);
+            this.relationTypes1.TabIndex = 21;
             // 
             // saveDatabase
             // 
@@ -1904,6 +1949,8 @@
             this.tabDisplayProgress.ResumeLayout(false);
             this.tabDisplayProgress.PerformLayout();
             this.tabSelector.ResumeLayout(false);
+            this.tabFacts.ResumeLayout(false);
+            this.tabFacts.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2067,7 +2114,11 @@
         private System.Windows.Forms.ToolStripMenuItem buildLocationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuLifelines;
         private System.Windows.Forms.ToolStripMenuItem resetToDefaultFormSizeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuFactReport;
+        private System.Windows.Forms.TabPage tabFacts;
+        private System.Windows.Forms.Button btnShowFacts;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtFactsSurname;
+        private Controls.RelationTypes relationTypes1;
     }
 }
 

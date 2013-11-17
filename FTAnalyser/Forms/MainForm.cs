@@ -183,7 +183,6 @@ namespace FTAnalyzer
             mnuGeocodeLocations.Enabled = enabled;
             mnuLocationsGeocodeReport.Enabled = enabled;
             mnuLifelines.Enabled = enabled;
-            mnuFactReport.Enabled = enabled;
         }
 
         private void DisposeIndividualForms()
@@ -294,11 +293,16 @@ namespace FTAnalyzer
                     tsCountLabel.Text = Properties.Messages.Count + list.Count;
                     tsHintsLabel.Text = Properties.Messages.Hints_Occupation;
                 }
+                else if (tabSelector.SelectedTab == tabFacts)
+                {
+                    tsCountLabel.Text = string.Empty;
+                    tsHintsLabel.Text = string.Empty;
+                }
                 else if (tabSelector.SelectedTab == tabCensus)
                 {
                     cenDate.RevertToDefaultDate();
-                    tsCountLabel.Text = "";
-                    tsHintsLabel.Text = "";
+                    tsCountLabel.Text = string.Empty;
+                    tsHintsLabel.Text = string.Empty;
                     btnShowCensusMissing.Enabled = ft.IndividualCount > 0;
                     cenDate.AddAllCensusItems();
                 }
@@ -1728,10 +1732,16 @@ namespace FTAnalyzer
             this.Width = 955;
         }
 
-        private void factReportToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btnShowFacts_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Facts facts = new Facts(ft.AllIndividuals);
+            Predicate<Individual> filter = relTypesCensus.BuildFilter<Individual>(x => x.RelationType);
+            if (txtSurname.Text.Length > 0)
+            {
+                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
+                filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
+            }
+            Facts facts = new Facts(ft.AllIndividuals.Where(filter));
             facts.Show();
             HourGlass(false);
         }

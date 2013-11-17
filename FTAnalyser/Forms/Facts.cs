@@ -153,5 +153,10 @@ namespace FTAnalyzer.Forms
                 }
             }
         }
+
+        private void Facts_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }
