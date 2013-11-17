@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.2.0.0-beta-test3";
+        public string VERSION = "3.2.0.0-beta-test4";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -1736,7 +1736,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Predicate<Individual> filter = relTypesFacts.BuildFilter<Individual>(x => x.RelationType);
-            if (txtSurname.Text.Length > 0)
+            if (txtFactsSurname.Text.Length > 0)
             {
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
