@@ -63,7 +63,7 @@ namespace FTAnalyzer.Forms
             pointLayer.CoordinateTransformation = MapTransforms.Transform();
             pointLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
 
-            mapBox1.Map.Layers.Add(pointLayer);
+            mapBox1.Map.VariableLayers.Add(pointLayer);
             mapBox1.Map.MinimumZoom = 500;
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
@@ -287,8 +287,11 @@ namespace FTAnalyzer.Forms
 
         private void btnCustomMap_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             RemoveCustomMapLayers();
             customMapLayers = btnCustomMap.Checked ? LoadGeoReferencedImages() : new List<GdalRasterLayer>();
+            mapBox1.Refresh();
+            this.Cursor = Cursors.Default;
         }
 
         private void RemoveCustomMapLayers()
