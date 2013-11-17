@@ -216,6 +216,17 @@
     </Compile>
     <Compile Include="Mapping\MapLifeLine.cs" />
     <Compile Include="Mapping\NLSRequest.cs" />
+    <Compile Include="Properties\MappingSettings.Designer.cs">
+      <DependentUpon>MappingSettings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UserControls\MappingSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\MappingSettings.designer.cs">
+      <DependentUpon>MappingSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\CustomToolStripRenderer.cs" />
     <Compile Include="Forms\EditLocation.cs">
       <SubType>Form</SubType>
@@ -382,6 +393,9 @@
     <EmbeddedResource Include="Forms\Controls\CensusCountry.resx">
       <DependentUpon>CensusCountry.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\MappingSettings.resx">
+      <DependentUpon>MappingSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\GeneralSettings.resx">
       <DependentUpon>GeneralSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -401,6 +415,10 @@
     </None>
     <None Include="FTAnalyzer_TemporaryKey.pfx" />
     <None Include="packages.config" />
+    <None Include="Properties\MappingSettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>MappingSettings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Properties\GeneralSettings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>GeneralSettings.Designer.cs</LastGenOutput>
