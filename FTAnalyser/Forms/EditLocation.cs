@@ -63,6 +63,13 @@ namespace FTAnalyzer.Forms
             pointLayer.CoordinateTransformation = MapTransforms.Transform();
             pointLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
 
+            if (Properties.MappingSettings.Default.UseEnglishParishBoundaries)
+            {
+                VectorLayer parishLayer = new VectorLayer("ParishBoundaries");
+                parishLayer.DataSource = new ShapeFile(Path.Combine(Application.StartupPath, @"Resources\Layers\parish_region.shp"), true);
+                mapBox1.Map.VariableLayers.Add(parishLayer);
+            }
+
             mapBox1.Map.VariableLayers.Add(pointLayer);
             mapBox1.Map.MinimumZoom = 500;
             mapBox1.Map.MaximumZoom = 50000000;

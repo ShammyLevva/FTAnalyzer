@@ -35,6 +35,7 @@
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.txtMapPath = new System.Windows.Forms.TextBox();
             this.btnBrowseFolder = new System.Windows.Forms.Button();
+            this.ckbUseParishBoundaries = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,10 +60,19 @@
             this.btnBrowseFolder.UseVisualStyleBackColor = true;
             this.btnBrowseFolder.Click += new System.EventHandler(this.btnBrowseFolder_Click);
             // 
+            // ckbUseParishBoundaries
+            // 
+            resources.ApplyResources(this.ckbUseParishBoundaries, "ckbUseParishBoundaries");
+            this.ckbUseParishBoundaries.Checked = true;
+            this.ckbUseParishBoundaries.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbUseParishBoundaries.Name = "ckbUseParishBoundaries";
+            this.ckbUseParishBoundaries.UseVisualStyleBackColor = true;
+            // 
             // MappingSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.ckbUseParishBoundaries);
             this.Controls.Add(this.btnBrowseFolder);
             this.Controls.Add(this.txtMapPath);
             this.Controls.Add(this.label1);
@@ -80,6 +90,7 @@
         private System.Windows.Forms.TextBox txtMapPath;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
+        private System.Windows.Forms.CheckBox ckbUseParishBoundaries;
 
 
 	}

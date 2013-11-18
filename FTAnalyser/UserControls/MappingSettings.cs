@@ -17,6 +17,7 @@ namespace FTAnalyzer.UserControls
 			//cannot be in load, because its possible this tab won't show, and the values will not be initialized.
 			//if this happens, then the users settings will be cleared.
             txtMapPath.Text = Properties.MappingSettings.Default.CustomMapPath;
+            ckbUseParishBoundaries.Checked = Properties.MappingSettings.Default.UseEnglishParishBoundaries;
 		}
 
 		#region IOptions Members
@@ -24,6 +25,7 @@ namespace FTAnalyzer.UserControls
 		public void Save()
 		{
             Properties.MappingSettings.Default.CustomMapPath = txtMapPath.Text;
+            Properties.MappingSettings.Default.UseEnglishParishBoundaries = ckbUseParishBoundaries.Checked;
             Properties.MappingSettings.Default.Save();
 		}
 
