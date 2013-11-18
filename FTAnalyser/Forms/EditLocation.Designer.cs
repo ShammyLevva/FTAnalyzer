@@ -122,6 +122,7 @@ namespace FTAnalyzer.Forms
             this.btnSaveExit.Size = new System.Drawing.Size(23, 22);
             this.btnSaveExit.Text = "Save & Exit";
             this.btnSaveExit.ToolTipText = "Save & Exit";
+            this.btnSaveExit.Click += new System.EventHandler(this.btnSaveExit_Click);
             // 
             // btnReload
             // 
