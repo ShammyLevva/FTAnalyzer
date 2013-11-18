@@ -136,7 +136,7 @@ namespace FTAnalyzer.Forms
 
             if (Properties.MappingSettings.Default.UseEnglishParishBoundaries)
             {
-                string filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, "EnglishParishes.shp");
+                string filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, "parish_region.shp");
                 if (File.Exists(filename))
                 {
                     VectorLayer parishLayer = new VectorLayer("ParishBoundaries");
