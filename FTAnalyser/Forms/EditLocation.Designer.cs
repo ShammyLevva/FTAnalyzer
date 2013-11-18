@@ -39,10 +39,10 @@ namespace FTAnalyzer.Forms
             this.labSearch = new System.Windows.Forms.ToolStripLabel();
             this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
+            this.btnCustomMap = new System.Windows.Forms.ToolStripButton();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnCustomMap = new System.Windows.Forms.ToolStripButton();
             this.mapZoomToolStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -148,6 +148,17 @@ namespace FTAnalyzer.Forms
             this.btnSearch.ToolTipText = "Search Google for Location Text";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
+            // btnCustomMap
+            // 
+            this.btnCustomMap.CheckOnClick = true;
+            this.btnCustomMap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnCustomMap.Image = ((System.Drawing.Image)(resources.GetObject("btnCustomMap.Image")));
+            this.btnCustomMap.ImageTransparentColor = System.Drawing.Color.White;
+            this.btnCustomMap.Name = "btnCustomMap";
+            this.btnCustomMap.Size = new System.Drawing.Size(23, 22);
+            this.btnCustomMap.Text = "Enable Custom Map Overlay";
+            this.btnCustomMap.Click += new System.EventHandler(this.btnCustomMap_Click);
+            // 
             // linkLabel1
             // 
             this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -177,17 +188,6 @@ namespace FTAnalyzer.Forms
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(633, 17);
             this.toolStripStatusLabel1.Text = "Left click to select pointer, move to the correct place (using zoom/pan) then rig" +
                 "ht click to place pointer in new location";
-            // 
-            // btnCustomMap
-            // 
-            this.btnCustomMap.CheckOnClick = true;
-            this.btnCustomMap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnCustomMap.Image = ((System.Drawing.Image)(resources.GetObject("btnCustomMap.Image")));
-            this.btnCustomMap.ImageTransparentColor = System.Drawing.Color.White;
-            this.btnCustomMap.Name = "btnCustomMap";
-            this.btnCustomMap.Size = new System.Drawing.Size(23, 22);
-            this.btnCustomMap.Text = "Enable Custom Map Overlay";
-            this.btnCustomMap.Click += new System.EventHandler(this.btnCustomMap_Click);
             // 
             // EditLocation
             // 

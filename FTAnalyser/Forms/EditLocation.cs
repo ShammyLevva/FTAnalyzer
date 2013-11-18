@@ -65,9 +65,13 @@ namespace FTAnalyzer.Forms
 
             if (Properties.MappingSettings.Default.UseEnglishParishBoundaries)
             {
-                VectorLayer parishLayer = new VectorLayer("ParishBoundaries");
-                parishLayer.DataSource = new ShapeFile(Path.Combine(Application.StartupPath, @"Resources\Layers\parish_region.shp"), true);
-                mapBox1.Map.VariableLayers.Add(parishLayer);
+                string filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, "EnglishParishes.shp");
+                if (File.Exists(filename))
+                {
+                    VectorLayer parishLayer = new VectorLayer("ParishBoundaries");
+                    parishLayer.DataSource = new ShapeFile(filename, true);
+                    mapBox1.Map.VariableLayers.Add(parishLayer);
+                }
             }
 
             mapBox1.Map.VariableLayers.Add(pointLayer);
