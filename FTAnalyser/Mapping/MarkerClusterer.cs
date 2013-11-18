@@ -13,7 +13,6 @@ namespace FTAnalyzer.Mapping
 {
     public class MarkerClusterer
     {
-
         private List<MapCluster> clusters;
         private double gridsize;
         private int minClusterSize;

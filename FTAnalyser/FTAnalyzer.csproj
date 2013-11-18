@@ -111,9 +111,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="gdalconst_csharp">
-      <HintPath>packages\GDAL.1.9.2\lib\net40\gdalconst_csharp.dll</HintPath>
-    </Reference>
     <Reference Include="gdal_csharp">
       <HintPath>packages\GDAL.1.9.2\lib\net40\gdal_csharp.dll</HintPath>
     </Reference>
@@ -129,38 +126,19 @@
     </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Mono.Security">
-      <HintPath>packages\Npgsql.2.0.12.1\lib\net40\Mono.Security.dll</HintPath>
-    </Reference>
     <Reference Include="NetTopologySuite, Version=1.13.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\NetTopologySuite.1.13.1\lib\net40-client\NetTopologySuite.dll</HintPath>
-    </Reference>
-    <Reference Include="NetTopologySuite.IO.GeoTools, Version=1.13.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\NetTopologySuite.IO.1.13.1\lib\net40-client\NetTopologySuite.IO.GeoTools.dll</HintPath>
-    </Reference>
-    <Reference Include="NetTopologySuite.IO.MsSqlSpatial">
-      <HintPath>packages\NetTopologySuite.IO.1.13.1\lib\net40-client\NetTopologySuite.IO.MsSqlSpatial.dll</HintPath>
-    </Reference>
-    <Reference Include="NetTopologySuite.IO.PostGis">
-      <HintPath>packages\NetTopologySuite.IO.1.13.1\lib\net40-client\NetTopologySuite.IO.PostGis.dll</HintPath>
-    </Reference>
-    <Reference Include="NetTopologySuite.IO.SpatiaLite">
-      <HintPath>packages\NetTopologySuite.IO.SpatiaLite.1.13.1.1\lib\net40-client\NetTopologySuite.IO.SpatiaLite.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql">
-      <HintPath>packages\Npgsql.2.0.12.1\lib\net40\Npgsql.dll</HintPath>
-    </Reference>
-    <Reference Include="ogr_csharp">
+    <Reference Include="ogr_csharp, Version=1.0.4704.32537, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\GDAL.1.9.2\lib\net40\ogr_csharp.dll</HintPath>
     </Reference>
-    <Reference Include="osr_csharp">
+    <Reference Include="osr_csharp, Version=1.0.4704.32536, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\GDAL.1.9.2\lib\net40\osr_csharp.dll</HintPath>
-    </Reference>
-    <Reference Include="policy.2.0.Npgsql">
-      <HintPath>packages\Npgsql.2.0.12.1\lib\net40\policy.2.0.Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="PowerCollections, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\NetTopologySuite.1.13.1\lib\net40-client\PowerCollections.dll</HintPath>
@@ -187,9 +165,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.89.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>packages\System.Data.SQLite.MSIL.1.0.89.0\lib\net40\System.Data.SQLite.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite.Linq, Version=1.0.89.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>packages\System.Data.SQLite.MSIL.1.0.89.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -242,8 +217,6 @@
     <Compile Include="Forms\LifeLine.Designer.cs">
       <DependentUpon>LifeLine.cs</DependentUpon>
     </Compile>
-    <Compile Include="GdalConfiguration.cs" />
-    <Compile Include="GdalNativeConfiguration.cs" />
     <Compile Include="Mapping\MapLifeLine.cs" />
     <Compile Include="Mapping\NLSRequest.cs" />
     <Compile Include="Properties\MappingSettings.Designer.cs">
@@ -352,8 +325,6 @@
     <Resource Include="Resources\Lib\SharpMap.UI.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Content Include="GdalConfiguration.vb" />
-    <Content Include="GdalNativeConfiguration.vb" />
     <Content Include="Resources\Icons\SaveExit.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
