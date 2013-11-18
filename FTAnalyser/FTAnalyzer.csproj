@@ -354,6 +354,9 @@
     </Resource>
     <Content Include="GdalConfiguration.vb" />
     <Content Include="GdalNativeConfiguration.vb" />
+    <Content Include="Resources\Icons\SaveExit.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Icons\Scroll_NoText.png" />
     <Resource Include="Resources\Lib\SharpMap.Extensions.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

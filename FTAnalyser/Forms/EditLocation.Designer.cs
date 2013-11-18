@@ -35,6 +35,7 @@ namespace FTAnalyzer.Forms
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.btnSaveExit = new System.Windows.Forms.ToolStripButton();
             this.btnReload = new System.Windows.Forms.ToolStripButton();
             this.labSearch = new System.Windows.Forms.ToolStripLabel();
             this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
@@ -77,6 +78,7 @@ namespace FTAnalyzer.Forms
             this.mapZoomToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnEdit,
             this.btnSave,
+            this.btnSaveExit,
             this.btnReload,
             this.labSearch,
             this.txtSearch,
@@ -110,6 +112,16 @@ namespace FTAnalyzer.Forms
             this.btnSave.Text = "toolStripButton1";
             this.btnSave.ToolTipText = "Save location to database";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnSaveExit
+            // 
+            this.btnSaveExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSaveExit.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveExit.Image")));
+            this.btnSaveExit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSaveExit.Name = "btnSaveExit";
+            this.btnSaveExit.Size = new System.Drawing.Size(23, 22);
+            this.btnSaveExit.Text = "Save & Exit";
+            this.btnSaveExit.ToolTipText = "Save & Exit";
             // 
             // btnReload
             // 
@@ -226,5 +238,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripButton btnSearch;
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnCustomMap;
+        private System.Windows.Forms.ToolStripButton btnSaveExit;
     }
 }

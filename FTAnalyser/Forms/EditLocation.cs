@@ -183,6 +183,13 @@ namespace FTAnalyzer.Forms
             MessageBox.Show("Data for " + location.ToString() + " updated.", "Save new location");
         }
 
+        private void btnSaveExit_Click(object sender, EventArgs e)
+        {
+            UpdateDatabase();
+            UserSavedPoint = true;
+            this.Close();
+        }
+
         private void btnReload_Click(object sender, EventArgs e)
         {
             ResetMap();
