@@ -12,6 +12,10 @@ using SharpMap.Data;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
 using System.Collections.Generic;
+using SharpMap.Rendering.Symbolizer;
+using SharpMap.Styles;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 
 namespace FTAnalyzer.Forms
 {
@@ -70,7 +74,26 @@ namespace FTAnalyzer.Forms
                 {
                     VectorLayer parishLayer = new VectorLayer("ParishBoundaries");
                     parishLayer.DataSource = new ShapeFile(filename, true);
+                    parishLayer.Style.Fill = null;
+                    parishLayer.Style.Outline = new Pen(Color.Black, 2.0f);
+                    parishLayer.Style.EnableOutline = true;
                     mapBox1.Map.VariableLayers.Add(parishLayer);
+
+                    LabelLayer parishLabelLayer = new LabelLayer("ParishNames");
+                    parishLabelLayer.DataSource = new ShapeFile(filename, true);
+                    parishLabelLayer.LabelColumn = "NAME";
+                    parishLabelLayer.TextRenderingHint = TextRenderingHint.AntiAlias;
+                    parishLabelLayer.SmoothingMode = SmoothingMode.AntiAlias;
+                    LabelStyle style = new LabelStyle();
+                    style.ForeColor = Color.DarkRed;
+                    style.Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold);
+                    style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center;
+                    style.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Middle;
+                    style.CollisionDetection = true;
+                    parishLabelLayer.Style = style;
+                    parishLabelLayer.MinVisible = 500;
+                    parishLabelLayer.MaxVisible = 50000;
+                    mapBox1.Map.Layers.Add(parishLabelLayer);
                 }
             }
 
