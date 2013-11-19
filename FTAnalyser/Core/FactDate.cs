@@ -585,6 +585,8 @@ namespace FTAnalyzer
          */
         public bool IsBefore(FactDate that)
         {
+            if (!this.DoubleDate && that != null && that.DoubleDate)
+                return EndDate < that.StartDate.AddYears(1);
             // easy case is extremes whole of date before other
             return (that == null) ? true : EndDate < that.StartDate;
         }
@@ -594,6 +596,8 @@ namespace FTAnalyzer
          */
         public bool StartsBefore(FactDate that)
         {
+            if (!this.DoubleDate && that != null && that.DoubleDate)
+                return StartDate < that.StartDate.AddYears(1);
             return (that == null) ? true : StartDate < that.StartDate;
         }
 
@@ -602,6 +606,8 @@ namespace FTAnalyzer
          */
         public bool IsAfter(FactDate that)
         {
+            if (this.DoubleDate && that != null && !that.DoubleDate)
+                return StartDate.AddYears(1) > that.EndDate;
             // easy case is extremes whole of date after other
             return (that == null) ? true : StartDate > that.EndDate;
         }
@@ -611,6 +617,8 @@ namespace FTAnalyzer
          */
         public bool EndsAfter(FactDate that)
         {
+            if (this.DoubleDate && that != null && !that.DoubleDate)
+                return EndDate.AddYears(1) > that.EndDate;
             return (that == null) ? true : EndDate > that.EndDate;
         }
 

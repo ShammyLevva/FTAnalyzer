@@ -281,5 +281,18 @@ namespace FactDateTest
             Assert.AreEqual(new DateTime(966, 12, 31), target.EndDate);
 
         }
+
+        [TestMethod()]
+        public void FactDateComparisonTest()
+        {
+            FactDate first = new FactDate("1 January 1721/2");
+            FactDate second = new FactDate("31 December 1721");
+
+            Assert.IsTrue(second.IsBefore(first));
+            Assert.IsTrue(second.StartsBefore(first));
+            Assert.IsTrue(first.IsAfter(second));
+            Assert.IsTrue(first.EndsAfter(second));
+            Assert.IsFalse(first.Overlaps(second));
+        }
     }
 }
