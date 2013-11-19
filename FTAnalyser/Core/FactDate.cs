@@ -547,7 +547,9 @@ namespace FTAnalyzer
                 return false; // double years must be pre Mar 25th of year
             if (doubleyear == "00" && year.Substring(2, 2) != "99")
                 return false; // check for change of century year
-            int iDoubleYear = Convert.ToInt32(year.Substring(0, 2) + doubleyear);
+            int iDoubleYear = doubleyear == "00" ? 
+                Convert.ToInt32((Convert.ToInt32(year.Substring(0, 2)) + 1).ToString() + doubleyear) : 
+                Convert.ToInt32(year.Substring(0, 2) + doubleyear);
             if (iDoubleYear - iYear != 1)
                 return false; // must only be 1 year between double years
             DoubleDate = true; // passed all checks
