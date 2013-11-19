@@ -11,6 +11,14 @@ using FTAnalyzer.Events;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
 using GeoAPI.Geometries;
+using SharpMap.Styles;
+using System.Drawing.Drawing2D;
+using SharpMap.Layers;
+using SharpMap;
+using System.IO;
+using SharpMap.Data.Providers;
+using System.Drawing.Text;
+using SharpMap.Rendering;
 
 namespace FTAnalyzer.Forms
 {
@@ -925,6 +933,44 @@ namespace FTAnalyzer.Forms
             {
                 dgLocations.Rows[row.Index].Selected = true;
                 dgLocations.FirstDisplayedScrollingRowIndex = row.Index;
+            }
+        }
+
+        public static void AddEnglishParishLayer(Map map)
+        {
+            if (Properties.MappingSettings.Default.UseEnglishParishBoundaries)
+            {
+                string filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, "parish_region.shp");
+                if (File.Exists(filename))
+                {
+                    VectorLayer parishLayer = new VectorLayer("ParishBoundaries");
+                    parishLayer.DataSource = new ShapeFile(filename, true);
+                    parishLayer.Style.Fill = null;
+                    parishLayer.Style.Outline = new Pen(Color.Black, 2.0f);
+                    parishLayer.Style.EnableOutline = true;
+                    map.VariableLayers.Add(parishLayer);
+
+                    LabelLayer parishLabelLayer = new LabelLayer("ParishNames");
+                    parishLabelLayer.DataSource = new ShapeFile(filename, true);
+                    parishLabelLayer.LabelColumn = "NAME";
+                    parishLabelLayer.TextRenderingHint = TextRenderingHint.AntiAlias;
+                    parishLabelLayer.SmoothingMode = SmoothingMode.AntiAlias;
+
+                    LabelStyle style = new LabelStyle();
+                    style.ForeColor = Color.DarkRed;
+                    style.Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold);
+                    style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center;
+                    style.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Middle;
+                    style.CollisionDetection = true;
+                    style.CollisionBuffer = new SizeF(4f, 4f);
+
+                    parishLabelLayer.Style = style;
+                    parishLabelLayer.LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection;
+                    parishLabelLayer.Style.CollisionDetection = true; // set twice to fix bug 
+                    parishLabelLayer.MinVisible = 500;
+                    parishLabelLayer.MaxVisible = 75000;
+                    map.Layers.Add(parishLabelLayer);
+                }
             }
         }
     }

@@ -110,17 +110,7 @@ namespace FTAnalyzer.Forms
             labelLayer.Style = style;
             mapBox1.Map.Layers.Add(labelLayer);
 
-            if (Properties.MappingSettings.Default.UseEnglishParishBoundaries)
-            {
-                string filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, "parish_region.shp");
-                if (File.Exists(filename))
-                {
-                    VectorLayer parishLayer = new VectorLayer("ParishBoundaries");
-                    parishLayer.DataSource = new ShapeFile(filename, true);
-                    mapBox1.Map.VariableLayers.Add(parishLayer);
-                }
-            }
-
+            GeocodeLocations.AddEnglishParishLayer(mapBox1.Map);
             mapBox1.Map.MinimumZoom = 500;
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.QueryGrowFactor = 30;

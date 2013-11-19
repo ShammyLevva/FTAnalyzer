@@ -67,36 +67,7 @@ namespace FTAnalyzer.Forms
             pointLayer.CoordinateTransformation = MapTransforms.Transform();
             pointLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
 
-            if (Properties.MappingSettings.Default.UseEnglishParishBoundaries)
-            {
-                string filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, "parish_region.shp");
-                if (File.Exists(filename))
-                {
-                    VectorLayer parishLayer = new VectorLayer("ParishBoundaries");
-                    parishLayer.DataSource = new ShapeFile(filename, true);
-                    parishLayer.Style.Fill = null;
-                    parishLayer.Style.Outline = new Pen(Color.Black, 2.0f);
-                    parishLayer.Style.EnableOutline = true;
-                    mapBox1.Map.VariableLayers.Add(parishLayer);
-
-                    LabelLayer parishLabelLayer = new LabelLayer("ParishNames");
-                    parishLabelLayer.DataSource = new ShapeFile(filename, true);
-                    parishLabelLayer.LabelColumn = "NAME";
-                    parishLabelLayer.TextRenderingHint = TextRenderingHint.AntiAlias;
-                    parishLabelLayer.SmoothingMode = SmoothingMode.AntiAlias;
-                    LabelStyle style = new LabelStyle();
-                    style.ForeColor = Color.DarkRed;
-                    style.Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold);
-                    style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center;
-                    style.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Middle;
-                    style.CollisionDetection = true;
-                    parishLabelLayer.Style = style;
-                    parishLabelLayer.MinVisible = 500;
-                    parishLabelLayer.MaxVisible = 50000;
-                    mapBox1.Map.Layers.Add(parishLabelLayer);
-                }
-            }
-
+            GeocodeLocations.AddEnglishParishLayer(mapBox1.Map);
             mapBox1.Map.VariableLayers.Add(pointLayer);
             mapBox1.Map.MinimumZoom = 500;
             mapBox1.Map.MaximumZoom = 50000000;
