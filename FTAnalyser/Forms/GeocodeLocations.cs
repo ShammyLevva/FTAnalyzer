@@ -413,7 +413,7 @@ namespace FTAnalyzer.Forms
             {
                 FactLocation pasteLocation = dgLocations.CurrentRow.DataBoundItem as FactLocation;
                 FactLocation.CopyLocationDetails(CopyLocation, pasteLocation);
-                DatabaseHelper.Instance.UpdateGeocodeStatus(pasteLocation);
+                UpdateDatabase(pasteLocation, true);
                 dgLocations.Refresh();
             }
         }
@@ -614,7 +614,8 @@ namespace FTAnalyzer.Forms
                                 loc.GoogleLocation = address;
                                 loc.GoogleResultType = resultType;
                                 loc.ViewPort = viewport;
-                                UpdateDatabase(loc, inDatabase, foundLevel);
+                                loc.FoundLevel = foundLevel;
+                                UpdateDatabase(loc, inDatabase);
                             }
                             else
                             {
@@ -661,42 +662,14 @@ namespace FTAnalyzer.Forms
             return res;
         }
 
-        private static void UpdateDatabase(FactLocation loc, bool inDatabase, int foundLevel)
+        private static void UpdateDatabase(FactLocation loc, bool inDatabase)
         {
             DatabaseHelper dbh = DatabaseHelper.Instance;
             if (inDatabase)
-            {
-                SQLiteCommand updateCmd = dbh.UpdateGeocode();
-                updateCmd.Parameters[0].Value = loc.Level;
-                updateCmd.Parameters[1].Value = loc.Latitude;
-                updateCmd.Parameters[2].Value = loc.Longitude;
-                updateCmd.Parameters[3].Value = loc.GoogleLocation;
-                updateCmd.Parameters[4].Value = foundLevel;
-                updateCmd.Parameters[5].Value = loc.ViewPort.NorthEast.Lat;
-                updateCmd.Parameters[6].Value = loc.ViewPort.NorthEast.Long;
-                updateCmd.Parameters[7].Value = loc.ViewPort.SouthWest.Lat;
-                updateCmd.Parameters[8].Value = loc.ViewPort.SouthWest.Long;
-                updateCmd.Parameters[9].Value = loc.GeocodeStatus;
-                updateCmd.Parameters[10].Value = loc.GoogleResultType;
-                updateCmd.Parameters[11].Value = loc.ToString();
-                updateCmd.ExecuteNonQuery();
-            }
+                dbh.UpdateGeocode(loc);
             else
             {
-                SQLiteCommand insertCmd = dbh.InsertGeocode();
-                insertCmd.Parameters[0].Value = loc.ToString();
-                insertCmd.Parameters[1].Value = loc.Level;
-                insertCmd.Parameters[2].Value = loc.Latitude;
-                insertCmd.Parameters[3].Value = loc.Longitude;
-                insertCmd.Parameters[4].Value = loc.GoogleLocation;
-                insertCmd.Parameters[5].Value = foundLevel;
-                insertCmd.Parameters[6].Value = loc.ViewPort.NorthEast.Lat;
-                insertCmd.Parameters[7].Value = loc.ViewPort.NorthEast.Long;
-                insertCmd.Parameters[8].Value = loc.ViewPort.SouthWest.Lat;
-                insertCmd.Parameters[9].Value = loc.ViewPort.SouthWest.Long;
-                insertCmd.Parameters[10].Value = loc.GeocodeStatus;
-                insertCmd.Parameters[11].Value = loc.GoogleResultType;
-                insertCmd.ExecuteNonQuery();
+                dbh.InsertGeocode(loc);
             }
         }
 
@@ -725,7 +698,7 @@ namespace FTAnalyzer.Forms
         {
             FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
             loc.GeocodeStatus = FactLocation.Geocode.GEDCOM_USER;
-            DatabaseHelper.Instance.UpdateGeocodeStatus(loc);
+            UpdateDatabase(loc, true);
             dgLocations.Refresh();
         }
 
@@ -733,7 +706,7 @@ namespace FTAnalyzer.Forms
         {
             FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
             loc.GeocodeStatus = FactLocation.Geocode.INCORRECT;
-            DatabaseHelper.Instance.UpdateGeocodeStatus(loc);
+            UpdateDatabase(loc, true);
             dgLocations.Refresh();
         }
 
@@ -749,7 +722,8 @@ namespace FTAnalyzer.Forms
             loc.ViewPort.NorthEast.Long = 0d;
             loc.ViewPort.SouthWest.Lat = 0d;
             loc.ViewPort.SouthWest.Long = 0d;
-            UpdateDatabase(loc, true, -2);
+            loc.FoundLevel = -2;
+            UpdateDatabase(loc, true);
             dgLocations.Refresh();
         }
 
@@ -839,7 +813,7 @@ namespace FTAnalyzer.Forms
                             if (res != null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
                             {
                                 ProcessReverseResult(loc, res);
-                                DatabaseHelper.Instance.UpdateGeocodeStatus(loc);
+                                UpdateDatabase(loc, true);
                             }
                         }
                     }

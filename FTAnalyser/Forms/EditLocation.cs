@@ -151,8 +151,6 @@ namespace FTAnalyzer.Forms
             Envelope env = new Envelope(transform.Transform(mapBox1.Map.Envelope.TopLeft()),
                                         transform.Transform(mapBox1.Map.Envelope.BottomRight()));
 
-            DatabaseHelper dbh = DatabaseHelper.Instance;
-            SQLiteCommand updateCmd = dbh.UpdatePointGeocode();
             location.Latitude = pointFeature.Geometry.Coordinate.Y;
             location.Longitude = pointFeature.Geometry.Coordinate.X;
             location.ViewPort.NorthEast.Lat = env.Top();
@@ -162,16 +160,8 @@ namespace FTAnalyzer.Forms
             location.PixelSize = mapBox1.Map.PixelSize;
             location.GoogleLocation = string.Empty;
             location.GeocodeStatus = FactLocation.Geocode.GEDCOM_USER;
-
-            updateCmd.Parameters[0].Value = location.Latitude;
-            updateCmd.Parameters[1].Value = location.Longitude;
-            updateCmd.Parameters[2].Value = location.ViewPort.NorthEast.Lat;
-            updateCmd.Parameters[3].Value = location.ViewPort.NorthEast.Long;
-            updateCmd.Parameters[4].Value = location.ViewPort.SouthWest.Lat;
-            updateCmd.Parameters[5].Value = location.ViewPort.SouthWest.Long;
-            updateCmd.Parameters[6].Value = location.GeocodeStatus;
-            updateCmd.Parameters[7].Value = location.ToString();
-            updateCmd.ExecuteNonQuery();
+            location.FoundLevel = -2;
+            DatabaseHelper.Instance.UpdateGeocode(location);
             pointUpdated = false;
             dataUpdated = true;
         }

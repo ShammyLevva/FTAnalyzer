@@ -33,6 +33,7 @@ namespace FTAnalyzer
         public Geocode GeocodeStatus { get; set; }
         public string GoogleLocation { get; set; }
         public string GoogleResultType { get; set; }
+        public int FoundLevel { get; set; }
         public double PixelSize { get; set; }
         public GeoResponse.CResult.CGeometry.CViewPort ViewPort { get; set; }
         private List<Individual> individuals;
@@ -231,6 +232,7 @@ namespace FTAnalyzer
             this.GeocodeStatus = Geocode.NOT_SEARCHED;
             this.GoogleLocation = string.Empty;
             this.GoogleResultType = string.Empty;
+            this.FoundLevel = -2;
             this.ViewPort = new GeoResponse.CResult.CGeometry.CViewPort();
         }
 
@@ -730,6 +732,7 @@ namespace FTAnalyzer
             to.GeocodeStatus = from.GeocodeStatus;
             to.GoogleLocation = from.GoogleLocation;
             to.GoogleResultType = from.GoogleResultType;
+            to.FoundLevel = from.FoundLevel;
         }
 
         public int CompareTo(FactLocation that)

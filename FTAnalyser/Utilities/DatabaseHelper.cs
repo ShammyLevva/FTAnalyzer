@@ -197,7 +197,7 @@ namespace FTAnalyzer.Utilities
             return cmd;
         }
 
-        public SQLiteCommand InsertGeocode()
+        public void InsertGeocode(FactLocation loc)
         {
             SQLiteCommand insertCmd = new SQLiteCommand("insert into geocode (location, level, latitude, longitude, founddate, foundlocation, foundlevel, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw, geocodestatus, foundresulttype) values(?,?,?,?,date('now'),?,?,?,?,?,?,?,?)", conn);
             SQLiteParameter param = insertCmd.CreateParameter();
@@ -251,14 +251,63 @@ namespace FTAnalyzer.Utilities
             insertCmd.Parameters.Add(param);
 
             insertCmd.Prepare();
-            return insertCmd;
+            insertCmd.Parameters[0].Value = loc.ToString();
+            insertCmd.Parameters[1].Value = loc.Level;
+            insertCmd.Parameters[2].Value = loc.Latitude;
+            insertCmd.Parameters[3].Value = loc.Longitude;
+            insertCmd.Parameters[4].Value = loc.GoogleLocation;
+            insertCmd.Parameters[5].Value = loc.FoundLevel;
+            insertCmd.Parameters[6].Value = loc.ViewPort.NorthEast.Lat;
+            insertCmd.Parameters[7].Value = loc.ViewPort.NorthEast.Long;
+            insertCmd.Parameters[8].Value = loc.ViewPort.SouthWest.Lat;
+            insertCmd.Parameters[9].Value = loc.ViewPort.SouthWest.Long;
+            insertCmd.Parameters[10].Value = loc.GeocodeStatus;
+            insertCmd.Parameters[11].Value = loc.GoogleResultType;
+            insertCmd.ExecuteNonQuery();
         }
 
-        public void UpdateGeocodeStatus(FactLocation loc)
+        public void UpdateGeocode(FactLocation loc)
         {
-            SQLiteCommand updateCmd = new SQLiteCommand("update geocode set founddate = date('now'), geocodestatus = ?, foundlocation = ?, foundresulttype = ? where location = ?", conn);
+            SQLiteCommand updateCmd = new SQLiteCommand("update geocode set founddate=date('now'), level = ?, latitude = ?, longitude = ?, foundlocation = ?, foundlevel = ?, viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ?, geocodestatus = ?, foundresulttype = ? where location = ?", conn);
 
             SQLiteParameter param = updateCmd.CreateParameter();
+
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.Int32;
+            updateCmd.Parameters.Add(param);
+
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updateCmd.Parameters.Add(param);
+
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updateCmd.Parameters.Add(param);
+
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.String;
+            updateCmd.Parameters.Add(param);
+
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.Int32;
+            updateCmd.Parameters.Add(param);
+            
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updateCmd.Parameters.Add(param);
+
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updateCmd.Parameters.Add(param);
+
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updateCmd.Parameters.Add(param);
+
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updateCmd.Parameters.Add(param);
+
             param = updateCmd.CreateParameter();
             param.DbType = DbType.Int32;
             updateCmd.Parameters.Add(param);
@@ -271,117 +320,21 @@ namespace FTAnalyzer.Utilities
             param.DbType = DbType.String;
             updateCmd.Parameters.Add(param);
 
-            param = updateCmd.CreateParameter();
-            param.DbType = DbType.String;
-            updateCmd.Parameters.Add(param);
-
             updateCmd.Prepare();
-            updateCmd.Parameters[0].Value = loc.GeocodeStatus;
-            updateCmd.Parameters[1].Value = loc.GoogleLocation;
-            updateCmd.Parameters[2].Value = loc.GoogleResultType;
-            updateCmd.Parameters[3].Value = loc.ToString();
-
+            updateCmd.Parameters[0].Value = loc.Level;
+            updateCmd.Parameters[1].Value = loc.Latitude;
+            updateCmd.Parameters[2].Value = loc.Longitude;
+            updateCmd.Parameters[3].Value = loc.GoogleLocation;
+            updateCmd.Parameters[4].Value = loc.FoundLevel;
+            updateCmd.Parameters[5].Value = loc.ViewPort.NorthEast.Lat;
+            updateCmd.Parameters[6].Value = loc.ViewPort.NorthEast.Long;
+            updateCmd.Parameters[7].Value = loc.ViewPort.SouthWest.Lat;
+            updateCmd.Parameters[8].Value = loc.ViewPort.SouthWest.Long;
+            updateCmd.Parameters[9].Value = loc.GeocodeStatus;
+            updateCmd.Parameters[10].Value = loc.GoogleResultType;
+            updateCmd.Parameters[11].Value = loc.ToString();
             updateCmd.ExecuteNonQuery();
             OnGeoLocationUpdated(loc);
-        }
-
-        public SQLiteCommand UpdateGeocode()
-        {
-            SQLiteCommand updateCmd = new SQLiteCommand("update geocode set level = ?, latitude = ?, longitude = ?, founddate = date('now'), foundlocation = ?, foundlevel = ?, viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ?, geocodestatus = ?, foundresulttype = ? where location = ?", conn);
-
-            SQLiteParameter param = updateCmd.CreateParameter();
-            param = updateCmd.CreateParameter();
-            param.DbType = DbType.Int32;
-            updateCmd.Parameters.Add(param);
-
-            param = updateCmd.CreateParameter();
-            param.DbType = DbType.Double;
-            updateCmd.Parameters.Add(param);
-
-            param = updateCmd.CreateParameter();
-            param.DbType = DbType.Double;
-            updateCmd.Parameters.Add(param);
-
-            param = updateCmd.CreateParameter();
-            param.DbType = DbType.String;
-            updateCmd.Parameters.Add(param);
-
-            param = updateCmd.CreateParameter();
-            param.DbType = DbType.Int32;
-            updateCmd.Parameters.Add(param);
-
-            param = updateCmd.CreateParameter();
-            param.DbType = DbType.Double;
-            updateCmd.Parameters.Add(param);
-
-            param = updateCmd.CreateParameter();
-            param.DbType = DbType.Double;
-            updateCmd.Parameters.Add(param);
-
-            param = updateCmd.CreateParameter();
-            param.DbType = DbType.Double;
-            updateCmd.Parameters.Add(param);
-
-            param = updateCmd.CreateParameter();
-            param.DbType = DbType.Double;
-            updateCmd.Parameters.Add(param);
-
-            param = updateCmd.CreateParameter();
-            param.DbType = DbType.Int32;
-            updateCmd.Parameters.Add(param);
-
-            param = updateCmd.CreateParameter();
-            param.DbType = DbType.String;
-            updateCmd.Parameters.Add(param);
-
-            param = updateCmd.CreateParameter();
-            param.DbType = DbType.String;
-            updateCmd.Parameters.Add(param);
-
-            updateCmd.Prepare();
-            return updateCmd;
-        }
-
-        public SQLiteCommand UpdatePointGeocode()
-        {
-            SQLiteCommand updatePointCmd = new SQLiteCommand("update geocode set founddate=date('now'), latitude = ?, longitude = ?, viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ?, geocodestatus = ?, foundlocation = '', foundlevel = -2  where location = ?", conn);
-
-            SQLiteParameter param = updatePointCmd.CreateParameter();
-
-            param = updatePointCmd.CreateParameter();
-            param.DbType = DbType.Double;
-            updatePointCmd.Parameters.Add(param);
-
-            param = updatePointCmd.CreateParameter();
-            param.DbType = DbType.Double;
-            updatePointCmd.Parameters.Add(param);
-
-            param = updatePointCmd.CreateParameter();
-            param.DbType = DbType.Double;
-            updatePointCmd.Parameters.Add(param);
-
-            param = updatePointCmd.CreateParameter();
-            param.DbType = DbType.Double;
-            updatePointCmd.Parameters.Add(param);
-
-            param = updatePointCmd.CreateParameter();
-            param.DbType = DbType.Double;
-            updatePointCmd.Parameters.Add(param);
-
-            param = updatePointCmd.CreateParameter();
-            param.DbType = DbType.Double;
-            updatePointCmd.Parameters.Add(param);
-
-            param = updatePointCmd.CreateParameter();
-            param.DbType = DbType.Int32;
-            updatePointCmd.Parameters.Add(param);
-
-            param = updatePointCmd.CreateParameter();
-            param.DbType = DbType.String;
-            updatePointCmd.Parameters.Add(param);
-
-            updatePointCmd.Prepare();
-            return updatePointCmd;
         }
         #endregion
 
