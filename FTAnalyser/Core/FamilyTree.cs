@@ -158,6 +158,9 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("\n\nUnable to find GEDCOM 'HEAD' record in first line of file aborting load.\nIs " + filename + " really a GEDCOM file");
                 return false;
             }
+            XmlNode charset = doc.SelectSingleNode("GED/HEAD/CHAR");
+            if (charset != null && charset.InnerText.Equals("UTF-8"))
+                doc = GedcomToXml.Load(filename, Encoding.UTF8);
             ReportOptions();
             XmlNode root = doc.SelectSingleNode("GED/HEAD/_ROOT");
             if (root != null)

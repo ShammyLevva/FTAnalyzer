@@ -10,13 +10,14 @@ namespace FTAnalyzer
 {
     class GedcomToXml
     {
+        private static readonly Encoding isoWesternEuropean = Encoding.GetEncoding(28591);
 
-        public static XmlDocument Load(string path)
+        public static XmlDocument Load(string path) { return Load(path, isoWesternEuropean); }
+        public static XmlDocument Load(string path, Encoding encoding)
         {
             //StreamReader reader = new AnselInputStreamReader(checkInvalidCR(path));
             //StreamReader reader = new AnselInputStreamReader(new FileStream(path, FileMode.Open, FileAccess.Read));
-            Encoding isoWesternEuropean = Encoding.GetEncoding(28591);
-            StreamReader reader = new StreamReader(new FileStream(path, FileMode.Open, FileAccess.Read), isoWesternEuropean);
+            StreamReader reader = new StreamReader(new FileStream(path, FileMode.Open, FileAccess.Read), encoding);
             return parse(reader);
         }
 
