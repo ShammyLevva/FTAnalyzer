@@ -269,8 +269,16 @@ namespace FTAnalyzer.Forms
             if (dgIndividuals.RowCount > 0)
             {   // update map using first row as selected row
                 BuildMap();
-
             }
+        }
+
+        private void hideLabelsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (hideLabelsToolStripMenuItem.Checked)
+                mapBox1.Map.Layers.Remove(labelLayer);
+            else
+                mapBox1.Map.Layers.Add(labelLayer);
+            mapBox1.Refresh();
         }
     }
 }
