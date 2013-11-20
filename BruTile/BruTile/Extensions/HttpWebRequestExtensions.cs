@@ -46,7 +46,7 @@ namespace BruTile.Extensions
                 }
                 catch (WebException we)
                 {
-                    HttpStatusCode status = (we.Response as HttpWebResponse).StatusCode;
+                    //HttpStatusCode status = (we.Response as HttpWebResponse).StatusCode;
                     //if (we.Status == WebExceptionStatus.ProtocolError)
                     //    SetDefaultProxy();
                     if (we.Status != WebExceptionStatus.RequestCanceled)
