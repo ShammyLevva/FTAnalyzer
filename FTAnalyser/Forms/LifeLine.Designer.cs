@@ -186,7 +186,7 @@ namespace FTAnalyzer.Forms
             this.selectAllDescendantsToolStripMenuItem,
             this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem});
             this.ctxmnuSelectOthers.Name = "ctxmnuSelectOthers";
-            this.ctxmnuSelectOthers.Size = new System.Drawing.Size(244, 92);
+            this.ctxmnuSelectOthers.Size = new System.Drawing.Size(244, 114);
             // 
             // addAllFamilyMembersToolStripMenuItem
             // 
