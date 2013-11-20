@@ -949,7 +949,7 @@ namespace FTAnalyzer.Forms
                     parishLayer.Style.Outline = new Pen(Color.Black, 2.0f);
                     parishLayer.Style.EnableOutline = true;
                     parishLayer.MinVisible = 500;
-                    parishLayer.MaxVisible = 75000;
+                    parishLayer.MaxVisible = 300000;
                     map.VariableLayers.Add(parishLayer);
 
                     LabelLayer parishLabelLayer = new LabelLayer("ParishNames");
@@ -970,7 +970,7 @@ namespace FTAnalyzer.Forms
                     parishLabelLayer.LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection;
                     parishLabelLayer.Style.CollisionDetection = true; // set twice to fix bug 
                     parishLabelLayer.MinVisible = 500;
-                    parishLabelLayer.MaxVisible = 75000;
+                    parishLabelLayer.MaxVisible = 100000;
                     map.Layers.Add(parishLabelLayer);
                 }
             }
