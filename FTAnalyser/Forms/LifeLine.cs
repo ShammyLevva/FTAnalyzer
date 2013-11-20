@@ -30,6 +30,9 @@ namespace FTAnalyzer.Forms
         private VectorLayer linesLayer;
         private LabelLayer labelLayer;
         private bool isloading;
+        private SortableBindingList<Individual> individualsList;
+        private DataGridViewSelectedRowCollection selected;
+        private Individual currentRowIndividual;
 
         public LifeLine()
         {
@@ -48,11 +51,29 @@ namespace FTAnalyzer.Forms
             SetupMap();
             dgFacts.AutoGenerateColumns = false;
             dgIndividuals.AutoGenerateColumns = false;
-            dgIndividuals.DataSource = new SortableBindingList<Individual>(ft.AllIndividuals);
+            individualsList = new SortableBindingList<Individual>(ft.AllIndividuals);
+            dgIndividuals.DataSource = individualsList;
             dgIndividuals.Sort(dgIndividuals.Columns["BirthDate"], ListSortDirection.Ascending);
             dgIndividuals.Sort(dgIndividuals.Columns["SortedName"], ListSortDirection.Ascending);
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
-            isloading = false;
+            individualsList.ListChanged += new ListChangedEventHandler(individualsList_ListChanged);
+            individualsList.SortStarted += new EventHandler(individualsList_SortStarted);
+        }
+
+        private void individualsList_SortStarted(object sender, EventArgs e)
+        {
+            //this.Cursor = Cursors.WaitCursor;
+            //selected = dgIndividuals.SelectedRows;
+            //currentRowIndividual = dgIndividuals.CurrentRow == null ? null : (Individual)dgIndividuals.CurrentRow.DataBoundItem;
+        }
+
+        private void individualsList_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            //foreach (DataGridViewRow row in selected)
+            //    row.Selected = true;
+            //if(currentRowIndividual != null)
+            //    MoveToIndividual(currentRowIndividual);
+            //this.Cursor = Cursors.Default;
         }
 
         private void DatabaseHelper_GeoLocationUpdated(object location, EventArgs e)
@@ -204,6 +225,13 @@ namespace FTAnalyzer.Forms
             BuildMap();
         }
 
+        private void MoveToIndividual(Individual i)
+        {
+            DataGridViewRow row = dgIndividuals.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["IndividualID"].Value.ToString().Equals(i.IndividualID)).FirstOrDefault();
+            if (row != null)
+                dgIndividuals.FirstDisplayedScrollingRowIndex = row.Index;
+        }
+
         private void SelectIndividual(Individual i)
         {
             DataGridViewRow row = dgIndividuals.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["IndividualID"].Value.ToString().Equals(i.IndividualID)).FirstOrDefault();
@@ -241,6 +269,8 @@ namespace FTAnalyzer.Forms
         private void LifeLine_FormClosed(object sender, FormClosedEventArgs e)
         {
             DatabaseHelper.GeoLocationUpdated -= DatabaseHelper_GeoLocationUpdated;
+            individualsList.ListChanged -= individualsList_ListChanged;
+            individualsList.SortStarted -= individualsList_SortStarted;
             this.Dispose();
         }
 
@@ -261,6 +291,15 @@ namespace FTAnalyzer.Forms
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
                 e.ToolTipText = "Double click to edit location.";
+            }
+        }
+
+        private void LifeLine_Load(object sender, EventArgs e)
+        {
+            isloading = false; // only turn off building map if completely done initializing
+            if (dgIndividuals.RowCount > 0)
+            {   // update map using first row as selected row
+                BuildMap();
             }
         }
     }

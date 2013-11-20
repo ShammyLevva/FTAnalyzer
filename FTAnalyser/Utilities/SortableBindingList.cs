@@ -50,6 +50,7 @@ namespace FTAnalyzer.Utilities
 
         protected override void ApplySortCore(PropertyDescriptor property, ListSortDirection direction)
         {
+            this.OnSortStarted();
             List<T> itemsList = (List<T>)this.Items;
 
             Type propertyType = property.PropertyType;
@@ -150,6 +151,15 @@ namespace FTAnalyzer.Utilities
                 inputList[j] = tempList[i];
             }
         }
+        #region EventHandler
+        public event EventHandler SortStarted;
+        public void OnSortStarted()
+        {
+            if (SortStarted != null)
+                SortStarted(null, EventArgs.Empty);
+        }
+
+        #endregion
 
     }
 }

@@ -186,7 +186,7 @@ namespace FTAnalyzer.Forms
             this.selectAllDescendantsToolStripMenuItem,
             this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem});
             this.ctxmnuSelectOthers.Name = "ctxmnuSelectOthers";
-            this.ctxmnuSelectOthers.Size = new System.Drawing.Size(244, 114);
+            this.ctxmnuSelectOthers.Size = new System.Drawing.Size(244, 92);
             // 
             // addAllFamilyMembersToolStripMenuItem
             // 
@@ -451,6 +451,7 @@ namespace FTAnalyzer.Forms
             this.Name = "LifeLine";
             this.Text = "Lifeline";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LifeLine_FormClosed);
+            this.Load += new System.EventHandler(this.LifeLine_Load);
             this.splitContainerFacts.Panel1.ResumeLayout(false);
             this.splitContainerFacts.Panel2.ResumeLayout(false);
             this.splitContainerFacts.Panel2.PerformLayout();
