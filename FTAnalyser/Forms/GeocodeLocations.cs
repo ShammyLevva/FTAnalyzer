@@ -948,6 +948,8 @@ namespace FTAnalyzer.Forms
                     parishLayer.Style.Fill = null;
                     parishLayer.Style.Outline = new Pen(Color.Black, 2.0f);
                     parishLayer.Style.EnableOutline = true;
+                    parishLayer.MinVisible = 500;
+                    parishLayer.MaxVisible = 75000;
                     map.VariableLayers.Add(parishLayer);
 
                     LabelLayer parishLabelLayer = new LabelLayer("ParishNames");

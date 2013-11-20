@@ -186,7 +186,7 @@ namespace FTAnalyzer.Forms
             this.selectAllDescendantsToolStripMenuItem,
             this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem});
             this.ctxmnuSelectOthers.Name = "ctxmnuSelectOthers";
-            this.ctxmnuSelectOthers.Size = new System.Drawing.Size(244, 114);
+            this.ctxmnuSelectOthers.Size = new System.Drawing.Size(244, 92);
             // 
             // addAllFamilyMembersToolStripMenuItem
             // 
@@ -242,7 +242,7 @@ namespace FTAnalyzer.Forms
             this.mapBox1.QueryLayerIndex = 0;
             this.mapBox1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.mapBox1.ShowProgressUpdate = false;
+            this.mapBox1.ShowProgressUpdate = true;
             this.mapBox1.Size = new System.Drawing.Size(779, 434);
             this.mapBox1.TabIndex = 2;
             this.mapBox1.Text = "mapBox1";
