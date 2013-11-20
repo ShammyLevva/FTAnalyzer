@@ -25,7 +25,7 @@ namespace FTAnalyzer
             BRAZIL = "Brazil", MAURITIUS = "Mauritius", UAE = "United Arab Emirates", AFGHANISTAN = "Afghanistan",
             ARGENTINA = "Argentina", BARBADOS = "Barbados", BANGLADESH = "Bangladesh", BAHAMAS = "Bahamas", SRI_LANKA = "Sri Lanka",
             CUBA = "Cuba", INDONESIA = "Indonesia", ISRAEL = "Israel", IRAQ = "Iraq", IRAN = "Iran", JORDAN = "Jordan",
-            JAMAICA = "Jamaica", KENYA = "Kenya", MEXICO = "Mexico";
+            JAMAICA = "Jamaica", KENYA = "Kenya", MEXICO = "Mexico", SINGAPORE = "Singapore";
 
         //AG  Antigua and Barbuda
         //AO  Angola
@@ -115,7 +115,6 @@ namespace FTAnalyzer
         //SB  Solomon Islands
         //SC  Seychelles
         //SD  Sudan
-        //SG  Singapore
         //SI  Slovenia
         //SK  Slovakia
         //SL  Sierra Leone
@@ -156,7 +155,7 @@ namespace FTAnalyzer
             LIBYA, NIGERIA, BULGARIA, CYPRUS, ESTONIA, LATVIA, LIECHTENSTIEN, LITHUANIA, ALBANIA, ARMENIA, ANDORRA,
             AZERBAIJAN, BELARUS, MOLDOVA, MONACO, MONTENEGRO, PORTUGAL, ROMANIA, SAN_MARINO, TURKEY, UKRAINE, BRAZIL, MAURITIUS,
             UAE, AFGHANISTAN, ARGENTINA, BARBADOS, BANGLADESH, BAHAMAS, SRI_LANKA, CUBA, INDONESIA, ISRAEL, IRAN, IRAQ, JORDAN,
-            JAMAICA, KENYA, MEXICO
+            JAMAICA, KENYA, MEXICO, SINGAPORE
         });
 
         private static readonly ISet<string> UK_COUNTRIES = new HashSet<string>(new string[] { 
