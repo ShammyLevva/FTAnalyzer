@@ -25,102 +25,35 @@ namespace FTAnalyzer
             BRAZIL = "Brazil", MAURITIUS = "Mauritius", UAE = "United Arab Emirates", AFGHANISTAN = "Afghanistan",
             ARGENTINA = "Argentina", BARBADOS = "Barbados", BANGLADESH = "Bangladesh", BAHAMAS = "Bahamas", SRI_LANKA = "Sri Lanka",
             CUBA = "Cuba", INDONESIA = "Indonesia", ISRAEL = "Israel", IRAQ = "Iraq", IRAN = "Iran", JORDAN = "Jordan",
-            JAMAICA = "Jamaica", KENYA = "Kenya", MEXICO = "Mexico", SINGAPORE = "Singapore";
+            JAMAICA = "Jamaica", KENYA = "Kenya", MEXICO = "Mexico", SINGAPORE = "Singapore", PAKISTAN = "Pakistan", ANGOLA = "Angola",
+            BAHRAIN = "Bahrain", BURUNDI = "Burundi", BENIN = "Benin", BOLIVIA = "Bolivia", BHUTAN = "Bhutan", BOTSWANA = "Botswana",
+            BELIZE = "Belize", CONGO = "Congo", CENTRAL_AFRICAN_REPUBLIC = "Central African Republic", CHILE = "Chile", 
+            CAMEROON = "Cameroon", COLOMBIA = "Colombia", COSTA_RICA = "Costa Rica", CAPE_VERDE = "Cape Verde", DOMINICA = "Dominica",
+            DOMINICAN_REPUBLIC = "Dominican Republic", ALGERIA = "Algeria", ECUADOR = "Ecuador", ERITREA = "Eritrea", 
+            ETHIOPIA = "Ethiopia", FIJI = "Fiji", DJIBOUTI = "Djibouti", MICRONESIA = "Micronesia", GABON = "Gabon", GRENADA = "Grenada",
+            GHANA = "Ghana", GAMBIA = "Gambia", GUINEA = "Guinea", EQUATORIAL_GUINEA = "Equatorial Guinea", GUATEMALA = "Guatemala", 
+            GUYANA = "Guyana", HONDURAS = "Honduras", CROATIA = "Croatia", HAITI = "Haiti", KYRGYZSTAN = "Kyrgyzstan", 
+            CAMBODIA = "Cambodia", KIRIBATI = "Kiribati", COMOROS = "Comoros", KUWAIT = "Kuwait", KAZAKHSTAN = "Kazakhstan",
+            LEBANON = "Lebanon", LIBERIA = "Liberia", LESOTHO = "Lesotho", MOROCCO = "Moroco", MADAGASCAR = "Madagascar",
+            MALI = "Mali", MARSHALL_ISLANDS = "Marshall Islands", MYANMAR = "Myanmar", MONGOLIA = "Mongolia", 
+            MAURITANIA = "Mauitania", MALDIVES = "Maldives", MALAWI = "Malawi", MALAYSIA = "Malaysia", MOZAMBIQUE = "Mozambique",
+            NAMIBIA = "Namibia", NIGER = "Niger", NICARAGUA = "Nicaragua", NEPAL = "Nepal", NAURU = "Nauru", OMAN = "Oman", 
+            PANAMA = "Panama", PERU = "Peru", PAPUA_NEW_GUINEA = "Papua New Guinea", PHILIPPINES = "Philippines", PALAU = "Palau",
+            PARAGUAY = "Paraguay", QATAR = "Qatar", SERBIA = "Serbia", RWANDA = "Rwanda", SAUDI_ARABIA ="Saudi Arabia",
+            SOLOMON_ISLANDS = "Solomon Islands", SEYSCHELLES = "Seyschelles", SUDAN = "Sudan", SLOVENIA = "Slovenia",
+            SLOVAKIA ="Slovakia", CZECH_REPUBLIC = "Czech Republic", CZECHOSLOVAKIA = "Czechoslovakia", SENEGAL = "Senegal",
+            SIERRA_LEONE = "Sierra Leone", SOMALIA = "Somalia", SURINAME = "Suriname";
 
         //AG  Antigua and Barbuda
-        //AO  Angola
         //BA  Bosnia and Herzegovina
         //BF  Burkina Faso
-        //BH  Bahrain
-        //BI  Burundi
-        //BJ  Benin
         //BN  Brunei Darussalam
-        //BO  Bolivia (Plurinational State of)
-        //BT  Bhutan
-        //BW  Botswana
-        //BZ  Belize
-        //CD  Democratic Republic of the Congo
-        //CF  Central African Republic
-        //CG  Congo
         //CI  Côte d'Ivoire
-        //CL  Chile
-        //CM  Cameroon
-        //CO  Colombia
-        //CR  Costa Rica
-        //CV  Cape Verde
-        //CZ  Czech Republic
-        //DJ  Djibouti
-        //DM  Dominica
-        //DO  Dominican Republic
-        //DZ  Algeria
-        //EC  Ecuador
-        //ER  Eritrea
-        //ET  Ethiopia
-        //FJ  Fiji
-        //FM  Micronesia (Federated States of)
-        //GA  Gabon
-        //GD  Grenada
-        //GH  Ghana
-        //GM  Gambia
-        //GN  Guinea
-        //GQ  Equatorial Guinea
-        //GT  Guatemala
         //GW  Guinea-Bissau
-        //GY  Guyana
-        //HN  Honduras
-        //HR  Croatia
-        //HT  Haiti
-        //KG  Kyrgyzstan
-        //KH  Cambodia
-        //KI  Kiribati
-        //KM  Comoros
         //KN  Saint Kitts and Nevis
         //KP  Democratic People's Republic of Korea
         //KR  Republic of Korea
-        //KW  Kuwait
-        //KZ  Kazakhstan
         //LA  Lao People's Democratic Republic
-        //LB  Lebanon
-        //LR  Liberia
-        //LS  Lesotho
-        //MA  Morocco
-        //MG  Madagascar
-        //MH  Marshall Islands
-        //MK  The former Yugoslav Republic of Macedonia
-        //ML  Mali
-        //MM  Myanmar
-        //MN  Mongolia
-        //MR  Mauritania
-        //MV  Maldives
-        //MW  Malawi
-        //MY  Malaysia
-        //MZ  Mozambique
-        //NA  Namibia
-        //NE  Niger
-        //NI  Nicaragua
-        //NP  Nepal
-        //NR  Nauru
-        //OM  Oman
-        //PA  Panama
-        //PE  Peru
-        //PG  Papua New Guinea
-        //PH  Philippines
-        //PK  Pakistan
-        //PW  Palau
-        //PY  Paraguay
-        //QA  Qatar
-        //RS  Serbia
-        //RW  Rwanda
-        //SA  Saudi Arabia
-        //SB  Solomon Islands
-        //SC  Seychelles
-        //SD  Sudan
-        //SI  Slovenia
-        //SK  Slovakia
-        //SL  Sierra Leone
-        //SN  Senegal
-        //SO  Somalia
-        //SR  Suriname
         //SS  South Sudan
         //ST  Sao Tome and Principe
         //SV  El Salvador
@@ -152,10 +85,17 @@ namespace FTAnalyzer
             SCOTLAND, ENGLAND, CANADA, UNITED_STATES, WALES, IRELAND, UNITED_KINGDOM, NEW_ZEALAND, AUSTRALIA, INDIA, FRANCE, GERMANY,
             ITALY, SPAIN, BELGIUM, SOUTH_AFRICA, NORTHERN_IRELAND, EGYPT, HUNGARY, MALTA, DENMARK, SWEDEN, NORWAY, FINLAND, ICELAND,
             SWITZERLAND, AUSTRIA, NETHERLANDS, CHINA, ZIMBABWE, JAPAN, RUSSIA, POLAND, ST_LUCIA, LUXEMBOURG, ISLE_OF_MAN, GREECE,
-            LIBYA, NIGERIA, BULGARIA, CYPRUS, ESTONIA, LATVIA, LIECHTENSTIEN, LITHUANIA, ALBANIA, ARMENIA, ANDORRA,
-            AZERBAIJAN, BELARUS, MOLDOVA, MONACO, MONTENEGRO, PORTUGAL, ROMANIA, SAN_MARINO, TURKEY, UKRAINE, BRAZIL, MAURITIUS,
-            UAE, AFGHANISTAN, ARGENTINA, BARBADOS, BANGLADESH, BAHAMAS, SRI_LANKA, CUBA, INDONESIA, ISRAEL, IRAN, IRAQ, JORDAN,
-            JAMAICA, KENYA, MEXICO, SINGAPORE
+            LIBYA, NIGERIA, BULGARIA, CYPRUS, ESTONIA, LATVIA, LIECHTENSTIEN, LITHUANIA, ALBANIA, ARMENIA, ANDORRA, AZERBAIJAN, 
+            BELARUS, MOLDOVA, MONACO, MONTENEGRO, PORTUGAL, ROMANIA, SAN_MARINO, TURKEY, UKRAINE, BRAZIL, MAURITIUS, UAE, AFGHANISTAN, 
+            ARGENTINA, BARBADOS, BANGLADESH, BAHAMAS, SRI_LANKA, CUBA, INDONESIA, ISRAEL, IRAN, IRAQ, JORDAN, JAMAICA, KENYA, MEXICO,
+            SINGAPORE, PAKISTAN, ANGOLA, BAHRAIN, BURUNDI, BENIN, BOLIVIA, BHUTAN, BOTSWANA, BELIZE, CONGO, CENTRAL_AFRICAN_REPUBLIC,
+            CHILE, CAMEROON, COLOMBIA, COSTA_RICA, CAPE_VERDE, DOMINICA, DOMINICAN_REPUBLIC, ALGERIA, ECUADOR, ERITREA, ETHIOPIA, 
+            FIJI, DJIBOUTI, MICRONESIA, GABON, GAMBIA, GRENADA, GHANA, GUINEA, EQUATORIAL_GUINEA, GUATEMALA, GUYANA, HONDURAS, CROATIA,
+            HAITI, KYRGYZSTAN, CAMBODIA, KIRIBATI, COMOROS, KUWAIT, KAZAKHSTAN, LEBANON, LIBERIA, LESOTHO, MOROCCO, MADAGASCAR,
+            MALI, MACEDONIA, MARSHALL_ISLANDS, MYANMAR, MONGOLIA, MAURITANIA, MALDIVES, MALAWI, MALAYSIA, MOZAMBIQUE, NAMIBIA, NIGER,
+            NICARAGUA, NEPAL, NAURU, OMAN, PANAMA, PERU, PAPUA_NEW_GUINEA, PHILIPPINES, PALAU, PARAGUAY, QATAR, SERBIA, RWANDA, 
+            SAUDI_ARABIA, SOLOMON_ISLANDS, SEYSCHELLES, SUDAN, SLOVAKIA, SLOVENIA, CZECH_REPUBLIC, CZECHOSLOVAKIA, SENEGAL, SIERRA_LEONE,
+            SOMALIA, SURINAME
         });
 
         private static readonly ISet<string> UK_COUNTRIES = new HashSet<string>(new string[] { 
