@@ -42,45 +42,23 @@ namespace FTAnalyzer
             PARAGUAY = "Paraguay", QATAR = "Qatar", SERBIA = "Serbia", RWANDA = "Rwanda", SAUDI_ARABIA ="Saudi Arabia",
             SOLOMON_ISLANDS = "Solomon Islands", SEYSCHELLES = "Seyschelles", SUDAN = "Sudan", SLOVENIA = "Slovenia",
             SLOVAKIA ="Slovakia", CZECH_REPUBLIC = "Czech Republic", CZECHOSLOVAKIA = "Czechoslovakia", SENEGAL = "Senegal",
-            SIERRA_LEONE = "Sierra Leone", SOMALIA = "Somalia", SURINAME = "Suriname";
+            SIERRA_LEONE = "Sierra Leone", SOMALIA = "Somalia", SURINAME = "Suriname", SOUTH_SUDAN = "South Sudan",
+            EL_SALVADOR = "El Salvador", SYRIA = "Syria", SWAZILAND = "Swaziland", CHAD = "Chad", SOUTH_KOREA = "South Korea",
+            NORTH_KOREA = "North Korea", KOREA = "Korea", IVORY_COAST = "Ivory Coast", TOGO = "Togo", THAILAND = "Thailand",
+            TAJIKISTAN = "Tajikistan", TURKMENISTAN = "Turkmenistan", TUNISIA = "Tunisia", TONGA = "Tonga", TUVALU = "Tuvalu",
+            TRINIDAD_TOBAGO = "Trinidad and Tobago", TANZANIA = "Tanzania", UGANDA = "Uganda", URUGUAY = "Uruguay",
+            UZBEKISTAN = "Uzbekistan", VENEZUELA = "Venezuela", VIETNAM = "Vietnam", VANATU = "Vanatu", SAMOA = "Samoa", 
+            YEMEN = "Yemen", ZAMBIA = "Zambia", BURKINA_FASO = "Burkina Faso", BOSNIA = "Bosnia and Herzegovina";
 
         //AG  Antigua and Barbuda
-        //BA  Bosnia and Herzegovina
-        //BF  Burkina Faso
         //BN  Brunei Darussalam
-        //CI  Côte d'Ivoire
         //GW  Guinea-Bissau
         //KN  Saint Kitts and Nevis
-        //KP  Democratic People's Republic of Korea
-        //KR  Republic of Korea
         //LA  Lao People's Democratic Republic
-        //SS  South Sudan
         //ST  Sao Tome and Principe
-        //SV  El Salvador
-        //SY  Syrian Arab Republic
-        //SZ  Swaziland
-        //TD  Chad
-        //TG  Togo
-        //TH  Thailand
-        //TJ  Tajikistan
         //TL  Timor-Leste
-        //TM  Turkmenistan
-        //TN  Tunisia
-        //TO  Tonga
-        //TT  Trinidad and Tobago
-        //TV  Tuvalu
-        //TZ  United Republic of Tanzania
-        //UG  Uganda
-        //UY  Uruguay
-        //UZ  Uzbekistan
         //VC  Saint Vincent and the Grenadines
-        //VE  Venezuela (Bolivarian Republic of)
-        //VN  Viet Nam
-        //VU  Vanuatu
-        //WS  Samoa
-        //YE  Yemen
-        //ZM  Zambia
-
+        
         private static readonly ISet<string> KNOWN_COUNTRIES = new HashSet<string>(new string[] {
             SCOTLAND, ENGLAND, CANADA, UNITED_STATES, WALES, IRELAND, UNITED_KINGDOM, NEW_ZEALAND, AUSTRALIA, INDIA, FRANCE, GERMANY,
             ITALY, SPAIN, BELGIUM, SOUTH_AFRICA, NORTHERN_IRELAND, EGYPT, HUNGARY, MALTA, DENMARK, SWEDEN, NORWAY, FINLAND, ICELAND,
@@ -95,7 +73,9 @@ namespace FTAnalyzer
             MALI, MACEDONIA, MARSHALL_ISLANDS, MYANMAR, MONGOLIA, MAURITANIA, MALDIVES, MALAWI, MALAYSIA, MOZAMBIQUE, NAMIBIA, NIGER,
             NICARAGUA, NEPAL, NAURU, OMAN, PANAMA, PERU, PAPUA_NEW_GUINEA, PHILIPPINES, PALAU, PARAGUAY, QATAR, SERBIA, RWANDA, 
             SAUDI_ARABIA, SOLOMON_ISLANDS, SEYSCHELLES, SUDAN, SLOVAKIA, SLOVENIA, CZECH_REPUBLIC, CZECHOSLOVAKIA, SENEGAL, SIERRA_LEONE,
-            SOMALIA, SURINAME
+            SOMALIA, SURINAME, SOUTH_SUDAN, EL_SALVADOR, SYRIA, SWAZILAND, CHAD, SOUTH_KOREA, NORTH_KOREA, KOREA, IVORY_COAST, TOGO, 
+            THAILAND, TAJIKISTAN, TURKMENISTAN, TUNISIA, TONGA, TUVALU, TRINIDAD_TOBAGO, TANZANIA, UGANDA, URUGUAY, UZBEKISTAN, VENEZUELA,
+            VIETNAM, VANATU, SAMOA, YEMEN, ZAMBIA, BURKINA_FASO, BOSNIA
         });
 
         private static readonly ISet<string> UK_COUNTRIES = new HashSet<string>(new string[] { 

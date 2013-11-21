@@ -29,8 +29,18 @@
       <CountryTypo from="The Netherlands" to="Netherlands" />
       <CountryTypo from="St Lucia" to="Saint Lucia" />
       <CountryTypo from="Ceylon"   to="Sri Lanka" />
-
+      <CountryTypo from="Viet nam" to="Vietnam" />
+      <CountryTypo from="Viet Nam" to="Vietnam" />
+      <CountryTypo from="Bosnia" to="Bosnia and Herzegovina" />
+      <CountryTypo from="Herzegovina" to="Bosnia and Herzegovina" />
+      <CountryTypo from="Trinidad" to="Trinidad and Tobago" />
+      <CountryTypo from="Tobago" to="Trinidad and Tobago" />
+      <CountryTypo from="East Germany" to="Germany" />
+      <CountryTypo from="West Germany" to="Germany" />
+      <CountryTypo from="N Wales" to="Wales" />
+      <CountryTypo from="S Wales" to="Wales" />
     </CountryTypos>
+    
     <RegionTypos>
       <!-- Scotland -->
       <RegionTypo from="ABD"            to="Aberdeenshire" />
@@ -51,7 +61,7 @@
       <RegionTypo from="Caithnessshire"  to="Caithness" />
       <RegionTypo from="Haddingtonshire" to="East Lothian" />
       <RegionTypo from="Linlithgowshire" to="West Lothian" />
-      
+
       <!-- England -->
       <RegionTypo from="Beds"          to="Bedfordshire" />
       <RegionTypo from="Bedford"       to="Bedfordshire" />
@@ -179,7 +189,7 @@
       <RegionTypo from="Co Wexford"       to="County Wexford" />
       <RegionTypo from="Wexford"          to="County Wexford" />
       <RegionTypo from="Co Wicklow"       to="County Wicklow" />
-      <RegionTypo from="Wicklow"          to="County Wicklow" />  
+      <RegionTypo from="Wicklow"          to="County Wicklow" />
 
       <!-- Wales -->
       <RegionTypo from="Caernarvonshire"  to="Caernarvon" />
@@ -309,7 +319,7 @@
       <CountryToRegion region="Sutherland"          country="Scotland" />
       <CountryToRegion region="West Lothian"        country="Scotland" />
       <CountryToRegion region="Wigtonshire"         country="Scotland" />
-    
+
       <!-- Scottish Cities add the Country -->
       <CountryToRegion region="Aberdeen"            country="Scotland" />
       <CountryToRegion region="Dundee"              country="Scotland" />
@@ -361,7 +371,10 @@
       <CountryToRegion region="Wiltshire"           country="England" />
       <CountryToRegion region="Worcestershire"      country="England" />
       <CountryToRegion region="Yorkshire"           country="England" />
-    
+      <CountryToRegion region="East Yorkshire"      country="England" />
+      <CountryToRegion region="North Yorkshire"     country="England" />
+      <CountryToRegion region="West Yorkshire"      country="England" />
+
       <!-- English Cities add the Country -->
       <CountryToRegion region="Bath"                country="England" />
       <CountryToRegion region="Birmingham"          country="England" />
@@ -429,28 +442,28 @@
 
       <!-- Welsh Regions add the Country -->
       <CountryToRegion region="Anglesey"            country="Wales" />
-      <CountryToRegion region="Brecon"              country="Wales" />  
-      <CountryToRegion region="Caernarvon"          country="Wales" />  
-      <CountryToRegion region="Cardigan"            country="Wales" />  
-      <CountryToRegion region="Carmarthen"          country="Wales" />  
-      <CountryToRegion region="Denbigh"             country="Wales" />  
-      <CountryToRegion region="Flint"               country="Wales" />  
-      <CountryToRegion region="Glamorgan"           country="Wales" />  
-      <CountryToRegion region="Gwynedd"             country="Wales" />  
-      <CountryToRegion region="Merioneth"           country="Wales" />  
-      <CountryToRegion region="Mid-Glamorgan"       country="Wales" />  
-      <CountryToRegion region="Monmouth"            country="Wales" />  
-      <CountryToRegion region="Montgomery"          country="Wales" />  
-      <CountryToRegion region="Pembroke"            country="Wales" />  
-      <CountryToRegion region="Radnor"              country="Wales" />  
-      
+      <CountryToRegion region="Brecon"              country="Wales" />
+      <CountryToRegion region="Caernarvon"          country="Wales" />
+      <CountryToRegion region="Cardigan"            country="Wales" />
+      <CountryToRegion region="Carmarthen"          country="Wales" />
+      <CountryToRegion region="Denbigh"             country="Wales" />
+      <CountryToRegion region="Flint"               country="Wales" />
+      <CountryToRegion region="Glamorgan"           country="Wales" />
+      <CountryToRegion region="Gwynedd"             country="Wales" />
+      <CountryToRegion region="Merioneth"           country="Wales" />
+      <CountryToRegion region="Mid-Glamorgan"       country="Wales" />
+      <CountryToRegion region="Monmouth"            country="Wales" />
+      <CountryToRegion region="Montgomery"          country="Wales" />
+      <CountryToRegion region="Pembroke"            country="Wales" />
+      <CountryToRegion region="Radnor"              country="Wales" />
+
       <!-- Welsh Cities add the Country -->
       <CountryToRegion region="Bangor"              country="Wales" />
       <CountryToRegion region="Cardiff"             country="Wales" />
       <CountryToRegion region="Newport"             country="Wales" />
       <CountryToRegion region="St Asaph"            country="Wales" />
       <CountryToRegion region="St David's"          country="Wales" />
-      <CountryToRegion region="Swansea"             country="Wales" />  
+      <CountryToRegion region="Swansea"             country="Wales" />
 
       <!-- Irish Provinces add the Country -->
       <CountryToRegion region="County Antrim"      country="Northern Ireland" />
@@ -518,61 +531,61 @@
       <!-- US States add the Country -->
       <CountryToRegion region="Alabama"               country="United States" />
       <CountryToRegion region="Alaska"                country="United States" />
-      <CountryToRegion region="Arizona"               country="United States" /> 
-      <CountryToRegion region="Arkansas"              country="United States" /> 
-      <CountryToRegion region="California"            country="United States" /> 
-      <CountryToRegion region="Colorado"              country="United States" /> 
-      <CountryToRegion region="Connecticut"           country="United States" /> 
-      <CountryToRegion region="Delaware"              country="United States" /> 
-      <CountryToRegion region="District of Columbia"  country="United States" /> 
+      <CountryToRegion region="Arizona"               country="United States" />
+      <CountryToRegion region="Arkansas"              country="United States" />
+      <CountryToRegion region="California"            country="United States" />
+      <CountryToRegion region="Colorado"              country="United States" />
+      <CountryToRegion region="Connecticut"           country="United States" />
+      <CountryToRegion region="Delaware"              country="United States" />
+      <CountryToRegion region="District of Columbia"  country="United States" />
       <CountryToRegion region="Florida"               country="United States" />
       <!--      
       <CountryToRegion region="Georgia"               country="United States" /> 
       -->
-      <CountryToRegion region="Hawaii"                country="United States" /> 
-      <CountryToRegion region="Idaho"                 country="United States" /> 
-      <CountryToRegion region="Illinois"              country="United States" /> 
-      <CountryToRegion region="Indiana"               country="United States" /> 
-      <CountryToRegion region="Iowa"                  country="United States" /> 
-      <CountryToRegion region="Kansas"                country="United States" /> 
-      <CountryToRegion region="Kentucky"              country="United States" /> 
-      <CountryToRegion region="Louisiana"             country="United States" /> 
-      <CountryToRegion region="Maine"                 country="United States" /> 
-      <CountryToRegion region="Maryland"              country="United States" /> 
-      <CountryToRegion region="Massachusetts"         country="United States" /> 
-      <CountryToRegion region="Michigan"              country="United States" /> 
-      <CountryToRegion region="Minnesota"             country="United States" /> 
-      <CountryToRegion region="Mississippi"           country="United States" /> 
-      <CountryToRegion region="Missouri"              country="United States" /> 
-      <CountryToRegion region="Montana"               country="United States" /> 
-      <CountryToRegion region="Nebraska"              country="United States" /> 
-      <CountryToRegion region="Nevada"                country="United States" /> 
-      <CountryToRegion region="New Hampshire"         country="United States" /> 
-      <CountryToRegion region="New Jersey"            country="United States" /> 
-      <CountryToRegion region="New Mexico"            country="United States" /> 
-      <CountryToRegion region="New York"              country="United States" /> 
-      <CountryToRegion region="North Carolina"        country="United States" /> 
-      <CountryToRegion region="North Dakota"          country="United States" /> 
-      <CountryToRegion region="Ohio"                  country="United States" /> 
-      <CountryToRegion region="Oklahoma"              country="United States" /> 
-      <CountryToRegion region="Oregon"                country="United States" /> 
-      <CountryToRegion region="Pennsylvania"          country="United States" /> 
-      <CountryToRegion region="Rhode Island"          country="United States" /> 
-      <CountryToRegion region="South Carolina"        country="United States" /> 
-      <CountryToRegion region="South Dakota"          country="United States" /> 
-      <CountryToRegion region="Tennessee"             country="United States" /> 
-      <CountryToRegion region="Texas"                 country="United States" /> 
-      <CountryToRegion region="Utah"                  country="United States" /> 
-      <CountryToRegion region="Vermont"               country="United States" /> 
-      <CountryToRegion region="Virginia"              country="United States" /> 
-      <CountryToRegion region="Washington"            country="United States" /> 
-      <CountryToRegion region="West Virginia"         country="United States" /> 
-      <CountryToRegion region="Wisconsin"             country="United States" /> 
-      <CountryToRegion region="Wyoming"               country="United States" /> 
+      <CountryToRegion region="Hawaii"                country="United States" />
+      <CountryToRegion region="Idaho"                 country="United States" />
+      <CountryToRegion region="Illinois"              country="United States" />
+      <CountryToRegion region="Indiana"               country="United States" />
+      <CountryToRegion region="Iowa"                  country="United States" />
+      <CountryToRegion region="Kansas"                country="United States" />
+      <CountryToRegion region="Kentucky"              country="United States" />
+      <CountryToRegion region="Louisiana"             country="United States" />
+      <CountryToRegion region="Maine"                 country="United States" />
+      <CountryToRegion region="Maryland"              country="United States" />
+      <CountryToRegion region="Massachusetts"         country="United States" />
+      <CountryToRegion region="Michigan"              country="United States" />
+      <CountryToRegion region="Minnesota"             country="United States" />
+      <CountryToRegion region="Mississippi"           country="United States" />
+      <CountryToRegion region="Missouri"              country="United States" />
+      <CountryToRegion region="Montana"               country="United States" />
+      <CountryToRegion region="Nebraska"              country="United States" />
+      <CountryToRegion region="Nevada"                country="United States" />
+      <CountryToRegion region="New Hampshire"         country="United States" />
+      <CountryToRegion region="New Jersey"            country="United States" />
+      <CountryToRegion region="New Mexico"            country="United States" />
+      <CountryToRegion region="New York"              country="United States" />
+      <CountryToRegion region="North Carolina"        country="United States" />
+      <CountryToRegion region="North Dakota"          country="United States" />
+      <CountryToRegion region="Ohio"                  country="United States" />
+      <CountryToRegion region="Oklahoma"              country="United States" />
+      <CountryToRegion region="Oregon"                country="United States" />
+      <CountryToRegion region="Pennsylvania"          country="United States" />
+      <CountryToRegion region="Rhode Island"          country="United States" />
+      <CountryToRegion region="South Carolina"        country="United States" />
+      <CountryToRegion region="South Dakota"          country="United States" />
+      <CountryToRegion region="Tennessee"             country="United States" />
+      <CountryToRegion region="Texas"                 country="United States" />
+      <CountryToRegion region="Utah"                  country="United States" />
+      <CountryToRegion region="Vermont"               country="United States" />
+      <CountryToRegion region="Virginia"              country="United States" />
+      <CountryToRegion region="Washington"            country="United States" />
+      <CountryToRegion region="West Virginia"         country="United States" />
+      <CountryToRegion region="Wisconsin"             country="United States" />
+      <CountryToRegion region="Wyoming"               country="United States" />
 
       <!-- Australian Territories -->
       <CountryToRegion region="New South Wales"          country="Australia" />
-    </DemoteCountries>                                                          
+    </DemoteCountries>
     <DemoteRegions>
       <RegionToParish parish="Aberdeen"      region="Aberdeenshire" />
       <RegionToParish parish="Ayr"           region="Ayrshire" />
@@ -583,7 +596,7 @@
       <RegionToParish parish="Falkirk"       region="West Lothian" />
       <RegionToParish parish="Stirling"      region="Stirlingshire" />
       <RegionToParish parish="Perth"         region="Perthshire" />
-      
+
       <!-- Welsh Cities add the county  -->
       <RegionToParish parish="Bangor"        region="Caernarvon" />
       <RegionToParish parish="Cardiff"       region="Glamorgan" />
@@ -652,7 +665,7 @@
       <RegionToParish parish="Worcester"      region="Worcestershire" />
       <RegionToParish parish="York"           region="Yorkshire" />
       <RegionToParish parish="Ipswich"        region="Suffolk" />
-                    
+
       <RegionToParish parish="Toronto"    region="Ontario" />
       <RegionToParish parish="Vancouver"  region="British Columbia" />
     </DemoteRegions>
