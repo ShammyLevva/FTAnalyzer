@@ -25,11 +25,8 @@ namespace FTAnalyzer.Forms
         private int maxGeoCodedYear;
         private int geocodedRange;
         private int yearLimit;
-        private FeatureDataTable factLocations;
-        private VectorLayer clusterLayer;
-        private LabelLayer labelLayer;
-        private MarkerClusterer clusterer;
         private Color backgroundColour;
+        private ClusterLayer clusters;
         
         public TimeLine()
         {
@@ -79,61 +76,7 @@ namespace FTAnalyzer.Forms
 
         private void SetupMap()
         {
-            factLocations = new FeatureDataTable();
-            factLocations.Columns.Add("MapLocation", typeof(MapLocation));
-            factLocations.Columns.Add("Label", typeof(string));
-
-            clusterer = new MarkerClusterer(factLocations);
-            GeometryFeatureProvider factLocationGFP = new GeometryFeatureProvider(clusterer.FeatureDataTable);
-
-            clusterLayer = new VectorLayer("Clusters");
-            clusterLayer.DataSource = factLocationGFP;
-            clusterLayer.CoordinateTransformation = MapTransforms.Transform();
-            clusterLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
-
-            Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
-
-            VectorStyle feature = new VectorStyle();
-            feature.PointColor = new SolidBrush(Color.Red);
-            feature.PointSize = 20;
-            feature.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\teardrop_blue.png"));
-            feature.SymbolOffset = new PointF(0.0f, -17.0f);
-            styles.Add(MapCluster.FEATURE, feature);
-
-            VectorStyle cluster = new VectorStyle();
-            cluster.PointColor = new SolidBrush(Color.ForestGreen);
-            cluster.PointSize = 20;
-            cluster.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\people35.png"));
-            styles.Add(MapCluster.CLUSTER, cluster);
-
-            VectorStyle unknown = new VectorStyle();
-            unknown.PointColor = new SolidBrush(Color.Black);
-            unknown.PointSize = 10;
-            styles.Add(MapCluster.UNKNOWN, unknown);
-
-            clusterLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<string>("Cluster", styles, unknown);
-            mapBox1.Map.Layers.Add(clusterLayer);
-
-            labelLayer = new LabelLayer("Label");
-            labelLayer.CoordinateTransformation = MapTransforms.Transform();
-            labelLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
-            labelLayer.DataSource = factLocationGFP;
-            labelLayer.Enabled = true;
-            //Specifiy field that contains the label string.
-            labelLayer.LabelColumn = "Label";
-            labelLayer.TextRenderingHint = TextRenderingHint.AntiAlias;
-            labelLayer.SmoothingMode = SmoothingMode.AntiAlias;
-            LabelStyle style = new LabelStyle();
-            style.ForeColor = Color.Black;
-            style.Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold);
-            style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center;
-            style.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom;
-            style.CollisionDetection = true;
-            style.Offset = new PointF(2, 22);
-            style.Halo = new Pen(Color.Yellow, 3);
-            labelLayer.Style = style;
-            mapBox1.Map.Layers.Add(labelLayer);
-
+            clusters = new ClusterLayer(mapBox1.Map);
             GeocodeLocations.AddEnglishParishLayer(mapBox1.Map); 
             mapBox1.Map.MinimumZoom = 500;
             mapBox1.Map.MaximumZoom = 50000000;
@@ -217,16 +160,16 @@ namespace FTAnalyzer.Forms
                     txtLocations.Text = locations.Count() + " Locations in total for year " + year;
                 }
                 txtLocations.Text += " (you may need to zoom out to see them all). Use arrow tool then select icon to view ancestors at location";
-                factLocations.Clear();
+                clusters.Clear();
                 Envelope bbox = new Envelope();
                 foreach (MapLocation loc in locations)
                 {
-                    FeatureDataRow row = loc.AddFeatureDataRow(factLocations);
+                    FeatureDataRow row = loc.AddFeatureDataRow(clusters.FactLocations);
                     bbox.ExpandToInclude(row.Geometry.Coordinate);
                 }
                 if (!mnuKeepZoom.Checked)
                 {
-                    IMathTransform transform = clusterLayer.CoordinateTransformation.MathTransform;
+                    IMathTransform transform = clusters.MathTransform;
                     Envelope expand;
                     if (bbox.Centre == null)
                         expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
@@ -316,14 +259,6 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void RefreshClusters()
-        {
-            Envelope env = mapBox1.Map.Envelope;
-            IMathTransform transform = clusterLayer.ReverseCoordinateTransformation.MathTransform;
-            env = new Envelope(transform.Transform(env.TopLeft()), transform.Transform(env.BottomRight()));
-            clusterer.Recluster(Math.Max(env.Width, env.Height) / 35.0);
-        }
-
         private void TimeLine_Load(object sender, EventArgs e)
         {
             SetGeoCodedYearRange();
@@ -350,7 +285,7 @@ namespace FTAnalyzer.Forms
 
         private void mapBox1_MapViewOnChange()
         {
-            RefreshClusters();
+            clusters.Refresh();
         }
 
         private void mapBox1_MapZoomChanged(double zoom)
@@ -360,7 +295,7 @@ namespace FTAnalyzer.Forms
 
         public void RefreshTimeline()
         {
-            RefreshClusters();
+            clusters.Refresh();
             mapBox1.Refresh();
         }
 

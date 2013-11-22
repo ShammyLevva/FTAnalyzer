@@ -211,12 +211,19 @@
     <Compile Include="Forms\Controls\ToolStripMapSelector.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\Places.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Places.Designer.cs">
+      <DependentUpon>Places.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\LifeLine.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\LifeLine.Designer.cs">
       <DependentUpon>LifeLine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\ClusterLayer.cs" />
     <Compile Include="Mapping\MapLifeLine.cs" />
     <Compile Include="Mapping\NLSRequest.cs" />
     <Compile Include="Properties\MappingSettings.Designer.cs">
@@ -347,6 +354,9 @@
     </Content>
     <EmbeddedResource Include="Forms\ColourBMD.resx">
       <DependentUpon>ColourBMD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Places.resx">
+      <DependentUpon>Places.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditLocation.resx">
       <DependentUpon>EditLocation.cs</DependentUpon>

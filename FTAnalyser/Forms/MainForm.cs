@@ -1726,6 +1726,15 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        private void mnuPlaces_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            Places p = new Places();
+            p.Show();
+            DisposeDuplicateForms(p);
+            HourGlass(false);
+        }
+
         private void resetToDefaultFormSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Height = 561;
