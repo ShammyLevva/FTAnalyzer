@@ -99,8 +99,12 @@ namespace FTAnalyzer.Forms
             List<IDisplayFact> displayFacts = new List<IDisplayFact>();
             FactLocation location = tvPlaces.SelectedNode.Tag as FactLocation;
             if (location == null)
+            {
+                this.Cursor = Cursors.Default;
                 return;
-            foreach (Individual ind in ft.GetIndividualsAtLocation(location, tvPlaces.SelectedNode.Level))
+            }
+            IEnumerable<Individual> list = ft.GetIndividualsAtLocation(location, tvPlaces.SelectedNode.Level);
+            foreach (Individual ind in list)
             {
                 foreach(Fact fact in ind.AllFacts)
                 {
@@ -151,7 +155,7 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        private void LifeLine_FormClosed(object sender, FormClosedEventArgs e)
+        private void Places_FormClosed(object sender, FormClosedEventArgs e)
         {
             DatabaseHelper.GeoLocationUpdated -= DatabaseHelper_GeoLocationUpdated;
             this.Dispose();
@@ -165,7 +169,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void LifeLine_Load(object sender, EventArgs e)
+        private void Places_Load(object sender, EventArgs e)
         {
             // add nodes after constructor so that bold issues don't interfere
             tvPlaces.Nodes.AddRange(ft.GetAllLocationsTreeNodes(tvPlaces.Font));

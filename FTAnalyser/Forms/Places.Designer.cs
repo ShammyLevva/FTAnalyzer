@@ -377,8 +377,8 @@ namespace FTAnalyzer.Forms
             this.MainMenuStrip = this.menuStrip;
             this.Name = "Places";
             this.Text = "Places";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LifeLine_FormClosed);
-            this.Load += new System.EventHandler(this.LifeLine_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Places_FormClosed);
+            this.Load += new System.EventHandler(this.Places_Load);
             this.splitContainerFacts.Panel1.ResumeLayout(false);
             this.splitContainerFacts.Panel2.ResumeLayout(false);
             this.splitContainerFacts.Panel2.PerformLayout();
