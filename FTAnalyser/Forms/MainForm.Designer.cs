@@ -68,6 +68,7 @@
             this.mnuMaps = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuShowTimeline = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuLifelines = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPlaces = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuGeocodeLocations = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuLocationsGeocodeReport = new System.Windows.Forms.ToolStripMenuItem();
@@ -191,7 +192,6 @@
             this.relTypesFacts = new Controls.RelationTypes();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.mnuPlaces = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -531,6 +531,13 @@
             this.mnuLifelines.Text = "Show Lifelines";
             this.mnuLifelines.Click += new System.EventHandler(this.mnuLifelines_Click);
             // 
+            // mnuPlaces
+            // 
+            this.mnuPlaces.Name = "mnuPlaces";
+            this.mnuPlaces.Size = new System.Drawing.Size(243, 22);
+            this.mnuPlaces.Text = "Show Places";
+            this.mnuPlaces.Click += new System.EventHandler(this.mnuPlaces_Click);
+            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
@@ -640,9 +647,9 @@
             // 
             this.dgDataErrors.AllowUserToAddRows = false;
             this.dgDataErrors.AllowUserToDeleteRows = false;
-            this.dgDataErrors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgDataErrors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -772,9 +779,9 @@
             // 
             this.dgWarDead.AllowUserToAddRows = false;
             this.dgWarDead.AllowUserToDeleteRows = false;
-            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgWarDead.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgWarDead.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgWarDead.Location = new System.Drawing.Point(0, 110);
@@ -838,9 +845,9 @@
             // 
             this.dgTreeTops.AllowUserToAddRows = false;
             this.dgTreeTops.AllowUserToDeleteRows = false;
-            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgTreeTops.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgTreeTops.Location = new System.Drawing.Point(0, 110);
@@ -1087,7 +1094,7 @@
             this.ckbShowLCEntered.Size = new System.Drawing.Size(415, 17);
             this.ckbShowLCEntered.TabIndex = 10;
             this.ckbShowLCEntered.Text = "Show already entered to Lost Cousins (unticked = show those to yet to be entered)" +
-    "";
+                "";
             this.ckbShowLCEntered.UseVisualStyleBackColor = true;
             // 
             // btnLC1841EW
@@ -1740,9 +1747,10 @@
             // 
             // rtbOutput
             // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbOutput.Location = new System.Drawing.Point(3, 96);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
@@ -1801,9 +1809,9 @@
             // 
             // tabSelector
             // 
-            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabSelector.Controls.Add(this.tabDisplayProgress);
             this.tabSelector.Controls.Add(this.tabIndividuals);
             this.tabSelector.Controls.Add(this.tabFamilies);
@@ -1880,13 +1888,6 @@
             // 
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
-            // 
-            // mnuPlaces
-            // 
-            this.mnuPlaces.Name = "mnuPlaces";
-            this.mnuPlaces.Size = new System.Drawing.Size(243, 22);
-            this.mnuPlaces.Text = "Show Places";
-            this.mnuPlaces.Click += new System.EventHandler(this.mnuPlaces_Click);
             // 
             // MainForm
             // 

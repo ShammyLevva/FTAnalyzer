@@ -137,10 +137,7 @@ namespace FTAnalyzer
         public void CheckUnknownFactTypes(string factType)
         {
             if (!unknownFactTypes.Contains(factType))
-            {
                 unknownFactTypes.Add(factType);
-                xmlErrorbox.AppendText("Recorded unknown fact type " + factType + "\n");
-            }
         }
 
         public bool LoadTree(string filename, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
@@ -243,11 +240,17 @@ namespace FTAnalyzer
         {
             if (Properties.GeneralSettings.Default.ReportOptions)
             {
-                xmlErrorbox.AppendText("\nThe current options are set :");
+                xmlErrorbox.AppendText("\nThe current general options are set :");
                 xmlErrorbox.AppendText("\n    Use Baptism/Christening date if no birth date: " + Properties.GeneralSettings.Default.UseBaptismDates);
                 xmlErrorbox.AppendText("\n    Allow Empty values in Locations: " + Properties.GeneralSettings.Default.AllowEmptyLocations);
                 xmlErrorbox.AppendText("\n    Treat Residence facts as Census facts: " + Properties.GeneralSettings.Default.UseResidenceAsCensus);
                 xmlErrorbox.AppendText("\n    Tolerate slightly inaccurate census dates: " + Properties.GeneralSettings.Default.TolerateInaccurateCensusDate);
+                xmlErrorbox.AppendText("\n    Include Locations with partial match status: " + Properties.GeneralSettings.Default.IncludePartials);
+                xmlErrorbox.AppendText("\n    Family Census Facts apply to only parents: " + Properties.GeneralSettings.Default.OnlyCensusParents);
+                xmlErrorbox.AppendText("\n    Loose Birth minimum parental age: " + Properties.GeneralSettings.Default.MinParentalAge);
+                xmlErrorbox.AppendText("\nThe current mapping options are set :");
+                xmlErrorbox.AppendText("\n    Custom Maps Location: " + Properties.MappingSettings.Default.CustomMapPath);
+                xmlErrorbox.AppendText("\n    Display English & Welsh Parish Boundaries: " + Properties.MappingSettings.Default.UseEnglishParishBoundaries);
                 xmlErrorbox.AppendText("\n\n");
             }
         }
