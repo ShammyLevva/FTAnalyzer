@@ -52,6 +52,7 @@ namespace FTAnalyzer
             }
             Chart chart = new Chart();
             chart.BuildChildBirthProfile(stats);
+            MainForm.DisposeDuplicateForms(chart);
             chart.Show();
             return buildOutput(stats);
         }

@@ -1072,7 +1072,7 @@ namespace FTAnalyzer
         private void childAgeProfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Statistics s = Statistics.Instance;
-            MessageBox.Show(s.ChildrenBirthProfiles());
+            MessageBox.Show(s.ChildrenBirthProfiles(), "Birth Profile Information");
         }
 
         private void viewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)
