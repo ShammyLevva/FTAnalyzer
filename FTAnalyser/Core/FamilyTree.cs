@@ -1884,7 +1884,6 @@ namespace FTAnalyzer
                         else
                             child.NodeFont = regularFont;
                         current.Nodes.Add(child);
-                        child.Text += string.Empty; // forces recalculation of fontsize
                     }
                     current = child;
                 }
@@ -1906,6 +1905,8 @@ namespace FTAnalyzer
                     }
                 }
             }
+            foreach (TreeNode node in displayTreeRootNode.Nodes)
+                node.Text += "  "; // force text to be longer to fix bold bug
             return BuildTreeNodeArray();
         }
 

@@ -1,24 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using FTAnalyzer.Utilities;
-using SharpMap.Styles;
-using SharpMap.Data;
-using FTAnalyzer.Mapping;
-using System.IO;
-using SharpMap.Layers;
-using SharpMap.Data.Providers;
-using System.Drawing.Text;
-using System.Drawing.Drawing2D;
-using SharpMap.Rendering.Decoration.ScaleBar;
-using GeoAPI.Geometries;
-using GeoAPI.CoordinateSystems.Transformations;
 using System.Diagnostics;
+using System.Drawing;
+using System.Windows.Forms;
+using FTAnalyzer.Mapping;
+using FTAnalyzer.Utilities;
+using GeoAPI.CoordinateSystems.Transformations;
+using GeoAPI.Geometries;
+using SharpMap.Data;
+using SharpMap.Rendering.Decoration.ScaleBar;
 
 namespace FTAnalyzer.Forms
 {
@@ -43,6 +33,7 @@ namespace FTAnalyzer.Forms
             for (int i = 7; i <= 10; i++)
                 mapZoomToolStrip.Items[i].Visible = false;
             backgroundColour = mapZoomToolStrip.Items[0].BackColor;
+            mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(mapBox1_MapViewOnChange);
             SetupMap();
             tvPlaces.Nodes.Clear();
             dgFacts.AutoGenerateColumns = false;
@@ -85,13 +76,7 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.Decorations.RemoveAt(0);
             mapBox1.Refresh();
         }
-
-        private void dgIndividuals_SelectionChanged(object sender, EventArgs e)
-        {
-            if (!isloading)
-                BuildMap();
-        }
-
+        
         private void BuildMap()
         {
             this.Cursor = Cursors.WaitCursor;
@@ -99,7 +84,7 @@ namespace FTAnalyzer.Forms
             dgFacts.DataSource = null;
             List<IDisplayFact> displayFacts = new List<IDisplayFact>();
             FactLocation location = tvPlaces.SelectedNode.Tag as FactLocation;
-            if (location == null || !location.IsGeoCoded(false))
+            if (isloading || location == null || !location.IsGeoCoded(false))
             {
                 this.Cursor = Cursors.Default;
                 return;
@@ -107,9 +92,9 @@ namespace FTAnalyzer.Forms
             IEnumerable<Individual> list = ft.GetIndividualsAtLocation(location, tvPlaces.SelectedNode.Level);
             foreach (Individual ind in list)
             {
-                foreach(Fact fact in ind.AllFacts)
+                foreach (Fact fact in ind.AllFacts)
                 {
-                    if (fact.Location.IsGeoCoded(false) && fact.Location.Matches(location.ToString(), tvPlaces.SelectedNode.Level))
+                    if (fact.Location.Matches(location.ToString(), tvPlaces.SelectedNode.Level))
                     {
                         displayFacts.Add(new DisplayFact(ind, fact));
                         MapLocation loc = new MapLocation(ind, fact, fact.FactDate);
@@ -138,8 +123,8 @@ namespace FTAnalyzer.Forms
                 mapBox1.Map.Zoom = mapBox1.Map.MinimumZoom;
             if (mapBox1.Map.Zoom > mapBox1.Map.MaximumZoom)
                 mapBox1.Map.Zoom = mapBox1.Map.MaximumZoom;
-            mapBox1.Refresh();
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
+            RefreshPlaces();
             this.Cursor = Cursors.Default;
         }
 
@@ -178,21 +163,27 @@ namespace FTAnalyzer.Forms
             if (tvPlaces.Nodes.Count > 0)
             {   // update map using first node as selected node
                 tvPlaces.SelectedNode = tvPlaces.Nodes[0];
-                BuildMap();
             }
             this.Cursor = Cursors.Default;
         }
-        
-        private bool preventExpand;
+
+        private bool preventExpand = false;
+        private bool settingIcon = false;
 
         private void tvPlaces_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (tvPlaces.SelectedNode != e.Node)
                 tvPlaces.SelectedNode = e.Node;
-            tvPlaces.SelectedImageIndex = e.Node.ImageIndex;
-            BuildMap();
+            if (!settingIcon)
+                BuildMap();
+            if (tvPlaces.SelectedImageIndex != e.Node.ImageIndex)
+            {
+                settingIcon = true;
+                tvPlaces.SelectedImageIndex = e.Node.ImageIndex;
+                settingIcon = false;
+            }
         }
-        
+
         private void tvPlaces_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
         {
             e.Cancel = (preventExpand && e.Action == TreeViewAction.Collapse);
@@ -220,6 +211,49 @@ namespace FTAnalyzer.Forms
                 frmInd.Show();
             }
             Cursor = Cursors.Default;
+        }
+
+        private void mapBox1_MapViewOnChange()
+        {
+            clusters.Refresh();
+        }
+
+        private void mapBox1_MapZoomChanged(double zoom)
+        {
+            RefreshPlaces();
+        }
+
+        public void RefreshPlaces()
+        {
+            clusters.Refresh();
+            mapBox1.Refresh();
+        }
+
+        private void mapBox1_MapCenterChanged(Coordinate center)
+        {
+            RefreshPlaces();
+        }
+
+        private void mapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            bool zoomed = false;
+            if (e.Button == MouseButtons.Left && mapBox1.Map.Zoom > mapBox1.Map.MinimumZoom)
+            {
+                zoomed = true;
+                mapBox1.Map.Zoom *= 1d / 1.5d;
+            }
+            else if (e.Button == MouseButtons.Right && mapBox1.Map.Zoom < mapBox1.Map.MaximumZoom)
+            {
+                zoomed = true;
+                mapBox1.Map.Zoom *= 1.5d;
+            }
+            if (zoomed)
+            {
+                Coordinate p = mapBox1.Map.ImageToWorld(new PointF(e.X, e.Y));
+                mapBox1.Map.Center.X = p.X;
+                mapBox1.Map.Center.Y = p.Y;
+                RefreshPlaces();
+            }
         }
     }
 }
