@@ -14,6 +14,7 @@ namespace FTAnalyzer
         string Forenames { get; }
         string TypeOfFact { get; }
         FactDate FactDate { get; }
+        string Relation { get; }
         FactLocation Location { get; }
         Age AgeAtFact { get; }
         Image LocationIcon { get; }

@@ -83,6 +83,19 @@ namespace FTAnalyzer.Forms
             tsRecords.Text = facts.Count + " Records";
         }
 
+        private void SetBackColour()
+        {
+            bool backColourGrey = false;
+            DisplayFact previous = null;
+            foreach (DisplayFact fact in facts)
+            {
+                if (previous != null && previous.IndividualID != fact.IndividualID)
+                    backColourGrey = !backColourGrey;
+                fact.BackColour = backColourGrey ? Color.LightGray : Color.White;
+                previous = fact;
+            }
+        }
+
         private void ResetTable()
         {
             if (allFacts)
@@ -93,6 +106,7 @@ namespace FTAnalyzer.Forms
             }
             else
                 dgFacts.Sort(dgFacts.Columns["FactDate"], ListSortDirection.Ascending);
+            SetBackColour();
         }
 
         private void printToolStripButton_Click(object sender, EventArgs e)
@@ -125,7 +139,7 @@ namespace FTAnalyzer.Forms
             reportFormHelper.SaveColumnLayout("FactsColumns.xml");
             MessageBox.Show("Column Settings Saved", "Facts");
         }
-        
+
         private void dgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 0)
@@ -149,8 +163,9 @@ namespace FTAnalyzer.Forms
                     {
                         cell.InheritedStyle.ForeColor = Color.Red; // if ignoring facts then set as red
                         cell.ToolTipText = "Fact is an error and isn't being used";
-                    }   
+                    }
                 }
+                cell.Style.BackColor = f.BackColour;
             }
         }
 

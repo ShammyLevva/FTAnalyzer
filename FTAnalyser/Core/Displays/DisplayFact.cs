@@ -13,7 +13,7 @@ namespace FTAnalyzer
         public string Forenames { get; private set; }
         private Individual Ind { get; set; }
         public Fact Fact { get; set; }
-
+        public Color BackColour { get; set; }
 
         public DisplayFact(Individual ind, Fact fact) : this(ind, ind.Surname, ind.Forenames, fact) { }
         public DisplayFact(Individual ind, string surname, string forenames, Fact fact)
@@ -36,6 +36,7 @@ namespace FTAnalyzer
         public string GoogleResultType { get { return Fact.Location.GoogleResultType; } }
         public string GeocodeStatus { get { return Fact.Location.Geocoded; } }
         public Image LocationIcon { get { return FactLocationImage.ErrorIcon(Fact.Location.GeocodeStatus).Icon; } }
+        public string Relation { get { return Ind.Relation; } }
 
         public int CompareTo(object obj)
         {
