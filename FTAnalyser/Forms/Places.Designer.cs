@@ -112,6 +112,7 @@ namespace FTAnalyzer.Forms
             // tvPlaces
             // 
             this.tvPlaces.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvPlaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tvPlaces.Location = new System.Drawing.Point(0, 0);
             this.tvPlaces.Name = "tvPlaces";
             this.tvPlaces.Size = new System.Drawing.Size(330, 459);
@@ -119,7 +120,6 @@ namespace FTAnalyzer.Forms
             this.tvPlaces.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeCollapse);
             this.tvPlaces.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeExpand);
             this.tvPlaces.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvPlaces_AfterSelect);
-            this.tvPlaces.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvPlaces_NodeMouseClick);
             this.tvPlaces.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvPlaces_NodeMouseDoubleClick);
             this.tvPlaces.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvPlaces_MouseDown);
             // 

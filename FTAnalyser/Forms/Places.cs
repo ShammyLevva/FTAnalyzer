@@ -96,9 +96,10 @@ namespace FTAnalyzer.Forms
         {
             this.Cursor = Cursors.WaitCursor;
             clusters.Clear();
+            dgFacts.DataSource = null;
             List<IDisplayFact> displayFacts = new List<IDisplayFact>();
             FactLocation location = tvPlaces.SelectedNode.Tag as FactLocation;
-            if (location == null)
+            if (location == null || !location.IsGeoCoded(false))
             {
                 this.Cursor = Cursors.Default;
                 return;
@@ -176,6 +177,7 @@ namespace FTAnalyzer.Forms
             isloading = false; // only turn off building map if completely done initializing
             if (tvPlaces.Nodes.Count > 0)
             {   // update map using first node as selected node
+                tvPlaces.SelectedNode = tvPlaces.Nodes[0];
                 BuildMap();
             }
             this.Cursor = Cursors.Default;
@@ -185,16 +187,12 @@ namespace FTAnalyzer.Forms
 
         private void tvPlaces_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            tvPlaces.SelectedImageIndex = e.Node.ImageIndex;
-        }
-
-        private void tvPlaces_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
             if (tvPlaces.SelectedNode != e.Node)
                 tvPlaces.SelectedNode = e.Node;
+            tvPlaces.SelectedImageIndex = e.Node.ImageIndex;
             BuildMap();
         }
-
+        
         private void tvPlaces_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
         {
             e.Cancel = (preventExpand && e.Action == TreeViewAction.Collapse);

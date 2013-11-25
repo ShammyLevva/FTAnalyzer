@@ -1884,7 +1884,7 @@ namespace FTAnalyzer
                         else
                             child.NodeFont = regularFont;
                         current.Nodes.Add(child);
-                        child.Text = child.Text; // forces recalculation of fontsize
+                        child.Text += string.Empty; // forces recalculation of fontsize
                     }
                     current = child;
                 }
