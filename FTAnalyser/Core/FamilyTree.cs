@@ -65,7 +65,7 @@ namespace FTAnalyzer
             {
                 return "";
             }
-            if (node.Name.Equals("PAGE"))
+            if (node.Name.Equals("PAGE") || node.Name.Equals("TITL"))
                 return node.InnerText.Trim();
             else
                 return node.FirstChild.Value.Trim();
