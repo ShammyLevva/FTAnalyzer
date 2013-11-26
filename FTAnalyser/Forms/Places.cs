@@ -18,6 +18,8 @@ namespace FTAnalyzer.Forms
         private Color backgroundColour;
         private ClusterLayer clusters;
         private bool isloading;
+        private FactLocation currentLocation;
+        private int currentLevel;
 
         public Places()
         {
@@ -84,17 +86,20 @@ namespace FTAnalyzer.Forms
             dgFacts.DataSource = null;
             List<IDisplayFact> displayFacts = new List<IDisplayFact>();
             FactLocation location = tvPlaces.SelectedNode.Tag as FactLocation;
-            if (isloading || location == null || !location.IsGeoCoded(false))
+            int level = tvPlaces.SelectedNode.Level;
+            if (isloading || location == null || !location.IsGeoCoded(false) || (location == currentLocation && level == currentLevel))
             {
                 this.Cursor = Cursors.Default;
                 return;
             }
-            IEnumerable<Individual> list = ft.GetIndividualsAtLocation(location, tvPlaces.SelectedNode.Level);
+            currentLevel = level;
+            currentLocation = location;
+            IEnumerable<Individual> list = ft.GetIndividualsAtLocation(location, level);
             foreach (Individual ind in list)
             {
                 foreach (Fact fact in ind.AllFacts)
                 {
-                    if (fact.Location.Matches(location.ToString(), tvPlaces.SelectedNode.Level))
+                    if (fact.Location.Matches(location.ToString(), level))
                     {
                         displayFacts.Add(new DisplayFact(ind, fact));
                         MapLocation loc = new MapLocation(ind, fact, fact.FactDate);
@@ -158,7 +163,8 @@ namespace FTAnalyzer.Forms
         private void Places_Load(object sender, EventArgs e)
         {
             // add nodes after constructor so that bold issues don't interfere
-            tvPlaces.Nodes.AddRange(ft.GetAllLocationsTreeNodes(tvPlaces.Font));
+            TreeNode[] nodes = ft.GetAllLocationsTreeNodes(tvPlaces.Font);
+            tvPlaces.Nodes.AddRange(nodes);
             isloading = false; // only turn off building map if completely done initializing
             if (tvPlaces.Nodes.Count > 0)
             {   // update map using first node as selected node

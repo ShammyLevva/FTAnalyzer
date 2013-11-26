@@ -45,8 +45,8 @@ namespace FTAnalyzer.Forms
             this.selectAllAncestorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectAllDescendantsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.mapBox1 = new SharpMap.Forms.MapBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.txtCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -96,8 +96,8 @@ namespace FTAnalyzer.Forms
             // 
             // splitContainerFacts.Panel2
             // 
-            this.splitContainerFacts.Panel2.Controls.Add(this.statusStrip);
             this.splitContainerFacts.Panel2.Controls.Add(this.dgFacts);
+            this.splitContainerFacts.Panel2.Controls.Add(this.statusStrip);
             this.splitContainerFacts.Size = new System.Drawing.Size(1113, 566);
             this.splitContainerFacts.SplitterDistance = 435;
             this.splitContainerFacts.TabIndex = 18;
@@ -220,19 +220,6 @@ namespace FTAnalyzer.Forms
             this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Text = "Select all Relations (all of above)";
             this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Click += new System.EventHandler(this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem_Click);
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(651, 25);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(125, 13);
-            this.linkLabel1.TabIndex = 16;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "© Google - Terms of Use";
-            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
             // mapBox1
             // 
             this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.None;
@@ -251,6 +238,19 @@ namespace FTAnalyzer.Forms
             this.mapBox1.TabIndex = 2;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(651, 25);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(125, 13);
+            this.linkLabel1.TabIndex = 16;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "© Google - Terms of Use";
+            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // mapZoomToolStrip
             // 
@@ -282,7 +282,6 @@ namespace FTAnalyzer.Forms
             this.dgFacts.AllowUserToAddRows = false;
             this.dgFacts.AllowUserToDeleteRows = false;
             this.dgFacts.AllowUserToOrderColumns = true;
-            this.dgFacts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FactIcon,
@@ -313,7 +312,7 @@ namespace FTAnalyzer.Forms
             this.dgFacts.RowHeadersWidth = 16;
             this.dgFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgFacts.ShowEditingIcon = false;
-            this.dgFacts.Size = new System.Drawing.Size(1113, 127);
+            this.dgFacts.Size = new System.Drawing.Size(1113, 105);
             this.dgFacts.TabIndex = 3;
             this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFacts_CellDoubleClick);
             this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgFacts_CellToolTipTextNeeded);
@@ -467,7 +466,7 @@ namespace FTAnalyzer.Forms
             // 
             this.hideLabelsToolStripMenuItem.CheckOnClick = true;
             this.hideLabelsToolStripMenuItem.Name = "hideLabelsToolStripMenuItem";
-            this.hideLabelsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hideLabelsToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.hideLabelsToolStripMenuItem.Text = "Hide Labels";
             this.hideLabelsToolStripMenuItem.Click += new System.EventHandler(this.hideLabelsToolStripMenuItem_Click);
             // 

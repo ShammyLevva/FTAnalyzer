@@ -262,10 +262,14 @@ namespace FTAnalyzer
 
         private void CountUnknownFactTypes()
         {
-            foreach (string tag in unknownFactTypes)
+            if (unknownFactTypes.Count > 0)
             {
-                int count = AllExportFacts.Count(f => f.FactType == tag);
-                xmlErrorbox.AppendText("\nFound " + count + " facts of unknown fact type " + tag);
+                foreach (string tag in unknownFactTypes)
+                {
+                    int count = AllExportFacts.Count(f => f.FactType == tag);
+                    xmlErrorbox.AppendText("\nFound " + count + " facts of unknown fact type " + tag);
+                }
+                xmlErrorbox.AppendText("\n");
             }
         }
 
@@ -1967,7 +1971,7 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("\nGeocoding results:");
             // write geocode results - ignore UNKNOWN entry
             int notsearched = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1);
-            xmlErrorbox.AppendText("\n\nFound " + (FactLocation.AllLocations.Count() - 1) + " locations in file.\n");
+            xmlErrorbox.AppendText("\nFound " + (FactLocation.AllLocations.Count() - 1) + " locations in file.\n");
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER) && x.GoogleLocation.Length > 0) + " are GEDCOM/User Entered and have been geocoded.\n");
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER) && x.GoogleLocation.Length == 0) + " are GEDCOM/User Entered but lack a Google Location.\n");
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.MATCHED)) + " have a geocoding match from Google.\n");

@@ -84,8 +84,8 @@ namespace FTAnalyzer.Forms
             // 
             // splitContainerFacts.Panel2
             // 
-            this.splitContainerFacts.Panel2.Controls.Add(this.statusStrip);
             this.splitContainerFacts.Panel2.Controls.Add(this.dgFacts);
+            this.splitContainerFacts.Panel2.Controls.Add(this.statusStrip);
             this.splitContainerFacts.Size = new System.Drawing.Size(1113, 590);
             this.splitContainerFacts.SplitterDistance = 459;
             this.splitContainerFacts.TabIndex = 18;
@@ -189,7 +189,6 @@ namespace FTAnalyzer.Forms
             this.dgFacts.AllowUserToAddRows = false;
             this.dgFacts.AllowUserToDeleteRows = false;
             this.dgFacts.AllowUserToOrderColumns = true;
-            this.dgFacts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FactIcon,
@@ -221,7 +220,7 @@ namespace FTAnalyzer.Forms
             this.dgFacts.RowHeadersWidth = 16;
             this.dgFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgFacts.ShowEditingIcon = false;
-            this.dgFacts.Size = new System.Drawing.Size(1113, 127);
+            this.dgFacts.Size = new System.Drawing.Size(1113, 105);
             this.dgFacts.TabIndex = 3;
             this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFacts_CellDoubleClick);
             this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgFacts_CellToolTipTextNeeded);

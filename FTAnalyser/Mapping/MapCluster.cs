@@ -14,6 +14,7 @@ namespace FTAnalyzer.Mapping
         private List<FeatureDataRow> cluster;
         private int minSize;
         private double gridSize;
+        private List<IPoint> points;
         private IMultiPoint multiPoint;
         
         public static readonly string CLUSTER = "Cluster", FEATURE = "Feature", UNKNOWN = "Unknown";
@@ -25,6 +26,7 @@ namespace FTAnalyzer.Mapping
             this.cluster = new List<FeatureDataRow>();
             this.minSize = minSize;
             this.gridSize = gridSize;
+            this.points = new List<IPoint>();
             multiPoint = MultiPoint.Empty;
         }
 
@@ -38,12 +40,8 @@ namespace FTAnalyzer.Mapping
                 return false;
             cluster.Add(row);
 
-            IPoint[] points = new IPoint[cluster.Count];
-            int index = 0;
-            List<MapLocation> locations = new List<MapLocation>();
-            foreach (FeatureDataRow ml in cluster)
-                points[index++] = (IPoint)ml.Geometry;
-            multiPoint = new MultiPoint(points);
+            points.Add((IPoint)row.Geometry);
+            multiPoint = new MultiPoint(points.ToArray());
             return true;
         }
 
