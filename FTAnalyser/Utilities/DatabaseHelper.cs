@@ -4,6 +4,9 @@ using System;
 using System.Windows.Forms;
 using System.IO;
 using FTAnalyzer.Forms;
+using FTAnalyzer.Mapping;
+using GeoAPI.CoordinateSystems.Transformations;
+using GeoAPI.Geometries;
 
 namespace FTAnalyzer.Utilities
 {
@@ -93,6 +96,7 @@ namespace FTAnalyzer.Utilities
                 Version v3_0_0_0 = new Version("3.0.0.0");
                 Version v3_0_2_0 = new Version("3.0.2.0");
                 Version v3_1_2_0 = new Version("3.1.2.0");
+                Version v3_2_1_0 = new Version("3.2.1.0");
                 if (dbVersion < v3_0_0_0)
                 {
                     // Version is less than 3.0.0.0 or none existent so copy latest database from empty database
@@ -126,11 +130,72 @@ namespace FTAnalyzer.Utilities
                     cmd = new SQLiteCommand("update versions set Database = '3.1.2.0'", conn);
                     cmd.ExecuteNonQuery();
                 }
+                if (dbVersion < v3_2_1_0)
+                {
+                    bool proceed = false;
+                    DialogResult result = MessageBox.Show("In order to improve speed of the maps a database upgrade is needed.\nThis may take several minutes and must be allowed to complete.\nYou must backup your database first. Ok to proceed?", "Database upgrading", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    Application.UseWaitCursor = true;
+                    if (result == DialogResult.Yes)
+                        proceed = FamilyTree.Instance.BackupDatabase(new SaveFileDialog(), "FT Analyzer zip file created by Database upgrade for v3.2.1.0");
+                    Application.UseWaitCursor = false;
+                    if (proceed)
+                    {
+                        SQLiteCommand cmd = new SQLiteCommand("alter table geocode add column LatM real default 0", conn);
+                        cmd.ExecuteNonQuery();
+                        cmd = new SQLiteCommand("alter table geocode add column LongM real default 0", conn);
+                        cmd.ExecuteNonQuery();
+                        ConvertLatLongs();
+                        cmd = new SQLiteCommand("update versions set Database = '3.2.1.0'", conn);
+                        cmd.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Database not backed up we cannot proceed to update maps without a safe database backup.\nMapping features will not work correctly.", "Database backup Required");
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error upgrading database. Error is :" + ex.Message);
             }
+        }
+        #endregion
+
+        #region Conversion Routines
+        private void ConvertLatLongs()
+        {
+            Coordinate Point, NorthEast, SouthWest;
+            Coordinate mPoint, mNorthEast, mSouthWest;
+            double latitude, longitude, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw;
+
+            IMathTransform transform = MapTransforms.Transform().MathTransform;
+            SQLiteCommand cmd = new SQLiteCommand("select location, latitude, longitude, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw from geocode where latitude <> 0 and longitude <> 0", conn);
+            SQLiteCommand updatecmd = new SQLiteCommand("update latm, longm, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw from geocode where location = ?", conn);
+            SQLiteParameter param = cmd.CreateParameter();
+            param.DbType = DbType.String;
+            updatecmd.Parameters.Add(param);
+            updatecmd.Prepare();
+
+            SQLiteDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                latitude = longitude = viewport_x_ne = viewport_x_sw = viewport_y_ne = viewport_y_sw = 0;
+                string location = reader["location"].ToString();
+                double.TryParse(reader["latitude"].ToString(), out latitude);
+                double.TryParse(reader["longitude"].ToString(), out longitude);
+                double.TryParse(reader["viewport_x_ne"].ToString(), out viewport_x_ne);
+                double.TryParse(reader["viewport_y_ne"].ToString(), out viewport_y_ne);
+                double.TryParse(reader["viewport_x_sw"].ToString(), out viewport_x_sw);
+                double.TryParse(reader["viewport_y_sw"].ToString(), out viewport_y_sw);
+                Point = new Coordinate(longitude, latitude);
+                NorthEast = new Coordinate(viewport_y_ne, viewport_x_ne); // old viewports had x & y wrong way round
+                SouthWest = new Coordinate(viewport_y_sw, viewport_x_sw); // x is stored as lat y as long
+                mPoint = transform.Transform(Point);
+                mNorthEast = transform.Transform(NorthEast);
+                mSouthWest = transform.Transform(SouthWest);
+                // now write back the m versions
+            }
+            reader.Close();
         }
         #endregion
 
@@ -291,7 +356,7 @@ namespace FTAnalyzer.Utilities
             param = updateCmd.CreateParameter();
             param.DbType = DbType.Int32;
             updateCmd.Parameters.Add(param);
-            
+
             param = updateCmd.CreateParameter();
             param.DbType = DbType.Double;
             updateCmd.Parameters.Add(param);
@@ -381,7 +446,7 @@ namespace FTAnalyzer.Utilities
                     OpenDatabaseConnection();
                 UpgradeDatabase(ProgramVersion);
                 FamilyTree ft = FamilyTree.Instance;
-                if(ft.DataLoaded)
+                if (ft.DataLoaded)
                     ft.LoadGeoLocationsFromDataBase();
             }
             catch (Exception)

@@ -1557,24 +1557,7 @@ namespace FTAnalyzer
                 MessageBox.Show("You need to stop Geocoding before you can export the database");
             else
             {
-                string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();
-                saveDatabase.FileName = "FTAnalyzer-Geocodes-" + DateTime.Now.ToString("yyyy-MM-dd") + ".zip";
-                saveDatabase.InitialDirectory = directory;
-                DialogResult result = saveDatabase.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    DatabaseHelper dbh = DatabaseHelper.Instance;
-                    dbh.StartBackupRestoreDatabase();
-                    if (File.Exists(saveDatabase.FileName))
-                        File.Delete(saveDatabase.FileName);
-                    ZipFile zip = new ZipFile(saveDatabase.FileName);
-                    zip.AddFile(dbh.Filename, string.Empty);
-                    zip.Comment = "FT Analyzer zip file created by v" + PublishVersion() + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm");
-                    zip.Save();
-                    dbh.EndBackupDatabase();
-                    Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName));
-                    MessageBox.Show("Database exported to " + saveDatabase.FileName);
-                }
+                ft.BackupDatabase(saveDatabase, "FT Analyzer zip file created by v" + PublishVersion());
             }
         }
 
@@ -1601,7 +1584,7 @@ namespace FTAnalyzer
                             File.Copy(dbh.Filename, dbh.CurrentFilename, true); // copy exisiting file to safety
                             zip.ExtractAll(dbh.DatabasePath, ExtractExistingFileAction.OverwriteSilently);
                             if (dbh.RestoreDatabase())
-                                MessageBox.Show("Database restored from " + restoreDatabase.FileName);
+                                MessageBox.Show("Database restored from " + restoreDatabase.FileName, "FTAnalyzer Database Restore Complete");
                             else
                             {
                                 File.Copy(dbh.CurrentFilename, dbh.Filename, true);
@@ -1610,14 +1593,14 @@ namespace FTAnalyzer
                             }
                         }
                         else
-                            MessageBox.Show("Database file could not be extracted");
+                            MessageBox.Show("Database file could not be extracted", "FTAnalyzer Database Restore Error");
                     }
                     else
                     {
                         failed = true;
                     }
                     if(failed)
-                        MessageBox.Show(restoreDatabase.FileName + " doesn't appear to be an FTAnalyzer database");
+                        MessageBox.Show(restoreDatabase.FileName + " doesn't appear to be an FTAnalyzer database", "FTAnalyzer Database Restore Error");
                     HourGlass(false);
                 }
             }

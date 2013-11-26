@@ -15,6 +15,7 @@ using FTAnalyzer.Filters;
 using System.Data.SQLite;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Forms;
+using Ionic.Zip;
 
 namespace FTAnalyzer
 {
@@ -2090,5 +2091,29 @@ namespace FTAnalyzer
             return GetFamily(ind).Union(GetAncestors(ind).Union(GetDescendants(ind))).ToList<Individual>();
         }
         #endregion
+
+        public bool BackupDatabase(SaveFileDialog saveDatabase, string comment)
+        {
+            string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();
+            saveDatabase.FileName = "FTAnalyzer-Geocodes-" + DateTime.Now.ToString("yyyy-MM-dd") + ".zip";
+            saveDatabase.InitialDirectory = directory;
+            DialogResult result = saveDatabase.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                DatabaseHelper dbh = DatabaseHelper.Instance;
+                dbh.StartBackupRestoreDatabase();
+                if (File.Exists(saveDatabase.FileName))
+                    File.Delete(saveDatabase.FileName);
+                ZipFile zip = new ZipFile(saveDatabase.FileName);
+                zip.AddFile(dbh.Filename, string.Empty);
+                zip.Comment = comment + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm");
+                zip.Save();
+                dbh.EndBackupDatabase();
+                Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName));
+                MessageBox.Show("Database exported to " + saveDatabase.FileName, "FTAnalyzer Database Export Complete");
+                return true;
+            }
+            return false;
+        }
     }
 }
