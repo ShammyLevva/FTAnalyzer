@@ -110,6 +110,9 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("Census 1920", CENSUS);
             CUSTOM_TAGS.Add("Census 1930", CENSUS);
             CUSTOM_TAGS.Add("Census 1940", CENSUS);
+            CUSTOM_TAGS.Add("Birth Reg", BIRTH);
+            CUSTOM_TAGS.Add("Marriage Reg", MARRIAGE);
+            CUSTOM_TAGS.Add("Death Reg", DEATH);
 
             COMMENT_FACTS.Add(OCCUPATION);
             COMMENT_FACTS.Add(MILITARY);
