@@ -172,7 +172,6 @@
             this.dgFacts.TabIndex = 2;
             this.dgFacts.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgFacts_CellFormatting);
             this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgFacts_CellToolTipTextNeeded);
-            this.dgFacts.ColumnSortModeChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgFacts_ColumnSortModeChanged);
             // 
             // FactIcon
             // 

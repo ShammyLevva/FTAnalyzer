@@ -173,12 +173,7 @@ namespace FTAnalyzer.Forms
         {
             this.Dispose();
         }
-
-        private void dgFacts_ColumnSortModeChanged(object sender, DataGridViewColumnEventArgs e)
-        {
-
-        }
-
+        
         private void Facts_MouseDown(object sender, MouseEventArgs e)
         {
 
