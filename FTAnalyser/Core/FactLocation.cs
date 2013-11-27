@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Xml;
-using System.IO;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
-using System.Globalization;
-using FTAnalyzer.Utilities;
+using System.Windows.Forms;
+using System.Xml;
 using FTAnalyzer.Mapping;
-using System.Drawing;
+using FTAnalyzer.Utilities;
+using GeoAPI.CoordinateSystems.Transformations;
+using GeoAPI.Geometries;
 
 namespace FTAnalyzer
 {
@@ -30,6 +31,8 @@ namespace FTAnalyzer
         public int Level { get; private set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public double LatitudeM { get; set; }
+        public double LongitudeM { get; set; }
         public Geocode GeocodeStatus { get; set; }
         public string GoogleLocation { get; set; }
         public string GoogleResultType { get; set; }
@@ -228,6 +231,8 @@ namespace FTAnalyzer
             this.individuals = new List<Individual>();
             this.Latitude = 0;
             this.Longitude = 0;
+            this.LatitudeM = 0;
+            this.LongitudeM = 0;
             this.Level = UNKNOWN;
             this.GeocodeStatus = Geocode.NOT_SEARCHED;
             this.GoogleLocation = string.Empty;
@@ -242,6 +247,11 @@ namespace FTAnalyzer
             double temp;
             this.Latitude = double.TryParse(latitude, out temp) ? temp : 0;
             this.Longitude = double.TryParse(longitude, out temp) ? temp : 0;
+            Coordinate point = new Coordinate(Longitude, Latitude);
+            IMathTransform transform = MapTransforms.Transform().MathTransform;
+            Coordinate mpoint = transform.Transform(point);
+            this.LongitudeM = mpoint.X;
+            this.LatitudeM = mpoint.Y;
             this.GeocodeStatus = status;
             if (status == Geocode.NOT_SEARCHED && (Latitude != 0 || Longitude != 0))
                 status = Geocode.GEDCOM_USER;
@@ -725,6 +735,8 @@ namespace FTAnalyzer
         {
             to.Latitude = from.Latitude;
             to.Longitude = from.Longitude;
+            to.LatitudeM = from.LatitudeM;
+            to.LongitudeM = from.LongitudeM;
             to.ViewPort.NorthEast.Lat = from.ViewPort.NorthEast.Lat;
             to.ViewPort.NorthEast.Long = from.ViewPort.NorthEast.Long;
             to.ViewPort.SouthWest.Lat = from.ViewPort.SouthWest.Lat;

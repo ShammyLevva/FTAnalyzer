@@ -7,6 +7,7 @@ using FTAnalyzer.Forms;
 using FTAnalyzer.Mapping;
 using GeoAPI.CoordinateSystems.Transformations;
 using GeoAPI.Geometries;
+using System.Collections.Concurrent;
 
 namespace FTAnalyzer.Utilities
 {
@@ -243,14 +244,19 @@ namespace FTAnalyzer.Utilities
         #endregion
 
         #region Commands
-        public SQLiteCommand GetLocation()
+        public bool IsLocationInDatabase(string location)
         {
             SQLiteCommand cmd = new SQLiteCommand("select location from geocode where location = ?", conn);
             SQLiteParameter param = cmd.CreateParameter();
             param.DbType = DbType.String;
             cmd.Parameters.Add(param);
             cmd.Prepare();
-            return cmd;
+            cmd.Parameters[0].Value = location;
+            SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
+            bool inDatabase = reader.Read();
+            reader.Close();
+            return inDatabase;
+
         }
 
         public void ResetPartials()
@@ -259,10 +265,10 @@ namespace FTAnalyzer.Utilities
             cmd.ExecuteNonQuery();
         }
 
-        public void GetLatLong(FactLocation location)
+        public void GetLocationDetails(FactLocation location)
         {
             if (location.ToString().Length == 0) return;
-            SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw, geocodestatus from geocode where location = ?", conn);
+            SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, latm, longm, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw, geocodestatus, foundlevel, foundlocation, foundresulttype from geocode where location = ?", conn);
             SQLiteParameter param = cmd.CreateParameter();
             param.DbType = DbType.String;
             cmd.Parameters.Add(param);
@@ -271,43 +277,42 @@ namespace FTAnalyzer.Utilities
             SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleRow);
             if (reader.Read())
             {
-                double latitude, longitude, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw;
+                double latitude, longitude, latm, longm, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw;
                 double.TryParse(reader["latitude"].ToString(), out latitude);
                 double.TryParse(reader["longitude"].ToString(), out longitude);
+                double.TryParse(reader["latm"].ToString(), out latm);
+                double.TryParse(reader["longm"].ToString(), out longm);
                 double.TryParse(reader["viewport_x_ne"].ToString(), out viewport_x_ne);
                 double.TryParse(reader["viewport_y_ne"].ToString(), out viewport_y_ne);
                 double.TryParse(reader["viewport_x_sw"].ToString(), out viewport_x_sw);
                 double.TryParse(reader["viewport_y_sw"].ToString(), out viewport_y_sw);
                 location.Latitude = latitude;
                 location.Longitude = longitude;
+                location.LatitudeM = latm;
+                location.LongitudeM = longm;
                 if (location.ViewPort == null)
                 {
                     location.ViewPort = new Mapping.GeoResponse.CResult.CGeometry.CViewPort();
                     location.ViewPort.NorthEast = new Mapping.GeoResponse.CResult.CGeometry.CLocation();
                     location.ViewPort.SouthWest = new Mapping.GeoResponse.CResult.CGeometry.CLocation();
                 }
-                location.ViewPort.NorthEast.Lat = viewport_x_ne;
-                location.ViewPort.NorthEast.Long = viewport_y_ne;
-                location.ViewPort.SouthWest.Lat = viewport_x_sw;
-                location.ViewPort.SouthWest.Long = viewport_y_sw;
+                location.ViewPort.NorthEast.Lat = viewport_y_ne;
+                location.ViewPort.NorthEast.Long = viewport_x_ne;
+                location.ViewPort.SouthWest.Lat = viewport_y_sw;
+                location.ViewPort.SouthWest.Long = viewport_x_sw;
                 location.GeocodeStatus = (FactLocation.Geocode)Enum.Parse(typeof(FactLocation.Geocode), reader["geocodestatus"].ToString());
+                location.GoogleLocation = reader["foundlocation"].ToString();
+                location.GoogleResultType = reader["foundresulttype"].ToString();
+                int foundlevel = 0;
+                int.TryParse(reader["foundlevel"].ToString(), out foundlevel);
+                location.FoundLevel = foundlevel;
             }
             reader.Close();
         }
 
-        public SQLiteCommand GetLocationDetails()
-        {
-            SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, level, foundlevel, foundlocation, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw, geocodestatus, foundresulttype from geocode where location = ?", conn);
-            SQLiteParameter param = cmd.CreateParameter();
-            param.DbType = DbType.String;
-            cmd.Parameters.Add(param);
-            cmd.Prepare();
-            return cmd;
-        }
-
         public void InsertGeocode(FactLocation loc)
         {
-            SQLiteCommand insertCmd = new SQLiteCommand("insert into geocode (location, level, latitude, longitude, founddate, foundlocation, foundlevel, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw, geocodestatus, foundresulttype) values(?,?,?,?,date('now'),?,?,?,?,?,?,?,?)", conn);
+            SQLiteCommand insertCmd = new SQLiteCommand("insert into geocode (location, level, latitude, longitude, founddate, foundlocation, foundlevel, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw, geocodestatus, foundresulttype, latm, longm) values(?,?,?,?,date('now'),?,?,?,?,?,?,?,?,?,?)", conn);
             SQLiteParameter param = insertCmd.CreateParameter();
 
             param = insertCmd.CreateParameter();
@@ -358,6 +363,14 @@ namespace FTAnalyzer.Utilities
             param.DbType = DbType.String;
             insertCmd.Parameters.Add(param);
 
+            param = insertCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            insertCmd.Parameters.Add(param);
+
+            param = insertCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            insertCmd.Parameters.Add(param);
+
             insertCmd.Prepare();
             insertCmd.Parameters[0].Value = loc.ToString();
             insertCmd.Parameters[1].Value = loc.Level;
@@ -365,18 +378,20 @@ namespace FTAnalyzer.Utilities
             insertCmd.Parameters[3].Value = loc.Longitude;
             insertCmd.Parameters[4].Value = loc.GoogleLocation;
             insertCmd.Parameters[5].Value = loc.FoundLevel;
-            insertCmd.Parameters[6].Value = loc.ViewPort.NorthEast.Lat;
-            insertCmd.Parameters[7].Value = loc.ViewPort.NorthEast.Long;
-            insertCmd.Parameters[8].Value = loc.ViewPort.SouthWest.Lat;
-            insertCmd.Parameters[9].Value = loc.ViewPort.SouthWest.Long;
+            insertCmd.Parameters[6].Value = loc.ViewPort.NorthEast.Long;
+            insertCmd.Parameters[7].Value = loc.ViewPort.NorthEast.Lat;
+            insertCmd.Parameters[8].Value = loc.ViewPort.SouthWest.Long;
+            insertCmd.Parameters[9].Value = loc.ViewPort.SouthWest.Lat;
             insertCmd.Parameters[10].Value = loc.GeocodeStatus;
             insertCmd.Parameters[11].Value = loc.GoogleResultType;
+            insertCmd.Parameters[12].Value = loc.LatitudeM;
+            insertCmd.Parameters[13].Value = loc.LongitudeM;
             insertCmd.ExecuteNonQuery();
         }
 
         public void UpdateGeocode(FactLocation loc)
         {
-            SQLiteCommand updateCmd = new SQLiteCommand("update geocode set founddate=date('now'), level = ?, latitude = ?, longitude = ?, foundlocation = ?, foundlevel = ?, viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ?, geocodestatus = ?, foundresulttype = ? where location = ?", conn);
+            SQLiteCommand updateCmd = new SQLiteCommand("update geocode set founddate=date('now'), level = ?, latitude = ?, longitude = ?, foundlocation = ?, foundlevel = ?, viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ?, geocodestatus = ?, foundresulttype = ?, latm = ?, longm = ? where location = ?", conn);
 
             SQLiteParameter param = updateCmd.CreateParameter();
 
@@ -425,6 +440,14 @@ namespace FTAnalyzer.Utilities
             updateCmd.Parameters.Add(param);
 
             param = updateCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updateCmd.Parameters.Add(param);
+
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updateCmd.Parameters.Add(param);
+
+            param = updateCmd.CreateParameter();
             param.DbType = DbType.String;
             updateCmd.Parameters.Add(param);
 
@@ -434,13 +457,15 @@ namespace FTAnalyzer.Utilities
             updateCmd.Parameters[2].Value = loc.Longitude;
             updateCmd.Parameters[3].Value = loc.GoogleLocation;
             updateCmd.Parameters[4].Value = loc.FoundLevel;
-            updateCmd.Parameters[5].Value = loc.ViewPort.NorthEast.Lat;
-            updateCmd.Parameters[6].Value = loc.ViewPort.NorthEast.Long;
-            updateCmd.Parameters[7].Value = loc.ViewPort.SouthWest.Lat;
-            updateCmd.Parameters[8].Value = loc.ViewPort.SouthWest.Long;
+            updateCmd.Parameters[5].Value = loc.ViewPort.NorthEast.Long;
+            updateCmd.Parameters[6].Value = loc.ViewPort.NorthEast.Lat;
+            updateCmd.Parameters[7].Value = loc.ViewPort.SouthWest.Long;
+            updateCmd.Parameters[8].Value = loc.ViewPort.SouthWest.Lat;
             updateCmd.Parameters[9].Value = loc.GeocodeStatus;
             updateCmd.Parameters[10].Value = loc.GoogleResultType;
-            updateCmd.Parameters[11].Value = loc.ToString();
+            updateCmd.Parameters[11].Value = loc.LatitudeM;
+            updateCmd.Parameters[12].Value = loc.LongitudeM;
+            updateCmd.Parameters[13].Value = loc.ToString();
             updateCmd.ExecuteNonQuery();
             OnGeoLocationUpdated(loc);
         }
@@ -448,9 +473,21 @@ namespace FTAnalyzer.Utilities
 
         #region Cursor Queries
 
+        //public void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
+        //{
+        //    SQLiteCommand cmd = new SQLiteCommand("select location from geocode where foundlocation='' and geocodestatus=3", conn);
+        //    SQLiteDataReader reader = cmd.ExecuteReader();
+        //    while (reader.Read())
+        //    {
+        //        FactLocation loc = FactLocation.LookupLocation(reader[0].ToString());
+        //        if (!queue.Contains(loc))
+        //            queue.Enqueue(loc);
+        //    }
+        //}
+
         public SQLiteCommand NeedsReverseGeocode()
         {
-            return new SQLiteCommand("select location, latitude, longitude from geocode where foundlocation='' and geocodestatus=3", conn);
+            return new SQLiteCommand("select location from geocode where foundlocation='' and geocodestatus=3", conn);
         }
 
         #endregion

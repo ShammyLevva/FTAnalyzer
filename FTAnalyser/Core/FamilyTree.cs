@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using System.Windows.Forms;
-using System.IO;
-using FTAnalyzer.Utilities;
-using System.Web;
 using System.Diagnostics;
 using System.Drawing;
-using System.Resources;
-using System.Data;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Web;
+using System.Windows.Forms;
+using System.Xml;
 using FTAnalyzer.Filters;
-using System.Data.SQLite;
-using FTAnalyzer.Mapping;
 using FTAnalyzer.Forms;
+using FTAnalyzer.Mapping;
+using FTAnalyzer.Utilities;
 using Ionic.Zip;
 
 namespace FTAnalyzer
@@ -1931,33 +1928,8 @@ namespace FTAnalyzer
             try
             {
                 DatabaseHelper dbh = DatabaseHelper.Instance;
-                SQLiteCommand cmd = dbh.GetLocationDetails();
-
                 foreach (FactLocation loc in FactLocation.AllLocations)
-                {
-                    loc.GeocodeStatus = FactLocation.Geocode.NOT_SEARCHED;
-                    cmd.Parameters[0].Value = loc.ToString();
-                    SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
-                    if (reader.Read() && loc.ToString().Length > 0)
-                    {
-                        // location is in database so update location object
-                        loc.Latitude = (double)reader["latitude"];
-                        loc.Longitude = (double)reader["longitude"];
-                        loc.GoogleLocation = (string)reader["foundlocation"];
-                        if (reader["foundlevel"] != null)
-                        {
-                            long level = (long)reader["level"];
-                            long foundLevel = (long)reader["foundlevel"];
-                        }
-                        loc.ViewPort.NorthEast.Lat = (double)reader["viewport_x_ne"];
-                        loc.ViewPort.NorthEast.Long = (double)reader["viewport_y_ne"];
-                        loc.ViewPort.SouthWest.Lat = (double)reader["viewport_x_sw"];
-                        loc.ViewPort.SouthWest.Long = (double)reader["viewport_y_sw"];
-                        loc.GoogleResultType = (string)reader["foundresulttype"];
-                        loc.GeocodeStatus = (FactLocation.Geocode)Enum.Parse(typeof(FactLocation.Geocode), reader["GeocodeStatus"].ToString());
-                    }
-                    reader.Close();
-                }
+                    dbh.GetLocationDetails(loc);
                 WriteGeocodeStatstoRTB(false);
             }
             catch (Exception ex)

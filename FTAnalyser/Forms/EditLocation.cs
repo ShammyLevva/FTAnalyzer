@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Data.SQLite;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -11,11 +11,6 @@ using GeoAPI.Geometries;
 using SharpMap.Data;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
-using System.Collections.Generic;
-using SharpMap.Rendering.Symbolizer;
-using SharpMap.Styles;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 
 namespace FTAnalyzer.Forms
 {
@@ -222,7 +217,7 @@ namespace FTAnalyzer.Forms
             {
                 FactLocation loc = FactLocation.LookupLocation(txtSearch.Text);
                 if (!loc.IsGeoCoded(false)) // if not geocoded then try database
-                    DatabaseHelper.Instance.GetLatLong(loc);
+                    DatabaseHelper.Instance.GetLocationDetails(loc);
                 if (loc.IsGeoCoded(false))
                 {
                     FactLocation.CopyLocationDetails(loc, location);

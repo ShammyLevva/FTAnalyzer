@@ -2,23 +2,22 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using FTAnalyzer.Events;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
 using GeoAPI.Geometries;
-using SharpMap.Styles;
-using System.Drawing.Drawing2D;
-using SharpMap.Layers;
 using SharpMap;
-using System.IO;
 using SharpMap.Data.Providers;
-using System.Drawing.Text;
+using SharpMap.Layers;
 using SharpMap.Rendering;
+using SharpMap.Styles;
 
 namespace FTAnalyzer.Forms
 {
@@ -518,8 +517,7 @@ namespace FTAnalyzer.Forms
                 bool retryPartial = (bool)e.Argument;
                 GoogleMap.WaitingForGoogle += new GoogleMap.GoogleEventHandler(GoogleMap_WaitingForGoogle);
                 DatabaseHelper dbh = DatabaseHelper.Instance;
-                SQLiteCommand cmd = dbh.GetLocation();
-
+                
                 int count = 0;
                 int googled = 0;
                 int geocoded = 0;
@@ -535,9 +533,7 @@ namespace FTAnalyzer.Forms
                         skipped++; // don't re-geocode incorrect ones as that would reset incorrect flag back to what user already identified was wrong
                     else
                     {
-                        cmd.Parameters[0].Value = loc.ToString();
-                        SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
-                        bool inDatabase = reader.Read();
+                        bool inDatabase = dbh.IsLocationInDatabase(loc.ToString());
                         if (loc.ToString().Length > 0)
                         {
                             GeoResponse res = null;
@@ -630,7 +626,6 @@ namespace FTAnalyzer.Forms
                                 skipped++;
                             }
                         }
-                        reader.Close();
                     }
                     count++;
                     int percent = (int)Math.Truncate((count - 1) * 100.0 / total);
@@ -775,6 +770,7 @@ namespace FTAnalyzer.Forms
                 txtLocations.Text = string.Empty;
                 txtGoogleWait.Text = string.Empty;
                 ft.Geocoding = true;
+                //DatabaseHelper.Instance.AddEmptyLocationsToQueue(queue);
                 AddEmptyLocationsToQueue();
                 reverseGeocodeBackgroundWorker.RunWorkerAsync();
                 this.Cursor = Cursors.Default;
