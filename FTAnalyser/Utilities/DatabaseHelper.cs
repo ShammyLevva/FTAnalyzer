@@ -140,13 +140,14 @@ namespace FTAnalyzer.Utilities
                     Application.UseWaitCursor = false;
                     if (proceed)
                     {
-                        SQLiteCommand cmd = new SQLiteCommand("alter table geocode add column LatM real default 0", conn);
+                        SQLiteCommand cmd = new SQLiteCommand("alter table geocode add column Latm real default 0.0", conn);
                         cmd.ExecuteNonQuery();
-                        cmd = new SQLiteCommand("alter table geocode add column LongM real default 0", conn);
+                        cmd = new SQLiteCommand("alter table geocode add column Longm real default 0.0", conn);
                         cmd.ExecuteNonQuery();
                         ConvertLatLongs();
                         cmd = new SQLiteCommand("update versions set Database = '3.2.1.0'", conn);
                         cmd.ExecuteNonQuery();
+                        MessageBox.Show("Database lat/long upgrade complete");
                     }
                     else
                     {
@@ -169,14 +170,46 @@ namespace FTAnalyzer.Utilities
             double latitude, longitude, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw;
 
             IMathTransform transform = MapTransforms.Transform().MathTransform;
-            SQLiteCommand cmd = new SQLiteCommand("select location, latitude, longitude, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw from geocode where latitude <> 0 and longitude <> 0", conn);
-            SQLiteCommand updatecmd = new SQLiteCommand("update latm, longm, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw from geocode where location = ?", conn);
-            SQLiteParameter param = cmd.CreateParameter();
-            param.DbType = DbType.String;
-            updatecmd.Parameters.Add(param);
-            updatecmd.Prepare();
+            SQLiteCommand cmd = new SQLiteCommand("select count(*) from geocode where latitude <> 0 and longitude <> 0", conn);
+            SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
+            reader.Read();
+            int rowcount = 0;
+            int.TryParse(reader[0].ToString(), out rowcount);
+            reader.Close();
+            cmd = new SQLiteCommand("select location, latitude, longitude, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw from geocode where latitude <> 0 and longitude <> 0", conn);
+            SQLiteCommand updateCmd = new SQLiteCommand("update geocode set latm=?, longm=?, viewport_x_ne=?, viewport_y_ne=?, viewport_x_sw=?, viewport_y_sw=?  where location = ?", conn);
+            SQLiteParameter param = updateCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updateCmd.Parameters.Add(param);
 
-            SQLiteDataReader reader = cmd.ExecuteReader();
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updateCmd.Parameters.Add(param);
+
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updateCmd.Parameters.Add(param);
+
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updateCmd.Parameters.Add(param);
+
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updateCmd.Parameters.Add(param);
+
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.Double;
+            updateCmd.Parameters.Add(param);
+
+            param = updateCmd.CreateParameter();
+            param.DbType = DbType.String;
+            updateCmd.Parameters.Add(param);
+            updateCmd.Prepare();
+            Progress p = new Progress(rowcount);
+            p.Show();
+            int row = 0;
+            reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 latitude = longitude = viewport_x_ne = viewport_x_sw = viewport_y_ne = viewport_y_sw = 0;
@@ -194,7 +227,17 @@ namespace FTAnalyzer.Utilities
                 mNorthEast = transform.Transform(NorthEast);
                 mSouthWest = transform.Transform(SouthWest);
                 // now write back the m versions
+                updateCmd.Parameters[0].Value = mPoint.X;
+                updateCmd.Parameters[1].Value = mPoint.Y;
+                updateCmd.Parameters[2].Value = mNorthEast.X;
+                updateCmd.Parameters[3].Value = mNorthEast.Y;
+                updateCmd.Parameters[4].Value = mSouthWest.X;
+                updateCmd.Parameters[5].Value = mSouthWest.Y;
+                updateCmd.Parameters[6].Value = location;
+                updateCmd.ExecuteNonQuery();
+                p.Update(++row);
             }
+            p.Dispose();
             reader.Close();
         }
         #endregion

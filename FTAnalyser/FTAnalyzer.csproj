@@ -223,6 +223,12 @@
     <Compile Include="Forms\LifeLine.Designer.cs">
       <DependentUpon>LifeLine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Progress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Progress.Designer.cs">
+      <DependentUpon>Progress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mapping\ClusterLayer.cs" />
     <Compile Include="Mapping\MapLifeLine.cs" />
     <Compile Include="Mapping\NLSRequest.cs" />
@@ -372,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Facts.resx">
       <DependentUpon>Facts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Progress.resx">
+      <DependentUpon>Progress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TimeLine.resx">
       <DependentUpon>TimeLine.cs</DependentUpon>
