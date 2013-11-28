@@ -93,21 +93,27 @@ namespace FTAnalyzer.Forms
             }
             currentLevel = level;
             currentLocation = location;
-            IEnumerable<Individual> list = ft.GetIndividualsAtLocation(location, level);
+            List<Individual> list = new List<Individual>(ft.GetIndividualsAtLocation(location, level));
+            int count = 0;
+            progressbar.Visible = true;
+            progressbar.Maximum = list.Count;
             foreach (Individual ind in list)
             {
                 foreach (Fact fact in ind.AllFacts)
                 {
-                    if (fact.Location.Matches(location.ToString(), level))
+                    if (fact.Location.IsGeoCoded(false) && fact.Location.Matches(location.ToString(), level))
                     {
                         displayFacts.Add(new DisplayFact(ind, fact));
                         MapLocation loc = new MapLocation(ind, fact, fact.FactDate);
                         FeatureDataRow fdr = loc.AddFeatureDataRow(clusters.FactLocations);
                     }
                 }
+                progressbar.Value = ++count;
+                txtCount.Text = "Processed " + count + " Individuals from list of " + list.Count;
+                Application.DoEvents();
             }
+            progressbar.Visible = false;
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
-            txtCount.Text = dgFacts.RowCount + " Geolocated fact(s) displayed";
 
             Envelope bbox = new Envelope();
             foreach (FeatureDataRow row in clusters.FactLocations)
@@ -119,15 +125,13 @@ namespace FTAnalyzer.Forms
                 expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
             else
                 expand = new Envelope(bbox.TopLeft(),bbox.BottomRight());
-            mapBox1.Map.ZoomToBox(expand);
             expand.ExpandBy(mapBox1.Map.PixelSize * 40);
             mapBox1.Map.ZoomToBox(expand);
-            if (mapBox1.Map.Zoom < mapBox1.Map.MinimumZoom)
-                mapBox1.Map.Zoom = mapBox1.Map.MinimumZoom;
-            if (mapBox1.Map.Zoom > mapBox1.Map.MaximumZoom)
-                mapBox1.Map.Zoom = mapBox1.Map.MaximumZoom;
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
+            txtCount.Text = "Recalculating clusters";
+            Application.DoEvents();
             RefreshPlaces();
+            txtCount.Text = dgFacts.RowCount + " Geolocated fact(s) displayed";
             this.Cursor = Cursors.Default;
         }
 

@@ -28,6 +28,8 @@ namespace FTAnalyzer
         public string TypeOfFact { get { return Fact.FactTypeDescription; } }
         public FactDate FactDate { get { return Fact.FactDate; } }
         public FactLocation Location { get { return Fact.Location; } }
+        public double Latitude { get { return Fact.Location.Latitude; } }
+        public double Longitude { get { return Fact.Location.Longitude; } }
         public string Comment { get { return Fact.Comment; } }
         public string IndividualID { get { return Ind == null ? string.Empty : Ind.IndividualID; } }
         public Age AgeAtFact { get { return Ind == null ? null : Ind.GetAge(Fact.FactDate, Fact.FactType); } }

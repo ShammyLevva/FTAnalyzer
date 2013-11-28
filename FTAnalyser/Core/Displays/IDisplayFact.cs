@@ -23,6 +23,7 @@ namespace FTAnalyzer
         string GoogleResultType { get; }
         string Comment { get; }
         string SourceList { get; }
+        double Latitude { get; }
+        double Longitude { get; }
     }
 }
- 
