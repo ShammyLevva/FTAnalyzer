@@ -128,8 +128,6 @@ namespace FTAnalyzer.Forms
             expand.ExpandBy(mapBox1.Map.PixelSize * 40);
             mapBox1.Map.ZoomToBox(expand);
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
-            txtCount.Text = "Recalculating clusters";
-            Application.DoEvents();
             RefreshPlaces();
             txtCount.Text = dgFacts.RowCount + " Geolocated fact(s) displayed";
             this.Cursor = Cursors.Default;
