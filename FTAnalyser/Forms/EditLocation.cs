@@ -59,8 +59,8 @@ namespace FTAnalyzer.Forms
             pointLayer.Style.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\teardrop_blue.png"));
             pointLayer.Style.SymbolOffset = new PointF(0.0f, -17.0f);
             pointLayer.DataSource = pointGFP;
-            pointLayer.CoordinateTransformation = MapTransforms.Transform();
-            pointLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
+            //pointLayer.CoordinateTransformation = MapTransforms.Transform();
+            //pointLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
 
             GeocodeLocations.AddEnglishParishLayer(mapBox1.Map);
             mapBox1.Map.VariableLayers.Add(pointLayer);
@@ -229,9 +229,18 @@ namespace FTAnalyzer.Forms
                     GeoResponse res = GoogleMap.GoogleGeocode(txtSearch.Text, 8);
                     if (res.Status == "OK")
                     {
-                        loc.ViewPort = res.Results[0].Geometry.ViewPort;
+                        IMathTransform transform = MapTransforms.Transform().MathTransform;
+                        Coordinate mpoint = transform.Transform(new Coordinate(loc.Longitude, loc.Latitude));
+                        Coordinate mNorthEast = transform.Transform(new Coordinate(res.Results[0].Geometry.ViewPort.NorthEast.Long, res.Results[0].Geometry.ViewPort.NorthEast.Lat));
+                        Coordinate mSouthWest = transform.Transform(new Coordinate(res.Results[0].Geometry.ViewPort.SouthWest.Long, res.Results[0].Geometry.ViewPort.SouthWest.Lat));
                         loc.Latitude = res.Results[0].Geometry.Location.Lat;
                         loc.Longitude = res.Results[0].Geometry.Location.Long;
+                        loc.LongitudeM = mpoint.X;
+                        loc.LatitudeM = mpoint.Y;
+                        loc.ViewPort.NorthEast.Long = mNorthEast.X;
+                        loc.ViewPort.NorthEast.Lat = mNorthEast.Y;
+                        loc.ViewPort.SouthWest.Long = mSouthWest.X;
+                        loc.ViewPort.SouthWest.Lat = mSouthWest.Y;
                         loc.GeocodeStatus = res.Results[0].PartialMatch ? FactLocation.Geocode.PARTIAL_MATCH : FactLocation.Geocode.MATCHED;
                         FactLocation.CopyLocationDetails(loc, location);
                         SetLocation();
@@ -246,19 +255,15 @@ namespace FTAnalyzer.Forms
         private void SetLocation()
         {
             pointTable.Clear();
-            pointTable.AddRow(GetRow(location.Longitude, location.Latitude));
+            pointTable.AddRow(GetRow(location.LongitudeM, location.LatitudeM));
 
-            IMathTransform transform = pointLayer.CoordinateTransformation.MathTransform;
             GeoResponse.CResult.CGeometry.CViewPort vp = location.ViewPort;
             Envelope expand;
             if (vp.NorthEast.Lat == 0 && vp.NorthEast.Long == 0 && vp.SouthWest.Lat == 0 && vp.SouthWest.Long == 0)
                 expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
             else
-            {
-                Envelope bbox = new Envelope(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
-                expand = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
-            }
-            Coordinate p = transform.Transform(new Coordinate(location.Longitude, location.Latitude));
+                expand = new Envelope(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
+            Coordinate p = new Coordinate(location.LongitudeM, location.LatitudeM);
             Envelope point = new Envelope(p, p);
             point.ExpandBy(mapBox1.Map.PixelSize * 40);
             if (!expand.Contains(point))
