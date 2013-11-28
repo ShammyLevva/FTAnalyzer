@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
-using GeoAPI.CoordinateSystems.Transformations;
 using GeoAPI.Geometries;
 using SharpMap.Data;
 using SharpMap.Rendering.Decoration.ScaleBar;
@@ -115,12 +114,11 @@ namespace FTAnalyzer.Forms
                 foreach (Coordinate c in row.Geometry.Coordinates)
                     if (c != null)
                         bbox.ExpandToInclude(c);
-            IMathTransform transform = clusters.MathTransform;
             Envelope expand;
             if (bbox.Centre == null)
                 expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
             else
-                expand = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
+                expand = new Envelope(bbox.TopLeft(),bbox.BottomRight());
             mapBox1.Map.ZoomToBox(expand);
             expand.ExpandBy(mapBox1.Map.PixelSize * 40);
             mapBox1.Map.ZoomToBox(expand);

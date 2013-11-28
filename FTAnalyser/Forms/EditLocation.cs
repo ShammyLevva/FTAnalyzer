@@ -59,8 +59,6 @@ namespace FTAnalyzer.Forms
             pointLayer.Style.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\teardrop_blue.png"));
             pointLayer.Style.SymbolOffset = new PointF(0.0f, -17.0f);
             pointLayer.DataSource = pointGFP;
-            //pointLayer.CoordinateTransformation = MapTransforms.Transform();
-            //pointLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
 
             GeocodeLocations.AddEnglishParishLayer(mapBox1.Map);
             mapBox1.Map.VariableLayers.Add(pointLayer);

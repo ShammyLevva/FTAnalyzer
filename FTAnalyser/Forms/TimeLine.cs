@@ -2,19 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using FTAnalyzer.Mapping;
-using GeoAPI.CoordinateSystems.Transformations;
 using GeoAPI.Geometries;
 using SharpMap.Data;
-using SharpMap.Data.Providers;
-using SharpMap.Layers;
 using SharpMap.Rendering.Decoration.ScaleBar;
-using SharpMap.Styles;
 
 namespace FTAnalyzer.Forms
 {
@@ -169,12 +162,11 @@ namespace FTAnalyzer.Forms
                 }
                 if (!mnuKeepZoom.Checked)
                 {
-                    IMathTransform transform = clusters.MathTransform;
                     Envelope expand;
                     if (bbox.Centre == null)
                         expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
                     else
-                        expand = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
+                        expand = new Envelope(bbox.TopLeft(),bbox.BottomRight());
                     mapBox1.Map.ZoomToBox(expand);
                     expand.ExpandBy(mapBox1.Map.PixelSize * 20);
                     mapBox1.Map.ZoomToBox(expand);

@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections;
-using NetTopologySuite.Geometries;
-using SharpMap;
+﻿using System.Collections.Generic;
 using GeoAPI.Geometries;
-using GeoAPI.CoordinateSystems.Transformations;
 using SharpMap.Data;
 
 namespace FTAnalyzer.Mapping
@@ -91,18 +84,5 @@ namespace FTAnalyzer.Mapping
                 clusteredDataTable.AddRow(row);
             }
         }
-
-        //private void FitMaptoMarkers()
-        //{
-        //    foreach (MapLocation ml in markers)
-        //    {
-        //        if (!bounds.Covers(ml.Location.Longitude, ml.Location.Latitude))
-        //            bounds.ExpandToInclude(ml.Location.Longitude, ml.Location.Latitude);
-        //    }
-        //    IMathTransform transform = MapTransforms.MathTransform;
-        //    bounds = new Envelope(transform.Transform(bounds.TopLeft()), transform.Transform(bounds.BottomRight()));
-        //    bounds.ExpandBy(this.map.PixelSize * 5);
-        //    this.map.ZoomToBox(bounds);
-        //}
     }
 }

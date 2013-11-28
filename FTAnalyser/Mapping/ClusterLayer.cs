@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpMap.Data;
-using SharpMap.Layers;
-using SharpMap;
-using SharpMap.Styles;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.IO;
 using System.Windows.Forms;
+using SharpMap;
+using SharpMap.Data;
 using SharpMap.Data.Providers;
-using GeoAPI.CoordinateSystems.Transformations;
-using GeoAPI.Geometries;
+using SharpMap.Layers;
+using SharpMap.Styles;
 
 namespace FTAnalyzer.Mapping
 {
@@ -38,20 +34,7 @@ namespace FTAnalyzer.Mapping
 
         public void Refresh()
         {
-            Envelope env = map.Envelope;
-            IMathTransform transform = ReverseMathTransform;
-            env = new Envelope(transform.Transform(env.TopLeft()), transform.Transform(env.BottomRight()));
-            clusterer.Recluster(Math.Max(env.Width, env.Height) / 35.0);
-        }
-
-        public IMathTransform MathTransform
-        {
-            get { return clusterLayer.CoordinateTransformation.MathTransform; }
-        }
-
-        public IMathTransform ReverseMathTransform
-        {
-            get { return clusterLayer.ReverseCoordinateTransformation.MathTransform; }
+            clusterer.Recluster(Math.Max(map.Envelope.Width, map.Envelope.Height) / 35.0);
         }
 
         private void SetupMap()
@@ -65,8 +48,6 @@ namespace FTAnalyzer.Mapping
 
             clusterLayer = new VectorLayer("Clusters");
             clusterLayer.DataSource = factLocationGFP;
-            clusterLayer.CoordinateTransformation = MapTransforms.Transform();
-            clusterLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
 
             Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
 
@@ -92,8 +73,6 @@ namespace FTAnalyzer.Mapping
             map.Layers.Add(clusterLayer);
 
             labelLayer = new LabelLayer("Label");
-            labelLayer.CoordinateTransformation = MapTransforms.Transform();
-            labelLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
             labelLayer.DataSource = factLocationGFP;
             labelLayer.Enabled = true;
             //Specifiy field that contains the label string.

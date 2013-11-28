@@ -6,6 +6,7 @@ using GeoAPI.CoordinateSystems;
 using ProjNet.CoordinateSystems;
 using ProjNet.CoordinateSystems.Transformations;
 using GeoAPI.CoordinateSystems.Transformations;
+using GeoAPI.Geometries;
 
 namespace FTAnalyzer.Mapping
 {
@@ -87,9 +88,14 @@ namespace FTAnalyzer.Mapping
             return ctFact.CreateFromCoordinateSystems(GetEPSG900913(csFact), GeographicCoordinateSystem.WGS84); ;
         }
 
-        public static IMathTransform MathTransform
+        //public static IMathTransform MathTransform
+        //{
+        //    get { return Transform().MathTransform; }
+        //}
+
+        public static Coordinate TransformCoordinate(Coordinate point)
         {
-            get { return Transform().MathTransform; }
+            return Transform().MathTransform.Transform(point);
         }
     }
 }

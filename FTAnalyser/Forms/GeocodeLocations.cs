@@ -18,7 +18,6 @@ using SharpMap.Data.Providers;
 using SharpMap.Layers;
 using SharpMap.Rendering;
 using SharpMap.Styles;
-using GeoAPI.CoordinateSystems.Transformations;
 
 namespace FTAnalyzer.Forms
 {
@@ -518,7 +517,6 @@ namespace FTAnalyzer.Forms
                 bool retryPartial = (bool)e.Argument;
                 GoogleMap.WaitingForGoogle += new GoogleMap.GoogleEventHandler(GoogleMap_WaitingForGoogle);
                 DatabaseHelper dbh = DatabaseHelper.Instance;
-                IMathTransform transform = MapTransforms.Transform().MathTransform;
                                 
                 int count = 0;
                 int googled = 0;
@@ -615,7 +613,7 @@ namespace FTAnalyzer.Forms
                                     skipped++;
                                     foundLevel = -2;
                                 }
-                                Coordinate mpoint = transform.Transform(new Coordinate(longitude, latitude));
+                                Coordinate mpoint = MapTransforms.TransformCoordinate(new Coordinate(longitude, latitude));
                                 loc.Latitude = latitude;
                                 loc.Longitude = longitude;
                                 loc.LongitudeM = mpoint.X;
