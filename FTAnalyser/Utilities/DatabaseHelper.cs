@@ -77,10 +77,7 @@ namespace FTAnalyzer.Utilities
             try
             {
                 ProgramVersion = programVersion;
-                SQLiteCommand cmd = new SQLiteCommand("select Database from versions", conn);
-                string db = (string)cmd.ExecuteScalar();
-                cmd.Dispose();
-                Version dbVersion = db == null ? new Version("0.0.0.0") : new Version(db);
+                Version dbVersion = GetDatabaseVersion();
                 if (dbVersion < programVersion)
                     UpgradeDatabase(dbVersion);
             }
@@ -88,6 +85,15 @@ namespace FTAnalyzer.Utilities
             {
                 UpgradeDatabase(new Version("0.0.0.0"));
             }
+        }
+
+        private static Version GetDatabaseVersion()
+        {
+            SQLiteCommand cmd = new SQLiteCommand("select Database from versions", conn);
+            string db = (string)cmd.ExecuteScalar();
+            cmd.Dispose();
+            Version dbVersion = db == null ? new Version("0.0.0.0") : new Version(db);
+            return dbVersion;
         }
 
         private void UpgradeDatabase(Version dbVersion)
@@ -228,8 +234,8 @@ namespace FTAnalyzer.Utilities
                 mNorthEast = transform.Transform(NorthEast);
                 mSouthWest = transform.Transform(SouthWest);
                 // now write back the m versions
-                updateCmd.Parameters[0].Value = mPoint.X;
-                updateCmd.Parameters[1].Value = mPoint.Y;
+                updateCmd.Parameters[0].Value = mPoint.Y;
+                updateCmd.Parameters[1].Value = mPoint.X;
                 updateCmd.Parameters[2].Value = mNorthEast.X;
                 updateCmd.Parameters[3].Value = mNorthEast.Y;
                 updateCmd.Parameters[4].Value = mSouthWest.X;
@@ -524,7 +530,7 @@ namespace FTAnalyzer.Utilities
                 // finally re-open database and check for updates
                 if (conn.State != ConnectionState.Open)
                     OpenDatabaseConnection();
-                UpgradeDatabase(ProgramVersion);
+                CheckDatabaseVersion(ProgramVersion);
                 FamilyTree ft = FamilyTree.Instance;
                 if (ft.DataLoaded)
                     ft.LoadGeoLocationsFromDataBase();
