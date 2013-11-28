@@ -38,6 +38,7 @@ namespace FTAnalyzer.Mapping
 
             points.Add((IPoint)row.Geometry);
             multiPoint = new MultiPoint(points.ToArray());
+            //multiPoint.Normalize(); didn't seem to make a difference if anything slower
             return true;
         }
 
@@ -46,5 +47,15 @@ namespace FTAnalyzer.Mapping
             double d = multiPoint.Distance(row.Geometry);
             return d <= gridSize;
         }
+
+        //public void UpdateCentre(IPoint point)
+        //{
+        //    int oldCount = points.Count;
+        //    int newCount = oldCount + 1;
+        //    double X = (Centre.X * (oldCount / newCount)) + point.X / newCount;
+        //    double Y = (Centre.Y * (oldCount / newCount)) + point.Y / newCount;
+        //    Centre = new Point(new Coordinate(X, Y));
+        //}
+
     }
 }
