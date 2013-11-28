@@ -85,18 +85,14 @@ namespace FTAnalyzer.Forms
 
         private void mapBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            GeoAPI.Geometries.Coordinate c1 = mapBox1.Map.ImageToWorld(new PointF(e.X - 21.0f, e.Y - 34.0f));
-            GeoAPI.Geometries.Coordinate c2 = mapBox1.Map.ImageToWorld(new PointF(e.X + 21.0f, e.Y + 34.0f));
-            IMathTransform transform = pointLayer.ReverseCoordinateTransformation.MathTransform;
-            c1 = transform.Transform(c1);
-            c2 = transform.Transform(c2);
+            Coordinate c1 = mapBox1.Map.ImageToWorld(new PointF(e.X - 21.0f, e.Y - 34.0f));
+            Coordinate c2 = mapBox1.Map.ImageToWorld(new PointF(e.X + 21.0f, e.Y + 34.0f));
             Envelope env = new Envelope(c1, c2);
             if (iconSelected && e.Button == MouseButtons.Right)
             {
                 // we have finished and are saving icon
                 mapBox1.Cursor = Cursors.Default;
-                GeoAPI.Geometries.Coordinate c = mapBox1.Map.ImageToWorld(new PointF(e.X, e.Y + 17.0f));
-                c = transform.Transform(c);
+                Coordinate c = mapBox1.Map.ImageToWorld(new PointF(e.X, e.Y + 17.0f));
                 pointFeature.Geometry = new NetTopologySuite.Geometries.Point(c);
                 mapBox1.Refresh();
                 iconSelected = false;
@@ -136,12 +132,13 @@ namespace FTAnalyzer.Forms
 
         private void UpdateDatabase()
         {
-            IMathTransform transform = pointLayer.ReverseCoordinateTransformation.MathTransform;
-            Envelope env = new Envelope(transform.Transform(mapBox1.Map.Envelope.TopLeft()),
-                                        transform.Transform(mapBox1.Map.Envelope.BottomRight()));
-
-            location.Latitude = pointFeature.Geometry.Coordinate.Y;
-            location.Longitude = pointFeature.Geometry.Coordinate.X;
+            IMathTransform transform = MapTransforms.ReverseTransform().MathTransform;
+            Envelope env = new Envelope(mapBox1.Map.Envelope.TopLeft(),mapBox1.Map.Envelope.BottomRight());
+            Coordinate point = new Coordinate(transform.Transform(pointFeature.Geometry.Coordinate));
+            location.Latitude = point.Y;
+            location.Longitude = point.X;
+            location.LatitudeM = pointFeature.Geometry.Coordinate.Y;
+            location.LongitudeM = pointFeature.Geometry.Coordinate.X;
             location.ViewPort.NorthEast.Lat = env.Top();
             location.ViewPort.NorthEast.Long = env.Right();
             location.ViewPort.SouthWest.Lat = env.Bottom();
