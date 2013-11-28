@@ -34,7 +34,7 @@ namespace FTAnalyzer.Mapping
 
         public void Refresh()
         {
-            clusterer.Recluster(Math.Max(map.Envelope.Width, map.Envelope.Height) / 35.0);
+            clusterer.Recluster(Math.Max(map.Envelope.Width, map.Envelope.Height) / 20.0);
         }
 
         private void SetupMap()
