@@ -19,6 +19,7 @@ namespace FTAnalyzer.Utilities
         public string CurrentFilename { get; private set; }
         public string DatabasePath { get; private set; }
         private Version ProgramVersion { get; set; }
+        private bool restoring;
 
         #region Constructor/Destructor
         private DatabaseHelper()
@@ -26,6 +27,7 @@ namespace FTAnalyzer.Utilities
             DatabasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer");
             CurrentFilename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\FTA-RestoreTemp.s3db");
             OpenDatabaseConnection();
+            restoring = false;
         }
 
         public static DatabaseHelper Instance
@@ -140,11 +142,16 @@ namespace FTAnalyzer.Utilities
                 if (dbVersion < v3_2_1_0)
                 {
                     bool proceed = false;
-                    DialogResult result = MessageBox.Show("In order to improve speed of the maps a database upgrade is needed.\nThis may take several minutes and must be allowed to complete.\nYou must backup your database first. Ok to proceed?", "Database upgrading", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    Application.UseWaitCursor = true;
-                    if (result == DialogResult.Yes)
-                        proceed = FamilyTree.Instance.BackupDatabase(new SaveFileDialog(), "FT Analyzer zip file created by Database upgrade for v3.2.1.0");
-                    Application.UseWaitCursor = false;
+                    if (restoring)
+                        proceed = true;
+                    else
+                    {
+                        DialogResult result = MessageBox.Show("In order to improve speed of the maps a database upgrade is needed.\nThis may take several minutes and must be allowed to complete.\nYou must backup your database first. Ok to proceed?", "Database upgrading", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        Application.UseWaitCursor = true;
+                        if (result == DialogResult.Yes)
+                            proceed = FamilyTree.Instance.BackupDatabase(new SaveFileDialog(), "FT Analyzer zip file created by Database upgrade for v3.2.1.0");
+                        Application.UseWaitCursor = false;
+                    }
                     if (proceed)
                     {
                         SQLiteCommand cmd = new SQLiteCommand("alter table geocode add column Latm real default 0.0", conn);
@@ -530,7 +537,9 @@ namespace FTAnalyzer.Utilities
                 // finally re-open database and check for updates
                 if (conn.State != ConnectionState.Open)
                     OpenDatabaseConnection();
+                restoring = true;
                 CheckDatabaseVersion(ProgramVersion);
+                restoring = false;
                 FamilyTree ft = FamilyTree.Instance;
                 if (ft.DataLoaded)
                     ft.LoadGeoLocationsFromDataBase();
