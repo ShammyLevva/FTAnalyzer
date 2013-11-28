@@ -45,12 +45,13 @@ namespace FTAnalyzer.Mapping
         {
             double distance = double.MaxValue;
             MapCluster clusterToAddTo = null;
+            IPoint rowCentre = row.Geometry.Centroid;
             foreach (MapCluster cluster in this.clusters)
             {
                 IPoint centre = cluster.Geometry.Centroid;
                 if (centre.X != 0 && centre.Y != 0)
                 {
-                    double d = centre.Distance(row.Geometry.Centroid);
+                    double d = centre.Distance(rowCentre);
                     if (d < distance)
                     {
                         distance = d;
