@@ -1,13 +1,11 @@
-﻿using System.Data.SQLite;
+﻿using System;
 using System.Data;
-using System;
-using System.Windows.Forms;
+using System.Data.SQLite;
 using System.IO;
+using System.Windows.Forms;
 using FTAnalyzer.Forms;
 using FTAnalyzer.Mapping;
-using GeoAPI.CoordinateSystems.Transformations;
 using GeoAPI.Geometries;
-using System.Collections.Concurrent;
 
 namespace FTAnalyzer.Utilities
 {
@@ -183,7 +181,6 @@ namespace FTAnalyzer.Utilities
             Coordinate mPoint, mNorthEast, mSouthWest;
             double latitude, longitude, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw;
 
-            IMathTransform transform = MapTransforms.Transform().MathTransform;
             SQLiteCommand cmd = new SQLiteCommand("select count(*) from geocode where latitude <> 0 and longitude <> 0", conn);
             SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
             reader.Read();
@@ -237,9 +234,9 @@ namespace FTAnalyzer.Utilities
                 Point = new Coordinate(longitude, latitude);
                 NorthEast = new Coordinate(viewport_y_ne, viewport_x_ne); // old viewports had x & y wrong way round
                 SouthWest = new Coordinate(viewport_y_sw, viewport_x_sw); // x is stored as lat y as long
-                mPoint = transform.Transform(Point);
-                mNorthEast = transform.Transform(NorthEast);
-                mSouthWest = transform.Transform(SouthWest);
+                mPoint = MapTransforms.TransformCoordinate(Point);
+                mNorthEast = MapTransforms.TransformCoordinate(NorthEast);
+                mSouthWest = MapTransforms.TransformCoordinate(SouthWest);
                 // now write back the m versions
                 updateCmd.Parameters[0].Value = mPoint.Y;
                 updateCmd.Parameters[1].Value = mPoint.X;

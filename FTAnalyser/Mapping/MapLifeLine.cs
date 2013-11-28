@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpMap.Data;
-using NetTopologySuite.Geometries;
+﻿using System.Collections.Generic;
 using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
+using SharpMap.Data;
 
 namespace FTAnalyzer.Mapping
 {
@@ -24,7 +21,7 @@ namespace FTAnalyzer.Mapping
             Coordinate previousPoint = null;
             foreach (IDisplayFact f in ind.AllGeocodedFacts)
             {
-                Coordinate point = new Coordinate(f.Location.Longitude, f.Location.Latitude);
+                Coordinate point = new Coordinate(f.Location.LongitudeM, f.Location.LatitudeM);
                 if(index == 1) 
                     StartPoint = new NetTopologySuite.Geometries.Point(point);
                 if(index == ind.AllGeocodedFacts.Count)

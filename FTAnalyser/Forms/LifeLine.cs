@@ -1,24 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using FTAnalyzer.Utilities;
-using SharpMap.Styles;
-using SharpMap.Data;
-using FTAnalyzer.Mapping;
-using System.IO;
-using SharpMap.Layers;
-using SharpMap.Data.Providers;
-using System.Drawing.Text;
-using System.Drawing.Drawing2D;
-using SharpMap.Rendering.Decoration.ScaleBar;
-using GeoAPI.Geometries;
-using GeoAPI.CoordinateSystems.Transformations;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
+using System.Linq;
+using System.Windows.Forms;
+using FTAnalyzer.Mapping;
+using FTAnalyzer.Utilities;
+using GeoAPI.Geometries;
+using SharpMap.Data;
+using SharpMap.Data.Providers;
+using SharpMap.Layers;
+using SharpMap.Rendering.Decoration.ScaleBar;
+using SharpMap.Styles;
 
 namespace FTAnalyzer.Forms
 {
@@ -76,9 +72,7 @@ namespace FTAnalyzer.Forms
 
             linesLayer = new VectorLayer("LifeLines");
             linesLayer.DataSource = lifelinesGFP;
-            linesLayer.CoordinateTransformation = MapTransforms.Transform();
-            linesLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
-
+            
             Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
 
             VectorStyle linestyle = new VectorStyle();
@@ -90,8 +84,6 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.Layers.Add(linesLayer);
 
             labelLayer = new LabelLayer("Label");
-            labelLayer.CoordinateTransformation = MapTransforms.Transform();
-            labelLayer.ReverseCoordinateTransformation = MapTransforms.ReverseTransform();
             labelLayer.DataSource = lifelinesGFP;
             labelLayer.Enabled = true;
             //Specifiy field that contains the label string.
@@ -162,12 +154,11 @@ namespace FTAnalyzer.Forms
                 foreach (Coordinate c in row.Geometry.Coordinates)
                     if (c != null)
                         bbox.ExpandToInclude(c);
-            IMathTransform transform = linesLayer.CoordinateTransformation.MathTransform;
             Envelope expand;
             if (bbox.Centre == null)
                 expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
             else
-                expand = new Envelope(transform.Transform(bbox.TopLeft()), transform.Transform(bbox.BottomRight()));
+                expand = new Envelope(bbox.TopLeft(),bbox.BottomRight());
             mapBox1.Map.ZoomToBox(expand);
             expand.ExpandBy(mapBox1.Map.PixelSize * 40);
             mapBox1.Map.ZoomToBox(expand);

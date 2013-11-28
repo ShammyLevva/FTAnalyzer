@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using System.Xml;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
-using GeoAPI.CoordinateSystems.Transformations;
 using GeoAPI.Geometries;
 
 namespace FTAnalyzer
@@ -248,8 +247,7 @@ namespace FTAnalyzer
             this.Latitude = double.TryParse(latitude, out temp) ? temp : 0;
             this.Longitude = double.TryParse(longitude, out temp) ? temp : 0;
             Coordinate point = new Coordinate(Longitude, Latitude);
-            IMathTransform transform = MapTransforms.Transform().MathTransform;
-            Coordinate mpoint = transform.Transform(point);
+            Coordinate mpoint = MapTransforms.TransformCoordinate(point);
             this.LongitudeM = mpoint.X;
             this.LatitudeM = mpoint.Y;
             this.GeocodeStatus = status;

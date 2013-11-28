@@ -26,7 +26,7 @@ namespace FTAnalyzer.Mapping
             this.Location = loc;
             this.year = year;
             this.Icon = FactLocationImage.ErrorIcon(loc.GeocodeStatus).Icon;
-            this.Geometry = new NetTopologySuite.Geometries.Point(Location.Longitude, Location.Latitude);
+            this.Geometry = new NetTopologySuite.Geometries.Point(Location.LongitudeM, Location.LatitudeM);
             this.GoogleLocation = loc.GoogleLocation;
         }
 
