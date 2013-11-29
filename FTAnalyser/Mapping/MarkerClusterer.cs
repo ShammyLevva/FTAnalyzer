@@ -34,8 +34,12 @@ namespace FTAnalyzer.Mapping
                 reclustering = true;
                 this.gridsize = gridSize;
                 this.clusters.Clear();
+                int count = 0;
                 foreach (FeatureDataRow row in sourceDataTable)
+                {
                     AddToClosestCluster(row);
+                    count++;
+                }
                 BuildClusteredFeatureTable();
                 reclustering = false;
             }
