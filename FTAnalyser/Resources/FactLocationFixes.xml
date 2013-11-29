@@ -906,4 +906,16 @@
       <Lookup country="England"  code="Yorkshire (West riding)                 :9                             " county="West Yorkshire" />
     </FindMyPast>
   </Lookups>
+  <GoogleGeocodes>
+    <CountryFixes>
+      
+    </CountryFixes>
+    <RegionFixes>
+      <!-- England -->
+      <RegionFix from="Cumberland" to ="Cumbria" />
+    </RegionFixes>
+    <SubRegionFixes>
+      
+    </SubRegionFixes>
+  </GoogleGeocodes>
 </Data>

@@ -543,7 +543,7 @@ namespace FTAnalyzer.Forms
                                 (retryPartial &&
                                     (loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH || loc.GeocodeStatus == FactLocation.Geocode.LEVEL_MISMATCH)))
                             {
-                                res = SearchGoogle(loc.ToString());
+                                res = SearchGoogle(loc.GoogleFixed);
                             }
                             if (res != null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
                             {
@@ -576,7 +576,7 @@ namespace FTAnalyzer.Forms
                                                 if (!result.PartialMatch)
                                                 {
                                                     if (checkresultsPass == 2)
-                                                        log.Info("Geocoding found a match with " + loc.GEDCOMLocation + " previously failed with " + loc.ToString());
+                                                        log.Info("Geocoding found a match with " + loc.GEDCOMLocation + " previously failed with " + loc.GoogleFixed);
                                                     checkresultsPass = 3; // force exit
                                                     break; // we've got a good match so exit
                                                 }
@@ -584,7 +584,7 @@ namespace FTAnalyzer.Forms
                                         }
                                         if (loc.GeocodeStatus != FactLocation.Geocode.MATCHED && checkresultsPass == 1)
                                         {
-                                            if (loc.GEDCOMLocation.Equals(loc.ToString()))
+                                            if (loc.GEDCOMLocation.Equals(loc.GoogleFixed))
                                                 checkresultsPass++;  // if we have the same string skip checking GEDCOM location
                                             else
                                                 res = SearchGoogle(loc.GEDCOMLocation);

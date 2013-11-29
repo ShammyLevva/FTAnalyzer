@@ -52,6 +52,7 @@ namespace FTAnalyzer
         private static Dictionary<string, string> FREECEN_LOOKUP = new Dictionary<string, string>();
         private static Dictionary<string, Tuple<string, string>> FINDMYPAST_LOOKUP = new Dictionary<string, Tuple<string, string>>();
         private static IDictionary<string, FactLocation> locations;
+        private static Dictionary<Tuple<int, string>, string> GOOGLE_FIXES = new Dictionary<Tuple<int, string>, string>();
 
         public static Dictionary<Geocode, string> Geocodes;
         public static FactLocation UNKNOWN_LOCATION;
@@ -137,7 +138,24 @@ namespace FTAnalyzer
                         FINDMYPAST_LOOKUP.Add(county, result);
                     }
                 }
+                foreach (XmlNode n in xmlDoc.SelectNodes("Data/GoogleGeocodes/CountryFixes/CountryFix"))
+                    AddGoogleFixes(n, COUNTRY);
+                foreach (XmlNode n in xmlDoc.SelectNodes("Data/GoogleGeocodes/RegionFixes/RegionFix"))
+                    AddGoogleFixes(n, REGION);
+                foreach (XmlNode n in xmlDoc.SelectNodes("Data/GoogleGeocodes/SubRegionFixes/SubRegionFix"))
+                    AddGoogleFixes(n, SUBREGION);
             }
+        }
+
+        private static void AddGoogleFixes(XmlNode n, int level)
+        {
+            string fromstr = n.Attributes["from"].Value;
+            string to = n.Attributes["to"].Value;
+            Tuple<int, string> from = new Tuple<int, string>(level, fromstr);
+            if (GOOGLE_FIXES.ContainsKey(from))
+                Console.WriteLine("Error duplicate Google Region fixes :" + from);
+            if (from != null && fromstr.Length > 0 && to != null && to.Length > 0)
+                GOOGLE_FIXES.Add(from, to);
         }
 
         private static void SetupGeocodes()
@@ -730,6 +748,37 @@ namespace FTAnalyzer
             to.GoogleLocation = from.GoogleLocation;
             to.GoogleResultType = from.GoogleResultType;
             to.FoundLevel = from.FoundLevel;
+        }
+
+        public string GoogleFixed
+        {
+            get {
+                string countryFix = string.Empty;
+                string regionFix = string.Empty;
+                string subRegionFix = string.Empty;
+                GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(COUNTRY, Country), out countryFix);
+                if (countryFix == null)
+                    countryFix = Country;
+                GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(REGION, Region), out regionFix);
+                if (regionFix == null)
+                    regionFix = Region;
+                else
+                    regionFix = regionFix;
+                GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(SUBREGION, SubRegion), out subRegionFix);
+                if (subRegionFix == null)
+                    subRegionFix = SubRegion;
+                
+                string result = countryFix;
+                if (!regionFix.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
+                    result = regionFix + ", " + result;
+                if (!subRegionFix.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
+                    result = subRegionFix + ", " + result;
+                if (!Address.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
+                    result = Address + ", " + result;
+                if (!Place.Equals(string.Empty))
+                    result = Place + ", " + result;
+                return TrimLeadingCommas(result);
+            }
         }
 
         public int CompareTo(FactLocation that)
