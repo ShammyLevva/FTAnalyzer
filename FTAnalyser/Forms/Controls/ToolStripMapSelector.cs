@@ -9,6 +9,7 @@ using FTAnalyzer.Mapping;
 using BruTile.Web;
 using SharpMap.Forms;
 using System.Drawing;
+using System.IO;
 
 namespace FTAnalyzer.Forms.Controls
 {
@@ -194,14 +195,16 @@ namespace FTAnalyzer.Forms.Controls
             if (sender == mnuGoogleMap)
             {
                 mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                        new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap"));
+                        new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap",
+                        new Color(), true, Path.Combine(Path.GetTempPath(), "GoogleTileCache")));
                 mnuGoogleMap.Checked = true;
                 UpdateLinkLabel(LinkLabelType.GOOGLE);
             }
             else if (sender == mnuGoogleSatellite)
             {
                 mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                        new GoogleTileSource(GoogleMapType.GoogleSatellite), "GoogleSatellite"));
+                        new GoogleTileSource(GoogleMapType.GoogleSatellite), "GoogleSatellite",
+                        new Color(), true, Path.Combine(Path.GetTempPath(), "GoogleTileCache")));
                 mnuGoogleSatellite.Checked = true;
                 UpdateLinkLabel(LinkLabelType.GOOGLE);
                 mnuGoogleSatellite.Visible = false;
@@ -209,46 +212,48 @@ namespace FTAnalyzer.Forms.Controls
             else if (sender == mnuOpenStreetMap)
             {
                 mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BruTile.Web.OsmTileSource(), "OpenStreetMap"));
+                    new OsmTileSource(), "OpenStreetMap",
+                        new Color(), true, Path.Combine(Path.GetTempPath(), "OSMTileCache")));
                 mnuOpenStreetMap.Checked = true;
                 UpdateLinkLabel(LinkLabelType.OSM);
             }
             else if (sender == mnuBingMapAerial)
             {
                 mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BruTile.Web.BingTileSource(BingRequest.UrlBing, null, BingMapType.Aerial), "BingMapAerial"));
+                    new BingTileSource(BingRequest.UrlBing, null, BingMapType.Aerial), "BingMapAerial",
+                        new Color(), true, Path.Combine(Path.GetTempPath(), "BingTileCache")));
                 mnuBingMapAerial.Checked = true;
                 UpdateLinkLabel(LinkLabelType.BING);
             }
             else if (sender == mnuBingMapRoads)
             {
                 mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BruTile.Web.BingTileSource(BingRequest.UrlBing, null, BingMapType.Roads), "BingMapRoads"));
+                    new BingTileSource(BingRequest.UrlBing, null, BingMapType.Roads), "BingMapRoads",
+                        new Color(), true, Path.Combine(Path.GetTempPath(), "BingTileCache")));
                 mnuBingMapRoads.Checked = true;
                 UpdateLinkLabel(LinkLabelType.BING);
             }
             else if (sender == mnuBingMapHybrid)
             {
                 mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BruTile.Web.BingTileSource(BingRequest.UrlBing, null, BingMapType.Hybrid), "BingMapHybrid"));
+                    new BingTileSource(BingRequest.UrlBing, null, BingMapType.Hybrid), "BingMapHybrid",
+                        new Color(), true, Path.Combine(Path.GetTempPath(), "BingTileCache")));
                 mnuBingMapHybrid.Checked = true;
                 UpdateLinkLabel(LinkLabelType.BING);
             }
             else if (sender == mnuBingMapOS)
             {
                 mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BruTile.Web.BingTileSource(
-                        new BruTile.Web.BingRequest(BingRequest.UrlBing, null, BingMapType.OS), null),
-                        "BingMapOS"));
+                    new BingTileSource(new BingRequest(BingRequest.UrlBing, null, BingMapType.OS), null), "BingMapOS",
+                        new Color(), true, Path.Combine(Path.GetTempPath(), "BingTileCache")));
                 mnuBingMapOS.Checked = true;
                 UpdateLinkLabel(LinkLabelType.BING);
             }
             else if (sender == mnuNLSOSHistoric)
             {
                 mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BruTile.Web.OsmTileSource(
-                        new NLSRequest(), null),
-                        "NLSOSHistoric"));
+                    new OsmTileSource(new NLSRequest(), null), "NLSOSHistoric",
+                        new Color(), true, Path.Combine(Path.GetTempPath(), "OSMTileCache")));
                 mnuNLSOSHistoric.Checked = true;
                 UpdateLinkLabel(LinkLabelType.NLS);
             }
