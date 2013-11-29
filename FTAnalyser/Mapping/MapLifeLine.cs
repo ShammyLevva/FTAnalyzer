@@ -12,12 +12,14 @@ namespace FTAnalyzer.Mapping
         private Geometry StartPoint { get; set; }
         private Geometry EndPoint { get; set; }
         private int Count { get; set; }
+        private Envelope viewport { get; set; }
 
         public MapLifeLine(Individual ind)
         {
             this.ind = ind;
             int index = 1;
             List<Coordinate> points = new List<Coordinate>();
+            this.viewport = new Envelope();
             Coordinate previousPoint = null;
             foreach (IDisplayFact f in ind.AllGeocodedFacts)
             {
@@ -32,6 +34,10 @@ namespace FTAnalyzer.Mapping
                     points.Add(point); // don't add point if same as last one
                     previousPoint = point;
                 }
+                GeoResponse.CResult.CGeometry.CViewPort vp = f.Location.ViewPort;
+                Envelope env = new Envelope(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
+                if (!viewport.Contains(env))
+                    viewport.ExpandToInclude(env);
             }
             if (points.Count > 1)
                 this.Geometry = new NetTopologySuite.Geometries.LineString(points.ToArray());
@@ -47,6 +53,7 @@ namespace FTAnalyzer.Mapping
             r["StartPoint"] = false;
             r["EndPoint"] = false;
             r["Label"] = ind.Name;
+            r["ViewPort"] = viewport;
             r.Geometry = Geometry;
             table.AddRow(r);
 
@@ -54,7 +61,8 @@ namespace FTAnalyzer.Mapping
             r["MapLifeLine"] = this;
             r["StartPoint"] = true;
             r["EndPoint"] = false;
-            if(Count < 2)
+            r["ViewPort"] = viewport;
+            if (Count < 2)
                 r["Label"] = ind.Name;
             r.Geometry = StartPoint;
             table.AddRow(r);
@@ -63,6 +71,7 @@ namespace FTAnalyzer.Mapping
             r["MapLifeLine"] = this;
             r["StartPoint"] = false;
             r["EndPoint"] = true;
+            r["ViewPort"] = viewport;
             r.Geometry = EndPoint;
             table.AddRow(r);
 
