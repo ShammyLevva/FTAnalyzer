@@ -1908,7 +1908,7 @@ namespace FTAnalyzer
                 }
             }
             foreach (TreeNode node in displayTreeRootNode.Nodes)
-                node.Text += "    "; // force text to be longer to fix bold bug
+                node.Text += "       "; // force text to be longer to fix bold bug
             return BuildTreeNodeArray();
         }
 
