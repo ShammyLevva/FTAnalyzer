@@ -404,7 +404,6 @@ namespace FTAnalyzer.Forms
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
-            this.optionsToolStripMenuItem.Visible = false;
             // 
             // mnuHideScaleBar
             // 
