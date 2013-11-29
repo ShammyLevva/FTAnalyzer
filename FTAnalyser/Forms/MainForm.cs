@@ -62,8 +62,12 @@ namespace FTAnalyzer
             // to resize thus setting the values for both
             int Width = (int) Application.UserAppDataRegistry.GetValue("Mainform size - width", this.Width);
             int Height = (int) Application.UserAppDataRegistry.GetValue("Mainform size - height", this.Height);
+            int Top = (int)Application.UserAppDataRegistry.GetValue("Mainform position - top", this.Top);
+            int Left = (int)Application.UserAppDataRegistry.GetValue("Mainform position - left", this.Left);
             this.Width = Width;
             this.Height = Height;
+            this.Top = Top;
+            this.Left = Left;
         }
 
         private string PublishVersion()
@@ -934,6 +938,8 @@ namespace FTAnalyzer
             {  //only save window size if not maximised or minimised
                 Application.UserAppDataRegistry.SetValue("Mainform size - width", this.Width);
                 Application.UserAppDataRegistry.SetValue("Mainform size - height", this.Height);
+                Application.UserAppDataRegistry.SetValue("Mainform position - top", this.Top);
+                Application.UserAppDataRegistry.SetValue("Mainform position - left", this.Left);
             }
         }
 
