@@ -67,6 +67,7 @@ namespace FTAnalyzer.Forms
             lifelines.Columns.Add("StartPoint", typeof(bool));
             lifelines.Columns.Add("EndPoint", typeof(bool));
             lifelines.Columns.Add("Label", typeof(string));
+            lifelines.Columns.Add("ViewPort", typeof(Envelope));
 
             GeometryFeatureProvider lifelinesGFP = new GeometryFeatureProvider(lifelines);
 
@@ -151,16 +152,20 @@ namespace FTAnalyzer.Forms
 
             Envelope bbox = new Envelope();
             foreach (FeatureDataRow row in lifelines)
+            {
                 foreach (Coordinate c in row.Geometry.Coordinates)
+                {
                     if (c != null)
                         bbox.ExpandToInclude(c);
+                }
+                bbox.ExpandToInclude((Envelope)row["ViewPort"]);
+            }
             Envelope expand;
             if (bbox.Centre == null)
                 expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
             else
                 expand = new Envelope(bbox.TopLeft(),bbox.BottomRight());
-            mapBox1.Map.ZoomToBox(expand);
-            expand.ExpandBy(mapBox1.Map.PixelSize * 40);
+            expand.ExpandBy(mapBox1.Map.PixelSize);
             mapBox1.Map.ZoomToBox(expand);
             if (mapBox1.Map.Zoom < mapBox1.Map.MinimumZoom)
                 mapBox1.Map.Zoom = mapBox1.Map.MinimumZoom;
