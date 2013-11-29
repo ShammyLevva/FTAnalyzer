@@ -1498,8 +1498,8 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             TimeLine tl = new TimeLine();
-            tl.Show();
             DisposeDuplicateForms(tl);
+            tl.Show();
             HourGlass(false);
         }
 
@@ -1530,8 +1530,8 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             GeocodeLocations geo = new GeocodeLocations();
-            geo.Show();
             DisposeDuplicateForms(geo);
+            geo.Show();
             HourGlass(false);
         }
 
@@ -1705,8 +1705,8 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             LifeLine l = new LifeLine();
-            l.Show();
             DisposeDuplicateForms(l);
+            l.Show();
             HourGlass(false);
         }
 
@@ -1714,8 +1714,8 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Places p = new Places();
-            p.Show();
             DisposeDuplicateForms(p);
+            p.Show();
             HourGlass(false);
         }
 

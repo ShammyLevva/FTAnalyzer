@@ -58,8 +58,8 @@ namespace FTAnalyzer.Forms
             {
                 this.Cursor = Cursors.WaitCursor;
                 GeocodeLocations geo = new GeocodeLocations();
-                geo.Show();
                 MainForm.DisposeDuplicateForms(geo);
+                geo.Show();
                 geo.StartGeoCoding(false);
                 geo.BringToFront();
                 geo.Focus();

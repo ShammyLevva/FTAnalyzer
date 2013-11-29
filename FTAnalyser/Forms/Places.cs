@@ -163,7 +163,7 @@ namespace FTAnalyzer.Forms
 
         private void Places_Load(object sender, EventArgs e)
         {
-            // add nodes after constructor so that bold issues don't interfere
+            tvPlaces.Nodes.Clear();
             TreeNode[] nodes = ft.GetAllLocationsTreeNodes(tvPlaces.Font);
             tvPlaces.Nodes.AddRange(nodes);
             isloading = false; // only turn off building map if completely done initializing
