@@ -75,12 +75,12 @@ namespace FTAnalyzer.Mapping
         private static CoordinateTransformationFactory ctFact = new CoordinateTransformationFactory();
         private static CoordinateSystemFactory csFact = new CoordinateSystemFactory();
 
-        public static ICoordinateTransformation Transform()
+        private static ICoordinateTransformation Transform()
         {
             return ctFact.CreateFromCoordinateSystems(GeographicCoordinateSystem.WGS84, GetEPSG900913(csFact));
         }
 
-        public static ICoordinateTransformation ReverseTransform()
+        private static ICoordinateTransformation ReverseTransform()
         {
             return ctFact.CreateFromCoordinateSystems(GetEPSG900913(csFact), GeographicCoordinateSystem.WGS84); ;
         }
@@ -93,6 +93,11 @@ namespace FTAnalyzer.Mapping
         public static Coordinate TransformCoordinate(Coordinate point)
         {
             return Transform().MathTransform.Transform(point);
+        }
+
+        public static Coordinate ReverseTransformCoordinate(Coordinate point)
+        {
+            return ReverseTransform().MathTransform.Transform(point);
         }
     }
 }

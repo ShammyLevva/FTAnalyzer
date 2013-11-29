@@ -131,7 +131,7 @@ namespace FTAnalyzer.Forms
         private void UpdateDatabase()
         {
             Envelope env = new Envelope(mapBox1.Map.Envelope.TopLeft(),mapBox1.Map.Envelope.BottomRight());
-            Coordinate point = MapTransforms.TransformCoordinate(pointFeature.Geometry.Coordinate);
+            Coordinate point = MapTransforms.ReverseTransformCoordinate(pointFeature.Geometry.Coordinate);
             location.Latitude = point.Y;
             location.Longitude = point.X;
             location.LatitudeM = pointFeature.Geometry.Coordinate.Y;
