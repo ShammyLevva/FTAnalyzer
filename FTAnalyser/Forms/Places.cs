@@ -99,12 +99,12 @@ namespace FTAnalyzer.Forms
             progressbar.Maximum = list.Count;
             foreach (Individual ind in list)
             {
-                foreach (Fact fact in ind.AllFacts)
+                foreach (DisplayFact dispfact in ind.AllGeocodedFacts)
                 {
-                    if (fact.Location.IsGeoCoded(false) && fact.Location.Matches(location.ToString(), level))
+                    if (dispfact.Location.CompareTo(location, level) == 0)
                     {
-                        displayFacts.Add(new DisplayFact(ind, fact));
-                        MapLocation loc = new MapLocation(ind, fact, fact.FactDate);
+                        displayFacts.Add(dispfact);
+                        MapLocation loc = new MapLocation(ind, dispfact.Fact, dispfact.FactDate);
                         FeatureDataRow fdr = loc.AddFeatureDataRow(clusters.FactLocations);
                     }
                 }
@@ -113,8 +113,9 @@ namespace FTAnalyzer.Forms
                 Application.DoEvents();
             }
             progressbar.Visible = false;
+            txtCount.Text = "Loading map tiles and computing clusters for " + displayFacts.Count + " facts. Please wait";
+            Application.DoEvents();
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
-
             Envelope bbox = new Envelope();
             foreach (FeatureDataRow row in clusters.FactLocations)
                 foreach (Coordinate c in row.Geometry.Coordinates)
@@ -124,8 +125,8 @@ namespace FTAnalyzer.Forms
             if (bbox.Centre == null)
                 expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
             else
-                expand = new Envelope(bbox.TopLeft(),bbox.BottomRight());
-            expand.ExpandBy(mapBox1.Map.PixelSize * 40);
+                expand = new Envelope(bbox.TopLeft(), bbox.BottomRight());
+            expand.ExpandBy(mapBox1.Map.PixelSize);
             mapBox1.Map.ZoomToBox(expand);
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             RefreshPlaces();
