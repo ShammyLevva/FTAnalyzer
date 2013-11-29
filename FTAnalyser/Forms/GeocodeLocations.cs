@@ -86,6 +86,8 @@ namespace FTAnalyzer.Forms
                 menu.Checked = Application.UserAppDataRegistry.GetValue(geocode, "True").Equals("True");
                 menu.CheckOnClick = true;
                 menu.CheckedChanged += new EventHandler(menuGeocode_CheckedChanged);
+                menu.Image = FactLocationImage.ErrorIcon(item.Key).Icon;
+                menu.TextImageRelation = TextImageRelation.TextBeforeImage;
                 mnuGeocodeStatus.DropDownItems.Add(menu);
             }
 
