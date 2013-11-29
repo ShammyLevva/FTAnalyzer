@@ -762,8 +762,6 @@ namespace FTAnalyzer
                 GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(REGION, Region), out regionFix);
                 if (regionFix == null)
                     regionFix = Region;
-                else
-                    regionFix = regionFix;
                 GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(SUBREGION, SubRegion), out subRegionFix);
                 if (subRegionFix == null)
                     subRegionFix = SubRegion;

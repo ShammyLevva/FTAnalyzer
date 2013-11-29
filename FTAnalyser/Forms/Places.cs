@@ -113,7 +113,7 @@ namespace FTAnalyzer.Forms
                 Application.DoEvents();
             }
             progressbar.Visible = false;
-            txtCount.Text = "Loading map tiles and computing clusters for " + displayFacts.Count + " facts. Please wait";
+            txtCount.Text = "Downloading map tiles and computing clusters for " + displayFacts.Count + " facts. Please wait";
             Application.DoEvents();
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
             Envelope bbox = new Envelope();
@@ -126,7 +126,7 @@ namespace FTAnalyzer.Forms
                 expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
             else
                 expand = new Envelope(bbox.TopLeft(), bbox.BottomRight());
-            expand.ExpandBy(mapBox1.Map.PixelSize);
+            expand.ExpandBy(mapBox1.Map.PixelSize * 1.3);
             mapBox1.Map.ZoomToBox(expand);
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             RefreshPlaces();

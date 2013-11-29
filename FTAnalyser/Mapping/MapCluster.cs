@@ -15,8 +15,10 @@ namespace FTAnalyzer.Mapping
         private List<IPoint> points;
         private IMultiPoint multiPoint;
         private IGeometry bufferedMultiPoint;
-
+        private IPoint centroid;
+        
         public static readonly string CLUSTER = "Cluster", FEATURE = "Feature", UNKNOWN = "Unknown";
+        private static readonly int CENTROID_THRESHOLD = 100;
 
         public IList<FeatureDataRow> Features { get { return cluster; } }
 
@@ -31,20 +33,28 @@ namespace FTAnalyzer.Mapping
         }
 
         public IGeometry Geometry { get { return multiPoint.Centroid; } }
-
+        
         public string ClusterType { get { return (cluster.Count < minSize) ? FEATURE : CLUSTER; } }
 
+        public IPoint Centroid
+        {
+            get {
+                if (points.Count < CENTROID_THRESHOLD)
+                    return multiPoint.Centroid;
+                else
+                    return centroid;
+            }
+        }
+        
         public void AddFeature(FeatureDataRow row)
         {
-            //if (this.cluster.Contains(row))
-            //    return false;
             cluster.Add(row);
 
             points.Add((IPoint)row.Geometry);
+            if (points.Count == CENTROID_THRESHOLD)
+                centroid = multiPoint.Centroid; // save centroid when we reach 500 points
             multiPoint = new MultiPoint(points.ToArray());
             bufferedMultiPoint = multiPoint.Envelope.Buffer(gridSize);
-            //multiPoint.Normalize(); didn't seem to make a difference if anything slower
-            //return true;
         }
 
         public bool IsFeatureInClusterBounds(FeatureDataRow row)

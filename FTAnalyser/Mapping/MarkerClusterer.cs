@@ -52,7 +52,7 @@ namespace FTAnalyzer.Mapping
             IPoint rowCentre = row.Geometry.Centroid;
             foreach (MapCluster cluster in this.clusters)
             {
-                IPoint centre = cluster.Geometry.Centroid;
+                IPoint centre = cluster.Centroid;
                 if (centre.X != 0 && centre.Y != 0)
                 {
                     double d = centre.Distance(rowCentre);

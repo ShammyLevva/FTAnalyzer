@@ -167,8 +167,7 @@ namespace FTAnalyzer.Forms
                         expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
                     else
                         expand = new Envelope(bbox.TopLeft(),bbox.BottomRight());
-                    mapBox1.Map.ZoomToBox(expand);
-                    expand.ExpandBy(mapBox1.Map.PixelSize * 20);
+                    expand.ExpandBy(mapBox1.Map.PixelSize * 1.3);
                     mapBox1.Map.ZoomToBox(expand);
                 }
                 RefreshTimeline();
