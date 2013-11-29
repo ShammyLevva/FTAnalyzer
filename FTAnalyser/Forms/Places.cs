@@ -150,6 +150,7 @@ namespace FTAnalyzer.Forms
         private void Places_FormClosed(object sender, FormClosedEventArgs e)
         {
             DatabaseHelper.GeoLocationUpdated -= DatabaseHelper_GeoLocationUpdated;
+            tvPlaces.Nodes.Clear();
             this.Dispose();
         }
 
@@ -163,9 +164,8 @@ namespace FTAnalyzer.Forms
 
         private void Places_Load(object sender, EventArgs e)
         {
-            tvPlaces.Nodes.Clear();
             TreeNode[] nodes = ft.GetAllLocationsTreeNodes(tvPlaces.Font);
-            tvPlaces.Nodes.AddRange(nodes);
+            tvPlaces.Nodes.AddRange(nodes); 
             isloading = false; // only turn off building map if completely done initializing
             if (tvPlaces.Nodes.Count > 0)
             {   // update map using first node as selected node

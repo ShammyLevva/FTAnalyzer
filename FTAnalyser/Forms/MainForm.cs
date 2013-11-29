@@ -217,6 +217,8 @@ namespace FTAnalyzer
             foreach (Form f in toDispose)
             {
                 GC.SuppressFinalize(f);
+                if (f.Visible)
+                    f.Close(); // call close method to force tidy up of forms
                 f.Dispose();
             }
         }
