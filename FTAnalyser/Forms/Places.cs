@@ -164,7 +164,7 @@ namespace FTAnalyzer.Forms
 
         private void Places_Load(object sender, EventArgs e)
         {
-            TreeNode[] nodes = ft.GetAllLocationsTreeNodes(tvPlaces.Font);
+            TreeNode[] nodes = ft.GetAllLocationsTreeNodes(tvPlaces.Font, false);
             tvPlaces.Nodes.AddRange(nodes); 
             isloading = false; // only turn off building map if completely done initializing
             if (tvPlaces.Nodes.Count > 0)

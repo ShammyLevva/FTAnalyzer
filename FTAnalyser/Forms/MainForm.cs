@@ -359,7 +359,7 @@ namespace FTAnalyzer
                     tsHintsLabel.Text = Properties.Messages.Hints_Location;
                     treeViewLocations.Nodes.Clear();
                     Application.DoEvents();
-                    treeViewLocations.Nodes.AddRange(ft.GetAllLocationsTreeNodes(treeViewLocations.Font));
+                    treeViewLocations.Nodes.AddRange(ft.GetAllLocationsTreeNodes(treeViewLocations.Font, true));
                     mnuPrint.Enabled = false;
                     dgCountries.DataSource = ft.AllDisplayCountries;
                     dgRegions.DataSource = ft.AllDisplayRegions;

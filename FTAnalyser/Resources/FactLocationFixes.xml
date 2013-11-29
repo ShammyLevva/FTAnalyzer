@@ -72,7 +72,6 @@
       <RegionTypo from="Cambs"         to="Cambridgeshire" />
       <RegionTypo from="Cambridge"     to="Cambridgeshire" />
       <RegionTypo from="Ches"          to="Cheshire" />
-      <RegionTypo from="Cumberland"    to="Cumbria" />
       <RegionTypo from="Cumb"          to="Cumbria" />
       <RegionTypo from="Derbys"        to="Derbyshire" />
       <RegionTypo from="Derby"         to="Derbyshire" />
@@ -338,6 +337,7 @@
       <CountryToRegion region="Cambridgeshire"      country="England" />
       <CountryToRegion region="Cheshire"            country="England" />
       <CountryToRegion region="Cornwall"            country="England" />
+      <CountryToRegion region="Cumberland"          country="England" />
       <CountryToRegion region="Cumbria"             country="England" />
       <CountryToRegion region="Derbyshire"          country="England" />
       <CountryToRegion region="Devon"               country="England" />
@@ -623,7 +623,7 @@
       <RegionToParish parish="Bristol"        region="Gloucestershire" />
       <RegionToParish parish="Cambridge"      region="Cambridgeshire" />
       <RegionToParish parish="Canterbury"     region="Kent" />
-      <RegionToParish parish="Carlisle"       region="Cumbria" />
+      <RegionToParish parish="Carlisle"       region="Cumberland" />
       <RegionToParish parish="Chelmsford"     region="Essex" />
       <RegionToParish parish="Chester"        region="Cheshire" />
       <RegionToParish parish="Chichester"     region="Sussex" />

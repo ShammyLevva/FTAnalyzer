@@ -33,7 +33,8 @@ namespace FTAnalyzer
         private SortableBindingList<IDisplayLocation>[] displayLocations;
         private SortableBindingList<IDisplayLooseDeath> looseDeaths;
         private SortableBindingList<IDisplayLooseBirth> looseBirths;
-        private TreeNode displayTreeRootNode;
+        private TreeNode mainformTreeRootNode;
+        private TreeNode placesTreeRootNode;
         private static int DATA_ERROR_GROUPS = 21;
 
         public bool Geocoding { get; set; }
@@ -121,7 +122,7 @@ namespace FTAnalyzer
             displayLocations = new SortableBindingList<IDisplayLocation>[5];
             unknownFactTypes = new HashSet<string>();
             ClearLocations();
-            displayTreeRootNode = null;
+            mainformTreeRootNode = null;
             ResetLooseFacts();
             FactLocation.ResetLocations();
         }
@@ -1830,25 +1831,28 @@ namespace FTAnalyzer
         #endregion
 
         #region Location Tree Building
-        public TreeNode[] GetAllLocationsTreeNodes(Font defaultFont)
+        public TreeNode[] GetAllLocationsTreeNodes(Font defaultFont, bool mainform)
         {
-            if (displayTreeRootNode != null)
-                return BuildTreeNodeArray();
+            if (mainformTreeRootNode != null)
+                return BuildTreeNodeArray(mainform);
 
-            displayTreeRootNode = new TreeNode();
+            mainformTreeRootNode = new TreeNode();
+            placesTreeRootNode = new TreeNode();
             Font regularFont = new Font(defaultFont, FontStyle.Regular);
             Font boldFont = new Font(defaultFont, FontStyle.Bold);
             foreach (FactLocation location in AllDisplayPlaces)
             {
                 string[] parts = location.Parts;
-                TreeNode current = displayTreeRootNode;
+                TreeNode currentM = mainformTreeRootNode;
+                TreeNode currentP = placesTreeRootNode;
                 foreach (string part in parts)
                 {
                     if (part.Length == 0 && !Properties.GeneralSettings.Default.AllowEmptyLocations) break;
-                    TreeNode child = current.Nodes.Find(part, false).FirstOrDefault();
-                    if (child == null)
+                    TreeNode childM = currentM.Nodes.Find(part, false).FirstOrDefault();
+                    TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
+                    if (childM == null)
                     {
-                        child = new TreeNode((part.Length == 0 ? "<blank>" : part));
+                        TreeNode child = new TreeNode((part.Length == 0 ? "<blank>" : part));
                         child.Name = part;
                         child.Tag = location;
                         child.ToolTipText = "Geocoding Status : " + location.Geocoded;
@@ -1881,13 +1885,17 @@ namespace FTAnalyzer
                                 break;
                         }
                         // Set everything other than known countries to regular
-                        if (current == displayTreeRootNode && Countries.IsKnownCountry(part))
+                        if (currentM == mainformTreeRootNode && Countries.IsKnownCountry(part))
                             child.NodeFont = boldFont;
                         else
                             child.NodeFont = regularFont;
-                        current.Nodes.Add(child);
+                        childM = child;
+                        childP = (TreeNode)child.Clone();
+                        currentM.Nodes.Add(childM);
+                        currentP.Nodes.Add(childP);
                     }
-                    current = child;
+                    currentM = childM;
+                    currentP = childP;
                 }
             }
             if (Properties.GeneralSettings.Default.AllowEmptyLocations)
@@ -1895,7 +1903,7 @@ namespace FTAnalyzer
                 bool recheck = true;
                 while (recheck)
                 {
-                    TreeNode[] emptyNodes = displayTreeRootNode.Nodes.Find(string.Empty, true);
+                    TreeNode[] emptyNodes = mainformTreeRootNode.Nodes.Find(string.Empty, true);
                     recheck = false;
                     foreach (TreeNode node in emptyNodes)
                     {
@@ -1907,17 +1915,24 @@ namespace FTAnalyzer
                     }
                 }
             }
-            foreach (TreeNode node in displayTreeRootNode.Nodes)
-                node.Text += "       "; // force text to be longer to fix bold bug
-            return BuildTreeNodeArray();
+            foreach (TreeNode node in mainformTreeRootNode.Nodes)
+                node.Text += "         "; // force text to be longer to fix bold bug
+            foreach (TreeNode node in placesTreeRootNode.Nodes)
+                node.Text += "         "; // force text to be longer to fix bold bug
+            return BuildTreeNodeArray(mainform);
         }
 
-        private TreeNode[] BuildTreeNodeArray()
+        private TreeNode[] BuildTreeNodeArray(bool mainForm)
         {
-            TreeNodeCollection nodes = displayTreeRootNode.Nodes;
+            TreeNodeCollection nodes;
+            if (mainForm)
+                nodes = mainformTreeRootNode.Nodes;
+            else
+                nodes = placesTreeRootNode.Nodes;
             TreeNode[] result = new TreeNode[nodes.Count];
             nodes.CopyTo(result, 0);
             return result;
+
         }
         #endregion
 
