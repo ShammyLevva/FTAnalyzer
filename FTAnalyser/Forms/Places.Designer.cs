@@ -39,10 +39,6 @@ namespace FTAnalyzer.Forms
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
             this.dgFacts = new System.Windows.Forms.DataGridView();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.txtCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.FactsIndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Forenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,7 +55,12 @@ namespace FTAnalyzer.Forms
             this.GoogleResultTypes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SourceList = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.txtCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.progressbar = new System.Windows.Forms.ToolStripProgressBar();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuHideScaleBar = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFacts)).BeginInit();
             this.splitContainerFacts.Panel1.SuspendLayout();
             this.splitContainerFacts.Panel2.SuspendLayout();
@@ -77,7 +78,7 @@ namespace FTAnalyzer.Forms
             // 
             this.splitContainerFacts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerFacts.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainerFacts.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerFacts.Location = new System.Drawing.Point(0, 24);
             this.splitContainerFacts.Name = "splitContainerFacts";
             this.splitContainerFacts.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -89,8 +90,8 @@ namespace FTAnalyzer.Forms
             // 
             this.splitContainerFacts.Panel2.Controls.Add(this.dgFacts);
             this.splitContainerFacts.Panel2.Controls.Add(this.statusStrip);
-            this.splitContainerFacts.Size = new System.Drawing.Size(1113, 590);
-            this.splitContainerFacts.SplitterDistance = 459;
+            this.splitContainerFacts.Size = new System.Drawing.Size(1113, 566);
+            this.splitContainerFacts.SplitterDistance = 435;
             this.splitContainerFacts.TabIndex = 18;
             // 
             // splitContainerMap
@@ -109,7 +110,7 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap.Panel2.Controls.Add(this.mapBox1);
             this.splitContainerMap.Panel2.Controls.Add(this.linkLabel1);
             this.splitContainerMap.Panel2.Controls.Add(this.mapZoomToolStrip);
-            this.splitContainerMap.Size = new System.Drawing.Size(1113, 459);
+            this.splitContainerMap.Size = new System.Drawing.Size(1113, 435);
             this.splitContainerMap.SplitterDistance = 330;
             this.splitContainerMap.TabIndex = 2;
             // 
@@ -119,7 +120,7 @@ namespace FTAnalyzer.Forms
             this.tvPlaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tvPlaces.Location = new System.Drawing.Point(0, 0);
             this.tvPlaces.Name = "tvPlaces";
-            this.tvPlaces.Size = new System.Drawing.Size(330, 459);
+            this.tvPlaces.Size = new System.Drawing.Size(330, 435);
             this.tvPlaces.TabIndex = 0;
             this.tvPlaces.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeCollapse);
             this.tvPlaces.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeExpand);
@@ -141,7 +142,7 @@ namespace FTAnalyzer.Forms
             this.mapBox1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.ShowProgressUpdate = true;
-            this.mapBox1.Size = new System.Drawing.Size(779, 434);
+            this.mapBox1.Size = new System.Drawing.Size(779, 410);
             this.mapBox1.TabIndex = 2;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
@@ -214,40 +215,6 @@ namespace FTAnalyzer.Forms
             this.dgFacts.TabIndex = 3;
             this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFacts_CellDoubleClick);
             this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgFacts_CellToolTipTextNeeded);
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.txtCount,
-            this.progressbar});
-            this.statusStrip.Location = new System.Drawing.Point(0, 105);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1113, 22);
-            this.statusStrip.TabIndex = 4;
-            this.statusStrip.Text = "statusStrip1";
-            // 
-            // txtCount
-            // 
-            this.txtCount.Name = "txtCount";
-            this.txtCount.Size = new System.Drawing.Size(0, 17);
-            // 
-            // menuStrip
-            // 
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem});
-            this.menuStrip.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1113, 24);
-            this.menuStrip.TabIndex = 19;
-            this.menuStrip.Text = "menuStrip1";
-            this.menuStrip.Visible = false;
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.optionsToolStripMenuItem.Text = "Options";
-            this.optionsToolStripMenuItem.Visible = false;
             // 
             // FactIcon
             // 
@@ -398,11 +365,53 @@ namespace FTAnalyzer.Forms
             this.SourceList.ReadOnly = true;
             this.SourceList.Width = 250;
             // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.txtCount,
+            this.progressbar});
+            this.statusStrip.Location = new System.Drawing.Point(0, 105);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(1113, 22);
+            this.statusStrip.TabIndex = 4;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // txtCount
+            // 
+            this.txtCount.Name = "txtCount";
+            this.txtCount.Size = new System.Drawing.Size(0, 17);
+            // 
             // progressbar
             // 
             this.progressbar.Name = "progressbar";
             this.progressbar.Size = new System.Drawing.Size(100, 16);
             this.progressbar.Visible = false;
+            // 
+            // menuStrip
+            // 
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.optionsToolStripMenuItem});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(1113, 24);
+            this.menuStrip.TabIndex = 19;
+            this.menuStrip.Text = "menuStrip1";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuHideScaleBar});
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
+            this.optionsToolStripMenuItem.Visible = false;
+            // 
+            // mnuHideScaleBar
+            // 
+            this.mnuHideScaleBar.Name = "mnuHideScaleBar";
+            this.mnuHideScaleBar.Size = new System.Drawing.Size(152, 22);
+            this.mnuHideScaleBar.Text = "Hide Scale Bar";
+            this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
             // 
             // Places
             // 
@@ -468,5 +477,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;
         private System.Windows.Forms.ToolStripProgressBar progressbar;
+        private System.Windows.Forms.ToolStripMenuItem mnuHideScaleBar;
     }
 }

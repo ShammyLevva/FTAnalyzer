@@ -262,5 +262,13 @@ namespace FTAnalyzer.Forms
                 RefreshPlaces();
             }
         }
+
+        private void mnuHideScaleBar_Click(object sender, EventArgs e)
+        {
+            if (mnuHideScaleBar.Checked)
+                RemoveScaleBar();
+            else
+                AddScaleBar();
+        }
     }
 }

@@ -276,5 +276,13 @@ namespace FTAnalyzer.Forms
                 mapBox1.Map.Layers.Add(labelLayer);
             mapBox1.Refresh();
         }
+
+        private void mnuHideScaleBar_Click(object sender, EventArgs e)
+        {
+            if (mnuHideScaleBar.Checked)
+                RemoveScaleBar();
+            else
+                AddScaleBar();
+        }
     }
 }
