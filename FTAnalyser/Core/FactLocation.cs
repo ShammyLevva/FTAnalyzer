@@ -694,19 +694,6 @@ namespace FTAnalyzer
             return this.Country.Length == 0;
         }
 
-        public bool Matches(string s, int level)
-        {
-            switch (level)
-            {
-                case COUNTRY: return this.Country.ToUpper().CompareTo(s.ToUpper()) == 0;
-                case REGION: return this.Region.ToUpper().CompareTo(s.ToUpper()) == 0;
-                case SUBREGION: return this.SubRegion.ToUpper().CompareTo(s.ToUpper()) == 0;
-                case ADDRESS: return this.Address.ToUpper().CompareTo(s.ToUpper()) == 0;
-                case PLACE: return this.Place.ToUpper().CompareTo(s.ToUpper()) == 0;
-                default: return false;
-            }
-        }
-
         public bool CensusCountryMatches(string s, bool includeUnknownCountries)
         {
             if (Country.Equals(s))
@@ -754,7 +741,7 @@ namespace FTAnalyzer
         {
             return CompareTo((FactLocation)that, level);
         }
-
+        
         public virtual int CompareTo(FactLocation that, int level)
         {
             int res = this.Country.CompareTo(that.Country);
