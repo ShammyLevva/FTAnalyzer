@@ -65,7 +65,7 @@ namespace FTAnalyzer.Utilities
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error opening database. Error is :" + ex.Message);
+                MessageBox.Show("Error opening database. Error is :" + ex.Message, "FT Analyzer");
             }
         }
 
@@ -127,7 +127,7 @@ namespace FTAnalyzer.Utilities
                     cmd.ExecuteNonQuery(); // set to level mismatch if partial
                     cmd = new SQLiteCommand("update versions set Database = '3.0.2.0'", conn);
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Please note that due to fixes in the way Google reports\nlocations your 'Google Matched' geocodes have been reset.");
+                    MessageBox.Show("Please note that due to fixes in the way Google reports\nlocations your 'Google Matched' geocodes have been reset.", "FT Analyzer");
                 }
                 if (dbVersion < v3_1_2_0)
                 {
@@ -159,7 +159,7 @@ namespace FTAnalyzer.Utilities
                         ConvertLatLongs();
                         cmd = new SQLiteCommand("update versions set Database = '3.2.1.0'", conn);
                         cmd.ExecuteNonQuery();
-                        MessageBox.Show("Database lat/long upgrade complete");
+                        MessageBox.Show("Database lat/long upgrade complete", "FT Analyzer");
                     }
                     else
                     {
@@ -169,7 +169,7 @@ namespace FTAnalyzer.Utilities
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error upgrading database. Error is :" + ex.Message);
+                MessageBox.Show("Error upgrading database. Error is :" + ex.Message, "FT Analyzer");
             }
         }
         #endregion

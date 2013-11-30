@@ -174,7 +174,7 @@ namespace FTAnalyzer.Forms
                 if (frmGoogleMap.SetLocation(loc, loc.Level))
                     frmGoogleMap.Show();
                 else
-                    MessageBox.Show("Unable to find location : " + loc.ToString());
+                    MessageBox.Show("Unable to find location : " + loc.ToString(), "FT Analyzer");
             }
             this.Cursor = Cursors.Default;
         }
@@ -190,7 +190,7 @@ namespace FTAnalyzer.Forms
                 if (frmBingMap.SetLocation(loc, loc.Level))
                     frmBingMap.Show();
                 else
-                    MessageBox.Show("Unable to find location : " + loc.ToString());
+                    MessageBox.Show("Unable to find location : " + loc.ToString(), "FT Analyzer");
             }
             this.Cursor = Cursors.Default;
         }

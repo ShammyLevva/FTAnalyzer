@@ -73,7 +73,7 @@ namespace FTAnalyzer.Forms
 
             linesLayer = new VectorLayer("LifeLines");
             linesLayer.DataSource = lifelinesGFP;
-            
+
             Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
 
             VectorStyle linestyle = new VectorStyle();
@@ -164,7 +164,7 @@ namespace FTAnalyzer.Forms
             if (bbox.Centre == null)
                 expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
             else
-                expand = new Envelope(bbox.TopLeft(),bbox.BottomRight());
+                expand = new Envelope(bbox.TopLeft(), bbox.BottomRight());
             expand.ExpandBy(mapBox1.Map.PixelSize * 1.3);
             mapBox1.Map.ZoomToBox(expand);
             if (mapBox1.Map.Zoom < mapBox1.Map.MinimumZoom)

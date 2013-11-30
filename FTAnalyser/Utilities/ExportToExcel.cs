@@ -26,12 +26,12 @@ namespace FTAnalyzer.Utilities
                     string path = Path.GetDirectoryName(saveFileDialog.FileName);
                     Application.UserAppDataRegistry.SetValue("Excel Export Individual Path", path);
                     WriteFile(dt, saveFileDialog.FileName);
-                    MessageBox.Show("File written to " + saveFileDialog.FileName);
+                    MessageBox.Show("File written to " + saveFileDialog.FileName, "FT Analyzer");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "FT Analyzer");
             }
         }
 

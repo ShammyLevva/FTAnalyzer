@@ -108,8 +108,8 @@ namespace FTAnalyzer.Forms
             // splitContainerMap.Panel2
             // 
             this.splitContainerMap.Panel2.Controls.Add(this.mapBox1);
-            this.splitContainerMap.Panel2.Controls.Add(this.linkLabel1);
             this.splitContainerMap.Panel2.Controls.Add(this.mapZoomToolStrip);
+            this.splitContainerMap.Panel2.Controls.Add(this.linkLabel1);
             this.splitContainerMap.Size = new System.Drawing.Size(1113, 435);
             this.splitContainerMap.SplitterDistance = 330;
             this.splitContainerMap.TabIndex = 2;
@@ -408,7 +408,7 @@ namespace FTAnalyzer.Forms
             // mnuHideScaleBar
             // 
             this.mnuHideScaleBar.Name = "mnuHideScaleBar";
-            this.mnuHideScaleBar.Size = new System.Drawing.Size(152, 22);
+            this.mnuHideScaleBar.Size = new System.Drawing.Size(149, 22);
             this.mnuHideScaleBar.Text = "Hide Scale Bar";
             this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
             // 

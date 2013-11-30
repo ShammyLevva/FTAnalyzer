@@ -234,7 +234,7 @@ namespace FTAnalyzer.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to contact http://maps.googleapis.com error was : " + ex.Message);
+                MessageBox.Show("Unable to contact http://maps.googleapis.com error was : " + ex.Message, "FT Analyzer");
             }
             return res;
         }

@@ -91,7 +91,7 @@ namespace FTAnalyzer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Found a problem starting up.\nPlease report this at http://ftanalyzer.codeplex.com\nThe error was :" + ex.Message);
+                MessageBox.Show("Found a problem starting up.\nPlease report this at http://ftanalyzer.codeplex.com\nThe error was :" + ex.Message, "FT Analyzer");
             }
         }
 
@@ -155,18 +155,18 @@ namespace FTAnalyzer
                         HourGlass(false);
                         AddFileToRecentList(filename);
                         mnuRestore.Enabled = false;
-                        MessageBox.Show("Gedcom File " + filename + " Loaded");
+                        MessageBox.Show("Gedcom File " + filename + " Loaded", "FT Analyzer");
                     }
                 }
             }
             catch (IOException ex)
             {
-                MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message, "FT Analyzer");
             }
             catch (Exception ex2)
             {
                 MessageBox.Show("Error: Problem processing your file.\n" +
-                    "Please report this at http://ftanalyzer.codeplex.com. Error was: " + ex2.Message);
+                    "Please report this at http://ftanalyzer.codeplex.com. Error was: " + ex2.Message, "FT Analyzer");
             }
             finally
             {
@@ -500,7 +500,7 @@ namespace FTAnalyzer
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is Family Tree Analyzer version " + VERSION);
+            MessageBox.Show("This is Family Tree Analyzer version " + VERSION, "FT Analyzer");
         }
 
         #region Filters
@@ -962,7 +962,7 @@ namespace FTAnalyzer
             {
                 ft.SetRelations(ind.IndividualID);
                 dgIndividuals.Refresh();
-                MessageBox.Show("Root person set as " + ind.Name + "\n\n" + ft.PrintRelationCount());
+                MessageBox.Show("Root person set as " + ind.Name + "\n\n" + ft.PrintRelationCount(), "FT Analyzer");
             }
             HourGlass(false);
         }
@@ -983,7 +983,7 @@ namespace FTAnalyzer
                 else
                 {
                     frmGoogleMap.Dispose();
-                    MessageBox.Show("Unable to find location : " + loc.GetLocation(locType));
+                    MessageBox.Show("Unable to find location : " + loc.GetLocation(locType), "FT Analyzer");
                 }
             }
             this.Cursor = Cursors.Default;
@@ -1005,7 +1005,7 @@ namespace FTAnalyzer
                 else
                 {
                     frmBingMap.Dispose();
-                    MessageBox.Show("Unable to find location : " + loc.GetLocation(locType));
+                    MessageBox.Show("Unable to find location : " + loc.GetLocation(locType), "FT Analyzer");
                 }
             }
             this.Cursor = Cursors.Default;
@@ -1045,9 +1045,9 @@ namespace FTAnalyzer
             if (loc == null)
             {
                 if (tabCtrlLocations.SelectedTab.Text == "Tree View")
-                    MessageBox.Show("Location selected isn't valid to show on the map.");
+                    MessageBox.Show("Location selected isn't valid to show on the map.", "FT Analyzer");
                 else
-                    MessageBox.Show("Nothing selected. Please select a location to show on the map.");
+                    MessageBox.Show("Nothing selected. Please select a location to show on the map.", "FT Analyzer");
                 return locType;
             }
             if (locType == FactLocation.UNKNOWN)
@@ -1105,10 +1105,10 @@ namespace FTAnalyzer
                 catch (Exception)
                 {
                     if (result != DialogResult.Cancel)
-                        MessageBox.Show("Invalid Age entered");
+                        MessageBox.Show("Invalid Age entered", "FT Analyzer");
                 }
                 if (age < 13 || age > 90)
-                    MessageBox.Show("Please enter an age between 13 and 90");
+                    MessageBox.Show("Please enter an age between 13 and 90", "FT Analyzer");
             } while ((result != DialogResult.Cancel) && (age < 13 || age > 90));
             if (result == DialogResult.OK)
             {
@@ -1385,9 +1385,9 @@ namespace FTAnalyzer
             }
             if (!fileLoaded)
                 if (files.Length > 1)
-                    MessageBox.Show("Unable to load File. None of the files dragged and dropped were *.ged files");
+                    MessageBox.Show("Unable to load File. None of the files dragged and dropped were *.ged files", "FT Analyzer");
                 else
-                    MessageBox.Show("Unable to load File. The file dragged and dropped wasn't a *.ged file");
+                    MessageBox.Show("Unable to load File. The file dragged and dropped wasn't a *.ged file", "FT Analyzer");
         }
 
         private void mainForm_DragEnter(object sender, DragEventArgs e)
@@ -1562,7 +1562,7 @@ namespace FTAnalyzer
         private void backupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ft.Geocoding)
-                MessageBox.Show("You need to stop Geocoding before you can export the database");
+                MessageBox.Show("You need to stop Geocoding before you can export the database", "FT Analyzer");
             else
             {
                 ft.BackupDatabase(saveDatabase, "FT Analyzer zip file created by v" + PublishVersion());
@@ -1572,7 +1572,7 @@ namespace FTAnalyzer
         private void restoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ft.Geocoding)
-                MessageBox.Show("You need to stop Geocoding before you can import the database");
+                MessageBox.Show("You need to stop Geocoding before you can import the database", "FT Analyzer");
             else
             {
                 string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();

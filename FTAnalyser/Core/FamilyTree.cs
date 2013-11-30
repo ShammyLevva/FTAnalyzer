@@ -1460,7 +1460,7 @@ namespace FTAnalyzer
                 path.Append("&collection_id=" + collection);
             else
             {
-                MessageBox.Show("Sorry searching the " + country + " census on FamilySearch for " + censusYear + " is not supported by FTAnalyzer at this time");
+                MessageBox.Show("Sorry searching the " + country + " census on FamilySearch for " + censusYear + " is not supported by FTAnalyzer at this time", "FT Analyzer");
                 return null;
             }
             return path.Replace("+", "%20").ToString();
@@ -1479,7 +1479,7 @@ namespace FTAnalyzer
             }
             else if (censusCountry.Equals(Countries.IRELAND))
             {
-                MessageBox.Show("Sorry searching the Ireland census on Ancestry for " + censusYear + " is not supported by FTAnalyzer at this time");
+                MessageBox.Show("Sorry searching the Ireland census on Ancestry for " + censusYear + " is not supported by FTAnalyzer at this time", "FT Analyzer");
                 return null;
             }
             else if (censusCountry.Equals(Countries.UNITED_STATES))
@@ -1548,7 +1548,7 @@ namespace FTAnalyzer
         {
             if (!censusCountry.Equals(Countries.UNITED_KINGDOM) && !censusCountry.Equals("Unknown"))
             {
-                MessageBox.Show("Sorry only UK searches can be done on FreeCEN.");
+                MessageBox.Show("Sorry only UK searches can be done on FreeCEN.", "FT Analyzer");
                 return null;
             }
             FactDate censusFactDate = new FactDate(censusYear.ToString());
@@ -1627,7 +1627,7 @@ namespace FTAnalyzer
             // good http://www.findmypast.co.uk/CensusPersonSearchResultServlet?basicSearch=false&censusYear=1881&occupation=&otherForenames=&otherLastName=&pageDirection=&recordPosition=0&residence=&route=&searchHouseholds=6,15&searchInstitutions=9&searchVessels=11,12&sortOrder=nameAsc&startNewSearch=startNewSearch&forenames=C&fns=fns&lastName=Whitethread&sns=sns&yearOfBirth=1867&yearOfBirthVariation=1&birthPlace=Streatham&country=England&coIdList=Surrey++++++++++++++++++++++++++++++++++%3a3%2c4+++++++++++++++++++++++++++
             if (!censusCountry.Equals(Countries.UNITED_KINGDOM) && !censusCountry.Equals("Unknown"))
             {
-                MessageBox.Show("Sorry non UK census searching of Find My Past isn't supported in this version of FTAnalyzer");
+                MessageBox.Show("Sorry non UK census searching of Find My Past isn't supported in this version of FTAnalyzer", "FT Analyzer");
                 return null;
             }
             FactDate censusFactDate = new FactDate(censusYear.ToString());
@@ -1748,19 +1748,19 @@ namespace FTAnalyzer
 
         private string BuildFamilySearchQuery(SearchType st, Individual individual)
         {
-            MessageBox.Show(Properties.Messages.NotYet);
+            MessageBox.Show(Properties.Messages.NotYet, "FT Analyzer");
             return null;
         }
 
         private string BuildFreeCenQuery(SearchType st, Individual individual)
         {
-            MessageBox.Show(Properties.Messages.NotYet);
+            MessageBox.Show(Properties.Messages.NotYet, "FT Analyzer");
             return null;
         }
 
         private string BuildFindMyPastQuery(SearchType st, Individual individual)
         {
-            MessageBox.Show(Properties.Messages.NotYet);
+            MessageBox.Show(Properties.Messages.NotYet, "FT Analyzer");
             return null;
         }
 
@@ -1949,7 +1949,7 @@ namespace FTAnalyzer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading previously geocoded data. " + ex.Message);
+                MessageBox.Show("Error loading previously geocoded data. " + ex.Message, "FT Analyzer");
             }
         }
 
