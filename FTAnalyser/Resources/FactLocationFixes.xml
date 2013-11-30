@@ -917,5 +917,10 @@
     <SubRegionFixes>
       
     </SubRegionFixes>
+    <MultiLevelFixes>
+      <MultiLevelFix from ="Speke, Lancashire" to="Speke, Merseyside" />
+      <MultiLevelFix from ="West Derby, Lancashire" to="West Derby, Merseyside" />
+      <MultiLevelFix from ="Ulverston, Lancashire" to="Ulverston, Cumbria" />
+    </MultiLevelFixes>
   </GoogleGeocodes>
 </Data>

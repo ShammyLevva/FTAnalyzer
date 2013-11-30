@@ -144,6 +144,8 @@ namespace FTAnalyzer
                     AddGoogleFixes(n, REGION);
                 foreach (XmlNode n in xmlDoc.SelectNodes("Data/GoogleGeocodes/SubRegionFixes/SubRegionFix"))
                     AddGoogleFixes(n, SUBREGION);
+                foreach (XmlNode n in xmlDoc.SelectNodes("Data/GoogleGeocodes/MultiLevelFixes/MultiLevelFix"))
+                    AddGoogleFixes(n, UNKNOWN);
             }
         }
 
@@ -753,10 +755,18 @@ namespace FTAnalyzer
         public string GoogleFixed
         {
             get {
+                string result = fixedLocation;
+                foreach (KeyValuePair<Tuple<int, string>, string> fix in GOOGLE_FIXES)
+                {
+                    if(fix.Key.Item1 == UNKNOWN)
+                        result =result.Replace(fix.Key.Item2, fix.Value);
+                }
+                if (result != fixedLocation)
+                    return result;
                 string countryFix = string.Empty;
                 string regionFix = string.Empty;
                 string subRegionFix = string.Empty;
-                GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(COUNTRY, Country), out countryFix);
+                GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(COUNTRY, countryFix), out countryFix);
                 if (countryFix == null)
                     countryFix = Country;
                 GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(REGION, Region), out regionFix);
@@ -766,7 +776,7 @@ namespace FTAnalyzer
                 if (subRegionFix == null)
                     subRegionFix = SubRegion;
                 
-                string result = countryFix;
+                result = countryFix;
                 if (!regionFix.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
                     result = regionFix + ", " + result;
                 if (!subRegionFix.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
