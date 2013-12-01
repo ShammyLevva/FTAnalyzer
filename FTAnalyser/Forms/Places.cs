@@ -131,7 +131,7 @@ namespace FTAnalyzer.Forms
             }
             mapBox1.Map.ZoomToBox(expand);
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
-            RefreshPlaces();
+            RefreshClusters();
             txtCount.Text = dgFacts.RowCount + " Geolocated fact(s) displayed";
             this.Cursor = Cursors.Default;
         }
@@ -232,14 +232,14 @@ namespace FTAnalyzer.Forms
 
         private void mapBox1_MapZoomChanged(double zoom)
         {
-            RefreshPlaces();
+            RefreshClusters();
         }
 
-        public void RefreshPlaces()
+        public void RefreshClusters()
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(new Action(() => RefreshPlaces()));
+                this.Invoke(new Action(() => RefreshClusters()));
                 return;
             }
             this.Cursor = Cursors.WaitCursor;
@@ -250,7 +250,7 @@ namespace FTAnalyzer.Forms
 
         private void mapBox1_MapCenterChanged(Coordinate center)
         {
-            RefreshPlaces();
+            RefreshClusters();
         }
 
         private void mapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -271,7 +271,7 @@ namespace FTAnalyzer.Forms
                 Coordinate p = mapBox1.Map.ImageToWorld(new PointF(e.X, e.Y));
                 mapBox1.Map.Center.X = p.X;
                 mapBox1.Map.Center.Y = p.Y;
-                RefreshPlaces();
+                RefreshClusters();
             }
         }
 
@@ -281,6 +281,35 @@ namespace FTAnalyzer.Forms
                 RemoveScaleBar();
             else
                 AddScaleBar();
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            btnSelect.Checked = true;
+            mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
+        }
+
+        private void mapBox1_ActiveToolChanged(SharpMap.Forms.MapBox.Tools tool)
+        {
+            if (mapBox1.ActiveTool != SharpMap.Forms.MapBox.Tools.QueryPoint)
+                btnSelect.Checked = false;
+        }
+
+        private void mapBox1_MapQueried(FeatureDataTable data)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            List<MapLocation> locations = new List<MapLocation>();
+            foreach (FeatureDataRow row in data)
+            {
+                IList<FeatureDataRow> features = (List<FeatureDataRow>)row["Features"];
+                foreach (FeatureDataRow feature in features)
+                {
+                    locations.Add((MapLocation)feature["MapLocation"]);
+                }
+            }
+            MapIndividuals ind = new MapIndividuals(locations, "none", this);
+            ind.Show();
+            this.Cursor = Cursors.Default;
         }
     }
 }
