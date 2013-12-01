@@ -232,13 +232,15 @@ namespace FTAnalyzer.Forms
 
         public void RefreshPlaces()
         {
+            this.Cursor = Cursors.WaitCursor;
             clusters.Refresh();
             mapBox1.Refresh();
+            this.Cursor = Cursors.Default;
         }
 
         private void mapBox1_MapCenterChanged(Coordinate center)
         {
-            RefreshPlaces();
+            //RefreshPlaces();
         }
 
         private void mapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
