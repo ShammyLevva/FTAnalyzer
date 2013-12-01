@@ -168,7 +168,7 @@ namespace FTAnalyzer.Forms
                     else
                     {
                         expand = new Envelope(bbox.TopLeft(), bbox.BottomRight());
-                        expand.ExpandBy(bbox.Width * 0.3);
+                        expand.ExpandBy(bbox.Width * FamilyTree.SCALEBY);
                     }
                     mapBox1.Map.ZoomToBox(expand);
                 }

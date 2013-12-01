@@ -36,6 +36,7 @@ namespace FTAnalyzer
         private TreeNode mainformTreeRootNode;
         private TreeNode placesTreeRootNode;
         private static int DATA_ERROR_GROUPS = 21;
+        public static double SCALEBY = 0.1;
 
         public bool Geocoding { get; set; }
 
