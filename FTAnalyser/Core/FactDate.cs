@@ -33,6 +33,9 @@ namespace FTAnalyzer
         private static readonly string POSTFIX = "(\\d{1,2})(?:ST|ND|RD|TH)(.*)";
         private static readonly string BETWEENFIX = "(\\d{4}) *- *(\\d{4})";
         private static readonly string BETWEENFIX2 = "([A-Za-z]{0,3}) *(\\d{4}) *- *([A-Za-z]{0,3}) *(\\d{4})";
+        private static readonly string BETWEENFIX3 = "(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{4}) *- *(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{4})";
+        private static readonly string BETWEENFIX4 = "(\\d{1,2}) *- *(\\d{1,2} )?([A-Za-z]{0,3}) *(\\d{4})";
+        private static readonly string BETWEENFIX5 = "(\\d{1,2} )?([A-Za-z]{0,3}) *- *(\\d{1,2} )?([A-Za-z]{0,3}) *(\\d{4})";
         private static readonly string USDATEFIX = "^([A-Za-z]{3}) *(\\d{1,2} )(\\d{4})$";
         private static readonly string SPACEFIX = "^(\\d{1,2}) *([A-Za-z]{3}) *(\\d{0,4})$";
 
@@ -216,6 +219,24 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 string result = "BET " + matcher.Groups[1].ToString() + " " + matcher.Groups[2].ToString() + " AND " + matcher.Groups[3].ToString() + " " + matcher.Groups[4].ToString();
+                return result.Trim();
+            }
+            matcher = Regex.Match(str, BETWEENFIX3);
+            if (matcher.Success)
+            {
+                string result = "BET " + matcher.Groups[1].ToString() + matcher.Groups[2].ToString() + " " + matcher.Groups[3].ToString() + " AND " + matcher.Groups[4].ToString() + matcher.Groups[5].ToString() + " " + matcher.Groups[6].ToString();
+                return result.Trim();
+            }
+            matcher = Regex.Match(str, BETWEENFIX4);
+            if (matcher.Success)
+            {
+                string result = "BET " + matcher.Groups[1].ToString() + " " + matcher.Groups[3].ToString() + " " + matcher.Groups[4].ToString() + " AND " + matcher.Groups[2].ToString() + matcher.Groups[3].ToString() + " " + matcher.Groups[4].ToString();
+                return result.Trim();
+            }
+            matcher = Regex.Match(str, BETWEENFIX5);
+            if (matcher.Success)
+            {
+                string result = "BET " + matcher.Groups[1].ToString() + matcher.Groups[2].ToString() + " " + matcher.Groups[5].ToString() + " AND " + matcher.Groups[3].ToString() + matcher.Groups[4].ToString() + " " + matcher.Groups[5].ToString();
                 return result.Trim();
             }
             matcher = Regex.Match(str, USDATEFIX);
