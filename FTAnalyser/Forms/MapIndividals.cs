@@ -21,12 +21,12 @@ namespace FTAnalyzer
         private Font italicFont;
         private ReportFormHelper reportFormHelper;
         private List<MapLocation> locations;
-        private TimeLine timeline;
+        private Form mapForm;
 
-        public MapIndividuals(List<MapLocation> locations, string year, TimeLine timeline)
+        public MapIndividuals(List<MapLocation> locations, string year, Form mapForm)
         {
             InitializeComponent();
-            this.timeline = timeline;
+            this.mapForm = mapForm;
             this.locations = locations;
             dgIndividuals.AutoGenerateColumns = false;
             dgIndividuals.DataSource = new SortableBindingList<MapLocation>(this.locations);
@@ -35,8 +35,11 @@ namespace FTAnalyzer
             reportFormHelper.LoadColumnLayout("MapIndividualColumns.xml");
             tsRecords.Text = this.locations.Count + " Records. " + Properties.Messages.Hints_Individual;
             MapLocation mostCommon = this.locations.MostCommon();
-            string titleText = mostCommon.Location.ToString() + " in " + year;
+            string titleText = mostCommon.Location.ToString();
+            if (mapForm.GetType() == typeof(TimeLine))
+                titleText += " in " + year;
             this.Text = this.locations.Count < 2 ? titleText : "Centred near " + titleText;
+            DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
         }
 
         private void ResetTable()
@@ -102,10 +105,14 @@ namespace FTAnalyzer
             this.Cursor = Cursors.Default;
             DialogResult result = editform.ShowDialog(this);
             editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
-            if(timeline != null && timeline.Visible)
-                timeline.RefreshTimeline();
-            UpdateIcons(loc.Location);
-            dgIndividuals.Refresh();
+            if (mapForm != null && mapForm.Visible)
+            {
+                if (mapForm.GetType() == typeof(TimeLine))
+                    ((TimeLine)mapForm).RefreshClusters();
+                else if (mapForm.GetType() == typeof(Places))
+                    ((Places)mapForm).RefreshClusters();
+            }       
+            UpdateIcons(loc.Location);  
         }
 
         private void UpdateIcons(FactLocation changed)
@@ -115,6 +122,7 @@ namespace FTAnalyzer
                 if (loc.Location.Equals(changed))
                     loc.UpdateIcon();
             }
+            dgIndividuals.Refresh();
         }
 
         private void editLocationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -141,6 +149,22 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 dgIndividuals.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+        }
+
+        private void DatabaseHelper_GeoLocationUpdated(object location, EventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => DatabaseHelper_GeoLocationUpdated(location, e)));
+                return;
+            }
+            UpdateIcons((FactLocation)location);
+        }
+
+        private void MapIndividuals_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DatabaseHelper.GeoLocationUpdated -= DatabaseHelper_GeoLocationUpdated;
+            this.Dispose();
         }
     }
 }

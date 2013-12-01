@@ -42,10 +42,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuEditLocation = new System.Windows.Forms.ToolStripButton();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.editLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,6 +53,10 @@
             this.AgeAtFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SortDistance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
@@ -165,7 +165,6 @@
             this.dgIndividuals.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgIndividuals.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FactIcon,
@@ -200,35 +199,6 @@
             this.dgIndividuals.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgIndividuals_CellContextMenuStripNeeded);
             this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgIndividuals_CellDoubleClick);
             this.dgIndividuals.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgIndividuals_CellToolTipTextNeeded);
-            // 
-            // contextMenuStrip
-            // 
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editLocationToolStripMenuItem});
-            this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(144, 26);
-            // 
-            // editLocationToolStripMenuItem
-            // 
-            this.editLocationToolStripMenuItem.Name = "editLocationToolStripMenuItem";
-            this.editLocationToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.editLocationToolStripMenuItem.Text = "Edit Location";
-            this.editLocationToolStripMenuItem.Click += new System.EventHandler(this.editLocationToolStripMenuItem_Click);
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsRecords});
-            this.statusStrip.Location = new System.Drawing.Point(0, 365);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(993, 22);
-            this.statusStrip.TabIndex = 3;
-            this.statusStrip.Text = "statusStrip1";
-            // 
-            // tsRecords
-            // 
-            this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(0, 17);
             // 
             // FactIcon
             // 
@@ -333,6 +303,35 @@
             this.SortDistance.Name = "SortDistance";
             this.SortDistance.ReadOnly = true;
             // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editLocationToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(144, 26);
+            // 
+            // editLocationToolStripMenuItem
+            // 
+            this.editLocationToolStripMenuItem.Name = "editLocationToolStripMenuItem";
+            this.editLocationToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.editLocationToolStripMenuItem.Text = "Edit Location";
+            this.editLocationToolStripMenuItem.Click += new System.EventHandler(this.editLocationToolStripMenuItem_Click);
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsRecords});
+            this.statusStrip.Location = new System.Drawing.Point(0, 365);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(993, 22);
+            this.statusStrip.TabIndex = 3;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // tsRecords
+            // 
+            this.tsRecords.Name = "tsRecords";
+            this.tsRecords.Size = new System.Drawing.Size(0, 17);
+            // 
             // MapIndividuals
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -344,6 +343,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MapIndividuals";
             this.Text = "Individuals";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MapIndividuals_FormClosed);
             this.TextChanged += new System.EventHandler(this.Facts_TextChanged);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
