@@ -21,7 +21,6 @@ namespace FTAnalyzer
         private string fixedLocation;
         public string GEDCOMLocation { get; private set; }
         public string SortableLocation { get; private set; }
-        public string GoogleFixed { get; private set; }
         public string Country { get; set; }
         public string Region { get; set; }
         public string SubRegion { get; set; }
@@ -342,7 +341,6 @@ namespace FTAnalyzer
                 ShiftRegionToParish();
                 SetFixedLocation();
                 SetSortableLocation();
-                GoogleFixed = SetGoogleFixed();
                 //string after = (parish + ", " + region + ", " + country).ToUpper().Trim();
                 //if (!before.Equals(after))
                 //    Console.WriteLine("Debug : '" + before + "'  converted to '" + after + "'");
@@ -529,39 +527,44 @@ namespace FTAnalyzer
             SortableLocation = TrimLeadingCommas(SortableLocation);
         }
 
-        private string SetGoogleFixed()
+        public string GoogleFixed
         {
-            string result = fixedLocation;
-            foreach (KeyValuePair<Tuple<int, string>, string> fix in GOOGLE_FIXES)
-            {
-                if (fix.Key.Item1 == UNKNOWN)
-                    result = result.Replace(fix.Key.Item2, fix.Value);
+            get {
+                // first check the multifixes
+                string result = fixedLocation;
+                foreach (KeyValuePair<Tuple<int, string>, string> fix in GOOGLE_FIXES)
+                {
+                    if(fix.Key.Item1 == UNKNOWN)
+                        result =result.Replace(fix.Key.Item2, fix.Value);
+                }
+                if (result != fixedLocation)
+                    return result;
+                
+                // now check the individual part fixes
+                string countryFix = string.Empty;
+                string regionFix = string.Empty;
+                string subRegionFix = string.Empty;
+                GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(COUNTRY, countryFix), out countryFix);
+                if (countryFix == null)
+                    countryFix = Country;
+                GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(REGION, Region), out regionFix);
+                if (regionFix == null)
+                    regionFix = Region;
+                GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(SUBREGION, SubRegion), out subRegionFix);
+                if (subRegionFix == null)
+                    subRegionFix = SubRegion;
+                
+                result = countryFix;
+                if (!regionFix.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
+                    result = regionFix + ", " + result;
+                if (!subRegionFix.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
+                    result = subRegionFix + ", " + result;
+                if (!Address.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
+                    result = Address + ", " + result;
+                if (!Place.Equals(string.Empty))
+                    result = Place + ", " + result;
+                return TrimLeadingCommas(result);
             }
-            if (result != fixedLocation)
-                return result;
-            string countryFix = string.Empty;
-            string regionFix = string.Empty;
-            string subRegionFix = string.Empty;
-            GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(COUNTRY, countryFix), out countryFix);
-            if (countryFix == null)
-                countryFix = Country;
-            GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(REGION, Region), out regionFix);
-            if (regionFix == null)
-                regionFix = Region;
-            GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(SUBREGION, SubRegion), out subRegionFix);
-            if (subRegionFix == null)
-                subRegionFix = SubRegion;
-
-            result = countryFix;
-            if (!regionFix.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
-                result = regionFix + ", " + result;
-            if (!subRegionFix.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
-                result = subRegionFix + ", " + result;
-            if (!Address.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
-                result = Address + ", " + result;
-            if (!Place.Equals(string.Empty))
-                result = Place + ", " + result;
-            return TrimLeadingCommas(result);
         }
 
         private string TrimLeadingCommas(string toChange)
@@ -798,7 +801,7 @@ namespace FTAnalyzer
         {
             return CompareTo((FactLocation)that, level);
         }
-
+        
         public virtual int CompareTo(FactLocation that, int level)
         {
             int res = this.Country.CompareTo(that.Country);
