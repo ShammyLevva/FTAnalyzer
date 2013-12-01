@@ -240,7 +240,7 @@ namespace FTAnalyzer.Forms
 
         private void mapBox1_MapCenterChanged(Coordinate center)
         {
-            //RefreshPlaces();
+            RefreshPlaces();
         }
 
         private void mapBox1_MouseDoubleClick(object sender, MouseEventArgs e)

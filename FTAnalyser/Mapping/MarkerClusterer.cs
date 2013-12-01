@@ -27,7 +27,7 @@ namespace FTAnalyzer.Mapping
             reclustering = false;
         }
 
-        public void Recluster(double gridSize)
+        public void Recluster(double gridSize, Envelope bounds)
         {
             if (!reclustering)
             {
@@ -37,8 +37,11 @@ namespace FTAnalyzer.Mapping
                 int count = 0;
                 foreach (FeatureDataRow row in sourceDataTable)
                 {
-                    AddToClosestCluster(row);
-                    count++;
+                    if (bounds.Contains(row.Geometry.Coordinate))
+                    {
+                        AddToClosestCluster(row);
+                        count++;
+                    }
                 }
                 BuildClusteredFeatureTable();
                 reclustering = false;

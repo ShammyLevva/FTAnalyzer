@@ -10,6 +10,7 @@ using SharpMap.Data;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
 using SharpMap.Styles;
+using GeoAPI.Geometries;
 
 namespace FTAnalyzer.Mapping
 {
@@ -34,7 +35,10 @@ namespace FTAnalyzer.Mapping
 
         public void Refresh()
         {
-            clusterer.Recluster(Math.Max(map.Envelope.Width, map.Envelope.Height) / 20.0);
+            Envelope bounds = map.Envelope;
+            double gridSize = Math.Max(map.Envelope.Width, map.Envelope.Height) / 20.0;
+            bounds.ExpandBy(gridSize);
+            clusterer.Recluster(gridSize, bounds);
         }
 
         private void SetupMap()

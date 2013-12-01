@@ -16,7 +16,6 @@ namespace FTAnalyzer.Mapping
         private IPoint centroid;
 
         public static readonly string CLUSTER = "Cluster", FEATURE = "Feature", UNKNOWN = "Unknown";
-        private static readonly int CENTROID_THRESHOLD = 100;
 
         public IList<FeatureDataRow> Features { get { return cluster; } }
 
