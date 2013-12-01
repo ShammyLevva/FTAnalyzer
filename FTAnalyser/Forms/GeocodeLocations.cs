@@ -2,7 +2,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data.SQLite;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
@@ -777,22 +776,9 @@ namespace FTAnalyzer.Forms
                 txtLocations.Text = string.Empty;
                 txtGoogleWait.Text = string.Empty;
                 ft.Geocoding = true;
-                //DatabaseHelper.Instance.AddEmptyLocationsToQueue(queue);
-                AddEmptyLocationsToQueue();
+                DatabaseHelper.Instance.AddEmptyLocationsToQueue(queue);
                 reverseGeocodeBackgroundWorker.RunWorkerAsync();
                 this.Cursor = Cursors.Default;
-            }
-        }
-
-        public void AddEmptyLocationsToQueue()
-        {
-            SQLiteCommand cmd = DatabaseHelper.Instance.NeedsReverseGeocode();
-            SQLiteDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                FactLocation loc = FactLocation.LookupLocation(reader[0].ToString());
-                if (!queue.Contains(loc))
-                    queue.Enqueue(loc);
             }
         }
 

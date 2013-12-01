@@ -3,9 +3,11 @@ using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Windows.Forms;
+using System.Linq;
 using FTAnalyzer.Forms;
 using FTAnalyzer.Mapping;
 using GeoAPI.Geometries;
+using System.Collections.Concurrent;
 
 namespace FTAnalyzer.Utilities
 {
@@ -483,17 +485,17 @@ namespace FTAnalyzer.Utilities
 
         #region Cursor Queries
 
-        //public void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
-        //{
-        //    SQLiteCommand cmd = new SQLiteCommand("select location from geocode where foundlocation='' and geocodestatus=3", conn);
-        //    SQLiteDataReader reader = cmd.ExecuteReader();
-        //    while (reader.Read())
-        //    {
-        //        FactLocation loc = FactLocation.LookupLocation(reader[0].ToString());
-        //        if (!queue.Contains(loc))
-        //            queue.Enqueue(loc);
-        //    }
-        //}
+        public void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
+        {
+            SQLiteCommand cmd = new SQLiteCommand("select location from geocode where foundlocation='' and geocodestatus=3", conn);
+            SQLiteDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                FactLocation loc = FactLocation.LookupLocation(reader[0].ToString());
+                if (!queue.Contains(loc))
+                    queue.Enqueue(loc);
+            }
+        }
 
         public SQLiteCommand NeedsReverseGeocode()
         {
