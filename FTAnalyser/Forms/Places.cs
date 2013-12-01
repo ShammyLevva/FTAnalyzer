@@ -77,7 +77,7 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.Decorations.RemoveAt(0);
             mapBox1.Refresh();
         }
-        
+
         private void BuildMap()
         {
             this.Cursor = Cursors.WaitCursor;
@@ -125,8 +125,10 @@ namespace FTAnalyzer.Forms
             if (bbox.Centre == null)
                 expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
             else
+            {
                 expand = new Envelope(bbox.TopLeft(), bbox.BottomRight());
-            expand.ExpandBy(mapBox1.Map.PixelSize * 1.3);
+                expand.ExpandBy(bbox.Width * 0.3);
+            }
             mapBox1.Map.ZoomToBox(expand);
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             RefreshPlaces();
@@ -165,7 +167,7 @@ namespace FTAnalyzer.Forms
         private void Places_Load(object sender, EventArgs e)
         {
             TreeNode[] nodes = ft.GetAllLocationsTreeNodes(tvPlaces.Font, false);
-            tvPlaces.Nodes.AddRange(nodes); 
+            tvPlaces.Nodes.AddRange(nodes);
             isloading = false; // only turn off building map if completely done initializing
             if (tvPlaces.Nodes.Count > 0)
             {   // update map using first node as selected node
@@ -232,6 +234,11 @@ namespace FTAnalyzer.Forms
 
         public void RefreshPlaces()
         {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => RefreshPlaces()));
+                return;
+            }
             this.Cursor = Cursors.WaitCursor;
             clusters.Refresh();
             mapBox1.Refresh();

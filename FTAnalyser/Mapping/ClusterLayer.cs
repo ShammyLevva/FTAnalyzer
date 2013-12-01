@@ -41,6 +41,11 @@ namespace FTAnalyzer.Mapping
             clusterer.Recluster(gridSize, bounds);
         }
 
+        public Envelope Bounds
+        {
+            get { return clusterLayer.Envelope; }
+        }
+
         private void SetupMap()
         {
             FactLocations = new FeatureDataTable();

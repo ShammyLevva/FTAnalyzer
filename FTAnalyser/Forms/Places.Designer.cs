@@ -36,8 +36,8 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap = new System.Windows.Forms.SplitContainer();
             this.tvPlaces = new System.Windows.Forms.TreeView();
             this.mapBox1 = new SharpMap.Forms.MapBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.dgFacts = new System.Windows.Forms.DataGridView();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.FactsIndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -111,7 +111,7 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap.Panel2.Controls.Add(this.mapZoomToolStrip);
             this.splitContainerMap.Panel2.Controls.Add(this.linkLabel1);
             this.splitContainerMap.Size = new System.Drawing.Size(1113, 435);
-            this.splitContainerMap.SplitterDistance = 330;
+            this.splitContainerMap.SplitterDistance = 200;
             this.splitContainerMap.TabIndex = 2;
             // 
             // tvPlaces
@@ -120,7 +120,7 @@ namespace FTAnalyzer.Forms
             this.tvPlaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tvPlaces.Location = new System.Drawing.Point(0, 0);
             this.tvPlaces.Name = "tvPlaces";
-            this.tvPlaces.Size = new System.Drawing.Size(330, 435);
+            this.tvPlaces.Size = new System.Drawing.Size(200, 435);
             this.tvPlaces.TabIndex = 0;
             this.tvPlaces.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeCollapse);
             this.tvPlaces.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeExpand);
@@ -142,7 +142,7 @@ namespace FTAnalyzer.Forms
             this.mapBox1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.ShowProgressUpdate = true;
-            this.mapBox1.Size = new System.Drawing.Size(779, 410);
+            this.mapBox1.Size = new System.Drawing.Size(909, 410);
             this.mapBox1.TabIndex = 2;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
@@ -150,11 +150,21 @@ namespace FTAnalyzer.Forms
             this.mapBox1.MapCenterChanged += new SharpMap.Forms.MapBox.MapCenterChangedHandler(this.mapBox1_MapCenterChanged);
             this.mapBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mapBox1_MouseDoubleClick);
             // 
+            // mapZoomToolStrip
+            // 
+            this.mapZoomToolStrip.Enabled = false;
+            this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.mapZoomToolStrip.MapControl = this.mapBox1;
+            this.mapZoomToolStrip.Name = "mapZoomToolStrip";
+            this.mapZoomToolStrip.Size = new System.Drawing.Size(909, 25);
+            this.mapZoomToolStrip.TabIndex = 1;
+            this.mapZoomToolStrip.Text = "mapZoomToolStrip1";
+            // 
             // linkLabel1
             // 
             this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(651, 25);
+            this.linkLabel1.Location = new System.Drawing.Point(781, 25);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(125, 13);
             this.linkLabel1.TabIndex = 16;
@@ -162,16 +172,6 @@ namespace FTAnalyzer.Forms
             this.linkLabel1.Text = "© Google - Terms of Use";
             this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // mapZoomToolStrip
-            // 
-            this.mapZoomToolStrip.Enabled = false;
-            this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
-            this.mapZoomToolStrip.MapControl = this.mapBox1;
-            this.mapZoomToolStrip.Name = "mapZoomToolStrip";
-            this.mapZoomToolStrip.Size = new System.Drawing.Size(779, 25);
-            this.mapZoomToolStrip.TabIndex = 1;
-            this.mapZoomToolStrip.Text = "mapZoomToolStrip1";
             // 
             // dgFacts
             // 
