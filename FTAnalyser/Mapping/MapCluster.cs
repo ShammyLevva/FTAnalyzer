@@ -13,10 +13,8 @@ namespace FTAnalyzer.Mapping
         private int minSize;
         private double gridSize;
         private List<IPoint> points;
-        private IMultiPoint multiPoint;
-        private IGeometry bufferedMultiPoint;
         private IPoint centroid;
-        
+
         public static readonly string CLUSTER = "Cluster", FEATURE = "Feature", UNKNOWN = "Unknown";
         private static readonly int CENTROID_THRESHOLD = 100;
 
@@ -28,48 +26,45 @@ namespace FTAnalyzer.Mapping
             this.minSize = minSize;
             this.gridSize = gridSize;
             this.points = new List<IPoint>();
-            multiPoint = MultiPoint.Empty;
-            bufferedMultiPoint = multiPoint.Envelope.Buffer(gridSize);
         }
 
-        public IGeometry Geometry { get { return multiPoint.Centroid; } }
-        
+        public IGeometry Geometry { get { return centroid; } }
+
         public string ClusterType { get { return (cluster.Count < minSize) ? FEATURE : CLUSTER; } }
 
         public IPoint Centroid
         {
-            get {
-                if (points.Count < CENTROID_THRESHOLD)
-                    return multiPoint.Centroid;
-                else
-                    return centroid;
-            }
+            get { return centroid; }
         }
-        
+
         public void AddFeature(FeatureDataRow row)
         {
             cluster.Add(row);
-
-            points.Add((IPoint)row.Geometry);
-            if (points.Count == CENTROID_THRESHOLD)
-                centroid = multiPoint.Centroid; // save centroid when we reach 500 points
-            multiPoint = new MultiPoint(points.ToArray());
-            bufferedMultiPoint = multiPoint.Envelope.Buffer(gridSize);
+            IPoint p = (IPoint)row.Geometry;
+            UpdateCentroid(p);
+            points.Add(p);
         }
 
         public bool IsFeatureInClusterBounds(FeatureDataRow row)
         {
-            return bufferedMultiPoint.Contains(row.Geometry);
+            return centroid.Distance(row.Geometry) <= gridSize;
         }
 
-        //public void UpdateCentre(IPoint point)
-        //{
-        //    int oldCount = points.Count;
-        //    int newCount = oldCount + 1;
-        //    double X = (Centre.X * (oldCount / newCount)) + point.X / newCount;
-        //    double Y = (Centre.Y * (oldCount / newCount)) + point.Y / newCount;
-        //    Centre = new Point(new Coordinate(X, Y));
-        //}
+        public void UpdateCentroid(IPoint point)
+        {
+            double oldCount = points.Count;
+            if (oldCount == 0)
+            {
+                centroid = point;
+            }
+            else
+            {
+                double newCount = oldCount + 1;
+                double X = (centroid.X * oldCount + point.X) / newCount;
+                double Y = (centroid.Y * oldCount + point.Y) / newCount;
+                centroid = new Point(new Coordinate(X, Y));
+            }
+        }
 
     }
 }
