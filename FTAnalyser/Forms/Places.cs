@@ -143,10 +143,13 @@ namespace FTAnalyzer.Forms
 
         private void dgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-            IDisplayFact fact = (IDisplayFact)dgFacts.CurrentRow.DataBoundItem;
-            ft.OpenGeoLocations(fact.Location);
-            this.Cursor = Cursors.Default;
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                this.Cursor = Cursors.WaitCursor;
+                IDisplayFact fact = (IDisplayFact)dgFacts.CurrentRow.DataBoundItem;
+                ft.OpenGeoLocations(fact.Location);
+                this.Cursor = Cursors.Default;
+            }
         }
 
         private void Places_FormClosed(object sender, FormClosedEventArgs e)
