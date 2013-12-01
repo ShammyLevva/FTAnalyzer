@@ -172,7 +172,7 @@ namespace FTAnalyzer.Forms
                     }
                     mapBox1.Map.ZoomToBox(expand);
                 }
-                RefreshTimeline();
+                RefreshClusters();
             }
         }
 
@@ -248,7 +248,7 @@ namespace FTAnalyzer.Forms
                 Coordinate p = mapBox1.Map.ImageToWorld(new PointF(e.X, e.Y));
                 mapBox1.Map.Center.X = p.X;
                 mapBox1.Map.Center.Y = p.Y;
-                RefreshTimeline();
+                RefreshClusters();
             }
         }
 
@@ -283,10 +283,10 @@ namespace FTAnalyzer.Forms
 
         private void mapBox1_MapZoomChanged(double zoom)
         {
-            RefreshTimeline();
+            RefreshClusters();
         }
 
-        public void RefreshTimeline()
+        public void RefreshClusters()
         {
             clusters.Refresh();
             mapBox1.Refresh();
@@ -294,7 +294,7 @@ namespace FTAnalyzer.Forms
 
         private void mapBox1_MapCenterChanged(Coordinate center)
         {
-            RefreshTimeline();
+            RefreshClusters();
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
