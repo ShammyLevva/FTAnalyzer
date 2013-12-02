@@ -46,8 +46,8 @@ namespace FTAnalyzer.Forms
             this.selectAllDescendantsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mapBox1 = new SharpMap.Forms.MapBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.dgFacts = new System.Windows.Forms.DataGridView();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.FactsIndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -102,6 +102,7 @@ namespace FTAnalyzer.Forms
             this.splitContainerFacts.Size = new System.Drawing.Size(1113, 566);
             this.splitContainerFacts.SplitterDistance = 435;
             this.splitContainerFacts.TabIndex = 18;
+            this.splitContainerFacts.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainerFacts_SplitterMoved);
             // 
             // splitContainerMap
             // 
@@ -122,6 +123,7 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap.Size = new System.Drawing.Size(1113, 435);
             this.splitContainerMap.SplitterDistance = 330;
             this.splitContainerMap.TabIndex = 2;
+            this.splitContainerMap.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainerMap_SplitterMoved);
             // 
             // dgIndividuals
             // 
@@ -240,6 +242,16 @@ namespace FTAnalyzer.Forms
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
             // 
+            // mapZoomToolStrip
+            // 
+            this.mapZoomToolStrip.Enabled = false;
+            this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.mapZoomToolStrip.MapControl = this.mapBox1;
+            this.mapZoomToolStrip.Name = "mapZoomToolStrip";
+            this.mapZoomToolStrip.Size = new System.Drawing.Size(779, 25);
+            this.mapZoomToolStrip.TabIndex = 1;
+            this.mapZoomToolStrip.Text = "mapZoomToolStrip1";
+            // 
             // linkLabel1
             // 
             this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -252,16 +264,6 @@ namespace FTAnalyzer.Forms
             this.linkLabel1.Text = "© Google - Terms of Use";
             this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // mapZoomToolStrip
-            // 
-            this.mapZoomToolStrip.Enabled = false;
-            this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
-            this.mapZoomToolStrip.MapControl = this.mapBox1;
-            this.mapZoomToolStrip.Name = "mapZoomToolStrip";
-            this.mapZoomToolStrip.Size = new System.Drawing.Size(779, 25);
-            this.mapZoomToolStrip.TabIndex = 1;
-            this.mapZoomToolStrip.Text = "mapZoomToolStrip1";
             // 
             // dgFacts
             // 

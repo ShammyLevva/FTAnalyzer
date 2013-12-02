@@ -48,6 +48,10 @@ namespace FTAnalyzer.Forms
             dgIndividuals.Sort(dgIndividuals.Columns["BirthDate"], ListSortDirection.Ascending);
             dgIndividuals.Sort(dgIndividuals.Columns["SortedName"], ListSortDirection.Ascending);
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
+            int splitheight = (int)Application.UserAppDataRegistry.GetValue("Lifeline Facts Splitter Distance", -1);
+            if (splitheight != -1)
+                splitContainerFacts.SplitterDistance = this.Height - splitheight;
+            splitContainerMap.SplitterDistance = (int)Application.UserAppDataRegistry.GetValue("Lifeline Map Splitter Distance", splitContainerMap.SplitterDistance);
         }
 
         private void DatabaseHelper_GeoLocationUpdated(object location, EventArgs e)
@@ -285,6 +289,18 @@ namespace FTAnalyzer.Forms
                 RemoveScaleBar();
             else
                 AddScaleBar();
+        }
+
+        private void splitContainerFacts_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            SplitContainer splitter = (SplitContainer)sender;
+            Application.UserAppDataRegistry.SetValue("Lifeline Facts Splitter Distance", this.Height - splitter.SplitterDistance);
+        }
+
+        private void splitContainerMap_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            SplitContainer splitter = (SplitContainer)sender;
+            Application.UserAppDataRegistry.SetValue("Lifeline Map Splitter Distance", splitter.SplitterDistance);
         }
     }
 }
