@@ -8,6 +8,7 @@ namespace FTAnalyzer
 {
     public class Age : IComparable<Age>
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public int MinAge { get; private set; }
         public int MaxAge { get; private set; }
         private FactDate birthDate;
@@ -28,8 +29,12 @@ namespace FTAnalyzer
         {
             if (when.IsAfter(ind.DeathDate))
                 when = ind.DeathDate;
+            log.Debug("Calculating Age for " + ind.Name + " on " + when.ToString());
+            log.Debug("Min age: birth enddate:" + ind.BirthDate.EndDate + " to startdate:" + when.StartDate);
+            log.Debug("Max age: birth startdate:" + ind.BirthDate.StartDate + " to enddate:" + when.EndDate);
             MinAge = GetAge(ind.BirthDate.EndDate, when.StartDate);
             MaxAge = GetAge(ind.BirthDate.StartDate, when.EndDate);
+            log.Debug("Calculated minage:" + MinAge + " calculated maxage:" + MaxAge);
             if (MinAge == FactDate.MINYEARS)
             {
                 if (MaxAge == FactDate.MAXYEARS)
