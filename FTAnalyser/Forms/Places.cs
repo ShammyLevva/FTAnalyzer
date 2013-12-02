@@ -39,6 +39,10 @@ namespace FTAnalyzer.Forms
             tvPlaces.Nodes.Clear();
             dgFacts.AutoGenerateColumns = false;
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
+            int splitheight = (int)Application.UserAppDataRegistry.GetValue("Places Facts Splitter Distance", -1);
+            if(splitheight != -1)
+                splitContainerFacts.SplitterDistance =  this.Height - splitheight;
+            splitContainerMap.SplitterDistance = (int)Application.UserAppDataRegistry.GetValue("Places Map Splitter Distance", splitContainerMap.SplitterDistance);
         }
 
         private void DatabaseHelper_GeoLocationUpdated(object location, EventArgs e)
@@ -89,6 +93,7 @@ namespace FTAnalyzer.Forms
             if (isloading || location == null || !location.IsGeoCoded(false) || (location == currentLocation && level == currentLevel))
             {
                 this.Cursor = Cursors.Default;
+                RefreshClusters();
                 return;
             }
             currentLevel = level;
@@ -310,6 +315,18 @@ namespace FTAnalyzer.Forms
             MapIndividuals ind = new MapIndividuals(locations, "none", this);
             ind.Show();
             this.Cursor = Cursors.Default;
+        }
+
+        private void splitContainerFacts_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            SplitContainer splitter = (SplitContainer)sender;
+            Application.UserAppDataRegistry.SetValue("Places Facts Splitter Distance", this.Height - splitter.SplitterDistance);
+        }
+
+        private void splitContainerMap_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            SplitContainer splitter = (SplitContainer)sender;
+            Application.UserAppDataRegistry.SetValue("Places Map Splitter Distance", splitter.SplitterDistance);
         }
     }
 }
