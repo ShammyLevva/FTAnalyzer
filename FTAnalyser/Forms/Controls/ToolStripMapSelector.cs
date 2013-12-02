@@ -29,8 +29,8 @@ namespace FTAnalyzer.Forms.Controls
         public ToolStripMapSelector()
             : base()
         {
-            this.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            this.ImageTransparentColor = Color.Magenta;
             this.Name = "mnuMapStyle";
             this.Size = new System.Drawing.Size(71, 22);
             this.Text = "Map style";

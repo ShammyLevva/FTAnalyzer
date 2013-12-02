@@ -16,7 +16,7 @@ using Ionic.Zip;
 
 namespace FTAnalyzer
 {
-    class FamilyTree
+    class FamilyTree : IDisposable
     {
         private static FamilyTree instance;
 
@@ -2102,6 +2102,11 @@ namespace FTAnalyzer
                 return true;
             }
             return false;
+        }
+
+        public void Dispose()
+        {
+            xmlErrorbox.Dispose();
         }
     }
 }

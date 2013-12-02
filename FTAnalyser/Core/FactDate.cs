@@ -536,14 +536,14 @@ namespace FTAnalyzer
                     dt = (highlow == HIGH) ? MAXDATE : MINDATE;
                 }
             }
-            catch (System.FormatException e1)
+            catch (System.FormatException)
             {
-                throw e1;
+                throw;
             }
-            catch (Exception e2)
+            catch (Exception)
             {
                 dt = (highlow == HIGH) ? MAXDATE : MINDATE;
-                throw e2;
+                throw;
             }
             return dt;
         }

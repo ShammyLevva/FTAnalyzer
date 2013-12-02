@@ -19,6 +19,7 @@ namespace FTAnalyzer.Forms
                 components.Dispose();
             }
             base.Dispose(disposing);
+            clusters.Dispose();
         }
 
         #region Windows Form Designer generated code

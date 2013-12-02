@@ -59,6 +59,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -640,6 +641,7 @@
     <Compile Include="Utilities\ListtoDataTableConvertor.cs" />
     <Compile Include="Mapping\MapTransforms.cs" />
     <Compile Include="Mapping\MarkerClusterer.cs" />
+    <Compile Include="Utilities\NativeMethods.cs" />
     <Compile Include="Utilities\Printing.cs" />
     <Compile Include="Utilities\PropertyComparer.cs" />
     <Compile Include="Utilities\ScrollingRichTextBox.cs">

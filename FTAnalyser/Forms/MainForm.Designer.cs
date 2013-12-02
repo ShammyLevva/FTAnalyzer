@@ -18,6 +18,8 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
+            normalFont.Dispose();
+            boldFont.Dispose();
         }
 
         #region Windows Form Designer generated code

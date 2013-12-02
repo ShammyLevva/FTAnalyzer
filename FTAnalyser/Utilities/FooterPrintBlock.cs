@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace FTAnalyzer.Utilities
 {
-    public class FooterPrintBlock : PrintBlock
+    public class FooterPrintBlock : PrintBlock, IDisposable
     {
 
         Font font = new Font("Tahoma", 9, GraphicsUnit.Point);
@@ -32,6 +32,11 @@ namespace FTAnalyzer.Utilities
                 new SolidBrush(Color.Black),
                 Rectangle,
                 format);
+        }
+
+        public void Dispose()
+        {
+            font.Dispose();
         }
     }
 }

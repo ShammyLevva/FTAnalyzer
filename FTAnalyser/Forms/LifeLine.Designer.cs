@@ -19,6 +19,8 @@ namespace FTAnalyzer.Forms
                 components.Dispose();
             }
             base.Dispose(disposing);
+            labelLayer.Dispose();
+            linesLayer.Dispose();
         }
 
         #region Windows Form Designer generated code

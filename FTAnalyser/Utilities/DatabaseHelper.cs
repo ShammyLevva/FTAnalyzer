@@ -50,6 +50,7 @@ namespace FTAnalyzer.Utilities
             }
             catch (Exception) { }
             conn = null;
+            GC.SuppressFinalize(this);
         }
 
         private void OpenDatabaseConnection()

@@ -14,7 +14,7 @@ using GeoAPI.Geometries;
 
 namespace FTAnalyzer.Mapping
 {
-    public class ClusterLayer
+    public class ClusterLayer : IDisposable
     {
         public FeatureDataTable FactLocations { get; private set; }
         private VectorLayer clusterLayer;
@@ -98,6 +98,18 @@ namespace FTAnalyzer.Mapping
             style.Halo = new Pen(Color.Yellow, 3);
             labelLayer.Style = style;
             map.Layers.Add(labelLayer);
+        }
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        public void Dispose()
+        {
+            this.FactLocations.Dispose();
+            this.clusterLayer.Dispose();
+            this.labelLayer.Dispose();
+            this.map.Dispose();
         }
     }
 }
