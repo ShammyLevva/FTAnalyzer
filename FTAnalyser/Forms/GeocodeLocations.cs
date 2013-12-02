@@ -55,7 +55,7 @@ namespace FTAnalyzer.Forms
             SetupFilterMenu();
             SetStatusText();
             CheckGoogleStatusCodes(locations);
-            UpdateGridWithFilters(locations);
+            UpdateGridWithFilters();
         }
 
         private void SetStatusText()
@@ -154,10 +154,10 @@ namespace FTAnalyzer.Forms
             return count == menus;
         }
 
-        private void UpdateGridWithFilters(List<IDisplayGeocodedLocation> input)
+        private void UpdateGridWithFilters()
         {
             this.Cursor = Cursors.WaitCursor;
-            SortableBindingList<IDisplayGeocodedLocation> filteredLocations = ApplyFilters(input);
+            SortableBindingList<IDisplayGeocodedLocation> filteredLocations = ApplyFilters(null);
             // store sort order
             DataGridViewColumn sortCol = dgLocations.SortedColumn;
             ListSortDirection sortOrder = dgLocations.SortOrder == SortOrder.Descending ? ListSortDirection.Descending : ListSortDirection.Ascending;
@@ -184,21 +184,21 @@ namespace FTAnalyzer.Forms
             return result;
         }
 
-        private SortableBindingList<IDisplayGeocodedLocation> ApplyFilters(List<IDisplayGeocodedLocation> input)
+        private SortableBindingList<IDisplayGeocodedLocation> ApplyFilters(FactLocation mustDisplay)
         {
             if (AllFiltersActive(false))
-                return new SortableBindingList<IDisplayGeocodedLocation>(input);
+                return new SortableBindingList<IDisplayGeocodedLocation>(locations);
             List<IDisplayGeocodedLocation> results = new List<IDisplayGeocodedLocation>();
             ToolStripMenuItem places = mnuGoogleResultType.DropDownItems["Places"] as ToolStripMenuItem;
             ToolStripMenuItem[] list = new ToolStripMenuItem[places.DropDownItems.Count + mnuGoogleResultType.DropDownItems.Count + noneOfTheAboveMenus.Count()];
             mnuGoogleResultType.DropDownItems.CopyTo(list, 0);
             places.DropDownItems.CopyTo(list, mnuGoogleResultType.DropDownItems.Count);
             noneOfTheAboveMenus.CopyTo(list, mnuGoogleResultType.DropDownItems.Count + places.DropDownItems.Count); // add any missing elements to always display them
-            foreach (IDisplayGeocodedLocation loc in input)
+            foreach (IDisplayGeocodedLocation loc in locations)
             {
-                if (StatusFilter(loc))
+                if (StatusFilter(loc) || (mustDisplay != null && loc.Equals(mustDisplay)))
                 {
-                    if (loc.GoogleResultType == null || loc.GoogleResultType.Length == 0)
+                    if (loc.GoogleResultType == null || loc.GoogleResultType.Length == 0 || (mustDisplay != null && loc.Equals(mustDisplay)))
                         results.Add(loc);
                     else
                     {
@@ -265,7 +265,7 @@ namespace FTAnalyzer.Forms
             {
                 Application.UserAppDataRegistry.SetValue(menu.Name, menu.Checked.ToString()); // remember checked state for next time
             }
-            UpdateGridWithFilters(locations);
+            UpdateGridWithFilters();
         }
 
         private void menuResultType_CheckedChanged(object sender, EventArgs e)
@@ -280,7 +280,7 @@ namespace FTAnalyzer.Forms
             {
                 Application.UserAppDataRegistry.SetValue(menu.Name, menu.Checked.ToString()); // remember checked state for next time
             }
-            UpdateGridWithFilters(locations);
+            UpdateGridWithFilters();
         }
 
         private void mnuSelectClear_Click(object sender, EventArgs e)
@@ -917,8 +917,15 @@ namespace FTAnalyzer.Forms
 
         public void SelectLocation(string location)
         {
+            FactLocation loc = FactLocation.GetLocation(location);
             DataGridViewRow row = dgLocations.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["GeocodedLocation"].Value.ToString().Equals(location)).FirstOrDefault();
-            if (row != null)
+            if (row == null)
+            {
+                dgLocations.DataSource = ApplyFilters(loc);  // forces location to appear in list
+                dgLocations.Refresh(); 
+                row = dgLocations.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["GeocodedLocation"].Value.ToString().Equals(location)).FirstOrDefault();
+            }
+            if(row != null)
             {
                 dgLocations.Rows[row.Index].Selected = true;
                 dgLocations.FirstDisplayedScrollingRowIndex = row.Index;
