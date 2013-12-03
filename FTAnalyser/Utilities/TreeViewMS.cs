@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
 
-namespace TreeViewMS
+namespace FTAnalyzer.Utilities
 {
 	/// <summary>
 	/// Summary description for TreeViewMS.
@@ -78,8 +78,6 @@ namespace TreeViewMS
 
 		protected override void OnAfterSelect(TreeViewEventArgs e)
 		{
-			base.OnAfterSelect(e);
-
 			bool bControl = (ModifierKeys==Keys.Control);
 			bool bShift = (ModifierKeys==Keys.Shift);
 
@@ -179,7 +177,8 @@ namespace TreeViewMS
 					m_coll.Add( e.Node );
 				}
 			}
-		}
+            base.OnAfterSelect(e);
+        }
 
 
 

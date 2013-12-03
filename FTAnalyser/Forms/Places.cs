@@ -17,8 +17,6 @@ namespace FTAnalyzer.Forms
         private Color backgroundColour;
         private ClusterLayer clusters;
         private bool isloading;
-        private FactLocation currentLocation;
-        private int currentLevel;
 
         public Places()
         {
@@ -40,8 +38,8 @@ namespace FTAnalyzer.Forms
             dgFacts.AutoGenerateColumns = false;
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
             int splitheight = (int)Application.UserAppDataRegistry.GetValue("Places Facts Splitter Distance", -1);
-            if(splitheight != -1)
-                splitContainerFacts.SplitterDistance =  this.Height - splitheight;
+            if (splitheight != -1)
+                splitContainerFacts.SplitterDistance = this.Height - splitheight;
             splitContainerMap.SplitterDistance = (int)Application.UserAppDataRegistry.GetValue("Places Map Splitter Distance", splitContainerMap.SplitterDistance);
         }
 
@@ -88,17 +86,20 @@ namespace FTAnalyzer.Forms
             clusters.Clear();
             dgFacts.DataSource = null;
             List<IDisplayFact> displayFacts = new List<IDisplayFact>();
-            FactLocation location = tvPlaces.SelectedNode.Tag as FactLocation;
-            int level = tvPlaces.SelectedNode.Level;
-            if (isloading || location == null || !location.IsGeoCoded(false) || (location == currentLocation && level == currentLevel))
+            List<Individual> list = new List<Individual>();
+            List<Tuple<FactLocation, int>> locations = new List<Tuple<FactLocation, int>>();
+            foreach (TreeNode node in tvPlaces.SelectedNodes)
+            {
+                Tuple<FactLocation, int> location = new Tuple<FactLocation, int>((FactLocation)node.Tag, node.Level);
+                list.AddRange(ft.GetIndividualsAtLocation(location.Item1, location.Item2));
+                locations.Add(location);
+            }
+            if (list.Count == 0)
             {
                 this.Cursor = Cursors.Default;
                 RefreshClusters();
                 return;
             }
-            currentLevel = level;
-            currentLocation = location;
-            List<Individual> list = new List<Individual>(ft.GetIndividualsAtLocation(location, level));
             int count = 0;
             progressbar.Visible = true;
             progressbar.Maximum = list.Count;
@@ -106,11 +107,15 @@ namespace FTAnalyzer.Forms
             {
                 foreach (DisplayFact dispfact in ind.AllGeocodedFacts)
                 {
-                    if (dispfact.Location.CompareTo(location, level) == 0)
+                    foreach (Tuple<FactLocation, int> location in locations)
                     {
-                        displayFacts.Add(dispfact);
-                        MapLocation loc = new MapLocation(ind, dispfact.Fact, dispfact.FactDate);
-                        FeatureDataRow fdr = loc.AddFeatureDataRow(clusters.FactLocations);
+                        if (dispfact.Location.CompareTo(location.Item1, location.Item2) == 0)
+                        {
+                            displayFacts.Add(dispfact);
+                            MapLocation loc = new MapLocation(ind, dispfact.Fact, dispfact.FactDate);
+                            FeatureDataRow fdr = loc.AddFeatureDataRow(clusters.FactLocations);
+                            break;
+                        }
                     }
                 }
                 progressbar.Value = ++count;

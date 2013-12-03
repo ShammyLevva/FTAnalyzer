@@ -35,7 +35,7 @@ namespace FTAnalyzer.Forms
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainerFacts = new System.Windows.Forms.SplitContainer();
             this.splitContainerMap = new System.Windows.Forms.SplitContainer();
-            this.tvPlaces = new System.Windows.Forms.TreeView();
+            this.tvPlaces = new FTAnalyzer.Utilities.TreeViewMS();
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
             this.btnSelect = new System.Windows.Forms.ToolStripButton();
@@ -121,12 +121,12 @@ namespace FTAnalyzer.Forms
             // 
             // tvPlaces
             // 
-            this.tvPlaces.CheckBoxes = true;
             this.tvPlaces.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvPlaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tvPlaces.HideSelection = false;
             this.tvPlaces.Location = new System.Drawing.Point(0, 0);
             this.tvPlaces.Name = "tvPlaces";
+            this.tvPlaces.SelectedNodes = ((System.Collections.ArrayList)(resources.GetObject("tvPlaces.SelectedNodes")));
             this.tvPlaces.Size = new System.Drawing.Size(200, 435);
             this.tvPlaces.TabIndex = 0;
             this.tvPlaces.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeCollapse);
@@ -482,7 +482,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripStatusLabel txtCount;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-        private System.Windows.Forms.TreeView tvPlaces;
         private System.Windows.Forms.DataGridViewImageColumn FactIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactsIndividualID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Forenames;
@@ -502,5 +501,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripProgressBar progressbar;
         private System.Windows.Forms.ToolStripMenuItem mnuHideScaleBar;
         private System.Windows.Forms.ToolStripButton btnSelect;
+        private Utilities.TreeViewMS tvPlaces;
     }
 }
