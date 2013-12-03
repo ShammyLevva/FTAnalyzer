@@ -147,6 +147,8 @@ namespace FTAnalyzer
             string rootIndividual = string.Empty;
             Application.DoEvents();
             XmlDocument doc = GedcomToXml.Load(filename);
+            if (doc == null)
+                return false;
             xmlErrorbox.AppendText("Loading file " + filename + "\n");
             // First check if file has a valid header record ie: it is actually a GEDCOM file
             XmlNode header = doc.SelectSingleNode("GED/HEAD");
@@ -158,6 +160,8 @@ namespace FTAnalyzer
             XmlNode charset = doc.SelectSingleNode("GED/HEAD/CHAR");
             if (charset != null && charset.InnerText.Equals("UTF-8"))
                 doc = GedcomToXml.Load(filename, Encoding.UTF8);
+            if (doc == null)
+                return false;
             ReportOptions();
             XmlNode root = doc.SelectSingleNode("GED/HEAD/_ROOT");
             if (root != null)

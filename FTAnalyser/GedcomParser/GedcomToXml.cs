@@ -18,10 +18,10 @@ namespace FTAnalyzer
             //StreamReader reader = new AnselInputStreamReader(checkInvalidCR(path));
             //StreamReader reader = new AnselInputStreamReader(new FileStream(path, FileMode.Open, FileAccess.Read));
             StreamReader reader = new StreamReader(new FileStream(path, FileMode.Open, FileAccess.Read), encoding);
-            return parse(reader);
+            return Parse(reader);
         }
 
-        private static MemoryStream checkInvalidCR(string path)
+        private static MemoryStream CheckInvalidCR(string path)
         {
             FileStream infs = new FileStream(path, FileMode.Open, FileAccess.Read);
             MemoryStream outfs = new MemoryStream();
@@ -43,7 +43,7 @@ namespace FTAnalyzer
             return outfs;
         }
 
-        private static XmlDocument parse(StreamReader reader)
+        private static XmlDocument Parse(StreamReader reader)
         {
             long lineNr = 0;
             int badLineCount = 0;
@@ -189,7 +189,10 @@ namespace FTAnalyzer
                         if (result == DialogResult.Yes)
                             badLineCount = 0;
                         else
+                        {
+                            document = null;
                             break;
+                        }
                     }
                         
                 } // end while
