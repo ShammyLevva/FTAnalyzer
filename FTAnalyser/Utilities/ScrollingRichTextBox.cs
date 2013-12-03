@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 
@@ -8,6 +9,15 @@ namespace FTAnalyzer.Utilities
 {
     class ScrollingRichTextBox : System.Windows.Forms.RichTextBox
     {
+        private class NativeMethods
+        {
+            [DllImport("user32.dll", CharSet = CharSet.Auto)]
+            public static extern IntPtr SendMessage(
+              IntPtr hWnd,
+              uint Msg,
+              IntPtr wParam,
+              IntPtr lParam);
+        }
 
         private const int WM_VSCROLL = 277;
         private const int SB_LINEUP = 0;

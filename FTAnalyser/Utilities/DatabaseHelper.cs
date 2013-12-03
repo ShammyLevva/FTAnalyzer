@@ -42,14 +42,22 @@ namespace FTAnalyzer.Utilities
             }
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                try
+                {
+                    if (conn != null) conn.Close();
+                }
+                catch (Exception) { }
+                conn = null;
+            }
+        }
+
         public void Dispose()
         {
-            try
-            {
-                if (conn != null) conn.Close();
-            }
-            catch (Exception) { }
-            conn = null;
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 

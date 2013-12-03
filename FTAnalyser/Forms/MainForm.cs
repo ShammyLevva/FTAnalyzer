@@ -222,8 +222,11 @@ namespace FTAnalyzer
             {
                 GC.SuppressFinalize(f);
                 if (f.Visible)
+                {
                     f.Close(); // call close method to force tidy up of forms
-                f.Dispose();
+                }
+                else
+                    f.Dispose();
             }
         }
 

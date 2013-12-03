@@ -27,13 +27,12 @@ namespace FTAnalyzer.Forms.Controls
         private ToolStripMenuItem mnuNLSOSHistoric;
 
         public ToolStripMapSelector()
-            : base()
+            : base("Map style")
         {
-            this.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            this.ImageTransparentColor = Color.Magenta;
-            this.Name = "mnuMapStyle";
-            this.Size = new System.Drawing.Size(71, 22);
-            this.Text = "Map style";
+            //this.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            //this.ImageTransparentColor = Color.Magenta;
+            //this.Name = "mnuMapStyle";
+            //this.Size = new System.Drawing.Size(71, 22);
         }
 
         public void Setup(LinkLabel label, MapBox mapbox)

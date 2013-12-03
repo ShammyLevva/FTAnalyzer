@@ -13,7 +13,7 @@ using System.ComponentModel;
 
 namespace FTAnalyzer
 {
-    class ReportFormHelper
+    class ReportFormHelper : IDisposable
     {
         private PrintingDataGridViewProvider printProvider;
         private PrintDocument printDocument;
@@ -147,5 +147,20 @@ namespace FTAnalyzer
             SaveColumnLayout(filename);
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                printDocument.Dispose();
+                printDialog.Dispose();
+                printPreviewDialog.Dispose();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

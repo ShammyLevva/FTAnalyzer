@@ -100,16 +100,22 @@ namespace FTAnalyzer.Mapping
             map.Layers.Add(labelLayer);
         }
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                FactLocations.Dispose();
+                clusterLayer.Dispose();
+                labelLayer.Dispose();
+                clusterer.Dispose();
+                map.Dispose();
+            }
+        }
+
         public void Dispose()
         {
-            this.FactLocations.Dispose();
-            this.clusterLayer.Dispose();
-            this.labelLayer.Dispose();
-            this.map.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
-    }
+     }
 }

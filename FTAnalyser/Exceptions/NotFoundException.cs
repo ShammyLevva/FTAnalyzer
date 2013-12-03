@@ -5,6 +5,7 @@ using System.Text;
 
 namespace FTAnalyzer
 {
+    [Serializable]
     class NotFoundException : Exception
     {
     }

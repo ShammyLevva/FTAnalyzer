@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using GeoAPI.Geometries;
 using SharpMap.Data;
+using System;
 
 namespace FTAnalyzer.Mapping
 {
-    public class MarkerClusterer
+    public class MarkerClusterer : IDisposable
     {
         private List<MapCluster> clusters;
         private double gridsize;
@@ -91,6 +92,21 @@ namespace FTAnalyzer.Mapping
                 row["Cluster"] = cluster.ClusterType;
                 clusteredDataTable.AddRow(row);
             }
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                clusteredDataTable.Dispose();
+                sourceDataTable.Dispose();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

@@ -34,9 +34,18 @@ namespace FTAnalyzer.Utilities
                 format);
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                font.Dispose();
+            }
+        }
+         
         public void Dispose()
         {
-            font.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

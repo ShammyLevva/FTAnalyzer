@@ -640,7 +640,6 @@
     <Compile Include="Utilities\ListtoDataTableConvertor.cs" />
     <Compile Include="Mapping\MapTransforms.cs" />
     <Compile Include="Mapping\MarkerClusterer.cs" />
-    <Compile Include="Utilities\NativeMethods.cs" />
     <Compile Include="Utilities\Printing.cs" />
     <Compile Include="Utilities\PropertyComparer.cs" />
     <Compile Include="Utilities\ScrollingRichTextBox.cs">

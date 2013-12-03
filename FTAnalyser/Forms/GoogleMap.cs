@@ -87,7 +87,7 @@ namespace FTAnalyzer.Forms
         private String location;
         private bool loaded;
 
-        public delegate void GoogleEventHandler(object sender, GoogleWaitingEventArgs args);
+        public delegate void GoogleEventHandler(object sender, GoogleWaitingEventArgs e);
         public static event GoogleEventHandler WaitingForGoogle;
         public static bool ThreadCancelled { get; set; }
 

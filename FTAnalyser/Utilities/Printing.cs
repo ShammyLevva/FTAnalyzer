@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace FTAnalyzer.Utilities
 {
-    class Printing
+    class Printing : IDisposable
     {
         private ScrollingRichTextBox rtb;
         private StringReader reader;
@@ -48,6 +48,21 @@ namespace FTAnalyzer.Utilities
                 e.HasMorePages = false;
             }
             PrintBrush.Dispose();
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                reader.Dispose();
+                rtb.Dispose();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

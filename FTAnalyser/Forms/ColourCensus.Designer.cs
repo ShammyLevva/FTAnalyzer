@@ -19,6 +19,7 @@
             }
             base.Dispose(disposing);
             boldFont.Dispose();
+            reportFormHelper.Dispose();
         }
 
         #region Windows Form Designer generated code

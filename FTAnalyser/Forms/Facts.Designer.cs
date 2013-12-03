@@ -19,6 +19,7 @@
             }
             base.Dispose(disposing);
             italicFont.Dispose();
+            reportFormHelper.Dispose();
         }
 
         #region Windows Form Designer generated code
