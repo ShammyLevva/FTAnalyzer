@@ -274,6 +274,8 @@ namespace FTAnalyzer
                     }
                     SetCommentAndLocation(FactType, FamilyTree.GetText(node), FamilyTree.GetText(node, "PLAC"),
                         FamilyTree.GetText(node, "PLAC/MAP/LATI"), FamilyTree.GetText(node, "PLAC/MAP/LONG"));
+                    if (Location.Equals(FactLocation.UNKNOWN_LOCATION))
+                        SetAddress(FactType, node);
 
                     if (FactType.Equals(CENSUS) && Location.IsUnitedKingdom)
                     {  // only check UK census dates for errors as those are used for colour census
@@ -319,6 +321,52 @@ namespace FTAnalyzer
                     throw new InvalidXMLFactException(message + "\n            Error " + ex.Message + "\n");
                 }
             }
+        }
+
+        private void SetAddress(string FactType, XmlNode node)
+        {
+            XmlNode addr = node.SelectSingleNode("ADDR");
+            if(addr == null)
+                return;
+            string result = string.Empty; // need to do something with an ADDR tag
+            XmlNode ctry = node.SelectSingleNode("ADDR/CTRY");
+            if (ctry != null)
+                result = ctry.InnerText;
+            XmlNode stae = node.SelectSingleNode("ADDR/STAE");
+            if (stae != null)
+                result = (result.Length > 0) ? stae.InnerText + ", " + result : stae.InnerText;
+            XmlNode city = node.SelectSingleNode("ADDR/CITY");
+            if (city != null)
+                result = (result.Length > 0) ? city.InnerText + ", " + result : city.InnerText;
+            XmlNode adr3 = node.SelectSingleNode("ADDR/ADR3");
+            if (adr3 != null)
+                result = (result.Length > 0) ? adr3.InnerText + ", " + result : adr3.InnerText;
+            XmlNode adr2 = node.SelectSingleNode("ADDR/ADR2");
+            if (adr2 != null)
+                result = (result.Length > 0) ? adr2.InnerText + ", " + result : adr2.InnerText;
+            XmlNode adr1 = node.SelectSingleNode("ADDR/ADR1");
+            if (adr1 != null)
+                result = (result.Length > 0) ? adr1.InnerText + ", " + result : adr1.InnerText;
+            string address = string.Empty;
+            if (addr.FirstChild.Value != null)
+                address = addr.FirstChild.Value;
+            foreach(XmlNode cont in node.SelectNodes("ADDR/CONT"))
+            {
+                if (cont.FirstChild.Value != null)
+                    address += " " + cont.FirstChild.Value;
+            }
+            if (address.Length > 0)
+                result = (result.Length > 0) ? address + ", " + result : address;
+            //   ADDR <ADDRESS_LINE> {1:1} p.41
+         //+1 CONT <ADDRESS_LINE> {0:3} p.41
+         //+1 ADR1 <ADDRESS_LINE1> {0:1} p.41
+         //+1 ADR2 <ADDRESS_LINE2> {0:1} p.41
+         //+1 ADR3 <ADDRESS_LINE3> {0:1} p.41
+         //+1 CITY <ADDRESS_CITY> {0:1} p.41
+         //+1 STAE <ADDRESS_STATE> {0:1} p.42
+         //+1 POST <ADDRESS_POSTAL_CODE> {0:1} p.41
+         //+1 CTRY <ADDRESS_COUNTRY> 
+            Location = FactLocation.GetLocation(result);
         }
 
         private void GetCensusReference(XmlNode n)
