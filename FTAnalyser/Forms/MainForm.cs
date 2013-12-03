@@ -222,9 +222,7 @@ namespace FTAnalyzer
             {
                 GC.SuppressFinalize(f);
                 if (f.Visible)
-                {
-                    f.Close(); // call close method to force tidy up of forms
-                }
+                    f.Close(); // call close method to force tidy up of forms & dispose
                 else
                     f.Dispose();
             }
@@ -1350,7 +1348,7 @@ namespace FTAnalyzer
             FactLocation location = e.Node.Tag as FactLocation;
             if (location != null)
             {
-                Forms.People frmInd = new Forms.People();
+                People frmInd = new People();
                 frmInd.SetLocation(location, e.Node.Level);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();

@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Net;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
-using System.Web;
-using System.Windows.Forms;
+﻿using FTAnalyzer.Mapping;
+using System;
 using System.IO;
-using System.Threading;
-using FTAnalyzer.Utilities;
-using FTAnalyzer.Mapping;
+using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
 {
@@ -99,5 +87,9 @@ namespace FTAnalyzer.Forms
             webBrowser.Navigate("http://www.microsoft.com/Maps/product/terms.html");
         }
 
+        private void BingOSMap_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }

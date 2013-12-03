@@ -54,6 +54,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Chart";
             this.Text = "Chart";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Chart_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.chartDisplay)).EndInit();
             this.ResumeLayout(false);
 

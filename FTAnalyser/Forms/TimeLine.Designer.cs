@@ -476,6 +476,7 @@ namespace FTAnalyzer.Forms
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "TimeLine";
             this.Text = "Timeline of Individuals";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TimeLine_FormClosed);
             this.Load += new System.EventHandler(this.TimeLine_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

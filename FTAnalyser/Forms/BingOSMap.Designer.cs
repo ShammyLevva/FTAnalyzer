@@ -79,6 +79,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BingOSMap";
             this.Text = "Bing OS Map";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BingOSMap_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -46,8 +46,8 @@
             // 
             // labMapLevel
             // 
-            this.labMapLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.labMapLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labMapLevel.AutoSize = true;
             this.labMapLevel.Location = new System.Drawing.Point(3, 3);
             this.labMapLevel.Name = "labMapLevel";
@@ -65,6 +65,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GoogleMap";
             this.Text = "Google Map";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GoogleMap_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

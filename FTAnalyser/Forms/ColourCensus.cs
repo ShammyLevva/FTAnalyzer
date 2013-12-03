@@ -323,5 +323,10 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
         }
+
+        private void ColourCensus_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }

@@ -113,6 +113,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "People";
             this.Text = "Individuals & Families";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.People_FormClosed);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);

@@ -338,5 +338,10 @@ namespace FTAnalyzer.Forms
             loaded = true;
             System.Diagnostics.Debug.Print("DocumentCompleted called");
         }
+
+        private void GoogleMap_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }

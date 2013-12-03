@@ -59,6 +59,7 @@
             this.MinimizeBox = false;
             this.Name = "Progress";
             this.Text = "Database Updating";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Progress_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

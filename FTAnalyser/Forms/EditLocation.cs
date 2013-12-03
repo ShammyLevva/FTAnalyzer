@@ -311,5 +311,10 @@ namespace FTAnalyzer.Forms
             }
             return layers;
         }
+
+        private void EditLocation_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }

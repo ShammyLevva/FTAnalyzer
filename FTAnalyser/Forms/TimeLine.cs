@@ -467,5 +467,10 @@ namespace FTAnalyzer.Forms
         {
             Process.Start(e.Link.LinkData as string);
         }
+
+        private void TimeLine_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }

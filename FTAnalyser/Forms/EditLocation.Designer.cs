@@ -201,7 +201,7 @@ namespace FTAnalyzer.Forms
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(633, 17);
             this.toolStripStatusLabel1.Text = "Left click to select pointer, move to the correct place (using zoom/pan) then rig" +
-                "ht click to place pointer in new location";
+    "ht click to place pointer in new location";
             // 
             // EditLocation
             // 
@@ -216,6 +216,7 @@ namespace FTAnalyzer.Forms
             this.Name = "EditLocation";
             this.Text = "EditLocation";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditLocation_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EditLocation_FormClosed);
             this.mapZoomToolStrip.ResumeLayout(false);
             this.mapZoomToolStrip.PerformLayout();
             this.statusStrip1.ResumeLayout(false);

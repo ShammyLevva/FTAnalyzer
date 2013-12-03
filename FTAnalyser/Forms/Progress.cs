@@ -28,5 +28,10 @@ namespace FTAnalyzer.Forms
             label1.Text = "Updated " + value + " of " + progressBar1.Maximum + " records. Please wait";
             Application.DoEvents();
         }
+
+        private void Progress_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }

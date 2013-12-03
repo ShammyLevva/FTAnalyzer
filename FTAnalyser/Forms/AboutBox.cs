@@ -100,5 +100,10 @@ namespace FTAnalyzer.Core.Displays
             }
         }
         #endregion
+
+        private void AboutBox1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }

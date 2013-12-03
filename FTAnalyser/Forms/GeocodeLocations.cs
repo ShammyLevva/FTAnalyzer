@@ -971,5 +971,10 @@ namespace FTAnalyzer.Forms
                 }
             }
         }
+
+        private void GeocodeLocations_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }

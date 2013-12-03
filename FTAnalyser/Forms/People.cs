@@ -268,5 +268,10 @@ namespace FTAnalyzer.Forms
                 factForm.Show();
             }
         }
+
+        private void People_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }

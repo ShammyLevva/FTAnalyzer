@@ -261,5 +261,10 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 dgCensus.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
         }
+
+        private void Census_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }
