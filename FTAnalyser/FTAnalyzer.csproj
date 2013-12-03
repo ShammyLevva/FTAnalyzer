@@ -334,6 +334,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\TreeViewMS.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Resource Include="Resources\Lib\SharpMap.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

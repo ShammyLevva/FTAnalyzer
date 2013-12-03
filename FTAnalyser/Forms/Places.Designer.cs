@@ -32,7 +32,7 @@ namespace FTAnalyzer.Forms
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Places));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainerFacts = new System.Windows.Forms.SplitContainer();
             this.splitContainerMap = new System.Windows.Forms.SplitContainer();
             this.tvPlaces = new System.Windows.Forms.TreeView();
@@ -121,8 +121,10 @@ namespace FTAnalyzer.Forms
             // 
             // tvPlaces
             // 
+            this.tvPlaces.CheckBoxes = true;
             this.tvPlaces.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvPlaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tvPlaces.HideSelection = false;
             this.tvPlaces.Location = new System.Drawing.Point(0, 0);
             this.tvPlaces.Name = "tvPlaces";
             this.tvPlaces.Size = new System.Drawing.Size(200, 435);
@@ -216,14 +218,14 @@ namespace FTAnalyzer.Forms
             this.GoogleResultTypes,
             this.Comment,
             this.SourceList});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgFacts.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgFacts.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgFacts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgFacts.Location = new System.Drawing.Point(0, 0);
             this.dgFacts.Name = "dgFacts";
@@ -240,7 +242,7 @@ namespace FTAnalyzer.Forms
             // 
             this.FactIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.FactIcon.DataPropertyName = "Icon";
-            this.FactIcon.HeaderText = global::FTAnalyzer.Properties.Resources.FTA_0002;
+            this.FactIcon.HeaderText = "";
             this.FactIcon.MinimumWidth = 20;
             this.FactIcon.Name = "FactIcon";
             this.FactIcon.ReadOnly = true;
@@ -317,7 +319,7 @@ namespace FTAnalyzer.Forms
             // LocationIcon
             // 
             this.LocationIcon.DataPropertyName = "LocationIcon";
-            this.LocationIcon.HeaderText = global::FTAnalyzer.Properties.Resources.FTA_0002;
+            this.LocationIcon.HeaderText = "";
             this.LocationIcon.MinimumWidth = 20;
             this.LocationIcon.Name = "LocationIcon";
             this.LocationIcon.ReadOnly = true;
