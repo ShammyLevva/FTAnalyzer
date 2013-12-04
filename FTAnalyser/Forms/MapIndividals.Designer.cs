@@ -164,9 +164,9 @@
             this.dgIndividuals.AllowUserToAddRows = false;
             this.dgIndividuals.AllowUserToDeleteRows = false;
             this.dgIndividuals.AllowUserToOrderColumns = true;
-            this.dgIndividuals.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgIndividuals.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FactIcon,
@@ -235,7 +235,7 @@
             // 
             this.FactIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.FactIcon.DataPropertyName = "Icon";
-            this.FactIcon.HeaderText = global::FTAnalyzer.Properties.Resources.FTA_0002;
+            this.FactIcon.HeaderText = "";
             this.FactIcon.MinimumWidth = 20;
             this.FactIcon.Name = "FactIcon";
             this.FactIcon.ReadOnly = true;
@@ -335,6 +335,7 @@
             this.SortDistance.HeaderText = "Geometry";
             this.SortDistance.Name = "SortDistance";
             this.SortDistance.ReadOnly = true;
+            this.SortDistance.Visible = false;
             // 
             // MapIndividuals
             // 

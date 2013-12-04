@@ -331,7 +331,7 @@ namespace FTAnalyzer.Forms
             this.btnSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(23, 22);
-            this.btnSelect.Text = "toolStripButton1";
+            this.btnSelect.Text = "Location Selection ";
             this.btnSelect.ToolTipText = "Location Selection ";
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 

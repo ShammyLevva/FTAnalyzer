@@ -31,11 +31,10 @@ namespace FTAnalyzer.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Places));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainerFacts = new System.Windows.Forms.SplitContainer();
             this.splitContainerMap = new System.Windows.Forms.SplitContainer();
-            this.tvPlaces = new FTAnalyzer.Utilities.TreeViewMS();
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
             this.btnSelect = new System.Windows.Forms.ToolStripButton();
@@ -63,6 +62,7 @@ namespace FTAnalyzer.Forms
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHideScaleBar = new System.Windows.Forms.ToolStripMenuItem();
+            this.tvPlaces = new FTAnalyzer.Utilities.TreeViewMS();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFacts)).BeginInit();
             this.splitContainerFacts.Panel1.SuspendLayout();
             this.splitContainerFacts.Panel2.SuspendLayout();
@@ -119,22 +119,6 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap.TabIndex = 2;
             this.splitContainerMap.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainerMap_SplitterMoved);
             // 
-            // tvPlaces
-            // 
-            this.tvPlaces.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvPlaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tvPlaces.HideSelection = false;
-            this.tvPlaces.Location = new System.Drawing.Point(0, 0);
-            this.tvPlaces.Name = "tvPlaces";
-            this.tvPlaces.SelectedNodes = ((System.Collections.ArrayList)(resources.GetObject("tvPlaces.SelectedNodes")));
-            this.tvPlaces.Size = new System.Drawing.Size(200, 435);
-            this.tvPlaces.TabIndex = 0;
-            this.tvPlaces.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeCollapse);
-            this.tvPlaces.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeExpand);
-            this.tvPlaces.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvPlaces_AfterSelect);
-            this.tvPlaces.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvPlaces_NodeMouseDoubleClick);
-            this.tvPlaces.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvPlaces_MouseDown);
-            // 
             // mapBox1
             // 
             this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.None;
@@ -179,7 +163,7 @@ namespace FTAnalyzer.Forms
             this.btnSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(23, 22);
-            this.btnSelect.Text = "toolStripButton1";
+            this.btnSelect.Text = "Location Selection ";
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // linkLabel1
@@ -218,14 +202,14 @@ namespace FTAnalyzer.Forms
             this.GoogleResultTypes,
             this.Comment,
             this.SourceList});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgFacts.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgFacts.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgFacts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgFacts.Location = new System.Drawing.Point(0, 0);
             this.dgFacts.Name = "dgFacts";
@@ -434,6 +418,22 @@ namespace FTAnalyzer.Forms
             this.mnuHideScaleBar.Size = new System.Drawing.Size(152, 22);
             this.mnuHideScaleBar.Text = "Hide Scale Bar";
             this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
+            // 
+            // tvPlaces
+            // 
+            this.tvPlaces.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvPlaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tvPlaces.HideSelection = false;
+            this.tvPlaces.Location = new System.Drawing.Point(0, 0);
+            this.tvPlaces.Name = "tvPlaces";
+            this.tvPlaces.SelectedNodes = ((System.Collections.ArrayList)(resources.GetObject("tvPlaces.SelectedNodes")));
+            this.tvPlaces.Size = new System.Drawing.Size(200, 435);
+            this.tvPlaces.TabIndex = 0;
+            this.tvPlaces.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeCollapse);
+            this.tvPlaces.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeExpand);
+            this.tvPlaces.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvPlaces_AfterSelect);
+            this.tvPlaces.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvPlaces_NodeMouseDoubleClick);
+            this.tvPlaces.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvPlaces_MouseDown);
             // 
             // Places
             // 
