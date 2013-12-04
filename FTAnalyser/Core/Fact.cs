@@ -358,14 +358,14 @@ namespace FTAnalyzer
             if (address.Length > 0)
                 result = (result.Length > 0) ? address + ", " + result : address;
             //   ADDR <ADDRESS_LINE> {1:1} p.41
-         //+1 CONT <ADDRESS_LINE> {0:3} p.41
-         //+1 ADR1 <ADDRESS_LINE1> {0:1} p.41
-         //+1 ADR2 <ADDRESS_LINE2> {0:1} p.41
-         //+1 ADR3 <ADDRESS_LINE3> {0:1} p.41
-         //+1 CITY <ADDRESS_CITY> {0:1} p.41
-         //+1 STAE <ADDRESS_STATE> {0:1} p.42
-         //+1 POST <ADDRESS_POSTAL_CODE> {0:1} p.41
-         //+1 CTRY <ADDRESS_COUNTRY> 
+            //+1 CONT <ADDRESS_LINE> {0:3} p.41
+            //+1 ADR1 <ADDRESS_LINE1> {0:1} p.41
+            //+1 ADR2 <ADDRESS_LINE2> {0:1} p.41
+            //+1 ADR3 <ADDRESS_LINE3> {0:1} p.41
+            //+1 CITY <ADDRESS_CITY> {0:1} p.41
+            //+1 STAE <ADDRESS_STATE> {0:1} p.42
+            //+1 POST <ADDRESS_POSTAL_CODE> {0:1} p.41
+            //+1 CTRY <ADDRESS_COUNTRY> 
             Location = FactLocation.GetLocation(result);
         }
 

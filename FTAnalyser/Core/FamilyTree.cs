@@ -1976,6 +1976,7 @@ namespace FTAnalyzer
             xmlErrorbox.AppendText("    " + notsearched + " haven't been searched on Google.");
             if (notsearched > 0)
                 xmlErrorbox.AppendText(" Use the 'Run Geocoder' option (under Maps menu) to find them.\n");
+            xmlErrorbox.BringToFront(); // force the rich text box to the front
         }
 
         public void OpenGeoLocations(FactLocation location)
