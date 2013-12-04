@@ -429,8 +429,9 @@ namespace FTAnalyzer.Forms
             // 
             // mnuHideScaleBar
             // 
+            this.mnuHideScaleBar.CheckOnClick = true;
             this.mnuHideScaleBar.Name = "mnuHideScaleBar";
-            this.mnuHideScaleBar.Size = new System.Drawing.Size(149, 22);
+            this.mnuHideScaleBar.Size = new System.Drawing.Size(152, 22);
             this.mnuHideScaleBar.Text = "Hide Scale Bar";
             this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
             // 

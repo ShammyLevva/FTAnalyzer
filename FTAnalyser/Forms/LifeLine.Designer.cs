@@ -311,7 +311,7 @@ namespace FTAnalyzer.Forms
             // 
             this.FactIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.FactIcon.DataPropertyName = "Icon";
-            this.FactIcon.HeaderText = global::FTAnalyzer.Properties.Resources.FTA_0002;
+            this.FactIcon.HeaderText = "";
             this.FactIcon.MinimumWidth = 20;
             this.FactIcon.Name = "FactIcon";
             this.FactIcon.ReadOnly = true;
@@ -380,7 +380,7 @@ namespace FTAnalyzer.Forms
             // LocationIcon
             // 
             this.LocationIcon.DataPropertyName = "LocationIcon";
-            this.LocationIcon.HeaderText = global::FTAnalyzer.Properties.Resources.FTA_0002;
+            this.LocationIcon.HeaderText = "";
             this.LocationIcon.MinimumWidth = 20;
             this.LocationIcon.Name = "LocationIcon";
             this.LocationIcon.ReadOnly = true;
@@ -472,14 +472,15 @@ namespace FTAnalyzer.Forms
             // 
             this.hideLabelsToolStripMenuItem.CheckOnClick = true;
             this.hideLabelsToolStripMenuItem.Name = "hideLabelsToolStripMenuItem";
-            this.hideLabelsToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.hideLabelsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.hideLabelsToolStripMenuItem.Text = "Hide Labels";
             this.hideLabelsToolStripMenuItem.Click += new System.EventHandler(this.hideLabelsToolStripMenuItem_Click);
             // 
             // mnuHideScaleBar
             // 
+            this.mnuHideScaleBar.CheckOnClick = true;
             this.mnuHideScaleBar.Name = "mnuHideScaleBar";
-            this.mnuHideScaleBar.Size = new System.Drawing.Size(149, 22);
+            this.mnuHideScaleBar.Size = new System.Drawing.Size(152, 22);
             this.mnuHideScaleBar.Text = "Hide Scale Bar";
             this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
             // 

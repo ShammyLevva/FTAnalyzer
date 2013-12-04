@@ -29,6 +29,7 @@ namespace FTAnalyzer.Forms
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             mapZoomToolStrip.Renderer = new CustomToolStripRenderer();
             tbYears.MouseWheel += new MouseEventHandler(tbYears_MouseWheel);
+            mnuHideScaleBar.Checked = Properties.MappingSettings.Default.HideScaleBar;
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[4].ToolTipText = "Draw rectangle by dragging mouse to specify zoom area";
             for (int i = 7; i <= 10; i++)
