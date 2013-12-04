@@ -18,6 +18,7 @@ namespace FTAnalyzer.UserControls
 			//if this happens, then the users settings will be cleared.
             txtMapPath.Text = Properties.MappingSettings.Default.CustomMapPath;
             ckbUseParishBoundaries.Checked = Properties.MappingSettings.Default.UseEnglishParishBoundaries;
+            ckbHideScaleBar.Checked = Properties.MappingSettings.Default.HideScaleBar;
 		}
 
 		#region IOptions Members
@@ -26,6 +27,7 @@ namespace FTAnalyzer.UserControls
 		{
             Properties.MappingSettings.Default.CustomMapPath = txtMapPath.Text;
             Properties.MappingSettings.Default.UseEnglishParishBoundaries = ckbUseParishBoundaries.Checked;
+            Properties.MappingSettings.Default.HideScaleBar = ckbHideScaleBar.Checked;
             Properties.MappingSettings.Default.Save();
 		}
 

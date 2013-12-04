@@ -255,6 +255,7 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("\nThe current mapping options are set :");
                 xmlErrorbox.AppendText("\n    Custom Maps Location: " + Properties.MappingSettings.Default.CustomMapPath);
                 xmlErrorbox.AppendText("\n    Display English & Welsh Parish Boundaries: " + Properties.MappingSettings.Default.UseEnglishParishBoundaries);
+                xmlErrorbox.AppendText("\n    Hide Scale Bar: " + Properties.MappingSettings.Default.HideScaleBar);
                 xmlErrorbox.AppendText("\n\n");
             }
         }

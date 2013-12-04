@@ -14,6 +14,7 @@ namespace FTAnalyzer.Forms
     public partial class Places : Form
     {
         private FamilyTree ft = FamilyTree.Instance;
+        private MapHelper mh = MapHelper.Instance;
         private Color backgroundColour;
         private ClusterLayer clusters;
         private bool isloading;
@@ -33,6 +34,7 @@ namespace FTAnalyzer.Forms
                 mapZoomToolStrip.Items[i].Visible = false;
             backgroundColour = mapZoomToolStrip.Items[0].BackColor;
             mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(mapBox1_MapViewOnChange);
+            mnuHideScaleBar.Checked = Properties.MappingSettings.Default.HideScaleBar;
             SetupMap();
             tvPlaces.Nodes.Clear();
             dgFacts.AutoGenerateColumns = false;
@@ -61,27 +63,13 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.QueryGrowFactor = 30;
             mapBox1.Map.ZoomToExtents();
-            AddScaleBar();
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
+            mh.SetScaleBar(mapBox1);
         }
-
-        private void AddScaleBar()
-        {
-            ScaleBar scalebar = new ScaleBar();
-            scalebar.BackgroundColor = Color.White;
-            scalebar.RoundedEdges = true;
-            mapBox1.Map.Decorations.Add(scalebar);
-            mapBox1.Refresh();
-        }
-
-        private void RemoveScaleBar()
-        {
-            mapBox1.Map.Decorations.RemoveAt(0);
-            mapBox1.Refresh();
-        }
-
+        
         private void BuildMap()
         {
+            if (isloading) return;
             this.Cursor = Cursors.WaitCursor;
             clusters.Clear();
             dgFacts.DataSource = null;
@@ -287,10 +275,7 @@ namespace FTAnalyzer.Forms
 
         private void mnuHideScaleBar_Click(object sender, EventArgs e)
         {
-            if (mnuHideScaleBar.Checked)
-                RemoveScaleBar();
-            else
-                AddScaleBar();
+            mh.mnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);    
         }
 
         private void btnSelect_Click(object sender, EventArgs e)
