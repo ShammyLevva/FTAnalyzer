@@ -13,7 +13,8 @@ namespace FTAnalyzer.Forms
 {
     public partial class TimeLine : Form
     {
-        private FamilyTree ft;
+        private FamilyTree ft = FamilyTree.Instance;
+        private MapHelper mh = MapHelper.Instance;
         private int minGeoCodedYear;
         private int maxGeoCodedYear;
         private int geocodedRange;
@@ -34,38 +35,9 @@ namespace FTAnalyzer.Forms
                 mapZoomToolStrip.Items[i].Visible = false;
             backgroundColour = mapZoomToolStrip.Items[0].BackColor;
             mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(mapBox1_MapViewOnChange);
-            ft = FamilyTree.Instance;
             cbLimitFactDates.Text = "No Limit";
-            CheckIfGeocodingNeeded();
-            mapBox1.Refresh();
         }
 
-        private void CheckIfGeocodingNeeded()
-        {
-            int notsearched = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)) - 1);
-            if (notsearched > 0 && !ft.Geocoding)
-            {
-                DialogResult res = MessageBox.Show("You have " + notsearched + " places with no map location do you want to search Google for the locations?",
-                                                   "Geocode Locations", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (res == DialogResult.Yes)
-                    StartGeocoding();
-            }
-        }
-
-        private void StartGeocoding()
-        {
-            if (!ft.Geocoding) // don't geocode if another geocode session in progress
-            {
-                this.Cursor = Cursors.WaitCursor;
-                GeocodeLocations geo = new GeocodeLocations();
-                MainForm.DisposeDuplicateForms(geo);
-                geo.Show();
-                geo.StartGeoCoding(false);
-                geo.BringToFront();
-                geo.Focus();
-                this.Cursor = Cursors.Default;
-            }
-        }
 
         private void SetupMap()
         {
@@ -75,23 +47,8 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.QueryGrowFactor = 30;
             mapBox1.Map.ZoomToExtents();
-            AddScaleBar();
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
-        }
-
-        private void AddScaleBar()
-        {
-            ScaleBar scalebar = new ScaleBar();
-            scalebar.BackgroundColor = Color.White;
-            scalebar.RoundedEdges = true;
-            mapBox1.Map.Decorations.Add(scalebar);
-            mapBox1.Refresh();
-        }
-
-        private void RemoveScaleBar()
-        {
-            mapBox1.Map.Decorations.RemoveAt(0);
-            mapBox1.Refresh();
+            mh.SetScaleBar(mapBox1);
         }
 
         private void SetGeoCodedYearRange()
@@ -132,7 +89,9 @@ namespace FTAnalyzer.Forms
 
         private void geocodeLocationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StartGeocoding();
+            this.Cursor = Cursors.WaitCursor;
+            mh.StartGeocoding();
+            this.Cursor = Cursors.Default;
         }
 
         public void DisplayLocationsForYear(string year)
@@ -257,6 +216,8 @@ namespace FTAnalyzer.Forms
             SetGeoCodedYearRange();
             SetupMap();
             DisplayLocationsForYear(labValue.Text);
+            mh.CheckIfGeocodingNeeded(this);
+            mapBox1.Refresh();
         }
 
         private void mapBox1_MapQueried(FeatureDataTable data)
@@ -457,10 +418,7 @@ namespace FTAnalyzer.Forms
 
         private void mnuHideScaleBar_Click(object sender, EventArgs e)
         {
-            if (mnuHideScaleBar.Checked)
-                RemoveScaleBar();
-            else
-                AddScaleBar();
+            mh.mnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

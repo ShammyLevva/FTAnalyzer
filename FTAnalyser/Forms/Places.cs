@@ -174,6 +174,7 @@ namespace FTAnalyzer.Forms
             {   // update map using first node as selected node
                 tvPlaces.SelectedNode = tvPlaces.Nodes[0];
             }
+            mh.CheckIfGeocodingNeeded(this);
             this.Cursor = Cursors.Default;
         }
 

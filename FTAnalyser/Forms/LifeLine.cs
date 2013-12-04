@@ -21,6 +21,7 @@ namespace FTAnalyzer.Forms
     public partial class LifeLine : Form
     {
         private FamilyTree ft = FamilyTree.Instance;
+        private MapHelper mh = MapHelper.Instance;
         private Color backgroundColour;
         private FeatureDataTable lifelines;
         private VectorLayer linesLayer;
@@ -111,23 +112,8 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.QueryGrowFactor = 30;
             mapBox1.Map.ZoomToExtents();
-            AddScaleBar();
+            mh.SetScaleBar(mapBox1);
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
-        }
-
-        private void AddScaleBar()
-        {
-            ScaleBar scalebar = new ScaleBar();
-            scalebar.BackgroundColor = Color.White;
-            scalebar.RoundedEdges = true;
-            mapBox1.Map.Decorations.Add(scalebar);
-            mapBox1.Refresh();
-        }
-
-        private void RemoveScaleBar()
-        {
-            mapBox1.Map.Decorations.RemoveAt(0);
-            mapBox1.Refresh();
         }
 
         private void dgIndividuals_SelectionChanged(object sender, EventArgs e)
@@ -272,6 +258,7 @@ namespace FTAnalyzer.Forms
             {   // update map using first row as selected row
                 BuildMap();
             }
+            mh.CheckIfGeocodingNeeded(this);
         }
 
         private void hideLabelsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -285,10 +272,7 @@ namespace FTAnalyzer.Forms
 
         private void mnuHideScaleBar_Click(object sender, EventArgs e)
         {
-            if (mnuHideScaleBar.Checked)
-                RemoveScaleBar();
-            else
-                AddScaleBar();
+            mh.mnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
         }
 
         private void splitContainerFacts_SplitterMoved(object sender, SplitterEventArgs e)
