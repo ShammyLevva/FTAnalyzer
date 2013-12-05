@@ -32,8 +32,8 @@ namespace FTAnalyzer
 
         private int sortBirthdate(Individual i1, Individual i2)
         {
-            Fact b1 = i1.GetPreferredFact(Fact.BIRTH);
-            Fact b2 = i2.GetPreferredFact(Fact.BIRTH);
+            Fact b1 = i1.BirthFact;
+            Fact b2 = i2.BirthFact;
             FactDate d1 = (b1 == null) ? FactDate.UNKNOWN_DATE : b1.FactDate;
             FactDate d2 = (b2 == null) ? FactDate.UNKNOWN_DATE : b2.FactDate;
             return d1.CompareTo(d2);

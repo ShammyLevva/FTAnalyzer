@@ -12,7 +12,7 @@ namespace FTAnalyzer
         // define relation type from direct ancestor to related by marriage and 
         // MARRIAGEDB ie: married to a direct or blood relation
         public const int UNKNOWN = 1, DIRECT = 2, BLOOD = 4, MARRIEDTODB = 8, MARRIAGE = 16, UNSET = 32;
-        
+
         public string IndividualID { get; private set; }
         //private string gedcomID;
         private string forenames;
@@ -171,11 +171,7 @@ namespace FTAnalyzer
 
         public bool IsBloodDirect
         {
-            get
-            {
-                return relationType == BLOOD ||
-                  relationType == DIRECT || relationType == MARRIEDTODB;
-            }
+            get { return relationType == BLOOD || relationType == DIRECT || relationType == MARRIEDTODB; }
         }
 
         public string Relation
@@ -221,7 +217,7 @@ namespace FTAnalyzer
             {
                 List<IDisplayFact> allGeocodedFacts = new List<IDisplayFact>();
                 foreach (Fact f in AllFacts)
-                    if(f.Location.IsGeoCoded(false))
+                    if (f.Location.IsGeoCoded(false))
                         allGeocodedFacts.Add(new DisplayFact(this, f));
                 allGeocodedFacts.Sort();
                 return allGeocodedFacts;
@@ -330,58 +326,60 @@ namespace FTAnalyzer
             set { this.marriedName = value; }
         }
 
-        public FactDate BirthDate
+        public Fact BirthFact
         {
             get
             {
-                FactDate f = GetPreferredFactDate(Fact.BIRTH);
+                Fact f = GetPreferredFact(Fact.BIRTH);
                 if (Properties.GeneralSettings.Default.UseBaptismDates)
                 {
-                    if (f.IsKnown)
+                    if (f != null)
                         return f;
-                    f = GetPreferredFactDate(Fact.BAPTISM);
-                    if (f.IsKnown)
+                    f = GetPreferredFact(Fact.BAPTISM);
+                    if (f != null)
                         return f;
-                    f = GetPreferredFactDate(Fact.CHRISTENING);
+                    f = GetPreferredFact(Fact.CHRISTENING);
                 }
                 return f;
             }
         }
 
+        public FactDate BirthDate
+        {
+            get { return BirthFact == null ? FactDate.UNKNOWN_DATE : BirthFact.FactDate; }
+        }
+
         public FactLocation BirthLocation
+        {
+            get { return (BirthFact == null) ? null : BirthFact.Location; }
+        }
+
+        public Fact DeathFact
         {
             get
             {
-                Fact f = GetPreferredFact(Fact.BIRTH);
-                return (f == null) ? null : f.Location;
+                Fact f = GetPreferredFact(Fact.DEATH);
+                if (Properties.GeneralSettings.Default.UseBurialDates)
+                {
+                    if (f != null)
+                        return f;
+                    f = GetPreferredFact(Fact.BURIAL);
+                    if (f != null)
+                        return f;
+                    f = GetPreferredFact(Fact.CREMATION);
+                }
+                return f;
             }
         }
 
         public FactDate DeathDate
         {
-            get
-            {
-                FactDate f = GetPreferredFactDate(Fact.DEATH);
-                if (Properties.GeneralSettings.Default.UseBurialDates)
-                {
-                    if (f.IsKnown)
-                        return f;
-                    f = GetPreferredFactDate(Fact.BURIAL);
-                    if (f.IsKnown)
-                        return f;
-                    f = GetPreferredFactDate(Fact.CREMATION);
-                }
-                return f;
-            }
+            get { return DeathFact == null ? FactDate.UNKNOWN_DATE : DeathFact.FactDate; }
         }
 
         public FactLocation DeathLocation
         {
-            get
-            {
-                Fact f = GetPreferredFact(Fact.DEATH);
-                return (f == null) ? null : f.Location;
-            }
+            get { return DeathFact == null ? null : DeathFact.Location; }
         }
 
         public FactDate BurialDate
@@ -404,18 +402,12 @@ namespace FTAnalyzer
 
         private int MaxAgeAtDeath
         {
-            get
-            {
-                return GetAge(DeathDate).MaxAge;
-            }
+            get { return GetAge(DeathDate).MaxAge; }
         }
 
         public Age LifeSpan
         {
-            get
-            {
-                return GetAge(DateTime.Now);
-            }
+            get { return GetAge(DateTime.Now); }
         }
 
         public string LooseBirth
@@ -467,7 +459,7 @@ namespace FTAnalyzer
             }
             return false;
         }
-        
+
         public int FactCount(string factType)
         {
             return facts.Count(f => f.FactType == factType && f.FactErrorLevel == Fact.FactError.GOOD);
@@ -817,10 +809,8 @@ namespace FTAnalyzer
                 res = this.forenames.CompareTo(that.forenames);
                 if (res == 0)
                 {
-                    Fact b1 = this.GetPreferredFact(Fact.BIRTH);
-                    Fact b2 = that.GetPreferredFact(Fact.BIRTH);
-                    FactDate d1 = (b1 == null) ? FactDate.UNKNOWN_DATE : b1.FactDate;
-                    FactDate d2 = (b2 == null) ? FactDate.UNKNOWN_DATE : b2.FactDate;
+                    FactDate d1 = this.BirthDate;
+                    FactDate d2 = that.BirthDate;
                     res = d1.CompareTo(d2);
                 }
             }
@@ -849,9 +839,9 @@ namespace FTAnalyzer
             {
                 // we have a census in a LC year but no LC event check if country is a LC country.
                 int year = census.StartDate.Year;
-                if(year == 1841 && IsCensusDone(CensusDate.EWCENSUS1841, false))
+                if (year == 1841 && IsCensusDone(CensusDate.EWCENSUS1841, false))
                     return 2; // census entered LC not entered - yellow
-                if(year == 1911 && (IsCensusDone(CensusDate.EWCENSUS1911, false) || IsCensusDone(CensusDate.IRELANDCENSUS1911, false)))
+                if (year == 1911 && (IsCensusDone(CensusDate.EWCENSUS1911, false) || IsCensusDone(CensusDate.IRELANDCENSUS1911, false)))
                     return 2; // census entered LC not entered - yellow
                 return 3;  // census entered and LCyear but not LC country - green
             }
