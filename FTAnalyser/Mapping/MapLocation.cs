@@ -32,8 +32,10 @@ namespace FTAnalyzer.Mapping
 
         public FeatureDataRow AddFeatureDataRow(FeatureDataTable table)
         {
+            GeoResponse.CResult.CGeometry.CViewPort vp = Location.ViewPort;
             FeatureDataRow r = table.NewRow();
             r["MapLocation"] = this;
+            r["ViewPort"] = new Envelope(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
             r["Label"] = Individual.Name + " at " + Location;
             r.Geometry = Geometry;
             table.AddRow(r);

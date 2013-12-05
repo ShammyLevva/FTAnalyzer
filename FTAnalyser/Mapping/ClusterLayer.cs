@@ -50,6 +50,7 @@ namespace FTAnalyzer.Mapping
         {
             FactLocations = new FeatureDataTable();
             FactLocations.Columns.Add("MapLocation", typeof(MapLocation));
+            FactLocations.Columns.Add("ViewPort", typeof(Envelope));
             FactLocations.Columns.Add("Label", typeof(string));
 
             clusterer = new MarkerClusterer(FactLocations);
@@ -117,5 +118,5 @@ namespace FTAnalyzer.Mapping
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-     }
+    }
 }

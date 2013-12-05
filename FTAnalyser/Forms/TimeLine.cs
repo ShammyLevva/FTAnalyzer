@@ -118,18 +118,10 @@ namespace FTAnalyzer.Forms
                 foreach (MapLocation loc in locations)
                 {
                     FeatureDataRow row = loc.AddFeatureDataRow(clusters.FactLocations);
-                    bbox.ExpandToInclude(row.Geometry.Coordinate);
                 }
                 if (!mnuKeepZoom.Checked)
                 {
-                    Envelope expand;
-                    if (bbox.Centre == null)
-                        expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
-                    else
-                    {
-                        expand = new Envelope(bbox.TopLeft(), bbox.BottomRight());
-                        expand.ExpandBy(bbox.Width * mh.SCALEBY);
-                    }
+                    Envelope expand = mh.GetExtents(clusters.FactLocations);
                     mapBox1.Map.ZoomToBox(expand);
                 }
                 RefreshClusters();

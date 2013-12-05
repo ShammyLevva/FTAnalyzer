@@ -24,8 +24,7 @@ namespace FTAnalyzer.Mapping
     {
         private static MapHelper instance;
         private FamilyTree ft = FamilyTree.Instance;
-        public readonly double SCALEBY = 0.1;
-                
+
         private MapHelper()
         {
         }
@@ -153,7 +152,7 @@ namespace FTAnalyzer.Mapping
             else
             {
                 expand = new Envelope(bbox.TopLeft(), bbox.BottomRight());
-                expand.ExpandBy(bbox.Width * SCALEBY);
+                expand.ExpandBy(bbox.Width * 0.1d);
             }
             return expand;
         }

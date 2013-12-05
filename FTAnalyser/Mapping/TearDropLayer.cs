@@ -33,6 +33,7 @@ namespace FTAnalyzer.Mapping
         {
             TearDropLocations = new FeatureDataTable();
             TearDropLocations.Columns.Add("MapLocation", typeof(MapLocation));
+            TearDropLocations.Columns.Add("ViewPort", typeof(Envelope));
             TearDropLocations.Columns.Add("Colour", typeof(string));
 
             GeometryFeatureProvider TearDropLocationGFP = new GeometryFeatureProvider(TearDropLocations);
@@ -97,8 +98,10 @@ namespace FTAnalyzer.Mapping
 
         private FeatureDataRow AddFeatureDataRow(MapLocation loc, string colour)
         {
+            GeoResponse.CResult.CGeometry.CViewPort vp = loc.Location.ViewPort;
             FeatureDataRow r = TearDropLocations.NewRow();
             r["MapLocation"] = loc;
+            r["ViewPort"] = new Envelope(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
             r["Colour"] = colour;
             r.Geometry = loc.Geometry;
             TearDropLocations.AddRow(r);
