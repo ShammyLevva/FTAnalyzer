@@ -11,7 +11,7 @@ namespace FTAnalyzer
         public Image Icon { get; private set; }
         public string Surname { get; private set; }
         public string Forenames { get; private set; }
-        private Individual Ind { get; set; }
+        public Individual Ind { get; private set; }
         public Fact Fact { get; set; }
         public Color BackColour { get; set; }
 

@@ -34,8 +34,8 @@ namespace FTAnalyzer.Forms
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LifeLine));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainerFacts = new System.Windows.Forms.SplitContainer();
             this.splitContainerMap = new System.Windows.Forms.SplitContainer();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
@@ -50,6 +50,7 @@ namespace FTAnalyzer.Forms
             this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
+            this.btnSelect = new System.Windows.Forms.ToolStripButton();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.dgFacts = new System.Windows.Forms.DataGridView();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
@@ -71,7 +72,6 @@ namespace FTAnalyzer.Forms
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideLabelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHideScaleBar = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSelect = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFacts)).BeginInit();
             this.splitContainerFacts.Panel1.SuspendLayout();
             this.splitContainerFacts.Panel2.SuspendLayout();
@@ -259,6 +259,15 @@ namespace FTAnalyzer.Forms
             this.mapZoomToolStrip.TabIndex = 1;
             this.mapZoomToolStrip.Text = "mapZoomToolStrip1";
             // 
+            // btnSelect
+            // 
+            this.btnSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSelect.Image = ((System.Drawing.Image)(resources.GetObject("btnSelect.Image")));
+            this.btnSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(23, 22);
+            this.btnSelect.Text = "Point Selection ";
+            // 
             // linkLabel1
             // 
             this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -311,6 +320,7 @@ namespace FTAnalyzer.Forms
             this.dgFacts.TabIndex = 3;
             this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFacts_CellDoubleClick);
             this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgFacts_CellToolTipTextNeeded);
+            this.dgFacts.SelectionChanged += new System.EventHandler(this.dgFacts_SelectionChanged);
             // 
             // FactIcon
             // 
@@ -488,15 +498,6 @@ namespace FTAnalyzer.Forms
             this.mnuHideScaleBar.Size = new System.Drawing.Size(149, 22);
             this.mnuHideScaleBar.Text = "Hide Scale Bar";
             this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
-            // 
-            // btnSelect
-            // 
-            this.btnSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSelect.Image = ((System.Drawing.Image)(resources.GetObject("btnSelect.Image")));
-            this.btnSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(23, 22);
-            this.btnSelect.Text = "Point Selection ";
             // 
             // LifeLine
             // 

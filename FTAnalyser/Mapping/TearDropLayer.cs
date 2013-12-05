@@ -96,6 +96,17 @@ namespace FTAnalyzer.Mapping
             }
         }
 
+        public void AddSelections(DataGridViewSelectedRowCollection rows)
+        {
+            Clear();
+            foreach (DataGridViewRow row in rows)
+            {
+                DisplayFact dispFact = row.DataBoundItem as DisplayFact;
+                MapLocation ml = new MapLocation(dispFact.Ind, dispFact.Fact, dispFact.FactDate);
+                AddFeatureDataRow(ml, LIGHT_GREEN);
+            }
+        }
+        
         private FeatureDataRow AddFeatureDataRow(MapLocation loc, string colour)
         {
             GeoResponse.CResult.CGeometry.CViewPort vp = loc.Location.ViewPort;

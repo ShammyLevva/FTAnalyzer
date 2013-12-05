@@ -115,7 +115,7 @@ namespace FTAnalyzer.Forms
             Application.DoEvents();
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
             
-            Envelope expand = mh.GetExtents(clusters.FactLocations, 0.1d);
+            Envelope expand = mh.GetExtents(clusters.FactLocations);
             mapBox1.Map.ZoomToBox(expand);
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             RefreshClusters();

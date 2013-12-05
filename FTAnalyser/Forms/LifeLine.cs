@@ -27,6 +27,7 @@ namespace FTAnalyzer.Forms
         private VectorLayer linesLayer;
         private LabelLayer labelLayer;
         private TearDropLayer points;
+        private TearDropLayer selections;
         private bool isloading;
 
         public LifeLine()
@@ -86,8 +87,8 @@ namespace FTAnalyzer.Forms
             Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
 
             VectorStyle linestyle = new VectorStyle();
-            linestyle.Line = new Pen(Color.Brown, 2f);
-            linestyle.Line.EndCap = LineCap.Triangle;
+            linestyle.Line = new Pen(Color.Green, 2f);
+            linestyle.Line.EndCap = LineCap.NoAnchor;
             linesLayer.Style = linestyle;
             mapBox1.Map.Layers.Add(linesLayer);
 
@@ -110,6 +111,7 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.Layers.Add(labelLayer);
 
             points = new TearDropLayer(mapBox1.Map);
+            selections = new TearDropLayer(mapBox1.Map);
             mh.AddEnglishParishLayer(mapBox1.Map);
             mapBox1.Map.MinimumZoom = 500;
             mapBox1.Map.MaximumZoom = 50000000;
@@ -145,8 +147,13 @@ namespace FTAnalyzer.Forms
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
             txtCount.Text = dgIndividuals.SelectedRows.Count + " Individual(s) selected, " + dgFacts.RowCount + " Geolocated fact(s) displayed";
 
-            Envelope expand = mh.GetExtents(lifelines, 0.66d);
+            Envelope expand = mh.GetExtents(lifelines);
             mapBox1.Map.ZoomToBox(expand);
+            if(mapBox1.Map.Zoom < mapBox1.Map.MaximumZoom)
+            {
+                expand.ExpandBy(mapBox1.Map.PixelSize * 40);
+                mapBox1.Map.ZoomToBox(expand);
+            }
             mapBox1.Refresh();
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             this.Cursor = Cursors.Default;
@@ -269,6 +276,17 @@ namespace FTAnalyzer.Forms
         {
             SplitContainer splitter = (SplitContainer)sender;
             Application.UserAppDataRegistry.SetValue("Lifeline Map Splitter Distance", splitter.SplitterDistance);
+        }
+
+        private void dgFacts_SelectionChanged(object sender, EventArgs e)
+        {
+            UpdateSelection();
+        }
+
+        private void UpdateSelection()
+        {
+            selections.AddSelections(dgFacts.SelectedRows);
+            mapBox1.Refresh();
         }
     }
 }
