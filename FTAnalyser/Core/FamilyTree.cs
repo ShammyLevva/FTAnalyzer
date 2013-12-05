@@ -1982,24 +1982,24 @@ namespace FTAnalyzer
 
         public void OpenGeoLocations(FactLocation location)
         {
-            GeocodeLocations loc = null;
+            GeocodeLocations geoLocations = null;
             foreach (Form f in Application.OpenForms)
             {
                 if (f.GetType() == typeof(GeocodeLocations))
                 {
                     f.BringToFront();
                     f.Focus();
-                    loc = (GeocodeLocations)f;
+                    geoLocations = (GeocodeLocations)f;
                     break;
                 }
             }
-            if (loc == null)
+            if (geoLocations == null)
             {
-                loc = new GeocodeLocations();
-                loc.Show();
+                geoLocations = new GeocodeLocations();
+                geoLocations.Show();
             }
             // we now have opened form
-            loc.SelectLocation(location.SortableLocation);
+            geoLocations.SelectLocation(location);
         }
 
         #endregion

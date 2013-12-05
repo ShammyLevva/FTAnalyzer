@@ -234,6 +234,7 @@
     <Compile Include="Mapping\MapLifeLine.cs" />
     <Compile Include="Mapping\Mapping.cs" />
     <Compile Include="Mapping\NLSRequest.cs" />
+    <Compile Include="Mapping\TearDropLayer.cs" />
     <Compile Include="Properties\MappingSettings.Designer.cs">
       <DependentUpon>MappingSettings.settings</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -351,6 +352,15 @@
     <Resource Include="Resources\Lib\SharpMap.Extensions.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Content Include="Resources\Icons\teardrop_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\teardrop_lightgreen.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\teardrop_red.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="x64\gdal_wrap.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

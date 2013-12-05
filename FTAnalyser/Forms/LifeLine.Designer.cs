@@ -21,6 +21,7 @@ namespace FTAnalyzer.Forms
             base.Dispose(disposing);
             labelLayer.Dispose();
             linesLayer.Dispose();
+            points.Dispose();
         }
 
         #region Windows Form Designer generated code
@@ -70,6 +71,7 @@ namespace FTAnalyzer.Forms
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideLabelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHideScaleBar = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSelect = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFacts)).BeginInit();
             this.splitContainerFacts.Panel1.SuspendLayout();
             this.splitContainerFacts.Panel2.SuspendLayout();
@@ -80,6 +82,7 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.ctxmnuSelectOthers.SuspendLayout();
+            this.mapZoomToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -247,6 +250,8 @@ namespace FTAnalyzer.Forms
             // mapZoomToolStrip
             // 
             this.mapZoomToolStrip.Enabled = false;
+            this.mapZoomToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnSelect});
             this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
             this.mapZoomToolStrip.MapControl = this.mapBox1;
             this.mapZoomToolStrip.Name = "mapZoomToolStrip";
@@ -472,7 +477,7 @@ namespace FTAnalyzer.Forms
             // 
             this.hideLabelsToolStripMenuItem.CheckOnClick = true;
             this.hideLabelsToolStripMenuItem.Name = "hideLabelsToolStripMenuItem";
-            this.hideLabelsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hideLabelsToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.hideLabelsToolStripMenuItem.Text = "Hide Labels";
             this.hideLabelsToolStripMenuItem.Click += new System.EventHandler(this.hideLabelsToolStripMenuItem_Click);
             // 
@@ -480,9 +485,18 @@ namespace FTAnalyzer.Forms
             // 
             this.mnuHideScaleBar.CheckOnClick = true;
             this.mnuHideScaleBar.Name = "mnuHideScaleBar";
-            this.mnuHideScaleBar.Size = new System.Drawing.Size(152, 22);
+            this.mnuHideScaleBar.Size = new System.Drawing.Size(149, 22);
             this.mnuHideScaleBar.Text = "Hide Scale Bar";
             this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
+            // 
+            // btnSelect
+            // 
+            this.btnSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSelect.Image = ((System.Drawing.Image)(resources.GetObject("btnSelect.Image")));
+            this.btnSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(23, 22);
+            this.btnSelect.Text = "Point Selection ";
             // 
             // LifeLine
             // 
@@ -509,6 +523,8 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
             this.ctxmnuSelectOthers.ResumeLayout(false);
+            this.mapZoomToolStrip.ResumeLayout(false);
+            this.mapZoomToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
@@ -557,5 +573,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hideLabelsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuHideScaleBar;
+        private System.Windows.Forms.ToolStripButton btnSelect;
     }
 }

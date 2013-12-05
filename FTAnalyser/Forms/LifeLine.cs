@@ -26,6 +26,7 @@ namespace FTAnalyzer.Forms
         private FeatureDataTable lifelines;
         private VectorLayer linesLayer;
         private LabelLayer labelLayer;
+        private TearDropLayer points;
         private bool isloading;
 
         public LifeLine()
@@ -68,6 +69,9 @@ namespace FTAnalyzer.Forms
 
         private void SetupMap()
         {
+            //  http://thydzik.com/thydzikGoogleMap/markerlink.php?text=1&color=5680FC - sets up colour teardrops
+            points = new TearDropLayer(mapBox1.Map);
+            
             lifelines = new FeatureDataTable();
             lifelines.Columns.Add("MapLifeLine", typeof(MapLifeLine));
             lifelines.Columns.Add("StartPoint", typeof(bool));
@@ -127,6 +131,7 @@ namespace FTAnalyzer.Forms
         {
             this.Cursor = Cursors.WaitCursor;
             lifelines.Clear();
+            //points.Clear();
             List<IDisplayFact> displayFacts = new List<IDisplayFact>();
             foreach (DataGridViewRow row in dgIndividuals.SelectedRows)
             {
@@ -135,7 +140,8 @@ namespace FTAnalyzer.Forms
                 {
                     displayFacts.AddRange(ind.AllGeocodedFacts);
                     MapLifeLine line = new MapLifeLine(ind);
-                    FeatureDataRow fdr = line.AddFeatureDataRow(lifelines);
+                    line.AddFeatureDataRow(lifelines);
+                    //points.AddFeatureDataRows(ind);
                 }
             }
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);

@@ -915,15 +915,14 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        public void SelectLocation(string location)
+        public void SelectLocation(FactLocation location)
         {
-            FactLocation loc = FactLocation.GetLocation(location);
-            DataGridViewRow row = dgLocations.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["GeocodedLocation"].Value.ToString().Equals(location)).FirstOrDefault();
+            DataGridViewRow row = dgLocations.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["GeocodedLocation"].Value.ToString().Equals(location.SortableLocation)).FirstOrDefault();
             if (row == null)
             {
-                dgLocations.DataSource = ApplyFilters(loc);  // forces location to appear in list
-                dgLocations.Refresh(); 
-                row = dgLocations.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["GeocodedLocation"].Value.ToString().Equals(location)).FirstOrDefault();
+                dgLocations.DataSource = ApplyFilters(location);  // forces location to appear in list
+                dgLocations.Refresh();
+                row = dgLocations.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["GeocodedLocation"].Value.ToString().Equals(location.SortableLocation)).FirstOrDefault();
             }
             if(row != null)
             {

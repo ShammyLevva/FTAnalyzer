@@ -11,7 +11,7 @@ namespace FTAnalyzer.Mapping
         public Individual Individual { get; private set; }
         public Fact Fact { get; private set; }
         public FactLocation Location { get; private set; }
-        private Geometry Geometry { get; set; }
+        public Geometry Geometry { get; private set; }
         private FactDate year;
         public string GoogleLocation { get; private set; }
 

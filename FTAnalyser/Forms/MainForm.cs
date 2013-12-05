@@ -231,14 +231,9 @@ namespace FTAnalyzer
         private void HourGlass(bool on)
         {
             if (on)
-            {
                 this.Cursor = Cursors.WaitCursor;
-            }
             else
-            {
                 this.Cursor = Cursors.Default;
-            }
-            Application.DoEvents();
         }
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
