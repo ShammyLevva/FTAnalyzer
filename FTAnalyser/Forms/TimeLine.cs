@@ -121,7 +121,7 @@ namespace FTAnalyzer.Forms
                 }
                 if (!mnuKeepZoom.Checked)
                 {
-                    Envelope expand = mh.GetExtents(clusters.FactLocations);
+                    Envelope expand = mh.GetExtents(clusters.FactLocations, 0.2d);
                     mapBox1.Map.ZoomToBox(expand);
                 }
                 RefreshClusters();

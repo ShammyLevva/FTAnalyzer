@@ -86,10 +86,8 @@ namespace FTAnalyzer.Forms
             Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
 
             VectorStyle linestyle = new VectorStyle();
-            linestyle.Line = new Pen(Color.Red, 2f);
+            linestyle.Line = new Pen(Color.Brown, 2f);
             linestyle.Line.EndCap = LineCap.Triangle;
-            linestyle.PointColor = new SolidBrush(Color.Green);
-            linestyle.PointSize = 10; // for single fact individuals, start & end points
             linesLayer.Style = linestyle;
             mapBox1.Map.Layers.Add(linesLayer);
 
@@ -147,7 +145,7 @@ namespace FTAnalyzer.Forms
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
             txtCount.Text = dgIndividuals.SelectedRows.Count + " Individual(s) selected, " + dgFacts.RowCount + " Geolocated fact(s) displayed";
 
-            Envelope expand = mh.GetExtents(lifelines);
+            Envelope expand = mh.GetExtents(lifelines, 0.66d);
             mapBox1.Map.ZoomToBox(expand);
             mapBox1.Refresh();
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;

@@ -134,7 +134,7 @@ namespace FTAnalyzer.Mapping
             }
         }
 
-        public Envelope GetExtents(FeatureDataTable table)
+        public Envelope GetExtents(FeatureDataTable table, double scaleFactor)
         {
             Envelope bbox = new Envelope();
             foreach (FeatureDataRow row in table)
@@ -152,7 +152,7 @@ namespace FTAnalyzer.Mapping
             else
             {
                 expand = new Envelope(bbox.TopLeft(), bbox.BottomRight());
-                expand.ExpandBy(bbox.Width * 0.1d);
+                expand.ExpandBy(bbox.Width * scaleFactor);
             }
             return expand;
         }

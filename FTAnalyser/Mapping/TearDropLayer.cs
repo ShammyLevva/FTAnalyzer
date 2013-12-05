@@ -44,31 +44,31 @@ namespace FTAnalyzer.Mapping
             Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
             VectorStyle birth = new VectorStyle();
             birth.PointColor = new SolidBrush(Color.Red);
-            birth.PointSize = 20;
+            birth.PointSize = 10;
             birth.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\", RED));
             birth.SymbolOffset = new PointF(0.0f, -17.0f);
             styles.Add(RED, birth);
 
             VectorStyle death = new VectorStyle();
             death.PointColor = new SolidBrush(Color.Black);
-            death.PointSize = 20;
+            death.PointSize = 10;
             death.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\", BLACK));
             death.SymbolOffset = new PointF(0.0f, -17.0f);
             styles.Add(BLACK, death);
 
             VectorStyle selected = new VectorStyle();
             selected.PointColor = new SolidBrush(Color.LightGreen);
-            selected.PointSize = 20;
+            selected.PointSize = 10;
             selected.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\", LIGHT_GREEN));
             selected.SymbolOffset = new PointF(0.0f, -17.0f);
             styles.Add(LIGHT_GREEN, selected);
 
             VectorStyle point = new VectorStyle();
             point.PointColor = new SolidBrush(Color.DarkGray);
-            point.PointSize = 20;
+            point.PointSize = 8;
             styles.Add(GREY, point);
 
-            tearDropsLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<string>("Teardrop Theme", styles, point);
+            tearDropsLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<string>("Colour", styles, point);
             map.VariableLayers.Add(tearDropsLayer);
         }
 
