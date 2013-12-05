@@ -22,6 +22,7 @@ namespace FTAnalyzer.Forms
             labelLayer.Dispose();
             linesLayer.Dispose();
             points.Dispose();
+            selections.Dispose();
         }
 
         #region Windows Form Designer generated code
@@ -267,6 +268,7 @@ namespace FTAnalyzer.Forms
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(23, 22);
             this.btnSelect.Text = "Point Selection ";
+            this.btnSelect.Visible = false;
             // 
             // linkLabel1
             // 
