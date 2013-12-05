@@ -101,7 +101,7 @@ namespace FTAnalyzer.Forms
                         {
                             displayFacts.Add(dispfact);
                             MapLocation loc = new MapLocation(ind, dispfact.Fact, dispfact.FactDate);
-                            FeatureDataRow fdr = loc.AddFeatureDataRow(clusters.FactLocations);
+                            loc.AddFeatureDataRow(clusters.FactLocations);
                             break;
                         }
                     }
@@ -114,19 +114,8 @@ namespace FTAnalyzer.Forms
             txtCount.Text = "Downloading map tiles and computing clusters for " + displayFacts.Count + " facts. Please wait";
             Application.DoEvents();
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
-            Envelope bbox = new Envelope();
-            foreach (FeatureDataRow row in clusters.FactLocations)
-                foreach (Coordinate c in row.Geometry.Coordinates)
-                    if (c != null)
-                        bbox.ExpandToInclude(c);
-            Envelope expand;
-            if (bbox.Centre == null)
-                expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
-            else
-            {
-                expand = new Envelope(bbox.TopLeft(), bbox.BottomRight());
-                expand.ExpandBy(bbox.Width * FamilyTree.SCALEBY);
-            }
+            
+            Envelope expand = mh.GetExtents(clusters.FactLocations);
             mapBox1.Map.ZoomToBox(expand);
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             RefreshClusters();

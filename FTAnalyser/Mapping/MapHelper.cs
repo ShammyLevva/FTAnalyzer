@@ -1,5 +1,7 @@
 ﻿using FTAnalyzer.Forms;
+using GeoAPI.Geometries;
 using SharpMap;
+using SharpMap.Data;
 using SharpMap.Data.Providers;
 using SharpMap.Forms;
 using SharpMap.Layers;
@@ -22,7 +24,8 @@ namespace FTAnalyzer.Mapping
     {
         private static MapHelper instance;
         private FamilyTree ft = FamilyTree.Instance;
-        
+        public readonly double SCALEBY = 0.1;
+                
         private MapHelper()
         {
         }
@@ -132,5 +135,27 @@ namespace FTAnalyzer.Mapping
             }
         }
 
+        public Envelope GetExtents(FeatureDataTable table)
+        {
+            Envelope bbox = new Envelope();
+            foreach (FeatureDataRow row in table)
+            {
+                foreach (Coordinate c in row.Geometry.Coordinates)
+                {
+                    if (c != null)
+                        bbox.ExpandToInclude(c);
+                }
+                bbox.ExpandToInclude((Envelope)row["ViewPort"]);
+            }
+            Envelope expand;
+            if (bbox.Centre == null)
+                expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
+            else
+            {
+                expand = new Envelope(bbox.TopLeft(), bbox.BottomRight());
+                expand.ExpandBy(bbox.Width * SCALEBY);
+            }
+            return expand;
+        }
     }
 }

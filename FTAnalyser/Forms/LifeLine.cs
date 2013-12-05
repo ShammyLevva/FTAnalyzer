@@ -131,7 +131,7 @@ namespace FTAnalyzer.Forms
         {
             this.Cursor = Cursors.WaitCursor;
             lifelines.Clear();
-            //points.Clear();
+            points.Clear();
             List<IDisplayFact> displayFacts = new List<IDisplayFact>();
             foreach (DataGridViewRow row in dgIndividuals.SelectedRows)
             {
@@ -147,32 +147,11 @@ namespace FTAnalyzer.Forms
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
             txtCount.Text = dgIndividuals.SelectedRows.Count + " Individual(s) selected, " + dgFacts.RowCount + " Geolocated fact(s) displayed";
 
-            Envelope bbox = new Envelope();
-            foreach (FeatureDataRow row in lifelines)
-            {
-                foreach (Coordinate c in row.Geometry.Coordinates)
-                {
-                    if (c != null)
-                        bbox.ExpandToInclude(c);
-                }
-                bbox.ExpandToInclude((Envelope)row["ViewPort"]);
-            }
-            Envelope expand;
-            if (bbox.Centre == null)
-                expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
-            else
-            {
-                expand = new Envelope(bbox.TopLeft(), bbox.BottomRight());
-                expand.ExpandBy(bbox.Width * FamilyTree.SCALEBY);
-            }
+            Envelope expand = mh.GetExtents(lifelines);
             mapBox1.Map.ZoomToBox(expand);
-            if (mapBox1.Map.Zoom < mapBox1.Map.MinimumZoom)
-                mapBox1.Map.Zoom = mapBox1.Map.MinimumZoom;
-            if (mapBox1.Map.Zoom > mapBox1.Map.MaximumZoom)
-                mapBox1.Map.Zoom = mapBox1.Map.MaximumZoom;
             mapBox1.Refresh();
-            this.Cursor = Cursors.Default;
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
+            this.Cursor = Cursors.Default;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
