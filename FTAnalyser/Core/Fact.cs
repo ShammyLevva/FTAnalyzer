@@ -305,7 +305,7 @@ namespace FTAnalyzer
                     if (FactType == DEATH)
                     {
                         Comment = FamilyTree.GetText(node, "CAUS");
-                        if (node.FirstChild.Value == "Y" && !FactDate.IsKnown)
+                        if (node.FirstChild != null && node.FirstChild.Value == "Y" && !FactDate.IsKnown)
                         {
                             FactDate = new FactDate(FactDate.MINDATE, DateTime.Now); // if death flag set as Y then death before today.
                         }
@@ -348,11 +348,11 @@ namespace FTAnalyzer
             if (adr1 != null)
                 result = (result.Length > 0) ? adr1.InnerText + ", " + result : adr1.InnerText;
             string address = string.Empty;
-            if (addr.FirstChild.Value != null)
+            if (addr.FirstChild != null && addr.FirstChild.Value != null)
                 address = addr.FirstChild.Value;
             foreach(XmlNode cont in node.SelectNodes("ADDR/CONT"))
             {
-                if (cont.FirstChild.Value != null)
+                if (cont.FirstChild != null && cont.FirstChild.Value != null)
                     address += " " + cont.FirstChild.Value;
             }
             if (address.Length > 0)
