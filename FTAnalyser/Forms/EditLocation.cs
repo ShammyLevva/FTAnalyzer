@@ -60,7 +60,7 @@ namespace FTAnalyzer.Forms
             pointLayer.Style.SymbolOffset = new PointF(0.0f, -17.0f);
             pointLayer.DataSource = pointGFP;
 
-            GeocodeLocations.AddEnglishParishLayer(mapBox1.Map);
+            MapHelper.Instance.AddEnglishParishLayer(mapBox1.Map);
             mapBox1.Map.VariableLayers.Add(pointLayer);
             mapBox1.Map.MinimumZoom = 500;
             mapBox1.Map.MaximumZoom = 50000000;

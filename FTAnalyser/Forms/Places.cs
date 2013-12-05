@@ -58,7 +58,7 @@ namespace FTAnalyzer.Forms
         private void SetupMap()
         {
             clusters = new ClusterLayer(mapBox1.Map);
-            GeocodeLocations.AddEnglishParishLayer(mapBox1.Map);
+            mh.AddEnglishParishLayer(mapBox1.Map);
             mapBox1.Map.MinimumZoom = 500;
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.QueryGrowFactor = 30;

@@ -70,7 +70,6 @@ namespace FTAnalyzer.Forms
         private void SetupMap()
         {
             //  http://thydzik.com/thydzikGoogleMap/markerlink.php?text=1&color=5680FC - sets up colour teardrops
-            points = new TearDropLayer(mapBox1.Map);
             
             lifelines = new FeatureDataTable();
             lifelines.Columns.Add("MapLifeLine", typeof(MapLifeLine));
@@ -112,7 +111,8 @@ namespace FTAnalyzer.Forms
             labelLayer.Style = style;
             mapBox1.Map.Layers.Add(labelLayer);
 
-            GeocodeLocations.AddEnglishParishLayer(mapBox1.Map);
+            points = new TearDropLayer(mapBox1.Map);
+            mh.AddEnglishParishLayer(mapBox1.Map);
             mapBox1.Map.MinimumZoom = 500;
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.QueryGrowFactor = 30;
@@ -141,7 +141,7 @@ namespace FTAnalyzer.Forms
                     displayFacts.AddRange(ind.AllGeocodedFacts);
                     MapLifeLine line = new MapLifeLine(ind);
                     line.AddFeatureDataRow(lifelines);
-                    //points.AddFeatureDataRows(ind);
+                    points.AddFeatureDataRows(ind);
                 }
             }
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
