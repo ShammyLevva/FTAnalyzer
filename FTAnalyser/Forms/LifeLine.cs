@@ -28,12 +28,14 @@ namespace FTAnalyzer.Forms
         private LabelLayer labelLayer;
         private TearDropLayer points;
         private TearDropLayer selections;
-        private bool isloading;
+        private bool isLoading;
+        private bool isQuerying;
 
         public LifeLine()
         {
             InitializeComponent();
-            isloading = true;
+            isLoading = true;
+            isQuerying = false;
             mnuMapStyle.Setup(linkLabel1, mapBox1);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             foreach (ToolStripItem item in mapZoomToolStrip.Items)
@@ -83,6 +85,7 @@ namespace FTAnalyzer.Forms
 
             linesLayer = new VectorLayer("LifeLines");
             linesLayer.DataSource = lifelinesGFP;
+            linesLayer.IsQueryEnabled = false;
 
             Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
 
@@ -110,8 +113,8 @@ namespace FTAnalyzer.Forms
             labelLayer.Style = style;
             mapBox1.Map.Layers.Add(labelLayer);
 
-            points = new TearDropLayer(mapBox1.Map);
-            selections = new TearDropLayer(mapBox1.Map);
+            points = new TearDropLayer(mapBox1.Map, true);
+            selections = new TearDropLayer(mapBox1.Map, false);
             mh.AddEnglishParishLayer(mapBox1.Map);
             mapBox1.Map.MinimumZoom = 500;
             mapBox1.Map.MaximumZoom = 50000000;
@@ -123,7 +126,7 @@ namespace FTAnalyzer.Forms
 
         private void dgIndividuals_SelectionChanged(object sender, EventArgs e)
         {
-            if (!isloading)
+            if (!isLoading)
                 BuildMap();
         }
 
@@ -175,10 +178,10 @@ namespace FTAnalyzer.Forms
         private void addAllFamilyMembersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Individual ind = dgIndividuals.CurrentRow.DataBoundItem as Individual;
-            isloading = true;
+            isLoading = true;
             foreach (Individual i in ft.GetFamily(ind))
                 SelectIndividual(i);
-            isloading = false;
+            isLoading = false;
             BuildMap();
         }
 
@@ -192,11 +195,11 @@ namespace FTAnalyzer.Forms
         private void SelectIndividuals(Func<Individual, List<Individual>> method)
         {
             this.Cursor = Cursors.WaitCursor;
-            isloading = true;
+            isLoading = true;
             Individual ind = dgIndividuals.CurrentRow.DataBoundItem as Individual;
             foreach (Individual i in method(ind))
                 SelectIndividual(i);
-            isloading = false;
+            isLoading = false;
             BuildMap();
             this.Cursor = Cursors.Default;
         }
@@ -244,7 +247,7 @@ namespace FTAnalyzer.Forms
 
         private void LifeLine_Load(object sender, EventArgs e)
         {
-            isloading = false; // only turn off building map if completely done initializing
+            isLoading = false; // only turn off building map if completely done initializing
             if (dgIndividuals.RowCount > 0)
             {   // update map using first row as selected row
                 BuildMap();
@@ -280,13 +283,44 @@ namespace FTAnalyzer.Forms
 
         private void dgFacts_SelectionChanged(object sender, EventArgs e)
         {
-            UpdateSelection();
+            if(!isQuerying)
+                UpdateSelection();
         }
 
         private void UpdateSelection()
         {
             selections.AddSelections(dgFacts.SelectedRows);
             mapBox1.Refresh();
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            btnSelect.Checked = true;
+            mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
+        }
+
+        private void mapBox1_ActiveToolChanged(SharpMap.Forms.MapBox.Tools tool)
+        {
+            if (mapBox1.ActiveTool != SharpMap.Forms.MapBox.Tools.QueryPoint)
+                btnSelect.Checked = false;
+        }
+
+        private void mapBox1_MapQueried(FeatureDataTable data)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            isQuerying = true;
+            //foreach (FeatureDataRow row in data)
+            //{
+            //    MapLifeLine ml = (MapLifeLine)row["MapLifeLine"];
+            //    SelectFact(ml.Fact);
+            //}
+            isQuerying = false;
+            this.Cursor = Cursors.Default;
+        }
+
+        private void SelectFact(Fact fact)
+        {
+
         }
     }
 }

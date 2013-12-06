@@ -292,8 +292,6 @@ namespace FTAnalyzer.Forms
                     locations.Add((MapLocation)feature["MapLocation"]);
                 }
             }
-            MapIndividuals ind = new MapIndividuals(locations, "none", this);
-            ind.Show();
             this.Cursor = Cursors.Default;
         }
 

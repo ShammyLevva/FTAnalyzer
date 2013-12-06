@@ -23,13 +23,13 @@ namespace FTAnalyzer.Mapping
 
         public static readonly string RED = "Teardrop_Red.png", BLACK = "Teardrop_Black.png", LIGHT_GREEN = "Teardrop_LightGreen.png", GREY = "Grey";
 
-        public TearDropLayer(Map map)
+        public TearDropLayer(Map map, bool isQueryEnabled)
         {
             this.map = map;
-            SetupMap();
+            SetupMap(isQueryEnabled);
         }
 
-        private void SetupMap()
+        private void SetupMap(bool isQueryEnabled)
         {
             TearDropLocations = new FeatureDataTable();
             TearDropLocations.Columns.Add("MapLocation", typeof(MapLocation));
@@ -69,6 +69,7 @@ namespace FTAnalyzer.Mapping
             styles.Add(GREY, point);
 
             tearDropsLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<string>("Colour", styles, point);
+            tearDropsLayer.IsQueryEnabled = isQueryEnabled;
             map.VariableLayers.Add(tearDropsLayer);
         }
 
