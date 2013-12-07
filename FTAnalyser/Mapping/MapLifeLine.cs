@@ -78,5 +78,9 @@ namespace FTAnalyzer.Mapping
             return r;
         }
 
+        public override string ToString()
+        {
+            return ind.ToString();
+        }
     }
 }

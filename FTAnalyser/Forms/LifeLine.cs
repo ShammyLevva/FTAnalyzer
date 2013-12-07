@@ -73,7 +73,7 @@ namespace FTAnalyzer.Forms
         private void SetupMap()
         {
             //  http://thydzik.com/thydzikGoogleMap/markerlink.php?text=1&color=5680FC - sets up colour teardrops
-            
+
             lifelines = new FeatureDataTable();
             lifelines.Columns.Add("MapLifeLine", typeof(MapLifeLine));
             lifelines.Columns.Add("StartPoint", typeof(bool));
@@ -85,8 +85,7 @@ namespace FTAnalyzer.Forms
 
             linesLayer = new VectorLayer("LifeLines");
             linesLayer.DataSource = lifelinesGFP;
-            linesLayer.IsQueryEnabled = false;
-
+            
             Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
 
             VectorStyle linestyle = new VectorStyle();
@@ -113,14 +112,17 @@ namespace FTAnalyzer.Forms
             labelLayer.Style = style;
             mapBox1.Map.Layers.Add(labelLayer);
 
-            points = new TearDropLayer(mapBox1.Map, true);
-            selections = new TearDropLayer(mapBox1.Map, false);
+            points = new TearDropLayer("Points");
+            mapBox1.Map.VariableLayers.Add(points);
+            selections = new TearDropLayer("Selections");
+            mapBox1.Map.VariableLayers.Add(selections);
+
             mh.AddEnglishParishLayer(mapBox1.Map);
+            mh.SetScaleBar(mapBox1);
             mapBox1.Map.MinimumZoom = 500;
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.QueryGrowFactor = 30;
             mapBox1.Map.ZoomToExtents();
-            mh.SetScaleBar(mapBox1);
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
         }
 
@@ -152,7 +154,7 @@ namespace FTAnalyzer.Forms
 
             Envelope expand = mh.GetExtents(lifelines);
             mapBox1.Map.ZoomToBox(expand);
-            if(mapBox1.Map.Zoom < mapBox1.Map.MaximumZoom)
+            if (mapBox1.Map.Zoom < mapBox1.Map.MaximumZoom)
             {
                 expand.ExpandBy(mapBox1.Map.PixelSize * 40);
                 mapBox1.Map.ZoomToBox(expand);
@@ -283,7 +285,7 @@ namespace FTAnalyzer.Forms
 
         private void dgFacts_SelectionChanged(object sender, EventArgs e)
         {
-            if(!isQuerying)
+            if (!isQuerying)
                 UpdateSelection();
         }
 
@@ -322,5 +324,33 @@ namespace FTAnalyzer.Forms
         {
 
         }
+
+        private void mapBox1_MouseMove(Coordinate worldPos, MouseEventArgs imagePos)
+        {
+            string tooltip = string.Empty;
+            Envelope infoPoint = new Envelope(worldPos.CoordinateValue);
+            infoPoint.ExpandBy(mapBox1.QueryGrowFactor);
+
+            foreach (Layer layer in mapBox1.Map.Layers)
+            {
+                if (layer.GetType() == typeof(VectorLayer))
+                {
+                    VectorLayer vl = (VectorLayer)layer;
+                    FeatureDataSet ds = new FeatureDataSet();
+                    if (!vl.DataSource.IsOpen)
+                        vl.DataSource.Open();
+                    vl.DataSource.ExecuteIntersectionQuery(infoPoint, ds);
+                    vl.DataSource.Close();
+                    foreach (FeatureDataRow row in ds.Tables[0].Rows)
+                    {
+                        MapLifeLine line = (MapLifeLine)row["MapLifeLine"];
+                        tooltip += vl.LayerName + ": " + line.ToString() + "\n";
+                    }
+                }
+            }
+            if(!tooltip.Equals(toolTip1.GetToolTip(mapBox1)))
+                toolTip1.SetToolTip(mapBox1, tooltip);
+        }
     }
 }
+

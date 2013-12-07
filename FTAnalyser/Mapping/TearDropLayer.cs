@@ -14,22 +14,14 @@ using System.Windows.Forms;
 
 namespace FTAnalyzer.Mapping
 {
-    public class TearDropLayer : IDisposable
+    public class TearDropLayer : VectorLayer, IDisposable
     {
         public FeatureDataTable TearDropLocations { get; private set; }
         public Image Icon { get; private set; }
-        private VectorLayer tearDropsLayer;
-        private Map map;
-
+        
         public static readonly string RED = "Teardrop_Red.png", BLACK = "Teardrop_Black.png", LIGHT_GREEN = "Teardrop_LightGreen.png", GREY = "Grey";
 
-        public TearDropLayer(Map map, bool isQueryEnabled)
-        {
-            this.map = map;
-            SetupMap(isQueryEnabled);
-        }
-
-        private void SetupMap(bool isQueryEnabled)
+        public TearDropLayer(string title) : base(title)
         {
             TearDropLocations = new FeatureDataTable();
             TearDropLocations.Columns.Add("MapLocation", typeof(MapLocation));
@@ -37,10 +29,8 @@ namespace FTAnalyzer.Mapping
             TearDropLocations.Columns.Add("Colour", typeof(string));
 
             GeometryFeatureProvider TearDropLocationGFP = new GeometryFeatureProvider(TearDropLocations);
+            this.DataSource = TearDropLocationGFP;
 
-            tearDropsLayer = new VectorLayer("Teardrops");
-            tearDropsLayer.DataSource = TearDropLocationGFP;
-            
             Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
             VectorStyle birth = new VectorStyle();
             birth.PointColor = new SolidBrush(Color.Red);
@@ -68,9 +58,7 @@ namespace FTAnalyzer.Mapping
             point.PointSize = 8;
             styles.Add(GREY, point);
 
-            tearDropsLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<string>("Colour", styles, point);
-            tearDropsLayer.IsQueryEnabled = isQueryEnabled;
-            map.VariableLayers.Add(tearDropsLayer);
+            this.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<string>("Colour", styles, point);
         }
 
         public void Clear()
@@ -80,7 +68,7 @@ namespace FTAnalyzer.Mapping
 
         public void AddFeatureDataRows(Individual ind)
         {
-            foreach(DisplayFact f in ind.AllGeocodedFacts)
+            foreach (DisplayFact f in ind.AllGeocodedFacts)
             {
                 MapLocation ml = new MapLocation(ind, f.Fact, f.FactDate);
                 AddFeatureDataRow(ml, GREY);
@@ -107,7 +95,7 @@ namespace FTAnalyzer.Mapping
                 AddFeatureDataRow(ml, LIGHT_GREEN);
             }
         }
-        
+
         private FeatureDataRow AddFeatureDataRow(MapLocation loc, string colour)
         {
             GeoResponse.CResult.CGeometry.CViewPort vp = loc.Location.ViewPort;
@@ -125,16 +113,7 @@ namespace FTAnalyzer.Mapping
             if (disposing)
             {
                 TearDropLocations.Dispose();
-                tearDropsLayer.Dispose();
-                map.Dispose();
             }
         }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
     }
 }
