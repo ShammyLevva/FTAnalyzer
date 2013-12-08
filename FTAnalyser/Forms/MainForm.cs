@@ -1515,7 +1515,7 @@ namespace FTAnalyzer
                 GeocodeLocations geo = null;
                 foreach (Form f in Application.OpenForms)
                 {
-                    if (f.GetType() == typeof(GeocodeLocations))
+                    if (f is GeocodeLocations)
                     {
                         geo = f as GeocodeLocations;
                         break;
