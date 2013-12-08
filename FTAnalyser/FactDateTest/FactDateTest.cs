@@ -90,6 +90,10 @@ namespace FactDateTest
             Assert.AreEqual(new DateTime(1965, 1, 1), target.StartDate);
             Assert.AreEqual(new DateTime(1966, 12, 31), target.EndDate);
 
+            target = new FactDate("ABT  1615");
+            Assert.AreEqual(new DateTime(1614, 1, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1615, 12, 31), target.EndDate);
+
             target = new FactDate("ABT NOV 1966");
             Assert.AreEqual(new DateTime(1966, 10, 1), target.StartDate);
             Assert.AreEqual(new DateTime(1966, 11, 30), target.EndDate);
