@@ -113,7 +113,7 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.Layers.Add(labelLayer);
 
             points = new TearDropLayer("Points");
-            mapBox1.Map.VariableLayers.Add(points);
+            mapBox1.Map.Layers.Add(points);
             selections = new TearDropLayer("Selections");
             mapBox1.Map.VariableLayers.Add(selections);
 
@@ -311,11 +311,11 @@ namespace FTAnalyzer.Forms
         {
             this.Cursor = Cursors.WaitCursor;
             isQuerying = true;
-            //foreach (FeatureDataRow row in data)
-            //{
-            //    MapLifeLine ml = (MapLifeLine)row["MapLifeLine"];
-            //    SelectFact(ml.Fact);
-            //}
+            foreach (FeatureDataRow row in data)
+            {
+                MapLocation ml = (MapLocation)row["MapLocation"];
+                SelectFact(ml.Fact);
+            }
             isQuerying = false;
             this.Cursor = Cursors.Default;
         }
@@ -325,31 +325,35 @@ namespace FTAnalyzer.Forms
 
         }
 
+       
+
         private void mapBox1_MouseMove(Coordinate worldPos, MouseEventArgs imagePos)
         {
             string tooltip = string.Empty;
             Envelope infoPoint = new Envelope(worldPos.CoordinateValue);
-            infoPoint.ExpandBy(mapBox1.QueryGrowFactor);
-
+            infoPoint.ExpandBy(mapBox1.Map.PixelSize * 30);
             foreach (Layer layer in mapBox1.Map.Layers)
             {
-                if (layer.GetType() == typeof(VectorLayer))
+                if (layer is TearDropLayer)
                 {
-                    VectorLayer vl = (VectorLayer)layer;
+                    TearDropLayer tdl = (TearDropLayer)layer;
                     FeatureDataSet ds = new FeatureDataSet();
-                    if (!vl.DataSource.IsOpen)
-                        vl.DataSource.Open();
-                    vl.DataSource.ExecuteIntersectionQuery(infoPoint, ds);
-                    vl.DataSource.Close();
+                    if (!tdl.DataSource.IsOpen)
+                        tdl.DataSource.Open();
+                    tdl.DataSource.ExecuteIntersectionQuery(infoPoint, ds);
+                    tdl.DataSource.Close();
                     foreach (FeatureDataRow row in ds.Tables[0].Rows)
                     {
-                        MapLifeLine line = (MapLifeLine)row["MapLifeLine"];
-                        tooltip += vl.LayerName + ": " + line.ToString() + "\n";
+                        MapLocation line = (MapLocation)row["MapLocation"];
+                        string colour = (string)row["Colour"];
+                        if(colour == TearDropLayer.GREY)
+                            tooltip += line.ToString() + "\n";
                     }
                 }
             }
-            if(!tooltip.Equals(toolTip1.GetToolTip(mapBox1)))
-                toolTip1.SetToolTip(mapBox1, tooltip);
+            Console.WriteLine("tooltip: " + tooltip);
+            if (!tooltip.Equals(mapTooltip.GetToolTip(mapBox1)))
+                mapTooltip.SetToolTip(mapBox1, tooltip);
         }
     }
 }

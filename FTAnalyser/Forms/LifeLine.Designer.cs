@@ -34,9 +34,9 @@ namespace FTAnalyzer.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LifeLine));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainerFacts = new System.Windows.Forms.SplitContainer();
             this.splitContainerMap = new System.Windows.Forms.SplitContainer();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
@@ -73,7 +73,7 @@ namespace FTAnalyzer.Forms
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideLabelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHideScaleBar = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.mapTooltip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFacts)).BeginInit();
             this.splitContainerFacts.Panel1.SuspendLayout();
             this.splitContainerFacts.Panel2.SuspendLayout();
@@ -136,8 +136,8 @@ namespace FTAnalyzer.Forms
             // 
             this.dgIndividuals.AllowUserToAddRows = false;
             this.dgIndividuals.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgIndividuals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgIndividuals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IndividualID,
@@ -240,7 +240,7 @@ namespace FTAnalyzer.Forms
             this.mapBox1.MapQueryMode = SharpMap.Forms.MapBox.MapQueryType.LayerByIndex;
             this.mapBox1.Name = "mapBox1";
             this.mapBox1.QueryGrowFactor = 5F;
-            this.mapBox1.QueryLayerIndex = 0;
+            this.mapBox1.QueryLayerIndex = 2;
             this.mapBox1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.ShowProgressUpdate = true;
@@ -307,14 +307,14 @@ namespace FTAnalyzer.Forms
             this.GoogleResultTypes,
             this.Comment,
             this.SourceList});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgFacts.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgFacts.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgFacts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgFacts.Location = new System.Drawing.Point(0, 0);
             this.dgFacts.Name = "dgFacts";
@@ -505,11 +505,11 @@ namespace FTAnalyzer.Forms
             this.mnuHideScaleBar.Text = "Hide Scale Bar";
             this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
             // 
-            // toolTip1
+            // mapTooltip
             // 
-            this.toolTip1.AutoPopDelay = 5000;
-            this.toolTip1.InitialDelay = 500;
-            this.toolTip1.ReshowDelay = 100;
+            this.mapTooltip.AutoPopDelay = 5000;
+            this.mapTooltip.InitialDelay = 500;
+            this.mapTooltip.ReshowDelay = 100;
             // 
             // LifeLine
             // 
@@ -587,6 +587,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripMenuItem hideLabelsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuHideScaleBar;
         private System.Windows.Forms.ToolStripButton btnSelect;
-        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip mapTooltip;
     }
 }

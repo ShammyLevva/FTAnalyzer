@@ -62,6 +62,11 @@ namespace FTAnalyzer.Mapping
         public int Ahnentafel { get { return Individual.Ahnentafel; } }
 
         public double SortDistance { get { return centre.Distance(Geometry); } }
+
+        public override string ToString()
+        {
+            return Individual.IndividualID + ": " + Individual.Name + ", " + Fact.ToString();
+        }
     }
 }
 
