@@ -1984,7 +1984,7 @@ namespace FTAnalyzer
             GeocodeLocations geoLocations = null;
             foreach (Form f in Application.OpenForms)
             {
-                if (f.GetType() == typeof(GeocodeLocations))
+                if (f is GeocodeLocations)
                 {
                     f.BringToFront();
                     f.Focus();
