@@ -36,7 +36,7 @@ namespace FTAnalyzer
             tsRecords.Text = this.locations.Count + " Records. " + Properties.Messages.Hints_Individual;
             MapLocation mostCommon = this.locations.MostCommon();
             string titleText = mostCommon.Location.ToString();
-            if (mapForm.GetType() == typeof(TimeLine))
+            if (mapForm is TimeLine)
                 titleText += " in " + year;
             this.Text = this.locations.Count < 2 ? titleText : "Centred near " + titleText;
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
@@ -107,9 +107,9 @@ namespace FTAnalyzer
             editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
             if (mapForm != null && mapForm.Visible)
             {
-                if (mapForm.GetType() == typeof(TimeLine))
+                if (mapForm is TimeLine)
                     ((TimeLine)mapForm).RefreshClusters();
-                else if (mapForm.GetType() == typeof(Places))
+                else if (mapForm is Places)
                     ((Places)mapForm).RefreshClusters();
             }       
             UpdateIcons(loc.Location);  
