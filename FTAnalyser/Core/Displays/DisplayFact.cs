@@ -47,5 +47,21 @@ namespace FTAnalyzer
                 return this.Ind.CompareTo(that.Ind);
             return this.FactDate.CompareTo(that.FactDate);
         }
+
+        public override bool Equals(object obj)
+        {
+            DisplayFact that = (DisplayFact)obj;
+            return this.Ind.Equals(that.Ind) && this.Fact.Equals(that.Fact);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return IndividualID + ": " + Forenames + " " + Surname + ", " + Fact.ToString();
+        }
     }
 }

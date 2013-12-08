@@ -311,21 +311,28 @@ namespace FTAnalyzer.Forms
         {
             this.Cursor = Cursors.WaitCursor;
             isQuerying = true;
+            dgFacts.ClearSelection();
             foreach (FeatureDataRow row in data)
             {
-                MapLocation ml = (MapLocation)row["MapLocation"];
-                SelectFact(ml.Fact);
+                if (row["DisplayFact"] != null && row["Colour"] == TearDropLayer.GREY)
+                {
+                    DisplayFact dispFact = (DisplayFact)row["DisplayFact"];
+                    SelectFact(dispFact);
+                }
             }
             isQuerying = false;
             this.Cursor = Cursors.Default;
         }
 
-        private void SelectFact(Fact fact)
+        private void SelectFact(DisplayFact dispFact)
         {
-
+            foreach (DataGridViewRow row in dgFacts.Rows)
+            {
+                DisplayFact rowFact = (DisplayFact)row.DataBoundItem;
+                if(rowFact.Equals(dispFact))
+                    dgFacts.Rows[row.Index].Selected = true;
+            }
         }
-
-       
 
         private void mapBox1_MouseMove(Coordinate worldPos, MouseEventArgs imagePos)
         {
@@ -351,7 +358,6 @@ namespace FTAnalyzer.Forms
                     }
                 }
             }
-            Console.WriteLine("tooltip: " + tooltip);
             if (!tooltip.Equals(mapTooltip.GetToolTip(mapBox1)))
                 mapTooltip.SetToolTip(mapBox1, tooltip);
         }

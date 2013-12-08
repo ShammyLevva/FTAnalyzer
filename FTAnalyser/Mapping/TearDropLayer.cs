@@ -25,6 +25,7 @@ namespace FTAnalyzer.Mapping
         {
             TearDropLocations = new FeatureDataTable();
             TearDropLocations.Columns.Add("MapLocation", typeof(MapLocation));
+            TearDropLocations.Columns.Add("DisplayFact", typeof(DisplayFact));
             TearDropLocations.Columns.Add("ViewPort", typeof(Envelope));
             TearDropLocations.Columns.Add("Colour", typeof(string));
 
@@ -71,17 +72,17 @@ namespace FTAnalyzer.Mapping
             foreach (DisplayFact f in ind.AllGeocodedFacts)
             {
                 MapLocation ml = new MapLocation(ind, f.Fact, f.FactDate);
-                AddFeatureDataRow(ml, GREY);
+                AddFeatureDataRow(f, ml, GREY);
             }
             if (ind.BirthFact != null)
             {
                 MapLocation birth = new MapLocation(ind, ind.BirthFact, ind.BirthDate);
-                AddFeatureDataRow(birth, RED);
+                AddFeatureDataRow(null, birth, RED);
             }
             if (ind.DeathFact != null)
             {
                 MapLocation death = new MapLocation(ind, ind.DeathFact, ind.DeathDate);
-                AddFeatureDataRow(death, BLACK);
+                AddFeatureDataRow(null, death, BLACK);
             }
         }
 
@@ -92,14 +93,15 @@ namespace FTAnalyzer.Mapping
             {
                 DisplayFact dispFact = row.DataBoundItem as DisplayFact;
                 MapLocation ml = new MapLocation(dispFact.Ind, dispFact.Fact, dispFact.FactDate);
-                AddFeatureDataRow(ml, LIGHT_GREEN);
+                AddFeatureDataRow(dispFact, ml, LIGHT_GREEN);
             }
         }
 
-        private FeatureDataRow AddFeatureDataRow(MapLocation loc, string colour)
+        private FeatureDataRow AddFeatureDataRow(DisplayFact dispfact, MapLocation loc, string colour)
         {
             GeoResponse.CResult.CGeometry.CViewPort vp = loc.Location.ViewPort;
             FeatureDataRow r = TearDropLocations.NewRow();
+            r["DisplayFact"] = dispfact;
             r["MapLocation"] = loc;
             r["ViewPort"] = new Envelope(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
             r["Colour"] = colour;
