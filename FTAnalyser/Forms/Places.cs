@@ -288,10 +288,9 @@ namespace FTAnalyzer.Forms
             {
                 IList<FeatureDataRow> features = (List<FeatureDataRow>)row["Features"];
                 foreach (FeatureDataRow feature in features)
-                {
                     locations.Add((MapLocation)feature["MapLocation"]);
-                }
             }
+
             this.Cursor = Cursors.Default;
         }
 

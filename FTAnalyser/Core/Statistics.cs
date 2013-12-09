@@ -108,5 +108,10 @@ namespace FTAnalyzer
             }
             return surnames;
         }
+
+        public void LoadGOONS()
+        {
+
+        }
     }
 }
