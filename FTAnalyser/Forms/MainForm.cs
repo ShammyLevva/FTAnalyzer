@@ -60,14 +60,15 @@ namespace FTAnalyzer
             this.Text = "Family Tree Analyzer v" + VERSION;
             // load height & width from registry - note need to use temp variables as setting them causes form
             // to resize thus setting the values for both
-            int Width = (int) Application.UserAppDataRegistry.GetValue("Mainform size - width", this.Width);
-            int Height = (int) Application.UserAppDataRegistry.GetValue("Mainform size - height", this.Height);
+            int Width = (int)Application.UserAppDataRegistry.GetValue("Mainform size - width", this.Width);
+            int Height = (int)Application.UserAppDataRegistry.GetValue("Mainform size - height", this.Height);
             int Top = (int)Application.UserAppDataRegistry.GetValue("Mainform position - top", this.Top);
             int Left = (int)Application.UserAppDataRegistry.GetValue("Mainform position - left", this.Left);
             this.Width = Width;
             this.Height = Height;
             this.Top = Top;
             this.Left = Left;
+            dgSurnames.AutoGenerateColumns = false;
         }
 
         private string PublishVersion()
@@ -305,7 +306,7 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabSurnames)
                 {
-                    SortableBindingList <SurnameStats> list = new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames());
+                    SortableBindingList<SurnameStats> list = new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames());
                     dgSurnames.DataSource = list;
                     dgSurnames.Sort(dgSurnames.Columns["Surname"], ListSortDirection.Ascending);
                     dgSurnames.Focus();
@@ -1625,7 +1626,7 @@ namespace FTAnalyzer
                     {
                         failed = true;
                     }
-                    if(failed)
+                    if (failed)
                         MessageBox.Show(restoreDatabase.FileName + " doesn't appear to be an FTAnalyzer database", "FTAnalyzer Database Restore Error");
                     HourGlass(false);
                 }
@@ -1763,6 +1764,34 @@ namespace FTAnalyzer
             Facts facts = new Facts(ft.AllIndividuals.Where(filter));
             facts.Show();
             HourGlass(false);
+        }
+
+        private void dgSurnames_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                DataGridViewCell cell = dgSurnames.Rows[e.RowIndex].Cells["URI"];
+                if (cell.Value != null)
+                {
+                    string url = cell.Value.ToString();
+                    ProcessStartInfo info = new ProcessStartInfo(url);
+                    Process.Start(info);
+                }
+            }
+        }
+
+        private void dgSurnames_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow r in dgSurnames.Rows)
+            {
+                if (r.Cells["URI"].Value != null)
+                {
+                    r.Cells["Surname"] = new DataGridViewLinkCell();
+                    DataGridViewLinkCell c = (DataGridViewLinkCell)r.Cells["Surname"];
+                    c.UseColumnTextForLinkValue = true;
+                    c.Value = r.Cells["URI"].Value;
+                }
+            }
         }
     }
 }

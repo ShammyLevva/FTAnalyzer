@@ -178,14 +178,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.pbSources = new System.Windows.Forms.ProgressBar();
             this.tabSelector = new System.Windows.Forms.TabControl();
+            this.tabSurnames = new System.Windows.Forms.TabPage();
+            this.dgSurnames = new System.Windows.Forms.DataGridView();
             this.tabFacts = new System.Windows.Forms.TabPage();
             this.btnShowFacts = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtFactsSurname = new System.Windows.Forms.TextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.tabSurnames = new System.Windows.Forms.TabPage();
-            this.dgSurnames = new System.Windows.Forms.DataGridView();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.relTypesFacts = new Controls.RelationTypes();
             this.cenDate = new Controls.CensusDateSelector();
@@ -196,6 +196,11 @@
             this.treetopsCountry = new Controls.CensusCountry();
             this.wardeadRelation = new Controls.RelationTypes();
             this.wardeadCountry = new Controls.CensusCountry();
+            this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.URI = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.Individuals = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Families = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Marriages = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -239,9 +244,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.tabDisplayProgress.SuspendLayout();
             this.tabSelector.SuspendLayout();
-            this.tabFacts.SuspendLayout();
             this.tabSurnames.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSurnames)).BeginInit();
+            this.tabFacts.SuspendLayout();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -1756,6 +1761,41 @@
             this.tabSelector.TabIndex = 9;
             this.tabSelector.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
+            // tabSurnames
+            // 
+            this.tabSurnames.Controls.Add(this.dgSurnames);
+            this.tabSurnames.Location = new System.Drawing.Point(4, 22);
+            this.tabSurnames.Name = "tabSurnames";
+            this.tabSurnames.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSurnames.Size = new System.Drawing.Size(1035, 445);
+            this.tabSurnames.TabIndex = 14;
+            this.tabSurnames.Text = "Surnames";
+            this.tabSurnames.UseVisualStyleBackColor = true;
+            // 
+            // dgSurnames
+            // 
+            this.dgSurnames.AllowUserToAddRows = false;
+            this.dgSurnames.AllowUserToDeleteRows = false;
+            this.dgSurnames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgSurnames.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Surname,
+            this.URI,
+            this.Individuals,
+            this.Families,
+            this.Marriages});
+            this.dgSurnames.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgSurnames.Location = new System.Drawing.Point(3, 3);
+            this.dgSurnames.MultiSelect = false;
+            this.dgSurnames.Name = "dgSurnames";
+            this.dgSurnames.ReadOnly = true;
+            this.dgSurnames.RowHeadersWidth = 20;
+            this.dgSurnames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgSurnames.Size = new System.Drawing.Size(1029, 439);
+            this.dgSurnames.TabIndex = 1;
+            this.dgSurnames.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSurnames_CellContentClick);
+            this.dgSurnames.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSurnames_CellDoubleClick);
+            this.dgSurnames.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgSurnames_DataBindingComplete);
+            // 
             // tabFacts
             // 
             this.tabFacts.Controls.Add(this.btnShowFacts);
@@ -1804,32 +1844,6 @@
             // 
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
-            // 
-            // tabSurnames
-            // 
-            this.tabSurnames.Controls.Add(this.dgSurnames);
-            this.tabSurnames.Location = new System.Drawing.Point(4, 22);
-            this.tabSurnames.Name = "tabSurnames";
-            this.tabSurnames.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSurnames.Size = new System.Drawing.Size(1035, 445);
-            this.tabSurnames.TabIndex = 14;
-            this.tabSurnames.Text = "Surnames";
-            this.tabSurnames.UseVisualStyleBackColor = true;
-            // 
-            // dgSurnames
-            // 
-            this.dgSurnames.AllowUserToAddRows = false;
-            this.dgSurnames.AllowUserToDeleteRows = false;
-            this.dgSurnames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgSurnames.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgSurnames.Location = new System.Drawing.Point(3, 3);
-            this.dgSurnames.MultiSelect = false;
-            this.dgSurnames.Name = "dgSurnames";
-            this.dgSurnames.ReadOnly = true;
-            this.dgSurnames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgSurnames.Size = new System.Drawing.Size(1029, 439);
-            this.dgSurnames.TabIndex = 1;
-            this.dgSurnames.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSurnames_CellDoubleClick);
             // 
             // rtbOutput
             // 
@@ -1922,6 +1936,46 @@
             this.wardeadCountry.Title = "Default Country";
             this.wardeadCountry.UKEnabled = true;
             // 
+            // Surname
+            // 
+            this.Surname.DataPropertyName = "Surname";
+            this.Surname.HeaderText = "Surname";
+            this.Surname.Name = "Surname";
+            this.Surname.ReadOnly = true;
+            // 
+            // URI
+            // 
+            this.URI.DataPropertyName = "URI";
+            this.URI.HeaderText = "Link";
+            this.URI.MinimumWidth = 100;
+            this.URI.Name = "URI";
+            this.URI.ReadOnly = true;
+            this.URI.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.URI.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.URI.Visible = false;
+            this.URI.Width = 200;
+            // 
+            // Individuals
+            // 
+            this.Individuals.DataPropertyName = "Individuals";
+            this.Individuals.HeaderText = "Individuals";
+            this.Individuals.Name = "Individuals";
+            this.Individuals.ReadOnly = true;
+            // 
+            // Families
+            // 
+            this.Families.DataPropertyName = "Families";
+            this.Families.HeaderText = "Families";
+            this.Families.Name = "Families";
+            this.Families.ReadOnly = true;
+            // 
+            // Marriages
+            // 
+            this.Marriages.DataPropertyName = "Marriages";
+            this.Marriages.HeaderText = "Marriages";
+            this.Marriages.Name = "Marriages";
+            this.Marriages.ReadOnly = true;
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1992,10 +2046,10 @@
             this.tabDisplayProgress.ResumeLayout(false);
             this.tabDisplayProgress.PerformLayout();
             this.tabSelector.ResumeLayout(false);
-            this.tabFacts.ResumeLayout(false);
-            this.tabFacts.PerformLayout();
             this.tabSurnames.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgSurnames)).EndInit();
+            this.tabFacts.ResumeLayout(false);
+            this.tabFacts.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2167,6 +2221,11 @@
         private System.Windows.Forms.ToolStripMenuItem mnuPlaces;
         private System.Windows.Forms.TabPage tabSurnames;
         private System.Windows.Forms.DataGridView dgSurnames;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Surname;
+        private System.Windows.Forms.DataGridViewLinkColumn URI;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Individuals;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Families;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Marriages;
     }
 }
 

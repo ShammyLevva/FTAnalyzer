@@ -11,6 +11,7 @@ namespace FTAnalyzer
         public int Individuals { get; set; }
         public int Families { get; set; }
         public int Marriages { get;  set; }
+        public Uri URI { get; set; }
         
         public SurnameStats(string name)
         {
@@ -18,6 +19,7 @@ namespace FTAnalyzer
             this.Individuals = 0;
             this.Families = 0; 
             this.Marriages = 0;
+            this.URI = null;
         }
     }
 }

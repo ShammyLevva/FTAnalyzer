@@ -124,7 +124,7 @@ namespace FTAnalyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Double click to show a list of individuals and families with the selected surname..
+        ///   Looks up a localized string similar to Double click to show a list of individuals and families with the selected surname. Click links for one name study..
         /// </summary>
         internal static string Hints_Surname {
             get {
