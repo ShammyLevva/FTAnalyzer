@@ -52,7 +52,7 @@ namespace FTAnalyzer
         public FactDateType DateType { get; private set; }
 
         public bool DoubleDate { get; private set; } // Is a pre 1752 date bet 1 Jan and 25 Mar eg: 1735/36.
-        private int yearfix = 0;
+        private int yearfix;
 
         public FactDate(string str, string factRef = "")
         {
@@ -103,6 +103,7 @@ namespace FTAnalyzer
             str = str.Replace("&", " AND ");
             str = str.Replace(" / ", "/");
             str = str.Replace("   ", " ");
+            str = str.Replace("  ", " ");
             str = str.Replace("  ", " ");
 
             str = str.Replace("JANUARY", "JAN");
@@ -427,6 +428,7 @@ namespace FTAnalyzer
             DateTime date;
             Group gDay, gMonth, gYear, gDouble;
             DateTime dt = MINDATE;
+            dateValue = dateValue.Trim();
             if (dateValue == string.Empty)
                 return highlow == HIGH ? MAXDATE : MINDATE;
             try
