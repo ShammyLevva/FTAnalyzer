@@ -50,6 +50,7 @@ namespace FTAnalyzer
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
         public FactDateType DateType { get; private set; }
+        private string OriginalString;
 
         public bool DoubleDate { get; private set; } // Is a pre 1752 date bet 1 Jan and 25 Mar eg: 1735/36.
         private int yearfix;
@@ -59,24 +60,19 @@ namespace FTAnalyzer
             this.DoubleDate = false;
             if (str == null)
                 str = string.Empty;
+            this.OriginalString = str;
             // remove any commas in date string
             this.yearfix = 0;
             str = FixCommonDateFormats(str);
             this.DateType = FactDateType.UNK;
             if (str == null || str.Length == 0)
-            {
                 this.DateString = "UNKNOWN";
-            }
             else
-            {
                 this.DateString = str.ToUpper();
-            }
             StartDate = MINDATE;
             EndDate = MAXDATE;
             if (!this.DateString.Equals("UNKNOWN"))
-            {
                 ProcessDate(this.DateString, factRef);
-            }
         }
 
         public FactDate(DateTime startdate, DateTime enddate)
@@ -85,6 +81,7 @@ namespace FTAnalyzer
             this.StartDate = startdate;
             this.EndDate = enddate;
             this.DateString = CalculateDateString();
+            this.OriginalString = string.Empty;
         }
 
         public static string Format(string format, DateTime date)
@@ -414,7 +411,7 @@ namespace FTAnalyzer
             }
             catch (Exception e)
             {
-                FamilyTree.Instance.XmlErrorBox.AppendText("Error parsing date '" + processDate + "' for " + factRef + "' error message was : " + e.Message + "\n");
+                FamilyTree.Instance.XmlErrorBox.AppendText("Error parsing date '" + OriginalString + "' for " + factRef + "' error message was : " + e.Message + "\n");
             }
         }
 
