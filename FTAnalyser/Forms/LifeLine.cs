@@ -312,7 +312,7 @@ namespace FTAnalyzer.Forms
             dgFacts.ClearSelection();
             foreach (FeatureDataRow row in data)
             {
-                if (row["DisplayFact"] != null && row["Colour"] == TearDropLayer.GREY)
+                if (row["DisplayFact"] != null && row["Colour"].ToString() == TearDropLayer.GREY)
                 {
                     DisplayFact dispFact = (DisplayFact)row["DisplayFact"];
                     SelectFact(dispFact);
