@@ -72,8 +72,6 @@ namespace FTAnalyzer.Forms
 
         private void SetupMap()
         {
-            //  http://thydzik.com/thydzikGoogleMap/markerlink.php?text=1&color=5680FC - sets up colour teardrops
-
             lifelines = new FeatureDataTable();
             lifelines.Columns.Add("MapLifeLine", typeof(MapLifeLine));
             lifelines.Columns.Add("StartPoint", typeof(bool));

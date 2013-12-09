@@ -12,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+//  http://thydzik.com/thydzikGoogleMap/markerlink.php?text=1&color=5680FC - sets up colour teardrops
+
 namespace FTAnalyzer.Mapping
 {
     public class TearDropLayer : VectorLayer, IDisposable
