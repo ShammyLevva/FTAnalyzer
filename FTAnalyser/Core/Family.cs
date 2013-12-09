@@ -216,7 +216,7 @@ namespace FTAnalyzer
         {
             get
             {
-                if (Husband == null || Wife == null)
+                if (Husband == null || Wife == null || !MarriageDate.IsKnown)
                     return SINGLE;
                 else
                     // very crude at the moment needs to check marriage facts 
@@ -289,6 +289,11 @@ namespace FTAnalyzer
             if (ind.Equals(Wife))
                 return Husband;
             return null;
+        }
+
+        public bool ContainsSurname(string surname)
+        {
+            return Members.Any(x => x.Surname.Equals(surname));
         }
 
         #endregion

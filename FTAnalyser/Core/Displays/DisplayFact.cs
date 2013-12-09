@@ -38,7 +38,7 @@ namespace FTAnalyzer
         public string GoogleResultType { get { return Fact.Location.GoogleResultType; } }
         public string GeocodeStatus { get { return Fact.Location.Geocoded; } }
         public Image LocationIcon { get { return FactLocationImage.ErrorIcon(Fact.Location.GeocodeStatus).Icon; } }
-        public string Relation { get { return Ind.Relation; } }
+        public string Relation { get { return Ind == null ? string.Empty : Ind.Relation; } }
 
         public int CompareTo(object obj)
         {

@@ -138,6 +138,9 @@
   <data name="Hints_Occupation" xml:space="preserve">
     <value>Double click to show a list of individuals with the selected occupation.</value>
   </data>
+  <data name="Hints_Surname" xml:space="preserve">
+    <value>Double click to show a list of individuals and families with the selected surname.</value>
+  </data>
   <data name="NotYet" xml:space="preserve">
     <value>Not Implemented Yet. Coming Soon in a future version</value>
   </data>

@@ -10,6 +10,7 @@ namespace FTAnalyzer
     {
         private static Statistics instance;
         private static FamilyTree ft;
+        private List<SurnameStats> surnames;
 
         private Statistics()
         {
@@ -85,6 +86,27 @@ namespace FTAnalyzer
             int over65unknown = minAge[1, 13, 2] + minAge[1, 14, 2] + minAge[1, 15, 2] + minAge[1, 16, 2] + minAge[1, 17, 2] + minAge[1, 18, 2] + minAge[1, 19, 2];
             output.AppendLine("over 65 : " + over65males + " Males, " + over65females + " Females " + over65unknown + " unknown.");
             return output.ToString();
+        }
+
+        public void Clear()
+        {
+            this.surnames = null;
+        }
+
+        public List<SurnameStats> Surnames()
+        {
+            if (surnames != null)
+                return surnames;
+            IEnumerable<Individual> list = ft.AllIndividuals.GroupBy(x => x.Surname).Select(group => group.First());
+            surnames = list.Select(x => new SurnameStats(x.Surname)).ToList();
+
+            foreach(SurnameStats stat in surnames)
+            {
+                stat.Individuals = ft.AllIndividuals.Where(x => x.Surname.Equals(stat.Surname)).Count();
+                stat.Families = ft.AllFamilies.Where(x => x.ContainsSurname(stat.Surname)).Count();
+                stat.Marriages = ft.AllFamilies.Where(x => x.ContainsSurname(stat.Surname) && x.MaritalStatus == Family.MARRIED).Count();
+            }
+            return surnames;
         }
     }
 }

@@ -64,6 +64,28 @@ namespace FTAnalyzer.Forms
             UpdateStatusCount();
         }
 
+        public void SetSurnameStats(SurnameStats stat)
+        {
+            this.Text = "Individuals & Families whose surame is " + stat.Surname;
+            SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
+            FamilyTree ft = FamilyTree.Instance;
+            Predicate<Individual> indSurnames = x => x.Surname.Equals(stat.Surname);
+            foreach (Individual i in ft.AllIndividuals.Where(indSurnames))
+                dsInd.Add(i);
+            dgIndividuals.DataSource = dsInd;
+            dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
+            dgIndividuals.Dock = DockStyle.Fill;
+
+            Predicate<Family> famSurnames = x => x.ContainsSurname(stat.Surname);
+            SortableBindingList<IDisplayFamily> dsFam = new SortableBindingList<IDisplayFamily>();
+            foreach (Family f in ft.AllFamilies.Where(famSurnames))
+                dsFam.Add(f);
+            dgFamilies.DataSource = dsFam;
+            dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
+            splitContainer.Panel2Collapsed = false;
+            UpdateStatusCount();
+        }
+
         public void SetupLCDuplicates(Predicate<Individual> relationFilter)
         {
             Predicate<Individual> lcFacts = i => i.DuplicateLCFacts > 0;

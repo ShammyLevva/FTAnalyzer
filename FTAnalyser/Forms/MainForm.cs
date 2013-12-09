@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.3.1.0";
+        public string VERSION = "3.3.2.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -140,6 +140,8 @@ namespace FTAnalyzer
                 dgLooseDeaths.DataSource = null;
                 dgDataErrors.DataSource = null;
                 dgOccupations.DataSource = null;
+                dgSurnames.DataSource = null;
+                Statistics.Instance.Clear();
                 tabCtrlLooseBDs.SelectedTab = tabLooseBirths; // force back to first tab
                 tabCtrlLocations.SelectedTab = tabTreeView; // otherwise totals etc look wrong
                 treeViewLocations.Nodes.Clear();
@@ -301,6 +303,15 @@ namespace FTAnalyzer
                     tsCountLabel.Text = string.Empty;
                     tsHintsLabel.Text = string.Empty;
                 }
+                else if (tabSelector.SelectedTab == tabSurnames)
+                {
+                    SortableBindingList <SurnameStats> list = new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames());
+                    dgSurnames.DataSource = list;
+                    dgSurnames.Sort(dgSurnames.Columns["Surname"], ListSortDirection.Ascending);
+                    dgSurnames.Focus();
+                    tsCountLabel.Text = Properties.Messages.Count + list.Count + " Surnames.";
+                    tsHintsLabel.Text = Properties.Messages.Hints_Surname;
+                }
                 else if (tabSelector.SelectedTab == tabCensus)
                 {
                     cenDate.RevertToDefaultDate();
@@ -403,6 +414,17 @@ namespace FTAnalyzer
                 tsHintsLabel.Text = Properties.Messages.Hints_Loose_Deaths + Properties.Messages.Hints_Individual;
             }
 
+        }
+
+        private void dgSurnames_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            HourGlass(true);
+            SurnameStats stat = (SurnameStats)dgSurnames.CurrentRow.DataBoundItem;
+            Forms.People frmInd = new Forms.People();
+            frmInd.SetSurnameStats(stat);
+            DisposeDuplicateForms(frmInd);
+            frmInd.Show();
+            HourGlass(false);
         }
 
         private void dgCountries_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
