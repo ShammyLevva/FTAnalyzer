@@ -16,7 +16,7 @@ namespace FTAnalyzer
     public class FactLocation : IComparable<FactLocation>, IDisplayLocation, IDisplayGeocodedLocation
     {
         public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, SUBREGION = 2, ADDRESS = 3, PLACE = 4;
-        public enum Geocode { NOT_SEARCHED = 0, MATCHED = 1, PARTIAL_MATCH = 2, GEDCOM_USER = 3, NO_MATCH = 4, INCORRECT = 5, OUT_OF_BOUNDS = 6, LEVEL_MISMATCH = 7 };
+        public enum Geocode { UNKNOWN = -1, NOT_SEARCHED = 0, MATCHED = 1, PARTIAL_MATCH = 2, GEDCOM_USER = 3, NO_MATCH = 4, INCORRECT = 5, OUT_OF_BOUNDS = 6, LEVEL_MISMATCH = 7 };
 
         private string fixedLocation;
         public string GEDCOMLocation { get; private set; }
@@ -163,6 +163,7 @@ namespace FTAnalyzer
         private static void SetupGeocodes()
         {
             Geocodes = new Dictionary<Geocode, string>();
+            Geocodes.Add(Geocode.UNKNOWN, "Unknown");
             Geocodes.Add(Geocode.NOT_SEARCHED, "Not Searched");
             Geocodes.Add(Geocode.GEDCOM_USER, "GEDCOM/User Data");
             Geocodes.Add(Geocode.PARTIAL_MATCH, "Partial Match (Google)");
@@ -233,7 +234,7 @@ namespace FTAnalyzer
         {
             locations = new Dictionary<string, FactLocation>();
             // set unknown location as found so it doesn't keep hassling to be searched
-            UNKNOWN_LOCATION = GetLocation(string.Empty, "0.0", "0.0", Geocode.NO_MATCH);
+            UNKNOWN_LOCATION = GetLocation(string.Empty, "0.0", "0.0", Geocode.UNKNOWN);
         }
 
         private FactLocation()
@@ -641,6 +642,11 @@ namespace FTAnalyzer
             {
                 return FactLocation.AllLocations.Count(l => l.IsGeoCoded(false));
             }
+        }
+
+        public static int LocationsCount
+        {   // discount the empty location
+            get { return FactLocation.AllLocations.Count() - 1; } 
         }
 
         public string CensusCountry

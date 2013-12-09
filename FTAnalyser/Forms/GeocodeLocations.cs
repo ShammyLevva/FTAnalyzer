@@ -68,7 +68,7 @@ namespace FTAnalyzer.Forms
             int notfound = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NO_MATCH));
             int outofbounds = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OUT_OF_BOUNDS));
             int incorrect = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.INCORRECT));
-            int total = FactLocation.AllLocations.Count();
+            int total = FactLocation.LocationsCount;
 
             txtGoogleWait.Text = string.Empty;
             statusText = "Already Geocoded: " + (gedcom + found) + ", partials: " + (partial + levelpartial + notfound + incorrect + outofbounds) + ", yet to search: " + notsearched + " of " + total + " locations.";
@@ -523,7 +523,7 @@ namespace FTAnalyzer.Forms
                 int googled = 0;
                 int geocoded = 0;
                 int skipped = 0;
-                int total = FactLocation.AllLocations.Count() - 1;
+                int total = FactLocation.LocationsCount;
                 GoogleMap.ThreadCancelled = false;
 
                 foreach (FactLocation loc in FactLocation.AllLocations)
