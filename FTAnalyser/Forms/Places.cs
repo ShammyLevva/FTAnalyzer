@@ -290,8 +290,10 @@ namespace FTAnalyzer.Forms
                 foreach (FeatureDataRow feature in features)
                     locations.Add((MapLocation)feature["MapLocation"]);
             }
-
+            MapIndividuals ind = new MapIndividuals(locations, null, this);
+            ind.Show();
             this.Cursor = Cursors.Default;
+
         }
 
         private void splitContainerFacts_SplitterMoved(object sender, SplitterEventArgs e)
