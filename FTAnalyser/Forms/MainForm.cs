@@ -30,10 +30,12 @@ namespace FTAnalyzer
         private string filename;
         private Font boldFont;
         private Font normalFont;
+        private bool loading;
 
         public MainForm()
         {
             InitializeComponent();
+            loading = true;
             displayOptionsOnLoadToolStripMenuItem.Checked = Properties.GeneralSettings.Default.ReportOptions;
             ft.XmlErrorBox = rtbOutput;
             VERSION = PublishVersion();
@@ -69,6 +71,7 @@ namespace FTAnalyzer
             this.Top = Top;
             this.Left = Left;
             dgSurnames.AutoGenerateColumns = false;
+            loading = false;
         }
 
         private string PublishVersion()
@@ -953,7 +956,17 @@ namespace FTAnalyzer
         private void MainForm_Resize(object sender, EventArgs e)
         {
             rtbOutput.Top = pbFamilies.Top + 30;
-            if (this.WindowState == FormWindowState.Normal)
+            SavePosition();
+        }
+
+        private void MainForm_Move(object sender, EventArgs e)
+        {
+            SavePosition();
+        }
+
+        private void SavePosition()
+        {
+            if (!loading && this.WindowState == FormWindowState.Normal)
             {  //only save window size if not maximised or minimised
                 Application.UserAppDataRegistry.SetValue("Mainform size - width", this.Width);
                 Application.UserAppDataRegistry.SetValue("Mainform size - height", this.Height);
