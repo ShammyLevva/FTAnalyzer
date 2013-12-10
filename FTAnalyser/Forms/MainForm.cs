@@ -1761,8 +1761,13 @@ namespace FTAnalyzer
 
         private void resetToDefaultFormSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            loading = true;
             this.Height = 561;
-            this.Width = 955;
+            this.Width = 1059;
+            this.Top = 50;
+            this.Left = 50;
+            loading = false;
+            SavePosition();
         }
 
         private void btnShowFacts_Click(object sender, EventArgs e)
