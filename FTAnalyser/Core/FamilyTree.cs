@@ -756,7 +756,7 @@ namespace FTAnalyzer
                     }
                 }
             }
-            if (childDate && indiv.IsMale && maxdate > FactDate.MINDATE)
+            if (childDate && indiv.IsMale && maxdate > FactDate.MINDATE.AddMonths(9))
             {
                 // set to 9 months before birth if indiv is a father 
                 // and we have changed maxdate from the MINDATE default
