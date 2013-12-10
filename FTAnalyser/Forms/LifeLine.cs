@@ -88,7 +88,7 @@ namespace FTAnalyzer.Forms
 
             VectorStyle linestyle = new VectorStyle();
             linestyle.Line = new Pen(Color.Green, 2f);
-            linestyle.Line.EndCap = LineCap.NoAnchor;
+            linestyle.Line.MiterLimit = 0;
             linesLayer.Style = linestyle;
             mapBox1.Map.Layers.Add(linesLayer);
 
