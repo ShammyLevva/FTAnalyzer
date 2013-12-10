@@ -14,6 +14,8 @@ namespace FTAnalyzer.Mapping
         private int Count { get; set; }
         private Envelope viewport { get; set; }
 
+        public static readonly string LINE = "Line", START = "Start", END = "End";
+
         public MapLifeLine(Individual ind)
         {
             this.ind = ind;
@@ -24,9 +26,9 @@ namespace FTAnalyzer.Mapping
             foreach (IDisplayFact f in ind.AllGeocodedFacts)
             {
                 Coordinate point = new Coordinate(f.Location.LongitudeM, f.Location.LatitudeM);
-                if(index == 1) 
+                if (index == 1)
                     StartPoint = new NetTopologySuite.Geometries.Point(point);
-                if(index == ind.AllGeocodedFacts.Count)
+                if (index == ind.AllGeocodedFacts.Count)
                     EndPoint = new NetTopologySuite.Geometries.Point(point);
                 index++;
                 if (points.Count == 0 || (points.Count > 0 && !point.Equals2D(previousPoint)))
@@ -50,8 +52,7 @@ namespace FTAnalyzer.Mapping
         {
             FeatureDataRow r = table.NewRow();
             r["MapLifeLine"] = this;
-            r["StartPoint"] = false;
-            r["EndPoint"] = false;
+            r["LineCap"] = LINE;
             r["Label"] = ind.Name;
             r["ViewPort"] = viewport;
             r.Geometry = Geometry;
@@ -59,22 +60,22 @@ namespace FTAnalyzer.Mapping
 
             r = table.NewRow();
             r["MapLifeLine"] = this;
-            r["StartPoint"] = true;
-            r["EndPoint"] = false;
+            r["LineCap"] = Count > 1 ? START : LINE;
             r["ViewPort"] = viewport;
-            if (Count < 2)
+            if(Count == 1)
                 r["Label"] = ind.Name;
             r.Geometry = StartPoint;
             table.AddRow(r);
 
-            r = table.NewRow();
-            r["MapLifeLine"] = this;
-            r["StartPoint"] = false;
-            r["EndPoint"] = true;
-            r["ViewPort"] = viewport;
-            r.Geometry = EndPoint;
-            table.AddRow(r);
-
+            if (Count > 1)
+            {
+                r = table.NewRow();
+                r["MapLifeLine"] = this;
+                r["LineCap"] = END;
+                r["ViewPort"] = viewport;
+                r.Geometry = EndPoint;
+                table.AddRow(r);
+            }
             return r;
         }
 

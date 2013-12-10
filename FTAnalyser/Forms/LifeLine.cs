@@ -15,6 +15,7 @@ using SharpMap.Data.Providers;
 using SharpMap.Layers;
 using SharpMap.Rendering.Decoration.ScaleBar;
 using SharpMap.Styles;
+using System.IO;
 
 namespace FTAnalyzer.Forms
 {
@@ -74,8 +75,7 @@ namespace FTAnalyzer.Forms
         {
             lifelines = new FeatureDataTable();
             lifelines.Columns.Add("MapLifeLine", typeof(MapLifeLine));
-            lifelines.Columns.Add("StartPoint", typeof(bool));
-            lifelines.Columns.Add("EndPoint", typeof(bool));
+            lifelines.Columns.Add("LineCap", typeof(string));
             lifelines.Columns.Add("Label", typeof(string));
             lifelines.Columns.Add("ViewPort", typeof(Envelope));
 
@@ -84,12 +84,31 @@ namespace FTAnalyzer.Forms
             linesLayer = new VectorLayer("LifeLines");
             linesLayer.DataSource = lifelinesGFP;
             
-            Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
-
             VectorStyle linestyle = new VectorStyle();
             linestyle.Line = new Pen(Color.Green, 2f);
             linestyle.Line.MiterLimit = 0;
             linesLayer.Style = linestyle;
+
+            Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
+            VectorStyle line = new VectorStyle();
+            line.PointColor = new SolidBrush(Color.Green);
+            line.PointSize = 2;
+            styles.Add(MapLifeLine.LINE, line);
+            
+            VectorStyle startPoint = new VectorStyle();
+            startPoint.PointColor = new SolidBrush(Color.Green);
+            startPoint.PointSize = 2;
+            startPoint.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\arrow-right.png"));
+            styles.Add(MapLifeLine.START, startPoint);
+
+            VectorStyle endPoint = new VectorStyle();
+            endPoint.PointColor = new SolidBrush(Color.Green);
+            endPoint.PointSize = 2;
+            endPoint.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\arrow-left.png"));
+            styles.Add(MapLifeLine.END, endPoint);
+
+            linesLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<string>("LineCap", styles, line);
+
             mapBox1.Map.Layers.Add(linesLayer);
 
             labelLayer = new LabelLayer("Label");

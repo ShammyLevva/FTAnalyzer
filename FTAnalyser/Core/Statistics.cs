@@ -132,10 +132,18 @@ namespace FTAnalyzer
                         foreach (HtmlNode node in nodes)
                         {
                             string surname = node.InnerText.Trim();
-                            Predicate<SurnameStats> p = x => x.Surname.Equals(surname);
-                            SurnameStats stat = surnames.Find(p);
+                            SurnameStats stat = surnames.Find(x => x.Surname.Equals(surname));
                             if(stat != null)
                                 stat.URI = new Uri("http://www.one-name.org" + node.GetAttributeValue("href", ""));
+                        }
+                        // now add links for those that are on GOONS but as a default page
+                        nodes = table.Descendants("td").ToList();
+                        foreach (HtmlNode node in nodes)
+                        {
+                            string surname = node.InnerText.Trim();
+                            SurnameStats stat = surnames.Find(x => x.Surname.Equals(surname));
+                            if (stat != null && stat.URI == null)
+                                stat.URI = new Uri(website);
                         }
                     }
                 }

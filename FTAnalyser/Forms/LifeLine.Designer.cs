@@ -54,6 +54,13 @@ namespace FTAnalyzer.Forms
             this.btnSelect = new System.Windows.Forms.ToolStripButton();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.dgFacts = new System.Windows.Forms.DataGridView();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.txtCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hideLabelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuHideScaleBar = new System.Windows.Forms.ToolStripMenuItem();
+            this.mapTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.FactsIndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,13 +74,6 @@ namespace FTAnalyzer.Forms
             this.GoogleResultTypes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SourceList = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.txtCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hideLabelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuHideScaleBar = new System.Windows.Forms.ToolStripMenuItem();
-            this.mapTooltip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFacts)).BeginInit();
             this.splitContainerFacts.Panel1.SuspendLayout();
             this.splitContainerFacts.Panel2.SuspendLayout();
@@ -106,8 +106,8 @@ namespace FTAnalyzer.Forms
             // 
             this.splitContainerFacts.Panel2.Controls.Add(this.dgFacts);
             this.splitContainerFacts.Panel2.Controls.Add(this.statusStrip);
-            this.splitContainerFacts.Size = new System.Drawing.Size(1113, 566);
-            this.splitContainerFacts.SplitterDistance = 435;
+            this.splitContainerFacts.Size = new System.Drawing.Size(1123, 620);
+            this.splitContainerFacts.SplitterDistance = 450;
             this.splitContainerFacts.TabIndex = 18;
             this.splitContainerFacts.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainerFacts_SplitterMoved);
             // 
@@ -127,7 +127,7 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap.Panel2.Controls.Add(this.mapBox1);
             this.splitContainerMap.Panel2.Controls.Add(this.mapZoomToolStrip);
             this.splitContainerMap.Panel2.Controls.Add(this.linkLabel1);
-            this.splitContainerMap.Size = new System.Drawing.Size(1113, 435);
+            this.splitContainerMap.Size = new System.Drawing.Size(1123, 450);
             this.splitContainerMap.SplitterDistance = 330;
             this.splitContainerMap.TabIndex = 2;
             this.splitContainerMap.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainerMap_SplitterMoved);
@@ -151,7 +151,7 @@ namespace FTAnalyzer.Forms
             this.dgIndividuals.ReadOnly = true;
             this.dgIndividuals.RowHeadersWidth = 4;
             this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgIndividuals.Size = new System.Drawing.Size(330, 435);
+            this.dgIndividuals.Size = new System.Drawing.Size(330, 450);
             this.dgIndividuals.TabIndex = 0;
             this.dgIndividuals.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgIndividuals_CellToolTipTextNeeded);
             this.dgIndividuals.SelectionChanged += new System.EventHandler(this.dgIndividuals_SelectionChanged);
@@ -244,7 +244,7 @@ namespace FTAnalyzer.Forms
             this.mapBox1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.ShowProgressUpdate = true;
-            this.mapBox1.Size = new System.Drawing.Size(779, 410);
+            this.mapBox1.Size = new System.Drawing.Size(789, 425);
             this.mapBox1.TabIndex = 2;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
@@ -260,7 +260,7 @@ namespace FTAnalyzer.Forms
             this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
             this.mapZoomToolStrip.MapControl = this.mapBox1;
             this.mapZoomToolStrip.Name = "mapZoomToolStrip";
-            this.mapZoomToolStrip.Size = new System.Drawing.Size(779, 25);
+            this.mapZoomToolStrip.Size = new System.Drawing.Size(789, 25);
             this.mapZoomToolStrip.TabIndex = 1;
             this.mapZoomToolStrip.Text = "mapZoomToolStrip1";
             // 
@@ -278,7 +278,7 @@ namespace FTAnalyzer.Forms
             // 
             this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(651, 25);
+            this.linkLabel1.Location = new System.Drawing.Point(661, 25);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(125, 13);
             this.linkLabel1.TabIndex = 16;
@@ -322,11 +322,67 @@ namespace FTAnalyzer.Forms
             this.dgFacts.RowHeadersWidth = 16;
             this.dgFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgFacts.ShowEditingIcon = false;
-            this.dgFacts.Size = new System.Drawing.Size(1113, 105);
+            this.dgFacts.Size = new System.Drawing.Size(1123, 144);
             this.dgFacts.TabIndex = 3;
             this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFacts_CellDoubleClick);
             this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgFacts_CellToolTipTextNeeded);
             this.dgFacts.SelectionChanged += new System.EventHandler(this.dgFacts_SelectionChanged);
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.txtCount});
+            this.statusStrip.Location = new System.Drawing.Point(0, 144);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(1123, 22);
+            this.statusStrip.TabIndex = 4;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // txtCount
+            // 
+            this.txtCount.Name = "txtCount";
+            this.txtCount.Size = new System.Drawing.Size(0, 17);
+            // 
+            // menuStrip
+            // 
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.optionsToolStripMenuItem});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(1123, 24);
+            this.menuStrip.TabIndex = 19;
+            this.menuStrip.Text = "menuStrip1";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.hideLabelsToolStripMenuItem,
+            this.mnuHideScaleBar});
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // hideLabelsToolStripMenuItem
+            // 
+            this.hideLabelsToolStripMenuItem.CheckOnClick = true;
+            this.hideLabelsToolStripMenuItem.Name = "hideLabelsToolStripMenuItem";
+            this.hideLabelsToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.hideLabelsToolStripMenuItem.Text = "Hide Labels";
+            this.hideLabelsToolStripMenuItem.Click += new System.EventHandler(this.hideLabelsToolStripMenuItem_Click);
+            // 
+            // mnuHideScaleBar
+            // 
+            this.mnuHideScaleBar.CheckOnClick = true;
+            this.mnuHideScaleBar.Name = "mnuHideScaleBar";
+            this.mnuHideScaleBar.Size = new System.Drawing.Size(149, 22);
+            this.mnuHideScaleBar.Text = "Hide Scale Bar";
+            this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
+            // 
+            // mapTooltip
+            // 
+            this.mapTooltip.AutoPopDelay = 5000;
+            this.mapTooltip.InitialDelay = 500;
+            this.mapTooltip.ReshowDelay = 100;
             // 
             // FactIcon
             // 
@@ -393,10 +449,10 @@ namespace FTAnalyzer.Forms
             this.FactLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.FactLocation.DataPropertyName = "Location";
             this.FactLocation.HeaderText = "Location";
-            this.FactLocation.MinimumWidth = 120;
+            this.FactLocation.MinimumWidth = 200;
             this.FactLocation.Name = "FactLocation";
             this.FactLocation.ReadOnly = true;
-            this.FactLocation.Width = 123;
+            this.FactLocation.Width = 250;
             // 
             // LocationIcon
             // 
@@ -455,67 +511,11 @@ namespace FTAnalyzer.Forms
             this.SourceList.ReadOnly = true;
             this.SourceList.Width = 250;
             // 
-            // statusStrip
-            // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.txtCount});
-            this.statusStrip.Location = new System.Drawing.Point(0, 105);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1113, 22);
-            this.statusStrip.TabIndex = 4;
-            this.statusStrip.Text = "statusStrip1";
-            // 
-            // txtCount
-            // 
-            this.txtCount.Name = "txtCount";
-            this.txtCount.Size = new System.Drawing.Size(0, 17);
-            // 
-            // menuStrip
-            // 
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem});
-            this.menuStrip.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1113, 24);
-            this.menuStrip.TabIndex = 19;
-            this.menuStrip.Text = "menuStrip1";
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.hideLabelsToolStripMenuItem,
-            this.mnuHideScaleBar});
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.optionsToolStripMenuItem.Text = "Options";
-            // 
-            // hideLabelsToolStripMenuItem
-            // 
-            this.hideLabelsToolStripMenuItem.CheckOnClick = true;
-            this.hideLabelsToolStripMenuItem.Name = "hideLabelsToolStripMenuItem";
-            this.hideLabelsToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.hideLabelsToolStripMenuItem.Text = "Hide Labels";
-            this.hideLabelsToolStripMenuItem.Click += new System.EventHandler(this.hideLabelsToolStripMenuItem_Click);
-            // 
-            // mnuHideScaleBar
-            // 
-            this.mnuHideScaleBar.CheckOnClick = true;
-            this.mnuHideScaleBar.Name = "mnuHideScaleBar";
-            this.mnuHideScaleBar.Size = new System.Drawing.Size(149, 22);
-            this.mnuHideScaleBar.Text = "Hide Scale Bar";
-            this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
-            // 
-            // mapTooltip
-            // 
-            this.mapTooltip.AutoPopDelay = 5000;
-            this.mapTooltip.InitialDelay = 500;
-            this.mapTooltip.ReshowDelay = 100;
-            // 
             // LifeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1113, 590);
+            this.ClientSize = new System.Drawing.Size(1123, 644);
             this.Controls.Add(this.splitContainerFacts);
             this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -569,6 +569,12 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn SortedName;
         private System.Windows.Forms.DataGridViewTextBoxColumn BirthDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn GeoLocationCount;
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hideLabelsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuHideScaleBar;
+        private System.Windows.Forms.ToolStripButton btnSelect;
+        private System.Windows.Forms.ToolTip mapTooltip;
         private System.Windows.Forms.DataGridViewImageColumn FactIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactsIndividualID;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactName;
@@ -582,11 +588,5 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn GoogleResultTypes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;
-        private System.Windows.Forms.MenuStrip menuStrip;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hideLabelsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuHideScaleBar;
-        private System.Windows.Forms.ToolStripButton btnSelect;
-        private System.Windows.Forms.ToolTip mapTooltip;
     }
 }
