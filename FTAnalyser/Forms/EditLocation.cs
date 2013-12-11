@@ -120,6 +120,10 @@ namespace FTAnalyzer.Forms
                     e.Cancel = true;
                     FactLocation.CopyLocationDetails(originalLocation, location);
                 }
+                else if (result == DialogResult.No)
+                { 
+                    FactLocation.CopyLocationDetails(originalLocation, location); 
+                }
                 else if (result == DialogResult.Yes)
                 {
                     UpdateDatabase();
@@ -130,7 +134,7 @@ namespace FTAnalyzer.Forms
 
         private void UpdateDatabase()
         {
-            Envelope env = new Envelope(mapBox1.Map.Envelope.TopLeft(),mapBox1.Map.Envelope.BottomRight());
+            Envelope env = new Envelope(mapBox1.Map.Envelope.TopLeft(), mapBox1.Map.Envelope.BottomRight());
             Coordinate point = MapTransforms.ReverseTransformCoordinate(pointFeature.Geometry.Coordinate);
             location.Latitude = point.Y;
             location.Longitude = point.X;
@@ -221,13 +225,13 @@ namespace FTAnalyzer.Forms
                 else
                 {
                     GeoResponse res = GoogleMap.GoogleGeocode(txtSearch.Text, 8);
-                    if (res.Status == "OK")
+                    if (res.Status == "OK" && !(res.Results[0].Geometry.Location.Lat == 0 && res.Results[0].Geometry.Location.Long == 0))
                     {
+                        loc.Latitude = res.Results[0].Geometry.Location.Lat;
+                        loc.Longitude = res.Results[0].Geometry.Location.Long;
                         Coordinate mpoint = MapTransforms.TransformCoordinate(new Coordinate(loc.Longitude, loc.Latitude));
                         Coordinate mNorthEast = MapTransforms.TransformCoordinate(new Coordinate(res.Results[0].Geometry.ViewPort.NorthEast.Long, res.Results[0].Geometry.ViewPort.NorthEast.Lat));
                         Coordinate mSouthWest = MapTransforms.TransformCoordinate(new Coordinate(res.Results[0].Geometry.ViewPort.SouthWest.Long, res.Results[0].Geometry.ViewPort.SouthWest.Lat));
-                        loc.Latitude = res.Results[0].Geometry.Location.Lat;
-                        loc.Longitude = res.Results[0].Geometry.Location.Long;
                         loc.LongitudeM = mpoint.X;
                         loc.LatitudeM = mpoint.Y;
                         loc.ViewPort.NorthEast.Long = mNorthEast.X;
