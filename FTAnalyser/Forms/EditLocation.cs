@@ -122,7 +122,8 @@ namespace FTAnalyzer.Forms
                 }
                 else if (result == DialogResult.No)
                 { 
-                    FactLocation.CopyLocationDetails(originalLocation, location); 
+                    FactLocation.CopyLocationDetails(originalLocation, location);
+                    pointUpdated = false;
                 }
                 else if (result == DialogResult.Yes)
                 {
