@@ -15,6 +15,7 @@ namespace FTAnalyzer
 {
     public class FactLocation : IComparable<FactLocation>, IDisplayLocation, IDisplayGeocodedLocation
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, SUBREGION = 2, ADDRESS = 3, PLACE = 4;
         public enum Geocode { UNKNOWN = -1, NOT_SEARCHED = 0, MATCHED = 1, PARTIAL_MATCH = 2, GEDCOM_USER = 3, NO_MATCH = 4, INCORRECT = 5, OUT_OF_BOUNDS = 6, LEVEL_MISMATCH = 7 };
 
@@ -177,10 +178,16 @@ namespace FTAnalyzer
             string fromstr = n.Attributes["from"].Value;
             string to = n.Attributes["to"].Value;
             Tuple<int, string> from = new Tuple<int, string>(level, fromstr);
-            if (dictionary.ContainsKey(from))
-                Console.WriteLine("Error duplicate Google Region fixes :" + from);
             if (from != null && fromstr.Length > 0 && to != null && to.Length > 0)
-                dictionary.Add(from, to);
+            {
+                if (dictionary.ContainsKey(from))
+                    log.Error("Error duplicate Google fix :" + from + " to " + to);
+                else
+                {
+                    log.Info("Added Google fix :" + from + " to " + to);
+                    dictionary.Add(from, to);
+                }
+            }
         }
 
         private static void SetupGeocodes()
