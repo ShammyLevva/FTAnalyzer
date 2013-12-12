@@ -177,14 +177,14 @@ namespace FTAnalyzer
         {
             string fromstr = n.Attributes["from"].Value;
             string to = n.Attributes["to"].Value;
-            Tuple<int, string> from = new Tuple<int, string>(level, fromstr);
+            Tuple<int, string> from = new Tuple<int, string>(level, fromstr.ToUpperInvariant());
             if (from != null && fromstr.Length > 0 && to != null && to.Length > 0)
             {
                 if (dictionary.ContainsKey(from))
-                    log.Error("Error duplicate Google fix :" + from + " to " + to);
+                    log.Error("Error duplicate Google fix :" + fromstr + " to " + to);
                 else
                 {
-                    log.Info("Added Google fix :" + from + " to " + to);
+                    log.Info("Added Google fix :" + fromstr + " to " + to);
                     dictionary.Add(from, to);
                 }
             }
@@ -558,6 +558,26 @@ namespace FTAnalyzer
             SortableLocation = TrimLeadingCommas(SortableLocation);
         }
 
+        public static string ReplaceString(string str, string oldValue, string newValue, StringComparison comparison)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            int previousIndex = 0;
+            int index = str.IndexOf(oldValue, comparison);
+            while (index != -1)
+            {
+                sb.Append(str.Substring(previousIndex, index - previousIndex));
+                sb.Append(newValue);
+                index += oldValue.Length;
+
+                previousIndex = index;
+                index = str.IndexOf(oldValue, index, comparison);
+            }
+            sb.Append(str.Substring(previousIndex));
+
+            return sb.ToString();
+        }
+
         public string GoogleFixed
         {
             get
@@ -567,7 +587,7 @@ namespace FTAnalyzer
                 foreach (KeyValuePair<Tuple<int, string>, string> fix in LOCAL_GOOGLE_FIXES)
                 {
                     if (fix.Key.Item1 == UNKNOWN)
-                        result = result.Replace(fix.Key.Item2, fix.Value);
+                        result = ReplaceString(result, fix.Key.Item2, fix.Value, StringComparison.InvariantCultureIgnoreCase);
                 }
                 if (result != fixedLocation)
                     return result;
@@ -575,32 +595,33 @@ namespace FTAnalyzer
                 foreach (KeyValuePair<Tuple<int, string>, string> fix in GOOGLE_FIXES)
                 {
                     if (fix.Key.Item1 == UNKNOWN)
-                        result = result.Replace(fix.Key.Item2, fix.Value);
+                        result = ReplaceString(result, fix.Key.Item2, fix.Value, StringComparison.InvariantCultureIgnoreCase);
                 }
                 if (result != fixedLocation)
                     return result;
+
                 // now check the individual part fixes
                 string countryFix = string.Empty;
                 string regionFix = string.Empty;
                 string subRegionFix = string.Empty;
-                LOCAL_GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(COUNTRY, countryFix), out countryFix);
+                LOCAL_GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(COUNTRY, Country.ToUpperInvariant()), out countryFix);
                 if (countryFix == null)
                 {
-                    GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(COUNTRY, countryFix), out countryFix);
+                    GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(COUNTRY, Country.ToUpperInvariant()), out countryFix);
                     if (countryFix == null)
                         countryFix = Country;
                 }
-                LOCAL_GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(REGION, Region), out regionFix);
+                LOCAL_GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(REGION, Region.ToUpperInvariant()), out regionFix);
                 if (regionFix == null)
                 {
-                    GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(REGION, Region), out regionFix);
+                    GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(REGION, Region.ToUpperInvariant()), out regionFix);
                     if (regionFix == null)
                         regionFix = Region;
                 }
-                LOCAL_GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(SUBREGION, SubRegion), out subRegionFix);
+                LOCAL_GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(SUBREGION, SubRegion.ToUpperInvariant()), out subRegionFix);
                 if (subRegionFix == null)
                 {
-                    GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(SUBREGION, SubRegion), out subRegionFix);
+                    GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(SUBREGION, SubRegion.ToUpperInvariant()), out subRegionFix);
                     if (subRegionFix == null)
                         subRegionFix = SubRegion;
                 }
