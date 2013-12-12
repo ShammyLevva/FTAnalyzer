@@ -1,3 +1,6 @@
+using FTAnalyzer.Mapping;
+using FTAnalyzer.Utilities;
+using GeoAPI.Geometries;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,9 +10,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
-using FTAnalyzer.Mapping;
-using FTAnalyzer.Utilities;
-using GeoAPI.Geometries;
 
 namespace FTAnalyzer
 {
@@ -53,6 +53,7 @@ namespace FTAnalyzer
         private static Dictionary<string, Tuple<string, string>> FINDMYPAST_LOOKUP = new Dictionary<string, Tuple<string, string>>();
         private static IDictionary<string, FactLocation> locations;
         private static Dictionary<Tuple<int, string>, string> GOOGLE_FIXES = new Dictionary<Tuple<int, string>, string>();
+        private static Dictionary<Tuple<int, string>, string> LOCAL_GOOGLE_FIXES = new Dictionary<Tuple<int, string>, string>();
 
         public static Dictionary<Geocode, string> Geocodes;
         public static FactLocation UNKNOWN_LOCATION;
@@ -139,25 +140,47 @@ namespace FTAnalyzer
                     }
                 }
                 foreach (XmlNode n in xmlDoc.SelectNodes("Data/GoogleGeocodes/CountryFixes/CountryFix"))
-                    AddGoogleFixes(n, COUNTRY);
+                    AddGoogleFixes(GOOGLE_FIXES, n, COUNTRY);
                 foreach (XmlNode n in xmlDoc.SelectNodes("Data/GoogleGeocodes/RegionFixes/RegionFix"))
-                    AddGoogleFixes(n, REGION);
+                    AddGoogleFixes(GOOGLE_FIXES, n, REGION);
                 foreach (XmlNode n in xmlDoc.SelectNodes("Data/GoogleGeocodes/SubRegionFixes/SubRegionFix"))
-                    AddGoogleFixes(n, SUBREGION);
+                    AddGoogleFixes(GOOGLE_FIXES, n, SUBREGION);
                 foreach (XmlNode n in xmlDoc.SelectNodes("Data/GoogleGeocodes/MultiLevelFixes/MultiLevelFix"))
-                    AddGoogleFixes(n, UNKNOWN);
+                    AddGoogleFixes(GOOGLE_FIXES, n, UNKNOWN);
+            }
+            try
+            {
+                filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, "GoogleFixes.xml");
+                if (File.Exists(filename))
+                {
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.Load(filename);
+                    foreach (XmlNode n in xmlDoc.SelectNodes("GoogleGeocodes/CountryFixes/CountryFix"))
+                        AddGoogleFixes(LOCAL_GOOGLE_FIXES, n, COUNTRY);
+                    foreach (XmlNode n in xmlDoc.SelectNodes("GoogleGeocodes/RegionFixes/RegionFix"))
+                        AddGoogleFixes(LOCAL_GOOGLE_FIXES, n, REGION);
+                    foreach (XmlNode n in xmlDoc.SelectNodes("GoogleGeocodes/SubRegionFixes/SubRegionFix"))
+                        AddGoogleFixes(LOCAL_GOOGLE_FIXES, n, SUBREGION);
+                    foreach (XmlNode n in xmlDoc.SelectNodes("GoogleGeocodes/MultiLevelFixes/MultiLevelFix"))
+                        AddGoogleFixes(LOCAL_GOOGLE_FIXES, n, UNKNOWN);
+                }
+            }
+            catch(Exception e)
+            {
+                LOCAL_GOOGLE_FIXES = new Dictionary<Tuple<int, string>, string>();
+                MessageBox.Show("Error processing user defined GoogleFixes.xml file. File will be ignored.\n\nError was : " + e.Message, "FT Analyzer");
             }
         }
 
-        private static void AddGoogleFixes(XmlNode n, int level)
+        private static void AddGoogleFixes(Dictionary<Tuple<int, string>, string> dictionary, XmlNode n, int level)
         {
             string fromstr = n.Attributes["from"].Value;
             string to = n.Attributes["to"].Value;
             Tuple<int, string> from = new Tuple<int, string>(level, fromstr);
-            if (GOOGLE_FIXES.ContainsKey(from))
+            if (dictionary.ContainsKey(from))
                 Console.WriteLine("Error duplicate Google Region fixes :" + from);
             if (from != null && fromstr.Length > 0 && to != null && to.Length > 0)
-                GOOGLE_FIXES.Add(from, to);
+                dictionary.Add(from, to);
         }
 
         private static void SetupGeocodes()
@@ -233,7 +256,7 @@ namespace FTAnalyzer
         public static void ResetLocations()
         {
             locations = new Dictionary<string, FactLocation>();
-            // set unknown location as found so it doesn't keep hassling to be searched
+            // set unknown location as unknown so it doesn't keep hassling to be searched
             UNKNOWN_LOCATION = GetLocation(string.Empty, "0.0", "0.0", Geocode.UNKNOWN);
         }
 
@@ -530,31 +553,50 @@ namespace FTAnalyzer
 
         public string GoogleFixed
         {
-            get {
+            get
+            {
                 // first check the multifixes
                 string result = fixedLocation;
-                foreach (KeyValuePair<Tuple<int, string>, string> fix in GOOGLE_FIXES)
+                foreach (KeyValuePair<Tuple<int, string>, string> fix in LOCAL_GOOGLE_FIXES)
                 {
-                    if(fix.Key.Item1 == UNKNOWN)
-                        result =result.Replace(fix.Key.Item2, fix.Value);
+                    if (fix.Key.Item1 == UNKNOWN)
+                        result = result.Replace(fix.Key.Item2, fix.Value);
                 }
                 if (result != fixedLocation)
                     return result;
-                
+
+                foreach (KeyValuePair<Tuple<int, string>, string> fix in GOOGLE_FIXES)
+                {
+                    if (fix.Key.Item1 == UNKNOWN)
+                        result = result.Replace(fix.Key.Item2, fix.Value);
+                }
+                if (result != fixedLocation)
+                    return result;
                 // now check the individual part fixes
                 string countryFix = string.Empty;
                 string regionFix = string.Empty;
                 string subRegionFix = string.Empty;
-                GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(COUNTRY, countryFix), out countryFix);
+                LOCAL_GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(COUNTRY, countryFix), out countryFix);
                 if (countryFix == null)
-                    countryFix = Country;
-                GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(REGION, Region), out regionFix);
+                {
+                    GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(COUNTRY, countryFix), out countryFix);
+                    if (countryFix == null)
+                        countryFix = Country;
+                }
+                LOCAL_GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(REGION, Region), out regionFix);
                 if (regionFix == null)
-                    regionFix = Region;
-                GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(SUBREGION, SubRegion), out subRegionFix);
+                {
+                    GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(REGION, Region), out regionFix);
+                    if (regionFix == null)
+                        regionFix = Region;
+                }
+                LOCAL_GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(SUBREGION, SubRegion), out subRegionFix);
                 if (subRegionFix == null)
-                    subRegionFix = SubRegion;
-                
+                {
+                    GOOGLE_FIXES.TryGetValue(new Tuple<int, string>(SUBREGION, SubRegion), out subRegionFix);
+                    if (subRegionFix == null)
+                        subRegionFix = SubRegion;
+                }
                 result = countryFix;
                 if (!regionFix.Equals(string.Empty) || Properties.GeneralSettings.Default.AllowEmptyLocations)
                     result = regionFix + ", " + result;
@@ -646,7 +688,7 @@ namespace FTAnalyzer
 
         public static int LocationsCount
         {   // discount the empty location
-            get { return FactLocation.AllLocations.Count() - 1; } 
+            get { return FactLocation.AllLocations.Count() - 1; }
         }
 
         public string CensusCountry
@@ -807,7 +849,7 @@ namespace FTAnalyzer
         {
             return CompareTo((FactLocation)that, level);
         }
-        
+
         public virtual int CompareTo(FactLocation that, int level)
         {
             int res = this.Country.CompareTo(that.Country);
