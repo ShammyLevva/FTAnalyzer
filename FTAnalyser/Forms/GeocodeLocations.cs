@@ -571,7 +571,7 @@ namespace FTAnalyzer.Forms
                                                 latitude = result.Geometry.Location.Lat;
                                                 longitude = result.Geometry.Location.Long;
                                                 loc.GeocodeStatus = result.PartialMatch ? FactLocation.Geocode.PARTIAL_MATCH : FactLocation.Geocode.MATCHED;
-                                                loc.ViewPort = viewport;
+                                                loc.ViewPort = MapTransforms.TransformViewport(viewport);
                                                 if (!result.PartialMatch)
                                                 {
                                                     if (checkresultsPass == 2)
@@ -621,7 +621,7 @@ namespace FTAnalyzer.Forms
                                 loc.LatitudeM = mpoint.Y;
                                 loc.GoogleLocation = address;
                                 loc.GoogleResultType = resultType;
-                                loc.ViewPort = viewport;
+                                loc.ViewPort = MapTransforms.TransformViewport(viewport);
                                 loc.FoundLevel = foundLevel;
                                 UpdateDatabase(loc, inDatabase);
                             }

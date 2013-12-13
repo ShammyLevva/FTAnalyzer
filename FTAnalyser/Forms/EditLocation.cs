@@ -231,14 +231,9 @@ namespace FTAnalyzer.Forms
                         loc.Latitude = res.Results[0].Geometry.Location.Lat;
                         loc.Longitude = res.Results[0].Geometry.Location.Long;
                         Coordinate mpoint = MapTransforms.TransformCoordinate(new Coordinate(loc.Longitude, loc.Latitude));
-                        Coordinate mNorthEast = MapTransforms.TransformCoordinate(new Coordinate(res.Results[0].Geometry.ViewPort.NorthEast.Long, res.Results[0].Geometry.ViewPort.NorthEast.Lat));
-                        Coordinate mSouthWest = MapTransforms.TransformCoordinate(new Coordinate(res.Results[0].Geometry.ViewPort.SouthWest.Long, res.Results[0].Geometry.ViewPort.SouthWest.Lat));
                         loc.LongitudeM = mpoint.X;
                         loc.LatitudeM = mpoint.Y;
-                        loc.ViewPort.NorthEast.Long = mNorthEast.X;
-                        loc.ViewPort.NorthEast.Lat = mNorthEast.Y;
-                        loc.ViewPort.SouthWest.Long = mSouthWest.X;
-                        loc.ViewPort.SouthWest.Lat = mSouthWest.Y;
+                        loc.ViewPort = MapTransforms.TransformViewport(res.Results[0].Geometry.ViewPort);
                         loc.GeocodeStatus = res.Results[0].PartialMatch ? FactLocation.Geocode.PARTIAL_MATCH : FactLocation.Geocode.MATCHED;
                         FactLocation.CopyLocationDetails(loc, location);
                         SetLocation();
