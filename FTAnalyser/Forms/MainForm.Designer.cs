@@ -392,15 +392,16 @@
             // backupToolStripMenuItem
             // 
             this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
-            this.backupToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.backupToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.backupToolStripMenuItem.Text = "Backup";
             this.backupToolStripMenuItem.Click += new System.EventHandler(this.backupToolStripMenuItem_Click);
             // 
             // mnuRestore
             // 
             this.mnuRestore.Name = "mnuRestore";
-            this.mnuRestore.Size = new System.Drawing.Size(113, 22);
+            this.mnuRestore.Size = new System.Drawing.Size(152, 22);
             this.mnuRestore.Text = "Restore";
+            this.mnuRestore.ToolTipText = "Restore is only available prior to loading GEDCOM";
             this.mnuRestore.Click += new System.EventHandler(this.restoreToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
