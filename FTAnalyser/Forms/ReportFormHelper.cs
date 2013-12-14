@@ -13,7 +13,7 @@ using System.ComponentModel;
 
 namespace FTAnalyzer
 {
-    class ReportFormHelper : IDisposable
+    public class ReportFormHelper : IDisposable
     {
         private PrintingDataGridViewProvider printProvider;
         private PrintDocument printDocument;
@@ -21,6 +21,9 @@ namespace FTAnalyzer
         private PrintPreviewDialog printPreviewDialog;
         private Action resetTable;
         private Form parent;
+        private Tuple<int, int> defaultLocation;
+        private Tuple<int, int> defaultSize;
+        private string registry;
 
         public DataGridView ReportGrid { get; private set; }
         public String PrintTitle { get; set; }
@@ -28,9 +31,12 @@ namespace FTAnalyzer
         public ReportFormHelper(Form parent, string title, DataGridView report, Action resetTable, string registry)
         {
             this.parent = parent;
+            this.defaultLocation = new Tuple<int, int>(parent.Top, parent.Left);
+            this.defaultSize = new Tuple<int, int>(parent.Height, parent.Width);
             this.PrintTitle = title;
             this.ReportGrid = report;
             this.resetTable = resetTable;
+            this.registry = registry;
 
             printDocument = new PrintDocument();
             printDocument.DefaultPageSettings.Landscape = true;
@@ -52,7 +58,6 @@ namespace FTAnalyzer
             printPreviewDialog.AutoScrollMinSize = new Size(0, 0);
             printPreviewDialog.ClientSize = new Size(400, 300);
             printPreviewDialog.Document = printDocument;
-
         }
 
         public void PrintReport()
@@ -99,10 +104,12 @@ namespace FTAnalyzer
             }
             string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, filename);
             dt.WriteXmlSchema(path);
+            SaveFormLayout();
         }
 
         public void LoadColumnLayout(string filename)
         {
+            LoadFormLayout();
             try
             {
                 this.resetTable();
@@ -147,6 +154,35 @@ namespace FTAnalyzer
             for (int i = 0; i < ReportGrid.Columns.Count; i++)
                 ReportGrid.Columns[i].DisplayIndex = i;
             SaveColumnLayout(filename);
+            ResetFormLayout();
+        }
+
+        private void LoadFormLayout()
+        {
+            parent.Top = (int)Application.UserAppDataRegistry.GetValue(registry + " position - top", defaultLocation.Item1);
+            parent.Left = (int)Application.UserAppDataRegistry.GetValue(registry + " position - left", defaultLocation.Item2);
+            parent.Width = (int)Application.UserAppDataRegistry.GetValue(registry + " size - width", defaultSize.Item1);
+            parent.Height = (int)Application.UserAppDataRegistry.GetValue(registry + " size - height", defaultSize.Item2);
+        }
+
+        private void SaveFormLayout()
+        {
+            if (parent.WindowState == FormWindowState.Normal)
+            {  //only save window size if not maximised or minimised
+                Application.UserAppDataRegistry.SetValue(registry + " position - top", parent.Top);
+                Application.UserAppDataRegistry.SetValue(registry + " position - left", parent.Left);
+                Application.UserAppDataRegistry.SetValue(registry + " size - width", parent.Width);
+                Application.UserAppDataRegistry.SetValue(registry + " size - height", parent.Height);
+            }
+        }
+
+        private void ResetFormLayout()
+        {
+            parent.Top = defaultLocation.Item1;
+            parent.Left = defaultLocation.Item2;
+            parent.Height = defaultSize.Item1;
+            parent.Width = defaultSize.Item2;
+            SaveFormLayout();
         }
 
         protected virtual void Dispose(bool disposing)
