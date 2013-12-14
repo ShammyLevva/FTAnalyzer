@@ -32,7 +32,7 @@ namespace FTAnalyzer.Forms
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Places));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainerFacts = new System.Windows.Forms.SplitContainer();
             this.splitContainerMap = new System.Windows.Forms.SplitContainer();
             this.tvPlaces = new FTAnalyzer.Utilities.TreeViewMS();
@@ -63,6 +63,7 @@ namespace FTAnalyzer.Forms
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHideScaleBar = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetFormDefaultSizeAndPositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFacts)).BeginInit();
             this.splitContainerFacts.Panel1.SuspendLayout();
             this.splitContainerFacts.Panel2.SuspendLayout();
@@ -217,14 +218,14 @@ namespace FTAnalyzer.Forms
             this.GoogleResultTypes,
             this.Comment,
             this.SourceList});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgFacts.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgFacts.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgFacts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgFacts.Location = new System.Drawing.Point(0, 0);
             this.dgFacts.Name = "dgFacts";
@@ -421,7 +422,8 @@ namespace FTAnalyzer.Forms
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuHideScaleBar});
+            this.mnuHideScaleBar,
+            this.resetFormDefaultSizeAndPositionToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -430,9 +432,16 @@ namespace FTAnalyzer.Forms
             // 
             this.mnuHideScaleBar.CheckOnClick = true;
             this.mnuHideScaleBar.Name = "mnuHideScaleBar";
-            this.mnuHideScaleBar.Size = new System.Drawing.Size(149, 22);
+            this.mnuHideScaleBar.Size = new System.Drawing.Size(262, 22);
             this.mnuHideScaleBar.Text = "Hide Scale Bar";
             this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
+            // 
+            // resetFormDefaultSizeAndPositionToolStripMenuItem
+            // 
+            this.resetFormDefaultSizeAndPositionToolStripMenuItem.Name = "resetFormDefaultSizeAndPositionToolStripMenuItem";
+            this.resetFormDefaultSizeAndPositionToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
+            this.resetFormDefaultSizeAndPositionToolStripMenuItem.Text = "Reset form default size and position";
+            this.resetFormDefaultSizeAndPositionToolStripMenuItem.Click += new System.EventHandler(this.resetFormDefaultSizeAndPositionToolStripMenuItem_Click);
             // 
             // Places
             // 
@@ -447,6 +456,8 @@ namespace FTAnalyzer.Forms
             this.Text = "Places";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Places_FormClosed);
             this.Load += new System.EventHandler(this.Places_Load);
+            this.Move += new System.EventHandler(this.Places_Move);
+            this.Resize += new System.EventHandler(this.Places_Resize);
             this.splitContainerFacts.Panel1.ResumeLayout(false);
             this.splitContainerFacts.Panel2.ResumeLayout(false);
             this.splitContainerFacts.Panel2.PerformLayout();
@@ -502,5 +513,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripMenuItem mnuHideScaleBar;
         private System.Windows.Forms.ToolStripButton btnSelect;
         private Utilities.TreeViewMS tvPlaces;
+        private System.Windows.Forms.ToolStripMenuItem resetFormDefaultSizeAndPositionToolStripMenuItem;
     }
 }

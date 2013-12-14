@@ -158,6 +158,14 @@ namespace FTAnalyzer.Forms
         {
             TreeNode[] nodes = ft.GetAllLocationsTreeNodes(tvPlaces.Font, false);
             tvPlaces.Nodes.AddRange(nodes);
+            int Width = (int)Application.UserAppDataRegistry.GetValue("Places size - width", this.Width);
+            int Height = (int)Application.UserAppDataRegistry.GetValue("Places size - height", this.Height);
+            int Top = (int)Application.UserAppDataRegistry.GetValue("Places position - top", this.Top);
+            int Left = (int)Application.UserAppDataRegistry.GetValue("Places position - left", this.Left);
+            this.Width = Width;
+            this.Height = Height;
+            this.Top = Top;
+            this.Left = Left;
             isloading = false; // only turn off building map if completely done initializing
             if (tvPlaces.Nodes.Count > 0)
             {   // update map using first node as selected node
@@ -306,6 +314,38 @@ namespace FTAnalyzer.Forms
         {
             SplitContainer splitter = (SplitContainer)sender;
             Application.UserAppDataRegistry.SetValue("Places Map Splitter Distance", splitter.SplitterDistance);
+        }
+
+        private void resetFormDefaultSizeAndPositionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            isloading = true;
+            this.Height = 622;
+            this.Width = 937;
+            this.Top = 50;
+            this.Left = 50;
+            isloading = false;
+            SavePosition();
+        }
+
+        private void Places_Move(object sender, EventArgs e)
+        {
+            SavePosition();
+        }
+
+        private void Places_Resize(object sender, EventArgs e)
+        {
+            SavePosition();
+        }
+
+        private void SavePosition()
+        {
+            if (!isloading && this.WindowState == FormWindowState.Normal)
+            {  //only save window size if not maximised or minimised
+                Application.UserAppDataRegistry.SetValue("Places size - width", this.Width);
+                Application.UserAppDataRegistry.SetValue("Places size - height", this.Height);
+                Application.UserAppDataRegistry.SetValue("Places position - top", this.Top);
+                Application.UserAppDataRegistry.SetValue("Places position - left", this.Left);
+            }
         }
     }
 }
