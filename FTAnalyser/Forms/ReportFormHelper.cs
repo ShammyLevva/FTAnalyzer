@@ -161,8 +161,8 @@ namespace FTAnalyzer
         {
             parent.Top = (int)Application.UserAppDataRegistry.GetValue(registry + " position - top", defaultLocation.Item1);
             parent.Left = (int)Application.UserAppDataRegistry.GetValue(registry + " position - left", defaultLocation.Item2);
-            parent.Width = (int)Application.UserAppDataRegistry.GetValue(registry + " size - width", defaultSize.Item1);
-            parent.Height = (int)Application.UserAppDataRegistry.GetValue(registry + " size - height", defaultSize.Item2);
+            parent.Height = (int)Application.UserAppDataRegistry.GetValue(registry + " size - height", defaultSize.Item1);
+            parent.Width = (int)Application.UserAppDataRegistry.GetValue(registry + " size - width", defaultSize.Item2);    
         }
 
         private void SaveFormLayout()
@@ -171,8 +171,8 @@ namespace FTAnalyzer
             {  //only save window size if not maximised or minimised
                 Application.UserAppDataRegistry.SetValue(registry + " position - top", parent.Top);
                 Application.UserAppDataRegistry.SetValue(registry + " position - left", parent.Left);
-                Application.UserAppDataRegistry.SetValue(registry + " size - width", parent.Width);
                 Application.UserAppDataRegistry.SetValue(registry + " size - height", parent.Height);
+                Application.UserAppDataRegistry.SetValue(registry + " size - width", parent.Width);
             }
         }
 
