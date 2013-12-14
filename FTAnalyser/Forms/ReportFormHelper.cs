@@ -20,12 +20,14 @@ namespace FTAnalyzer
         private PrintDialog printDialog;
         private PrintPreviewDialog printPreviewDialog;
         private Action resetTable;
+        private Form parent;
 
         public DataGridView ReportGrid { get; private set; }
         public String PrintTitle { get; set; }
 
-        public ReportFormHelper(string title, DataGridView report, Action resetTable)
+        public ReportFormHelper(Form parent, string title, DataGridView report, Action resetTable, string registry)
         {
+            this.parent = parent;
             this.PrintTitle = title;
             this.ReportGrid = report;
             this.resetTable = resetTable;
@@ -53,7 +55,7 @@ namespace FTAnalyzer
 
         }
 
-        public void PrintReport(Form parent)
+        public void PrintReport()
         {
             if (printDialog.ShowDialog(parent) == DialogResult.OK)
             {
@@ -64,13 +66,13 @@ namespace FTAnalyzer
             }
         }
 
-        public void PrintPreviewReport(Form parent)
+        public void PrintPreviewReport()
         {
             printProvider.Drawer.TitlePrintBlock = new TitlePrintBlock(PrintTitle);
             printPreviewDialog.ShowDialog(parent);
         }
 
-        public void DoExportToExcel<T>(Form parent)
+        public void DoExportToExcel<T>()
         {
             parent.Cursor = Cursors.WaitCursor;
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();

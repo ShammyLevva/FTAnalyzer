@@ -28,7 +28,7 @@ namespace FTAnalyzer.Forms
             this.facts = new SortableBindingList<IDisplayFact>();
             this.allFacts = false;
             dgFacts.AutoGenerateColumns = false;
-            reportFormHelper = new ReportFormHelper(this.Text, dgFacts, this.ResetTable);
+            reportFormHelper = new ReportFormHelper(this, this.Text, dgFacts, this.ResetTable, "Facts");
             italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
         }
 
@@ -111,12 +111,12 @@ namespace FTAnalyzer.Forms
 
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
-            reportFormHelper.PrintReport(this);
+            reportFormHelper.PrintReport();
         }
 
         private void printPreviewToolStripButton_Click(object sender, EventArgs e)
         {
-            reportFormHelper.PrintPreviewReport(this);
+            reportFormHelper.PrintPreviewReport();
         }
 
         private void Facts_TextChanged(object sender, EventArgs e)
@@ -126,7 +126,7 @@ namespace FTAnalyzer.Forms
 
         private void mnuExportToExcel_Click(object sender, EventArgs e)
         {
-            reportFormHelper.DoExportToExcel<IDisplayFact>(this);
+            reportFormHelper.DoExportToExcel<IDisplayFact>();
         }
 
         private void mnuResetColumns_Click(object sender, EventArgs e)

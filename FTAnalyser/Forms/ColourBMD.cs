@@ -30,7 +30,7 @@ namespace FTAnalyzer.Forms
             dgBMDReportSheet.AutoGenerateColumns = false;
 
             this.reportList = new SortableBindingList<IDisplayColourBMD>(reportList);
-            reportFormHelper = new ReportFormHelper("Colour BMD Report", dgBMDReportSheet, this.ResetTable);
+            reportFormHelper = new ReportFormHelper(this, "Colour BMD Report", dgBMDReportSheet, this.ResetTable, "Colour BMD");
 
             boldFont = new Font(dgBMDReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
             styles = new Dictionary<int, DataGridViewCellStyle>();
@@ -158,12 +158,12 @@ namespace FTAnalyzer.Forms
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintTitle = "Colour BDM Report";
-            reportFormHelper.PrintReport(this);
+            reportFormHelper.PrintReport();
         }
 
         private void printPreviewToolStripButton_Click(object sender, EventArgs e)
         {
-            reportFormHelper.PrintPreviewReport(this);
+            reportFormHelper.PrintPreviewReport();
         }
 
         private void dgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -289,7 +289,7 @@ namespace FTAnalyzer.Forms
 
         private void mnuExportToExcel_Click(object sender, EventArgs e)
         {
-            reportFormHelper.DoExportToExcel<IDisplayColourBMD>(this);
+            reportFormHelper.DoExportToExcel<IDisplayColourBMD>();
         }
 
         private void mnuResetCensusColumns_Click(object sender, EventArgs e)

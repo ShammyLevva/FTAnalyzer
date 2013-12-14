@@ -30,7 +30,7 @@ namespace FTAnalyzer.Forms
             dgReportSheet.AutoGenerateColumns = false;
             
             this.reportList = new SortableBindingList<IDisplayColourCensus>(reportList);
-            reportFormHelper = new ReportFormHelper("Colour Census Report", dgReportSheet, this.ResetTable);
+            reportFormHelper = new ReportFormHelper(this, "Colour Census Report", dgReportSheet, this.ResetTable, "Colour Census");
 
             boldFont = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
             styles = new Dictionary<int, DataGridViewCellStyle>();
@@ -178,12 +178,12 @@ namespace FTAnalyzer.Forms
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintTitle = "Colour Census Report";
-            reportFormHelper.PrintReport(this);
+            reportFormHelper.PrintReport();
         }
 
         private void printPreviewToolStripButton_Click(object sender, EventArgs e)
         {
-            reportFormHelper.PrintPreviewReport(this);
+            reportFormHelper.PrintPreviewReport();
         }
 
         private void dgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -292,7 +292,7 @@ namespace FTAnalyzer.Forms
 
         private void mnuExportToExcel_Click(object sender, EventArgs e)
         {
-            reportFormHelper.DoExportToExcel<IDisplayColourCensus>(this);
+            reportFormHelper.DoExportToExcel<IDisplayColourCensus>();
         }
 
         private void mnuSaveCensusColumnLayout_Click(object sender, EventArgs e)

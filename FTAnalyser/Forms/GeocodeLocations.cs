@@ -46,7 +46,7 @@ namespace FTAnalyzer.Forms
             this.CopyLocation = FactLocation.UNKNOWN_LOCATION;
             mnuPasteLocation.Enabled = false;
             dgLocations.AutoGenerateColumns = false;
-            reportFormHelper = new ReportFormHelper(this.Text, dgLocations, this.ResetTable);
+            reportFormHelper = new ReportFormHelper(this, this.Text, dgLocations, this.ResetTable, "Geocode Locations");
             italicFont = new Font(dgLocations.DefaultCellStyle.Font, FontStyle.Italic);
             reportFormHelper.LoadColumnLayout("GeocodeLocationsColumns.xml");
             mnuGeocodeLocations.Enabled = !ft.Geocoding; // disable menu if already geocoding
@@ -337,12 +337,12 @@ namespace FTAnalyzer.Forms
 
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
-            reportFormHelper.PrintReport(this);
+            reportFormHelper.PrintReport();
         }
 
         private void printPreviewToolStripButton_Click(object sender, EventArgs e)
         {
-            reportFormHelper.PrintPreviewReport(this);
+            reportFormHelper.PrintPreviewReport();
         }
 
         private void Facts_TextChanged(object sender, EventArgs e)
@@ -352,7 +352,7 @@ namespace FTAnalyzer.Forms
 
         private void mnuExportToExcel_Click(object sender, EventArgs e)
         {
-            reportFormHelper.DoExportToExcel<IDisplayGeocodedLocation>(this);
+            reportFormHelper.DoExportToExcel<IDisplayGeocodedLocation>();
         }
 
         private void mnuResetColumns_Click(object sender, EventArgs e)

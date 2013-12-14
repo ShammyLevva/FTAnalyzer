@@ -28,7 +28,7 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
             dgCensus.AutoGenerateColumns = false;
             ft = FamilyTree.Instance;
-            reportFormHelper = new ReportFormHelper("Census Report", dgCensus, this.ResetTable);
+            reportFormHelper = new ReportFormHelper(this, "Census Report", dgCensus, this.ResetTable, "Census");
 
             this.LostCousins = false;
             this.CensusDate = censusDate;
@@ -150,12 +150,12 @@ namespace FTAnalyzer.Forms
 
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
-            reportFormHelper.PrintReport(this);
+            reportFormHelper.PrintReport();
         }
 
         private void printPreviewToolStripButton_Click(object sender, EventArgs e)
         {
-            reportFormHelper.PrintPreviewReport(this);
+            reportFormHelper.PrintPreviewReport();
         }
 
         private void Census_TextChanged(object sender, EventArgs e)
@@ -232,7 +232,7 @@ namespace FTAnalyzer.Forms
 
         private void mnuExportToExcel_Click(object sender, EventArgs e)
         {
-            reportFormHelper.DoExportToExcel<IDisplayCensus>(this);
+            reportFormHelper.DoExportToExcel<IDisplayCensus>();
         }
 
         private void dgCensus_ColumnSortModeChanged(object sender, DataGridViewColumnEventArgs e)

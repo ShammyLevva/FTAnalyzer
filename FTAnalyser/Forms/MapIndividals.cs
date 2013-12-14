@@ -30,7 +30,7 @@ namespace FTAnalyzer
             this.locations = locations;
             dgIndividuals.AutoGenerateColumns = false;
             dgIndividuals.DataSource = new SortableBindingList<MapLocation>(this.locations);
-            reportFormHelper = new ReportFormHelper(this.Text, dgIndividuals, this.ResetTable);
+            reportFormHelper = new ReportFormHelper(this, this.Text, dgIndividuals, this.ResetTable, "Map Individuals");
             italicFont = new Font(dgIndividuals.DefaultCellStyle.Font, FontStyle.Italic);
             reportFormHelper.LoadColumnLayout("MapIndividualColumns.xml");
             tsRecords.Text = this.locations.Count + " Records. " + Properties.Messages.Hints_Individual;
@@ -50,12 +50,12 @@ namespace FTAnalyzer
 
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
-            reportFormHelper.PrintReport(this);
+            reportFormHelper.PrintReport();
         }
 
         private void printPreviewToolStripButton_Click(object sender, EventArgs e)
         {
-            reportFormHelper.PrintPreviewReport(this);
+            reportFormHelper.PrintPreviewReport();
         }
 
         private void Facts_TextChanged(object sender, EventArgs e)
@@ -65,7 +65,7 @@ namespace FTAnalyzer
 
         private void mnuExportToExcel_Click(object sender, EventArgs e)
         {
-            reportFormHelper.DoExportToExcel<MapLocation>(this);
+            reportFormHelper.DoExportToExcel<MapLocation>();
         }
 
         private void mnuResetColumns_Click(object sender, EventArgs e)
