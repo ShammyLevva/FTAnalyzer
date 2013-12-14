@@ -266,6 +266,14 @@ namespace FTAnalyzer.Forms
 
         private void LifeLine_Load(object sender, EventArgs e)
         {
+            int Width = (int)Application.UserAppDataRegistry.GetValue("Lifeline size - width", this.Width);
+            int Height = (int)Application.UserAppDataRegistry.GetValue("Lifeline size - height", this.Height);
+            int Top = (int)Application.UserAppDataRegistry.GetValue("Lifeline position - top", this.Top);
+            int Left = (int)Application.UserAppDataRegistry.GetValue("Lifeline position - left", this.Left);
+            this.Width = Width;
+            this.Height = Height;
+            this.Top = Top;
+            this.Left = Left;
             isLoading = false; // only turn off building map if completely done initializing
             if (dgIndividuals.RowCount > 0)
             {   // update map using first row as selected row
@@ -377,6 +385,39 @@ namespace FTAnalyzer.Forms
             }
             if (!tooltip.Equals(mapTooltip.GetToolTip(mapBox1)))
                 mapTooltip.SetToolTip(mapBox1, tooltip);
+        }
+
+        private void LifeLine_Move(object sender, EventArgs e)
+        {
+            SavePosition();
+        }
+
+        private void LifeLine_Resize(object sender, EventArgs e)
+        {
+            SavePosition();
+        }
+
+        private void SavePosition()
+        {
+            if (!isLoading && this.WindowState == FormWindowState.Normal)
+            {  //only save window size if not maximised or minimised
+                Application.UserAppDataRegistry.SetValue("Lifeline size - width", this.Width);
+                Application.UserAppDataRegistry.SetValue("Lifeline size - height", this.Height);
+                Application.UserAppDataRegistry.SetValue("Lifeline position - top", this.Top);
+                Application.UserAppDataRegistry.SetValue("Lifeline position - left", this.Left);
+            }
+        }
+
+        private void resetFormToDefaultSizeAndPositionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            isLoading = true;
+            this.Height = 682;
+            this.Width = 1139;
+            this.Top = 50;
+            this.Left = 50;
+            isLoading = false;
+            SavePosition();
+
         }
     }
 }
