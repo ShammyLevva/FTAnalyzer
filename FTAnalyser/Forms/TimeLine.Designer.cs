@@ -69,6 +69,7 @@ namespace FTAnalyzer.Forms
             this.btnForward1 = new System.Windows.Forms.Button();
             this.btnBack10 = new System.Windows.Forms.Button();
             this.btnForward10 = new System.Windows.Forms.Button();
+            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -183,7 +184,8 @@ namespace FTAnalyzer.Forms
             this.mnuDisableTimeline,
             this.mnuHideScaleBar,
             this.mnuKeepZoom,
-            this.mnuLimitFactDates});
+            this.mnuLimitFactDates,
+            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem});
             this.mnuOptions.Name = "mnuOptions";
             this.mnuOptions.Size = new System.Drawing.Size(61, 20);
             this.mnuOptions.Text = "Options";
@@ -454,6 +456,13 @@ namespace FTAnalyzer.Forms
             this.btnForward10.UseVisualStyleBackColor = true;
             this.btnForward10.Click += new System.EventHandler(this.btnForward10_Click);
             // 
+            // resetFormToDefaultPostiionAndSizeToolStripMenuItem
+            // 
+            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem.Name = "resetFormToDefaultPostiionAndSizeToolStripMenuItem";
+            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
+            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem.Text = "Reset form to default position and size";
+            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem.Click += new System.EventHandler(this.resetFormToDefaultPostiionAndSizeToolStripMenuItem_Click);
+            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -478,6 +487,8 @@ namespace FTAnalyzer.Forms
             this.Text = "Timeline of Individuals";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TimeLine_FormClosed);
             this.Load += new System.EventHandler(this.TimeLine_Load);
+            this.Move += new System.EventHandler(this.TimeLine_Move);
+            this.Resize += new System.EventHandler(this.TimeLine_Resize);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -530,5 +541,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripMenuItem mnuHideScaleBar;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private ToolStripMapSelector mnuMapStyle = new ToolStripMapSelector();
+        private System.Windows.Forms.ToolStripMenuItem resetFormToDefaultPostiionAndSizeToolStripMenuItem;
     }
 }

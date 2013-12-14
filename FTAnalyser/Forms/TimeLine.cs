@@ -21,10 +21,12 @@ namespace FTAnalyzer.Forms
         private int yearLimit;
         private Color backgroundColour;
         private ClusterLayer clusters;
-        
+        private bool loading;
+
         public TimeLine()
         {
             InitializeComponent();
+            loading = true;
             mnuMapStyle.Setup(linkLabel1, mapBox1);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             //mapZoomToolStrip.Renderer = new CustomToolStripRenderer();
@@ -43,7 +45,7 @@ namespace FTAnalyzer.Forms
         private void SetupMap()
         {
             clusters = new ClusterLayer(mapBox1.Map);
-            mh.AddEnglishParishLayer(mapBox1.Map); 
+            mh.AddEnglishParishLayer(mapBox1.Map);
             mapBox1.Map.MinimumZoom = 500;
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.QueryGrowFactor = 30;
@@ -210,7 +212,16 @@ namespace FTAnalyzer.Forms
             SetupMap();
             DisplayLocationsForYear(labValue.Text);
             mh.CheckIfGeocodingNeeded(this);
+            int Width = (int)Application.UserAppDataRegistry.GetValue("Timeline size - width", this.Width);
+            int Height = (int)Application.UserAppDataRegistry.GetValue("Timeline size - height", this.Height);
+            int Top = (int)Application.UserAppDataRegistry.GetValue("Timeline position - top", this.Top);
+            int Left = (int)Application.UserAppDataRegistry.GetValue("Timeline position - left", this.Left);
+            this.Width = Width;
+            this.Height = Height;
+            this.Top = Top;
+            this.Left = Left;
             mapBox1.Refresh();
+            loading = false;
         }
 
         private void mapBox1_MapQueried(FeatureDataTable data)
@@ -422,6 +433,38 @@ namespace FTAnalyzer.Forms
         private void TimeLine_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Dispose();
+        }
+
+        private void TimeLine_Resize(object sender, EventArgs e)
+        {
+            SavePosition();
+        }
+
+        private void TimeLine_Move(object sender, EventArgs e)
+        {
+            SavePosition();
+        }
+
+        private void SavePosition()
+        {
+            if (!loading && this.WindowState == FormWindowState.Normal)
+            {  //only save window size if not maximised or minimised
+                Application.UserAppDataRegistry.SetValue("Timeline size - width", this.Width);
+                Application.UserAppDataRegistry.SetValue("Timeline size - height", this.Height);
+                Application.UserAppDataRegistry.SetValue("Timeline position - top", this.Top);
+                Application.UserAppDataRegistry.SetValue("Timeline position - left", this.Left);
+            }
+        }
+
+        private void resetFormToDefaultPostiionAndSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            loading = true;
+            this.Height = 622;
+            this.Width = 937;
+            this.Top = 50;
+            this.Left = 50;
+            loading = false;
+            SavePosition();
         }
     }
 }
