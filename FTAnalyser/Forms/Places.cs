@@ -319,8 +319,8 @@ namespace FTAnalyzer.Forms
         private void resetFormDefaultSizeAndPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             isloading = true;
-            this.Height = 622;
-            this.Width = 937;
+            this.Height = 628;
+            this.Width = 1129;
             this.Top = 50;
             this.Left = 50;
             isloading = false;
