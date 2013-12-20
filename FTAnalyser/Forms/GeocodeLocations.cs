@@ -542,6 +542,7 @@ namespace FTAnalyzer.Forms
                                 (retryPartial &&
                                     (loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH || loc.GeocodeStatus == FactLocation.Geocode.LEVEL_MISMATCH)))
                             {
+                                log.Info("Searching Google for '" + loc.GoogleFixed + "' original text was '" + loc.GEDCOMLocation + "'.");
                                 res = SearchGoogle(loc.GoogleFixed);
                             }
                             if (res != null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
