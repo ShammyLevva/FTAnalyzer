@@ -53,7 +53,7 @@ namespace FTAnalyzer
         private static Dictionary<string, string> FREECEN_LOOKUP = new Dictionary<string, string>();
         private static Dictionary<string, Tuple<string, string>> FINDMYPAST_LOOKUP = new Dictionary<string, Tuple<string, string>>();
         private static IDictionary<string, FactLocation> locations;
-        private static Dictionary<Tuple<int, string>, string> GOOGLE_FIXES;
+        private static Dictionary<Tuple<int, string>, string> GOOGLE_FIXES = new Dictionary<Tuple<int, string>, string>();
         private static Dictionary<Tuple<int, string>, string> LOCAL_GOOGLE_FIXES;
 
         public static Dictionary<Geocode, string> Geocodes;
@@ -151,9 +151,9 @@ namespace FTAnalyzer
             }
         }
 
-        public static void LoadGoogleFixesXMLFile()
+        public static void LoadGoogleFixesXMLFile(RichTextBox xmlErrorDocument)
         {
-            ResetGoogleFixes();
+            LOCAL_GOOGLE_FIXES = new Dictionary<Tuple<int, string>, string>();
             try
             {
                 string filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, "GoogleFixes.xml");
@@ -169,19 +169,14 @@ namespace FTAnalyzer
                         AddGoogleFixes(LOCAL_GOOGLE_FIXES, n, SUBREGION);
                     foreach (XmlNode n in xmlDoc.SelectNodes("GoogleGeocodes/MultiLevelFixes/MultiLevelFix"))
                         AddGoogleFixes(LOCAL_GOOGLE_FIXES, n, UNKNOWN);
+                    xmlErrorDocument.AppendText("\nLoaded " + LOCAL_GOOGLE_FIXES.Count() + " Google Fixes.\n");
                 }
             }
             catch (Exception e)
             {
-                ResetGoogleFixes();
+                LOCAL_GOOGLE_FIXES = new Dictionary<Tuple<int, string>, string>();
                 MessageBox.Show("Error processing user defined GoogleFixes.xml file. File will be ignored.\n\nError was : " + e.Message, "FT Analyzer");
             }
-        }
-
-        private static void ResetGoogleFixes()
-        {
-            GOOGLE_FIXES = new Dictionary<Tuple<int, string>, string>();
-            LOCAL_GOOGLE_FIXES = new Dictionary<Tuple<int, string>, string>();
         }
 
         private static void AddGoogleFixes(Dictionary<Tuple<int, string>, string> dictionary, XmlNode n, int level)
@@ -288,7 +283,7 @@ namespace FTAnalyzer
             locations = new Dictionary<string, FactLocation>();
             // set unknown location as unknown so it doesn't keep hassling to be searched
             UNKNOWN_LOCATION = GetLocation(string.Empty, "0.0", "0.0", Geocode.UNKNOWN);
-            ResetGoogleFixes();
+            LOCAL_GOOGLE_FIXES = new Dictionary<Tuple<int, string>, string>();
         }
 
         private FactLocation()
