@@ -143,6 +143,7 @@ namespace FTAnalyzer
         {
             _loading = true;
             ResetData();
+            FactLocation.LoadGoogleFixesXMLFile();
             string rootIndividual = string.Empty;
             Application.DoEvents();
             XmlDocument doc = GedcomToXml.Load(filename);
