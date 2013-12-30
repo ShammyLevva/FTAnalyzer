@@ -115,6 +115,7 @@ namespace FTAnalyzer.Utilities
                 Version v3_0_2_0 = new Version("3.0.2.0");
                 Version v3_1_2_0 = new Version("3.1.2.0");
                 Version v3_2_1_0 = new Version("3.2.1.0");
+                Version v3_3_2_5 = new Version("3.3.2.5");
                 if (dbVersion < v3_0_0_0)
                 {
                     // Version is less than 3.0.0.0 or none existent so copy latest database from empty database
@@ -176,6 +177,14 @@ namespace FTAnalyzer.Utilities
                     {
                         MessageBox.Show("Database not backed up we cannot proceed to update maps without a safe database backup.\nMapping features will not work correctly.", "Database backup Required");
                     }
+                }
+                if(dbVersion < v3_3_2_5)
+                {
+                    // mark all bad viewports as not searched
+                    SQLiteCommand cmd = new SQLiteCommand("update Geocode set latitude = 0, longitude = 0, founddate = date('now'), foundlocation = '', foundlevel = -2, viewport_x_ne = 0, viewport_y_ne = 0, viewport_x_sw = 0, viewport_y_sw = 0, geocodestatus = 0, foundresulttype = '' where latitude<>0 and longitude<>0 and abs(viewport_x_ne) <= 180", conn);
+                    cmd.ExecuteNonQuery();
+                    cmd = new SQLiteCommand("update versions set Database = '3.3.2.5'", conn);
+                    cmd.ExecuteNonQuery();            
                 }
             }
             catch (Exception ex)
