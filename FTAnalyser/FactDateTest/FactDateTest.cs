@@ -171,37 +171,26 @@ namespace FactDateTest
             Assert.AreEqual(new DateTime(1983, 9, 28), target.StartDate);
             Assert.AreEqual(new DateTime(1986, 6, 10), target.EndDate);
 
+            // Double dates
             target = new FactDate("11 Mar 1747/48");
-            Assert.AreEqual(new DateTime(1747, 3, 11), target.StartDate);
-            Assert.AreEqual(new DateTime(1747, 3, 11), target.EndDate);
+            Assert.AreEqual(new DateTime(1748, 3, 11), target.StartDate);
+            Assert.AreEqual(new DateTime(1748, 3, 11), target.EndDate);
 
             target = new FactDate("Mar 1747/48");
-            Assert.AreEqual(new DateTime(1747, 3, 1), target.StartDate);
-            Assert.AreEqual(new DateTime(1747, 3, 31), target.EndDate);
+            Assert.AreEqual(new DateTime(1748, 3, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1748, 3, 31), target.EndDate);
 
             target = new FactDate("1747/48");
-            Assert.AreEqual(new DateTime(1747, 1, 1), target.StartDate);
-            Assert.AreEqual(new DateTime(1747, 12, 31), target.EndDate);
-
-            target = new FactDate("11 Mar 1747/8");
-            Assert.AreEqual(new DateTime(1747, 3, 11), target.StartDate);
-            Assert.AreEqual(new DateTime(1747, 3, 11), target.EndDate);
-
-            target = new FactDate("Mar 1747/8");
-            Assert.AreEqual(new DateTime(1747, 3, 1), target.StartDate);
-            Assert.AreEqual(new DateTime(1747, 3, 31), target.EndDate);
-
-            target = new FactDate("1747/8");
-            Assert.AreEqual(new DateTime(1747, 1, 1), target.StartDate);
-            Assert.AreEqual(new DateTime(1747, 12, 31), target.EndDate);
+            Assert.AreEqual(new DateTime(1748, 1, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1748, 12, 31), target.EndDate);
 
             target = new FactDate("11 Mar 1747/1748");
-            Assert.AreEqual(new DateTime(1747, 3, 11), target.StartDate);
-            Assert.AreEqual(new DateTime(1747, 3, 11), target.EndDate);
+            Assert.AreEqual(new DateTime(1748, 3, 11), target.StartDate);
+            Assert.AreEqual(new DateTime(1748, 3, 11), target.EndDate);
 
             target = new FactDate("15 FEB 1599/00");
-            Assert.AreEqual(new DateTime(1599, 2, 15), target.StartDate);
-            Assert.AreEqual(new DateTime(1599, 2, 15), target.EndDate);
+            Assert.AreEqual(new DateTime(1600, 2, 15), target.StartDate);
+            Assert.AreEqual(new DateTime(1600, 2, 15), target.EndDate);
             
             // test some alternative date formats
             target = new FactDate("Q3 1947");
