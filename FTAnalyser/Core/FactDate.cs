@@ -534,6 +534,8 @@ namespace FTAnalyzer
                 {
                     dt = (highlow == HIGH) ? MAXDATE : MINDATE;
                 }
+                if (gDouble != null)
+                    dt = dt.AddYears(1); // use upper year for double dates
             }
             catch (System.FormatException)
             {
