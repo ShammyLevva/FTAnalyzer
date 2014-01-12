@@ -587,7 +587,10 @@ namespace FTAnalyzer.Forms
                                             if (loc.GEDCOMLocation.Equals(loc.GoogleFixed))
                                                 checkresultsPass++;  // if we have the same string skip checking GEDCOM location
                                             else
+                                            {
+                                                log.Info("Searching Google for original text '" + loc.GEDCOMLocation + "'.");
                                                 res = SearchGoogle(loc.GEDCOMLocation);
+                                            }
                                         }
                                         checkresultsPass++;
                                     }
