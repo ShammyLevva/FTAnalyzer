@@ -675,13 +675,11 @@ namespace FTAnalyzer.Forms
 
         private static void UpdateDatabase(FactLocation loc, bool inDatabase)
         {
-            DatabaseHelper dbh = DatabaseHelper.Instance;
             if (inDatabase)
-                dbh.UpdateGeocode(loc);
+                DatabaseHelper.Instance.UpdateGeocode(loc);
             else
-            {
-                dbh.InsertGeocode(loc);
-            }
+                DatabaseHelper.Instance.InsertGeocode(loc);
+            FamilyTree.Instance.RefreshTreeNodeIcon(loc);
         }
 
         private void mnuGeocodeLocations_Click(object sender, EventArgs e)

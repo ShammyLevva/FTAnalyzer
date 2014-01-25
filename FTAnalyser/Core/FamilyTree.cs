@@ -1862,34 +1862,7 @@ namespace FTAnalyzer
                         child.Name = part;
                         child.Tag = location;
                         child.ToolTipText = "Geocoding Status : " + location.Geocoded;
-                        switch (location.GeocodeStatus)
-                        {
-                            case FactLocation.Geocode.NOT_SEARCHED:
-                                child.ImageIndex = 0;
-                                child.ToolTipText += "\nUse 'Run Geocoder' option under Maps menu to search Google for location.";
-                                break;
-                            case FactLocation.Geocode.MATCHED:
-                                child.ImageIndex = 1;
-                                break;
-                            case FactLocation.Geocode.PARTIAL_MATCH:
-                                child.ImageIndex = 2;
-                                break;
-                            case FactLocation.Geocode.GEDCOM_USER:
-                                child.ImageIndex = 3;
-                                break;
-                            case FactLocation.Geocode.NO_MATCH:
-                                child.ImageIndex = 4;
-                                break;
-                            case FactLocation.Geocode.INCORRECT:
-                                child.ImageIndex = 5;
-                                break;
-                            case FactLocation.Geocode.OUT_OF_BOUNDS:
-                                child.ImageIndex = 6;
-                                break;
-                            case FactLocation.Geocode.LEVEL_MISMATCH:
-                                child.ImageIndex = 7;
-                                break;
-                        }
+                        SetTreeNodeImage(location, child);
                         // Set everything other than known countries to regular
                         if (currentM == mainformTreeRootNode && Countries.IsKnownCountry(part))
                             child.NodeFont = boldFont;
@@ -1928,6 +1901,38 @@ namespace FTAnalyzer
             return BuildTreeNodeArray(mainform);
         }
 
+        private static void SetTreeNodeImage(FactLocation location, TreeNode child)
+        {
+            switch (location.GeocodeStatus)
+            {
+                case FactLocation.Geocode.NOT_SEARCHED:
+                    child.ImageIndex = 0;
+                    child.ToolTipText += "\nUse 'Run Geocoder' option under Maps menu to search Google for location.";
+                    break;
+                case FactLocation.Geocode.MATCHED:
+                    child.ImageIndex = 1;
+                    break;
+                case FactLocation.Geocode.PARTIAL_MATCH:
+                    child.ImageIndex = 2;
+                    break;
+                case FactLocation.Geocode.GEDCOM_USER:
+                    child.ImageIndex = 3;
+                    break;
+                case FactLocation.Geocode.NO_MATCH:
+                    child.ImageIndex = 4;
+                    break;
+                case FactLocation.Geocode.INCORRECT:
+                    child.ImageIndex = 5;
+                    break;
+                case FactLocation.Geocode.OUT_OF_BOUNDS:
+                    child.ImageIndex = 6;
+                    break;
+                case FactLocation.Geocode.LEVEL_MISMATCH:
+                    child.ImageIndex = 7;
+                    break;
+            }
+        }
+
         private TreeNode[] BuildTreeNodeArray(bool mainForm)
         {
             TreeNodeCollection nodes;
@@ -1938,7 +1943,35 @@ namespace FTAnalyzer
             TreeNode[] result = new TreeNode[nodes.Count];
             nodes.CopyTo(result, 0);
             return result;
+        }
 
+        public void RefreshTreeNodeIcon(FactLocation location)
+        {
+            string[] parts = location.Parts;
+            TreeNode currentM = mainformTreeRootNode;
+            TreeNode currentP = placesTreeRootNode;
+            if (currentM != null || currentP != null)
+            {
+                foreach (string part in parts)
+                {
+                    if (part.Length == 0 && !Properties.GeneralSettings.Default.AllowEmptyLocations) break;
+                    if (mainformTreeRootNode != null)
+                    {
+                        TreeNode childM = currentM.Nodes.Find(part, false).FirstOrDefault();
+                        currentM = childM;
+                    }
+                    if (placesTreeRootNode != null)
+                    {
+                        TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
+                        currentP = childP;
+                    }
+                }
+                // we should now have nodes to update   
+                if (mainformTreeRootNode != null)
+                    SetTreeNodeImage(location, currentM);
+                if (placesTreeRootNode != null)
+                    SetTreeNodeImage(location, currentP);
+            }
         }
         #endregion
 
