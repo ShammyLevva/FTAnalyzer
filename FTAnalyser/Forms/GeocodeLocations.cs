@@ -673,8 +673,13 @@ namespace FTAnalyzer.Forms
             return res;
         }
 
-        private static void UpdateDatabase(FactLocation loc, bool inDatabase)
+        private void UpdateDatabase(FactLocation loc, bool inDatabase)
         {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => UpdateDatabase(loc, inDatabase)));
+                return;
+            }
             if (inDatabase)
                 DatabaseHelper.Instance.UpdateGeocode(loc);
             else
