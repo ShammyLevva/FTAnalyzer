@@ -161,6 +161,7 @@ namespace FTAnalyzer
                         HourGlass(false);
                         AddFileToRecentList(filename);
                         mnuRestore.Enabled = false;
+                        this.Text = "Family Tree Analyzer v" + VERSION + ". Analysing: " + filename;
                         MessageBox.Show("Gedcom File " + filename + " Loaded", "FT Analyzer");
                     }
                 }
