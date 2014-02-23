@@ -841,7 +841,15 @@ namespace FTAnalyzer
                 int year = census.StartDate.Year;
                 if (year == 1841 && IsCensusDone(CensusDate.EWCENSUS1841, false))
                     return 2; // census entered LC not entered - yellow
+                if (year == 1880 && IsCensusDone(CensusDate.USCENSUS1880, false))
+                    return 2; // census entered LC not entered - yellow
+                if (year == 1881 && 
+                    (IsCensusDone(CensusDate.EWCENSUS1881, false) || IsCensusDone(CensusDate.CANADACENSUS1881, false) ||
+                     IsCensusDone(CensusDate.SCOTCENSUS1881, false)))
+                    return 2; // census entered LC not entered - yellow
                 if (year == 1911 && (IsCensusDone(CensusDate.EWCENSUS1911, false) || IsCensusDone(CensusDate.IRELANDCENSUS1911, false)))
+                    return 2; // census entered LC not entered - yellow
+                if (year == 1940 && IsCensusDone(CensusDate.USCENSUS1940, false))
                     return 2; // census entered LC not entered - yellow
                 return 3;  // census entered and LCyear but not LC country - green
             }
