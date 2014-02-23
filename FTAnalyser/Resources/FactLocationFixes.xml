@@ -16,14 +16,12 @@
       <CountryTypo from="UK"      to="England" />
       <CountryTypo from="U K"     to="England" />
       <CountryTypo from="Eng"     to="England" />
-      <CountryTypo from="ENG"     to="England" />
       <CountryTypo from="GB"      to="England" />
       <CountryTypo from="G B"     to="England" />
       <CountryTypo from="Great Britain"    to="England" />
       <CountryTypo from="Aust"    to="Australia" />
       <CountryTypo from="AUS"     to="Australia" />
       <CountryTypo from="Eire"    to="Ireland" />
-      <CountryTypo from="SCT"     to="Scotland" />
       <CountryTypo from="Scot"    to="Scotland" />
       <CountryTypo from="Holland" to="Netherlands" />
       <CountryTypo from="The Netherlands" to="Netherlands" />
@@ -39,13 +37,19 @@
       <CountryTypo from="West Germany" to="Germany" />
       <CountryTypo from="N Wales" to="Wales" />
       <CountryTypo from="S Wales" to="Wales" />
+      <!-- Chapman Codes -->
+      <CountryTypo from="CHI" to="Channel Islands" />
+      <CountryTypo from="ENG" to="England" />
+      <CountryTypo from="IOM" to="Isle of Man" />
+      <CountryTypo from="IRL" to="Ireland" />
+      <CountryTypo from="NIR" to="Northern Ireland" />
+      <CountryTypo from="SCT" to="Scotland" />
+      <CountryTypo from="WLS" to="Wales" />
     </CountryTypos>
     
     <RegionTypos>
       <!-- Scotland -->
-      <RegionTypo from="ABD"            to="Aberdeenshire" />
       <RegionTypo from="ABDN"           to="Aberdeenshire" />
-      <RegionTypo from="KCD"            to="Kincardineshire" />
       <RegionTypo from="Dumfriesshire"  to="Dumfries-shire" />
       <RegionTypo from="Invernessshire" to="Inverness-shire" />
       <RegionTypo from="Kinrossshire"   to="Kinross-shire" />
@@ -207,6 +211,155 @@
       <RegionTypo from="Pembrokeshire"    to="Pembroke" />
       <RegionTypo from="Radnorshire"      to="Radnor" />
 
+      <!-- Chapman County Codes -->
+      <RegionTypo from="ALD" to="Alderney" />
+      <RegionTypo from="GSY" to="Guernsey" />
+      <RegionTypo from="JSY" to="Jersey" />
+      <RegionTypo from="SRK" to="Sark" />
+      
+      <RegionTypo from="BDF" to="Bedfordshire" />
+      <RegionTypo from="BRK" to="Berkshire" />
+      <RegionTypo from="BKM" to="Buckinghamshire" />
+      <RegionTypo from="CAM" to="Cambridgeshire" />
+      <RegionTypo from="CHS" to="Cheshire" />
+      <RegionTypo from="CON" to="Cornwall" />
+      <RegionTypo from="CUL" to="Cumberland" />
+      <RegionTypo from="DBY" to="Derbyshire" />
+      <RegionTypo from="DEV" to="Devonshire" />
+      <RegionTypo from="DOR" to="Dorset" />
+      <RegionTypo from="DUR" to="Durham" />
+      <RegionTypo from="ESS" to="Essex" />
+      <RegionTypo from="GLS" to="Gloucestershire" />
+      <RegionTypo from="HAM" to="Hampshire" />
+      <RegionTypo from="HEF" to="Herefordshire" />
+      <RegionTypo from="HRT" to="Hertfordshire" />
+      <RegionTypo from="HUN" to="Huntingdonshire" />
+      <RegionTypo from="IOW" to="Isle of Wight" />
+      <RegionTypo from="KEN" to="Kent" />
+      <RegionTypo from="LAN" to="Lancashire" />
+      <RegionTypo from="LEI" to="Leicestershire" />
+      <RegionTypo from="LIN" to="Lincolnshire" />
+      <RegionTypo from="LND" to="London" />
+      <RegionTypo from="MDX" to="Middlesex" />
+      <RegionTypo from="NFK" to="Norfolk" />
+      <RegionTypo from="NTH" to="Northamptonshire" />
+      <RegionTypo from="NBL" to="Northumberland" />
+      <RegionTypo from="NTT" to="Nottinghamshire" />
+      <RegionTypo from="OXF" to="Oxfordshire" />
+      <RegionTypo from="RUT" to="Rutland" />
+      <RegionTypo from="SAL" to="Shropshire" />
+      <RegionTypo from="SOM" to="Somerset" />
+      <RegionTypo from="STS" to="Staffordshire" />
+      <RegionTypo from="SFK" to="Suffolk" />
+      <RegionTypo from="SRY" to="Surrey" />
+      <RegionTypo from="SSX" to="Sussex" />
+      <RegionTypo from="WAR" to="Warwickshire" />
+      <RegionTypo from="WES" to="Westmorland" />
+      <RegionTypo from="WIL" to="Wiltshire" />
+      <RegionTypo from="WOR" to="Worcestershire" />
+      <RegionTypo from="YKS" to="Yorkshire" />
+      <RegionTypo from="ERY" to="East Yorkshire" />
+      <RegionTypo from="NRY" to="North Yorkshire" />
+      <RegionTypo from="WRY" to="West Yorkshire" />
+      
+      <RegionTypo from="ABD" to="Aberdeenshire" />
+      <RegionTypo from="ANS" to="Angus" />
+      <RegionTypo from="ARL" to="Argyll" />
+      <RegionTypo from="AYR" to="Ayrshire" />
+      <RegionTypo from="BAN" to="Banffshire" />
+      <RegionTypo from="BEW" to="Berwickshire" />
+      <RegionTypo from="BUT" to="Bute" />
+      <RegionTypo from="CAI" to="Caithness" />
+      <RegionTypo from="CLK" to="Clackmannanshire" />
+      <RegionTypo from="DFS" to="Dumfriesshire" />
+      <RegionTypo from="DNB" to="Dunbartonshire" />
+      <RegionTypo from="ELN" to="East Lothian" />
+      <RegionTypo from="FIF" to="Fife" />
+      <RegionTypo from="INV" to="Inverness-shire" />
+      <RegionTypo from="KCD" to="Kincardineshire" />
+      <RegionTypo from="KRS" to="Kinross-shire" />
+      <RegionTypo from="KKD" to="Kirkcudbrightshire" />
+      <RegionTypo from="LKS" to="Lanarkshire" />
+      <RegionTypo from="MLN" to="Midlothian" />
+      <RegionTypo from="MOR" to="Moray" />
+      <RegionTypo from="NAI" to="Nairnshire" />
+      <RegionTypo from="OKI" to="Orkney" />
+      <RegionTypo from="PEE" to="Peeblesshire" />
+      <RegionTypo from="PER" to="Perthshire" />
+      <RegionTypo from="RFW" to="Renfrewshire" />
+      <RegionTypo from="ROC" to="Ross and Cromarty" />
+      <RegionTypo from="ROX" to="Roxburghshire" />
+      <RegionTypo from="SEL" to="Selkirkshire" />
+      <RegionTypo from="SHI" to="Shetland" />
+      <RegionTypo from="STI" to="Stirlingshire" />
+      <RegionTypo from="SUT" to="Sutherland" />
+      <RegionTypo from="WLN" to="West Lothian" />
+      <RegionTypo from="WIG" to="Wigtownshire" />
+      <RegionTypo from="BOR" to="Borders" />
+      <RegionTypo from="CEN" to="Central" />
+      <RegionTypo from="DGY" to="Dumfries and Galloway" />
+      <RegionTypo from="GMP" to="Grampian" />
+      <RegionTypo from="HLD" to="Highland" />
+      <RegionTypo from="LTN" to="Lothian" />
+      <RegionTypo from="STD" to="Strathclyde" />
+      <RegionTypo from="TAY" to="Tayside" />
+      <RegionTypo from="WIS" to="Western Isles" />
+      
+      <RegionTypo from="AGY" to="Anglesey" />
+      <RegionTypo from="BRE" to="Brecknockshire" />
+      <RegionTypo from="CAE" to="Caernarfonshire" />
+      <RegionTypo from="CGN" to="Cardiganshire" />
+      <RegionTypo from="CMN" to="Carmarthenshire" />
+      <RegionTypo from="DEN" to="Denbighshire" />
+      <RegionTypo from="FLN" to="Flintshire" />
+      <RegionTypo from="GLA" to="Glamorgan" />
+      <RegionTypo from="MER" to="Merionethshire" />
+      <RegionTypo from="MON" to="Monmouthshire" />
+      <RegionTypo from="MGY" to="Montgomeryshire" />
+      <RegionTypo from="PEM" to="Pembrokeshire" />
+      <RegionTypo from="RAD" to="Radnorshire" />
+      <RegionTypo from="CWD" to="Clwyd" />
+      <RegionTypo from="DFD" to="Dyfed" />
+      <RegionTypo from="GNT" to="Gwent" />
+      <RegionTypo from="GWN" to="Gwynedd" />
+      <RegionTypo from="MGM" to="Mid Glamorgan" />
+      <RegionTypo from="POW" to="Powys" />
+      <RegionTypo from="SGM" to="South Glamorgan" />
+      <RegionTypo from="WGM" to="West Glamorgan" />
+      
+      <RegionTypo from="ANT" to="Antrim" />
+      <RegionTypo from="ARM" to="Armagh" />
+      <RegionTypo from="CAR" to="Carlow" />
+      <RegionTypo from="CAV" to="Cavan" />
+      <RegionTypo from="CLA" to="Clare" />
+      <RegionTypo from="COR" to="Cork" />
+      <RegionTypo from="DON" to="Donegal" />
+      <RegionTypo from="DOW" to="Down" />
+      <RegionTypo from="DUB" to="Dublin" />
+      <RegionTypo from="FER" to="Fermanagh" />
+      <RegionTypo from="GAL" to="Galway" />
+      <RegionTypo from="KER" to="Kerry" />
+      <RegionTypo from="KID" to="Kildare" />
+      <RegionTypo from="KIK" to="Kilkenny" />
+      <RegionTypo from="LET" to="Leitrim" />
+      <RegionTypo from="LEX" to="Leix" />
+      <RegionTypo from="LIM" to="Limerick" />
+      <RegionTypo from="LDY" to="Londonderry" />
+      <RegionTypo from="LOG" to="Longford" />
+      <RegionTypo from="LOU" to="Louth" />
+      <RegionTypo from="MAY" to="Mayo" />
+      <RegionTypo from="MEA" to="Meath" />
+      <RegionTypo from="MOG" to="Monaghan" />
+      <RegionTypo from="OFF" to="Offaly" />
+      <RegionTypo from="ROS" to="Roscommon" />
+      <RegionTypo from="SLI" to="Sligo" />
+      <RegionTypo from="TIP" to="Tipperary" />
+      <RegionTypo from="TYR" to="Tyrone" />
+      <RegionTypo from="WAT" to="Waterford" />
+      <RegionTypo from="WEM" to="Westmeath" />
+      <RegionTypo from="WEX" to="Wexford" />
+      <RegionTypo from="WIC" to="Wicklow" />
+      
       <!-- Canadian Province abbreviations -->
       <RegionTypo from="BC"     to="British Columbia" />
       <RegionTypo from="NWT"    to="North West Territories" />
