@@ -284,7 +284,6 @@ namespace FTAnalyzer.Forms
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list);
                     break;
             }
-            ResetTable();
             dgReportSheet.Focus();
             tsRecords.Text = Properties.Messages.Count + dgReportSheet.RowCount + " records listed.";
             this.Cursor = Cursors.Default;

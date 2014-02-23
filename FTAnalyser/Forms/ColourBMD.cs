@@ -281,7 +281,6 @@ namespace FTAnalyzer.Forms
                     dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(8, false));
                     break;
             }
-            ResetTable();
             dgBMDReportSheet.Focus();
             tsRecords.Text = Properties.Messages.Count + dgBMDReportSheet.RowCount + " records listed.";
             this.Cursor = Cursors.Default;
