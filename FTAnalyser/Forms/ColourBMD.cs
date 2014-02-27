@@ -62,9 +62,9 @@ namespace FTAnalyzer.Forms
             noMarriage.BackColor = noMarriage.ForeColor = Color.RoyalBlue;
             styles.Add(8, noMarriage);
 
-            dgBMDReportSheet.DataSource = this.reportList;
             birthColumnIndex = dgBMDReportSheet.Columns["Birth"].Index;
             burialColumnIndex = dgBMDReportSheet.Columns["CremBuri"].Index;
+            dgBMDReportSheet.DataSource = this.reportList;
             reportFormHelper.LoadColumnLayout("ColourBMDColumns.xml");
             tsRecords.Text = Properties.Messages.Count + reportList.Count + " records listed.";
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");

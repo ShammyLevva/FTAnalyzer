@@ -211,6 +211,7 @@
     <Compile Include="Core\FactLocationImage.cs" />
     <Compile Include="Core\ParentalRelationship.cs" />
     <Compile Include="Core\Parishes.cs" />
+    <Compile Include="Core\Relationship.cs" />
     <Compile Include="Core\Surname.cs" />
     <Compile Include="Forms\Controls\ToolStripMapSelector.cs">
       <SubType>Component</SubType>
