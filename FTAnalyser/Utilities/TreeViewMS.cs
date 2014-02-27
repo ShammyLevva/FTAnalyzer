@@ -12,12 +12,12 @@ namespace FTAnalyzer.Utilities
     /// </summary>
     public class TreeViewMS : TreeView
     {
-        protected ArrayList m_coll;
+        protected ArrayList selectedNodes;
         protected TreeNode m_lastNode, m_firstNode;
 
         public TreeViewMS()
         {
-            m_coll = new ArrayList();
+            selectedNodes = new ArrayList();
         }
 
         protected override void OnPaint(PaintEventArgs pe)
@@ -30,13 +30,13 @@ namespace FTAnalyzer.Utilities
 
         public ArrayList SelectedNodes
         {
-            get { return m_coll; }
+            get { return selectedNodes; }
             set
             {
-                removePaintFromNodes();
-                m_coll.Clear();
-                m_coll = value;
-                paintSelectedNodes();
+                RemovePaintFromNodes();
+                selectedNodes.Clear();
+                selectedNodes = value;
+                PaintSelectedNodes();
             }
         }
 
@@ -44,11 +44,10 @@ namespace FTAnalyzer.Utilities
         //
         // (overriden method, and base class called to ensure events are triggered)
 
-
         protected override void OnNodeMouseClick(TreeNodeMouseClickEventArgs e)
         {
             base.OnNodeMouseClick(e);
-            if (e.Node.IsSelected && ModifierKeys == Keys.Control && m_coll.Count > 1)
+            if (e.Node.IsSelected && ModifierKeys == Keys.Control && selectedNodes.Count > 1)
             {
                 OnBeforeSelect(new TreeViewCancelEventArgs(e.Node, false, TreeViewAction.ByMouse));
                 OnAfterSelect(new TreeViewEventArgs(e.Node));
@@ -63,15 +62,15 @@ namespace FTAnalyzer.Utilities
             bool bShift = (ModifierKeys == Keys.Shift);
 
             // selecting twice the node while pressing CTRL ?
-            if (bControl && m_coll.Contains(e.Node))
+            if (bControl && selectedNodes.Contains(e.Node))
             {
                 // unselect it (let framework know we don't want selection this time)
                 e.Cancel = true;
 
                 // update nodes
-                removePaintFromNodes();
-                m_coll.Remove(e.Node);
-                paintSelectedNodes();
+                RemovePaintFromNodes();
+                selectedNodes.Remove(e.Node);
+                PaintSelectedNodes();
                 return;
             }
             m_lastNode = e.Node;
@@ -85,14 +84,14 @@ namespace FTAnalyzer.Utilities
 
             if (bControl)
             {
-                if (!m_coll.Contains(e.Node)) // new node ?
-                    m_coll.Add(e.Node);
+                if (!selectedNodes.Contains(e.Node)) // new node ?
+                    selectedNodes.Add(e.Node);
                 else  // not new, remove it from the collection
                 {
-                    removePaintFromNodes();
-                    m_coll.Remove(e.Node);
+                    RemovePaintFromNodes();
+                    selectedNodes.Remove(e.Node);
                 }
-                paintSelectedNodes();
+                PaintSelectedNodes();
             }
             else
             {
@@ -119,7 +118,7 @@ namespace FTAnalyzer.Utilities
                         TreeNode n = bottomnode;
                         while (n != uppernode.Parent)
                         {
-                            if (!m_coll.Contains(n)) // new node ?
+                            if (!selectedNodes.Contains(n)) // new node ?
                                 myQueue.Enqueue(n);
                             n = n.Parent;
                         }
@@ -142,7 +141,7 @@ namespace FTAnalyzer.Utilities
                             TreeNode n = uppernode;
                             while (nIndexUpper <= nIndexBottom)
                             {
-                                if (!m_coll.Contains(n)) // new node ?
+                                if (!selectedNodes.Contains(n)) // new node ?
                                     myQueue.Enqueue(n);
                                 n = n.NextNode;
                                 nIndexUpper++;
@@ -150,24 +149,25 @@ namespace FTAnalyzer.Utilities
                         }
                         else
                         {
-                            if (!m_coll.Contains(uppernode)) myQueue.Enqueue(uppernode);
-                            if (!m_coll.Contains(bottomnode)) myQueue.Enqueue(bottomnode);
+                            if (!selectedNodes.Contains(uppernode)) myQueue.Enqueue(uppernode);
+                            if (!selectedNodes.Contains(bottomnode)) myQueue.Enqueue(bottomnode);
                         }
                     }
 
-                    m_coll.AddRange(myQueue);
-                    paintSelectedNodes();
+                    selectedNodes.AddRange(myQueue);
+                    PaintSelectedNodes();
                     m_firstNode = e.Node; // let us chain several SHIFTs if we like it
                 } // end if m_bShift
                 else
                 {
                     // in the case of a simple click, just add this item
-                    if (m_coll != null && m_coll.Count > 0)
+                    if (selectedNodes != null && selectedNodes.Count > 0)
                     {
-                        removePaintFromNodes();
-                        m_coll.Clear();
+                        RemovePaintFromNodes();
+                        selectedNodes.Clear();
                     }
-                    m_coll.Add(e.Node);
+                    selectedNodes.Add(e.Node);
+                    PaintSelectedNodes();
                 }
             }
             base.OnAfterSelect(e);
@@ -192,24 +192,31 @@ namespace FTAnalyzer.Utilities
             return bFound;
         }
 
-        protected void paintSelectedNodes()
+        public void Clear()
         {
-            foreach (TreeNode n in m_coll)
+            Nodes.Clear();
+            selectedNodes.Clear();
+            RemovePaintFromNodes();
+        }
+
+        protected void PaintSelectedNodes()
+        {
+            foreach (TreeNode n in selectedNodes)
             {
                 n.BackColor = SystemColors.Highlight;
                 n.ForeColor = SystemColors.HighlightText;
             }
         }
 
-        protected void removePaintFromNodes()
+        protected void RemovePaintFromNodes()
         {
-            if (m_coll.Count == 0) return;
+            if (selectedNodes.Count == 0) return;
 
-            TreeNode n0 = (TreeNode)m_coll[0];
+            TreeNode n0 = (TreeNode)selectedNodes[0];
             Color back = n0.TreeView.BackColor;
             Color fore = n0.TreeView.ForeColor;
 
-            foreach (TreeNode n in m_coll)
+            foreach (TreeNode n in selectedNodes)
             {
                 n.BackColor = back;
                 n.ForeColor = fore;

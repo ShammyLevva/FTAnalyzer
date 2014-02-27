@@ -23,6 +23,7 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             isloading = true;
+            tvPlaces.Clear();
             mnuMapStyle.Setup(linkLabel1, mapBox1);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             foreach (ToolStripItem item in mapZoomToolStrip.Items)
@@ -36,7 +37,6 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(mapBox1_MapViewOnChange);
             mnuHideScaleBar.Checked = Properties.MappingSettings.Default.HideScaleBar;
             SetupMap();
-            tvPlaces.Nodes.Clear();
             dgFacts.AutoGenerateColumns = false;
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
             int splitheight = (int)Application.UserAppDataRegistry.GetValue("Places Facts Splitter Distance", -1);
@@ -177,6 +177,12 @@ namespace FTAnalyzer.Forms
 
         private bool preventExpand = false;
         private bool settingIcon = false;
+
+        private void tvPlaces_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            //if (!e.Node.IsSelected)
+            //    BuildMap();
+        }
 
         private void tvPlaces_AfterSelect(object sender, TreeViewEventArgs e)
         {
