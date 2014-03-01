@@ -169,6 +169,8 @@ namespace FTAnalyzer
             set { relationType = value; }
         }
 
+        public string RelationToRoot { get; set; }
+
         public bool IsBloodDirect
         {
             get { return relationType == BLOOD || relationType == DIRECT || relationType == MARRIEDTODB; }
@@ -843,7 +845,7 @@ namespace FTAnalyzer
                     return 2; // census entered LC not entered - yellow
                 if (year == 1880 && IsCensusDone(CensusDate.USCENSUS1880, false))
                     return 2; // census entered LC not entered - yellow
-                if (year == 1881 && 
+                if (year == 1881 &&
                     (IsCensusDone(CensusDate.EWCENSUS1881, false) || IsCensusDone(CensusDate.CANADACENSUS1881, false) ||
                      IsCensusDone(CensusDate.SCOTCENSUS1881, false)))
                     return 2; // census entered LC not entered - yellow

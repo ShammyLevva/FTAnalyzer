@@ -228,6 +228,7 @@ namespace FTAnalyzer
             xmlErrorbox.SelectionFont = new Font(xmlErrorbox.Font, FontStyle.Bold);
             xmlErrorbox.SelectionLength = 0;
             SetRelations(rootIndividual);
+            SetRelationDescriptions(rootIndividual);
             xmlErrorbox.AppendText(PrintRelationCount());
             CountCensusFacts();
             FixIDs();
@@ -823,14 +824,6 @@ namespace FTAnalyzer
 
         #region Relationship Functions
 
-        //private ParentalGroup CreateFamilyGroup(Individual i)
-        //{
-        //    Family f = i.FamiliesAsChild.FirstOrDefault().Family;
-        //    return (f == null) ?
-        //            new ParentalGroup(i, null, null, null) :
-        //            new ParentalGroup(i, f.Husband, f.Wife, f.GetPreferredFact(Fact.MARRIAGE));
-        //}
-
         private void ClearRelations()
         {
             foreach (Individual i in individuals)
@@ -996,21 +989,15 @@ namespace FTAnalyzer
             }
         }
 
-        //private void SetFamilies()
-        //{
-        //    foreach (Family f in families)
-        //    {
-        //        if (f.Husband != null)
-        //            f.Husband.FamiliesAsParent.Add(f);
-        //        if (f.Wife != null)
-        //            f.Wife.FamiliesAsParent.Add(f);
-        //        foreach (Individual child in f.Children)
-        //        {
-        //            ParentalRelationship parent = new ParentalRelationship(f, ParentalRelationship.ParentalRelationshipType.UNKNOWN, ParentalRelationship.ParentalRelationshipType.UNKNOWN);
-        //            child.FamiliesAsChild.Add(parent);
-        //        }
-        //    }
-        //}
+        private void SetRelationDescriptions(string startID)
+        {
+            Individual rootPerson = GetIndividual(startID);
+            IEnumerable<Individual> directs = GetAllRelationsOfType(Individual.DIRECT);
+            foreach (Individual i in directs)
+            {
+                i.RelationToRoot = Relationship.CalculateRelationship(i, rootPerson);
+            }
+        }
 
         public string PrintRelationCount()
         {
