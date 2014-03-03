@@ -53,6 +53,7 @@
             this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Relaton = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeOfFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GoogleLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -174,6 +175,7 @@
             this.IndividualID,
             this.FactName,
             this.Relaton,
+            this.RelationToRoot,
             this.TypeOfFact,
             this.FactDate,
             this.GoogleLocation,
@@ -281,6 +283,15 @@
             this.Relaton.ReadOnly = true;
             this.Relaton.Width = 105;
             // 
+            // RelationToRoot
+            // 
+            this.RelationToRoot.DataPropertyName = "RelationToRoot";
+            this.RelationToRoot.HeaderText = "Relation To Root";
+            this.RelationToRoot.MinimumWidth = 100;
+            this.RelationToRoot.Name = "RelationToRoot";
+            this.RelationToRoot.ReadOnly = true;
+            this.RelationToRoot.Width = 150;
+            // 
             // TypeOfFact
             // 
             this.TypeOfFact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -383,6 +394,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Relaton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RelationToRoot;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeOfFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn GoogleLocation;

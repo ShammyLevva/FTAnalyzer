@@ -57,6 +57,7 @@
             this.Forenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Relation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Birth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BaptChri = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Marriage1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -94,6 +95,7 @@
             this.Forenames,
             this.Surname,
             this.Relation,
+            this.RelationToRoot,
             this.Birth,
             this.BaptChri,
             this.Marriage1,
@@ -342,6 +344,15 @@
             this.Relation.ReadOnly = true;
             this.Relation.Width = 105;
             // 
+            // RelationToRoot
+            // 
+            this.RelationToRoot.DataPropertyName = "RelationToRoot";
+            this.RelationToRoot.HeaderText = "Relation To Root";
+            this.RelationToRoot.MinimumWidth = 100;
+            this.RelationToRoot.Name = "RelationToRoot";
+            this.RelationToRoot.ReadOnly = true;
+            this.RelationToRoot.Width = 150;
+            // 
             // Birth
             // 
             this.Birth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -556,6 +567,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Forenames;
         private System.Windows.Forms.DataGridViewTextBoxColumn Surname;
         private System.Windows.Forms.DataGridViewTextBoxColumn Relation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RelationToRoot;
         private System.Windows.Forms.DataGridViewTextBoxColumn Birth;
         private System.Windows.Forms.DataGridViewTextBoxColumn BaptChri;
         private System.Windows.Forms.DataGridViewTextBoxColumn Marriage1;
