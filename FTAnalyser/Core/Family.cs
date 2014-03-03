@@ -11,7 +11,7 @@ namespace FTAnalyzer
 {
     public class Family : IDisplayFamily
     {
-        public static readonly string SINGLE = "Single", MARRIED = "Married", SOLOINDIVIDUAL = "Solo", PRE_MARRIAGE = "Pre-Marriage";
+        public static readonly string SINGLE = "Single", MARRIED = "Married", SOLOINDIVIDUAL = "Solo", PRE_MARRIAGE = "Pre-Marriage", UNMARRIED = "Unmarried";
 
         public string FamilyID { get; private set; }
         public IList<Fact> Facts { get; private set; }
@@ -219,9 +219,15 @@ namespace FTAnalyzer
                 if (Husband == null || Wife == null || !MarriageDate.IsKnown)
                     return SINGLE;
                 else
-                    // very crude at the moment needs to check marriage facts 
-                    // and return the appropriate marriage text string
-                    return MARRIED;
+                {
+                    foreach(Fact f in Facts)
+                    {
+                        if (f.FactType == Fact.MARR_CONTRACT || f.FactType == Fact.MARR_LICENSE || f.FactType == Fact.MARR_SETTLEMENT
+                            || f.FactType == Fact.MARRIAGE || f.FactType == Fact.MARRIAGE_BANN)
+                            return MARRIED;
+                    }
+                    return UNMARRIED;
+                }
             }
         }
 

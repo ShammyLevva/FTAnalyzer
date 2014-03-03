@@ -1008,7 +1008,10 @@ namespace FTAnalyzer
                 {
                     if (i.RelationToRoot == null && f.Spouse(i) != null && f.Spouse(i).IsBloodDirect)
                     {
-                        i.RelationToRoot = (i.IsMale ? "Husband of " : "Wife of ") + f.Spouse(i).RelationToRoot;
+                        if (f.MaritalStatus != Family.MARRIED)
+                            i.RelationToRoot = "partner of " + f.Spouse(i).RelationToRoot;
+                        else
+                            i.RelationToRoot = (i.IsMale ? "husband of " : "wife of ") + f.Spouse(i).RelationToRoot;
                         break;
                     }
                 }
