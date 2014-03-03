@@ -28,7 +28,7 @@ namespace FTAnalyzer
                 RETIREMENT = "RETI", WILL = "WILL", SEPARATION = "_SEPR",
                 MILITARY = "_MILT", ELECTION = "_ELEC", DEGREE = "_DEG",
                 EMPLOYMENT = "_EMPLOY", MEDICAL_CONDITION = "_MDCL",
-                CUSTOM_FACT = "EVEN", CUSTOM_FACT2 = "FACT";
+                CUSTOM_EVENT = "EVEN", CUSTOM_FACT = "FACT";
 
         public const string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSED", LOOSEBIRTH = "*LOOSEB", FAMILYSEARCH = "*IGI",
@@ -189,7 +189,7 @@ namespace FTAnalyzer
                 case EMPLOYMENT: return "Employment";
                 case MEDICAL_CONDITION: return "Medical condition";
                 case CHILDLESS: return "Childless";
-                case UNMARRIED: return "Dies single";
+                case UNMARRIED: return "Unmarried";
                 case WITNESS: return "Witness";
                 case LOOSEDEATH: return "Loose death";
                 case LOOSEBIRTH: return "Loose birth";
@@ -256,7 +256,7 @@ namespace FTAnalyzer
                     FactType = FixFactTypes(node.Name);
                     string factDate = FamilyTree.GetText(node, "DATE");
                     this.FactDate = new FactDate(factDate, factRef);
-                    if (FactType.Equals(CUSTOM_FACT) || FactType.Equals(CUSTOM_FACT2))
+                    if (FactType.Equals(CUSTOM_EVENT) || FactType.Equals(CUSTOM_FACT))
                     {
                         string tag = FamilyTree.GetText(node, "TYPE");
                         string factType;
