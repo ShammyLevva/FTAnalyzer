@@ -1472,8 +1472,10 @@ namespace FTAnalyzer
             }
             else if (censusCountry.Equals(Countries.IRELAND))
             {
-                MessageBox.Show("Sorry searching the Ireland census on Ancestry for " + censusYear + " is not supported by FTAnalyzer at this time", "FT Analyzer");
-                return null;
+                if(censusYear == 1901)
+                    query.Append("db=websearch-4150&");
+                if(censusYear == 1911)
+                    query.Append("db=websearch-4050&");
             }
             else if (censusCountry.Equals(Countries.UNITED_STATES))
             {

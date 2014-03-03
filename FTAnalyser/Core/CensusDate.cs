@@ -26,6 +26,7 @@ namespace FTAnalyzer
         public static readonly CensusDate EWCENSUS1911 = new CensusDate("02 APR 1911", "England & Wales Census 1911", Countries.ENG_WALES);
         public static readonly CensusDate SCOTCENSUS1881 = new CensusDate("03 APR 1881", "Scotland Census 1881", Countries.SCOTLAND);
 
+        public static readonly CensusDate IRELANDCENSUS1901 = new CensusDate("31 MAR 1901", "Ireland Census 1901", Countries.IRELAND);
         public static readonly CensusDate IRELANDCENSUS1911 = new CensusDate("02 APR 1911", "Ireland Census 1911", Countries.IRELAND);
 
         public static readonly CensusDate USCENSUS1790 = new CensusDate("2 AUG 1790", "US Federal Census 1790", Countries.UNITED_STATES);

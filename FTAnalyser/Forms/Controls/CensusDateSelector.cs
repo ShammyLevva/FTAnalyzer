@@ -94,7 +94,8 @@ namespace Controls
             }
             else if (location.Equals(Countries.IRELAND))
             {
-                //cbCensusDate.Items.Add(CensusDate.IRELANDCENSUS1911);
+                cbCensusDate.Items.Add(CensusDate.IRELANDCENSUS1901);
+                cbCensusDate.Items.Add(CensusDate.IRELANDCENSUS1911);
             }
             else if (location.Equals(Countries.UNITED_STATES))
             {
