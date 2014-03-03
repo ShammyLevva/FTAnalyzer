@@ -56,12 +56,12 @@ namespace FTAnalyzer
             // COUSINS, GENERATIONALLY REMOVED
             int cousinOrdinal = Math.Min(rootDistance, toFindDistance) - 1;
             int cousinGenerations = Math.Abs(rootDistance - toFindDistance);
-            return step + OrdinalSuffix(cousinOrdinal) + " cousin " + FormatPlural(cousinGenerations, "time", "times") + " removed";
+            return step + OrdinalSuffix(cousinOrdinal) + " cousin " + FormatPlural(cousinGenerations, "once", "times") + " removed";
         }
 
         private static string FormatPlural(int count, string singular, string plural)
         {
-            return count + " " + (count == 1 || count == -1 ? singular : plural);
+            return (count == 1 || count == -1) ? singular : count + " " + plural;
         }
 
         private static string AggrandiseRelationship(string relation, int distance, int offset)

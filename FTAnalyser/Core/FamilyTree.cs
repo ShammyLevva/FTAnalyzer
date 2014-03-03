@@ -1001,6 +1001,18 @@ namespace FTAnalyzer
             IEnumerable<Individual> blood = GetAllRelationsOfType(Individual.BLOOD);
             foreach (Individual i in blood)
                 i.RelationToRoot = Relationship.CalculateRelationship(rootPerson, i);
+            IEnumerable<Individual> married = GetAllRelationsOfType(Individual.MARRIEDTODB);
+            foreach(Individual i in married)
+            {
+                foreach(Family f in i.FamiliesAsParent)
+                {
+                    if (i.RelationToRoot == null && f.Spouse(i) != null && f.Spouse(i).IsBloodDirect)
+                    {
+                        i.RelationToRoot = (i.IsMale ? "Husband of " : "Wife of") + f.Spouse(i).RelationToRoot;
+                        break;
+                    }
+                }
+            }
         }
 
         public string PrintRelationCount()
