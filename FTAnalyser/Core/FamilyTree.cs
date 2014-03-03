@@ -1481,7 +1481,12 @@ namespace FTAnalyzer
                 query.Append("gss=ms_db&");
             }
             else if (censusCountry.Equals(Countries.CANADA))
-                query.Append("db=" + censusYear + "canada&");
+            {
+                if(censusYear==1921)
+                    query.Append("db=cancen1921&");
+                else
+                    query.Append("db=" + censusYear + "canada&");
+            }
             query.Append("rank=1&");
             query.Append("new=1&");
             query.Append("so=3&");

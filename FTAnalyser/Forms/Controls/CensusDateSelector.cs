@@ -126,6 +126,7 @@ namespace Controls
                 cbCensusDate.Items.Add(CensusDate.CANADACENSUS1906);
                 cbCensusDate.Items.Add(CensusDate.CANADACENSUS1911);
                 cbCensusDate.Items.Add(CensusDate.CANADACENSUS1916);
+                cbCensusDate.Items.Add(CensusDate.CANADACENSUS1921);
             }
         }
 
