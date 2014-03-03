@@ -228,7 +228,7 @@ namespace FTAnalyzer
             xmlErrorbox.SelectionFont = new Font(xmlErrorbox.Font, FontStyle.Bold);
             xmlErrorbox.SelectionLength = 0;
             SetRelations(rootIndividual);
-            //SetRelationDescriptions(rootIndividual);
+            SetRelationDescriptions(rootIndividual);
             xmlErrorbox.AppendText(PrintRelationCount());
             CountCensusFacts();
             FixIDs();
@@ -925,6 +925,8 @@ namespace FTAnalyzer
             {
                 // add all direct ancestors budgie codes
                 i.BudgieCode = (i.Ahnentafel).ToString().PadLeft(lenAhnentafel, '0') + "d";
+                // set all directs as common ancestor
+                i.CommonAncestor = new CommonAncestor(i, 0, false);
             }
             AddToQueue(queue, directs);
             while (queue.Count > 0)
@@ -940,6 +942,7 @@ namespace FTAnalyzer
                     // all children of direct ancestors and blood relations
                     // are blood relations
                     family.SetChildRelation(queue, Individual.BLOOD);
+                    family.SetChildrenCommonRelation(ind, ind.CommonAncestor);
                     family.SetBudgieCode(ind, lenAhnentafel);
                 }
                 Application.DoEvents();
@@ -994,9 +997,10 @@ namespace FTAnalyzer
             Individual rootPerson = GetIndividual(startID);
             IEnumerable<Individual> directs = GetAllRelationsOfType(Individual.DIRECT);
             foreach (Individual i in directs)
-            {
-                i.RelationToRoot = Relationship.CalculateRelationship(i, rootPerson);
-            }
+                i.RelationToRoot = Relationship.CalculateRelationship(rootPerson, i);
+            IEnumerable<Individual> blood = GetAllRelationsOfType(Individual.BLOOD);
+            foreach (Individual i in blood)
+                i.RelationToRoot = Relationship.CalculateRelationship(rootPerson, i);
         }
 
         public string PrintRelationCount()

@@ -368,6 +368,13 @@ namespace FTAnalyzer
             }
         }
 
+        public void SetChildrenCommonRelation(Individual parent, CommonAncestor commonAncestor)
+        {
+            foreach (Individual child in Children)
+                if(child.CommonAncestor == null || child.CommonAncestor.distance > commonAncestor.distance + 1)
+                    child.CommonAncestor = new CommonAncestor(commonAncestor.ind, commonAncestor.distance + 1, !child.IsNaturalChildOf(parent));
+        }
+
         #region IDisplayFamily Members
 
         string IDisplayFamily.Husband

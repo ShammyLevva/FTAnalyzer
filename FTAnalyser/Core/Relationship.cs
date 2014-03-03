@@ -13,11 +13,9 @@ namespace FTAnalyzer
         {
             if (rootPerson.Equals(toFind))
                 return "self";
-            Tuple<Individual, int, int> lca = GetLowestCommonAncestor(rootPerson, toFind);
-            if (lca == null)
-                return UNKNOWN;
-            int rootDistance = lca.Item2;
-            int toFindDistance = lca.Item3;
+            CommonAncestor commonAncestor = toFind.CommonAncestor;
+            int rootDistance = (int)(Math.Log(commonAncestor.ind.Ahnentafel) / Math.Log(2.0));
+            int toFindDistance = commonAncestor.distance;
 
             // DIRECT DESCENDANT - PARENT
             if (rootDistance == 0)

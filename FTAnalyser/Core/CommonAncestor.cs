@@ -7,13 +7,15 @@ namespace FTAnalyzer
 {
     public class CommonAncestor
     {
-        private Individual ind;
-        private int distance;
+        public Individual ind { get; private set; }
+        public int distance { get; private set; }
+        public bool step { get; private set; }
 
-        public CommonAncestor(Individual ind, int distance)
+        public CommonAncestor(Individual ind, int distance, bool step)
         {
             this.ind = ind;
             this.distance = distance;
+            this.step = step;
         }
     }
 }

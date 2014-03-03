@@ -171,6 +171,8 @@ namespace FTAnalyzer
 
         public string RelationToRoot { get; set; }
 
+        public CommonAncestor CommonAncestor { get; set; }
+
         public bool IsBloodDirect
         {
             get { return relationType == BLOOD || relationType == DIRECT || relationType == MARRIEDTODB; }
