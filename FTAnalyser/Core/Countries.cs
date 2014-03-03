@@ -83,7 +83,7 @@ namespace FTAnalyzer
         });
 
         private static readonly ISet<string> CENSUS_COUNTRIES = new HashSet<string>(new string[] { 
-            SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM, UNITED_STATES, CANADA, ISLE_OF_MAN
+            SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM, UNITED_STATES, CANADA, ISLE_OF_MAN, IRELAND
         });
 
         private static Dictionary<string, Envelope> BOUNDING_BOXES;

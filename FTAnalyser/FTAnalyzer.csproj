@@ -191,6 +191,7 @@
     <Compile Include="Comparators\Individual\DefaultIndividualComparer.cs" />
     <Compile Include="Comparators\Individual\BirthDateComparer.cs" />
     <Compile Include="Core\CensusIndividual.cs" />
+    <Compile Include="Core\CommonAncestor.cs" />
     <Compile Include="Core\Countries.cs" />
     <Compile Include="Core\DataError.cs" />
     <Compile Include="Core\DataErrorGroup.cs" />

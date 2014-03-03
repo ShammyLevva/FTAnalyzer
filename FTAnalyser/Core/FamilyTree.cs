@@ -228,7 +228,7 @@ namespace FTAnalyzer
             xmlErrorbox.SelectionFont = new Font(xmlErrorbox.Font, FontStyle.Bold);
             xmlErrorbox.SelectionLength = 0;
             SetRelations(rootIndividual);
-            SetRelationDescriptions(rootIndividual);
+            //SetRelationDescriptions(rootIndividual);
             xmlErrorbox.AppendText(PrintRelationCount());
             CountCensusFacts();
             FixIDs();
