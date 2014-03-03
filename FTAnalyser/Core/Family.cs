@@ -372,7 +372,7 @@ namespace FTAnalyzer
         {
             foreach (Individual child in Children)
                 if(child.CommonAncestor == null || child.CommonAncestor.distance > commonAncestor.distance + 1)
-                    child.CommonAncestor = new CommonAncestor(commonAncestor.ind, commonAncestor.distance + 1, !child.IsNaturalChildOf(parent));
+                    child.CommonAncestor = new CommonAncestor(commonAncestor.ind, commonAncestor.distance + 1, !child.IsNaturalChildOf(parent) || commonAncestor.step);
         }
 
         #region IDisplayFamily Members

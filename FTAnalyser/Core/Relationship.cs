@@ -7,57 +7,56 @@ namespace FTAnalyzer
 {
     public class Relationship
     {
-        private static string UNKNOWN = "Unknown";
-
         public static string CalculateRelationship(Individual rootPerson, Individual toFind)
         {
             if (rootPerson.Equals(toFind))
                 return "self";
             CommonAncestor commonAncestor = toFind.CommonAncestor;
+            string step = commonAncestor.step ? "step " : string.Empty;
             int rootDistance = (int)(Math.Log(commonAncestor.ind.Ahnentafel) / Math.Log(2.0));
             int toFindDistance = commonAncestor.distance;
 
             // DIRECT DESCENDANT - PARENT
-            if (rootDistance == 0)
-            {
-                string relation = rootPerson.IsMale ? "father" : "mother";
-                return AggrandiseRelationship(relation, toFindDistance, 0);
-            }
-            // DIRECT DESCENDANT - CHILD
             if (toFindDistance == 0)
             {
-                string relation = rootPerson.IsMale ? "son" : "daughter";
-                return AggrandiseRelationship(relation, rootDistance, 0);
+                string relation = toFind.IsMale ? "father" : "mother";
+                return step + AggrandiseRelationship(relation, rootDistance, 0);
+            }
+            // DIRECT DESCENDANT - CHILD
+            if (rootDistance == 0)
+            {
+                string relation = toFind.IsMale ? "son" : "daughter";
+                return step + AggrandiseRelationship(relation, toFindDistance, 0);
             }
             // EQUAL DISTANCE - SIBLINGS / PERFECT COUSINS
             if (rootDistance == toFindDistance)
             {
-                switch (rootDistance)
+                switch (toFindDistance)
                 {
                     case 1:
-                        return rootPerson.IsMale ? "brother" : "sister";
+                        return step + (toFind.IsMale ? "brother" : "sister");
                     case 2:
-                        return "cousin";
+                        return step + "cousin";
                     default:
-                        return OrdinalSuffix(rootDistance - 2) + " cousin";
+                        return step + OrdinalSuffix(toFindDistance - 2) + " cousin";
                 }
             }
             // AUNT / UNCLE
-            if (rootDistance == 1)
-            {
-                string relation = rootPerson.IsMale ? "uncle" : "aunt";
-                return AggrandiseRelationship(relation, toFindDistance, 1);
-            }
-            // NEPHEW / NIECE
             if (toFindDistance == 1)
             {
-                string relation = rootPerson.IsMale ? "nephew" : "neice";
-                return AggrandiseRelationship(relation, rootDistance, 1);
+                string relation = toFind.IsMale ? "uncle" : "aunt";
+                return step + AggrandiseRelationship(relation, rootDistance, 1);
+            }
+            // NEPHEW / NIECE
+            if (rootDistance == 1)
+            {
+                string relation = toFind.IsMale ? "nephew" : "niece";
+                return step + AggrandiseRelationship(relation, toFindDistance, 1);
             }
             // COUSINS, GENERATIONALLY REMOVED
             int cousinOrdinal = Math.Min(rootDistance, toFindDistance) - 1;
             int cousinGenerations = Math.Abs(rootDistance - toFindDistance);
-            return OrdinalSuffix(cousinOrdinal) + " cousin " + FormatPlural(cousinGenerations, "time", "times") + " removed";
+            return step + OrdinalSuffix(cousinOrdinal) + " cousin " + FormatPlural(cousinGenerations, "time", "times") + " removed";
         }
 
         private static string FormatPlural(int count, string singular, string plural)

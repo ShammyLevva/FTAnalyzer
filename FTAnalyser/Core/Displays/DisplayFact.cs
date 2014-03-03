@@ -39,7 +39,8 @@ namespace FTAnalyzer
         public string GeocodeStatus { get { return Fact.Location.Geocoded; } }
         public Image LocationIcon { get { return FactLocationImage.ErrorIcon(Fact.Location.GeocodeStatus).Icon; } }
         public string Relation { get { return Ind == null ? string.Empty : Ind.Relation; } }
-
+        string RelationToRoot { get { return Ind == null ? string.Empty : Ind.RelationToRoot; } }
+        
         public int CompareTo(object obj)
         {
             DisplayFact that = (DisplayFact)obj;

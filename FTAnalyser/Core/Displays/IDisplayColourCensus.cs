@@ -11,7 +11,8 @@ namespace FTAnalyzer
         string Forenames { get; }           
         string Surname { get; }
         string Relation { get; }
-
+        string RelationToRoot { get; }
+        
         int C1841 { get; }
         int C1851 { get; }
         int C1861 { get; }
