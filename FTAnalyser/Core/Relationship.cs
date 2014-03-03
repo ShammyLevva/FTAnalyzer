@@ -38,7 +38,7 @@ namespace FTAnalyzer
                     case 2:
                         return step + "cousin";
                     default:
-                        return step + OrdinalSuffix(toFindDistance - 2) + " cousin";
+                        return step + OrdinalSuffix(toFindDistance - 1) + " cousin";
                 }
             }
             // AUNT / UNCLE
@@ -56,12 +56,16 @@ namespace FTAnalyzer
             // COUSINS, GENERATIONALLY REMOVED
             int cousinOrdinal = Math.Min(rootDistance, toFindDistance) - 1;
             int cousinGenerations = Math.Abs(rootDistance - toFindDistance);
-            return step + OrdinalSuffix(cousinOrdinal) + " cousin " + FormatPlural(cousinGenerations, "once", "times") + " removed";
+            return step + OrdinalSuffix(cousinOrdinal) + " cousin " + FormatPlural(cousinGenerations) + " removed";
         }
 
-        private static string FormatPlural(int count, string singular, string plural)
+        private static string FormatPlural(int count)
         {
-            return (count == 1 || count == -1) ? singular : count + " " + plural;
+            if (Math.Abs(count) == 1)
+                return "once";
+            if (Math.Abs(count) == 2)
+                return "twice";
+            return count + " times";
         }
 
         private static string AggrandiseRelationship(string relation, int distance, int offset)

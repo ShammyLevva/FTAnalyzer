@@ -93,8 +93,8 @@ namespace FTAnalyzer
             AddFacts(node, Fact.EMPLOYMENT);
 
             // Custom facts
+            AddFacts(node, Fact.CUSTOM_EVENT);
             AddFacts(node, Fact.CUSTOM_FACT);
-            AddFacts(node, Fact.CUSTOM_FACT2);
 
             //IEnumerable<Fact> gedcomAges = facts.Where(x => x.GedcomAge != null);
             //if (gedcomAges.Count() > 0 && !BirthDate.IsKnown && BirthDate.IsExact)
