@@ -56,9 +56,9 @@ namespace FTAnalyzer.Forms
             onOtherCensus.BackColor = onOtherCensus.ForeColor = Color.DarkSlateGray;
             styles.Add(6, onOtherCensus);
 
-            dgReportSheet.DataSource = this.reportList;
             c1841ColumnIndex = dgReportSheet.Columns["C1841"].Index;
             c1911ColumnIndex = dgReportSheet.Columns["C1911"].Index;
+            dgReportSheet.DataSource = this.reportList;
             reportFormHelper.LoadColumnLayout("ColourCensusLayout.xml");
             tsRecords.Text = Properties.Messages.Count + reportList.Count + " records listed.";
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
