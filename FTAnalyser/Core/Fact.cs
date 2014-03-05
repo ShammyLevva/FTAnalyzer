@@ -582,12 +582,6 @@ namespace FTAnalyzer
             }
             if (tag == "Census" || tag == "LostCousins" || tag == "Lost Cousins")
             {
-                if (!CensusDate.IsUKCensusYear(yearAdjusted, false))
-                {
-                    this.FactErrorMessage = "Census fact error date '" + FactDate + "' isn't a supported UK census date. Check for incorrect date entered or try Tolerate slightly inaccurate census date option.";
-                    this.FactErrorLevel = FactError.ERROR;
-                    return;
-                }
                 TimeSpan ts = FactDate.EndDate - FactDate.StartDate;
                 if (ts.Days > 3650)
                 {
@@ -598,7 +592,13 @@ namespace FTAnalyzer
             }
             if (tag == "Census")
             {
-                if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && yearAdjusted.IsKnown && !CensusDate.IsUKCensusYear(yearAdjusted, true))
+                if (!CensusDate.IsCensusYear(yearAdjusted, false))
+                {
+                    this.FactErrorMessage = "Census fact error date '" + FactDate + "' isn't a supported census date. Check for incorrect date entered or try Tolerate slightly inaccurate census date option.";
+                    this.FactErrorLevel = FactError.ERROR;
+                    return;
+                }
+                if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && yearAdjusted.IsKnown && !CensusDate.IsCensusYear(yearAdjusted, true))
                 {
                     this.FactErrorMessage = "Warning : Census fact error date '" + FactDate + "' overlaps census date but is vague. Check for incorrect date entered.";
                     this.FactErrorLevel = FactError.WARNINGALLOW;
