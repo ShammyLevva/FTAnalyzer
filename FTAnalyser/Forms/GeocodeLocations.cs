@@ -363,7 +363,7 @@ namespace FTAnalyzer.Forms
         private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("GeocodeLocationsColumns.xml");
-            MessageBox.Show("Column Settings Saved", "Geocode Locations");
+            MessageBox.Show("Form Settings Saved", "Geocode Locations");
         }
 
         private void dgLocations_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)

@@ -109,7 +109,6 @@ namespace FTAnalyzer
 
         public void LoadColumnLayout(string filename)
         {
-            LoadFormLayout();
             try
             {
                 this.resetTable();
@@ -146,6 +145,7 @@ namespace FTAnalyzer
             {
                 ResetColumnLayout(filename);
             }
+            LoadFormLayout();
         }
 
         public void ResetColumnLayout(string filename)
@@ -162,6 +162,8 @@ namespace FTAnalyzer
 
         private void LoadFormLayout()
         {
+            parent.WindowState = FormWindowState.Normal;
+            parent.StartPosition = FormStartPosition.Manual;
             parent.Top = (int)Application.UserAppDataRegistry.GetValue(registry + " position - top", defaultLocation.Item1);
             parent.Left = (int)Application.UserAppDataRegistry.GetValue(registry + " position - left", defaultLocation.Item2);
             parent.Height = (int)Application.UserAppDataRegistry.GetValue(registry + " size - height", defaultSize.Item1);

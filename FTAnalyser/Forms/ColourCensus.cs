@@ -297,7 +297,7 @@ namespace FTAnalyzer.Forms
         private void mnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("ColourCensusLayout.xml");
-            MessageBox.Show("Column Settings Saved", "Colour Census");
+            MessageBox.Show("Form Settings Saved", "Colour Census");
         }
 
         private void mnuResetCensusColumns_Click(object sender, EventArgs e)

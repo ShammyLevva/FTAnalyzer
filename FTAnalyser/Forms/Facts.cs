@@ -137,7 +137,7 @@ namespace FTAnalyzer.Forms
         private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("FactsColumns.xml");
-            MessageBox.Show("Column Settings Saved", "Facts");
+            MessageBox.Show("Form Settings Saved", "Facts");
         }
 
         private void dgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)

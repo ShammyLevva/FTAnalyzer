@@ -299,7 +299,7 @@ namespace FTAnalyzer.Forms
         private void mnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("ColourBMDColumns.xml");
-            MessageBox.Show("Column Settings Saved", "BMD Colour");
+            MessageBox.Show("Form Settings Saved", "BMD Colour");
         }
 
         private void mnuViewFacts_Click(object sender, EventArgs e)
