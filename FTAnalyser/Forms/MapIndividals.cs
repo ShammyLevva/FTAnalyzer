@@ -50,7 +50,7 @@ namespace FTAnalyzer
 
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
-            reportFormHelper.PrintReport();
+            reportFormHelper.PrintReport("Map Individuals");
         }
 
         private void printPreviewToolStripButton_Click(object sender, EventArgs e)
@@ -76,7 +76,7 @@ namespace FTAnalyzer
         private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("MapIndividualColumns.xml");
-            MessageBox.Show("Column Settings Saved", "Map Individuals");
+            MessageBox.Show("Form Settings Saved", "Map Individuals");
         }
 
         private void dgIndividuals_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)

@@ -111,7 +111,7 @@ namespace FTAnalyzer.Forms
 
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
-            reportFormHelper.PrintReport();
+            reportFormHelper.PrintReport("Facts Report");
         }
 
         private void printPreviewToolStripButton_Click(object sender, EventArgs e)

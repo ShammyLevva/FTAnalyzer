@@ -150,7 +150,7 @@ namespace FTAnalyzer.Forms
 
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
-            reportFormHelper.PrintReport();
+            reportFormHelper.PrintReport("Census Report");
         }
 
         private void printPreviewToolStripButton_Click(object sender, EventArgs e)
@@ -222,7 +222,7 @@ namespace FTAnalyzer.Forms
         private void mnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("CensusColumns.xml");
-            MessageBox.Show("Column Settings Saved", "Census");
+            MessageBox.Show("Form Settings Saved", "Census");
         }
 
         private void mnuResetCensusColumns_Click(object sender, EventArgs e)

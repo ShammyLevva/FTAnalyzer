@@ -158,7 +158,7 @@ namespace FTAnalyzer.Forms
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintTitle = "Colour BDM Report";
-            reportFormHelper.PrintReport();
+            reportFormHelper.PrintReport("Colour BDM Report");
         }
 
         private void printPreviewToolStripButton_Click(object sender, EventArgs e)

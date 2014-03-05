@@ -60,13 +60,13 @@ namespace FTAnalyzer
             printPreviewDialog.Document = printDocument;
         }
 
-        public void PrintReport()
+        public void PrintReport(string reportname)
         {
             if (printDialog.ShowDialog(parent) == DialogResult.OK)
             {
                 printProvider.Drawer.TitlePrintBlock = new TitlePrintBlock(PrintTitle);
                 printDocument.PrinterSettings = printDialog.PrinterSettings;
-                printDocument.DocumentName = "Missing from Census Report";
+                printDocument.DocumentName = reportname;
                 printDocument.Print();
             }
         }

@@ -178,7 +178,7 @@ namespace FTAnalyzer.Forms
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintTitle = "Colour Census Report";
-            reportFormHelper.PrintReport();
+            reportFormHelper.PrintReport("Missing from Census Report");
         }
 
         private void printPreviewToolStripButton_Click(object sender, EventArgs e)
