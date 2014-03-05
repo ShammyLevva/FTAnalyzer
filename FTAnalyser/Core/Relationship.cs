@@ -12,7 +12,7 @@ namespace FTAnalyzer
             if (rootPerson.Equals(toFind))
                 return "self";
             CommonAncestor commonAncestor = toFind.CommonAncestor;
-            string step = commonAncestor.step ? "step " : string.Empty;
+            string step = string.Empty; // should be half I think disable for now commonAncestor.step ? "step " : string.Empty;
             int rootDistance = (int)(Math.Log(commonAncestor.ind.Ahnentafel) / Math.Log(2.0));
             int toFindDistance = commonAncestor.distance;
 

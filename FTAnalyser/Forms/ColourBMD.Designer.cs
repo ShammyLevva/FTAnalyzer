@@ -512,7 +512,7 @@
             this.Ahnentafel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.Ahnentafel.DataPropertyName = "Ahnentafel";
             this.Ahnentafel.HeaderText = "Ahnentafel";
-            this.Ahnentafel.MinimumWidth = 50;
+            this.Ahnentafel.MinimumWidth = 20;
             this.Ahnentafel.Name = "Ahnentafel";
             this.Ahnentafel.ReadOnly = true;
             this.Ahnentafel.Width = 83;
