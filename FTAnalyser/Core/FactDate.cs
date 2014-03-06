@@ -51,6 +51,7 @@ namespace FTAnalyzer
         public DateTime EndDate { get; private set; }
         public FactDateType DateType { get; private set; }
         private string OriginalString;
+        private string DoubleDateError;
 
         public bool DoubleDate { get; private set; } // Is a pre 1752 date bet 1 Jan and 25 Mar eg: 1735/36.
         private int yearfix;
@@ -478,7 +479,7 @@ namespace FTAnalyzer
                 string year = gYear == null ? string.Empty : gYear.ToString().Trim();
                 
                 if (!IsValidDoubleDate(day, month, year, gDouble))
-                    throw new InvalidDoubleDateException();
+                    throw new InvalidDoubleDateException(DoubleDateError);
                 if (day.Length == 0 && month.Length == 0)
                 {
                     if (year.Length == 4)
@@ -552,6 +553,7 @@ namespace FTAnalyzer
         private bool IsValidDoubleDate(string day, string month, string year, Group gDouble)
         {
             DoubleDate = false;   // set property
+            DoubleDateError = string.Empty;
             if (gDouble == null)  // normal date so its valid double date
                 return true;
             // check if valid double date if so set double date to true
@@ -561,19 +563,34 @@ namespace FTAnalyzer
             if (doubleyear.Length == 1 && year.Length >= 2)
                 doubleyear = year.Substring(year.Length - 2, 1) + doubleyear;
             if (doubleyear == null || (doubleyear.Length != 2 && doubleyear.Length != 4) || year.Length < 3)
+            {
+                DoubleDateError = "Year part of double date is an invalid length.";
                 return false;
+            }
             int iYear = Convert.ToInt32(year);
             if (iYear >= 1752)
+            {
+                DoubleDateError = "Double dates are only valid prior to 1752.";
                 return false; // double years are only for pre 1752
+            }
             if (month.Length == 3 && month != "JAN" && month != "FEB" && month != "MAR")
+            {
+                DoubleDateError = "Double dates years are only valid for Jan-Mar of a year.";
                 return false; // double years must be pre Mar 25th of year
+            }
             if (doubleyear == "00" && year.Substring(2, 2) != "99")
+            {
+                DoubleDateError = "Double date year should be 99/00 if it crosses century.";
                 return false; // check for change of century year
+            }
             int iDoubleYear = doubleyear == "00" ? 
                 Convert.ToInt32((Convert.ToInt32(year.Substring(0, 2)) + 1).ToString() + doubleyear) : 
                 Convert.ToInt32(year.Substring(0, 2) + doubleyear);
             if (iDoubleYear - iYear != 1)
+            {
+                DoubleDateError = "Double date years must be for adjacent years.";
                 return false; // must only be 1 year between double years
+            }
             DoubleDate = true; // passed all checks
             return DoubleDate;
         }

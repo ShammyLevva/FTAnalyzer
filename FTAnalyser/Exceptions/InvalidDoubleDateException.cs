@@ -6,7 +6,10 @@ using System.Text;
 namespace FTAnalyzer
 {
     [Serializable]
-    class InvalidDoubleDateException : Exception
+    public class InvalidDoubleDateException : Exception
     {
+        public InvalidDoubleDateException(string message)
+            : base(message)
+        { }
     }
 }
