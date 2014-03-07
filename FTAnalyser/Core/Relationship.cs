@@ -10,7 +10,7 @@ namespace FTAnalyzer
         public static string CalculateRelationship(Individual rootPerson, Individual toFind)
         {
             if (rootPerson.Equals(toFind))
-                return "self";
+                return "root person";
             CommonAncestor commonAncestor = toFind.CommonAncestor;
             int rootDistance = (int)(Math.Log(commonAncestor.ind.Ahnentafel) / Math.Log(2.0));
             int toFindDistance = commonAncestor.distance;

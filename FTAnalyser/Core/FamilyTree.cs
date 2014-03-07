@@ -832,6 +832,8 @@ namespace FTAnalyzer
                 i.RelationType = Individual.UNKNOWN;
                 i.BudgieCode = string.Empty;
                 i.Ahnentafel = 0;
+                i.CommonAncestor = null;
+                i.RelationToRoot = string.Empty;
             }
         }
 
@@ -902,7 +904,6 @@ namespace FTAnalyzer
         public void SetRelations(string startID)
         {
             ClearRelations();
-            //SetFamilies();
             Individual rootPerson = GetIndividual(startID);
             Individual ind = rootPerson;
             ind.RelationType = Individual.DIRECT;
