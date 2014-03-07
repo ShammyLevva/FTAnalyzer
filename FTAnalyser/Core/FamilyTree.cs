@@ -143,7 +143,7 @@ namespace FTAnalyzer
         {
             _loading = true;
             ResetData();
-            string rootIndividual = string.Empty;
+            string rootIndividualID = string.Empty;
             Application.DoEvents();
             XmlDocument doc = GedcomToXml.Load(filename);
             if (doc == null)
@@ -168,7 +168,7 @@ namespace FTAnalyzer
                 // file has a root individual
                 try
                 {
-                    rootIndividual = root.Attributes["REF"].Value;
+                    rootIndividualID = root.Attributes["REF"].Value;
                 }
                 catch (Exception)
                 { } // don't crash if can't set root individual
@@ -217,19 +217,9 @@ namespace FTAnalyzer
             pbF.Value = pbF.Maximum;
             CheckAllIndividualsAreInAFamily();
             RemoveFamiliesWithNoIndividuals();
-            if (rootIndividual == string.Empty)
-                rootIndividual = individuals[0].IndividualID;
-            int start = xmlErrorbox.TextLength;
-            xmlErrorbox.AppendText("\nCalculating Relationships using " + rootIndividual + ": " +
-                GetIndividual(rootIndividual).Name + " as starter person. Please wait\n\n");
-            int end = xmlErrorbox.TextLength;
-            xmlErrorbox.SelectionStart = start;
-            xmlErrorbox.SelectionLength = end - start;
-            xmlErrorbox.SelectionFont = new Font(xmlErrorbox.Font, FontStyle.Bold);
-            xmlErrorbox.SelectionLength = 0;
-            SetRelations(rootIndividual);
-            SetRelationDescriptions(rootIndividual);
-            xmlErrorbox.AppendText(PrintRelationCount());
+            if (rootIndividualID == string.Empty)
+                rootIndividualID = individuals[0].IndividualID;
+            UpdateRootIndividual(rootIndividualID);
             CountCensusFacts();
             FixIDs();
             SetDataErrorTypes();
@@ -239,6 +229,21 @@ namespace FTAnalyzer
             _loading = false;
             _dataloaded = true;
             return true;
+        }
+
+        public void UpdateRootIndividual(string rootIndividualID)
+        {
+            int start = xmlErrorbox.TextLength;
+            xmlErrorbox.AppendText("\nCalculating Relationships using " + rootIndividualID + ": " +
+                GetIndividual(rootIndividualID).Name + " as root person. Please wait\n\n");
+            int end = xmlErrorbox.TextLength;
+            xmlErrorbox.SelectionStart = start;
+            xmlErrorbox.SelectionLength = end - start;
+            xmlErrorbox.SelectionFont = new Font(xmlErrorbox.Font, FontStyle.Bold);
+            xmlErrorbox.SelectionLength = 0;
+            SetRelations(rootIndividualID);
+            SetRelationDescriptions(rootIndividualID);
+            xmlErrorbox.AppendText(PrintRelationCount());
         }
 
         private void ReportOptions()
@@ -544,14 +549,10 @@ namespace FTAnalyzer
         {
             int indLen = individuals.Count.ToString().Length;
             foreach (Individual ind in individuals)
-            {
                 ind.FixIndividualID(indLen);
-            }
             int famLen = families.Count.ToString().Length;
             foreach (Family f in families)
-            {
                 f.FixFamilyID(famLen);
-            }
         }
 
         #endregion
@@ -2132,6 +2133,7 @@ namespace FTAnalyzer
         }
         #endregion
 
+        #region Database Functions
         public bool BackupDatabase(SaveFileDialog saveDatabase, string comment)
         {
             string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();
@@ -2155,6 +2157,7 @@ namespace FTAnalyzer
             }
             return false;
         }
+        #endregion
 
         public void Dispose()
         {

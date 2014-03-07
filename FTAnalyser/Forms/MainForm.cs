@@ -993,7 +993,7 @@ namespace FTAnalyzer
             Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
             if (ind != null)
             {
-                ft.SetRelations(ind.IndividualID);
+                ft.UpdateRootIndividual(ind.IndividualID);
                 dgIndividuals.Refresh();
                 MessageBox.Show("Root person set as " + ind.Name + "\n\n" + ft.PrintRelationCount(), "FT Analyzer");
             }
