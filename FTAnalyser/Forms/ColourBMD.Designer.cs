@@ -509,13 +509,13 @@
             // 
             // Ahnentafel
             // 
-            this.Ahnentafel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Ahnentafel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Ahnentafel.DataPropertyName = "Ahnentafel";
             this.Ahnentafel.HeaderText = "Ahnentafel";
             this.Ahnentafel.MinimumWidth = 20;
             this.Ahnentafel.Name = "Ahnentafel";
             this.Ahnentafel.ReadOnly = true;
-            this.Ahnentafel.Width = 83;
+            this.Ahnentafel.Width = 60;
             // 
             // ColourBMD
             // 

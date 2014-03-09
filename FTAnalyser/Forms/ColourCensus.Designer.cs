@@ -72,7 +72,6 @@
             this.DeathLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BestLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dummy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -108,8 +107,7 @@
             this.DeathDate,
             this.DeathLocation,
             this.BestLocation,
-            this.Ahnentafel,
-            this.Dummy});
+            this.Ahnentafel});
             this.dgReportSheet.ContextMenuStrip = this.contextMenuStrip;
             this.dgReportSheet.Location = new System.Drawing.Point(0, 28);
             this.dgReportSheet.MultiSelect = false;
@@ -492,14 +490,7 @@
             this.Ahnentafel.MinimumWidth = 20;
             this.Ahnentafel.Name = "Ahnentafel";
             this.Ahnentafel.ReadOnly = true;
-            this.Ahnentafel.Width = 83;
-            // 
-            // Dummy
-            // 
-            this.Dummy.HeaderText = "Dummy";
-            this.Dummy.Name = "Dummy";
-            this.Dummy.ReadOnly = true;
-            this.Dummy.Width = 5;
+            this.Ahnentafel.Width = 60;
             // 
             // ColourCensus
             // 
@@ -566,6 +557,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DeathLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn BestLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ahnentafel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Dummy;
     }
 }
