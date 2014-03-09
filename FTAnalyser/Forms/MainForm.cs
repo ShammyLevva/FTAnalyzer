@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.3.3.0-beta 5";
+        public string VERSION = "3.3.3.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -130,7 +130,10 @@ namespace FTAnalyzer
                 rtbOutput.Text = string.Empty;
                 tsCountLabel.Text = string.Empty;
                 tsHintsLabel.Text = string.Empty;
-                pbSources.Value = pbIndividuals.Value = pbFamilies.Value = 0;
+                pbSources.Value = 0;
+                pbIndividuals.Value = 0;
+                pbFamilies.Value = 0;
+                pbRelationships.Value = 0;
                 dgCountries.DataSource = null;
                 dgRegions.DataSource = null;
                 dgSubRegions.DataSource = null;
@@ -153,7 +156,7 @@ namespace FTAnalyzer
                 if (!stopProcessing)
                 {
                     //document.Save("GedcomOutput.xml");
-                    if (ft.LoadTree(filename, pbSources, pbIndividuals, pbFamilies))
+                    if (ft.LoadTree(filename, pbSources, pbIndividuals, pbFamilies, pbRelationships))
                     {
                         ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
                         Application.UseWaitCursor = false;
@@ -956,7 +959,7 @@ namespace FTAnalyzer
 
         private void MainForm_Resize(object sender, EventArgs e)
         {
-            rtbOutput.Top = pbFamilies.Top + 30;
+            rtbOutput.Top = pbRelationships.Top + 30;
             SavePosition();
         }
 
@@ -993,7 +996,7 @@ namespace FTAnalyzer
             Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
             if (ind != null)
             {
-                ft.UpdateRootIndividual(ind.IndividualID);
+                ft.UpdateRootIndividual(ind.IndividualID, pbRelationships);
                 dgIndividuals.Refresh();
                 MessageBox.Show("Root person set as " + ind.Name + "\n\n" + ft.PrintRelationCount(), "FT Analyzer");
             }

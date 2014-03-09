@@ -201,6 +201,8 @@
             this.relTypesFacts = new Controls.RelationTypes();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.label7 = new System.Windows.Forms.Label();
+            this.pbRelationships = new System.Windows.Forms.ProgressBar();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -392,14 +394,14 @@
             // backupToolStripMenuItem
             // 
             this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
-            this.backupToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.backupToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.backupToolStripMenuItem.Text = "Backup";
             this.backupToolStripMenuItem.Click += new System.EventHandler(this.backupToolStripMenuItem_Click);
             // 
             // mnuRestore
             // 
             this.mnuRestore.Name = "mnuRestore";
-            this.mnuRestore.Size = new System.Drawing.Size(152, 22);
+            this.mnuRestore.Size = new System.Drawing.Size(113, 22);
             this.mnuRestore.Text = "Restore";
             this.mnuRestore.ToolTipText = "Restore is only available prior to loading GEDCOM";
             this.mnuRestore.Click += new System.EventHandler(this.restoreToolStripMenuItem_Click);
@@ -1742,6 +1744,8 @@
             // 
             // tabDisplayProgress
             // 
+            this.tabDisplayProgress.Controls.Add(this.label7);
+            this.tabDisplayProgress.Controls.Add(this.pbRelationships);
             this.tabDisplayProgress.Controls.Add(this.rtbOutput);
             this.tabDisplayProgress.Controls.Add(this.label6);
             this.tabDisplayProgress.Controls.Add(this.pbFamilies);
@@ -1763,10 +1767,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbOutput.Location = new System.Drawing.Point(3, 96);
+            this.rtbOutput.Location = new System.Drawing.Point(3, 112);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(1029, 346);
+            this.rtbOutput.Size = new System.Drawing.Size(1029, 327);
             this.rtbOutput.TabIndex = 6;
             this.rtbOutput.Text = "";
             this.rtbOutput.TextChanged += new System.EventHandler(this.rtbOutput_TextChanged);
@@ -1782,7 +1786,7 @@
             // 
             // pbFamilies
             // 
-            this.pbFamilies.Location = new System.Drawing.Point(112, 60);
+            this.pbFamilies.Location = new System.Drawing.Point(139, 60);
             this.pbFamilies.Name = "pbFamilies";
             this.pbFamilies.Size = new System.Drawing.Size(316, 16);
             this.pbFamilies.TabIndex = 4;
@@ -1798,7 +1802,7 @@
             // 
             // pbIndividuals
             // 
-            this.pbIndividuals.Location = new System.Drawing.Point(112, 38);
+            this.pbIndividuals.Location = new System.Drawing.Point(139, 38);
             this.pbIndividuals.Name = "pbIndividuals";
             this.pbIndividuals.Size = new System.Drawing.Size(316, 16);
             this.pbIndividuals.TabIndex = 2;
@@ -1814,7 +1818,7 @@
             // 
             // pbSources
             // 
-            this.pbSources.Location = new System.Drawing.Point(112, 16);
+            this.pbSources.Location = new System.Drawing.Point(139, 16);
             this.pbSources.Name = "pbSources";
             this.pbSources.Size = new System.Drawing.Size(316, 16);
             this.pbSources.TabIndex = 0;
@@ -1976,6 +1980,22 @@
             // 
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(8, 85);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(125, 13);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "Calculating Relationships";
+            // 
+            // pbRelationships
+            // 
+            this.pbRelationships.Location = new System.Drawing.Point(139, 82);
+            this.pbRelationships.Name = "pbRelationships";
+            this.pbRelationships.Size = new System.Drawing.Size(316, 16);
+            this.pbRelationships.TabIndex = 7;
             // 
             // MainForm
             // 
@@ -2228,6 +2248,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Individuals;
         private System.Windows.Forms.DataGridViewTextBoxColumn Families;
         private System.Windows.Forms.DataGridViewTextBoxColumn Marriages;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ProgressBar pbRelationships;
     }
 }
 

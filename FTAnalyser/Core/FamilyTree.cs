@@ -139,7 +139,7 @@ namespace FTAnalyzer
                 unknownFactTypes.Add(factType);
         }
 
-        public bool LoadTree(string filename, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF)
+        public bool LoadTree(string filename, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF, ProgressBar pbR)
         {
             _loading = true;
             ResetData();
@@ -214,12 +214,13 @@ namespace FTAnalyzer
                 Application.DoEvents();
             }
             xmlErrorbox.AppendText("Loaded " + counter + " families.\n");
-            pbF.Value = pbF.Maximum;
             CheckAllIndividualsAreInAFamily();
             RemoveFamiliesWithNoIndividuals();
+            pbF.Value = pbF.Maximum;
+            Application.DoEvents();
             if (rootIndividualID == string.Empty)
                 rootIndividualID = individuals[0].IndividualID;
-            UpdateRootIndividual(rootIndividualID);
+            UpdateRootIndividual(rootIndividualID, pbR);
             CountCensusFacts();
             FixIDs();
             SetDataErrorTypes();
@@ -231,7 +232,7 @@ namespace FTAnalyzer
             return true;
         }
 
-        public void UpdateRootIndividual(string rootIndividualID)
+        public void UpdateRootIndividual(string rootIndividualID, ProgressBar pb)
         {
             int start = xmlErrorbox.TextLength;
             xmlErrorbox.AppendText("\nCalculating Relationships using " + rootIndividualID + ": " +
@@ -241,9 +242,13 @@ namespace FTAnalyzer
             xmlErrorbox.SelectionLength = end - start;
             xmlErrorbox.SelectionFont = new Font(xmlErrorbox.Font, FontStyle.Bold);
             xmlErrorbox.SelectionLength = 0;
-            SetRelations(rootIndividualID);
-            SetRelationDescriptions(rootIndividualID);
+            pb.Maximum = individuals.Count * 2;
+            pb.Value = 0;
+            Application.DoEvents();
+            SetRelations(rootIndividualID, pb);
+            SetRelationDescriptions(rootIndividualID, pb);
             xmlErrorbox.AppendText(PrintRelationCount());
+            Application.DoEvents();
         }
 
         private void ReportOptions()
@@ -860,7 +865,7 @@ namespace FTAnalyzer
                             maxAhnentafel = family.Husband.Ahnentafel;
                         queue.Enqueue(family.Husband); // add to directs queue only if natural father of direct
                     }
-                    if(!setAhnenfatel)
+                    if (!setAhnenfatel)
                         queue.Enqueue(family.Husband); // add if not checking directs
                 }
                 if (family.Wife != null && family.Wife.RelationType == Individual.UNKNOWN)
@@ -901,7 +906,7 @@ namespace FTAnalyzer
             }
         }
 
-        public void SetRelations(string startID)
+        public void SetRelations(string startID, ProgressBar pb)
         {
             ClearRelations();
             Individual rootPerson = GetIndividual(startID);
@@ -909,6 +914,7 @@ namespace FTAnalyzer
             ind.RelationType = Individual.DIRECT;
             ind.Ahnentafel = 1;
             maxAhnentafel = 1;
+            pb.Value = 0;
             Queue<Individual> queue = new Queue<Individual>();
             queue.Enqueue(ind);
             while (queue.Count > 0)
@@ -918,7 +924,6 @@ namespace FTAnalyzer
                 // set them as a direct relation
                 ind.RelationType = Individual.DIRECT;
                 AddParentsToQueue(ind, queue, true);
-                Application.DoEvents();
             }
             int lenAhnentafel = maxAhnentafel.ToString().Length;
             // we have now added all direct ancestors
@@ -947,26 +952,13 @@ namespace FTAnalyzer
                     family.SetChildrenCommonRelation(ind, ind.CommonAncestor);
                     family.SetBudgieCode(ind, lenAhnentafel);
                 }
-                Application.DoEvents();
+                UpdateProgressBar(pb);
             }
             // we have now set all direct ancestors and all blood relations
-            // now we need to set all descendants of root person's budgie code
-            //queue.Enqueue(rootPerson);
-            //bool isRootPerson = true;
-            //while (queue.Count > 0)
-            //{
-            //    // now take an item from the queue
-            //    ind = queue.Dequeue();
-            //    // set them as a direct relation
-            //    if (ind != rootPerson)
-            //        ind.RelationType = Individual.BLOOD;
-            //    addChildrenToQueue(ind, queue, isRootPerson);
-            //    isRootPerson = false;
-            //    Application.DoEvents();
-            //}
             // all that remains is to loop through the marriage relations
             IEnumerable<Individual> marriedDBs = GetAllRelationsOfType(Individual.MARRIEDTODB);
             AddToQueue(queue, marriedDBs);
+            int ignored = 0;
             while (queue.Count > 0)
             {
                 // get the next person
@@ -989,24 +981,34 @@ namespace FTAnalyzer
                         // identified are also relatives by marriage
                         family.SetChildRelation(queue, Individual.MARRIAGE);
                     }
+                    UpdateProgressBar(pb);
                 }
-                Application.DoEvents();
+                else
+                    ignored++;
             }
         }
 
-        private void SetRelationDescriptions(string startID)
+        private void SetRelationDescriptions(string startID, ProgressBar pb)
         {
-            Individual rootPerson = GetIndividual(startID);
             IEnumerable<Individual> directs = GetAllRelationsOfType(Individual.DIRECT);
-            foreach (Individual i in directs)
-                i.RelationToRoot = Relationship.CalculateRelationship(rootPerson, i);
             IEnumerable<Individual> blood = GetAllRelationsOfType(Individual.BLOOD);
-            foreach (Individual i in blood)
-                i.RelationToRoot = Relationship.CalculateRelationship(rootPerson, i);
             IEnumerable<Individual> married = GetAllRelationsOfType(Individual.MARRIEDTODB);
-            foreach(Individual i in married)
+            pb.Maximum = pb.Value + directs.Count() + blood.Count() + married.Count();
+            Application.DoEvents();
+            Individual rootPerson = GetIndividual(startID);
+            foreach (Individual i in directs)
             {
-                foreach(Family f in i.FamiliesAsParent)
+                i.RelationToRoot = Relationship.CalculateRelationship(rootPerson, i);
+                UpdateProgressBar(pb);
+            }
+            foreach (Individual i in blood)
+            {
+                i.RelationToRoot = Relationship.CalculateRelationship(rootPerson, i);
+                UpdateProgressBar(pb);
+            }
+            foreach (Individual i in married)
+            {
+                foreach (Family f in i.FamiliesAsParent)
                 {
                     if (i.RelationToRoot == null && f.Spouse(i) != null && f.Spouse(i).IsBloodDirect)
                     {
@@ -1017,7 +1019,17 @@ namespace FTAnalyzer
                         break;
                     }
                 }
+                UpdateProgressBar(pb);
             }
+            pb.Value = pb.Maximum;
+            Application.DoEvents();
+        }
+
+        private static void UpdateProgressBar(ProgressBar pb)
+        {
+            pb.Value++;
+            if (pb.Value % 20 == 0)
+                Application.DoEvents();
         }
 
         public string PrintRelationCount()
@@ -1300,12 +1312,12 @@ namespace FTAnalyzer
                                 new DataError((int)dataerror.FACTS_AFTER_DEATH, ind, f.FactTypeDescription + " fact recorded: " +
                                             f.FactDate + " after individual died"));
                         }
-                        foreach(string tag in unknownFactTypes)
+                        foreach (string tag in unknownFactTypes)
                         {
                             if (f.FactTypeDescription == tag)
                             {
                                 errors[(int)dataerror.UNKNOWN_FACT_TYPE].Add(
-                                    new DataError((int)dataerror.UNKNOWN_FACT_TYPE,Fact.FactError.QUESTIONABLE,
+                                    new DataError((int)dataerror.UNKNOWN_FACT_TYPE, Fact.FactError.QUESTIONABLE,
                                         ind, "Unknown fact type " + f.FactTypeDescription + " recorded"));
                             }
                         }
@@ -1387,7 +1399,7 @@ namespace FTAnalyzer
             BIRTH_AFTER_FATHER_DEATH = 4, BIRTH_BEFORE_FATHER_13 = 5, BIRTH_BEFORE_MOTHER_13 = 6, BURIAL_BEFORE_DEATH = 7,
             AGED_MORE_THAN_110 = 8, FACTS_BEFORE_BIRTH = 9, FACTS_AFTER_DEATH = 10, MARRIAGE_AFTER_DEATH = 11,
             MARRIAGE_AFTER_SPOUSE_DEAD = 12, MARRIAGE_BEFORE_13 = 13, MARRIAGE_BEFORE_SPOUSE_13 = 14, LOST_COUSINS_NON_CENSUS = 15,
-            LOST_COUSINS_NOT_SUPPORTED_YEAR = 16, RESIDENCE_CENSUS_DATE = 17, CENSUS_COVERAGE = 18, FACT_ERROR = 19, 
+            LOST_COUSINS_NOT_SUPPORTED_YEAR = 16, RESIDENCE_CENSUS_DATE = 17, CENSUS_COVERAGE = 18, FACT_ERROR = 19,
             UNKNOWN_FACT_TYPE = 20
         };
 
@@ -1493,9 +1505,9 @@ namespace FTAnalyzer
             }
             else if (censusCountry.Equals(Countries.IRELAND))
             {
-                if(censusYear == 1901)
+                if (censusYear == 1901)
                     query.Append("db=websearch-4150&");
-                if(censusYear == 1911)
+                if (censusYear == 1911)
                     query.Append("db=websearch-4050&");
             }
             else if (censusCountry.Equals(Countries.UNITED_STATES))
@@ -1505,7 +1517,7 @@ namespace FTAnalyzer
             }
             else if (censusCountry.Equals(Countries.CANADA))
             {
-                if(censusYear==1921)
+                if (censusYear == 1921)
                     query.Append("db=cancen1921&");
                 else
                     query.Append("db=" + censusYear + "canada&");
@@ -2114,7 +2126,7 @@ namespace FTAnalyzer
                         queue.Enqueue(spouse);
                         results.Add(spouse);
                     }
-                    foreach(Individual child in f.Children)
+                    foreach (Individual child in f.Children)
                     {
                         // we have a child and we have a parent check if natural child
                         if (!processed.Contains(child) && child.IsNaturalChildOf(parent))
