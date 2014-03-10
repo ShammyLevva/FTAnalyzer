@@ -816,11 +816,15 @@ namespace FTAnalyzer
             // this returns a Fact for a FactLocation a person was at for a given period
             Fact result = new Fact(Fact.UNKNOWN, FactDate.UNKNOWN_DATE);
             double minDistance = float.MaxValue;
+            double distance;
             foreach (Fact f in facts)
             {
                 if (f.FactDate.IsKnown && !f.Location.GEDCOMLocation.Equals(string.Empty))
                 {  // only deal with known dates and non empty locations
-                    double distance = Math.Abs(f.FactDate.BestYear - when.BestYear);
+                    if (Fact.RANGED_DATE_FACTS.Contains(f.FactType) && f.FactDate.StartDate.Year != f.FactDate.EndDate.Year) // If fact type is ranged year use least end of range
+                        distance = Math.Min(Math.Abs(f.FactDate.StartDate.Year - when.BestYear), Math.Abs(f.FactDate.EndDate.Year - when.BestYear));
+                    else
+                        distance = Math.Abs(f.FactDate.BestYear - when.BestYear);
                     if (distance < limit)
                     {
                         if (distance < minDistance)

@@ -49,6 +49,10 @@ namespace FTAnalyzer
             ORDINATION, NATURALIZATION, GRADUATION, RETIREMENT, LOSTCOUSINS
                     });
 
+        public static readonly ISet<string> RANGED_DATE_FACTS = new HashSet<string>(new string[] {
+            EDUCATION, OCCUPATION, RESIDENCE, RETIREMENT, MILITARY, ELECTION, DEGREE, EMPLOYMENT, MEDICAL_CONDITION
+                    });
+
         private static readonly Dictionary<string, string> CUSTOM_TAGS = new Dictionary<string, string>();
         private static readonly HashSet<string> COMMENT_FACTS = new HashSet<string>();
 
