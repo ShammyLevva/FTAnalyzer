@@ -822,7 +822,10 @@ namespace FTAnalyzer
                 if (f.FactDate.IsKnown && !f.Location.GEDCOMLocation.Equals(string.Empty))
                 {  // only deal with known dates and non empty locations
                     if (Fact.RANGED_DATE_FACTS.Contains(f.FactType) && f.FactDate.StartDate.Year != f.FactDate.EndDate.Year) // If fact type is ranged year use least end of range
+                    {
                         distance = Math.Min(Math.Abs(f.FactDate.StartDate.Year - when.BestYear), Math.Abs(f.FactDate.EndDate.Year - when.BestYear));
+                        distance = Math.Min(distance, Math.Abs(f.FactDate.BestYear - when.BestYear)); // also check mid point to ensure fact is picked up at any point in range
+                    }
                     else
                         distance = Math.Abs(f.FactDate.BestYear - when.BestYear);
                     if (distance < limit)
