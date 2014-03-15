@@ -2219,7 +2219,7 @@ namespace FTAnalyzer
                             indA.BirthDate.Distance(indB.BirthDate) < 5)
                         {
                             DuplicateIndividual test = new DuplicateIndividual(indA, indB);
-                            if (!duplicates.Contains(test))
+                            if (test.Score > 0 && !duplicates.Contains(test))
                                 duplicates.Add(test);
                         }
                     }
