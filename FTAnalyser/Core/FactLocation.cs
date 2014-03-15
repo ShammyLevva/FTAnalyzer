@@ -413,25 +413,25 @@ namespace FTAnalyzer
                 Region = SubRegion;
                 SubRegion = Address;
                 Address = Place;
-                Place = "";
+                Place = string.Empty;
             }
             if (Region.Length == 0)
             {
                 Region = SubRegion;
                 SubRegion = Address;
                 Address = Place;
-                Place = "";
+                Place = string.Empty;
             }
             if (SubRegion.Length == 0)
             {
                 SubRegion = Address;
                 Address = Place;
-                Place = "";
+                Place = string.Empty;
             }
             if (Address.Length == 0)
             {
                 Address = Place;
-                Place = "";
+                Place = string.Empty;
             }
         }
 

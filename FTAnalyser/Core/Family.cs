@@ -148,7 +148,7 @@ namespace FTAnalyzer
         {
             try
             {
-                if (FamilyID == null || FamilyID == "" || FamilyID == SOLOINDIVIDUAL)
+                if (FamilyID == null || FamilyID == string.Empty || FamilyID == SOLOINDIVIDUAL)
                     FamilyID = SOLOINDIVIDUAL;
                 else
                     FamilyID = FamilyID.Substring(0, 1) + FamilyID.Substring(1).PadLeft(length, '0');
@@ -233,13 +233,13 @@ namespace FTAnalyzer
 
         public string HusbandID
         {
-            get { return (Husband == null) ? "" : Husband.IndividualID;
+            get { return (Husband == null) ? string.Empty : Husband.IndividualID;
             }
         }
 
         public string WifeID
         {
-            get { return (Wife == null) ? "" : Wife.IndividualID;
+            get { return (Wife == null) ? string.Empty : Wife.IndividualID;
             }
         }
 

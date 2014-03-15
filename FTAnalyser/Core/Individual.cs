@@ -287,7 +287,7 @@ namespace FTAnalyzer
             get
             {
                 if (forenames == null)
-                    return "";
+                    return string.Empty;
                 else
                 {
                     int pos = forenames.IndexOf(' ');
@@ -400,7 +400,7 @@ namespace FTAnalyzer
             get
             {
                 Fact occupation = GetPreferredFact(Fact.OCCUPATION);
-                return occupation == null ? "" : occupation.Comment;
+                return occupation == null ? string.Empty : occupation.Comment;
             }
         }
 

@@ -179,6 +179,8 @@
             this.tabIndividuals = new System.Windows.Forms.TabPage();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.pbRelationships = new System.Windows.Forms.ProgressBar();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.pbFamilies = new System.Windows.Forms.ProgressBar();
@@ -201,8 +203,10 @@
             this.relTypesFacts = new Controls.RelationTypes();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.label7 = new System.Windows.Forms.Label();
-            this.pbRelationships = new System.Windows.Forms.ProgressBar();
+            this.tabDuplicates = new System.Windows.Forms.TabPage();
+            this.splitDuplicates = new System.Windows.Forms.SplitContainer();
+            this.dgDuplicateSelect = new System.Windows.Forms.DataGridView();
+            this.dgDuplicateView = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -249,6 +253,13 @@
             this.tabSurnames.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSurnames)).BeginInit();
             this.tabFacts.SuspendLayout();
+            this.tabDuplicates.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitDuplicates)).BeginInit();
+            this.splitDuplicates.Panel1.SuspendLayout();
+            this.splitDuplicates.Panel2.SuspendLayout();
+            this.splitDuplicates.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgDuplicateSelect)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgDuplicateView)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -1761,6 +1772,22 @@
             this.tabDisplayProgress.Text = "Gedcom Stats";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(8, 85);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(125, 13);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "Calculating Relationships";
+            // 
+            // pbRelationships
+            // 
+            this.pbRelationships.Location = new System.Drawing.Point(139, 82);
+            this.pbRelationships.Name = "pbRelationships";
+            this.pbRelationships.Size = new System.Drawing.Size(316, 16);
+            this.pbRelationships.TabIndex = 7;
+            // 
             // rtbOutput
             // 
             this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1836,6 +1863,7 @@
             this.tabSelector.Controls.Add(this.tabOccupations);
             this.tabSelector.Controls.Add(this.tabFacts);
             this.tabSelector.Controls.Add(this.tabDataErrors);
+            this.tabSelector.Controls.Add(this.tabDuplicates);
             this.tabSelector.Controls.Add(this.tabLooseBirthDeaths);
             this.tabSelector.Controls.Add(this.tabCensus);
             this.tabSelector.Controls.Add(this.tabLostCousins);
@@ -1981,21 +2009,51 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // label7
+            // tabDuplicates
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 85);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(125, 13);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "Calculating Relationships";
+            this.tabDuplicates.Controls.Add(this.splitDuplicates);
+            this.tabDuplicates.Location = new System.Drawing.Point(4, 22);
+            this.tabDuplicates.Name = "tabDuplicates";
+            this.tabDuplicates.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDuplicates.Size = new System.Drawing.Size(1035, 445);
+            this.tabDuplicates.TabIndex = 15;
+            this.tabDuplicates.Text = "Duplicates?";
+            this.tabDuplicates.UseVisualStyleBackColor = true;
             // 
-            // pbRelationships
+            // splitDuplicates
             // 
-            this.pbRelationships.Location = new System.Drawing.Point(139, 82);
-            this.pbRelationships.Name = "pbRelationships";
-            this.pbRelationships.Size = new System.Drawing.Size(316, 16);
-            this.pbRelationships.TabIndex = 7;
+            this.splitDuplicates.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitDuplicates.Location = new System.Drawing.Point(3, 3);
+            this.splitDuplicates.Name = "splitDuplicates";
+            // 
+            // splitDuplicates.Panel1
+            // 
+            this.splitDuplicates.Panel1.Controls.Add(this.dgDuplicateSelect);
+            // 
+            // splitDuplicates.Panel2
+            // 
+            this.splitDuplicates.Panel2.Controls.Add(this.dgDuplicateView);
+            this.splitDuplicates.Size = new System.Drawing.Size(1029, 439);
+            this.splitDuplicates.SplitterDistance = 512;
+            this.splitDuplicates.TabIndex = 0;
+            // 
+            // dgDuplicateSelect
+            // 
+            this.dgDuplicateSelect.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgDuplicateSelect.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgDuplicateSelect.Location = new System.Drawing.Point(0, 0);
+            this.dgDuplicateSelect.Name = "dgDuplicateSelect";
+            this.dgDuplicateSelect.Size = new System.Drawing.Size(512, 439);
+            this.dgDuplicateSelect.TabIndex = 0;
+            // 
+            // dgDuplicateView
+            // 
+            this.dgDuplicateView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgDuplicateView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgDuplicateView.Location = new System.Drawing.Point(0, 0);
+            this.dgDuplicateView.Name = "dgDuplicateView";
+            this.dgDuplicateView.Size = new System.Drawing.Size(513, 439);
+            this.dgDuplicateView.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -2072,6 +2130,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgSurnames)).EndInit();
             this.tabFacts.ResumeLayout(false);
             this.tabFacts.PerformLayout();
+            this.tabDuplicates.ResumeLayout(false);
+            this.splitDuplicates.Panel1.ResumeLayout(false);
+            this.splitDuplicates.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitDuplicates)).EndInit();
+            this.splitDuplicates.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgDuplicateSelect)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgDuplicateView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2250,6 +2315,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Marriages;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ProgressBar pbRelationships;
+        private System.Windows.Forms.TabPage tabDuplicates;
+        private System.Windows.Forms.SplitContainer splitDuplicates;
+        private System.Windows.Forms.DataGridView dgDuplicateSelect;
+        private System.Windows.Forms.DataGridView dgDuplicateView;
     }
 }
 

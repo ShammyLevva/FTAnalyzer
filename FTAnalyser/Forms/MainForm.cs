@@ -252,8 +252,8 @@ namespace FTAnalyzer
             if (ft.Loading)
             {
                 tabSelector.SelectedTab = tabDisplayProgress;
-                tsCountLabel.Text = "";
-                tsHintsLabel.Text = "";
+                tsCountLabel.Text = string.Empty;
+                tsHintsLabel.Text = string.Empty;
             }
             else
             {
@@ -262,8 +262,8 @@ namespace FTAnalyzer
                     if (tabSelector.SelectedTab != tabDisplayProgress)
                     {
                         tabSelector.SelectedTab = tabDisplayProgress;
-                        tsCountLabel.Text = "";
-                        tsHintsLabel.Text = "";
+                        tsCountLabel.Text = string.Empty;
+                        tsHintsLabel.Text = string.Empty;
                         mnuRestore.Enabled = true;
                         MessageBox.Show(Properties.ErrorMessages.FTA_0002, "Error : FTA_0002");
                     }
@@ -272,8 +272,8 @@ namespace FTAnalyzer
                 HourGlass(true);
                 if (tabSelector.SelectedTab == tabDisplayProgress)
                 {
-                    tsCountLabel.Text = "";
-                    tsHintsLabel.Text = "";
+                    tsCountLabel.Text = string.Empty;
+                    tsHintsLabel.Text = string.Empty;
                     mnuPrint.Enabled = true;
                 }
                 else if (tabSelector.SelectedTab == tabIndividuals)
@@ -328,10 +328,16 @@ namespace FTAnalyzer
                     btnShowCensusMissing.Enabled = ft.IndividualCount > 0;
                     cenDate.AddAllCensusItems();
                 }
+                else if (tabSelector.SelectedTab == tabDuplicates)
+                {
+                    tsCountLabel.Text = string.Empty;
+                    tsHintsLabel.Text = string.Empty;
+                    ft.GenerateDuplicatesList();
+                }
                 else if (tabSelector.SelectedTab == tabTreetops)
                 {
-                    tsCountLabel.Text = "";
-                    tsHintsLabel.Text = "";
+                    tsCountLabel.Text = string.Empty;
+                    tsHintsLabel.Text = string.Empty;
                     dgTreeTops.DataSource = null;
                     if (ckbTTIgnoreLocations.Checked)
                         treetopsCountry.Enabled = false;
@@ -340,8 +346,8 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabWarDead)
                 {
-                    tsCountLabel.Text = "";
-                    tsHintsLabel.Text = "";
+                    tsCountLabel.Text = string.Empty;
+                    tsHintsLabel.Text = string.Empty;
                     dgWarDead.DataSource = null;
                     if (ckbWDIgnoreLocations.Checked)
                         wardeadCountry.Enabled = false;
@@ -350,8 +356,8 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabLostCousins)
                 {
-                    tsCountLabel.Text = "";
-                    tsHintsLabel.Text = "";
+                    tsCountLabel.Text = string.Empty;
+                    tsHintsLabel.Text = string.Empty;
                     btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled =
                         btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled =
                         btnLC1911EW.Enabled = ft.IndividualCount > 0;
@@ -374,7 +380,7 @@ namespace FTAnalyzer
                 {
                     HourGlass(true);
                     tabCtrlLocations.SelectedIndex = 0;
-                    tsCountLabel.Text = "";
+                    tsCountLabel.Text = string.Empty;
                     tsHintsLabel.Text = Properties.Messages.Hints_Location;
                     treeViewLocations.Nodes.Clear();
                     Application.DoEvents();

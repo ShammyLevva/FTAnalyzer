@@ -62,7 +62,7 @@ namespace FTAnalyzer
         {
             if (node == null || node.FirstChild == null || node.FirstChild.Value == null)
             {
-                return "";
+                return string.Empty;
             }
             if (node.Name.Equals("PAGE") || node.Name.Equals("TITL"))
                 return node.InnerText.Trim();
@@ -2175,6 +2175,11 @@ namespace FTAnalyzer
         public void Dispose()
         {
             xmlErrorbox.Dispose();
+        }
+
+        internal void GenerateDuplicatesList()
+        {
+            throw new NotImplementedException();
         }
     }
 }
