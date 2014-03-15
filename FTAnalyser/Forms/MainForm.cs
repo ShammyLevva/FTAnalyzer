@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.3.3.0";
+        public string VERSION = "3.4.0.0-beta 1";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -335,7 +335,7 @@ namespace FTAnalyzer
                     tsCountLabel.Text = string.Empty;
                     tsHintsLabel.Text = string.Empty;
                     Application.DoEvents();
-                    ft.GenerateDuplicatesList(pbDuplicates);
+                    SetPossibleDuplicates();
                 }
                 else if (tabSelector.SelectedTab == tabTreetops)
                 {
@@ -398,6 +398,12 @@ namespace FTAnalyzer
                 }
                 HourGlass(false);
             }
+        }
+
+        private void SetPossibleDuplicates()
+        {
+            dgDuplicateSelect.DataSource = ft.GenerateDuplicatesList(pbDuplicates, tbDuplicateScore);
+            tsCountLabel.Text = "Possible Duplicate Count : " + dgDuplicateSelect.RowCount.ToString();
         }
 
         private void UpdateLooseBirthDeaths()
@@ -1743,6 +1749,25 @@ namespace FTAnalyzer
             factForm.Show();
         }
 
+        private void dgDuplicateSelect_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+            Individual ind = ft.GetIndividual(indID);
+            Facts factForm = new Facts(ind);
+            DisposeDuplicateForms(factForm);
+            factForm.Show();
+        }
+
+        private void dgDuplicateSelect_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgDuplicateSelect.CurrentRow != null)
+            {
+                string indID = (string)dgDuplicateSelect.CurrentRow.Cells["IndividualID"].Value;
+                Individual ind = ft.GetIndividual(indID);
+                dgDuplicateView.DataSource = ft.BuildDuplicateList(ind);
+            }
+        }
+
         private void buildLocationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             foreach (KeyValuePair<string, string> shift in FactLocation.COUNTRY_SHIFTS)
@@ -1823,6 +1848,11 @@ namespace FTAnalyzer
                     c.Value = r.Cells["URI"].Value;
                 }
             }
+        }
+
+        private void tbDuplicateScore_Scroll(object sender, EventArgs e)
+        {
+            SetPossibleDuplicates();
         }
     }
 }

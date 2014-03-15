@@ -2177,10 +2177,10 @@ namespace FTAnalyzer
         #endregion
 
         #region Duplicates Processing
-        public void GenerateDuplicatesList(ProgressBar pb)
+        public SortableBindingList<IDisplayIndividual> GenerateDuplicatesList(ProgressBar pb, TrackBar tb)
         {
             if (duplicates != null)
-                return; // we have already processed the duplicates since the file was loaded
+                return BuildDuplicateSelectList(tb.Value); // we have already processed the duplicates since the file was loaded
             duplicates = new SortableBindingList<DuplicateIndividual>();
             IEnumerable<Individual> males = individuals.Where<Individual>(x => (x.Gender == "M" || x.Gender == "U"));
             IEnumerable<Individual> females = individuals.Where<Individual>(x => (x.Gender == "F" || x.Gender == "U"));
@@ -2188,6 +2188,19 @@ namespace FTAnalyzer
             pb.Value = 0;
             IndentifyDuplicates(pb, males);
             IndentifyDuplicates(pb, females);
+            tb.Maximum = MaxDuplicateScore();
+            return BuildDuplicateSelectList(tb.Value);
+        }
+
+        private int MaxDuplicateScore()
+        {
+            int score = 0;
+            foreach(DuplicateIndividual dup in duplicates)
+            {
+                if (dup.Score > score)
+                    score = dup.Score;
+            }
+            return score;
         }
 
         private void IndentifyDuplicates(ProgressBar pb, IEnumerable<Individual> enumerable)
@@ -2215,6 +2228,35 @@ namespace FTAnalyzer
                         Application.DoEvents();
                 }
             }
+        }
+
+        private SortableBindingList<IDisplayIndividual> BuildDuplicateSelectList(int minScore)
+        {
+            SortableBindingList<IDisplayIndividual> select = new SortableBindingList<IDisplayIndividual>();
+            foreach(DuplicateIndividual dup in duplicates)
+            {
+                if (dup.Score >= minScore)
+                {
+                    if (!select.Contains(dup.IndividualA))
+                        select.Add(dup.IndividualA);
+                    if (!select.Contains(dup.IndividualB))
+                        select.Add(dup.IndividualB);
+                }
+            }
+            return select;
+        }
+
+        public SortableBindingList<IDisplayIndividual> BuildDuplicateList(Individual ind)
+        {
+            SortableBindingList<IDisplayIndividual> result = new SortableBindingList<IDisplayIndividual>();
+            foreach (DuplicateIndividual dup in duplicates)
+            {
+                if (dup.IndividualA.Equals(ind) && !result.Contains(dup.IndividualB))
+                    result.Add(dup.IndividualB);
+                if (dup.IndividualB.Equals(ind) && !result.Contains(dup.IndividualA))
+                    result.Add(dup.IndividualA);
+            }
+            return result;
         }
         #endregion
 
