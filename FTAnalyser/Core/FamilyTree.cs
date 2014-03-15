@@ -33,6 +33,7 @@ namespace FTAnalyzer
         private SortableBindingList<IDisplayLocation>[] displayLocations;
         private SortableBindingList<IDisplayLooseDeath> looseDeaths;
         private SortableBindingList<IDisplayLooseBirth> looseBirths;
+        private SortableBindingList<DuplicateIndividual> duplicates;
         private TreeNode mainformTreeRootNode;
         private TreeNode placesTreeRootNode;
         private static int DATA_ERROR_GROUPS = 21;
@@ -121,6 +122,7 @@ namespace FTAnalyzer
             dataErrorTypes = new List<DataErrorGroup>();
             displayLocations = new SortableBindingList<IDisplayLocation>[5];
             unknownFactTypes = new HashSet<string>();
+            duplicates = null;
             ClearLocations();
             mainformTreeRootNode = null;
             ResetLooseFacts();
@@ -221,11 +223,13 @@ namespace FTAnalyzer
             if (rootIndividualID == string.Empty)
                 rootIndividualID = individuals[0].IndividualID;
             UpdateRootIndividual(rootIndividualID, pbR);
+            Application.DoEvents();
             CountCensusFacts();
             FixIDs();
             SetDataErrorTypes();
             CountUnknownFactTypes();
             FactLocation.LoadGoogleFixesXMLFile(xmlErrorbox);
+            Application.DoEvents();
             LoadGeoLocationsFromDataBase();
             _loading = false;
             _dataloaded = true;
@@ -2172,14 +2176,51 @@ namespace FTAnalyzer
         }
         #endregion
 
+        #region Duplicates Processing
+        public void GenerateDuplicatesList(ProgressBar pb)
+        {
+            if (duplicates != null)
+                return; // we have already processed the duplicates since the file was loaded
+            duplicates = new SortableBindingList<DuplicateIndividual>();
+            IEnumerable<Individual> males = individuals.Where<Individual>(x => (x.Gender == "M" || x.Gender == "U"));
+            IEnumerable<Individual> females = individuals.Where<Individual>(x => (x.Gender == "F" || x.Gender == "U"));
+            pb.Maximum = (males.Count() * males.Count() + females.Count() * females.Count()) / 2;
+            pb.Value = 0;
+            IndentifyDuplicates(pb, males);
+            IndentifyDuplicates(pb, females);
+        }
+
+        private void IndentifyDuplicates(ProgressBar pb, IEnumerable<Individual> enumerable)
+        {
+            List<Individual> list = enumerable.ToList<Individual>();
+            for (int i = 0; i < list.Count; i++)
+            {
+                Individual indA = list[i];
+                for (int j = i + 1; j < list.Count; j++)
+                {
+                    Individual indB = list[j];
+                    if (indA.GenderMatches(indB))
+                    {
+                        if (indA.SurnameMetaphone == indB.SurnameMetaphone &&
+                            indA.ForenameMetaphone == indB.ForenameMetaphone &&
+                            indA.BirthDate.Distance(indB.BirthDate) < 5)
+                        {
+                            DuplicateIndividual test = new DuplicateIndividual(indA, indB);
+                            if (!duplicates.Contains(test))
+                                duplicates.Add(test);
+                        }
+                    }
+                    pb.Value++;
+                    if (pb.Value % 1000 == 0)
+                        Application.DoEvents();
+                }
+            }
+        }
+        #endregion
+
         public void Dispose()
         {
             xmlErrorbox.Dispose();
-        }
-
-        internal void GenerateDuplicatesList()
-        {
-            throw new NotImplementedException();
         }
     }
 }

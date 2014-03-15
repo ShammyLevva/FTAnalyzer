@@ -56,7 +56,7 @@ namespace FTAnalyzer
         public bool DoubleDate { get; private set; } // Is a pre 1752 date bet 1 Jan and 25 Mar eg: 1735/36.
         private int yearfix;
 
-        public FactDate(string str, string factRef = string.Empty)
+        public FactDate(string str, string factRef = "")
         {
             this.DoubleDate = false;
             if (str == null)

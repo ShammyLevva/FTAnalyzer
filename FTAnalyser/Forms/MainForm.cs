@@ -148,6 +148,8 @@ namespace FTAnalyzer
                 dgDataErrors.DataSource = null;
                 dgOccupations.DataSource = null;
                 dgSurnames.DataSource = null;
+                dgDuplicateSelect.DataSource = null;
+                dgDuplicateView.DataSource = null;
                 Statistics.Instance.Clear();
                 tabCtrlLooseBDs.SelectedTab = tabLooseBirths; // force back to first tab
                 tabCtrlLocations.SelectedTab = tabTreeView; // otherwise totals etc look wrong
@@ -332,7 +334,8 @@ namespace FTAnalyzer
                 {
                     tsCountLabel.Text = string.Empty;
                     tsHintsLabel.Text = string.Empty;
-                    ft.GenerateDuplicatesList();
+                    Application.DoEvents();
+                    ft.GenerateDuplicatesList(pbDuplicates);
                 }
                 else if (tabSelector.SelectedTab == tabTreetops)
                 {

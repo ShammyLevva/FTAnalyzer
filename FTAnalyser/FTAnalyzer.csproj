@@ -202,6 +202,7 @@
     <Compile Include="Core\Displays\IDisplayColourCensus.cs" />
     <Compile Include="Core\Displays\DisplayOccupation.cs" />
     <Compile Include="Core\Displays\IDisplayOccupation.cs" />
+    <Compile Include="Core\DuplicateIndividual.cs" />
     <Compile Include="Core\Exports\ExportFacts.cs" />
     <Compile Include="Core\Exports\IExportIndividual.cs" />
     <Compile Include="Core\Fact.cs" />
@@ -793,6 +794,10 @@
     <PostBuildEvent>
     if not exist "$(TargetDir)gdal" md "$(TargetDir)gdal"
     xcopy /s /y "$(SolutionDir)packages\GDAL.Native.1.9.2\gdal\*.*" "$(TargetDir)gdal"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>if exist "$(TargetPath).locked" del "$(TargetPath).locked"
+if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

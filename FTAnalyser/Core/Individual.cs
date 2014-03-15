@@ -25,6 +25,8 @@ namespace FTAnalyzer
         private string budgieCode;
         private bool infamily;
         private bool hasParents;
+        private DoubleMetaphone surnameMetaphone;
+        private DoubleMetaphone forenameMetaphone;
 
         private IList<Fact> facts;
         private IList<Fact> errorFacts;
@@ -50,6 +52,8 @@ namespace FTAnalyzer
             familiesAsChild = new List<ParentalRelationship>();
             familiesAsParent = new List<Family>();
             preferredFacts = new Dictionary<string, Fact>();
+            forenameMetaphone = new DoubleMetaphone(Forename);
+            surnameMetaphone = new DoubleMetaphone(Surname);
 
             // Individual attributes
             AddFacts(node, Fact.PHYSICAL_DESC);
@@ -117,6 +121,8 @@ namespace FTAnalyzer
                 this.IndividualID = i.IndividualID;
                 this.forenames = i.forenames;
                 this.surname = i.surname;
+                this.forenameMetaphone = i.forenameMetaphone;
+                this.surnameMetaphone = i.surnameMetaphone;
                 this.marriedName = i.marriedName;
                 this.gender = i.gender;
                 this.alias = i.alias;
@@ -254,6 +260,11 @@ namespace FTAnalyzer
             }
         }
 
+        public bool GenderMatches(Individual that)
+        {
+            return this.Gender == that.Gender || this.Gender == "U" || that.Gender == "U";
+        }
+
         public string SortedName
         {
             get { return (surname + ", " + forenames).Trim(); }
@@ -300,8 +311,7 @@ namespace FTAnalyzer
         {
             get
             {
-                DoubleMetaphone mp = new DoubleMetaphone(Forename);
-                return mp.PrimaryKey;
+                return forenameMetaphone.PrimaryKey;
             }
         }
 
@@ -319,8 +329,7 @@ namespace FTAnalyzer
         {
             get
             {
-                DoubleMetaphone mp = new DoubleMetaphone(Surname);
-                return mp.PrimaryKey;
+                return surnameMetaphone.PrimaryKey;
             }
         }
 
