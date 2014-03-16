@@ -71,7 +71,8 @@ namespace FTAnalyzer.Forms
             int numIndividuals = (from x in individuals select x.IndividualID).Distinct().Count();
             int numFamilies = (from x in individuals select x.FamilyID).Distinct().Count();
 
-            tsRecords.Text = individuals.Count + " Rows containing " + numIndividuals + " Individuals and " + numFamilies + " Families.";
+            tsRecords.Text = individuals.Count + " Rows containing " + numIndividuals + " Individuals and " + 
+                             numFamilies + " Families. " + CensusProviderText();
         }
 
         private void ResetTable()
@@ -114,6 +115,14 @@ namespace FTAnalyzer.Forms
                 return "This individual is known to be alive on this census.";
             else if (style.ForeColor == Color.Red)
                 return "This is a direct ancestor that may be alive on this census.";
+            else
+                return CensusProviderText();
+        }
+
+        private string CensusProviderText()
+        {
+            if(LostCousins)
+                return "Shift Double click to search " + cbCensusSearchProvider.Text + " for this person's census record";
             else
                 return "Double click to search " + cbCensusSearchProvider.Text + " for this person's census record";
         }
@@ -201,7 +210,7 @@ namespace FTAnalyzer.Forms
             {
                 CensusIndividual ds = (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
                 FamilyTree ft = FamilyTree.Instance;
-                if (LostCousins)
+                if (LostCousins && !Control.ModifierKeys.Equals(Keys.Shift))
                 {
                     Facts factForm = new Facts(ds);
                     MainForm.DisposeDuplicateForms(factForm);
