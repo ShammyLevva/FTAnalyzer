@@ -27,6 +27,7 @@ namespace FTAnalyzer
         private ISet<string> unknownFactTypes;
         private bool _loading = false;
         private bool _dataloaded = false;
+        private bool _cancelDuplicates = false;
         private RichTextBox xmlErrorbox = new RichTextBox();
         private int maxAhnentafel = 0;
         private IList<DataErrorGroup> dataErrorTypes;
@@ -2179,8 +2180,10 @@ namespace FTAnalyzer
         #region Duplicates Processing
         public SortableBindingList<IDisplayIndividual> GenerateDuplicatesList(ProgressBar pb, TrackBar tb)
         {
-            if (duplicates != null)
+            if (duplicates != null && !_cancelDuplicates)
                 return BuildDuplicateSelectList(tb.Value); // we have already processed the duplicates since the file was loaded
+            tb.Enabled = false;
+            _cancelDuplicates = false;
             duplicates = new SortableBindingList<DuplicateIndividual>();
             IEnumerable<Individual> males = individuals.Where<Individual>(x => (x.Gender == "M" || x.Gender == "U"));
             IEnumerable<Individual> females = individuals.Where<Individual>(x => (x.Gender == "F" || x.Gender == "U"));
@@ -2188,8 +2191,20 @@ namespace FTAnalyzer
             pb.Value = 0;
             IndentifyDuplicates(pb, males);
             IndentifyDuplicates(pb, females);
+            if(_cancelDuplicates)
+            {
+                pb.Value = 0;
+                MessageBox.Show("Possible Duplicate Seach Cancelled", "FT Analyzer");
+                return null;
+            }
+            tb.Enabled = true;
             tb.Maximum = MaxDuplicateScore();
             return BuildDuplicateSelectList(tb.Value);
+        }
+
+        public void CancelDuplicateProcessing()
+        {
+            _cancelDuplicates = true;
         }
 
         private int MaxDuplicateScore()
@@ -2208,24 +2223,29 @@ namespace FTAnalyzer
             List<Individual> list = enumerable.ToList<Individual>();
             for (int i = 0; i < list.Count; i++)
             {
-                Individual indA = list[i];
-                for (int j = i + 1; j < list.Count; j++)
+                if (!_cancelDuplicates)
                 {
-                    Individual indB = list[j];
-                    if (indA.GenderMatches(indB))
+                    Individual indA = list[i];
+                    for (int j = i + 1; j < list.Count; j++)
                     {
-                        if (indA.SurnameMetaphone == indB.SurnameMetaphone &&
-                            indA.ForenameMetaphone == indB.ForenameMetaphone &&
-                            indA.BirthDate.Distance(indB.BirthDate) < 5)
+                        if (_cancelDuplicates)
+                            break;
+                        Individual indB = list[j];
+                        if (indA.GenderMatches(indB))
                         {
-                            DuplicateIndividual test = new DuplicateIndividual(indA, indB);
-                            if (test.Score > 0 && !duplicates.Contains(test))
-                                duplicates.Add(test);
+                            if (indA.SurnameMetaphone == indB.SurnameMetaphone &&
+                                indA.ForenameMetaphone == indB.ForenameMetaphone &&
+                                indA.BirthDate.Distance(indB.BirthDate) < 5)
+                            {
+                                DuplicateIndividual test = new DuplicateIndividual(indA, indB);
+                                if (test.Score > 0 && !duplicates.Contains(test))
+                                    duplicates.Add(test);
+                            }
                         }
+                        pb.Value++;
+                        if (pb.Value % 1000 == 0)
+                            Application.DoEvents();
                     }
-                    pb.Value++;
-                    if (pb.Value % 1000 == 0)
-                        Application.DoEvents();
                 }
             }
         }

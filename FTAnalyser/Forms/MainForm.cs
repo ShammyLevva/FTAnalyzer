@@ -1854,5 +1854,10 @@ namespace FTAnalyzer
         {
             SetPossibleDuplicates();
         }
+
+        private void btnCancelDuplicates_Click(object sender, EventArgs e)
+        {
+            ft.CancelDuplicateProcessing();
+        }
     }
 }
