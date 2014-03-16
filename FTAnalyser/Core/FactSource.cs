@@ -11,9 +11,9 @@ namespace FTAnalyzer
         private static readonly string BIRTHCERT = "BIRTH", DEATHCERT = "DEATH",
                 MARRIAGECERT = "MARRIAGE", CENSUSCERT = "CENSUS";
 
-        public string SourceID { get; set; }
-        private string SourceTitle { get; set; }
-        private string SourceMedium { get; set; }
+        public string SourceID { get; private set; }
+        public string SourceTitle { get; private set; }
+        public string SourceMedium { get; private set; }
 
         public FactSource(XmlNode node)
         {

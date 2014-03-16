@@ -66,6 +66,7 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_PATTERN = "Class: RG(\\d{2,3}); Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3}); GSU";
         private static readonly string EW_CENSUS_1841_PATTERN = "Class: HO107; Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3}); GSU";
         private static readonly string EW_CENSUS_1841_PATTERN2 = "Class: HO107; Piece:? (\\d{1,5}); Book: (\\d{1,3});.*?Folio: (\\d{1,4}); Page: (\\d{1,3});";
+        private static readonly string EW_CENSUS_1841_PATTERN3 = "HO107/(\\d{1,5})/(\\d{1,3}) ED(\\d{1,2}) F(\\d{1,3}) p(\\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN = "^RG14PN(\\d{1,6}) .*SN(\\d{1,3})$";
         private static readonly string EW_CENSUS_1911_PATTERN2 = "Class: RG14; Piece: (\\d{1,6})$";
         private static readonly string EW_CENSUS_1911_PATTERN3 = "Class: RG14; Piece: (\\d{1,6}); Schedule Number: (\\d{1,3})$";
@@ -222,7 +223,7 @@ namespace FTAnalyzer
         public bool Created { get; protected set; }
         public bool Preferred { get; private set; }
         private string Tag { get; set; }
-        
+
         #region Constructors
 
         private Fact()
@@ -330,7 +331,7 @@ namespace FTAnalyzer
         private void SetAddress(string FactType, XmlNode node)
         {
             XmlNode addr = node.SelectSingleNode("ADDR");
-            if(addr == null)
+            if (addr == null)
                 return;
             string result = string.Empty; // need to do something with an ADDR tag
             XmlNode ctry = node.SelectSingleNode("ADDR/CTRY");
@@ -354,7 +355,7 @@ namespace FTAnalyzer
             string address = string.Empty;
             if (addr.FirstChild != null && addr.FirstChild.Value != null)
                 address = addr.FirstChild.Value;
-            foreach(XmlNode cont in node.SelectNodes("ADDR/CONT"))
+            foreach (XmlNode cont in node.SelectNodes("ADDR/CONT"))
             {
                 if (cont.FirstChild != null && cont.FirstChild.Value != null)
                     address += " " + cont.FirstChild.Value;
@@ -384,6 +385,7 @@ namespace FTAnalyzer
                     this.Parish = matcher.Groups[1].ToString();
                     this.ED = matcher.Groups[2].ToString();
                     this.Page = matcher.Groups[3].ToString();
+                    return;
                 }
                 matcher = Regex.Match(text, SCOT_CENSUS_PATTERN2);
                 if (matcher.Success)
@@ -391,6 +393,7 @@ namespace FTAnalyzer
                     this.Parish = matcher.Groups[1].ToString().Replace("/00", "").Replace("/", "-");
                     this.ED = matcher.Groups[2].ToString().Replace("/00", "").TrimStart('0');
                     this.Page = matcher.Groups[3].ToString().TrimStart('0');
+                    return;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_PATTERN);
                 if (matcher.Success)
@@ -398,6 +401,7 @@ namespace FTAnalyzer
                     this.Piece = matcher.Groups[2].ToString();
                     this.Folio = matcher.Groups[3].ToString();
                     this.Page = matcher.Groups[4].ToString();
+                    return;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN);
                 if (matcher.Success)
@@ -405,6 +409,7 @@ namespace FTAnalyzer
                     this.Piece = matcher.Groups[1].ToString();
                     this.Folio = matcher.Groups[2].ToString();
                     this.Page = matcher.Groups[3].ToString();
+                    return;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN2);
                 if (matcher.Success)
@@ -413,30 +418,50 @@ namespace FTAnalyzer
                     this.Book = matcher.Groups[2].ToString();
                     this.Folio = matcher.Groups[3].ToString();
                     this.Page = matcher.Groups[4].ToString();
+                    return;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN);
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
+                    return;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN2);
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = "Missing";
+                    return;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3);
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
+                    return;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN4);
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
                     this.Page = matcher.Groups[2].ToString();
+                    return;
+                }
+            }
+            // now check sources to see if census reference is in title page
+            if (n.OuterXml.Contains("S100"))
+                Console.Write("S100");
+            foreach (FactSource fs in Sources)
+            {
+                Match matcher = Regex.Match(fs.SourceTitle, EW_CENSUS_1841_PATTERN3);
+                if (matcher.Success)
+                {
+                    this.Piece = matcher.Groups[1].ToString();
+                    this.Book = matcher.Groups[2].ToString();
+                    this.Folio = matcher.Groups[4].ToString();
+                    this.Page = matcher.Groups[5].ToString();
+                    return;
                 }
             }
         }

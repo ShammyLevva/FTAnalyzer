@@ -792,12 +792,11 @@
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>
     <PostBuildEvent>
-    if not exist "$(TargetDir)gdal" md "$(TargetDir)gdal"
-    xcopy /s /y "$(SolutionDir)packages\GDAL.Native.1.9.2\gdal\*.*" "$(TargetDir)gdal"</PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>if exist "$(TargetPath).locked" del "$(TargetPath).locked"
-if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
