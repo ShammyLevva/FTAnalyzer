@@ -2194,7 +2194,7 @@ namespace FTAnalyzer
             if(_cancelDuplicates)
             {
                 pb.Value = 0;
-                MessageBox.Show("Possible Duplicate Seach Cancelled", "FT Analyzer");
+                MessageBox.Show("Possible Duplicate Search Cancelled", "FT Analyzer");
                 return null;
             }
             tb.Enabled = true;

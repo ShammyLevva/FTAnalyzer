@@ -129,6 +129,7 @@ namespace FTAnalyzer
                 this.ahnentafel = i.ahnentafel;
                 this.budgieCode = i.budgieCode;
                 this.relationType = i.relationType;
+                this.RelationToRoot = i.RelationToRoot;
                 this.infamily = i.infamily;
                 this.facts = new List<Fact>(i.facts);
                 this.errorFacts = new List<Fact>(i.errorFacts);
