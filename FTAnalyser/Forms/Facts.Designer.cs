@@ -49,6 +49,7 @@
             this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeOfFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SurnameAtDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Relation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -152,6 +153,7 @@
             this.Surname,
             this.TypeOfFact,
             this.FactDate,
+            this.SurnameAtDate,
             this.Relation,
             this.RelationToRoot,
             this.FactLocation,
@@ -251,6 +253,15 @@
             this.FactDate.Name = "FactDate";
             this.FactDate.ReadOnly = true;
             this.FactDate.Width = 150;
+            // 
+            // SurnameAtDate
+            // 
+            this.SurnameAtDate.DataPropertyName = "SurnameAtDate";
+            this.SurnameAtDate.HeaderText = "Surname at Date";
+            this.SurnameAtDate.MinimumWidth = 75;
+            this.SurnameAtDate.Name = "SurnameAtDate";
+            this.SurnameAtDate.ReadOnly = true;
+            this.SurnameAtDate.Width = 75;
             // 
             // Relation
             // 
@@ -353,6 +364,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Surname;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeOfFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SurnameAtDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Relation;
         private System.Windows.Forms.DataGridViewTextBoxColumn RelationToRoot;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactLocation;

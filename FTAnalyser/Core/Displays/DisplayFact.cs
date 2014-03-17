@@ -40,6 +40,7 @@ namespace FTAnalyzer
         public Image LocationIcon { get { return FactLocationImage.ErrorIcon(Fact.Location.GeocodeStatus).Icon; } }
         public string Relation { get { return Ind == null ? string.Empty : Ind.Relation; } }
         public string RelationToRoot { get { return Ind == null ? string.Empty : Ind.RelationToRoot; } }
+        public string SurnameAtDate { get { return Ind == null ? string.Empty : Ind.SurnameAtDate(FactDate); } }
         
         public int CompareTo(object obj)
         {

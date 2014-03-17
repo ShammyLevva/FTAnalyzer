@@ -288,7 +288,7 @@ namespace FTAnalyzer
                     surname = "UNKNOWN";
                     forenames = name;
                 }
-                if (surname == "?")
+                if (surname == "?" || surname.ToLower() == "mnu")
                     surname = "UNKNOWN";
                 marriedName = surname;
             }
@@ -768,7 +768,7 @@ namespace FTAnalyzer
             {
                 foreach (Family marriage in familiesAsParent.OrderBy(f => f.MarriageDate))
                 {
-                    if (marriage.MarriageDate.IsBefore(date) && marriage.Husband != null)
+                    if ((marriage.MarriageDate.Equals(date) || marriage.MarriageDate.IsBefore(date)) && marriage.Husband != null)
                         name = marriage.Husband.surname;
                 }
             }

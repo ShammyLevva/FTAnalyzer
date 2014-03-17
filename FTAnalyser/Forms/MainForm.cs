@@ -232,9 +232,9 @@ namespace FTAnalyzer
                     {
                         Facts newForm = form as Facts;
                         Facts oldForm = f as Facts;
-                        if (oldForm.Individual.Equals(newForm.Individual) && oldForm.Individual != null)
+                        if (oldForm.Individual != null && oldForm.Individual.Equals(newForm.Individual))
                             toDispose.Add(f);
-                        if (oldForm.Family.Equals(newForm.Family) && oldForm.Family != null)
+                        if (oldForm.Family != null && oldForm.Family.Equals(newForm.Family))
                             toDispose.Add(f);
                     }
                     else
