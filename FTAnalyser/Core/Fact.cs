@@ -381,7 +381,7 @@ namespace FTAnalyzer
             string text = FamilyTree.GetText(n, "PAGE");
             if (text.Length > 0)
             {
-                Match matcher = Regex.Match(text, SCOT_CENSUS_PATTERN);
+                Match matcher = Regex.Match(text, SCOT_CENSUS_PATTERN, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
                     this.Parish = matcher.Groups[1].ToString();
@@ -389,7 +389,7 @@ namespace FTAnalyzer
                     this.Page = matcher.Groups[3].ToString();
                     return;
                 }
-                matcher = Regex.Match(text, SCOT_CENSUS_PATTERN2);
+                matcher = Regex.Match(text, SCOT_CENSUS_PATTERN2, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
                     this.Parish = matcher.Groups[1].ToString().Replace("/00", "").Replace("/", "-");
@@ -397,7 +397,7 @@ namespace FTAnalyzer
                     this.Page = matcher.Groups[3].ToString().TrimStart('0');
                     return;
                 }
-                matcher = Regex.Match(text, EW_CENSUS_PATTERN);
+                matcher = Regex.Match(text, EW_CENSUS_PATTERN, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[2].ToString();
@@ -405,7 +405,7 @@ namespace FTAnalyzer
                     this.Page = matcher.Groups[4].ToString();
                     return;
                 }
-                matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN);
+                matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
@@ -413,7 +413,7 @@ namespace FTAnalyzer
                     this.Page = matcher.Groups[3].ToString();
                     return;
                 }
-                matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN2);
+                matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN2, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
@@ -422,28 +422,28 @@ namespace FTAnalyzer
                     this.Page = matcher.Groups[4].ToString();
                     return;
                 }
-                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN);
+                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
                     return;
                 }
-                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN2);
+                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN2, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = "Missing";
                     return;
                 }
-                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3);
+                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
                     return;
                 }
-                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN4);
+                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN4, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
