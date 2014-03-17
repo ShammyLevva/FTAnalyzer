@@ -31,7 +31,8 @@ namespace FTAnalyzer
                 Score += 10;
             if (IndividualA.DeathDate.Equals(IndividualB.DeathDate))
                 Score += 10;
-            
+            if (!IndividualA.BirthLocation.Country.Equals(IndividualB.BirthLocation.Country))
+                Score -= 100;
         }
 
         public override bool Equals(object that)
