@@ -1887,6 +1887,7 @@ namespace FTAnalyzer
         private void tbDuplicateScore_Scroll(object sender, EventArgs e)
         {
             SetPossibleDuplicates();
+            label14.Text = "Debug: slider=" + tbDuplicateScore.Value;
         }
 
         private void btnCancelDuplicates_Click(object sender, EventArgs e)
