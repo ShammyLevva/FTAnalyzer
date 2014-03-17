@@ -161,6 +161,7 @@ namespace FTAnalyzer
                     if (ft.LoadTree(filename, pbSources, pbIndividuals, pbFamilies, pbRelationships))
                     {
                         ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
+                        ft.SetFactTypeList(ckbFactSelect);
                         Application.UseWaitCursor = false;
                         ShowMenus(true);
                         HourGlass(false);
@@ -1224,7 +1225,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            DataTable dt = convertor.ToDataTable(new List<ExportFacts>(ft.AllExportFacts));
+            DataTable dt = convertor.ToDataTable(new List<ExportFact>(ft.AllExportFacts));
             ExportToExcel.Export(dt);
             HourGlass(false);
         }
@@ -1881,6 +1882,16 @@ namespace FTAnalyzer
         private void btnCancelDuplicates_Click(object sender, EventArgs e)
         {
             ft.CancelDuplicateProcessing();
+        }
+
+        private void ckbFactSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = 0;
+            foreach (string factType in ckbFactSelect.Items)
+            {
+                bool itemChecked = ckbFactSelect.GetItemChecked(index++);
+                Application.UserAppDataRegistry.SetValue("Fact: " + factType, itemChecked);
+            }
         }
     }
 }

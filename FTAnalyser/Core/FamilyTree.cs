@@ -466,18 +466,18 @@ namespace FTAnalyzer
             return result;
         }
 
-        public List<ExportFacts> AllExportFacts
+        public List<ExportFact> AllExportFacts
         {
             get
             {
-                List<ExportFacts> result = new List<ExportFacts>();
+                List<ExportFact> result = new List<ExportFact>();
                 foreach (Individual ind in individuals)
                 {
                     foreach (Fact f in ind.PersonalFacts)
-                        result.Add(new ExportFacts(ind, f));
+                        result.Add(new ExportFact(ind, f));
                     foreach (Family fam in ind.FamiliesAsParent)
                         foreach (Fact famfact in fam.Facts)
-                            result.Add(new ExportFacts(ind, famfact));
+                            result.Add(new ExportFact(ind, famfact));
                 }
                 return result;
             }
@@ -1417,6 +1417,22 @@ namespace FTAnalyzer
                 int index = list.Items.Add(dataError);
                 bool itemChecked = Application.UserAppDataRegistry.GetValue(dataError.ToString(), "True").Equals("True");
                 list.SetItemChecked(index, itemChecked);
+            }
+        }
+
+        public void SetFactTypeList(CheckedListBox ckbFactSelect)
+        {
+            List<string> factTypes = AllExportFacts.Select(x => x.FactType).Distinct().ToList<string>();
+            factTypes.Sort();
+            ckbFactSelect.Items.Clear();
+            foreach(string factType in factTypes)
+            {
+                if (!ckbFactSelect.Items.Contains(factType))
+                {
+                    int index = ckbFactSelect.Items.Add(factType);
+                    bool itemChecked = Application.UserAppDataRegistry.GetValue("Fact: " + factType, "True").Equals("True");
+                    ckbFactSelect.SetItemChecked(index, itemChecked);
+                }
             }
         }
 

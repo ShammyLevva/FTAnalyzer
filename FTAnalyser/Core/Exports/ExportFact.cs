@@ -5,12 +5,12 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    public class ExportFacts
+    public class ExportFact
     {
         private Individual ind;
         private Fact f;
 
-        public ExportFacts(Individual ind, Fact f)
+        public ExportFact(Individual ind, Fact f)
         {
             this.ind = ind;
             this.f = f;

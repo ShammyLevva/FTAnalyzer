@@ -197,6 +197,7 @@
             this.Families = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Marriages = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabFacts = new System.Windows.Forms.TabPage();
+            this.ckbFactSelect = new System.Windows.Forms.CheckedListBox();
             this.btnShowFacts = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtFactsSurname = new System.Windows.Forms.TextBox();
@@ -216,7 +217,6 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.ckbFactSelect = new System.Windows.Forms.CheckedListBox();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -1977,6 +1977,17 @@
             this.tabFacts.Text = "Facts";
             this.tabFacts.UseVisualStyleBackColor = true;
             // 
+            // ckbFactSelect
+            // 
+            this.ckbFactSelect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.ckbFactSelect.FormattingEnabled = true;
+            this.ckbFactSelect.Location = new System.Drawing.Point(8, 92);
+            this.ckbFactSelect.Name = "ckbFactSelect";
+            this.ckbFactSelect.Size = new System.Drawing.Size(313, 349);
+            this.ckbFactSelect.TabIndex = 25;
+            this.ckbFactSelect.SelectedIndexChanged += new System.EventHandler(this.ckbFactSelect_SelectedIndexChanged);
+            // 
             // btnShowFacts
             // 
             this.btnShowFacts.Location = new System.Drawing.Point(342, 63);
@@ -2170,16 +2181,6 @@
             // 
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
-            // 
-            // ckbFactSelect
-            // 
-            this.ckbFactSelect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.ckbFactSelect.FormattingEnabled = true;
-            this.ckbFactSelect.Location = new System.Drawing.Point(8, 92);
-            this.ckbFactSelect.Name = "ckbFactSelect";
-            this.ckbFactSelect.Size = new System.Drawing.Size(313, 349);
-            this.ckbFactSelect.TabIndex = 25;
             // 
             // MainForm
             // 
