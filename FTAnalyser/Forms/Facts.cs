@@ -14,8 +14,8 @@ namespace FTAnalyzer.Forms
 {
     public partial class Facts : Form
     {
-        private Individual individual;
-        private Family family;
+        public Individual Individual { get; private set; }
+        public Family Family { get; private set; }
         private FamilyTree ft = FamilyTree.Instance;
         private SortableBindingList<IDisplayFact> facts;
         private Font italicFont;
@@ -35,7 +35,7 @@ namespace FTAnalyzer.Forms
         public Facts(Individual individual)
             : this()
         {
-            this.individual = individual;
+            this.Individual = individual;
             AddIndividualsFacts(individual);
             this.Text = "Facts Report for " + individual.IndividualID + ": " + individual.Name;
             SetupFacts();
@@ -45,7 +45,7 @@ namespace FTAnalyzer.Forms
         public Facts(Family family)
             : this()
         {
-            this.family = family;
+            this.Family = family;
             foreach (DisplayFact f in family.AllDisplayFacts)
                 facts.Add(f);
             this.Text = "Facts Report for " + family.FamilyRef;

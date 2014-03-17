@@ -227,6 +227,15 @@ namespace FTAnalyzer
                         if (oldForm.CensusDate.Equals(newForm.CensusDate) && oldForm.LostCousins == newForm.LostCousins)
                             toDispose.Add(f);
                     }
+                    else if(form is Facts)
+                    {
+                        Facts newForm = form as Facts;
+                        Facts oldForm = f as Facts;
+                        if (oldForm.Individual.Equals(newForm.Individual) && oldForm.Individual != null)
+                            toDispose.Add(f);
+                        if (oldForm.Family.Equals(newForm.Family) && oldForm.Family != null)
+                            toDispose.Add(f);
+                    }
                     else
                         toDispose.Add(f);
             }
@@ -1759,6 +1768,7 @@ namespace FTAnalyzer
             string indID = (string)dgDuplicateSelect.CurrentRow.Cells["IndividualID"].Value;
             Individual ind = ft.GetIndividual(indID);
             Facts factForm = new Facts(ind);
+            DisposeDuplicateForms(factForm);
             factForm.Show();
         }
         
@@ -1767,6 +1777,7 @@ namespace FTAnalyzer
             string indID = (string)dgDuplicateView.CurrentRow.Cells["IndividualID"].Value;
             Individual ind = ft.GetIndividual(indID);
             Facts factForm = new Facts(ind);
+            DisposeDuplicateForms(factForm);
             factForm.Show();
         }
         
