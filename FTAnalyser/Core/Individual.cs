@@ -365,7 +365,7 @@ namespace FTAnalyzer
 
         public FactLocation BirthLocation
         {
-            get { return (BirthFact == null) ? null : BirthFact.Location; }
+            get { return (BirthFact == null) ? FactLocation.UNKNOWN_LOCATION : BirthFact.Location; }
         }
 
         public Fact DeathFact

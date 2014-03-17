@@ -1474,7 +1474,7 @@ namespace FTAnalyzer
                 int endYear = person.BirthDate.EndDate.Year + 1;
                 path.Append("%2B" + FamilySearch.BIRTH_YEAR + "%3A" + startYear + "-" + endYear + "%7E%20");
             }
-            if (person.BirthLocation != null)
+            if (person.BirthLocation != FactLocation.UNKNOWN_LOCATION)
             {
                 string location;
                 if (person.BirthLocation.Country != country)
@@ -1573,7 +1573,7 @@ namespace FTAnalyzer
                 query.Append("msbdy=" + year + "&");
                 query.Append("msbdp=" + range + "&");
             }
-            if (person.BirthLocation != null)
+            if (person.BirthLocation != FactLocation.UNKNOWN_LOCATION)
             {
                 string location = person.BirthLocation.GetLocation(FactLocation.SUBREGION).ToString();
                 query.Append("msbpn__ftp=" + HttpUtility.UrlEncode(location) + "&");
@@ -1648,7 +1648,7 @@ namespace FTAnalyzer
                 }
                 query.Append("a=" + year + "&");
             }
-            if (person.BirthLocation != null)
+            if (person.BirthLocation != FactLocation.UNKNOWN_LOCATION)
             {
                 string location = person.BirthLocation.SubRegion;
                 query.Append("t=" + HttpUtility.UrlEncode(location) + "&");
@@ -1741,7 +1741,7 @@ namespace FTAnalyzer
             {
                 query.Append("yearOfBirth=&yearOfBirthVariation=&");
             }
-            if (person.BirthLocation != null)
+            if (person.BirthLocation != FactLocation.UNKNOWN_LOCATION)
             {
                 query.Append("birthPlace=" + HttpUtility.UrlEncode(person.BirthLocation.SubRegion) + "&");
                 Tuple<string, string> area = person.BirthLocation.FindMyPastCountyCode;
@@ -1857,7 +1857,7 @@ namespace FTAnalyzer
                 query.Append("msbdy=" + year + "&");
                 query.Append("msbdp=" + range + "&");
             }
-            if (individual.BirthLocation != null)
+            if (individual.BirthLocation != FactLocation.UNKNOWN_LOCATION)
             {
                 string location = individual.BirthLocation.GetLocation(FactLocation.SUBREGION).ToString();
                 query.Append("msbpn__ftp=" + HttpUtility.UrlEncode(location) + "&");

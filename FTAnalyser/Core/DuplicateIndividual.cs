@@ -27,10 +27,11 @@ namespace FTAnalyzer
                 Score += 100;
             else if (IndividualA.BirthDate.Distance(IndividualB.BirthDate) <= 2)
                 Score += 5;
-            if (IndividualA.BirthLocation != null && IndividualA.BirthLocation.Equals(IndividualB.BirthLocation))
+            if (IndividualA.BirthLocation.Equals(IndividualB.BirthLocation))
                 Score += 10;
             if (IndividualA.DeathDate.Equals(IndividualB.DeathDate))
                 Score += 10;
+            
         }
 
         public override bool Equals(object that)
