@@ -1984,13 +1984,14 @@
             this.ckbFactSelect.FormattingEnabled = true;
             this.ckbFactSelect.Location = new System.Drawing.Point(8, 92);
             this.ckbFactSelect.Name = "ckbFactSelect";
+            this.ckbFactSelect.ScrollAlwaysVisible = true;
             this.ckbFactSelect.Size = new System.Drawing.Size(313, 349);
             this.ckbFactSelect.TabIndex = 25;
             this.ckbFactSelect.SelectedIndexChanged += new System.EventHandler(this.ckbFactSelect_SelectedIndexChanged);
             // 
             // btnShowFacts
             // 
-            this.btnShowFacts.Location = new System.Drawing.Point(342, 63);
+            this.btnShowFacts.Location = new System.Drawing.Point(342, 54);
             this.btnShowFacts.Name = "btnShowFacts";
             this.btnShowFacts.Size = new System.Drawing.Size(75, 23);
             this.btnShowFacts.TabIndex = 24;

@@ -36,7 +36,7 @@ namespace FTAnalyzer.Forms
             : this()
         {
             this.Individual = individual;
-            AddIndividualsFacts(individual);
+            AddIndividualsFacts(individual, null);
             this.Text = "Facts Report for " + individual.IndividualID + ": " + individual.Name;
             SetupFacts();
             dgFacts.Columns["IndividualID"].Visible = false;
@@ -53,26 +53,28 @@ namespace FTAnalyzer.Forms
             dgFacts.Columns["IndividualID"].Visible = true;
         }
 
-        public Facts(IEnumerable<Individual> individuals)
+        public Facts(IEnumerable<Individual> individuals, List<string> factTypes)
             : this()
         {
             this.allFacts = true;
             foreach (Individual ind in individuals)
-                AddIndividualsFacts(ind);
+                AddIndividualsFacts(ind, factTypes);
             this.Text = "Facts Report for all " + individuals.Count() + " individuals. Facts count: " + facts.Count;
             SetupFacts();
             dgFacts.Columns["IndividualID"].Visible = true;
         }
 
-        private void AddIndividualsFacts(Individual individual)
+        private void AddIndividualsFacts(Individual individual, List<string> factTypes)
         {
             foreach (Fact f in individual.AllFacts)
-                facts.Add(new DisplayFact(individual, f));
+                if(factTypes == null || factTypes.Contains(f.FactTypeDescription))
+                    facts.Add(new DisplayFact(individual, f));
             foreach (Fact f in individual.ErrorFacts)
             {
                 // only add ignored and errors as allowed have are in AllFacts
                 if (f.FactErrorLevel != Fact.FactError.WARNINGALLOW)
-                    facts.Add(new DisplayFact(individual, f));
+                    if (factTypes == null || factTypes.Contains(f.FactTypeDescription))
+                        facts.Add(new DisplayFact(individual, f));
             }
         }
 

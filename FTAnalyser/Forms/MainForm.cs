@@ -1841,9 +1841,19 @@ namespace FTAnalyzer
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            Facts facts = new Facts(ft.AllIndividuals.Where(filter));
+            Facts facts = new Facts(ft.AllIndividuals.Where(filter), BuildFactTypeList());
             facts.Show();
             HourGlass(false);
+        }
+
+        private List<string> BuildFactTypeList()
+        {
+            List<string> result = new List<string>();
+            int index = 0;
+            foreach (string factType in ckbFactSelect.Items)
+                if (ckbFactSelect.GetItemChecked(index++))
+                    result.Add(factType);
+            return result;
         }
 
         private void dgSurnames_CellContentClick(object sender, DataGridViewCellEventArgs e)
