@@ -402,8 +402,13 @@ namespace FTAnalyzer
 
         private void SetPossibleDuplicates()
         {
+            btnCancelDuplicates.Visible = true;
             dgDuplicateSelect.DataSource = ft.GenerateDuplicatesList(pbDuplicates, tbDuplicateScore);
+            dgDuplicateSelect.Sort(dgDuplicateSelect.Columns["BirthDate"], ListSortDirection.Ascending);
+            dgDuplicateSelect.Sort(dgDuplicateSelect.Columns["Forenames"], ListSortDirection.Ascending);
+            dgDuplicateSelect.Sort(dgDuplicateSelect.Columns["Surname"], ListSortDirection.Ascending);
             tsCountLabel.Text = "Possible Duplicate Count : " + dgDuplicateSelect.RowCount.ToString();
+            btnCancelDuplicates.Visible = false;
         }
 
         private void UpdateLooseBirthDeaths()
@@ -1751,13 +1756,20 @@ namespace FTAnalyzer
 
         private void dgDuplicateSelect_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+            string indID = (string)dgDuplicateSelect.CurrentRow.Cells["IndividualID"].Value;
             Individual ind = ft.GetIndividual(indID);
             Facts factForm = new Facts(ind);
-            DisposeDuplicateForms(factForm);
             factForm.Show();
         }
-
+        
+        private void dgDuplicateView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string indID = (string)dgDuplicateView.CurrentRow.Cells["IndividualID"].Value;
+            Individual ind = ft.GetIndividual(indID);
+            Facts factForm = new Facts(ind);
+            factForm.Show();
+        }
+        
         private void dgDuplicateSelect_SelectionChanged(object sender, EventArgs e)
         {
             if (dgDuplicateSelect.CurrentRow != null)
