@@ -14,7 +14,6 @@ namespace FTAnalyzer
         public const int UNKNOWN = 1, DIRECT = 2, BLOOD = 4, MARRIEDTODB = 8, MARRIAGE = 16, UNSET = 32;
 
         public string IndividualID { get; private set; }
-        //private string gedcomID;
         private string forenames;
         private string surname;
         private string marriedName;
@@ -56,6 +55,7 @@ namespace FTAnalyzer
             surnameMetaphone = new DoubleMetaphone(Surname);
 
             // Individual attributes
+            AddFacts(node, Fact.NAME); 
             AddFacts(node, Fact.PHYSICAL_DESC);
             AddFacts(node, Fact.EDUCATION);
             AddFacts(node, Fact.DEGREE);
@@ -93,6 +93,7 @@ namespace FTAnalyzer
             AddFacts(node, Fact.GRADUATION);
             AddFacts(node, Fact.RETIREMENT);
             AddFacts(node, Fact.MILITARY);
+            AddFacts(node, Fact.SERVICE_NUMBER);
             AddFacts(node, Fact.ELECTION);
             AddFacts(node, Fact.EMPLOYMENT);
 
@@ -447,6 +448,14 @@ namespace FTAnalyzer
         public string IndividualRef
         {
             get { return IndividualID + ": " + Name; }
+        }
+
+        public string ServiceNumber
+        {
+            get {
+                Fact service = GetPreferredFact(Fact.SERVICE_NUMBER);
+                return service == null ? "" : service.Comment;
+            }
         }
 
         public IList<Family> FamiliesAsParent

@@ -31,6 +31,7 @@ namespace FTAnalyzer
         private Font boldFont;
         private Font normalFont;
         private bool loading;
+        private bool WWI = false;
 
         public MainForm()
         {
@@ -228,7 +229,7 @@ namespace FTAnalyzer
                         if (oldForm.CensusDate.Equals(newForm.CensusDate) && oldForm.LostCousins == newForm.LostCousins)
                             toDispose.Add(f);
                     }
-                    else if(form is Facts)
+                    else if (form is Facts)
                     {
                         Facts newForm = form as Facts;
                         Facts oldForm = f as Facts;
@@ -410,7 +411,8 @@ namespace FTAnalyzer
             }
         }
 
-        private void SetPossibleDuplicates()
+        private void
+            SetPossibleDuplicates()
         {
             btnCancelDuplicates.Visible = true;
             dgDuplicateSelect.DataSource = ft.GenerateDuplicatesList(pbDuplicates, tbDuplicateScore);
@@ -874,6 +876,7 @@ namespace FTAnalyzer
         private void btnWWI_Click(object sender, EventArgs e)
         {
             HourGlass(true);
+            WWI = true;
             Predicate<Individual> filter = CreateWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("BET 1914 AND 1918"));
             List<IDisplayIndividual> warDeadList = ft.GetWarDead(filter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
@@ -882,7 +885,7 @@ namespace FTAnalyzer
             foreach (DataGridViewColumn c in dgWarDead.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = Properties.Messages.Count + warDeadList.Count;
-            tsHintsLabel.Text = Properties.Messages.Hints_Individual;
+            tsHintsLabel.Text = Properties.Messages.Hints_Individual + Properties.Messages.Hints_LivesOfFirstWorldWar;
             mnuPrint.Enabled = true;
             HourGlass(false);
         }
@@ -890,6 +893,7 @@ namespace FTAnalyzer
         private void btnWWII_Click(object sender, EventArgs e)
         {
             HourGlass(true);
+            WWI = false;
             Predicate<Individual> filter = CreateWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("BET 1939 AND 1945"));
             List<IDisplayIndividual> warDeadList = ft.GetWarDead(filter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
@@ -1253,10 +1257,7 @@ namespace FTAnalyzer
                 if (hti.RowIndex >= 0 && hti.ColumnIndex >= 0)
                 {
                     string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
-                    Individual ind = ft.GetIndividual(indID);
-                    Facts factForm = new Facts(ind);
-                    DisposeDuplicateForms(factForm);
-                    factForm.Show();
+                    ShowFacts(indID);
                 }
             }
         }
@@ -1501,7 +1502,22 @@ namespace FTAnalyzer
         private void dgWarDead_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgWarDead.CurrentRow.Cells["IndividualID"].Value);
+            {
+                string indID = (string)dgWarDead.CurrentRow.Cells["IndividualID"].Value;
+                if (WWI && ModifierKeys.Equals(Keys.Shift))
+                    LivesOfFirstWorldWar(indID);
+                else
+                    ShowFacts(indID);
+            }
+        }
+
+        private void LivesOfFirstWorldWar(string indID)
+        {
+            Individual ind = ft.GetIndividual(indID);
+            string searchtext = ind.Forenames + "+" + ind.Surname;
+            if(ind.ServiceNumber.Length > 0)
+                searchtext+= "+" + ind.ServiceNumber;
+            Process.Start("https://beta.livesofthefirstworldwar.org/search#FreeSearch=" + searchtext + "&PageIndex=1&PageSize=20");
         }
 
         private void ShowFacts(string indID)
@@ -1758,30 +1774,21 @@ namespace FTAnalyzer
         private void dgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
-            Individual ind = ft.GetIndividual(indID);
-            Facts factForm = new Facts(ind);
-            DisposeDuplicateForms(factForm);
-            factForm.Show();
+            ShowFacts(indID);
         }
 
         private void dgDuplicateSelect_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             string indID = (string)dgDuplicateSelect.CurrentRow.Cells["IndividualID"].Value;
-            Individual ind = ft.GetIndividual(indID);
-            Facts factForm = new Facts(ind);
-            DisposeDuplicateForms(factForm);
-            factForm.Show();
+            ShowFacts(indID);
         }
-        
+
         private void dgDuplicateView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             string indID = (string)dgDuplicateView.CurrentRow.Cells["IndividualID"].Value;
-            Individual ind = ft.GetIndividual(indID);
-            Facts factForm = new Facts(ind);
-            DisposeDuplicateForms(factForm);
-            factForm.Show();
+            ShowFacts(indID);
         }
-        
+
         private void dgDuplicateSelect_SelectionChanged(object sender, EventArgs e)
         {
             if (dgDuplicateSelect.CurrentRow != null)

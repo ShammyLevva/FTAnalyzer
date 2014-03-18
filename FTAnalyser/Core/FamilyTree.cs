@@ -829,7 +829,7 @@ namespace FTAnalyzer
 
         public IEnumerable<IDisplayIndividual> GetWarDead(Predicate<Individual> filter)
         {
-            return individuals.Where(ind => ind.IsMale && !ind.IsDeathKnown() && filter(ind));
+            return individuals.Where(ind => ind.IsMale && filter(ind));
         }
 
         #endregion

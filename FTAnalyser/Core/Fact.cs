@@ -27,8 +27,8 @@ namespace FTAnalyzer
                 ORDINATION = "ORDN", PROBATE = "PROB", RESIDENCE = "RESI",
                 RETIREMENT = "RETI", WILL = "WILL", SEPARATION = "_SEPR",
                 MILITARY = "_MILT", ELECTION = "_ELEC", DEGREE = "_DEG",
-                EMPLOYMENT = "_EMPLOY", MEDICAL_CONDITION = "_MDCL",
-                CUSTOM_EVENT = "EVEN", CUSTOM_FACT = "FACT";
+                EMPLOYMENT = "_EMPLOY", MEDICAL_CONDITION = "_MDCL", NAME = "NAME",
+                CUSTOM_EVENT = "EVEN", CUSTOM_FACT = "FACT", SERVICE_NUMBER = "_MILTID";
 
         public const string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSED", LOOSEBIRTH = "*LOOSEB", FAMILYSEARCH = "*IGI",
@@ -121,8 +121,10 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("Marriage Reg", MARRIAGE);
             CUSTOM_TAGS.Add("Death Reg", DEATH);
 
+            COMMENT_FACTS.Add(NAME); 
             COMMENT_FACTS.Add(OCCUPATION);
             COMMENT_FACTS.Add(MILITARY);
+            COMMENT_FACTS.Add(SERVICE_NUMBER);
             COMMENT_FACTS.Add(RETIREMENT);
             COMMENT_FACTS.Add(WILL);
             COMMENT_FACTS.Add(ELECTION);
@@ -148,6 +150,7 @@ namespace FTAnalyzer
         {
             switch (factType)
             {
+                case NAME: return "Alternate Name";
                 case ADOPTION: return "Adoption";
                 case ANNULMENT: return "Annulment";
                 case BAPTISM: return "Baptism";
@@ -191,6 +194,7 @@ namespace FTAnalyzer
                 case WILL: return "Will";
                 case SEPARATION: return "Separation";
                 case MILITARY: return "Military service";
+                case SERVICE_NUMBER: return "Military service number";
                 case ELECTION: return "Election";
                 case DEGREE: return "Degree";
                 case EMPLOYMENT: return "Employment";

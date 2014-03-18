@@ -126,6 +126,9 @@
   <data name="Hints_Individual" xml:space="preserve">
     <value>Double click to show a list of facts for the selected individual.</value>
   </data>
+  <data name="Hints_LivesOfFirstWorldWar" xml:space="preserve">
+    <value>Shift double click to search Lives of First World War life story page.</value>
+  </data>
   <data name="Hints_Location" xml:space="preserve">
     <value>Double click to show a list of individuals and families at the selected location.</value>
   </data>
@@ -142,6 +145,6 @@
     <value>Double click to show a list of individuals and families with the selected surname. Click links for one name study.</value>
   </data>
   <data name="NotYet" xml:space="preserve">
-    <value>Not Implemented Yet. Coming Soon in a future version</value>
+    <value>Not Implemented Yet. Coming Soon in a future version.</value>
   </data>
 </root>
