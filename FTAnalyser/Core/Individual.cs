@@ -706,8 +706,11 @@ namespace FTAnalyzer
             {
                 try
                 {
-                    Fact f = new Fact(n, IndividualRef, preferredFact);
-                    AddFact(f);
+                    if (factType != Fact.NAME || !preferredFact)
+                    {  // don't add first name in file as a fact 
+                        Fact f = new Fact(n, IndividualRef, preferredFact);
+                        AddFact(f);
+                    }
                 }
                 catch (InvalidXMLFactException ex)
                 {
