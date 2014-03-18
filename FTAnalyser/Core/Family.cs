@@ -115,9 +115,10 @@ namespace FTAnalyzer
         private void AddFacts(XmlNode node, string factType)
         {
             XmlNodeList list = node.SelectNodes(factType);
+            bool preferredFact = true;
             foreach (XmlNode n in list)
             {
-                Fact f = new Fact(n, FamilyRef);
+                Fact f = new Fact(n, FamilyRef, preferredFact);
                 if (f.FactType != Fact.CENSUS)
                 {
                     Facts.Add(f);
@@ -141,6 +142,7 @@ namespace FTAnalyzer
                                 person.AddFact(f);
                     }
                 }
+                preferredFact = false;
             }
         }
 
