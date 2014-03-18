@@ -1895,14 +1895,33 @@ namespace FTAnalyzer
             ft.CancelDuplicateProcessing();
         }
 
-        private void ckbFactSelect_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnSelectAllFactTypes_Click(object sender, EventArgs e)
         {
-            int index = 0;
-            foreach (string factType in ckbFactSelect.Items)
+            SetFactTypes(true);
+        }
+
+        private void btnDeselectAllFactTypes_Click(object sender, EventArgs e)
+        {
+            SetFactTypes(false);
+        }
+
+        private void SetFactTypes(bool selected)
+        {
+            for(int index = 0; index < ckbFactSelect.Items.Count; index++)
             {
-                bool itemChecked = ckbFactSelect.GetItemChecked(index++);
-                Application.UserAppDataRegistry.SetValue("Fact: " + factType, itemChecked);
+                string factType = ckbFactSelect.Items[index].ToString();
+                ckbFactSelect.SetItemChecked(index, selected);
+                Application.UserAppDataRegistry.SetValue("Fact: " + factType, selected);
             }
+        }
+
+        private void ckbFactSelect_MouseClick(object sender, MouseEventArgs e)
+        {
+            int index = ckbFactSelect.IndexFromPoint(e.Location);
+            string factType = ckbFactSelect.Items[index].ToString();
+            bool selected = ckbFactSelect.GetItemChecked(index);
+            ckbFactSelect.SetItemChecked(index, !selected);
+            Application.UserAppDataRegistry.SetValue("Fact: " + factType, selected);
         }
     }
 }

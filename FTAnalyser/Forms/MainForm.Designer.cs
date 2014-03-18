@@ -197,6 +197,8 @@
             this.Families = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Marriages = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabFacts = new System.Windows.Forms.TabPage();
+            this.btnDeselectAllFactTypes = new System.Windows.Forms.Button();
+            this.btnSelectAllFactTypes = new System.Windows.Forms.Button();
             this.ckbFactSelect = new System.Windows.Forms.CheckedListBox();
             this.btnShowFacts = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -1965,6 +1967,8 @@
             // 
             // tabFacts
             // 
+            this.tabFacts.Controls.Add(this.btnDeselectAllFactTypes);
+            this.tabFacts.Controls.Add(this.btnSelectAllFactTypes);
             this.tabFacts.Controls.Add(this.ckbFactSelect);
             this.tabFacts.Controls.Add(this.btnShowFacts);
             this.tabFacts.Controls.Add(this.label3);
@@ -1977,17 +1981,38 @@
             this.tabFacts.Text = "Facts";
             this.tabFacts.UseVisualStyleBackColor = true;
             // 
+            // btnDeselectAllFactTypes
+            // 
+            this.btnDeselectAllFactTypes.Location = new System.Drawing.Point(185, 93);
+            this.btnDeselectAllFactTypes.Name = "btnDeselectAllFactTypes";
+            this.btnDeselectAllFactTypes.Size = new System.Drawing.Size(136, 23);
+            this.btnDeselectAllFactTypes.TabIndex = 27;
+            this.btnDeselectAllFactTypes.Text = "De-select all Fact Types";
+            this.btnDeselectAllFactTypes.UseVisualStyleBackColor = true;
+            this.btnDeselectAllFactTypes.Click += new System.EventHandler(this.btnDeselectAllFactTypes_Click);
+            // 
+            // btnSelectAllFactTypes
+            // 
+            this.btnSelectAllFactTypes.Location = new System.Drawing.Point(8, 92);
+            this.btnSelectAllFactTypes.Name = "btnSelectAllFactTypes";
+            this.btnSelectAllFactTypes.Size = new System.Drawing.Size(136, 23);
+            this.btnSelectAllFactTypes.TabIndex = 26;
+            this.btnSelectAllFactTypes.Text = "Select all Fact Types";
+            this.btnSelectAllFactTypes.UseVisualStyleBackColor = true;
+            this.btnSelectAllFactTypes.Click += new System.EventHandler(this.btnSelectAllFactTypes_Click);
+            // 
             // ckbFactSelect
             // 
             this.ckbFactSelect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ckbFactSelect.FormattingEnabled = true;
-            this.ckbFactSelect.Location = new System.Drawing.Point(8, 92);
+            this.ckbFactSelect.Location = new System.Drawing.Point(8, 122);
             this.ckbFactSelect.Name = "ckbFactSelect";
             this.ckbFactSelect.ScrollAlwaysVisible = true;
-            this.ckbFactSelect.Size = new System.Drawing.Size(313, 349);
+            this.ckbFactSelect.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.ckbFactSelect.Size = new System.Drawing.Size(313, 304);
             this.ckbFactSelect.TabIndex = 25;
-            this.ckbFactSelect.SelectedIndexChanged += new System.EventHandler(this.ckbFactSelect_SelectedIndexChanged);
+            this.ckbFactSelect.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ckbFactSelect_MouseClick);
             // 
             // btnShowFacts
             // 
@@ -2459,6 +2484,8 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button btnCancelDuplicates;
         private System.Windows.Forms.CheckedListBox ckbFactSelect;
+        private System.Windows.Forms.Button btnDeselectAllFactTypes;
+        private System.Windows.Forms.Button btnSelectAllFactTypes;
     }
 }
 
