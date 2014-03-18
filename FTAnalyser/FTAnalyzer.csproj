@@ -195,6 +195,7 @@
     <Compile Include="Core\Countries.cs" />
     <Compile Include="Core\DataError.cs" />
     <Compile Include="Core\DataErrorGroup.cs" />
+    <Compile Include="Core\Displays\IDisplayDuplicateIndividual.cs" />
     <Compile Include="Core\Displays\IDisplayLooseBirth.cs" />
     <Compile Include="Core\Displays\IDisplayColourBMD.cs" />
     <Compile Include="Core\Displays\DisplayFact.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="Core\Displays\IDisplayColourCensus.cs" />
     <Compile Include="Core\Displays\DisplayOccupation.cs" />
     <Compile Include="Core\Displays\IDisplayOccupation.cs" />
+    <Compile Include="Core\Displays\IDisplaySource.cs" />
     <Compile Include="Core\DuplicateIndividual.cs" />
     <Compile Include="Core\Exports\ExportFact.cs" />
     <Compile Include="Core\Exports\IExportIndividual.cs" />
@@ -217,6 +219,12 @@
     <Compile Include="Core\Surname.cs" />
     <Compile Include="Forms\Controls\ToolStripMapSelector.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\Sources.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Sources.Designer.cs">
+      <DependentUpon>Sources.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Places.cs">
       <SubType>Form</SubType>
@@ -387,6 +395,9 @@
     </Content>
     <EmbeddedResource Include="Forms\ColourBMD.resx">
       <DependentUpon>ColourBMD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sources.resx">
+      <DependentUpon>Sources.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Places.resx">
       <DependentUpon>Places.cs</DependentUpon>

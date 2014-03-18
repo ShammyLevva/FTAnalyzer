@@ -175,9 +175,15 @@ namespace FTAnalyzer.Forms
         {
             this.Dispose();
         }
-        
-        private void Facts_MouseDown(object sender, MouseEventArgs e)
+ 
+        private void dgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                DisplayFact f = dgFacts.Rows[e.RowIndex].DataBoundItem as DisplayFact;
+                Sources sourceForm = new Sources(f);
+                sourceForm.Show();
+            }
 
         }
     }

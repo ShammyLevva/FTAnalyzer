@@ -28,6 +28,7 @@ namespace FTAnalyzer
         public string TypeOfFact { get { return Fact.FactTypeDescription; } }
         public FactDate FactDate { get { return Fact.FactDate; } }
         public FactLocation Location { get { return Fact.Location; } }
+        public IList<FactSource> Sources { get { return Fact.Sources; } }
         public double Latitude { get { return Fact.Location.Latitude; } }
         public double Longitude { get { return Fact.Location.Longitude; } }
         public string Comment { get { return Fact.Comment; } }
