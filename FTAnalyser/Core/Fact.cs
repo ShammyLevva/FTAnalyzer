@@ -256,7 +256,7 @@ namespace FTAnalyzer
             this.Preferred = false;
         }
 
-        public Fact(XmlNode node, string factRef)
+        public Fact(XmlNode node, string factRef, bool preferred)
             : this()
         {
             if (node != null)
@@ -267,6 +267,7 @@ namespace FTAnalyzer
                     FactType = FixFactTypes(node.Name);
                     string factDate = FamilyTree.GetText(node, "DATE");
                     this.FactDate = new FactDate(factDate, factRef);
+                    this.Preferred = preferred;
                     if (FactType.Equals(CUSTOM_EVENT) || FactType.Equals(CUSTOM_FACT))
                     {
                         string tag = FamilyTree.GetText(node, "TYPE");
@@ -708,6 +709,8 @@ namespace FTAnalyzer
             {
                 Comment = factComment;
                 Place = factPlace;
+                if (factType == NAME)
+                    Comment = Comment.Replace("/", "");
             }
             Comment = EnhancedTextInfo.ToTitleCase(Comment);
             Location = FactLocation.GetLocation(Place, latitude, longitude, FactLocation.Geocode.NOT_SEARCHED);

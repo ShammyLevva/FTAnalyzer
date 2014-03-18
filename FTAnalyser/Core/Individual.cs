@@ -701,11 +701,12 @@ namespace FTAnalyzer
         private void AddFacts(XmlNode node, string factType)
         {
             XmlNodeList list = node.SelectNodes(factType);
+            bool preferredFact = true;
             foreach (XmlNode n in list)
             {
                 try
                 {
-                    Fact f = new Fact(n, IndividualRef);
+                    Fact f = new Fact(n, IndividualRef, preferredFact);
                     AddFact(f);
                 }
                 catch (InvalidXMLFactException ex)
@@ -714,6 +715,7 @@ namespace FTAnalyzer
                     ft.XmlErrorBox.AppendText("Error with Individual : " + IndividualRef + "\n" +
                         "       Invalid fact : " + ex.Message);
                 }
+                preferredFact = false;
             }
         }
 
