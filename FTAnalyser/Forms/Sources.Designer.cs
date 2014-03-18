@@ -45,6 +45,9 @@
             this.SourceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SourceTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SourceMedium = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Publication = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SourceText = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSources)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -138,7 +141,10 @@
             this.dgSources.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SourceID,
             this.SourceTitle,
-            this.SourceMedium});
+            this.SourceMedium,
+            this.Publication,
+            this.Author,
+            this.SourceText});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -201,6 +207,36 @@
             this.SourceMedium.ReadOnly = true;
             this.SourceMedium.Width = 69;
             // 
+            // Publication
+            // 
+            this.Publication.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Publication.DataPropertyName = "Publication";
+            this.Publication.HeaderText = "Publication";
+            this.Publication.MinimumWidth = 50;
+            this.Publication.Name = "Publication";
+            this.Publication.ReadOnly = true;
+            this.Publication.Width = 84;
+            // 
+            // Author
+            // 
+            this.Author.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Author.DataPropertyName = "Author";
+            this.Author.HeaderText = "Author";
+            this.Author.MinimumWidth = 50;
+            this.Author.Name = "Author";
+            this.Author.ReadOnly = true;
+            this.Author.Width = 63;
+            // 
+            // SourceText
+            // 
+            this.SourceText.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.SourceText.DataPropertyName = "SourceText";
+            this.SourceText.HeaderText = "Text";
+            this.SourceText.MinimumWidth = 200;
+            this.SourceText.Name = "SourceText";
+            this.SourceText.ReadOnly = true;
+            this.SourceText.Width = 200;
+            // 
             // Sources
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -240,5 +276,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceID;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceMedium;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Publication;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Author;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SourceText;
     }
 }

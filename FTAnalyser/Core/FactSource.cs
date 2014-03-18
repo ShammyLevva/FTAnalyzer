@@ -13,30 +13,38 @@ namespace FTAnalyzer
 
         public string SourceID { get; private set; }
         public string SourceTitle { get; private set; }
+        public string Publication { get; private set; }
+        public string Author { get; private set; }
+        public string SourceText { get; private set; }
         public string SourceMedium { get; private set; }
 
         public FactSource(XmlNode node)
         {
             this.SourceID = node.Attributes["ID"].Value;
             this.SourceTitle = FamilyTree.GetText(node, "TITL");
+            this.Publication = FamilyTree.GetText(node, "PUBL");
+            this.Author = FamilyTree.GetText(node, "AUTH");
+            this.SourceText = FamilyTree.GetText(node, "TEXT"); 
             this.SourceMedium = FamilyTree.GetText(node, "REPO/CALN/MEDI");
+            if (this.SourceMedium.Length == 0)
+                this.SourceMedium = FamilyTree.GetText(node, "NOTE/CONC");
         }
 
         public bool isBirthCert()
         {
-            return SourceMedium.Equals("Official Document") &&
+            return SourceMedium.Contains("Official Document") &&
                    SourceTitle.ToUpper().IndexOf(BIRTHCERT) >= 0;
         }
 
         public bool isDeathCert()
         {
-            return SourceMedium.Equals("Official Document") &&
+            return SourceMedium.Contains("Official Document") &&
                    SourceTitle.ToUpper().IndexOf(DEATHCERT) >= 0;
         }
 
         public bool isMarriageCert()
         {
-            return SourceMedium.Equals("Official Document") &&
+            return SourceMedium.Contains("Official Document") &&
                    SourceTitle.ToUpper().IndexOf(MARRIAGECERT) >= 0;
         }
 
