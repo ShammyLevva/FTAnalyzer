@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    public class DuplicateIndividual
+    public class DuplicateIndividual 
     {
         public Individual IndividualA { get; private set; }
         public Individual IndividualB { get; private set; }

@@ -1793,9 +1793,7 @@ namespace FTAnalyzer
         {
             if (dgDuplicateSelect.CurrentRow != null)
             {
-                string indID = (string)dgDuplicateSelect.CurrentRow.Cells["IndividualID"].Value;
-                Individual ind = ft.GetIndividual(indID);
-                dgDuplicateView.DataSource = ft.BuildDuplicateList(ind);
+                // TODO do something when Selection changes
             }
         }
 

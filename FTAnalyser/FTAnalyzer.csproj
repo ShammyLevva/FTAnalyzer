@@ -195,6 +195,7 @@
     <Compile Include="Core\Countries.cs" />
     <Compile Include="Core\DataError.cs" />
     <Compile Include="Core\DataErrorGroup.cs" />
+    <Compile Include="Core\Displays\DisplayDuplicateIndividual.cs" />
     <Compile Include="Core\Displays\IDisplayDuplicateIndividual.cs" />
     <Compile Include="Core\Displays\IDisplayLooseBirth.cs" />
     <Compile Include="Core\Displays\IDisplayColourBMD.cs" />
