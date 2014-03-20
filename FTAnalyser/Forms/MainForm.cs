@@ -345,8 +345,9 @@ namespace FTAnalyzer
                 {
                     tsCountLabel.Text = string.Empty;
                     tsHintsLabel.Text = string.Empty;
-                    Application.DoEvents();
                     SetPossibleDuplicates();
+                    dgSurnames.Focus();
+                    mnuPrint.Enabled = true;
                 }
                 else if (tabSelector.SelectedTab == tabTreetops)
                 {
@@ -414,6 +415,7 @@ namespace FTAnalyzer
         private void SetPossibleDuplicates()
         {
             btnCancelDuplicates.Visible = true;
+            Application.DoEvents();
             SortableBindingList<IDisplayDuplicateIndividual> data = ft.GenerateDuplicatesList(pbDuplicates, tbDuplicateScore);
             if (data != null)
             {
@@ -882,7 +884,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             WWI = true;
-            Predicate<Individual> filter = CreateWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("BET 1914 AND 1918"));
+            Predicate<Individual> filter = CreateWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("FROM 28 JUL 1914"));
             List<IDisplayIndividual> warDeadList = ft.GetWorldWars(filter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWorldWars.DataSource = new SortableBindingList<IDisplayIndividual>(warDeadList);
@@ -890,7 +892,7 @@ namespace FTAnalyzer
             foreach (DataGridViewColumn c in dgWorldWars.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = Properties.Messages.Count + warDeadList.Count;
-            tsHintsLabel.Text = Properties.Messages.Hints_Individual + Properties.Messages.Hints_LivesOfFirstWorldWar;
+            tsHintsLabel.Text = Properties.Messages.Hints_Individual + "  " + Properties.Messages.Hints_LivesOfFirstWorldWar;
             mnuPrint.Enabled = true;
             HourGlass(false);
         }
@@ -899,7 +901,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             WWI = false;
-            Predicate<Individual> filter = CreateWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("BET 1939 AND 1945"));
+            Predicate<Individual> filter = CreateWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("FROM 1 SEP 1939"));
             List<IDisplayIndividual> warDeadList = ft.GetWorldWars(filter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWorldWars.DataSource = new SortableBindingList<IDisplayIndividual>(warDeadList);
@@ -1519,7 +1521,7 @@ namespace FTAnalyzer
         private void LivesOfFirstWorldWar(string indID)
         {
             Individual ind = ft.GetIndividual(indID);
-            string searchtext = ind.Forenames + "+" + ind.Surname;
+            string searchtext = ind.Forename + "+" + ind.Surname;
             if(ind.ServiceNumber.Length > 0)
                 searchtext+= "+" + ind.ServiceNumber;
             Process.Start("https://beta.livesofthefirstworldwar.org/search#FreeSearch=" + searchtext + "&PageIndex=1&PageSize=20");
@@ -1918,7 +1920,7 @@ namespace FTAnalyzer
             string factType = ckbFactSelect.Items[index].ToString();
             bool selected = ckbFactSelect.GetItemChecked(index);
             ckbFactSelect.SetItemChecked(index, !selected);
-            Application.UserAppDataRegistry.SetValue("Fact: " + factType, selected);
+            Application.UserAppDataRegistry.SetValue("Fact: " + factType, !selected);
         }
     }
 }

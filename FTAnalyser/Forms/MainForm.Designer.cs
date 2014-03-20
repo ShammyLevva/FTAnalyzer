@@ -785,6 +785,7 @@
             this.tabWorldWars.Size = new System.Drawing.Size(1035, 445);
             this.tabWorldWars.TabIndex = 8;
             this.tabWorldWars.Text = "World Wars";
+            this.tabWorldWars.ToolTipText = "Find men of fighting age during WWI & WWII";
             this.tabWorldWars.UseVisualStyleBackColor = true;
             // 
             // ckbWDIgnoreLocations
