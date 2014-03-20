@@ -93,13 +93,13 @@
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
-            this.tabWarDead = new System.Windows.Forms.TabPage();
+            this.tabWorldWars = new System.Windows.Forms.TabPage();
             this.ckbWDIgnoreLocations = new System.Windows.Forms.CheckBox();
             this.btnWWII = new System.Windows.Forms.Button();
             this.btnWWI = new System.Windows.Forms.Button();
-            this.dgWarDead = new System.Windows.Forms.DataGridView();
+            this.dgWorldWars = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtWarDeadSurname = new System.Windows.Forms.TextBox();
+            this.txtWorldWarsSurname = new System.Windows.Forms.TextBox();
             this.wardeadRelation = new Controls.RelationTypes();
             this.wardeadCountry = new Controls.CensusCountry();
             this.tabTreetops = new System.Windows.Forms.TabPage();
@@ -237,8 +237,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgDataErrors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgRegions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgCountries)).BeginInit();
-            this.tabWarDead.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgWarDead)).BeginInit();
+            this.tabWorldWars.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgWorldWars)).BeginInit();
             this.tabTreetops.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).BeginInit();
             this.tabColourReports.SuspendLayout();
@@ -770,22 +770,22 @@
             this.printDialog.AllowSomePages = true;
             this.printDialog.UseEXDialog = true;
             // 
-            // tabWarDead
+            // tabWorldWars
             // 
-            this.tabWarDead.Controls.Add(this.ckbWDIgnoreLocations);
-            this.tabWarDead.Controls.Add(this.btnWWII);
-            this.tabWarDead.Controls.Add(this.btnWWI);
-            this.tabWarDead.Controls.Add(this.dgWarDead);
-            this.tabWarDead.Controls.Add(this.label9);
-            this.tabWarDead.Controls.Add(this.txtWarDeadSurname);
-            this.tabWarDead.Controls.Add(this.wardeadRelation);
-            this.tabWarDead.Controls.Add(this.wardeadCountry);
-            this.tabWarDead.Location = new System.Drawing.Point(4, 22);
-            this.tabWarDead.Name = "tabWarDead";
-            this.tabWarDead.Size = new System.Drawing.Size(1035, 445);
-            this.tabWarDead.TabIndex = 8;
-            this.tabWarDead.Text = "World Wars";
-            this.tabWarDead.UseVisualStyleBackColor = true;
+            this.tabWorldWars.Controls.Add(this.ckbWDIgnoreLocations);
+            this.tabWorldWars.Controls.Add(this.btnWWII);
+            this.tabWorldWars.Controls.Add(this.btnWWI);
+            this.tabWorldWars.Controls.Add(this.dgWorldWars);
+            this.tabWorldWars.Controls.Add(this.label9);
+            this.tabWorldWars.Controls.Add(this.txtWorldWarsSurname);
+            this.tabWorldWars.Controls.Add(this.wardeadRelation);
+            this.tabWorldWars.Controls.Add(this.wardeadCountry);
+            this.tabWorldWars.Location = new System.Drawing.Point(4, 22);
+            this.tabWorldWars.Name = "tabWorldWars";
+            this.tabWorldWars.Size = new System.Drawing.Size(1035, 445);
+            this.tabWorldWars.TabIndex = 8;
+            this.tabWorldWars.Text = "World Wars";
+            this.tabWorldWars.UseVisualStyleBackColor = true;
             // 
             // ckbWDIgnoreLocations
             // 
@@ -820,22 +820,22 @@
             this.btnWWI.UseVisualStyleBackColor = true;
             this.btnWWI.Click += new System.EventHandler(this.btnWWI_Click);
             // 
-            // dgWarDead
+            // dgWorldWars
             // 
-            this.dgWarDead.AllowUserToAddRows = false;
-            this.dgWarDead.AllowUserToDeleteRows = false;
-            this.dgWarDead.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgWorldWars.AllowUserToAddRows = false;
+            this.dgWorldWars.AllowUserToDeleteRows = false;
+            this.dgWorldWars.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgWarDead.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgWarDead.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgWarDead.Location = new System.Drawing.Point(0, 110);
-            this.dgWarDead.Name = "dgWarDead";
-            this.dgWarDead.ReadOnly = true;
-            this.dgWarDead.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgWarDead.Size = new System.Drawing.Size(1035, 332);
-            this.dgWarDead.TabIndex = 29;
-            this.dgWarDead.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgWarDead_CellDoubleClick);
+            this.dgWorldWars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgWorldWars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgWorldWars.Location = new System.Drawing.Point(0, 110);
+            this.dgWorldWars.Name = "dgWorldWars";
+            this.dgWorldWars.ReadOnly = true;
+            this.dgWorldWars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgWorldWars.Size = new System.Drawing.Size(1035, 332);
+            this.dgWorldWars.TabIndex = 29;
+            this.dgWorldWars.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgWorldWars_CellDoubleClick);
             // 
             // label9
             // 
@@ -846,12 +846,12 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Surname";
             // 
-            // txtWarDeadSurname
+            // txtWorldWarsSurname
             // 
-            this.txtWarDeadSurname.Location = new System.Drawing.Point(650, 22);
-            this.txtWarDeadSurname.Name = "txtWarDeadSurname";
-            this.txtWarDeadSurname.Size = new System.Drawing.Size(201, 20);
-            this.txtWarDeadSurname.TabIndex = 27;
+            this.txtWorldWarsSurname.Location = new System.Drawing.Point(650, 22);
+            this.txtWorldWarsSurname.Name = "txtWorldWarsSurname";
+            this.txtWorldWarsSurname.Size = new System.Drawing.Size(201, 20);
+            this.txtWorldWarsSurname.TabIndex = 27;
             // 
             // wardeadRelation
             // 
@@ -1889,7 +1889,7 @@
             this.tabSelector.Controls.Add(this.tabLostCousins);
             this.tabSelector.Controls.Add(this.tabColourReports);
             this.tabSelector.Controls.Add(this.tabTreetops);
-            this.tabSelector.Controls.Add(this.tabWarDead);
+            this.tabSelector.Controls.Add(this.tabWorldWars);
             this.tabSelector.Location = new System.Drawing.Point(0, 27);
             this.tabSelector.Name = "tabSelector";
             this.tabSelector.SelectedIndex = 0;
@@ -2336,9 +2336,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgDataErrors)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgRegions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgCountries)).EndInit();
-            this.tabWarDead.ResumeLayout(false);
-            this.tabWarDead.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgWarDead)).EndInit();
+            this.tabWorldWars.ResumeLayout(false);
+            this.tabWorldWars.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgWorldWars)).EndInit();
             this.tabTreetops.ResumeLayout(false);
             this.tabTreetops.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).EndInit();
@@ -2429,13 +2429,13 @@
         private System.Windows.Forms.ToolStripMenuItem reportAnIssueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuReload;
         private System.Windows.Forms.ToolStripStatusLabel tsHintsLabel;
-        private System.Windows.Forms.TabPage tabWarDead;
+        private System.Windows.Forms.TabPage tabWorldWars;
         private System.Windows.Forms.CheckBox ckbWDIgnoreLocations;
         private System.Windows.Forms.Button btnWWII;
         private System.Windows.Forms.Button btnWWI;
-        private System.Windows.Forms.DataGridView dgWarDead;
+        private System.Windows.Forms.DataGridView dgWorldWars;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtWarDeadSurname;
+        private System.Windows.Forms.TextBox txtWorldWarsSurname;
         private Controls.RelationTypes wardeadRelation;
         private Controls.CensusCountry wardeadCountry;
         private System.Windows.Forms.TabPage tabTreetops;

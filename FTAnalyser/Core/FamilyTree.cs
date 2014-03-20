@@ -825,9 +825,9 @@ namespace FTAnalyzer
 
         #endregion
 
-        #region WarDead
+        #region WorldWars
 
-        public IEnumerable<IDisplayIndividual> GetWarDead(Predicate<Individual> filter)
+        public IEnumerable<IDisplayIndividual> GetWorldWars(Predicate<Individual> filter)
         {
             return individuals.Where(ind => ind.IsMale && filter(ind));
         }

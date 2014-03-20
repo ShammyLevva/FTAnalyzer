@@ -144,7 +144,7 @@ namespace FTAnalyzer
                 dgIndividuals.DataSource = null;
                 dgFamilies.DataSource = null;
                 dgTreeTops.DataSource = null;
-                dgWarDead.DataSource = null;
+                dgWorldWars.DataSource = null;
                 dgLooseBirths.DataSource = null;
                 dgLooseDeaths.DataSource = null;
                 dgDataErrors.DataSource = null;
@@ -358,11 +358,11 @@ namespace FTAnalyzer
                     else
                         treetopsCountry.Enabled = true;
                 }
-                else if (tabSelector.SelectedTab == tabWarDead)
+                else if (tabSelector.SelectedTab == tabWorldWars)
                 {
                     tsCountLabel.Text = string.Empty;
                     tsHintsLabel.Text = string.Empty;
-                    dgWarDead.DataSource = null;
+                    dgWorldWars.DataSource = null;
                     if (ckbWDIgnoreLocations.Checked)
                         wardeadCountry.Enabled = false;
                     else
@@ -621,9 +621,9 @@ namespace FTAnalyzer
                         FilterUtils.AndFilter<Individual>(birthFilter, deathFilter),
                         FilterUtils.AndFilter<Individual>(locationFilter, relationFilter));
 
-            if (txtWarDeadSurname.Text.Length > 0)
+            if (txtWorldWarsSurname.Text.Length > 0)
             {
-                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtWarDeadSurname.Text);
+                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtWorldWarsSurname.Text);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
 
@@ -883,11 +883,11 @@ namespace FTAnalyzer
             HourGlass(true);
             WWI = true;
             Predicate<Individual> filter = CreateWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("BET 1914 AND 1918"));
-            List<IDisplayIndividual> warDeadList = ft.GetWarDead(filter).ToList();
+            List<IDisplayIndividual> warDeadList = ft.GetWorldWars(filter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
-            dgWarDead.DataSource = new SortableBindingList<IDisplayIndividual>(warDeadList);
-            dgWarDead.Focus();
-            foreach (DataGridViewColumn c in dgWarDead.Columns)
+            dgWorldWars.DataSource = new SortableBindingList<IDisplayIndividual>(warDeadList);
+            dgWorldWars.Focus();
+            foreach (DataGridViewColumn c in dgWorldWars.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = Properties.Messages.Count + warDeadList.Count;
             tsHintsLabel.Text = Properties.Messages.Hints_Individual + Properties.Messages.Hints_LivesOfFirstWorldWar;
@@ -900,11 +900,11 @@ namespace FTAnalyzer
             HourGlass(true);
             WWI = false;
             Predicate<Individual> filter = CreateWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("BET 1939 AND 1945"));
-            List<IDisplayIndividual> warDeadList = ft.GetWarDead(filter).ToList();
+            List<IDisplayIndividual> warDeadList = ft.GetWorldWars(filter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
-            dgWarDead.DataSource = new SortableBindingList<IDisplayIndividual>(warDeadList);
-            dgWarDead.Focus();
-            foreach (DataGridViewColumn c in dgWarDead.Columns)
+            dgWorldWars.DataSource = new SortableBindingList<IDisplayIndividual>(warDeadList);
+            dgWorldWars.Focus();
+            foreach (DataGridViewColumn c in dgWorldWars.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = Properties.Messages.Count + warDeadList.Count;
             tsHintsLabel.Text = Properties.Messages.Hints_Individual;
@@ -976,9 +976,9 @@ namespace FTAnalyzer
             {
                 PrintDataGrid(true, dgTreeTops, "List of People at Top of Tree");
             }
-            else if (tabSelector.SelectedTab == tabWarDead)
+            else if (tabSelector.SelectedTab == tabWorldWars)
             {
-                PrintDataGrid(true, dgWarDead, "List of Possible World Wars");
+                PrintDataGrid(true, dgWorldWars, "List of Possible World Wars");
             }
         }
 
@@ -1504,11 +1504,11 @@ namespace FTAnalyzer
                 ShowFacts((string)dgTreeTops.CurrentRow.Cells["IndividualID"].Value);
         }
 
-        private void dgWarDead_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgWorldWars_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string indID = (string)dgWarDead.CurrentRow.Cells["IndividualID"].Value;
+                string indID = (string)dgWorldWars.CurrentRow.Cells["IndividualID"].Value;
                 if (WWI && ModifierKeys.Equals(Keys.Shift))
                     LivesOfFirstWorldWar(indID);
                 else
