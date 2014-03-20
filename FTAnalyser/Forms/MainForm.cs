@@ -1527,12 +1527,17 @@ namespace FTAnalyzer
             Process.Start("https://beta.livesofthefirstworldwar.org/search#FreeSearch=" + searchtext + "&PageIndex=1&PageSize=20");
         }
 
-        private void ShowFacts(string indID)
+        private void ShowFacts(string indID, bool offset = false)
         {
             Individual ind = ft.GetIndividual(indID);
             Facts factForm = new Facts(ind);
             DisposeDuplicateForms(factForm);
             factForm.Show();
+            if (offset)
+            {
+                factForm.Left += 50;
+                factForm.Top += 50;
+            }
         }
 
         private void btnColouredCensus_Click(object sender, EventArgs e)
@@ -1786,10 +1791,10 @@ namespace FTAnalyzer
 
         private void dgDuplicates_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            string indID = (string)dgDuplicates.CurrentRow.Cells["IndividualID"].Value;
+            string indID = (string)dgDuplicates.CurrentRow.Cells["DuplicateIndividualID"].Value;
             ShowFacts(indID);
             indID = (string)dgDuplicates.CurrentRow.Cells["MatchIndividualID"].Value;
-            ShowFacts(indID);
+            ShowFacts(indID, true);
         }
 
         private void buildLocationsToolStripMenuItem_Click(object sender, EventArgs e)
