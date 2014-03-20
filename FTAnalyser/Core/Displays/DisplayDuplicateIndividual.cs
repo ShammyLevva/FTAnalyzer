@@ -19,13 +19,19 @@ namespace FTAnalyzer
         }
 
         public string IndividualID { get { return IndA.IndividualID; } }
+        public string Name { get { return IndA.Name; } }
         public string Forenames { get { return IndA.Forenames; } }
         public string Surname { get { return IndA.Surname; } }
-        public string Gender { get { return IndA.Gender; } }
         public FactDate BirthDate { get { return IndA.BirthDate; } }
         public FactLocation BirthLocation { get { return IndA.BirthLocation; } }
         public string Relation { get { return IndA.Relation; } }
-        public FactLocation RelationToRoot { get { return IndA.BirthLocation; } }
+        public string RelationToRoot { get { return IndA.RelationToRoot; } }
 
+        public string MatchIndividualID { get { return IndB.IndividualID; } }
+        public string MatchName { get { return IndB.Name; } }
+        public FactDate MatchBirthDate { get { return IndB.BirthDate; } }
+        public FactLocation MatchBirthLocation { get { return IndB.BirthLocation; } }
+        public string MatchRelation { get { return IndB.Relation; } }
+        public string MatchRelationToRoot { get { return IndB.RelationToRoot; } }
     }
 }

@@ -1474,12 +1474,12 @@ namespace FTAnalyzer
             // good https://familysearch.org/search/record/results#count=20&query=%2Bgivenname%3ACharles%7E%20%2Bsurname%3ABisset%7E%20%2Brecord_country%3AScotland%20%2Brecord_type%3A%283%29&collection_id=2046756
             StringBuilder path = new StringBuilder();
             path.Append("https://www.familysearch.org/search/record/results#count=20&query=");
-            if (person.Forenames != "?" && person.Forenames.ToUpper() != "UNKNOWN")
+            if (person.Forenames != "?" && person.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
             {
                 path.Append("%2B" + FamilySearch.GIVENNAME + "%3A%22" + HttpUtility.UrlEncode(person.Forenames) + "%22%7E%20");
             }
             string surname = person.SurnameAtDate(censusFactDate);
-            if (surname != "?" && surname.ToUpper() != "UNKNOWN")
+            if (surname != "?" && surname.ToUpper() != Individual.UNKNOWN_NAME)
             {
                 path.Append("%2B" + FamilySearch.SURNAME + "%3A" + HttpUtility.UrlEncode(surname) + "%7E%20");
             }
@@ -1549,16 +1549,16 @@ namespace FTAnalyzer
             query.Append("so=3&");
             query.Append("MSAV=1&");
             query.Append("msT=1&");
-            if (person.Forenames != "?" && person.Forenames.ToUpper() != "UNKNOWN")
+            if (person.Forenames != "?" && person.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
             {
                 query.Append("gsfn=" + HttpUtility.UrlEncode(person.Forenames) + "&");
             }
             string surname = string.Empty;
-            if (person.Surname != "?" && person.Surname.ToUpper() != "UNKNOWN")
+            if (person.Surname != "?" && person.Surname.ToUpper() != Individual.UNKNOWN_NAME)
             {
                 surname = person.Surname;
             }
-            if (person.MarriedName != "?" && person.MarriedName.ToUpper() != "UNKNOWN" && person.MarriedName != person.Surname)
+            if (person.MarriedName != "?" && person.MarriedName.ToUpper() != Individual.UNKNOWN_NAME && person.MarriedName != person.Surname)
             {
                 surname += " " + person.MarriedName;
             }
@@ -1612,7 +1612,7 @@ namespace FTAnalyzer
             uri.Path = "/cgi/search.pl";
             StringBuilder query = new StringBuilder();
             query.Append("y=" + censusYear + "&");
-            if (person.Forenames != "?" && person.Forenames.ToUpper() != "UNKNOWN")
+            if (person.Forenames != "?" && person.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
             {
                 int pos = person.Forenames.IndexOf(" ");
                 string forename = person.Forenames;
@@ -1621,7 +1621,7 @@ namespace FTAnalyzer
                 query.Append("g=" + HttpUtility.UrlEncode(forename) + "&");
             }
             string surname = person.SurnameAtDate(censusFactDate);
-            if (surname != "?" && surname.ToUpper() != "UNKNOWN")
+            if (surname != "?" && surname.ToUpper() != Individual.UNKNOWN_NAME)
             {
                 query.Append("s=" + HttpUtility.UrlEncode(surname) + "&");
                 query.Append("p=on&");
@@ -1705,7 +1705,7 @@ namespace FTAnalyzer
             query.Append("sortOrder=nameAsc&");
             query.Append("startNewSearch=startNewSearch&");
 
-            if (person.Forenames != "?" && person.Forenames.ToUpper() != "UNKNOWN")
+            if (person.Forenames != "?" && person.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
             {
                 int pos = person.Forenames.IndexOf(" ");
                 string forenames = person.Forenames;
@@ -1719,7 +1719,7 @@ namespace FTAnalyzer
                 query.Append("forenames=&fns=fns&");
             }
             string surname = person.SurnameAtDate(censusFactDate);
-            if (surname != "?" && surname.ToUpper() != "UNKNOWN")
+            if (surname != "?" && surname.ToUpper() != Individual.UNKNOWN_NAME)
             {
                 query.Append("lastName=" + HttpUtility.UrlEncode(surname) + "&");
                 query.Append("sns=sns&");
@@ -1833,16 +1833,16 @@ namespace FTAnalyzer
             query.Append("so=3&");
             query.Append("MSAV=1&");
             query.Append("msT=1&");
-            if (individual.Forenames != "?" && individual.Forenames.ToUpper() != "UNKNOWN")
+            if (individual.Forenames != "?" && individual.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
             {
                 query.Append("gsfn=" + HttpUtility.UrlEncode(individual.Forenames) + "&");
             }
             string surname = string.Empty;
-            if (individual.Surname != "?" && individual.Surname.ToUpper() != "UNKNOWN")
+            if (individual.Surname != "?" && individual.Surname.ToUpper() != Individual.UNKNOWN_NAME)
             {
                 surname = individual.Surname;
             }
-            if (individual.MarriedName != "?" && individual.MarriedName.ToUpper() != "UNKNOWN" && individual.MarriedName != individual.Surname)
+            if (individual.MarriedName != "?" && individual.MarriedName.ToUpper() != Individual.UNKNOWN_NAME && individual.MarriedName != individual.Surname)
             {
                 surname += " " + individual.MarriedName;
             }
@@ -2215,6 +2215,7 @@ namespace FTAnalyzer
                 return null;
             }
             tb.Enabled = true;
+            tb.Minimum = 1;
             tb.Maximum = MaxDuplicateScore();
             return BuildDuplicateList(tb.Value);
         }
@@ -2248,7 +2249,7 @@ namespace FTAnalyzer
                         if (_cancelDuplicates)
                             break;
                         Individual indB = list[j];
-                        if (indA.GenderMatches(indB))
+                        if (indA.GenderMatches(indB) && indA.Name != Individual.UNKNOWN_NAME)
                         {
                             if (indA.SurnameMetaphone == indB.SurnameMetaphone &&
                                 indA.ForenameMetaphone == indB.ForenameMetaphone &&

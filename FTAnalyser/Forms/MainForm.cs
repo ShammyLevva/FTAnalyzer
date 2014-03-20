@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.4.0.0-beta 6";
+        public string VERSION = "3.4.0.0-beta 7";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -38,6 +38,7 @@ namespace FTAnalyzer
             InitializeComponent();
             loading = true;
             displayOptionsOnLoadToolStripMenuItem.Checked = Properties.GeneralSettings.Default.ReportOptions;
+            dgDuplicates.AutoGenerateColumns = false;
             ft.XmlErrorBox = rtbOutput;
             VERSION = PublishVersion();
             log.Info("Started FTAnalyzer version " + VERSION);
@@ -149,8 +150,7 @@ namespace FTAnalyzer
                 dgDataErrors.DataSource = null;
                 dgOccupations.DataSource = null;
                 dgSurnames.DataSource = null;
-                dgDuplicateSelect.DataSource = null;
-                dgDuplicateView.DataSource = null;
+                dgDuplicates.DataSource = null;
                 Statistics.Instance.Clear();
                 tabCtrlLooseBDs.SelectedTab = tabLooseBirths; // force back to first tab
                 tabCtrlLocations.SelectedTab = tabTreeView; // otherwise totals etc look wrong
@@ -411,16 +411,21 @@ namespace FTAnalyzer
             }
         }
 
-        private void
-            SetPossibleDuplicates()
+        private void SetPossibleDuplicates()
         {
             btnCancelDuplicates.Visible = true;
-            dgDuplicateSelect.DataSource = ft.GenerateDuplicatesList(pbDuplicates, tbDuplicateScore);
-            dgDuplicateSelect.Sort(dgDuplicateSelect.Columns["BirthDate"], ListSortDirection.Ascending);
-            dgDuplicateSelect.Sort(dgDuplicateSelect.Columns["Forenames"], ListSortDirection.Ascending);
-            dgDuplicateSelect.Sort(dgDuplicateSelect.Columns["Surname"], ListSortDirection.Ascending);
-            tsCountLabel.Text = "Possible Duplicate Count : " + dgDuplicateSelect.RowCount.ToString();
+            SortableBindingList<IDisplayDuplicateIndividual> data = ft.GenerateDuplicatesList(pbDuplicates, tbDuplicateScore);
+            if (data != null)
+            {
+                dgDuplicates.DataSource = data;
+                dgDuplicates.Sort(dgDuplicates.Columns["DuplicateBirthDate"], ListSortDirection.Ascending);
+                dgDuplicates.Sort(dgDuplicates.Columns["DuplicateForenames"], ListSortDirection.Ascending);
+                dgDuplicates.Sort(dgDuplicates.Columns["DuplicateSurname"], ListSortDirection.Ascending);
+                tsCountLabel.Text = "Possible Duplicate Count : " + dgDuplicates.RowCount.ToString();
+                label14.Text = "Slider Value=" + tbDuplicateScore.Value;
+            }
             btnCancelDuplicates.Visible = false;
+            HourGlass(false);
         }
 
         private void UpdateLooseBirthDeaths()
@@ -973,7 +978,7 @@ namespace FTAnalyzer
             }
             else if (tabSelector.SelectedTab == tabWarDead)
             {
-                PrintDataGrid(true, dgWarDead, "List of Possible War Dead");
+                PrintDataGrid(true, dgWarDead, "List of Possible World Wars");
             }
         }
 
@@ -1777,24 +1782,12 @@ namespace FTAnalyzer
             ShowFacts(indID);
         }
 
-        private void dgDuplicateSelect_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgDuplicates_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            string indID = (string)dgDuplicateSelect.CurrentRow.Cells["IndividualID"].Value;
+            string indID = (string)dgDuplicates.CurrentRow.Cells["IndividualID"].Value;
             ShowFacts(indID);
-        }
-
-        private void dgDuplicateView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            string indID = (string)dgDuplicateView.CurrentRow.Cells["IndividualID"].Value;
+            indID = (string)dgDuplicates.CurrentRow.Cells["MatchIndividualID"].Value;
             ShowFacts(indID);
-        }
-
-        private void dgDuplicateSelect_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgDuplicateSelect.CurrentRow != null)
-            {
-                // TODO do something when Selection changes
-            }
         }
 
         private void buildLocationsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1892,7 +1885,6 @@ namespace FTAnalyzer
         private void tbDuplicateScore_Scroll(object sender, EventArgs e)
         {
             SetPossibleDuplicates();
-            label14.Text = "Debug: slider=" + tbDuplicateScore.Value;
         }
 
         private void btnCancelDuplicates_Click(object sender, EventArgs e)

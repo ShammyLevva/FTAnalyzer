@@ -149,7 +149,7 @@ namespace FTAnalyzer
                         return child.SurnameAtDate(CensusDate);
                     }
                 }
-                return "UNKNOWN";
+                return Individual.UNKNOWN_NAME;
             }
         }
     }

@@ -8,12 +8,20 @@ namespace FTAnalyzer
     public interface IDisplayDuplicateIndividual
     {
         string IndividualID { get;}
-        string Forenames { get;}
-        string Surname { get;}
-        string Gender { get;}
+        string Name { get;}
+        string Forenames { get; } 
+        string Surname { get; }
         FactDate BirthDate { get;}
         FactLocation BirthLocation { get;}
         string Relation { get; }
-        FactLocation RelationToRoot { get;}
+        string RelationToRoot { get; }
+
+        string MatchIndividualID { get; }
+        string MatchName { get; }
+        FactDate MatchBirthDate { get; }
+        FactLocation MatchBirthLocation { get; }
+        string MatchRelation { get; }
+        string MatchRelationToRoot { get; }
+        int Score { get; }
     }
 }

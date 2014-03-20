@@ -205,12 +205,24 @@
             this.txtFactsSurname = new System.Windows.Forms.TextBox();
             this.relTypesFacts = new Controls.RelationTypes();
             this.tabDuplicates = new System.Windows.Forms.TabPage();
+            this.dgDuplicates = new System.Windows.Forms.DataGridView();
+            this.DuplicateIndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DuplicateBirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DuplicatesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DuplicateForenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DuplicateSurname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DuplicateBirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DuplicateRelation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DuplicateRelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MatchIndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MatchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MatchBirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MatchBirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MatchRelation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MatchRelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Score = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCancelDuplicates = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.splitDuplicates = new System.Windows.Forms.SplitContainer();
-            this.dgDuplicateSelect = new System.Windows.Forms.DataGridView();
-            this.dgDuplicateView = new System.Windows.Forms.DataGridView();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -266,12 +278,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgSurnames)).BeginInit();
             this.tabFacts.SuspendLayout();
             this.tabDuplicates.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitDuplicates)).BeginInit();
-            this.splitDuplicates.Panel1.SuspendLayout();
-            this.splitDuplicates.Panel2.SuspendLayout();
-            this.splitDuplicates.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgDuplicateSelect)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgDuplicateView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgDuplicates)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbDuplicateScore)).BeginInit();
             this.SuspendLayout();
             // 
@@ -777,7 +784,7 @@
             this.tabWarDead.Name = "tabWarDead";
             this.tabWarDead.Size = new System.Drawing.Size(1035, 445);
             this.tabWarDead.TabIndex = 8;
-            this.tabWarDead.Text = "War Dead";
+            this.tabWarDead.Text = "World Wars";
             this.tabWarDead.UseVisualStyleBackColor = true;
             // 
             // ckbWDIgnoreLocations
@@ -787,9 +794,9 @@
             this.ckbWDIgnoreLocations.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbWDIgnoreLocations.Location = new System.Drawing.Point(8, 87);
             this.ckbWDIgnoreLocations.Name = "ckbWDIgnoreLocations";
-            this.ckbWDIgnoreLocations.Size = new System.Drawing.Size(245, 17);
+            this.ckbWDIgnoreLocations.Size = new System.Drawing.Size(252, 17);
             this.ckbWDIgnoreLocations.TabIndex = 32;
-            this.ckbWDIgnoreLocations.Text = "Include Unknown Countries in War Dead Filter";
+            this.ckbWDIgnoreLocations.Text = "Include Unknown Countries in World Wars Filter";
             this.ckbWDIgnoreLocations.UseVisualStyleBackColor = true;
             this.ckbWDIgnoreLocations.CheckedChanged += new System.EventHandler(this.ckbWDIgnoreLocations_CheckedChanged);
             // 
@@ -2016,11 +2023,11 @@
             // 
             // btnShowFacts
             // 
-            this.btnShowFacts.Location = new System.Drawing.Point(342, 54);
+            this.btnShowFacts.Location = new System.Drawing.Point(333, 51);
             this.btnShowFacts.Name = "btnShowFacts";
-            this.btnShowFacts.Size = new System.Drawing.Size(75, 23);
+            this.btnShowFacts.Size = new System.Drawing.Size(262, 23);
             this.btnShowFacts.TabIndex = 24;
-            this.btnShowFacts.Text = "Show Facts";
+            this.btnShowFacts.Text = "Show Facts for Individuals with Selected Fact Types";
             this.btnShowFacts.UseVisualStyleBackColor = true;
             this.btnShowFacts.Click += new System.EventHandler(this.btnShowFacts_Click);
             // 
@@ -2050,10 +2057,9 @@
             // 
             // tabDuplicates
             // 
+            this.tabDuplicates.Controls.Add(this.dgDuplicates);
             this.tabDuplicates.Controls.Add(this.btnCancelDuplicates);
             this.tabDuplicates.Controls.Add(this.label16);
-            this.tabDuplicates.Controls.Add(this.label15);
-            this.tabDuplicates.Controls.Add(this.splitDuplicates);
             this.tabDuplicates.Controls.Add(this.label14);
             this.tabDuplicates.Controls.Add(this.label13);
             this.tabDuplicates.Controls.Add(this.label12);
@@ -2067,6 +2073,148 @@
             this.tabDuplicates.TabIndex = 15;
             this.tabDuplicates.Text = "Duplicates?";
             this.tabDuplicates.UseVisualStyleBackColor = true;
+            // 
+            // dgDuplicates
+            // 
+            this.dgDuplicates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgDuplicates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgDuplicates.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DuplicateIndividualID,
+            this.DuplicateBirthDate,
+            this.DuplicatesName,
+            this.DuplicateForenames,
+            this.DuplicateSurname,
+            this.DuplicateBirthLocation,
+            this.DuplicateRelation,
+            this.DuplicateRelationToRoot,
+            this.MatchIndividualID,
+            this.MatchName,
+            this.MatchBirthDate,
+            this.MatchBirthLocation,
+            this.MatchRelation,
+            this.MatchRelationToRoot,
+            this.Score});
+            this.dgDuplicates.Location = new System.Drawing.Point(0, 67);
+            this.dgDuplicates.Name = "dgDuplicates";
+            this.dgDuplicates.RowHeadersWidth = 15;
+            this.dgDuplicates.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgDuplicates.Size = new System.Drawing.Size(1032, 375);
+            this.dgDuplicates.TabIndex = 18;
+            this.dgDuplicates.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDuplicates_CellDoubleClick);
+            // 
+            // DuplicateIndividualID
+            // 
+            this.DuplicateIndividualID.DataPropertyName = "IndividualID";
+            this.DuplicateIndividualID.HeaderText = "ID";
+            this.DuplicateIndividualID.Name = "DuplicateIndividualID";
+            this.DuplicateIndividualID.Width = 50;
+            // 
+            // DuplicateBirthDate
+            // 
+            this.DuplicateBirthDate.DataPropertyName = "BirthDate";
+            this.DuplicateBirthDate.HeaderText = "Birthdate";
+            this.DuplicateBirthDate.MinimumWidth = 150;
+            this.DuplicateBirthDate.Name = "DuplicateBirthDate";
+            this.DuplicateBirthDate.Width = 150;
+            // 
+            // DuplicatesName
+            // 
+            this.DuplicatesName.DataPropertyName = "Name";
+            this.DuplicatesName.HeaderText = "Name";
+            this.DuplicatesName.Name = "DuplicatesName";
+            // 
+            // DuplicateForenames
+            // 
+            this.DuplicateForenames.DataPropertyName = "Forenames";
+            this.DuplicateForenames.HeaderText = "Forenames";
+            this.DuplicateForenames.Name = "DuplicateForenames";
+            this.DuplicateForenames.Visible = false;
+            // 
+            // DuplicateSurname
+            // 
+            this.DuplicateSurname.DataPropertyName = "Surname";
+            this.DuplicateSurname.HeaderText = "Surname";
+            this.DuplicateSurname.Name = "DuplicateSurname";
+            this.DuplicateSurname.Visible = false;
+            // 
+            // DuplicateBirthLocation
+            // 
+            this.DuplicateBirthLocation.DataPropertyName = "BirthLocation";
+            this.DuplicateBirthLocation.HeaderText = "Birth Location";
+            this.DuplicateBirthLocation.MinimumWidth = 120;
+            this.DuplicateBirthLocation.Name = "DuplicateBirthLocation";
+            this.DuplicateBirthLocation.Width = 120;
+            // 
+            // DuplicateRelation
+            // 
+            this.DuplicateRelation.DataPropertyName = "Relation";
+            this.DuplicateRelation.HeaderText = "Relation";
+            this.DuplicateRelation.MinimumWidth = 105;
+            this.DuplicateRelation.Name = "DuplicateRelation";
+            this.DuplicateRelation.Width = 105;
+            // 
+            // DuplicateRelationToRoot
+            // 
+            this.DuplicateRelationToRoot.DataPropertyName = "RelationToRoot";
+            this.DuplicateRelationToRoot.HeaderText = "Relation to Root";
+            this.DuplicateRelationToRoot.MinimumWidth = 100;
+            this.DuplicateRelationToRoot.Name = "DuplicateRelationToRoot";
+            // 
+            // MatchIndividualID
+            // 
+            this.MatchIndividualID.DataPropertyName = "MatchIndividualID";
+            this.MatchIndividualID.HeaderText = "Match ID";
+            this.MatchIndividualID.Name = "MatchIndividualID";
+            this.MatchIndividualID.Width = 50;
+            // 
+            // MatchName
+            // 
+            this.MatchName.DataPropertyName = "MatchName";
+            this.MatchName.HeaderText = "Match Name";
+            this.MatchName.MinimumWidth = 150;
+            this.MatchName.Name = "MatchName";
+            this.MatchName.Width = 150;
+            // 
+            // MatchBirthDate
+            // 
+            this.MatchBirthDate.DataPropertyName = "MatchBirthDate";
+            this.MatchBirthDate.HeaderText = "Match Birthdate";
+            this.MatchBirthDate.MinimumWidth = 150;
+            this.MatchBirthDate.Name = "MatchBirthDate";
+            this.MatchBirthDate.Width = 150;
+            // 
+            // MatchBirthLocation
+            // 
+            this.MatchBirthLocation.DataPropertyName = "MatchBirthLocation";
+            this.MatchBirthLocation.HeaderText = "Match Birth Location";
+            this.MatchBirthLocation.MinimumWidth = 120;
+            this.MatchBirthLocation.Name = "MatchBirthLocation";
+            this.MatchBirthLocation.Width = 120;
+            // 
+            // MatchRelation
+            // 
+            this.MatchRelation.DataPropertyName = "MatchRelation";
+            this.MatchRelation.HeaderText = "Match Relation";
+            this.MatchRelation.MinimumWidth = 105;
+            this.MatchRelation.Name = "MatchRelation";
+            this.MatchRelation.Width = 105;
+            // 
+            // MatchRelationToRoot
+            // 
+            this.MatchRelationToRoot.DataPropertyName = "MatchRelationToRoot";
+            this.MatchRelationToRoot.HeaderText = "Match Relation to Root";
+            this.MatchRelationToRoot.MinimumWidth = 100;
+            this.MatchRelationToRoot.Name = "MatchRelationToRoot";
+            this.MatchRelationToRoot.Width = 150;
+            // 
+            // Score
+            // 
+            this.Score.DataPropertyName = "Score";
+            this.Score.HeaderText = "Score";
+            this.Score.Name = "Score";
+            this.Score.Width = 50;
             // 
             // btnCancelDuplicates
             // 
@@ -2082,63 +2230,15 @@
             // 
             // label16
             // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(182, 51);
+            this.label16.Location = new System.Drawing.Point(427, 51);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(152, 13);
             this.label16.TabIndex = 16;
             this.label16.Text = "Candidate Duplicates List";
-            // 
-            // label15
-            // 
-            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(732, 51);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(112, 13);
-            this.label15.TabIndex = 15;
-            this.label15.Text = "Possible Duplicate";
-            // 
-            // splitDuplicates
-            // 
-            this.splitDuplicates.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.splitDuplicates.Location = new System.Drawing.Point(3, 67);
-            this.splitDuplicates.Name = "splitDuplicates";
-            // 
-            // splitDuplicates.Panel1
-            // 
-            this.splitDuplicates.Panel1.Controls.Add(this.dgDuplicateSelect);
-            // 
-            // splitDuplicates.Panel2
-            // 
-            this.splitDuplicates.Panel2.Controls.Add(this.dgDuplicateView);
-            this.splitDuplicates.Size = new System.Drawing.Size(1029, 375);
-            this.splitDuplicates.SplitterDistance = 512;
-            this.splitDuplicates.TabIndex = 0;
-            // 
-            // dgDuplicateSelect
-            // 
-            this.dgDuplicateSelect.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgDuplicateSelect.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgDuplicateSelect.Location = new System.Drawing.Point(0, 0);
-            this.dgDuplicateSelect.Name = "dgDuplicateSelect";
-            this.dgDuplicateSelect.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgDuplicateSelect.Size = new System.Drawing.Size(512, 375);
-            this.dgDuplicateSelect.TabIndex = 0;
-            this.dgDuplicateSelect.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDuplicateSelect_CellDoubleClick);
-            this.dgDuplicateSelect.SelectionChanged += new System.EventHandler(this.dgDuplicateSelect_SelectionChanged);
-            // 
-            // dgDuplicateView
-            // 
-            this.dgDuplicateView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgDuplicateView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgDuplicateView.Location = new System.Drawing.Point(0, 0);
-            this.dgDuplicateView.Name = "dgDuplicateView";
-            this.dgDuplicateView.Size = new System.Drawing.Size(513, 375);
-            this.dgDuplicateView.TabIndex = 0;
-            this.dgDuplicateView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDuplicateView_CellDoubleClick);
             // 
             // label14
             // 
@@ -2285,12 +2385,7 @@
             this.tabFacts.PerformLayout();
             this.tabDuplicates.ResumeLayout(false);
             this.tabDuplicates.PerformLayout();
-            this.splitDuplicates.Panel1.ResumeLayout(false);
-            this.splitDuplicates.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitDuplicates)).EndInit();
-            this.splitDuplicates.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgDuplicateSelect)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgDuplicateView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgDuplicates)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbDuplicateScore)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -2471,9 +2566,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ProgressBar pbRelationships;
         private System.Windows.Forms.TabPage tabDuplicates;
-        private System.Windows.Forms.SplitContainer splitDuplicates;
-        private System.Windows.Forms.DataGridView dgDuplicateSelect;
-        private System.Windows.Forms.DataGridView dgDuplicateView;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ProgressBar pbDuplicates;
         private System.Windows.Forms.Label label14;
@@ -2481,11 +2573,27 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TrackBar tbDuplicateScore;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button btnCancelDuplicates;
         private System.Windows.Forms.CheckedListBox ckbFactSelect;
         private System.Windows.Forms.Button btnDeselectAllFactTypes;
         private System.Windows.Forms.Button btnSelectAllFactTypes;
+        private System.Windows.Forms.DataGridView dgDuplicates;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateIndividualID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateBirthDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DuplicatesName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateForenames;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateSurname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateBirthLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateRelation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateRelationToRoot;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MatchIndividualID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MatchName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MatchBirthDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MatchBirthLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MatchRelation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MatchRelationToRoot;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Score;
     }
 }
 

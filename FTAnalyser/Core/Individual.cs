@@ -12,6 +12,7 @@ namespace FTAnalyzer
         // define relation type from direct ancestor to related by marriage and 
         // MARRIAGEDB ie: married to a direct or blood relation
         public const int UNKNOWN = 1, DIRECT = 2, BLOOD = 4, MARRIEDTODB = 8, MARRIAGE = 16, UNSET = 32;
+        public const string UNKNOWN_NAME = "UNKNOWN";
 
         public string IndividualID { get; private set; }
         private string forenames;
@@ -282,15 +283,15 @@ namespace FTAnalyzer
                 if (startPos >= 0 && endPos > startPos)
                 {
                     surname = name.Substring(startPos + 1, endPos - startPos - 1);
-                    forenames = startPos == 0 ? "UNKNOWN" : name.Substring(0, startPos - 1);
+                    forenames = startPos == 0 ? Individual.UNKNOWN_NAME : name.Substring(0, startPos - 1);
                 }
                 else
                 {
-                    surname = "UNKNOWN";
+                    surname = Individual.UNKNOWN_NAME;
                     forenames = name;
                 }
                 if (surname == "?" || surname.ToLower() == "mnu")
-                    surname = "UNKNOWN";
+                    surname = Individual.UNKNOWN_NAME;
                 marriedName = surname;
             }
         }
