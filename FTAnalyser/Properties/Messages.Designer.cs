@@ -70,6 +70,15 @@ namespace FTAnalyzer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Double click to show the facts for both the individual and their possible match..
+        /// </summary>
+        internal static string Hints_Duplicates {
+            get {
+                return ResourceManager.GetString("Hints_Duplicates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Double click to show a list of facts for the selected family..
         /// </summary>
         internal static string Hints_Family {

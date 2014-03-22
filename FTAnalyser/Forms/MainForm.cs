@@ -418,7 +418,7 @@ namespace FTAnalyzer
 
         private void SetPossibleDuplicates()
         {
-            btnCancelDuplicates.Visible = true;
+            SetDuplicateControlsVisibility(true);
             rfhDuplicates.SaveColumnLayout("DuplicatesColumns.xml");
             Application.DoEvents();
             SortableBindingList<IDisplayDuplicateIndividual> data = ft.GenerateDuplicatesList(pbDuplicates, tbDuplicateScore);
@@ -427,10 +427,17 @@ namespace FTAnalyzer
                 dgDuplicates.DataSource = data;
                 rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
                 labDuplicateSlider.Text = "Duplicates Match Quality : " + tbDuplicateScore.Value;
-                tsCountLabel.Text = "Possible Duplicate Count : " + dgDuplicates.RowCount.ToString();
+                tsCountLabel.Text = "Possible Duplicate Count : " + dgDuplicates.RowCount.ToString() + ".  " + Properties.Messages.Hints_Duplicates;
             }
-            btnCancelDuplicates.Visible = false;
+            SetDuplicateControlsVisibility(false);
             HourGlass(false);
+        }
+
+        private void SetDuplicateControlsVisibility(bool visible)
+        {
+            btnCancelDuplicates.Visible = visible;
+            labCalcDuplicates.Visible = visible;
+            pbDuplicates.Visible = visible;
         }
 
         private void ResetDuplicatesTable()
@@ -1546,8 +1553,8 @@ namespace FTAnalyzer
             factForm.Show();
             if (offset)
             {
-                factForm.Left += 50;
-                factForm.Top += 50;
+                factForm.Left += 200;
+                factForm.Top += 100;
             }
         }
 
