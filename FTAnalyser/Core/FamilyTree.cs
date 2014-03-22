@@ -269,6 +269,7 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("\n    Include Locations with partial match status: " + Properties.GeneralSettings.Default.IncludePartials);
                 xmlErrorbox.AppendText("\n    Family Census Facts apply to only parents: " + Properties.GeneralSettings.Default.OnlyCensusParents);
                 xmlErrorbox.AppendText("\n    Loose Birth minimum parental age: " + Properties.GeneralSettings.Default.MinParentalAge);
+                xmlErrorbox.AppendText("\n    Show Multiple Fact forms when viewing duplicates : " + Properties.GeneralSettings.Default.MultipleFactForms);
                 xmlErrorbox.AppendText("\nThe current mapping options are set :");
                 xmlErrorbox.AppendText("\n    Custom Maps Location: " + Properties.MappingSettings.Default.CustomMapPath);
                 xmlErrorbox.AppendText("\n    Display English & Welsh Parish Boundaries: " + Properties.MappingSettings.Default.UseEnglishParishBoundaries);
