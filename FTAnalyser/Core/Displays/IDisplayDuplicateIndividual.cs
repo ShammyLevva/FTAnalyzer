@@ -19,5 +19,6 @@ namespace FTAnalyzer
         FactDate MatchBirthDate { get; }
         FactLocation MatchBirthLocation { get; }
         int Score { get; }
+        bool IgnoreNonDuplicate { get; }
     }
 }

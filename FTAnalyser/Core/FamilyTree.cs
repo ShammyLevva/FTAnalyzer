@@ -43,7 +43,7 @@ namespace FTAnalyzer
 
         public bool Geocoding { get; set; }
         public List<NonDuplicate> NonDuplicates { get; private set; }
-        
+
         #region Static Functions
 
         private FamilyTree()
@@ -2282,7 +2282,7 @@ namespace FTAnalyzer
                 {
                     DisplayDuplicateIndividual dispDup = new DisplayDuplicateIndividual(dup);
                     NonDuplicate toCheck = new NonDuplicate(dispDup);
-                    dispDup.NonDuplicate = NonDuplicates.Contains(toCheck);
+                    dispDup.IgnoreNonDuplicate = NonDuplicates.Contains(toCheck);
                     if (!select.Contains(dispDup))
                         select.Add(dispDup);
                 }
@@ -2296,10 +2296,12 @@ namespace FTAnalyzer
             {
                 IFormatter formatter = new BinaryFormatter();
                 string file = Path.Combine(Properties.GeneralSettings.Default.SavePath, "NonDuplicates.xml");
-                Stream stream = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.None);
-                formatter.Serialize(stream, NonDuplicates);
-                stream.Close();
-            } catch(Exception)
+                using (Stream stream = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    formatter.Serialize(stream, NonDuplicates);
+                }
+            }
+            catch (Exception)
             { }
         }
 
@@ -2309,14 +2311,19 @@ namespace FTAnalyzer
             {
                 IFormatter formatter = new BinaryFormatter();
                 string file = Path.Combine(Properties.GeneralSettings.Default.SavePath, "NonDuplicates.xml");
-                Stream stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read);
-                NonDuplicates = (List<NonDuplicate>)formatter.Deserialize(stream);
-                stream.Close();
+                if (File.Exists(file))
+                {
+                    using (Stream stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    {
+                        NonDuplicates = (List<NonDuplicate>)formatter.Deserialize(stream);
+                    }
+                }
+                else
+                    NonDuplicates = new List<NonDuplicate>();
             }
             catch (Exception)
             {
                 NonDuplicates = new List<NonDuplicate>();
-                SerializeNonDuplicates();
             }
         }
         #endregion

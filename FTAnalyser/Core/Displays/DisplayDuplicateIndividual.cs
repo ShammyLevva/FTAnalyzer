@@ -10,7 +10,7 @@ namespace FTAnalyzer
         private Individual IndA { get; set; }
         private Individual IndB { get; set; }
         public int Score { get; private set; }
-        public bool NonDuplicate { get; set; }
+        public bool IgnoreNonDuplicate { get; set; }
 
         public DisplayDuplicateIndividual(DuplicateIndividual dup)
         {

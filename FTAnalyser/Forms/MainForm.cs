@@ -1540,8 +1540,8 @@ namespace FTAnalyzer
         {
             Individual ind = ft.GetIndividual(indID);
             string searchtext = ind.Forename + "+" + ind.Surname;
-            if(ind.ServiceNumber.Length > 0)
-                searchtext+= "+" + ind.ServiceNumber;
+            if (ind.ServiceNumber.Length > 0)
+                searchtext += "+" + ind.ServiceNumber;
             Process.Start("https://beta.livesofthefirstworldwar.org/search#FreeSearch=" + searchtext + "&PageIndex=1&PageSize=20");
         }
 
@@ -1946,7 +1946,7 @@ namespace FTAnalyzer
 
         private void SetFactTypes(bool selected)
         {
-            for(int index = 0; index < ckbFactSelect.Items.Count; index++)
+            for (int index = 0; index < ckbFactSelect.Items.Count; index++)
             {
                 string factType = ckbFactSelect.Items[index].ToString();
                 ckbFactSelect.SetItemChecked(index, selected);
@@ -1965,16 +1965,18 @@ namespace FTAnalyzer
 
         private void dgDuplicates_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex >0 && e.ColumnIndex == 0)
+            if (e.RowIndex >= 0 && e.ColumnIndex == 0)
             {
                 DisplayDuplicateIndividual dupInd = (DisplayDuplicateIndividual)dgDuplicates.Rows[e.RowIndex].DataBoundItem;
-                bool cellChecked = (bool)dgDuplicates.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
                 NonDuplicate nonDup = new NonDuplicate(dupInd);
-                if (cellChecked)
+                dupInd.IgnoreNonDuplicate = !dupInd.IgnoreNonDuplicate; // flip state of checkbox
+                if (dupInd.IgnoreNonDuplicate)
+                {  //ignoring this record so add it to the list if its not already present
                     if (!ft.NonDuplicates.Contains(nonDup))
                         ft.NonDuplicates.Add(nonDup);
+                }
                 else
-                    ft.NonDuplicates.Remove(nonDup);
+                    ft.NonDuplicates.Remove(nonDup); // no longer ignoring so remove from list
                 ft.SerializeNonDuplicates();
             }
         }
