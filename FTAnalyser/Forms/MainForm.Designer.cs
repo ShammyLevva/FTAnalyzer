@@ -207,6 +207,7 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.ckbHideIgnoredDuplicates = new System.Windows.Forms.CheckBox();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.relTypesFacts = new Controls.RelationTypes();
             this.cenDate = new Controls.CensusDateSelector();
@@ -220,7 +221,7 @@
             this.NonDuplicate = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Score = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DuplicateIndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DuplicatesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DuplicateName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DuplicateForenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DuplicateSurname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DuplicateBirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -1980,6 +1981,7 @@
             // 
             // tabDuplicates
             // 
+            this.tabDuplicates.Controls.Add(this.ckbHideIgnoredDuplicates);
             this.tabDuplicates.Controls.Add(this.dgDuplicates);
             this.tabDuplicates.Controls.Add(this.btnCancelDuplicates);
             this.tabDuplicates.Controls.Add(this.label16);
@@ -2007,7 +2009,7 @@
             this.NonDuplicate,
             this.Score,
             this.DuplicateIndividualID,
-            this.DuplicatesName,
+            this.DuplicateName,
             this.DuplicateForenames,
             this.DuplicateSurname,
             this.DuplicateBirthDate,
@@ -2105,6 +2107,19 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // ckbHideIgnoredDuplicates
+            // 
+            this.ckbHideIgnoredDuplicates.AutoSize = true;
+            this.ckbHideIgnoredDuplicates.Checked = true;
+            this.ckbHideIgnoredDuplicates.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbHideIgnoredDuplicates.Location = new System.Drawing.Point(8, 44);
+            this.ckbHideIgnoredDuplicates.Name = "ckbHideIgnoredDuplicates";
+            this.ckbHideIgnoredDuplicates.Size = new System.Drawing.Size(228, 17);
+            this.ckbHideIgnoredDuplicates.TabIndex = 19;
+            this.ckbHideIgnoredDuplicates.Text = "Hide Possible Duplicates marked as Ignore";
+            this.ckbHideIgnoredDuplicates.UseVisualStyleBackColor = true;
+            this.ckbHideIgnoredDuplicates.CheckedChanged += new System.EventHandler(this.ckbHideIgnoredDuplicates_CheckedChanged);
+            // 
             // rtbOutput
             // 
             this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2198,7 +2213,7 @@
             // 
             // NonDuplicate
             // 
-            this.NonDuplicate.DataPropertyName = "NonDuplicate";
+            this.NonDuplicate.DataPropertyName = "IgnoreNonDuplicate";
             this.NonDuplicate.FalseValue = "False";
             this.NonDuplicate.HeaderText = "Ignore";
             this.NonDuplicate.Name = "NonDuplicate";
@@ -2219,13 +2234,13 @@
             this.DuplicateIndividualID.Name = "DuplicateIndividualID";
             this.DuplicateIndividualID.Width = 50;
             // 
-            // DuplicatesName
+            // DuplicateName
             // 
-            this.DuplicatesName.DataPropertyName = "Name";
-            this.DuplicatesName.HeaderText = "Name";
-            this.DuplicatesName.MinimumWidth = 50;
-            this.DuplicatesName.Name = "DuplicatesName";
-            this.DuplicatesName.Width = 150;
+            this.DuplicateName.DataPropertyName = "Name";
+            this.DuplicateName.HeaderText = "Name";
+            this.DuplicateName.MinimumWidth = 50;
+            this.DuplicateName.Name = "DuplicateName";
+            this.DuplicateName.Width = 150;
             // 
             // DuplicateForenames
             // 
@@ -2558,11 +2573,11 @@
         private System.Windows.Forms.Button btnDeselectAllFactTypes;
         private System.Windows.Forms.Button btnSelectAllFactTypes;
         private System.Windows.Forms.DataGridView dgDuplicates;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateName;
+        private System.Windows.Forms.CheckBox ckbHideIgnoredDuplicates;
         private System.Windows.Forms.DataGridViewCheckBoxColumn NonDuplicate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Score;
         private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateIndividualID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DuplicatesName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateName;
         private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateForenames;
         private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateSurname;
         private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateBirthDate;

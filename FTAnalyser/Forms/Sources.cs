@@ -16,14 +16,12 @@ namespace FTAnalyzer.Forms
     {
         private FamilyTree ft = FamilyTree.Instance;
         private SortableBindingList<IDisplaySource> sources;
-        private bool allSources;
         private ReportFormHelper reportFormHelper;
 
         public Sources(DisplayFact fact)
         {
             InitializeComponent();
             this.sources = new SortableBindingList<IDisplaySource>();
-            this.allSources = false;
             dgSources.AutoGenerateColumns = false;
             reportFormHelper = new ReportFormHelper(this, this.Text, dgSources, this.ResetTable, "Sources");
             AddSources(fact);

@@ -2283,7 +2283,7 @@ namespace FTAnalyzer
                     DisplayDuplicateIndividual dispDup = new DisplayDuplicateIndividual(dup);
                     NonDuplicate toCheck = new NonDuplicate(dispDup);
                     dispDup.IgnoreNonDuplicate = NonDuplicates.Contains(toCheck);
-                    if (!select.Contains(dispDup))
+                    if (!select.Contains(dispDup) && !(dispDup.IgnoreNonDuplicate && Properties.Settings.Default.HideIgnoredDuplicates))
                         select.Add(dispDup);
                 }
             }

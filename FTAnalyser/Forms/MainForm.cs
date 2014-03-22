@@ -348,6 +348,7 @@ namespace FTAnalyzer
                     tsCountLabel.Text = string.Empty;
                     tsHintsLabel.Text = string.Empty;
                     rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
+                    ckbHideIgnoredDuplicates.Checked = Properties.Settings.Default.HideIgnoredDuplicates;
                     SetPossibleDuplicates();
                     ResetDuplicatesTable(); // force a reset on intial load
                     dgDuplicates.Focus();
@@ -1979,6 +1980,13 @@ namespace FTAnalyzer
                     ft.NonDuplicates.Remove(nonDup); // no longer ignoring so remove from list
                 ft.SerializeNonDuplicates();
             }
+        }
+
+        private void ckbHideIgnoredDuplicates_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.HideIgnoredDuplicates = ckbHideIgnoredDuplicates.Checked;
+            Properties.Settings.Default.Save();
+            SetPossibleDuplicates();
         }
     }
 }
