@@ -45,7 +45,7 @@ namespace FTAnalyzer
 
         private void ScoreDates(FactDate dateA, FactDate dateB)
         {
-            if (dateA.IsKnown)
+            if (dateA.IsKnown && dateB.IsKnown)
             {
                 if (dateA.Equals(dateB))
                     Score += 50;
@@ -57,6 +57,8 @@ namespace FTAnalyzer
                     Score += 10;
                 else if (dateA.Distance(dateB) <= 2)
                     Score += 5;
+                else if (dateA.Distance(dateB) > 5)
+                    Score -= (int)(dateA.Distance(dateB) * dateA.Distance(dateB));
                 if (dateA.IsExact && dateB.IsExact)
                     Score += 100;
             }
