@@ -250,7 +250,7 @@
             this.FactDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.FactDate.DataPropertyName = "FactDate";
             this.FactDate.HeaderText = "Fact Date";
-            this.FactDate.MinimumWidth = 150;
+            this.FactDate.MinimumWidth = 50;
             this.FactDate.Name = "FactDate";
             this.FactDate.ReadOnly = true;
             this.FactDate.Width = 150;

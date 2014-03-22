@@ -20,6 +20,7 @@
             base.Dispose(disposing);
             normalFont.Dispose();
             boldFont.Dispose();
+            rfhDuplicates.Dispose();
         }
 
         #region Windows Form Designer generated code
@@ -32,7 +33,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -90,6 +91,7 @@
             this.dgDataErrors = new System.Windows.Forms.DataGridView();
             this.dgRegions = new System.Windows.Forms.DataGridView();
             this.dgCountries = new System.Windows.Forms.DataGridView();
+            this.tbDuplicateScore = new System.Windows.Forms.TrackBar();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -198,24 +200,13 @@
             this.dgDuplicates = new System.Windows.Forms.DataGridView();
             this.btnCancelDuplicates = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.labDuplicateSlider = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.tbDuplicateScore = new System.Windows.Forms.TrackBar();
             this.label11 = new System.Windows.Forms.Label();
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
-            this.relTypesFacts = new Controls.RelationTypes();
-            this.cenDate = new Controls.CensusDateSelector();
-            this.relTypesCensus = new Controls.RelationTypes();
-            this.relTypesLC = new Controls.RelationTypes();
-            this.relTypesColoured = new Controls.RelationTypes();
-            this.treetopsRelation = new Controls.RelationTypes();
-            this.treetopsCountry = new Controls.CensusCountry();
-            this.wardeadRelation = new Controls.RelationTypes();
-            this.wardeadCountry = new Controls.CensusCountry();
             this.Score = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DuplicateIndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DuplicatesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -231,12 +222,23 @@
             this.MatchBirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MatchRelation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MatchRelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
+            this.relTypesFacts = new Controls.RelationTypes();
+            this.cenDate = new Controls.CensusDateSelector();
+            this.relTypesCensus = new Controls.RelationTypes();
+            this.relTypesLC = new Controls.RelationTypes();
+            this.relTypesColoured = new Controls.RelationTypes();
+            this.treetopsRelation = new Controls.RelationTypes();
+            this.treetopsCountry = new Controls.CensusCountry();
+            this.wardeadRelation = new Controls.RelationTypes();
+            this.wardeadCountry = new Controls.CensusCountry();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgDataErrors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgRegions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgCountries)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbDuplicateScore)).BeginInit();
             this.tabWorldWars.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWorldWars)).BeginInit();
             this.tabTreetops.SuspendLayout();
@@ -279,7 +281,6 @@
             this.tabFacts.SuspendLayout();
             this.tabDuplicates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgDuplicates)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbDuplicateScore)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -697,14 +698,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 154);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -753,6 +754,21 @@
             this.toolTips.SetToolTip(this.dgCountries, "Double click on Country name to see list of individuals with that Country.");
             this.dgCountries.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCountries_CellDoubleClick);
             this.dgCountries.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgCountries_CellFormatting);
+            // 
+            // tbDuplicateScore
+            // 
+            this.tbDuplicateScore.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbDuplicateScore.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tbDuplicateScore.Location = new System.Drawing.Point(443, 3);
+            this.tbDuplicateScore.Minimum = 1;
+            this.tbDuplicateScore.Name = "tbDuplicateScore";
+            this.tbDuplicateScore.Size = new System.Drawing.Size(589, 45);
+            this.tbDuplicateScore.TabIndex = 11;
+            this.tbDuplicateScore.TickFrequency = 5;
+            this.toolTips.SetToolTip(this.tbDuplicateScore, "Adjust Slider to right to limit results to more likely matches");
+            this.tbDuplicateScore.Value = 1;
+            this.tbDuplicateScore.Scroll += new System.EventHandler(this.tbDuplicateScore_Scroll);
             // 
             // printPreviewDialog
             // 
@@ -1970,7 +1986,7 @@
             this.tabDuplicates.Controls.Add(this.dgDuplicates);
             this.tabDuplicates.Controls.Add(this.btnCancelDuplicates);
             this.tabDuplicates.Controls.Add(this.label16);
-            this.tabDuplicates.Controls.Add(this.label14);
+            this.tabDuplicates.Controls.Add(this.labDuplicateSlider);
             this.tabDuplicates.Controls.Add(this.label13);
             this.tabDuplicates.Controls.Add(this.label12);
             this.tabDuplicates.Controls.Add(this.tbDuplicateScore);
@@ -2038,16 +2054,16 @@
             this.label16.TabIndex = 16;
             this.label16.Text = "Candidate Duplicates List";
             // 
-            // label14
+            // labDuplicateSlider
             // 
-            this.label14.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(671, 27);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(149, 13);
-            this.label14.TabIndex = 14;
-            this.label14.Text = "Duplicates Match Quality";
+            this.labDuplicateSlider.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labDuplicateSlider.AutoSize = true;
+            this.labDuplicateSlider.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labDuplicateSlider.Location = new System.Drawing.Point(671, 27);
+            this.labDuplicateSlider.Name = "labDuplicateSlider";
+            this.labDuplicateSlider.Size = new System.Drawing.Size(168, 13);
+            this.labDuplicateSlider.TabIndex = 14;
+            this.labDuplicateSlider.Text = "Duplicates Match Quality : 1";
             // 
             // label13
             // 
@@ -2067,18 +2083,6 @@
             this.label12.Size = new System.Drawing.Size(69, 13);
             this.label12.TabIndex = 12;
             this.label12.Text = "Loose Match";
-            // 
-            // tbDuplicateScore
-            // 
-            this.tbDuplicateScore.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbDuplicateScore.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tbDuplicateScore.Location = new System.Drawing.Point(443, 3);
-            this.tbDuplicateScore.Name = "tbDuplicateScore";
-            this.tbDuplicateScore.Size = new System.Drawing.Size(589, 45);
-            this.tbDuplicateScore.TabIndex = 11;
-            this.tbDuplicateScore.TickFrequency = 5;
-            this.tbDuplicateScore.Scroll += new System.EventHandler(this.tbDuplicateScore_Scroll);
             // 
             // label11
             // 
@@ -2105,6 +2109,124 @@
             // 
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
+            // 
+            // Score
+            // 
+            this.Score.DataPropertyName = "Score";
+            this.Score.HeaderText = "Score";
+            this.Score.Name = "Score";
+            this.Score.Width = 40;
+            // 
+            // DuplicateIndividualID
+            // 
+            this.DuplicateIndividualID.DataPropertyName = "IndividualID";
+            this.DuplicateIndividualID.HeaderText = "ID";
+            this.DuplicateIndividualID.Name = "DuplicateIndividualID";
+            this.DuplicateIndividualID.Width = 50;
+            // 
+            // DuplicatesName
+            // 
+            this.DuplicatesName.DataPropertyName = "Name";
+            this.DuplicatesName.HeaderText = "Name";
+            this.DuplicatesName.MinimumWidth = 50;
+            this.DuplicatesName.Name = "DuplicatesName";
+            this.DuplicatesName.Width = 150;
+            // 
+            // DuplicateForenames
+            // 
+            this.DuplicateForenames.DataPropertyName = "Forenames";
+            this.DuplicateForenames.HeaderText = "Forenames";
+            this.DuplicateForenames.Name = "DuplicateForenames";
+            this.DuplicateForenames.Visible = false;
+            // 
+            // DuplicateSurname
+            // 
+            this.DuplicateSurname.DataPropertyName = "Surname";
+            this.DuplicateSurname.HeaderText = "Surname";
+            this.DuplicateSurname.Name = "DuplicateSurname";
+            this.DuplicateSurname.Visible = false;
+            // 
+            // DuplicateBirthDate
+            // 
+            this.DuplicateBirthDate.DataPropertyName = "BirthDate";
+            this.DuplicateBirthDate.HeaderText = "Birthdate";
+            this.DuplicateBirthDate.MinimumWidth = 50;
+            this.DuplicateBirthDate.Name = "DuplicateBirthDate";
+            this.DuplicateBirthDate.Width = 150;
+            // 
+            // DuplicateBirthLocation
+            // 
+            this.DuplicateBirthLocation.DataPropertyName = "BirthLocation";
+            this.DuplicateBirthLocation.HeaderText = "Birth Location";
+            this.DuplicateBirthLocation.MinimumWidth = 100;
+            this.DuplicateBirthLocation.Name = "DuplicateBirthLocation";
+            this.DuplicateBirthLocation.Width = 175;
+            // 
+            // DuplicateRelation
+            // 
+            this.DuplicateRelation.DataPropertyName = "Relation";
+            this.DuplicateRelation.HeaderText = "Relation";
+            this.DuplicateRelation.MinimumWidth = 105;
+            this.DuplicateRelation.Name = "DuplicateRelation";
+            this.DuplicateRelation.Visible = false;
+            this.DuplicateRelation.Width = 105;
+            // 
+            // DuplicateRelationToRoot
+            // 
+            this.DuplicateRelationToRoot.DataPropertyName = "RelationToRoot";
+            this.DuplicateRelationToRoot.HeaderText = "Relation to Root";
+            this.DuplicateRelationToRoot.MinimumWidth = 100;
+            this.DuplicateRelationToRoot.Name = "DuplicateRelationToRoot";
+            this.DuplicateRelationToRoot.Visible = false;
+            // 
+            // MatchIndividualID
+            // 
+            this.MatchIndividualID.DataPropertyName = "MatchIndividualID";
+            this.MatchIndividualID.HeaderText = "Match ID";
+            this.MatchIndividualID.Name = "MatchIndividualID";
+            this.MatchIndividualID.Width = 50;
+            // 
+            // MatchName
+            // 
+            this.MatchName.DataPropertyName = "MatchName";
+            this.MatchName.HeaderText = "Match Name";
+            this.MatchName.MinimumWidth = 50;
+            this.MatchName.Name = "MatchName";
+            this.MatchName.Width = 150;
+            // 
+            // MatchBirthDate
+            // 
+            this.MatchBirthDate.DataPropertyName = "MatchBirthDate";
+            this.MatchBirthDate.HeaderText = "Match Birthdate";
+            this.MatchBirthDate.MinimumWidth = 50;
+            this.MatchBirthDate.Name = "MatchBirthDate";
+            this.MatchBirthDate.Width = 150;
+            // 
+            // MatchBirthLocation
+            // 
+            this.MatchBirthLocation.DataPropertyName = "MatchBirthLocation";
+            this.MatchBirthLocation.HeaderText = "Match Birth Location";
+            this.MatchBirthLocation.MinimumWidth = 100;
+            this.MatchBirthLocation.Name = "MatchBirthLocation";
+            this.MatchBirthLocation.Width = 175;
+            // 
+            // MatchRelation
+            // 
+            this.MatchRelation.DataPropertyName = "MatchRelation";
+            this.MatchRelation.HeaderText = "Match Relation";
+            this.MatchRelation.MinimumWidth = 105;
+            this.MatchRelation.Name = "MatchRelation";
+            this.MatchRelation.Visible = false;
+            this.MatchRelation.Width = 105;
+            // 
+            // MatchRelationToRoot
+            // 
+            this.MatchRelationToRoot.DataPropertyName = "MatchRelationToRoot";
+            this.MatchRelationToRoot.HeaderText = "Match Relation to Root";
+            this.MatchRelationToRoot.MinimumWidth = 100;
+            this.MatchRelationToRoot.Name = "MatchRelationToRoot";
+            this.MatchRelationToRoot.Visible = false;
+            this.MatchRelationToRoot.Width = 150;
             // 
             // rtbOutput
             // 
@@ -2197,122 +2319,6 @@
             this.wardeadCountry.Title = "Default Country";
             this.wardeadCountry.UKEnabled = true;
             // 
-            // Score
-            // 
-            this.Score.DataPropertyName = "Score";
-            this.Score.HeaderText = "Score";
-            this.Score.Name = "Score";
-            this.Score.Width = 50;
-            // 
-            // DuplicateIndividualID
-            // 
-            this.DuplicateIndividualID.DataPropertyName = "IndividualID";
-            this.DuplicateIndividualID.HeaderText = "ID";
-            this.DuplicateIndividualID.Name = "DuplicateIndividualID";
-            this.DuplicateIndividualID.Width = 50;
-            // 
-            // DuplicatesName
-            // 
-            this.DuplicatesName.DataPropertyName = "Name";
-            this.DuplicatesName.HeaderText = "Name";
-            this.DuplicatesName.Name = "DuplicatesName";
-            // 
-            // DuplicateForenames
-            // 
-            this.DuplicateForenames.DataPropertyName = "Forenames";
-            this.DuplicateForenames.HeaderText = "Forenames";
-            this.DuplicateForenames.Name = "DuplicateForenames";
-            this.DuplicateForenames.Visible = false;
-            // 
-            // DuplicateSurname
-            // 
-            this.DuplicateSurname.DataPropertyName = "Surname";
-            this.DuplicateSurname.HeaderText = "Surname";
-            this.DuplicateSurname.Name = "DuplicateSurname";
-            this.DuplicateSurname.Visible = false;
-            // 
-            // DuplicateBirthDate
-            // 
-            this.DuplicateBirthDate.DataPropertyName = "BirthDate";
-            this.DuplicateBirthDate.HeaderText = "Birthdate";
-            this.DuplicateBirthDate.MinimumWidth = 100;
-            this.DuplicateBirthDate.Name = "DuplicateBirthDate";
-            this.DuplicateBirthDate.Width = 150;
-            // 
-            // DuplicateBirthLocation
-            // 
-            this.DuplicateBirthLocation.DataPropertyName = "BirthLocation";
-            this.DuplicateBirthLocation.HeaderText = "Birth Location";
-            this.DuplicateBirthLocation.MinimumWidth = 100;
-            this.DuplicateBirthLocation.Name = "DuplicateBirthLocation";
-            this.DuplicateBirthLocation.Width = 150;
-            // 
-            // DuplicateRelation
-            // 
-            this.DuplicateRelation.DataPropertyName = "Relation";
-            this.DuplicateRelation.HeaderText = "Relation";
-            this.DuplicateRelation.MinimumWidth = 105;
-            this.DuplicateRelation.Name = "DuplicateRelation";
-            this.DuplicateRelation.Visible = false;
-            this.DuplicateRelation.Width = 105;
-            // 
-            // DuplicateRelationToRoot
-            // 
-            this.DuplicateRelationToRoot.DataPropertyName = "RelationToRoot";
-            this.DuplicateRelationToRoot.HeaderText = "Relation to Root";
-            this.DuplicateRelationToRoot.MinimumWidth = 100;
-            this.DuplicateRelationToRoot.Name = "DuplicateRelationToRoot";
-            this.DuplicateRelationToRoot.Visible = false;
-            // 
-            // MatchIndividualID
-            // 
-            this.MatchIndividualID.DataPropertyName = "MatchIndividualID";
-            this.MatchIndividualID.HeaderText = "Match ID";
-            this.MatchIndividualID.Name = "MatchIndividualID";
-            this.MatchIndividualID.Width = 50;
-            // 
-            // MatchName
-            // 
-            this.MatchName.DataPropertyName = "MatchName";
-            this.MatchName.HeaderText = "Match Name";
-            this.MatchName.MinimumWidth = 150;
-            this.MatchName.Name = "MatchName";
-            this.MatchName.Width = 150;
-            // 
-            // MatchBirthDate
-            // 
-            this.MatchBirthDate.DataPropertyName = "MatchBirthDate";
-            this.MatchBirthDate.HeaderText = "Match Birthdate";
-            this.MatchBirthDate.MinimumWidth = 100;
-            this.MatchBirthDate.Name = "MatchBirthDate";
-            this.MatchBirthDate.Width = 150;
-            // 
-            // MatchBirthLocation
-            // 
-            this.MatchBirthLocation.DataPropertyName = "MatchBirthLocation";
-            this.MatchBirthLocation.HeaderText = "Match Birth Location";
-            this.MatchBirthLocation.MinimumWidth = 100;
-            this.MatchBirthLocation.Name = "MatchBirthLocation";
-            this.MatchBirthLocation.Width = 150;
-            // 
-            // MatchRelation
-            // 
-            this.MatchRelation.DataPropertyName = "MatchRelation";
-            this.MatchRelation.HeaderText = "Match Relation";
-            this.MatchRelation.MinimumWidth = 105;
-            this.MatchRelation.Name = "MatchRelation";
-            this.MatchRelation.Visible = false;
-            this.MatchRelation.Width = 105;
-            // 
-            // MatchRelationToRoot
-            // 
-            this.MatchRelationToRoot.DataPropertyName = "MatchRelationToRoot";
-            this.MatchRelationToRoot.HeaderText = "Match Relation to Root";
-            this.MatchRelationToRoot.MinimumWidth = 100;
-            this.MatchRelationToRoot.Name = "MatchRelationToRoot";
-            this.MatchRelationToRoot.Visible = false;
-            this.MatchRelationToRoot.Width = 150;
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -2341,6 +2347,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgDataErrors)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgRegions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgCountries)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbDuplicateScore)).EndInit();
             this.tabWorldWars.ResumeLayout(false);
             this.tabWorldWars.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWorldWars)).EndInit();
@@ -2391,7 +2398,6 @@
             this.tabDuplicates.ResumeLayout(false);
             this.tabDuplicates.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgDuplicates)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbDuplicateScore)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2573,7 +2579,7 @@
         private System.Windows.Forms.TabPage tabDuplicates;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ProgressBar pbDuplicates;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label labDuplicateSlider;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TrackBar tbDuplicateScore;

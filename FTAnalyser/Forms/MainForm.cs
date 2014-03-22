@@ -32,6 +32,7 @@ namespace FTAnalyzer
         private Font normalFont;
         private bool loading;
         private bool WWI = false;
+        private ReportFormHelper rfhDuplicates;
 
         public MainForm()
         {
@@ -48,6 +49,7 @@ namespace FTAnalyzer
             int pos = VERSION.IndexOf('-');
             string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
             DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
+            rfhDuplicates = new ReportFormHelper(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
             BuildRecentList();
         }
 
@@ -345,8 +347,9 @@ namespace FTAnalyzer
                 {
                     tsCountLabel.Text = string.Empty;
                     tsHintsLabel.Text = string.Empty;
+                    rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
                     SetPossibleDuplicates();
-                    dgSurnames.Focus();
+                    dgDuplicates.Focus();
                     mnuPrint.Enabled = true;
                 }
                 else if (tabSelector.SelectedTab == tabTreetops)
@@ -415,19 +418,26 @@ namespace FTAnalyzer
         private void SetPossibleDuplicates()
         {
             btnCancelDuplicates.Visible = true;
+            rfhDuplicates.SaveColumnLayout("DuplicatesColumns.xml");
             Application.DoEvents();
             SortableBindingList<IDisplayDuplicateIndividual> data = ft.GenerateDuplicatesList(pbDuplicates, tbDuplicateScore);
             if (data != null)
             {
                 dgDuplicates.DataSource = data;
-                dgDuplicates.Sort(dgDuplicates.Columns["DuplicateBirthDate"], ListSortDirection.Ascending);
-                dgDuplicates.Sort(dgDuplicates.Columns["DuplicateForenames"], ListSortDirection.Ascending);
-                dgDuplicates.Sort(dgDuplicates.Columns["DuplicateSurname"], ListSortDirection.Ascending);
+                rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
+                labDuplicateSlider.Text = "Duplicates Match Quality : " + tbDuplicateScore.Value;
                 tsCountLabel.Text = "Possible Duplicate Count : " + dgDuplicates.RowCount.ToString();
-                label14.Text = "Slider Value=" + tbDuplicateScore.Value;
             }
             btnCancelDuplicates.Visible = false;
             HourGlass(false);
+        }
+
+        private void ResetDuplicatesTable()
+        {
+            dgDuplicates.Sort(dgDuplicates.Columns["DuplicateBirthDate"], ListSortDirection.Ascending);
+            dgDuplicates.Sort(dgDuplicates.Columns["DuplicateForenames"], ListSortDirection.Ascending);
+            dgDuplicates.Sort(dgDuplicates.Columns["DuplicateSurname"], ListSortDirection.Ascending);
+            dgDuplicates.Sort(dgDuplicates.Columns["Score"], ListSortDirection.Descending);
         }
 
         private void UpdateLooseBirthDeaths()
@@ -1828,13 +1838,18 @@ namespace FTAnalyzer
 
         private void resetToDefaultFormSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            LoadDefaultPosition();
+            SavePosition();
+        }
+
+        private void LoadDefaultPosition()
+        {
             loading = true;
             this.Height = 561;
             this.Width = 1059;
             this.Top = 50;
             this.Left = 50;
             loading = false;
-            SavePosition();
         }
 
         private void btnShowFacts_Click(object sender, EventArgs e)

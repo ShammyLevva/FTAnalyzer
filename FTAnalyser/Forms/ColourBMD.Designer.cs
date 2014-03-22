@@ -435,7 +435,7 @@
             this.BirthDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.BirthDate.DataPropertyName = "BirthDate";
             this.BirthDate.HeaderText = "Birth Date";
-            this.BirthDate.MinimumWidth = 150;
+            this.BirthDate.MinimumWidth = 50;
             this.BirthDate.Name = "BirthDate";
             this.BirthDate.ReadOnly = true;
             this.BirthDate.Width = 150;
@@ -445,7 +445,7 @@
             this.DeathDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.DeathDate.DataPropertyName = "DeathDate";
             this.DeathDate.HeaderText = "Death Date";
-            this.DeathDate.MinimumWidth = 150;
+            this.DeathDate.MinimumWidth = 50;
             this.DeathDate.Name = "DeathDate";
             this.DeathDate.ReadOnly = true;
             this.DeathDate.Width = 150;
