@@ -207,21 +207,6 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.Score = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DuplicateIndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DuplicatesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DuplicateForenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DuplicateSurname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DuplicateBirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DuplicateBirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DuplicateRelation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DuplicateRelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MatchIndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MatchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MatchBirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MatchBirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MatchRelation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MatchRelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.relTypesFacts = new Controls.RelationTypes();
             this.cenDate = new Controls.CensusDateSelector();
@@ -232,6 +217,17 @@
             this.treetopsCountry = new Controls.CensusCountry();
             this.wardeadRelation = new Controls.RelationTypes();
             this.wardeadCountry = new Controls.CensusCountry();
+            this.Score = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DuplicateIndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DuplicatesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DuplicateForenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DuplicateSurname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DuplicateBirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DuplicateBirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MatchIndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MatchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MatchBirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MatchBirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -2014,14 +2010,10 @@
             this.DuplicateSurname,
             this.DuplicateBirthDate,
             this.DuplicateBirthLocation,
-            this.DuplicateRelation,
-            this.DuplicateRelationToRoot,
             this.MatchIndividualID,
             this.MatchName,
             this.MatchBirthDate,
-            this.MatchBirthLocation,
-            this.MatchRelation,
-            this.MatchRelationToRoot});
+            this.MatchBirthLocation});
             this.dgDuplicates.Location = new System.Drawing.Point(0, 67);
             this.dgDuplicates.Name = "dgDuplicates";
             this.dgDuplicates.RowHeadersWidth = 15;
@@ -2109,124 +2101,6 @@
             // 
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
-            // 
-            // Score
-            // 
-            this.Score.DataPropertyName = "Score";
-            this.Score.HeaderText = "Score";
-            this.Score.Name = "Score";
-            this.Score.Width = 40;
-            // 
-            // DuplicateIndividualID
-            // 
-            this.DuplicateIndividualID.DataPropertyName = "IndividualID";
-            this.DuplicateIndividualID.HeaderText = "ID";
-            this.DuplicateIndividualID.Name = "DuplicateIndividualID";
-            this.DuplicateIndividualID.Width = 50;
-            // 
-            // DuplicatesName
-            // 
-            this.DuplicatesName.DataPropertyName = "Name";
-            this.DuplicatesName.HeaderText = "Name";
-            this.DuplicatesName.MinimumWidth = 50;
-            this.DuplicatesName.Name = "DuplicatesName";
-            this.DuplicatesName.Width = 150;
-            // 
-            // DuplicateForenames
-            // 
-            this.DuplicateForenames.DataPropertyName = "Forenames";
-            this.DuplicateForenames.HeaderText = "Forenames";
-            this.DuplicateForenames.Name = "DuplicateForenames";
-            this.DuplicateForenames.Visible = false;
-            // 
-            // DuplicateSurname
-            // 
-            this.DuplicateSurname.DataPropertyName = "Surname";
-            this.DuplicateSurname.HeaderText = "Surname";
-            this.DuplicateSurname.Name = "DuplicateSurname";
-            this.DuplicateSurname.Visible = false;
-            // 
-            // DuplicateBirthDate
-            // 
-            this.DuplicateBirthDate.DataPropertyName = "BirthDate";
-            this.DuplicateBirthDate.HeaderText = "Birthdate";
-            this.DuplicateBirthDate.MinimumWidth = 50;
-            this.DuplicateBirthDate.Name = "DuplicateBirthDate";
-            this.DuplicateBirthDate.Width = 150;
-            // 
-            // DuplicateBirthLocation
-            // 
-            this.DuplicateBirthLocation.DataPropertyName = "BirthLocation";
-            this.DuplicateBirthLocation.HeaderText = "Birth Location";
-            this.DuplicateBirthLocation.MinimumWidth = 100;
-            this.DuplicateBirthLocation.Name = "DuplicateBirthLocation";
-            this.DuplicateBirthLocation.Width = 175;
-            // 
-            // DuplicateRelation
-            // 
-            this.DuplicateRelation.DataPropertyName = "Relation";
-            this.DuplicateRelation.HeaderText = "Relation";
-            this.DuplicateRelation.MinimumWidth = 105;
-            this.DuplicateRelation.Name = "DuplicateRelation";
-            this.DuplicateRelation.Visible = false;
-            this.DuplicateRelation.Width = 105;
-            // 
-            // DuplicateRelationToRoot
-            // 
-            this.DuplicateRelationToRoot.DataPropertyName = "RelationToRoot";
-            this.DuplicateRelationToRoot.HeaderText = "Relation to Root";
-            this.DuplicateRelationToRoot.MinimumWidth = 100;
-            this.DuplicateRelationToRoot.Name = "DuplicateRelationToRoot";
-            this.DuplicateRelationToRoot.Visible = false;
-            // 
-            // MatchIndividualID
-            // 
-            this.MatchIndividualID.DataPropertyName = "MatchIndividualID";
-            this.MatchIndividualID.HeaderText = "Match ID";
-            this.MatchIndividualID.Name = "MatchIndividualID";
-            this.MatchIndividualID.Width = 50;
-            // 
-            // MatchName
-            // 
-            this.MatchName.DataPropertyName = "MatchName";
-            this.MatchName.HeaderText = "Match Name";
-            this.MatchName.MinimumWidth = 50;
-            this.MatchName.Name = "MatchName";
-            this.MatchName.Width = 150;
-            // 
-            // MatchBirthDate
-            // 
-            this.MatchBirthDate.DataPropertyName = "MatchBirthDate";
-            this.MatchBirthDate.HeaderText = "Match Birthdate";
-            this.MatchBirthDate.MinimumWidth = 50;
-            this.MatchBirthDate.Name = "MatchBirthDate";
-            this.MatchBirthDate.Width = 150;
-            // 
-            // MatchBirthLocation
-            // 
-            this.MatchBirthLocation.DataPropertyName = "MatchBirthLocation";
-            this.MatchBirthLocation.HeaderText = "Match Birth Location";
-            this.MatchBirthLocation.MinimumWidth = 100;
-            this.MatchBirthLocation.Name = "MatchBirthLocation";
-            this.MatchBirthLocation.Width = 175;
-            // 
-            // MatchRelation
-            // 
-            this.MatchRelation.DataPropertyName = "MatchRelation";
-            this.MatchRelation.HeaderText = "Match Relation";
-            this.MatchRelation.MinimumWidth = 105;
-            this.MatchRelation.Name = "MatchRelation";
-            this.MatchRelation.Visible = false;
-            this.MatchRelation.Width = 105;
-            // 
-            // MatchRelationToRoot
-            // 
-            this.MatchRelationToRoot.DataPropertyName = "MatchRelationToRoot";
-            this.MatchRelationToRoot.HeaderText = "Match Relation to Root";
-            this.MatchRelationToRoot.MinimumWidth = 100;
-            this.MatchRelationToRoot.Name = "MatchRelationToRoot";
-            this.MatchRelationToRoot.Visible = false;
-            this.MatchRelationToRoot.Width = 150;
             // 
             // rtbOutput
             // 
@@ -2318,6 +2192,89 @@
             this.wardeadCountry.TabIndex = 25;
             this.wardeadCountry.Title = "Default Country";
             this.wardeadCountry.UKEnabled = true;
+            // 
+            // Score
+            // 
+            this.Score.DataPropertyName = "Score";
+            this.Score.HeaderText = "Score";
+            this.Score.Name = "Score";
+            this.Score.Width = 40;
+            // 
+            // DuplicateIndividualID
+            // 
+            this.DuplicateIndividualID.DataPropertyName = "IndividualID";
+            this.DuplicateIndividualID.HeaderText = "ID";
+            this.DuplicateIndividualID.Name = "DuplicateIndividualID";
+            this.DuplicateIndividualID.Width = 50;
+            // 
+            // DuplicatesName
+            // 
+            this.DuplicatesName.DataPropertyName = "Name";
+            this.DuplicatesName.HeaderText = "Name";
+            this.DuplicatesName.MinimumWidth = 50;
+            this.DuplicatesName.Name = "DuplicatesName";
+            this.DuplicatesName.Width = 150;
+            // 
+            // DuplicateForenames
+            // 
+            this.DuplicateForenames.DataPropertyName = "Forenames";
+            this.DuplicateForenames.HeaderText = "Forenames";
+            this.DuplicateForenames.Name = "DuplicateForenames";
+            this.DuplicateForenames.Visible = false;
+            // 
+            // DuplicateSurname
+            // 
+            this.DuplicateSurname.DataPropertyName = "Surname";
+            this.DuplicateSurname.HeaderText = "Surname";
+            this.DuplicateSurname.Name = "DuplicateSurname";
+            this.DuplicateSurname.Visible = false;
+            // 
+            // DuplicateBirthDate
+            // 
+            this.DuplicateBirthDate.DataPropertyName = "BirthDate";
+            this.DuplicateBirthDate.HeaderText = "Birthdate";
+            this.DuplicateBirthDate.MinimumWidth = 50;
+            this.DuplicateBirthDate.Name = "DuplicateBirthDate";
+            this.DuplicateBirthDate.Width = 150;
+            // 
+            // DuplicateBirthLocation
+            // 
+            this.DuplicateBirthLocation.DataPropertyName = "BirthLocation";
+            this.DuplicateBirthLocation.HeaderText = "Birth Location";
+            this.DuplicateBirthLocation.MinimumWidth = 100;
+            this.DuplicateBirthLocation.Name = "DuplicateBirthLocation";
+            this.DuplicateBirthLocation.Width = 175;
+            // 
+            // MatchIndividualID
+            // 
+            this.MatchIndividualID.DataPropertyName = "MatchIndividualID";
+            this.MatchIndividualID.HeaderText = "Match ID";
+            this.MatchIndividualID.Name = "MatchIndividualID";
+            this.MatchIndividualID.Width = 50;
+            // 
+            // MatchName
+            // 
+            this.MatchName.DataPropertyName = "MatchName";
+            this.MatchName.HeaderText = "Match Name";
+            this.MatchName.MinimumWidth = 50;
+            this.MatchName.Name = "MatchName";
+            this.MatchName.Width = 150;
+            // 
+            // MatchBirthDate
+            // 
+            this.MatchBirthDate.DataPropertyName = "MatchBirthDate";
+            this.MatchBirthDate.HeaderText = "Match Birthdate";
+            this.MatchBirthDate.MinimumWidth = 50;
+            this.MatchBirthDate.Name = "MatchBirthDate";
+            this.MatchBirthDate.Width = 150;
+            // 
+            // MatchBirthLocation
+            // 
+            this.MatchBirthLocation.DataPropertyName = "MatchBirthLocation";
+            this.MatchBirthLocation.HeaderText = "Match Birth Location";
+            this.MatchBirthLocation.MinimumWidth = 100;
+            this.MatchBirthLocation.Name = "MatchBirthLocation";
+            this.MatchBirthLocation.Width = 175;
             // 
             // MainForm
             // 
@@ -2597,14 +2554,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateSurname;
         private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateBirthDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateBirthLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateRelation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateRelationToRoot;
         private System.Windows.Forms.DataGridViewTextBoxColumn MatchIndividualID;
         private System.Windows.Forms.DataGridViewTextBoxColumn MatchName;
         private System.Windows.Forms.DataGridViewTextBoxColumn MatchBirthDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn MatchBirthLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MatchRelation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MatchRelationToRoot;
     }
 }
 

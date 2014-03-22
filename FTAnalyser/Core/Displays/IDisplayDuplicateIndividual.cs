@@ -13,15 +13,11 @@ namespace FTAnalyzer
         string Surname { get; }
         FactDate BirthDate { get;}
         FactLocation BirthLocation { get;}
-        string Relation { get; }
-        string RelationToRoot { get; }
 
         string MatchIndividualID { get; }
         string MatchName { get; }
         FactDate MatchBirthDate { get; }
         FactLocation MatchBirthLocation { get; }
-        string MatchRelation { get; }
-        string MatchRelationToRoot { get; }
         int Score { get; }
     }
 }
