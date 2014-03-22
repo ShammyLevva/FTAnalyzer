@@ -349,6 +349,7 @@ namespace FTAnalyzer
                     tsHintsLabel.Text = string.Empty;
                     rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
                     SetPossibleDuplicates();
+                    ResetDuplicatesTable(); // force a reset on intial load
                     dgDuplicates.Focus();
                     mnuPrint.Enabled = true;
                 }
@@ -1801,10 +1802,22 @@ namespace FTAnalyzer
 
         private void dgDuplicates_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            string indID = (string)dgDuplicates.CurrentRow.Cells["DuplicateIndividualID"].Value;
-            ShowFacts(indID);
-            indID = (string)dgDuplicates.CurrentRow.Cells["MatchIndividualID"].Value;
-            ShowFacts(indID, true);
+            string indA_ID = (string)dgDuplicates.CurrentRow.Cells["DuplicateIndividualID"].Value;
+            string indB_ID = (string)dgDuplicates.CurrentRow.Cells["MatchIndividualID"].Value;
+            if (Properties.GeneralSettings.Default.MultipleFactForms)
+            {
+                ShowFacts(indA_ID);
+                ShowFacts(indB_ID, true);
+            }
+            else
+            {
+                List<Individual> dupInd = new List<Individual>();
+                dupInd.Add(ft.GetIndividual(indA_ID));
+                dupInd.Add(ft.GetIndividual(indB_ID));
+                Facts f = new Facts(dupInd, null);
+                DisposeDuplicateForms(f);
+                f.Show();
+            }
         }
 
         private void buildLocationsToolStripMenuItem_Click(object sender, EventArgs e)

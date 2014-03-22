@@ -41,6 +41,7 @@
             this.upDownAge = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.chkUseBurials = new System.Windows.Forms.CheckBox();
+            this.chkMultipleFactForms = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownAge)).BeginInit();
             this.SuspendLayout();
@@ -135,10 +136,17 @@
             this.chkUseBurials.Name = "chkUseBurials";
             this.chkUseBurials.UseVisualStyleBackColor = true;
             // 
+            // chkMultipleFactForms
+            // 
+            resources.ApplyResources(this.chkMultipleFactForms, "chkMultipleFactForms");
+            this.chkMultipleFactForms.Name = "chkMultipleFactForms";
+            this.chkMultipleFactForms.UseVisualStyleBackColor = true;
+            // 
             // GeneralSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkMultipleFactForms);
             this.Controls.Add(this.chkUseBurials);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.upDownAge);
@@ -170,6 +178,7 @@
         private System.Windows.Forms.NumericUpDown upDownAge;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkUseBurials;
+        private System.Windows.Forms.CheckBox chkMultipleFactForms;
 
 
 	}

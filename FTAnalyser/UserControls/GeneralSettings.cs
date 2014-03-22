@@ -23,6 +23,7 @@ namespace FTAnalyzer.UserControls
 			chkTolerateInaccurateCensus.Checked = Properties.GeneralSettings.Default.TolerateInaccurateCensusDate;
             chkIncludePartialGeocoded.Checked = Properties.GeneralSettings.Default.IncludePartials;
             chkFamilyCensus.Checked = Properties.GeneralSettings.Default.OnlyCensusParents;
+            chkMultipleFactForms.Checked = Properties.GeneralSettings.Default.MultipleFactForms;
             upDownAge.Value = Properties.GeneralSettings.Default.MinParentalAge;
 			Properties.GeneralSettings.Default.ReloadRequired = false;
 		}
@@ -39,7 +40,8 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.IncludePartials = chkIncludePartialGeocoded.Checked;
             Properties.GeneralSettings.Default.OnlyCensusParents = chkFamilyCensus.Checked;
             Properties.GeneralSettings.Default.MinParentalAge = (int)upDownAge.Value;
-			Properties.GeneralSettings.Default.Save();
+            Properties.GeneralSettings.Default.MultipleFactForms = chkMultipleFactForms.Checked;
+            Properties.GeneralSettings.Default.Save();
 			OnUseBaptismDatesChanged();
 			OnAllowEmptyLocationsChanged();
 			OnUseResidenceAsCensusChanged();
