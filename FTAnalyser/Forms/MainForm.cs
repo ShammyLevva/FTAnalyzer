@@ -1962,5 +1962,21 @@ namespace FTAnalyzer
             ckbFactSelect.SetItemChecked(index, !selected);
             Application.UserAppDataRegistry.SetValue("Fact: " + factType, !selected);
         }
+
+        private void dgDuplicates_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >0 && e.ColumnIndex == 0)
+            {
+                DisplayDuplicateIndividual dupInd = (DisplayDuplicateIndividual)dgDuplicates.Rows[e.RowIndex].DataBoundItem;
+                bool cellChecked = (bool)dgDuplicates.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                NonDuplicate nonDup = new NonDuplicate(dupInd);
+                if (cellChecked)
+                    if (!ft.NonDuplicates.Contains(nonDup))
+                        ft.NonDuplicates.Add(nonDup);
+                else
+                    ft.NonDuplicates.Remove(nonDup);
+                ft.SerializeNonDuplicates();
+            }
+        }
     }
 }

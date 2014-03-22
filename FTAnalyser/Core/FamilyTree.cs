@@ -13,6 +13,8 @@ using FTAnalyzer.Forms;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
 using Ionic.Zip;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace FTAnalyzer
 {
@@ -40,7 +42,8 @@ namespace FTAnalyzer
         private static int DATA_ERROR_GROUPS = 21;
 
         public bool Geocoding { get; set; }
-
+        public List<NonDuplicate> NonDuplicates { get; private set; }
+        
         #region Static Functions
 
         private FamilyTree()
@@ -1426,7 +1429,7 @@ namespace FTAnalyzer
             List<string> factTypes = AllExportFacts.Select(x => x.FactType).Distinct().ToList<string>();
             factTypes.Sort();
             ckbFactSelect.Items.Clear();
-            foreach(string factType in factTypes)
+            foreach (string factType in factTypes)
             {
                 if (!ckbFactSelect.Items.Contains(factType))
                 {
@@ -2198,6 +2201,7 @@ namespace FTAnalyzer
         #region Duplicates Processing
         public SortableBindingList<IDisplayDuplicateIndividual> GenerateDuplicatesList(ProgressBar pb, TrackBar tb)
         {
+            DeserializeNonDuplicates();
             if (duplicates != null && !_cancelDuplicates)
                 return BuildDuplicateList(tb.Value); // we have already processed the duplicates since the file was loaded
             tb.Enabled = false;
@@ -2209,7 +2213,7 @@ namespace FTAnalyzer
             pb.Value = 0;
             IndentifyDuplicates(pb, males);
             IndentifyDuplicates(pb, females);
-            if(_cancelDuplicates)
+            if (_cancelDuplicates)
             {
                 pb.Value = 0;
                 MessageBox.Show("Possible Duplicate Search Cancelled", "FT Analyzer");
@@ -2229,7 +2233,7 @@ namespace FTAnalyzer
         private int MaxDuplicateScore()
         {
             int score = 0;
-            foreach(DuplicateIndividual dup in duplicates)
+            foreach (DuplicateIndividual dup in duplicates)
             {
                 if (dup.Score > score)
                     score = dup.Score;
@@ -2272,16 +2276,48 @@ namespace FTAnalyzer
         public SortableBindingList<IDisplayDuplicateIndividual> BuildDuplicateList(int minScore)
         {
             SortableBindingList<IDisplayDuplicateIndividual> select = new SortableBindingList<IDisplayDuplicateIndividual>();
-            foreach(DuplicateIndividual dup in duplicates)
+            foreach (DuplicateIndividual dup in duplicates)
             {
                 if (dup.Score >= minScore)
                 {
                     DisplayDuplicateIndividual dispDup = new DisplayDuplicateIndividual(dup);
+                    NonDuplicate toCheck = new NonDuplicate(dispDup);
+                    dispDup.NonDuplicate = NonDuplicates.Contains(toCheck);
                     if (!select.Contains(dispDup))
                         select.Add(dispDup);
                 }
             }
             return select;
+        }
+
+        public void SerializeNonDuplicates()
+        {
+            try
+            {
+                IFormatter formatter = new BinaryFormatter();
+                string file = Path.Combine(Properties.GeneralSettings.Default.SavePath, "NonDuplicates.xml");
+                Stream stream = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.None);
+                formatter.Serialize(stream, NonDuplicates);
+                stream.Close();
+            } catch(Exception)
+            { }
+        }
+
+        public void DeserializeNonDuplicates()
+        {
+            try
+            {
+                IFormatter formatter = new BinaryFormatter();
+                string file = Path.Combine(Properties.GeneralSettings.Default.SavePath, "NonDuplicates.xml");
+                Stream stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read);
+                NonDuplicates = (List<NonDuplicate>)formatter.Deserialize(stream);
+                stream.Close();
+            }
+            catch (Exception)
+            {
+                NonDuplicates = new List<NonDuplicate>();
+                SerializeNonDuplicates();
+            }
         }
         #endregion
 
