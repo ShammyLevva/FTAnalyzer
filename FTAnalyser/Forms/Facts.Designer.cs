@@ -300,7 +300,7 @@
             this.Comment.MinimumWidth = 120;
             this.Comment.Name = "Comment";
             this.Comment.ReadOnly = true;
-            this.Comment.Width = 120;
+            this.Comment.Width = 250;
             // 
             // AgeAtFact
             // 

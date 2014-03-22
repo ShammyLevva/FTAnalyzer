@@ -32,7 +32,7 @@ namespace FTAnalyzer
 
         public const string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSED", LOOSEBIRTH = "*LOOSEB", FAMILYSEARCH = "*IGI",
-                CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT",
+                CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT", PARENT = "*PARENT",
                 CHANGE = "*CHNG", LOSTCOUSINS = "*LOST", DIED_SINGLE = "*SINGLE";
 
         public static readonly ISet<string> LOOSE_BIRTH_FACTS = new HashSet<string>(new string[] {
@@ -144,6 +144,7 @@ namespace FTAnalyzer
             COMMENT_FACTS.Add(ORDINATION);
             COMMENT_FACTS.Add(PHYSICAL_DESC);
             COMMENT_FACTS.Add(POSSESSIONS);
+            COMMENT_FACTS.Add(PARENT);
         }
 
         private string GetFactTypeDescription(string factType)
@@ -212,6 +213,7 @@ namespace FTAnalyzer
                 case LOSTCOUSINS: return "Lost Cousins";
                 case DIED_SINGLE: return "Died Single";
                 case UNKNOWN: return "UNKNOWN";
+                case PARENT: return "Parent";
                 default: return factType;
             }
         }
@@ -488,12 +490,12 @@ namespace FTAnalyzer
             }
         }
 
-        public Fact(string factType, FactDate date)
+        public Fact(string factType, FactDate date, string comment = "")
             : this()
         {
             this.FactType = factType;
             this.FactDate = date;
-            this.Comment = string.Empty;
+            this.Comment = comment;
             this.Place = string.Empty;
             this.Location = FactLocation.GetLocation(Place);
         }
@@ -516,7 +518,7 @@ namespace FTAnalyzer
 
         public string FactErrorMessage { get; private set; }
 
-        public string FactTypeDescription { get { return FactType == Fact.UNKNOWN ? Tag : GetFactTypeDescription(FactType); } }
+        public string FactTypeDescription { get { return GetFactTypeDescription(FactType); } }
 
         public bool IsCensusFact
         {

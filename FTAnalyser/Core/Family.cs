@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml;
 using System.Windows.Forms;
 using System.IO;
+using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer
 {
@@ -67,6 +68,8 @@ namespace FTAnalyzer
                             Children.Add(child);
                             ParentalRelationship parent = new ParentalRelationship(this, father, mother);
                             child.FamiliesAsChild.Add(parent);
+                            AddParent(child, Husband, father);
+                            AddParent(child, Wife, mother);
                         }
                         else
                             ft.XmlErrorBox.AppendText("Child not found in family :" + FamilyRef + "\n");
@@ -88,8 +91,18 @@ namespace FTAnalyzer
                 AddFacts(node, Fact.CENSUS);
                 AddFacts(node, Fact.CUSTOM_EVENT);
                 AddFacts(node, Fact.CUSTOM_FACT);
-
                 //TODO: need to think about family facts having AGE tags in GEDCOM
+            }
+        }
+
+        private void AddParent(Individual child, Individual parent, ParentalRelationship.ParentalRelationshipType prType)
+        {
+            if (parent != null)
+            {
+                string titlecase = EnhancedTextInfo.ToTitleCase(prType.ToString().ToLower());
+                string comment =  titlecase + " child of " + parent.IndividualID + ": " + parent.Name;
+                Fact f = new Fact(Fact.PARENT, child.BirthDate, comment);
+                child.AddFact(f);
             }
         }
 
@@ -111,7 +124,7 @@ namespace FTAnalyzer
             this.Children = new List<Individual>(f.Children);
             this.preferredFacts = new Dictionary<string, Fact>(f.preferredFacts);
         }
-        
+
         private void AddFacts(XmlNode node, string factType)
         {
             XmlNodeList list = node.SelectNodes(factType);
@@ -222,7 +235,7 @@ namespace FTAnalyzer
                     return SINGLE;
                 else
                 {
-                    foreach(Fact f in Facts)
+                    foreach (Fact f in Facts)
                     {
                         if (f.FactType == Fact.MARR_CONTRACT || f.FactType == Fact.MARR_LICENSE || f.FactType == Fact.MARR_SETTLEMENT
                             || f.FactType == Fact.MARRIAGE || f.FactType == Fact.MARRIAGE_BANN)
@@ -235,13 +248,17 @@ namespace FTAnalyzer
 
         public string HusbandID
         {
-            get { return (Husband == null) ? string.Empty : Husband.IndividualID;
+            get
+            {
+                return (Husband == null) ? string.Empty : Husband.IndividualID;
             }
         }
 
         public string WifeID
         {
-            get { return (Wife == null) ? string.Empty : Wife.IndividualID;
+            get
+            {
+                return (Wife == null) ? string.Empty : Wife.IndividualID;
             }
         }
 
@@ -379,7 +396,7 @@ namespace FTAnalyzer
         public void SetChildrenCommonRelation(Individual parent, CommonAncestor commonAncestor)
         {
             foreach (Individual child in Children)
-                if(child.CommonAncestor == null || child.CommonAncestor.distance > commonAncestor.distance + 1)
+                if (child.CommonAncestor == null || child.CommonAncestor.distance > commonAncestor.distance + 1)
                     child.CommonAncestor = new CommonAncestor(commonAncestor.ind, commonAncestor.distance + 1, !child.IsNaturalChildOf(parent) || commonAncestor.step);
         }
 
@@ -524,10 +541,10 @@ namespace FTAnalyzer
                         forenames = Husband.Forenames + " & " + Wife.Forenames;
                     }
                 }
-                foreach(Fact f in Facts)
+                foreach (Fact f in Facts)
                     results.Add(new DisplayFact(null, surname, forenames, f));
                 if (Husband != null)
-                    foreach(Fact f in Husband.PersonalFacts)
+                    foreach (Fact f in Husband.PersonalFacts)
                         results.Add(new DisplayFact(Husband, f));
                 if (Wife != null)
                     foreach (Fact f in Wife.PersonalFacts)
