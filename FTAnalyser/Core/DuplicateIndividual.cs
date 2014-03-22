@@ -40,7 +40,7 @@ namespace FTAnalyzer
             if (IndividualA.BirthLocation.IsKnownCountry && IndividualB.BirthLocation.IsKnownCountry &&
                 !IndividualA.BirthLocation.Country.Equals(IndividualB.BirthLocation.Country))
                 Score -= 250;
-            Score += SharedParents();
+            Score += SharedParents() + SharedChildren();
         }
 
         private void ScoreDates(FactDate dateA, FactDate dateB)
@@ -75,6 +75,21 @@ namespace FTAnalyzer
                         score += 50;
                     if (parentA.Mother == parentB.Mother)
                         score += 50;
+                }
+            }
+            return score;
+        }
+
+        private int SharedChildren()
+        {
+            int score = 0;
+            foreach (Family familyA in IndividualA.FamiliesAsParent)
+            {
+                foreach (Family familyB in IndividualB.FamiliesAsParent)
+                {
+                    foreach (Individual familyBchild in familyB.Children)
+                        if (familyA.Children.Contains(familyBchild))
+                            score += 50;
                 }
             }
             return score;
