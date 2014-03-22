@@ -188,11 +188,14 @@ namespace FTAnalyzer
 
         private void ResetFormLayout()
         {
-            parent.Top = defaultLocation.Item1;
-            parent.Left = defaultLocation.Item2;
-            parent.Height = defaultSize.Item1;
-            parent.Width = defaultSize.Item2;
-            SaveFormLayout();
+            if (saveForm)
+            {
+                parent.Top = defaultLocation.Item1;
+                parent.Left = defaultLocation.Item2;
+                parent.Height = defaultSize.Item1;
+                parent.Width = defaultSize.Item2;
+                SaveFormLayout();
+            }
         }
 
         protected virtual void Dispose(bool disposing)
