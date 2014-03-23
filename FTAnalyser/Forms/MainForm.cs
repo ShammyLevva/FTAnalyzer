@@ -164,7 +164,7 @@ namespace FTAnalyzer
                     if (ft.LoadTree(filename, pbSources, pbIndividuals, pbFamilies, pbRelationships))
                     {
                         ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
-                        Predicate<ExportFact> filter = relTypesFacts.BuildFilter<ExportFact>(x => x.RelationType);
+                        Predicate<ExportFact> filter = CreateFactsFilter(); 
                         ft.SetFactTypeList(ckbFactSelect, filter);
                         Application.UseWaitCursor = false;
                         ShowMenus(true);
@@ -589,6 +589,17 @@ namespace FTAnalyzer
         }
 
         #region Filters
+        private Predicate<ExportFact> CreateFactsFilter()
+        {
+            Predicate<ExportFact> filter = relTypesFacts.BuildFilter<ExportFact>(x => x.RelationType);
+            if (txtFactsSurname.Text.Length > 0)
+            {
+                Predicate<ExportFact> surnameFilter = FilterUtils.StringFilter<ExportFact>(x => x.Surname, txtSurname.Text);
+                filter = FilterUtils.AndFilter<ExportFact>(filter, surnameFilter);
+            }
+            return filter;                        
+        }
+
         private Predicate<CensusIndividual> CreateCensusIndividualFilter(bool censusDone)
         {
             Predicate<CensusIndividual> relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
@@ -1992,7 +2003,13 @@ namespace FTAnalyzer
 
         private void relTypesFacts_RelationTypesChanged(object sender, EventArgs e)
         {
-            Predicate<ExportFact> filter = relTypesFacts.BuildFilter<ExportFact>(x => x.RelationType);
+            Predicate<ExportFact> filter = CreateFactsFilter();
+            ft.SetFactTypeList(ckbFactSelect, filter);
+        }
+
+        private void txtFactsSurname_TextChanged(object sender, EventArgs e)
+        {
+            Predicate<ExportFact> filter = CreateFactsFilter();
             ft.SetFactTypeList(ckbFactSelect, filter);
         }
     }
