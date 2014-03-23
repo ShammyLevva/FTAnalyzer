@@ -27,6 +27,11 @@ namespace FTAnalyzer
         public string SubRegion { get; set; }
         public string Address { get; set; }
         public string Place { get; set; }
+        public string CountryMetaphone { get; private set; }
+        public string RegionMetaphone { get; private set; }
+        public string SubRegionMetaphone { get; private set; }
+        public string AddressMetaphone { get; private set; }
+        public string PlaceMetaphone { get; private set; }
         public string ParishID { get; internal set; }
         public int Level { get; private set; }
         public double Latitude { get; set; }
@@ -391,6 +396,7 @@ namespace FTAnalyzer
                 ShiftRegionToParish();
                 SetFixedLocation();
                 SetSortableLocation();
+                SetMetaphones();
                 //string after = (parish + ", " + region + ", " + country).ToUpper().Trim();
                 //if (!before.Equals(after))
                 //    Console.WriteLine("Debug : '" + before + "'  converted to '" + after + "'");
@@ -575,6 +581,20 @@ namespace FTAnalyzer
             if (!Place.Equals(string.Empty))
                 SortableLocation = SortableLocation + ", " + Place;
             SortableLocation = TrimLeadingCommas(SortableLocation);
+        }
+
+        private void SetMetaphones()
+        {
+            DoubleMetaphone meta = new DoubleMetaphone(Country);
+            CountryMetaphone = meta.PrimaryKey;
+            meta = new DoubleMetaphone(Region);
+            RegionMetaphone = meta.PrimaryKey;
+            meta = new DoubleMetaphone(SubRegion);
+            SubRegionMetaphone = meta.PrimaryKey;
+            meta = new DoubleMetaphone(Address);
+            AddressMetaphone = meta.PrimaryKey;
+            meta = new DoubleMetaphone(Place);
+            PlaceMetaphone = meta.PrimaryKey;
         }
 
         public static string ReplaceString(string str, string oldValue, string newValue, StringComparison comparison)
@@ -772,52 +792,6 @@ namespace FTAnalyzer
                 return result;
             }
         }
-
-        public string CountryMetaphone
-        {
-            get
-            {
-                DoubleMetaphone meta = new DoubleMetaphone(Country);
-                return meta.PrimaryKey;
-            }
-        }
-
-        public string RegionMetaphone
-        {
-            get
-            {
-                DoubleMetaphone meta = new DoubleMetaphone(Region);
-                return meta.PrimaryKey;
-            }
-        }
-
-        public string SubRegionMetaphone
-        {
-            get
-            {
-                DoubleMetaphone meta = new DoubleMetaphone(SubRegion);
-                return meta.PrimaryKey;
-            }
-        }
-
-        public string AddressMetaphone
-        {
-            get
-            {
-                DoubleMetaphone meta = new DoubleMetaphone(Address);
-                return meta.PrimaryKey;
-            }
-        }
-
-        public string PlaceMetaphone
-        {
-            get
-            {
-                DoubleMetaphone meta = new DoubleMetaphone(Place);
-                return meta.PrimaryKey;
-            }
-        }
-
         #endregion
 
         public bool SupportedLocation(int level)

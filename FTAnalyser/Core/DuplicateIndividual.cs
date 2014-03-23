@@ -33,6 +33,8 @@ namespace FTAnalyzer
 
         private void LocationScore()
         {
+            if (IndividualA.BirthLocation.IsBlank() || IndividualB.BirthLocation.IsBlank())
+                return;
             if (IndividualA.BirthLocation.Equals(IndividualB.BirthLocation))
                 Score += 75;
             if (IndividualA.BirthLocation.Country.Equals(IndividualB.BirthLocation.Country))

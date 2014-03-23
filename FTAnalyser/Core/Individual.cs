@@ -665,7 +665,7 @@ namespace FTAnalyzer
 
         public Age GetAge(FactDate when, string factType)
         {
-            return factType == Fact.BIRTH ? Age.BIRTH : new Age(this, when);
+            return (factType == Fact.BIRTH || factType == Fact.PARENT) ? Age.BIRTH : new Age(this, when);
         }
 
         public Age GetAge(DateTime when)
