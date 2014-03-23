@@ -809,6 +809,15 @@ namespace FTAnalyzer
             }
         }
 
+        public string PlaceMetaphone
+        {
+            get
+            {
+                DoubleMetaphone meta = new DoubleMetaphone(Place);
+                return meta.PrimaryKey;
+            }
+        }
+
         #endregion
 
         public bool SupportedLocation(int level)

@@ -34,24 +34,28 @@ namespace FTAnalyzer
         private void LocationScore()
         {
             if (IndividualA.BirthLocation.Equals(IndividualB.BirthLocation))
-                Score += 50;
+                Score += 75;
             if (IndividualA.BirthLocation.Country.Equals(IndividualB.BirthLocation.Country))
-                Score += 5;
-            if (IndividualA.BirthLocation.Region.Equals(IndividualB.BirthLocation.Region))
-                Score += 5;
-            if (IndividualA.BirthLocation.SubRegion.Equals(IndividualB.BirthLocation.SubRegion))
                 Score += 10;
-            if (IndividualA.BirthLocation.Address.Equals(IndividualB.BirthLocation.Address))
+            if (IndividualA.BirthLocation.Region.Equals(IndividualB.BirthLocation.Region))
+                Score += 10;
+            if (IndividualA.BirthLocation.SubRegion.Equals(IndividualB.BirthLocation.SubRegion))
                 Score += 20;
+            if (IndividualA.BirthLocation.Address.Equals(IndividualB.BirthLocation.Address))
+                Score += 40;
+            if (IndividualA.BirthLocation.Place.Equals(IndividualB.BirthLocation.Place))
+                Score += 40;
 
             if (IndividualA.BirthLocation.CountryMetaphone.Equals(IndividualB.BirthLocation.CountryMetaphone))
-                Score += 2;
-            if (IndividualA.BirthLocation.RegionMetaphone.Equals(IndividualB.BirthLocation.RegionMetaphone))
-                Score += 3;
-            if (IndividualA.BirthLocation.SubRegionMetaphone.Equals(IndividualB.BirthLocation.SubRegionMetaphone))
                 Score += 5;
-            if (IndividualA.BirthLocation.AddressMetaphone.Equals(IndividualB.BirthLocation.AddressMetaphone))
+            if (IndividualA.BirthLocation.RegionMetaphone.Equals(IndividualB.BirthLocation.RegionMetaphone))
+                Score += 5;
+            if (IndividualA.BirthLocation.SubRegionMetaphone.Equals(IndividualB.BirthLocation.SubRegionMetaphone))
                 Score += 10;
+            if (IndividualA.BirthLocation.AddressMetaphone.Equals(IndividualB.BirthLocation.AddressMetaphone))
+                Score += 20;
+            if (IndividualA.BirthLocation.PlaceMetaphone.Equals(IndividualB.BirthLocation.PlaceMetaphone))
+                Score += 20;
 
             if (IndividualA.BirthLocation.IsKnownCountry && IndividualB.BirthLocation.IsKnownCountry &&
                 !IndividualA.BirthLocation.Country.Equals(IndividualB.BirthLocation.Country))
