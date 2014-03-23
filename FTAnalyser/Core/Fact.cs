@@ -518,7 +518,7 @@ namespace FTAnalyzer
 
         public string FactErrorMessage { get; private set; }
 
-        public string FactTypeDescription { get { return GetFactTypeDescription(FactType); } }
+        public string FactTypeDescription { get { return (FactType == Fact.UNKNOWN && Tag.Length > 0) ? Tag : GetFactTypeDescription(FactType); } }
 
         public bool IsCensusFact
         {
