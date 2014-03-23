@@ -773,6 +773,42 @@ namespace FTAnalyzer
             }
         }
 
+        public string CountryMetaphone
+        {
+            get
+            {
+                DoubleMetaphone meta = new DoubleMetaphone(Country);
+                return meta.PrimaryKey;
+            }
+        }
+
+        public string RegionMetaphone
+        {
+            get
+            {
+                DoubleMetaphone meta = new DoubleMetaphone(Region);
+                return meta.PrimaryKey;
+            }
+        }
+
+        public string SubRegionMetaphone
+        {
+            get
+            {
+                DoubleMetaphone meta = new DoubleMetaphone(SubRegion);
+                return meta.PrimaryKey;
+            }
+        }
+
+        public string AddressMetaphone
+        {
+            get
+            {
+                DoubleMetaphone meta = new DoubleMetaphone(Address);
+                return meta.PrimaryKey;
+            }
+        }
+
         #endregion
 
         public bool SupportedLocation(int level)

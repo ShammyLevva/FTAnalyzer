@@ -27,6 +27,12 @@ namespace FTAnalyzer
                 Score+=20;
             ScoreDates(IndividualA.BirthDate, IndividualB.BirthDate);
             ScoreDates(IndividualA.DeathDate, IndividualB.DeathDate);
+            LocationScore();
+            Score += SharedParents() + SharedChildren();
+        }
+
+        private void LocationScore()
+        {
             if (IndividualA.BirthLocation.Equals(IndividualB.BirthLocation))
                 Score += 50;
             if (IndividualA.BirthLocation.Country.Equals(IndividualB.BirthLocation.Country))
@@ -37,10 +43,19 @@ namespace FTAnalyzer
                 Score += 10;
             if (IndividualA.BirthLocation.Address.Equals(IndividualB.BirthLocation.Address))
                 Score += 20;
+
+            if (IndividualA.BirthLocation.CountryMetaphone.Equals(IndividualB.BirthLocation.CountryMetaphone))
+                Score += 2;
+            if (IndividualA.BirthLocation.RegionMetaphone.Equals(IndividualB.BirthLocation.RegionMetaphone))
+                Score += 3;
+            if (IndividualA.BirthLocation.SubRegionMetaphone.Equals(IndividualB.BirthLocation.SubRegionMetaphone))
+                Score += 5;
+            if (IndividualA.BirthLocation.AddressMetaphone.Equals(IndividualB.BirthLocation.AddressMetaphone))
+                Score += 10;
+
             if (IndividualA.BirthLocation.IsKnownCountry && IndividualB.BirthLocation.IsKnownCountry &&
                 !IndividualA.BirthLocation.Country.Equals(IndividualB.BirthLocation.Country))
                 Score -= 250;
-            Score += SharedParents() + SharedChildren();
         }
 
         private void ScoreDates(FactDate dateA, FactDate dateB)
