@@ -213,7 +213,7 @@ namespace FTAnalyzer
                 case LOSTCOUSINS: return "Lost Cousins";
                 case DIED_SINGLE: return "Died Single";
                 case UNKNOWN: return "UNKNOWN";
-                case PARENT: return "Parent";
+                case PARENT: return "Parental Info";
                 default: return factType;
             }
         }

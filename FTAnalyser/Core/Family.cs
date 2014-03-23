@@ -99,8 +99,14 @@ namespace FTAnalyzer
         {
             if (parent != null)
             {
-                string titlecase = EnhancedTextInfo.ToTitleCase(prType.ToString().ToLower());
-                string comment =  titlecase + " child of " + parent.IndividualID + ": " + parent.Name;
+                string comment;
+                if (prType == ParentalRelationship.ParentalRelationshipType.UNKNOWN)
+                    comment = "Child of " + parent.IndividualID + ": " + parent.Name;
+                else
+                {
+                    string titlecase = EnhancedTextInfo.ToTitleCase(prType.ToString().ToLower());
+                    comment = titlecase + " child of " + parent.IndividualID + ": " + parent.Name;
+                }
                 Fact f = new Fact(Fact.PARENT, child.BirthDate, comment);
                 child.AddFact(f);
             }
