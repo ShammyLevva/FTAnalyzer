@@ -197,27 +197,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtFactsSurname = new System.Windows.Forms.TextBox();
             this.tabDuplicates = new System.Windows.Forms.TabPage();
-            this.dgDuplicates = new System.Windows.Forms.DataGridView();
-            this.btnCancelDuplicates = new System.Windows.Forms.Button();
-            this.label16 = new System.Windows.Forms.Label();
-            this.labDuplicateSlider = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.labCalcDuplicates = new System.Windows.Forms.Label();
-            this.pbDuplicates = new System.Windows.Forms.ProgressBar();
-            this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
-            this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
             this.ckbHideIgnoredDuplicates = new System.Windows.Forms.CheckBox();
-            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
-            this.relTypesFacts = new Controls.RelationTypes();
-            this.cenDate = new Controls.CensusDateSelector();
-            this.relTypesCensus = new Controls.RelationTypes();
-            this.relTypesLC = new Controls.RelationTypes();
-            this.relTypesColoured = new Controls.RelationTypes();
-            this.treetopsRelation = new Controls.RelationTypes();
-            this.treetopsCountry = new Controls.CensusCountry();
-            this.wardeadRelation = new Controls.RelationTypes();
-            this.wardeadCountry = new Controls.CensusCountry();
+            this.dgDuplicates = new System.Windows.Forms.DataGridView();
             this.NonDuplicate = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Score = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DuplicateIndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -230,6 +211,25 @@
             this.MatchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MatchBirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MatchBirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnCancelDuplicates = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.labDuplicateSlider = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.labCalcDuplicates = new System.Windows.Forms.Label();
+            this.pbDuplicates = new System.Windows.Forms.ProgressBar();
+            this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
+            this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
+            this.relTypesFacts = new Controls.RelationTypes();
+            this.cenDate = new Controls.CensusDateSelector();
+            this.relTypesCensus = new Controls.RelationTypes();
+            this.relTypesLC = new Controls.RelationTypes();
+            this.relTypesColoured = new Controls.RelationTypes();
+            this.treetopsRelation = new Controls.RelationTypes();
+            this.treetopsCountry = new Controls.CensusCountry();
+            this.wardeadRelation = new Controls.RelationTypes();
+            this.wardeadCountry = new Controls.CensusCountry();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -1999,6 +1999,19 @@
             this.tabDuplicates.Text = "Duplicates?";
             this.tabDuplicates.UseVisualStyleBackColor = true;
             // 
+            // ckbHideIgnoredDuplicates
+            // 
+            this.ckbHideIgnoredDuplicates.AutoSize = true;
+            this.ckbHideIgnoredDuplicates.Checked = true;
+            this.ckbHideIgnoredDuplicates.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbHideIgnoredDuplicates.Location = new System.Drawing.Point(8, 44);
+            this.ckbHideIgnoredDuplicates.Name = "ckbHideIgnoredDuplicates";
+            this.ckbHideIgnoredDuplicates.Size = new System.Drawing.Size(228, 17);
+            this.ckbHideIgnoredDuplicates.TabIndex = 19;
+            this.ckbHideIgnoredDuplicates.Text = "Hide Possible Duplicates marked as Ignore";
+            this.ckbHideIgnoredDuplicates.UseVisualStyleBackColor = true;
+            this.ckbHideIgnoredDuplicates.CheckedChanged += new System.EventHandler(this.ckbHideIgnoredDuplicates_CheckedChanged);
+            // 
             // dgDuplicates
             // 
             this.dgDuplicates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2026,190 +2039,6 @@
             this.dgDuplicates.TabIndex = 18;
             this.dgDuplicates.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDuplicates_CellContentClick);
             this.dgDuplicates.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDuplicates_CellDoubleClick);
-            // 
-            // btnCancelDuplicates
-            // 
-            this.btnCancelDuplicates.Image = global::FTAnalyzer.Properties.Resources.CriticalError;
-            this.btnCancelDuplicates.Location = new System.Drawing.Point(411, 6);
-            this.btnCancelDuplicates.Name = "btnCancelDuplicates";
-            this.btnCancelDuplicates.Size = new System.Drawing.Size(26, 26);
-            this.btnCancelDuplicates.TabIndex = 17;
-            this.btnCancelDuplicates.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancelDuplicates.UseVisualStyleBackColor = true;
-            this.btnCancelDuplicates.Visible = false;
-            this.btnCancelDuplicates.Click += new System.EventHandler(this.btnCancelDuplicates_Click);
-            // 
-            // label16
-            // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(427, 51);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(152, 13);
-            this.label16.TabIndex = 16;
-            this.label16.Text = "Candidate Duplicates List";
-            // 
-            // labDuplicateSlider
-            // 
-            this.labDuplicateSlider.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.labDuplicateSlider.AutoSize = true;
-            this.labDuplicateSlider.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labDuplicateSlider.Location = new System.Drawing.Point(671, 27);
-            this.labDuplicateSlider.Name = "labDuplicateSlider";
-            this.labDuplicateSlider.Size = new System.Drawing.Size(168, 13);
-            this.labDuplicateSlider.TabIndex = 14;
-            this.labDuplicateSlider.Text = "Duplicates Match Quality : 1";
-            // 
-            // label13
-            // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(940, 27);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(92, 13);
-            this.label13.TabIndex = 13;
-            this.label13.Text = "Aggressive Match";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(440, 27);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(69, 13);
-            this.label12.TabIndex = 12;
-            this.label12.Text = "Loose Match";
-            // 
-            // labCalcDuplicates
-            // 
-            this.labCalcDuplicates.AutoSize = true;
-            this.labCalcDuplicates.Location = new System.Drawing.Point(3, 13);
-            this.labCalcDuplicates.Name = "labCalcDuplicates";
-            this.labCalcDuplicates.Size = new System.Drawing.Size(112, 13);
-            this.labCalcDuplicates.TabIndex = 10;
-            this.labCalcDuplicates.Text = "Calculating Duplicates";
-            // 
-            // pbDuplicates
-            // 
-            this.pbDuplicates.Location = new System.Drawing.Point(121, 9);
-            this.pbDuplicates.Name = "pbDuplicates";
-            this.pbDuplicates.Size = new System.Drawing.Size(283, 23);
-            this.pbDuplicates.TabIndex = 9;
-            // 
-            // saveDatabase
-            // 
-            this.saveDatabase.DefaultExt = "zip";
-            this.saveDatabase.Filter = "Zip Files | *.zip";
-            // 
-            // restoreDatabase
-            // 
-            this.restoreDatabase.FileName = "*.zip";
-            this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
-            // 
-            // ckbHideIgnoredDuplicates
-            // 
-            this.ckbHideIgnoredDuplicates.AutoSize = true;
-            this.ckbHideIgnoredDuplicates.Checked = true;
-            this.ckbHideIgnoredDuplicates.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbHideIgnoredDuplicates.Location = new System.Drawing.Point(8, 44);
-            this.ckbHideIgnoredDuplicates.Name = "ckbHideIgnoredDuplicates";
-            this.ckbHideIgnoredDuplicates.Size = new System.Drawing.Size(228, 17);
-            this.ckbHideIgnoredDuplicates.TabIndex = 19;
-            this.ckbHideIgnoredDuplicates.Text = "Hide Possible Duplicates marked as Ignore";
-            this.ckbHideIgnoredDuplicates.UseVisualStyleBackColor = true;
-            this.ckbHideIgnoredDuplicates.CheckedChanged += new System.EventHandler(this.ckbHideIgnoredDuplicates_CheckedChanged);
-            // 
-            // rtbOutput
-            // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbOutput.Location = new System.Drawing.Point(3, 112);
-            this.rtbOutput.Name = "rtbOutput";
-            this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(1029, 327);
-            this.rtbOutput.TabIndex = 6;
-            this.rtbOutput.Text = "";
-            this.rtbOutput.TextChanged += new System.EventHandler(this.rtbOutput_TextChanged);
-            // 
-            // relTypesFacts
-            // 
-            this.relTypesFacts.Location = new System.Drawing.Point(8, 8);
-            this.relTypesFacts.MarriedToDB = true;
-            this.relTypesFacts.Name = "relTypesFacts";
-            this.relTypesFacts.Size = new System.Drawing.Size(325, 78);
-            this.relTypesFacts.TabIndex = 21;
-            // 
-            // cenDate
-            // 
-            this.cenDate.AutoSize = true;
-            this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cenDate.Country = "";
-            this.cenDate.Location = new System.Drawing.Point(14, 92);
-            this.cenDate.Name = "cenDate";
-            this.cenDate.Size = new System.Drawing.Size(186, 27);
-            this.cenDate.TabIndex = 17;
-            // 
-            // relTypesCensus
-            // 
-            this.relTypesCensus.Location = new System.Drawing.Point(8, 8);
-            this.relTypesCensus.MarriedToDB = true;
-            this.relTypesCensus.Name = "relTypesCensus";
-            this.relTypesCensus.Size = new System.Drawing.Size(325, 78);
-            this.relTypesCensus.TabIndex = 15;
-            // 
-            // relTypesLC
-            // 
-            this.relTypesLC.Location = new System.Drawing.Point(8, 8);
-            this.relTypesLC.MarriedToDB = true;
-            this.relTypesLC.Name = "relTypesLC";
-            this.relTypesLC.Size = new System.Drawing.Size(325, 78);
-            this.relTypesLC.TabIndex = 19;
-            this.relTypesLC.RelationTypesChanged += new System.EventHandler(this.relTypesLC_RelationTypesChanged);
-            // 
-            // relTypesColoured
-            // 
-            this.relTypesColoured.Location = new System.Drawing.Point(8, 8);
-            this.relTypesColoured.MarriedToDB = true;
-            this.relTypesColoured.Name = "relTypesColoured";
-            this.relTypesColoured.Size = new System.Drawing.Size(325, 78);
-            this.relTypesColoured.TabIndex = 26;
-            // 
-            // treetopsRelation
-            // 
-            this.treetopsRelation.Location = new System.Drawing.Point(270, 12);
-            this.treetopsRelation.MarriedToDB = true;
-            this.treetopsRelation.Name = "treetopsRelation";
-            this.treetopsRelation.Size = new System.Drawing.Size(322, 74);
-            this.treetopsRelation.TabIndex = 12;
-            // 
-            // treetopsCountry
-            // 
-            this.treetopsCountry.Location = new System.Drawing.Point(8, 12);
-            this.treetopsCountry.Name = "treetopsCountry";
-            this.treetopsCountry.Size = new System.Drawing.Size(256, 74);
-            this.treetopsCountry.TabIndex = 11;
-            this.treetopsCountry.Title = "Default Country";
-            this.treetopsCountry.UKEnabled = true;
-            // 
-            // wardeadRelation
-            // 
-            this.wardeadRelation.Location = new System.Drawing.Point(270, 12);
-            this.wardeadRelation.MarriedToDB = true;
-            this.wardeadRelation.Name = "wardeadRelation";
-            this.wardeadRelation.Size = new System.Drawing.Size(322, 74);
-            this.wardeadRelation.TabIndex = 26;
-            // 
-            // wardeadCountry
-            // 
-            this.wardeadCountry.Location = new System.Drawing.Point(8, 12);
-            this.wardeadCountry.Name = "wardeadCountry";
-            this.wardeadCountry.Size = new System.Drawing.Size(256, 74);
-            this.wardeadCountry.TabIndex = 25;
-            this.wardeadCountry.Title = "Default Country";
-            this.wardeadCountry.UKEnabled = true;
             // 
             // NonDuplicate
             // 
@@ -2302,6 +2131,178 @@
             this.MatchBirthLocation.MinimumWidth = 100;
             this.MatchBirthLocation.Name = "MatchBirthLocation";
             this.MatchBirthLocation.Width = 175;
+            // 
+            // btnCancelDuplicates
+            // 
+            this.btnCancelDuplicates.Image = global::FTAnalyzer.Properties.Resources.CriticalError;
+            this.btnCancelDuplicates.Location = new System.Drawing.Point(411, 6);
+            this.btnCancelDuplicates.Name = "btnCancelDuplicates";
+            this.btnCancelDuplicates.Size = new System.Drawing.Size(26, 26);
+            this.btnCancelDuplicates.TabIndex = 17;
+            this.btnCancelDuplicates.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancelDuplicates.UseVisualStyleBackColor = true;
+            this.btnCancelDuplicates.Visible = false;
+            this.btnCancelDuplicates.Click += new System.EventHandler(this.btnCancelDuplicates_Click);
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(427, 51);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(152, 13);
+            this.label16.TabIndex = 16;
+            this.label16.Text = "Candidate Duplicates List";
+            // 
+            // labDuplicateSlider
+            // 
+            this.labDuplicateSlider.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labDuplicateSlider.AutoSize = true;
+            this.labDuplicateSlider.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labDuplicateSlider.Location = new System.Drawing.Point(671, 27);
+            this.labDuplicateSlider.Name = "labDuplicateSlider";
+            this.labDuplicateSlider.Size = new System.Drawing.Size(168, 13);
+            this.labDuplicateSlider.TabIndex = 14;
+            this.labDuplicateSlider.Text = "Duplicates Match Quality : 1";
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(940, 27);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(92, 13);
+            this.label13.TabIndex = 13;
+            this.label13.Text = "Aggressive Match";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(440, 27);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(69, 13);
+            this.label12.TabIndex = 12;
+            this.label12.Text = "Loose Match";
+            // 
+            // labCalcDuplicates
+            // 
+            this.labCalcDuplicates.AutoSize = true;
+            this.labCalcDuplicates.Location = new System.Drawing.Point(3, 13);
+            this.labCalcDuplicates.Name = "labCalcDuplicates";
+            this.labCalcDuplicates.Size = new System.Drawing.Size(112, 13);
+            this.labCalcDuplicates.TabIndex = 10;
+            this.labCalcDuplicates.Text = "Calculating Duplicates";
+            // 
+            // pbDuplicates
+            // 
+            this.pbDuplicates.Location = new System.Drawing.Point(121, 9);
+            this.pbDuplicates.Name = "pbDuplicates";
+            this.pbDuplicates.Size = new System.Drawing.Size(283, 23);
+            this.pbDuplicates.TabIndex = 9;
+            // 
+            // saveDatabase
+            // 
+            this.saveDatabase.DefaultExt = "zip";
+            this.saveDatabase.Filter = "Zip Files | *.zip";
+            // 
+            // restoreDatabase
+            // 
+            this.restoreDatabase.FileName = "*.zip";
+            this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
+            // 
+            // rtbOutput
+            // 
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbOutput.Location = new System.Drawing.Point(3, 112);
+            this.rtbOutput.Name = "rtbOutput";
+            this.rtbOutput.ReadOnly = true;
+            this.rtbOutput.Size = new System.Drawing.Size(1029, 327);
+            this.rtbOutput.TabIndex = 6;
+            this.rtbOutput.Text = "";
+            this.rtbOutput.TextChanged += new System.EventHandler(this.rtbOutput_TextChanged);
+            // 
+            // relTypesFacts
+            // 
+            this.relTypesFacts.Location = new System.Drawing.Point(8, 8);
+            this.relTypesFacts.MarriedToDB = true;
+            this.relTypesFacts.Name = "relTypesFacts";
+            this.relTypesFacts.Size = new System.Drawing.Size(325, 78);
+            this.relTypesFacts.TabIndex = 21;
+            this.relTypesFacts.RelationTypesChanged += new System.EventHandler(this.relTypesFacts_RelationTypesChanged);
+            // 
+            // cenDate
+            // 
+            this.cenDate.AutoSize = true;
+            this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cenDate.Country = "";
+            this.cenDate.Location = new System.Drawing.Point(14, 92);
+            this.cenDate.Name = "cenDate";
+            this.cenDate.Size = new System.Drawing.Size(186, 27);
+            this.cenDate.TabIndex = 17;
+            // 
+            // relTypesCensus
+            // 
+            this.relTypesCensus.Location = new System.Drawing.Point(8, 8);
+            this.relTypesCensus.MarriedToDB = true;
+            this.relTypesCensus.Name = "relTypesCensus";
+            this.relTypesCensus.Size = new System.Drawing.Size(325, 78);
+            this.relTypesCensus.TabIndex = 15;
+            // 
+            // relTypesLC
+            // 
+            this.relTypesLC.Location = new System.Drawing.Point(8, 8);
+            this.relTypesLC.MarriedToDB = true;
+            this.relTypesLC.Name = "relTypesLC";
+            this.relTypesLC.Size = new System.Drawing.Size(325, 78);
+            this.relTypesLC.TabIndex = 19;
+            this.relTypesLC.RelationTypesChanged += new System.EventHandler(this.relTypesLC_RelationTypesChanged);
+            // 
+            // relTypesColoured
+            // 
+            this.relTypesColoured.Location = new System.Drawing.Point(8, 8);
+            this.relTypesColoured.MarriedToDB = true;
+            this.relTypesColoured.Name = "relTypesColoured";
+            this.relTypesColoured.Size = new System.Drawing.Size(325, 78);
+            this.relTypesColoured.TabIndex = 26;
+            // 
+            // treetopsRelation
+            // 
+            this.treetopsRelation.Location = new System.Drawing.Point(270, 12);
+            this.treetopsRelation.MarriedToDB = true;
+            this.treetopsRelation.Name = "treetopsRelation";
+            this.treetopsRelation.Size = new System.Drawing.Size(322, 74);
+            this.treetopsRelation.TabIndex = 12;
+            // 
+            // treetopsCountry
+            // 
+            this.treetopsCountry.Location = new System.Drawing.Point(8, 12);
+            this.treetopsCountry.Name = "treetopsCountry";
+            this.treetopsCountry.Size = new System.Drawing.Size(256, 74);
+            this.treetopsCountry.TabIndex = 11;
+            this.treetopsCountry.Title = "Default Country";
+            this.treetopsCountry.UKEnabled = true;
+            // 
+            // wardeadRelation
+            // 
+            this.wardeadRelation.Location = new System.Drawing.Point(270, 12);
+            this.wardeadRelation.MarriedToDB = true;
+            this.wardeadRelation.Name = "wardeadRelation";
+            this.wardeadRelation.Size = new System.Drawing.Size(322, 74);
+            this.wardeadRelation.TabIndex = 26;
+            // 
+            // wardeadCountry
+            // 
+            this.wardeadCountry.Location = new System.Drawing.Point(8, 12);
+            this.wardeadCountry.Name = "wardeadCountry";
+            this.wardeadCountry.Size = new System.Drawing.Size(256, 74);
+            this.wardeadCountry.TabIndex = 25;
+            this.wardeadCountry.Title = "Default Country";
+            this.wardeadCountry.UKEnabled = true;
             // 
             // MainForm
             // 

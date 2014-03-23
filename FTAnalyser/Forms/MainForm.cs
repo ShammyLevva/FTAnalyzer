@@ -164,7 +164,8 @@ namespace FTAnalyzer
                     if (ft.LoadTree(filename, pbSources, pbIndividuals, pbFamilies, pbRelationships))
                     {
                         ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
-                        ft.SetFactTypeList(ckbFactSelect);
+                        Predicate<ExportFact> filter = relTypesFacts.BuildFilter<ExportFact>(x => x.RelationType);
+                        ft.SetFactTypeList(ckbFactSelect, filter);
                         Application.UseWaitCursor = false;
                         ShowMenus(true);
                         HourGlass(false);
@@ -1987,6 +1988,12 @@ namespace FTAnalyzer
             Properties.Settings.Default.HideIgnoredDuplicates = ckbHideIgnoredDuplicates.Checked;
             Properties.Settings.Default.Save();
             SetPossibleDuplicates();
+        }
+
+        private void relTypesFacts_RelationTypesChanged(object sender, EventArgs e)
+        {
+            Predicate<ExportFact> filter = relTypesFacts.BuildFilter<ExportFact>(x => x.RelationType);
+            ft.SetFactTypeList(ckbFactSelect, filter);
         }
     }
 }

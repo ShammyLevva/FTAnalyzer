@@ -70,5 +70,10 @@ namespace FTAnalyzer
         {
             get { return f.FactDate.EndDate; }
         }
+
+        public int RelationType
+        {
+            get { return ind.RelationType; }
+        }
     }
 }
