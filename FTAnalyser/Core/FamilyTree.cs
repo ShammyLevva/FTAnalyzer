@@ -2201,7 +2201,6 @@ namespace FTAnalyzer
         #region Duplicates Processing
         public SortableBindingList<IDisplayDuplicateIndividual> GenerateDuplicatesList(ProgressBar pb, TrackBar tb)
         {
-            DeserializeNonDuplicates();
             if (duplicates != null && !_cancelDuplicates)
                 return BuildDuplicateList(tb.Value); // we have already processed the duplicates since the file was loaded
             tb.Enabled = false;
@@ -2222,6 +2221,7 @@ namespace FTAnalyzer
             tb.Enabled = true;
             tb.Minimum = 1;
             tb.Maximum = MaxDuplicateScore();
+            DeserializeNonDuplicates();
             return BuildDuplicateList(tb.Value);
         }
 

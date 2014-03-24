@@ -257,9 +257,10 @@ namespace FTAnalyzer
         private void HourGlass(bool on)
         {
             if (on)
-                this.Cursor = Cursors.WaitCursor;
+                Cursor.Current = Cursors.WaitCursor;
             else
-                this.Cursor = Cursors.Default;
+                Cursor.Current = Cursors.Default;
+            Application.DoEvents();
         }
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
@@ -422,7 +423,6 @@ namespace FTAnalyzer
         {
             SetDuplicateControlsVisibility(true);
             rfhDuplicates.SaveColumnLayout("DuplicatesColumns.xml");
-            Application.DoEvents();
             SortableBindingList<IDisplayDuplicateIndividual> data = ft.GenerateDuplicatesList(pbDuplicates, tbDuplicateScore);
             if (data != null)
             {
@@ -430,6 +430,7 @@ namespace FTAnalyzer
                 rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
                 labDuplicateSlider.Text = "Duplicates Match Quality : " + tbDuplicateScore.Value;
                 tsCountLabel.Text = "Possible Duplicate Count : " + dgDuplicates.RowCount.ToString() + ".  " + Properties.Messages.Hints_Duplicates;
+                dgDuplicates.UseWaitCursor = false;
             }
             SetDuplicateControlsVisibility(false);
             HourGlass(false);
