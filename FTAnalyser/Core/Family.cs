@@ -68,8 +68,8 @@ namespace FTAnalyzer
                             Children.Add(child);
                             ParentalRelationship parent = new ParentalRelationship(this, father, mother);
                             child.FamiliesAsChild.Add(parent);
-                            AddParent(child, Husband, father);
-                            AddParent(child, Wife, mother);
+                            AddParentAndChildrenFacts(child, Husband, father);
+                            AddParentAndChildrenFacts(child, Wife, mother);
                         }
                         else
                             ft.XmlErrorBox.AppendText("Child not found in family :" + FamilyRef + "\n");
@@ -95,20 +95,27 @@ namespace FTAnalyzer
             }
         }
 
-        private void AddParent(Individual child, Individual parent, ParentalRelationship.ParentalRelationshipType prType)
+        private void AddParentAndChildrenFacts(Individual child, Individual parent, ParentalRelationship.ParentalRelationshipType prType)
         {
             if (parent != null)
             {
-                string comment;
+                string parentComment;
+                string childrenComment;
                 if (prType == ParentalRelationship.ParentalRelationshipType.UNKNOWN)
-                    comment = "Child of " + parent.IndividualID + ": " + parent.Name;
+                {
+                    parentComment = "Child of " + parent.IndividualID + ": " + parent.Name;
+                    childrenComment = "Parent of " + child.IndividualID + ": " + child.Name;
+                }
                 else
                 {
                     string titlecase = EnhancedTextInfo.ToTitleCase(prType.ToString().ToLower());
-                    comment = titlecase + " child of " + parent.IndividualID + ": " + parent.Name;
+                    parentComment = titlecase + " child of " + parent.IndividualID + ": " + parent.Name;
+                    childrenComment = titlecase + " parent of " + child.IndividualID + ": " + child.Name;
                 }
-                Fact f = new Fact(Fact.PARENT, child.BirthDate, comment);
-                child.AddFact(f);
+                Fact parentFact = new Fact(Fact.PARENT, child.BirthDate, parentComment);
+                Fact childrenFact = new Fact(Fact.CHILDREN, child.BirthDate, childrenComment);
+                child.AddFact(parentFact);
+                parent.AddFact(childrenFact);
             }
         }
 
