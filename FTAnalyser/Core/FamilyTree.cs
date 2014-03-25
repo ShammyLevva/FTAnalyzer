@@ -2284,8 +2284,6 @@ namespace FTAnalyzer
                 log.Error("BuildDuplicateList called with null duplicates");
             if (NonDuplicates == null)
                 log.Error("BuildDuplicateList called with null NonDuplicates");
-            if (Properties.Settings.Default.HideIgnoredDuplicates == null)
-                log.Error("BuildDuplicateList called with null Properties.Settings.Default.HideIgnoredDuplicates");
             foreach (DuplicateIndividual dup in duplicates)
             {
                 if (dup.Score >= minScore)
