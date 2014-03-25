@@ -21,6 +21,7 @@ namespace FTAnalyzer
     class FamilyTree : IDisposable
     {
         private static FamilyTree instance;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private IList<FactSource> sources;
         private IList<Individual> individuals;
@@ -2201,6 +2202,7 @@ namespace FTAnalyzer
         #region Duplicates Processing
         public SortableBindingList<IDisplayDuplicateIndividual> GenerateDuplicatesList(ProgressBar pb, TrackBar tb)
         {
+            log.Debug("FamilyTree.GenerateDuplicatesList");
             if (duplicates != null && !_cancelDuplicates)
                 return BuildDuplicateList(tb.Value); // we have already processed the duplicates since the file was loaded
             tb.Enabled = false;
@@ -2243,6 +2245,7 @@ namespace FTAnalyzer
 
         private void IndentifyDuplicates(ProgressBar pb, IEnumerable<Individual> enumerable)
         {
+            log.Debug("FamilyTree.IndentifyDuplicates");
             List<Individual> list = enumerable.ToList<Individual>();
             for (int i = 0; i < list.Count; i++)
             {
@@ -2275,7 +2278,14 @@ namespace FTAnalyzer
 
         public SortableBindingList<IDisplayDuplicateIndividual> BuildDuplicateList(int minScore)
         {
+            log.Debug("FamilyTree.BuildDuplicateList");
             SortableBindingList<IDisplayDuplicateIndividual> select = new SortableBindingList<IDisplayDuplicateIndividual>();
+            if (duplicates == null)
+                log.Error("BuildDuplicateList called with null duplicates");
+            if (NonDuplicates == null)
+                log.Error("BuildDuplicateList called with null NonDuplicates");
+            if (Properties.Settings.Default.HideIgnoredDuplicates == null)
+                log.Error("BuildDuplicateList called with null Properties.Settings.Default.HideIgnoredDuplicates");
             foreach (DuplicateIndividual dup in duplicates)
             {
                 if (dup.Score >= minScore)
@@ -2292,6 +2302,7 @@ namespace FTAnalyzer
 
         public void SerializeNonDuplicates()
         {
+            log.Debug("FamilyTree.SerializeNonDuplicates");
             try
             {
                 IFormatter formatter = new BinaryFormatter();
@@ -2301,12 +2312,15 @@ namespace FTAnalyzer
                     formatter.Serialize(stream, NonDuplicates);
                 }
             }
-            catch (Exception)
-            { }
+            catch (Exception e)
+            {
+                log.Error("Error " + e.Message + " writing NonDuplicates.xml");
+            }
         }
 
         public void DeserializeNonDuplicates()
         {
+            log.Debug("FamilyTree.DeserializeNonDuplicates");
             try
             {
                 IFormatter formatter = new BinaryFormatter();
@@ -2321,8 +2335,9 @@ namespace FTAnalyzer
                 else
                     NonDuplicates = new List<NonDuplicate>();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                log.Error("Error " + e.Message + " reading NonDuplicates.xml");
                 NonDuplicates = new List<NonDuplicate>();
             }
         }

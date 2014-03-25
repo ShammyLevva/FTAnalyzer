@@ -1561,6 +1561,7 @@ namespace FTAnalyzer
 
         private void ShowFacts(string indID, bool offset = false)
         {
+            log.Debug("MainForm.ShowFacts: About to show facts for id:" + indID);
             Individual ind = ft.GetIndividual(indID);
             Facts factForm = new Facts(ind);
             DisposeDuplicateForms(factForm);
