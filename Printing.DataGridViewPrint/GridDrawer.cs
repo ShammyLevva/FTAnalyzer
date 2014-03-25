@@ -23,7 +23,7 @@ namespace Printing.DataGridViewPrint
     {
         #region Fields
 
-        static readonly Exception NotSynException = new Exception("Drawer is not synchronised with datagridview");
+        //static readonly Exception NotSynException = new Exception("Drawer is not synchronised with datagridview");
 
         private DataGridView _GridView;
 
@@ -345,7 +345,7 @@ namespace Printing.DataGridViewPrint
         /// <returns></returns>
         public IEnumerable<Partition> PartitionsByLevel(int indexLevel)
         {
-            if (!IsInitialized) throw NotSynException;
+            if (!IsInitialized) throw new Exception("Drawer is not synchronised with datagridview");
 
             int firstRow = firstRows[indexLevel - 1];
             int lastRow = (indexLevel >= firstRows.Length) ?
@@ -382,7 +382,7 @@ namespace Printing.DataGridViewPrint
         /// <returns></returns>
         public IEnumerable<Partition> PartitionsByColumn(int partitionLevel)
         {
-            if (!IsInitialized) throw NotSynException;
+            if (!IsInitialized) throw new Exception("Drawer is not synchronised with datagridview");
 
             int firstColumn = firstColumns[partitionLevel-1];
             int lastColumn = (partitionLevel == firstColumns.Length) ?
