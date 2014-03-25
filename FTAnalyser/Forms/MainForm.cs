@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.4.0.0";
+        public string VERSION = "3.4.1.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -1823,6 +1823,8 @@ namespace FTAnalyzer
 
         private void dgDuplicates_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (pbDuplicates.Visible)
+                return; // do nothing if progress bar still visible
             string indA_ID = (string)dgDuplicates.CurrentRow.Cells["DuplicateIndividualID"].Value;
             string indB_ID = (string)dgDuplicates.CurrentRow.Cells["MatchIndividualID"].Value;
             if (Properties.GeneralSettings.Default.MultipleFactForms)
@@ -1940,7 +1942,9 @@ namespace FTAnalyzer
 
         private void tbDuplicateScore_Scroll(object sender, EventArgs e)
         {
-            SetPossibleDuplicates();
+            // do nothing if progress bar still visible
+            if (!pbDuplicates.Visible)
+                SetPossibleDuplicates();
         }
 
         private void btnCancelDuplicates_Click(object sender, EventArgs e)
@@ -1979,7 +1983,7 @@ namespace FTAnalyzer
 
         private void dgDuplicates_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex == 0)
+            if (e.RowIndex >= 0 && e.ColumnIndex == 0 && !pbDuplicates.Visible) // don't do anything if progressbar still loading duplicates
             {
                 DisplayDuplicateIndividual dupInd = (DisplayDuplicateIndividual)dgDuplicates.Rows[e.RowIndex].DataBoundItem;
                 NonDuplicate nonDup = new NonDuplicate(dupInd);
@@ -1997,6 +2001,8 @@ namespace FTAnalyzer
 
         private void ckbHideIgnoredDuplicates_CheckedChanged(object sender, EventArgs e)
         {
+            if (pbDuplicates.Visible)
+                return; // do nothing if progress bar still visible
             Properties.Settings.Default.HideIgnoredDuplicates = ckbHideIgnoredDuplicates.Checked;
             Properties.Settings.Default.Save();
             SetPossibleDuplicates();

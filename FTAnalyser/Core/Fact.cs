@@ -215,7 +215,7 @@ namespace FTAnalyzer
                 case DIED_SINGLE: return "Died Single";
                 case UNKNOWN: return "UNKNOWN";
                 case PARENT: return "Parental Info";
-                case CHILDREN: return "Children Info";
+                case CHILDREN: return "Child Born";
                 default: return factType;
             }
         }
