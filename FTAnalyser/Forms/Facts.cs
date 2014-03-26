@@ -64,6 +64,17 @@ namespace FTAnalyzer.Forms
             dgFacts.Columns["IndividualID"].Visible = true;
         }
 
+        public Facts(FactSource source)
+            : this()
+        {
+            this.allFacts = true;
+            foreach(DisplayFact f in source.Facts)
+                facts.Add(f);
+            this.Text = "Facts Report for source: " + source.ToString() + ". Facts count: " + facts.Count;
+            SetupFacts();
+            dgFacts.Columns["IndividualID"].Visible = true;
+        }
+
         private void AddIndividualsFacts(Individual individual, List<string> factTypes)
         {
             foreach (Fact f in individual.AllFacts)

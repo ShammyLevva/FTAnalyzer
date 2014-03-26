@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.4.1.0";
+        public string VERSION = "3.4.1.0-debug";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -153,6 +153,7 @@ namespace FTAnalyzer
                 dgOccupations.DataSource = null;
                 dgSurnames.DataSource = null;
                 dgDuplicates.DataSource = null;
+                dgSources.DataSource = null;
                 Statistics.Instance.Clear();
                 tabCtrlLooseBDs.SelectedTab = tabLooseBirths; // force back to first tab
                 tabCtrlLocations.SelectedTab = tabTreeView; // otherwise totals etc look wrong
@@ -327,6 +328,16 @@ namespace FTAnalyzer
                 {
                     tsCountLabel.Text = string.Empty;
                     tsHintsLabel.Text = string.Empty;
+                }
+                else if (tabSelector.SelectedTab == tabSources)
+                {
+                    SortableBindingList<IDisplaySource> list = ft.AllDisplaySources;
+                    dgSources.DataSource = list;
+                    dgSources.Sort(dgSources.Columns["SourceTitle"], ListSortDirection.Ascending);
+                    dgSources.Focus();
+                    mnuPrint.Enabled = true;
+                    tsCountLabel.Text = Properties.Messages.Count + list.Count;
+                    tsHintsLabel.Text = Properties.Messages.Hints_Sources;
                 }
                 else if (tabSelector.SelectedTab == tabSurnames)
                 {
@@ -982,6 +993,14 @@ namespace FTAnalyzer
             {
                 PrintDataGrid(false, dgOccupations, "List of Occupations");
             }
+            if (tabSelector.SelectedTab == tabSources)
+            {
+                PrintDataGrid(true, dgSources, "List of Sources");
+            }
+            if (tabSelector.SelectedTab == tabDuplicates)
+            {
+                PrintDataGrid(true, dgDuplicates, "List of Potential Duplicates");
+            }
             if (tabSelector.SelectedTab == tabLocations)
             {
                 if (tabCtrlLocations.SelectedTab == tabCountries)
@@ -1012,7 +1031,7 @@ namespace FTAnalyzer
             }
             else if (tabSelector.SelectedTab == tabWorldWars)
             {
-                PrintDataGrid(true, dgWorldWars, "List of Possible World Wars");
+                PrintDataGrid(true, dgWorldWars, "List of Individuals who may have served in the World Wars");
             }
         }
 
@@ -1820,6 +1839,14 @@ namespace FTAnalyzer
         {
             string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
             ShowFacts(indID);
+        }
+
+        private void dgSources_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            FactSource source = (FactSource)dgSources.CurrentRow.DataBoundItem;
+            Facts factForm = new Facts(source);
+            DisposeDuplicateForms(factForm);
+            factForm.Show();
         }
 
         private void dgDuplicates_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

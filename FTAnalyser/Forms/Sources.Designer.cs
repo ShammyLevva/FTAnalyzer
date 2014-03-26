@@ -48,6 +48,7 @@
             this.Publication = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SourceText = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FactCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSources)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -144,7 +145,8 @@
             this.SourceMedium,
             this.Publication,
             this.Author,
-            this.SourceText});
+            this.SourceText,
+            this.FactCount});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -237,6 +239,13 @@
             this.SourceText.ReadOnly = true;
             this.SourceText.Width = 200;
             // 
+            // FactCount
+            // 
+            this.FactCount.DataPropertyName = "FactCount";
+            this.FactCount.HeaderText = "Facts";
+            this.FactCount.Name = "FactCount";
+            this.FactCount.ReadOnly = true;
+            // 
             // Sources
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -279,5 +288,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Publication;
         private System.Windows.Forms.DataGridViewTextBoxColumn Author;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceText;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FactCount;
     }
 }

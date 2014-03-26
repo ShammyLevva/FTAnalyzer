@@ -498,6 +498,11 @@ namespace FTAnalyzer
             get { return individuals; }
         }
 
+        public IEnumerable<FactSource> AllSources
+        {
+            get { return sources; }
+        }
+
         public int IndividualCount { get { return individuals.Count; } }
 
         #endregion
@@ -1173,6 +1178,17 @@ namespace FTAnalyzer
                 SortableBindingList<IDisplayFamily> result = new SortableBindingList<IDisplayFamily>();
                 foreach (IDisplayFamily f in families)
                     result.Add(f);
+                return result;
+            }
+        }
+
+        public SortableBindingList<IDisplaySource> AllDisplaySources
+        {
+            get
+            {
+                SortableBindingList<IDisplaySource> result = new SortableBindingList<IDisplaySource>();
+                foreach (IDisplaySource s in sources)
+                    result.Add(s);
                 return result;
             }
         }
