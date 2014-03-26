@@ -195,7 +195,6 @@ namespace FTAnalyzer.Forms
                 Sources sourceForm = new Sources(f);
                 sourceForm.Show();
             }
-
         }
     }
 }
