@@ -76,6 +76,16 @@ namespace FTAnalyzer.Forms
         {
             this.Dispose();
         }
-        
+
+        private void dgSources_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                FactSource source = (FactSource)dgSources.CurrentRow.DataBoundItem;
+                Facts factForm = new Facts(source);
+                MainForm.DisposeDuplicateForms(factForm);
+                factForm.Show();
+            }
+        }   
     }
 }

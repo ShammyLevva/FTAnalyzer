@@ -165,7 +165,7 @@ namespace FTAnalyzer
                     if (ft.LoadTree(filename, pbSources, pbIndividuals, pbFamilies, pbRelationships))
                     {
                         ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
-                        Predicate<ExportFact> filter = CreateFactsFilter(); 
+                        Predicate<ExportFact> filter = CreateFactsFilter();
                         ft.SetFactTypeList(ckbFactSelect, filter);
                         Application.UseWaitCursor = false;
                         ShowMenus(true);
@@ -609,7 +609,7 @@ namespace FTAnalyzer
                 Predicate<ExportFact> surnameFilter = FilterUtils.StringFilter<ExportFact>(x => x.Surname, txtSurname.Text);
                 filter = FilterUtils.AndFilter<ExportFact>(filter, surnameFilter);
             }
-            return filter;                        
+            return filter;
         }
 
         private Predicate<CensusIndividual> CreateCensusIndividualFilter(bool censusDone)
@@ -1837,21 +1837,27 @@ namespace FTAnalyzer
 
         private void dgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
-            ShowFacts(indID);
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+                ShowFacts(indID);
+            }
         }
 
         private void dgSources_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            FactSource source = (FactSource)dgSources.CurrentRow.DataBoundItem;
-            Facts factForm = new Facts(source);
-            DisposeDuplicateForms(factForm);
-            factForm.Show();
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                FactSource source = (FactSource)dgSources.CurrentRow.DataBoundItem;
+                Facts factForm = new Facts(source);
+                DisposeDuplicateForms(factForm);
+                factForm.Show();
+            }
         }
 
         private void dgDuplicates_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (pbDuplicates.Visible)
+            if (pbDuplicates.Visible || e.RowIndex < 0 || e.ColumnIndex < 0)
                 return; // do nothing if progress bar still visible
             string indA_ID = (string)dgDuplicates.CurrentRow.Cells["DuplicateIndividualID"].Value;
             string indB_ID = (string)dgDuplicates.CurrentRow.Cells["MatchIndividualID"].Value;

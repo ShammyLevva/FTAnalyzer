@@ -163,6 +163,7 @@
             this.dgSources.ShowEditingIcon = false;
             this.dgSources.Size = new System.Drawing.Size(857, 337);
             this.dgSources.TabIndex = 2;
+            this.dgSources.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSources_CellDoubleClick);
             // 
             // statusStrip
             // 
