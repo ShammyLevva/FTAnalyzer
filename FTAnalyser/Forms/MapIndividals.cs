@@ -90,11 +90,14 @@ namespace FTAnalyzer
 
         private void dgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
-            Individual ind = ft.GetIndividual(indID);
-            Facts factForm = new Facts(ind);
-            MainForm.DisposeDuplicateForms(factForm);
-            factForm.Show();
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+                Individual ind = ft.GetIndividual(indID);
+                Facts factForm = new Facts(ind);
+                MainForm.DisposeDuplicateForms(factForm);
+                factForm.Show();
+            }
         }
 
         private void mnuEditLocation_Click(object sender, EventArgs e)

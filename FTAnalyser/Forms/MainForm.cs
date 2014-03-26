@@ -497,68 +497,86 @@ namespace FTAnalyzer
 
         private void dgSurnames_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            HourGlass(true);
-            SurnameStats stat = (SurnameStats)dgSurnames.CurrentRow.DataBoundItem;
-            Forms.People frmInd = new Forms.People();
-            frmInd.SetSurnameStats(stat);
-            DisposeDuplicateForms(frmInd);
-            frmInd.Show();
-            HourGlass(false);
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                HourGlass(true);
+                SurnameStats stat = (SurnameStats)dgSurnames.CurrentRow.DataBoundItem;
+                Forms.People frmInd = new Forms.People();
+                frmInd.SetSurnameStats(stat);
+                DisposeDuplicateForms(frmInd);
+                frmInd.Show();
+                HourGlass(false);
+            }
         }
 
         private void dgCountries_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            HourGlass(true);
-            FactLocation loc = (FactLocation)dgCountries.CurrentRow.DataBoundItem;
-            Forms.People frmInd = new Forms.People();
-            frmInd.SetLocation(loc, FactLocation.COUNTRY);
-            DisposeDuplicateForms(frmInd);
-            frmInd.Show();
-            HourGlass(false);
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                HourGlass(true);
+                FactLocation loc = (FactLocation)dgCountries.CurrentRow.DataBoundItem;
+                Forms.People frmInd = new Forms.People();
+                frmInd.SetLocation(loc, FactLocation.COUNTRY);
+                DisposeDuplicateForms(frmInd);
+                frmInd.Show();
+                HourGlass(false);
+            }
         }
 
         private void dgRegions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            HourGlass(true);
-            FactLocation loc = dgRegions.CurrentRow == null ? FactLocation.UNKNOWN_LOCATION : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
-            Forms.People frmInd = new Forms.People();
-            frmInd.SetLocation(loc, FactLocation.REGION);
-            DisposeDuplicateForms(frmInd);
-            frmInd.Show();
-            HourGlass(false);
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                HourGlass(true);
+                FactLocation loc = dgRegions.CurrentRow == null ? FactLocation.UNKNOWN_LOCATION : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
+                Forms.People frmInd = new Forms.People();
+                frmInd.SetLocation(loc, FactLocation.REGION);
+                DisposeDuplicateForms(frmInd);
+                frmInd.Show();
+                HourGlass(false);
+            }
         }
 
         private void dgSubRegions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            HourGlass(true);
-            FactLocation loc = (FactLocation)dgSubRegions.CurrentRow.DataBoundItem;
-            Forms.People frmInd = new Forms.People();
-            frmInd.SetLocation(loc, FactLocation.SUBREGION);
-            DisposeDuplicateForms(frmInd);
-            frmInd.Show();
-            HourGlass(false);
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                HourGlass(true);
+                FactLocation loc = (FactLocation)dgSubRegions.CurrentRow.DataBoundItem;
+                Forms.People frmInd = new Forms.People();
+                frmInd.SetLocation(loc, FactLocation.SUBREGION);
+                DisposeDuplicateForms(frmInd);
+                frmInd.Show();
+                HourGlass(false);
+            }
         }
 
         private void dgAddresses_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            HourGlass(true);
-            FactLocation loc = (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
-            Forms.People frmInd = new Forms.People();
-            frmInd.SetLocation(loc, FactLocation.ADDRESS);
-            DisposeDuplicateForms(frmInd);
-            frmInd.Show();
-            HourGlass(false);
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                HourGlass(true);
+                FactLocation loc = (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
+                Forms.People frmInd = new Forms.People();
+                frmInd.SetLocation(loc, FactLocation.ADDRESS);
+                DisposeDuplicateForms(frmInd);
+                frmInd.Show();
+                HourGlass(false);
+            }
         }
 
         private void dgPlaces_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            HourGlass(true);
-            FactLocation loc = (FactLocation)dgPlaces.CurrentRow.DataBoundItem;
-            Forms.People frmInd = new Forms.People();
-            frmInd.SetLocation(loc, FactLocation.PLACE);
-            DisposeDuplicateForms(frmInd);
-            frmInd.Show();
-            HourGlass(false);
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                HourGlass(true);
+                FactLocation loc = (FactLocation)dgPlaces.CurrentRow.DataBoundItem;
+                Forms.People frmInd = new Forms.People();
+                frmInd.SetLocation(loc, FactLocation.PLACE);
+                DisposeDuplicateForms(frmInd);
+                frmInd.Show();
+                HourGlass(false);
+            }
         }
 
         private void btnShowCensus_Click(object sender, EventArgs e)
@@ -1073,13 +1091,16 @@ namespace FTAnalyzer
 
         private void dgOccupations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            HourGlass(true);
-            DisplayOccupation occ = (DisplayOccupation)dgOccupations.CurrentRow.DataBoundItem;
-            Forms.People frmInd = new Forms.People();
-            frmInd.SetWorkers(occ.Occupation, ft.AllWorkers(occ.Occupation));
-            DisposeDuplicateForms(frmInd);
-            frmInd.Show();
-            HourGlass(false);
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                HourGlass(true);
+                DisplayOccupation occ = (DisplayOccupation)dgOccupations.CurrentRow.DataBoundItem;
+                Forms.People frmInd = new Forms.People();
+                frmInd.SetWorkers(occ.Occupation, ft.AllWorkers(occ.Occupation));
+                DisposeDuplicateForms(frmInd);
+                frmInd.Show();
+                HourGlass(false);
+            }
         }
 
         private void setAsRootToolStripMenuItem_Click(object sender, EventArgs e)

@@ -188,10 +188,13 @@ namespace FTAnalyzer.Forms
 
         private void dgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-            IDisplayFact fact = (IDisplayFact)dgFacts.CurrentRow.DataBoundItem;
-            ft.OpenGeoLocations(fact.Location);
-            this.Cursor = Cursors.Default;
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                IDisplayFact fact = (IDisplayFact)dgFacts.CurrentRow.DataBoundItem;
+                ft.OpenGeoLocations(fact.Location);
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         private void addAllFamilyMembersToolStripMenuItem_Click(object sender, EventArgs e)
