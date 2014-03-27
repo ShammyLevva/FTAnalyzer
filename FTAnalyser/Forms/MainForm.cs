@@ -2074,5 +2074,17 @@ namespace FTAnalyzer
             Predicate<ExportFact> filter = CreateFactsFilter();
             ft.SetFactTypeList(ckbFactSelect, filter);
         }
+
+        private void possibleCensusFactsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            Predicate<Individual> predicate = new Predicate<Individual>(x => x.Notes.ToLower().Contains("census"));
+            List<Individual> censusNotes = ft.AllIndividuals.Where(predicate).ToList<Individual>();
+            People people = new People();
+            people.SetIndividuals(censusNotes, "List of Possible Census records incorrectly recorded as notes");
+            DisposeDuplicateForms(people);
+            people.Show();
+            HourGlass(false);
+        }
     }
 }
