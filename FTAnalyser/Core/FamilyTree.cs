@@ -41,6 +41,7 @@ namespace FTAnalyzer
         private TreeNode mainformTreeRootNode;
         private TreeNode placesTreeRootNode;
         private static int DATA_ERROR_GROUPS = 21;
+        private static XmlNodeList noteNodes = null;
 
         public bool Geocoding { get; set; }
         public List<NonDuplicate> NonDuplicates { get; private set; }
@@ -95,16 +96,44 @@ namespace FTAnalyzer
             XmlNodeList notes = node.SelectNodes("NOTE");
             if (notes.Count == 0) return string.Empty;
             StringBuilder result = new StringBuilder();
-            foreach (XmlNode note in notes)
+            try
             {
-                foreach (XmlNode child in note.ChildNodes)
+                foreach (XmlNode note in notes)
                 {
-                    result.AppendLine(child.InnerText);
+                    if (note.ChildNodes.Count > 0)
+                    {
+                        foreach (XmlNode child in note.ChildNodes)
+                            result.AppendLine(child.InnerText);
+                    }
+                    else
+                    {
+                        XmlAttribute ID = note.Attributes["REF"];
+                        result.AppendLine(GetNoteRef(ID));
+                    }
+                    result.AppendLine();
+                    result.AppendLine();
                 }
-                result.AppendLine();
-                result.AppendLine();
             }
-            return result.ToString();
+            catch(Exception)
+            {}
+            return result.ToString().Trim();
+        }
+
+        public static string GetNoteRef(XmlAttribute reference)
+        {
+            if (noteNodes == null || reference == null)
+                return string.Empty;
+            StringBuilder result = new StringBuilder();
+            foreach (XmlNode node in noteNodes)
+            {
+                if (node.Attributes["ID"] != null && node.Attributes["ID"].Value == reference.Value)
+                {
+                    foreach (XmlNode child in node.ChildNodes)
+                        result.AppendLine(child.InnerText);
+                    return result.ToString();
+                }
+            }
+            return string.Empty;
         }
 
         public static string ValidFilename(string filename)
@@ -212,6 +241,8 @@ namespace FTAnalyzer
             }
             xmlErrorbox.AppendText("Loaded " + counter + " sources.\n");
             pbS.Value = pbS.Maximum;
+            // now get a list of all notes
+            noteNodes = doc.SelectNodes("GED/NOTE");
             // now iterate through child elements of root
             // finding all individuals
             list = doc.SelectNodes("GED/INDI");
