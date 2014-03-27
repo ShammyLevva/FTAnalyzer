@@ -24,5 +24,6 @@ namespace FTAnalyzer
         int ChildrenCount { get; }
         string BudgieCode { get; }
         int Ahnentafel { get; }
+        bool HasNotes { get; }
     }
 }

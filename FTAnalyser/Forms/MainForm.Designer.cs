@@ -59,6 +59,7 @@
             this.mnuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuChildAgeProfiles = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOlderParents = new System.Windows.Forms.ToolStripMenuItem();
+            this.possibleCensusFactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuIndividualsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFamiliesToExcel = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,6 +84,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSetRoot = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.setAsRootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewNotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -232,7 +234,6 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.possibleCensusFactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -485,6 +486,15 @@
             this.mnuOlderParents.Text = "Older Parents";
             this.mnuOlderParents.Click += new System.EventHandler(this.olderParentsToolStripMenuItem_Click);
             // 
+            // possibleCensusFactsToolStripMenuItem
+            // 
+            this.possibleCensusFactsToolStripMenuItem.Name = "possibleCensusFactsToolStripMenuItem";
+            this.possibleCensusFactsToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.possibleCensusFactsToolStripMenuItem.Text = "Possible Census Facts";
+            this.possibleCensusFactsToolStripMenuItem.ToolTipText = "This report aims to find census facts that have been incorrectly recorded as note" +
+    "s";
+            this.possibleCensusFactsToolStripMenuItem.Click += new System.EventHandler(this.possibleCensusFactsToolStripMenuItem_Click);
+            // 
             // mnuExport
             // 
             this.mnuExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -655,9 +665,11 @@
             // mnuSetRoot
             // 
             this.mnuSetRoot.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.setAsRootToolStripMenuItem});
+            this.setAsRootToolStripMenuItem,
+            this.viewNotesToolStripMenuItem});
             this.mnuSetRoot.Name = "mnuSetRoot";
-            this.mnuSetRoot.Size = new System.Drawing.Size(174, 26);
+            this.mnuSetRoot.Size = new System.Drawing.Size(174, 48);
+            this.mnuSetRoot.Opened += new System.EventHandler(this.mnuSetRoot_Opened);
             // 
             // setAsRootToolStripMenuItem
             // 
@@ -665,6 +677,13 @@
             this.setAsRootToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.setAsRootToolStripMenuItem.Text = "Set As Root Person";
             this.setAsRootToolStripMenuItem.Click += new System.EventHandler(this.setAsRootToolStripMenuItem_Click);
+            // 
+            // viewNotesToolStripMenuItem
+            // 
+            this.viewNotesToolStripMenuItem.Name = "viewNotesToolStripMenuItem";
+            this.viewNotesToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.viewNotesToolStripMenuItem.Text = "View Notes";
+            this.viewNotesToolStripMenuItem.Click += new System.EventHandler(this.viewNotesToolStripMenuItem_Click);
             // 
             // tsCount
             // 
@@ -2339,15 +2358,6 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // possibleCensusFactsToolStripMenuItem
-            // 
-            this.possibleCensusFactsToolStripMenuItem.Name = "possibleCensusFactsToolStripMenuItem";
-            this.possibleCensusFactsToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.possibleCensusFactsToolStripMenuItem.Text = "Possible Census Facts";
-            this.possibleCensusFactsToolStripMenuItem.ToolTipText = "This report aims to find census facts that have been incorrectly recorded as note" +
-    "s";
-            this.possibleCensusFactsToolStripMenuItem.Click += new System.EventHandler(this.possibleCensusFactsToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -2636,6 +2646,7 @@
         private System.Windows.Forms.TabPage tabSources;
         private System.Windows.Forms.DataGridView dgSources;
         private System.Windows.Forms.ToolStripMenuItem possibleCensusFactsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewNotesToolStripMenuItem;
     }
 }
 

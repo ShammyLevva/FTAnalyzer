@@ -190,6 +190,11 @@ namespace FTAnalyzer
             get { return relationType == BLOOD || relationType == DIRECT || relationType == MARRIEDTODB; }
         }
 
+        public bool HasNotes
+        {
+            get { return Notes.Length > 0; }
+        }
+
         public string Relation
         {
             get

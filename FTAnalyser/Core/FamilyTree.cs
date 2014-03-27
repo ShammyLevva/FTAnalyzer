@@ -97,7 +97,12 @@ namespace FTAnalyzer
             StringBuilder result = new StringBuilder();
             foreach (XmlNode note in notes)
             {
-                result.AppendLine(note.InnerText);
+                foreach (XmlNode child in note.ChildNodes)
+                {
+                    result.AppendLine(child.InnerText);
+                }
+                result.AppendLine();
+                result.AppendLine();
             }
             return result.ToString();
         }

@@ -1116,9 +1116,28 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        private void mnuSetRoot_Opened(object sender, EventArgs e)
+        {
+            Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
+            if (ind != null)
+                viewNotesToolStripMenuItem.Enabled = ind.HasNotes;
+        }
+
+        private void viewNotesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
+            if (ind != null)
+            {
+                Notes notes = new Notes(ind.Notes);
+                notes.Show();
+            }
+            HourGlass(false);
+        }
+
         private void btnShowMap_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
+            HourGlass(true);
             FactLocation loc = null;
             int locType = GetMapLocationType(out loc);
             if (loc != null)
@@ -1135,7 +1154,7 @@ namespace FTAnalyzer
                     MessageBox.Show("Unable to find location : " + loc.GetLocation(locType), "FT Analyzer");
                 }
             }
-            this.Cursor = Cursors.Default;
+            HourGlass(false);
         }
 
         private void btnBingOSMap_Click(object sender, EventArgs e)

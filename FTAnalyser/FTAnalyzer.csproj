@@ -222,6 +222,12 @@
     <Compile Include="Forms\Controls\ToolStripMapSelector.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\Notes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Notes.Designer.cs">
+      <DependentUpon>Notes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Sources.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -397,6 +403,9 @@
     </Content>
     <EmbeddedResource Include="Forms\ColourBMD.resx">
       <DependentUpon>ColourBMD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Notes.resx">
+      <DependentUpon>Notes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Sources.resx">
       <DependentUpon>Sources.cs</DependentUpon>
