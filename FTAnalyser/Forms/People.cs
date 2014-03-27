@@ -295,5 +295,24 @@ namespace FTAnalyzer.Forms
         {
             this.Dispose();
         }
+
+        private void contextMenuStrip1_Opened(object sender, EventArgs e)
+        {
+            string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+            Individual ind = FamilyTree.Instance.GetIndividual(indID);
+            if (ind != null)
+                viewNotesToolStripMenuItem.Enabled = ind.HasNotes;
+        }
+
+        private void viewNotesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+            Individual ind = FamilyTree.Instance.GetIndividual(indID);
+            if (ind != null)
+            {
+                Notes notes = new Notes(ind);
+                notes.Show();
+            }
+        }
     }
 }

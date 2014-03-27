@@ -59,7 +59,7 @@
             this.mnuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuChildAgeProfiles = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOlderParents = new System.Windows.Forms.ToolStripMenuItem();
-            this.possibleCensusFactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPossibleCensusFacts = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuIndividualsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFamiliesToExcel = new System.Windows.Forms.ToolStripMenuItem();
@@ -467,7 +467,7 @@
             this.mnuReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuChildAgeProfiles,
             this.mnuOlderParents,
-            this.possibleCensusFactsToolStripMenuItem});
+            this.mnuPossibleCensusFacts});
             this.mnuReports.Name = "mnuReports";
             this.mnuReports.Size = new System.Drawing.Size(59, 20);
             this.mnuReports.Text = "Reports";
@@ -486,14 +486,14 @@
             this.mnuOlderParents.Text = "Older Parents";
             this.mnuOlderParents.Click += new System.EventHandler(this.olderParentsToolStripMenuItem_Click);
             // 
-            // possibleCensusFactsToolStripMenuItem
+            // mnuPossibleCensusFacts
             // 
-            this.possibleCensusFactsToolStripMenuItem.Name = "possibleCensusFactsToolStripMenuItem";
-            this.possibleCensusFactsToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.possibleCensusFactsToolStripMenuItem.Text = "Possible Census Facts";
-            this.possibleCensusFactsToolStripMenuItem.ToolTipText = "This report aims to find census facts that have been incorrectly recorded as note" +
+            this.mnuPossibleCensusFacts.Name = "mnuPossibleCensusFacts";
+            this.mnuPossibleCensusFacts.Size = new System.Drawing.Size(188, 22);
+            this.mnuPossibleCensusFacts.Text = "Possible Census Facts";
+            this.mnuPossibleCensusFacts.ToolTipText = "This report aims to find census facts that have been incorrectly recorded as note" +
     "s";
-            this.possibleCensusFactsToolStripMenuItem.Click += new System.EventHandler(this.possibleCensusFactsToolStripMenuItem_Click);
+            this.mnuPossibleCensusFacts.Click += new System.EventHandler(this.possibleCensusFactsToolStripMenuItem_Click);
             // 
             // mnuExport
             // 
@@ -2645,7 +2645,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MatchBirthLocation;
         private System.Windows.Forms.TabPage tabSources;
         private System.Windows.Forms.DataGridView dgSources;
-        private System.Windows.Forms.ToolStripMenuItem possibleCensusFactsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuPossibleCensusFacts;
         private System.Windows.Forms.ToolStripMenuItem viewNotesToolStripMenuItem;
     }
 }

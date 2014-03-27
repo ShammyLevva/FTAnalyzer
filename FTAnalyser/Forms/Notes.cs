@@ -11,10 +11,11 @@ namespace FTAnalyzer.Forms
 {
     public partial class Notes : Form
     {
-        public Notes(string text)
+        public Notes(Individual ind)
         {
             InitializeComponent();
-            rtbNotes.Text = text;
+            rtbNotes.Text = ind.Notes;
+            this.Text = "Notes for " + ind.ToString();
         }
     }
 }

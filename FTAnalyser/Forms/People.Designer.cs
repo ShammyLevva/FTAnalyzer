@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(People));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.txtCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
             this.dgFamilies = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewNotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -41,6 +44,7 @@
             this.splitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -83,6 +87,7 @@
             this.dgIndividuals.AllowUserToDeleteRows = false;
             this.dgIndividuals.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgIndividuals.ContextMenuStrip = this.contextMenuStrip1;
             this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgIndividuals.Location = new System.Drawing.Point(0, 0);
             this.dgIndividuals.Name = "dgIndividuals";
@@ -103,6 +108,21 @@
             this.dgFamilies.TabIndex = 5;
             this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFamilies_CellDoubleClick_1);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewNotesToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(134, 26);
+            this.contextMenuStrip1.Opened += new System.EventHandler(this.contextMenuStrip1_Opened);
+            // 
+            // viewNotesToolStripMenuItem
+            // 
+            this.viewNotesToolStripMenuItem.Name = "viewNotesToolStripMenuItem";
+            this.viewNotesToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.viewNotesToolStripMenuItem.Text = "View Notes";
+            this.viewNotesToolStripMenuItem.Click += new System.EventHandler(this.viewNotesToolStripMenuItem_Click);
+            // 
             // People
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -122,6 +142,7 @@
             this.splitContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,5 +155,7 @@
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.DataGridView dgIndividuals;
         private System.Windows.Forms.DataGridView dgFamilies;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem viewNotesToolStripMenuItem;
     }
 }

@@ -201,6 +201,7 @@ namespace FTAnalyzer
             mnuFamiliesToExcel.Enabled = enabled;
             mnuChildAgeProfiles.Enabled = enabled;
             mnuOlderParents.Enabled = enabled;
+            mnuPossibleCensusFacts.Enabled = enabled;
             mnuShowTimeline.Enabled = enabled;
             mnuGeocodeLocations.Enabled = enabled;
             mnuLocationsGeocodeReport.Enabled = enabled;
@@ -1129,7 +1130,7 @@ namespace FTAnalyzer
             Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
             if (ind != null)
             {
-                Notes notes = new Notes(ind.Notes);
+                Notes notes = new Notes(ind);
                 notes.Show();
             }
             HourGlass(false);
