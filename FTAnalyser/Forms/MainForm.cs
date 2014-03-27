@@ -2106,5 +2106,73 @@ namespace FTAnalyzer
             people.Show();
             HourGlass(false);
         }
+
+        private void ctxViewNotes_Opening(object sender, CancelEventArgs e)
+        {
+            Individual ind = GetContextIndividual(sender);
+            if (ind != null)
+                mnuViewNotes.Enabled = ind.HasNotes;
+            else
+                e.Cancel = true;
+        }
+
+        private Individual GetContextIndividual(object sender)
+        {
+            Individual ind = null;
+            ContextMenuStrip cms = null;
+            if(sender is ContextMenuStrip)
+                cms = (ContextMenuStrip)sender;
+            if(sender is ToolStripMenuItem)
+            {
+                ToolStripMenuItem tsmi = (ToolStripMenuItem)sender;
+                cms = (ContextMenuStrip)tsmi.Owner;
+            }
+            if (cms != null && cms.Tag != null)
+                ind = (Individual)cms.Tag;
+            return ind;
+        }
+
+        private void mnuViewNotes_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            Individual ind = GetContextIndividual(sender);
+            if (ind != null)
+            {
+                Notes notes = new Notes(ind);
+                notes.Show();
+            }
+            HourGlass(false);
+        }
+
+        private void dgTreeTops_MouseDown(object sender, MouseEventArgs e)
+        {
+            ShowViewNotesMenu(dgTreeTops,e);
+        }
+
+        private void dgWorldWars_MouseDown(object sender, MouseEventArgs e)
+        {
+            ShowViewNotesMenu(dgWorldWars, e);
+        }
+
+        private void ShowViewNotesMenu(DataGridView dg, MouseEventArgs e)
+        {
+            DataGridView.HitTestInfo hti = dg.HitTest(e.Location.X, e.Location.Y);
+            if (e.Button == MouseButtons.Right)
+            {
+                var ht = dg.HitTest(e.X, e.Y);
+                if (ht.Type != DataGridViewHitTestType.ColumnHeader)
+                {
+                    if (hti.RowIndex >= 0 && hti.ColumnIndex >= 0)
+                    {
+                        dg.CurrentCell = dg.Rows[hti.RowIndex].Cells[hti.ColumnIndex];
+                        // Can leave these here - doesn't hurt
+                        dg.Rows[hti.RowIndex].Selected = true;
+                        dg.Focus();
+                        ctxViewNotes.Tag = dg.CurrentRow.DataBoundItem;
+                        ctxViewNotes.Show(MousePosition);
+                    }
+                }
+            }
+        }
     }
 }

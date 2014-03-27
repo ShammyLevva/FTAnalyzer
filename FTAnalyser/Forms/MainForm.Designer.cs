@@ -33,7 +33,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,6 +102,8 @@
             this.btnWWII = new System.Windows.Forms.Button();
             this.btnWWI = new System.Windows.Forms.Button();
             this.dgWorldWars = new System.Windows.Forms.DataGridView();
+            this.ctxViewNotes = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuViewNotes = new System.Windows.Forms.ToolStripMenuItem();
             this.label9 = new System.Windows.Forms.Label();
             this.txtWorldWarsSurname = new System.Windows.Forms.TextBox();
             this.wardeadRelation = new Controls.RelationTypes();
@@ -243,6 +245,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbDuplicateScore)).BeginInit();
             this.tabWorldWars.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWorldWars)).BeginInit();
+            this.ctxViewNotes.SuspendLayout();
             this.tabTreetops.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).BeginInit();
             this.tabColourReports.SuspendLayout();
@@ -721,14 +724,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 154);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -876,6 +879,22 @@
             this.dgWorldWars.Size = new System.Drawing.Size(1035, 332);
             this.dgWorldWars.TabIndex = 29;
             this.dgWorldWars.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgWorldWars_CellDoubleClick);
+            this.dgWorldWars.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgWorldWars_MouseDown);
+            // 
+            // ctxViewNotes
+            // 
+            this.ctxViewNotes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuViewNotes});
+            this.ctxViewNotes.Name = "contextMenuStrip1";
+            this.ctxViewNotes.Size = new System.Drawing.Size(134, 26);
+            this.ctxViewNotes.Opening += new System.ComponentModel.CancelEventHandler(this.ctxViewNotes_Opening);
+            // 
+            // mnuViewNotes
+            // 
+            this.mnuViewNotes.Name = "mnuViewNotes";
+            this.mnuViewNotes.Size = new System.Drawing.Size(133, 22);
+            this.mnuViewNotes.Text = "View Notes";
+            this.mnuViewNotes.Click += new System.EventHandler(this.mnuViewNotes_Click);
             // 
             // label9
             // 
@@ -942,6 +961,7 @@
             this.dgTreeTops.Size = new System.Drawing.Size(1035, 332);
             this.dgTreeTops.TabIndex = 28;
             this.dgTreeTops.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTreeTops_CellDoubleClick);
+            this.dgTreeTops.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgTreeTops_MouseDown);
             // 
             // ckbTTIgnoreLocations
             // 
@@ -2390,6 +2410,7 @@
             this.tabWorldWars.ResumeLayout(false);
             this.tabWorldWars.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWorldWars)).EndInit();
+            this.ctxViewNotes.ResumeLayout(false);
             this.tabTreetops.ResumeLayout(false);
             this.tabTreetops.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).EndInit();
@@ -2647,6 +2668,8 @@
         private System.Windows.Forms.DataGridView dgSources;
         private System.Windows.Forms.ToolStripMenuItem mnuPossibleCensusFacts;
         private System.Windows.Forms.ToolStripMenuItem viewNotesToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip ctxViewNotes;
+        private System.Windows.Forms.ToolStripMenuItem mnuViewNotes;
     }
 }
 
