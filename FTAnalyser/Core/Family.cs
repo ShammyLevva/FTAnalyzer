@@ -300,7 +300,7 @@ namespace FTAnalyzer
         {
             get
             {
-                return FamilyTree.validFilename(FamilyID + " - Marriage of " + FamilyName + ".html");
+                return FamilyTree.ValidFilename(FamilyID + " - Marriage of " + FamilyName + ".html");
             }
         }
 
@@ -308,7 +308,7 @@ namespace FTAnalyzer
         {
             get
             {
-                return FamilyTree.validFilename(FamilyID + " - Children of " + FamilyName + ".html");
+                return FamilyTree.ValidFilename(FamilyID + " - Children of " + FamilyName + ".html");
             }
         }
 

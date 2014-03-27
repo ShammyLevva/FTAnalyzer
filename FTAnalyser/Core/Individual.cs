@@ -27,6 +27,7 @@ namespace FTAnalyzer
         private bool hasParents;
         private DoubleMetaphone surnameMetaphone;
         private DoubleMetaphone forenameMetaphone;
+        public string Notes { get; private set; }
 
         private IList<Fact> facts;
         private IList<Fact> errorFacts;
@@ -54,6 +55,7 @@ namespace FTAnalyzer
             preferredFacts = new Dictionary<string, Fact>();
             forenameMetaphone = new DoubleMetaphone(Forename);
             surnameMetaphone = new DoubleMetaphone(Surname);
+            Notes = FamilyTree.GetNotes(node);
 
             // Individual attributes
             AddFacts(node, Fact.NAME); 
@@ -133,6 +135,7 @@ namespace FTAnalyzer
                 this.relationType = i.relationType;
                 this.RelationToRoot = i.RelationToRoot;
                 this.infamily = i.infamily;
+                this.Notes = i.Notes;
                 this.facts = new List<Fact>(i.facts);
                 this.errorFacts = new List<Fact>(i.errorFacts);
                 this.locations = new List<FactLocation>(i.locations);

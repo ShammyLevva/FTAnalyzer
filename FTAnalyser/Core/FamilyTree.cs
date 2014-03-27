@@ -89,7 +89,20 @@ namespace FTAnalyzer
                 return node.SelectSingleNode(tag);
         }
 
-        public static string validFilename(string filename)
+        public static string GetNotes(XmlNode node)
+        {
+            if (node == null) return string.Empty;
+            XmlNodeList notes = node.SelectNodes("NOTE");
+            if (notes.Count == 0) return string.Empty;
+            StringBuilder result = new StringBuilder();
+            foreach (XmlNode note in notes)
+            {
+                result.AppendLine(note.InnerText);
+            }
+            return result.ToString();
+        }
+
+        public static string ValidFilename(string filename)
         {
             int pos = filename.IndexOfAny(Path.GetInvalidFileNameChars());
             if (pos == -1)
