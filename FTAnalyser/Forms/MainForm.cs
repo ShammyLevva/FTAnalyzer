@@ -167,6 +167,7 @@ namespace FTAnalyzer
                         ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
                         Predicate<ExportFact> filter = CreateFactsFilter();
                         ft.SetFactTypeList(ckbFactSelect, filter);
+                        SetShowFactsButton();
                         Application.UseWaitCursor = false;
                         ShowMenus(true);
                         HourGlass(false);
@@ -2045,6 +2046,7 @@ namespace FTAnalyzer
                 ckbFactSelect.SetItemChecked(index, selected);
                 Application.UserAppDataRegistry.SetValue("Fact: " + factType, selected);
             }
+            SetShowFactsButton();
         }
 
         private void ckbFactSelect_MouseClick(object sender, MouseEventArgs e)
@@ -2054,6 +2056,20 @@ namespace FTAnalyzer
             bool selected = ckbFactSelect.GetItemChecked(index);
             ckbFactSelect.SetItemChecked(index, !selected);
             Application.UserAppDataRegistry.SetValue("Fact: " + factType, !selected);
+            SetShowFactsButton();
+        }
+
+        private void SetShowFactsButton()
+        {
+            for (int index = 0; index < ckbFactSelect.Items.Count; index++)
+            {
+                if (ckbFactSelect.GetItemChecked(index))
+                {
+                    btnShowFacts.Enabled = true;
+                    return;
+                }
+            }
+            btnShowFacts.Enabled = false;
         }
 
         private void dgDuplicates_CellContentClick(object sender, DataGridViewCellEventArgs e)
