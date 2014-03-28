@@ -33,7 +33,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,12 +102,12 @@
             this.btnWWII = new System.Windows.Forms.Button();
             this.btnWWI = new System.Windows.Forms.Button();
             this.dgWorldWars = new System.Windows.Forms.DataGridView();
-            this.ctxViewNotes = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnuViewNotes = new System.Windows.Forms.ToolStripMenuItem();
             this.label9 = new System.Windows.Forms.Label();
             this.txtWorldWarsSurname = new System.Windows.Forms.TextBox();
             this.wardeadRelation = new Controls.RelationTypes();
             this.wardeadCountry = new Controls.CensusCountry();
+            this.ctxViewNotes = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuViewNotes = new System.Windows.Forms.ToolStripMenuItem();
             this.tabTreetops = new System.Windows.Forms.TabPage();
             this.dgTreeTops = new System.Windows.Forms.DataGridView();
             this.ckbTTIgnoreLocations = new System.Windows.Forms.CheckBox();
@@ -147,7 +147,7 @@
             this.btnDuplicateCensus = new System.Windows.Forms.Button();
             this.btnMissingCensusLocation = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtSurname = new System.Windows.Forms.TextBox();
+            this.txtCensusSurname = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
             this.cenDate = new Controls.CensusDateSelector();
@@ -724,14 +724,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 154);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -881,21 +881,6 @@
             this.dgWorldWars.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgWorldWars_CellDoubleClick);
             this.dgWorldWars.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgWorldWars_MouseDown);
             // 
-            // ctxViewNotes
-            // 
-            this.ctxViewNotes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuViewNotes});
-            this.ctxViewNotes.Name = "contextMenuStrip1";
-            this.ctxViewNotes.Size = new System.Drawing.Size(134, 26);
-            this.ctxViewNotes.Opening += new System.ComponentModel.CancelEventHandler(this.ctxViewNotes_Opening);
-            // 
-            // mnuViewNotes
-            // 
-            this.mnuViewNotes.Name = "mnuViewNotes";
-            this.mnuViewNotes.Size = new System.Drawing.Size(133, 22);
-            this.mnuViewNotes.Text = "View Notes";
-            this.mnuViewNotes.Click += new System.EventHandler(this.mnuViewNotes_Click);
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -928,6 +913,21 @@
             this.wardeadCountry.TabIndex = 25;
             this.wardeadCountry.Title = "Default Country";
             this.wardeadCountry.UKEnabled = true;
+            // 
+            // ctxViewNotes
+            // 
+            this.ctxViewNotes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuViewNotes});
+            this.ctxViewNotes.Name = "contextMenuStrip1";
+            this.ctxViewNotes.Size = new System.Drawing.Size(134, 26);
+            this.ctxViewNotes.Opening += new System.ComponentModel.CancelEventHandler(this.ctxViewNotes_Opening);
+            // 
+            // mnuViewNotes
+            // 
+            this.mnuViewNotes.Name = "mnuViewNotes";
+            this.mnuViewNotes.Size = new System.Drawing.Size(133, 22);
+            this.mnuViewNotes.Text = "View Notes";
+            this.mnuViewNotes.Click += new System.EventHandler(this.mnuViewNotes_Click);
             // 
             // tabTreetops
             // 
@@ -1276,7 +1276,7 @@
             this.tabCensus.Controls.Add(this.groupBox2);
             this.tabCensus.Controls.Add(this.groupBox1);
             this.tabCensus.Controls.Add(this.label1);
-            this.tabCensus.Controls.Add(this.txtSurname);
+            this.tabCensus.Controls.Add(this.txtCensusSurname);
             this.tabCensus.Controls.Add(this.label2);
             this.tabCensus.Controls.Add(this.udAgeFilter);
             this.tabCensus.Controls.Add(this.cenDate);
@@ -1360,12 +1360,12 @@
             this.label1.TabIndex = 20;
             this.label1.Text = "Surname";
             // 
-            // txtSurname
+            // txtCensusSurname
             // 
-            this.txtSurname.Location = new System.Drawing.Point(394, 16);
-            this.txtSurname.Name = "txtSurname";
-            this.txtSurname.Size = new System.Drawing.Size(201, 20);
-            this.txtSurname.TabIndex = 19;
+            this.txtCensusSurname.Location = new System.Drawing.Point(394, 16);
+            this.txtCensusSurname.Name = "txtCensusSurname";
+            this.txtCensusSurname.Size = new System.Drawing.Size(201, 20);
+            this.txtCensusSurname.TabIndex = 19;
             // 
             // label2
             // 
@@ -2538,7 +2538,7 @@
         private System.Windows.Forms.Button btnLC1881Scot;
         private System.Windows.Forms.TabPage tabCensus;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtSurname;
+        private System.Windows.Forms.TextBox txtCensusSurname;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown udAgeFilter;
         private Controls.CensusDateSelector cenDate;

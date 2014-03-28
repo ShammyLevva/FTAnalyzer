@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.5.0.0-beta 2";
+        public string VERSION = "3.5.0.0-beta 3";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -626,7 +626,7 @@ namespace FTAnalyzer
             Predicate<ExportFact> filter = relTypesFacts.BuildFilter<ExportFact>(x => x.RelationType);
             if (txtFactsSurname.Text.Length > 0)
             {
-                Predicate<ExportFact> surnameFilter = FilterUtils.StringFilter<ExportFact>(x => x.Surname, txtSurname.Text);
+                Predicate<ExportFact> surnameFilter = FilterUtils.StringFilter<ExportFact>(x => x.Surname, txtFactsSurname.Text.Trim());
                 filter = FilterUtils.AndFilter<ExportFact>(filter, surnameFilter);
             }
             return filter;
@@ -640,9 +640,9 @@ namespace FTAnalyzer
                 new Predicate<CensusIndividual>(x => !x.IsCensusDone(cenDate.SelectedDate));
 
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, dateFilter);
-            if (txtSurname.Text.Length > 0)
+            if (txtCensusSurname.Text.Length > 0)
             {
-                Predicate<CensusIndividual> surnameFilter = FilterUtils.StringFilter<CensusIndividual>(x => x.Surname, txtSurname.Text);
+                Predicate<CensusIndividual> surnameFilter = FilterUtils.StringFilter<CensusIndividual>(x => x.Surname, txtCensusSurname.Text);
                 filter = FilterUtils.AndFilter<CensusIndividual>(filter, surnameFilter);
             }
 
