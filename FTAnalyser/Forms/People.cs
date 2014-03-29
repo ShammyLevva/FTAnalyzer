@@ -15,7 +15,8 @@ namespace FTAnalyzer.Forms
     {
         private bool selectRow = false;
         private Dictionary<IDisplayIndividual, IDisplayFamily> families;
-
+        private FamilyTree ft = FamilyTree.Instance;
+        
         public People()
         {
             InitializeComponent();
@@ -32,7 +33,6 @@ namespace FTAnalyzer.Forms
         public void SetLocation(FactLocation loc, int level)
         {
             this.Text = "Individuals & Families with connection to " + loc.ToString();
-            FamilyTree ft = FamilyTree.Instance;
             level = Math.Min(loc.Level, level); // if location level isn't as detailed as level on tab use location level
             IEnumerable<Individual> listInd = ft.GetIndividualsAtLocation(loc, level);
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
@@ -68,7 +68,6 @@ namespace FTAnalyzer.Forms
         {
             this.Text = "Individuals & Families whose surame is " + stat.Surname;
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
-            FamilyTree ft = FamilyTree.Instance;
             Predicate<Individual> indSurnames = x => x.Surname.Equals(stat.Surname);
             foreach (Individual i in ft.AllIndividuals.Where(indSurnames))
                 dsInd.Add(i);
@@ -90,13 +89,13 @@ namespace FTAnalyzer.Forms
         {
             Predicate<Individual> lcFacts = i => i.DuplicateLCFacts > 0;
             Predicate<Individual> filter = FilterUtils.AndFilter<Individual>(relationFilter, lcFacts);
-            List<Individual> individuals = FamilyTree.Instance.AllIndividuals.Where(filter).ToList();
+            List<Individual> individuals = ft.AllIndividuals.Where(filter).ToList();
             SetIndividuals(individuals, "Lost Cousins with Duplicate Facts");
         }
 
         public void SetupLCnoCensus(Predicate<Individual> relationFilter)
         {
-            List<Individual> listtoCheck = FamilyTree.Instance.AllIndividuals.Where(relationFilter).ToList();
+            List<Individual> listtoCheck = ft.AllIndividuals.Where(relationFilter).ToList();
             List<Individual> individuals = new List<Individual>();
             foreach (CensusDate censusDate in CensusDate.LOSTCOUSINS_CENSUS)
             {
@@ -112,7 +111,7 @@ namespace FTAnalyzer.Forms
         {
             Predicate<Individual> lcFacts = x => x.LostCousinsFacts > 0;
             Predicate<Individual> filter = FilterUtils.AndFilter<Individual>(relationFilter, lcFacts);
-            IEnumerable<Individual> listToCheck = FamilyTree.Instance.AllIndividuals.Where(filter).ToList();
+            IEnumerable<Individual> listToCheck = ft.AllIndividuals.Where(filter).ToList();
            
             Predicate<Individual> missing = x => !x.IsLostCousinsEntered(CensusDate.EWCENSUS1841, false)
                                               && !x.IsLostCousinsEntered(CensusDate.EWCENSUS1881, false)
@@ -141,7 +140,6 @@ namespace FTAnalyzer.Forms
         public bool OlderParents(int minAge)
         {
             this.Text = "Parents aged " + minAge + "+ at time of child's birth";
-            FamilyTree ft = FamilyTree.Instance;
             selectRow = true;
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
             SortableBindingList<IDisplayFamily> dsFam = new SortableBindingList<IDisplayFamily>();
@@ -224,7 +222,7 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
-                Individual ind = FamilyTree.Instance.GetIndividual(indID);
+                Individual ind = ft.GetIndividual(indID);
                 Facts factForm = new Facts(ind);
                 factForm.Show();
             }
@@ -235,7 +233,7 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 string famID = (string)dgFamilies.CurrentRow.Cells["FamilyID"].Value;
-                Family fam = FamilyTree.Instance.GetFamily(famID);
+                Family fam = ft.GetFamily(famID);
                 Facts factForm = new Facts(fam);
                 factForm.Show();
             }
@@ -247,7 +245,7 @@ namespace FTAnalyzer.Forms
             foreach (CensusDate censusDate in CensusDate.SUPPORTED_CENSUS)
             {
                 Predicate<Individual> censusFacts = new Predicate<Individual>(x => x.IsCensusDone(censusDate) && !x.HasCensusLocation(censusDate));
-                IEnumerable<Individual> censusMissing = FamilyTree.Instance.AllIndividuals.Where(censusFacts);
+                IEnumerable<Individual> censusMissing = ft.AllIndividuals.Where(censusFacts);
                 individuals.AddRange(censusMissing);
             }
             individuals = individuals.Distinct<Individual>().ToList();
@@ -260,7 +258,7 @@ namespace FTAnalyzer.Forms
             foreach (CensusDate censusDate in CensusDate.SUPPORTED_CENSUS)
             {
                 Predicate<Individual> censusFacts = new Predicate<Individual>(i => i.CensusDateFactCount(censusDate) > 1);
-                IEnumerable<Individual> censusMissing = FamilyTree.Instance.AllIndividuals.Where(censusFacts);
+                IEnumerable<Individual> censusMissing = ft.AllIndividuals.Where(censusFacts);
                 individuals.AddRange(censusMissing);
             }
             individuals = individuals.Distinct<Individual>().ToList();
@@ -272,7 +270,7 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
-                Individual ind = FamilyTree.Instance.GetIndividual(indID);
+                Individual ind = ft.GetIndividual(indID);
                 Facts factForm = new Facts(ind);
                 MainForm.DisposeDuplicateForms(factForm);
                 factForm.Show();
@@ -284,7 +282,7 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 string famID = (string)dgFamilies.CurrentRow.Cells["FamilyID"].Value;
-                Family fam = FamilyTree.Instance.GetFamily(famID);
+                Family fam = ft.GetFamily(famID);
                 Facts factForm = new Facts(fam);
                 MainForm.DisposeDuplicateForms(factForm);
                 factForm.Show();
@@ -299,7 +297,7 @@ namespace FTAnalyzer.Forms
         private void contextMenuStrip1_Opened(object sender, EventArgs e)
         {
             string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
-            Individual ind = FamilyTree.Instance.GetIndividual(indID);
+            Individual ind = ft.GetIndividual(indID);
             if (ind != null)
                 viewNotesToolStripMenuItem.Enabled = ind.HasNotes;
         }
@@ -307,7 +305,7 @@ namespace FTAnalyzer.Forms
         private void viewNotesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
-            Individual ind = FamilyTree.Instance.GetIndividual(indID);
+            Individual ind = ft.GetIndividual(indID);
             if (ind != null)
             {
                 Notes notes = new Notes(ind);
