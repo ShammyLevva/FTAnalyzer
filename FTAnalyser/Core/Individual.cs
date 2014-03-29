@@ -70,6 +70,7 @@ namespace FTAnalyzer
             AddFacts(node, Fact.POSSESSIONS);
             AddFacts(node, Fact.RESIDENCE);
             AddFacts(node, Fact.MEDICAL_CONDITION);
+            AddFacts(node, Fact.REFERENCE);
 
             // Individual events
             AddFacts(node, Fact.BIRTH);
@@ -103,6 +104,7 @@ namespace FTAnalyzer
             // Custom facts
             AddFacts(node, Fact.CUSTOM_EVENT);
             AddFacts(node, Fact.CUSTOM_FACT);
+            AddFacts(node, Fact.UNKNOWN);
 
             //IEnumerable<Fact> gedcomAges = facts.Where(x => x.GedcomAge != null);
             //if (gedcomAges.Count() > 0 && !BirthDate.IsKnown && BirthDate.IsExact)

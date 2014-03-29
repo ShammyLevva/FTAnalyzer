@@ -91,6 +91,8 @@ namespace FTAnalyzer
                 AddFacts(node, Fact.CENSUS);
                 AddFacts(node, Fact.CUSTOM_EVENT);
                 AddFacts(node, Fact.CUSTOM_FACT);
+                AddFacts(node, Fact.REFERENCE);
+                AddFacts(node, Fact.UNKNOWN);
                 //TODO: need to think about family facts having AGE tags in GEDCOM
             }
         }

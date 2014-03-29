@@ -28,10 +28,11 @@ namespace FTAnalyzer
                 RETIREMENT = "RETI", WILL = "WILL", SEPARATION = "_SEPR",
                 MILITARY = "_MILT", ELECTION = "_ELEC", DEGREE = "_DEG",
                 EMPLOYMENT = "_EMPLOY", MEDICAL_CONDITION = "_MDCL", NAME = "NAME",
-                CUSTOM_EVENT = "EVEN", CUSTOM_FACT = "FACT", SERVICE_NUMBER = "_MILTID";
+                CUSTOM_EVENT = "EVEN", CUSTOM_FACT = "FACT", SERVICE_NUMBER = "_MILTID",
+                REFERENCE = "REFN", UNKNOWN = "UNKN";
 
         public const string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
-                UNKNOWN = "*UNKN", LOOSEDEATH = "*LOOSED", LOOSEBIRTH = "*LOOSEB", FAMILYSEARCH = "*IGI",
+                LOOSEDEATH = "*LOOSED", LOOSEBIRTH = "*LOOSEB", FAMILYSEARCH = "*IGI",
                 CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT", PARENT = "*PARENT",
                 CHILDREN = "*CHILDREN", CHANGE = "*CHNG", LOSTCOUSINS = "*LOST", DIED_SINGLE = "*SINGLE";
 
@@ -216,6 +217,7 @@ namespace FTAnalyzer
                 case UNKNOWN: return "UNKNOWN";
                 case PARENT: return "Parental Info";
                 case CHILDREN: return "Child Born";
+                case REFERENCE: return "Reference ID";
                 default: return factType;
             }
         }
