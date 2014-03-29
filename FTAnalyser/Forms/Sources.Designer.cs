@@ -242,10 +242,12 @@
             // 
             // FactCount
             // 
+            this.FactCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.FactCount.DataPropertyName = "FactCount";
             this.FactCount.HeaderText = "Facts";
             this.FactCount.Name = "FactCount";
             this.FactCount.ReadOnly = true;
+            this.FactCount.Width = 58;
             // 
             // Sources
             // 

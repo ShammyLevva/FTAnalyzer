@@ -251,7 +251,7 @@ namespace FTAnalyzer.Forms
                 individuals.AddRange(censusMissing);
             }
             individuals = individuals.Distinct<Individual>().ToList();
-            SetIndividuals(individuals, "Indiviudals with census records with no census location");
+            SetIndividuals(individuals, "Individuals with census records with no census location");
         }
 
         public void SetupDuplicateCensus()
@@ -264,7 +264,7 @@ namespace FTAnalyzer.Forms
                 individuals.AddRange(censusMissing);
             }
             individuals = individuals.Distinct<Individual>().ToList();
-            SetIndividuals(individuals, "Individuals that have more than once census record for a census year");
+            SetIndividuals(individuals, "Individuals that have more than one census record for a census year");
         }
 
         private void dgIndividuals_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
