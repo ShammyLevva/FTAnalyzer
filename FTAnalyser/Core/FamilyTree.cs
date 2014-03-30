@@ -2344,11 +2344,12 @@ namespace FTAnalyzer
         public SortableBindingList<IDisplayDuplicateIndividual> BuildDuplicateList(int minScore)
         {
             log.Debug("FamilyTree.BuildDuplicateList");
-            SortableBindingList<IDisplayDuplicateIndividual> select = new SortableBindingList<IDisplayDuplicateIndividual>();
             if (duplicates == null)
                 log.Error("BuildDuplicateList called with null duplicates");
+
+            SortableBindingList<IDisplayDuplicateIndividual> select = new SortableBindingList<IDisplayDuplicateIndividual>();
             if (NonDuplicates == null)
-                log.Error("BuildDuplicateList called with null NonDuplicates");
+                DeserializeNonDuplicates();
             foreach (DuplicateIndividual dup in duplicates)
             {
                 if (dup.Score >= minScore)
