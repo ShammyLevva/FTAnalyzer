@@ -84,7 +84,7 @@
             this.mnuSaveColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuSaveColumnLayout.Name = "mnuSaveColumnLayout";
             this.mnuSaveColumnLayout.Size = new System.Drawing.Size(23, 22);
-            this.mnuSaveColumnLayout.Text = "Save Column Sort Order";
+            this.mnuSaveColumnLayout.Text = "Save Column Sort Order, layout, width etc";
             this.mnuSaveColumnLayout.Click += new System.EventHandler(this.mnuSaveColumnLayout_Click);
             // 
             // mnuResetColumns
