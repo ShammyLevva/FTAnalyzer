@@ -183,7 +183,7 @@
             // 
             // SourceID
             // 
-            this.SourceID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.SourceID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.SourceID.DataPropertyName = "SourceID";
             this.SourceID.HeaderText = "ID";
             this.SourceID.MinimumWidth = 50;
@@ -193,61 +193,61 @@
             // 
             // SourceTitle
             // 
-            this.SourceTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.SourceTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.SourceTitle.DataPropertyName = "SourceTitle";
             this.SourceTitle.HeaderText = "Title";
             this.SourceTitle.MinimumWidth = 100;
             this.SourceTitle.Name = "SourceTitle";
             this.SourceTitle.ReadOnly = true;
+            this.SourceTitle.Width = 250;
             // 
             // SourceMedium
             // 
-            this.SourceMedium.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.SourceMedium.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.SourceMedium.DataPropertyName = "SourceMedium";
             this.SourceMedium.HeaderText = "Medium";
             this.SourceMedium.MinimumWidth = 50;
             this.SourceMedium.Name = "SourceMedium";
             this.SourceMedium.ReadOnly = true;
-            this.SourceMedium.Width = 69;
             // 
             // Publication
             // 
-            this.Publication.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Publication.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Publication.DataPropertyName = "Publication";
             this.Publication.HeaderText = "Publication";
             this.Publication.MinimumWidth = 50;
             this.Publication.Name = "Publication";
             this.Publication.ReadOnly = true;
-            this.Publication.Width = 84;
             // 
             // Author
             // 
-            this.Author.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Author.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Author.DataPropertyName = "Author";
             this.Author.HeaderText = "Author";
             this.Author.MinimumWidth = 50;
             this.Author.Name = "Author";
             this.Author.ReadOnly = true;
-            this.Author.Width = 63;
+            this.Author.Width = 75;
             // 
             // SourceText
             // 
-            this.SourceText.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.SourceText.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.SourceText.DataPropertyName = "SourceText";
             this.SourceText.HeaderText = "Text";
-            this.SourceText.MinimumWidth = 200;
+            this.SourceText.MinimumWidth = 100;
             this.SourceText.Name = "SourceText";
             this.SourceText.ReadOnly = true;
             this.SourceText.Width = 200;
             // 
             // FactCount
             // 
-            this.FactCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.FactCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.FactCount.DataPropertyName = "FactCount";
             this.FactCount.HeaderText = "Facts";
+            this.FactCount.MinimumWidth = 30;
             this.FactCount.Name = "FactCount";
             this.FactCount.ReadOnly = true;
-            this.FactCount.Width = 58;
+            this.FactCount.Width = 50;
             // 
             // Sources
             // 
