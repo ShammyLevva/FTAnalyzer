@@ -260,9 +260,9 @@ namespace FTAnalyzer
         private void HourGlass(bool on)
         {
             if (on)
-                Cursor.Current = Cursors.WaitCursor;
+                this.Cursor = Cursors.WaitCursor;
             else
-                Cursor.Current = Cursors.Default;
+                this.Cursor = Cursors.Default;
             Application.DoEvents();
         }
 
