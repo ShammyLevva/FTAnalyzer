@@ -68,8 +68,7 @@ namespace FTAnalyzer.Forms
             : this()
         {
             this.allFacts = true;
-            foreach(DisplayFact f in source.Facts)
-                facts.Add(f);
+            this.facts = ft.GetDisplayFacts(source);
             this.Text = "Facts Report for source: " + source.ToString() + ". Facts count: " + facts.Count;
             SetupFacts();
             dgFacts.Columns["IndividualID"].Visible = true;

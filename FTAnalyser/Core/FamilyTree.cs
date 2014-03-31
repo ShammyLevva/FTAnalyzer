@@ -114,8 +114,8 @@ namespace FTAnalyzer
                     result.AppendLine();
                 }
             }
-            catch(Exception)
-            {}
+            catch (Exception)
+            { }
             return result.ToString().Trim();
         }
 
@@ -1229,6 +1229,16 @@ namespace FTAnalyzer
                     result.Add(f);
                 return result;
             }
+        }
+
+        public SortableBindingList<IDisplayFact> GetDisplayFacts(FactSource source)
+        {
+            SortableBindingList<IDisplayFact> result = new SortableBindingList<IDisplayFact>();
+            foreach(Individual i in individuals)
+                foreach(Fact f in i.AllFacts)
+                    if(f.Sources.Contains(source))
+                        result.Add(new DisplayFact(i,f));
+            return result;           
         }
 
         public SortableBindingList<IDisplaySource> AllDisplaySources

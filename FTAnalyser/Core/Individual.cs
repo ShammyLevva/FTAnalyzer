@@ -749,7 +749,6 @@ namespace FTAnalyzer
                     errorFacts.Add(fact);
                     break;
             }
-            AddSources(fact);
         }
 
         private void AddGoodFact(Fact fact)
@@ -768,12 +767,6 @@ namespace FTAnalyzer
                 locations.Add(loc);
                 loc.AddIndividual(this);
             }
-        }
-
-        private void AddSources(Fact fact)
-        {
-            foreach (FactSource s in fact.Sources)
-                s.AddFact(new DisplayFact(this, fact));
         }
 
         public Fact GetPreferredFact(string factType)

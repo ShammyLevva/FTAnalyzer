@@ -314,7 +314,10 @@ namespace FTAnalyzer
                             string srcref = n.Attributes["REF"].Value;
                             FactSource source = ft.GetSourceID(srcref);
                             if (source != null)
+                            {
                                 Sources.Add(source);
+                                source.AddFact(this);
+                            }
                             else
                                 ft.XmlErrorBox.AppendText("Source " + srcref + " not found." + "\n");
                         }
