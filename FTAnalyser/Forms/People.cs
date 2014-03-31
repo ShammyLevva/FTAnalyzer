@@ -30,11 +30,11 @@ namespace FTAnalyzer.Forms
         {
             indReportFormHelper.LoadColumnLayout("PeopleIndColumns.xml");
             if (splitContainer.Panel2Collapsed)
-                txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals.";
+                txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals.  " + Properties.Messages.Hints_Individual;
             else
             {
                 famReportFormHelper.LoadColumnLayout("PeopleFamColumns.xml");
-                txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals and " + dgFamilies.RowCount + " Families.";
+                txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals and " + dgFamilies.RowCount + " Families. " + Properties.Messages.Hints_IndividualFamily;
             }
         }
 

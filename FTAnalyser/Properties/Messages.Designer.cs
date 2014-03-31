@@ -97,6 +97,15 @@ namespace FTAnalyzer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Double click to show a list of facts for the selected individual or family..
+        /// </summary>
+        internal static string Hints_IndividualFamily {
+            get {
+                return ResourceManager.GetString("Hints_IndividualFamily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shift double click to search Lives of First World War life story page..
         /// </summary>
         internal static string Hints_LivesOfFirstWorldWar {

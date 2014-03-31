@@ -38,7 +38,6 @@
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
             this.ctxViewNotes = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewNotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dgFamilies = new System.Windows.Forms.DataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.mnuSaveColumnLayout = new System.Windows.Forms.ToolStripButton();
             this.mnuResetColumns = new System.Windows.Forms.ToolStripButton();
@@ -47,6 +46,7 @@
             this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
+            this.dgFamilies = new System.Windows.Forms.DataGridView();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -54,8 +54,8 @@
             this.splitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.ctxViewNotes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -119,22 +119,9 @@
             // viewNotesToolStripMenuItem
             // 
             this.viewNotesToolStripMenuItem.Name = "viewNotesToolStripMenuItem";
-            this.viewNotesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewNotesToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.viewNotesToolStripMenuItem.Text = "View Notes";
             this.viewNotesToolStripMenuItem.Click += new System.EventHandler(this.viewNotesToolStripMenuItem_Click);
-            // 
-            // dgFamilies
-            // 
-            this.dgFamilies.AllowUserToAddRows = false;
-            this.dgFamilies.AllowUserToDeleteRows = false;
-            this.dgFamilies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgFamilies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgFamilies.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgFamilies.Location = new System.Drawing.Point(0, 0);
-            this.dgFamilies.Name = "dgFamilies";
-            this.dgFamilies.Size = new System.Drawing.Size(1038, 271);
-            this.dgFamilies.TabIndex = 5;
-            this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFamilies_CellDoubleClick_1);
             // 
             // toolStrip1
             // 
@@ -160,6 +147,7 @@
             this.mnuSaveColumnLayout.Name = "mnuSaveColumnLayout";
             this.mnuSaveColumnLayout.Size = new System.Drawing.Size(23, 22);
             this.mnuSaveColumnLayout.Text = "Save Column Sort Order, layout, width etc";
+            this.mnuSaveColumnLayout.Visible = false;
             this.mnuSaveColumnLayout.Click += new System.EventHandler(this.mnuSaveColumnLayout_Click);
             // 
             // mnuResetColumns
@@ -170,12 +158,14 @@
             this.mnuResetColumns.Name = "mnuResetColumns";
             this.mnuResetColumns.Size = new System.Drawing.Size(23, 22);
             this.mnuResetColumns.Text = "Reset Column Sort Order to Default";
+            this.mnuResetColumns.Visible = false;
             this.mnuResetColumns.Click += new System.EventHandler(this.mnuResetColumns_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator2.Visible = false;
             // 
             // printToolStripButton
             // 
@@ -212,6 +202,19 @@
             this.mnuExportToExcel.Text = "Export to Excel";
             this.mnuExportToExcel.Click += new System.EventHandler(this.mnuExportToExcel_Click);
             // 
+            // dgFamilies
+            // 
+            this.dgFamilies.AllowUserToAddRows = false;
+            this.dgFamilies.AllowUserToDeleteRows = false;
+            this.dgFamilies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgFamilies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgFamilies.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgFamilies.Location = new System.Drawing.Point(0, 0);
+            this.dgFamilies.Name = "dgFamilies";
+            this.dgFamilies.Size = new System.Drawing.Size(1038, 271);
+            this.dgFamilies.TabIndex = 5;
+            this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFamilies_CellDoubleClick_1);
+            // 
             // People
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -232,9 +235,9 @@
             this.splitContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
             this.ctxViewNotes.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

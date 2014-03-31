@@ -129,6 +129,9 @@
   <data name="Hints_Individual" xml:space="preserve">
     <value>Double click to show a list of facts for the selected individual.</value>
   </data>
+  <data name="Hints_IndividualFamily" xml:space="preserve">
+    <value>Double click to show a list of facts for the selected individual or family.</value>
+  </data>
   <data name="Hints_LivesOfFirstWorldWar" xml:space="preserve">
     <value>Shift double click to search Lives of First World War life story page.</value>
   </data>
