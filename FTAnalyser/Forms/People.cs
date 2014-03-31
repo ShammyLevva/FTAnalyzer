@@ -28,12 +28,10 @@ namespace FTAnalyzer.Forms
 
         private void UpdateStatusCount()
         {
-            indReportFormHelper.LoadColumnLayout("PeopleIndColumns.xml");
             if (splitContainer.Panel2Collapsed)
                 txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals.  " + Properties.Messages.Hints_Individual;
             else
             {
-                famReportFormHelper.LoadColumnLayout("PeopleFamColumns.xml");
                 txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals and " + dgFamilies.RowCount + " Families. " + Properties.Messages.Hints_IndividualFamily;
             }
         }
@@ -47,14 +45,14 @@ namespace FTAnalyzer.Forms
             foreach (Individual i in listInd)
                 dsInd.Add(i);
             dgIndividuals.DataSource = dsInd;
-            dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
-
+            SortIndividuals();
+                
             IEnumerable<Family> listFam = ft.GetFamiliesAtLocation(loc, level);
             SortableBindingList<IDisplayFamily> dsFam = new SortableBindingList<IDisplayFamily>();
             foreach (Family f in listFam)
                 dsFam.Add(f);
             dgFamilies.DataSource = dsFam;
-            dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
+            SortFamilies();
             splitContainer.Panel2Collapsed = false;
             UpdateStatusCount();
         }
@@ -66,7 +64,7 @@ namespace FTAnalyzer.Forms
             foreach (Individual i in workers)
                 dsInd.Add(i);
             dgIndividuals.DataSource = dsInd;
-            dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
+            SortIndividuals();
             dgIndividuals.Dock = DockStyle.Fill;
             splitContainer.Panel2Collapsed = true;
             UpdateStatusCount();
@@ -80,7 +78,7 @@ namespace FTAnalyzer.Forms
             foreach (Individual i in ft.AllIndividuals.Where(indSurnames))
                 dsInd.Add(i);
             dgIndividuals.DataSource = dsInd;
-            dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
+            SortIndividuals();
             dgIndividuals.Dock = DockStyle.Fill;
 
             Predicate<Family> famSurnames = x => x.ContainsSurname(stat.Surname);
@@ -88,7 +86,7 @@ namespace FTAnalyzer.Forms
             foreach (Family f in ft.AllFamilies.Where(famSurnames))
                 dsFam.Add(f);
             dgFamilies.DataSource = dsFam;
-            dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
+            SortFamilies();
             splitContainer.Panel2Collapsed = false;
             UpdateStatusCount();
         }
@@ -133,12 +131,23 @@ namespace FTAnalyzer.Forms
             SetIndividuals(individuals, "Lost Cousins with No Country");
         }
 
+        private void SortIndividuals()
+        {
+            //indReportFormHelper.LoadColumnLayout("PeopleIndColumns.xml");
+            dgIndividuals.Sort(dgIndividuals.Columns[1], ListSortDirection.Ascending);
+            dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
+        }
+
+        private void SortFamilies()
+        {
+            //famReportFormHelper.LoadColumnLayout("PeopleFamColumns.xml");
+            dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
+        }
+
         public void SetIndividuals(List<Individual> individuals, string reportTitle)
         {
             this.Text = reportTitle;
             dgIndividuals.DataSource = new SortableBindingList<IDisplayIndividual>(individuals);
-            dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
-            dgIndividuals.Sort(dgIndividuals.Columns[1], ListSortDirection.Ascending);
             dgIndividuals.Dock = DockStyle.Fill;
 
             splitContainer.Panel2Collapsed = true;
@@ -189,10 +198,10 @@ namespace FTAnalyzer.Forms
             if (dsInd.Count > 0)
             {
                 dgIndividuals.DataSource = dsInd;
-                dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
+                SortIndividuals();
                 dgIndividuals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dgFamilies.DataSource = dsFam;
-                dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
+                SortFamilies();
                 dgFamilies.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dgIndividuals.Rows[0].Selected = true; // force a selection to update both grids
                 return true;
@@ -270,7 +279,7 @@ namespace FTAnalyzer.Forms
                 individuals.AddRange(censusMissing);
             }
             individuals = individuals.Distinct<Individual>().ToList();
-            SetIndividuals(individuals, "Individuals that have more than one census record for a census year");
+            SetIndividuals(individuals, "Individuals that may have more than one census/residence record for a census year");
         }
 
         private void dgIndividuals_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
@@ -344,9 +353,9 @@ namespace FTAnalyzer.Forms
 
         private void ResetTable()
         {
-            dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
+            SortIndividuals();
             if (!splitContainer.Panel2Collapsed)
-                dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
+                SortFamilies();
         }
 
         private void mnuSaveColumnLayout_Click(object sender, EventArgs e)

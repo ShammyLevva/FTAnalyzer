@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTAnalyzer", "FTAnalyzer.csproj", "{799ECA65-6748-4B7C-BBD5-429C19E02161}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3D793607-BF4F-4E49-870F-191E187C2EAD} = {3D793607-BF4F-4E49-870F-191E187C2EAD}
@@ -69,9 +71,6 @@ Global
 		SccProjectUniqueName9 = ..\\BruTile\\BruTile.Desktop\\BruTile.Desktop.csproj
 		SccProjectName9 = ../BruTile/BruTile.Desktop
 		SccLocalPath9 = ..\\BruTile\\BruTile.Desktop
-	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = FTAnalyzer.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -192,5 +191,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = FTAnalyzer.vsmdi
 	EndGlobalSection
 EndGlobal
