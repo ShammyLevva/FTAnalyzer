@@ -81,6 +81,8 @@ namespace FTAnalyzer
 
         public void DoExportToExcel<T>()
         {
+            if (ReportGrid.DataSource == null)
+                return;
             parent.Cursor = Cursors.WaitCursor;
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
             SortableBindingList<T> gridDatasource = ReportGrid.DataSource as SortableBindingList<T>;

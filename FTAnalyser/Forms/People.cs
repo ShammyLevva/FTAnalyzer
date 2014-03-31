@@ -16,18 +16,26 @@ namespace FTAnalyzer.Forms
         private bool selectRow = false;
         private Dictionary<IDisplayIndividual, IDisplayFamily> families;
         private FamilyTree ft = FamilyTree.Instance;
-        
+        private ReportFormHelper indReportFormHelper;
+        private ReportFormHelper famReportFormHelper;
+
         public People()
         {
             InitializeComponent();
+            indReportFormHelper = new ReportFormHelper(this, this.Text, dgIndividuals, this.ResetTable, "People");
+            famReportFormHelper = new ReportFormHelper(this, this.Text, dgFamilies, this.ResetTable, "People");
         }
 
         private void UpdateStatusCount()
         {
+            indReportFormHelper.LoadColumnLayout("PeopleIndColumns.xml");
             if (splitContainer.Panel2Collapsed)
                 txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals.";
             else
+            {
+                famReportFormHelper.LoadColumnLayout("PeopleFamColumns.xml");
                 txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals and " + dgFamilies.RowCount + " Families.";
+            }
         }
 
         public void SetLocation(FactLocation loc, int level)
@@ -311,6 +319,73 @@ namespace FTAnalyzer.Forms
                 Notes notes = new Notes(ind);
                 notes.Show();
             }
+        }
+
+        private void ShowViewNotesMenu(DataGridView dg, MouseEventArgs e)
+        {
+            DataGridView.HitTestInfo hti = dg.HitTest(e.Location.X, e.Location.Y);
+            if (e.Button == MouseButtons.Right)
+            {
+                var ht = dg.HitTest(e.X, e.Y);
+                if (ht.Type != DataGridViewHitTestType.ColumnHeader)
+                {
+                    if (hti.RowIndex >= 0 && hti.ColumnIndex >= 0)
+                    {
+                        dg.CurrentCell = dg.Rows[hti.RowIndex].Cells[hti.ColumnIndex];
+                        // Can leave these here - doesn't hurt
+                        dg.Rows[hti.RowIndex].Selected = true;
+                        dg.Focus();
+                        ctxViewNotes.Tag = dg.CurrentRow.DataBoundItem;
+                        ctxViewNotes.Show(MousePosition);
+                    }
+                }
+            }
+        }
+
+        private void ResetTable()
+        {
+            dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
+            if (!splitContainer.Panel2Collapsed)
+                dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
+        }
+
+        private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
+        {
+            indReportFormHelper.SaveColumnLayout("PeopleIndColumns.xml");
+            famReportFormHelper.SaveColumnLayout("PeopleFamColumns.xml"); 
+            MessageBox.Show("Form Settings Saved", "People");
+        }
+
+        private void mnuResetColumns_Click(object sender, EventArgs e)
+        {
+            indReportFormHelper.ResetColumnLayout("PeopleIndColumns.xml");
+            famReportFormHelper.ResetColumnLayout("PeopleFamColumns.xml");
+        }
+
+        private void printToolStripButton_Click(object sender, EventArgs e)
+        {
+            indReportFormHelper.PrintReport(this.Text);
+            if (!splitContainer.Panel2Collapsed)
+                famReportFormHelper.PrintReport(this.Text + " - Families");
+        }
+
+        private void printPreviewToolStripButton_Click(object sender, EventArgs e)
+        {
+            indReportFormHelper.PrintPreviewReport();
+            if (!splitContainer.Panel2Collapsed)
+                famReportFormHelper.PrintPreviewReport();
+        }
+
+        private void mnuExportToExcel_Click(object sender, EventArgs e)
+        {
+            indReportFormHelper.DoExportToExcel<IDisplayFact>();
+            if (!splitContainer.Panel2Collapsed)
+                famReportFormHelper.DoExportToExcel<IDisplayFact>();
+        }
+
+        private void dgIndividuals_MouseDown(object sender, MouseEventArgs e)
+        {
+            ShowViewNotesMenu(dgIndividuals, e);
         }
     }
 }

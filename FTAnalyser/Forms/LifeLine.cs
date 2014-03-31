@@ -190,10 +190,10 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                Cursor.Current = Cursors.WaitCursor;
+                this.Cursor = Cursors.WaitCursor;
                 IDisplayFact fact = (IDisplayFact)dgFacts.CurrentRow.DataBoundItem;
                 ft.OpenGeoLocations(fact.Location);
-                Cursor.Current = Cursors.Default;
+                this.Cursor = Cursors.Default;
             }
         }
 

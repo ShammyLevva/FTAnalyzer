@@ -18,6 +18,8 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
+            indReportFormHelper.Dispose();
+            famReportFormHelper.Dispose();
         }
 
         #region Windows Form Designer generated code
@@ -34,17 +36,26 @@
             this.txtCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
-            this.dgFamilies = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ctxViewNotes = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewNotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dgFamilies = new System.Windows.Forms.DataGridView();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.mnuSaveColumnLayout = new System.Windows.Forms.ToolStripButton();
+            this.mnuResetColumns = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
+            this.ctxViewNotes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -73,6 +84,7 @@
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.Controls.Add(this.dgIndividuals);
+            this.splitContainer.Panel1.Controls.Add(this.toolStrip1);
             // 
             // splitContainer.Panel2
             // 
@@ -87,13 +99,29 @@
             this.dgIndividuals.AllowUserToDeleteRows = false;
             this.dgIndividuals.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgIndividuals.ContextMenuStrip = this.contextMenuStrip1;
+            this.dgIndividuals.ContextMenuStrip = this.ctxViewNotes;
             this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgIndividuals.Location = new System.Drawing.Point(0, 0);
+            this.dgIndividuals.Location = new System.Drawing.Point(0, 25);
             this.dgIndividuals.Name = "dgIndividuals";
-            this.dgIndividuals.Size = new System.Drawing.Size(1038, 286);
+            this.dgIndividuals.Size = new System.Drawing.Size(1038, 261);
             this.dgIndividuals.TabIndex = 2;
             this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgIndividuals_CellDoubleClick_1);
+            this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgIndividuals_MouseDown);
+            // 
+            // ctxViewNotes
+            // 
+            this.ctxViewNotes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewNotesToolStripMenuItem});
+            this.ctxViewNotes.Name = "contextMenuStrip1";
+            this.ctxViewNotes.Size = new System.Drawing.Size(134, 26);
+            this.ctxViewNotes.Opened += new System.EventHandler(this.contextMenuStrip1_Opened);
+            // 
+            // viewNotesToolStripMenuItem
+            // 
+            this.viewNotesToolStripMenuItem.Name = "viewNotesToolStripMenuItem";
+            this.viewNotesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewNotesToolStripMenuItem.Text = "View Notes";
+            this.viewNotesToolStripMenuItem.Click += new System.EventHandler(this.viewNotesToolStripMenuItem_Click);
             // 
             // dgFamilies
             // 
@@ -108,20 +136,81 @@
             this.dgFamilies.TabIndex = 5;
             this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFamilies_CellDoubleClick_1);
             // 
-            // contextMenuStrip1
+            // toolStrip1
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewNotesToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(134, 26);
-            this.contextMenuStrip1.Opened += new System.EventHandler(this.contextMenuStrip1_Opened);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuSaveColumnLayout,
+            this.mnuResetColumns,
+            this.toolStripSeparator2,
+            this.printToolStripButton,
+            this.printPreviewToolStripButton,
+            this.toolStripSeparator,
+            this.mnuExportToExcel});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1038, 25);
+            this.toolStrip1.TabIndex = 3;
+            this.toolStrip1.Text = "toolStrip1";
             // 
-            // viewNotesToolStripMenuItem
+            // mnuSaveColumnLayout
             // 
-            this.viewNotesToolStripMenuItem.Name = "viewNotesToolStripMenuItem";
-            this.viewNotesToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.viewNotesToolStripMenuItem.Text = "View Notes";
-            this.viewNotesToolStripMenuItem.Click += new System.EventHandler(this.viewNotesToolStripMenuItem_Click);
+            this.mnuSaveColumnLayout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mnuSaveColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveColumnLayout.Image")));
+            this.mnuSaveColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnuSaveColumnLayout.Name = "mnuSaveColumnLayout";
+            this.mnuSaveColumnLayout.Size = new System.Drawing.Size(23, 22);
+            this.mnuSaveColumnLayout.Text = "Save Column Sort Order, layout, width etc";
+            this.mnuSaveColumnLayout.Click += new System.EventHandler(this.mnuSaveColumnLayout_Click);
+            // 
+            // mnuResetColumns
+            // 
+            this.mnuResetColumns.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mnuResetColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetColumns.Image")));
+            this.mnuResetColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnuResetColumns.Name = "mnuResetColumns";
+            this.mnuResetColumns.Size = new System.Drawing.Size(23, 22);
+            this.mnuResetColumns.Text = "Reset Column Sort Order to Default";
+            this.mnuResetColumns.Click += new System.EventHandler(this.mnuResetColumns_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // printToolStripButton
+            // 
+            this.printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
+            this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.printToolStripButton.Name = "printToolStripButton";
+            this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.printToolStripButton.Text = "&Print";
+            this.printToolStripButton.Click += new System.EventHandler(this.printToolStripButton_Click);
+            // 
+            // printPreviewToolStripButton
+            // 
+            this.printPreviewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
+            this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
+            this.printPreviewToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.printPreviewToolStripButton.Text = "Print Preview...";
+            this.printPreviewToolStripButton.Click += new System.EventHandler(this.printPreviewToolStripButton_Click);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // mnuExportToExcel
+            // 
+            this.mnuExportToExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
+            this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnuExportToExcel.Name = "mnuExportToExcel";
+            this.mnuExportToExcel.Size = new System.Drawing.Size(23, 22);
+            this.mnuExportToExcel.Text = "Export to Excel";
+            this.mnuExportToExcel.Click += new System.EventHandler(this.mnuExportToExcel_Click);
             // 
             // People
             // 
@@ -137,12 +226,15 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel1.PerformLayout();
             this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
+            this.ctxViewNotes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,7 +247,15 @@
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.DataGridView dgIndividuals;
         private System.Windows.Forms.DataGridView dgFamilies;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip ctxViewNotes;
         private System.Windows.Forms.ToolStripMenuItem viewNotesToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton mnuSaveColumnLayout;
+        private System.Windows.Forms.ToolStripButton mnuResetColumns;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton printToolStripButton;
+        private System.Windows.Forms.ToolStripButton printPreviewToolStripButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.ToolStripButton mnuExportToExcel;
     }
 }
