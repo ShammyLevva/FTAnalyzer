@@ -236,6 +236,9 @@ namespace FTAnalyzer
         {
             FactLocation result;
             FactLocation temp;
+            // GEDCOM lat/long will be prefixed with NS and EW which needs to be +/- to work.
+            latitude = latitude.Replace("N", "").Replace("S", "-");
+            longitude = longitude.Replace("W", "-").Replace("E", "");
             if (!locations.TryGetValue(place, out result))
             {
                 result = new FactLocation(place, latitude, longitude, status);
