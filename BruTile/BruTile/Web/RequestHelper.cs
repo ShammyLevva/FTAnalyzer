@@ -20,11 +20,6 @@ namespace BruTile.Web
         public static byte[] FetchImage(HttpWebRequest webRequest)
         {
             WebResponse webResponse = webRequest.GetSyncResponse(Timeout);
-            //if (webResponse == null)
-            //{
-            //    HttpWebRequestExtensions.SetDefaultProxy();
-            //    webResponse = webRequest.GetSyncResponse(Timeout);
-            //}
             if (webResponse == null) throw (new WebException("An error occurred while fetching tile", null));
             if (webResponse.ContentType.StartsWith("image", StringComparison.OrdinalIgnoreCase))
             {

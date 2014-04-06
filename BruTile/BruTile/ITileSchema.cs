@@ -10,15 +10,19 @@ namespace BruTile
         string Name { get; }
         string Srs { get; }
         Extent Extent { get; }
-        double OriginX { get; }
-        double OriginY { get; }
-        IDictionary<int, Resolution> Resolutions { get; }
-        int Width { get; }
-        int Height { get; }
+        int GetTileWidth(string levelId);
+        int GetTileHeight(string levelId);
+        double GetOriginX(string levelId);
+        double GetOriginY(string levelId);
+        int GetMatrixWidth(string levelId);
+        int GetMatrixHeight(string levelId);
+        IDictionary<string, Resolution> Resolutions { get; }
         string Format { get; }
         AxisDirection Axis { get; }
-        IEnumerable<TileInfo> GetTilesInView(Extent extent, int level);
+        IEnumerable<TileInfo> GetTilesInView(Extent extent, string levelId);
         IEnumerable<TileInfo> GetTilesInView(Extent extent, double resolution);
-        Extent GetExtentOfTilesInView(Extent extent, int level);
+        Extent GetExtentOfTilesInView(Extent extent, string levelId);
+        int GetMatrixFirstCol(string levelId);
+        int GetMatrixFirstRow(string levelId);
     }
 }

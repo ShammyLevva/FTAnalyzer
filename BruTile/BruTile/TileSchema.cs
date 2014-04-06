@@ -31,74 +31,150 @@ namespace BruTile
 
     public class TileSchema : ITileSchema
     {
-        private readonly IDictionary<int, Resolution> _resolutions;
-        private readonly IDictionary<int, TileMatrix> _tileMatrices; 
+        public double ProportionIgnored;
+        private readonly IDictionary<string, Resolution> _resolutions;
 
         public TileSchema()
         {
-            _resolutions = new Dictionary<int, Resolution>();
-            _tileMatrices = new Dictionary<int, TileMatrix>();
+            ProportionIgnored = 0.0001;
+            _resolutions = new Dictionary<string, Resolution>();
             Axis = AxisDirection.Normal;
             OriginY = Double.NaN;
             OriginX = Double.NaN;
         }
 
-        public string Name { get; set; }
-        public string Srs { get; set; }
-        public Extent Extent { get; set; }
         public double OriginX { get; set; }
         public double OriginY { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
+        public string Name { get; set; }
+        public string Srs { get; set; }
         public string Format { get; set; }
+        public Extent Extent { get; set; }
+        public AxisDirection Axis { get; set; }
 
-        public IDictionary<int, Resolution> Resolutions
+        public IDictionary<string, Resolution> Resolutions
         {
             get { return _resolutions; }
         }
 
-        public IDictionary<int, TileMatrix> Matrices // this shoudl replace all resolutions.
+        public double GetOriginX(string levelId)
         {
-            get { return _tileMatrices;  }
+            return OriginX;
         }
 
-        public AxisDirection Axis { get; set; }
+        public double GetOriginY(string levelId)
+        {
+            return OriginY;
+        }
+
+        public int GetTileWidth(string levelId)
+        {
+            return Width;
+        }
+
+        public int GetTileHeight(string levelId)
+        {
+            return Height;
+        }
+
+        public int GetMatrixWidth(string levelId)
+        {
+            return GetMatrixLastCol(levelId) - GetMatrixFirstCol(levelId) + 1;
+        }
+
+        public int GetMatrixHeight(string levelId)
+        {
+            return GetMatrixLastRow(levelId) - GetMatrixFirstRow(levelId) + 1;
+        }
+
+        public int GetMatrixFirstCol(string levelId)
+        {
+            return (int)Math.Floor(((GetFirstXRelativeToOrigin(Extent, OriginX) / Resolutions[levelId].UnitsPerPixel) / GetTileWidth(levelId)));
+        }
+
+        public int GetMatrixFirstRow(string levelId)
+        {
+            return (int)Math.Floor((GetFirstYRelativeToOrigin(Axis, Extent, OriginY) / Resolutions[levelId].UnitsPerPixel) / GetTileHeight(levelId));
+        }
 
         /// <summary>
         /// Returns a List of TileInfos that cover the provided extent. 
         /// </summary>
         public IEnumerable<TileInfo> GetTilesInView(Extent extent, double resolution)
         {
-            int level = Utilities.GetNearestLevel(Resolutions, resolution);
+            var level = Utilities.GetNearestLevel(Resolutions, resolution);
             return GetTilesInView(extent, level);
         }
 
-        public IEnumerable<TileInfo> GetTilesInView(Extent extent, int level)
+        public IEnumerable<TileInfo> GetTilesInView(Extent extent, string levelId)
         {
-            TileRange range = TileTransform.WorldToTile(extent, level, this);
+            return GetTilesInView(this, extent, levelId);
+        }
 
-            for (int x = range.FirstCol; x < range.FirstCol + range.ColCount; x++)
+        public Extent GetExtentOfTilesInView(Extent extent, string levelId)
+        {
+            return GetExtentOfTilesInView(this, extent, levelId);
+        }
+
+        private int GetMatrixLastCol(string levelId)
+        {
+            return (int)Math.Floor(((GetLastXRelativeToOrigin(Extent, OriginX)) / Resolutions[levelId].UnitsPerPixel) / GetTileWidth(levelId) - ProportionIgnored);
+        }
+
+        private int GetMatrixLastRow(string levelId)
+        {
+            return (int)Math.Floor((GetLastYRelativeToOrigin(Axis, Extent, OriginY) / Resolutions[levelId].UnitsPerPixel) / GetTileHeight(levelId) - ProportionIgnored);
+        }
+
+        private static double GetLastXRelativeToOrigin(Extent extent, double originX)
+        {
+            return extent.MaxX - originX;
+        }
+
+        private static double GetLastYRelativeToOrigin(AxisDirection axis, Extent extent, double originY)
+        {
+            return axis == AxisDirection.Normal ? extent.MaxY - originY : -extent.MinY + originY;
+        }
+
+        private static double GetFirstXRelativeToOrigin(Extent extent, double originX)
+        {
+            return extent.MinX - originX;
+        }
+
+        private static double GetFirstYRelativeToOrigin(AxisDirection axis, Extent extent, double originY)
+        {
+            return (axis == AxisDirection.Normal) ? extent.MinY - originY : -extent.MaxY + originY;
+        }
+
+        internal static IEnumerable<TileInfo> GetTilesInView(ITileSchema schema, Extent extent, string levelId)
+        {
+            // todo: move this method elsewhere.
+            var range = TileTransform.WorldToTile(extent, levelId, schema);
+
+            // todo: use a method to get tilerange for full schema and intersect with requested tilerange.
+            var startX = Math.Max(range.FirstCol, schema.GetMatrixFirstCol(levelId));
+            var stopX = Math.Min(range.FirstCol + range.ColCount, schema.GetMatrixFirstCol(levelId) + schema.GetMatrixWidth(levelId));
+            var startY = Math.Max(range.FirstRow, schema.GetMatrixFirstRow(levelId));
+            var stopY = Math.Min(range.FirstRow + range.RowCount, schema.GetMatrixFirstRow(levelId) + schema.GetMatrixHeight(levelId));
+
+            for (var x = startX; x < stopX; x++)
             {
-                for (int y = range.FirstRow; y < range.FirstRow + range.RowCount; y++)
+                for (var y = startY; y < stopY; y++)
                 {
-                    var info = new TileInfo
-                        {
-                            Extent = TileTransform.TileToWorld(new TileRange(x, y), level, this),
-                            Index = new TileIndex(x, y, level)
-                        };
-
-                    if (WithinSchemaExtent(Extent, info.Extent))
+                    yield return new TileInfo
                     {
-                        yield return info;
-                    }
+                        Extent = TileTransform.TileToWorld(new TileRange(x, y), levelId, schema),
+                        Index = new TileIndex(x, y, levelId)
+                    };
                 }
             }
         }
 
-        public Extent GetExtentOfTilesInView(Extent extent, int level)
+        public static Extent GetExtentOfTilesInView(ITileSchema schema, Extent extent, string levelId)
         {
-            TileRange range = TileTransform.WorldToTile(extent, level, this);
-            return TileTransform.TileToWorld(range, level, this);
+            var range = TileTransform.WorldToTile(extent, levelId, schema);
+            return TileTransform.TileToWorld(range, levelId, schema);
         }
 
         /// <summary>
@@ -148,21 +224,6 @@ namespace BruTile
                 throw new ValidationException(String.Format(CultureInfo.InvariantCulture,
                                                             "The Format was not set for TileSchema '{0}'", Name));
             }
-
-            // TODO: BoundingBox should contain a SRS, and we should check if BoundingBox.Srs is the same
-            // as TileSchema Srs because we do not project one to the other. 
-        }
-
-        private static bool WithinSchemaExtent(Extent schemaExtent, Extent tileExtent)
-        {
-            // Always return false when the tile is outsize of the schema
-            if (!tileExtent.Intersects(schemaExtent)) return false;
-
-            // Do not always accept when the tile is partially inside the schema. 
-            // Reject tiles that have less than 0.1% percent overlap.
-            // In practice they turn out to be mostly false positives due to rounding errors.
-            // They are not present on the server and the failed requests slow the application down.
-            return ((tileExtent.Intersect(schemaExtent).Area/tileExtent.Area) > 0.001);
         }
     }
 }

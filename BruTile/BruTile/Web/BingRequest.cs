@@ -12,7 +12,7 @@ namespace BruTile.Web
         Roads,
         Aerial,
         Hybrid,
-        OS
+	OS
     }
 
     public class BingRequest : IRequest
@@ -33,11 +33,11 @@ namespace BruTile.Web
         /// http://msdn.microsoft.com/en-us/library/cc980844.aspx</remarks>
         public BingRequest(string baseUrl, string token, BingMapType mapType, string apiVersion = DefaultApiVersion)
         {
-            _urlFormatter = baseUrl + "/" + ToMapTypeChar(mapType) + QuadKeyTag + ".jpeg?g=" +
-                    ApiVersionTag + OSTag + "&token=" + UserKeyTag;
+            _urlFormatter = baseUrl + "/" + ToMapTypeChar(mapType) +  QuadKeyTag + ".jpeg?g=" + 
+                ApiVersionTag + OSTag + "&token=" + UserKeyTag;
             _userKey = token;
             ApiVersion = apiVersion;
-            _mapType = mapType;
+	    _mapType = mapType;
         }
 
         public BingRequest(string urlFormatter, string userKey, string apiVersion = DefaultApiVersion, IEnumerable<string> serverNodes = null)
@@ -70,7 +70,7 @@ namespace BruTile.Web
             var stringBuilder = new StringBuilder(_urlFormatter);
             stringBuilder.Replace(QuadKeyTag, TileXyToQuadKey(info.Index.Col, info.Index.Row, info.Index.Level));
             stringBuilder.Replace(ApiVersionTag, ApiVersion);
-            if (_mapType == BingMapType.OS && info.Index.Level >= 12)
+            if (_mapType == BingMapType.OS && Convert.ToInt32(info.Index.Level) >= 12)
                 stringBuilder.Replace(OSTag, "&productSet=mmOS");
             else
                 stringBuilder.Replace(OSTag, string.Empty);
@@ -85,7 +85,7 @@ namespace BruTile.Web
             {
                 case BingMapType.Roads:
                 case BingMapType.OS:
-                    return 'r';
+                   return 'r';
                 case BingMapType.Aerial:
                     return 'a';
                 case BingMapType.Hybrid:
@@ -99,18 +99,20 @@ namespace BruTile.Web
         /// </summary>
         /// <param name="tileX">Tile X coordinate.</param>
         /// <param name="tileY">Tile Y coordinate.</param>
-        /// <param name="levelOfDetail">Level of detail, from 1 (lowest detail)
+        /// <param name="levelId">Level of detail, from 1 (lowest detail)
         /// to 23 (highest detail).</param>
         /// <returns>A string containing the QuadKey.</returns>
         /// Stole this methode from this nice blog: http://www.silverlightshow.net/items/Virtual-earth-deep-zooming.aspx. PDD.
-        private static string TileXyToQuadKey(int tileX, int tileY, int levelOfDetail)
+        private static string TileXyToQuadKey(int tileX, int tileY, string levelId)
         {
             var quadKey = new StringBuilder();
 
-            for (int i = levelOfDetail; i > 0; i--)
+            var levelOfDetail = int.Parse(levelId);
+
+            for (var i = levelOfDetail; i > 0; i--)
             {
-                char digit = '0';
-                int mask = 1 << (i - 1);
+                var digit = '0';
+                var mask = 1 << (i - 1);
 
                 if ((tileX & mask) != 0)
                 {

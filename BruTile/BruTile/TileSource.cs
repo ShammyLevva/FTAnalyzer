@@ -1,6 +1,7 @@
 ﻿﻿// Copyright (c) BruTile developers team. All rights reserved. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
 using BruTile.Predefined;
 using BruTile.Web;
 
@@ -10,6 +11,7 @@ namespace BruTile
     {
         public ITileProvider Provider { get; private set; }
         public ITileSchema Schema { get; private set; }
+        public string Title { get; set; }
 
         public TileSource(ITileProvider tileProvider, ITileSchema tileSchema)
         {

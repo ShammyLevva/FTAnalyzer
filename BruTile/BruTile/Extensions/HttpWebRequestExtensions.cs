@@ -46,9 +46,6 @@ namespace BruTile.Extensions
                 }
                 catch (WebException we)
                 {
-                    //HttpStatusCode status = (we.Response as HttpWebResponse).StatusCode;
-                    //if (we.Status == WebExceptionStatus.ProtocolError)
-                    //    SetDefaultProxy();
                     if (we.Status != WebExceptionStatus.RequestCanceled)
                     {
                         exception = we;
@@ -91,20 +88,6 @@ namespace BruTile.Extensions
             if (exception != null) throw exception;
 
             return response;
-        }
-
-        public static void SetDefaultProxy()
-        {
-            HttpWebRequest request = HttpWebRequest.Create("http://www.google.com") as HttpWebRequest;
-            IWebProxy proxy = request.Proxy;
-            if (proxy.Credentials == null)
-            {
-                string proxyuri = proxy.GetProxy(request.RequestUri).ToString();
-                request.UseDefaultCredentials = true;
-                proxy = new WebProxy(proxyuri, false);
-                proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
-                WebRequest.DefaultWebProxy = proxy;
-            }
         }
     }
 }

@@ -8,22 +8,13 @@ using System.Linq;
 namespace BruTile.Cache
 {
 
-    public class MemoryCache<T> : ITileCache<T>, INotifyPropertyChanged, IDisposable
+    public class MemoryCache<T>: IMemoryCache<T>, INotifyPropertyChanged, IDisposable
     {
-        //for future implemenations or replacements of this class look 
-        //into .net 4.0 System.Collections.Concurrent namespace.
-
-        private readonly Dictionary<TileIndex, T> _bitmaps
-          = new Dictionary<TileIndex, T>();
-
-        private readonly Dictionary<TileIndex, DateTime> _touched
-          = new Dictionary<TileIndex, DateTime>();
-
+        private readonly Dictionary<TileIndex, T> _bitmaps = new Dictionary<TileIndex, T>();
+        private readonly Dictionary<TileIndex, DateTime> _touched = new Dictionary<TileIndex, DateTime>();
         private readonly object _syncRoot = new object();
-        private readonly int _maxTiles;
-        private readonly int _minTiles;
-        private bool _haveDisposed;
-        private readonly Func<TileIndex, bool> _keepTileInMemory = null; 
+        private bool _disposed;
+        private readonly Func<TileIndex, bool> _keepTileInMemory;
         
         public int TileCount
         {
@@ -33,14 +24,17 @@ namespace BruTile.Cache
             }
         }
 
+        public int MinTiles { get; set; }
+        public int MaxTiles { get; set; }
+
         public MemoryCache(int minTiles = 50, int maxTiles = 100, Func<TileIndex, bool> keepTileInMemory = null)
         {
             if (minTiles >= maxTiles) throw new ArgumentException("minTiles should be smaller than maxTiles");
             if (minTiles < 0) throw new ArgumentException("minTiles should be larger than zero");
             if (maxTiles < 0) throw new ArgumentException("maxTiles should be larger than zero");
             
-            _minTiles = minTiles;
-            _maxTiles = maxTiles;
+            MinTiles = minTiles;
+            MaxTiles = maxTiles;
             _keepTileInMemory = keepTileInMemory;
         }
 
@@ -57,7 +51,7 @@ namespace BruTile.Cache
                 {
                     _touched.Add(index, DateTime.Now);
                     _bitmaps.Add(index, item);
-                    if (_bitmaps.Count > _maxTiles) CleanUp();
+                    CleanUp();
                     OnNotifyPropertyChange("TileCount");
                 }
             }
@@ -67,11 +61,18 @@ namespace BruTile.Cache
         {
             lock (_syncRoot)
             {
-                if (!_bitmaps.ContainsKey(index)) return; //ignore if not exists
-                _touched.Remove(index);
-                _bitmaps.Remove(index);
-                OnNotifyPropertyChange("TileCount");
+                LocalRemove(index);
             }
+        }
+
+        private void LocalRemove(TileIndex index)
+        {
+            if (!_bitmaps.ContainsKey(index)) return;
+            var disposable = (_bitmaps[index] as IDisposable);
+            if (disposable != null) disposable.Dispose();
+            _touched.Remove(index);
+            _bitmaps.Remove(index);
+            OnNotifyPropertyChange("TileCount");
         }
 
         public T Find(TileIndex index)
@@ -89,106 +90,70 @@ namespace BruTile.Cache
         {
             lock (_syncRoot)
             {
-                _bitmaps.Clear();
+                DisposeTilesIfDisposable();
                 _touched.Clear();
+                _bitmaps.Clear();
+                OnNotifyPropertyChange("TileCount");
             }
         }
 
-        private void CleanUp()
+        virtual protected void CleanUp()
         {
-            lock (_syncRoot)
+            if (_bitmaps.Count <= MaxTiles) return;
+
+            var numTilesToAlwaysKeep = 0;
+            if (_keepTileInMemory != null)
             {
-                //Purpose: Remove the older tiles so that the newest x tiles are left.
-                if (_keepTileInMemory != null) TouchPermaCache(_touched, _keepTileInMemory);
-                DateTime cutoff = GetCutOff(_touched, _minTiles);
-                IEnumerable<TileIndex> oldItems = GetOldItems(_touched, ref cutoff);
-                foreach (TileIndex index in oldItems)
-                {
-                    Remove(index);
-                }
+                var tilesToKeep = _touched.Keys.Where(_keepTileInMemory).ToList();
+                foreach (var index in tilesToKeep) _touched[index] = DateTime.Now; // touch tiles to keep
+                numTilesToAlwaysKeep = tilesToKeep.Count;
             }
-        }
+            var tilesToRemove = Math.Min(_bitmaps.Count - MinTiles, _bitmaps.Count - numTilesToAlwaysKeep);
 
-        private static void TouchPermaCache(Dictionary<TileIndex, DateTime> touched, Func<TileIndex, bool> keepTileInMemory)
-        {
-            //This is a temporary solution to preserve level zero tiles in memory.
-            var keys = touched.Keys.Where(keepTileInMemory).ToList();
-            
-            foreach (TileIndex index in keys) touched[index] = DateTime.Now;
-        }
+            var oldItems = _touched.OrderBy(p => p.Value).Take(tilesToRemove); 
 
-        private static DateTime GetCutOff(Dictionary<TileIndex, DateTime> touched,
-          int lowerLimit)
-        {
-            var times = touched.Values.ToList();
-            times.Sort();
-            return times[times.Count - lowerLimit];
-        }
-
-        private static IEnumerable<TileIndex> GetOldItems(Dictionary<TileIndex, DateTime> touched,
-          ref DateTime cutoff)
-        {
-            var oldItems = new List<TileIndex>();
-            foreach (TileIndex index in touched.Keys)
+            foreach (var oldItem in oldItems)
             {
-                if (touched[index] < cutoff)
-                {
-                    oldItems.Add(index);
-                }
+                Remove(oldItem.Key);
             }
-            return oldItems;
         }
-
-        #region INotifyPropertyChanged Members
 
         protected virtual void OnNotifyPropertyChange(string propertyName)
         {
-            if (PropertyChanged != null)
+            var handler = PropertyChanged;
+            if (handler != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        #endregion
-
-		~MemoryCache()
-        {
-            if (!_haveDisposed)
-                Dispose();
-        }
-
         public void Dispose()
         {
-            if (_haveDisposed)
-                return;
+            if (_disposed) return;
+            DisposeTilesIfDisposable();
+            _touched.Clear();
+            _bitmaps.Clear();
+            _disposed = true;
+        }
 
-            if (_bitmaps != null)
+        private void DisposeTilesIfDisposable()
+        {
+            foreach (var index in _bitmaps.Keys)
             {
-                foreach (var kvp in _bitmaps)
-                {
-                    if (kvp.Value != null)
-                    {
-                        if (kvp.Value is IDisposable)
-                        {
-                            (kvp.Value as IDisposable).Dispose();
-                        }
-                        
-                    }
-                }
-                _bitmaps.Clear();
+                var bitmap = (_bitmaps[index] as IDisposable);
+                if (bitmap != null) bitmap.Dispose();
             }
-            _haveDisposed = true;
         }
 
 #if DEBUG
         public bool EqualSetup(MemoryCache<T> other)
         {
-            if (_minTiles != other._minTiles)
+            if (MinTiles != other.MinTiles)
                 return false;
 
-            if (_maxTiles != other._maxTiles)
+            if (MaxTiles != other.MaxTiles)
                 return false;
 
             System.Diagnostics.Debug.Assert(_syncRoot != null && other._syncRoot != null && _syncRoot != other._syncRoot);
