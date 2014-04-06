@@ -20,7 +20,8 @@ namespace FTAnalyzer.Mapping
 
         public override Uri GetUri(BruTile.TileIndex tileIndex)
         {
-            if (tileIndex.Level < 7 || tileIndex.Level > 14)
+            var level = Convert.ToInt32(tileIndex.Level);
+            if (level < 7 || level > 14)
                 return mDefault.GetUri(tileIndex);
             return base.GetUri(tileIndex);
         }
