@@ -1,4 +1,3 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
@@ -8,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTAnalyzer", "FTAnalyzer.cs
 		{3D793607-BF4F-4E49-870F-191E187C2EAD} = {3D793607-BF4F-4E49-870F-191E187C2EAD}
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F} = {2DDE32B6-2BC5-44D3-8BE2-E7705645558F}
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Old Java Code", "..\Old Java Code\Old Java Code.csproj", "{19F9AC73-3B92-4656-9280-6CB638CB88E2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTMAnalyzer", "..\FTMAnalyzer\FTMAnalyzer.csproj", "{4DA6B8B8-8F42-4DFF-B998-5DF9F99929AE}"
 EndProject
@@ -21,8 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Local.testsettings = Local.testsettings
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Old Code", "..\Old Code\Old Code.csproj", "{63028B09-0EC2-45FA-BBC2-9B5F863C0E63}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Printing.DataGridViewPrint", "..\Printing.DataGridViewPrint\Printing.DataGridViewPrint.csproj", "{FDFCB41B-C75D-476F-A4AA-EFD8C875A677}"
 EndProject
@@ -39,38 +34,37 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTile", "..\BruTile\BruTi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTile.Desktop", "..\BruTile\BruTile.Desktop\BruTile.Desktop.csproj", "{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiSelectTreeView", "..\MultiSelectTreeView\MultiSelectTreeView\MultiSelectTreeView.csproj", "{2854814F-EA3C-41D4-AA94-460C4694F430}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = FTAnalyzer.csproj
 		SccLocalPath1 = .
-		SccProjectUniqueName2 = ..\\Old\u0020Java\u0020Code\\Old\u0020Java\u0020Code.csproj
-		SccProjectName2 = ../Old\u0020Java\u0020Code
-		SccLocalPath2 = ..\\Old\u0020Java\u0020Code
-		SccProjectUniqueName3 = ..\\FTMAnalyzer\\FTMAnalyzer.csproj
-		SccProjectName3 = ../FTMAnalyzer
-		SccLocalPath3 = ..\\FTMAnalyzer
-		SccProjectUniqueName4 = FactDateTest\\FTA-UnitTests.csproj
-		SccProjectName4 = FactDateTest
-		SccLocalPath4 = FactDateTest
-		SccProjectUniqueName5 = ..\\Old\u0020Code\\Old\u0020Code.csproj
-		SccProjectName5 = ../Old\u0020Code
-		SccLocalPath5 = ..\\Old\u0020Code
-		SccProjectUniqueName6 = ..\\Printing.DataGridViewPrint\\Printing.DataGridViewPrint.csproj
-		SccProjectName6 = ../Printing.DataGridViewPrint
-		SccLocalPath6 = ..\\Printing.DataGridViewPrint
-		SccProjectUniqueName7 = ..\\DgvFilterPopup\\DgvFilterPopup.csproj
-		SccProjectName7 = ../DgvFilterPopup
-		SccLocalPath7 = ..\\DgvFilterPopup
-		SccProjectUniqueName8 = ..\\BruTile\\BruTile\\BruTile.csproj
-		SccProjectName8 = ../BruTile/BruTile
-		SccLocalPath8 = ..\\BruTile\\BruTile
-		SccProjectUniqueName9 = ..\\BruTile\\BruTile.Desktop\\BruTile.Desktop.csproj
-		SccProjectName9 = ../BruTile/BruTile.Desktop
-		SccLocalPath9 = ..\\BruTile\\BruTile.Desktop
+		SccProjectUniqueName2 = ..\\FTMAnalyzer\\FTMAnalyzer.csproj
+		SccProjectName2 = ../FTMAnalyzer
+		SccLocalPath2 = ..\\FTMAnalyzer
+		SccProjectUniqueName3 = FactDateTest\\FTA-UnitTests.csproj
+		SccProjectName3 = FactDateTest
+		SccLocalPath3 = FactDateTest
+		SccProjectUniqueName4 = ..\\Printing.DataGridViewPrint\\Printing.DataGridViewPrint.csproj
+		SccProjectName4 = ../Printing.DataGridViewPrint
+		SccLocalPath4 = ..\\Printing.DataGridViewPrint
+		SccProjectUniqueName5 = ..\\DgvFilterPopup\\DgvFilterPopup.csproj
+		SccProjectName5 = ../DgvFilterPopup
+		SccLocalPath5 = ..\\DgvFilterPopup
+		SccProjectUniqueName6 = ..\\BruTile\\BruTile\\BruTile.csproj
+		SccProjectName6 = ../BruTile/BruTile
+		SccLocalPath6 = ..\\BruTile\\BruTile
+		SccProjectUniqueName7 = ..\\BruTile\\BruTile.Desktop\\BruTile.Desktop.csproj
+		SccProjectName7 = ../BruTile/BruTile.Desktop
+		SccLocalPath7 = ..\\BruTile\\BruTile.Desktop
+		SccProjectUniqueName8 = ..\\MultiSelectTreeView\\MultiSelectTreeView\\MultiSelectTreeView.csproj
+		SccProjectName8 = ../MultiSelectTreeView/MultiSelectTreeView
+		SccLocalPath8 = ..\\MultiSelectTreeView\\MultiSelectTreeView
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,17 +91,6 @@ Global
 		{799ECA65-6748-4B7C-BBD5-429C19E02161}.ReleaseDSProjection|Any CPU.ActiveCfg = Release|x86
 		{799ECA65-6748-4B7C-BBD5-429C19E02161}.ReleaseDSProjection|x86.ActiveCfg = Release|x86
 		{799ECA65-6748-4B7C-BBD5-429C19E02161}.ReleaseDSProjection|x86.Build.0 = Release|x86
-		{19F9AC73-3B92-4656-9280-6CB638CB88E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19F9AC73-3B92-4656-9280-6CB638CB88E2}.Debug|x86.ActiveCfg = Debug|x86
-		{19F9AC73-3B92-4656-9280-6CB638CB88E2}.Debug|x86.Build.0 = Debug|x86
-		{19F9AC73-3B92-4656-9280-6CB638CB88E2}.DebugDSProjection|Any CPU.ActiveCfg = Debug|x86
-		{19F9AC73-3B92-4656-9280-6CB638CB88E2}.DebugDSProjection|x86.ActiveCfg = Debug|x86
-		{19F9AC73-3B92-4656-9280-6CB638CB88E2}.DebugDSProjection|x86.Build.0 = Debug|x86
-		{19F9AC73-3B92-4656-9280-6CB638CB88E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19F9AC73-3B92-4656-9280-6CB638CB88E2}.Release|x86.ActiveCfg = Release|Any CPU
-		{19F9AC73-3B92-4656-9280-6CB638CB88E2}.ReleaseDSProjection|Any CPU.ActiveCfg = Release|x86
-		{19F9AC73-3B92-4656-9280-6CB638CB88E2}.ReleaseDSProjection|x86.ActiveCfg = Release|x86
-		{19F9AC73-3B92-4656-9280-6CB638CB88E2}.ReleaseDSProjection|x86.Build.0 = Release|x86
 		{4DA6B8B8-8F42-4DFF-B998-5DF9F99929AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4DA6B8B8-8F42-4DFF-B998-5DF9F99929AE}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{4DA6B8B8-8F42-4DFF-B998-5DF9F99929AE}.DebugDSProjection|Any CPU.ActiveCfg = Debug|Any CPU
@@ -130,16 +113,6 @@ Global
 		{B1B5657E-4843-42BC-B859-FFEE313A1680}.ReleaseDSProjection|Any CPU.ActiveCfg = Release|Any CPU
 		{B1B5657E-4843-42BC-B859-FFEE313A1680}.ReleaseDSProjection|Any CPU.Build.0 = Release|Any CPU
 		{B1B5657E-4843-42BC-B859-FFEE313A1680}.ReleaseDSProjection|x86.ActiveCfg = Release|Any CPU
-		{63028B09-0EC2-45FA-BBC2-9B5F863C0E63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{63028B09-0EC2-45FA-BBC2-9B5F863C0E63}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{63028B09-0EC2-45FA-BBC2-9B5F863C0E63}.DebugDSProjection|Any CPU.ActiveCfg = Debug|Any CPU
-		{63028B09-0EC2-45FA-BBC2-9B5F863C0E63}.DebugDSProjection|Any CPU.Build.0 = Debug|Any CPU
-		{63028B09-0EC2-45FA-BBC2-9B5F863C0E63}.DebugDSProjection|x86.ActiveCfg = Debug|Any CPU
-		{63028B09-0EC2-45FA-BBC2-9B5F863C0E63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{63028B09-0EC2-45FA-BBC2-9B5F863C0E63}.Release|x86.ActiveCfg = Release|Any CPU
-		{63028B09-0EC2-45FA-BBC2-9B5F863C0E63}.ReleaseDSProjection|Any CPU.ActiveCfg = Release|Any CPU
-		{63028B09-0EC2-45FA-BBC2-9B5F863C0E63}.ReleaseDSProjection|Any CPU.Build.0 = Release|Any CPU
-		{63028B09-0EC2-45FA-BBC2-9B5F863C0E63}.ReleaseDSProjection|x86.ActiveCfg = Release|Any CPU
 		{FDFCB41B-C75D-476F-A4AA-EFD8C875A677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FDFCB41B-C75D-476F-A4AA-EFD8C875A677}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDFCB41B-C75D-476F-A4AA-EFD8C875A677}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -188,11 +161,26 @@ Global
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.ReleaseDSProjection|Any CPU.ActiveCfg = Release|Any CPU
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.ReleaseDSProjection|Any CPU.Build.0 = Release|Any CPU
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.ReleaseDSProjection|x86.ActiveCfg = Release|Any CPU
+		{2854814F-EA3C-41D4-AA94-460C4694F430}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2854814F-EA3C-41D4-AA94-460C4694F430}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2854814F-EA3C-41D4-AA94-460C4694F430}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2854814F-EA3C-41D4-AA94-460C4694F430}.DebugDSProjection|Any CPU.ActiveCfg = Debug|Any CPU
+		{2854814F-EA3C-41D4-AA94-460C4694F430}.DebugDSProjection|Any CPU.Build.0 = Debug|Any CPU
+		{2854814F-EA3C-41D4-AA94-460C4694F430}.DebugDSProjection|x86.ActiveCfg = Debug|Any CPU
+		{2854814F-EA3C-41D4-AA94-460C4694F430}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2854814F-EA3C-41D4-AA94-460C4694F430}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2854814F-EA3C-41D4-AA94-460C4694F430}.Release|x86.ActiveCfg = Release|Any CPU
+		{2854814F-EA3C-41D4-AA94-460C4694F430}.ReleaseDSProjection|Any CPU.ActiveCfg = Release|Any CPU
+		{2854814F-EA3C-41D4-AA94-460C4694F430}.ReleaseDSProjection|Any CPU.Build.0 = Release|Any CPU
+		{2854814F-EA3C-41D4-AA94-460C4694F430}.ReleaseDSProjection|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FTAnalyzer.vsmdi
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = MultiSelectTreeView.vsmdi
 	EndGlobalSection
 EndGlobal
