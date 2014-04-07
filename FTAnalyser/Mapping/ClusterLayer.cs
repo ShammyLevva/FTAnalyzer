@@ -95,7 +95,7 @@ namespace FTAnalyzer.Mapping
             style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center;
             style.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom;
             style.CollisionDetection = true;
-            style.Offset = new PointF(2, 22);
+            style.Offset = new PointF(0, 17);
             style.Halo = new Pen(Color.Yellow, 3);
             labelLayer.Style = style;
             map.Layers.Add(labelLayer);
