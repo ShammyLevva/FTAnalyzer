@@ -1,4 +1,8 @@
 ﻿using FTAnalyzer.Forms.Controls;
+using FTAnalyzer.Utilities;
+using System.Windows.Forms;
+using System.Collections;
+
 namespace FTAnalyzer.Forms
 {
     partial class Places
@@ -35,7 +39,7 @@ namespace FTAnalyzer.Forms
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainerFacts = new System.Windows.Forms.SplitContainer();
             this.splitContainerMap = new System.Windows.Forms.SplitContainer();
-            this.tvPlaces = new FTAnalyzer.Utilities.TreeViewMS();
+            this.tvPlaces = new FTAnalyzer.Utilities.MultiSelectTreeview();
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
             this.btnSelect = new System.Windows.Forms.ToolStripButton();
@@ -127,15 +131,14 @@ namespace FTAnalyzer.Forms
             this.tvPlaces.HideSelection = false;
             this.tvPlaces.Location = new System.Drawing.Point(0, 0);
             this.tvPlaces.Name = "tvPlaces";
-            this.tvPlaces.SelectedNodes = ((System.Collections.ArrayList)(resources.GetObject("tvPlaces.SelectedNodes")));
+            // this.tvPlaces.SelectedNodes = (ArrayList)resources.GetObject("tvPlaces.SelectedNodes");
             this.tvPlaces.Size = new System.Drawing.Size(200, 435);
             this.tvPlaces.TabIndex = 0;
-            this.tvPlaces.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeCollapse);
-            this.tvPlaces.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeExpand);
+            //this.tvPlaces.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeCollapse);
+            //this.tvPlaces.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeExpand);
             this.tvPlaces.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvPlaces_AfterSelect);
-            this.tvPlaces.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvPlaces_NodeMouseClick);
             this.tvPlaces.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvPlaces_NodeMouseDoubleClick);
-            this.tvPlaces.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvPlaces_MouseDown);
+            //this.tvPlaces.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvPlaces_MouseDown);
             // 
             // mapBox1
             // 
@@ -513,7 +516,7 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripProgressBar progressbar;
         private System.Windows.Forms.ToolStripMenuItem mnuHideScaleBar;
         private System.Windows.Forms.ToolStripButton btnSelect;
-        private Utilities.TreeViewMS tvPlaces;
+        private MultiSelectTreeview tvPlaces;
         private System.Windows.Forms.ToolStripMenuItem resetFormDefaultSizeAndPositionToolStripMenuItem;
     }
 }

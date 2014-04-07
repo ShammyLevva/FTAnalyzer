@@ -34,11 +34,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTile", "..\BruTile\BruTi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTile.Desktop", "..\BruTile\BruTile.Desktop\BruTile.Desktop.csproj", "{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiSelectTreeView", "..\MultiSelectTreeView\MultiSelectTreeView\MultiSelectTreeView.csproj", "{2854814F-EA3C-41D4-AA94-460C4694F430}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
 		SccLocalPath0 = .
@@ -62,9 +60,6 @@ Global
 		SccProjectUniqueName7 = ..\\BruTile\\BruTile.Desktop\\BruTile.Desktop.csproj
 		SccProjectName7 = ../BruTile/BruTile.Desktop
 		SccLocalPath7 = ..\\BruTile\\BruTile.Desktop
-		SccProjectUniqueName8 = ..\\MultiSelectTreeView\\MultiSelectTreeView\\MultiSelectTreeView.csproj
-		SccProjectName8 = ../MultiSelectTreeView/MultiSelectTreeView
-		SccLocalPath8 = ..\\MultiSelectTreeView\\MultiSelectTreeView
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -161,18 +156,6 @@ Global
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.ReleaseDSProjection|Any CPU.ActiveCfg = Release|Any CPU
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.ReleaseDSProjection|Any CPU.Build.0 = Release|Any CPU
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.ReleaseDSProjection|x86.ActiveCfg = Release|Any CPU
-		{2854814F-EA3C-41D4-AA94-460C4694F430}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2854814F-EA3C-41D4-AA94-460C4694F430}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2854814F-EA3C-41D4-AA94-460C4694F430}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{2854814F-EA3C-41D4-AA94-460C4694F430}.DebugDSProjection|Any CPU.ActiveCfg = Debug|Any CPU
-		{2854814F-EA3C-41D4-AA94-460C4694F430}.DebugDSProjection|Any CPU.Build.0 = Debug|Any CPU
-		{2854814F-EA3C-41D4-AA94-460C4694F430}.DebugDSProjection|x86.ActiveCfg = Debug|Any CPU
-		{2854814F-EA3C-41D4-AA94-460C4694F430}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2854814F-EA3C-41D4-AA94-460C4694F430}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2854814F-EA3C-41D4-AA94-460C4694F430}.Release|x86.ActiveCfg = Release|Any CPU
-		{2854814F-EA3C-41D4-AA94-460C4694F430}.ReleaseDSProjection|Any CPU.ActiveCfg = Release|Any CPU
-		{2854814F-EA3C-41D4-AA94-460C4694F430}.ReleaseDSProjection|Any CPU.Build.0 = Release|Any CPU
-		{2854814F-EA3C-41D4-AA94-460C4694F430}.ReleaseDSProjection|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

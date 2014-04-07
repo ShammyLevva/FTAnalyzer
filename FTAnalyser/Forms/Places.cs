@@ -23,7 +23,7 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             isloading = true;
-            tvPlaces.Clear();
+            // OLD Control - tvPlaces.Clear();
             mnuMapStyle.Setup(linkLabel1, mapBox1);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             foreach (ToolStripItem item in mapZoomToolStrip.Items)
@@ -175,42 +175,9 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        private bool preventExpand = false;
-        private bool settingIcon = false;
-
-        private void tvPlaces_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            //if (!e.Node.IsSelected)
-            //    BuildMap();
-        }
-
         private void tvPlaces_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (tvPlaces.SelectedNode != e.Node)
-                tvPlaces.SelectedNode = e.Node;
-            if (!settingIcon)
-                BuildMap();
-            if (tvPlaces.SelectedImageIndex != e.Node.ImageIndex)
-            {
-                settingIcon = true;
-                tvPlaces.SelectedImageIndex = e.Node.ImageIndex;
-                settingIcon = false;
-            }
-        }
-
-        private void tvPlaces_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
-        {
-            e.Cancel = (preventExpand && e.Action == TreeViewAction.Collapse);
-        }
-
-        private void tvPlaces_BeforeExpand(object sender, TreeViewCancelEventArgs e)
-        {
-            e.Cancel = (preventExpand && e.Action == TreeViewAction.Expand);
-        }
-
-        private void tvPlaces_MouseDown(object sender, MouseEventArgs e)
-        {
-            preventExpand = e.Clicks > 1;
+            BuildMap();
         }
 
         private void tvPlaces_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
