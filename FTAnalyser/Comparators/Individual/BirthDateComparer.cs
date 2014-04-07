@@ -7,7 +7,6 @@ namespace FTAnalyzer
 {
     public class BirthDateComparer : Comparer<IDisplayIndividual>
     {
-
         public static bool ASCENDING = true;
         public static bool DESCENDING = false;
         private bool direction = ASCENDING;

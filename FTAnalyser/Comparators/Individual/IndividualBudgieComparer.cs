@@ -7,7 +7,6 @@ namespace FTAnalyzer
 {
     public class IndividualBudgieComparer : Comparer<IDisplayIndividual>
     {
-
         public override int Compare(IDisplayIndividual x, IDisplayIndividual y)
         {
             // change the + for older to an Z and - for younger to a A to force sort to be right
