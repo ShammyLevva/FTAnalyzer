@@ -217,6 +217,8 @@
     <Compile Include="Comparators\Family\FamilySizeComparer.cs" />
     <Compile Include="Comparators\Family\FamilyDateComparer.cs" />
     <Compile Include="Comparators\Individual\AhnentafelComparer.cs" />
+    <Compile Include="Comparators\Individual\LooseDeathComparer.cs" />
+    <Compile Include="Comparators\Individual\LooseBirthComparer.cs" />
     <Compile Include="Comparators\Individual\IndividualBudgieComparer.cs" />
     <Compile Include="Comparators\Individual\DefaultIndividualComparer.cs" />
     <Compile Include="Comparators\Individual\BirthDateComparer.cs" />

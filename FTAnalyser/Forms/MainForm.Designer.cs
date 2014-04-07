@@ -226,6 +226,8 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.mnuLooseBirthsToExcel = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuLooseDeathsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.relTypesFacts = new Controls.RelationTypes();
             this.cenDate = new Controls.CensusDateSelector();
@@ -503,7 +505,9 @@
             this.mnuExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuIndividualsToExcel,
             this.mnuFamiliesToExcel,
-            this.mnuFactsToExcel});
+            this.mnuFactsToExcel,
+            this.mnuLooseBirthsToExcel,
+            this.mnuLooseDeathsToExcel});
             this.mnuExport.Name = "mnuExport";
             this.mnuExport.Size = new System.Drawing.Size(52, 20);
             this.mnuExport.Text = "Export";
@@ -511,21 +515,21 @@
             // mnuIndividualsToExcel
             // 
             this.mnuIndividualsToExcel.Name = "mnuIndividualsToExcel";
-            this.mnuIndividualsToExcel.Size = new System.Drawing.Size(174, 22);
+            this.mnuIndividualsToExcel.Size = new System.Drawing.Size(187, 22);
             this.mnuIndividualsToExcel.Text = "Individuals to Excel";
             this.mnuIndividualsToExcel.Click += new System.EventHandler(this.individualsToExcelToolStripMenuItem_Click);
             // 
             // mnuFamiliesToExcel
             // 
             this.mnuFamiliesToExcel.Name = "mnuFamiliesToExcel";
-            this.mnuFamiliesToExcel.Size = new System.Drawing.Size(174, 22);
+            this.mnuFamiliesToExcel.Size = new System.Drawing.Size(187, 22);
             this.mnuFamiliesToExcel.Text = "Families to Excel";
             this.mnuFamiliesToExcel.Click += new System.EventHandler(this.familiesToExcelToolStripMenuItem_Click);
             // 
             // mnuFactsToExcel
             // 
             this.mnuFactsToExcel.Name = "mnuFactsToExcel";
-            this.mnuFactsToExcel.Size = new System.Drawing.Size(174, 22);
+            this.mnuFactsToExcel.Size = new System.Drawing.Size(187, 22);
             this.mnuFactsToExcel.Text = "Facts to Excel";
             this.mnuFactsToExcel.Click += new System.EventHandler(this.factsToExcelToolStripMenuItem_Click);
             // 
@@ -2288,6 +2292,20 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // mnuLooseBirthsToExcel
+            // 
+            this.mnuLooseBirthsToExcel.Name = "mnuLooseBirthsToExcel";
+            this.mnuLooseBirthsToExcel.Size = new System.Drawing.Size(187, 22);
+            this.mnuLooseBirthsToExcel.Text = "Loose Births to Excel";
+            this.mnuLooseBirthsToExcel.Click += new System.EventHandler(this.looseBirthsToExcelToolStripMenuItem_Click);
+            // 
+            // mnuLooseDeathsToExcel
+            // 
+            this.mnuLooseDeathsToExcel.Name = "mnuLooseDeathsToExcel";
+            this.mnuLooseDeathsToExcel.Size = new System.Drawing.Size(187, 22);
+            this.mnuLooseDeathsToExcel.Text = "Loose Deaths to Excel";
+            this.mnuLooseDeathsToExcel.Click += new System.EventHandler(this.looseDeathsToExcelToolStripMenuItem_Click);
+            // 
             // rtbOutput
             // 
             this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2672,6 +2690,8 @@
         private System.Windows.Forms.ToolStripMenuItem viewNotesToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip ctxViewNotes;
         private System.Windows.Forms.ToolStripMenuItem mnuViewNotes;
+        private System.Windows.Forms.ToolStripMenuItem mnuLooseBirthsToExcel;
+        private System.Windows.Forms.ToolStripMenuItem mnuLooseDeathsToExcel;
     }
 }
 

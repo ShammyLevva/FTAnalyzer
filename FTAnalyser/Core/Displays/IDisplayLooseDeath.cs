@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    public interface IDisplayLooseDeath
+    public interface IDisplayLooseDeath : IComparable<Individual>
     {
         string IndividualID { get; }
         string Forenames { get; }

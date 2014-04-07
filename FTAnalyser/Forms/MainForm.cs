@@ -200,6 +200,8 @@ namespace FTAnalyzer
             mnuFactsToExcel.Enabled = enabled;
             mnuIndividualsToExcel.Enabled = enabled;
             mnuFamiliesToExcel.Enabled = enabled;
+            mnuLooseBirthsToExcel.Enabled = enabled;
+            mnuLooseDeathsToExcel.Enabled = enabled;
             mnuChildAgeProfiles.Enabled = enabled;
             mnuOlderParents.Enabled = enabled;
             mnuPossibleCensusFacts.Enabled = enabled;
@@ -2136,9 +2138,9 @@ namespace FTAnalyzer
         {
             Individual ind = null;
             ContextMenuStrip cms = null;
-            if(sender is ContextMenuStrip)
+            if (sender is ContextMenuStrip)
                 cms = (ContextMenuStrip)sender;
-            if(sender is ToolStripMenuItem)
+            if (sender is ToolStripMenuItem)
             {
                 ToolStripMenuItem tsmi = (ToolStripMenuItem)sender;
                 cms = (ContextMenuStrip)tsmi.Owner;
@@ -2162,7 +2164,7 @@ namespace FTAnalyzer
 
         private void dgTreeTops_MouseDown(object sender, MouseEventArgs e)
         {
-            ShowViewNotesMenu(dgTreeTops,e);
+            ShowViewNotesMenu(dgTreeTops, e);
         }
 
         private void dgWorldWars_MouseDown(object sender, MouseEventArgs e)
@@ -2189,6 +2191,28 @@ namespace FTAnalyzer
                     }
                 }
             }
+        }
+
+        private void looseBirthsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            List<IDisplayLooseBirth> list = ft.LooseBirths.ToList<IDisplayLooseBirth>();
+            list.Sort(new LooseBirthComparer());
+            DataTable dt = convertor.ToDataTable(list);
+            ExportToExcel.Export(dt);
+            HourGlass(false);
+        }
+
+        private void looseDeathsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            List<IDisplayLooseDeath> list = ft.LooseDeaths.ToList<IDisplayLooseDeath>();
+            list.Sort(new LooseDeathComparer());
+            DataTable dt = convertor.ToDataTable(list);
+            ExportToExcel.Export(dt);
+            HourGlass(false);
         }
     }
 }
