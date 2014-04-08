@@ -64,6 +64,7 @@
             this.mnuIndividualsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFamiliesToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFactsToExcel = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSourcesToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuLooseBirthsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuLooseDeathsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -125,6 +126,10 @@
             this.txtColouredSurname = new System.Windows.Forms.TextBox();
             this.relTypesColoured = new Controls.RelationTypes();
             this.tabLostCousins = new System.Windows.Forms.TabPage();
+            this.Referrals = new System.Windows.Forms.GroupBox();
+            this.btnReferrals = new System.Windows.Forms.Button();
+            this.cmbReferrals = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.btnLCnoCensus = new System.Windows.Forms.Button();
             this.btnLCDuplicates = new System.Windows.Forms.Button();
             this.btnLCMissingCountry = new System.Windows.Forms.Button();
@@ -238,7 +243,6 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.mnuSourcesToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -253,6 +257,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).BeginInit();
             this.tabColourReports.SuspendLayout();
             this.tabLostCousins.SuspendLayout();
+            this.Referrals.SuspendLayout();
             this.tabCensus.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -534,6 +539,13 @@
             this.mnuFactsToExcel.Size = new System.Drawing.Size(187, 22);
             this.mnuFactsToExcel.Text = "Facts to Excel";
             this.mnuFactsToExcel.Click += new System.EventHandler(this.factsToExcelToolStripMenuItem_Click);
+            // 
+            // mnuSourcesToExcel
+            // 
+            this.mnuSourcesToExcel.Name = "mnuSourcesToExcel";
+            this.mnuSourcesToExcel.Size = new System.Drawing.Size(187, 22);
+            this.mnuSourcesToExcel.Text = "Sources to Excel";
+            this.mnuSourcesToExcel.Click += new System.EventHandler(this.mnuSourcesToExcel_Click);
             // 
             // mnuLooseBirthsToExcel
             // 
@@ -1101,6 +1113,7 @@
             // 
             // tabLostCousins
             // 
+            this.tabLostCousins.Controls.Add(this.Referrals);
             this.tabLostCousins.Controls.Add(this.btnLCnoCensus);
             this.tabLostCousins.Controls.Add(this.btnLCDuplicates);
             this.tabLostCousins.Controls.Add(this.btnLCMissingCountry);
@@ -1124,6 +1137,46 @@
             this.tabLostCousins.TabIndex = 5;
             this.tabLostCousins.Text = "Lost Cousins";
             this.tabLostCousins.UseVisualStyleBackColor = true;
+            // 
+            // Referrals
+            // 
+            this.Referrals.Controls.Add(this.btnReferrals);
+            this.Referrals.Controls.Add(this.cmbReferrals);
+            this.Referrals.Controls.Add(this.label11);
+            this.Referrals.Location = new System.Drawing.Point(8, 316);
+            this.Referrals.Name = "Referrals";
+            this.Referrals.Size = new System.Drawing.Size(498, 83);
+            this.Referrals.TabIndex = 23;
+            this.Referrals.TabStop = false;
+            this.Referrals.Text = "Referrals";
+            // 
+            // btnReferrals
+            // 
+            this.btnReferrals.Location = new System.Drawing.Point(272, 45);
+            this.btnReferrals.Name = "btnReferrals";
+            this.btnReferrals.Size = new System.Drawing.Size(220, 23);
+            this.btnReferrals.TabIndex = 2;
+            this.btnReferrals.Text = "Generate Referral Report for this Individual";
+            this.btnReferrals.UseVisualStyleBackColor = true;
+            this.btnReferrals.Click += new System.EventHandler(this.btnReferrals_Click);
+            // 
+            // cmbReferrals
+            // 
+            this.cmbReferrals.FormattingEnabled = true;
+            this.cmbReferrals.Location = new System.Drawing.Point(97, 18);
+            this.cmbReferrals.Name = "cmbReferrals";
+            this.cmbReferrals.Size = new System.Drawing.Size(395, 21);
+            this.cmbReferrals.TabIndex = 1;
+            this.cmbReferrals.Click += new System.EventHandler(this.cmbReferrals_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 21);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(85, 13);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Select Individual";
             // 
             // btnLCnoCensus
             // 
@@ -2400,13 +2453,6 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // mnuSourcesToExcel
-            // 
-            this.mnuSourcesToExcel.Name = "mnuSourcesToExcel";
-            this.mnuSourcesToExcel.Size = new System.Drawing.Size(187, 22);
-            this.mnuSourcesToExcel.Text = "Sources to Excel";
-            this.mnuSourcesToExcel.Click += new System.EventHandler(this.mnuSourcesToExcel_Click);
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -2447,6 +2493,8 @@
             this.tabColourReports.PerformLayout();
             this.tabLostCousins.ResumeLayout(false);
             this.tabLostCousins.PerformLayout();
+            this.Referrals.ResumeLayout(false);
+            this.Referrals.PerformLayout();
             this.tabCensus.ResumeLayout(false);
             this.tabCensus.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -2702,6 +2750,10 @@
         private System.Windows.Forms.ToolStripMenuItem mnuLooseBirthsToExcel;
         private System.Windows.Forms.ToolStripMenuItem mnuLooseDeathsToExcel;
         private System.Windows.Forms.ToolStripMenuItem mnuSourcesToExcel;
+        private System.Windows.Forms.GroupBox Referrals;
+        private System.Windows.Forms.Button btnReferrals;
+        private System.Windows.Forms.ComboBox cmbReferrals;
+        private System.Windows.Forms.Label label11;
     }
 }
 

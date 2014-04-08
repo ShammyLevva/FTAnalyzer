@@ -971,11 +971,13 @@ namespace FTAnalyzer
             }
         }
 
+        public Individual RootPerson { get; set; }
+
         public void SetRelations(string startID, ProgressBar pb)
         {
             ClearRelations();
-            Individual rootPerson = GetIndividual(startID);
-            Individual ind = rootPerson;
+            RootPerson = GetIndividual(startID);
+            Individual ind = RootPerson;
             ind.RelationType = Individual.DIRECT;
             ind.Ahnentafel = 1;
             maxAhnentafel = 1;
@@ -1234,11 +1236,11 @@ namespace FTAnalyzer
         public SortableBindingList<IDisplayFact> GetDisplayFacts(FactSource source)
         {
             SortableBindingList<IDisplayFact> result = new SortableBindingList<IDisplayFact>();
-            foreach(Individual i in individuals)
-                foreach(Fact f in i.AllFacts)
-                    if(f.Sources.Contains(source))
-                        result.Add(new DisplayFact(i,f));
-            return result;           
+            foreach (Individual i in individuals)
+                foreach (Fact f in i.AllFacts)
+                    if (f.Sources.Contains(source))
+                        result.Add(new DisplayFact(i, f));
+            return result;
         }
 
         public SortableBindingList<IDisplaySource> AllDisplaySources

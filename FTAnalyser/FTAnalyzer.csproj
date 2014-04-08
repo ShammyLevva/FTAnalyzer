@@ -217,6 +217,7 @@
     <Compile Include="Comparators\Family\FamilySizeComparer.cs" />
     <Compile Include="Comparators\Family\FamilyDateComparer.cs" />
     <Compile Include="Comparators\Individual\AhnentafelComparer.cs" />
+    <Compile Include="Comparators\Individual\NameComparer.cs" />
     <Compile Include="Comparators\Individual\LooseDeathComparer.cs" />
     <Compile Include="Comparators\Individual\LooseBirthComparer.cs" />
     <Compile Include="Comparators\Individual\IndividualBudgieComparer.cs" />
@@ -240,6 +241,7 @@
     <Compile Include="Core\DuplicateIndividual.cs" />
     <Compile Include="Core\Exports\ExportFact.cs" />
     <Compile Include="Core\Exports\IExportIndividual.cs" />
+    <Compile Include="Core\Exports\ExportReferrals.cs" />
     <Compile Include="Core\Exports\NonDuplicate.cs" />
     <Compile Include="Core\Fact.cs" />
     <Compile Include="Core\FactDate.cs" />
@@ -498,6 +500,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

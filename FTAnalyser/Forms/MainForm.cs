@@ -170,7 +170,9 @@ namespace FTAnalyzer
                 dgSurnames.DataSource = null;
                 dgDuplicates.DataSource = null;
                 dgSources.DataSource = null;
+                cmbReferrals.Items.Clear();
                 Statistics.Instance.Clear();
+                btnReferrals.Enabled = false;
                 tabCtrlLooseBDs.SelectedTab = tabLooseBirths; // force back to first tab
                 tabCtrlLocations.SelectedTab = tabTreeView; // otherwise totals etc look wrong
                 treeViewLocations.Nodes.Clear();
@@ -2239,6 +2241,42 @@ namespace FTAnalyzer
             DataTable dt = convertor.ToDataTable(new List<IDisplaySource>(ft.AllSources));
             ExportToExcel.Export(dt);
             HourGlass(false);
+        }
+
+        private void cmbReferrals_Click(object sender, EventArgs e)
+        {
+            if(cmbReferrals.Items.Count == 0)
+            {
+                HourGlass(true);
+                List<Individual> list = ft.AllIndividuals.ToList<Individual>();
+                list.Sort(new NameComparer());
+                foreach (Individual ind in list)
+                    cmbReferrals.Items.Add(ind);
+                btnReferrals.Enabled = true;
+                HourGlass(false);
+            }
+        }
+
+        private void btnReferrals_Click(object sender, EventArgs e)
+        {
+            Individual selected = cmbReferrals.SelectedItem as Individual;
+            if (selected != null)
+            {
+                HourGlass(true);
+                Individual root = ft.RootPerson;
+                ft.SetRelations(selected.IndividualID, pbRelationships);
+                Predicate<Individual> lostCousinsFact = new Predicate<Individual>(x => x.HasLostCousinsFact);
+                List<Individual> lostCousinsFacts = ft.AllIndividuals.Where(lostCousinsFact).ToList<Individual>();
+                List<ExportReferrals> referrals = new List<ExportReferrals>();
+                foreach(Individual ind in lostCousinsFacts)
+                    foreach (Fact f in ind.GetFacts(Fact.LOSTCOUSINS))
+                        referrals.Add(new ExportReferrals(ind, f));
+                ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+                DataTable dt = convertor.ToDataTable(referrals);
+                ExportToExcel.Export(dt);
+                ft.SetRelations(root.IndividualID, pbRelationships);
+                HourGlass(false);
+            }
         }
     }
 }

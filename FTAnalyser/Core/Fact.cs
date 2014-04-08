@@ -790,7 +790,7 @@ namespace FTAnalyzer
 
         public override string ToString()
         {
-            return FactType + ": " + FactDate + " at " + Location;
+            return FactTypeDescription + ": " + FactDate + " at " + Location;
         }
     }
 }

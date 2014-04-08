@@ -58,7 +58,7 @@ namespace FTAnalyzer
             Notes = FamilyTree.GetNotes(node);
 
             // Individual attributes
-            AddFacts(node, Fact.NAME); 
+            AddFacts(node, Fact.NAME);
             AddFacts(node, Fact.PHYSICAL_DESC);
             AddFacts(node, Fact.EDUCATION);
             AddFacts(node, Fact.DEGREE);
@@ -163,6 +163,17 @@ namespace FTAnalyzer
         public bool HasRangedBirthDate
         {
             get { return BirthDate.DateType == FactDate.FactDateType.BET && BirthDate.StartDate.Year != BirthDate.EndDate.Year; }
+        }
+
+        public bool HasLostCousinsFact
+        {
+            get
+            {
+                foreach (Fact f in AllFacts)
+                    if (f.FactType == Fact.LOSTCOUSINS)
+                        return true;
+                return false;
+            }
         }
 
         public int Ahnentafel
@@ -463,7 +474,8 @@ namespace FTAnalyzer
 
         public string ServiceNumber
         {
-            get {
+            get
+            {
                 Fact service = GetPreferredFact(Fact.SERVICE_NUMBER);
                 return service == null ? "" : service.Comment;
             }
@@ -594,6 +606,11 @@ namespace FTAnalyzer
                 }
             }
             return false;
+        }
+
+        public Fact LostCousinsCensusFact(Fact lcFact)
+        {
+            return facts.FirstOrDefault(x => x.FactType == Fact.CENSUS && x.FactDate.Overlaps(lcFact.FactDate));
         }
 
         public bool IsLostCousinsEntered(CensusDate when) { return IsLostCousinsEntered(when, true); }
