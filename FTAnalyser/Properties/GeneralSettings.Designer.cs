@@ -166,5 +166,17 @@ namespace FTAnalyzer.Properties {
                 this["MultipleFactForms"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2014-03-25")]
+        public global::System.DateTime LastXPWarning {
+            get {
+                return ((global::System.DateTime)(this["LastXPWarning"]));
+            }
+            set {
+                this["LastXPWarning"] = value;
+            }
+        }
     }
 }

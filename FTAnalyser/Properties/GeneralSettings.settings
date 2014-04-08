@@ -38,5 +38,8 @@
     <Setting Name="MultipleFactForms" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="LastXPWarning" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2014-03-25</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
