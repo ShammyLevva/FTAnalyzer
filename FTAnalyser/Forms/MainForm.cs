@@ -216,6 +216,7 @@ namespace FTAnalyzer
             mnuFactsToExcel.Enabled = enabled;
             mnuIndividualsToExcel.Enabled = enabled;
             mnuFamiliesToExcel.Enabled = enabled;
+            mnuSourcesToExcel.Enabled = enabled;
             mnuLooseBirthsToExcel.Enabled = enabled;
             mnuLooseDeathsToExcel.Enabled = enabled;
             mnuChildAgeProfiles.Enabled = enabled;
@@ -2227,6 +2228,15 @@ namespace FTAnalyzer
             List<IDisplayLooseDeath> list = ft.LooseDeaths.ToList<IDisplayLooseDeath>();
             list.Sort(new LooseDeathComparer());
             DataTable dt = convertor.ToDataTable(list);
+            ExportToExcel.Export(dt);
+            HourGlass(false);
+        }
+
+        private void mnuSourcesToExcel_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            DataTable dt = convertor.ToDataTable(new List<IDisplaySource>(ft.AllSources));
             ExportToExcel.Export(dt);
             HourGlass(false);
         }
