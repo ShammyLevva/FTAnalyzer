@@ -171,6 +171,7 @@ namespace FTAnalyzer
                 dgDuplicates.DataSource = null;
                 dgSources.DataSource = null;
                 cmbReferrals.Items.Clear();
+                cmbReferrals.SelectedText = string.Empty;
                 Statistics.Instance.Clear();
                 btnReferrals.Enabled = false;
                 tabCtrlLooseBDs.SelectedTab = tabLooseBirths; // force back to first tab
