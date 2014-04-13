@@ -18,8 +18,8 @@ namespace FTAnalyzer
             this.censusFact = ind.LostCousinsCensusFact(f);
         }
 
-        public string CensusReference { get { return censusFact == null ? string.Empty : censusFact.CensusReference; } }
-        public string ID { get { return ind.IndividualID; } }
+        public string CensusReference { get { return censusFact == null ? "Not Found" : censusFact.CensusReference; } }
+        public string IndividualID { get { return ind.IndividualID; } }
         public string Forenames { get { return ind.Forenames; } }
         public string Surname { get { return ind.Surname; } }
         public Age Age { get { return ind.GetAge(f.FactDate); } }

@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.6.0.0-beta 1";
+        public string VERSION = "3.6.0.0-beta 2";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -171,7 +171,7 @@ namespace FTAnalyzer
                 dgDuplicates.DataSource = null;
                 dgSources.DataSource = null;
                 cmbReferrals.Items.Clear();
-                cmbReferrals.SelectedText = string.Empty;
+                cmbReferrals.Text = string.Empty;
                 Statistics.Instance.Clear();
                 btnReferrals.Enabled = false;
                 tabCtrlLooseBDs.SelectedTab = tabLooseBirths; // force back to first tab
@@ -2266,16 +2266,9 @@ namespace FTAnalyzer
                 HourGlass(true);
                 Individual root = ft.RootPerson;
                 ft.SetRelations(selected.IndividualID, pbRelationships);
-                Predicate<Individual> lostCousinsFact = new Predicate<Individual>(x => x.HasLostCousinsFact);
-                List<Individual> lostCousinsFacts = ft.AllIndividuals.Where(lostCousinsFact).ToList<Individual>();
-                List<ExportReferrals> referrals = new List<ExportReferrals>();
-                foreach(Individual ind in lostCousinsFacts)
-                    foreach (Fact f in ind.GetFacts(Fact.LOSTCOUSINS))
-                        referrals.Add(new ExportReferrals(ind, f));
-                referrals.Sort(new LostCousinsReferralComparer());
-                ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-                DataTable dt = convertor.ToDataTable(referrals);
-                ExportToExcel.Export(dt);
+                LostCousinsReferral lcr = new LostCousinsReferral();
+                DisposeDuplicateForms(lcr);
+                lcr.Show();
                 ft.SetRelations(root.IndividualID, pbRelationships);
                 HourGlass(false);
             }
