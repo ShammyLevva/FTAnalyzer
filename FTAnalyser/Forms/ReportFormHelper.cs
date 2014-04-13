@@ -64,6 +64,8 @@ namespace FTAnalyzer
 
         public void PrintReport(string reportname)
         {
+            if (ReportGrid.DataSource == null || ReportGrid.RowCount == 0)
+                return;
             if (printDialog.ShowDialog(parent) == DialogResult.OK)
             {
                 printProvider.Drawer.TitlePrintBlock = new TitlePrintBlock(PrintTitle);
@@ -75,13 +77,15 @@ namespace FTAnalyzer
 
         public void PrintPreviewReport()
         {
+            if (ReportGrid.DataSource == null || ReportGrid.RowCount == 0)
+                return;
             printProvider.Drawer.TitlePrintBlock = new TitlePrintBlock(PrintTitle);
             printPreviewDialog.ShowDialog(parent);
         }
 
         public void DoExportToExcel<T>()
         {
-            if (ReportGrid.DataSource == null)
+            if (ReportGrid.DataSource == null || ReportGrid.RowCount == 0)
                 return;
             parent.Cursor = Cursors.WaitCursor;
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
