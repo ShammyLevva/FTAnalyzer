@@ -249,6 +249,7 @@ namespace FTAnalyzer
             this.CertificatePresent = false;
             this.FactErrorLevel = FactError.GOOD;
             this.FactErrorMessage = string.Empty;
+            this.FactErrorNumber = 0;
             this.Piece = string.Empty;
             this.Folio = string.Empty;
             this.Book = string.Empty;
@@ -521,6 +522,8 @@ namespace FTAnalyzer
 
         public string FactType { get; private set; }
 
+        public int FactErrorNumber { get; private set; }
+
         public FactError FactErrorLevel { get; private set; }
 
         public string FactErrorMessage { get; private set; }
@@ -569,6 +572,13 @@ namespace FTAnalyzer
         public bool CertificatePresent { get; private set; }
 
         #endregion
+
+        public void SetError(int number, FactError level, string message)
+        {
+            FactErrorNumber = number;
+            FactErrorLevel = level;
+            FactErrorMessage = message;
+        }
 
         private string FixFactTypes(string tag)
         {

@@ -2272,6 +2272,7 @@ namespace FTAnalyzer
                 foreach(Individual ind in lostCousinsFacts)
                     foreach (Fact f in ind.GetFacts(Fact.LOSTCOUSINS))
                         referrals.Add(new ExportReferrals(ind, f));
+                referrals.Sort(new LostCousinsReferralComparer());
                 ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
                 DataTable dt = convertor.ToDataTable(referrals);
                 ExportToExcel.Export(dt);

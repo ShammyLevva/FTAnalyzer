@@ -68,7 +68,6 @@ namespace FTAnalyzer
             AddFacts(node, Fact.NUM_MARRIAGE);
             AddFacts(node, Fact.OCCUPATION);
             AddFacts(node, Fact.POSSESSIONS);
-            AddFacts(node, Fact.RESIDENCE);
             AddFacts(node, Fact.MEDICAL_CONDITION);
             AddFacts(node, Fact.REFERENCE);
 
@@ -91,6 +90,7 @@ namespace FTAnalyzer
             AddFacts(node, Fact.EMIGRATION);
             AddFacts(node, Fact.IMMIGRATION);
             AddFacts(node, Fact.CENSUS);
+            AddFacts(node, Fact.RESIDENCE);
             AddFacts(node, Fact.PROBATE);
             AddFacts(node, Fact.WILL);
             AddFacts(node, Fact.LEGATEE);
@@ -752,6 +752,14 @@ namespace FTAnalyzer
 
         public void AddFact(Fact fact)
         {
+            FamilyTree ft = FamilyTree.Instance;
+            if (ft.FactBeforeBirth(this, fact))
+                fact.SetError((int)FamilyTree.Dataerror.FACTS_BEFORE_BIRTH, Fact.FactError.ERROR, 
+                    fact.FactTypeDescription + " fact recorded: " + fact.FactDate + " before individual was born");
+            if (ft.FactAfterDeath(this, fact))
+                fact.SetError((int)FamilyTree.Dataerror.FACTS_AFTER_DEATH, Fact.FactError.ERROR,
+                    fact.FactTypeDescription + " fact recorded: " + fact.FactDate + " after individual died");
+
             switch (fact.FactErrorLevel)
             {
                 case Fact.FactError.GOOD:

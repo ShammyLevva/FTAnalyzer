@@ -22,7 +22,7 @@ namespace FTAnalyzer
         public string ID { get { return ind.IndividualID; } }
         public string Forenames { get { return ind.Forenames; } }
         public string Surname { get { return ind.Surname; } }
-        public FactDate BirthDate { get { return ind.BirthDate; } }
+        public Age Age { get { return ind.GetAge(f.FactDate); } }
         public string Census { get { return censusFact == null ? f.ToString() : censusFact.ToString(); } }
         public bool Include { get { return ind.IsBloodDirect; } }
         public string RelationType { get { return ind.IsBloodDirect ? ind.Relation : string.Empty; } }// don't show type if shouldn't be included as it confuses

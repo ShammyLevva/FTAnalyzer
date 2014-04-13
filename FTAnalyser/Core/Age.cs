@@ -127,5 +127,18 @@ namespace FTAnalyzer
                 return this.MaxAge - that.MaxAge;
             return this.MinAge - that.MinAge;
         }
+
+        public override bool Equals(object obj)
+        {
+            if(obj.GetType() != typeof(Age))
+                return false;
+            Age that = (Age)obj;
+            return this.MaxAge == that.MaxAge && this.MinAge == that.MinAge;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
