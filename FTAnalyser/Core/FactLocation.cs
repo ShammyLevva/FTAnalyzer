@@ -736,6 +736,11 @@ namespace FTAnalyzer
             get { return Countries.IsUnitedKingdom(Country); }
         }
 
+        public bool IsEnglandWales
+        {
+            get { return Countries.IsEnglandWales(Country); }
+        }
+
         public string Geocoded
         {
             get

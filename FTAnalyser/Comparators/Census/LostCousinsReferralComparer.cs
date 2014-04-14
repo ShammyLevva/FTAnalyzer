@@ -8,29 +8,34 @@ namespace FTAnalyzer
     public class LostCousinsReferralComparer : Comparer<ExportReferrals>
     {
         public override int Compare(ExportReferrals a, ExportReferrals b)
-        {  // needs to compare census LCcodes then if census ref is empty compare sortable addresses
-            if (a.Census.Equals(b.Census))
+        {
+            if (a.ShortCode.Equals(b.ShortCode))
             {
-                if (a.CensusReference.Equals(b.Census))
+                if (a.Census.Equals(b.Census))
                 {
-                    if (a.Age.Equals(b.Age))
+                    if (a.CensusReference.Equals(b.Census))
                     {
                         if (a.Surname.Equals(b.Surname))
-                            return a.Forenames.CompareTo(b.Forenames);
+                        {
+                            if (a.Age.Equals(b.Age))
+                                return a.Forenames.CompareTo(b.Forenames);
+                            else
+                                return b.Age.CompareTo(a.Age);
+                        }
                         else
+                        {
                             return a.Surname.CompareTo(b.Surname);
+                        }
+
                     }
                     else
-                    {
-                        return b.Age.CompareTo(a.Age);
-                    }
-
+                        return a.CensusReference.CompareTo(b.CensusReference);
                 }
                 else
-                    return a.CensusReference.CompareTo(b.CensusReference);
+                    return a.Census.CompareTo(b.Census);
             }
             else
-                return a.Census.CompareTo(b.Census);
+                return a.ShortCode.CompareTo(b.ShortCode);
         }
     }
 }
