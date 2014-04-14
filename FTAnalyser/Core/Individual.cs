@@ -28,6 +28,7 @@ namespace FTAnalyzer
         private DoubleMetaphone surnameMetaphone;
         private DoubleMetaphone forenameMetaphone;
         public string Notes { get; private set; }
+        public string StandardisedName { get; private set; }
 
         private IList<Fact> facts;
         private IList<Fact> errorFacts;
@@ -56,6 +57,7 @@ namespace FTAnalyzer
             forenameMetaphone = new DoubleMetaphone(Forename);
             surnameMetaphone = new DoubleMetaphone(Surname);
             Notes = FamilyTree.GetNotes(node);
+            StandardisedName = FamilyTree.GetStandardisedName(IsMale, Forename);
 
             // Individual attributes
             AddFacts(node, Fact.NAME);
@@ -130,6 +132,7 @@ namespace FTAnalyzer
                 this.forenameMetaphone = i.forenameMetaphone;
                 this.surnameMetaphone = i.surnameMetaphone;
                 this.marriedName = i.marriedName;
+                this.StandardisedName = i.StandardisedName;
                 this.gender = i.gender;
                 this.alias = i.alias;
                 this.ahnentafel = i.ahnentafel;

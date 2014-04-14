@@ -27,6 +27,7 @@ namespace FTAnalyzer
         private IList<Individual> individuals;
         private IList<Family> families;
         private IDictionary<string, List<Individual>> occupations;
+        private IDictionary<Ginap,Ginap> names;
         private ISet<string> unknownFactTypes;
         private bool _loading = false;
         private bool _dataloaded = false;
@@ -179,6 +180,7 @@ namespace FTAnalyzer
             mainformTreeRootNode = null;
             ResetLooseFacts();
             FactLocation.ResetLocations();
+            LoadGinap();
         }
 
         public void ResetLooseFacts()
@@ -308,6 +310,21 @@ namespace FTAnalyzer
             SetRelationDescriptions(rootIndividualID, pb);
             xmlErrorbox.AppendText(PrintRelationCount());
             Application.DoEvents();
+        }
+
+        private void LoadGinap()
+        {
+
+        }
+
+        public static string GetStandardisedName(bool IsMale, string name)
+        {
+            Ginap gIn = new Ginap(IsMale,name);
+            Ginap gOut;
+            names.TryGetValue(gIn, out gOut);
+            if (gOut == null)
+                return name;
+            return gOut.Name;
         }
 
         private void ReportOptions()
