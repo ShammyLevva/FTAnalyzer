@@ -3,8 +3,6 @@
   <Fixes>
     <CountryTypos>
       <CountryTypo from="Can"     to="Canada" />
-      <CountryTypo from="CAN"     to="Canada" />
-      <CountryTypo from="USA"     to="United States" />
       <CountryTypo from="US"      to="United States" />
       <CountryTypo from="U S "    to="United States" />
       <CountryTypo from="U S A"   to="United States" />
@@ -20,7 +18,6 @@
       <CountryTypo from="G B"     to="England" />
       <CountryTypo from="Great Britain"    to="England" />
       <CountryTypo from="Aust"    to="Australia" />
-      <CountryTypo from="AUS"     to="Australia" />
       <CountryTypo from="Eire"    to="Ireland" />
       <CountryTypo from="Scot"    to="Scotland" />
       <CountryTypo from="Holland" to="Netherlands" />
@@ -41,10 +38,260 @@
       <CountryTypo from="CHI" to="Channel Islands" />
       <CountryTypo from="ENG" to="England" />
       <CountryTypo from="IOM" to="Isle of Man" />
-      <CountryTypo from="IRL" to="Ireland" />
       <CountryTypo from="NIR" to="Northern Ireland" />
       <CountryTypo from="SCT" to="Scotland" />
       <CountryTypo from="WLS" to="Wales" />
+    
+      <!-- ISO Codes -->
+      <CountryTypo from="ABW" to="Aruba" />
+      <CountryTypo from="AFG" to="Afghanistan" />
+      <CountryTypo from="AGO" to="Angola" />
+      <CountryTypo from="AIA" to="Anguilla" />
+      <CountryTypo from="ALA" to="Åland Islands" />
+      <CountryTypo from="ALB" to="Albania" />
+      <CountryTypo from="AND" to="Andorra" />
+      <CountryTypo from="ARE" to="United Arab Emirates" />
+      <CountryTypo from="ARG" to="Argentina" />
+      <CountryTypo from="ARM" to="Armenia" />
+      <CountryTypo from="ASM" to="American Samoa" />
+      <CountryTypo from="ATA" to="Antarctica" />
+      <CountryTypo from="ATF" to="French Southern Territories" />
+      <CountryTypo from="ATG" to="Antigua and Barbuda" />
+      <CountryTypo from="AUS" to="Australia" />
+      <CountryTypo from="AUT" to="Austria" />
+      <CountryTypo from="AZE" to="Azerbaijan" />
+      <CountryTypo from="BDI" to="Burundi" />
+      <CountryTypo from="BEL" to="Belgium" />
+      <CountryTypo from="BEN" to="Benin" />
+      <CountryTypo from="BES" to="Bonaire, Sint Eustatius and Saba" />
+      <CountryTypo from="BFA" to="Burkina Faso" />
+      <CountryTypo from="BGD" to="Bangladesh" />
+      <CountryTypo from="BGR" to="Bulgaria" />
+      <CountryTypo from="BHR" to="Bahrain" />
+      <CountryTypo from="BHS" to="Bahamas" />
+      <CountryTypo from="BIH" to="Bosnia and Herzegovina" />
+      <CountryTypo from="BLM" to="Saint Barthélemy" />
+      <CountryTypo from="BLR" to="Belarus" />
+      <CountryTypo from="BLZ" to="Belize" />
+      <CountryTypo from="BMU" to="Bermuda" />
+      <CountryTypo from="BOL" to="Bolivia, Plurinational State of" />
+      <CountryTypo from="BRA" to="Brazil" />
+      <CountryTypo from="BRB" to="Barbados" />
+      <CountryTypo from="BRN" to="Brunei Darussalam" />
+      <CountryTypo from="BTN" to="Bhutan" />
+      <CountryTypo from="BVT" to="Bouvet Island" />
+      <CountryTypo from="BWA" to="Botswana" />
+      <CountryTypo from="CAF" to="Central African Republic" />
+      <CountryTypo from="CAN" to="Canada" />
+      <CountryTypo from="CCK" to="Cocos (Keeling) Islands" />
+      <CountryTypo from="CHE" to="Switzerland" />
+      <CountryTypo from="CHL" to="Chile" />
+      <CountryTypo from="CHN" to="China" />
+      <CountryTypo from="CIV" to="Côte d'Ivoire" />
+      <CountryTypo from="CMR" to="Cameroon" />
+      <CountryTypo from="COD" to="Congo, the Democratic Republic of the" />
+      <CountryTypo from="COG" to="Congo" />
+      <CountryTypo from="COK" to="Cook Islands" />
+      <CountryTypo from="COL" to="Colombia" />
+      <CountryTypo from="COM" to="Comoros" />
+      <CountryTypo from="CPV" to="Cape Verde" />
+      <CountryTypo from="CRI" to="Costa Rica" />
+      <CountryTypo from="CUB" to="Cuba" />
+      <CountryTypo from="CUW" to="Curaçao" />
+      <CountryTypo from="CXR" to="Christmas Island" />
+      <CountryTypo from="CYM" to="Cayman Islands" />
+      <CountryTypo from="CYP" to="Cyprus" />
+      <CountryTypo from="CZE" to="Czech Republic" />
+      <CountryTypo from="DEU" to="Germany" />
+      <CountryTypo from="DJI" to="Djibouti" />
+      <CountryTypo from="DMA" to="Dominica" />
+      <CountryTypo from="DNK" to="Denmark" />
+      <CountryTypo from="DOM" to="Dominican Republic" />
+      <CountryTypo from="DZA" to="Algeria" />
+      <CountryTypo from="ECU" to="Ecuador" />
+      <CountryTypo from="EGY" to="Egypt" />
+      <CountryTypo from="ERI" to="Eritrea" />
+      <CountryTypo from="ESH" to="Western Sahara" />
+      <CountryTypo from="ESP" to="Spain" />
+      <CountryTypo from="EST" to="Estonia" />
+      <CountryTypo from="ETH" to="Ethiopia" />
+      <CountryTypo from="FIN" to="Finland" />
+      <CountryTypo from="FJI" to="Fiji" />
+      <CountryTypo from="FLK" to="Falkland Islands (Malvinas)" />
+      <CountryTypo from="FRA" to="France" />
+      <CountryTypo from="FRO" to="Faroe Islands" />
+      <CountryTypo from="FSM" to="Micronesia, Federated States of" />
+      <CountryTypo from="GAB" to="Gabon" />
+      <CountryTypo from="GBR" to="United Kingdom" />
+      <CountryTypo from="GEO" to="Georgia" />
+      <CountryTypo from="GGY" to="Guernsey" />
+      <CountryTypo from="GHA" to="Ghana" />
+      <CountryTypo from="GIB" to="Gibraltar" />
+      <CountryTypo from="GIN" to="Guinea" />
+      <CountryTypo from="GLP" to="Guadeloupe" />
+      <CountryTypo from="GMB" to="Gambia" />
+      <CountryTypo from="GNB" to="Guinea-Bissau" />
+      <CountryTypo from="GNQ" to="Equatorial Guinea" />
+      <CountryTypo from="GRC" to="Greece" />
+      <CountryTypo from="GRD" to="Grenada" />
+      <CountryTypo from="GRL" to="Greenland" />
+      <CountryTypo from="GTM" to="Guatemala" />
+      <CountryTypo from="GUF" to="French Guiana" />
+      <CountryTypo from="GUM" to="Guam" />
+      <CountryTypo from="GUY" to="Guyana" />
+      <CountryTypo from="HKG" to="Hong Kong" />
+      <CountryTypo from="HMD" to="Heard Island and McDonald Islands" />
+      <CountryTypo from="HND" to="Honduras" />
+      <CountryTypo from="HRV" to="Croatia" />
+      <CountryTypo from="HTI" to="Haiti" />
+      <CountryTypo from="HUN" to="Hungary" />
+      <CountryTypo from="IDN" to="Indonesia" />
+      <CountryTypo from="IMN" to="Isle of Man" />
+      <CountryTypo from="IND" to="India" />
+      <CountryTypo from="IOT" to="British Indian Ocean Territory" />
+      <CountryTypo from="IRL" to="Ireland" />
+      <CountryTypo from="IRN" to="Iran, Islamic Republic of" />
+      <CountryTypo from="IRQ" to="Iraq" />
+      <CountryTypo from="ISL" to="Iceland" />
+      <CountryTypo from="ISR" to="Israel" />
+      <CountryTypo from="ITA" to="Italy" />
+      <CountryTypo from="JAM" to="Jamaica" />
+      <CountryTypo from="JEY" to="Jersey" />
+      <CountryTypo from="JOR" to="Jordan" />
+      <CountryTypo from="JPN" to="Japan" />
+      <CountryTypo from="KAZ" to="Kazakhstan" />
+      <CountryTypo from="KEN" to="Kenya" />
+      <CountryTypo from="KGZ" to="Kyrgyzstan" />
+      <CountryTypo from="KHM" to="Cambodia" />
+      <CountryTypo from="KIR" to="Kiribati" />
+      <CountryTypo from="KNA" to="Saint Kitts and Nevis" />
+      <CountryTypo from="KOR" to="Korea, Republic of" />
+      <CountryTypo from="KWT" to="Kuwait" />
+      <CountryTypo from="LAO" to="Lao People's Democratic Republic" />
+      <CountryTypo from="LBN" to="Lebanon" />
+      <CountryTypo from="LBR" to="Liberia" />
+      <CountryTypo from="LBY" to="Libya" />
+      <CountryTypo from="LCA" to="Saint Lucia" />
+      <CountryTypo from="LIE" to="Liechtenstein" />
+      <CountryTypo from="LKA" to="Sri Lanka" />
+      <CountryTypo from="LSO" to="Lesotho" />
+      <CountryTypo from="LTU" to="Lithuania" />
+      <CountryTypo from="LUX" to="Luxembourg" />
+      <CountryTypo from="LVA" to="Latvia" />
+      <CountryTypo from="MAC" to="Macao" />
+      <CountryTypo from="MAF" to="Saint Martin (French part)" />
+      <CountryTypo from="MAR" to="Morocco" />
+      <CountryTypo from="MCO" to="Monaco" />
+      <CountryTypo from="MDA" to="Moldova, Republic of" />
+      <CountryTypo from="MDG" to="Madagascar" />
+      <CountryTypo from="MDV" to="Maldives" />
+      <CountryTypo from="MEX" to="Mexico" />
+      <CountryTypo from="MHL" to="Marshall Islands" />
+      <CountryTypo from="MKD" to="Macedonia, the former Yugoslav Republic of" />
+      <CountryTypo from="MLI" to="Mali" />
+      <CountryTypo from="MLT" to="Malta" />
+      <CountryTypo from="MMR" to="Myanmar" />
+      <CountryTypo from="MNE" to="Montenegro" />
+      <CountryTypo from="MNG" to="Mongolia" />
+      <CountryTypo from="MNP" to="Northern Mariana Islands" />
+      <CountryTypo from="MOZ" to="Mozambique" />
+      <CountryTypo from="MRT" to="Mauritania" />
+      <CountryTypo from="MSR" to="Montserrat" />
+      <CountryTypo from="MTQ" to="Martinique" />
+      <CountryTypo from="MUS" to="Mauritius" />
+      <CountryTypo from="MWI" to="Malawi" />
+      <CountryTypo from="MYS" to="Malaysia" />
+      <CountryTypo from="MYT" to="Mayotte" />
+      <CountryTypo from="NAM" to="Namibia" />
+      <CountryTypo from="NCL" to="New Caledonia" />
+      <CountryTypo from="NER" to="Niger" />
+      <CountryTypo from="NFK" to="Norfolk Island" />
+      <CountryTypo from="NGA" to="Nigeria" />
+      <CountryTypo from="NIC" to="Nicaragua" />
+      <CountryTypo from="NIU" to="Niue" />
+      <CountryTypo from="NLD" to="Netherlands" />
+      <CountryTypo from="NOR" to="Norway" />
+      <CountryTypo from="NPL" to="Nepal" />
+      <CountryTypo from="NRU" to="Nauru" />
+      <CountryTypo from="NZL" to="New Zealand" />
+      <CountryTypo from="OMN" to="Oman" />
+      <CountryTypo from="PAK" to="Pakistan" />
+      <CountryTypo from="PAN" to="Panama" />
+      <CountryTypo from="PCN" to="Pitcairn" />
+      <CountryTypo from="PER" to="Peru" />
+      <CountryTypo from="PHL" to="Philippines" />
+      <CountryTypo from="PLW" to="Palau" />
+      <CountryTypo from="PNG" to="Papua New Guinea" />
+      <CountryTypo from="POL" to="Poland" />
+      <CountryTypo from="PRI" to="Puerto Rico" />
+      <CountryTypo from="PRK" to="Korea, Democratic People's Republic of" />
+      <CountryTypo from="PRT" to="Portugal" />
+      <CountryTypo from="PRY" to="Paraguay" />
+      <CountryTypo from="PSE" to="Palestine, State of" />
+      <CountryTypo from="PYF" to="French Polynesia" />
+      <CountryTypo from="QAT" to="Qatar" />
+      <CountryTypo from="REU" to="Réunion" />
+      <CountryTypo from="ROU" to="Romania" />
+      <CountryTypo from="RUS" to="Russian Federation" />
+      <CountryTypo from="RWA" to="Rwanda" />
+      <CountryTypo from="SAU" to="Saudi Arabia" />
+      <CountryTypo from="SDN" to="Sudan" />
+      <CountryTypo from="SEN" to="Senegal" />
+      <CountryTypo from="SGP" to="Singapore" />
+      <CountryTypo from="SGS" to="South Georgia and the South Sandwich Islands" />
+      <CountryTypo from="SHN" to="Saint Helena, Ascension and Tristan da Cunha" />
+      <CountryTypo from="SJM" to="Svalbard and Jan Mayen" />
+      <CountryTypo from="SLB" to="Solomon Islands" />
+      <CountryTypo from="SLE" to="Sierra Leone" />
+      <CountryTypo from="SLV" to="El Salvador" />
+      <CountryTypo from="SMR" to="San Marino" />
+      <CountryTypo from="SOM" to="Somalia" />
+      <CountryTypo from="SPM" to="Saint Pierre and Miquelon" />
+      <CountryTypo from="SRB" to="Serbia" />
+      <CountryTypo from="SSD" to="South Sudan" />
+      <CountryTypo from="STP" to="Sao Tome and Principe" />
+      <CountryTypo from="SUR" to="Suriname" />
+      <CountryTypo from="SVK" to="Slovakia" />
+      <CountryTypo from="SVN" to="Slovenia" />
+      <CountryTypo from="SWE" to="Sweden" />
+      <CountryTypo from="SWZ" to="Swaziland" />
+      <CountryTypo from="SXM" to="Sint Maarten (Dutch part)" />
+      <CountryTypo from="SYC" to="Seychelles" />
+      <CountryTypo from="SYR" to="Syrian Arab Republic" />
+      <CountryTypo from="TCA" to="Turks and Caicos Islands" />
+      <CountryTypo from="TCD" to="Chad" />
+      <CountryTypo from="TGO" to="Togo" />
+      <CountryTypo from="THA" to="Thailand" />
+      <CountryTypo from="TJK" to="Tajikistan" />
+      <CountryTypo from="TKL" to="Tokelau" />
+      <CountryTypo from="TKM" to="Turkmenistan" />
+      <CountryTypo from="TLS" to="Timor-Leste" />
+      <CountryTypo from="TON" to="Tonga" />
+      <CountryTypo from="TTO" to="Trinidad and Tobago" />
+      <CountryTypo from="TUN" to="Tunisia" />
+      <CountryTypo from="TUR" to="Turkey" />
+      <CountryTypo from="TUV" to="Tuvalu" />
+      <CountryTypo from="TWN" to="Taiwan, Province of China" />
+      <CountryTypo from="TZA" to="Tanzania, United Republic of" />
+      <CountryTypo from="UGA" to="Uganda" />
+      <CountryTypo from="UKR" to="Ukraine" />
+      <CountryTypo from="UMI" to="United States Minor Outlying Islands" />
+      <CountryTypo from="URY" to="Uruguay" />
+      <CountryTypo from="USA" to="United States" />
+      <CountryTypo from="UZB" to="Uzbekistan" />
+      <CountryTypo from="VAT" to="Holy See (Vatican City State)" />
+      <CountryTypo from="VCT" to="Saint Vincent and the Grenadines" />
+      <CountryTypo from="VEN" to="Venezuela, Bolivarian Republic of" />
+      <CountryTypo from="VGB" to="Virgin Islands, British" />
+      <CountryTypo from="VIR" to="Virgin Islands, U.S." />
+      <CountryTypo from="VNM" to="Viet Nam" />
+      <CountryTypo from="VUT" to="Vanuatu" />
+      <CountryTypo from="WLF" to="Wallis and Futuna" />
+      <CountryTypo from="WSM" to="Samoa" />
+      <CountryTypo from="YEM" to="Yemen" />
+      <CountryTypo from="ZAF" to="South Africa" />
+      <CountryTypo from="ZMB" to="Zambia" />
+      <CountryTypo from="ZWE" to="Zimbabwe" />
     </CountryTypos>
     
     <RegionTypos>
