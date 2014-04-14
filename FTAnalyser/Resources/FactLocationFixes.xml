@@ -63,7 +63,6 @@
       <CountryTypo from="BDI" to="Burundi" />
       <CountryTypo from="BEL" to="Belgium" />
       <CountryTypo from="BEN" to="Benin" />
-      <CountryTypo from="BES" to="Bonaire, Sint Eustatius and Saba" />
       <CountryTypo from="BFA" to="Burkina Faso" />
       <CountryTypo from="BGD" to="Bangladesh" />
       <CountryTypo from="BGR" to="Bulgaria" />
@@ -74,7 +73,7 @@
       <CountryTypo from="BLR" to="Belarus" />
       <CountryTypo from="BLZ" to="Belize" />
       <CountryTypo from="BMU" to="Bermuda" />
-      <CountryTypo from="BOL" to="Bolivia, Plurinational State of" />
+      <CountryTypo from="BOL" to="Bolivia" />
       <CountryTypo from="BRA" to="Brazil" />
       <CountryTypo from="BRB" to="Barbados" />
       <CountryTypo from="BRN" to="Brunei Darussalam" />
@@ -89,7 +88,7 @@
       <CountryTypo from="CHN" to="China" />
       <CountryTypo from="CIV" to="Côte d'Ivoire" />
       <CountryTypo from="CMR" to="Cameroon" />
-      <CountryTypo from="COD" to="Congo, the Democratic Republic of the" />
+      <CountryTypo from="COD" to="DR Congo" />
       <CountryTypo from="COG" to="Congo" />
       <CountryTypo from="COK" to="Cook Islands" />
       <CountryTypo from="COL" to="Colombia" />
@@ -120,7 +119,7 @@
       <CountryTypo from="FLK" to="Falkland Islands (Malvinas)" />
       <CountryTypo from="FRA" to="France" />
       <CountryTypo from="FRO" to="Faroe Islands" />
-      <CountryTypo from="FSM" to="Micronesia, Federated States of" />
+      <CountryTypo from="FSM" to="Micronesia" />
       <CountryTypo from="GAB" to="Gabon" />
       <CountryTypo from="GBR" to="United Kingdom" />
       <CountryTypo from="GEO" to="Georgia" />
@@ -150,7 +149,7 @@
       <CountryTypo from="IND" to="India" />
       <CountryTypo from="IOT" to="British Indian Ocean Territory" />
       <CountryTypo from="IRL" to="Ireland" />
-      <CountryTypo from="IRN" to="Iran, Islamic Republic of" />
+      <CountryTypo from="IRN" to="Iran" />
       <CountryTypo from="IRQ" to="Iraq" />
       <CountryTypo from="ISL" to="Iceland" />
       <CountryTypo from="ISR" to="Israel" />
@@ -165,7 +164,7 @@
       <CountryTypo from="KHM" to="Cambodia" />
       <CountryTypo from="KIR" to="Kiribati" />
       <CountryTypo from="KNA" to="Saint Kitts and Nevis" />
-      <CountryTypo from="KOR" to="Korea, Republic of" />
+      <CountryTypo from="KOR" to="Korea" />
       <CountryTypo from="KWT" to="Kuwait" />
       <CountryTypo from="LAO" to="Lao People's Democratic Republic" />
       <CountryTypo from="LBN" to="Lebanon" />
@@ -182,12 +181,12 @@
       <CountryTypo from="MAF" to="Saint Martin (French part)" />
       <CountryTypo from="MAR" to="Morocco" />
       <CountryTypo from="MCO" to="Monaco" />
-      <CountryTypo from="MDA" to="Moldova, Republic of" />
+      <CountryTypo from="MDA" to="Moldova" />
       <CountryTypo from="MDG" to="Madagascar" />
       <CountryTypo from="MDV" to="Maldives" />
       <CountryTypo from="MEX" to="Mexico" />
       <CountryTypo from="MHL" to="Marshall Islands" />
-      <CountryTypo from="MKD" to="Macedonia, the former Yugoslav Republic of" />
+      <CountryTypo from="MKD" to="Macedonia" />
       <CountryTypo from="MLI" to="Mali" />
       <CountryTypo from="MLT" to="Malta" />
       <CountryTypo from="MMR" to="Myanmar" />
@@ -224,10 +223,10 @@
       <CountryTypo from="PNG" to="Papua New Guinea" />
       <CountryTypo from="POL" to="Poland" />
       <CountryTypo from="PRI" to="Puerto Rico" />
-      <CountryTypo from="PRK" to="Korea, Democratic People's Republic of" />
+      <CountryTypo from="PRK" to="Korea" />
       <CountryTypo from="PRT" to="Portugal" />
       <CountryTypo from="PRY" to="Paraguay" />
-      <CountryTypo from="PSE" to="Palestine, State of" />
+      <CountryTypo from="PSE" to="Palestine" />
       <CountryTypo from="PYF" to="French Polynesia" />
       <CountryTypo from="QAT" to="Qatar" />
       <CountryTypo from="REU" to="Réunion" />
@@ -239,7 +238,7 @@
       <CountryTypo from="SEN" to="Senegal" />
       <CountryTypo from="SGP" to="Singapore" />
       <CountryTypo from="SGS" to="South Georgia and the South Sandwich Islands" />
-      <CountryTypo from="SHN" to="Saint Helena, Ascension and Tristan da Cunha" />
+      <CountryTypo from="SHN" to="Saint Helena" />
       <CountryTypo from="SJM" to="Svalbard and Jan Mayen" />
       <CountryTypo from="SLB" to="Solomon Islands" />
       <CountryTypo from="SLE" to="Sierra Leone" />
@@ -271,8 +270,8 @@
       <CountryTypo from="TUN" to="Tunisia" />
       <CountryTypo from="TUR" to="Turkey" />
       <CountryTypo from="TUV" to="Tuvalu" />
-      <CountryTypo from="TWN" to="Taiwan, Province of China" />
-      <CountryTypo from="TZA" to="Tanzania, United Republic of" />
+      <CountryTypo from="TWN" to="Taiwan" />
+      <CountryTypo from="TZA" to="Tanzania" />
       <CountryTypo from="UGA" to="Uganda" />
       <CountryTypo from="UKR" to="Ukraine" />
       <CountryTypo from="UMI" to="United States Minor Outlying Islands" />
@@ -281,10 +280,10 @@
       <CountryTypo from="UZB" to="Uzbekistan" />
       <CountryTypo from="VAT" to="Holy See (Vatican City State)" />
       <CountryTypo from="VCT" to="Saint Vincent and the Grenadines" />
-      <CountryTypo from="VEN" to="Venezuela, Bolivarian Republic of" />
-      <CountryTypo from="VGB" to="Virgin Islands, British" />
-      <CountryTypo from="VIR" to="Virgin Islands, U.S." />
-      <CountryTypo from="VNM" to="Viet Nam" />
+      <CountryTypo from="VEN" to="Venezuela" />
+      <CountryTypo from="VGB" to="British Virgin Islands" />
+      <CountryTypo from="VIR" to="U.S. Virgin Islands" />
+      <CountryTypo from="VNM" to="Vietnam" />
       <CountryTypo from="VUT" to="Vanuatu" />
       <CountryTypo from="WLF" to="Wallis and Futuna" />
       <CountryTypo from="WSM" to="Samoa" />
