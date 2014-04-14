@@ -27,7 +27,7 @@ namespace FTAnalyzer
         private IList<Individual> individuals;
         private IList<Family> families;
         private IDictionary<string, List<Individual>> occupations;
-        private IDictionary<Ginap,Ginap> names;
+        private IDictionary<StandardisedName,StandardisedName> names;
         private ISet<string> unknownFactTypes;
         private bool _loading = false;
         private bool _dataloaded = false;
@@ -314,13 +314,13 @@ namespace FTAnalyzer
 
         private void LoadGinap()
         {
-
+            names = new Dictionary<StandardisedName, StandardisedName>();
         }
 
         public string GetStandardisedName(bool IsMale, string name)
         {
-            Ginap gIn = new Ginap(IsMale,name);
-            Ginap gOut;
+            StandardisedName gIn = new StandardisedName(IsMale,name);
+            StandardisedName gOut;
             names.TryGetValue(gIn, out gOut);
             if (gOut == null)
                 return name;

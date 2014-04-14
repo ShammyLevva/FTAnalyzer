@@ -5,18 +5,18 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    public class Ginap
+    public class StandardisedName
     {
         public bool IsMale { get; private set; } 
         public string Name { get; private set; }
         
-        public Ginap(int oSex, string oGName)
+        public StandardisedName(int sex, string name)
         {
-            IsMale = oSex == 2;
-            Name = oGName;
+            IsMale = sex != 1;  // 1 female, 2 male, anything else male
+            Name = name;
         }
 
-        public Ginap(bool male, string name)
+        public StandardisedName(bool male, string name)
         {
             IsMale = male;
             Name = name;

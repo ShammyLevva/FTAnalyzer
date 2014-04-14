@@ -613,7 +613,7 @@ namespace FTAnalyzer
 
         public Fact LostCousinsCensusFact(Fact lcFact)
         {
-            return facts.FirstOrDefault(x => x.FactType == Fact.CENSUS && x.FactDate.Overlaps(lcFact.FactDate));
+            return facts.FirstOrDefault(x => x.IsCensusFact && x.FactDate.Overlaps(lcFact.FactDate));
         }
 
         public bool IsLostCousinsEntered(CensusDate when) { return IsLostCousinsEntered(when, true); }
