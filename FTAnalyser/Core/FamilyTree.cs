@@ -2368,7 +2368,7 @@ namespace FTAnalyzer
                         if (indA.GenderMatches(indB) && indA.Name != Individual.UNKNOWN_NAME)
                         {
                             if (indA.SurnameMetaphone == indB.SurnameMetaphone &&
-                                indA.ForenameMetaphone == indB.ForenameMetaphone &&
+                                (indA.ForenameMetaphone == indB.ForenameMetaphone || indA.StandardisedName == indB.StandardisedName) &&
                                 indA.BirthDate.Distance(indB.BirthDate) < 5)
                             {
                                 DuplicateIndividual test = new DuplicateIndividual(indA, indB);
