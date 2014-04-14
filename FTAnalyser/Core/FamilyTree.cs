@@ -317,7 +317,7 @@ namespace FTAnalyzer
 
         }
 
-        public static string GetStandardisedName(bool IsMale, string name)
+        public string GetStandardisedName(bool IsMale, string name)
         {
             Ginap gIn = new Ginap(IsMale,name);
             Ginap gOut;

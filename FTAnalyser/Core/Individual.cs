@@ -57,7 +57,7 @@ namespace FTAnalyzer
             forenameMetaphone = new DoubleMetaphone(Forename);
             surnameMetaphone = new DoubleMetaphone(Surname);
             Notes = FamilyTree.GetNotes(node);
-            StandardisedName = FamilyTree.GetStandardisedName(IsMale, Forename);
+            StandardisedName = FamilyTree.Instance.GetStandardisedName(IsMale, Forename);
 
             // Individual attributes
             AddFacts(node, Fact.NAME);
