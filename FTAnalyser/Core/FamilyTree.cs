@@ -457,12 +457,19 @@ namespace FTAnalyzer
             foreach (Family f in families)
             {
                 if (f.Husband != null)
+                {
                     f.Husband.Infamily = true;
+                    f.Husband.ReferralFamilyID = f.FamilyID;
+                }
                 if (f.Wife != null)
+                {
                     f.Wife.Infamily = true;
+                    f.Wife.ReferralFamilyID = f.FamilyID;
+                }
                 foreach (Individual c in f.Children)
                 {
                     c.Infamily = true;
+                    c.ReferralFamilyID = f.FamilyID;
                     if (f.Husband != null || f.Wife != null)
                         c.HasParents = true;
                 }

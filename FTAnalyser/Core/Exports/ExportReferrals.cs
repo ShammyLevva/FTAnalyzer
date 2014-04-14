@@ -21,6 +21,7 @@ namespace FTAnalyzer
 
         public string CensusReference { get { return censusFact == null ? "Census Not Found" : censusFact.CensusReference; } }
         public string IndividualID { get { return ind.IndividualID; } }
+        public string FamilyID { get { return ind.ReferralFamilyID; } }
         public string Forenames { get { return ind.Forenames; } }
         public string Surname { get { return ind.Surname; } }
         public Age Age { get { return ind.GetAge(f.FactDate); } }

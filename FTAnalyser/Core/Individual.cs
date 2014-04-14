@@ -48,6 +48,7 @@ namespace FTAnalyzer
             budgieCode = string.Empty;
             infamily = false;
             hasParents = false;
+            ReferralFamilyID = string.Empty;
             facts = new List<Fact>();
             errorFacts = new List<Fact>();
             locations = new List<FactLocation>();
@@ -141,6 +142,7 @@ namespace FTAnalyzer
                 this.RelationToRoot = i.RelationToRoot;
                 this.infamily = i.infamily;
                 this.Notes = i.Notes;
+                this.ReferralFamilyID = i.ReferralFamilyID;
                 this.facts = new List<Fact>(i.facts);
                 this.errorFacts = new List<Fact>(i.errorFacts);
                 this.locations = new List<FactLocation>(i.locations);
@@ -611,6 +613,8 @@ namespace FTAnalyzer
             return false;
         }
 
+        public string ReferralFamilyID { get; set; }
+
         public Fact LostCousinsCensusFact(Fact lcFact)
         {
             return facts.FirstOrDefault(x => x.IsCensusFact && x.FactDate.Overlaps(lcFact.FactDate));
@@ -757,7 +761,7 @@ namespace FTAnalyzer
         {
             FamilyTree ft = FamilyTree.Instance;
             if (ft.FactBeforeBirth(this, fact))
-                fact.SetError((int)FamilyTree.Dataerror.FACTS_BEFORE_BIRTH, Fact.FactError.ERROR, 
+                fact.SetError((int)FamilyTree.Dataerror.FACTS_BEFORE_BIRTH, Fact.FactError.ERROR,
                     fact.FactTypeDescription + " fact recorded: " + fact.FactDate + " before individual was born");
             if (ft.FactAfterDeath(this, fact))
                 fact.SetError((int)FamilyTree.Dataerror.FACTS_AFTER_DEATH, Fact.FactError.ERROR,

@@ -13,20 +13,22 @@ namespace FTAnalyzer
             {
                 if (a.Census.Equals(b.Census))
                 {
-                    if (a.CensusReference.Equals(b.Census))
+                    if (a.CensusReference.Equals(b.CensusReference))
                     {
-                        if (a.Surname.Equals(b.Surname))
+                        if (a.FamilyID.Equals(b.FamilyID))
                         {
                             if (a.Age.Equals(b.Age))
-                                return a.Forenames.CompareTo(b.Forenames);
+                            {
+                                if (a.Surname.Equals(b.Surname))
+                                    return a.Forenames.CompareTo(b.Forenames);
+                                else
+                                    return a.Surname.CompareTo(b.Surname);
+                            }
                             else
                                 return b.Age.CompareTo(a.Age);
                         }
                         else
-                        {
-                            return a.Surname.CompareTo(b.Surname);
-                        }
-
+                            return a.FamilyID.CompareTo(b.FamilyID);
                     }
                     else
                         return a.CensusReference.CompareTo(b.CensusReference);
@@ -34,7 +36,7 @@ namespace FTAnalyzer
                 else
                     return a.Census.CompareTo(b.Census);
             }
-            else
+            else 
                 return a.ShortCode.CompareTo(b.ShortCode);
         }
     }
