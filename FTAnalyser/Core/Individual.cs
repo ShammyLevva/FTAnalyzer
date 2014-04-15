@@ -338,10 +338,7 @@ namespace FTAnalyzer
 
         public string ForenameMetaphone
         {
-            get
-            {
-                return forenameMetaphone.PrimaryKey;
-            }
+            get { return forenameMetaphone.PrimaryKey; }
         }
 
         public string Forenames
@@ -356,10 +353,7 @@ namespace FTAnalyzer
 
         public string SurnameMetaphone
         {
-            get
-            {
-                return surnameMetaphone.PrimaryKey;
-            }
+            get { return surnameMetaphone.PrimaryKey; }
         }
 
         public string MarriedName

@@ -180,7 +180,7 @@ namespace FTAnalyzer
             mainformTreeRootNode = null;
             ResetLooseFacts();
             FactLocation.ResetLocations();
-            LoadGinap();
+            LoadStandardisedNames();
         }
 
         public void ResetLooseFacts()
@@ -312,9 +312,43 @@ namespace FTAnalyzer
             Application.DoEvents();
         }
 
-        private void LoadGinap()
+        private void LoadStandardisedNames()
         {
             names = new Dictionary<StandardisedName, StandardisedName>();
+            try
+            {
+                string startPath;
+                if (Application.StartupPath.Contains("Common7\\IDE")) // running unit tests
+                    startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
+                else
+                    startPath = Application.StartupPath;
+                string filename = Path.Combine(startPath, @"Resources\GINAP.txt");
+                if (File.Exists(filename))
+                {
+                    ReadStandardisedNameFile(filename);
+                }
+            }
+            catch(Exception e)
+            {
+                log.Warn("Failed to load Standardised names error was : " + e.Message);
+            }
+        }
+
+        private void ReadStandardisedNameFile(string filename)
+        {
+            StreamReader reader = new StreamReader(filename);
+            while(!reader.EndOfStream)
+            {
+                string line = reader.ReadLine();
+                string[] values = line.Split(',');
+                if (line.IndexOf(',') > 0 && (values[0] == "1" || values[0] == "2"))
+                {
+                    StandardisedName original = new StandardisedName(values[0] == "2", values[2]);
+                    StandardisedName standardised = new StandardisedName(values[1] == "2", values[3]);
+                    names.Add(original, standardised);
+                }
+            }
+            reader.Close();
         }
 
         public string GetStandardisedName(bool IsMale, string name)

@@ -21,5 +21,10 @@ namespace FTAnalyzer
             IsMale = male;
             Name = name;
         }
+
+        public override string ToString()
+        {
+            return (IsMale ? "Male :" : "Female :") + Name;
+        }
     }
 }
