@@ -10,7 +10,7 @@ namespace FTAnalyzer
         private Individual ind;
         private Fact f;
         private Fact censusFact;
-        
+
         public ExportReferrals(Individual ind, Fact f)
         {
             this.ind = ind;
@@ -28,7 +28,18 @@ namespace FTAnalyzer
         public string ShortCode { get; private set; }
         public string Census { get { return censusFact == null ? f.ToString() : censusFact.ToString(); } }
         public bool Include { get { return ind.IsBloodDirect; } }
-        public string RelationType { get { return ind.IsBloodDirect ? ind.Relation : string.Empty; } }// don't show type if shouldn't be included as it confuses
+        public string RelationType
+        {
+            // don't show type if shouldn't be included as it confuses
+            get
+            {
+                if (ind.RelationType == Individual.DIRECT || ind.RelationType == Individual.BLOOD)
+                    return "Blood Relation";
+                else if (ind.RelationType == Individual.MARRIEDTODB)
+                    return "Marriage";
+                else return string.Empty;
+            }
+        }
 
         public string GetShortCode()
         {
