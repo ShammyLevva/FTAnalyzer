@@ -2399,10 +2399,10 @@ namespace FTAnalyzer
                         if (_cancelDuplicates)
                             break;
                         Individual indB = list[j];
-                        if (indA.GenderMatches(indB) && indA.Name != Individual.UNKNOWN_NAME)
+                        if (indA.GenderMatches(indB) && indA.Name != Individual.UNKNOWN_NAME && indB.Name != Individual.UNKNOWN_NAME)
                         {
-                            if (indA.SurnameMetaphone == indB.SurnameMetaphone &&
-                                (indA.ForenameMetaphone == indB.ForenameMetaphone || indA.StandardisedName == indB.StandardisedName) &&
+                            if (indA.SurnameMetaphone.Equals(indB.SurnameMetaphone) &&
+                                (indA.ForenameMetaphone.Equals(indB.ForenameMetaphone) || indA.StandardisedName.Equals(indB.StandardisedName)) &&
                                 indA.BirthDate.Distance(indB.BirthDate) < 5)
                             {
                                 DuplicateIndividual test = new DuplicateIndividual(indA, indB);

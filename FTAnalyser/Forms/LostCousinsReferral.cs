@@ -14,7 +14,7 @@ namespace FTAnalyzer.Forms
     {
         private ReportFormHelper reportFormHelper;
 
-        public LostCousinsReferral()
+        public LostCousinsReferral(bool onlyInCommon)
         {
             InitializeComponent();
             FamilyTree ft = FamilyTree.Instance;
@@ -23,7 +23,10 @@ namespace FTAnalyzer.Forms
             List<ExportReferrals> referrals = new List<ExportReferrals>();
             foreach (Individual ind in lostCousinsFacts)
                 foreach (Fact f in ind.GetFacts(Fact.LOSTCOUSINS))
-                    referrals.Add(new ExportReferrals(ind, f));
+                {
+                    if((onlyInCommon && ind.IsBloodDirect) || !onlyInCommon)
+                        referrals.Add(new ExportReferrals(ind, f));
+                }
             referrals.Sort(new LostCousinsReferralComparer());
             dgLCReferrals.AutoGenerateColumns = false;
             dgLCReferrals.DataSource = referrals;

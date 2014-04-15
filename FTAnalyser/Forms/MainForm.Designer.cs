@@ -243,6 +243,7 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.ckbReferralInCommon = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -1140,6 +1141,7 @@
             // 
             // Referrals
             // 
+            this.Referrals.Controls.Add(this.ckbReferralInCommon);
             this.Referrals.Controls.Add(this.btnReferrals);
             this.Referrals.Controls.Add(this.cmbReferrals);
             this.Referrals.Controls.Add(this.label11);
@@ -2453,6 +2455,16 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // ckbReferralInCommon
+            // 
+            this.ckbReferralInCommon.AutoSize = true;
+            this.ckbReferralInCommon.Location = new System.Drawing.Point(11, 49);
+            this.ckbReferralInCommon.Name = "ckbReferralInCommon";
+            this.ckbReferralInCommon.Size = new System.Drawing.Size(150, 17);
+            this.ckbReferralInCommon.TabIndex = 3;
+            this.ckbReferralInCommon.Text = "Limit to Common Relatives";
+            this.ckbReferralInCommon.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -2754,6 +2766,7 @@
         private System.Windows.Forms.Button btnReferrals;
         private System.Windows.Forms.ComboBox cmbReferrals;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.CheckBox ckbReferralInCommon;
     }
 }
 

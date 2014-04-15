@@ -480,10 +480,13 @@ namespace FTAnalyzer
 
         private void ResetDuplicatesTable()
         {
-            dgDuplicates.Sort(dgDuplicates.Columns["DuplicateBirthDate"], ListSortDirection.Ascending);
-            dgDuplicates.Sort(dgDuplicates.Columns["DuplicateForenames"], ListSortDirection.Ascending);
-            dgDuplicates.Sort(dgDuplicates.Columns["DuplicateSurname"], ListSortDirection.Ascending);
-            dgDuplicates.Sort(dgDuplicates.Columns["Score"], ListSortDirection.Descending);
+            if (dgDuplicates.RowCount > 0)
+            {
+                dgDuplicates.Sort(dgDuplicates.Columns["DuplicateBirthDate"], ListSortDirection.Ascending);
+                dgDuplicates.Sort(dgDuplicates.Columns["DuplicateForenames"], ListSortDirection.Ascending);
+                dgDuplicates.Sort(dgDuplicates.Columns["DuplicateSurname"], ListSortDirection.Ascending);
+                dgDuplicates.Sort(dgDuplicates.Columns["Score"], ListSortDirection.Descending);
+            }
         }
 
         private void UpdateLooseBirthDeaths()
@@ -2266,7 +2269,7 @@ namespace FTAnalyzer
                 HourGlass(true);
                 Individual root = ft.RootPerson;
                 ft.SetRelations(selected.IndividualID, pbRelationships);
-                LostCousinsReferral lcr = new LostCousinsReferral();
+                LostCousinsReferral lcr = new LostCousinsReferral(ckbReferralInCommon.Checked);
                 DisposeDuplicateForms(lcr);
                 lcr.Show();
                 ft.SetRelations(root.IndividualID, pbRelationships);
