@@ -28,7 +28,7 @@ namespace FTAnalyzer
             ScoreDates(IndividualA.BirthDate, IndividualB.BirthDate);
             ScoreDates(IndividualA.DeathDate, IndividualB.DeathDate);
             LocationScore();
-            Score += SharedParents() + SharedChildren() - DifferentParents();
+            Score += SharedParents() + SharedChildren() + DifferentParentsPenalty();
         }
 
         private void LocationScore()
@@ -101,7 +101,7 @@ namespace FTAnalyzer
             return score;
         }
 
-        private int DifferentParents()
+        private int DifferentParentsPenalty()
         {
             int score = 0;
             if(IndividualA.FamiliesAsChild.Count > 0 && IndividualB.FamiliesAsChild.Count > 0 && SharedParents() == 0)
