@@ -104,9 +104,15 @@ namespace FTAnalyzer
         private int DifferentParentsPenalty()
         {
             int score = 0;
-            if(IndividualA.FamiliesAsChild.Count > 0 && IndividualB.FamiliesAsChild.Count > 0 && SharedParents() == 0)
+            if(IndividualA.FamiliesAsChild.Count == 1 && IndividualB.FamiliesAsChild.Count == 1)
             { // both individuals have parents but none of them are shared parents so heavy penalty
-                score = -200;
+                if(!IndividualA.FamiliesAsChild[0].Father.Equals(IndividualB.FamiliesAsChild[0].Father) &&
+                   !IndividualA.FamiliesAsChild[0].Mother.Equals(IndividualB.FamiliesAsChild[0].Mother))
+                        score = -500;
+            }  else if (IndividualA.FamiliesAsChild.Count > 0 && IndividualB.FamiliesAsChild.Count > 0)
+            {
+                if (SharedParents() == 0)
+                    score = -250;
             }
             return score;
         }
