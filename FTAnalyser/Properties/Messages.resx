@@ -156,4 +156,13 @@
   <data name="NotYet" xml:space="preserve">
     <value>Not Implemented Yet. Coming Soon in a future version.</value>
   </data>
+  <data name="Referral_Blood" xml:space="preserve">
+    <value>Blood Relation</value>
+  </data>
+  <data name="Referral_Direct" xml:space="preserve">
+    <value>Direct Ancestor</value>
+  </data>
+  <data name="Referral_Marriage" xml:space="preserve">
+    <value>Marriage</value>
+  </data>
 </root>

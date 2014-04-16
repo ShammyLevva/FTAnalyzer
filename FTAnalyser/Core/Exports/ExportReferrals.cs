@@ -17,6 +17,8 @@ namespace FTAnalyzer
             this.f = f;
             this.censusFact = ind.LostCousinsCensusFact(f);
             this.ShortCode = GetShortCode();
+            this.RelationType = SetRelationType();
+            this.Include = ind.IsBloodDirect;
         }
 
         public string CensusReference { get { return censusFact == null ? "Census Not Found" : censusFact.CensusReference; } }
@@ -27,18 +29,18 @@ namespace FTAnalyzer
         public Age Age { get { return ind.GetAge(f.FactDate); } }
         public string ShortCode { get; private set; }
         public string Census { get { return censusFact == null ? f.ToString() : censusFact.ToString(); } }
-        public bool Include { get { return ind.IsBloodDirect; } }
-        public string RelationType
+        public bool Include { get; private set; }
+        public string RelationType { get; private set; }
+        
+        public string SetRelationType()
         {
-            // don't show type if shouldn't be included as it confuses
-            get
-            {
-                if (ind.RelationType == Individual.DIRECT || ind.RelationType == Individual.BLOOD)
-                    return "Blood Relation";
-                else if (ind.RelationType == Individual.MARRIEDTODB)
-                    return "Marriage";
-                else return string.Empty;
-            }
+            if (ind.RelationType == Individual.DIRECT)
+                return Properties.Messages.Referral_Direct;
+            if (ind.RelationType == Individual.BLOOD)
+                return Properties.Messages.Referral_Blood;
+            else if (ind.RelationType == Individual.MARRIEDTODB)
+                return Properties.Messages.Referral_Marriage;
+            else return string.Empty;
         }
 
         public string GetShortCode()

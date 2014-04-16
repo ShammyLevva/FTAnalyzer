@@ -13,29 +13,43 @@ namespace FTAnalyzer.Forms
     public partial class LostCousinsReferral : Form
     {
         private ReportFormHelper reportFormHelper;
+        List<ExportReferrals> referrals;
 
-        public LostCousinsReferral(bool onlyInCommon)
+        public LostCousinsReferral(Individual referee, bool onlyInCommon)
         {
             InitializeComponent();
             FamilyTree ft = FamilyTree.Instance;
+            this.Text = "Lost Cousins Referral for " + referee.ToString();
+            reportFormHelper = new ReportFormHelper(this, this.Text, dgLCReferrals, this.ResetTable, "Lost Cousins Referrals");
+            dgLCReferrals.AutoGenerateColumns = false;
             Predicate<Individual> lostCousinsFact = new Predicate<Individual>(x => x.HasLostCousinsFact);
             List<Individual> lostCousinsFacts = ft.AllIndividuals.Where(lostCousinsFact).ToList<Individual>();
-            List<ExportReferrals> referrals = new List<ExportReferrals>();
+            referrals = new List<ExportReferrals>();
             foreach (Individual ind in lostCousinsFacts)
                 foreach (Fact f in ind.GetFacts(Fact.LOSTCOUSINS))
                 {
                     if((onlyInCommon && ind.IsBloodDirect) || !onlyInCommon)
                         referrals.Add(new ExportReferrals(ind, f));
                 }
-            referrals.Sort(new LostCousinsReferralComparer());
-            dgLCReferrals.AutoGenerateColumns = false;
-            dgLCReferrals.DataSource = referrals;
-            reportFormHelper = new ReportFormHelper(this, this.Text, dgLCReferrals, this.ResetTable, "Lost Cousins Referrals");
+            reportFormHelper.LoadColumnLayout("LCReferralsColumns.xml");
+            tsRecords.Text = GetCountofRecords();
+        }
+
+        private string GetCountofRecords()
+        {
+            int total = referrals.Count();
+            int direct = referrals.Count(x => x.RelationType.Equals(Properties.Messages.Referral_Direct));
+            int blood = referrals.Count(x => x.RelationType.Equals(Properties.Messages.Referral_Blood));
+            int marriage = referrals.Count(x => x.RelationType.Equals(Properties.Messages.Referral_Marriage));
+            int others = referrals.Count(x => x.RelationType.Equals(string.Empty));
+            return total + " Lost Cousins Records listed made up of " + direct + " Direct Ancestors, " + blood + " Blood Relatives, "
+                + marriage + " Marriage and " + others + " Others.";
         }
 
         private void ResetTable()
         {
-            dgLCReferrals.Sort(new LostCousinsReferralComparer());
+            referrals.Sort(new LostCousinsReferralComparer());
+            dgLCReferrals.DataSource = referrals;
         }
 
         private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
@@ -62,6 +76,11 @@ namespace FTAnalyzer.Forms
         private void mnuExportToExcel_Click(object sender, EventArgs e)
         {
             reportFormHelper.DoExportToExcel<IDisplayFact>();
+        }
+
+        private void LostCousinsReferral_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

@@ -30,7 +30,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LostCousinsReferral));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.mnuSaveColumnLayout = new System.Windows.Forms.ToolStripButton();
             this.mnuResetColumns = new System.Windows.Forms.ToolStripButton();
@@ -48,8 +48,11 @@
             this.Census = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Include = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.RelationType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLCReferrals)).BeginInit();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -143,14 +146,14 @@
             this.Census,
             this.Include,
             this.RelationType});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgLCReferrals.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgLCReferrals.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgLCReferrals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgLCReferrals.Location = new System.Drawing.Point(0, 25);
             this.dgLCReferrals.Name = "dgLCReferrals";
@@ -158,7 +161,7 @@
             this.dgLCReferrals.RowHeadersWidth = 20;
             this.dgLCReferrals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgLCReferrals.ShowEditingIcon = false;
-            this.dgLCReferrals.Size = new System.Drawing.Size(943, 386);
+            this.dgLCReferrals.Size = new System.Drawing.Size(943, 364);
             this.dgLCReferrals.TabIndex = 3;
             // 
             // CensusReference
@@ -233,19 +236,38 @@
             this.RelationType.ReadOnly = true;
             this.RelationType.Width = 105;
             // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsRecords});
+            this.statusStrip.Location = new System.Drawing.Point(0, 389);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(943, 22);
+            this.statusStrip.TabIndex = 4;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // tsRecords
+            // 
+            this.tsRecords.Name = "tsRecords";
+            this.tsRecords.Size = new System.Drawing.Size(0, 17);
+            // 
             // LostCousinsReferral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(943, 411);
             this.Controls.Add(this.dgLCReferrals);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LostCousinsReferral";
             this.Text = "LostCousinsReferral";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LostCousinsReferral_FormClosed);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLCReferrals)).EndInit();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,5 +292,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Census;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Include;
         private System.Windows.Forms.DataGridViewTextBoxColumn RelationType;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel tsRecords;
     }
 }

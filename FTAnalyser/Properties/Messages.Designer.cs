@@ -176,5 +176,32 @@ namespace FTAnalyzer.Properties {
                 return ResourceManager.GetString("NotYet", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blood Relation.
+        /// </summary>
+        internal static string Referral_Blood {
+            get {
+                return ResourceManager.GetString("Referral_Blood", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Direct Ancestor.
+        /// </summary>
+        internal static string Referral_Direct {
+            get {
+                return ResourceManager.GetString("Referral_Direct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Marriage.
+        /// </summary>
+        internal static string Referral_Marriage {
+            get {
+                return ResourceManager.GetString("Referral_Marriage", resourceCulture);
+            }
+        }
     }
 }
