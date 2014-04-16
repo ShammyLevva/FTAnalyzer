@@ -102,6 +102,18 @@ namespace FTAnalyzer.Mapping
             return result;                        
         }
 
+        public static GeoResponse.CResult.CGeometry.CViewPort ReverseTransformViewport(GeoResponse.CResult.CGeometry.CViewPort viewport)
+        {
+            Coordinate mNorthEast = MapTransforms.ReverseTransformCoordinate(new Coordinate(viewport.NorthEast.Long, viewport.NorthEast.Lat));
+            Coordinate mSouthWest = MapTransforms.ReverseTransformCoordinate(new Coordinate(viewport.SouthWest.Long, viewport.SouthWest.Lat));
+            GeoResponse.CResult.CGeometry.CViewPort result = new GeoResponse.CResult.CGeometry.CViewPort();
+            result.NorthEast.Long = mNorthEast.X;
+            result.NorthEast.Lat = mNorthEast.Y;
+            result.SouthWest.Long = mSouthWest.X;
+            result.SouthWest.Lat = mSouthWest.Y;
+            return result;
+        }
+
         public static Coordinate TransformCoordinate(Coordinate point)
         {
             return Transform().MathTransform.Transform(point);

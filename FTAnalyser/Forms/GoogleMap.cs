@@ -112,7 +112,8 @@ namespace FTAnalyzer.Forms
             if (loc.IsGeoCoded(false) && loc.ViewPort != null)
             {
                 labMapLevel.Text = "Previously Geocoded: " + loc.ToString();
-                viewport = loc.ViewPort;
+                viewport = MapTransforms.ReverseTransformViewport(loc.ViewPort);
+                args = new Object[] { loc.Latitude, loc.Longitude };
             }
             else
             {
