@@ -64,17 +64,18 @@ namespace FTAnalyzer
         //Parish: Inverurie; ED: 4; Page: 12; Line: 3; Roll: CSSCT1901_69
         //Class: RG14; Piece: 21983
         //Class: RG14; Piece: 12577; Schedule Number: 103
-        private static readonly string EW_CENSUS_PATTERN = "Class: RG(\\d{2,3}); Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3}); GSU";
+        private static readonly string EW_CENSUS_PATTERN = "Class: RG(\\d{2,3}); Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3})";
         private static readonly string EW_CENSUS_PATTERN_FH = "RG(\\d{1,2})/(\\d{1,5}) F(\\d{1,4}) p(\\d{1,3})";
-        private static readonly string EW_CENSUS_1841_PATTERN = "Class: HO107; Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3}); GSU";
+        private static readonly string EW_CENSUS_1841_PATTERN = "Class: HO107; Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3})";
         private static readonly string EW_CENSUS_1841_PATTERN2 = "Class: HO107; Piece:? (\\d{1,5}); Book: (\\d{1,3});.*?Folio: (\\d{1,4}); Page: (\\d{1,3});";
         private static readonly string EW_CENSUS_1841_PATTERN_FH = "HO107/(\\d{1,5})/(\\d{1,3}) .*F(\\d{1,3}) p(\\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN = "^RG14PN(\\d{1,6}) .*SN(\\d{1,3})$";
         private static readonly string EW_CENSUS_1911_PATTERN2 = "Class: RG14; Piece: (\\d{1,6})$";
         private static readonly string EW_CENSUS_1911_PATTERN3 = "Class: RG14; Piece: (\\d{1,6}); Schedule Number: (\\d{1,3})$";
+        private static readonly string EW_CENSUS_1911_PATTERN3a = "Class: RG14; Piece: (\\d{1,6}); SN: (\\d{1,3})$";
         private static readonly string EW_CENSUS_1911_PATTERN4 = "Class: RG14; Piece: (\\d{1,6}); Page: (\\d{1,3})$";
         private static readonly string EW_CENSUS_1911_PATTERN_FH = "RG14/PN(\\d{1,6}) .*SN(\\d{1,3})$";
-        private static readonly string SCOT_CENSUS_PATTERN = "Parish: ([A-Za-z]+); ED: (\\d{1,3}); Page: (\\d{1,4}); Line: (\\d{1,2}); Roll: CSSCT";
+        private static readonly string SCOT_CENSUS_PATTERN = "Parish: ([A-Za-z]+); ED: (\\d{1,3}); Page: (\\d{1,4}); Line: (\\d{1,2})";
         private static readonly string SCOT_CENSUS_PATTERN2 = "(\\d{3}/\\d{2}) (\\d{3}/\\d{2}) (\\d{3,4})";
 
         static Fact()
@@ -452,7 +453,8 @@ namespace FTAnalyzer
                     return;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3, RegexOptions.IgnoreCase);
-                if (matcher.Success)
+                Match matcher2 = Regex.Match(text, EW_CENSUS_1911_PATTERN3a, RegexOptions.IgnoreCase);
+                if (matcher.Success || matcher2.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
@@ -467,8 +469,6 @@ namespace FTAnalyzer
                 }
             }
             // now check sources to see if census reference is in title page
-            if (n.OuterXml.Contains("S1218"))
-                Console.Write("S1218");
             foreach (FactSource fs in Sources)
             {
                 Match matcher = Regex.Match(fs.SourceTitle, EW_CENSUS_1841_PATTERN_FH, RegexOptions.IgnoreCase);
