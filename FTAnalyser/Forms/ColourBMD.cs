@@ -18,6 +18,9 @@ namespace FTAnalyzer.Forms
     {
         private ReportFormHelper reportFormHelper;
 
+        public const int EMPTY = 0, UNKNOWN_DATE = 1, WIDE_DATE = 2, NARROW_DATE = 3, APPROX_DATE = 4, 
+                         EXACT_DATE = 5, NO_SPOUSE = 6, NO_PARTNER = 7, NO_MARRIAGE = 8;
+
         private Dictionary<int, DataGridViewCellStyle> styles;
         private int birthColumnIndex;
         private int burialColumnIndex;
@@ -121,31 +124,31 @@ namespace FTAnalyzer.Forms
 
                     switch (value)
                     {
-                        case 0: // Grey
+                        case EMPTY: // Grey
                             cell.ToolTipText = string.Empty;
                             break;
-                        case 1: // Red
+                        case UNKNOWN_DATE: // Red
                             cell.ToolTipText = "Unknown date.";
                             break;
-                        case 2: // Orange
+                        case WIDE_DATE: // Orange
                             cell.ToolTipText = "Wide date range (>2 years).";
                             break;
-                        case 3: // Yellow
+                        case NARROW_DATE: // Yellow
                             cell.ToolTipText = "Narrow date range (over Quarter/Month up to 2y).";
                             break;
-                        case 4: // Pale Green 
+                        case APPROX_DATE: // Pale Green 
                             cell.ToolTipText = "Approximate date. (Quarter/Month)";
                             break;
-                        case 5: // Green
+                        case EXACT_DATE: // Green
                             cell.ToolTipText = "Exact date.";
                             break;
-                        case 6: // pale grey
+                        case NO_SPOUSE: // pale grey
                             cell.ToolTipText = "Of marrying age but no spouse recorded";
                             break;
-                        case 7: // light blue
+                        case NO_PARTNER: // light blue
                             cell.ToolTipText = "No partner but has shared fact or children";
                             break;
-                        case 8: // dark blue
+                        case NO_MARRIAGE: // dark blue
                             cell.ToolTipText = "Has partner but no marriage fact";
                             break;
                     }
@@ -173,7 +176,7 @@ namespace FTAnalyzer.Forms
                 {
                     DataGridViewCell cell = dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
                     int value = (int)cell.Value;
-                    if (value != 5)
+                    if (value != EXACT_DATE)
                     {
                         IDisplayColourBMD person = (IDisplayColourBMD)dgBMDReportSheet.Rows[e.RowIndex].DataBoundItem;
                         if (e.ColumnIndex == birthColumnIndex || e.ColumnIndex == birthColumnIndex + 1)
@@ -240,43 +243,43 @@ namespace FTAnalyzer.Forms
                     dgBMDReportSheet.DataSource = this.reportList;
                     break;
                 case 1: // None Found (All Red)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(1, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(UNKNOWN_DATE, true));
                     break;
                 case 2: // All Found (All Green)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(5, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(EXACT_DATE, true));
                     break;
                 case 3: // All Wide date ranges (Orange)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(2, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(WIDE_DATE, true));
                     break;
                 case 4: // All Narrow date ranges (Yellow)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(3, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(NARROW_DATE, true));
                     break;
                 case 5: // All Approx date ranges (Light Green)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(4, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(APPROX_DATE, true));
                     break;
                 case 6: // Some Missing (Some Red)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(1, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(UNKNOWN_DATE, false));
                     break;
                 case 7: // Some found (Some Green)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(5, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(EXACT_DATE, false));
                     break;
                 case 8: // Some Wide date ranges (Orange)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(2, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(WIDE_DATE, false));
                     break;
                 case 9: // Some Narrow date ranges (Yellow)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(3, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(NARROW_DATE, false));
                     break;
                 case 10: // Some Approx date ranges (Light Green)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(4, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(APPROX_DATE, false));
                     break;
                 case 11: // Of Marrying age (Peach)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(6, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(NO_SPOUSE, false));
                     break;
                 case 12: // No Partner shared fact/children (Light Blue)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(7, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(NO_PARTNER, false));
                     break;
                 case 13: // Partner but no marriage (Dark Blue)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(8, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(NO_MARRIAGE, false));
                     break;
             }
             dgBMDReportSheet.Focus();
