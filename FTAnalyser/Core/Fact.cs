@@ -84,6 +84,7 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("Childless", CHILDLESS);
             CUSTOM_TAGS.Add("Contact", CONTACT);
             CUSTOM_TAGS.Add("Witness", WITNESS);
+            CUSTOM_TAGS.Add("Witnesses", WITNESS);
             CUSTOM_TAGS.Add("Unmarried", UNMARRIED);
             CUSTOM_TAGS.Add("Friends", UNMARRIED);
             CUSTOM_TAGS.Add("Partners", UNMARRIED);
