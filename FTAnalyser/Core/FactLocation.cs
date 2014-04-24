@@ -385,7 +385,7 @@ namespace FTAnalyzer
                     Country = location.Trim();
                     Level = COUNTRY;
                 }
-                //string before = (parish + ", " + region + ", " + country).ToUpper().Trim();
+                string before = (SubRegion + ", " + Region + ", " + Country).ToUpper().Trim();
                 if (!Properties.GeneralSettings.Default.AllowEmptyLocations)
                     FixEmptyFields();
                 FixCapitalisation();
@@ -505,6 +505,8 @@ namespace FTAnalyzer
         private string FixRegionTypos(string toFix)
         {
             string result = string.Empty;
+            if (Country == Countries.AUSTRALIA && toFix.Equals("WA"))
+                return "Western Australia"; // fix for WA = Washington
             REGION_TYPOS.TryGetValue(toFix, out result);
             if (result != null && result.Length > 0)
                 return result;
