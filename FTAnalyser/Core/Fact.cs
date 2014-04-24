@@ -69,7 +69,7 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1841_PATTERN = "Class: HO107; Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3})";
         private static readonly string EW_CENSUS_1841_PATTERN2 = "Class: HO107; Piece:? (\\d{1,5}); Book: (\\d{1,3});.*?Folio: (\\d{1,4}); Page: (\\d{1,3});";
         private static readonly string EW_CENSUS_1841_PATTERN_FH = "HO107/(\\d{1,5})/(\\d{1,3}) .*F(\\d{1,3}) p(\\d{1,3})";
-        private static readonly string EW_CENSUS_1911_PATTERN = "^RG14PN(\\d{1,6}) .*SN(\\d{1,3});?$";
+        private static readonly string EW_CENSUS_1911_PATTERN = "^RG14PN(\\d{1,6}) .*SN(\\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN2 = "Class: RG14; Piece: (\\d{1,6});?$";
         private static readonly string EW_CENSUS_1911_PATTERN3 = "Class: RG14; Piece: (\\d{1,6}); Schedule Number: (\\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN3a = "Class: RG14; Piece: (\\d{1,6}); SN: (\\d{1,3})";
@@ -457,8 +457,14 @@ namespace FTAnalyzer
                     return;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3, RegexOptions.IgnoreCase);
-                Match matcher2 = Regex.Match(text, EW_CENSUS_1911_PATTERN3a, RegexOptions.IgnoreCase);
-                if (matcher.Success || matcher2.Success)
+                if (matcher.Success)
+                {
+                    this.Piece = matcher.Groups[1].ToString();
+                    this.Schedule = matcher.Groups[2].ToString();
+                    return;
+                }
+                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3a, RegexOptions.IgnoreCase);
+                if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
