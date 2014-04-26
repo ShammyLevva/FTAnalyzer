@@ -33,7 +33,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,8 +65,12 @@
             this.mnuFamiliesToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFactsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSourcesToExcel = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuLooseBirthsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuLooseDeathsToExcel = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuTreetopsToExcel = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuWorldWarsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -244,10 +248,6 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuTreetopsToExcel = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuWorldWarsToExcel = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -556,6 +556,11 @@
             this.mnuSourcesToExcel.Text = "Sources to Excel";
             this.mnuSourcesToExcel.Click += new System.EventHandler(this.mnuSourcesToExcel_Click);
             // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(218, 6);
+            // 
             // mnuLooseBirthsToExcel
             // 
             this.mnuLooseBirthsToExcel.Name = "mnuLooseBirthsToExcel";
@@ -569,6 +574,25 @@
             this.mnuLooseDeathsToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuLooseDeathsToExcel.Text = "Loose Deaths to Excel";
             this.mnuLooseDeathsToExcel.Click += new System.EventHandler(this.looseDeathsToExcelToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(218, 6);
+            // 
+            // mnuTreetopsToExcel
+            // 
+            this.mnuTreetopsToExcel.Name = "mnuTreetopsToExcel";
+            this.mnuTreetopsToExcel.Size = new System.Drawing.Size(221, 22);
+            this.mnuTreetopsToExcel.Text = "Current Treetops to Excel";
+            this.mnuTreetopsToExcel.Click += new System.EventHandler(this.mnuTreetopsToExcel_Click);
+            // 
+            // mnuWorldWarsToExcel
+            // 
+            this.mnuWorldWarsToExcel.Name = "mnuWorldWarsToExcel";
+            this.mnuWorldWarsToExcel.Size = new System.Drawing.Size(221, 22);
+            this.mnuWorldWarsToExcel.Text = "Current World Wars to Excel";
+            this.mnuWorldWarsToExcel.Click += new System.EventHandler(this.mnuWorldWarsToExcel_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -765,14 +789,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 154);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -2472,28 +2496,6 @@
             // 
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(218, 6);
-            // 
-            // mnuTreetopsToExcel
-            // 
-            this.mnuTreetopsToExcel.Name = "mnuTreetopsToExcel";
-            this.mnuTreetopsToExcel.Size = new System.Drawing.Size(221, 22);
-            this.mnuTreetopsToExcel.Text = "Current Treetops to Excel";
-            // 
-            // mnuWorldWarsToExcel
-            // 
-            this.mnuWorldWarsToExcel.Name = "mnuWorldWarsToExcel";
-            this.mnuWorldWarsToExcel.Size = new System.Drawing.Size(221, 22);
-            this.mnuWorldWarsToExcel.Text = "Current World Wars to Excel";
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(218, 6);
             // 
             // MainForm
             // 

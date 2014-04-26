@@ -2281,5 +2281,25 @@ namespace FTAnalyzer
                 HourGlass(false);
             }
         }
+
+        private void mnuTreetopsToExcel_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            SortableBindingList<IDisplayIndividual> list = dgTreeTops.DataSource as SortableBindingList<IDisplayIndividual>;
+            DataTable dt = convertor.ToDataTable(list.ToList<IDisplayIndividual>());
+            ExportToExcel.Export(dt);
+            HourGlass(false);
+        }
+
+        private void mnuWorldWarsToExcel_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            SortableBindingList<IDisplayIndividual> list = dgWorldWars.DataSource as SortableBindingList<IDisplayIndividual>;
+            DataTable dt = convertor.ToDataTable(list.ToList<IDisplayIndividual>());
+            ExportToExcel.Export(dt);
+            HourGlass(false);
+        }
     }
 }
