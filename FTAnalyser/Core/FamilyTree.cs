@@ -759,7 +759,7 @@ namespace FTAnalyzer
                 }
                 if (birthDate.EndDate < minEnd)
                 {  // check for BEF XXXX types that are prevalent in my tree
-                    if (birthDate.StartDate == FactDate.MINDATE && birthDate.EndDate.AddYears(1) < minEnd)
+                    if (birthDate.StartDate == FactDate.MINDATE && birthDate.EndDate.AddYears(1) <= minEnd)
                         minEnd = birthDate.EndDate.AddYears(1);
                     else
                         minEnd = birthDate.EndDate;
