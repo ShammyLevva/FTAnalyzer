@@ -54,6 +54,10 @@ namespace FTAnalyzer
             EDUCATION, OCCUPATION, RESIDENCE, RETIREMENT, MILITARY, ELECTION, DEGREE, EMPLOYMENT, MEDICAL_CONDITION
                     });
 
+        public static readonly ISet<string> IGNORE_LONG_RANGE = new HashSet<string>(new string[] {
+            MARRIAGE, CHILDREN
+                    });
+
         private static readonly Dictionary<string, string> CUSTOM_TAGS = new Dictionary<string, string>();
         private static readonly HashSet<string> COMMENT_FACTS = new HashSet<string>();
 
