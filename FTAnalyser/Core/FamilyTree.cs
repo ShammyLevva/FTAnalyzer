@@ -789,8 +789,8 @@ namespace FTAnalyzer
             {
                 if (Fact.LOOSE_BIRTH_FACTS.Contains(f.FactType))
                 {
-                    if (f.FactDate.IsKnown)
-                    {
+                    if (f.FactDate.IsKnown && (f.FactType != Fact.MARRIAGE || !f.FactDate.IsLongYearSpan))
+                    {  // don't consider long year span marriage facts
                         if (f.FactDate.StartDate != FactDate.MINDATE && f.FactDate.StartDate < mindate)
                             mindate = f.FactDate.StartDate;
                         if (f.FactDate.EndDate != FactDate.MAXDATE && f.FactDate.EndDate < mindate) //copes with BEF dates
@@ -899,8 +899,9 @@ namespace FTAnalyzer
                 // very exact 9 months before dates
                 maxdate = new DateTime(maxdate.Year, 1, 1);
             }
+            // Check max date on all facts of facttype but don't consider long year span marriage facts
             foreach (Fact f in indiv.AllFacts)
-                if (factTypes.Contains(f.FactType) && f.FactDate.StartDate > maxdate)
+                if (factTypes.Contains(f.FactType) && f.FactDate.StartDate > maxdate && (f.FactType != Fact.MARRIAGE || !f.FactDate.IsLongYearSpan))
                     maxdate = f.FactDate.StartDate;
             // at this point we have the maximum point a person was alive
             // based on their oldest child and last living fact record and marriage date
