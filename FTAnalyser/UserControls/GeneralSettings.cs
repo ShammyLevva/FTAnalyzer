@@ -24,6 +24,7 @@ namespace FTAnalyzer.UserControls
             chkIncludePartialGeocoded.Checked = Properties.GeneralSettings.Default.IncludePartials;
             chkFamilyCensus.Checked = Properties.GeneralSettings.Default.OnlyCensusParents;
             chkMultipleFactForms.Checked = Properties.GeneralSettings.Default.MultipleFactForms;
+            chkCompactCensusRef.Checked = Properties.GeneralSettings.Default.UseCompactCensusRef;
             upDownAge.Value = Properties.GeneralSettings.Default.MinParentalAge;
 			Properties.GeneralSettings.Default.ReloadRequired = false;
 		}
@@ -41,6 +42,7 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.OnlyCensusParents = chkFamilyCensus.Checked;
             Properties.GeneralSettings.Default.MinParentalAge = (int)upDownAge.Value;
             Properties.GeneralSettings.Default.MultipleFactForms = chkMultipleFactForms.Checked;
+            Properties.GeneralSettings.Default.UseCompactCensusRef = chkCompactCensusRef.Checked;
             Properties.GeneralSettings.Default.Save();
 			OnUseBaptismDatesChanged();
 			OnAllowEmptyLocationsChanged();
@@ -49,6 +51,7 @@ namespace FTAnalyzer.UserControls
             OnIncludePartialGeocodedChanged();
             OnOnlyCensusParentsChanged();
             OnMinParentalAgeChanged();
+            OnCompactCensusRefChanged();
 		}
 
 		public void Cancel()
@@ -158,6 +161,13 @@ namespace FTAnalyzer.UserControls
                 MinParentalAgeChanged(null, EventArgs.Empty);
         }
 
+        public static event EventHandler CompactCensusRefChanged;
+        protected static void OnCompactCensusRefChanged()
+        {
+            if (CompactCensusRefChanged != null)
+                CompactCensusRefChanged(null, EventArgs.Empty);
+        }
+                
         private void chkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)
 		{
 			Properties.GeneralSettings.Default.ReloadRequired = true;

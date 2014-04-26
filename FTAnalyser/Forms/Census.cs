@@ -10,6 +10,7 @@ using FTAnalyzer.Filters;
 using System.IO;
 using FTAnalyzer.Utilities;
 using System.Collections;
+using FTAnalyzer.UserControls;
 
 namespace FTAnalyzer.Forms
 {
@@ -39,6 +40,7 @@ namespace FTAnalyzer.Forms
                 defaultProvider = "Ancestry";
             }
             cbCensusSearchProvider.Text = defaultProvider;
+            GeneralSettings.CompactCensusRefChanged += new EventHandler(RefreshCensusReferences);
         }
 
         public void SetupCensus(Predicate<CensusIndividual> filter, bool censusDone)
@@ -143,7 +145,6 @@ namespace FTAnalyzer.Forms
 
         private class IDisplayCensusComparerWrapper : Comparer<IDisplayCensus>
         {
-
             private Comparer<CensusIndividual> comparer;
 
             public IDisplayCensusComparerWrapper(Comparer<CensusIndividual> comp)
@@ -269,6 +270,11 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 dgCensus.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+        }
+
+        private void RefreshCensusReferences(object sender, EventArgs e)
+        {
+            dgCensus.Refresh();
         }
 
         private void Census_FormClosed(object sender, FormClosedEventArgs e)

@@ -42,6 +42,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.chkUseBurials = new System.Windows.Forms.CheckBox();
             this.chkMultipleFactForms = new System.Windows.Forms.CheckBox();
+            this.chkCompactCensusRef = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownAge)).BeginInit();
             this.SuspendLayout();
@@ -142,10 +143,17 @@
             this.chkMultipleFactForms.Name = "chkMultipleFactForms";
             this.chkMultipleFactForms.UseVisualStyleBackColor = true;
             // 
+            // chkCompactCensusRef
+            // 
+            resources.ApplyResources(this.chkCompactCensusRef, "chkCompactCensusRef");
+            this.chkCompactCensusRef.Name = "chkCompactCensusRef";
+            this.chkCompactCensusRef.UseVisualStyleBackColor = true;
+            // 
             // GeneralSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkCompactCensusRef);
             this.Controls.Add(this.chkMultipleFactForms);
             this.Controls.Add(this.chkUseBurials);
             this.Controls.Add(this.label2);
@@ -179,6 +187,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkUseBurials;
         private System.Windows.Forms.CheckBox chkMultipleFactForms;
+        private System.Windows.Forms.CheckBox chkCompactCensusRef;
 
 
 	}

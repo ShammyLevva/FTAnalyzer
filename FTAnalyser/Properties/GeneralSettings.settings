@@ -41,5 +41,8 @@
     <Setting Name="LastXPWarning" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)">2014-03-25</Value>
     </Setting>
+    <Setting Name="UseCompactCensusRef" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

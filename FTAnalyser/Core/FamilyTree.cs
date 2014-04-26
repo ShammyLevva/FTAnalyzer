@@ -367,6 +367,7 @@ namespace FTAnalyzer
             {
                 xmlErrorbox.AppendText("\nThe current general options are set :");
                 xmlErrorbox.AppendText("\n    Use Baptism/Christening date if no birth date: " + Properties.GeneralSettings.Default.UseBaptismDates);
+                xmlErrorbox.AppendText("\n    Use Burial/Cremation date if no death date: " + Properties.GeneralSettings.Default.UseBurialDates);
                 xmlErrorbox.AppendText("\n    Allow Empty values in Locations: " + Properties.GeneralSettings.Default.AllowEmptyLocations);
                 xmlErrorbox.AppendText("\n    Treat Residence facts as Census facts: " + Properties.GeneralSettings.Default.UseResidenceAsCensus);
                 xmlErrorbox.AppendText("\n    Tolerate slightly inaccurate census dates: " + Properties.GeneralSettings.Default.TolerateInaccurateCensusDate);
@@ -374,6 +375,7 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("\n    Family Census Facts apply to only parents: " + Properties.GeneralSettings.Default.OnlyCensusParents);
                 xmlErrorbox.AppendText("\n    Loose Birth minimum parental age: " + Properties.GeneralSettings.Default.MinParentalAge);
                 xmlErrorbox.AppendText("\n    Show Multiple Fact forms when viewing duplicates : " + Properties.GeneralSettings.Default.MultipleFactForms);
+                xmlErrorbox.AppendText("\n    Use Compact Census References : " + Properties.GeneralSettings.Default.UseCompactCensusRef);
                 xmlErrorbox.AppendText("\nThe current mapping options are set :");
                 xmlErrorbox.AppendText("\n    Custom Maps Location: " + Properties.MappingSettings.Default.CustomMapPath);
                 xmlErrorbox.AppendText("\n    Display English & Welsh Parish Boundaries: " + Properties.MappingSettings.Default.UseEnglishParishBoundaries);

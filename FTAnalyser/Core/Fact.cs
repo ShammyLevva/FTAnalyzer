@@ -771,7 +771,6 @@ namespace FTAnalyzer
         {
             get
             {
-                string result = string.Empty;
                 if (Location.Country.Equals(Countries.CANADA) && FactDate.Overlaps(CensusDate.CANADACENSUS1881))
                     return "Canada Census references not yet available";
                 else if (Location.Country.Equals(Countries.UNITED_STATES) && FactDate.Overlaps(CensusDate.USCENSUS1880))
@@ -783,29 +782,47 @@ namespace FTAnalyzer
                 else if (Piece.Length > 0)
                 {
                     if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1881))
-                        return "Piece: " + Piece + ", Folio: " + Folio + ", Page: " + Page;
+                        if(Properties.GeneralSettings.Default.UseCompactCensusRef)
+                            return Piece + "/" + Folio + "/" + Page;
+                        else
+                            return "Piece: " + Piece + ", Folio: " + Folio + ", Page: " + Page;
                     if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1841))
                     {
                         if (Book.Length > 0)
-                            return "Piece: " + Piece + ", Book: " + Book + ", Folio: " + Folio + ", Page: " + Page;
+                            if (Properties.GeneralSettings.Default.UseCompactCensusRef)
+                                return Piece + "/" + Book + "/" + Folio + "/" + Page;
+                            else
+                                return "Piece: " + Piece + ", Book: " + Book + ", Folio: " + Folio + ", Page: " + Page;
                         else
-                            return "Piece: " + Piece + ", Book: see census image (stamped on the census page after the piece number), Folio: " + Folio + ", Page: " + Page;
+                            if (Properties.GeneralSettings.Default.UseCompactCensusRef)
+                                return Piece + "/see image/" + Folio + "/" + Page;
+                            else
+                                return "Piece: " + Piece + ", Book: see census image (stamped on the census page after the piece number), Folio: " + Folio + ", Page: " + Page;
                     }
                     if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1911))
                     {
                         if (Schedule.Length > 0)
-                            return "Piece: " + Piece + ", Schedule: " + Schedule;
+                            if (Properties.GeneralSettings.Default.UseCompactCensusRef)
+                                return Piece + "/" + Schedule;
+                            else
+                                return "Piece: " + Piece + ", Schedule: " + Schedule;
                         else
-                            return "Piece: " + Piece + ", Page: " + Page;
+                            if (Properties.GeneralSettings.Default.UseCompactCensusRef)
+                                return Piece + "/" + Page;
+                            else
+                                return "Piece: " + Piece + ", Page: " + Page;
                     }
                 }
                 else if (Parish.Length > 0)
                 {
                     if (Location.Country.Equals(Countries.SCOTLAND) && FactDate.Overlaps(CensusDate.UKCENSUS1881))
-                        return "Parish: " + Parish + Parishes.Reference(Parish) + " ED: " + ED + ", Page: " + Page;
+                        if (Properties.GeneralSettings.Default.UseCompactCensusRef)
+                            return Parish + Parishes.Reference(Parish) + "/" + ED + "/" + Page;
+                        else
+                            return "Parish: " + Parish + Parishes.Reference(Parish) + " ED: " + ED + ", Page: " + Page;
                 }
 
-                return result;
+                return string.Empty;
             }
         }
 

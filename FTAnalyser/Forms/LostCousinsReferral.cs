@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FTAnalyzer.Filters;
+using FTAnalyzer.UserControls;
 
 namespace FTAnalyzer.Forms
 {
@@ -22,6 +23,7 @@ namespace FTAnalyzer.Forms
             this.Text = "Lost Cousins Referral for " + referee.ToString();
             reportFormHelper = new ReportFormHelper(this, this.Text, dgLCReferrals, this.ResetTable, "Lost Cousins Referrals");
             dgLCReferrals.AutoGenerateColumns = false;
+            GeneralSettings.CompactCensusRefChanged += new EventHandler(RefreshCensusReferences);
             Predicate<Individual> lostCousinsFact = new Predicate<Individual>(x => x.HasLostCousinsFact);
             List<Individual> lostCousinsFacts = ft.AllIndividuals.Where(lostCousinsFact).ToList<Individual>();
             referrals = new List<ExportReferrals>();
@@ -50,6 +52,11 @@ namespace FTAnalyzer.Forms
         {
             referrals.Sort(new LostCousinsReferralComparer());
             dgLCReferrals.DataSource = referrals;
+        }
+
+        private void RefreshCensusReferences(object sender, EventArgs e)
+        {
+            dgLCReferrals.Refresh();
         }
 
         private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
