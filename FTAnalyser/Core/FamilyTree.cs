@@ -738,8 +738,8 @@ namespace FTAnalyzer
                         {
                             int maxChildYear = childrenNoBEF.Max(child => child.BirthDate.StartDate).Year;
                             DateTime maxChild;
-                            if (indiv.IsMale) // for males check that not over MAXYEARS when oldest child is born
-                                maxChild = new DateTime(maxChildYear - FactDate.MAXYEARS, 1, 1);
+                            if (indiv.IsMale) // for males check that not over 100 when oldest child is born
+                                maxChild = new DateTime(maxChildYear - 100, 1, 1);
                             else // for females check that not over 60 when oldest child is born
                                 maxChild = new DateTime(maxChildYear - 60, 1, 1);
                             if (maxChild > minStart)
