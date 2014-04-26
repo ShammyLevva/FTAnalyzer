@@ -127,6 +127,7 @@
             this.relTypesColoured = new Controls.RelationTypes();
             this.tabLostCousins = new System.Windows.Forms.TabPage();
             this.Referrals = new System.Windows.Forms.GroupBox();
+            this.ckbReferralInCommon = new System.Windows.Forms.CheckBox();
             this.btnReferrals = new System.Windows.Forms.Button();
             this.cmbReferrals = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -243,7 +244,10 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.ckbReferralInCommon = new System.Windows.Forms.CheckBox();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuTreetopsToExcel = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuWorldWarsToExcel = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -514,8 +518,12 @@
             this.mnuFamiliesToExcel,
             this.mnuFactsToExcel,
             this.mnuSourcesToExcel,
+            this.toolStripSeparator8,
             this.mnuLooseBirthsToExcel,
-            this.mnuLooseDeathsToExcel});
+            this.mnuLooseDeathsToExcel,
+            this.toolStripSeparator9,
+            this.mnuTreetopsToExcel,
+            this.mnuWorldWarsToExcel});
             this.mnuExport.Name = "mnuExport";
             this.mnuExport.Size = new System.Drawing.Size(52, 20);
             this.mnuExport.Text = "Export";
@@ -523,42 +531,42 @@
             // mnuIndividualsToExcel
             // 
             this.mnuIndividualsToExcel.Name = "mnuIndividualsToExcel";
-            this.mnuIndividualsToExcel.Size = new System.Drawing.Size(187, 22);
+            this.mnuIndividualsToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuIndividualsToExcel.Text = "Individuals to Excel";
             this.mnuIndividualsToExcel.Click += new System.EventHandler(this.individualsToExcelToolStripMenuItem_Click);
             // 
             // mnuFamiliesToExcel
             // 
             this.mnuFamiliesToExcel.Name = "mnuFamiliesToExcel";
-            this.mnuFamiliesToExcel.Size = new System.Drawing.Size(187, 22);
+            this.mnuFamiliesToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuFamiliesToExcel.Text = "Families to Excel";
             this.mnuFamiliesToExcel.Click += new System.EventHandler(this.familiesToExcelToolStripMenuItem_Click);
             // 
             // mnuFactsToExcel
             // 
             this.mnuFactsToExcel.Name = "mnuFactsToExcel";
-            this.mnuFactsToExcel.Size = new System.Drawing.Size(187, 22);
+            this.mnuFactsToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuFactsToExcel.Text = "Facts to Excel";
             this.mnuFactsToExcel.Click += new System.EventHandler(this.factsToExcelToolStripMenuItem_Click);
             // 
             // mnuSourcesToExcel
             // 
             this.mnuSourcesToExcel.Name = "mnuSourcesToExcel";
-            this.mnuSourcesToExcel.Size = new System.Drawing.Size(187, 22);
+            this.mnuSourcesToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuSourcesToExcel.Text = "Sources to Excel";
             this.mnuSourcesToExcel.Click += new System.EventHandler(this.mnuSourcesToExcel_Click);
             // 
             // mnuLooseBirthsToExcel
             // 
             this.mnuLooseBirthsToExcel.Name = "mnuLooseBirthsToExcel";
-            this.mnuLooseBirthsToExcel.Size = new System.Drawing.Size(187, 22);
+            this.mnuLooseBirthsToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuLooseBirthsToExcel.Text = "Loose Births to Excel";
             this.mnuLooseBirthsToExcel.Click += new System.EventHandler(this.looseBirthsToExcelToolStripMenuItem_Click);
             // 
             // mnuLooseDeathsToExcel
             // 
             this.mnuLooseDeathsToExcel.Name = "mnuLooseDeathsToExcel";
-            this.mnuLooseDeathsToExcel.Size = new System.Drawing.Size(187, 22);
+            this.mnuLooseDeathsToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuLooseDeathsToExcel.Text = "Loose Deaths to Excel";
             this.mnuLooseDeathsToExcel.Click += new System.EventHandler(this.looseDeathsToExcelToolStripMenuItem_Click);
             // 
@@ -1151,6 +1159,16 @@
             this.Referrals.TabIndex = 23;
             this.Referrals.TabStop = false;
             this.Referrals.Text = "Referrals";
+            // 
+            // ckbReferralInCommon
+            // 
+            this.ckbReferralInCommon.AutoSize = true;
+            this.ckbReferralInCommon.Location = new System.Drawing.Point(11, 49);
+            this.ckbReferralInCommon.Name = "ckbReferralInCommon";
+            this.ckbReferralInCommon.Size = new System.Drawing.Size(150, 17);
+            this.ckbReferralInCommon.TabIndex = 3;
+            this.ckbReferralInCommon.Text = "Limit to Common Relatives";
+            this.ckbReferralInCommon.UseVisualStyleBackColor = true;
             // 
             // btnReferrals
             // 
@@ -2455,15 +2473,27 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // ckbReferralInCommon
+            // toolStripSeparator8
             // 
-            this.ckbReferralInCommon.AutoSize = true;
-            this.ckbReferralInCommon.Location = new System.Drawing.Point(11, 49);
-            this.ckbReferralInCommon.Name = "ckbReferralInCommon";
-            this.ckbReferralInCommon.Size = new System.Drawing.Size(150, 17);
-            this.ckbReferralInCommon.TabIndex = 3;
-            this.ckbReferralInCommon.Text = "Limit to Common Relatives";
-            this.ckbReferralInCommon.UseVisualStyleBackColor = true;
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(218, 6);
+            // 
+            // mnuTreetopsToExcel
+            // 
+            this.mnuTreetopsToExcel.Name = "mnuTreetopsToExcel";
+            this.mnuTreetopsToExcel.Size = new System.Drawing.Size(221, 22);
+            this.mnuTreetopsToExcel.Text = "Current Treetops to Excel";
+            // 
+            // mnuWorldWarsToExcel
+            // 
+            this.mnuWorldWarsToExcel.Name = "mnuWorldWarsToExcel";
+            this.mnuWorldWarsToExcel.Size = new System.Drawing.Size(221, 22);
+            this.mnuWorldWarsToExcel.Text = "Current World Wars to Excel";
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(218, 6);
             // 
             // MainForm
             // 
@@ -2767,6 +2797,10 @@
         private System.Windows.Forms.ComboBox cmbReferrals;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckBox ckbReferralInCommon;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripMenuItem mnuTreetopsToExcel;
+        private System.Windows.Forms.ToolStripMenuItem mnuWorldWarsToExcel;
     }
 }
 

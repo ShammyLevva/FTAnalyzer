@@ -230,6 +230,8 @@ namespace FTAnalyzer
             mnuLocationsGeocodeReport.Enabled = enabled;
             mnuLifelines.Enabled = enabled;
             mnuPlaces.Enabled = enabled;
+            mnuTreetopsToExcel.Enabled = enabled && dgTreeTops.RowCount > 0;
+            mnuWorldWarsToExcel.Enabled = enabled && dgWorldWars.RowCount > 0;
         }
 
         private void DisposeIndividualForms()
@@ -965,6 +967,7 @@ namespace FTAnalyzer
             tsCountLabel.Text = Properties.Messages.Count + treeTopsList.Count;
             tsHintsLabel.Text = Properties.Messages.Hints_Individual;
             mnuPrint.Enabled = true;
+            ShowMenus(true);
             HourGlass(false);
         }
 
@@ -982,6 +985,7 @@ namespace FTAnalyzer
             tsCountLabel.Text = Properties.Messages.Count + warDeadList.Count;
             tsHintsLabel.Text = Properties.Messages.Hints_Individual + "  " + Properties.Messages.Hints_LivesOfFirstWorldWar;
             mnuPrint.Enabled = true;
+            ShowMenus(true);
             HourGlass(false);
         }
 
@@ -999,6 +1003,7 @@ namespace FTAnalyzer
             tsCountLabel.Text = Properties.Messages.Count + warDeadList.Count;
             tsHintsLabel.Text = Properties.Messages.Hints_Individual;
             mnuPrint.Enabled = true;
+            ShowMenus(true);
             HourGlass(false);
         }
 
