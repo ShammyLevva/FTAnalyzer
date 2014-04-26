@@ -227,13 +227,24 @@ namespace FTAnalyzer.Forms
             {
                 if (all)
                 {
-                    if ((row.C1841 == toFind || row.C1841 == 0) && (row.C1851 == toFind || row.C1851 == 0) &&
-                        (row.C1861 == toFind || row.C1861 == 0) && (row.C1871 == toFind || row.C1871 == 0) &&
-                        (row.C1881 == toFind || row.C1881 == 0) && (row.C1891 == toFind || row.C1891 == 0) &&
-                        (row.C1901 == toFind || row.C1901 == 0) && (row.C1911 == toFind || row.C1911 == 0) &&
-                        !(row.C1841 == 0 && row.C1851 == 0 && row.C1861 == 0 && row.C1871 == 0 && 
-                          row.C1881 == 0 && row.C1891 == 0 && row.C1901 == 0 && row.C1911 == 0 && toFind != 0)) // exclude all greys
-                        result.Add(row);
+                    if (toFind == 3)
+                    {  // also check for value of 4 which is also green
+                        if ((row.C1841 == 3 || row.C1841 == 4 || row.C1841 == 0) && (row.C1851 == toFind || row.C1851 == 0) &&
+                            (row.C1861 == toFind || row.C1861 == 0) && (row.C1871 == toFind || row.C1871 == 0) &&
+                            (row.C1881 == toFind || row.C1881 == 4 || row.C1881 == 0) && (row.C1891 == toFind || row.C1891 == 0) &&
+                            (row.C1901 == toFind || row.C1901 == 0) && (row.C1911 == toFind || row.C1911 == 4 || row.C1911 == 0) &&
+                            !(row.C1841 == 0 && row.C1851 == 0 && row.C1861 == 0 && row.C1871 == 0 &&
+                              row.C1881 == 0 && row.C1891 == 0 && row.C1901 == 0 && row.C1911 == 0 && toFind != 0)) // exclude all greys
+                            result.Add(row);
+                    }
+                    else
+                        if ((row.C1841 == toFind || row.C1841 == 0) && (row.C1851 == toFind || row.C1851 == 0) &&
+                            (row.C1861 == toFind || row.C1861 == 0) && (row.C1871 == toFind || row.C1871 == 0) &&
+                            (row.C1881 == toFind || row.C1881 == 0) && (row.C1891 == toFind || row.C1891 == 0) &&
+                            (row.C1901 == toFind || row.C1901 == 0) && (row.C1911 == toFind || row.C1911 == 0) &&
+                            !(row.C1841 == 0 && row.C1851 == 0 && row.C1861 == 0 && row.C1871 == 0 && 
+                              row.C1881 == 0 && row.C1891 == 0 && row.C1901 == 0 && row.C1911 == 0 && toFind != 0)) // exclude all greys
+                            result.Add(row);
                 }
                 else
                 {
