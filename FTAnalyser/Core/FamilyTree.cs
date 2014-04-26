@@ -725,7 +725,8 @@ namespace FTAnalyzer
                     }
                     if (fam.Children.Count > 0)
                     {   // must be at least X years old at birth of child
-                        List<Individual> childrenNoAFT = fam.Children.Where(child => child.BirthDate.EndDate != FactDate.MAXDATE).ToList();
+                        List<Individual> childrenNoAFT = 
+                            fam.Children.Where(child => child.BirthDate.EndDate != FactDate.MAXDATE && !child.BirthDate.IsLongYearSpan).ToList();
                         if (childrenNoAFT.Count > 0)
                         {
                             int minChildYear = childrenNoAFT.Min(child => child.BirthDate.EndDate).Year;
@@ -733,7 +734,8 @@ namespace FTAnalyzer
                             if (minChild < minEnd && minChild >= minStart)
                                 minEnd = minChild;
                         }
-                        List<Individual> childrenNoBEF = fam.Children.Where(child => child.BirthDate.StartDate != FactDate.MINDATE).ToList();
+                        List<Individual> childrenNoBEF =
+                            fam.Children.Where(child => child.BirthDate.StartDate != FactDate.MINDATE && !child.BirthDate.IsLongYearSpan).ToList();
                         if (childrenNoBEF.Count > 0)
                         {
                             int maxChildYear = childrenNoBEF.Max(child => child.BirthDate.StartDate).Year;
@@ -766,6 +768,8 @@ namespace FTAnalyzer
                 }
                 if (birthDate.StartDate > minStart)
                     minStart = birthDate.StartDate;
+                if (minEnd.Month == 1 && minEnd.Day == 1 && birthDate.EndDate.Month == 12 && birthDate.EndDate.Day == 31)
+                    minEnd = minEnd.AddYears(1).AddDays(-1); // year has rounded to 1st Jan when was upper year.
                 baseDate = new FactDate(minStart, minEnd);
                 if (birthDate != baseDate)
                     toAdd = baseDate;
@@ -879,9 +883,10 @@ namespace FTAnalyzer
                 FactDate marriageDate = fam.GetPreferredFactDate(Fact.MARRIAGE);
                 if (marriageDate.StartDate > maxdate && !marriageDate.IsLongYearSpan)
                     maxdate = marriageDate.StartDate;
-                if (fam.Children.Count > 0)
+                List<Individual> childrenNoLongSpan = fam.Children.Where(child => !child.BirthDate.IsLongYearSpan).ToList<Individual>();
+                if (childrenNoLongSpan.Count > 0)
                 {
-                    DateTime maxChildBirthDate = fam.Children.Max(child => child.BirthDate.StartDate);
+                    DateTime maxChildBirthDate = childrenNoLongSpan.Max(child => child.BirthDate.StartDate);
                     if (maxChildBirthDate > maxdate)
                     {
                         maxdate = maxChildBirthDate;
