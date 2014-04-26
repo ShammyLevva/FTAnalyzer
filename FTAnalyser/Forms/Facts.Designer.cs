@@ -172,7 +172,7 @@
             this.dgFacts.RowHeadersWidth = 20;
             this.dgFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgFacts.ShowEditingIcon = false;
-            this.dgFacts.Size = new System.Drawing.Size(857, 362);
+            this.dgFacts.Size = new System.Drawing.Size(857, 340);
             this.dgFacts.TabIndex = 2;
             this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFacts_CellDoubleClick);
             this.dgFacts.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgFacts_CellFormatting);
@@ -325,8 +325,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(857, 387);
-            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dgFacts);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Facts";
