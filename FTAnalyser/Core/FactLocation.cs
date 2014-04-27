@@ -189,7 +189,7 @@ namespace FTAnalyzer
             string fromstr = n.Attributes["from"].Value;
             string to = n.Attributes["to"].Value;
             Tuple<int, string> from = new Tuple<int, string>(level, fromstr.ToUpperInvariant());
-            if (from != null && fromstr.Length > 0 && to != null && to.Length > 0)
+            if (from != null && fromstr.Length > 0 && to != null)
             {
                 if (dictionary.ContainsKey(from))
                     log.Error("Error duplicate Google " + GoogleFixLevel(level) + " :" + fromstr + " to " + to);
