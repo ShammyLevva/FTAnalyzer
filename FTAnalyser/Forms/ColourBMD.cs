@@ -72,7 +72,7 @@ namespace FTAnalyzer.Forms
             tsRecords.Text = Properties.Messages.Count + reportList.Count + " records listed.";
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
-                defaultProvider = "Ancestry";
+                defaultProvider = "FamilySearch";
             cbBMDSearchProvider.Text = defaultProvider;
             cbFilter.Text = "All Individuals";
         }

@@ -37,7 +37,7 @@ namespace FTAnalyzer.Forms
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
             {
-                defaultProvider = "Ancestry";
+                defaultProvider = "FamilySearch";
             }
             cbCensusSearchProvider.Text = defaultProvider;
             GeneralSettings.CompactCensusRefChanged += new EventHandler(RefreshCensusReferences);
