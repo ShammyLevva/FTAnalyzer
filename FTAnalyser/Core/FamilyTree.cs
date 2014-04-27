@@ -1667,7 +1667,12 @@ namespace FTAnalyzer
                 if (collection > 0)
                     path.Append("&collection_id=" + collection);
                 else
-                    if (Countries.IsKnownCountry(country))
+                    if(Countries.IsUnitedKingdom(country))
+                    {
+                        collection = FamilySearch.CensusCollectionID(Countries.ENGLAND, censusYear);
+                        path.Append("&collection_id=" + collection);
+                    }
+                    else if (Countries.IsKnownCountry(country))
                     {
                         MessageBox.Show("Sorry searching the " + country + " census on FamilySearch for " + censusYear + " is not supported by FTAnalyzer at this time", "FT Analyzer");
                         return null;
