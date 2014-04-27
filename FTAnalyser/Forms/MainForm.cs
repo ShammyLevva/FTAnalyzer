@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.6.1.2";
+        public string VERSION = "3.6.2.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -1203,14 +1203,15 @@ namespace FTAnalyzer
             Predicate<CensusIndividual> dateFilter = censusDone ?
                 new Predicate<CensusIndividual>(x => x.IsCensusDone(cenDate.SelectedDate)) :
                 new Predicate<CensusIndividual>(x => !x.IsCensusDone(cenDate.SelectedDate));
-
+            
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, dateFilter);
             if (txtCensusSurname.Text.Length > 0)
             {
                 Predicate<CensusIndividual> surnameFilter = FilterUtils.StringFilter<CensusIndividual>(x => x.Surname, txtCensusSurname.Text);
                 filter = FilterUtils.AndFilter<CensusIndividual>(filter, surnameFilter);
             }
-
+            if(chkExcludeUnknownBirths.Checked)
+                filter = FilterUtils.AndFilter<CensusIndividual>(x => x.BirthDate.IsKnown, filter);
             filter = FilterUtils.AndFilter<CensusIndividual>(x => x.Age.MinAge < (int)udAgeFilter.Value, filter);
             return filter;
         }

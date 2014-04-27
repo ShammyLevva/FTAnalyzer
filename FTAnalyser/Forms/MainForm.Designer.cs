@@ -33,7 +33,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -248,6 +248,7 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.chkExcludeUnknownBirths = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -789,14 +790,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 154);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1392,6 +1393,7 @@
             // 
             // tabCensus
             // 
+            this.tabCensus.Controls.Add(this.chkExcludeUnknownBirths);
             this.tabCensus.Controls.Add(this.groupBox2);
             this.tabCensus.Controls.Add(this.groupBox1);
             this.tabCensus.Controls.Add(this.label1);
@@ -1473,7 +1475,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(339, 19);
+            this.label1.Location = new System.Drawing.Point(682, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 20;
@@ -1481,7 +1483,7 @@
             // 
             // txtCensusSurname
             // 
-            this.txtCensusSurname.Location = new System.Drawing.Point(394, 16);
+            this.txtCensusSurname.Location = new System.Drawing.Point(737, 25);
             this.txtCensusSurname.Name = "txtCensusSurname";
             this.txtCensusSurname.Size = new System.Drawing.Size(201, 20);
             this.txtCensusSurname.TabIndex = 19;
@@ -1489,7 +1491,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(339, 52);
+            this.label2.Location = new System.Drawing.Point(345, 28);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(175, 13);
             this.label2.TabIndex = 6;
@@ -1497,7 +1499,7 @@
             // 
             // udAgeFilter
             // 
-            this.udAgeFilter.Location = new System.Drawing.Point(520, 50);
+            this.udAgeFilter.Location = new System.Drawing.Point(526, 26);
             this.udAgeFilter.Maximum = new decimal(new int[] {
             110,
             0,
@@ -2497,6 +2499,16 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // chkExcludeUnknownBirths
+            // 
+            this.chkExcludeUnknownBirths.AutoSize = true;
+            this.chkExcludeUnknownBirths.Location = new System.Drawing.Point(348, 52);
+            this.chkExcludeUnknownBirths.Name = "chkExcludeUnknownBirths";
+            this.chkExcludeUnknownBirths.Size = new System.Drawing.Size(238, 17);
+            this.chkExcludeUnknownBirths.TabIndex = 24;
+            this.chkExcludeUnknownBirths.Text = "Exclude Individuals with unknown birth dates";
+            this.chkExcludeUnknownBirths.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -2803,6 +2815,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem mnuTreetopsToExcel;
         private System.Windows.Forms.ToolStripMenuItem mnuWorldWarsToExcel;
+        private System.Windows.Forms.CheckBox chkExcludeUnknownBirths;
     }
 }
 
