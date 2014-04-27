@@ -1645,9 +1645,9 @@ namespace FTAnalyzer
                 int endYear = person.BirthDate.EndDate.Year + 1;
                 path.Append("%2B" + FamilySearch.BIRTH_YEAR + "%3A" + startYear + "-" + endYear + "%7E%20");
             }
+            string location = Countries.UNKNOWN_COUNTRY;
             if (person.BirthLocation != FactLocation.UNKNOWN_LOCATION)
             {
-                string location;
                 if (person.BirthLocation.Country != country)
                 {
                     location = person.BirthLocation.Country;
@@ -1659,12 +1659,19 @@ namespace FTAnalyzer
                 path.Append("%2B" + FamilySearch.BIRTH_LOCATION + "%3A" + HttpUtility.UrlEncode(location) + "%7E%20");
             }
             int collection = FamilySearch.CensusCollectionID(country, censusYear);
-            if (collection > 0 || country != "Unknown")
+            if (collection > 0)
                 path.Append("&collection_id=" + collection);
             else
             {
-                MessageBox.Show("Sorry searching the " + country + " census on FamilySearch for " + censusYear + " is not supported by FTAnalyzer at this time", "FT Analyzer");
-                return null;
+                collection = FamilySearch.CensusCollectionID(location, censusYear);
+                if (collection > 0)
+                    path.Append("&collection_id=" + collection);
+                else
+                    if (Countries.IsKnownCountry(country))
+                    {
+                        MessageBox.Show("Sorry searching the " + country + " census on FamilySearch for " + censusYear + " is not supported by FTAnalyzer at this time", "FT Analyzer");
+                        return null;
+                    }
             }
             return path.Replace("+", "%20").ToString();
         }
