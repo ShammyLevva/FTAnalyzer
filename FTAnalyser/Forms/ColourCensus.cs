@@ -55,6 +55,9 @@ namespace FTAnalyzer.Forms
             DataGridViewCellStyle onOtherCensus = new DataGridViewCellStyle();
             onOtherCensus.BackColor = onOtherCensus.ForeColor = Color.DarkSlateGray;
             styles.Add(6, onOtherCensus);
+            DataGridViewCellStyle outsideUKCensus = new DataGridViewCellStyle();
+            outsideUKCensus.BackColor = outsideUKCensus.ForeColor = Color.DarkSlateGray;
+            styles.Add(7, onOtherCensus);
 
             c1841ColumnIndex = dgReportSheet.Columns["C1841"].Index;
             c1911ColumnIndex = dgReportSheet.Columns["C1911"].Index;
@@ -169,6 +172,9 @@ namespace FTAnalyzer.Forms
                             break;
                         case 6:
                             cell.ToolTipText = "On Census outside UK.";
+                            break;
+                        case 7:
+                            cell.ToolTipText = "Likely outside UK on census date";
                             break;
                     }
                 }

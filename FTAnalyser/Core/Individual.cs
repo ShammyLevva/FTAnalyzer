@@ -893,6 +893,9 @@ namespace FTAnalyzer
                     return 6; // checks if on census outside UK in census year or on prior year (to check US census)
                 if (CensusDate.IsLostCousinsCensusYear(census, true) && IsLostCousinsEntered(census))
                     return 5; // LC entered but no census entered - orange
+                FactLocation location = BestLocation(census);
+                if (location.IsKnownCountry && !location.IsUnitedKingdom)
+                    return 7; // Likely out of UK on census date
                 else
                     return 1; // no census - red
             }
