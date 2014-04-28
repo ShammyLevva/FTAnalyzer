@@ -289,7 +289,10 @@ namespace FTAnalyzer.Forms
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(5, false));
                     break;
                 case 5: // Some Outside UK (Some Dark Grey)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(6, false));
+                    list = new List<IDisplayColourCensus>();
+                    list.AddRange(BuildFilter(6, true));
+                    list.AddRange(BuildFilter(7, true));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list);
                     break;
                 case 6: // Some Missing (Some Red)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(1, false));
