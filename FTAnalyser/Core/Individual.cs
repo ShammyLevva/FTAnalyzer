@@ -196,7 +196,11 @@ namespace FTAnalyzer
         public int RelationType
         {
             get { return relationType; }
-            set { relationType = value; }
+            set
+            { 
+                if(relationType == UNKNOWN || relationType > value)
+                    relationType = value; 
+            }
         }
 
         public string RelationToRoot { get; set; }

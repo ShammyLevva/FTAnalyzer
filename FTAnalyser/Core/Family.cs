@@ -388,21 +388,20 @@ namespace FTAnalyzer
         public void SetSpouseRelation(Individual ind, int relationType)
         {
             Individual spouse = ind.IsMale ? Wife : Husband;
-            if (spouse != null && spouse.RelationType == Individual.UNKNOWN)
-            {
+            if (spouse != null)
                 spouse.RelationType = relationType;
-            }
         }
 
         public void SetChildRelation(Queue<Individual> queue, int relationType)
         {
             foreach (Individual child in Children)
             {
-                if (child.RelationType == Individual.UNKNOWN)
+                int previousType = child.RelationType;
+                child.RelationType = relationType;
+                if (child.RelationType != previousType)
                 {
-                    // add this previously unknown individual to list 
+                    // add this changed individual to list 
                     // of relatives to update family of
-                    child.RelationType = relationType;
                     queue.Enqueue(child);
                 }
             }
