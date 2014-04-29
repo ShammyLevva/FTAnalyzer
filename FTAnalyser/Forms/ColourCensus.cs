@@ -58,6 +58,9 @@ namespace FTAnalyzer.Forms
             DataGridViewCellStyle outsideUKCensus = new DataGridViewCellStyle();
             outsideUKCensus.BackColor = outsideUKCensus.ForeColor = Color.DarkSlateGray;
             styles.Add(7, onOtherCensus);
+            DataGridViewCellStyle knownMissing = new DataGridViewCellStyle();
+            knownMissing.BackColor = knownMissing.ForeColor = Color.MediumSeaGreen;
+            styles.Add(8, knownMissing);
 
             c1841ColumnIndex = dgReportSheet.Columns["C1841"].Index;
             c1911ColumnIndex = dgReportSheet.Columns["C1911"].Index;
@@ -175,6 +178,9 @@ namespace FTAnalyzer.Forms
                             break;
                         case 7:
                             cell.ToolTipText = "Likely outside UK on census date";
+                            break;
+                        case 8:
+                            cell.ToolTipText = "Known to be missing from the census";
                             break;
                     }
                 }
@@ -297,11 +303,14 @@ namespace FTAnalyzer.Forms
                 case 6: // Some Missing (Some Red)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(1, false));
                     break;
-                case 7:
+                case 7: // Some Found (Some Green)
                     list = new List<IDisplayColourCensus>();
                     list.AddRange(BuildFilter(3, false));
                     list.AddRange(BuildFilter(4, false));
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list);
+                    break;
+                case 8: // Known Missing (Mid Green)
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(8, false));
                     break;
             }
             dgReportSheet.Focus();

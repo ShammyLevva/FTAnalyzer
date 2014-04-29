@@ -34,7 +34,8 @@ namespace FTAnalyzer
         public const string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 LOOSEDEATH = "*LOOSED", LOOSEBIRTH = "*LOOSEB", FAMILYSEARCH = "*IGI",
                 CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT", PARENT = "*PARENT",
-                CHILDREN = "*CHILDREN", CHANGE = "*CHNG", LOSTCOUSINS = "*LOST", DIED_SINGLE = "*SINGLE";
+                CHILDREN = "*CHILDREN", CHANGE = "*CHNG", LOSTCOUSINS = "*LOST", 
+                DIED_SINGLE = "*SINGLE", MISSING = "*MISSING";
 
         public static readonly ISet<string> LOOSE_BIRTH_FACTS = new HashSet<string>(new string[] {
             CHRISTENING, BAPTISM, RESIDENCE, WITNESS, EMIGRATION, IMMIGRATION, ARRIVAL, DEPARTURE, 
@@ -127,6 +128,7 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("Birth Reg", BIRTH);
             CUSTOM_TAGS.Add("Marriage Reg", MARRIAGE);
             CUSTOM_TAGS.Add("Death Reg", DEATH);
+            CUSTOM_TAGS.Add("Missing", MISSING);
 
             COMMENT_FACTS.Add(NAME); 
             COMMENT_FACTS.Add(OCCUPATION);
@@ -141,6 +143,7 @@ namespace FTAnalyzer
             COMMENT_FACTS.Add(UNKNOWN);
             COMMENT_FACTS.Add(FAMILYSEARCH);
             COMMENT_FACTS.Add(LOSTCOUSINS);
+            COMMENT_FACTS.Add(MISSING);
             COMMENT_FACTS.Add(DEGREE);
             COMMENT_FACTS.Add(EDUCATION);
             COMMENT_FACTS.Add(GRADUATION);
@@ -224,6 +227,7 @@ namespace FTAnalyzer
                 case PARENT: return "Parental Info";
                 case CHILDREN: return "Child Born";
                 case REFERENCE: return "Reference ID";
+                case MISSING: return "Missing";
                 default: return factType;
             }
         }

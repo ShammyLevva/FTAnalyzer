@@ -611,6 +611,18 @@ namespace FTAnalyzer
             return false;
         }
 
+        public bool IsCensusMissing(CensusDate when)
+        {
+            if (when == null) return false;
+            foreach (Fact f in facts)
+            {
+                if (f.FactType.Equals(Fact.MISSING) && f.FactDate.Overlaps(when))
+                    return true;
+            }
+            return false;
+        }
+
+
         public string ReferralFamilyID { get; set; }
 
         public Fact LostCousinsCensusFact(Fact lcFact)
@@ -888,19 +900,20 @@ namespace FTAnalyzer
 
         private int ColourCensusReport(CensusDate census)
         {
-
             if (BirthDate.IsAfter(census) || DeathDate.IsBefore(census))
                 return 0; // not alive - grey
             if (!IsCensusDone(census))
             {
-                if (IsCensusDone(census, true, false) || IsCensusDone(census.EquivalentUSCensus, true, false))
+                if (IsCensusMissing(census))
+                    return 8;
+                else if (IsCensusDone(census, true, false) || IsCensusDone(census.EquivalentUSCensus, true, false))
                     return 6; // checks if on census outside UK in census year or on prior year (to check US census)
                 if (CensusDate.IsLostCousinsCensusYear(census, true) && IsLostCousinsEntered(census))
                     return 5; // LC entered but no census entered - orange
                 FactLocation location = BestLocation(census);
                 if (location.IsKnownCountry && !location.IsUnitedKingdom)
                     return 7; // Likely out of UK on census date
-                else
+                else 
                     return 1; // no census - red
             }
             if (!CensusDate.IsLostCousinsCensusYear(census, true))
