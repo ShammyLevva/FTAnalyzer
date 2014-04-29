@@ -622,7 +622,6 @@ namespace FTAnalyzer
             return false;
         }
 
-
         public string ReferralFamilyID { get; set; }
 
         public Fact LostCousinsCensusFact(Fact lcFact)
