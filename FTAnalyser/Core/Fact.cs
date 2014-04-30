@@ -517,7 +517,7 @@ namespace FTAnalyzer
             }
         }
 
-        public Fact(string factType, FactDate date, string comment = "")
+        public Fact(string factType, FactDate date, string comment = "", bool preferred = true)
             : this()
         {
             this.FactType = factType;
@@ -525,6 +525,7 @@ namespace FTAnalyzer
             this.Comment = comment;
             this.Place = string.Empty;
             this.Location = FactLocation.GetLocation(Place);
+            this.Preferred = preferred;
         }
 
         #endregion
