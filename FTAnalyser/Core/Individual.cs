@@ -307,7 +307,12 @@ namespace FTAnalyzer
 
         public string Name
         {
-            get { return (forenames + " " + surname).Trim(); }
+            get { 
+                if(Properties.GeneralSettings.Default.ShowAliasInName && Alias.Length > 0)
+                    return (forenames + (" '" + Alias + "' ") + surname).Trim();
+                else
+                    return (forenames + " " + surname).Trim(); 
+            }
             private set
             {
                 string name = value;
@@ -349,7 +354,12 @@ namespace FTAnalyzer
 
         public string Forenames
         {
-            get { return forenames; }
+            get {
+                if (Properties.GeneralSettings.Default.ShowAliasInName && Alias.Length > 0)
+                    return forenames + " '" + Alias + "' ";
+                else
+                    return forenames; 
+            }
         }
 
         public string Surname

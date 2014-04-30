@@ -376,6 +376,7 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("\n    Loose Birth minimum parental age: " + Properties.GeneralSettings.Default.MinParentalAge);
                 xmlErrorbox.AppendText("\n    Show Multiple Fact forms when viewing duplicates : " + Properties.GeneralSettings.Default.MultipleFactForms);
                 xmlErrorbox.AppendText("\n    Use Compact Census References : " + Properties.GeneralSettings.Default.UseCompactCensusRef);
+                xmlErrorbox.AppendText("\n    Show Alias in Name Displays : " + Properties.GeneralSettings.Default.ShowAliasInName);
                 xmlErrorbox.AppendText("\nThe current mapping options are set :");
                 xmlErrorbox.AppendText("\n    Custom Maps Location: " + Properties.MappingSettings.Default.CustomMapPath);
                 xmlErrorbox.AppendText("\n    Display English & Welsh Parish Boundaries: " + Properties.MappingSettings.Default.UseEnglishParishBoundaries);
