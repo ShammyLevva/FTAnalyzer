@@ -815,7 +815,7 @@ namespace FTAnalyzer
         private void AddGoodFact(Fact fact)
         {
             facts.Add(fact);
-            if (!preferredFacts.ContainsKey(fact.FactType))
+            if (fact.Preferred && !preferredFacts.ContainsKey(fact.FactType))
                 preferredFacts.Add(fact.FactType, fact);
             AddLocation(fact);
         }
