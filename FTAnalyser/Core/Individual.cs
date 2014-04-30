@@ -806,7 +806,9 @@ namespace FTAnalyzer
 
         public Fact GetPreferredFact(string factType)
         {
-            return preferredFacts.ContainsKey(factType) ? preferredFacts[factType] : null;
+            if (preferredFacts.ContainsKey(factType))
+                return preferredFacts[factType];
+            return facts.FirstOrDefault(f => f.FactType == factType);
         }
 
         public FactDate GetPreferredFactDate(string factType)
