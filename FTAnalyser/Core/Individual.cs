@@ -919,7 +919,7 @@ namespace FTAnalyzer
 
         private int ColourCensusReport(CensusDate census)
         {
-            if (BirthDate.IsAfter(census) || DeathDate.IsBefore(census))
+            if (BirthDate.IsAfter(census) || DeathDate.IsBefore(census) || GetAge(census).MinAge >= FactDate.MAXYEARS)
                 return 0; // not alive - grey
             if (!IsCensusDone(census))
             {
