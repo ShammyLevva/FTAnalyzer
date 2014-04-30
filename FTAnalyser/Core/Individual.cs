@@ -647,7 +647,8 @@ namespace FTAnalyzer
         public bool IsLostCousinsEntered(CensusDate when, bool includeUnknownCountries)
         {
             Predicate<Fact> p = new Predicate<Fact>(f => f.IsValidLostCousins(when));
-            return facts.Any<Fact>(f => p(f) && this.BestLocation(when).CensusCountryMatches(when.Country, includeUnknownCountries));
+            return facts.Any<Fact>(f => p(f) && 
+                (this.BestLocation(when).CensusCountryMatches(when.Country, includeUnknownCountries)) || Countries.IsUnitedKingdom(when.Country) && f.IsUKCensus);
         }
 
         public bool IsLostCousinsMissingCountry(CensusDate when)
