@@ -906,14 +906,20 @@ namespace FTAnalyzer
             {
                 if (IsCensusMissing(census))
                     return 8;
-                else if (IsCensusDone(census, true, false) || IsCensusDone(census.EquivalentUSCensus, true, false))
+                else if (IsCensusDone(census, true, false) || (Countries.IsUnitedKingdom(census.Country) && IsCensusDone(census.EquivalentUSCensus, true, false)))
                     return 6; // checks if on census outside UK in census year or on prior year (to check US census)
                 if (CensusDate.IsLostCousinsCensusYear(census, true) && IsLostCousinsEntered(census))
                     return 5; // LC entered but no census entered - orange
                 FactLocation location = BestLocation(census);
-                if (location.IsKnownCountry && !location.IsUnitedKingdom)
-                    return 7; // Likely out of UK on census date
-                else 
+                if (location.IsKnownCountry)
+                {
+                    if ((Countries.IsUnitedKingdom(census.Country) && !location.IsUnitedKingdom) ||
+                        (!Countries.IsUnitedKingdom(census.Country) && census.Country != location.Country))
+                        return 7; // Likely out of country on census date
+                    else
+                        return 1; // no census - red
+                }
+                else
                     return 1; // no census - red
             }
             if (!CensusDate.IsLostCousinsCensusYear(census, true))
