@@ -573,9 +573,7 @@ namespace FTAnalyzer
             {
                 if (FactType == CENSUS) return true;
                 if (FactType == RESIDENCE && Properties.GeneralSettings.Default.UseResidenceAsCensus)
-                {
                     return CensusDate.IsCensusYear(FactDate, Properties.GeneralSettings.Default.TolerateInaccurateCensusDate);
-                }
                 return false;
             }
         }
