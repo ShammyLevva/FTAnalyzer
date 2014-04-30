@@ -202,12 +202,12 @@ namespace FTAnalyzer.Forms
                         int censusYear;
                         if(country.Equals(Countries.UNITED_STATES))
                             censusYear = (1790 + (e.ColumnIndex - startColumnIndex) * 10);
-                        if (country.Equals(Countries.CANADA))
+                        else if (country.Equals(Countries.CANADA))
                             if(e.ColumnIndex <= dgReportSheet.Columns["Can1901"].Index)
                                 censusYear = (1851 + (e.ColumnIndex - startColumnIndex) * 10);
                             else
                                 censusYear = (1901 + (e.ColumnIndex - dgReportSheet.Columns["Can1901"].Index) * 5);
-                        if (country.Equals(Countries.IRELAND))
+                        else if (country.Equals(Countries.IRELAND))
                             censusYear = (1901 + (e.ColumnIndex - startColumnIndex) * 10);
                         else
                             censusYear = (1841 + (e.ColumnIndex - startColumnIndex) * 10);
