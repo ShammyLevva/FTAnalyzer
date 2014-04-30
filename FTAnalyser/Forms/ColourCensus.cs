@@ -68,9 +68,7 @@ namespace FTAnalyzer.Forms
             tsRecords.Text = Properties.Messages.Count + reportList.Count + " records listed.";
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
-            {
                 defaultProvider = "FamilySearch";
-            }
             cbCensusSearchProvider.Text = defaultProvider;
             cbFilter.Text = "All Individuals";
         }
@@ -201,7 +199,18 @@ namespace FTAnalyzer.Forms
                     if (value == 1 || value == 2)
                     {
                         IDisplayColourCensus person = (IDisplayColourCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
-                        int censusYear = (1841 + (e.ColumnIndex - startColumnIndex) * 10);
+                        int censusYear;
+                        if(country.Equals(Countries.UNITED_STATES))
+                            censusYear = (1790 + (e.ColumnIndex - startColumnIndex) * 10);
+                        if (country.Equals(Countries.CANADA))
+                            if(e.ColumnIndex <= dgReportSheet.Columns["Can1901"].Index)
+                                censusYear = (1851 + (e.ColumnIndex - startColumnIndex) * 10);
+                            else
+                                censusYear = (1901 + (e.ColumnIndex - dgReportSheet.Columns["Can1901"].Index) * 5);
+                        if (country.Equals(Countries.IRELAND))
+                            censusYear = (1901 + (e.ColumnIndex - startColumnIndex) * 10);
+                        else
+                            censusYear = (1841 + (e.ColumnIndex - startColumnIndex) * 10);
                         string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
                         ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
                     }
