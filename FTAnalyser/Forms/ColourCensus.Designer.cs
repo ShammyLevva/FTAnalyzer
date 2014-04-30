@@ -491,172 +491,310 @@
             // 
             // US1790
             // 
+            this.US1790.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.US1790.DataPropertyName = "US1790";
             this.US1790.HeaderText = "1790 US Census";
+            this.US1790.MinimumWidth = 60;
             this.US1790.Name = "US1790";
             this.US1790.ReadOnly = true;
+            this.US1790.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.US1790.Width = 60;
             // 
             // US1800
             // 
+            this.US1800.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.US1800.DataPropertyName = "US1800";
             this.US1800.HeaderText = "1800 US Census";
+            this.US1800.MinimumWidth = 60;
             this.US1800.Name = "US1800";
             this.US1800.ReadOnly = true;
+            this.US1800.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.US1800.Width = 60;
             // 
             // US1810
             // 
+            this.US1810.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.US1810.DataPropertyName = "US1810";
             this.US1810.HeaderText = "1810 US Census";
+            this.US1810.MinimumWidth = 60;
             this.US1810.Name = "US1810";
             this.US1810.ReadOnly = true;
+            this.US1810.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.US1810.Width = 60;
             // 
             // US1820
             // 
+            this.US1820.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.US1820.DataPropertyName = "US1820";
             this.US1820.HeaderText = "1820 US Census";
+            this.US1820.MinimumWidth = 60;
             this.US1820.Name = "US1820";
             this.US1820.ReadOnly = true;
+            this.US1820.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.US1820.Width = 60;
             // 
             // US1830
             // 
+            this.US1830.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.US1830.DataPropertyName = "US1830";
             this.US1830.HeaderText = "1830 US Census";
+            this.US1830.MinimumWidth = 60;
             this.US1830.Name = "US1830";
             this.US1830.ReadOnly = true;
+            this.US1830.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.US1830.Width = 60;
             // 
             // US1840
             // 
+            this.US1840.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.US1840.DataPropertyName = "US1840";
             this.US1840.HeaderText = "1840 US Census";
+            this.US1840.MinimumWidth = 60;
             this.US1840.Name = "US1840";
             this.US1840.ReadOnly = true;
+            this.US1840.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.US1840.Width = 60;
             // 
             // US1850
             // 
+            this.US1850.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.US1850.DataPropertyName = "US1850";
             this.US1850.HeaderText = "1850 US Census";
+            this.US1850.MinimumWidth = 60;
             this.US1850.Name = "US1850";
             this.US1850.ReadOnly = true;
+            this.US1850.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.US1850.Width = 60;
             // 
             // US1860
             // 
+            this.US1860.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.US1860.DataPropertyName = "US1860";
             this.US1860.HeaderText = "1860 US Census";
+            this.US1860.MinimumWidth = 60;
             this.US1860.Name = "US1860";
             this.US1860.ReadOnly = true;
+            this.US1860.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.US1860.Width = 60;
             // 
             // US1870
             // 
+            this.US1870.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.US1870.DataPropertyName = "US1870";
             this.US1870.HeaderText = "1870 US Census";
+            this.US1870.MinimumWidth = 60;
             this.US1870.Name = "US1870";
             this.US1870.ReadOnly = true;
+            this.US1870.Width = 60;
             // 
             // US1880
             // 
+            this.US1880.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.US1880.DataPropertyName = "US1880";
             this.US1880.HeaderText = "1880 US Census";
+            this.US1880.MinimumWidth = 60;
             this.US1880.Name = "US1880";
             this.US1880.ReadOnly = true;
+            this.US1880.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.US1880.Width = 60;
             // 
             // US1890
             // 
+            this.US1890.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.US1890.DataPropertyName = "US1890";
             this.US1890.HeaderText = "1890 US Census";
+            this.US1890.MinimumWidth = 60;
             this.US1890.Name = "US1890";
             this.US1890.ReadOnly = true;
+            this.US1890.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.US1890.Width = 60;
             // 
             // US1900
             // 
+            this.US1900.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.US1900.DataPropertyName = "US1900";
             this.US1900.HeaderText = "1900 US Census";
+            this.US1900.MinimumWidth = 60;
             this.US1900.Name = "US1900";
             this.US1900.ReadOnly = true;
+            this.US1900.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.US1900.Width = 60;
             // 
             // US1910
             // 
+            this.US1910.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.US1910.DataPropertyName = "US1910";
             this.US1910.HeaderText = "1910 US Census";
+            this.US1910.MinimumWidth = 60;
             this.US1910.Name = "US1910";
             this.US1910.ReadOnly = true;
+            this.US1910.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.US1910.Width = 60;
             // 
             // US1920
             // 
+            this.US1920.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.US1920.DataPropertyName = "US1920";
             this.US1920.HeaderText = "1920 US Census";
+            this.US1920.MinimumWidth = 60;
             this.US1920.Name = "US1920";
             this.US1920.ReadOnly = true;
+            this.US1920.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.US1920.Width = 60;
             // 
             // US1930
             // 
+            this.US1930.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.US1930.DataPropertyName = "US1930";
             this.US1930.HeaderText = "1930 US Census";
+            this.US1930.MinimumWidth = 60;
             this.US1930.Name = "US1930";
             this.US1930.ReadOnly = true;
+            this.US1930.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.US1930.Width = 60;
             // 
             // US1940
             // 
+            this.US1940.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.US1940.DataPropertyName = "US1940";
             this.US1940.HeaderText = "1940 US Census";
+            this.US1940.MinimumWidth = 60;
             this.US1940.Name = "US1940";
             this.US1940.ReadOnly = true;
+            this.US1940.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.US1940.Width = 60;
             // 
             // Can1851
             // 
+            this.Can1851.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Can1851.DataPropertyName = "Can1851";
             this.Can1851.HeaderText = "1851/2 Canada Census";
+            this.Can1851.MinimumWidth = 60;
             this.Can1851.Name = "Can1851";
             this.Can1851.ReadOnly = true;
+            this.Can1851.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Can1851.Width = 60;
             // 
             // Can1861
             // 
+            this.Can1861.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Can1861.DataPropertyName = "Can1861";
             this.Can1861.HeaderText = "1861 Canada Census";
+            this.Can1861.MinimumWidth = 60;
             this.Can1861.Name = "Can1861";
             this.Can1861.ReadOnly = true;
+            this.Can1861.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Can1861.Width = 60;
             // 
             // Can1871
             // 
+            this.Can1871.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Can1871.DataPropertyName = "Can1871";
             this.Can1871.HeaderText = "1871 Canada Census";
+            this.Can1871.MinimumWidth = 60;
             this.Can1871.Name = "Can1871";
             this.Can1871.ReadOnly = true;
+            this.Can1871.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Can1871.Width = 60;
             // 
             // Can1881
             // 
+            this.Can1881.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Can1881.DataPropertyName = "Can1881";
             this.Can1881.HeaderText = "1881 Canada Census";
+            this.Can1881.MinimumWidth = 60;
             this.Can1881.Name = "Can1881";
             this.Can1881.ReadOnly = true;
+            this.Can1881.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Can1881.Width = 60;
             // 
             // Can1891
             // 
+            this.Can1891.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Can1891.DataPropertyName = "Can1891";
             this.Can1891.HeaderText = "1891 Canada Census";
+            this.Can1891.MinimumWidth = 60;
             this.Can1891.Name = "Can1891";
             this.Can1891.ReadOnly = true;
+            this.Can1891.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Can1891.Width = 60;
             // 
             // Can1901
             // 
+            this.Can1901.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Can1901.DataPropertyName = "Can1901";
             this.Can1901.HeaderText = "1901 Canada Census";
+            this.Can1901.MinimumWidth = 60;
             this.Can1901.Name = "Can1901";
             this.Can1901.ReadOnly = true;
+            this.Can1901.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Can1901.Width = 60;
             // 
             // Can1906
             // 
+            this.Can1906.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Can1906.DataPropertyName = "Can1906";
             this.Can1906.HeaderText = "1906 Canada Census";
+            this.Can1906.MinimumWidth = 60;
             this.Can1906.Name = "Can1906";
             this.Can1906.ReadOnly = true;
+            this.Can1906.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Can1906.Width = 60;
             // 
             // Can1911
             // 
+            this.Can1911.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Can1911.DataPropertyName = "Can1911";
             this.Can1911.HeaderText = "1911 Canada Census";
+            this.Can1911.MinimumWidth = 60;
             this.Can1911.Name = "Can1911";
             this.Can1911.ReadOnly = true;
+            this.Can1911.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Can1911.Width = 60;
             // 
             // Can1916
             // 
+            this.Can1916.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Can1916.DataPropertyName = "Can1916";
             this.Can1916.HeaderText = "1916 Canada Census";
+            this.Can1916.MinimumWidth = 60;
             this.Can1916.Name = "Can1916";
             this.Can1916.ReadOnly = true;
+            this.Can1916.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Can1916.Width = 60;
             // 
             // Can1921
             // 
+            this.Can1921.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Can1921.DataPropertyName = "Can1921";
             this.Can1921.HeaderText = "1921 Canada Census";
+            this.Can1921.MinimumWidth = 60;
             this.Can1921.Name = "Can1921";
             this.Can1921.ReadOnly = true;
+            this.Can1921.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Can1921.Width = 60;
             // 
             // Ire1901
             // 
+            this.Ire1901.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Ire1901.DataPropertyName = "Ire1901";
             this.Ire1901.HeaderText = "1901 Irish Census";
+            this.Ire1901.MinimumWidth = 60;
             this.Ire1901.Name = "Ire1901";
             this.Ire1901.ReadOnly = true;
+            this.Ire1901.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Ire1901.Width = 60;
             // 
             // Ire1911
             // 
+            this.Ire1911.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Ire1911.DataPropertyName = "Ire1911";
             this.Ire1911.HeaderText = "1911 Irish Census";
+            this.Ire1911.MinimumWidth = 60;
             this.Ire1911.Name = "Ire1911";
             this.Ire1911.ReadOnly = true;
+            this.Ire1911.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Ire1911.Width = 60;
             // 
             // BirthDate
             // 
