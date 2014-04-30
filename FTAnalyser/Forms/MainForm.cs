@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.6.1.5";
+        public string VERSION = "3.6.2.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -826,28 +826,6 @@ namespace FTAnalyzer
         private void treeViewLocations_MouseDown(object sender, MouseEventArgs e)
         {
             preventExpand = e.Clicks > 1;
-        }
-
-        private void btnColouredCensus_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            List<IDisplayColourCensus> list = ft.ColourCensus(relTypesColoured, txtColouredSurname.Text);
-            ColourCensus rs = new ColourCensus(list);
-            DisposeDuplicateForms(rs);
-            rs.Show();
-            rs.Focus();
-            HourGlass(false);
-        }
-
-        private void btnColourBMD_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            List<IDisplayColourBMD> list = ft.ColourBMD(relTypesColoured, txtColouredSurname.Text);
-            ColourBMD rs = new ColourBMD(list);
-            DisposeDuplicateForms(rs);
-            rs.Show();
-            rs.Focus();
-            HourGlass(false);
         }
 
         private void btnSelectAll_Click(object sender, EventArgs e)
@@ -2114,6 +2092,50 @@ namespace FTAnalyzer
             Properties.Settings.Default.HideIgnoredDuplicates = ckbHideIgnoredDuplicates.Checked;
             Properties.Settings.Default.Save();
             SetPossibleDuplicates();
+        }
+        #endregion
+
+        #region Colour Reports Tab
+        private void btnColourBMD_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            List<IDisplayColourBMD> list = ft.ColourBMD(relTypesColoured, txtColouredSurname.Text);
+            ColourBMD rs = new ColourBMD(list);
+            DisposeDuplicateForms(rs);
+            rs.Show();
+            rs.Focus();
+            HourGlass(false);
+        }
+
+        private void DisplayColourCensus(string country)
+        {
+            HourGlass(true);
+            List<IDisplayColourCensus> list = ft.ColourCensus(country, relTypesColoured, txtColouredSurname.Text);
+            ColourCensus rs = new ColourCensus(country, list);
+            DisposeDuplicateForms(rs);
+            rs.Show();
+            rs.Focus();
+            HourGlass(false);
+        }
+
+        private void btnUKColourCensus_Click(object sender, EventArgs e)
+        {
+            DisplayColourCensus(Countries.UNITED_KINGDOM);
+        }
+
+        private void btnIrishColourCensus_Click(object sender, EventArgs e)
+        {
+            DisplayColourCensus(Countries.IRELAND);
+        }
+
+        private void btnUSColourCensus_Click(object sender, EventArgs e)
+        {
+            DisplayColourCensus(Countries.UNITED_STATES);
+        }
+
+        private void btnCanadianColourCensus_Click(object sender, EventArgs e)
+        {
+            DisplayColourCensus(Countries.CANADA);
         }
         #endregion
 

@@ -6,7 +6,8 @@ using System.Xml;
 namespace FTAnalyzer
 {
     public class Individual : IComparable<Individual>,
-        IDisplayIndividual, IDisplayLooseDeath, IDisplayLooseBirth, IDisplayColourCensus, IDisplayColourBMD, IExportIndividual
+        IDisplayIndividual, IDisplayLooseDeath, IDisplayLooseBirth, IExportIndividual,
+        IDisplayColourCensus, IDisplayColourBMD
     {
 
         // define relation type from direct ancestor to related by marriage and 
@@ -979,9 +980,156 @@ namespace FTAnalyzer
             get { return ColourCensusReport(CensusDate.UKCENSUS1911); }
         }
 
-        public bool AliveOnAnyCensus
+        public int Ire1901
         {
-            get { return (C1841 + C1851 + C1861 + C1871 + C1881 + C1891 + C1901 + C1911) > 0; }
+            get { return ColourCensusReport(CensusDate.IRELANDCENSUS1901); }
+        }
+
+        public int Ire1911
+        {
+            get { return ColourCensusReport(CensusDate.IRELANDCENSUS1911); }
+        }
+
+        public int US1790
+        {
+            get { return ColourCensusReport(CensusDate.USCENSUS1790); }
+        }
+
+        public int US1800
+        {
+            get { return ColourCensusReport(CensusDate.USCENSUS1800); }
+        }
+
+        public int US1810
+        {
+            get { return ColourCensusReport(CensusDate.USCENSUS1810); }
+        }
+
+        public int US1820
+        {
+            get { return ColourCensusReport(CensusDate.USCENSUS1820); }
+        }
+
+        public int US1830
+        {
+            get { return ColourCensusReport(CensusDate.USCENSUS1830); }
+        }
+
+        public int US1840
+        {
+            get { return ColourCensusReport(CensusDate.USCENSUS1840); }
+        }
+
+        public int US1850
+        {
+            get { return ColourCensusReport(CensusDate.USCENSUS1850); }
+        }
+
+        public int US1860
+        {
+            get { return ColourCensusReport(CensusDate.USCENSUS1860); }
+        }
+
+        public int US1870
+        {
+            get { return ColourCensusReport(CensusDate.USCENSUS1870); }
+        }
+
+        public int US1880
+        {
+            get { return ColourCensusReport(CensusDate.USCENSUS1880); }
+        }
+
+        public int US1890
+        {
+            get { return ColourCensusReport(CensusDate.USCENSUS1890); }
+        }
+
+        public int US1900
+        {
+            get { return ColourCensusReport(CensusDate.USCENSUS1900); }
+        }
+
+        public int US1910
+        {
+            get { return ColourCensusReport(CensusDate.USCENSUS1910); }
+        }
+
+        public int US1920
+        {
+            get { return ColourCensusReport(CensusDate.USCENSUS1920); }
+        }
+
+        public int US1930
+        {
+            get { return ColourCensusReport(CensusDate.USCENSUS1930); }
+        }
+
+        public int US1940
+        {
+            get { return ColourCensusReport(CensusDate.USCENSUS1940); }
+        }
+
+        public int Can1851
+        {
+            get { return ColourCensusReport(CensusDate.CANADACENSUS1851); }
+        }
+
+        public int Can1861
+        {
+            get { return ColourCensusReport(CensusDate.CANADACENSUS1861); }
+        }
+
+        public int Can1871
+        {
+            get { return ColourCensusReport(CensusDate.CANADACENSUS1871); }
+        }
+
+        public int Can1881
+        {
+            get { return ColourCensusReport(CensusDate.CANADACENSUS1881); }
+        }
+
+        public int Can1891
+        {
+            get { return ColourCensusReport(CensusDate.CANADACENSUS1891); }
+        }
+
+        public int Can1901
+        {
+            get { return ColourCensusReport(CensusDate.CANADACENSUS1901); }
+        }
+
+        public int Can1906
+        {
+            get { return ColourCensusReport(CensusDate.CANADACENSUS1906); }
+        }
+
+        public int Can1911
+        {
+            get { return ColourCensusReport(CensusDate.CANADACENSUS1911); }
+        }
+
+        public int Can1916
+        {
+            get { return ColourCensusReport(CensusDate.CANADACENSUS1916); }
+        }
+
+        public int Can1921
+        {
+            get { return ColourCensusReport(CensusDate.CANADACENSUS1921); }
+        }
+
+        public bool AliveOnAnyCensus(string country)
+        {
+            if(country.Equals(Countries.UNITED_STATES))
+                return (US1790 + US1800 + US1810 + US1810 + US1820 + US1830 + US1840 + US1850 + US1860 + US1870 + US1880 + US1890 + US1900 + US1910 + US1920 + US1930 + US1940) > 0; 
+            else if (country.Equals(Countries.CANADA))
+                return (Can1851 + Can1861 + Can1871 + Can1881 + Can1891 + Can1901 + Can1906 + Can1911 + Can1916 + Can1921) > 0; 
+            else if (country.Equals(Countries.IRELAND))
+                return (Ire1901 + Ire1911) > 0;
+            else
+                return (C1841 + C1851 + C1861 + C1871 + C1881 + C1891 + C1901 + C1911) > 0;      
         }
 
         public int CensusFactCount
@@ -1126,14 +1274,11 @@ namespace FTAnalyzer
             }
         }
 
-        public int NumMissingLostCousins
+        public int NumMissingLostCousins(string country)
         {
-            get
-            {
-                if (!AliveOnAnyCensus) return 0;
-                int numMissing = CensusDate.LOSTCOUSINS_CENSUS.Count(x => this.IsCensusDone(x) && !this.IsLostCousinsEntered(x));
-                return numMissing;
-            }
+            if (!AliveOnAnyCensus(country)) return 0;
+            int numMissing = CensusDate.LOSTCOUSINS_CENSUS.Count(x => this.IsCensusDone(x) && !this.IsLostCousinsEntered(x));
+            return numMissing;
         }
 
         public override bool Equals(object that)

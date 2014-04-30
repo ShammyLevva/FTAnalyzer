@@ -33,7 +33,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -121,7 +121,6 @@
             this.txtTreetopsSurname = new System.Windows.Forms.TextBox();
             this.tabColourReports = new System.Windows.Forms.TabPage();
             this.btnColourBMD = new System.Windows.Forms.Button();
-            this.btnColourCensus = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.txtColouredSurname = new System.Windows.Forms.TextBox();
             this.tabLostCousins = new System.Windows.Forms.TabPage();
@@ -249,6 +248,11 @@
             this.treetopsCountry = new Controls.CensusCountry();
             this.wardeadRelation = new Controls.RelationTypes();
             this.wardeadCountry = new Controls.CensusCountry();
+            this.btnUSColourCensus = new System.Windows.Forms.Button();
+            this.btnCanadianColourCensus = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnIrishColourCensus = new System.Windows.Forms.Button();
+            this.btnUKColourCensus = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -302,6 +306,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgSources)).BeginInit();
             this.tabDuplicates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgDuplicates)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -790,14 +795,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 154);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1055,8 +1060,8 @@
             // 
             // tabColourReports
             // 
+            this.tabColourReports.Controls.Add(this.groupBox3);
             this.tabColourReports.Controls.Add(this.btnColourBMD);
-            this.tabColourReports.Controls.Add(this.btnColourCensus);
             this.tabColourReports.Controls.Add(this.label10);
             this.tabColourReports.Controls.Add(this.txtColouredSurname);
             this.tabColourReports.Controls.Add(this.relTypesColoured);
@@ -1069,23 +1074,13 @@
             // 
             // btnColourBMD
             // 
-            this.btnColourBMD.Location = new System.Drawing.Point(8, 92);
+            this.btnColourBMD.Location = new System.Drawing.Point(14, 184);
             this.btnColourBMD.Name = "btnColourBMD";
-            this.btnColourBMD.Size = new System.Drawing.Size(155, 23);
-            this.btnColourBMD.TabIndex = 33;
-            this.btnColourBMD.Text = "View Colour BMD Report";
+            this.btnColourBMD.Size = new System.Drawing.Size(307, 23);
+            this.btnColourBMD.TabIndex = 42;
+            this.btnColourBMD.Text = "View Colour Birth/Marriage/Death Report";
             this.btnColourBMD.UseVisualStyleBackColor = true;
             this.btnColourBMD.Click += new System.EventHandler(this.btnColourBMD_Click);
-            // 
-            // btnColourCensus
-            // 
-            this.btnColourCensus.Location = new System.Drawing.Point(169, 92);
-            this.btnColourCensus.Name = "btnColourCensus";
-            this.btnColourCensus.Size = new System.Drawing.Size(155, 23);
-            this.btnColourCensus.TabIndex = 32;
-            this.btnColourCensus.Text = "View Colour Census Report";
-            this.btnColourCensus.UseVisualStyleBackColor = true;
-            this.btnColourCensus.Click += new System.EventHandler(this.btnColouredCensus_Click);
             // 
             // label10
             // 
@@ -1093,7 +1088,7 @@
             this.label10.Location = new System.Drawing.Point(339, 19);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(49, 13);
-            this.label10.TabIndex = 31;
+            this.label10.TabIndex = 59;
             this.label10.Text = "Surname";
             // 
             // txtColouredSurname
@@ -2509,6 +2504,59 @@
             this.wardeadCountry.Title = "Default Country";
             this.wardeadCountry.UKEnabled = true;
             // 
+            // btnUSColourCensus
+            // 
+            this.btnUSColourCensus.Location = new System.Drawing.Point(6, 48);
+            this.btnUSColourCensus.Name = "btnUSColourCensus";
+            this.btnUSColourCensus.Size = new System.Drawing.Size(195, 23);
+            this.btnUSColourCensus.TabIndex = 40;
+            this.btnUSColourCensus.Text = "View US Colour Census Report";
+            this.btnUSColourCensus.UseVisualStyleBackColor = true;
+            this.btnUSColourCensus.Click += new System.EventHandler(this.btnUSColourCensus_Click);
+            // 
+            // btnCanadianColourCensus
+            // 
+            this.btnCanadianColourCensus.Location = new System.Drawing.Point(207, 48);
+            this.btnCanadianColourCensus.Name = "btnCanadianColourCensus";
+            this.btnCanadianColourCensus.Size = new System.Drawing.Size(195, 23);
+            this.btnCanadianColourCensus.TabIndex = 41;
+            this.btnCanadianColourCensus.Text = "View Canadian Colour Census Report";
+            this.btnCanadianColourCensus.UseVisualStyleBackColor = true;
+            this.btnCanadianColourCensus.Click += new System.EventHandler(this.btnCanadianColourCensus_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnIrishColourCensus);
+            this.groupBox3.Controls.Add(this.btnCanadianColourCensus);
+            this.groupBox3.Controls.Add(this.btnUKColourCensus);
+            this.groupBox3.Controls.Add(this.btnUSColourCensus);
+            this.groupBox3.Location = new System.Drawing.Point(8, 92);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(417, 86);
+            this.groupBox3.TabIndex = 36;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Colour Census Reports";
+            // 
+            // btnIrishColourCensus
+            // 
+            this.btnIrishColourCensus.Location = new System.Drawing.Point(207, 19);
+            this.btnIrishColourCensus.Name = "btnIrishColourCensus";
+            this.btnIrishColourCensus.Size = new System.Drawing.Size(195, 23);
+            this.btnIrishColourCensus.TabIndex = 39;
+            this.btnIrishColourCensus.Text = "View Irish Colour Census Report";
+            this.btnIrishColourCensus.UseVisualStyleBackColor = true;
+            this.btnIrishColourCensus.Click += new System.EventHandler(this.btnIrishColourCensus_Click);
+            // 
+            // btnUKColourCensus
+            // 
+            this.btnUKColourCensus.Location = new System.Drawing.Point(6, 19);
+            this.btnUKColourCensus.Name = "btnUKColourCensus";
+            this.btnUKColourCensus.Size = new System.Drawing.Size(195, 23);
+            this.btnUKColourCensus.TabIndex = 38;
+            this.btnUKColourCensus.Text = "View UK Colour Census Report";
+            this.btnUKColourCensus.UseVisualStyleBackColor = true;
+            this.btnUKColourCensus.Click += new System.EventHandler(this.btnUKColourCensus_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -2593,6 +2641,7 @@
             this.tabDuplicates.ResumeLayout(false);
             this.tabDuplicates.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgDuplicates)).EndInit();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2654,7 +2703,6 @@
         private Controls.CensusCountry treetopsCountry;
         private System.Windows.Forms.TabPage tabColourReports;
         private System.Windows.Forms.Button btnColourBMD;
-        private System.Windows.Forms.Button btnColourCensus;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtColouredSurname;
         private Controls.RelationTypes relTypesColoured;
@@ -2816,6 +2864,11 @@
         private System.Windows.Forms.ToolStripMenuItem mnuTreetopsToExcel;
         private System.Windows.Forms.ToolStripMenuItem mnuWorldWarsToExcel;
         private System.Windows.Forms.CheckBox chkExcludeUnknownBirths;
+        private System.Windows.Forms.Button btnCanadianColourCensus;
+        private System.Windows.Forms.Button btnUSColourCensus;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btnIrishColourCensus;
+        private System.Windows.Forms.Button btnUKColourCensus;
     }
 }
 

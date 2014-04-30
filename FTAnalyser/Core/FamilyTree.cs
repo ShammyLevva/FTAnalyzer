@@ -1336,17 +1336,29 @@ namespace FTAnalyzer
             return new SortableBindingList<Individual>(occupations[job]);
         }
 
-        public List<IDisplayColourCensus> ColourCensus(Controls.RelationTypes relType, string surname)
+        public List<IDisplayColourCensus> ColourCensus(string country, Controls.RelationTypes relType, string surname)
         {
-            Predicate<Individual> aliveOnAnyCensus = x => x.AliveOnAnyCensus;
+            Predicate<Individual> aliveOnAnyCensus = x => x.AliveOnAnyCensus(country);
             Predicate<Individual> filter = relType.BuildFilter<Individual>(x => x.RelationType);
             if (surname.Length > 0)
             {
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, surname);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            Predicate<Individual> dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.UKCENSUS1911) || !i.BirthDate.IsKnown) &&
+            Predicate<Individual> dateFilter;
+            if(country.Equals(Countries.UNITED_STATES))
+                dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.USCENSUS1790) || !i.BirthDate.IsKnown) &&
+                                                     (i.DeathDate.EndsAfter(CensusDate.USCENSUS1940) || !i.DeathDate.IsKnown));
+            else if(country.Equals(Countries.CANADA))
+                dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.CANADACENSUS1851) || !i.BirthDate.IsKnown) &&
+                                                     (i.DeathDate.EndsAfter(CensusDate.CANADACENSUS1921) || !i.DeathDate.IsKnown));
+            else if (country.Equals(Countries.IRELAND))
+                dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.IRELANDCENSUS1901) || !i.BirthDate.IsKnown) &&
+                                                     (i.DeathDate.EndsAfter(CensusDate.IRELANDCENSUS1911) || !i.DeathDate.IsKnown));
+            else 
+                dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.UKCENSUS1911) || !i.BirthDate.IsKnown) &&
                                                      (i.DeathDate.EndsAfter(CensusDate.UKCENSUS1841) || !i.DeathDate.IsKnown));
+
             filter = FilterUtils.AndFilter<Individual>(filter, dateFilter, aliveOnAnyCensus);
             return individuals.Where(filter).ToList<IDisplayColourCensus>();
         }

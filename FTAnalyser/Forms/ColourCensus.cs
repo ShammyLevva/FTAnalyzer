@@ -19,16 +19,17 @@ namespace FTAnalyzer.Forms
         private ReportFormHelper reportFormHelper;
 
         private Dictionary<int, DataGridViewCellStyle> styles;
-        private int c1841ColumnIndex;
-        private int c1911ColumnIndex;
+        private int startColumnIndex;
+        private int endColumnIndex;
         private SortableBindingList<IDisplayColourCensus> reportList;
         private Font boldFont;
+        private string country;
 
-        public ColourCensus(List<IDisplayColourCensus> reportList)
+        public ColourCensus(string country, List<IDisplayColourCensus> reportList)
         {
             InitializeComponent();
             dgReportSheet.AutoGenerateColumns = false;
-            
+            this.country = country;
             this.reportList = new SortableBindingList<IDisplayColourCensus>(reportList);
             reportFormHelper = new ReportFormHelper(this, "Colour Census Report", dgReportSheet, this.ResetTable, "Colour Census");
 
@@ -61,9 +62,7 @@ namespace FTAnalyzer.Forms
             DataGridViewCellStyle knownMissing = new DataGridViewCellStyle();
             knownMissing.BackColor = knownMissing.ForeColor = Color.MediumSeaGreen;
             styles.Add(8, knownMissing);
-
-            c1841ColumnIndex = dgReportSheet.Columns["C1841"].Index;
-            c1911ColumnIndex = dgReportSheet.Columns["C1911"].Index;
+            SetColumns(country);
             dgReportSheet.DataSource = this.reportList;
             reportFormHelper.LoadColumnLayout("ColourCensusLayout.xml");
             tsRecords.Text = Properties.Messages.Count + reportList.Count + " records listed.";
@@ -76,41 +75,35 @@ namespace FTAnalyzer.Forms
             cbFilter.Text = "All Individuals";
         }
 
-        private string CountText(SortableBindingList<IDisplayColourCensus> reportList)
+        private void SetColumns(string country)
         {
+            // make all census columns hidden
+            for (int index = dgReportSheet.Columns["C1841"].Index; index <= dgReportSheet.Columns["Ire1911"].Index; index++)
+                dgReportSheet.Columns[index].Visible = false;
 
-            StringBuilder output = new StringBuilder();
-
-            //Dictionary<int, int> totals = new Dictionary<int, int>();
-            //for (int census = 1841; census <= 1911; census += 10)
-            //    for (int i = 0; i <= 4; i++)
-            //        totals[census * 10 + i] = 0;
-
-            //foreach (IDisplayLCReport r in reportList)
-            //{
-            //    totals[18410 + r.C1841]++;
-            //    totals[18510 + r.C1851]++;
-            //    totals[18610 + r.C1861]++;
-            //    totals[18710 + r.C1871]++;
-            //    totals[18810 + r.C1881]++;
-            //    totals[18910 + r.C1891]++;
-            //    totals[19010 + r.C1901]++;
-            //    totals[19110 + r.C1911]++;
-            //}
-
-            //for (int census = 1841; census <= 1911; census += 10)
-            //{
-            //    output.Append(census);
-            //    output.Append(":");
-            //    output.Append(totals[census * 10 + 1]);
-            //    output.Append("/");
-            //    output.Append(totals[census * 10 + 2]);
-            //    output.Append("/");
-            //    output.Append(totals[census * 10 + 3] + totals[census * 10 + 4]);
-            //    output.Append(" ");
-            //}
-
-            return output.ToString();
+            if (country.Equals(Countries.UNITED_STATES))
+            {
+                startColumnIndex = dgReportSheet.Columns["US1790"].Index;
+                endColumnIndex = dgReportSheet.Columns["US1940"].Index;
+            }
+            else if (country.Equals(Countries.CANADA))
+            {
+                startColumnIndex = dgReportSheet.Columns["Can1851"].Index;
+                endColumnIndex = dgReportSheet.Columns["Can1921"].Index;
+            }
+            else if (country.Equals(Countries.IRELAND))
+            {
+                startColumnIndex = dgReportSheet.Columns["Ire1901"].Index;
+                endColumnIndex = dgReportSheet.Columns["Ire1911"].Index;
+            }
+            else
+            {
+                startColumnIndex = dgReportSheet.Columns["C1841"].Index;
+                endColumnIndex = dgReportSheet.Columns["C1911"].Index;
+            }
+            // show those columns that should be visible for the country in use
+            for (int index = startColumnIndex; index <= endColumnIndex; index++)
+                dgReportSheet.Columns[index].Visible = true;
         }
 
         private void ResetTable()
@@ -128,14 +121,12 @@ namespace FTAnalyzer.Forms
             {
                 return;
             }
-            if (e.ColumnIndex < c1841ColumnIndex || e.ColumnIndex > c1911ColumnIndex)
+            if (e.ColumnIndex < startColumnIndex || e.ColumnIndex > endColumnIndex)
             {
                 DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells["Relation"];
                 string relation = (string)cell.Value;
                 if (relation == "Direct Ancestor")
-                {
                     e.CellStyle.Font = boldFont;
-                }
             }
             else
             {
@@ -174,10 +165,10 @@ namespace FTAnalyzer.Forms
                             cell.ToolTipText = "Lost Cousins flagged but no Census entered.";
                             break;
                         case 6:
-                            cell.ToolTipText = "On Census outside UK.";
+                            cell.ToolTipText = "On Census outside " + country;
                             break;
                         case 7:
-                            cell.ToolTipText = "Likely outside UK on census date";
+                            cell.ToolTipText = "Likely outside " + country + " on census date";
                             break;
                         case 8:
                             cell.ToolTipText = "Known to be missing from the census";
@@ -203,14 +194,14 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0)
             {
                 FamilyTree ft = FamilyTree.Instance;
-                if (e.ColumnIndex >= c1841ColumnIndex && e.ColumnIndex <= c1911ColumnIndex)
+                if (e.ColumnIndex >= startColumnIndex && e.ColumnIndex <= endColumnIndex)
                 {
                     DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
                     int value = (int)cell.Value;
                     if (value == 1 || value == 2)
                     {
                         IDisplayColourCensus person = (IDisplayColourCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
-                        int censusYear = (1841 + (e.ColumnIndex - c1841ColumnIndex) * 10);
+                        int censusYear = (1841 + (e.ColumnIndex - startColumnIndex) * 10);
                         string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
                         ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
                     }
