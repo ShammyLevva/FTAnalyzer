@@ -69,18 +69,18 @@ namespace FTAnalyzer
         //Parish: Inverurie; ED: 4; Page: 12; Line: 3; Roll: CSSCT1901_69
         //Class: RG14; Piece: 21983
         //Class: RG14; Piece: 12577; Schedule Number: 103
-        private static readonly string EW_CENSUS_PATTERN = "Class: RG(\\d{2,3}); Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3})";
+        private static readonly string EW_CENSUS_PATTERN = "Class: RG(\\d{2,3}); Piece: ?(\\d{1,5}); Folio: ?(\\d{1,4}); Page: ?(\\d{1,3})";
         private static readonly string EW_CENSUS_PATTERN_FH = "RG(\\d{1,2})/(\\d{1,5}) F(\\d{1,4}) p(\\d{1,3})";
-        private static readonly string EW_CENSUS_1841_PATTERN = "Class: HO107; Piece: (\\d{1,5}); Folio: (\\d{1,4}); Page: (\\d{1,3})";
-        private static readonly string EW_CENSUS_1841_PATTERN2 = "Class: HO107; Piece:? (\\d{1,5}); Book: (\\d{1,3});.*?Folio: (\\d{1,4}); Page: (\\d{1,3});";
+        private static readonly string EW_CENSUS_1841_PATTERN = "Class: HO107; Piece: ?(\\d{1,5}); Folio: ?(\\d{1,4}); Page: ?(\\d{1,3})";
+        private static readonly string EW_CENSUS_1841_PATTERN2 = "Class: HO107; Piece:? ?(\\d{1,5}); Book: ?(\\d{1,3});.*?Folio: ?(\\d{1,4}); Page: ?(\\d{1,3});";
         private static readonly string EW_CENSUS_1841_PATTERN_FH = "HO107/(\\d{1,5})/(\\d{1,3}) .*F(\\d{1,3}) p(\\d{1,3})";
-        private static readonly string EW_CENSUS_1911_PATTERN = "^RG14PN(\\d{1,6}) .*SN(\\d{1,3})";
-        private static readonly string EW_CENSUS_1911_PATTERN2 = "Class: RG14; Piece: (\\d{1,6});?$";
-        private static readonly string EW_CENSUS_1911_PATTERN3 = "Class: RG14; Piece: (\\d{1,6}); Schedule Number: (\\d{1,3})";
-        private static readonly string EW_CENSUS_1911_PATTERN3a = "Class: RG14; Piece: (\\d{1,6}); SN: (\\d{1,3})";
-        private static readonly string EW_CENSUS_1911_PATTERN4 = "Class: RG14; Piece: (\\d{1,6}); Page: (\\d{1,3})";
-        private static readonly string EW_CENSUS_1911_PATTERN_FH = "RG14/PN(\\d{1,6}) .*SN(\\d{1,3})";
-        private static readonly string SCOT_CENSUS_PATTERN = "Parish: ([A-Za-z]+); ED: (\\d{1,3}); Page: (\\d{1,4}); Line: (\\d{1,2})";
+        private static readonly string EW_CENSUS_1911_PATTERN = "^RG14PN(\\d{1,6}) .*SN(\\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN2 = "Class: RG14; Piece: ?(\\d{1,6});?$";
+        private static readonly string EW_CENSUS_1911_PATTERN3 = "Class: RG14; Piece: ?(\\d{1,6}); Schedule Number: ?(\\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN3a = "Class: RG14; Piece: ?(\\d{1,6}); SN: ?(\\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN4 = "Class: RG14; Piece: ?(\\d{1,6}); Page: ?(\\d{1,3})";
+        private static readonly string EW_CENSUS_1911_PATTERN_FH = "RG14/PN(\\d{1,6}) .*SN(\\d{1,4})";
+        private static readonly string SCOT_CENSUS_PATTERN = "Parish: ?([A-Za-z]+); ED: ?(\\d{1,3}); Page: ?(\\d{1,4}); Line: ?(\\d{1,2})";
         private static readonly string SCOT_CENSUS_PATTERN2 = "(\\d{3}/\\d{2}) (\\d{3}/\\d{2}) (\\d{3,4})";
 
         static Fact()
@@ -246,6 +246,7 @@ namespace FTAnalyzer
         public Age GedcomAge { get; private set; }
         public bool Created { get; protected set; }
         public bool Preferred { get; private set; }
+        public bool IsUKCensus { get; private set; }
         private string Tag { get; set; }
 
         #region Constructors
@@ -273,6 +274,7 @@ namespace FTAnalyzer
             this.Created = false;
             this.Tag = string.Empty;
             this.Preferred = false;
+            this.IsUKCensus = false;
         }
 
         public Fact(XmlNode node, string factRef, bool preferred)
@@ -418,6 +420,7 @@ namespace FTAnalyzer
                     this.Parish = matcher.Groups[1].ToString();
                     this.ED = matcher.Groups[2].ToString();
                     this.Page = matcher.Groups[3].ToString();
+                    this.IsUKCensus = true;
                     return;
                 }
                 matcher = Regex.Match(text, SCOT_CENSUS_PATTERN2, RegexOptions.IgnoreCase);
@@ -426,6 +429,7 @@ namespace FTAnalyzer
                     this.Parish = matcher.Groups[1].ToString().Replace("/00", "").Replace("/", "-");
                     this.ED = matcher.Groups[2].ToString().Replace("/00", "").TrimStart('0');
                     this.Page = matcher.Groups[3].ToString().TrimStart('0');
+                    this.IsUKCensus = true;
                     return;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_PATTERN, RegexOptions.IgnoreCase);
@@ -434,6 +438,7 @@ namespace FTAnalyzer
                     this.Piece = matcher.Groups[2].ToString();
                     this.Folio = matcher.Groups[3].ToString();
                     this.Page = matcher.Groups[4].ToString();
+                    this.IsUKCensus = true;
                     return;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN, RegexOptions.IgnoreCase);
@@ -442,6 +447,7 @@ namespace FTAnalyzer
                     this.Piece = matcher.Groups[1].ToString();
                     this.Folio = matcher.Groups[2].ToString();
                     this.Page = matcher.Groups[3].ToString();
+                    this.IsUKCensus = true;
                     return;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN2, RegexOptions.IgnoreCase);
@@ -451,6 +457,7 @@ namespace FTAnalyzer
                     this.Book = matcher.Groups[2].ToString();
                     this.Folio = matcher.Groups[3].ToString();
                     this.Page = matcher.Groups[4].ToString();
+                    this.IsUKCensus = true;
                     return;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN, RegexOptions.IgnoreCase);
@@ -458,6 +465,7 @@ namespace FTAnalyzer
                 {
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
+                    this.IsUKCensus = true;
                     return;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN2, RegexOptions.IgnoreCase);
@@ -465,6 +473,7 @@ namespace FTAnalyzer
                 {
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = "Missing";
+                    this.IsUKCensus = true;
                     return;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3, RegexOptions.IgnoreCase);
@@ -472,6 +481,7 @@ namespace FTAnalyzer
                 {
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
+                    this.IsUKCensus = true;
                     return;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3a, RegexOptions.IgnoreCase);
@@ -479,6 +489,7 @@ namespace FTAnalyzer
                 {
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
+                    this.IsUKCensus = true;
                     return;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN4, RegexOptions.IgnoreCase);
@@ -486,6 +497,7 @@ namespace FTAnalyzer
                 {
                     this.Piece = matcher.Groups[1].ToString();
                     this.Page = matcher.Groups[2].ToString();
+                    this.IsUKCensus = true;
                     return;
                 }
             }
@@ -499,6 +511,7 @@ namespace FTAnalyzer
                     this.Book = matcher.Groups[2].ToString();
                     this.Folio = matcher.Groups[3].ToString();
                     this.Page = matcher.Groups[4].ToString();
+                    this.IsUKCensus = true;
                     return;
                 }
                 matcher = Regex.Match(fs.SourceTitle, EW_CENSUS_PATTERN_FH, RegexOptions.IgnoreCase);
@@ -507,6 +520,7 @@ namespace FTAnalyzer
                     this.Piece = matcher.Groups[2].ToString();
                     this.Folio = matcher.Groups[3].ToString();
                     this.Page = matcher.Groups[4].ToString();
+                    this.IsUKCensus = true;
                     return;
                 }
                 matcher = Regex.Match(fs.SourceTitle, EW_CENSUS_1911_PATTERN_FH, RegexOptions.IgnoreCase);
@@ -514,6 +528,7 @@ namespace FTAnalyzer
                 {
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
+                    this.IsUKCensus = true;
                     return;
                 }
             }

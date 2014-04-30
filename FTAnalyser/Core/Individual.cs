@@ -618,6 +618,8 @@ namespace FTAnalyzer
                     if (!checkCountry) return true;
                     if (f.Location.CensusCountryMatches(when.Country, includeUnknownCountries))
                         return true;
+                    if (Countries.IsUnitedKingdom(when.Country) && f.IsUKCensus)
+                        return true;
                 }
             }
             return false;
