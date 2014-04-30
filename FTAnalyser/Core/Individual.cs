@@ -9,7 +9,6 @@ namespace FTAnalyzer
         IDisplayIndividual, IDisplayLooseDeath, IDisplayLooseBirth, IExportIndividual,
         IDisplayColourCensus, IDisplayColourBMD
     {
-
         // define relation type from direct ancestor to related by marriage and 
         // MARRIAGEDB ie: married to a direct or blood relation
         public const int UNKNOWN = 1, DIRECT = 2, BLOOD = 4, MARRIEDTODB = 8, MARRIAGE = 16, UNSET = 32;
@@ -22,14 +21,16 @@ namespace FTAnalyzer
         private string gender;
         private string alias;
         private int relationType;
-        private int ahnentafel;
-        private string budgieCode;
-        private bool infamily;
-        private bool hasParents;
         private DoubleMetaphone surnameMetaphone;
         private DoubleMetaphone forenameMetaphone;
         public string Notes { get; private set; }
         public string StandardisedName { get; private set; }
+        public bool HasParents { get; set; }
+        public bool Infamily { get; set; }
+        public int Ahnentafel { get; set; }
+        public string BudgieCode { get; set; }
+        public string RelationToRoot { get; set; }
+        public CommonAncestor CommonAncestor { get; set; }
 
         private IList<Fact> facts;
         private IList<Fact> errorFacts;
@@ -45,10 +46,10 @@ namespace FTAnalyzer
             Gender = FamilyTree.GetText(node, "SEX");
             alias = FamilyTree.GetText(node, "ALIA");
             relationType = UNSET;
-            ahnentafel = 0;
-            budgieCode = string.Empty;
-            infamily = false;
-            hasParents = false;
+            Ahnentafel = 0;
+            BudgieCode = string.Empty;
+            Infamily = false;
+            HasParents = false;
             ReferralFamilyID = string.Empty;
             facts = new List<Fact>();
             errorFacts = new List<Fact>();
@@ -138,11 +139,11 @@ namespace FTAnalyzer
                 this.StandardisedName = i.StandardisedName;
                 this.gender = i.gender;
                 this.alias = i.alias;
-                this.ahnentafel = i.ahnentafel;
-                this.budgieCode = i.budgieCode;
+                this.Ahnentafel = i.Ahnentafel;
+                this.BudgieCode = i.BudgieCode;
                 this.relationType = i.relationType;
                 this.RelationToRoot = i.RelationToRoot;
-                this.infamily = i.infamily;
+                this.Infamily = i.Infamily;
                 this.Notes = i.Notes;
                 this.ReferralFamilyID = i.ReferralFamilyID;
                 this.facts = new List<Fact>(i.facts);
@@ -155,17 +156,6 @@ namespace FTAnalyzer
         }
 
         #region Properties
-
-        public bool Infamily
-        {
-            set { infamily = value; }
-        }
-
-        public bool HasParents
-        {
-            get { return hasParents; }
-            set { hasParents = value; }
-        }
 
         public bool HasRangedBirthDate
         {
@@ -183,18 +173,6 @@ namespace FTAnalyzer
             }
         }
 
-        public int Ahnentafel
-        {
-            get { return ahnentafel; }
-            set { ahnentafel = value; }
-        }
-
-        public string BudgieCode
-        {
-            get { return budgieCode; }
-            set { budgieCode = value; }
-        }
-
         public int RelationType
         {
             get { return relationType; }
@@ -204,10 +182,6 @@ namespace FTAnalyzer
                     relationType = value;
             }
         }
-
-        public string RelationToRoot { get; set; }
-
-        public CommonAncestor CommonAncestor { get; set; }
 
         public bool IsBloodDirect
         {
@@ -225,7 +199,7 @@ namespace FTAnalyzer
             {
                 switch (relationType)
                 {
-                    case DIRECT: return ahnentafel == 1 ? "Root Person" : "Direct Ancestor";
+                    case DIRECT: return Ahnentafel == 1 ? "Root Person" : "Direct Ancestor";
                     case BLOOD: return "Blood Relation";
                     case MARRIAGE: return "By Marriage";
                     case MARRIEDTODB: return "Marr to Direct/Blood";
@@ -581,7 +555,7 @@ namespace FTAnalyzer
 
         public bool IsInFamily
         {
-            get { return infamily; }
+            get { return Infamily; }
         }
 
         public bool IsMarried(FactDate fd)
