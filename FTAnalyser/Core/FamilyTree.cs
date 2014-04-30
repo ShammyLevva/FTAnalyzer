@@ -1338,7 +1338,7 @@ namespace FTAnalyzer
 
         public List<IDisplayColourCensus> ColourCensus(string country, Controls.RelationTypes relType, string surname)
         {
-            Predicate<Individual> aliveOnAnyCensus = x => x.AliveOnAnyCensus(country);
+            Predicate<Individual> aliveOnAnyCensus = x => x.AliveOnAnyCensus(country) && !x.OutOfCountryOnAllCensus(country);
             Predicate<Individual> filter = relType.BuildFilter<Individual>(x => x.RelationType);
             if (surname.Length > 0)
             {
@@ -1347,14 +1347,14 @@ namespace FTAnalyzer
             }
             Predicate<Individual> dateFilter;
             if(country.Equals(Countries.UNITED_STATES))
-                dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.USCENSUS1790) || !i.BirthDate.IsKnown) &&
-                                                     (i.DeathDate.EndsAfter(CensusDate.USCENSUS1940) || !i.DeathDate.IsKnown));
+                dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.USCENSUS1940) || !i.BirthDate.IsKnown) &&
+                                                     (i.DeathDate.EndsAfter(CensusDate.USCENSUS1790) || !i.DeathDate.IsKnown));
             else if(country.Equals(Countries.CANADA))
-                dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.CANADACENSUS1851) || !i.BirthDate.IsKnown) &&
-                                                     (i.DeathDate.EndsAfter(CensusDate.CANADACENSUS1921) || !i.DeathDate.IsKnown));
+                dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.CANADACENSUS1921) || !i.BirthDate.IsKnown) &&
+                                                     (i.DeathDate.EndsAfter(CensusDate.CANADACENSUS1851) || !i.DeathDate.IsKnown));
             else if (country.Equals(Countries.IRELAND))
-                dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.IRELANDCENSUS1901) || !i.BirthDate.IsKnown) &&
-                                                     (i.DeathDate.EndsAfter(CensusDate.IRELANDCENSUS1911) || !i.DeathDate.IsKnown));
+                dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.IRELANDCENSUS1911) || !i.BirthDate.IsKnown) &&
+                                                     (i.DeathDate.EndsAfter(CensusDate.IRELANDCENSUS1901) || !i.DeathDate.IsKnown));
             else 
                 dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.UKCENSUS1911) || !i.BirthDate.IsKnown) &&
                                                      (i.DeathDate.EndsAfter(CensusDate.UKCENSUS1841) || !i.DeathDate.IsKnown));

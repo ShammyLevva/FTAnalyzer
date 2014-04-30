@@ -198,9 +198,9 @@ namespace FTAnalyzer
         {
             get { return relationType; }
             set
-            { 
-                if(relationType == UNKNOWN || relationType > value)
-                    relationType = value; 
+            {
+                if (relationType == UNKNOWN || relationType > value)
+                    relationType = value;
             }
         }
 
@@ -1128,14 +1128,31 @@ namespace FTAnalyzer
 
         public bool AliveOnAnyCensus(string country)
         {
-            if(country.Equals(Countries.UNITED_STATES))
-                return (US1790 + US1800 + US1810 + US1810 + US1820 + US1830 + US1840 + US1850 + US1860 + US1870 + US1880 + US1890 + US1900 + US1910 + US1920 + US1930 + US1940) > 0; 
+            if (country.Equals(Countries.UNITED_STATES))
+                return (US1790 + US1800 + US1810 + US1810 + US1820 + US1830 + US1840 + US1850 + US1860 + US1870 + US1880 + US1890 + US1900 + US1910 + US1920 + US1930 + US1940) > 0;
             else if (country.Equals(Countries.CANADA))
-                return (Can1851 + Can1861 + Can1871 + Can1881 + Can1891 + Can1901 + Can1906 + Can1911 + Can1916 + Can1921) > 0; 
+                return (Can1851 + Can1861 + Can1871 + Can1881 + Can1891 + Can1901 + Can1906 + Can1911 + Can1916 + Can1921) > 0;
             else if (country.Equals(Countries.IRELAND))
                 return (Ire1901 + Ire1911) > 0;
             else
-                return (C1841 + C1851 + C1861 + C1871 + C1881 + C1891 + C1901 + C1911) > 0;      
+                return (C1841 + C1851 + C1861 + C1871 + C1881 + C1891 + C1901 + C1911) > 0;
+        }
+
+        public bool OutOfCountryOnAllCensus(string country)
+        {
+            if (country.Equals(Countries.UNITED_STATES))
+                return (US1790 == 0 || US1790 == 7) && (US1800 == 0 || US1800 == 7) && (US1810 == 0 || US1810 == 7) && (US1820 == 0 || US1820 == 7) && (US1830 == 0 || US1830 == 7)
+                    && (US1840 == 0 || US1840 == 7) && (US1850 == 0 || US1850 == 7) && (US1860 == 0 || US1860 == 7) && (US1870 == 0 || US1870 == 7) && (US1880 == 0 || US1880 == 7)
+                    && (US1890 == 0 || US1890 == 7) && (US1900 == 0 || US1900 == 7) && (US1910 == 0 || US1910 == 7) && (US1920 == 0 || US1920 == 7) && (US1930 == 0 || US1930 == 7)
+                    && (US1940 == 0 || US1940 == 7);
+            else if (country.Equals(Countries.CANADA))
+                return (Can1851 == 0 || Can1851 == 7) && (Can1861 == 0 || Can1861 == 7) && (Can1871 == 0 || Can1871 == 7) && (Can1881 == 0 || Can1881 == 7) && (Can1891 == 0 || Can1891 == 7)
+                    && (Can1901 == 0 || Can1901 == 7) && (Can1906 == 0 || Can1906 == 7) && (Can1911 == 0 || Can1911 == 7) && (Can1916 == 0 || Can1916 == 7) && (Can1921 == 0 || Can1921 == 7);
+            else if (country.Equals(Countries.IRELAND))
+                return (Ire1901 == 0 || Ire1901 == 7) && (Ire1911 == 0 || Ire1911 == 7);
+            else
+                return (C1841 == 0 || C1841 == 7) && (C1851 == 0 || C1851 == 7) && (C1861 == 0 || C1861 == 7) && (C1871 == 0 || C1871 == 7) && (C1881 == 0 || C1881 == 7)
+                    && (C1891 == 0 || C1891 == 7) && (C1901 == 0 || C1901 == 7) && (C1911 == 0 || C1911 == 7);
         }
 
         public int CensusFactCount
