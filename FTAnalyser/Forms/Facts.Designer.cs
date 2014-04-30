@@ -41,6 +41,8 @@
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
             this.dgFacts = new System.Windows.Forms.DataGridView();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Forenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,9 +55,8 @@
             this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AgeAtFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Preferred = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.SourceList = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -156,6 +157,7 @@
             this.FactLocation,
             this.Comment,
             this.AgeAtFact,
+            this.Preferred,
             this.SourceList});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -177,6 +179,22 @@
             this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFacts_CellDoubleClick);
             this.dgFacts.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgFacts_CellFormatting);
             this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgFacts_CellToolTipTextNeeded);
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsRecords});
+            this.statusStrip.Location = new System.Drawing.Point(0, 365);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(857, 22);
+            this.statusStrip.TabIndex = 3;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // tsRecords
+            // 
+            this.tsRecords.Name = "tsRecords";
+            this.tsRecords.Size = new System.Drawing.Size(118, 17);
+            this.tsRecords.Text = "toolStripStatusLabel1";
             // 
             // FactIcon
             // 
@@ -294,6 +312,15 @@
             this.AgeAtFact.ReadOnly = true;
             this.AgeAtFact.Width = 50;
             // 
+            // Preferred
+            // 
+            this.Preferred.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Preferred.DataPropertyName = "Preferred";
+            this.Preferred.HeaderText = "Preferred";
+            this.Preferred.Name = "Preferred";
+            this.Preferred.ReadOnly = true;
+            this.Preferred.Width = 40;
+            // 
             // SourceList
             // 
             this.SourceList.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -303,22 +330,6 @@
             this.SourceList.Name = "SourceList";
             this.SourceList.ReadOnly = true;
             this.SourceList.Width = 300;
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsRecords});
-            this.statusStrip.Location = new System.Drawing.Point(0, 365);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(857, 22);
-            this.statusStrip.TabIndex = 3;
-            this.statusStrip.Text = "statusStrip1";
-            // 
-            // tsRecords
-            // 
-            this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(118, 17);
-            this.tsRecords.Text = "toolStripStatusLabel1";
             // 
             // Facts
             // 
@@ -368,6 +379,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FactLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
         private System.Windows.Forms.DataGridViewTextBoxColumn AgeAtFact;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Preferred;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;
     }
 }

@@ -27,5 +27,6 @@ namespace FTAnalyzer
         string SourceList { get; }
         double Latitude { get; }
         double Longitude { get; }
+        bool Preferred { get; }
     }
 }
