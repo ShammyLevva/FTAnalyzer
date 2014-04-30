@@ -11,7 +11,7 @@ namespace FTAnalyzer
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public int MinAge { get; private set; }
         public int MaxAge { get; private set; }
-        private FactDate birthDate;
+        public FactDate CalculatedBirthDate { get; private set; }
         private string age;
 
         public static Age BIRTH = new Age();
@@ -21,7 +21,7 @@ namespace FTAnalyzer
             MinAge = 0;
             MaxAge = 0;
             age = "0";
-            birthDate = FactDate.UNKNOWN_DATE;
+            CalculatedBirthDate = FactDate.UNKNOWN_DATE;
         }
 
         public Age(Individual ind, FactDate when)
@@ -70,20 +70,23 @@ namespace FTAnalyzer
                 DateTime endDate = when.EndDate;
                 if (int.TryParse(year, out yearno))
                 {
-                    startDate = startDate.AddYears(-yearno);
+                    if(startDate != FactDate.MINDATE)
+                        startDate = startDate.AddYears(-yearno);
                     endDate = endDate.AddYears(-yearno);
                 }
                 if (int.TryParse(month, out monthno))
                 {
-                    startDate = startDate.AddMonths(-monthno);
+                    if (startDate != FactDate.MINDATE)
+                        startDate = startDate.AddMonths(-monthno);
                     endDate = endDate.AddMonths(-monthno);
                 }
                 if (int.TryParse(day, out dayno))
                 {
-                    startDate = startDate.AddDays(-dayno);
+                    if (startDate != FactDate.MINDATE)
+                        startDate = startDate.AddDays(-dayno);
                     endDate = endDate.AddDays(-dayno);
                 }
-                birthDate = new FactDate(startDate, endDate);
+                CalculatedBirthDate = new FactDate(startDate, endDate);
             }
         }
 
@@ -106,8 +109,8 @@ namespace FTAnalyzer
 
         public FactDate GetBirthDate(FactDate when)
         {
-            if (birthDate.IsKnown)
-                return birthDate;
+            if (CalculatedBirthDate.IsKnown)
+                return CalculatedBirthDate;
             else
             {
                 DateTime startDate = when.StartDate.AddYears(-MaxAge);
