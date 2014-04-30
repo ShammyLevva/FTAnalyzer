@@ -63,6 +63,7 @@ namespace FTAnalyzer
 
             // Individual attributes
             AddFacts(node, Fact.NAME);
+            AddFacts(node, Fact.ALIAS);
             AddFacts(node, Fact.PHYSICAL_DESC);
             AddFacts(node, Fact.EDUCATION);
             AddFacts(node, Fact.DEGREE);

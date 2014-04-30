@@ -29,7 +29,7 @@ namespace FTAnalyzer
                 MILITARY = "_MILT", ELECTION = "_ELEC", DEGREE = "_DEG",
                 EMPLOYMENT = "_EMPLOY", MEDICAL_CONDITION = "_MDCL", NAME = "NAME",
                 CUSTOM_EVENT = "EVEN", CUSTOM_FACT = "FACT", SERVICE_NUMBER = "_MILTID",
-                REFERENCE = "REFN", UNKNOWN = "UNKN";
+                REFERENCE = "REFN", UNKNOWN = "UNKN", ALIAS = "ALIA";
 
         public const string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 LOOSEDEATH = "*LOOSED", LOOSEBIRTH = "*LOOSEB", FAMILYSEARCH = "*IGI",
@@ -156,6 +156,7 @@ namespace FTAnalyzer
             COMMENT_FACTS.Add(POSSESSIONS);
             COMMENT_FACTS.Add(PARENT);
             COMMENT_FACTS.Add(CHILDREN);
+            COMMENT_FACTS.Add(ALIAS);
         }
 
         private string GetFactTypeDescription(string factType)
@@ -163,6 +164,7 @@ namespace FTAnalyzer
             switch (factType)
             {
                 case NAME: return "Alternate Name";
+                case ALIAS: return "Also known as";
                 case ADOPTION: return "Adoption";
                 case ANNULMENT: return "Annulment";
                 case BAPTISM: return "Baptism";
