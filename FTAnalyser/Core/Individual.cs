@@ -620,9 +620,17 @@ namespace FTAnalyzer
         public bool IsLostCousinsEntered(CensusDate when) { return IsLostCousinsEntered(when, true); }
         public bool IsLostCousinsEntered(CensusDate when, bool includeUnknownCountries)
         {
-            Predicate<Fact> p = new Predicate<Fact>(f => f.IsValidLostCousins(when));
-            return facts.Any<Fact>(f => p(f) && 
-                (this.BestLocation(when).CensusCountryMatches(when.Country, includeUnknownCountries)) || Countries.IsUnitedKingdom(when.Country) && f.IsUKCensus);
+            foreach(Fact f in facts)
+            {
+                if(f.IsValidLostCousins(when))
+                {
+                    if(this.BestLocation(when).CensusCountryMatches(when.Country, includeUnknownCountries))
+                        return true;
+                    if(Countries.IsUnitedKingdom(when.Country) && f.IsUKCensus)
+                        return true;
+                }
+            }
+            return false;
         }
 
         public bool IsLostCousinsMissingCountry(CensusDate when)
@@ -901,7 +909,7 @@ namespace FTAnalyzer
             {
                 if (IsCensusMissing(census))
                     return 8;
-                else if (IsCensusDone(census, true, false) || (Countries.IsUnitedKingdom(census.Country) && IsCensusDone(census.EquivalentUSCensus, true, false)))
+                if (IsCensusDone(census, true, false) || (Countries.IsUnitedKingdom(census.Country) && IsCensusDone(census.EquivalentUSCensus, true, false)))
                     return 6; // checks if on census outside UK in census year or on prior year (to check US census)
                 if (CensusDate.IsLostCousinsCensusYear(census, true) && IsLostCousinsEntered(census))
                     return 5; // LC entered but no census entered - orange

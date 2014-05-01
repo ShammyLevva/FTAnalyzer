@@ -854,7 +854,7 @@
             this.Ahnentafel.MinimumWidth = 20;
             this.Ahnentafel.Name = "Ahnentafel";
             this.Ahnentafel.ReadOnly = true;
-            this.Ahnentafel.Width = 60;
+            this.Ahnentafel.Width = 75;
             // 
             // ColourCensus
             // 
