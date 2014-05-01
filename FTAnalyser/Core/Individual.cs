@@ -626,7 +626,8 @@ namespace FTAnalyzer
                 {
                     if(this.BestLocation(when).CensusCountryMatches(when.Country, includeUnknownCountries))
                         return true;
-                    if(Countries.IsUnitedKingdom(when.Country) && f.IsUKCensus)
+                    Fact censusFact = LostCousinsCensusFact(f);
+                    if (Countries.IsUnitedKingdom(when.Country) && censusFact !=null && censusFact.IsUKCensus)
                         return true;
                 }
             }

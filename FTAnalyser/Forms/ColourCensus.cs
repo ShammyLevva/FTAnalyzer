@@ -106,11 +106,16 @@ namespace FTAnalyzer.Forms
 
         private void ResetTable()
         {
+            ApplyDefaultSort();
+            foreach (DataGridViewColumn column in dgReportSheet.Columns)
+                column.Width = column.MinimumWidth;
+        }
+
+        private void ApplyDefaultSort()
+        {
             dgReportSheet.Sort(dgReportSheet.Columns["BirthDate"], ListSortDirection.Ascending);
             dgReportSheet.Sort(dgReportSheet.Columns["Forenames"], ListSortDirection.Ascending);
             dgReportSheet.Sort(dgReportSheet.Columns["Surname"], ListSortDirection.Ascending);
-            foreach (DataGridViewColumn column in dgReportSheet.Columns)
-                column.Width = column.MinimumWidth;
         }
 
         private void dgReportSheet_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -314,6 +319,7 @@ namespace FTAnalyzer.Forms
                     break;
             }
             dgReportSheet.Focus();
+            ApplyDefaultSort();
             tsRecords.Text = Properties.Messages.Count + dgReportSheet.RowCount + " records listed.";
             this.Cursor = Cursors.Default;
         }
