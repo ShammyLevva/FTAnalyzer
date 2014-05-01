@@ -74,7 +74,7 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1841_PATTERN = "Class: HO107; Piece: ?(\\d{1,5}); Folio: ?(\\d{1,4}); Page: ?(\\d{1,3})";
         private static readonly string EW_CENSUS_1841_PATTERN2 = "Class: HO107; Piece:? ?(\\d{1,5}); Book: ?(\\d{1,3});.*?Folio: ?(\\d{1,4}); Page: ?(\\d{1,3});";
         private static readonly string EW_CENSUS_1841_PATTERN_FH = "HO107/(\\d{1,5})/(\\d{1,3}) .*F(\\d{1,3}) p(\\d{1,3})";
-        private static readonly string EW_CENSUS_1911_PATTERN = "^RG14PN(\\d{1,6}) .*SN(\\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN = "RG14PN(\\d{1,6}) .*SN(\\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN2 = "Class: RG14; Piece: ?(\\d{1,6});?$";
         private static readonly string EW_CENSUS_1911_PATTERN3 = "Class: RG14; Piece: ?(\\d{1,6}); Schedule Number: ?(\\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN3a = "Class: RG14; Piece: ?(\\d{1,6}); SN: ?(\\d{1,4})";
@@ -82,6 +82,8 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1911_PATTERN_FH = "RG14/PN(\\d{1,6}) .*SN(\\d{1,4})";
         private static readonly string SCOT_CENSUS_PATTERN = "Parish: ?([A-Za-z]+); ED: ?(\\d{1,3}); Page: ?(\\d{1,4}); Line: ?(\\d{1,2})";
         private static readonly string SCOT_CENSUS_PATTERN2 = "(\\d{3}/\\d{2}) (\\d{3}/\\d{2}) (\\d{3,4})";
+
+        private static readonly string UNRECOGNISED_CENSUS = "Unknown census ref: ";
 
         static Fact()
         {
@@ -335,7 +337,8 @@ namespace FTAnalyzer
                             else
                                 ft.XmlErrorBox.AppendText("Source " + srcref + " not found." + "\n");
                         }
-                        GetCensusReference(n);
+                        if(IsCensusFact)
+                            GetCensusReference(n);
                     }
                     if (FactType == DEATH)
                     {
@@ -500,6 +503,10 @@ namespace FTAnalyzer
                     this.IsUKCensus = true;
                     return;
                 }
+                // no match so store text in comment
+                if (this.Comment.Length > 0)
+                    Comment += "\n";
+                Comment += UNRECOGNISED_CENSUS + text;
             }
             // now check sources to see if census reference is in title page
             foreach (FactSource fs in Sources)
@@ -795,15 +802,7 @@ namespace FTAnalyzer
         {
             get
             {
-                if (Location.Country.Equals(Countries.CANADA) && FactDate.Overlaps(CensusDate.CANADACENSUS1881))
-                    return "Canada Census references not yet available";
-                else if (Location.Country.Equals(Countries.UNITED_STATES) && FactDate.Overlaps(CensusDate.USCENSUS1880))
-                    return "US Census references not yet available";
-                else if (Location.Country.Equals(Countries.IRELAND) && FactDate.Overlaps(CensusDate.IRELANDCENSUS1911))
-                    return "Irish Census references not yet available";
-                else if (Location.Country.Equals(Countries.UNITED_STATES) && FactDate.Overlaps(CensusDate.USCENSUS1940))
-                    return "US Census references not yet available";
-                else if (Piece.Length > 0)
+                if (Piece.Length > 0)
                 {
                     if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1881))
                         if(Properties.GeneralSettings.Default.UseCompactCensusRef)
@@ -845,7 +844,8 @@ namespace FTAnalyzer
                         else
                             return "Parish: " + Parish + Parishes.Reference(Parish) + " ED: " + ED + ", Page: " + Page;
                 }
-
+                if (Comment.Contains(UNRECOGNISED_CENSUS))
+                    return Comment;
                 return string.Empty;
             }
         }
