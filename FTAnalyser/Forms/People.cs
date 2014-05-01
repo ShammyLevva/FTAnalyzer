@@ -387,9 +387,9 @@ namespace FTAnalyzer.Forms
 
         private void mnuExportToExcel_Click(object sender, EventArgs e)
         {
-            indReportFormHelper.DoExportToExcel<IDisplayFact>();
+            indReportFormHelper.DoExportToExcel<IDisplayIndividual>();
             if (!splitContainer.Panel2Collapsed)
-                famReportFormHelper.DoExportToExcel<IDisplayFact>();
+                famReportFormHelper.DoExportToExcel<IDisplayFamily>();
         }
 
         private void dgIndividuals_MouseDown(object sender, MouseEventArgs e)
