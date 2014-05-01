@@ -69,21 +69,19 @@ namespace FTAnalyzer
         //Parish: Inverurie; ED: 4; Page: 12; Line: 3; Roll: CSSCT1901_69
         //Class: RG14; Piece: 21983
         //Class: RG14; Piece: 12577; Schedule Number: 103
-        private static readonly string EW_CENSUS_PATTERN = "Class: RG(\\d{2,3}); Piece: ?(\\d{1,5}); Folio: ?(\\d{1,4}); Page: ?(\\d{1,3})";
-        private static readonly string EW_CENSUS_PATTERN_FH = "RG(\\d{1,2})/(\\d{1,5}) F(\\d{1,4}) p(\\d{1,3})";
-        private static readonly string EW_CENSUS_1841_PATTERN = "Class: HO107; Piece: ?(\\d{1,5}); Folio: ?(\\d{1,4}); Page: ?(\\d{1,3})";
-        private static readonly string EW_CENSUS_1841_PATTERN2 = "Class: HO107; Piece:? ?(\\d{1,5}); Book: ?(\\d{1,3});.*?Folio: ?(\\d{1,4}); Page: ?(\\d{1,3});";
-        private static readonly string EW_CENSUS_1841_PATTERN_FH = "HO107/(\\d{1,5})/(\\d{1,3}) .*F(\\d{1,3}) p(\\d{1,3})";
-        private static readonly string EW_CENSUS_1911_PATTERN = "RG14PN(\\d{1,6}) .*SN(\\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN2 = "Class: RG14; Piece: ?(\\d{1,6});?$";
-        private static readonly string EW_CENSUS_1911_PATTERN3 = "Class: RG14; Piece: ?(\\d{1,6}); Schedule Number: ?(\\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN3a = "Class: RG14; Piece: ?(\\d{1,6}); SN: ?(\\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN4 = "Class: RG14; Piece: ?(\\d{1,6}); Page: ?(\\d{1,3})";
-        private static readonly string EW_CENSUS_1911_PATTERN_FH = "RG14/PN(\\d{1,6}) .*SN(\\d{1,4})";
-        private static readonly string SCOT_CENSUS_PATTERN = "Parish: ?([A-Za-z]+); ED: ?(\\d{1,3}); Page: ?(\\d{1,4}); Line: ?(\\d{1,2})";
-        private static readonly string SCOT_CENSUS_PATTERN2 = "(\\d{3}/\\d{2}) (\\d{3}/\\d{2}) (\\d{3,4})";
-
-        private static readonly string UNRECOGNISED_CENSUS = "Unknown census ref: ";
+        private static readonly string EW_CENSUS_PATTERN = @"Class: RG ?(\d{1,3}); Piece: ?(\d{1,5}); Folio: ?(\d{1,4}); Page: ?(\d{1,3})";
+        private static readonly string EW_CENSUS_PATTERN_FH = @"RG ?(\d{1,2})/(\d{1,5}) F(\d{1,4}) p(\d{1,3})";
+        private static readonly string EW_CENSUS_1841_PATTERN = @"Class: HO107; Piece: ?(\d{1,5}); Folio: ?(\d{1,4}); Page: ?(\d{1,3})";
+        private static readonly string EW_CENSUS_1841_PATTERN2 = @"Class: HO107; Piece:? ?(\d{1,5}); Book: ?(\d{1,3});.*?Folio: ?(\d{1,4}); Page: ?(\d{1,3});";
+        private static readonly string EW_CENSUS_1841_PATTERN_FH = @"HO107/(\d{1,5})/(\d{1,3}) .*F(\d{1,3}) p(\d{1,3})";
+        private static readonly string EW_CENSUS_1911_PATTERN = @"RG14PN(\d{1,6}) .*SN(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN2 = @"Class: RG14; Piece: ?(\d{1,6});?$";
+        private static readonly string EW_CENSUS_1911_PATTERN3 = @"Class: RG14; Piece: ?(\d{1,6}); Schedule Number: ?(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN3a = @"Class: RG14; Piece: ?(\d{1,6}); SN: ?(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN4 = @"Class: RG14; Piece: ?(\d{1,6}); Page: ?(\d{1,3})";
+        private static readonly string EW_CENSUS_1911_PATTERN_FH = @"RG14/PN(\d{1,6}) .*SN(\d{1,4})";
+        private static readonly string SCOT_CENSUS_PATTERN = @"Parish: ?([A-Za-z]+); ED: ?(\d{1,3}); Page: ?(\d{1,4}); Line: ?(\d{1,2})";
+        private static readonly string SCOT_CENSUS_PATTERN2 = @"(\d{3}/\d{2}) (\d{3}/\d{2}) (\d{3,4})";
 
         static Fact()
         {
@@ -250,6 +248,7 @@ namespace FTAnalyzer
         public bool Preferred { get; private set; }
         public bool IsUKCensus { get; private set; }
         private string Tag { get; set; }
+        private string unknownCensusRef;
 
         #region Constructors
 
@@ -275,6 +274,7 @@ namespace FTAnalyzer
             this.GedcomAge = null;
             this.Created = false;
             this.Tag = string.Empty;
+            this.unknownCensusRef = string.Empty;
             this.Preferred = false;
             this.IsUKCensus = false;
         }
@@ -344,9 +344,7 @@ namespace FTAnalyzer
                     {
                         Comment = FamilyTree.GetText(node, "CAUS");
                         if (node.FirstChild != null && node.FirstChild.Value == "Y" && !FactDate.IsKnown)
-                        {
                             FactDate = new FactDate(FactDate.MINDATE, DateTime.Now); // if death flag set as Y then death before today.
-                        }
                     }
                     string age = FamilyTree.GetText(node, "AGE");
                     if (age.Length > 0)
@@ -504,9 +502,7 @@ namespace FTAnalyzer
                     return;
                 }
                 // no match so store text in comment
-                if (this.Comment.Length > 0)
-                    Comment += "\n";
-                Comment += UNRECOGNISED_CENSUS + text;
+                unknownCensusRef = "Unknown Census Ref: " + text;
             }
             // now check sources to see if census reference is in title page
             foreach (FactSource fs in Sources)
@@ -804,7 +800,9 @@ namespace FTAnalyzer
             {
                 if (Piece.Length > 0)
                 {
-                    if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1881))
+                    if (Countries.IsEnglandWales(Location.Country) && (FactDate.Overlaps(CensusDate.UKCENSUS1851) || FactDate.Overlaps(CensusDate.UKCENSUS1861) || 
+                        FactDate.Overlaps(CensusDate.UKCENSUS1871) || FactDate.Overlaps(CensusDate.UKCENSUS1881) || FactDate.Overlaps(CensusDate.UKCENSUS1891) || 
+                        FactDate.Overlaps(CensusDate.UKCENSUS1901)))
                         if(Properties.GeneralSettings.Default.UseCompactCensusRef)
                             return Piece + "/" + Folio + "/" + Page;
                         else
@@ -838,14 +836,16 @@ namespace FTAnalyzer
                 }
                 else if (Parish.Length > 0)
                 {
-                    if (Location.Country.Equals(Countries.SCOTLAND) && FactDate.Overlaps(CensusDate.UKCENSUS1881))
+                    if (Location.Country.Equals(Countries.SCOTLAND) && (FactDate.Overlaps(CensusDate.UKCENSUS1851) || FactDate.Overlaps(CensusDate.UKCENSUS1861) ||
+                        FactDate.Overlaps(CensusDate.UKCENSUS1871) || FactDate.Overlaps(CensusDate.UKCENSUS1881) || FactDate.Overlaps(CensusDate.UKCENSUS1891) ||
+                        FactDate.Overlaps(CensusDate.UKCENSUS1901)))
                         if (Properties.GeneralSettings.Default.UseCompactCensusRef)
                             return Parish + Parishes.Reference(Parish) + "/" + ED + "/" + Page;
                         else
                             return "Parish: " + Parish + Parishes.Reference(Parish) + " ED: " + ED + ", Page: " + Page;
                 }
-                if (Comment.Contains(UNRECOGNISED_CENSUS))
-                    return Comment;
+                if (unknownCensusRef.Length > 0)
+                    return unknownCensusRef;
                 return string.Empty;
             }
         }
@@ -853,9 +853,9 @@ namespace FTAnalyzer
         public bool CheckCensusReference(bool present)
         {
             string censusRef = CensusReference;
-            if (present && censusRef.Length > 0 && !censusRef.Contains(UNRECOGNISED_CENSUS))
+            if (present && censusRef.Length > 0 && unknownCensusRef.Length == 0)
                 return true;
-            if(!present && (censusRef.Length == 0 || censusRef.Contains(UNRECOGNISED_CENSUS)))
+            if(!present && (censusRef.Length == 0 || unknownCensusRef.Length > 0))
                 return true;
             return false;
         }
