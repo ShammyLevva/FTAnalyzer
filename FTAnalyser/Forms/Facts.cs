@@ -30,6 +30,8 @@ namespace FTAnalyzer.Forms
             dgFacts.AutoGenerateColumns = false;
             reportFormHelper = new ReportFormHelper(this, this.Text, dgFacts, this.ResetTable, "Facts");
             italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
+            dgFacts.Columns["IndividualID"].Visible = true;
+            dgFacts.Columns["CensusReference"].Visible = false;
         }
 
         public Facts(Individual individual)
@@ -39,7 +41,7 @@ namespace FTAnalyzer.Forms
             AddIndividualsFacts(individual, null);
             this.Text = "Facts Report for " + individual.IndividualID + ": " + individual.Name;
             SetupFacts();
-            dgFacts.Columns["IndividualID"].Visible = false;
+            dgFacts.Columns["IndividualID"].Visible = false; // all same individual so hide ID
         }
 
         public Facts(Family family)
@@ -50,7 +52,6 @@ namespace FTAnalyzer.Forms
                 facts.Add(f);
             this.Text = "Facts Report for " + family.FamilyRef;
             SetupFacts();
-            dgFacts.Columns["IndividualID"].Visible = true;
         }
 
         public Facts(IEnumerable<Individual> individuals, List<string> factTypes)
@@ -61,7 +62,22 @@ namespace FTAnalyzer.Forms
                 AddIndividualsFacts(ind, factTypes);
             this.Text = "Facts Report for all " + individuals.Count() + " individuals. Facts count: " + facts.Count;
             SetupFacts();
-            dgFacts.Columns["IndividualID"].Visible = true;
+        }
+
+        public Facts(bool censusRefPresent)
+            : this()
+        {
+            this.allFacts = true;
+            foreach (Individual ind in ft.AllIndividuals)
+                foreach (Fact f in ind.AllFacts)
+                    if (f.IsCensusFact && f.CheckCensusReference(censusRefPresent))
+                        facts.Add(new DisplayFact(ind, f));
+            if(censusRefPresent)
+                this.Text = "Census Reference Report. Facts count: " + facts.Count;
+            else
+                this.Text = "Missing/Unknown Census Reference Report. Facts count: " + facts.Count;
+            SetupFacts();
+            dgFacts.Columns["CensusReference"].Visible = true;
         }
 
         public Facts(FactSource source)
@@ -71,13 +87,12 @@ namespace FTAnalyzer.Forms
             this.facts = ft.GetDisplayFacts(source);
             this.Text = "Facts Report for source: " + source.ToString() + ". Facts count: " + facts.Count;
             SetupFacts();
-            dgFacts.Columns["IndividualID"].Visible = true;
         }
 
         private void AddIndividualsFacts(Individual individual, List<string> factTypes)
         {
             foreach (Fact f in individual.AllFacts)
-                if(factTypes == null || factTypes.Contains(f.FactTypeDescription))
+                if (factTypes == null || factTypes.Contains(f.FactTypeDescription))
                     facts.Add(new DisplayFact(individual, f));
             foreach (Fact f in individual.ErrorFacts)
             {
@@ -185,7 +200,7 @@ namespace FTAnalyzer.Forms
         {
             this.Dispose();
         }
- 
+
         private void dgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)

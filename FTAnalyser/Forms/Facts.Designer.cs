@@ -54,6 +54,7 @@
             this.RelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CensusReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AgeAtFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Preferred = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.SourceList = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -156,6 +157,7 @@
             this.RelationToRoot,
             this.FactLocation,
             this.Comment,
+            this.CensusReference,
             this.AgeAtFact,
             this.Preferred,
             this.SourceList});
@@ -302,6 +304,15 @@
             this.Comment.ReadOnly = true;
             this.Comment.Width = 250;
             // 
+            // CensusReference
+            // 
+            this.CensusReference.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CensusReference.DataPropertyName = "CensusReference";
+            this.CensusReference.HeaderText = "CensusReference";
+            this.CensusReference.MinimumWidth = 25;
+            this.CensusReference.Name = "CensusReference";
+            this.CensusReference.ReadOnly = true;
+            // 
             // AgeAtFact
             // 
             this.AgeAtFact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -378,6 +389,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RelationToRoot;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CensusReference;
         private System.Windows.Forms.DataGridViewTextBoxColumn AgeAtFact;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Preferred;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;

@@ -23,6 +23,7 @@ namespace FTAnalyzer
         string GeocodeStatus { get; }
         string GoogleLocation { get; }
         string GoogleResultType { get; }
+        string CensusReference { get; }
         string Comment { get; }
         string SourceList { get; }
         double Latitude { get; }

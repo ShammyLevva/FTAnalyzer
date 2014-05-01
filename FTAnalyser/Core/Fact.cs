@@ -850,6 +850,16 @@ namespace FTAnalyzer
             }
         }
 
+        public bool CheckCensusReference(bool present)
+        {
+            string censusRef = CensusReference;
+            if (present && censusRef.Length > 0 && !censusRef.Contains(UNRECOGNISED_CENSUS))
+                return true;
+            if(!present && (censusRef.Length == 0 || censusRef.Contains(UNRECOGNISED_CENSUS)))
+                return true;
+            return false;
+        }
+
         public override string ToString()
         {
             return FactTypeDescription + ": " + FactDate + (Location.ToString().Length > 0 ? " at " + Location : string.Empty);

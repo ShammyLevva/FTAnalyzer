@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.7.0.2";
+        public string VERSION = "3.7.1.0-beta1";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -329,40 +329,6 @@ namespace FTAnalyzer
                 frmInd.Show();
                 HourGlass(false);
             }
-        }
-
-        private void btnShowCensus_Click(object sender, EventArgs e)
-        {
-            bool censusDone = sender == btnShowCensusEntered;
-            Predicate<CensusIndividual> filter = CreateCensusIndividualFilter(censusDone);
-            Census census = new Census(cenDate.SelectedDate);
-            census.SetupCensus(filter, censusDone);
-            if (censusDone)
-                census.Text = "People entered with a " + cenDate.SelectedDate.StartDate.Year.ToString() + " " + cenDate.CensusCountry + " Census Record";
-            else
-                census.Text = "People missing a " + cenDate.SelectedDate.StartDate.Year.ToString() + " " + cenDate.CensusCountry + " Census Record that you can search for";
-            DisposeDuplicateForms(census);
-            census.Show();
-        }
-
-        private void btnMissingCensusLocation_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            People people = new People();
-            people.SetupMissingCensusLocation();
-            DisposeDuplicateForms(people);
-            people.Show();
-            HourGlass(false);
-        }
-
-        private void btnDuplicateCensus_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            People people = new People();
-            people.SetupDuplicateCensus();
-            DisposeDuplicateForms(people);
-            people.Show();
-            HourGlass(false);
         }
 
         private void rtbOutput_TextChanged(object sender, EventArgs e)
@@ -2092,6 +2058,58 @@ namespace FTAnalyzer
             Properties.Settings.Default.HideIgnoredDuplicates = ckbHideIgnoredDuplicates.Checked;
             Properties.Settings.Default.Save();
             SetPossibleDuplicates();
+        }
+        #endregion
+
+        #region Census Tab
+        private void btnShowCensus_Click(object sender, EventArgs e)
+        {
+            bool censusDone = sender == btnShowCensusEntered;
+            Predicate<CensusIndividual> filter = CreateCensusIndividualFilter(censusDone);
+            Census census = new Census(cenDate.SelectedDate);
+            census.SetupCensus(filter, censusDone);
+            if (censusDone)
+                census.Text = "People entered with a " + cenDate.SelectedDate.StartDate.Year.ToString() + " " + cenDate.CensusCountry + " Census Record";
+            else
+                census.Text = "People missing a " + cenDate.SelectedDate.StartDate.Year.ToString() + " " + cenDate.CensusCountry + " Census Record that you can search for";
+            DisposeDuplicateForms(census);
+            census.Show();
+        }
+
+        private void btnMissingCensusLocation_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            People people = new People();
+            people.SetupMissingCensusLocation();
+            DisposeDuplicateForms(people);
+            people.Show();
+            HourGlass(false);
+        }
+
+        private void btnDuplicateCensus_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            People people = new People();
+            people.SetupDuplicateCensus();
+            DisposeDuplicateForms(people);
+            people.Show();
+            HourGlass(false);
+        }
+
+        private void btnCensusRefs_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            Facts facts = new Facts(true);
+            facts.Show();
+            HourGlass(false);
+        }
+
+        private void btnMissingCensusRefs_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            Facts facts = new Facts(false);
+            facts.Show();
+            HourGlass(false);
         }
         #endregion
 
