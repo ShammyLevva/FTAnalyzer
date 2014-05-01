@@ -633,7 +633,7 @@ namespace FTAnalyzer
             }
             return false;
         }
-
+        
         public bool IsLostCousinsMissingCountry(CensusDate when)
         {
             Predicate<Fact> p = new Predicate<Fact>(f => f.IsValidLostCousins(when));
