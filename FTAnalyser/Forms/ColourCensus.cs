@@ -286,7 +286,7 @@ namespace FTAnalyzer.Forms
                     list = new List<IDisplayColourCensus>();
                     list.AddRange(BuildFilter(3, true));
                     list.AddRange(BuildFilter(4, true));
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list);
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list.Distinct().ToList<IDisplayColourCensus>());
                     break;
                 case 3: // Lost Cousins Missing (Yellows)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(2, false));
@@ -298,7 +298,7 @@ namespace FTAnalyzer.Forms
                     list = new List<IDisplayColourCensus>();
                     list.AddRange(BuildFilter(6, false));
                     list.AddRange(BuildFilter(7, false));
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list);
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list.Distinct().ToList<IDisplayColourCensus>());
                     break;
                 case 6: // Some Missing (Some Red)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(1, false));
@@ -307,7 +307,7 @@ namespace FTAnalyzer.Forms
                     list = new List<IDisplayColourCensus>();
                     list.AddRange(BuildFilter(3, false));
                     list.AddRange(BuildFilter(4, false));
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list);
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list.Distinct().ToList<IDisplayColourCensus>());
                     break;
                 case 8: // Known Missing (Mid Green)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(8, false));
