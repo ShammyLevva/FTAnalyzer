@@ -40,6 +40,7 @@ namespace FTAnalyzer
         private static readonly string SPACEFIX = "^(\\d{1,2}) *([A-Za-z]{3}) *(\\d{0,4})$";
 
         public static readonly FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
+        public static readonly FactDate MARRIAGE_LESS_THAN_13 = new FactDate("1600");
 
         public enum FactDateType
         {
