@@ -634,7 +634,7 @@ namespace FTAnalyzer
 
         public bool CheckCensusReference(bool present)
         {
-            return CensusReference !=null & CensusReference.CheckCensusReference(present);
+            return CensusReference !=null && CensusReference.CheckCensusReference(present);
         }
 
         public override string ToString()
