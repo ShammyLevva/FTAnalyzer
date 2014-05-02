@@ -71,8 +71,9 @@ namespace FTAnalyzer
         //Class: RG14; Piece: 12577; Schedule Number: 103
         private static readonly string EW_CENSUS_PATTERN = @"Class: RG ?(\d{1,3}); ?Piece:? ?(\d{1,5}); ?Folio:? ?(\d{1,4}); ?Page:? ?(\d{1,3})";
         private static readonly string EW_CENSUS_PATTERN_FH = @"RG ?(\d{1,2})/(\d{1,5}) F(\d{1,4}) p(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_PATTERN = @"Class: HO107; ?Piece: ?(\d{1,5}); ?Folio:? ?(\d{1,4}); ?Page:? ?(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_PATTERN2 = @"Class: HO107; ?Piece:? ?(\d{1,5}); ?Book:? ?(\d{1,3});.*?Folio:? ?(\d{1,4}); ?Page:? ?(\d{1,3});";
+        private static readonly string EW_CENSUS_1841_PATTERN = @"Class: HO107; ?Piece:? ?(\d{1,5}); ?Folio:? ?(\d{1,4}); ?Page:? ?(\d{1,3})";
+        private static readonly string EW_CENSUS_1841_PATTERN2 = @"Class: HO107; ?Piece:? ?(\d{1,5}); ?Book:? ?(\d{1,3});.*Folio:? ?(\d{1,4}); ?Page:? ?(\d{1,3})";
+        private static readonly string EW_CENSUS_1841_PATTERN3 = @"Class: HO107; ?Piece:? ?(\d{1,5}); ?Book:? ?(\d{1,3});.*Page:? ?(\d{1,3})";
         private static readonly string EW_CENSUS_1841_PATTERN_FH = @"HO107/(\d{1,5})/(\d{1,3}) .*F(\d{1,3}) p(\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN = @"RG14PN(\d{1,6}) .*SN(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN2 = @"Class: RG14; ?Piece:? ?(\d{1,6});?$";
@@ -311,16 +312,14 @@ namespace FTAnalyzer
                         FamilyTree.GetText(node, "PLAC/MAP/LATI"), FamilyTree.GetText(node, "PLAC/MAP/LONG"));
                     SetAddress(FactType, node);
 
+                    // only check UK census dates for errors as those are used for colour census
                     if (FactType.Equals(CENSUS) && Location.IsUnitedKingdom)
-                    {  // only check UK census dates for errors as those are used for colour census
                         CheckCensusDate("Census");
-                    }
 
                     // need to check residence after setting location
                     if (FactType.Equals(RESIDENCE) && Properties.GeneralSettings.Default.UseResidenceAsCensus)
-                    {
                         CheckResidenceCensusDate();
-                    }
+
                     // now iterate through source elements of the fact finding all sources
                     XmlNodeList list = node.SelectNodes("SOUR");
                     foreach (XmlNode n in list)
@@ -458,6 +457,16 @@ namespace FTAnalyzer
                     this.Book = matcher.Groups[2].ToString();
                     this.Folio = matcher.Groups[3].ToString();
                     this.Page = matcher.Groups[4].ToString();
+                    this.IsUKCensus = true;
+                    return;
+                }
+                matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN3, RegexOptions.IgnoreCase);
+                if (matcher.Success)
+                {
+                    this.Piece = matcher.Groups[1].ToString();
+                    this.Book = matcher.Groups[2].ToString();
+                    this.Folio = "Missing";
+                    this.Page = matcher.Groups[3].ToString();
                     this.IsUKCensus = true;
                     return;
                 }
