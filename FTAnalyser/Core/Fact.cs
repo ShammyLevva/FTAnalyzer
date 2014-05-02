@@ -42,7 +42,7 @@ namespace FTAnalyzer
             EDUCATION, DEGREE, ADOPTION, BAR_MITZVAH, BAS_MITZVAH, ADULT_CHRISTENING, CONFIRMATION, 
             FIRST_COMMUNION, ORDINATION, NATURALIZATION, GRADUATION, RETIREMENT, LOSTCOUSINS, 
             MARR_CONTRACT, MARR_LICENSE, MARR_SETTLEMENT, MARRIAGE, MARRIAGE_BANN, DEATH, 
-            CREMATION, BURIAL
+            CREMATION, BURIAL, CENSUS
                     });
 
         public static readonly ISet<string> LOOSE_DEATH_FACTS = new HashSet<string>(new string[] {
@@ -246,7 +246,7 @@ namespace FTAnalyzer
         public Age GedcomAge { get; private set; }
         public bool Created { get; protected set; }
         public bool Preferred { get; private set; }
-        public bool IsUKCensus { get; private set; }
+        private bool IsUKCensus { get; set; }
         private string Tag { get; set; }
         private string unknownCensusRef;
 
@@ -794,13 +794,18 @@ namespace FTAnalyzer
             return FactDate.IsKnown && FactType == Fact.LOSTCOUSINS && FactDate.Overlaps(when) && FactDate.IsNotBEForeOrAFTer && FactErrorLevel == Fact.FactError.GOOD;
         }
 
+        public bool IsOverseasUKCensus(string country)
+        {
+            return !Countries.IsUnitedKingdom(country) && IsUKCensus;
+        }
+
         public string CensusReference
         {
             get
             {
                 if (Piece.Length > 0)
                 {
-                    if (Countries.IsEnglandWales(Location.Country) || (!Countries.IsUnitedKingdom(Location.Country) && IsUKCensus))
+                    if (Countries.IsEnglandWales(Location.Country) || IsOverseasUKCensus(Location.Country))
                     {
                         if ((FactDate.Overlaps(CensusDate.UKCENSUS1851) || FactDate.Overlaps(CensusDate.UKCENSUS1861) || FactDate.Overlaps(CensusDate.UKCENSUS1871) ||
                             FactDate.Overlaps(CensusDate.UKCENSUS1881) || FactDate.Overlaps(CensusDate.UKCENSUS1891) || FactDate.Overlaps(CensusDate.UKCENSUS1901)))
