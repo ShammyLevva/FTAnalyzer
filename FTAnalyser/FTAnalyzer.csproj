@@ -241,6 +241,7 @@
     <Compile Include="Core\Displays\IDisplaySource.cs" />
     <Compile Include="Core\DuplicateIndividual.cs" />
     <Compile Include="Core\Exports\ExportFact.cs" />
+    <Compile Include="Core\Exports\IExportReferrals.cs" />
     <Compile Include="Core\Exports\IExportIndividual.cs" />
     <Compile Include="Core\Exports\ExportReferrals.cs" />
     <Compile Include="Core\Exports\NonDuplicate.cs" />

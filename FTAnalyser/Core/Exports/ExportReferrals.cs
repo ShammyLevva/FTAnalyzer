@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    public class ExportReferrals
+    public class ExportReferrals : IExportReferrals
     {
         private Individual ind;
         private Fact f;
@@ -21,6 +21,7 @@ namespace FTAnalyzer
             this.Include = ind.IsBloodDirect;
         }
 
+        public string CensusDate { get { return f.FactDate.ToString(); } }
         public string CensusReference { get { return censusFact == null ? "Census Not Found" : censusFact.CensusReference; } }
         public string IndividualID { get { return ind.IndividualID; } }
         public string FamilyID { get { return ind.ReferralFamilyID; } }
@@ -47,21 +48,21 @@ namespace FTAnalyzer
         {
             if (censusFact == null)
                 return string.Empty;
-            if (censusFact.FactDate.Overlaps(CensusDate.EWCENSUS1881) && censusFact.Location.IsEnglandWales)
+            if (censusFact.FactDate.Overlaps(FTAnalyzer.CensusDate.EWCENSUS1881) && censusFact.Location.IsEnglandWales)
                 return "RG11";
-            if (censusFact.FactDate.Overlaps(CensusDate.SCOTCENSUS1881) && censusFact.Location.Equals(Countries.SCOTLAND))
+            if (censusFact.FactDate.Overlaps(FTAnalyzer.CensusDate.SCOTCENSUS1881) && censusFact.Location.Equals(Countries.SCOTLAND))
                 return "SCT1";
-            if (censusFact.FactDate.Overlaps(CensusDate.CANADACENSUS1881) && censusFact.Location.Equals(Countries.CANADA))
+            if (censusFact.FactDate.Overlaps(FTAnalyzer.CensusDate.CANADACENSUS1881) && censusFact.Location.Equals(Countries.CANADA))
                 return "CAN1";
-            if (censusFact.FactDate.Overlaps(CensusDate.USCENSUS1880) && censusFact.Location.Equals(Countries.UNITED_STATES))
+            if (censusFact.FactDate.Overlaps(FTAnalyzer.CensusDate.USCENSUS1880) && censusFact.Location.Equals(Countries.UNITED_STATES))
                 return "USA1";
-            if (censusFact.FactDate.Overlaps(CensusDate.EWCENSUS1841) && censusFact.Location.IsEnglandWales)
+            if (censusFact.FactDate.Overlaps(FTAnalyzer.CensusDate.EWCENSUS1841) && censusFact.Location.IsEnglandWales)
                 return "1841";
-            if (censusFact.FactDate.Overlaps(CensusDate.IRELANDCENSUS1911) && censusFact.Location.Equals(Countries.IRELAND))
+            if (censusFact.FactDate.Overlaps(FTAnalyzer.CensusDate.IRELANDCENSUS1911) && censusFact.Location.Equals(Countries.IRELAND))
                 return "0IRL";
-            if (censusFact.FactDate.Overlaps(CensusDate.EWCENSUS1911) && censusFact.Location.IsEnglandWales)
+            if (censusFact.FactDate.Overlaps(FTAnalyzer.CensusDate.EWCENSUS1911) && censusFact.Location.IsEnglandWales)
                 return "0ENG";
-            if (censusFact.FactDate.Overlaps(CensusDate.USCENSUS1940) && censusFact.Location.Equals(Countries.UNITED_STATES))
+            if (censusFact.FactDate.Overlaps(FTAnalyzer.CensusDate.USCENSUS1940) && censusFact.Location.Equals(Countries.UNITED_STATES))
                 return "USA4";
             return string.Empty;
         }

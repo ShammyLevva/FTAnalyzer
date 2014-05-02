@@ -95,6 +95,17 @@ namespace FTAnalyzer
             parent.Cursor = Cursors.Default;
         }
 
+        public void DoExportToExcel(List<IExportReferrals> list)
+        {
+            if (list == null || list.Count == 0)
+                return;
+            parent.Cursor = Cursors.WaitCursor;
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            DataTable dt = convertor.ToDataTable(list);
+            ExportToExcel.Export(dt);
+            parent.Cursor = Cursors.Default;
+        }
+
         public void SaveColumnLayout(string filename)
         {
             DataTable dt = new DataTable("table");

@@ -531,7 +531,7 @@ namespace FTAnalyzer
                     this.IsUKCensus = true;
                     return;
                 }
-                // no match so store text in comment
+                // no match so store text 
                 if (unknownCensusRef.Length == 0)
                     unknownCensusRef = "Unknown Census Ref: " + text;
                 else

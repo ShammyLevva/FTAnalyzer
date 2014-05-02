@@ -83,7 +83,7 @@ namespace FTAnalyzer.Forms
 
         private void mnuExportToExcel_Click(object sender, EventArgs e)
         {
-            reportFormHelper.DoExportToExcel<ExportReferrals>();
+            reportFormHelper.DoExportToExcel(referrals.ToList<IExportReferrals>());
         }
 
         private void LostCousinsReferral_FormClosed(object sender, FormClosedEventArgs e)
