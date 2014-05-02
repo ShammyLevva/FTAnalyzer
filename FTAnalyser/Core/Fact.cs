@@ -62,30 +62,6 @@ namespace FTAnalyzer
         private static readonly Dictionary<string, string> CUSTOM_TAGS = new Dictionary<string, string>();
         private static readonly HashSet<string> COMMENT_FACTS = new HashSet<string>();
 
-        //Database online. Class: HO107; Piece: 1782; Folio: 719; Page: 25; GSU
-        //Database online. Class: HO107; Piece 709; Book: 6; Civil Parish: StLeonard Shoreditch; County: Middlesex; Enumeration District: 19;Folio: 53; Page: 15; Line: 16; GSU roll: 438819.
-        //Database online. Class: RG9; Piece: 1105; Folio: 90; Page: 21; GSU
-        //RG14PN22623 RG78PN1327 RD455 SD10 ED13 SN183
-        //Parish: Inverurie; ED: 4; Page: 12; Line: 3; Roll: CSSCT1901_69
-        //Class: RG14; Piece: 21983
-        //Class: RG14; Piece: 12577; Schedule Number: 103
-        private static readonly string EW_CENSUS_PATTERN = @"Class: RG ?(\d{1,3}); ?Piece:? ?(\d{1,5}); ?Folio:? ?(\d{1,4}); ?Page:? ?(\d{1,3})";
-        private static readonly string EW_CENSUS_PATTERN2 = @"Class: RG ?(\d{1,3}); ?Piece:? ?(\d{1,5}); ?Folio:? ?(\d{1,4})";
-        private static readonly string EW_CENSUS_PATTERN_FH = @"RG ?(\d{1,2})/(\d{1,5}) F(\d{1,4}) p(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_PATTERN = @"Class: HO107; ?Piece:? ?(\d{1,5}); ?Folio:? ?(\d{1,4}); ?Page:? ?(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_PATTERN2 = @"Class: HO107; ?Piece:? ?(\d{1,5}); ?Book:? ?(\d{1,3});.*Folio:? ?(\d{1,4}); ?Page:? ?(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_PATTERN3 = @"Class: HO107; ?Piece:? ?(\d{1,5}); ?Book:? ?(\d{1,3});.*Page:? ?(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_PATTERN4 = @"Class: HO107; ?Piece:? ?(\d{1,5});.*Page:? ?(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_PATTERN_FH = @"HO107/(\d{1,5})/(\d{1,3}) .*F(\d{1,3}) p(\d{1,3})";
-        private static readonly string EW_CENSUS_1911_PATTERN = @"RG14PN(\d{1,6}) .*SN(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN2 = @"Class: RG14; ?Piece:? ?(\d{1,6});?$";
-        private static readonly string EW_CENSUS_1911_PATTERN3 = @"Class: RG14; ?Piece:? ?(\d{1,6}); ?Schedule Number:? ?(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN3a = @"Class: RG14; ?Piece:? ?(\d{1,6}); ?SN:? ?(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN4 = @"Class: RG14; ?Piece:? ?(\d{1,6}); ?Page:? ?(\d{1,3})";
-        private static readonly string EW_CENSUS_1911_PATTERN_FH = @"RG14/PN(\d{1,6}) .*SN(\d{1,4})";
-        private static readonly string SCOT_CENSUS_PATTERN = @"Parish:? ?([A-Za-z .'-]+); ?ED:? ?(\d{1,3}[A-Za-z]?); ?Page:? ?(\d{1,4}); ?Line:? ?(\d{1,2})";
-        private static readonly string SCOT_CENSUS_PATTERN2 = @"(\d{3}/\d{2}) (\d{3}/\d{2}) (\d{3,4})";
-
         static Fact()
         {
             CUSTOM_TAGS.Add("IGI Search", FAMILYSEARCH);
@@ -239,19 +215,11 @@ namespace FTAnalyzer
 
         public enum FactError { GOOD = 0, WARNINGALLOW = 1, WARNINGIGNORE = 2, ERROR = 3, QUESTIONABLE = 4 };
 
-        public string Piece { get; private set; }
-        public string Folio { get; private set; }
-        public string Page { get; private set; }
-        public string Book { get; private set; }
-        public string Schedule { get; private set; }
-        public string Parish { get; private set; }
-        public string ED { get; private set; }
         public Age GedcomAge { get; private set; }
         public bool Created { get; protected set; }
         public bool Preferred { get; private set; }
-        private bool IsUKCensus { get; set; }
         private string Tag { get; set; }
-        private string unknownCensusRef;
+        public CensusReference CensusReference { get; private set; }
 
         #region Constructors
 
@@ -267,19 +235,10 @@ namespace FTAnalyzer
             this.FactErrorLevel = FactError.GOOD;
             this.FactErrorMessage = string.Empty;
             this.FactErrorNumber = 0;
-            this.Piece = string.Empty;
-            this.Folio = string.Empty;
-            this.Book = string.Empty;
-            this.Page = string.Empty;
-            this.Schedule = string.Empty;
-            this.Parish = string.Empty;
-            this.ED = string.Empty;
             this.GedcomAge = null;
             this.Created = false;
             this.Tag = string.Empty;
-            this.unknownCensusRef = string.Empty;
             this.Preferred = false;
-            this.IsUKCensus = false;
         }
 
         public Fact(XmlNode node, string factRef, bool preferred)
@@ -339,8 +298,7 @@ namespace FTAnalyzer
                                 ft.XmlErrorBox.AppendText("Source " + srcref + " not found." + "\n");
                         }
                         if (IsCensusFact)
-                            if (GetCensusReference(n))
-                                unknownCensusRef = string.Empty;
+                            this.CensusReference = new CensusReference(this, n);
                     }
                     if (FactType == DEATH)
                     {
@@ -410,166 +368,6 @@ namespace FTAnalyzer
                 result = result + ", " + Location.GEDCOMLocation;
             if(!Fact.COMMENT_FACTS.Contains(factType))
                 Location = FactLocation.GetLocation(result);
-        }
-
-        private bool GetCensusReference(XmlNode n)
-        {
-            string text = FamilyTree.GetText(n, "PAGE");
-            if (text.Length > 0)
-            {
-                Match matcher = Regex.Match(text, SCOT_CENSUS_PATTERN, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Parish = matcher.Groups[1].ToString();
-                    this.ED = matcher.Groups[2].ToString();
-                    this.Page = matcher.Groups[3].ToString();
-                    this.IsUKCensus = true;
-                    return true;
-                }
-                matcher = Regex.Match(text, SCOT_CENSUS_PATTERN2, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Parish = matcher.Groups[1].ToString().Replace("/00", "").Replace("/", "-");
-                    this.ED = matcher.Groups[2].ToString().Replace("/00", "").TrimStart('0');
-                    this.Page = matcher.Groups[3].ToString().TrimStart('0');
-                    this.IsUKCensus = true;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_PATTERN, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[2].ToString();
-                    this.Folio = matcher.Groups[3].ToString();
-                    this.Page = matcher.Groups[4].ToString();
-                    this.IsUKCensus = true;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_PATTERN2, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[2].ToString();
-                    this.Folio = matcher.Groups[3].ToString();
-                    this.Page = "Missing";
-                    this.IsUKCensus = true;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Folio = matcher.Groups[2].ToString();
-                    this.Page = matcher.Groups[3].ToString();
-                    this.IsUKCensus = true;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN2, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Book = matcher.Groups[2].ToString();
-                    this.Folio = matcher.Groups[3].ToString();
-                    this.Page = matcher.Groups[4].ToString();
-                    this.IsUKCensus = true;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN3, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Book = matcher.Groups[2].ToString();
-                    this.Folio = "Missing";
-                    this.Page = matcher.Groups[3].ToString();
-                    this.IsUKCensus = true;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN4, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Book = "Missing";
-                    this.Folio = "Missing";
-                    this.Page = matcher.Groups[2].ToString();
-                    this.IsUKCensus = true;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Schedule = matcher.Groups[2].ToString();
-                    this.IsUKCensus = true;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN2, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Schedule = "Missing";
-                    this.IsUKCensus = true;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Schedule = matcher.Groups[2].ToString();
-                    this.IsUKCensus = true;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3a, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Schedule = matcher.Groups[2].ToString();
-                    this.IsUKCensus = true;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN4, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Page = matcher.Groups[2].ToString();
-                    this.IsUKCensus = true;
-                    return true;
-                }
-                // no match so store text 
-                if (unknownCensusRef.Length == 0)
-                    unknownCensusRef = "Unknown Census Ref: " + text;
-                else
-                    unknownCensusRef += "\n" + text;
-            }
-            // now check sources to see if census reference is in title page
-            foreach (FactSource fs in Sources)
-            {
-                Match matcher = Regex.Match(fs.SourceTitle, EW_CENSUS_1841_PATTERN_FH, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Book = matcher.Groups[2].ToString();
-                    this.Folio = matcher.Groups[3].ToString();
-                    this.Page = matcher.Groups[4].ToString();
-                    this.IsUKCensus = true;
-                    return true;
-                }
-                matcher = Regex.Match(fs.SourceTitle, EW_CENSUS_PATTERN_FH, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[2].ToString();
-                    this.Folio = matcher.Groups[3].ToString();
-                    this.Page = matcher.Groups[4].ToString();
-                    this.IsUKCensus = true;
-                    return true;
-                }
-                matcher = Regex.Match(fs.SourceTitle, EW_CENSUS_1911_PATTERN_FH, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Schedule = matcher.Groups[2].ToString();
-                    this.IsUKCensus = true;
-                    return true;
-                }
-            }
-            return false;
         }
 
         public Fact(string factType, FactDate date, string comment = "", bool preferred = true)
@@ -831,75 +629,12 @@ namespace FTAnalyzer
 
         public bool IsOverseasUKCensus(string country)
         {
-            return !Countries.IsUnitedKingdom(country) && IsUKCensus;
-        }
-
-        public string CensusReference
-        {
-            get
-            {
-                if (Piece.Length > 0)
-                {
-                    if (Countries.IsEnglandWales(Location.Country) || IsOverseasUKCensus(Location.Country))
-                    {
-                        if ((FactDate.Overlaps(CensusDate.UKCENSUS1851) || FactDate.Overlaps(CensusDate.UKCENSUS1861) || FactDate.Overlaps(CensusDate.UKCENSUS1871) ||
-                            FactDate.Overlaps(CensusDate.UKCENSUS1881) || FactDate.Overlaps(CensusDate.UKCENSUS1891) || FactDate.Overlaps(CensusDate.UKCENSUS1901)))
-                            if (Properties.GeneralSettings.Default.UseCompactCensusRef)
-                                return Piece + "/" + Folio + "/" + Page;
-                            else
-                                return "Piece: " + Piece + ", Folio: " + Folio + ", Page: " + Page;
-                        if (FactDate.Overlaps(CensusDate.UKCENSUS1841))
-                        {
-                            if (Book.Length > 0)
-                                if (Properties.GeneralSettings.Default.UseCompactCensusRef)
-                                    return Piece + "/" + Book + "/" + Folio + "/" + Page;
-                                else
-                                    return "Piece: " + Piece + ", Book: " + Book + ", Folio: " + Folio + ", Page: " + Page;
-                            else
-                                if (Properties.GeneralSettings.Default.UseCompactCensusRef)
-                                    return Piece + "/see image/" + Folio + "/" + Page;
-                                else
-                                    return "Piece: " + Piece + ", Book: see census image (stamped on the census page after the piece number), Folio: " + Folio + ", Page: " + Page;
-                        }
-                        if (FactDate.Overlaps(CensusDate.UKCENSUS1911))
-                        {
-                            if (Schedule.Length > 0)
-                                if (Properties.GeneralSettings.Default.UseCompactCensusRef)
-                                    return Piece + "/" + Schedule;
-                                else
-                                    return "Piece: " + Piece + ", Schedule: " + Schedule;
-                            else
-                                if (Properties.GeneralSettings.Default.UseCompactCensusRef)
-                                    return Piece + "/" + Page;
-                                else
-                                    return "Piece: " + Piece + ", Page: " + Page;
-                        }
-                    }
-                }
-                else if (Parish.Length > 0)
-                {
-                    if (Location.Country.Equals(Countries.SCOTLAND) && (FactDate.Overlaps(CensusDate.UKCENSUS1851) || FactDate.Overlaps(CensusDate.UKCENSUS1861) ||
-                        FactDate.Overlaps(CensusDate.UKCENSUS1871) || FactDate.Overlaps(CensusDate.UKCENSUS1881) || FactDate.Overlaps(CensusDate.UKCENSUS1891) ||
-                        FactDate.Overlaps(CensusDate.UKCENSUS1901)))
-                        if (Properties.GeneralSettings.Default.UseCompactCensusRef)
-                            return Parish + Parishes.Reference(Parish) + "/" + ED + "/" + Page;
-                        else
-                            return "Parish: " + Parish + Parishes.Reference(Parish) + " ED: " + ED + ", Page: " + Page;
-                }
-                if (unknownCensusRef.Length > 0)
-                    return unknownCensusRef;
-                return string.Empty;
-            }
+            return !Countries.IsUnitedKingdom(country) && CensusReference.IsUKCensus;
         }
 
         public bool CheckCensusReference(bool present)
         {
-            string censusRef = CensusReference;
-            if (present && censusRef.Length > 0 && unknownCensusRef.Length == 0)
-                return true;
-            if(!present && (censusRef.Length == 0 || unknownCensusRef.Length > 0))
-                return true;
-            return false;
+            return CensusReference !=null & CensusReference.CheckCensusReference(present);
         }
 
         public override string ToString()

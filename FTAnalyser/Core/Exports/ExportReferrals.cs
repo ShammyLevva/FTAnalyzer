@@ -22,7 +22,7 @@ namespace FTAnalyzer
         }
 
         public string CensusDate { get { return f.FactDate.ToString(); } }
-        public string CensusReference { get { return censusFact == null ? "Census Not Found" : censusFact.CensusReference; } }
+        public string CensusReference { get { return censusFact == null ? "Census Not Found" : censusFact.CensusReference.Reference; } }
         public string IndividualID { get { return ind.IndividualID; } }
         public string FamilyID { get { return ind.ReferralFamilyID; } }
         public string Forenames { get { return ind.Forenames; } }

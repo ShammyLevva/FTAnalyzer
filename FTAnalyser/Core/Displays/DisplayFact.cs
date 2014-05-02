@@ -35,7 +35,7 @@ namespace FTAnalyzer
         public string IndividualID { get { return Ind == null ? string.Empty : Ind.IndividualID; } }
         public Age AgeAtFact { get { return Ind == null ? null : Ind.GetAge(Fact.FactDate, Fact.FactType); } }
         public string SourceList { get { return Fact.SourceList;  } }
-        public string CensusReference { get { return Fact.CensusReference; } }
+        public string CensusReference { get { return Fact.CensusReference.Reference; } }
         public string GoogleLocation { get { return Fact.Location.GoogleLocation; } }
         public string GoogleResultType { get { return Fact.Location.GoogleResultType; } }
         public string GeocodeStatus { get { return Fact.Location.Geocoded; } }
