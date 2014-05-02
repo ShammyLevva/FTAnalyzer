@@ -800,38 +800,40 @@ namespace FTAnalyzer
             {
                 if (Piece.Length > 0)
                 {
-                    if (Countries.IsEnglandWales(Location.Country) && (FactDate.Overlaps(CensusDate.UKCENSUS1851) || FactDate.Overlaps(CensusDate.UKCENSUS1861) || 
-                        FactDate.Overlaps(CensusDate.UKCENSUS1871) || FactDate.Overlaps(CensusDate.UKCENSUS1881) || FactDate.Overlaps(CensusDate.UKCENSUS1891) || 
-                        FactDate.Overlaps(CensusDate.UKCENSUS1901)))
-                        if(Properties.GeneralSettings.Default.UseCompactCensusRef)
-                            return Piece + "/" + Folio + "/" + Page;
-                        else
-                            return "Piece: " + Piece + ", Folio: " + Folio + ", Page: " + Page;
-                    if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1841))
+                    if (Countries.IsEnglandWales(Location.Country) || (!Countries.IsUnitedKingdom(Location.Country) && IsUKCensus))
                     {
-                        if (Book.Length > 0)
+                        if ((FactDate.Overlaps(CensusDate.UKCENSUS1851) || FactDate.Overlaps(CensusDate.UKCENSUS1861) || FactDate.Overlaps(CensusDate.UKCENSUS1871) ||
+                            FactDate.Overlaps(CensusDate.UKCENSUS1881) || FactDate.Overlaps(CensusDate.UKCENSUS1891) || FactDate.Overlaps(CensusDate.UKCENSUS1901)))
                             if (Properties.GeneralSettings.Default.UseCompactCensusRef)
-                                return Piece + "/" + Book + "/" + Folio + "/" + Page;
+                                return Piece + "/" + Folio + "/" + Page;
                             else
-                                return "Piece: " + Piece + ", Book: " + Book + ", Folio: " + Folio + ", Page: " + Page;
-                        else
-                            if (Properties.GeneralSettings.Default.UseCompactCensusRef)
-                                return Piece + "/see image/" + Folio + "/" + Page;
+                                return "Piece: " + Piece + ", Folio: " + Folio + ", Page: " + Page;
+                        if (FactDate.Overlaps(CensusDate.UKCENSUS1841))
+                        {
+                            if (Book.Length > 0)
+                                if (Properties.GeneralSettings.Default.UseCompactCensusRef)
+                                    return Piece + "/" + Book + "/" + Folio + "/" + Page;
+                                else
+                                    return "Piece: " + Piece + ", Book: " + Book + ", Folio: " + Folio + ", Page: " + Page;
                             else
-                                return "Piece: " + Piece + ", Book: see census image (stamped on the census page after the piece number), Folio: " + Folio + ", Page: " + Page;
-                    }
-                    if (Countries.IsEnglandWales(Location.Country) && FactDate.Overlaps(CensusDate.UKCENSUS1911))
-                    {
-                        if (Schedule.Length > 0)
-                            if (Properties.GeneralSettings.Default.UseCompactCensusRef)
-                                return Piece + "/" + Schedule;
+                                if (Properties.GeneralSettings.Default.UseCompactCensusRef)
+                                    return Piece + "/see image/" + Folio + "/" + Page;
+                                else
+                                    return "Piece: " + Piece + ", Book: see census image (stamped on the census page after the piece number), Folio: " + Folio + ", Page: " + Page;
+                        }
+                        if (FactDate.Overlaps(CensusDate.UKCENSUS1911))
+                        {
+                            if (Schedule.Length > 0)
+                                if (Properties.GeneralSettings.Default.UseCompactCensusRef)
+                                    return Piece + "/" + Schedule;
+                                else
+                                    return "Piece: " + Piece + ", Schedule: " + Schedule;
                             else
-                                return "Piece: " + Piece + ", Schedule: " + Schedule;
-                        else
-                            if (Properties.GeneralSettings.Default.UseCompactCensusRef)
-                                return Piece + "/" + Page;
-                            else
-                                return "Piece: " + Piece + ", Page: " + Page;
+                                if (Properties.GeneralSettings.Default.UseCompactCensusRef)
+                                    return Piece + "/" + Page;
+                                else
+                                    return "Piece: " + Piece + ", Page: " + Page;
+                        }
                     }
                 }
                 else if (Parish.Length > 0)
