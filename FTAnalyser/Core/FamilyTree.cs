@@ -1408,8 +1408,11 @@ namespace FTAnalyzer
                     {
                         bool added = false;
                         if (f.FactErrorNumber != 0)
+                        {
                             errors[f.FactErrorNumber].Add(
                                 new DataError(f.FactErrorNumber, ind, f.FactErrorMessage));
+                            added = true;
+                        }
                         else if (f.FactType == Fact.LOSTCOUSINS)
                         {
                             if (!CensusDate.IsCensusYear(f.FactDate, false))
@@ -1458,14 +1461,12 @@ namespace FTAnalyzer
                     #region All Facts
                     foreach (Fact f in ind.AllFacts)
                     {
-                        if(FactBeforeBirth(ind, f))
+                        if (FactBeforeBirth(ind, f))
                             errors[(int)Dataerror.FACTS_BEFORE_BIRTH].Add(
                                 new DataError((int)Dataerror.FACTS_BEFORE_BIRTH, ind, f.FactErrorMessage));
-                        if (FactAfterDeath(ind,f))
-                        {
+                        if (FactAfterDeath(ind, f))
                             errors[(int)Dataerror.FACTS_AFTER_DEATH].Add(
                                 new DataError((int)Dataerror.FACTS_AFTER_DEATH, ind, f.FactErrorMessage));
-                        }
                         foreach (string tag in unknownFactTypes)
                         {
                             if (f.FactTypeDescription == tag)

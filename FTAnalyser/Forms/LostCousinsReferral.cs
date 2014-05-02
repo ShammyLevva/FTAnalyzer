@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using FTAnalyzer.Filters;
 using FTAnalyzer.UserControls;
+using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer.Forms
 {
@@ -51,7 +52,7 @@ namespace FTAnalyzer.Forms
         private void ResetTable()
         {
             referrals.Sort(new LostCousinsReferralComparer());
-            dgLCReferrals.DataSource = referrals;
+            dgLCReferrals.DataSource = new SortableBindingList<ExportReferrals>(referrals);
         }
 
         private void RefreshCensusReferences(object sender, EventArgs e)
