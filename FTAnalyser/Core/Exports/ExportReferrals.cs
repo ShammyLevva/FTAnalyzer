@@ -19,6 +19,7 @@ namespace FTAnalyzer
             this.ShortCode = GetShortCode();
             this.RelationType = SetRelationType();
             this.Include = ind.IsBloodDirect;
+            this.Ahnentafel = ind.Ahnentafel;
         }
 
         public string CensusDate { get { return f.FactDate.ToString(); } }
@@ -32,7 +33,8 @@ namespace FTAnalyzer
         public string Census { get { return censusFact == null ? f.ToString() : censusFact.ToString(); } }
         public bool Include { get; private set; }
         public string RelationType { get; private set; }
-        
+        public int Ahnentafel { get; private set; }
+
         public string SetRelationType()
         {
             if (ind.RelationType == Individual.DIRECT)
