@@ -64,18 +64,22 @@ namespace FTAnalyzer.Forms
             SetupFacts();
         }
 
-        public Facts(bool censusRefPresent)
+        public Facts(CensusReference.ReferenceStatus status)
             : this()
         {
             this.allFacts = true;
             foreach (Individual ind in ft.AllIndividuals)
                 foreach (Fact f in ind.AllFacts)
-                    if (f.IsCensusFact && f.CheckCensusReference(censusRefPresent))
+                    if (f.IsCensusFact && f.CensusReference != null && f.CensusReference.Status == status)
                         facts.Add(new DisplayFact(ind, f));
-            if(censusRefPresent)
+            if (status == FTAnalyzer.CensusReference.ReferenceStatus.GOOD)
                 this.Text = "Census Reference Report. Facts count: " + facts.Count;
-            else
-                this.Text = "Missing/Unknown Census Reference Report. Facts count: " + facts.Count;
+            else if (status == FTAnalyzer.CensusReference.ReferenceStatus.INCOMPLETE)
+                this.Text = "Incomplete Census Reference Report. Facts count: " + facts.Count;
+            else if (status == FTAnalyzer.CensusReference.ReferenceStatus.UNRECOGNISED)
+                this.Text = "Unrecognised Census Reference Report. Facts count: " + facts.Count;
+            else if (status == FTAnalyzer.CensusReference.ReferenceStatus.BLANK)
+                this.Text = "Blank Census Reference Report. Facts count: " + facts.Count;
             SetupFacts();
             dgFacts.Columns["CensusReference"].Visible = true;
         }

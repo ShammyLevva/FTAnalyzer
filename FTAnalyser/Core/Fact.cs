@@ -631,12 +631,7 @@ namespace FTAnalyzer
         {
             return !Countries.IsUnitedKingdom(country) && CensusReference.IsUKCensus;
         }
-
-        public bool CheckCensusReference(bool present)
-        {
-            return CensusReference !=null && CensusReference.CheckCensusReference(present);
-        }
-
+        
         public override string ToString()
         {
             return FactTypeDescription + ": " + FactDate + (Location.ToString().Length > 0 ? " at " + Location : string.Empty);

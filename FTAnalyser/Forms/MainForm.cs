@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.7.1.0-beta8";
+        public string VERSION = "3.7.1.0-beta9";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -2096,21 +2096,34 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void btnCensusRefs_Click(object sender, EventArgs e)
+        private void ShowCensusRefFacts(CensusReference.ReferenceStatus status)
         {
             HourGlass(true);
-            Facts facts = new Facts(true);
+            Facts facts = new Facts(status);
             facts.Show();
             HourGlass(false);
         }
 
+        private void btnCensusRefs_Click(object sender, EventArgs e)
+        {
+            ShowCensusRefFacts(CensusReference.ReferenceStatus.GOOD);
+        }
+
         private void btnMissingCensusRefs_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
-            Facts facts = new Facts(false);
-            facts.Show();
-            HourGlass(false);
+            ShowCensusRefFacts(CensusReference.ReferenceStatus.BLANK);
         }
+        
+        private void btnIncompleteCensusRef_Click(object sender, EventArgs e)
+        {
+            ShowCensusRefFacts(CensusReference.ReferenceStatus.INCOMPLETE);
+        }
+
+        private void btnUnrecognisedCensusRef_Click(object sender, EventArgs e)
+        {
+            ShowCensusRefFacts(CensusReference.ReferenceStatus.UNRECOGNISED);
+        }
+
         #endregion
 
         #region Colour Reports Tab
