@@ -338,8 +338,9 @@ namespace FTAnalyzer
                             else
                                 ft.XmlErrorBox.AppendText("Source " + srcref + " not found." + "\n");
                         }
-                        if(IsCensusFact)
-                            GetCensusReference(n);
+                        if (IsCensusFact)
+                            if (GetCensusReference(n))
+                                unknownCensusRef = string.Empty;
                     }
                     if (FactType == DEATH)
                     {
@@ -411,7 +412,7 @@ namespace FTAnalyzer
                 Location = FactLocation.GetLocation(result);
         }
 
-        private void GetCensusReference(XmlNode n)
+        private bool GetCensusReference(XmlNode n)
         {
             string text = FamilyTree.GetText(n, "PAGE");
             if (text.Length > 0)
@@ -423,8 +424,7 @@ namespace FTAnalyzer
                     this.ED = matcher.Groups[2].ToString();
                     this.Page = matcher.Groups[3].ToString();
                     this.IsUKCensus = true;
-                    unknownCensusRef = string.Empty;
-                    return;
+                    return true;
                 }
                 matcher = Regex.Match(text, SCOT_CENSUS_PATTERN2, RegexOptions.IgnoreCase);
                 if (matcher.Success)
@@ -433,8 +433,7 @@ namespace FTAnalyzer
                     this.ED = matcher.Groups[2].ToString().Replace("/00", "").TrimStart('0');
                     this.Page = matcher.Groups[3].ToString().TrimStart('0');
                     this.IsUKCensus = true;
-                    unknownCensusRef = string.Empty;
-                    return;
+                    return true;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_PATTERN, RegexOptions.IgnoreCase);
                 if (matcher.Success)
@@ -443,8 +442,7 @@ namespace FTAnalyzer
                     this.Folio = matcher.Groups[3].ToString();
                     this.Page = matcher.Groups[4].ToString();
                     this.IsUKCensus = true;
-                    unknownCensusRef = string.Empty;
-                    return;
+                    return true;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_PATTERN2, RegexOptions.IgnoreCase);
                 if (matcher.Success)
@@ -453,8 +451,7 @@ namespace FTAnalyzer
                     this.Folio = matcher.Groups[3].ToString();
                     this.Page = "Missing";
                     this.IsUKCensus = true;
-                    unknownCensusRef = string.Empty;
-                    return;
+                    return true;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN, RegexOptions.IgnoreCase);
                 if (matcher.Success)
@@ -463,8 +460,7 @@ namespace FTAnalyzer
                     this.Folio = matcher.Groups[2].ToString();
                     this.Page = matcher.Groups[3].ToString();
                     this.IsUKCensus = true;
-                    unknownCensusRef = string.Empty;
-                    return;
+                    return true;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN2, RegexOptions.IgnoreCase);
                 if (matcher.Success)
@@ -474,8 +470,7 @@ namespace FTAnalyzer
                     this.Folio = matcher.Groups[3].ToString();
                     this.Page = matcher.Groups[4].ToString();
                     this.IsUKCensus = true;
-                    unknownCensusRef = string.Empty;
-                    return;
+                    return true;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN3, RegexOptions.IgnoreCase);
                 if (matcher.Success)
@@ -485,8 +480,7 @@ namespace FTAnalyzer
                     this.Folio = "Missing";
                     this.Page = matcher.Groups[3].ToString();
                     this.IsUKCensus = true;
-                    unknownCensusRef = string.Empty;
-                    return;
+                    return true;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN4, RegexOptions.IgnoreCase);
                 if (matcher.Success)
@@ -496,8 +490,7 @@ namespace FTAnalyzer
                     this.Folio = "Missing";
                     this.Page = matcher.Groups[2].ToString();
                     this.IsUKCensus = true;
-                    unknownCensusRef = string.Empty;
-                    return;
+                    return true;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN, RegexOptions.IgnoreCase);
                 if (matcher.Success)
@@ -505,8 +498,7 @@ namespace FTAnalyzer
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
                     this.IsUKCensus = true;
-                    unknownCensusRef = string.Empty;
-                    return;
+                    return true;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN2, RegexOptions.IgnoreCase);
                 if (matcher.Success)
@@ -514,8 +506,7 @@ namespace FTAnalyzer
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = "Missing";
                     this.IsUKCensus = true;
-                    unknownCensusRef = string.Empty;
-                    return;
+                    return true;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3, RegexOptions.IgnoreCase);
                 if (matcher.Success)
@@ -523,8 +514,7 @@ namespace FTAnalyzer
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
                     this.IsUKCensus = true;
-                    unknownCensusRef = string.Empty;
-                    return;
+                    return true;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3a, RegexOptions.IgnoreCase);
                 if (matcher.Success)
@@ -532,8 +522,7 @@ namespace FTAnalyzer
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
                     this.IsUKCensus = true;
-                    unknownCensusRef = string.Empty;
-                    return;
+                    return true;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN4, RegexOptions.IgnoreCase);
                 if (matcher.Success)
@@ -541,8 +530,7 @@ namespace FTAnalyzer
                     this.Piece = matcher.Groups[1].ToString();
                     this.Page = matcher.Groups[2].ToString();
                     this.IsUKCensus = true;
-                    unknownCensusRef = string.Empty;
-                    return;
+                    return true;
                 }
                 // no match so store text 
                 if (unknownCensusRef.Length == 0)
@@ -561,8 +549,7 @@ namespace FTAnalyzer
                     this.Folio = matcher.Groups[3].ToString();
                     this.Page = matcher.Groups[4].ToString();
                     this.IsUKCensus = true;
-                    unknownCensusRef = string.Empty;
-                    return;
+                    return true;
                 }
                 matcher = Regex.Match(fs.SourceTitle, EW_CENSUS_PATTERN_FH, RegexOptions.IgnoreCase);
                 if (matcher.Success)
@@ -571,8 +558,7 @@ namespace FTAnalyzer
                     this.Folio = matcher.Groups[3].ToString();
                     this.Page = matcher.Groups[4].ToString();
                     this.IsUKCensus = true;
-                    unknownCensusRef = string.Empty;
-                    return;
+                    return true;
                 }
                 matcher = Regex.Match(fs.SourceTitle, EW_CENSUS_1911_PATTERN_FH, RegexOptions.IgnoreCase);
                 if (matcher.Success)
@@ -580,10 +566,10 @@ namespace FTAnalyzer
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
                     this.IsUKCensus = true;
-                    unknownCensusRef = string.Empty;
-                    return;
+                    return true;
                 }
             }
+            return false;
         }
 
         public Fact(string factType, FactDate date, string comment = "", bool preferred = true)
