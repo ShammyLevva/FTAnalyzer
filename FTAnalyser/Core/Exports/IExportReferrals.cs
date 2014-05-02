@@ -13,7 +13,6 @@ namespace FTAnalyzer
         string Surname { get; }
         Age Age { get; }
         string RelationType { get; }
-        int Ahnentafel { get; }
         string Census { get; }
     }
 }
