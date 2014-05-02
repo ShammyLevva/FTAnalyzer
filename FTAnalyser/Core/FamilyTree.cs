@@ -2518,9 +2518,22 @@ namespace FTAnalyzer
         }
         #endregion
 
+        #region Report Issues
+        public HashSet<string> UnrecognisedCensusReferences()
+        {
+            HashSet<string> result = new HashSet<string>();
+            IEnumerable<Fact> unrecognised = AllIndividuals.SelectMany(x => x.AllFacts.Where(f => f.CensusReference != null && f.CensusReference.Status == CensusReference.ReferenceStatus.UNRECOGNISED));
+            foreach(Fact f in unrecognised)
+                result.Add(f.CensusReference.Reference);
+            return result;
+        }
+        #endregion
+
+        #region Dispose
         public void Dispose()
         {
             xmlErrorbox.Dispose();
         }
+        #endregion
     }
 }

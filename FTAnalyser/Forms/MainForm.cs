@@ -2386,5 +2386,10 @@ namespace FTAnalyzer
             HourGlass(false);
         }
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            HashSet<string> result = ft.UnrecognisedCensusReferences();
+        }
     }
 }

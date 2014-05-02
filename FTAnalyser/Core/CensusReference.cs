@@ -16,6 +16,7 @@ namespace FTAnalyzer
         //Parish: Inverurie; ED: 4; Page: 12; Line: 3; Roll: CSSCT1901_69
         //Class: RG14; Piece: 21983
         //Class: RG14; Piece: 12577; Schedule Number: 103
+        //Year: 1900; Census Place: South Prairie, Pierce,Washington; Roll: T623_1748; Page: 4B; Enumeration District: 160.
         private static readonly string EW_CENSUS_PATTERN = @"Class: RG ?(\d{1,3}); ?Piece:? ?(\d{1,5}); ?Folio:? ?(\d{1,4}); ?Page:? ?(\d{1,3})";
         private static readonly string EW_CENSUS_PATTERN2 = @"Class: RG ?(\d{1,3}); ?Piece:? ?(\d{1,5}); ?Folio:? ?(\d{1,4})";
         private static readonly string EW_CENSUS_PATTERN_FH = @"RG ?(\d{1,2})/(\d{1,5}) F(\d{1,4}) p(\d{1,3})";
@@ -32,25 +33,31 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1911_PATTERN_FH = @"RG14/PN(\d{1,6}) .*SN(\d{1,4})";
         private static readonly string SCOT_CENSUS_PATTERN = @"Parish:? ?([A-Za-z .'-]+); ?ED:? ?(\d{1,3}[A-Za-z]?); ?Page:? ?(\d{1,4}); ?Line:? ?(\d{1,2})";
         private static readonly string SCOT_CENSUS_PATTERN2 = @"(\d{3}/\d{2}) (\d{3}/\d{2}) (\d{3,4})";
+        private static readonly string US_CENSUS_PATTERN = @"Year: ?(\d{4});? ?Census Place:? ?(.*); ?Roll:? ?(.*); ?Page:? ?(\d{1,4}[AB]?)";
 
         public enum ReferenceStatus { BLANK = 0, UNRECOGNISED = 1, INCOMPLETE = 2, GOOD = 3 };
         private static readonly string MISSING = "Missing";
 
         private string unknownCensusRef;
         private Fact fact;
-        public string Piece { get; private set; }
-        public string Folio { get; private set; }
-        public string Page { get; private set; }
-        public string Book { get; private set; }
-        public string Schedule { get; private set; }
-        public string Parish { get; private set; }
-        public string ED { get; private set; }
+        private string Place { get; set; }
+        private string Roll { get; set; }
+        private string Piece { get; set; }
+        private string Folio { get; set; }
+        private string Page { get; set; }
+        private string Book { get; set; }
+        private string Schedule { get; set; }
+        private string Parish { get; set; }
+        private string ED { get; set; }
+        
         public bool IsUKCensus { get; private set; }
         public ReferenceStatus Status { get; private set; }
 
         public CensusReference(Fact fact, XmlNode node)
         {
             this.fact = fact;
+            this.Roll = string.Empty;
+            this.Place = string.Empty;
             this.Piece = string.Empty;
             this.Folio = string.Empty;
             this.Book = string.Empty;
@@ -198,6 +205,16 @@ namespace FTAnalyzer
                     this.Status = ReferenceStatus.GOOD;
                     return true;
                 }
+                matcher = Regex.Match(text, US_CENSUS_PATTERN, RegexOptions.IgnoreCase);
+                if (matcher.Success)
+                {
+                    this.Place = matcher.Groups[2].ToString();
+                    this.Roll = matcher.Groups[3].ToString();
+                    this.Page = matcher.Groups[4].ToString();
+                    this.IsUKCensus = false;
+                    this.Status = ReferenceStatus.GOOD;
+                    return true;
+                }
                 // no match so store text 
                 this.Status = ReferenceStatus.UNRECOGNISED;
                 if (unknownCensusRef.Length == 0)
@@ -246,7 +263,14 @@ namespace FTAnalyzer
         {
             get
             {
-                if (Piece.Length > 0)
+                if(Roll.Length > 0)
+                {
+                    if (Properties.GeneralSettings.Default.UseCompactCensusRef)
+                        return Roll + "/" + Page;
+                    else
+                        return "Roll: " + Roll + ", Page: " + Page;
+                }
+                else if (Piece.Length > 0)
                 {
                     if (Countries.IsEnglandWales(fact.Location.Country) || fact.IsOverseasUKCensus(fact.Location.Country))
                     {
