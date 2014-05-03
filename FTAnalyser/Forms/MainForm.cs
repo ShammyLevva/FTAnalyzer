@@ -1145,8 +1145,8 @@ namespace FTAnalyzer
         {
             Predicate<CensusIndividual> relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
             Predicate<CensusIndividual> dateFilter = censusDone ?
-                new Predicate<CensusIndividual>(x => x.IsCensusDone(cenDate.SelectedDate)) :
-                new Predicate<CensusIndividual>(x => !x.IsCensusDone(cenDate.SelectedDate));
+                new Predicate<CensusIndividual>(x => x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate)) :
+                new Predicate<CensusIndividual>(x => !x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate));
             
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, dateFilter);
             if (txtCensusSurname.Text.Length > 0)

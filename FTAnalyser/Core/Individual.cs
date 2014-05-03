@@ -590,7 +590,8 @@ namespace FTAnalyzer
             {
                 if (f.IsValidCensus(when))
                 {
-                    if (!checkCountry) return true;
+                    if (!checkCountry) 
+                        return true;
                     if (f.Location.CensusCountryMatches(when.Country, includeUnknownCountries))
                         return true;
                     if (Countries.IsUnitedKingdom(when.Country) && f.IsOverseasUKCensus(f.Country))
@@ -1153,6 +1154,11 @@ namespace FTAnalyzer
                 return CheckOutOfCountry("Ire1");
             else
                 return CheckOutOfCountry("C1");
+        }
+
+        public bool OutOfCountry(CensusDate census)
+        {
+            return CheckOutOfCountry(census.PropertyName);
         }
 
         private bool CheckOutOfCountry(string prefix)
