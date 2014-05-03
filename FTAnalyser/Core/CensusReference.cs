@@ -19,6 +19,8 @@ namespace FTAnalyzer
         //Year: 1900; Census Place: South Prairie, Pierce,Washington; Roll: T623_1748; Page: 4B; Enumeration District: 160.
         private static readonly string EW_CENSUS_PATTERN = @"Class: RG ?(\d{1,3}); ?Piece:? ?(\d{1,5}); ?Folio:? ?(\d{1,4}); ?Page:? ?(\d{1,3})";
         private static readonly string EW_CENSUS_PATTERN2 = @"Class: RG ?(\d{1,3}); ?Piece:? ?(\d{1,5}); ?Folio:? ?(\d{1,4})";
+        private static readonly string EW_MISSINGCLASS_PATTERN = @"Piece:? ?(\d{1,5}); ?Folio:? ?(\d{1,4}); ?Page:? ?(\d{1,3})";
+        private static readonly string EW_MISSINGCLASS_PATTERN2 = @"Piece:? ?(\d{1,5}); ?Folio:? ?(\d{1,4})";
         private static readonly string EW_CENSUS_PATTERN_FH = @"RG ?(\d{1,2})/(\d{1,5}) F(\d{1,4}) p(\d{1,3})";
         private static readonly string EW_CENSUS_1841_PATTERN = @"Class: HO107; ?Piece:? ?(\d{1,5}); ?Folio:? ?(\d{1,4}); ?Page:? ?(\d{1,3})";
         private static readonly string EW_CENSUS_1841_PATTERN2 = @"Class: HO107; ?Piece:? ?(\d{1,5}); ?Book:? ?(\d{1,3});.*Folio:? ?(\d{1,4}); ?Page:? ?(\d{1,3})";
@@ -224,6 +226,26 @@ namespace FTAnalyzer
                     this.Page = matcher.Groups[4].ToString();
                     this.IsUKCensus = false;
                     this.Status = ReferenceStatus.GOOD;
+                    return true;
+                }
+                matcher = Regex.Match(text, EW_MISSINGCLASS_PATTERN, RegexOptions.IgnoreCase);
+                if (matcher.Success)
+                {
+                    this.Piece = matcher.Groups[1].ToString();
+                    this.Folio = matcher.Groups[2].ToString();
+                    this.Page = matcher.Groups[3].ToString();
+                    this.IsUKCensus = true;
+                    this.Status = ReferenceStatus.GOOD;
+                    return true;
+                }
+                matcher = Regex.Match(text, EW_MISSINGCLASS_PATTERN2, RegexOptions.IgnoreCase);
+                if (matcher.Success)
+                {
+                    this.Piece = matcher.Groups[1].ToString();
+                    this.Folio = matcher.Groups[2].ToString();
+                    this.Page = MISSING;
+                    this.IsUKCensus = true;
+                    this.Status = ReferenceStatus.INCOMPLETE;
                     return true;
                 }
                 // no match so store text 
