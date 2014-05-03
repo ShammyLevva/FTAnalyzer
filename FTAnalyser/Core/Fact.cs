@@ -629,7 +629,7 @@ namespace FTAnalyzer
 
         public bool IsOverseasUKCensus(string country)
         {
-            return !Countries.IsUnitedKingdom(country) && CensusReference.IsUKCensus;
+            return !Countries.IsUnitedKingdom(country) && CensusReference != null && CensusReference.IsUKCensus;
         }
         
         public override string ToString()

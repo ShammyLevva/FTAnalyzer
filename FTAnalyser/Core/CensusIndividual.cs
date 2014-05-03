@@ -63,7 +63,7 @@ namespace FTAnalyzer
             get
             {
                 foreach (Fact f in AllFacts)
-                    if (f.IsValidCensus(CensusDate))
+                    if (f.IsValidCensus(CensusDate) && f.CensusReference != null)
                         return f.CensusReference.Reference;
                 return string.Empty;
             }
