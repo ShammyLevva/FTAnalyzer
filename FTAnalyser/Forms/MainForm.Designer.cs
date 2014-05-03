@@ -150,6 +150,7 @@
             this.btnLC1881Canada = new System.Windows.Forms.Button();
             this.btnLC1881Scot = new System.Windows.Forms.Button();
             this.tabCensus = new System.Windows.Forms.TabPage();
+            this.btnReportUnrecognised = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnUnrecognisedCensusRef = new System.Windows.Forms.Button();
             this.btnIncompleteCensusRef = new System.Windows.Forms.Button();
@@ -248,7 +249,6 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.button1 = new System.Windows.Forms.Button();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.relTypesFacts = new Controls.RelationTypes();
             this.cenDate = new Controls.CensusDateSelector();
@@ -1397,7 +1397,7 @@
             // 
             // tabCensus
             // 
-            this.tabCensus.Controls.Add(this.button1);
+            this.tabCensus.Controls.Add(this.btnReportUnrecognised);
             this.tabCensus.Controls.Add(this.groupBox4);
             this.tabCensus.Controls.Add(this.chkExcludeUnknownBirths);
             this.tabCensus.Controls.Add(this.groupBox2);
@@ -1415,6 +1415,17 @@
             this.tabCensus.TabIndex = 0;
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
+            // 
+            // btnReportUnrecognised
+            // 
+            this.btnReportUnrecognised.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnReportUnrecognised.Location = new System.Drawing.Point(14, 401);
+            this.btnReportUnrecognised.Name = "btnReportUnrecognised";
+            this.btnReportUnrecognised.Size = new System.Drawing.Size(150, 38);
+            this.btnReportUnrecognised.TabIndex = 26;
+            this.btnReportUnrecognised.Text = "Export Unrecognised Census References";
+            this.btnReportUnrecognised.UseVisualStyleBackColor = true;
+            this.btnReportUnrecognised.Click += new System.EventHandler(this.btnReportUnrecognised_Click);
             // 
             // groupBox4
             // 
@@ -2527,17 +2538,6 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(695, 158);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 25);
-            this.button1.TabIndex = 26;
-            this.button1.Text = "Unrecogniseds";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // rtbOutput
             // 
             this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2948,7 +2948,7 @@
         private System.Windows.Forms.Button btnCensusRefs;
         private System.Windows.Forms.Button btnUnrecognisedCensusRef;
         private System.Windows.Forms.Button btnIncompleteCensusRef;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnReportUnrecognised;
     }
 }
 

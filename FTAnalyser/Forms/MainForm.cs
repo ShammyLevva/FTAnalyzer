@@ -15,13 +15,14 @@ using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
 using Ionic.Zip;
 using Printing.DataGridViewPrint.Tools;
+using System.Text;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.7.1.0-beta9";
+        public string VERSION = "3.7.1.0-beta10";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -2124,6 +2125,43 @@ namespace FTAnalyzer
             ShowCensusRefFacts(CensusReference.ReferenceStatus.UNRECOGNISED);
         }
 
+        private void btnReportUnrecognised_Click(object sender, EventArgs e)
+        {
+            HashSet<string> results = ft.UnrecognisedCensusReferences();
+            if (results.Count > 0)
+            {
+                try
+                {
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    string initialDir = (string)Application.UserAppDataRegistry.GetValue("Report Unrecognised Census References Path");
+                    saveFileDialog.InitialDirectory = initialDir == null ? Environment.SpecialFolder.MyDocuments.ToString() : initialDir;
+                    saveFileDialog.FileName = "Unrecognised Census References for " + Path.GetFileNameWithoutExtension(filename) + ".txt";
+                    saveFileDialog.Filter = "Report File (*.txt)|*.txt";
+                    saveFileDialog.FilterIndex = 1;
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string path = Path.GetDirectoryName(saveFileDialog.FileName);
+                        Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
+                        WriteFile(results, saveFileDialog.FileName);
+                        MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease upload it to http://ftanalyzer.codeplex.com in the issues section.", "FT Analyzer");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "FT Analyzer");
+                }
+            }
+        }
+        
+        private void WriteFile(HashSet<string> results, string filename)
+        {
+            Encoding isoWesternEuropean = Encoding.GetEncoding(28591);
+            StreamWriter output = new StreamWriter(new FileStream(filename, FileMode.Create, FileAccess.Write), isoWesternEuropean);
+            foreach(string line in results)
+                output.WriteLine(line);
+            output.Close();
+        }
         #endregion
 
         #region Colour Reports Tab
@@ -2386,10 +2424,5 @@ namespace FTAnalyzer
             HourGlass(false);
         }
         #endregion
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            HashSet<string> result = ft.UnrecognisedCensusReferences();
-        }
     }
 }
