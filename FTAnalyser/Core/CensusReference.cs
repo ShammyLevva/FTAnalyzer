@@ -26,13 +26,14 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1841_PATTERN4 = @"Class: HO107; ?Piece:? ?(\d{1,5});.*Page:? ?(\d{1,3})";
         private static readonly string EW_CENSUS_1841_PATTERN_FH = @"HO107/(\d{1,5})/(\d{1,3}) .*F(\d{1,3}) p(\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN = @"RG14PN(\d{1,6}) .*SN(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN2 = @"Class: RG14; ?Piece:? ?(\d{1,6});?$";
-        private static readonly string EW_CENSUS_1911_PATTERN3 = @"Class: RG14; ?Piece:? ?(\d{1,6}); ?Schedule Number:? ?(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN3a = @"Class: RG14; ?Piece:? ?(\d{1,6}); ?SN:? ?(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN4 = @"Class: RG14; ?Piece:? ?(\d{1,6}); ?Page:? ?(\d{1,3})";
+        private static readonly string EW_CENSUS_1911_PATTERN2 = @"Class: RG14; ?Piece:? ?(\d{1,6}); ?SN:? ?(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN3 = @"Class: RG14; ?Piece:? ?(\d{1,6});?$";
+        private static readonly string EW_CENSUS_1911_PATTERN4 = @"Class: RG14; ?Piece:? ?(\d{1,6}); ?Schedule Number:? ?(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN5 = @"Class: RG14; ?Piece:? ?(\d{1,6}); ?Page:? ?(\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN_FH = @"RG14/PN(\d{1,6}) .*SN(\d{1,4})";
-        private static readonly string SCOT_CENSUS_PATTERN = @"Parish:? ?([A-Za-z .'-]+); ?ED:? ?(\d{1,3}[A-Za-z]?); ?Page:? ?(\d{1,4}); ?Line:? ?(\d{1,2})";
-        private static readonly string SCOT_CENSUS_PATTERN2 = @"(\d{3}/\d{2}) (\d{3}/\d{2}) (\d{3,4})";
+        private static readonly string SCOT_CENSUS_PATTERN = @"Parish:? ?([A-Z .'-]+); ?ED:? ?(\d{1,3}[AB]?); ?Page:? ?(\d{1,4}); ?Line:? ?(\d{1,2})";
+        private static readonly string SCOT_CENSUS_PATTERN2 = @"(\d{3}/\d{1,2}[AB]?) (\d{3}/\d{2}) (\d{3,4})";
+        private static readonly string SCOT_CENSUS_PATTERN3 = @"(\d{3}[AB]?)/(\d{2}[AB]?) Page:? ?(\d{1,4})";
         private static readonly string US_CENSUS_PATTERN = @"Year: ?(\d{4});? ?Census Place:? ?(.*); ?Roll:? ?(.*); ?Page:? ?(\d{1,4}[AB]?)";
 
         public enum ReferenceStatus { BLANK = 0, UNRECOGNISED = 1, INCOMPLETE = 2, GOOD = 3 };
@@ -77,27 +78,7 @@ namespace FTAnalyzer
             string text = FamilyTree.GetText(n, "PAGE");
             if (text.Length > 0)
             {
-                Match matcher = Regex.Match(text, SCOT_CENSUS_PATTERN, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Parish = matcher.Groups[1].ToString();
-                    this.ED = matcher.Groups[2].ToString();
-                    this.Page = matcher.Groups[3].ToString();
-                    this.IsUKCensus = true;
-                    this.Status = ReferenceStatus.GOOD;
-                    return true;
-                }
-                matcher = Regex.Match(text, SCOT_CENSUS_PATTERN2, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Parish = matcher.Groups[1].ToString().Replace("/00", "").Replace("/", "-");
-                    this.ED = matcher.Groups[2].ToString().Replace("/00", "").TrimStart('0');
-                    this.Page = matcher.Groups[3].ToString().TrimStart('0');
-                    this.IsUKCensus = true;
-                    this.Status = ReferenceStatus.GOOD;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_PATTERN, RegexOptions.IgnoreCase);
+                Match matcher = Regex.Match(text, EW_CENSUS_PATTERN, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[2].ToString();
@@ -173,34 +154,64 @@ namespace FTAnalyzer
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
-                    this.Schedule = MISSING;
+                    this.Schedule = matcher.Groups[2].ToString();
                     this.IsUKCensus = true;
-                    this.Status = ReferenceStatus.INCOMPLETE;
+                    this.Status = ReferenceStatus.GOOD;
                     return true;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
-                    this.Schedule = matcher.Groups[2].ToString();
+                    this.Schedule = MISSING;
                     this.IsUKCensus = true;
-                    this.Status = ReferenceStatus.GOOD;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3a, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Schedule = matcher.Groups[2].ToString();
-                    this.IsUKCensus = true;
-                    this.Status = ReferenceStatus.GOOD;
+                    this.Status = ReferenceStatus.INCOMPLETE;
                     return true;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN4, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
+                    this.Schedule = matcher.Groups[2].ToString();
+                    this.IsUKCensus = true;
+                    this.Status = ReferenceStatus.GOOD;
+                    return true;
+                }
+                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN5, RegexOptions.IgnoreCase);
+                if (matcher.Success)
+                {
+                    this.Piece = matcher.Groups[1].ToString();
                     this.Page = matcher.Groups[2].ToString();
+                    this.IsUKCensus = true;
+                    this.Status = ReferenceStatus.GOOD;
+                    return true;
+                }
+                matcher = Regex.Match(text, SCOT_CENSUS_PATTERN, RegexOptions.IgnoreCase);
+                if (matcher.Success)
+                {
+                    this.Parish = matcher.Groups[1].ToString();
+                    this.ED = matcher.Groups[2].ToString();
+                    this.Page = matcher.Groups[3].ToString();
+                    this.IsUKCensus = true;
+                    this.Status = ReferenceStatus.GOOD;
+                    return true;
+                }
+                matcher = Regex.Match(text, SCOT_CENSUS_PATTERN2, RegexOptions.IgnoreCase);
+                if (matcher.Success)
+                {
+                    this.Parish = matcher.Groups[1].ToString().Replace("/00", "").Replace("/", "-");
+                    this.ED = matcher.Groups[2].ToString().Replace("/00", "").TrimStart('0');
+                    this.Page = matcher.Groups[3].ToString().TrimStart('0');
+                    this.IsUKCensus = true;
+                    this.Status = ReferenceStatus.GOOD;
+                    return true;
+                }
+                matcher = Regex.Match(text, SCOT_CENSUS_PATTERN3, RegexOptions.IgnoreCase);
+                if (matcher.Success)
+                {
+                    this.Parish = matcher.Groups[1].ToString().TrimStart('0');
+                    this.ED = matcher.Groups[2].ToString().Replace("/00", "").TrimStart('0');
+                    this.Page = matcher.Groups[3].ToString().TrimStart('0');
                     this.IsUKCensus = true;
                     this.Status = ReferenceStatus.GOOD;
                     return true;
