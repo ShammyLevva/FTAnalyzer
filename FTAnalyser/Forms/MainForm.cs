@@ -2127,8 +2127,9 @@ namespace FTAnalyzer
 
         private void btnReportUnrecognised_Click(object sender, EventArgs e)
         {
-            HashSet<string> results = ft.UnrecognisedCensusReferences();
-            if (results.Count > 0)
+            IEnumerable<string> results = ft.UnrecognisedCensusReferences();
+            results = results.OrderBy(x => x.ToString());
+            if (results.Count() > 0)
             {
                 try
                 {
@@ -2144,7 +2145,7 @@ namespace FTAnalyzer
                         string path = Path.GetDirectoryName(saveFileDialog.FileName);
                         Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
                         WriteFile(results, saveFileDialog.FileName);
-                        MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease upload it to http://ftanalyzer.codeplex.com in the issues section.", "FT Analyzer");
+                        MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease upload it to http://ftanalyzer.codeplex.com in the issues section, if you feel you have standard census references that should be recognised.", "FT Analyzer");
                     }
                 }
                 catch (Exception ex)
@@ -2154,7 +2155,7 @@ namespace FTAnalyzer
             }
         }
         
-        private void WriteFile(HashSet<string> results, string filename)
+        private void WriteFile(IEnumerable<string> results, string filename)
         {
             Encoding isoWesternEuropean = Encoding.GetEncoding(28591);
             StreamWriter output = new StreamWriter(new FileStream(filename, FileMode.Create, FileAccess.Write), isoWesternEuropean);
