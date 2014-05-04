@@ -29,8 +29,8 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1841_PATTERN_FH = @"HO ?107/(\d{1,5})/(\d{1,3}) .*F(\d{1,3}) p(\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN = @"RG ?14 ?PN(\d{1,6}) .*SN(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN2 = @"RG ?14[;,] ?Piece:? ?(\d{1,6})[;,] ?SN:? ?(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN3 = @"RG ?14[;,] ?Piece:? ?(\d{1,6})[;,]?$";
-        private static readonly string EW_CENSUS_1911_PATTERN4 = @"RG ?14[;,] ?Piece:? ?(\d{1,6})[;,] ?Schedule Number:? ?(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN3 = @"RG ?14[;,] ?Piece:? ?(\d{1,6})[;,] ?Schedule Number:? ?(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN4 = @"RG ?14[;,] ?Piece:? ?(\d{1,6})[;,]?$";
         private static readonly string EW_CENSUS_1911_PATTERN5 = @"RG ?14[;,] ?Piece:? ?(\d{1,6})[;,] ?Page:? ?(\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN_FH = @"RG ?14/PN(\d{1,6}) .*SN(\d{1,4})";
         private static readonly string SCOT_CENSUS_PATTERN = @"Parish:? ?([A-Z .'-]+)[;,] ?ED:? ?(\d{1,3}[AB]?)[;,] ?Page:? ?(\d{1,4})[;,] ?Line:? ?(\d{1,2})";
@@ -165,18 +165,18 @@ namespace FTAnalyzer
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
-                    this.Schedule = MISSING;
+                    this.Schedule = matcher.Groups[2].ToString();
                     this.IsUKCensus = true;
-                    this.Status = ReferenceStatus.INCOMPLETE;
+                    this.Status = ReferenceStatus.GOOD;
                     return true;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN4, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
-                    this.Schedule = matcher.Groups[2].ToString();
+                    this.Schedule = MISSING;
                     this.IsUKCensus = true;
-                    this.Status = ReferenceStatus.GOOD;
+                    this.Status = ReferenceStatus.INCOMPLETE;
                     return true;
                 }
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN5, RegexOptions.IgnoreCase);
