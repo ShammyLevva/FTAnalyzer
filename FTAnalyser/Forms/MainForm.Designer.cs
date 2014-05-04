@@ -33,7 +33,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -802,14 +802,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 154);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1479,14 +1479,14 @@
             this.groupBox4.Controls.Add(this.btnCensusRefs);
             this.groupBox4.Location = new System.Drawing.Point(339, 182);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(659, 61);
+            this.groupBox4.Size = new System.Drawing.Size(632, 61);
             this.groupBox4.TabIndex = 25;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Census References";
             // 
             // btnUnrecognisedCensusRef
             // 
-            this.btnUnrecognisedCensusRef.Location = new System.Drawing.Point(496, 19);
+            this.btnUnrecognisedCensusRef.Location = new System.Drawing.Point(474, 19);
             this.btnUnrecognisedCensusRef.Name = "btnUnrecognisedCensusRef";
             this.btnUnrecognisedCensusRef.Size = new System.Drawing.Size(150, 25);
             this.btnUnrecognisedCensusRef.TabIndex = 8;
@@ -1496,7 +1496,7 @@
             // 
             // btnIncompleteCensusRef
             // 
-            this.btnIncompleteCensusRef.Location = new System.Drawing.Point(340, 19);
+            this.btnIncompleteCensusRef.Location = new System.Drawing.Point(318, 19);
             this.btnIncompleteCensusRef.Name = "btnIncompleteCensusRef";
             this.btnIncompleteCensusRef.Size = new System.Drawing.Size(150, 25);
             this.btnIncompleteCensusRef.TabIndex = 7;
@@ -1537,7 +1537,7 @@
             this.groupBox2.Controls.Add(this.btnShowCensusMissing);
             this.groupBox2.Location = new System.Drawing.Point(8, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(990, 170);
+            this.groupBox2.Size = new System.Drawing.Size(963, 170);
             this.groupBox2.TabIndex = 23;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Census Search Reports";

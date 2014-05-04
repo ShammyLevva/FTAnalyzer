@@ -32,6 +32,22 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Census));
             this.dgCensus = new System.Windows.Forms.DataGridView();
+            this.FamilyID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CensusLoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CensusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Occupation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DeathDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DeathLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CensusStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Relation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CensusReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -50,22 +66,6 @@
             this.cbCensusSearchProvider = new System.Windows.Forms.ToolStripComboBox();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuViewFacts = new System.Windows.Forms.ToolStripMenuItem();
-            this.FamilyID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CensusLoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CensusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Occupation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DeathDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DeathLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CensusStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Relation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CensusReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgCensus)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -111,167 +111,6 @@
             this.dgCensus.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgCensus_CellFormatting);
             this.dgCensus.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgCensus_ColumnHeaderMouseClick);
             this.dgCensus.ColumnSortModeChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgCensus_ColumnSortModeChanged);
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsRecords});
-            this.statusStrip.Location = new System.Drawing.Point(0, 561);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1038, 22);
-            this.statusStrip.TabIndex = 2;
-            this.statusStrip.Text = "statusStrip1";
-            // 
-            // tsRecords
-            // 
-            this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(118, 17);
-            this.tsRecords.Text = "toolStripStatusLabel1";
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuSaveCensusColumnLayout,
-            this.mnuResetCensusColumns,
-            this.toolStripSeparator2,
-            this.printToolStripButton,
-            this.printPreviewToolStripButton,
-            this.toolStripSeparator,
-            this.mnuExportToExcel,
-            this.toolStripSeparator3,
-            this.tsBtnMapLocation,
-            this.tsBtnMapOSLocation,
-            this.toolStripSeparator1,
-            this.toolStripLabel1,
-            this.cbCensusSearchProvider});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1038, 25);
-            this.toolStrip1.TabIndex = 3;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // mnuSaveCensusColumnLayout
-            // 
-            this.mnuSaveCensusColumnLayout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuSaveCensusColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveCensusColumnLayout.Image")));
-            this.mnuSaveCensusColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
-            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(23, 22);
-            this.mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
-            this.mnuSaveCensusColumnLayout.Click += new System.EventHandler(this.mnuSaveCensusColumnLayout_Click);
-            // 
-            // mnuResetCensusColumns
-            // 
-            this.mnuResetCensusColumns.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuResetCensusColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetCensusColumns.Image")));
-            this.mnuResetCensusColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuResetCensusColumns.Name = "mnuResetCensusColumns";
-            this.mnuResetCensusColumns.Size = new System.Drawing.Size(23, 22);
-            this.mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
-            this.mnuResetCensusColumns.Click += new System.EventHandler(this.mnuResetCensusColumns_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // printToolStripButton
-            // 
-            this.printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
-            this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.printToolStripButton.Text = "&Print";
-            this.printToolStripButton.Click += new System.EventHandler(this.printToolStripButton_Click);
-            // 
-            // printPreviewToolStripButton
-            // 
-            this.printPreviewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
-            this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
-            this.printPreviewToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.printPreviewToolStripButton.Text = "Print Preview...";
-            this.printPreviewToolStripButton.Click += new System.EventHandler(this.printPreviewToolStripButton_Click);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
-            // 
-            // mnuExportToExcel
-            // 
-            this.mnuExportToExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
-            this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuExportToExcel.Name = "mnuExportToExcel";
-            this.mnuExportToExcel.Size = new System.Drawing.Size(23, 22);
-            this.mnuExportToExcel.Text = "Export to Excel";
-            this.mnuExportToExcel.Click += new System.EventHandler(this.mnuExportToExcel_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // tsBtnMapLocation
-            // 
-            this.tsBtnMapLocation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsBtnMapLocation.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnMapLocation.Image")));
-            this.tsBtnMapLocation.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsBtnMapLocation.Name = "tsBtnMapLocation";
-            this.tsBtnMapLocation.Size = new System.Drawing.Size(133, 22);
-            this.tsBtnMapLocation.Text = "Show Location on Map";
-            this.tsBtnMapLocation.Click += new System.EventHandler(this.tsBtnMapLocation_Click);
-            // 
-            // tsBtnMapOSLocation
-            // 
-            this.tsBtnMapOSLocation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsBtnMapOSLocation.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnMapOSLocation.Image")));
-            this.tsBtnMapOSLocation.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsBtnMapOSLocation.Name = "tsBtnMapOSLocation";
-            this.tsBtnMapOSLocation.Size = new System.Drawing.Size(151, 22);
-            this.tsBtnMapOSLocation.Text = "Show Location on OS Map";
-            this.tsBtnMapOSLocation.Click += new System.EventHandler(this.tsBtnMapOSLocation_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(117, 22);
-            this.toolStripLabel1.Text = "Census search using:";
-            // 
-            // cbCensusSearchProvider
-            // 
-            this.cbCensusSearchProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCensusSearchProvider.Items.AddRange(new object[] {
-            "Ancestry",
-            "Find My Past",
-            "FreeCen",
-            "FamilySearch"});
-            this.cbCensusSearchProvider.Name = "cbCensusSearchProvider";
-            this.cbCensusSearchProvider.Size = new System.Drawing.Size(121, 25);
-            this.cbCensusSearchProvider.SelectedIndexChanged += new System.EventHandler(this.cbCensusSearchProvider_SelectedIndexChanged);
-            // 
-            // contextMenuStrip
-            // 
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuViewFacts});
-            this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(190, 26);
-            // 
-            // mnuViewFacts
-            // 
-            this.mnuViewFacts.Name = "mnuViewFacts";
-            this.mnuViewFacts.Size = new System.Drawing.Size(189, 22);
-            this.mnuViewFacts.Text = "View Individuals Facts";
-            this.mnuViewFacts.Click += new System.EventHandler(this.mnuViewFacts_Click);
             // 
             // FamilyID
             // 
@@ -395,6 +234,167 @@
             this.Ahnentafel.HeaderText = "Ahnentafel";
             this.Ahnentafel.Name = "Ahnentafel";
             this.Ahnentafel.ReadOnly = true;
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsRecords});
+            this.statusStrip.Location = new System.Drawing.Point(0, 561);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(1038, 22);
+            this.statusStrip.TabIndex = 2;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // tsRecords
+            // 
+            this.tsRecords.Name = "tsRecords";
+            this.tsRecords.Size = new System.Drawing.Size(118, 17);
+            this.tsRecords.Text = "toolStripStatusLabel1";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuSaveCensusColumnLayout,
+            this.mnuResetCensusColumns,
+            this.toolStripSeparator2,
+            this.printToolStripButton,
+            this.printPreviewToolStripButton,
+            this.toolStripSeparator,
+            this.mnuExportToExcel,
+            this.toolStripSeparator3,
+            this.tsBtnMapLocation,
+            this.tsBtnMapOSLocation,
+            this.toolStripSeparator1,
+            this.toolStripLabel1,
+            this.cbCensusSearchProvider});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1038, 25);
+            this.toolStrip1.TabIndex = 3;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // mnuSaveCensusColumnLayout
+            // 
+            this.mnuSaveCensusColumnLayout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mnuSaveCensusColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveCensusColumnLayout.Image")));
+            this.mnuSaveCensusColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
+            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(23, 22);
+            this.mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
+            this.mnuSaveCensusColumnLayout.Click += new System.EventHandler(this.mnuSaveCensusColumnLayout_Click);
+            // 
+            // mnuResetCensusColumns
+            // 
+            this.mnuResetCensusColumns.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mnuResetCensusColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetCensusColumns.Image")));
+            this.mnuResetCensusColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnuResetCensusColumns.Name = "mnuResetCensusColumns";
+            this.mnuResetCensusColumns.Size = new System.Drawing.Size(23, 22);
+            this.mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
+            this.mnuResetCensusColumns.Click += new System.EventHandler(this.mnuResetCensusColumns_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // printToolStripButton
+            // 
+            this.printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
+            this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.printToolStripButton.Name = "printToolStripButton";
+            this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.printToolStripButton.Text = "&Print";
+            this.printToolStripButton.Click += new System.EventHandler(this.printToolStripButton_Click);
+            // 
+            // printPreviewToolStripButton
+            // 
+            this.printPreviewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
+            this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
+            this.printPreviewToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.printPreviewToolStripButton.Text = "Print Preview...";
+            this.printPreviewToolStripButton.Click += new System.EventHandler(this.printPreviewToolStripButton_Click);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // mnuExportToExcel
+            // 
+            this.mnuExportToExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
+            this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnuExportToExcel.Name = "mnuExportToExcel";
+            this.mnuExportToExcel.Size = new System.Drawing.Size(23, 22);
+            this.mnuExportToExcel.Text = "Export to Excel";
+            this.mnuExportToExcel.Click += new System.EventHandler(this.mnuExportToExcel_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsBtnMapLocation
+            // 
+            this.tsBtnMapLocation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsBtnMapLocation.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnMapLocation.Image")));
+            this.tsBtnMapLocation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnMapLocation.Name = "tsBtnMapLocation";
+            this.tsBtnMapLocation.Size = new System.Drawing.Size(174, 22);
+            this.tsBtnMapLocation.Text = "Show Location on Google Map";
+            this.tsBtnMapLocation.Click += new System.EventHandler(this.tsBtnMapLocation_Click);
+            // 
+            // tsBtnMapOSLocation
+            // 
+            this.tsBtnMapOSLocation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsBtnMapOSLocation.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnMapOSLocation.Image")));
+            this.tsBtnMapOSLocation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnMapOSLocation.Name = "tsBtnMapOSLocation";
+            this.tsBtnMapOSLocation.Size = new System.Drawing.Size(151, 22);
+            this.tsBtnMapOSLocation.Text = "Show Location on OS Map";
+            this.tsBtnMapOSLocation.Click += new System.EventHandler(this.tsBtnMapOSLocation_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(117, 22);
+            this.toolStripLabel1.Text = "Census search using:";
+            // 
+            // cbCensusSearchProvider
+            // 
+            this.cbCensusSearchProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCensusSearchProvider.Items.AddRange(new object[] {
+            "Ancestry",
+            "Find My Past",
+            "FreeCen",
+            "FamilySearch"});
+            this.cbCensusSearchProvider.Name = "cbCensusSearchProvider";
+            this.cbCensusSearchProvider.Size = new System.Drawing.Size(121, 25);
+            this.cbCensusSearchProvider.SelectedIndexChanged += new System.EventHandler(this.cbCensusSearchProvider_SelectedIndexChanged);
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuViewFacts});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(190, 26);
+            // 
+            // mnuViewFacts
+            // 
+            this.mnuViewFacts.Name = "mnuViewFacts";
+            this.mnuViewFacts.Size = new System.Drawing.Size(189, 22);
+            this.mnuViewFacts.Text = "View Individuals Facts";
+            this.mnuViewFacts.Click += new System.EventHandler(this.mnuViewFacts_Click);
             // 
             // Census
             // 
