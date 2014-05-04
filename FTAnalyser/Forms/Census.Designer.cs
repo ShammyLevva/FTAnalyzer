@@ -66,6 +66,7 @@
             this.RelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CensusReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnHelp = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgCensus)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -144,7 +145,8 @@
             this.tsBtnMapOSLocation,
             this.toolStripSeparator1,
             this.toolStripLabel1,
-            this.cbCensusSearchProvider});
+            this.cbCensusSearchProvider,
+            this.btnHelp});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1038, 25);
@@ -413,6 +415,16 @@
             this.Ahnentafel.Name = "Ahnentafel";
             this.Ahnentafel.ReadOnly = true;
             // 
+            // btnHelp
+            // 
+            this.btnHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
+            this.btnHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(23, 22);
+            this.btnHelp.Text = "toolStripButton1";
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
+            // 
             // Census
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -474,5 +486,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RelationToRoot;
         private System.Windows.Forms.DataGridViewTextBoxColumn CensusReference;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ahnentafel;
+        private System.Windows.Forms.ToolStripButton btnHelp;
     }
 }

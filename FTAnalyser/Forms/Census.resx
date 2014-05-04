@@ -278,8 +278,78 @@
         TgDQASA1MVpwzwAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="btnHelp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOwSURBVDhPPZNvTBN3HMaPvVncErOEvRjJllmTDeKYwFS2
+        6BiTKgxTzoECTin+YerEgtPqqJFZtIusQ6nAgHUMW0RMEYZmOKn8X9Ad0A6LFeSA0ltbQe70sCVSx0qf
+        neB4Xv8++Ty/5PsQiwECFFWuwNxqjjyu5zTHKjkqW8vy+4pZPr2QpZLzOQ15miPFCleg8DjgBbUQpRIv
+        qS5OiNS1j9TlNzz09d5ZjDzww8kBtnE/uu75oGuewTcXeDrxu3F1lJwREQKzQAvmEwKsaeC1rRYvY2X8
+        qOkEFDo/virxIatsFqrLXtR2etE79Az65ikmRWXXRsosovkmz2vnC+b2fi9jGgYOaYHNqjkUXp3DoGMO
+        j9xz6LfN4lvdFGTFk2jrm8aFJpaJlVvUIdKWQEKh58iyRg993+lHXo0fMQofci/6YB72CTYvCq540HZn
+        Bmbai2SlHdtPj+K21Y39P1jp99PbSEJewWkahT9f6vAjOudfiBXPcELvhfb3p4jNYbE2y4VTVRxGXP9g
+        55kRLNvag5J6J8ob7IhIu64hZD9x1KDDD1mZD+vkM/jokAdRR3hEH5nEmkwntiid0Bt5tJqfIP7oXQSR
+        fyDhmAmU9TFWba+jiIwilrdN+BGfO4MPs59gdSaH8P3jCM1gEJ/DQNf0GN0DHqj0doSm3cbr8TexfMtN
+        0I5pRKRU84T0LMuPjs8hVuHGqkwWYftceG/PGILTh5BV5EDv4DRKf3VgvawHQZJmvLbhN7xNNoL+24Pw
+        pEqeSM5nKat9FhnneKzc68SK3TYESwexfJsFeToHTPfd2KmyCLARS8XX8Gp0HTYcbMUty0OEfV5KEZK8
+        Sc3ljmn8csONFbtG8E7aAESpfXgricKmo32QFw9g9e4OLI1pwCuf1GLJxzVQV1lRVPMXQiXnNcR6hYs8
+        rH1IU4NPsUM1hmUpZryZ+CfeSOhAZsE9GFpc+PRAO5ZEGfDy2mrEHGiat+86Xk8Hx50liTXCbUtO2tU6
+        I8u0mKawNdeKoIR2BH5mxKnKIfQN8YjLbl2E69vGUG7oZtal/qgOEZ8RdiGcY6RsSJR4ckBb0ehiuvp5
+        aAw2xH/dhQ+kRkTtNUJyuBXfV91Fu+kBSmooZuOen7XvbixYOOX5CMOI/LJbJM7qUh8sMPdc63SMWoZ5
+        jDqnQTNu3LozgfOXzEjPqaOfm+dhpfLFmBaDgBBpQ+DKL64mhG8znItIraIikir48MRSPmxzMRW6qVAT
+        HKcmF2r/byaI/wArlXrsEWAN4gAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>231, 17</value>
+  </metadata>
+  <metadata name="FamilyID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Position.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="IndividualID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="CensusLoc.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="CensusName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Age.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Occupation.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="BirthDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="BirthLocation.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="DeathDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="DeathLocation.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="CensusStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Relation.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="RelationToRoot.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="CensusReference.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Ahnentafel.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

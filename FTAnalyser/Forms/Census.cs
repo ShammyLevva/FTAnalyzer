@@ -111,14 +111,16 @@ namespace FTAnalyzer.Forms
 
         private string GetTooltipText(DataGridViewCellStyle style)
         {
+            string result;
             if (style.Font.Bold && style.ForeColor == Color.Red)
-                return "This direct ancestor is known to be alive on this census.";
+                result = "This direct ancestor is known to be alive on this census.";
             else if (style.Font.Bold)
-                return "This individual is known to be alive on this census.";
+                result = "This individual is known to be alive on this census.\n";
             else if (style.ForeColor == Color.Red)
-                return "This is a direct ancestor that may be alive on this census.";
+                result = "This is a direct ancestor that may be alive on this census.";
             else
-                return CensusProviderText();
+                result = "This individual may be alive on this census.";
+            return result + "\n" + CensusProviderText();
         }
 
         private string CensusProviderText()
@@ -280,6 +282,11 @@ namespace FTAnalyzer.Forms
         private void Census_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Dispose();
+        }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://ftanalyzer.codeplex.com/wikipage?title=The%20Census%20Tab&referringTitle=Documentation");
         }
     }
 }

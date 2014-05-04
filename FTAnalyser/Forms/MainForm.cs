@@ -2153,6 +2153,8 @@ namespace FTAnalyzer
                     MessageBox.Show(ex.Message, "FT Analyzer");
                 }
             }
+            else
+                MessageBox.Show("No unrecognised census references found.", "FTAnalyzer");
         }
         
         private void WriteFile(IEnumerable<string> results, string filename)
