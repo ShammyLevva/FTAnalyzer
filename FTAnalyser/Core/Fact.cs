@@ -108,6 +108,7 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("MARRIAGE REG", MARRIAGE);
             CUSTOM_TAGS.Add("DEATH REG", DEATH);
             CUSTOM_TAGS.Add("MISSING", MISSING);
+            CUSTOM_TAGS.Add("CHILDREN STATUS", NUM_CHILDREN);
 
             COMMENT_FACTS.Add(NAME); 
             COMMENT_FACTS.Add(OCCUPATION);
