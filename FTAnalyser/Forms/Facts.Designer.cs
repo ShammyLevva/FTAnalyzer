@@ -312,6 +312,7 @@
             this.CensusReference.MinimumWidth = 25;
             this.CensusReference.Name = "CensusReference";
             this.CensusReference.ReadOnly = true;
+            this.CensusReference.Width = 250;
             // 
             // AgeAtFact
             // 
