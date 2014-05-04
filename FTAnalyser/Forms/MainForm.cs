@@ -1148,8 +1148,12 @@ namespace FTAnalyzer
             Predicate<CensusIndividual> dateFilter = censusDone ?
                 new Predicate<CensusIndividual>(x => x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate)) :
                 new Predicate<CensusIndividual>(x => !x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate));
-            
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, dateFilter);
+            if (!censusDone && Properties.GeneralSettings.Default.HidePeopleWithMissingTag)
+            {  //if we are reporting missing from census and we are hiding people who have a missing tag then only select those who are not tagged missing
+                Predicate<CensusIndividual> missingTag = new Predicate<CensusIndividual>(x => !x.IsTaggedMissingCensus(cenDate.SelectedDate));
+                filter = FilterUtils.AndFilter<CensusIndividual>(filter, missingTag);
+            }
             if (txtCensusSurname.Text.Length > 0)
             {
                 Predicate<CensusIndividual> surnameFilter = FilterUtils.StringFilter<CensusIndividual>(x => x.Surname, txtCensusSurname.Text);

@@ -601,7 +601,7 @@ namespace FTAnalyzer
             return false;
         }
 
-        public bool IsCensusMissing(CensusDate when)
+        public bool IsTaggedMissingCensus(CensusDate when)
         {
             if (when == null) return false;
             foreach (Fact f in facts)
@@ -910,7 +910,7 @@ namespace FTAnalyzer
                 return 0; // not alive - grey
             if (!IsCensusDone(census))
             {
-                if (IsCensusMissing(census))
+                if (IsTaggedMissingCensus(census))
                     return 8;
                 if (IsCensusDone(census, true, false) || (Countries.IsUnitedKingdom(census.Country) && IsCensusDone(census.EquivalentUSCensus, true, false)))
                     return 6; // checks if on census outside UK in census year or on prior year (to check US census)

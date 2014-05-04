@@ -64,50 +64,50 @@ namespace FTAnalyzer
 
         static Fact()
         {
-            CUSTOM_TAGS.Add("IGI Search", FAMILYSEARCH);
-            CUSTOM_TAGS.Add("Childless", CHILDLESS);
-            CUSTOM_TAGS.Add("Contact", CONTACT);
-            CUSTOM_TAGS.Add("Witness", WITNESS);
-            CUSTOM_TAGS.Add("Witnesses", WITNESS);
-            CUSTOM_TAGS.Add("Unmarried", UNMARRIED);
-            CUSTOM_TAGS.Add("Friends", UNMARRIED);
-            CUSTOM_TAGS.Add("Partners", UNMARRIED);
-            CUSTOM_TAGS.Add("Unknown", UNKNOWN);
-            CUSTOM_TAGS.Add("Unknown-Begin", UNKNOWN);
-            CUSTOM_TAGS.Add("Arrival", ARRIVAL);
-            CUSTOM_TAGS.Add("Departure", DEPARTURE);
-            CUSTOM_TAGS.Add("Record Change", CHANGE);
-            CUSTOM_TAGS.Add("Lost Cousins", LOSTCOUSINS);
-            CUSTOM_TAGS.Add("LostCousins", LOSTCOUSINS);
-            CUSTOM_TAGS.Add("Died Single", DIED_SINGLE);
-            CUSTOM_TAGS.Add("Census 1841", CENSUS);
-            CUSTOM_TAGS.Add("Census 1851", CENSUS);
-            CUSTOM_TAGS.Add("Census 1861", CENSUS);
-            CUSTOM_TAGS.Add("Census 1871", CENSUS);
-            CUSTOM_TAGS.Add("Census 1881", CENSUS);
-            CUSTOM_TAGS.Add("Census 1891", CENSUS);
-            CUSTOM_TAGS.Add("Census 1901", CENSUS);
-            CUSTOM_TAGS.Add("Census 1911", CENSUS);
-            CUSTOM_TAGS.Add("Census 1790", CENSUS);
-            CUSTOM_TAGS.Add("Census 1800", CENSUS);
-            CUSTOM_TAGS.Add("Census 1810", CENSUS);
-            CUSTOM_TAGS.Add("Census 1820", CENSUS);
-            CUSTOM_TAGS.Add("Census 1830", CENSUS);
-            CUSTOM_TAGS.Add("Census 1840", CENSUS);
-            CUSTOM_TAGS.Add("Census 1850", CENSUS);
-            CUSTOM_TAGS.Add("Census 1860", CENSUS);
-            CUSTOM_TAGS.Add("Census 1870", CENSUS);
-            CUSTOM_TAGS.Add("Census 1880", CENSUS);
-            CUSTOM_TAGS.Add("Census 1890", CENSUS);
-            CUSTOM_TAGS.Add("Census 1900", CENSUS);
-            CUSTOM_TAGS.Add("Census 1910", CENSUS);
-            CUSTOM_TAGS.Add("Census 1920", CENSUS);
-            CUSTOM_TAGS.Add("Census 1930", CENSUS);
-            CUSTOM_TAGS.Add("Census 1940", CENSUS);
-            CUSTOM_TAGS.Add("Birth Reg", BIRTH);
-            CUSTOM_TAGS.Add("Marriage Reg", MARRIAGE);
-            CUSTOM_TAGS.Add("Death Reg", DEATH);
-            CUSTOM_TAGS.Add("Missing", MISSING);
+            CUSTOM_TAGS.Add("IGI SEARCH", FAMILYSEARCH);
+            CUSTOM_TAGS.Add("CHILDLESS", CHILDLESS);
+            CUSTOM_TAGS.Add("CONTACT", CONTACT);
+            CUSTOM_TAGS.Add("WITNESS", WITNESS);
+            CUSTOM_TAGS.Add("WITNESSES", WITNESS);
+            CUSTOM_TAGS.Add("UNMARRIED", UNMARRIED);
+            CUSTOM_TAGS.Add("FRIENDS", UNMARRIED);
+            CUSTOM_TAGS.Add("PARTNERS", UNMARRIED);
+            CUSTOM_TAGS.Add("UNKNOWN", UNKNOWN);
+            CUSTOM_TAGS.Add("UNKNOWN-BEGIN", UNKNOWN);
+            CUSTOM_TAGS.Add("ARRIVAL", ARRIVAL);
+            CUSTOM_TAGS.Add("DEPARTURE", DEPARTURE);
+            CUSTOM_TAGS.Add("RECORD CHANGE", CHANGE);
+            CUSTOM_TAGS.Add("LOST COUSINS", LOSTCOUSINS);
+            CUSTOM_TAGS.Add("LOSTCOUSINS", LOSTCOUSINS);
+            CUSTOM_TAGS.Add("DIED SINGLE", DIED_SINGLE);
+            CUSTOM_TAGS.Add("CENSUS 1841", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1851", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1861", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1871", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1881", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1891", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1901", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1911", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1790", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1800", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1810", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1820", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1830", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1840", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1850", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1860", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1870", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1880", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1890", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1900", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1910", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1920", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1930", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1940", CENSUS);
+            CUSTOM_TAGS.Add("BIRTH REG", BIRTH);
+            CUSTOM_TAGS.Add("MARRIAGE REG", MARRIAGE);
+            CUSTOM_TAGS.Add("DEATH REG", DEATH);
+            CUSTOM_TAGS.Add("MISSING", MISSING);
 
             COMMENT_FACTS.Add(NAME); 
             COMMENT_FACTS.Add(OCCUPATION);
@@ -255,7 +255,7 @@ namespace FTAnalyzer
                     this.Preferred = preferred;
                     if (FactType.Equals(CUSTOM_EVENT) || FactType.Equals(CUSTOM_FACT))
                     {
-                        string tag = FamilyTree.GetText(node, "TYPE");
+                        string tag = FamilyTree.GetText(node, "TYPE").ToUpper();
                         string factType;
                         if (CUSTOM_TAGS.TryGetValue(tag, out factType))
                         {

@@ -27,6 +27,7 @@ namespace FTAnalyzer.UserControls
             chkCompactCensusRef.Checked = Properties.GeneralSettings.Default.UseCompactCensusRef;
             upDownAge.Value = Properties.GeneralSettings.Default.MinParentalAge;
             chkUseAlias.Checked = Properties.GeneralSettings.Default.ShowAliasInName;
+            chkHideMissingTagged.Checked = Properties.GeneralSettings.Default.HidePeopleWithMissingTag;
 			Properties.GeneralSettings.Default.ReloadRequired = false;
 		}
 
@@ -45,6 +46,7 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.MultipleFactForms = chkMultipleFactForms.Checked;
             Properties.GeneralSettings.Default.UseCompactCensusRef = chkCompactCensusRef.Checked;
             Properties.GeneralSettings.Default.ShowAliasInName = chkUseAlias.Checked;
+            Properties.GeneralSettings.Default.HidePeopleWithMissingTag = chkHideMissingTagged.Checked;
             Properties.GeneralSettings.Default.Save();
 			OnUseBaptismDatesChanged();
 			OnAllowEmptyLocationsChanged();

@@ -202,5 +202,17 @@ namespace FTAnalyzer.Properties {
                 this["ShowAliasInName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HidePeopleWithMissingTag {
+            get {
+                return ((bool)(this["HidePeopleWithMissingTag"]));
+            }
+            set {
+                this["HidePeopleWithMissingTag"] = value;
+            }
+        }
     }
 }

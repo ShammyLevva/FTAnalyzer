@@ -44,6 +44,7 @@
             this.chkMultipleFactForms = new System.Windows.Forms.CheckBox();
             this.chkCompactCensusRef = new System.Windows.Forms.CheckBox();
             this.chkUseAlias = new System.Windows.Forms.CheckBox();
+            this.chkHideMissingTagged = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownAge)).BeginInit();
             this.SuspendLayout();
@@ -156,10 +157,19 @@
             this.chkUseAlias.Name = "chkUseAlias";
             this.chkUseAlias.UseVisualStyleBackColor = true;
             // 
+            // chkHideMissingTagged
+            // 
+            resources.ApplyResources(this.chkHideMissingTagged, "chkHideMissingTagged");
+            this.chkHideMissingTagged.Checked = true;
+            this.chkHideMissingTagged.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkHideMissingTagged.Name = "chkHideMissingTagged";
+            this.chkHideMissingTagged.UseVisualStyleBackColor = true;
+            // 
             // GeneralSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkHideMissingTagged);
             this.Controls.Add(this.chkUseAlias);
             this.Controls.Add(this.chkCompactCensusRef);
             this.Controls.Add(this.chkMultipleFactForms);
@@ -197,6 +207,7 @@
         private System.Windows.Forms.CheckBox chkMultipleFactForms;
         private System.Windows.Forms.CheckBox chkCompactCensusRef;
         private System.Windows.Forms.CheckBox chkUseAlias;
+        private System.Windows.Forms.CheckBox chkHideMissingTagged;
 
 
 	}
