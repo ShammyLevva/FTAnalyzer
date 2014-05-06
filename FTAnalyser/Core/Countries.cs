@@ -48,7 +48,8 @@ namespace FTAnalyzer
             TAJIKISTAN = "Tajikistan", TURKMENISTAN = "Turkmenistan", TUNISIA = "Tunisia", TONGA = "Tonga", TUVALU = "Tuvalu",
             TRINIDAD_TOBAGO = "Trinidad and Tobago", TANZANIA = "Tanzania", UGANDA = "Uganda", URUGUAY = "Uruguay",
             UZBEKISTAN = "Uzbekistan", VENEZUELA = "Venezuela", VIETNAM = "Vietnam", VANATU = "Vanatu", SAMOA = "Samoa", 
-            YEMEN = "Yemen", ZAMBIA = "Zambia", BURKINA_FASO = "Burkina Faso", BOSNIA = "Bosnia and Herzegovina";
+            YEMEN = "Yemen", ZAMBIA = "Zambia", BURKINA_FASO = "Burkina Faso", BOSNIA = "Bosnia and Herzegovina",
+            CHANNEL_ISLANDS = "Channel Islands";
 
         //AG  Antigua and Barbuda
         //BN  Brunei Darussalam
@@ -75,15 +76,15 @@ namespace FTAnalyzer
             SAUDI_ARABIA, SOLOMON_ISLANDS, SEYSCHELLES, SUDAN, SLOVAKIA, SLOVENIA, CZECH_REPUBLIC, CZECHOSLOVAKIA, SENEGAL, SIERRA_LEONE,
             SOMALIA, SURINAME, SOUTH_SUDAN, EL_SALVADOR, SYRIA, SWAZILAND, CHAD, SOUTH_KOREA, NORTH_KOREA, KOREA, IVORY_COAST, TOGO, 
             THAILAND, TAJIKISTAN, TURKMENISTAN, TUNISIA, TONGA, TUVALU, TRINIDAD_TOBAGO, TANZANIA, UGANDA, URUGUAY, UZBEKISTAN, VENEZUELA,
-            VIETNAM, VANATU, SAMOA, YEMEN, ZAMBIA, BURKINA_FASO, BOSNIA
+            VIETNAM, VANATU, SAMOA, YEMEN, ZAMBIA, BURKINA_FASO, BOSNIA, CHANNEL_ISLANDS
         });
 
         private static readonly ISet<string> UK_COUNTRIES = new HashSet<string>(new string[] { 
-            SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM, NORTHERN_IRELAND, ISLE_OF_MAN
+            SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM, NORTHERN_IRELAND, ISLE_OF_MAN, CHANNEL_ISLANDS
         });
 
         private static readonly ISet<string> CENSUS_COUNTRIES = new HashSet<string>(new string[] { 
-            SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM, UNITED_STATES, CANADA, ISLE_OF_MAN, IRELAND
+            SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM, UNITED_STATES, CANADA, ISLE_OF_MAN, IRELAND, CHANNEL_ISLANDS
         });
 
         private static Dictionary<string, Envelope> BOUNDING_BOXES;

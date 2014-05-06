@@ -103,7 +103,7 @@ namespace FTAnalyzer
             FactLocation bestLocation = indiv.BestLocation(CensusDate);
             if (birth <= CensusDate.StartDate && death >= CensusDate.StartDate)
             {
-                if ((checkCensus && indiv.IsCensusDone(CensusDate) == censusDone) || !checkCensus)
+                if ((checkCensus && indiv.IsCensusDone(CensusDate) == censusDone && !indiv.OutOfCountry(CensusDate)) || !checkCensus)
                 {
                     if (parentCheck) // Husband or Wife with valid date range
                         return true;
