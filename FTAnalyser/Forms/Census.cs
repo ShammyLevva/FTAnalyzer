@@ -73,7 +73,7 @@ namespace FTAnalyzer.Forms
             int numIndividuals = (from x in individuals select x.IndividualID).Distinct().Count();
             int numFamilies = (from x in individuals select x.FamilyID).Distinct().Count();
 
-            tsRecords.Text = individuals.Count + " Rows containing " + numIndividuals + " Individuals and " + 
+            tsRecords.Text = individuals.Count + " Rows containing " + numIndividuals + " Individuals and " +
                              numFamilies + " Families. " + CensusProviderText();
         }
 
@@ -125,10 +125,7 @@ namespace FTAnalyzer.Forms
 
         private string CensusProviderText()
         {
-            if(LostCousins)
-                return "Shift Double click to search " + cbCensusSearchProvider.Text + " for this person's census record";
-            else
-                return "Double click to search " + cbCensusSearchProvider.Text + " for this person's census record";
+            return "Double click to search " + cbCensusSearchProvider.Text + " for this person's census record. Shift Double click to display thier facts.";
         }
 
         private void dgCensus_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -213,7 +210,7 @@ namespace FTAnalyzer.Forms
             {
                 CensusIndividual ds = (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
                 FamilyTree ft = FamilyTree.Instance;
-                if (LostCousins && !Control.ModifierKeys.Equals(Keys.Shift))
+                if (Control.ModifierKeys.Equals(Keys.Shift))
                 {
                     Facts factForm = new Facts(ds);
                     MainForm.DisposeDuplicateForms(factForm);
