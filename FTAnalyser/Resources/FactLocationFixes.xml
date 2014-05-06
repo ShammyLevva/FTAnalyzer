@@ -34,6 +34,8 @@
       <CountryTypo from="West Germany" to="Germany" />
       <CountryTypo from="N Wales" to="Wales" />
       <CountryTypo from="S Wales" to="Wales" />
+      <CountryTypo from="Channel Isles" to="Channel Islands" />
+      
       <!-- Chapman Codes -->
       <CountryTypo from="CHI" to="Channel Islands" />
       <CountryTypo from="ENG" to="England" />
