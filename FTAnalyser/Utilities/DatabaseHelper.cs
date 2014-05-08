@@ -143,14 +143,6 @@ namespace FTAnalyzer.Utilities
                 }
                 if (dbVersion < v3_1_2_0)
                 {
-                    // Version v3.1.0.2 needs to reset Google locations & found level to unknown where status is user entered
-                    SQLiteCommand cmd = new SQLiteCommand("update geocode set foundlocation='', foundlevel=-2 where geocodestatus=3", conn);
-                    cmd.ExecuteNonQuery();
-                    cmd = new SQLiteCommand("update versions set Database = '3.1.2.0'", conn);
-                    cmd.ExecuteNonQuery();
-                }
-                if (dbVersion < v3_2_1_0)
-                {
                     bool proceed = false;
                     if (restoring)
                         proceed = true;
@@ -169,6 +161,8 @@ namespace FTAnalyzer.Utilities
                         cmd = new SQLiteCommand("alter table geocode add column Longm real default 0.0", conn);
                         cmd.ExecuteNonQuery();
                         ConvertLatLongs();
+                        cmd = new SQLiteCommand("update geocode set foundlocation='', foundlevel=-2 where geocodestatus=3", conn);
+                        cmd.ExecuteNonQuery();
                         cmd = new SQLiteCommand("update versions set Database = '3.2.1.0'", conn);
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Database lat/long upgrade complete", "FT Analyzer");
