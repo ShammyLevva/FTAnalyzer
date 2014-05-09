@@ -1805,7 +1805,7 @@ namespace FTAnalyzer
             string searchtext = ind.Forename + "+" + ind.Surname;
             if (ind.ServiceNumber.Length > 0)
                 searchtext += "+" + ind.ServiceNumber;
-            Process.Start("https://beta.livesofthefirstworldwar.org/search#FreeSearch=" + searchtext + "&PageIndex=1&PageSize=20");
+            Process.Start("https://www.livesofthefirstworldwar.org/search#FreeSearch=" + searchtext + "&PageIndex=1&PageSize=20");
         }
 
         private void dgIndividuals_MouseDown(object sender, MouseEventArgs e)
