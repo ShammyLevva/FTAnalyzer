@@ -1860,55 +1860,35 @@ namespace FTAnalyzer
 
         private string BuildFindMyPastQuery(string censusCountry, int censusYear, Individual person)
         {
-            // bad  http://www.findmypast.co.uk/CensusPersonSearchResultServlet?basicSearch=false&censusYear=1881&occupation=&otherForenames=&otherLastName=&pageDirection=&recordPosition=0&residence=&route=&searchHouseholds=6,15&searchInstitutions=9&searchVessels=11,12&sortOrder=nameAsc&startNewSearch=startNewSearch&forenames=Michael&fns=fns&lastName=Tebbutt&sns=sns&yearOfBirth=1867&yearOfBirthVariation=1&birthPlace=Streatham&country=England&coIdList=Surrey++++++++++++++++++++++++++++++++++%3a3%2c4+++++++++++++++++++++++++++
-            // good http://www.findmypast.co.uk/CensusPersonSearchResultServlet?basicSearch=false&censusYear=1881&occupation=&otherForenames=&otherLastName=&pageDirection=&recordPosition=0&residence=&route=&searchHouseholds=6,15&searchInstitutions=9&searchVessels=11,12&sortOrder=nameAsc&startNewSearch=startNewSearch&forenames=C&fns=fns&lastName=Whitethread&sns=sns&yearOfBirth=1867&yearOfBirthVariation=1&birthPlace=Streatham&country=England&coIdList=Surrey++++++++++++++++++++++++++++++++++%3a3%2c4+++++++++++++++++++++++++++
-            if (!censusCountry.Equals(Countries.UNITED_KINGDOM) && !censusCountry.Equals("Unknown"))
-            {
-                MessageBox.Show("Sorry non UK census searching of Find My Past isn't supported in this version of FTAnalyzer", "FT Analyzer");
-                return null;
-            }
+            // new http://search.findmypast.co.uk/results/united-kingdom-records-in-census-land-and-surveys?firstname=peter&firstname_variants=true&lastname=moir&lastname_variants=true&eventyear=1881&eventyear_offset=2&yearofbirth=1825&yearofbirth_offset=2
             FactDate censusFactDate = new FactDate(censusYear.ToString());
             UriBuilder uri = new UriBuilder();
-            uri.Host = "www.findmypast.co.uk";
-            uri.Path = "/CensusPersonSearchResultServlet";
+            uri.Host = "search.findmypast.co.uk";
+            if(censusCountry.Equals(Countries.UNITED_STATES))
+                uri.Path = "/results/united-states-records-in-census-land-and-surveys";
+            if (Countries.IsUnitedKingdom(censusCountry))
+                uri.Path = "/results/united-kingdom-records-in-census-land-and-surveys";
+            if (censusCountry.Equals(Countries.IRELAND))
+                uri.Path = "/results/ireland-records-in-census-land-and-surveys";
+            else
+                uri.Path = "/results/world-records-in-census-land-and-surveys";
             StringBuilder query = new StringBuilder();
-            query.Append("basicSearch=false&");
-            query.Append("censusYear=" + censusYear + "&");
-            query.Append("occupation=&");
-            query.Append("otherForenames=&");
-            query.Append("otherLastName=&");
-            query.Append("pageDirection=&");
-            query.Append("recordPosition=0&");
-            query.Append("residence=&");
-            query.Append("route=&");
-            query.Append("searchHouseholds=6,15&");
-            query.Append("searchInstitutions=9&");
-            query.Append("searchVessels=11,12&");
-            query.Append("sortOrder=nameAsc&");
-            query.Append("startNewSearch=startNewSearch&");
-
+            query.Append("eventyear=" + censusYear + "&eventyear_offset=0&");
+            
             if (person.Forenames != "?" && person.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
             {
                 int pos = person.Forenames.IndexOf(" ");
                 string forenames = person.Forenames;
                 if (pos > 0)
-                    forenames = person.Forenames.Substring(0, pos); //strip out any middle names as FreeCen searches better without then
-                query.Append("forenames=" + HttpUtility.UrlEncode(forenames) + "&");
-                query.Append("fns=fns&");
-            }
-            else
-            {
-                query.Append("forenames=&fns=fns&");
+                    forenames = person.Forenames.Substring(0, pos); //strip out any middle names as searches better without then
+                query.Append("firstname=" + HttpUtility.UrlEncode(forenames) + "&");
+                query.Append("firstname_variants=true&");
             }
             string surname = person.SurnameAtDate(censusFactDate);
             if (surname != "?" && surname.ToUpper() != Individual.UNKNOWN_NAME)
             {
                 query.Append("lastName=" + HttpUtility.UrlEncode(surname) + "&");
-                query.Append("sns=sns&");
-            }
-            else
-            {
-                query.Append("lastName=&sns=sns&");
+                query.Append("lastname_variants=true&");
             }
             if (person.BirthDate.IsKnown)
             {
@@ -1932,31 +1912,27 @@ namespace FTAnalyzer
                     if (range > 5) range = 10;
                     if (year > censusYear) year = censusYear;
                 }
-                query.Append("yearOfBirth=" + year + "&");
-                query.Append("yearOfBirthVariation=" + range + "&");
+                query.Append("yearofbirth=" + year + "&");
+                query.Append("yearofbirth_offset=" + range + "&");
             }
-            else
-            {
-                query.Append("yearOfBirth=&yearOfBirthVariation=&");
-            }
-            if (person.BirthLocation != FactLocation.UNKNOWN_LOCATION)
-            {
-                query.Append("birthPlace=" + HttpUtility.UrlEncode(person.BirthLocation.SubRegion) + "&");
-                Tuple<string, string> area = person.BirthLocation.FindMyPastCountyCode;
-                if (area != null)
-                {
-                    query.Append("country=" + HttpUtility.UrlEncode(area.Item1) + "&");
-                    query.Append("coIdList=" + HttpUtility.UrlEncode(area.Item2));
-                }
-                else
-                {
-                    query.Append("country=&coIdList=");
-                }
-            }
-            else
-            {
-                query.Append("birthPlace=&country=&coIdList=");
-            }
+            //if (person.BirthLocation != FactLocation.UNKNOWN_LOCATION)
+            //{
+            //    query.Append("birthPlace=" + HttpUtility.UrlEncode(person.BirthLocation.SubRegion) + "&");
+            //    Tuple<string, string> area = person.BirthLocation.FindMyPastCountyCode;
+            //    if (area != null)
+            //    {
+            //        query.Append("country=" + HttpUtility.UrlEncode(area.Item1) + "&");
+            //        query.Append("coIdList=" + HttpUtility.UrlEncode(area.Item2));
+            //    }
+            //    else
+            //    {
+            //        query.Append("country=&coIdList=");
+            //    }
+            //}
+            //else
+            //{
+            //    query.Append("birthPlace=&country=&coIdList=");
+            //}
             uri.Query = query.ToString();
             return uri.ToString();
         }

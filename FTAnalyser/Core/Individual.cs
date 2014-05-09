@@ -604,12 +604,7 @@ namespace FTAnalyzer
         public bool IsTaggedMissingCensus(CensusDate when)
         {
             if (when == null) return false;
-            foreach (Fact f in facts)
-            {
-                if (f.FactType.Equals(Fact.MISSING) && f.FactDate.Overlaps(when))
-                    return true;
-            }
-            return false;
+            return facts.Any(x => x.FactType == Fact.MISSING && x.FactDate.Overlaps(when));
         }
 
         public string ReferralFamilyID { get; set; }
