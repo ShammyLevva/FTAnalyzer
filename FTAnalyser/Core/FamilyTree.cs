@@ -1866,9 +1866,9 @@ namespace FTAnalyzer
             uri.Host = "search.findmypast.co.uk";
             if(censusCountry.Equals(Countries.UNITED_STATES))
                 uri.Path = "/results/united-states-records-in-census-land-and-surveys";
-            if (Countries.IsUnitedKingdom(censusCountry))
+            else if (Countries.IsUnitedKingdom(censusCountry))
                 uri.Path = "/results/united-kingdom-records-in-census-land-and-surveys";
-            if (censusCountry.Equals(Countries.IRELAND))
+            else if (censusCountry.Equals(Countries.IRELAND))
                 uri.Path = "/results/ireland-records-in-census-land-and-surveys";
             else
                 uri.Path = "/results/world-records-in-census-land-and-surveys";

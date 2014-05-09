@@ -48,6 +48,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.cbCensusSearchProvider = new System.Windows.Forms.ToolStripComboBox();
+            this.btnHelp = new System.Windows.Forms.ToolStripButton();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuViewFacts = new System.Windows.Forms.ToolStripMenuItem();
             this.FamilyID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,7 +67,6 @@
             this.RelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CensusReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnHelp = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgCensus)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -261,6 +261,16 @@
             this.cbCensusSearchProvider.Size = new System.Drawing.Size(121, 25);
             this.cbCensusSearchProvider.SelectedIndexChanged += new System.EventHandler(this.cbCensusSearchProvider_SelectedIndexChanged);
             // 
+            // btnHelp
+            // 
+            this.btnHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
+            this.btnHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(23, 22);
+            this.btnHelp.Text = "toolStripButton1";
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
+            // 
             // contextMenuStrip
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -364,12 +374,11 @@
             // 
             // DeathLocation
             // 
-            this.DeathLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.DeathLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.DeathLocation.DataPropertyName = "DeathLocation";
             this.DeathLocation.HeaderText = "DeathLocation";
             this.DeathLocation.Name = "DeathLocation";
             this.DeathLocation.ReadOnly = true;
-            this.DeathLocation.Width = 102;
             // 
             // CensusStatus
             // 
@@ -414,16 +423,6 @@
             this.Ahnentafel.HeaderText = "Ahnentafel";
             this.Ahnentafel.Name = "Ahnentafel";
             this.Ahnentafel.ReadOnly = true;
-            // 
-            // btnHelp
-            // 
-            this.btnHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
-            this.btnHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(23, 22);
-            this.btnHelp.Text = "toolStripButton1";
-            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // Census
             // 
@@ -470,6 +469,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem mnuViewFacts;
+        private System.Windows.Forms.ToolStripButton btnHelp;
         private System.Windows.Forms.DataGridViewTextBoxColumn FamilyID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Position;
         private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
@@ -486,6 +486,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RelationToRoot;
         private System.Windows.Forms.DataGridViewTextBoxColumn CensusReference;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ahnentafel;
-        private System.Windows.Forms.ToolStripButton btnHelp;
     }
 }
