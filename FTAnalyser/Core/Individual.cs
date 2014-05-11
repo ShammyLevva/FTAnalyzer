@@ -1170,6 +1170,11 @@ namespace FTAnalyzer
             return true;
         }
 
+        public int LostCousinsCensusFactCount
+        {
+            get { return facts.Count(f => f.IsCensusFact && CensusDate.IsLostCousinsCensusYear(f.FactDate, true)); }
+        }
+
         public int CensusFactCount
         {
             get { return FactCount(Fact.CENSUS); }
