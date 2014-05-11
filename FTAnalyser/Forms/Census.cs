@@ -28,6 +28,7 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             dgCensus.AutoGenerateColumns = false;
+            ExtensionMethods.DoubleBuffered(dgCensus, true);
             ft = FamilyTree.Instance;
             reportFormHelper = new ReportFormHelper(this, "Census Report", dgCensus, this.ResetTable, "Census");
 

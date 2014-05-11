@@ -24,6 +24,7 @@ namespace FTAnalyzer.Forms
             this.Text = "Lost Cousins Referral for " + referee.ToString();
             reportFormHelper = new ReportFormHelper(this, this.Text, dgLCReferrals, this.ResetTable, "Lost Cousins Referrals");
             dgLCReferrals.AutoGenerateColumns = false;
+            ExtensionMethods.DoubleBuffered(dgLCReferrals, true);
             GeneralSettings.CompactCensusRefChanged += new EventHandler(RefreshCensusReferences);
             Predicate<Individual> lostCousinsFact = new Predicate<Individual>(x => x.HasLostCousinsFact);
             List<Individual> lostCousinsFacts = ft.AllIndividuals.Where(lostCousinsFact).ToList<Individual>();

@@ -34,7 +34,8 @@ namespace FTAnalyzer.Forms
 
             this.reportList = new SortableBindingList<IDisplayColourBMD>(reportList);
             reportFormHelper = new ReportFormHelper(this, "Colour BMD Report", dgBMDReportSheet, this.ResetTable, "Colour BMD");
-
+            ExtensionMethods.DoubleBuffered(dgBMDReportSheet, true);
+            
             boldFont = new Font(dgBMDReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
             styles = new Dictionary<int, DataGridViewCellStyle>();
             DataGridViewCellStyle notRequired = new DataGridViewCellStyle();

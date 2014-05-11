@@ -29,10 +29,11 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             dgReportSheet.AutoGenerateColumns = false;
+            ExtensionMethods.DoubleBuffered(dgReportSheet, true);
             this.country = country;
             this.reportList = new SortableBindingList<IDisplayColourCensus>(reportList);
             reportFormHelper = new ReportFormHelper(this, "Colour Census Report", dgReportSheet, this.ResetTable, "Colour Census");
-
+            
             boldFont = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
             styles = new Dictionary<int, DataGridViewCellStyle>();
             DataGridViewCellStyle notAlive = new DataGridViewCellStyle();

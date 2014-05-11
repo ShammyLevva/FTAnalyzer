@@ -24,6 +24,8 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
             indReportFormHelper = new ReportFormHelper(this, this.Text, dgIndividuals, this.ResetTable, "People");
             famReportFormHelper = new ReportFormHelper(this, this.Text, dgFamilies, this.ResetTable, "People");
+            ExtensionMethods.DoubleBuffered(dgIndividuals, true);
+            ExtensionMethods.DoubleBuffered(dgFamilies, true);
         }
 
         private void UpdateStatusCount()

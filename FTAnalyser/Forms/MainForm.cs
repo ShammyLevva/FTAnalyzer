@@ -125,22 +125,7 @@ namespace FTAnalyzer
                 pbIndividuals.Value = 0;
                 pbFamilies.Value = 0;
                 pbRelationships.Value = 0;
-                dgCountries.DataSource = null;
-                dgRegions.DataSource = null;
-                dgSubRegions.DataSource = null;
-                dgAddresses.DataSource = null;
-                dgPlaces.DataSource = null;
-                dgIndividuals.DataSource = null;
-                dgFamilies.DataSource = null;
-                dgTreeTops.DataSource = null;
-                dgWorldWars.DataSource = null;
-                dgLooseBirths.DataSource = null;
-                dgLooseDeaths.DataSource = null;
-                dgDataErrors.DataSource = null;
-                dgOccupations.DataSource = null;
-                dgSurnames.DataSource = null;
-                dgDuplicates.DataSource = null;
-                dgSources.DataSource = null;
+                SetupGridControls();
                 cmbReferrals.Items.Clear();
                 cmbReferrals.Text = string.Empty;
                 Statistics.Instance.Clear();
@@ -181,6 +166,41 @@ namespace FTAnalyzer
             {
                 HourGlass(false);
             }
+        }
+
+        private void SetupGridControls()
+        {
+            dgCountries.DataSource = null;
+            dgRegions.DataSource = null;
+            dgSubRegions.DataSource = null;
+            dgAddresses.DataSource = null;
+            dgPlaces.DataSource = null;
+            dgIndividuals.DataSource = null;
+            dgFamilies.DataSource = null;
+            dgTreeTops.DataSource = null;
+            dgWorldWars.DataSource = null;
+            dgLooseBirths.DataSource = null;
+            dgLooseDeaths.DataSource = null;
+            dgDataErrors.DataSource = null;
+            dgOccupations.DataSource = null;
+            dgSurnames.DataSource = null;
+            dgDuplicates.DataSource = null;
+            dgSources.DataSource = null;
+            ExtensionMethods.DoubleBuffered(dgCountries, true);
+            ExtensionMethods.DoubleBuffered(dgRegions, true);
+            ExtensionMethods.DoubleBuffered(dgSubRegions, true);
+            ExtensionMethods.DoubleBuffered(dgAddresses, true);
+            ExtensionMethods.DoubleBuffered(dgIndividuals, true);
+            ExtensionMethods.DoubleBuffered(dgFamilies, true);
+            ExtensionMethods.DoubleBuffered(dgTreeTops, true);
+            ExtensionMethods.DoubleBuffered(dgWorldWars, true);
+            ExtensionMethods.DoubleBuffered(dgLooseBirths, true);
+            ExtensionMethods.DoubleBuffered(dgLooseDeaths, true);
+            ExtensionMethods.DoubleBuffered(dgDataErrors, true);
+            ExtensionMethods.DoubleBuffered(dgOccupations, true);
+            ExtensionMethods.DoubleBuffered(dgSurnames, true);
+            ExtensionMethods.DoubleBuffered(dgDuplicates, true);
+            ExtensionMethods.DoubleBuffered(dgSources, true);
         }
 
         private void SetSavePath()
