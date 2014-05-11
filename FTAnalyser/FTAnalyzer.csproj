@@ -368,6 +368,7 @@
     </Compile>
     <Compile Include="Exceptions\InvalidXMLFactException.cs" />
     <Compile Include="Exceptions\InvalidDoubleDateException.cs" />
+    <Compile Include="Utilities\ExtensionMethods.cs" />
     <Compile Include="Utilities\FilterList.cs" />
     <Compile Include="Utilities\FilterUtils.cs" />
     <Compile Include="Forms\BingOSMap.cs">

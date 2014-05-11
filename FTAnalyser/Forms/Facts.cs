@@ -28,6 +28,7 @@ namespace FTAnalyzer.Forms
             this.facts = new SortableBindingList<IDisplayFact>();
             this.allFacts = false;
             dgFacts.AutoGenerateColumns = false;
+            ExtensionMethods.DoubleBuffered(dgFacts, true);
             reportFormHelper = new ReportFormHelper(this, this.Text, dgFacts, this.ResetTable, "Facts");
             italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
             dgFacts.Columns["IndividualID"].Visible = true;

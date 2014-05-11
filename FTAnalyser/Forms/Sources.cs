@@ -23,6 +23,7 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
             this.sources = new SortableBindingList<IDisplaySource>();
             dgSources.AutoGenerateColumns = false;
+            ExtensionMethods.DoubleBuffered(dgSources, true);
             reportFormHelper = new ReportFormHelper(this, this.Text, dgSources, this.ResetTable, "Sources");
             AddSources(fact);
         }
@@ -30,7 +31,8 @@ namespace FTAnalyzer.Forms
         private void AddSources(DisplayFact fact)
         {
             foreach (FactSource s in fact.Sources)
-                sources.Add(s);
+                if(!sources.Contains(s))
+                    sources.Add(s);
             dgSources.DataSource = sources;
             reportFormHelper.LoadColumnLayout("SourcesColumns.xml");
             tsRecords.Text = sources.Count + " Records";
