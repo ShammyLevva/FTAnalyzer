@@ -34,7 +34,7 @@ namespace FTAnalyzer
         public const string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 LOOSEDEATH = "*LOOSED", LOOSEBIRTH = "*LOOSEB", FAMILYSEARCH = "*IGI",
                 CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT", PARENT = "*PARENT",
-                CHILDREN = "*CHILDREN", CHANGE = "*CHNG", LOSTCOUSINS = "*LOST", 
+                CHILDREN = "*CHILDREN", CHANGE = "*CHNG", LOSTCOUSINS = "*LOST",
                 DIED_SINGLE = "*SINGLE", MISSING = "*MISSING";
 
         public static readonly ISet<string> LOOSE_BIRTH_FACTS = new HashSet<string>(new string[] {
@@ -82,7 +82,7 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("LOSTCOUSINS", LOSTCOUSINS);
             CUSTOM_TAGS.Add("DIED SINGLE", DIED_SINGLE);
             CUSTOM_TAGS.Add("MISSING", MISSING);
-            
+
             // convert custom tags to normal tags
             CUSTOM_TAGS.Add("CENSUS 1841", CENSUS);
             CUSTOM_TAGS.Add("CENSUS 1851", CENSUS);
@@ -126,7 +126,7 @@ namespace FTAnalyzer
 
 
             // Create list of 
-            COMMENT_FACTS.Add(NAME); 
+            COMMENT_FACTS.Add(NAME);
             COMMENT_FACTS.Add(OCCUPATION);
             COMMENT_FACTS.Add(MILITARY);
             COMMENT_FACTS.Add(SERVICE_NUMBER);
@@ -232,15 +232,9 @@ namespace FTAnalyzer
 
         public enum FactError { GOOD = 0, WARNINGALLOW = 1, WARNINGIGNORE = 2, ERROR = 3, QUESTIONABLE = 4 };
 
-        public Age GedcomAge { get; private set; }
-        public bool Created { get; protected set; }
-        public bool Preferred { get; private set; }
-        private string Tag { get; set; }
-        public CensusReference CensusReference { get; private set; }
-
         #region Constructors
 
-        private Fact()
+        private Fact(string reference, bool preferred)
         {
             this.FactType = string.Empty;
             this.FactDate = FactDate.UNKNOWN_DATE;
@@ -255,20 +249,23 @@ namespace FTAnalyzer
             this.GedcomAge = null;
             this.Created = false;
             this.Tag = string.Empty;
-            this.Preferred = false;
+            this.Preferred = preferred;
+            this.Reference = reference;
         }
 
-        public Fact(XmlNode node, string factRef, bool preferred)
-            : this()
+        public Fact(XmlNode node, string reference, bool preferred) : this(reference, preferred) { }
+        public Fact(XmlNode node, Individual ind, bool preferred)
+            : this(ind.IndividualID, preferred)
         {
             if (node != null)
             {
+                Individual = ind;
                 FamilyTree ft = FamilyTree.Instance;
                 try
                 {
                     FactType = FixFactTypes(node.Name);
                     string factDate = FamilyTree.GetText(node, "DATE");
-                    this.FactDate = new FactDate(factDate, factRef);
+                    this.FactDate = new FactDate(factDate, ind.IndividualRef);
                     this.Preferred = preferred;
                     if (FactType.Equals(CUSTOM_EVENT) || FactType.Equals(CUSTOM_FACT))
                     {
@@ -386,41 +383,39 @@ namespace FTAnalyzer
             // if we have a location and its not a comment fact then add them together
             if (!Location.Equals(FactLocation.UNKNOWN_LOCATION))
                 result = result + ", " + Location.GEDCOMLocation;
-            if(!Fact.COMMENT_FACTS.Contains(factType))
+            if (!Fact.COMMENT_FACTS.Contains(factType))
                 Location = FactLocation.GetLocation(result);
         }
 
-        public Fact(string factType, FactDate date, string comment = "", bool preferred = true)
-            : this()
+        public Fact(string factRef, string factType, FactDate date, string comment = "", bool preferred = true)
+            : this(factRef, preferred)
         {
             this.FactType = factType;
             this.FactDate = date;
             this.Comment = comment;
             this.Place = string.Empty;
             this.Location = FactLocation.GetLocation(Place);
-            this.Preferred = preferred;
         }
 
         #endregion
 
         #region Properties
 
+        public Age GedcomAge { get; private set; }
+        public bool Created { get; protected set; }
+        public bool Preferred { get; private set; }
+        private string Tag { get; set; }
+        public CensusReference CensusReference { get; private set; }
         public FactLocation Location { get; private set; }
-
         public string Place { get; private set; }
-
         public string Comment { get; private set; }
-
         public FactDate FactDate { get; private set; }
-
         public string FactType { get; private set; }
-
         public int FactErrorNumber { get; private set; }
-
         public FactError FactErrorLevel { get; private set; }
-
         public string FactErrorMessage { get; private set; }
-
+        public string Reference { get; private set; }
+        public Individual Individual { get; private set; }
         public string FactTypeDescription { get { return (FactType == Fact.UNKNOWN && Tag.Length > 0) ? Tag : GetFactTypeDescription(FactType); } }
 
         public bool IsCensusFact
@@ -651,10 +646,10 @@ namespace FTAnalyzer
         {
             return !Countries.IsUnitedKingdom(country) && CensusReference != null && CensusReference.IsUKCensus;
         }
-        
+
         public override string ToString()
         {
             return FactTypeDescription + ": " + FactDate + (Location.ToString().Length > 0 ? " at " + Location : string.Empty);
-        }  
+        }
     }
 }

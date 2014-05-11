@@ -780,7 +780,7 @@ namespace FTAnalyzer
             {
                 // we have a date to change and its not the same 
                 // range as the existing death date
-                Fact looseBirth = new Fact(Fact.LOOSEBIRTH, toAdd);
+                Fact looseBirth = new Fact(indiv.IndividualID, Fact.LOOSEBIRTH, toAdd);
                 indiv.AddFact(looseBirth);
                 result.Add(indiv);
             }
@@ -866,7 +866,7 @@ namespace FTAnalyzer
             {
                 // we have a date to change and its not the same 
                 // range as the existing death date
-                Fact looseDeath = new Fact(Fact.LOOSEDEATH, toAdd);
+                Fact looseDeath = new Fact(indiv.IndividualID, Fact.LOOSEDEATH, toAdd);
                 indiv.AddFact(looseDeath);
                 result.Add(indiv);
             }
@@ -1304,22 +1304,14 @@ namespace FTAnalyzer
         public SortableBindingList<IDisplayFact> GetDisplayFacts(FactSource source)
         {
             SortableBindingList<IDisplayFact> result = new SortableBindingList<IDisplayFact>();
-            foreach (Individual i in individuals)
+            foreach (Fact f in source.Facts)
             {
-                foreach (Fact f in i.AllFacts)
-                    if (source.Facts.Contains(f))
-                    {
-                        DisplayFact df = new DisplayFact(i, f);
-                        if (!result.Contains(df))
-                            result.Add(df);
-                    }
-                foreach (Fact f in i.ErrorFacts)
-                    if (source.Facts.Contains(f))
-                    {
-                        DisplayFact df = new DisplayFact(i, f);
-                        if (!result.Contains(df))
-                            result.Add(df);
-                    }
+                if (f.Individual != null)
+                {
+                    DisplayFact df = new DisplayFact(f.Individual, f);
+                    if (!result.Contains(df))
+                        result.Add(df);
+                }
             }
             return result;
         }

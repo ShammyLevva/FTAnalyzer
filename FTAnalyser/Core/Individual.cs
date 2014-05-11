@@ -747,11 +747,11 @@ namespace FTAnalyzer
                 {
                     if (factType != Fact.NAME || !preferredFact)
                     {  // don't add first name in file as a fact 
-                        Fact f = new Fact(n, IndividualRef, preferredFact);
+                        Fact f = new Fact(n, this, preferredFact);
                         AddFact(f);
                         if(f.GedcomAge != null && f.GedcomAge.CalculatedBirthDate != FactDate.UNKNOWN_DATE)
                         {
-                            Fact calculatedBirth = new Fact(Fact.BIRTH, f.GedcomAge.CalculatedBirthDate, "Calculated from " + f.ToString(), false);
+                            Fact calculatedBirth = new Fact(IndividualID, Fact.BIRTH, f.GedcomAge.CalculatedBirthDate, "Calculated from " + f.ToString(), false);
                             AddFact(calculatedBirth);
                         }
                     }

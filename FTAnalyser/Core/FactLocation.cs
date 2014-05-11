@@ -843,7 +843,7 @@ namespace FTAnalyzer
         public static Fact BestLocationFact(IEnumerable<Fact> facts, FactDate when, int limit)
         {
             // this returns a Fact for a FactLocation a person was at for a given period
-            Fact result = new Fact(Fact.UNKNOWN, FactDate.UNKNOWN_DATE);
+            Fact result = new Fact("Unknown", Fact.UNKNOWN, FactDate.UNKNOWN_DATE);
             double minDistance = float.MaxValue;
             double distance;
             foreach (Fact f in facts)
