@@ -27,7 +27,7 @@ namespace FTAnalyzer
         private IList<Individual> individuals;
         private IList<Family> families;
         private IDictionary<string, List<Individual>> occupations;
-        private IDictionary<StandardisedName,StandardisedName> names;
+        private IDictionary<StandardisedName, StandardisedName> names;
         private ISet<string> unknownFactTypes;
         private bool _loading = false;
         private bool _dataloaded = false;
@@ -328,7 +328,7 @@ namespace FTAnalyzer
                     ReadStandardisedNameFile(filename);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 log.Warn("Failed to load Standardised names error was : " + e.Message);
             }
@@ -337,7 +337,7 @@ namespace FTAnalyzer
         private void ReadStandardisedNameFile(string filename)
         {
             StreamReader reader = new StreamReader(filename);
-            while(!reader.EndOfStream)
+            while (!reader.EndOfStream)
             {
                 string line = reader.ReadLine();
                 string[] values = line.Split(',');
@@ -353,7 +353,7 @@ namespace FTAnalyzer
 
         public string GetStandardisedName(bool IsMale, string name)
         {
-            StandardisedName gIn = new StandardisedName(IsMale,name);
+            StandardisedName gIn = new StandardisedName(IsMale, name);
             StandardisedName gOut;
             names.TryGetValue(gIn, out gOut);
             if (gOut == null)
@@ -727,7 +727,7 @@ namespace FTAnalyzer
                     }
                     if (fam.Children.Count > 0)
                     {   // must be at least X years old at birth of child
-                        List<Individual> childrenNoAFT = 
+                        List<Individual> childrenNoAFT =
                             fam.Children.Where(child => child.BirthDate.EndDate != FactDate.MAXDATE && !child.BirthDate.IsLongYearSpan).ToList();
                         if (childrenNoAFT.Count > 0)
                         {
@@ -1305,9 +1305,22 @@ namespace FTAnalyzer
         {
             SortableBindingList<IDisplayFact> result = new SortableBindingList<IDisplayFact>();
             foreach (Individual i in individuals)
+            {
                 foreach (Fact f in i.AllFacts)
-                    if (f.Sources.Contains(source))
-                        result.Add(new DisplayFact(i, f));
+                    if (source.Facts.Contains(f))
+                    {
+                        DisplayFact df = new DisplayFact(i, f);
+                        if (!result.Contains(df))
+                            result.Add(df);
+                    }
+                foreach (Fact f in i.ErrorFacts)
+                    if (source.Facts.Contains(f))
+                    {
+                        DisplayFact df = new DisplayFact(i, f);
+                        if (!result.Contains(df))
+                            result.Add(df);
+                    }
+            }
             return result;
         }
 
@@ -1348,16 +1361,16 @@ namespace FTAnalyzer
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
             Predicate<Individual> dateFilter;
-            if(country.Equals(Countries.UNITED_STATES))
+            if (country.Equals(Countries.UNITED_STATES))
                 dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.USCENSUS1940) || !i.BirthDate.IsKnown) &&
                                                      (i.DeathDate.EndsAfter(CensusDate.USCENSUS1790) || !i.DeathDate.IsKnown));
-            else if(country.Equals(Countries.CANADA))
+            else if (country.Equals(Countries.CANADA))
                 dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.CANADACENSUS1921) || !i.BirthDate.IsKnown) &&
                                                      (i.DeathDate.EndsAfter(CensusDate.CANADACENSUS1851) || !i.DeathDate.IsKnown));
             else if (country.Equals(Countries.IRELAND))
                 dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.IRELANDCENSUS1911) || !i.BirthDate.IsKnown) &&
                                                      (i.DeathDate.EndsAfter(CensusDate.IRELANDCENSUS1901) || !i.DeathDate.IsKnown));
-            else 
+            else
                 dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.UKCENSUS1911) || !i.BirthDate.IsKnown) &&
                                                      (i.DeathDate.EndsAfter(CensusDate.UKCENSUS1841) || !i.DeathDate.IsKnown));
 
@@ -1682,7 +1695,7 @@ namespace FTAnalyzer
                 if (collection > 0)
                     path.Append("&collection_id=" + collection);
                 else
-                    if(Countries.IsUnitedKingdom(country))
+                    if (Countries.IsUnitedKingdom(country))
                     {
                         collection = FamilySearch.CensusCollectionID(Countries.ENGLAND, censusYear);
                         path.Append("&collection_id=" + collection);
@@ -1864,7 +1877,7 @@ namespace FTAnalyzer
             FactDate censusFactDate = new FactDate(censusYear.ToString());
             UriBuilder uri = new UriBuilder();
             uri.Host = "search.findmypast.co.uk";
-            if(censusCountry.Equals(Countries.UNITED_STATES))
+            if (censusCountry.Equals(Countries.UNITED_STATES))
                 uri.Path = "/results/united-states-records-in-census-land-and-surveys";
             else if (Countries.IsUnitedKingdom(censusCountry))
                 uri.Path = "/results/united-kingdom-records-in-census-land-and-surveys";
@@ -1874,7 +1887,7 @@ namespace FTAnalyzer
                 uri.Path = "/results/world-records-in-census-land-and-surveys";
             StringBuilder query = new StringBuilder();
             query.Append("eventyear=" + censusYear + "&eventyear_offset=0&");
-            
+
             if (person.Forenames != "?" && person.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
             {
                 int pos = person.Forenames.IndexOf(" ");
@@ -2500,7 +2513,7 @@ namespace FTAnalyzer
         {
             HashSet<string> result = new HashSet<string>();
             IEnumerable<Fact> unrecognised = AllIndividuals.SelectMany(x => x.AllFacts.Where(f => f.CensusReference != null && f.CensusReference.Status == CensusReference.ReferenceStatus.UNRECOGNISED));
-            foreach(Fact f in unrecognised)
+            foreach (Fact f in unrecognised)
                 result.Add(f.CensusReference.Reference);
             return result;
         }
