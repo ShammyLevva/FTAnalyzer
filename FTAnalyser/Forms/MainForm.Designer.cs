@@ -33,7 +33,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -129,6 +129,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txtColouredSurname = new System.Windows.Forms.TextBox();
             this.tabLostCousins = new System.Windows.Forms.TabPage();
+            this.btnCensusNoCountryNoLC = new System.Windows.Forms.Button();
             this.Referrals = new System.Windows.Forms.GroupBox();
             this.ckbReferralInCommon = new System.Windows.Forms.CheckBox();
             this.btnReferrals = new System.Windows.Forms.Button();
@@ -157,6 +158,11 @@
             this.btnMissingCensusRefs = new System.Windows.Forms.Button();
             this.btnCensusRefs = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkExcludeUnknownBirths = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtCensusSurname = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
             this.btnShowCensusEntered = new System.Windows.Forms.Button();
             this.btnShowCensusMissing = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -244,11 +250,6 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.chkExcludeUnknownBirths = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtCensusSurname = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.relTypesFacts = new Controls.RelationTypes();
             this.cenDate = new Controls.CensusDateSelector();
@@ -278,6 +279,7 @@
             this.tabCensus.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tabLooseBirthDeaths.SuspendLayout();
             this.tabCtrlLooseBDs.SuspendLayout();
@@ -313,7 +315,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgSources)).BeginInit();
             this.tabDuplicates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgDuplicates)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -802,14 +803,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 154);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1160,6 +1161,7 @@
             // 
             // tabLostCousins
             // 
+            this.tabLostCousins.Controls.Add(this.btnCensusNoCountryNoLC);
             this.tabLostCousins.Controls.Add(this.Referrals);
             this.tabLostCousins.Controls.Add(this.btnLCnoCensus);
             this.tabLostCousins.Controls.Add(this.btnLCDuplicates);
@@ -1184,6 +1186,16 @@
             this.tabLostCousins.TabIndex = 5;
             this.tabLostCousins.Text = "Lost Cousins";
             this.tabLostCousins.UseVisualStyleBackColor = true;
+            // 
+            // btnCensusNoCountryNoLC
+            // 
+            this.btnCensusNoCountryNoLC.Location = new System.Drawing.Point(8, 266);
+            this.btnCensusNoCountryNoLC.Name = "btnCensusNoCountryNoLC";
+            this.btnCensusNoCountryNoLC.Size = new System.Drawing.Size(330, 27);
+            this.btnCensusNoCountryNoLC.TabIndex = 24;
+            this.btnCensusNoCountryNoLC.Text = "Census Facts with no Country and no Lost Cousins fact";
+            this.btnCensusNoCountryNoLC.UseVisualStyleBackColor = true;
+            this.btnCensusNoCountryNoLC.Click += new System.EventHandler(this.btnCensusNoCountryNoLC_Click);
             // 
             // Referrals
             // 
@@ -1490,6 +1502,63 @@
             this.groupBox2.TabIndex = 23;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Census Search Reports";
+            // 
+            // chkExcludeUnknownBirths
+            // 
+            this.chkExcludeUnknownBirths.AutoSize = true;
+            this.chkExcludeUnknownBirths.Location = new System.Drawing.Point(349, 63);
+            this.chkExcludeUnknownBirths.Name = "chkExcludeUnknownBirths";
+            this.chkExcludeUnknownBirths.Size = new System.Drawing.Size(238, 17);
+            this.chkExcludeUnknownBirths.TabIndex = 31;
+            this.chkExcludeUnknownBirths.Text = "Exclude Individuals with unknown birth dates";
+            this.chkExcludeUnknownBirths.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(606, 39);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 30;
+            this.label1.Text = "Surname";
+            // 
+            // txtCensusSurname
+            // 
+            this.txtCensusSurname.Location = new System.Drawing.Point(661, 36);
+            this.txtCensusSurname.Name = "txtCensusSurname";
+            this.txtCensusSurname.Size = new System.Drawing.Size(201, 20);
+            this.txtCensusSurname.TabIndex = 29;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(346, 39);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(175, 13);
+            this.label2.TabIndex = 26;
+            this.label2.Text = "Exclude individuals over the age of ";
+            // 
+            // udAgeFilter
+            // 
+            this.udAgeFilter.Location = new System.Drawing.Point(527, 37);
+            this.udAgeFilter.Maximum = new decimal(new int[] {
+            110,
+            0,
+            0,
+            0});
+            this.udAgeFilter.Minimum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.udAgeFilter.Name = "udAgeFilter";
+            this.udAgeFilter.Size = new System.Drawing.Size(43, 20);
+            this.udAgeFilter.TabIndex = 25;
+            this.udAgeFilter.Value = new decimal(new int[] {
+            90,
+            0,
+            0,
+            0});
             // 
             // btnShowCensusEntered
             // 
@@ -2481,63 +2550,6 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // chkExcludeUnknownBirths
-            // 
-            this.chkExcludeUnknownBirths.AutoSize = true;
-            this.chkExcludeUnknownBirths.Location = new System.Drawing.Point(349, 63);
-            this.chkExcludeUnknownBirths.Name = "chkExcludeUnknownBirths";
-            this.chkExcludeUnknownBirths.Size = new System.Drawing.Size(238, 17);
-            this.chkExcludeUnknownBirths.TabIndex = 31;
-            this.chkExcludeUnknownBirths.Text = "Exclude Individuals with unknown birth dates";
-            this.chkExcludeUnknownBirths.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(606, 39);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
-            this.label1.TabIndex = 30;
-            this.label1.Text = "Surname";
-            // 
-            // txtCensusSurname
-            // 
-            this.txtCensusSurname.Location = new System.Drawing.Point(661, 36);
-            this.txtCensusSurname.Name = "txtCensusSurname";
-            this.txtCensusSurname.Size = new System.Drawing.Size(201, 20);
-            this.txtCensusSurname.TabIndex = 29;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(346, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(175, 13);
-            this.label2.TabIndex = 26;
-            this.label2.Text = "Exclude individuals over the age of ";
-            // 
-            // udAgeFilter
-            // 
-            this.udAgeFilter.Location = new System.Drawing.Point(527, 37);
-            this.udAgeFilter.Maximum = new decimal(new int[] {
-            110,
-            0,
-            0,
-            0});
-            this.udAgeFilter.Minimum = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.udAgeFilter.Name = "udAgeFilter";
-            this.udAgeFilter.Size = new System.Drawing.Size(43, 20);
-            this.udAgeFilter.TabIndex = 25;
-            this.udAgeFilter.Value = new decimal(new int[] {
-            90,
-            0,
-            0,
-            0});
-            // 
             // rtbOutput
             // 
             this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2677,6 +2689,7 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.tabLooseBirthDeaths.ResumeLayout(false);
             this.tabCtrlLooseBDs.ResumeLayout(false);
@@ -2715,7 +2728,6 @@
             this.tabDuplicates.ResumeLayout(false);
             this.tabDuplicates.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgDuplicates)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2949,6 +2961,7 @@
         private System.Windows.Forms.NumericUpDown udAgeFilter;
         private Controls.CensusDateSelector cenDate;
         private Controls.RelationTypes relTypesCensus;
+        private System.Windows.Forms.Button btnCensusNoCountryNoLC;
     }
 }
 

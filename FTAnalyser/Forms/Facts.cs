@@ -65,6 +65,18 @@ namespace FTAnalyzer.Forms
             SetupFacts();
         }
 
+        public Facts(IEnumerable<Individual> individuals) // Census facts with no country or Lost cousins fact
+            : this()
+        {
+            this.allFacts = true;
+            foreach (Individual ind in individuals)
+                foreach (Fact f in ind.AllFacts)
+                    if (f.IsCensusFact && CensusDate.IsLostCousinsCensusYear(f.FactDate, true))
+                        facts.Add(new DisplayFact(ind, f));
+            this.Text = "Facts Report for all " + individuals.Count() + " individuals. Facts count: " + facts.Count;
+            SetupFacts();
+        }
+
         public Facts(CensusReference.ReferenceStatus status)
             : this()
         {
