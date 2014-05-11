@@ -64,6 +64,7 @@ namespace FTAnalyzer
 
         static Fact()
         {
+            // special tags
             CUSTOM_TAGS.Add("IGI SEARCH", FAMILYSEARCH);
             CUSTOM_TAGS.Add("CHILDLESS", CHILDLESS);
             CUSTOM_TAGS.Add("CONTACT", CONTACT);
@@ -80,6 +81,9 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("LOST COUSINS", LOSTCOUSINS);
             CUSTOM_TAGS.Add("LOSTCOUSINS", LOSTCOUSINS);
             CUSTOM_TAGS.Add("DIED SINGLE", DIED_SINGLE);
+            CUSTOM_TAGS.Add("MISSING", MISSING);
+            
+            // convert custom tags to normal tags
             CUSTOM_TAGS.Add("CENSUS 1841", CENSUS);
             CUSTOM_TAGS.Add("CENSUS 1851", CENSUS);
             CUSTOM_TAGS.Add("CENSUS 1861", CENSUS);
@@ -105,11 +109,23 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("CENSUS 1930", CENSUS);
             CUSTOM_TAGS.Add("CENSUS 1940", CENSUS);
             CUSTOM_TAGS.Add("BIRTH REG", BIRTH);
+            CUSTOM_TAGS.Add("BIRTH", BIRTH);
             CUSTOM_TAGS.Add("MARRIAGE REG", MARRIAGE);
+            CUSTOM_TAGS.Add("MARRIAGE", MARRIAGE);
             CUSTOM_TAGS.Add("DEATH REG", DEATH);
-            CUSTOM_TAGS.Add("MISSING", MISSING);
+            CUSTOM_TAGS.Add("DEATH", DEATH);
+            CUSTOM_TAGS.Add("CHRISTENING", CHRISTENING);
+            CUSTOM_TAGS.Add("BURIAL", BURIAL);
+            CUSTOM_TAGS.Add("FUNERAL", BURIAL);
+            CUSTOM_TAGS.Add("CREMATION", CREMATION);
             CUSTOM_TAGS.Add("CHILDREN STATUS", NUM_CHILDREN);
+            CUSTOM_TAGS.Add("PROBATE", PROBATE);
+            CUSTOM_TAGS.Add("PROBATE DATE", PROBATE);
+            CUSTOM_TAGS.Add("RESIDENCE", RESIDENCE);
+            CUSTOM_TAGS.Add("CENSUS", CENSUS);
 
+
+            // Create list of 
             COMMENT_FACTS.Add(NAME); 
             COMMENT_FACTS.Add(OCCUPATION);
             COMMENT_FACTS.Add(MILITARY);
