@@ -226,7 +226,8 @@ namespace FTAnalyzer
                 case CHILDREN: return "Child Born";
                 case REFERENCE: return "Reference ID";
                 case MISSING: return "Missing";
-                default: return factType;
+                case "": return "UNKNOWN";
+                default: return EnhancedTextInfo.ToTitleCase(factType);
             }
         }
 
@@ -253,19 +254,30 @@ namespace FTAnalyzer
             this.Reference = reference;
         }
 
-        public Fact(XmlNode node, string reference, bool preferred) : this(reference, preferred) { }
+        public Fact(XmlNode node, string reference, bool preferred) 
+            : this(reference, preferred) 
+        {
+            Individual = null;
+            CreateFact(node, reference, preferred);
+        }
+
         public Fact(XmlNode node, Individual ind, bool preferred)
             : this(ind.IndividualID, preferred)
         {
+            Individual = ind;
+            CreateFact(node, ind.IndividualRef, preferred);
+        }
+
+        private void CreateFact(XmlNode node, string reference, bool preferred)
+        {
             if (node != null)
             {
-                Individual = ind;
                 FamilyTree ft = FamilyTree.Instance;
                 try
                 {
                     FactType = FixFactTypes(node.Name);
                     string factDate = FamilyTree.GetText(node, "DATE");
-                    this.FactDate = new FactDate(factDate, ind.IndividualRef);
+                    this.FactDate = new FactDate(factDate, reference);
                     this.Preferred = preferred;
                     if (FactType.Equals(CUSTOM_EVENT) || FactType.Equals(CUSTOM_FACT))
                     {

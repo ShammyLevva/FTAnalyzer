@@ -1306,12 +1306,9 @@ namespace FTAnalyzer
             SortableBindingList<IDisplayFact> result = new SortableBindingList<IDisplayFact>();
             foreach (Fact f in source.Facts)
             {
-                if (f.Individual != null)
-                {
-                    DisplayFact df = new DisplayFact(f.Individual, f);
+                DisplayFact df = new DisplayFact(f.Individual, f);
                     if (!result.Contains(df))
                         result.Add(df);
-                }
             }
             return result;
         }
