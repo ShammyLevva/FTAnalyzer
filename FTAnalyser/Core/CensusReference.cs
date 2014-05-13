@@ -77,9 +77,10 @@ namespace FTAnalyzer
 
         private bool GetCensusReference(XmlNode n)
         {
-            string text = FamilyTree.GetText(n, "PAGE");
-            if (text.Length > 0)
-            {
+            // aggressively remove multi spaces to allow for spaces in the census references
+            string text = FamilyTree.GetText(n, "PAGE").Replace("   ", " ").Replace("  ", " ").Replace("  ", " ");
+            if (text.Length > 0)                       
+            {                                          
                 Match matcher = Regex.Match(text, EW_CENSUS_PATTERN, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
