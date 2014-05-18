@@ -27,6 +27,12 @@ namespace FTAnalyzer
         public static readonly CensusDate EWCENSUS1911 = new CensusDate("02 APR 1911", "England & Wales Census 1911", Countries.ENG_WALES, "C1911");
         public static readonly CensusDate SCOTCENSUS1881 = new CensusDate("03 APR 1881", "Scotland Census 1881", Countries.SCOTLAND, "C1881");
 
+        public static readonly CensusDate SCOTVALUATION1885 = new CensusDate("BET JUL 1884 AND MAY 1885", "Scottish Valuation Roll 1885", Countries.SCOTLAND, "V1885");
+        public static readonly CensusDate SCOTVALUATION1895 = new CensusDate("BET JUL 1894 AND MAY 1895", "Scottish Valuation Roll 1895", Countries.SCOTLAND, "V1895");
+        public static readonly CensusDate SCOTVALUATION1905 = new CensusDate("BET JUL 1904 AND MAY 1905", "Scottish Valuation Roll 1905", Countries.SCOTLAND, "V1905");
+        public static readonly CensusDate SCOTVALUATION1915 = new CensusDate("BET JUL 1914 AND MAY 1915", "Scottish Valuation Roll 1915", Countries.SCOTLAND, "V1915");
+        public static readonly CensusDate SCOTVALUATION1920 = new CensusDate("BET JUL 1919 AND MAY 1920", "Scottish Valuation Roll 1920", Countries.SCOTLAND, "V1920");
+
         public static readonly CensusDate IRELANDCENSUS1901 = new CensusDate("31 MAR 1901", "Ireland Census 1901", Countries.IRELAND, "Ire1901");
         public static readonly CensusDate IRELANDCENSUS1911 = new CensusDate("02 APR 1911", "Ireland Census 1911", Countries.IRELAND, "Ire1911");
 

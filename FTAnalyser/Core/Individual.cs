@@ -1127,6 +1127,31 @@ namespace FTAnalyzer
             get { return ColourCensusReport(CensusDate.CANADACENSUS1921); }
         }
 
+        public int V1885
+        {
+            get { return ColourCensusReport(CensusDate.SCOTVALUATION1885); }
+        }
+
+        public int V1895
+        {
+            get { return ColourCensusReport(CensusDate.SCOTVALUATION1895); }
+        }
+
+        public int V1905
+        {
+            get { return ColourCensusReport(CensusDate.SCOTVALUATION1905); }
+        }
+
+        public int V1915
+        {
+            get { return ColourCensusReport(CensusDate.SCOTVALUATION1915); }
+        }
+
+        public int V1920
+        {
+            get { return ColourCensusReport(CensusDate.SCOTVALUATION1920); }
+        }
+
         public bool AliveOnAnyCensus(string country)
         {
             if (country.Equals(Countries.UNITED_STATES))

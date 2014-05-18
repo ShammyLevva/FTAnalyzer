@@ -31,10 +31,20 @@ namespace Controls
             AddCensusItems(Countries.IRELAND);
             AddCensusItems(Countries.UNITED_STATES);
             AddCensusItems(Countries.CANADA);
+            AddValuationItems();
             defaultDate = CensusDate.UKCENSUS1881;
             previousDate = defaultDate;
             RevertToDefaultDate();
             SetControlWidth();
+        }
+
+        private void AddValuationItems()
+        {
+            cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1885);
+            cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1895);
+            cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1905);
+            cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1915);
+            cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1920);
         }
 
         public void AddLCCensusItems()

@@ -2110,9 +2110,9 @@ namespace FTAnalyzer
             Census census = new Census(cenDate.SelectedDate);
             census.SetupCensus(filter, censusDone);
             if (censusDone)
-                census.Text = "People entered with a " + cenDate.SelectedDate.StartDate.Year.ToString() + " " + cenDate.CensusCountry + " Census Record";
+                census.Text = "People entered with a " + cenDate.SelectedDate.ToString() + " record";
             else
-                census.Text = "People missing a " + cenDate.SelectedDate.StartDate.Year.ToString() + " " + cenDate.CensusCountry + " Census Record that you can search for";
+                census.Text = "People missing a " + cenDate.SelectedDate.ToString() + " record that you can search for";
             DisposeDuplicateForms(census);
             census.Show();
         }
