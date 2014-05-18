@@ -81,6 +81,10 @@ namespace FTAnalyzer
             EWCENSUS1841, EWCENSUS1881, SCOTCENSUS1881, EWCENSUS1911, USCENSUS1880, USCENSUS1940, CANADACENSUS1881, IRELANDCENSUS1911
         });
 
+        public static readonly ISet<CensusDate> VALUATIONROLLS = new HashSet<CensusDate>(new CensusDate[] {
+            SCOTVALUATION1885, SCOTVALUATION1895, SCOTVALUATION1905, SCOTVALUATION1915, SCOTVALUATION1920
+        });
+
         private CensusDate(string str, string displayName, string country, string propertyName)
             : base(str)
         {

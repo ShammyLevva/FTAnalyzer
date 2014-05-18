@@ -126,6 +126,8 @@ namespace FTAnalyzer.Forms
 
         private string CensusProviderText()
         {
+            if (CensusDate.VALUATIONROLLS.Contains(CensusDate))
+                return string.Empty;
             return "Double click to search " + cbCensusSearchProvider.Text + " for this person's census record. Shift Double click to display thier facts.";
         }
 
@@ -207,7 +209,7 @@ namespace FTAnalyzer.Forms
 
         private void dgCensus_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dgCensus.CurrentRow != null)
+            if (e.RowIndex >= 0 && dgCensus.CurrentRow != null && !CensusDate.VALUATIONROLLS.Contains(CensusDate))
             {
                 CensusIndividual ds = (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
                 FamilyTree ft = FamilyTree.Instance;
