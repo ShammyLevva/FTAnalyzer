@@ -1189,7 +1189,7 @@
             // 
             // btnCensusNoCountryNoLC
             // 
-            this.btnCensusNoCountryNoLC.Location = new System.Drawing.Point(8, 266);
+            this.btnCensusNoCountryNoLC.Location = new System.Drawing.Point(6, 266);
             this.btnCensusNoCountryNoLC.Name = "btnCensusNoCountryNoLC";
             this.btnCensusNoCountryNoLC.Size = new System.Drawing.Size(330, 27);
             this.btnCensusNoCountryNoLC.TabIndex = 24;

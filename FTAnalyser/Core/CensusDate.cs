@@ -167,6 +167,18 @@ namespace FTAnalyzer
             return false;
         }
 
+        public static CensusDate GetLostCousinsCensusYear(FactDate fd, bool exactYear)
+        {
+            foreach (CensusDate cd in LOSTCOUSINS_CENSUS)
+            {
+                if (exactYear && fd.YearMatches(cd))
+                    return cd;
+                if (!exactYear && fd.Overlaps(cd))
+                    return cd;
+            }
+            return null;
+        }
+
         public override string ToString()
         {
             return displayName;

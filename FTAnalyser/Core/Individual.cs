@@ -282,11 +282,12 @@ namespace FTAnalyzer
 
         public string Name
         {
-            get { 
-                if(Properties.GeneralSettings.Default.ShowAliasInName && Alias.Length > 0)
+            get
+            {
+                if (Properties.GeneralSettings.Default.ShowAliasInName && Alias.Length > 0)
                     return (forenames + (" '" + Alias + "' ") + surname).Trim();
                 else
-                    return (forenames + " " + surname).Trim(); 
+                    return (forenames + " " + surname).Trim();
             }
             private set
             {
@@ -329,11 +330,12 @@ namespace FTAnalyzer
 
         public string Forenames
         {
-            get {
+            get
+            {
                 if (Properties.GeneralSettings.Default.ShowAliasInName && Alias.Length > 0)
                     return forenames + " '" + Alias + "' ";
                 else
-                    return forenames; 
+                    return forenames;
             }
         }
 
@@ -590,7 +592,7 @@ namespace FTAnalyzer
             {
                 if (f.IsValidCensus(when))
                 {
-                    if (!checkCountry) 
+                    if (!checkCountry)
                         return true;
                     if (f.Location.CensusCountryMatches(when.Country, includeUnknownCountries))
                         return true;
@@ -617,20 +619,20 @@ namespace FTAnalyzer
         public bool IsLostCousinsEntered(CensusDate when) { return IsLostCousinsEntered(when, true); }
         public bool IsLostCousinsEntered(CensusDate when, bool includeUnknownCountries)
         {
-            foreach(Fact f in facts)
+            foreach (Fact f in facts)
             {
-                if(f.IsValidLostCousins(when))
+                if (f.IsValidLostCousins(when))
                 {
-                    if(this.BestLocation(when).CensusCountryMatches(when.Country, includeUnknownCountries))
+                    if (this.BestLocation(when).CensusCountryMatches(when.Country, includeUnknownCountries))
                         return true;
                     Fact censusFact = LostCousinsCensusFact(f);
-                    if (Countries.IsUnitedKingdom(when.Country) && censusFact !=null && censusFact.IsOverseasUKCensus(censusFact.Country))
+                    if (Countries.IsUnitedKingdom(when.Country) && censusFact != null && censusFact.IsOverseasUKCensus(censusFact.Country))
                         return true;
                 }
             }
             return false;
         }
-        
+
         public bool IsLostCousinsMissingCountry(CensusDate when)
         {
             Predicate<Fact> p = new Predicate<Fact>(f => f.IsValidLostCousins(when));
@@ -646,6 +648,16 @@ namespace FTAnalyzer
                 IEnumerable<Fact> lcFacts = AllFacts.Where(f => f.FactType == Fact.LOSTCOUSINS);
                 int distinctFacts = lcFacts.Distinct(factComparer).Count();
                 return LostCousinsFacts - distinctFacts;
+            }
+        }
+
+        public int DuplicateLCCensusFacts
+        {
+            get
+            {
+                IEnumerable<Fact> censusFacts = AllFacts.Where(f => f.IsCensusFact && CensusDate.IsLostCousinsCensusYear(f.FactDate, false));
+                int distinctFacts = censusFacts.Distinct(factComparer).Count();
+                return CensusFactCount - distinctFacts;
             }
         }
 
@@ -749,7 +761,7 @@ namespace FTAnalyzer
                     {  // don't add first name in file as a fact 
                         Fact f = new Fact(n, this, preferredFact);
                         AddFact(f);
-                        if(f.GedcomAge != null && f.GedcomAge.CalculatedBirthDate != FactDate.UNKNOWN_DATE)
+                        if (f.GedcomAge != null && f.GedcomAge.CalculatedBirthDate != FactDate.UNKNOWN_DATE)
                         {
                             Fact calculatedBirth = new Fact(IndividualID, Fact.BIRTH, f.GedcomAge.CalculatedBirthDate, "Calculated from " + f.ToString(), false);
                             AddFact(calculatedBirth);
@@ -1202,7 +1214,7 @@ namespace FTAnalyzer
 
         public int CensusFactCount
         {
-            get { return FactCount(Fact.CENSUS); }
+            get { return facts.Count(f => f.IsCensusFact); }
         }
 
         public int CensusDateFactCount(CensusDate censusDate)

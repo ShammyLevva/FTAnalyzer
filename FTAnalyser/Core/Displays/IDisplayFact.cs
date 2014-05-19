@@ -12,6 +12,7 @@ namespace FTAnalyzer
         string IndividualID { get; }
         string Surname { get; }
         string Forenames { get; }
+        FactDate DateofBirth { get; }
         string SurnameAtDate { get; }
         string TypeOfFact { get; }
         FactDate FactDate { get; }

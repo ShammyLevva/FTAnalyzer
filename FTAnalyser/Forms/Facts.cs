@@ -71,8 +71,14 @@ namespace FTAnalyzer.Forms
             this.allFacts = true;
             foreach (Individual ind in individuals)
                 foreach (Fact f in ind.AllFacts)
-                    if (f.IsCensusFact && CensusDate.IsLostCousinsCensusYear(f.FactDate, true))
-                        facts.Add(new DisplayFact(ind, f));
+                {
+                    if (f.IsCensusFact)
+                    {
+                        CensusDate cd = CensusDate.GetLostCousinsCensusYear(f.FactDate, true);
+                        if (cd != null && !ind.MissingLostCousins(cd, false) && !Countries.IsKnownCountry(f.Country))
+                            facts.Add(new DisplayFact(ind, f));
+                    }
+                }
             this.Text = "Facts Report for all " + individuals.Count() + " individuals. Facts count: " + facts.Count;
             SetupFacts();
         }

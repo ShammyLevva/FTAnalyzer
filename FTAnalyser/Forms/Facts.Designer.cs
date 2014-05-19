@@ -47,6 +47,7 @@
             this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Forenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateofBirth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeOfFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SurnameAtDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -150,6 +151,7 @@
             this.IndividualID,
             this.Forenames,
             this.Surname,
+            this.DateofBirth,
             this.TypeOfFact,
             this.FactDate,
             this.SurnameAtDate,
@@ -236,6 +238,16 @@
             this.Surname.Name = "Surname";
             this.Surname.ReadOnly = true;
             this.Surname.Width = 75;
+            // 
+            // DateofBirth
+            // 
+            this.DateofBirth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.DateofBirth.DataPropertyName = "DateofBirth";
+            this.DateofBirth.HeaderText = "Date of Birth";
+            this.DateofBirth.MinimumWidth = 50;
+            this.DateofBirth.Name = "DateofBirth";
+            this.DateofBirth.ReadOnly = true;
+            this.DateofBirth.Width = 150;
             // 
             // TypeOfFact
             // 
@@ -383,6 +395,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Forenames;
         private System.Windows.Forms.DataGridViewTextBoxColumn Surname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DateofBirth;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeOfFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn SurnameAtDate;
