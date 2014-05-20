@@ -24,7 +24,7 @@ namespace FTAnalyzer
             this.Fact = fact;
             this.Icon = FactImage.ErrorIcon(fact.FactErrorLevel).Icon;
         }
-        public FactDate DateofBirth { get { return Ind.BirthDate; } }
+        public FactDate DateofBirth { get { return Ind == null ? FactDate.UNKNOWN_DATE : Ind.BirthDate; } }
         public string TypeOfFact { get { return Fact.FactTypeDescription; } }
         public FactDate FactDate { get { return Fact.FactDate; } }
         public FactLocation Location { get { return Fact.Location; } }
