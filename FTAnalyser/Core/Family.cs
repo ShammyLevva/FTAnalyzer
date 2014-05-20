@@ -261,21 +261,9 @@ namespace FTAnalyzer
             }
         }
 
-        public string HusbandID
-        {
-            get
-            {
-                return (Husband == null) ? string.Empty : Husband.IndividualID;
-            }
-        }
+        public string HusbandID { get { return (Husband == null) ? string.Empty : Husband.IndividualID; } }
 
-        public string WifeID
-        {
-            get
-            {
-                return (Wife == null) ? string.Empty : Wife.IndividualID;
-            }
-        }
+        public string WifeID { get { return (Wife == null) ? string.Empty : Wife.IndividualID; } }
 
         public IEnumerable<Individual> Members
         {
@@ -285,6 +273,17 @@ namespace FTAnalyzer
                 if (Wife != null) yield return Wife;
                 if (Children != null && Children.Count > 0)
                     foreach (Individual child in Children) yield return child;
+            }
+        }
+
+        public IEnumerable<int> RelationTypes
+        {
+            get
+            {
+                if (Husband != null) yield return Husband.RelationType;
+                if (Wife != null) yield return Wife.RelationType;
+                if (Children != null && Children.Count > 0)
+                    foreach (Individual child in Children) yield return child.RelationType;
             }
         }
 

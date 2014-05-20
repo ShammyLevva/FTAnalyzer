@@ -40,7 +40,7 @@ namespace FTAnalyzer
             {             
                 if (Husband != null) yield return Husband;
                 if (Wife != null) yield return Wife;
-                if(Children != null && Children.Count > 0)
+                if (Children != null && Children.Count > 0)
                     foreach (CensusIndividual child in Children) yield return child;
             }
         }

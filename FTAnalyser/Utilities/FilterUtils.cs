@@ -62,6 +62,11 @@ namespace FTAnalyzer.Filters
             return x => f(x) == i;
         }
 
+        public static Predicate<T> FamilyRelationFilter<T>(Func<T, IEnumerable<int>> f, int i)
+        {
+            return x => f(x).Contains(i);
+        }
+
         public static Predicate<T> DateFilter<T>(Func<T, FactDate> f, FactDate d)
         {
             return x => f(x).Overlaps(d);

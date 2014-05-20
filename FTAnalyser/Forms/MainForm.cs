@@ -128,6 +128,7 @@ namespace FTAnalyzer
                 SetupGridControls();
                 cmbReferrals.Items.Clear();
                 cmbReferrals.Text = string.Empty;
+                ClearColourFamilyCombo();
                 Statistics.Instance.Clear();
                 btnReferrals.Enabled = false;
                 tabCtrlLooseBDs.SelectedTab = tabLooseBirths; // force back to first tab
@@ -2249,6 +2250,54 @@ namespace FTAnalyzer
         private void btnCanadianColourCensus_Click(object sender, EventArgs e)
         {
             DisplayColourCensus(Countries.CANADA);
+        }
+
+        private void cmbColourFamily_Click(object sender, EventArgs e)
+        {
+            UpdateColourFamilyComboBox(null);
+        }
+
+        private void relTypesColoured_RelationTypesChanged(object sender, EventArgs e)
+        {
+            ComboBoxFamily f = null;
+            if (cmbColourFamily.Text != "All Families")
+                f = cmbColourFamily.SelectedItem as ComboBoxFamily;
+            ClearColourFamilyCombo();
+            bool stillThere = UpdateColourFamilyComboBox(f);
+            if (f != null && stillThere)
+                cmbColourFamily.SelectedItem = f;
+        }
+
+        private void ClearColourFamilyCombo()
+        {
+            cmbColourFamily.Items.Clear();
+            cmbColourFamily.Text = "All Families";
+        }
+
+        private bool UpdateColourFamilyComboBox(ComboBoxFamily f)
+        {
+            bool stillThere = false;
+            if (cmbColourFamily.Items.Count == 0)
+            {
+                HourGlass(true);
+                IEnumerable<Family> candidates = ft.AllFamilies;
+                Predicate<Family> surnameFilter = x => x.ContainsSurname(txtColouredSurname.Text);
+                Predicate<Family> relationFilter = relTypesColoured.BuildFamilyFilter<Family>(x => x.RelationTypes);
+                if (txtColouredSurname.Text.Length > 0)
+                    candidates = candidates.Where(surnameFilter);
+                List<Family> list = candidates.Where(relationFilter).ToList<Family>();
+                list.Sort(new DefaultFamilyComparer());
+                foreach (Family family in list)
+                {
+                    ComboBoxFamily cbf = new ComboBoxFamily(family);
+                    cmbColourFamily.Items.Add(cbf);
+                    if (cbf.Equals(f))
+                        stillThere = true;
+                }
+                btnReferrals.Enabled = true;
+                HourGlass(false);
+            }
+            return stillThere;
         }
         #endregion
 

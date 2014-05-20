@@ -59,6 +59,22 @@ namespace Controls
             return FilterUtils.OrFilter<T>(relationFilters);
         }
 
+        public Predicate<Family> BuildFamilyFilter<Family>(Func<Family, IEnumerable<int>> relationTypes)
+        {
+            List<Predicate<Family>> relationFilters = new List<Predicate<Family>>();
+            if (Blood)
+                relationFilters.Add(FilterUtils.FamilyRelationFilter<Family>(relationTypes, Individual.BLOOD));
+            if (Directs)
+                relationFilters.Add(FilterUtils.FamilyRelationFilter<Family>(relationTypes, Individual.DIRECT));
+            if (Marriage)
+                relationFilters.Add(FilterUtils.FamilyRelationFilter<Family>(relationTypes, Individual.MARRIAGE));
+            if (MarriedToDB)
+                relationFilters.Add(FilterUtils.FamilyRelationFilter<Family>(relationTypes, Individual.MARRIEDTODB));
+            if (Unknown)
+                relationFilters.Add(FilterUtils.FamilyRelationFilter<Family>(relationTypes, Individual.UNKNOWN));
+            return FilterUtils.OrFilter<Family>(relationFilters);
+        }
+
         public event EventHandler RelationTypesChanged;
         protected void OnRelationTypesChanged()
         {
