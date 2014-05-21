@@ -72,14 +72,37 @@ namespace FTAnalyzer.Forms
             foreach (Individual ind in individuals)
                 foreach (Fact f in ind.AllFacts)
                 {
-                    if (f.IsCensusFact)
+                    if (f.IsCensusFact && CensusDate.IsLostCousinsCensusYear(f.FactDate, false))
                     {
-                        CensusDate cd = CensusDate.GetLostCousinsCensusYear(f.FactDate, true);
-                        if (cd != null && !ind.MissingLostCousins(cd, false) && !Countries.IsKnownCountry(f.Country))
+                        bool lcEntered = false;
+                        if(f.FactDate.YearMatches(CensusDate.EWCENSUS1841) && 
+                            ind.IsLostCousinsEntered(CensusDate.EWCENSUS1841, false) && !ind.IsLostCousinsEntered(CensusDate.EWCENSUS1841, true))
+                            lcEntered = true;
+                        else if(f.FactDate.YearMatches(CensusDate.EWCENSUS1881) && 
+                            (ind.IsLostCousinsEntered(CensusDate.EWCENSUS1881, false) || 
+                             ind.IsLostCousinsEntered(CensusDate.SCOTCENSUS1881, false) || 
+                             ind.IsLostCousinsEntered(CensusDate.CANADACENSUS1881, false)) &&
+                           !(ind.IsLostCousinsEntered(CensusDate.EWCENSUS1881, true) || 
+                             ind.IsLostCousinsEntered(CensusDate.SCOTCENSUS1881, true) || 
+                             ind.IsLostCousinsEntered(CensusDate.CANADACENSUS1881, true)))
+                            lcEntered = true; 
+                        else if(f.FactDate.YearMatches(CensusDate.EWCENSUS1911) && 
+                            (ind.IsLostCousinsEntered(CensusDate.EWCENSUS1911, false) || 
+                             ind.IsLostCousinsEntered(CensusDate.IRELANDCENSUS1911, false)) &&
+                           !(ind.IsLostCousinsEntered(CensusDate.EWCENSUS1911, true) || 
+                             ind.IsLostCousinsEntered(CensusDate.IRELANDCENSUS1911, true)))
+                            lcEntered = true;
+                        else if(f.FactDate.YearMatches(CensusDate.USCENSUS1880) && 
+                            ind.IsLostCousinsEntered(CensusDate.USCENSUS1880, false) && !ind.IsLostCousinsEntered(CensusDate.USCENSUS1880, true))
+                            lcEntered = true;
+                        else if(f.FactDate.YearMatches(CensusDate.USCENSUS1940) &&
+                            ind.IsLostCousinsEntered(CensusDate.USCENSUS1940, false) && !ind.IsLostCousinsEntered(CensusDate.USCENSUS1940, true))
+                            lcEntered = true;
+                        if(!lcEntered && !Countries.IsKnownCountry(f.Country))
                             facts.Add(new DisplayFact(ind, f));
                     }
                 }
-            this.Text = "Facts Report for all " + individuals.Count() + " individuals. Facts count: " + facts.Count;
+            this.Text =  facts.Count + "Census Facts with no Lost Cousins fact and no known country.";
             SetupFacts();
         }
 

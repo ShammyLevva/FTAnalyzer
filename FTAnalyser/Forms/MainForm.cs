@@ -1344,7 +1344,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
-            Predicate<Individual> censusFacts = x => (x.LostCousinsCensusFactCount - x.LostCousinsFacts) > 0;
+            Predicate<Individual> censusFacts = x => x.LostCousinsCensusFactCount > 0;
             Predicate<Individual> filter = FilterUtils.AndFilter(censusFacts, relationFilter);
             IEnumerable<Individual> listToCheck = ft.AllIndividuals.Where(filter).ToList();
             Facts facts = new Facts(listToCheck);
