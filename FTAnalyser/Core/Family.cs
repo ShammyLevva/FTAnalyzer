@@ -332,7 +332,7 @@ namespace FTAnalyzer
 
         public bool ContainsSurname(string surname)
         {
-            return Members.Any(x => x.Surname.Equals(surname));
+            return Members.Any(x => x.Surname.ToUpper().Equals(surname.ToUpper()));
         }
 
         #endregion

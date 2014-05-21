@@ -2259,6 +2259,16 @@ namespace FTAnalyzer
 
         private void relTypesColoured_RelationTypesChanged(object sender, EventArgs e)
         {
+            RefreshColourFamilyComboBox();
+        }
+
+        private void txtColouredSurname_TextChanged(object sender, EventArgs e)
+        {
+            RefreshColourFamilyComboBox();
+        }
+
+        private void RefreshColourFamilyComboBox()
+        {
             ComboBoxFamily f = null;
             if (cmbColourFamily.Text != "All Families")
                 f = cmbColourFamily.SelectedItem as ComboBoxFamily; // store the previous value to set it again after

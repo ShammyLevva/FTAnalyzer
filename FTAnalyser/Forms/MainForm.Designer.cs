@@ -1217,6 +1217,7 @@
             this.txtColouredSurname.Name = "txtColouredSurname";
             this.txtColouredSurname.Size = new System.Drawing.Size(201, 20);
             this.txtColouredSurname.TabIndex = 30;
+            this.txtColouredSurname.TextChanged += new System.EventHandler(this.txtColouredSurname_TextChanged);
             // 
             // relTypesColoured
             // 
