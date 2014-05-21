@@ -1340,7 +1340,7 @@ namespace FTAnalyzer
             return new SortableBindingList<Individual>(occupations[job]);
         }
 
-        public List<IDisplayColourCensus> ColourCensus(string country, Controls.RelationTypes relType, string surname)
+        public List<IDisplayColourCensus> ColourCensus(string country, Controls.RelationTypes relType, string surname, ComboBoxFamily family)
         {
             Predicate<Individual> aliveOnAnyCensus = x => x.AliveOnAnyCensus(country) && !x.OutOfCountryOnAllCensus(country);
             Predicate<Individual> filter = relType.BuildFilter<Individual>(x => x.RelationType);
@@ -1362,18 +1362,27 @@ namespace FTAnalyzer
             else
                 dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.UKCENSUS1911) || !i.BirthDate.IsKnown) &&
                                                      (i.DeathDate.EndsAfter(CensusDate.UKCENSUS1841) || !i.DeathDate.IsKnown));
-
             filter = FilterUtils.AndFilter<Individual>(filter, dateFilter, aliveOnAnyCensus);
+            if (family != null)
+            {
+                Predicate<Individual> familyMembers = x => family.Members.Contains<Individual>(x);
+                filter = FilterUtils.AndFilter<Individual>(filter, familyMembers);
+            }
             return individuals.Where(filter).ToList<IDisplayColourCensus>();
         }
 
-        public List<IDisplayColourBMD> ColourBMD(Controls.RelationTypes relType, string surname)
+        public List<IDisplayColourBMD> ColourBMD(Controls.RelationTypes relType, string surname, ComboBoxFamily family)
         {
             Predicate<Individual> filter = relType.BuildFilter<Individual>(x => x.RelationType);
             if (surname.Length > 0)
             {
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, surname);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
+            }
+            if (family != null)
+            {
+                Predicate<Individual> familyMembers = x => family.Members.Contains<Individual>(x);
+                filter = FilterUtils.AndFilter<Individual>(filter, familyMembers);
             }
             return individuals.Where(filter).ToList<IDisplayColourBMD>();
         }

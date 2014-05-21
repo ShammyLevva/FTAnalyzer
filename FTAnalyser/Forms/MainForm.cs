@@ -22,7 +22,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.7.2.3-beta2";
+        public string VERSION = "3.7.3.0-beta1";
         
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -2213,7 +2213,7 @@ namespace FTAnalyzer
         private void btnColourBMD_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            List<IDisplayColourBMD> list = ft.ColourBMD(relTypesColoured, txtColouredSurname.Text);
+            List<IDisplayColourBMD> list = ft.ColourBMD(relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
             ColourBMD rs = new ColourBMD(list);
             DisposeDuplicateForms(rs);
             rs.Show();
@@ -2224,7 +2224,7 @@ namespace FTAnalyzer
         private void DisplayColourCensus(string country)
         {
             HourGlass(true);
-            List<IDisplayColourCensus> list = ft.ColourCensus(country, relTypesColoured, txtColouredSurname.Text);
+            List<IDisplayColourCensus> list = ft.ColourCensus(country, relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
             ColourCensus rs = new ColourCensus(country, list);
             DisposeDuplicateForms(rs);
             rs.Show();
@@ -2261,10 +2261,10 @@ namespace FTAnalyzer
         {
             ComboBoxFamily f = null;
             if (cmbColourFamily.Text != "All Families")
-                f = cmbColourFamily.SelectedItem as ComboBoxFamily;
+                f = cmbColourFamily.SelectedItem as ComboBoxFamily; // store the previous value to set it again after
             ClearColourFamilyCombo();
             bool stillThere = UpdateColourFamilyComboBox(f);
-            if (f != null && stillThere)
+            if (f != null && stillThere)  // the previously selected value is still present so select it
                 cmbColourFamily.SelectedItem = f;
         }
 
