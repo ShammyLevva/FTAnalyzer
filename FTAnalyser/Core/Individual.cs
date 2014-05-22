@@ -633,12 +633,6 @@ namespace FTAnalyzer
             return false;
         }
 
-        public bool IsLostCousinsMissingCountry(CensusDate when)
-        {
-            Predicate<Fact> p = new Predicate<Fact>(f => f.IsValidLostCousins(when));
-            return facts.Any<Fact>(f => p(f) && !this.BestLocation(when).IsKnownCountry);
-        }
-
         private FactComparer factComparer = new FactComparer();
 
         public int DuplicateLCFacts
@@ -655,9 +649,9 @@ namespace FTAnalyzer
         {
             get
             {
-                IEnumerable<Fact> censusFacts = AllFacts.Where(f => f.IsCensusFact && CensusDate.IsLostCousinsCensusYear(f.FactDate, false));
+                IEnumerable<Fact> censusFacts = AllFacts.Where(f => f.IsLCCensusFact);
                 int distinctFacts = censusFacts.Distinct(factComparer).Count();
-                return CensusFactCount - distinctFacts;
+                return censusFacts.Count() - distinctFacts;
             }
         }
 
@@ -1209,7 +1203,7 @@ namespace FTAnalyzer
 
         public int LostCousinsCensusFactCount
         {
-            get { return facts.Count(f => f.IsCensusFact && CensusDate.IsLostCousinsCensusYear(f.FactDate, true)); }
+            get { return facts.Count(f => f.IsLCCensusFact); }
         }
 
         public int CensusFactCount

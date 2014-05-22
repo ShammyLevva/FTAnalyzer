@@ -588,6 +588,11 @@ namespace FTAnalyzer
             Process.Start("http://ftanalyzer.codeplex.com/documentation");
         }
 
+        private void onlineGuidesToUsingFTAnalyzerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://ftanalyzer.codeplex.com/releases/view/122486");
+        }
+        
         private void olderParentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
