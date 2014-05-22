@@ -27,6 +27,7 @@ namespace FTAnalyzer
         private static readonly string DISPLAY = "d MMM yyyy";
         private static readonly string CHECKING = "d MMM";
         private static readonly string DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})$";
+        private static readonly string INTERPRETED_DATE_PATTERN = "^INT (\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4}) .*$";
         private static readonly string EARLY_DATE_PATTERN = "^(\\d{3})$";
         private static readonly string DOUBLE_DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})/(\\d{0,2})$";
         private static readonly string DOUBLE_DATE_PATTERN2 = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{4})/(\\d{4})$";
@@ -202,8 +203,17 @@ namespace FTAnalyzer
                 str = str.Replace("TO", "BEF"); // year will be one out
                 yearfix = +1;
             }
-
-            Match matcher = Regex.Match(str, POSTFIX);
+            Match matcher;
+            if (str.StartsWith("INT")) // Interpreted date but we can discard <<Date_Phrase>>
+            {
+                matcher = Regex.Match(str, INTERPRETED_DATE_PATTERN);
+                if (matcher.Success)
+                {
+                    string result = matcher.Groups[1].ToString() + matcher.Groups[2].ToString() + " " + matcher.Groups[3].ToString();
+                    return result.Trim();
+                }
+            }
+            matcher = Regex.Match(str, POSTFIX);
             if (matcher.Success)
             {
                 string result = matcher.Groups[1].ToString() + matcher.Groups[2].ToString();

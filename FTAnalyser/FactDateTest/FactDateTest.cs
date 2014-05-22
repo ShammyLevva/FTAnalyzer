@@ -289,6 +289,11 @@ namespace FactDateTest
             Assert.AreEqual(new DateTime(966, 1, 1), target.StartDate);
             Assert.AreEqual(new DateTime(966, 12, 31), target.EndDate);
 
+            // interpreted dates
+            target = new FactDate("INT 4 OCT 1723 4DA 8MNTH 1723");
+            Assert.AreEqual(new DateTime(1723, 10, 4), target.StartDate);
+            Assert.AreEqual(new DateTime(1723, 10, 4), target.EndDate);
+            
         }
 
         [TestMethod()]
