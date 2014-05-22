@@ -441,6 +441,34 @@ namespace FTAnalyzer
             }
         }
 
+        public bool IsLCCensusFact
+        {
+            get
+            {
+                if (!IsCensusFact)
+                    return false;
+                if (!CensusDate.IsLostCousinsCensusYear(FactDate, false))
+                    return false;
+                if (FactDate.YearMatches(CensusDate.EWCENSUS1841) && Countries.IsEnglandWales(Country))
+                    return true;
+                if (FactDate.YearMatches(CensusDate.EWCENSUS1881) && Countries.IsEnglandWales(Country))
+                    return true;                    
+                if (FactDate.YearMatches(CensusDate.SCOTCENSUS1881) && Country.Equals(Countries.SCOTLAND))
+                    return true;
+                if (FactDate.YearMatches(CensusDate.CANADACENSUS1881) && Country.Equals(Countries.CANADA))
+                    return true;
+                if (FactDate.YearMatches(CensusDate.EWCENSUS1911) && Countries.IsEnglandWales(Country))
+                    return true;
+                if (FactDate.YearMatches(CensusDate.IRELANDCENSUS1911) && Country.Equals(Countries.IRELAND))
+                    return true;
+                if (FactDate.YearMatches(CensusDate.USCENSUS1880) && Country.Equals(Countries.UNITED_STATES))
+                    return true;
+                if (FactDate.YearMatches(CensusDate.USCENSUS1940) && Country.Equals(Countries.UNITED_STATES))
+                    return true;
+                return false;
+            }
+        }
+
         public string DateString
         {
             get { return this.FactDate == null ? string.Empty : this.FactDate.DateString; }

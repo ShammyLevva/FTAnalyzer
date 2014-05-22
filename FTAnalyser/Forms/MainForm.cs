@@ -22,7 +22,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "3.7.3.0-beta1";
+        public string VERSION = "3.7.3.0-beta2";
         
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -1257,6 +1257,7 @@ namespace FTAnalyzer
             countEW1841 = countEW1881 = countSco1881 = countCan1881 = countEW1911 = countIre1911 = countUS1880 = countUS1940 = 0;
             missingEW1841 = missingEW1881 = missingSco1881 = missingCan1881 = missingEW1911 = missingIre1911 = missingUS1880 = missingUS1940 = 0;
             int LostCousinsCensusYearFacts = 0;
+            int LCnoCensus = 0;
             foreach (Individual ind in listToCheck)
             {
                 countEW1841 += (ind.IsLostCousinsEntered(CensusDate.EWCENSUS1841, false) ? 1 : 0);
@@ -1277,6 +1278,17 @@ namespace FTAnalyzer
                 missingUS1880 += (ind.MissingLostCousins(CensusDate.USCENSUS1880, false) ? 1 : 0);
                 missingUS1940 += (ind.MissingLostCousins(CensusDate.USCENSUS1940, false) ? 1 : 0);
                 LostCousinsCensusYearFacts += ind.LostCousinsCensusFactCount;
+                int mt = (ind.MissingLostCousins(CensusDate.EWCENSUS1841, false) ? 1 : 0) +
+                    (ind.MissingLostCousins(CensusDate.EWCENSUS1881, false) ? 1 : 0) + 
+                    (ind.MissingLostCousins(CensusDate.SCOTCENSUS1881, false) ? 1 : 0) +
+                    (ind.MissingLostCousins(CensusDate.CANADACENSUS1881, false) ? 1 : 0) +
+                    (ind.MissingLostCousins(CensusDate.EWCENSUS1911, false) ? 1 : 0) +
+                    (ind.MissingLostCousins(CensusDate.IRELANDCENSUS1911, false) ? 1 : 0) +
+                    (ind.MissingLostCousins(CensusDate.USCENSUS1880, false) ? 1 : 0) +
+                    (ind.MissingLostCousins(CensusDate.USCENSUS1940, false) ? 1 : 0);
+
+                if (ind.LostCousinsCensusFactCount - mt - ind.LostCousinsFacts != 0)
+                    LCnoCensus++;
             }
 
             int moreThanOneLCfact = listToCheck.Sum(i => i.DuplicateLCFacts);
@@ -1284,7 +1296,7 @@ namespace FTAnalyzer
             int LCtotal = listToCheck.Sum(i => i.LostCousinsFacts);
             int total = countEW1841 + countEW1881 + countSco1881 + countCan1881 + countEW1911 + countIre1911 + countUS1880 + countUS1940 + moreThanOneLCfact;
             int missingTotal = missingEW1841 + missingEW1881 + missingSco1881 + missingCan1881 + missingEW1911 + missingIre1911 + missingUS1880 + missingUS1940;
-            int noCountryTotal = LostCousinsCensusYearFacts - missingTotal - LCtotal - duplicateLCCensusFacts;
+            int noCountryTotal = LCnoCensus + LostCousinsCensusYearFacts - missingTotal - LCtotal - duplicateLCCensusFacts;
 
             rtbLostCousins.AppendText("1881 England & Wales Census: " + countEW1881 + " Found, " + missingEW1881 + " Missing\n");
             rtbLostCousins.AppendText("1841 England & Wales Census: " + countEW1841 + " Found, " + missingEW1841 + " Missing\n");
@@ -1299,6 +1311,8 @@ namespace FTAnalyzer
             rtbLostCousins.AppendText("1880 US Census: " + countUS1880 + " Found, " + missingUS1880 + " Missing\n");
             rtbLostCousins.AppendText("1940 US Census: " + countUS1940 + " Found, " + missingUS1940 + " Missing\n");
             rtbLostCousins.AppendText("____________________________________________________\n");
+            if (LCnoCensus > 0)
+                rtbLostCousins.AppendText("LostCousins facts with no census fact: " + LCnoCensus + "\n");
             if (moreThanOneLCfact > 0)
                 rtbLostCousins.AppendText("Duplicate LostCousins facts: " + moreThanOneLCfact + "\n");
             if (LCtotal > total)
@@ -1308,7 +1322,7 @@ namespace FTAnalyzer
                 rtbLostCousins.AppendText("Census facts with no census country and no Lost Cousins fact : " + noCountryTotal + "\n");
                 missingTotal += noCountryTotal;
             }
-            if (moreThanOneLCfact > 0 || LCtotal > total || noCountryTotal > 0)
+            if (LCnoCensus > 0 || moreThanOneLCfact > 0 || LCtotal > total || noCountryTotal > 0)
                 rtbLostCousins.AppendText("____________________________________________________\n");
             rtbLostCousins.AppendText("Totals: " + LCtotal + " Found, " + missingTotal + " Missing");
 
