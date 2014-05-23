@@ -6,6 +6,7 @@ using FTAnalyzer.Forms;
 using HtmlAgilityPack;
 using System.Net;
 using System.IO;
+using System.Windows.Forms;
 
 namespace FTAnalyzer
 {
@@ -96,24 +97,30 @@ namespace FTAnalyzer
             this.surnames = null;
         }
 
-        public List<SurnameStats> Surnames()
+        public List<SurnameStats> Surnames(ToolStripProgressBar pb)
         {
             if (surnames != null)
                 return surnames;
             IEnumerable<Individual> list = ft.AllIndividuals.GroupBy(x => x.Surname).Select(group => group.First());
             surnames = list.Select(x => new SurnameStats(x.Surname)).ToList();
-            LoadGOONS();
+            pb.Value = 0;
+            pb.Minimum = 0;
+            pb.Maximum = list.Count() + 260;
+            LoadGOONS(pb);
             foreach (SurnameStats stat in surnames)
             {
                 string upper = stat.Surname.ToUpper();
                 stat.Individuals = ft.AllIndividuals.Where(x => x.SurnameUpper.Equals(upper)).Count();
                 stat.Families = ft.AllFamilies.Where(x => x.ContainsSurname(upper)).Count();
                 stat.Marriages = ft.AllFamilies.Where(x => x.ContainsSurname(upper) && x.MaritalStatus == Family.MARRIED).Count();
+                pb.Value++;
+                if (pb.Value % 25 == 0)
+                    Application.DoEvents();
             }
             return surnames;
         }
 
-        public void LoadGOONS()
+        public void LoadGOONS(ToolStripProgressBar pb)
         {
             try
             {
@@ -125,7 +132,7 @@ namespace FTAnalyzer
                         string website = "http://www.one-name.org/index_" + c.ToString() + ".html";
                         client.DownloadFile(website, filename);
 
-                        HtmlDocument doc = new HtmlDocument();
+                        HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
                         doc.Load(filename);
                         HtmlNode table = doc.DocumentNode.SelectSingleNode("//table");
 
@@ -146,6 +153,8 @@ namespace FTAnalyzer
                             if (stat != null && stat.URI == null)
                                 stat.URI = new Uri(website);
                         }
+                        pb.Value+=10;
+                        Application.DoEvents();
                     }
                 }
             }

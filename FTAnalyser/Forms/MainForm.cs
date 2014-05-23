@@ -994,6 +994,7 @@ namespace FTAnalyzer
             mnuPrint.Enabled = false;
             tsCountLabel.Text = string.Empty;
             tsHintsLabel.Text = string.Empty;
+            tspbTabProgress.Visible = false;
             Application.DoEvents();
             if (ft.Loading)
             {
@@ -1062,12 +1063,14 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabSurnames)
                 {
-                    SortableBindingList<SurnameStats> list = new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames());
+                    tspbTabProgress.Visible = true;
+                    SortableBindingList<SurnameStats> list = new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(tspbTabProgress));
                     dgSurnames.DataSource = list;
                     dgSurnames.Sort(dgSurnames.Columns["Surname"], ListSortDirection.Ascending);
                     dgSurnames.Focus();
                     tsCountLabel.Text = Properties.Messages.Count + list.Count + " Surnames.";
                     tsHintsLabel.Text = Properties.Messages.Hints_Surname;
+                    tspbTabProgress.Visible = false;
                 }
                 else if (tabSelector.SelectedTab == tabCensus)
                 {
