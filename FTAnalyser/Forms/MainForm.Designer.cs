@@ -1232,6 +1232,7 @@
             this.btnCensusNoCountryNoLC.TabIndex = 24;
             this.btnCensusNoCountryNoLC.Text = "Census Facts with no Country and no Lost Cousins fact";
             this.btnCensusNoCountryNoLC.UseVisualStyleBackColor = true;
+            this.btnCensusNoCountryNoLC.Visible = false;
             this.btnCensusNoCountryNoLC.Click += new System.EventHandler(this.btnCensusNoCountryNoLC_Click);
             // 
             // Referrals

@@ -1281,7 +1281,7 @@ namespace FTAnalyzer
             int LCtotal = listToCheck.Sum(i => i.LostCousinsFacts);
             int total = countEW1841 + countEW1881 + countSco1881 + countCan1881 + countEW1911 + countIre1911 + countUS1880 + countUS1940 + moreThanOneLCfact;
             int missingTotal = missingEW1841 + missingEW1881 + missingSco1881 + missingCan1881 + missingEW1911 + missingIre1911 + missingUS1880 + missingUS1940;
-            int noCountryTotal = LCnoCensus + LostCousinsCensusYearFacts - missingTotal - LCtotal - duplicateLCCensusFacts;
+            int noCountryTotal = LostCousinsCensusYearFacts - missingTotal - LCtotal - duplicateLCCensusFacts;
 
             rtbLostCousins.AppendText("1881 England & Wales Census: " + countEW1881 + " Found, " + missingEW1881 + " Missing\n");
             rtbLostCousins.AppendText("1841 England & Wales Census: " + countEW1841 + " Found, " + missingEW1841 + " Missing\n");
@@ -1302,13 +1302,11 @@ namespace FTAnalyzer
                 rtbLostCousins.AppendText("Duplicate LostCousins facts: " + moreThanOneLCfact + "\n");
             if (LCtotal > total)
                 rtbLostCousins.AppendText("LostCousins fact with no Lost Cousins census country : " + (LCtotal - total) + "\n");
-            if (noCountryTotal > 0)
-            {
-                rtbLostCousins.AppendText("Census facts with no census country and no Lost Cousins fact : " + noCountryTotal + "\n");
-                missingTotal += noCountryTotal;
-            }
-            if (LCnoCensus > 0 || moreThanOneLCfact > 0 || LCtotal > total || noCountryTotal > 0)
+            //if (noCountryTotal > 0)
+            //    rtbLostCousins.AppendText("Census facts with no census country and no Lost Cousins fact : " + noCountryTotal + "\n");
+            if (LCnoCensus > 0 || moreThanOneLCfact > 0 || LCtotal > total) // || noCountryTotal > 0)
                 rtbLostCousins.AppendText("____________________________________________________\n");
+            missingTotal += LCnoCensus;
             rtbLostCousins.AppendText("Totals: " + LCtotal + " Found, " + missingTotal + " Missing");
 
             if (missingTotal > 0)
