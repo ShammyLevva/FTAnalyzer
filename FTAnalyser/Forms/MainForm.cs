@@ -992,11 +992,12 @@ namespace FTAnalyzer
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             mnuPrint.Enabled = false;
+            tsCountLabel.Text = string.Empty;
+            tsHintsLabel.Text = string.Empty;
+            Application.DoEvents();
             if (ft.Loading)
             {
                 tabSelector.SelectedTab = tabDisplayProgress;
-                tsCountLabel.Text = string.Empty;
-                tsHintsLabel.Text = string.Empty;
             }
             else
             {
@@ -1005,8 +1006,6 @@ namespace FTAnalyzer
                     if (tabSelector.SelectedTab != tabDisplayProgress)
                     {
                         tabSelector.SelectedTab = tabDisplayProgress;
-                        tsCountLabel.Text = string.Empty;
-                        tsHintsLabel.Text = string.Empty;
                         mnuRestore.Enabled = true;
                         MessageBox.Show(Properties.ErrorMessages.FTA_0002, "Error : FTA_0002");
                     }
@@ -1015,8 +1014,6 @@ namespace FTAnalyzer
                 HourGlass(true);
                 if (tabSelector.SelectedTab == tabDisplayProgress)
                 {
-                    tsCountLabel.Text = string.Empty;
-                    tsHintsLabel.Text = string.Empty;
                     mnuPrint.Enabled = true;
                 }
                 else if (tabSelector.SelectedTab == tabIndividuals)
@@ -1051,8 +1048,7 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabFacts)
                 {
-                    tsCountLabel.Text = string.Empty;
-                    tsHintsLabel.Text = string.Empty;
+                    // already cleared text don't need to do anything else
                 }
                 else if (tabSelector.SelectedTab == tabSources)
                 {
@@ -1076,15 +1072,11 @@ namespace FTAnalyzer
                 else if (tabSelector.SelectedTab == tabCensus)
                 {
                     cenDate.RevertToDefaultDate();
-                    tsCountLabel.Text = string.Empty;
-                    tsHintsLabel.Text = string.Empty;
                     btnShowCensusMissing.Enabled = ft.IndividualCount > 0;
                     cenDate.AddAllCensusItems();
                 }
                 else if (tabSelector.SelectedTab == tabDuplicates)
                 {
-                    tsCountLabel.Text = string.Empty;
-                    tsHintsLabel.Text = string.Empty;
                     rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
                     ckbHideIgnoredDuplicates.Checked = Properties.Settings.Default.HideIgnoredDuplicates;
                     SetPossibleDuplicates();
@@ -1094,8 +1086,6 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabTreetops)
                 {
-                    tsCountLabel.Text = string.Empty;
-                    tsHintsLabel.Text = string.Empty;
                     dgTreeTops.DataSource = null;
                     if (ckbTTIgnoreLocations.Checked)
                         treetopsCountry.Enabled = false;
@@ -1104,8 +1094,6 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabWorldWars)
                 {
-                    tsCountLabel.Text = string.Empty;
-                    tsHintsLabel.Text = string.Empty;
                     dgWorldWars.DataSource = null;
                     if (ckbWDIgnoreLocations.Checked)
                         wardeadCountry.Enabled = false;
@@ -1114,8 +1102,6 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabLostCousins)
                 {
-                    tsCountLabel.Text = string.Empty;
-                    tsHintsLabel.Text = string.Empty;
                     btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled =
                         btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled =
                         btnLC1911EW.Enabled = ft.IndividualCount > 0;

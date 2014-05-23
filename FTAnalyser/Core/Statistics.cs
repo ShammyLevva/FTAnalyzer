@@ -105,9 +105,10 @@ namespace FTAnalyzer
             LoadGOONS();
             foreach (SurnameStats stat in surnames)
             {
-                stat.Individuals = ft.AllIndividuals.Where(x => x.Surname.Equals(stat.Surname)).Count();
-                stat.Families = ft.AllFamilies.Where(x => x.ContainsSurname(stat.Surname)).Count();
-                stat.Marriages = ft.AllFamilies.Where(x => x.ContainsSurname(stat.Surname) && x.MaritalStatus == Family.MARRIED).Count();
+                string upper = stat.Surname.ToUpper();
+                stat.Individuals = ft.AllIndividuals.Where(x => x.SurnameUpper.Equals(upper)).Count();
+                stat.Families = ft.AllFamilies.Where(x => x.ContainsSurname(upper)).Count();
+                stat.Marriages = ft.AllFamilies.Where(x => x.ContainsSurname(upper) && x.MaritalStatus == Family.MARRIED).Count();
             }
             return surnames;
         }

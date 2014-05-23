@@ -26,6 +26,7 @@ namespace FTAnalyzer
         private DoubleMetaphone forenameMetaphone;
         public string Notes { get; private set; }
         public string StandardisedName { get; private set; }
+        public string SurnameUpper { get; private set; }
         public bool HasParents { get; set; }
         public bool Infamily { get; set; }
         public int Ahnentafel { get; set; }
@@ -60,6 +61,7 @@ namespace FTAnalyzer
             preferredFacts = new Dictionary<string, Fact>();
             forenameMetaphone = new DoubleMetaphone(Forename);
             surnameMetaphone = new DoubleMetaphone(Surname);
+            SurnameUpper = Surname.ToUpper();
             Notes = FamilyTree.GetNotes(node);
             StandardisedName = FamilyTree.Instance.GetStandardisedName(IsMale, Forename);
 
@@ -134,6 +136,7 @@ namespace FTAnalyzer
                 this.IndividualID = i.IndividualID;
                 this.forenames = i.forenames;
                 this.surname = i.surname;
+                this.SurnameUpper = i.SurnameUpper;
                 this.forenameMetaphone = i.forenameMetaphone;
                 this.surnameMetaphone = i.surnameMetaphone;
                 this.marriedName = i.marriedName;
