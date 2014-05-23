@@ -1272,16 +1272,7 @@ namespace FTAnalyzer
                 missingUS1880 += (ind.MissingLostCousins(CensusDate.USCENSUS1880, false) ? 1 : 0);
                 missingUS1940 += (ind.MissingLostCousins(CensusDate.USCENSUS1940, false) ? 1 : 0);
                 LostCousinsCensusYearFacts += ind.LostCousinsCensusFactCount;
-                int mt = (ind.MissingLostCousins(CensusDate.EWCENSUS1841, false) ? 1 : 0) +
-                    (ind.MissingLostCousins(CensusDate.EWCENSUS1881, false) ? 1 : 0) + 
-                    (ind.MissingLostCousins(CensusDate.SCOTCENSUS1881, false) ? 1 : 0) +
-                    (ind.MissingLostCousins(CensusDate.CANADACENSUS1881, false) ? 1 : 0) +
-                    (ind.MissingLostCousins(CensusDate.EWCENSUS1911, false) ? 1 : 0) +
-                    (ind.MissingLostCousins(CensusDate.IRELANDCENSUS1911, false) ? 1 : 0) +
-                    (ind.MissingLostCousins(CensusDate.USCENSUS1880, false) ? 1 : 0) +
-                    (ind.MissingLostCousins(CensusDate.USCENSUS1940, false) ? 1 : 0);
-
-                if (ind.LostCousinsCensusFactCount - mt - ind.LostCousinsFacts != 0)
+                if (ind.LostCousinsCensusFactCount - ind.MissingLostCousinsCount - ind.LostCousinsFacts != 0)
                     LCnoCensus++;
             }
 
@@ -1306,7 +1297,7 @@ namespace FTAnalyzer
             rtbLostCousins.AppendText("1940 US Census: " + countUS1940 + " Found, " + missingUS1940 + " Missing\n");
             rtbLostCousins.AppendText("____________________________________________________\n");
             if (LCnoCensus > 0)
-                rtbLostCousins.AppendText("LostCousins facts with no census fact: " + LCnoCensus + "\n");
+                rtbLostCousins.AppendText("LostCousins facts with bad/missing census fact: " + LCnoCensus + "\n");
             if (moreThanOneLCfact > 0)
                 rtbLostCousins.AppendText("Duplicate LostCousins facts: " + moreThanOneLCfact + "\n");
             if (LCtotal > total)

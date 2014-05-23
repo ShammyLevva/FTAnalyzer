@@ -657,12 +657,27 @@ namespace FTAnalyzer
                 return censusFacts.Count() - distinctFacts;
             }
         }
-
+        
         public bool MissingLostCousins(CensusDate censusDate, bool includeUnknownCountries)
         {
             bool isCensusDone = IsCensusDone(censusDate, includeUnknownCountries);
             bool isLostCousinsEntered = IsLostCousinsEntered(censusDate, includeUnknownCountries);
             return isCensusDone && !isLostCousinsEntered;
+        }
+
+        public int MissingLostCousinsCount
+        {
+            get
+            {
+                return (MissingLostCousins(CensusDate.EWCENSUS1841, false) ? 1 : 0) +
+                       (MissingLostCousins(CensusDate.EWCENSUS1881, false) ? 1 : 0) +
+                       (MissingLostCousins(CensusDate.SCOTCENSUS1881, false) ? 1 : 0) +
+                       (MissingLostCousins(CensusDate.CANADACENSUS1881, false) ? 1 : 0) +
+                       (MissingLostCousins(CensusDate.EWCENSUS1911, false) ? 1 : 0) +
+                       (MissingLostCousins(CensusDate.IRELANDCENSUS1911, false) ? 1 : 0) +
+                       (MissingLostCousins(CensusDate.USCENSUS1880, false) ? 1 : 0) +
+                       (MissingLostCousins(CensusDate.USCENSUS1940, false) ? 1 : 0);
+            }
         }
 
         public int LostCousinsFacts

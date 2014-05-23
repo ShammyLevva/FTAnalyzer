@@ -253,6 +253,7 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.tspbTabProgress = new System.Windows.Forms.ToolStripProgressBar();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.relTypesFacts = new Controls.RelationTypes();
             this.cenDate = new Controls.CensusDateSelector();
@@ -263,7 +264,6 @@
             this.treetopsCountry = new Controls.CensusCountry();
             this.wardeadRelation = new Controls.RelationTypes();
             this.wardeadCountry = new Controls.CensusCountry();
-            this.tspbTabProgress = new System.Windows.Forms.ToolStripProgressBar();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -1291,7 +1291,7 @@
             this.btnLCnoCensus.Name = "btnLCnoCensus";
             this.btnLCnoCensus.Size = new System.Drawing.Size(162, 27);
             this.btnLCnoCensus.TabIndex = 22;
-            this.btnLCnoCensus.Text = "Lost Cousins but no Census";
+            this.btnLCnoCensus.Text = "Lost Cousins w/bad Census";
             this.btnLCnoCensus.UseVisualStyleBackColor = true;
             this.btnLCnoCensus.Click += new System.EventHandler(this.btnLCnoCensus_Click);
             // 
@@ -2587,6 +2587,11 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // tspbTabProgress
+            // 
+            this.tspbTabProgress.Name = "tspbTabProgress";
+            this.tspbTabProgress.Size = new System.Drawing.Size(100, 16);
+            // 
             // rtbOutput
             // 
             this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2679,11 +2684,6 @@
             this.wardeadCountry.TabIndex = 25;
             this.wardeadCountry.Title = "Default Country";
             this.wardeadCountry.UKEnabled = true;
-            // 
-            // tspbTabProgress
-            // 
-            this.tspbTabProgress.Name = "tspbTabProgress";
-            this.tspbTabProgress.Size = new System.Drawing.Size(100, 16);
             // 
             // MainForm
             // 
