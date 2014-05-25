@@ -40,17 +40,15 @@ namespace FTAnalyzer
             InitializeComponent();
             loading = true;
             displayOptionsOnLoadToolStripMenuItem.Checked = Properties.GeneralSettings.Default.ReportOptions;
-            dgDuplicates.AutoGenerateColumns = false;
             ft.XmlErrorBox = rtbOutput;
-            VERSION = PublishVersion();
-            log.Info("Started FTAnalyzer version " + VERSION);
             treetopsRelation.MarriedToDB = false;
             ShowMenus(false);
-            SetSavePath();
+            VERSION = PublishVersion();
+            log.Info("Started FTAnalyzer version " + VERSION);
             int pos = VERSION.IndexOf('-');
             string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
             DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
-            rfhDuplicates = new ReportFormHelper(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
+            SetSavePath();
             BuildRecentList();
         }
 
@@ -65,6 +63,15 @@ namespace FTAnalyzer
             GeneralSettings.TolerateInaccurateCensusChanged += new EventHandler(Options_TolerateInaccurateCensusChanged);
             GeneralSettings.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
             this.Text = "Family Tree Analyzer v" + VERSION;
+            SetHeightWidth();
+            dgSurnames.AutoGenerateColumns = false;
+            dgDuplicates.AutoGenerateColumns = false;
+            rfhDuplicates = new ReportFormHelper(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
+            loading = false;
+        }
+
+        private void SetHeightWidth()
+        {
             // load height & width from registry - note need to use temp variables as setting them causes form
             // to resize thus setting the values for both
             int Width = (int)Application.UserAppDataRegistry.GetValue("Mainform size - width", this.Width);
@@ -75,8 +82,6 @@ namespace FTAnalyzer
             this.Height = Height;
             this.Top = Top;
             this.Left = Left;
-            dgSurnames.AutoGenerateColumns = false;
-            loading = false;
         }
 
         #region Version Info
