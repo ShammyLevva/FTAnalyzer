@@ -564,7 +564,7 @@ namespace System.Web
             }
             catch(Exception e)
             {
-                MessageBox.Show("Error processing web request. Error was : " + e.Message, "FTAnalyzer");
+                MessageBox.Show("Error processing web request. Error was : " + e.Message + "\nSite was: " + url, "FTAnalyzer");
             }
         }
 
