@@ -8,6 +8,7 @@ using FTAnalyzer.Utilities;
 using GeoAPI.Geometries;
 using SharpMap.Data;
 using SharpMap.Rendering.Decoration.ScaleBar;
+using System.Web;
 
 namespace FTAnalyzer.Forms
 {
@@ -125,7 +126,7 @@ namespace FTAnalyzer.Forms
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(e.Link.LinkData as string);
+            HttpUtility.VisitWebsite(e.Link.LinkData as string);
         }
 
         private void dgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

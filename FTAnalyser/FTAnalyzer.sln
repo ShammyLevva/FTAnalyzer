@@ -256,7 +256,6 @@ Global
 		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.DVD-5|x86.ActiveCfg = DVD-5
 		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.DVD-5|x86.Build.0 = DVD-5
 		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.Release|Any CPU.ActiveCfg = SingleImage
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.Release|Any CPU.Build.0 = SingleImage
 		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.Release|x86.ActiveCfg = SingleImage
 		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.Release|x86.Build.0 = SingleImage
 		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.ReleaseDSProjection|Any CPU.ActiveCfg = SingleImage
@@ -264,7 +263,6 @@ Global
 		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.ReleaseDSProjection|x86.ActiveCfg = SingleImage
 		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.ReleaseDSProjection|x86.Build.0 = SingleImage
 		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.SingleImage|Any CPU.ActiveCfg = SingleImage
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.SingleImage|Any CPU.Build.0 = SingleImage
 		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.SingleImage|x86.ActiveCfg = SingleImage
 		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.SingleImage|x86.Build.0 = SingleImage
 	EndGlobalSection

@@ -1646,7 +1646,7 @@ namespace FTAnalyzer
             }
             if (uri != null)
             {
-                Process.Start(uri);
+                HttpUtility.VisitWebsite(uri);
             }
         }
 
@@ -1968,7 +1968,7 @@ namespace FTAnalyzer
             }
             if (uri != null)
             {
-                Process.Start(uri);
+                HttpUtility.VisitWebsite(uri);
             }
         }
 

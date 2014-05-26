@@ -11,6 +11,7 @@ using System.IO;
 using FTAnalyzer.Utilities;
 using System.Collections;
 using FTAnalyzer.UserControls;
+using System.Web;
 
 namespace FTAnalyzer.Forms
 {
@@ -286,7 +287,7 @@ namespace FTAnalyzer.Forms
 
         private void btnHelp_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://ftanalyzer.codeplex.com/wikipage?title=The%20Census%20Tab&referringTitle=Documentation");
+            HttpUtility.VisitWebsite("https://ftanalyzer.codeplex.com/wikipage?title=The%20Census%20Tab&referringTitle=Documentation");
         }
     }
 }

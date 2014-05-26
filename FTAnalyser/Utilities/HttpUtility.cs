@@ -1,5 +1,7 @@
 ﻿using System.Text;
 using System.Net;
+using System.Windows;
+using System.Diagnostics;
 
 namespace System.Web
 {
@@ -550,6 +552,19 @@ namespace System.Web
                 proxy = new WebProxy(proxyuri, false);
                 proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
                 WebRequest.DefaultWebProxy = proxy;
+            }
+        }
+
+        public static void VisitWebsite(string url)
+        {
+            try
+            {
+                ProcessStartInfo info = new ProcessStartInfo(url);
+                Process.Start(url);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Error processing web request. Error was : " + e.Message, "FTAnalyzer");
             }
         }
 

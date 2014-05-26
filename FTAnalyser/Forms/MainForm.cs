@@ -16,6 +16,7 @@ using FTAnalyzer.Utilities;
 using Ionic.Zip;
 using Printing.DataGridViewPrint.Tools;
 using System.Text;
+using System.Web;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace FTAnalyzer
@@ -423,7 +424,7 @@ namespace FTAnalyzer
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://forums.lc");
+            HttpUtility.VisitWebsite("http://forums.lc");
         }
 
         private void dgOccupations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -590,12 +591,12 @@ namespace FTAnalyzer
 
         private void viewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("http://ftanalyzer.codeplex.com/documentation");
+            HttpUtility.VisitWebsite("http://ftanalyzer.codeplex.com/documentation");
         }
 
         private void onlineGuidesToUsingFTAnalyzerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("http://ftanalyzer.codeplex.com/releases/view/122486");
+            HttpUtility.VisitWebsite("http://ftanalyzer.codeplex.com/releases/view/122486");
         }
         
         private void olderParentsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -852,12 +853,12 @@ namespace FTAnalyzer
 
         private void reportAnIssueToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("http://ftanalyzer.codeplex.com/workitem/list/basic");
+            HttpUtility.VisitWebsite("http://ftanalyzer.codeplex.com/workitem/list/basic");
         }
 
         private void whatsNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("http://ftanalyzer.codeplex.com/wikipage?title=What%27s%20New%20in%20this%20Release%3f");
+            HttpUtility.VisitWebsite("http://ftanalyzer.codeplex.com/wikipage?title=What%27s%20New%20in%20this%20Release%3f");
         }
 
         private void mnuShowTimeline_Click(object sender, EventArgs e)
@@ -949,8 +950,7 @@ namespace FTAnalyzer
                 if (cell.Value != null)
                 {
                     string url = cell.Value.ToString();
-                    ProcessStartInfo info = new ProcessStartInfo(url);
-                    Process.Start(info);
+                    HttpUtility.VisitWebsite(url);
                 }
             }
         }
@@ -1443,9 +1443,7 @@ namespace FTAnalyzer
 
         private void labLostCousinsWeb_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
-            Process.Start(null, "http://www.lostcousins.com/?ref=LC585149");
-            HourGlass(false);
+            HttpUtility.VisitWebsite("http://www.lostcousins.com/?ref=LC585149");
         }
 
         private void labLostCousinsWeb_MouseEnter(object sender, EventArgs e)
@@ -1461,7 +1459,7 @@ namespace FTAnalyzer
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.lostcousins.com/?ref=LC585149");
+            HttpUtility.VisitWebsite("http://www.lostcousins.com/?ref=LC585149");
         }
         #endregion
 
@@ -1845,7 +1843,7 @@ namespace FTAnalyzer
             string searchtext = ind.Forename + "+" + ind.Surname;
             if (ind.ServiceNumber.Length > 0)
                 searchtext += "+" + ind.ServiceNumber;
-            Process.Start("https://www.livesofthefirstworldwar.org/search#FreeSearch=" + searchtext + "&PageIndex=1&PageSize=20");
+            HttpUtility.VisitWebsite("https://www.livesofthefirstworldwar.org/search#FreeSearch=" + searchtext + "&PageIndex=1&PageSize=20");
         }
 
         private void dgIndividuals_MouseDown(object sender, MouseEventArgs e)

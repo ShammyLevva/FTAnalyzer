@@ -11,6 +11,7 @@ using GeoAPI.Geometries;
 using SharpMap.Data;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
+using System.Web;
 
 namespace FTAnalyzer.Forms
 {
@@ -182,7 +183,7 @@ namespace FTAnalyzer.Forms
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(e.Link.LinkData as string);
+            HttpUtility.VisitWebsite(e.Link.LinkData as string);
         }
 
         private void mapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
