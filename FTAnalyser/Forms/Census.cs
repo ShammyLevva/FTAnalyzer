@@ -106,7 +106,7 @@ namespace FTAnalyzer.Forms
                 DataGridViewCellStyle style = new DataGridViewCellStyle(dgCensus.DefaultCellStyle);
                 style.BackColor = highlighted ? Color.LightGray : Color.White;
                 style.ForeColor = cr.RelationType == Individual.DIRECT ? Color.Red : Color.Black;
-                style.Font = (cr.IsAlive(CensusDate) && !cr.DeathDate.StartsBefore(CensusDate)) ? boldFont : regularFont;
+                style.Font = (cr.IsCensusDone(CensusDate) || (cr.IsAlive(CensusDate) && !cr.DeathDate.StartsBefore(CensusDate))) ? boldFont : regularFont;
                 cr.CellStyle = style;
             }
         }
