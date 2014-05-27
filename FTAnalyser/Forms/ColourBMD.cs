@@ -132,13 +132,13 @@ namespace FTAnalyzer.Forms
                             cell.ToolTipText = "Unknown date.";
                             break;
                         case WIDE_DATE: // Orange
-                            cell.ToolTipText = "Wide date range (>2 years).";
+                            cell.ToolTipText = "Event occurred in >2 year period.";
                             break;
                         case NARROW_DATE: // Yellow
-                            cell.ToolTipText = "Narrow date range (over Quarter/Month up to 2y).";
+                            cell.ToolTipText = "Event occured within two year period, but longer than 3 months.";
                             break;
                         case APPROX_DATE: // Pale Green 
-                            cell.ToolTipText = "Approximate date. (Quarter/Month)";
+                            cell.ToolTipText = "Date accurate to within 3 months (note may be date of registration not event date)";
                             break;
                         case EXACT_DATE: // Green
                             cell.ToolTipText = "Exact date.";
