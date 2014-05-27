@@ -1700,14 +1700,15 @@ namespace FTAnalyzer
             }
 
             bool added = false;
+            int count = 0;
             for (int i = 0; i < 5; i++)
             {
                 string name = Properties.Settings.Default.RecentFiles[i];
-                if (name != null && name.Length > 0)
+                if (name != null && name.Length > 0 && File.Exists(name))
                 {
                     added = true;
                     mnuRecent.DropDownItems[i].Visible = true;
-                    mnuRecent.DropDownItems[i].Text = (i + 1) + ". " + name;
+                    mnuRecent.DropDownItems[i].Text = ++count + ". " + name;
                     mnuRecent.DropDownItems[i].Tag = name;
                 }
                 else
