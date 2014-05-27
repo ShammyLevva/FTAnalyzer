@@ -819,7 +819,7 @@ namespace FTAnalyzer
         {
             if (Longitude == 0.0 && Latitude == 0.0)
                 return false;
-            if (!recheckPartials && Properties.GeneralSettings.Default.IncludePartials && (GeocodeStatus == Geocode.PARTIAL_MATCH || GeocodeStatus == Geocode.LEVEL_MISMATCH))
+            if (!recheckPartials && Properties.MappingSettings.Default.IncludePartials && (GeocodeStatus == Geocode.PARTIAL_MATCH || GeocodeStatus == Geocode.LEVEL_MISMATCH))
                 return true;
             return GeocodeStatus == Geocode.MATCHED || GeocodeStatus == Geocode.GEDCOM_USER;
         }
