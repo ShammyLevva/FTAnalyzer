@@ -36,7 +36,6 @@
             this.chkCensusResidence = new System.Windows.Forms.CheckBox();
             this.chkTolerateInaccurateCensus = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.chkIncludePartialGeocoded = new System.Windows.Forms.CheckBox();
             this.chkFamilyCensus = new System.Windows.Forms.CheckBox();
             this.upDownAge = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
@@ -90,14 +89,6 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            // 
-            // chkIncludePartialGeocoded
-            // 
-            resources.ApplyResources(this.chkIncludePartialGeocoded, "chkIncludePartialGeocoded");
-            this.chkIncludePartialGeocoded.Checked = true;
-            this.chkIncludePartialGeocoded.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkIncludePartialGeocoded.Name = "chkIncludePartialGeocoded";
-            this.chkIncludePartialGeocoded.UseVisualStyleBackColor = true;
             // 
             // chkFamilyCensus
             // 
@@ -177,7 +168,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.upDownAge);
             this.Controls.Add(this.chkFamilyCensus);
-            this.Controls.Add(this.chkIncludePartialGeocoded);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chkTolerateInaccurateCensus);
             this.Controls.Add(this.chkCensusResidence);
@@ -199,7 +189,6 @@
         private System.Windows.Forms.CheckBox chkCensusResidence;
         private System.Windows.Forms.CheckBox chkTolerateInaccurateCensus;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox chkIncludePartialGeocoded;
         private System.Windows.Forms.CheckBox chkFamilyCensus;
         private System.Windows.Forms.NumericUpDown upDownAge;
         private System.Windows.Forms.Label label2;

@@ -371,7 +371,6 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("\n    Allow Empty Values In Locations: " + Properties.GeneralSettings.Default.AllowEmptyLocations);
                 xmlErrorbox.AppendText("\n    Treat Residence Facts As Census Facts: " + Properties.GeneralSettings.Default.UseResidenceAsCensus);
                 xmlErrorbox.AppendText("\n    Tolerate Slightly Inaccurate Census Dates: " + Properties.GeneralSettings.Default.TolerateInaccurateCensusDate);
-                xmlErrorbox.AppendText("\n    Include Locations with Partial Match Status: " + Properties.GeneralSettings.Default.IncludePartials);
                 xmlErrorbox.AppendText("\n    Family Census Facts Apply To Only Parents: " + Properties.GeneralSettings.Default.OnlyCensusParents);
                 xmlErrorbox.AppendText("\n    Loose Birth Minimum Parental Age: " + Properties.GeneralSettings.Default.MinParentalAge);
                 xmlErrorbox.AppendText("\n    Show Multiple Fact Forms When Viewing Duplicates : " + Properties.GeneralSettings.Default.MultipleFactForms);
@@ -382,6 +381,7 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("\n    Custom Maps Location: " + Properties.MappingSettings.Default.CustomMapPath);
                 xmlErrorbox.AppendText("\n    Display English & Welsh Parish Boundaries: " + Properties.MappingSettings.Default.UseEnglishParishBoundaries);
                 xmlErrorbox.AppendText("\n    Hide Scale Bar: " + Properties.MappingSettings.Default.HideScaleBar);
+                xmlErrorbox.AppendText("\n    Include Locations with Partial Match Status: " + Properties.MappingSettings.Default.IncludePartials);
                 xmlErrorbox.AppendText("\n\n");
             }
         }

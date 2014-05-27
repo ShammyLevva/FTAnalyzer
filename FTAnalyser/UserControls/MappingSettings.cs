@@ -18,6 +18,7 @@ namespace FTAnalyzer.UserControls
 			//if this happens, then the users settings will be cleared.
             txtMapPath.Text = Properties.MappingSettings.Default.CustomMapPath;
             ckbUseParishBoundaries.Checked = Properties.MappingSettings.Default.UseEnglishParishBoundaries;
+            chkIncludePartialGeocoded.Checked = Properties.MappingSettings.Default.IncludePartials;
             ckbHideScaleBar.Checked = Properties.MappingSettings.Default.HideScaleBar;
 		}
 
@@ -28,6 +29,7 @@ namespace FTAnalyzer.UserControls
             Properties.MappingSettings.Default.CustomMapPath = txtMapPath.Text;
             Properties.MappingSettings.Default.UseEnglishParishBoundaries = ckbUseParishBoundaries.Checked;
             Properties.MappingSettings.Default.HideScaleBar = ckbHideScaleBar.Checked;
+            Properties.MappingSettings.Default.IncludePartials = chkIncludePartialGeocoded.Checked;
             Properties.MappingSettings.Default.Save();
 		}
 

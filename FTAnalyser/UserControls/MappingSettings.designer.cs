@@ -37,6 +37,7 @@
             this.btnBrowseFolder = new System.Windows.Forms.Button();
             this.ckbUseParishBoundaries = new System.Windows.Forms.CheckBox();
             this.ckbHideScaleBar = new System.Windows.Forms.CheckBox();
+            this.chkIncludePartialGeocoded = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,10 +78,19 @@
             this.ckbHideScaleBar.Name = "ckbHideScaleBar";
             this.ckbHideScaleBar.UseVisualStyleBackColor = true;
             // 
+            // chkIncludePartialGeocoded
+            // 
+            resources.ApplyResources(this.chkIncludePartialGeocoded, "chkIncludePartialGeocoded");
+            this.chkIncludePartialGeocoded.Checked = true;
+            this.chkIncludePartialGeocoded.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIncludePartialGeocoded.Name = "chkIncludePartialGeocoded";
+            this.chkIncludePartialGeocoded.UseVisualStyleBackColor = true;
+            // 
             // MappingSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkIncludePartialGeocoded);
             this.Controls.Add(this.ckbHideScaleBar);
             this.Controls.Add(this.ckbUseParishBoundaries);
             this.Controls.Add(this.btnBrowseFolder);
@@ -102,6 +112,7 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.CheckBox ckbUseParishBoundaries;
         private System.Windows.Forms.CheckBox ckbHideScaleBar;
+        private System.Windows.Forms.CheckBox chkIncludePartialGeocoded;
 
 
 	}
