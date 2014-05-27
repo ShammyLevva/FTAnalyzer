@@ -1730,7 +1730,7 @@ namespace FTAnalyzer
                 int j = 1;
                 for (int i = 0; i < Properties.Settings.Default.RecentFiles.Count; i++)
                 {
-                    if (Properties.Settings.Default.RecentFiles[i] != filename)
+                    if (Properties.Settings.Default.RecentFiles[i] != filename && File.Exists(Properties.Settings.Default.RecentFiles[i]))
                     {
                         recent[j++] = Properties.Settings.Default.RecentFiles[i];
                         if (j == 5) break;
