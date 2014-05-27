@@ -34,14 +34,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTile", "..\BruTile\BruTi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTile.Desktop", "..\BruTile\BruTile.Desktop\BruTile.Desktop.csproj", "{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}"
 EndProject
-Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "FTAnalyzer Setup", "..\FTAnalyzer Setup\FTAnalyzer Setup.isproj", "{8E4CB156-9ACA-4720-9899-62BCC45D9C96}"
-	ProjectSection(ProjectDependencies) = postProject
-		{799ECA65-6748-4B7C-BBD5-429C19E02161} = {799ECA65-6748-4B7C-BBD5-429C19E02161}
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
 		SccLocalPath0 = .
@@ -65,9 +60,6 @@ Global
 		SccProjectUniqueName7 = ..\\BruTile\\BruTile.Desktop\\BruTile.Desktop.csproj
 		SccProjectName7 = ../BruTile/BruTile.Desktop
 		SccLocalPath7 = ..\\BruTile\\BruTile.Desktop
-		SccProjectUniqueName8 = ..\\FTAnalyzer\u0020Setup\\FTAnalyzer\u0020Setup.isproj
-		SccProjectName8 = ../FTAnalyzer\u0020Setup
-		SccLocalPath8 = ..\\FTAnalyzer\u0020Setup
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -239,32 +231,6 @@ Global
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.SingleImage|x86.ActiveCfg = Release|x86
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.SingleImage|x86.Build.0 = Release|x86
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.CD_ROM|Any CPU.Build.0 = CD_ROM
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.CD_ROM|x86.ActiveCfg = CD_ROM
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.CD_ROM|x86.Build.0 = CD_ROM
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.Debug|Any CPU.ActiveCfg = SingleImage
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.Debug|Any CPU.Build.0 = SingleImage
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.Debug|x86.ActiveCfg = DVD-5
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.Debug|x86.Build.0 = DVD-5
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.DebugDSProjection|Any CPU.ActiveCfg = DVD-5
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.DebugDSProjection|Any CPU.Build.0 = DVD-5
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.DebugDSProjection|x86.ActiveCfg = DVD-5
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.DebugDSProjection|x86.Build.0 = DVD-5
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.DVD-5|Any CPU.ActiveCfg = DVD-5
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.DVD-5|Any CPU.Build.0 = DVD-5
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.DVD-5|x86.ActiveCfg = DVD-5
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.DVD-5|x86.Build.0 = DVD-5
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.Release|Any CPU.ActiveCfg = SingleImage
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.Release|x86.ActiveCfg = SingleImage
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.Release|x86.Build.0 = SingleImage
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.ReleaseDSProjection|Any CPU.ActiveCfg = SingleImage
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.ReleaseDSProjection|Any CPU.Build.0 = SingleImage
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.ReleaseDSProjection|x86.ActiveCfg = SingleImage
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.ReleaseDSProjection|x86.Build.0 = SingleImage
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.SingleImage|Any CPU.ActiveCfg = SingleImage
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.SingleImage|x86.ActiveCfg = SingleImage
-		{8E4CB156-9ACA-4720-9899-62BCC45D9C96}.SingleImage|x86.Build.0 = SingleImage
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

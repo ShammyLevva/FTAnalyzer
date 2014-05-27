@@ -19,7 +19,7 @@ namespace FTAnalyzer.Forms
         private ReportFormHelper reportFormHelper;
 
         public const int EMPTY = 0, UNKNOWN_DATE = 1, WIDE_DATE = 2, NARROW_DATE = 3, APPROX_DATE = 4, 
-                         EXACT_DATE = 5, NO_SPOUSE = 6, NO_PARTNER = 7, NO_MARRIAGE = 8;
+                         EXACT_DATE = 5, NO_SPOUSE = 6, NO_PARTNER = 7, NO_MARRIAGE = 8, ISLIVING = 9;
 
         private Dictionary<int, DataGridViewCellStyle> styles;
         private int birthColumnIndex;
@@ -65,6 +65,9 @@ namespace FTAnalyzer.Forms
             DataGridViewCellStyle noMarriage = new DataGridViewCellStyle();
             noMarriage.BackColor = noMarriage.ForeColor = Color.RoyalBlue;
             styles.Add(8, noMarriage);
+            DataGridViewCellStyle isLiving = new DataGridViewCellStyle();
+            isLiving.BackColor = isLiving.ForeColor = Color.DarkSlateGray;
+            styles.Add(9, isLiving);
 
             birthColumnIndex = dgBMDReportSheet.Columns["Birth"].Index;
             burialColumnIndex = dgBMDReportSheet.Columns["CremBuri"].Index;
@@ -76,6 +79,7 @@ namespace FTAnalyzer.Forms
                 defaultProvider = "FamilySearch";
             cbBMDSearchProvider.Text = defaultProvider;
             cbFilter.Text = "All Individuals";
+            List<Individual> test = FamilyTree.Instance.DeadOrAlive;
         }
 
         private void ResetTable()
@@ -126,16 +130,19 @@ namespace FTAnalyzer.Forms
                     switch (value)
                     {
                         case EMPTY: // Grey
-                            cell.ToolTipText = string.Empty;
+                            if (e.ColumnIndex == burialColumnIndex - 1) // death column
+                                cell.ToolTipText = "Individual is probably still alive";
+                            else
+                                cell.ToolTipText = string.Empty;
                             break;
                         case UNKNOWN_DATE: // Red
                             cell.ToolTipText = "Unknown date.";
                             break;
                         case WIDE_DATE: // Orange
-                            cell.ToolTipText = "Event occurred in >2 year period.";
+                            cell.ToolTipText = "Date only accurate to more than two year date range.";
                             break;
                         case NARROW_DATE: // Yellow
-                            cell.ToolTipText = "Event occured within two year period, but longer than 3 months.";
+                            cell.ToolTipText = "Date accurate to within two year period, but longer than 3 months.";
                             break;
                         case APPROX_DATE: // Pale Green 
                             cell.ToolTipText = "Date accurate to within 3 months (note may be date of registration not event date)";
@@ -151,6 +158,9 @@ namespace FTAnalyzer.Forms
                             break;
                         case NO_MARRIAGE: // dark blue
                             cell.ToolTipText = "Has partner but no marriage fact";
+                            break;
+                        case ISLIVING: // dark grey
+                            cell.ToolTipText = "Is flagged as living";
                             break;
                     }
                 }

@@ -29,6 +29,7 @@ namespace FTAnalyzer
         public string SurnameUpper { get; private set; }
         public bool HasParents { get; set; }
         public bool Infamily { get; set; }
+        public bool IsFlaggedAsLiving { get; private set; }
         public int Ahnentafel { get; set; }
         public string BudgieCode { get; set; }
         public string RelationToRoot { get; set; }
@@ -52,6 +53,7 @@ namespace FTAnalyzer
             BudgieCode = string.Empty;
             Infamily = false;
             HasParents = false;
+            IsFlaggedAsLiving = node.SelectSingleNode("_FLGS/__LIVING") != null;
             ReferralFamilyID = string.Empty;
             facts = new List<Fact>();
             errorFacts = new List<Fact>();
@@ -141,6 +143,7 @@ namespace FTAnalyzer
                 this.surnameMetaphone = i.surnameMetaphone;
                 this.marriedName = i.marriedName;
                 this.StandardisedName = i.StandardisedName;
+                this.IsFlaggedAsLiving = i.IsFlaggedAsLiving;
                 this.gender = i.gender;
                 this.alias = i.alias;
                 this.Ahnentafel = i.Ahnentafel;
@@ -1234,6 +1237,11 @@ namespace FTAnalyzer
             return facts.Count(f => f.IsValidCensus(censusDate));
         }
 
+        public bool IsLivingError
+        {
+            get { return IsFlaggedAsLiving && DeathDate.IsKnown; }
+        }
+
         public int Birth
         {
             get { return BirthDate.DateStatus(false); }
@@ -1323,7 +1331,9 @@ namespace FTAnalyzer
         {
             get
             {
-                if (!DeathDate.IsKnown && GetMaxAge(DateTime.Now) < 110)
+                if (IsFlaggedAsLiving)
+                    return 9;
+                else if (!DeathDate.IsKnown && GetMaxAge(DateTime.Now) < FactDate.MAXYEARS)
                     return 0;
                 else
                     return DeathDate.DateStatus(false);

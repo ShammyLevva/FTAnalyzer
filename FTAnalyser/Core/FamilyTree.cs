@@ -616,6 +616,8 @@ namespace FTAnalyzer
 
         public int IndividualCount { get { return individuals.Count; } }
 
+        public List<Individual> DeadOrAlive { get {  return individuals.Where(x => x.DeathDate.IsKnown && x.IsFlaggedAsLiving).ToList<Individual>(); } }
+
         #endregion
 
         #region Property Functions
