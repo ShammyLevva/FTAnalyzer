@@ -1751,6 +1751,11 @@ namespace FTAnalyzer
             string filename = (string)(sender as ToolStripMenuItem).Tag;
             LoadFile(filename);
         }
+
+        private void mnuRecent_DropDownOpening(object sender, EventArgs e)
+        {
+            BuildRecentList();
+        }
         #endregion
 
         #region Show Facts
