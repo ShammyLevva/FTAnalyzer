@@ -31,7 +31,8 @@ namespace FTAnalyzer
                       "Residence census date warnings",
                       "Census date range too wide/Unknown",
                       "Fact warning/error detected",
-                      "Unknown Fact Type"
+                      "Unknown Fact Type",
+                      "Flagged as living but has death date"
                     };
 
         //"Later marriage before previous spouse died"

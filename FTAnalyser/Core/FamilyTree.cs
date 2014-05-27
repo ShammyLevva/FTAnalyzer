@@ -41,7 +41,7 @@ namespace FTAnalyzer
         private SortableBindingList<DuplicateIndividual> duplicates;
         private TreeNode mainformTreeRootNode;
         private TreeNode placesTreeRootNode;
-        private static int DATA_ERROR_GROUPS = 21;
+        private static int DATA_ERROR_GROUPS = 22;
         private static XmlNodeList noteNodes = null;
 
         public bool Geocoding { get; set; }
@@ -1418,6 +1418,8 @@ namespace FTAnalyzer
                         int minAge = ind.GetMinAge(ind.DeathDate);
                         if (minAge > FactDate.MAXYEARS)
                             errors[(int)Dataerror.AGED_MORE_THAN_110].Add(new DataError((int)Dataerror.AGED_MORE_THAN_110, ind, "Aged over " + FactDate.MAXYEARS + " before died " + ind.DeathDate));
+                        if(ind.IsFlaggedAsLiving)
+                            errors[(int)Dataerror.LIVING_WITH_DEATH_DATE].Add(new DataError((int)Dataerror.LIVING_WITH_DEATH_DATE, ind, "Flagged as living but has death date of " + ind.DeathDate));
                     }
                     #region Error facts
                     foreach (Fact f in ind.ErrorFacts)
@@ -1591,7 +1593,7 @@ namespace FTAnalyzer
             AGED_MORE_THAN_110 = 8, FACTS_BEFORE_BIRTH = 9, FACTS_AFTER_DEATH = 10, MARRIAGE_AFTER_DEATH = 11,
             MARRIAGE_AFTER_SPOUSE_DEAD = 12, MARRIAGE_BEFORE_13 = 13, MARRIAGE_BEFORE_SPOUSE_13 = 14, LOST_COUSINS_NON_CENSUS = 15,
             LOST_COUSINS_NOT_SUPPORTED_YEAR = 16, RESIDENCE_CENSUS_DATE = 17, CENSUS_COVERAGE = 18, FACT_ERROR = 19,
-            UNKNOWN_FACT_TYPE = 20
+            UNKNOWN_FACT_TYPE = 20, LIVING_WITH_DEATH_DATE = 21
         };
 
         public void SetDataErrorsCheckedDefaults(CheckedListBox list)

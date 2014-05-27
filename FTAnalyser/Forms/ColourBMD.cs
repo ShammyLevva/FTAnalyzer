@@ -79,7 +79,6 @@ namespace FTAnalyzer.Forms
                 defaultProvider = "FamilySearch";
             cbBMDSearchProvider.Text = defaultProvider;
             cbFilter.Text = "All Individuals";
-            List<Individual> test = FamilyTree.Instance.DeadOrAlive;
         }
 
         private void ResetTable()

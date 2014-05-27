@@ -681,6 +681,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        #region CellFormatting
         private void FormatCellLocations(DataGridView grid, DataGridViewCellFormattingEventArgs e)
         {
             DataGridViewCell cell = grid.Rows[e.RowIndex].Cells[e.ColumnIndex];
@@ -738,6 +739,7 @@ namespace FTAnalyzer
                 FormatCellLocations(dgPlaces, e);
             }
         }
+#endregion
 
         #region EventHandlers
         private void Options_BaptismChanged(object sender, EventArgs e)
