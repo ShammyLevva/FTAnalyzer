@@ -27,39 +27,42 @@ namespace FTAnalyzer
             CUBA = "Cuba", INDONESIA = "Indonesia", ISRAEL = "Israel", IRAQ = "Iraq", IRAN = "Iran", JORDAN = "Jordan",
             JAMAICA = "Jamaica", KENYA = "Kenya", MEXICO = "Mexico", SINGAPORE = "Singapore", PAKISTAN = "Pakistan", ANGOLA = "Angola",
             BAHRAIN = "Bahrain", BURUNDI = "Burundi", BENIN = "Benin", BOLIVIA = "Bolivia", BHUTAN = "Bhutan", BOTSWANA = "Botswana",
-            BELIZE = "Belize", CONGO = "Congo", CENTRAL_AFRICAN_REPUBLIC = "Central African Republic", CHILE = "Chile", 
+            BELIZE = "Belize", CONGO = "Congo", CENTRAL_AFRICAN_REPUBLIC = "Central African Republic", CHILE = "Chile",
             CAMEROON = "Cameroon", COLOMBIA = "Colombia", COSTA_RICA = "Costa Rica", CAPE_VERDE = "Cape Verde", DOMINICA = "Dominica",
-            DOMINICAN_REPUBLIC = "Dominican Republic", ALGERIA = "Algeria", ECUADOR = "Ecuador", ERITREA = "Eritrea", 
+            DOMINICAN_REPUBLIC = "Dominican Republic", ALGERIA = "Algeria", ECUADOR = "Ecuador", ERITREA = "Eritrea",
             ETHIOPIA = "Ethiopia", FIJI = "Fiji", DJIBOUTI = "Djibouti", MICRONESIA = "Micronesia", GABON = "Gabon", GRENADA = "Grenada",
-            GHANA = "Ghana", GAMBIA = "Gambia", GUINEA = "Guinea", EQUATORIAL_GUINEA = "Equatorial Guinea", GUATEMALA = "Guatemala", 
-            GUYANA = "Guyana", HONDURAS = "Honduras", CROATIA = "Croatia", HAITI = "Haiti", KYRGYZSTAN = "Kyrgyzstan", 
+            GHANA = "Ghana", GAMBIA = "Gambia", GUINEA = "Guinea", EQUATORIAL_GUINEA = "Equatorial Guinea", GUATEMALA = "Guatemala",
+            GUYANA = "Guyana", HONDURAS = "Honduras", CROATIA = "Croatia", HAITI = "Haiti", KYRGYZSTAN = "Kyrgyzstan",
             CAMBODIA = "Cambodia", KIRIBATI = "Kiribati", COMOROS = "Comoros", KUWAIT = "Kuwait", KAZAKHSTAN = "Kazakhstan",
             LEBANON = "Lebanon", LIBERIA = "Liberia", LESOTHO = "Lesotho", MOROCCO = "Moroco", MADAGASCAR = "Madagascar",
-            MALI = "Mali", MARSHALL_ISLANDS = "Marshall Islands", MYANMAR = "Myanmar", MONGOLIA = "Mongolia", 
+            MALI = "Mali", MARSHALL_ISLANDS = "Marshall Islands", MYANMAR = "Myanmar", MONGOLIA = "Mongolia",
             MAURITANIA = "Mauitania", MALDIVES = "Maldives", MALAWI = "Malawi", MALAYSIA = "Malaysia", MOZAMBIQUE = "Mozambique",
-            NAMIBIA = "Namibia", NIGER = "Niger", NICARAGUA = "Nicaragua", NEPAL = "Nepal", NAURU = "Nauru", OMAN = "Oman", 
+            NAMIBIA = "Namibia", NIGER = "Niger", NICARAGUA = "Nicaragua", NEPAL = "Nepal", NAURU = "Nauru", OMAN = "Oman",
             PANAMA = "Panama", PERU = "Peru", PAPUA_NEW_GUINEA = "Papua New Guinea", PHILIPPINES = "Philippines", PALAU = "Palau",
-            PARAGUAY = "Paraguay", QATAR = "Qatar", SERBIA = "Serbia", RWANDA = "Rwanda", SAUDI_ARABIA ="Saudi Arabia",
+            PARAGUAY = "Paraguay", QATAR = "Qatar", SERBIA = "Serbia", RWANDA = "Rwanda", SAUDI_ARABIA = "Saudi Arabia",
             SOLOMON_ISLANDS = "Solomon Islands", SEYSCHELLES = "Seyschelles", SUDAN = "Sudan", SLOVENIA = "Slovenia",
-            SLOVAKIA ="Slovakia", CZECH_REPUBLIC = "Czech Republic", CZECHOSLOVAKIA = "Czechoslovakia", SENEGAL = "Senegal",
+            SLOVAKIA = "Slovakia", CZECH_REPUBLIC = "Czech Republic", CZECHOSLOVAKIA = "Czechoslovakia", SENEGAL = "Senegal",
             SIERRA_LEONE = "Sierra Leone", SOMALIA = "Somalia", SURINAME = "Suriname", SOUTH_SUDAN = "South Sudan",
             EL_SALVADOR = "El Salvador", SYRIA = "Syria", SWAZILAND = "Swaziland", CHAD = "Chad", SOUTH_KOREA = "South Korea",
             NORTH_KOREA = "North Korea", KOREA = "Korea", IVORY_COAST = "Ivory Coast", TOGO = "Togo", THAILAND = "Thailand",
             TAJIKISTAN = "Tajikistan", TURKMENISTAN = "Turkmenistan", TUNISIA = "Tunisia", TONGA = "Tonga", TUVALU = "Tuvalu",
             TRINIDAD_TOBAGO = "Trinidad and Tobago", TANZANIA = "Tanzania", UGANDA = "Uganda", URUGUAY = "Uruguay",
-            UZBEKISTAN = "Uzbekistan", VENEZUELA = "Venezuela", VIETNAM = "Vietnam", VANATU = "Vanatu", SAMOA = "Samoa", 
+            UZBEKISTAN = "Uzbekistan", VENEZUELA = "Venezuela", VIETNAM = "Vietnam", VANATU = "Vanatu", SAMOA = "Samoa",
             YEMEN = "Yemen", ZAMBIA = "Zambia", BURKINA_FASO = "Burkina Faso", BOSNIA = "Bosnia and Herzegovina",
-            CHANNEL_ISLANDS = "Channel Islands";
+            CHANNEL_ISLANDS = "Channel Islands", GIBRALTAR = "Gibraltar", IVORY_COAST_FR = "Côte d'Ivoire",
+            IVORY_COAST_FR2 = "Cote d'Ivoire", HONG_KONG = "Hong Kong", ARUBA = "Aruba", ANGUILLA = "Anguilla",
+            AMERICAN_SAMOA = "American Samoa", ANTIGUA_BARBUDA = "Antigua and Barbuda", BERMUDA = "Bermuda",
+            BRUNEI = "Brunei", BRUNEI_FULL = "Brunei Darussalam", DR_CONGO = "DR Congo", COOK_ISLANDS = "Cook Islands",
+            STKITTS = "Saint Kitts and Nevis", LAO = "Lao", LAO_FULL = "Lao People's Democratic Republic",
+            PALESTINE = "Palestine", TIMOR_LESTE = "Timor-Leste", TAIWAN = "Taiwan", GUINEA_BISSAU = "Guinea-Bissau",
+            SAO_TOME_PRINCIPE = "Sao Tome and Principe", TOKELAU = "Tokelau", SAINT_VINCENT = "Saint Vincent",
+            SAINT_VINCENT_FULL = "Saint Vincent and the Grenadines", ANTARTICA = "Antartica", CAYMAN = "Cayman Islands",
+            WESTERN_SAHARA = "Western Sahara", FALKLAND_ISLANDS = "Falkland Islands", FAROES = "Faroe Islands",
+            GUADELOUPE = "Guadeloupe", GREENLAND = "Greenland", FRENCH_GUIANA = "French Guiana", GUAM = "Guam",
+            MACAO = "Macao", MONSERRAT ="Monserrat", MARTINIQUE = "Martinique", MAYOTTE = "Mayotte", 
+            NEW_CALEDONIA = "New Caledonia", NIEU = "Nieu", PUERTO_RICO = "Puerto Rico", 
+            FRENCH_POLYNESIA = "French Polynesia", SAINT_HELENA = "Saint Helena";
 
-        //AG  Antigua and Barbuda
-        //BN  Brunei Darussalam
-        //GW  Guinea-Bissau
-        //KN  Saint Kitts and Nevis
-        //LA  Lao People's Democratic Republic
-        //ST  Sao Tome and Principe
-        //TL  Timor-Leste
-        //VC  Saint Vincent and the Grenadines
-        
         private static readonly ISet<string> KNOWN_COUNTRIES = new HashSet<string>(new string[] {
             SCOTLAND, ENGLAND, CANADA, UNITED_STATES, WALES, IRELAND, UNITED_KINGDOM, NEW_ZEALAND, AUSTRALIA, INDIA, FRANCE, GERMANY,
             ITALY, SPAIN, BELGIUM, SOUTH_AFRICA, NORTHERN_IRELAND, EGYPT, HUNGARY, MALTA, DENMARK, SWEDEN, NORWAY, FINLAND, ICELAND,
@@ -76,7 +79,11 @@ namespace FTAnalyzer
             SAUDI_ARABIA, SOLOMON_ISLANDS, SEYSCHELLES, SUDAN, SLOVAKIA, SLOVENIA, CZECH_REPUBLIC, CZECHOSLOVAKIA, SENEGAL, SIERRA_LEONE,
             SOMALIA, SURINAME, SOUTH_SUDAN, EL_SALVADOR, SYRIA, SWAZILAND, CHAD, SOUTH_KOREA, NORTH_KOREA, KOREA, IVORY_COAST, TOGO, 
             THAILAND, TAJIKISTAN, TURKMENISTAN, TUNISIA, TONGA, TUVALU, TRINIDAD_TOBAGO, TANZANIA, UGANDA, URUGUAY, UZBEKISTAN, VENEZUELA,
-            VIETNAM, VANATU, SAMOA, YEMEN, ZAMBIA, BURKINA_FASO, BOSNIA, CHANNEL_ISLANDS
+            VIETNAM, VANATU, SAMOA, YEMEN, ZAMBIA, BURKINA_FASO, BOSNIA, CHANNEL_ISLANDS, GIBRALTAR, HONG_KONG, ARUBA, IVORY_COAST_FR,
+            IVORY_COAST_FR2, ANGUILLA, AMERICAN_SAMOA, ANTIGUA_BARBUDA, BERMUDA, BRUNEI, BRUNEI_FULL, DR_CONGO, COOK_ISLANDS, STKITTS, 
+            LAO, LAO_FULL, PALESTINE, TIMOR_LESTE, TAIWAN, GUINEA_BISSAU, SAO_TOME_PRINCIPE, TOKELAU, SAINT_VINCENT, SAINT_VINCENT_FULL,
+            ANTARTICA, CAYMAN, WESTERN_SAHARA, FALKLAND_ISLANDS, FAROES, GUADELOUPE, GREENLAND, FRENCH_GUIANA, GUAM, MACAO, MONSERRAT,
+            MARTINIQUE, MAYOTTE, NEW_CALEDONIA, NIEU, PUERTO_RICO, FRENCH_POLYNESIA, SAINT_HELENA
         });
 
         private static readonly ISet<string> UK_COUNTRIES = new HashSet<string>(new string[] { 

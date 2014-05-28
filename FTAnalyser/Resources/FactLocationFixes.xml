@@ -118,14 +118,14 @@
       <CountryTypo from="ETH" to="Ethiopia" />
       <CountryTypo from="FIN" to="Finland" />
       <CountryTypo from="FJI" to="Fiji" />
-      <CountryTypo from="FLK" to="Falkland Islands (Malvinas)" />
+      <CountryTypo from="FLK" to="Falkland Islands" />
       <CountryTypo from="FRA" to="France" />
       <CountryTypo from="FRO" to="Faroe Islands" />
       <CountryTypo from="FSM" to="Micronesia" />
       <CountryTypo from="GAB" to="Gabon" />
       <CountryTypo from="GBR" to="United Kingdom" />
       <CountryTypo from="GEO" to="Georgia" />
-      <CountryTypo from="GGY" to="Guernsey" />
+      <CountryTypo from="GGY" to="Guernsey, Channel Islands" />
       <CountryTypo from="GHA" to="Ghana" />
       <CountryTypo from="GIB" to="Gibraltar" />
       <CountryTypo from="GIN" to="Guinea" />
@@ -157,7 +157,7 @@
       <CountryTypo from="ISR" to="Israel" />
       <CountryTypo from="ITA" to="Italy" />
       <CountryTypo from="JAM" to="Jamaica" />
-      <CountryTypo from="JEY" to="Jersey" />
+      <CountryTypo from="JEY" to="Jersey, Channel Islands" />
       <CountryTypo from="JOR" to="Jordan" />
       <CountryTypo from="JPN" to="Japan" />
       <CountryTypo from="KAZ" to="Kazakhstan" />
