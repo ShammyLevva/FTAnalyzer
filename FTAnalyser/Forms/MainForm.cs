@@ -1029,6 +1029,7 @@ namespace FTAnalyzer
                     SortableBindingList<IDisplayIndividual> list = ft.AllDisplayIndividuals;
                     dgIndividuals.DataSource = list;
                     dgIndividuals.Sort(dgIndividuals.Columns["IndividualID"], ListSortDirection.Ascending);
+                    dgIndividuals.AllowUserToResizeColumns = true;
                     dgIndividuals.Focus();
                     mnuPrint.Enabled = true;
                     tsCountLabel.Text = Properties.Messages.Count + list.Count;
@@ -1039,6 +1040,7 @@ namespace FTAnalyzer
                     SortableBindingList<IDisplayFamily> list = ft.AllDisplayFamilies;
                     dgFamilies.DataSource = list;
                     dgFamilies.Sort(dgFamilies.Columns["FamilyID"], ListSortDirection.Ascending);
+                    dgFamilies.AllowUserToResizeColumns = true;
                     dgFamilies.Focus();
                     mnuPrint.Enabled = true;
                     tsCountLabel.Text = Properties.Messages.Count + list.Count;
@@ -1049,6 +1051,7 @@ namespace FTAnalyzer
                     SortableBindingList<IDisplayOccupation> list = ft.AllDisplayOccupations;
                     dgOccupations.DataSource = list;
                     dgOccupations.Sort(dgOccupations.Columns["Occupation"], ListSortDirection.Ascending);
+                    dgOccupations.AllowUserToResizeColumns = true;
                     dgOccupations.Focus();
                     mnuPrint.Enabled = true;
                     tsCountLabel.Text = Properties.Messages.Count + list.Count;
@@ -1063,6 +1066,7 @@ namespace FTAnalyzer
                     SortableBindingList<IDisplaySource> list = ft.AllDisplaySources;
                     dgSources.DataSource = list;
                     dgSources.Sort(dgSources.Columns["SourceTitle"], ListSortDirection.Ascending);
+                    dgSources.AllowUserToResizeColumns = true;
                     dgSources.Focus();
                     mnuPrint.Enabled = true;
                     tsCountLabel.Text = Properties.Messages.Count + list.Count;
@@ -1074,6 +1078,7 @@ namespace FTAnalyzer
                     SortableBindingList<SurnameStats> list = new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(tspbTabProgress));
                     dgSurnames.DataSource = list;
                     dgSurnames.Sort(dgSurnames.Columns["Surname"], ListSortDirection.Ascending);
+                    dgSurnames.AllowUserToResizeColumns = true;
                     dgSurnames.Focus();
                     tsCountLabel.Text = Properties.Messages.Count + list.Count + " Surnames.";
                     tsHintsLabel.Text = Properties.Messages.Hints_Surname;
@@ -1121,6 +1126,7 @@ namespace FTAnalyzer
                 {
                     SortableBindingList<DataError> errors = ft.DataErrors(ckbDataErrors);
                     dgDataErrors.DataSource = errors;
+                    dgDataErrors.AllowUserToResizeColumns = true;
                     dgDataErrors.Focus();
                     mnuPrint.Enabled = true;
                     tsCountLabel.Text = Properties.Messages.Count + errors.Count;
