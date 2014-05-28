@@ -18,7 +18,6 @@ namespace FTAnalyzer
         public string SourceText { get; private set; }
         public string SourceMedium { get; private set; }
         public List<Fact> Facts { get; private set; }
-        public int FactCount { get { return Facts.Count; } }
 
         public FactSource(XmlNode node)
         {
@@ -26,7 +25,7 @@ namespace FTAnalyzer
             this.SourceTitle = FamilyTree.GetText(node, "TITL");
             this.Publication = FamilyTree.GetText(node, "PUBL");
             this.Author = FamilyTree.GetText(node, "AUTH");
-            this.SourceText = FamilyTree.GetText(node, "TEXT"); 
+            this.SourceText = FamilyTree.GetText(node, "TEXT");
             this.SourceMedium = FamilyTree.GetText(node, "REPO/CALN/MEDI");
             if (this.SourceMedium.Length == 0)
                 this.SourceMedium = FamilyTree.GetText(node, "NOTE/CONC");
@@ -35,9 +34,21 @@ namespace FTAnalyzer
 
         public void AddFact(Fact f)
         {
-            if(!this.Facts.Contains(f))
+            if (!this.Facts.Contains(f))
                 this.Facts.Add(f);
         }
+
+        public int FactCount
+        {
+            get
+            {
+                int count = Facts.Count<Fact>(x => x.Individual != null);
+                count += Facts.Count<Fact>(x => x.Family != null && x.Family.Husband != null);
+                count += Facts.Count<Fact>(x => x.Family != null && x.Family.Wife != null);
+                return count;
+            }
+        }
+
 
         public bool isBirthCert()
         {

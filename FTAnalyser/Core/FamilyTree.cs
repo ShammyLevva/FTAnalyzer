@@ -1303,14 +1303,32 @@ namespace FTAnalyzer
             }
         }
 
-        public SortableBindingList<IDisplayFact> GetDisplayFacts(FactSource source)
+        public SortableBindingList<IDisplayFact> GetSourceDisplayFacts(FactSource source)
         {
             SortableBindingList<IDisplayFact> result = new SortableBindingList<IDisplayFact>();
             foreach (Fact f in source.Facts)
             {
-                DisplayFact df = new DisplayFact(f.Individual, f);
-                if (!result.Contains(df))
-                    result.Add(df);
+                if (f.Individual != null)
+                {
+                    DisplayFact df = new DisplayFact(f.Individual, f);
+                    if (!result.Contains(df))
+                        result.Add(df);
+                }
+                else
+                {
+                    if (f.Family != null && f.Family.Husband != null)
+                    {
+                        DisplayFact df = new DisplayFact(f.Family.Husband, f);
+                        if (!result.Contains(df))
+                            result.Add(df);
+                    }
+                    if (f.Family != null && f.Family.Wife != null)
+                    {
+                        DisplayFact df = new DisplayFact(f.Family.Wife, f);
+                        if (!result.Contains(df))
+                            result.Add(df);
+                    }
+                }
             }
             return result;
         }

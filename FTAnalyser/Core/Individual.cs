@@ -42,18 +42,27 @@ namespace FTAnalyzer
         private IList<ParentalRelationship> familiesAsChild;
         private Dictionary<string, Fact> preferredFacts;
 
-        public Individual(XmlNode node)
+        private Individual()
         {
-            IndividualID = node.Attributes["ID"].Value;
-            Name = FamilyTree.GetText(node, "NAME");
-            Gender = FamilyTree.GetText(node, "SEX");
-            alias = FamilyTree.GetText(node, "ALIA");
-            relationType = UNSET;
+            IndividualID = string.Empty;
+            forenames = string.Empty;
+            surname = string.Empty;
+            SurnameUpper = string.Empty;
+            forenameMetaphone = new DoubleMetaphone();
+            surnameMetaphone = new DoubleMetaphone();
+            marriedName = string.Empty;
+            StandardisedName = string.Empty;
+            IsFlaggedAsLiving = false;
+            Gender = "U";
+            alias = string.Empty;
             Ahnentafel = 0;
             BudgieCode = string.Empty;
+            relationType = UNSET;
+            RelationToRoot = string.Empty;
+            CommonAncestor = null;
             Infamily = false;
+            Notes = string.Empty;
             HasParents = false;
-            IsFlaggedAsLiving = node.SelectSingleNode("_FLGS/__LIVING") != null;
             ReferralFamilyID = string.Empty;
             facts = new List<Fact>();
             errorFacts = new List<Fact>();
@@ -61,6 +70,16 @@ namespace FTAnalyzer
             familiesAsChild = new List<ParentalRelationship>();
             familiesAsParent = new List<Family>();
             preferredFacts = new Dictionary<string, Fact>();
+        }
+
+        public Individual(XmlNode node) 
+            : this ()
+        {
+            IndividualID = node.Attributes["ID"].Value;
+            Name = FamilyTree.GetText(node, "NAME");
+            Gender = FamilyTree.GetText(node, "SEX");
+            alias = FamilyTree.GetText(node, "ALIA");
+            IsFlaggedAsLiving = node.SelectSingleNode("_FLGS/__LIVING") != null;
             forenameMetaphone = new DoubleMetaphone(Forename);
             surnameMetaphone = new DoubleMetaphone(Surname);
             SurnameUpper = Surname.ToUpper();
@@ -152,7 +171,9 @@ namespace FTAnalyzer
                 this.RelationToRoot = i.RelationToRoot;
                 this.Infamily = i.Infamily;
                 this.Notes = i.Notes;
+                this.HasParents = i.HasParents;
                 this.ReferralFamilyID = i.ReferralFamilyID;
+                this.CommonAncestor = i.CommonAncestor;
                 this.facts = new List<Fact>(i.facts);
                 this.errorFacts = new List<Fact>(i.errorFacts);
                 this.locations = new List<FactLocation>(i.locations);

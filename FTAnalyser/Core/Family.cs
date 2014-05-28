@@ -146,7 +146,7 @@ namespace FTAnalyzer
             bool preferredFact = true;
             foreach (XmlNode n in list)
             {
-                Fact f = new Fact(n, FamilyRef, preferredFact);
+                Fact f = new Fact(n, this, preferredFact);
                 if (f.FactType != Fact.CENSUS)
                 {
                     Facts.Add(f);

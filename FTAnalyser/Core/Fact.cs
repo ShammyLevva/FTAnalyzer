@@ -254,17 +254,19 @@ namespace FTAnalyzer
             this.Reference = reference;
         }
 
-        public Fact(XmlNode node, string reference, bool preferred) 
-            : this(reference, preferred) 
+        public Fact(XmlNode node, Family family, bool preferred) 
+            : this(family.FamilyRef, preferred) 
         {
             Individual = null;
-            CreateFact(node, reference, preferred);
+            Family = family;
+            CreateFact(node, family.FamilyRef, preferred);
         }
 
         public Fact(XmlNode node, Individual ind, bool preferred)
             : this(ind.IndividualID, preferred)
         {
             Individual = ind;
+            Family = null;
             CreateFact(node, ind.IndividualRef, preferred);
         }
 
@@ -428,6 +430,7 @@ namespace FTAnalyzer
         public string FactErrorMessage { get; private set; }
         public string Reference { get; private set; }
         public Individual Individual { get; private set; }
+        public Family Family { get; private set; }
         public string FactTypeDescription { get { return (FactType == Fact.UNKNOWN && Tag.Length > 0) ? Tag : GetFactTypeDescription(FactType); } }
 
         public bool IsCensusFact

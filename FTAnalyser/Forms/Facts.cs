@@ -143,7 +143,7 @@ namespace FTAnalyzer.Forms
             : this()
         {
             this.allFacts = true;
-            this.facts = ft.GetDisplayFacts(source);
+            this.facts = ft.GetSourceDisplayFacts(source);
             this.Text = "Facts Report for source: " + source.ToString() + ". Facts count: " + facts.Count;
             SetupFacts();
         }
