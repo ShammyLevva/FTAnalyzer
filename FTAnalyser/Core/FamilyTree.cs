@@ -687,6 +687,9 @@ namespace FTAnalyzer
             int famLen = families.Count.ToString().Length;
             foreach (Family f in families)
                 f.FixFamilyID(famLen);
+            int sourceLen = sources.Count.ToString().Length;
+            foreach (FactSource s in sources)
+                s.FixSourceID(sourceLen);
         }
 
         #endregion

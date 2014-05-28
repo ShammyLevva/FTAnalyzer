@@ -49,6 +49,17 @@ namespace FTAnalyzer
             }
         }
 
+        public void FixSourceID(int length)
+        {
+            try
+            {
+                if (SourceID != null || SourceID.Length > 0)
+                    SourceID = SourceID.Substring(0, 1) + SourceID.Substring(1).PadLeft(length, '0');
+            }
+            catch (Exception)
+            { // don't error if SourceID is not of format Sxxxx
+            }
+        }
 
         public bool isBirthCert()
         {
