@@ -402,7 +402,7 @@ namespace FTAnalyzer
                 SetFixedLocation();
                 SetSortableLocation();
                 SetMetaphones();
-                SetCounties();
+                Counties = Mapping.Counties.GetCounties(Region);
                 //string after = (parish + ", " + region + ", " + country).ToUpper().Trim();
                 //if (!before.Equals(after))
                 //    Console.WriteLine("Debug : '" + before + "'  converted to '" + after + "'");
@@ -603,13 +603,6 @@ namespace FTAnalyzer
             AddressMetaphone = meta.PrimaryKey;
             meta = new DoubleMetaphone(Place);
             PlaceMetaphone = meta.PrimaryKey;
-        }
-
-        private void SetCounties()
-        {
-            Counties = Mapping.Counties.GetCounties(Region);
-            if(Counties.Count > 0)
-                Console.WriteLine("Set counties");
         }
 
         public static string ReplaceString(string str, string oldValue, string newValue, StringComparison comparison)
@@ -954,10 +947,10 @@ namespace FTAnalyzer
                     res = this.SubRegion.CompareTo(that.SubRegion);
                     if (res == 0 && level > SUBREGION)
                     {
-                        res = this.Address.CompareTo(that.Address);
+                        res = this.AddressNumeric.CompareTo(that.AddressNumeric);
                         if (res == 0 && level > ADDRESS)
                         {
-                            res = this.Place.CompareTo(that.Place);
+                            res = this.PlaceNumeric.CompareTo(that.PlaceNumeric);
                         }
                     }
                 }
