@@ -898,7 +898,7 @@ namespace FTAnalyzer
         private void mnuOSGeocoder_Click(object sender, EventArgs e)
         {
             ft.LoadOS50kGazetteer();
-            // doesn't do anything yet
+            ft.ProcessOS50kGazetteerData();
         }
 
         private void locationsGeocodeReportToolStripMenuItem_Click(object sender, EventArgs e)

@@ -691,7 +691,6 @@ namespace FTAnalyzer
                 toChange = toChange.Substring(2);
             return toChange.Trim();
         }
-
         #endregion
 
         public void AddIndividual(Individual ind)
@@ -924,6 +923,7 @@ namespace FTAnalyzer
             to.GoogleLocation = from.GoogleLocation;
             to.GoogleResultType = from.GoogleResultType;
             to.FoundLevel = from.FoundLevel;
+            to.Counties = from.Counties;
         }
 
         public int CompareTo(FactLocation that)

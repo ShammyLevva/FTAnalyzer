@@ -343,14 +343,16 @@ namespace FTAnalyzer
                     OS50k.Add(new OS50kGazetteer(line));
             }
             reader.Close();
-            ProcessOS50kGazetteerData();
         }
 
-        private void ProcessOS50kGazetteerData()
+        public void ProcessOS50kGazetteerData()
         {
-            IEnumerable<string> counties = OS50k.Select(g => g.Counties.ToString()).Distinct().OrderBy(x => x);
-            foreach (string county in counties)
-                Console.WriteLine(county);
+            Predicate<FactLocation> notGeocoded = x => !x.IsGeoCoded(false) && x.Counties.Count > 0;
+            IEnumerable<FactLocation> toSearch = FactLocation.AllLocations.Where(notGeocoded);
+            foreach (FactLocation loc in toSearch)
+            {
+                IEnumerable<OS50kGazetteer> placeMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.Place, StringComparison.InvariantCultureIgnoreCase));
+            }
         }
 
         private void LoadStandardisedNames()

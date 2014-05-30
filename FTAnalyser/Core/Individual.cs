@@ -26,7 +26,6 @@ namespace FTAnalyzer
         private DoubleMetaphone forenameMetaphone;
         public string Notes { get; private set; }
         public string StandardisedName { get; private set; }
-        public string SurnameUpper { get; private set; }
         public bool HasParents { get; set; }
         public bool Infamily { get; set; }
         public bool IsFlaggedAsLiving { get; private set; }
@@ -47,7 +46,6 @@ namespace FTAnalyzer
             IndividualID = string.Empty;
             forenames = string.Empty;
             surname = string.Empty;
-            SurnameUpper = string.Empty;
             forenameMetaphone = new DoubleMetaphone();
             surnameMetaphone = new DoubleMetaphone();
             marriedName = string.Empty;
@@ -82,7 +80,6 @@ namespace FTAnalyzer
             IsFlaggedAsLiving = node.SelectSingleNode("_FLGS/__LIVING") != null;
             forenameMetaphone = new DoubleMetaphone(Forename);
             surnameMetaphone = new DoubleMetaphone(Surname);
-            SurnameUpper = Surname.ToUpper();
             Notes = FamilyTree.GetNotes(node);
             StandardisedName = FamilyTree.Instance.GetStandardisedName(IsMale, Forename);
 
@@ -157,7 +154,6 @@ namespace FTAnalyzer
                 this.IndividualID = i.IndividualID;
                 this.forenames = i.forenames;
                 this.surname = i.surname;
-                this.SurnameUpper = i.SurnameUpper;
                 this.forenameMetaphone = i.forenameMetaphone;
                 this.surnameMetaphone = i.surnameMetaphone;
                 this.marriedName = i.marriedName;
