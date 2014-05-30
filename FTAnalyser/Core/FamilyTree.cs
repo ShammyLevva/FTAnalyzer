@@ -28,6 +28,7 @@ namespace FTAnalyzer
         private IList<Family> families;
         private IDictionary<string, List<Individual>> occupations;
         private IDictionary<StandardisedName, StandardisedName> names;
+        private IList<OS50kGazetteer> OS50k;
         private ISet<string> unknownFactTypes;
         private bool _loading = false;
         private bool _dataloaded = false;
@@ -310,6 +311,46 @@ namespace FTAnalyzer
             SetRelationDescriptions(rootIndividualID, pb);
             xmlErrorbox.AppendText(PrintRelationCount());
             Application.DoEvents();
+        }
+
+        public void LoadOS50kGazetteer()
+        {
+            OS50k = new List<OS50kGazetteer>();
+            try
+            {
+                string startPath;
+                if (Application.StartupPath.Contains("Common7\\IDE")) // running unit tests
+                    startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
+                else
+                    startPath = Application.StartupPath;
+                string filename = Path.Combine(startPath, @"Resources\50kgaz2014.txt");
+                if (File.Exists(filename))
+                    ReadOS50kGazetteer(filename);
+            }
+            catch (Exception e)
+            {
+                log.Warn("Failed to load OS50k Gazatteer error was : " + e.Message);
+            }
+        }
+
+        public void ReadOS50kGazetteer(string filename)
+        {
+            StreamReader reader = new StreamReader(filename);
+            while (!reader.EndOfStream)
+            {
+                string line = reader.ReadLine();
+                if (line.IndexOf(':') > 0)
+                    OS50k.Add(new OS50kGazetteer(line));
+            }
+            reader.Close();
+            ProcessOS50kGazetteerData();
+        }
+
+        private void ProcessOS50kGazetteerData()
+        {
+            IEnumerable<string> counties = OS50k.Select(g => g.County.ToString()).Distinct().OrderBy(x => x);
+            foreach (string county in counties)
+                Console.WriteLine(county);
         }
 
         private void LoadStandardisedNames()

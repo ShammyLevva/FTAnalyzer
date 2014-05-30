@@ -298,9 +298,11 @@
       <DependentUpon>Progress.cs</DependentUpon>
     </Compile>
     <Compile Include="Mapping\ClusterLayer.cs" />
+    <Compile Include="Mapping\Counties.cs" />
     <Compile Include="Mapping\MapLifeLine.cs" />
     <Compile Include="Mapping\MapHelper.cs" />
     <Compile Include="Mapping\NLSRequest.cs" />
+    <Compile Include="Mapping\OS50kGazetteer.cs" />
     <Compile Include="Mapping\TearDropLayer.cs" />
     <Compile Include="Properties\MappingSettings.Designer.cs">
       <DependentUpon>MappingSettings.settings</DependentUpon>
@@ -404,6 +406,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Resources\50kgaz2014.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\GINAP.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

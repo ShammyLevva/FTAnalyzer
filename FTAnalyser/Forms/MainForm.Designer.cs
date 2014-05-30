@@ -82,6 +82,7 @@
             this.mnuPlaces = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuGeocodeLocations = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOSGeocoder = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuLocationsGeocodeReport = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewOnlineManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -659,6 +660,7 @@
             this.mnuPlaces,
             this.toolStripSeparator4,
             this.mnuGeocodeLocations,
+            this.mnuOSGeocoder,
             this.mnuLocationsGeocodeReport});
             this.mnuMaps.Name = "mnuMaps";
             this.mnuMaps.Size = new System.Drawing.Size(48, 20);
@@ -667,40 +669,47 @@
             // mnuShowTimeline
             // 
             this.mnuShowTimeline.Name = "mnuShowTimeline";
-            this.mnuShowTimeline.Size = new System.Drawing.Size(243, 22);
+            this.mnuShowTimeline.Size = new System.Drawing.Size(284, 22);
             this.mnuShowTimeline.Text = "Show Timeline";
             this.mnuShowTimeline.Click += new System.EventHandler(this.mnuShowTimeline_Click);
             // 
             // mnuLifelines
             // 
             this.mnuLifelines.Name = "mnuLifelines";
-            this.mnuLifelines.Size = new System.Drawing.Size(243, 22);
+            this.mnuLifelines.Size = new System.Drawing.Size(284, 22);
             this.mnuLifelines.Text = "Show Lifelines";
             this.mnuLifelines.Click += new System.EventHandler(this.mnuLifelines_Click);
             // 
             // mnuPlaces
             // 
             this.mnuPlaces.Name = "mnuPlaces";
-            this.mnuPlaces.Size = new System.Drawing.Size(243, 22);
+            this.mnuPlaces.Size = new System.Drawing.Size(284, 22);
             this.mnuPlaces.Text = "Show Places";
             this.mnuPlaces.Click += new System.EventHandler(this.mnuPlaces_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(240, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(281, 6);
             // 
             // mnuGeocodeLocations
             // 
             this.mnuGeocodeLocations.Name = "mnuGeocodeLocations";
-            this.mnuGeocodeLocations.Size = new System.Drawing.Size(243, 22);
-            this.mnuGeocodeLocations.Text = "Run Geocoder to Find Locations";
+            this.mnuGeocodeLocations.Size = new System.Drawing.Size(284, 22);
+            this.mnuGeocodeLocations.Text = "Run Google Geocoder to Find Locations";
             this.mnuGeocodeLocations.Click += new System.EventHandler(this.mnuGeocodeLocations_Click);
+            // 
+            // mnuOSGeocoder
+            // 
+            this.mnuOSGeocoder.Name = "mnuOSGeocoder";
+            this.mnuOSGeocoder.Size = new System.Drawing.Size(284, 22);
+            this.mnuOSGeocoder.Text = "Run OS Geocoder to Find Locations";
+            this.mnuOSGeocoder.Click += new System.EventHandler(this.mnuOSGeocoder_Click);
             // 
             // mnuLocationsGeocodeReport
             // 
             this.mnuLocationsGeocodeReport.Name = "mnuLocationsGeocodeReport";
-            this.mnuLocationsGeocodeReport.Size = new System.Drawing.Size(243, 22);
+            this.mnuLocationsGeocodeReport.Size = new System.Drawing.Size(284, 22);
             this.mnuLocationsGeocodeReport.Text = "Display Geocoded Locations";
             this.mnuLocationsGeocodeReport.Click += new System.EventHandler(this.locationsGeocodeReportToolStripMenuItem_Click);
             // 
@@ -812,6 +821,7 @@
             // 
             this.tspbTabProgress.Name = "tspbTabProgress";
             this.tspbTabProgress.Size = new System.Drawing.Size(100, 16);
+            this.tspbTabProgress.Visible = false;
             // 
             // dgDataErrors
             // 
@@ -1272,6 +1282,13 @@
             this.tabLostCousins.TabIndex = 5;
             this.tabLostCousins.Text = "Lost Cousins";
             this.tabLostCousins.UseVisualStyleBackColor = true;
+            // 
+            // btnCensusNoCountryNoLC
+            // 
+            this.btnCensusNoCountryNoLC.Location = new System.Drawing.Point(0, 0);
+            this.btnCensusNoCountryNoLC.Name = "btnCensusNoCountryNoLC";
+            this.btnCensusNoCountryNoLC.Size = new System.Drawing.Size(75, 23);
+            this.btnCensusNoCountryNoLC.TabIndex = 0;
             // 
             // Referrals
             // 
@@ -3000,6 +3017,7 @@
         private System.Windows.Forms.ComboBox cmbColourFamily;
         private System.Windows.Forms.ToolStripMenuItem onlineGuidesToUsingFTAnalyzerToolStripMenuItem;
         private System.Windows.Forms.ToolStripProgressBar tspbTabProgress;
+        private System.Windows.Forms.ToolStripMenuItem mnuOSGeocoder;
     }
 }
 

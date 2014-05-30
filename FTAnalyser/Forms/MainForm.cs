@@ -895,6 +895,12 @@ namespace FTAnalyzer
             }
         }
 
+        private void mnuOSGeocoder_Click(object sender, EventArgs e)
+        {
+            ft.LoadOS50kGazetteer();
+            // doesn't do anything yet
+        }
+
         private void locationsGeocodeReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
