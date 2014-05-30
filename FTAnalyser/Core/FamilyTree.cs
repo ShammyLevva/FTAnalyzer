@@ -351,7 +351,12 @@ namespace FTAnalyzer
             IEnumerable<FactLocation> toSearch = FactLocation.AllLocations.Where(notGeocoded);
             foreach (FactLocation loc in toSearch)
             {
-                IEnumerable<OS50kGazetteer> placeMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.Place, StringComparison.InvariantCultureIgnoreCase));
+                if (loc.Place.Length > 0)
+                {
+                    IEnumerable<OS50kGazetteer> placeMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.Place, StringComparison.InvariantCultureIgnoreCase));
+                    if (placeMatches.Count() > 0)
+                        Console.WriteLine("we have a place mactch for something not geocoded");
+                }
             }
         }
 
