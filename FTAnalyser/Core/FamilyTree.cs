@@ -348,7 +348,7 @@ namespace FTAnalyzer
 
         private void ProcessOS50kGazetteerData()
         {
-            IEnumerable<string> counties = OS50k.Select(g => g.County.ToString()).Distinct().OrderBy(x => x);
+            IEnumerable<string> counties = OS50k.Select(g => g.Counties.ToString()).Distinct().OrderBy(x => x);
             foreach (string county in counties)
                 Console.WriteLine(county);
         }

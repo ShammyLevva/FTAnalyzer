@@ -12,7 +12,7 @@ namespace FTAnalyzer.Mapping
         public double Latitude { get; private set; }
         public double Longitude { get; private set; }
         public string FeatureCode { get; private set; }
-        public Counties.County County { get; private set; }
+        public List<Counties.County> Counties { get; private set; }
 
         public OS50kGazetteer(string line)
         {
@@ -30,7 +30,7 @@ namespace FTAnalyzer.Mapping
             Longitude = intval + longitude / 60;
             if (values[10] == "W")
                 Longitude = -1 * Longitude; // West Longitudes are negative
-            County = Counties.GetCounty(values[11]);
+            Counties = Mapping.Counties.GetCounties(values[11]);
             FeatureCode = values[14];
         }
     }

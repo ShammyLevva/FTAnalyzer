@@ -28,10 +28,12 @@ namespace FTAnalyzer.Mapping
             }
         }
 
-        public static County GetCounty(string code)
+        public static List<County> GetCounties(string code)
         {
-            return UK_COUNTIES.First(c => c.CountyCode.Equals(code));
+            return UK_COUNTIES.Where(c => c.LookupName.Equals(code)).ToList<County>();
         }
+
+        public static readonly County UNKNOWN = new County("Unknown", "XX", "County Unknown");
 
         static Counties()
         {
