@@ -1350,18 +1350,6 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void btnCensusNoCountryNoLC_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
-            Predicate<Individual> censusFacts = x => x.LostCousinsCensusFactCount > 0;
-            Predicate<Individual> filter = FilterUtils.AndFilter(censusFacts, relationFilter);
-            IEnumerable<Individual> listToCheck = ft.AllIndividuals.Where(filter).ToList();
-            Facts facts = new Facts(listToCheck);
-            facts.Show();
-            HourGlass(false);
-        }
-
         private void btnLCMissingCountry_Click(object sender, EventArgs e)
         {
             HourGlass(true);

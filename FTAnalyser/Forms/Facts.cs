@@ -59,63 +59,16 @@ namespace FTAnalyzer.Forms
             : this()
         {
             this.allFacts = true;
+            int distinctIndividuals = 0;
             foreach (Individual ind in individuals)
+            {
+                int before = facts.Count;
                 AddIndividualsFacts(ind, factTypes);
-            this.Text = "Facts Report for all " + individuals.Count() + " individuals. Facts count: " + facts.Count;
-            SetupFacts();
-        }
-
-        public Facts(IEnumerable<Individual> individuals) // Census facts with no country or Lost cousins fact
-            : this()
-        {
-            this.allFacts = true;
-            int count = 0;
-            foreach (Individual ind in individuals)
-                foreach (Fact f in ind.AllFacts)
-                {
-                    if (f.IsLCCensusFact)
-                    {
-                        count++;
-                        bool toDisplay = false;
-                        if(f.FactDate.YearMatches(CensusDate.EWCENSUS1841) &&
-                            !ind.IsLostCousinsEntered(CensusDate.EWCENSUS1841, false) && 
-                             ind.IsLostCousinsEntered(CensusDate.EWCENSUS1841, true) &&
-                            !ind.MissingLostCousins(CensusDate.EWCENSUS1841, false))
-                            toDisplay = true;
-                        else if(f.FactDate.YearMatches(CensusDate.EWCENSUS1881) && 
-                           !(ind.IsLostCousinsEntered(CensusDate.EWCENSUS1881, false) || 
-                             ind.IsLostCousinsEntered(CensusDate.SCOTCENSUS1881, false) || 
-                             ind.IsLostCousinsEntered(CensusDate.CANADACENSUS1881, false)) &&
-                            (ind.IsLostCousinsEntered(CensusDate.EWCENSUS1881, true) ||
-                             ind.IsLostCousinsEntered(CensusDate.SCOTCENSUS1881, true) ||
-                             ind.IsLostCousinsEntered(CensusDate.CANADACENSUS1881, true)) &&
-                           !(ind.MissingLostCousins(CensusDate.EWCENSUS1881, false) ||
-                             ind.MissingLostCousins(CensusDate.SCOTCENSUS1881, false) ||
-                             ind.MissingLostCousins(CensusDate.CANADACENSUS1881, false)))
-                            toDisplay = true; 
-                        else if(f.FactDate.YearMatches(CensusDate.EWCENSUS1911) && 
-                           !(ind.IsLostCousinsEntered(CensusDate.EWCENSUS1911, false) ||
-                             ind.IsLostCousinsEntered(CensusDate.IRELANDCENSUS1911, false)) &&
-                            (ind.IsLostCousinsEntered(CensusDate.EWCENSUS1911, true) ||
-                             ind.IsLostCousinsEntered(CensusDate.IRELANDCENSUS1911, true)) &&
-                           !(ind.MissingLostCousins(CensusDate.EWCENSUS1911, false) ||
-                             ind.MissingLostCousins(CensusDate.IRELANDCENSUS1911, false)))
-                            toDisplay = true;
-                        else if(f.FactDate.YearMatches(CensusDate.USCENSUS1880) &&
-                            !ind.IsLostCousinsEntered(CensusDate.USCENSUS1880, false) &&
-                             ind.IsLostCousinsEntered(CensusDate.USCENSUS1880, true) && 
-                            !ind.MissingLostCousins(CensusDate.USCENSUS1880, false))
-                            toDisplay = true;
-                        else if(f.FactDate.YearMatches(CensusDate.USCENSUS1940) &&
-                            !ind.IsLostCousinsEntered(CensusDate.USCENSUS1940, false) &&
-                             ind.IsLostCousinsEntered(CensusDate.USCENSUS1940, true) && 
-                            !ind.MissingLostCousins(CensusDate.USCENSUS1940, false))
-                            toDisplay = true;
-                        if (toDisplay)
-                            facts.Add(new DisplayFact(ind, f));
-                    }
-                }
-            this.Text =  "Showing " + facts.Count + " Census Facts with no Lost Cousins fact and no known country.";
+                int after = facts.Count;
+                if(before != after)
+                    distinctIndividuals++;
+            }
+            this.Text = "Facts Report for all " + distinctIndividuals + " individuals. Facts count: " + facts.Count;
             SetupFacts();
         }
 

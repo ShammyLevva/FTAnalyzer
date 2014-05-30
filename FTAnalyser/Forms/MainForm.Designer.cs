@@ -1273,17 +1273,6 @@
             this.tabLostCousins.Text = "Lost Cousins";
             this.tabLostCousins.UseVisualStyleBackColor = true;
             // 
-            // btnCensusNoCountryNoLC
-            // 
-            this.btnCensusNoCountryNoLC.Location = new System.Drawing.Point(6, 266);
-            this.btnCensusNoCountryNoLC.Name = "btnCensusNoCountryNoLC";
-            this.btnCensusNoCountryNoLC.Size = new System.Drawing.Size(330, 27);
-            this.btnCensusNoCountryNoLC.TabIndex = 24;
-            this.btnCensusNoCountryNoLC.Text = "Census Facts with no Country and no Lost Cousins fact";
-            this.btnCensusNoCountryNoLC.UseVisualStyleBackColor = true;
-            this.btnCensusNoCountryNoLC.Visible = false;
-            this.btnCensusNoCountryNoLC.Click += new System.EventHandler(this.btnCensusNoCountryNoLC_Click);
-            // 
             // Referrals
             // 
             this.Referrals.Controls.Add(this.ckbReferralInCommon);
