@@ -19,7 +19,7 @@ namespace FTAnalyzer.Forms
         private ReportFormHelper reportFormHelper;
 
         public const int EMPTY = 0, UNKNOWN_DATE = 1, WIDE_DATE = 2, NARROW_DATE = 3, APPROX_DATE = 4, 
-                         EXACT_DATE = 5, NO_SPOUSE = 6, NO_PARTNER = 7, NO_MARRIAGE = 8, ISLIVING = 9;
+                         EXACT_DATE = 5, NO_SPOUSE = 6, NO_PARTNER = 7, NO_MARRIAGE = 8, ISLIVING = 9, OVER90 = 10;
 
         private Dictionary<int, DataGridViewCellStyle> styles;
         private int birthColumnIndex;
@@ -68,6 +68,9 @@ namespace FTAnalyzer.Forms
             DataGridViewCellStyle isLiving = new DataGridViewCellStyle();
             isLiving.BackColor = isLiving.ForeColor = Color.DarkSlateGray;
             styles.Add(9, isLiving);
+            DataGridViewCellStyle over90 = new DataGridViewCellStyle();
+            over90.BackColor = over90.ForeColor = Color.DarkGray;
+            styles.Add(10, over90);
 
             birthColumnIndex = dgBMDReportSheet.Columns["Birth"].Index;
             burialColumnIndex = dgBMDReportSheet.Columns["CremBuri"].Index;
@@ -130,7 +133,7 @@ namespace FTAnalyzer.Forms
                     {
                         case EMPTY: // Grey
                             if (e.ColumnIndex == burialColumnIndex - 1) // death column
-                                cell.ToolTipText = "Individual is probably still alive";
+                                cell.ToolTipText = "Individual is probably still alive"; // if OVER90 still grey cell but use different tooltip
                             else
                                 cell.ToolTipText = string.Empty;
                             break;
@@ -160,6 +163,9 @@ namespace FTAnalyzer.Forms
                             break;
                         case ISLIVING: // dark grey
                             cell.ToolTipText = "Is flagged as living";
+                            break;
+                        case OVER90:
+                            cell.ToolTipText = "Individual may be still alive";
                             break;
                     }
                 }

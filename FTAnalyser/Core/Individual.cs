@@ -1355,7 +1355,10 @@ namespace FTAnalyzer
                 if (IsFlaggedAsLiving)
                     return 9;
                 else if (!DeathDate.IsKnown && GetMaxAge(DateTime.Now) < FactDate.MAXYEARS)
-                    return 0;
+                    if (GetMaxAge(DateTime.Now) < 90)
+                        return 0;
+                    else
+                        return 10;
                 else
                     return DeathDate.DateStatus(false);
             }
