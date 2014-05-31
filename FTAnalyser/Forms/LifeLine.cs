@@ -135,7 +135,7 @@ namespace FTAnalyzer.Forms
             selections = new TearDropLayer("Selections");
             mapBox1.Map.VariableLayers.Add(selections);
 
-            mh.AddEnglishParishLayer(mapBox1.Map);
+            mh.AddParishLayers(mapBox1.Map);
             mh.SetScaleBar(mapBox1);
             mapBox1.Map.MinimumZoom = 500;
             mapBox1.Map.MaximumZoom = 50000000;

@@ -329,7 +329,7 @@ namespace FTAnalyzer
             }
             catch (Exception e)
             {
-                log.Warn("Failed to load OS50k Gazatteer error was : " + e.Message);
+                log.Warn("Failed to load OS50k Gazetteer error was : " + e.Message);
             }
         }
 
@@ -350,35 +350,31 @@ namespace FTAnalyzer
             Predicate<FactLocation> notGeocoded = x => !x.IsGeoCoded(true) && Countries.IsUnitedKingdom(x.Country);
             IEnumerable<FactLocation> toSearch = FactLocation.AllLocations.Where(notGeocoded);
             foreach (FactLocation loc in toSearch)
-                GazatterMatchMethodA(loc);
+                GazetteerMatchMethodA(loc);
         }
 
-        private void GazatterMatchMethodA(FactLocation loc)
+        private void GazetteerMatchMethodA(FactLocation loc)
         {
-            bool failedPlaceCheck = true;
             if (loc.PlaceStripNumeric.Length > 0)
             {
                 IEnumerable<OS50kGazetteer> placeMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.PlaceStripNumeric, StringComparison.InvariantCultureIgnoreCase));
                 if (placeMatches.Count() > 0)
                 {
                     ProcessOS50kMatches(placeMatches, loc, FactLocation.PLACE);
-                    failedPlaceCheck = false;
+                    return;
                 }
             }
-            if (failedPlaceCheck)
+            if (loc.AddressStripNumeric.Length > 0)
             {
-                if (loc.AddressStripNumeric.Length > 0)
-                {
-                    IEnumerable<OS50kGazetteer> addressMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.AddressStripNumeric, StringComparison.InvariantCultureIgnoreCase));
-                    if (addressMatches.Count() > 0)
-                        ProcessOS50kMatches(addressMatches, loc, FactLocation.ADDRESS);
-                }
-                else if (loc.SubRegion.Length > 0)
-                {
-                    IEnumerable<OS50kGazetteer> subRegionMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.SubRegion, StringComparison.InvariantCultureIgnoreCase));
-                    if (subRegionMatches.Count() > 0)
-                        ProcessOS50kMatches(subRegionMatches, loc, FactLocation.SUBREGION);
-                }
+                IEnumerable<OS50kGazetteer> addressMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.AddressStripNumeric, StringComparison.InvariantCultureIgnoreCase));
+                if (addressMatches.Count() > 0)
+                    ProcessOS50kMatches(addressMatches, loc, FactLocation.ADDRESS);
+            }
+            else if (loc.SubRegion.Length > 0)
+            {
+                IEnumerable<OS50kGazetteer> subRegionMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.SubRegion, StringComparison.InvariantCultureIgnoreCase));
+                if (subRegionMatches.Count() > 0)
+                    ProcessOS50kMatches(subRegionMatches, loc, FactLocation.SUBREGION);
             }
         }
 
@@ -461,7 +457,7 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("\n    Hide People Tagged As Missing From Census : " + Properties.GeneralSettings.Default.HidePeopleWithMissingTag);
                 xmlErrorbox.AppendText("\nThe current mapping options are set :");
                 xmlErrorbox.AppendText("\n    Custom Maps Location: " + Properties.MappingSettings.Default.CustomMapPath);
-                xmlErrorbox.AppendText("\n    Display English & Welsh Parish Boundaries: " + Properties.MappingSettings.Default.UseEnglishParishBoundaries);
+                xmlErrorbox.AppendText("\n    Display British Parish Boundaries: " + Properties.MappingSettings.Default.UseParishBoundaries);
                 xmlErrorbox.AppendText("\n    Hide Scale Bar: " + Properties.MappingSettings.Default.HideScaleBar);
                 xmlErrorbox.AppendText("\n    Include Locations with Partial Match Status: " + Properties.MappingSettings.Default.IncludePartials);
                 xmlErrorbox.AppendText("\n\n");
@@ -698,7 +694,7 @@ namespace FTAnalyzer
 
         public int IndividualCount { get { return individuals.Count; } }
 
-        public List<Individual> DeadOrAlive { get {  return individuals.Where(x => x.DeathDate.IsKnown && x.IsFlaggedAsLiving).ToList<Individual>(); } }
+        public List<Individual> DeadOrAlive { get { return individuals.Where(x => x.DeathDate.IsKnown && x.IsFlaggedAsLiving).ToList<Individual>(); } }
 
         #endregion
 
@@ -1489,7 +1485,7 @@ namespace FTAnalyzer
                     filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
                 }
             }
-            else  
+            else
                 filter = x => family.Members.Contains<Individual>(x);
             return individuals.Where(filter).ToList<IDisplayColourBMD>();
         }
@@ -1521,7 +1517,7 @@ namespace FTAnalyzer
                         int minAge = ind.GetMinAge(ind.DeathDate);
                         if (minAge > FactDate.MAXYEARS)
                             errors[(int)Dataerror.AGED_MORE_THAN_110].Add(new DataError((int)Dataerror.AGED_MORE_THAN_110, ind, "Aged over " + FactDate.MAXYEARS + " before died " + ind.DeathDate));
-                        if(ind.IsFlaggedAsLiving)
+                        if (ind.IsFlaggedAsLiving)
                             errors[(int)Dataerror.LIVING_WITH_DEATH_DATE].Add(new DataError((int)Dataerror.LIVING_WITH_DEATH_DATE, ind, "Flagged as living but has death date of " + ind.DeathDate));
                     }
                     #region Error facts

@@ -94,9 +94,14 @@ namespace FTAnalyzer.Mapping
             }
         }
 
+        public void AddParishLayers(Map map)
+        {
+            AddEnglishParishLayer(map);
+        }
+
         public void AddEnglishParishLayer(Map map)
         {
-            if (Properties.MappingSettings.Default.UseEnglishParishBoundaries)
+            if (Properties.MappingSettings.Default.UseParishBoundaries)
             {
                 string filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, "parish_region.shp");
                 if (File.Exists(filename))

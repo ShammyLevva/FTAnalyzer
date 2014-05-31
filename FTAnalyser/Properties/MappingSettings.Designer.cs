@@ -38,12 +38,12 @@ namespace FTAnalyzer.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool UseEnglishParishBoundaries {
+        public bool UseParishBoundaries {
             get {
-                return ((bool)(this["UseEnglishParishBoundaries"]));
+                return ((bool)(this["UseParishBoundaries"]));
             }
             set {
-                this["UseEnglishParishBoundaries"] = value;
+                this["UseParishBoundaries"] = value;
             }
         }
         

@@ -202,13 +202,13 @@
     <value>6, 51</value>
   </data>
   <data name="ckbUseParishBoundaries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>227, 17</value>
+    <value>179, 17</value>
   </data>
   <data name="ckbUseParishBoundaries.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="ckbUseParishBoundaries.Text" xml:space="preserve">
-    <value>Display English &amp;&amp; Welsh Parish Boundaries</value>
+    <value>Display British Parish Boundaries</value>
   </data>
   <data name="&gt;&gt;ckbUseParishBoundaries.Name" xml:space="preserve">
     <value>ckbUseParishBoundaries</value>

@@ -5,7 +5,7 @@
     <Setting Name="CustomMapPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="UseEnglishParishBoundaries" Type="System.Boolean" Scope="User">
+    <Setting Name="UseParishBoundaries" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="HideScaleBar" Type="System.Boolean" Scope="User">
