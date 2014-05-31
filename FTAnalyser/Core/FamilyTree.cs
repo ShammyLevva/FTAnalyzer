@@ -350,31 +350,34 @@ namespace FTAnalyzer
             Predicate<FactLocation> notGeocoded = x => !x.IsGeoCoded(true) && Countries.IsUnitedKingdom(x.Country);
             IEnumerable<FactLocation> toSearch = FactLocation.AllLocations.Where(notGeocoded);
             foreach (FactLocation loc in toSearch)
+                GazatterMatchMethodA(loc);
+        }
+
+        private void GazatterMatchMethodA(FactLocation loc)
+        {
+            bool failedPlaceCheck = true;
+            if (loc.PlaceStripNumeric.Length > 0)
             {
-                bool failedPlaceCheck = true;
-                if (loc.PlaceStripNumeric.Length > 0)
+                IEnumerable<OS50kGazetteer> placeMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.PlaceStripNumeric, StringComparison.InvariantCultureIgnoreCase));
+                if (placeMatches.Count() > 0)
                 {
-                    IEnumerable<OS50kGazetteer> placeMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.PlaceStripNumeric, StringComparison.InvariantCultureIgnoreCase));
-                    if (placeMatches.Count() > 0)
-                    {
-                        ProcessOS50kMatches(placeMatches, loc, FactLocation.PLACE);
-                        failedPlaceCheck = false;
-                    }
+                    ProcessOS50kMatches(placeMatches, loc, FactLocation.PLACE);
+                    failedPlaceCheck = false;
                 }
-                if (failedPlaceCheck)
+            }
+            if (failedPlaceCheck)
+            {
+                if (loc.AddressStripNumeric.Length > 0)
                 {
-                    if (loc.AddressStripNumeric.Length > 0)
-                    {
-                        IEnumerable<OS50kGazetteer> addressMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.AddressStripNumeric, StringComparison.InvariantCultureIgnoreCase));
-                        if (addressMatches.Count() > 0)
-                            ProcessOS50kMatches(addressMatches, loc, FactLocation.ADDRESS);
-                    }
-                    else if (loc.SubRegion.Length > 0)
-                    {
-                        IEnumerable<OS50kGazetteer> subRegionMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.SubRegion, StringComparison.InvariantCultureIgnoreCase));
-                        if (subRegionMatches.Count() > 0)
-                            ProcessOS50kMatches(subRegionMatches, loc, FactLocation.SUBREGION);
-                    }
+                    IEnumerable<OS50kGazetteer> addressMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.AddressStripNumeric, StringComparison.InvariantCultureIgnoreCase));
+                    if (addressMatches.Count() > 0)
+                        ProcessOS50kMatches(addressMatches, loc, FactLocation.ADDRESS);
+                }
+                else if (loc.SubRegion.Length > 0)
+                {
+                    IEnumerable<OS50kGazetteer> subRegionMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.SubRegion, StringComparison.InvariantCultureIgnoreCase));
+                    if (subRegionMatches.Count() > 0)
+                        ProcessOS50kMatches(subRegionMatches, loc, FactLocation.SUBREGION);
                 }
             }
         }
