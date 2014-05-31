@@ -96,6 +96,8 @@ namespace FTAnalyzer.Mapping
 
         public void AddParishLayers(Map map)
         {
+            VectorRenderer.SizeOfString = SizeOfString;  //fixes label width bug by defining an alternate sizing function
+
             string filename;
 
             filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, "parish_region.shp");
@@ -142,6 +144,13 @@ namespace FTAnalyzer.Mapping
                     map.Layers.Add(parishLabelLayer);
                 }
             }
+        }
+
+        // alternate sizing function to fix bug in sharpmap v1.1
+        private SizeF SizeOfString(Graphics graphics, string text, Font font)
+        {
+            var s = TextRenderer.MeasureText(text, font);
+            return new SizeF(s.Width + 1f, s.Height);
         }
 
         public Envelope GetExtents(FeatureDataTable table)
