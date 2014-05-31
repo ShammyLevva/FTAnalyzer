@@ -54,6 +54,7 @@ namespace FTAnalyzer
 
         private static Dictionary<string, string> COUNTRY_TYPOS = new Dictionary<string, string>();
         private static Dictionary<string, string> REGION_TYPOS = new Dictionary<string, string>();
+        public static Dictionary<string, Tuple<string, string>> CHAPMAN_CODES = new Dictionary<string, Tuple<string, string>>();
         public static Dictionary<string, string> COUNTRY_SHIFTS = new Dictionary<string, string>();
         private static Dictionary<string, string> REGION_SHIFTS = new Dictionary<string, string>();
         private static Dictionary<string, string> FREECEN_LOOKUP = new Dictionary<string, string>();
@@ -99,6 +100,21 @@ namespace FTAnalyzer
                         Console.WriteLine("Error duplicate region typos :" + from);
                     if (from != null && from.Length > 0 && to != null && to.Length > 0)
                         REGION_TYPOS.Add(from, to);
+                }
+                foreach (XmlNode n in xmlDoc.SelectNodes("Data/Fixes/ChapmanCodes/ChapmanCode"))
+                {  // add Chapman code to Region Typos to convert locations with codes to region text strings
+                    string historicCode = n.Attributes["historicCode"].Value;
+                    string countyName = n.Attributes["countyName"].Value;
+                    string modernCode = n.Attributes["modernCode"].Value;
+                    if (REGION_TYPOS.ContainsKey(historicCode))
+                        Console.WriteLine("Error duplicate region typos adding ChapmanCode :" + historicCode);
+                    if (historicCode != null && historicCode.Length > 0 && countyName != null && countyName.Length > 0)
+                        REGION_TYPOS.Add(historicCode, countyName);
+                    // then load the codes into the ChapmanCodes dictionary for converting old to new Counties
+                    if (CHAPMAN_CODES.ContainsKey(historicCode))
+                        Console.WriteLine("Error duplicate ChapmanCode :" + historicCode);
+                    if (historicCode != null && historicCode.Length > 0 && countyName != null && countyName.Length > 0)
+                        CHAPMAN_CODES.Add(historicCode, new Tuple<string,string>(countyName, modernCode));
                 }
                 foreach (XmlNode n in xmlDoc.SelectNodes("Data/Fixes/DemoteCountries/CountryToRegion"))
                 {
@@ -275,9 +291,9 @@ namespace FTAnalyzer
             if (level > REGION && (SubRegion.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
                 location.Insert(0, this.SubRegion + ", ");
             if (level > SUBREGION && (Address.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
-                location.Insert(0, fixNumerics ? FixNumerics(this.Address) : this.Address + ", ");
+                location.Insert(0, fixNumerics ? this.AddressNumeric : this.Address + ", ");
             if (level > ADDRESS && Place.Length > 0)
-                location.Insert(0, fixNumerics ? FixNumerics(this.Place) : this.Place + ", ");
+                location.Insert(0, fixNumerics ? this.PlaceNumeric : this.Place + ", ");
             FactLocation newLocation = GetLocation(location.ToString());
             return newLocation;
         }
@@ -341,6 +357,7 @@ namespace FTAnalyzer
             if (location != null)
             {
                 this.GEDCOMLocation = location;
+                location = location.Replace("?", ""); // remove question marks
                 // we need to parse the location string from a little injun to a big injun
                 int comma = location.LastIndexOf(",");
                 if (comma > 0)
@@ -722,12 +739,22 @@ namespace FTAnalyzer
 
         public string AddressNumeric
         {
-            get { return FixNumerics(this.Address); }
+            get { return FixNumerics(this.Address, true); }
         }
 
         public string PlaceNumeric
         {
-            get { return FixNumerics(this.Place); }
+            get { return FixNumerics(this.Place, true); }
+        }
+
+        public string AddressStripNumeric
+        {
+            get { return FixNumerics(this.Address, false); }
+        }
+
+        public string PlaceStripNumeric
+        {
+            get { return FixNumerics(this.Place, false); }
         }
 
         public bool IsKnownCountry
@@ -826,7 +853,7 @@ namespace FTAnalyzer
             return GeocodeStatus == Geocode.MATCHED || GeocodeStatus == Geocode.GEDCOM_USER;
         }
 
-        private string FixNumerics(string addressField)
+        private string FixNumerics(string addressField, bool returnNumber)
         {
             int pos = addressField.IndexOf(" ");
             if (pos > 0 & pos < addressField.Length)
@@ -835,9 +862,7 @@ namespace FTAnalyzer
                 string name = addressField.Substring(pos + 1);
                 Match matcher = Regex.Match(number, "\\d+[A-Za-z½]?");
                 if (matcher.Success)
-                {
-                    return name + " - " + number;
-                }
+                    return returnNumber ? name + " - " + number : name;
             }
             return addressField;
         }
@@ -923,7 +948,6 @@ namespace FTAnalyzer
             to.GoogleLocation = from.GoogleLocation;
             to.GoogleResultType = from.GoogleResultType;
             to.FoundLevel = from.FoundLevel;
-            to.Counties = from.Counties;
         }
 
         public int CompareTo(FactLocation that)

@@ -13,6 +13,7 @@ namespace FTAnalyzer.Mapping
         public double Longitude { get; private set; }
         public string FeatureCode { get; private set; }
         public string CountyCode { get; private set; }
+        public string CountyName { get; private set; }
 
         public OS50kGazetteer(string line)
         {
@@ -31,7 +32,21 @@ namespace FTAnalyzer.Mapping
             if (values[10] == "W")
                 Longitude = -1 * Longitude; // West Longitudes are negative
             CountyCode = values[11];
+            CountyName = values[13];
             FeatureCode = values[14];
+        }
+
+        public bool IsCountyMatch(FactLocation loc)
+        {
+            foreach (Counties.County c in loc.Counties)
+                if (c.CountyCode == CountyCode)
+                    return true;
+            return false;
+        }
+
+        public override string ToString()
+        {
+            return CountyCode + ": " + DefinitiveName + "(" + CountyName + ")";
         }
     }
 }

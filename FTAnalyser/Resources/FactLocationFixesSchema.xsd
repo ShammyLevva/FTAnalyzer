@@ -20,6 +20,13 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
+              <xs:element name="ChapmanCodes">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name ="ChapmanCode" type="chapman" minOccurs="0" maxOccurs="unbounded" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
               <xs:element name="DemoteCountries">
                 <xs:complexType>
                   <xs:sequence>
@@ -76,6 +83,12 @@
   <xs:complexType name="typo">
     <xs:attribute name="from" type="xs:string"/>
     <xs:attribute name="to" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="chapman">
+    <xs:attribute name="historicCode" type="xs:string"/>
+    <xs:attribute name="countyName" type="xs:string"/>
+    <xs:attribute name="modernCode" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="countryMove">

@@ -347,16 +347,47 @@ namespace FTAnalyzer
 
         public void ProcessOS50kGazetteerData()
         {
-            Predicate<FactLocation> notGeocoded = x => !x.IsGeoCoded(false) && x.Counties.Count > 0;
+            Predicate<FactLocation> notGeocoded = x => !x.IsGeoCoded(true) && Countries.IsUnitedKingdom(x.Country);
             IEnumerable<FactLocation> toSearch = FactLocation.AllLocations.Where(notGeocoded);
             foreach (FactLocation loc in toSearch)
             {
-                if (loc.Place.Length > 0)
+                bool failedPlaceCheck = true;
+                if (loc.PlaceStripNumeric.Length > 0)
                 {
-                    IEnumerable<OS50kGazetteer> placeMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.Place, StringComparison.InvariantCultureIgnoreCase));
+                    IEnumerable<OS50kGazetteer> placeMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.PlaceStripNumeric, StringComparison.InvariantCultureIgnoreCase));
                     if (placeMatches.Count() > 0)
-                        Console.WriteLine("we have a place mactch for something not geocoded");
+                    {
+                        ProcessOS50kMatches(placeMatches, loc, FactLocation.PLACE);
+                        failedPlaceCheck = false;
+                    }
                 }
+                if (failedPlaceCheck)
+                {
+                    if (loc.AddressStripNumeric.Length > 0)
+                    {
+                        IEnumerable<OS50kGazetteer> addressMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.AddressStripNumeric, StringComparison.InvariantCultureIgnoreCase));
+                        if (addressMatches.Count() > 0)
+                            ProcessOS50kMatches(addressMatches, loc, FactLocation.ADDRESS);
+                    }
+                    else if (loc.SubRegion.Length > 0)
+                    {
+                        IEnumerable<OS50kGazetteer> subRegionMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.SubRegion, StringComparison.InvariantCultureIgnoreCase));
+                        if (subRegionMatches.Count() > 0)
+                            ProcessOS50kMatches(subRegionMatches, loc, FactLocation.SUBREGION);
+                    }
+                }
+            }
+        }
+
+        private void ProcessOS50kMatches(IEnumerable<OS50kGazetteer> matches, FactLocation loc, int level)
+        {
+            Console.WriteLine("we have " + matches.Count() + " match(es) at level " + level + " for " + loc.ToString() + ": ");
+            foreach (OS50kGazetteer os in matches)
+            {
+                if (os.IsCountyMatch(loc))
+                    Console.WriteLine("**** " + os.ToString());
+                else
+                    Console.WriteLine("     " + os.ToString());
             }
         }
 
