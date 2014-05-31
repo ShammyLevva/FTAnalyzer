@@ -96,17 +96,22 @@ namespace FTAnalyzer.Mapping
 
         public void AddParishLayers(Map map)
         {
-            AddEnglishParishLayer(map);
+            string filename;
+
+            filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, "parish_region.shp");
+            AddParishLayer(map, filename, "English", "NAME");
+
+            filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, "CivilParish1930.shp");
+            AddParishLayer(map, filename, "Scottish", "name");
         }
 
-        public void AddEnglishParishLayer(Map map)
+        public void AddParishLayer(Map map, string filename, string prefix, string labelField)
         {
             if (Properties.MappingSettings.Default.UseParishBoundaries)
             {
-                string filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, "parish_region.shp");
                 if (File.Exists(filename))
                 {
-                    VectorLayer parishLayer = new VectorLayer("ParishBoundaries");
+                    VectorLayer parishLayer = new VectorLayer(prefix + "ParishBoundaries");
                     parishLayer.DataSource = new ShapeFile(filename, true);
                     parishLayer.Style.Fill = null;
                     parishLayer.Style.Outline = new Pen(Color.Black, 2.0f);
@@ -115,9 +120,9 @@ namespace FTAnalyzer.Mapping
                     parishLayer.MaxVisible = 300000;
                     map.VariableLayers.Add(parishLayer);
 
-                    LabelLayer parishLabelLayer = new LabelLayer("ParishNames");
+                    LabelLayer parishLabelLayer = new LabelLayer(prefix + "ParishNames");
                     parishLabelLayer.DataSource = new ShapeFile(filename, true);
-                    parishLabelLayer.LabelColumn = "NAME";
+                    parishLabelLayer.LabelColumn = labelField;
                     parishLabelLayer.TextRenderingHint = TextRenderingHint.AntiAlias;
                     parishLabelLayer.SmoothingMode = SmoothingMode.AntiAlias;
 
