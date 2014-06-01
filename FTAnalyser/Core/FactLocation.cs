@@ -102,7 +102,7 @@ namespace FTAnalyzer
                 }
                 foreach (XmlNode n in xmlDoc.SelectNodes("Data/Fixes/ChapmanCodes/ChapmanCode"))
                 {  // add Chapman code to Region Typos to convert locations with codes to region text strings
-                    string chapmanCode = n.Attributes["historicCode"].Value;
+                    string chapmanCode = n.Attributes["chapmanCode"].Value;
                     string countyName = n.Attributes["countyName"].Value;
                     if (REGION_TYPOS.ContainsKey(chapmanCode))
                         Console.WriteLine("Error duplicate region typos adding ChapmanCode :" + chapmanCode);
@@ -235,6 +235,7 @@ namespace FTAnalyzer
             Geocodes.Add(Geocode.INCORRECT, "Incorrect (User Marked)");
             Geocodes.Add(Geocode.OUT_OF_BOUNDS, "Outside Country Area");
             Geocodes.Add(Geocode.LEVEL_MISMATCH, "Partial Match (Levels)");
+            Geocodes.Add(Geocode.OS_50MATCH, "OS 50k Gazetteer Match");
         }
 
         public static FactLocation GetLocation(string place)
