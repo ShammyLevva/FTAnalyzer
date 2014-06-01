@@ -34,9 +34,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTile", "..\BruTile\BruTi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTile.Desktop", "..\BruTile\BruTile.Desktop\BruTile.Desktop.csproj", "{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSGazetteerProcessor", "..\OSGazetteerProcessor\OSGazetteerProcessor.csproj", "{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
 		SccLocalPath0 = .
@@ -60,6 +62,9 @@ Global
 		SccProjectUniqueName7 = ..\\BruTile\\BruTile.Desktop\\BruTile.Desktop.csproj
 		SccProjectName7 = ../BruTile/BruTile.Desktop
 		SccLocalPath7 = ..\\BruTile\\BruTile.Desktop
+		SccProjectUniqueName8 = ..\\OSGazetteerProcessor\\OSGazetteerProcessor.csproj
+		SccProjectName8 = ../OSGazetteerProcessor
+		SccLocalPath8 = ..\\OSGazetteerProcessor
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -231,6 +236,27 @@ Global
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.SingleImage|x86.ActiveCfg = Release|x86
 		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.SingleImage|x86.Build.0 = Release|x86
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.CD_ROM|x86.ActiveCfg = Release|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.DebugDSProjection|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.DebugDSProjection|Any CPU.Build.0 = Debug|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.DebugDSProjection|x86.ActiveCfg = Debug|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.DVD-5|x86.ActiveCfg = Debug|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.Release|x86.ActiveCfg = Release|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.ReleaseDSProjection|Any CPU.ActiveCfg = Release|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.ReleaseDSProjection|Any CPU.Build.0 = Release|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.ReleaseDSProjection|x86.ActiveCfg = Release|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.SingleImage|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
