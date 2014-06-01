@@ -17,7 +17,7 @@ namespace FTAnalyzer
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, SUBREGION = 2, ADDRESS = 3, PLACE = 4;
-        public enum Geocode { UNKNOWN = -1, NOT_SEARCHED = 0, MATCHED = 1, PARTIAL_MATCH = 2, GEDCOM_USER = 3, NO_MATCH = 4, INCORRECT = 5, OUT_OF_BOUNDS = 6, LEVEL_MISMATCH = 7 };
+        public enum Geocode { UNKNOWN = -1, NOT_SEARCHED = 0, MATCHED = 1, PARTIAL_MATCH = 2, GEDCOM_USER = 3, NO_MATCH = 4, INCORRECT = 5, OUT_OF_BOUNDS = 6, LEVEL_MISMATCH = 7, OS_50MATCH = 8 };
 
         private string fixedLocation;
         public string GEDCOMLocation { get; private set; }
@@ -54,7 +54,6 @@ namespace FTAnalyzer
 
         private static Dictionary<string, string> COUNTRY_TYPOS = new Dictionary<string, string>();
         private static Dictionary<string, string> REGION_TYPOS = new Dictionary<string, string>();
-        public static Dictionary<string, Tuple<string, string>> CHAPMAN_CODES = new Dictionary<string, Tuple<string, string>>();
         public static Dictionary<string, string> COUNTRY_SHIFTS = new Dictionary<string, string>();
         private static Dictionary<string, string> REGION_SHIFTS = new Dictionary<string, string>();
         private static Dictionary<string, string> FREECEN_LOOKUP = new Dictionary<string, string>();
@@ -103,18 +102,12 @@ namespace FTAnalyzer
                 }
                 foreach (XmlNode n in xmlDoc.SelectNodes("Data/Fixes/ChapmanCodes/ChapmanCode"))
                 {  // add Chapman code to Region Typos to convert locations with codes to region text strings
-                    string historicCode = n.Attributes["historicCode"].Value;
+                    string chapmanCode = n.Attributes["historicCode"].Value;
                     string countyName = n.Attributes["countyName"].Value;
-                    string modernCode = n.Attributes["modernCode"].Value;
-                    if (REGION_TYPOS.ContainsKey(historicCode))
-                        Console.WriteLine("Error duplicate region typos adding ChapmanCode :" + historicCode);
-                    if (historicCode != null && historicCode.Length > 0 && countyName != null && countyName.Length > 0)
-                        REGION_TYPOS.Add(historicCode, countyName);
-                    // then load the codes into the ChapmanCodes dictionary for converting old to new Counties
-                    if (CHAPMAN_CODES.ContainsKey(historicCode))
-                        Console.WriteLine("Error duplicate ChapmanCode :" + historicCode);
-                    if (historicCode != null && historicCode.Length > 0 && countyName != null && countyName.Length > 0)
-                        CHAPMAN_CODES.Add(historicCode, new Tuple<string,string>(countyName, modernCode));
+                    if (REGION_TYPOS.ContainsKey(chapmanCode))
+                        Console.WriteLine("Error duplicate region typos adding ChapmanCode :" + chapmanCode);
+                    if (chapmanCode != null && chapmanCode.Length > 0 && countyName != null && countyName.Length > 0)
+                        REGION_TYPOS.Add(chapmanCode, countyName);
                 }
                 foreach (XmlNode n in xmlDoc.SelectNodes("Data/Fixes/DemoteCountries/CountryToRegion"))
                 {

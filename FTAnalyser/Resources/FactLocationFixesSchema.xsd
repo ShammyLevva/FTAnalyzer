@@ -86,9 +86,8 @@
   </xs:complexType>
 
   <xs:complexType name="chapman">
-    <xs:attribute name="historicCode" type="xs:string"/>
+    <xs:attribute name="chapmanCode" type="xs:string"/>
     <xs:attribute name="countyName" type="xs:string"/>
-    <xs:attribute name="modernCode" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="countryMove">

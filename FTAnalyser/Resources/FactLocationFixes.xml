@@ -529,153 +529,153 @@
     </RegionTypos>
     <ChapmanCodes>
       <!-- Chapman County Codes -->
-      <ChapmanCode historicCode="ALD" countyName="Alderney" modernCode="" />
-      <ChapmanCode historicCode="GSY" countyName="Guernsey" modernCode="" />
-      <ChapmanCode historicCode="JSY" countyName="Jersey"   modernCode="" />
-      <ChapmanCode historicCode="SRK" countyName="Sark"     modernCode="" />
+      <ChapmanCode chapmanCode="ALD" countyName="Alderney" />
+      <ChapmanCode chapmanCode="GSY" countyName="Guernsey" />
+      <ChapmanCode chapmanCode="JSY" countyName="Jersey"   />
+      <ChapmanCode chapmanCode="SRK" countyName="Sark"     />
 
-      <ChapmanCode historicCode="BDF" countyName="Bedfordshire"     modernCode="" />
-      <ChapmanCode historicCode="BRK" countyName="Berkshire"        modernCode="" />
-      <ChapmanCode historicCode="BKM" countyName="Buckinghamshire"  modernCode="" />
-      <ChapmanCode historicCode="CAM" countyName="Cambridgeshire"   modernCode="" />
-      <ChapmanCode historicCode="CHS" countyName="Cheshire"         modernCode="" />
-      <ChapmanCode historicCode="CON" countyName="Cornwall"         modernCode="" />
-      <ChapmanCode historicCode="CUL" countyName="Cumberland"       modernCode="" />
-      <ChapmanCode historicCode="DBY" countyName="Derbyshire"       modernCode="" />
-      <ChapmanCode historicCode="DEV" countyName="Devonshire"       modernCode="" />
-      <ChapmanCode historicCode="DOR" countyName="Dorset"           modernCode="" />
-      <ChapmanCode historicCode="DUR" countyName="Durham"           modernCode="" />
-      <ChapmanCode historicCode="ESS" countyName="Essex"            modernCode="" />
-      <ChapmanCode historicCode="GLS" countyName="Gloucestershire"  modernCode="" />
-      <ChapmanCode historicCode="HAM" countyName="Hampshire"        modernCode="" />
-      <ChapmanCode historicCode="HEF" countyName="Herefordshire"    modernCode="" />
-      <ChapmanCode historicCode="HRT" countyName="Hertfordshire"    modernCode="" />
-      <ChapmanCode historicCode="HUN" countyName="Huntingdonshire"  modernCode="" />
-      <ChapmanCode historicCode="IOW" countyName="Isle of Wight"    modernCode="" />
-      <ChapmanCode historicCode="KEN" countyName="Kent"             modernCode="" />
-      <ChapmanCode historicCode="LAN" countyName="Lancashire"       modernCode="" />
-      <ChapmanCode historicCode="LEI" countyName="Leicestershire"   modernCode="" />
-      <ChapmanCode historicCode="LIN" countyName="Lincolnshire"     modernCode="" />
-      <ChapmanCode historicCode="LND" countyName="London"           modernCode="" />
-      <ChapmanCode historicCode="MDX" countyName="Middlesex"        modernCode="" />
-      <ChapmanCode historicCode="NFK" countyName="Norfolk"          modernCode="" />
-      <ChapmanCode historicCode="NTH" countyName="Northamptonshire" modernCode="" />
-      <ChapmanCode historicCode="NBL" countyName="Northumberland"   modernCode="" />
-      <ChapmanCode historicCode="NTT" countyName="Nottinghamshire"  modernCode="" />
-      <ChapmanCode historicCode="OXF" countyName="Oxfordshire"      modernCode="" />
-      <ChapmanCode historicCode="RUT" countyName="Rutland"          modernCode="" />
-      <ChapmanCode historicCode="SAL" countyName="Shropshire"       modernCode="" />
-      <ChapmanCode historicCode="SOM" countyName="Somerset"         modernCode="" />
-      <ChapmanCode historicCode="STS" countyName="Staffordshire"    modernCode="" />
-      <ChapmanCode historicCode="SFK" countyName="Suffolk"          modernCode="" />
-      <ChapmanCode historicCode="SRY" countyName="Surrey"           modernCode="" />
-      <ChapmanCode historicCode="SSX" countyName="Sussex"           modernCode="" />
-      <ChapmanCode historicCode="WAR" countyName="Warwickshire"     modernCode="" />
-      <ChapmanCode historicCode="WES" countyName="Westmorland"      modernCode="" />
-      <ChapmanCode historicCode="WIL" countyName="Wiltshire"        modernCode="" />
-      <ChapmanCode historicCode="WOR" countyName="Worcestershire"   modernCode="" />
-      <ChapmanCode historicCode="YKS" countyName="Yorkshire"        modernCode="" />
-      <ChapmanCode historicCode="ERY" countyName="East Yorkshire"   modernCode="" />
-      <ChapmanCode historicCode="NRY" countyName="North Yorkshire"  modernCode="" />
-      <ChapmanCode historicCode="WRY" countyName="West Yorkshire"   modernCode="" />
+      <ChapmanCode chapmanCode="BDF" countyName="Bedfordshire"     />
+      <ChapmanCode chapmanCode="BRK" countyName="Berkshire"        />
+      <ChapmanCode chapmanCode="BKM" countyName="Buckinghamshire"  />
+      <ChapmanCode chapmanCode="CAM" countyName="Cambridgeshire"   />
+      <ChapmanCode chapmanCode="CHS" countyName="Cheshire"         />
+      <ChapmanCode chapmanCode="CON" countyName="Cornwall"         />
+      <ChapmanCode chapmanCode="CUL" countyName="Cumberland"       />
+      <ChapmanCode chapmanCode="DBY" countyName="Derbyshire"       />
+      <ChapmanCode chapmanCode="DEV" countyName="Devonshire"       />
+      <ChapmanCode chapmanCode="DOR" countyName="Dorset"           />
+      <ChapmanCode chapmanCode="DUR" countyName="Durham"           />
+      <ChapmanCode chapmanCode="ESS" countyName="Essex"            />
+      <ChapmanCode chapmanCode="GLS" countyName="Gloucestershire"  />
+      <ChapmanCode chapmanCode="HAM" countyName="Hampshire"        />
+      <ChapmanCode chapmanCode="HEF" countyName="Herefordshire"    />
+      <ChapmanCode chapmanCode="HRT" countyName="Hertfordshire"    />
+      <ChapmanCode chapmanCode="HUN" countyName="Huntingdonshire"  />
+      <ChapmanCode chapmanCode="IOW" countyName="Isle of Wight"    />
+      <ChapmanCode chapmanCode="KEN" countyName="Kent"             />
+      <ChapmanCode chapmanCode="LAN" countyName="Lancashire"       />
+      <ChapmanCode chapmanCode="LEI" countyName="Leicestershire"   />
+      <ChapmanCode chapmanCode="LIN" countyName="Lincolnshire"     />
+      <ChapmanCode chapmanCode="LND" countyName="London"           />
+      <ChapmanCode chapmanCode="MDX" countyName="Middlesex"        />
+      <ChapmanCode chapmanCode="NFK" countyName="Norfolk"          />
+      <ChapmanCode chapmanCode="NTH" countyName="Northamptonshire" />
+      <ChapmanCode chapmanCode="NBL" countyName="Northumberland"   />
+      <ChapmanCode chapmanCode="NTT" countyName="Nottinghamshire"  />
+      <ChapmanCode chapmanCode="OXF" countyName="Oxfordshire"      />
+      <ChapmanCode chapmanCode="RUT" countyName="Rutland"          />
+      <ChapmanCode chapmanCode="SAL" countyName="Shropshire"       />
+      <ChapmanCode chapmanCode="SOM" countyName="Somerset"         />
+      <ChapmanCode chapmanCode="STS" countyName="Staffordshire"    />
+      <ChapmanCode chapmanCode="SFK" countyName="Suffolk"          />
+      <ChapmanCode chapmanCode="SRY" countyName="Surrey"           />
+      <ChapmanCode chapmanCode="SSX" countyName="Sussex"           />
+      <ChapmanCode chapmanCode="WAR" countyName="Warwickshire"     />
+      <ChapmanCode chapmanCode="WES" countyName="Westmorland"      />
+      <ChapmanCode chapmanCode="WIL" countyName="Wiltshire"        />
+      <ChapmanCode chapmanCode="WOR" countyName="Worcestershire"   />
+      <ChapmanCode chapmanCode="YKS" countyName="Yorkshire"        />
+      <ChapmanCode chapmanCode="ERY" countyName="East Yorkshire"   />
+      <ChapmanCode chapmanCode="NRY" countyName="North Yorkshire"  />
+      <ChapmanCode chapmanCode="WRY" countyName="West Yorkshire"   />
 
-      <ChapmanCode historicCode="ABD" countyName="Aberdeenshire"         modernCode="" />
-      <ChapmanCode historicCode="ANS" countyName="Angus"                 modernCode="" />
-      <ChapmanCode historicCode="ARL" countyName="Argyll"                modernCode="" />
-      <ChapmanCode historicCode="AYR" countyName="Ayrshire"              modernCode="" />
-      <ChapmanCode historicCode="BAN" countyName="Banffshire"            modernCode="" />
-      <ChapmanCode historicCode="BEW" countyName="Berwickshire"          modernCode="" />
-      <ChapmanCode historicCode="BUT" countyName="Bute"                  modernCode="" />
-      <ChapmanCode historicCode="CAI" countyName="Caithness"             modernCode="" />
-      <ChapmanCode historicCode="CLK" countyName="Clackmannanshire"      modernCode="" />
-      <ChapmanCode historicCode="DFS" countyName="Dumfriesshire"         modernCode="" />
-      <ChapmanCode historicCode="DNB" countyName="Dunbartonshire"        modernCode="" />
-      <ChapmanCode historicCode="ELN" countyName="East Lothian"          modernCode="" />
-      <ChapmanCode historicCode="FIF" countyName="Fife"                  modernCode="" />
-      <ChapmanCode historicCode="INV" countyName="Inverness-shire"       modernCode="" />
-      <ChapmanCode historicCode="KCD" countyName="Kincardineshire"       modernCode="" />
-      <ChapmanCode historicCode="KRS" countyName="Kinross-shire"         modernCode="" />
-      <ChapmanCode historicCode="KKD" countyName="Kirkcudbrightshire"    modernCode="" />
-      <ChapmanCode historicCode="LKS" countyName="Lanarkshire"           modernCode="" />
-      <ChapmanCode historicCode="MLN" countyName="Midlothian"            modernCode="" />
-      <ChapmanCode historicCode="MOR" countyName="Moray"                 modernCode="" />
-      <ChapmanCode historicCode="NAI" countyName="Nairnshire"            modernCode="" />
-      <ChapmanCode historicCode="OKI" countyName="Orkney"                modernCode="" />
-      <ChapmanCode historicCode="PEE" countyName="Peeblesshire"          modernCode="" />
-      <ChapmanCode historicCode="PER" countyName="Perthshire"            modernCode="" />
-      <ChapmanCode historicCode="RFW" countyName="Renfrewshire"          modernCode="" />
-      <ChapmanCode historicCode="ROC" countyName="Ross and Cromarty"     modernCode="" />
-      <ChapmanCode historicCode="ROX" countyName="Roxburghshire"         modernCode="" />
-      <ChapmanCode historicCode="SEL" countyName="Selkirkshire"          modernCode="" />
-      <ChapmanCode historicCode="SHI" countyName="Shetland"              modernCode="" />
-      <ChapmanCode historicCode="STI" countyName="Stirlingshire"         modernCode="" />
-      <ChapmanCode historicCode="SUT" countyName="Sutherland"            modernCode="" />
-      <ChapmanCode historicCode="WLN" countyName="West Lothian"          modernCode="" />
-      <ChapmanCode historicCode="WIG" countyName="Wigtownshire"          modernCode="" />
-      <ChapmanCode historicCode="BOR" countyName="Borders"               modernCode="" />
-      <ChapmanCode historicCode="CEN" countyName="Central"               modernCode="" />
-      <ChapmanCode historicCode="DGY" countyName="Dumfries and Galloway" modernCode="" />
-      <ChapmanCode historicCode="GMP" countyName="Grampian"              modernCode="" />
-      <ChapmanCode historicCode="HLD" countyName="Highland"              modernCode="" />
-      <ChapmanCode historicCode="LTN" countyName="Lothian"               modernCode="" />
-      <ChapmanCode historicCode="STD" countyName="Strathclyde"           modernCode="" />
-      <ChapmanCode historicCode="TAY" countyName="Tayside"               modernCode="" />
-      <ChapmanCode historicCode="WIS" countyName="Western Isles"         modernCode="" />
+      <ChapmanCode chapmanCode="ABD" countyName="Aberdeenshire"         />
+      <ChapmanCode chapmanCode="ANS" countyName="Angus"                 />
+      <ChapmanCode chapmanCode="ARL" countyName="Argyll"                />
+      <ChapmanCode chapmanCode="AYR" countyName="Ayrshire"              />
+      <ChapmanCode chapmanCode="BAN" countyName="Banffshire"            />
+      <ChapmanCode chapmanCode="BEW" countyName="Berwickshire"          />
+      <ChapmanCode chapmanCode="BUT" countyName="Bute"                  />
+      <ChapmanCode chapmanCode="CAI" countyName="Caithness"             />
+      <ChapmanCode chapmanCode="CLK" countyName="Clackmannanshire"      />
+      <ChapmanCode chapmanCode="DFS" countyName="Dumfriesshire"         />
+      <ChapmanCode chapmanCode="DNB" countyName="Dunbartonshire"        />
+      <ChapmanCode chapmanCode="ELN" countyName="East Lothian"          />
+      <ChapmanCode chapmanCode="FIF" countyName="Fife"                  />
+      <ChapmanCode chapmanCode="INV" countyName="Inverness-shire"       />
+      <ChapmanCode chapmanCode="KCD" countyName="Kincardineshire"       />
+      <ChapmanCode chapmanCode="KRS" countyName="Kinross-shire"         />
+      <ChapmanCode chapmanCode="KKD" countyName="Kirkcudbrightshire"    />
+      <ChapmanCode chapmanCode="LKS" countyName="Lanarkshire"           />
+      <ChapmanCode chapmanCode="MLN" countyName="Midlothian"            />
+      <ChapmanCode chapmanCode="MOR" countyName="Moray"                 />
+      <ChapmanCode chapmanCode="NAI" countyName="Nairnshire"            />
+      <ChapmanCode chapmanCode="OKI" countyName="Orkney"                />
+      <ChapmanCode chapmanCode="PEE" countyName="Peeblesshire"          />
+      <ChapmanCode chapmanCode="PER" countyName="Perthshire"            />
+      <ChapmanCode chapmanCode="RFW" countyName="Renfrewshire"          />
+      <ChapmanCode chapmanCode="ROC" countyName="Ross and Cromarty"     />
+      <ChapmanCode chapmanCode="ROX" countyName="Roxburghshire"         />
+      <ChapmanCode chapmanCode="SEL" countyName="Selkirkshire"          />
+      <ChapmanCode chapmanCode="SHI" countyName="Shetland"              />
+      <ChapmanCode chapmanCode="STI" countyName="Stirlingshire"         />
+      <ChapmanCode chapmanCode="SUT" countyName="Sutherland"            />
+      <ChapmanCode chapmanCode="WLN" countyName="West Lothian"          />
+      <ChapmanCode chapmanCode="WIG" countyName="Wigtownshire"          />
+      <ChapmanCode chapmanCode="BOR" countyName="Borders"               />
+      <ChapmanCode chapmanCode="CEN" countyName="Central"               />
+      <ChapmanCode chapmanCode="DGY" countyName="Dumfries and Galloway" />
+      <ChapmanCode chapmanCode="GMP" countyName="Grampian"              />
+      <ChapmanCode chapmanCode="HLD" countyName="Highland"              />
+      <ChapmanCode chapmanCode="LTN" countyName="Lothian"               />
+      <ChapmanCode chapmanCode="STD" countyName="Strathclyde"           />
+      <ChapmanCode chapmanCode="TAY" countyName="Tayside"               />
+      <ChapmanCode chapmanCode="WIS" countyName="Western Isles"         />
 
-      <ChapmanCode historicCode="AGY" countyName="Anglesey"         modernCode="" />
-      <ChapmanCode historicCode="BRE" countyName="Brecknockshire"   modernCode="" />
-      <ChapmanCode historicCode="CAE" countyName="Caernarfonshire"  modernCode="" />
-      <ChapmanCode historicCode="CGN" countyName="Cardiganshire"    modernCode="" />
-      <ChapmanCode historicCode="CMN" countyName="Carmarthenshire"  modernCode="" />
-      <ChapmanCode historicCode="DEN" countyName="Denbighshire"     modernCode="" />
-      <ChapmanCode historicCode="FLN" countyName="Flintshire"       modernCode="" />
-      <ChapmanCode historicCode="GLA" countyName="Glamorgan"        modernCode="" />
-      <ChapmanCode historicCode="MER" countyName="Merionethshire"   modernCode="" />
-      <ChapmanCode historicCode="MON" countyName="Monmouthshire"    modernCode="" />
-      <ChapmanCode historicCode="MGY" countyName="Montgomeryshire"  modernCode="" />
-      <ChapmanCode historicCode="PEM" countyName="Pembrokeshire"    modernCode="" />
-      <ChapmanCode historicCode="RAD" countyName="Radnorshire"      modernCode="" />
-      <ChapmanCode historicCode="CWD" countyName="Clwyd"            modernCode="" />
-      <ChapmanCode historicCode="DFD" countyName="Dyfed"            modernCode="" />
-      <ChapmanCode historicCode="GNT" countyName="Gwent"            modernCode="" />
-      <ChapmanCode historicCode="GWN" countyName="Gwynedd"          modernCode="" />
-      <ChapmanCode historicCode="MGM" countyName="Mid Glamorgan"    modernCode="" />
-      <ChapmanCode historicCode="POW" countyName="Powys"            modernCode="" />
-      <ChapmanCode historicCode="SGM" countyName="South Glamorgan"  modernCode="" />
-      <ChapmanCode historicCode="WGM" countyName="West Glamorgan"   modernCode="" />
+      <ChapmanCode chapmanCode="AGY" countyName="Anglesey"         />
+      <ChapmanCode chapmanCode="BRE" countyName="Brecknockshire"   />
+      <ChapmanCode chapmanCode="CAE" countyName="Caernarfonshire"  />
+      <ChapmanCode chapmanCode="CGN" countyName="Cardiganshire"    />
+      <ChapmanCode chapmanCode="CMN" countyName="Carmarthenshire"  />
+      <ChapmanCode chapmanCode="DEN" countyName="Denbighshire"     />
+      <ChapmanCode chapmanCode="FLN" countyName="Flintshire"       />
+      <ChapmanCode chapmanCode="GLA" countyName="Glamorgan"        />
+      <ChapmanCode chapmanCode="MER" countyName="Merionethshire"   />
+      <ChapmanCode chapmanCode="MON" countyName="Monmouthshire"    />
+      <ChapmanCode chapmanCode="MGY" countyName="Montgomeryshire"  />
+      <ChapmanCode chapmanCode="PEM" countyName="Pembrokeshire"    />
+      <ChapmanCode chapmanCode="RAD" countyName="Radnorshire"      />
+      <ChapmanCode chapmanCode="CWD" countyName="Clwyd"            />
+      <ChapmanCode chapmanCode="DFD" countyName="Dyfed"            />
+      <ChapmanCode chapmanCode="GNT" countyName="Gwent"            />
+      <ChapmanCode chapmanCode="GWN" countyName="Gwynedd"          />
+      <ChapmanCode chapmanCode="MGM" countyName="Mid Glamorgan"    />
+      <ChapmanCode chapmanCode="POW" countyName="Powys"            />
+      <ChapmanCode chapmanCode="SGM" countyName="South Glamorgan"  />
+      <ChapmanCode chapmanCode="WGM" countyName="West Glamorgan"   />
 
-      <ChapmanCode historicCode="ANT" countyName="Antrim"       modernCode="" />
-      <ChapmanCode historicCode="ARM" countyName="Armagh"       modernCode="" />
-      <ChapmanCode historicCode="CAR" countyName="Carlow"       modernCode="" />
-      <ChapmanCode historicCode="CAV" countyName="Cavan"        modernCode="" />
-      <ChapmanCode historicCode="CLA" countyName="Clare"        modernCode="" />
-      <ChapmanCode historicCode="COR" countyName="Cork"         modernCode="" />
-      <ChapmanCode historicCode="DON" countyName="Donegal"      modernCode="" />
-      <ChapmanCode historicCode="DOW" countyName="Down"         modernCode="" />
-      <ChapmanCode historicCode="DUB" countyName="Dublin"       modernCode="" />
-      <ChapmanCode historicCode="FER" countyName="Fermanagh"    modernCode="" />
-      <ChapmanCode historicCode="GAL" countyName="Galway"       modernCode="" />
-      <ChapmanCode historicCode="KER" countyName="Kerry"        modernCode="" />
-      <ChapmanCode historicCode="KID" countyName="Kildare"      modernCode="" />
-      <ChapmanCode historicCode="KIK" countyName="Kilkenny"     modernCode="" />
-      <ChapmanCode historicCode="LET" countyName="Leitrim"      modernCode="" />
-      <ChapmanCode historicCode="LEX" countyName="Leix"         modernCode="" />
-      <ChapmanCode historicCode="LIM" countyName="Limerick"     modernCode="" />
-      <ChapmanCode historicCode="LDY" countyName="Londonderry"  modernCode="" />
-      <ChapmanCode historicCode="LOG" countyName="Longford"     modernCode="" />
-      <ChapmanCode historicCode="LOU" countyName="Louth"        modernCode="" />
-      <ChapmanCode historicCode="MAY" countyName="Mayo"         modernCode="" />
-      <ChapmanCode historicCode="MEA" countyName="Meath"        modernCode="" />
-      <ChapmanCode historicCode="MOG" countyName="Monaghan"     modernCode="" />
-      <ChapmanCode historicCode="OFF" countyName="Offaly"       modernCode="" />
-      <ChapmanCode historicCode="ROS" countyName="Roscommon"    modernCode="" />
-      <ChapmanCode historicCode="SLI" countyName="Sligo"        modernCode="" />
-      <ChapmanCode historicCode="TIP" countyName="Tipperary"    modernCode="" />
-      <ChapmanCode historicCode="TYR" countyName="Tyrone"       modernCode="" />
-      <ChapmanCode historicCode="WAT" countyName="Waterford"    modernCode="" />
-      <ChapmanCode historicCode="WEM" countyName="Westmeath"    modernCode="" />
-      <ChapmanCode historicCode="WEX" countyName="Wexford"      modernCode="" />
-      <ChapmanCode historicCode="WIC" countyName="Wicklow"      modernCode="" />
+      <ChapmanCode chapmanCode="ANT" countyName="Antrim"       />
+      <ChapmanCode chapmanCode="ARM" countyName="Armagh"       />
+      <ChapmanCode chapmanCode="CAR" countyName="Carlow"       />
+      <ChapmanCode chapmanCode="CAV" countyName="Cavan"        />
+      <ChapmanCode chapmanCode="CLA" countyName="Clare"        />
+      <ChapmanCode chapmanCode="COR" countyName="Cork"         />
+      <ChapmanCode chapmanCode="DON" countyName="Donegal"      />
+      <ChapmanCode chapmanCode="DOW" countyName="Down"         />
+      <ChapmanCode chapmanCode="DUB" countyName="Dublin"       />
+      <ChapmanCode chapmanCode="FER" countyName="Fermanagh"    />
+      <ChapmanCode chapmanCode="GAL" countyName="Galway"       />
+      <ChapmanCode chapmanCode="KER" countyName="Kerry"        />
+      <ChapmanCode chapmanCode="KID" countyName="Kildare"      />
+      <ChapmanCode chapmanCode="KIK" countyName="Kilkenny"     />
+      <ChapmanCode chapmanCode="LET" countyName="Leitrim"      />
+      <ChapmanCode chapmanCode="LEX" countyName="Leix"         />
+      <ChapmanCode chapmanCode="LIM" countyName="Limerick"     />
+      <ChapmanCode chapmanCode="LDY" countyName="Londonderry"  />
+      <ChapmanCode chapmanCode="LOG" countyName="Longford"     />
+      <ChapmanCode chapmanCode="LOU" countyName="Louth"        />
+      <ChapmanCode chapmanCode="MAY" countyName="Mayo"         />
+      <ChapmanCode chapmanCode="MEA" countyName="Meath"        />
+      <ChapmanCode chapmanCode="MOG" countyName="Monaghan"     />
+      <ChapmanCode chapmanCode="OFF" countyName="Offaly"       />
+      <ChapmanCode chapmanCode="ROS" countyName="Roscommon"    />
+      <ChapmanCode chapmanCode="SLI" countyName="Sligo"        />
+      <ChapmanCode chapmanCode="TIP" countyName="Tipperary"    />
+      <ChapmanCode chapmanCode="TYR" countyName="Tyrone"       />
+      <ChapmanCode chapmanCode="WAT" countyName="Waterford"    />
+      <ChapmanCode chapmanCode="WEM" countyName="Westmeath"    />
+      <ChapmanCode chapmanCode="WEX" countyName="Wexford"      />
+      <ChapmanCode chapmanCode="WIC" countyName="Wicklow"      />
     </ChapmanCodes>
     <DemoteCountries>
       <!-- Scottish Counties add the Country -->
