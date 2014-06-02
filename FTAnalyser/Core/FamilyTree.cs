@@ -323,7 +323,7 @@ namespace FTAnalyzer
                     startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
                 else
                     startPath = Application.StartupPath;
-                string filename = Path.Combine(startPath, @"Resources\50kgaz2014.txt");
+                string filename = Path.Combine(startPath, @"Resources\OS50kGazetteer.txt");
                 if (File.Exists(filename))
                     ReadOS50kGazetteer(filename);
             }
