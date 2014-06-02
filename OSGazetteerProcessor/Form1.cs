@@ -37,7 +37,7 @@ namespace OSGazetteerProcessor
                     startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
                 else
                     startPath = Application.StartupPath;
-                string filename = @"c:\Maps\FTAnalyzer\50kgaz2014-input.txt";
+                string filename = @"C:\Maps\FTAnalyzer\50kgaz2014-input.txt";
                 if (File.Exists(filename))
                     ReadOS50kGazetteer(filename);
             }
