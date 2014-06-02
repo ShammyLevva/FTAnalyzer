@@ -65,6 +65,7 @@ namespace FTAnalyzer.Forms
             int gedcom = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER));
             int found = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.MATCHED));
             int osmatch = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OS_50KMATCH));
+            int ospartial = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OS_50KPARTIAL));
             int partial = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH));
             int levelpartial = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.LEVEL_MISMATCH));
             int notsearched = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED));
@@ -74,7 +75,9 @@ namespace FTAnalyzer.Forms
             int total = FactLocation.LocationsCount;
 
             txtGoogleWait.Text = string.Empty;
-            statusText = "Already Geocoded: " + (gedcom + found + osmatch) + ", partials: " + (partial + levelpartial + notfound + incorrect + outofbounds) + ", yet to search: " + notsearched + " of " + total + " locations.";
+            statusText = "Already Geocoded: " + (gedcom + found + osmatch) + 
+                ", partials: " + (partial + levelpartial + ospartial + notfound + incorrect + outofbounds) 
+                + ", yet to search: " + notsearched + " of " + total + " locations.";
             txtLocations.Text = statusText;
         }
 
@@ -976,7 +979,7 @@ namespace FTAnalyzer.Forms
                 mnuReverseGeocode.Enabled = false;
                 mnuOSGeocodeLocations.Enabled = false;
                 ft.Geocoding = true;
-                txtLocations.Text += " Initialising OS Geocoding.";
+                txtLocations.Text += ".  Initialising OS Geocoding.";
                 OSGeocodeBackgroundWorker.RunWorkerAsync();
                 this.Cursor = Cursors.Default;
             }
@@ -1034,7 +1037,7 @@ namespace FTAnalyzer.Forms
                     matched++;
                 count++;
                 int percent = (int)Math.Truncate((count - 1) * 100.0 / total);
-                string status = "OS matched: " + matched + ". Done " + count + " of " + total + ".  ";
+                string status = "Ordnance Survey geocoding, matched: " + matched + ". Checked " + count + " of " + total + ".  ";
                 worker.ReportProgress(percent, status);
                 if (worker.CancellationPending)
                 {
@@ -1098,7 +1101,10 @@ namespace FTAnalyzer.Forms
             location.ViewPort.SouthWest.Long = env.Left();
             location.PixelSize = (double)expandBy / 40.0;
             location.GoogleLocation = string.Empty;
-            location.GeocodeStatus = FactLocation.Geocode.OS_50KMATCH;
+            if (level == location.Level)
+                location.GeocodeStatus = FactLocation.Geocode.OS_50KMATCH;
+            else
+                location.GeocodeStatus = FactLocation.Geocode.OS_50KPARTIAL;
             location.FoundLevel = level;
             UpdateDatabase(location, true);
         }

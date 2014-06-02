@@ -18,7 +18,7 @@ namespace FTAnalyzer
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, SUBREGION = 2, ADDRESS = 3, PLACE = 4;
         public enum Geocode { UNKNOWN = -1, NOT_SEARCHED = 0, MATCHED = 1, PARTIAL_MATCH = 2, GEDCOM_USER = 3, NO_MATCH = 4, 
-            INCORRECT = 5, OUT_OF_BOUNDS = 6, LEVEL_MISMATCH = 7, OS_50KMATCH = 8 };
+            INCORRECT = 5, OUT_OF_BOUNDS = 6, LEVEL_MISMATCH = 7, OS_50KMATCH = 8, OS_50KPARTIAL = 9 };
 
         private string fixedLocation;
         public string GEDCOMLocation { get; private set; }
@@ -237,6 +237,7 @@ namespace FTAnalyzer
             Geocodes.Add(Geocode.OUT_OF_BOUNDS, "Outside Country Area");
             Geocodes.Add(Geocode.LEVEL_MISMATCH, "Partial Match (Levels)");
             Geocodes.Add(Geocode.OS_50KMATCH, "OS 50k Gazetteer Match");
+            Geocodes.Add(Geocode.OS_50KPARTIAL, "OS 50k Partial Match");
         }
 
         public static FactLocation GetLocation(string place)

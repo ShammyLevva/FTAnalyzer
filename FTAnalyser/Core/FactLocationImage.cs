@@ -31,6 +31,8 @@ namespace FTAnalyzer
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Warning.png")));
         private static FactLocationImage IMG_OS50k_MATCH = new FactLocationImage(FactLocation.Geocode.OS_50KMATCH,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\OS50kMatch.png")));
+        private static FactLocationImage IMG_OS50k_PARTIAL = new FactLocationImage(FactLocation.Geocode.OS_50KPARTIAL,
+            Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\OS50kPartial.png")));
 
         public FactLocationImage(FactLocation.Geocode errorLevel, Image img)
         {
@@ -60,6 +62,8 @@ namespace FTAnalyzer
                     return IMG_LEVEL_MISMATCH;
                 case FactLocation.Geocode.OS_50KMATCH:
                     return IMG_OS50k_MATCH;
+                case FactLocation.Geocode.OS_50KPARTIAL:
+                    return IMG_OS50k_PARTIAL;
             }
             return IMG_NO_MATCH;
         }
