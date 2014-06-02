@@ -14,6 +14,7 @@ namespace FTAnalyzer.Mapping
         public string FeatureCode { get; private set; }
         public string CountyCode { get; private set; }
         public string CountyName { get; private set; }
+        public string ParishName { get; private set; }
 
         public OS50kGazetteer(string line)
         {
@@ -34,6 +35,7 @@ namespace FTAnalyzer.Mapping
             CountyCode = values[11];
             CountyName = values[13];
             FeatureCode = values[14];
+            ParishName = values[20];
         }
 
         public bool IsCountyMatch(FactLocation loc)
