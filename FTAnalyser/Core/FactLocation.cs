@@ -845,7 +845,7 @@ namespace FTAnalyzer
                 return false;
             if (!recheckPartials && Properties.MappingSettings.Default.IncludePartials && (GeocodeStatus == Geocode.PARTIAL_MATCH || GeocodeStatus == Geocode.LEVEL_MISMATCH))
                 return true;
-            return GeocodeStatus == Geocode.MATCHED || GeocodeStatus == Geocode.GEDCOM_USER;
+            return GeocodeStatus == Geocode.MATCHED || GeocodeStatus == Geocode.GEDCOM_USER || GeocodeStatus == Geocode.OS_50KMATCH;
         }
 
         private string FixNumerics(string addressField, bool returnNumber)
