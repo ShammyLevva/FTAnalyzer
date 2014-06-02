@@ -102,9 +102,8 @@ namespace OSGazetteerProcessor
             int featureNum = 0;
             int originalToSearch = 0;
             int lastSaved = int.MaxValue;
-            IEnumerable<Feature> searchFeatures = features.Where(x => x.Attributes["TYPE_CODE"].ToString() != "FA");
-            int featuresCount = searchFeatures.Count();
-            foreach (Feature f in searchFeatures)
+            int featuresCount = features.Count();
+            foreach (Feature f in features)
             {
                 featureNum++;
                 if (f.Attributes[fieldname] == null || f.Attributes[fieldname].ToString().Length == 0)
@@ -124,7 +123,7 @@ namespace OSGazetteerProcessor
                 });
                 int left = toSearch.Count() - count;
                 textBox1.AppendText("Set " + count + " entries for parish: " + f.Attributes[fieldname] + " number " + featureNum + " / " + featuresCount + " leaving " + left + " of " + originalToSearch + " to search\n");
-                if (lastSaved - 500 > left)
+                if (lastSaved - 2000 > left)
                 {
                     lastSaved = left;
                     SaveOS50kGazetteer();
@@ -141,9 +140,11 @@ namespace OSGazetteerProcessor
         private void generateOutputFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadOS50kGazetteer();
-            englishParishes = LoadParishBoundaries(@"C:\Maps\FTAnalyzer\parish_region.shp");
             scottishParishes = LoadParishBoundaries(@"C:\Maps\FTAnalyzer\CivilParish1930.shp");
             AddParishNames(scottishParishes, "name");
+            englishParishes = LoadParishBoundaries(@"C:\Maps\FTAnalyzer\parish_region.shp");
+            // strip parishes of blank filler area (FA) codes
+            englishParishes = englishParishes.Where(x => x.Attributes["TYPE_CODE"].ToString() != "FA").ToList<Feature>();
             AddParishNames(englishParishes, "NAME");
             SaveOS50kGazetteer();
             MessageBox.Show("Finished");
