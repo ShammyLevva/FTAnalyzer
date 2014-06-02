@@ -26,6 +26,10 @@ namespace OSGazetteerProcessor
             Longitude = intval + longitude / 60;
             if (values[10] == "W")
                 Longitude = -1 * Longitude; // West Longitudes are negative
+            if(values.Length >= 21)
+                ParishName = values[20];
+            if (values.Length == 22)
+                Line = line.Substring(1, line.LastIndexOf(":"));
         }
 
         public override string ToString()

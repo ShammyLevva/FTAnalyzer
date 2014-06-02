@@ -13,6 +13,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace OSGazetteerProcessor
@@ -41,7 +42,7 @@ namespace OSGazetteerProcessor
                     startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
                 else
                     startPath = Application.StartupPath;
-                string filename = Path.Combine(startPath, @"Resources\50kgaz2014.txt");
+                string filename = @"c:\Maps\FTAnalyzer\50kgaz2014-input.txt";
                 if (File.Exists(filename))
                     ReadOS50kGazetteer(filename);
             }
@@ -65,11 +66,9 @@ namespace OSGazetteerProcessor
 
         public void SaveOS50kGazetteer()
         {
-            using (StreamWriter sw = new StreamWriter(@"Resources\50kgaz2014-output.txt")) {
+            using (StreamWriter sw = new StreamWriter(@"c:\Maps\FTAnalyzer\50kgaz2014-output.txt")) {
                 foreach (OS50kGazetteer os50k in OS50k)
-                {
                     sw.WriteLine(os50k.ToString());
-                }
             }
         }
 
@@ -105,11 +104,20 @@ namespace OSGazetteerProcessor
         private void AddParishNames(List<Feature> features, string fieldname)
         {
             int featureNum = 0;
-            foreach (Feature f in features)
+            int originalToSearch = 0;
+            int lastSaved = int.MaxValue;
+            IEnumerable<Feature> searchFeatures = features.Where(x => x.Attributes["TYPE_CODE"] != "FA");
+            int featuresCount = searchFeatures.Count();
+            foreach (Feature f in searchFeatures)
             {
+                if (f.Attributes[fieldname] == null || f.Attributes[fieldname].ToString().Length == 0)
+                    Console.WriteLine("Parish is null?? type_code:" + f.Attributes["TYPE_CODE"]); // f.Attributes["TYPE_CODE"] = "FA"
                 IPreparedGeometry geom = PreparedGeometryFactory.Prepare(f.Geometry);
                 int count = 0;
-                foreach (OS50kGazetteer os50k in OS50k.Where(x => x.ParishName == null))
+                IEnumerable<OS50kGazetteer> toSearch = OS50k.Where(x => x.ParishName == null || x.ParishName.Length == 0);
+                if (originalToSearch == 0)
+                    originalToSearch = toSearch.Count();
+                Parallel.ForEach(toSearch, os50k =>
                 {
                     Coordinate c = new Coordinate(os50k.Longitude, os50k.Latitude);
                     c = MapTransforms.TransformCoordinate(c);
@@ -119,9 +127,15 @@ namespace OSGazetteerProcessor
                         os50k.ParishName = (string)f.Attributes[fieldname];
                         count++;
                     }
-                }
+                });
                 featureNum++;
-                textBox1.AppendText("Set " + count + " entries for parish: " + f.Attributes[fieldname] + " number " + featureNum + " / " + features.Count + "\n");
+                int left = toSearch.Count() - count;
+                textBox1.AppendText("Set " + count + " entries for parish: " + f.Attributes[fieldname] + " number " + featureNum + " / " + featuresCount + " leaving " + left + " of " + originalToSearch + " to search\n");
+                if (lastSaved - 500 > left)
+                {
+                    lastSaved = left;
+                    SaveOS50kGazetteer();
+                }
                 Application.DoEvents();
             }
         }
@@ -135,8 +149,8 @@ namespace OSGazetteerProcessor
         {
             LoadOS50kGazetteer();
             englishParishes = LoadParishBoundaries(@"C:\Maps\FTAnalyzer\parish_region.shp");
-            scottishParishes = LoadParishBoundaries(@"C:\Maps\FTAnalyzer\CivilParish1930.shp");
-            AddParishNames(scottishParishes, "name");
+            //scottishParishes = LoadParishBoundaries(@"C:\Maps\FTAnalyzer\CivilParish1930.shp");
+            //AddParishNames(scottishParishes, "name");
             AddParishNames(englishParishes, "NAME");
             SaveOS50kGazetteer();
         }
