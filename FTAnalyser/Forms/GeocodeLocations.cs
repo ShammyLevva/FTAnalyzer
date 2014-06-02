@@ -172,7 +172,7 @@ namespace FTAnalyzer.Forms
             if (sortCol != null)
                 dgLocations.Sort(sortCol, sortOrder);
             dgLocations.Refresh();
-            txtLocations.Text = statusText + " Displaying: " + dgLocations.RowCount;
+            txtLocations.Text = statusText + " Displaying: " + dgLocations.RowCount + ". ";
             this.Cursor = Cursors.Default;
         }
 
@@ -559,7 +559,9 @@ namespace FTAnalyzer.Forms
                             GeoResponse res = null;
                             if (loc.GeocodeStatus == FactLocation.Geocode.NOT_SEARCHED ||
                                 (retryPartial &&
-                                    (loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH || loc.GeocodeStatus == FactLocation.Geocode.LEVEL_MISMATCH)))
+                                    (loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH || 
+                                     loc.GeocodeStatus == FactLocation.Geocode.LEVEL_MISMATCH ||
+                                     loc.GeocodeStatus == FactLocation.Geocode.OS_50KPARTIAL)))
                             {
                                 log.Info("Searching Google for '" + loc.GoogleFixed + "' original text was '" + loc.GEDCOMLocation + "'.");
                                 res = SearchGoogle(loc.GoogleFixed);
@@ -671,7 +673,7 @@ namespace FTAnalyzer.Forms
                 if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text.Substring(0, 3).Equals("Max"))
                     MessageBox.Show("Finished Geocoding.\n" + txtGoogleWait.Text + "\nPlease wait 24hrs before trying again as Google\nwill not allow further geocoding before then.", "Timeline Geocoding");
                 else
-                    MessageBox.Show("Finished Geocoding.", "Timeline Geocoding");
+                    MessageBox.Show("Finished Geocoding.", "Google Geocoding");
             }
             catch (Exception ex)
             {
@@ -857,7 +859,7 @@ namespace FTAnalyzer.Forms
                 if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text.Substring(0, 3).Equals("Max"))
                     MessageBox.Show("Finished Reverse Geocoding.\n" + txtGoogleWait.Text + "\nPlease wait 24hrs before trying again as Google\nwill not allow further reverse geocoding before then.", "Timeline Geocoding");
                 else
-                    MessageBox.Show("Finished Reverse Geocoding.", "Timeline Geocoding");
+                    MessageBox.Show("Finished Reverse Geocoding.", "Google Geocoding");
             }
             catch (Exception ex)
             {
@@ -979,7 +981,7 @@ namespace FTAnalyzer.Forms
                 mnuReverseGeocode.Enabled = false;
                 mnuOSGeocodeLocations.Enabled = false;
                 ft.Geocoding = true;
-                txtLocations.Text += ".  Initialising OS Geocoding.";
+                txtLocations.Text += " Initialising OS Geocoding.";
                 OSGeocodeBackgroundWorker.RunWorkerAsync();
                 this.Cursor = Cursors.Default;
             }
@@ -1075,12 +1077,23 @@ namespace FTAnalyzer.Forms
 
         private bool ProcessOS50kMatches(IEnumerable<OS50kGazetteer> matches, FactLocation loc, int level)
         {
-            Console.WriteLine("we have " + matches.Count() + " match(es) at level " + level + " for " + loc.ToString() + ": ");
-            if (matches.Count() == 1)
-            {
+            int count = matches.Count();
+            Console.WriteLine("we have " + count + " match(es) at level " + level + " for " + loc.ToString() + ": ");
+            if (count == 1)
+            {  // we only have one match so its good
                 OS50kGazetteer gaz = matches.First<OS50kGazetteer>();
                 SetOSGeocoding(loc, gaz, level);
                 return true;
+            }
+            if(count == 2)
+            {   // we have two matches if name and county are the same then use first one. This fixes issue with a place having same name as an area
+                OS50kGazetteer gazA = matches.First<OS50kGazetteer>();
+                OS50kGazetteer gazB = matches.Last<OS50kGazetteer>();
+                if(gazA.CountyCode == gazB.CountyCode && gazA.DefinitiveName == gazB.DefinitiveName)
+                {
+                    SetOSGeocoding(loc, gazA, level);
+                    return true;
+                }
             }
             return false;
         }

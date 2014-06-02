@@ -499,7 +499,7 @@ namespace FTAnalyzer.Utilities
 
         public void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
         {
-            SQLiteCommand cmd = new SQLiteCommand("select location from geocode where foundlocation='' and geocodestatus=3", conn);
+            SQLiteCommand cmd = new SQLiteCommand("select location from geocode where foundlocation='' and geocodestatus in (3, 8, 9)", conn);
             SQLiteDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -511,7 +511,7 @@ namespace FTAnalyzer.Utilities
 
         public SQLiteCommand NeedsReverseGeocode()
         {
-            return new SQLiteCommand("select location from geocode where foundlocation='' and geocodestatus=3", conn);
+            return new SQLiteCommand("select location from geocode where foundlocation='' and geocodestatus in (3, 8, 9)", conn);
         }
 
         #endregion

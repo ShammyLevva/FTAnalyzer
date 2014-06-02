@@ -844,7 +844,8 @@ namespace FTAnalyzer
         {
             if (Longitude == 0.0 && Latitude == 0.0)
                 return false;
-            if (!recheckPartials && Properties.MappingSettings.Default.IncludePartials && (GeocodeStatus == Geocode.PARTIAL_MATCH || GeocodeStatus == Geocode.LEVEL_MISMATCH))
+            if (!recheckPartials && Properties.MappingSettings.Default.IncludePartials && 
+                (GeocodeStatus == Geocode.PARTIAL_MATCH || GeocodeStatus == Geocode.LEVEL_MISMATCH || GeocodeStatus == Geocode.OS_50KPARTIAL))
                 return true;
             return GeocodeStatus == Geocode.MATCHED || GeocodeStatus == Geocode.GEDCOM_USER || GeocodeStatus == Geocode.OS_50KMATCH;
         }
