@@ -88,7 +88,7 @@ namespace FTAnalyzer.Mapping
                 GeocodeLocations geo = new GeocodeLocations();
                 MainForm.DisposeDuplicateForms(geo);
                 geo.Show();
-                geo.StartGeoCoding(false);
+                geo.StartGoogleGeoCoding(false);
                 geo.BringToFront();
                 geo.Focus();
             }

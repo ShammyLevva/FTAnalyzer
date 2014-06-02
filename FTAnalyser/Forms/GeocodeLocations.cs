@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using FTAnalyzer.Events;
+using FTAnalyzer.Filters;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
 using GeoAPI.Geometries;
@@ -33,7 +34,8 @@ namespace FTAnalyzer.Forms
         private ISet<string> noneOfTheAbove;
         private ToolStripMenuItem[] noneOfTheAboveMenus;
         private ConcurrentQueue<FactLocation> queue;
-
+        private IList<OS50kGazetteer> OS50k;
+        
         private FactLocation CopyLocation;
 
         public GeocodeLocations()
@@ -492,7 +494,7 @@ namespace FTAnalyzer.Forms
 
         #region Google Geocoding
 
-        public void StartGeoCoding(bool retryPartials)
+        public void StartGoogleGeoCoding(bool retryPartials)
         {
             if (geocodeBackgroundWorker.IsBusy)
             {
@@ -689,7 +691,7 @@ namespace FTAnalyzer.Forms
 
         private void mnuGeocodeLocations_Click(object sender, EventArgs e)
         {
-            StartGeoCoding(false);
+            StartGoogleGeoCoding(false);
         }
 
         #endregion
@@ -906,7 +908,7 @@ namespace FTAnalyzer.Forms
 
         private void mnuRetryPartial_Click(object sender, EventArgs e)
         {
-            StartGeoCoding(true);
+            StartGoogleGeoCoding(true);
         }
 
         private void resetAllPartialMatchesToNotSearchedToolStripMenuItem_Click(object sender, EventArgs e)
@@ -924,12 +926,13 @@ namespace FTAnalyzer.Forms
 
         public void SelectLocation(FactLocation location)
         {
-            DataGridViewRow row = dgLocations.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["GeocodedLocation"].Value.ToString().Equals(location.SortableLocation)).FirstOrDefault();
+            Predicate<DataGridViewRow> condition = r => r.Cells["GeocodedLocation"].Value.ToString().Equals(location.SortableLocation);
+            DataGridViewRow row = dgLocations.Rows.Cast<DataGridViewRow>().Where(condition).FirstOrDefault();
             if (row == null)
             {
                 dgLocations.DataSource = ApplyFilters(location);  // forces location to appear in list
                 dgLocations.Refresh();
-                row = dgLocations.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["GeocodedLocation"].Value.ToString().Equals(location.SortableLocation)).FirstOrDefault();
+                row = dgLocations.Rows.Cast<DataGridViewRow>().Where(condition).FirstOrDefault();
             }
             if(row != null)
             {
@@ -942,5 +945,112 @@ namespace FTAnalyzer.Forms
         {
             this.Dispose();
         }
+
+        #region OS Geocoding
+        public void StartOSGeoCoding()
+        {
+            LoadOS50kGazetteer();
+            ProcessOS50kGazetteerData();
+        }
+
+        public void LoadOS50kGazetteer()
+        {
+            OS50k = new List<OS50kGazetteer>();
+            try
+            {
+                string startPath;
+                if (Application.StartupPath.Contains("Common7\\IDE")) // running unit tests
+                    startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
+                else
+                    startPath = Application.StartupPath;
+                string filename = Path.Combine(startPath, @"Resources\OS50kGazetteer.txt");
+                if (File.Exists(filename))
+                    ReadOS50kGazetteer(filename);
+            }
+            catch (Exception e)
+            {
+                log.Warn("Failed to load OS50k Gazetteer error was : " + e.Message);
+            }
+        }
+
+        public void ReadOS50kGazetteer(string filename)
+        {
+            StreamReader reader = new StreamReader(filename);
+            while (!reader.EndOfStream)
+            {
+                string line = reader.ReadLine();
+                if (line.IndexOf(':') > 0)
+                    OS50k.Add(new OS50kGazetteer(line));
+            }
+            reader.Close();
+        }
+
+        public void ProcessOS50kGazetteerData()
+        {
+            Predicate<FactLocation> notGeocoded = x => !x.IsGeoCoded(true) && Countries.IsUnitedKingdom(x.Country);
+            IEnumerable<FactLocation> toSearch = FactLocation.AllLocations.Where(notGeocoded);
+            foreach (FactLocation loc in toSearch)
+                GazetteerMatchMethodA(loc);
+        }
+
+        private void GazetteerMatchMethodA(FactLocation loc)
+        {
+            if (loc.PlaceStripNumeric.Length > 0)
+            {
+                IEnumerable<OS50kGazetteer> placeMatches =
+                    OS50k.Where(x => x.DefinitiveName.Equals(loc.PlaceStripNumeric, StringComparison.InvariantCultureIgnoreCase) && x.IsCountyMatch(loc));
+                if (placeMatches.Count() > 0)
+                {
+                    ProcessOS50kMatches(placeMatches, loc, FactLocation.PLACE);
+                    return;
+                }
+            }
+            if (loc.AddressStripNumeric.Length > 0)
+            {
+                IEnumerable<OS50kGazetteer> addressMatches =
+                    OS50k.Where(x => x.DefinitiveName.Equals(loc.AddressStripNumeric, StringComparison.InvariantCultureIgnoreCase) && x.IsCountyMatch(loc));
+                if (addressMatches.Count() > 0)
+                    ProcessOS50kMatches(addressMatches, loc, FactLocation.ADDRESS);
+            }
+            else if (loc.SubRegion.Length > 0)
+            {
+                IEnumerable<OS50kGazetteer> subRegionMatches =
+                    OS50k.Where(x => x.DefinitiveName.Equals(loc.SubRegion, StringComparison.InvariantCultureIgnoreCase) && x.IsCountyMatch(loc));
+                if (subRegionMatches.Count() > 0)
+                    ProcessOS50kMatches(subRegionMatches, loc, FactLocation.SUBREGION);
+            }
+        }
+
+        private void ProcessOS50kMatches(IEnumerable<OS50kGazetteer> matches, FactLocation loc, int level)
+        {
+            Console.WriteLine("we have " + matches.Count() + " match(es) at level " + level + " for " + loc.ToString() + ": ");
+            if (matches.Count() == 1)
+            {
+                OS50kGazetteer gaz = matches.First<OS50kGazetteer>();
+                SetOSGeocoding(loc, gaz, level);
+            }
+        }
+
+        private void SetOSGeocoding(FactLocation location, OS50kGazetteer gaz, int level)
+        {
+            int expandBy = 2500;
+            Coordinate p = new Coordinate(gaz.Point.X, gaz.Point.Y);
+            Envelope env = new Envelope(p, p);
+            env.ExpandBy(expandBy); // OS50k is 1km sq expand by 2.5km to ensure text is visible.
+            location.Latitude = gaz.Latitude;
+            location.Longitude = gaz.Longitude;
+            location.LatitudeM = gaz.Point.Y;
+            location.LongitudeM = gaz.Point.X;
+            location.ViewPort.NorthEast.Lat = env.Top();
+            location.ViewPort.NorthEast.Long = env.Right();
+            location.ViewPort.SouthWest.Lat = env.Bottom();
+            location.ViewPort.SouthWest.Long = env.Left();
+            location.PixelSize = (double)expandBy / 40.0;
+            location.GoogleLocation = string.Empty;
+            location.GeocodeStatus = FactLocation.Geocode.OS_50KMATCH;
+            location.FoundLevel = level;
+            DatabaseHelper.Instance.UpdateGeocode(location);
+        }
+        #endregion
     }
 }

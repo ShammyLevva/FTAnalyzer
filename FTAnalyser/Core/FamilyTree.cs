@@ -29,7 +29,6 @@ namespace FTAnalyzer
         private IList<Family> families;
         private IDictionary<string, List<Individual>> occupations;
         private IDictionary<StandardisedName, StandardisedName> names;
-        private IList<OS50kGazetteer> OS50k;
         private ISet<string> unknownFactTypes;
         private bool _loading = false;
         private bool _dataloaded = false;
@@ -312,105 +311,6 @@ namespace FTAnalyzer
             SetRelationDescriptions(rootIndividualID, pb);
             xmlErrorbox.AppendText(PrintRelationCount());
             Application.DoEvents();
-        }
-
-        public void LoadOS50kGazetteer()
-        {
-            OS50k = new List<OS50kGazetteer>();
-            try
-            {
-                string startPath;
-                if (Application.StartupPath.Contains("Common7\\IDE")) // running unit tests
-                    startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
-                else
-                    startPath = Application.StartupPath;
-                string filename = Path.Combine(startPath, @"Resources\OS50kGazetteer.txt");
-                if (File.Exists(filename))
-                    ReadOS50kGazetteer(filename);
-            }
-            catch (Exception e)
-            {
-                log.Warn("Failed to load OS50k Gazetteer error was : " + e.Message);
-            }
-        }
-
-        public void ReadOS50kGazetteer(string filename)
-        {
-            StreamReader reader = new StreamReader(filename);
-            while (!reader.EndOfStream)
-            {
-                string line = reader.ReadLine();
-                if (line.IndexOf(':') > 0)
-                    OS50k.Add(new OS50kGazetteer(line));
-            }
-            reader.Close();
-        }
-
-        public void ProcessOS50kGazetteerData()
-        {
-            Predicate<FactLocation> notGeocoded = x => !x.IsGeoCoded(true) && Countries.IsUnitedKingdom(x.Country);
-            IEnumerable<FactLocation> toSearch = FactLocation.AllLocations.Where(notGeocoded);
-            foreach (FactLocation loc in toSearch)
-                GazetteerMatchMethodA(loc);
-        }
-
-        private void GazetteerMatchMethodA(FactLocation loc)
-        {
-            if (loc.PlaceStripNumeric.Length > 0)
-            {
-                IEnumerable<OS50kGazetteer> placeMatches =
-                    OS50k.Where(x => x.DefinitiveName.Equals(loc.PlaceStripNumeric, StringComparison.InvariantCultureIgnoreCase) && x.IsCountyMatch(loc));
-                if (placeMatches.Count() > 0)
-                {
-                    ProcessOS50kMatches(placeMatches, loc, FactLocation.PLACE);
-                    return;
-                }
-            }
-            if (loc.AddressStripNumeric.Length > 0)
-            {
-                IEnumerable<OS50kGazetteer> addressMatches = 
-                    OS50k.Where(x => x.DefinitiveName.Equals(loc.AddressStripNumeric, StringComparison.InvariantCultureIgnoreCase) && x.IsCountyMatch(loc));
-                if (addressMatches.Count() > 0)
-                    ProcessOS50kMatches(addressMatches, loc, FactLocation.ADDRESS);
-            }
-            else if (loc.SubRegion.Length > 0)
-            {
-                IEnumerable<OS50kGazetteer> subRegionMatches =
-                    OS50k.Where(x => x.DefinitiveName.Equals(loc.SubRegion, StringComparison.InvariantCultureIgnoreCase) && x.IsCountyMatch(loc));
-                if (subRegionMatches.Count() > 0)
-                    ProcessOS50kMatches(subRegionMatches, loc, FactLocation.SUBREGION);
-            }
-        }
-
-        private void ProcessOS50kMatches(IEnumerable<OS50kGazetteer> matches, FactLocation loc, int level)
-        {
-            Console.WriteLine("we have " + matches.Count() + " match(es) at level " + level + " for " + loc.ToString() + ": ");
-            if(matches.Count() == 1)
-            {
-                OS50kGazetteer gaz = matches.First<OS50kGazetteer>();
-                SetOSGeocoding(loc, gaz, level);
-            }
-        }
-
-        private void SetOSGeocoding(FactLocation location, OS50kGazetteer gaz, int level)
-        {
-            int expandBy = 2500;
-            Coordinate p = new Coordinate(gaz.Point.X, gaz.Point.Y);
-            Envelope env = new Envelope(p, p);
-            env.ExpandBy(expandBy); // OS50k is 1km sq expand by 2.5km to ensure text is visible.
-            location.Latitude = gaz.Latitude;
-            location.Longitude = gaz.Longitude;
-            location.LatitudeM = gaz.Point.Y;
-            location.LongitudeM =  gaz.Point.X;
-            location.ViewPort.NorthEast.Lat = env.Top();
-            location.ViewPort.NorthEast.Long = env.Right();
-            location.ViewPort.SouthWest.Lat = env.Bottom();
-            location.ViewPort.SouthWest.Long = env.Left();
-            location.PixelSize = (double)expandBy / 40.0;
-            location.GoogleLocation = string.Empty;
-            location.GeocodeStatus = FactLocation.Geocode.OS_50KMATCH;
-            location.FoundLevel = level;
-            DatabaseHelper.Instance.UpdateGeocode(location);
         }
 
         private void LoadStandardisedNames()
@@ -2348,6 +2248,7 @@ namespace FTAnalyzer
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER) && x.GoogleLocation.Length > 0) + " are GEDCOM/User Entered and have been geocoded.\n");
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER) && x.GoogleLocation.Length == 0) + " are GEDCOM/User Entered but lack a Google Location.\n");
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.MATCHED)) + " have a geocoding match from Google.\n");
+            xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OS_50KMATCH)) + " have a geocoding match from OS.\n");
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH)) + " have partial geocoding match from Google.\n");
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.LEVEL_MISMATCH)) + " have partial geocoding match at lower level of detail.\n");
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OUT_OF_BOUNDS)) + " found by Google but outside country boundary.\n");

@@ -875,6 +875,11 @@ namespace FTAnalyzer
 
         private void mnuGeocodeLocations_Click(object sender, EventArgs e)
         {
+            StartGeocoding(true);
+        }
+
+        private void StartGeocoding(bool google)
+        {
             if (!ft.Geocoding) // don't geocode if another geocode session in progress
             {
                 HourGlass(true);
@@ -891,15 +896,17 @@ namespace FTAnalyzer
                     geo = new GeocodeLocations();
                 geo.Show();
                 geo.Focus();
-                geo.StartGeoCoding(false);
+                if (google)
+                    geo.StartGoogleGeoCoding(false);
+                else
+                    geo.StartOSGeoCoding();
                 HourGlass(false);
             }
         }
 
         private void mnuOSGeocoder_Click(object sender, EventArgs e)
         {
-            ft.LoadOS50kGazetteer();
-            ft.ProcessOS50kGazetteerData();
+            StartGeocoding(false);
         }
 
         private void locationsGeocodeReportToolStripMenuItem_Click(object sender, EventArgs e)
