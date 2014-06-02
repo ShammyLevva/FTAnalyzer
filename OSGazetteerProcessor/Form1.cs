@@ -106,7 +106,7 @@ namespace OSGazetteerProcessor
             int featureNum = 0;
             int originalToSearch = 0;
             int lastSaved = int.MaxValue;
-            IEnumerable<Feature> searchFeatures = features.Where(x => x.Attributes["TYPE_CODE"] != "FA");
+            IEnumerable<Feature> searchFeatures = features.Where(x => x.Attributes["TYPE_CODE"].ToString() != "FA");
             int featuresCount = searchFeatures.Count();
             foreach (Feature f in searchFeatures)
             {
