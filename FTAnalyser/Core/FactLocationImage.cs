@@ -13,22 +13,24 @@ namespace FTAnalyzer
         public FactLocation.Geocode ErrorLevel { get; private set; }
         public Bitmap Icon { get; private set; }
 
-        private static FactLocationImage NOT_SEARCHED = new FactLocationImage(FactLocation.Geocode.NOT_SEARCHED,
+        private static FactLocationImage IMG_NOT_SEARCHED = new FactLocationImage(FactLocation.Geocode.NOT_SEARCHED,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\QuestionMark.png")));
-        private static FactLocationImage MATCHED = new FactLocationImage(FactLocation.Geocode.MATCHED,
+        private static FactLocationImage IMG_MATCHED = new FactLocationImage(FactLocation.Geocode.MATCHED,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\GoogleMatch.png")));
-        private static FactLocationImage PARTIAL_MATCH = new FactLocationImage(FactLocation.Geocode.PARTIAL_MATCH,
+        private static FactLocationImage IMG_PARTIAL_MATCH = new FactLocationImage(FactLocation.Geocode.PARTIAL_MATCH,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\GooglePartial.png")));
-        private static FactLocationImage GEDCOM_USER = new FactLocationImage(FactLocation.Geocode.GEDCOM_USER,
+        private static FactLocationImage IMG_GEDCOM_USER = new FactLocationImage(FactLocation.Geocode.GEDCOM_USER,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Complete_OK.png")));
-        private static FactLocationImage NO_MATCH = new FactLocationImage(FactLocation.Geocode.NO_MATCH,
+        private static FactLocationImage IMG_NO_MATCH = new FactLocationImage(FactLocation.Geocode.NO_MATCH,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\CriticalError.png")));
-        private static FactLocationImage INCORRECT = new FactLocationImage(FactLocation.Geocode.INCORRECT,
+        private static FactLocationImage IMG_INCORRECT = new FactLocationImage(FactLocation.Geocode.INCORRECT,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Flagged.png")));
-        private static FactLocationImage OUT_OF_BOUNDS = new FactLocationImage(FactLocation.Geocode.OUT_OF_BOUNDS,
+        private static FactLocationImage IMG_OUT_OF_BOUNDS = new FactLocationImage(FactLocation.Geocode.OUT_OF_BOUNDS,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\OutOfBounds.png")));
-        private static FactLocationImage LEVEL_MISMATCH = new FactLocationImage(FactLocation.Geocode.LEVEL_MISMATCH,
+        private static FactLocationImage IMG_LEVEL_MISMATCH = new FactLocationImage(FactLocation.Geocode.LEVEL_MISMATCH,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Warning.png")));
+        private static FactLocationImage IMG_OS50k_MATCH = new FactLocationImage(FactLocation.Geocode.OS_50KMATCH,
+            Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\OS50kMatch.png")));
 
         public FactLocationImage(FactLocation.Geocode errorLevel, Image img)
         {
@@ -41,23 +43,25 @@ namespace FTAnalyzer
             switch (errorLevel)
             {
                 case FactLocation.Geocode.NOT_SEARCHED:
-                    return NOT_SEARCHED;
+                    return IMG_NOT_SEARCHED;
                 case FactLocation.Geocode.MATCHED:
-                    return MATCHED;
+                    return IMG_MATCHED;
                 case FactLocation.Geocode.PARTIAL_MATCH:
-                    return PARTIAL_MATCH;
+                    return IMG_PARTIAL_MATCH;
                 case FactLocation.Geocode.GEDCOM_USER:
-                    return GEDCOM_USER;
+                    return IMG_GEDCOM_USER;
                 case FactLocation.Geocode.NO_MATCH:
-                    return NO_MATCH;
+                    return IMG_NO_MATCH;
                 case FactLocation.Geocode.INCORRECT:
-                    return INCORRECT;
+                    return IMG_INCORRECT;
                 case FactLocation.Geocode.OUT_OF_BOUNDS:
-                    return OUT_OF_BOUNDS;
+                    return IMG_OUT_OF_BOUNDS;
                 case FactLocation.Geocode.LEVEL_MISMATCH:
-                    return LEVEL_MISMATCH;
+                    return IMG_LEVEL_MISMATCH;
+                case FactLocation.Geocode.OS_50KMATCH:
+                    return IMG_OS50k_MATCH;
             }
-            return NO_MATCH;
+            return IMG_NO_MATCH;
         }
     }
 }

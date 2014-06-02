@@ -15,6 +15,7 @@ using FTAnalyzer.Utilities;
 using Ionic.Zip;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using GeoAPI.Geometries;
 
 namespace FTAnalyzer
 {
@@ -357,7 +358,8 @@ namespace FTAnalyzer
         {
             if (loc.PlaceStripNumeric.Length > 0)
             {
-                IEnumerable<OS50kGazetteer> placeMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.PlaceStripNumeric, StringComparison.InvariantCultureIgnoreCase));
+                IEnumerable<OS50kGazetteer> placeMatches =
+                    OS50k.Where(x => x.DefinitiveName.Equals(loc.PlaceStripNumeric, StringComparison.InvariantCultureIgnoreCase) && x.IsCountyMatch(loc));
                 if (placeMatches.Count() > 0)
                 {
                     ProcessOS50kMatches(placeMatches, loc, FactLocation.PLACE);
@@ -366,13 +368,15 @@ namespace FTAnalyzer
             }
             if (loc.AddressStripNumeric.Length > 0)
             {
-                IEnumerable<OS50kGazetteer> addressMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.AddressStripNumeric, StringComparison.InvariantCultureIgnoreCase));
+                IEnumerable<OS50kGazetteer> addressMatches = 
+                    OS50k.Where(x => x.DefinitiveName.Equals(loc.AddressStripNumeric, StringComparison.InvariantCultureIgnoreCase) && x.IsCountyMatch(loc));
                 if (addressMatches.Count() > 0)
                     ProcessOS50kMatches(addressMatches, loc, FactLocation.ADDRESS);
             }
             else if (loc.SubRegion.Length > 0)
             {
-                IEnumerable<OS50kGazetteer> subRegionMatches = OS50k.Where(x => x.DefinitiveName.Equals(loc.SubRegion, StringComparison.InvariantCultureIgnoreCase));
+                IEnumerable<OS50kGazetteer> subRegionMatches =
+                    OS50k.Where(x => x.DefinitiveName.Equals(loc.SubRegion, StringComparison.InvariantCultureIgnoreCase) && x.IsCountyMatch(loc));
                 if (subRegionMatches.Count() > 0)
                     ProcessOS50kMatches(subRegionMatches, loc, FactLocation.SUBREGION);
             }
@@ -381,13 +385,32 @@ namespace FTAnalyzer
         private void ProcessOS50kMatches(IEnumerable<OS50kGazetteer> matches, FactLocation loc, int level)
         {
             Console.WriteLine("we have " + matches.Count() + " match(es) at level " + level + " for " + loc.ToString() + ": ");
-            foreach (OS50kGazetteer os in matches)
+            if(matches.Count() == 1)
             {
-                if (os.IsCountyMatch(loc))
-                    Console.WriteLine("**** " + os.ToString());
-                else
-                    Console.WriteLine("     " + os.ToString());
+                OS50kGazetteer gaz = matches.First<OS50kGazetteer>();
+                SetOSGeocoding(loc, gaz, level);
             }
+        }
+
+        private void SetOSGeocoding(FactLocation location, OS50kGazetteer gaz, int level)
+        {
+            int expandBy = 2500;
+            Coordinate p = new Coordinate(gaz.Point.X, gaz.Point.Y);
+            Envelope env = new Envelope(p, p);
+            env.ExpandBy(expandBy); // OS50k is 1km sq expand by 2.5km to ensure text is visible.
+            location.Latitude = gaz.Latitude;
+            location.Longitude = gaz.Longitude;
+            location.LatitudeM = gaz.Point.Y;
+            location.LongitudeM =  gaz.Point.X;
+            location.ViewPort.NorthEast.Lat = env.Top();
+            location.ViewPort.NorthEast.Long = env.Right();
+            location.ViewPort.SouthWest.Lat = env.Bottom();
+            location.ViewPort.SouthWest.Long = env.Left();
+            location.PixelSize = (double)expandBy / 40.0;
+            location.GoogleLocation = string.Empty;
+            location.GeocodeStatus = FactLocation.Geocode.OS_50KMATCH;
+            location.FoundLevel = level;
+            DatabaseHelper.Instance.UpdateGeocode(location);
         }
 
         private void LoadStandardisedNames()

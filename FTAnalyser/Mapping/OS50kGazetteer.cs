@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,7 @@ namespace FTAnalyzer.Mapping
         public string CountyCode { get; private set; }
         public string CountyName { get; private set; }
         public string ParishName { get; private set; }
+        public IPoint Point { get; private set; }
 
         public OS50kGazetteer(string line)
         {
@@ -32,6 +35,10 @@ namespace FTAnalyzer.Mapping
             Longitude = intval + longitude / 60;
             if (values[10] == "W")
                 Longitude = -1 * Longitude; // West Longitudes are negative
+            Coordinate c = new Coordinate(Longitude, Latitude);
+            c = MapTransforms.TransformCoordinate(c);
+            Point = GeometryFactory.Default.CreatePoint(c);
+
             CountyCode = values[11];
             CountyName = values[13];
             FeatureCode = values[14];
