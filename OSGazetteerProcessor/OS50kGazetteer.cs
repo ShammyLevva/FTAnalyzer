@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +13,7 @@ namespace OSGazetteerProcessor
         public double Longitude { get; private set; }
         public string ParishName { get; set; }
         public string Line { get; private set; }
+        public IPoint Point { get; private set; }
 
         public OS50kGazetteer(string line)
         {
@@ -26,6 +29,10 @@ namespace OSGazetteerProcessor
             Longitude = intval + longitude / 60;
             if (values[10] == "W")
                 Longitude = -1 * Longitude; // West Longitudes are negative
+            Coordinate c = new Coordinate(Longitude, Latitude);
+            c = MapTransforms.TransformCoordinate(c);
+            Point = GeometryFactory.Default.CreatePoint(c);
+                        
             if (values.Length >= 21)
             {
                 ParishName = values[20];

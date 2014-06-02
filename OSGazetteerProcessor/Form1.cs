@@ -1,5 +1,4 @@
-﻿using GeoAPI.Geometries;
-using GeoAPI.Geometries.Prepared;
+﻿using GeoAPI.Geometries.Prepared;
 using NetTopologySuite.Features;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.Geometries.Prepared;
@@ -7,12 +6,8 @@ using NetTopologySuite.IO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -110,33 +105,33 @@ namespace OSGazetteerProcessor
             int featuresCount = searchFeatures.Count();
             foreach (Feature f in searchFeatures)
             {
-                if (f.Attributes[fieldname] == null || f.Attributes[fieldname].ToString().Length == 0)
-                    Console.WriteLine("Parish is null?? type_code:" + f.Attributes["TYPE_CODE"]); // f.Attributes["TYPE_CODE"] = "FA"
-                IPreparedGeometry geom = PreparedGeometryFactory.Prepare(f.Geometry);
-                int count = 0;
-                IEnumerable<OS50kGazetteer> toSearch = OS50k.Where(x => x.ParishName == null || x.ParishName.Length == 0);
-                if (originalToSearch == 0)
-                    originalToSearch = toSearch.Count();
-                Parallel.ForEach(toSearch, os50k =>
-                {
-                    Coordinate c = new Coordinate(os50k.Longitude, os50k.Latitude);
-                    c = MapTransforms.TransformCoordinate(c);
-                    IPoint p = GeometryFactory.Default.CreatePoint(c);
-                    if (geom.Intersects(p))
-                    {
-                        os50k.ParishName = (string)f.Attributes[fieldname];
-                        count++;
-                    }
-                });
                 featureNum++;
-                int left = toSearch.Count() - count;
-                textBox1.AppendText("Set " + count + " entries for parish: " + f.Attributes[fieldname] + " number " + featureNum + " / " + featuresCount + " leaving " + left + " of " + originalToSearch + " to search\n");
-                if (lastSaved - 500 > left)
+                if (featureNum > 700)
                 {
-                    lastSaved = left;
-                    SaveOS50kGazetteer();
+                    if (f.Attributes[fieldname] == null || f.Attributes[fieldname].ToString().Length == 0)
+                        Console.WriteLine("Parish is null?? type_code:" + f.Attributes["TYPE_CODE"]); // f.Attributes["TYPE_CODE"] = "FA"
+                    IPreparedGeometry geom = PreparedGeometryFactory.Prepare(f.Geometry);
+                    int count = 0;
+                    IEnumerable<OS50kGazetteer> toSearch = OS50k.Where(x => x.ParishName == null || x.ParishName.Length == 0);
+                    if (originalToSearch == 0)
+                        originalToSearch = toSearch.Count();
+                    Parallel.ForEach(toSearch, os50k =>
+                    {
+                        if (geom.Intersects(os50k.Point))
+                        {
+                            os50k.ParishName = (string)f.Attributes[fieldname];
+                            count++;
+                        }
+                    });
+                    int left = toSearch.Count() - count;
+                    textBox1.AppendText("Set " + count + " entries for parish: " + f.Attributes[fieldname] + " number " + featureNum + " / " + featuresCount + " leaving " + left + " of " + originalToSearch + " to search\n");
+                    if (lastSaved - 500 > left)
+                    {
+                        lastSaved = left;
+                        SaveOS50kGazetteer();
+                    }
+                    Application.DoEvents();
                 }
-                Application.DoEvents();
             }
         }
 
@@ -153,6 +148,7 @@ namespace OSGazetteerProcessor
             //AddParishNames(scottishParishes, "name");
             AddParishNames(englishParishes, "NAME");
             SaveOS50kGazetteer();
+            MessageBox.Show("Finished");
         }
     }
 }
