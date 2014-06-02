@@ -259,6 +259,7 @@ namespace FTAnalyzer
             mnuPossibleCensusFacts.Enabled = enabled;
             mnuShowTimeline.Enabled = enabled;
             mnuGeocodeLocations.Enabled = enabled;
+            mnuOSGeocoder.Enabled = enabled;
             mnuLocationsGeocodeReport.Enabled = enabled;
             mnuLifelines.Enabled = enabled;
             mnuPlaces.Enabled = enabled;
