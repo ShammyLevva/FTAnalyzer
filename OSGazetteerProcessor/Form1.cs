@@ -61,7 +61,8 @@ namespace OSGazetteerProcessor
 
         public void SaveOS50kGazetteer()
         {
-            using (StreamWriter sw = new StreamWriter(@"c:\Maps\FTAnalyzer\50kgaz2014-output.txt")) {
+            using (StreamWriter sw = new StreamWriter(@"C:\Maps\FTAnalyzer\OS50kGazetteer.txt"))
+            {
                 foreach (OS50kGazetteer os50k in OS50k)
                     sw.WriteLine(os50k.ToString());
             }
@@ -106,32 +107,29 @@ namespace OSGazetteerProcessor
             foreach (Feature f in searchFeatures)
             {
                 featureNum++;
-                if (featureNum > 700)
+                if (f.Attributes[fieldname] == null || f.Attributes[fieldname].ToString().Length == 0)
+                    Console.WriteLine("Parish is null?? type_code:" + f.Attributes["TYPE_CODE"]); // f.Attributes["TYPE_CODE"] = "FA"
+                IPreparedGeometry geom = PreparedGeometryFactory.Prepare(f.Geometry);
+                int count = 0;
+                IEnumerable<OS50kGazetteer> toSearch = OS50k.Where(x => x.ParishName == null || x.ParishName.Length == 0);
+                if (originalToSearch == 0)
+                    originalToSearch = toSearch.Count();
+                Parallel.ForEach(toSearch, os50k =>
                 {
-                    if (f.Attributes[fieldname] == null || f.Attributes[fieldname].ToString().Length == 0)
-                        Console.WriteLine("Parish is null?? type_code:" + f.Attributes["TYPE_CODE"]); // f.Attributes["TYPE_CODE"] = "FA"
-                    IPreparedGeometry geom = PreparedGeometryFactory.Prepare(f.Geometry);
-                    int count = 0;
-                    IEnumerable<OS50kGazetteer> toSearch = OS50k.Where(x => x.ParishName == null || x.ParishName.Length == 0);
-                    if (originalToSearch == 0)
-                        originalToSearch = toSearch.Count();
-                    Parallel.ForEach(toSearch, os50k =>
+                    if (geom.Intersects(os50k.Point))
                     {
-                        if (geom.Intersects(os50k.Point))
-                        {
-                            os50k.ParishName = (string)f.Attributes[fieldname];
-                            count++;
-                        }
-                    });
-                    int left = toSearch.Count() - count;
-                    textBox1.AppendText("Set " + count + " entries for parish: " + f.Attributes[fieldname] + " number " + featureNum + " / " + featuresCount + " leaving " + left + " of " + originalToSearch + " to search\n");
-                    if (lastSaved - 500 > left)
-                    {
-                        lastSaved = left;
-                        SaveOS50kGazetteer();
+                        os50k.ParishName = (string)f.Attributes[fieldname];
+                        count++;
                     }
-                    Application.DoEvents();
+                });
+                int left = toSearch.Count() - count;
+                textBox1.AppendText("Set " + count + " entries for parish: " + f.Attributes[fieldname] + " number " + featureNum + " / " + featuresCount + " leaving " + left + " of " + originalToSearch + " to search\n");
+                if (lastSaved - 500 > left)
+                {
+                    lastSaved = left;
+                    SaveOS50kGazetteer();
                 }
+                Application.DoEvents();
             }
         }
 
@@ -144,8 +142,8 @@ namespace OSGazetteerProcessor
         {
             LoadOS50kGazetteer();
             englishParishes = LoadParishBoundaries(@"C:\Maps\FTAnalyzer\parish_region.shp");
-            //scottishParishes = LoadParishBoundaries(@"C:\Maps\FTAnalyzer\CivilParish1930.shp");
-            //AddParishNames(scottishParishes, "name");
+            scottishParishes = LoadParishBoundaries(@"C:\Maps\FTAnalyzer\CivilParish1930.shp");
+            AddParishNames(scottishParishes, "name");
             AddParishNames(englishParishes, "NAME");
             SaveOS50kGazetteer();
             MessageBox.Show("Finished");
