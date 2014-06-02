@@ -54,6 +54,7 @@ namespace FTAnalyzer.Forms
             mnuGoogleGeocodeLocations.Enabled = !ft.Geocoding; // disable menu if already geocoding
             mnuEditLocation.Enabled = !ft.Geocoding;
             mnuReverseGeocode.Enabled = !ft.Geocoding;
+            mnuOSGeocodeLocations.Enabled = !ft.Geocoding;
             SetupFilterMenu();
             SetStatusText();
             CheckGoogleStatusCodes(locations);
@@ -991,7 +992,7 @@ namespace FTAnalyzer.Forms
         {
             LoadOS50kGazetteer();
             ProcessOS50kGazetteerData(worker, e);
-            MessageBox.Show("Processed Ordnance Survey Geocoding", "FTAnalyzer");
+            MessageBox.Show("Finished Ordnance Survey Geocoding", "FTAnalyzer");
         }
 
         public void LoadOS50kGazetteer()
@@ -1028,7 +1029,9 @@ namespace FTAnalyzer.Forms
 
         public void ProcessOS50kGazetteerData(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            Predicate<FactLocation> notGeocoded = x => !x.IsGeoCoded(true) && Countries.IsUnitedKingdom(x.Country);
+            // IsGeoCoded(true) will include OS_50KPARTIALS but we don't want to recheck them
+            Predicate<FactLocation> notGeocoded = 
+                x => !x.IsGeoCoded(true) && x.GeocodeStatus != FactLocation.Geocode.OS_50KPARTIAL && Countries.IsUnitedKingdom(x.Country);
             IEnumerable<FactLocation> toSearch = FactLocation.AllLocations.Where(notGeocoded);
             int total = toSearch.Count();
             int count = 0;
@@ -1079,20 +1082,22 @@ namespace FTAnalyzer.Forms
         {
             int count = matches.Count();
             Console.WriteLine("we have " + count + " match(es) at level " + level + " for " + loc.ToString() + ": ");
+            OS50kGazetteer gazA = matches.First<OS50kGazetteer>();
             if (count == 1)
             {  // we only have one match so its good
-                OS50kGazetteer gaz = matches.First<OS50kGazetteer>();
-                SetOSGeocoding(loc, gaz, level);
+                SetOSGeocoding(loc, gazA, level);
                 return true;
             }
-            if(count == 2)
-            {   // we have two matches if name and county are the same then use first one. This fixes issue with a place having same name as an area
-                OS50kGazetteer gazA = matches.First<OS50kGazetteer>();
-                OS50kGazetteer gazB = matches.Last<OS50kGazetteer>();
-                if(gazA.CountyCode == gazB.CountyCode && gazA.DefinitiveName == gazB.DefinitiveName)
+            else
+            {
+                // we have several places of same name in matching county loop through matching check for matching parish
+                foreach (OS50kGazetteer gaz in matches)
                 {
-                    SetOSGeocoding(loc, gazA, level);
-                    return true;
+                    if (gaz.ParishName == loc.SubRegion)
+                    {   // we match on parish name so we found a match on name, parish & county
+                        SetOSGeocoding(loc, gaz, level);
+                        return true;
+                    }
                 }
             }
             return false;

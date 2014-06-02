@@ -31,9 +31,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeocodeLocations));
             this.dgLocations = new System.Windows.Forms.DataGridView();
             this.LocationIcon = new System.Windows.Forms.DataGridViewImageColumn();
@@ -102,14 +102,14 @@
             this.GoogleLocation,
             this.GoogleResultType});
             this.dgLocations.ContextMenuStrip = this.contextMenuStrip;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgLocations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgLocations.Location = new System.Drawing.Point(0, 49);
             this.dgLocations.MultiSelect = false;
@@ -149,8 +149,8 @@
             // 
             this.Latitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Latitude.DataPropertyName = "Latitude";
-            dataGridViewCellStyle3.Format = "N7";
-            this.Latitude.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Format = "N7";
+            this.Latitude.DefaultCellStyle = dataGridViewCellStyle4;
             this.Latitude.HeaderText = "Latitude";
             this.Latitude.MinimumWidth = 75;
             this.Latitude.Name = "Latitude";
@@ -162,8 +162,8 @@
             // 
             this.Longitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Longitude.DataPropertyName = "Longitude";
-            dataGridViewCellStyle7.Format = "N7";
-            this.Longitude.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle5.Format = "N7";
+            this.Longitude.DefaultCellStyle = dataGridViewCellStyle5;
             this.Longitude.HeaderText = "Longitude";
             this.Longitude.MinimumWidth = 75;
             this.Longitude.Name = "Longitude";
@@ -404,7 +404,7 @@
             // mnuGoogleGeocodeLocations
             // 
             this.mnuGoogleGeocodeLocations.Name = "mnuGoogleGeocodeLocations";
-            this.mnuGoogleGeocodeLocations.Size = new System.Drawing.Size(282, 22);
+            this.mnuGoogleGeocodeLocations.Size = new System.Drawing.Size(313, 22);
             this.mnuGoogleGeocodeLocations.Text = "Run Google Geocoder to find Locations";
             this.mnuGoogleGeocodeLocations.ToolTipText = "Looks up map co-ordinates for locations in your file";
             this.mnuGoogleGeocodeLocations.Click += new System.EventHandler(this.mnuGeocodeLocations_Click);
@@ -412,14 +412,14 @@
             // mnuRetryPartial
             // 
             this.mnuRetryPartial.Name = "mnuRetryPartial";
-            this.mnuRetryPartial.Size = new System.Drawing.Size(282, 22);
+            this.mnuRetryPartial.Size = new System.Drawing.Size(313, 22);
             this.mnuRetryPartial.Text = "Run Google Geocoder retrying Partials";
             this.mnuRetryPartial.Click += new System.EventHandler(this.mnuRetryPartial_Click);
             // 
             // mnuOSGeocodeLocations
             // 
             this.mnuOSGeocodeLocations.Name = "mnuOSGeocodeLocations";
-            this.mnuOSGeocodeLocations.Size = new System.Drawing.Size(282, 22);
+            this.mnuOSGeocodeLocations.Size = new System.Drawing.Size(313, 22);
             this.mnuOSGeocodeLocations.Text = "Run OS Geocoder to find Locations";
             this.mnuOSGeocodeLocations.Click += new System.EventHandler(this.mnuOSGeocodeLocations_Click);
             // 
@@ -427,7 +427,7 @@
             // 
             this.mnuReverseGeocode.Name = "mnuReverseGeocode";
             this.mnuReverseGeocode.Size = new System.Drawing.Size(282, 22);
-            this.mnuReverseGeocode.Text = "Lookup Locations for User entered data";
+            this.mnuReverseGeocode.Text = "Lookup Blank Google Locations";
             this.mnuReverseGeocode.Click += new System.EventHandler(this.mnuReverseGeocde_Click);
             // 
             // mnuOptions
