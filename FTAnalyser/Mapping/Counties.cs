@@ -44,6 +44,7 @@ namespace FTAnalyzer.Mapping
         {
             UK_COUNTIES.Add(new County("Aberdeen City", "AN", "Aberdeen City"));
             UK_COUNTIES.Add(new County("Aberdeen", "AN", "Aberdeen City"));
+            UK_COUNTIES.Add(new County("Aberdeenshire", "AN", "Aberdeen City"));
             UK_COUNTIES.Add(new County("Aberdeenshire", "AB", "Aberdeenshire"));
             UK_COUNTIES.Add(new County("Kincardineshire", "AB", "Aberdeenshire"));
             UK_COUNTIES.Add(new County("Banffshire", "AB", "Aberdeenshire"));
