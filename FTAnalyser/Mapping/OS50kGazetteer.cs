@@ -43,6 +43,8 @@ namespace FTAnalyzer.Mapping
             CountyName = values[13];
             FeatureCode = values[14];
             ParishName = values[20];
+            if (ParishName.EndsWith(" CP"))
+                ParishName = ParishName.Substring(0, ParishName.Length - 3);
         }
 
         public bool IsCountyMatch(FactLocation loc)
