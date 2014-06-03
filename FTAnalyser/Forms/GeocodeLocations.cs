@@ -1093,7 +1093,7 @@ namespace FTAnalyzer.Forms
                 // we have several places of same name in matching county loop through matching check for matching parish
                 foreach (OS50kGazetteer gaz in matches)
                 {
-                    if (gaz.ParishName == loc.SubRegion)
+                    if (gaz.ParishName.Equals(loc.SubRegion, StringComparison.InvariantCultureIgnoreCase))
                     {   // we match on parish name so we found a match on name, parish & county
                         SetOSGeocoding(loc, gaz, level);
                         return true;
@@ -1119,7 +1119,7 @@ namespace FTAnalyzer.Forms
             location.ViewPort.SouthWest.Long = env.Left();
             location.PixelSize = (double)expandBy / 40.0;
             location.GoogleLocation = string.Empty;
-            if (level == location.Level)
+            if (level == location.Level || level == 4)
                 location.GeocodeStatus = FactLocation.Geocode.OS_50KMATCH;
             else
                 location.GeocodeStatus = FactLocation.Geocode.OS_50KPARTIAL;
