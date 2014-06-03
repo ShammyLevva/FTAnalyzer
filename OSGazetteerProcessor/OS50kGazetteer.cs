@@ -9,6 +9,8 @@ namespace OSGazetteerProcessor
 {
     public class OS50kGazetteer
     {
+        public string CountyCode { get; private set; }
+        public string CountyName { get; private set; }
         public double Latitude { get; private set; }
         public double Longitude { get; private set; }
         public string ParishName { get; set; }
@@ -20,6 +22,8 @@ namespace OSGazetteerProcessor
         {
             Line = line;
             string[] values = line.Split(':');
+            CountyCode = values[11];
+            CountyName = values[13];
             int intval;
             double latitude, longitude;
             Int32.TryParse(values[4], out intval);
@@ -33,7 +37,7 @@ namespace OSGazetteerProcessor
             Coordinate c = new Coordinate(Longitude, Latitude);
             c = MapTransforms.TransformCoordinate(c);
             Point = GeometryFactory.Default.CreatePoint(c);
-            BufferedPoint = Point.Buffer(185); // points are to 1dp of a minute = 185m so create buffer for matching
+            //BufferedPoint = Point.Buffer(185); // points are to 1dp of a minute = 185m so create buffer for matching
             if (values.Length >= 21)
             {
                 ParishName = values[20];

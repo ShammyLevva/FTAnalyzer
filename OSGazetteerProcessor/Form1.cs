@@ -21,6 +21,9 @@ namespace OSGazetteerProcessor
         private IList<OS50kGazetteer> OS50k;
         private List<Feature> englishParishes;
         private List<Feature> scottishParishes;
+        private List<Feature> oldEnglishCounties;
+
+        private IDictionary<string, ISet<Tuple<string,string>>> oldCountiesToCounties;
 
         public Form1()
         {
@@ -68,7 +71,7 @@ namespace OSGazetteerProcessor
             }
         }
 
-        public List<Feature> LoadParishBoundaries(string filename)
+        public List<Feature> LoadFeatureList(string filename)
         {
             List<Feature> features = new List<Feature>();
             if (File.Exists(filename))
@@ -132,6 +135,51 @@ namespace OSGazetteerProcessor
             }
         }
 
+        private void ProcessOldCounties()
+        {
+            oldCountiesToCounties = new Dictionary<string, ISet<Tuple<string,string>>>();
+
+            foreach (Feature f in oldEnglishCounties)
+            {
+                IPreparedGeometry geometry = PreparedGeometryFactory.Prepare(f.Geometry);
+                foreach (OS50kGazetteer os50k in OS50k)
+                {
+                    if (geometry.Intersects(os50k.Point))
+                    {
+                        ISet<Tuple<string,string>> oldCounties = null;
+                        string name = (string)f.Attributes["NAME"];
+                        if (!oldCountiesToCounties.TryGetValue(name, out oldCounties))
+                        {
+                            oldCounties = new SortedSet<Tuple<string,string>>();
+                            oldCountiesToCounties.Add(name, oldCounties);
+                        }
+                        oldCounties.Add(Tuple.Create(os50k.CountyCode, os50k.CountyName));
+                    }
+                }
+            }
+        }
+
+        private void SaveCounties()
+        {
+            using (StreamWriter writer = new StreamWriter(@"C:\Maps\FTAnalyzer\counties.txt"))
+            {
+                foreach (string c in oldCountiesToCounties.Keys)
+                {
+                    ISet<Tuple<string, string>> value = oldCountiesToCounties[c];
+                    foreach (Tuple<string, string> t in value)
+                    {
+                        writer.Write("UK_COUNTIES.Add(new County(\"");
+                        writer.Write(c);
+                        writer.Write("\", \"");
+                        writer.Write(t.Item1);
+                        writer.Write("\", \"");
+                        writer.Write(t.Item2);
+                        writer.WriteLine("\"));");
+                    }
+                }
+            }
+        }
+            
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -140,13 +188,18 @@ namespace OSGazetteerProcessor
         private void generateOutputFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadOS50kGazetteer();
-            scottishParishes = LoadParishBoundaries(@"C:\Maps\FTAnalyzer\CivilParish1930.shp");
-            AddParishNames(scottishParishes, "name");
-            englishParishes = LoadParishBoundaries(@"C:\Maps\FTAnalyzer\parish_region.shp");
+
+            //scottishParishes = LoadFeatureList(@"C:\Maps\FTAnalyzer\CivilParish1930.shp");
+            //AddParishNames(scottishParishes, "name");
+            //englishParishes = LoadFeatureList(@"C:\Maps\FTAnalyzer\parish_region.shp");
             // strip parishes of blank filler area (FA) codes
-            englishParishes = englishParishes.Where(x => x.Attributes["TYPE_CODE"].ToString() != "FA").ToList<Feature>();
-            AddParishNames(englishParishes, "NAME");
-            SaveOS50kGazetteer();
+            //englishParishes = englishParishes.Where(x => x.Attributes["TYPE_CODE"].ToString() != "FA").ToList<Feature>();
+            //AddParishNames(englishParishes, "NAME");
+            //SaveOS50kGazetteer();
+
+            oldEnglishCounties = LoadFeatureList(@"C:\Maps\FTAnalyzer\Historic_Counties_of_England&Wales_Web.shp");
+            ProcessOldCounties();
+            SaveCounties();
             MessageBox.Show("Finished");
         }
     }
