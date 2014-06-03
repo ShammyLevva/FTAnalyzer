@@ -990,12 +990,14 @@ namespace FTAnalyzer.Forms
 
         private void OSGeoCode(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            LoadOS50kGazetteer();
-            ProcessOS50kGazetteerData(worker, e);
-            MessageBox.Show("Finished Ordnance Survey Geocoding", "FTAnalyzer");
+            if (LoadOS50kGazetteer())
+            {
+                ProcessOS50kGazetteerData(worker, e);
+                MessageBox.Show("Finished Ordnance Survey Geocoding", "FTAnalyzer");
+            }
         }
 
-        public void LoadOS50kGazetteer()
+        public bool LoadOS50kGazetteer()
         {
             OS50k = new List<OS50kGazetteer>();
             try
@@ -1008,11 +1010,14 @@ namespace FTAnalyzer.Forms
                 string filename = Path.Combine(startPath, @"Resources\OS50kGazetteer.txt");
                 if (File.Exists(filename))
                     ReadOS50kGazetteer(filename);
+                return true;
             }
             catch (Exception e)
             {
                 log.Warn("Failed to load OS50k Gazetteer error was : " + e.Message);
+                MessageBox.Show("Failed to load OS50k Gazetteer error was : " + e.Message);
             }
+            return false;
         }
 
         public void ReadOS50kGazetteer(string filename)
@@ -1025,6 +1030,13 @@ namespace FTAnalyzer.Forms
                     OS50k.Add(new OS50kGazetteer(line));
             }
             reader.Close();
+            //CheckGazetteer();
+        }
+
+        public void CheckGazetteer()
+        {
+            IEnumerable<OS50kGazetteer> spaces = OS50k.Where(x => x.DefinitiveName.LastIndexOf(" ") > 0 && x.DefinitiveName.LastIndexOf(" ") + 4 >= x.DefinitiveName.Length);
+            List<string> endings = spaces.Select(x => x.DefinitiveName.Substring(x.DefinitiveName.LastIndexOf(" "))).Distinct().ToList();
         }
 
         public void ProcessOS50kGazetteerData(BackgroundWorker worker, DoWorkEventArgs e)
@@ -1075,13 +1087,13 @@ namespace FTAnalyzer.Forms
                 if (subRegionMatches.Count() > 0)
                     return ProcessOS50kMatches(subRegionMatches, loc, FactLocation.SUBREGION);
             }
+            Console.WriteLine("Failed to match: " + loc.ToString());
             return false;
         }
 
         private bool ProcessOS50kMatches(IEnumerable<OS50kGazetteer> matches, FactLocation loc, int level)
         {
             int count = matches.Count();
-            Console.WriteLine("we have " + count + " match(es) at level " + level + " for " + loc.ToString() + ": ");
             OS50kGazetteer gazA = matches.First<OS50kGazetteer>();
             if (count == 1)
             {  // we only have one match so its good
@@ -1119,7 +1131,9 @@ namespace FTAnalyzer.Forms
             location.ViewPort.SouthWest.Long = env.Left();
             location.PixelSize = (double)expandBy / 40.0;
             location.GoogleLocation = string.Empty;
-            if (level == location.Level || level == 4)
+            if (level == location.Level)
+                location.GeocodeStatus = FactLocation.Geocode.OS_50KMATCH;
+            else if(level == 4)
                 location.GeocodeStatus = FactLocation.Geocode.OS_50KMATCH;
             else
                 location.GeocodeStatus = FactLocation.Geocode.OS_50KPARTIAL;
