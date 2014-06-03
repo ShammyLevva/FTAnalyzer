@@ -14,6 +14,7 @@ namespace OSGazetteerProcessor
         public string ParishName { get; set; }
         public string Line { get; private set; }
         public IPoint Point { get; private set; }
+        public IGeometry BufferedPoint { get; private set; }
 
         public OS50kGazetteer(string line)
         {
@@ -32,7 +33,7 @@ namespace OSGazetteerProcessor
             Coordinate c = new Coordinate(Longitude, Latitude);
             c = MapTransforms.TransformCoordinate(c);
             Point = GeometryFactory.Default.CreatePoint(c);
-                        
+            BufferedPoint = Point.Buffer(185); // points are to 1dp of a minute = 185m so create buffer for matching
             if (values.Length >= 21)
             {
                 ParishName = values[20];

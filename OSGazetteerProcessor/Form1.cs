@@ -113,14 +113,14 @@ namespace OSGazetteerProcessor
                 IEnumerable<OS50kGazetteer> toSearch = OS50k.Where(x => x.ParishName == null || x.ParishName.Length == 0);
                 if (originalToSearch == 0)
                     originalToSearch = toSearch.Count();
-                Parallel.ForEach(toSearch, os50k =>
+                foreach(OS50kGazetteer os50k in toSearch)
                 {
-                    if (geom.Intersects(os50k.Point))
+                    if (geom.Intersects(os50k.BufferedPoint))
                     {
                         os50k.ParishName = (string)f.Attributes[fieldname];
                         count++;
                     }
-                });
+                }
                 int left = toSearch.Count() - count;
                 textBox1.AppendText("Set " + count + " entries for parish: " + f.Attributes[fieldname] + " number " + featureNum + " / " + featuresCount + " leaving " + left + " of " + originalToSearch + " to search\n");
                 if (lastSaved - 2000 > left)
