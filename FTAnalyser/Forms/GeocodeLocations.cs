@@ -1087,7 +1087,7 @@ namespace FTAnalyzer.Forms
                 if (subRegionMatches.Count() > 0)
                     return ProcessOS50kMatches(subRegionMatches, loc, FactLocation.SUBREGION);
             }
-            Console.WriteLine("Failed to match: " + loc.ToString());
+            log.Info("OS Geocoder Failed to match: " + loc.ToString());
             return false;
         }
 
