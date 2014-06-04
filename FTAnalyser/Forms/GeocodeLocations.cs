@@ -982,7 +982,7 @@ namespace FTAnalyzer.Forms
                 mnuReverseGeocode.Enabled = false;
                 mnuOSGeocodeLocations.Enabled = false;
                 ft.Geocoding = true;
-                txtLocations.Text += " Initialising OS Geocoding.";
+                txtLocations.Text = "Initialising OS Geocoding.";
                 OSGeocodeBackgroundWorker.RunWorkerAsync();
                 this.Cursor = Cursors.Default;
             }
