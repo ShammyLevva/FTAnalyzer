@@ -12,47 +12,50 @@ namespace FTAnalyzer
         public static List<Region> WELSH_REGIONS;
         public static List<Region> UK_REGIONS;
 
+        #region Scottish Regions
+        public static Region ABERDEEN = new Region(Countries.SCOTLAND, "Aberdeen");
+        public static Region ABERDEEN_CITY = new Region(Countries.SCOTLAND, "Aberdeen City");
+        public static Region ANGUS = new Region(Countries.SCOTLAND, "Angus");
+        public static Region ARGYLL = new Region(Countries.SCOTLAND, "Argyll");
+        public static Region AYR = new Region(Countries.SCOTLAND, "Ayr");
+        public static Region BANFF = new Region(Countries.SCOTLAND, "Banff");
+        public static Region BERWICK = new Region(Countries.SCOTLAND, "Berwick");
+        public static Region BUTE = new Region(Countries.SCOTLAND, "Bute");
+        public static Region CAITHNESS = new Region(Countries.SCOTLAND, "Caithness");
+        public static Region CLACKMANNAN = new Region(Countries.SCOTLAND, "Clackmannan");
+        public static Region DUMFRIES = new Region(Countries.SCOTLAND, "Dumfries");
+        public static Region DUNBARTON = new Region(Countries.SCOTLAND, "Dunbarton");
+        public static Region DUNDEE_CITY = new Region(Countries.SCOTLAND, "Dundee City");
+        public static Region EAST_LOTHIAN = new Region(Countries.SCOTLAND, "East Lothian");
+        public static Region EDINBURGH_CITY = new Region(Countries.SCOTLAND, "Edinburugh City");
+        public static Region FIFE = new Region(Countries.SCOTLAND, "Fife");
+        public static Region GLASGOW_CITY = new Region(Countries.SCOTLAND, "Glasgow City");
+        public static Region INVERNESS = new Region(Countries.SCOTLAND, "Inverness");
+        public static Region KINCARDINE = new Region(Countries.SCOTLAND, "Kincardine");
+        public static Region KINROSS = new Region(Countries.SCOTLAND, "Kinross");
+        public static Region KIRKCUDBRIGHT = new Region(Countries.SCOTLAND, "Kirkcudbright");
+        public static Region LANARK = new Region(Countries.SCOTLAND, "Lanark");
+        public static Region MIDLOTHIAN = new Region(Countries.SCOTLAND, "Midlothian");
+        public static Region MORAY = new Region(Countries.SCOTLAND, "Moray");
+        public static Region NAIRN = new Region(Countries.SCOTLAND, "Nairn");
+        public static Region ORKNEY = new Region(Countries.SCOTLAND, "Orkney");
+        public static Region PEEBLES = new Region(Countries.SCOTLAND, "Peebles");
+        public static Region PERTH = new Region(Countries.SCOTLAND, "Perth");
+        public static Region RENFREW = new Region(Countries.SCOTLAND, "Renfrew");
+        public static Region ROSS_CROMARTY = new Region(Countries.SCOTLAND, "Ross and Cromarty");
+        public static Region ROXBURGH = new Region(Countries.SCOTLAND, "Roxburgh");
+        public static Region SELKIRK = new Region(Countries.SCOTLAND, "Selkirk");
+        public static Region SHETLAND = new Region(Countries.SCOTLAND, "Shetland");
+        public static Region STIRLING = new Region(Countries.SCOTLAND, "Stirling");
+        public static Region SUTHERLAND = new Region(Countries.SCOTLAND, "Sutherland");
+        public static Region WEST_LOTHIAN = new Region(Countries.SCOTLAND, "West Lothian");
+        public static Region WIGTOWN = new Region(Countries.SCOTLAND, "Wigtown");
+        #endregion
+
         static Regions()
         {
             SCOTTISH_REGIONS = new List<Region>();
             // List from Scotland's People
-            Region ABERDEEN = new Region(Countries.SCOTLAND, "Aberdeen");
-		    Region ABERDEEN_CITY = new Region(Countries.SCOTLAND, "Aberdeen City");
-		    Region ANGUS = new Region(Countries.SCOTLAND, "Angus");
-		    Region ARGYLL = new Region(Countries.SCOTLAND, "Argyll");
-		    Region AYR = new Region(Countries.SCOTLAND, "Ayr");
-		    Region BANFF = new Region(Countries.SCOTLAND, "Banff");
-		    Region BERWICK = new Region(Countries.SCOTLAND, "Berwick");
-		    Region BUTE = new Region(Countries.SCOTLAND, "Bute");
-		    Region CAITHNESS = new Region(Countries.SCOTLAND, "Caithness");
-		    Region CLACKMANNAN = new Region(Countries.SCOTLAND, "Clackmannan");
-		    Region DUMFRIES = new Region(Countries.SCOTLAND, "Dumfries");
-		    Region DUNBARTON = new Region(Countries.SCOTLAND, "Dunbarton");
-		    Region DUNDEE_CITY = new Region(Countries.SCOTLAND, "Dundee City");
-		    Region EAST_LOTHIAN = new Region(Countries.SCOTLAND, "East Lothian");
-		    Region EDINBURGH_CITY = new Region(Countries.SCOTLAND, "Edinburugh City");
-		    Region FIFE = new Region(Countries.SCOTLAND, "Fife");
-		    Region GLASGOW_CITY = new Region(Countries.SCOTLAND, "Glasgow City");
-		    Region INVERNESS = new Region(Countries.SCOTLAND, "Inverness");
-		    Region KINCARDINE = new Region(Countries.SCOTLAND, "Kincardine");
-		    Region KINROSS = new Region(Countries.SCOTLAND, "Kinross");
-		    Region KIRKCUDBRIGHT = new Region(Countries.SCOTLAND, "Kirkcudbright");
-		    Region LANARK = new Region(Countries.SCOTLAND, "Lanark");
-		    Region MIDLOTHIAN = new Region(Countries.SCOTLAND, "Midlothian");
-		    Region MORAY = new Region(Countries.SCOTLAND, "Moray");
-		    Region NAIRN = new Region(Countries.SCOTLAND, "Nairn");
-		    Region ORKNEY = new Region(Countries.SCOTLAND, "Orkney");
-		    Region PEEBLES = new Region(Countries.SCOTLAND, "Peebles");
-		    Region PERTH = new Region(Countries.SCOTLAND, "Perth");
-		    Region RENFREW = new Region(Countries.SCOTLAND, "Renfrew");
-		    Region ROSS_CROMARTY = new Region(Countries.SCOTLAND, "Ross and Cromarty");
-		    Region ROXBURGH = new Region(Countries.SCOTLAND, "Roxburgh");
-		    Region SELKIRK = new Region(Countries.SCOTLAND, "Selkirk");
-		    Region SHETLAND = new Region(Countries.SCOTLAND, "Shetland");
-		    Region STIRLING = new Region(Countries.SCOTLAND, "Stirling");
-		    Region SUTHERLAND = new Region(Countries.SCOTLAND, "Sutherland");
-		    Region WEST_LOTHIAN = new Region(Countries.SCOTLAND, "West Lothian");
-		    Region WIGTOWN = new Region(Countries.SCOTLAND, "Wigtown");
             SCOTTISH_REGIONS.AddRange(new Region[]{
                     ABERDEEN, ABERDEEN_CITY, ANGUS, ARGYLL, AYR, BANFF, BERWICK, BUTE, CAITHNESS, CLACKMANNAN, DUMFRIES,
                     DUNBARTON, DUNDEE_CITY, EAST_LOTHIAN, EDINBURGH_CITY, FIFE, GLASGOW_CITY, INVERNESS, KINCARDINE, 
@@ -74,7 +77,47 @@ namespace FTAnalyzer
 
         private static void AddScottishRegionAlternates()
         {
-            throw new NotImplementedException();
+            // add cities without word city
+            ABERDEEN_CITY.AddAlternateName("Aberdeen");
+            DUNDEE_CITY.AddAlternateName("Dundee");
+            EDINBURGH_CITY.AddAlternateName("Edinburgh");
+            GLASGOW_CITY.AddAlternateName("Glasgow");
+            // add shires
+            ABERDEEN.AddAlternateName("Aberdeenshire");
+            ANGUS.AddAlternateName("Forfarshire");
+            ARGYLL.AddAlternateName("Argyllshire");
+            AYR.AddAlternateName("Ayrshire");
+            BANFF.AddAlternateName("Banffshire");
+            BERWICK.AddAlternateName("Berwickshire");
+            BUTE.AddAlternateName("Buteshire");
+            CLACKMANNAN.AddAlternateName("Clackmannanshire");
+            DUMFRIES.AddAlternateName("Dumfries-shire");
+            DUMFRIES.AddAlternateName("Dumfriesshire");
+            DUNBARTON.AddAlternateName("Dunbartonshire");
+            EAST_LOTHIAN.AddAlternateName("Haddingtonshire");
+            FIFE.AddAlternateName("Fifeshire");
+            INVERNESS.AddAlternateName("Inverness-shire");
+            INVERNESS.AddAlternateName("Invernessshire");
+            KINCARDINE.AddAlternateName("Kincardineshire");
+            KINROSS.AddAlternateName("Kinross-shire");
+            KINROSS.AddAlternateName("Kinrossshire");
+            KIRKCUDBRIGHT.AddAlternateName("Kirkcudbrightshire");
+            LANARK.AddAlternateName("Lanarkshire");
+            MORAY.AddAlternateName("Elginshire");
+            NAIRN.AddAlternateName("Nairnshire");
+            PEEBLES.AddAlternateName("Peebles-shire");
+            PEEBLES.AddAlternateName("Peeblesshire");
+            PERTH.AddAlternateName("Perthshire");
+            RENFREW.AddAlternateName("Renfrewshire");
+            ROXBURGH.AddAlternateName("Roxburghshire");
+            SELKIRK.AddAlternateName("Selkirkshire");
+            STIRLING.AddAlternateName("Stirlingshire");
+            WEST_LOTHIAN.AddAlternateName("Linlithgowshire");
+            WIGTOWN.AddAlternateName("Wigtownshire");
+            // alternate names
+            SHETLAND.AddAlternateName("Zetland");
+            ROSS_CROMARTY.AddAlternateName("Ross & Cromarty");
+            FIFE.AddAlternateName("Kingdom of Fife");
         }
     }
 }
