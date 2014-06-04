@@ -24,7 +24,7 @@ namespace FTAnalyzer
     public partial class MainForm : Form
     {
         public static string VERSION = "4.0.0.0-beta2";
-        
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
@@ -263,6 +263,7 @@ namespace FTAnalyzer
             mnuLocationsGeocodeReport.Enabled = enabled;
             mnuLifelines.Enabled = enabled;
             mnuPlaces.Enabled = enabled;
+            mnuLookupBlankGoogleLocations.Enabled = enabled;
             mnuTreetopsToExcel.Enabled = enabled && dgTreeTops.RowCount > 0;
             mnuWorldWarsToExcel.Enabled = enabled && dgWorldWars.RowCount > 0;
         }
@@ -599,7 +600,7 @@ namespace FTAnalyzer
         {
             HttpUtility.VisitWebsite("http://ftanalyzer.codeplex.com/releases/view/122486");
         }
-        
+
         private void olderParentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
@@ -694,6 +695,14 @@ namespace FTAnalyzer
                 else
                     e.CellStyle.Font = normalFont;
             }
+            else if (e.ColumnIndex == 1)
+            {
+                string region = (string)cell.Value;
+                if (region.Length > 0 && Regions.IsKnownRegion(region))
+                    e.CellStyle.Font = boldFont;
+                else
+                    e.CellStyle.Font = normalFont;
+            }
             else
             {
                 FactLocation loc = grid.Rows[e.RowIndex].DataBoundItem as FactLocation;
@@ -704,43 +713,33 @@ namespace FTAnalyzer
         private void dgCountries_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex == 0 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
-            {
                 FormatCellLocations(dgCountries, e);
-            }
         }
 
         private void dgRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 0 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
-            {
+            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
                 FormatCellLocations(dgRegions, e);
-            }
         }
 
         private void dgSubRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 0 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
-            {
+            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
                 FormatCellLocations(dgSubRegions, e);
-            }
         }
 
         private void dgAddresses_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 0 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
-            {
+            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
                 FormatCellLocations(dgAddresses, e);
-            }
         }
 
         private void dgPlaces_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 0 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
-            {
+            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
                 FormatCellLocations(dgPlaces, e);
-            }
         }
-#endregion
+        #endregion
 
         #region EventHandlers
         private void Options_BaptismChanged(object sender, EventArgs e)
@@ -1216,7 +1215,7 @@ namespace FTAnalyzer
                 Predicate<CensusIndividual> surnameFilter = FilterUtils.StringFilter<CensusIndividual>(x => x.Surname, txtCensusSurname.Text);
                 filter = FilterUtils.AndFilter<CensusIndividual>(filter, surnameFilter);
             }
-            if(chkExcludeUnknownBirths.Checked)
+            if (chkExcludeUnknownBirths.Checked)
                 filter = FilterUtils.AndFilter<CensusIndividual>(x => x.BirthDate.IsKnown, filter);
             filter = FilterUtils.AndFilter<CensusIndividual>(x => x.Age.MinAge < (int)udAgeFilter.Value, filter);
             return filter;
@@ -1416,7 +1415,7 @@ namespace FTAnalyzer
             people.Show();
             HourGlass(false);
         }
-                
+
         private void btnLC1881EW_Click(object sender, EventArgs e)
         {
             string reportTitle = "1881 England & Wales Census Records on file";
@@ -2094,7 +2093,7 @@ namespace FTAnalyzer
                 dgDuplicates.Sort(dgDuplicates.Columns["Score"], ListSortDirection.Descending);
             }
         }
-        
+
         private void tbDuplicateScore_Scroll(object sender, EventArgs e)
         {
             // do nothing if progress bar still visible
@@ -2187,7 +2186,7 @@ namespace FTAnalyzer
         {
             ShowCensusRefFacts(CensusReference.ReferenceStatus.BLANK);
         }
-        
+
         private void btnIncompleteCensusRef_Click(object sender, EventArgs e)
         {
             ShowCensusRefFacts(CensusReference.ReferenceStatus.INCOMPLETE);
@@ -2229,12 +2228,12 @@ namespace FTAnalyzer
             else
                 MessageBox.Show("No unrecognised census references found.", "FTAnalyzer");
         }
-        
+
         private void WriteFile(IEnumerable<string> results, string filename)
         {
             Encoding isoWesternEuropean = Encoding.GetEncoding(28591);
             StreamWriter output = new StreamWriter(new FileStream(filename, FileMode.Create, FileAccess.Write), isoWesternEuropean);
-            foreach(string line in results)
+            foreach (string line in results)
                 output.WriteLine(line);
             output.Close();
         }
@@ -2450,7 +2449,7 @@ namespace FTAnalyzer
         #region Referrals
         private void cmbReferrals_Click(object sender, EventArgs e)
         {
-            if(cmbReferrals.Items.Count == 0)
+            if (cmbReferrals.Items.Count == 0)
             {
                 HourGlass(true);
                 List<Individual> list = ft.AllIndividuals.ToList<Individual>();
@@ -2477,8 +2476,8 @@ namespace FTAnalyzer
                 HourGlass(false);
             }
         }
-        #endregion 
-        
+        #endregion
+
         #region Export To Excel
         private void individualsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {

@@ -343,12 +343,16 @@
       <RegionTypo from="Lincs"         to="Lincolnshire" />
       <RegionTypo from="Lincoln"       to="Lincolnshire" />
       <RegionTypo from="Middx"         to="Middlesex" />
+      <RegionTypo from="Mddx"          to="Middlesex" />
+      <RegionTypo from="Mx"            to="Middlesex" />
       <RegionTypo from="Northants"     to="Northamptonshire" />
       <RegionTypo from="Notts"         to="Nottinghamshire" />
       <RegionTypo from="Oxon"          to="Oxfordshire" />
       <RegionTypo from="Oxford"        to="Oxfordshire" />
       <RegionTypo from="Rutlandshire"  to="Rutland" />
+      <RegionTypo from="Rut"           to="Rutland" />
       <RegionTypo from="Salop"         to="Shropshire" />
+      <RegionTypo from="Shrops"        to="Shropshire" />
       <RegionTypo from="Somt"          to="Somerset" />
       <RegionTypo from="Somer"         to="Somerset" />
       <RegionTypo from="Staffs"        to="Staffordshire" />
