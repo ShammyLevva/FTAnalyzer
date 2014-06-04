@@ -23,7 +23,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public string VERSION = "4.0.0.0-beta1";
+        public static string VERSION = "4.0.0.0-beta1";
         
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -44,6 +44,7 @@ namespace FTAnalyzer
             ft.XmlErrorBox = rtbOutput;
             treetopsRelation.MarriedToDB = false;
             ShowMenus(false);
+            WarnXPVersion();
             VERSION = PublishVersion();
             log.Info("Started FTAnalyzer version " + VERSION);
             int pos = VERSION.IndexOf('-');
@@ -88,7 +89,6 @@ namespace FTAnalyzer
         #region Version Info
         private string PublishVersion()
         {
-            WarnXPVersion();
             if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
             {
                 Version ver = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
@@ -1633,7 +1633,7 @@ namespace FTAnalyzer
                 MessageBox.Show("You need to stop Geocoding before you can export the database", "FT Analyzer");
             else
             {
-                ft.BackupDatabase(saveDatabase, "FT Analyzer zip file created by v" + PublishVersion());
+                ft.BackupDatabase(saveDatabase, "FT Analyzer zip file created by v" + VERSION);
             }
         }
 

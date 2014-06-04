@@ -2371,7 +2371,7 @@ namespace FTAnalyzer
         public bool BackupDatabase(SaveFileDialog saveDatabase, string comment)
         {
             string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();
-            saveDatabase.FileName = "FTAnalyzer-Geocodes-" + DateTime.Now.ToString("yyyy-MM-dd") + ".zip";
+            saveDatabase.FileName = "FTAnalyzer-Geocodes-" + DateTime.Now.ToString("yyyy-MM-dd") + "-v" + MainForm.VERSION + ".zip";
             saveDatabase.InitialDirectory = directory;
             DialogResult result = saveDatabase.ShowDialog();
             if (result == DialogResult.OK)

@@ -253,6 +253,8 @@
     <Compile Include="Core\FactSource.cs" />
     <Compile Include="Core\FamilySearch.cs" />
     <Compile Include="Core\FactLocationImage.cs" />
+    <Compile Include="Core\Region.cs" />
+    <Compile Include="Core\Regions.cs" />
     <Compile Include="Core\StandardisedName.cs" />
     <Compile Include="Core\ParentalRelationship.cs" />
     <Compile Include="Core\Parishes.cs" />
