@@ -1027,5 +1027,12 @@ namespace FTAnalyzer
         {
             return base.GetHashCode();
         }
+
+        public bool NeedsReverseGeocoding { 
+            get 
+            {
+                return GoogleLocation.Length == 0 && (GeocodeStatus == Geocode.GEDCOM_USER || GeocodeStatus == Geocode.OS_50KMATCH || GeocodeStatus == Geocode.OS_50KPARTIAL);
+            } 
+        }
     }
 }
