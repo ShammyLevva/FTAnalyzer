@@ -7,14 +7,14 @@ namespace FTAnalyzer
 {
     public class Regions
     {
-        public static List<Region> SCOTTISH_REGIONS;
-        public static List<Region> ENGLISH_REGIONS;
-        public static List<Region> WELSH_REGIONS;
-        public static List<Region> UK_REGIONS;
+        public static ISet<Region> SCOTTISH_REGIONS;
+        public static ISet<Region> ENGLISH_REGIONS;
+        public static ISet<Region> WELSH_REGIONS;
+        public static ISet<Region> UK_REGIONS;
+        public static ISet<string> VALID_REGIONS;
 
         #region Scottish Regions
         public static Region ABERDEEN = new Region(Countries.SCOTLAND, "Aberdeen");
-        public static Region ABERDEEN_CITY = new Region(Countries.SCOTLAND, "Aberdeen City");
         public static Region ANGUS = new Region(Countries.SCOTLAND, "Angus");
         public static Region ARGYLL = new Region(Countries.SCOTLAND, "Argyll");
         public static Region AYR = new Region(Countries.SCOTLAND, "Ayr");
@@ -25,11 +25,8 @@ namespace FTAnalyzer
         public static Region CLACKMANNAN = new Region(Countries.SCOTLAND, "Clackmannan");
         public static Region DUMFRIES = new Region(Countries.SCOTLAND, "Dumfries");
         public static Region DUNBARTON = new Region(Countries.SCOTLAND, "Dunbarton");
-        public static Region DUNDEE_CITY = new Region(Countries.SCOTLAND, "Dundee City");
         public static Region EAST_LOTHIAN = new Region(Countries.SCOTLAND, "East Lothian");
-        public static Region EDINBURGH_CITY = new Region(Countries.SCOTLAND, "Edinburugh City");
         public static Region FIFE = new Region(Countries.SCOTLAND, "Fife");
-        public static Region GLASGOW_CITY = new Region(Countries.SCOTLAND, "Glasgow City");
         public static Region INVERNESS = new Region(Countries.SCOTLAND, "Inverness");
         public static Region KINCARDINE = new Region(Countries.SCOTLAND, "Kincardine");
         public static Region KINROSS = new Region(Countries.SCOTLAND, "Kinross");
@@ -54,35 +51,41 @@ namespace FTAnalyzer
 
         static Regions()
         {
-            SCOTTISH_REGIONS = new List<Region>();
+            SCOTTISH_REGIONS = new HashSet<Region>();
             // List from Scotland's People
-            SCOTTISH_REGIONS.AddRange(new Region[]{
-                    ABERDEEN, ABERDEEN_CITY, ANGUS, ARGYLL, AYR, BANFF, BERWICK, BUTE, CAITHNESS, CLACKMANNAN, DUMFRIES,
-                    DUNBARTON, DUNDEE_CITY, EAST_LOTHIAN, EDINBURGH_CITY, FIFE, GLASGOW_CITY, INVERNESS, KINCARDINE, 
-                    KINROSS, KIRKCUDBRIGHT, LANARK, MIDLOTHIAN, MORAY, NAIRN, ORKNEY, PEEBLES, PERTH, RENFREW, 
-                    ROSS_CROMARTY, ROXBURGH, SELKIRK, SHETLAND, STIRLING, SUTHERLAND, WEST_LOTHIAN, WIGTOWN
+            SCOTTISH_REGIONS.UnionWith(new Region[]{
+                    ABERDEEN, ANGUS, ARGYLL, AYR, BANFF, BERWICK, BUTE, CAITHNESS, CLACKMANNAN, DUMFRIES,
+                    DUNBARTON, EAST_LOTHIAN, FIFE, INVERNESS, KINCARDINE, KINROSS, KIRKCUDBRIGHT, LANARK, 
+                    MIDLOTHIAN, MORAY, NAIRN, ORKNEY, PEEBLES, PERTH, RENFREW, ROSS_CROMARTY, ROXBURGH, 
+                    SELKIRK, SHETLAND, STIRLING, SUTHERLAND, WEST_LOTHIAN, WIGTOWN
                 });
             AddScottishRegionAlternates();
 
-            ENGLISH_REGIONS = new List<Region>();
+            ENGLISH_REGIONS = new HashSet<Region>();
 
 
-            WELSH_REGIONS = new List<Region>();
+            WELSH_REGIONS = new HashSet<Region>();
 
-            UK_REGIONS = new List<Region>();
-            UK_REGIONS.AddRange(SCOTTISH_REGIONS);
-            UK_REGIONS.AddRange(ENGLISH_REGIONS);
-            UK_REGIONS.AddRange(WELSH_REGIONS);
+            UK_REGIONS = new HashSet<Region>();
+            UK_REGIONS.UnionWith(SCOTTISH_REGIONS);
+            UK_REGIONS.UnionWith(ENGLISH_REGIONS);
+            UK_REGIONS.UnionWith(WELSH_REGIONS);
+            AppendValidRegions(UK_REGIONS);
+        }
+
+        private static void AppendValidRegions(ISet<Region> regions)
+        {
+            foreach(Region r in regions)
+            {
+                VALID_REGIONS.Add(r.PreferredName);
+                foreach (string alternate in r.AlternativeNames)
+                    VALID_REGIONS.Add(alternate);
+            }
         }
 
         private static void AddScottishRegionAlternates()
         {
-            // add cities without word city
-            ABERDEEN_CITY.AddAlternateName("Aberdeen");
-            DUNDEE_CITY.AddAlternateName("Dundee");
-            EDINBURGH_CITY.AddAlternateName("Edinburgh");
-            GLASGOW_CITY.AddAlternateName("Glasgow");
-            // add shires
+            // add Anglicised shires
             ABERDEEN.AddAlternateName("Aberdeenshire");
             ANGUS.AddAlternateName("Forfarshire");
             ARGYLL.AddAlternateName("Argyllshire");
@@ -119,5 +122,7 @@ namespace FTAnalyzer
             ROSS_CROMARTY.AddAlternateName("Ross & Cromarty");
             FIFE.AddAlternateName("Kingdom of Fife");
         }
+
+        
     }
 }
