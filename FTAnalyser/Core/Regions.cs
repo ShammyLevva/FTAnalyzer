@@ -10,8 +10,10 @@ namespace FTAnalyzer
         public static ISet<Region> SCOTTISH_REGIONS;
         public static ISet<Region> ENGLISH_REGIONS;
         public static ISet<Region> WELSH_REGIONS;
+        public static ISet<Region> NIRELAND_REGIONS;
+        public static ISet<Region> ISLAND_REGIONS;
         public static ISet<Region> UK_REGIONS;
-        public static ISet<string> VALID_REGIONS;
+        public static IDictionary<string, Region> VALID_REGIONS;
 
         #region Scottish Regions
         public static Region ABERDEEN = new Region("Aberdeenshire", Countries.SCOTLAND);
@@ -115,6 +117,13 @@ namespace FTAnalyzer
         //County Londonderry
         //County Tyrone
 
+        #region UK Islands
+        public static Region IOM = new Region("Isle of Man", Countries.ISLE_OF_MAN);
+        public static Region JERSEY = new Region("Jersey", Countries.CHANNEL_ISLANDS);
+        public static Region GUERNSEY = new Region("Guernsey", Countries.CHANNEL_ISLANDS);
+        public static Region ALDERNEY = new Region("Alderney", Countries.CHANNEL_ISLANDS);
+        public static Region SARK = new Region("Sark", Countries.CHANNEL_ISLANDS);
+        #endregion
         
         static Regions()
         {
@@ -129,7 +138,7 @@ namespace FTAnalyzer
 
             ENGLISH_REGIONS = new HashSet<Region>(new Region[] {
                     BEDS, BERKS, BUCKS, CAMBS, CHESHIRE, CORNWALL, CUMBERLAND, DERBY, DEVON, DORSET,
-                    DURHAM, ESSEX, GLOUCS, HAMPS, HEREFORD, HERTS, HUNTS, KENT, LANCS, LEICS, LINCOLN, 
+                    DURHAM, ESSEX, GLOUCS, HANTS, HEREFORD, HERTS, HUNTS, KENT, LANCS, LEICS, LINCOLN, 
                     MIDDLESEX, NORFOLK, NORTHAMPTON, NORTHUMBERLAND, NOTTINGHAM, OXFORD, RUTLAND, SHROPS, 
                     SOMERSET, STAFFORD, SUFFOLK, SURREY, SUSSEX, WARWICK, WESTMORLAND, WILTS, WORCESTER, YORKS
             });
@@ -140,12 +149,23 @@ namespace FTAnalyzer
             });
             AddWelshRegionAlternates();
 
+            NIRELAND_REGIONS = new HashSet<Region>(new Region[] {
+            
+            });
+            AddNorthernIrelandRegionAlternates();
+
+            ISLAND_REGIONS = new HashSet<Region>(new Region[] {
+                JERSEY, ALDERNEY, GUERNSEY, SARK, IOM
+            });
+
             UK_REGIONS = new HashSet<Region>();
             UK_REGIONS.UnionWith(SCOTTISH_REGIONS);
             UK_REGIONS.UnionWith(ENGLISH_REGIONS);
             UK_REGIONS.UnionWith(WELSH_REGIONS);
+            UK_REGIONS.UnionWith(NIRELAND_REGIONS);
+            UK_REGIONS.UnionWith(ISLAND_REGIONS);
 
-            VALID_REGIONS = new HashSet<string>();
+            VALID_REGIONS = new Dictionary<string, Region>();
             AppendValidRegions(UK_REGIONS);
         }
 
@@ -153,15 +173,23 @@ namespace FTAnalyzer
         {
             foreach(Region r in regions)
             {
-                VALID_REGIONS.Add(r.PreferredName);
+                VALID_REGIONS.Add(r.PreferredName, r);
                 foreach (string alternate in r.AlternativeNames)
-                    VALID_REGIONS.Add(alternate);
+                    VALID_REGIONS.Add(alternate, r);
             }
         }
 
         public static bool IsKnownRegion(string region)
         {
-            return VALID_REGIONS.Contains(region);
+            return VALID_REGIONS.ContainsKey(region);
+        }
+
+        public static Region GetRegion(string region)
+        {
+            Region result;
+            if (VALID_REGIONS.TryGetValue(region, out result))
+                return result;
+            return null;
         }
 
         private static void AddScottishRegionAlternates()
@@ -222,6 +250,11 @@ namespace FTAnalyzer
             //Montgomeryshire      Sir Drefaldwyn
             //Pembrokeshire        Sir Benfro
             //Radnorshire          Sir Faesyfed
+        }
+
+        private static void AddNorthernIrelandRegionAlternates()
+        {
+
         }
 
         private static void AddEnglishRegionAlternates()

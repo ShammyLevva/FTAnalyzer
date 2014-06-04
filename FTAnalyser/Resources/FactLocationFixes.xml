@@ -531,6 +531,7 @@
       <RegionTypo from="SA"    to="South Australia" />
       <RegionTypo from="VIC"   to="Victoria" />
     </RegionTypos>
+    
     <ChapmanCodes>
       <!-- Chapman County Codes -->
       <ChapmanCode chapmanCode="ALD" countyName="Alderney" />
@@ -1313,6 +1314,7 @@
       <Lookup country="England"  code="Yorkshire (West riding)                 :9                             " county="West Yorkshire" />
     </FindMyPast>
   </Lookups>
+  
   <GoogleGeocodes>
     <CountryFixes>
       
