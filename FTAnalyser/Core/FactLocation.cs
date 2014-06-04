@@ -353,7 +353,6 @@ namespace FTAnalyzer
             if (location != null)
             {
                 this.GEDCOMLocation = location;
-                location = location.Replace("?", ""); // remove question marks
                 // we need to parse the location string from a little injun to a big injun
                 int comma = location.LastIndexOf(",");
                 if (comma > 0)
