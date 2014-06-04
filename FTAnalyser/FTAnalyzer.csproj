@@ -298,7 +298,7 @@
       <DependentUpon>Progress.cs</DependentUpon>
     </Compile>
     <Compile Include="Mapping\ClusterLayer.cs" />
-    <Compile Include="Mapping\Counties.cs" />
+    <Compile Include="Mapping\CountyConversion.cs" />
     <Compile Include="Mapping\MapLifeLine.cs" />
     <Compile Include="Mapping\MapHelper.cs" />
     <Compile Include="Mapping\NLSRequest.cs" />

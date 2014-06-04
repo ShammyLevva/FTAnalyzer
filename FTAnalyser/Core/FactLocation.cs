@@ -44,7 +44,7 @@ namespace FTAnalyzer
         public string GoogleResultType { get; set; }
         public int FoundLevel { get; set; }
         public double PixelSize { get; set; }
-        public List<Counties.County> Counties { get; private set; }
+        public List<CountyConversion.County> Counties { get; private set; }
         public GeoResponse.CResult.CGeometry.CViewPort ViewPort { get; set; }
         private List<Individual> individuals;
 
@@ -237,7 +237,7 @@ namespace FTAnalyzer
             Geocodes.Add(Geocode.OUT_OF_BOUNDS, "Outside Country Area");
             Geocodes.Add(Geocode.LEVEL_MISMATCH, "Partial Match (Levels)");
             Geocodes.Add(Geocode.OS_50KMATCH, "OS 50k Gazetteer Match");
-            Geocodes.Add(Geocode.OS_50KPARTIAL, "OS 50k Partial Match");
+            Geocodes.Add(Geocode.OS_50KPARTIAL, "Partial Match (OS 50k)");
         }
 
         public static FactLocation GetLocation(string place)
@@ -329,7 +329,7 @@ namespace FTAnalyzer
             this.GoogleResultType = string.Empty;
             this.FoundLevel = -2;
             this.ViewPort = new GeoResponse.CResult.CGeometry.CViewPort();
-            this.Counties = new List<Counties.County>();
+            this.Counties = new List<CountyConversion.County>();
         }
 
         private FactLocation(string location, string latitude, string longitude, Geocode status)
@@ -415,7 +415,7 @@ namespace FTAnalyzer
                 SetFixedLocation();
                 SetSortableLocation();
                 SetMetaphones();
-                Counties = Mapping.Counties.GetCounties(Region);
+                Counties = Mapping.CountyConversion.GetCounties(Region);
                 //string after = (parish + ", " + region + ", " + country).ToUpper().Trim();
                 //if (!before.Equals(after))
                 //    Console.WriteLine("Debug : '" + before + "'  converted to '" + after + "'");

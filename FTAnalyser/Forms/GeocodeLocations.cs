@@ -672,13 +672,13 @@ namespace FTAnalyzer.Forms
                 }
                 ft.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
                 if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text.Substring(0, 3).Equals("Max"))
-                    MessageBox.Show("Finished Geocoding.\n" + txtGoogleWait.Text + "\nPlease wait 24hrs before trying again as Google\nwill not allow further geocoding before then.", "Timeline Geocoding");
+                    MessageBox.Show("Finished Google Geocoding.\n" + txtGoogleWait.Text + "\nPlease wait 24hrs before trying again as Google\nwill not allow further geocoding before then.", "FTAnalyzer Geocoding");
                 else
-                    MessageBox.Show("Finished Geocoding.", "Google Geocoding");
+                    MessageBox.Show("Finished Google Geocoding.", "FTAnalyzer Geocoding");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error geocoding : " + ex.Message, "FT Analyzer");
+                MessageBox.Show("Error Google Geocoding : " + ex.Message, "FTAnalyzer Geocoding");
             }
         }
 
@@ -858,13 +858,13 @@ namespace FTAnalyzer.Forms
                 }
                 ft.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
                 if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text.Substring(0, 3).Equals("Max"))
-                    MessageBox.Show("Finished Reverse Geocoding.\n" + txtGoogleWait.Text + "\nPlease wait 24hrs before trying again as Google\nwill not allow further reverse geocoding before then.", "Timeline Geocoding");
+                    MessageBox.Show("Finished Reverse Geocoding.\n" + txtGoogleWait.Text + "\nPlease wait 24hrs before trying again as Google\nwill not allow further reverse geocoding before then.", "FTAnalyzer Geocoding");
                 else
-                    MessageBox.Show("Finished Reverse Geocoding.", "Google Geocoding");
+                    MessageBox.Show("Finished Reverse Geocoding.", "FTAnalyzer Geocoding");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error reverse geocoding : " + ex.Message, "FT Analyzer");
+                MessageBox.Show("Error Reverse Geocoding : " + ex.Message, "FTAnalyzer Geocoding");
             }
         }
 
@@ -993,7 +993,7 @@ namespace FTAnalyzer.Forms
             if (LoadOS50kGazetteer())
             {
                 ProcessOS50kGazetteerData(worker, e);
-                MessageBox.Show("Finished Ordnance Survey Geocoding", "FTAnalyzer");
+                MessageBox.Show("Finished Ordnance Survey Geocoding", "FTAnalyzer Geocoding");
             }
         }
 
@@ -1042,19 +1042,31 @@ namespace FTAnalyzer.Forms
         public void ProcessOS50kGazetteerData(BackgroundWorker worker, DoWorkEventArgs e)
         {
             // IsGeoCoded(true) will include OS_50KPARTIALS but we don't want to recheck them
-            Predicate<FactLocation> notGeocoded = 
-                x => !x.IsGeoCoded(true) && x.GeocodeStatus != FactLocation.Geocode.OS_50KPARTIAL && Countries.IsUnitedKingdom(x.Country);
-            IEnumerable<FactLocation> toSearch = FactLocation.AllLocations.Where(notGeocoded);
+            IEnumerable<FactLocation> toSearch = FactLocation.AllLocations;
             int total = toSearch.Count();
             int count = 0;
             int matched = 0;
+            int previous = 0;
+            int skipped = 0;
             foreach (FactLocation loc in toSearch)
             {
-                if (GazetteerMatchMethodA(loc))
-                    matched++;
+                if (loc.IsGeoCoded(true) || loc.GeocodeStatus == FactLocation.Geocode.OS_50KPARTIAL)
+                    previous++;
+                else
+                {
+                    if (!Countries.IsUnitedKingdom(loc.Country))
+                        skipped++;
+                    else
+                    {
+                        if (GazetteerMatchMethodA(loc))
+                            matched++;
+                    }
+                }
                 count++;
+
                 int percent = (int)Math.Truncate((count - 1) * 100.0 / total);
-                string status = "Ordnance Survey geocoding, matched: " + matched + ". Checked " + count + " of " + total + ".  ";
+                string status = "Previously geocoded: " + previous + ", skipped: " + skipped +
+                                    ", OS matched: " + matched + ". Done " + count + " of " + total + ".  ";
                 worker.ReportProgress(percent, status);
                 if (worker.CancellationPending)
                 {
