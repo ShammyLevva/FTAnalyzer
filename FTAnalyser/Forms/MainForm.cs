@@ -873,12 +873,24 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        private enum GecodingType { Google = 1, OS = 2, Reverse = 3 }
+
         private void mnuGeocodeLocations_Click(object sender, EventArgs e)
         {
-            StartGeocoding(true);
+            StartGeocoding(GecodingType.Google);
         }
 
-        private void StartGeocoding(bool google)
+        private void mnuOSGeocoder_Click(object sender, EventArgs e)
+        {
+            StartGeocoding(GecodingType.OS);
+        }
+
+        private void mnuLookupBlankGoogleLocations_Click(object sender, EventArgs e)
+        {
+            StartGeocoding(GecodingType.Reverse);
+        }
+
+        private void StartGeocoding(GecodingType type)
         {
             if (!ft.Geocoding) // don't geocode if another geocode session in progress
             {
@@ -896,17 +908,20 @@ namespace FTAnalyzer
                     geo = new GeocodeLocations();
                 geo.Show();
                 geo.Focus();
-                if (google)
-                    geo.StartGoogleGeoCoding(false);
-                else
-                    geo.StartOSGeoCoding();
+                switch (type)
+                {
+                    case GecodingType.Google:
+                        geo.StartGoogleGeoCoding(false);
+                        break;
+                    case GecodingType.OS:
+                        geo.StartOSGeoCoding();
+                        break;
+                    case GecodingType.Reverse:
+                        geo.StartReverseGeoCoding();
+                        break;
+                }
                 HourGlass(false);
             }
-        }
-
-        private void mnuOSGeocoder_Click(object sender, EventArgs e)
-        {
-            StartGeocoding(false);
         }
 
         private void locationsGeocodeReportToolStripMenuItem_Click(object sender, EventArgs e)

@@ -2176,6 +2176,12 @@ namespace FTAnalyzer
                 case FactLocation.Geocode.LEVEL_MISMATCH:
                     child.ImageIndex = 7;
                     break;
+                case FactLocation.Geocode.OS_50KMATCH:
+                    child.ImageIndex = 8;
+                    break;
+                case FactLocation.Geocode.OS_50KPARTIAL:
+                    child.ImageIndex = 9;
+                    break;
             }
         }
 
@@ -2244,6 +2250,7 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("\nGeocoding results:");
             // write geocode results - ignore UNKNOWN entry
             int notsearched = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED));
+            int needsReverse = FactLocation.AllLocations.Count(x => x.GoogleLocation == null || x.GoogleLocation.Length == 0);
             xmlErrorbox.AppendText("\nFound " + FactLocation.LocationsCount + " locations in file.\n");
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER) && x.GoogleLocation.Length > 0) + " are GEDCOM/User Entered and have been geocoded.\n");
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER) && x.GoogleLocation.Length == 0) + " are GEDCOM/User Entered but lack a Google Location.\n");
@@ -2255,9 +2262,15 @@ namespace FTAnalyzer
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OUT_OF_BOUNDS)) + " found by Google but outside country boundary.\n");
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.INCORRECT)) + " marked as incorrect by user.\n");
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NO_MATCH)) + " could not be found on Google.\n");
-            xmlErrorbox.AppendText("    " + notsearched + " haven't been searched on Google.");
+            xmlErrorbox.AppendText("    " + notsearched + " haven't been searched.");
             if (notsearched > 0)
-                xmlErrorbox.AppendText(" Use the 'Run Geocoder' option (under Maps menu) to find them.\n");
+                xmlErrorbox.AppendText(" Use the 'Run Google/OS Geocoder' option (under Maps menu) to find them.\n");
+            if (needsReverse > 0)
+            {
+                xmlErrorbox.AppendText("\nNote " + needsReverse + " of the searched locations are missing a reverse lookup.");
+                xmlErrorbox.AppendText(" Use the 'Lookup Blank Google Locations' option (under Maps menu) to find them.\n");
+            }
+            
             xmlErrorbox.BringToFront(); // force the rich text box to the front
         }
 
