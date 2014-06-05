@@ -7,7 +7,7 @@ namespace FTAnalyzer
 {
     public class Region
     {
-        public static enum Creation { HISTORIC = 0, LG_ACT1974 = 1, MODERN = 2 }
+        public enum Creation { HISTORIC = 0, LG_ACT1974 = 1, MODERN = 2 }
 
         public string PreferredName { get; private set; }
         public string Country { get; private set; }

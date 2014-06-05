@@ -2109,8 +2109,9 @@ namespace FTAnalyzer
                         child.Tag = location;
                         child.ToolTipText = "Geocoding Status : " + location.Geocoded;
                         SetTreeNodeImage(location, child);
-                        // Set everything other than known countries to regular
-                        if (currentM == mainformTreeRootNode && Countries.IsKnownCountry(part))
+                        // Set everything other than known countries and known regions to regular
+                        if ((currentM.Level == 0 && Countries.IsKnownCountry(part)) || 
+                            (currentM.Level == 1 && Regions.IsKnownRegion(part)))
                             child.NodeFont = boldFont;
                         else
                             child.NodeFont = regularFont;

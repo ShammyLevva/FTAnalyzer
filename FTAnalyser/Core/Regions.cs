@@ -13,6 +13,9 @@ namespace FTAnalyzer
         public static ISet<Region> NIRELAND_REGIONS;
         public static ISet<Region> ISLAND_REGIONS;
         public static ISet<Region> UK_REGIONS;
+        public static ISet<Region> CANADIAN_REGIONS;
+        public static ISet<Region> US_STATES;
+        public static ISet<Region> AUSTRALIAN_REGIONS;
         public static IDictionary<string, Region> VALID_REGIONS;
 
         #region Scottish Regions
@@ -22,7 +25,7 @@ namespace FTAnalyzer
         public static Region AYR = new Region("Ayrshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
         public static Region BANFF = new Region("Banffshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
         public static Region BERWICK = new Region("Berwickshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
-        public static Region BUTE = new Region("Buteshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region BUTE = new Region("Bute", Countries.SCOTLAND, Region.Creation.HISTORIC);
         public static Region CAITHNESS = new Region("Caithness", Countries.SCOTLAND, Region.Creation.HISTORIC);
         public static Region CLACKMANNAN = new Region("Clackmannanshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
         public static Region DUMFRIES = new Region("Dumfries-shire", Countries.SCOTLAND, Region.Creation.HISTORIC);
@@ -62,7 +65,7 @@ namespace FTAnalyzer
         public static Region DERBY = new Region("Derbyshire", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region DEVON = new Region("Devon", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region DORSET = new Region("Dorset", Countries.ENGLAND, Region.Creation.HISTORIC);
-        public static Region DURHAM = new Region("Durham", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region DURHAM = new Region("County Durham", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region ESSEX = new Region("Essex", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region GLOUCS = new Region("Gloucestershire", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region HANTS = new Region("Hampshire", Countries.ENGLAND, Region.Creation.HISTORIC);
@@ -92,32 +95,54 @@ namespace FTAnalyzer
         public static Region WORCESTER = new Region("Worcestershire", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region YORKS = new Region("Yorkshire", Countries.ENGLAND, Region.Creation.HISTORIC);
 
-        public static Region CUMBRIA = new Region("Cumbria", Countries.ENGLAND, Region.Creation.MODERN);
-        public static Region HUMBERSIDE = new Region("Cumbria", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region LONDON = new Region("Greater London", Countries.ENGLAND, Region.Creation.LG_ACT1974);
+        public static Region MANCHESTER = new Region("Greater Manchester", Countries.ENGLAND, Region.Creation.LG_ACT1974);
+        public static Region MERSEYSIDE = new Region("Merseyside", Countries.ENGLAND, Region.Creation.LG_ACT1974);
+        public static Region SOUTH_YORKSHIRE = new Region("South Yorkshire", Countries.ENGLAND, Region.Creation.LG_ACT1974);
+        public static Region TYNE_WEAR = new Region("Tyne and Wear", Countries.ENGLAND, Region.Creation.LG_ACT1974);
+        public static Region WEST_MIDLANDS = new Region("West Midlands", Countries.ENGLAND, Region.Creation.LG_ACT1974);
+        public static Region WEST_YORKSHIRE = new Region("West Yorkshire", Countries.ENGLAND, Region.Creation.LG_ACT1974);
+        public static Region AVON = new Region("Avon", Countries.ENGLAND, Region.Creation.LG_ACT1974);
+        public static Region CLEVELAND = new Region("Cleveland", Countries.ENGLAND, Region.Creation.LG_ACT1974);
+        public static Region CUMBRIA = new Region("Cumbria", Countries.ENGLAND, Region.Creation.LG_ACT1974);
+        public static Region HUMBERSIDE = new Region("Humberside", Countries.ENGLAND, Region.Creation.LG_ACT1974);
+        public static Region IOW = new Region("Isle of Wight", Countries.ENGLAND, Region.Creation.LG_ACT1974);
+        public static Region HEREFORE_WORCESTER = new Region("Hereford and Worcester", Countries.ENGLAND, Region.Creation.LG_ACT1974);
         #endregion
 
-        // Wales
-        //Anglesey / Sir Fon
-        //Brecknockshire / Sir Frycheiniog
-        //Caernarfonshire / Sir Gaernarfon
-        //Cardiganshire / Ceredigion
-        //Carmarthenshire / Sir Gaerfyrddin
-        //Denbighshire / Sir Ddinbych
-        //Flintshire / Sir Fflint
-        //Glamorgan / Morgannwg
-        //Merioneth / Meirionnydd
-        //Monmouthshire / Sir Fynwy
-        //Montgomeryshire / Sir Drefaldwyn
-        //Pembrokeshire / Sir Benfro
-        //Radnorshire / Sir Faesyfed
+        #region Welsh Regions
+        public static Region ANGLESEY = new Region("Anglesey", Countries.WALES, Region.Creation.HISTORIC);
+        public static Region BRECON = new Region("Brecknockshire", Countries.WALES, Region.Creation.HISTORIC);
+        public static Region CAERNARFON = new Region("Caernarfonshire", Countries.WALES, Region.Creation.HISTORIC);
+        public static Region CARDIGAN = new Region("Cardiganshire", Countries.WALES, Region.Creation.HISTORIC);
+        public static Region CARMARTHEN = new Region("Carmarthenshire", Countries.WALES, Region.Creation.HISTORIC);
+        public static Region DENBIGH = new Region("Denbighshire", Countries.WALES, Region.Creation.HISTORIC);
+        public static Region FLINT = new Region("Flintshire", Countries.WALES, Region.Creation.HISTORIC);
+        public static Region GLAMORGAN = new Region("Glamorgan", Countries.WALES, Region.Creation.HISTORIC);
+        public static Region MERIONETH = new Region("Merioneth", Countries.WALES, Region.Creation.HISTORIC);
+        public static Region MONMOUTH = new Region("Monmouthshire", Countries.WALES, Region.Creation.HISTORIC);
+        public static Region MONTGOMERY = new Region("Montgomeryshire", Countries.WALES, Region.Creation.HISTORIC);
+        public static Region PEMBROKE = new Region("Pembrokeshire", Countries.WALES, Region.Creation.HISTORIC);
+        public static Region RADNOR = new Region("Radnorshire", Countries.WALES, Region.Creation.HISTORIC);
 
-//Northern Island
-        //County Antrim
-        //County Armagh
-        //County Down
-        //County Fermanagh
-        //County Londonderry
-        //County Tyrone
+        public static Region CLWYD = new Region("Clwyd", Countries.WALES, Region.Creation.LG_ACT1974);
+        public static Region DYFED = new Region("Dyfed", Countries.WALES, Region.Creation.LG_ACT1974);
+        public static Region GWENT = new Region("Gwent", Countries.WALES, Region.Creation.LG_ACT1974);
+        public static Region GWYNEDD = new Region("Gwynedd", Countries.WALES, Region.Creation.LG_ACT1974);
+        public static Region MID_GLAMORGAN = new Region("Mid Glamorgan", Countries.WALES, Region.Creation.LG_ACT1974);
+        public static Region POWYS = new Region("Powys", Countries.WALES, Region.Creation.LG_ACT1974);
+        public static Region SOUTH_GLAMORGAN = new Region("South Glamorgan", Countries.WALES, Region.Creation.LG_ACT1974);
+        public static Region WEST_GLAMORGAN = new Region("West Glamorgan", Countries.WALES, Region.Creation.LG_ACT1974);
+        #endregion
+
+        #region Northern Ireland Regions
+        public static Region ANTRIM = new Region("County Antrim", Countries.NORTHERN_IRELAND, Region.Creation.HISTORIC);
+        public static Region ARMAGH = new Region("County Armagh", Countries.NORTHERN_IRELAND, Region.Creation.HISTORIC);
+        public static Region DOWN = new Region("County Down", Countries.NORTHERN_IRELAND, Region.Creation.HISTORIC);
+        public static Region FERMANAGH = new Region("County Fermanagh", Countries.NORTHERN_IRELAND, Region.Creation.HISTORIC);
+        public static Region LONDONDERRY = new Region("County Londonderry", Countries.NORTHERN_IRELAND, Region.Creation.HISTORIC);
+        public static Region TYRONE = new Region("County Tyrone", Countries.NORTHERN_IRELAND, Region.Creation.HISTORIC);
+        #endregion
 
         #region UK Islands
         public static Region IOM = new Region("Isle of Man", Countries.ISLE_OF_MAN, Region.Creation.HISTORIC);
@@ -126,9 +151,83 @@ namespace FTAnalyzer
         public static Region ALDERNEY = new Region("Alderney", Countries.CHANNEL_ISLANDS, Region.Creation.HISTORIC);
         public static Region SARK = new Region("Sark", Countries.CHANNEL_ISLANDS, Region.Creation.HISTORIC);
         #endregion
-        
+
+        #region Canadian Regions
+        public static Region ALBERTA = new Region("Alberta", Countries.CANADA, Region.Creation.HISTORIC);
+        public static Region BRITISH_COLUMBIA = new Region("British Columbia", Countries.CANADA, Region.Creation.HISTORIC);
+        public static Region MANITOBA = new Region("NManitoba", Countries.CANADA, Region.Creation.HISTORIC);
+        public static Region NEW_BRUNSWICK = new Region("New Brunswick", Countries.CANADA, Region.Creation.HISTORIC);
+        public static Region NEWFOUNDLAND = new Region("Newfoundland and Labrador", Countries.CANADA, Region.Creation.HISTORIC);
+        public static Region NOVA_SCOTIA = new Region("Nova Scotia", Countries.CANADA, Region.Creation.HISTORIC);
+        public static Region ONTARIO = new Region("Ontario", Countries.CANADA, Region.Creation.HISTORIC);
+        public static Region PRINCE_EDWARD = new Region("Prince Edward Island", Countries.CANADA, Region.Creation.HISTORIC);
+        public static Region QUEBEC = new Region("Quebec", Countries.CANADA, Region.Creation.HISTORIC);
+        public static Region SASKATCHEWAN = new Region("Saskatchewan", Countries.CANADA, Region.Creation.HISTORIC);
+        public static Region NW_TERRITORIES = new Region("Northwest Territories", Countries.CANADA, Region.Creation.HISTORIC);
+        public static Region NUNAVUT = new Region("Nunavut", Countries.CANADA, Region.Creation.HISTORIC);
+        public static Region YUKON = new Region("Yukon Territory", Countries.CANADA, Region.Creation.HISTORIC);
+        #endregion
+
+        #region US States
+        public static Region ALABAMA = new Region("Alabama", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region ALASKA = new Region("Alaska", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region ARIZONA = new Region("Arizona", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region ARKANSAS = new Region("Arkansas", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region CALIFORNIA = new Region("California", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region COLORADO = new Region("Colorado", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region CONNECTICUT = new Region("Connecticut", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region DELAWARE = new Region("Delaware", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region FLORIDA = new Region("Florida", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region GEORGIA = new Region("Georgia", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region HAWAII = new Region("Hawaii", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region IDAHO = new Region("Idaho", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region ILLINOIS = new Region("Illinois", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region INDIANA = new Region("Indiana", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region IOWA = new Region("Iowa", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region KANSAS = new Region("Kansas", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region KENTUCKY = new Region("Kentucky", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region LOUISIANA = new Region("Louisiana", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region MAINE = new Region("Maine", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region MARYLAND = new Region("Maryland", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region MASSACHUSETTS = new Region("Massachusetts", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region MICHIGAN = new Region("Michigan", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region MINNESOTA = new Region("Minnesota", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region MISSISSIPPI = new Region("Mississippi", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region MISSOURI = new Region("Missouri", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region MONTANA = new Region("Montana", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region NEBRASKA = new Region("Nebraska", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region NEVADA = new Region("Nevada", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region NEW_HAMPSHIRE = new Region("New Hampshire", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region NEW_JERSEY = new Region("New Jersey", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region NEW_MEXICO = new Region("New Mexico", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region NEW_YORK = new Region("New York", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region NORTH_CAROLINA = new Region("North Carolina", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region NORTH_DAKOTA = new Region("North Dakota", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region OHIO = new Region("Ohio", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region OKLAHOMA = new Region("Oklahoma", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region OREGON = new Region("Oregon", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region PENNSYLVANIA = new Region("Pennsylvania", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region RHODE_ISLAND = new Region("Rhode Island", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region SOUTH_CAROLINA = new Region("South Carolina", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region SOUTH_DAKOTA = new Region("South Dakota", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region TENNESSEE = new Region("Tennessee", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region TEXAS = new Region("Texas", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region UTAH = new Region("Utah", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region VERMONT = new Region("Vermont", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region VIRGINIA = new Region("Virginia", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region WASHINGTON = new Region("Washington", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region WEST_VIRGINIA = new Region("West Virginia", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region WISCONSIN = new Region("Wisconsin", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region WYOMING = new Region("Wyoming", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        public static Region DC = new Region("District of Columbia", Countries.UNITED_STATES, Region.Creation.HISTORIC);
+        #endregion
+
+        #region Australian Regions
+        #endregion
+
         static Regions()
         {
+            #region UK Regions
             // List from Scotland's People
             SCOTTISH_REGIONS = new HashSet<Region>(new Region[]{
                     ABERDEEN, ANGUS, ARGYLL, AYR, BANFF, BERWICK, BUTE, CAITHNESS, CLACKMANNAN, DUMFRIES,
@@ -143,17 +242,20 @@ namespace FTAnalyzer
                     DURHAM, ESSEX, GLOUCS, HANTS, HEREFORD, HERTS, HUNTS, KENT, LANCS, LEICS, LINCOLN, 
                     MIDDLESEX, NORFOLK, NORTHAMPTON, NORTHUMBERLAND, NOTTINGHAM, OXFORD, RUTLAND, SHROPS, 
                     SOMERSET, STAFFORD, SUFFOLK, SURREY, SUSSEX, WARWICK, WESTMORLAND, WILTS, WORCESTER,
-                    YORKS, CUMBRIA, HUMBERSIDE
+                    YORKS, LONDON, MANCHESTER, MERSEYSIDE, SOUTH_YORKSHIRE, TYNE_WEAR, WEST_MIDLANDS,
+                    WEST_YORKSHIRE, AVON, CLEVELAND, CUMBRIA, HUMBERSIDE, IOW, HEREFORE_WORCESTER
             });
             AddEnglishRegionAlternates();
 
             WELSH_REGIONS = new HashSet<Region>(new Region[] {
-            
+                    ANGLESEY, BRECON, CAERNARFON, CARDIGAN, CARMARTHEN, DENBIGH, FLINT, GLAMORGAN, MERIONETH, 
+                    MONMOUTH, MONTGOMERY, PEMBROKE, RADNOR, CLWYD, DYFED, GWENT, GWYNEDD, MID_GLAMORGAN, 
+                    POWYS, SOUTH_GLAMORGAN, WEST_GLAMORGAN              
             });
             AddWelshRegionAlternates();
 
             NIRELAND_REGIONS = new HashSet<Region>(new Region[] {
-            
+                ANTRIM, ARMAGH, DOWN, FERMANAGH, LONDONDERRY, TYRONE
             });
             AddNorthernIrelandRegionAlternates();
 
@@ -167,14 +269,40 @@ namespace FTAnalyzer
             UK_REGIONS.UnionWith(WELSH_REGIONS);
             UK_REGIONS.UnionWith(NIRELAND_REGIONS);
             UK_REGIONS.UnionWith(ISLAND_REGIONS);
+            #endregion 
+            
+            CANADIAN_REGIONS = new HashSet<Region>(new Region[] { 
+                ALBERTA, BRITISH_COLUMBIA, MANITOBA, NEW_BRUNSWICK, NEWFOUNDLAND, NOVA_SCOTIA, ONTARIO, 
+                PRINCE_EDWARD, QUEBEC, SASKATCHEWAN, NW_TERRITORIES, NUNAVUT, YUKON
+            });
+            AddCanadianRegionAlternates();
 
+            US_STATES = new HashSet<Region>(new Region[] { 
+                ALABAMA, ALASKA, ARIZONA, ARKANSAS, CALIFORNIA, COLORADO, CONNECTICUT, DELAWARE, FLORIDA,
+                GEORGIA, HAWAII, IDAHO, ILLINOIS, INDIANA, IOWA, KANSAS, KENTUCKY, LOUISIANA, MAINE, 
+                MARYLAND, MASSACHUSETTS, MICHIGAN, MINNESOTA, MISSISSIPPI, MISSOURI, MONTANA, NEBRASKA,
+                NEVADA, NEW_HAMPSHIRE, NEW_JERSEY, NEW_MEXICO, NEW_YORK, NORTH_CAROLINA, NORTH_DAKOTA,
+                OHIO, OKLAHOMA, OREGON, PENNSYLVANIA, RHODE_ISLAND, SOUTH_CAROLINA, SOUTH_DAKOTA,
+                TENNESSEE, TEXAS, UTAH, VERMONT, VIRGINIA, WASHINGTON, WEST_VIRGINIA, WISCONSIN, WYOMING
+            });
+            AddUSStatesAlternates();
+
+            AUSTRALIAN_REGIONS = new HashSet<Region>(new Region[] { 
+
+            });
+
+            #region Valid Regions
             VALID_REGIONS = new Dictionary<string, Region>();
             AppendValidRegions(UK_REGIONS);
+            AppendValidRegions(CANADIAN_REGIONS);
+            AppendValidRegions(US_STATES);
+            AppendValidRegions(AUSTRALIAN_REGIONS);
+            #endregion
         }
 
         private static void AppendValidRegions(ISet<Region> regions)
         {
-            foreach(Region r in regions)
+            foreach (Region r in regions)
             {
                 VALID_REGIONS.Add(r.PreferredName, r);
                 foreach (string alternate in r.AlternativeNames)
@@ -198,12 +326,12 @@ namespace FTAnalyzer
         private static void AddScottishRegionAlternates()
         {
             // add Anglicised shires
-            ABERDEEN.AddAlternateName("Aberdeen");
+            ABERDEEN.AddAlternateName("Abdn");
             ANGUS.AddAlternateName("Forfarshire");
             ARGYLL.AddAlternateName("Argyllshire");
             BANFF.AddAlternateName("Banff");
             BERWICK.AddAlternateName("Berwick");
-            BUTE.AddAlternateName("Butes");
+            BUTE.AddAlternateName("Buteshire");
             CLACKMANNAN.AddAlternateName("Clackmannan");
             DUMFRIES.AddAlternateName("Dumfries");
             DUMFRIES.AddAlternateName("Dumfriesshire");
@@ -240,24 +368,50 @@ namespace FTAnalyzer
 
         private static void AddWelshRegionAlternates()
         { // http://www.gazetteer.org.uk/contents.php
-            //Anglesey             Sir Fon
-            //Brecknockshire       Sir Frycheiniog
-            //Caernarfonshire      Sir Gaernarfon
-            //Cardiganshire        Ceredigion
-            //Carmarthenshire      Sir Gaerfyrddin
-            //Denbighshire         Sir Ddinbych
-            //Flintshire           Sir y Fflint
-            //Glamorgan            Morgannwg
-            //Merioneth            Meirionnydd
-            //Monmouthshire        Sir Fynwy
-            //Montgomeryshire      Sir Drefaldwyn
-            //Pembrokeshire        Sir Benfro
-            //Radnorshire          Sir Faesyfed
+            ANGLESEY.AddAlternateName("Sir Fon");
+            BRECON.AddAlternateName("Sir Frycheiniog");
+            BRECON.AddAlternateName("Brecon");
+            CAERNARFON.AddAlternateName("Sir Gaernarfon");
+            CAERNARFON.AddAlternateName("Caernarfon");
+            CAERNARFON.AddAlternateName("Caernarvonshire");
+            CAERNARFON.AddAlternateName("Caernarvon");
+            CARDIGAN.AddAlternateName("Cardigan");
+            CARDIGAN.AddAlternateName("Ceredigion");
+            CARMARTHEN.AddAlternateName("Sir Gaerfyrddin");
+            CARMARTHEN.AddAlternateName("Carmarthen");
+            DENBIGH.AddAlternateName("Denbigh");
+            DENBIGH.AddAlternateName("Sir Ddinbych");
+            FLINT.AddAlternateName("Flint");
+            FLINT.AddAlternateName("Sir y Fflint");
+            GLAMORGAN.AddAlternateName("Morgannwg");
+            MERIONETH.AddAlternateName("Merionethshire");
+            MERIONETH.AddAlternateName("Meirionnydd");
+            MONMOUTH.AddAlternateName("Monmouth");
+            MONMOUTH.AddAlternateName("Sir Fynwy");
+            MONTGOMERY.AddAlternateName("Montogmery");
+            MONTGOMERY.AddAlternateName("Sir Drefaldwyn");
+            PEMBROKE.AddAlternateName("Pembroke");
+            PEMBROKE.AddAlternateName("Sir Benfro");
+            RADNOR.AddAlternateName("Radnor");
+            RADNOR.AddAlternateName("Sir Faesyfed");
         }
 
         private static void AddNorthernIrelandRegionAlternates()
         {
-
+            ANTRIM.AddAlternateName("Antrim");
+            ARMAGH.AddAlternateName("Armagh");
+            DOWN.AddAlternateName("Down");
+            FERMANAGH.AddAlternateName("Fermanagh");
+            LONDONDERRY.AddAlternateName("Londonderry");
+            TYRONE.AddAlternateName("Tyrone");
+            ANTRIM.AddAlternateName("Co Antrim");
+            ARMAGH.AddAlternateName("Co Armagh");
+            DOWN.AddAlternateName("Co Down");
+            FERMANAGH.AddAlternateName("Co Fermanagh");
+            LONDONDERRY.AddAlternateName("Co Londonderry");
+            TYRONE.AddAlternateName("Co Tyrone");
+            LONDONDERRY.AddAlternateName("Derry");
+            LONDONDERRY.AddAlternateName("Co Derry");
         }
 
         private static void AddEnglishRegionAlternates()
@@ -275,7 +429,7 @@ namespace FTAnalyzer
             DEVON.AddAlternateName("Dev");
             DORSET.AddAlternateName("Dorsetshire");
             DORSET.AddAlternateName("Dor");
-            DURHAM.AddAlternateName("County Durham");
+            DURHAM.AddAlternateName("Durham");
             DURHAM.AddAlternateName("Co Durham");
             DURHAM.AddAlternateName("Co Dur");
             GLOUCS.AddAlternateName("Glos");
@@ -326,7 +480,31 @@ namespace FTAnalyzer
             YORKS.AddAlternateName("Yorks");
             YORKS.AddAlternateName("East Yorkshire");
             YORKS.AddAlternateName("North Yorkshire");
-            YORKS.AddAlternateName("West Yorkshire");
+
+            TYNE_WEAR.AddAlternateName("Tyne & Wear");
+        }
+
+        private static void AddCanadianRegionAlternates()
+        {
+            BRITISH_COLUMBIA.AddAlternateName("Colombie-Britannique");
+            NEW_BRUNSWICK.AddAlternateName("Nouveau-Brunswick");
+            NEWFOUNDLAND.AddAlternateName("Newfoundland");
+            NEWFOUNDLAND.AddAlternateName("Labrador");
+            NEWFOUNDLAND.AddAlternateName("Terre-Neuve-et-Labrador");
+            NOVA_SCOTIA.AddAlternateName("Nouvelle-Écosse");
+            PRINCE_EDWARD.AddAlternateName("Île-du-Prince-Édouard");
+            PRINCE_EDWARD.AddAlternateName("Prince Edward");
+            QUEBEC.AddAlternateName("Québec");
+            NW_TERRITORIES.AddAlternateName("Territoires du Nord-Ouest");
+            NW_TERRITORIES.AddAlternateName("Northwest Territory");
+            YUKON.AddAlternateName("Yukon");
+            YUKON.AddAlternateName("Territoire du Yukon");
+        }
+
+        private static void AddUSStatesAlternates()
+        {
+            DC.AddAlternateName("DC");
+            DC.AddAlternateName("Dist of Columba");
         }
     }
 }

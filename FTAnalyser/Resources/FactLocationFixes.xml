@@ -300,14 +300,17 @@
       <!-- Scotland -->
       <RegionTypo from="ABDN"           to="Aberdeenshire" />
       <RegionTypo from="Dumfriesshire"  to="Dumfries-shire" />
+      <RegionTypo from="Berwick"        to="Berwickshire" />
       <RegionTypo from="Invernessshire" to="Inverness-shire" />
       <RegionTypo from="Kinrossshire"   to="Kinross-shire" />
       <RegionTypo from="Peeblesshire"   to="Peebles" />
+      <RegionTypo from="Peebles-shire"  to="Peebles" />
       <RegionTypo from="Forfarshire"    to="Angus" />
       <RegionTypo from="Argyllshire"    to="Argyll" />
       <RegionTypo from="Buteshire"      to="Bute" />
       <RegionTypo from="Morayshire"     to="Moray" />
       <RegionTypo from="Fifeshire"      to="Fife" />
+      <RegionTypo from="Elginshire"     to="Moray" />
       <RegionTypo from="Nairnshire"     to="Nairn" />
       <RegionTypo from="Roxburghshire"  to="Roxburgh" />
       <RegionTypo from="Selkirkshire"   to="Selkirk" />
@@ -315,6 +318,7 @@
       <RegionTypo from="Caithnessshire"  to="Caithness" />
       <RegionTypo from="Haddingtonshire" to="East Lothian" />
       <RegionTypo from="Linlithgowshire" to="West Lothian" />
+      <RegionTypo from="Edinburghshire" to="Midlothian" />
 
       <!-- England -->
       <RegionTypo from="Beds"          to="Bedfordshire" />
@@ -379,10 +383,10 @@
       <RegionTypo from="Yorkshire West Riding"      to="West Yorkshire" />
       <RegionTypo from="West Riding of Yorkshire"   to="West Yorkshire" />
       <RegionTypo from="Yorkshire (West)"           to="West Yorkshire" />
-      <RegionTypo from="Yorkshire (South)"          to="West Yorkshire" />
-      <RegionTypo from="South Yorkshire"            to="West Yorkshire" />
       <RegionTypo from="W Yorks"                    to="West Yorkshire" />
-      <RegionTypo from="S Yorks"                    to="West Yorkshire" />
+      <RegionTypo from="South Yorkshire"            to="South Yorkshire" />
+      <RegionTypo from="Yorkshire (South)"          to="South Yorkshire" />
+      <RegionTypo from="S Yorks"                    to="South Yorkshire" />
 
       <!-- Ireland -->
       <RegionTypo from="Co Antrim"        to="County Antrim" />
