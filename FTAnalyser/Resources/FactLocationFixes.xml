@@ -319,6 +319,7 @@
       <RegionTypo from="Haddingtonshire" to="East Lothian" />
       <RegionTypo from="Linlithgowshire" to="West Lothian" />
       <RegionTypo from="Edinburghshire" to="Midlothian" />
+      <RegionTypo from="Zetland"        to="Shetland" />
 
       <!-- England -->
       <RegionTypo from="Beds"          to="Bedfordshire" />
@@ -460,7 +461,7 @@
       <RegionTypo from="County Wicklow"   to="Wicklow" />
 
       <!-- Wales -->
-      <RegionTypo from="Caernarvonshire"  to="Caernarvon" />
+      <RegionTypo from="Caernarvonshire"  to="Caernarfon" />
       <RegionTypo from="Cardiganshire"    to="Cardigan" />
       <RegionTypo from="Carmarthenshire"  to="Carmarthen" />
       <RegionTypo from="Brecknockshire"   to="Brecon" />
@@ -479,7 +480,7 @@
       <RegionTypo from="BC"     to="British Columbia" />
       <RegionTypo from="MB"     to="Manitoba" />
       <RegionTypo from="NB"     to="New Brunswick" />
-      <RegionTypo from="NL"     to="Newfoundland and Labrador" />
+      <RegionTypo from="NL"     to="Newfoundland" />
       <RegionTypo from="NWT"    to="North West Territories" />
       <RegionTypo from="NT"     to="North West Territories" />
       <RegionTypo from="NS"     to="Nova Scotia" />
@@ -648,18 +649,18 @@
       <ChapmanCode chapmanCode="WIS" countyName="Western Isles"         />
 
       <ChapmanCode chapmanCode="AGY" countyName="Anglesey"         />
-      <ChapmanCode chapmanCode="BRE" countyName="Brecknockshire"   />
-      <ChapmanCode chapmanCode="CAE" countyName="Caernarfonshire"  />
-      <ChapmanCode chapmanCode="CGN" countyName="Cardiganshire"    />
-      <ChapmanCode chapmanCode="CMN" countyName="Carmarthenshire"  />
-      <ChapmanCode chapmanCode="DEN" countyName="Denbighshire"     />
-      <ChapmanCode chapmanCode="FLN" countyName="Flintshire"       />
+      <ChapmanCode chapmanCode="BRE" countyName="Brecon"           />
+      <ChapmanCode chapmanCode="CAE" countyName="Caernarfon"       />
+      <ChapmanCode chapmanCode="CGN" countyName="Cardigan"         />
+      <ChapmanCode chapmanCode="CMN" countyName="Carmarthen"       />
+      <ChapmanCode chapmanCode="DEN" countyName="Denbigh"          />
+      <ChapmanCode chapmanCode="FLN" countyName="Flint"            />
       <ChapmanCode chapmanCode="GLA" countyName="Glamorgan"        />
-      <ChapmanCode chapmanCode="MER" countyName="Merioneth"   />
-      <ChapmanCode chapmanCode="MON" countyName="Monmouthshire"    />
-      <ChapmanCode chapmanCode="MGY" countyName="Montgomeryshire"  />
-      <ChapmanCode chapmanCode="PEM" countyName="Pembrokeshire"    />
-      <ChapmanCode chapmanCode="RAD" countyName="Radnorshire"      />
+      <ChapmanCode chapmanCode="MER" countyName="Merioneth"        />
+      <ChapmanCode chapmanCode="MON" countyName="Monmouth"         />
+      <ChapmanCode chapmanCode="MGY" countyName="Montgomery"       />
+      <ChapmanCode chapmanCode="PEM" countyName="Pembroke"         />
+      <ChapmanCode chapmanCode="RAD" countyName="Radnor"           />
       <ChapmanCode chapmanCode="CWD" countyName="Clwyd"            />
       <ChapmanCode chapmanCode="DFD" countyName="Dyfed"            />
       <ChapmanCode chapmanCode="GNT" countyName="Gwent"            />
@@ -707,34 +708,24 @@
       <CountryToRegion region="Aberdeenshire"       country="Scotland" />
       <CountryToRegion region="Angus"               country="Scotland" />
       <CountryToRegion region="Argyll"              country="Scotland" />
-      <CountryToRegion region="Argyllshire"         country="Scotland" />
       <CountryToRegion region="Ayrshire"            country="Scotland" />
-      <CountryToRegion region="Banff"               country="Scotland" />
       <CountryToRegion region="Banffshire"          country="Scotland" />
-      <CountryToRegion region="Berwick"             country="Scotland" />
       <CountryToRegion region="Berwickshire"        country="Scotland" />
       <CountryToRegion region="Bute"                country="Scotland" />
       <CountryToRegion region="Caithness"           country="Scotland" />
       <CountryToRegion region="Clackmannanshire"    country="Scotland" />
-      <CountryToRegion region="Dumfries"            country="Scotland" />
       <CountryToRegion region="Dumfries-shire"      country="Scotland" />
-      <CountryToRegion region="Dunbarton"           country="Scotland" />
       <CountryToRegion region="Dunbartonshire"      country="Scotland" />
       <CountryToRegion region="East Lothian"        country="Scotland" />
       <CountryToRegion region="Fife"                country="Scotland" />
-      <CountryToRegion region="Fifeshire"           country="Scotland" />
       <CountryToRegion region="Inverness-shire"     country="Scotland" />
       <CountryToRegion region="Kincardineshire"     country="Scotland" />
-      <CountryToRegion region="Kinross"             country="Scotland" />
       <CountryToRegion region="Kinross-shire"       country="Scotland" />
-      <CountryToRegion region="Kirkcudbright"       country="Scotland" />
       <CountryToRegion region="Kirkcudbrightshire"  country="Scotland" />
       <CountryToRegion region="Lanarkshire"         country="Scotland" />
       <CountryToRegion region="Midlothian"          country="Scotland" />
       <CountryToRegion region="Moray"               country="Scotland" />
-      <CountryToRegion region="Morayshire"          country="Scotland" />
       <CountryToRegion region="Nairn"               country="Scotland" />
-      <CountryToRegion region="Nairnshire"          country="Scotland" />
       <CountryToRegion region="Orkney"              country="Scotland" />
       <CountryToRegion region="Peebles"             country="Scotland" />
       <CountryToRegion region="Perthshire"          country="Scotland" />
@@ -743,11 +734,10 @@
       <CountryToRegion region="Roxburgh"            country="Scotland" />
       <CountryToRegion region="Selkirk"             country="Scotland" />
       <CountryToRegion region="Shetland"            country="Scotland" />
-      <CountryToRegion region="Zetland"             country="Scotland" />
       <CountryToRegion region="Stirlingshire"       country="Scotland" />
       <CountryToRegion region="Sutherland"          country="Scotland" />
       <CountryToRegion region="West Lothian"        country="Scotland" />
-      <CountryToRegion region="Wigtonshire"         country="Scotland" />
+      <CountryToRegion region="Wigtownshire"        country="Scotland" />
 
       <!-- English Shires & Counties add the Country -->
       <CountryToRegion region="Bedfordshire"        country="England" />
@@ -787,7 +777,6 @@
       <CountryToRegion region="Surrey"              country="England" />
       <CountryToRegion region="Warwickshire"        country="England" />
       <CountryToRegion region="Westmorland"         country="England" />
-      <CountryToRegion region="Westmorlandshire"    country="England" />
       <CountryToRegion region="Wiltshire"           country="England" />
       <CountryToRegion region="Worcestershire"      country="England" />
       <CountryToRegion region="Yorkshire"           country="England" />
@@ -795,11 +784,10 @@
       <CountryToRegion region="North Yorkshire"     country="England" />
       <CountryToRegion region="West Yorkshire"      country="England" />
 
-
       <!-- Welsh Regions add the Country -->
       <CountryToRegion region="Anglesey"            country="Wales" />
       <CountryToRegion region="Brecon"              country="Wales" />
-      <CountryToRegion region="Caernarvon"          country="Wales" />
+      <CountryToRegion region="Caernarfon"          country="Wales" />
       <CountryToRegion region="Cardigan"            country="Wales" />
       <CountryToRegion region="Carmarthen"          country="Wales" />
       <CountryToRegion region="Denbigh"             country="Wales" />
@@ -807,7 +795,7 @@
       <CountryToRegion region="Glamorgan"           country="Wales" />
       <CountryToRegion region="Gwynedd"             country="Wales" />
       <CountryToRegion region="Merioneth"           country="Wales" />
-      <CountryToRegion region="Mid-Glamorgan"       country="Wales" />
+      <CountryToRegion region="Mid Glamorgan"       country="Wales" />
       <CountryToRegion region="Monmouth"            country="Wales" />
       <CountryToRegion region="Montgomery"          country="Wales" />
       <CountryToRegion region="Pembroke"            country="Wales" />
@@ -819,7 +807,7 @@
       <CountryToRegion region="Cavan"       country="Ireland" />
       <CountryToRegion region="Carlow"      country="Ireland" />
       <CountryToRegion region="Clare"       country="Ireland" />
-      <CountryToRegion region="Connaught"   country="Ireland" />
+      <CountryToRegion region="Connacht"    country="Ireland" />
       <CountryToRegion region="Cork"        country="Ireland" />
       <CountryToRegion region="Donegal"     country="Ireland" />
       <CountryToRegion region="Down"        country="Northern Ireland" />
@@ -829,7 +817,7 @@
       <CountryToRegion region="Kerry"       country="Ireland" />
       <CountryToRegion region="Kildare"     country="Ireland" />
       <CountryToRegion region="Kilkenny"    country="Ireland" />
-      <CountryToRegion region="Laoighis"    country="Ireland" />
+      <CountryToRegion region="Laois"       country="Ireland" />
       <CountryToRegion region="Leinster"    country="Ireland" />
       <CountryToRegion region="Leitrim"     country="Ireland" />
       <CountryToRegion region="Limerick"    country="Ireland" />
@@ -852,15 +840,6 @@
       <CountryToRegion region="Wexford"     country="Ireland" />
       <CountryToRegion region="Wicklow"     country="Ireland" />
 
-      <!-- Northern Ireland Cities add the Country-->
-      <!-- already present as county
-      <CountryToRegion region="Armagh"      country="Northern Ireland" />
-      <CountryToRegion region="Derry"       country="Northern Ireland" />
-      -->
-      <CountryToRegion region="Belfast"     country="Northern Ireland" />
-      <CountryToRegion region="Lisburn"     country="Northern Ireland" />
-      <CountryToRegion region="Newry"       country="Northern Ireland" />
-
       <!-- North America -->
       <!-- Canadian Provinces add the Country -->
       <CountryToRegion region="Alberta"               country="Canada" />
@@ -868,7 +847,7 @@
       <CountryToRegion region="Manitoba"              country="Canada" />
       <CountryToRegion region="New Brunswick"         country="Canada" />
       <CountryToRegion region="Newfoundland"          country="Canada" />
-      <CountryToRegion region="Northwest Territories" country="Canada" />
+      <CountryToRegion region="North West Territories" country="Canada" />
       <CountryToRegion region="Nova Scotia"           country="Canada" />
       <CountryToRegion region="Ontario"               country="Canada" />
       <CountryToRegion region="Prince Edward Island"  country="Canada" />
@@ -1015,6 +994,15 @@
       <CityAddCountry city="St Asaph"            country="Wales" />
       <CityAddCountry city="St David's"          country="Wales" />
       <CityAddCountry city="Swansea"             country="Wales" />
+
+      <!-- Northern Ireland Cities add the Country-->
+      <!-- already present as county
+      <CountryToRegion region="Armagh"      country="Northern Ireland" />
+      <CountryToRegion region="Derry"       country="Northern Ireland" />
+      -->
+      <CityAddCountry city="Belfast"     country="Northern Ireland" />
+      <CityAddCountry city="Lisburn"     country="Northern Ireland" />
+      <CityAddCountry city="Newry"       country="Northern Ireland" />
     </DemoteCountries>
     <DemoteRegions>
       <RegionToParish parish="Aberdeen"      region="Aberdeenshire" />
@@ -1028,7 +1016,7 @@
       <RegionToParish parish="Perth"         region="Perthshire" />
 
       <!-- Welsh Cities add the county  -->
-      <RegionToParish parish="Bangor"        region="Caernarvon" />
+      <RegionToParish parish="Bangor"        region="Caernarfon" />
       <RegionToParish parish="Cardiff"       region="Glamorgan" />
       <RegionToParish parish="Newport"       region="Monmouth" />
       <RegionToParish parish="St Asaph"      region="Denbigh" />
@@ -1118,7 +1106,7 @@
       <Lookup code="BRE" county="Brecon" />
       <Lookup code="BKM" county="Buckinghamshire" />
       <Lookup code="BUT" county="Bute" />
-      <Lookup code="CAE" county="Caernarvon" />
+      <Lookup code="CAE" county="Caernarfon" />
       <Lookup code="CAI" county="Caithness" />
       <Lookup code="CAM" county="Cambridgeshire" />
       <Lookup code="CGN" county="Cardigan" />
