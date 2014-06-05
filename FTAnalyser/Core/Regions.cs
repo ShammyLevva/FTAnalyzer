@@ -16,81 +16,84 @@ namespace FTAnalyzer
         public static IDictionary<string, Region> VALID_REGIONS;
 
         #region Scottish Regions
-        public static Region ABERDEEN = new Region("Aberdeenshire", Countries.SCOTLAND);
-        public static Region ANGUS = new Region("Angus", Countries.SCOTLAND);
-        public static Region ARGYLL = new Region("Argyll", Countries.SCOTLAND);
-        public static Region AYR = new Region("Ayrshire", Countries.SCOTLAND);
-        public static Region BANFF = new Region("Banffshire", Countries.SCOTLAND);
-        public static Region BERWICK = new Region("Berwickshire", Countries.SCOTLAND);
-        public static Region BUTE = new Region("Buteshire", Countries.SCOTLAND);
-        public static Region CAITHNESS = new Region("Caithness", Countries.SCOTLAND);
-        public static Region CLACKMANNAN = new Region("Clackmannanshire", Countries.SCOTLAND);
-        public static Region DUMFRIES = new Region("Dumfries-shire", Countries.SCOTLAND);
-        public static Region DUNBARTON = new Region("Dunbartonshire", Countries.SCOTLAND);
-        public static Region EAST_LOTHIAN = new Region("East Lothian", Countries.SCOTLAND);
-        public static Region FIFE = new Region("Fife", Countries.SCOTLAND);
-        public static Region INVERNESS = new Region("Inverness-shire", Countries.SCOTLAND);
-        public static Region KINCARDINE = new Region("Kincardineshire", Countries.SCOTLAND);
-        public static Region KINROSS = new Region("Kinross-shire", Countries.SCOTLAND);
-        public static Region KIRKCUDBRIGHT = new Region("Kirkcudbrightshire", Countries.SCOTLAND);
-        public static Region LANARK = new Region("Lanarkshire", Countries.SCOTLAND);
-        public static Region MIDLOTHIAN = new Region("Midlothian", Countries.SCOTLAND);
-        public static Region MORAY = new Region("Moray", Countries.SCOTLAND);
-        public static Region NAIRN = new Region("Nairn", Countries.SCOTLAND);
-        public static Region ORKNEY = new Region("Orkney", Countries.SCOTLAND);
-        public static Region PEEBLES = new Region("Peebles", Countries.SCOTLAND);
-        public static Region PERTH = new Region("Perthshire", Countries.SCOTLAND);
-        public static Region RENFREW = new Region("Renfrewshire", Countries.SCOTLAND);
-        public static Region ROSS_CROMARTY = new Region("Ross and Cromarty", Countries.SCOTLAND);
-        public static Region ROXBURGH = new Region("Roxburgh", Countries.SCOTLAND);
-        public static Region SELKIRK = new Region("Selkirk", Countries.SCOTLAND);
-        public static Region SHETLAND = new Region("Shetland", Countries.SCOTLAND);
-        public static Region STIRLING = new Region("Stirlingshire", Countries.SCOTLAND);
-        public static Region SUTHERLAND = new Region("Sutherland", Countries.SCOTLAND);
-        public static Region WEST_LOTHIAN = new Region("West Lothian", Countries.SCOTLAND);
-        public static Region WIGTOWN = new Region("Wigtownshire", Countries.SCOTLAND);
+        public static Region ABERDEEN = new Region("Aberdeenshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region ANGUS = new Region("Angus", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region ARGYLL = new Region("Argyll", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region AYR = new Region("Ayrshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region BANFF = new Region("Banffshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region BERWICK = new Region("Berwickshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region BUTE = new Region("Buteshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region CAITHNESS = new Region("Caithness", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region CLACKMANNAN = new Region("Clackmannanshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region DUMFRIES = new Region("Dumfries-shire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region DUNBARTON = new Region("Dunbartonshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region EAST_LOTHIAN = new Region("East Lothian", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region FIFE = new Region("Fife", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region INVERNESS = new Region("Inverness-shire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region KINCARDINE = new Region("Kincardineshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region KINROSS = new Region("Kinross-shire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region KIRKCUDBRIGHT = new Region("Kirkcudbrightshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region LANARK = new Region("Lanarkshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region MIDLOTHIAN = new Region("Midlothian", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region MORAY = new Region("Moray", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region NAIRN = new Region("Nairn", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region ORKNEY = new Region("Orkney", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region PEEBLES = new Region("Peebles", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region PERTH = new Region("Perthshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region RENFREW = new Region("Renfrewshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region ROSS_CROMARTY = new Region("Ross and Cromarty", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region ROXBURGH = new Region("Roxburgh", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region SELKIRK = new Region("Selkirk", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region SHETLAND = new Region("Shetland", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region STIRLING = new Region("Stirlingshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region SUTHERLAND = new Region("Sutherland", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region WEST_LOTHIAN = new Region("West Lothian", Countries.SCOTLAND, Region.Creation.HISTORIC);
+        public static Region WIGTOWN = new Region("Wigtownshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
         #endregion
 
         #region English Regions
-        public static Region BEDS = new Region("Bedfordshire", Countries.ENGLAND);
-        public static Region BERKS = new Region("Berkshire", Countries.ENGLAND);
-        public static Region BUCKS = new Region("Buckinghamshire", Countries.ENGLAND);
-        public static Region CAMBS = new Region("Cambridgeshire", Countries.ENGLAND);
-        public static Region CHESHIRE = new Region("Cheshire", Countries.ENGLAND);
-        public static Region CORNWALL = new Region("Cornwall", Countries.ENGLAND);
-        public static Region CUMBERLAND = new Region("Cumberland", Countries.ENGLAND);
-        public static Region DERBY = new Region("Derbyshire", Countries.ENGLAND);
-        public static Region DEVON = new Region("Devon", Countries.ENGLAND);
-        public static Region DORSET = new Region("Dorset", Countries.ENGLAND);
-        public static Region DURHAM = new Region("Durham", Countries.ENGLAND);
-        public static Region ESSEX = new Region("Essex", Countries.ENGLAND);
-        public static Region GLOUCS = new Region("Gloucestershire", Countries.ENGLAND);
-        public static Region HANTS = new Region("Hampshire", Countries.ENGLAND);
-        public static Region HEREFORD = new Region("Herefordshire", Countries.ENGLAND);
-        public static Region HERTS = new Region("Hertfordshire", Countries.ENGLAND);
-        public static Region HUNTS = new Region("Huntingdonshire", Countries.ENGLAND);
-        public static Region KENT = new Region("Kent", Countries.ENGLAND);
-        public static Region LANCS = new Region("Lancashire", Countries.ENGLAND);
-        public static Region LEICS = new Region("Leicestershire", Countries.ENGLAND);
-        public static Region LINCOLN = new Region("Lincolnshire", Countries.ENGLAND);
-        public static Region MIDDLESEX = new Region("Middlesex", Countries.ENGLAND);
-        public static Region NORFOLK = new Region("Norfolk", Countries.ENGLAND);
-        public static Region NORTHAMPTON = new Region("Northamptonshire", Countries.ENGLAND);
-        public static Region NORTHUMBERLAND = new Region("Northumberland", Countries.ENGLAND);
-        public static Region NOTTINGHAM = new Region("Nottinghamshire", Countries.ENGLAND);
-        public static Region OXFORD = new Region("Oxfordshire", Countries.ENGLAND);
-        public static Region RUTLAND = new Region("Rutland", Countries.ENGLAND);
-        public static Region SHROPS = new Region("Shropshire", Countries.ENGLAND);
-        public static Region SOMERSET = new Region("Somerset", Countries.ENGLAND);
-        public static Region STAFFORD = new Region("Staffordshire", Countries.ENGLAND);
-        public static Region SUFFOLK = new Region("Suffolk", Countries.ENGLAND);
-        public static Region SURREY = new Region("Surrey", Countries.ENGLAND);
-        public static Region SUSSEX = new Region("Sussex", Countries.ENGLAND);
-        public static Region WARWICK = new Region("Warwickshire", Countries.ENGLAND);
-        public static Region WESTMORLAND = new Region("Westmorland", Countries.ENGLAND);
-        public static Region WILTS = new Region("Wiltshire", Countries.ENGLAND);
-        public static Region WORCESTER = new Region("Worcestershire", Countries.ENGLAND);
-        public static Region YORKS = new Region("Yorkshire", Countries.ENGLAND);
+        public static Region BEDS = new Region("Bedfordshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region BERKS = new Region("Berkshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region BUCKS = new Region("Buckinghamshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region CAMBS = new Region("Cambridgeshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region CHESHIRE = new Region("Cheshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region CORNWALL = new Region("Cornwall", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region CUMBERLAND = new Region("Cumberland", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region DERBY = new Region("Derbyshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region DEVON = new Region("Devon", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region DORSET = new Region("Dorset", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region DURHAM = new Region("Durham", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region ESSEX = new Region("Essex", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region GLOUCS = new Region("Gloucestershire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region HANTS = new Region("Hampshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region HEREFORD = new Region("Herefordshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region HERTS = new Region("Hertfordshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region HUNTS = new Region("Huntingdonshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region KENT = new Region("Kent", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region LANCS = new Region("Lancashire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region LEICS = new Region("Leicestershire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region LINCOLN = new Region("Lincolnshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region MIDDLESEX = new Region("Middlesex", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region NORFOLK = new Region("Norfolk", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region NORTHAMPTON = new Region("Northamptonshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region NORTHUMBERLAND = new Region("Northumberland", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region NOTTINGHAM = new Region("Nottinghamshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region OXFORD = new Region("Oxfordshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region RUTLAND = new Region("Rutland", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region SHROPS = new Region("Shropshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region SOMERSET = new Region("Somerset", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region STAFFORD = new Region("Staffordshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region SUFFOLK = new Region("Suffolk", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region SURREY = new Region("Surrey", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region SUSSEX = new Region("Sussex", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region WARWICK = new Region("Warwickshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region WESTMORLAND = new Region("Westmorland", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region WILTS = new Region("Wiltshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region WORCESTER = new Region("Worcestershire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region YORKS = new Region("Yorkshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+
+        public static Region CUMBRIA = new Region("Cumbria", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region HUMBERSIDE = new Region("Cumbria", Countries.ENGLAND, Region.Creation.MODERN);
         #endregion
 
         // Wales
@@ -100,7 +103,6 @@ namespace FTAnalyzer
         //Cardiganshire / Ceredigion
         //Carmarthenshire / Sir Gaerfyrddin
         //Denbighshire / Sir Ddinbych
-        //Dunbartonshire / Dumbartonshire
         //Flintshire / Sir Fflint
         //Glamorgan / Morgannwg
         //Merioneth / Meirionnydd
@@ -118,11 +120,11 @@ namespace FTAnalyzer
         //County Tyrone
 
         #region UK Islands
-        public static Region IOM = new Region("Isle of Man", Countries.ISLE_OF_MAN);
-        public static Region JERSEY = new Region("Jersey", Countries.CHANNEL_ISLANDS);
-        public static Region GUERNSEY = new Region("Guernsey", Countries.CHANNEL_ISLANDS);
-        public static Region ALDERNEY = new Region("Alderney", Countries.CHANNEL_ISLANDS);
-        public static Region SARK = new Region("Sark", Countries.CHANNEL_ISLANDS);
+        public static Region IOM = new Region("Isle of Man", Countries.ISLE_OF_MAN, Region.Creation.HISTORIC);
+        public static Region JERSEY = new Region("Jersey", Countries.CHANNEL_ISLANDS, Region.Creation.HISTORIC);
+        public static Region GUERNSEY = new Region("Guernsey", Countries.CHANNEL_ISLANDS, Region.Creation.HISTORIC);
+        public static Region ALDERNEY = new Region("Alderney", Countries.CHANNEL_ISLANDS, Region.Creation.HISTORIC);
+        public static Region SARK = new Region("Sark", Countries.CHANNEL_ISLANDS, Region.Creation.HISTORIC);
         #endregion
         
         static Regions()
@@ -140,7 +142,8 @@ namespace FTAnalyzer
                     BEDS, BERKS, BUCKS, CAMBS, CHESHIRE, CORNWALL, CUMBERLAND, DERBY, DEVON, DORSET,
                     DURHAM, ESSEX, GLOUCS, HANTS, HEREFORD, HERTS, HUNTS, KENT, LANCS, LEICS, LINCOLN, 
                     MIDDLESEX, NORFOLK, NORTHAMPTON, NORTHUMBERLAND, NOTTINGHAM, OXFORD, RUTLAND, SHROPS, 
-                    SOMERSET, STAFFORD, SUFFOLK, SURREY, SUSSEX, WARWICK, WESTMORLAND, WILTS, WORCESTER, YORKS
+                    SOMERSET, STAFFORD, SUFFOLK, SURREY, SUSSEX, WARWICK, WESTMORLAND, WILTS, WORCESTER,
+                    YORKS, CUMBRIA, HUMBERSIDE
             });
             AddEnglishRegionAlternates();
 

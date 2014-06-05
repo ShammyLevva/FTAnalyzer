@@ -328,6 +328,7 @@
       <RegionTypo from="Cumb"          to="Cumbria" />
       <RegionTypo from="Derbys"        to="Derbyshire" />
       <RegionTypo from="Derby"         to="Derbyshire" />
+      <RegionTypo from="Devonshire"    to="Devon" />
       <RegionTypo from="Co Durham"     to="County Durham" />
       <RegionTypo from="Glous"         to="Gloucestershire" />
       <RegionTypo from="Glos"          to="Gloucestershire" />
