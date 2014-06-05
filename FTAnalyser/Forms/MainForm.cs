@@ -1741,6 +1741,7 @@ namespace FTAnalyzer
 
             toolStripSeparator7.Visible = added;
             clearRecentFileListToolStripMenuItem.Visible = added;
+            mnuRecent.Enabled = added;
         }
 
         private void AddFileToRecentList(string filename)

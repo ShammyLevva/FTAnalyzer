@@ -1041,15 +1041,15 @@ namespace FTAnalyzer.Forms
 
         public void ProcessOS50kGazetteerData(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            // IsGeoCoded(true) will include OS_50KPARTIALS but we don't want to recheck them
             IEnumerable<FactLocation> toSearch = FactLocation.AllLocations;
-            int total = toSearch.Count();
+            int total = FactLocation.LocationsCount;
             int count = 0;
             int matched = 0;
             int previous = 0;
             int skipped = 0;
             foreach (FactLocation loc in toSearch)
             {
+                // IsGeoCoded(true) will include OS_50KPARTIALS but we don't want to recheck them
                 if (loc.IsGeoCoded(true) || loc.GeocodeStatus == FactLocation.Geocode.OS_50KPARTIAL)
                     previous++;
                 else
@@ -1066,7 +1066,7 @@ namespace FTAnalyzer.Forms
 
                 int percent = (int)Math.Truncate((count - 1) * 100.0 / total);
                 string status = "Previously geocoded: " + previous + ", skipped: " + skipped +
-                                    ", OS matched: " + matched + ". Done " + count + " of " + total + ".  ";
+                                    ", OS matched: " + matched + ". Done " + (count -1) + " of " + total + ".  ";
                 worker.ReportProgress(percent, status);
                 if (worker.CancellationPending)
                 {
