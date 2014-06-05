@@ -164,7 +164,22 @@ namespace FTAnalyzer
                     AddGoogleFixes(GOOGLE_FIXES, n, SUBREGION);
                 foreach (XmlNode n in xmlDoc.SelectNodes("Data/GoogleGeocodes/MultiLevelFixes/MultiLevelFix"))
                     AddGoogleFixes(GOOGLE_FIXES, n, UNKNOWN);
+                ValidateTypoFixes();
             }
+        }
+
+        private static void ValidateTypoFixes()
+        {
+            //foreach (string typo in COUNTRY_TYPOS.Values)
+            //    if (!Countries.IsKnownCountry(typo))
+            //        Console.WriteLine("Country typo: " + typo + " is not a known country.");
+            foreach (string typo in REGION_TYPOS.Values)
+                if (!Regions.IsPreferredRegion(typo))
+                    Console.WriteLine("Region typo: " + typo + " is not a preferred region.");
+            foreach(string shift in COUNTRY_SHIFTS.Keys)
+                if(!Regions.IsPreferredRegion(shift))
+                    Console.WriteLine("Country shift: " + shift + " is not a preferred region.");
+
         }
 
         public static void LoadGoogleFixesXMLFile(RichTextBox xmlErrorDocument)

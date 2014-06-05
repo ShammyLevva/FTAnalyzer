@@ -126,7 +126,7 @@
       <CountryTypo from="GAB" to="Gabon" />
       <CountryTypo from="GBR" to="United Kingdom" />
       <CountryTypo from="GEO" to="Georgia" />
-      <CountryTypo from="GGY" to="Guernsey, Channel Islands" />
+      <CountryTypo from="GGY" to="Guernsey" />
       <CountryTypo from="GHA" to="Ghana" />
       <CountryTypo from="GIB" to="Gibraltar" />
       <CountryTypo from="GIN" to="Guinea" />
@@ -158,7 +158,7 @@
       <CountryTypo from="ISR" to="Israel" />
       <CountryTypo from="ITA" to="Italy" />
       <CountryTypo from="JAM" to="Jamaica" />
-      <CountryTypo from="JEY" to="Jersey, Channel Islands" />
+      <CountryTypo from="JEY" to="Jersey" />
       <CountryTypo from="JOR" to="Jordan" />
       <CountryTypo from="JPN" to="Japan" />
       <CountryTypo from="KAZ" to="Kazakhstan" />
@@ -298,7 +298,7 @@
     
     <RegionTypos>
       <!-- Scotland -->
-      <RegionTypo from="ABDN"           to="Aberdeenshire" />
+      <RegionTypo from="ABDN"    to="Aberdeenshire" />
       <RegionTypo from="Dumfriesshire"  to="Dumfries-shire" />
       <RegionTypo from="Berwick"        to="Berwickshire" />
       <RegionTypo from="Invernessshire" to="Inverness-shire" />
@@ -349,113 +349,115 @@
       <RegionTypo from="Lincoln"       to="Lincolnshire" />
       <RegionTypo from="Middx"         to="Middlesex" />
       <RegionTypo from="Mddx"          to="Middlesex" />
-      <RegionTypo from="Mx"            to="Middlesex" />
+      <RegionTypo from="Mx"     to="Middlesex" />
       <RegionTypo from="Northants"     to="Northamptonshire" />
       <RegionTypo from="Notts"         to="Nottinghamshire" />
       <RegionTypo from="Oxon"          to="Oxfordshire" />
       <RegionTypo from="Oxford"        to="Oxfordshire" />
       <RegionTypo from="Rutlandshire"  to="Rutland" />
-      <RegionTypo from="Rut"           to="Rutland" />
+      <RegionTypo from="Rut"    to="Rutland" />
       <RegionTypo from="Salop"         to="Shropshire" />
       <RegionTypo from="Shrops"        to="Shropshire" />
       <RegionTypo from="Somt"          to="Somerset" />
       <RegionTypo from="Somer"         to="Somerset" />
       <RegionTypo from="Staffs"        to="Staffordshire" />
-      <RegionTypo from="SX"            to="Sussex" />
+      <RegionTypo from="SX"     to="Sussex" />
       <RegionTypo from="West Sussex"   to="Sussex" />
       <RegionTypo from="East Sussex"   to="Sussex" />
       <RegionTypo from="Warks"         to="Warwickshire" />
       <RegionTypo from="Wmld"          to="Westmorland" />
       <RegionTypo from="Wilts"         to="Wiltshire" />
-      <RegionTypo from="Worcs"         to="Wocestershire" />
+      <RegionTypo from="Worcs"         to="Worcestershire" />
       <RegionTypo from="Yorks"         to="Yorkshire" />
       <RegionTypo from="East Riding Yorkshire"      to="East Yorkshire" />
       <RegionTypo from="Yorkshire East Riding"      to="East Yorkshire" />
       <RegionTypo from="Yorkshire-East Riding"      to="East Yorkshire" />
       <RegionTypo from="East Riding of Yorkshire"   to="East Yorkshire" />
-      <RegionTypo from="Yorkshire (East)"           to="East Yorkshire" />
-      <RegionTypo from="E Yorks"                    to="East Yorkshire" />
+      <RegionTypo from="Yorkshire (East)"    to="East Yorkshire" />
+      <RegionTypo from="E Yorks"             to="East Yorkshire" />
       <RegionTypo from="North Riding Yorkshire"     to="North Yorkshire" />
       <RegionTypo from="Yorkshire North Riding"     to="North Yorkshire" />
       <RegionTypo from="Yorkshire-North Riding"     to="North Yorkshire" />
       <RegionTypo from="North Riding of Yorkshire"  to="North Yorkshire" />
       <RegionTypo from="Yorkshire (North)"          to="North Yorkshire" />
-      <RegionTypo from="N Yorks"                    to="North Yorkshire" />
+      <RegionTypo from="N Yorks"             to="North Yorkshire" />
       <RegionTypo from="West Riding Yorkshire"      to="West Yorkshire" />
       <RegionTypo from="Yorkshire West Riding"      to="West Yorkshire" />
       <RegionTypo from="Yorkshire-West Riding"      to="West Yorkshire" />
       <RegionTypo from="West Riding of Yorkshire"   to="West Yorkshire" />
-      <RegionTypo from="Yorkshire (West)"           to="West Yorkshire" />
-      <RegionTypo from="W Yorks"                    to="West Yorkshire" />
-      <RegionTypo from="South Yorkshire"            to="South Yorkshire" />
+      <RegionTypo from="Yorkshire (West)"    to="West Yorkshire" />
+      <RegionTypo from="W Yorks"             to="West Yorkshire" />
+      <RegionTypo from="South Yorkshire"     to="South Yorkshire" />
       <RegionTypo from="Yorkshire (South)"          to="South Yorkshire" />
-      <RegionTypo from="S Yorks"                    to="South Yorkshire" />
+      <RegionTypo from="S Yorks"             to="South Yorkshire" />
 
       <!-- Ireland -->
-      <RegionTypo from="Co Antrim"        to="County Antrim" />
-      <RegionTypo from="Antrim"           to="County Antrim" />
-      <RegionTypo from="Co Armagh"        to="County Armagh" />
-      <RegionTypo from="Armagh"           to="County Armagh" />
-      <RegionTypo from="Co Carlow"        to="County Carlow" />
-      <RegionTypo from="Carlow"           to="County Carlow" />
-      <RegionTypo from="Co Cavan"         to="County Cavan" />
-      <RegionTypo from="Cavan"            to="County Cavan" />
-      <RegionTypo from="Co Clare"         to="County Clare" />
-      <RegionTypo from="Clare"            to="County Clare" />
-      <RegionTypo from="Co Cork"          to="County Cork" />
-      <RegionTypo from="Cork"             to="County Cork" />
-      <RegionTypo from="Co Donegal"       to="County Donegal" />
-      <RegionTypo from="Donegal"          to="County Donegal" />
-      <RegionTypo from="Co Down"          to="County Down" />
-      <RegionTypo from="Down"             to="County Down" />
-      <RegionTypo from="Co Dublin"        to="County Dublin" />
-      <RegionTypo from="Dublin"           to="County Dublin" />
-      <RegionTypo from="Co Fermanagh"     to="County Fermanagh" />
-      <RegionTypo from="Fermanagh"        to="County Fermanagh" />
-      <RegionTypo from="Co Galway"        to="County Galway" />
-      <RegionTypo from="Galway"           to="County Galway" />
-      <RegionTypo from="Co Kerry"         to="County Kerry" />
-      <RegionTypo from="Kerry"            to="County Kerry" />
-      <RegionTypo from="Co Kildare"       to="County Kildare" />
-      <RegionTypo from="Kildare"          to="County Kildare" />
-      <RegionTypo from="Co Kilkenny"      to="County Kilkenny" />
-      <RegionTypo from="Kilkenny"         to="County Kilkenny" />
-      <RegionTypo from="Co Laois"         to="County Laois" />
-      <RegionTypo from="Laois"            to="County Laois" />
-      <RegionTypo from="Co Leitrim"       to="County Leitrim" />
-      <RegionTypo from="Leitrim"          to="County Leitrim" />
-      <RegionTypo from="Co Limerick"      to="County Limerick" />
-      <RegionTypo from="Limerick"         to="County Limerick" />
-      <RegionTypo from="Co Londonderry"   to="County Londonderry" />
-      <RegionTypo from="Londonderry"      to="County Londonderry" />
-      <RegionTypo from="Co Derry"         to="County Londonderry" />
-      <RegionTypo from="Derry"            to="County Londonderry" />
-      <RegionTypo from="Co Longford"      to="County Longford" />
-      <RegionTypo from="Longford"         to="County Longford" />
-      <RegionTypo from="Co Louth"         to="County Louth" />
-      <RegionTypo from="Louth"            to="County Louth" />
-      <RegionTypo from="Co Mayo"          to="County Mayo" />
-      <RegionTypo from="Mayo"             to="County Mayo" />
-      <RegionTypo from="Co Meath"         to="County Meath" />
-      <RegionTypo from="Meath"            to="County Meath" />
-      <RegionTypo from="Co Monaghan"      to="County Monaghan" />
-      <RegionTypo from="Monaghan"         to="County Monaghan" />
-      <RegionTypo from="Co Offaly"        to="County Offaly" />
-      <RegionTypo from="Offaly"           to="County Offaly" />
-      <RegionTypo from="Co Roscommon"     to="County Roscommon" />
-      <RegionTypo from="Roscommon"        to="County Roscommon" />
-      <RegionTypo from="Co Sligo"         to="County Sligo" />
-      <RegionTypo from="Sligo"            to="County Sligo" />
-      <RegionTypo from="Co Tyrone"        to="County Tyrone" />
-      <RegionTypo from="Tyrone"           to="County Tyrone" />
-      <RegionTypo from="Co Waterford"     to="County Waterford" />
-      <RegionTypo from="Waterford"        to="County Waterford" />
-      <RegionTypo from="Co Westmeath"     to="County Westmeath" />
-      <RegionTypo from="Westmeath"        to="County Westmeath" />
-      <RegionTypo from="Co Wexford"       to="County Wexford" />
-      <RegionTypo from="Wexford"          to="County Wexford" />
-      <RegionTypo from="Co Wicklow"       to="County Wicklow" />
-      <RegionTypo from="Wicklow"          to="County Wicklow" />
+      <RegionTypo from="Co Antrim"        to="Antrim" />
+      <RegionTypo from="County Antrim"    to="Antrim" />
+      <RegionTypo from="Co Armagh"        to="Armagh" />
+      <RegionTypo from="County Armagh"    to="Armagh" />
+      <RegionTypo from="Co Carlow"        to="Carlow" />
+      <RegionTypo from="County Carlow"    to="Carlow" />
+      <RegionTypo from="Co Cavan"         to="Cavan" />
+      <RegionTypo from="County Cavan"     to="Cavan" />
+      <RegionTypo from="Co Clare"         to="Clare" />
+      <RegionTypo from="County Clare"     to="Clare" />
+      <RegionTypo from="Co Cork"          to="Cork" />
+      <RegionTypo from="County Cork"      to="Cork" />
+      <RegionTypo from="Co Donegal"       to="Donegal" />
+      <RegionTypo from="County Donegal"   to="Donegal" />
+      <RegionTypo from="Co Down"          to="Down" />
+      <RegionTypo from="County Down"      to="Down" />
+      <RegionTypo from="Co Dublin"        to="Dublin" />
+      <RegionTypo from="County Dublin"    to="Dublin" />
+      <RegionTypo from="Co Fermanagh"     to="Fermanagh" />
+      <RegionTypo from="County Fermanagh" to="Fermanagh" />
+      <RegionTypo from="Co Galway"        to="Galway" />
+      <RegionTypo from="County Galway"    to="Galway" />
+      <RegionTypo from="Co Kerry"         to="Kerry" />
+      <RegionTypo from="County Kerry"     to="Kerry" />
+      <RegionTypo from="Co Kildare"       to="Kildare" />
+      <RegionTypo from="County Kildare"   to="Kildare" />
+      <RegionTypo from="Co Kilkenny"      to="Kilkenny" />
+      <RegionTypo from="County Kilkenny"  to="Kilkenny" />
+      <RegionTypo from="Co Laois"         to="Laois" />
+      <RegionTypo from="County Laois"     to="Laois" />
+      <RegionTypo from="Co Leitrim"       to="Leitrim" />
+      <RegionTypo from="County Leitrim"   to="Leitrim" />
+      <RegionTypo from="Co Limerick"      to="Limerick" />
+      <RegionTypo from="County Limerick"  to="Limerick" />
+      <RegionTypo from="Co Londonderry"   to="Londonderry" />
+      <RegionTypo from="County Londonderry" to="Londonderry" />
+      <RegionTypo from="Co Derry"         to="Londonderry" />
+      <RegionTypo from="County Derry"     to="Londonderry" />
+      <RegionTypo from="Co Longford"      to="Longford" />
+      <RegionTypo from="County Longford"  to="Longford" />
+      <RegionTypo from="Co Louth"         to="Louth" />
+      <RegionTypo from="County Louth"     to="Louth" />
+      <RegionTypo from="Co Mayo"          to="Mayo" />
+      <RegionTypo from="County Mayo"      to="Mayo" />
+      <RegionTypo from="Co Meath"         to="Meath" />
+      <RegionTypo from="County Meath"     to="Meath" />
+      <RegionTypo from="Co Monaghan"      to="Monaghan" />
+      <RegionTypo from="County Monaghan"  to="Monaghan" />
+      <RegionTypo from="Co Offaly"        to="Offaly" />
+      <RegionTypo from="County Offaly"    to="Offaly" />
+      <RegionTypo from="Co Roscommon"     to="Roscommon" />
+      <RegionTypo from="County Roscommon" to="Roscommon" />
+      <RegionTypo from="Co Sligo"         to="Sligo" />
+      <RegionTypo from="County Sligo"     to="Sligo" />
+      <RegionTypo from="Co Tyrone"        to="Tyrone" />
+      <RegionTypo from="County Tyrone"    to="Tyrone" />
+      <RegionTypo from="Co Tipperary"     to="Tipperary" />
+      <RegionTypo from="County Tipperary" to="Tipperary" />
+      <RegionTypo from="Co Waterford"     to="Waterford" />
+      <RegionTypo from="County Waterford" to="Waterford" />
+      <RegionTypo from="Co Westmeath"     to="Westmeath" />
+      <RegionTypo from="County Westmeath" to="Westmeath" />
+      <RegionTypo from="Co Wexford"       to="Wexford" />
+      <RegionTypo from="County Wexford"   to="Wexford" />
+      <RegionTypo from="Co Wicklow"       to="Wicklow" />
+      <RegionTypo from="County Wicklow"   to="Wicklow" />
 
       <!-- Wales -->
       <RegionTypo from="Caernarvonshire"  to="Caernarvon" />
@@ -565,9 +567,9 @@
       <ChapmanCode chapmanCode="CON" countyName="Cornwall"         />
       <ChapmanCode chapmanCode="CUL" countyName="Cumberland"       />
       <ChapmanCode chapmanCode="DBY" countyName="Derbyshire"       />
-      <ChapmanCode chapmanCode="DEV" countyName="Devonshire"       />
+      <ChapmanCode chapmanCode="DEV" countyName="Devon"            />
       <ChapmanCode chapmanCode="DOR" countyName="Dorset"           />
-      <ChapmanCode chapmanCode="DUR" countyName="Durham"           />
+      <ChapmanCode chapmanCode="DUR" countyName="County Durham"    />
       <ChapmanCode chapmanCode="ESS" countyName="Essex"            />
       <ChapmanCode chapmanCode="GLS" countyName="Gloucestershire"  />
       <ChapmanCode chapmanCode="HAM" countyName="Hampshire"        />
@@ -611,7 +613,7 @@
       <ChapmanCode chapmanCode="BUT" countyName="Bute"                  />
       <ChapmanCode chapmanCode="CAI" countyName="Caithness"             />
       <ChapmanCode chapmanCode="CLK" countyName="Clackmannanshire"      />
-      <ChapmanCode chapmanCode="DFS" countyName="Dumfriesshire"         />
+      <ChapmanCode chapmanCode="DFS" countyName="Dumfries-shire"        />
       <ChapmanCode chapmanCode="DNB" countyName="Dunbartonshire"        />
       <ChapmanCode chapmanCode="ELN" countyName="East Lothian"          />
       <ChapmanCode chapmanCode="FIF" countyName="Fife"                  />
@@ -622,14 +624,14 @@
       <ChapmanCode chapmanCode="LKS" countyName="Lanarkshire"           />
       <ChapmanCode chapmanCode="MLN" countyName="Midlothian"            />
       <ChapmanCode chapmanCode="MOR" countyName="Moray"                 />
-      <ChapmanCode chapmanCode="NAI" countyName="Nairnshire"            />
+      <ChapmanCode chapmanCode="NAI" countyName="Nairn"                 />
       <ChapmanCode chapmanCode="OKI" countyName="Orkney"                />
-      <ChapmanCode chapmanCode="PEE" countyName="Peeblesshire"          />
+      <ChapmanCode chapmanCode="PEE" countyName="Peebles"               />
       <ChapmanCode chapmanCode="PER" countyName="Perthshire"            />
       <ChapmanCode chapmanCode="RFW" countyName="Renfrewshire"          />
       <ChapmanCode chapmanCode="ROC" countyName="Ross and Cromarty"     />
-      <ChapmanCode chapmanCode="ROX" countyName="Roxburghshire"         />
-      <ChapmanCode chapmanCode="SEL" countyName="Selkirkshire"          />
+      <ChapmanCode chapmanCode="ROX" countyName="Roxburgh"              />
+      <ChapmanCode chapmanCode="SEL" countyName="Selkirk"               />
       <ChapmanCode chapmanCode="SHI" countyName="Shetland"              />
       <ChapmanCode chapmanCode="STI" countyName="Stirlingshire"         />
       <ChapmanCode chapmanCode="SUT" countyName="Sutherland"            />
@@ -653,7 +655,7 @@
       <ChapmanCode chapmanCode="DEN" countyName="Denbighshire"     />
       <ChapmanCode chapmanCode="FLN" countyName="Flintshire"       />
       <ChapmanCode chapmanCode="GLA" countyName="Glamorgan"        />
-      <ChapmanCode chapmanCode="MER" countyName="Merionethshire"   />
+      <ChapmanCode chapmanCode="MER" countyName="Merioneth"   />
       <ChapmanCode chapmanCode="MON" countyName="Monmouthshire"    />
       <ChapmanCode chapmanCode="MGY" countyName="Montgomeryshire"  />
       <ChapmanCode chapmanCode="PEM" countyName="Pembrokeshire"    />
@@ -682,7 +684,7 @@
       <ChapmanCode chapmanCode="KID" countyName="Kildare"      />
       <ChapmanCode chapmanCode="KIK" countyName="Kilkenny"     />
       <ChapmanCode chapmanCode="LET" countyName="Leitrim"      />
-      <ChapmanCode chapmanCode="LEX" countyName="Leix"         />
+      <ChapmanCode chapmanCode="LEX" countyName="Laois"        />
       <ChapmanCode chapmanCode="LIM" countyName="Limerick"     />
       <ChapmanCode chapmanCode="LDY" countyName="Londonderry"  />
       <ChapmanCode chapmanCode="LOG" countyName="Longford"     />
@@ -1083,7 +1085,7 @@
       <RegionToParish parish="Southampton"    region="Hampshire" />
       <RegionToParish parish="St Albans"      region="Hertfordshire" />
       <RegionToParish parish="Stoke"          region="Staffordshire" />
-      <RegionToParish parish="Sunderland"     region="Durham" />
+      <RegionToParish parish="Sunderland"     region="County Durham" />
       <RegionToParish parish="Truro"          region="Cornwall" />
       <RegionToParish parish="Wakefield"      region="Yorkshire" />
       <RegionToParish parish="Wells"          region="Somerset" />
