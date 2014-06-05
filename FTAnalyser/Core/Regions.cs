@@ -7,6 +7,8 @@ namespace FTAnalyzer
 {
     public class Regions
     {
+        // ISO Region codes at http://en.wikipedia.org/wiki/ISO_3166-2
+
         public static ISet<Region> SCOTTISH_REGIONS;
         public static ISet<Region> ENGLISH_REGIONS;
         public static ISet<Region> WELSH_REGIONS;
