@@ -749,15 +749,6 @@
       <CountryToRegion region="West Lothian"        country="Scotland" />
       <CountryToRegion region="Wigtonshire"         country="Scotland" />
 
-      <!-- Scottish Cities add the Country -->
-      <CountryToRegion region="Aberdeen"            country="Scotland" />
-      <CountryToRegion region="Dundee"              country="Scotland" />
-      <CountryToRegion region="Edinburgh"           country="Scotland" />
-      <CountryToRegion region="Glasgow"             country="Scotland" />
-      <CountryToRegion region="Inverness"           country="Scotland" />
-      <CountryToRegion region="Perth"               country="Scotland" />
-      <CountryToRegion region="Stirling"            country="Scotland" />
-
       <!-- English Shires & Counties add the Country -->
       <CountryToRegion region="Bedfordshire"        country="England" />
       <CountryToRegion region="Berkshire"           country="England" />
@@ -804,70 +795,6 @@
       <CountryToRegion region="North Yorkshire"     country="England" />
       <CountryToRegion region="West Yorkshire"      country="England" />
 
-      <!-- English Cities add the Country -->
-      <CountryToRegion region="Bath"                country="England" />
-      <CountryToRegion region="Birmingham"          country="England" />
-      <CountryToRegion region="Bradford"            country="England" />
-      <CountryToRegion region="Brighton &amp; Hove" country="England" />
-      <CountryToRegion region="Brighton"            country="England" />
-      <CountryToRegion region="Hove"                country="England" />
-      <CountryToRegion region="Bristol"             country="England" />
-      <CountryToRegion region="Cambridge"           country="England" />
-      <CountryToRegion region="Canterbury"          country="England" />
-      <CountryToRegion region="Carlisle"            country="England" />
-      <CountryToRegion region="Chelmsford"          country="England" />
-      <CountryToRegion region="Chester"             country="England" />
-      <CountryToRegion region="Chichester"          country="England" />
-      <CountryToRegion region="City of London"      country="England" />
-      <CountryToRegion region="City of Westminster" country="England" />
-      <CountryToRegion region="London"              country="England" />
-      <CountryToRegion region="Coventry"            country="England" />
-      <CountryToRegion region="Derby"               country="England" />
-      <CountryToRegion region="Durham"              country="England" />
-      <CountryToRegion region="Ely"                 country="England" />
-      <CountryToRegion region="Exeter"              country="England" />
-      <CountryToRegion region="Gloucester"          country="England" />
-      <CountryToRegion region="Hereford"            country="England" />
-      <CountryToRegion region="Kingston upon Hull"  country="England" />
-      <CountryToRegion region="Kingston"            country="England" />
-      <CountryToRegion region="Lancaster"           country="England" />
-      <CountryToRegion region="Leeds"               country="England" />
-      <CountryToRegion region="Leicester"           country="England" />
-      <CountryToRegion region="Lichfield"           country="England" />
-      <CountryToRegion region="Lincoln"             country="England" />
-      <CountryToRegion region="Liverpool"           country="England" />
-      <CountryToRegion region="Manchester"          country="England" />
-      <CountryToRegion region="Newcastle upon Tyne" country="England" />
-      <CountryToRegion region="Newcastle-upon-Tyne" country="England" />
-      <CountryToRegion region="Newcastle"           country="England" />
-      <CountryToRegion region="Norwich"             country="England" />
-      <CountryToRegion region="Nottingham"          country="England" />
-      <CountryToRegion region="Oxford"              country="England" />
-      <CountryToRegion region="Peterborough"        country="England" />
-      <CountryToRegion region="Plymouth"            country="England" />
-      <CountryToRegion region="Portsmouth"          country="England" />
-      <CountryToRegion region="Preston"             country="England" />
-      <CountryToRegion region="Ripon"               country="England" />
-      <CountryToRegion region="Salford"             country="England" />
-      <CountryToRegion region="Salisbury"           country="England" />
-      <CountryToRegion region="Sheffield"           country="England" />
-      <CountryToRegion region="Southampton"         country="England" />
-      <CountryToRegion region="St Albans"           country="England" />
-      <CountryToRegion region="St.Albans"           country="England" />
-      <CountryToRegion region="Stoke-On-Trent"      country="England" />
-      <CountryToRegion region="Stoke-on-Trent"      country="England" />
-      <CountryToRegion region="Stoke On Trent"      country="England" />
-      <CountryToRegion region="Stoke"               country="England" />
-      <CountryToRegion region="Sunderland"          country="England" />
-      <CountryToRegion region="Truro"               country="England" />
-      <CountryToRegion region="Wakefield"           country="England" />
-      <CountryToRegion region="Wells"               country="England" />
-      <CountryToRegion region="Winchester"          country="England" />
-      <CountryToRegion region="Wolverhampton"       country="England" />
-      <CountryToRegion region="Worcester"           country="England" />
-      <CountryToRegion region="York"                country="England" />
-      <CountryToRegion region="Ipswich"             country="England" />
-      <CountryToRegion region="Isle Of Wight"       country="England" />
 
       <!-- Welsh Regions add the Country -->
       <CountryToRegion region="Anglesey"            country="Wales" />
@@ -886,52 +813,44 @@
       <CountryToRegion region="Pembroke"            country="Wales" />
       <CountryToRegion region="Radnor"              country="Wales" />
 
-      <!-- Welsh Cities add the Country -->
-      <CountryToRegion region="Bangor"              country="Wales" />
-      <CountryToRegion region="Cardiff"             country="Wales" />
-      <CountryToRegion region="Newport"             country="Wales" />
-      <CountryToRegion region="St Asaph"            country="Wales" />
-      <CountryToRegion region="St David's"          country="Wales" />
-      <CountryToRegion region="Swansea"             country="Wales" />
-
       <!-- Irish Provinces add the Country -->
-      <CountryToRegion region="County Antrim"      country="Northern Ireland" />
-      <CountryToRegion region="County Armagh"      country="Northern Ireland" />
-      <CountryToRegion region="County Cavan"       country="Ireland" />
-      <CountryToRegion region="County Carlow"      country="Ireland" />
-      <CountryToRegion region="County Clare"       country="Ireland" />
-      <CountryToRegion region="County Connaught"   country="Ireland" />
-      <CountryToRegion region="County Cork"        country="Ireland" />
-      <CountryToRegion region="County Donegal"     country="Ireland" />
-      <CountryToRegion region="County Down"        country="Northern Ireland" />
-      <CountryToRegion region="County Dublin"      country="Ireland" />
-      <CountryToRegion region="County Fermanagh"   country="Northern Ireland" />
-      <CountryToRegion region="County Galway"      country="Ireland" />
-      <CountryToRegion region="County Kerry"       country="Ireland" />
-      <CountryToRegion region="County Kildare"     country="Ireland" />
-      <CountryToRegion region="County Kilkenny"    country="Ireland" />
-      <CountryToRegion region="County Laoighis"    country="Ireland" />
-      <CountryToRegion region="County Leinster"    country="Ireland" />
-      <CountryToRegion region="County Leitrim"     country="Ireland" />
-      <CountryToRegion region="County Limerick"    country="Ireland" />
-      <CountryToRegion region="County Londonderry" country="Northern Ireland" />
-      <CountryToRegion region="County Derry"       country="Northern Ireland" />
-      <CountryToRegion region="County Longford"    country="Ireland" />
-      <CountryToRegion region="County Louth"       country="Ireland" />
-      <CountryToRegion region="County Mayo"        country="Ireland" />
-      <CountryToRegion region="County Meath"       country="Ireland" />
-      <CountryToRegion region="County Monaghan"    country="Ireland" />
-      <CountryToRegion region="County Munster"     country="Ireland" />
-      <CountryToRegion region="County Offaly"      country="Ireland" />
-      <CountryToRegion region="County Roscommon"   country="Ireland" />
-      <CountryToRegion region="County Sligo"       country="Ireland" />
-      <CountryToRegion region="County Tipperary"   country="Ireland" />
-      <CountryToRegion region="County Tyrone"      country="Ireland" />
-      <CountryToRegion region="County Ulster"      country="Northern Ireland" />
-      <CountryToRegion region="County Waterford"   country="Ireland" />
-      <CountryToRegion region="County Westmeath"   country="Ireland" />
-      <CountryToRegion region="County Wexford"     country="Ireland" />
-      <CountryToRegion region="County Wicklow"     country="Ireland" />
+      <CountryToRegion region="Antrim"      country="Northern Ireland" />
+      <CountryToRegion region="Armagh"      country="Northern Ireland" />
+      <CountryToRegion region="Cavan"       country="Ireland" />
+      <CountryToRegion region="Carlow"      country="Ireland" />
+      <CountryToRegion region="Clare"       country="Ireland" />
+      <CountryToRegion region="Connaught"   country="Ireland" />
+      <CountryToRegion region="Cork"        country="Ireland" />
+      <CountryToRegion region="Donegal"     country="Ireland" />
+      <CountryToRegion region="Down"        country="Northern Ireland" />
+      <CountryToRegion region="Dublin"      country="Ireland" />
+      <CountryToRegion region="Fermanagh"   country="Northern Ireland" />
+      <CountryToRegion region="Galway"      country="Ireland" />
+      <CountryToRegion region="Kerry"       country="Ireland" />
+      <CountryToRegion region="Kildare"     country="Ireland" />
+      <CountryToRegion region="Kilkenny"    country="Ireland" />
+      <CountryToRegion region="Laoighis"    country="Ireland" />
+      <CountryToRegion region="Leinster"    country="Ireland" />
+      <CountryToRegion region="Leitrim"     country="Ireland" />
+      <CountryToRegion region="Limerick"    country="Ireland" />
+      <CountryToRegion region="Londonderry" country="Northern Ireland" />
+      <CountryToRegion region="Derry"       country="Northern Ireland" />
+      <CountryToRegion region="Longford"    country="Ireland" />
+      <CountryToRegion region="Louth"       country="Ireland" />
+      <CountryToRegion region="Mayo"        country="Ireland" />
+      <CountryToRegion region="Meath"       country="Ireland" />
+      <CountryToRegion region="Monaghan"    country="Ireland" />
+      <CountryToRegion region="Munster"     country="Ireland" />
+      <CountryToRegion region="Offaly"      country="Ireland" />
+      <CountryToRegion region="Roscommon"   country="Ireland" />
+      <CountryToRegion region="Sligo"       country="Ireland" />
+      <CountryToRegion region="Tipperary"   country="Ireland" />
+      <CountryToRegion region="Tyrone"      country="Ireland" />
+      <CountryToRegion region="Ulster"      country="Northern Ireland" />
+      <CountryToRegion region="Waterford"   country="Ireland" />
+      <CountryToRegion region="Westmeath"   country="Ireland" />
+      <CountryToRegion region="Wexford"     country="Ireland" />
+      <CountryToRegion region="Wicklow"     country="Ireland" />
 
       <!-- Northern Ireland Cities add the Country-->
       <!-- already present as county
@@ -1014,6 +933,88 @@
 
       <!-- Australian Territories -->
       <CountryToRegion region="New South Wales"          country="Australia" />
+
+      <!-- Scottish Cities add the Country -->
+      <CityAddCountry city="Aberdeen"            country="Scotland" />
+      <CityAddCountry city="Dundee"              country="Scotland" />
+      <CityAddCountry city="Edinburgh"           country="Scotland" />
+      <CityAddCountry city="Glasgow"             country="Scotland" />
+      <CityAddCountry city="Inverness"           country="Scotland" />
+      <CityAddCountry city="Perth"               country="Scotland" />
+      <CityAddCountry city="Stirling"            country="Scotland" />
+
+      <!-- English Cities add the Country -->
+      <CityAddCountry city="Bath"                country="England" />
+      <CityAddCountry city="Birmingham"          country="England" />
+      <CityAddCountry city="Bradford"            country="England" />
+      <CityAddCountry city="Brighton &amp; Hove" country="England" />
+      <CityAddCountry city="Brighton"            country="England" />
+      <CityAddCountry city="Hove"                country="England" />
+      <CityAddCountry city="Bristol"             country="England" />
+      <CityAddCountry city="Cambridge"           country="England" />
+      <CityAddCountry city="Canterbury"          country="England" />
+      <CityAddCountry city="Carlisle"            country="England" />
+      <CityAddCountry city="Chelmsford"          country="England" />
+      <CityAddCountry city="Chester"             country="England" />
+      <CityAddCountry city="Chichester"          country="England" />
+      <CityAddCountry city="City of London"      country="England" />
+      <CityAddCountry city="City of Westminster" country="England" />
+      <CityAddCountry city="London"              country="England" />
+      <CityAddCountry city="Coventry"            country="England" />
+      <CityAddCountry city="Derby"               country="England" />
+      <CityAddCountry city="Durham"              country="England" />
+      <CityAddCountry city="Ely"                 country="England" />
+      <CityAddCountry city="Exeter"              country="England" />
+      <CityAddCountry city="Gloucester"          country="England" />
+      <CityAddCountry city="Hereford"            country="England" />
+      <CityAddCountry city="Kingston upon Hull"  country="England" />
+      <CityAddCountry city="Kingston"            country="England" />
+      <CityAddCountry city="Lancaster"           country="England" />
+      <CityAddCountry city="Leeds"               country="England" />
+      <CityAddCountry city="Leicester"           country="England" />
+      <CityAddCountry city="Lichfield"           country="England" />
+      <CityAddCountry city="Lincoln"             country="England" />
+      <CityAddCountry city="Liverpool"           country="England" />
+      <CityAddCountry city="Manchester"          country="England" />
+      <CityAddCountry city="Newcastle upon Tyne" country="England" />
+      <CityAddCountry city="Newcastle-upon-Tyne" country="England" />
+      <CityAddCountry city="Newcastle"           country="England" />
+      <CityAddCountry city="Norwich"             country="England" />
+      <CityAddCountry city="Nottingham"          country="England" />
+      <CityAddCountry city="Oxford"              country="England" />
+      <CityAddCountry city="Peterborough"        country="England" />
+      <CityAddCountry city="Plymouth"            country="England" />
+      <CityAddCountry city="Portsmouth"          country="England" />
+      <CityAddCountry city="Preston"             country="England" />
+      <CityAddCountry city="Ripon"               country="England" />
+      <CityAddCountry city="Salford"             country="England" />
+      <CityAddCountry city="Salisbury"           country="England" />
+      <CityAddCountry city="Sheffield"           country="England" />
+      <CityAddCountry city="Southampton"         country="England" />
+      <CityAddCountry city="St Albans"           country="England" />
+      <CityAddCountry city="St.Albans"           country="England" />
+      <CityAddCountry city="Stoke-On-Trent"      country="England" />
+      <CityAddCountry city="Stoke-on-Trent"      country="England" />
+      <CityAddCountry city="Stoke On Trent"      country="England" />
+      <CityAddCountry city="Stoke"               country="England" />
+      <CityAddCountry city="Sunderland"          country="England" />
+      <CityAddCountry city="Truro"               country="England" />
+      <CityAddCountry city="Wakefield"           country="England" />
+      <CityAddCountry city="Wells"               country="England" />
+      <CityAddCountry city="Winchester"          country="England" />
+      <CityAddCountry city="Wolverhampton"       country="England" />
+      <CityAddCountry city="Worcester"           country="England" />
+      <CityAddCountry city="York"                country="England" />
+      <CityAddCountry city="Ipswich"             country="England" />
+      <CityAddCountry city="Isle Of Wight"       country="England" />
+      
+      <!-- Welsh Cities add the Country -->
+      <CityAddCountry city="Bangor"              country="Wales" />
+      <CityAddCountry city="Cardiff"             country="Wales" />
+      <CityAddCountry city="Newport"             country="Wales" />
+      <CityAddCountry city="St Asaph"            country="Wales" />
+      <CityAddCountry city="St David's"          country="Wales" />
+      <CityAddCountry city="Swansea"             country="Wales" />
     </DemoteCountries>
     <DemoteRegions>
       <RegionToParish parish="Aberdeen"      region="Aberdeenshire" />

@@ -31,6 +31,7 @@
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name ="CountryToRegion" type="countryMove" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name ="CityAddCountry" type="addCountry" minOccurs="0" maxOccurs="unbounded" />
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -92,6 +93,11 @@
 
   <xs:complexType name="countryMove">
     <xs:attribute name="region" type="xs:string"/>
+    <xs:attribute name="country" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="addCountry">
+    <xs:attribute name="city" type="xs:string"/>
     <xs:attribute name="country" type="xs:string"/>
   </xs:complexType>
 

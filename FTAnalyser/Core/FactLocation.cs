@@ -56,6 +56,7 @@ namespace FTAnalyzer
         private static Dictionary<string, string> COUNTRY_TYPOS = new Dictionary<string, string>();
         private static Dictionary<string, string> REGION_TYPOS = new Dictionary<string, string>();
         public static Dictionary<string, string> COUNTRY_SHIFTS = new Dictionary<string, string>();
+        public static Dictionary<string, string> CITY_ADD_COUNTRY = new Dictionary<string, string>();
         private static Dictionary<string, string> REGION_SHIFTS = new Dictionary<string, string>();
         private static Dictionary<string, string> FREECEN_LOOKUP = new Dictionary<string, string>();
         private static Dictionary<string, Tuple<string, string>> FINDMYPAST_LOOKUP = new Dictionary<string, Tuple<string, string>>();
@@ -121,6 +122,19 @@ namespace FTAnalyzer
                         COUNTRY_SHIFTS.Add(from, to);
                     }
                 }
+                foreach (XmlNode n in xmlDoc.SelectNodes("Data/Fixes/DemoteCountries/CityAddCountry"))
+                {
+                    string from = n.Attributes["city"].Value;
+                    string to = n.Attributes["country"].Value;
+                    if (from != null && from.Length > 0 && to != null && to.Length > 0)
+                    {
+                        if (CITY_ADD_COUNTRY.ContainsKey(from))
+                            Console.WriteLine("Error duplicate city add country :" + from);
+                        if (COUNTRY_SHIFTS.ContainsKey(from)) // also check country shifts for duplicates
+                            Console.WriteLine("Error duplicate city in country shift :" + from);
+                        CITY_ADD_COUNTRY.Add(from, to);
+                    }
+                }
                 foreach (XmlNode n in xmlDoc.SelectNodes("Data/Fixes/DemoteRegions/RegionToParish"))
                 {
                     string from = n.Attributes["parish"].Value;
@@ -165,6 +179,7 @@ namespace FTAnalyzer
                 foreach (XmlNode n in xmlDoc.SelectNodes("Data/GoogleGeocodes/MultiLevelFixes/MultiLevelFix"))
                     AddGoogleFixes(GOOGLE_FIXES, n, UNKNOWN);
                 ValidateTypoFixes();
+                COUNTRY_SHIFTS = COUNTRY_SHIFTS.Concat(CITY_ADD_COUNTRY).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             }
         }
 
@@ -179,7 +194,6 @@ namespace FTAnalyzer
             foreach(string shift in COUNTRY_SHIFTS.Keys)
                 if(!Regions.IsPreferredRegion(shift))
                     Console.WriteLine("Country shift: " + shift + " is not a preferred region.");
-
         }
 
         public static void LoadGoogleFixesXMLFile(RichTextBox xmlErrorDocument)
