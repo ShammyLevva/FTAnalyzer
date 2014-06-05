@@ -371,16 +371,19 @@
       <RegionTypo from="Yorks"         to="Yorkshire" />
       <RegionTypo from="East Riding Yorkshire"      to="East Yorkshire" />
       <RegionTypo from="Yorkshire East Riding"      to="East Yorkshire" />
+      <RegionTypo from="Yorkshire-East Riding"      to="East Yorkshire" />
       <RegionTypo from="East Riding of Yorkshire"   to="East Yorkshire" />
       <RegionTypo from="Yorkshire (East)"           to="East Yorkshire" />
       <RegionTypo from="E Yorks"                    to="East Yorkshire" />
       <RegionTypo from="North Riding Yorkshire"     to="North Yorkshire" />
       <RegionTypo from="Yorkshire North Riding"     to="North Yorkshire" />
+      <RegionTypo from="Yorkshire-North Riding"     to="North Yorkshire" />
       <RegionTypo from="North Riding of Yorkshire"  to="North Yorkshire" />
       <RegionTypo from="Yorkshire (North)"          to="North Yorkshire" />
       <RegionTypo from="N Yorks"                    to="North Yorkshire" />
       <RegionTypo from="West Riding Yorkshire"      to="West Yorkshire" />
       <RegionTypo from="Yorkshire West Riding"      to="West Yorkshire" />
+      <RegionTypo from="Yorkshire-West Riding"      to="West Yorkshire" />
       <RegionTypo from="West Riding of Yorkshire"   to="West Yorkshire" />
       <RegionTypo from="Yorkshire (West)"           to="West Yorkshire" />
       <RegionTypo from="W Yorks"                    to="West Yorkshire" />

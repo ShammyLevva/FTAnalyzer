@@ -223,6 +223,14 @@ namespace FTAnalyzer
         #endregion
 
         #region Australian Regions
+        public static Region NSW = new Region("New South Wales", Countries.AUSTRALIA, Region.Creation.HISTORIC);
+        public static Region QUEENSLAND = new Region("Queensland", Countries.AUSTRALIA, Region.Creation.HISTORIC);
+        public static Region SAUSTRALIA = new Region("South Australia", Countries.AUSTRALIA, Region.Creation.HISTORIC);
+        public static Region TASMANIA = new Region("Tasmania", Countries.AUSTRALIA, Region.Creation.HISTORIC);
+        public static Region VICTORIA = new Region("Victoria", Countries.AUSTRALIA, Region.Creation.HISTORIC);
+        public static Region WAUSTRALIA = new Region("Western Australia", Countries.AUSTRALIA, Region.Creation.HISTORIC);
+        public static Region ACT = new Region("Australian Capital Territory", Countries.AUSTRALIA, Region.Creation.HISTORIC);
+        public static Region NORTHERN_TERRITORY = new Region("Northern Territory", Countries.AUSTRALIA, Region.Creation.HISTORIC);
         #endregion
 
         static Regions()
@@ -288,8 +296,9 @@ namespace FTAnalyzer
             AddUSStatesAlternates();
 
             AUSTRALIAN_REGIONS = new HashSet<Region>(new Region[] { 
-
+                NSW, QUEENSLAND, SAUSTRALIA, TASMANIA, VICTORIA, WAUSTRALIA, ACT, NORTHERN_TERRITORY
             });
+            AddAustralianRegionAlternates();
 
             #region Valid Regions
             VALID_REGIONS = new Dictionary<string, Region>();
@@ -505,6 +514,11 @@ namespace FTAnalyzer
         {
             DC.AddAlternateName("DC");
             DC.AddAlternateName("Dist of Columba");
+        }
+
+        private static void AddAustralianRegionAlternates()
+        {
+            ACT.AddAlternateName("ACT");
         }
     }
 }
