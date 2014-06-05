@@ -473,12 +473,22 @@
       <RegionTypo from="Radnorshire"      to="Radnor" />
 
       <!-- Canadian Province abbreviations -->
+      <RegionTypo from="AB"     to="Alberta" />
       <RegionTypo from="BC"     to="British Columbia" />
+      <RegionTypo from="MB"     to="Manitoba" />
+      <RegionTypo from="NB"     to="New Brunswick" />
+      <RegionTypo from="NL"     to="Newfoundland and Labrador" />
       <RegionTypo from="NWT"    to="North West Territories" />
+      <RegionTypo from="NT"     to="North West Territories" />
       <RegionTypo from="NS"     to="Nova Scotia" />
+      <RegionTypo from="NU"     to="Nunavut" />
       <RegionTypo from="ON"     to="Ontario" />
+      <RegionTypo from="QC"     to="Quebec" />
       <RegionTypo from="PEI"    to="Prince Edward Island" />
+      <RegionTypo from="PE"     to="Prince Edward Island" />
+      <RegionTypo from="SK"     to="Saskatchewan" />
       <RegionTypo from="Yukon"  to="Yukon Territory" />
+      <RegionTypo from="YT   "  to="Yukon Territory" />
 
       <!-- US State abbreviations -->
       <RegionTypo from="AL"  to="Alabama" />

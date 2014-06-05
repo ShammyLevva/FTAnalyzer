@@ -54,6 +54,17 @@ namespace FTAnalyzer
         public static Region SUTHERLAND = new Region("Sutherland", Countries.SCOTLAND, Region.Creation.HISTORIC);
         public static Region WEST_LOTHIAN = new Region("West Lothian", Countries.SCOTLAND, Region.Creation.HISTORIC);
         public static Region WIGTOWN = new Region("Wigtownshire", Countries.SCOTLAND, Region.Creation.HISTORIC);
+       
+        public static Region BORDERS = new Region("Borders", Countries.SCOTLAND, Region.Creation.LG_ACT1974);              
+        public static Region CENTRAL_SCOT = new Region("Central", Countries.SCOTLAND, Region.Creation.LG_ACT1974);              
+        public static Region DUMFRIES_GALLOWAY = new Region("Dumfries and Galloway", Countries.SCOTLAND, Region.Creation.LG_ACT1974);
+        public static Region GRAMPIAN = new Region("Grampian", Countries.SCOTLAND, Region.Creation.LG_ACT1974);             
+        public static Region HIGHLAND = new Region("Highland", Countries.SCOTLAND, Region.Creation.LG_ACT1974);
+        public static Region LOTHIAN = new Region("Lothian", Countries.SCOTLAND, Region.Creation.LG_ACT1974);
+        public static Region STRATHCLYDE = new Region("Strathclyde", Countries.SCOTLAND, Region.Creation.LG_ACT1974);
+        public static Region TAYSIDE = new Region("Tayside", Countries.SCOTLAND, Region.Creation.LG_ACT1974);
+        public static Region WESTERN_ISLES = new Region("Western Isles", Countries.SCOTLAND, Region.Creation.LG_ACT1974);
+        
         #endregion
 
         #region English Regions
@@ -243,7 +254,8 @@ namespace FTAnalyzer
                     ABERDEEN, ANGUS, ARGYLL, AYR, BANFF, BERWICK, BUTE, CAITHNESS, CLACKMANNAN, DUMFRIES,
                     DUNBARTON, EAST_LOTHIAN, FIFE, INVERNESS, KINCARDINE, KINROSS, KIRKCUDBRIGHT, LANARK, 
                     MIDLOTHIAN, MORAY, NAIRN, ORKNEY, PEEBLES, PERTH, RENFREW, ROSS_CROMARTY, ROXBURGH, 
-                    SELKIRK, SHETLAND, STIRLING, SUTHERLAND, WEST_LOTHIAN, WIGTOWN
+                    SELKIRK, SHETLAND, STIRLING, SUTHERLAND, WEST_LOTHIAN, WIGTOWN, BORDERS, CENTRAL_SCOT,
+                    DUMFRIES_GALLOWAY, GRAMPIAN, HIGLAND, LOTHIAN, STRATHCLYDE, TAYSIDE, WESTERN_ISLES
                 });
             AddScottishRegionAlternates();
 
@@ -371,10 +383,13 @@ namespace FTAnalyzer
             STIRLING.AddAlternateName("Stirling");
             WEST_LOTHIAN.AddAlternateName("Linlithgowshire");
             WIGTOWN.AddAlternateName("Wigtown");
-            // alternate names
             SHETLAND.AddAlternateName("Zetland");
             ROSS_CROMARTY.AddAlternateName("Ross & Cromarty");
             FIFE.AddAlternateName("Kingdom of Fife");
+            CENTRAL_SCOT.AddAlternateName("Central Scotland");
+            HIGHLAND.AddAlternateName("Highlands");
+            HIGHLAND.AddAlternateName("Highlands & Islands");
+            HIGHLAND.AddAlternateName("Highlands and Islands");
         }
 
         private static void AddWelshRegionAlternates()
@@ -382,6 +397,7 @@ namespace FTAnalyzer
             ANGLESEY.AddAlternateName("Sir Fon");
             BRECON.AddAlternateName("Sir Frycheiniog");
             BRECON.AddAlternateName("Brecon");
+            BRECON.AddAlternateName("Breconshire");
             CAERNARFON.AddAlternateName("Sir Gaernarfon");
             CAERNARFON.AddAlternateName("Caernarfon");
             CAERNARFON.AddAlternateName("Caernarvonshire");
@@ -521,6 +537,9 @@ namespace FTAnalyzer
         private static void AddAustralianRegionAlternates()
         {
             ACT.AddAlternateName("ACT");
+            TASMANIA.AddAlternateName("Van Diemen's Land");
+            TASMANIA.AddAlternateName("Van Diemens Land");
+            TASMANIA.AddAlternateName("VDL");
         }
     }
 }
