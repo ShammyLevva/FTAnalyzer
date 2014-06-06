@@ -976,7 +976,6 @@ namespace FTAnalyzer.Forms
             else
             {
                 this.Cursor = Cursors.WaitCursor;
-                pbGeocoding.Visible = true;
                 mnuGoogleGeocodeLocations.Enabled = false;
                 mnuEditLocation.Enabled = false;
                 mnuReverseGeocode.Enabled = false;
@@ -1042,6 +1041,7 @@ namespace FTAnalyzer.Forms
         public void ProcessOS50kGazetteerData(BackgroundWorker worker, DoWorkEventArgs e)
         {
             IEnumerable<FactLocation> toSearch = FactLocation.AllLocations;
+            List<FactLocation> failedToFind = new List<FactLocation>();
             int total = FactLocation.LocationsCount;
             int count = 0;
             int matched = 0;
@@ -1060,6 +1060,8 @@ namespace FTAnalyzer.Forms
                     {
                         if (GazetteerMatchMethodA(loc))
                             matched++;
+                        else
+                            failedToFind.Add(loc);
                     }
                 }
                 count++;
@@ -1072,6 +1074,26 @@ namespace FTAnalyzer.Forms
                 {
                     e.Cancel = true;
                     break;
+                }
+            }
+            GenerateTestGedcom(failedToFind);
+        }
+
+        private void GenerateTestGedcom(List<FactLocation> failedToFind)
+        {
+            string filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, "OS50k Gazetteer failed matches.ged");
+            using(StreamWriter stream = new StreamWriter(filename))
+            {
+                stream.WriteLine("0 HEAD");
+                stream.WriteLine("0 @I@ INDI");
+                stream.WriteLine("1 NAME Test /Person/");
+                DateTime date = new DateTime(1800, 1, 1);
+                foreach(FactLocation loc in failedToFind)
+                {
+                    stream.WriteLine("1 RESI");
+                    stream.WriteLine("2 DATE " + date.ToString("dd MMM yyyy").ToUpper());
+                    stream.WriteLine("2 PLAC " + loc.ToString());
+                    date = date.AddDays(1);
                 }
             }
         }
@@ -1167,6 +1189,7 @@ namespace FTAnalyzer.Forms
 
         private void OSGeocodeBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            pbGeocoding.Visible = true;
             pbGeocoding.Value = e.ProgressPercentage;
             txtLocations.Text = (string)e.UserState;
         }

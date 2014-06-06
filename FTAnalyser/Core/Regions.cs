@@ -456,6 +456,7 @@ namespace FTAnalyzer
             HIGHLAND.AddAlternateName("Highlands");
             HIGHLAND.AddAlternateName("Highlands & Islands");
             HIGHLAND.AddAlternateName("Highlands and Islands");
+            LOTHIAN.AddAlternateName("Lothians");
         }
 
         private static void AddWelshRegionAlternates()
