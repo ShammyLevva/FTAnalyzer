@@ -137,6 +137,8 @@ namespace FTAnalyzer
                 ClearColourFamilyCombo();
                 Statistics.Instance.Clear();
                 btnReferrals.Enabled = false;
+                openToolStripMenuItem.Enabled = false;
+                mnuRecent.Enabled = false;
                 tabCtrlLooseBDs.SelectedTab = tabLooseBirths; // force back to first tab
                 tabCtrlLocations.SelectedTab = tabTreeView; // otherwise totals etc look wrong
                 treeViewLocations.Nodes.Clear();
@@ -151,6 +153,7 @@ namespace FTAnalyzer
                         ft.SetFactTypeList(ckbFactSelect, filter);
                         SetShowFactsButton();
                         Application.UseWaitCursor = false;
+                        openToolStripMenuItem.Enabled = true;
                         ShowMenus(true);
                         HourGlass(false);
                         AddFileToRecentList(filename);
@@ -368,6 +371,7 @@ namespace FTAnalyzer
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            DatabaseHelper.Instance.Dispose();
             stopProcessing = true;
         }
 
