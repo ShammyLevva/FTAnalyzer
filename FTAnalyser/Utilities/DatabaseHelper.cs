@@ -82,7 +82,6 @@ namespace FTAnalyzer.Utilities
                 MessageBox.Show("Error opening database. Error is :" + ex.Message, "FT Analyzer");
             }
         }
-
         #endregion
 
         #region Database Update Functions
@@ -414,6 +413,7 @@ namespace FTAnalyzer.Utilities
             insertCmd.Parameters[12].Value = loc.LatitudeM;
             insertCmd.Parameters[13].Value = loc.LongitudeM;
             insertCmd.ExecuteNonQuery();
+            insertCmd.Dispose();
         }
 
         public void UpdateGeocode(FactLocation loc)
@@ -494,6 +494,7 @@ namespace FTAnalyzer.Utilities
             updateCmd.Parameters[12].Value = loc.LongitudeM;
             updateCmd.Parameters[13].Value = loc.ToString();
             updateCmd.ExecuteNonQuery();
+            updateCmd.Dispose();
             OnGeoLocationUpdated(loc);
         }
         #endregion

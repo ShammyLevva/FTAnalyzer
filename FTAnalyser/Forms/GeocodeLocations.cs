@@ -697,15 +697,20 @@ namespace FTAnalyzer.Forms
 
         private void UpdateDatabase(FactLocation loc, bool inDatabase)
         {
-            if (this.InvokeRequired)
-            {
-                this.Invoke(new Action(() => UpdateDatabase(loc, inDatabase)));
-                return;
-            }
             if (inDatabase)
                 DatabaseHelper.Instance.UpdateGeocode(loc);
             else
                 DatabaseHelper.Instance.InsertGeocode(loc);
+            RefreshTreeNode(loc);
+        }
+
+        private void RefreshTreeNode(FactLocation loc)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => RefreshTreeNode(loc)));
+                return;
+            }
             FamilyTree.Instance.RefreshTreeNodeIcon(loc);
         }
 
