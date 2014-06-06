@@ -1078,17 +1078,17 @@ namespace FTAnalyzer.Forms
 
         private bool GazetteerMatchMethodA(FactLocation loc)
         {
-            if (loc.PlaceStripNumeric.Length > 0)
+            if (loc.PlaceNoNumerics.Length > 0)
             {
                 IEnumerable<OS50kGazetteer> placeMatches =
-                    OS50k.Where(x => x.DefinitiveName.Equals(loc.PlaceStripNumeric, StringComparison.InvariantCultureIgnoreCase) && x.IsCountyMatch(loc));
+                    OS50k.Where(x => x.DefinitiveName.Equals(loc.PlaceNoNumerics, StringComparison.InvariantCultureIgnoreCase) && x.IsCountyMatch(loc));
                 if (placeMatches.Count() > 0)
                     return ProcessOS50kMatches(placeMatches, loc, FactLocation.PLACE);
             }
-            if (loc.AddressStripNumeric.Length > 0)
+            if (loc.AddressNoNumerics.Length > 0)
             {
                 IEnumerable<OS50kGazetteer> addressMatches =
-                    OS50k.Where(x => x.DefinitiveName.Equals(loc.AddressStripNumeric, StringComparison.InvariantCultureIgnoreCase) && x.IsCountyMatch(loc));
+                    OS50k.Where(x => x.DefinitiveName.Equals(loc.AddressNoNumerics, StringComparison.InvariantCultureIgnoreCase) && x.IsCountyMatch(loc));
                 if (addressMatches.Count() > 0)
                     return ProcessOS50kMatches(addressMatches, loc, FactLocation.ADDRESS);
             }

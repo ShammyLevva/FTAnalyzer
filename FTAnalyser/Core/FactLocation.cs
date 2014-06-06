@@ -21,18 +21,22 @@ namespace FTAnalyzer
             INCORRECT = 5, OUT_OF_BOUNDS = 6, LEVEL_MISMATCH = 7, OS_50KMATCH = 8, OS_50KPARTIAL = 9 };
 
         private string fixedLocation;
+        private string address;
+        private string place;
         public string GEDCOMLocation { get; private set; }
         public string SortableLocation { get; private set; }
         public string Country { get; set; }
         public string Region { get; set; }
         public string SubRegion { get; set; }
-        public string Address { get; set; }
-        public string Place { get; set; }
+        public string Address { get { return address; } set { address = value; AddressNoNumerics = FixNumerics(value, false); } }
+        public string Place { get { return place; } set { place = value; PlaceNoNumerics = FixNumerics(value, false); } }
         public string CountryMetaphone { get; private set; }
         public string RegionMetaphone { get; private set; }
         public string SubRegionMetaphone { get; private set; }
         public string AddressMetaphone { get; private set; }
         public string PlaceMetaphone { get; private set; }
+        public string AddressNoNumerics { get; private set; }
+        public string PlaceNoNumerics { get; private set; }
         public string ParishID { get; internal set; }
         public int Level { get; private set; }
         public double Latitude { get; set; }
@@ -770,17 +774,7 @@ namespace FTAnalyzer
         {
             get { return FixNumerics(this.Place, true); }
         }
-
-        public string AddressStripNumeric
-        {
-            get { return FixNumerics(this.Address, false); }
-        }
-
-        public string PlaceStripNumeric
-        {
-            get { return FixNumerics(this.Place, false); }
-        }
-
+        
         public bool IsKnownCountry
         {
             get { return Countries.IsKnownCountry(Country); }
