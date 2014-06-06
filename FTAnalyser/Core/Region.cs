@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FTAnalyzer.Mapping;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,8 @@ namespace FTAnalyzer
         public List<string> AlternativeNames { get; private set; }
         public string ISOcode { get; set; }
         public Creation RegionType { get; private set; }
-
+        public List<CountyConversion.County> CountyCodes { get; private set; }
+        
         public Region(string region, string country, Creation regionType)
         {
             Country = country;
@@ -22,6 +24,9 @@ namespace FTAnalyzer
             AlternativeNames = new List<string>();
             ISOcode = string.Empty;
             RegionType = regionType;
+            CountyCodes = Mapping.CountyConversion.GetCounties(region);
+            if ((Countries.IsEnglandWales(country) || country == Countries.SCOTLAND) && (CountyCodes == null || CountyCodes.Count == 0))
+                Console.WriteLine("Missing new county codes for: " + region);
         }
 
         public void AddAlternateName(string name)

@@ -85,7 +85,7 @@ namespace FTAnalyzer.Mapping
 
         public bool IsCountyMatch(FactLocation loc)
         {
-            return loc.Counties.Any(c => c.CountyCode == CountyCode);
+            return loc.KnownRegion != null && loc.KnownRegion.CountyCodes.Any(c => c.CountyCode == CountyCode);
         }
 
         public override string ToString()

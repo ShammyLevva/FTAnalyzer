@@ -49,7 +49,6 @@ namespace FTAnalyzer
         public string GoogleResultType { get; set; }
         public int FoundLevel { get; set; }
         public double PixelSize { get; set; }
-        public List<CountyConversion.County> Counties { get; private set; }
         public GeoResponse.CResult.CGeometry.CViewPort ViewPort { get; set; }
         private List<Individual> individuals;
 
@@ -363,7 +362,6 @@ namespace FTAnalyzer
             this.GoogleResultType = string.Empty;
             this.FoundLevel = -2;
             this.ViewPort = new GeoResponse.CResult.CGeometry.CViewPort();
-            this.Counties = new List<CountyConversion.County>();
         }
 
         private FactLocation(string location, string latitude, string longitude, Geocode status)
@@ -448,7 +446,6 @@ namespace FTAnalyzer
                 SetFixedLocation();
                 SetSortableLocation();
                 SetMetaphones();
-                Counties = Mapping.CountyConversion.GetCounties(Region);
                 KnownRegion = Regions.GetRegion(Region);
                 //string after = (parish + ", " + region + ", " + country).ToUpper().Trim();
                 //if (!before.Equals(after))
