@@ -69,6 +69,9 @@ namespace FTAnalyzer.Utilities
                 Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\Geocodes.s3db");
                 if (!File.Exists(Filename))
                 {
+                    string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer");
+                    if (!Directory.Exists(path))
+                        Directory.CreateDirectory(path);
                     File.Copy(Path.Combine(Application.StartupPath, @"Resources\Geocodes-Empty.s3db"), Filename);
                 }
                 conn = new SQLiteConnection("Data Source=" + Filename + ";Version=3;");
