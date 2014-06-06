@@ -2150,6 +2150,8 @@ namespace FTAnalyzer
 
         private static void SetTreeNodeImage(FactLocation location, TreeNode child)
         {
+            if (child == null)
+                return;
             switch (location.GeocodeStatus)
             {
                 case FactLocation.Geocode.NOT_SEARCHED:

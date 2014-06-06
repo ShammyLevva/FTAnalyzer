@@ -39,6 +39,7 @@ namespace FTAnalyzer
         public string PlaceNoNumerics { get; private set; }
         public string ParishID { get; internal set; }
         public int Level { get; private set; }
+        public Region KnownRegion { get; private set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public double LatitudeM { get; set; }
@@ -448,6 +449,7 @@ namespace FTAnalyzer
                 SetSortableLocation();
                 SetMetaphones();
                 Counties = Mapping.CountyConversion.GetCounties(Region);
+                KnownRegion = Regions.GetRegion(Region);
                 //string after = (parish + ", " + region + ", " + country).ToUpper().Trim();
                 //if (!before.Equals(after))
                 //    Console.WriteLine("Debug : '" + before + "'  converted to '" + after + "'");

@@ -28,5 +28,10 @@ namespace FTAnalyzer
         {
             AlternativeNames.Add(name);
         }
+
+        public override string ToString()
+        {
+            return PreferredName + ", " + Country;
+        }
     }
 }
