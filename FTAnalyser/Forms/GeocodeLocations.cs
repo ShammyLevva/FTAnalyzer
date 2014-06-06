@@ -1180,7 +1180,8 @@ namespace FTAnalyzer.Forms
             else
                 location.GeocodeStatus = FactLocation.Geocode.OS_50KPARTIAL;
             location.FoundLevel = level;
-            UpdateDatabase(location, true);
+            bool inDatabase = DatabaseHelper.Instance.IsLocationInDatabase(location.ToString());
+            UpdateDatabase(location, inDatabase);
         }
 
         private void mnuOSGeocodeLocations_Click(object sender, EventArgs e)

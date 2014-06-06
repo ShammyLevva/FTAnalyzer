@@ -471,7 +471,8 @@ namespace FTAnalyzer.Utilities
                     insertCmd.Parameters[11].Value = loc.GoogleResultType;
                     insertCmd.Parameters[12].Value = loc.LatitudeM;
                     insertCmd.Parameters[13].Value = loc.LongitudeM;
-                    insertCmd.ExecuteNonQuery();
+
+                    int rowsaffected = insertCmd.ExecuteNonQuery();
                 }
             }
         }
@@ -555,7 +556,9 @@ namespace FTAnalyzer.Utilities
                     updateCmd.Parameters[11].Value = loc.LatitudeM;
                     updateCmd.Parameters[12].Value = loc.LongitudeM;
                     updateCmd.Parameters[13].Value = loc.ToString();
-                    updateCmd.ExecuteNonQuery();
+                    int rowsaffected = updateCmd.ExecuteNonQuery();
+                    if (rowsaffected != 1)
+                        Console.WriteLine("Problem updating");
                     OnGeoLocationUpdated(loc);
                 }
             }
