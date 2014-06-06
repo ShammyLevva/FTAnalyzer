@@ -269,8 +269,8 @@ namespace FTAnalyzer
             Geocodes.Add(Geocode.INCORRECT, "Incorrect (User Marked)");
             Geocodes.Add(Geocode.OUT_OF_BOUNDS, "Outside Country Area");
             Geocodes.Add(Geocode.LEVEL_MISMATCH, "Partial Match (Levels)");
-            Geocodes.Add(Geocode.OS_50KMATCH, "OS 50k Gazetteer Match");
-            Geocodes.Add(Geocode.OS_50KPARTIAL, "Partial Match (OS 50k)");
+            Geocodes.Add(Geocode.OS_50KMATCH, "OS Gazetteer Match");
+            Geocodes.Add(Geocode.OS_50KPARTIAL, "Partial Match (Ord Surv)");
         }
 
         public static FactLocation GetLocation(string place)

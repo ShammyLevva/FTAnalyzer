@@ -2400,7 +2400,7 @@ namespace FTAnalyzer
                 zip.AddFile(dbh.Filename, string.Empty);
                 zip.Comment = comment + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm");
                 zip.Save();
-                dbh.EndBackupDatabase();
+                //dbh.EndBackupDatabase();
                 Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName));
                 MessageBox.Show("Database exported to " + saveDatabase.FileName, "FTAnalyzer Database Export Complete");
                 return true;
