@@ -19,6 +19,8 @@ namespace FTAnalyzer
         public static ISet<Region> CANADIAN_REGIONS;
         public static ISet<Region> US_STATES;
         public static ISet<Region> AUSTRALIAN_REGIONS;
+        public static ISet<Region> NEW_ZEALAND_REGIONS;
+
         public static IDictionary<string, Region> ALL_REGIONS;
         public static IDictionary<string, Region> VALID_REGIONS;
 
@@ -291,6 +293,28 @@ namespace FTAnalyzer
         public static Region NORTHERN_TERRITORY = new Region("Northern Territory", Countries.AUSTRALIA, Region.Creation.HISTORIC);
         #endregion
 
+        #region New Zealand Regions
+        public static Region AUCKLAND = new Region("Auckland", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region BAY_OF_PLENTY = new Region("Bay of Plenty", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region CANTERBURY = new Region("Canterbury", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region HAWKES_BAY = new Region("Hawke's Bay", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region MANAWATU_WANGANUI = new Region("Manawatu-Wanganui", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region NORTHLAND = new Region("Northland", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region OTAGO = new Region("Otago", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region SOUTHLAND = new Region("Southland", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region TARANAKI = new Region("Taranaki", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region WAIKATO = new Region("Waikato", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region WELLINGTON = new Region("Wellington", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region WEST_COAST = new Region("West Coast", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region GISBORNE = new Region("Gisborne District", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region MARBOROUGH = new Region("Marlborough District", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region NELSON = new Region("Nelson City", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region TASMAN = new Region("Tasman District", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region CHATAM_ISLANDS = new Region("Chatham Islands Territory", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region NORTH_ISLAND = new Region("North Island", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        public static Region SOUTH_ISLAND = new Region("South Island", Countries.NEW_ZEALAND, Region.Creation.HISTORIC);
+        #endregion
+
         static Regions()
         {
             #region UK Regions
@@ -339,7 +363,6 @@ namespace FTAnalyzer
             UK_REGIONS.UnionWith(ISLAND_REGIONS);
             #endregion 
             
-
             IRISH_REGIONS = new HashSet<Region>(new Region[] { 
                 CARLOW, CAVAN, CLARE, CORK, DONEGAL, DUBLIN, GALWAY, KERRY, KILDARE, KILKENNY, LAOIS, LEITRIM,
                 LIMERICK, LONGFORD, LOUTH, MAYO, MEATH, MONAGHAN, OFFALY, ROSCOMMON, SLIGO, TIPPERARY, WATERFORD, 
@@ -369,6 +392,13 @@ namespace FTAnalyzer
                 NSW, QUEENSLAND, SAUSTRALIA, TASMANIA, VICTORIA, WAUSTRALIA, ACT, NORTHERN_TERRITORY
             });
             AddAustralianRegionAlternates();
+
+            NEW_ZEALAND_REGIONS = new HashSet<Region>(new Region[] { 
+                AUCKLAND, BAY_OF_PLENTY, CANTERBURY, HAWKES_BAY, MANAWATU_WANGANUI, NORTHLAND, OTAGO,
+                SOUTHLAND, TARANAKI, WAIKATO, WELLINGTON, WEST_COAST, GISBORNE, MARBOROUGH, NELSON,
+                TASMAN, CHATAM_ISLANDS, NORTH_ISLAND, SOUTH_ISLAND
+            });
+            AddNewZealandRegionAlternates();
 
             #region Valid Regions
             ALL_REGIONS = new Dictionary<string, Region>();
@@ -669,6 +699,26 @@ namespace FTAnalyzer
             TASMANIA.AddAlternateName("Van Diemen's Land");
             TASMANIA.AddAlternateName("Van Diemens Land");
             TASMANIA.AddAlternateName("VDL");
+        }
+
+        private static void AddNewZealandRegionAlternates()
+        {
+            AUCKLAND.AddAlternateName("Tāmaki-makau-rau");
+            BAY_OF_PLENTY.AddAlternateName("Te Moana a Toi Te Huatahi");
+            CANTERBURY.AddAlternateName("Waitaha");
+            HAWKES_BAY.AddAlternateName("Te Matau a Māui");
+            MANAWATU_WANGANUI.AddAlternateName("Manawatu Whanganui");
+            NORTHLAND.AddAlternateName("Te Tai tokerau");
+            OTAGO.AddAlternateName("Ō Tākou");
+            SOUTHLAND.AddAlternateName("Murihiku");
+            WELLINGTON.AddAlternateName("Te Whanga-nui-a-Tara");
+            WEST_COAST.AddAlternateName("Te Taihau ā uru");
+            GISBORNE.AddAlternateName("Gisborne");
+            GISBORNE.AddAlternateName("Tūranga nui a Kiwa");
+            MARBOROUGH.AddAlternateName("Marborough");
+            NELSON.AddAlternateName("Nelson");
+            NELSON.AddAlternateName("Whakatū");
+            CHATAM_ISLANDS.AddAlternateName("Wharekauri");
         }
     }
 }
