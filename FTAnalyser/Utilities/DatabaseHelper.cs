@@ -333,9 +333,24 @@ namespace FTAnalyzer.Utilities
             using (SQLiteConnection conn = new SQLiteConnection(connectionString))
             {
                 conn.Open();
-                using (SQLiteCommand cmd = new SQLiteCommand("update geocode set latitude = 0, longitude = 0, founddate = date('now'), foundlocation = '', foundlevel = -2, viewport_x_ne = 0, viewport_y_ne = 0, viewport_x_sw = 0, viewport_y_sw = 0, geocodestatus = 0, foundresulttype = '' where geocodestatus = 2 or geocodestatus=7", conn))
+                using (SQLiteCommand cmd = new SQLiteCommand("update geocode set latitude = 0, longitude = 0, founddate = date('now'), foundlocation = '', foundlevel = -2, viewport_x_ne = 0, viewport_y_ne = 0, viewport_x_sw = 0, viewport_y_sw = 0, geocodestatus = 0, foundresulttype = '' where geocodestatus in (2,7,9)", conn))
                 {
                     cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void LoadGeoLocations(ProgressBar pb)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                foreach (FactLocation loc in FactLocation.AllLocations)
+                {
+                    ReadLocationIntoFact(loc, conn);
+                    pb.Value++;
+                    if (pb.Value % 20 == 0)
+                        Application.DoEvents();
                 }
             }
         }
@@ -346,47 +361,52 @@ namespace FTAnalyzer.Utilities
             using (SQLiteConnection conn = new SQLiteConnection(connectionString))
             {
                 conn.Open();
-                using (SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, latm, longm, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw, geocodestatus, foundlevel, foundlocation, foundresulttype from geocode where location = ?", conn))
+                ReadLocationIntoFact(location, conn);
+            }
+        }
+
+        private static void ReadLocationIntoFact(FactLocation location, SQLiteConnection conn)
+        {
+            using (SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, latm, longm, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw, geocodestatus, foundlevel, foundlocation, foundresulttype from geocode where location = ?", conn))
+            {
+                SQLiteParameter param = cmd.CreateParameter();
+                param.DbType = DbType.String;
+                cmd.Parameters.Add(param);
+                cmd.Prepare();
+                cmd.Parameters[0].Value = location.ToString();
+                using (SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleRow))
                 {
-                    SQLiteParameter param = cmd.CreateParameter();
-                    param.DbType = DbType.String;
-                    cmd.Parameters.Add(param);
-                    cmd.Prepare();
-                    cmd.Parameters[0].Value = location.ToString();
-                    using (SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleRow))
+                    if (reader.Read())
                     {
-                        if (reader.Read())
+                        double latitude, longitude, latm, longm, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw;
+                        double.TryParse(reader["latitude"].ToString(), out latitude);
+                        double.TryParse(reader["longitude"].ToString(), out longitude);
+                        double.TryParse(reader["latm"].ToString(), out latm);
+                        double.TryParse(reader["longm"].ToString(), out longm);
+                        double.TryParse(reader["viewport_x_ne"].ToString(), out viewport_x_ne);
+                        double.TryParse(reader["viewport_y_ne"].ToString(), out viewport_y_ne);
+                        double.TryParse(reader["viewport_x_sw"].ToString(), out viewport_x_sw);
+                        double.TryParse(reader["viewport_y_sw"].ToString(), out viewport_y_sw);
+                        location.Latitude = latitude;
+                        location.Longitude = longitude;
+                        location.LatitudeM = latm;
+                        location.LongitudeM = longm;
+                        if (location.ViewPort == null)
                         {
-                            double latitude, longitude, latm, longm, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw;
-                            double.TryParse(reader["latitude"].ToString(), out latitude);
-                            double.TryParse(reader["longitude"].ToString(), out longitude);
-                            double.TryParse(reader["latm"].ToString(), out latm);
-                            double.TryParse(reader["longm"].ToString(), out longm);
-                            double.TryParse(reader["viewport_x_ne"].ToString(), out viewport_x_ne);
-                            double.TryParse(reader["viewport_y_ne"].ToString(), out viewport_y_ne);
-                            double.TryParse(reader["viewport_x_sw"].ToString(), out viewport_x_sw);
-                            double.TryParse(reader["viewport_y_sw"].ToString(), out viewport_y_sw);
-                            location.Latitude = latitude;
-                            location.Longitude = longitude;
-                            location.LatitudeM = latm;
-                            location.LongitudeM = longm;
-                            if (location.ViewPort == null)
-                            {
-                                location.ViewPort = new Mapping.GeoResponse.CResult.CGeometry.CViewPort();
-                                location.ViewPort.NorthEast = new Mapping.GeoResponse.CResult.CGeometry.CLocation();
-                                location.ViewPort.SouthWest = new Mapping.GeoResponse.CResult.CGeometry.CLocation();
-                            }
-                            location.ViewPort.NorthEast.Lat = viewport_y_ne;
-                            location.ViewPort.NorthEast.Long = viewport_x_ne;
-                            location.ViewPort.SouthWest.Lat = viewport_y_sw;
-                            location.ViewPort.SouthWest.Long = viewport_x_sw;
-                            location.GeocodeStatus = (FactLocation.Geocode)Enum.Parse(typeof(FactLocation.Geocode), reader["geocodestatus"].ToString());
-                            location.GoogleLocation = reader["foundlocation"].ToString();
-                            location.GoogleResultType = reader["foundresulttype"].ToString();
-                            int foundlevel = 0;
-                            int.TryParse(reader["foundlevel"].ToString(), out foundlevel);
-                            location.FoundLevel = foundlevel;
+                            location.ViewPort = new Mapping.GeoResponse.CResult.CGeometry.CViewPort();
+                            location.ViewPort.NorthEast = new Mapping.GeoResponse.CResult.CGeometry.CLocation();
+                            location.ViewPort.SouthWest = new Mapping.GeoResponse.CResult.CGeometry.CLocation();
                         }
+                        location.ViewPort.NorthEast.Lat = viewport_y_ne;
+                        location.ViewPort.NorthEast.Long = viewport_x_ne;
+                        location.ViewPort.SouthWest.Lat = viewport_y_sw;
+                        location.ViewPort.SouthWest.Long = viewport_x_sw;
+                        location.GeocodeStatus = (FactLocation.Geocode)Enum.Parse(typeof(FactLocation.Geocode), reader["geocodestatus"].ToString());
+                        location.GoogleLocation = reader["foundlocation"].ToString();
+                        location.GoogleResultType = reader["foundresulttype"].ToString();
+                        int foundlevel = 0;
+                        int.TryParse(reader["foundlevel"].ToString(), out foundlevel);
+                        location.FoundLevel = foundlevel;
                     }
                 }
             }
@@ -622,7 +642,7 @@ namespace FTAnalyzer.Utilities
                 restoring = false;
                 FamilyTree ft = FamilyTree.Instance;
                 if (ft.DataLoaded)
-                    ft.LoadGeoLocationsFromDataBase();
+                    ft.LoadGeoLocationsFromDataBase(null);
             }
             catch (Exception)
             {

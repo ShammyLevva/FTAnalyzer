@@ -947,17 +947,6 @@ namespace FTAnalyzer
             treeViewLocations.SelectedImageIndex = e.Node.ImageIndex;
         }
 
-        private void buildLocationsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (KeyValuePair<string, string> shift in FactLocation.COUNTRY_SHIFTS)
-            {
-                FactLocation.GetLocation(shift.Key + ", " + shift.Value);
-            }
-            ft.LoadGeoLocationsFromDataBase();
-            GeocodeLocations gl = new GeocodeLocations();
-            gl.Show();
-        }
-
         private void mnuLifelines_Click(object sender, EventArgs e)
         {
             HourGlass(true);

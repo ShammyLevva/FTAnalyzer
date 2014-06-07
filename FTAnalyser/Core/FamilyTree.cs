@@ -288,7 +288,7 @@ namespace FTAnalyzer
             CountUnknownFactTypes();
             FactLocation.LoadGoogleFixesXMLFile(xmlErrorbox);
             Application.DoEvents();
-            LoadGeoLocationsFromDataBase();
+            LoadGeoLocationsFromDataBase(pbR);
             _loading = false;
             _dataloaded = true;
             return true;
@@ -304,11 +304,12 @@ namespace FTAnalyzer
             xmlErrorbox.SelectionLength = end - start;
             xmlErrorbox.SelectionFont = new Font(xmlErrorbox.Font, FontStyle.Bold);
             xmlErrorbox.SelectionLength = 0;
-            pb.Maximum = individuals.Count * 2;
+            int locationCount = FactLocation.AllLocations.Count();
+            pb.Maximum = (individuals.Count * 2) + locationCount;
             pb.Value = 0;
             Application.DoEvents();
             SetRelations(rootIndividualID, pb);
-            SetRelationDescriptions(rootIndividualID, pb);
+            SetRelationDescriptions(rootIndividualID, pb, locationCount);
             xmlErrorbox.AppendText(PrintRelationCount());
             Application.DoEvents();
         }
@@ -1127,14 +1128,15 @@ namespace FTAnalyzer
                 else
                     ignored++;
             }
+            Application.DoEvents();
         }
 
-        private void SetRelationDescriptions(string startID, ProgressBar pb)
+        private void SetRelationDescriptions(string startID, ProgressBar pb, int locationCount)
         {
             IEnumerable<Individual> directs = GetAllRelationsOfType(Individual.DIRECT);
             IEnumerable<Individual> blood = GetAllRelationsOfType(Individual.BLOOD);
             IEnumerable<Individual> married = GetAllRelationsOfType(Individual.MARRIEDTODB);
-            pb.Maximum = pb.Value + directs.Count() + blood.Count() + married.Count();
+            pb.Maximum = pb.Value + directs.Count() + blood.Count() + married.Count() + locationCount;
             Application.DoEvents();
             Individual rootPerson = GetIndividual(startID);
             foreach (Individual i in directs)
@@ -1162,7 +1164,6 @@ namespace FTAnalyzer
                 }
                 UpdateProgressBar(pb);
             }
-            pb.Value = pb.Maximum;
             Application.DoEvents();
         }
 
@@ -2232,13 +2233,11 @@ namespace FTAnalyzer
 
         #region Geocoding
 
-        public void LoadGeoLocationsFromDataBase()
+        public void LoadGeoLocationsFromDataBase(ProgressBar pb)
         {
             try
             {
-                DatabaseHelper dbh = DatabaseHelper.Instance;
-                foreach (FactLocation loc in FactLocation.AllLocations)
-                    dbh.GetLocationDetails(loc);
+                DatabaseHelper.Instance.LoadGeoLocations(pb);
                 WriteGeocodeStatstoRTB(false);
             }
             catch (Exception ex)

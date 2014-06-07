@@ -938,12 +938,12 @@ namespace FTAnalyzer.Forms
 
         private void resetAllPartialMatchesToNotSearchedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to reset all Google Partials and Level Mismatch Partials to not searched?",
+            DialogResult result = MessageBox.Show("Are you sure you want to reset all Partial Matches (Google, Level and Ord Surv) to not searched?",
                 "Reset ALL Partials", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 DatabaseHelper.Instance.ResetPartials();
-                ft.LoadGeoLocationsFromDataBase();
+                ft.LoadGeoLocationsFromDataBase(null);
                 ft.WriteGeocodeStatstoRTB(true);
                 MessageBox.Show("Partials have been reset", "FT Analyzer");
             }
