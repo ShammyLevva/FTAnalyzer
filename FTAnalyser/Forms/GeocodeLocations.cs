@@ -459,8 +459,7 @@ namespace FTAnalyzer.Forms
             mnuEditLocation.Enabled = true;
             mnuReverseGeocode.Enabled = true;
             mnuOSGeocodeLocations.Enabled = true;
-            if (sender == googleGeocodeBackgroundWorker || sender == OSGeocodeBackgroundWorker)
-                ft.WriteGeocodeStatstoRTB(true);
+            ft.WriteGeocodeStatstoRTB(true);
             ft.Geocoding = false;
             if (formClosing)
                 this.Close();
@@ -851,7 +850,7 @@ namespace FTAnalyzer.Forms
                     count++;
                     if (count > total) total = count; // incase main thread has added extra items to queue
                     int percent = (int)Math.Truncate(count * 100.0 / total);
-                    string status = "Looking up location names from Latitude/Longitude. Done " + count + " of " + total + ".  ";
+                    string status = "Finding locations from Latitude/Longitude. Done " + count + " of " + total + ".  (Includes all blank locations in database)";
                     worker.ReportProgress(percent, status);
 
                     if (worker.CancellationPending ||
@@ -1054,7 +1053,7 @@ namespace FTAnalyzer.Forms
             int skipped = 0;
             foreach (FactLocation loc in toSearch)
             {
-                // IsGeoCoded(true) will include OS_50KPARTIALS but we don't want to recheck them
+                // IsGeoCoded(true) will include OS_50KPARTIALS but we don't want to recheck them in normal operation ok for beta
                 if (loc.IsGeoCoded(true) || loc.GeocodeStatus == FactLocation.Geocode.OS_50KPARTIAL)
                     previous++;
                 else
@@ -1122,7 +1121,7 @@ namespace FTAnalyzer.Forms
                 if (addressMatches.Count() > 0)
                     return ProcessOS50kMatches(addressMatches, loc, FactLocation.ADDRESS);
             }
-            else if (loc.SubRegion.Length > 0)
+            if (loc.SubRegion.Length > 0)
             {
                 IEnumerable<OS50kGazetteer> subRegionMatches =
                     OS50k.Where(x => x.DefinitiveName.Equals(loc.SubRegion, StringComparison.InvariantCultureIgnoreCase) && x.IsCountyMatch(loc));
@@ -1175,7 +1174,7 @@ namespace FTAnalyzer.Forms
             location.GoogleLocation = string.Empty;
             if (level == location.Level)
                 location.GeocodeStatus = FactLocation.Geocode.OS_50KMATCH;
-            else if(level == 4)
+            else if(level == FactLocation.ADDRESS)
                 location.GeocodeStatus = FactLocation.Geocode.OS_50KMATCH;
             else
                 location.GeocodeStatus = FactLocation.Geocode.OS_50KPARTIAL;

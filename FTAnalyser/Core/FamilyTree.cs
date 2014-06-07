@@ -2253,6 +2253,8 @@ namespace FTAnalyzer
             // write geocode results - ignore UNKNOWN entry
             int notsearched = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED));
             int needsReverse = FactLocation.AllLocations.Count(x => x.NeedsReverseGeocoding);
+            //Predicate<FactLocation> predicate = x => x.NeedsReverseGeocoding;
+            //List<FactLocation> needRev = FactLocation.AllLocations.Where(predicate).ToList();
             xmlErrorbox.AppendText("\nFound " + FactLocation.LocationsCount + " locations in file.\n");
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER) && x.GoogleLocation.Length > 0) + " are GEDCOM/User Entered and have been geocoded.\n");
             xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER) && x.GoogleLocation.Length == 0) + " are GEDCOM/User Entered but lack a Google Location.\n");
@@ -2269,7 +2271,7 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText(" Use the 'Run Google/OS Geocoder' option (under Maps menu) to find them.\n");
             if (needsReverse > 0)
             {
-                xmlErrorbox.AppendText("\nNote " + needsReverse + " of the searched locations are missing a reverse lookup.");
+                xmlErrorbox.AppendText("\nNote " + needsReverse + " of the searched locations are missing a Google location.");
                 xmlErrorbox.AppendText(" Use the 'Lookup Blank Google Locations' option (under Maps menu) to find them.\n");
             }
             
