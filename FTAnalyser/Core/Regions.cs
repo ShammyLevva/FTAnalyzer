@@ -112,8 +112,8 @@ namespace FTAnalyzer
         public static Region WORCESTER = new Region("Worcestershire", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region YORKS = new Region("Yorkshire", Countries.ENGLAND, Region.Creation.HISTORIC);
 
-        public static Region LONDON = new Region("Greater London", Countries.ENGLAND, Region.Creation.LG_ACT1974);
-        public static Region MANCHESTER = new Region("Greater Manchester", Countries.ENGLAND, Region.Creation.LG_ACT1974);
+        public static Region LONDON = new Region("London", Countries.ENGLAND, Region.Creation.LG_ACT1974);
+        public static Region MANCHESTER = new Region("Manchester", Countries.ENGLAND, Region.Creation.LG_ACT1974);
         public static Region MERSEYSIDE = new Region("Merseyside", Countries.ENGLAND, Region.Creation.LG_ACT1974);
         public static Region EAST_YORKSHIRE = new Region("East Yorkshire", Countries.ENGLAND, Region.Creation.LG_ACT1974);
         public static Region NORTH_YORKSHIRE = new Region("North Yorkshire", Countries.ENGLAND, Region.Creation.LG_ACT1974);
@@ -607,7 +607,8 @@ namespace FTAnalyzer
             YORKS.AddAlternateName("Yorks");
 
             TYNE_WEAR.AddAlternateName("Tyne & Wear");
-            LONDON.AddAlternateName("London");
+            LONDON.AddAlternateName("Greater London");
+            MANCHESTER.AddAlternateName("Greater Manchester");
         }
 
         private static void AddIrishRegionAlternates()
