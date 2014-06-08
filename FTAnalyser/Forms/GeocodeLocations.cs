@@ -1133,7 +1133,7 @@ namespace FTAnalyzer.Forms
                             stream.WriteLine("2 DATE " + date.ToString("dd MMM yyyy").ToUpper());
                             stream.WriteLine("2 PLAC " + kvp.Key.ToString());
                             StringBuilder sb = new StringBuilder();
-                            sb.Append("2 NOTE ");
+                            sb.Append("2 NOTE Found " + kvp.Value[0].DefinitiveName + " in ");
                             foreach(OS50kGazetteer gaz in kvp.Value)
                                 sb.Append(gaz.CountyCode + ": " + gaz.CountyName + ", ");
                             stream.WriteLine(sb.ToString());

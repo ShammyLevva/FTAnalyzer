@@ -17,8 +17,11 @@ namespace FTAnalyzer
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, SUBREGION = 2, ADDRESS = 3, PLACE = 4;
-        public enum Geocode { UNKNOWN = -1, NOT_SEARCHED = 0, MATCHED = 1, PARTIAL_MATCH = 2, GEDCOM_USER = 3, NO_MATCH = 4, 
-            INCORRECT = 5, OUT_OF_BOUNDS = 6, LEVEL_MISMATCH = 7, OS_50KMATCH = 8, OS_50KPARTIAL = 9 };
+        public enum Geocode
+        {
+            UNKNOWN = -1, NOT_SEARCHED = 0, MATCHED = 1, PARTIAL_MATCH = 2, GEDCOM_USER = 3, NO_MATCH = 4,
+            INCORRECT = 5, OUT_OF_BOUNDS = 6, LEVEL_MISMATCH = 7, OS_50KMATCH = 8, OS_50KPARTIAL = 9
+        };
 
         private string fixedLocation;
         private string address;
@@ -196,18 +199,23 @@ namespace FTAnalyzer
             foreach (string typo in REGION_TYPOS.Values)
                 if (!Regions.IsPreferredRegion(typo))
                     Console.WriteLine("Region typo: " + typo + " is not a preferred region.");
-            foreach(string shift in COUNTRY_SHIFTS.Keys)
-                if(!Regions.IsPreferredRegion(shift))
+            foreach (string shift in COUNTRY_SHIFTS.Keys)
+                if (!Regions.IsPreferredRegion(shift))
                     Console.WriteLine("Country shift: " + shift + " is not a preferred region.");
         }
 
         private static void ValidateCounties()
         {
-            foreach(Region region in Regions.UK_REGIONS)
+            foreach (Region region in Regions.UK_REGIONS)
             {
-                if (region.CountyCodes.Count == 0 && region.RegionType == 0 &&
+                if (region.CountyCodes.Count == 0 &&
                     (region.Country == Countries.ENGLAND || region.Country == Countries.WALES || region.Country == Countries.SCOTLAND))
                     Console.WriteLine("No valid county for region: " + region);
+            }
+            foreach (CountyConversion.County county in CountyConversion.CONVERSIONS)
+            {
+                if (!Regions.IsKnownRegion(county.LookupName))
+                    Console.WriteLine("County conversion for unknown region: " + county.LookupName);
             }
         }
 
@@ -258,7 +266,7 @@ namespace FTAnalyzer
 
         private static string GoogleFixLevel(int level)
         {
-            switch(level)
+            switch (level)
             {
                 case UNKNOWN: return "MultiLevelFix";
                 case COUNTRY: return "CountryFix";
@@ -784,7 +792,7 @@ namespace FTAnalyzer
         {
             get { return FixNumerics(this.Place, true); }
         }
-        
+
         public bool IsKnownCountry
         {
             get { return Countries.IsKnownCountry(Country); }
@@ -876,7 +884,7 @@ namespace FTAnalyzer
         {
             if (Longitude == 0.0 && Latitude == 0.0)
                 return false;
-            if (!recheckPartials && Properties.MappingSettings.Default.IncludePartials && 
+            if (!recheckPartials && Properties.MappingSettings.Default.IncludePartials &&
                 (GeocodeStatus == Geocode.PARTIAL_MATCH || GeocodeStatus == Geocode.LEVEL_MISMATCH || GeocodeStatus == Geocode.OS_50KPARTIAL))
                 return true;
             return GeocodeStatus == Geocode.MATCHED || GeocodeStatus == Geocode.GEDCOM_USER || GeocodeStatus == Geocode.OS_50KMATCH;
@@ -1060,11 +1068,12 @@ namespace FTAnalyzer
             return base.GetHashCode();
         }
 
-        public bool NeedsReverseGeocoding { 
-            get 
+        public bool NeedsReverseGeocoding
+        {
+            get
             {
                 return GoogleLocation.Length == 0 && (GeocodeStatus == Geocode.GEDCOM_USER || GeocodeStatus == Geocode.OS_50KMATCH || GeocodeStatus == Geocode.OS_50KPARTIAL);
-            } 
+            }
         }
     }
 }
