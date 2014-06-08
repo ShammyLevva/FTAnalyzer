@@ -62,18 +62,17 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Kinross-shire", "PK", "Perth and Kinross"));
             CONVERSIONS.Add(new County("Lanarkshire", "GL", "Glasgow City"));
             CONVERSIONS.Add(new County("Renfrewshire", "GL", "Glasgow City"));
-            //CONVERSIONS.Add(new County("Kirkcudbrightshire
-            //CONVERSIONS.Add(new County("Nairn
-            //CONVERSIONS.Add(new County("Orkney
-            //CONVERSIONS.Add(new County("Peebles
+            CONVERSIONS.Add(new County("Kirkcudbrightshire", "DG", "Dumfries and Galloway"));
+            CONVERSIONS.Add(new County("Nairn", "HL", "Highland"));
+            CONVERSIONS.Add(new County("Orkney", "OK", "Orkney Islands"));
+            CONVERSIONS.Add(new County("Peebles", "SB", "Scottish Borders"));
             CONVERSIONS.Add(new County("Perthshire", "PK", "Perth and Kinross"));
-            //CONVERSIONS.Add(new County("Roxburgh
-            //CONVERSIONS.Add(new County("Selkirk
-            //CONVERSIONS.Add(new County("Shetland
-            //CONVERSIONS.Add(new County("Stirlingshire
-            //CONVERSIONS.Add(new County("Wigtownshire
+            CONVERSIONS.Add(new County("Roxburgh", "SB", "Scottish Borders"));
+            CONVERSIONS.Add(new County("Selkirk", "SB", "Scottish Borders"));
+            CONVERSIONS.Add(new County("Shetland", "SI", "Shetland Islands"));
+            CONVERSIONS.Add(new County("Stirlingshire", "SR", "Stirling"));
+            CONVERSIONS.Add(new County("Wigtownshire", "DG", "Dumfries and Galloway"));
             CONVERSIONS.Add(new County("Borders", "SB", "Scottish Borders"));
-
 
             CONVERSIONS.Add(new County("Barking & Dagenham", "BD", "Barking & Dagenham"));
             CONVERSIONS.Add(new County("Barking", "BD", "Barking & Dagenham"));

@@ -123,7 +123,7 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("PROBATE DATE", PROBATE);
             CUSTOM_TAGS.Add("RESIDENCE", RESIDENCE);
             CUSTOM_TAGS.Add("CENSUS", CENSUS);
-
+            CUSTOM_TAGS.Add("MILITARY SERVICE", MILITARY);
 
             // Create list of 
             COMMENT_FACTS.Add(NAME);
