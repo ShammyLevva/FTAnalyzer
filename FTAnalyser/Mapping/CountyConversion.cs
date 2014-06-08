@@ -53,6 +53,28 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Ayrshire", "EA", "East Ayrshire"));
             CONVERSIONS.Add(new County("Ayrshire", "NA", "North Ayrshire"));
             CONVERSIONS.Add(new County("Ayrshire", "SX", "South Ayrshire"));
+            CONVERSIONS.Add(new County("Ross and Cromarty", "HL", "Highland"));
+            CONVERSIONS.Add(new County("Inverness-shire", "HL", "Highland"));
+            CONVERSIONS.Add(new County("Caithness", "HL", "Highland"));
+            CONVERSIONS.Add(new County("Sutherland", "HL", "Highland"));
+            CONVERSIONS.Add(new County("Berwickshire", "SB", "Scottish Borders"));
+            CONVERSIONS.Add(new County("Dumfries-shire", "DG", "Dumfries and Galloway"));
+            CONVERSIONS.Add(new County("Kinross-shire", "PK", "Perth and Kinross"));
+            CONVERSIONS.Add(new County("Lanarkshire", "GL", "Glasgow City"));
+            CONVERSIONS.Add(new County("Renfrewshire", "GL", "Glasgow City"));
+            //CONVERSIONS.Add(new County("Kirkcudbrightshire
+            //CONVERSIONS.Add(new County("Nairn
+            //CONVERSIONS.Add(new County("Orkney
+            //CONVERSIONS.Add(new County("Peebles
+            CONVERSIONS.Add(new County("Perthshire", "PK", "Perth and Kinross"));
+            //CONVERSIONS.Add(new County("Roxburgh
+            //CONVERSIONS.Add(new County("Selkirk
+            //CONVERSIONS.Add(new County("Shetland
+            //CONVERSIONS.Add(new County("Stirlingshire
+            //CONVERSIONS.Add(new County("Wigtownshire
+            CONVERSIONS.Add(new County("Borders", "SB", "Scottish Borders"));
+
+
             CONVERSIONS.Add(new County("Barking & Dagenham", "BD", "Barking & Dagenham"));
             CONVERSIONS.Add(new County("Barking", "BD", "Barking & Dagenham"));
             CONVERSIONS.Add(new County("Barnet", "BN", "Barnet"));
@@ -362,6 +384,19 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Durham", "SM", "Stockton on Tees"));
             CONVERSIONS.Add(new County("Durham", "SV", "Sunderland"));
             CONVERSIONS.Add(new County("Durham", "SY", "South Tyneside"));
+            CONVERSIONS.Add(new County("County Durham", "CU", "Cumbria"));
+            CONVERSIONS.Add(new County("County Durham", "DL", "Darlington"));
+            CONVERSIONS.Add(new County("County Durham", "DU", "Durham"));
+            CONVERSIONS.Add(new County("County Durham", "GH", "Gateshead"));
+            CONVERSIONS.Add(new County("County Durham", "HT", "Hartlepool"));
+            CONVERSIONS.Add(new County("County Durham", "MB", "Middlesbrough"));
+            CONVERSIONS.Add(new County("County Durham", "ND", "Northumberland"));
+            CONVERSIONS.Add(new County("County Durham", "NR", "North Tyneside"));
+            CONVERSIONS.Add(new County("County Durham", "NW", "Newcastle upon Tyne"));
+            CONVERSIONS.Add(new County("County Durham", "NY", "North Yorkshire"));
+            CONVERSIONS.Add(new County("County Durham", "SM", "Stockton on Tees"));
+            CONVERSIONS.Add(new County("County Durham", "SV", "Sunderland"));
+            CONVERSIONS.Add(new County("County Durham", "SY", "South Tyneside"));
             CONVERSIONS.Add(new County("Yorkshire", "BA", "Bradford"));
             CONVERSIONS.Add(new County("Yorkshire", "BL", "Barnsley"));
             CONVERSIONS.Add(new County("Yorkshire", "CA", "Calderdale"));
@@ -682,13 +717,13 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Buckinghamshire", "WC", "Windsor and Maidenhead"));
             CONVERSIONS.Add(new County("Buckinghamshire", "WJ", "Wokingham"));
             CONVERSIONS.Add(new County("Buckinghamshire", "YT", "Slough"));
-            CONVERSIONS.Add(new County("Pembrokeshire", "CE", "Ceredigion"));
-            CONVERSIONS.Add(new County("Pembrokeshire", "CT", "Carmarthenshire"));
-            CONVERSIONS.Add(new County("Pembrokeshire", "PB", "Pembrokeshire"));
-            CONVERSIONS.Add(new County("Merionethshire", "CW", "Conwy"));
-            CONVERSIONS.Add(new County("Merionethshire", "DE", "Denbighshire"));
-            CONVERSIONS.Add(new County("Merionethshire", "GY", "Gwynedd"));
-            CONVERSIONS.Add(new County("Merionethshire", "PW", "Powys"));
+            CONVERSIONS.Add(new County("Pembroke", "CE", "Ceredigion"));
+            CONVERSIONS.Add(new County("Pembroke", "CT", "Carmarthenshire"));
+            CONVERSIONS.Add(new County("Pembroke", "PB", "Pembrokeshire"));
+            CONVERSIONS.Add(new County("Merioneth", "CW", "Conwy"));
+            CONVERSIONS.Add(new County("Merioneth", "DE", "Denbighshire"));
+            CONVERSIONS.Add(new County("Merioneth", "GY", "Gwynedd"));
+            CONVERSIONS.Add(new County("Merioneth", "PW", "Powys"));
             CONVERSIONS.Add(new County("Gloucestershire", "BS", "Bath and North East Somerset"));
             CONVERSIONS.Add(new County("Gloucestershire", "BZ", "City of Bristol"));
             CONVERSIONS.Add(new County("Gloucestershire", "DT", "Dorset"));
@@ -702,17 +737,17 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Gloucestershire", "WK", "Warwickshire"));
             CONVERSIONS.Add(new County("Gloucestershire", "WO", "Worcestershire"));
             CONVERSIONS.Add(new County("Gloucestershire", "WT", "Wiltshire"));
-            CONVERSIONS.Add(new County("Monmouthshire", "BG", "Blaenau Gwent"));
-            CONVERSIONS.Add(new County("Monmouthshire", "CD", "Cardiff"));
-            CONVERSIONS.Add(new County("Monmouthshire", "CF", "Caerphilly"));
-            CONVERSIONS.Add(new County("Monmouthshire", "GR", "Gloucestershire"));
-            CONVERSIONS.Add(new County("Monmouthshire", "HE", "Herefordshire"));
-            CONVERSIONS.Add(new County("Monmouthshire", "MM", "Monmouthshire"));
-            CONVERSIONS.Add(new County("Monmouthshire", "MT", "Merthyr Tydfil"));
-            CONVERSIONS.Add(new County("Monmouthshire", "NE", "Newport"));
-            CONVERSIONS.Add(new County("Monmouthshire", "PW", "Powys"));
-            CONVERSIONS.Add(new County("Monmouthshire", "RH", "Rhondda,Cynon,Taff"));
-            CONVERSIONS.Add(new County("Monmouthshire", "TF", "Torfaen"));
+            CONVERSIONS.Add(new County("Monmouth", "BG", "Blaenau Gwent"));
+            CONVERSIONS.Add(new County("Monmouth", "CD", "Cardiff"));
+            CONVERSIONS.Add(new County("Monmouth", "CF", "Caerphilly"));
+            CONVERSIONS.Add(new County("Monmouth", "GR", "Gloucestershire"));
+            CONVERSIONS.Add(new County("Monmouth", "HE", "Herefordshire"));
+            CONVERSIONS.Add(new County("Monmouth", "MM", "Monmouthshire"));
+            CONVERSIONS.Add(new County("Monmouth", "MT", "Merthyr Tydfil"));
+            CONVERSIONS.Add(new County("Monmouth", "NE", "Newport"));
+            CONVERSIONS.Add(new County("Monmouth", "PW", "Powys"));
+            CONVERSIONS.Add(new County("Monmouth", "RH", "Rhondda,Cynon,Taff"));
+            CONVERSIONS.Add(new County("Monmouth", "TF", "Torfaen"));
             CONVERSIONS.Add(new County("Glamorgan", "BE", "Bridgend"));
             CONVERSIONS.Add(new County("Glamorgan", "CD", "Cardiff"));
             CONVERSIONS.Add(new County("Glamorgan", "CF", "Caerphilly"));
@@ -724,38 +759,38 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Glamorgan", "RH", "Rhondda,Cynon,Taff"));
             CONVERSIONS.Add(new County("Glamorgan", "SS", "Swansea"));
             CONVERSIONS.Add(new County("Glamorgan", "VG", "The Vale of Glamorgan"));
-            CONVERSIONS.Add(new County("Carmarthenshire", "CE", "Ceredigion"));
-            CONVERSIONS.Add(new County("Carmarthenshire", "CT", "Carmarthenshire"));
-            CONVERSIONS.Add(new County("Carmarthenshire", "NP", "Neath Port Talbot"));
-            CONVERSIONS.Add(new County("Carmarthenshire", "PB", "Pembrokeshire"));
-            CONVERSIONS.Add(new County("Carmarthenshire", "PW", "Powys"));
-            CONVERSIONS.Add(new County("Carmarthenshire", "SS", "Swansea"));
-            CONVERSIONS.Add(new County("Brecknockshire", "BG", "Blaenau Gwent"));
-            CONVERSIONS.Add(new County("Brecknockshire", "CE", "Ceredigion"));
-            CONVERSIONS.Add(new County("Brecknockshire", "CF", "Caerphilly"));
-            CONVERSIONS.Add(new County("Brecknockshire", "CT", "Carmarthenshire"));
-            CONVERSIONS.Add(new County("Brecknockshire", "HE", "Herefordshire"));
-            CONVERSIONS.Add(new County("Brecknockshire", "MM", "Monmouthshire"));
-            CONVERSIONS.Add(new County("Brecknockshire", "MT", "Merthyr Tydfil"));
-            CONVERSIONS.Add(new County("Brecknockshire", "NP", "Neath Port Talbot"));
-            CONVERSIONS.Add(new County("Brecknockshire", "PW", "Powys"));
-            CONVERSIONS.Add(new County("Brecknockshire", "RH", "Rhondda,Cynon,Taff"));
-            CONVERSIONS.Add(new County("Brecknockshire", "TF", "Torfaen"));
-            CONVERSIONS.Add(new County("Cardiganshire", "CE", "Ceredigion"));
-            CONVERSIONS.Add(new County("Cardiganshire", "CT", "Carmarthenshire"));
-            CONVERSIONS.Add(new County("Cardiganshire", "GY", "Gwynedd"));
-            CONVERSIONS.Add(new County("Cardiganshire", "PB", "Pembrokeshire"));
-            CONVERSIONS.Add(new County("Cardiganshire", "PW", "Powys"));
+            CONVERSIONS.Add(new County("Carmarthen", "CE", "Ceredigion"));
+            CONVERSIONS.Add(new County("Carmarthen", "CT", "Carmarthenshire"));
+            CONVERSIONS.Add(new County("Carmarthen", "NP", "Neath Port Talbot"));
+            CONVERSIONS.Add(new County("Carmarthen", "PB", "Pembrokeshire"));
+            CONVERSIONS.Add(new County("Carmarthen", "PW", "Powys"));
+            CONVERSIONS.Add(new County("Carmarthen", "SS", "Swansea"));
+            CONVERSIONS.Add(new County("Brecon", "BG", "Blaenau Gwent"));
+            CONVERSIONS.Add(new County("Brecon", "CE", "Ceredigion"));
+            CONVERSIONS.Add(new County("Brecon", "CF", "Caerphilly"));
+            CONVERSIONS.Add(new County("Brecon", "CT", "Carmarthenshire"));
+            CONVERSIONS.Add(new County("Brecon", "HE", "Herefordshire"));
+            CONVERSIONS.Add(new County("Brecon", "MM", "Monmouthshire"));
+            CONVERSIONS.Add(new County("Brecon", "MT", "Merthyr Tydfil"));
+            CONVERSIONS.Add(new County("Brecon", "NP", "Neath Port Talbot"));
+            CONVERSIONS.Add(new County("Brecon", "PW", "Powys"));
+            CONVERSIONS.Add(new County("Brecon", "RH", "Rhondda,Cynon,Taff"));
+            CONVERSIONS.Add(new County("Brecon", "TF", "Torfaen"));
+            CONVERSIONS.Add(new County("Cardigan", "CE", "Ceredigion"));
+            CONVERSIONS.Add(new County("Cardigan", "CT", "Carmarthenshire"));
+            CONVERSIONS.Add(new County("Cardigan", "GY", "Gwynedd"));
+            CONVERSIONS.Add(new County("Cardigan", "PB", "Pembrokeshire"));
+            CONVERSIONS.Add(new County("Cardigan", "PW", "Powys"));
             CONVERSIONS.Add(new County("Herefordshire", "GR", "Gloucestershire"));
             CONVERSIONS.Add(new County("Herefordshire", "HE", "Herefordshire"));
             CONVERSIONS.Add(new County("Herefordshire", "MM", "Monmouthshire"));
             CONVERSIONS.Add(new County("Herefordshire", "PW", "Powys"));
             CONVERSIONS.Add(new County("Herefordshire", "SH", "Shropshire"));
             CONVERSIONS.Add(new County("Herefordshire", "WO", "Worcestershire"));
-            CONVERSIONS.Add(new County("Radnorshire", "CE", "Ceredigion"));
-            CONVERSIONS.Add(new County("Radnorshire", "HE", "Herefordshire"));
-            CONVERSIONS.Add(new County("Radnorshire", "PW", "Powys"));
-            CONVERSIONS.Add(new County("Radnorshire", "SH", "Shropshire"));
+            CONVERSIONS.Add(new County("Radnor", "CE", "Ceredigion"));
+            CONVERSIONS.Add(new County("Radnor", "HE", "Herefordshire"));
+            CONVERSIONS.Add(new County("Radnor", "PW", "Powys"));
+            CONVERSIONS.Add(new County("Radnor", "SH", "Shropshire"));
             CONVERSIONS.Add(new County("Shropshire", "CH", "Cheshire East"));
             CONVERSIONS.Add(new County("Shropshire", "HE", "Herefordshire"));
             CONVERSIONS.Add(new County("Shropshire", "PW", "Powys"));
@@ -764,28 +799,27 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Shropshire", "WO", "Worcestershire"));
             CONVERSIONS.Add(new County("Shropshire", "WP", "Telford and Wrekin"));
             CONVERSIONS.Add(new County("Shropshire", "WX", "Wrexham"));
-            CONVERSIONS.Add(new County("Montgomeryshire", "CE", "Ceredigion"));
-            CONVERSIONS.Add(new County("Montgomeryshire", "GY", "Gwynedd"));
-            CONVERSIONS.Add(new County("Montgomeryshire", "PW", "Powys"));
-            CONVERSIONS.Add(new County("Montgomeryshire", "SH", "Shropshire"));
-            CONVERSIONS.Add(new County("Flintshire", "CC", "Cheshire West and Chester"));
-            CONVERSIONS.Add(new County("Flintshire", "CW", "Conwy"));
-            CONVERSIONS.Add(new County("Flintshire", "DE", "Denbighshire"));
-            CONVERSIONS.Add(new County("Flintshire", "FL", "Flintshire"));
-            CONVERSIONS.Add(new County("Flintshire", "SH", "Shropshire"));
-            CONVERSIONS.Add(new County("Flintshire", "WX", "Wrexham"));
-            CONVERSIONS.Add(new County("Denbighshire", "CC", "Cheshire West and Chester"));
-            CONVERSIONS.Add(new County("Denbighshire", "CW", "Conwy"));
-            CONVERSIONS.Add(new County("Denbighshire", "DE", "Denbighshire"));
-            CONVERSIONS.Add(new County("Denbighshire", "FL", "Flintshire"));
-            CONVERSIONS.Add(new County("Denbighshire", "GY", "Gwynedd"));
-            CONVERSIONS.Add(new County("Denbighshire", "PW", "Powys"));
-            CONVERSIONS.Add(new County("Denbighshire", "SH", "Shropshire"));
-            CONVERSIONS.Add(new County("Denbighshire", "WX", "Wrexham"));
-            CONVERSIONS.Add(new County("Caernarfonshire", "CW", "Conwy"));
-            CONVERSIONS.Add(new County("Caernarfonshire", "GY", "Gwynedd"));
+            CONVERSIONS.Add(new County("Montgomery", "CE", "Ceredigion"));
+            CONVERSIONS.Add(new County("Montgomery", "GY", "Gwynedd"));
+            CONVERSIONS.Add(new County("Montgomery", "PW", "Powys"));
+            CONVERSIONS.Add(new County("Montgomery", "SH", "Shropshire"));
+            CONVERSIONS.Add(new County("Flint", "CC", "Cheshire West and Chester"));
+            CONVERSIONS.Add(new County("Flint", "CW", "Conwy"));
+            CONVERSIONS.Add(new County("Flint", "DE", "Denbighshire"));
+            CONVERSIONS.Add(new County("Flint", "FL", "Flintshire"));
+            CONVERSIONS.Add(new County("Flint", "SH", "Shropshire"));
+            CONVERSIONS.Add(new County("Flint", "WX", "Wrexham"));
+            CONVERSIONS.Add(new County("Denbigh", "CC", "Cheshire West and Chester"));
+            CONVERSIONS.Add(new County("Denbigh", "CW", "Conwy"));
+            CONVERSIONS.Add(new County("Denbigh", "DE", "Denbighshire"));
+            CONVERSIONS.Add(new County("Denbigh", "FL", "Flintshire"));
+            CONVERSIONS.Add(new County("Denbigh", "GY", "Gwynedd"));
+            CONVERSIONS.Add(new County("Denbigh", "PW", "Powys"));
+            CONVERSIONS.Add(new County("Denbigh", "SH", "Shropshire"));
+            CONVERSIONS.Add(new County("Denbigh", "WX", "Wrexham"));
+            CONVERSIONS.Add(new County("Caernarfon", "CW", "Conwy"));
+            CONVERSIONS.Add(new County("Caernarfon", "GY", "Gwynedd"));
             CONVERSIONS.Add(new County("Anglesey", "IA", "Isle of Anglesey"));
-
         }
     }
 }

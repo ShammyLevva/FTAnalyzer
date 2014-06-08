@@ -183,6 +183,7 @@ namespace FTAnalyzer
                 foreach (XmlNode n in xmlDoc.SelectNodes("Data/GoogleGeocodes/MultiLevelFixes/MultiLevelFix"))
                     AddGoogleFixes(GOOGLE_FIXES, n, UNKNOWN);
                 ValidateTypoFixes();
+                ValidateCounties();
                 COUNTRY_SHIFTS = COUNTRY_SHIFTS.Concat(CITY_ADD_COUNTRY).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             }
         }
@@ -198,6 +199,16 @@ namespace FTAnalyzer
             foreach(string shift in COUNTRY_SHIFTS.Keys)
                 if(!Regions.IsPreferredRegion(shift))
                     Console.WriteLine("Country shift: " + shift + " is not a preferred region.");
+        }
+
+        private static void ValidateCounties()
+        {
+            foreach(Region region in Regions.UK_REGIONS)
+            {
+                if (region.CountyCodes.Count == 0 && region.RegionType == 0 &&
+                    (region.Country == Countries.ENGLAND || region.Country == Countries.WALES || region.Country == Countries.SCOTLAND))
+                    Console.WriteLine("No valid county for region: " + region);
+            }
         }
 
         public static void LoadGoogleFixesXMLFile(RichTextBox xmlErrorDocument)

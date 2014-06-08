@@ -21,7 +21,7 @@ namespace FTAnalyzer
         public static ISet<Region> AUSTRALIAN_REGIONS;
         public static ISet<Region> NEW_ZEALAND_REGIONS;
 
-        public static IDictionary<string, Region> ALL_REGIONS;
+        public static IDictionary<string, Region> PREFERRED_REGIONS;
         public static IDictionary<string, Region> VALID_REGIONS;
 
         #region Scottish Regions
@@ -401,7 +401,7 @@ namespace FTAnalyzer
             AddNewZealandRegionAlternates();
 
             #region Valid Regions
-            ALL_REGIONS = new Dictionary<string, Region>();
+            PREFERRED_REGIONS = new Dictionary<string, Region>();
             VALID_REGIONS = new Dictionary<string, Region>();
             AppendValidRegions(UK_REGIONS);
             AppendValidRegions(IRISH_REGIONS);
@@ -416,7 +416,7 @@ namespace FTAnalyzer
             foreach (Region r in regions)
             {
                 VALID_REGIONS.Add(r.PreferredName, r);
-                ALL_REGIONS.Add(r.PreferredName, r);
+                PREFERRED_REGIONS.Add(r.PreferredName, r);
                 foreach (string alternate in r.AlternativeNames)
                     VALID_REGIONS.Add(alternate, r);
             }
@@ -429,7 +429,7 @@ namespace FTAnalyzer
 
         public static bool IsPreferredRegion(string region)
         {
-            return ALL_REGIONS.ContainsKey(region);
+            return PREFERRED_REGIONS.ContainsKey(region);
         }
 
         public static Region GetRegion(string region)

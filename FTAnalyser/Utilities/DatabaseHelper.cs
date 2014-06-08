@@ -348,9 +348,12 @@ namespace FTAnalyzer.Utilities
                 foreach (FactLocation loc in FactLocation.AllLocations)
                 {
                     ReadLocationIntoFact(loc, conn);
-                    pb.Value++;
-                    if (pb.Value % 20 == 0)
-                        Application.DoEvents();
+                    if (pb != null)
+                    {
+                        pb.Value++;
+                        if (pb.Value % 20 == 0)
+                            Application.DoEvents();
+                    }
                 }
             }
         }
