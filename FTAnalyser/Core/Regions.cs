@@ -601,6 +601,7 @@ namespace FTAnalyzer
             WARWICK.AddAlternateName("Warw");
             WARWICK.AddAlternateName("Warks");
             WARWICK.AddAlternateName("War");
+            WARWICK.AddAlternateName("Warwick");
             WESTMORLAND.AddAlternateName("Westm");
             WILTS.AddAlternateName("Wilts");
             WORCESTER.AddAlternateName("Worcs");

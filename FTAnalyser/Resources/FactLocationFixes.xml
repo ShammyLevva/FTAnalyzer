@@ -366,6 +366,7 @@
       <RegionTypo from="West Sussex"   to="Sussex" />
       <RegionTypo from="East Sussex"   to="Sussex" />
       <RegionTypo from="Warks"         to="Warwickshire" />
+      <RegionTypo from="Warwick"       to="Warwickshire" />
       <RegionTypo from="Wmld"          to="Westmorland" />
       <RegionTypo from="Wilts"         to="Wiltshire" />
       <RegionTypo from="Worcs"         to="Worcestershire" />
