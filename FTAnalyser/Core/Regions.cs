@@ -453,6 +453,8 @@ namespace FTAnalyzer
             DUMFRIES.AddAlternateName("Dumfries");
             DUMFRIES.AddAlternateName("Dumfriesshire");
             DUNBARTON.AddAlternateName("Dunbarton");
+            DUNBARTON.AddAlternateName("Dumbartonshire");
+            DUNBARTON.AddAlternateName("Dumbarton");
             EAST_LOTHIAN.AddAlternateName("Haddingtonshire");
             FIFE.AddAlternateName("Fifeshire");
             INVERNESS.AddAlternateName("Inverness");
@@ -487,6 +489,7 @@ namespace FTAnalyzer
             HIGHLAND.AddAlternateName("Highlands & Islands");
             HIGHLAND.AddAlternateName("Highlands and Islands");
             LOTHIAN.AddAlternateName("Lothians");
+            WESTERN_ISLES.AddAlternateName("Na h-Eileanan an Iar");
         }
 
         private static void AddWelshRegionAlternates()
