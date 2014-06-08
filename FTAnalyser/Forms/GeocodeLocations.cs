@@ -18,6 +18,7 @@ using SharpMap.Data.Providers;
 using SharpMap.Layers;
 using SharpMap.Rendering;
 using SharpMap.Styles;
+using System.Text;
 
 namespace FTAnalyzer.Forms
 {
@@ -34,7 +35,7 @@ namespace FTAnalyzer.Forms
         private ISet<string> noneOfTheAbove;
         private ToolStripMenuItem[] noneOfTheAboveMenus;
         private ConcurrentQueue<FactLocation> queue;
-        private IList<OS50kGazetteer> OS50k;
+        private IDictionary<string, IList<OS50kGazetteer>> OS50k;
 
         private FactLocation CopyLocation;
 
@@ -76,8 +77,8 @@ namespace FTAnalyzer.Forms
             int total = FactLocation.LocationsCount;
 
             txtGoogleWait.Text = string.Empty;
-            statusText = "Already Geocoded: " + (gedcom + found + osmatch) + 
-                ", partials: " + (partial + levelpartial + ospartial + notfound + incorrect + outofbounds) 
+            statusText = "Already Geocoded: " + (gedcom + found + osmatch) +
+                ", partials: " + (partial + levelpartial + ospartial + notfound + incorrect + outofbounds)
                 + ", yet to search: " + notsearched + " of " + total + " locations.";
             txtLocations.Text = statusText;
         }
@@ -559,7 +560,7 @@ namespace FTAnalyzer.Forms
                             GeoResponse res = null;
                             if (loc.GeocodeStatus == FactLocation.Geocode.NOT_SEARCHED ||
                                 (retryPartial &&
-                                    (loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH || 
+                                    (loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH ||
                                      loc.GeocodeStatus == FactLocation.Geocode.LEVEL_MISMATCH ||
                                      loc.GeocodeStatus == FactLocation.Geocode.OS_50KPARTIAL)))
                             {
@@ -1002,7 +1003,9 @@ namespace FTAnalyzer.Forms
 
         public bool LoadOS50kGazetteer()
         {
-            OS50k = new List<OS50kGazetteer>();
+            if (OS50k != null)
+                return true; // already loaded
+            OS50k = new Dictionary<string, IList<OS50kGazetteer>>();
             try
             {
                 string startPath;
@@ -1020,6 +1023,7 @@ namespace FTAnalyzer.Forms
                 log.Warn("Failed to load OS50k Gazetteer error was : " + e.Message);
                 MessageBox.Show("Failed to load OS50k Gazetteer error was : " + e.Message);
             }
+            OS50k = null; // discard partially loaded file
             return false;
         }
 
@@ -1030,7 +1034,17 @@ namespace FTAnalyzer.Forms
             {
                 string line = reader.ReadLine();
                 if (line.IndexOf(':') > 0)
-                    OS50k.Add(new OS50kGazetteer(line));
+                {
+                    OS50kGazetteer gaz = new OS50kGazetteer(line);
+                    string key = gaz.DefinitiveName.ToLower();
+                    IList<OS50kGazetteer> list = null;
+                    if (!OS50k.TryGetValue(key, out list))
+                    {
+                        list = new List<OS50kGazetteer>();
+                        OS50k.Add(key, list);
+                    }
+                    list.Add(gaz);
+                }
             }
             reader.Close();
             //CheckGazetteer();
@@ -1038,14 +1052,17 @@ namespace FTAnalyzer.Forms
 
         public void CheckGazetteer()
         {
-            IEnumerable<OS50kGazetteer> spaces = OS50k.Where(x => x.DefinitiveName.LastIndexOf(" ") > 0 && x.DefinitiveName.LastIndexOf(" ") + 4 >= x.DefinitiveName.Length);
-            List<string> endings = spaces.Select(x => x.DefinitiveName.Substring(x.DefinitiveName.LastIndexOf(" "))).Distinct().ToList();
+            //IEnumerable<OS50kGazetteer> spaces = OS50k.Where(x => x.DefinitiveName.LastIndexOf(" ") > 0 && x.DefinitiveName.LastIndexOf(" ") + 4 >= x.DefinitiveName.Length);
+            //List<string> endings = spaces.Select(x => x.DefinitiveName.Substring(x.DefinitiveName.LastIndexOf(" "))).Distinct().ToList();
         }
+
+        private Dictionary<FactLocation, IList<OS50kGazetteer>> noCounty;
 
         public void ProcessOS50kGazetteerData(BackgroundWorker worker, DoWorkEventArgs e)
         {
             IEnumerable<FactLocation> toSearch = FactLocation.AllLocations;
             List<FactLocation> failedToFind = new List<FactLocation>();
+            noCounty = new Dictionary<FactLocation, IList<OS50kGazetteer>>();
             int total = FactLocation.LocationsCount;
             int count = 0;
             int matched = 0;
@@ -1072,7 +1089,7 @@ namespace FTAnalyzer.Forms
 
                 int percent = (int)Math.Truncate((count - 1) * 100.0 / total);
                 string status = "Previously geocoded: " + previous + ", skipped: " + skipped +
-                                    ", OS matched: " + matched + ". Done " + (count -1) + " of " + total + ".  ";
+                                    ", OS matched: " + matched + ". Done " + (count - 1) + " of " + total + ".  ";
                 worker.ReportProgress(percent, status);
                 if (worker.CancellationPending)
                 {
@@ -1080,26 +1097,48 @@ namespace FTAnalyzer.Forms
                     break;
                 }
             }
-            GenerateTestGedcom(failedToFind);
+            if (MainForm.VERSION.Contains("beta"))
+            {
+                GenerateTestGedcom(failedToFind, "OS50k Gazetteer failed matches.ged", null);
+                GenerateTestGedcom(null, "OS50k Gazetteer no Counties.ged", noCounty);
+            }
         }
 
-        private void GenerateTestGedcom(List<FactLocation> failedToFind)
+        private void GenerateTestGedcom(List<FactLocation> failedToFind, string name, Dictionary<FactLocation,IList<OS50kGazetteer>> noCounty)
         {
             if (Directory.Exists(Properties.MappingSettings.Default.CustomMapPath))
             {
-                string filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, "OS50k Gazetteer failed matches.ged");
+                string filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, name);
                 using (StreamWriter stream = new StreamWriter(filename))
                 {
                     stream.WriteLine("0 HEAD");
                     stream.WriteLine("0 @I@ INDI");
                     stream.WriteLine("1 NAME Test /Person/");
                     DateTime date = new DateTime(1800, 1, 1);
-                    foreach (FactLocation loc in failedToFind)
+                    if (failedToFind != null)
                     {
-                        stream.WriteLine("1 RESI");
-                        stream.WriteLine("2 DATE " + date.ToString("dd MMM yyyy").ToUpper());
-                        stream.WriteLine("2 PLAC " + loc.ToString());
-                        date = date.AddDays(1);
+                        foreach (FactLocation loc in failedToFind)
+                        {
+                            stream.WriteLine("1 RESI");
+                            stream.WriteLine("2 DATE " + date.ToString("dd MMM yyyy").ToUpper());
+                            stream.WriteLine("2 PLAC " + loc.ToString());
+                            date = date.AddDays(1);
+                        }
+                    }
+                    if(noCounty != null)
+                    {
+                        foreach(KeyValuePair<FactLocation,IList<OS50kGazetteer>> kvp in noCounty)
+                        {
+                            stream.WriteLine("1 RESI");
+                            stream.WriteLine("2 DATE " + date.ToString("dd MMM yyyy").ToUpper());
+                            stream.WriteLine("2 PLAC " + kvp.Key.ToString());
+                            StringBuilder sb = new StringBuilder();
+                            sb.Append("2 NOTE ");
+                            foreach(OS50kGazetteer gaz in kvp.Value)
+                                sb.Append(gaz.CountyCode + ": " + gaz.CountyName + ", ");
+                            stream.WriteLine(sb.ToString());
+                            date = date.AddDays(1);
+                        }
                     }
                 }
             }
@@ -1107,28 +1146,30 @@ namespace FTAnalyzer.Forms
 
         private bool GazetteerMatchMethodA(FactLocation loc)
         {
-            if (loc.PlaceNoNumerics.Length > 0)
+            if (CheckLocationMatch(loc.PlaceNoNumerics.ToLower(), loc))
+                return true;
+            if (CheckLocationMatch(loc.AddressNoNumerics.ToLower(), loc))
+                return true;
+            if (CheckLocationMatch(loc.SubRegion.ToLower(), loc))
+                return true;
+            log.Info("OS Geocoder Failed to match: " + loc.ToString());
+            return false;
+        }
+
+        private bool CheckLocationMatch(string key, FactLocation loc)
+        {
+            IList<OS50kGazetteer> results = null;
+            if (key.Length > 0 && OS50k.TryGetValue(key, out results))
             {
-                IEnumerable<OS50kGazetteer> placeMatches =
-                    OS50k.Where(x => x.DefinitiveName.Equals(loc.PlaceNoNumerics, StringComparison.InvariantCultureIgnoreCase) && x.IsCountyMatch(loc));
+                IEnumerable<OS50kGazetteer> placeMatches = results.Where(x => x.IsCountyMatch(loc));
                 if (placeMatches.Count() > 0)
                     return ProcessOS50kMatches(placeMatches, loc, FactLocation.PLACE);
+                else
+                {
+                    if(!noCounty.ContainsKey(loc))
+                        noCounty.Add(loc, results);
+                }
             }
-            if (loc.AddressNoNumerics.Length > 0)
-            {
-                IEnumerable<OS50kGazetteer> addressMatches =
-                    OS50k.Where(x => x.DefinitiveName.Equals(loc.AddressNoNumerics, StringComparison.InvariantCultureIgnoreCase) && x.IsCountyMatch(loc));
-                if (addressMatches.Count() > 0)
-                    return ProcessOS50kMatches(addressMatches, loc, FactLocation.ADDRESS);
-            }
-            if (loc.SubRegion.Length > 0)
-            {
-                IEnumerable<OS50kGazetteer> subRegionMatches =
-                    OS50k.Where(x => x.DefinitiveName.Equals(loc.SubRegion, StringComparison.InvariantCultureIgnoreCase) && x.IsCountyMatch(loc));
-                if (subRegionMatches.Count() > 0)
-                    return ProcessOS50kMatches(subRegionMatches, loc, FactLocation.SUBREGION);
-            }
-            log.Info("OS Geocoder Failed to match: " + loc.ToString());
             return false;
         }
 
@@ -1174,7 +1215,7 @@ namespace FTAnalyzer.Forms
             location.GoogleLocation = string.Empty;
             if (level == location.Level)
                 location.GeocodeStatus = FactLocation.Geocode.OS_50KMATCH;
-            else if(level == FactLocation.ADDRESS)
+            else if (level == FactLocation.ADDRESS)
                 location.GeocodeStatus = FactLocation.Geocode.OS_50KMATCH;
             else
                 location.GeocodeStatus = FactLocation.Geocode.OS_50KPARTIAL;
