@@ -212,11 +212,6 @@ namespace FTAnalyzer
                     (region.Country == Countries.ENGLAND || region.Country == Countries.WALES || region.Country == Countries.SCOTLAND))
                     Console.WriteLine("No valid county for region: " + region);
             }
-            foreach (CountyConversion.County county in CountyConversion.CONVERSIONS)
-            {
-                if (!Regions.IsKnownRegion(county.LookupName))
-                    Console.WriteLine("County conversion for unknown region: " + county.LookupName);
-            }
         }
 
         public static void LoadGoogleFixesXMLFile(RichTextBox xmlErrorDocument)

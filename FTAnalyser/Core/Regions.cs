@@ -80,13 +80,12 @@ namespace FTAnalyzer
         public static Region GLASGOW_CITY = new Region("Glasgow City", Countries.SCOTLAND, Region.Creation.MODERN);
         public static Region INVERCLYDE = new Region("Inverclyde", Countries.SCOTLAND, Region.Creation.MODERN);
         public static Region INVERNESS_CITY = new Region("City of Inverness", Countries.SCOTLAND, Region.Creation.MODERN);
-
-        //North Ayrshire
-        //North Lanarkshire
-        //Perth and Kinross
-        //South Lanarkshire
-        //South Ayrshire
-        //West Dunbartonshire
+        public static Region NORTH_AYRSHIRE = new Region("North Ayrshire", Countries.SCOTLAND, Region.Creation.MODERN);
+        public static Region NORTH_LANARK = new Region("North Lanarkshire", Countries.SCOTLAND, Region.Creation.MODERN);
+        public static Region PERTH_KINROSS = new Region("Perth and Kinross", Countries.SCOTLAND, Region.Creation.MODERN);
+        public static Region SOUTH_LANARK = new Region("South Lanarkshire", Countries.SCOTLAND, Region.Creation.MODERN);
+        public static Region SOUTH_AYRSHIRE = new Region("South Ayrshire", Countries.SCOTLAND, Region.Creation.MODERN);
+        public static Region WEST_DUNBARTON = new Region("West Dunbartonshire", Countries.SCOTLAND, Region.Creation.MODERN);
 
         #endregion
 
@@ -111,17 +110,17 @@ namespace FTAnalyzer
         public static Region KENT = new Region("Kent", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region LANCS = new Region("Lancashire", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region LEICS = new Region("Leicestershire", Countries.ENGLAND, Region.Creation.HISTORIC);
-        public static Region LINCOLN = new Region("Lincolnshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region LINCS = new Region("Lincolnshire", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region MIDDLESEX = new Region("Middlesex", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region NORFOLK = new Region("Norfolk", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region NORTHAMPTON = new Region("Northamptonshire", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region NORTHUMBERLAND = new Region("Northumberland", Countries.ENGLAND, Region.Creation.HISTORIC);
-        public static Region NOTTINGHAM = new Region("Nottinghamshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region NOTTS = new Region("Nottinghamshire", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region OXFORD = new Region("Oxfordshire", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region RUTLAND = new Region("Rutland", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region SHROPS = new Region("Shropshire", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region SOMERSET = new Region("Somerset", Countries.ENGLAND, Region.Creation.HISTORIC);
-        public static Region STAFFORD = new Region("Staffordshire", Countries.ENGLAND, Region.Creation.HISTORIC);
+        public static Region STAFFS = new Region("Staffordshire", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region SUFFOLK = new Region("Suffolk", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region SURREY = new Region("Surrey", Countries.ENGLAND, Region.Creation.HISTORIC);
         public static Region SUSSEX = new Region("Sussex", Countries.ENGLAND, Region.Creation.HISTORIC);
@@ -184,7 +183,7 @@ namespace FTAnalyzer
         public static Region HILLINGDON = new Region("Hillingdon", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region HACKNEY = new Region("Hackney", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region HARROW = new Region("Harrow", Countries.ENGLAND, Region.Creation.MODERN);
-        public static Region HOUNDSLOW = new Region("Hounslow", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region HOUNSLOW = new Region("Hounslow", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region HARTLEPOOL = new Region("Hartlepool", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region HAVERING = new Region("Havering", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region ISLINGTON = new Region("Islington", Countries.ENGLAND, Region.Creation.MODERN);
@@ -235,7 +234,7 @@ namespace FTAnalyzer
         public static Region SHEFFIELD = new Region("Sheffield", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region SOLIHULL = new Region("Solihull", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region SUNDERLAND = new Region("Sunderland", Countries.ENGLAND, Region.Creation.MODERN);
-        public static Region SOUTHWARD = new Region("Southwark", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region SOUTHWARK = new Region("Southwark", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region SOUTH_TYNESIDE = new Region("South Tyneside", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region SUTTON = new Region("Sutton", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region TORBAY = new Region("Torbay", Countries.ENGLAND, Region.Creation.MODERN);
@@ -479,23 +478,23 @@ namespace FTAnalyzer
 
             ENGLISH_REGIONS = new HashSet<Region>(new Region[] {
                     BEDS, BERKS, BUCKS, CAMBS, CHESHIRE, CORNWALL, CUMBERLAND, DERBY, DEVON, DORSET,
-                    DURHAM, ESSEX, GLOUCS, HANTS, HEREFORD, HERTS, HUNTS, KENT, LANCS, LEICS, LINCOLN, 
-                    MIDDLESEX, NORFOLK, NORTHAMPTON, NORTHUMBERLAND, NOTTINGHAM, OXFORD, RUTLAND, SHROPS, 
-                    SOMERSET, STAFFORD, SUFFOLK, SURREY, SUSSEX, WARWICK, WESTMORLAND, WILTS, WORCESTER,
+                    DURHAM, ESSEX, GLOUCS, HANTS, HEREFORD, HERTS, HUNTS, KENT, LANCS, LEICS, LINCS, 
+                    MIDDLESEX, NORFOLK, NORTHAMPTON, NORTHUMBERLAND, NOTTS, OXFORD, RUTLAND, SHROPS, 
+                    SOMERSET, STAFFS, SUFFOLK, SURREY, SUSSEX, WARWICK, WESTMORLAND, WILTS, WORCESTER,
                     YORKS, LONDON, MANCHESTER, MERSEYSIDE, SOUTH_YORKSHIRE, TYNE_WEAR, WEST_MIDLANDS,
                     WEST_YORKSHIRE, AVON, CLEVELAND, CUMBRIA, HUMBERSIDE, IOW, HEREFORD_WORCESTER,
                     NORTH_YORKSHIRE, EAST_YORKSHIRE, BRADFORD, BLACKBURN, BRACKNELL, BARKING, BRIGHTON,
                     BIRMINGHAM, BARNSLEY, BARNET, BOLTON, BLACKPOOL, BROMLEY, BATH, BRENT, BOURNEMOUTH,
                     BEXLEY, BURY, BRISTOL, CALDERDALE, CAMDEN, COVENTRY, CROYDON, DERBY_CITY,  DARLINGTON,
                     DONCASTER, DUDLEY, EALING, ENFIELD, EAST_SUSSEX, GATESHEAD, GREENWICH, HALTON, 
-                    HAMMERSMITH, HARINGEY, HILLINGDON, HACKNEY, HARROW, HOUNDSLOW, HARTLEPOOL, HAVERING,
+                    HAMMERSMITH, HARINGEY, HILLINGDON, HACKNEY, HARROW, HOUNSLOW, HARTLEPOOL, HAVERING,
                     ISLINGTON, ISLES_OF_SCILLY, KENSINGTON, KINGSTON_THAMES, KINGSTON_HULL, KIRKLEES, 
                     KNOWSLEY, LAMBETH, LEICESTER_CITY, LEEDS, LUTON, LIVERPOOL, LEWISHAM, MIDDLESBROUGH,
                     MEDWAY, MILTON_KEYNES, MERTON, NE_LINCOLNSHIRE, NEWPORT, NOTTINGHAM_CITY, NEWHAM, 
                     NORTH_LINCOLNSHIRE, NORTH_TYNESIDE, NORTH_SOMERSET, NEWCASTLE, OLDHAM, PETERBOROUGH, 
                     POOLE, PORTSMOUTH, PLYMOUTH, REDBRIDGE, REDCAR, ROCHDALE, READING, ROTHERHAM, 
                     RICHMOND_THAMES, SANDWELL, SALFORD, SWINDON, SEFTON, SOUTH_GLOUCESTERSHIRE, STOKE, 
-                    STOCKTON, ST_HELENS, SOUTHAMPTON, SHEFFIELD, SOLIHULL, SUNDERLAND, SOUTHWARD, 
+                    STOCKTON, ST_HELENS, SOUTHAMPTON, SHEFFIELD, SOLIHULL, SUNDERLAND, SOUTHWARK, 
                     SOUTH_TYNESIDE, SUTTON, TORBAY, TOWER_HAMLETS, TRAFFORD, TAMESIDE, THURROCK, WALSALL, 
                     WEST_BERKSHIRE, WINDSOR, WAKEFIELD, WALTHAM_FOREST, WARRINGTON, WOLVERHAMPTON, 
                     WOKINGHAM, WESTMINSTER, WIGAN, TELFORD, WIRRAL, WEST_SUSSEX, WANDSWORTH, WREXHAM, 
@@ -738,7 +737,7 @@ namespace FTAnalyzer
             HUNTS.AddAlternateName("Hunts");
             LANCS.AddAlternateName("Lancs");
             LEICS.AddAlternateName("Leics");
-            LINCOLN.AddAlternateName("Lincs");
+            LINCS.AddAlternateName("Lincs");
             LONDON.AddAlternateName("City of London");
             MIDDLESEX.AddAlternateName("Mx");
             MIDDLESEX.AddAlternateName("Middx");
@@ -748,15 +747,15 @@ namespace FTAnalyzer
             NORTHAMPTON.AddAlternateName("Northants");
             NORTHUMBERLAND.AddAlternateName("Northumb");
             NORTHUMBERLAND.AddAlternateName("Northd");
-            NOTTINGHAM.AddAlternateName("Notts");
+            NOTTS.AddAlternateName("Notts");
             OXFORD.AddAlternateName("Oxon");
             RUTLAND.AddAlternateName("Rut");
             SHROPS.AddAlternateName("Shrops");
             SHROPS.AddAlternateName("Salop");
             SOMERSET.AddAlternateName("Som");
             SOMERSET.AddAlternateName("Somersetshire");
-            STAFFORD.AddAlternateName("Staffs");
-            STAFFORD.AddAlternateName("Staf");
+            STAFFS.AddAlternateName("Staffs");
+            STAFFS.AddAlternateName("Staf");
             SUFFOLK.AddAlternateName("Suff");
             SUFFOLK.AddAlternateName("West Suffolk");
             SUFFOLK.AddAlternateName("East Suffolk");

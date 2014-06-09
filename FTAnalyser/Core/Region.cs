@@ -24,7 +24,7 @@ namespace FTAnalyzer
             AlternativeNames = new List<string>();
             ISOcode = string.Empty;
             RegionType = regionType;
-            CountyCodes = Mapping.CountyConversion.GetCounties(region);
+            CountyCodes = Mapping.CountyConversion.GetCounties(this);
             if ((Countries.IsEnglandWales(country) || country == Countries.SCOTLAND) && (CountyCodes == null || CountyCodes.Count == 0))
                 Console.WriteLine("Missing new county codes for: " + region);
         }
