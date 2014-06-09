@@ -166,6 +166,7 @@ namespace FTAnalyzer
         public static Region BRISTOL = new Region("City of Bristol", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region CALDERDALE = new Region("Calderdale", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region CAMDEN = new Region("Camden", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region CENTRAL_BEDFORDSHIRE = new Region("Central Bedfordshire", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region COVENTRY = new Region("Coventry", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region CROYDON = new Region("Croydon", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region DERBY_CITY = new Region("City of Derby", Countries.ENGLAND, Region.Creation.MODERN);
@@ -267,7 +268,7 @@ namespace FTAnalyzer
         public static Region ANGLESEY = new Region("Anglesey", Countries.WALES, Region.Creation.HISTORIC);
         public static Region BRECON = new Region("Brecon", Countries.WALES, Region.Creation.HISTORIC);
         public static Region CAERNARFON = new Region("Caernarfon", Countries.WALES, Region.Creation.HISTORIC);
-        public static Region CARDIGAN = new Region("Cardigan", Countries.WALES, Region.Creation.HISTORIC);
+        public static Region CEREDIGION = new Region("Ceredigion", Countries.WALES, Region.Creation.HISTORIC);
         public static Region CARMARTHEN = new Region("Carmarthen", Countries.WALES, Region.Creation.HISTORIC);
         public static Region DENBIGH = new Region("Denbigh", Countries.WALES, Region.Creation.HISTORIC);
         public static Region FLINT = new Region("Flint", Countries.WALES, Region.Creation.HISTORIC);
@@ -503,7 +504,7 @@ namespace FTAnalyzer
             AddEnglishRegionAlternates();
 
             WELSH_REGIONS = new HashSet<Region>(new Region[] {
-                    ANGLESEY, BRECON, CAERNARFON, CARDIGAN, CARMARTHEN, DENBIGH, FLINT, GLAMORGAN, MERIONETH, 
+                    ANGLESEY, BRECON, CAERNARFON, CEREDIGION, CARMARTHEN, DENBIGH, FLINT, GLAMORGAN, MERIONETH, 
                     MONMOUTH, MONTGOMERY, PEMBROKE, RADNOR, CLWYD, DYFED, GWENT, GWYNEDD, MID_GLAMORGAN, 
                     POWYS, SOUTH_GLAMORGAN, WEST_GLAMORGAN, BLAENAU_GWENT, BRIDGEND, CARDIFF, CAERPHILLY,
                     CONWY, BLAENAU_GWENT, BRIDGEND, CARDIFF, CAERPHILLY, CONWY, MERTHYL, NEATH, RHONDDA,
@@ -669,9 +670,9 @@ namespace FTAnalyzer
             CAERNARFON.AddAlternateName("Caernarfonshire");
             CAERNARFON.AddAlternateName("Caernarvonshire");
             CAERNARFON.AddAlternateName("Caernarvon");
-            CARDIGAN.AddAlternateName("Cardiganshire");
-            CARDIGAN.AddAlternateName("Ceredigionshire");
-            CARDIGAN.AddAlternateName("Ceredigion");
+            CEREDIGION.AddAlternateName("Cardiganshire");
+            CEREDIGION.AddAlternateName("Ceredigionshire");
+            CEREDIGION.AddAlternateName("Cardigan");
             CARMARTHEN.AddAlternateName("Sir Gaerfyrddin");
             CARMARTHEN.AddAlternateName("Carmarthenshire");
             DENBIGH.AddAlternateName("Denbighshire");
