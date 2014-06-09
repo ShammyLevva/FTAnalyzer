@@ -172,125 +172,96 @@ namespace FTAnalyzer
         public static Region DARLINGTON = new Region("Darlington", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region DONCASTER = new Region("Doncaster", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region DUDLEY = new Region("Dudley", Countries.ENGLAND, Region.Creation.MODERN);
-
-
-
-//Ealing
-//Enfield
-//East Sussex
-//Gateshead
-//Greenwich
-//Halton
-//Hammersmith and Fulham
-//Haringey
-//Hillingdon
-//Hackney
-//Hampshire
-//Harrow
-//Hounslow
-//Hartlepool
-//Havering
-//Islington
-//Isles of Scilly
-//Isle of Wight
-//Royal Borough of Kensington and Chelsea
-//Kingston upon Thames
-//City of Kingston upon Hull
-//Kirklees
-//Knowsley
-//Lambeth
-//City of Leicester
-//Leeds
-//Luton
-//City of London
-//Liverpool
-//Lewisham
-//Middlesbrough
-//Medway
-//Milton Keynes
-//Merton
-//Merthyr Tydfil
-//North East Lincolnshire
-//Newport
-//City of Nottingham
-//Newham
-//North Lincolnshire
-//Norfolk
-//Northamptonshire
-//Neath Port Talbot
-//North Tyneside
-//North Somerset
-//Nottinghamshire
-//Newcastle upon Tyne
-//North Yorkshire
-//Oldham
-//Oxfordshire
-//Pembrokeshire
-//City of Peterborough
-//Poole
-//City of Portsmouth
-//Powys
-//City of Plymouth
-//Redbridge
-//Redcar and Cleveland
-//Rochdale
-//Reading
-//Rhondda Cynon Taff
-//Rutland
-//Rotherham
-//Richmond upon Thames
-//Sandwell
-//Salford
-//Swindon
-//Sefton
-//Staffordshire
-//South Gloucestershire
-//Shropshire
-//City of Stoke-on-Trent
-//Suffolk
-//Stockton-on-Tees
-//St Helens
-//City of Southampton
-//Sheffield
-//Solihull
-//Swansea
-//Somerset
-//Surrey
-//Sunderland
-//Southwark
-//South Tyneside
-//Sutton
-//Torbay
-//Torfaen
-//Tower Hamlets
-//Trafford
-//Tameside
-//Thurrock
-//Vale of Glamorgan
-//Walsall
-//West Berkshire
-//Windsor and Maidenhead
-//Wakefield
-//Waltham Forest
-//Warrington
-//City of Wolverhampton
-//Wokingham
-//Warwickshire
-//West Lothian
-//City of Westminster
-//Wigan
-//Worcestershire
-//Telford and Wrekin
-//Wirral
-//West Sussex
-//Wiltshire
-//Wandsworth
-//Wrexham
-//York
-//Southend-on-Sea
-//Slough
-//Stockport
-
+        public static Region EALING = new Region("Ealing", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region ENFIELD = new Region("Enfield", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region EAST_SUSSEX = new Region("East Sussex", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region GATESHEAD = new Region("Gateshead", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region GREENWICH = new Region("Greenwich", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region HALTON = new Region("Halton", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region HAMMERSMITH = new Region("Hammersmith and Fulham", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region HARINGEY = new Region("Haringey", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region HILLINGDON = new Region("Hillingdon", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region HACKNEY = new Region("Hackney", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region HARROW = new Region("Harrow", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region HOUNDSLOW = new Region("Hounslow", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region HARTLEPOOL = new Region("Hartlepool", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region HAVERING = new Region("Havering", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region ISLINGTON = new Region("Islington", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region ISLES_OF_SCILLY = new Region("Isles of Scilly", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region KENSINGTON = new Region("Royal Borough of Kensington and Chelsea", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region KINGSTON_THAMES = new Region("Kingston upon Thames", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region KINGSTON_HULL = new Region("City of Kingston upon Hull", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region KIRKLEES = new Region("Kirklees", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region KNOWSLEY = new Region("Knowsley", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region LAMBETH = new Region("Lambeth", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region LEICESTER_CITY = new Region("City of Leicester", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region LEEDS = new Region("Leeds", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region LUTON = new Region("Luton", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region LIVERPOOL = new Region("Liverpool", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region LEWISHAM = new Region("Lewisham", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region MIDDLESBROUGH = new Region("Middlesbrough", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region MEDWAY = new Region("Medway", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region MILTON_KEYNES = new Region("Milton Keynes", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region MERTON = new Region("Merton", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region NE_LINCOLNSHIRE = new Region("North East Lincolnshire", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region NEWPORT = new Region("Newport", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region NOTTINGHAM_CITY = new Region("City of Nottingham", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region NEWHAM = new Region("Newham", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region NORTH_LINCOLNSHIRE = new Region("North Lincolnshire", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region NORTH_TYNESIDE = new Region("North Tyneside", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region NORTH_SOMERSET = new Region("North Somerset", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region NEWCASTLE = new Region("Newcastle upon Tyne", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region OLDHAM = new Region("Oldham", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region PETERBOROUGH = new Region("City of Peterborough", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region POOLE = new Region("Poole", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region PORTSMOUTH = new Region("City of Portsmouth", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region PLYMOUTH = new Region("City of Plymouth", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region REDBRIDGE = new Region("Redbridge", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region REDCAR = new Region("Redcar and Cleveland", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region ROCHDALE = new Region("Rochdale", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region READING = new Region("Reading", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region ROTHERHAM = new Region("Rotherham", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region RICHMOND_THAMES = new Region("Richmond upon Thames", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region SANDWELL = new Region("Sandwell", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region SALFORD = new Region("Salford", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region SWINDON = new Region("Swindon", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region SEFTON = new Region("Sefton", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region SOUTH_GLOUCESTERSHIRE = new Region("South Gloucestershire", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region STOKE = new Region("City of Stoke-on-Trent", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region STOCKTON = new Region("Stockton-on-Tees", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region ST_HELENS = new Region("St Helens", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region SOUTHAMPTON = new Region("City of Southampton", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region SHEFFIELD = new Region("Sheffield", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region SOLIHULL = new Region("Solihull", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region SUNDERLAND = new Region("Sunderland", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region SOUTHWARD = new Region("Southwark", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region SOUTH_TYNESIDE = new Region("South Tyneside", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region SUTTON = new Region("Sutton", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region TORBAY = new Region("Torbay", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region TOWER_HAMLETS = new Region("Tower Hamlets", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region TRAFFORD = new Region("Trafford", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region TAMESIDE = new Region("Tameside", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region THURROCK = new Region("Thurrock", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region WALSALL = new Region("Walsall", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region WEST_BERKSHIRE = new Region("West Berkshire", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region WINDSOR = new Region("Windsor and Maidenhead", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region WAKEFIELD = new Region("Wakefield", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region WALTHAM_FOREST = new Region("Waltham Forest", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region WARRINGTON = new Region("Warrington", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region WOLVERHAMPTON = new Region("City of Wolverhampton", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region WOKINGHAM = new Region("Wokingham", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region WESTMINSTER = new Region("City of Westminster", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region WIGAN = new Region("Wigan", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region TELFORD = new Region("Telford and Wrekin", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region WIRRAL = new Region("Wirral", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region WEST_SUSSEX = new Region("West Sussex", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region WILTSHIRE = new Region("Wiltshire", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region WANDSWORTH = new Region("Wandsworth", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region WREXHAM = new Region("Wrexham", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region YORK = new Region("York", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region SOUTHEND = new Region("Southend-on-Sea", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region SLOUGH = new Region("Slough", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region STOCKPORT = new Region("Stockport", Countries.ENGLAND, Region.Creation.MODERN);
         #endregion
 
         #region Welsh Regions
@@ -322,6 +293,12 @@ namespace FTAnalyzer
         public static Region CARDIFF = new Region("Cardiff", Countries.WALES, Region.Creation.MODERN);
         public static Region CAERPHILLY = new Region("Caerphilly", Countries.WALES, Region.Creation.MODERN);
         public static Region CONWY = new Region("Conwy", Countries.WALES, Region.Creation.MODERN);
+        public static Region MERTHYL = new Region("Merthyr Tydfil", Countries.WALES, Region.Creation.MODERN);
+        public static Region NEATH = new Region("Neath Port Talbot", Countries.WALES, Region.Creation.MODERN);
+        public static Region RHONDDA = new Region("Rhondda Cynon Taff", Countries.WALES, Region.Creation.MODERN);
+        public static Region SWANSEA = new Region("Swansea", Countries.WALES, Region.Creation.MODERN);
+        public static Region TORFAEN = new Region("Torfaen", Countries.WALES, Region.Creation.MODERN);
+        public static Region VALE_GLAMORGAN = new Region("Vale of Glamorgan", Countries.WALES, Region.Creation.MODERN);
         #endregion
 
         #region Northern Ireland Regions
@@ -495,7 +472,8 @@ namespace FTAnalyzer
                     MIDLOTHIAN, MORAY, NAIRN, ORKNEY, PEEBLES, PERTH, RENFREW, ROSS_CROMARTY, ROXBURGH, 
                     SELKIRK, SHETLAND, STIRLING, SUTHERLAND, WEST_LOTHIAN, WIGTOWN, BORDERS, CENTRAL_SCOT,
                     DUMFRIES_GALLOWAY, GRAMPIAN, HIGHLAND, LOTHIAN, STRATHCLYDE, TAYSIDE, WESTERN_ISLES,
-                    ABERDEEN_CITY, ARGYLL_BUTE, DUNDEE_CITY
+                    ABERDEEN_CITY, ARGYLL_BUTE, DUNDEE_CITY, EAST_AYRSHIRE, EDINBURGH_CITY, 
+                    EAST_DUNBARTONSHIRE, EAST_RENFREW, FALKIRK, GLASGOW_CITY, INVERCLYDE, INVERNESS_CITY
                 });
             AddScottishRegionAlternates();
 
@@ -509,7 +487,19 @@ namespace FTAnalyzer
                     NORTH_YORKSHIRE, EAST_YORKSHIRE, BRADFORD, BLACKBURN, BRACKNELL, BARKING, BRIGHTON,
                     BIRMINGHAM, BARNSLEY, BARNET, BOLTON, BLACKPOOL, BROMLEY, BATH, BRENT, BOURNEMOUTH,
                     BEXLEY, BURY, BRISTOL, CALDERDALE, CAMDEN, COVENTRY, CROYDON, DERBY_CITY,  DARLINGTON,
-                    DONCASTER, DUDLEY
+                    DONCASTER, DUDLEY, EALING, ENFIELD, EAST_SUSSEX, GATESHEAD, GREENWICH, HALTON, 
+                    HAMMERSMITH, HARINGEY, HILLINGDON, HACKNEY, HARROW, HOUNDSLOW, HARTLEPOOL, HAVERING,
+                    ISLINGTON, ISLES_OF_SCILLY, KENSINGTON, KINGSTON_THAMES, KINGSTON_HULL, KIRKLEES, 
+                    KNOWSLEY, LAMBETH, LEICESTER_CITY, LEEDS, LUTON, LIVERPOOL, LEWISHAM, MIDDLESBROUGH,
+                    MEDWAY, MILTON_KEYNES, MERTON, NE_LINCOLNSHIRE, NEWPORT, NOTTINGHAM_CITY, NEWHAM, 
+                    NORTH_LINCOLNSHIRE, NORTH_TYNESIDE, NORTH_SOMERSET, NEWCASTLE, OLDHAM, PETERBOROUGH, 
+                    POOLE, PORTSMOUTH, PLYMOUTH, REDBRIDGE, REDCAR, ROCHDALE, READING, ROTHERHAM, 
+                    RICHMOND_THAMES, SANDWELL, SALFORD, SWINDON, SEFTON, SOUTH_GLOUCESTERSHIRE, STOKE, 
+                    STOCKTON, ST_HELENS, SOUTHAMPTON, SHEFFIELD, SOLIHULL, SUNDERLAND, SOUTHWARD, 
+                    SOUTH_TYNESIDE, SUTTON, TORBAY, TOWER_HAMLETS, TRAFFORD, TAMESIDE, THURROCK, WALSALL, 
+                    WEST_BERKSHIRE, WINDSOR, WAKEFIELD, WALTHAM_FOREST, WARRINGTON, WOLVERHAMPTON, WOKINGHAM,
+                    WESTMINSTER, WIGAN, TELFORD, WIRRAL, WEST_SUSSEX, WILTSHIRE, WANDSWORTH, WREXHAM, YORK,
+                    SOUTHEND, SLOUGH, STOCKPORT
             });
             AddEnglishRegionAlternates();
 
@@ -517,7 +507,8 @@ namespace FTAnalyzer
                     ANGLESEY, BRECON, CAERNARFON, CARDIGAN, CARMARTHEN, DENBIGH, FLINT, GLAMORGAN, MERIONETH, 
                     MONMOUTH, MONTGOMERY, PEMBROKE, RADNOR, CLWYD, DYFED, GWENT, GWYNEDD, MID_GLAMORGAN, 
                     POWYS, SOUTH_GLAMORGAN, WEST_GLAMORGAN, BLAENAU_GWENT, BRIDGEND, CARDIFF, CAERPHILLY,
-                    CONWY
+                    CONWY, BLAENAU_GWENT, BRIDGEND, CARDIFF, CAERPHILLY, CONWY, MERTHYL, NEATH, RHONDDA,
+                    SWANSEA, TORFAEN, VALE_GLAMORGAN
             });
             AddWelshRegionAlternates();
 
@@ -748,6 +739,7 @@ namespace FTAnalyzer
             LANCS.AddAlternateName("Lancs");
             LEICS.AddAlternateName("Leics");
             LINCOLN.AddAlternateName("Lincs");
+            LONDON.AddAlternateName("City of London");
             MIDDLESEX.AddAlternateName("Mx");
             MIDDLESEX.AddAlternateName("Middx");
             MIDDLESEX.AddAlternateName("Midx");
