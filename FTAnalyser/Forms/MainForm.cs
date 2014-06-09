@@ -1255,6 +1255,11 @@ namespace FTAnalyzer
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtWorldWarsSurname.Text);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
+            if(ckbMilitaryOnly.Checked)
+            {
+                Predicate<Individual> militaryFilter = x => x.HasMilitaryFacts;
+                filter = FilterUtils.AndFilter<Individual>(filter, militaryFilter);
+            }
 
             return filter;
         }

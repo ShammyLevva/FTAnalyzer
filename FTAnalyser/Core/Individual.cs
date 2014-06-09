@@ -595,6 +595,11 @@ namespace FTAnalyzer
             });
         }
 
+        public bool HasMilitaryFacts
+        {
+            get { return facts.Any(f => f.FactType == Fact.MILITARY || f.FactType == Fact.SERVICE_NUMBER); }
+        }
+
         public bool HasCensusLocation(CensusDate when)
         {
             if (when == null) return false;
