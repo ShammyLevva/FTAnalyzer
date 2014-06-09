@@ -8,6 +8,7 @@ using FTAnalyzer.Forms;
 using FTAnalyzer.Mapping;
 using GeoAPI.Geometries;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace FTAnalyzer.Utilities
 {
@@ -212,7 +213,7 @@ namespace FTAnalyzer.Utilities
         }
         #endregion
 
-        #region Conversion Routines
+        #region Lat/Long Routines
         private void ConvertLatLongs()
         {
             Coordinate Point, NorthEast, SouthWest;
@@ -301,6 +302,44 @@ namespace FTAnalyzer.Utilities
                 }
                 #endregion
             }
+        }
+
+        public string LatLongHashKey(double latitude, double longitude)
+        {
+            return latitude.ToString("F6") + longitude.ToString("F6");
+        }
+
+        public Dictionary<string, Tuple<string,string>> GetLatLongIndex()
+        {
+            Dictionary<string, Tuple<string, string>> results = new Dictionary<string, Tuple<string, string>>();
+
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                double latitude = 0;
+                double longitude = 0;
+                string hashkey;
+                string foundlocation;
+                string foundresulttype;
+                using (SQLiteCommand cmd = new SQLiteCommand(
+                    "select distinct latitude, longitude, foundlocation, foundresulttype from geocode where latitude <> 0 and longitude <> 0 and foundlocation<>''", conn))
+                {
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            double.TryParse(reader[0].ToString(), out latitude);
+                            double.TryParse(reader[1].ToString(), out longitude);
+                            hashkey = LatLongHashKey(latitude, longitude);
+                            foundlocation = reader[2].ToString();
+                            foundresulttype = reader[3].ToString();
+                            if (!results.ContainsKey(hashkey))
+                                results.Add(hashkey, new Tuple<string, string>(foundlocation, foundresulttype));
+                        }
+                    }
+                }
+            }
+            return results;
         }
         #endregion
 

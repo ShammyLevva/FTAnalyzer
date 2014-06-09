@@ -825,26 +825,38 @@ namespace FTAnalyzer.Forms
                 FactLocation loc;
                 int count = 0;
                 int total = queue.Count;
+                DatabaseHelper dbh = DatabaseHelper.Instance;
+                Dictionary<string, Tuple<string, string>> LatLongIndex = dbh.GetLatLongIndex();
                 while (!queue.IsEmpty)
                 {
                     if (queue.TryDequeue(out loc))
                     {
-                        if (loc.ToString().Length > 0)
+                        if (loc.ToString().Length > 0 && loc.Latitude != 0 && loc.Longitude != 0)
                         {
                             GeoResponse res = null;
                             double latitude = loc.Latitude;
                             double longitude = loc.Longitude;
-                            res = GoogleMap.GoogleReverseGeocode(latitude, longitude, 8);
-                            if (res != null && res.Status == "Maxed")
+                            string hashkey = dbh.LatLongHashKey(latitude, longitude);
+                            if (LatLongIndex.ContainsKey(hashkey))
                             {
-                                googleGeocodeBackgroundWorker.CancelAsync();
-                                GoogleMap.ThreadCancelled = true;
-                                res = null;
-                            }
-                            if (res != null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
-                            {
-                                ProcessReverseResult(loc, res);
+                                loc.GoogleLocation = LatLongIndex[hashkey].Item1;
+                                loc.GoogleResultType = LatLongIndex[hashkey].Item2;
                                 UpdateDatabase(loc, true);
+                            }
+                            else
+                            {
+                                res = GoogleMap.GoogleReverseGeocode(latitude, longitude, 8);
+                                if (res != null && res.Status == "Maxed")
+                                {
+                                    googleGeocodeBackgroundWorker.CancelAsync();
+                                    GoogleMap.ThreadCancelled = true;
+                                    res = null;
+                                }
+                                if (res != null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
+                                {
+                                    ProcessReverseResult(loc, res);
+                                    UpdateDatabase(loc, true);
+                                }
                             }
                         }
                     }
@@ -917,7 +929,7 @@ namespace FTAnalyzer.Forms
             else if (res.Status == "ZERO_RESULTS")
             {
                 loc.GoogleLocation = "Not Found";
-                foundLevel = -2;
+                loc.GoogleResultType = string.Empty;
             }
         }
 
