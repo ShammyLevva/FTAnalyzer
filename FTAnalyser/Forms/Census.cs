@@ -19,13 +19,15 @@ namespace FTAnalyzer.Forms
     {
         //private int numFamilies;
         public CensusDate CensusDate { get; private set; }
+        public int RecordCount { get; private set; }
         private string censusCountry;
+        private bool CensusDone;
         private ReportFormHelper reportFormHelper;
         private FamilyTree ft;
 
         public bool LostCousins { get; private set; }
 
-        public Census(CensusDate censusDate)
+        public Census(CensusDate censusDate, bool censusDone)
         {
             InitializeComponent();
             dgCensus.AutoGenerateColumns = false;
@@ -36,20 +38,21 @@ namespace FTAnalyzer.Forms
             this.LostCousins = false;
             this.CensusDate = censusDate;
             this.censusCountry = CensusDate.Country;
+            this.RecordCount = 0;
+            this.CensusDone = censusDone;
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
-            {
                 defaultProvider = "FamilySearch";
-            }
             cbCensusSearchProvider.Text = defaultProvider;
             GeneralSettings.CompactCensusRefChanged += new EventHandler(RefreshCensusReferences);
         }
 
-        public void SetupCensus(Predicate<CensusIndividual> filter, bool censusDone)
+        public void SetupCensus(Predicate<CensusIndividual> filter)
         {
-            IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, censusDone, true);
+            IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, CensusDone, true);
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Where(filter).ToList();
-            SetupDataGridView(censusDone, individuals);
+            RecordCount = individuals.Count;
+            SetupDataGridView(CensusDone, individuals);
         }
 
         public void SetupLCCensus(Predicate<CensusIndividual> relationFilter, bool showEnteredLostCousins)
@@ -63,6 +66,7 @@ namespace FTAnalyzer.Forms
             IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, true, false);
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, predicate);
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Where(filter).ToList();
+            RecordCount = individuals.Count;
             SetupDataGridView(true, individuals);
         }
 

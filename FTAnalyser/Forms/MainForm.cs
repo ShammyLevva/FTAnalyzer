@@ -1191,7 +1191,7 @@ namespace FTAnalyzer
             return filter;
         }
 
-        private Predicate<CensusIndividual> CreateCensusIndividualFilter(bool censusDone)
+        private Predicate<CensusIndividual> CreateCensusIndividualFilter(bool censusDone, string surname)
         {
             Predicate<CensusIndividual> relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
             Predicate<CensusIndividual> dateFilter = censusDone ?
@@ -1203,9 +1203,9 @@ namespace FTAnalyzer
                 Predicate<CensusIndividual> missingTag = new Predicate<CensusIndividual>(x => !x.IsTaggedMissingCensus(cenDate.SelectedDate));
                 filter = FilterUtils.AndFilter<CensusIndividual>(filter, missingTag);
             }
-            if (txtCensusSurname.Text.Length > 0)
+            if (surname.Length > 0)
             {
-                Predicate<CensusIndividual> surnameFilter = FilterUtils.StringFilter<CensusIndividual>(x => x.Surname, txtCensusSurname.Text);
+                Predicate<CensusIndividual> surnameFilter = FilterUtils.StringFilter<CensusIndividual>(x => x.Surname, surname);
                 filter = FilterUtils.AndFilter<CensusIndividual>(filter, surnameFilter);
             }
             if (chkExcludeUnknownBirths.Checked)
@@ -1363,7 +1363,7 @@ namespace FTAnalyzer
         private void LostCousinsCensus(CensusDate censusDate, string reportTitle)
         {
             HourGlass(true);
-            Census census = new Census(censusDate);
+            Census census = new Census(censusDate, true);
             Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType);
             census.SetupLCCensus(relationFilter, ckbShowLCEntered.Checked);
             if (ckbShowLCEntered.Checked)
@@ -2137,15 +2137,54 @@ namespace FTAnalyzer
         private void btnShowCensus_Click(object sender, EventArgs e)
         {
             bool censusDone = sender == btnShowCensusEntered;
-            Predicate<CensusIndividual> filter = CreateCensusIndividualFilter(censusDone);
-            Census census = new Census(cenDate.SelectedDate);
-            census.SetupCensus(filter, censusDone);
-            if (censusDone)
-                census.Text = "People entered with a " + cenDate.SelectedDate.ToString() + " record";
+            ShowCensus(censusDone, txtCensusSurname.Text, false);
+        }
+
+        private void ShowCensus(bool censusDone, string surname, bool random)
+        {
+            Census census = new Census(cenDate.SelectedDate, censusDone);
+            if (random)
+                census.Text = "People with surname " + surname;
             else
-                census.Text = "People missing a " + cenDate.SelectedDate.ToString() + " record that you can search for";
+                census.Text = "People";
+            if (censusDone)
+                census.Text += " entered with a " + cenDate.SelectedDate.ToString() + " record";
+            else
+                census.Text += " missing a " + cenDate.SelectedDate.ToString() + " record that you can search for";
+            Predicate<CensusIndividual> filter = CreateCensusIndividualFilter(censusDone, surname);
+            census.SetupCensus(filter);
+            int tries = 0;
+            while (random && census.RecordCount == 0 && tries < 5)
+            {
+                surname = GetRandomSurname();
+                filter = CreateCensusIndividualFilter(censusDone, surname);
+                census.SetupCensus(filter);
+                tries++;
+            }
             DisposeDuplicateForms(census);
             census.Show();
+        }
+
+        private void btnRandomSurname_Click(object sender, EventArgs e)
+        {
+            string surname = GetRandomSurname();
+            bool censusDone = sender == btnRandomSurnameEntered;
+            ShowCensus(censusDone, surname, true);
+        }
+
+        private string GetRandomSurname()
+        {
+            Predicate<Individual> direct = x => x.RelationType == Individual.DIRECT;
+            IEnumerable<Individual> directs = ft.AllIndividuals.Where(direct);
+            List<string> surnames = directs.Select(x => x.Surname).Distinct<string>().ToList<string>();
+            Random rnd = new Random();
+            string surname;
+            do
+            {
+                int selection = rnd.Next(surnames.Count);
+                surname = surnames[selection];
+            } while (surname == "UNKNOWN" && surnames.Count > 10);
+            return surname;
         }
 
         private void btnMissingCensusLocation_Click(object sender, EventArgs e)
