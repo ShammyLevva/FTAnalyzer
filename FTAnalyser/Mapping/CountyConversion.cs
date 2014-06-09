@@ -146,13 +146,13 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Peebles", "MI", "Midlothian"));
             CONVERSIONS.Add(new County("Peebles", "WL", "West Lothian"));
             CONVERSIONS.Add(new County("Aberdeen City", "AN", "Aberdeen City"));
-            CONVERSIONS.Add(new County("Aberdeen", "AN", "Aberdeen City"));
             CONVERSIONS.Add(new County("Orkney", "OK", "Orkney Islands"));
             CONVERSIONS.Add(new County("Shetland", "SI", "Shetland Islands"));
             CONVERSIONS.Add(new County("Borders", "SB", "Scottish Borders"));
 
             #region Modern Counties - as per Gazetteer
-            CONVERSIONS.Add(new County("Barking & Dagenham", "BD", "Barking & Dagenham"));
+
+            CONVERSIONS.Add(new County("Barking and Dagenham", "BD", "Barking and Dagenham"));
             CONVERSIONS.Add(new County("Barnet", "BN", "Barnet"));
             CONVERSIONS.Add(new County("Barnsley", "BL", "Barnsley"));
             CONVERSIONS.Add(new County("Bath and North East Somerset", "BS", "Bath and North East Somerset"));
@@ -169,8 +169,8 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Bradford", "BA", "Bradford"));
             CONVERSIONS.Add(new County("Brent", "BT", "Brent"));
             CONVERSIONS.Add(new County("Bridgend", "BE", "Bridgend"));
-            CONVERSIONS.Add(new County("City of Brighton and Hove", "BH", "City of Brighton and Hove"));
-            CONVERSIONS.Add(new County("City of Bristol", "BZ", "City of Bristol"));
+            CONVERSIONS.Add(new County("Brighton and Hove", "BH", "City of Brighton and Hove"));
+            CONVERSIONS.Add(new County("Bristol", "BZ", "City of Bristol"));
             CONVERSIONS.Add(new County("Bromley", "BR", "Bromley"));
             CONVERSIONS.Add(new County("Buckinghamshire", "BM", "Buckinghamshire"));
             CONVERSIONS.Add(new County("Bury", "BY", "Bury"));
@@ -183,33 +183,20 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Carmarthenshire", "CT", "Carmarthenshire"));
             CONVERSIONS.Add(new County("Central Bedfordshire", "BK", "Central Bedfordshire"));
             CONVERSIONS.Add(new County("Ceredigion", "CE", "Ceredigion"));
-            CONVERSIONS.Add(new County("Chelsea", "KC", "Royal Borough of Kensington & Chelsea"));
             CONVERSIONS.Add(new County("Cheshire East", "CH", "Cheshire East"));
             CONVERSIONS.Add(new County("Cheshire West and Chester", "CC", "Cheshire West and Chester"));
             CONVERSIONS.Add(new County("City of Brighton and Hove", "BH", "City of Brighton and Hove"));
             CONVERSIONS.Add(new County("City of Bristol", "BZ", "City of Bristol"));
-            CONVERSIONS.Add(new County("City of Derby", "DB", "City of Derby"));
-            CONVERSIONS.Add(new County("City of Edinburgh", "EB", "City of Edinburgh"));
-            CONVERSIONS.Add(new County("City of Kingston upon Hull", "KH", "City of Kingston upon Hull"));
-            CONVERSIONS.Add(new County("City of Leicester", "LC", "City of Leicester"));
-            CONVERSIONS.Add(new County("City of London", "LO", "City of London"));
-            CONVERSIONS.Add(new County("City of Nottingham", "NG", "City of Nottingham"));
-            CONVERSIONS.Add(new County("City of Peterborough", "PE", "City of Peterborough"));
-            CONVERSIONS.Add(new County("City of Plymouth", "PY", "City of Plymouth"));
-            CONVERSIONS.Add(new County("City of Portsmouth", "PO", "City of Portsmouth"));
-            CONVERSIONS.Add(new County("City of Southampton", "SO", "City of Southampton"));
-            CONVERSIONS.Add(new County("City of Stoke-on-Trent", "SJ", "City of Stoke-on-Trent"));
-            CONVERSIONS.Add(new County("City of Westminster", "WM", "City of Westminster"));
-            CONVERSIONS.Add(new County("City of Wolverhampton", "WH", "City of Wolverhampton"));
             CONVERSIONS.Add(new County("Clackmannanshire", "CL", "Clackmannanshire"));
             CONVERSIONS.Add(new County("Conwy", "CW", "Conwy"));
             CONVERSIONS.Add(new County("Cornwall", "CN", "Cornwall"));
             CONVERSIONS.Add(new County("Coventry", "CV", "Coventry"));
             CONVERSIONS.Add(new County("Croydon", "CY", "Croydon"));
             CONVERSIONS.Add(new County("Cumbria", "CU", "Cumbria"));
-            CONVERSIONS.Add(new County("Dagenham", "BD", "Barking & Dagenham"));
+            CONVERSIONS.Add(new County("Dagenham", "BD", "Barking and Dagenham"));
             CONVERSIONS.Add(new County("Darlington", "DL", "Darlington"));
             CONVERSIONS.Add(new County("Denbighshire", "DE", "Denbighshire"));
+            CONVERSIONS.Add(new County("Derby", "DB", "City of Derby"));
             CONVERSIONS.Add(new County("Derby", "DB", "City of Derby"));
             CONVERSIONS.Add(new County("Derbyshire", "DY", "Derbyshire"));
             CONVERSIONS.Add(new County("Devon", "DN", "Devon"));
@@ -231,6 +218,7 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("East Riding of Yorkshire", "EY", "East Riding of Yorkshire"));
             CONVERSIONS.Add(new County("East Sussex", "ES", "East Sussex"));
             CONVERSIONS.Add(new County("Edinburgh", "EB", "City of Edinburgh"));
+            CONVERSIONS.Add(new County("Edinburgh", "EB", "City of Edinburgh"));
             CONVERSIONS.Add(new County("Enfield", "EN", "Enfield"));
             CONVERSIONS.Add(new County("Essex", "EX", "Essex"));
             CONVERSIONS.Add(new County("Falkirk", "FA", "Falkirk"));
@@ -248,7 +236,6 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Hackney", "HN", "Hackney"));
             CONVERSIONS.Add(new County("Halton", "HA", "Halton"));
             CONVERSIONS.Add(new County("Hammersmith and Fulham", "HF", "Hammersmith and Fulham"));
-            CONVERSIONS.Add(new County("Hammersmith", "HF", "Hammersmith and Fulham"));
             CONVERSIONS.Add(new County("Hampshire", "HP", "Hampshire"));
             CONVERSIONS.Add(new County("Haringey", "HG", "Haringey"));
             CONVERSIONS.Add(new County("Harrow", "HR", "Harrow"));
@@ -266,8 +253,6 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Isle of Wight", "IW", "Isle of Wight"));
             CONVERSIONS.Add(new County("Isles of Scilly", "IS", "Isles of Scilly"));
             CONVERSIONS.Add(new County("Islington", "IL", "Islington"));
-            CONVERSIONS.Add(new County("Kensington & Chelsea", "KC", "Royal Borough of Kensington & Chelsea"));
-            CONVERSIONS.Add(new County("Kensington", "KC", "Royal Borough of Kensington & Chelsea"));
             CONVERSIONS.Add(new County("Kent", "KT", "Kent"));
             CONVERSIONS.Add(new County("Kingston upon Hull", "KH", "City of Kingston upon Hull"));
             CONVERSIONS.Add(new County("Kingston upon Thames", "KG", "Kingston upon Thames"));
@@ -328,14 +313,14 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Powys", "PW", "Powys"));
             CONVERSIONS.Add(new County("Reading", "RG", "Reading"));
             CONVERSIONS.Add(new County("Redbridge", "RB", "Redbridge"));
-            CONVERSIONS.Add(new County("Redcar & Cleveland", "RC", "Redcar & Cleveland"));
+            CONVERSIONS.Add(new County("Redcar and Cleveland", "RC", "Redcar and Cleveland"));
             CONVERSIONS.Add(new County("Renfrewshire", "ER", "East Renfrewshire"));
             CONVERSIONS.Add(new County("Renfrewshire", "RE", "Renfrewshire"));
             CONVERSIONS.Add(new County("Rhondda", "RH", "Rhondda,Cynon,Taff"));
             CONVERSIONS.Add(new County("Richmond upon Thames", "RT", "Richmond upon Thames"));
             CONVERSIONS.Add(new County("Rochdale", "RD", "Rochdale"));
             CONVERSIONS.Add(new County("Rotherham", "RO", "Rotherham"));
-            CONVERSIONS.Add(new County("Royal Borough of Kensington & Chelsea", "KC", "Royal Borough of Kensington & Chelsea"));
+            CONVERSIONS.Add(new County("Royal Borough of Kensington and Chelsea", "KC", "Royal Borough of Kensington and Chelsea"));
             CONVERSIONS.Add(new County("Rutland", "RL", "Rutland"));
             CONVERSIONS.Add(new County("Salford", "SC", "Salford"));
             CONVERSIONS.Add(new County("Sandwell", "SA", "Sandwell"));
@@ -372,8 +357,6 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Swindon", "SD", "Swindon"));
             CONVERSIONS.Add(new County("Tameside", "TS", "Tameside"));
             CONVERSIONS.Add(new County("Telford and Wrekin", "WP", "Telford and Wrekin"));
-            CONVERSIONS.Add(new County("Telford", "WP", "Telford and Wrekin"));
-            CONVERSIONS.Add(new County("The Vale of Glamorgan", "VG", "The Vale of Glamorgan"));
             CONVERSIONS.Add(new County("Thurrock", "TU", "Thurrock"));
             CONVERSIONS.Add(new County("Torbay", "TB", "Torbay"));
             CONVERSIONS.Add(new County("Torfaen", "TF", "Torfaen"));
@@ -395,27 +378,32 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Wigan", "WN", "Wigan"));
             CONVERSIONS.Add(new County("Wiltshire", "WT", "Wiltshire"));
             CONVERSIONS.Add(new County("Windsor and Maidenhead", "WC", "Windsor and Maidenhead"));
-            CONVERSIONS.Add(new County("Windsor", "WC", "Windsor and Maidenhead"));
             CONVERSIONS.Add(new County("Wirral", "WR", "Wirral"));
             CONVERSIONS.Add(new County("Wokingham", "WJ", "Wokingham"));
             CONVERSIONS.Add(new County("Wolverhampton", "WH", "City of Wolverhampton"));
             CONVERSIONS.Add(new County("Worcestershire", "WO", "Worcestershire"));
-            CONVERSIONS.Add(new County("Wrekin", "WP", "Telford and Wrekin"));
             CONVERSIONS.Add(new County("Wrexham", "WX", "Wrexham"));
             CONVERSIONS.Add(new County("York", "YK", "York"));
             #endregion
 
             // Alternate names for Modern Counties
-            CONVERSIONS.Add(new County("Barking", "BD", "Barking & Dagenham"));
-            CONVERSIONS.Add(new County("Bath", "BS", "Bath and North East Somerset"));
-            CONVERSIONS.Add(new County("Bedford", "BF", "Bedford"));
-            CONVERSIONS.Add(new County("Blackburn", "BB", "Blackburn with Darwen"));
-            CONVERSIONS.Add(new County("Brighton", "BH", "City of Brighton and Hove"));
-            CONVERSIONS.Add(new County("Bristol", "BZ", "City of Bristol"));
-            CONVERSIONS.Add(new County("Chester", "CC", "Cheshire West and Chester"));
-            CONVERSIONS.Add(new County("Tyneside", "NR", "North Tyneside"));
-            CONVERSIONS.Add(new County("Tyneside", "SY", "South Tyneside"));
-            CONVERSIONS.Add(new County("Warwickshire", "BI", "Birmingham"));
+            //CONVERSIONS.Add(new County("Barking", "BD", "Barking and Dagenham"));
+            //CONVERSIONS.Add(new County("Bath", "BS", "Bath and North East Somerset"));
+            //CONVERSIONS.Add(new County("Bedford", "BF", "Bedford"));
+            //CONVERSIONS.Add(new County("Blackburn", "BB", "Blackburn with Darwen"));
+            //CONVERSIONS.Add(new County("Brighton", "BH", "City of Brighton and Hove"));
+            //CONVERSIONS.Add(new County("Bristol", "BZ", "City of Bristol"));
+            //CONVERSIONS.Add(new County("Chelsea", "KC", "Royal Borough of Kensington and Chelsea"));
+            //CONVERSIONS.Add(new County("Chester", "CC", "Cheshire West and Chester"));
+            //CONVERSIONS.Add(new County("Hammersmith", "HF", "Hammersmith and Fulham"));
+            //CONVERSIONS.Add(new County("Kensington and Chelsea", "KC", "Royal Borough of Kensington and Chelsea"));
+            //CONVERSIONS.Add(new County("Kensington", "KC", "Royal Borough of Kensington and Chelsea"));
+            //CONVERSIONS.Add(new County("Telford", "WP", "Telford and Wrekin"));
+            //CONVERSIONS.Add(new County("Tyneside", "NR", "North Tyneside"));
+            //CONVERSIONS.Add(new County("Tyneside", "SY", "South Tyneside"));
+            //CONVERSIONS.Add(new County("Warwickshire", "BI", "Birmingham"));
+            //CONVERSIONS.Add(new County("Windsor", "WC", "Windsor and Maidenhead"));
+            //CONVERSIONS.Add(new County("Wrekin", "WP", "Telford and Wrekin"));
 
             // from parish maps
             CONVERSIONS.Add(new County("Anglesey", "IA", "Isle of Anglesey"));
@@ -558,7 +546,7 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Durham", "SM", "Stockton on Tees"));
             CONVERSIONS.Add(new County("Durham", "SV", "Sunderland"));
             CONVERSIONS.Add(new County("Durham", "SY", "South Tyneside"));
-            CONVERSIONS.Add(new County("Essex", "BD", "Barking & Dagenham"));
+            CONVERSIONS.Add(new County("Essex", "BD", "Barking and Dagenham"));
             CONVERSIONS.Add(new County("Essex", "CB", "Cambridgeshire"));
             CONVERSIONS.Add(new County("Essex", "EN", "Enfield"));
             CONVERSIONS.Add(new County("Essex", "EX", "Essex"));
@@ -701,14 +689,14 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("London", "EN", "Enfield"));
             CONVERSIONS.Add(new County("London", "ES", "East Sussex"));
             CONVERSIONS.Add(new County("London", "EX", "Essex"));
-            CONVERSIONS.Add(new County("London", "HF", "Hammersmith & Fulham"));
+            CONVERSIONS.Add(new County("London", "HF", "Hammersmith and Fulham"));
             CONVERSIONS.Add(new County("London", "HG", "Haringey"));
             CONVERSIONS.Add(new County("London", "HI", "Hillingdon"));
             CONVERSIONS.Add(new County("London", "HN", "Hackney"));
             CONVERSIONS.Add(new County("London", "HR", "Harrow"));
             CONVERSIONS.Add(new County("London", "HS", "Hounslow"));
             CONVERSIONS.Add(new County("London", "IL", "Islington"));
-            CONVERSIONS.Add(new County("London", "KC", "Royal Borough of Kensington & Chelsea"));
+            CONVERSIONS.Add(new County("London", "KC", "Royal Borough of Kensington and Chelsea"));
             CONVERSIONS.Add(new County("London", "KG", "Kingston upon Thames"));
             CONVERSIONS.Add(new County("London", "KT", "Kent"));
             CONVERSIONS.Add(new County("London", "LB", "Lambeth"));
@@ -742,14 +730,14 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Middlesex", "EN", "Enfield"));
             CONVERSIONS.Add(new County("Middlesex", "EX", "Essex"));
             CONVERSIONS.Add(new County("Middlesex", "HD", "Hertfordshire"));
-            CONVERSIONS.Add(new County("Middlesex", "HF", "Hammersmith & Fulham"));
+            CONVERSIONS.Add(new County("Middlesex", "HF", "Hammersmith and Fulham"));
             CONVERSIONS.Add(new County("Middlesex", "HG", "Haringey"));
             CONVERSIONS.Add(new County("Middlesex", "HI", "Hillingdon"));
             CONVERSIONS.Add(new County("Middlesex", "HN", "Hackney"));
             CONVERSIONS.Add(new County("Middlesex", "HR", "Harrow"));
             CONVERSIONS.Add(new County("Middlesex", "HS", "Hounslow"));
             CONVERSIONS.Add(new County("Middlesex", "IL", "Islington"));
-            CONVERSIONS.Add(new County("Middlesex", "KC", "Royal Borough of Kensington & Chelsea"));
+            CONVERSIONS.Add(new County("Middlesex", "KC", "Royal Borough of Kensington and Chelsea"));
             CONVERSIONS.Add(new County("Middlesex", "LB", "Lambeth"));
             CONVERSIONS.Add(new County("Middlesex", "LO", "City of London"));
             CONVERSIONS.Add(new County("Middlesex", "NH", "Newham"));
@@ -781,7 +769,7 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Norfolk", "SK", "Suffolk"));
             CONVERSIONS.Add(new County("North Yorkshire", "DL", "Darlington"));
             CONVERSIONS.Add(new County("North Yorkshire", "MB", "Middlesbrough"));
-            CONVERSIONS.Add(new County("North Yorkshire", "RC", "Redcar & Cleveland"));
+            CONVERSIONS.Add(new County("North Yorkshire", "RC", "Redcar and Cleveland"));
             CONVERSIONS.Add(new County("North Yorkshire", "SM", "Stockton on Tees"));
             CONVERSIONS.Add(new County("Northamptonshire", "BF", "Bedford"));
             CONVERSIONS.Add(new County("Northamptonshire", "BM", "Buckinghamshire"));
@@ -888,7 +876,7 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Surrey", "ES", "East Sussex"));
             CONVERSIONS.Add(new County("Surrey", "HP", "Hampshire"));
             CONVERSIONS.Add(new County("Surrey", "HS", "Hounslow"));
-            CONVERSIONS.Add(new County("Surrey", "KC", "Royal Borough of Kensington & Chelsea"));
+            CONVERSIONS.Add(new County("Surrey", "KC", "Royal Borough of Kensington and Chelsea"));
             CONVERSIONS.Add(new County("Surrey", "KG", "Kingston upon Thames"));
             CONVERSIONS.Add(new County("Surrey", "KT", "Kent"));
             CONVERSIONS.Add(new County("Surrey", "LB", "Lambeth"));
@@ -987,7 +975,7 @@ namespace FTAnalyzer.Mapping
             CONVERSIONS.Add(new County("Yorkshire", "NT", "Nottinghamshire"));
             CONVERSIONS.Add(new County("Yorkshire", "NY", "North Yorkshire"));
             CONVERSIONS.Add(new County("Yorkshire", "OH", "Oldham"));
-            CONVERSIONS.Add(new County("Yorkshire", "RC", "Redcar & Cleveland"));
+            CONVERSIONS.Add(new County("Yorkshire", "RC", "Redcar and Cleveland"));
             CONVERSIONS.Add(new County("Yorkshire", "RD", "Rochdale"));
             CONVERSIONS.Add(new County("Yorkshire", "RO", "Rotherham"));
             CONVERSIONS.Add(new County("Yorkshire", "SM", "Stockton on Tees"));

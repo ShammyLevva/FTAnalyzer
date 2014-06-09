@@ -212,10 +212,10 @@ namespace FTAnalyzer
         public static Region NORTH_SOMERSET = new Region("North Somerset", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region NEWCASTLE = new Region("Newcastle upon Tyne", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region OLDHAM = new Region("Oldham", Countries.ENGLAND, Region.Creation.MODERN);
-        public static Region PETERBOROUGH = new Region("City of Peterborough", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region PETERBOROUGH = new Region("Peterborough", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region POOLE = new Region("Poole", Countries.ENGLAND, Region.Creation.MODERN);
-        public static Region PORTSMOUTH = new Region("City of Portsmouth", Countries.ENGLAND, Region.Creation.MODERN);
-        public static Region PLYMOUTH = new Region("City of Plymouth", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region PORTSMOUTH = new Region("Portsmouth", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region PLYMOUTH = new Region("Plymouth", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region REDBRIDGE = new Region("Redbridge", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region REDCAR = new Region("Redcar and Cleveland", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region ROCHDALE = new Region("Rochdale", Countries.ENGLAND, Region.Creation.MODERN);
@@ -227,7 +227,7 @@ namespace FTAnalyzer
         public static Region SWINDON = new Region("Swindon", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region SEFTON = new Region("Sefton", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region SOUTH_GLOUCESTERSHIRE = new Region("South Gloucestershire", Countries.ENGLAND, Region.Creation.MODERN);
-        public static Region STOKE = new Region("City of Stoke-on-Trent", Countries.ENGLAND, Region.Creation.MODERN);
+        public static Region STOKE = new Region("Stoke-on-Trent", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region STOCKTON = new Region("Stockton-on-Tees", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region ST_HELENS = new Region("St Helens", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region SOUTHAMPTON = new Region("City of Southampton", Countries.ENGLAND, Region.Creation.MODERN);
@@ -255,7 +255,6 @@ namespace FTAnalyzer
         public static Region TELFORD = new Region("Telford and Wrekin", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region WIRRAL = new Region("Wirral", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region WEST_SUSSEX = new Region("West Sussex", Countries.ENGLAND, Region.Creation.MODERN);
-        public static Region WILTSHIRE = new Region("Wiltshire", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region WANDSWORTH = new Region("Wandsworth", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region WREXHAM = new Region("Wrexham", Countries.ENGLAND, Region.Creation.MODERN);
         public static Region YORK = new Region("York", Countries.ENGLAND, Region.Creation.MODERN);
@@ -497,9 +496,9 @@ namespace FTAnalyzer
                     RICHMOND_THAMES, SANDWELL, SALFORD, SWINDON, SEFTON, SOUTH_GLOUCESTERSHIRE, STOKE, 
                     STOCKTON, ST_HELENS, SOUTHAMPTON, SHEFFIELD, SOLIHULL, SUNDERLAND, SOUTHWARD, 
                     SOUTH_TYNESIDE, SUTTON, TORBAY, TOWER_HAMLETS, TRAFFORD, TAMESIDE, THURROCK, WALSALL, 
-                    WEST_BERKSHIRE, WINDSOR, WAKEFIELD, WALTHAM_FOREST, WARRINGTON, WOLVERHAMPTON, WOKINGHAM,
-                    WESTMINSTER, WIGAN, TELFORD, WIRRAL, WEST_SUSSEX, WILTSHIRE, WANDSWORTH, WREXHAM, YORK,
-                    SOUTHEND, SLOUGH, STOCKPORT
+                    WEST_BERKSHIRE, WINDSOR, WAKEFIELD, WALTHAM_FOREST, WARRINGTON, WOLVERHAMPTON, 
+                    WOKINGHAM, WESTMINSTER, WIGAN, TELFORD, WIRRAL, WEST_SUSSEX, WANDSWORTH, WREXHAM, 
+                    YORK, SOUTHEND, SLOUGH, STOCKPORT
             });
             AddEnglishRegionAlternates();
 
@@ -765,8 +764,6 @@ namespace FTAnalyzer
             SURREY.AddAlternateName("West Surrey");
             SUSSEX.AddAlternateName("Sx");
             SUSSEX.AddAlternateName("Ssx");
-            SUSSEX.AddAlternateName("East Sussex");
-            SUSSEX.AddAlternateName("West Sussex");
             WARWICK.AddAlternateName("Warw");
             WARWICK.AddAlternateName("Warks");
             WARWICK.AddAlternateName("War");
