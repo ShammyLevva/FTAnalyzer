@@ -37,11 +37,11 @@ namespace FTAnalyzer
         public static ModernCounty OS_BRACKNELL_FOREST = new ModernCounty("BC", "Bracknell Forest");
         public static ModernCounty OS_BARKING_AND_DAGENHAM = new ModernCounty("BD", "Barking and Dagenham");
         public static ModernCounty OS_BRIDGEND = new ModernCounty("BE", "Bridgend");
-        public static ModernCounty OS_BEDFORDSHIRE = new ModernCounty("BF", "Bedfordshire");
+        public static ModernCounty OS_BEDFORDSHIRE = new ModernCounty("BF", "Bedford");
         public static ModernCounty OS_BLAENAU_GWENT = new ModernCounty("BG", "Blaenau Gwent");
         public static ModernCounty OS_CITY_OF_BRIGHTON_AND_HOVE = new ModernCounty("BH", "City of Brighton and Hove");
         public static ModernCounty OS_BIRMINGHAM = new ModernCounty("BI", "Birmingham");
-        public static ModernCounty OS_CENTRAL_BEDFORDSHIRE = new ModernCounty("BK", "Central Bedfordshire"); // extra to gazetteer index
+        public static ModernCounty OS_CENTRAL_BEDFORDSHIRE = new ModernCounty("BK", "Central Bedfordshire"); 
         public static ModernCounty OS_BARNSLEY = new ModernCounty("BL", "Barnsley");
         public static ModernCounty OS_BUCKINGHAMSHIRE = new ModernCounty("BM", "Buckinghamshire");
         public static ModernCounty OS_BARNET = new ModernCounty("BN", "Barnet");
@@ -56,11 +56,11 @@ namespace FTAnalyzer
         public static ModernCounty OS_BRISTOL = new ModernCounty("BZ", "City of Bristol");
         public static ModernCounty OS_CALDERDALE = new ModernCounty("CA", "Calderdale");
         public static ModernCounty OS_CAMBRIDGESHIRE = new ModernCounty("CB", "Cambridgeshire");
+        public static ModernCounty OS_CHESHIRE_WEST_AND_CHESTER = new ModernCounty("CC", "Cheshire West and Chester");
         public static ModernCounty OS_CARDIFF = new ModernCounty("CD", "Cardiff");
         public static ModernCounty OS_CEREDIGION = new ModernCounty("CE", "Ceredigion");
         public static ModernCounty OS_CAERPHILLY = new ModernCounty("CF", "Caerphilly");
         public static ModernCounty OS_CHESHIRE_EAST = new ModernCounty("CH", "Cheshire East");
-        public static ModernCounty OS_CHESHIRE_WEST_AND_CHESTER = new ModernCounty("CC", "Cheshire West and Chester");
         public static ModernCounty OS_CLACKMANNANSHIRE = new ModernCounty("CL", "Clackmannanshire");
         public static ModernCounty OS_CAMDEN = new ModernCounty("CM", "Camden");
         public static ModernCounty OS_CORNWALL = new ModernCounty("CN", "Cornwall");
@@ -116,7 +116,7 @@ namespace FTAnalyzer
         public static ModernCounty OS_ISLE_OF_MAN = new ModernCounty("IM", "Isle of Man");
         public static ModernCounty OS_INVERCLYDE = new ModernCounty("IN", "Inverclyde");
         public static ModernCounty OS_ISLES_OF_SCILLY = new ModernCounty("IS", "Isles of Scilly");
-        public static ModernCounty OS_CITY_OF_INVERNESS = new ModernCounty("IV", "City of Inverness");
+        public static ModernCounty OS_CITY_OF_INVERNESS = new ModernCounty("IV", "City of Inverness"); // not on gazetteer but in index??
         public static ModernCounty OS_ISLE_OF_WIGHT = new ModernCounty("IW", "Isle of Wight");
         public static ModernCounty OS_ROYAL_BOROUGH_OF_KENSINGTON_AND_CHELSEA = new ModernCounty("KC", "Royal Borough of Kensington and Chelsea");
         public static ModernCounty OS_KINGSTON_UPON_THAMES = new ModernCounty("KG", "Kingston upon Thames");
@@ -1750,7 +1750,9 @@ namespace FTAnalyzer
             AddConversion(LINCS, OS_NORTH_LINCOLNSHIRE);
             AddConversion(LINCS, OS_NOTTINGHAMSHIRE);
             AddConversion(LINCS, OS_RUTLAND);
+            AddConversion(LONDON, OS_BARKING_AND_DAGENHAM);
             AddConversion(LONDON, OS_BARNET);
+            AddConversion(LONDON, OS_BEXLEY);
             AddConversion(LONDON, OS_BRACKNELL_FOREST);
             AddConversion(LONDON, OS_BRENT);
             AddConversion(LONDON, OS_BROMLEY);
@@ -1762,10 +1764,12 @@ namespace FTAnalyzer
             AddConversion(LONDON, OS_EAST_SUSSEX);
             AddConversion(LONDON, OS_ENFIELD);
             AddConversion(LONDON, OS_ESSEX);
+            AddConversion(LONDON, OS_GREENWICH);
             AddConversion(LONDON, OS_HACKNEY);
             AddConversion(LONDON, OS_HAMMERSMITH_AND_FULHAM);
             AddConversion(LONDON, OS_HARINGEY);
             AddConversion(LONDON, OS_HARROW);
+            AddConversion(LONDON, OS_HAVERING);
             AddConversion(LONDON, OS_HILLINGDON);
             AddConversion(LONDON, OS_HOUNSLOW);
             AddConversion(LONDON, OS_ISLINGTON);
@@ -1775,17 +1779,27 @@ namespace FTAnalyzer
             AddConversion(LONDON, OS_LEWISHAM);
             AddConversion(LONDON, OS_MERTON);
             AddConversion(LONDON, OS_NEWHAM);
+            AddConversion(LONDON, OS_REDBRIDGE);
             AddConversion(LONDON, OS_RICHMOND_UPON_THAMES);
             AddConversion(LONDON, OS_ROYAL_BOROUGH_OF_KENSINGTON_AND_CHELSEA);
             AddConversion(LONDON, OS_SOUTHWARK);
             AddConversion(LONDON, OS_SURREY);
             AddConversion(LONDON, OS_SUTTON);
             AddConversion(LONDON, OS_TOWER_HAMLETS);
+            AddConversion(LONDON, OS_WALTHAM_FOREST);
             AddConversion(LONDON, OS_WANDSWORTH);
             AddConversion(LONDON, OS_WEST_SUSSEX);
             AddConversion(LONDON, OS_WINDSOR_AND_MAIDENHEAD);
+            AddConversion(MANCHESTER, OS_BURY);
+            AddConversion(MANCHESTER, OS_BOLTON);
+            AddConversion(MANCHESTER, OS_MANCHESTER);
             AddConversion(MANCHESTER, OS_OLDHAM);
+            AddConversion(MANCHESTER, OS_ROCHDALE);
+            AddConversion(MANCHESTER, OS_SALFORD);
+            AddConversion(MANCHESTER, OS_STOCKPORT);
             AddConversion(MANCHESTER, OS_TAMESIDE);
+            AddConversion(MANCHESTER, OS_TRAFFORD);
+            AddConversion(MANCHESTER, OS_WIGAN);
             AddConversion(MERIONETH, OS_CONWY);
             AddConversion(MERIONETH, OS_DENBIGHSHIRE);
             AddConversion(MERIONETH, OS_GWYNEDD);
@@ -2130,7 +2144,6 @@ namespace FTAnalyzer
             AddConversion(LOTHIAN, OS_EAST_LOTHIAN);
             AddConversion(LOTHIAN, OS_WEST_LOTHIAN);
             AddConversion(LUTON, OS_LUTON);
-            AddConversion(MANCHESTER, OS_MANCHESTER);
             AddConversion(MEDWAY, OS_MEDWAY);
             AddConversion(MERTHYL, OS_MERTHYR_TYDFIL);
             AddConversion(MERTON, OS_MERTON);
