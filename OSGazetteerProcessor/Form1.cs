@@ -22,8 +22,9 @@ namespace OSGazetteerProcessor
         private List<Feature> englishParishes;
         private List<Feature> scottishParishes;
         private List<Feature> oldEnglishCounties;
+        private List<string> modernCounties;
 
-        private IDictionary<string, ISet<Tuple<string,string>>> oldCountiesToCounties;
+        private IDictionary<string, ISet<Tuple<string, string>>> oldCountiesToCounties;
 
         public Form1()
         {
@@ -116,7 +117,7 @@ namespace OSGazetteerProcessor
                 IEnumerable<OS50kGazetteer> toSearch = OS50k.Where(x => x.ParishName == null || x.ParishName.Length == 0);
                 if (originalToSearch == 0)
                     originalToSearch = toSearch.Count();
-                foreach(OS50kGazetteer os50k in toSearch)
+                foreach (OS50kGazetteer os50k in toSearch)
                 {
                     if (geom.Intersects(os50k.BufferedPoint))
                     {
@@ -137,7 +138,7 @@ namespace OSGazetteerProcessor
 
         private void ProcessOldCounties()
         {
-            oldCountiesToCounties = new Dictionary<string, ISet<Tuple<string,string>>>();
+            oldCountiesToCounties = new Dictionary<string, ISet<Tuple<string, string>>>();
 
             foreach (Feature f in oldEnglishCounties)
             {
@@ -146,16 +147,26 @@ namespace OSGazetteerProcessor
                 {
                     if (geometry.Intersects(os50k.Point))
                     {
-                        ISet<Tuple<string,string>> oldCounties = null;
+                        ISet<Tuple<string, string>> oldCounties = null;
                         string name = (string)f.Attributes["NAME"];
                         if (!oldCountiesToCounties.TryGetValue(name, out oldCounties))
                         {
-                            oldCounties = new SortedSet<Tuple<string,string>>();
+                            oldCounties = new SortedSet<Tuple<string, string>>();
                             oldCountiesToCounties.Add(name, oldCounties);
                         }
                         oldCounties.Add(Tuple.Create(os50k.CountyCode, os50k.CountyName));
+                        modernCounties.Add("'" + os50k.CountyCode + "','" + os50k.CountyName + "'");
                     }
                 }
+            }
+        }
+
+        private void SaveModernCounties()
+        {
+            using (StreamWriter writer = new StreamWriter(@"C:\Maps\FTAnalyzer\modern counties.txt"))
+            {
+                foreach (string c in modernCounties)
+                    writer.WriteLine(c);
             }
         }
 
@@ -179,7 +190,7 @@ namespace OSGazetteerProcessor
                 }
             }
         }
-            
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -201,6 +212,21 @@ namespace OSGazetteerProcessor
             ProcessOldCounties();
             SaveCounties();
             MessageBox.Show("Finished");
+        }
+
+        private void getCountiesFromGazetteerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadOS50kGazetteer();
+            ProcessGazetteerCounties();
+            SaveModernCounties();
+            MessageBox.Show("Finished Modern Counties");
+        }
+
+        private void ProcessGazetteerCounties()
+        {
+            List<string> results = OS50k.Select(x => ("'" + x.CountyCode + "','" + x.CountyName + "'")).Distinct().ToList<string>();
+            results.Sort();
+            modernCounties = results;
         }
     }
 }

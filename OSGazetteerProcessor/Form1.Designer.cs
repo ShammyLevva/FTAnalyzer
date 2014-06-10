@@ -34,6 +34,7 @@
             this.processToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generateOutputFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.getCountiesFromGazetteerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,7 +67,8 @@
             // processToolStripMenuItem
             // 
             this.processToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.generateOutputFileToolStripMenuItem});
+            this.generateOutputFileToolStripMenuItem,
+            this.getCountiesFromGazetteerToolStripMenuItem});
             this.processToolStripMenuItem.Name = "processToolStripMenuItem";
             this.processToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.processToolStripMenuItem.Text = "Process";
@@ -74,7 +76,7 @@
             // generateOutputFileToolStripMenuItem
             // 
             this.generateOutputFileToolStripMenuItem.Name = "generateOutputFileToolStripMenuItem";
-            this.generateOutputFileToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.generateOutputFileToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.generateOutputFileToolStripMenuItem.Text = "Generate Output File";
             this.generateOutputFileToolStripMenuItem.Click += new System.EventHandler(this.generateOutputFileToolStripMenuItem_Click);
             // 
@@ -86,6 +88,13 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(724, 275);
             this.textBox1.TabIndex = 1;
+            // 
+            // getCountiesFromGazetteerToolStripMenuItem
+            // 
+            this.getCountiesFromGazetteerToolStripMenuItem.Name = "getCountiesFromGazetteerToolStripMenuItem";
+            this.getCountiesFromGazetteerToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.getCountiesFromGazetteerToolStripMenuItem.Text = "Get Counties from Gazetteer";
+            this.getCountiesFromGazetteerToolStripMenuItem.Click += new System.EventHandler(this.getCountiesFromGazetteerToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -112,6 +121,7 @@
         private System.Windows.Forms.ToolStripMenuItem processToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generateOutputFileToolStripMenuItem;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ToolStripMenuItem getCountiesFromGazetteerToolStripMenuItem;
 
     }
 }
