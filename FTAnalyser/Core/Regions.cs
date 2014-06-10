@@ -1277,23 +1277,217 @@ namespace FTAnalyzer
             AddConversion(WEST_LOTHIAN, OS_WEST_LOTHIAN);
             AddConversion(WIGTOWN, OS_DUMFRIES_AND_GALLOWAY);
 
-            //AddConversion(CENTRAL_SCOT, );
-            //AddConversion(ARGYLL_BUTE, );
-            //AddConversion(GRAMPIAN, );
-            //AddConversion(STRATHCLYDE, );
-            //AddConversion(TAYSIDE, );
-            //AddConversion(Merseyside
-            //AddConversion(Tyne and Wear
-            //AddConversion(West Midlands
-            //AddConversion(Avon
-            //AddConversion(Cleveland
-            //AddConversion(Humberside
-            //AddConversion(Hereford and Worcester
-            //AddConversion(Clwyd
-            //AddConversion(Dyfed
-            //AddConversion(Gwent
-            //AddConversion(Mid Glamorgan
-            //AddConversion(South Glamorgan
+            #region 1974 LG act regions
+            AddConversion(CENTRAL_SCOT, OS_CLACKMANNANSHIRE);
+            AddConversion(CENTRAL_SCOT, OS_EAST_DUNBARTONSHIRE);
+            AddConversion(CENTRAL_SCOT, OS_FALKIRK);
+            AddConversion(CENTRAL_SCOT, OS_FIFE);
+            AddConversion(CENTRAL_SCOT, OS_NORTH_LANARKSHIRE);
+            AddConversion(CENTRAL_SCOT, OS_PERTH_AND_KINROSS);
+            AddConversion(CENTRAL_SCOT, OS_STIRLING);
+            AddConversion(CENTRAL_SCOT, OS_WEST_LOTHIAN);
+            AddConversion(GRAMPIAN, OS_ABERDEENSHIRE);
+            AddConversion(GRAMPIAN, OS_ABERDEEN_CITY);
+            AddConversion(GRAMPIAN, OS_ANGUS);
+            AddConversion(GRAMPIAN, OS_HIGHLAND);
+            AddConversion(GRAMPIAN, OS_MORAY);
+            AddConversion(STRATHCLYDE, OS_ARGYLL_AND_BUTE);
+            AddConversion(STRATHCLYDE, OS_DUMFRIES_AND_GALLOWAY);
+            AddConversion(STRATHCLYDE, OS_EAST_AYRSHIRE);
+            AddConversion(STRATHCLYDE, OS_EAST_DUNBARTONSHIRE);
+            AddConversion(STRATHCLYDE, OS_EAST_RENFREWSHIRE);
+            AddConversion(STRATHCLYDE, OS_GLASGOW_CITY);
+            AddConversion(STRATHCLYDE, OS_INVERCLYDE);
+            AddConversion(STRATHCLYDE, OS_NORTH_AYRSHIRE);
+            AddConversion(STRATHCLYDE, OS_NORTH_LANARKSHIRE);
+            AddConversion(STRATHCLYDE, OS_RENFREWSHIRE);
+            AddConversion(STRATHCLYDE, OS_SCOTTISH_BORDERS);
+            AddConversion(STRATHCLYDE, OS_SOUTH_AYRSHIRE);
+            AddConversion(STRATHCLYDE, OS_SOUTH_LANARKSHIRE);
+            AddConversion(STRATHCLYDE, OS_STIRLING);
+            AddConversion(STRATHCLYDE, OS_WEST_DUNBARTONSHIRE);
+            AddConversion(STRATHCLYDE, OS_WEST_LOTHIAN);
+            AddConversion(TAYSIDE, OS_ABERDEENSHIRE);
+            AddConversion(TAYSIDE, OS_ANGUS);
+            AddConversion(TAYSIDE, OS_CLACKMANNANSHIRE);
+            AddConversion(TAYSIDE, OS_DUNDEE_CITY);
+            AddConversion(TAYSIDE, OS_FIFE);
+            AddConversion(TAYSIDE, OS_PERTH_AND_KINROSS);
+            AddConversion(TAYSIDE, OS_STIRLING);
+            #endregion
+
+            #region English 1974 LG Act Regions
+            AddConversion(MERSEYSIDE, OS_BLACKBURN_WITH_DARWEN);
+            AddConversion(MERSEYSIDE, OS_BLACKPOOL);
+            AddConversion(MERSEYSIDE, OS_BOLTON);
+            AddConversion(MERSEYSIDE, OS_BURY);
+            AddConversion(MERSEYSIDE, OS_CALDERDALE);
+            AddConversion(MERSEYSIDE, OS_CHESHIRE_EAST);
+            AddConversion(MERSEYSIDE, OS_CHESHIRE_WEST_AND_CHESTER);
+            AddConversion(MERSEYSIDE, OS_CUMBRIA);
+            AddConversion(MERSEYSIDE, OS_DERBYSHIRE);
+            AddConversion(MERSEYSIDE, OS_FLINTSHIRE);
+            AddConversion(MERSEYSIDE, OS_HALTON);
+            AddConversion(MERSEYSIDE, OS_KNOWSLEY);
+            AddConversion(MERSEYSIDE, OS_LANCASHIRE);
+            AddConversion(MERSEYSIDE, OS_LIVERPOOL);
+            AddConversion(MERSEYSIDE, OS_MANCHESTER);
+            AddConversion(MERSEYSIDE, OS_NORTH_YORKSHIRE);
+            AddConversion(MERSEYSIDE, OS_OLDHAM);
+            AddConversion(MERSEYSIDE, OS_ROCHDALE);
+            AddConversion(MERSEYSIDE, OS_SALFORD);
+            AddConversion(MERSEYSIDE, OS_SEFTON);
+            AddConversion(MERSEYSIDE, OS_SHROPSHIRE);
+            AddConversion(MERSEYSIDE, OS_STAFFORDSHIRE);
+            AddConversion(MERSEYSIDE, OS_STOCKPORT);
+            AddConversion(MERSEYSIDE, OS_ST_HELENS);
+            AddConversion(MERSEYSIDE, OS_TAMESIDE);
+            AddConversion(MERSEYSIDE, OS_TRAFFORD);
+            AddConversion(MERSEYSIDE, OS_WARRINGTON);
+            AddConversion(MERSEYSIDE, OS_WIGAN);
+            AddConversion(MERSEYSIDE, OS_WIRRAL);
+            AddConversion(MERSEYSIDE, OS_WREXHAM);
+            AddConversion(TYNE_WEAR, OS_CUMBRIA);
+            AddConversion(TYNE_WEAR, OS_DARLINGTON);
+            AddConversion(TYNE_WEAR, OS_DURHAM);
+            AddConversion(TYNE_WEAR, OS_GATESHEAD);
+            AddConversion(TYNE_WEAR, OS_HARTLEPOOL);
+            AddConversion(TYNE_WEAR, OS_MIDDLESBROUGH);
+            AddConversion(TYNE_WEAR, OS_NEWCASTLE_UPON_TYNE);
+            AddConversion(TYNE_WEAR, OS_NORTHUMBERLAND);
+            AddConversion(TYNE_WEAR, OS_NORTH_TYNESIDE);
+            AddConversion(TYNE_WEAR, OS_NORTH_YORKSHIRE);
+            AddConversion(TYNE_WEAR, OS_SCOTTISH_BORDERS);
+            AddConversion(TYNE_WEAR, OS_SOUTH_TYNESIDE);
+            AddConversion(TYNE_WEAR, OS_STOCKTON_ON_TEES);
+            AddConversion(TYNE_WEAR, OS_SUNDERLAND);
+            AddConversion(WEST_MIDLANDS, OS_BIRMINGHAM);
+            AddConversion(WEST_MIDLANDS, OS_BUCKINGHAMSHIRE);
+            AddConversion(WEST_MIDLANDS, OS_CHESHIRE_EAST);
+            AddConversion(WEST_MIDLANDS, OS_CITY_OF_STOKE_ON_TRENT);
+            AddConversion(WEST_MIDLANDS, OS_CITY_OF_WOLVERHAMPTON);
+            AddConversion(WEST_MIDLANDS, OS_COVENTRY);
+            AddConversion(WEST_MIDLANDS, OS_DERBYSHIRE);
+            AddConversion(WEST_MIDLANDS, OS_DUDLEY);
+            AddConversion(WEST_MIDLANDS, OS_GLOUCESTERSHIRE);
+            AddConversion(WEST_MIDLANDS, OS_HEREFORDSHIRE);
+            AddConversion(WEST_MIDLANDS, OS_LEICESTERSHIRE);
+            AddConversion(WEST_MIDLANDS, OS_NORTHAMPTONSHIRE);
+            AddConversion(WEST_MIDLANDS, OS_OXFORDSHIRE);
+            AddConversion(WEST_MIDLANDS, OS_SANDWELL);
+            AddConversion(WEST_MIDLANDS, OS_SHROPSHIRE);
+            AddConversion(WEST_MIDLANDS, OS_SOLIHULL);
+            AddConversion(WEST_MIDLANDS, OS_SOUTH_TYNESIDE);
+            AddConversion(WEST_MIDLANDS, OS_STAFFORDSHIRE);
+            AddConversion(WEST_MIDLANDS, OS_WALSALL);
+            AddConversion(WEST_MIDLANDS, OS_WARWICKSHIRE);
+            AddConversion(WEST_MIDLANDS, OS_WORCESTERSHIRE);
+            AddConversion(AVON, OS_BATH_AND_NORTH_EAST_SOMERSET);
+            AddConversion(AVON, OS_BRISTOL);
+            AddConversion(AVON, OS_DEVON);
+            AddConversion(AVON, OS_DORSET);
+            AddConversion(AVON, OS_GLOUCESTERSHIRE);
+            AddConversion(AVON, OS_HEREFORDSHIRE);
+            AddConversion(AVON, OS_MONMOUTHSHIRE);
+            AddConversion(AVON, OS_NORTH_SOMERSET);
+            AddConversion(AVON, OS_OXFORDSHIRE);
+            AddConversion(AVON, OS_SOMERSET);
+            AddConversion(AVON, OS_SOUTH_GLOUCESTERSHIRE);
+            AddConversion(AVON, OS_SWINDON);
+            AddConversion(AVON, OS_WARWICKSHIRE);
+            AddConversion(AVON, OS_WILTSHIRE);
+            AddConversion(AVON, OS_WORCESTERSHIRE);
+            AddConversion(CLEVELAND, OS_CUMBRIA);
+            AddConversion(CLEVELAND, OS_DARLINGTON);
+            AddConversion(CLEVELAND, OS_DURHAM);
+            AddConversion(CLEVELAND, OS_GATESHEAD);
+            AddConversion(CLEVELAND, OS_HARTLEPOOL);
+            AddConversion(CLEVELAND, OS_MIDDLESBROUGH);
+            AddConversion(CLEVELAND, OS_NEWCASTLE_UPON_TYNE);
+            AddConversion(CLEVELAND, OS_NORTHUMBERLAND);
+            AddConversion(CLEVELAND, OS_NORTH_TYNESIDE);
+            AddConversion(CLEVELAND, OS_NORTH_YORKSHIRE);
+            AddConversion(CLEVELAND, OS_REDCAR_AND_CLEVELAND);
+            AddConversion(CLEVELAND, OS_SOUTH_TYNESIDE);
+            AddConversion(CLEVELAND, OS_STOCKTON_ON_TEES);
+            AddConversion(CLEVELAND, OS_SUNDERLAND);
+            AddConversion(HUMBERSIDE, OS_BARNSLEY);
+            AddConversion(HUMBERSIDE, OS_BRADFORD);
+            AddConversion(HUMBERSIDE, OS_CALDERDALE);
+            AddConversion(HUMBERSIDE, OS_DERBYSHIRE);
+            AddConversion(HUMBERSIDE, OS_DONCASTER);
+            AddConversion(HUMBERSIDE, OS_DURHAM);
+            AddConversion(HUMBERSIDE, OS_EAST_RIDING_OF_YORKSHIRE);
+            AddConversion(HUMBERSIDE, OS_KIRKLEES);
+            AddConversion(HUMBERSIDE, OS_LANCASHIRE);
+            AddConversion(HUMBERSIDE, OS_LEEDS);
+            AddConversion(HUMBERSIDE, OS_LEICESTERSHIRE);
+            AddConversion(HUMBERSIDE, OS_LINCOLNSHIRE);
+            AddConversion(HUMBERSIDE, OS_MANCHESTER);
+            AddConversion(HUMBERSIDE, OS_NORTHAMPTONSHIRE);
+            AddConversion(HUMBERSIDE, OS_NORTH_EAST_LINCOLNSHIRE);
+            AddConversion(HUMBERSIDE, OS_NORTH_LINCOLNSHIRE);
+            AddConversion(HUMBERSIDE, OS_NORTH_YORKSHIRE);
+            AddConversion(HUMBERSIDE, OS_NOTTINGHAMSHIRE);
+            AddConversion(HUMBERSIDE, OS_OLDHAM);
+            AddConversion(HUMBERSIDE, OS_ROCHDALE);
+            AddConversion(HUMBERSIDE, OS_ROTHERHAM);
+            AddConversion(HUMBERSIDE, OS_RUTLAND);
+            AddConversion(HUMBERSIDE, OS_SHEFFIELD);
+            AddConversion(HUMBERSIDE, OS_TAMESIDE);
+            AddConversion(HUMBERSIDE, OS_WAKEFIELD);
+            AddConversion(HEREFORD_WORCESTER, OS_BIRMINGHAM);
+            AddConversion(HEREFORD_WORCESTER, OS_DUDLEY);
+            AddConversion(HEREFORD_WORCESTER, OS_GLOUCESTERSHIRE);
+            AddConversion(HEREFORD_WORCESTER, OS_HEREFORDSHIRE);
+            AddConversion(HEREFORD_WORCESTER, OS_MONMOUTHSHIRE);
+            AddConversion(HEREFORD_WORCESTER, OS_POWYS);
+            AddConversion(HEREFORD_WORCESTER, OS_SANDWELL);
+            AddConversion(HEREFORD_WORCESTER, OS_SHROPSHIRE);
+            AddConversion(HEREFORD_WORCESTER, OS_SOLIHULL);
+            AddConversion(HEREFORD_WORCESTER, OS_STAFFORDSHIRE);
+            AddConversion(HEREFORD_WORCESTER, OS_WARWICKSHIRE);
+            AddConversion(HEREFORD_WORCESTER, OS_WORCESTERSHIRE);
+            #endregion 
+
+            #region Wales 1974 LG act regions
+            AddConversion(CLWYD, OS_CHESHIRE_WEST_AND_CHESTER);
+            AddConversion(CLWYD, OS_CONWY);
+            AddConversion(CLWYD, OS_DENBIGHSHIRE);
+            AddConversion(CLWYD, OS_FLINTSHIRE);
+            AddConversion(CLWYD, OS_GWYNEDD);
+            AddConversion(CLWYD, OS_POWYS);
+            AddConversion(CLWYD, OS_SHROPSHIRE);
+            AddConversion(CLWYD, OS_WREXHAM);
+            AddConversion(DYFED, OS_CARMARTHENSHIRE);
+            AddConversion(DYFED, OS_CEREDIGION);
+            AddConversion(DYFED, OS_GWYNEDD);
+            AddConversion(DYFED, OS_NEATH_PORT_TALBOT);
+            AddConversion(DYFED, OS_PEMBROKESHIRE);
+            AddConversion(DYFED, OS_POWYS);
+            AddConversion(DYFED, OS_SWANSEA);
+            AddConversion(GWENT, OS_BLAENAU_GWENT);
+            AddConversion(GWENT, OS_CAERPHILLY);
+            AddConversion(GWENT, OS_CARDIFF);
+            AddConversion(GWENT, OS_GLOUCESTERSHIRE);
+            AddConversion(GWENT, OS_HEREFORDSHIRE);
+            AddConversion(GWENT, OS_MERTHYR_TYDFIL);
+            AddConversion(GWENT, OS_MONMOUTHSHIRE);
+            AddConversion(GWENT, OS_NEWPORT);
+            AddConversion(GWENT, OS_POWYS);
+            AddConversion(GWENT, OS_RHONDDA_CYNON_TAFF);
+            AddConversion(GWENT, OS_TORFAEN);
+            AddConversion(GWYNEDD, OS_GWYNEDD);
+            AddConversion(GWYNEDD, OS_ISLE_OF_ANGLESEY);
+            AddConversion(MID_GLAMORGAN, OS_BRIDGEND);
+            AddConversion(MID_GLAMORGAN, OS_MERTHYR_TYDFIL);
+            AddConversion(MID_GLAMORGAN, OS_RHONDDA_CYNON_TAFF);
+            AddConversion(POWYS, OS_POWYS);
+            AddConversion(SOUTH_GLAMORGAN, OS_CARDIFF);
+            AddConversion(SOUTH_GLAMORGAN, OS_VALE_OF_GLAMORGAN);
+            AddConversion(WEST_GLAMORGAN, OS_SWANSEA);
+            AddConversion(WEST_GLAMORGAN, OS_NEATH_PORT_TALBOT);
+            #endregion
 
             #region from parish maps
             AddConversion(ANGLESEY, OS_ISLE_OF_ANGLESEY);
@@ -1786,7 +1980,6 @@ namespace FTAnalyzer
             AddConversion(WESTMORLAND, OS_CUMBRIA);
             AddConversion(WESTMORLAND, OS_DURHAM);
             AddConversion(WESTMORLAND, OS_LANCASHIRE);
-            AddConversion(WEST_GLAMORGAN, OS_SWANSEA);
             AddConversion(WEST_YORKSHIRE, OS_BARNSLEY);
             AddConversion(WEST_YORKSHIRE, OS_BRADFORD);
             AddConversion(WEST_YORKSHIRE, OS_CALDERDALE);
@@ -1908,7 +2101,6 @@ namespace FTAnalyzer
             AddConversion(GATESHEAD, OS_GATESHEAD);
             AddConversion(GLASGOW_CITY, OS_GLASGOW_CITY);
             AddConversion(GREENWICH, OS_GREENWICH);
-            AddConversion(GWYNEDD, OS_GWYNEDD);
             AddConversion(HACKNEY, OS_HACKNEY);
             AddConversion(HALTON, OS_HALTON);
             AddConversion(HAMMERSMITH, OS_HAMMERSMITH_AND_FULHAM);
@@ -1962,7 +2154,6 @@ namespace FTAnalyzer
             AddConversion(PLYMOUTH, OS_CITY_OF_PLYMOUTH);
             AddConversion(POOLE, OS_POOLE);
             AddConversion(PORTSMOUTH, OS_CITY_OF_PORTSMOUTH);
-            AddConversion(POWYS, OS_POWYS);
             AddConversion(READING, OS_READING);
             AddConversion(REDBRIDGE, OS_REDBRIDGE);
             AddConversion(REDCAR, OS_REDCAR_AND_CLEVELAND);

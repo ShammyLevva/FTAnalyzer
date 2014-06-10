@@ -464,6 +464,7 @@
       <!-- Wales -->
       <RegionTypo from="Caernarvonshire"  to="Caernarfon" />
       <RegionTypo from="Caernarvon"       to="Caernarfon" />
+      <RegionTypo from="Carnarvon"        to="Caernarfon" />
       <RegionTypo from="Cardiganshire"    to="Ceredigion" />
       <RegionTypo from="Cardigan"         to="Ceredigion" />
       <RegionTypo from="Carmarthenshire"  to="Carmarthen" />
