@@ -210,7 +210,7 @@ namespace FTAnalyzer
             {
                 if (region.CountyCodes.Count == 0 &&
                     (region.Country == Countries.ENGLAND || region.Country == Countries.WALES || region.Country == Countries.SCOTLAND))
-                    Console.WriteLine("No valid county for region: " + region);
+                    Console.WriteLine("Missing Conversions for region: " + region);
             }
         }
 

@@ -21,7 +21,7 @@ namespace FTAnalyzer
         public static ISet<Region> AUSTRALIAN_REGIONS;
         public static ISet<Region> NEW_ZEALAND_REGIONS;
 
-        public static IDictionary<string, Region> PREFERRED_REGIONS;
+        public static IList<Region> PREFERRED_REGIONS;
         public static IDictionary<string, Region> VALID_REGIONS;
 
         public static readonly Dictionary<Region, List<ModernCounty>> CONVERSIONS = new Dictionary<Region, List<ModernCounty>>();
@@ -822,7 +822,7 @@ namespace FTAnalyzer
             #endregion
 
             #region Valid Regions
-            PREFERRED_REGIONS = new Dictionary<string, Region>();
+            PREFERRED_REGIONS = new List<Region>();
             VALID_REGIONS = new Dictionary<string, Region>();
             AppendValidRegions(UK_REGIONS);
             AppendValidRegions(IRISH_REGIONS);
@@ -832,6 +832,7 @@ namespace FTAnalyzer
             #endregion
 
             AddConversions();
+            SetRegionsConversions();
         }
         #endregion
 
@@ -853,7 +854,7 @@ namespace FTAnalyzer
             foreach (Region r in regions)
             {
                 VALID_REGIONS.Add(r.PreferredName, r);
-                PREFERRED_REGIONS.Add(r.PreferredName, r);
+                PREFERRED_REGIONS.Add(r);
                 foreach (string alternate in r.AlternativeNames)
                     VALID_REGIONS.Add(alternate, r);
             }
@@ -866,7 +867,7 @@ namespace FTAnalyzer
 
         public static bool IsPreferredRegion(string region)
         {
-            return PREFERRED_REGIONS.ContainsKey(region);
+            return PREFERRED_REGIONS.Any(x => x.PreferredName.Equals(region));
         }
 
         public static Region GetRegion(string region)
@@ -1168,22 +1169,6 @@ namespace FTAnalyzer
         #endregion
 
         #region Conversions
-        private static void AddConversion(Region region, ModernCounty county)
-        {
-            List<ModernCounty> counties;
-            if (CONVERSIONS.ContainsKey(region))
-                counties = CONVERSIONS[region];
-            else
-            {
-                counties = new List<ModernCounty>();
-                CONVERSIONS.Add(region, counties);
-            }
-            if (counties.Contains(county))
-                Console.WriteLine("Duplicate county: " + region.PreferredName + " mapped to " + county.CountyName);
-            else
-                counties.Add(county);
-        }
-
         private static void AddConversions()
         {
             AddConversion(ABERDEEN, OS_ABERDEENSHIRE);
@@ -1291,6 +1276,24 @@ namespace FTAnalyzer
             AddConversion(WEST_LOTHIAN, OS_SOUTH_LANARKSHIRE);
             AddConversion(WEST_LOTHIAN, OS_WEST_LOTHIAN);
             AddConversion(WIGTOWN, OS_DUMFRIES_AND_GALLOWAY);
+
+            //AddConversion(CENTRAL_SCOT, );
+            //AddConversion(ARGYLL_BUTE, );
+            //AddConversion(GRAMPIAN, );
+            //AddConversion(STRATHCLYDE, );
+            //AddConversion(TAYSIDE, );
+            //AddConversion(Merseyside
+            //AddConversion(Tyne and Wear
+            //AddConversion(West Midlands
+            //AddConversion(Avon
+            //AddConversion(Cleveland
+            //AddConversion(Humberside
+            //AddConversion(Hereford and Worcester
+            //AddConversion(Clwyd
+            //AddConversion(Dyfed
+            //AddConversion(Gwent
+            //AddConversion(Mid Glamorgan
+            //AddConversion(South Glamorgan
 
             #region from parish maps
             AddConversion(ANGLESEY, OS_ISLE_OF_ANGLESEY);
@@ -1857,6 +1860,7 @@ namespace FTAnalyzer
             #endregion
 
             #region extra mappings for Modern Counties - as per Gazetteer
+            AddConversion(ARGYLL_BUTE, OS_ARGYLL_AND_BUTE);
             AddConversion(BARKING, OS_BARKING_AND_DAGENHAM);
             AddConversion(BARNET, OS_BARNET);
             AddConversion(BARNSLEY, OS_BARNSLEY);
@@ -1887,6 +1891,7 @@ namespace FTAnalyzer
             AddConversion(CROYDON, OS_CROYDON);
             AddConversion(CUMBRIA, OS_CUMBRIA);
             AddConversion(DARLINGTON, OS_DARLINGTON);
+            AddConversion(DERBY_CITY, OS_CITY_OF_DERBY);
             AddConversion(DONCASTER, OS_DONCASTER);
             AddConversion(DUDLEY, OS_DUDLEY);
             AddConversion(DUMFRIES_GALLOWAY, OS_DUMFRIES_AND_GALLOWAY);
@@ -1915,6 +1920,7 @@ namespace FTAnalyzer
             AddConversion(HILLINGDON, OS_HILLINGDON);
             AddConversion(HOUNSLOW, OS_HOUNSLOW);
             AddConversion(INVERCLYDE, OS_INVERCLYDE);
+            AddConversion(INVERNESS_CITY, OS_CITY_OF_INVERNESS);
             AddConversion(IOM, OS_ISLE_OF_MAN);
             AddConversion(IOW, OS_ISLE_OF_WIGHT);
             AddConversion(ISLES_OF_SCILLY, OS_ISLES_OF_SCILLY);
@@ -2012,6 +2018,30 @@ namespace FTAnalyzer
             AddConversion(YORK, OS_YORK);
             #endregion
         }
+
+        #region Conversion Functions
+        private static void AddConversion(Region region, ModernCounty county)
+        {
+            List<ModernCounty> counties;
+            if (CONVERSIONS.ContainsKey(region))
+                counties = CONVERSIONS[region];
+            else
+            {
+                counties = new List<ModernCounty>();
+                CONVERSIONS.Add(region, counties);
+            }
+            if (counties.Contains(county))
+                Console.WriteLine("Duplicate county: " + region.PreferredName + " mapped to " + county.CountyName);
+            else
+                counties.Add(county);
+        }
+
+        private static void SetRegionsConversions()
+        {
+            foreach (Region region in PREFERRED_REGIONS)
+                region.CountyCodes = GetCounties(region);
+        }
+        #endregion
         #endregion
     }
 }

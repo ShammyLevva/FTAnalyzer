@@ -15,7 +15,7 @@ namespace FTAnalyzer
         public List<string> AlternativeNames { get; private set; }
         public string ISOcode { get; set; }
         public Creation RegionType { get; private set; }
-        public List<ModernCounty> CountyCodes { get; private set; }
+        public List<ModernCounty> CountyCodes { get; set; }
         
         public Region(string region, string country, Creation regionType)
         {
@@ -24,9 +24,7 @@ namespace FTAnalyzer
             AlternativeNames = new List<string>();
             ISOcode = string.Empty;
             RegionType = regionType;
-            CountyCodes = Regions.GetCounties(this);
-            if ((Countries.IsEnglandWales(country) || country == Countries.SCOTLAND) && (CountyCodes == null || CountyCodes.Count == 0))
-                Console.WriteLine("Missing new county codes for: " + region);
+            CountyCodes = null;
         }
 
         public void AddAlternateName(string name)

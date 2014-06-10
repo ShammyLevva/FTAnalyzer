@@ -463,7 +463,9 @@
 
       <!-- Wales -->
       <RegionTypo from="Caernarvonshire"  to="Caernarfon" />
-      <RegionTypo from="Cardiganshire"    to="Cardigan" />
+      <RegionTypo from="Caernarvon"       to="Caernarfon" />
+      <RegionTypo from="Cardiganshire"    to="Ceredigion" />
+      <RegionTypo from="Cardigan"         to="Ceredigion" />
       <RegionTypo from="Carmarthenshire"  to="Carmarthen" />
       <RegionTypo from="Brecknockshire"   to="Brecon" />
       <RegionTypo from="Breconshire"      to="Brecon" />
@@ -652,7 +654,7 @@
       <ChapmanCode chapmanCode="AGY" countyName="Anglesey"         />
       <ChapmanCode chapmanCode="BRE" countyName="Brecon"           />
       <ChapmanCode chapmanCode="CAE" countyName="Caernarfon"       />
-      <ChapmanCode chapmanCode="CGN" countyName="Cardigan"         />
+      <ChapmanCode chapmanCode="CGN" countyName="Ceredigion"       />
       <ChapmanCode chapmanCode="CMN" countyName="Carmarthen"       />
       <ChapmanCode chapmanCode="DEN" countyName="Denbigh"          />
       <ChapmanCode chapmanCode="FLN" countyName="Flint"            />
@@ -789,7 +791,7 @@
       <CountryToRegion region="Anglesey"            country="Wales" />
       <CountryToRegion region="Brecon"              country="Wales" />
       <CountryToRegion region="Caernarfon"          country="Wales" />
-      <CountryToRegion region="Cardigan"            country="Wales" />
+      <CountryToRegion region="Ceredigion"          country="Wales" />
       <CountryToRegion region="Carmarthen"          country="Wales" />
       <CountryToRegion region="Denbigh"             country="Wales" />
       <CountryToRegion region="Flint"               country="Wales" />
@@ -1110,7 +1112,7 @@
       <Lookup code="CAE" county="Caernarfon" />
       <Lookup code="CAI" county="Caithness" />
       <Lookup code="CAM" county="Cambridgeshire" />
-      <Lookup code="CGN" county="Cardigan" />
+      <Lookup code="CGN" county="Ceredigion" />
       <Lookup code="CAR" county="Carlow" />
       <Lookup code="CMN" county="Carmarthen" />
       <Lookup code="CAV" county="Cavan" />
@@ -1269,7 +1271,7 @@
       <Lookup country="Wales"    code="Anglesey                                :52                            " county="Anglesey" />
       <Lookup country="Wales"    code="Brecknockshire                          :48                            " county="Brecon" />
       <Lookup country="Wales"    code="Caernarvonshire                         :42                            " county="Caernarvon" />
-      <Lookup country="Wales"    code="Cardiganshire                           :43                            " county="Cardigan" />
+      <Lookup country="Wales"    code="Cardiganshire                           :43                            " county="Ceredigion" />
       <Lookup country="Wales"    code="Carmarthenshire                         :41                            " county="Carmarthen" />
       <Lookup country="Wales"    code="Denbighshire                            :44                            " county="Denbigh" />
       <Lookup country="Wales"    code="Flintshire                              :54                            " county="Flint" />
