@@ -2111,7 +2111,7 @@ namespace FTAnalyzer
                         child.ToolTipText = "Geocoding Status : " + location.Geocoded;
                         SetTreeNodeImage(location, child);
                         // Set everything other than known countries and known regions to regular
-                        if ((currentM.Level == 0 && Countries.IsKnownCountry(part)) || 
+                        if ((currentM.Level == 0 && Countries.IsKnownCountry(part)) ||
                             (currentM.Level == 1 && Regions.IsKnownRegion(part)))
                             child.NodeFont = boldFont;
                         else
@@ -2206,28 +2206,25 @@ namespace FTAnalyzer
             string[] parts = location.Parts;
             TreeNode currentM = mainformTreeRootNode;
             TreeNode currentP = placesTreeRootNode;
-            if (currentM != null || currentP != null)
+            foreach (string part in parts)
             {
-                foreach (string part in parts)
+                if (part.Length == 0 && !Properties.GeneralSettings.Default.AllowEmptyLocations) break;
+                if (mainformTreeRootNode != null && currentM != null)
                 {
-                    if (part.Length == 0 && !Properties.GeneralSettings.Default.AllowEmptyLocations) break;
-                    if (mainformTreeRootNode != null)
-                    {
-                        TreeNode childM = currentM.Nodes.Find(part, false).FirstOrDefault();
-                        currentM = childM;
-                    }
-                    if (placesTreeRootNode != null)
-                    {
-                        TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
-                        currentP = childP;
-                    }
+                    TreeNode childM = currentM.Nodes.Find(part, false).FirstOrDefault();
+                    currentM = childM;
                 }
-                // we should now have nodes to update   
-                if (mainformTreeRootNode != null)
-                    SetTreeNodeImage(location, currentM);
-                if (placesTreeRootNode != null)
-                    SetTreeNodeImage(location, currentP);
+                if (placesTreeRootNode != null && currentP != null)
+                {
+                    TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
+                    currentP = childP;
+                }
             }
+            // we should now have nodes to update   
+            if (mainformTreeRootNode != null && currentM != null)
+                SetTreeNodeImage(location, currentM);
+            if (placesTreeRootNode != null && currentP != null)
+                SetTreeNodeImage(location, currentP);
         }
         #endregion
 
@@ -2274,7 +2271,7 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("\nNote " + needsReverse + " of the searched locations are missing a Google location.");
                 xmlErrorbox.AppendText(" Use the 'Lookup Blank Google Locations' option (under Maps menu) to find them.\n");
             }
-            
+
             xmlErrorbox.BringToFront(); // force the rich text box to the front
         }
 

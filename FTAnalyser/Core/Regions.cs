@@ -1171,6 +1171,7 @@ namespace FTAnalyzer
         #region Conversions
         private static void AddConversions()
         {
+            #region Scottish Conversions
             AddConversion(ABERDEEN, OS_ABERDEENSHIRE);
             AddConversion(ABERDEEN, OS_ABERDEEN_CITY);
             AddConversion(ABERDEEN, OS_MORAY);
@@ -1276,6 +1277,7 @@ namespace FTAnalyzer
             AddConversion(WEST_LOTHIAN, OS_SOUTH_LANARKSHIRE);
             AddConversion(WEST_LOTHIAN, OS_WEST_LOTHIAN);
             AddConversion(WIGTOWN, OS_DUMFRIES_AND_GALLOWAY);
+            #endregion
 
             #region 1974 LG act regions
             AddConversion(CENTRAL_SCOT, OS_CLACKMANNANSHIRE);
