@@ -442,7 +442,7 @@ namespace FTAnalyzer.Forms
 
         private void googleGeocodingBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            pbGeocoding.Value = e.ProgressPercentage;
+            pbGeocoding.Value = (e.ProgressPercentage < 0) ? 1 : e.ProgressPercentage; ;
             txtLocations.Text = (string)e.UserState;
         }
 
@@ -1270,7 +1270,7 @@ namespace FTAnalyzer.Forms
         private void OSGeocodeBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             pbGeocoding.Visible = true;
-            pbGeocoding.Value = e.ProgressPercentage;
+            pbGeocoding.Value = (e.ProgressPercentage < 0) ? 1 : e.ProgressPercentage;
             txtLocations.Text = (string)e.UserState;
         }
 
