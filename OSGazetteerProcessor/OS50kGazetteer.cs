@@ -20,7 +20,7 @@ namespace OSGazetteerProcessor
 
         public OS50kGazetteer(string line)
         {
-            Line = line;
+            Line = line.Normalize();
             string[] values = line.Split(':');
             CountyCode = values[11];
             CountyName = values[13];

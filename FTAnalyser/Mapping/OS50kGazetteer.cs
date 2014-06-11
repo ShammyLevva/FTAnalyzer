@@ -21,7 +21,7 @@ namespace FTAnalyzer.Mapping
 
         public OS50kGazetteer(string line)
         {
-            string[] values = line.Split(':');
+            string[] values = line.Normalize().Split(':');
             int intval;
             Int32.TryParse(values[0], out intval);
             SequenceNumber = intval;
