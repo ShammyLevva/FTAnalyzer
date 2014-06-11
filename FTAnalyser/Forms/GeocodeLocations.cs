@@ -1067,24 +1067,28 @@ namespace FTAnalyzer.Forms
         public void CheckGazetteer()
         {
             List<string> endings = new List<string>();
-            foreach(string name in OS50k.Keys)
+            using (StreamWriter sw = new StreamWriter(@"C:\Maps\FTAnalyzer\endings.csv", false))
             {
-                if(name.LastIndexOf(" ") > 0 && name.LastIndexOf(" ") + 4 >= name.ToString().Length)
+                sw.WriteLine("Ending,PlaceName,CountyCode,CountyName,FeatureCode,Latitude,Longitude,ParishName");
+                foreach(KeyValuePair<string, IList<OS50kGazetteer>> kvp in OS50k)
                 {
-                    string ending = name.Substring(name.LastIndexOf(" ") + 1).Trim();
-                    if (ending != "tor" && ending != "bay" && ending != "way" && ending != "law" && ending != "fen" && ending != "row"
-                         && ending != "top" && ending != "ure" && ending != "end" && ending != "oak" && ending != "den" && ending != "dun" && ending != "lee"
-                         && ending != "dam" && ending != "end")
+                    string name = kvp.Key;
+                    OS50kGazetteer gaz = kvp.Value[0];
+                    if(name.LastIndexOf(" ") > 0 && name.LastIndexOf(" ") + 4 >= name.ToString().Length)
                     {
-                        if (!endings.Contains(ending))
-                            endings.Add(ending);
-                        Console.WriteLine("Ending: " + ending + " from: " + name);
+                        string ending = name.Substring(name.LastIndexOf(" ") + 1).Trim();
+                        if (ending != "tor" && ending != "bay" && ending != "way" && ending != "law" && ending != "fen" && ending != "row" && ending != "lea"
+                             && ending != "top" && ending != "ure" && ending != "end" && ending != "oak" && ending != "den" && ending != "dun" && ending != "lee"
+                             && ending != "dam" && ending != "gap" && ending != "sea" && ending != "dee" && ending != "don" && ending != "dye" && ending != "bog"
+                             && ending != "bar" && ending != "low" && ending != "mor")
+                        {
+                            if (!endings.Contains(ending))
+                                endings.Add(ending);
+                            sw.WriteLine(ending + "," + gaz.DefinitiveName + "," + gaz.CountyCode + "," + gaz.CountyName + "," + gaz.FeatureCode + "," + gaz.Latitude + "," + gaz.Longitude + "," + gaz.ParishName);
+                        }
                     }
                 }
             }
-            endings.Sort();
-            foreach (string ending in endings)
-                Console.WriteLine("Ending list: " + ending);
         }
 
         private Dictionary<FactLocation, IList<OS50kGazetteer>> noCounty;
@@ -1135,7 +1139,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void GenerateTestGedcom(List<FactLocation> failedToFind, string name, Dictionary<FactLocation,IList<OS50kGazetteer>> noCounty)
+        private void GenerateTestGedcom(List<FactLocation> failedToFind, string name, Dictionary<FactLocation, IList<OS50kGazetteer>> noCounty)
         {
             if (Directory.Exists(Properties.MappingSettings.Default.CustomMapPath))
             {
@@ -1156,16 +1160,16 @@ namespace FTAnalyzer.Forms
                             date = date.AddDays(1);
                         }
                     }
-                    if(noCounty != null)
+                    if (noCounty != null)
                     {
-                        foreach(KeyValuePair<FactLocation,IList<OS50kGazetteer>> kvp in noCounty)
+                        foreach (KeyValuePair<FactLocation, IList<OS50kGazetteer>> kvp in noCounty)
                         {
                             stream.WriteLine("1 RESI");
                             stream.WriteLine("2 DATE " + date.ToString("dd MMM yyyy").ToUpper());
                             stream.WriteLine("2 PLAC " + kvp.Key.ToString());
                             StringBuilder sb = new StringBuilder();
                             sb.Append("2 NOTE Found " + kvp.Value[0].DefinitiveName + " in ");
-                            foreach(OS50kGazetteer gaz in kvp.Value)
+                            foreach (OS50kGazetteer gaz in kvp.Value)
                                 sb.Append(gaz.CountyCode + ": " + gaz.CountyName + ", ");
                             stream.WriteLine(sb.ToString());
                             date = date.AddDays(1);
@@ -1197,7 +1201,7 @@ namespace FTAnalyzer.Forms
                     return ProcessOS50kMatches(placeMatches, loc, FactLocation.PLACE);
                 else
                 {
-                    if(!noCounty.ContainsKey(loc))
+                    if (!noCounty.ContainsKey(loc))
                         noCounty.Add(loc, results);
                 }
             }

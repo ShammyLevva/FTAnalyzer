@@ -70,7 +70,9 @@ namespace FTAnalyzer.Mapping
             if (DefinitiveName.EndsWith(" Pt")) // Pt is abbreviation for Point
                 DefinitiveName = DefinitiveName.Replace(" Pt", " Point"); ;
             if (DefinitiveName.EndsWith(" Pk")) // Pt is abbreviation for Park
-                DefinitiveName = DefinitiveName.Replace(" Pt", " Park"); ;
+                DefinitiveName = DefinitiveName.Replace(" Pk", " Park"); ;
+            if (DefinitiveName.EndsWith(" Rly")) // Pt is abbreviation for Park
+                DefinitiveName = DefinitiveName.Replace(" Rly", " Railway"); ;
             if (DefinitiveName.EndsWith(" Sq")) // Sq is abbreviation for Square
                 DefinitiveName = DefinitiveName + "uare";
             if (DefinitiveName.EndsWith(" Sch")) // Sch is abbreviation for School
@@ -96,7 +98,7 @@ namespace FTAnalyzer.Mapping
 
         public override string ToString()
         {
-            return CountyCode + ": " + DefinitiveName + "(" + CountyName + ")";
+            return CountyCode + ": " + DefinitiveName + "(" + CountyName + "). Feature:" + FeatureCode + " parish: " + ParishName;
         }
     }
 }
