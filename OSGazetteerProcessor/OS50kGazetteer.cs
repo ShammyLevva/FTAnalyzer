@@ -2,6 +2,7 @@
 using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -20,7 +21,7 @@ namespace OSGazetteerProcessor
 
         public OS50kGazetteer(string line)
         {
-            Line = line.Normalize();
+            Line = RemoveDiacritics(line);
             string[] values = line.Split(':');
             CountyCode = values[11];
             CountyName = values[13];
@@ -44,6 +45,21 @@ namespace OSGazetteerProcessor
                 Line = line.Substring(1, line.LastIndexOf(":") -1);
             }
             Line = Line.Trim(':');
+        }
+
+        private string RemoveDiacritics(string text)
+        {
+            string formD = text.Normalize(NormalizationForm.FormD);
+            StringBuilder sb = new StringBuilder();
+
+            foreach (char ch in formD)
+            {
+                UnicodeCategory uc = CharUnicodeInfo.GetUnicodeCategory(ch);
+                if (uc != UnicodeCategory.NonSpacingMark)
+                    sb.Append(ch);
+            }
+
+            return sb.ToString().Normalize(NormalizationForm.FormC);
         }
 
         public override string ToString()
