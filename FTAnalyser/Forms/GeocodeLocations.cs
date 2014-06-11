@@ -1071,9 +1071,14 @@ namespace FTAnalyzer.Forms
             {
                 if(name.LastIndexOf(" ") > 0 && name.LastIndexOf(" ") + 4 >= name.ToString().Length)
                 {
-                    string ending = name.Substring(name.LastIndexOf(" ") + 1);
-                    if(!endings.Contains(ending))
-                        endings.Add(ending);
+                    string ending = name.Substring(name.LastIndexOf(" ") + 1).Trim();
+                    if (ending != "tor" && ending != "bay" && ending != "way" && ending != "law" && ending != "fen" && ending != "row"
+                         && ending != "top" && ending != "ure" && ending != "end" && ending != "oak" && ending != "den" && ending != "dun" && ending != "lee"
+                         && ending != "dam" && ending != "end")
+                    {
+                        if (!endings.Contains(ending))
+                            endings.Add(ending);
+                    }
                     Console.WriteLine("Ending: " + ending + " from: " + name);
                 }
             }

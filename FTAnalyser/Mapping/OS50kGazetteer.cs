@@ -69,8 +69,12 @@ namespace FTAnalyzer.Mapping
                 DefinitiveName = DefinitiveName.Replace(" Ct", " Court");
             if (DefinitiveName.EndsWith(" Pt")) // Pt is abbreviation for Point
                 DefinitiveName = DefinitiveName.Replace(" Pt", " Point"); ;
+            if (DefinitiveName.EndsWith(" Pk")) // Pt is abbreviation for Park
+                DefinitiveName = DefinitiveName.Replace(" Pt", " Park"); ;
             if (DefinitiveName.EndsWith(" Sq")) // Sq is abbreviation for Square
                 DefinitiveName = DefinitiveName + "uare";
+            if (DefinitiveName.EndsWith(" Sch")) // Sch is abbreviation for School
+                DefinitiveName = DefinitiveName + "ool";
             if (DefinitiveName.EndsWith(" Ho")) // Ho is abbreviation for House
                 DefinitiveName = DefinitiveName + "use";
             if (DefinitiveName.EndsWith(" St")) // St is abbreviation for Street
@@ -81,6 +85,8 @@ namespace FTAnalyzer.Mapping
                 DefinitiveName = DefinitiveName + "idge";
             if (DefinitiveName.EndsWith(" Ch")) // Ch is abbreviation for Church
                 DefinitiveName = DefinitiveName + "urch";
+            if (DefinitiveName.EndsWith(" Pl")) // Pl is abbreviation for Place
+                DefinitiveName = DefinitiveName + "ace";
         }
 
         public bool IsCountyMatch(FactLocation loc)
