@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace FTAnalyzer.Mapping
 {
@@ -65,6 +66,8 @@ namespace FTAnalyzer.Mapping
                 DefinitiveName = DefinitiveName.Replace(" Fm", " Farm");
             if (DefinitiveName.EndsWith(" fm")) // Fm is abbreviation for Farm
                 DefinitiveName = DefinitiveName.Replace(" fm", " Farm");
+            if (DefinitiveName.EndsWith(" fms")) // Fm is abbreviation for Farm
+                DefinitiveName = DefinitiveName.Replace(" fms", " Farm");
             if (DefinitiveName.EndsWith(" Ct")) // Ct is abbreviation for Court
                 DefinitiveName = DefinitiveName.Replace(" Ct", " Court");
             if (DefinitiveName.EndsWith(" Pt")) // Pt is abbreviation for Point
@@ -89,6 +92,18 @@ namespace FTAnalyzer.Mapping
                 DefinitiveName = DefinitiveName + "urch";
             if (DefinitiveName.EndsWith(" Pl")) // Pl is abbreviation for Place
                 DefinitiveName = DefinitiveName + "ace";
+            if (DefinitiveName.EndsWith(" Ave")) // Ave is abbreviation for Avenue
+                DefinitiveName = DefinitiveName + "nue";
+            if (DefinitiveName.EndsWith(" The")) // we can strip trailing the's
+                DefinitiveName = DefinitiveName.Substring(DefinitiveName.Length -4);
+
+            if (DefinitiveName.Contains("("))
+            { 
+                Console.WriteLine("bracket");
+                Match match = Regex.Match(DefinitiveName, @"(.*)\(.*\)");
+                if(match.Success)
+                    DefinitiveName = match.Groups[1].ToString().Trim();
+            }
         }
 
         public bool IsCountyMatch(FactLocation loc)

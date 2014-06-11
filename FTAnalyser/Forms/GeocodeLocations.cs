@@ -1061,7 +1061,7 @@ namespace FTAnalyzer.Forms
                     }
                 }
             }
-            CheckGazetteer();
+            //CheckGazetteer();
         }
 
         public void CheckGazetteer()
@@ -1080,7 +1080,9 @@ namespace FTAnalyzer.Forms
                         if (ending != "tor" && ending != "bay" && ending != "way" && ending != "law" && ending != "fen" && ending != "row" && ending != "lea"
                              && ending != "top" && ending != "ure" && ending != "end" && ending != "oak" && ending != "den" && ending != "dun" && ending != "lee"
                              && ending != "dam" && ending != "gap" && ending != "sea" && ending != "dee" && ending != "don" && ending != "dye" && ending != "bog"
-                             && ending != "bar" && ending != "low" && ending != "mor")
+                             && ending != "bar" && ending != "low" && ending != "mor" && ending != "ard" && ending != "ark" && ending != "ash" && ending != "ayr"
+                             && ending != "ban" && ending != "bed" && ending != "beg" && ending != "box" && ending != "boy" && ending != "cap" && ending != "cat"
+                             && ending != "dhu" && ending != "dod" && ending != "elm" && ending != "esk")
                         {
                             if (!endings.Contains(ending))
                                 endings.Add(ending);
