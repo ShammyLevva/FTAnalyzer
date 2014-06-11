@@ -1078,10 +1078,11 @@ namespace FTAnalyzer.Forms
                     {
                         if (!endings.Contains(ending))
                             endings.Add(ending);
+                        Console.WriteLine("Ending: " + ending + " from: " + name);
                     }
-                    Console.WriteLine("Ending: " + ending + " from: " + name);
                 }
             }
+            endings.Sort();
             foreach (string ending in endings)
                 Console.WriteLine("Ending list: " + ending);
         }
