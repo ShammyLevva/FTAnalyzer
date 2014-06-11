@@ -57,9 +57,7 @@ namespace FTAnalyzer.Mapping
             DefinitiveName = DefinitiveName.Replace(", The", ""); // strip out supurflous "the"
             int pos = DefinitiveName.IndexOf(",");
             if(pos > 0)
-            {
                 DefinitiveName = (DefinitiveName.Substring(pos + 1) + " " + DefinitiveName.Substring(0, pos)).Trim();
-            }
         }
 
         private void FixAbbreviations()
@@ -68,8 +66,8 @@ namespace FTAnalyzer.Mapping
                 DefinitiveName = DefinitiveName.Replace(" Fm", " Farm");
             if (DefinitiveName.EndsWith(" fm")) // Fm is abbreviation for Farm
                 DefinitiveName = DefinitiveName.Replace(" fm", " Farm");
-            if (DefinitiveName.EndsWith(" fms")) // Fm is abbreviation for Farm
-                DefinitiveName = DefinitiveName.Replace(" fms", " Farm");
+            if (DefinitiveName.EndsWith(" Fms")) // Fm is abbreviation for Farm
+                DefinitiveName = DefinitiveName.Replace(" Fms", " Farm");
             if (DefinitiveName.EndsWith(" Ct")) // Ct is abbreviation for Court
                 DefinitiveName = DefinitiveName.Replace(" Ct", " Court");
             if (DefinitiveName.EndsWith(" Pt")) // Pt is abbreviation for Point
