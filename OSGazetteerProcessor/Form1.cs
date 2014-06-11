@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -41,7 +42,7 @@ namespace OSGazetteerProcessor
                     startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
                 else
                     startPath = Application.StartupPath;
-                string filename = @"C:\Maps\FTAnalyzer\50kgaz2014-input.txt";
+                string filename = @"C:\Maps\FTAnalyzer\50kgaz2014.txt";
                 if (File.Exists(filename))
                     ReadOS50kGazetteer(filename);
             }
@@ -53,19 +54,21 @@ namespace OSGazetteerProcessor
 
         public void ReadOS50kGazetteer(string filename)
         {
-            StreamReader reader = new StreamReader(filename);
-            while (!reader.EndOfStream)
+            using (StreamReader reader = new StreamReader(filename, Encoding.UTF7))
             {
-                string line = reader.ReadLine();
-                if (line.IndexOf(':') > 0)
-                    OS50k.Add(new OS50kGazetteer(line));
+                while (!reader.EndOfStream)
+                {
+                    string line = reader.ReadLine();
+                    if (line.IndexOf(':') > 0)
+                        OS50k.Add(new OS50kGazetteer(line));
+                }
             }
-            reader.Close();
         }
 
         public void SaveOS50kGazetteer()
         {
-            using (StreamWriter sw = new StreamWriter(@"C:\Maps\FTAnalyzer\OS50kGazetteer.txt"))
+            Encoding isoWesternEuropean = Encoding.GetEncoding(28591);
+            using (StreamWriter sw = new StreamWriter(@"C:\Maps\FTAnalyzer\OS50kGazetteer.txt", false, isoWesternEuropean))
             {
                 foreach (OS50kGazetteer os50k in OS50k)
                     sw.WriteLine(os50k.ToString());
@@ -122,6 +125,8 @@ namespace OSGazetteerProcessor
                     if (geom.Intersects(os50k.BufferedPoint))
                     {
                         os50k.ParishName = (string)f.Attributes[fieldname];
+                        if (os50k.ParishName.EndsWith(" CP"))
+                            os50k.ParishName = os50k.ParishName.Substring(0, os50k.ParishName.Length - 3);
                         count++;
                     }
                 }
@@ -155,7 +160,7 @@ namespace OSGazetteerProcessor
                             oldCountiesToCounties.Add(name, oldCounties);
                         }
                         oldCounties.Add(Tuple.Create(os50k.CountyCode, os50k.CountyName));
-                        modernCounties.Add("'" + os50k.CountyCode + "','" + os50k.CountyName + "'");
+                        //modernCounties.Add("'" + os50k.CountyCode + "','" + os50k.CountyName + "'");
                     }
                 }
             }
@@ -200,17 +205,17 @@ namespace OSGazetteerProcessor
         {
             LoadOS50kGazetteer();
 
-            //scottishParishes = LoadFeatureList(@"C:\Maps\FTAnalyzer\CivilParish1930.shp");
-            //AddParishNames(scottishParishes, "name");
-            //englishParishes = LoadFeatureList(@"C:\Maps\FTAnalyzer\parish_region.shp");
+            scottishParishes = LoadFeatureList(@"C:\Maps\FTAnalyzer\CivilParish1930.shp");
+            AddParishNames(scottishParishes, "name");
+            englishParishes = LoadFeatureList(@"C:\Maps\FTAnalyzer\parish_region.shp");
             // strip parishes of blank filler area (FA) codes
-            //englishParishes = englishParishes.Where(x => x.Attributes["TYPE_CODE"].ToString() != "FA").ToList<Feature>();
-            //AddParishNames(englishParishes, "NAME");
-            //SaveOS50kGazetteer();
+            englishParishes = englishParishes.Where(x => x.Attributes["TYPE_CODE"].ToString() != "FA").ToList<Feature>();
+            AddParishNames(englishParishes, "NAME");
+            SaveOS50kGazetteer();
 
-            oldEnglishCounties = LoadFeatureList(@"C:\Maps\FTAnalyzer\Historic_Counties_of_England&Wales_Web.shp");
-            ProcessOldCounties();
-            SaveCounties();
+            //oldEnglishCounties = LoadFeatureList(@"C:\Maps\FTAnalyzer\Historic_Counties_of_England&Wales_Web.shp");
+            //ProcessOldCounties();
+            //SaveCounties();
             MessageBox.Show("Finished");
         }
 

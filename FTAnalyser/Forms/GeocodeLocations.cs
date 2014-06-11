@@ -1041,31 +1041,44 @@ namespace FTAnalyzer.Forms
 
         public void ReadOS50kGazetteer(string filename)
         {
-            StreamReader reader = new StreamReader(filename);
-            while (!reader.EndOfStream)
+            Encoding isoWesternEuropean = Encoding.GetEncoding(28591);
+            using (StreamReader reader = new StreamReader(filename, isoWesternEuropean))
             {
-                string line = reader.ReadLine();
-                if (line.IndexOf(':') > 0)
+                while (!reader.EndOfStream)
                 {
-                    OS50kGazetteer gaz = new OS50kGazetteer(line);
-                    string key = gaz.DefinitiveName.ToLower();
-                    IList<OS50kGazetteer> list = null;
-                    if (!OS50k.TryGetValue(key, out list))
+                    string line = reader.ReadLine();
+                    if (line.IndexOf(':') > 0)
                     {
-                        list = new List<OS50kGazetteer>();
-                        OS50k.Add(key, list);
+                        OS50kGazetteer gaz = new OS50kGazetteer(line);
+                        string key = gaz.DefinitiveName.ToLower();
+                        IList<OS50kGazetteer> list = null;
+                        if (!OS50k.TryGetValue(key, out list))
+                        {
+                            list = new List<OS50kGazetteer>();
+                            OS50k.Add(key, list);
+                        }
+                        list.Add(gaz);
                     }
-                    list.Add(gaz);
                 }
             }
-            reader.Close();
-            //CheckGazetteer();
+            CheckGazetteer();
         }
 
         public void CheckGazetteer()
         {
-            //IEnumerable<OS50kGazetteer> spaces = OS50k.Where(x => x.DefinitiveName.LastIndexOf(" ") > 0 && x.DefinitiveName.LastIndexOf(" ") + 4 >= x.DefinitiveName.Length);
-            //List<string> endings = spaces.Select(x => x.DefinitiveName.Substring(x.DefinitiveName.LastIndexOf(" "))).Distinct().ToList();
+            List<string> endings = new List<string>();
+            foreach(string name in OS50k.Keys)
+            {
+                if(name.LastIndexOf(" ") > 0 && name.LastIndexOf(" ") + 4 >= name.ToString().Length)
+                {
+                    string ending = name.Substring(name.LastIndexOf(" ") + 1);
+                    if(!endings.Contains(ending))
+                        endings.Add(ending);
+                    Console.WriteLine("Ending: " + ending + " from: " + name);
+                }
+            }
+            foreach (string ending in endings)
+                Console.WriteLine("Ending list: " + ending);
         }
 
         private Dictionary<FactLocation, IList<OS50kGazetteer>> noCounty;

@@ -37,7 +37,7 @@ namespace OSGazetteerProcessor
             Coordinate c = new Coordinate(Longitude, Latitude);
             c = MapTransforms.TransformCoordinate(c);
             Point = GeometryFactory.Default.CreatePoint(c);
-            //BufferedPoint = Point.Buffer(185); // points are to 1dp of a minute = 185m so create buffer for matching
+            BufferedPoint = Point.Buffer(200); // points are to 1dp of a minute = 185m so create buffer for matching use 200 for bit wider scope
             if (values.Length >= 21)
             {
                 ParishName = values[20];
