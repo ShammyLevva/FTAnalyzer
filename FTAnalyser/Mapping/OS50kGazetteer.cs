@@ -46,6 +46,8 @@ namespace FTAnalyzer.Mapping
             ParishName = values[20];
             if (ParishName.EndsWith(" CP"))
                 ParishName = ParishName.Substring(0, ParishName.Length - 3);
+            if (ParishName.EndsWith(" Community"))
+                ParishName = ParishName.Substring(0, ParishName.Length - 10);
             FixCommas();
             FixAbbreviations();
         }
