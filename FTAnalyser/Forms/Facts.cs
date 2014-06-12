@@ -99,6 +99,7 @@ namespace FTAnalyzer.Forms
             this.facts = ft.GetSourceDisplayFacts(source);
             this.Text = "Facts Report for source: " + source.ToString() + ". Facts count: " + facts.Count;
             SetupFacts();
+            dgFacts.Columns["CensusReference"].Visible = true;
         }
 
         private void AddIndividualsFacts(Individual individual, List<string> factTypes)
