@@ -67,6 +67,7 @@ namespace FTAnalyzer.Forms
             int gedcom = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER));
             int found = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.MATCHED));
             int osmatch = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OS_50KMATCH));
+            int osfuzzy = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OS_50KFUZZY));
             int ospartial = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OS_50KPARTIAL));
             int partial = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH));
             int levelpartial = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.LEVEL_MISMATCH));
@@ -75,9 +76,8 @@ namespace FTAnalyzer.Forms
             int outofbounds = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OUT_OF_BOUNDS));
             int incorrect = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.INCORRECT));
             int total = FactLocation.LocationsCount;
-
             txtGoogleWait.Text = string.Empty;
-            statusText = "Already Geocoded: " + (gedcom + found + osmatch) +
+            statusText = "Already Geocoded: " + (gedcom + found + osmatch + osfuzzy) +
                 ", partials: " + (partial + levelpartial + ospartial + notfound + incorrect + outofbounds)
                 + ", yet to search: " + notsearched + " of " + total + " locations.";
             txtLocations.Text = statusText;
@@ -1119,6 +1119,8 @@ namespace FTAnalyzer.Forms
                     {
                         if (GazetteerMatchMethodA(loc))
                             matched++;
+                        else if (GazetteerMatchMethodB(loc))
+                            matched++;
                         else
                             failedToFind.Add(loc);
                     }
@@ -1194,6 +1196,12 @@ namespace FTAnalyzer.Forms
             return false;
         }
 
+        private bool GazetteerMatchMethodB(FactLocation loc)
+        {
+            log.Info("OS Geocoder Fuzzy match Failed to match: " + loc.ToString());
+            return false;
+        }
+
         private bool CheckLocationMatch(string key, FactLocation loc)
         {
             IList<OS50kGazetteer> results = null;
@@ -1235,7 +1243,7 @@ namespace FTAnalyzer.Forms
             return false;
         }
 
-        private void SetOSGeocoding(FactLocation location, OS50kGazetteer gaz, int level)
+        private void SetOSGeocoding(FactLocation location, OS50kGazetteer gaz, int level, bool fuzzy)
         {
             int expandBy = 2500;
             Coordinate p = new Coordinate(gaz.Point.X, gaz.Point.Y);
@@ -1251,7 +1259,9 @@ namespace FTAnalyzer.Forms
             location.ViewPort.SouthWest.Long = env.Left();
             location.PixelSize = (double)expandBy / 40.0;
             location.GoogleLocation = string.Empty;
-            if (level == location.Level)
+            if (fuzzy)
+                location.GeocodeStatus = FactLocation.Geocode.OS_50KFUZZY;
+            else if (level == location.Level)
                 location.GeocodeStatus = FactLocation.Geocode.OS_50KMATCH;
             else if (level == FactLocation.ADDRESS)
                 location.GeocodeStatus = FactLocation.Geocode.OS_50KMATCH;

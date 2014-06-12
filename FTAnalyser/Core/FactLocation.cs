@@ -20,7 +20,7 @@ namespace FTAnalyzer
         public enum Geocode
         {
             UNKNOWN = -1, NOT_SEARCHED = 0, MATCHED = 1, PARTIAL_MATCH = 2, GEDCOM_USER = 3, NO_MATCH = 4,
-            INCORRECT = 5, OUT_OF_BOUNDS = 6, LEVEL_MISMATCH = 7, OS_50KMATCH = 8, OS_50KPARTIAL = 9
+            INCORRECT = 5, OUT_OF_BOUNDS = 6, LEVEL_MISMATCH = 7, OS_50KMATCH = 8, OS_50KPARTIAL = 9, OS_50KFUZZY = 10
         };
 
         private string fixedLocation;
@@ -285,6 +285,7 @@ namespace FTAnalyzer
             Geocodes.Add(Geocode.LEVEL_MISMATCH, "Partial Match (Levels)");
             Geocodes.Add(Geocode.OS_50KMATCH, "OS Gazetteer Match");
             Geocodes.Add(Geocode.OS_50KPARTIAL, "Partial Match (Ord Surv)");
+            Geocodes.Add(Geocode.OS_50KFUZZY, "Fuzzy Match (Ord Surv)");
         }
 
         public static FactLocation GetLocation(string place)
@@ -883,7 +884,7 @@ namespace FTAnalyzer
             if (!recheckPartials && Properties.MappingSettings.Default.IncludePartials &&
                 (GeocodeStatus == Geocode.PARTIAL_MATCH || GeocodeStatus == Geocode.LEVEL_MISMATCH || GeocodeStatus == Geocode.OS_50KPARTIAL))
                 return true;
-            return GeocodeStatus == Geocode.MATCHED || GeocodeStatus == Geocode.GEDCOM_USER || GeocodeStatus == Geocode.OS_50KMATCH;
+            return GeocodeStatus == Geocode.MATCHED || GeocodeStatus == Geocode.GEDCOM_USER || GeocodeStatus == Geocode.OS_50KMATCH || GeocodeStatus == Geocode.OS_50KFUZZY;
         }
 
         private string FixNumerics(string addressField, bool returnNumber)
@@ -1068,7 +1069,8 @@ namespace FTAnalyzer
         {
             get
             {
-                return GoogleLocation.Length == 0 && (GeocodeStatus == Geocode.GEDCOM_USER || GeocodeStatus == Geocode.OS_50KMATCH || GeocodeStatus == Geocode.OS_50KPARTIAL);
+                return GoogleLocation.Length == 0 &&
+                    (GeocodeStatus == Geocode.GEDCOM_USER || GeocodeStatus == Geocode.OS_50KMATCH || GeocodeStatus == Geocode.OS_50KPARTIAL || GeocodeStatus == Geocode.OS_50KFUZZY);
             }
         }
     }
