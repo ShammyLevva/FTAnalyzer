@@ -460,7 +460,8 @@ namespace FTAnalyzer.Forms
             mnuEditLocation.Enabled = true;
             mnuReverseGeocode.Enabled = true;
             mnuOSGeocodeLocations.Enabled = true;
-            ft.WriteGeocodeStatstoRTB(true);
+            string title = sender == OSGeocodeBackgroundWorker ? "OS Geocoding Results:" : "Google Geocoding Results:";
+            ft.WriteGeocodeStatstoRTB(title);
             ft.Geocoding = false;
             if (formClosing)
                 this.Close();
@@ -956,7 +957,7 @@ namespace FTAnalyzer.Forms
             {
                 DatabaseHelper.Instance.ResetPartials();
                 ft.LoadGeoLocationsFromDataBase(null);
-                ft.WriteGeocodeStatstoRTB(true);
+                ft.WriteGeocodeStatstoRTB("Geocoding status after reset partials:");
                 MessageBox.Show("Partials have been reset", "FT Analyzer");
             }
         }
