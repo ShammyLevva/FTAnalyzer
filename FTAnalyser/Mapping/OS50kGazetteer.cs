@@ -116,10 +116,15 @@ namespace FTAnalyzer.Mapping
 
             if (DefinitiveName.Contains("("))
             { 
-                Console.WriteLine("bracket");
                 Match match = Regex.Match(DefinitiveName, @"(.*)\(.*\)");
                 if(match.Success)
                     DefinitiveName = match.Groups[1].ToString().Trim();
+            }
+            if (ParishName.Contains("("))
+            {
+                Match match = Regex.Match(ParishName, @"(.*)\(.*\)");
+                if (match.Success)
+                    ParishName = match.Groups[1].ToString().Trim();
             }
         }
 
