@@ -140,6 +140,10 @@ namespace FTAnalyzer
                     int i = 0;
                     foreach (DataColumn col in dt.Columns)
                     {
+                        if (col.ColumnName == "GoogleLocation")
+                            col.ColumnName = "FoundLocation";
+                        if (col.ColumnName == "GoogleResultType")
+                            col.ColumnName = "FoundResultType";
                         ReportGrid.Columns[col.ColumnName].DisplayIndex = i;
                         if (col.ExtendedProperties.Contains("Width"))
                         {

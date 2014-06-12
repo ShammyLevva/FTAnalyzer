@@ -58,7 +58,7 @@ namespace FTAnalyzer.Forms
             this.Longitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GeocodeStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FoundLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FoundResultTypes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FoundResultType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SourceList = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
@@ -219,7 +219,7 @@ namespace FTAnalyzer.Forms
             this.Longitude,
             this.GeocodeStatus,
             this.FoundLocation,
-            this.FoundResultTypes,
+            this.FoundResultType,
             this.Comment,
             this.SourceList});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -363,13 +363,13 @@ namespace FTAnalyzer.Forms
             this.FoundLocation.ReadOnly = true;
             this.FoundLocation.Width = 120;
             // 
-            // FoundResultTypes
+            // FoundResultType
             // 
-            this.FoundResultTypes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.FoundResultTypes.DataPropertyName = "FoundResultTypes";
-            this.FoundResultTypes.HeaderText = "Found Result Types";
-            this.FoundResultTypes.Name = "FoundResultTypes";
-            this.FoundResultTypes.ReadOnly = true;
+            this.FoundResultType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.FoundResultType.DataPropertyName = "FoundResultType";
+            this.FoundResultType.HeaderText = "Found Result Type";
+            this.FoundResultType.Name = "FoundResultType";
+            this.FoundResultType.ReadOnly = true;
             // 
             // Comment
             // 
@@ -510,7 +510,7 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn Longitude;
         private System.Windows.Forms.DataGridViewTextBoxColumn GeocodeStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn FoundLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FoundResultTypes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FoundResultType;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;
         private System.Windows.Forms.ToolStripProgressBar progressbar;
