@@ -79,6 +79,7 @@ namespace FTAnalyzer.Mapping
 
         private void FixAbbreviations()
         {
+            DefinitiveName = DefinitiveName.Trim();
             if (DefinitiveName.EndsWith(" Fm")) // Fm is abbreviation for Farm
                 DefinitiveName = DefinitiveName.Replace(" Fm", " Farm");
             if (DefinitiveName.EndsWith(" fm")) // Fm is abbreviation for Farm
