@@ -444,8 +444,8 @@ namespace FTAnalyzer.Utilities
                         location.ViewPort.SouthWest.Lat = viewport_y_sw;
                         location.ViewPort.SouthWest.Long = viewport_x_sw;
                         location.GeocodeStatus = (FactLocation.Geocode)Enum.Parse(typeof(FactLocation.Geocode), reader["geocodestatus"].ToString());
-                        location.GoogleLocation = reader["foundlocation"].ToString();
-                        location.GoogleResultType = reader["foundresulttype"].ToString();
+                        location.FoundLocation = reader["foundlocation"].ToString();
+                        location.FoundResultType = reader["foundresulttype"].ToString();
                         int foundlevel = 0;
                         int.TryParse(reader["foundlevel"].ToString(), out foundlevel);
                         location.FoundLevel = foundlevel;
@@ -523,14 +523,14 @@ namespace FTAnalyzer.Utilities
                     insertCmd.Parameters[1].Value = loc.Level;
                     insertCmd.Parameters[2].Value = loc.Latitude;
                     insertCmd.Parameters[3].Value = loc.Longitude;
-                    insertCmd.Parameters[4].Value = loc.GoogleLocation;
+                    insertCmd.Parameters[4].Value = loc.FoundLocation;
                     insertCmd.Parameters[5].Value = loc.FoundLevel;
                     insertCmd.Parameters[6].Value = loc.ViewPort.NorthEast.Long;
                     insertCmd.Parameters[7].Value = loc.ViewPort.NorthEast.Lat;
                     insertCmd.Parameters[8].Value = loc.ViewPort.SouthWest.Long;
                     insertCmd.Parameters[9].Value = loc.ViewPort.SouthWest.Lat;
                     insertCmd.Parameters[10].Value = loc.GeocodeStatus;
-                    insertCmd.Parameters[11].Value = loc.GoogleResultType;
+                    insertCmd.Parameters[11].Value = loc.FoundResultType;
                     insertCmd.Parameters[12].Value = loc.LatitudeM;
                     insertCmd.Parameters[13].Value = loc.LongitudeM;
 
@@ -607,14 +607,14 @@ namespace FTAnalyzer.Utilities
                     updateCmd.Parameters[0].Value = loc.Level;
                     updateCmd.Parameters[1].Value = loc.Latitude;
                     updateCmd.Parameters[2].Value = loc.Longitude;
-                    updateCmd.Parameters[3].Value = loc.GoogleLocation;
+                    updateCmd.Parameters[3].Value = loc.FoundLocation;
                     updateCmd.Parameters[4].Value = loc.FoundLevel;
                     updateCmd.Parameters[5].Value = loc.ViewPort.NorthEast.Long;
                     updateCmd.Parameters[6].Value = loc.ViewPort.NorthEast.Lat;
                     updateCmd.Parameters[7].Value = loc.ViewPort.SouthWest.Long;
                     updateCmd.Parameters[8].Value = loc.ViewPort.SouthWest.Lat;
                     updateCmd.Parameters[9].Value = loc.GeocodeStatus;
-                    updateCmd.Parameters[10].Value = loc.GoogleResultType;
+                    updateCmd.Parameters[10].Value = loc.FoundResultType;
                     updateCmd.Parameters[11].Value = loc.LatitudeM;
                     updateCmd.Parameters[12].Value = loc.LongitudeM;
                     updateCmd.Parameters[13].Value = loc.ToString();

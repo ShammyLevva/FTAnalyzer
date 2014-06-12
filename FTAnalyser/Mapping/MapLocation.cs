@@ -13,7 +13,7 @@ namespace FTAnalyzer.Mapping
         public FactLocation Location { get; private set; }
         public Geometry Geometry { get; private set; }
         private FactDate year;
-        public string GoogleLocation { get; private set; }
+        public string FoundLocation { get; private set; }
 
         private static GeoAPI.Geometries.IPoint centre = new NetTopologySuite.Geometries.Point(0, 0);
 
@@ -27,7 +27,7 @@ namespace FTAnalyzer.Mapping
             this.year = year;
             this.Icon = FactLocationImage.ErrorIcon(loc.GeocodeStatus).Icon;
             this.Geometry = new NetTopologySuite.Geometries.Point(Location.LongitudeM, Location.LatitudeM);
-            this.GoogleLocation = loc.GoogleLocation;
+            this.FoundLocation = loc.FoundLocation;
         }
 
         public FeatureDataRow AddFeatureDataRow(FeatureDataTable table)

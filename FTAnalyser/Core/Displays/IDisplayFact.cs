@@ -22,8 +22,8 @@ namespace FTAnalyzer
         Age AgeAtFact { get; }
         Image LocationIcon { get; }
         string GeocodeStatus { get; }
-        string GoogleLocation { get; }
-        string GoogleResultType { get; }
+        string FoundLocation { get; }
+        string FoundResultType { get; }
         string CensusReference { get; }
         string Comment { get; }
         string SourceList { get; }

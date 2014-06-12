@@ -266,7 +266,7 @@ namespace FTAnalyzer
             mnuLocationsGeocodeReport.Enabled = enabled;
             mnuLifelines.Enabled = enabled;
             mnuPlaces.Enabled = enabled;
-            mnuLookupBlankGoogleLocations.Enabled = enabled;
+            mnuLookupBlankFoundLocations.Enabled = enabled;
             mnuTreetopsToExcel.Enabled = enabled && dgTreeTops.RowCount > 0;
             mnuWorldWarsToExcel.Enabled = enabled && dgWorldWars.RowCount > 0;
         }
@@ -888,7 +888,7 @@ namespace FTAnalyzer
             StartGeocoding(GecodingType.OS);
         }
 
-        private void mnuLookupBlankGoogleLocations_Click(object sender, EventArgs e)
+        private void mnuLookupBlankFoundLocations_Click(object sender, EventArgs e)
         {
             StartGeocoding(GecodingType.Reverse);
         }

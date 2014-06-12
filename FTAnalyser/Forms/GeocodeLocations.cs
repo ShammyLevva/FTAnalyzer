@@ -35,7 +35,8 @@ namespace FTAnalyzer.Forms
         private ISet<string> noneOfTheAbove;
         private ToolStripMenuItem[] noneOfTheAboveMenus;
         private ConcurrentQueue<FactLocation> queue;
-        private IDictionary<string, IList<OS50kGazetteer>> OS50k;
+        private IDictionary<string, IList<OS50kGazetteer>> OS50kDictionary;
+        private IList<OS50kGazetteer> OS50k;
 
         private FactLocation CopyLocation;
 
@@ -111,9 +112,9 @@ namespace FTAnalyzer.Forms
                 if (GoogleMap.PLACES.Contains(resultType))
                     placesMenu.DropDownItems.Add(menu);
                 else
-                    mnuGoogleResultType.DropDownItems.Add(menu);
+                    mnuFoundResultType.DropDownItems.Add(menu);
             }
-            mnuGoogleResultType.DropDownItems.Add(placesMenu);
+            mnuFoundResultType.DropDownItems.Add(placesMenu);
             if (AllFiltersActive(true))
                 mnuSelectClear.Text = "Clear All";
             else
@@ -140,7 +141,7 @@ namespace FTAnalyzer.Forms
                 else
                     mnuStatusSelectAll.Text = "Select All";
             }
-            foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
+            foreach (ToolStripMenuItem menu in mnuFoundResultType.DropDownItems)
             {
                 if (menu.Text != "Places" && menu.Text != "Select All" && menu.Text != "Clear All")
                 {
@@ -149,7 +150,7 @@ namespace FTAnalyzer.Forms
                         count++;
                 }
             }
-            ToolStripMenuItem places = mnuGoogleResultType.DropDownItems["Places"] as ToolStripMenuItem;
+            ToolStripMenuItem places = mnuFoundResultType.DropDownItems["Places"] as ToolStripMenuItem;
             foreach (ToolStripMenuItem menu in places.DropDownItems)
             {
                 if (menu.Text != "Select All" && menu.Text != "Clear All")
@@ -197,23 +198,23 @@ namespace FTAnalyzer.Forms
             if (AllFiltersActive(false))
                 return new SortableBindingList<IDisplayGeocodedLocation>(locations);
             List<IDisplayGeocodedLocation> results = new List<IDisplayGeocodedLocation>();
-            ToolStripMenuItem places = mnuGoogleResultType.DropDownItems["Places"] as ToolStripMenuItem;
-            ToolStripMenuItem[] list = new ToolStripMenuItem[places.DropDownItems.Count + mnuGoogleResultType.DropDownItems.Count + noneOfTheAboveMenus.Count()];
-            mnuGoogleResultType.DropDownItems.CopyTo(list, 0);
-            places.DropDownItems.CopyTo(list, mnuGoogleResultType.DropDownItems.Count);
-            noneOfTheAboveMenus.CopyTo(list, mnuGoogleResultType.DropDownItems.Count + places.DropDownItems.Count); // add any missing elements to always display them
+            ToolStripMenuItem places = mnuFoundResultType.DropDownItems["Places"] as ToolStripMenuItem;
+            ToolStripMenuItem[] list = new ToolStripMenuItem[places.DropDownItems.Count + mnuFoundResultType.DropDownItems.Count + noneOfTheAboveMenus.Count()];
+            mnuFoundResultType.DropDownItems.CopyTo(list, 0);
+            places.DropDownItems.CopyTo(list, mnuFoundResultType.DropDownItems.Count);
+            noneOfTheAboveMenus.CopyTo(list, mnuFoundResultType.DropDownItems.Count + places.DropDownItems.Count); // add any missing elements to always display them
             foreach (IDisplayGeocodedLocation loc in locations)
             {
                 if (StatusFilter(loc) || (mustDisplay != null && loc.Equals(mustDisplay)))
                 {
-                    if (loc.GoogleResultType == null || loc.GoogleResultType.Length == 0 || (mustDisplay != null && loc.Equals(mustDisplay)))
+                    if (loc.FoundResultType == null || loc.FoundResultType.Length == 0 || (mustDisplay != null && loc.Equals(mustDisplay)))
                         results.Add(loc);
                     else
                     {
                         foreach (ToolStripMenuItem menu in list)
                         {
                             // filter locations on menu items that are ticked
-                            if (menu.Checked && loc.GoogleResultType.Contains(menu.Name))
+                            if (menu.Checked && loc.FoundResultType.Contains(menu.Name))
                             {
                                 results.Add(loc);
                                 break;
@@ -231,9 +232,9 @@ namespace FTAnalyzer.Forms
             Dictionary<string, List<IDisplayGeocodedLocation>> results = new Dictionary<string, List<IDisplayGeocodedLocation>>();
             foreach (IDisplayGeocodedLocation loc in input)
             {
-                if (loc.GoogleResultType.Length > 0)
+                if (loc.FoundResultType.Length > 0)
                 {
-                    string[] parts = loc.GoogleResultType.Split(',');
+                    string[] parts = loc.FoundResultType.Split(',');
                     foreach (string part in parts)
                     {
                         string key = part.Trim();
@@ -284,7 +285,7 @@ namespace FTAnalyzer.Forms
 
         private void UpdateGoogleStatusMenus()
         {
-            foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
+            foreach (ToolStripMenuItem menu in mnuFoundResultType.DropDownItems)
             {
                 Application.UserAppDataRegistry.SetValue(menu.Name, menu.Checked.ToString()); // remember checked state for next time
             }
@@ -294,11 +295,11 @@ namespace FTAnalyzer.Forms
         private void mnuSelectClear_Click(object sender, EventArgs e)
         {
             refreshingMenus = true;
-            ToolStripMenuItem places = mnuGoogleResultType.DropDownItems["Places"] as ToolStripMenuItem;
+            ToolStripMenuItem places = mnuFoundResultType.DropDownItems["Places"] as ToolStripMenuItem;
             if (mnuSelectClear.Text.Equals("Clear All"))
             {
                 mnuSelectClear.Text = "Select All";
-                foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
+                foreach (ToolStripMenuItem menu in mnuFoundResultType.DropDownItems)
                     menu.Checked = false;
                 foreach (ToolStripMenuItem menu in places.DropDownItems)
                     menu.Checked = false;
@@ -306,7 +307,7 @@ namespace FTAnalyzer.Forms
             else
             {
                 mnuSelectClear.Text = "Clear All";
-                foreach (ToolStripMenuItem menu in mnuGoogleResultType.DropDownItems)
+                foreach (ToolStripMenuItem menu in mnuFoundResultType.DropDownItems)
                     menu.Checked = true;
                 foreach (ToolStripMenuItem menu in places.DropDownItems)
                     menu.Checked = true;
@@ -646,8 +647,8 @@ namespace FTAnalyzer.Forms
                                 loc.Longitude = longitude;
                                 loc.LongitudeM = mpoint.X;
                                 loc.LatitudeM = mpoint.Y;
-                                loc.GoogleLocation = address;
-                                loc.GoogleResultType = resultType;
+                                loc.FoundLocation = address;
+                                loc.FoundResultType = resultType;
                                 loc.ViewPort = MapTransforms.TransformViewport(viewport);
                                 loc.FoundLevel = foundLevel;
                                 UpdateDatabase(loc, inDatabase);
@@ -756,8 +757,8 @@ namespace FTAnalyzer.Forms
         {
             FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
             loc.GeocodeStatus = FactLocation.Geocode.NOT_SEARCHED;
-            loc.GoogleLocation = string.Empty;
-            loc.GoogleResultType = string.Empty;
+            loc.FoundLocation = string.Empty;
+            loc.FoundResultType = string.Empty;
             loc.Latitude = 0d;
             loc.Longitude = 0d;
             loc.LatitudeM = 0d;
@@ -840,8 +841,8 @@ namespace FTAnalyzer.Forms
                             string hashkey = dbh.LatLongHashKey(latitude, longitude);
                             if (LatLongIndex.ContainsKey(hashkey))
                             {
-                                loc.GoogleLocation = LatLongIndex[hashkey].Item1;
-                                loc.GoogleResultType = LatLongIndex[hashkey].Item2;
+                                loc.FoundLocation = LatLongIndex[hashkey].Item1;
+                                loc.FoundResultType = LatLongIndex[hashkey].Item2;
                                 UpdateDatabase(loc, true);
                             }
                             else
@@ -905,13 +906,13 @@ namespace FTAnalyzer.Forms
                         (resultTypes != GoogleMap.POSTALCODE &&
                          resultTypes != GoogleMap.POSTALCODEPREFIX)) // prefer more detailed results than postal codes
                     {
-                        loc.GoogleLocation = result.ReturnAddress;
-                        loc.GoogleResultType = resultTypes;
+                        loc.FoundLocation = result.ReturnAddress;
+                        loc.FoundResultType = resultTypes;
                         log.Info("Decided to use: Pixelsize: " + loc.PixelSize + ", level: " + foundLevel + "=" + result.ReturnAddress + ". Type: " + resultTypes);
                         break;
                     }
                 }
-                if (loc.GoogleLocation.Length == 0)
+                if (loc.FoundLocation.Length == 0)
                 {
                     // we haven't got a good match so try again with level <=
                     foreach (GeoResponse.CResult result in res.Results)
@@ -920,8 +921,8 @@ namespace FTAnalyzer.Forms
                         viewport = result.Geometry.ViewPort;
                         if (foundLevel <= loc.Level)
                         {
-                            loc.GoogleLocation = result.ReturnAddress;
-                            loc.GoogleResultType = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
+                            loc.FoundLocation = result.ReturnAddress;
+                            loc.FoundResultType = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
                             break;
                         }
                     }
@@ -929,8 +930,8 @@ namespace FTAnalyzer.Forms
             }
             else if (res.Status == "ZERO_RESULTS")
             {
-                loc.GoogleLocation = "Not Found";
-                loc.GoogleResultType = string.Empty;
+                loc.FoundLocation = "Not Found";
+                loc.FoundResultType = string.Empty;
             }
         }
 
@@ -1016,9 +1017,10 @@ namespace FTAnalyzer.Forms
 
         public bool LoadOS50kGazetteer()
         {
-            if (OS50k != null)
+            if (OS50kDictionary != null)
                 return true; // already loaded
-            OS50k = new Dictionary<string, IList<OS50kGazetteer>>();
+            OS50kDictionary = new Dictionary<string, IList<OS50kGazetteer>>();
+            OS50k = new List<OS50kGazetteer>();
             try
             {
                 string startPath;
@@ -1036,7 +1038,8 @@ namespace FTAnalyzer.Forms
                 log.Warn("Failed to load OS50k Gazetteer error was : " + e.Message);
                 MessageBox.Show("Failed to load OS50k Gazetteer error was : " + e.Message);
             }
-            OS50k = null; // discard partially loaded file
+            OS50kDictionary = null; // only reach here on exception so discard partially loaded file
+            OS50k = null;
             return false;
         }
 
@@ -1053,12 +1056,13 @@ namespace FTAnalyzer.Forms
                         OS50kGazetteer gaz = new OS50kGazetteer(line);
                         string key = gaz.DefinitiveName.ToLower();
                         IList<OS50kGazetteer> list = null;
-                        if (!OS50k.TryGetValue(key, out list))
+                        if (!OS50kDictionary.TryGetValue(key, out list))
                         {
                             list = new List<OS50kGazetteer>();
-                            OS50k.Add(key, list);
+                            OS50kDictionary.Add(key, list);
                         }
                         list.Add(gaz);
+                        OS50k.Add(gaz);
                     }
                 }
             }
@@ -1071,7 +1075,7 @@ namespace FTAnalyzer.Forms
             using (StreamWriter sw = new StreamWriter(@"C:\Maps\FTAnalyzer\endings.csv", false))
             {
                 sw.WriteLine("Ending,PlaceName,CountyCode,CountyName,FeatureCode,Latitude,Longitude,ParishName");
-                foreach(KeyValuePair<string, IList<OS50kGazetteer>> kvp in OS50k)
+                foreach(KeyValuePair<string, IList<OS50kGazetteer>> kvp in OS50kDictionary)
                 {
                     string name = kvp.Key;
                     OS50kGazetteer gaz = kvp.Value[0];
@@ -1198,14 +1202,24 @@ namespace FTAnalyzer.Forms
 
         private bool GazetteerMatchMethodB(FactLocation loc)
         {
-            log.Info("OS Geocoder Fuzzy match Failed to match: " + loc.ToString());
+            if (loc.Level >= FactLocation.ADDRESS)
+            {
+                Predicate<OS50kGazetteer> match = x => x.FuzzyMatch == loc.FuzzyMatch && x.IsCountyMatch(loc);
+                List<OS50kGazetteer> results = OS50k.Where(match).ToList<OS50kGazetteer>();
+                if (results.Count > 0)
+                {
+                    SetOSGeocoding(loc, results[0], FactLocation.ADDRESS, true);
+                    return true;
+                }
+                log.Info("OS Geocoder Fuzzy match Failed to match: " + loc.ToString());
+            }
             return false;
         }
 
         private bool CheckLocationMatch(string key, FactLocation loc)
         {
             IList<OS50kGazetteer> results = null;
-            if (key.Length > 0 && OS50k.TryGetValue(key, out results))
+            if (key.Length > 0 && OS50kDictionary.TryGetValue(key, out results))
             {
                 IEnumerable<OS50kGazetteer> placeMatches = results.Where(x => x.IsCountyMatch(loc));
                 if (placeMatches.Count() > 0)
@@ -1225,7 +1239,7 @@ namespace FTAnalyzer.Forms
             OS50kGazetteer gazA = matches.First<OS50kGazetteer>();
             if (count == 1)
             {  // we only have one match so its good
-                SetOSGeocoding(loc, gazA, level);
+                SetOSGeocoding(loc, gazA, level, false);
                 return true;
             }
             else
@@ -1235,7 +1249,7 @@ namespace FTAnalyzer.Forms
                 {
                     if (gaz.ParishName.Equals(loc.SubRegion, StringComparison.InvariantCultureIgnoreCase))
                     {   // we match on parish name so we found a match on name, parish & county
-                        SetOSGeocoding(loc, gaz, level);
+                        SetOSGeocoding(loc, gaz, level, false);
                         return true;
                     }
                 }
@@ -1258,7 +1272,7 @@ namespace FTAnalyzer.Forms
             location.ViewPort.SouthWest.Lat = env.Bottom();
             location.ViewPort.SouthWest.Long = env.Left();
             location.PixelSize = (double)expandBy / 40.0;
-            location.GoogleLocation = string.Empty;
+            location.FoundLocation = string.Empty;
             if (fuzzy)
                 location.GeocodeStatus = FactLocation.Geocode.OS_50KFUZZY;
             else if (level == location.Level)
@@ -1268,6 +1282,7 @@ namespace FTAnalyzer.Forms
             else
                 location.GeocodeStatus = FactLocation.Geocode.OS_50KPARTIAL;
             location.FoundLevel = level;
+            location.FoundLocation = gaz.ToString();
             bool inDatabase = DatabaseHelper.Instance.IsLocationInDatabase(location.ToString());
             UpdateDatabase(location, inDatabase);
         }

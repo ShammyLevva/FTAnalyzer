@@ -40,6 +40,7 @@ namespace FTAnalyzer
         public string PlaceMetaphone { get; private set; }
         public string AddressNoNumerics { get; private set; }
         public string PlaceNoNumerics { get; private set; }
+        public string FuzzyMatch { get; private set; }
         public string ParishID { get; internal set; }
         public int Level { get; private set; }
         public Region KnownRegion { get; private set; }
@@ -48,8 +49,8 @@ namespace FTAnalyzer
         public double LatitudeM { get; set; }
         public double LongitudeM { get; set; }
         public Geocode GeocodeStatus { get; set; }
-        public string GoogleLocation { get; set; }
-        public string GoogleResultType { get; set; }
+        public string FoundLocation { get; set; }
+        public string FoundResultType { get; set; }
         public int FoundLevel { get; set; }
         public double PixelSize { get; set; }
         public GeoResponse.CResult.CGeometry.CViewPort ViewPort { get; set; }
@@ -366,6 +367,7 @@ namespace FTAnalyzer
             this.Address = string.Empty;
             this.Place = string.Empty;
             this.ParishID = null;
+            this.FuzzyMatch = string.Empty;
             this.individuals = new List<Individual>();
             this.Latitude = 0;
             this.Longitude = 0;
@@ -373,8 +375,8 @@ namespace FTAnalyzer
             this.LongitudeM = 0;
             this.Level = UNKNOWN;
             this.GeocodeStatus = Geocode.NOT_SEARCHED;
-            this.GoogleLocation = string.Empty;
-            this.GoogleResultType = string.Empty;
+            this.FoundLocation = string.Empty;
+            this.FoundResultType = string.Empty;
             this.FoundLevel = -2;
             this.ViewPort = new GeoResponse.CResult.CGeometry.CViewPort();
         }
@@ -663,6 +665,7 @@ namespace FTAnalyzer
             AddressMetaphone = meta.PrimaryKey;
             meta = new DoubleMetaphone(Place);
             PlaceMetaphone = meta.PrimaryKey;
+            FuzzyMatch = AddressMetaphone + ":" + SubRegionMetaphone + ":" + RegionMetaphone + ":" + CountryMetaphone;
         }
 
         public static string ReplaceString(string str, string oldValue, string newValue, StringComparison comparison)
@@ -979,8 +982,8 @@ namespace FTAnalyzer
             to.ViewPort.SouthWest.Lat = from.ViewPort.SouthWest.Lat;
             to.ViewPort.SouthWest.Long = from.ViewPort.SouthWest.Long;
             to.GeocodeStatus = from.GeocodeStatus;
-            to.GoogleLocation = from.GoogleLocation;
-            to.GoogleResultType = from.GoogleResultType;
+            to.FoundLocation = from.FoundLocation;
+            to.FoundResultType = from.FoundResultType;
             to.FoundLevel = from.FoundLevel;
         }
 
@@ -1069,7 +1072,7 @@ namespace FTAnalyzer
         {
             get
             {
-                return GoogleLocation.Length == 0 &&
+                return FoundLocation.Length == 0 &&
                     (GeocodeStatus == Geocode.GEDCOM_USER || GeocodeStatus == Geocode.OS_50KMATCH || GeocodeStatus == Geocode.OS_50KPARTIAL || GeocodeStatus == Geocode.OS_50KFUZZY);
             }
         }

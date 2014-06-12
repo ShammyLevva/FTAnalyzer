@@ -28,214 +28,214 @@ namespace FTAnalyzer
         public static readonly List<ModernCounty> MODERN_COUNTIES;
 
         #region Modern County List
-        public static ModernCounty OS_ABERDEENSHIRE = new ModernCounty("AB", "Aberdeenshire");
-        public static ModernCounty OS_ANGUS = new ModernCounty("AG", "Angus");
-        public static ModernCounty OS_ABERDEEN_CITY = new ModernCounty("AN", "Aberdeen City");
-        public static ModernCounty OS_ARGYLL_AND_BUTE = new ModernCounty("AR", "Argyll and Bute");
-        public static ModernCounty OS_BRADFORD = new ModernCounty("BA", "Bradford");
-        public static ModernCounty OS_BLACKBURN_WITH_DARWEN = new ModernCounty("BB", "Blackburn with Darwen");
-        public static ModernCounty OS_BRACKNELL_FOREST = new ModernCounty("BC", "Bracknell Forest");
-        public static ModernCounty OS_BARKING_AND_DAGENHAM = new ModernCounty("BD", "Barking and Dagenham");
-        public static ModernCounty OS_BRIDGEND = new ModernCounty("BE", "Bridgend");
-        public static ModernCounty OS_BEDFORDSHIRE = new ModernCounty("BF", "Bedford");
-        public static ModernCounty OS_BLAENAU_GWENT = new ModernCounty("BG", "Blaenau Gwent");
-        public static ModernCounty OS_CITY_OF_BRIGHTON_AND_HOVE = new ModernCounty("BH", "City of Brighton and Hove");
-        public static ModernCounty OS_BIRMINGHAM = new ModernCounty("BI", "Birmingham");
-        public static ModernCounty OS_CENTRAL_BEDFORDSHIRE = new ModernCounty("BK", "Central Bedfordshire"); 
-        public static ModernCounty OS_BARNSLEY = new ModernCounty("BL", "Barnsley");
-        public static ModernCounty OS_BUCKINGHAMSHIRE = new ModernCounty("BM", "Buckinghamshire");
-        public static ModernCounty OS_BARNET = new ModernCounty("BN", "Barnet");
-        public static ModernCounty OS_BOLTON = new ModernCounty("BO", "Bolton");
-        public static ModernCounty OS_BLACKPOOL = new ModernCounty("BP", "Blackpool");
-        public static ModernCounty OS_BROMLEY = new ModernCounty("BR", "Bromley");
-        public static ModernCounty OS_BATH_AND_NORTH_EAST_SOMERSET = new ModernCounty("BS", "Bath and North East Somerset");
-        public static ModernCounty OS_BRENT = new ModernCounty("BT", "Brent");
-        public static ModernCounty OS_BOURNEMOUTH = new ModernCounty("BU", "Bournemouth");
-        public static ModernCounty OS_BEXLEY = new ModernCounty("BX", "Bexley");
-        public static ModernCounty OS_BURY = new ModernCounty("BY", "Bury");
-        public static ModernCounty OS_BRISTOL = new ModernCounty("BZ", "City of Bristol");
-        public static ModernCounty OS_CALDERDALE = new ModernCounty("CA", "Calderdale");
-        public static ModernCounty OS_CAMBRIDGESHIRE = new ModernCounty("CB", "Cambridgeshire");
-        public static ModernCounty OS_CHESHIRE_WEST_AND_CHESTER = new ModernCounty("CC", "Cheshire West and Chester");
-        public static ModernCounty OS_CARDIFF = new ModernCounty("CD", "Cardiff");
-        public static ModernCounty OS_CEREDIGION = new ModernCounty("CE", "Ceredigion");
-        public static ModernCounty OS_CAERPHILLY = new ModernCounty("CF", "Caerphilly");
-        public static ModernCounty OS_CHESHIRE_EAST = new ModernCounty("CH", "Cheshire East");
-        public static ModernCounty OS_CLACKMANNANSHIRE = new ModernCounty("CL", "Clackmannanshire");
-        public static ModernCounty OS_CAMDEN = new ModernCounty("CM", "Camden");
-        public static ModernCounty OS_CORNWALL = new ModernCounty("CN", "Cornwall");
-        public static ModernCounty OS_CARMARTHENSHIRE = new ModernCounty("CT", "Carmarthenshire");
-        public static ModernCounty OS_CUMBRIA = new ModernCounty("CU", "Cumbria");
-        public static ModernCounty OS_COVENTRY = new ModernCounty("CV", "Coventry");
-        public static ModernCounty OS_CONWY = new ModernCounty("CW", "Conwy");
-        public static ModernCounty OS_CROYDON = new ModernCounty("CY", "Croydon");
-        public static ModernCounty OS_CITY_OF_DERBY = new ModernCounty("DB", "City of Derby");
-        public static ModernCounty OS_DUNDEE_CITY = new ModernCounty("DD", "Dundee City");
-        public static ModernCounty OS_DENBIGHSHIRE = new ModernCounty("DE", "Denbighshire");
-        public static ModernCounty OS_DUMFRIES_AND_GALLOWAY = new ModernCounty("DG", "Dumfries and Galloway");
-        public static ModernCounty OS_DARLINGTON = new ModernCounty("DL", "Darlington");
-        public static ModernCounty OS_DEVON = new ModernCounty("DN", "Devon");
-        public static ModernCounty OS_DONCASTER = new ModernCounty("DR", "Doncaster");
-        public static ModernCounty OS_DORSET = new ModernCounty("DT", "Dorset");
-        public static ModernCounty OS_DURHAM = new ModernCounty("DU", "Durham");
-        public static ModernCounty OS_DERBYSHIRE = new ModernCounty("DY", "Derbyshire");
-        public static ModernCounty OS_DUDLEY = new ModernCounty("DZ", "Dudley");
-        public static ModernCounty OS_EAST_AYRSHIRE = new ModernCounty("EA", "East Ayrshire");
-        public static ModernCounty OS_CITY_OF_EDINBURGH = new ModernCounty("EB", "City of Edinburgh");
-        public static ModernCounty OS_EAST_DUNBARTONSHIRE = new ModernCounty("ED", "East Dunbartonshire");
-        public static ModernCounty OS_EALING = new ModernCounty("EG", "Ealing");
-        public static ModernCounty OS_EAST_LOTHIAN = new ModernCounty("EL", "East Lothian");
-        public static ModernCounty OS_ENFIELD = new ModernCounty("EN", "Enfield");
-        public static ModernCounty OS_EAST_RENFREWSHIRE = new ModernCounty("ER", "East Renfrewshire");
-        public static ModernCounty OS_EAST_SUSSEX = new ModernCounty("ES", "East Sussex");
-        public static ModernCounty OS_ESSEX = new ModernCounty("EX", "Essex");
-        public static ModernCounty OS_EAST_RIDING_OF_YORKSHIRE = new ModernCounty("EY", "East Riding of Yorkshire");
-        public static ModernCounty OS_FALKIRK = new ModernCounty("FA", "Falkirk");
-        public static ModernCounty OS_FIFE = new ModernCounty("FF", "Fife");
-        public static ModernCounty OS_FLINTSHIRE = new ModernCounty("FL", "Flintshire");
-        public static ModernCounty OS_GATESHEAD = new ModernCounty("GH", "Gateshead");
-        public static ModernCounty OS_GLASGOW_CITY = new ModernCounty("GL", "Glasgow City");
-        public static ModernCounty OS_GLOUCESTERSHIRE = new ModernCounty("GR", "Gloucestershire");
-        public static ModernCounty OS_GREENWICH = new ModernCounty("GW", "Greenwich");
-        public static ModernCounty OS_GWYNEDD = new ModernCounty("GY", "Gwynedd");
-        public static ModernCounty OS_HALTON = new ModernCounty("HA", "Halton");
-        public static ModernCounty OS_HERTFORDSHIRE = new ModernCounty("HD", "Hertfordshire");
-        public static ModernCounty OS_HEREFORDSHIRE = new ModernCounty("HE", "Herefordshire");
-        public static ModernCounty OS_HAMMERSMITH_AND_FULHAM = new ModernCounty("HF", "Hammersmith and Fulham");
-        public static ModernCounty OS_HARINGEY = new ModernCounty("HG", "Haringey");
-        public static ModernCounty OS_HILLINGDON = new ModernCounty("HI", "Hillingdon");
-        public static ModernCounty OS_HIGHLAND = new ModernCounty("HL", "Highland");
-        public static ModernCounty OS_HACKNEY = new ModernCounty("HN", "Hackney");
-        public static ModernCounty OS_HAMPSHIRE = new ModernCounty("HP", "Hampshire");
-        public static ModernCounty OS_HARROW = new ModernCounty("HR", "Harrow");
-        public static ModernCounty OS_HOUNSLOW = new ModernCounty("HS", "Hounslow");
-        public static ModernCounty OS_HARTLEPOOL = new ModernCounty("HT", "Hartlepool");
-        public static ModernCounty OS_HAVERING = new ModernCounty("HV", "Havering");
-        public static ModernCounty OS_ISLE_OF_ANGLESEY = new ModernCounty("IA", "Isle of Anglesey");
-        public static ModernCounty OS_ISLINGTON = new ModernCounty("IL", "Islington");
-        public static ModernCounty OS_ISLE_OF_MAN = new ModernCounty("IM", "Isle of Man");
-        public static ModernCounty OS_INVERCLYDE = new ModernCounty("IN", "Inverclyde");
-        public static ModernCounty OS_ISLES_OF_SCILLY = new ModernCounty("IS", "Isles of Scilly");
-        public static ModernCounty OS_CITY_OF_INVERNESS = new ModernCounty("IV", "City of Inverness"); // not on gazetteer but in index??
-        public static ModernCounty OS_ISLE_OF_WIGHT = new ModernCounty("IW", "Isle of Wight");
-        public static ModernCounty OS_ROYAL_BOROUGH_OF_KENSINGTON_AND_CHELSEA = new ModernCounty("KC", "Royal Borough of Kensington and Chelsea");
-        public static ModernCounty OS_KINGSTON_UPON_THAMES = new ModernCounty("KG", "Kingston upon Thames");
-        public static ModernCounty OS_CITY_OF_KINGSTON_UPON_HULL = new ModernCounty("KH", "City of Kingston upon Hull");
-        public static ModernCounty OS_KIRKLEES = new ModernCounty("KL", "Kirklees");
-        public static ModernCounty OS_KNOWSLEY = new ModernCounty("KN", "Knowsley");
-        public static ModernCounty OS_KENT = new ModernCounty("KT", "Kent");
-        public static ModernCounty OS_LANCASHIRE = new ModernCounty("LA", "Lancashire");
-        public static ModernCounty OS_LAMBETH = new ModernCounty("LB", "Lambeth");
-        public static ModernCounty OS_CITY_OF_LEICESTER = new ModernCounty("LC", "City of Leicester");
-        public static ModernCounty OS_LEEDS = new ModernCounty("LD", "Leeds");
-        public static ModernCounty OS_LINCOLNSHIRE = new ModernCounty("LL", "Lincolnshire");
-        public static ModernCounty OS_LUTON = new ModernCounty("LN", "Luton");
-        public static ModernCounty OS_CITY_OF_LONDON = new ModernCounty("LO", "City of London");
-        public static ModernCounty OS_LIVERPOOL = new ModernCounty("LP", "Liverpool");
-        public static ModernCounty OS_LEWISHAM = new ModernCounty("LS", "Lewisham");
-        public static ModernCounty OS_LEICESTERSHIRE = new ModernCounty("LT", "Leicestershire");
-        public static ModernCounty OS_MANCHESTER = new ModernCounty("MA", "Manchester");
-        public static ModernCounty OS_MIDDLESBROUGH = new ModernCounty("MB", "Middlesbrough");
-        public static ModernCounty OS_MEDWAY = new ModernCounty("ME", "Medway");
-        public static ModernCounty OS_MIDLOTHIAN = new ModernCounty("MI", "Midlothian");
-        public static ModernCounty OS_MILTON_KEYNES = new ModernCounty("MK", "Milton Keynes");
-        public static ModernCounty OS_MONMOUTHSHIRE = new ModernCounty("MM", "Monmouthshire");
-        public static ModernCounty OS_MORAY = new ModernCounty("MO", "Moray");
-        public static ModernCounty OS_MERTON = new ModernCounty("MR", "Merton");
-        public static ModernCounty OS_MERTHYR_TYDFIL = new ModernCounty("MT", "Merthyr Tydfil");
-        public static ModernCounty OS_NORTH_AYRSHIRE = new ModernCounty("NA", "North Ayrshire");
-        public static ModernCounty OS_NORTH_EAST_LINCOLNSHIRE = new ModernCounty("NC", "North East Lincolnshire");
-        public static ModernCounty OS_NORTHUMBERLAND = new ModernCounty("ND", "Northumberland");
-        public static ModernCounty OS_NEWPORT = new ModernCounty("NE", "Newport");
-        public static ModernCounty OS_CITY_OF_NOTTINGHAM = new ModernCounty("NG", "City of Nottingham");
-        public static ModernCounty OS_NEWHAM = new ModernCounty("NH", "Newham");
-        public static ModernCounty OS_NORTH_LINCOLNSHIRE = new ModernCounty("NI", "North Lincolnshire");
-        public static ModernCounty OS_NORFOLK = new ModernCounty("NK", "Norfolk");
-        public static ModernCounty OS_NORTH_LANARKSHIRE = new ModernCounty("NL", "North Lanarkshire");
-        public static ModernCounty OS_NORTHAMPTONSHIRE = new ModernCounty("NN", "Northamptonshire");
-        public static ModernCounty OS_NEATH_PORT_TALBOT = new ModernCounty("NP", "Neath Port Talbot");
-        public static ModernCounty OS_NORTH_TYNESIDE = new ModernCounty("NR", "North Tyneside");
-        public static ModernCounty OS_NORTH_SOMERSET = new ModernCounty("NS", "North Somerset");
-        public static ModernCounty OS_NOTTINGHAMSHIRE = new ModernCounty("NT", "Nottinghamshire");
-        public static ModernCounty OS_NEWCASTLE_UPON_TYNE = new ModernCounty("NW", "Newcastle upon Tyne");
-        public static ModernCounty OS_NORTH_YORKSHIRE = new ModernCounty("NY", "North Yorkshire");
-        public static ModernCounty OS_OLDHAM = new ModernCounty("OH", "Oldham");
-        public static ModernCounty OS_ORKNEY_ISLANDS = new ModernCounty("OK", "Orkney Islands");
-        public static ModernCounty OS_OXFORDSHIRE = new ModernCounty("ON", "Oxfordshire");
-        public static ModernCounty OS_PEMBROKESHIRE = new ModernCounty("PB", "Pembrokeshire");
-        public static ModernCounty OS_CITY_OF_PETERBOROUGH = new ModernCounty("PE", "City of Peterborough");
-        public static ModernCounty OS_PERTH_AND_KINROSS = new ModernCounty("PK", "Perth and Kinross");
-        public static ModernCounty OS_POOLE = new ModernCounty("PL", "Poole");
-        public static ModernCounty OS_CITY_OF_PORTSMOUTH = new ModernCounty("PO", "City of Portsmouth");
-        public static ModernCounty OS_POWYS = new ModernCounty("PW", "Powys");
-        public static ModernCounty OS_CITY_OF_PLYMOUTH = new ModernCounty("PY", "City of Plymouth");
-        public static ModernCounty OS_REDBRIDGE = new ModernCounty("RB", "Redbridge");
-        public static ModernCounty OS_REDCAR_AND_CLEVELAND = new ModernCounty("RC", "Redcar and Cleveland");
-        public static ModernCounty OS_ROCHDALE = new ModernCounty("RD", "Rochdale");
-        public static ModernCounty OS_RENFREWSHIRE = new ModernCounty("RE", "Renfrewshire");
-        public static ModernCounty OS_READING = new ModernCounty("RG", "Reading");
-        public static ModernCounty OS_RHONDDA_CYNON_TAFF = new ModernCounty("RH", "Rhondda Cynon Taff");
-        public static ModernCounty OS_RUTLAND = new ModernCounty("RL", "Rutland");
-        public static ModernCounty OS_ROTHERHAM = new ModernCounty("RO", "Rotherham");
-        public static ModernCounty OS_RICHMOND_UPON_THAMES = new ModernCounty("RT", "Richmond upon Thames");
-        public static ModernCounty OS_SANDWELL = new ModernCounty("SA", "Sandwell");
-        public static ModernCounty OS_SCOTTISH_BORDERS = new ModernCounty("SB", "Scottish Borders");
-        public static ModernCounty OS_SALFORD = new ModernCounty("SC", "Salford");
-        public static ModernCounty OS_SWINDON = new ModernCounty("SD", "Swindon");
-        public static ModernCounty OS_SEFTON = new ModernCounty("SE", "Sefton");
-        public static ModernCounty OS_STAFFORDSHIRE = new ModernCounty("SF", "Staffordshire");
-        public static ModernCounty OS_SOUTH_GLOUCESTERSHIRE = new ModernCounty("SG", "South Gloucestershire");
-        public static ModernCounty OS_SHROPSHIRE = new ModernCounty("SH", "Shropshire");
-        public static ModernCounty OS_SHETLAND_ISLANDS = new ModernCounty("SI", "Shetland Islands");
-        public static ModernCounty OS_CITY_OF_STOKE_ON_TRENT = new ModernCounty("SJ", "City of Stoke-on-Trent");
-        public static ModernCounty OS_SUFFOLK = new ModernCounty("SK", "Suffolk");
-        public static ModernCounty OS_SOUTH_LANARKSHIRE = new ModernCounty("SL", "South Lanarkshire");
-        public static ModernCounty OS_STOCKTON_ON_TEES = new ModernCounty("SM", "Stockton-on-Tees");
-        public static ModernCounty OS_ST_HELENS = new ModernCounty("SN", "St Helens");
-        public static ModernCounty OS_CITY_OF_SOUTHAMPTON = new ModernCounty("SO", "City of Southampton");
-        public static ModernCounty OS_SHEFFIELD = new ModernCounty("SP", "Sheffield");
-        public static ModernCounty OS_SOLIHULL = new ModernCounty("SQ", "Solihull");
-        public static ModernCounty OS_STIRLING = new ModernCounty("SR", "Stirling");
-        public static ModernCounty OS_SWANSEA = new ModernCounty("SS", "Swansea");
-        public static ModernCounty OS_SOMERSET = new ModernCounty("ST", "Somerset");
-        public static ModernCounty OS_SURREY = new ModernCounty("SU", "Surrey");
-        public static ModernCounty OS_SUNDERLAND = new ModernCounty("SV", "Sunderland");
-        public static ModernCounty OS_SOUTHWARK = new ModernCounty("SW", "Southwark");
-        public static ModernCounty OS_SOUTH_AYRSHIRE = new ModernCounty("SX", "South Ayrshire");
-        public static ModernCounty OS_SOUTH_TYNESIDE = new ModernCounty("SY", "South Tyneside");
-        public static ModernCounty OS_SUTTON = new ModernCounty("SZ", "Sutton");
-        public static ModernCounty OS_TORBAY = new ModernCounty("TB", "Torbay");
-        public static ModernCounty OS_TORFAEN = new ModernCounty("TF", "Torfaen");
-        public static ModernCounty OS_TOWER_HAMLETS = new ModernCounty("TH", "Tower Hamlets");
-        public static ModernCounty OS_TRAFFORD = new ModernCounty("TR", "Trafford");
-        public static ModernCounty OS_TAMESIDE = new ModernCounty("TS", "Tameside");
-        public static ModernCounty OS_THURROCK = new ModernCounty("TU", "Thurrock");
-        public static ModernCounty OS_VALE_OF_GLAMORGAN = new ModernCounty("VG", "Vale of Glamorgan");
-        public static ModernCounty OS_WALSALL = new ModernCounty("WA", "Walsall");
-        public static ModernCounty OS_WEST_BERKSHIRE = new ModernCounty("WB", "West Berkshire");
-        public static ModernCounty OS_WINDSOR_AND_MAIDENHEAD = new ModernCounty("WC", "Windsor and Maidenhead");
-        public static ModernCounty OS_WEST_DUNBARTONSHIRE = new ModernCounty("WD", "West Dunbartonshire");
-        public static ModernCounty OS_WAKEFIELD = new ModernCounty("WE", "Wakefield");
-        public static ModernCounty OS_WALTHAM_FOREST = new ModernCounty("WF", "Waltham Forest");
-        public static ModernCounty OS_WARRINGTON = new ModernCounty("WG", "Warrington");
-        public static ModernCounty OS_CITY_OF_WOLVERHAMPTON = new ModernCounty("WH", "City of Wolverhampton");
-        public static ModernCounty OS_WESTERN_ISLES = new ModernCounty("WI", "Na h-Eileanan an Iar");
-        public static ModernCounty OS_WOKINGHAM = new ModernCounty("WJ", "Wokingham");
-        public static ModernCounty OS_WARWICKSHIRE = new ModernCounty("WK", "Warwickshire");
-        public static ModernCounty OS_WEST_LOTHIAN = new ModernCounty("WL", "West Lothian");
-        public static ModernCounty OS_CITY_OF_WESTMINSTER = new ModernCounty("WM", "City of Westminster");
-        public static ModernCounty OS_WIGAN = new ModernCounty("WN", "Wigan");
-        public static ModernCounty OS_WORCESTERSHIRE = new ModernCounty("WO", "Worcestershire");
-        public static ModernCounty OS_TELFORD_AND_WREKIN = new ModernCounty("WP", "Telford and Wrekin");
-        public static ModernCounty OS_WIRRAL = new ModernCounty("WR", "Wirral");
-        public static ModernCounty OS_WEST_SUSSEX = new ModernCounty("WS", "West Sussex");
-        public static ModernCounty OS_WILTSHIRE = new ModernCounty("WT", "Wiltshire");
-        public static ModernCounty OS_WANDSWORTH = new ModernCounty("WW", "Wandsworth");
-        public static ModernCounty OS_WREXHAM = new ModernCounty("WX", "Wrexham");
-        public static ModernCounty OS_YORK = new ModernCounty("YK", "York");
-        public static ModernCounty OS_SOUTHEND_ON_SEA = new ModernCounty("YS", "Southend-on-Sea");
-        public static ModernCounty OS_SLOUGH = new ModernCounty("YT", "Slough");
-        public static ModernCounty OS_STOCKPORT = new ModernCounty("YY", "Stockport");
+        public static ModernCounty OS_ABERDEENSHIRE = new ModernCounty("AB", "Aberdeenshire", Countries.SCOTLAND);
+        public static ModernCounty OS_ANGUS = new ModernCounty("AG", "Angus", Countries.SCOTLAND);
+        public static ModernCounty OS_ABERDEEN_CITY = new ModernCounty("AN", "Aberdeen City", Countries.SCOTLAND);
+        public static ModernCounty OS_ARGYLL_AND_BUTE = new ModernCounty("AR", "Argyll and Bute", Countries.SCOTLAND);
+        public static ModernCounty OS_BRADFORD = new ModernCounty("BA", "Bradford", Countries.ENGLAND);
+        public static ModernCounty OS_BLACKBURN_WITH_DARWEN = new ModernCounty("BB", "Blackburn with Darwen", Countries.ENGLAND);
+        public static ModernCounty OS_BRACKNELL_FOREST = new ModernCounty("BC", "Bracknell Forest", Countries.ENGLAND);
+        public static ModernCounty OS_BARKING_AND_DAGENHAM = new ModernCounty("BD", "Barking and Dagenham", Countries.ENGLAND);
+        public static ModernCounty OS_BRIDGEND = new ModernCounty("BE", "Bridgend", Countries.WALES);
+        public static ModernCounty OS_BEDFORDSHIRE = new ModernCounty("BF", "Bedford", Countries.ENGLAND);
+        public static ModernCounty OS_BLAENAU_GWENT = new ModernCounty("BG", "Blaenau Gwent", Countries.WALES);
+        public static ModernCounty OS_CITY_OF_BRIGHTON_AND_HOVE = new ModernCounty("BH", "City of Brighton and Hove", Countries.ENGLAND);
+        public static ModernCounty OS_BIRMINGHAM = new ModernCounty("BI", "Birmingham", Countries.ENGLAND);
+        public static ModernCounty OS_CENTRAL_BEDFORDSHIRE = new ModernCounty("BK", "Central Bedfordshire", Countries.ENGLAND);
+        public static ModernCounty OS_BARNSLEY = new ModernCounty("BL", "Barnsley", Countries.ENGLAND);
+        public static ModernCounty OS_BUCKINGHAMSHIRE = new ModernCounty("BM", "Buckinghamshire", Countries.ENGLAND);
+        public static ModernCounty OS_BARNET = new ModernCounty("BN", "Barnet", Countries.ENGLAND);
+        public static ModernCounty OS_BOLTON = new ModernCounty("BO", "Bolton", Countries.ENGLAND);
+        public static ModernCounty OS_BLACKPOOL = new ModernCounty("BP", "Blackpool", Countries.ENGLAND);
+        public static ModernCounty OS_BROMLEY = new ModernCounty("BR", "Bromley", Countries.ENGLAND);
+        public static ModernCounty OS_BATH_AND_NORTH_EAST_SOMERSET = new ModernCounty("BS", "Bath and North East Somerset", Countries.ENGLAND);
+        public static ModernCounty OS_BRENT = new ModernCounty("BT", "Brent", Countries.ENGLAND);
+        public static ModernCounty OS_BOURNEMOUTH = new ModernCounty("BU", "Bournemouth", Countries.ENGLAND);
+        public static ModernCounty OS_BEXLEY = new ModernCounty("BX", "Bexley", Countries.ENGLAND);
+        public static ModernCounty OS_BURY = new ModernCounty("BY", "Bury", Countries.ENGLAND);
+        public static ModernCounty OS_BRISTOL = new ModernCounty("BZ", "City of Bristol", Countries.ENGLAND);
+        public static ModernCounty OS_CALDERDALE = new ModernCounty("CA", "Calderdale", Countries.ENGLAND);
+        public static ModernCounty OS_CAMBRIDGESHIRE = new ModernCounty("CB", "Cambridgeshire", Countries.ENGLAND);
+        public static ModernCounty OS_CHESHIRE_WEST_AND_CHESTER = new ModernCounty("CC", "Cheshire West and Chester", Countries.ENGLAND);
+        public static ModernCounty OS_CARDIFF = new ModernCounty("CD", "Cardiff", Countries.WALES);
+        public static ModernCounty OS_CEREDIGION = new ModernCounty("CE", "Ceredigion", Countries.WALES);
+        public static ModernCounty OS_CAERPHILLY = new ModernCounty("CF", "Caerphilly", Countries.WALES);
+        public static ModernCounty OS_CHESHIRE_EAST = new ModernCounty("CH", "Cheshire East", Countries.ENGLAND);
+        public static ModernCounty OS_CLACKMANNANSHIRE = new ModernCounty("CL", "Clackmannanshire", Countries.SCOTLAND);
+        public static ModernCounty OS_CAMDEN = new ModernCounty("CM", "Camden", Countries.ENGLAND);
+        public static ModernCounty OS_CORNWALL = new ModernCounty("CN", "Cornwall", Countries.ENGLAND);
+        public static ModernCounty OS_CARMARTHENSHIRE = new ModernCounty("CT", "Carmarthenshire", Countries.ENGLAND);
+        public static ModernCounty OS_CUMBRIA = new ModernCounty("CU", "Cumbria", Countries.ENGLAND);
+        public static ModernCounty OS_COVENTRY = new ModernCounty("CV", "Coventry", Countries.ENGLAND);
+        public static ModernCounty OS_CONWY = new ModernCounty("CW", "Conwy", Countries.WALES);
+        public static ModernCounty OS_CROYDON = new ModernCounty("CY", "Croydon", Countries.ENGLAND);
+        public static ModernCounty OS_CITY_OF_DERBY = new ModernCounty("DB", "City of Derby", Countries.ENGLAND);
+        public static ModernCounty OS_DUNDEE_CITY = new ModernCounty("DD", "Dundee City", Countries.SCOTLAND);
+        public static ModernCounty OS_DENBIGHSHIRE = new ModernCounty("DE", "Denbighshire", Countries.WALES);
+        public static ModernCounty OS_DUMFRIES_AND_GALLOWAY = new ModernCounty("DG", "Dumfries and Galloway", Countries.SCOTLAND);
+        public static ModernCounty OS_DARLINGTON = new ModernCounty("DL", "Darlington", Countries.ENGLAND);
+        public static ModernCounty OS_DEVON = new ModernCounty("DN", "Devon", Countries.ENGLAND);
+        public static ModernCounty OS_DONCASTER = new ModernCounty("DR", "Doncaster", Countries.ENGLAND);
+        public static ModernCounty OS_DORSET = new ModernCounty("DT", "Dorset", Countries.ENGLAND);
+        public static ModernCounty OS_DURHAM = new ModernCounty("DU", "Durham", Countries.ENGLAND);
+        public static ModernCounty OS_DERBYSHIRE = new ModernCounty("DY", "Derbyshire", Countries.ENGLAND);
+        public static ModernCounty OS_DUDLEY = new ModernCounty("DZ", "Dudley", Countries.ENGLAND);
+        public static ModernCounty OS_EAST_AYRSHIRE = new ModernCounty("EA", "East Ayrshire", Countries.SCOTLAND);
+        public static ModernCounty OS_CITY_OF_EDINBURGH = new ModernCounty("EB", "City of Edinburgh", Countries.SCOTLAND);
+        public static ModernCounty OS_EAST_DUNBARTONSHIRE = new ModernCounty("ED", "East Dunbartonshire", Countries.SCOTLAND);
+        public static ModernCounty OS_EALING = new ModernCounty("EG", "Ealing", Countries.ENGLAND);
+        public static ModernCounty OS_EAST_LOTHIAN = new ModernCounty("EL", "East Lothian", Countries.SCOTLAND);
+        public static ModernCounty OS_ENFIELD = new ModernCounty("EN", "Enfield", Countries.ENGLAND);
+        public static ModernCounty OS_EAST_RENFREWSHIRE = new ModernCounty("ER", "East Renfrewshire", Countries.SCOTLAND);
+        public static ModernCounty OS_EAST_SUSSEX = new ModernCounty("ES", "East Sussex", Countries.ENGLAND);
+        public static ModernCounty OS_ESSEX = new ModernCounty("EX", "Essex", Countries.ENGLAND);
+        public static ModernCounty OS_EAST_RIDING_OF_YORKSHIRE = new ModernCounty("EY", "East Riding of Yorkshire", Countries.ENGLAND);
+        public static ModernCounty OS_FALKIRK = new ModernCounty("FA", "Falkirk", Countries.SCOTLAND);
+        public static ModernCounty OS_FIFE = new ModernCounty("FF", "Fife", Countries.SCOTLAND);
+        public static ModernCounty OS_FLINTSHIRE = new ModernCounty("FL", "Flintshire", Countries.WALES);
+        public static ModernCounty OS_GATESHEAD = new ModernCounty("GH", "Gateshead", Countries.ENGLAND);
+        public static ModernCounty OS_GLASGOW_CITY = new ModernCounty("GL", "Glasgow City", Countries.SCOTLAND);
+        public static ModernCounty OS_GLOUCESTERSHIRE = new ModernCounty("GR", "Gloucestershire", Countries.ENGLAND);
+        public static ModernCounty OS_GREENWICH = new ModernCounty("GW", "Greenwich", Countries.ENGLAND);
+        public static ModernCounty OS_GWYNEDD = new ModernCounty("GY", "Gwynedd", Countries.WALES);
+        public static ModernCounty OS_HALTON = new ModernCounty("HA", "Halton", Countries.ENGLAND);
+        public static ModernCounty OS_HERTFORDSHIRE = new ModernCounty("HD", "Hertfordshire", Countries.ENGLAND);
+        public static ModernCounty OS_HEREFORDSHIRE = new ModernCounty("HE", "Herefordshire", Countries.ENGLAND);
+        public static ModernCounty OS_HAMMERSMITH_AND_FULHAM = new ModernCounty("HF", "Hammersmith and Fulham", Countries.ENGLAND);
+        public static ModernCounty OS_HARINGEY = new ModernCounty("HG", "Haringey", Countries.ENGLAND);
+        public static ModernCounty OS_HILLINGDON = new ModernCounty("HI", "Hillingdon", Countries.ENGLAND);
+        public static ModernCounty OS_HIGHLAND = new ModernCounty("HL", "Highland", Countries.SCOTLAND);
+        public static ModernCounty OS_HACKNEY = new ModernCounty("HN", "Hackney", Countries.ENGLAND);
+        public static ModernCounty OS_HAMPSHIRE = new ModernCounty("HP", "Hampshire", Countries.ENGLAND);
+        public static ModernCounty OS_HARROW = new ModernCounty("HR", "Harrow", Countries.ENGLAND);
+        public static ModernCounty OS_HOUNSLOW = new ModernCounty("HS", "Hounslow", Countries.ENGLAND);
+        public static ModernCounty OS_HARTLEPOOL = new ModernCounty("HT", "Hartlepool", Countries.ENGLAND);
+        public static ModernCounty OS_HAVERING = new ModernCounty("HV", "Havering", Countries.ENGLAND);
+        public static ModernCounty OS_ISLE_OF_ANGLESEY = new ModernCounty("IA", "Isle of Anglesey", Countries.WALES);
+        public static ModernCounty OS_ISLINGTON = new ModernCounty("IL", "Islington", Countries.ENGLAND);
+        public static ModernCounty OS_ISLE_OF_MAN = new ModernCounty("IM", "Isle of Man", Countries.ISLE_OF_MAN);
+        public static ModernCounty OS_INVERCLYDE = new ModernCounty("IN", "Inverclyde", Countries.SCOTLAND);
+        public static ModernCounty OS_ISLES_OF_SCILLY = new ModernCounty("IS", "Isles of Scilly", Countries.ENGLAND);
+        public static ModernCounty OS_CITY_OF_INVERNESS = new ModernCounty("IV", "City of Inverness", Countries.SCOTLAND); // not on gazetteer but in index??
+        public static ModernCounty OS_ISLE_OF_WIGHT = new ModernCounty("IW", "Isle of Wight", Countries.ENGLAND);
+        public static ModernCounty OS_ROYAL_BOROUGH_OF_KENSINGTON_AND_CHELSEA = new ModernCounty("KC", "Royal Borough of Kensington and Chelsea", Countries.ENGLAND);
+        public static ModernCounty OS_KINGSTON_UPON_THAMES = new ModernCounty("KG", "Kingston upon Thames", Countries.ENGLAND);
+        public static ModernCounty OS_CITY_OF_KINGSTON_UPON_HULL = new ModernCounty("KH", "City of Kingston upon Hull", Countries.ENGLAND);
+        public static ModernCounty OS_KIRKLEES = new ModernCounty("KL", "Kirklees", Countries.ENGLAND);
+        public static ModernCounty OS_KNOWSLEY = new ModernCounty("KN", "Knowsley", Countries.ENGLAND);
+        public static ModernCounty OS_KENT = new ModernCounty("KT", "Kent", Countries.ENGLAND);
+        public static ModernCounty OS_LANCASHIRE = new ModernCounty("LA", "Lancashire", Countries.ENGLAND);
+        public static ModernCounty OS_LAMBETH = new ModernCounty("LB", "Lambeth", Countries.ENGLAND);
+        public static ModernCounty OS_CITY_OF_LEICESTER = new ModernCounty("LC", "City of Leicester", Countries.ENGLAND);
+        public static ModernCounty OS_LEEDS = new ModernCounty("LD", "Leeds", Countries.ENGLAND);
+        public static ModernCounty OS_LINCOLNSHIRE = new ModernCounty("LL", "Lincolnshire", Countries.ENGLAND);
+        public static ModernCounty OS_LUTON = new ModernCounty("LN", "Luton", Countries.ENGLAND);
+        public static ModernCounty OS_CITY_OF_LONDON = new ModernCounty("LO", "City of London", Countries.ENGLAND);
+        public static ModernCounty OS_LIVERPOOL = new ModernCounty("LP", "Liverpool", Countries.ENGLAND);
+        public static ModernCounty OS_LEWISHAM = new ModernCounty("LS", "Lewisham", Countries.ENGLAND);
+        public static ModernCounty OS_LEICESTERSHIRE = new ModernCounty("LT", "Leicestershire", Countries.ENGLAND);
+        public static ModernCounty OS_MANCHESTER = new ModernCounty("MA", "Manchester", Countries.ENGLAND);
+        public static ModernCounty OS_MIDDLESBROUGH = new ModernCounty("MB", "Middlesbrough", Countries.ENGLAND);
+        public static ModernCounty OS_MEDWAY = new ModernCounty("ME", "Medway", Countries.ENGLAND);
+        public static ModernCounty OS_MIDLOTHIAN = new ModernCounty("MI", "Midlothian", Countries.SCOTLAND);
+        public static ModernCounty OS_MILTON_KEYNES = new ModernCounty("MK", "Milton Keynes", Countries.ENGLAND);
+        public static ModernCounty OS_MONMOUTHSHIRE = new ModernCounty("MM", "Monmouthshire", Countries.WALES);
+        public static ModernCounty OS_MORAY = new ModernCounty("MO", "Moray", Countries.SCOTLAND);
+        public static ModernCounty OS_MERTON = new ModernCounty("MR", "Merton", Countries.ENGLAND);
+        public static ModernCounty OS_MERTHYR_TYDFIL = new ModernCounty("MT", "Merthyr Tydfil", Countries.WALES);
+        public static ModernCounty OS_NORTH_AYRSHIRE = new ModernCounty("NA", "North Ayrshire", Countries.SCOTLAND);
+        public static ModernCounty OS_NORTH_EAST_LINCOLNSHIRE = new ModernCounty("NC", "North East Lincolnshire", Countries.ENGLAND);
+        public static ModernCounty OS_NORTHUMBERLAND = new ModernCounty("ND", "Northumberland", Countries.ENGLAND);
+        public static ModernCounty OS_NEWPORT = new ModernCounty("NE", "Newport", Countries.WALES);
+        public static ModernCounty OS_CITY_OF_NOTTINGHAM = new ModernCounty("NG", "City of Nottingham", Countries.ENGLAND);
+        public static ModernCounty OS_NEWHAM = new ModernCounty("NH", "Newham", Countries.ENGLAND);
+        public static ModernCounty OS_NORTH_LINCOLNSHIRE = new ModernCounty("NI", "North Lincolnshire", Countries.ENGLAND);
+        public static ModernCounty OS_NORFOLK = new ModernCounty("NK", "Norfolk", Countries.ENGLAND);
+        public static ModernCounty OS_NORTH_LANARKSHIRE = new ModernCounty("NL", "North Lanarkshire", Countries.SCOTLAND);
+        public static ModernCounty OS_NORTHAMPTONSHIRE = new ModernCounty("NN", "Northamptonshire", Countries.ENGLAND);
+        public static ModernCounty OS_NEATH_PORT_TALBOT = new ModernCounty("NP", "Neath Port Talbot", Countries.WALES);
+        public static ModernCounty OS_NORTH_TYNESIDE = new ModernCounty("NR", "North Tyneside", Countries.ENGLAND);
+        public static ModernCounty OS_NORTH_SOMERSET = new ModernCounty("NS", "North Somerset", Countries.ENGLAND);
+        public static ModernCounty OS_NOTTINGHAMSHIRE = new ModernCounty("NT", "Nottinghamshire", Countries.ENGLAND);
+        public static ModernCounty OS_NEWCASTLE_UPON_TYNE = new ModernCounty("NW", "Newcastle upon Tyne", Countries.ENGLAND);
+        public static ModernCounty OS_NORTH_YORKSHIRE = new ModernCounty("NY", "North Yorkshire", Countries.ENGLAND);
+        public static ModernCounty OS_OLDHAM = new ModernCounty("OH", "Oldham", Countries.ENGLAND);
+        public static ModernCounty OS_ORKNEY_ISLANDS = new ModernCounty("OK", "Orkney Islands", Countries.SCOTLAND);
+        public static ModernCounty OS_OXFORDSHIRE = new ModernCounty("ON", "Oxfordshire", Countries.ENGLAND);
+        public static ModernCounty OS_PEMBROKESHIRE = new ModernCounty("PB", "Pembrokeshire", Countries.WALES);
+        public static ModernCounty OS_CITY_OF_PETERBOROUGH = new ModernCounty("PE", "City of Peterborough", Countries.ENGLAND);
+        public static ModernCounty OS_PERTH_AND_KINROSS = new ModernCounty("PK", "Perth and Kinross", Countries.SCOTLAND);
+        public static ModernCounty OS_POOLE = new ModernCounty("PL", "Poole", Countries.ENGLAND);
+        public static ModernCounty OS_CITY_OF_PORTSMOUTH = new ModernCounty("PO", "City of Portsmouth", Countries.ENGLAND);
+        public static ModernCounty OS_POWYS = new ModernCounty("PW", "Powys", Countries.WALES);
+        public static ModernCounty OS_CITY_OF_PLYMOUTH = new ModernCounty("PY", "City of Plymouth", Countries.ENGLAND);
+        public static ModernCounty OS_REDBRIDGE = new ModernCounty("RB", "Redbridge", Countries.ENGLAND);
+        public static ModernCounty OS_REDCAR_AND_CLEVELAND = new ModernCounty("RC", "Redcar and Cleveland", Countries.ENGLAND);
+        public static ModernCounty OS_ROCHDALE = new ModernCounty("RD", "Rochdale", Countries.ENGLAND);
+        public static ModernCounty OS_RENFREWSHIRE = new ModernCounty("RE", "Renfrewshire", Countries.SCOTLAND);
+        public static ModernCounty OS_READING = new ModernCounty("RG", "Reading", Countries.ENGLAND);
+        public static ModernCounty OS_RHONDDA_CYNON_TAFF = new ModernCounty("RH", "Rhondda Cynon Taff", Countries.WALES);
+        public static ModernCounty OS_RUTLAND = new ModernCounty("RL", "Rutland", Countries.ENGLAND);
+        public static ModernCounty OS_ROTHERHAM = new ModernCounty("RO", "Rotherham", Countries.ENGLAND);
+        public static ModernCounty OS_RICHMOND_UPON_THAMES = new ModernCounty("RT", "Richmond upon Thames", Countries.ENGLAND);
+        public static ModernCounty OS_SANDWELL = new ModernCounty("SA", "Sandwell", Countries.ENGLAND);
+        public static ModernCounty OS_SCOTTISH_BORDERS = new ModernCounty("SB", "Scottish Borders", Countries.SCOTLAND);
+        public static ModernCounty OS_SALFORD = new ModernCounty("SC", "Salford", Countries.ENGLAND);
+        public static ModernCounty OS_SWINDON = new ModernCounty("SD", "Swindon", Countries.ENGLAND);
+        public static ModernCounty OS_SEFTON = new ModernCounty("SE", "Sefton", Countries.ENGLAND);
+        public static ModernCounty OS_STAFFORDSHIRE = new ModernCounty("SF", "Staffordshire", Countries.ENGLAND);
+        public static ModernCounty OS_SOUTH_GLOUCESTERSHIRE = new ModernCounty("SG", "South Gloucestershire", Countries.ENGLAND);
+        public static ModernCounty OS_SHROPSHIRE = new ModernCounty("SH", "Shropshire", Countries.ENGLAND);
+        public static ModernCounty OS_SHETLAND_ISLANDS = new ModernCounty("SI", "Shetland Islands", Countries.SCOTLAND);
+        public static ModernCounty OS_CITY_OF_STOKE_ON_TRENT = new ModernCounty("SJ", "City of Stoke-on-Trent", Countries.ENGLAND);
+        public static ModernCounty OS_SUFFOLK = new ModernCounty("SK", "Suffolk", Countries.ENGLAND);
+        public static ModernCounty OS_SOUTH_LANARKSHIRE = new ModernCounty("SL", "South Lanarkshire", Countries.SCOTLAND);
+        public static ModernCounty OS_STOCKTON_ON_TEES = new ModernCounty("SM", "Stockton-on-Tees", Countries.ENGLAND);
+        public static ModernCounty OS_ST_HELENS = new ModernCounty("SN", "St Helens", Countries.ENGLAND);
+        public static ModernCounty OS_CITY_OF_SOUTHAMPTON = new ModernCounty("SO", "City of Southampton", Countries.ENGLAND);
+        public static ModernCounty OS_SHEFFIELD = new ModernCounty("SP", "Sheffield", Countries.ENGLAND);
+        public static ModernCounty OS_SOLIHULL = new ModernCounty("SQ", "Solihull", Countries.ENGLAND);
+        public static ModernCounty OS_STIRLING = new ModernCounty("SR", "Stirling", Countries.SCOTLAND);
+        public static ModernCounty OS_SWANSEA = new ModernCounty("SS", "Swansea", Countries.WALES);
+        public static ModernCounty OS_SOMERSET = new ModernCounty("ST", "Somerset", Countries.ENGLAND);
+        public static ModernCounty OS_SURREY = new ModernCounty("SU", "Surrey", Countries.ENGLAND);
+        public static ModernCounty OS_SUNDERLAND = new ModernCounty("SV", "Sunderland", Countries.ENGLAND);
+        public static ModernCounty OS_SOUTHWARK = new ModernCounty("SW", "Southwark", Countries.ENGLAND);
+        public static ModernCounty OS_SOUTH_AYRSHIRE = new ModernCounty("SX", "South Ayrshire", Countries.SCOTLAND);
+        public static ModernCounty OS_SOUTH_TYNESIDE = new ModernCounty("SY", "South Tyneside", Countries.ENGLAND);
+        public static ModernCounty OS_SUTTON = new ModernCounty("SZ", "Sutton", Countries.ENGLAND);
+        public static ModernCounty OS_TORBAY = new ModernCounty("TB", "Torbay", Countries.ENGLAND);
+        public static ModernCounty OS_TORFAEN = new ModernCounty("TF", "Torfaen", Countries.WALES);
+        public static ModernCounty OS_TOWER_HAMLETS = new ModernCounty("TH", "Tower Hamlets", Countries.ENGLAND);
+        public static ModernCounty OS_TRAFFORD = new ModernCounty("TR", "Trafford", Countries.ENGLAND);
+        public static ModernCounty OS_TAMESIDE = new ModernCounty("TS", "Tameside", Countries.ENGLAND);
+        public static ModernCounty OS_THURROCK = new ModernCounty("TU", "Thurrock", Countries.ENGLAND);
+        public static ModernCounty OS_VALE_OF_GLAMORGAN = new ModernCounty("VG", "Vale of Glamorgan", Countries.WALES);
+        public static ModernCounty OS_WALSALL = new ModernCounty("WA", "Walsall", Countries.ENGLAND);
+        public static ModernCounty OS_WEST_BERKSHIRE = new ModernCounty("WB", "West Berkshire", Countries.ENGLAND);
+        public static ModernCounty OS_WINDSOR_AND_MAIDENHEAD = new ModernCounty("WC", "Windsor and Maidenhead", Countries.ENGLAND);
+        public static ModernCounty OS_WEST_DUNBARTONSHIRE = new ModernCounty("WD", "West Dunbartonshire", Countries.SCOTLAND);
+        public static ModernCounty OS_WAKEFIELD = new ModernCounty("WE", "Wakefield", Countries.ENGLAND);
+        public static ModernCounty OS_WALTHAM_FOREST = new ModernCounty("WF", "Waltham Forest", Countries.ENGLAND);
+        public static ModernCounty OS_WARRINGTON = new ModernCounty("WG", "Warrington", Countries.ENGLAND);
+        public static ModernCounty OS_CITY_OF_WOLVERHAMPTON = new ModernCounty("WH", "City of Wolverhampton", Countries.ENGLAND);
+        public static ModernCounty OS_WESTERN_ISLES = new ModernCounty("WI", "Na h-Eileanan an Iar", Countries.SCOTLAND);
+        public static ModernCounty OS_WOKINGHAM = new ModernCounty("WJ", "Wokingham", Countries.ENGLAND);
+        public static ModernCounty OS_WARWICKSHIRE = new ModernCounty("WK", "Warwickshire", Countries.ENGLAND);
+        public static ModernCounty OS_WEST_LOTHIAN = new ModernCounty("WL", "West Lothian", Countries.SCOTLAND);
+        public static ModernCounty OS_CITY_OF_WESTMINSTER = new ModernCounty("WM", "City of Westminster", Countries.ENGLAND);
+        public static ModernCounty OS_WIGAN = new ModernCounty("WN", "Wigan", Countries.ENGLAND);
+        public static ModernCounty OS_WORCESTERSHIRE = new ModernCounty("WO", "Worcestershire", Countries.ENGLAND);
+        public static ModernCounty OS_TELFORD_AND_WREKIN = new ModernCounty("WP", "Telford and Wrekin", Countries.ENGLAND);
+        public static ModernCounty OS_WIRRAL = new ModernCounty("WR", "Wirral", Countries.ENGLAND);
+        public static ModernCounty OS_WEST_SUSSEX = new ModernCounty("WS", "West Sussex", Countries.ENGLAND);
+        public static ModernCounty OS_WILTSHIRE = new ModernCounty("WT", "Wiltshire", Countries.ENGLAND);
+        public static ModernCounty OS_WANDSWORTH = new ModernCounty("WW", "Wandsworth", Countries.ENGLAND);
+        public static ModernCounty OS_WREXHAM = new ModernCounty("WX", "Wrexham", Countries.WALES);
+        public static ModernCounty OS_YORK = new ModernCounty("YK", "York", Countries.ENGLAND);
+        public static ModernCounty OS_SOUTHEND_ON_SEA = new ModernCounty("YS", "Southend-on-Sea", Countries.ENGLAND);
+        public static ModernCounty OS_SLOUGH = new ModernCounty("YT", "Slough", Countries.ENGLAND);
+        public static ModernCounty OS_STOCKPORT = new ModernCounty("YY", "Stockport", Countries.ENGLAND);
         #endregion
 
         #region Regions
@@ -682,38 +682,40 @@ namespace FTAnalyzer
         {
             #region Modern County Setup
             MODERN_COUNTIES = new List<ModernCounty>(new ModernCounty[] { 
-                OS_ABERDEEN_CITY, OS_ANGUS, OS_ABERDEENSHIRE, OS_ARGYLL_AND_BUTE, OS_BRADFORD, OS_BLACKBURN_WITH_DARWEN,
+                OS_ABERDEENSHIRE, OS_ANGUS, OS_ABERDEEN_CITY, OS_ARGYLL_AND_BUTE, OS_BRADFORD, OS_BLACKBURN_WITH_DARWEN,
                 OS_BRACKNELL_FOREST, OS_BARKING_AND_DAGENHAM, OS_BRIDGEND, OS_BEDFORDSHIRE, OS_BLAENAU_GWENT, 
                 OS_CITY_OF_BRIGHTON_AND_HOVE, OS_BIRMINGHAM, OS_CENTRAL_BEDFORDSHIRE, OS_BARNSLEY, OS_BUCKINGHAMSHIRE,
                 OS_BARNET, OS_BOLTON, OS_BLACKPOOL, OS_BROMLEY, OS_BATH_AND_NORTH_EAST_SOMERSET, OS_BRENT, OS_BOURNEMOUTH,
-                OS_BEXLEY, OS_BURY, OS_BRISTOL, OS_CALDERDALE, OS_CAMBRIDGESHIRE, OS_CARDIFF, OS_CEREDIGION, OS_CAERPHILLY, 
-                OS_CHESHIRE_EAST, OS_CHESHIRE_WEST_AND_CHESTER, OS_CLACKMANNANSHIRE, OS_CAMDEN, OS_CORNWALL, 
-                OS_CARMARTHENSHIRE, OS_CUMBRIA, OS_COVENTRY, OS_CONWY, OS_CROYDON, OS_CITY_OF_DERBY, OS_DUNDEE_CITY, OS_DENBIGHSHIRE,
-                OS_DUMFRIES_AND_GALLOWAY, OS_DARLINGTON, OS_DEVON, OS_DONCASTER, OS_DORSET, OS_DURHAM, OS_DERBYSHIRE, OS_EAST_AYRSHIRE,
-                OS_CITY_OF_EDINBURGH, OS_EAST_DUNBARTONSHIRE, OS_EALING, OS_EAST_LOTHIAN, OS_ENFIELD, OS_EAST_RENFREWSHIRE, 
-                OS_EAST_SUSSEX, OS_ESSEX, OS_EAST_RIDING_OF_YORKSHIRE, OS_FALKIRK, OS_FIFE, OS_FLINTSHIRE, OS_GATESHEAD, 
-                OS_GLASGOW_CITY, OS_GLOUCESTERSHIRE, OS_GREENWICH, OS_GWYNEDD, OS_HALTON, OS_HERTFORDSHIRE, OS_HEREFORDSHIRE,
-                OS_HAMMERSMITH_AND_FULHAM, OS_HARINGEY, OS_HILLINGDON, OS_HIGHLAND, OS_HACKNEY, OS_HAMPSHIRE, OS_HARROW,
-                OS_HOUNSLOW, OS_HARTLEPOOL, OS_HAVERING, OS_ISLE_OF_ANGLESEY, OS_ISLINGTON, OS_ISLE_OF_MAN, OS_INVERCLYDE,
-                OS_ISLES_OF_SCILLY, OS_CITY_OF_INVERNESS, OS_ISLE_OF_WIGHT, OS_ROYAL_BOROUGH_OF_KENSINGTON_AND_CHELSEA,
-                OS_KINGSTON_UPON_THAMES, OS_CITY_OF_KINGSTON_UPON_HULL, OS_KIRKLEES, OS_KNOWSLEY, OS_KENT, OS_LANCASHIRE,
-                OS_LAMBETH, OS_CITY_OF_LEICESTER, OS_LEEDS, OS_LINCOLNSHIRE, OS_LUTON, OS_CITY_OF_LONDON, OS_LIVERPOOL, 
+                OS_BEXLEY, OS_BURY, OS_BRISTOL, OS_CALDERDALE, OS_CAMBRIDGESHIRE, OS_CHESHIRE_WEST_AND_CHESTER, OS_CARDIFF,
+                OS_CEREDIGION, OS_CAERPHILLY, OS_CHESHIRE_EAST, OS_CLACKMANNANSHIRE, OS_CAMDEN, OS_CORNWALL, 
+                OS_CARMARTHENSHIRE, OS_CUMBRIA, OS_COVENTRY, OS_CONWY, OS_CROYDON, OS_CITY_OF_DERBY, OS_DUNDEE_CITY, 
+                OS_DENBIGHSHIRE, OS_DUMFRIES_AND_GALLOWAY, OS_DARLINGTON, OS_DEVON, OS_DONCASTER, OS_DORSET, OS_DURHAM, 
+                OS_DERBYSHIRE, OS_DUDLEY, OS_EAST_AYRSHIRE, OS_CITY_OF_EDINBURGH, OS_EAST_DUNBARTONSHIRE, OS_EALING, 
+                OS_EAST_LOTHIAN, OS_ENFIELD, OS_EAST_RENFREWSHIRE, OS_EAST_SUSSEX, OS_ESSEX, OS_EAST_RIDING_OF_YORKSHIRE, 
+                OS_FALKIRK, OS_FIFE, OS_FLINTSHIRE, OS_GATESHEAD, OS_GLASGOW_CITY, OS_GLOUCESTERSHIRE, OS_GREENWICH, 
+                OS_GWYNEDD, OS_HALTON, OS_HERTFORDSHIRE, OS_HEREFORDSHIRE, OS_HAMMERSMITH_AND_FULHAM, OS_HARINGEY, 
+                OS_HILLINGDON, OS_HIGHLAND, OS_HACKNEY, OS_HAMPSHIRE, OS_HARROW, OS_HOUNSLOW, OS_HARTLEPOOL, OS_HAVERING,
+                OS_ISLE_OF_ANGLESEY, OS_ISLINGTON, OS_ISLE_OF_MAN, OS_INVERCLYDE, OS_ISLES_OF_SCILLY, OS_CITY_OF_INVERNESS,
+                OS_ISLE_OF_WIGHT, OS_ROYAL_BOROUGH_OF_KENSINGTON_AND_CHELSEA, OS_KINGSTON_UPON_THAMES, 
+                OS_CITY_OF_KINGSTON_UPON_HULL, OS_KIRKLEES, OS_KNOWSLEY, OS_KENT, OS_LANCASHIRE, OS_LAMBETH, 
+                OS_CITY_OF_LEICESTER, OS_LEEDS, OS_LINCOLNSHIRE, OS_LUTON, OS_CITY_OF_LONDON, OS_LIVERPOOL, 
                 OS_LEWISHAM, OS_LEICESTERSHIRE, OS_MANCHESTER, OS_MIDDLESBROUGH, OS_MEDWAY, OS_MIDLOTHIAN, OS_MILTON_KEYNES,
                 OS_MONMOUTHSHIRE, OS_MORAY, OS_MERTON, OS_MERTHYR_TYDFIL, OS_NORTH_AYRSHIRE, OS_NORTH_EAST_LINCOLNSHIRE,
                 OS_NORTHUMBERLAND, OS_NEWPORT, OS_CITY_OF_NOTTINGHAM, OS_NEWHAM, OS_NORTH_LINCOLNSHIRE, OS_NORFOLK,
-                OS_NORTH_LANARKSHIRE, OS_NORTHAMPTONSHIRE, OS_NEWCASTLE_UPON_TYNE, OS_NORTH_YORKSHIRE, OS_OLDHAM, 
-                OS_ORKNEY_ISLANDS, OS_OXFORDSHIRE, OS_PEMBROKESHIRE, OS_CITY_OF_PETERBOROUGH, OS_POWYS, OS_CITY_OF_PLYMOUTH,
-                OS_REDBRIDGE, OS_REDCAR_AND_CLEVELAND, OS_ROCHDALE, OS_RENFREWSHIRE, OS_READING, OS_RHONDDA_CYNON_TAFF, 
-                OS_RUTLAND, OS_ROTHERHAM, OS_RICHMOND_UPON_THAMES, OS_SANDWELL, OS_SCOTTISH_BORDERS, OS_SALFORD, 
-                OS_SWINDON, OS_SEFTON, OS_SOUTH_GLOUCESTERSHIRE, OS_SHROPSHIRE, OS_SHETLAND_ISLANDS, OS_CITY_OF_STOKE_ON_TRENT,
-                OS_SUFFOLK, OS_SOUTH_LANARKSHIRE, OS_STOCKTON_ON_TEES, OS_ST_HELENS, OS_CITY_OF_SOUTHAMPTON, OS_SHEFFIELD,
-                OS_SOLIHULL, OS_STIRLING, OS_SWANSEA, OS_SOMERSET, OS_SURREY, OS_SUNDERLAND, OS_SOUTHWARK, OS_SOUTH_AYRSHIRE,
-                OS_SOUTH_TYNESIDE, OS_SUTTON, OS_TORBAY, OS_TORFAEN, OS_TOWER_HAMLETS, OS_TRAFFORD, OS_TAMESIDE, OS_THURROCK,
-                OS_VALE_OF_GLAMORGAN, OS_WALSALL, OS_WEST_BERKSHIRE, OS_WINDSOR_AND_MAIDENHEAD, OS_WEST_DUNBARTONSHIRE,
-                OS_WAKEFIELD, OS_WALTHAM_FOREST, OS_WARRINGTON, OS_CITY_OF_WOLVERHAMPTON, OS_WESTERN_ISLES, OS_WOKINGHAM,
-                OS_WARWICKSHIRE, OS_WEST_LOTHIAN, OS_CITY_OF_WESTMINSTER, OS_WIGAN, OS_WORCESTERSHIRE, OS_TELFORD_AND_WREKIN,
-                OS_WIRRAL, OS_WEST_SUSSEX, OS_WILTSHIRE, OS_WANDSWORTH, OS_WREXHAM, OS_YORK, OS_SOUTHEND_ON_SEA, OS_SLOUGH, 
-                OS_STOCKPORT
+                OS_NORTH_LANARKSHIRE, OS_NORTHAMPTONSHIRE, OS_NEATH_PORT_TALBOT, OS_NORTH_TYNESIDE, OS_NORTH_SOMERSET,
+                OS_NOTTINGHAMSHIRE, OS_NEWCASTLE_UPON_TYNE, OS_NORTH_YORKSHIRE, OS_OLDHAM, OS_ORKNEY_ISLANDS, OS_OXFORDSHIRE, 
+                OS_PEMBROKESHIRE, OS_CITY_OF_PETERBOROUGH, OS_PERTH_AND_KINROSS, OS_POOLE, OS_CITY_OF_PORTSMOUTH, OS_POWYS,
+                OS_CITY_OF_PLYMOUTH, OS_REDBRIDGE, OS_REDCAR_AND_CLEVELAND, OS_ROCHDALE, OS_RENFREWSHIRE, OS_READING, 
+                OS_RHONDDA_CYNON_TAFF, OS_RUTLAND, OS_ROTHERHAM, OS_RICHMOND_UPON_THAMES, OS_SANDWELL, OS_SCOTTISH_BORDERS, 
+                OS_SALFORD, OS_SWINDON, OS_SEFTON, OS_STAFFORDSHIRE, OS_SOUTH_GLOUCESTERSHIRE, OS_SHROPSHIRE, OS_SHETLAND_ISLANDS, 
+                OS_CITY_OF_STOKE_ON_TRENT, OS_SUFFOLK, OS_SOUTH_LANARKSHIRE, OS_STOCKTON_ON_TEES, OS_ST_HELENS, 
+                OS_CITY_OF_SOUTHAMPTON, OS_SHEFFIELD, OS_SOLIHULL, OS_STIRLING, OS_SWANSEA, OS_SOMERSET, OS_SURREY, 
+                OS_SUNDERLAND, OS_SOUTHWARK, OS_SOUTH_AYRSHIRE, OS_SOUTH_TYNESIDE, OS_SUTTON, OS_TORBAY, OS_TORFAEN, 
+                OS_TOWER_HAMLETS, OS_TRAFFORD, OS_TAMESIDE, OS_THURROCK, OS_VALE_OF_GLAMORGAN, OS_WALSALL, OS_WEST_BERKSHIRE,
+                OS_WINDSOR_AND_MAIDENHEAD, OS_WEST_DUNBARTONSHIRE, OS_WAKEFIELD, OS_WALTHAM_FOREST, OS_WARRINGTON, 
+                OS_CITY_OF_WOLVERHAMPTON, OS_WESTERN_ISLES, OS_WOKINGHAM, OS_WARWICKSHIRE, OS_WEST_LOTHIAN, 
+                OS_CITY_OF_WESTMINSTER, OS_WIGAN, OS_WORCESTERSHIRE, OS_TELFORD_AND_WREKIN, OS_WIRRAL, OS_WEST_SUSSEX, 
+                OS_WILTSHIRE, OS_WANDSWORTH, OS_WREXHAM, OS_YORK, OS_SOUTHEND_ON_SEA, OS_SLOUGH, OS_STOCKPORT
             });
             #endregion
 
@@ -846,7 +848,7 @@ namespace FTAnalyzer
 
         public static ModernCounty OS_GetCounty(string code)
         {
-            return MODERN_COUNTIES.First(c => c.CountyCode.Equals(code));
+            return MODERN_COUNTIES.FirstOrDefault(c => c.CountyCode.Equals(code));
         }
 
         private static void AppendValidRegions(ISet<Region> regions)

@@ -63,8 +63,8 @@ namespace FTAnalyzer.Forms
             this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LocationIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.GeocodeStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GoogleLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GoogleResultTypes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FoundLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FoundResultTypes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SourceList = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
@@ -304,8 +304,8 @@ namespace FTAnalyzer.Forms
             this.FactLocation,
             this.LocationIcon,
             this.GeocodeStatus,
-            this.GoogleLocation,
-            this.GoogleResultTypes,
+            this.FoundLocation,
+            this.FoundResultTypes,
             this.Comment,
             this.SourceList});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -418,23 +418,23 @@ namespace FTAnalyzer.Forms
             this.GeocodeStatus.Name = "GeocodeStatus";
             this.GeocodeStatus.ReadOnly = true;
             // 
-            // GoogleLocation
+            // FoundLocation
             // 
-            this.GoogleLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.GoogleLocation.DataPropertyName = "GoogleLocation";
-            this.GoogleLocation.HeaderText = "GoogleLocation";
-            this.GoogleLocation.MinimumWidth = 120;
-            this.GoogleLocation.Name = "GoogleLocation";
-            this.GoogleLocation.ReadOnly = true;
-            this.GoogleLocation.Width = 120;
+            this.FoundLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.FoundLocation.DataPropertyName = "FoundLocation";
+            this.FoundLocation.HeaderText = "FoundLocation";
+            this.FoundLocation.MinimumWidth = 120;
+            this.FoundLocation.Name = "FoundLocation";
+            this.FoundLocation.ReadOnly = true;
+            this.FoundLocation.Width = 120;
             // 
-            // GoogleResultTypes
+            // FoundResultTypes
             // 
-            this.GoogleResultTypes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.GoogleResultTypes.DataPropertyName = "GoogleResultTypes";
-            this.GoogleResultTypes.HeaderText = "Google Result Types";
-            this.GoogleResultTypes.Name = "GoogleResultTypes";
-            this.GoogleResultTypes.ReadOnly = true;
+            this.FoundResultTypes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.FoundResultTypes.DataPropertyName = "FoundResultTypes";
+            this.FoundResultTypes.HeaderText = "Found Result Types";
+            this.FoundResultTypes.Name = "FoundResultTypes";
+            this.FoundResultTypes.ReadOnly = true;
             // 
             // Comment
             // 
@@ -595,8 +595,8 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn FactLocation;
         private System.Windows.Forms.DataGridViewImageColumn LocationIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn GeocodeStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GoogleLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GoogleResultTypes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FoundLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FoundResultTypes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;
         private System.Windows.Forms.ToolStripMenuItem resetFormToDefaultSizeAndPositionToolStripMenuItem;

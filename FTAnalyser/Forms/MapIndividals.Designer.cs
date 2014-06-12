@@ -56,7 +56,7 @@
             this.RelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeOfFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GoogleLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FoundLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AgeAtFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SortDistance = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -178,7 +178,7 @@
             this.RelationToRoot,
             this.TypeOfFact,
             this.FactDate,
-            this.GoogleLocation,
+            this.FoundLocation,
             this.AgeAtFact,
             this.Ahnentafel,
             this.SortDistance});
@@ -312,14 +312,14 @@
             this.FactDate.ReadOnly = true;
             this.FactDate.Width = 150;
             // 
-            // GoogleLocation
+            // FoundLocation
             // 
-            this.GoogleLocation.DataPropertyName = "GoogleLocation";
-            this.GoogleLocation.HeaderText = "Google Location";
-            this.GoogleLocation.MinimumWidth = 175;
-            this.GoogleLocation.Name = "GoogleLocation";
-            this.GoogleLocation.ReadOnly = true;
-            this.GoogleLocation.Width = 175;
+            this.FoundLocation.DataPropertyName = "FoundLocation";
+            this.FoundLocation.HeaderText = "Found Location";
+            this.FoundLocation.MinimumWidth = 175;
+            this.FoundLocation.Name = "FoundLocation";
+            this.FoundLocation.ReadOnly = true;
+            this.FoundLocation.Width = 175;
             // 
             // AgeAtFact
             // 
@@ -397,7 +397,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RelationToRoot;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeOfFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GoogleLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FoundLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn AgeAtFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ahnentafel;
         private System.Windows.Forms.DataGridViewTextBoxColumn SortDistance;

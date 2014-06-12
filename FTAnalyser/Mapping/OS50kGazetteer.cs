@@ -17,8 +17,10 @@ namespace FTAnalyzer.Mapping
         public string FeatureCode { get; private set; }
         public string CountyCode { get; private set; }
         public string CountyName { get; private set; }
+        public string CountryName { get; private set; }
         public string ParishName { get; private set; }
         public IPoint Point { get; private set; }
+        public string FuzzyMatch { get; private set; }
 
         public OS50kGazetteer(string line)
         {
@@ -50,6 +52,21 @@ namespace FTAnalyzer.Mapping
                 ParishName = ParishName.Substring(0, ParishName.Length - 10);
             FixCommas();
             FixAbbreviations();
+            ModernCounty county = Regions.OS_GetCounty(CountyCode);
+            if (county == null)
+                CountryName = string.Empty;
+            else
+            {
+                CountryName = county.CountryName;
+                DoubleMetaphone meta = new DoubleMetaphone(DefinitiveName);
+                FuzzyMatch = meta.PrimaryKey + ":";
+                meta = new DoubleMetaphone(ParishName);
+                FuzzyMatch += meta.PrimaryKey + ":";
+                meta = new DoubleMetaphone(CountyName);
+                FuzzyMatch += meta.PrimaryKey + ":";
+                meta = new DoubleMetaphone(county.CountryName);
+                FuzzyMatch += meta.PrimaryKey;
+            }
         }
 
         private void FixCommas()
@@ -113,7 +130,7 @@ namespace FTAnalyzer.Mapping
 
         public override string ToString()
         {
-            return CountyCode + ": " + DefinitiveName + "(" + CountyName + "). Feature:" + FeatureCode + " parish: " + ParishName;
+            return DefinitiveName + ", " + ParishName + ", " + CountyName + ", " + CountryName;
         }
     }
 }

@@ -42,16 +42,18 @@ namespace FTAnalyzer
     {
         public string CountyCode { get; private set; }
         public string CountyName { get; private set; }
+        public string CountryName { get; private set; }
 
-        public ModernCounty(string code, string countyName)
+        public ModernCounty(string code, string countyName, string country)
         {
             CountyCode = code;
             CountyName = countyName;
+            CountryName = country;
         }
 
         public override string ToString()
         {
-            return CountyCode + ": " + CountyName;
+            return CountyCode + ": " + CountyName + ", " + CountryName;
         }
     }
 }

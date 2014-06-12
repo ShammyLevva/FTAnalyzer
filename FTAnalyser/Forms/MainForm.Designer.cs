@@ -84,7 +84,7 @@
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuGeocodeLocations = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOSGeocoder = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuLookupBlankGoogleLocations = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuLookupBlankFoundLocations = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewOnlineManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -657,7 +657,7 @@
             this.toolStripSeparator10,
             this.mnuGeocodeLocations,
             this.mnuOSGeocoder,
-            this.mnuLookupBlankGoogleLocations});
+            this.mnuLookupBlankFoundLocations});
             this.mnuMaps.Name = "mnuMaps";
             this.mnuMaps.Size = new System.Drawing.Size(48, 20);
             this.mnuMaps.Text = "Maps";
@@ -714,12 +714,12 @@
             this.mnuOSGeocoder.Text = "Run OS Geocoder to Find Locations";
             this.mnuOSGeocoder.Click += new System.EventHandler(this.mnuOSGeocoder_Click);
             // 
-            // mnuLookupBlankGoogleLocations
+            // mnuLookupBlankFoundLocations
             // 
-            this.mnuLookupBlankGoogleLocations.Name = "mnuLookupBlankGoogleLocations";
-            this.mnuLookupBlankGoogleLocations.Size = new System.Drawing.Size(284, 22);
-            this.mnuLookupBlankGoogleLocations.Text = "Lookup Blank Google Locations";
-            this.mnuLookupBlankGoogleLocations.Click += new System.EventHandler(this.mnuLookupBlankGoogleLocations_Click);
+            this.mnuLookupBlankFoundLocations.Name = "mnuLookupBlankFoundLocations";
+            this.mnuLookupBlankFoundLocations.Size = new System.Drawing.Size(284, 22);
+            this.mnuLookupBlankFoundLocations.Text = "Lookup Blank Google Locations";
+            this.mnuLookupBlankFoundLocations.Click += new System.EventHandler(this.mnuLookupBlankFoundLocations_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -3050,7 +3050,7 @@
         private System.Windows.Forms.ToolStripProgressBar tspbTabProgress;
         private System.Windows.Forms.ToolStripMenuItem mnuOSGeocoder;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-        private System.Windows.Forms.ToolStripMenuItem mnuLookupBlankGoogleLocations;
+        private System.Windows.Forms.ToolStripMenuItem mnuLookupBlankFoundLocations;
         private System.Windows.Forms.CheckBox ckbMilitaryOnly;
         private System.Windows.Forms.Button btnRandomSurnameMissing;
         private System.Windows.Forms.Button btnRandomSurnameEntered;

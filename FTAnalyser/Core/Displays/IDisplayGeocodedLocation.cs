@@ -14,8 +14,8 @@ namespace FTAnalyzer
         double Longitude { get; }
         Image Icon { get; }
         string Geocoded { get; }
-        string GoogleLocation { get; }
-        string GoogleResultType { get; }
+        string FoundLocation { get; }
+        string FoundResultType { get; }
         GeoResponse.CResult.CGeometry.CViewPort ViewPort { get; }
     }
 }

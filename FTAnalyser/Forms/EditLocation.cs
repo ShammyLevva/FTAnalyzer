@@ -147,7 +147,7 @@ namespace FTAnalyzer.Forms
             location.ViewPort.SouthWest.Lat = env.Bottom();
             location.ViewPort.SouthWest.Long = env.Left();
             location.PixelSize = mapBox1.Map.PixelSize;
-            location.GoogleLocation = string.Empty;
+            location.FoundLocation = string.Empty;
             location.GeocodeStatus = FactLocation.Geocode.GEDCOM_USER;
             location.FoundLevel = -2;
             DatabaseHelper.Instance.UpdateGeocode(location);
