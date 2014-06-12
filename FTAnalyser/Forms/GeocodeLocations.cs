@@ -1117,7 +1117,7 @@ namespace FTAnalyzer.Forms
                     previous++;
                 else
                 {
-                    if (!Countries.IsUnitedKingdom(loc.Country))
+                    if (!Countries.IsUnitedKingdom(loc.Country) || loc.GeocodeStatus == FactLocation.Geocode.INCORRECT)
                         skipped++;
                     else
                     {

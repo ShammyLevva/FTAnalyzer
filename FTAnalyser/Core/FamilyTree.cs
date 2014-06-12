@@ -2248,7 +2248,7 @@ namespace FTAnalyzer
 
         public void WriteGeocodeStatstoRTB(string title)
         {
-            xmlErrorbox.AppendText("\n" + title);
+            xmlErrorbox.AppendText("\n\n" + title);
             // write geocode results - ignore UNKNOWN entry
             int notsearched = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED));
             int needsReverse = FactLocation.AllLocations.Count(x => x.NeedsReverseGeocoding);
