@@ -1283,7 +1283,7 @@ namespace FTAnalyzer.Forms
                 location.GeocodeStatus = FactLocation.Geocode.OS_50KPARTIAL;
             location.FoundLevel = level;
             location.FoundLocation = gaz.ToString();
-            location.FoundResultType = "OS Feature";
+            location.FoundResultType = GoogleMap.OS_FEATURE;
             bool inDatabase = DatabaseHelper.Instance.IsLocationInDatabase(location.ToString());
             UpdateDatabase(location, inDatabase);
         }
