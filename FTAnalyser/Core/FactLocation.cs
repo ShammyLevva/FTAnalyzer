@@ -233,7 +233,7 @@ namespace FTAnalyzer
                         AddGoogleFixes(LOCAL_GOOGLE_FIXES, n, SUBREGION);
                     foreach (XmlNode n in xmlDoc.SelectNodes("GoogleGeocodes/MultiLevelFixes/MultiLevelFix"))
                         AddGoogleFixes(LOCAL_GOOGLE_FIXES, n, UNKNOWN);
-                    xmlErrorDocument.AppendText("\nLoaded " + LOCAL_GOOGLE_FIXES.Count() + " Google Fixes.\n");
+                    xmlErrorDocument.AppendText("\nLoaded " + LOCAL_GOOGLE_FIXES.Count() + " Google Fixes.");
                 }
             }
             catch (Exception e)
