@@ -23,7 +23,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "4.0.0.1";
+        public static string VERSION = "4.0.0.2";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -1255,7 +1255,7 @@ namespace FTAnalyzer
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtWorldWarsSurname.Text);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            if(ckbMilitaryOnly.Checked)
+            if (ckbMilitaryOnly.Checked)
             {
                 Predicate<Individual> militaryFilter = x => x.HasMilitaryFacts;
                 filter = FilterUtils.AndFilter<Individual>(filter, militaryFilter);
@@ -2275,6 +2275,36 @@ namespace FTAnalyzer
                 output.WriteLine(line);
             output.Close();
         }
+
+        private void btnInconsistentLocations_Click(object sender, EventArgs e)
+        {
+            HourGlass(true); 
+            List<DisplayFact> results = new List<DisplayFact>();
+            List<DisplayFact> censusRefs = new List<DisplayFact>();
+            foreach (Individual ind in ft.AllIndividuals)
+                foreach (Fact f in ind.AllFacts)
+                    if (f.IsCensusFact && f.CensusReference != null && f.CensusReference.Reference.Length > 0)
+                        censusRefs.Add(new DisplayFact(ind, f));
+            IEnumerable<string> distinctRefs = censusRefs.Select(x => x.FactDate.StartDate.Year + x.CensusReference).Distinct();
+            tspbTabProgress.Maximum = distinctRefs.Count();
+            tspbTabProgress.Value = 0;
+            tspbTabProgress.Visible = true;
+            foreach (string censusref in distinctRefs)
+            {
+                Predicate<DisplayFact> match = x => censusref == x.FactDate.StartDate.Year + x.CensusReference;
+                IEnumerable<DisplayFact> result = censusRefs.Where(match);
+                int count = result.Select(x => x.Location).Distinct().Count();
+                if (count > 1)
+                    results.AddRange(result);
+                tspbTabProgress.Value++;
+                Application.DoEvents();
+            }
+            tspbTabProgress.Visible = false;
+            Facts factForm = new Facts(results);
+            DisposeDuplicateForms(factForm);
+            factForm.Show();
+            HourGlass(false);
+        }
         #endregion
 
         #region Colour Reports Tab
@@ -2381,7 +2411,7 @@ namespace FTAnalyzer
         private void btnRandomSurnameColour_Click(object sender, EventArgs e)
         {
             txtColouredSurname.Text = GetRandomSurname();
-        }        
+        }
         #endregion
 
         #region Loose Birth/Death Tab
@@ -2600,5 +2630,6 @@ namespace FTAnalyzer
             HourGlass(false);
         }
         #endregion
+
     }
 }

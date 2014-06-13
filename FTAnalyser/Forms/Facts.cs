@@ -102,6 +102,18 @@ namespace FTAnalyzer.Forms
             dgFacts.Columns["CensusReference"].Visible = true;
         }
 
+        public Facts(List<DisplayFact> results)
+            : this()
+        {
+            foreach (DisplayFact fact in results)
+                facts.Add(fact);
+            SetupFacts();
+            dgFacts.Columns["CensusReference"].Visible = true;
+            dgFacts.Sort(dgFacts.Columns["DateofBirth"], ListSortDirection.Ascending);
+            dgFacts.Sort(dgFacts.Columns["CensusReference"], ListSortDirection.Ascending);
+            SetBackColour(true);
+        }
+
         private void AddIndividualsFacts(Individual individual, List<string> factTypes)
         {
             foreach (Fact f in individual.AllFacts)
@@ -123,14 +135,15 @@ namespace FTAnalyzer.Forms
             tsRecords.Text = facts.Count + " Records";
         }
 
-        private void SetBackColour()
+        private void SetBackColour(bool censusref)
         {
             bool backColourGrey = false;
             DisplayFact previous = null;
             foreach (DisplayFact fact in facts)
             {
-                if (previous != null && previous.IndividualID != fact.IndividualID)
-                    backColourGrey = !backColourGrey;
+                if (previous != null)
+                    if((censusref && previous.CensusReference != fact.CensusReference) || (!censusref && previous.IndividualID != fact.IndividualID))
+                        backColourGrey = !backColourGrey;
                 fact.BackColour = backColourGrey ? Color.LightGray : Color.White;
                 previous = fact;
             }
@@ -146,7 +159,7 @@ namespace FTAnalyzer.Forms
             }
             else
                 dgFacts.Sort(dgFacts.Columns["FactDate"], ListSortDirection.Ascending);
-            SetBackColour();
+            SetBackColour(false);
         }
 
         private void printToolStripButton_Click(object sender, EventArgs e)
