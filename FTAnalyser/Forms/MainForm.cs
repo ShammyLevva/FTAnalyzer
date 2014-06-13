@@ -2377,6 +2377,11 @@ namespace FTAnalyzer
             }
             return stillThere;
         }
+
+        private void btnRandomSurnameColour_Click(object sender, EventArgs e)
+        {
+            txtColouredSurname.Text = GetRandomSurname();
+        }        
         #endregion
 
         #region Loose Birth/Death Tab

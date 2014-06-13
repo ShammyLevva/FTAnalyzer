@@ -33,7 +33,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,6 +106,7 @@
             this.dgCountries = new System.Windows.Forms.DataGridView();
             this.tbDuplicateScore = new System.Windows.Forms.TrackBar();
             this.cmbColourFamily = new System.Windows.Forms.ComboBox();
+            this.btnRandomSurnameColour = new System.Windows.Forms.Button();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -170,6 +171,7 @@
             this.btnMissingCensusRefs = new System.Windows.Forms.Button();
             this.btnCensusRefs = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnRandomSurnameEntered = new System.Windows.Forms.Button();
             this.btnRandomSurnameMissing = new System.Windows.Forms.Button();
             this.chkExcludeUnknownBirths = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -267,7 +269,6 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.btnRandomSurnameEntered = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -840,14 +841,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 154);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -923,6 +924,18 @@
             this.cmbColourFamily.TabIndex = 60;
             this.toolTips.SetToolTip(this.cmbColourFamily, "Select a family to limit the reports to just that family");
             this.cmbColourFamily.Click += new System.EventHandler(this.cmbColourFamily_Click);
+            // 
+            // btnRandomSurnameColour
+            // 
+            this.btnRandomSurnameColour.Location = new System.Drawing.Point(622, 13);
+            this.btnRandomSurnameColour.Name = "btnRandomSurnameColour";
+            this.btnRandomSurnameColour.Size = new System.Drawing.Size(293, 25);
+            this.btnRandomSurnameColour.TabIndex = 62;
+            this.btnRandomSurnameColour.Text = "Select Random Surname from Direct Ancestor\'s Surnames";
+            this.toolTips.SetToolTip(this.btnRandomSurnameColour, "Once selected click the appropriate report button to view the report. eg: UK Colo" +
+        "ur Census Report.");
+            this.btnRandomSurnameColour.UseVisualStyleBackColor = true;
+            this.btnRandomSurnameColour.Click += new System.EventHandler(this.btnRandomSurnameColour_Click);
             // 
             // printPreviewDialog
             // 
@@ -1162,6 +1175,7 @@
             // 
             // tabColourReports
             // 
+            this.tabColourReports.Controls.Add(this.btnRandomSurnameColour);
             this.tabColourReports.Controls.Add(this.label14);
             this.tabColourReports.Controls.Add(this.cmbColourFamily);
             this.tabColourReports.Controls.Add(this.groupBox3);
@@ -1617,6 +1631,16 @@
             this.groupBox2.TabIndex = 23;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Census Search Reports";
+            // 
+            // btnRandomSurnameEntered
+            // 
+            this.btnRandomSurnameEntered.Location = new System.Drawing.Point(649, 136);
+            this.btnRandomSurnameEntered.Name = "btnRandomSurnameEntered";
+            this.btnRandomSurnameEntered.Size = new System.Drawing.Size(306, 25);
+            this.btnRandomSurnameEntered.TabIndex = 33;
+            this.btnRandomSurnameEntered.Text = "Show Entered Random Surname from Direct Ancestors";
+            this.btnRandomSurnameEntered.UseVisualStyleBackColor = true;
+            this.btnRandomSurnameEntered.Click += new System.EventHandler(this.btnRandomSurname_Click);
             // 
             // btnRandomSurnameMissing
             // 
@@ -2716,16 +2740,6 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // btnRandomSurnameEntered
-            // 
-            this.btnRandomSurnameEntered.Location = new System.Drawing.Point(649, 136);
-            this.btnRandomSurnameEntered.Name = "btnRandomSurnameEntered";
-            this.btnRandomSurnameEntered.Size = new System.Drawing.Size(306, 25);
-            this.btnRandomSurnameEntered.TabIndex = 33;
-            this.btnRandomSurnameEntered.Text = "Show Entered Random Surname from Direct Ancestors";
-            this.btnRandomSurnameEntered.UseVisualStyleBackColor = true;
-            this.btnRandomSurnameEntered.Click += new System.EventHandler(this.btnRandomSurname_Click);
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -3054,6 +3068,7 @@
         private System.Windows.Forms.CheckBox ckbMilitaryOnly;
         private System.Windows.Forms.Button btnRandomSurnameMissing;
         private System.Windows.Forms.Button btnRandomSurnameEntered;
+        private System.Windows.Forms.Button btnRandomSurnameColour;
     }
 }
 
