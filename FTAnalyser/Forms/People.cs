@@ -48,7 +48,7 @@ namespace FTAnalyzer.Forms
                 dsInd.Add(i);
             dgIndividuals.DataSource = dsInd;
             SortIndividuals();
-                
+
             IEnumerable<Family> listFam = ft.GetFamiliesAtLocation(loc, level);
             SortableBindingList<IDisplayFamily> dsFam = new SortableBindingList<IDisplayFamily>();
             foreach (Family f in listFam)
@@ -120,7 +120,7 @@ namespace FTAnalyzer.Forms
             Predicate<Individual> lcFacts = x => x.LostCousinsFacts > 0;
             Predicate<Individual> filter = FilterUtils.AndFilter<Individual>(relationFilter, lcFacts);
             IEnumerable<Individual> listToCheck = ft.AllIndividuals.Where(filter).ToList();
-           
+
             Predicate<Individual> missing = x => !x.IsLostCousinsEntered(CensusDate.EWCENSUS1841, false)
                                               && !x.IsLostCousinsEntered(CensusDate.EWCENSUS1881, false)
                                               && !x.IsLostCousinsEntered(CensusDate.SCOTCENSUS1881, false)
@@ -363,7 +363,7 @@ namespace FTAnalyzer.Forms
         private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             indReportFormHelper.SaveColumnLayout("PeopleIndColumns.xml");
-            famReportFormHelper.SaveColumnLayout("PeopleFamColumns.xml"); 
+            famReportFormHelper.SaveColumnLayout("PeopleFamColumns.xml");
             MessageBox.Show("Form Settings Saved", "People");
         }
 
@@ -397,6 +397,22 @@ namespace FTAnalyzer.Forms
         private void dgIndividuals_MouseDown(object sender, MouseEventArgs e)
         {
             ShowViewNotesMenu(dgIndividuals, e);
+        }
+
+        public void SetupNoChildrenStatus()
+        {
+            SortableBindingList<IDisplayFamily> results = new SortableBindingList<IDisplayFamily>();
+            IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
+            foreach (Family f in toSearch)
+            {
+                if (f.On1911Census && !f.HasChildrenStatus)
+                    results.Add(f);
+            }
+            dgFamilies.DataSource = results;
+            SortFamilies();
+            splitContainer.Panel1Collapsed = true;
+            splitContainer.Panel2Collapsed = false;
+            UpdateStatusCount();
         }
     }
 }

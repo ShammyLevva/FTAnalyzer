@@ -53,6 +53,7 @@ namespace FTAnalyzer.Forms
                 facts.Add(f);
             this.Text = "Facts Report for " + family.FamilyRef;
             SetupFacts();
+            SetBackColour(false);
         }
 
         public Facts(IEnumerable<Individual> individuals, List<string> factTypes)

@@ -23,7 +23,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "4.0.0.2-beta 1";
+        public static string VERSION = "4.0.1.0-beta 2";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -2207,6 +2207,16 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        private void btnNoChildrenStatus_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            People people = new People();
+            people.SetupNoChildrenStatus();
+            DisposeDuplicateForms(people);
+            people.Show();
+            HourGlass(false);
+        }
+
         private void ShowCensusRefFacts(CensusReference.ReferenceStatus status)
         {
             HourGlass(true);
@@ -2630,6 +2640,5 @@ namespace FTAnalyzer
             HourGlass(false);
         }
         #endregion
-
     }
 }

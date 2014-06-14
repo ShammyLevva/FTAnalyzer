@@ -158,7 +158,10 @@
             this.btnLC1881Canada = new System.Windows.Forms.Button();
             this.btnLC1881Scot = new System.Windows.Forms.Button();
             this.tabCensus = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnInconsistentLocations = new System.Windows.Forms.Button();
+            this.btnReportUnrecognised = new System.Windows.Forms.Button();
             this.btnUnrecognisedCensusRef = new System.Windows.Forms.Button();
             this.btnIncompleteCensusRef = new System.Windows.Forms.Button();
             this.btnMissingCensusRefs = new System.Windows.Forms.Button();
@@ -258,9 +261,7 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.btnReportUnrecognised = new System.Windows.Forms.Button();
-            this.btnInconsistentLocations = new System.Windows.Forms.Button();
+            this.btnNoChildrenStatus = new System.Windows.Forms.Button();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.relTypesFacts = new Controls.RelationTypes();
             this.cenDate = new Controls.CensusDateSelector();
@@ -288,6 +289,7 @@
             this.tabLostCousins.SuspendLayout();
             this.Referrals.SuspendLayout();
             this.tabCensus.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
@@ -1498,6 +1500,16 @@
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.btnNoChildrenStatus);
+            this.groupBox5.Location = new System.Drawing.Point(6, 276);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(327, 73);
+            this.groupBox5.TabIndex = 27;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "1911 UK Census";
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.btnInconsistentLocations);
@@ -1512,6 +1524,27 @@
             this.groupBox4.TabIndex = 25;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Census References";
+            // 
+            // btnInconsistentLocations
+            // 
+            this.btnInconsistentLocations.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnInconsistentLocations.Location = new System.Drawing.Point(318, 50);
+            this.btnInconsistentLocations.Name = "btnInconsistentLocations";
+            this.btnInconsistentLocations.Size = new System.Drawing.Size(306, 25);
+            this.btnInconsistentLocations.TabIndex = 29;
+            this.btnInconsistentLocations.Text = "Inconsistent census locations for familys with same census ref";
+            this.btnInconsistentLocations.UseVisualStyleBackColor = true;
+            this.btnInconsistentLocations.Click += new System.EventHandler(this.btnInconsistentLocations_Click);
+            // 
+            // btnReportUnrecognised
+            // 
+            this.btnReportUnrecognised.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnReportUnrecognised.Location = new System.Drawing.Point(6, 50);
+            this.btnReportUnrecognised.Name = "btnReportUnrecognised";
+            this.btnReportUnrecognised.Size = new System.Drawing.Size(306, 25);
+            this.btnReportUnrecognised.TabIndex = 28;
+            this.btnReportUnrecognised.Text = "Export Unrecognised Census References";
+            this.btnReportUnrecognised.UseVisualStyleBackColor = true;
             // 
             // btnUnrecognisedCensusRef
             // 
@@ -1683,7 +1716,7 @@
             // 
             // btnDuplicateCensus
             // 
-            this.btnDuplicateCensus.Location = new System.Drawing.Point(162, 19);
+            this.btnDuplicateCensus.Location = new System.Drawing.Point(165, 19);
             this.btnDuplicateCensus.Name = "btnDuplicateCensus";
             this.btnDuplicateCensus.Size = new System.Drawing.Size(150, 25);
             this.btnDuplicateCensus.TabIndex = 6;
@@ -1693,7 +1726,7 @@
             // 
             // btnMissingCensusLocation
             // 
-            this.btnMissingCensusLocation.Location = new System.Drawing.Point(6, 19);
+            this.btnMissingCensusLocation.Location = new System.Drawing.Point(9, 19);
             this.btnMissingCensusLocation.Name = "btnMissingCensusLocation";
             this.btnMissingCensusLocation.Size = new System.Drawing.Size(150, 25);
             this.btnMissingCensusLocation.TabIndex = 5;
@@ -2640,36 +2673,15 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // groupBox5
+            // btnNoChildrenStatus
             // 
-            this.groupBox5.Location = new System.Drawing.Point(14, 276);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(319, 73);
-            this.groupBox5.TabIndex = 27;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "1911 UK Census";
-            this.groupBox5.Visible = false;
-            // 
-            // btnReportUnrecognised
-            // 
-            this.btnReportUnrecognised.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnReportUnrecognised.Location = new System.Drawing.Point(6, 50);
-            this.btnReportUnrecognised.Name = "btnReportUnrecognised";
-            this.btnReportUnrecognised.Size = new System.Drawing.Size(306, 25);
-            this.btnReportUnrecognised.TabIndex = 28;
-            this.btnReportUnrecognised.Text = "Export Unrecognised Census References";
-            this.btnReportUnrecognised.UseVisualStyleBackColor = true;
-            // 
-            // btnInconsistentLocations
-            // 
-            this.btnInconsistentLocations.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnInconsistentLocations.Location = new System.Drawing.Point(318, 50);
-            this.btnInconsistentLocations.Name = "btnInconsistentLocations";
-            this.btnInconsistentLocations.Size = new System.Drawing.Size(306, 25);
-            this.btnInconsistentLocations.TabIndex = 29;
-            this.btnInconsistentLocations.Text = "Inconsistent census locations for familys with same census ref";
-            this.btnInconsistentLocations.UseVisualStyleBackColor = true;
-            this.btnInconsistentLocations.Click += new System.EventHandler(this.btnInconsistentLocations_Click);
+            this.btnNoChildrenStatus.Location = new System.Drawing.Point(11, 19);
+            this.btnNoChildrenStatus.Name = "btnNoChildrenStatus";
+            this.btnNoChildrenStatus.Size = new System.Drawing.Size(150, 25);
+            this.btnNoChildrenStatus.TabIndex = 6;
+            this.btnNoChildrenStatus.Text = "Missing Children Status";
+            this.btnNoChildrenStatus.UseVisualStyleBackColor = true;
+            this.btnNoChildrenStatus.Click += new System.EventHandler(this.btnNoChildrenStatus_Click);
             // 
             // rtbOutput
             // 
@@ -2808,6 +2820,7 @@
             this.Referrals.ResumeLayout(false);
             this.Referrals.PerformLayout();
             this.tabCensus.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -3095,6 +3108,7 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button btnInconsistentLocations;
         private System.Windows.Forms.Button btnReportUnrecognised;
+        private System.Windows.Forms.Button btnNoChildrenStatus;
     }
 }
 

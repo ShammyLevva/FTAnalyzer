@@ -335,6 +335,19 @@ namespace FTAnalyzer
             return Members.Any(x => x.Surname.Equals(surname, StringComparison.InvariantCultureIgnoreCase));
         }
 
+        public bool On1911Census
+        {
+            get
+            {
+                if (Husband != null && Husband.IsCensusDone(CensusDate.UKCENSUS1911)) return true;
+                if (Wife != null && Wife.IsCensusDone(CensusDate.UKCENSUS1911)) return true;
+                return false;
+            }
+        }
+
+        // only check shared facts for children status
+        public bool HasChildrenStatus { get { return Facts.Any(f => f.FactType == Fact.CHILDREN1911); } }
+
         #endregion
 
         public void SetBudgieCode(Individual ind, int lenAhnentafel)

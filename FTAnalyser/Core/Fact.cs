@@ -35,7 +35,7 @@ namespace FTAnalyzer
                 LOOSEDEATH = "*LOOSED", LOOSEBIRTH = "*LOOSEB", FAMILYSEARCH = "*IGI",
                 CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT", PARENT = "*PARENT",
                 CHILDREN = "*CHILDREN", CHANGE = "*CHNG", LOSTCOUSINS = "*LOST",
-                DIED_SINGLE = "*SINGLE", MISSING = "*MISSING";
+                DIED_SINGLE = "*SINGLE", MISSING = "*MISSING", CHILDREN1911 = "CHILDREN1911";
 
         public static readonly ISet<string> LOOSE_BIRTH_FACTS = new HashSet<string>(new string[] {
             CHRISTENING, BAPTISM, RESIDENCE, WITNESS, EMIGRATION, IMMIGRATION, ARRIVAL, DEPARTURE, 
@@ -82,7 +82,8 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("LOSTCOUSINS", LOSTCOUSINS);
             CUSTOM_TAGS.Add("DIED SINGLE", DIED_SINGLE);
             CUSTOM_TAGS.Add("MISSING", MISSING);
-
+            CUSTOM_TAGS.Add("CHILDREN STATUS", CHILDREN1911);
+            
             // convert custom tags to normal tags
             CUSTOM_TAGS.Add("CENSUS 1841", CENSUS);
             CUSTOM_TAGS.Add("CENSUS 1851", CENSUS);
@@ -118,14 +119,13 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("BURIAL", BURIAL);
             CUSTOM_TAGS.Add("FUNERAL", BURIAL);
             CUSTOM_TAGS.Add("CREMATION", CREMATION);
-            CUSTOM_TAGS.Add("CHILDREN STATUS", NUM_CHILDREN);
             CUSTOM_TAGS.Add("PROBATE", PROBATE);
             CUSTOM_TAGS.Add("PROBATE DATE", PROBATE);
             CUSTOM_TAGS.Add("RESIDENCE", RESIDENCE);
             CUSTOM_TAGS.Add("CENSUS", CENSUS);
             CUSTOM_TAGS.Add("MILITARY SERVICE", MILITARY);
 
-            // Create list of 
+            // Create list of Comment facts
             COMMENT_FACTS.Add(NAME);
             COMMENT_FACTS.Add(OCCUPATION);
             COMMENT_FACTS.Add(MILITARY);
@@ -153,6 +153,7 @@ namespace FTAnalyzer
             COMMENT_FACTS.Add(PARENT);
             COMMENT_FACTS.Add(CHILDREN);
             COMMENT_FACTS.Add(ALIAS);
+            COMMENT_FACTS.Add(CHILDREN1911);
         }
 
         private string GetFactTypeDescription(string factType)
@@ -226,6 +227,7 @@ namespace FTAnalyzer
                 case CHILDREN: return "Child Born";
                 case REFERENCE: return "Reference ID";
                 case MISSING: return "Missing";
+                case CHILDREN1911: return "Children Status";
                 case "": return "UNKNOWN";
                 default: return EnhancedTextInfo.ToTitleCase(factType);
             }
