@@ -7,6 +7,7 @@ using System.Xml;
 using System.Windows.Forms;
 using System.IO;
 using FTAnalyzer.Utilities;
+using System.Text.RegularExpressions;
 
 namespace FTAnalyzer
 {
@@ -19,6 +20,9 @@ namespace FTAnalyzer
         public List<Individual> Children { get; internal set; }
         public Individual Husband { get; internal set; }
         public Individual Wife { get; internal set; }
+        public int ExpectedTotal { get; internal set; }
+        public int ExpectedAlive { get; internal set; }
+        public int ExpectedDead { get; internal set; }
 
         private Dictionary<string, Fact> preferredFacts;
 
@@ -28,6 +32,9 @@ namespace FTAnalyzer
             this.Facts = new List<Fact>();
             this.Children = new List<Individual>();
             this.preferredFacts = new Dictionary<string, Fact>();
+            this.ExpectedTotal = 0;
+            this.ExpectedAlive = 0;
+            this.ExpectedDead = 0;
         }
 
         public Family() : this(string.Empty) { }
@@ -94,7 +101,36 @@ namespace FTAnalyzer
                 AddFacts(node, Fact.REFERENCE);
                 AddFacts(node, Fact.UNKNOWN);
                 //TODO: need to think about family facts having AGE tags in GEDCOM
+                if (HasChildrenStatus)
+                    CheckChildrenStatusCounts();
             }
+        }
+
+        private void CheckChildrenStatusCounts()
+        {
+            foreach (Fact f in ChildrenStatusFacts)
+            {
+                Match matcher = Regex.Match(f.Comment, Fact.CHILDREN_STATUS_PATTERN1);
+                if (matcher.Success)
+                    SetChildrenStatusCounts(matcher);
+                else
+                {
+                    matcher = Regex.Match(f.Comment, Fact.CHILDREN_STATUS_PATTERN2);
+                    if (matcher.Success)
+                        SetChildrenStatusCounts(matcher);
+                }
+            }
+        }
+
+        private void SetChildrenStatusCounts(Match matcher)
+        {
+            int resultT, resultA, resultD;
+            int.TryParse(matcher.Groups[1].Value, out resultT);
+            ExpectedTotal += resultT;
+            int.TryParse(matcher.Groups[2].Value, out resultA);
+            ExpectedAlive += resultA;
+            int.TryParse(matcher.Groups[3].Value, out resultD);
+            ExpectedDead += resultD;
         }
 
         private void AddParentAndChildrenFacts(Individual child, Individual parent, ParentalRelationship.ParentalRelationshipType prType)
@@ -138,6 +174,9 @@ namespace FTAnalyzer
             this.Wife = f.Wife == null ? null : new Individual(f.Wife);
             this.Children = new List<Individual>(f.Children);
             this.preferredFacts = new Dictionary<string, Fact>(f.preferredFacts);
+            this.ExpectedTotal = f.ExpectedTotal;
+            this.ExpectedAlive = f.ExpectedAlive;
+            this.ExpectedDead = f.ExpectedDead;
         }
 
         private void AddFacts(XmlNode node, string factType)
@@ -346,7 +385,9 @@ namespace FTAnalyzer
         }
 
         // only check shared facts for children status
-        public bool HasChildrenStatus { get { return Facts.Any(f => f.FactType == Fact.CHILDREN1911); } }
+        private IEnumerable<Fact> ChildrenStatusFacts { get { return Facts.Where(f => f.FactType == Fact.CHILDREN1911 && f.FactErrorLevel == Fact.FactError.GOOD); } }
+        
+        public bool HasChildrenStatus { get { return Facts.Any(f => f.FactType == Fact.CHILDREN1911 && f.FactErrorLevel == Fact.FactError.GOOD); } }
 
         #endregion
 

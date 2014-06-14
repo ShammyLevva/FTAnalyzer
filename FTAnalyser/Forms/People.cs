@@ -414,5 +414,22 @@ namespace FTAnalyzer.Forms
             splitContainer.Panel2Collapsed = false;
             UpdateStatusCount();
         }
+
+        public void SetupChildrenStatusReport()
+        {
+            SortableBindingList<IDisplayChildrenStatus> results = new SortableBindingList<IDisplayChildrenStatus>();
+            IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
+            foreach (CensusFamily f in toSearch)
+            {
+                if (f.On1911Census && f.HasChildrenStatus && 
+                    (f.ExpectedTotal != f.ChildrenTotal || f.ExpectedAlive != f.ChildrenAlive || f.ExpectedDead != f.ChildrenDead))
+                    results.Add(f);
+            }
+            dgFamilies.DataSource = results;
+            SortFamilies();
+            splitContainer.Panel1Collapsed = true;
+            splitContainer.Panel2Collapsed = false;
+            UpdateStatusCount();
+        }
     }
 }

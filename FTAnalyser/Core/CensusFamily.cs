@@ -6,14 +6,14 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class CensusFamily : Family
+    public class CensusFamily : Family, IDisplayChildrenStatus
     {
-
         public CensusDate CensusDate { get; private set; }
         public FactLocation BestLocation { get; private set; }
         public new CensusIndividual Husband { get; private set; }
         public new CensusIndividual Wife { get; private set; }
         public new List<CensusIndividual> Children { get; private set; }
+        private List<CensusIndividual> FamilyChildren { get; set; }
 
         public CensusFamily(Family f, CensusDate censusDate)
             : base(f)
@@ -32,6 +32,7 @@ namespace FTAnalyzer
                 CensusIndividual toAdd = new CensusIndividual(position++, child, this, CensusIndividual.CHILD);
                 this.Children.Add(toAdd);
             }
+            this.FamilyChildren = Children; // Family children is all children alive or dead at census date
         }
 
         public new IEnumerable<CensusIndividual> Members
@@ -150,6 +151,21 @@ namespace FTAnalyzer
                 }
                 return Individual.UNKNOWN_NAME;
             }
+        }
+
+        public int ChildrenAlive
+        { 
+            get { return FamilyChildren.Count(x => x.BirthDate.IsBefore(CensusDate) && x.DeathDate.IsAfter(CensusDate));  }
+        }
+
+        public int ChildrenDead
+        {
+            get { return FamilyChildren.Count(x => x.BirthDate.IsBefore(CensusDate) && x.DeathDate.IsBefore(CensusDate)); }
+        }
+        
+        public int ChildrenTotal
+        {
+            get { return ChildrenAlive + ChildrenDead;  }
         }
     }
 }

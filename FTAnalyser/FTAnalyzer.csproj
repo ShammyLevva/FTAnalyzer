@@ -241,6 +241,7 @@
     <Compile Include="Core\Displays\DisplayOccupation.cs" />
     <Compile Include="Core\Displays\IDisplayOccupation.cs" />
     <Compile Include="Core\Displays\IDisplaySource.cs" />
+    <Compile Include="Core\Displays\IDisplayChildrenStatus.cs" />
     <Compile Include="Core\DuplicateIndividual.cs" />
     <Compile Include="Core\Exports\ExportFact.cs" />
     <Compile Include="Core\Exports\IExportReferrals.cs" />

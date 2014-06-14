@@ -272,6 +272,7 @@
             this.treetopsCountry = new Controls.CensusCountry();
             this.wardeadRelation = new Controls.RelationTypes();
             this.wardeadCountry = new Controls.CensusCountry();
+            this.btnMismatchedChildrenStatus = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -1502,10 +1503,11 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.btnMismatchedChildrenStatus);
             this.groupBox5.Controls.Add(this.btnNoChildrenStatus);
             this.groupBox5.Location = new System.Drawing.Point(6, 276);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(327, 73);
+            this.groupBox5.Size = new System.Drawing.Size(327, 59);
             this.groupBox5.TabIndex = 27;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "1911 UK Census";
@@ -2776,6 +2778,16 @@
             this.wardeadCountry.Title = "Default Country";
             this.wardeadCountry.UKEnabled = true;
             // 
+            // btnMismatchedChildrenStatus
+            // 
+            this.btnMismatchedChildrenStatus.Location = new System.Drawing.Point(167, 19);
+            this.btnMismatchedChildrenStatus.Name = "btnMismatchedChildrenStatus";
+            this.btnMismatchedChildrenStatus.Size = new System.Drawing.Size(150, 25);
+            this.btnMismatchedChildrenStatus.TabIndex = 7;
+            this.btnMismatchedChildrenStatus.Text = "Mismatched Children Status";
+            this.btnMismatchedChildrenStatus.UseVisualStyleBackColor = true;
+            this.btnMismatchedChildrenStatus.Click += new System.EventHandler(this.btnMismatchedChildrenStatus_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -3109,6 +3121,7 @@
         private System.Windows.Forms.Button btnInconsistentLocations;
         private System.Windows.Forms.Button btnReportUnrecognised;
         private System.Windows.Forms.Button btnNoChildrenStatus;
+        private System.Windows.Forms.Button btnMismatchedChildrenStatus;
     }
 }
 

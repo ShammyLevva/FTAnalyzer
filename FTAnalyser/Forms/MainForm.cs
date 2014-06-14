@@ -2217,6 +2217,16 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        private void btnMismatchedChildrenStatus_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            People people = new People();
+            people.SetupChildrenStatusReport();
+            DisposeDuplicateForms(people);
+            people.Show();
+            HourGlass(false);
+        }
+        
         private void ShowCensusRefFacts(CensusReference.ReferenceStatus status)
         {
             HourGlass(true);

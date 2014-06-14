@@ -311,6 +311,10 @@ namespace FTAnalyzer
                     if (FactType.Equals(RESIDENCE) && Properties.GeneralSettings.Default.UseResidenceAsCensus)
                         CheckResidenceCensusDate();
 
+                    // check Children Status is valid
+                    if (FactType.Equals(CHILDREN1911))
+                        CheckValidChildrenStatus();
+
                     // now iterate through source elements of the fact finding all sources
                     XmlNodeList list = node.SelectNodes("SOUR");
                     foreach (XmlNode n in list)
@@ -350,6 +354,21 @@ namespace FTAnalyzer
                     throw new InvalidXMLFactException(message + "\n            Error " + ex.Message + "\n");
                 }
             }
+        }
+
+        public static readonly string CHILDREN_STATUS_PATTERN1 = @"(\d{1,2}) Total,? ?(\d{1,2}) Alive,? ?(\d{1,2}) Dead";
+        public static readonly string CHILDREN_STATUS_PATTERN2 = @"Total:? (\d{1,2}),? ?Alive:? (\d{1,2}),? ?Dead:? (\d{1,2})";
+
+        private void CheckValidChildrenStatus()
+        {
+            Match matcher = Regex.Match(Comment, CHILDREN_STATUS_PATTERN1);
+            if (matcher.Success)
+                return;
+            matcher = Regex.Match(Comment, CHILDREN_STATUS_PATTERN2);
+            if (matcher.Success)
+                return;
+            this.FactErrorLevel = FactError.ERROR;
+            this.FactErrorMessage = "Children status doesn't match valid patter Total x, Alive y, Dead z";
         }
 
         private void SetAddress(string factType, XmlNode node)
