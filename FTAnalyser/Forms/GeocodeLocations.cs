@@ -1234,7 +1234,7 @@ namespace FTAnalyzer.Forms
                     foundLevel == FactLocation.ADDRESS && distance < 5000 ||
                     foundLevel == FactLocation.SUBREGION && distance < 20000 ||
                     foundLevel == FactLocation.REGION && distance < 50000 ||
-                    foundLevel == FactLocation.COUNTRY && distance < 250000)) 
+                    foundLevel == FactLocation.COUNTRY)) 
                 {
                     selected = gaz;
                     minDistance = distance;
