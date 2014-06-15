@@ -41,6 +41,7 @@ namespace FTAnalyzer
         public string AddressNoNumerics { get; private set; }
         public string PlaceNoNumerics { get; private set; }
         public string FuzzyMatch { get; private set; }
+        public string FuzzyNoParishMatch { get; private set; }
         public string ParishID { get; internal set; }
         public int Level { get; private set; }
         public Region KnownRegion { get; private set; }
@@ -666,6 +667,7 @@ namespace FTAnalyzer
             meta = new DoubleMetaphone(Place);
             PlaceMetaphone = meta.PrimaryKey;
             FuzzyMatch = AddressMetaphone + ":" + SubRegionMetaphone + ":" + RegionMetaphone + ":" + CountryMetaphone;
+            FuzzyNoParishMatch = AddressMetaphone + ":" + RegionMetaphone + ":" + CountryMetaphone;
         }
 
         public static string ReplaceString(string str, string oldValue, string newValue, StringComparison comparison)

@@ -21,6 +21,7 @@ namespace FTAnalyzer.Mapping
         public string ParishName { get; private set; }
         public IPoint Point { get; private set; }
         public string FuzzyMatch { get; private set; }
+        public string FuzzyNoParishMatch { get; private set; }
 
         public OS50kGazetteer(string line)
         {
@@ -60,12 +61,15 @@ namespace FTAnalyzer.Mapping
                 CountryName = county.CountryName;
                 DoubleMetaphone meta = new DoubleMetaphone(DefinitiveName);
                 FuzzyMatch = meta.PrimaryKey + ":";
+                FuzzyNoParishMatch = meta.PrimaryKey + ":";
                 meta = new DoubleMetaphone(ParishName);
                 FuzzyMatch += meta.PrimaryKey + ":";
                 meta = new DoubleMetaphone(CountyName);
                 FuzzyMatch += meta.PrimaryKey + ":";
+                FuzzyNoParishMatch = meta.PrimaryKey + ":";
                 meta = new DoubleMetaphone(county.CountryName);
                 FuzzyMatch += meta.PrimaryKey;
+                FuzzyNoParishMatch = meta.PrimaryKey + ":";
             }
         }
 

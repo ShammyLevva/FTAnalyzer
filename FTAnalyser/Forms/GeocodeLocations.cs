@@ -19,6 +19,7 @@ using SharpMap.Layers;
 using SharpMap.Rendering;
 using SharpMap.Styles;
 using System.Text;
+using SharpMap.Utilities;
 
 namespace FTAnalyzer.Forms
 {
@@ -467,7 +468,7 @@ namespace FTAnalyzer.Forms
             if (formClosing)
                 this.Close();
             else
-                dgLocations.Refresh();
+                UpdateGridWithFilters();
         }
 
         private void GeocodeLocations_FormClosing(object sender, FormClosingEventArgs e)
@@ -1204,16 +1205,47 @@ namespace FTAnalyzer.Forms
         {
             if (loc.Level >= FactLocation.ADDRESS)
             {
-                Predicate<OS50kGazetteer> match = x => x.FuzzyMatch == loc.FuzzyMatch && x.IsCountyMatch(loc);
+                Predicate<OS50kGazetteer> match = x => (x.FuzzyMatch == loc.FuzzyMatch || x.FuzzyNoParishMatch == loc.FuzzyNoParishMatch) && x.IsCountyMatch(loc);
                 List<OS50kGazetteer> results = OS50k.Where(match).ToList<OS50kGazetteer>();
                 if (results.Count > 0)
                 {
-                    SetOSGeocoding(loc, results[0], FactLocation.ADDRESS, true);
+                    if(loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH || loc.GeocodeStatus == FactLocation.Geocode.LEVEL_MISMATCH)
+                        return CheckNearest(loc, results);
+                    else
+                        SetOSGeocoding(loc, results[0], FactLocation.ADDRESS, true);
                     return true;
                 }
                 log.Info("OS Geocoder Fuzzy match Failed to match: " + loc.ToString());
             }
             return false;
+        }
+
+        private bool CheckNearest(FactLocation loc, List<OS50kGazetteer> results)
+        {
+            double minDistance = double.MaxValue;
+            OS50kGazetteer selected = null;
+            int foundLevel = loc.FoundLevel >= 0 ? loc.FoundLevel : loc.Level;
+            foreach(OS50kGazetteer gaz in results)
+            {
+                Coordinate c = new Coordinate(loc.Longitude,loc.Latitude);
+                double distance = GeoSpatialMath.GreatCircleDistance(loc.Longitude, loc.Latitude, gaz.Longitude, gaz.Latitude);
+                if (distance < minDistance &&
+                   (distance < 2500 ||
+                    foundLevel == FactLocation.ADDRESS && distance < 5000 ||
+                    foundLevel == FactLocation.SUBREGION && distance < 20000 ||
+                    foundLevel == FactLocation.REGION && distance < 50000 ||
+                    foundLevel == FactLocation.COUNTRY && distance < 250000)) 
+                {
+                    selected = gaz;
+                    minDistance = distance;
+                }
+            }
+            if (selected != null)
+            {
+                SetOSGeocoding(loc, selected, FactLocation.ADDRESS, true);
+                log.Info("Accepted " + selected.ToString() + " for " + loc.ToString() + ". Distance: " + minDistance + " Level: " + foundLevel);
+            }
+            return selected != null;
         }
 
         private bool CheckLocationMatch(string key, FactLocation loc)
