@@ -35,6 +35,7 @@ namespace FTAnalyzer
             switch (errorLevel)
             {
                 case Fact.FactError.GOOD:
+                case Fact.FactError.IGNORE:
                     return GOOD;
                 case Fact.FactError.WARNINGALLOW:
                     return WARNINGALLOW;
