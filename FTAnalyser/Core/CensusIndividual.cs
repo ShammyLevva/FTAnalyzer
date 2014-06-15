@@ -80,5 +80,10 @@ namespace FTAnalyzer
             else
                 return CensusLocation.Country.Equals(location);
         }
+
+        public override string ToString()
+        {
+            return IndividualID + ": " + Name + " b." + BirthDate;
+        }
     }
 }

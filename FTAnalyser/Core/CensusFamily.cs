@@ -22,9 +22,9 @@ namespace FTAnalyzer
             this.CensusDate = censusDate;
             this.BestLocation = null;
             int position = 1;
-            if(f.Wife != null)
+            if (f.Wife != null)
                 this.Wife = new CensusIndividual(position++, f.Wife, this, CensusIndividual.WIFE);
-            if(f.Husband != null)
+            if (f.Husband != null)
                 this.Husband = new CensusIndividual(position++, f.Husband, this, CensusIndividual.HUSBAND);
             this.Children = new List<CensusIndividual>();
             foreach (Individual child in f.Children)
@@ -32,13 +32,13 @@ namespace FTAnalyzer
                 CensusIndividual toAdd = new CensusIndividual(position++, child, this, CensusIndividual.CHILD);
                 this.Children.Add(toAdd);
             }
-            this.FamilyChildren = Children; // Family children is all children alive or dead at census date
+            this.FamilyChildren = new List<CensusIndividual>(Children); // Family children is all children alive or dead at census date
         }
 
         public new IEnumerable<CensusIndividual> Members
         {
-            get 
-            {             
+            get
+            {
                 if (Husband != null) yield return Husband;
                 if (Wife != null) yield return Wife;
                 if (Children != null && Children.Count > 0)
@@ -154,18 +154,24 @@ namespace FTAnalyzer
         }
 
         public int ChildrenAlive
-        { 
-            get { return FamilyChildren.Count(x => x.BirthDate.IsBefore(CensusDate) && x.DeathDate.IsAfter(CensusDate));  }
+        {
+            get { return FamilyChildren.Count(x => x.IsAlive(CensusDate)); }
         }
 
         public int ChildrenDead
         {
-            get { return FamilyChildren.Count(x => x.BirthDate.IsBefore(CensusDate) && x.DeathDate.IsBefore(CensusDate)); }
+            get { return FamilyChildren.Count(x => !x.IsAlive(CensusDate)); }
         }
-        
+
         public int ChildrenTotal
         {
-            get { return ChildrenAlive + ChildrenDead;  }
+            get
+            {
+                int total = ChildrenAlive + ChildrenDead;
+                if (total == 0)
+                    Console.WriteLine("hmmm zero?");
+                return total;
+            }
         }
     }
 }

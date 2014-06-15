@@ -356,8 +356,8 @@ namespace FTAnalyzer
             }
         }
 
-        public static readonly string CHILDREN_STATUS_PATTERN1 = @"(\d{1,2}) Total,? ?(\d{1,2}) Alive,? ?(\d{1,2}) Dead";
-        public static readonly string CHILDREN_STATUS_PATTERN2 = @"Total:? (\d{1,2}),? ?Alive:? (\d{1,2}),? ?Dead:? (\d{1,2})";
+        public static readonly string CHILDREN_STATUS_PATTERN1 = @"(\d{1,2}) Total ?,? ?(\d{1,2}) Alive ?,? ?(\d{1,2}) Dead";
+        public static readonly string CHILDREN_STATUS_PATTERN2 = @"Total:? (\d{1,2}) ?,? ?Alive:? (\d{1,2}) ?,? ?Dead:? (\d{1,2})";
 
         private void CheckValidChildrenStatus()
         {

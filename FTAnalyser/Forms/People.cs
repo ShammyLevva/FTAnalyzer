@@ -13,11 +13,14 @@ namespace FTAnalyzer.Forms
 {
     public partial class People : Form
     {
+        private enum ReportType { People, MissingChildrenStatus, MismatchedChildrenStatus } 
+        
         private bool selectRow = false;
         private Dictionary<IDisplayIndividual, IDisplayFamily> families;
         private FamilyTree ft = FamilyTree.Instance;
         private ReportFormHelper indReportFormHelper;
         private ReportFormHelper famReportFormHelper;
+        private ReportType reportType = ReportType.People;
 
         public People()
         {
@@ -413,6 +416,8 @@ namespace FTAnalyzer.Forms
             splitContainer.Panel1Collapsed = true;
             splitContainer.Panel2Collapsed = false;
             UpdateStatusCount();
+            reportType = ReportType.MissingChildrenStatus;
+            this.Text = "Families with a 1911 census record but no Children Status record showing Children Alive/Dead";
         }
 
         public void SetupChildrenStatusReport()
@@ -430,6 +435,34 @@ namespace FTAnalyzer.Forms
             splitContainer.Panel1Collapsed = true;
             splitContainer.Panel2Collapsed = false;
             UpdateStatusCount();
+            reportType = ReportType.MismatchedChildrenStatus;
+            this.Text = "1911 Census Families where the children status recorded doesn't match the children in tree";
+        }
+
+        private void dgFamilies_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (reportType == ReportType.MissingChildrenStatus)
+                e.CellStyle.BackColor = Color.Wheat;
+            else if (reportType == ReportType.MismatchedChildrenStatus)
+            {
+                e.CellStyle.BackColor = Color.Wheat;
+                DataGridViewCellCollection cells = dgFamilies.Rows[e.RowIndex].Cells;
+                switch (e.ColumnIndex)
+                {
+                    case 5: // Totals
+                    case 8:
+                        e.CellStyle.BackColor = cells["ChildrenTotal"].Value.Equals(cells["ExpectedTotal"].Value) ? Color.Wheat : Color.OrangeRed;
+                        break;
+                    case 6: // Alive
+                    case 9:
+                        e.CellStyle.BackColor = cells["ChildrenAlive"].Value.Equals(cells["ExpectedAlive"].Value) ? Color.Wheat : Color.OrangeRed;
+                        break;
+                    case 7: // ChildrenTotal
+                    case 10:
+                        e.CellStyle.BackColor = cells["ChildrenDead"].Value.Equals(cells["ExpectedDead"].Value) ? Color.Wheat : Color.OrangeRed;
+                        break;
+                }
+            }
         }
     }
 }

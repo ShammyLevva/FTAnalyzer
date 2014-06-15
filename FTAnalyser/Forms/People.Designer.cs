@@ -214,6 +214,7 @@
             this.dgFamilies.Size = new System.Drawing.Size(1038, 271);
             this.dgFamilies.TabIndex = 5;
             this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFamilies_CellDoubleClick_1);
+            this.dgFamilies.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgFamilies_CellFormatting);
             // 
             // People
             // 
