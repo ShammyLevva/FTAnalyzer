@@ -14,10 +14,12 @@ namespace FTAnalyzer
         public new CensusIndividual Wife { get; private set; }
         public new List<CensusIndividual> Children { get; private set; }
         private List<CensusIndividual> FamilyChildren { get; set; }
+        private Family BaseFamily { get; set; }
 
         public CensusFamily(Family f, CensusDate censusDate)
             : base(f)
         {
+            this.BaseFamily = f;
             FamilyTree ft = FamilyTree.Instance;
             this.CensusDate = censusDate;
             this.BestLocation = null;
@@ -176,12 +178,12 @@ namespace FTAnalyzer
 
         string IDisplayChildrenStatus.Husband
         {
-            get { return Husband == null ? string.Empty : Husband.Name + " (b." + Husband.BirthDate + ")"; }
+            get { return BaseFamily.Husband == null ? string.Empty : BaseFamily.Husband.Name + " (b." + BaseFamily.Husband.BirthDate + ")"; }
         }
 
         string IDisplayChildrenStatus.Wife
         {
-            get { return Wife == null ? string.Empty : Wife.Name + " (b." + Wife.BirthDate + ")"; }
+            get { return BaseFamily.Wife == null ? string.Empty : BaseFamily.Wife.Name + " (b." + BaseFamily.Wife.BirthDate + ")"; }
         }
     }
 }
