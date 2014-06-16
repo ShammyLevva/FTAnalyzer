@@ -39,6 +39,8 @@ namespace FTAnalyzer.Forms
             {
                 txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals and " + dgFamilies.RowCount + " Families. " + Properties.Messages.Hints_IndividualFamily;
             }
+            if (reportType == ReportType.MissingChildrenStatus || reportType == ReportType.MismatchedChildrenStatus)
+                txtCount.Text += " Shift Double click to see colour census report for family.";
         }
 
         public void SetLocation(FactLocation loc, int level)
@@ -238,7 +240,7 @@ namespace FTAnalyzer.Forms
                 }
             }
         }
-
+        
         private void dgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
@@ -246,6 +248,7 @@ namespace FTAnalyzer.Forms
                 string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
                 Individual ind = ft.GetIndividual(indID);
                 Facts factForm = new Facts(ind);
+                MainForm.DisposeDuplicateForms(factForm);
                 factForm.Show();
             }
         }
@@ -258,9 +261,20 @@ namespace FTAnalyzer.Forms
                 Family fam = ft.GetFamily(famID);
                 if (fam != null)
                 {
-                    Facts factForm = new Facts(fam);
-                    MainForm.DisposeDuplicateForms(factForm);
-                    factForm.Show();
+                    if ((reportType == ReportType.MismatchedChildrenStatus || reportType == ReportType.MissingChildrenStatus) && ModifierKeys.Equals(Keys.Shift))
+                    {
+                        List<IDisplayColourCensus> list = fam.Members.ToList<IDisplayColourCensus>();
+                        ColourCensus rs = new ColourCensus(Countries.UNITED_KINGDOM, list);
+                        MainForm.DisposeDuplicateForms(rs);
+                        rs.Show();
+                        rs.Focus();
+                    }
+                    else
+                    {
+                        Facts factForm = new Facts(fam);
+                        MainForm.DisposeDuplicateForms(factForm);
+                        factForm.Show();
+                    }
                 }
             }
         }
@@ -289,33 +303,6 @@ namespace FTAnalyzer.Forms
             }
             individuals = individuals.Distinct<Individual>().ToList();
             SetIndividuals(individuals, "Individuals that may have more than one census/residence record for a census year");
-        }
-
-        private void dgIndividuals_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
-                Individual ind = ft.GetIndividual(indID);
-                Facts factForm = new Facts(ind);
-                MainForm.DisposeDuplicateForms(factForm);
-                factForm.Show();
-            }
-        }
-
-        private void dgFamilies_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                string famID = (string)dgFamilies.CurrentRow.Cells["FamilyID"].Value;
-                Family fam = ft.GetFamily(famID);
-                if (fam != null)
-                {
-                    Facts factForm = new Facts(fam);
-                    MainForm.DisposeDuplicateForms(factForm);
-                    factForm.Show();
-                }
-            }
         }
 
         private void People_FormClosed(object sender, FormClosedEventArgs e)
@@ -422,9 +409,9 @@ namespace FTAnalyzer.Forms
             SortFamilies();
             splitContainer.Panel1Collapsed = true;
             splitContainer.Panel2Collapsed = false;
-            UpdateStatusCount();
             reportType = ReportType.MissingChildrenStatus;
             this.Text = "Families with a 1911 census record but no Children Status record showing Children Alive/Dead";
+            UpdateStatusCount();
         }
 
         public void SetupChildrenStatusReport()
@@ -441,9 +428,9 @@ namespace FTAnalyzer.Forms
             SortFamilies();
             splitContainer.Panel1Collapsed = true;
             splitContainer.Panel2Collapsed = false;
-            UpdateStatusCount();
             reportType = ReportType.MismatchedChildrenStatus;
             this.Text = "1911 Census Families where the children status recorded doesn't match the children in tree";
+            UpdateStatusCount();
         }
 
         private void dgFamilies_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

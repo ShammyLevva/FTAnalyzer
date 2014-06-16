@@ -97,15 +97,17 @@
             // 
             this.dgIndividuals.AllowUserToAddRows = false;
             this.dgIndividuals.AllowUserToDeleteRows = false;
+            this.dgIndividuals.AllowUserToOrderColumns = true;
             this.dgIndividuals.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.ContextMenuStrip = this.ctxViewNotes;
             this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgIndividuals.Location = new System.Drawing.Point(0, 25);
+            this.dgIndividuals.MultiSelect = false;
             this.dgIndividuals.Name = "dgIndividuals";
             this.dgIndividuals.Size = new System.Drawing.Size(1038, 261);
             this.dgIndividuals.TabIndex = 2;
-            this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgIndividuals_CellDoubleClick_1);
+            this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgIndividuals_CellDoubleClick);
             this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgIndividuals_MouseDown);
             // 
             // ctxViewNotes
@@ -206,14 +208,16 @@
             // 
             this.dgFamilies.AllowUserToAddRows = false;
             this.dgFamilies.AllowUserToDeleteRows = false;
+            this.dgFamilies.AllowUserToOrderColumns = true;
             this.dgFamilies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgFamilies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFamilies.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgFamilies.Location = new System.Drawing.Point(0, 0);
+            this.dgFamilies.MultiSelect = false;
             this.dgFamilies.Name = "dgFamilies";
             this.dgFamilies.Size = new System.Drawing.Size(1038, 271);
             this.dgFamilies.TabIndex = 5;
-            this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFamilies_CellDoubleClick_1);
+            this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFamilies_CellDoubleClick);
             this.dgFamilies.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgFamilies_CellFormatting);
             // 
             // People
