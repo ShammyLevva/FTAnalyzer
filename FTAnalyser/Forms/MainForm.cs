@@ -148,8 +148,9 @@ namespace FTAnalyzer
             }
             catch (Exception ex2)
             {
-                MessageBox.Show("Error: Problem processing your file.\n" +
-                    "Please report this at http://ftanalyzer.codeplex.com. Error was: " + ex2.Message, "FT Analyzer");
+                string message = ex2.Message + (ex2.InnerException != null ? ex2.InnerException.Message : string.Empty);
+                MessageBox.Show("Error: Problem processing your file. Please try again.\n" +
+                    "If this problem persists please report this at http://ftanalyzer.codeplex.com. Error was: " + ex2.Message + "\n" + ex2.InnerException, "FT Analyzer");
             }
             finally
             {
@@ -1970,6 +1971,7 @@ namespace FTAnalyzer
                 f.Show();
             }
         }
+
         private void btnSelectAllFactTypes_Click(object sender, EventArgs e)
         {
             SetFactTypes(true);
@@ -2013,6 +2015,30 @@ namespace FTAnalyzer
             }
             btnShowFacts.Enabled = false;
         }
+
+        private void btnExcludeAllFactTypes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDeselectExcludeAllFactTypes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnShowExclusions_Click(object sender, EventArgs e)
+        {
+            bool visible = !ckbFactExclude.Visible;
+            ckbFactExclude.Visible = visible;
+            btnExcludeAllFactTypes.Visible= visible;
+            btnDeselectExcludeAllFactTypes.Visible = visible;
+            lblExclude.Visible = visible;
+        }
+        
+        private void ckbFactExclude_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }       
         #endregion
 
         #region Form Drag Drop
