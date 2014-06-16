@@ -166,7 +166,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Load Gedcom XML
-        private void ResetData()
+        public void ResetData()
         {
             _dataloaded = false;
             sources = new List<FactSource>();

@@ -23,7 +23,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "4.0.1.0-beta 3";
+        public static string VERSION = "4.0.1.0-beta 4";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -121,28 +121,7 @@ namespace FTAnalyzer
             {
                 HourGlass(true);
                 this.filename = filename;
-                DisposeIndividualForms();
-                ShowMenus(false);
-                tabSelector.SelectTab(tabDisplayProgress);
-                rtbOutput.Text = string.Empty;
-                tsCountLabel.Text = string.Empty;
-                tsHintsLabel.Text = string.Empty;
-                pbSources.Value = 0;
-                pbIndividuals.Value = 0;
-                pbFamilies.Value = 0;
-                pbRelationships.Value = 0;
-                SetupGridControls();
-                cmbReferrals.Items.Clear();
-                cmbReferrals.Text = string.Empty;
-                ClearColourFamilyCombo();
-                Statistics.Instance.Clear();
-                btnReferrals.Enabled = false;
-                openToolStripMenuItem.Enabled = false;
-                mnuRecent.Enabled = false;
-                tabCtrlLooseBDs.SelectedTab = tabLooseBirths; // force back to first tab
-                tabCtrlLocations.SelectedTab = tabTreeView; // otherwise totals etc look wrong
-                treeViewLocations.Nodes.Clear();
-                Application.DoEvents();
+                CloseGEDCOM();
                 if (!stopProcessing)
                 {
                     //document.Save("GedcomOutput.xml");
@@ -153,11 +132,11 @@ namespace FTAnalyzer
                         ft.SetFactTypeList(ckbFactSelect, filter);
                         SetShowFactsButton();
                         Application.UseWaitCursor = false;
-                        openToolStripMenuItem.Enabled = true;
+                        mnuCloseGEDCOM.Enabled = true;
+                        EnableLoadMenus();
                         ShowMenus(true);
                         HourGlass(false);
                         AddFileToRecentList(filename);
-                        mnuRestore.Enabled = false;
                         this.Text = "Family Tree Analyzer v" + VERSION + ". Analysing: " + filename;
                         MessageBox.Show("Gedcom File " + filename + " Loaded", "FT Analyzer");
                     }
@@ -176,6 +155,40 @@ namespace FTAnalyzer
             {
                 HourGlass(false);
             }
+        }
+
+        private void EnableLoadMenus()
+        {
+            openToolStripMenuItem.Enabled = true;
+            databaseToolStripMenuItem.Enabled = true;
+            mnuRestore.Enabled = false;
+        }
+
+        private void CloseGEDCOM()
+        {
+            DisposeIndividualForms();
+            ShowMenus(false);
+            tabSelector.SelectTab(tabDisplayProgress);
+            rtbOutput.Text = string.Empty;
+            tsCountLabel.Text = string.Empty;
+            tsHintsLabel.Text = string.Empty;
+            pbSources.Value = 0;
+            pbIndividuals.Value = 0;
+            pbFamilies.Value = 0;
+            pbRelationships.Value = 0;
+            SetupGridControls();
+            cmbReferrals.Items.Clear();
+            cmbReferrals.Text = string.Empty;
+            ClearColourFamilyCombo();
+            Statistics.Instance.Clear();
+            btnReferrals.Enabled = false;
+            openToolStripMenuItem.Enabled = false;
+            databaseToolStripMenuItem.Enabled = false;
+            mnuRecent.Enabled = false;
+            tabCtrlLooseBDs.SelectedTab = tabLooseBirths; // force back to first tab
+            tabCtrlLocations.SelectedTab = tabTreeView; // otherwise totals etc look wrong
+            treeViewLocations.Nodes.Clear();
+            Application.DoEvents();
         }
 
         private void SetupGridControls()
@@ -244,6 +257,15 @@ namespace FTAnalyzer
                 Properties.Settings.Default.LoadLocation = Path.GetFullPath(openGedcom.FileName);
                 Properties.Settings.Default.Save();
             }
+        }
+
+        private void mnuCloseGEDCOM_Click(object sender, EventArgs e)
+        {
+            CloseGEDCOM();
+            ft.ResetData();
+            EnableLoadMenus();
+            mnuRestore.Enabled = true;
+            mnuCloseGEDCOM.Enabled = false;
         }
         #endregion
 

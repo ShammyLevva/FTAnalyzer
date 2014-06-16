@@ -159,6 +159,8 @@
             this.btnLC1881Scot = new System.Windows.Forms.Button();
             this.tabCensus = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnMismatchedChildrenStatus = new System.Windows.Forms.Button();
+            this.btnNoChildrenStatus = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnInconsistentLocations = new System.Windows.Forms.Button();
             this.btnReportUnrecognised = new System.Windows.Forms.Button();
@@ -261,7 +263,7 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.btnNoChildrenStatus = new System.Windows.Forms.Button();
+            this.mnuCloseGEDCOM = new System.Windows.Forms.ToolStripMenuItem();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.relTypesFacts = new Controls.RelationTypes();
             this.cenDate = new Controls.CensusDateSelector();
@@ -272,7 +274,6 @@
             this.treetopsCountry = new Controls.CensusCountry();
             this.wardeadRelation = new Controls.RelationTypes();
             this.wardeadCountry = new Controls.CensusCountry();
-            this.btnMismatchedChildrenStatus = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -361,6 +362,7 @@
             this.toolStripSeparator3,
             this.databaseToolStripMenuItem,
             this.toolStripSeparator5,
+            this.mnuCloseGEDCOM,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -474,14 +476,14 @@
             // backupToolStripMenuItem
             // 
             this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
-            this.backupToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.backupToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.backupToolStripMenuItem.Text = "Backup";
             this.backupToolStripMenuItem.Click += new System.EventHandler(this.backupToolStripMenuItem_Click);
             // 
             // mnuRestore
             // 
             this.mnuRestore.Name = "mnuRestore";
-            this.mnuRestore.Size = new System.Drawing.Size(113, 22);
+            this.mnuRestore.Size = new System.Drawing.Size(152, 22);
             this.mnuRestore.Text = "Restore";
             this.mnuRestore.ToolTipText = "Restore is only available prior to loading GEDCOM";
             this.mnuRestore.Click += new System.EventHandler(this.restoreToolStripMenuItem_Click);
@@ -1511,6 +1513,26 @@
             this.groupBox5.TabIndex = 27;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "1911 UK Census";
+            // 
+            // btnMismatchedChildrenStatus
+            // 
+            this.btnMismatchedChildrenStatus.Location = new System.Drawing.Point(167, 19);
+            this.btnMismatchedChildrenStatus.Name = "btnMismatchedChildrenStatus";
+            this.btnMismatchedChildrenStatus.Size = new System.Drawing.Size(150, 25);
+            this.btnMismatchedChildrenStatus.TabIndex = 7;
+            this.btnMismatchedChildrenStatus.Text = "Mismatched Children Status";
+            this.btnMismatchedChildrenStatus.UseVisualStyleBackColor = true;
+            this.btnMismatchedChildrenStatus.Click += new System.EventHandler(this.btnMismatchedChildrenStatus_Click);
+            // 
+            // btnNoChildrenStatus
+            // 
+            this.btnNoChildrenStatus.Location = new System.Drawing.Point(11, 19);
+            this.btnNoChildrenStatus.Name = "btnNoChildrenStatus";
+            this.btnNoChildrenStatus.Size = new System.Drawing.Size(150, 25);
+            this.btnNoChildrenStatus.TabIndex = 6;
+            this.btnNoChildrenStatus.Text = "Missing Children Status";
+            this.btnNoChildrenStatus.UseVisualStyleBackColor = true;
+            this.btnNoChildrenStatus.Click += new System.EventHandler(this.btnNoChildrenStatus_Click);
             // 
             // groupBox4
             // 
@@ -2675,15 +2697,13 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // btnNoChildrenStatus
+            // mnuCloseGEDCOM
             // 
-            this.btnNoChildrenStatus.Location = new System.Drawing.Point(11, 19);
-            this.btnNoChildrenStatus.Name = "btnNoChildrenStatus";
-            this.btnNoChildrenStatus.Size = new System.Drawing.Size(150, 25);
-            this.btnNoChildrenStatus.TabIndex = 6;
-            this.btnNoChildrenStatus.Text = "Missing Children Status";
-            this.btnNoChildrenStatus.UseVisualStyleBackColor = true;
-            this.btnNoChildrenStatus.Click += new System.EventHandler(this.btnNoChildrenStatus_Click);
+            this.mnuCloseGEDCOM.Enabled = false;
+            this.mnuCloseGEDCOM.Name = "mnuCloseGEDCOM";
+            this.mnuCloseGEDCOM.Size = new System.Drawing.Size(184, 22);
+            this.mnuCloseGEDCOM.Text = "Close GEDCOM file";
+            this.mnuCloseGEDCOM.Click += new System.EventHandler(this.mnuCloseGEDCOM_Click);
             // 
             // rtbOutput
             // 
@@ -2777,16 +2797,6 @@
             this.wardeadCountry.TabIndex = 25;
             this.wardeadCountry.Title = "Default Country";
             this.wardeadCountry.UKEnabled = true;
-            // 
-            // btnMismatchedChildrenStatus
-            // 
-            this.btnMismatchedChildrenStatus.Location = new System.Drawing.Point(167, 19);
-            this.btnMismatchedChildrenStatus.Name = "btnMismatchedChildrenStatus";
-            this.btnMismatchedChildrenStatus.Size = new System.Drawing.Size(150, 25);
-            this.btnMismatchedChildrenStatus.TabIndex = 7;
-            this.btnMismatchedChildrenStatus.Text = "Mismatched Children Status";
-            this.btnMismatchedChildrenStatus.UseVisualStyleBackColor = true;
-            this.btnMismatchedChildrenStatus.Click += new System.EventHandler(this.btnMismatchedChildrenStatus_Click);
             // 
             // MainForm
             // 
@@ -3122,6 +3132,7 @@
         private System.Windows.Forms.Button btnReportUnrecognised;
         private System.Windows.Forms.Button btnNoChildrenStatus;
         private System.Windows.Forms.Button btnMismatchedChildrenStatus;
+        private System.Windows.Forms.ToolStripMenuItem mnuCloseGEDCOM;
     }
 }
 
