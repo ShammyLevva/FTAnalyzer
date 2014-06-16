@@ -402,7 +402,7 @@ namespace FTAnalyzer.Forms
             IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
             foreach (Family f in toSearch)
             {
-                if (f.On1911Census && !f.HasChildrenStatus)
+                if (f.On1911Census && !f.HasChildrenStatus && f.FamilyID != Family.SOLOINDIVIDUAL && f.FamilyID != Family.PRE_MARRIAGE)
                     results.Add(f);
             }
             dgFamilies.DataSource = results;
@@ -420,7 +420,7 @@ namespace FTAnalyzer.Forms
             IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
             foreach (CensusFamily f in toSearch)
             {
-                if (f.On1911Census && f.HasChildrenStatus && 
+                if (f.On1911Census && f.HasChildrenStatus && f.FamilyID != Family.SOLOINDIVIDUAL && f.FamilyID != Family.PRE_MARRIAGE &&
                     (f.ExpectedTotal != f.ChildrenTotal || f.ExpectedAlive != f.ChildrenAlive || f.ExpectedDead != f.ChildrenDead))
                     results.Add(f);
             }
