@@ -173,5 +173,15 @@ namespace FTAnalyzer
                 return total;
             }
         }
+
+        string IDisplayChildrenStatus.Husband
+        {
+            get { return Husband == null ? string.Empty : Husband.Name + " (b." + Husband.BirthDate + ")"; }
+        }
+
+        string IDisplayChildrenStatus.Wife
+        {
+            get { return Wife == null ? string.Empty : Wife.Name + " (b." + Wife.BirthDate + ")"; }
+        }
     }
 }

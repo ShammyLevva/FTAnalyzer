@@ -313,7 +313,7 @@ namespace FTAnalyzer
 
                     // check Children Status is valid
                     if (FactType.Equals(CHILDREN1911))
-                        CheckValidChildrenStatus();
+                        CheckValidChildrenStatus(node);
 
                     // now iterate through source elements of the fact finding all sources
                     XmlNodeList list = node.SelectNodes("SOUR");
@@ -359,8 +359,10 @@ namespace FTAnalyzer
         public static readonly string CHILDREN_STATUS_PATTERN1 = @"(\d{1,2}) Total ?,? ?(\d{1,2}) Alive ?,? ?(\d{1,2}) Dead";
         public static readonly string CHILDREN_STATUS_PATTERN2 = @"Total:? (\d{1,2}) ?,? ?Alive:? (\d{1,2}) ?,? ?Dead:? (\d{1,2})";
 
-        private void CheckValidChildrenStatus()
+        private void CheckValidChildrenStatus(XmlNode node)
         {
+            if (Comment.Length == 0)
+                Comment = FamilyTree.GetNotes(node);
             if (Comment.IndexOf("ignore", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 this.FactErrorLevel = FactError.IGNORE;
@@ -374,7 +376,7 @@ namespace FTAnalyzer
                 return;
             this.FactErrorNumber = (int) FamilyTree.Dataerror.FACT_ERROR;
             this.FactErrorLevel = FactError.ERROR;
-            this.FactErrorMessage = "Children status doesn't match valid patter Total x, Alive y, Dead z";
+            this.FactErrorMessage = "Children status doesn't match valid pattern Total x, Alive y, Dead z";
         }
 
         private void SetAddress(string factType, XmlNode node)

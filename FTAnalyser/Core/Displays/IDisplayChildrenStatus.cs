@@ -9,9 +9,9 @@ namespace FTAnalyzer
     {
         string FamilyID { get; }
         string HusbandID { get; }
-        CensusIndividual Husband { get; }
+        string Husband { get; }
         string WifeID { get; }
-        CensusIndividual Wife { get; }
+        string Wife { get; }
         int ChildrenTotal { get; }
         int ChildrenAlive { get; }
         int ChildrenDead { get; }
