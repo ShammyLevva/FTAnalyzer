@@ -1824,9 +1824,12 @@ namespace FTAnalyzer
             {
                 string famID = (string)dgFamilies.CurrentRow.Cells["FamilyID"].Value;
                 Family fam = ft.GetFamily(famID);
-                Facts factForm = new Facts(fam);
-                DisposeDuplicateForms(factForm);
-                factForm.Show();
+                if (fam != null)
+                {
+                    Facts factForm = new Facts(fam);
+                    DisposeDuplicateForms(factForm);
+                    factForm.Show();
+                }
             }
         }
 

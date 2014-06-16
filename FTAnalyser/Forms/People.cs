@@ -256,8 +256,12 @@ namespace FTAnalyzer.Forms
             {
                 string famID = (string)dgFamilies.CurrentRow.Cells["FamilyID"].Value;
                 Family fam = ft.GetFamily(famID);
-                Facts factForm = new Facts(fam);
-                factForm.Show();
+                if (fam != null)
+                {
+                    Facts factForm = new Facts(fam);
+                    MainForm.DisposeDuplicateForms(factForm);
+                    factForm.Show();
+                }
             }
         }
 
@@ -305,9 +309,12 @@ namespace FTAnalyzer.Forms
             {
                 string famID = (string)dgFamilies.CurrentRow.Cells["FamilyID"].Value;
                 Family fam = ft.GetFamily(famID);
-                Facts factForm = new Facts(fam);
-                MainForm.DisposeDuplicateForms(factForm);
-                factForm.Show();
+                if (fam != null)
+                {
+                    Facts factForm = new Facts(fam);
+                    MainForm.DisposeDuplicateForms(factForm);
+                    factForm.Show();
+                }
             }
         }
 
