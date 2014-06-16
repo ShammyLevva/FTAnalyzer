@@ -1232,7 +1232,7 @@ namespace FTAnalyzer.Forms
                 if (distance < minDistance &&
                    (distance < 2500 ||
                     foundLevel == FactLocation.ADDRESS && distance < 5000 ||
-                    foundLevel == FactLocation.SUBREGION && distance < 20000 ||
+                    foundLevel == FactLocation.SUBREGION && distance < 10000 ||
                     foundLevel == FactLocation.REGION && distance < 50000 ||
                     foundLevel == FactLocation.COUNTRY)) 
                 {

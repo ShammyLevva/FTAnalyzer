@@ -392,7 +392,7 @@
             this.mnuGeocodeStatus.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuStatusSelectAll});
             this.mnuGeocodeStatus.Name = "mnuGeocodeStatus";
-            this.mnuGeocodeStatus.Size = new System.Drawing.Size(176, 22);
+            this.mnuGeocodeStatus.Size = new System.Drawing.Size(172, 22);
             this.mnuGeocodeStatus.Text = "Geocode Status";
             // 
             // mnuStatusSelectAll
@@ -407,7 +407,7 @@
             this.mnuFoundResultType.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuSelectClear});
             this.mnuFoundResultType.Name = "mnuFoundResultType";
-            this.mnuFoundResultType.Size = new System.Drawing.Size(176, 22);
+            this.mnuFoundResultType.Size = new System.Drawing.Size(172, 22);
             this.mnuFoundResultType.Text = "Found Result Type";
             // 
             // mnuSelectClear
@@ -449,7 +449,7 @@
             this.GeocodedLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.GeocodedLocation.DataPropertyName = "SortableLocation";
             this.GeocodedLocation.HeaderText = "Location";
-            this.GeocodedLocation.MinimumWidth = 450;
+            this.GeocodedLocation.MinimumWidth = 100;
             this.GeocodedLocation.Name = "GeocodedLocation";
             this.GeocodedLocation.ReadOnly = true;
             this.GeocodedLocation.Width = 450;

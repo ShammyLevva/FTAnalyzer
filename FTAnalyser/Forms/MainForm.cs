@@ -266,6 +266,7 @@ namespace FTAnalyzer
             EnableLoadMenus();
             mnuRestore.Enabled = true;
             mnuCloseGEDCOM.Enabled = false;
+            BuildRecentList();
         }
         #endregion
 
