@@ -15,6 +15,7 @@ namespace FTAnalyzer
 {
     public class FactLocation : IComparable<FactLocation>, IDisplayLocation, IDisplayGeocodedLocation
     {
+        #region Variables
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public const int UNKNOWN = -1, COUNTRY = 0, REGION = 1, SUBREGION = 2, ADDRESS = 3, PLACE = 4;
         public enum Geocode
@@ -71,6 +72,7 @@ namespace FTAnalyzer
         public static Dictionary<Geocode, string> Geocodes;
         public static FactLocation UNKNOWN_LOCATION;
         public static FactLocation TEMP = new FactLocation();
+        #endregion
 
         #region Static Constructor
         static FactLocation()
@@ -495,6 +497,21 @@ namespace FTAnalyzer
             return result;
         }
 
+        public static void CopyLocationDetails(FactLocation from, FactLocation to)
+        {
+            to.Latitude = from.Latitude;
+            to.Longitude = from.Longitude;
+            to.LatitudeM = from.LatitudeM;
+            to.LongitudeM = from.LongitudeM;
+            to.ViewPort.NorthEast.Lat = from.ViewPort.NorthEast.Lat;
+            to.ViewPort.NorthEast.Long = from.ViewPort.NorthEast.Long;
+            to.ViewPort.SouthWest.Lat = from.ViewPort.SouthWest.Lat;
+            to.ViewPort.SouthWest.Long = from.ViewPort.SouthWest.Long;
+            to.GeocodeStatus = from.GeocodeStatus;
+            to.FoundLocation = from.FoundLocation;
+            to.FoundResultType = from.FoundResultType;
+            to.FoundLevel = from.FoundLevel;
+        }
         #endregion
 
         #region Fix Location string routines
@@ -895,6 +912,7 @@ namespace FTAnalyzer
         }
         #endregion
 
+        #region General Functions
         public FactLocation GetLocation(int level) { return GetLocation(level, false); }
         public FactLocation GetLocation(int level, bool fixNumerics)
         {
@@ -987,22 +1005,7 @@ namespace FTAnalyzer
                 return true;
             return false;
         }
-
-        public static void CopyLocationDetails(FactLocation from, FactLocation to)
-        {
-            to.Latitude = from.Latitude;
-            to.Longitude = from.Longitude;
-            to.LatitudeM = from.LatitudeM;
-            to.LongitudeM = from.LongitudeM;
-            to.ViewPort.NorthEast.Lat = from.ViewPort.NorthEast.Lat;
-            to.ViewPort.NorthEast.Long = from.ViewPort.NorthEast.Long;
-            to.ViewPort.SouthWest.Lat = from.ViewPort.SouthWest.Lat;
-            to.ViewPort.SouthWest.Long = from.ViewPort.SouthWest.Long;
-            to.GeocodeStatus = from.GeocodeStatus;
-            to.FoundLocation = from.FoundLocation;
-            to.FoundResultType = from.FoundResultType;
-            to.FoundLevel = from.FoundLevel;
-        }
+        #endregion
 
         #region Overrides
         public int CompareTo(FactLocation that)
