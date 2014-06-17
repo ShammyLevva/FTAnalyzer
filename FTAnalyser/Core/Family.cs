@@ -634,7 +634,7 @@ namespace FTAnalyzer
             Fact marriage = GetPreferredFact(Fact.MARRIAGE);
             if (marriage == null)
                 return string.Empty;
-            if (marriage.Location.IsBlank())
+            if (marriage.Location.IsBlank)
                 return MarriageDate.ToString();
             else
                 return MarriageDate.ToString() + " at " + marriage.Location;

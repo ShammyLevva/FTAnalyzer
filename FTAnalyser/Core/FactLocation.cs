@@ -57,11 +57,6 @@ namespace FTAnalyzer
         public GeoResponse.CResult.CGeometry.CViewPort ViewPort { get; set; }
         private List<Individual> individuals;
 
-        public string[] Parts
-        {
-            get { return new string[] { Country, Region, SubRegion, Address, Place }; }
-        }
-
         private static Dictionary<string, string> COUNTRY_TYPOS = new Dictionary<string, string>();
         private static Dictionary<string, string> REGION_TYPOS = new Dictionary<string, string>();
         public static Dictionary<string, string> COUNTRY_SHIFTS = new Dictionary<string, string>();
@@ -77,6 +72,7 @@ namespace FTAnalyzer
         public static FactLocation UNKNOWN_LOCATION;
         public static FactLocation TEMP = new FactLocation();
 
+        #region Static Constructor
         static FactLocation()
         {
             SetupGeocodes();
@@ -289,74 +285,9 @@ namespace FTAnalyzer
             Geocodes.Add(Geocode.OS_50KPARTIAL, "Partial Match (Ord Surv)");
             Geocodes.Add(Geocode.OS_50KFUZZY, "Fuzzy Match (Ord Surv)");
         }
+        #endregion
 
-        public static FactLocation GetLocation(string place)
-        {
-            return GetLocation(place, string.Empty, string.Empty, Geocode.NOT_SEARCHED);
-        }
-
-        public static FactLocation GetLocation(string place, string latitude, string longitude, Geocode status)
-        {
-            FactLocation result;
-            FactLocation temp;
-            // GEDCOM lat/long will be prefixed with NS and EW which needs to be +/- to work.
-            latitude = latitude.Replace("N", "").Replace("S", "-");
-            longitude = longitude.Replace("W", "-").Replace("E", "");
-            if (!locations.TryGetValue(place, out result))
-            {
-                result = new FactLocation(place, latitude, longitude, status);
-                if (locations.TryGetValue(result.ToString(), out temp))
-                    return temp;
-                else
-                {
-                    locations.Add(result.ToString(), result);
-                    if (result.Level > COUNTRY)
-                    {   // recusive call to GetLocation forces create of lower level objects and stores in locations
-                        result.GetLocation(result.Level - 1);
-                    }
-                }
-            }
-            return result; // should return object that is in list of locations 
-        }
-
-        public static FactLocation LookupLocation(string place)
-        {
-            FactLocation result = null;
-            locations.TryGetValue(place, out result);
-            if (result == null)
-                result = new FactLocation(place);
-            return result;
-        }
-
-        public FactLocation GetLocation(int level) { return GetLocation(level, false); }
-        public FactLocation GetLocation(int level, bool fixNumerics)
-        {
-            StringBuilder location = new StringBuilder(this.Country);
-            if (level > COUNTRY && (Region.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
-                location.Insert(0, this.Region + ", ");
-            if (level > REGION && (SubRegion.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
-                location.Insert(0, this.SubRegion + ", ");
-            if (level > SUBREGION && (Address.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
-                location.Insert(0, fixNumerics ? this.AddressNumeric : this.Address + ", ");
-            if (level > ADDRESS && Place.Length > 0)
-                location.Insert(0, fixNumerics ? this.PlaceNumeric : this.Place + ", ");
-            FactLocation newLocation = GetLocation(location.ToString());
-            return newLocation;
-        }
-
-        public static IEnumerable<FactLocation> AllLocations
-        {
-            get { return locations.Values; }
-        }
-
-        public static void ResetLocations()
-        {
-            locations = new Dictionary<string, FactLocation>();
-            // set unknown location as unknown so it doesn't keep hassling to be searched
-            UNKNOWN_LOCATION = GetLocation(string.Empty, "0.0", "0.0", Geocode.UNKNOWN);
-            LOCAL_GOOGLE_FIXES = new Dictionary<Tuple<int, string>, string>();
-        }
-
+        #region Object Constructors
         private FactLocation()
         {
             this.GEDCOMLocation = string.Empty;
@@ -471,6 +402,100 @@ namespace FTAnalyzer
                 //    Console.WriteLine("Debug : '" + before + "'  converted to '" + after + "'");
             }
         }
+        #endregion
+
+        #region Static Functions
+        public static FactLocation GetLocation(string place)
+        {
+            return GetLocation(place, string.Empty, string.Empty, Geocode.NOT_SEARCHED);
+        }
+
+        public static FactLocation GetLocation(string place, string latitude, string longitude, Geocode status)
+        {
+            FactLocation result;
+            FactLocation temp;
+            // GEDCOM lat/long will be prefixed with NS and EW which needs to be +/- to work.
+            latitude = latitude.Replace("N", "").Replace("S", "-");
+            longitude = longitude.Replace("W", "-").Replace("E", "");
+            if (!locations.TryGetValue(place, out result))
+            {
+                result = new FactLocation(place, latitude, longitude, status);
+                if (locations.TryGetValue(result.ToString(), out temp))
+                    return temp;
+                else
+                {
+                    locations.Add(result.ToString(), result);
+                    if (result.Level > COUNTRY)
+                    {   // recusive call to GetLocation forces create of lower level objects and stores in locations
+                        result.GetLocation(result.Level - 1);
+                    }
+                }
+            }
+            return result; // should return object that is in list of locations 
+        }
+
+        public static FactLocation LookupLocation(string place)
+        {
+            FactLocation result = null;
+            locations.TryGetValue(place, out result);
+            if (result == null)
+                result = new FactLocation(place);
+            return result;
+        }
+
+        public static IEnumerable<FactLocation> AllLocations
+        {
+            get { return locations.Values; }
+        }
+
+        public static void ResetLocations()
+        {
+            locations = new Dictionary<string, FactLocation>();
+            // set unknown location as unknown so it doesn't keep hassling to be searched
+            UNKNOWN_LOCATION = GetLocation(string.Empty, "0.0", "0.0", Geocode.UNKNOWN);
+            LOCAL_GOOGLE_FIXES = new Dictionary<Tuple<int, string>, string>();
+        }
+
+        public static FactLocation BestLocation(IEnumerable<Fact> facts, FactDate when)
+        {
+            Fact result = BestLocationFact(facts, when, int.MaxValue);
+            return result.Location;
+        }
+
+        public static Fact BestLocationFact(IEnumerable<Fact> facts, FactDate when, int limit)
+        {
+            // this returns a Fact for a FactLocation a person was at for a given period
+            Fact result = new Fact("Unknown", Fact.UNKNOWN, FactDate.UNKNOWN_DATE);
+            double minDistance = float.MaxValue;
+            double distance;
+            foreach (Fact f in facts)
+            {
+                if (f.FactDate.IsKnown && !f.Location.GEDCOMLocation.Equals(string.Empty))
+                {  // only deal with known dates and non empty locations
+                    if (Fact.RANGED_DATE_FACTS.Contains(f.FactType) && f.FactDate.StartDate.Year != f.FactDate.EndDate.Year) // If fact type is ranged year use least end of range
+                    {
+                        distance = Math.Min(Math.Abs(f.FactDate.StartDate.Year - when.BestYear), Math.Abs(f.FactDate.EndDate.Year - when.BestYear));
+                        distance = Math.Min(distance, Math.Abs(f.FactDate.BestYear - when.BestYear)); // also check mid point to ensure fact is picked up at any point in range
+                    }
+                    else
+                        distance = Math.Abs(f.FactDate.BestYear - when.BestYear);
+                    if (distance < limit)
+                    {
+                        if (distance < minDistance)
+                        { // this is a closer date but now check to ensure we aren't overwriting a known country with an unknown one.
+                            if (f.Location.IsKnownCountry || (!f.Location.IsKnownCountry && !result.Location.IsKnownCountry))
+                            {
+                                result = f;
+                                minDistance = distance;
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
+        #endregion
 
         #region Fix Location string routines
         private void FixEmptyFields()
@@ -758,27 +783,12 @@ namespace FTAnalyzer
         }
         #endregion
 
-        public void AddIndividual(Individual ind)
-        {
-            if (ind != null && !individuals.Contains(ind))
-            {
-                individuals.Add(ind);
-            }
-        }
-
-        public IList<string> GetSurnames()
-        {
-            HashSet<string> names = new HashSet<string>();
-            foreach (Individual i in individuals)
-            {
-                names.Add(i.Surname);
-            }
-            List<string> result = names.ToList();
-            result.Sort();
-            return result;
-        }
-
         #region Properties
+
+        public string[] Parts
+        {
+            get { return new string[] { Country, Region, SubRegion, Address, Place }; }
+        }
 
         public Image Icon
         {
@@ -869,7 +879,57 @@ namespace FTAnalyzer
                 return result;
             }
         }
+
+        public bool IsBlank
+        {
+            get { return this.Country.Length == 0; }
+        }
+
+        public bool NeedsReverseGeocoding
+        {
+            get
+            {
+                return FoundLocation.Length == 0 &&
+                    (GeocodeStatus == Geocode.GEDCOM_USER || GeocodeStatus == Geocode.OS_50KMATCH || GeocodeStatus == Geocode.OS_50KPARTIAL || GeocodeStatus == Geocode.OS_50KFUZZY);
+            }
+        }
         #endregion
+
+        public FactLocation GetLocation(int level) { return GetLocation(level, false); }
+        public FactLocation GetLocation(int level, bool fixNumerics)
+        {
+            StringBuilder location = new StringBuilder(this.Country);
+            if (level > COUNTRY && (Region.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
+                location.Insert(0, this.Region + ", ");
+            if (level > REGION && (SubRegion.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
+                location.Insert(0, this.SubRegion + ", ");
+            if (level > SUBREGION && (Address.Length > 0 || Properties.GeneralSettings.Default.AllowEmptyLocations))
+                location.Insert(0, fixNumerics ? this.AddressNumeric : this.Address + ", ");
+            if (level > ADDRESS && Place.Length > 0)
+                location.Insert(0, fixNumerics ? this.PlaceNumeric : this.Place + ", ");
+            FactLocation newLocation = GetLocation(location.ToString());
+            return newLocation;
+        }
+
+        public void AddIndividual(Individual ind)
+        {
+            if (ind != null && !individuals.Contains(ind))
+            {
+                individuals.Add(ind);
+            }
+        }
+
+        public IList<string> GetSurnames()
+        {
+            HashSet<string> names = new HashSet<string>();
+            foreach (Individual i in individuals)
+            {
+                names.Add(i.Surname);
+            }
+            List<string> result = names.ToList();
+            result.Sort();
+            return result;
+        }
 
         public bool SupportedLocation(int level)
         {
@@ -904,51 +964,6 @@ namespace FTAnalyzer
                     return returnNumber ? name + " - " + number : name;
             }
             return addressField;
-        }
-
-        public static Fact BestLocationFact(IEnumerable<Fact> facts, FactDate when, int limit)
-        {
-            // this returns a Fact for a FactLocation a person was at for a given period
-            Fact result = new Fact("Unknown", Fact.UNKNOWN, FactDate.UNKNOWN_DATE);
-            double minDistance = float.MaxValue;
-            double distance;
-            foreach (Fact f in facts)
-            {
-                if (f.FactDate.IsKnown && !f.Location.GEDCOMLocation.Equals(string.Empty))
-                {  // only deal with known dates and non empty locations
-                    if (Fact.RANGED_DATE_FACTS.Contains(f.FactType) && f.FactDate.StartDate.Year != f.FactDate.EndDate.Year) // If fact type is ranged year use least end of range
-                    {
-                        distance = Math.Min(Math.Abs(f.FactDate.StartDate.Year - when.BestYear), Math.Abs(f.FactDate.EndDate.Year - when.BestYear));
-                        distance = Math.Min(distance, Math.Abs(f.FactDate.BestYear - when.BestYear)); // also check mid point to ensure fact is picked up at any point in range
-                    }
-                    else
-                        distance = Math.Abs(f.FactDate.BestYear - when.BestYear);
-                    if (distance < limit)
-                    {
-                        if (distance < minDistance)
-                        { // this is a closer date but now check to ensure we aren't overwriting a known country with an unknown one.
-                            if (f.Location.IsKnownCountry || (!f.Location.IsKnownCountry && !result.Location.IsKnownCountry))
-                            {
-                                result = f;
-                                minDistance = distance;
-                            }
-                        }
-                    }
-                }
-            }
-            return result;
-        }
-
-        public static FactLocation BestLocation(IEnumerable<Fact> facts, FactDate when)
-        {
-            Fact result = BestLocationFact(facts, when, int.MaxValue);
-            return result.Location;
-        }
-
-
-        public bool IsBlank()
-        {
-            return this.Country.Length == 0;
         }
 
         public bool CensusCountryMatches(string s, bool includeUnknownCountries)
@@ -989,6 +1004,7 @@ namespace FTAnalyzer
             to.FoundLevel = from.FoundLevel;
         }
 
+        #region Overrides
         public int CompareTo(FactLocation that)
         {
             return CompareTo(that, PLACE);
@@ -1069,14 +1085,6 @@ namespace FTAnalyzer
         {
             return base.GetHashCode();
         }
-
-        public bool NeedsReverseGeocoding
-        {
-            get
-            {
-                return FoundLocation.Length == 0 &&
-                    (GeocodeStatus == Geocode.GEDCOM_USER || GeocodeStatus == Geocode.OS_50KMATCH || GeocodeStatus == Geocode.OS_50KPARTIAL || GeocodeStatus == Geocode.OS_50KFUZZY);
-            }
-        }
+        #endregion
     }
 }
