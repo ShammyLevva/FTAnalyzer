@@ -268,6 +268,7 @@ namespace FTAnalyzer
             mnuRestore.Enabled = true;
             mnuCloseGEDCOM.Enabled = false;
             BuildRecentList();
+            this.Text = "Family Tree Analyzer v" + VERSION;
         }
         #endregion
 
