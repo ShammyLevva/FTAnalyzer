@@ -23,7 +23,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "4.0.1.0-beta 5";
+        public static string VERSION = "4.0.1.0-beta 6";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -1969,6 +1969,8 @@ namespace FTAnalyzer
         private List<string> BuildFactTypeList(CheckedListBox list)
         {
             List<string> result = new List<string>();
+            if (list == ckbFactExclude && ckbFactExclude.Visible == false)
+                return result; // if we aren't looking to exclude facts don't pass anything to list of exclusions
             int index = 0;
             foreach (string factType in list.Items)
                 if (list.GetItemChecked(index++))
@@ -2009,15 +2011,11 @@ namespace FTAnalyzer
 
         private void SetShowFactsButton()
         {
-            for (int index = 0; index < ckbFactSelect.Items.Count; index++)
-            {
-                if (ckbFactSelect.GetItemChecked(index))
-                {
-                    btnShowFacts.Enabled = true;
-                    return;
-                }
-            }
-            btnShowFacts.Enabled = false;
+            if (ckbFactSelect.CheckedItems.Count == 0 && ckbFactExclude.CheckedItems.Count > 0)
+                btnShowFacts.Text = "Show all Facts for Individuals who are missing the selected excluded Fact Types";
+            else
+                btnShowFacts.Text = "Show only the selected Facts for Individuals" + (ckbFactExclude.Visible ? " who don't have any of the excluded Fact Types" : string.Empty);
+            btnShowFacts.Enabled = ckbFactSelect.CheckedItems.Count > 0 || (ckbFactExclude.Visible && ckbFactExclude.CheckedItems.Count > 0);
         }
 
         private void btnExcludeAllFactTypes_Click(object sender, EventArgs e)
@@ -2037,7 +2035,7 @@ namespace FTAnalyzer
             btnExcludeAllFactTypes.Visible= visible;
             btnDeselectExcludeAllFactTypes.Visible = visible;
             lblExclude.Visible = visible;
-            btnShowFacts.Text = "Show Facts for Individuals with Selected Fact Types" + (visible ? " and without any of the excluded Fact Types" : string.Empty);
+            SetShowFactsButton();
         }
         
         private void ckbFactExclude_MouseClick(object sender, MouseEventArgs e)
@@ -2047,6 +2045,7 @@ namespace FTAnalyzer
             bool selected = ckbFactExclude.GetItemChecked(index);
             ckbFactExclude.SetItemChecked(index, !selected);
             Application.UserAppDataRegistry.SetValue("Exclude Fact: " + factType, !selected);
+            SetShowFactsButton();
         }       
         #endregion
 

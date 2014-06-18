@@ -122,9 +122,9 @@ namespace FTAnalyzer.Forms
             {
                 if (factTypes == null && excludedTypes == null)
                     facts.Add(new DisplayFact(individual, f));
-                else if (factTypes.Contains(f.FactTypeDescription) && !excludedTypes.Contains(f.FactTypeDescription))
+                else if (factTypes.Contains(f.FactTypeDescription) && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
                     facts.Add(new DisplayFact(individual, f));
-                else if (factTypes.Count == 0 && !excludedTypes.Contains(f.FactTypeDescription))
+                else if (factTypes.Count == 0 && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
                     facts.Add(new DisplayFact(individual, f));
             }
         }

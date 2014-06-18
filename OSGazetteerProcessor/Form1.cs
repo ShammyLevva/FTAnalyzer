@@ -22,7 +22,7 @@ namespace OSGazetteerProcessor
         private IList<OS50kGazetteer> OS50k;
         private List<Feature> englishParishes;
         private List<Feature> scottishParishes;
-        private List<Feature> oldEnglishCounties;
+        //private List<Feature> oldEnglishCounties;
         private List<string> modernCounties;
 
         private IDictionary<string, ISet<Tuple<string, string>>> oldCountiesToCounties;
@@ -141,30 +141,30 @@ namespace OSGazetteerProcessor
             }
         }
 
-        private void ProcessOldCounties()
-        {
-            oldCountiesToCounties = new Dictionary<string, ISet<Tuple<string, string>>>();
+        //private void ProcessOldCounties()
+        //{
+        //    oldCountiesToCounties = new Dictionary<string, ISet<Tuple<string, string>>>();
 
-            foreach (Feature f in oldEnglishCounties)
-            {
-                IPreparedGeometry geometry = PreparedGeometryFactory.Prepare(f.Geometry);
-                foreach (OS50kGazetteer os50k in OS50k)
-                {
-                    if (geometry.Intersects(os50k.Point))
-                    {
-                        ISet<Tuple<string, string>> oldCounties = null;
-                        string name = (string)f.Attributes["NAME"];
-                        if (!oldCountiesToCounties.TryGetValue(name, out oldCounties))
-                        {
-                            oldCounties = new SortedSet<Tuple<string, string>>();
-                            oldCountiesToCounties.Add(name, oldCounties);
-                        }
-                        oldCounties.Add(Tuple.Create(os50k.CountyCode, os50k.CountyName));
-                        //modernCounties.Add("'" + os50k.CountyCode + "','" + os50k.CountyName + "'");
-                    }
-                }
-            }
-        }
+        //    foreach (Feature f in oldEnglishCounties)
+        //    {
+        //        IPreparedGeometry geometry = PreparedGeometryFactory.Prepare(f.Geometry);
+        //        foreach (OS50kGazetteer os50k in OS50k)
+        //        {
+        //            if (geometry.Intersects(os50k.Point))
+        //            {
+        //                ISet<Tuple<string, string>> oldCounties = null;
+        //                string name = (string)f.Attributes["NAME"];
+        //                if (!oldCountiesToCounties.TryGetValue(name, out oldCounties))
+        //                {
+        //                    oldCounties = new SortedSet<Tuple<string, string>>();
+        //                    oldCountiesToCounties.Add(name, oldCounties);
+        //                }
+        //                oldCounties.Add(Tuple.Create(os50k.CountyCode, os50k.CountyName));
+        //                //modernCounties.Add("'" + os50k.CountyCode + "','" + os50k.CountyName + "'");
+        //            }
+        //        }
+        //    }
+        //}
 
         private void SaveModernCounties()
         {
