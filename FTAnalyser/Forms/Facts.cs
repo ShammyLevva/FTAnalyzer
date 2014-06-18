@@ -119,12 +119,14 @@ namespace FTAnalyzer.Forms
         {
             IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
             foreach (Fact f in list)
-                if (factTypes == null || factTypes.Contains(f.FactTypeDescription))
+            {
+                if (factTypes == null && excludedTypes == null)
                     facts.Add(new DisplayFact(individual, f));
-            // having added facts now filter out excluded facttypes
-            if (excludedTypes == null)
-                return; // we have a regular facts report with normal facts added
-
+                else if (factTypes.Contains(f.FactTypeDescription) && !excludedTypes.Contains(f.FactTypeDescription))
+                    facts.Add(new DisplayFact(individual, f));
+                else if (factTypes.Count == 0 && !excludedTypes.Contains(f.FactTypeDescription))
+                    facts.Add(new DisplayFact(individual, f));
+            }
         }
 
         private void SetupFacts()
