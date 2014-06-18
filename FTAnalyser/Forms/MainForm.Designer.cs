@@ -33,7 +33,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,6 +54,7 @@
             this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRestore = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuCloseGEDCOM = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuChildAgeProfiles = new System.Windows.Forms.ToolStripMenuItem();
@@ -279,7 +280,6 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.mnuCloseGEDCOM = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -498,6 +498,13 @@
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(181, 6);
+            // 
+            // mnuCloseGEDCOM
+            // 
+            this.mnuCloseGEDCOM.Name = "mnuCloseGEDCOM";
+            this.mnuCloseGEDCOM.Size = new System.Drawing.Size(184, 22);
+            this.mnuCloseGEDCOM.Text = "Close GEDCOM file";
+            this.mnuCloseGEDCOM.Click += new System.EventHandler(this.mnuCloseGEDCOM_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -854,14 +861,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 154);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -968,9 +975,9 @@
             // 
             // btnShowExclusions
             // 
-            this.btnShowExclusions.Location = new System.Drawing.Point(327, 213);
+            this.btnShowExclusions.Location = new System.Drawing.Point(327, 238);
             this.btnShowExclusions.Name = "btnShowExclusions";
-            this.btnShowExclusions.Size = new System.Drawing.Size(28, 85);
+            this.btnShowExclusions.Size = new System.Drawing.Size(28, 51);
             this.btnShowExclusions.TabIndex = 33;
             this.btnShowExclusions.Text = "=>";
             this.toolTips.SetToolTip(this.btnShowExclusions, "Show Exclusions");
@@ -2578,9 +2585,9 @@
             // 
             // btnShowFacts
             // 
-            this.btnShowFacts.Location = new System.Drawing.Point(333, 51);
+            this.btnShowFacts.Location = new System.Drawing.Point(361, 42);
             this.btnShowFacts.Name = "btnShowFacts";
-            this.btnShowFacts.Size = new System.Drawing.Size(262, 23);
+            this.btnShowFacts.Size = new System.Drawing.Size(313, 38);
             this.btnShowFacts.TabIndex = 24;
             this.btnShowFacts.Text = "Show Facts for Individuals with Selected Fact Types";
             this.btnShowFacts.UseVisualStyleBackColor = true;
@@ -2589,7 +2596,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(339, 19);
+            this.label3.Location = new System.Drawing.Point(363, 19);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 23;
@@ -2597,9 +2604,9 @@
             // 
             // txtFactsSurname
             // 
-            this.txtFactsSurname.Location = new System.Drawing.Point(394, 16);
+            this.txtFactsSurname.Location = new System.Drawing.Point(418, 16);
             this.txtFactsSurname.Name = "txtFactsSurname";
-            this.txtFactsSurname.Size = new System.Drawing.Size(201, 20);
+            this.txtFactsSurname.Size = new System.Drawing.Size(256, 20);
             this.txtFactsSurname.TabIndex = 22;
             this.txtFactsSurname.TextChanged += new System.EventHandler(this.txtFactsSurname_TextChanged);
             // 
@@ -2871,13 +2878,6 @@
             // 
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
-            // 
-            // mnuCloseGEDCOM
-            // 
-            this.mnuCloseGEDCOM.Name = "mnuCloseGEDCOM";
-            this.mnuCloseGEDCOM.Size = new System.Drawing.Size(184, 22);
-            this.mnuCloseGEDCOM.Text = "Close GEDCOM file";
-            this.mnuCloseGEDCOM.Click += new System.EventHandler(this.mnuCloseGEDCOM_Click);
             // 
             // MainForm
             // 

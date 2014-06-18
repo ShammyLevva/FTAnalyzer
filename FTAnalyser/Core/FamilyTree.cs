@@ -1630,11 +1630,12 @@ namespace FTAnalyzer
             }
         }
 
-        public void SetFactTypeList(CheckedListBox ckbFactSelect, Predicate<ExportFact> filter)
+        public void SetFactTypeList(CheckedListBox ckbFactSelect, CheckedListBox ckbFactExclude, Predicate<ExportFact> filter)
         {
             List<string> factTypes = AllExportFacts.Where(filter).Select(x => x.FactType).Distinct().ToList<string>();
             factTypes.Sort();
             ckbFactSelect.Items.Clear();
+            ckbFactExclude.Items.Clear();
             foreach (string factType in factTypes)
             {
                 if (!ckbFactSelect.Items.Contains(factType))
@@ -1642,6 +1643,12 @@ namespace FTAnalyzer
                     int index = ckbFactSelect.Items.Add(factType);
                     bool itemChecked = Application.UserAppDataRegistry.GetValue("Fact: " + factType, "True").Equals("True");
                     ckbFactSelect.SetItemChecked(index, itemChecked);
+                }
+                if (!ckbFactExclude.Items.Contains(factType))
+                {
+                    int index = ckbFactExclude.Items.Add(factType);
+                    bool itemChecked = Application.UserAppDataRegistry.GetValue("Exlude Fact: " + factType, "False").Equals("True");
+                    ckbFactExclude.SetItemChecked(index, itemChecked);
                 }
             }
         }

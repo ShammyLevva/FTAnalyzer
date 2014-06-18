@@ -39,7 +39,7 @@ namespace FTAnalyzer.Forms
             : this()
         {
             this.Individual = individual;
-            AddIndividualsFacts(individual, null);
+            AddIndividualsFacts(individual, null, null);
             this.Text = "Facts Report for " + individual.IndividualID + ": " + individual.Name;
             SetupFacts();
             dgFacts.Columns["IndividualID"].Visible = false; // all same individual so hide ID
@@ -56,7 +56,7 @@ namespace FTAnalyzer.Forms
             SetBackColour(false);
         }
 
-        public Facts(IEnumerable<Individual> individuals, List<string> factTypes)
+        public Facts(IEnumerable<Individual> individuals, List<string> factTypes, List<string> excludedTypes)
             : this()
         {
             this.allFacts = true;
@@ -64,7 +64,7 @@ namespace FTAnalyzer.Forms
             foreach (Individual ind in individuals)
             {
                 int before = facts.Count;
-                AddIndividualsFacts(ind, factTypes);
+                AddIndividualsFacts(ind, factTypes, excludedTypes);
                 int after = facts.Count;
                 if(before != after)
                     distinctIndividuals++;
@@ -115,18 +115,16 @@ namespace FTAnalyzer.Forms
             SetBackColour(true);
         }
 
-        private void AddIndividualsFacts(Individual individual, List<string> factTypes)
+        private void AddIndividualsFacts(Individual individual, List<string> factTypes, List<string> excludedTypes)
         {
-            foreach (Fact f in individual.AllFacts)
+            IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
+            foreach (Fact f in list)
                 if (factTypes == null || factTypes.Contains(f.FactTypeDescription))
                     facts.Add(new DisplayFact(individual, f));
-            foreach (Fact f in individual.ErrorFacts)
-            {
-                // only add ignored and errors as allowed have are in AllFacts
-                if (f.FactErrorLevel != Fact.FactError.WARNINGALLOW)
-                    if (factTypes == null || factTypes.Contains(f.FactTypeDescription))
-                        facts.Add(new DisplayFact(individual, f));
-            }
+            // having added facts now filter out excluded facttypes
+            if (excludedTypes == null)
+                return; // we have a regular facts report with normal facts added
+
         }
 
         private void SetupFacts()

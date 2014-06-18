@@ -128,9 +128,7 @@ namespace FTAnalyzer
                     if (ft.LoadTree(filename, pbSources, pbIndividuals, pbFamilies, pbRelationships))
                     {
                         ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
-                        Predicate<ExportFact> filter = CreateFactsFilter();
-                        ft.SetFactTypeList(ckbFactSelect, filter);
-                        SetShowFactsButton();
+                        SetupFactsCheckboxes();
                         Application.UseWaitCursor = false;
                         mnuCloseGEDCOM.Enabled = true;
                         EnableLoadMenus();
@@ -1017,18 +1015,6 @@ namespace FTAnalyzer
             }
         }
 
-        private void relTypesFacts_RelationTypesChanged(object sender, EventArgs e)
-        {
-            Predicate<ExportFact> filter = CreateFactsFilter();
-            ft.SetFactTypeList(ckbFactSelect, filter);
-        }
-
-        private void txtFactsSurname_TextChanged(object sender, EventArgs e)
-        {
-            Predicate<ExportFact> filter = CreateFactsFilter();
-            ft.SetFactTypeList(ckbFactSelect, filter);
-        }
-
         private void possibleCensusFactsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
@@ -1804,45 +1790,6 @@ namespace FTAnalyzer
         }
         #endregion
 
-        #region Show Facts
-        private void ShowFacts(string indID, bool offset = false)
-        {
-            log.Debug("MainForm.ShowFacts: About to show facts for id:" + indID);
-            Individual ind = ft.GetIndividual(indID);
-            Facts factForm = new Facts(ind);
-            DisposeDuplicateForms(factForm);
-            factForm.Show();
-            if (offset)
-            {
-                factForm.Left += 200;
-                factForm.Top += 100;
-            }
-        }
-
-        private void btnShowFacts_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            Predicate<Individual> filter = relTypesFacts.BuildFilter<Individual>(x => x.RelationType);
-            if (txtFactsSurname.Text.Length > 0)
-            {
-                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
-                filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
-            }
-            Facts facts = new Facts(ft.AllIndividuals.Where(filter), BuildFactTypeList());
-            facts.Show();
-            HourGlass(false);
-        }
-
-        private List<string> BuildFactTypeList()
-        {
-            List<string> result = new List<string>();
-            int index = 0;
-            foreach (string factType in ckbFactSelect.Items)
-                if (ckbFactSelect.GetItemChecked(index++))
-                    result.Add(factType);
-            return result;
-        }
-
         private void dgFamilies_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
@@ -1967,29 +1914,85 @@ namespace FTAnalyzer
                 List<Individual> dupInd = new List<Individual>();
                 dupInd.Add(ft.GetIndividual(indA_ID));
                 dupInd.Add(ft.GetIndividual(indB_ID));
-                Facts f = new Facts(dupInd, null);
+                Facts f = new Facts(dupInd, null, null);
                 DisposeDuplicateForms(f);
                 f.Show();
             }
         }
 
+        #region Facts Tab
+        private void SetupFactsCheckboxes()
+        {
+            Predicate<ExportFact> filter = CreateFactsFilter();
+            ft.SetFactTypeList(ckbFactSelect, ckbFactExclude, filter);
+            SetShowFactsButton();
+        }
+
+        private void relTypesFacts_RelationTypesChanged(object sender, EventArgs e)
+        {
+            SetupFactsCheckboxes();
+        }
+
+        private void txtFactsSurname_TextChanged(object sender, EventArgs e)
+        {
+            SetupFactsCheckboxes();
+        }
+
+        private void ShowFacts(string indID, bool offset = false)
+        {
+            log.Debug("MainForm.ShowFacts: About to show facts for id:" + indID);
+            Individual ind = ft.GetIndividual(indID);
+            Facts factForm = new Facts(ind);
+            DisposeDuplicateForms(factForm);
+            factForm.Show();
+            if (offset)
+            {
+                factForm.Left += 200;
+                factForm.Top += 100;
+            }
+        }
+
+        private void btnShowFacts_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            Predicate<Individual> filter = relTypesFacts.BuildFilter<Individual>(x => x.RelationType);
+            if (txtFactsSurname.Text.Length > 0)
+            {
+                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
+                filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
+            }
+            Facts facts = new Facts(ft.AllIndividuals.Where(filter), BuildFactTypeList(ckbFactSelect), BuildFactTypeList(ckbFactExclude));
+            facts.Show();
+            HourGlass(false);
+        }
+
+        private List<string> BuildFactTypeList(CheckedListBox list)
+        {
+            List<string> result = new List<string>();
+            int index = 0;
+            foreach (string factType in list.Items)
+                if (list.GetItemChecked(index++))
+                    result.Add(factType);
+            return result;
+        }
+
         private void btnSelectAllFactTypes_Click(object sender, EventArgs e)
         {
-            SetFactTypes(true);
+            SetFactTypes(ckbFactSelect, true, "Fact: ");
         }
 
         private void btnDeselectAllFactTypes_Click(object sender, EventArgs e)
         {
-            SetFactTypes(false);
+            SetFactTypes(ckbFactSelect, false, "Fact: ");
         }
 
-        private void SetFactTypes(bool selected)
+        private void SetFactTypes(CheckedListBox list, bool selected, string registryPrefix)
         {
-            for (int index = 0; index < ckbFactSelect.Items.Count; index++)
+            for (int index = 0; index < list.Items.Count; index++)
             {
-                string factType = ckbFactSelect.Items[index].ToString();
-                ckbFactSelect.SetItemChecked(index, selected);
-                Application.UserAppDataRegistry.SetValue("Fact: " + factType, selected);
+                string factType = list.Items[index].ToString();
+                list.SetItemChecked(index, selected);
+                Application.UserAppDataRegistry.SetValue(registryPrefix + factType, selected);
             }
             SetShowFactsButton();
         }
@@ -2019,12 +2022,12 @@ namespace FTAnalyzer
 
         private void btnExcludeAllFactTypes_Click(object sender, EventArgs e)
         {
-
+            SetFactTypes(ckbFactExclude, true, "Exclude Fact: ");
         }
 
         private void btnDeselectExcludeAllFactTypes_Click(object sender, EventArgs e)
         {
-
+            SetFactTypes(ckbFactExclude, false, "Exclude Fact: ");
         }
 
         private void btnShowExclusions_Click(object sender, EventArgs e)
@@ -2034,11 +2037,16 @@ namespace FTAnalyzer
             btnExcludeAllFactTypes.Visible= visible;
             btnDeselectExcludeAllFactTypes.Visible = visible;
             lblExclude.Visible = visible;
+            btnShowFacts.Text = "Show Facts for Individuals with Selected Fact Types" + (visible ? " and without any of the excluded Fact Types" : string.Empty);
         }
         
         private void ckbFactExclude_MouseClick(object sender, MouseEventArgs e)
         {
-
+            int index = ckbFactExclude.IndexFromPoint(e.Location);
+            string factType = ckbFactExclude.Items[index].ToString();
+            bool selected = ckbFactExclude.GetItemChecked(index);
+            ckbFactExclude.SetItemChecked(index, !selected);
+            Application.UserAppDataRegistry.SetValue("Exclude Fact: " + factType, !selected);
         }       
         #endregion
 
