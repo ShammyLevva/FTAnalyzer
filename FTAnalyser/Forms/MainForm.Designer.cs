@@ -280,6 +280,7 @@
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.btnDuplicateFacts = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -2487,6 +2488,7 @@
             // 
             // tabFacts
             // 
+            this.tabFacts.Controls.Add(this.btnDuplicateFacts);
             this.tabFacts.Controls.Add(this.btnShowExclusions);
             this.tabFacts.Controls.Add(this.lblExclude);
             this.tabFacts.Controls.Add(this.label15);
@@ -2879,6 +2881,16 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // btnDuplicateFacts
+            // 
+            this.btnDuplicateFacts.Location = new System.Drawing.Point(681, 42);
+            this.btnDuplicateFacts.Name = "btnDuplicateFacts";
+            this.btnDuplicateFacts.Size = new System.Drawing.Size(162, 38);
+            this.btnDuplicateFacts.TabIndex = 34;
+            this.btnDuplicateFacts.Text = "Show Duplicate Facts of Selected Fact Type";
+            this.btnDuplicateFacts.UseVisualStyleBackColor = true;
+            this.btnDuplicateFacts.Click += new System.EventHandler(this.btnDuplicateFacts_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -3220,6 +3232,7 @@
         private System.Windows.Forms.Button btnDeselectExcludeAllFactTypes;
         private System.Windows.Forms.Button btnExcludeAllFactTypes;
         private System.Windows.Forms.ToolStripMenuItem mnuCloseGEDCOM;
+        private System.Windows.Forms.Button btnDuplicateFacts;
     }
 }
 

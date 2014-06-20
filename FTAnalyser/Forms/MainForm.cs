@@ -2046,7 +2046,21 @@ namespace FTAnalyzer
             ckbFactExclude.SetItemChecked(index, !selected);
             Application.UserAppDataRegistry.SetValue("Exclude Fact: " + factType, !selected);
             SetShowFactsButton();
-        }       
+        }
+
+        private void btnDuplicateFacts_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            Predicate<Individual> filter = relTypesFacts.BuildFilter<Individual>(x => x.RelationType);
+            if (txtFactsSurname.Text.Length > 0)
+            {
+                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
+                filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
+            }
+            Facts facts = new Facts(ft.AllIndividuals.Where(filter), BuildFactTypeList(ckbFactSelect));
+            facts.Show();
+            HourGlass(false);
+        }
         #endregion
 
         #region Form Drag Drop

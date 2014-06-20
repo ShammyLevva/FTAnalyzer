@@ -73,6 +73,23 @@ namespace FTAnalyzer.Forms
             SetupFacts();
         }
 
+        public Facts(IEnumerable<Individual> individuals, List<string> duplicateTypes)
+            : this()
+        {
+            this.allFacts = true;
+            int distinctIndividuals = 0;
+            foreach (Individual ind in individuals)
+            {
+                int before = facts.Count;
+                AddDuplicateFacts(ind, factTypes);
+                int after = facts.Count;
+                if (before != after)
+                    distinctIndividuals++;
+            }
+            this.Text = "Duplicates Facts Report for all " + distinctIndividuals + " individuals. Facts count: " + facts.Count;
+            SetupFacts();
+        }
+
         public Facts(CensusReference.ReferenceStatus status)
             : this()
         {
@@ -128,6 +145,17 @@ namespace FTAnalyzer.Forms
                     facts.Add(new DisplayFact(individual, f));
             }
         }
+
+        private void AddDuplicateFacts(Individual individual, List<string> factTypes)
+        {
+            IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
+            foreach(string factType in factTypes)
+            {
+                if(list.Count(x => x.FactTypeDescription.Equals(factType)) > 1)
+                    foreach(Fact f in list.Where(x => x.FactTypeDescription.Equals(factType)))
+                        facts.Add(new DisplayFact(individual, f));
+            }
+        } 
 
         private void SetupFacts()
         {
