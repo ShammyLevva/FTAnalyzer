@@ -21,18 +21,26 @@ namespace FTAnalyzer.Forms
         private Font italicFont;
         private bool allFacts;
         private ReportFormHelper reportFormHelper;
+        private bool CensusRefReport;
 
         private Facts()
         {
             InitializeComponent();
             this.facts = new SortableBindingList<IDisplayFact>();
+            this.facts.SortFinished += new EventHandler(Grid_SortFinished);
             this.allFacts = false;
+            this.CensusRefReport = false;
             dgFacts.AutoGenerateColumns = false;
             ExtensionMethods.DoubleBuffered(dgFacts, true);
             reportFormHelper = new ReportFormHelper(this, this.Text, dgFacts, this.ResetTable, "Facts");
             italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
             dgFacts.Columns["IndividualID"].Visible = true;
             dgFacts.Columns["CensusReference"].Visible = false;
+        }
+
+        private void Grid_SortFinished(object sender, EventArgs e)
+        {
+            SetBackColour();
         }
 
         public Facts(Individual individual)
@@ -129,11 +137,11 @@ namespace FTAnalyzer.Forms
         {
             foreach (DisplayFact fact in results)
                 facts.Add(fact);
+            CensusRefReport = true;
             SetupFacts();
             dgFacts.Columns["CensusReference"].Visible = true;
             dgFacts.Sort(dgFacts.Columns["DateofBirth"], ListSortDirection.Ascending);
             dgFacts.Sort(dgFacts.Columns["CensusReference"], ListSortDirection.Ascending);
-            SetBackColour(true);
         }
 
         private void AddIndividualsFacts(Individual individual)
@@ -159,30 +167,30 @@ namespace FTAnalyzer.Forms
         private void AddDuplicateFacts(Individual individual, List<string> factTypes)
         {
             IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
-            foreach(string factType in factTypes)
+            foreach (string factType in factTypes)
             {
-                if(list.Count(x => x.FactTypeDescription.Equals(factType)) > 1)
-                    foreach(Fact f in list.Where(x => x.FactTypeDescription.Equals(factType)))
+                if (list.Count(x => x.FactTypeDescription.Equals(factType)) > 1)
+                    foreach (Fact f in list.Where(x => x.FactTypeDescription.Equals(factType)))
                         facts.Add(new DisplayFact(individual, f));
             }
-        } 
+        }
 
         private void SetupFacts(string extraText = "")
         {
             dgFacts.DataSource = facts;
             reportFormHelper.LoadColumnLayout("FactsColumns.xml");
             tsRecords.Text = facts.Count + " Records " + extraText;
-            SetBackColour(false);
+            SetBackColour();
         }
 
-        private void SetBackColour(bool censusref)
+        private void SetBackColour()
         {
             bool backColourGrey = false;
             DisplayFact previous = null;
             foreach (DisplayFact fact in facts)
             {
                 if (previous != null)
-                    if ((censusref && previous.CensusReference != fact.CensusReference) || (!censusref && previous.IndividualID != fact.IndividualID))
+                    if ((CensusRefReport && previous.CensusReference != fact.CensusReference) || (!CensusRefReport && previous.IndividualID != fact.IndividualID))
                         backColourGrey = !backColourGrey;
                 fact.BackColour = backColourGrey ? Color.LightGray : Color.White;
                 previous = fact;
@@ -199,7 +207,7 @@ namespace FTAnalyzer.Forms
             }
             else
                 dgFacts.Sort(dgFacts.Columns["FactDate"], ListSortDirection.Ascending);
-            SetBackColour(false);
+            SetBackColour();
         }
 
         private void printToolStripButton_Click(object sender, EventArgs e)
