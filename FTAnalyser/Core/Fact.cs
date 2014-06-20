@@ -35,7 +35,8 @@ namespace FTAnalyzer
                 LOOSEDEATH = "*LOOSED", LOOSEBIRTH = "*LOOSEB", FAMILYSEARCH = "*IGI",
                 CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT", PARENT = "*PARENT",
                 CHILDREN = "*CHILDREN", CHANGE = "*CHNG", LOSTCOUSINS = "*LOST",
-                DIED_SINGLE = "*SINGLE", MISSING = "*MISSING", CHILDREN1911 = "CHILDREN1911";
+                DIED_SINGLE = "*SINGLE", MISSING = "*MISSING", CHILDREN1911 = "CHILDREN1911",
+                REPORT = "*REPORT";
 
         public static readonly ISet<string> LOOSE_BIRTH_FACTS = new HashSet<string>(new string[] {
             CHRISTENING, BAPTISM, RESIDENCE, WITNESS, EMIGRATION, IMMIGRATION, ARRIVAL, DEPARTURE, 
@@ -228,6 +229,7 @@ namespace FTAnalyzer
                 case REFERENCE: return "Reference ID";
                 case MISSING: return "Missing";
                 case CHILDREN1911: return "Children Status";
+                case REPORT: return "Fact Report";
                 case "": return "UNKNOWN";
                 default: return EnhancedTextInfo.ToTitleCase(factType);
             }

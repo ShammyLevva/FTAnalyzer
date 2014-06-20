@@ -39,7 +39,7 @@ namespace FTAnalyzer.Forms
             : this()
         {
             this.Individual = individual;
-            AddIndividualsFacts(individual, null, null);
+            AddIndividualsFacts(individual);
             this.Text = "Facts Report for " + individual.IndividualID + ": " + individual.Name;
             SetupFacts();
             dgFacts.Columns["IndividualID"].Visible = false; // all same individual so hide ID
@@ -53,7 +53,6 @@ namespace FTAnalyzer.Forms
                 facts.Add(f);
             this.Text = "Facts Report for " + family.FamilyRef;
             SetupFacts();
-            SetBackColour(false);
         }
 
         public Facts(IEnumerable<Individual> individuals, List<string> factTypes, List<string> excludedTypes)
@@ -64,13 +63,17 @@ namespace FTAnalyzer.Forms
             foreach (Individual ind in individuals)
             {
                 int before = facts.Count;
-                AddIndividualsFacts(ind, factTypes, excludedTypes);
+                if (factTypes == null)
+                    AddIndividualsFacts(ind);
+                else
+                    AddIndividualsFacts(ind, factTypes, excludedTypes);
                 int after = facts.Count;
-                if(before != after)
+                if (before != after)
                     distinctIndividuals++;
             }
-            this.Text = "Facts Report for all " + distinctIndividuals + " individuals. Facts count: " + facts.Count;
-            SetupFacts();
+            string text = distinctIndividuals + " individuals.";
+            this.Text = "Facts Report for all " + text + " Facts count: " + facts.Count;
+            SetupFacts(text);
         }
 
         public Facts(IEnumerable<Individual> individuals, List<string> duplicateTypes)
@@ -81,13 +84,14 @@ namespace FTAnalyzer.Forms
             foreach (Individual ind in individuals)
             {
                 int before = facts.Count;
-                AddDuplicateFacts(ind, factTypes);
+                AddDuplicateFacts(ind, duplicateTypes);
                 int after = facts.Count;
                 if (before != after)
                     distinctIndividuals++;
             }
-            this.Text = "Duplicates Facts Report for all " + distinctIndividuals + " individuals. Facts count: " + facts.Count;
-            SetupFacts();
+            string text = distinctIndividuals + " individuals.";
+            this.Text = "Duplicates Facts Report for all " + text + " Facts count: " + facts.Count;
+            SetupFacts(text);
         }
 
         public Facts(CensusReference.ReferenceStatus status)
@@ -132,17 +136,23 @@ namespace FTAnalyzer.Forms
             SetBackColour(true);
         }
 
-        private void AddIndividualsFacts(Individual individual, List<string> factTypes, List<string> excludedTypes)
+        private void AddIndividualsFacts(Individual individual)
         {
             IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
             foreach (Fact f in list)
+                facts.Add(new DisplayFact(individual, f));
+        }
+
+        private void AddIndividualsFacts(Individual individual, List<string> factTypes, List<string> excludedTypes)
+        {
+            IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
+            if (factTypes.Count == 0 && excludedTypes != null && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
+                facts.Add(new DisplayFact(individual, new Fact(individual.IndividualID, Fact.REPORT, individual.BirthDate)));
+            else
             {
-                if (factTypes == null && excludedTypes == null)
-                    facts.Add(new DisplayFact(individual, f));
-                else if (factTypes.Contains(f.FactTypeDescription) && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
-                    facts.Add(new DisplayFact(individual, f));
-                else if (factTypes.Count == 0 && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
-                    facts.Add(new DisplayFact(individual, f));
+                foreach (Fact f in list)
+                    if (factTypes.Contains(f.FactTypeDescription) && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
+                        facts.Add(new DisplayFact(individual, f));
             }
         }
 
@@ -157,11 +167,12 @@ namespace FTAnalyzer.Forms
             }
         } 
 
-        private void SetupFacts()
+        private void SetupFacts(string extraText = "")
         {
             dgFacts.DataSource = facts;
             reportFormHelper.LoadColumnLayout("FactsColumns.xml");
-            tsRecords.Text = facts.Count + " Records";
+            tsRecords.Text = facts.Count + " Records " + extraText;
+            SetBackColour(false);
         }
 
         private void SetBackColour(bool censusref)
@@ -171,7 +182,7 @@ namespace FTAnalyzer.Forms
             foreach (DisplayFact fact in facts)
             {
                 if (previous != null)
-                    if((censusref && previous.CensusReference != fact.CensusReference) || (!censusref && previous.IndividualID != fact.IndividualID))
+                    if ((censusref && previous.CensusReference != fact.CensusReference) || (!censusref && previous.IndividualID != fact.IndividualID))
                         backColourGrey = !backColourGrey;
                 fact.BackColour = backColourGrey ? Color.LightGray : Color.White;
                 previous = fact;
@@ -261,8 +272,16 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 DisplayFact f = dgFacts.Rows[e.RowIndex].DataBoundItem as DisplayFact;
-                Sources sourceForm = new Sources(f);
-                sourceForm.Show();
+                if (f.Fact.FactType == Fact.REPORT)
+                {
+                    Facts person = new Facts(f.Ind);
+                    person.Show();
+                }
+                else
+                {
+                    Sources sourceForm = new Sources(f);
+                    sourceForm.Show();
+                }
             }
         }
     }

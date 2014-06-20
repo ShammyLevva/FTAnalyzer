@@ -69,6 +69,7 @@ namespace FTAnalyzer.Utilities
             this.isSorted = true;
 
             this.OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
+            this.OnSortFinished();
         }
 
         protected override void RemoveSortCore()
@@ -159,6 +160,12 @@ namespace FTAnalyzer.Utilities
                 SortStarted(null, EventArgs.Empty);
         }
 
+        public event EventHandler SortFinished;
+        public void OnSortFinished()
+        {
+            if (SortFinished != null)
+                SortFinished(null, EventArgs.Empty);
+        }
         #endregion
 
     }
