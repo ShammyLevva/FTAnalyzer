@@ -30,11 +30,7 @@ namespace FTAnalyzer
         private IDictionary<string, List<Individual>> occupations;
         private IDictionary<StandardisedName, StandardisedName> names;
         private ISet<string> unknownFactTypes;
-        private bool _loading = false;
-        private bool _dataloaded = false;
-        private bool _cancelDuplicates = false;
         private RichTextBox xmlErrorbox = new RichTextBox();
-        private int maxAhnentafel = 0;
         private IList<DataErrorGroup> dataErrorTypes;
         private SortableBindingList<IDisplayLocation>[] displayLocations;
         private SortableBindingList<IDisplayLooseDeath> looseDeaths;
@@ -44,7 +40,11 @@ namespace FTAnalyzer
         private TreeNode placesTreeRootNode;
         private static int DATA_ERROR_GROUPS = 22;
         private static XmlNodeList noteNodes = null;
-
+        private bool _loading = false;
+        private bool _dataloaded = false;
+        private bool _cancelDuplicates = false;
+        private int maxAhnentafel = 0;
+        
         public bool Geocoding { get; set; }
         public List<NonDuplicate> NonDuplicates { get; private set; }
 
@@ -173,13 +173,17 @@ namespace FTAnalyzer
             individuals = new List<Individual>();
             families = new List<Family>();
             occupations = new Dictionary<string, List<Individual>>();
+            names = new Dictionary<StandardisedName, StandardisedName>();
+            unknownFactTypes = new HashSet<string>();
             dataErrorTypes = new List<DataErrorGroup>();
             displayLocations = new SortableBindingList<IDisplayLocation>[5];
-            unknownFactTypes = new HashSet<string>();
+            ResetLooseFacts();
             duplicates = null;
             ClearLocations();
             mainformTreeRootNode = null;
-            ResetLooseFacts();
+            placesTreeRootNode = null;
+            noteNodes = null;
+            maxAhnentafel = 0;
             FactLocation.ResetLocations();
             LoadStandardisedNames();
         }
@@ -316,7 +320,6 @@ namespace FTAnalyzer
 
         private void LoadStandardisedNames()
         {
-            names = new Dictionary<StandardisedName, StandardisedName>();
             try
             {
                 string startPath;
