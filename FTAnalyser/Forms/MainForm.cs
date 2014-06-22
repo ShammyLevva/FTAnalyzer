@@ -187,6 +187,7 @@ namespace FTAnalyzer
             tabCtrlLooseBDs.SelectedTab = tabLooseBirths; // force back to first tab
             tabCtrlLocations.SelectedTab = tabTreeView; // otherwise totals etc look wrong
             treeViewLocations.Nodes.Clear();
+            this.Text = "Family Tree Analyzer v" + VERSION;
             Application.DoEvents();
         }
 
@@ -266,7 +267,6 @@ namespace FTAnalyzer
             mnuRestore.Enabled = true;
             mnuCloseGEDCOM.Enabled = false;
             BuildRecentList();
-            this.Text = "Family Tree Analyzer v" + VERSION;
         }
         #endregion
 
@@ -2396,6 +2396,7 @@ namespace FTAnalyzer
             tspbTabProgress.Visible = false;
             Facts factForm = new Facts(results);
             DisposeDuplicateForms(factForm);
+            factForm.Text = "Families with the same census ref but different locations.";
             factForm.Show();
             HourGlass(false);
         }
