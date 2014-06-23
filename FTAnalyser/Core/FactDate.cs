@@ -808,6 +808,8 @@ namespace FTAnalyzer
         {
             if (DateString.StartsWith("BET 1 JAN"))
                 return "BET " + DateString.Substring(10);
+            else if (DateString.StartsWith("AFT 1 JAN"))
+                return "AFT " + DateString.Substring(10);
             else
                 return DateString;
         }
