@@ -766,6 +766,13 @@ namespace FTAnalyzer
                                 minStart = maxChild;
                         }
                     }
+                    Individual spouse = fam.Spouse(indiv);
+                    if (spouse != null)
+                    {
+                        DateTime minMarried = new DateTime(spouse.DeathDate.StartDate.Year - Properties.GeneralSettings.Default.MinParentalAge, 12, 31);
+                        if (minMarried < minEnd && minMarried >= minStart)
+                            minEnd = minMarried;
+                    }
                 }
                 foreach (ParentalRelationship parents in indiv.FamiliesAsChild)
                 {  // check min date at least X years after parent
