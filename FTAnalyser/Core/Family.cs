@@ -387,7 +387,7 @@ namespace FTAnalyzer
         // only check shared facts for children status
         private IEnumerable<Fact> ChildrenStatusFacts { get { return Facts.Where(f => f.FactType == Fact.CHILDREN1911 && f.FactErrorLevel == Fact.FactError.GOOD); } }
         
-        public bool HasChildrenStatus { get { return Facts.Any(f => f.FactType == Fact.CHILDREN1911 && f.FactErrorLevel != Fact.FactError.ERROR); } }
+        public bool HasChildrenStatus { get { return Facts.Any(f => f.FactType == Fact.CHILDREN1911 && f.FactErrorLevel == Fact.FactError.GOOD); } }
 
         #endregion
 

@@ -162,7 +162,7 @@ namespace FTAnalyzer
 
         public int ChildrenDead
         {
-            get { return FamilyChildren.Count(x => !x.IsAlive(CensusDate)); }
+            get { return FamilyChildren.Count(x => !x.IsAlive(CensusDate) && x.BirthDate.IsBefore(CensusDate)); }
         }
 
         public int ChildrenTotal
