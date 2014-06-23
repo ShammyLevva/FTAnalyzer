@@ -725,7 +725,7 @@ namespace FTAnalyzer
             {
                 FactDate baseDate = BaseLivingDate(indiv);
                 DateTime minStart = baseDate.StartDate;
-                DateTime minEnd = baseDate.EndDate;
+                DateTime minEnd = birthDate.EndDate;
                 foreach (Family fam in indiv.FamiliesAsParent)
                 {
                     FactDate marriageDate = fam.GetPreferredFactDate(Fact.MARRIAGE);
@@ -771,7 +771,7 @@ namespace FTAnalyzer
                         if (fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
                             minStart = new DateTime(fam.Wife.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
                 }
-                if (birthDate.EndDate < minEnd)
+                if (birthDate.EndDate <= minEnd && birthDate.EndDate != FactDate.MAXDATE)
                 {  // check for BEF XXXX types that are prevalent in my tree
                     if (birthDate.StartDate == FactDate.MINDATE && birthDate.EndDate.AddYears(1) <= minEnd)
                         minEnd = birthDate.EndDate.AddYears(1);
