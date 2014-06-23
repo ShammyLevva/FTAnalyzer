@@ -725,7 +725,13 @@ namespace FTAnalyzer
             {
                 FactDate baseDate = BaseLivingDate(indiv);
                 DateTime minStart = baseDate.StartDate;
-                DateTime minEnd = birthDate.EndDate;
+                DateTime minEnd = baseDate.EndDate;
+                if (birthDate.EndDate != FactDate.MAXDATE && birthDate.EndDate > minEnd)
+                {   // makes sure we use birth date end in event we have not enough facts
+                    minEnd = birthDate.EndDate; 
+                    if (minStart != FactDate.MINDATE && minEnd.Year > minStart.Year + FactDate.MAXYEARS)
+                        minEnd = new DateTime(minStart.Year + FactDate.MAXYEARS, minEnd.Month, minEnd.Day); // min end mustn't be more than max years after start
+                }
                 foreach (Family fam in indiv.FamiliesAsParent)
                 {
                     FactDate marriageDate = fam.GetPreferredFactDate(Fact.MARRIAGE);
