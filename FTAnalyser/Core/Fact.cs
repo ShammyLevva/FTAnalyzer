@@ -370,15 +370,30 @@ namespace FTAnalyzer
                 this.FactErrorLevel = FactError.IGNORE;
                 return;
             }
+            bool success = false;
             Match matcher = Regex.Match(Comment, CHILDREN_STATUS_PATTERN1);
             if (matcher.Success)
-                return;
-            matcher = Regex.Match(Comment, CHILDREN_STATUS_PATTERN2);
-            if (matcher.Success)
-                return;
-            this.FactErrorNumber = (int) FamilyTree.Dataerror.FACT_ERROR;
+                success = true;
+            else
+            {
+                matcher = Regex.Match(Comment, CHILDREN_STATUS_PATTERN2);
+                if (matcher.Success)
+                    success = true;
+            }
+            if (success)
+            {
+                int total, alive, dead;
+                int.TryParse(matcher.Groups[1].ToString(), out total);
+                int.TryParse(matcher.Groups[2].ToString(), out alive);
+                int.TryParse(matcher.Groups[3].ToString(), out dead);
+                if (total == alive + dead)
+                    return;
+                this.FactErrorMessage = "Children status total doesn't equal numbers alive plus numbers dead.";
+            }
+            else
+                this.FactErrorMessage = "Children status doesn't match valid pattern Total x, Alive y, Dead z";
+            this.FactErrorNumber = (int)FamilyTree.Dataerror.FACT_ERROR;
             this.FactErrorLevel = FactError.ERROR;
-            this.FactErrorMessage = "Children status doesn't match valid pattern Total x, Alive y, Dead z";
         }
 
         private void SetAddress(string factType, XmlNode node)
