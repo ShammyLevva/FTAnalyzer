@@ -767,7 +767,7 @@ namespace FTAnalyzer
                         }
                     }
                     Individual spouse = fam.Spouse(indiv);
-                    if (spouse != null)
+                    if (spouse != null && spouse.DeathDate.StartDate != FactDate.MINDATE)
                     {
                         DateTime minMarried = new DateTime(spouse.DeathDate.StartDate.Year - Properties.GeneralSettings.Default.MinParentalAge, 12, 31);
                         if (minMarried < minEnd && minMarried >= minStart)
@@ -775,14 +775,26 @@ namespace FTAnalyzer
                     }
                 }
                 foreach (ParentalRelationship parents in indiv.FamiliesAsChild)
-                {  // check min date at least X years after parent
+                {  // check min date at least X years after parent born and no later than parent dies
                     Family fam = parents.Family;
-                    if (fam.Husband != null && fam.Husband.BirthDate.IsKnown && fam.Husband.BirthDate.StartDate != FactDate.MINDATE)
-                        if (fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
-                            minStart = new DateTime(fam.Husband.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
-                    if (fam.Wife != null && fam.Wife.BirthDate.IsKnown && fam.Wife.BirthDate.StartDate != FactDate.MINDATE)
-                        if (fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
-                            minStart = new DateTime(fam.Wife.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
+                    if (fam.Husband != null)
+                    {
+                        if (fam.Husband.BirthDate.IsKnown && fam.Husband.BirthDate.StartDate != FactDate.MINDATE)
+                            if (fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
+                                minStart = new DateTime(fam.Husband.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
+                        if(fam.Husband.DeathDate.IsKnown && fam.Husband.DeathDate.EndDate != FactDate.MAXDATE)
+                            if (fam.Husband.DeathDate.EndDate.AddMonths(9) > minEnd)
+                                minEnd = new DateTime(fam.Husband.DeathDate.EndDate.AddMonths(9).Year, 1, 1);                            
+                    }
+                    if (fam.Wife != null)
+                    {
+                        if (fam.Wife.BirthDate.IsKnown && fam.Wife.BirthDate.StartDate != FactDate.MINDATE)
+                            if (fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
+                                minStart = new DateTime(fam.Wife.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
+                        if (fam.Wife.DeathDate.IsKnown && fam.Wife.DeathDate.EndDate != FactDate.MAXDATE)
+                            if (fam.Wife.DeathDate.EndDate > minEnd)
+                                minEnd = new DateTime(fam.Wife.DeathDate.EndDate.Year, 1, 1);
+                    }
                 }
                 if (birthDate.EndDate <= minEnd && birthDate.EndDate != FactDate.MAXDATE)
                 {  // check for BEF XXXX types that are prevalent in my tree
