@@ -61,7 +61,7 @@ namespace FTAnalyzer.Forms
             SetupFilterMenu();
             SetStatusText();
             CheckGoogleStatusCodes(locations);
-            UpdateGridWithFilters();
+            UpdateGridWithFilters(false);
         }
 
         private void SetStatusText()
@@ -164,9 +164,10 @@ namespace FTAnalyzer.Forms
             return count == menus;
         }
 
-        private void UpdateGridWithFilters()
+        private void UpdateGridWithFilters(bool keepCurrentLocation)
         {
             this.Cursor = Cursors.WaitCursor;
+            FactLocation loc = dgLocations.CurrentRow != null ? dgLocations.CurrentRow.DataBoundItem as FactLocation : null;
             SortableBindingList<IDisplayGeocodedLocation> filteredLocations = ApplyFilters(null);
             // store sort order
             DataGridViewColumn sortCol = dgLocations.SortedColumn;
@@ -177,6 +178,8 @@ namespace FTAnalyzer.Forms
                 dgLocations.Sort(sortCol, sortOrder);
             dgLocations.Refresh();
             txtLocations.Text = statusText + " Displaying: " + dgLocations.RowCount + ". ";
+            if(loc != null) 
+                SelectLocation(loc);
             this.Cursor = Cursors.Default;
         }
 
@@ -275,7 +278,7 @@ namespace FTAnalyzer.Forms
             {
                 Application.UserAppDataRegistry.SetValue(menu.Name, menu.Checked.ToString()); // remember checked state for next time
             }
-            UpdateGridWithFilters();
+            UpdateGridWithFilters(false);
         }
 
         private void menuResultType_CheckedChanged(object sender, EventArgs e)
@@ -290,7 +293,7 @@ namespace FTAnalyzer.Forms
             {
                 Application.UserAppDataRegistry.SetValue(menu.Name, menu.Checked.ToString()); // remember checked state for next time
             }
-            UpdateGridWithFilters();
+            UpdateGridWithFilters(false);
         }
 
         private void mnuSelectClear_Click(object sender, EventArgs e)
@@ -468,7 +471,7 @@ namespace FTAnalyzer.Forms
             if (formClosing)
                 this.Close();
             else
-                UpdateGridWithFilters();
+                UpdateGridWithFilters(true);
         }
 
         private void GeocodeLocations_FormClosing(object sender, FormClosingEventArgs e)
