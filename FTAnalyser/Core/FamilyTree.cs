@@ -783,7 +783,7 @@ namespace FTAnalyzer
                             if (fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
                                 minStart = new DateTime(fam.Husband.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
                         if(fam.Husband.DeathDate.IsKnown && fam.Husband.DeathDate.EndDate != FactDate.MAXDATE)
-                            if (fam.Husband.DeathDate.EndDate.AddMonths(9) > minEnd)
+                            if (fam.Husband.DeathDate.EndDate.AddMonths(9) < minEnd)
                                 minEnd = new DateTime(fam.Husband.DeathDate.EndDate.AddMonths(9).Year, 1, 1);                            
                     }
                     if (fam.Wife != null)
@@ -792,7 +792,7 @@ namespace FTAnalyzer
                             if (fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
                                 minStart = new DateTime(fam.Wife.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
                         if (fam.Wife.DeathDate.IsKnown && fam.Wife.DeathDate.EndDate != FactDate.MAXDATE)
-                            if (fam.Wife.DeathDate.EndDate > minEnd)
+                            if (fam.Wife.DeathDate.EndDate < minEnd)
                                 minEnd = new DateTime(fam.Wife.DeathDate.EndDate.Year, 1, 1);
                     }
                 }
