@@ -989,7 +989,7 @@
       <CityAddCountry city="Worcester"           country="England" />
       <CityAddCountry city="York"                country="England" />
       <CityAddCountry city="Ipswich"             country="England" />
-      <CityAddCountry city="Isle Of Wight"       country="England" />
+      <CityAddCountry city="Isle of Wight"       country="England" />
       
       <!-- Welsh Cities add the Country -->
       <CityAddCountry city="Bangor"              country="Wales" />
