@@ -25,7 +25,7 @@ namespace FTAnalyzer.Forms
         private bool allFacts;
         private ReportFormHelper reportFormHelper;
         private bool CensusRefReport;
-        private List<DisplayFact> IgnoreList;
+        private List<string> IgnoreList;
 
         private Facts()
         {
@@ -144,7 +144,7 @@ namespace FTAnalyzer.Forms
             DeserializeIgnoreList();
             foreach (DisplayFact fact in results)
             {
-                fact.Ignore = IgnoreList.Contains(fact);
+                fact.Ignore = IgnoreList.Contains(fact.FactHash);
                 facts.Add(fact);
             }
             CensusRefReport = true;
@@ -155,8 +155,13 @@ namespace FTAnalyzer.Forms
             dgFacts.Sort(dgFacts.Columns["DateofBirth"], ListSortDirection.Ascending);
             dgFacts.Sort(dgFacts.Columns["CensusReference"], ListSortDirection.Ascending);
             dgFacts.ReadOnly = false;
-            foreach(DataGridViewRow row in dgFacts.Rows)
-                row.Visible = row.Cells["Ignore"].Value.ToString().Equals("False");
+            foreach (DataGridViewRow row in dgFacts.Rows)
+            {
+                DataGridViewCell cell = row.Cells["Ignore"];
+                if (row.Cells["IndividualID"].Value.ToString() == "I8303")
+                    Console.Write("hello");
+                row.Visible = cell.Value == null ? true : cell.Value.ToString().Equals("False");
+            }
         }
 
         #region IgnoreList
@@ -181,24 +186,39 @@ namespace FTAnalyzer.Forms
         public void DeserializeIgnoreList()
         {
             log.Debug("FamilyTree.DeserializeIgnoreList");
+            IgnoreList = new List<string>();
             try
             {
                 IFormatter formatter = new BinaryFormatter();
-                string file = Path.Combine(Properties.GeneralSettings.Default.SavePath, "NonDuplicates.xml");
+                string file = Path.Combine(Properties.GeneralSettings.Default.SavePath, "IgnoreList.xml");
                 if (File.Exists(file))
                 {
                     using (Stream stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
-                        IgnoreList = (List<DisplayFact>)formatter.Deserialize(stream);
+                        IgnoreList = (List<string>)formatter.Deserialize(stream);
                     }
                 }
-                else
-                    IgnoreList = new List<DisplayFact>();
             }
             catch (Exception e)
             {
                 log.Error("Error " + e.Message + " reading IgnoreList.xml");
-                IgnoreList = new List<DisplayFact>();
+            }
+        }
+
+        private void dgFacts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex == 1)
+            {
+                DisplayFact ignoreFact = (DisplayFact)dgFacts.Rows[e.RowIndex].DataBoundItem;
+                ignoreFact.Ignore = !ignoreFact.Ignore; // flip state of checkbox
+                if (ignoreFact.Ignore)
+                {  //ignoring this record so add it to the list if its not already present
+                    if (!IgnoreList.Contains(ignoreFact.FactHash))
+                        IgnoreList.Add(ignoreFact.FactHash);
+                }
+                else
+                    IgnoreList.Remove(ignoreFact.FactHash); // no longer ignoring so remove from list
+                SerializeIgnoreList();
             }
         }
         #endregion
@@ -349,23 +369,6 @@ namespace FTAnalyzer.Forms
                     Sources sourceForm = new Sources(f);
                     sourceForm.Show();
                 }
-            }
-        }
-
-        private void dgFacts_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex == 0) 
-            {
-                DisplayFact ignoreFact = (DisplayFact)dgFacts.Rows[e.RowIndex].DataBoundItem;
-                ignoreFact.Ignore = !ignoreFact.Ignore; // flip state of checkbox
-                if (ignoreFact.Ignore)
-                {  //ignoring this record so add it to the list if its not already present
-                    if (!IgnoreList.Contains(ignoreFact))
-                        IgnoreList.Add(ignoreFact);
-                }
-                else
-                    IgnoreList.Remove(ignoreFact); // no longer ignoring so remove from list
-                SerializeIgnoreList();
             }
         }
     }

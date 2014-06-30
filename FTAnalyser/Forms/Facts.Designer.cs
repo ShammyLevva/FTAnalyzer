@@ -218,9 +218,11 @@
             // 
             this.Ignore.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Ignore.DataPropertyName = "Ignore";
+            this.Ignore.FalseValue = "False";
             this.Ignore.HeaderText = "Ignore";
             this.Ignore.Name = "Ignore";
             this.Ignore.ReadOnly = true;
+            this.Ignore.TrueValue = "True";
             this.Ignore.Width = 40;
             // 
             // IndividualID
