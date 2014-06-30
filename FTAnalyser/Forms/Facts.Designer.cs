@@ -44,6 +44,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Ignore = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Forenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -148,6 +149,7 @@
             this.dgFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FactIcon,
+            this.Ignore,
             this.IndividualID,
             this.Forenames,
             this.Surname,
@@ -180,6 +182,7 @@
             this.dgFacts.ShowEditingIcon = false;
             this.dgFacts.Size = new System.Drawing.Size(857, 340);
             this.dgFacts.TabIndex = 2;
+            this.dgFacts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFacts_CellContentClick);
             this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFacts_CellDoubleClick);
             this.dgFacts.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgFacts_CellFormatting);
             this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgFacts_CellToolTipTextNeeded);
@@ -210,6 +213,15 @@
             this.FactIcon.ReadOnly = true;
             this.FactIcon.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.FactIcon.Width = 20;
+            // 
+            // Ignore
+            // 
+            this.Ignore.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Ignore.DataPropertyName = "Ignore";
+            this.Ignore.HeaderText = "Ignore";
+            this.Ignore.Name = "Ignore";
+            this.Ignore.ReadOnly = true;
+            this.Ignore.Width = 40;
             // 
             // IndividualID
             // 
@@ -392,6 +404,7 @@
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel tsRecords;
         private System.Windows.Forms.DataGridViewImageColumn FactIcon;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Ignore;
         private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Forenames;
         private System.Windows.Forms.DataGridViewTextBoxColumn Surname;

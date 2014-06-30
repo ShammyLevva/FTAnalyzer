@@ -44,6 +44,8 @@ namespace FTAnalyzer
         public string RelationToRoot { get { return Ind == null ? string.Empty : Ind.RelationToRoot; } }
         public string SurnameAtDate { get { return Ind == null ? string.Empty : Ind.SurnameAtDate(FactDate); } }
         public bool Preferred { get { return Fact.Preferred; } }
+        public bool Ignore { get; set; }
+        private string FactHash { get { return Ind.IndividualID + Fact.Preferred + Fact.FactTypeDescription + Fact.DateString + Fact.Location.GEDCOMLocation; } }
         
         public int CompareTo(object obj)
         {
@@ -56,7 +58,7 @@ namespace FTAnalyzer
         public override bool Equals(object obj)
         {
             DisplayFact that = (DisplayFact)obj;
-            return this.Ind.Equals(that.Ind) && this.Fact.Equals(that.Fact);
+            return this.FactHash.Equals(that.FactHash); //this.Ind.Equals(that.Ind) && this.Fact.Equals(that.Fact);
         }
 
         public override int GetHashCode()

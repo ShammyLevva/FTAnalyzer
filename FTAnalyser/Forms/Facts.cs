@@ -9,11 +9,14 @@ using System.Windows.Forms;
 using FTAnalyzer.Utilities;
 using Printing.DataGridViewPrint.Tools;
 using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace FTAnalyzer.Forms
 {
     public partial class Facts : Form
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public Individual Individual { get; private set; }
         public Family Family { get; private set; }
         private FamilyTree ft = FamilyTree.Instance;
@@ -22,6 +25,7 @@ namespace FTAnalyzer.Forms
         private bool allFacts;
         private ReportFormHelper reportFormHelper;
         private bool CensusRefReport;
+        private List<DisplayFact> IgnoreList;
 
         private Facts()
         {
@@ -36,6 +40,8 @@ namespace FTAnalyzer.Forms
             italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
             dgFacts.Columns["IndividualID"].Visible = true;
             dgFacts.Columns["CensusReference"].Visible = false;
+            dgFacts.Columns["Ignore"].Visible = false;
+            dgFacts.ReadOnly = true;
         }
 
         private void Grid_SortFinished(object sender, EventArgs e)
@@ -135,14 +141,67 @@ namespace FTAnalyzer.Forms
         public Facts(List<DisplayFact> results)
             : this()
         {
+            DeserializeIgnoreList();
             foreach (DisplayFact fact in results)
+            {
+                fact.Ignore = IgnoreList.Contains(fact);
                 facts.Add(fact);
+            }
             CensusRefReport = true;
+            this.Text = "Families with the same census ref but different locations.";
             SetupFacts();
             dgFacts.Columns["CensusReference"].Visible = true;
+            dgFacts.Columns["Ignore"].Visible = true;
             dgFacts.Sort(dgFacts.Columns["DateofBirth"], ListSortDirection.Ascending);
             dgFacts.Sort(dgFacts.Columns["CensusReference"], ListSortDirection.Ascending);
+            dgFacts.ReadOnly = false;
+            foreach(DataGridViewRow row in dgFacts.Rows)
+                row.Visible = row.Cells["Ignore"].Value.ToString().Equals("False");
         }
+
+        #region IgnoreList
+        public void SerializeIgnoreList()
+        {
+            log.Debug("FamilyTree.SerializeIgnoreList");
+            try
+            {
+                IFormatter formatter = new BinaryFormatter();
+                string file = Path.Combine(Properties.GeneralSettings.Default.SavePath, "IgnoreList.xml");
+                using (Stream stream = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    formatter.Serialize(stream, IgnoreList);
+                }
+            }
+            catch (Exception e)
+            {
+                log.Error("Error " + e.Message + " writing IgnoreList.xml");
+            }
+        }
+
+        public void DeserializeIgnoreList()
+        {
+            log.Debug("FamilyTree.DeserializeIgnoreList");
+            try
+            {
+                IFormatter formatter = new BinaryFormatter();
+                string file = Path.Combine(Properties.GeneralSettings.Default.SavePath, "NonDuplicates.xml");
+                if (File.Exists(file))
+                {
+                    using (Stream stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    {
+                        IgnoreList = (List<DisplayFact>)formatter.Deserialize(stream);
+                    }
+                }
+                else
+                    IgnoreList = new List<DisplayFact>();
+            }
+            catch (Exception e)
+            {
+                log.Error("Error " + e.Message + " reading IgnoreList.xml");
+                IgnoreList = new List<DisplayFact>();
+            }
+        }
+        #endregion
 
         private void AddIndividualsFacts(Individual individual)
         {
@@ -290,6 +349,23 @@ namespace FTAnalyzer.Forms
                     Sources sourceForm = new Sources(f);
                     sourceForm.Show();
                 }
+            }
+        }
+
+        private void dgFacts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex == 0) 
+            {
+                DisplayFact ignoreFact = (DisplayFact)dgFacts.Rows[e.RowIndex].DataBoundItem;
+                ignoreFact.Ignore = !ignoreFact.Ignore; // flip state of checkbox
+                if (ignoreFact.Ignore)
+                {  //ignoring this record so add it to the list if its not already present
+                    if (!IgnoreList.Contains(ignoreFact))
+                        IgnoreList.Add(ignoreFact);
+                }
+                else
+                    IgnoreList.Remove(ignoreFact); // no longer ignoring so remove from list
+                SerializeIgnoreList();
             }
         }
     }

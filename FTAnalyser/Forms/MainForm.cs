@@ -23,7 +23,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "4.1.0.2";
+        public static string VERSION = "4.1.1.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -2396,7 +2396,6 @@ namespace FTAnalyzer
             tspbTabProgress.Visible = false;
             Facts factForm = new Facts(results);
             DisposeDuplicateForms(factForm);
-            factForm.Text = "Families with the same census ref but different locations.";
             factForm.Show();
             HourGlass(false);
         }
