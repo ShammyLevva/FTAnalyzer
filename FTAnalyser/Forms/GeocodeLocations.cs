@@ -556,7 +556,7 @@ namespace FTAnalyzer.Forms
                 {
                     if (loc.IsGeoCoded(retryPartial))
                         geocoded++;
-                    else if (loc.GeocodeStatus == FactLocation.Geocode.INCORRECT)
+                    else if (loc.GeocodeStatus == FactLocation.Geocode.INCORRECT || loc.Country.Equals(Countries.AT_SEA))
                         skipped++; // don't re-geocode incorrect ones as that would reset incorrect flag back to what user already identified was wrong
                     else
                     {
@@ -837,7 +837,7 @@ namespace FTAnalyzer.Forms
                 {
                     if (queue.TryDequeue(out loc))
                     {
-                        if (loc.ToString().Length > 0 && loc.Latitude != 0 && loc.Longitude != 0)
+                        if (loc.ToString().Length > 0 && loc.Latitude != 0 && loc.Longitude != 0 && !loc.Country.Equals(Countries.AT_SEA))
                         {
                             GeoResponse res = null;
                             double latitude = loc.Latitude;
