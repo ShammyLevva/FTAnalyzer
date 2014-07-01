@@ -226,6 +226,8 @@ namespace FTAnalyzer.Forms
 
         public void ShowHideFactRows()
         {
+            CurrencyManager cm = (CurrencyManager)BindingContext[dgFacts.DataSource];
+            cm.SuspendBinding();
             foreach (DataGridViewRow row in dgFacts.Rows)
             {
                 if (btnShowHideFacts.Checked)
@@ -236,6 +238,7 @@ namespace FTAnalyzer.Forms
                 else
                     row.Visible = true;
             }
+            cm.ResumeBinding();
             dgFacts.Refresh();
         }
 
