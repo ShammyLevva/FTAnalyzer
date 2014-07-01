@@ -42,6 +42,8 @@ namespace FTAnalyzer.Forms
             dgFacts.Columns["CensusReference"].Visible = false;
             dgFacts.Columns["IgnoreFact"].Visible = false;
             dgFacts.ReadOnly = true;
+            sep1.Visible = false;
+            btnShowHideFacts.Visible = false;
         }
 
         private void Grid_SortFinished(object sender, EventArgs e)
@@ -155,17 +157,8 @@ namespace FTAnalyzer.Forms
             dgFacts.Sort(dgFacts.Columns["DateofBirth"], ListSortDirection.Ascending);
             dgFacts.Sort(dgFacts.Columns["CensusReference"], ListSortDirection.Ascending);
             dgFacts.ReadOnly = false;
-        }
-
-        public void ShowHideFactRows()
-        {
-            foreach (DataGridViewRow row in dgFacts.Rows)
-            {
-                DisplayFact fact = row.DataBoundItem as DisplayFact;
-                if (row.Cells["IndividualID"].Value.ToString() == "I8303")
-                    Console.Write("hello");
-                row.Visible = !fact.IgnoreFact;
-            }
+            sep1.Visible = true;
+            btnShowHideFacts.Visible = true;
         }
 
         #region IgnoreList
@@ -225,6 +218,27 @@ namespace FTAnalyzer.Forms
                 SerializeIgnoreList();
             }
         }
+
+        private void btnShowHideFacts_Click(object sender, EventArgs e)
+        {
+            ShowHideFactRows();
+        }
+
+        public void ShowHideFactRows()
+        {
+            foreach (DataGridViewRow row in dgFacts.Rows)
+            {
+                if (btnShowHideFacts.Checked)
+                {
+                    DisplayFact fact = row.DataBoundItem as DisplayFact;
+                    row.Visible = !fact.IgnoreFact;
+                }
+                else
+                    row.Visible = true;
+            }
+            dgFacts.Refresh();
+        }
+
         #endregion
 
         private void AddIndividualsFacts(Individual individual)
