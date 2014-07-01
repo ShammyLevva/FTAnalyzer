@@ -730,7 +730,7 @@ namespace FTAnalyzer
                 {   // makes sure we use birth date end in event we have not enough facts
                     minEnd = birthDate.EndDate; 
                     if (minStart != FactDate.MINDATE && minEnd.Year > minStart.Year + FactDate.MAXYEARS)
-                        minEnd = new DateTime(minStart.Year + FactDate.MAXYEARS, minEnd.Month, minEnd.Day); // min end mustn't be more than max years after start
+                        minStart = new DateTime(minEnd.Year - FactDate.MAXYEARS, minStart.Month, minStart.Day); // min end mustn't be more than max years after start
                 }
                 foreach (Family fam in indiv.FamiliesAsParent)
                 {
