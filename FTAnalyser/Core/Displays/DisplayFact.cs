@@ -22,7 +22,7 @@ namespace FTAnalyzer
             this.Surname = surname;
             this.Forenames = forenames;
             this.Fact = fact;
-            this.Ignore = false;
+            this.IgnoreFact = false;
             this.Icon = FactImage.ErrorIcon(fact.FactErrorLevel).Icon;
         }
         public FactDate DateofBirth { get { return Ind == null ? FactDate.UNKNOWN_DATE : Ind.BirthDate; } }
@@ -45,7 +45,7 @@ namespace FTAnalyzer
         public string RelationToRoot { get { return Ind == null ? string.Empty : Ind.RelationToRoot; } }
         public string SurnameAtDate { get { return Ind == null ? string.Empty : Ind.SurnameAtDate(FactDate); } }
         public bool Preferred { get { return Fact.Preferred; } }
-        public bool Ignore { get; set; }
+        public bool IgnoreFact { get; set; }
         public string FactHash { get { return Ind.IndividualID + Fact.Preferred + Fact.FactTypeDescription + Fact.DateString + Fact.Location.GEDCOMLocation; } }
         
         public int CompareTo(object obj)

@@ -40,7 +40,7 @@ namespace FTAnalyzer.Forms
             italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
             dgFacts.Columns["IndividualID"].Visible = true;
             dgFacts.Columns["CensusReference"].Visible = false;
-            dgFacts.Columns["Ignore"].Visible = false;
+            dgFacts.Columns["IgnoreFact"].Visible = false;
             dgFacts.ReadOnly = true;
         }
 
@@ -144,23 +144,27 @@ namespace FTAnalyzer.Forms
             DeserializeIgnoreList();
             foreach (DisplayFact fact in results)
             {
-                fact.Ignore = IgnoreList.Contains(fact.FactHash);
+                fact.IgnoreFact = IgnoreList.Contains(fact.FactHash);
                 facts.Add(fact);
             }
             CensusRefReport = true;
             this.Text = "Families with the same census ref but different locations.";
             SetupFacts();
             dgFacts.Columns["CensusReference"].Visible = true;
-            dgFacts.Columns["Ignore"].Visible = true;
+            dgFacts.Columns["IgnoreFact"].Visible = true;
             dgFacts.Sort(dgFacts.Columns["DateofBirth"], ListSortDirection.Ascending);
             dgFacts.Sort(dgFacts.Columns["CensusReference"], ListSortDirection.Ascending);
             dgFacts.ReadOnly = false;
+        }
+
+        public void ShowHideFactRows()
+        {
             foreach (DataGridViewRow row in dgFacts.Rows)
             {
-                DataGridViewCell cell = row.Cells["Ignore"];
+                DisplayFact fact = row.DataBoundItem as DisplayFact;
                 if (row.Cells["IndividualID"].Value.ToString() == "I8303")
                     Console.Write("hello");
-                row.Visible = cell.Value == null ? true : cell.Value.ToString().Equals("False");
+                row.Visible = !fact.IgnoreFact;
             }
         }
 
@@ -210,8 +214,8 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex == 1)
             {
                 DisplayFact ignoreFact = (DisplayFact)dgFacts.Rows[e.RowIndex].DataBoundItem;
-                ignoreFact.Ignore = !ignoreFact.Ignore; // flip state of checkbox
-                if (ignoreFact.Ignore)
+                ignoreFact.IgnoreFact = !(bool)dgFacts.Rows[e.RowIndex].Cells["IgnoreFact"].Value; // value will be value before click so invert it 
+                if (ignoreFact.IgnoreFact)
                 {  //ignoring this record so add it to the list if its not already present
                     if (!IgnoreList.Contains(ignoreFact.FactHash))
                         IgnoreList.Add(ignoreFact.FactHash);

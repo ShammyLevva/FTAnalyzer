@@ -30,5 +30,6 @@ namespace FTAnalyzer
         double Latitude { get; }
         double Longitude { get; }
         bool Preferred { get; }
+        bool IgnoreFact { get; }
     }
 }

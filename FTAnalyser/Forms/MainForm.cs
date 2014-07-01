@@ -2397,6 +2397,7 @@ namespace FTAnalyzer
             Facts factForm = new Facts(results);
             DisposeDuplicateForms(factForm);
             factForm.Show();
+            factForm.ShowHideFactRows();
             HourGlass(false);
         }
         #endregion

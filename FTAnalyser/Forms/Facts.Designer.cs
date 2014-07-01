@@ -44,7 +44,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Ignore = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.IgnoreFact = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Forenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -149,7 +149,7 @@
             this.dgFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FactIcon,
-            this.Ignore,
+            this.IgnoreFact,
             this.IndividualID,
             this.Forenames,
             this.Surname,
@@ -214,16 +214,16 @@
             this.FactIcon.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.FactIcon.Width = 20;
             // 
-            // Ignore
+            // IgnoreFact
             // 
-            this.Ignore.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Ignore.DataPropertyName = "Ignore";
-            this.Ignore.FalseValue = "False";
-            this.Ignore.HeaderText = "Ignore";
-            this.Ignore.Name = "Ignore";
-            this.Ignore.ReadOnly = true;
-            this.Ignore.TrueValue = "True";
-            this.Ignore.Width = 40;
+            this.IgnoreFact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.IgnoreFact.DataPropertyName = "IgnoreFact";
+            this.IgnoreFact.FalseValue = "False";
+            this.IgnoreFact.HeaderText = "Ignore";
+            this.IgnoreFact.Name = "IgnoreFact";
+            this.IgnoreFact.ReadOnly = true;
+            this.IgnoreFact.TrueValue = "True";
+            this.IgnoreFact.Width = 40;
             // 
             // IndividualID
             // 
@@ -406,7 +406,7 @@
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel tsRecords;
         private System.Windows.Forms.DataGridViewImageColumn FactIcon;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Ignore;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IgnoreFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Forenames;
         private System.Windows.Forms.DataGridViewTextBoxColumn Surname;
