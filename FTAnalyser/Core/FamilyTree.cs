@@ -826,8 +826,8 @@ namespace FTAnalyzer
             foreach (Family fam in indiv.FamiliesAsParent)
             {
                 Individual spouse = fam.Spouse(indiv);
-                if (spouse != null && spouse.DeathDate.StartDate != FactDate.MINDATE && spouse.DeathDate.StartDate > maxMarried)
-                    maxMarried = new DateTime(spouse.DeathDate.StartDate.Year - Properties.GeneralSettings.Default.MinParentalAge, 12, 31);
+                if (spouse != null && spouse.DeathDate.EndDate != FactDate.MAXDATE && spouse.DeathDate.EndDate > maxMarried)
+                    maxMarried = new DateTime(spouse.DeathDate.EndDate.Year - Properties.GeneralSettings.Default.MinParentalAge, 12, 31);
             }
             return maxMarried;
         }
