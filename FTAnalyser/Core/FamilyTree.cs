@@ -771,7 +771,7 @@ namespace FTAnalyzer
                     }
                 }
                 DateTime maxMarried = MaximumMarriedDate(indiv);
-                if (maxMarried < minEnd && maxMarried >= minStart)
+                if (maxMarried < minEnd && maxMarried >= minStart && maxMarried != DateTime.MinValue)
                     minEnd = maxMarried;
                 foreach (ParentalRelationship parents in indiv.FamiliesAsChild)
                 {  // check min date at least X years after parent born and no later than parent dies
