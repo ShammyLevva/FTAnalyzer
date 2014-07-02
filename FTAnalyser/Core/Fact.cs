@@ -358,8 +358,8 @@ namespace FTAnalyzer
             }
         }
 
-        public static readonly string CHILDREN_STATUS_PATTERN1 = @"(\d{1,2}) Total ?,? ?(\d{1,2}) Alive ?,? ?(\d{1,2}) Dead";
-        public static readonly string CHILDREN_STATUS_PATTERN2 = @"Total:? (\d{1,2}) ?,? ?Alive:? (\d{1,2}) ?,? ?Dead:? (\d{1,2})";
+        public static readonly string CHILDREN_STATUS_PATTERN1 = @"(\d{1,2}) Total ?,? ?(\d{1,2}) (Alive|Living) ?,? ?(\d{1,2}) Dead";
+        public static readonly string CHILDREN_STATUS_PATTERN2 = @"Total:? (\d{1,2}) ?,? ?(Alive|Living):? (\d{1,2}) ?,? ?Dead:? (\d{1,2})";
 
         private void CheckValidChildrenStatus(XmlNode node)
         {
@@ -371,21 +371,29 @@ namespace FTAnalyzer
                 return;
             }
             bool success = false;
+            int total, alive, dead;
+            total = alive = dead = 0;
             Match matcher = Regex.Match(Comment, CHILDREN_STATUS_PATTERN1);
             if (matcher.Success)
+            {
                 success = true;
+                int.TryParse(matcher.Groups[1].ToString(), out total);
+                int.TryParse(matcher.Groups[2].ToString(), out alive);
+                int.TryParse(matcher.Groups[4].ToString(), out dead);
+            }
             else
             {
                 matcher = Regex.Match(Comment, CHILDREN_STATUS_PATTERN2);
                 if (matcher.Success)
+                {
                     success = true;
+                    int.TryParse(matcher.Groups[1].ToString(), out total);
+                    int.TryParse(matcher.Groups[3].ToString(), out alive);
+                    int.TryParse(matcher.Groups[4].ToString(), out dead);
+                }
             }
             if (success)
             {
-                int total, alive, dead;
-                int.TryParse(matcher.Groups[1].ToString(), out total);
-                int.TryParse(matcher.Groups[2].ToString(), out alive);
-                int.TryParse(matcher.Groups[3].ToString(), out dead);
                 if (total == alive + dead)
                     return;
                 this.FactErrorMessage = "Children status total doesn't equal numbers alive plus numbers dead.";

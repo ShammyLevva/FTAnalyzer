@@ -21,6 +21,7 @@ namespace FTAnalyzer
 {
     class FamilyTree : IDisposable
     {
+        #region Variables
         private static FamilyTree instance;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -47,6 +48,7 @@ namespace FTAnalyzer
         
         public bool Geocoding { get; set; }
         public List<NonDuplicate> NonDuplicates { get; private set; }
+        #endregion
 
         #region Static Functions
 

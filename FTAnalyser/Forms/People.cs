@@ -443,16 +443,16 @@ namespace FTAnalyzer.Forms
                 DataGridViewCellCollection cells = dgFamilies.Rows[e.RowIndex].Cells;
                 switch (e.ColumnIndex)
                 {
-                    case 5: // Totals
-                    case 8:
+                    case 6: // Totals
+                    case 9:
                         e.CellStyle.BackColor = cells["ChildrenTotal"].Value.Equals(cells["ExpectedTotal"].Value) ? Color.Wheat : Color.OrangeRed;
                         break;
-                    case 6: // Alive
-                    case 9:
+                    case 7: // Alive
+                    case 10:
                         e.CellStyle.BackColor = cells["ChildrenAlive"].Value.Equals(cells["ExpectedAlive"].Value) ? Color.Wheat : Color.OrangeRed;
                         break;
-                    case 7: // ChildrenTotal
-                    case 10:
+                    case 8: // ChildrenTotal
+                    case 11:
                         e.CellStyle.BackColor = cells["ChildrenDead"].Value.Equals(cells["ExpectedDead"].Value) ? Color.Wheat : Color.OrangeRed;
                         break;
                 }
