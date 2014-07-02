@@ -769,14 +769,10 @@ namespace FTAnalyzer
                                 minStart = maxChild;
                         }
                     }
-                    Individual spouse = fam.Spouse(indiv);
-                    if (spouse != null && spouse.DeathDate.StartDate != FactDate.MINDATE)
-                    {
-                        DateTime minMarried = new DateTime(spouse.DeathDate.StartDate.Year - Properties.GeneralSettings.Default.MinParentalAge, 12, 31);
-                        if (minMarried < minEnd && minMarried >= minStart)
-                            minEnd = minMarried;
-                    }
                 }
+                DateTime maxMarried = MaximumMarriedDate(indiv);
+                if (maxMarried < minEnd && maxMarried >= minStart)
+                    minEnd = maxMarried;
                 foreach (ParentalRelationship parents in indiv.FamiliesAsChild)
                 {  // check min date at least X years after parent born and no later than parent dies
                     Family fam = parents.Family;
@@ -822,6 +818,18 @@ namespace FTAnalyzer
                 indiv.AddFact(looseBirth);
                 result.Add(indiv);
             }
+        }
+
+        private static DateTime MaximumMarriedDate(Individual indiv)
+        {
+            DateTime maxMarried = DateTime.MinValue;
+            foreach (Family fam in indiv.FamiliesAsParent)
+            {
+                Individual spouse = fam.Spouse(indiv);
+                if (spouse != null && spouse.DeathDate.StartDate != FactDate.MINDATE && spouse.DeathDate.StartDate > maxMarried)
+                    maxMarried = new DateTime(spouse.DeathDate.StartDate.Year - Properties.GeneralSettings.Default.MinParentalAge, 12, 31);
+            }
+            return maxMarried;
         }
 
         private FactDate BaseLivingDate(Individual indiv)
