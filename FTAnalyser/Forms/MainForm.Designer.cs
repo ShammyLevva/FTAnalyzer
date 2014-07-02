@@ -1610,6 +1610,7 @@
             this.btnReportUnrecognised.TabIndex = 28;
             this.btnReportUnrecognised.Text = "Export Unrecognised Census References";
             this.btnReportUnrecognised.UseVisualStyleBackColor = true;
+            this.btnReportUnrecognised.Click += new System.EventHandler(this.btnReportUnrecognised_Click);
             // 
             // btnUnrecognisedCensusRef
             // 
