@@ -651,6 +651,8 @@ namespace FTAnalyzer
 
         private void ShiftRegionToParish()
         {
+            if (!Countries.IsUnitedKingdom(Country))
+                return; // don't shift regions if not UK
             string result = string.Empty;
             REGION_SHIFTS.TryGetValue(Region, out result);
             if (result == null || result.Length == 0)

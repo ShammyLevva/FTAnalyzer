@@ -707,6 +707,7 @@
       <ChapmanCode chapmanCode="WEX" countyName="Wexford"      />
       <ChapmanCode chapmanCode="WIC" countyName="Wicklow"      />
     </ChapmanCodes>
+    
     <DemoteCountries>
       <!-- Scottish Counties add the Country -->
       <CountryToRegion region="Aberdeenshire"       country="Scotland" />
@@ -1008,6 +1009,7 @@
       <CityAddCountry city="Lisburn"     country="Northern Ireland" />
       <CityAddCountry city="Newry"       country="Northern Ireland" />
     </DemoteCountries>
+    
     <DemoteRegions>
       <RegionToParish parish="Aberdeen"      region="Aberdeenshire" />
       <RegionToParish parish="Ayr"           region="Ayrshire" />
@@ -1033,7 +1035,6 @@
       <RegionToParish parish="Derry"       region="Derry" />
       <RegionToParish parish="Lisburn"     region="Antrim" />
       <RegionToParish parish="Newry"       region="Newry" />
-
 
       <!-- English Cities add the county -->
       <RegionToParish parish="Isle of Wight"  region="Hampshire" />
@@ -1087,9 +1088,6 @@
       <RegionToParish parish="Worcester"      region="Worcestershire" />
       <RegionToParish parish="York"           region="Yorkshire" />
       <RegionToParish parish="Ipswich"        region="Suffolk" />
-
-      <RegionToParish parish="Toronto"    region="Ontario" />
-      <RegionToParish parish="Vancouver"  region="British Columbia" />
     </DemoteRegions>
   </Fixes>
 
