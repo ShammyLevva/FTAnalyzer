@@ -401,6 +401,11 @@ namespace FTAnalyzer
             get { return BirthFact == null ? FactDate.UNKNOWN_DATE : BirthFact.FactDate; }
         }
 
+        public DateTime BirthStart
+        {
+            get { return BirthDate.StartDate != FactDate.MINDATE ? BirthDate.StartDate : BirthDate.EndDate; }
+        }
+
         public FactLocation BirthLocation
         {
             get { return (BirthFact == null) ? FactLocation.UNKNOWN_LOCATION : BirthFact.Location; }
@@ -427,6 +432,11 @@ namespace FTAnalyzer
         public FactDate DeathDate
         {
             get { return DeathFact == null ? FactDate.UNKNOWN_DATE : DeathFact.FactDate; }
+        }
+
+        public DateTime DeathEnd
+        {
+            get { return DeathDate.EndDate != FactDate.MAXDATE ? DeathDate.EndDate : DeathDate.StartDate; }
         }
 
         public FactLocation DeathLocation
