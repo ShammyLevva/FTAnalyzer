@@ -36,7 +36,7 @@ namespace FTAnalyzer
         private static readonly string SCOT_CENSUS_PATTERN = @"Parish:? ?([A-Z .'-]+)[;,] ?ED:? ?(\d{1,3}[AB]?)[;,] ?Page:? ?(\d{1,4})[;,] ?Line:? ?(\d{1,2})";
         private static readonly string SCOT_CENSUS_PATTERN2 = @"(\d{3}/\d{1,2}[AB]?) (\d{3}/\d{2}) (\d{3,4})";
         private static readonly string SCOT_CENSUS_PATTERN3 = @"(\d{3}[AB]?)/(\d{2}[AB]?) Page:? ?(\d{1,4})";
-        private static readonly string US_CENSUS_PATTERN = @"Year: ?(\d{4});? ?Census Place:? ?(.*)[;,] ?Roll:? ?(.*)[;,] ?Page:? ?(\d{1,4}[AB]?)";
+        private static readonly string US_CENSUS_PATTERN = @"Year: ?(\d{4});? ?Census Place:? ?(.*)[;,] ?Roll:? ?(.*)[;,] ?Page:? ?(\d{1,4}[AB]?);? ?(Enumeration District:? ?(.*))?";
 
         public enum ReferenceStatus { BLANK = 0, UNRECOGNISED = 1, INCOMPLETE = 2, GOOD = 3 };
         private static readonly string MISSING = "Missing";
@@ -225,6 +225,8 @@ namespace FTAnalyzer
                     this.Place = matcher.Groups[2].ToString();
                     this.Roll = matcher.Groups[3].ToString();
                     this.Page = matcher.Groups[4].ToString();
+                    if (matcher.Groups.Count == 7)
+                        this.ED = matcher.Groups[6].ToString();
                     this.IsUKCensus = false;
                     this.Status = ReferenceStatus.GOOD;
                     return true;
