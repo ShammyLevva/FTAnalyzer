@@ -121,7 +121,7 @@ namespace FTAnalyzer
             {
                 HourGlass(true);
                 this.filename = filename;
-                CloseGEDCOM();
+                CloseGEDCOM(false);
                 if (!stopProcessing)
                 {
                     //document.Save("GedcomOutput.xml");
@@ -138,6 +138,8 @@ namespace FTAnalyzer
                         this.Text = "Family Tree Analyzer v" + VERSION + ". Analysing: " + filename;
                         MessageBox.Show("Gedcom File " + filename + " Loaded", "FT Analyzer");
                     }
+                    else
+                        CloseGEDCOM(true);
                 }
             }
             catch (IOException ex)
@@ -163,12 +165,13 @@ namespace FTAnalyzer
             mnuRestore.Enabled = false;
         }
 
-        private void CloseGEDCOM()
+        private void CloseGEDCOM(bool keepOutput)
         {
             DisposeIndividualForms();
             ShowMenus(false);
             tabSelector.SelectTab(tabDisplayProgress);
-            rtbOutput.Text = string.Empty;
+            if(!keepOutput)
+                rtbOutput.Text = string.Empty;
             tsCountLabel.Text = string.Empty;
             tsHintsLabel.Text = string.Empty;
             pbSources.Value = 0;
@@ -261,7 +264,7 @@ namespace FTAnalyzer
 
         private void mnuCloseGEDCOM_Click(object sender, EventArgs e)
         {
-            CloseGEDCOM();
+            CloseGEDCOM(false);
             ft.ResetData();
             EnableLoadMenus();
             mnuRestore.Enabled = true;
