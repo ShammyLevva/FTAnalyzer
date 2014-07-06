@@ -302,9 +302,9 @@ namespace FTAnalyzer
                 if(Roll.Length > 0)
                 {
                     if (Properties.GeneralSettings.Default.UseCompactCensusRef)
-                        return Roll + "/" + Page;
+                        return Roll + "/" + Page + (ED.Length > 0 ? "/" + ED : "");
                     else
-                        return "Roll: " + Roll + ", Page: " + Page;
+                        return "Roll: " + Roll + ", Page: " + Page + (ED.Length > 0 ? ", ED: " + ED : "");
                 }
                 else if (Piece.Length > 0)
                 {
