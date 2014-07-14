@@ -136,7 +136,7 @@ namespace FTAnalyzer
 
         public static bool IsEnglandWales(string country)
         {
-            return country.Equals(ENG_WALES) || country.Equals(ENGLAND) || country.Equals(WALES) || country.Equals(ISLE_OF_MAN);
+            return country.Equals(ENG_WALES) || country.Equals(ENGLAND) || country.Equals(WALES) || country.Equals(ISLE_OF_MAN) || country.Equals(CHANNEL_ISLANDS);
         }
 
         public static Envelope BoundingBox(string country)
