@@ -29,7 +29,7 @@ namespace FTAnalyzer
         public bool HasParents { get; set; }
         public bool Infamily { get; set; }
         public bool IsFlaggedAsLiving { get; private set; }
-        public int Ahnentafel { get; set; }
+        public Int64 Ahnentafel { get; set; }
         public string BudgieCode { get; set; }
         public string RelationToRoot { get; set; }
         public CommonAncestor CommonAncestor { get; set; }

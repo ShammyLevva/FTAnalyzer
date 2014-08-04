@@ -12,8 +12,8 @@ namespace FTAnalyzer
             if (rootPerson.Equals(toFind))
                 return "root person";
             CommonAncestor commonAncestor = toFind.CommonAncestor;
-            int rootDistance = (int)(Math.Log(commonAncestor.ind.Ahnentafel) / Math.Log(2.0));
-            int toFindDistance = commonAncestor.distance;
+            Int64 rootDistance = (Int64)(Math.Log(commonAncestor.ind.Ahnentafel) / Math.Log(2.0));
+            Int64 toFindDistance = commonAncestor.distance;
 
             // DIRECT DESCENDANT - PARENT
             if (toFindDistance == 0)
@@ -53,12 +53,12 @@ namespace FTAnalyzer
                 return AggrandiseRelationship(relation, toFindDistance, 1);
             }
             // COUSINS, GENERATIONALLY REMOVED
-            int cousinOrdinal = Math.Min(rootDistance, toFindDistance) - 1;
-            int cousinGenerations = Math.Abs(rootDistance - toFindDistance);
+            Int64 cousinOrdinal = Math.Min(rootDistance, toFindDistance) - 1;
+            Int64 cousinGenerations = Math.Abs(rootDistance - toFindDistance);
             return OrdinalSuffix(cousinOrdinal) + " cousin " + FormatPlural(cousinGenerations) + " removed";
         }
 
-        private static string FormatPlural(int count)
+        private static string FormatPlural(Int64 count)
         {
             if (Math.Abs(count) == 1)
                 return "once";
@@ -67,7 +67,7 @@ namespace FTAnalyzer
             return count + " times";
         }
 
-        private static string AggrandiseRelationship(string relation, int distance, int offset)
+        private static string AggrandiseRelationship(string relation, Int64 distance, int offset)
         {
             distance -= offset;
             switch (distance)
@@ -83,7 +83,7 @@ namespace FTAnalyzer
             }
         }
 
-        private static string OrdinalSuffix(int number)
+        private static string OrdinalSuffix(Int64 number)
         {
             string os = string.Empty;
             if (number % 100 > 10 && number % 100 < 14)
@@ -92,7 +92,7 @@ namespace FTAnalyzer
                 os = "";
             else
             {
-                Int32 last = number % 10;
+                Int64 last = number % 10;
                 switch (last)
                 {
                     case 1:

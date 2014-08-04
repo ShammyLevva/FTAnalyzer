@@ -2,6 +2,7 @@
 using GeoAPI.Geometries;
 using NetTopologySuite.Geometries;
 using SharpMap.Data;
+using System;
 
 namespace FTAnalyzer.Mapping
 {
@@ -61,7 +62,7 @@ namespace FTAnalyzer.Mapping
 
         public string RelationToRoot { get { return Individual.RelationToRoot; } }
 
-        public int Ahnentafel { get { return Individual.Ahnentafel; } }
+        public Int64 Ahnentafel { get { return Individual.Ahnentafel; } }
 
         public double SortDistance { get { return centre.Distance(Geometry); } }
 

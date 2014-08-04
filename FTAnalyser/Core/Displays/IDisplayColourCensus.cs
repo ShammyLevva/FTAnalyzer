@@ -58,6 +58,6 @@ namespace FTAnalyzer
         FactDate DeathDate { get; }
         FactLocation DeathLocation { get; }
         FactLocation BestLocation(FactDate when);
-        int Ahnentafel { get; }
+        Int64 Ahnentafel { get; }
     }
 }

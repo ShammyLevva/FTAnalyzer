@@ -20,7 +20,7 @@ namespace FTAnalyzer
         Age LifeSpan { get; }
         string Relation { get; }
         string BudgieCode { get; }
-        int Ahnentafel { get; }
+        Int64 Ahnentafel { get; }
         bool HasRangedBirthDate { get; }
         bool HasParents { get; }
         int CensusFactCount { get; }

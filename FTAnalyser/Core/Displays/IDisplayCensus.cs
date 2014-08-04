@@ -22,6 +22,6 @@ namespace FTAnalyzer
         string CensusReference { get; }
         string Relation { get; }
         string RelationToRoot { get; }
-        int Ahnentafel { get; }
+        Int64 Ahnentafel { get; }
     }
 }

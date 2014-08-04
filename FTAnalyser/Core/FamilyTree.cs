@@ -44,7 +44,7 @@ namespace FTAnalyzer
         private bool _loading = false;
         private bool _dataloaded = false;
         private bool _cancelDuplicates = false;
-        private int maxAhnentafel = 0;
+        private Int64 maxAhnentafel = 0;
 
         public bool Geocoding { get; set; }
         public List<NonDuplicate> NonDuplicates { get; private set; }

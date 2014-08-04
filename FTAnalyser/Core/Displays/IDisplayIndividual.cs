@@ -23,7 +23,7 @@ namespace FTAnalyzer
         int MarriageCount { get; }
         int ChildrenCount { get; }
         string BudgieCode { get; }
-        int Ahnentafel { get; }
+        Int64 Ahnentafel { get; }
         bool HasNotes { get; }
     }
 }
