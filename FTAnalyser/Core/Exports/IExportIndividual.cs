@@ -26,5 +26,6 @@ namespace FTAnalyzer
         int CensusFactCount { get; }
         string MarriageDates { get; }
         string MarriageLocations { get; }
+        string RelationToRoot { get; set; }
     }
 }
