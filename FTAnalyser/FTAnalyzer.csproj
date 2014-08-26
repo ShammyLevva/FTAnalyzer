@@ -96,7 +96,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>FFFBD7BA64F152469E3578035BBB3E6013014A63</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>2D247322E11563A20684F881EF7486EBC516D62B</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>
