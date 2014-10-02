@@ -25,7 +25,7 @@ namespace OSGazetteerProcessor
         //private List<Feature> oldEnglishCounties;
         private List<string> modernCounties;
 
-        private IDictionary<string, ISet<Tuple<string, string>>> oldCountiesToCounties;
+        //private IDictionary<string, ISet<Tuple<string, string>>> oldCountiesToCounties;
 
         public Form1()
         {
@@ -175,26 +175,26 @@ namespace OSGazetteerProcessor
             }
         }
 
-        private void SaveCounties()
-        {
-            using (StreamWriter writer = new StreamWriter(@"C:\Maps\FTAnalyzer\counties.txt"))
-            {
-                foreach (string c in oldCountiesToCounties.Keys)
-                {
-                    ISet<Tuple<string, string>> value = oldCountiesToCounties[c];
-                    foreach (Tuple<string, string> t in value)
-                    {
-                        writer.Write("UK_COUNTIES.Add(new County(\"");
-                        writer.Write(c);
-                        writer.Write("\", \"");
-                        writer.Write(t.Item1);
-                        writer.Write("\", \"");
-                        writer.Write(t.Item2);
-                        writer.WriteLine("\"));");
-                    }
-                }
-            }
-        }
+        //private void SaveCounties()
+        //{
+        //    using (StreamWriter writer = new StreamWriter(@"C:\Maps\FTAnalyzer\counties.txt"))
+        //    {
+        //        foreach (string c in oldCountiesToCounties.Keys)
+        //        {
+        //            ISet<Tuple<string, string>> value = oldCountiesToCounties[c];
+        //            foreach (Tuple<string, string> t in value)
+        //            {
+        //                writer.Write("UK_COUNTIES.Add(new County(\"");
+        //                writer.Write(c);
+        //                writer.Write("\", \"");
+        //                writer.Write(t.Item1);
+        //                writer.Write("\", \"");
+        //                writer.Write(t.Item2);
+        //                writer.WriteLine("\"));");
+        //            }
+        //        }
+        //    }
+        //}
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
