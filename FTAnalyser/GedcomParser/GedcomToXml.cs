@@ -132,9 +132,9 @@ namespace FTAnalyzer
 
                             // perform validation on the CHAR field (character code)
                             if (tag.Equals("CHAR") &&
-                                !(value.Trim().Equals("ANSEL") || value.Trim().Equals("ASCII") || value.Trim().Equals("ANSI") || value.Trim().Equals("UTF-8")))
+                                !(value.Trim().Equals("ANSEL") || value.Trim().Equals("ASCII") || value.Trim().Equals("ANSI") || value.Trim().Equals("UTF-8") || value.Trim().Equals("UNICODE")))
                             {
-                                FamilyTree.Instance.XmlErrorBox.AppendText("WARNING: Character set is " + value + ": should be ANSEL, ANSI or ASCII\n");
+                                FamilyTree.Instance.XmlErrorBox.AppendText("WARNING: Character set is " + value + ": should be ANSEL, ANSI, ASCII, UTF-8 or UNICODE\n");
                             }
 
                             // insert any necessary closing tags

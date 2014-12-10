@@ -223,6 +223,8 @@ namespace FTAnalyzer
             XmlNode charset = doc.SelectSingleNode("GED/HEAD/CHAR");
             if (charset != null && charset.InnerText.Equals("UTF-8"))
                 doc = GedcomToXml.Load(filename, Encoding.UTF8);
+            if (charset != null && charset.InnerText.Equals("UNICODE"))
+                doc = GedcomToXml.Load(filename, Encoding.Unicode);
             if (doc == null)
                 return false;
             ReportOptions();
