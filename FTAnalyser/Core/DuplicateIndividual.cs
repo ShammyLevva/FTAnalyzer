@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FTAnalyzer
 {
-    public class DuplicateIndividual 
+    public class DuplicateIndividual
     {
         public Individual IndividualA { get; private set; }
         public Individual IndividualB { get; private set; }
@@ -22,9 +22,9 @@ namespace FTAnalyzer
         {
             Score = 0;
             if (IndividualA.Surname.Equals(IndividualB.Surname) && IndividualA.Surname != Individual.UNKNOWN_NAME)
-                Score+=20;
-            if(IndividualA.Forename.Equals(IndividualB.Forename) && IndividualA.Forename != Individual.UNKNOWN_NAME)
-                Score+=20;
+                Score += 20;
+            if (IndividualA.Forename.Equals(IndividualB.Forename) && IndividualA.Forename != Individual.UNKNOWN_NAME)
+                Score += 20;
             ScoreDates(IndividualA.BirthDate, IndividualB.BirthDate);
             ScoreDates(IndividualA.DeathDate, IndividualB.DeathDate);
             LocationScore();
@@ -68,18 +68,21 @@ namespace FTAnalyzer
         {
             if (dateA.IsKnown && dateB.IsKnown)
             {
+                double distance = dateA.Distance(dateB);
                 if (dateA.Equals(dateB))
                     Score += 50;
-                else if (dateA.Distance(dateB) <= .25)
+                else if (distance <= .25)
                     Score += 50;
-                else if (dateA.Distance(dateB) <= .5)
+                else if (distance <= .5)
                     Score += 20;
-                else if (dateA.Distance(dateB) <= 1)
+                else if (distance <= 1)
                     Score += 10;
-                else if (dateA.Distance(dateB) <= 2)
+                else if (distance <= 2)
                     Score += 5;
-                else if (dateA.Distance(dateB) > 5)
-                    Score -= (int)(dateA.Distance(dateB) * dateA.Distance(dateB));
+                else if (distance > 5 && distance < 20)
+                    Score -= (int)(distance * distance);
+                else
+                    Score = -10000;  // distance is too big so set score to large negative
                 if (dateA.IsExact && dateB.IsExact)
                     Score += 100;
             }
@@ -88,7 +91,7 @@ namespace FTAnalyzer
         private int SharedParents()
         {
             int score = 0;
-            foreach(ParentalRelationship parentA in IndividualA.FamiliesAsChild)
+            foreach (ParentalRelationship parentA in IndividualA.FamiliesAsChild)
             {
                 foreach (ParentalRelationship parentB in IndividualB.FamiliesAsChild)
                 {
@@ -104,14 +107,15 @@ namespace FTAnalyzer
         private int DifferentParentsPenalty()
         {
             int score = 0;
-            if(IndividualA.FamiliesAsChild.Count == 1 && IndividualB.FamiliesAsChild.Count == 1)
+            if (IndividualA.FamiliesAsChild.Count == 1 && IndividualB.FamiliesAsChild.Count == 1)
             { // both individuals have parents if none of them are shared parents apply a heavy penalty
-                if(IndividualA.FamiliesAsChild[0].Father != null && IndividualA.FamiliesAsChild[0].Mother != null &&
+                if (IndividualA.FamiliesAsChild[0].Father != null && IndividualA.FamiliesAsChild[0].Mother != null &&
                     IndividualB.FamiliesAsChild[0].Father != null && IndividualB.FamiliesAsChild[0].Mother != null &&
                     !IndividualA.FamiliesAsChild[0].Father.Equals(IndividualB.FamiliesAsChild[0].Father) &&
                     !IndividualA.FamiliesAsChild[0].Mother.Equals(IndividualB.FamiliesAsChild[0].Mother))
-                        score = -500;
-            }  else if (IndividualA.FamiliesAsChild.Count > 0 && IndividualB.FamiliesAsChild.Count > 0)
+                    score = -500;
+            }
+            else if (IndividualA.FamiliesAsChild.Count > 0 && IndividualB.FamiliesAsChild.Count > 0)
             {
                 if (SharedParents() == 0)
                     score = -250;

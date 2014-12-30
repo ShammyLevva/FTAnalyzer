@@ -2463,17 +2463,20 @@ namespace FTAnalyzer
             IEnumerable<Individual> females = individuals.Where<Individual>(x => (x.Gender == "F" || x.Gender == "U"));
             pb.Maximum = (males.Count() * males.Count() + females.Count() * females.Count()) / 2;
             pb.Value = 0;
-            IndentifyDuplicates(pb, males);
-            IndentifyDuplicates(pb, females);
+            IdentifyDuplicates(pb, males);
+            IdentifyDuplicates(pb, females);
             if (_cancelDuplicates)
             {
                 pb.Value = 0;
                 MessageBox.Show("Possible Duplicate Search Cancelled", "FT Analyzer");
+                tb.Minimum = 1;
+                tb.Maximum = 10;
+                tb.Enabled = true;
                 return null;
             }
-            tb.Enabled = true;
             tb.Minimum = 1;
             tb.Maximum = MaxDuplicateScore();
+            tb.Enabled = true;
             DeserializeNonDuplicates();
             return BuildDuplicateList(tb.Value);
         }
@@ -2494,7 +2497,7 @@ namespace FTAnalyzer
             return score;
         }
 
-        private void IndentifyDuplicates(ProgressBar pb, IEnumerable<Individual> enumerable)
+        private void IdentifyDuplicates(ProgressBar pb, IEnumerable<Individual> enumerable)
         {
             log.Debug("FamilyTree.IndentifyDuplicates");
             List<Individual> list = enumerable.ToList<Individual>();
@@ -2515,7 +2518,7 @@ namespace FTAnalyzer
                                 indA.BirthDate.Distance(indB.BirthDate) < 5)
                             {
                                 DuplicateIndividual test = new DuplicateIndividual(indA, indB);
-                                if (test.Score > 0 && !duplicates.Contains(test))
+                                if (test.Score > 0)
                                     duplicates.Add(test);
                             }
                         }
