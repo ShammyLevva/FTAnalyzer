@@ -2474,8 +2474,9 @@ namespace FTAnalyzer
                 tb.Enabled = true;
                 return null;
             }
-            tb.Minimum = 1;
-            tb.Maximum = MaxDuplicateScore();
+            int maxScore = MaxDuplicateScore();
+            tb.TickFrequency = maxScore / 20;
+            tb.SetRange(1, maxScore);
             tb.Enabled = true;
             DeserializeNonDuplicates();
             return BuildDuplicateList(tb.Value);
