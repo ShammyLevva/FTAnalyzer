@@ -27,6 +27,7 @@ namespace FTAnalyzer.UserControls
             upDownAge.Value = Properties.GeneralSettings.Default.MinParentalAge;
             chkUseAlias.Checked = Properties.GeneralSettings.Default.ShowAliasInName;
             chkHideMissingTagged.Checked = Properties.GeneralSettings.Default.HidePeopleWithMissingTag;
+            chkReverseLocations.Checked = Properties.GeneralSettings.Default.ReverseLocations;
 			Properties.GeneralSettings.Default.ReloadRequired = false;
 		}
 
@@ -45,6 +46,7 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.UseCompactCensusRef = chkCompactCensusRef.Checked;
             Properties.GeneralSettings.Default.ShowAliasInName = chkUseAlias.Checked;
             Properties.GeneralSettings.Default.HidePeopleWithMissingTag = chkHideMissingTagged.Checked;
+            Properties.GeneralSettings.Default.ReverseLocations = chkReverseLocations.Checked;
             Properties.GeneralSettings.Default.Save();
 			OnUseBaptismDatesChanged();
 			OnAllowEmptyLocationsChanged();
@@ -54,6 +56,7 @@ namespace FTAnalyzer.UserControls
             OnOnlyCensusParentsChanged();
             OnMinParentalAgeChanged();
             OnCompactCensusRefChanged();
+            OnReverseCountriesChanged();
 		}
 
 		public void Cancel()
@@ -169,7 +172,14 @@ namespace FTAnalyzer.UserControls
             if (CompactCensusRefChanged != null)
                 CompactCensusRefChanged(null, EventArgs.Empty);
         }
-                
+
+        public static event EventHandler ReverseCountriesChanged;
+        protected static void OnReverseCountriesChanged()
+        {
+            if (ReverseCountriesChanged != null)
+                ReverseCountriesChanged(null, EventArgs.Empty);
+        }
+
         private void chkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)
 		{
 			Properties.GeneralSettings.Default.ReloadRequired = true;
@@ -189,5 +199,10 @@ namespace FTAnalyzer.UserControls
         {
             Properties.GeneralSettings.Default.ReloadRequired = true;
         }
-	}
+
+        private void chkReverseLocations_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.GeneralSettings.Default.ReloadRequired = true;
+        }
+    }
 }

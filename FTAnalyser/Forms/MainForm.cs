@@ -23,7 +23,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "5.0.0.0";
+        public static string VERSION = "5.0.0.0-beta1";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -64,6 +64,7 @@ namespace FTAnalyzer
             //GeneralSettings.StrictResidenceDatesChanged += new EventHandler(Options_StrictResidenceDatesChanged);
             GeneralSettings.TolerateInaccurateCensusChanged += new EventHandler(Options_TolerateInaccurateCensusChanged);
             GeneralSettings.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
+            GeneralSettings.ReverseCountriesChanged += new EventHandler(Options_ReverseCountriesChanged);
             this.Text = "Family Tree Analyzer v" + VERSION;
             SetHeightWidth();
             dgSurnames.AutoGenerateColumns = false;
@@ -785,14 +786,21 @@ namespace FTAnalyzer
         private void Options_UseResidenceAsCensusChanged(object sender, EventArgs e)
         {
             // need to refresh any census reports when option changes
+            QueryReloadData();
         }
 
         private void Options_StrictResidenceDatesChanged(object sender, EventArgs e)
         {
             // need to refresh any census reports when option changes
+            QueryReloadData();
         }
 
         private void Options_TolerateInaccurateCensusChanged(object sender, EventArgs e)
+        {
+            QueryReloadData();
+        }
+
+        private void Options_ReverseCountriesChanged(object sender, EventArgs e)
         {
             QueryReloadData();
         }

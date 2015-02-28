@@ -556,6 +556,11 @@ namespace FTAnalyzer
 
         #endregion
 
+        public string ReverseLocation(string location)
+        {
+            return string.Join(",", location.Split(',').Reverse());
+        }
+
         public void SetError(int number, FactError level, string message)
         {
             FactErrorNumber = number;
@@ -724,7 +729,10 @@ namespace FTAnalyzer
                     Comment = Comment.Replace("/", "");
             }
             Comment = EnhancedTextInfo.ToTitleCase(Comment);
-            Location = FactLocation.GetLocation(Place, latitude, longitude, FactLocation.Geocode.NOT_SEARCHED);
+            if (Properties.GeneralSettings.Default.ReverseLocations)
+                Location = FactLocation.GetLocation(ReverseLocation(Place), latitude, longitude, FactLocation.Geocode.NOT_SEARCHED);
+            else
+                Location = FactLocation.GetLocation(Place, latitude, longitude, FactLocation.Geocode.NOT_SEARCHED);
         }
 
         private bool SetCertificatePresent()

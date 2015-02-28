@@ -44,6 +44,7 @@
             this.chkCompactCensusRef = new System.Windows.Forms.CheckBox();
             this.chkUseAlias = new System.Windows.Forms.CheckBox();
             this.chkHideMissingTagged = new System.Windows.Forms.CheckBox();
+            this.chkReverseLocations = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownAge)).BeginInit();
             this.SuspendLayout();
@@ -156,10 +157,18 @@
             this.chkHideMissingTagged.Name = "chkHideMissingTagged";
             this.chkHideMissingTagged.UseVisualStyleBackColor = true;
             // 
+            // chkReverseLocations
+            // 
+            resources.ApplyResources(this.chkReverseLocations, "chkReverseLocations");
+            this.chkReverseLocations.Name = "chkReverseLocations";
+            this.chkReverseLocations.UseVisualStyleBackColor = true;
+            this.chkReverseLocations.CheckedChanged += new System.EventHandler(this.chkReverseLocations_CheckedChanged);
+            // 
             // GeneralSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkReverseLocations);
             this.Controls.Add(this.chkHideMissingTagged);
             this.Controls.Add(this.chkUseAlias);
             this.Controls.Add(this.chkCompactCensusRef);
@@ -197,6 +206,7 @@
         private System.Windows.Forms.CheckBox chkCompactCensusRef;
         private System.Windows.Forms.CheckBox chkUseAlias;
         private System.Windows.Forms.CheckBox chkHideMissingTagged;
+        private System.Windows.Forms.CheckBox chkReverseLocations;
 
 
 	}
