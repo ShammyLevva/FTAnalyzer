@@ -121,10 +121,12 @@ namespace FTAnalyzer
                             if (line.StartsWith("@"))
                             {
                                 token2 = firstWord(line);
-                                if (token2.Length == 1 || !token2.EndsWith("@"))
+                                if (token2.Length == 1 || (!token2.EndsWith("@") && !token2.EndsWith("@,")))
                                     throw new Exception("Bad pointer value");
-
-                                xref = token2.Substring(1, token2.Length - 2);
+                                if(token2.EndsWith("@,"))
+                                    xref = token2.Substring(1, token2.Length - 3);
+                                else
+                                    xref = token2.Substring(1, token2.Length - 2);
                                 line = remainder(line);
                             };
 
