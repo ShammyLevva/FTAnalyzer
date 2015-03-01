@@ -203,6 +203,11 @@ namespace FTAnalyzer
                 str = str.Replace("TO", "BEF"); // year will be one out
                 yearfix = +1;
             }
+            if (str.StartsWith(">"))
+                str = str.Replace(">", "AFT ");
+            if (str.StartsWith("<"))
+                str = str.Replace("<", "BEF ");
+            str = str.Replace("  ", " "); // fix issue if > or < has already got a space
             Match matcher;
             if (str.StartsWith("INT")) // Interpreted date but we can discard <<Date_Phrase>>
             {
