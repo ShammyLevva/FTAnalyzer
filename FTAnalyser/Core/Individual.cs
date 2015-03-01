@@ -70,8 +70,8 @@ namespace FTAnalyzer
             preferredFacts = new Dictionary<string, Fact>();
         }
 
-        public Individual(XmlNode node) 
-            : this ()
+        public Individual(XmlNode node)
+            : this()
         {
             IndividualID = node.Attributes["ID"].Value;
             Name = FamilyTree.GetText(node, "NAME");
@@ -133,16 +133,8 @@ namespace FTAnalyzer
             AddFacts(node, Fact.CUSTOM_FACT);
             AddFacts(node, Fact.UNKNOWN);
 
-            //IEnumerable<Fact> gedcomAges = facts.Where(x => x.GedcomAge != null);
-            //if (gedcomAges.Count() > 0 && !BirthDate.IsKnown && BirthDate.IsExact)
-            //{
-            //    // we have gedcom ages so add them to birth facts
-            //    foreach (Fact f in gedcomAges)
-            //    {
-            //        Fact newFact = new BirthFact(f.GedcomAge.GetBirthDate(f.FactDate));
-            //        facts.Add(newFact);
-            //    }
-            //}
+            AddCensusSourceFacts();
+            AddCensusNoteFacts();
         }
 
         internal Individual(Individual i)
@@ -692,7 +684,7 @@ namespace FTAnalyzer
                 return censusFacts.Count() - distinctFacts;
             }
         }
-        
+
         public bool MissingLostCousins(CensusDate censusDate, bool includeUnknownCountries)
         {
             bool isCensusDone = IsCensusDone(censusDate, includeUnknownCountries);
@@ -857,6 +849,37 @@ namespace FTAnalyzer
             if (fact.Preferred && !preferredFacts.ContainsKey(fact.FactType))
                 preferredFacts.Add(fact.FactType, fact);
             AddLocation(fact);
+        }
+
+        /// <summary>
+        /// Checks the individual's node data to see if any census references exist in the source records
+        /// </summary>
+        /// <param name="node"></param>
+        private void AddCensusSourceFacts()
+        {
+            foreach (Fact f in facts)
+            {
+                if (!f.IsCensusFact)
+                {
+                    foreach (FactSource s in f.Sources)
+                    {
+                        if (s.SourceText.ToUpper().Contains("CENSUS"))
+                            Console.WriteLine("We have a census");
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checks the notes against an individual to see if any census data exists
+        /// </summary>
+        /// <param name="node"></param>
+        private void AddCensusNoteFacts()
+        {
+            if (HasNotes && Notes.ToUpper().Contains("CENSUS"))
+            {
+                Console.WriteLine("Notes for " + Name + ": " + Notes);
+            }
         }
 
         private void AddLocation(Fact fact)
