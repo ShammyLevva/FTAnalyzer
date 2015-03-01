@@ -576,6 +576,12 @@ namespace FTAnalyzer
             return tag;
         }
 
+        public void UpdateFactDate(FactDate date)
+        {
+            if (!FactDate.IsKnown)
+                FactDate = date;
+        }
+
         private void CheckResidenceCensusDate()
         {
             if (FactDate.IsKnown && CensusDate.IsCensusYear(FactDate, true) && !CensusDate.IsCensusYear(FactDate, false))

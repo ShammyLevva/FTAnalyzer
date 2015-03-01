@@ -17,26 +17,27 @@ namespace FTAnalyzer
         //Class: RG14; Piece: 21983
         //Class: RG14; Piece: 12577; Schedule Number: 103
         //Year: 1900; Census Place: South Prairie, Pierce,Washington; Roll: T623_1748; Page: 4B; Enumeration District: 160.
-        private static readonly string EW_CENSUS_PATTERN = @"RG ?(\d{1,3})[;,] ?Piece:? ?(\d{1,5})[;,] ?Folio:? ?(\d{1,4})[a-z]?[;,] ?Page:? ?(\d{1,3})";
-        private static readonly string EW_CENSUS_PATTERN2 = @"RG ?(\d{1,3})[;,] ?Piece:? ?(\d{1,5})[;,] ?Folio:? ?(\d{1,4})";
-        private static readonly string EW_MISSINGCLASS_PATTERN = @"Piece:? ?(\d{1,5})[;,] ?Folio:? ?(\d{1,4})[a-z]?[;,] ?Page:? ?(\d{1,3})";
-        private static readonly string EW_MISSINGCLASS_PATTERN2 = @"Piece:? ?(\d{1,5})[;,] ?Folio:? ?(\d{1,4})";
+        private static readonly string EW_CENSUS_PATTERN = @"RG ?(\d{1,3})[;,]? ?Piece:? ?(\d{1,5})[;,]? ?Folio:? ?(\d{1,4})[a-z]?[;,]? ?Page:? ?(\d{1,3})";
+        private static readonly string EW_CENSUS_PATTERN2 = @"RG ?(\d{1,3})[;,]? ?Piece:? ?(\d{1,5})[;,]? ?Folio:? ?(\d{1,4})";
+        private static readonly string EW_MISSINGCLASS_PATTERN = @"Piece:? ?(\d{1,5})[;,]? ?Folio:? ?(\d{1,4})[a-z]?[;,]? ?Page:? ?(\d{1,3})";
+        private static readonly string EW_MISSINGCLASS_PATTERN2 = @"Piece:? ?(\d{1,5})[;,]? ?Folio:? ?(\d{1,4})";
         private static readonly string EW_CENSUS_PATTERN_FH = @"RG ?(\d{1,2})/(\d{1,5}) F(\d{1,4}) p(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_PATTERN = @"HO ?107[;,] ?Piece:? ?(\d{1,5})[;,] ?Folio:? ?(\d{1,4})[a-z]?[;,] ?Page:? ?(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_PATTERN2 = @"HO ?107[;,] ?Piece:? ?(\d{1,5})[;,] ?Book:? ?(\d{1,3})[;,].*Folio:? ?(\d{1,4})[a-z]?[;,] ?Page:? ?(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_PATTERN3 = @"HO ?107[;,] ?Piece:? ?(\d{1,5})[;,] ?Book:? ?(\d{1,3})[;,].*Page:? ?(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_PATTERN4 = @"HO ?107[;,] ?Piece:? ?(\d{1,5})[;,].*Page:? ?(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_PATTERN_FH = @"HO ?107/(\d{1,5})/(\d{1,3}) .*F(\d{1,3}) p(\d{1,3})";
+        private static readonly string EW_CENSUS_1841_51_PATTERN = @"HO ?107[;,]? ?Piece:? ?(\d{1,5})[;,]? ?Folio:? ?(\d{1,4})[a-z]?[;,]? ?Page:? ?(\d{1,3})";
+        private static readonly string EW_CENSUS_1841_51_PATTERN2 = @"HO ?107[;,]? ?Piece:? ?(\d{1,5})[;,]? ?Book:? ?(\d{1,3})[;,]?.*Folio:? ?(\d{1,4})[a-z]?[;,]? ?Page:? ?(\d{1,3})";
+        private static readonly string EW_CENSUS_1841_51_PATTERN3 = @"HO ?107[;,]? ?Piece:? ?(\d{1,5})[;,]? ?Book/Folio:? ?(\d{1,4})[a-z]?/(\d{1,4})[a-z]?[;,]? ?Page:? ?(\d{1,3})";
+        private static readonly string EW_CENSUS_1841_51_PATTERN4 = @"HO ?107[;,]? ?Piece:? ?(\d{1,5})[;,]? ?Book:? ?(\d{1,3})[;,]?.*Page:? ?(\d{1,3})";
+        private static readonly string EW_CENSUS_1841_51_PATTERN5 = @"HO ?107[;,]? ?Piece:? ?(\d{1,5})[;,]?.*Page:? ?(\d{1,3})";
+        private static readonly string EW_CENSUS_1841_51_PATTERN_FH = @"HO ?107/(\d{1,5})/(\d{1,3}) .*F(\d{1,3}) p(\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN = @"RG ?14 ?PN(\d{1,6}) .*SN(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN2 = @"RG ?14[;,] ?Piece:? ?(\d{1,6})[;,] ?SN:? ?(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN3 = @"RG ?14[;,] ?Piece:? ?(\d{1,6})[;,] ?Schedule Number:? ?(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN4 = @"RG ?14[;,] ?Piece:? ?(\d{1,6})[;,]?$";
-        private static readonly string EW_CENSUS_1911_PATTERN5 = @"RG ?14[;,] ?Piece:? ?(\d{1,6})[;,] ?Page:? ?(\d{1,3})";
+        private static readonly string EW_CENSUS_1911_PATTERN2 = @"RG ?14[;,]? ?Piece:? ?(\d{1,6})[;,]? ?SN:? ?(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN3 = @"RG ?14[;,]? ?Piece:? ?(\d{1,6})[;,]? ?Schedule Number:? ?(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN4 = @"RG ?14[;,]? ?Piece:? ?(\d{1,6})[;,]?$";
+        private static readonly string EW_CENSUS_1911_PATTERN5 = @"RG ?14[;,]? ?Piece:? ?(\d{1,6})[;,]? ?Page:? ?(\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN_FH = @"RG ?14/PN(\d{1,6}) .*SN(\d{1,4})";
-        private static readonly string SCOT_CENSUS_PATTERN = @"Parish:? ?([A-Z .'-]+)[;,] ?ED:? ?(\d{1,3}[AB]?)[;,] ?Page:? ?(\d{1,4})[;,] ?Line:? ?(\d{1,2})";
+        private static readonly string SCOT_CENSUS_PATTERN = @"Parish:? ?([A-Z .'-]+)[;,]? ?ED:? ?(\d{1,3}[AB]?)[;,]? ?Page:? ?(\d{1,4})[;,]? ?Line:? ?(\d{1,2})";
         private static readonly string SCOT_CENSUS_PATTERN2 = @"(\d{3}/\d{1,2}[AB]?) (\d{3}/\d{2}) (\d{3,4})";
         private static readonly string SCOT_CENSUS_PATTERN3 = @"(\d{3}[AB]?)/(\d{2}[AB]?) Page:? ?(\d{1,4})";
-        private static readonly string US_CENSUS_PATTERN = @"Year: ?(\d{4});? ?Census Place:? ?(.*)[;,] ?Roll:? ?(.*)[;,] ?Page:? ?(\d{1,4}[AB]?);? ?(Enumeration District:? ?(.*))?";
+        private static readonly string US_CENSUS_PATTERN = @"Year: ?(\d{4});? ?Census Place:? ?(.*)[;,]? ?Roll:? ?(.*)[;,]? ?Page:? ?(\d{1,4}[AB]?);? ?(Enumeration District:? ?(.*))?";
 
         public enum ReferenceStatus { BLANK = 0, UNRECOGNISED = 1, INCOMPLETE = 2, GOOD = 3 };
         private static readonly string MISSING = "Missing";
@@ -44,6 +45,7 @@ namespace FTAnalyzer
         private string unknownCensusRef;
         private Fact fact;
         private string Place { get; set; }
+        private string Class { get; set; }
         private string Roll { get; set; }
         private string Piece { get; set; }
         private string Folio { get; set; }
@@ -55,10 +57,12 @@ namespace FTAnalyzer
         
         public bool IsUKCensus { get; private set; }
         public ReferenceStatus Status { get; private set; }
-
+        public FactDate CensusYear { get; private set; }
+        
         public CensusReference(Fact fact, XmlNode node)
         {
             this.fact = fact;
+            this.Class = string.Empty;
             this.Roll = string.Empty;
             this.Place = string.Empty;
             this.Piece = string.Empty;
@@ -73,6 +77,13 @@ namespace FTAnalyzer
             this.unknownCensusRef = string.Empty;
             if (GetCensusReference(node))
                 unknownCensusRef = string.Empty;
+            if (fact.FactDate.IsKnown)
+                this.CensusYear = fact.FactDate;
+            else
+            {
+                this.CensusYear = GetCensusYearFromReference();
+                this.fact.UpdateFactDate(this.CensusYear);
+            }
         }
 
         private bool GetCensusReference(XmlNode n)
@@ -84,6 +95,7 @@ namespace FTAnalyzer
                 Match matcher = Regex.Match(text, EW_CENSUS_PATTERN, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
+                    this.Class = "RG" + matcher.Groups[1].ToString();
                     this.Piece = matcher.Groups[2].ToString();
                     this.Folio = matcher.Groups[3].ToString();
                     this.Page = matcher.Groups[4].ToString();
@@ -94,6 +106,7 @@ namespace FTAnalyzer
                 matcher = Regex.Match(text, EW_CENSUS_PATTERN2, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
+                    this.Class = "RG" + matcher.Groups[1].ToString();
                     this.Piece = matcher.Groups[2].ToString();
                     this.Folio = matcher.Groups[3].ToString();
                     this.Page = MISSING;
@@ -101,9 +114,10 @@ namespace FTAnalyzer
                     this.Status = ReferenceStatus.INCOMPLETE;
                     return true;
                 }
-                matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN, RegexOptions.IgnoreCase);
+                matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
+                    this.Class = "HO107";
                     this.Piece = matcher.Groups[1].ToString();
                     this.Folio = matcher.Groups[2].ToString();
                     this.Page = matcher.Groups[3].ToString();
@@ -111,9 +125,10 @@ namespace FTAnalyzer
                     this.Status = ReferenceStatus.GOOD;
                     return true;
                 }
-                matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN2, RegexOptions.IgnoreCase);
+                matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN2, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
+                    this.Class = "HO107";
                     this.Piece = matcher.Groups[1].ToString();
                     this.Book = matcher.Groups[2].ToString();
                     this.Folio = matcher.Groups[3].ToString();
@@ -122,9 +137,22 @@ namespace FTAnalyzer
                     this.Status = ReferenceStatus.GOOD;
                     return true;
                 }
-                matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN3, RegexOptions.IgnoreCase);
+                matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN3, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
+                    this.Class = "HO107";
+                    this.Piece = matcher.Groups[1].ToString();
+                    this.Book = matcher.Groups[2].ToString();
+                    this.Folio = matcher.Groups[3].ToString(); ;
+                    this.Page = matcher.Groups[4].ToString();
+                    this.IsUKCensus = true;
+                    this.Status = ReferenceStatus.GOOD;
+                    return true;
+                }
+                matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN4, RegexOptions.IgnoreCase);
+                if (matcher.Success)
+                {
+                    this.Class = "HO107";
                     this.Piece = matcher.Groups[1].ToString();
                     this.Book = matcher.Groups[2].ToString();
                     this.Folio = MISSING;
@@ -133,9 +161,10 @@ namespace FTAnalyzer
                     this.Status = ReferenceStatus.INCOMPLETE;
                     return true;
                 }
-                matcher = Regex.Match(text, EW_CENSUS_1841_PATTERN4, RegexOptions.IgnoreCase);
+                matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN5, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
+                    this.Class = "HO107";
                     this.Piece = matcher.Groups[1].ToString();
                     this.Book = MISSING;
                     this.Folio = MISSING;
@@ -147,6 +176,7 @@ namespace FTAnalyzer
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
+                    this.Class = "RG14";
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
                     this.IsUKCensus = true;
@@ -156,6 +186,7 @@ namespace FTAnalyzer
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN2, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
+                    this.Class = "RG14";
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
                     this.IsUKCensus = true;
@@ -165,6 +196,7 @@ namespace FTAnalyzer
                 matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
+                    this.Class = "RG14";
                     this.Piece = matcher.Groups[1].ToString();
                     this.Schedule = matcher.Groups[2].ToString();
                     this.IsUKCensus = true;
@@ -222,6 +254,7 @@ namespace FTAnalyzer
                 matcher = Regex.Match(text, US_CENSUS_PATTERN, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
+                    this.Class = "US" + matcher.Groups[1].ToString();
                     this.Place = matcher.Groups[2].ToString();
                     this.Roll = matcher.Groups[3].ToString();
                     this.Page = matcher.Groups[4].ToString();
@@ -261,7 +294,7 @@ namespace FTAnalyzer
             // now check sources to see if census reference is in title page
             foreach (FactSource fs in fact.Sources)
             {
-                Match matcher = Regex.Match(fs.SourceTitle, EW_CENSUS_1841_PATTERN_FH, RegexOptions.IgnoreCase);
+                Match matcher = Regex.Match(fs.SourceTitle, EW_CENSUS_1841_51_PATTERN_FH, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
                     this.Piece = matcher.Groups[1].ToString();
@@ -293,6 +326,34 @@ namespace FTAnalyzer
                 }
             }
             return false;
+        }
+
+        private FactDate GetCensusYearFromReference()
+        {
+            if (this.Class.Equals("HO107"))
+            {
+                int piecenumber = 0;
+                Int32.TryParse(this.Piece, out piecenumber);
+                if (piecenumber > 1465) // piece numbers go 1-1465 for 1841 and 1466+ for 1851.
+                    return CensusDate.UKCENSUS1851;
+                else
+                    return CensusDate.UKCENSUS1841;
+            }
+            if (this.Class.Equals("RG9"))
+                return CensusDate.UKCENSUS1861;
+            if (this.Class.Equals("RG10"))
+                return CensusDate.UKCENSUS1871;
+            if (this.Class.Equals("RG11"))
+                return CensusDate.UKCENSUS1881;
+            if (this.Class.Equals("RG12"))
+                return CensusDate.UKCENSUS1891;
+            if (this.Class.Equals("RG13"))
+                return CensusDate.UKCENSUS1901;
+            if (this.Class.Equals("RG14"))
+                return CensusDate.UKCENSUS1911;
+            if (this.Class.StartsWith("US"))
+                return CensusDate.GetUSCensusDateFromReference(this.Class);
+            return FactDate.UNKNOWN_DATE;
         }
 
         public string Reference
