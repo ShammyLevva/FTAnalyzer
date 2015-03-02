@@ -865,7 +865,6 @@ namespace FTAnalyzer
         /// <summary>
         /// Checks the individual's node data to see if any census references exist in the source records
         /// </summary>
-        /// <param name="node"></param>
         private void AddCensusSourceFacts()
         {
             foreach (Fact f in facts)
@@ -885,7 +884,6 @@ namespace FTAnalyzer
         /// <summary>
         /// Checks the notes against an individual to see if any census data exists
         /// </summary>
-        /// <param name="node"></param>
         private void AddCensusNoteFacts()
         {
             if (HasNotes && Notes.ToUpper().Contains("CENSUS"))
