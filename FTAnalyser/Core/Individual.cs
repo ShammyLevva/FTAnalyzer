@@ -613,6 +613,17 @@ namespace FTAnalyzer
             return false;
         }
 
+        public bool CensusFactExists(FactDate when)
+        {
+            if (when == null) return false;
+            foreach (Fact f in facts)
+            {
+                if (f.IsValidCensus(when))
+                    return true;
+            }
+            return false;
+        }
+
         public bool IsCensusDone(CensusDate when) { return IsCensusDone(when, true, true); }
         public bool IsCensusDone(CensusDate when, bool includeUnknownCountries) { return IsCensusDone(when, includeUnknownCountries, true); }
         public bool IsCensusDone(CensusDate when, bool includeUnknownCountries, bool checkCountry)
@@ -859,12 +870,13 @@ namespace FTAnalyzer
         {
             foreach (Fact f in facts)
             {
-                if (!f.IsCensusFact)
+                if (!f.IsCensusFact && !CensusFactExists(f.FactDate))
                 {
                     foreach (FactSource s in f.Sources)
                     {
-                        if (s.SourceText.ToUpper().Contains("CENSUS"))
-                            Console.WriteLine("We have a census");
+                        CensusReference cr = new CensusReference(IndividualID, s.SourceText);
+                        if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD))
+                            AddFact(cr.Fact);
                     }
                 }
             }
@@ -884,7 +896,7 @@ namespace FTAnalyzer
                 {
                     checkNotes = false;
                     CensusReference cr = new CensusReference(IndividualID, notes);
-                    if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD))
+                    if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD) && !CensusFactExists(cr.Fact.FactDate))
                     {
                         AddFact(cr.Fact);
                         int pos = notes.IndexOf(cr.matchstring);
