@@ -878,9 +878,23 @@ namespace FTAnalyzer
         {
             if (HasNotes && Notes.ToUpper().Contains("CENSUS"))
             {
-                CensusReference cr = new CensusReference(IndividualID, Notes);
-                if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD))
-                    AddFact(cr.Fact);
+                bool checkNotes = true;
+                string notes = Notes;
+                while (checkNotes)
+                {
+                    checkNotes = false;
+                    CensusReference cr = new CensusReference(IndividualID, notes);
+                    if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD))
+                    {
+                        AddFact(cr.Fact);
+                        int pos = notes.IndexOf(cr.matchstring);
+                        if (pos != -1 && pos < notes.Length - cr.matchstring.Length -1)
+                        {
+                            checkNotes = true;
+                            notes = notes.Substring(pos + cr.matchstring.Length + 1);
+                        }
+                    }
+                }
             }
         }
 
@@ -921,6 +935,7 @@ namespace FTAnalyzer
                 foreach (Family marriage in familiesAsParent.OrderBy(f => f.MarriageDate))
                 {
                     if ((marriage.MarriageDate.Equals(date) || marriage.MarriageDate.IsBefore(date)) && marriage.Husband != null)
+                  
                         name = marriage.Husband.surname;
                 }
             }
