@@ -582,6 +582,12 @@ namespace FTAnalyzer
                 FactDate = date;
         }
 
+        public void SetCensusReference(CensusReference cr)
+        {
+            if (CensusReference == null)
+                this.CensusReference = cr;
+        }
+
         private void CheckResidenceCensusDate()
         {
             if (FactDate.IsKnown && CensusDate.IsCensusYear(FactDate, true) && !CensusDate.IsCensusYear(FactDate, false))

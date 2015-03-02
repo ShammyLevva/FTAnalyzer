@@ -878,7 +878,9 @@ namespace FTAnalyzer
         {
             if (HasNotes && Notes.ToUpper().Contains("CENSUS"))
             {
-                Console.WriteLine("Notes for " + Name + ": " + Notes);
+                CensusReference cr = new CensusReference(IndividualID, Notes);
+                if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD))
+                    AddFact(cr.Fact);
             }
         }
 

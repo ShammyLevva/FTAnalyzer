@@ -43,7 +43,6 @@ namespace FTAnalyzer
         private static readonly string MISSING = "Missing";
 
         private string unknownCensusRef;
-        private Fact fact;
         private string Place { get; set; }
         private string Class { get; set; }
         private string Roll { get; set; }
@@ -54,14 +53,14 @@ namespace FTAnalyzer
         private string Schedule { get; set; }
         private string Parish { get; set; }
         private string ED { get; set; }
-        
+
+        public Fact Fact { get; private set; }
         public bool IsUKCensus { get; private set; }
         public ReferenceStatus Status { get; private set; }
         public FactDate CensusYear { get; private set; }
         
-        public CensusReference(Fact fact, XmlNode node)
+        private CensusReference()
         {
-            this.fact = fact;
             this.Class = string.Empty;
             this.Roll = string.Empty;
             this.Place = string.Empty;
@@ -75,6 +74,12 @@ namespace FTAnalyzer
             this.IsUKCensus = false;
             this.Status = ReferenceStatus.BLANK;
             this.unknownCensusRef = string.Empty;
+        }
+
+        public CensusReference(Fact fact, XmlNode node)
+            : this()
+        {
+            this.Fact = fact;
             if (GetCensusReference(node))
                 unknownCensusRef = string.Empty;
             if (fact.FactDate.IsKnown)
@@ -82,14 +87,30 @@ namespace FTAnalyzer
             else
             {
                 this.CensusYear = GetCensusYearFromReference();
-                this.fact.UpdateFactDate(this.CensusYear);
+                this.Fact.UpdateFactDate(this.CensusYear);
             }
+        }
+
+        public CensusReference(string individualID, string notes)
+            : this()
+        {
+            this.Fact = new Fact(individualID, Fact.CENSUS, FactDate.UNKNOWN_DATE, "Fact created by FTAnalyzer from indivdiduals notes");
+            if(GetCensusReference(notes))
+                unknownCensusRef = string.Empty;
+            this.CensusYear = GetCensusYearFromReference();
+            this.Fact.UpdateFactDate(this.CensusYear);
+            this.Fact.SetCensusReference(this);
         }
 
         private bool GetCensusReference(XmlNode n)
         {
             // aggressively remove multi spaces to allow for spaces in the census references
             string text = FamilyTree.GetText(n, "PAGE").Replace("   ", " ").Replace("  ", " ").Replace("  ", " ");
+            return GetCensusReference(text);
+        }
+
+        private bool GetCensusReference(string text)
+        {
             if (text.Length > 0)                       
             {                                          
                 Match matcher = Regex.Match(text, EW_CENSUS_PATTERN, RegexOptions.IgnoreCase);
@@ -292,7 +313,7 @@ namespace FTAnalyzer
                     unknownCensusRef += "\n" + text;
             }
             // now check sources to see if census reference is in title page
-            foreach (FactSource fs in fact.Sources)
+            foreach (FactSource fs in Fact.Sources)
             {
                 Match matcher = Regex.Match(fs.SourceTitle, EW_CENSUS_1841_51_PATTERN_FH, RegexOptions.IgnoreCase);
                 if (matcher.Success)
@@ -369,15 +390,15 @@ namespace FTAnalyzer
                 }
                 else if (Piece.Length > 0)
                 {
-                    if (Countries.IsEnglandWales(fact.Location.Country) || fact.IsOverseasUKCensus(fact.Location.Country))
+                    if (Countries.IsEnglandWales(Fact.Location.Country) || Fact.IsOverseasUKCensus(Fact.Location.Country))
                     {
-                        if ((fact.FactDate.Overlaps(CensusDate.UKCENSUS1851) || fact.FactDate.Overlaps(CensusDate.UKCENSUS1861) || fact.FactDate.Overlaps(CensusDate.UKCENSUS1871) ||
-                            fact.FactDate.Overlaps(CensusDate.UKCENSUS1881) || fact.FactDate.Overlaps(CensusDate.UKCENSUS1891) || fact.FactDate.Overlaps(CensusDate.UKCENSUS1901)))
+                        if ((Fact.FactDate.Overlaps(CensusDate.UKCENSUS1851) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1861) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1871) ||
+                            Fact.FactDate.Overlaps(CensusDate.UKCENSUS1881) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1891) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1901)))
                             if (Properties.GeneralSettings.Default.UseCompactCensusRef)
                                 return Piece + "/" + Folio + "/" + Page;
                             else
                                 return "Piece: " + Piece + ", Folio: " + Folio + ", Page: " + Page;
-                        if (fact.FactDate.Overlaps(CensusDate.UKCENSUS1841))
+                        if (Fact.FactDate.Overlaps(CensusDate.UKCENSUS1841))
                         {
                             if (Book.Length > 0)
                                 if (Properties.GeneralSettings.Default.UseCompactCensusRef)
@@ -390,7 +411,7 @@ namespace FTAnalyzer
                                 else
                                     return "Piece: " + Piece + ", Book: see census image (stamped on the census page after the piece number), Folio: " + Folio + ", Page: " + Page;
                         }
-                        if (fact.FactDate.Overlaps(CensusDate.UKCENSUS1911))
+                        if (Fact.FactDate.Overlaps(CensusDate.UKCENSUS1911))
                         {
                             if (Schedule.Length > 0)
                                 if (Properties.GeneralSettings.Default.UseCompactCensusRef)
@@ -407,9 +428,9 @@ namespace FTAnalyzer
                 }
                 else if (Parish.Length > 0)
                 {
-                    if (fact.Location.Country.Equals(Countries.SCOTLAND) && (fact.FactDate.Overlaps(CensusDate.UKCENSUS1851) || fact.FactDate.Overlaps(CensusDate.UKCENSUS1861) ||
-                        fact.FactDate.Overlaps(CensusDate.UKCENSUS1871) || fact.FactDate.Overlaps(CensusDate.UKCENSUS1881) || fact.FactDate.Overlaps(CensusDate.UKCENSUS1891) ||
-                        fact.FactDate.Overlaps(CensusDate.UKCENSUS1901)))
+                    if (Fact.Location.Country.Equals(Countries.SCOTLAND) && (Fact.FactDate.Overlaps(CensusDate.UKCENSUS1851) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1861) ||
+                        Fact.FactDate.Overlaps(CensusDate.UKCENSUS1871) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1881) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1891) ||
+                        Fact.FactDate.Overlaps(CensusDate.UKCENSUS1901)))
                         if (Properties.GeneralSettings.Default.UseCompactCensusRef)
                             return Parish + Parishes.Reference(Parish) + "/" + ED + "/" + Page;
                         else
