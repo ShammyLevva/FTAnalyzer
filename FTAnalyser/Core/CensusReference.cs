@@ -96,7 +96,7 @@ namespace FTAnalyzer
         public CensusReference(string individualID, string notes)
             : this()
         {
-            this.Fact = new Fact(individualID, Fact.CENSUS, FactDate.UNKNOWN_DATE, "Fact created by FTAnalyzer from indivdiduals notes");
+            this.Fact = new Fact(individualID, Fact.CENSUS_FTA, FactDate.UNKNOWN_DATE, "Fact created by FTAnalyzer from indivdiduals notes");
             if(GetCensusReference(notes))
                 unknownCensusRef = string.Empty;
             this.CensusYear = GetCensusYearFromReference();

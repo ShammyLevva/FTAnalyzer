@@ -14,7 +14,7 @@ namespace FTAnalyzer
     {
         public const string ADOPTION = "ADOP", ANNULMENT = "ANUL", BAPTISM = "BAPM",
                 BAR_MITZVAH = "BARM", BAS_MITZVAH = "BASM", BIRTH = "BIRT",
-                BLESSING = "BLESS", BURIAL = "BURI", CENSUS = "CENS",
+                BLESSING = "BLESS", BURIAL = "BURI", CENSUS = "CENS", CENSUS_FTA = "_CENSFTA",
                 CHRISTENING = "CHR", ADULT_CHRISTENING = "CHRA", CONFIRMATION = "CONF",
                 CREMATION = "CREM", DEATH = "DEAT", PHYSICAL_DESC = "DSCR",
                 DIVORCE = "DIV", DIVORCE_FILED = "DIVF", EDUCATION = "EDUC",
@@ -172,6 +172,7 @@ namespace FTAnalyzer
                 case BLESSING: return "Blessing";
                 case BURIAL: return "Burial";
                 case CENSUS: return "Census";
+                case CENSUS_FTA: return "Census (FTAnalyzer)";
                 case CHRISTENING: return "Christening";
                 case ADULT_CHRISTENING: return "Adult christening";
                 case CONFIRMATION: return "Confirmation";
@@ -491,7 +492,7 @@ namespace FTAnalyzer
         {
             get
             {
-                if (FactType == CENSUS) return true;
+                if (FactType == CENSUS || FactType == CENSUS_FTA) return true;
                 if (FactType == RESIDENCE && Properties.GeneralSettings.Default.UseResidenceAsCensus)
                     return CensusDate.IsCensusYear(FactDate, Properties.GeneralSettings.Default.TolerateInaccurateCensusDate);
                 return false;

@@ -416,6 +416,7 @@ namespace FTAnalyzer
         private void CountCensusFacts()
         {
             int censusFacts = 0;
+            int censusFTAFacts = 0;
             int resiFacts = 0;
             int lostCousinsFacts = 0;
             int censusWarnAllow = 0;
@@ -429,6 +430,7 @@ namespace FTAnalyzer
             foreach (Individual ind in individuals)
             {
                 censusFacts += ind.FactCount(Fact.CENSUS);
+                censusFTAFacts += ind.FactCount(Fact.CENSUS_FTA);
                 censusWarnAllow += ind.ErrorFactCount(Fact.CENSUS, Fact.FactError.WARNINGALLOW);
                 censusWarnIgnore += ind.ErrorFactCount(Fact.CENSUS, Fact.FactError.WARNINGIGNORE);
                 censusErrors += ind.ErrorFactCount(Fact.CENSUS, Fact.FactError.ERROR);
@@ -453,6 +455,7 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText(censusErrors + " errors (data discarded), ");
             xmlErrorbox.AppendText((censusFacts + censusWarnAllow) + " usable facts loaded)");
 
+            xmlErrorbox.AppendText("\nCreated " + censusFTAFacts + " census facts from individuals notes in GEDCOM File");
             xmlErrorbox.AppendText("\nFound " + resiTotal + " residence facts in GEDCOM File (" + resiCensus + " treated as Census facts) ");
             if (resiWarnAllow > 0)
             {
@@ -470,13 +473,14 @@ namespace FTAnalyzer
             if (lostCousinsErrors > 0)
                 xmlErrorbox.AppendText(lostCousinsErrors + " errors (data discarded), ");
             xmlErrorbox.AppendText((lostCousinsFacts + lostCousinsWarnAllow) + " usable facts loaded)\n");
-            if (censusFacts == 0 && resiCensus == 0 && censusWarnAllow == 0)
+            if (censusFacts == 0 && resiCensus == 0 && censusWarnAllow == 0 && censusFTAFacts == 0)
             {
-                xmlErrorbox.AppendText("\nFound no census or suitable residence facts in GEDCOM File.\n");
-                xmlErrorbox.AppendText("This is probably because you have recorded census facts as notes\n");
-                xmlErrorbox.AppendText("This will mean that the census report will show everyone as not yet found on census\n");
-                xmlErrorbox.AppendText("and the Lost Cousins report will report no-one with a census needing to be entered\n");
-                xmlErrorbox.AppendText("onto your Lost Cousins My Ancestors page.\n");
+                xmlErrorbox.AppendText("\nFound no census or suitable residence facts in GEDCOM File and no recognisable\n");
+                xmlErrorbox.AppendText("census references in notes or in source records stored against an individual.\n\n");
+                xmlErrorbox.AppendText("The most likely reason is that you have recorded census facts as notes and have\n");
+                xmlErrorbox.AppendText("not recorded any census references. This will mean that the census report will\n");
+                xmlErrorbox.AppendText("show everyone as not yet found on census and the Lost Cousins report will show\n");
+                xmlErrorbox.AppendText("no-one with a census needing to be entered onto your Lost Cousins My Ancestors page.\n");
             }
         }
 
