@@ -455,7 +455,7 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText(censusErrors + " errors (data discarded), ");
             xmlErrorbox.AppendText((censusFacts + censusWarnAllow) + " usable facts loaded)");
 
-            xmlErrorbox.AppendText("\nCreated " + censusFTAFacts + " census facts from individuals notes in GEDCOM File");
+            xmlErrorbox.AppendText("\nCreated " + censusFTAFacts + " census facts from individuals notes and source references in GEDCOM File");
             xmlErrorbox.AppendText("\nFound " + resiTotal + " residence facts in GEDCOM File (" + resiCensus + " treated as Census facts) ");
             if (resiWarnAllow > 0)
             {
