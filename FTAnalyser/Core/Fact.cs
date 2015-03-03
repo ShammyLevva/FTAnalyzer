@@ -587,6 +587,8 @@ namespace FTAnalyzer
         {
             if (CensusReference == null)
                 this.CensusReference = cr;
+            if (Location.IsBlank)
+                Location = FactLocation.GetLocation(cr.Country);
             if (Comment.Length == 0)
                 Comment = comment;
         }

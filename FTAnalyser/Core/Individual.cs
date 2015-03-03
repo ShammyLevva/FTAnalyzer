@@ -667,8 +667,13 @@ namespace FTAnalyzer
                     if (this.BestLocation(when).CensusCountryMatches(when.Country, includeUnknownCountries))
                         return true;
                     Fact censusFact = LostCousinsCensusFact(f);
-                    if (Countries.IsUnitedKingdom(when.Country) && censusFact != null && censusFact.IsOverseasUKCensus(censusFact.Country))
-                        return true;
+                    if(censusFact != null)
+                    {
+                        if (when.Country.Equals(Countries.SCOTLAND) && Countries.IsEnglandWales(censusFact.Country))
+                            return false;
+                        if (Countries.IsUnitedKingdom(when.Country) && censusFact.IsOverseasUKCensus(censusFact.Country))
+                            return true;
+                    }
                 }
             }
             return false;
@@ -897,10 +902,10 @@ namespace FTAnalyzer
                     if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD) && !CensusFactExists(cr.Fact.FactDate))
                     {
                         AddFact(cr.Fact);
-                        int pos = notes.IndexOf(cr.matchstring);
+                        int pos = notes.IndexOf(cr.MatchString);
                         if (pos != -1)
                         {
-                            notes = notes.Remove(pos, cr.matchstring.Length);
+                            notes = notes.Remove(pos, cr.MatchString.Length);
                             checkNotes = notes.Length > 0;
                         }
                     }
