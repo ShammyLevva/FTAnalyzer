@@ -886,7 +886,7 @@ namespace FTAnalyzer
         /// </summary>
         private void AddCensusNoteFacts()
         {
-            if (HasNotes && Notes.ToUpper().Contains("CENSUS"))
+            if (HasNotes)
             {
                 bool checkNotes = true;
                 string notes = Notes;
