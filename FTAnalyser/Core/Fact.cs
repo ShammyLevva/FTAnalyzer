@@ -583,10 +583,12 @@ namespace FTAnalyzer
                 FactDate = date;
         }
 
-        public void SetCensusReference(CensusReference cr)
+        public void SetCensusReferenceDetails(CensusReference cr, string comment)
         {
             if (CensusReference == null)
                 this.CensusReference = cr;
+            if (Comment.Length == 0)
+                Comment = comment;
         }
 
         private void CheckResidenceCensusDate()

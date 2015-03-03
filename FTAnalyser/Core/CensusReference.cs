@@ -99,12 +99,14 @@ namespace FTAnalyzer
         public CensusReference(string individualID, string notes)
             : this()
         {
-            this.Fact = new Fact(individualID, Fact.CENSUS_FTA, FactDate.UNKNOWN_DATE, "Fact created by FTAnalyzer from indivdiduals notes");
-            if(GetCensusReference(notes))
+            this.Fact = new Fact(individualID, Fact.CENSUS_FTA, FactDate.UNKNOWN_DATE);
+            if (GetCensusReference(notes))
+            {
                 unknownCensusRef = string.Empty;
-            this.CensusYear = GetCensusYearFromReference();
-            this.Fact.UpdateFactDate(this.CensusYear);
-            this.Fact.SetCensusReference(this);
+                this.CensusYear = GetCensusYearFromReference();
+                this.Fact.UpdateFactDate(this.CensusYear);
+                this.Fact.SetCensusReferenceDetails(this, "Fact created by FTAnalyzer after finding census ref: " + this.matchstring + " in the notes/sources for this individual");
+            }
         }
 
         private bool GetCensusReference(XmlNode n)
@@ -145,6 +147,7 @@ namespace FTAnalyzer
                 matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN, RegexOptions.IgnoreCase);
                 if (matcher.Success)
                 {
+              
                     this.Class = "HO107";
                     this.Piece = matcher.Groups[1].ToString();
                     this.Folio = matcher.Groups[2].ToString();
