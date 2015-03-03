@@ -898,10 +898,10 @@ namespace FTAnalyzer
                     {
                         AddFact(cr.Fact);
                         int pos = notes.IndexOf(cr.matchstring);
-                        if (pos != -1 && pos < notes.Length - cr.matchstring.Length -1)
+                        if (pos != -1)
                         {
-                            checkNotes = true;
-                            notes = notes.Substring(pos + cr.matchstring.Length + 1);
+                            notes = notes.Remove(pos, cr.matchstring.Length);
+                            checkNotes = notes.Length > 0;
                         }
                     }
                 }
