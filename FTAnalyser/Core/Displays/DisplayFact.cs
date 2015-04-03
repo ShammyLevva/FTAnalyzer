@@ -46,12 +46,13 @@ namespace FTAnalyzer
         public string SurnameAtDate { get { return Ind == null ? string.Empty : Ind.SurnameAtDate(FactDate); } }
         public bool Preferred { get { return Fact.Preferred; } }
         public bool IgnoreFact { get; set; }
-        public string FactHash { get { return Ind.IndividualID + Fact.Preferred + Fact.FactTypeDescription + Fact.DateString + Fact.Location.GEDCOMLocation; } }
+        public string FactHash { get { return Ind == null ? Fact.Preferred + Fact.FactTypeDescription + Fact.DateString + Fact.Location.GEDCOMLocation :
+                                                            Ind.IndividualID + Fact.Preferred + Fact.FactTypeDescription + Fact.DateString + Fact.Location.GEDCOMLocation; } }
         
         public int CompareTo(object obj)
         {
             DisplayFact that = (DisplayFact)obj;
-            if (this.FactDate == that.FactDate)
+            if (this.FactDate == that.FactDate && Ind != null)
                 return this.Ind.CompareTo(that.Ind);
             return this.FactDate.CompareTo(that.FactDate);
         }
@@ -69,7 +70,7 @@ namespace FTAnalyzer
 
         public override string ToString()
         {
-            return IndividualID + ": " + Forenames + " " + Surname + ", " + Fact.ToString();
+            return Ind == null ? Fact.FactDate + " " + Fact.Comment : IndividualID + ": " + Forenames + " " + Surname + ", " + Fact.ToString();
         }
     }
 }

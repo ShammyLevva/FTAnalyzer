@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ using Ionic.Zip;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using GeoAPI.Geometries;
+using System.Net;
 
 namespace FTAnalyzer
 {
@@ -32,6 +34,7 @@ namespace FTAnalyzer
         private IDictionary<StandardisedName, StandardisedName> names;
         private ISet<string> unknownFactTypes;
         private RichTextBox xmlErrorbox = new RichTextBox();
+        private RichTextBox todaysText = new RichTextBox();
         private IList<DataErrorGroup> dataErrorTypes;
         private SortableBindingList<IDisplayLocation>[] displayLocations;
         private SortableBindingList<IDisplayLooseDeath> looseDeaths;
@@ -549,6 +552,12 @@ namespace FTAnalyzer
         {
             get { return xmlErrorbox; }
             set { xmlErrorbox = value; }
+        }
+
+        public RichTextBox TodaysText
+        {
+            get { return todaysText; }
+            set { todaysText = value; }
         }
 
         public List<MapLocation> AllMapLocations
@@ -2612,10 +2621,120 @@ namespace FTAnalyzer
         }
         #endregion
 
+        #region Today
+        public void AddTodaysFacts(DateTime chosenDate, bool wholeMonth, ProgressBar bar, Label lab)
+        {
+            lab.Text = "Loading GEDCOM Events";
+            if(wholeMonth)
+                TodaysText.Rtf = @"{\rtf1\ansi \b GEDCOM and World Events this month\b0.}";
+            else
+                TodaysText.Rtf = @"{\rtf1\ansi \b GEDCOM and World Events on this date\b0.}";
+            TodaysText.AppendText("\n\n");
+            List<DisplayFact> todaysFacts = new List<DisplayFact>();
+            bar.Maximum = individuals.Count;
+            foreach (Individual i in individuals)
+            {
+                foreach (Fact f in i.AllFacts)
+                    if (!f.Created && f.FactDate.IsExact && f.FactDate.StartDate.Month == chosenDate.Month)
+                        if (wholeMonth || (!wholeMonth && f.FactDate.StartDate.Day == chosenDate.Day))
+                            todaysFacts.Add(new DisplayFact(i, f));
+                bar.Value++;
+                Application.DoEvents();
+            }
+            bar.Value = 0;
+            lab.Text = "Loading World Events";
+            todaysFacts.Sort();
+            if(todaysFacts.Count > 0)
+            {
+                int earliestYear = todaysFacts[0].FactDate.StartDate.Year;
+                List<DisplayFact> worldEvents = AddWorldEvents(earliestYear, chosenDate, wholeMonth, bar);
+                todaysFacts.AddRange(worldEvents);
+                todaysFacts.Sort();
+                foreach(DisplayFact f in todaysFacts)
+                    TodaysText.AppendText(f.ToString() + "\n");
+            }
+        }
+
+        public List<DisplayFact> AddWorldEvents(int earliestYear, DateTime chosenDate, bool wholeMonth, ProgressBar bar)
+        {
+            // use Wikipedia API at vizgr.org/historical-events/ to find what happened on that date in the past
+            List<DisplayFact> events = new List<DisplayFact>();
+            string URL;
+            bar.Minimum = earliestYear;
+            bar.Maximum = chosenDate.Year;
+            bar.Value = earliestYear;
+            for (int year = earliestYear; year <= chosenDate.Year; year++)
+            {
+                int diff = chosenDate.Year - year;
+                if (diff % 5 == 0)
+                {
+                    if (wholeMonth)
+                        URL = @"http://www.vizgr.org/historical-events/search.php?links=true&format=xml&begin_date=" + year.ToString() + chosenDate.ToString("MM", CultureInfo.InvariantCulture) + "00" +
+                            "&end_date=" + year.ToString() + chosenDate.ToString("MM", CultureInfo.InvariantCulture) + "31";
+                    else
+                        URL = @"http://www.vizgr.org/historical-events/search.php?links=true&format=xml&begin_date=" + year.ToString() + chosenDate.ToString("MMdd", CultureInfo.InvariantCulture) +
+                            "&end_date=" + year.ToString() + chosenDate.ToString("MMdd", CultureInfo.InvariantCulture);
+                    XmlDocument doc = GetWikipediaData(URL);
+                    if(doc.InnerText.Length > 0)
+                    {
+                        FactDate fd;
+                        XmlNodeList nodes = doc.SelectNodes("/result/event/description");
+                        foreach (XmlNode node in nodes)
+                        {
+                            string desc = node.InnerText.Replace("ampampnbsp", " "); 
+                            if (wholeMonth)
+                                fd = new FactDate(new DateTime(year, chosenDate.Month, 1), new DateTime(year, chosenDate.Month + 1, 1).AddDays(-1));
+                            else
+                                fd = new FactDate(new DateTime(year, chosenDate.Month, chosenDate.Day), new DateTime(year, chosenDate.Month, chosenDate.Day));
+                            Fact f = new Fact("Wikipedia", Fact.CUSTOM_EVENT, fd, desc, true, true);
+                            DisplayFact df = new DisplayFact(null, string.Empty, string.Empty, f);
+                            events.Add(df);
+                        }
+                    }
+                }
+                bar.Value = year;
+                Application.DoEvents();
+            }
+            return events;
+        }
+        
+        private XmlDocument GetWikipediaData(string URL)
+        {
+            string result = string.Empty;
+            XmlDocument doc = new XmlDocument();
+            try
+            {
+                //doc.Load(URL); // using doc.load throws XmlException slowing down loading of data
+                HttpWebRequest request = WebRequest.Create(URL) as HttpWebRequest;
+                request.ContentType = "application/xml";
+                request.Accept = "application/xml";
+                Encoding encode = System.Text.Encoding.GetEncoding("utf-8");
+                using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+                {
+                    StreamReader reader = new StreamReader(response.GetResponseStream(), encode);
+                    result = reader.ReadToEnd();
+                }
+                if (!result.Contains("No events found for this query"))
+                    doc.LoadXml(result);
+            }
+            catch(XmlException)
+            {
+                // we have an empty result so we can just accept that and return an empty document.
+            }
+            catch(Exception e)
+            {
+                log.Error("Error trying to load data from " + URL + "\n\n" + e.Message);
+            }
+            return doc;
+        }
+
+        #endregion
+
         #region Dispose
         public void Dispose()
         {
             xmlErrorbox.Dispose();
+            todaysText.Dispose();
         }
         #endregion
     }

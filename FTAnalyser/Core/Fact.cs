@@ -84,7 +84,7 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("DIED SINGLE", DIED_SINGLE);
             CUSTOM_TAGS.Add("MISSING", MISSING);
             CUSTOM_TAGS.Add("CHILDREN STATUS", CHILDREN1911);
-            
+
             // convert custom tags to normal tags
             CUSTOM_TAGS.Add("CENSUS 1841", CENSUS);
             CUSTOM_TAGS.Add("CENSUS 1851", CENSUS);
@@ -231,6 +231,7 @@ namespace FTAnalyzer
                 case MISSING: return "Missing";
                 case CHILDREN1911: return "Children Status";
                 case REPORT: return "Fact Report";
+                case CUSTOM_EVENT: return "Event";
                 case "": return "UNKNOWN";
                 default: return EnhancedTextInfo.ToTitleCase(factType);
             }
@@ -259,8 +260,8 @@ namespace FTAnalyzer
             this.Reference = reference;
         }
 
-        public Fact(XmlNode node, Family family, bool preferred) 
-            : this(family.FamilyRef, preferred) 
+        public Fact(XmlNode node, Family family, bool preferred)
+            : this(family.FamilyRef, preferred)
         {
             Individual = null;
             Family = family;
@@ -456,12 +457,13 @@ namespace FTAnalyzer
                 Location = FactLocation.GetLocation(result);
         }
 
-        public Fact(string factRef, string factType, FactDate date, string comment = "", bool preferred = true)
+        public Fact(string factRef, string factType, FactDate date, string comment = "", bool preferred = true, bool createdByFTA = false)
             : this(factRef, preferred)
         {
             this.FactType = factType;
             this.FactDate = date;
             this.Comment = comment;
+            this.Created = createdByFTA;
             this.Place = string.Empty;
             this.Location = FactLocation.GetLocation(Place);
         }
@@ -510,7 +512,7 @@ namespace FTAnalyzer
                 if (FactDate.YearMatches(CensusDate.EWCENSUS1841) && Countries.IsEnglandWales(Country))
                     return true;
                 if (FactDate.YearMatches(CensusDate.EWCENSUS1881) && Countries.IsEnglandWales(Country))
-                    return true;                    
+                    return true;
                 if (FactDate.YearMatches(CensusDate.SCOTCENSUS1881) && Country.Equals(Countries.SCOTLAND))
                     return true;
                 if (FactDate.YearMatches(CensusDate.CANADACENSUS1881) && Country.Equals(Countries.CANADA))
@@ -600,7 +602,7 @@ namespace FTAnalyzer
                 // residence isn't a normal census year but it is a census year if tolerate is on
                 if (CensusDate.IsCensusCountry(FactDate, Location) || !Location.IsKnownCountry)
                 {
-//                    this.FactErrorNumber = (int) FamilyTree.Dataerror.RESIDENCE_CENSUS_DATE;
+                    //                    this.FactErrorNumber = (int) FamilyTree.Dataerror.RESIDENCE_CENSUS_DATE;
                     this.FactErrorLevel = Fact.FactError.WARNINGALLOW;
                     this.FactErrorMessage = "Warning : Residence date " + FactDate + " is in a census year but doesn't overlap census date.";
                     if (!Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
@@ -633,13 +635,13 @@ namespace FTAnalyzer
                     yearAdjusted = new FactDate(year);
                     if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
                     {
-//                        this.FactErrorNumber = (int)FamilyTree.Dataerror.RESIDENCE_CENSUS_DATE;
+                        //                        this.FactErrorNumber = (int)FamilyTree.Dataerror.RESIDENCE_CENSUS_DATE;
                         this.FactErrorMessage = "Warning: Inaccurate Census date '" + FactDate + "' treated as '" + yearAdjusted + "'";
                         this.FactErrorLevel = Fact.FactError.WARNINGALLOW;
                     }
                     else
                     {
-//                        this.FactErrorNumber = (int)FamilyTree.Dataerror.RESIDENCE_CENSUS_DATE;
+                        //                        this.FactErrorNumber = (int)FamilyTree.Dataerror.RESIDENCE_CENSUS_DATE;
                         this.FactErrorLevel = Fact.FactError.WARNINGIGNORE;
                         this.FactErrorMessage = "Inaccurate Census date '" + FactDate + "' fact ignored in strict mode. Check for incorrect date entered or try Tolerate slightly inaccurate census date option.";
                     }
@@ -656,7 +658,7 @@ namespace FTAnalyzer
             {
                 this.FactErrorMessage = "UK Census fact error date '" + FactDate + "' doesn't match '" + tag + "' tag. Check for incorrect date entered.";
                 this.FactErrorLevel = FactError.ERROR;
-//                this.FactErrorNumber = (int)FamilyTree.Dataerror.CENSUS_COVERAGE;
+                //                this.FactErrorNumber = (int)FamilyTree.Dataerror.CENSUS_COVERAGE;
                 return;
             }
             if (tag == "Census" || tag == "LostCousins" || tag == "Lost Cousins")
@@ -664,7 +666,7 @@ namespace FTAnalyzer
                 TimeSpan ts = FactDate.EndDate - FactDate.StartDate;
                 if (ts.Days > 3650)
                 {
-//                    this.FactErrorNumber = (int)FamilyTree.Dataerror.CENSUS_COVERAGE;
+                    //                    this.FactErrorNumber = (int)FamilyTree.Dataerror.CENSUS_COVERAGE;
                     this.FactErrorLevel = FactError.ERROR;
                     this.FactErrorMessage = "Date covers more than one census.";
                     return;
@@ -674,14 +676,14 @@ namespace FTAnalyzer
             {
                 if (!CensusDate.IsCensusYear(yearAdjusted, false))
                 {
-//                    this.FactErrorNumber = (int)FamilyTree.Dataerror.CENSUS_COVERAGE;
+                    //                    this.FactErrorNumber = (int)FamilyTree.Dataerror.CENSUS_COVERAGE;
                     this.FactErrorMessage = "Census fact error date '" + FactDate + "' isn't a supported census date. Check for incorrect date entered or try Tolerate slightly inaccurate census date option.";
                     this.FactErrorLevel = FactError.ERROR;
                     return;
                 }
                 if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && yearAdjusted.IsKnown && !CensusDate.IsCensusYear(yearAdjusted, true))
                 {
-//                    this.FactErrorNumber = (int)FamilyTree.Dataerror.CENSUS_COVERAGE;
+                    //                    this.FactErrorNumber = (int)FamilyTree.Dataerror.CENSUS_COVERAGE;
                     this.FactErrorMessage = "Warning : Census fact error date '" + FactDate + "' overlaps census date but is vague. Check for incorrect date entered.";
                     this.FactErrorLevel = FactError.WARNINGALLOW;
                 }
@@ -692,13 +694,13 @@ namespace FTAnalyzer
             {
                 if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && yearAdjusted.IsKnown && !CensusDate.IsLostCousinsCensusYear(yearAdjusted, true))
                 {
-//                    this.FactErrorNumber = (int)FamilyTree.Dataerror.CENSUS_COVERAGE;
+                    //                    this.FactErrorNumber = (int)FamilyTree.Dataerror.CENSUS_COVERAGE;
                     this.FactErrorMessage = "Lost Cousins fact error date '" + FactDate + "' overlaps Lost Cousins census year but is vague. Check for incorrect date entered.";
                     this.FactErrorLevel = Fact.FactError.WARNINGALLOW;
                 }
                 if (!CensusDate.IsLostCousinsCensusYear(yearAdjusted, false))
                 {
-//                    this.FactErrorNumber = (int)FamilyTree.Dataerror.CENSUS_COVERAGE;
+                    //                    this.FactErrorNumber = (int)FamilyTree.Dataerror.CENSUS_COVERAGE;
                     this.FactErrorMessage = "Lost Cousins fact error date '" + FactDate + "' isn't a supported Lost Cousins census year. Check for incorrect date entered or try Tolerate slightly inaccurate census date option.";
                     this.FactErrorLevel = Fact.FactError.ERROR;
                 }

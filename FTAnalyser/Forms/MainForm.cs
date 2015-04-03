@@ -42,6 +42,7 @@ namespace FTAnalyzer
             loading = true;
             displayOptionsOnLoadToolStripMenuItem.Checked = Properties.GeneralSettings.Default.ReportOptions;
             ft.XmlErrorBox = rtbOutput;
+            ft.TodaysText = rtbToday;
             treetopsRelation.MarriedToDB = false;
             ShowMenus(false);
             WarnXPVersion();
@@ -175,6 +176,7 @@ namespace FTAnalyzer
                 rtbOutput.Text = string.Empty;
             tsCountLabel.Text = string.Empty;
             tsHintsLabel.Text = string.Empty;
+            rtbToday.Text = string.Empty;
             pbSources.Value = 0;
             pbIndividuals.Value = 0;
             pbFamilies.Value = 0;
@@ -1179,6 +1181,10 @@ namespace FTAnalyzer
                 {
                     UpdateLooseBirthDeaths();
                 }
+                else if (tabSelector.SelectedTab == tabToday)
+                {
+                    ShowTodaysEvents();
+                }
                 else if (tabSelector.SelectedTab == tabLocations)
                 {
                     HourGlass(true);
@@ -1199,6 +1205,7 @@ namespace FTAnalyzer
                 HourGlass(false);
             }
         }
+
         #endregion
 
         #region Filters
@@ -2122,6 +2129,7 @@ namespace FTAnalyzer
         private void MainForm_Resize(object sender, EventArgs e)
         {
             rtbOutput.Top = pbRelationships.Top + 30;
+            rtbToday.Top = dpToday.Top + 30;
             SavePosition();
         }
 
@@ -2734,6 +2742,36 @@ namespace FTAnalyzer
             DataTable dt = convertor.ToDataTable(list.ToList<IDisplayIndividual>());
             ExportToExcel.Export(dt);
             HourGlass(false);
+        }
+        #endregion
+
+        #region Today
+
+        private void ShowTodaysEvents()
+        {
+            pbToday.Visible = true;
+            labToday.Visible = true;
+            ft.TodaysText.ResetText();
+            ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, pbToday, labToday);
+            labToday.Visible = false;
+            pbToday.Visible = false;
+        }
+        
+        private void dpToday_ValueChanged(object sender, EventArgs e)
+        {
+            ShowTodaysEvents();
+        }
+
+        private void rbTodayMonth_CheckedChanged(object sender, EventArgs e)
+        {
+            if(rbTodayMonth.Checked)
+                ShowTodaysEvents();
+        }
+
+        private void rbTodaySingle_CheckedChanged(object sender, EventArgs e)
+        {
+            if(rbTodaySingle.Checked)
+                ShowTodaysEvents();
         }
         #endregion
     }
