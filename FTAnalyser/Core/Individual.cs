@@ -999,6 +999,8 @@ namespace FTAnalyzer
         {
             // Individuals are naturally ordered by surname, then forenames,
             // then date of birth.
+            if (that == null)
+                return -1;
             int res = this.surname.CompareTo(that.surname);
             if (res == 0)
             {

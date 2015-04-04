@@ -2622,27 +2622,28 @@ namespace FTAnalyzer
         #endregion
 
         #region Today
-        public void AddTodaysFacts(DateTime chosenDate, bool wholeMonth, ProgressBar bar, Label lab)
+        public void AddTodaysFacts(DateTime chosenDate, bool wholeMonth, ProgressBar bar)
         {
-            lab.Text = "Loading GEDCOM Events";
-            if(wholeMonth)
-                TodaysText.Rtf = @"{\rtf1\ansi \b GEDCOM and World Events this month\b0.}";
+            string dateDesc;
+            if (wholeMonth)
+            {
+                dateDesc = chosenDate.ToString("MMMM");
+                TodaysText.Rtf = @"{\rtf1\ansi \b GEDCOM and World Events in " + dateDesc + @"\b0.}";
+            }
             else
-                TodaysText.Rtf = @"{\rtf1\ansi \b GEDCOM and World Events on this date\b0.}";
+            {
+                dateDesc = chosenDate.ToString("d MMMM");
+                TodaysText.Rtf = @"{\rtf1\ansi \b GEDCOM and World Events on " + dateDesc + @"\b0.}";
+            }
             TodaysText.AppendText("\n\n");
             List<DisplayFact> todaysFacts = new List<DisplayFact>();
-            bar.Maximum = individuals.Count;
             foreach (Individual i in individuals)
             {
                 foreach (Fact f in i.AllFacts)
                     if (!f.Created && f.FactDate.IsExact && f.FactDate.StartDate.Month == chosenDate.Month)
                         if (wholeMonth || (!wholeMonth && f.FactDate.StartDate.Day == chosenDate.Day))
                             todaysFacts.Add(new DisplayFact(i, f));
-                bar.Value++;
-                Application.DoEvents();
             }
-            bar.Value = 0;
-            lab.Text = "Loading World Events";
             todaysFacts.Sort();
             if(todaysFacts.Count > 0)
             {
@@ -2660,6 +2661,7 @@ namespace FTAnalyzer
             // use Wikipedia API at vizgr.org/historical-events/ to find what happened on that date in the past
             List<DisplayFact> events = new List<DisplayFact>();
             string URL;
+            FactDate eventDate;
             bar.Minimum = earliestYear;
             bar.Maximum = chosenDate.Year;
             bar.Value = earliestYear;
@@ -2675,18 +2677,21 @@ namespace FTAnalyzer
                         URL = @"http://www.vizgr.org/historical-events/search.php?links=true&format=xml&begin_date=" + year.ToString() + chosenDate.ToString("MMdd", CultureInfo.InvariantCulture) +
                             "&end_date=" + year.ToString() + chosenDate.ToString("MMdd", CultureInfo.InvariantCulture);
                     XmlDocument doc = GetWikipediaData(URL);
-                    if(doc.InnerText.Length > 0)
+                    if (wholeMonth)
+                        eventDate = new FactDate(new DateTime(year, chosenDate.Month, 1), new DateTime(year, chosenDate.Month + 1, 1).AddDays(-1));
+                    else
+                        eventDate = new FactDate(new DateTime(year, chosenDate.Month, chosenDate.Day), new DateTime(year, chosenDate.Month, chosenDate.Day));
+                    if (doc.InnerText.Length > 0)
                     {
                         FactDate fd;
-                        XmlNodeList nodes = doc.SelectNodes("/result/event/description");
-                        foreach (XmlNode node in nodes)
+                        XmlNodeList nodes = doc.SelectNodes("/result/event");
+                        foreach (XmlNode worldEvent in nodes)
                         {
-                            string desc = node.InnerText.Replace("ampampnbsp", " "); 
-                            if (wholeMonth)
-                                fd = new FactDate(new DateTime(year, chosenDate.Month, 1), new DateTime(year, chosenDate.Month + 1, 1).AddDays(-1));
-                            else
-                                fd = new FactDate(new DateTime(year, chosenDate.Month, chosenDate.Day), new DateTime(year, chosenDate.Month, chosenDate.Day));
-                            Fact f = new Fact("Wikipedia", Fact.CUSTOM_EVENT, fd, desc, true, true);
+                            XmlNode descNode = worldEvent.SelectSingleNode("description");
+                            string desc = descNode.InnerText.Replace("ampampnbsp", " ").Replace("ampampndash", "-");
+                            XmlNode dateNode = worldEvent.SelectSingleNode("date");
+                            fd = GetWikiDate(dateNode, eventDate);
+                            Fact f = new Fact("Wikipedia", Fact.WORLD_EVENT, fd, desc, true, true);
                             DisplayFact df = new DisplayFact(null, string.Empty, string.Empty, f);
                             events.Add(df);
                         }
@@ -2696,6 +2701,26 @@ namespace FTAnalyzer
                 Application.DoEvents();
             }
             return events;
+        }
+
+        private static FactDate GetWikiDate(XmlNode dateNode, FactDate defaultDate)
+        {
+            FactDate fd;
+            try
+            {
+                string[] dateFields = dateNode.InnerText.Split(new Char[] { '/' });
+                int nodeyear = Int32.Parse(dateFields[0]);
+                int nodemonth = Int32.Parse(dateFields[1]);
+                int nodeday = Int32.Parse(dateFields[2]);
+                fd = new FactDate(new DateTime(nodeyear, nodemonth, nodeday).ToString("dd MMM yyyy"));
+            }
+            catch(Exception)
+            {
+                log.Error("Error processing wiki date for " + dateNode);
+                MessageBox.Show("Error processing wiki date for " + dateNode);
+                fd = defaultDate;
+            }
+            return fd;
         }
         
         private XmlDocument GetWikipediaData(string URL)

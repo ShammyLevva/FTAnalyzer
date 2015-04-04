@@ -70,7 +70,8 @@ namespace FTAnalyzer
 
         public override string ToString()
         {
-            return Ind == null ? Fact.FactDate + " " + Fact.Comment : IndividualID + ": " + Forenames + " " + Surname + ", " + Fact.ToString();
+            return Ind == null ? Fact.FactTypeDescription + ": " + Fact.FactDate + " " + Fact.Comment 
+                               : IndividualID + ": " + Forenames + " " + Surname + ", " + Fact.ToString();
         }
     }
 }

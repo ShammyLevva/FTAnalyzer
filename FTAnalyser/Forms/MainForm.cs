@@ -23,7 +23,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "5.0.0.0-beta3";
+        public static string VERSION = "5.0.0.0-beta4";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -1183,7 +1183,10 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabToday)
                 {
-                    ShowTodaysEvents();
+                    bool todaysMonth = Application.UserAppDataRegistry.GetValue("Todays Events Month", "False").Equals("True");
+                    rbTodayMonth.Checked = todaysMonth;
+                    if(!rbTodayMonth.Checked)
+                        ShowTodaysEvents(); // if it was checked ShowTodaysEvents() would have been called already
                 }
                 else if (tabSelector.SelectedTab == tabLocations)
                 {
@@ -2752,26 +2755,28 @@ namespace FTAnalyzer
             pbToday.Visible = true;
             labToday.Visible = true;
             ft.TodaysText.ResetText();
-            ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, pbToday, labToday);
+            ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, pbToday);
             labToday.Visible = false;
             pbToday.Visible = false;
         }
         
-        private void dpToday_ValueChanged(object sender, EventArgs e)
-        {
-            ShowTodaysEvents();
-        }
-
         private void rbTodayMonth_CheckedChanged(object sender, EventArgs e)
         {
+            Application.UserAppDataRegistry.SetValue("Todays Events Month", rbTodayMonth.Checked);
             if(rbTodayMonth.Checked)
                 ShowTodaysEvents();
         }
 
         private void rbTodaySingle_CheckedChanged(object sender, EventArgs e)
         {
-            if(rbTodaySingle.Checked)
+            Application.UserAppDataRegistry.SetValue("Todays Events Month", !rbTodaySingle.Checked);
+            if (rbTodaySingle.Checked)
                 ShowTodaysEvents();
+        }
+
+        private void btnUpdateTodaysEvents_Click(object sender, EventArgs e)
+        {
+            ShowTodaysEvents();
         }
         #endregion
     }

@@ -33,7 +33,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -280,6 +280,9 @@
             this.labCalcDuplicates = new System.Windows.Forms.Label();
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.tabToday = new System.Windows.Forms.TabPage();
+            this.btnUpdateTodaysEvents = new System.Windows.Forms.Button();
+            this.labToday = new System.Windows.Forms.Label();
+            this.pbToday = new System.Windows.Forms.ProgressBar();
             this.rbTodayMonth = new System.Windows.Forms.RadioButton();
             this.rbTodaySingle = new System.Windows.Forms.RadioButton();
             this.label17 = new System.Windows.Forms.Label();
@@ -287,8 +290,6 @@
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.pbToday = new System.Windows.Forms.ProgressBar();
-            this.labToday = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -871,14 +872,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 154);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -2894,6 +2895,7 @@
             // 
             // tabToday
             // 
+            this.tabToday.Controls.Add(this.btnUpdateTodaysEvents);
             this.tabToday.Controls.Add(this.labToday);
             this.tabToday.Controls.Add(this.pbToday);
             this.tabToday.Controls.Add(this.rbTodayMonth);
@@ -2909,10 +2911,36 @@
             this.tabToday.Text = "Today";
             this.tabToday.UseVisualStyleBackColor = true;
             // 
+            // btnUpdateTodaysEvents
+            // 
+            this.btnUpdateTodaysEvents.Location = new System.Drawing.Point(289, 18);
+            this.btnUpdateTodaysEvents.Name = "btnUpdateTodaysEvents";
+            this.btnUpdateTodaysEvents.Size = new System.Drawing.Size(137, 23);
+            this.btnUpdateTodaysEvents.TabIndex = 14;
+            this.btnUpdateTodaysEvents.Text = "Update list of Events";
+            this.btnUpdateTodaysEvents.UseVisualStyleBackColor = true;
+            this.btnUpdateTodaysEvents.Click += new System.EventHandler(this.btnUpdateTodaysEvents_Click);
+            // 
+            // labToday
+            // 
+            this.labToday.AutoSize = true;
+            this.labToday.Location = new System.Drawing.Point(603, 24);
+            this.labToday.Name = "labToday";
+            this.labToday.Size = new System.Drawing.Size(112, 13);
+            this.labToday.TabIndex = 13;
+            this.labToday.Text = "Loading World Events";
+            // 
+            // pbToday
+            // 
+            this.pbToday.Location = new System.Drawing.Point(721, 21);
+            this.pbToday.Name = "pbToday";
+            this.pbToday.Size = new System.Drawing.Size(316, 16);
+            this.pbToday.TabIndex = 12;
+            // 
             // rbTodayMonth
             // 
             this.rbTodayMonth.AutoSize = true;
-            this.rbTodayMonth.Location = new System.Drawing.Point(350, 21);
+            this.rbTodayMonth.Location = new System.Drawing.Point(506, 21);
             this.rbTodayMonth.Name = "rbTodayMonth";
             this.rbTodayMonth.Size = new System.Drawing.Size(89, 17);
             this.rbTodayMonth.TabIndex = 11;
@@ -2925,7 +2953,7 @@
             this.rbTodaySingle.AutoSize = true;
             this.rbTodaySingle.Checked = true;
             this.rbTodaySingle.Cursor = System.Windows.Forms.Cursors.Default;
-            this.rbTodaySingle.Location = new System.Drawing.Point(289, 21);
+            this.rbTodaySingle.Location = new System.Drawing.Point(445, 21);
             this.rbTodaySingle.Name = "rbTodaySingle";
             this.rbTodaySingle.Size = new System.Drawing.Size(55, 17);
             this.rbTodaySingle.TabIndex = 10;
@@ -2949,7 +2977,6 @@
             this.dpToday.Name = "dpToday";
             this.dpToday.Size = new System.Drawing.Size(200, 20);
             this.dpToday.TabIndex = 8;
-            this.dpToday.ValueChanged += new System.EventHandler(this.dpToday_ValueChanged);
             // 
             // rtbToday
             // 
@@ -2960,7 +2987,7 @@
             this.rtbToday.Location = new System.Drawing.Point(0, 59);
             this.rtbToday.Name = "rtbToday";
             this.rtbToday.ReadOnly = true;
-            this.rtbToday.Size = new System.Drawing.Size(1053, 386);
+            this.rtbToday.Size = new System.Drawing.Size(1053, 390);
             this.rtbToday.TabIndex = 7;
             this.rtbToday.Text = "";
             // 
@@ -2973,22 +3000,6 @@
             // 
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
-            // 
-            // pbToday
-            // 
-            this.pbToday.Location = new System.Drawing.Point(582, 23);
-            this.pbToday.Name = "pbToday";
-            this.pbToday.Size = new System.Drawing.Size(316, 16);
-            this.pbToday.TabIndex = 12;
-            // 
-            // labToday
-            // 
-            this.labToday.AutoSize = true;
-            this.labToday.Location = new System.Drawing.Point(445, 23);
-            this.labToday.Name = "labToday";
-            this.labToday.Size = new System.Drawing.Size(131, 13);
-            this.labToday.TabIndex = 13;
-            this.labToday.Text = "Loading GEDCOM Events";
             // 
             // MainForm
             // 
@@ -3342,6 +3353,7 @@
         private System.Windows.Forms.RadioButton rbTodaySingle;
         private System.Windows.Forms.Label labToday;
         private System.Windows.Forms.ProgressBar pbToday;
+        private System.Windows.Forms.Button btnUpdateTodaysEvents;
     }
 }
 
