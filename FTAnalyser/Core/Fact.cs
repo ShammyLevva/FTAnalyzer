@@ -36,7 +36,7 @@ namespace FTAnalyzer
                 CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT", PARENT = "*PARENT",
                 CHILDREN = "*CHILDREN", CHANGE = "*CHNG", LOSTCOUSINS = "*LOST",
                 DIED_SINGLE = "*SINGLE", MISSING = "*MISSING", CHILDREN1911 = "CHILDREN1911",
-                REPORT = "*REPORT";
+                REPORT = "*REPORT", WORLD_EVENT = "*WORLD_EVENT";
 
         public static readonly ISet<string> LOOSE_BIRTH_FACTS = new HashSet<string>(new string[] {
             CHRISTENING, BAPTISM, RESIDENCE, WITNESS, EMIGRATION, IMMIGRATION, ARRIVAL, DEPARTURE, 
@@ -232,6 +232,7 @@ namespace FTAnalyzer
                 case CHILDREN1911: return "Children Status";
                 case REPORT: return "Fact Report";
                 case CUSTOM_EVENT: return "Event";
+                case WORLD_EVENT: return "World Event";
                 case "": return "UNKNOWN";
                 default: return EnhancedTextInfo.ToTitleCase(factType);
             }
@@ -782,7 +783,7 @@ namespace FTAnalyzer
 
         public override string ToString()
         {
-            return FactTypeDescription + ": " + FactDate + (Location.ToString().Length > 0 ? " at " + Location : string.Empty);
+            return FactTypeDescription + ": " + FactDate + (Location.ToString().Length > 0 ? " at " + Location : string.Empty) + (Comment.ToString().Length > 0 ? "(" + Comment + ")" : string.Empty);
         }
     }
 }
