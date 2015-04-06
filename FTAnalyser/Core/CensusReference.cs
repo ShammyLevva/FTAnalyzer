@@ -33,11 +33,12 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH3 = @"HO *107/(\d{1,5}) .*F(olio)? *(\d{1,4})/(\d{1,4}) p(age)? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH4 = @"HO *107/(\d{1,5}) .*F(olio)? *(\d{1,4}) p(age)? *(\d{1,3})"; 
         private static readonly string EW_CENSUS_1911_PATTERN = @"RG *14 *PN(\d{1,6}) .*SN(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN78 = @"RG *78 *PN(\d{1,6}) .*SN(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN2 = @"RG *14[;,]? *Piece:? *(\d{1,6})[;,]? *SN:? *(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN3 = @"RG *14[;,]? *Piece:? *(\d{1,6})[;,]? *Schedule Number:? *(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN4 = @"RG *14[;,]? *Piece:? *(\d{1,6})[;,]?$";
         private static readonly string EW_CENSUS_1911_PATTERN5 = @"RG *14[;,]? *Piece:? *(\d{1,6})[;,]? *Page:? *(\d{1,3})";
-        private static readonly string EW_CENSUS_1911_PATTERN6 = @"RG *14[;,]? *RD:? *(\d{1,4})[;,]? *ED:? *(\d{1,3}) (\d{5})";
+        private static readonly string EW_CENSUS_1911_PATTERN6 = @"RG *14[;,]? *RD:? *(\d{1,4})[;,]? *ED:? *(\d{1,3}) (\d{1,5})";
         private static readonly string EW_CENSUS_1911_PATTERN_FH = @"RG *14/PN(\d{1,6}) .*SN(\d{1,4})";
         private static readonly string SCOT_CENSUS_PATTERN = @"Parish:? *([A-Z .'-]+)[;,]? *ED:? *(\d{1,3}[AB]?)[;,]? *Page:? *(\d{1,4})[;,]? *Line:? *(\d{1,2})";
         private static readonly string SCOT_CENSUS_PATTERN2 = @"(\d{3}/\d{1,2}[AB]?) (\d{3}/\d{2}) (\d{3,4})";
@@ -331,6 +332,18 @@ namespace FTAnalyzer
                 return true;
             }
             matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "RG14";
+                this.Piece = matcher.Groups[1].ToString();
+                this.Schedule = matcher.Groups[2].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN78, RegexOptions.IgnoreCase);
             if (matcher.Success)
             {
                 this.Class = "RG14";
