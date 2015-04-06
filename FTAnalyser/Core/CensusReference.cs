@@ -9,6 +9,7 @@ namespace FTAnalyzer
 {
     public class CensusReference
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         //Database online. Class: HO107; Piece: 1782; Folio: 719; Page: 25; GSU
         //Database online. Class: HO107; Piece 709; Book: 6; Civil Parish: StLeonard Shoreditch; County: Middlesex; Enumeration District: 19;Folio: 53; Page: 15; Line: 16; GSU roll: 438819.
         //Database online. Class: RG9; Piece: 1105; Folio: 90; Page: 21; GSU
@@ -63,6 +64,7 @@ namespace FTAnalyzer
         private string Parish { get; set; }
         private string RD { get; set; }
         private string ED { get; set; }
+        private string ReferenceText { get; set; }
 
         public Fact Fact { get; private set; }
         public bool IsUKCensus { get; private set; }
@@ -84,6 +86,7 @@ namespace FTAnalyzer
             this.Parish = string.Empty;
             this.RD = string.Empty;
             this.ED = string.Empty;
+            this.ReferenceText = string.Empty;
             this.IsUKCensus = false;
             this.Status = ReferenceStatus.BLANK;
             this.unknownCensusRef = string.Empty;
@@ -131,7 +134,10 @@ namespace FTAnalyzer
             if (text.Length > 0)                       
             {
                 if (CheckPatterns(text))
+                {
+                    ReferenceText = text;
                     return true;
+                }
                 // no match so store text 
                 this.Status = ReferenceStatus.UNRECOGNISED;
                 if (unknownCensusRef.Length == 0)
@@ -143,9 +149,15 @@ namespace FTAnalyzer
             foreach (FactSource fs in Fact.Sources)
             {
                 if (CheckPatterns(fs.SourceTitle))
+                {
+                    ReferenceText = fs.SourceTitle;
                     return true;
+                }
                 if (CheckPatterns(fs.Publication))
+                {
+                    ReferenceText = fs.Publication;
                     return true;
+                }
             }
             return false;
         }
@@ -626,9 +638,9 @@ namespace FTAnalyzer
                 }
                 else if (Parish.Length > 0)
                 {
-                    if (Fact.Location.Country.Equals(Countries.SCOTLAND) && (Fact.FactDate.Overlaps(CensusDate.UKCENSUS1851) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1861) ||
-                        Fact.FactDate.Overlaps(CensusDate.UKCENSUS1871) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1881) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1891) ||
-                        Fact.FactDate.Overlaps(CensusDate.UKCENSUS1901)))
+                    if (Fact.Location.Country.Equals(Countries.SCOTLAND) && (Fact.FactDate.Overlaps(CensusDate.UKCENSUS1841) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1851) ||
+                        Fact.FactDate.Overlaps(CensusDate.UKCENSUS1861) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1871) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1881) ||
+                        Fact.FactDate.Overlaps(CensusDate.UKCENSUS1891) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1901) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1911)))
                         if (Properties.GeneralSettings.Default.UseCompactCensusRef)
                             return Parish + Parishes.Reference(Parish) + "/" + ED + "/" + Page;
                         else
@@ -644,6 +656,7 @@ namespace FTAnalyzer
                 }
                 if (unknownCensusRef.Length > 0)
                     return unknownCensusRef;
+                log.Warn("Census reference text not generated for :" + ReferenceText);
                 return string.Empty;
             }
         }
