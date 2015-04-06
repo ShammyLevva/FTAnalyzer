@@ -37,6 +37,7 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1911_PATTERN3 = @"RG *14[;,]? *Piece:? *(\d{1,6})[;,]? *Schedule Number:? *(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN4 = @"RG *14[;,]? *Piece:? *(\d{1,6})[;,]?$";
         private static readonly string EW_CENSUS_1911_PATTERN5 = @"RG *14[;,]? *Piece:? *(\d{1,6})[;,]? *Page:? *(\d{1,3})";
+        private static readonly string EW_CENSUS_1911_PATTERN6 = @"RG *14[;,]? *RD:? *(\d{1,4})[;,]? *ED:? *(\d{1,3}) (\d{5})";
         private static readonly string EW_CENSUS_1911_PATTERN_FH = @"RG *14/PN(\d{1,6}) .*SN(\d{1,4})";
         private static readonly string SCOT_CENSUS_PATTERN = @"Parish:? *([A-Z .'-]+)[;,]? *ED:? *(\d{1,3}[AB]?)[;,]? *Page:? *(\d{1,4})[;,]? *Line:? *(\d{1,2})";
         private static readonly string SCOT_CENSUS_PATTERN2 = @"(\d{3}/\d{1,2}[AB]?) (\d{3}/\d{2}) (\d{3,4})";
@@ -59,6 +60,7 @@ namespace FTAnalyzer
         private string Book { get; set; }
         private string Schedule { get; set; }
         private string Parish { get; set; }
+        private string RD { get; set; }
         private string ED { get; set; }
 
         public Fact Fact { get; private set; }
@@ -79,6 +81,7 @@ namespace FTAnalyzer
             this.Page = string.Empty;
             this.Schedule = string.Empty;
             this.Parish = string.Empty;
+            this.RD = string.Empty;
             this.ED = string.Empty;
             this.IsUKCensus = false;
             this.Status = ReferenceStatus.BLANK;
@@ -366,6 +369,7 @@ namespace FTAnalyzer
             matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN4, RegexOptions.IgnoreCase);
             if (matcher.Success)
             {
+                this.Class = "RG14";
                 this.Piece = matcher.Groups[1].ToString();
                 this.Schedule = MISSING;
                 this.IsUKCensus = true;
@@ -377,8 +381,22 @@ namespace FTAnalyzer
             matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN5, RegexOptions.IgnoreCase);
             if (matcher.Success)
             {
+                this.Class = "RG14";
                 this.Piece = matcher.Groups[1].ToString();
                 this.Page = matcher.Groups[2].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN6, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "RG14";
+                this.RD = matcher.Groups[1].ToString();
+                this.ED = matcher.Groups[2].ToString();
+                this.Schedule = matcher.Groups[3].ToString();
                 this.IsUKCensus = true;
                 this.Country = Countries.ENG_WALES;
                 this.Status = ReferenceStatus.GOOD;
@@ -602,6 +620,14 @@ namespace FTAnalyzer
                             return Parish + Parishes.Reference(Parish) + "/" + ED + "/" + Page;
                         else
                             return "Parish: " + Parish + Parishes.Reference(Parish) + " ED: " + ED + ", Page: " + Page;
+                }
+                else if(RD.Length > 0)
+                {
+                    if(Fact.Location.IsEnglandWales && Fact.FactDate.Overlaps(CensusDate.UKCENSUS1911))
+                        if (Properties.GeneralSettings.Default.UseCompactCensusRef)
+                            return RD + "/" + ED + "/" + Schedule;
+                        else
+                            return "RD: " + RD + ", ED: " + ED + ", Schedule: " + Schedule;
                 }
                 if (unknownCensusRef.Length > 0)
                     return unknownCensusRef;
