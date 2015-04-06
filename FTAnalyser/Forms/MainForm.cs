@@ -2755,7 +2755,7 @@ namespace FTAnalyzer
             pbToday.Visible = true;
             labToday.Visible = true;
             ft.TodaysText.ResetText();
-            ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, pbToday);
+            ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, pbToday);
             labToday.Visible = false;
             pbToday.Visible = false;
         }

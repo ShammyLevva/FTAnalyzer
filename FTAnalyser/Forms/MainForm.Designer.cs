@@ -33,7 +33,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -290,6 +290,8 @@
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.nudToday = new System.Windows.Forms.NumericUpDown();
+            this.label18 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -347,6 +349,7 @@
             this.tabDuplicates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgDuplicates)).BeginInit();
             this.tabToday.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudToday)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -872,14 +875,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 154);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -2895,6 +2898,8 @@
             // 
             // tabToday
             // 
+            this.tabToday.Controls.Add(this.label18);
+            this.tabToday.Controls.Add(this.nudToday);
             this.tabToday.Controls.Add(this.btnUpdateTodaysEvents);
             this.tabToday.Controls.Add(this.labToday);
             this.tabToday.Controls.Add(this.pbToday);
@@ -2915,7 +2920,7 @@
             // 
             this.btnUpdateTodaysEvents.Location = new System.Drawing.Point(289, 18);
             this.btnUpdateTodaysEvents.Name = "btnUpdateTodaysEvents";
-            this.btnUpdateTodaysEvents.Size = new System.Drawing.Size(137, 23);
+            this.btnUpdateTodaysEvents.Size = new System.Drawing.Size(115, 23);
             this.btnUpdateTodaysEvents.TabIndex = 14;
             this.btnUpdateTodaysEvents.Text = "Update list of Events";
             this.btnUpdateTodaysEvents.UseVisualStyleBackColor = true;
@@ -2924,7 +2929,7 @@
             // labToday
             // 
             this.labToday.AutoSize = true;
-            this.labToday.Location = new System.Drawing.Point(603, 24);
+            this.labToday.Location = new System.Drawing.Point(681, 23);
             this.labToday.Name = "labToday";
             this.labToday.Size = new System.Drawing.Size(112, 13);
             this.labToday.TabIndex = 13;
@@ -2932,15 +2937,15 @@
             // 
             // pbToday
             // 
-            this.pbToday.Location = new System.Drawing.Point(721, 21);
+            this.pbToday.Location = new System.Drawing.Point(799, 21);
             this.pbToday.Name = "pbToday";
-            this.pbToday.Size = new System.Drawing.Size(316, 16);
+            this.pbToday.Size = new System.Drawing.Size(249, 20);
             this.pbToday.TabIndex = 12;
             // 
             // rbTodayMonth
             // 
             this.rbTodayMonth.AutoSize = true;
-            this.rbTodayMonth.Location = new System.Drawing.Point(506, 21);
+            this.rbTodayMonth.Location = new System.Drawing.Point(472, 21);
             this.rbTodayMonth.Name = "rbTodayMonth";
             this.rbTodayMonth.Size = new System.Drawing.Size(89, 17);
             this.rbTodayMonth.TabIndex = 11;
@@ -2953,7 +2958,7 @@
             this.rbTodaySingle.AutoSize = true;
             this.rbTodaySingle.Checked = true;
             this.rbTodaySingle.Cursor = System.Windows.Forms.Cursors.Default;
-            this.rbTodaySingle.Location = new System.Drawing.Point(445, 21);
+            this.rbTodaySingle.Location = new System.Drawing.Point(411, 21);
             this.rbTodaySingle.Name = "rbTodaySingle";
             this.rbTodaySingle.Size = new System.Drawing.Size(55, 17);
             this.rbTodaySingle.TabIndex = 10;
@@ -3000,6 +3005,37 @@
             // 
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
+            // 
+            // nudToday
+            // 
+            this.nudToday.Location = new System.Drawing.Point(633, 21);
+            this.nudToday.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nudToday.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudToday.Name = "nudToday";
+            this.nudToday.Size = new System.Drawing.Size(42, 20);
+            this.nudToday.TabIndex = 15;
+            this.nudToday.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(567, 23);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(60, 13);
+            this.label18.TabIndex = 16;
+            this.label18.Text = "Year Step :";
             // 
             // MainForm
             // 
@@ -3090,6 +3126,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgDuplicates)).EndInit();
             this.tabToday.ResumeLayout(false);
             this.tabToday.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudToday)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3354,6 +3391,8 @@
         private System.Windows.Forms.Label labToday;
         private System.Windows.Forms.ProgressBar pbToday;
         private System.Windows.Forms.Button btnUpdateTodaysEvents;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.NumericUpDown nudToday;
     }
 }
 

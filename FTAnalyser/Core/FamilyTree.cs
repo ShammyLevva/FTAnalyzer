@@ -2622,7 +2622,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Today
-        public void AddTodaysFacts(DateTime chosenDate, bool wholeMonth, ProgressBar bar)
+        public void AddTodaysFacts(DateTime chosenDate, bool wholeMonth, int stepSize, ProgressBar bar)
         {
             string dateDesc;
             if (wholeMonth)
@@ -2648,7 +2648,7 @@ namespace FTAnalyzer
             if(todaysFacts.Count > 0)
             {
                 int earliestYear = todaysFacts[0].FactDate.StartDate.Year;
-                List<DisplayFact> worldEvents = AddWorldEvents(earliestYear, chosenDate, wholeMonth, bar);
+                List<DisplayFact> worldEvents = AddWorldEvents(earliestYear, chosenDate, wholeMonth, stepSize, bar);
                 todaysFacts.AddRange(worldEvents);
                 todaysFacts.Sort();
                 foreach(DisplayFact f in todaysFacts)
@@ -2656,7 +2656,7 @@ namespace FTAnalyzer
             }
         }
 
-        public List<DisplayFact> AddWorldEvents(int earliestYear, DateTime chosenDate, bool wholeMonth, ProgressBar bar)
+        public List<DisplayFact> AddWorldEvents(int earliestYear, DateTime chosenDate, bool wholeMonth, int stepSize, ProgressBar bar)
         {
             // use Wikipedia API at vizgr.org/historical-events/ to find what happened on that date in the past
             List<DisplayFact> events = new List<DisplayFact>();
@@ -2668,7 +2668,7 @@ namespace FTAnalyzer
             for (int year = earliestYear; year <= chosenDate.Year; year++)
             {
                 int diff = chosenDate.Year - year;
-                if (diff % 5 == 0)
+                if (diff % stepSize == 0)
                 {
                     if (wholeMonth)
                         URL = @"http://www.vizgr.org/historical-events/search.php?links=true&format=xml&begin_date=" + year.ToString() + chosenDate.ToString("MM", CultureInfo.InvariantCulture) + "00" +
