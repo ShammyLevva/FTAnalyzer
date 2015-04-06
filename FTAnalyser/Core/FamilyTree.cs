@@ -2641,19 +2641,16 @@ namespace FTAnalyzer
             {
                 foreach (Fact f in i.AllFacts)
                     if (!f.Created && f.FactDate.IsExact && f.FactDate.StartDate.Month == chosenDate.Month)
-                        if (wholeMonth || (!wholeMonth && f.FactDate.StartDate.Day == chosenDate.Day))
+                        if (wholeMonth || f.FactDate.StartDate.Day == chosenDate.Day)
                             todaysFacts.Add(new DisplayFact(i, f));
             }
             todaysFacts.Sort();
-            if(todaysFacts.Count > 0)
-            {
-                int earliestYear = todaysFacts[0].FactDate.StartDate.Year;
-                List<DisplayFact> worldEvents = AddWorldEvents(earliestYear, chosenDate, wholeMonth, stepSize, bar);
-                todaysFacts.AddRange(worldEvents);
-                todaysFacts.Sort();
-                foreach(DisplayFact f in todaysFacts)
-                    TodaysText.AppendText(f.ToString() + "\n");
-            }
+            int earliestYear = todaysFacts.Count > 0 ? todaysFacts[0].FactDate.StartDate.Year : 1752; // if no facts show world events for Gregorian calendar to today
+            List<DisplayFact> worldEvents = AddWorldEvents(earliestYear, chosenDate, wholeMonth, stepSize, bar);
+            todaysFacts.AddRange(worldEvents);
+            todaysFacts.Sort();
+            foreach(DisplayFact f in todaysFacts)
+                TodaysText.AppendText(f.ToString() + "\n");
         }
 
         public List<DisplayFact> AddWorldEvents(int earliestYear, DateTime chosenDate, bool wholeMonth, int stepSize, ProgressBar bar)

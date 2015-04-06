@@ -783,7 +783,7 @@ namespace FTAnalyzer
 
         public override string ToString()
         {
-            return FactTypeDescription + ": " + FactDate + (Location.ToString().Length > 0 ? " at " + Location : string.Empty) + (Comment.ToString().Length > 0 ? "(" + Comment + ")" : string.Empty);
+            return FactTypeDescription + ": " + FactDate + (Location.ToString().Length > 0 ? " at " + Location : string.Empty) + (Comment.ToString().Length > 0 ? "  (" + Comment + ")" : string.Empty);
         }
     }
 }
