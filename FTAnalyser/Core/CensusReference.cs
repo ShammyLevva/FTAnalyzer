@@ -28,6 +28,7 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1841_51_PATTERN4 = @"HO *107[;,]? *Piece:? *(\d{1,5})[;,]? *Book:? *(\d{1,3})[;,]?.*Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN5 = @"HO *107[;,]? *Piece:? *(\d{1,5})[;,]?.*Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH = @"HO *107/(\d{1,5})/(\d{1,3}) .*F(\d{1,3}) p(\d{1,3})";
+        private static readonly string EW_CENSUS_1841_51_PATTERN_FH2 = @"HO *107\/(\d{1,5}) ED (\d{1,3}[a-z]?) Folio (\d{1,3}) page (\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN = @"RG *14 *PN(\d{1,6}) .*SN(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN2 = @"RG *14[;,]? *Piece:? *(\d{1,6})[;,]? *SN:? *(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN3 = @"RG *14[;,]? *Piece:? *(\d{1,6})[;,]? *Schedule Number:? *(\d{1,4})";
@@ -121,277 +122,9 @@ namespace FTAnalyzer
         private bool GetCensusReference(string text)
         {
             if (text.Length > 0)                       
-            {                                          
-                Match matcher = Regex.Match(text, EW_CENSUS_PATTERN, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Class = "RG" + matcher.Groups[1].ToString();
-                    this.Piece = matcher.Groups[2].ToString();
-                    this.Folio = matcher.Groups[3].ToString();
-                    this.Page = matcher.Groups[4].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
+            {
+                if (CheckPatterns(text))
                     return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_PATTERN2, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Class = "RG" + matcher.Groups[1].ToString();
-                    this.Piece = matcher.Groups[2].ToString();
-                    this.Folio = matcher.Groups[3].ToString();
-                    this.Page = MISSING;
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.INCOMPLETE;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-              
-                    this.Class = "HO107";
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Folio = matcher.Groups[2].ToString();
-                    this.Page = matcher.Groups[3].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN2, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Class = "HO107";
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Book = matcher.Groups[2].ToString();
-                    this.Folio = matcher.Groups[3].ToString();
-                    this.Page = matcher.Groups[4].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN3, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Class = "HO107";
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Book = matcher.Groups[2].ToString();
-                    this.Folio = matcher.Groups[3].ToString(); ;
-                    this.Page = matcher.Groups[4].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN4, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Class = "HO107";
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Book = matcher.Groups[2].ToString();
-                    this.Folio = MISSING;
-                    this.Page = matcher.Groups[3].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.INCOMPLETE;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN5, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Class = "HO107";
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Book = MISSING;
-                    this.Folio = MISSING;
-                    this.Page = matcher.Groups[2].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.INCOMPLETE;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Class = "RG14";
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Schedule = matcher.Groups[2].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN2, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Class = "RG14";
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Schedule = matcher.Groups[2].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Class = "RG14";
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Schedule = matcher.Groups[2].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN4, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Schedule = MISSING;
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.INCOMPLETE;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN5, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Page = matcher.Groups[2].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, SCOT_CENSUS_PATTERN, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Parish = matcher.Groups[1].ToString();
-                    this.ED = matcher.Groups[2].ToString();
-                    this.Page = matcher.Groups[3].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.SCOTLAND;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, SCOT_CENSUS_PATTERN2, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Parish = matcher.Groups[1].ToString().Replace("/00", "").Replace("/", "-");
-                    this.ED = matcher.Groups[2].ToString().Replace("/00", "").TrimStart('0');
-                    this.Page = matcher.Groups[3].ToString().TrimStart('0');
-                    this.IsUKCensus = true;
-                    this.Country = Countries.SCOTLAND;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, SCOT_CENSUS_PATTERN3, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Parish = matcher.Groups[1].ToString().TrimStart('0');
-                    this.ED = matcher.Groups[2].ToString().Replace("/00", "").TrimStart('0');
-                    this.Page = matcher.Groups[3].ToString().TrimStart('0');
-                    this.IsUKCensus = true;
-                    this.Country = Countries.SCOTLAND;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, US_CENSUS_PATTERN, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Class = "US" + matcher.Groups[1].ToString();
-                    this.Place = matcher.Groups[2].ToString();
-                    this.Roll = matcher.Groups[3].ToString();
-                    this.Page = matcher.Groups[4].ToString();
-                    if (matcher.Groups.Count == 7)
-                        this.ED = matcher.Groups[6].ToString();
-                    this.IsUKCensus = false;
-                    this.Country = Countries.UNITED_STATES;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, LC_CENSUS_PATTERN_EW, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    if (matcher.Groups[4].ToString().Equals("1881"))
-                        this.Class = "RG11";
-                    else
-                        this.Class = "HO107";
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Folio = matcher.Groups[2].ToString();
-                    this.Page = matcher.Groups[3].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, LC_CENSUS_PATTERN_1911_EW, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Class = "RG14";
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Schedule = matcher.Groups[2].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, LC_CENSUS_PATTERN_SCOT, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Class = "RG11";
-                    this.Parish = matcher.Groups[1].ToString();
-                    this.ED = matcher.Groups[2].ToString();
-                    this.Page = matcher.Groups[3].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.SCOTLAND;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_MISSINGCLASS_PATTERN, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Folio = matcher.Groups[2].ToString();
-                    this.Page = matcher.Groups[3].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(text, EW_MISSINGCLASS_PATTERN2, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Folio = matcher.Groups[2].ToString();
-                    this.Page = MISSING;
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.INCOMPLETE;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
                 // no match so store text 
                 this.Status = ReferenceStatus.UNRECOGNISED;
                 if (unknownCensusRef.Length == 0)
@@ -402,45 +135,335 @@ namespace FTAnalyzer
             // now check sources to see if census reference is in title page
             foreach (FactSource fs in Fact.Sources)
             {
-                Match matcher = Regex.Match(fs.SourceTitle, EW_CENSUS_1841_51_PATTERN_FH, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
+                if (CheckPatterns(fs.SourceTitle))
+                    return true;
+                if (CheckPatterns(fs.Publication))
+                    return true;
+            }
+            return false;
+        }
+
+        private bool CheckPatterns(string text)
+        {
+            Match matcher = Regex.Match(text, EW_CENSUS_PATTERN, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "RG" + matcher.Groups[1].ToString();
+                this.Piece = matcher.Groups[2].ToString();
+                this.Folio = matcher.Groups[3].ToString();
+                this.Page = matcher.Groups[4].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_PATTERN2, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "RG" + matcher.Groups[1].ToString();
+                this.Piece = matcher.Groups[2].ToString();
+                this.Folio = matcher.Groups[3].ToString();
+                this.Page = MISSING;
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.INCOMPLETE;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_PATTERN_FH, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "RG" + matcher.Groups[1].ToString();
+                this.Piece = matcher.Groups[2].ToString();
+                this.Folio = matcher.Groups[3].ToString();
+                this.Page = matcher.Groups[4].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "HO107";
+                this.Piece = matcher.Groups[1].ToString();
+                this.Folio = matcher.Groups[2].ToString();
+                this.Page = matcher.Groups[3].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN2, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "HO107";
+                this.Piece = matcher.Groups[1].ToString();
+                this.Book = matcher.Groups[2].ToString();
+                this.Folio = matcher.Groups[3].ToString();
+                this.Page = matcher.Groups[4].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN3, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "HO107";
+                this.Piece = matcher.Groups[1].ToString();
+                this.Book = matcher.Groups[2].ToString();
+                this.Folio = matcher.Groups[3].ToString(); ;
+                this.Page = matcher.Groups[4].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN4, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "HO107";
+                this.Piece = matcher.Groups[1].ToString();
+                this.Book = matcher.Groups[2].ToString();
+                this.Folio = MISSING;
+                this.Page = matcher.Groups[3].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.INCOMPLETE;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN5, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "HO107";
+                this.Piece = matcher.Groups[1].ToString();
+                this.Book = MISSING;
+                this.Folio = MISSING;
+                this.Page = matcher.Groups[2].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.INCOMPLETE;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN_FH, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "HO107";
+                this.Piece = matcher.Groups[1].ToString();
+                this.Folio = matcher.Groups[2].ToString();
+                this.Page = matcher.Groups[3].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_1841_51_PATTERN_FH2, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "HO107";
+                this.Piece = matcher.Groups[1].ToString();
+                this.Folio = matcher.Groups[2].ToString();
+                this.Page = matcher.Groups[3].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "RG14";
+                this.Piece = matcher.Groups[1].ToString();
+                this.Schedule = matcher.Groups[2].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN2, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "RG14";
+                this.Piece = matcher.Groups[1].ToString();
+                this.Schedule = matcher.Groups[2].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN3, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "RG14";
+                this.Piece = matcher.Groups[1].ToString();
+                this.Schedule = matcher.Groups[2].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN4, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Piece = matcher.Groups[1].ToString();
+                this.Schedule = MISSING;
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.INCOMPLETE;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN5, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Piece = matcher.Groups[1].ToString();
+                this.Page = matcher.Groups[2].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN_FH, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "RG14";
+                this.Piece = matcher.Groups[1].ToString();
+                this.Schedule = matcher.Groups[2].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, SCOT_CENSUS_PATTERN, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Parish = matcher.Groups[1].ToString();
+                this.ED = matcher.Groups[2].ToString();
+                this.Page = matcher.Groups[3].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.SCOTLAND;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, SCOT_CENSUS_PATTERN2, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Parish = matcher.Groups[1].ToString().Replace("/00", "").Replace("/", "-");
+                this.ED = matcher.Groups[2].ToString().Replace("/00", "").TrimStart('0');
+                this.Page = matcher.Groups[3].ToString().TrimStart('0');
+                this.IsUKCensus = true;
+                this.Country = Countries.SCOTLAND;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, SCOT_CENSUS_PATTERN3, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Parish = matcher.Groups[1].ToString().TrimStart('0');
+                this.ED = matcher.Groups[2].ToString().Replace("/00", "").TrimStart('0');
+                this.Page = matcher.Groups[3].ToString().TrimStart('0');
+                this.IsUKCensus = true;
+                this.Country = Countries.SCOTLAND;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, US_CENSUS_PATTERN, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "US" + matcher.Groups[1].ToString();
+                this.Place = matcher.Groups[2].ToString();
+                this.Roll = matcher.Groups[3].ToString();
+                this.Page = matcher.Groups[4].ToString();
+                if (matcher.Groups.Count == 7)
+                    this.ED = matcher.Groups[6].ToString();
+                this.IsUKCensus = false;
+                this.Country = Countries.UNITED_STATES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, LC_CENSUS_PATTERN_EW, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                if (matcher.Groups[4].ToString().Equals("1881"))
+                    this.Class = "RG11";
+                else
                     this.Class = "HO107";
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Book = matcher.Groups[2].ToString();
-                    this.Folio = matcher.Groups[3].ToString();
-                    this.Page = matcher.Groups[4].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(fs.SourceTitle, EW_CENSUS_PATTERN_FH, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Class = matcher.Groups[1].ToString();
-                    this.Piece = matcher.Groups[2].ToString();
-                    this.Folio = matcher.Groups[3].ToString();
-                    this.Page = matcher.Groups[4].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
-                matcher = Regex.Match(fs.SourceTitle, EW_CENSUS_1911_PATTERN_FH, RegexOptions.IgnoreCase);
-                if (matcher.Success)
-                {
-                    this.Class = "RG14";
-                    this.Piece = matcher.Groups[1].ToString();
-                    this.Schedule = matcher.Groups[2].ToString();
-                    this.IsUKCensus = true;
-                    this.Country = Countries.ENG_WALES;
-                    this.Status = ReferenceStatus.GOOD;
-                    this.MatchString = matcher.Value;
-                    return true;
-                }
+                this.Piece = matcher.Groups[1].ToString();
+                this.Folio = matcher.Groups[2].ToString();
+                this.Page = matcher.Groups[3].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, LC_CENSUS_PATTERN_1911_EW, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "RG14";
+                this.Piece = matcher.Groups[1].ToString();
+                this.Schedule = matcher.Groups[2].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, LC_CENSUS_PATTERN_SCOT, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "RG11";
+                this.Parish = matcher.Groups[1].ToString();
+                this.ED = matcher.Groups[2].ToString();
+                this.Page = matcher.Groups[3].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.SCOTLAND;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_MISSINGCLASS_PATTERN, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Piece = matcher.Groups[1].ToString();
+                this.Folio = matcher.Groups[2].ToString();
+                this.Page = matcher.Groups[3].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_MISSINGCLASS_PATTERN2, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Piece = matcher.Groups[1].ToString();
+                this.Folio = matcher.Groups[2].ToString();
+                this.Page = MISSING;
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.INCOMPLETE;
+                this.MatchString = matcher.Value;
+                return true;
             }
             return false;
         }
