@@ -18,6 +18,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using GeoAPI.Geometries;
 using System.Net;
+using System.Text.RegularExpressions;
 
 namespace FTAnalyzer
 {
@@ -2685,7 +2686,7 @@ namespace FTAnalyzer
                         foreach (XmlNode worldEvent in nodes)
                         {
                             XmlNode descNode = worldEvent.SelectSingleNode("description");
-                            string desc = descNode.InnerText.Replace("ampampnbsp", " ").Replace("ampampndash", "-");
+                            string desc = FixWikiFormatting(descNode.InnerText);
                             XmlNode dateNode = worldEvent.SelectSingleNode("date");
                             fd = GetWikiDate(dateNode, eventDate);
                             Fact f = new Fact("Wikipedia", Fact.WORLD_EVENT, fd, desc, true, true);
@@ -2698,6 +2699,14 @@ namespace FTAnalyzer
                 Application.DoEvents();
             }
             return events;
+        }
+
+        private string FixWikiFormatting(string input)
+        {
+            string result = input.Replace("ampampnbsp", " ").Replace("ampampndash", "-");
+            Regex rgx = new Regex("{{.*}}");
+            result = rgx.Replace(result, string.Empty);
+            return result;
         }
 
         private static FactDate GetWikiDate(XmlNode dateNode, FactDate defaultDate)
