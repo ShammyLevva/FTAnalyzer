@@ -32,7 +32,8 @@ namespace FTAnalyzer
                       "Census date range too wide/Unknown",
                       "Fact warning/error detected",
                       "Unknown Fact Type",
-                      "Flagged as living but has death date"
+                      "Flagged as living but has death date",
+                      "Children Status Total Mismatch"
                     };
 
         //"Later marriage before previous spouse died"

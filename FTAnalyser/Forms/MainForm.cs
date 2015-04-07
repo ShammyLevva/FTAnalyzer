@@ -23,7 +23,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "5.0.0.0-beta9";
+        public static string VERSION = "5.0.0.0-beta10";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -1829,7 +1829,13 @@ namespace FTAnalyzer
         private void dgDataErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgDataErrors.CurrentRow.Cells["IndividualID"].Value);
+            {
+                DataError error = (DataError)dgDataErrors.CurrentRow.DataBoundItem;
+                if(error.IsFamily())
+                    ShowFamilyFacts((string)dgDataErrors.CurrentRow.Cells["Reference"].Value);
+                else
+                    ShowFacts((string)dgDataErrors.CurrentRow.Cells["Reference"].Value);
+            }
         }
 
         private void dgLooseDeaths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -1961,9 +1967,21 @@ namespace FTAnalyzer
 
         private void ShowFacts(string indID, bool offset = false)
         {
-            log.Debug("MainForm.ShowFacts: About to show facts for id:" + indID);
             Individual ind = ft.GetIndividual(indID);
             Facts factForm = new Facts(ind);
+            DisposeDuplicateForms(factForm);
+            factForm.Show();
+            if (offset)
+            {
+                factForm.Left += 200;
+                factForm.Top += 100;
+            }
+        }
+
+        private void ShowFamilyFacts(string famID, bool offset = false)
+        {
+            Family fam = ft.GetFamily(famID);
+            Facts factForm = new Facts(fam);
             DisposeDuplicateForms(factForm);
             factForm.Show();
             if (offset)

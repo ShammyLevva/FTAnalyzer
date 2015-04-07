@@ -407,7 +407,7 @@ namespace FTAnalyzer
             }
             else
                 this.FactErrorMessage = "Children status doesn't match valid pattern Total x, Alive y, Dead z";
-            this.FactErrorNumber = (int)FamilyTree.Dataerror.FACT_ERROR;
+            this.FactErrorNumber = (int)FamilyTree.Dataerror.CHILDRENSTATUS_TOTAL_MISMATCH;
             this.FactErrorLevel = FactError.ERROR;
         }
 

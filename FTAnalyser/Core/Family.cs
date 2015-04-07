@@ -326,7 +326,7 @@ namespace FTAnalyzer
             }
         }
 
-        private string FamilyName
+        public string FamilyName
         {
             get
             {

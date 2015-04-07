@@ -43,7 +43,7 @@ namespace FTAnalyzer
         private SortableBindingList<DuplicateIndividual> duplicates;
         private TreeNode mainformTreeRootNode;
         private TreeNode placesTreeRootNode;
-        private static int DATA_ERROR_GROUPS = 22;
+        private static int DATA_ERROR_GROUPS = 23;
         private static XmlNodeList noteNodes = null;
         private bool _loading = false;
         private bool _dataloaded = false;
@@ -1473,10 +1473,12 @@ namespace FTAnalyzer
             for (int i = 0; i < DATA_ERROR_GROUPS; i++)
                 errors[i] = new List<DataError>();
             // calculate error lists
+            #region Individual Fact Errors
             foreach (Individual ind in AllIndividuals)
             {
                 try
                 {
+                    #region Death facts
                     if (ind.DeathDate.IsKnown)
                     {
                         if (ind.BirthDate.IsAfter(ind.DeathDate))
@@ -1491,6 +1493,7 @@ namespace FTAnalyzer
                         if (ind.IsFlaggedAsLiving)
                             errors[(int)Dataerror.LIVING_WITH_DEATH_DATE].Add(new DataError((int)Dataerror.LIVING_WITH_DEATH_DATE, ind, "Flagged as living but has death date of " + ind.DeathDate));
                     }
+                    #endregion
                     #region Error facts
                     foreach (Fact f in ind.ErrorFacts)
                     {
@@ -1566,6 +1569,7 @@ namespace FTAnalyzer
                         }
                     }
                     #endregion
+                    #region Parents Facts
                     foreach (ParentalRelationship parents in ind.FamiliesAsChild)
                     {
                         Family asChild = parents.Family;
@@ -1622,6 +1626,7 @@ namespace FTAnalyzer
                             //}
                         }
                     }
+                    #endregion
                 }
                 catch (Exception e)
                 {
@@ -1632,6 +1637,37 @@ namespace FTAnalyzer
                     }
                 }
             }
+            #endregion
+            #region Family Fact Errors
+            catchCount = 0;
+            foreach (Family fam in AllFamilies)
+            {
+                try
+                {
+                    foreach (Fact f in fam.Facts)
+                    {
+                        if (f.FactErrorLevel == Fact.FactError.ERROR)
+                        {
+                            if (f.FactType == Fact.CHILDREN1911)
+                                errors[(int)Dataerror.CHILDRENSTATUS_TOTAL_MISMATCH].Add(
+                                    new DataError((int)Dataerror.CHILDRENSTATUS_TOTAL_MISMATCH, fam, f.FactErrorMessage));
+                            else
+                                errors[(int)Dataerror.FACT_ERROR].Add(
+                                    new DataError((int)Dataerror.FACT_ERROR, fam, f.FactErrorMessage));
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    if (catchCount == 0) // prevent multiple displays of the same error - usually resource icon load failures
+                    {
+                        ErrorHandler.Show("FTA_0001", e);
+                        catchCount++;
+                    }
+                }
+            }
+            #endregion
+
             for (int i = 0; i < DATA_ERROR_GROUPS; i++)
                 dataErrorTypes.Add(new DataErrorGroup(i, errors[i]));
         }
@@ -1663,7 +1699,7 @@ namespace FTAnalyzer
             AGED_MORE_THAN_110 = 8, FACTS_BEFORE_BIRTH = 9, FACTS_AFTER_DEATH = 10, MARRIAGE_AFTER_DEATH = 11,
             MARRIAGE_AFTER_SPOUSE_DEAD = 12, MARRIAGE_BEFORE_13 = 13, MARRIAGE_BEFORE_SPOUSE_13 = 14, LOST_COUSINS_NON_CENSUS = 15,
             LOST_COUSINS_NOT_SUPPORTED_YEAR = 16, RESIDENCE_CENSUS_DATE = 17, CENSUS_COVERAGE = 18, FACT_ERROR = 19,
-            UNKNOWN_FACT_TYPE = 20, LIVING_WITH_DEATH_DATE = 21
+            UNKNOWN_FACT_TYPE = 20, LIVING_WITH_DEATH_DATE = 21, CHILDRENSTATUS_TOTAL_MISMATCH = 22
         };
 
         public void SetDataErrorsCheckedDefaults(CheckedListBox list)
