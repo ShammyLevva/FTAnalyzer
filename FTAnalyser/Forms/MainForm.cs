@@ -1982,20 +1982,29 @@ namespace FTAnalyzer
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            Facts facts = new Facts(ft.AllIndividuals.Where(filter), BuildFactTypeList(ckbFactSelect), BuildFactTypeList(ckbFactExclude));
+            Facts facts = new Facts(ft.AllIndividuals.Where(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true));
             facts.Show();
             HourGlass(false);
         }
 
-        private List<string> BuildFactTypeList(CheckedListBox list)
+        private List<string> BuildFactTypeList(CheckedListBox list, bool includeCreated)
         {
             List<string> result = new List<string>();
             if (list == ckbFactExclude && ckbFactExclude.Visible == false)
                 return result; // if we aren't looking to exclude facts don't pass anything to list of exclusions
             int index = 0;
             foreach (string factType in list.Items)
+            {
                 if (list.GetItemChecked(index++))
-                    result.Add(factType);
+                {
+                    if (includeCreated)
+                        result.Add(factType);
+                    else
+                        if (factType != Fact.GetFactTypeDescription(Fact.PARENT) && factType != Fact.GetFactTypeDescription(Fact.CHILDREN) &&
+                            factType != Fact.GetFactTypeDescription(Fact.CENSUS_FTA))
+                                result.Add(factType);
+                }
+            }
             return result;
         }
 
@@ -2078,7 +2087,7 @@ namespace FTAnalyzer
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            Facts facts = new Facts(ft.AllIndividuals.Where(filter), BuildFactTypeList(ckbFactSelect));
+            Facts facts = new Facts(ft.AllIndividuals.Where(filter), BuildFactTypeList(ckbFactSelect, false));
             facts.Show();
             HourGlass(false);
         }

@@ -60,6 +60,10 @@ namespace FTAnalyzer
             MARRIAGE, CHILDREN
                     });
 
+        public static readonly ISet<string> CREATED_FACTS = new HashSet<string>(new string[] {
+            CENSUS_FTA, CHILDREN, PARENT
+                    });
+
         private static readonly Dictionary<string, string> CUSTOM_TAGS = new Dictionary<string, string>();
         private static readonly HashSet<string> COMMENT_FACTS = new HashSet<string>();
 
@@ -157,7 +161,7 @@ namespace FTAnalyzer
             COMMENT_FACTS.Add(CHILDREN1911);
         }
 
-        private string GetFactTypeDescription(string factType)
+        internal static string GetFactTypeDescription(string factType)
         {
             switch (factType)
             {
