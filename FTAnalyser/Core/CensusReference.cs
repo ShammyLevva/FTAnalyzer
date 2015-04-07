@@ -33,13 +33,13 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH2 = @"HO *107\/(\d{1,5}) ED *(\d{1,4}[a-z]?) F(olio)? *(\d{1,4}) p(age)? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH3 = @"HO *107/(\d{1,5}) .*F(olio)? *(\d{1,4})/(\d{1,4}) p(age)? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH4 = @"HO *107/(\d{1,5}) .*F(olio)? *(\d{1,4}) p(age)? *(\d{1,3})"; 
-        private static readonly string EW_CENSUS_1911_PATTERN = @"RG *14 *PN(\d{1,6}) .*SN(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN78 = @"RG *78 *PN(\d{1,6}) .*SN(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN2 = @"RG *14[;,]? *Piece:? *(\d{1,6})[;,]? *SN:? *(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN3 = @"RG *14[;,]? *Piece:? *(\d{1,6})[;,]? *Schedule Number:? *(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN4 = @"RG *14[;,]? *Piece:? *(\d{1,6})[;,]?$";
-        private static readonly string EW_CENSUS_1911_PATTERN5 = @"RG *14[;,]? *Piece:? *(\d{1,6})[;,]? *Page:? *(\d{1,3})";
-        private static readonly string EW_CENSUS_1911_PATTERN6 = @"RG *14[;,]? *RD:? *(\d{1,4})[;,]? *ED:? *(\d{1,3}) (\d{1,5})";
+        private static readonly string EW_CENSUS_1911_PATTERN = @"RG *14/? *PN(\d{1,6}) .*SN(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN78 = @"RG *78/? *PN(\d{1,6}) .*SN(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN2 = @"RG *14[;,/]? *Piece:? *(\d{1,6})[;,]? *SN:? *(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN3 = @"RG *14[;,/]? *Piece:? *(\d{1,6})[;,]? *Schedule Number:? *(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN4 = @"RG *14[;,/]? *Piece:? *(\d{1,6})[;,]?$";
+        private static readonly string EW_CENSUS_1911_PATTERN5 = @"RG *14[;,/]? *Piece:? *(\d{1,6})[;,]? *Page:? *(\d{1,3})";
+        private static readonly string EW_CENSUS_1911_PATTERN6 = @"RG *14[;,/]? *RD:? *(\d{1,4})[;,]? *ED:? *(\d{1,3}) (\d{1,5})";
         private static readonly string EW_CENSUS_1911_PATTERN_FH = @"RG *14/PN(\d{1,6}) .*SN(\d{1,4})";
         private static readonly string SCOT_CENSUS_PATTERN = @"Parish:? *([A-Z .'-]+)[;,]? *ED:? *(\d{1,3}[AB]?)[;,]? *Page:? *(\d{1,4})[;,]? *Line:? *(\d{1,2})";
         private static readonly string SCOT_CENSUS_PATTERN2 = @"(\d{3}/\d{1,2}[AB]?) (\d{3}/\d{2}) (\d{3,4})";
@@ -72,6 +72,7 @@ namespace FTAnalyzer
         public FactDate CensusYear { get; private set; }
         public string MatchString { get; private set; }
         public string Country { get; private set; }
+        public string URL { get; private set; }
         
         private CensusReference()
         {
@@ -92,6 +93,7 @@ namespace FTAnalyzer
             this.unknownCensusRef = string.Empty;
             this.MatchString = string.Empty;
             this.Country = Countries.UNKNOWN_COUNTRY;
+            this.URL = string.Empty;
         }
 
         public CensusReference(Fact fact, XmlNode node)
@@ -99,14 +101,15 @@ namespace FTAnalyzer
         {
             this.Fact = fact;
             if (GetCensusReference(node))
-                unknownCensusRef = string.Empty;
+            {
+                this.unknownCensusRef = string.Empty;
+                this.CensusYear = GetCensusYearFromReference();
+                this.URL = GetCensusURLFromReference();
+            }
             if (fact.FactDate.IsKnown)
                 this.CensusYear = fact.FactDate;
             else
-            {
-                this.CensusYear = GetCensusYearFromReference();
                 this.Fact.UpdateFactDate(this.CensusYear);
-            }
         }
 
         public CensusReference(string individualID, string notes)
@@ -115,8 +118,9 @@ namespace FTAnalyzer
             this.Fact = new Fact(individualID, Fact.CENSUS_FTA, FactDate.UNKNOWN_DATE);
             if (GetCensusReference(notes))
             {
-                unknownCensusRef = string.Empty;
+                this.unknownCensusRef = string.Empty;
                 this.CensusYear = GetCensusYearFromReference();
+                this.URL = GetCensusURLFromReference();
                 this.Fact.UpdateFactDate(this.CensusYear);
                 this.Fact.SetCensusReferenceDetails(this, "Fact created by FTAnalyzer after finding census ref: " + this.MatchString + " in the notes/sources for this individual");
             }
@@ -125,7 +129,7 @@ namespace FTAnalyzer
         private bool GetCensusReference(XmlNode n)
         {
             // aggressively remove multi spaces to allow for spaces in the census references
-            string text = FamilyTree.GetText(n, "PAGE").Replace("   ", " ").Replace("  ", " ").Replace("  ", " ");
+            string text = FamilyTree.GetText(n, "PAGE").Replace("   ", " ").Replace("  ", " ").Replace("  ", " ").Replace("  ", " ");
             return GetCensusReference(text);
         }
 
@@ -587,6 +591,23 @@ namespace FTAnalyzer
             return FactDate.UNKNOWN_DATE;
         }
 
+        private string GetCensusURLFromReference()
+        {
+            string result = string.Empty;
+            if (this.CensusYear.Overlaps(CensusDate.UKCENSUS1911) && Countries.IsEnglandWales(this.Country) && this.Piece.Length > 0 && this.Schedule.Length > 0)
+                result = @"http://search.findmypast.co.uk/results/world-records/1911-census-for-england-and-wales?pieceno=" + this.Piece + @"&schedule=" + this.Schedule;
+            if (this.CensusYear.Overlaps(CensusDate.UKCENSUS1841) && Countries.IsUnitedKingdom(this.Country) && this.Piece.Length > 0 && this.Folio.Length > 0 && this.Page.Length > 0)
+            {
+                if (this.Book.Length > 0)
+                    result = @"http://search.findmypast.co.uk/results/world-records/1841-england-wales-and-scotland-census?pieceno=" + this.Piece + @"&book=" + this.Book + @"&folio=" + this.Folio + @"&page=" + this.Page;
+                else
+                    result = @"http://search.findmypast.co.uk/results/world-records/1841-england-wales-and-scotland-census?pieceno=" + this.Piece + @"&folio=" + this.Folio + @"&page=" + this.Page;
+            }
+            if (this.CensusYear.Overlaps(CensusDate.UKCENSUS1881) && Countries.IsUnitedKingdom(this.Country) && this.Piece.Length > 0 && this.Folio.Length > 0 && this.Page.Length > 0)
+                result = @"http://search.findmypast.co.uk/results/world-records/1881-england-wales-and-scotland-census?pieceno=" + this.Piece + @"&folio=" + this.Folio + @"&page=" + this.Page;
+            return result;
+        }
+
         public string Reference
         {
             get
@@ -659,6 +680,11 @@ namespace FTAnalyzer
                 log.Warn("Census reference text not generated for :" + ReferenceText);
                 return string.Empty;
             }
+        }
+
+        public override string ToString()
+        {
+            return Reference;
         }
     }
 }

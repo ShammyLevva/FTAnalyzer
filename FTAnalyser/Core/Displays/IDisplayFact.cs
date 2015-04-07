@@ -24,7 +24,7 @@ namespace FTAnalyzer
         string GeocodeStatus { get; }
         string FoundLocation { get; }
         string FoundResultType { get; }
-        string CensusReference { get; }
+        CensusReference CensusReference { get; }
         string Comment { get; }
         string SourceList { get; }
         double Latitude { get; }

@@ -11,6 +11,7 @@ using Printing.DataGridViewPrint.Tools;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Web;
 
 namespace FTAnalyzer.Forms
 {
@@ -22,6 +23,7 @@ namespace FTAnalyzer.Forms
         private FamilyTree ft = FamilyTree.Instance;
         private SortableBindingList<IDisplayFact> facts;
         private Font italicFont;
+        private Font linkFont;
         private bool allFacts;
         private ReportFormHelper reportFormHelper;
         private bool CensusRefReport;
@@ -38,6 +40,7 @@ namespace FTAnalyzer.Forms
             ExtensionMethods.DoubleBuffered(dgFacts, true);
             reportFormHelper = new ReportFormHelper(this, this.Text, dgFacts, this.ResetTable, "Facts");
             italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
+            linkFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Underline);
             dgFacts.Columns["IndividualID"].Visible = true;
             dgFacts.Columns["CensusReference"].Visible = false;
             dgFacts.Columns["IgnoreFact"].Visible = false;
@@ -217,6 +220,12 @@ namespace FTAnalyzer.Forms
                     IgnoreList.Remove(ignoreFact.FactHash); // no longer ignoring so remove from list
                 SerializeIgnoreList();
             }
+            if (e.RowIndex >=0 && e.ColumnIndex == dgFacts.Columns["CensusReference"].Index)
+            {
+                DisplayFact df = (DisplayFact)dgFacts.Rows[e.RowIndex].DataBoundItem;
+                if(df.CensusReference.URL.Length > 0)
+                    HttpUtility.VisitWebsite(df.CensusReference.URL);
+            }
         }
 
         private void btnShowHideFacts_Click(object sender, EventArgs e)
@@ -367,6 +376,11 @@ namespace FTAnalyzer.Forms
                     }
                 }
                 cell.Style.BackColor = f.BackColour;
+                if(e.ColumnIndex == dgFacts.Columns["CensusReference"].Index && f.CensusReference.URL.Length > 0)
+                {
+                    cell.Style.ForeColor = Color.Blue;
+                    cell.Style.Font = linkFont;
+                }
             }
         }
 

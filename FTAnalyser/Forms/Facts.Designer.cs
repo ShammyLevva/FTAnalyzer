@@ -361,6 +361,7 @@
             this.CensusReference.MinimumWidth = 25;
             this.CensusReference.Name = "CensusReference";
             this.CensusReference.ReadOnly = true;
+            this.CensusReference.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.CensusReference.Width = 250;
             // 
             // AgeAtFact

@@ -2428,13 +2428,13 @@ namespace FTAnalyzer
                 foreach (Fact f in ind.AllFacts)
                     if (f.IsCensusFact && f.CensusReference != null && f.CensusReference.Reference.Length > 0)
                         censusRefs.Add(new DisplayFact(ind, f));
-            IEnumerable<string> distinctRefs = censusRefs.Select(x => x.FactDate.StartDate.Year + x.CensusReference).Distinct();
+            IEnumerable<string> distinctRefs = censusRefs.Select(x => x.FactDate.StartDate.Year + x.CensusReference.ToString()).Distinct();
             tspbTabProgress.Maximum = distinctRefs.Count();
             tspbTabProgress.Value = 0;
             tspbTabProgress.Visible = true;
             foreach (string censusref in distinctRefs)
             {
-                Predicate<DisplayFact> match = x => censusref == x.FactDate.StartDate.Year + x.CensusReference;
+                Predicate<DisplayFact> match = x => censusref == x.FactDate.StartDate.Year + x.CensusReference.ToString();
                 IEnumerable<DisplayFact> result = censusRefs.Where(match);
                 int count = result.Select(x => x.Location).Distinct().Count();
                 if (count > 1)

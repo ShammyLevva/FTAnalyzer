@@ -367,7 +367,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1064, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1093, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -846,7 +846,7 @@
             this.tspbTabProgress});
             this.statusStrip.Location = new System.Drawing.Point(0, 501);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1064, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1093, 22);
             this.statusStrip.TabIndex = 10;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -2314,7 +2314,7 @@
             this.tabDisplayProgress.Location = new System.Drawing.Point(4, 22);
             this.tabDisplayProgress.Name = "tabDisplayProgress";
             this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplayProgress.Size = new System.Drawing.Size(1056, 445);
+            this.tabDisplayProgress.Size = new System.Drawing.Size(1085, 445);
             this.tabDisplayProgress.TabIndex = 1;
             this.tabDisplayProgress.Text = "Gedcom Stats";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
@@ -2344,7 +2344,7 @@
             this.rtbOutput.Location = new System.Drawing.Point(3, 112);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(1050, 327);
+            this.rtbOutput.Size = new System.Drawing.Size(1079, 327);
             this.rtbOutput.TabIndex = 6;
             this.rtbOutput.Text = "";
             this.rtbOutput.TextChanged += new System.EventHandler(this.rtbOutput_TextChanged);
@@ -2422,7 +2422,7 @@
             this.tabSelector.Location = new System.Drawing.Point(0, 27);
             this.tabSelector.Name = "tabSelector";
             this.tabSelector.SelectedIndex = 0;
-            this.tabSelector.Size = new System.Drawing.Size(1064, 471);
+            this.tabSelector.Size = new System.Drawing.Size(1093, 471);
             this.tabSelector.TabIndex = 9;
             this.tabSelector.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -2913,7 +2913,7 @@
             this.tabToday.Padding = new System.Windows.Forms.Padding(3);
             this.tabToday.Size = new System.Drawing.Size(1056, 445);
             this.tabToday.TabIndex = 17;
-            this.tabToday.Text = "Today";
+            this.tabToday.Text = "On This Day";
             this.tabToday.UseVisualStyleBackColor = true;
             // 
             // label18
@@ -3042,7 +3042,7 @@
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1064, 523);
+            this.ClientSize = new System.Drawing.Size(1093, 523);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabSelector);
