@@ -476,7 +476,7 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText(lostCousinsWarnIgnore + " warnings (data ignored in strict mode), ");
             if (lostCousinsErrors > 0)
                 xmlErrorbox.AppendText(lostCousinsErrors + " errors (data discarded), ");
-            xmlErrorbox.AppendText((lostCousinsFacts + lostCousinsWarnAllow) + " usable facts loaded)\n");
+            xmlErrorbox.AppendText((lostCousinsFacts + lostCousinsWarnAllow) + " usable facts loaded)");
             if (censusFacts == 0 && resiCensus == 0 && censusWarnAllow == 0 && censusFTAFacts == 0)
             {
                 xmlErrorbox.AppendText("\nFound no census or suitable residence facts in GEDCOM File and no recognisable\n");
@@ -484,7 +484,7 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("The most likely reason is that you have recorded census facts as notes and have\n");
                 xmlErrorbox.AppendText("not recorded any census references. This will mean that the census report will\n");
                 xmlErrorbox.AppendText("show everyone as not yet found on census and the Lost Cousins report will show\n");
-                xmlErrorbox.AppendText("no-one with a census needing to be entered onto your Lost Cousins My Ancestors page.\n");
+                xmlErrorbox.AppendText("no-one with a census needing to be entered onto your Lost Cousins My Ancestors page.");
             }
         }
 
@@ -2682,10 +2682,13 @@ namespace FTAnalyzer
                             todaysFacts.Add(new DisplayFact(i, f));
             }
             todaysFacts.Sort();
-            int earliestYear = todaysFacts.Count > 0 ? todaysFacts[0].FactDate.StartDate.Year : 1752; // if no facts show world events for Gregorian calendar to today
-            List<DisplayFact> worldEvents = AddWorldEvents(earliestYear, chosenDate, wholeMonth, stepSize, bar);
-            todaysFacts.AddRange(worldEvents);
-            todaysFacts.Sort();
+            if (Properties.GeneralSettings.Default.ShowWorldEvents)
+            {
+                int earliestYear = todaysFacts.Count > 0 ? todaysFacts[0].FactDate.StartDate.Year : 1752; // if no facts show world events for Gregorian calendar to today
+                List<DisplayFact> worldEvents = AddWorldEvents(earliestYear, chosenDate, wholeMonth, stepSize, bar);
+                todaysFacts.AddRange(worldEvents);
+                todaysFacts.Sort();
+            }
             foreach(DisplayFact f in todaysFacts)
                 TodaysText.AppendText(f.ToString() + "\n");
         }

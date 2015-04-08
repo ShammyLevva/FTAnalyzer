@@ -133,8 +133,11 @@ namespace FTAnalyzer
             AddFacts(node, Fact.CUSTOM_FACT);
             AddFacts(node, Fact.UNKNOWN);
 
-            AddCensusSourceFacts();
-            AddCensusNoteFacts();
+            if (Properties.GeneralSettings.Default.AutoCreateCensusFacts)
+            {
+                AddCensusSourceFacts();
+                AddCensusNoteFacts();
+            }
         }
 
         internal Individual(Individual i)

@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace FTAnalyzer
 {
-    public class CensusReference
+    public class CensusReference : IComparable<CensusReference>
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         //Database online. Class: HO107; Piece: 1782; Folio: 719; Page: 25; GSU
@@ -593,26 +593,41 @@ namespace FTAnalyzer
 
         private string GetCensusURLFromReference()
         {
-            string year = CensusYear.StartDate.Year.ToString();
-            string baseURL = @"http://www.awin1.com/cread.php?awinmid=2114&awinaffid=88963&clickref=FTA";
-            if (year.Equals("1911") && Countries.IsEnglandWales(this.Country) && this.Piece.Length > 0 && this.Schedule.Length > 0)
-                return baseURL + @"1911&p=http://search.findmypast.co.uk/results/world-records/1911-census-for-england-and-wales?pieceno=" + this.Piece + @"&schedule=" + this.Schedule;
-            if (Countries.IsUnitedKingdom(Country))
+            if (CensusDate.IsUKCensusYear(CensusYear, true))
             {
-                string querystring = string.Empty;
-                if (Piece.Length > 0)
-                    querystring = @"?pieceno=" + this.Piece;
-                if (Folio.Length > 0)
-                    querystring = querystring + @"&folio=" + this.Folio;
-                if (Page.Length > 0)
-                    querystring = querystring + @"&page=" + this.Page;
-                if (year.Equals("1841"))
+                string year = CensusYear.StartDate.Year.ToString();
+                string baseURL = @"http://www.awin1.com/cread.php?awinmid=2114&awinaffid=88963&clickref=FTA";
+                if (year.Equals("1911") && Countries.IsEnglandWales(this.Country) && this.Piece.Length > 0 && this.Schedule.Length > 0)
+                    return baseURL + @"1911&p=http://search.findmypast.co.uk/results/world-records/1911-census-for-england-and-wales?pieceno=" + this.Piece + @"&schedule=" + this.Schedule;
+                if (Countries.IsUnitedKingdom(Country))
                 {
-                    if (this.Book.Length > 0)
-                        return baseURL + @"1841&p=http://search.findmypast.co.uk/results/world-records/1841-england-wales-and-scotland-census?" + querystring + @"&book=" + this.Book;
+                    string querystring = string.Empty;
+                    if (Country.Equals(Countries.SCOTLAND))
+                    {
+                        if (Parish.Length > 0)
+                            querystring = @"pieceno=" + this.Parish;
+                        if (ED.Length > 0)
+                            querystring = querystring + @"&folio=" + this.ED;
+                        if (Page.Length > 0)
+                            querystring = querystring + @"&page=" + this.Page;
+                    }
+                    else
+                    {
+                        if (Piece.Length > 0)
+                            querystring = @"pieceno=" + this.Piece;
+                        if (Folio.Length > 0)
+                            querystring = querystring + @"&folio=" + this.Folio;
+                        if (Page.Length > 0)
+                            querystring = querystring + @"&page=" + this.Page;
+                    }
+                    if (year.Equals("1841"))
+                    {
+                        if (this.Book.Length > 0)
+                            return baseURL + @"1841&p=http://search.findmypast.co.uk/results/world-records/1841-england-wales-and-scotland-census?" + querystring + @"&book=" + this.Book;
+                    }
+                    else if (querystring.Length > 0)
+                        return baseURL + year + @"&p=http://search.findmypast.co.uk/results/world-records/" + year + "-england-wales-and-scotland-census?" + querystring;
                 }
-                else
-                    return baseURL + year + @"&p=http://search.findmypast.co.uk/results/world-records/" + year + "-england-wales-and-scotland-census?" + querystring;
             }
             return string.Empty;
         }
@@ -694,6 +709,11 @@ namespace FTAnalyzer
         public override string ToString()
         {
             return Reference;
+        }
+
+        public int CompareTo(CensusReference that)
+        {
+            return this.Reference.CompareTo(that.Reference);
         }
     }
 }
