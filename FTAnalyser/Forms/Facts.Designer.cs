@@ -19,6 +19,7 @@
             }
             base.Dispose(disposing);
             italicFont.Dispose();
+            linkFont.Dispose();
             reportFormHelper.Dispose();
         }
 

@@ -593,16 +593,26 @@ namespace FTAnalyzer
 
         private string GetCensusURLFromReference()
         {
-            if (this.CensusYear.Overlaps(CensusDate.UKCENSUS1911) && Countries.IsEnglandWales(this.Country) && this.Piece.Length > 0 && this.Schedule.Length > 0)
-                return @"http://search.findmypast.co.uk/results/world-records/1911-census-for-england-and-wales?pieceno=" + this.Piece + @"&schedule=" + this.Schedule;
-            if (this.CensusYear.Overlaps(CensusDate.UKCENSUS1881) && Countries.IsUnitedKingdom(this.Country) && this.Piece.Length > 0 && this.Folio.Length > 0 && this.Page.Length > 0)
-                return @"http://search.findmypast.co.uk/results/world-records/1881-england-wales-and-scotland-census?pieceno=" + this.Piece + @"&folio=" + this.Folio + @"&page=" + this.Page;
-            if (this.CensusYear.Overlaps(CensusDate.UKCENSUS1841) && Countries.IsUnitedKingdom(this.Country) && this.Piece.Length > 0 && this.Folio.Length > 0 && this.Page.Length > 0)
+            string year = CensusYear.StartDate.Year.ToString();
+            string baseURL = @"http://www.awin1.com/cread.php?awinmid=2114&awinaffid=88963&clickref=FTA";
+            if (year.Equals("1911") && Countries.IsEnglandWales(this.Country) && this.Piece.Length > 0 && this.Schedule.Length > 0)
+                return baseURL + @"1911&p=http://search.findmypast.co.uk/results/world-records/1911-census-for-england-and-wales?pieceno=" + this.Piece + @"&schedule=" + this.Schedule;
+            if (Countries.IsUnitedKingdom(Country))
             {
-                if (this.Book.Length > 0)
-                    return @"http://search.findmypast.co.uk/results/world-records/1841-england-wales-and-scotland-census?pieceno=" + this.Piece + @"&book=" + this.Book + @"&folio=" + this.Folio + @"&page=" + this.Page;
+                string querystring = string.Empty;
+                if (Piece.Length > 0)
+                    querystring = @"?pieceno=" + this.Piece;
+                if (Folio.Length > 0)
+                    querystring = querystring + @"&folio=" + this.Folio;
+                if (Page.Length > 0)
+                    querystring = querystring + @"&page=" + this.Page;
+                if (year.Equals("1841"))
+                {
+                    if (this.Book.Length > 0)
+                        return baseURL + @"1841&p=http://search.findmypast.co.uk/results/world-records/1841-england-wales-and-scotland-census?" + querystring + @"&book=" + this.Book;
+                }
                 else
-                    return @"http://search.findmypast.co.uk/results/world-records/1841-england-wales-and-scotland-census?pieceno=" + this.Piece + @"&folio=" + this.Folio + @"&page=" + this.Page;
+                    return baseURL + year + @"&p=http://search.findmypast.co.uk/results/world-records/" + year + "-england-wales-and-scotland-census?" + querystring;
             }
             return string.Empty;
         }
