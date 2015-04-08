@@ -593,19 +593,18 @@ namespace FTAnalyzer
 
         private string GetCensusURLFromReference()
         {
-            string result = string.Empty;
             if (this.CensusYear.Overlaps(CensusDate.UKCENSUS1911) && Countries.IsEnglandWales(this.Country) && this.Piece.Length > 0 && this.Schedule.Length > 0)
-                result = @"http://search.findmypast.co.uk/results/world-records/1911-census-for-england-and-wales?pieceno=" + this.Piece + @"&schedule=" + this.Schedule;
+                return @"http://search.findmypast.co.uk/results/world-records/1911-census-for-england-and-wales?pieceno=" + this.Piece + @"&schedule=" + this.Schedule;
+            if (this.CensusYear.Overlaps(CensusDate.UKCENSUS1881) && Countries.IsUnitedKingdom(this.Country) && this.Piece.Length > 0 && this.Folio.Length > 0 && this.Page.Length > 0)
+                return @"http://search.findmypast.co.uk/results/world-records/1881-england-wales-and-scotland-census?pieceno=" + this.Piece + @"&folio=" + this.Folio + @"&page=" + this.Page;
             if (this.CensusYear.Overlaps(CensusDate.UKCENSUS1841) && Countries.IsUnitedKingdom(this.Country) && this.Piece.Length > 0 && this.Folio.Length > 0 && this.Page.Length > 0)
             {
                 if (this.Book.Length > 0)
-                    result = @"http://search.findmypast.co.uk/results/world-records/1841-england-wales-and-scotland-census?pieceno=" + this.Piece + @"&book=" + this.Book + @"&folio=" + this.Folio + @"&page=" + this.Page;
+                    return @"http://search.findmypast.co.uk/results/world-records/1841-england-wales-and-scotland-census?pieceno=" + this.Piece + @"&book=" + this.Book + @"&folio=" + this.Folio + @"&page=" + this.Page;
                 else
-                    result = @"http://search.findmypast.co.uk/results/world-records/1841-england-wales-and-scotland-census?pieceno=" + this.Piece + @"&folio=" + this.Folio + @"&page=" + this.Page;
+                    return @"http://search.findmypast.co.uk/results/world-records/1841-england-wales-and-scotland-census?pieceno=" + this.Piece + @"&folio=" + this.Folio + @"&page=" + this.Page;
             }
-            if (this.CensusYear.Overlaps(CensusDate.UKCENSUS1881) && Countries.IsUnitedKingdom(this.Country) && this.Piece.Length > 0 && this.Folio.Length > 0 && this.Page.Length > 0)
-                result = @"http://search.findmypast.co.uk/results/world-records/1881-england-wales-and-scotland-census?pieceno=" + this.Piece + @"&folio=" + this.Folio + @"&page=" + this.Page;
-            return result;
+            return string.Empty;
         }
 
         public string Reference
