@@ -45,6 +45,8 @@
             this.chkUseAlias = new System.Windows.Forms.CheckBox();
             this.chkHideMissingTagged = new System.Windows.Forms.CheckBox();
             this.chkReverseLocations = new System.Windows.Forms.CheckBox();
+            this.chkAutoCreateCensus = new System.Windows.Forms.CheckBox();
+            this.chkShowWorldEvents = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownAge)).BeginInit();
             this.SuspendLayout();
@@ -164,10 +166,29 @@
             this.chkReverseLocations.UseVisualStyleBackColor = true;
             this.chkReverseLocations.CheckedChanged += new System.EventHandler(this.chkReverseLocations_CheckedChanged);
             // 
+            // chkAutoCreateCensus
+            // 
+            resources.ApplyResources(this.chkAutoCreateCensus, "chkAutoCreateCensus");
+            this.chkAutoCreateCensus.Checked = true;
+            this.chkAutoCreateCensus.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAutoCreateCensus.Name = "chkAutoCreateCensus";
+            this.chkAutoCreateCensus.UseVisualStyleBackColor = true;
+            this.chkAutoCreateCensus.CheckedChanged += new System.EventHandler(this.chkAutoCreateCensus_CheckedChanged);
+            // 
+            // chkShowWorldEvents
+            // 
+            resources.ApplyResources(this.chkShowWorldEvents, "chkShowWorldEvents");
+            this.chkShowWorldEvents.Checked = true;
+            this.chkShowWorldEvents.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkShowWorldEvents.Name = "chkShowWorldEvents";
+            this.chkShowWorldEvents.UseVisualStyleBackColor = true;
+            // 
             // GeneralSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkShowWorldEvents);
+            this.Controls.Add(this.chkAutoCreateCensus);
             this.Controls.Add(this.chkReverseLocations);
             this.Controls.Add(this.chkHideMissingTagged);
             this.Controls.Add(this.chkUseAlias);
@@ -207,6 +228,8 @@
         private System.Windows.Forms.CheckBox chkUseAlias;
         private System.Windows.Forms.CheckBox chkHideMissingTagged;
         private System.Windows.Forms.CheckBox chkReverseLocations;
+        private System.Windows.Forms.CheckBox chkShowWorldEvents;
+        private System.Windows.Forms.CheckBox chkAutoCreateCensus;
 
 
 	}
