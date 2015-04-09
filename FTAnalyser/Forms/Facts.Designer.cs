@@ -358,7 +358,7 @@
             // 
             this.CensusReference.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.CensusReference.DataPropertyName = "CensusReference";
-            this.CensusReference.HeaderText = "CensusReference";
+            this.CensusReference.HeaderText = "Census Reference";
             this.CensusReference.MinimumWidth = 25;
             this.CensusReference.Name = "CensusReference";
             this.CensusReference.ReadOnly = true;
