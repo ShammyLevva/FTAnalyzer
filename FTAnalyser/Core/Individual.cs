@@ -881,9 +881,12 @@ namespace FTAnalyzer
                 {
                     foreach (FactSource s in f.Sources)
                     {
-                        CensusReference cr = new CensusReference(IndividualID, s.SourceText);
-                        if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD))
+                        CensusReference cr = new CensusReference(IndividualID, s.SourceText, true);
+                        if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD) && !CensusFactExists(cr.Fact.FactDate))
+                        {
+                            cr.Fact.Sources.Add(s);
                             AddFact(cr.Fact);
+                        }
                     }
                 }
             }
@@ -901,7 +904,7 @@ namespace FTAnalyzer
                 while (checkNotes)
                 {
                     checkNotes = false;
-                    CensusReference cr = new CensusReference(IndividualID, notes);
+                    CensusReference cr = new CensusReference(IndividualID, notes, false);
                     if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD) && !CensusFactExists(cr.Fact.FactDate))
                     {
                         AddFact(cr.Fact);

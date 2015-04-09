@@ -112,7 +112,7 @@ namespace FTAnalyzer
                 this.Fact.UpdateFactDate(this.CensusYear);
         }
 
-        public CensusReference(string individualID, string notes)
+        public CensusReference(string individualID, string notes, bool source)
             : this()
         {
             this.Fact = new Fact(individualID, Fact.CENSUS_FTA, FactDate.UNKNOWN_DATE);
@@ -122,7 +122,10 @@ namespace FTAnalyzer
                 this.CensusYear = GetCensusYearFromReference();
                 this.URL = GetCensusURLFromReference();
                 this.Fact.UpdateFactDate(this.CensusYear);
-                this.Fact.SetCensusReferenceDetails(this, "Fact created by FTAnalyzer after finding census ref: " + this.MatchString + " in the notes/sources for this individual");
+                if(source)
+                    this.Fact.SetCensusReferenceDetails(this, "Fact created by FTAnalyzer after finding census ref: " + this.MatchString + " in a source for this individual");
+                else
+                    this.Fact.SetCensusReferenceDetails(this, "Fact created by FTAnalyzer after finding census ref: " + this.MatchString + " in the notes for this individual");
             }
         }
 
