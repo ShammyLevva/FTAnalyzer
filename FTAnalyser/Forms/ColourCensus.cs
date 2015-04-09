@@ -202,7 +202,7 @@ namespace FTAnalyzer.Forms
                 {
                     DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
                     int value = (int)cell.Value;
-                    if (value == 1 || value == 2)
+                    if (value >= 1 && value <= 7) // allows any type of record to search census
                     {
                         IDisplayColourCensus person = (IDisplayColourCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
                         int censusYear;

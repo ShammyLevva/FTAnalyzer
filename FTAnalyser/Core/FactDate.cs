@@ -586,7 +586,7 @@ namespace FTAnalyzer
             int iYear = Convert.ToInt32(year);
             if (iYear >= 1752)
             {
-                DoubleDateError = "Double dates are only valid prior to 1752.";
+                DoubleDateError = "Double dates are only valid prior to 1752 (for most GB countries and colonies).";
                 return false; // double years are only for pre 1752
             }
             if (month.Length == 3 && month != "JAN" && month != "FEB" && month != "MAR")
