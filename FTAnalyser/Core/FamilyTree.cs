@@ -31,6 +31,7 @@ namespace FTAnalyzer
         private IList<FactSource> sources;
         private IList<Individual> individuals;
         private IList<Family> families;
+        private IList<Tuple<string, Fact>> sharedFacts;
         private IDictionary<string, List<Individual>> occupations;
         private IDictionary<StandardisedName, StandardisedName> names;
         private ISet<string> unknownFactTypes;
@@ -168,7 +169,6 @@ namespace FTAnalyzer
             result.Append(remainder);
             return result.ToString();
         }
-
         #endregion
 
         #region Load Gedcom XML
@@ -178,6 +178,7 @@ namespace FTAnalyzer
             sources = new List<FactSource>();
             individuals = new List<Individual>();
             families = new List<Family>();
+            sharedFacts = new List<Tuple<string, Fact>>();
             occupations = new Dictionary<string, List<Individual>>();
             names = new Dictionary<StandardisedName, StandardisedName>();
             unknownFactTypes = new HashSet<string>();
@@ -294,6 +295,7 @@ namespace FTAnalyzer
                 rootIndividualID = individuals[0].IndividualID;
             UpdateRootIndividual(rootIndividualID, pbR);
             Application.DoEvents();
+            CreateSharedFacts();
             CountCensusFacts();
             FixIDs();
             SetDataErrorTypes();
@@ -414,6 +416,17 @@ namespace FTAnalyzer
                     xmlErrorbox.AppendText("\nFound " + count + " facts of unknown fact type " + tag);
                 }
                 xmlErrorbox.AppendText("\n");
+            }
+        }
+
+        private void CreateSharedFacts()
+        {
+            foreach(Tuple<string, Fact> t in sharedFacts)
+            {
+                Individual ind = GetIndividual(t.Item1);
+                Fact fact = t.Item2;
+                if (ind != null)
+                    ind.AddFact(fact);
             }
         }
 
@@ -676,6 +689,12 @@ namespace FTAnalyzer
         public Family GetFamily(string familyID)
         {
             return families.FirstOrDefault(f => f.FamilyID == familyID);
+        }
+
+        public void AddSharedFact(string individual, Fact fact)
+        {
+            Tuple<string, Fact> sf = new Tuple<string, Fact>(individual, fact);
+            sharedFacts.Add(sf);
         }
 
         public IEnumerable<Individual> GetIndividualsAtLocation(FactLocation loc, int level)

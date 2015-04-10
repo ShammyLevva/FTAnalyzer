@@ -344,8 +344,12 @@ namespace FTAnalyzer
                             this.CensusReference = new CensusReference(this, n);
                     }
                     // if we have checked the sources and no census ref see if its been added as a comment to this fact
-                    if (IsCensusFact && this.CensusReference == null && node.FirstChild != null)
-                        this.CensusReference = new CensusReference(this, node.FirstChild);
+                    if (IsCensusFact)
+                    {
+                        CheckForSharedFacts(node);
+                        if (this.CensusReference == null && node.FirstChild != null)
+                            this.CensusReference = new CensusReference(this, node.FirstChild);
+                    }
                     if (FactType == DEATH)
                     {
                         Comment = FamilyTree.GetText(node, "CAUS");
@@ -362,6 +366,18 @@ namespace FTAnalyzer
                     string message = (node == null) ? string.Empty : node.InnerText + ". ";
                     throw new InvalidXMLFactException(message + "\n            Error " + ex.Message + "\n");
                 }
+            }
+        }
+
+        private void CheckForSharedFacts(XmlNode node)
+        {
+            XmlNodeList list = node.SelectNodes("_SHAR");
+            foreach (XmlNode n in list)
+            {
+                string indref = n.Attributes["REF"].Value;
+                string role = FamilyTree.GetText(n, "ROLE");
+                if (role.Equals("Household Member"))
+                    FamilyTree.Instance.AddSharedFact(indref, this);
             }
         }
 
