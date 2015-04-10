@@ -112,24 +112,24 @@ namespace FTAnalyzer
             {
                 Match matcher = Regex.Match(f.Comment, Fact.CHILDREN_STATUS_PATTERN1);
                 if (matcher.Success)
-                    SetChildrenStatusCounts(matcher);
+                    SetChildrenStatusCounts(matcher, 1, 2, 4);
                 else
                 {
                     matcher = Regex.Match(f.Comment, Fact.CHILDREN_STATUS_PATTERN2);
                     if (matcher.Success)
-                        SetChildrenStatusCounts(matcher);
+                        SetChildrenStatusCounts(matcher, 1, 3, 4);
                 }
             }
         }
 
-        private void SetChildrenStatusCounts(Match matcher)
+        private void SetChildrenStatusCounts(Match matcher, int totalGroup, int aliveGroup, int deadGroup)
         {
             int resultT, resultA, resultD;
-            int.TryParse(matcher.Groups[1].Value, out resultT);
+            int.TryParse(matcher.Groups[totalGroup].Value, out resultT);
             ExpectedTotal += resultT;
-            int.TryParse(matcher.Groups[2].Value, out resultA);
+            int.TryParse(matcher.Groups[aliveGroup].Value, out resultA);
             ExpectedAlive += resultA;
-            int.TryParse(matcher.Groups[3].Value, out resultD);
+            int.TryParse(matcher.Groups[deadGroup].Value, out resultD);
             ExpectedDead += resultD;
         }
 
