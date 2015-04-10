@@ -38,15 +38,15 @@
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
             this.ctxViewNotes = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewNotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dgFamilies = new System.Windows.Forms.DataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.mnuSaveColumnLayout = new System.Windows.Forms.ToolStripButton();
             this.mnuResetColumns = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tssSaveButtons = new System.Windows.Forms.ToolStripSeparator();
             this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
-            this.dgFamilies = new System.Windows.Forms.DataGridView();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -54,8 +54,8 @@
             this.splitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.ctxViewNotes.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -71,27 +71,25 @@
             // txtCount
             // 
             this.txtCount.Name = "txtCount";
-            this.txtCount.Size = new System.Drawing.Size(118, 17);
-            this.txtCount.Text = "toolStripStatusLabel1";
+            this.txtCount.Size = new System.Drawing.Size(0, 17);
             // 
             // splitContainer
             // 
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer.Location = new System.Drawing.Point(0, 25);
             this.splitContainer.Name = "splitContainer";
             this.splitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.Controls.Add(this.dgIndividuals);
-            this.splitContainer.Panel1.Controls.Add(this.toolStrip1);
             // 
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.dgFamilies);
-            this.splitContainer.Size = new System.Drawing.Size(1038, 561);
-            this.splitContainer.SplitterDistance = 286;
-            this.splitContainer.TabIndex = 5;
+            this.splitContainer.Size = new System.Drawing.Size(1038, 536);
+            this.splitContainer.SplitterDistance = 273;
+            this.splitContainer.TabIndex = 7;
             // 
             // dgIndividuals
             // 
@@ -102,10 +100,10 @@
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.ContextMenuStrip = this.ctxViewNotes;
             this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgIndividuals.Location = new System.Drawing.Point(0, 25);
+            this.dgIndividuals.Location = new System.Drawing.Point(0, 0);
             this.dgIndividuals.MultiSelect = false;
             this.dgIndividuals.Name = "dgIndividuals";
-            this.dgIndividuals.Size = new System.Drawing.Size(1038, 261);
+            this.dgIndividuals.Size = new System.Drawing.Size(1038, 273);
             this.dgIndividuals.TabIndex = 2;
             this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgIndividuals_CellDoubleClick);
             this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgIndividuals_MouseDown);
@@ -125,12 +123,28 @@
             this.viewNotesToolStripMenuItem.Text = "View Notes";
             this.viewNotesToolStripMenuItem.Click += new System.EventHandler(this.viewNotesToolStripMenuItem_Click);
             // 
+            // dgFamilies
+            // 
+            this.dgFamilies.AllowUserToAddRows = false;
+            this.dgFamilies.AllowUserToDeleteRows = false;
+            this.dgFamilies.AllowUserToOrderColumns = true;
+            this.dgFamilies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgFamilies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgFamilies.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgFamilies.Location = new System.Drawing.Point(0, 0);
+            this.dgFamilies.MultiSelect = false;
+            this.dgFamilies.Name = "dgFamilies";
+            this.dgFamilies.Size = new System.Drawing.Size(1038, 259);
+            this.dgFamilies.TabIndex = 5;
+            this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFamilies_CellDoubleClick);
+            this.dgFamilies.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgFamilies_CellFormatting);
+            // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuSaveColumnLayout,
             this.mnuResetColumns,
-            this.toolStripSeparator2,
+            this.tssSaveButtons,
             this.printToolStripButton,
             this.printPreviewToolStripButton,
             this.toolStripSeparator,
@@ -163,11 +177,11 @@
             this.mnuResetColumns.Visible = false;
             this.mnuResetColumns.Click += new System.EventHandler(this.mnuResetColumns_Click);
             // 
-            // toolStripSeparator2
+            // tssSaveButtons
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            this.toolStripSeparator2.Visible = false;
+            this.tssSaveButtons.Name = "tssSaveButtons";
+            this.tssSaveButtons.Size = new System.Drawing.Size(6, 25);
+            this.tssSaveButtons.Visible = false;
             // 
             // printToolStripButton
             // 
@@ -204,28 +218,13 @@
             this.mnuExportToExcel.Text = "Export to Excel";
             this.mnuExportToExcel.Click += new System.EventHandler(this.mnuExportToExcel_Click);
             // 
-            // dgFamilies
-            // 
-            this.dgFamilies.AllowUserToAddRows = false;
-            this.dgFamilies.AllowUserToDeleteRows = false;
-            this.dgFamilies.AllowUserToOrderColumns = true;
-            this.dgFamilies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgFamilies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgFamilies.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgFamilies.Location = new System.Drawing.Point(0, 0);
-            this.dgFamilies.MultiSelect = false;
-            this.dgFamilies.Name = "dgFamilies";
-            this.dgFamilies.Size = new System.Drawing.Size(1038, 271);
-            this.dgFamilies.TabIndex = 5;
-            this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFamilies_CellDoubleClick);
-            this.dgFamilies.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgFamilies_CellFormatting);
-            // 
             // People
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1038, 583);
             this.Controls.Add(this.splitContainer);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "People";
@@ -234,15 +233,14 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
-            this.splitContainer.Panel1.PerformLayout();
             this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
             this.ctxViewNotes.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -260,7 +258,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton mnuSaveColumnLayout;
         private System.Windows.Forms.ToolStripButton mnuResetColumns;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator tssSaveButtons;
         private System.Windows.Forms.ToolStripButton printToolStripButton;
         private System.Windows.Forms.ToolStripButton printPreviewToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;

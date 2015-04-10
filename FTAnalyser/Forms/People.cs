@@ -29,6 +29,14 @@ namespace FTAnalyzer.Forms
             famReportFormHelper = new ReportFormHelper(this, this.Text, dgFamilies, this.ResetTable, "People");
             ExtensionMethods.DoubleBuffered(dgIndividuals, true);
             ExtensionMethods.DoubleBuffered(dgFamilies, true);
+            SetSaveButtonsStatus(false);
+        }
+
+        private void SetSaveButtonsStatus(bool value)
+        {
+            mnuSaveColumnLayout.Visible = value;
+            mnuResetColumns.Visible = value;
+            tssSaveButtons.Visible = value;
         }
 
         private void UpdateStatusCount()
@@ -140,14 +148,12 @@ namespace FTAnalyzer.Forms
 
         private void SortIndividuals()
         {
-            //indReportFormHelper.LoadColumnLayout("PeopleIndColumns.xml");
             dgIndividuals.Sort(dgIndividuals.Columns[1], ListSortDirection.Ascending);
             dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
         }
 
         private void SortFamilies()
         {
-            //famReportFormHelper.LoadColumnLayout("PeopleFamColumns.xml");
             dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
         }
 
@@ -352,22 +358,33 @@ namespace FTAnalyzer.Forms
 
         private void ResetTable()
         {
-            SortIndividuals();
+            if (!splitContainer.Panel1Collapsed)
+                SortIndividuals();
             if (!splitContainer.Panel2Collapsed)
                 SortFamilies();
         }
 
         private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
-            indReportFormHelper.SaveColumnLayout("PeopleIndColumns.xml");
-            famReportFormHelper.SaveColumnLayout("PeopleFamColumns.xml");
-            MessageBox.Show("Form Settings Saved", "People");
+            if (reportType == ReportType.MismatchedChildrenStatus || reportType == ReportType.MissingChildrenStatus)
+            {
+                if (!splitContainer.Panel1Collapsed)
+                    indReportFormHelper.SaveColumnLayout("ChildrenStatusIndColumns.xml");
+                if (!splitContainer.Panel2Collapsed)
+                    famReportFormHelper.SaveColumnLayout("ChildrenStatusFamColumns.xml");
+                MessageBox.Show("Form Settings Saved", "People");
+            }
         }
 
         private void mnuResetColumns_Click(object sender, EventArgs e)
         {
-            indReportFormHelper.ResetColumnLayout("PeopleIndColumns.xml");
-            famReportFormHelper.ResetColumnLayout("PeopleFamColumns.xml");
+            if (reportType == ReportType.MismatchedChildrenStatus || reportType == ReportType.MissingChildrenStatus)
+            {
+                if (!splitContainer.Panel1Collapsed)
+                    indReportFormHelper.ResetColumnLayout("ChildrenStatusIndColumns.xml");
+                if (!splitContainer.Panel2Collapsed)
+                    famReportFormHelper.ResetColumnLayout("ChildrenStatusFamColumns.xml");
+            }
         }
 
         private void printToolStripButton_Click(object sender, EventArgs e)
@@ -405,11 +422,12 @@ namespace FTAnalyzer.Forms
                 if (f.On1911Census && !f.HasChildrenStatus && f.FamilyID != Family.SOLOINDIVIDUAL && f.FamilyID != Family.PRE_MARRIAGE)
                     results.Add(f);
             }
+            reportType = ReportType.MissingChildrenStatus;
             dgFamilies.DataSource = results;
-            SortFamilies();
             splitContainer.Panel1Collapsed = true;
             splitContainer.Panel2Collapsed = false;
-            reportType = ReportType.MissingChildrenStatus;
+            famReportFormHelper.LoadColumnLayout("ChildrenStatusFamColumns.xml");
+            SetSaveButtonsStatus(true);
             this.Text = "Families with a 1911 census record but no Children Status record showing Children Alive/Dead";
             UpdateStatusCount();
         }
@@ -424,11 +442,12 @@ namespace FTAnalyzer.Forms
                     (f.ExpectedTotal != f.ChildrenTotal || f.ExpectedAlive != f.ChildrenAlive || f.ExpectedDead != f.ChildrenDead))
                     results.Add(f);
             }
+            reportType = ReportType.MismatchedChildrenStatus;
             dgFamilies.DataSource = results;
-            SortFamilies();
             splitContainer.Panel1Collapsed = true;
             splitContainer.Panel2Collapsed = false;
-            reportType = ReportType.MismatchedChildrenStatus;
+            famReportFormHelper.LoadColumnLayout("ChildrenStatusFamColumns.xml");
+            SetSaveButtonsStatus(true);
             this.Text = "1911 Census Families where the children status recorded doesn't match the children in tree";
             UpdateStatusCount();
         }

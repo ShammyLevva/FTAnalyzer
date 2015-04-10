@@ -183,7 +183,7 @@ namespace FTAnalyzer
             ResetFormLayout();
         }
 
-        private void LoadFormLayout()
+        public void LoadFormLayout()
         {
             if (saveForm)
             {
@@ -196,7 +196,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void SaveFormLayout()
+        public void SaveFormLayout()
         {
             if (saveForm && parent.WindowState == FormWindowState.Normal)
             {  //only save window size if not maximised or minimised
