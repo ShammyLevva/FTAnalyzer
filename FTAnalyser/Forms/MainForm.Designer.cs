@@ -907,7 +907,7 @@
             this.dgRegions.Name = "dgRegions";
             this.dgRegions.RowHeadersVisible = false;
             this.dgRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgRegions.Size = new System.Drawing.Size(1036, 407);
+            this.dgRegions.Size = new System.Drawing.Size(1065, 407);
             this.dgRegions.TabIndex = 1;
             this.toolTips.SetToolTip(this.dgRegions, "Double click on Region name to see list of individuals with that Region.");
             this.dgRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgRegions_CellDoubleClick);
@@ -926,7 +926,7 @@
             this.dgCountries.Name = "dgCountries";
             this.dgCountries.RowHeadersVisible = false;
             this.dgCountries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCountries.Size = new System.Drawing.Size(1036, 407);
+            this.dgCountries.Size = new System.Drawing.Size(1065, 407);
             this.dgCountries.TabIndex = 0;
             this.toolTips.SetToolTip(this.dgCountries, "Double click on Country name to see list of individuals with that Country.");
             this.dgCountries.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCountries_CellDoubleClick);
@@ -2143,7 +2143,7 @@
             this.tabCountries.Location = new System.Drawing.Point(4, 22);
             this.tabCountries.Name = "tabCountries";
             this.tabCountries.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCountries.Size = new System.Drawing.Size(1042, 413);
+            this.tabCountries.Size = new System.Drawing.Size(1071, 413);
             this.tabCountries.TabIndex = 0;
             this.tabCountries.Text = "Countries";
             this.tabCountries.ToolTipText = "Double click on Country name to see list of individuals with that Country.";
@@ -2155,7 +2155,7 @@
             this.tabRegions.Location = new System.Drawing.Point(4, 22);
             this.tabRegions.Name = "tabRegions";
             this.tabRegions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRegions.Size = new System.Drawing.Size(1042, 413);
+            this.tabRegions.Size = new System.Drawing.Size(1071, 413);
             this.tabRegions.TabIndex = 1;
             this.tabRegions.Text = "Regions";
             this.tabRegions.ToolTipText = "Double click on Region name to see list of individuals with that Region.";
@@ -2167,7 +2167,7 @@
             this.tabSubRegions.Location = new System.Drawing.Point(4, 22);
             this.tabSubRegions.Name = "tabSubRegions";
             this.tabSubRegions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSubRegions.Size = new System.Drawing.Size(1042, 413);
+            this.tabSubRegions.Size = new System.Drawing.Size(1071, 413);
             this.tabSubRegions.TabIndex = 2;
             this.tabSubRegions.Text = "SubRegions";
             this.tabSubRegions.ToolTipText = "Double click on \'Parish\' name to see list of individuals with that parish/area.";
@@ -2186,7 +2186,7 @@
             this.dgSubRegions.Name = "dgSubRegions";
             this.dgSubRegions.RowHeadersVisible = false;
             this.dgSubRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgSubRegions.Size = new System.Drawing.Size(1036, 407);
+            this.dgSubRegions.Size = new System.Drawing.Size(1065, 407);
             this.dgSubRegions.TabIndex = 1;
             this.dgSubRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSubRegions_CellDoubleClick);
             this.dgSubRegions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgSubRegions_CellFormatting);
@@ -2197,7 +2197,7 @@
             this.tabAddresses.Location = new System.Drawing.Point(4, 22);
             this.tabAddresses.Name = "tabAddresses";
             this.tabAddresses.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAddresses.Size = new System.Drawing.Size(1042, 413);
+            this.tabAddresses.Size = new System.Drawing.Size(1071, 413);
             this.tabAddresses.TabIndex = 3;
             this.tabAddresses.Text = "Addresses";
             this.tabAddresses.ToolTipText = "Double click on Address name to see list of individuals with that Address.";
@@ -2216,7 +2216,7 @@
             this.dgAddresses.Name = "dgAddresses";
             this.dgAddresses.RowHeadersVisible = false;
             this.dgAddresses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgAddresses.Size = new System.Drawing.Size(1036, 407);
+            this.dgAddresses.Size = new System.Drawing.Size(1065, 407);
             this.dgAddresses.TabIndex = 1;
             this.dgAddresses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAddresses_CellDoubleClick);
             this.dgAddresses.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgAddresses_CellFormatting);
@@ -2227,7 +2227,7 @@
             this.tabPlaces.Location = new System.Drawing.Point(4, 22);
             this.tabPlaces.Name = "tabPlaces";
             this.tabPlaces.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlaces.Size = new System.Drawing.Size(1042, 413);
+            this.tabPlaces.Size = new System.Drawing.Size(1071, 413);
             this.tabPlaces.TabIndex = 4;
             this.tabPlaces.Text = "Places";
             this.tabPlaces.ToolTipText = "Double click on Address name to see list of individuals with that Place";
@@ -2246,7 +2246,7 @@
             this.dgPlaces.Name = "dgPlaces";
             this.dgPlaces.RowHeadersVisible = false;
             this.dgPlaces.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgPlaces.Size = new System.Drawing.Size(1036, 407);
+            this.dgPlaces.Size = new System.Drawing.Size(1065, 407);
             this.dgPlaces.TabIndex = 2;
             this.dgPlaces.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgPlaces_CellDoubleClick);
             this.dgPlaces.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgPlaces_CellFormatting);
@@ -3025,7 +3025,7 @@
             this.rtbToday.Location = new System.Drawing.Point(0, 59);
             this.rtbToday.Name = "rtbToday";
             this.rtbToday.ReadOnly = true;
-            this.rtbToday.Size = new System.Drawing.Size(1053, 390);
+            this.rtbToday.Size = new System.Drawing.Size(1079, 390);
             this.rtbToday.TabIndex = 7;
             this.rtbToday.Text = "";
             // 
