@@ -16,6 +16,8 @@ namespace FTAnalyzer.Forms
         private enum ReportType { People, MissingChildrenStatus, MismatchedChildrenStatus } 
         
         private bool selectRow = false;
+        private Font boldFont;
+        private Font normalFont;
         private Dictionary<IDisplayIndividual, IDisplayFamily> families;
         private FamilyTree ft = FamilyTree.Instance;
         private ReportFormHelper indReportFormHelper;
@@ -29,6 +31,8 @@ namespace FTAnalyzer.Forms
             famReportFormHelper = new ReportFormHelper(this, this.Text, dgFamilies, this.ResetTable, "People");
             ExtensionMethods.DoubleBuffered(dgIndividuals, true);
             ExtensionMethods.DoubleBuffered(dgFamilies, true);
+            boldFont = new Font(dgFamilies.DefaultCellStyle.Font, FontStyle.Bold);
+            normalFont = new Font(dgFamilies.DefaultCellStyle.Font, FontStyle.Regular);
             SetSaveButtonsStatus(false);
         }
 
@@ -41,14 +45,15 @@ namespace FTAnalyzer.Forms
 
         private void UpdateStatusCount()
         {
-            if (splitContainer.Panel2Collapsed)
-                txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals.  " + Properties.Messages.Hints_Individual;
-            else
-            {
-                txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals and " + dgFamilies.RowCount + " Families. " + Properties.Messages.Hints_IndividualFamily;
-            }
             if (reportType == ReportType.MissingChildrenStatus || reportType == ReportType.MismatchedChildrenStatus)
-                txtCount.Text += " Shift Double click to see colour census report for family.";
+                txtCount.Text = dgFamilies.RowCount + " Problems detected. " + Properties.Messages.Hints_IndividualFamily + " Shift Double click to see colour census report for family.";
+            else
+            { 
+                if (splitContainer.Panel2Collapsed)
+                    txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals.  " + Properties.Messages.Hints_Individual;
+                else
+                    txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals and " + dgFamilies.RowCount + " Families. " + Properties.Messages.Hints_IndividualFamily;
+            }
         }
 
         public void SetLocation(FactLocation loc, int level)
@@ -455,24 +460,50 @@ namespace FTAnalyzer.Forms
         private void dgFamilies_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (reportType == ReportType.MissingChildrenStatus)
-                e.CellStyle.BackColor = Color.Wheat;
+                e.CellStyle.BackColor = Color.BlanchedAlmond;
             else if (reportType == ReportType.MismatchedChildrenStatus)
             {
-                e.CellStyle.BackColor = Color.Wheat;
+                e.CellStyle.BackColor = Color.BlanchedAlmond;
+                e.CellStyle.Font = normalFont;
                 DataGridViewCellCollection cells = dgFamilies.Rows[e.RowIndex].Cells;
+                cells[e.ColumnIndex].ToolTipText = string.Empty;
                 switch (e.ColumnIndex)
                 {
                     case 6: // Totals
                     case 9:
-                        e.CellStyle.BackColor = cells["ChildrenTotal"].Value.Equals(cells["ExpectedTotal"].Value) ? Color.Wheat : Color.OrangeRed;
+                        if (!cells["ChildrenTotal"].Value.Equals(cells["ExpectedTotal"].Value))
+                        {
+                            e.CellStyle.BackColor = Color.Peru;
+                            e.CellStyle.Font = boldFont;
+                            cells[e.ColumnIndex].ToolTipText = "Number of children known to this family doesn't match total from Children Status.";
+                        }
+                        else
+                            cells[e.ColumnIndex].ToolTipText = "Totals match";
+                        e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                         break;
                     case 7: // Alive
                     case 10:
-                        e.CellStyle.BackColor = cells["ChildrenAlive"].Value.Equals(cells["ExpectedAlive"].Value) ? Color.Wheat : Color.OrangeRed;
+                        if (!cells["ChildrenAlive"].Value.Equals(cells["ExpectedAlive"].Value))
+                        {
+                            e.CellStyle.BackColor = Color.SandyBrown;
+                            e.CellStyle.Font = boldFont;
+                            cells[e.ColumnIndex].ToolTipText = "Number of children alive at time of census doesn't match number alive from Children Status.";
+                        }
+                        else
+                            cells[e.ColumnIndex].ToolTipText = "Numbers alive match";
+                        e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                         break;
-                    case 8: // ChildrenTotal
+                    case 8: // Dead
                     case 11:
-                        e.CellStyle.BackColor = cells["ChildrenDead"].Value.Equals(cells["ExpectedDead"].Value) ? Color.Wheat : Color.OrangeRed;
+                        if (!cells["ChildrenDead"].Value.Equals(cells["ExpectedDead"].Value))
+                        {
+                            e.CellStyle.BackColor = Color.Tan;
+                            e.CellStyle.Font = boldFont;
+                            cells[e.ColumnIndex].ToolTipText = "Number of children dead by time of census doesn't match number dead from Children Status.";
+                        }
+                        else
+                            cells[e.ColumnIndex].ToolTipText = "Numbers dead match";
+                        e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                         break;
                 }
             }

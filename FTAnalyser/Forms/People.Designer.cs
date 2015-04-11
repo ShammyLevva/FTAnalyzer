@@ -20,6 +20,8 @@
             base.Dispose(disposing);
             indReportFormHelper.Dispose();
             famReportFormHelper.Dispose();
+            boldFont.Dispose();
+            normalFont.Dispose();
         }
 
         #region Windows Form Designer generated code
