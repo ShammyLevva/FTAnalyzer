@@ -81,7 +81,7 @@ namespace FTAnalyzer
             ResetLocations();
             // load conversions from XML file
             string startPath;
-            if (Application.StartupPath.Contains("Common7\\IDE")) // running unit tests
+            if (Application.StartupPath.Contains("COMMON7\\IDE")) // running unit tests
                 startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
             else
                 startPath = Application.StartupPath;
