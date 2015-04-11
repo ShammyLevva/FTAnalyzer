@@ -442,6 +442,7 @@
     </Content>
     <Content Include="Resources\Mapping URLs.txt" />
     <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="x86\SQLite.Interop.dll" />
     <Resource Include="Resources\Lib\SharpMap.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -473,6 +474,7 @@
     <Content Include="x64\gdal_wrap.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="x64\SQLite.Interop.dll" />
     <Content Include="x86\gdal_wrap.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
