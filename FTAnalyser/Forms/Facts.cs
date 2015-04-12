@@ -380,6 +380,7 @@ namespace FTAnalyzer.Forms
                 {
                     cell.Style.ForeColor = Color.Blue;
                     cell.Style.Font = linkFont;
+                    cell.ToolTipText = "Click link to view census records on Find My Past.";
                 }
             }
         }
