@@ -607,7 +607,7 @@ namespace FTAnalyzer
 
         public void SetCensusReferenceDetails(CensusReference cr, string comment)
         {
-            if (CensusReference == null)
+            if (CensusReference == null || CensusReference == CensusReference.UNKNOWN)
                 this.CensusReference = cr;
             if (Location.IsBlank)
                 Location = FactLocation.GetLocation(cr.Country);
