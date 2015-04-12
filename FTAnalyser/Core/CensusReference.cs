@@ -94,6 +94,7 @@ namespace FTAnalyzer
             this.MatchString = string.Empty;
             this.Country = Countries.UNKNOWN_COUNTRY;
             this.URL = string.Empty;
+            this.CensusYear = FactDate.UNKNOWN_DATE;
         }
 
         public CensusReference(Fact fact, XmlNode node)

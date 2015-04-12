@@ -602,7 +602,7 @@ namespace FTAnalyzer
 
         public void UpdateFactDate(FactDate date)
         {
-            if (!FactDate.IsKnown)
+            if (!FactDate.IsKnown && date != null && date.IsKnown)
                 FactDate = date;
         }
 
