@@ -254,6 +254,7 @@ namespace FTAnalyzer
             this.Place = string.Empty;
             this.Location = FactLocation.UNKNOWN_LOCATION;
             this.Sources = new List<FactSource>();
+            this.CensusReference = CensusReference.UNKNOWN;
             this.CertificatePresent = false;
             this.FactErrorLevel = FactError.GOOD;
             this.FactErrorMessage = string.Empty;
@@ -262,7 +263,6 @@ namespace FTAnalyzer
             this.Created = false;
             this.Tag = string.Empty;
             this.Preferred = preferred;
-            this.Reference = reference;
         }
 
         public Fact(XmlNode node, Family family, bool preferred)
@@ -506,7 +506,6 @@ namespace FTAnalyzer
         public int FactErrorNumber { get; private set; }
         public FactError FactErrorLevel { get; private set; }
         public string FactErrorMessage { get; private set; }
-        public string Reference { get; private set; }
         public Individual Individual { get; private set; }
         public Family Family { get; private set; }
         public string FactTypeDescription { get { return (FactType == Fact.UNKNOWN && Tag.Length > 0) ? Tag : GetFactTypeDescription(FactType); } }

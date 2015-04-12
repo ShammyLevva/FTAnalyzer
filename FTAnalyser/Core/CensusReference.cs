@@ -50,6 +50,7 @@ namespace FTAnalyzer
         private static readonly string LC_CENSUS_PATTERN_SCOT = @"(\d{1-5}-?[AB12]?)\/(\d{1-3})\/(d{1-3}) .* Scotland 1881";
         
         public enum ReferenceStatus { BLANK = 0, UNRECOGNISED = 1, INCOMPLETE = 2, GOOD = 3 };
+        public static readonly CensusReference UNKNOWN = new CensusReference();
         private static readonly string MISSING = "Missing";
 
         private string unknownCensusRef;
@@ -606,16 +607,7 @@ namespace FTAnalyzer
                 if (Countries.IsUnitedKingdom(Country))
                 {
                     string querystring = string.Empty;
-                    if (Country.Equals(Countries.SCOTLAND))
-                    {
-                        if (Parish.Length > 0)
-                            querystring = @"pieceno=" + this.Parish;
-                        if (ED.Length > 0)
-                            querystring = querystring + @"&folio=" + this.ED;
-                        if (Page.Length > 0)
-                            querystring = querystring + @"&page=" + this.Page;
-                    }
-                    else
+                    if (!Country.Equals(Countries.SCOTLAND))
                     {
                         if (Piece.Length > 0)
                             querystring = @"pieceno=" + this.Piece;
@@ -705,7 +697,8 @@ namespace FTAnalyzer
                 }
                 if (unknownCensusRef.Length > 0)
                     return unknownCensusRef;
-                log.Warn("Census reference text not generated for :" + ReferenceText);
+                if(ReferenceText.Length > 0)
+                    log.Warn("Census reference text not generated for :" + ReferenceText);
                 return string.Empty;
             }
         }

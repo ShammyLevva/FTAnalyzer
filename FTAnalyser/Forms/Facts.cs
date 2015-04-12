@@ -42,7 +42,7 @@ namespace FTAnalyzer.Forms
             italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
             linkFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Underline);
             dgFacts.Columns["IndividualID"].Visible = true;
-            dgFacts.Columns["CensusReference"].Visible = false;
+            dgFacts.Columns["CensusReference"].Visible = true; // originally false - trying true v5.0.0.3
             dgFacts.Columns["IgnoreFact"].Visible = false;
             dgFacts.ReadOnly = true;
             sep1.Visible = false;
@@ -130,7 +130,7 @@ namespace FTAnalyzer.Forms
             else if (status == FTAnalyzer.CensusReference.ReferenceStatus.BLANK)
                 this.Text = "Blank Census Reference Report. Facts count: " + facts.Count;
             SetupFacts();
-            dgFacts.Columns["CensusReference"].Visible = true;
+            //dgFacts.Columns["CensusReference"].Visible = true;
         }
 
         public Facts(FactSource source)
@@ -140,7 +140,7 @@ namespace FTAnalyzer.Forms
             this.facts = ft.GetSourceDisplayFacts(source);
             this.Text = "Facts Report for source: " + source.ToString() + ". Facts count: " + facts.Count;
             SetupFacts();
-            dgFacts.Columns["CensusReference"].Visible = true;
+            //dgFacts.Columns["CensusReference"].Visible = true;
         }
 
         public Facts(List<DisplayFact> results)
@@ -155,7 +155,7 @@ namespace FTAnalyzer.Forms
             CensusRefReport = true;
             this.Text = "Families with the same census ref but different locations.";
             SetupFacts();
-            dgFacts.Columns["CensusReference"].Visible = true;
+            //dgFacts.Columns["CensusReference"].Visible = true;
             dgFacts.Columns["IgnoreFact"].Visible = true;
             dgFacts.Sort(dgFacts.Columns["DateofBirth"], ListSortDirection.Ascending);
             dgFacts.Sort(dgFacts.Columns["CensusReference"], ListSortDirection.Ascending);
@@ -167,7 +167,6 @@ namespace FTAnalyzer.Forms
         #region IgnoreList
         public void SerializeIgnoreList()
         {
-            log.Debug("FamilyTree.SerializeIgnoreList");
             try
             {
                 IFormatter formatter = new BinaryFormatter();
@@ -376,7 +375,7 @@ namespace FTAnalyzer.Forms
                     }
                 }
                 cell.Style.BackColor = f.BackColour;
-                if(e.ColumnIndex == dgFacts.Columns["CensusReference"].Index && f.CensusReference.URL.Length > 0)
+                if(e.ColumnIndex == dgFacts.Columns["CensusReference"].Index && f.CensusReference != null && f.CensusReference.URL.Length > 0)
                 {
                     cell.Style.ForeColor = Color.Blue;
                     cell.Style.Font = linkFont;
