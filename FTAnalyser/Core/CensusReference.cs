@@ -20,6 +20,10 @@ namespace FTAnalyzer
         //Year: 1900; Census Place: South Prairie, Pierce,Washington; Roll: T623_1748; Page: 4B; Enumeration District: 160.
         private static readonly string EW_CENSUS_PATTERN = @"RG *(\d{1,3})[;,]? *Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4})[a-z]?[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_PATTERN2 = @"RG *(\d{1,3})[;,]? *Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4})";
+        private static readonly string EW_CENSUS_PATTERN3 = @"(\d{4}) Census.* *Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4})[a-z]?[;,]? *Page:? *(\d{1,3})";
+        private static readonly string EW_CENSUS_PATTERN4 = @"(\d{4}) Census.* *Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4})";
+        private static readonly string EW_CENSUS_PATTERN5 = @"Census[: ]*(\d{4}).* *Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4})[a-z]?[;,]? *Page:? *(\d{1,3})";
+        private static readonly string EW_CENSUS_PATTERN6 = @"Census[: ]*(\d{4}).* *Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4})";
         private static readonly string EW_MISSINGCLASS_PATTERN = @"Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4})[a-z]?[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_MISSINGCLASS_PATTERN2 = @"Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4})";
         private static readonly string EW_CENSUS_PATTERN_FH = @"RG *(\d{1,2})/(\d{1,5}) F(olio)? ?(\d{1,4}) p(age)? ?(\d{1,3})";
@@ -120,14 +124,17 @@ namespace FTAnalyzer
             this.Fact = new Fact(individualID, Fact.CENSUS_FTA, FactDate.UNKNOWN_DATE);
             if (GetCensusReference(notes))
             {
-                this.unknownCensusRef = string.Empty;
-                this.CensusYear = GetCensusYearFromReference();
-                this.URL = GetCensusURLFromReference();
-                this.Fact.UpdateFactDate(this.CensusYear);
-                if(source)
-                    this.Fact.SetCensusReferenceDetails(this, "Fact created by FTAnalyzer after finding census ref: " + this.MatchString + " in a source for this individual");
-                else
-                    this.Fact.SetCensusReferenceDetails(this, "Fact created by FTAnalyzer after finding census ref: " + this.MatchString + " in the notes for this individual");
+                if (this.Class.Length > 0)
+                {  // don't create fact if we don't know what year its for
+                    this.unknownCensusRef = string.Empty;
+                    this.CensusYear = GetCensusYearFromReference();
+                    this.URL = GetCensusURLFromReference();
+                    this.Fact.UpdateFactDate(this.CensusYear);
+                    if (source)
+                        this.Fact.SetCensusReferenceDetails(this, "Fact created by FTAnalyzer after finding census ref: " + this.MatchString + " in a source for this individual");
+                    else
+                        this.Fact.SetCensusReferenceDetails(this, "Fact created by FTAnalyzer after finding census ref: " + this.MatchString + " in the notes for this individual");
+                }
             }
         }
 
@@ -192,6 +199,58 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = "RG" + matcher.Groups[1].ToString();
+                this.Piece = matcher.Groups[2].ToString();
+                this.Folio = matcher.Groups[3].ToString();
+                this.Page = MISSING;
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.INCOMPLETE;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_PATTERN3, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = GetCensusClass(matcher.Groups[1].ToString());
+                this.Piece = matcher.Groups[2].ToString();
+                this.Folio = matcher.Groups[3].ToString();
+                this.Page = matcher.Groups[4].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_PATTERN4, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = GetCensusClass(matcher.Groups[1].ToString());
+                this.Piece = matcher.Groups[2].ToString();
+                this.Folio = matcher.Groups[3].ToString();
+                this.Page = MISSING;
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.INCOMPLETE;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_PATTERN5, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = GetCensusClass(matcher.Groups[1].ToString());
+                this.Piece = matcher.Groups[2].ToString();
+                this.Folio = matcher.Groups[3].ToString();
+                this.Page = matcher.Groups[4].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.ENG_WALES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_PATTERN6, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = GetCensusClass(matcher.Groups[1].ToString());
                 this.Piece = matcher.Groups[2].ToString();
                 this.Folio = matcher.Groups[3].ToString();
                 this.Page = MISSING;
@@ -549,7 +608,7 @@ namespace FTAnalyzer
                 this.Page = matcher.Groups[3].ToString();
                 this.IsUKCensus = true;
                 this.Country = Countries.ENG_WALES;
-                this.Status = ReferenceStatus.GOOD;
+                this.Status = ReferenceStatus.INCOMPLETE;
                 this.MatchString = matcher.Value;
                 return true;
             }
@@ -566,6 +625,25 @@ namespace FTAnalyzer
                 return true;
             }
             return false;
+        }
+
+        private string GetCensusClass(string year)
+        {
+            if (year.Equals("1841") || year.Equals("1851"))
+                return "HO107";
+            if (year.Equals("1861"))
+                return "RG9";
+            if (year.Equals("1871"))
+                return "RG10";
+            if (year.Equals("1881"))
+                return "RG11";
+            if (year.Equals("1891"))
+                return "RG12";
+            if (year.Equals("1901"))
+                return "RG13";
+            if (year.Equals("1911"))
+                return "RG14";
+            return string.Empty;
         }
 
         private FactDate GetCensusYearFromReference()
