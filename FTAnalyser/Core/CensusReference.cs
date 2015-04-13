@@ -664,7 +664,7 @@ namespace FTAnalyzer
                 else
                     return CensusDate.UKCENSUS1841;
             }
-            if (this.Class.Equals("RG9"))
+            if (this.Class.Equals("RG9") || this.Class.Equals("RG09"))
                 return CensusDate.UKCENSUS1861;
             if (this.Class.Equals("RG10"))
                 return CensusDate.UKCENSUS1871;
@@ -739,7 +739,7 @@ namespace FTAnalyzer
                     if (piece <= 2531)
                         return Countries.CHANNEL_ISLANDS;
                 }
-                else if (censusClass.Equals("RG9"))
+                else if (censusClass.Equals("RG9") || censusClass.Equals("RG09"))
                 {
                     if (piece <= 3973)
                         return Countries.ENGLAND;
