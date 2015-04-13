@@ -61,7 +61,7 @@ namespace FTAnalyzer
             GUADELOUPE = "Guadeloupe", GREENLAND = "Greenland", FRENCH_GUIANA = "French Guiana", GUAM = "Guam",
             MACAO = "Macao", MONSERRAT ="Monserrat", MARTINIQUE = "Martinique", MAYOTTE = "Mayotte", 
             NEW_CALEDONIA = "New Caledonia", NIEU = "Nieu", PUERTO_RICO = "Puerto Rico", 
-            FRENCH_POLYNESIA = "French Polynesia", SAINT_HELENA = "Saint Helena", AT_SEA = "At Sea";
+            FRENCH_POLYNESIA = "French Polynesia", SAINT_HELENA = "Saint Helena", AT_SEA = "At Sea", OVERSEAS_UK = "Overseas UK Military";
 
         private static readonly ISet<string> KNOWN_COUNTRIES = new HashSet<string>(new string[] {
             SCOTLAND, ENGLAND, CANADA, UNITED_STATES, WALES, IRELAND, UNITED_KINGDOM, NEW_ZEALAND, AUSTRALIA, INDIA, FRANCE, GERMANY,
@@ -83,15 +83,15 @@ namespace FTAnalyzer
             IVORY_COAST_FR2, ANGUILLA, AMERICAN_SAMOA, ANTIGUA_BARBUDA, BERMUDA, BRUNEI, BRUNEI_FULL, DR_CONGO, COOK_ISLANDS, STKITTS, 
             LAO, LAO_FULL, PALESTINE, TIMOR_LESTE, TAIWAN, GUINEA_BISSAU, SAO_TOME_PRINCIPE, TOKELAU, SAINT_VINCENT, SAINT_VINCENT_FULL,
             ANTARTICA, CAYMAN, WESTERN_SAHARA, FALKLAND_ISLANDS, FAROES, GUADELOUPE, GREENLAND, FRENCH_GUIANA, GUAM, MACAO, MONSERRAT,
-            MARTINIQUE, MAYOTTE, NEW_CALEDONIA, NIEU, PUERTO_RICO, FRENCH_POLYNESIA, SAINT_HELENA, AT_SEA
+            MARTINIQUE, MAYOTTE, NEW_CALEDONIA, NIEU, PUERTO_RICO, FRENCH_POLYNESIA, SAINT_HELENA, AT_SEA, OVERSEAS_UK
         });
 
         private static readonly ISet<string> UK_COUNTRIES = new HashSet<string>(new string[] { 
-            SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM, NORTHERN_IRELAND, ISLE_OF_MAN, CHANNEL_ISLANDS
+            SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM, NORTHERN_IRELAND, ISLE_OF_MAN, CHANNEL_ISLANDS, OVERSEAS_UK
         });
 
         private static readonly ISet<string> CENSUS_COUNTRIES = new HashSet<string>(new string[] { 
-            SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM, UNITED_STATES, CANADA, ISLE_OF_MAN, IRELAND, CHANNEL_ISLANDS
+            SCOTLAND, ENGLAND, WALES, ENG_WALES, UNITED_KINGDOM, UNITED_STATES, CANADA, ISLE_OF_MAN, IRELAND, CHANNEL_ISLANDS, OVERSEAS_UK
         });
 
         private static Dictionary<string, Envelope> BOUNDING_BOXES;
@@ -136,7 +136,7 @@ namespace FTAnalyzer
 
         public static bool IsEnglandWales(string country)
         {
-            return country.Equals(ENG_WALES) || country.Equals(ENGLAND) || country.Equals(WALES) || country.Equals(ISLE_OF_MAN) || country.Equals(CHANNEL_ISLANDS);
+            return country.Equals(ENG_WALES) || country.Equals(ENGLAND) || country.Equals(WALES) || country.Equals(ISLE_OF_MAN) || country.Equals(CHANNEL_ISLANDS) || country.Equals(OVERSEAS_UK);
         }
 
         public static Envelope BoundingBox(string country)

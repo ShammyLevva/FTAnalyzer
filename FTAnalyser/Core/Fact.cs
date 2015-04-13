@@ -800,7 +800,7 @@ namespace FTAnalyzer
 
         public bool IsOverseasUKCensus(string country)
         {
-            return !Countries.IsUnitedKingdom(country) && CensusReference != null && CensusReference.IsUKCensus;
+            return country.Equals(Countries.OVERSEAS_UK) || (!Countries.IsUnitedKingdom(country) && CensusReference != null && CensusReference.IsUKCensus);
         }
 
         public override string ToString()

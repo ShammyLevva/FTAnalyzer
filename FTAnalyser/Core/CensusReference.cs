@@ -36,7 +36,7 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH = @"HO *107/(\d{1,5})/(\d{1,3}) .*F(olio)? *(\d{1,3}) p(age)? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH2 = @"HO *107\/(\d{1,5}) ED *(\d{1,4}[a-z]?) F(olio)? *(\d{1,4}) p(age)? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH3 = @"HO *107/(\d{1,5}) .*F(olio)? *(\d{1,4})/(\d{1,4}) p(age)? *(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_51_PATTERN_FH4 = @"HO *107/(\d{1,5}) .*F(olio)? *(\d{1,4}) p(age)? *(\d{1,3})"; 
+        private static readonly string EW_CENSUS_1841_51_PATTERN_FH4 = @"HO *107/(\d{1,5}) .*F(olio)? *(\d{1,4}) p(age)? *(\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN = @"RG *14/? *PN(\d{1,6}) .*SN(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN78 = @"RG *78/? *PN(\d{1,6}) .*SN(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN2 = @"RG *14[;,/]? *Piece:? *(\d{1,6})[;,]? *SN:? *(\d{1,4})";
@@ -52,7 +52,7 @@ namespace FTAnalyzer
         private static readonly string LC_CENSUS_PATTERN_EW = @"(\d{1-5})\/(\d{1-3})\/(d{1-3}) .* England & Wales (1841|1881)";
         private static readonly string LC_CENSUS_PATTERN_1911_EW = @"(\d{1-5})\/(\d{1-3}) .* England & Wales 1911";
         private static readonly string LC_CENSUS_PATTERN_SCOT = @"(\d{1-5}-?[AB12]?)\/(\d{1-3})\/(d{1-3}) .* Scotland 1881";
-        
+
         public enum ReferenceStatus { BLANK = 0, UNRECOGNISED = 1, INCOMPLETE = 2, GOOD = 3 };
         public static readonly CensusReference UNKNOWN = new CensusReference();
         private static readonly string MISSING = "Missing";
@@ -79,7 +79,7 @@ namespace FTAnalyzer
         public string MatchString { get; private set; }
         public string Country { get; private set; }
         public string URL { get; private set; }
-        
+
         private CensusReference()
         {
             this.Class = string.Empty;
@@ -151,7 +151,7 @@ namespace FTAnalyzer
 
         private bool GetCensusReference(string text)
         {
-            if (text.Length > 0)                       
+            if (text.Length > 0)
             {
                 if (CheckPatterns(text))
                 {
@@ -194,7 +194,7 @@ namespace FTAnalyzer
                 this.Folio = matcher.Groups[3].ToString();
                 this.Page = matcher.Groups[4].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -207,7 +207,7 @@ namespace FTAnalyzer
                 this.Folio = matcher.Groups[3].ToString();
                 this.Page = MISSING;
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.INCOMPLETE;
                 this.MatchString = matcher.Value;
                 return true;
@@ -220,7 +220,7 @@ namespace FTAnalyzer
                 this.Folio = matcher.Groups[3].ToString();
                 this.Page = matcher.Groups[4].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -233,7 +233,7 @@ namespace FTAnalyzer
                 this.Folio = matcher.Groups[3].ToString();
                 this.Page = MISSING;
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.INCOMPLETE;
                 this.MatchString = matcher.Value;
                 return true;
@@ -246,7 +246,7 @@ namespace FTAnalyzer
                 this.Folio = matcher.Groups[3].ToString();
                 this.Page = matcher.Groups[4].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -259,7 +259,7 @@ namespace FTAnalyzer
                 this.Folio = matcher.Groups[3].ToString();
                 this.Page = MISSING;
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.INCOMPLETE;
                 this.MatchString = matcher.Value;
                 return true;
@@ -272,7 +272,7 @@ namespace FTAnalyzer
                 this.Folio = matcher.Groups[4].ToString();
                 this.Page = matcher.Groups[6].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -286,7 +286,7 @@ namespace FTAnalyzer
                 this.Folio = matcher.Groups[5].ToString();
                 this.Page = matcher.Groups[7].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -299,7 +299,7 @@ namespace FTAnalyzer
                 this.Folio = matcher.Groups[2].ToString();
                 this.Page = matcher.Groups[3].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -313,7 +313,7 @@ namespace FTAnalyzer
                 this.Folio = matcher.Groups[3].ToString();
                 this.Page = matcher.Groups[4].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -327,7 +327,7 @@ namespace FTAnalyzer
                 this.Folio = matcher.Groups[3].ToString(); ;
                 this.Page = matcher.Groups[4].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -341,7 +341,7 @@ namespace FTAnalyzer
                 this.Folio = MISSING;
                 this.Page = matcher.Groups[3].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.INCOMPLETE;
                 this.MatchString = matcher.Value;
                 return true;
@@ -355,7 +355,7 @@ namespace FTAnalyzer
                 this.Folio = MISSING;
                 this.Page = matcher.Groups[2].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.INCOMPLETE;
                 this.MatchString = matcher.Value;
                 return true;
@@ -369,7 +369,7 @@ namespace FTAnalyzer
                 this.Folio = matcher.Groups[4].ToString();
                 this.Page = matcher.Groups[6].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -383,7 +383,7 @@ namespace FTAnalyzer
                 this.Folio = matcher.Groups[4].ToString();
                 this.Page = matcher.Groups[6].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -397,7 +397,7 @@ namespace FTAnalyzer
                 this.ED = matcher.Groups[4].ToString();
                 this.Page = matcher.Groups[6].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -410,7 +410,7 @@ namespace FTAnalyzer
                 this.Folio = matcher.Groups[3].ToString();
                 this.Page = matcher.Groups[5].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -422,7 +422,7 @@ namespace FTAnalyzer
                 this.Piece = matcher.Groups[1].ToString();
                 this.Schedule = matcher.Groups[2].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -434,7 +434,7 @@ namespace FTAnalyzer
                 this.Piece = matcher.Groups[1].ToString();
                 this.Schedule = matcher.Groups[2].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -446,7 +446,7 @@ namespace FTAnalyzer
                 this.Piece = matcher.Groups[1].ToString();
                 this.Schedule = matcher.Groups[2].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -458,7 +458,7 @@ namespace FTAnalyzer
                 this.Piece = matcher.Groups[1].ToString();
                 this.Schedule = matcher.Groups[2].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -470,7 +470,7 @@ namespace FTAnalyzer
                 this.Piece = matcher.Groups[1].ToString();
                 this.Schedule = MISSING;
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.INCOMPLETE;
                 this.MatchString = matcher.Value;
                 return true;
@@ -482,7 +482,7 @@ namespace FTAnalyzer
                 this.Piece = matcher.Groups[1].ToString();
                 this.Page = matcher.Groups[2].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -507,7 +507,7 @@ namespace FTAnalyzer
                 this.Piece = matcher.Groups[1].ToString();
                 this.Schedule = matcher.Groups[2].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -574,7 +574,7 @@ namespace FTAnalyzer
                 this.Folio = matcher.Groups[2].ToString();
                 this.Page = matcher.Groups[3].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -586,7 +586,7 @@ namespace FTAnalyzer
                 this.Piece = matcher.Groups[1].ToString();
                 this.Schedule = matcher.Groups[2].ToString();
                 this.IsUKCensus = true;
-                this.Country = Countries.ENG_WALES;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
@@ -713,11 +713,59 @@ namespace FTAnalyzer
             return string.Empty;
         }
 
+        private string GetCensusReferenceCountry(string censusClass, string censusPiece)
+        {
+            int piece;
+            Int32.TryParse(censusPiece, out piece);
+            if (censusClass.Length > 0 && censusPiece.Length > 0 && piece > 0)
+            {
+                if (censusClass.Equals("HO107"))
+                {
+                    
+                }
+                else if (censusClass.Equals("RG9"))
+                {
+
+                }
+                else if (censusClass.Equals("RG10"))
+                {
+
+                }
+                else if (censusClass.Equals("RG11"))
+                {
+
+                }
+                else if (censusClass.Equals("RG12"))
+                {
+
+                }
+                else if (censusClass.Equals("RG13"))
+                {
+
+
+                }
+                else if (censusClass.Equals("RG14"))
+                {
+                    if (piece <= 31678)
+                        return Countries.ENGLAND;
+                    if (piece <= 34628)
+                        return Countries.WALES;
+                    if (piece <= 34751)
+                        return Countries.ISLE_OF_MAN;
+                    if (piece <= 34969)
+                        return Countries.CHANNEL_ISLANDS;
+                    else
+                        return Countries.OVERSEAS_UK;
+                }
+            }
+            return Countries.ENG_WALES;
+        }
+
         public string Reference
         {
             get
             {
-                if(Roll.Length > 0)
+                if (Roll.Length > 0)
                 {
                     if (Properties.GeneralSettings.Default.UseCompactCensusRef)
                         return Roll + "/" + Page + (ED.Length > 0 ? "/" + ED : "");
@@ -772,9 +820,9 @@ namespace FTAnalyzer
                         else
                             return "Parish: " + Parish + Parishes.Reference(Parish) + " ED: " + ED + ", Page: " + Page;
                 }
-                else if(RD.Length > 0)
+                else if (RD.Length > 0)
                 {
-                    if(Fact.Location.IsEnglandWales && Fact.FactDate.Overlaps(CensusDate.UKCENSUS1911))
+                    if (Fact.Location.IsEnglandWales && Fact.FactDate.Overlaps(CensusDate.UKCENSUS1911))
                         if (Properties.GeneralSettings.Default.UseCompactCensusRef)
                             return RD + "/" + ED + "/" + Schedule;
                         else
@@ -782,7 +830,7 @@ namespace FTAnalyzer
                 }
                 if (unknownCensusRef.Length > 0)
                     return unknownCensusRef;
-                if(ReferenceText.Length > 0)
+                if (ReferenceText.Length > 0)
                     log.Warn("Census reference text not generated for :" + ReferenceText);
                 return string.Empty;
             }
