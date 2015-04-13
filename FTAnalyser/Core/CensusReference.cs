@@ -629,20 +629,23 @@ namespace FTAnalyzer
 
         private string GetCensusClass(string year)
         {
-            if (year.Equals("1841") || year.Equals("1851"))
-                return "HO107";
-            if (year.Equals("1861"))
-                return "RG9";
-            if (year.Equals("1871"))
-                return "RG10";
-            if (year.Equals("1881"))
-                return "RG11";
-            if (year.Equals("1891"))
-                return "RG12";
-            if (year.Equals("1901"))
-                return "RG13";
-            if (year.Equals("1911"))
-                return "RG14";
+            if (Countries.IsUnitedKingdom(this.Country))
+            {
+                if (year.Equals("1841") || year.Equals("1851"))
+                    return "HO107";
+                if (year.Equals("1861"))
+                    return "RG9";
+                if (year.Equals("1871"))
+                    return "RG10";
+                if (year.Equals("1881"))
+                    return "RG11";
+                if (year.Equals("1891"))
+                    return "RG12";
+                if (year.Equals("1901"))
+                    return "RG13";
+                if (year.Equals("1911"))
+                    return "RG14";
+            }
             return string.Empty;
         }
 
