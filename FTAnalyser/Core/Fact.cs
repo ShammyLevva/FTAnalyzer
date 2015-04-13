@@ -605,12 +605,12 @@ namespace FTAnalyzer
                 FactDate = date;
         }
 
-        public void SetCensusReferenceDetails(CensusReference cr, string comment)
+        public void SetCensusReferenceDetails(CensusReference cr, CensusLocation cl, string comment)
         {
             if (CensusReference == null || CensusReference == CensusReference.UNKNOWN)
                 this.CensusReference = cr;
             if (Location.IsBlank)
-                Location = FactLocation.GetLocation(cr.Country);
+                Location = FactLocation.GetLocation(cl.Location, false);
             if (Comment.Length == 0)
                 Comment = comment;
         }

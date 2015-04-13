@@ -85,6 +85,7 @@ namespace FTAnalyzer
                 startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
             else
                 startPath = Application.StartupPath;
+            #region Fact Location Fixes
             string filename = Path.Combine(startPath, @"Resources\FactLocationFixes.xml");
             if (File.Exists(filename))
             {
@@ -189,6 +190,7 @@ namespace FTAnalyzer
                 ValidateCounties();
                 COUNTRY_SHIFTS = COUNTRY_SHIFTS.Concat(CITY_ADD_COUNTRY).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             }
+            #endregion
         }
 
         private static void ValidateTypoFixes()
@@ -407,12 +409,12 @@ namespace FTAnalyzer
         #endregion
 
         #region Static Functions
-        public static FactLocation GetLocation(string place)
+        public static FactLocation GetLocation(string place, bool addLocation = true)
         {
-            return GetLocation(place, string.Empty, string.Empty, Geocode.NOT_SEARCHED);
+            return GetLocation(place, string.Empty, string.Empty, Geocode.NOT_SEARCHED, addLocation);
         }
 
-        public static FactLocation GetLocation(string place, string latitude, string longitude, Geocode status)
+        public static FactLocation GetLocation(string place, string latitude, string longitude, Geocode status, bool addLocation)
         {
             FactLocation result;
             FactLocation temp;
@@ -426,10 +428,13 @@ namespace FTAnalyzer
                     return temp;
                 else
                 {
-                    locations.Add(result.ToString(), result);
-                    if (result.Level > COUNTRY)
-                    {   // recusive call to GetLocation forces create of lower level objects and stores in locations
-                        result.GetLocation(result.Level - 1);
+                    if (addLocation)
+                    {
+                        locations.Add(result.ToString(), result);
+                        if (result.Level > COUNTRY)
+                        {   // recusive call to GetLocation forces create of lower level objects and stores in locations
+                            result.GetLocation(result.Level - 1);
+                        }
                     }
                 }
             }

@@ -70,6 +70,7 @@ namespace FTAnalyzer
         private string RD { get; set; }
         private string ED { get; set; }
         private string ReferenceText { get; set; }
+        private CensusLocation CensusLocation { get; set; }
 
         public Fact Fact { get; private set; }
         public bool IsUKCensus { get; private set; }
@@ -100,6 +101,7 @@ namespace FTAnalyzer
             this.Country = Countries.UNKNOWN_COUNTRY;
             this.URL = string.Empty;
             this.CensusYear = FactDate.UNKNOWN_DATE;
+            this.CensusLocation = CensusLocation.UNKNOWN;
         }
 
         public CensusReference(Fact fact, XmlNode node)
@@ -110,6 +112,7 @@ namespace FTAnalyzer
             {
                 this.unknownCensusRef = string.Empty;
                 this.CensusYear = GetCensusYearFromReference();
+                this.CensusLocation = CensusLocation.GetCensusLocation(this.CensusYear.StartDate.Year.ToString(), this.Piece);
                 this.URL = GetCensusURLFromReference();
             }
             if (fact.FactDate.IsKnown)
@@ -121,19 +124,20 @@ namespace FTAnalyzer
         public CensusReference(string individualID, string notes, bool source)
             : this()
         {
-            this.Fact = new Fact(individualID, Fact.CENSUS_FTA, FactDate.UNKNOWN_DATE);
+            this.Fact = new Fact(individualID, Fact.CENSUS_FTA, FactDate.UNKNOWN_DATE, string.Empty, false, true);
             if (GetCensusReference(notes))
             {
                 if (this.Class.Length > 0)
                 {  // don't create fact if we don't know what year its for
                     this.unknownCensusRef = string.Empty;
                     this.CensusYear = GetCensusYearFromReference();
+                    this.CensusLocation = CensusLocation.GetCensusLocation(this.CensusYear.StartDate.Year.ToString(), this.Piece);
                     this.URL = GetCensusURLFromReference();
                     this.Fact.UpdateFactDate(this.CensusYear);
                     if (source)
-                        this.Fact.SetCensusReferenceDetails(this, "Fact created by FTAnalyzer after finding census ref: " + this.MatchString + " in a source for this individual");
+                        this.Fact.SetCensusReferenceDetails(this, CensusLocation, "Fact created by FTAnalyzer after finding census ref: " + this.MatchString + " in a source for this individual");
                     else
-                        this.Fact.SetCensusReferenceDetails(this, "Fact created by FTAnalyzer after finding census ref: " + this.MatchString + " in the notes for this individual");
+                        this.Fact.SetCensusReferenceDetails(this, CensusLocation, "Fact created by FTAnalyzer after finding census ref: " + this.MatchString + " in the notes for this individual");
                 }
             }
         }
