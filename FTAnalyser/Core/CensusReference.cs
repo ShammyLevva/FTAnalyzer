@@ -721,7 +721,23 @@ namespace FTAnalyzer
             {
                 if (censusClass.Equals("HO107"))
                 {
-                    
+                    if (piece <= 1357)
+                        return Countries.ENGLAND;
+                    if (piece <= 1459)
+                        return Countries.WALES;
+                    if (piece <= 1462)
+                        return Countries.CHANNEL_ISLANDS;
+                    if (piece <= 1465)
+                        return Countries.ISLE_OF_MAN;
+                    // 1466+ is 1851 census class was still HO107
+                    if (piece <= 2442)
+                        return Countries.ENGLAND;
+                    if (piece <= 1522)
+                        return Countries.WALES;
+                    if (piece <= 1526)
+                        return Countries.ISLE_OF_MAN;
+                    if (piece <= 2531)
+                        return Countries.CHANNEL_ISLANDS;
                 }
                 else if (censusClass.Equals("RG9"))
                 {
@@ -754,7 +770,7 @@ namespace FTAnalyzer
                         return Countries.ISLE_OF_MAN;
                     if (piece <= 34969)
                         return Countries.CHANNEL_ISLANDS;
-                    else
+                    if (piece <= 34998)
                         return Countries.OVERSEAS_UK;
                 }
             }
