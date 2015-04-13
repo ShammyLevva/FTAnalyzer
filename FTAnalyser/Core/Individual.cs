@@ -378,6 +378,9 @@ namespace FTAnalyzer
             get
             {
                 Fact f = GetPreferredFact(Fact.BIRTH);
+                if (f != null)
+                    return f;
+                f = GetPreferredFact(Fact.BIRTH_CALC);
                 if (Properties.GeneralSettings.Default.UseBaptismDates)
                 {
                     if (f != null)
@@ -821,7 +824,7 @@ namespace FTAnalyzer
                         AddFact(f);
                         if (f.GedcomAge != null && f.GedcomAge.CalculatedBirthDate != FactDate.UNKNOWN_DATE)
                         {
-                            Fact calculatedBirth = new Fact(IndividualID, Fact.BIRTH, f.GedcomAge.CalculatedBirthDate, "Calculated from " + f.ToString(), false);
+                            Fact calculatedBirth = new Fact(IndividualID, Fact.BIRTH_CALC, f.GedcomAge.CalculatedBirthDate, "Calculated from " + f.ToString(), false, true);
                             AddFact(calculatedBirth);
                         }
                     }

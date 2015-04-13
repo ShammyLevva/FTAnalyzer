@@ -250,5 +250,17 @@ namespace FTAnalyzer.Properties {
                 this["AddCreatedLocations"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AutoCreateBirthFactsFromAge {
+            get {
+                return ((bool)(this["AutoCreateBirthFactsFromAge"]));
+            }
+            set {
+                this["AutoCreateBirthFactsFromAge"] = value;
+            }
+        }
     }
 }

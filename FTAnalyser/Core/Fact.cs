@@ -36,14 +36,14 @@ namespace FTAnalyzer
                 CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT", PARENT = "*PARENT",
                 CHILDREN = "*CHILDREN", CHANGE = "*CHNG", LOSTCOUSINS = "*LOST",
                 DIED_SINGLE = "*SINGLE", MISSING = "*MISSING", CHILDREN1911 = "CHILDREN1911",
-                REPORT = "*REPORT", WORLD_EVENT = "*WORLD_EVENT";
+                REPORT = "*REPORT", WORLD_EVENT = "*WORLD_EVENT", BIRTH_CALC = "_BIRTHCALC";
 
         public static readonly ISet<string> LOOSE_BIRTH_FACTS = new HashSet<string>(new string[] {
             CHRISTENING, BAPTISM, RESIDENCE, WITNESS, EMIGRATION, IMMIGRATION, ARRIVAL, DEPARTURE, 
             EDUCATION, DEGREE, ADOPTION, BAR_MITZVAH, BAS_MITZVAH, ADULT_CHRISTENING, CONFIRMATION, 
             FIRST_COMMUNION, ORDINATION, NATURALIZATION, GRADUATION, RETIREMENT, LOSTCOUSINS, 
             MARR_CONTRACT, MARR_LICENSE, MARR_SETTLEMENT, MARRIAGE, MARRIAGE_BANN, DEATH, 
-            CREMATION, BURIAL, CENSUS
+            CREMATION, BURIAL, CENSUS, BIRTH_CALC
                     });
 
         public static readonly ISet<string> LOOSE_DEATH_FACTS = new HashSet<string>(new string[] {
@@ -61,7 +61,7 @@ namespace FTAnalyzer
                     });
 
         public static readonly ISet<string> CREATED_FACTS = new HashSet<string>(new string[] {
-            CENSUS_FTA, CHILDREN, PARENT
+            CENSUS_FTA, CHILDREN, PARENT, BIRTH_CALC
                     });
 
         private static readonly Dictionary<string, string> CUSTOM_TAGS = new Dictionary<string, string>();
@@ -173,6 +173,7 @@ namespace FTAnalyzer
                 case BAR_MITZVAH: return "Bar mitzvah";
                 case BAS_MITZVAH: return "Bas mitzvah";
                 case BIRTH: return "Birth";
+                case BIRTH_CALC: return "Birth (Calc from Age)";
                 case BLESSING: return "Blessing";
                 case BURIAL: return "Burial";
                 case CENSUS: return "Census";
