@@ -741,24 +741,48 @@ namespace FTAnalyzer
                 }
                 else if (censusClass.Equals("RG9"))
                 {
-
+                    if (piece <= 3973)
+                        return Countries.ENGLAND;
+                    if (piece <= 4373)
+                        return Countries.WALES;
+                    if (piece <= 4408)
+                        return Countries.CHANNEL_ISLANDS;
+                    if (piece <= 4432)
+                        return Countries.ISLE_OF_MAN;
+                    if (piece <= 4540)
+                        return Countries.OVERSEAS_UK;
                 }
                 else if (censusClass.Equals("RG10"))
                 {
-
+                    if (piece <= 5291)
+                        return Countries.ENGLAND;
+                    if (piece <= 5754)
+                        return Countries.WALES;
+                    if (piece <= 5770)
+                        return Countries.CHANNEL_ISLANDS;
+                    if (piece <= 5778)
+                        return Countries.ISLE_OF_MAN;
+                    if (piece <= 5785)
+                        return Countries.OVERSEAS_UK;
                 }
                 else if (censusClass.Equals("RG11"))
                 {
-
+                    if (piece <= 5216)
+                        return Countries.ENGLAND;
+                    if (piece <= 5595)
+                        return Countries.WALES;
+                    if (piece <= 5609)
+                        return Countries.ISLE_OF_MAN;
+                    if (piece <= 5632)
+                        return Countries.CHANNEL_ISLANDS;
+                    if (piece <= 5643)
+                        return Countries.OVERSEAS_UK;
                 }
                 else if (censusClass.Equals("RG12"))
                 {
-
                 }
                 else if (censusClass.Equals("RG13"))
                 {
-
-
                 }
                 else if (censusClass.Equals("RG14"))
                 {
