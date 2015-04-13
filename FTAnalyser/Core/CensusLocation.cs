@@ -41,7 +41,7 @@ namespace FTAnalyzer
                     string RD = n.Attributes["RD"].Value;
                     string parish = n.Attributes["Parish"].Value;
                     string county = n.Attributes["County"].Value;
-                    string location = n.Value;
+                    string location = n.InnerText;
                     CensusLocation cl = new CensusLocation(year, piece, RD, parish, county, location);
                     CENSUSLOCATIONS.Add(new Tuple<string, string>(year, piece), cl);
                 }
@@ -61,10 +61,15 @@ namespace FTAnalyzer
 
         public static CensusLocation GetCensusLocation(string year, string piece)
         {
-            CensusLocation result = UNKNOWN;
+            CensusLocation result;
             Tuple<string,string> key = new Tuple<string,string>(year, piece);
             CENSUSLOCATIONS.TryGetValue(key, out result);
-            return result;
+            return result == null ? CensusLocation.UNKNOWN : result;
+        }
+
+        public override string ToString()
+        {
+            return this.Location.Equals(string.Empty) ? "UNKNOWN" : this.Location;
         }
     }
 }

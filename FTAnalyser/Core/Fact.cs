@@ -610,7 +610,7 @@ namespace FTAnalyzer
             if (CensusReference == null || CensusReference == CensusReference.UNKNOWN)
                 this.CensusReference = cr;
             if (Location.IsBlank)
-                Location = FactLocation.GetLocation(cl.Location, false);
+                Location = cl.Equals(CensusLocation.UNKNOWN) ? FactLocation.GetLocation(cr.Country, false) : FactLocation.GetLocation(cl.Location, false);
             if (Comment.Length == 0)
                 Comment = comment;
         }

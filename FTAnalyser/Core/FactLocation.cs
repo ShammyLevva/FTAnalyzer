@@ -414,7 +414,7 @@ namespace FTAnalyzer
             return GetLocation(place, string.Empty, string.Empty, Geocode.NOT_SEARCHED, addLocation);
         }
 
-        public static FactLocation GetLocation(string place, string latitude, string longitude, Geocode status, bool addLocation)
+        public static FactLocation GetLocation(string place, string latitude, string longitude, Geocode status, bool addLocation = true)
         {
             FactLocation result;
             FactLocation temp;
