@@ -719,7 +719,7 @@ namespace FTAnalyzer
             Int32.TryParse(censusPiece, out piece);
             if (censusClass.Length > 0 && censusPiece.Length > 0 && piece > 0)
             {
-                if (censusClass.Equals("HO107"))
+                if (censusClass.Equals("HO107")) //1841 & 1851
                 {
                     if (piece <= 1357)
                         return Countries.ENGLAND;
@@ -739,7 +739,7 @@ namespace FTAnalyzer
                     if (piece <= 2531)
                         return Countries.CHANNEL_ISLANDS;
                 }
-                else if (censusClass.Equals("RG9") || censusClass.Equals("RG09"))
+                else if (censusClass.Equals("RG9") || censusClass.Equals("RG09")) //1861
                 {
                     if (piece <= 3973)
                         return Countries.ENGLAND;
@@ -752,7 +752,7 @@ namespace FTAnalyzer
                     if (piece <= 4540)
                         return Countries.OVERSEAS_UK;
                 }
-                else if (censusClass.Equals("RG10"))
+                else if (censusClass.Equals("RG10")) //1871
                 {
                     if (piece <= 5291)
                         return Countries.ENGLAND;
@@ -765,7 +765,7 @@ namespace FTAnalyzer
                     if (piece <= 5785)
                         return Countries.OVERSEAS_UK;
                 }
-                else if (censusClass.Equals("RG11"))
+                else if (censusClass.Equals("RG11")) //1881
                 {
                     if (piece <= 5216)
                         return Countries.ENGLAND;
@@ -778,7 +778,7 @@ namespace FTAnalyzer
                     if (piece <= 5643)
                         return Countries.OVERSEAS_UK;
                 }
-                else if (censusClass.Equals("RG12"))
+                else if (censusClass.Equals("RG12")) // 1891
                 {
                     if (piece <= 4334)
                         return Countries.ENGLAND;
@@ -791,7 +791,7 @@ namespace FTAnalyzer
                     if (piece <= 4708)
                         return Countries.OVERSEAS_UK;
                 }
-                else if (censusClass.Equals("RG13"))
+                else if (censusClass.Equals("RG13")) //1901
                 {
                     if (piece <= 4914)
                         return Countries.ENGLAND;
@@ -804,7 +804,7 @@ namespace FTAnalyzer
                     if (piece <= 5338)
                         return Countries.OVERSEAS_UK;
                 }
-                else if (censusClass.Equals("RG14"))
+                else if (censusClass.Equals("RG14")) //1911
                 {
                     if (piece <= 31678)
                         return Countries.ENGLAND;
