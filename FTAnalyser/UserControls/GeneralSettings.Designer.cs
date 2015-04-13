@@ -47,6 +47,7 @@
             this.chkReverseLocations = new System.Windows.Forms.CheckBox();
             this.chkAutoCreateCensus = new System.Windows.Forms.CheckBox();
             this.chkShowWorldEvents = new System.Windows.Forms.CheckBox();
+            this.chkAddCreatedLocations = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownAge)).BeginInit();
             this.SuspendLayout();
@@ -183,10 +184,20 @@
             this.chkShowWorldEvents.Name = "chkShowWorldEvents";
             this.chkShowWorldEvents.UseVisualStyleBackColor = true;
             // 
+            // chkAddCreatedLocations
+            // 
+            resources.ApplyResources(this.chkAddCreatedLocations, "chkAddCreatedLocations");
+            this.chkAddCreatedLocations.Checked = true;
+            this.chkAddCreatedLocations.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAddCreatedLocations.Name = "chkAddCreatedLocations";
+            this.chkAddCreatedLocations.UseVisualStyleBackColor = true;
+            this.chkAddCreatedLocations.CheckedChanged += new System.EventHandler(this.chkAddCreatedLocations_CheckedChanged);
+            // 
             // GeneralSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkAddCreatedLocations);
             this.Controls.Add(this.chkShowWorldEvents);
             this.Controls.Add(this.chkAutoCreateCensus);
             this.Controls.Add(this.chkReverseLocations);
@@ -230,6 +241,7 @@
         private System.Windows.Forms.CheckBox chkReverseLocations;
         private System.Windows.Forms.CheckBox chkShowWorldEvents;
         private System.Windows.Forms.CheckBox chkAutoCreateCensus;
+        private System.Windows.Forms.CheckBox chkAddCreatedLocations;
 
 
 	}

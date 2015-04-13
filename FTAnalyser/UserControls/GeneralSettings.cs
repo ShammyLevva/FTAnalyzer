@@ -29,6 +29,7 @@ namespace FTAnalyzer.UserControls
             chkHideMissingTagged.Checked = Properties.GeneralSettings.Default.HidePeopleWithMissingTag;
             chkReverseLocations.Checked = Properties.GeneralSettings.Default.ReverseLocations;
             chkAutoCreateCensus.Checked = Properties.GeneralSettings.Default.AutoCreateCensusFacts;
+            chkAddCreatedLocations.Checked = Properties.GeneralSettings.Default.AddCreatedLocations;
             chkShowWorldEvents.Checked = Properties.GeneralSettings.Default.ShowWorldEvents;
 			Properties.GeneralSettings.Default.ReloadRequired = false;
 		}
@@ -50,6 +51,7 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.HidePeopleWithMissingTag = chkHideMissingTagged.Checked;
             Properties.GeneralSettings.Default.ReverseLocations = chkReverseLocations.Checked;
             Properties.GeneralSettings.Default.AutoCreateCensusFacts = chkAutoCreateCensus.Checked;
+            Properties.GeneralSettings.Default.AddCreatedLocations = chkAddCreatedLocations.Checked;
             Properties.GeneralSettings.Default.ShowWorldEvents = chkShowWorldEvents.Checked;
             Properties.GeneralSettings.Default.Save();
 			OnUseBaptismDatesChanged();
@@ -62,6 +64,7 @@ namespace FTAnalyzer.UserControls
             OnCompactCensusRefChanged();
             OnReverseCountriesChanged();
             OnAutoCreateCensusFactsChanged();
+            OnAddCreatedLocationsChanged();
             OnShowWorldEventsChanged();
 		}
 
@@ -193,6 +196,13 @@ namespace FTAnalyzer.UserControls
                 AutoCreateCensusFactsChanged(null, EventArgs.Empty);
         }
 
+        public static event EventHandler AddCreatedLocationsChanged;
+        protected static void OnAddCreatedLocationsChanged()
+        {
+            if (AddCreatedLocationsChanged != null)
+                AddCreatedLocationsChanged(null, EventArgs.Empty);
+        }
+
         public static event EventHandler ShowWorldEventsChanged;
         protected static void OnShowWorldEventsChanged()
         {
@@ -226,6 +236,11 @@ namespace FTAnalyzer.UserControls
         }
 
         private void chkAutoCreateCensus_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.GeneralSettings.Default.ReloadRequired = true;
+        }
+
+        private void chkAddCreatedLocations_CheckedChanged(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = true;
         }

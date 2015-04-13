@@ -238,5 +238,17 @@ namespace FTAnalyzer.Properties {
                 this["ShowWorldEvents"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AddCreatedLocations {
+            get {
+                return ((bool)(this["AddCreatedLocations"]));
+            }
+            set {
+                this["AddCreatedLocations"] = value;
+            }
+        }
     }
 }
