@@ -389,7 +389,7 @@
             this.SourceList.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.SourceList.DataPropertyName = "SourceList";
             this.SourceList.HeaderText = "Sources";
-            this.SourceList.MinimumWidth = 300;
+            this.SourceList.MinimumWidth = 50;
             this.SourceList.Name = "SourceList";
             this.SourceList.ReadOnly = true;
             this.SourceList.Width = 300;
