@@ -137,6 +137,7 @@ namespace FTAnalyzer
                         ShowMenus(true);
                         HourGlass(false);
                         AddFileToRecentList(filename);
+                        CensusLocation loc = CensusLocation.UNKNOWN; // forces load of CensusLocation.XML for testing  CENSUSLOCATIONDELETE
                         this.Text = "Family Tree Analyzer v" + VERSION + ". Analysing: " + filename;
                         MessageBox.Show("Gedcom File " + filename + " Loaded", "FT Analyzer");
                     }

@@ -47,6 +47,12 @@ namespace FTAnalyzer
                 }
             }
             #endregion
+            #region Test CensusLocation.xml file
+            foreach(KeyValuePair<Tuple<string, string>, CensusLocation> kvp in CENSUSLOCATIONS)
+            {
+                FactLocation.GetLocation(kvp.Value.Location); // force creation of location facts
+            }
+            #endregion
         }
 
         public CensusLocation(string year, string piece, string rd, string parish, string county, string location)

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Data>
   <Fixes>
     <CountryTypos>
@@ -375,19 +375,22 @@
       <RegionTypo from="Yorkshire East Riding"      to="East Yorkshire" />
       <RegionTypo from="Yorkshire-East Riding"      to="East Yorkshire" />
       <RegionTypo from="East Riding of Yorkshire"   to="East Yorkshire" />
-      <RegionTypo from="Yorkshire (East)"    to="East Yorkshire" />
-      <RegionTypo from="E Yorks"             to="East Yorkshire" />
+      <RegionTypo from="Yorkshire (East)"           to="East Yorkshire" />
+      <RegionTypo from="Yorkshire (East Riding)"    to="East Yorkshire" />
+      <RegionTypo from="E Yorks"                    to="East Yorkshire" />
       <RegionTypo from="North Riding Yorkshire"     to="North Yorkshire" />
       <RegionTypo from="Yorkshire North Riding"     to="North Yorkshire" />
       <RegionTypo from="Yorkshire-North Riding"     to="North Yorkshire" />
       <RegionTypo from="North Riding of Yorkshire"  to="North Yorkshire" />
       <RegionTypo from="Yorkshire (North)"          to="North Yorkshire" />
-      <RegionTypo from="N Yorks"             to="North Yorkshire" />
+      <RegionTypo from="Yorkshire (North Riding)"   to="North Yorkshire" />
+      <RegionTypo from="N Yorks"                    to="North Yorkshire" />
       <RegionTypo from="West Riding Yorkshire"      to="West Yorkshire" />
       <RegionTypo from="Yorkshire West Riding"      to="West Yorkshire" />
       <RegionTypo from="Yorkshire-West Riding"      to="West Yorkshire" />
       <RegionTypo from="West Riding of Yorkshire"   to="West Yorkshire" />
       <RegionTypo from="Yorkshire (West)"    to="West Yorkshire" />
+      <RegionTypo from="Yorkshire (West Riding)"    to="West Yorkshire" />
       <RegionTypo from="W Yorks"             to="West Yorkshire" />
       <RegionTypo from="South Yorkshire"     to="South Yorkshire" />
       <RegionTypo from="Yorkshire (South)"          to="South Yorkshire" />
@@ -478,7 +481,7 @@
       <RegionTypo from="Montgomeryshire"  to="Montgomery" />
       <RegionTypo from="Pembrokeshire"    to="Pembroke" />
       <RegionTypo from="Radnorshire"      to="Radnor" />
-
+      
       <!-- Canadian Province abbreviations -->
       <RegionTypo from="AB"     to="Alberta" />
       <RegionTypo from="BC"     to="British Columbia" />
@@ -844,6 +847,12 @@
       <CountryToRegion region="Westmeath"   country="Ireland" />
       <CountryToRegion region="Wexford"     country="Ireland" />
       <CountryToRegion region="Wicklow"     country="Ireland" />
+      
+      <!-- Channel Islands -->
+      <CountryToRegion region="Alderney"    country="Channel Islands" />
+      <CountryToRegion region="Guernsey"    country="Channel Islands" />
+      <CountryToRegion region="Jersey"      country="Channel Islands" />
+      <CountryToRegion region="Sark"        country="Channel Islands" />
 
       <!-- North America -->
       <!-- Canadian Provinces add the Country -->

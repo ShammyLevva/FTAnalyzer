@@ -27,6 +27,7 @@ namespace FTAnalyzer.Utilities
                            .Replace(" As ", " as ")
                            .Replace(" Is ", " is ")
                            .Replace(" No ", " no ")
+                           .Replace(" Uk ", " UK ")
                            .Replace("1St", "1st")
                            .Replace("2Nd", "2nd")
                            .Replace("3Rd", "3rd")
