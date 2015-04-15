@@ -172,7 +172,7 @@ namespace FTAnalyzer
             DisposeIndividualForms();
             ShowMenus(false);
             tabSelector.SelectTab(tabDisplayProgress);
-            if(!keepOutput)
+            if (!keepOutput)
                 rtbOutput.Text = string.Empty;
             tsCountLabel.Text = string.Empty;
             tsHintsLabel.Text = string.Empty;
@@ -1829,7 +1829,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 DataError error = (DataError)dgDataErrors.CurrentRow.DataBoundItem;
-                if(error.IsFamily())
+                if (error.IsFamily())
                     ShowFamilyFacts((string)dgDataErrors.CurrentRow.Cells["Reference"].Value);
                 else
                     ShowFacts((string)dgDataErrors.CurrentRow.Cells["Reference"].Value);
@@ -2016,9 +2016,8 @@ namespace FTAnalyzer
                     if (includeCreated)
                         result.Add(factType);
                     else
-                        if (factType != Fact.GetFactTypeDescription(Fact.PARENT) && factType != Fact.GetFactTypeDescription(Fact.CHILDREN) &&
-                            factType != Fact.GetFactTypeDescription(Fact.CENSUS_FTA))
-                                result.Add(factType);
+                        if (factType != Fact.GetFactTypeDescription(Fact.PARENT) && factType != Fact.GetFactTypeDescription(Fact.CHILDREN))
+                            result.Add(factType);
                 }
             }
             return result;
@@ -2078,12 +2077,12 @@ namespace FTAnalyzer
         {
             bool visible = !ckbFactExclude.Visible;
             ckbFactExclude.Visible = visible;
-            btnExcludeAllFactTypes.Visible= visible;
+            btnExcludeAllFactTypes.Visible = visible;
             btnDeselectExcludeAllFactTypes.Visible = visible;
             lblExclude.Visible = visible;
             SetShowFactsButton();
         }
-        
+
         private void ckbFactExclude_MouseClick(object sender, MouseEventArgs e)
         {
             int index = ckbFactExclude.IndexFromPoint(e.Location);
@@ -2347,7 +2346,7 @@ namespace FTAnalyzer
             people.Show();
             HourGlass(false);
         }
-        
+
         private void ShowCensusRefFacts(CensusReference.ReferenceStatus status)
         {
             HourGlass(true);
@@ -2419,7 +2418,7 @@ namespace FTAnalyzer
 
         private void btnInconsistentLocations_Click(object sender, EventArgs e)
         {
-            HourGlass(true); 
+            HourGlass(true);
             List<DisplayFact> results = new List<DisplayFact>();
             List<DisplayFact> censusRefs = new List<DisplayFact>();
             foreach (Individual ind in ft.AllIndividuals)
@@ -2784,7 +2783,7 @@ namespace FTAnalyzer
             labToday.Visible = false;
             pbToday.Visible = false;
         }
-        
+
         private void rbTodayMonth_CheckedChanged(object sender, EventArgs e)
         {
             Application.UserAppDataRegistry.SetValue("Todays Events Month", rbTodayMonth.Checked);
