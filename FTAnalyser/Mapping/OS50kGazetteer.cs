@@ -1,4 +1,5 @@
-﻿using GeoAPI.Geometries;
+﻿using FTAnalyzer.Utilities;
+using GeoAPI.Geometries;
 using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace FTAnalyzer.Mapping
 
         public OS50kGazetteer(string line)
         {
+            line = EnhancedTextInfo.RemoveDiacritics(line); // remove any special characters for Gazatteer processing
             string[] values = line.Split(':');
             int intval;
             Int32.TryParse(values[0], out intval);

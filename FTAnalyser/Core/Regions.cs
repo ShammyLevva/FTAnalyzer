@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FTAnalyzer.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -875,6 +876,7 @@ namespace FTAnalyzer
         public static Region GetRegion(string region)
         {
             Region result;
+            region = EnhancedTextInfo.RemoveDiacritics(region); // remove any special characters for Known Region processing
             if (VALID_REGIONS.TryGetValue(region, out result))
                 return result;
             return null;
