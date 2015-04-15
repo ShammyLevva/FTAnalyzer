@@ -619,13 +619,18 @@ namespace FTAnalyzer
             return false;
         }
 
-        public bool CensusFactExists(FactDate when)
+        public bool CensusFactExists(FactDate when, bool includeCreated)
         {
             if (when == null) return false;
             foreach (Fact f in facts)
             {
                 if (f.IsValidCensus(when))
-                    return true;
+                {
+                    if (!f.Created)
+                        return true;
+                    else
+                        return includeCreated;
+                }
             }
             return false;
         }
@@ -880,12 +885,12 @@ namespace FTAnalyzer
         {
             foreach (Fact f in facts)
             {
-                if (!f.IsCensusFact && !CensusFactExists(f.FactDate))
+                if (!f.IsCensusFact && !CensusFactExists(f.FactDate, true))
                 {
                     foreach (FactSource s in f.Sources)
                     {
                         CensusReference cr = new CensusReference(IndividualID, s.SourceText, true);
-                        if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD) && !CensusFactExists(cr.Fact.FactDate))
+                        if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD) && !CensusFactExists(cr.Fact.FactDate, true))
                         {
                             cr.Fact.Sources.Add(s);
                             AddFact(cr.Fact);
@@ -908,7 +913,7 @@ namespace FTAnalyzer
                 {
                     checkNotes = false;
                     CensusReference cr = new CensusReference(IndividualID, notes, false);
-                    if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD) && !CensusFactExists(cr.Fact.FactDate))
+                    if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD) && !CensusFactExists(cr.Fact.FactDate, false))
                         AddFact(cr.Fact);
                     int pos = notes.IndexOf(cr.MatchString);
                     if (pos != -1)
