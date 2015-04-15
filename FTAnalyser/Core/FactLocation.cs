@@ -338,7 +338,7 @@ namespace FTAnalyzer
             if (location != null)
             {
                 this.GEDCOMLocation = location;
-                location = EnhancedTextInfo.RemoveDiacritics(location); // remove any special characters for location processing
+                //location = EnhancedTextInfo.RemoveDiacritics(location); // remove any special characters for location processing
                 // we need to parse the location string from a little injun to a big injun
                 int comma = location.LastIndexOf(",");
                 if (comma > 0)
