@@ -421,7 +421,7 @@ namespace FTAnalyzer
 
         private void CreateSharedFacts()
         {
-            foreach(Tuple<string, Fact> t in sharedFacts)
+            foreach (Tuple<string, Fact> t in sharedFacts)
             {
                 Individual ind = GetIndividual(t.Item1);
                 Fact fact = t.Item2;
@@ -2708,7 +2708,7 @@ namespace FTAnalyzer
                 todaysFacts.AddRange(worldEvents);
                 todaysFacts.Sort();
             }
-            foreach(DisplayFact f in todaysFacts)
+            foreach (DisplayFact f in todaysFacts)
                 TodaysText.AppendText(f.ToString() + "\n");
         }
 
@@ -2768,7 +2768,7 @@ namespace FTAnalyzer
             rgx = new Regex("<a href=.*</a>");
             result = rgx.Replace(result, string.Empty);
             Match match = Regex.Match(result, "(.*)quot(.*)quot(.*)", RegexOptions.IgnoreCase);
-            if(match.Success)
+            if (match.Success)
                 result = match.Groups[1].ToString().Trim() + " " + '\u0022' + match.Groups[2].ToString().Trim() + '\u0022' + " " + match.Groups[3].ToString().Trim();
             return result;
         }
@@ -2784,7 +2784,7 @@ namespace FTAnalyzer
                 int nodeday = Int32.Parse(dateFields[2]);
                 fd = new FactDate(new DateTime(nodeyear, nodemonth, nodeday).ToString("dd MMM yyyy"));
             }
-            catch(Exception)
+            catch (Exception)
             {
                 log.Error("Error processing wiki date for " + dateNode);
                 MessageBox.Show("Error processing wiki date for " + dateNode);
@@ -2792,7 +2792,7 @@ namespace FTAnalyzer
             }
             return fd;
         }
-        
+
         private XmlDocument GetWikipediaData(string URL)
         {
             string result = string.Empty;
@@ -2812,11 +2812,11 @@ namespace FTAnalyzer
                 if (!result.Contains("No events found for this query"))
                     doc.LoadXml(result);
             }
-            catch(XmlException)
+            catch (XmlException)
             {
                 // we have an empty result so we can just accept that and return an empty document.
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 log.Error("Error trying to load data from " + URL + "\n\n" + e.Message);
             }

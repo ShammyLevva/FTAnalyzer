@@ -151,6 +151,7 @@ namespace FTAnalyzer
 
         private bool GetCensusReference(string text)
         {
+            text = text.Replace(System.Environment.NewLine, "");
             if (text.Length > 0)
             {
                 if (CheckPatterns(text))

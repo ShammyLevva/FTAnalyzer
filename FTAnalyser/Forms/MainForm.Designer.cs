@@ -2921,7 +2921,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(567, 23);
+            this.label18.Location = new System.Drawing.Point(553, 23);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(60, 13);
             this.label18.TabIndex = 16;
@@ -2929,7 +2929,7 @@
             // 
             // nudToday
             // 
-            this.nudToday.Location = new System.Drawing.Point(633, 21);
+            this.nudToday.Location = new System.Drawing.Point(619, 21);
             this.nudToday.Maximum = new decimal(new int[] {
             10,
             0,
@@ -2951,7 +2951,7 @@
             // 
             // btnUpdateTodaysEvents
             // 
-            this.btnUpdateTodaysEvents.Location = new System.Drawing.Point(289, 18);
+            this.btnUpdateTodaysEvents.Location = new System.Drawing.Point(255, 18);
             this.btnUpdateTodaysEvents.Name = "btnUpdateTodaysEvents";
             this.btnUpdateTodaysEvents.Size = new System.Drawing.Size(115, 23);
             this.btnUpdateTodaysEvents.TabIndex = 14;
@@ -2978,7 +2978,7 @@
             // rbTodayMonth
             // 
             this.rbTodayMonth.AutoSize = true;
-            this.rbTodayMonth.Location = new System.Drawing.Point(472, 21);
+            this.rbTodayMonth.Location = new System.Drawing.Point(458, 21);
             this.rbTodayMonth.Name = "rbTodayMonth";
             this.rbTodayMonth.Size = new System.Drawing.Size(89, 17);
             this.rbTodayMonth.TabIndex = 11;
@@ -2991,19 +2991,19 @@
             this.rbTodaySingle.AutoSize = true;
             this.rbTodaySingle.Checked = true;
             this.rbTodaySingle.Cursor = System.Windows.Forms.Cursors.Default;
-            this.rbTodaySingle.Location = new System.Drawing.Point(411, 21);
+            this.rbTodaySingle.Location = new System.Drawing.Point(376, 21);
             this.rbTodaySingle.Name = "rbTodaySingle";
-            this.rbTodaySingle.Size = new System.Drawing.Size(55, 17);
+            this.rbTodaySingle.Size = new System.Drawing.Size(76, 17);
             this.rbTodaySingle.TabIndex = 10;
             this.rbTodaySingle.TabStop = true;
-            this.rbTodaySingle.Text = "Today";
+            this.rbTodaySingle.Text = "Single Day";
             this.rbTodaySingle.UseVisualStyleBackColor = true;
             this.rbTodaySingle.CheckedChanged += new System.EventHandler(this.rbTodaySingle_CheckedChanged);
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(8, 23);
+            this.label17.Location = new System.Drawing.Point(3, 23);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(69, 13);
             this.label17.TabIndex = 9;
@@ -3011,9 +3011,9 @@
             // 
             // dpToday
             // 
-            this.dpToday.Location = new System.Drawing.Point(83, 20);
+            this.dpToday.Location = new System.Drawing.Point(78, 21);
             this.dpToday.Name = "dpToday";
-            this.dpToday.Size = new System.Drawing.Size(200, 20);
+            this.dpToday.Size = new System.Drawing.Size(171, 20);
             this.dpToday.TabIndex = 8;
             // 
             // rtbToday

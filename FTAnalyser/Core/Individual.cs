@@ -673,7 +673,7 @@ namespace FTAnalyzer
                     if (this.BestLocation(when).CensusCountryMatches(when.Country, includeUnknownCountries))
                         return true;
                     Fact censusFact = LostCousinsCensusFact(f);
-                    if(censusFact != null)
+                    if (censusFact != null)
                     {
                         if (when.Country.Equals(Countries.SCOTLAND) && Countries.IsEnglandWales(censusFact.Country))
                             return false;
@@ -909,14 +909,14 @@ namespace FTAnalyzer
                     checkNotes = false;
                     CensusReference cr = new CensusReference(IndividualID, notes, false);
                     if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD) && !CensusFactExists(cr.Fact.FactDate))
-                    {
                         AddFact(cr.Fact);
-                        int pos = notes.IndexOf(cr.MatchString);
-                        if (pos != -1)
-                        {
-                            notes = notes.Remove(pos, cr.MatchString.Length);
-                            checkNotes = notes.Length > 0;
-                        }
+                    int pos = notes.IndexOf(cr.MatchString);
+                    if (pos != -1)
+                    {
+                        notes = notes.Remove(pos, cr.MatchString.Length);
+                        if (notes.Length > pos)
+                            notes = notes.Substring(pos);
+                        checkNotes = notes.Length > 0 && cr.MatchString.Length > 0;
                     }
                 }
             }
@@ -959,7 +959,7 @@ namespace FTAnalyzer
                 foreach (Family marriage in familiesAsParent.OrderBy(f => f.MarriageDate))
                 {
                     if ((marriage.MarriageDate.Equals(date) || marriage.MarriageDate.IsBefore(date)) && marriage.Husband != null)
-                  
+
                         name = marriage.Husband.surname;
                 }
             }
