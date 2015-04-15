@@ -2696,7 +2696,7 @@ namespace FTAnalyzer
             foreach (Individual i in individuals)
             {
                 foreach (Fact f in i.AllFacts)
-                    if (!f.Created && !f.IsCensusFact && f.FactDate.IsExact && f.FactDate.StartDate.Month == chosenDate.Month)
+                    if (!f.Created && !f.IsCensusFact && f.FactType != Fact.OCCUPATION && f.FactDate.IsExact && f.FactDate.StartDate.Month == chosenDate.Month)
                         if (wholeMonth || f.FactDate.StartDate.Day == chosenDate.Day)
                             todaysFacts.Add(new DisplayFact(i, f));
             }
