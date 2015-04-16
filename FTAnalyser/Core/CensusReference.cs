@@ -216,7 +216,7 @@ namespace FTAnalyzer
             matcher = Regex.Match(text, EW_CENSUS_PATTERN3, RegexOptions.IgnoreCase);
             if (matcher.Success)
             {
-                this.Class = GetCensusClass(matcher.Groups[1].ToString());
+                this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
                 this.Piece = matcher.Groups[2].ToString();
                 this.Folio = matcher.Groups[3].ToString();
                 this.Page = matcher.Groups[4].ToString();
@@ -229,7 +229,7 @@ namespace FTAnalyzer
             matcher = Regex.Match(text, EW_CENSUS_PATTERN4, RegexOptions.IgnoreCase);
             if (matcher.Success)
             {
-                this.Class = GetCensusClass(matcher.Groups[1].ToString());
+                this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
                 this.Piece = matcher.Groups[2].ToString();
                 this.Folio = matcher.Groups[3].ToString();
                 this.Page = MISSING;
@@ -242,7 +242,7 @@ namespace FTAnalyzer
             matcher = Regex.Match(text, EW_CENSUS_PATTERN5, RegexOptions.IgnoreCase);
             if (matcher.Success)
             {
-                this.Class = GetCensusClass(matcher.Groups[1].ToString());
+                this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
                 this.Piece = matcher.Groups[2].ToString();
                 this.Folio = matcher.Groups[3].ToString();
                 this.Page = matcher.Groups[4].ToString();
@@ -255,7 +255,7 @@ namespace FTAnalyzer
             matcher = Regex.Match(text, EW_CENSUS_PATTERN6, RegexOptions.IgnoreCase);
             if (matcher.Success)
             {
-                this.Class = GetCensusClass(matcher.Groups[1].ToString());
+                this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
                 this.Piece = matcher.Groups[2].ToString();
                 this.Folio = matcher.Groups[3].ToString();
                 this.Page = MISSING;
@@ -632,25 +632,22 @@ namespace FTAnalyzer
             return false;
         }
 
-        private string GetCensusClass(string year)
+        private string GetUKCensusClass(string year)
         {
-            if (Countries.IsUnitedKingdom(this.Country))
-            {
-                if (year.Equals("1841") || year.Equals("1851"))
-                    return "HO107";
-                if (year.Equals("1861"))
-                    return "RG9";
-                if (year.Equals("1871"))
-                    return "RG10";
-                if (year.Equals("1881"))
-                    return "RG11";
-                if (year.Equals("1891"))
-                    return "RG12";
-                if (year.Equals("1901"))
-                    return "RG13";
-                if (year.Equals("1911"))
-                    return "RG14";
-            }
+            if (year.Equals("1841") || year.Equals("1851"))
+                return "HO107";
+            if (year.Equals("1861"))
+                return "RG9";
+            if (year.Equals("1871"))
+                return "RG10";
+            if (year.Equals("1881"))
+                return "RG11";
+            if (year.Equals("1891"))
+                return "RG12";
+            if (year.Equals("1901"))
+                return "RG13";
+            if (year.Equals("1911"))
+                return "RG14";
             return string.Empty;
         }
 
