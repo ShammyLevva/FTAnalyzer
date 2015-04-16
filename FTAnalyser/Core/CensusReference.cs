@@ -695,7 +695,11 @@ namespace FTAnalyzer
                         if (Piece.Length > 0)
                             querystring = @"pieceno=" + this.Piece;
                         if (Folio.Length > 0)
-                            querystring = querystring + @"&folio=" + this.Folio;
+                        {
+                            string lastChar = Folio.Substring(Folio.Length).ToUpper();
+                            if (!lastChar.Equals("F") && !lastChar.Equals("R") && !lastChar.Equals("O"))
+                                querystring = querystring + @"&folio=" + this.Folio;
+                        }
                         if (Page.Length > 0)
                             querystring = querystring + @"&page=" + this.Page;
                     }
