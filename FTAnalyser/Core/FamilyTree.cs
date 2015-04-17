@@ -1772,7 +1772,7 @@ namespace FTAnalyzer
         public void SearchCensus(string censusCountry, int censusYear, Individual person, int censusProvider)
         {
             string uri = null;
-
+                
             switch (censusProvider)
             {
                 case 0: uri = BuildAncestryQuery(censusCountry, censusYear, person); break;
@@ -2083,7 +2083,7 @@ namespace FTAnalyzer
             //    query.Append("birthPlace=&country=&coIdList=");
             //}
             uri.Query = query.ToString();
-            return uri.ToString();
+            return @"http://www.awin1.com/cread.php?awinmid=2114&awinaffid=88963&clickref=FTACensusSearch&p=" + uri.ToString();
         }
         #endregion
 
