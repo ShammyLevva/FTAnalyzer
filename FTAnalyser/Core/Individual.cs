@@ -675,7 +675,7 @@ namespace FTAnalyzer
             {
                 if (f.IsValidLostCousins(when))
                 {
-                    if (this.BestLocation(when).CensusCountryMatches(when.Country, includeUnknownCountries))
+                    if (f.Location.CensusCountryMatches(when.Country, includeUnknownCountries) || this.BestLocation(when).CensusCountryMatches(when.Country, includeUnknownCountries))
                         return true;
                     Fact censusFact = LostCousinsCensusFact(f);
                     if (censusFact != null)
