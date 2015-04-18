@@ -266,11 +266,18 @@ namespace FTAnalyzer
             counter = 0;
             foreach (XmlNode n in list)
             {
-                Individual individual = new Individual(n);
-                individuals.Add(individual);
-                AddOccupations(individual);
-                pbI.Value = counter++;
-                Application.DoEvents();
+                try
+                {
+                    Individual individual = new Individual(n);
+                    individuals.Add(individual);
+                    AddOccupations(individual);
+                    pbI.Value = counter++;
+                    Application.DoEvents();
+                }
+                catch (NullReferenceException)
+                {
+                    xmlErrorbox.AppendText("File has invalid GEDCOM data. Individual found with no ID. Search file for 0 @@ INDI\n");
+                }
             }
             xmlErrorbox.AppendText("Loaded " + counter + " individuals.\n");
             pbI.Value = pbI.Maximum;
@@ -1772,7 +1779,7 @@ namespace FTAnalyzer
         public void SearchCensus(string censusCountry, int censusYear, Individual person, int censusProvider)
         {
             string uri = null;
-                
+
             switch (censusProvider)
             {
                 case 0: uri = BuildAncestryQuery(censusCountry, censusYear, person); break;

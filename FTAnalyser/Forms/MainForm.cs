@@ -23,7 +23,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "5.0.1.1";
+        public static string VERSION = "5.0.1.2";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -153,6 +153,7 @@ namespace FTAnalyzer
                 string message = ex2.Message + (ex2.InnerException != null ? ex2.InnerException.Message : string.Empty);
                 MessageBox.Show("Error: Problem processing your file. Please try again.\n" +
                     "If this problem persists please report this at http://ftanalyzer.codeplex.com. Error was: " + ex2.Message + "\n" + ex2.InnerException, "FT Analyzer");
+                CleanUp();
             }
             finally
             {
@@ -266,6 +267,11 @@ namespace FTAnalyzer
         }
 
         private void mnuCloseGEDCOM_Click(object sender, EventArgs e)
+        {
+            CleanUp();
+        }
+
+        private void CleanUp()
         {
             CloseGEDCOM(false);
             ft.ResetData();
