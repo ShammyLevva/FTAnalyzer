@@ -920,8 +920,15 @@ namespace FTAnalyzer
                 if (looseDeaths != null)
                     return looseDeaths;
                 SortableBindingList<IDisplayLooseDeath> result = new SortableBindingList<IDisplayLooseDeath>();
-                foreach (Individual ind in individuals)
-                    CheckLooseDeath(ind, result);
+                try
+                {
+                    foreach (Individual ind in individuals)
+                        CheckLooseDeath(ind, result);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Problem calculating Loose Deaths. Error was " + ex.Message);
+                }
                 looseDeaths = result;
                 return result;
             }
