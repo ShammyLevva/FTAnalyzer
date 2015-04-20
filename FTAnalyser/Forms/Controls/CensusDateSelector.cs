@@ -40,11 +40,14 @@ namespace Controls
 
         private void AddValuationItems()
         {
+            cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1865);
+            cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1875);
             cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1885);
             cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1895);
             cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1905);
             cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1915);
             cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1920);
+            cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1925);
         }
 
         public void AddLCCensusItems()
