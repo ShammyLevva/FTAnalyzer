@@ -752,9 +752,13 @@ namespace FTAnalyzer
                 if (looseBirths != null)
                     return looseBirths;
                 SortableBindingList<IDisplayLooseBirth> result = new SortableBindingList<IDisplayLooseBirth>();
-                foreach (Individual ind in individuals)
+                try
                 {
-                    CheckLooseBirth(ind, result);
+                    foreach (Individual ind in individuals)
+                        CheckLooseBirth(ind, result);
+                } catch (Exception ex)
+                {
+                    MessageBox.Show("Problem calculating Loose Births. Error was " + ex.Message);
                 }
                 looseBirths = result;
                 return result;
@@ -775,14 +779,14 @@ namespace FTAnalyzer
                     minEnd = birthDate.EndDate;
                     // don't think we should set the start date as max years before end as end may be wide range into future whereas start was calculated from facts
                     //if (minStart != FactDate.MINDATE && minEnd.Year > minStart.Year + FactDate.MAXYEARS)
-                    //    minStart = new DateTime(minEnd.Year - FactDate.MAXYEARS, minStart.Month, minStart.Day); // min end mustn't be more than max years after start
+                    //    minStart = CreateDate(minEnd.Year - FactDate.MAXYEARS, minStart.Month, minStart.Day); // min end mustn't be more than max years after start
                 }
                 foreach (Family fam in indiv.FamiliesAsParent)
                 {
                     FactDate marriageDate = fam.GetPreferredFactDate(Fact.MARRIAGE);
                     if (marriageDate.StartDate.Year > Properties.GeneralSettings.Default.MinParentalAge && !marriageDate.IsLongYearSpan)
                     {  // set maximum birthdate as X years before earliest marriage
-                        DateTime preMarriage = new DateTime(marriageDate.StartDate.Year - Properties.GeneralSettings.Default.MinParentalAge, 12, 31);
+                        DateTime preMarriage = CreateDate(marriageDate.StartDate.Year - Properties.GeneralSettings.Default.MinParentalAge, 12, 31);
                         if (preMarriage < minEnd && preMarriage >= minStart)
                             minEnd = preMarriage;
                     }
@@ -793,7 +797,7 @@ namespace FTAnalyzer
                         if (childrenNoAFT.Count > 0)
                         {
                             int minChildYear = childrenNoAFT.Min(child => child.BirthDate.EndDate).Year;
-                            DateTime minChild = new DateTime(minChildYear - Properties.GeneralSettings.Default.MinParentalAge, 12, 31);
+                            DateTime minChild = CreateDate(minChildYear - Properties.GeneralSettings.Default.MinParentalAge, 12, 31);
                             if (minChild < minEnd && minChild >= minStart)
                                 minEnd = minChild;
                         }
@@ -804,9 +808,9 @@ namespace FTAnalyzer
                             int maxChildYear = childrenNoBEF.Max(child => child.BirthDate.StartDate).Year;
                             DateTime maxChild;
                             if (indiv.IsMale) // for males check that not over 100 when oldest child is born
-                                maxChild = new DateTime(maxChildYear - 100, 1, 1);
+                                maxChild = CreateDate(maxChildYear - 100, 1, 1);
                             else // for females check that not over 60 when oldest child is born
-                                maxChild = new DateTime(maxChildYear - 60, 1, 1);
+                                maxChild = CreateDate(maxChildYear - 60, 1, 1);
                             if (maxChild > minStart)
                                 minStart = maxChild;
                         }
@@ -814,7 +818,7 @@ namespace FTAnalyzer
                     Individual spouse = fam.Spouse(indiv);
                     if (spouse != null && spouse.DeathDate.IsKnown)
                     {
-                        DateTime maxMarried = new DateTime(spouse.DeathEnd.Year - Properties.GeneralSettings.Default.MinParentalAge, 12, 31);
+                        DateTime maxMarried = CreateDate(spouse.DeathEnd.Year - Properties.GeneralSettings.Default.MinParentalAge, 12, 31);
                         if (maxMarried < minEnd && maxMarried >= minStart)
                             minEnd = maxMarried;
                     }
@@ -826,19 +830,19 @@ namespace FTAnalyzer
                     {
                         if (fam.Husband.BirthDate.IsKnown && fam.Husband.BirthDate.StartDate != FactDate.MINDATE)
                             if (fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
-                                minStart = new DateTime(fam.Husband.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
+                                minStart = CreateDate(fam.Husband.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
                         if (fam.Husband.DeathDate.IsKnown && fam.Husband.DeathDate.EndDate != FactDate.MAXDATE)
                             if (fam.Husband.DeathDate.EndDate.AddMonths(9) < minEnd)
-                                minEnd = new DateTime(fam.Husband.DeathDate.EndDate.AddMonths(9).Year, 1, 1);
+                                minEnd = CreateDate(fam.Husband.DeathDate.EndDate.AddMonths(9).Year, 1, 1);
                     }
                     if (fam.Wife != null)
                     {
                         if (fam.Wife.BirthDate.IsKnown && fam.Wife.BirthDate.StartDate != FactDate.MINDATE)
                             if (fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
-                                minStart = new DateTime(fam.Wife.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
+                                minStart = CreateDate(fam.Wife.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
                         if (fam.Wife.DeathDate.IsKnown && fam.Wife.DeathDate.EndDate != FactDate.MAXDATE)
                             if (fam.Wife.DeathDate.EndDate < minEnd)
-                                minEnd = new DateTime(fam.Wife.DeathDate.EndDate.Year, 1, 1);
+                                minEnd = CreateDate(fam.Wife.DeathDate.EndDate.Year, 1, 1);
                     }
                 }
                 if (birthDate.EndDate <= minEnd && birthDate.EndDate != FactDate.MAXDATE)
@@ -866,11 +870,24 @@ namespace FTAnalyzer
             }
         }
 
+        private DateTime CreateDate(int year, int month, int day)
+        {
+            if (year > DateTime.MaxValue.Year)
+                year = DateTime.MaxValue.Year;
+            if (year < 1)
+                year = 1;
+            if (month > 12)
+                month = 12;
+            if (month < 1)
+                month = 1;
+            return new DateTime(year, month, day);
+        }
+
         private FactDate BaseLivingDate(Individual indiv)
         {
             DateTime mindate = FactDate.MAXDATE;
             DateTime maxdate = GetMaxLivingDate(indiv, Fact.LOOSE_BIRTH_FACTS);
-            DateTime startdate = maxdate.Year < FactDate.MAXYEARS ? FactDate.MINDATE : new DateTime(maxdate.Year - FactDate.MAXYEARS, 1, 1);
+            DateTime startdate = maxdate.Year < FactDate.MAXYEARS ? FactDate.MINDATE : CreateDate(maxdate.Year - FactDate.MAXYEARS, 1, 1);
             foreach (Fact f in indiv.AllFacts)
             {
                 if (Fact.LOOSE_BIRTH_FACTS.Contains(f.FactType))
@@ -984,7 +1001,7 @@ namespace FTAnalyzer
                 maxdate = maxdate.AddMonths(-9);
                 // now set to Jan 1 of that year 9 months before birth to prevent 
                 // very exact 9 months before dates
-                maxdate = new DateTime(maxdate.Year, 1, 1);
+                maxdate = CreateDate(maxdate.Year, 1, 1);
             }
             // Check max date on all facts of facttype but don't consider long year span marriage or children facts
             foreach (Fact f in indiv.AllFacts)
@@ -1004,7 +1021,7 @@ namespace FTAnalyzer
             DateTime minDeath = FactDate.MAXDATE;
             if (indiv.BirthDate.IsKnown && indiv.BirthDate.EndDate.Year < 9999) // filter out births where no year specified
             {
-                minDeath = new DateTime(indiv.BirthDate.EndDate.Year + FactDate.MAXYEARS, 12, 31);
+                minDeath = CreateDate(indiv.BirthDate.EndDate.Year + FactDate.MAXYEARS, 12, 31);
                 if (birthDateType == FactDate.FactDateType.BEF)
                     minDeath = minDeath.AddYears(1);
                 if (minDeath > now) // 110 years after birth is after todays date so we set to ignore
@@ -2741,9 +2758,9 @@ namespace FTAnalyzer
                             "&end_date=" + year.ToString() + chosenDate.ToString("MMdd", CultureInfo.InvariantCulture);
                     XmlDocument doc = GetWikipediaData(URL);
                     if (wholeMonth)
-                        eventDate = new FactDate(new DateTime(year, chosenDate.Month, 1), new DateTime(year, chosenDate.Month + 1, 1).AddDays(-1));
+                        eventDate = new FactDate(CreateDate(year, chosenDate.Month, 1), CreateDate(year, chosenDate.Month + 1, 1).AddDays(-1));
                     else
-                        eventDate = new FactDate(new DateTime(year, chosenDate.Month, chosenDate.Day), new DateTime(year, chosenDate.Month, chosenDate.Day));
+                        eventDate = new FactDate(CreateDate(year, chosenDate.Month, chosenDate.Day), CreateDate(year, chosenDate.Month, chosenDate.Day));
                     if (doc.InnerText.Length > 0)
                     {
                         FactDate fd;
