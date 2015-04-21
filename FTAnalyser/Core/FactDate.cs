@@ -143,6 +143,7 @@ namespace FTAnalyzer
             str = str.Replace("BEFORE", "BEF");
             str = str.Replace("BETWEEN", "BET");
             str = str.Replace("BTW", "BET");
+            str = str.Replace("UNTIL", "TO");
 
             str = str.Replace("QUARTER", "QTR");
             str = str.Replace("MAR QTR", "ABT MAR");
@@ -188,6 +189,11 @@ namespace FTAnalyzer
 
             str = str.Replace("ABT ABT", "ABT"); // fix any ABT X QTR's that will have been changed to ABT ABT
 
+            if(str.IndexOf("TO") > 1)
+            {  // contains TO but doesn't start with TO
+                if (!str.StartsWith("FROM"))
+                    str = "FROM " + str;
+            }
             if (str.StartsWith("FROM"))
             {
                 if (str.IndexOf("TO") > 0)
@@ -493,7 +499,7 @@ namespace FTAnalyzer
                 string day = gDay == null ? string.Empty : gDay.ToString().Trim();
                 string month = gMonth == null ? string.Empty : gMonth.ToString().Trim();
                 string year = gYear == null ? string.Empty : gYear.ToString().Trim();
-                
+
                 if (!IsValidDoubleDate(day, month, year, gDouble))
                     throw new InvalidDoubleDateException(DoubleDateError);
                 if (day.Length == 0 && month.Length == 0)
@@ -599,8 +605,8 @@ namespace FTAnalyzer
                 DoubleDateError = "Double date year should be 99/00 if it crosses century.";
                 return false; // check for change of century year
             }
-            int iDoubleYear = doubleyear == "00" ? 
-                Convert.ToInt32((Convert.ToInt32(year.Substring(0, 2)) + 1).ToString() + doubleyear) : 
+            int iDoubleYear = doubleyear == "00" ?
+                Convert.ToInt32((Convert.ToInt32(year.Substring(0, 2)) + 1).ToString() + doubleyear) :
                 Convert.ToInt32(year.Substring(0, 2) + doubleyear);
             if (iDoubleYear - iYear != 1)
             {
