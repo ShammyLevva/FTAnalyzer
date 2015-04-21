@@ -48,6 +48,7 @@
             this.chkAutoCreateCensus = new System.Windows.Forms.CheckBox();
             this.chkShowWorldEvents = new System.Windows.Forms.CheckBox();
             this.chkAddCreatedLocations = new System.Windows.Forms.CheckBox();
+            this.chkIgnoreFactTypeWarnings = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownAge)).BeginInit();
             this.SuspendLayout();
@@ -193,10 +194,17 @@
             this.chkAddCreatedLocations.UseVisualStyleBackColor = true;
             this.chkAddCreatedLocations.CheckedChanged += new System.EventHandler(this.chkAddCreatedLocations_CheckedChanged);
             // 
+            // chkIgnoreFactTypeWarnings
+            // 
+            resources.ApplyResources(this.chkIgnoreFactTypeWarnings, "chkIgnoreFactTypeWarnings");
+            this.chkIgnoreFactTypeWarnings.Name = "chkIgnoreFactTypeWarnings";
+            this.chkIgnoreFactTypeWarnings.UseVisualStyleBackColor = true;
+            // 
             // GeneralSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkIgnoreFactTypeWarnings);
             this.Controls.Add(this.chkAddCreatedLocations);
             this.Controls.Add(this.chkShowWorldEvents);
             this.Controls.Add(this.chkAutoCreateCensus);
@@ -242,6 +250,7 @@
         private System.Windows.Forms.CheckBox chkShowWorldEvents;
         private System.Windows.Forms.CheckBox chkAutoCreateCensus;
         private System.Windows.Forms.CheckBox chkAddCreatedLocations;
+        private System.Windows.Forms.CheckBox chkIgnoreFactTypeWarnings;
 
 
 	}

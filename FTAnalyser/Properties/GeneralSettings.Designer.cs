@@ -253,13 +253,13 @@ namespace FTAnalyzer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool AutoCreateBirthFactsFromAge {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IgnoreFactTypeWarnings {
             get {
-                return ((bool)(this["AutoCreateBirthFactsFromAge"]));
+                return ((bool)(this["IgnoreFactTypeWarnings"]));
             }
             set {
-                this["AutoCreateBirthFactsFromAge"] = value;
+                this["IgnoreFactTypeWarnings"] = value;
             }
         }
     }

@@ -31,6 +31,7 @@ namespace FTAnalyzer.UserControls
             chkAutoCreateCensus.Checked = Properties.GeneralSettings.Default.AutoCreateCensusFacts;
             chkAddCreatedLocations.Checked = Properties.GeneralSettings.Default.AddCreatedLocations;
             chkShowWorldEvents.Checked = Properties.GeneralSettings.Default.ShowWorldEvents;
+            chkIgnoreFactTypeWarnings.Checked = Properties.GeneralSettings.Default.IgnoreFactTypeWarnings;
 			Properties.GeneralSettings.Default.ReloadRequired = false;
 		}
 
@@ -53,6 +54,7 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.AutoCreateCensusFacts = chkAutoCreateCensus.Checked;
             Properties.GeneralSettings.Default.AddCreatedLocations = chkAddCreatedLocations.Checked;
             Properties.GeneralSettings.Default.ShowWorldEvents = chkShowWorldEvents.Checked;
+            Properties.GeneralSettings.Default.IgnoreFactTypeWarnings = chkIgnoreFactTypeWarnings.Checked;
             Properties.GeneralSettings.Default.Save();
 			OnUseBaptismDatesChanged();
 			OnAllowEmptyLocationsChanged();

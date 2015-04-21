@@ -399,6 +399,12 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("\n    Use Compact Census References : " + Properties.GeneralSettings.Default.UseCompactCensusRef);
                 xmlErrorbox.AppendText("\n    Show Alias In Name Displays : " + Properties.GeneralSettings.Default.ShowAliasInName);
                 xmlErrorbox.AppendText("\n    Hide People Tagged As Missing From Census : " + Properties.GeneralSettings.Default.HidePeopleWithMissingTag);
+                xmlErrorbox.AppendText("\n    Files use Country First Locations : " + Properties.GeneralSettings.Default.ReverseLocations);
+                xmlErrorbox.AppendText("\n    Show World Events on the 'On This Day' tab : " + Properties.GeneralSettings.Default.ShowWorldEvents);
+                xmlErrorbox.AppendText("\n    Auto Create Census Events from Notes & Sources : " + Properties.GeneralSettings.Default.AutoCreateCensusFacts);
+                xmlErrorbox.AppendText("\n    Add Auto Created Census Locations to Locations List : " + Properties.GeneralSettings.Default.AddCreatedLocations);
+                xmlErrorbox.AppendText("\n    Ignore Unknown Fact Type Warnings : " + Properties.GeneralSettings.Default.IgnoreFactTypeWarnings);
+                
                 xmlErrorbox.AppendText("\nThe current mapping options are set :");
                 xmlErrorbox.AppendText("\n    Custom Maps Location: " + Properties.MappingSettings.Default.CustomMapPath);
                 xmlErrorbox.AppendText("\n    Display British Parish Boundaries: " + Properties.MappingSettings.Default.UseParishBoundaries);
@@ -415,7 +421,7 @@ namespace FTAnalyzer
 
         private void CountUnknownFactTypes()
         {
-            if (unknownFactTypes.Count > 0)
+            if (unknownFactTypes.Count > 0 && !Properties.GeneralSettings.Default.IgnoreFactTypeWarnings)
             {
                 foreach (string tag in unknownFactTypes)
                 {
@@ -1608,13 +1614,16 @@ namespace FTAnalyzer
                         if (FactAfterDeath(ind, f))
                             errors[(int)Dataerror.FACTS_AFTER_DEATH].Add(
                                 new DataError((int)Dataerror.FACTS_AFTER_DEATH, ind, f.FactErrorMessage));
-                        foreach (string tag in unknownFactTypes)
+                        if (!Properties.GeneralSettings.Default.IgnoreFactTypeWarnings)
                         {
-                            if (f.FactTypeDescription == tag)
+                            foreach (string tag in unknownFactTypes)
                             {
-                                errors[(int)Dataerror.UNKNOWN_FACT_TYPE].Add(
-                                    new DataError((int)Dataerror.UNKNOWN_FACT_TYPE, Fact.FactError.QUESTIONABLE,
-                                        ind, "Unknown fact type " + f.FactTypeDescription + " recorded"));
+                                if (f.FactTypeDescription == tag)
+                                {
+                                    errors[(int)Dataerror.UNKNOWN_FACT_TYPE].Add(
+                                        new DataError((int)Dataerror.UNKNOWN_FACT_TYPE, Fact.FactError.QUESTIONABLE,
+                                            ind, "Unknown fact type " + f.FactTypeDescription + " recorded"));
+                                }
                             }
                         }
                     }
