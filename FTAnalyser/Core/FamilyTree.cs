@@ -212,12 +212,12 @@ namespace FTAnalyzer
             _loading = true;
             ResetData();
             string rootIndividualID = string.Empty;
+            xmlErrorbox.AppendText("Loading file " + filename + "\n");
             Application.DoEvents();
             XmlDocument doc = GedcomToXml.Load(filename);
             if (doc == null)
                 return false;
             // doc.Save(@"c:\temp\FHcensusref.xml");
-            xmlErrorbox.AppendText("Loading file " + filename + "\n");
             // First check if file has a valid header record ie: it is actually a GEDCOM file
             XmlNode header = doc.SelectSingleNode("GED/HEAD");
             if (header == null)
