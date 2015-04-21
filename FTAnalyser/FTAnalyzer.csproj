@@ -321,12 +321,23 @@
     <Compile Include="Mapping\NLSRequest.cs" />
     <Compile Include="Mapping\OS50kGazetteer.cs" />
     <Compile Include="Mapping\TearDropLayer.cs" />
+    <Compile Include="Properties\FileHandling.Designer.cs">
+      <DependentUpon>FileHandling.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
     <Compile Include="Properties\MappingSettings.Designer.cs">
       <DependentUpon>MappingSettings.settings</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="UserControls\FileHandlingSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\FileHandlingSettings.designer.cs">
+      <DependentUpon>FileHandlingSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\MappingSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -576,6 +587,9 @@
     <EmbeddedResource Include="Forms\Controls\CensusCountry.resx">
       <DependentUpon>CensusCountry.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\FileHandlingSettings.resx">
+      <DependentUpon>FileHandlingSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\MappingSettings.resx">
       <DependentUpon>MappingSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -597,6 +611,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\FileHandling.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>FileHandling.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Properties\MappingSettings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>MappingSettings.Designer.cs</LastGenOutput>

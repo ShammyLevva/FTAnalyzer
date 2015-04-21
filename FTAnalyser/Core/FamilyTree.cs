@@ -387,6 +387,9 @@ namespace FTAnalyzer
         {
             if (Properties.GeneralSettings.Default.ReportOptions)
             {
+                xmlErrorbox.AppendText("\nThe current file handling options are set :");
+                xmlErrorbox.AppendText("\n    Use Special Character Filters When Loading: " + Properties.FileHandling.Default.LoadWithFilters);
+                
                 xmlErrorbox.AppendText("\nThe current general options are set :");
                 xmlErrorbox.AppendText("\n    Use Baptism/Christening Date If No Birth Date: " + Properties.GeneralSettings.Default.UseBaptismDates);
                 xmlErrorbox.AppendText("\n    Use Burial/Cremation Date If No Death Date: " + Properties.GeneralSettings.Default.UseBurialDates);

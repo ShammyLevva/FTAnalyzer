@@ -17,7 +17,11 @@ namespace FTAnalyzer
         {
             //StreamReader reader = new AnselInputStreamReader(checkInvalidCR(path));
             //StreamReader reader = new AnselInputStreamReader(new FileStream(path, FileMode.Open, FileAccess.Read));
-            StreamReader reader = new StreamReader(new FileStream(path, FileMode.Open, FileAccess.Read), encoding);
+            StreamReader reader;
+            if (Properties.FileHandling.Default.LoadWithFilters)
+                reader = new StreamReader(CheckSpuriousOD(path), encoding);
+            else
+                reader = new StreamReader(new FileStream(path, FileMode.Open, FileAccess.Read), encoding);
             return Parse(reader);
         }
 
@@ -38,6 +42,29 @@ namespace FTAnalyzer
                 }
                 outfs.WriteByte(b);
                 b = (byte) infs.ReadByte();
+            }
+            outfs.Position = 0;
+            return outfs;
+        }
+
+        private static MemoryStream CheckSpuriousOD(string path)
+        {
+            FileStream infs = new FileStream(path, FileMode.Open, FileAccess.Read);
+            MemoryStream outfs = new MemoryStream();
+            byte b = (byte)infs.ReadByte();
+            while (infs.Position < infs.Length)
+            {
+                while (b == 0x0d && infs.Position < infs.Length)
+                {
+                    b = (byte)infs.ReadByte();
+                    if (b == 0x0a)
+                    { // we have 0x0d 0x0a so write them both out
+                        outfs.WriteByte(0x0d);
+                        outfs.WriteByte(0x0a);
+                    } // otherwise we drop though and have ignored the 0x0d on its own
+                }
+                outfs.WriteByte(b);
+                b = (byte)infs.ReadByte();
             }
             outfs.Position = 0;
             return outfs;
@@ -178,8 +205,11 @@ namespace FTAnalyzer
                     System.Windows.Forms.Application.DoEvents();
                     if (badLineCount > badLineMax)
                     {
-                        DialogResult result = MessageBox.Show("Found more than " + badLineMax + " consecutive errors in the GEDCOM file.\nContinue Loading?",
-                                                         "Continue Loading?", MessageBoxButtons.YesNo);
+                        string message = "Found more than " + badLineMax + " consecutive errors in the GEDCOM file.";
+                        if(!Properties.FileHandling.Default.LoadWithFilters)
+                            message += "\n\nNB. You might get less errors if you turn on the option to 'Use Special Character Filters When Loading' from the Tools Options menu.";
+                        message += "\n\nContinue Loading?";
+                        DialogResult result = MessageBox.Show(message, "Continue Loading?", MessageBoxButtons.YesNo);
                         if (result == DialogResult.Yes)
                         {
                             badLineCount = 0;

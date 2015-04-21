@@ -59,13 +59,15 @@ namespace FTAnalyzer
         {
             boldFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Bold);
             normalFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Regular);
-            //GeneralSettings.UseBaptismDatesChanged += new EventHandler(Options_BaptismChanged);
-            GeneralSettings.AllowEmptyLocationsChanged += new EventHandler(Options_AllowEmptyLocationsChanged);
-            GeneralSettings.UseResidenceAsCensusChanged += new EventHandler(Options_UseResidenceAsCensusChanged);
-            //GeneralSettings.StrictResidenceDatesChanged += new EventHandler(Options_StrictResidenceDatesChanged);
-            GeneralSettings.TolerateInaccurateCensusChanged += new EventHandler(Options_TolerateInaccurateCensusChanged);
+            GeneralSettings.AllowEmptyLocationsChanged += new EventHandler(Options_ReloadData);
+            GeneralSettings.TolerateInaccurateCensusChanged += new EventHandler(Options_ReloadData);
+            GeneralSettings.UseResidenceAsCensusChanged += new EventHandler(Options_ReloadData);
+            GeneralSettings.OnlyCensusParentsChanged += new EventHandler(Options_ReloadData);
+            GeneralSettings.ReverseCountriesChanged += new EventHandler(Options_ReloadData);
+            GeneralSettings.AutoCreateCensusFactsChanged += new EventHandler(Options_ReloadData);
+            GeneralSettings.AddCreatedLocationsChanged += new EventHandler(Options_ReloadData);
             GeneralSettings.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
-            GeneralSettings.ReverseCountriesChanged += new EventHandler(Options_ReverseCountriesChanged);
+            FileHandlingSettings.LoadWithFiltersChanged += new EventHandler(Options_ReloadData);
             this.Text = "Family Tree Analyzer v" + VERSION;
             SetHeightWidth();
             dgSurnames.AutoGenerateColumns = false;
@@ -786,29 +788,7 @@ namespace FTAnalyzer
             // do anything that needs doing when option changes
         }
 
-        private void Options_AllowEmptyLocationsChanged(object sender, EventArgs e)
-        {
-            QueryReloadData();
-        }
-
-        private void Options_UseResidenceAsCensusChanged(object sender, EventArgs e)
-        {
-            // need to refresh any census reports when option changes
-            QueryReloadData();
-        }
-
-        private void Options_StrictResidenceDatesChanged(object sender, EventArgs e)
-        {
-            // need to refresh any census reports when option changes
-            QueryReloadData();
-        }
-
-        private void Options_TolerateInaccurateCensusChanged(object sender, EventArgs e)
-        {
-            QueryReloadData();
-        }
-
-        private void Options_ReverseCountriesChanged(object sender, EventArgs e)
+        private void Options_ReloadData(object sender, EventArgs e)
         {
             QueryReloadData();
         }
