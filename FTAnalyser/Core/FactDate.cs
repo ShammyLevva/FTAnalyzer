@@ -21,9 +21,11 @@ namespace FTAnalyzer
         private static readonly string YEAR = "yyyy";
         private static readonly string EARLYYEAR = "yyy";
         private static readonly string MONTHYEAR = "MMM yyyy";
+        private static readonly string MONTHYEAREARLY = "MMM yyy";
         private static readonly string DAYMONTH = "d MMM";
         private static readonly string MONTH = "MMM";
         public static readonly string FULL = "d MMM yyyy";
+        private static readonly string FULLEARLY = "d MMM yyy";
         private static readonly string DISPLAY = "d MMM yyyy";
         private static readonly string CHECKING = "d MMM";
         private static readonly string DATE_PATTERN = "^(\\d{0,2} )?([A-Za-z]{0,3}) *(\\d{0,4})$";
@@ -521,7 +523,8 @@ namespace FTAnalyzer
                 }
                 else if (day.Length == 0 && year.Length > 0)
                 {
-                    date = DateTime.ParseExact(dateValue, MONTHYEAR, CULTURE);
+                    if (!DateTime.TryParseExact(dateValue, MONTHYEAR, CULTURE, DateTimeStyles.NoCurrentDateDefault, out date))
+                        DateTime.TryParseExact(dateValue, MONTHYEAREARLY, CULTURE, DateTimeStyles.NoCurrentDateDefault, out date);
                     dt = new DateTime(date.Year, date.Month, 1);
                     dt = dt.AddMonths(adjustment);
                     if (highlow == HIGH)
@@ -551,7 +554,8 @@ namespace FTAnalyzer
                 }
                 else if (day.Length > 0 && month.Length > 0 && year.Length > 0)
                 {
-                    date = DateTime.ParseExact(dateValue, FULL, CULTURE);
+                    if (!DateTime.TryParseExact(dateValue, FULL, CULTURE, DateTimeStyles.NoCurrentDateDefault, out date))
+                        DateTime.TryParseExact(dateValue, FULLEARLY, CULTURE, DateTimeStyles.NoCurrentDateDefault, out date);
                     dt = new DateTime(date.Year, date.Month, date.Day);
                     dt = dt.AddDays(adjustment);
                 }

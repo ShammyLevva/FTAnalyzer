@@ -47,8 +47,8 @@ namespace FTAnalyzer
                 XmlNode eHusband = node.SelectSingleNode("HUSB");
                 XmlNode eWife = node.SelectSingleNode("WIFE");
                 this.FamilyID = node.Attributes["ID"].Value;
-                string husbandID = eHusband == null ? null : eHusband.Attributes["REF"].Value;
-                string wifeID = eWife == null ? null : eWife.Attributes["REF"].Value;
+                string husbandID = eHusband == null || eHusband.Attributes["REF"] == null ? null : eHusband.Attributes["REF"].Value;
+                string wifeID = eWife == null || eWife.Attributes["REF"] == null ? null : eWife.Attributes["REF"].Value;
                 FamilyTree ft = FamilyTree.Instance;
                 this.Husband = ft.GetIndividual(husbandID);
                 this.Wife = ft.GetIndividual(wifeID);
