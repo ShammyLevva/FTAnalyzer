@@ -213,7 +213,9 @@ namespace FTAnalyzer
                 str = str.Replace(">", "AFT ");
             if (str.StartsWith("<"))
                 str = str.Replace("<", "BEF ");
-            str = str.Replace("  ", " "); // fix issue if > or < has already got a space
+            if (str.StartsWith("C1") || str.StartsWith("C2") || str.StartsWith("C 1") || str.StartsWith("C 2"))
+                str = "ABT " + str.Substring(1);
+            str = str.Replace("  ", " "); // fix issue if > or < or Cxxx has already got a space
             Match matcher;
             if (str.StartsWith("INT")) // Interpreted date but we can discard <<Date_Phrase>>
             {
