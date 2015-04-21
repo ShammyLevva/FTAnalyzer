@@ -47,24 +47,16 @@ namespace FTAnalyzer
         {
             long lineNr = 0;
             int badLineCount = 0;
+            int badLineMax = 30;
 
             string line, nextline, token1, token2;
             string level;
             int thislevel;
-            int prevlevel;
+            int prevlevel = -1;
             string iden, tag, xref, value;
             int cpos1;
-
-            char[] newlineCharArray = new char[1];
-            newlineCharArray[0] = '\r';
-
-            lineNr = 0;
-
             Stack<string> stack = new Stack<string>();
             stack.Push("GED");
-
-            prevlevel = -1;
-
             XmlDocument document = new XmlDocument();
             XmlNode node = document.CreateElement("GED");
             document.AppendChild(node);
@@ -184,12 +176,15 @@ namespace FTAnalyzer
                     }
                     line = nextline;
                     System.Windows.Forms.Application.DoEvents();
-                    if (badLineCount > 30)
+                    if (badLineCount > badLineMax)
                     {
-                        DialogResult result = MessageBox.Show("Found more than 30 errors in the GEDCOM file.\nContinue Loading?",
+                        DialogResult result = MessageBox.Show("Found more than " + badLineMax + " errors in the GEDCOM file.\nContinue Loading?",
                                                          "Continue Loading?", MessageBoxButtons.YesNo);
                         if (result == DialogResult.Yes)
+                        {
                             badLineCount = 0;
+                            badLineMax *= 2; // double count of errors before next act
+                        }
                         else
                         {
                             document = null;
