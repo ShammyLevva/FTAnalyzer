@@ -101,7 +101,7 @@ namespace FTAnalyzer
                 AddFacts(node, Fact.REFERENCE);
                 AddFacts(node, Fact.UNKNOWN);
                 //TODO: need to think about family facts having AGE tags in GEDCOM
-                if (HasChildrenStatus)
+                if (HasGoodChildrenStatus)
                     CheckChildrenStatusCounts();
             }
         }
@@ -387,8 +387,9 @@ namespace FTAnalyzer
         // only check shared facts for children status
         private IEnumerable<Fact> ChildrenStatusFacts { get { return Facts.Where(f => f.FactType == Fact.CHILDREN1911 && f.FactErrorLevel == Fact.FactError.GOOD); } }
         
-        public bool HasChildrenStatus { get { return Facts.Any(f => f.FactType == Fact.CHILDREN1911 && f.FactErrorLevel == Fact.FactError.GOOD); } }
+        public bool HasGoodChildrenStatus { get { return Facts.Any(f => f.FactType == Fact.CHILDREN1911 && f.FactErrorLevel == Fact.FactError.GOOD); } }
 
+        public bool HasAnyChildrenStatus { get { return Facts.Any(f => f.FactType == Fact.CHILDREN1911); } }
         #endregion
 
         public void SetBudgieCode(Individual ind, int lenAhnentafel)
