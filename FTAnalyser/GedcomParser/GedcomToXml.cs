@@ -17,7 +17,8 @@ namespace FTAnalyzer
         {
             //StreamReader reader = new AnselInputStreamReader(checkInvalidCR(path));
             //StreamReader reader = new AnselInputStreamReader(new FileStream(path, FileMode.Open, FileAccess.Read));
-            StreamReader reader = new StreamReader(new FileStream(path, FileMode.Open, FileAccess.Read), encoding);
+            //StreamReader reader = new StreamReader(new FileStream(path, FileMode.Open, FileAccess.Read), encoding);
+            StreamReader reader = new StreamReader(CheckInvalidCR(path), encoding);
             return Parse(reader);
         }
 
