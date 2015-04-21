@@ -17,8 +17,7 @@ namespace FTAnalyzer
         {
             //StreamReader reader = new AnselInputStreamReader(checkInvalidCR(path));
             //StreamReader reader = new AnselInputStreamReader(new FileStream(path, FileMode.Open, FileAccess.Read));
-            //StreamReader reader = new StreamReader(new FileStream(path, FileMode.Open, FileAccess.Read), encoding);
-            StreamReader reader = new StreamReader(CheckInvalidCR(path), encoding);
+            StreamReader reader = new StreamReader(new FileStream(path, FileMode.Open, FileAccess.Read), encoding);
             return Parse(reader);
         }
 
@@ -179,7 +178,7 @@ namespace FTAnalyzer
                     System.Windows.Forms.Application.DoEvents();
                     if (badLineCount > badLineMax)
                     {
-                        DialogResult result = MessageBox.Show("Found more than " + badLineMax + " errors in the GEDCOM file.\nContinue Loading?",
+                        DialogResult result = MessageBox.Show("Found more than " + badLineMax + " consecutive errors in the GEDCOM file.\nContinue Loading?",
                                                          "Continue Loading?", MessageBoxButtons.YesNo);
                         if (result == DialogResult.Yes)
                         {
