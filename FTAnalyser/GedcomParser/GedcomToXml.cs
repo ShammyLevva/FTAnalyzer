@@ -58,9 +58,8 @@ namespace FTAnalyzer
                 {
                     b = (byte)infs.ReadByte();
                     if (b == 0x0a)
-                    { // we have 0x0d 0x0a so write them both out
+                    { // we have 0x0d 0x0a so write out the 0x0d and the 0x0a will follow in the normal write.
                         outfs.WriteByte(0x0d);
-                        outfs.WriteByte(0x0a);
                     } // otherwise we drop though and have ignored the 0x0d on its own
                 }
                 outfs.WriteByte(b);

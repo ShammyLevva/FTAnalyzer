@@ -35,6 +35,7 @@
             this.chkLoadWithFilters = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.chkRetryFailedLines = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,10 +62,16 @@
             this.chkRetryFailedLines.UseVisualStyleBackColor = true;
             this.chkRetryFailedLines.CheckedChanged += new System.EventHandler(this.chkRetryFailedLines_CheckedChanged);
             // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
             // FileHandlingSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.chkRetryFailedLines);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chkLoadWithFilters);
@@ -82,6 +89,7 @@
         private System.Windows.Forms.CheckBox chkLoadWithFilters;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkRetryFailedLines;
+        private System.Windows.Forms.Label label2;
 
 
 	}

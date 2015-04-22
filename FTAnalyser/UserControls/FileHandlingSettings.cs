@@ -16,8 +16,8 @@ namespace FTAnalyzer.UserControls
 			InitializeComponent();
 			//cannot be in load, because its possible this tab won't show, and the values will not be initialized.
 			//if this happens, then the users settings will be cleared.
-            chkLoadWithFilters.Checked = Properties.FileHandling.Default.LoadWithFilters;
-            chkRetryFailedLines.Checked = Properties.FileHandling.Default.RetryFailedLines;
+            chkLoadWithFilters.Checked = false; // Properties.FileHandling.Default.LoadWithFilters;
+            chkRetryFailedLines.Checked = false; // Properties.FileHandling.Default.RetryFailedLines;
             Properties.GeneralSettings.Default.ReloadRequired = false;
 		}
 
