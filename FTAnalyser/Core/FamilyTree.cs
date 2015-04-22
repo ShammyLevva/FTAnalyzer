@@ -388,16 +388,17 @@ namespace FTAnalyzer
             if (Properties.GeneralSettings.Default.ReportOptions)
             {
                 xmlErrorbox.AppendText("\nThe current file handling options are set :");
-                xmlErrorbox.AppendText("\n    Use Special Character Filters When Loading: " + Properties.FileHandling.Default.LoadWithFilters);
+                xmlErrorbox.AppendText("\n    Use Special Character Filters When Loading : " + Properties.FileHandling.Default.LoadWithFilters);
+                xmlErrorbox.AppendText("\n    Retry failed lines by looking for bad line breaks : " + Properties.FileHandling.Default.RetryFailedLines);
                 
                 xmlErrorbox.AppendText("\nThe current general options are set :");
-                xmlErrorbox.AppendText("\n    Use Baptism/Christening Date If No Birth Date: " + Properties.GeneralSettings.Default.UseBaptismDates);
-                xmlErrorbox.AppendText("\n    Use Burial/Cremation Date If No Death Date: " + Properties.GeneralSettings.Default.UseBurialDates);
-                xmlErrorbox.AppendText("\n    Allow Empty Values In Locations: " + Properties.GeneralSettings.Default.AllowEmptyLocations);
-                xmlErrorbox.AppendText("\n    Treat Residence Facts As Census Facts: " + Properties.GeneralSettings.Default.UseResidenceAsCensus);
-                xmlErrorbox.AppendText("\n    Tolerate Slightly Inaccurate Census Dates: " + Properties.GeneralSettings.Default.TolerateInaccurateCensusDate);
-                xmlErrorbox.AppendText("\n    Family Census Facts Apply To Only Parents: " + Properties.GeneralSettings.Default.OnlyCensusParents);
-                xmlErrorbox.AppendText("\n    Loose Birth Minimum Parental Age: " + Properties.GeneralSettings.Default.MinParentalAge);
+                xmlErrorbox.AppendText("\n    Use Baptism/Christening Date If No Birth Date : " + Properties.GeneralSettings.Default.UseBaptismDates);
+                xmlErrorbox.AppendText("\n    Use Burial/Cremation Date If No Death Date : " + Properties.GeneralSettings.Default.UseBurialDates);
+                xmlErrorbox.AppendText("\n    Allow Empty Values In Locations : " + Properties.GeneralSettings.Default.AllowEmptyLocations);
+                xmlErrorbox.AppendText("\n    Treat Residence Facts As Census Facts : " + Properties.GeneralSettings.Default.UseResidenceAsCensus);
+                xmlErrorbox.AppendText("\n    Tolerate Slightly Inaccurate Census Dates : " + Properties.GeneralSettings.Default.TolerateInaccurateCensusDate);
+                xmlErrorbox.AppendText("\n    Family Census Facts Apply To Only Parents : " + Properties.GeneralSettings.Default.OnlyCensusParents);
+                xmlErrorbox.AppendText("\n    Loose Birth Minimum Parental Age : " + Properties.GeneralSettings.Default.MinParentalAge);
                 xmlErrorbox.AppendText("\n    Show Multiple Fact Forms When Viewing Duplicates : " + Properties.GeneralSettings.Default.MultipleFactForms);
                 xmlErrorbox.AppendText("\n    Use Compact Census References : " + Properties.GeneralSettings.Default.UseCompactCensusRef);
                 xmlErrorbox.AppendText("\n    Show Alias In Name Displays : " + Properties.GeneralSettings.Default.ShowAliasInName);
@@ -409,10 +410,10 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("\n    Ignore Unknown Fact Type Warnings : " + Properties.GeneralSettings.Default.IgnoreFactTypeWarnings);
                 
                 xmlErrorbox.AppendText("\nThe current mapping options are set :");
-                xmlErrorbox.AppendText("\n    Custom Maps Location: " + Properties.MappingSettings.Default.CustomMapPath);
-                xmlErrorbox.AppendText("\n    Display British Parish Boundaries: " + Properties.MappingSettings.Default.UseParishBoundaries);
-                xmlErrorbox.AppendText("\n    Hide Scale Bar: " + Properties.MappingSettings.Default.HideScaleBar);
-                xmlErrorbox.AppendText("\n    Include Locations with Partial Match Status: " + Properties.MappingSettings.Default.IncludePartials);
+                xmlErrorbox.AppendText("\n    Custom Maps Location : " + Properties.MappingSettings.Default.CustomMapPath);
+                xmlErrorbox.AppendText("\n    Display British Parish Boundaries : " + Properties.MappingSettings.Default.UseParishBoundaries);
+                xmlErrorbox.AppendText("\n    Hide Scale Bar : " + Properties.MappingSettings.Default.HideScaleBar);
+                xmlErrorbox.AppendText("\n    Include Locations with Partial Match Status : " + Properties.MappingSettings.Default.IncludePartials);
                 xmlErrorbox.AppendText("\n\n");
             }
         }

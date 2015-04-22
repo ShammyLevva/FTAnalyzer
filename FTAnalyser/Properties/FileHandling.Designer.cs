@@ -34,5 +34,17 @@ namespace FTAnalyzer.Properties {
                 this["LoadWithFilters"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RetryFailedLines {
+            get {
+                return ((bool)(this["RetryFailedLines"]));
+            }
+            set {
+                this["RetryFailedLines"] = value;
+            }
+        }
     }
 }

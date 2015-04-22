@@ -17,6 +17,7 @@ namespace FTAnalyzer.UserControls
 			//cannot be in load, because its possible this tab won't show, and the values will not be initialized.
 			//if this happens, then the users settings will be cleared.
             chkLoadWithFilters.Checked = Properties.FileHandling.Default.LoadWithFilters;
+            chkRetryFailedLines.Checked = Properties.FileHandling.Default.RetryFailedLines;
             Properties.GeneralSettings.Default.ReloadRequired = false;
 		}
 
@@ -25,8 +26,10 @@ namespace FTAnalyzer.UserControls
 		public void Save()
 		{
             Properties.FileHandling.Default.LoadWithFilters = chkLoadWithFilters.Checked;
+            Properties.FileHandling.Default.RetryFailedLines = chkRetryFailedLines.Checked;
             Properties.FileHandling.Default.Save();
             OnLoadWithFiltersChanged();
+            OnRetryFailedLinesChanged();
 		}
 
 		public void Cancel()
@@ -87,7 +90,19 @@ namespace FTAnalyzer.UserControls
                 LoadWithFiltersChanged(null, EventArgs.Empty);
         }
 
+        public static event EventHandler RetryFailedLinesChanged;
+        protected static void OnRetryFailedLinesChanged()
+        {
+            if (RetryFailedLinesChanged != null)
+                RetryFailedLinesChanged(null, EventArgs.Empty);
+        }
+
         private void chkLoadWithFilters_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.GeneralSettings.Default.ReloadRequired = true;
+        }
+
+        private void chkRetryFailedLines_CheckedChanged(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = true;
         }

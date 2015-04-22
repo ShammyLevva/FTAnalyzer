@@ -34,6 +34,7 @@
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.chkLoadWithFilters = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.chkRetryFailedLines = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,10 +54,18 @@
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
+            // chkRetryFailedLines
+            // 
+            resources.ApplyResources(this.chkRetryFailedLines, "chkRetryFailedLines");
+            this.chkRetryFailedLines.Name = "chkRetryFailedLines";
+            this.chkRetryFailedLines.UseVisualStyleBackColor = true;
+            this.chkRetryFailedLines.CheckedChanged += new System.EventHandler(this.chkRetryFailedLines_CheckedChanged);
+            // 
             // FileHandlingSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkRetryFailedLines);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chkLoadWithFilters);
             this.Name = "FileHandlingSettings";
@@ -72,6 +81,7 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.CheckBox chkLoadWithFilters;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chkRetryFailedLines;
 
 
 	}

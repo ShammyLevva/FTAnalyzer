@@ -23,7 +23,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "5.0.1.4";
+        public static string VERSION = "5.0.1.5";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -59,6 +59,17 @@ namespace FTAnalyzer
         {
             boldFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Bold);
             normalFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Regular);
+            RegisterEventHandlers();
+            this.Text = "Family Tree Analyzer v" + VERSION;
+            SetHeightWidth();
+            dgSurnames.AutoGenerateColumns = false;
+            dgDuplicates.AutoGenerateColumns = false;
+            rfhDuplicates = new ReportFormHelper(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
+            loading = false;
+        }
+
+        private void RegisterEventHandlers()
+        {
             GeneralSettings.AllowEmptyLocationsChanged += new EventHandler(Options_ReloadData);
             GeneralSettings.TolerateInaccurateCensusChanged += new EventHandler(Options_ReloadData);
             GeneralSettings.UseResidenceAsCensusChanged += new EventHandler(Options_ReloadData);
@@ -68,12 +79,7 @@ namespace FTAnalyzer
             GeneralSettings.AddCreatedLocationsChanged += new EventHandler(Options_ReloadData);
             GeneralSettings.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
             FileHandlingSettings.LoadWithFiltersChanged += new EventHandler(Options_ReloadData);
-            this.Text = "Family Tree Analyzer v" + VERSION;
-            SetHeightWidth();
-            dgSurnames.AutoGenerateColumns = false;
-            dgDuplicates.AutoGenerateColumns = false;
-            rfhDuplicates = new ReportFormHelper(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
-            loading = false;
+            FileHandlingSettings.RetryFailedLinesChanged += new EventHandler(Options_ReloadData);
         }
 
         private void SetHeightWidth()

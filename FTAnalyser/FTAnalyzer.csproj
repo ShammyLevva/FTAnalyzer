@@ -321,6 +321,7 @@
     <Compile Include="Mapping\NLSRequest.cs" />
     <Compile Include="Mapping\OS50kGazetteer.cs" />
     <Compile Include="Mapping\TearDropLayer.cs" />
+    <Compile Include="Properties\FileHandling.cs" />
     <Compile Include="Properties\FileHandling.Designer.cs">
       <DependentUpon>FileHandling.settings</DependentUpon>
       <AutoGen>True</AutoGen>
