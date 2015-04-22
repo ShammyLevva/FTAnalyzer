@@ -422,10 +422,10 @@ namespace FTAnalyzer.Forms
         {
             SortableBindingList<IDisplayFamily> results = new SortableBindingList<IDisplayFamily>();
             IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
-            foreach (Family f in toSearch)
+            foreach (Family fam in toSearch)
             {
-                if (f.On1911Census && !f.HasAnyChildrenStatus && f.FamilyID != Family.SOLOINDIVIDUAL && f.FamilyID != Family.PRE_MARRIAGE)
-                    results.Add(f);
+                if (fam.On1911Census && !fam.HasAnyChildrenStatus && fam.BothParentsAlive(CensusDate.UKCENSUS1911) && fam.FamilyID != Family.PRE_MARRIAGE)
+                    results.Add(fam);
             }
             reportType = ReportType.MissingChildrenStatus;
             dgFamilies.DataSource = results;
@@ -441,11 +441,11 @@ namespace FTAnalyzer.Forms
         {
             SortableBindingList<IDisplayChildrenStatus> results = new SortableBindingList<IDisplayChildrenStatus>();
             IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
-            foreach (CensusFamily f in toSearch)
+            foreach (CensusFamily fam in toSearch)
             {
-                if (f.On1911Census && f.HasGoodChildrenStatus && f.FamilyID != Family.SOLOINDIVIDUAL && f.FamilyID != Family.PRE_MARRIAGE &&
-                    (f.ExpectedTotal != f.ChildrenTotal || f.ExpectedAlive != f.ChildrenAlive || f.ExpectedDead != f.ChildrenDead))
-                    results.Add(f);
+                if (fam.On1911Census && fam.HasGoodChildrenStatus && fam.FamilyID != Family.SOLOINDIVIDUAL && fam.FamilyID != Family.PRE_MARRIAGE &&
+                    (fam.ExpectedTotal != fam.ChildrenTotal || fam.ExpectedAlive != fam.ChildrenAlive || fam.ExpectedDead != fam.ChildrenDead))
+                    results.Add(fam);
             }
             reportType = ReportType.MismatchedChildrenStatus;
             dgFamilies.DataSource = results;

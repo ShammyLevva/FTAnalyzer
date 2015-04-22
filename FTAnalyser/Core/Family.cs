@@ -386,7 +386,7 @@ namespace FTAnalyzer
 
         // only check shared facts for children status
         private IEnumerable<Fact> ChildrenStatusFacts { get { return Facts.Where(f => f.FactType == Fact.CHILDREN1911 && f.FactErrorLevel == Fact.FactError.GOOD); } }
-        
+
         public bool HasGoodChildrenStatus { get { return Facts.Any(f => f.FactType == Fact.CHILDREN1911 && f.FactErrorLevel == Fact.FactError.GOOD); } }
 
         public bool HasAnyChildrenStatus { get { return Facts.Any(f => f.FactType == Fact.CHILDREN1911); } }
@@ -558,6 +558,13 @@ namespace FTAnalyzer
                     return true;
             }
             return false;
+        }
+ 
+        public bool BothParentsAlive(FactDate when)
+        {
+            if (Husband == null || Wife == null || FamilyID == SOLOINDIVIDUAL)
+                return false;
+            return Husband.IsAlive(when) && Wife.IsAlive(when) && Husband.GetAge(when).MinAge > 13 && Wife.GetAge(when).MinAge > 13;
         }
 
         private IEnumerable<Fact> AllFamilyFacts
