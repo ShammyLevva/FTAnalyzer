@@ -842,7 +842,7 @@ namespace FTAnalyzer
                             if (fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
                                 minStart = CreateDate(fam.Husband.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
                         if (fam.Husband.DeathDate.IsKnown && fam.Husband.DeathDate.EndDate != FactDate.MAXDATE)
-                            if (fam.Husband.DeathDate.EndDate.AddMonths(9) < minEnd)
+                            if (fam.Husband.DeathDate.EndDate.Year != FactDate.MAXDATE.Year && fam.Husband.DeathDate.EndDate.AddMonths(9) < minEnd)
                                 minEnd = CreateDate(fam.Husband.DeathDate.EndDate.AddMonths(9).Year, 1, 1);
                     }
                     if (fam.Wife != null)
@@ -851,7 +851,7 @@ namespace FTAnalyzer
                             if (fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
                                 minStart = CreateDate(fam.Wife.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
                         if (fam.Wife.DeathDate.IsKnown && fam.Wife.DeathDate.EndDate != FactDate.MAXDATE)
-                            if (fam.Wife.DeathDate.EndDate < minEnd)
+                            if (fam.Wife.DeathDate.EndDate.Year != FactDate.MAXDATE.Year && fam.Wife.DeathDate.EndDate < minEnd)
                                 minEnd = CreateDate(fam.Wife.DeathDate.EndDate.Year, 1, 1);
                     }
                 }
@@ -864,6 +864,11 @@ namespace FTAnalyzer
                 }
                 if (birthDate.StartDate > minStart)
                     minStart = birthDate.StartDate;
+                // force min & max years with odd dates to be min & max dates
+                if (minEnd.Year == FactDate.MAXDATE.Year && minEnd != FactDate.MAXDATE)
+                    minEnd = FactDate.MAXDATE;
+                if (minStart.Year == 1 && minStart != FactDate.MINDATE)
+                    minStart = FactDate.MINDATE;
                 if (minEnd.Month == 1 && minEnd.Day == 1 && birthDate.EndDate.Month == 12 && birthDate.EndDate.Day == 31)
                     minEnd = minEnd.AddYears(1).AddDays(-1); // year has rounded to 1st Jan when was upper year.
                 baseDate = new FactDate(minStart, minEnd);
@@ -911,9 +916,9 @@ namespace FTAnalyzer
                     }
                 }
             }
-            if (startdate < mindate)
+            if (startdate.Year != 1 && startdate.Year != FactDate.MAXDATE.Year && startdate < mindate)
                 return new FactDate(startdate, mindate);
-            else if (mindate <= maxdate)
+            else if (mindate.Year != 1 && mindate.Year != FactDate.MAXDATE.Year && mindate <= maxdate)
                 return new FactDate(mindate, maxdate);
             else
                 return FactDate.UNKNOWN_DATE;
