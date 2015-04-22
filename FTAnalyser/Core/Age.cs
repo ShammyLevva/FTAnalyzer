@@ -70,21 +70,21 @@ namespace FTAnalyzer
                 DateTime endDate = when.EndDate;
                 if (int.TryParse(year, out yearno))
                 {
-                    if(startDate != FactDate.MINDATE)
+                    if(startDate != FactDate.MINDATE && startDate.Year > yearno + 1)
                         startDate = startDate.AddYears(-yearno);
                     endDate = endDate.AddYears(-yearno);
                 }
                 if (int.TryParse(month, out monthno))
                 {
-                    if (startDate != FactDate.MINDATE)
+                    if (startDate != FactDate.MINDATE && startDate.Year > 1)
                         startDate = startDate.AddMonths(-monthno);
                     endDate = endDate.AddMonths(-monthno);
                 }
                 if (int.TryParse(day, out dayno))
-                {
-                    if (startDate != FactDate.MINDATE)
-                        startDate = startDate.AddDays(-dayno);
-                    endDate = endDate.AddDays(-dayno);
+                {  // -dayno + 1 as date will be at time 00:00 and subtraction is one day too much.
+                    if (startDate != FactDate.MINDATE &&  startDate.Year > 1)
+                        startDate = startDate.AddDays(-dayno + 1);
+                    endDate = endDate.AddDays(-dayno + 1);
                 }
                 CalculatedBirthDate = new FactDate(startDate, endDate);
             }
