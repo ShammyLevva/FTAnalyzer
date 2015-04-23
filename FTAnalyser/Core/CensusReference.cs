@@ -61,9 +61,9 @@ namespace FTAnalyzer
         private string Place { get; set; }
         private string Class { get; set; }
         private string Roll { get; set; }
-        private string Piece { get; set; }
-        private string Folio { get; set; }
-        private string Page { get; set; }
+        public string Piece { get; set; }
+        public string Folio { get; set; }
+        public string Page { get; set; }
         private string Book { get; set; }
         private string Schedule { get; set; }
         private string Parish { get; set; }
@@ -156,7 +156,7 @@ namespace FTAnalyzer
             {
                 if (CheckPatterns(text))
                 {
-                    ReferenceText = text;
+                    ReferenceText = text.Trim();
                     return true;
                 }
                 // no match so store text 

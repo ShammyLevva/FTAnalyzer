@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="AgeTest.cs" />
     <Compile Include="FactDateTest.cs" />
+    <Compile Include="CensusReferenceTest.cs" />
     <Compile Include="FactLocationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
