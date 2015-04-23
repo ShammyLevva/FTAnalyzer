@@ -83,8 +83,8 @@ namespace FTAnalyzer
                 if (int.TryParse(day, out dayno))
                 {  // -dayno + 1 as date will be at time 00:00 and subtraction is one day too much.
                     if (startDate != FactDate.MINDATE &&  startDate.Year > 1)
-                        startDate = startDate.AddDays(-dayno + 1);
-                    endDate = endDate.AddDays(-dayno + 1);
+                        startDate = startDate.AddDays(-dayno);
+                    endDate = endDate.AddDays(-dayno);
                 }
                 CalculatedBirthDate = new FactDate(startDate, endDate);
             }
