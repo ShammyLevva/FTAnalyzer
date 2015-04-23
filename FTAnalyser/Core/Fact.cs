@@ -479,7 +479,7 @@ namespace FTAnalyzer
                 Location = FactLocation.GetLocation(result);
         }
 
-        public Fact(string factRef, string factType, FactDate date, string comment = "", bool preferred = true, bool createdByFTA = false)
+        public Fact(string factRef, string factType, FactDate date, FactLocation loc, string comment = "", bool preferred = true, bool createdByFTA = false)
             : this(factRef, preferred)
         {
             this.FactType = factType;
@@ -487,7 +487,7 @@ namespace FTAnalyzer
             this.Comment = comment;
             this.Created = createdByFTA;
             this.Place = string.Empty;
-            this.Location = FactLocation.GetLocation(Place);
+            this.Location = loc;
         }
 
         #endregion

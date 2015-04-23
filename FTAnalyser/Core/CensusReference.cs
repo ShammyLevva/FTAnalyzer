@@ -124,7 +124,7 @@ namespace FTAnalyzer
         public CensusReference(string individualID, string notes, bool source)
             : this()
         {
-            this.Fact = new Fact(individualID, Fact.CENSUS_FTA, FactDate.UNKNOWN_DATE, string.Empty, false, true);
+            this.Fact = new Fact(individualID, Fact.CENSUS_FTA, FactDate.UNKNOWN_DATE, FactLocation.UNKNOWN_LOCATION, string.Empty, false, true);
             if (GetCensusReference(notes))
             {
                 if (this.Class.Length > 0)

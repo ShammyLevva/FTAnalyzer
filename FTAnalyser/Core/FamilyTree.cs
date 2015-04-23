@@ -390,7 +390,7 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("\nThe current file handling options are set :");
                 xmlErrorbox.AppendText("\n    Use Special Character Filters When Loading : " + Properties.FileHandling.Default.LoadWithFilters);
                 xmlErrorbox.AppendText("\n    Retry failed lines by looking for bad line breaks : " + Properties.FileHandling.Default.RetryFailedLines);
-                
+
                 xmlErrorbox.AppendText("\nThe current general options are set :");
                 xmlErrorbox.AppendText("\n    Use Baptism/Christening Date If No Birth Date : " + Properties.GeneralSettings.Default.UseBaptismDates);
                 xmlErrorbox.AppendText("\n    Use Burial/Cremation Date If No Death Date : " + Properties.GeneralSettings.Default.UseBurialDates);
@@ -408,7 +408,7 @@ namespace FTAnalyzer
                 xmlErrorbox.AppendText("\n    Auto Create Census Events from Notes & Sources : " + Properties.GeneralSettings.Default.AutoCreateCensusFacts);
                 xmlErrorbox.AppendText("\n    Add Auto Created Census Locations to Locations List : " + Properties.GeneralSettings.Default.AddCreatedLocations);
                 xmlErrorbox.AppendText("\n    Ignore Unknown Fact Type Warnings : " + Properties.GeneralSettings.Default.IgnoreFactTypeWarnings);
-                
+
                 xmlErrorbox.AppendText("\nThe current mapping options are set :");
                 xmlErrorbox.AppendText("\n    Custom Maps Location : " + Properties.MappingSettings.Default.CustomMapPath);
                 xmlErrorbox.AppendText("\n    Display British Parish Boundaries : " + Properties.MappingSettings.Default.UseParishBoundaries);
@@ -766,7 +766,8 @@ namespace FTAnalyzer
                 {
                     foreach (Individual ind in individuals)
                         CheckLooseBirth(ind, result);
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     MessageBox.Show("Problem calculating Loose Births. Error was " + ex.Message);
                 }
@@ -879,7 +880,7 @@ namespace FTAnalyzer
             {
                 // we have a date to change and its not the same 
                 // range as the existing death date
-                Fact looseBirth = new Fact(indiv.IndividualID, Fact.LOOSEBIRTH, toAdd);
+                Fact looseBirth = new Fact(indiv.IndividualID, Fact.LOOSEBIRTH, toAdd, FactLocation.UNKNOWN_LOCATION);
                 indiv.AddFact(looseBirth);
                 result.Add(indiv);
             }
@@ -985,7 +986,7 @@ namespace FTAnalyzer
             {
                 // we have a date to change and its not the same 
                 // range as the existing death date
-                Fact looseDeath = new Fact(indiv.IndividualID, Fact.LOOSEDEATH, toAdd);
+                Fact looseDeath = new Fact(indiv.IndividualID, Fact.LOOSEDEATH, toAdd, FactLocation.UNKNOWN_LOCATION);
                 indiv.AddFact(looseDeath);
                 result.Add(indiv);
             }
@@ -2796,7 +2797,7 @@ namespace FTAnalyzer
                             string desc = FixWikiFormatting(descNode.InnerText);
                             XmlNode dateNode = worldEvent.SelectSingleNode("date");
                             fd = GetWikiDate(dateNode, eventDate);
-                            Fact f = new Fact("Wikipedia", Fact.WORLD_EVENT, fd, desc, true, true);
+                            Fact f = new Fact("Wikipedia", Fact.WORLD_EVENT, fd, FactLocation.UNKNOWN_LOCATION, desc, true, true);
                             DisplayFact df = new DisplayFact(null, string.Empty, string.Empty, f);
                             events.Add(df);
                         }

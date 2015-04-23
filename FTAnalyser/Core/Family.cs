@@ -150,8 +150,8 @@ namespace FTAnalyzer
                     parentComment = titlecase + " child of " + parent.IndividualID + ": " + parent.Name;
                     childrenComment = titlecase + " parent of " + child.IndividualID + ": " + child.Name;
                 }
-                Fact parentFact = new Fact(parent.IndividualID, Fact.PARENT, child.BirthDate, parentComment, true, true);
-                Fact childrenFact = new Fact(child.IndividualID, Fact.CHILDREN, child.BirthDate, childrenComment, true, true);
+                Fact parentFact = new Fact(parent.IndividualID, Fact.PARENT, child.BirthDate, child.BirthLocation, parentComment, true, true);
+                Fact childrenFact = new Fact(child.IndividualID, Fact.CHILDREN, child.BirthDate, child.BirthLocation, childrenComment, true, true);
                 child.AddFact(parentFact);
                 parent.AddFact(childrenFact);
             }
