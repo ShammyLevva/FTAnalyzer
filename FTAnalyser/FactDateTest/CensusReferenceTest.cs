@@ -76,6 +76,11 @@ namespace CensusReferenceTest
             Assert.IsTrue(censusRef.Folio.Equals("49"));
             Assert.IsTrue(censusRef.Page.Equals("10"));
 
+            censusRef = new CensusReference("I1", "Archive reference	RG11\nPiece number	870\nFolio	49\nPage	10", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1881));
+            Assert.IsTrue(censusRef.Piece.Equals("870"));
+            Assert.IsTrue(censusRef.Folio.Equals("49"));
+            Assert.IsTrue(censusRef.Page.Equals("10"));
         }
     }
 }

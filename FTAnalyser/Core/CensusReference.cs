@@ -18,12 +18,12 @@ namespace FTAnalyzer
         //Class: RG14; Piece: 21983
         //Class: RG14; Piece: 12577; Schedule Number: 103
         //Year: 1900; Census Place: South Prairie, Pierce,Washington; Roll: T623_1748; Page: 4B; Enumeration District: 160.
-        private static readonly string EW_CENSUS_PATTERN = @"RG *(\d{1,3})[;,]? *Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
-        private static readonly string EW_CENSUS_PATTERN2 = @"RG *(\d{1,3})[;,]? *Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
-        private static readonly string EW_CENSUS_PATTERN3 = @"(\d{4}) Census.*? *Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
-        private static readonly string EW_CENSUS_PATTERN4 = @"(\d{4}) Census.*? *Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
-        private static readonly string EW_CENSUS_PATTERN5 = @"Census[: ]*(\d{4}).*? *Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
-        private static readonly string EW_CENSUS_PATTERN6 = @"Census[: ]*(\d{4}).*? *Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
+        private static readonly string EW_CENSUS_PATTERN = @"RG *(\d{1,3})[;,]? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
+        private static readonly string EW_CENSUS_PATTERN2 = @"RG *(\d{1,3})[;,]? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
+        private static readonly string EW_CENSUS_PATTERN3 = @"(\d{4}) Census.*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
+        private static readonly string EW_CENSUS_PATTERN4 = @"(\d{4}) Census.*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
+        private static readonly string EW_CENSUS_PATTERN5 = @"Census[: ]*(\d{4}).*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
+        private static readonly string EW_CENSUS_PATTERN6 = @"Census[: ]*(\d{4}).*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
         private static readonly string EW_MISSINGCLASS_PATTERN = @"Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_MISSINGCLASS_PATTERN2 = @"Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
         private static readonly string EW_CENSUS_PATTERN_FH = @"RG *(\d{1,2})/(\d{1,5}) F(olio)? ?(\d{1,4}[a-z]?) p(age)? ?(\d{1,3})";
@@ -151,7 +151,7 @@ namespace FTAnalyzer
 
         private bool GetCensusReference(string text)
         {
-            text = text.Replace(System.Environment.NewLine, "");
+            text = text.Replace(System.Environment.NewLine, " ").Replace("\n", " ").Replace("\t", " ");
             if (text.Length > 0)
             {
                 if (CheckPatterns(text))
@@ -191,9 +191,9 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = "RG" + matcher.Groups[1].ToString();
-                this.Piece = matcher.Groups[2].ToString();
-                this.Folio = matcher.Groups[3].ToString();
-                this.Page = matcher.Groups[4].ToString();
+                this.Piece = matcher.Groups[3].ToString();
+                this.Folio = matcher.Groups[4].ToString();
+                this.Page = matcher.Groups[5].ToString();
                 this.IsUKCensus = true;
                 this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
@@ -204,8 +204,8 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = "RG" + matcher.Groups[1].ToString();
-                this.Piece = matcher.Groups[2].ToString();
-                this.Folio = matcher.Groups[3].ToString();
+                this.Piece = matcher.Groups[3].ToString();
+                this.Folio = matcher.Groups[4].ToString();
                 this.Page = MISSING;
                 this.IsUKCensus = true;
                 this.Country = GetCensusReferenceCountry(Class, Piece);
@@ -217,9 +217,9 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
-                this.Piece = matcher.Groups[2].ToString();
-                this.Folio = matcher.Groups[3].ToString();
-                this.Page = matcher.Groups[4].ToString();
+                this.Piece = matcher.Groups[3].ToString();
+                this.Folio = matcher.Groups[4].ToString();
+                this.Page = matcher.Groups[5].ToString();
                 this.IsUKCensus = true;
                 this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
@@ -230,8 +230,8 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
-                this.Piece = matcher.Groups[2].ToString();
-                this.Folio = matcher.Groups[3].ToString();
+                this.Piece = matcher.Groups[3].ToString();
+                this.Folio = matcher.Groups[4].ToString();
                 this.Page = MISSING;
                 this.IsUKCensus = true;
                 this.Country = GetCensusReferenceCountry(Class, Piece);
@@ -243,9 +243,9 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
-                this.Piece = matcher.Groups[2].ToString();
-                this.Folio = matcher.Groups[3].ToString();
-                this.Page = matcher.Groups[4].ToString();
+                this.Piece = matcher.Groups[3].ToString();
+                this.Folio = matcher.Groups[4].ToString();
+                this.Page = matcher.Groups[5].ToString();
                 this.IsUKCensus = true;
                 this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
@@ -256,8 +256,8 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
-                this.Piece = matcher.Groups[2].ToString();
-                this.Folio = matcher.Groups[3].ToString();
+                this.Piece = matcher.Groups[3].ToString();
+                this.Folio = matcher.Groups[4].ToString();
                 this.Page = MISSING;
                 this.IsUKCensus = true;
                 this.Country = GetCensusReferenceCountry(Class, Piece);
