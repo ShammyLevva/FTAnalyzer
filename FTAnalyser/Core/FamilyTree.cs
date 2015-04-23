@@ -112,13 +112,15 @@ namespace FTAnalyzer
                     if (note.ChildNodes.Count > 0)
                     {
                         foreach (XmlNode child in note.ChildNodes)
-                            result.AppendLine(child.InnerText);
+                        {
+                            XmlNodeList continued = child.SelectNodes("CONC|CONT");
+                            if (continued.Count > 0)
+                                AddContinuationText(result, continued);
+                        }
+                        result.AppendLine();
                     }
-                    else
-                    {
-                        XmlAttribute ID = note.Attributes["REF"];
-                        result.AppendLine(GetNoteRef(ID));
-                    }
+                    XmlAttribute ID = note.Attributes["REF"];
+                    result.AppendLine(GetNoteRef(ID));
                     result.AppendLine();
                     result.AppendLine();
                 }
@@ -137,12 +139,23 @@ namespace FTAnalyzer
             {
                 if (node.Attributes["ID"] != null && node.Attributes["ID"].Value == reference.Value)
                 {
-                    foreach (XmlNode child in node.ChildNodes)
-                        result.AppendLine(child.InnerText);
+                    AddContinuationText(result, node.ChildNodes);
                     return result.ToString();
                 }
             }
             return string.Empty;
+        }
+
+        private static void AddContinuationText(StringBuilder result, XmlNodeList nodeList)
+        {
+            foreach (XmlNode child in nodeList)
+            {
+                if (child.Name.Equals("CONT"))
+                    result.AppendLine(); // We have a new continuation so start a new line
+                result.Append(child.InnerText);
+            }
+            result.AppendLine();
+            result.AppendLine();
         }
 
         public static string ValidFilename(string filename)
