@@ -913,6 +913,7 @@ namespace FTAnalyzer
                         }
                     }
                 }
+                UnrecognisedCensusNotes = notes;
             }
         }
 

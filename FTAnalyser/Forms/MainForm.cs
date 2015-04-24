@@ -23,7 +23,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "5.0.2.0";
+        public static string VERSION = "5.0.2.1";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -2370,31 +2370,46 @@ namespace FTAnalyzer
             IEnumerable<string> results = ft.UnrecognisedCensusReferences();
             results = results.OrderBy(x => x.ToString());
             if (results.Count() > 0)
-            {
-                try
-                {
-                    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    string initialDir = (string)Application.UserAppDataRegistry.GetValue("Report Unrecognised Census References Path");
-                    saveFileDialog.InitialDirectory = initialDir == null ? Environment.SpecialFolder.MyDocuments.ToString() : initialDir;
-                    saveFileDialog.FileName = "Unrecognised Census References for " + Path.GetFileNameWithoutExtension(filename) + ".txt";
-                    saveFileDialog.Filter = "Report File (*.txt)|*.txt";
-                    saveFileDialog.FilterIndex = 1;
-
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        string path = Path.GetDirectoryName(saveFileDialog.FileName);
-                        Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
-                        WriteFile(results, saveFileDialog.FileName);
-                        MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease upload it to http://ftanalyzer.codeplex.com in the issues section, if you feel you have standard census references that should be recognised.", "FT Analyzer");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "FT Analyzer");
-                }
-            }
+                SaveUnrecognisedDataFile(results, "Unrecognised Census References for " + Path.GetFileNameWithoutExtension(filename) + ".txt", string.Empty);
             else
                 MessageBox.Show("No unrecognised census references found.", "FTAnalyzer");
+        }
+
+        private void btnReportUnrecognisedNotes_Click(object sender, EventArgs e)
+        {
+            IEnumerable<string> results = ft.UnrecognisedCensusReferencesNotes();
+            results = results.OrderBy(x => x.ToString());
+            if (results.Count() > 0)
+                SaveUnrecognisedDataFile(results, "Notes with no recognised Census Reference formats for " + Path.GetFileNameWithoutExtension(filename) + ".txt",
+                    "\n\nPlease check the file and remove any private notes information before posting");
+            else
+                MessageBox.Show("No notes with unrecognised census references found.", "FTAnalyzer");
+
+        }
+
+        private void SaveUnrecognisedDataFile(IEnumerable<string> results, string unrecognisedFilename, string privateWarning)
+        {
+            try
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                string initialDir = (string)Application.UserAppDataRegistry.GetValue("Report Unrecognised Census References Path");
+                saveFileDialog.InitialDirectory = initialDir == null ? Environment.SpecialFolder.MyDocuments.ToString() : initialDir;
+                saveFileDialog.FileName = unrecognisedFilename;
+                saveFileDialog.Filter = "Report File (*.txt)|*.txt";
+                saveFileDialog.FilterIndex = 1;
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string path = Path.GetDirectoryName(saveFileDialog.FileName);
+                    Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
+                    WriteFile(results, saveFileDialog.FileName);
+                    MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease upload it to http://ftanalyzer.codeplex.com in the issues section, if you feel you have standard census references that should be recognised." + privateWarning, "FT Analyzer");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "FT Analyzer");
+            }
         }
 
         private void WriteFile(IEnumerable<string> results, string filename)
@@ -2789,5 +2804,6 @@ namespace FTAnalyzer
             ShowTodaysEvents();
         }
         #endregion
+
     }
 }

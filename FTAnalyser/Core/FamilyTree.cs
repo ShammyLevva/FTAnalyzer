@@ -2733,6 +2733,16 @@ namespace FTAnalyzer
                 result.Add(f.CensusReference.Reference);
             return result;
         }
+
+        public HashSet<string> UnrecognisedCensusReferencesNotes()
+        {
+            HashSet<string> result = new HashSet<string>();
+            Predicate<Individual> predicate = i => i.UnrecognisedCensusNotes.Length > 0;
+            IEnumerable<Individual> unrecognised = AllIndividuals.Where(predicate);
+            foreach (Individual i in unrecognised)
+                result.Add(i.UnrecognisedCensusNotes + "\n--------------------------------------------------------------------------------\n");
+            return result;
+        }
         #endregion
 
         #region Today
