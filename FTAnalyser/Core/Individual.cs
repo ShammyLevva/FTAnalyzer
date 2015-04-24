@@ -719,21 +719,6 @@ namespace FTAnalyzer
             return isCensusDone && !isLostCousinsEntered;
         }
 
-        public int MissingLostCousinsCount
-        {
-            get
-            {
-                return (MissingLostCousins(CensusDate.EWCENSUS1841, false) ? 1 : 0) +
-                       (MissingLostCousins(CensusDate.EWCENSUS1881, false) ? 1 : 0) +
-                       (MissingLostCousins(CensusDate.SCOTCENSUS1881, false) ? 1 : 0) +
-                       (MissingLostCousins(CensusDate.CANADACENSUS1881, false) ? 1 : 0) +
-                       (MissingLostCousins(CensusDate.EWCENSUS1911, false) ? 1 : 0) +
-                       (MissingLostCousins(CensusDate.IRELANDCENSUS1911, false) ? 1 : 0) +
-                       (MissingLostCousins(CensusDate.USCENSUS1880, false) ? 1 : 0) +
-                       (MissingLostCousins(CensusDate.USCENSUS1940, false) ? 1 : 0);
-            }
-        }
-
         public int LostCousinsFacts
         {
             get { return facts.Count(f => f.FactType == Fact.LOSTCOUSINS); }
@@ -1325,6 +1310,20 @@ namespace FTAnalyzer
             }
             return true;
         }
+
+        public bool HasLostCousinsFactWithNoCensusFact
+        {
+            get
+            {
+                foreach (CensusDate censusDate in CensusDate.LOSTCOUSINS_CENSUS)
+                {
+                    if (IsLostCousinsEntered(censusDate, false) && !IsCensusDone(censusDate))
+                        return true;
+                }
+                return false;
+            }
+        }
+
 
         public int LostCousinsCensusFactCount
         {

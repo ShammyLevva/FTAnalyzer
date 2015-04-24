@@ -13,8 +13,8 @@ namespace FTAnalyzer.Forms
 {
     public partial class People : Form
     {
-        private enum ReportType { People, MissingChildrenStatus, MismatchedChildrenStatus } 
-        
+        private enum ReportType { People, MissingChildrenStatus, MismatchedChildrenStatus }
+
         private bool selectRow = false;
         private Font boldFont;
         private Font normalFont;
@@ -48,7 +48,7 @@ namespace FTAnalyzer.Forms
             if (reportType == ReportType.MissingChildrenStatus || reportType == ReportType.MismatchedChildrenStatus)
                 txtCount.Text = dgFamilies.RowCount + " Problems detected. " + Properties.Messages.Hints_IndividualFamily + " Shift Double click to see colour census report for family.";
             else
-            { 
+            {
                 if (splitContainer.Panel2Collapsed)
                     txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals.  " + Properties.Messages.Hints_Individual;
                 else
@@ -123,12 +123,10 @@ namespace FTAnalyzer.Forms
         {
             List<Individual> listtoCheck = ft.AllIndividuals.Where(relationFilter).ToList();
             List<Individual> individuals = new List<Individual>();
-            foreach (CensusDate censusDate in CensusDate.LOSTCOUSINS_CENSUS)
-            {
-                Predicate<Individual> lcFacts = new Predicate<Individual>(i => i.LostCousinsCensusFactCount - i.MissingLostCousinsCount - i.LostCousinsFacts != 0);
-                IEnumerable<Individual> censusMissing = listtoCheck.Where(lcFacts);
-                individuals.AddRange(censusMissing);
-            }
+            //i.LostCousinsCensusFactCount - i.MissingLostCousinsCount - i.LostCousinsFacts != 0
+            Predicate<Individual> lcFacts = new Predicate<Individual>(i => i.HasLostCousinsFactWithNoCensusFact);
+            IEnumerable<Individual> censusMissing = listtoCheck.Where(lcFacts);
+            individuals.AddRange(censusMissing);
             individuals = individuals.Distinct<Individual>().ToList();
             SetIndividuals(individuals, "Lost Cousins with no corresponding census entry");
         }
@@ -251,7 +249,7 @@ namespace FTAnalyzer.Forms
                 }
             }
         }
-        
+
         private void dgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)

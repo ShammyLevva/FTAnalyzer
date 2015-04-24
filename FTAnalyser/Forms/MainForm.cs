@@ -1326,7 +1326,7 @@ namespace FTAnalyzer
             int missingUS1940 = listToCheck.Count(ind => ind.MissingLostCousins(CensusDate.USCENSUS1940, false) == true);
 
             int LostCousinsCensusYearFacts = listToCheck.Sum(ind => ind.LostCousinsCensusFactCount);
-            int LCnoCensus = listToCheck.Count(i => (i.LostCousinsCensusFactCount - i.MissingLostCousinsCount - i.LostCousinsFacts) != 0);
+            int LCnoCensus = listToCheck.Count(i => i.HasLostCousinsFactWithNoCensusFact);
 
             int moreThanOneLCfact = listToCheck.Sum(i => i.DuplicateLCFacts);
             int duplicateLCCensusFacts = listToCheck.Sum(i => i.DuplicateLCCensusFacts);
