@@ -81,6 +81,14 @@ namespace CensusReferenceTest
             Assert.IsTrue(censusRef.Piece.Equals("870"));
             Assert.IsTrue(censusRef.Folio.Equals("49"));
             Assert.IsTrue(censusRef.Page.Equals("10"));
+
+            censusRef = new CensusReference("I1", "HO107 piece 729 folio 5/15 page 6", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1841));
+            Assert.IsTrue(censusRef.Piece.Equals("729"));
+            Assert.IsTrue(censusRef.Book.Equals("5"));
+            Assert.IsTrue(censusRef.Folio.Equals("15"));
+            Assert.IsTrue(censusRef.Page.Equals("6"));
+            
         }
     }
 }
