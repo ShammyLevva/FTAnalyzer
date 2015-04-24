@@ -42,6 +42,8 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1911_PATTERN = @"RG *14/? *PN(\d{1,6}) .*?SN(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN78 = @"RG *78/? *PN(\d{1,6}) .*?SN(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN2 = @"RG *14[;,/]? *Piece:? *(\d{1,6})[;,]? *SN:? *(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN2A = @"1911 Census.*? *Piece:? *(\d{1,6})[;,]? *SN:? *(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN2B = @"Census[: ]*1911.*? *Piece:? *(\d{1,6})[;,]? *SN:? *(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN3 = @"RG *14[;,/]? *Piece:? *(\d{1,6})[;,]? *Schedule Number:? *(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN4 = @"RG *14[;,/]? *Piece:? *(\d{1,6})[;,]?$";
         private static readonly string EW_CENSUS_1911_PATTERN5 = @"RG *14[;,/]? *Piece:? *(\d{1,6})[;,]? *Page:? *(\d{1,3})";
@@ -474,6 +476,30 @@ namespace FTAnalyzer
                 return true;
             }
             matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN2, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "RG14";
+                this.Piece = matcher.Groups[1].ToString();
+                this.Schedule = matcher.Groups[2].ToString();
+                this.IsUKCensus = true;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN2A, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "RG14";
+                this.Piece = matcher.Groups[1].ToString();
+                this.Schedule = matcher.Groups[2].ToString();
+                this.IsUKCensus = true;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_1911_PATTERN2B, RegexOptions.IgnoreCase);
             if (matcher.Success)
             {
                 this.Class = "RG14";
