@@ -901,13 +901,14 @@ namespace FTAnalyzer
                     CensusReference cr = new CensusReference(IndividualID, notes, false);
                     if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD) && !CensusFactExists(cr.Fact.FactDate, false))
                         AddFact(cr.Fact);
-                    int pos = notes.IndexOf(cr.MatchString);
-                    if (pos != -1)
+                    if (cr.MatchString.Length > 0)
                     {
-                        notes = notes.Remove(pos, cr.MatchString.Length);
-                        if (notes.Length > pos)
-                            notes = notes.Substring(pos);
-                        checkNotes = notes.Length > 0 && cr.MatchString.Length > 0;
+                        int pos = notes.IndexOf(cr.MatchString);
+                        if (pos != -1)
+                        {
+                            notes = notes.Remove(pos, cr.MatchString.Length);
+                            checkNotes = notes.Length > 0 && cr.MatchString.Length > 0;
+                        }
                     }
                 }
             }
