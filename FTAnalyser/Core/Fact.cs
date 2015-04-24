@@ -130,6 +130,14 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("CENSUS", CENSUS);
             CUSTOM_TAGS.Add("MILITARY SERVICE", MILITARY);
 
+            // Legacy 8 default fact types
+            CUSTOM_TAGS.Add("ALT. BIRTH", BIRTH);
+            CUSTOM_TAGS.Add("ALT. CHRISTENING", CHRISTENING);
+            CUSTOM_TAGS.Add("ALT. DEATH", DEATH);
+            CUSTOM_TAGS.Add("ALT. BURIAL", BURIAL);
+            CUSTOM_TAGS.Add("ALT. MARRIAGE", MARRIAGE);
+            CUSTOM_TAGS.Add("MILITARY", MILITARY);
+
             // Create list of Comment facts
             COMMENT_FACTS.Add(NAME);
             COMMENT_FACTS.Add(OCCUPATION);
