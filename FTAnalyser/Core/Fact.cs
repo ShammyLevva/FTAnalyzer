@@ -23,7 +23,7 @@ namespace FTAnalyzer
                 NATIONAL_TRIBAL = "NATI", NUM_CHILDREN = "NCHI", NUM_MARRIAGE = "NMR",
                 LEGATEE = "LEGA", MARRIAGE_BANN = "MARB", MARR_CONTRACT = "MARC",
                 MARR_LICENSE = "MARL", MARRIAGE = "MARR", MARR_SETTLEMENT = "MARS",
-                NATURALIZATION = "NATU", OCCUPATION = "OCCU", POSSESSIONS = "PROP",
+                NATURALIZATION = "NATU", OCCUPATION = "OCCU", PROPERTY = "PROP",
                 ORDINATION = "ORDN", PROBATE = "PROB", RESIDENCE = "RESI",
                 RETIREMENT = "RETI", WILL = "WILL", SEPARATION = "_SEPR",
                 MILITARY = "_MILT", ELECTION = "_ELEC", DEGREE = "_DEG",
@@ -145,6 +145,7 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("MEDICAL", MEDICAL_CONDITION);
             CUSTOM_TAGS.Add("MILITARY", MILITARY);
             CUSTOM_TAGS.Add("MILITARY SERVICE", MILITARY);
+            CUSTOM_TAGS.Add("PROPERTY", PROPERTY);
 
             // Create list of Comment facts
             COMMENT_FACTS.Add(NAME);
@@ -170,7 +171,7 @@ namespace FTAnalyzer
             COMMENT_FACTS.Add(MEDICAL_CONDITION);
             COMMENT_FACTS.Add(ORDINATION);
             COMMENT_FACTS.Add(PHYSICAL_DESC);
-            COMMENT_FACTS.Add(POSSESSIONS);
+            COMMENT_FACTS.Add(PROPERTY);
             COMMENT_FACTS.Add(PARENT);
             COMMENT_FACTS.Add(CHILDREN);
             COMMENT_FACTS.Add(ALIAS);
@@ -220,7 +221,7 @@ namespace FTAnalyzer
                 case MARR_SETTLEMENT: return "Marriage settlement";
                 case NATURALIZATION: return "Naturalization";
                 case OCCUPATION: return "Occupation";
-                case POSSESSIONS: return "Property";
+                case PROPERTY: return "Property";
                 case ORDINATION: return "Ordination";
                 case PROBATE: return "Probate";
                 case RESIDENCE: return "Residence";
