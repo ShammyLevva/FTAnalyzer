@@ -215,6 +215,8 @@ namespace FTAnalyzer
                 str = str.Replace(">", "AFT ");
             if (str.StartsWith("<"))
                 str = str.Replace("<", "BEF ");
+            if (str.StartsWith("~"))
+                str = str.Replace("~", "ABT ");
             if (str.StartsWith("C1") || str.StartsWith("C2") || str.StartsWith("C 1") || str.StartsWith("C 2"))
                 str = "ABT " + str.Substring(1);
             str = str.Replace("  ", " "); // fix issue if > or < or Cxxx has already got a space
