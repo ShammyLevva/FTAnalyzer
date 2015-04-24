@@ -128,7 +128,6 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("PROBATE DATE", PROBATE);
             CUSTOM_TAGS.Add("RESIDENCE", RESIDENCE);
             CUSTOM_TAGS.Add("CENSUS", CENSUS);
-            CUSTOM_TAGS.Add("MILITARY SERVICE", MILITARY);
 
             // Legacy 8 default fact types
             CUSTOM_TAGS.Add("ALT. BIRTH", BIRTH);
@@ -136,7 +135,16 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("ALT. DEATH", DEATH);
             CUSTOM_TAGS.Add("ALT. BURIAL", BURIAL);
             CUSTOM_TAGS.Add("ALT. MARRIAGE", MARRIAGE);
+            CUSTOM_TAGS.Add("DIVORCE FILING", DIVORCE_FILED);
+            CUSTOM_TAGS.Add("DEGREE", DEGREE);
+            CUSTOM_TAGS.Add("ELECTION", ELECTION);
+            CUSTOM_TAGS.Add("EMPLOYMENT", EMPLOYMENT);
+            CUSTOM_TAGS.Add("MARRIAGE LICENCE", MARR_LICENSE);
+            CUSTOM_TAGS.Add("MARRIAGE LICENSE", MARR_LICENSE);
+            CUSTOM_TAGS.Add("MARRIAGE CONTRACT", MARR_CONTRACT);
+            CUSTOM_TAGS.Add("MEDICAL", MEDICAL_CONDITION);
             CUSTOM_TAGS.Add("MILITARY", MILITARY);
+            CUSTOM_TAGS.Add("MILITARY SERVICE", MILITARY);
 
             // Create list of Comment facts
             COMMENT_FACTS.Add(NAME);
