@@ -113,6 +113,8 @@ namespace FTAnalyzer
                     {
                         foreach (XmlNode child in note.ChildNodes)
                         {
+                            if(child.Name.Equals("#text")) // there is text on the NOTE tag.
+                                result.AppendLine(child.InnerText);
                             XmlNodeList continued = child.SelectNodes("CONC|CONT");
                             if (continued.Count > 0)
                                 AddContinuationText(result, continued);

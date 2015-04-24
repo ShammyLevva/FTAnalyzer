@@ -144,14 +144,17 @@ namespace FTAnalyzer
 
         private bool GetCensusReference(XmlNode n)
         {
-            // aggressively remove multi spaces to allow for spaces in the census references
-            string text = FamilyTree.GetText(n, "PAGE").Replace("   ", " ").Replace("  ", " ").Replace("  ", " ").Replace("  ", " ");
+            string text = FamilyTree.GetText(n, "PAGE");
+            if (GetCensusReference(text))
+                return true;
+            text = FamilyTree.GetNotes(n);
             return GetCensusReference(text);
         }
 
         private bool GetCensusReference(string text)
         {
-            text = text.Replace(System.Environment.NewLine, " ").Replace("\n", " ").Replace("\t", " ");
+            // aggressively remove multi spaces to allow for spaces in the census references
+            text = text.Replace(System.Environment.NewLine, " ").Replace("\n", " ").Replace("\t", " ").Replace("   ", " ").Replace("  ", " ").Replace("  ", " ").Replace("  ", " ");
             if (text.Length > 0)
             {
                 if (CheckPatterns(text))
