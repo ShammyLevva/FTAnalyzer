@@ -12,6 +12,7 @@ namespace FTAnalyzer
         public int MinAge { get; private set; }
         public int MaxAge { get; private set; }
         public FactDate CalculatedBirthDate { get; private set; }
+        public string GEDCOM_Age { get; private set; }
         private string age;
 
         public static Age BIRTH = new Age();
@@ -21,6 +22,7 @@ namespace FTAnalyzer
             MinAge = 0;
             MaxAge = 0;
             age = "0";
+            GEDCOM_Age = string.Empty;
             CalculatedBirthDate = FactDate.UNKNOWN_DATE;
         }
 
@@ -61,6 +63,7 @@ namespace FTAnalyzer
             Match matcher = Regex.Match(gedcomAge, pattern);
             if (matcher.Success)
             {
+                this.GEDCOM_Age = gedcomAge;
                 string year = matcher.Groups["year"].ToString().TrimEnd('y');
                 string month = matcher.Groups["month"].ToString().TrimEnd('m');
                 string day = matcher.Groups["day"].ToString().TrimEnd('d');

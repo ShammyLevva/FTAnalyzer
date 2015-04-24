@@ -829,7 +829,8 @@ namespace FTAnalyzer
                         AddFact(f);
                         if (f.GedcomAge != null && f.GedcomAge.CalculatedBirthDate != FactDate.UNKNOWN_DATE)
                         {
-                            Fact calculatedBirth = new Fact(IndividualID, Fact.BIRTH_CALC, f.GedcomAge.CalculatedBirthDate, FactLocation.UNKNOWN_LOCATION, "Calculated from " + f.ToString(), false, true);
+                            string reason = "Calculated from " + f.ToString() + " with Age: " + f.GedcomAge.GEDCOM_Age;
+                            Fact calculatedBirth = new Fact(IndividualID, Fact.BIRTH_CALC, f.GedcomAge.CalculatedBirthDate, FactLocation.UNKNOWN_LOCATION, reason, false, true);
                             AddFact(calculatedBirth);
                         }
                     }
