@@ -23,8 +23,9 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_PATTERN3 = @"(\d{4}) Census.*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Book:? *(\d{1,3}[;,]?).*?Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_PATTERN4 = @"(\d{4}) Census.*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_PATTERN5 = @"(\d{4}) Census.*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
-        private static readonly string EW_CENSUS_PATTERN6 = @"Census[: ]*(\d{4}).*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
-        private static readonly string EW_CENSUS_PATTERN7 = @"Census[: ]*(\d{4}).*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
+        private static readonly string EW_CENSUS_PATTERN6 = @"Census[: ]*(\d{4}).*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Book:? *(\d{1,3}[;,]?).*?Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
+        private static readonly string EW_CENSUS_PATTERN7 = @"Census[: ]*(\d{4}).*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
+        private static readonly string EW_CENSUS_PATTERN8 = @"Census[: ]*(\d{4}).*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
         private static readonly string EW_MISSINGCLASS_PATTERN = @"Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_MISSINGCLASS_PATTERN2 = @"Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
         private static readonly string EW_CENSUS_PATTERN_FH = @"RG *(\d{1,2})/(\d{1,5}) F(olio)? ?(\d{1,4}[a-z]?) p(age)? ?(\d{1,3})";
@@ -262,6 +263,20 @@ namespace FTAnalyzer
             {
                 this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
                 this.Piece = matcher.Groups[3].ToString();
+                this.Book = matcher.Groups[4].ToString();
+                this.Folio = matcher.Groups[5].ToString();
+                this.Page = matcher.Groups[6].ToString();
+                this.IsUKCensus = true;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_PATTERN7, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
+                this.Piece = matcher.Groups[3].ToString();
                 this.Folio = matcher.Groups[4].ToString();
                 this.Page = matcher.Groups[5].ToString();
                 this.IsUKCensus = true;
@@ -270,7 +285,7 @@ namespace FTAnalyzer
                 this.MatchString = matcher.Value;
                 return true;
             }
-            matcher = Regex.Match(text, EW_CENSUS_PATTERN7, RegexOptions.IgnoreCase);
+            matcher = Regex.Match(text, EW_CENSUS_PATTERN8, RegexOptions.IgnoreCase);
             if (matcher.Success)
             {
                 this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
