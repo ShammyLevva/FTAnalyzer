@@ -111,14 +111,7 @@ namespace FTAnalyzer
                 {
                     if (note.ChildNodes.Count > 0)
                     {
-                        foreach (XmlNode child in note.ChildNodes)
-                        {
-                            if(child.Name.Equals("#text")) // there is text on the NOTE tag.
-                                result.AppendLine(child.InnerText);
-                            XmlNodeList continued = child.SelectNodes("CONC|CONT");
-                            if (continued.Count > 0)
-                                AddContinuationText(result, continued);
-                        }
+                        AddContinuationText(result, note.ChildNodes);
                         result.AppendLine();
                     }
                     XmlAttribute ID = note.Attributes["REF"];
@@ -152,7 +145,7 @@ namespace FTAnalyzer
         {
             foreach (XmlNode child in nodeList)
             {
-                if (child.Name.Equals("CONT"))
+                if (child.Name.Equals("#text") || child.Name.Equals("CONT"))
                     result.AppendLine(); // We have a new continuation so start a new line
                 result.Append(child.InnerText);
             }
