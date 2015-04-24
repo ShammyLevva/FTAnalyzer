@@ -123,12 +123,11 @@ namespace FTAnalyzer.Forms
         {
             List<Individual> listtoCheck = ft.AllIndividuals.Where(relationFilter).ToList();
             List<Individual> individuals = new List<Individual>();
-            //i.LostCousinsCensusFactCount - i.MissingLostCousinsCount - i.LostCousinsFacts != 0
             Predicate<Individual> lcFacts = new Predicate<Individual>(i => i.HasLostCousinsFactWithNoCensusFact);
             IEnumerable<Individual> censusMissing = listtoCheck.Where(lcFacts);
             individuals.AddRange(censusMissing);
             individuals = individuals.Distinct<Individual>().ToList();
-            SetIndividuals(individuals, "Lost Cousins with no corresponding census entry");
+            SetIndividuals(individuals, "Lost Cousins facts with no corresponding census entry");
         }
 
         public void SetupLCNoCountry(Predicate<Individual> relationFilter)
@@ -146,7 +145,7 @@ namespace FTAnalyzer.Forms
                                               && !x.IsLostCousinsEntered(CensusDate.USCENSUS1880, false)
                                               && !x.IsLostCousinsEntered(CensusDate.USCENSUS1940, false);
             List<Individual> individuals = listToCheck.Where(missing).ToList<Individual>();
-            SetIndividuals(individuals, "Lost Cousins with No Country");
+            SetIndividuals(individuals, "Lost Cousins facts with no facts found to identify Country");
         }
 
         private void SortIndividuals()
