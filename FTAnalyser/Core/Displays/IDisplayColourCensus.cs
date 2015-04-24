@@ -53,6 +53,15 @@ namespace FTAnalyzer
         int Can1916 { get; }
         int Can1921 { get; }
 
+        int V1865 { get; }
+        int V1875 { get; }
+        int V1885 { get; }
+        int V1895 { get; }
+        int V1905 { get; }
+        int V1915 { get; }
+        int V1920 { get; }
+        int V1925 { get; }
+
         FactDate BirthDate { get; }
         FactLocation BirthLocation { get; }
         FactDate DeathDate { get; }
