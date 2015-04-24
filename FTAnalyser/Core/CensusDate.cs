@@ -90,7 +90,7 @@ namespace FTAnalyzer
         });
 
         public static readonly ISet<CensusDate> VALUATIONROLLS = new HashSet<CensusDate>(new CensusDate[] {
-            SCOTVALUATION1885, SCOTVALUATION1895, SCOTVALUATION1905, SCOTVALUATION1915, SCOTVALUATION1920
+             SCOTVALUATION1865, SCOTVALUATION1875,SCOTVALUATION1885, SCOTVALUATION1895, SCOTVALUATION1905, SCOTVALUATION1915, SCOTVALUATION1920, SCOTVALUATION1925
         });
 
         private CensusDate(string str, string displayName, string country, string propertyName)

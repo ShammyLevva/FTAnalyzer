@@ -33,6 +33,7 @@ namespace FTAnalyzer
         public string BudgieCode { get; set; }
         public string RelationToRoot { get; set; }
         public CommonAncestor CommonAncestor { get; set; }
+        public string UnrecognisedCensusNotes { get; private set; }
 
         private IList<Fact> facts;
         private IList<Fact> errorFacts;
@@ -50,6 +51,7 @@ namespace FTAnalyzer
             surnameMetaphone = new DoubleMetaphone();
             marriedName = string.Empty;
             StandardisedName = string.Empty;
+            UnrecognisedCensusNotes = string.Empty;
             IsFlaggedAsLiving = false;
             Gender = "U";
             alias = string.Empty;
@@ -94,7 +96,7 @@ namespace FTAnalyzer
             AddFacts(node, Fact.NUM_CHILDREN);
             AddFacts(node, Fact.NUM_MARRIAGE);
             AddFacts(node, Fact.OCCUPATION);
-            AddFacts(node, Fact.POSSESSIONS);
+            AddFacts(node, Fact.PROPERTY);
             AddFacts(node, Fact.MEDICAL_CONDITION);
             AddFacts(node, Fact.REFERENCE);
 
@@ -1244,6 +1246,16 @@ namespace FTAnalyzer
             get { return ColourCensusReport(CensusDate.CANADACENSUS1921); }
         }
 
+        public int V1865
+        {
+            get { return ColourCensusReport(CensusDate.SCOTVALUATION1865); }
+        }
+
+        public int V1875
+        {
+            get { return ColourCensusReport(CensusDate.SCOTVALUATION1875); }
+        }
+
         public int V1885
         {
             get { return ColourCensusReport(CensusDate.SCOTVALUATION1885); }
@@ -1269,16 +1281,24 @@ namespace FTAnalyzer
             get { return ColourCensusReport(CensusDate.SCOTVALUATION1920); }
         }
 
+        public int V1925
+        {
+            get { return ColourCensusReport(CensusDate.SCOTVALUATION1925); }
+        }
+
         public bool AliveOnAnyCensus(string country)
         {
+            int ukCensus = C1841 + C1851 + C1861 + C1871 + C1881 + C1891 + C1901 + C1911;
             if (country.Equals(Countries.UNITED_STATES))
                 return (US1790 + US1800 + US1810 + US1810 + US1820 + US1830 + US1840 + US1850 + US1860 + US1870 + US1880 + US1890 + US1900 + US1910 + US1920 + US1930 + US1940) > 0;
             else if (country.Equals(Countries.CANADA))
                 return (Can1851 + Can1861 + Can1871 + Can1881 + Can1891 + Can1901 + Can1906 + Can1911 + Can1916 + Can1921) > 0;
             else if (country.Equals(Countries.IRELAND))
                 return (Ire1901 + Ire1911) > 0;
+            else if (country.Equals(Countries.SCOTLAND))
+                return (ukCensus + V1865 + V1875 + V1885 + V1895 + V1905 + V1915 + V1920 + V1925) > 0;
             else
-                return (C1841 + C1851 + C1861 + C1871 + C1881 + C1891 + C1901 + C1911) > 0;
+                return ukCensus > 0;
         }
 
         public bool OutOfCountryOnAllCensus(string country)
