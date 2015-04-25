@@ -29,19 +29,19 @@ namespace FTAnalyzer
         {
             FileStream infs = new FileStream(path, FileMode.Open, FileAccess.Read);
             MemoryStream outfs = new MemoryStream();
-            byte b = (byte) infs.ReadByte();
+            byte b = (byte)infs.ReadByte();
             while (infs.Position < infs.Length)
             {
                 if (b == 0x0d)
                 {
-                    b = (byte) infs.ReadByte();
+                    b = (byte)infs.ReadByte();
                     if (b == 0x0a)
                     { // we have 0x0d 0x0a so write the 0x0d so that normal write works.
                         outfs.WriteByte(0x0d);
                     }
                 }
                 outfs.WriteByte(b);
-                b = (byte) infs.ReadByte();
+                b = (byte)infs.ReadByte();
             }
             outfs.Position = 0;
             return outfs;
@@ -133,26 +133,30 @@ namespace FTAnalyzer
                             {
                                 iden = "";
                                 tag = token1;
-                            };
+                            }
 
                             xref = "";
                             if (line.StartsWith("@"))
                             {
-                                token2 = firstWord(line);
-                                if (token2.Length == 1 || (!token2.EndsWith("@") && !token2.EndsWith("@,")))
-                                    throw new Exception("Bad pointer value");
-                                if(token2.EndsWith("@,"))
-                                    xref = token2.Substring(1, token2.Length - 3);
-                                else
-                                    xref = token2.Substring(1, token2.Length - 2);
-                                line = remainder(line);
-                            };
+                                if (!token1.Equals("CONT") && !token1.Equals("CONC"))
+                                {
+                                    token2 = firstWord(line);
+                                    if (token2.Length == 1 || (!token2.EndsWith("@") && !token2.EndsWith("@,")))
+                                        throw new Exception("Bad pointer value");
+                                    if (token2.EndsWith("@,"))
+                                        xref = token2.Substring(1, token2.Length - 3);
+                                    else
+                                        xref = token2.Substring(1, token2.Length - 2);
+                                    line = remainder(line);
+                                }
+                            }
 
                             value = line;
 
                             // perform validation on the CHAR field (character code)
+                            string valtrim = value.Trim();
                             if (tag.Equals("CHAR") &&
-                                !(value.Trim().Equals("ANSEL") || value.Trim().Equals("ASCII") || value.Trim().Equals("ANSI") || value.Trim().Equals("UTF-8") || value.Trim().Equals("UNICODE")))
+                                !(valtrim.Equals("ANSEL") || valtrim.Equals("ASCII") || valtrim.Equals("ANSI") || valtrim.Equals("UTF-8") || valtrim.Equals("UNICODE")))
                             {
                                 FamilyTree.Instance.XmlErrorBox.AppendText("WARNING: Character set is " + value + ": should be ANSEL, ANSI, ASCII, UTF-8 or UNICODE\n");
                             }
@@ -205,7 +209,7 @@ namespace FTAnalyzer
                     if (badLineCount > badLineMax)
                     {
                         string message = "Found more than " + badLineMax + " consecutive errors in the GEDCOM file.";
-                        if(!Properties.FileHandling.Default.LoadWithFilters)
+                        if (!Properties.FileHandling.Default.LoadWithFilters)
                             message += "\n\nNB. You might get less errors if you turn on the option to 'Use Special Character Filters When Loading' from the Tools Options menu.";
                         message += "\n\nContinue Loading?";
                         DialogResult result = MessageBox.Show(message, "Continue Loading?", MessageBoxButtons.YesNo);
@@ -220,7 +224,7 @@ namespace FTAnalyzer
                             break;
                         }
                     }
-                        
+
                 } // end while
 
             }
