@@ -871,21 +871,24 @@ namespace FTAnalyzer
         /// </summary>
         private void AddCensusSourceFacts()
         {
+            List<Fact> toAdd = new List<Fact>(); // we can't vary the facts collection whilst looping
             foreach (Fact f in facts)
             {
                 if (!f.IsCensusFact && !CensusFactExists(f.FactDate, true))
                 {
                     foreach (FactSource s in f.Sources)
                     {
-                        CensusReference cr = new CensusReference(IndividualID, s.SourceText, true);
-                        if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD) && !CensusFactExists(cr.Fact.FactDate, true))
+                        CensusReference cr = new CensusReference(IndividualID, s.SourceTitle + " " + s.SourceText, true);
+                        if (OKtoAddReference(cr, true))
                         {
                             cr.Fact.Sources.Add(s);
-                            AddFact(cr.Fact);
+                            toAdd.Add(cr.Fact);
                         }
                     }
                 }
             }
+            foreach (Fact f in toAdd)
+                AddFact(f);
         }
 
         /// <summary>
@@ -901,7 +904,7 @@ namespace FTAnalyzer
                 {
                     checkNotes = false;
                     CensusReference cr = new CensusReference(IndividualID, notes, false);
-                    if (!cr.Status.Equals(CensusReference.ReferenceStatus.UNRECOGNISED) && !CensusFactExists(cr.Fact.FactDate, false))
+                    if (OKtoAddReference(cr, true))
                         AddFact(cr.Fact);
                     if (cr.MatchString.Length > 0)
                     {
@@ -916,6 +919,13 @@ namespace FTAnalyzer
                 if(notes.Length > 10) // no point recording really short notes 
                     UnrecognisedCensusNotes = IndividualID + ": " + Name + ". Notes : " + notes;
             }
+        }
+
+        private bool OKtoAddReference(CensusReference cr, bool includeCreated)
+        {
+            return !cr.Status.Equals(CensusReference.ReferenceStatus.BLANK) &&
+                   !cr.Status.Equals(CensusReference.ReferenceStatus.UNRECOGNISED) &&
+                   !CensusFactExists(cr.Fact.FactDate, includeCreated);
         }
 
         private void AddLocation(Fact fact)
