@@ -528,7 +528,7 @@ namespace FTAnalyzer
             if(partialCensusRefs > 0)
                 xmlErrorbox.AppendText(", with " + partialCensusRefs + " references with partial details");
             if (unrecognisedCensusRefs > 0)
-                xmlErrorbox.AppendText("and " + unrecognisedCensusRefs + " references that were unrecognised");
+                xmlErrorbox.AppendText(" and " + unrecognisedCensusRefs + " references that were unrecognised");
             xmlErrorbox.AppendText("\nFound " + lostCousinsTotal + " Lost Cousins facts in GEDCOM File (" + lostCousinsFacts + " good, ");
             if (lostCousinsWarnAllow > 0)
                 xmlErrorbox.AppendText(lostCousinsWarnAllow + " warnings (data tolerated), ");
