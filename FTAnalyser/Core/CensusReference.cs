@@ -220,86 +220,6 @@ namespace FTAnalyzer
                 this.MatchString = matcher.Value;
                 return true;
             }
-            matcher = Regex.Match(text, EW_CENSUS_PATTERN3, RegexOptions.IgnoreCase);
-            if (matcher.Success)
-            {
-                this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
-                this.Piece = matcher.Groups[3].ToString();
-                this.Book = matcher.Groups[4].ToString();
-                this.Folio = matcher.Groups[5].ToString();
-                this.Page = matcher.Groups[6].ToString();
-                this.IsUKCensus = true;
-                this.Country = GetCensusReferenceCountry(Class, Piece);
-                this.Status = ReferenceStatus.GOOD;
-                this.MatchString = matcher.Value;
-                return true;
-            }
-            matcher = Regex.Match(text, EW_CENSUS_PATTERN4, RegexOptions.IgnoreCase);
-            if (matcher.Success)
-            {
-                this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
-                this.Piece = matcher.Groups[3].ToString();
-                this.Folio = matcher.Groups[4].ToString();
-                this.Page = matcher.Groups[5].ToString();
-                this.IsUKCensus = true;
-                this.Country = GetCensusReferenceCountry(Class, Piece);
-                this.Status = ReferenceStatus.GOOD;
-                this.MatchString = matcher.Value;
-                return true;
-            }
-            matcher = Regex.Match(text, EW_CENSUS_PATTERN5, RegexOptions.IgnoreCase);
-            if (matcher.Success)
-            {
-                this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
-                this.Piece = matcher.Groups[3].ToString();
-                this.Folio = matcher.Groups[4].ToString();
-                this.Page = MISSING;
-                this.IsUKCensus = true;
-                this.Country = GetCensusReferenceCountry(Class, Piece);
-                this.Status = ReferenceStatus.INCOMPLETE;
-                this.MatchString = matcher.Value;
-                return true;
-            }
-            matcher = Regex.Match(text, EW_CENSUS_PATTERN6, RegexOptions.IgnoreCase);
-            if (matcher.Success)
-            {
-                this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
-                this.Piece = matcher.Groups[3].ToString();
-                this.Book = matcher.Groups[4].ToString();
-                this.Folio = matcher.Groups[5].ToString();
-                this.Page = matcher.Groups[6].ToString();
-                this.IsUKCensus = true;
-                this.Country = GetCensusReferenceCountry(Class, Piece);
-                this.Status = ReferenceStatus.GOOD;
-                this.MatchString = matcher.Value;
-                return true;
-            }
-            matcher = Regex.Match(text, EW_CENSUS_PATTERN7, RegexOptions.IgnoreCase);
-            if (matcher.Success)
-            {
-                this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
-                this.Piece = matcher.Groups[3].ToString();
-                this.Folio = matcher.Groups[4].ToString();
-                this.Page = matcher.Groups[5].ToString();
-                this.IsUKCensus = true;
-                this.Country = GetCensusReferenceCountry(Class, Piece);
-                this.Status = ReferenceStatus.GOOD;
-                this.MatchString = matcher.Value;
-                return true;
-            }
-            matcher = Regex.Match(text, EW_CENSUS_PATTERN8, RegexOptions.IgnoreCase);
-            if (matcher.Success)
-            {
-                this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
-                this.Piece = matcher.Groups[3].ToString();
-                this.Folio = matcher.Groups[4].ToString();
-                this.Page = MISSING;
-                this.IsUKCensus = true;
-                this.Country = GetCensusReferenceCountry(Class, Piece);
-                this.Status = ReferenceStatus.INCOMPLETE;
-                this.MatchString = matcher.Value;
-                return true;
-            }
             matcher = Regex.Match(text, EW_CENSUS_PATTERN_FH, RegexOptions.IgnoreCase);
             if (matcher.Success)
             {
@@ -569,6 +489,86 @@ namespace FTAnalyzer
                 this.IsUKCensus = true;
                 this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_PATTERN3, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
+                this.Piece = matcher.Groups[3].ToString();
+                this.Book = matcher.Groups[4].ToString();
+                this.Folio = matcher.Groups[5].ToString();
+                this.Page = matcher.Groups[6].ToString();
+                this.IsUKCensus = true;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_PATTERN4, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
+                this.Piece = matcher.Groups[3].ToString();
+                this.Folio = matcher.Groups[4].ToString();
+                this.Page = matcher.Groups[5].ToString();
+                this.IsUKCensus = true;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_PATTERN5, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
+                this.Piece = matcher.Groups[3].ToString();
+                this.Folio = matcher.Groups[4].ToString();
+                this.Page = MISSING;
+                this.IsUKCensus = true;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
+                this.Status = ReferenceStatus.INCOMPLETE;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_PATTERN6, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
+                this.Piece = matcher.Groups[3].ToString();
+                this.Book = matcher.Groups[4].ToString();
+                this.Folio = matcher.Groups[5].ToString();
+                this.Page = matcher.Groups[6].ToString();
+                this.IsUKCensus = true;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_PATTERN7, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
+                this.Piece = matcher.Groups[3].ToString();
+                this.Folio = matcher.Groups[4].ToString();
+                this.Page = matcher.Groups[5].ToString();
+                this.IsUKCensus = true;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, EW_CENSUS_PATTERN8, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = GetUKCensusClass(matcher.Groups[1].ToString());
+                this.Piece = matcher.Groups[3].ToString();
+                this.Folio = matcher.Groups[4].ToString();
+                this.Page = MISSING;
+                this.IsUKCensus = true;
+                this.Country = GetCensusReferenceCountry(Class, Piece);
+                this.Status = ReferenceStatus.INCOMPLETE;
                 this.MatchString = matcher.Value;
                 return true;
             }
