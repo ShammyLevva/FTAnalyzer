@@ -904,7 +904,7 @@ namespace FTAnalyzer
                 {
                     checkNotes = false;
                     CensusReference cr = new CensusReference(IndividualID, notes, false);
-                    if (OKtoAddReference(cr, true))
+                    if (OKtoAddReference(cr, false)) // add census fact even if other created census facts exist for that year
                         AddFact(cr.Fact);
                     if (cr.MatchString.Length > 0)
                     {
