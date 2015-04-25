@@ -76,14 +76,20 @@ namespace FTAnalyzer
 
         public static string GetText(XmlNode node)
         {
-            if (node == null || node.FirstChild == null || node.FirstChild.Value == null)
-            {
+            if (node == null)
                 return string.Empty;
-            }
             if (node.Name.Equals("PAGE") || node.Name.Equals("TITL"))
                 return node.InnerText.Trim();
             else
-                return node.FirstChild.Value.Trim();
+            {
+                XmlNode text = node.SelectSingleNode(".//TEXT");
+                if (text != null && text.ChildNodes.Count > 0)
+                    return GetContinuationText(text.ChildNodes);
+                else if (node.FirstChild != null && node.FirstChild.Value != null)
+                    return node.FirstChild.Value.Trim();
+                else
+                    return string.Empty;
+            }
         }
 
         public static string GetText(XmlNode node, string tag)
@@ -111,7 +117,7 @@ namespace FTAnalyzer
                 {
                     if (note.ChildNodes.Count > 0)
                     {
-                        AddContinuationText(result, note.ChildNodes);
+                        GetContinuationText(note.ChildNodes);
                         result.AppendLine();
                     }
                     XmlAttribute ID = note.Attributes["REF"];
@@ -134,23 +140,27 @@ namespace FTAnalyzer
             {
                 if (node.Attributes["ID"] != null && node.Attributes["ID"].Value == reference.Value)
                 {
-                    AddContinuationText(result, node.ChildNodes);
+                    result.AppendLine(GetContinuationText(node.ChildNodes));
                     return result.ToString();
                 }
             }
             return string.Empty;
         }
 
-        private static void AddContinuationText(StringBuilder result, XmlNodeList nodeList)
+        private static string GetContinuationText(XmlNodeList nodeList)
         {
+            StringBuilder result = new StringBuilder();
             foreach (XmlNode child in nodeList)
             {
                 if (child.Name.Equals("#text") || child.Name.Equals("CONT"))
                     result.AppendLine(); // We have a new continuation so start a new line
-                result.Append(child.InnerText);
+                if (child.Name.Equals("SOUR"))
+                    result.AppendLine(GetText(child));
+                else
+                    result.Append(child.InnerText);
             }
             result.AppendLine();
-            result.AppendLine();
+            return result.ToString();
         }
 
         public static string ValidFilename(string filename)

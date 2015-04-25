@@ -896,12 +896,12 @@ namespace FTAnalyzer
             if (HasNotes)
             {
                 bool checkNotes = true;
-                string notes = Notes;
+                string notes = Notes.Trim();
                 while (checkNotes)
                 {
                     checkNotes = false;
                     CensusReference cr = new CensusReference(IndividualID, notes, false);
-                    if (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD) && !CensusFactExists(cr.Fact.FactDate, false))
+                    if (!cr.Status.Equals(CensusReference.ReferenceStatus.UNRECOGNISED) && !CensusFactExists(cr.Fact.FactDate, false))
                         AddFact(cr.Fact);
                     if (cr.MatchString.Length > 0)
                     {
@@ -914,7 +914,7 @@ namespace FTAnalyzer
                     }
                 }
                 if(notes.Length > 10) // no point recording really short notes 
-                    UnrecognisedCensusNotes = notes;
+                    UnrecognisedCensusNotes = IndividualID + ": " + Name + ". Notes : " + notes;
             }
         }
 
