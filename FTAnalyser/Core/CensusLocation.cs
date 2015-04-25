@@ -12,6 +12,8 @@ namespace FTAnalyzer
     {
         private static Dictionary<Tuple<string, string>, CensusLocation> CENSUSLOCATIONS = new Dictionary<Tuple<string, string>, CensusLocation>();
         public static readonly CensusLocation UNKNOWN = new CensusLocation(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
+        public static readonly CensusLocation SCOTLAND = new CensusLocation(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, Countries.SCOTLAND);
+        public static readonly CensusLocation UNITED_STATES = new CensusLocation(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, Countries.UNITED_STATES);
         public string Year { get; private set; }
         public string Piece { get; private set; }
         public string RegistrationDistrict { get; private set; }

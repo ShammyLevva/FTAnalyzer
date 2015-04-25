@@ -1489,6 +1489,11 @@ namespace FTAnalyzer
             }
         }
 
+        public int CensusReferenceCount(CensusReference.ReferenceStatus referenceStatus)
+        {
+            return AllFacts.Count(f => f.IsCensusFact && f.CensusReference != null && f.CensusReference.Status.Equals(referenceStatus));
+        }
+
         private Family Marriages(int number)
         {
             if (number < FamiliesAsParent.Count)

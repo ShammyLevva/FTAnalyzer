@@ -113,12 +113,7 @@ namespace FTAnalyzer
         {
             this.Fact = fact;
             if (GetCensusReference(node))
-            {
-                this.unknownCensusRef = string.Empty;
-                this.CensusYear = GetCensusYearFromReference();
-                this.CensusLocation = CensusLocation.GetCensusLocation(this.CensusYear.StartDate.Year.ToString(), this.Piece);
-                this.URL = GetCensusURLFromReference();
-            }
+                SetCensusReferenceDetails();
             if (fact.FactDate.IsKnown)
                 this.CensusYear = fact.FactDate;
             else
@@ -132,17 +127,29 @@ namespace FTAnalyzer
             if (GetCensusReference(notes))
             {
                 if (this.Class.Length > 0)
-                {  // don't create fact if we don't know what year its for
-                    this.unknownCensusRef = string.Empty;
-                    this.CensusYear = GetCensusYearFromReference();
-                    this.CensusLocation = CensusLocation.GetCensusLocation(this.CensusYear.StartDate.Year.ToString(), this.Piece);
-                    this.URL = GetCensusURLFromReference();
+                {  // don't create fact if we don't know what class it is
+                    SetCensusReferenceDetails();
                     this.Fact.UpdateFactDate(this.CensusYear);
                     if (source)
                         this.Fact.SetCensusReferenceDetails(this, CensusLocation, "Fact created by FTAnalyzer after finding census ref: " + this.MatchString + " in a source for this individual");
                     else
                         this.Fact.SetCensusReferenceDetails(this, CensusLocation, "Fact created by FTAnalyzer after finding census ref: " + this.MatchString + " in the notes for this individual");
                 }
+            }
+        }
+
+        private void SetCensusReferenceDetails()
+        {
+            this.unknownCensusRef = string.Empty;
+            this.CensusYear = GetCensusYearFromReference();
+            if (this.Class.Equals("SCOT"))
+                this.CensusLocation = CensusLocation.SCOTLAND;
+            else if (this.Class.StartsWith("US"))
+                this.CensusLocation = CensusLocation.UNITED_STATES;
+            else
+            {
+                this.CensusLocation = CensusLocation.GetCensusLocation(this.CensusYear.StartDate.Year.ToString(), this.Piece);
+                this.URL = GetCensusURLFromReference();
             }
         }
 
@@ -575,6 +582,7 @@ namespace FTAnalyzer
             matcher = Regex.Match(text, SCOT_CENSUS_PATTERN, RegexOptions.IgnoreCase);
             if (matcher.Success)
             {
+                this.Class = "SCOT";
                 this.Parish = matcher.Groups[1].ToString();
                 this.ED = matcher.Groups[2].ToString();
                 this.Page = matcher.Groups[3].ToString();
@@ -587,6 +595,7 @@ namespace FTAnalyzer
             matcher = Regex.Match(text, SCOT_CENSUS_PATTERN2, RegexOptions.IgnoreCase);
             if (matcher.Success)
             {
+                this.Class = "SCOT";
                 this.Parish = matcher.Groups[1].ToString().Replace("/00", "").Replace("/", "-");
                 this.ED = matcher.Groups[2].ToString().Replace("/00", "").TrimStart('0');
                 this.Page = matcher.Groups[3].ToString().TrimStart('0');
@@ -599,6 +608,7 @@ namespace FTAnalyzer
             matcher = Regex.Match(text, SCOT_CENSUS_PATTERN3, RegexOptions.IgnoreCase);
             if (matcher.Success)
             {
+                this.Class = "SCOT";
                 this.Parish = matcher.Groups[1].ToString().TrimStart('0');
                 this.ED = matcher.Groups[2].ToString().Replace("/00", "").TrimStart('0');
                 this.Page = matcher.Groups[3].ToString().TrimStart('0');
@@ -712,6 +722,8 @@ namespace FTAnalyzer
 
         private FactDate GetCensusYearFromReference()
         {
+            if (this.Class.Equals("SCOT"))
+                return FactDate.UNKNOWN_DATE;
             if (this.Class.Equals("HO107"))
             {
                 int piecenumber = 0;

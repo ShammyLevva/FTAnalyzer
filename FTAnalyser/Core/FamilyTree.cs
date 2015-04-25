@@ -479,6 +479,10 @@ namespace FTAnalyzer
             int lostCousinsWarnIgnore = 0;
             int censusErrors = 0;
             int lostCousinsErrors = 0;
+            int censusReferences = 0;
+            int blankCensusRefs = 0;
+            int partialCensusRefs = 0;
+            int unrecognisedCensusRefs = 0;
             foreach (Individual ind in individuals)
             {
                 censusFacts += ind.FactCount(Fact.CENSUS);
@@ -493,6 +497,10 @@ namespace FTAnalyzer
                 lostCousinsWarnAllow += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNINGALLOW);
                 lostCousinsWarnIgnore += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNINGIGNORE);
                 lostCousinsErrors += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.ERROR);
+                censusReferences += ind.CensusReferenceCount(CensusReference.ReferenceStatus.GOOD);
+                blankCensusRefs  += ind.CensusReferenceCount(CensusReference.ReferenceStatus.BLANK);
+                partialCensusRefs += ind.CensusReferenceCount(CensusReference.ReferenceStatus.INCOMPLETE);
+                unrecognisedCensusRefs += ind.CensusReferenceCount(CensusReference.ReferenceStatus.UNRECOGNISED);
             }
             int censusTotal = censusFacts + censusWarnAllow + censusWarnIgnore + censusErrors;
             int resiTotal = resiFacts + resiWarnAllow;
@@ -516,7 +524,11 @@ namespace FTAnalyzer
                 else
                     xmlErrorbox.AppendText(resiWarnAllow + " warnings (data ignored in strict mode), ");
             }
-
+            xmlErrorbox.AppendText("\nFound " + censusReferences + " census references in file and " + blankCensusRefs + " facts missing a census reference");
+            if(partialCensusRefs > 0)
+                xmlErrorbox.AppendText(", with " + partialCensusRefs + " references with partial details");
+            if (unrecognisedCensusRefs > 0)
+                xmlErrorbox.AppendText("and " + unrecognisedCensusRefs + " references that were unrecognised");
             xmlErrorbox.AppendText("\nFound " + lostCousinsTotal + " Lost Cousins facts in GEDCOM File (" + lostCousinsFacts + " good, ");
             if (lostCousinsWarnAllow > 0)
                 xmlErrorbox.AppendText(lostCousinsWarnAllow + " warnings (data tolerated), ");
@@ -2738,7 +2750,7 @@ namespace FTAnalyzer
         public HashSet<string> UnrecognisedCensusReferences()
         {
             HashSet<string> result = new HashSet<string>();
-            IEnumerable<Fact> unrecognised = AllIndividuals.SelectMany(x => x.AllFacts.Where(f => f.CensusReference != null && f.CensusReference.Status == CensusReference.ReferenceStatus.UNRECOGNISED));
+            IEnumerable<Fact> unrecognised = AllIndividuals.SelectMany(x => x.PersonalFacts.Where(f => f.IsCensusFact && f.CensusReference != null && f.CensusReference.Status.Equals(CensusReference.ReferenceStatus.UNRECOGNISED)));
             foreach (Fact f in unrecognised)
                 result.Add(f.CensusReference.Reference);
             return result;
