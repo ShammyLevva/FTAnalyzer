@@ -8,7 +8,7 @@ namespace FTAnalyzer.Utilities
 {
     public class EnhancedTextInfo
     {
-        private static TextInfo txtInfo = new CultureInfo("en-GB", false).TextInfo;
+        private static TextInfo txtInfo = new CultureInfo("en-GB").TextInfo;
 
         public static string ToTitleCase(string input)
         {

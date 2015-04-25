@@ -53,9 +53,9 @@ namespace FTAnalyzer
         private static readonly string SCOT_CENSUS_PATTERN2 = @"(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
         private static readonly string SCOT_CENSUS_PATTERN3 = @"(\d{3}[AB]?)\/(\d{2}[AB]?) Page:? *(\d{1,4})";
         private static readonly string US_CENSUS_PATTERN = @"Year: *(\d{4});? *Census Place:? *(.*?)[;,]? *Roll:? *(.*?)[;,]? *Page:? *(\d{1,4}[AB]?);? *(Enumeration District:? *(.*?))?";
-        private static readonly string LC_CENSUS_PATTERN_EW = @"(\d{1-5})\/(\d{1-3})\/(d{1-3}) .*? England & Wales (1841|1881)";
-        private static readonly string LC_CENSUS_PATTERN_1911_EW = @"(\d{1-5})\/(\d{1-3}) .*? England & Wales 1911";
-        private static readonly string LC_CENSUS_PATTERN_SCOT = @"(\d{1-5}-?[AB12]?)\/(\d{1-3})\/(d{1-3}) .*? Scotland 1881";
+        private static readonly string LC_CENSUS_PATTERN_EW = @"(\d{1,5})\/(\d{1,3})\/(d{1,3}) .*? England & Wales (1841|1881)";
+        private static readonly string LC_CENSUS_PATTERN_1911_EW = @"(\d{1,5})\/(\d{1,3}) .*? England & Wales 1911";
+        private static readonly string LC_CENSUS_PATTERN_SCOT = @"(\d{1,5}-?[AB12]?)\/(\d{1,3})\/(d{1,3}) .*? Scotland 1881";
 
         public enum ReferenceStatus { BLANK = 0, UNRECOGNISED = 1, INCOMPLETE = 2, GOOD = 3 };
         public static readonly CensusReference UNKNOWN = new CensusReference();

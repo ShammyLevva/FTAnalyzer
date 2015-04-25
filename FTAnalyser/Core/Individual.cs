@@ -913,7 +913,8 @@ namespace FTAnalyzer
                         }
                     }
                 }
-                UnrecognisedCensusNotes = notes;
+                if(notes.Length > 10) // no point recording really short notes 
+                    UnrecognisedCensusNotes = notes;
             }
         }
 
