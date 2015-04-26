@@ -56,9 +56,10 @@ namespace FTAnalyzer
         private static readonly string SCOT_CENSUS_PATTERN2 = @"(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
         private static readonly string SCOT_CENSUS_PATTERN3 = @"(\d{3}[AB]?)\/(\d{2}[AB]?) Page:? *(\d{1,4})";
         private static readonly string US_CENSUS_PATTERN = @"Year: *(\d{4});? *Census Place:? *(.*?)[;,]? *Roll:? *(.*?)[;,]? *Page:? *(\d{1,4}[AB]?);? *(Enumeration District:? *(.*?))?";
-        private static readonly string LC_CENSUS_PATTERN_EW = @"(\d{1,5})\/(\d{1,3})\/(d{1,3}) .*? England & Wales (1841|1881)";
-        private static readonly string LC_CENSUS_PATTERN_1911_EW = @"(\d{1,5})\/(\d{1,3}) .*? England & Wales 1911";
-        private static readonly string LC_CENSUS_PATTERN_SCOT = @"(\d{1,5}-?[AB12]?)\/(\d{1,3})\/(d{1,3}) .*? Scotland 1881";
+        private static readonly string LC_CENSUS_PATTERN_EW = @"(\d{1,5})\/(\d{1,3})\/(d{1,3}).*?England & Wales (1841|1881)";
+        private static readonly string LC_CENSUS_PATTERN_1911_EW = @"(\d{1,5})\/(\d{1,3}).*?England & Wales 1911";
+        private static readonly string LC_CENSUS_PATTERN_SCOT = @"(\d{1,5}-?[AB12]?)\/(\d{1,3})\/(d{1,3}).*?Scotland 1881";
+        private static readonly string LC_CENSUS_PATTERN_1940US = @"(T627[-_])(\d{1,5}-?[AB]?)\/(\d{1,2}[AB]?-\d{1,2}[AB]?)\/(d{1,3}[AB]?).*?US 1880";
 
         public enum ReferenceStatus { BLANK = 0, UNRECOGNISED = 1, INCOMPLETE = 2, GOOD = 3 };
         public static readonly CensusReference UNKNOWN = new CensusReference();
@@ -722,6 +723,19 @@ namespace FTAnalyzer
                 this.MatchString = matcher.Value;
                 return true;
             }
+            matcher = Regex.Match(text, LC_CENSUS_PATTERN_1940US, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "US1940";
+                this.Roll = matcher.Groups[2].ToString();
+                this.ED = matcher.Groups[3].ToString();
+                this.Page = matcher.Groups[4].ToString();
+                this.IsUKCensus = false;
+                this.Country = Countries.UNITED_STATES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
             matcher = Regex.Match(text, EW_MISSINGCLASS_PATTERN, RegexOptions.IgnoreCase);
             if (matcher.Success)
             {
@@ -949,9 +963,9 @@ namespace FTAnalyzer
                 if (Roll.Length > 0)
                 {
                     if (Properties.GeneralSettings.Default.UseCompactCensusRef)
-                        return Roll + "/" + Page + (ED.Length > 0 ? "/" + ED : "");
+                        return Roll + (ED.Length > 0 ? "/" + ED : "") + "/" + Page;
                     else
-                        return "Roll: " + Roll + ", Page: " + Page + (ED.Length > 0 ? ", ED: " + ED : "");
+                        return "Roll: " + Roll + (ED.Length > 0 ? ", ED: " + ED : "") + ", Page: " + Page;
                 }
                 else if (Piece.Length > 0)
                 {
