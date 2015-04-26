@@ -49,6 +49,9 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1911_PATTERN5 = @"RG *14[;,\/]? *Piece:? *(\d{1,6})[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN6 = @"RG *14[;,\/]? *RD:? *(\d{1,4})[;,]? *ED:? *(\d{1,3}) (\d{1,5})";
         private static readonly string EW_CENSUS_1911_PATTERN_FH = @"RG *14\/PN(\d{1,6}) .*?SN(\d{1,4})";
+        private static readonly string SCOT_CENSUSYEAR_PATTERN = @"(1[89]\d[15]).*?Parish:? *([A-Z .'-]+)[;,]? *ED:? *(\d{1,3}[AB]?)[;,]? *Page:? *(\d{1,4})[;,]? *Line:? *(\d{1,2})";
+        private static readonly string SCOT_CENSUSYEAR_PATTERN2 = @"(1[89]\d[15]).*?(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
+        private static readonly string SCOT_CENSUSYEAR_PATTERN3 = @"(1[89]\d[15]).*?(\d{3}[AB]?)\/(\d{2}[AB]?) Page:? *(\d{1,4})";
         private static readonly string SCOT_CENSUS_PATTERN = @"Parish:? *([A-Z .'-]+)[;,]? *ED:? *(\d{1,3}[AB]?)[;,]? *Page:? *(\d{1,4})[;,]? *Line:? *(\d{1,2})";
         private static readonly string SCOT_CENSUS_PATTERN2 = @"(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
         private static readonly string SCOT_CENSUS_PATTERN3 = @"(\d{3}[AB]?)\/(\d{2}[AB]?) Page:? *(\d{1,4})";
@@ -141,13 +144,16 @@ namespace FTAnalyzer
         private void SetCensusReferenceDetails()
         {
             this.unknownCensusRef = string.Empty;
-            this.CensusYear = GetCensusYearFromReference();
             if (this.Class.Equals("SCOT"))
                 this.CensusLocation = CensusLocation.SCOTLAND;
             else if (this.Class.StartsWith("US"))
+            {
+                this.CensusYear = GetCensusYearFromReference();
                 this.CensusLocation = CensusLocation.UNITED_STATES;
+            }
             else
             {
+                this.CensusYear = GetCensusYearFromReference();
                 this.CensusLocation = CensusLocation.GetCensusLocation(this.CensusYear.StartDate.Year.ToString(), this.Piece);
                 this.URL = GetCensusURLFromReference();
             }
@@ -576,6 +582,48 @@ namespace FTAnalyzer
                 this.IsUKCensus = true;
                 this.Country = GetCensusReferenceCountry(Class, Piece);
                 this.Status = ReferenceStatus.INCOMPLETE;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, SCOT_CENSUSYEAR_PATTERN, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "SCOT";
+                this.CensusYear = new FactDate(matcher.Groups[1].ToString());
+                this.Parish = matcher.Groups[2].ToString();
+                this.ED = matcher.Groups[3].ToString();
+                this.Page = matcher.Groups[4].ToString();
+                this.IsUKCensus = true;
+                this.Country = Countries.SCOTLAND;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, SCOT_CENSUSYEAR_PATTERN2, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "SCOT";
+                this.CensusYear = new FactDate(matcher.Groups[1].ToString());
+                this.Parish = matcher.Groups[2].ToString().Replace("/00", "").Replace("/", "-");
+                this.ED = matcher.Groups[3].ToString().Replace("/00", "").TrimStart('0');
+                this.Page = matcher.Groups[4].ToString().TrimStart('0');
+                this.IsUKCensus = true;
+                this.Country = Countries.SCOTLAND;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, SCOT_CENSUSYEAR_PATTERN3, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "SCOT";
+                this.CensusYear = new FactDate(matcher.Groups[1].ToString());
+                this.Parish = matcher.Groups[2].ToString().TrimStart('0');
+                this.ED = matcher.Groups[3].ToString().Replace("/00", "").TrimStart('0');
+                this.Page = matcher.Groups[4].ToString().TrimStart('0');
+                this.IsUKCensus = true;
+                this.Country = Countries.SCOTLAND;
+                this.Status = ReferenceStatus.GOOD;
                 this.MatchString = matcher.Value;
                 return true;
             }
