@@ -787,7 +787,7 @@ namespace FTAnalyzer
                 if (factType == NAME)
                     Comment = Comment.Replace("/", "");
             }
-            Comment = EnhancedTextInfo.ToTitleCase(Comment);
+            Comment = EnhancedTextInfo.ToTitleCase(Comment).Trim();
             if (Properties.GeneralSettings.Default.ReverseLocations)
                 Location = FactLocation.GetLocation(ReverseLocation(Place), latitude, longitude, FactLocation.Geocode.NOT_SEARCHED);
             else
