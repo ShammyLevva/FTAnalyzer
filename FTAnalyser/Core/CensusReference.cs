@@ -54,15 +54,15 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1911_PATTERN5 = @"RG *14[;,\/]? *Piece:? *(\d{1,6})[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN6 = @"RG *14[;,\/]? *RD:? *(\d{1,4})[;,]? *ED:? *(\d{1,3}) (\d{1,5})";
         private static readonly string EW_CENSUS_1911_PATTERN_FH = @"RG *14\/PN(\d{1,6}) .*?SN(\d{1,4})";
-        
-        private static readonly string SCOT_CENSUSYEAR_PATTERN = @"(1[89]\d[15]).*?Parish:? *([A-Z .'-]+)[;,]? *ED:? *(\d{1,3}[AB]?)[;,]? *Page:? *(\d{1,4})[;,]? *Line:? *(\d{1,2})";
-        private static readonly string SCOT_CENSUSYEAR_PATTERN2 = @"(1[89]\d[15]).*?(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
-        private static readonly string SCOT_CENSUSYEAR_PATTERN3 = @"(1[89]\d[15]).*?(\d{3}[AB]?)\/(\d{2}[AB]?) Page:? *(\d{1,4})";
-        private static readonly string SCOT_CENSUS_PATTERN = @"Parish:? *([A-Z .'-]+)[;,]? *ED:? *(\d{1,3}[AB]?)[;,]? *Page:? *(\d{1,4})[;,]? *Line:? *(\d{1,2})";
-        private static readonly string SCOT_CENSUS_PATTERN2 = @"(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
-        private static readonly string SCOT_CENSUS_PATTERN3 = @"(\d{3}[AB]?)\/(\d{2}[AB]?) Page:? *(\d{1,4})";
 
-        private static readonly string US_CENSUS_PATTERN = @"Year: *(\d{4});? *Census Place:? *(.*?)[;,]? *Roll:? *(.*?)[;,]? *Page:? *(\d{1,4}[AB]?)[,;]? *(Enumeration district) *(\(?ED\)?):? *(\d{1,2}[AB]?-\d{1,2}[AB]?)";
+        private static readonly string SCOT_CENSUSYEAR_PATTERN = @"(1[89]\d[15]).{1,10}(\(?GROS *\)?)?Parish:? *([A-Z .'-]+)[;,]? *ED:? *(\d{1,3}[AB]?)[;,]? *Page:? *(\d{1,4})[;,]? *Line:? *(\d{1,2})";
+        private static readonly string SCOT_CENSUSYEAR_PATTERN2 = @"(1[89]\d[15]).{1,10}(\(?GROS *\)?)?(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
+        private static readonly string SCOT_CENSUSYEAR_PATTERN3 = @"(1[89]\d[15]).{1,10}(\(?GROS *\)?)?(\d{3}[AB]?)\/(\d{2}[AB]?) Page:? *(\d{1,4})";
+        private static readonly string SCOT_CENSUS_PATTERN = @"Parish:? *([A-Z .'-]+)[;,]? *ED:? *(\d{1,3}[AB]?)[;,]? *Page:? *(\d{1,4})[;,]? *Line:? *(\d{1,2})";
+        private static readonly string SCOT_CENSUS_PATTERN2 = @"(\(?GROS *\)?)?(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
+        private static readonly string SCOT_CENSUS_PATTERN3 = @"(\(?GROS *\)?)?(\d{3}[AB]?)\/(\d{2}[AB]?) Page:? *(\d{1,4})";
+
+        private static readonly string US_CENSUS_PATTERN = @"Year: *(\d{4});? *Census Place:? *(.*?)[;,]? *Roll:? *(.*?)[;,]? *Page:? *(\d{1,4}[AB]?)[,;]? *(Enumeration District|\(?ED\)?):? *(\d{1,5}[AB]?-?\d{0,2}[AB]?)";
         private static readonly string US_CENSUS_1940_PATTERN1 = @"District:? *(\d{1,2}[AB]?-\d{1,2}[AB]?).*?(Sheet( Number and Letter)|Page):? *(\d{1,3}[AB]?).*?T627 ?,? *(Affiliate Film Number):? ?(\d{1,5}-?[AB]?)";
         private static readonly string US_CENSUS_1940_PATTERN2 = @"(Enumeration district) *(\(?ED\)?):? *(\d{1,2}[AB]?-\d{1,2}[AB]?).*?[;,]? *(sheet|page):? *(\d{1,3}[AB]?).*?T627.*?roll:? ?(\d{1,5}-?[AB]?)";
         private static readonly string US_CENSUS_1940_PATTERN3 = @"Year:? *1940;?.*?Roll:? *T627_(.*?)[;,]? *Page:? *(\d{1,4}[AB]?)[,;]? *(Enumeration District):? *(\(?ED\)?:?)? *(\d{1,2}[AB]?-\d{1,2}[AB]?)";
@@ -602,9 +602,9 @@ namespace FTAnalyzer
             {
                 this.Class = "SCOT";
                 this.CensusYear = CensusDate.GetUKCensusDateFromYear(matcher.Groups[1].ToString());
-                this.Parish = matcher.Groups[2].ToString();
-                this.ED = matcher.Groups[3].ToString();
-                this.Page = matcher.Groups[4].ToString();
+                this.Parish = matcher.Groups[3].ToString();
+                this.ED = matcher.Groups[4].ToString();
+                this.Page = matcher.Groups[5].ToString();
                 this.IsUKCensus = true;
                 this.Country = Countries.SCOTLAND;
                 this.Status = ReferenceStatus.GOOD;
@@ -616,9 +616,9 @@ namespace FTAnalyzer
             {
                 this.Class = "SCOT";
                 this.CensusYear = CensusDate.GetUKCensusDateFromYear(matcher.Groups[1].ToString());
-                this.Parish = matcher.Groups[2].ToString().Replace("/00", "").Replace("/", "-");
-                this.ED = matcher.Groups[3].ToString().Replace("/00", "").TrimStart('0');
-                this.Page = matcher.Groups[4].ToString().TrimStart('0');
+                this.Parish = matcher.Groups[3].ToString().Replace("/00", "").Replace("/", "-");
+                this.ED = matcher.Groups[4].ToString().Replace("/00", "").TrimStart('0');
+                this.Page = matcher.Groups[5].ToString().TrimStart('0');
                 this.IsUKCensus = true;
                 this.Country = Countries.SCOTLAND;
                 this.Status = ReferenceStatus.GOOD;
@@ -630,9 +630,9 @@ namespace FTAnalyzer
             {
                 this.Class = "SCOT";
                 this.CensusYear = CensusDate.GetUKCensusDateFromYear(matcher.Groups[1].ToString());
-                this.Parish = matcher.Groups[2].ToString().TrimStart('0');
-                this.ED = matcher.Groups[3].ToString().Replace("/00", "").TrimStart('0');
-                this.Page = matcher.Groups[4].ToString().TrimStart('0');
+                this.Parish = matcher.Groups[3].ToString().TrimStart('0');
+                this.ED = matcher.Groups[4].ToString().Replace("/00", "").TrimStart('0');
+                this.Page = matcher.Groups[5].ToString().TrimStart('0');
                 this.IsUKCensus = true;
                 this.Country = Countries.SCOTLAND;
                 this.Status = ReferenceStatus.GOOD;
@@ -643,6 +643,7 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = "SCOT";
+                this.CensusYear = FactDate.UNKNOWN_DATE;
                 this.Parish = matcher.Groups[1].ToString();
                 this.ED = matcher.Groups[2].ToString();
                 this.Page = matcher.Groups[3].ToString();
@@ -656,9 +657,10 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = "SCOT";
-                this.Parish = matcher.Groups[1].ToString().Replace("/00", "").Replace("/", "-");
-                this.ED = matcher.Groups[2].ToString().Replace("/00", "").TrimStart('0');
-                this.Page = matcher.Groups[3].ToString().TrimStart('0');
+                this.CensusYear = FactDate.UNKNOWN_DATE;
+                this.Parish = matcher.Groups[2].ToString().Replace("/00", "").Replace("/", "-").Replace("-0", "-");
+                this.ED = matcher.Groups[3].ToString().Replace("/00", "").TrimStart('0');
+                this.Page = matcher.Groups[4].ToString().TrimStart('0');
                 this.IsUKCensus = true;
                 this.Country = Countries.SCOTLAND;
                 this.Status = ReferenceStatus.GOOD;
@@ -669,9 +671,10 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = "SCOT";
-                this.Parish = matcher.Groups[1].ToString().TrimStart('0');
-                this.ED = matcher.Groups[2].ToString().Replace("/00", "").TrimStart('0');
-                this.Page = matcher.Groups[3].ToString().TrimStart('0');
+                this.CensusYear = FactDate.UNKNOWN_DATE;
+                this.Parish = matcher.Groups[2].ToString().TrimStart('0');
+                this.ED = matcher.Groups[3].ToString().Replace("/00", "").TrimStart('0');
+                this.Page = matcher.Groups[4].ToString().TrimStart('0');
                 this.IsUKCensus = true;
                 this.Country = Countries.SCOTLAND;
                 this.Status = ReferenceStatus.GOOD;

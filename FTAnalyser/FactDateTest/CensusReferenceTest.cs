@@ -119,12 +119,23 @@ namespace CensusReferenceTest
             Assert.IsTrue(censusRef.Folio.Equals("11"));
             Assert.IsTrue(censusRef.Page.Equals("14"));
 
-            censusRef = new CensusReference("I1", "For some reason,  in the 1851 census,  Fanny and Fred were not at home in Leith, but staying in Culross, Perthshire, where they are lodging with Anne Hutcheson at 43 South Street. Fred is an Officer in the Royal Navy and Fanny is an Officer's Wife. GROS 343/00 001/00 011.", false);
+            censusRef = new CensusReference("I1", "in the 1851 census, GROS 343/00 001/00 011.", false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1851));
             Assert.IsTrue(censusRef.Parish.Equals("343"));
             Assert.IsTrue(censusRef.ED.Equals("1"));
             Assert.IsTrue(censusRef.Page.Equals("11"));
 
+            censusRef = new CensusReference("I1", "GROS 692/01 019/00 008", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(FactDate.UNKNOWN_DATE));
+            Assert.IsTrue(censusRef.Parish.Equals("692-1"));
+            Assert.IsTrue(censusRef.ED.Equals("19"));
+            Assert.IsTrue(censusRef.Page.Equals("8"));
+
+            censusRef = new CensusReference("I1", "Year: 1930; Census Place: Sea Cliff, Nassau, New York; Roll: 1462; Page: 14B; Enumeration District: 193;", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.USCENSUS1930));
+            Assert.IsTrue(censusRef.Roll.Equals("1462"));
+            Assert.IsTrue(censusRef.ED.Equals("193"));
+            Assert.IsTrue(censusRef.Page.Equals("14B"));
         }
     }
 }
