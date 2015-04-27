@@ -516,7 +516,7 @@ namespace FTAnalyzer
             xmlErrorbox.AppendText((censusFacts + censusWarnAllow) + " usable facts loaded)");
 
             xmlErrorbox.AppendText("\nCreated " + censusFTAFacts + " census facts from individuals notes and source references in GEDCOM File");
-            xmlErrorbox.AppendText("\nFound " + resiTotal + " residence facts in GEDCOM File (" + resiCensus + " treated as Census facts) ");
+            xmlErrorbox.AppendText("\nFound " + resiTotal + " residence facts in GEDCOM File (" + resiCensus + " treated as census facts) ");
             if (resiWarnAllow > 0)
             {
                 if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
