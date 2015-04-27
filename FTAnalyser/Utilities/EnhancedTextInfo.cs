@@ -70,5 +70,12 @@ namespace FTAnalyzer.Utilities
 
             return sb.ToString().Normalize(NormalizationForm.FormC);
         }
+
+        public static string ClearWhiteSpace(string text)
+        {
+            return text.Replace(System.Environment.NewLine, " ").Replace("\n", " ")
+                       .Replace("\t", " ").Replace("   ", " ").Replace("  ", " ")
+                       .Replace("  ", " ").Replace("  ", " ").Replace("  ", " ").Trim();
+        }
     }
 }

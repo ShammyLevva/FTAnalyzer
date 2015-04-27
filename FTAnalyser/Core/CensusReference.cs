@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FTAnalyzer.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -182,7 +183,7 @@ namespace FTAnalyzer
         private bool GetCensusReference(string text)
         {
             // aggressively remove multi spaces to allow for spaces in the census references
-            text = text.Replace(System.Environment.NewLine, " ").Replace("\n", " ").Replace("\t", " ").Replace("   ", " ").Replace("  ", " ").Replace("  ", " ").Replace("  ", " ");
+            text = EnhancedTextInfo.ClearWhiteSpace(text);
             if (text.Length > 0)
             {
                 if (CheckPatterns(text))

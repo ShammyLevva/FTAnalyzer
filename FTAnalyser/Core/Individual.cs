@@ -1,3 +1,4 @@
+using FTAnalyzer.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -899,7 +900,7 @@ namespace FTAnalyzer
             if (HasNotes)
             {
                 bool checkNotes = true;
-                string notes = Notes.Trim();
+                string notes = EnhancedTextInfo.ClearWhiteSpace(Notes);
                 while (checkNotes)
                 {
                     checkNotes = false;
@@ -908,7 +909,7 @@ namespace FTAnalyzer
                         AddFact(cr.Fact);
                     if (cr.MatchString.Length > 0)
                     {
-                        int pos = notes.IndexOf(cr.MatchString);
+                        int pos = notes.IndexOf(cr.MatchString, StringComparison.InvariantCultureIgnoreCase);
                         if (pos != -1)
                         {
                             notes = notes.Remove(pos, cr.MatchString.Length);
