@@ -116,9 +116,15 @@ namespace CensusReferenceTest
             censusRef = new CensusReference("I1", "HO107, Piece 704, Folio 11, Page  14", false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1841));
             Assert.IsTrue(censusRef.Piece.Equals("704"));
-            //Assert.IsTrue(censusRef.Book.Equals("5"));
             Assert.IsTrue(censusRef.Folio.Equals("11"));
             Assert.IsTrue(censusRef.Page.Equals("14"));
+
+            censusRef = new CensusReference("I1", "For some reason,  in the 1851 census,  Fanny and Fred were not at home in Leith, but staying in Culross, Perthshire, where they are lodging with Anne Hutcheson at 43 South Street. Fred is an Officer in the Royal Navy and Fanny is an Officer's Wife. GROS 343/00 001/00 011.", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1851));
+            Assert.IsTrue(censusRef.Parish.Equals("343"));
+            Assert.IsTrue(censusRef.ED.Equals("1"));
+            Assert.IsTrue(censusRef.Page.Equals("11"));
+
         }
     }
 }

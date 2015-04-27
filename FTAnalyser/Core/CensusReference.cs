@@ -84,8 +84,8 @@ namespace FTAnalyzer
         public string Folio { get; private set; }
         public string Page { get; private set; }
         public string Book { get; private set; } 
-        private string Schedule { get; set; }
-        private string Parish { get; set; }
+        public string Schedule { get; private set; }
+        public string Parish { get; private set; }
         private string RD { get; set; }
         public string ED { get; private set; }
         private string ReferenceText { get; set; }
@@ -601,7 +601,7 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = "SCOT";
-                this.CensusYear = new FactDate(matcher.Groups[1].ToString());
+                this.CensusYear = CensusDate.GetUKCensusDateFromYear(matcher.Groups[1].ToString());
                 this.Parish = matcher.Groups[2].ToString();
                 this.ED = matcher.Groups[3].ToString();
                 this.Page = matcher.Groups[4].ToString();
@@ -615,7 +615,7 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = "SCOT";
-                this.CensusYear = new FactDate(matcher.Groups[1].ToString());
+                this.CensusYear = CensusDate.GetUKCensusDateFromYear(matcher.Groups[1].ToString());
                 this.Parish = matcher.Groups[2].ToString().Replace("/00", "").Replace("/", "-");
                 this.ED = matcher.Groups[3].ToString().Replace("/00", "").TrimStart('0');
                 this.Page = matcher.Groups[4].ToString().TrimStart('0');
@@ -629,7 +629,7 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = "SCOT";
-                this.CensusYear = new FactDate(matcher.Groups[1].ToString());
+                this.CensusYear = CensusDate.GetUKCensusDateFromYear(matcher.Groups[1].ToString());
                 this.Parish = matcher.Groups[2].ToString().TrimStart('0');
                 this.ED = matcher.Groups[3].ToString().Replace("/00", "").TrimStart('0');
                 this.Page = matcher.Groups[4].ToString().TrimStart('0');

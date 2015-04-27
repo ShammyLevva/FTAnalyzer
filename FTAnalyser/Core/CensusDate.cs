@@ -197,6 +197,16 @@ namespace FTAnalyzer
             return FactDate.UNKNOWN_DATE;
         }
 
+        public static FactDate GetUKCensusDateFromYear(string year)
+        {
+            foreach(CensusDate cd in UK_CENSUS)
+            {
+                if (cd.PropertyName.Equals("C" + year))
+                    return cd;
+            }
+            return FactDate.UNKNOWN_DATE;
+        }
+
         public override string ToString()
         {
             return displayName;
