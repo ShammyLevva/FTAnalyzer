@@ -26,10 +26,13 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_PATTERN6 = @"Census[: ]*(\d{4}).*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Book:? *(\d{1,3}[;,]?).*?Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_PATTERN7 = @"Census[: ]*(\d{4}).*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_PATTERN8 = @"Census[: ]*(\d{4}).*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
-        private static readonly string EW_MISSINGCLASS_PATTERN = @"Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
-        private static readonly string EW_MISSINGCLASS_PATTERN2 = @"Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
+        
         private static readonly string EW_CENSUS_PATTERN_FH = @"RG *(\d{1,2})\/(\d{1,5}) F(olio)? ?(\d{1,4}[a-z]?) p(age)? ?(\d{1,3})";
         private static readonly string EW_CENSUS_PATTERN_FH2 = @"RG *(\d{1,2})\/(\d{1,5}) ED *(\d{1,4}[a-z]?) F(olio)? ?(\d{1,4}[a-z]?) p(age)? ?(\d{1,3})";
+
+        private static readonly string EW_MISSINGCLASS_PATTERN = @"Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
+        private static readonly string EW_MISSINGCLASS_PATTERN2 = @"Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
+        
         private static readonly string EW_CENSUS_1841_51_PATTERN = @"HO *107[;,]? *Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN2 = @"HO *107[;,]? *Piece:? *(\d{1,5})[;,]? *Book:? *(\d{1,3})[;,]?.*?Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN3 = @"HO *107[;,]? *Piece:? *(\d{1,5})[;,]? *(Book\/)?Folio:? *(\d{1,3}[a-z]?)\/(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
@@ -39,6 +42,7 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH2 = @"HO *107\/(\d{1,5}) ED *(\d{1,4}[a-z]?) F(olio)? *(\d{1,4}[a-z]?) p(age)? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH3 = @"HO *107\/(\d{1,5}) .*?F(olio)? *(\d{1,4}[a-z]?)\/(\d{1,4}) p(age)? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH4 = @"HO *107\/(\d{1,5}) .*?F(olio)? *(\d{1,4}[a-z]?) p(age)? *(\d{1,3})";
+        
         private static readonly string EW_CENSUS_1911_PATTERN = @"RG *14\/? *PN(\d{1,6}) .*?SN(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN78 = @"RG *78\/? *PN(\d{1,6}) .*?SN(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN2 = @"RG *14[;,\/]? *Piece:? *(\d{1,6})[;,]? *SN:? *(\d{1,4})";
@@ -49,13 +53,19 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1911_PATTERN5 = @"RG *14[;,\/]? *Piece:? *(\d{1,6})[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN6 = @"RG *14[;,\/]? *RD:? *(\d{1,4})[;,]? *ED:? *(\d{1,3}) (\d{1,5})";
         private static readonly string EW_CENSUS_1911_PATTERN_FH = @"RG *14\/PN(\d{1,6}) .*?SN(\d{1,4})";
+        
         private static readonly string SCOT_CENSUSYEAR_PATTERN = @"(1[89]\d[15]).*?Parish:? *([A-Z .'-]+)[;,]? *ED:? *(\d{1,3}[AB]?)[;,]? *Page:? *(\d{1,4})[;,]? *Line:? *(\d{1,2})";
         private static readonly string SCOT_CENSUSYEAR_PATTERN2 = @"(1[89]\d[15]).*?(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
         private static readonly string SCOT_CENSUSYEAR_PATTERN3 = @"(1[89]\d[15]).*?(\d{3}[AB]?)\/(\d{2}[AB]?) Page:? *(\d{1,4})";
         private static readonly string SCOT_CENSUS_PATTERN = @"Parish:? *([A-Z .'-]+)[;,]? *ED:? *(\d{1,3}[AB]?)[;,]? *Page:? *(\d{1,4})[;,]? *Line:? *(\d{1,2})";
         private static readonly string SCOT_CENSUS_PATTERN2 = @"(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
         private static readonly string SCOT_CENSUS_PATTERN3 = @"(\d{3}[AB]?)\/(\d{2}[AB]?) Page:? *(\d{1,4})";
-        private static readonly string US_CENSUS_PATTERN = @"Year: *(\d{4});? *Census Place:? *(.*?)[;,]? *Roll:? *(.*?)[;,]? *Page:? *(\d{1,4}[AB]?);? *(Enumeration District:? *(.*?))?";
+
+        private static readonly string US_CENSUS_PATTERN = @"Year: *(\d{4});? *Census Place:? *(.*?)[;,]? *Roll:? *(.*?)[;,]? *Page:? *(\d{1,4}[AB]?)[,;]? *(Enumeration district) *(\(?ED\)?):? *(\d{1,2}[AB]?-\d{1,2}[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN1 = @"District:? *(\d{1,2}[AB]?-\d{1,2}[AB]?).*?(Sheet( Number and Letter)|Page):? *(\d{1,3}[AB]?).*?T627 ?,? *(Affiliate Film Number):? ?(\d{1,5}-?[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN2 = @"(Enumeration district) *(\(?ED\)?):? *(\d{1,2}[AB]?-\d{1,2}[AB]?).*?[;,]? *(sheet|page):? *(\d{1,3}[AB]?).*?T627.*?roll:? ?(\d{1,5}-?[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN3 = @"Year:? *1940;?.*?Roll:? *T627_(.*?)[;,]? *Page:? *(\d{1,4}[AB]?)[,;]? *(Enumeration District):? *(\(?ED\)?:?)? *(\d{1,2}[AB]?-\d{1,2}[AB]?)";
+
         private static readonly string LC_CENSUS_PATTERN_EW = @"(\d{1,5})\/(\d{1,3})\/(d{1,3}).*?England & Wales (1841|1881)";
         private static readonly string LC_CENSUS_PATTERN_1911_EW = @"(\d{1,5})\/(\d{1,3}).*?England & Wales 1911";
         private static readonly string LC_CENSUS_PATTERN_SCOT = @"(\d{1,5}-?[AB12]?)\/(\d{1,3})\/(d{1,3}).*?Scotland 1881";
@@ -68,15 +78,15 @@ namespace FTAnalyzer
         private string unknownCensusRef;
         private string Place { get; set; }
         private string Class { get; set; }
-        private string Roll { get; set; }
-        public string Piece { get; set; }
-        public string Folio { get; set; }
-        public string Page { get; set; }
-        public string Book { get; set; }
+        public string Roll { get; private set; }
+        public string Piece { get; private set; }
+        public string Folio { get; private set; }
+        public string Page { get; private set; }
+        public string Book { get; private set; } 
         private string Schedule { get; set; }
         private string Parish { get; set; }
         private string RD { get; set; }
-        private string ED { get; set; }
+        public string ED { get; private set; }
         private string ReferenceText { get; set; }
         private CensusLocation CensusLocation { get; set; }
 
@@ -676,6 +686,45 @@ namespace FTAnalyzer
                 this.Page = matcher.Groups[4].ToString();
                 if (matcher.Groups.Count == 7)
                     this.ED = matcher.Groups[6].ToString();
+                this.IsUKCensus = false;
+                this.Country = Countries.UNITED_STATES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, US_CENSUS_1940_PATTERN1, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "US1940";
+                this.Roll = "T627_" + matcher.Groups[6].ToString();
+                this.ED = matcher.Groups[1].ToString();
+                this.Page = matcher.Groups[4].ToString();
+                this.IsUKCensus = false;
+                this.Country = Countries.UNITED_STATES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, US_CENSUS_1940_PATTERN2, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "US1940";
+                this.Roll = "T627_" + matcher.Groups[6].ToString();
+                this.ED = matcher.Groups[3].ToString();
+                this.Page = matcher.Groups[5].ToString();
+                this.IsUKCensus = false;
+                this.Country = Countries.UNITED_STATES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, US_CENSUS_1940_PATTERN3, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "US1940";
+                this.Roll = "T627_" + matcher.Groups[1].ToString();
+                this.ED = matcher.Groups[5].ToString();
+                this.Page = matcher.Groups[2].ToString();
                 this.IsUKCensus = false;
                 this.Country = Countries.UNITED_STATES;
                 this.Status = ReferenceStatus.GOOD;

@@ -94,8 +94,24 @@ namespace CensusReferenceTest
             Assert.IsTrue(censusRef.Piece.Equals("2195"));
             Assert.IsTrue(censusRef.Folio.Equals("507"));
             Assert.IsTrue(censusRef.Page.Equals("71"));
-   
-            
+
+            censusRef = new CensusReference("I1", "District: 1-2 , Family Number: 251 , Sheet Number and Letter: 10B , Line Number: 78 , Affiliate Publication Number: T627 , Affiliate Film Number: 544 , Digital Folder Number: 005449024 , Image Number: 00057", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.USCENSUS1940));
+            Assert.IsTrue(censusRef.Roll.Equals("T627_544"));
+            Assert.IsTrue(censusRef.ED.Equals("1-2"));
+            Assert.IsTrue(censusRef.Page.Equals("10B"));
+
+            censusRef = new CensusReference("I1", "enumeration district (ED) 1-2, sheet 10B, family 251, NARA digital publication T627 (Washington, D.C.: National Archives and Records Administration, 2012), roll 544.", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.USCENSUS1940));
+            Assert.IsTrue(censusRef.Roll.Equals("T627_544"));
+            Assert.IsTrue(censusRef.ED.Equals("1-2"));
+            Assert.IsTrue(censusRef.Page.Equals("10B"));
+
+            censusRef = new CensusReference("I1", "Year: 1940; Census Place: Smyrna, Kent, Delaware; Roll: T627_544; Page: 10B; Enumeration District: 1-2", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.USCENSUS1940));
+            Assert.IsTrue(censusRef.Roll.Equals("T627_544"));
+            Assert.IsTrue(censusRef.ED.Equals("1-2"));
+            Assert.IsTrue(censusRef.Page.Equals("10B"));
         }
     }
 }
