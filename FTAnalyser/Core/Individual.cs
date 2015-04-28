@@ -77,9 +77,9 @@ namespace FTAnalyzer
             : this()
         {
             IndividualID = node.Attributes["ID"].Value;
-            Name = FamilyTree.GetText(node, "NAME");
-            Gender = FamilyTree.GetText(node, "SEX");
-            alias = FamilyTree.GetText(node, "ALIA");
+            Name = FamilyTree.GetText(node, "NAME", false);
+            Gender = FamilyTree.GetText(node, "SEX", false);
+            alias = FamilyTree.GetText(node, "ALIA", false);
             IsFlaggedAsLiving = node.SelectSingleNode("_FLGS/__LIVING") != null;
             forenameMetaphone = new DoubleMetaphone(Forename);
             surnameMetaphone = new DoubleMetaphone(Surname);

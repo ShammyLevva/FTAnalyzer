@@ -173,7 +173,7 @@ namespace FTAnalyzer
 
         private bool GetCensusReference(XmlNode n)
         {
-            string text = FamilyTree.GetText(n, "PAGE");
+            string text = FamilyTree.GetText(n, "PAGE", true);
             if (GetCensusReference(text))
                 return true;
             text = FamilyTree.GetNotes(n);

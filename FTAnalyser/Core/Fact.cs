@@ -307,12 +307,12 @@ namespace FTAnalyzer
                 try
                 {
                     FactType = FixFactTypes(node.Name);
-                    string factDate = FamilyTree.GetText(node, "DATE");
+                    string factDate = FamilyTree.GetText(node, "DATE", false);
                     this.FactDate = new FactDate(factDate, reference);
                     this.Preferred = preferred;
                     if (FactType.Equals(CUSTOM_EVENT) || FactType.Equals(CUSTOM_FACT))
                     {
-                        string tag = FamilyTree.GetText(node, "TYPE").ToUpper();
+                        string tag = FamilyTree.GetText(node, "TYPE", false).ToUpper();
                         string factType;
                         if (CUSTOM_TAGS.TryGetValue(tag, out factType))
                         {
@@ -326,8 +326,8 @@ namespace FTAnalyzer
                             Tag = tag;
                         }
                     }
-                    SetCommentAndLocation(FactType, FamilyTree.GetText(node), FamilyTree.GetText(node, "PLAC"),
-                        FamilyTree.GetText(node, "PLAC/MAP/LATI"), FamilyTree.GetText(node, "PLAC/MAP/LONG"));
+                    SetCommentAndLocation(FactType, FamilyTree.GetText(node, false), FamilyTree.GetText(node, "PLAC", false),
+                        FamilyTree.GetText(node, "PLAC/MAP/LATI", false), FamilyTree.GetText(node, "PLAC/MAP/LONG", false));
                     SetAddress(FactType, node);
 
                     // only check UK census dates for errors as those are used for colour census
@@ -370,11 +370,11 @@ namespace FTAnalyzer
                     }
                     if (FactType == DEATH)
                     {
-                        Comment = FamilyTree.GetText(node, "CAUS");
+                        Comment = FamilyTree.GetText(node, "CAUS", true);
                         if (node.FirstChild != null && node.FirstChild.Value == "Y" && !FactDate.IsKnown)
                             FactDate = new FactDate(FactDate.MINDATE, DateTime.Now); // if death flag set as Y then death before today.
                     }
-                    string age = FamilyTree.GetText(node, "AGE");
+                    string age = FamilyTree.GetText(node, "AGE", false);
                     if (age.Length > 0)
                         this.GedcomAge = new Age(age, FactDate);
                     this.CertificatePresent = SetCertificatePresent();
@@ -393,7 +393,7 @@ namespace FTAnalyzer
             foreach (XmlNode n in list)
             {
                 string indref = n.Attributes["REF"].Value;
-                string role = FamilyTree.GetText(n, "ROLE");
+                string role = FamilyTree.GetText(n, "ROLE", false);
                 if (role.Equals("Household Member"))
                     FamilyTree.Instance.AddSharedFact(indref, this);
             }

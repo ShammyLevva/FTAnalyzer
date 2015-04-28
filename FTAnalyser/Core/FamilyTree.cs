@@ -74,7 +74,7 @@ namespace FTAnalyzer
             }
         }
 
-        public static string GetText(XmlNode node)
+        public static string GetText(XmlNode node, bool lookForText)
         {
             if (node == null)
                 return string.Empty;
@@ -83,7 +83,7 @@ namespace FTAnalyzer
             else
             {
                 XmlNode text = node.SelectSingleNode(".//TEXT");
-                if (text != null && text.ChildNodes.Count > 0)
+                if (text != null && lookForText && text.ChildNodes.Count > 0)
                     return GetContinuationText(text.ChildNodes);
                 else if (node.FirstChild != null && node.FirstChild.Value != null)
                     return node.FirstChild.Value.Trim();
@@ -92,9 +92,9 @@ namespace FTAnalyzer
             }
         }
 
-        public static string GetText(XmlNode node, string tag)
+        public static string GetText(XmlNode node, string tag, bool lookForText)
         {
-            return GetText(GetChildNode(node, tag));
+            return GetText(GetChildNode(node, tag), lookForText);
         }
 
         public static XmlNode GetChildNode(XmlNode node, String tag)
@@ -154,9 +154,7 @@ namespace FTAnalyzer
             {
                 if (child.Name.Equals("#text") || child.Name.Equals("CONT"))
                     result.AppendLine(); // We have a new continuation so start a new line
-                if (child.Name.Equals("SOUR"))
-                    result.AppendLine(GetText(child));
-                else
+                if (!child.Name.Equals("SOUR"))
                     result.Append(child.InnerText);
             }
             result.AppendLine();

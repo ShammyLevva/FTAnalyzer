@@ -22,13 +22,13 @@ namespace FTAnalyzer
         public FactSource(XmlNode node)
         {
             this.SourceID = node.Attributes["ID"].Value;
-            this.SourceTitle = FamilyTree.GetText(node, "TITL");
-            this.Publication = FamilyTree.GetText(node, "PUBL");
-            this.Author = FamilyTree.GetText(node, "AUTH");
-            this.SourceText = FamilyTree.GetText(node, "TEXT");
-            this.SourceMedium = FamilyTree.GetText(node, "REPO/CALN/MEDI");
+            this.SourceTitle = FamilyTree.GetText(node, "TITL", true);
+            this.Publication = FamilyTree.GetText(node, "PUBL", true);
+            this.Author = FamilyTree.GetText(node, "AUTH", true);
+            this.SourceText = FamilyTree.GetText(node, "TEXT", true);
+            this.SourceMedium = FamilyTree.GetText(node, "REPO/CALN/MEDI", true);
             if (this.SourceMedium.Length == 0)
-                this.SourceMedium = FamilyTree.GetText(node, "NOTE/CONC");
+                this.SourceMedium = FamilyTree.GetText(node, "NOTE/CONC", true);
             this.Facts = new List<Fact>();
         }
 
