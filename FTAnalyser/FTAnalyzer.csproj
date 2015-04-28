@@ -275,6 +275,7 @@
     <Compile Include="Core\Parishes.cs" />
     <Compile Include="Core\Relationship.cs" />
     <Compile Include="Core\Surname.cs" />
+    <Compile Include="Exceptions\InvalidLocationCSVFileException.cs" />
     <Compile Include="Forms\Controls\ToolStripMapSelector.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -811,6 +812,7 @@
     </Compile>
     <Compile Include="Utilities\Printing.cs" />
     <Compile Include="Utilities\PropertyComparer.cs" />
+    <Compile Include="Utilities\ReadWriteCSV.cs" />
     <Compile Include="Utilities\ScrollingRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -2805,5 +2805,9 @@ namespace FTAnalyzer
         }
         #endregion
 
+        private void mnuLoadLocationsCSV_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -496,7 +496,7 @@ namespace FTAnalyzer
                 lostCousinsWarnIgnore += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNINGIGNORE);
                 lostCousinsErrors += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.ERROR);
                 censusReferences += ind.CensusReferenceCount(CensusReference.ReferenceStatus.GOOD);
-                blankCensusRefs  += ind.CensusReferenceCount(CensusReference.ReferenceStatus.BLANK);
+                blankCensusRefs += ind.CensusReferenceCount(CensusReference.ReferenceStatus.BLANK);
                 partialCensusRefs += ind.CensusReferenceCount(CensusReference.ReferenceStatus.INCOMPLETE);
                 unrecognisedCensusRefs += ind.CensusReferenceCount(CensusReference.ReferenceStatus.UNRECOGNISED);
             }
@@ -523,7 +523,7 @@ namespace FTAnalyzer
                     xmlErrorbox.AppendText(resiWarnAllow + " warnings (data ignored in strict mode), ");
             }
             xmlErrorbox.AppendText("\nFound " + censusReferences + " census references in file and " + blankCensusRefs + " facts missing a census reference");
-            if(partialCensusRefs > 0)
+            if (partialCensusRefs > 0)
                 xmlErrorbox.AppendText(", with " + partialCensusRefs + " references with partial details");
             if (unrecognisedCensusRefs > 0)
                 xmlErrorbox.AppendText(" and " + unrecognisedCensusRefs + " references that were unrecognised");
@@ -2911,6 +2911,57 @@ namespace FTAnalyzer
             return doc;
         }
 
+        #endregion
+
+        #region Load CSV Location Data
+
+        public void LoadCSVdata()
+        {
+            string csvFilename = string.Empty;
+            try
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                string initialDir = (string)Application.UserAppDataRegistry.GetValue("Excel Export Individual Path");
+                saveFileDialog.InitialDirectory = initialDir == null ? Environment.SpecialFolder.MyDocuments.ToString() : initialDir;
+                saveFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv";
+                saveFileDialog.FilterIndex = 1;
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    csvFilename = saveFileDialog.FileName;
+                    string path = Path.GetDirectoryName(csvFilename);
+                    Application.UserAppDataRegistry.SetValue("Excel Export Individual Path", path);
+                    ReadCSVdata(csvFilename);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading CSV location data from " + csvFilename + "\nError was " + ex.Message, "FT Analyzer");
+            }
+        }
+
+        public void ReadCSVdata(string csvFilename)
+        {
+            int rowCount = 0;
+            using (CsvFileReader reader = new CsvFileReader(csvFilename))
+            {
+                CsvRow headerRow = new CsvRow();
+                if (!headerRow[0].ToUpper().Equals("LOCATION"))
+                    throw new InvalidLocationCSVFileException("No Location header record. Header should be Location, Latitude, Longitude");
+                if (!headerRow[1].ToUpper().Equals("LATITUDE"))
+                    throw new InvalidLocationCSVFileException("No Latitude header record. Header should be Location, Latitude, Longitude");
+                if (!headerRow[0].ToUpper().Equals("LONGITUDE"))
+                    throw new InvalidLocationCSVFileException("No Longitude header record. Header should be Location, Latitude, Longitude");
+                CsvRow row = new CsvRow();
+                reader.ReadRow(headerRow);
+                while (reader.ReadRow(row))
+                {
+                    FactLocation loc = FactLocation.GetLocation(row[0], row[1], row[2], FactLocation.Geocode.NOT_SEARCHED, true);
+                    rowCount++;
+                }
+            }
+            MessageBox.Show("Loaded " + rowCount + " locations from file " + csvFilename, "FTAnalyzer");
+        }
         #endregion
 
         #region Dispose
