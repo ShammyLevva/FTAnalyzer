@@ -117,7 +117,7 @@ namespace FTAnalyzer
                 {
                     if (note.ChildNodes.Count > 0)
                     {
-                        GetContinuationText(note.ChildNodes);
+                        result.AppendLine(GetContinuationText(note.ChildNodes));
                         result.AppendLine();
                     }
                     XmlAttribute ID = note.Attributes["REF"];
