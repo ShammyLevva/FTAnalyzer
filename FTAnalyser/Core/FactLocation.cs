@@ -413,7 +413,7 @@ namespace FTAnalyzer
             return GetLocation(place, string.Empty, string.Empty, Geocode.NOT_SEARCHED, addLocation);
         }
 
-        public static FactLocation GetLocation(string place, string latitude, string longitude, Geocode status, bool addLocation = true)
+        public static FactLocation GetLocation(string place, string latitude, string longitude, Geocode status, bool addLocation = true, bool updateLatLong = false)
         {
             FactLocation result;
             FactLocation temp;
@@ -424,11 +424,23 @@ namespace FTAnalyzer
             {
                 result = new FactLocation(place, latitude, longitude, status);
                 if (locations.TryGetValue(result.ToString(), out temp))
+                {
+                    if (updateLatLong && !temp.IsGeoCoded(true))
+                    {  // we are updating the old value isn't geocoded so we can overwrite
+                        temp.Latitude = result.Latitude;
+                        temp.LatitudeM = result.LatitudeM;
+                        temp.Longitude = result.Longitude;
+                        temp.LongitudeM = result.LongitudeM;
+                        SaveLocationToDatabase(temp);
+                    }
                     return temp;
+                }
                 else
                 {
                     if (addLocation)
                     {
+                        if (updateLatLong)
+                            SaveLocationToDatabase(result);
                         locations.Add(result.ToString(), result);
                         if (result.Level > COUNTRY)
                         {   // recusive call to GetLocation forces create of lower level objects and stores in locations
@@ -438,6 +450,23 @@ namespace FTAnalyzer
                 }
             }
             return result; // should return object that is in list of locations 
+        }
+
+        private static void SaveLocationToDatabase(FactLocation loc)
+        {
+            loc.GeocodeStatus = FactLocation.Geocode.GEDCOM_USER;
+            loc.FoundLocation = string.Empty;
+            loc.FoundLevel = -2;
+            loc.ViewPort = new GeoResponse.CResult.CGeometry.CViewPort();
+            if (DatabaseHelper.Instance.IsLocationInDatabase(loc.ToString()))
+            {   // check whether the location in database is geocoded.
+                FactLocation inDatabase = new FactLocation(loc.ToString());
+                DatabaseHelper.Instance.GetLocationDetails(inDatabase);
+                if(!inDatabase.IsGeoCoded(true))
+                    DatabaseHelper.Instance.UpdateGeocode(loc); // only update if existing record wasn't geocoded
+            }
+            else
+                DatabaseHelper.Instance.InsertGeocode(loc);
         }
 
         public static FactLocation LookupLocation(string place)

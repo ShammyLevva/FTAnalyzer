@@ -174,6 +174,7 @@ namespace FTAnalyzer
             openToolStripMenuItem.Enabled = true;
             databaseToolStripMenuItem.Enabled = true;
             mnuRestore.Enabled = false;
+            mnuLoadLocationsCSV.Enabled = false;
         }
 
         private void CloseGEDCOM(bool keepOutput)
@@ -285,6 +286,7 @@ namespace FTAnalyzer
             ft.ResetData();
             EnableLoadMenus();
             mnuRestore.Enabled = true;
+            mnuLoadLocationsCSV.Enabled = true;
             mnuCloseGEDCOM.Enabled = false;
             BuildRecentList();
         }
@@ -1052,6 +1054,7 @@ namespace FTAnalyzer
                     {
                         tabSelector.SelectedTab = tabDisplayProgress;
                         mnuRestore.Enabled = true;
+                        mnuLoadLocationsCSV.Enabled = true;
                         MessageBox.Show(Properties.ErrorMessages.FTA_0002, "Error : FTA_0002");
                     }
                     return;
@@ -2807,7 +2810,7 @@ namespace FTAnalyzer
 
         private void mnuLoadLocationsCSV_Click(object sender, EventArgs e)
         {
-
+            ft.LoadCSVdata();
         }
     }
 }

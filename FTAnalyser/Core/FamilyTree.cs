@@ -2920,15 +2920,15 @@ namespace FTAnalyzer
             string csvFilename = string.Empty;
             try
             {
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                OpenFileDialog openFileDialog = new OpenFileDialog();
                 string initialDir = (string)Application.UserAppDataRegistry.GetValue("Excel Export Individual Path");
-                saveFileDialog.InitialDirectory = initialDir == null ? Environment.SpecialFolder.MyDocuments.ToString() : initialDir;
-                saveFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv";
-                saveFileDialog.FilterIndex = 1;
+                openFileDialog.InitialDirectory = initialDir == null ? Environment.SpecialFolder.MyDocuments.ToString() : initialDir;
+                openFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv";
+                openFileDialog.FilterIndex = 1;
 
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    csvFilename = saveFileDialog.FileName;
+                    csvFilename = openFileDialog.FileName;
                     string path = Path.GetDirectoryName(csvFilename);
                     Application.UserAppDataRegistry.SetValue("Excel Export Individual Path", path);
                     ReadCSVdata(csvFilename);
@@ -2946,17 +2946,20 @@ namespace FTAnalyzer
             using (CsvFileReader reader = new CsvFileReader(csvFilename))
             {
                 CsvRow headerRow = new CsvRow();
-                if (!headerRow[0].ToUpper().Equals("LOCATION"))
-                    throw new InvalidLocationCSVFileException("No Location header record. Header should be Location, Latitude, Longitude");
-                if (!headerRow[1].ToUpper().Equals("LATITUDE"))
-                    throw new InvalidLocationCSVFileException("No Latitude header record. Header should be Location, Latitude, Longitude");
-                if (!headerRow[0].ToUpper().Equals("LONGITUDE"))
-                    throw new InvalidLocationCSVFileException("No Longitude header record. Header should be Location, Latitude, Longitude");
                 CsvRow row = new CsvRow();
+
                 reader.ReadRow(headerRow);
+                if (headerRow.Count != 3)
+                    throw new InvalidLocationCSVFileException("Location file should have 3 values per line.");
+                if (!headerRow[0].Trim().ToUpper().Equals("LOCATION"))
+                    throw new InvalidLocationCSVFileException("No Location header record. Header should be Location, Latitude, Longitude");
+                if (!headerRow[1].Trim().ToUpper().Equals("LATITUDE"))
+                    throw new InvalidLocationCSVFileException("No Latitude header record. Header should be Location, Latitude, Longitude");
+                if (!headerRow[2].Trim().ToUpper().Equals("LONGITUDE"))
+                    throw new InvalidLocationCSVFileException("No Longitude header record. Header should be Location, Latitude, Longitude");
                 while (reader.ReadRow(row))
                 {
-                    FactLocation loc = FactLocation.GetLocation(row[0], row[1], row[2], FactLocation.Geocode.NOT_SEARCHED, true);
+                    FactLocation loc = FactLocation.GetLocation(row[0], row[1], row[2], FactLocation.Geocode.NOT_SEARCHED, true, true);
                     rowCount++;
                 }
             }
