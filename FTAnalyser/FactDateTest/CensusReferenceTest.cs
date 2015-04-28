@@ -136,6 +136,11 @@ namespace CensusReferenceTest
             Assert.IsTrue(censusRef.Roll.Equals("1462"));
             Assert.IsTrue(censusRef.ED.Equals("193"));
             Assert.IsTrue(censusRef.Page.Equals("14B"));
+
+            censusRef = new CensusReference("I1", "1911 census - Piece 28628, SN 176", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
+            Assert.IsTrue(censusRef.Piece.Equals("28628"));
+            Assert.IsTrue(censusRef.Schedule.Equals("176"));
         }
     }
 }
