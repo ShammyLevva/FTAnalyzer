@@ -2810,7 +2810,11 @@ namespace FTAnalyzer
 
         private void mnuLoadLocationsCSV_Click(object sender, EventArgs e)
         {
-            ft.LoadCSVdata();
+            DialogResult result = MessageBox.Show("It is recommended you backup your Geocoding database first.\nDo you want to backup now?", "FTAnalyzer", MessageBoxButtons.YesNoCancel);
+            if(result == System.Windows.Forms.DialogResult.Yes)
+                ft.BackupDatabase(saveDatabase, "FT Analyzer zip file created by v" + VERSION);
+            if(result != System.Windows.Forms.DialogResult.Cancel)
+                ft.LoadCSVdata();
         }
     }
 }
