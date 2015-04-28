@@ -666,9 +666,12 @@ namespace FTAnalyzer
 
         public string ReferralFamilyID { get; set; }
 
-        public Fact LostCousinsCensusFact(Fact lcFact)
+        public Fact GetCensusFact(Fact lcFact, bool includeCreated = true)
         {
-            return facts.FirstOrDefault(x => x.IsCensusFact && x.FactDate.Overlaps(lcFact.FactDate));
+            if(includeCreated)
+                return facts.FirstOrDefault(x => x.IsCensusFact && x.FactDate.Overlaps(lcFact.FactDate));
+            else
+                return facts.FirstOrDefault(x => x.IsCensusFact && !x.Created && x.FactDate.Overlaps(lcFact.FactDate));
         }
 
         public bool IsLostCousinsEntered(CensusDate when) { return IsLostCousinsEntered(when, true); }
@@ -680,7 +683,7 @@ namespace FTAnalyzer
                 {
                     if (f.Location.CensusCountryMatches(when.Country, includeUnknownCountries) || this.BestLocation(when).CensusCountryMatches(when.Country, includeUnknownCountries))
                         return true;
-                    Fact censusFact = LostCousinsCensusFact(f);
+                    Fact censusFact = GetCensusFact(f);
                     if (censusFact != null)
                     {
                         if (when.Country.Equals(Countries.SCOTLAND) && Countries.IsEnglandWales(censusFact.Country))
@@ -885,6 +888,8 @@ namespace FTAnalyzer
                             cr.Fact.Sources.Add(s);
                             toAdd.Add(cr.Fact);
                         }
+                        else
+                            UpdateCensusFactReference(cr);
                     }
                 }
             }
@@ -907,6 +912,8 @@ namespace FTAnalyzer
                     CensusReference cr = new CensusReference(IndividualID, notes, false);
                     if (OKtoAddReference(cr, false)) // add census fact even if other created census facts exist for that year
                         AddFact(cr.Fact);
+                    else
+                        UpdateCensusFactReference(cr);
                     if (cr.MatchString.Length > 0)
                     {
                         int pos = notes.IndexOf(cr.MatchString, StringComparison.InvariantCultureIgnoreCase);
@@ -920,6 +927,13 @@ namespace FTAnalyzer
                 if(notes.Length > 10) // no point recording really short notes 
                     UnrecognisedCensusNotes = IndividualID + ": " + Name + ". Notes : " + notes;
             }
+        }
+
+        private void UpdateCensusFactReference(CensusReference cr)
+        {
+            Fact censusFact = GetCensusFact(cr.Fact, false);
+            if (censusFact != null && censusFact.CensusReference.Status.Equals(CensusReference.ReferenceStatus.BLANK))
+                censusFact.SetCensusReferenceDetails(cr, CensusLocation.UNKNOWN, string.Empty);
         }
 
         private bool OKtoAddReference(CensusReference cr, bool includeCreated)

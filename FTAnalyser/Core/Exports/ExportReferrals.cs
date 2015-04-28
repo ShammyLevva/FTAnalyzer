@@ -15,7 +15,7 @@ namespace FTAnalyzer
         {
             this.ind = ind;
             this.f = f;
-            this.censusFact = ind.LostCousinsCensusFact(f);
+            this.censusFact = ind.GetCensusFact(f);
             this.ShortCode = GetShortCode();
             this.RelationType = SetRelationType();
             this.Include = ind.IsBloodDirect;
