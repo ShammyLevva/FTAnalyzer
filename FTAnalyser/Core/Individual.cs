@@ -932,7 +932,8 @@ namespace FTAnalyzer
         private void UpdateCensusFactReference(CensusReference cr)
         {
             Fact censusFact = GetCensusFact(cr.Fact, false);
-            if (censusFact != null && censusFact.CensusReference.Status.Equals(CensusReference.ReferenceStatus.BLANK))
+            if (censusFact != null && censusFact.CensusReference.Status.Equals(CensusReference.ReferenceStatus.BLANK)
+                && (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD) || cr.Status.Equals(CensusReference.ReferenceStatus.INCOMPLETE)))
                 censusFact.SetCensusReferenceDetails(cr, CensusLocation.UNKNOWN, string.Empty);
         }
 
