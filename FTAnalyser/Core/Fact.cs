@@ -631,7 +631,7 @@ namespace FTAnalyzer
                 Location = cl.Equals(CensusLocation.UNKNOWN) ? 
                     FactLocation.GetLocation(cr.Country, Properties.GeneralSettings.Default.AddCreatedLocations) :
                     FactLocation.GetLocation(cl.Location, Properties.GeneralSettings.Default.AddCreatedLocations);
-            if (Comment.Length > 0)
+            if (Comment.Length == 0 && comment.Length > 0)
                 Comment = comment;
         }
 
