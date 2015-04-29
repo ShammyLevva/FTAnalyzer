@@ -141,6 +141,58 @@ namespace CensusReferenceTest
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
             Assert.IsTrue(censusRef.Piece.Equals("28628"));
             Assert.IsTrue(censusRef.Schedule.Equals("176"));
+
+            censusRef = new CensusReference("I1", "Year: 1900; Census Place: South Prairie, Pierce,Washington; Roll: T623_1748; Page: 4B; Enumeration District: 160.", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.USCENSUS1900));
+            Assert.IsTrue(censusRef.Roll.Equals("T623_1748"));
+            Assert.IsTrue(censusRef.ED.Equals("160"));
+            Assert.IsTrue(censusRef.Page.Equals("4B"));
+
+            censusRef = new CensusReference("I1", "Class: RG14; Piece: 12577; Schedule Number: 103", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
+            Assert.IsTrue(censusRef.Piece.Equals("12577"));
+            Assert.IsTrue(censusRef.Schedule.Equals("103"));
+
+            censusRef = new CensusReference("I1", "Parish: Inverurie; ED: 4; Page: 12; Line: 3; Roll: CSSCT1901_69", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(FactDate.UNKNOWN_DATE));
+            Assert.IsTrue(censusRef.ED.Equals("4"));
+            Assert.IsTrue(censusRef.Page.Equals("12"));
+            Assert.IsTrue(censusRef.Parish.Equals("Inverurie"));
+
+            censusRef = new CensusReference("I1", "Database online. Class: HO107; Piece 709; Book: 6; Civil Parish: StLeonard Shoreditch; County: Middlesex; Enumeration District: 19;Folio: 53; Page: 15; Line: 16; GSU roll: 438819.", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1841));
+            Assert.IsTrue(censusRef.Piece.Equals("709"));
+            Assert.IsTrue(censusRef.Book.Equals("6"));
+            Assert.IsTrue(censusRef.Folio.Equals("53"));
+            Assert.IsTrue(censusRef.Page.Equals("15"));
+
+            censusRef = new CensusReference("I1", "HO107, Piece 704, Folio 11, Page  14", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1841));
+            Assert.IsTrue(censusRef.Piece.Equals("704"));
+            Assert.IsTrue(censusRef.Folio.Equals("11"));
+            Assert.IsTrue(censusRef.Page.Equals("14"));
+
+            censusRef = new CensusReference("I1", "Database online. Class: HO107; Piece: 1782; Folio: 719; Page: 25; GSU", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1851));
+            Assert.IsTrue(censusRef.Piece.Equals("1782"));
+            Assert.IsTrue(censusRef.Folio.Equals("719"));
+            Assert.IsTrue(censusRef.Page.Equals("25"));
+
+            censusRef = new CensusReference("I1", "Database online. Class: RG9; Piece: 1105; Folio: 90; Page: 21; GSU", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1861));
+            Assert.IsTrue(censusRef.Piece.Equals("1105"));
+            Assert.IsTrue(censusRef.Folio.Equals("90"));
+            Assert.IsTrue(censusRef.Page.Equals("21"));
+
+            censusRef = new CensusReference("I1", "RG14PN22623 RG78PN1327 RD455 SD10 ED13 SN183", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
+            Assert.IsTrue(censusRef.Piece.Equals("22623"));
+            Assert.IsTrue(censusRef.Schedule.Equals("183"));
+
+            censusRef = new CensusReference("I1", "RG14; Piece: 21983", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
+            Assert.IsTrue(censusRef.Piece.Equals("21983"));
+            Assert.IsTrue(censusRef.Status.Equals(CensusReference.ReferenceStatus.INCOMPLETE));
         }
     }
 }

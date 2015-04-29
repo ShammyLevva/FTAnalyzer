@@ -11,14 +11,7 @@ namespace FTAnalyzer
     public class CensusReference : IComparable<CensusReference>
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        //Database online. Class: HO107; Piece: 1782; Folio: 719; Page: 25; GSU
-        //Database online. Class: HO107; Piece 709; Book: 6; Civil Parish: StLeonard Shoreditch; County: Middlesex; Enumeration District: 19;Folio: 53; Page: 15; Line: 16; GSU roll: 438819.
-        //Database online. Class: RG9; Piece: 1105; Folio: 90; Page: 21; GSU
-        //RG14PN22623 RG78PN1327 RD455 SD10 ED13 SN183
-        //Parish: Inverurie; ED: 4; Page: 12; Line: 3; Roll: CSSCT1901_69
-        //Class: RG14; Piece: 21983
-        //Class: RG14; Piece: 12577; Schedule Number: 103
-        //Year: 1900; Census Place: South Prairie, Pierce,Washington; Roll: T623_1748; Page: 4B; Enumeration District: 160.
+       
         private static readonly string EW_CENSUS_PATTERN = @"RG *(\d{1,3})[;,]? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_PATTERN2 = @"RG *(\d{1,3})[;,]? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
         private static readonly string EW_CENSUS_PATTERN3 = @"(\d{4}) Census.*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Book:? *(\d{1,3}[;,]?).*?Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
@@ -36,7 +29,7 @@ namespace FTAnalyzer
         
         private static readonly string EW_CENSUS_1841_51_PATTERN = @"HO *107[;,]? *Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN2 = @"HO *107[;,]? *Piece:? *(\d{1,5})[;,]? *Book:? *(\d{1,3})[;,]?.*?Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_51_PATTERN3 = @"HO *107[;,]? *Piece:? *(\d{1,5})[;,]? *(Book\/)?Folio:? *(\d{1,3}[a-z]?)\/(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
+        private static readonly string EW_CENSUS_1841_51_PATTERN3 = @"HO *107[;,]? *Piece:? *(\d{1,5})[;,]? *(Book\/)?Folio:? *(\d{1,3}[a-z]?)?\/?(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN4 = @"HO *107[;,]? *Piece:? *(\d{1,5})[;,]? *Book:? *(\d{1,3}[;,]?).*?Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN5 = @"HO *107[;,]? *Piece:? *(\d{1,5})[;,]?.*?Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH = @"HO *107\/(\d{1,5})\/(\d{1,3}) .*?F(olio)? *(\d{1,4}[a-z]?) p(age)? *(\d{1,3})";
