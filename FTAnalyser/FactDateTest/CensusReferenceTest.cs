@@ -193,6 +193,12 @@ namespace CensusReferenceTest
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
             Assert.IsTrue(censusRef.Piece.Equals("21983"));
             Assert.IsTrue(censusRef.Status.Equals(CensusReference.ReferenceStatus.INCOMPLETE));
+
+            //censusRef = new CensusReference("I1", "RG14, Piece 00866, Registration District 10, Sub District 4, Enumeration District 25, Schedule No. 63", false);
+            //Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
+            //Assert.IsTrue(censusRef.Piece.Equals("866"));
+            //Assert.IsTrue(censusRef.Schedule.Equals("63"));
+
         }
     }
 }

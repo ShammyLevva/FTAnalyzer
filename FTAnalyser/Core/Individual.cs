@@ -905,7 +905,7 @@ namespace FTAnalyzer
             if (HasNotes)
             {
                 bool checkNotes = true;
-                string notes = EnhancedTextInfo.ClearWhiteSpace(Notes);
+                string notes = EnhancedTextInfo.ClearWhiteSpace(CensusReference.ClearCommonPhrases(Notes));
                 while (checkNotes)
                 {
                     checkNotes = false;
