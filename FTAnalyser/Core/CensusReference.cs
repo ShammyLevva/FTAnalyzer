@@ -55,10 +55,10 @@ namespace FTAnalyzer
         private static readonly string SCOT_CENSUS_PATTERN2 = @"(\(?GROS *\)?)?(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
         private static readonly string SCOT_CENSUS_PATTERN3 = @"(\(?GROS *\)?)?(\d{3}[AB]?)\/(\d{2}[AB]?) Page:? *(\d{1,4})";
 
-        private static readonly string US_CENSUS_PATTERN = @"Year:? *(\d{4});? *Census Place:? *(.*?)[;,]? *Roll:? *(.*?)[;,]? *Page:? *(\d{1,4}[AB]?)[,;]? *(Enumeration District|\(?ED\)?):? *(\d{1,5}[AB]?-?\d{0,2}[AB]?)";
-        private static readonly string US_CENSUS_1940_PATTERN1 = @"District:? *(\d{1,2}[AB]?-\d{1,2}[AB]?).*?(Sheet( Number and Letter)|Page):? *(\d{1,3}[AB]?).*?T627 ?,? *(Affiliate Film Number):? ?(\d{1,5}-?[AB]?)";
-        private static readonly string US_CENSUS_1940_PATTERN2 = @"(Enumeration district) *(\(?ED\)?):? *(\d{1,2}[AB]?-\d{1,2}[AB]?).*?[;,]? *(sheet|page):? *(\d{1,3}[AB]?).*?T627.*?roll:? ?(\d{1,5}-?[AB]?)";
-        private static readonly string US_CENSUS_1940_PATTERN3 = @"Year:? *1940;?.*?Roll:? *T627_(.*?)[;,]? *Page:? *(\d{1,4}[AB]?)[,;]? *(Enumeration District):? *(\(?ED\)?:?)? *(\d{1,2}[AB]?-\d{1,2}[AB]?)";
+        private static readonly string US_CENSUS_PATTERN = @"Year:? *(\d{4});? *Census Place:? *(.*?)[;,]? *Roll:? *(.*?)[;,]? *Page:? *(\d{1,4}[AB]?)[,;]? *ED *(\d{1,5}[AB]?-?\d{0,2}[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN1 = @"District:? *(\d{1,2}[AB]?-\d{1,2}[AB]?).*?Page:? *(\d{1,3}[AB]?).*?T627 ?,? *(\d{1,5}-?[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN2 = @"ED *(\d{1,2}[AB]?-\d{1,2}[AB]?).*?[;,]? *page:? *(\d{1,3}[AB]?).*?T627.*?roll:? ?(\d{1,5}-?[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN3 = @"Year:? *1940;?.*?Roll:? *T627_(.*?)[;,]? *Page:? *(\d{1,4}[AB]?)[,;]? *ED *(\d{1,2}[AB]?-\d{1,2}[AB]?)";
 
         private static readonly string LC_CENSUS_PATTERN_EW = @"(\d{1,5})\/(\d{1,3})\/(d{1,3}).*?England & Wales (1841|1881)";
         private static readonly string LC_CENSUS_PATTERN_1911_EW = @"(\d{1,5})\/(\d{1,3}).*?England & Wales 1911";
@@ -210,17 +210,21 @@ namespace FTAnalyzer
 
         public static string ClearCommonPhrases(string input)
         {
-            return input.Replace("Registration District", "RD")
-                        .Replace(".", " ").Replace(";", " ")
-                        .Replace("~", " ").Replace(",", " ")
-                        .Replace("(", "").Replace(")", "")
-                        .Replace("{", "").Replace("}", "")
-                        .Replace("Pg", "Page").Replace(":", " ")
-                        .Replace("PN", "Piece")
-                        .Replace("Schedule No", "SN")
-                        .Replace("Schedule Number", "SN")
-                        .Replace("Enumeration District ED", "ED")
-                        .Replace("Enumeration District", "ED");
+            return input.Replace("Registration District", "RD", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace(".", " ").Replace(";", " ", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("~", " ").Replace(",", " ", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("(", "").Replace(")", "", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("{", "").Replace("}", "", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("Pg", "Page").Replace(":", " ", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("PN", "Piece", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("Schedule No", "SN", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("Schedule Number", "SN", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("Enumeration District ED", "ED", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("Enumeration District", "ED", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("Sub District", "SD", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("Sheet number and letter", "Page", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("Sheet", "Page", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("Affiliate Film Number", " ", StringComparison.InvariantCultureIgnoreCase);
         }
 
         private bool CheckPatterns(string text)
@@ -696,8 +700,7 @@ namespace FTAnalyzer
                 this.Place = matcher.Groups[2].ToString();
                 this.Roll = matcher.Groups[3].ToString();
                 this.Page = matcher.Groups[4].ToString();
-                if (matcher.Groups.Count == 7)
-                    this.ED = matcher.Groups[6].ToString();
+                this.ED = matcher.Groups[5].ToString();
                 this.IsUKCensus = false;
                 this.Country = Countries.UNITED_STATES;
                 this.Status = ReferenceStatus.GOOD;
@@ -708,9 +711,9 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = "US1940";
-                this.Roll = "T627_" + matcher.Groups[6].ToString();
+                this.Roll = "T627_" + matcher.Groups[3].ToString();
                 this.ED = matcher.Groups[1].ToString();
-                this.Page = matcher.Groups[4].ToString();
+                this.Page = matcher.Groups[2].ToString();
                 this.IsUKCensus = false;
                 this.Country = Countries.UNITED_STATES;
                 this.Status = ReferenceStatus.GOOD;
@@ -721,9 +724,9 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = "US1940";
-                this.Roll = "T627_" + matcher.Groups[6].ToString();
-                this.ED = matcher.Groups[3].ToString();
-                this.Page = matcher.Groups[5].ToString();
+                this.Roll = "T627_" + matcher.Groups[3].ToString();
+                this.ED = matcher.Groups[1].ToString();
+                this.Page = matcher.Groups[2].ToString();
                 this.IsUKCensus = false;
                 this.Country = Countries.UNITED_STATES;
                 this.Status = ReferenceStatus.GOOD;

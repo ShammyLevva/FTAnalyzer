@@ -64,11 +64,6 @@ namespace CensusReferenceTest
         public void CensusReferenceConstructorTest()
         {
             CensusReference censusRef;
-            censusRef = new CensusReference("I1", "HO107 Piece: 1607 Folio: 880 Page: 29", false);
-            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1851));
-            Assert.IsTrue(censusRef.Piece.Equals("1607"));
-            Assert.IsTrue(censusRef.Folio.Equals("880"));
-            Assert.IsTrue(censusRef.Page.Equals("29"));
 
             censusRef = new CensusReference("I1", "            RG11 piece 870 folio 49 page 10", false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1881));
@@ -82,42 +77,16 @@ namespace CensusReferenceTest
             Assert.IsTrue(censusRef.Folio.Equals("49"));
             Assert.IsTrue(censusRef.Page.Equals("10"));
 
-            censusRef = new CensusReference("I1", "HO107 piece 729 folio 5/15 page 6", false);
-            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1841));
-            Assert.IsTrue(censusRef.Piece.Equals("729"));
-            Assert.IsTrue(censusRef.Book.Equals("5"));
-            Assert.IsTrue(censusRef.Folio.Equals("15"));
-            Assert.IsTrue(censusRef.Page.Equals("6"));
-
-            censusRef = new CensusReference("I1", "HO107 piece 2195 folio 507 page 71", false);
-            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1851));
-            Assert.IsTrue(censusRef.Piece.Equals("2195"));
-            Assert.IsTrue(censusRef.Folio.Equals("507"));
-            Assert.IsTrue(censusRef.Page.Equals("71"));
-
-            censusRef = new CensusReference("I1", "District: 1-2 , Family Number: 251 , Sheet Number and Letter: 10B , Line Number: 78 , Affiliate Publication Number: T627 , Affiliate Film Number: 544 , Digital Folder Number: 005449024 , Image Number: 00057", false);
-            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.USCENSUS1940));
-            Assert.IsTrue(censusRef.Roll.Equals("T627_544"));
-            Assert.IsTrue(censusRef.ED.Equals("1-2"));
-            Assert.IsTrue(censusRef.Page.Equals("10B"));
-
-            censusRef = new CensusReference("I1", "enumeration district (ED) 1-2, sheet 10B, family 251, NARA digital publication T627 (Washington, D.C.: National Archives and Records Administration, 2012), roll 544.", false);
-            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.USCENSUS1940));
-            Assert.IsTrue(censusRef.Roll.Equals("T627_544"));
-            Assert.IsTrue(censusRef.ED.Equals("1-2"));
-            Assert.IsTrue(censusRef.Page.Equals("10B"));
-
-            censusRef = new CensusReference("I1", "Year: 1940; Census Place: Smyrna, Kent, Delaware; Roll: T627_544; Page: 10B; Enumeration District: 1-2", false);
-            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.USCENSUS1940));
-            Assert.IsTrue(censusRef.Roll.Equals("T627_544"));
-            Assert.IsTrue(censusRef.ED.Equals("1-2"));
-            Assert.IsTrue(censusRef.Page.Equals("10B"));
-
-            censusRef = new CensusReference("I1", "HO107, Piece 704, Folio 11, Page  14", false);
-            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1841));
-            Assert.IsTrue(censusRef.Piece.Equals("704"));
-            Assert.IsTrue(censusRef.Folio.Equals("11"));
-            Assert.IsTrue(censusRef.Page.Equals("14"));
+            USCensusTest("District: 1-2 , Family Number: 251 , Sheet Number and Letter: 10B , Line Number: 78 , Affiliate Publication Number: T627 , Affiliate Film Number: 544 , Digital Folder Number: 005449024 , Image Number: 00057",
+                CensusDate.USCENSUS1940, "T627_544", "1-2", "10B");
+            USCensusTest("enumeration district (ED) 1-2, sheet 10B, family 251, NARA digital publication T627 (Washington, D.C.: National Archives and Records Administration, 2012), roll 544.",
+                CensusDate.USCENSUS1940, "T627_544", "1-2", "10B");
+            USCensusTest("Year: 1940; Census Place: Smyrna, Kent, Delaware; Roll: T627_544; Page: 10B; Enumeration District: 1-2",
+                CensusDate.USCENSUS1940, "T627_544", "1-2", "10B");
+            USCensusTest("Year: 1930; Census Place: Sea Cliff, Nassau, New York; Roll: 1462; Page: 14B; Enumeration District: 193;",
+                CensusDate.USCENSUS1930, "1462", "193", "14B");
+            USCensusTest("Year: 1900; Census Place: South Prairie, Pierce,Washington; Roll: T623_1748; Page: 4B; Enumeration District: 160.",
+                CensusDate.USCENSUS1900, "T623_1748", "160", "4B");
 
             censusRef = new CensusReference("I1", "in the 1851 census, GROS 343/00 001/00 011.", false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1851));
@@ -131,52 +100,25 @@ namespace CensusReferenceTest
             Assert.IsTrue(censusRef.ED.Equals("19"));
             Assert.IsTrue(censusRef.Page.Equals("8"));
 
-            censusRef = new CensusReference("I1", "Year: 1930; Census Place: Sea Cliff, Nassau, New York; Roll: 1462; Page: 14B; Enumeration District: 193;", false);
-            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.USCENSUS1930));
-            Assert.IsTrue(censusRef.Roll.Equals("1462"));
-            Assert.IsTrue(censusRef.ED.Equals("193"));
-            Assert.IsTrue(censusRef.Page.Equals("14B"));
-
-            censusRef = new CensusReference("I1", "1911 census - Piece 28628, SN 176", false);
-            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
-            Assert.IsTrue(censusRef.Piece.Equals("28628"));
-            Assert.IsTrue(censusRef.Schedule.Equals("176"));
-
-            censusRef = new CensusReference("I1", "Year: 1900; Census Place: South Prairie, Pierce,Washington; Roll: T623_1748; Page: 4B; Enumeration District: 160.", false);
-            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.USCENSUS1900));
-            Assert.IsTrue(censusRef.Roll.Equals("T623_1748"));
-            Assert.IsTrue(censusRef.ED.Equals("160"));
-            Assert.IsTrue(censusRef.Page.Equals("4B"));
-
-            censusRef = new CensusReference("I1", "Class: RG14; Piece: 12577; Schedule Number: 103", false);
-            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
-            Assert.IsTrue(censusRef.Piece.Equals("12577"));
-            Assert.IsTrue(censusRef.Schedule.Equals("103"));
-
             censusRef = new CensusReference("I1", "Parish: Inverurie; ED: 4; Page: 12; Line: 3; Roll: CSSCT1901_69", false);
             Assert.IsTrue(censusRef.CensusYear.Equals(FactDate.UNKNOWN_DATE));
             Assert.IsTrue(censusRef.ED.Equals("4"));
             Assert.IsTrue(censusRef.Page.Equals("12"));
             Assert.IsTrue(censusRef.Parish.Equals("Inverurie"));
 
-            censusRef = new CensusReference("I1", "Database online. Class: HO107; Piece 709; Book: 6; Civil Parish: StLeonard Shoreditch; County: Middlesex; Enumeration District: 19;Folio: 53; Page: 15; Line: 16; GSU roll: 438819.", false);
-            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1841));
-            Assert.IsTrue(censusRef.Piece.Equals("709"));
-            Assert.IsTrue(censusRef.Book.Equals("6"));
-            Assert.IsTrue(censusRef.Folio.Equals("53"));
-            Assert.IsTrue(censusRef.Page.Equals("15"));
+            CensusHO107Test("HO107 Piece: 1607 Folio: 880 Page: 29", CensusDate.UKCENSUS1851, "1607", string.Empty, "880", "29");
+            CensusHO107Test("HO107 piece 729 folio 5/15 page 6", CensusDate.UKCENSUS1841, "729", "5", "15", "6");
+            CensusHO107Test("HO107 piece 2195 folio 507 page 71", CensusDate.UKCENSUS1851, "2195", string.Empty, "507", "71");
+            CensusHO107Test("Database online. Class: HO107; Piece 709; Book: 6; Civil Parish: StLeonard Shoreditch; County: Middlesex; Enumeration District: 19;Folio: 53; Page: 15; Line: 16; GSU roll: 438819.", CensusDate.UKCENSUS1841, "709", "6", "53", "15");
+            CensusHO107Test("HO107, Piece 704, Folio 11, Page  14", CensusDate.UKCENSUS1841, "704", string.Empty, "11", "14");
+            CensusHO107Test("Database online. Class: HO107; Piece: 1782; Folio: 719; Page: 25; GSU", CensusDate.UKCENSUS1851, "1782", string.Empty, "719", "25");
 
-            censusRef = new CensusReference("I1", "HO107, Piece 704, Folio 11, Page  14", false);
-            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1841));
-            Assert.IsTrue(censusRef.Piece.Equals("704"));
-            Assert.IsTrue(censusRef.Folio.Equals("11"));
-            Assert.IsTrue(censusRef.Page.Equals("14"));
-
-            censusRef = new CensusReference("I1", "Database online. Class: HO107; Piece: 1782; Folio: 719; Page: 25; GSU", false);
-            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1851));
-            Assert.IsTrue(censusRef.Piece.Equals("1782"));
-            Assert.IsTrue(censusRef.Folio.Equals("719"));
-            Assert.IsTrue(censusRef.Page.Equals("25"));
+            Census1911Test("1911 census - Piece 22623, SN 183", "22623", "183");
+            Census1911Test("1911 census - Piece: 22623, SN: 183", "22623", "183");
+            Census1911Test("1911 census - Piece: 22623; Schedule No. : 183", "22623", "183");
+            Census1911Test("Class: RG14; Piece: 22623; Schedule Number: 183", "22623", "183");
+            Census1911Test("RG14PN22623 RG78PN1327 RD455 SD10 ED13 SN183", "22623", "183");
+            //Census1911Test("RG14, Piece 00866, Registration District 10, Sub District 4, Enumeration District 25, Schedule No. 63", "866", "63");
 
             censusRef = new CensusReference("I1", "Database online. Class: RG9; Piece: 1105; Folio: 90; Page: 21; GSU", false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1861));
@@ -184,20 +126,31 @@ namespace CensusReferenceTest
             Assert.IsTrue(censusRef.Folio.Equals("90"));
             Assert.IsTrue(censusRef.Page.Equals("21"));
 
-            censusRef = new CensusReference("I1", "RG14PN22623 RG78PN1327 RD455 SD10 ED13 SN183", false);
-            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
-            Assert.IsTrue(censusRef.Piece.Equals("22623"));
-            Assert.IsTrue(censusRef.Schedule.Equals("183"));
-
             censusRef = new CensusReference("I1", "RG14; Piece: 21983", false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
             Assert.IsTrue(censusRef.Piece.Equals("21983"));
             Assert.IsTrue(censusRef.Status.Equals(CensusReference.ReferenceStatus.INCOMPLETE));
+        }
 
-            //censusRef = new CensusReference("I1", "RG14, Piece 00866, Registration District 10, Sub District 4, Enumeration District 25, Schedule No. 63", false);
-            //Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
-            //Assert.IsTrue(censusRef.Piece.Equals("866"));
-            //Assert.IsTrue(censusRef.Schedule.Equals("63"));
+        private void USCensusTest(string reference, FactDate year, string roll, string ED, string page)
+        {
+            CensusReference censusRef = new CensusReference("I1", reference, false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(year));
+            Assert.IsTrue(censusRef.Roll.Equals(roll));
+            Assert.IsTrue(censusRef.ED.Equals(ED));
+            Assert.IsTrue(censusRef.Page.Equals(page));
+        }
+
+        private void Census1911Test(string reference, string piece, string schedule)
+        {
+            CensusReference censusRef = new CensusReference("I1", reference, false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
+            Assert.IsTrue(censusRef.Piece.Equals(piece));
+            Assert.IsTrue(censusRef.Schedule.Equals(schedule));
+        }
+
+        private void CensusHO107Test(string reference, FactDate year, string piece, string book, string folio, string page)
+        {
 
         }
     }

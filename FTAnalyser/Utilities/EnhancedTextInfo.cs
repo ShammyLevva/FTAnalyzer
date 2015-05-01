@@ -6,7 +6,7 @@ using System.Globalization;
 
 namespace FTAnalyzer.Utilities
 {
-    public class EnhancedTextInfo
+    public static class EnhancedTextInfo
     {
         private static TextInfo txtInfo = new CultureInfo("en-GB").TextInfo;
 
@@ -76,6 +76,26 @@ namespace FTAnalyzer.Utilities
             return text.Replace(System.Environment.NewLine, " ").Replace("\n", " ")
                        .Replace("\t", " ").Replace("   ", " ").Replace("  ", " ")
                        .Replace("  ", " ").Replace("  ", " ").Replace("  ", " ").Trim();
+        }
+
+        public static string Replace(this String str, string oldValue, string newValue, StringComparison comparison)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            int previousIndex = 0;
+            int index = str.IndexOf(oldValue, comparison);
+            while (index != -1)
+            {
+                sb.Append(str.Substring(previousIndex, index - previousIndex));
+                sb.Append(newValue);
+                index += oldValue.Length;
+
+                previousIndex = index;
+                index = str.IndexOf(oldValue, index, comparison);
+            }
+            sb.Append(str.Substring(previousIndex));
+
+            return sb.ToString();
         }
     }
 }
