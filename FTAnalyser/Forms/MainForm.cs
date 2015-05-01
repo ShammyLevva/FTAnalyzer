@@ -23,7 +23,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "5.0.2.4";
+        public static string VERSION = "5.0.2.5";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -1179,7 +1179,9 @@ namespace FTAnalyzer
                 else if (tabSelector.SelectedTab == tabToday)
                 {
                     bool todaysMonth = Application.UserAppDataRegistry.GetValue("Todays Events Month", "False").Equals("True");
+                    int todaysStep = Int32.Parse(Application.UserAppDataRegistry.GetValue("Todays Events Step", "5").ToString());
                     rbTodayMonth.Checked = todaysMonth;
+                    nudToday.Value = todaysStep;
                 }
                 else if (tabSelector.SelectedTab == tabLocations)
                 {
@@ -2805,6 +2807,11 @@ namespace FTAnalyzer
         private void btnUpdateTodaysEvents_Click(object sender, EventArgs e)
         {
             ShowTodaysEvents();
+        }
+
+        private void nudToday_ValueChanged(object sender, EventArgs e)
+        {
+            Application.UserAppDataRegistry.SetValue("Todays Events Step", nudToday.Value);
         }
         #endregion
 
