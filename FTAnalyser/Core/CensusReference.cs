@@ -11,7 +11,7 @@ namespace FTAnalyzer
     public class CensusReference : IComparable<CensusReference>
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-       
+
         private static readonly string EW_CENSUS_PATTERN = @"RG *(\d{1,3})[;,]? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_PATTERN2 = @"RG *(\d{1,3})[;,]? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
         private static readonly string EW_CENSUS_PATTERN3 = @"(\d{4}) Census.*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Book:? *(\d{1,3}[;,]?).*?Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
@@ -20,13 +20,13 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_PATTERN6 = @"Census[: ]*(\d{4}).*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Book:? *(\d{1,3}[;,]?).*?Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_PATTERN7 = @"Census[: ]*(\d{4}).*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_PATTERN8 = @"Census[: ]*(\d{4}).*? *Piece:? *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
-        
+
         private static readonly string EW_CENSUS_PATTERN_FH = @"RG *(\d{1,2})\/(\d{1,5}) F(olio)? ?(\d{1,4}[a-z]?) p(age)? ?(\d{1,3})";
         private static readonly string EW_CENSUS_PATTERN_FH2 = @"RG *(\d{1,2})\/(\d{1,5}) ED *(\d{1,4}[a-z]?) F(olio)? ?(\d{1,4}[a-z]?) p(age)? ?(\d{1,3})";
 
         private static readonly string EW_MISSINGCLASS_PATTERN = @"Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_MISSINGCLASS_PATTERN2 = @"Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)";
-        
+
         private static readonly string EW_CENSUS_1841_51_PATTERN = @"HO *107[;,]? *Piece:? *(\d{1,5})[;,]? *Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN2 = @"HO *107[;,]? *Piece:? *(\d{1,5})[;,]? *Book:? *(\d{1,3})[;,]?.*?Folio:? *(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN3 = @"HO *107[;,]? *Piece:? *(\d{1,5})[;,]? *(Book\/)?Folio:? *(\d{1,3}[a-z]?)?\/?(\d{1,4}[a-z]?)[;,]? *Page:? *(\d{1,3})";
@@ -36,7 +36,7 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH2 = @"HO *107\/(\d{1,5}) ED *(\d{1,4}[a-z]?) F(olio)? *(\d{1,4}[a-z]?) p(age)? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH3 = @"HO *107\/(\d{1,5}) .*?F(olio)? *(\d{1,4}[a-z]?)\/(\d{1,4}) p(age)? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH4 = @"HO *107\/(\d{1,5}) .*?F(olio)? *(\d{1,4}[a-z]?) p(age)? *(\d{1,3})";
-        
+
         private static readonly string EW_CENSUS_1911_PATTERN = @"RG *14\/? *Piece(\d{1,6}) .*?SN(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN78 = @"RG *78\/? *Piece(\d{1,6}) .*?SN(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN2 = @"RG *14[;,\/]? *Piece:? *(\d{1,6})[;,]? *SN:? *(\d{1,4})";
@@ -76,7 +76,7 @@ namespace FTAnalyzer
         public string Piece { get; private set; }
         public string Folio { get; private set; }
         public string Page { get; private set; }
-        public string Book { get; private set; } 
+        public string Book { get; private set; }
         public string Schedule { get; private set; }
         public string Parish { get; private set; }
         private string RD { get; set; }
@@ -210,12 +210,11 @@ namespace FTAnalyzer
 
         public static string ClearCommonPhrases(string input)
         {
-            return input.Replace("Registration District", "RD", StringComparison.InvariantCultureIgnoreCase)
-                        .Replace(".", " ").Replace(";", " ", StringComparison.InvariantCultureIgnoreCase)
-                        .Replace("~", " ").Replace(",", " ", StringComparison.InvariantCultureIgnoreCase)
-                        .Replace("(", "").Replace(")", "", StringComparison.InvariantCultureIgnoreCase)
-                        .Replace("{", "").Replace("}", "", StringComparison.InvariantCultureIgnoreCase)
-                        .Replace("Pg", "Page").Replace(":", " ", StringComparison.InvariantCultureIgnoreCase)
+            return input.Replace(".", " ").Replace(";", " ").Replace(":", " ")
+                        .Replace("~", " ").Replace(",", " ").Replace("(", " ")
+                        .Replace(")", " ").Replace("{", " ").Replace("}", " ")
+                        .Replace("Registration District", "RD", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("Pg", "Page", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("PN", "Piece", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Schedule No", "SN", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Schedule Number", "SN", StringComparison.InvariantCultureIgnoreCase)
