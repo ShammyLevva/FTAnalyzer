@@ -173,7 +173,6 @@ namespace FTAnalyzer
         private bool GetCensusReference(string text)
         {
             // aggressively remove multi spaces to allow for spaces in the census references
-            text = ClearCommonPhrases(text);
             if (text.Length > 0)
             {
                 if (CheckPatterns(text))
@@ -226,6 +225,7 @@ namespace FTAnalyzer
 
         private bool CheckPatterns(string text)
         {
+            text = ClearCommonPhrases(text);
             if (text.Length == 0)
                 return false;
             Match matcher = Regex.Match(text, EW_CENSUS_PATTERN, RegexOptions.IgnoreCase);
