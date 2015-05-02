@@ -55,6 +55,7 @@ namespace FTAnalyzer
         private static readonly string US_CENSUS_PATTERN = @"Year *(\d{4}) *Census *(.*?) *Roll *(.*?) *P(age)? *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
         private static readonly string US_CENSUS_PATTERN2 = @"Census *(\d{4}) *(.*?) *Roll *(.*?) *P(age)? *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
         private static readonly string US_CENSUS_PATTERN3 = @"Census *(\d{4}) *(.*?) *Ward *(.*?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?) *P(age)? *(\d{1,4}[AB]?)";
+        private static readonly string US_CENSUS_PATTERN4 = @"Census *(\d{4}) *(.*?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?) *P(age)? *(\d{1,4}[AB]?)";
         private static readonly string US_CENSUS_1940_PATTERN1 = @"District *(\d{1,5}[AB]?-?\d{0,4}[AB]?).*?P(age)? *(\d{1,3}[AB]?).*?T627 ?,? *(\d{1,5}-?[AB]?)";
         private static readonly string US_CENSUS_1940_PATTERN2 = @"ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?).*? *P(age)? *(\d{1,3}[AB]?).*?T627.*?roll ?(\d{1,5}-?[AB]?)";
         private static readonly string US_CENSUS_1940_PATTERN3 = @"Year *1940.*?Roll *T627_(.*?) *P(age)? *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
@@ -700,6 +701,19 @@ namespace FTAnalyzer
                 this.IsUKCensus = false;
                 this.Country = Countries.UNITED_STATES;
                 this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, US_CENSUS_PATTERN4, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "US" + matcher.Groups[1].ToString();
+                this.Place = GetOriginalPlace(matcher.Groups[2].ToString(), originalText, "ED");
+                this.Page = matcher.Groups[5].ToString();
+                this.ED = matcher.Groups[3].ToString();
+                this.IsUKCensus = false;
+                this.Country = Countries.UNITED_STATES;
+                this.Status = ReferenceStatus.INCOMPLETE;
                 this.MatchString = matcher.Value;
                 return true;
             }
