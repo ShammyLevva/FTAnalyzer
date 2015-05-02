@@ -52,12 +52,12 @@ namespace FTAnalyzer
         private static readonly string SCOT_CENSUS_PATTERN2 = @"(\(?GROS *\)?)?(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
         private static readonly string SCOT_CENSUS_PATTERN3 = @"(\(?GROS *\)?)?(\d{3}[AB]?)\/(\d{2}[AB]?) Page *(\d{1,4})";
 
-        private static readonly string US_CENSUS_PATTERN = @"Year *(\d{4}) *Census *(.*?) *Roll *(.*?) *P(age)? *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,2}[AB]?)";
-        private static readonly string US_CENSUS_PATTERN2 = @"Census *(\d{4}) *(.*?) *Roll *(.*?) *P(age)? *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,2}[AB]?)";
-        private static readonly string US_CENSUS_PATTERN3 = @"Census *(\d{4}) *(.*?) *Ward *(.*?) *ED *(\d{1,5}[AB]?-?\d{0,2}[AB]?) *P(age)? *(\d{1,4}[AB]?)";
-        private static readonly string US_CENSUS_1940_PATTERN1 = @"District *(\d{1,2}[AB]?-\d{1,2}[AB]?).*?Page *(\d{1,3}[AB]?).*?T627 ?,? *(\d{1,5}-?[AB]?)";
-        private static readonly string US_CENSUS_1940_PATTERN2 = @"ED *(\d{1,2}[AB]?-\d{1,2}[AB]?).*? *page *(\d{1,3}[AB]?).*?T627.*?roll ?(\d{1,5}-?[AB]?)";
-        private static readonly string US_CENSUS_1940_PATTERN3 = @"Year *1940.*?Roll *T627_(.*?) *Page *(\d{1,4}[AB]?) *ED *(\d{1,2}[AB]?-\d{1,2}[AB]?)";
+        private static readonly string US_CENSUS_PATTERN = @"Year *(\d{4}) *Census *(.*?) *Roll *(.*?) *P(age)? *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
+        private static readonly string US_CENSUS_PATTERN2 = @"Census *(\d{4}) *(.*?) *Roll *(.*?) *P(age)? *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
+        private static readonly string US_CENSUS_PATTERN3 = @"Census *(\d{4}) *(.*?) *Ward *(.*?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?) *P(age)? *(\d{1,4}[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN1 = @"District *(\d{1,5}[AB]?-?\d{0,4}[AB]?).*?Page *(\d{1,3}[AB]?).*?T627 ?,? *(\d{1,5}-?[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN2 = @"ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?).*? *page *(\d{1,3}[AB]?).*?T627.*?roll ?(\d{1,5}-?[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN3 = @"Year *1940.*?Roll *T627_(.*?) *Page *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
 
         private static readonly string LC_CENSUS_PATTERN_EW = @"(\d{1,5})\/(\d{1,3})\/(d{1,3}).*?England & Wales (1841|1881)";
         private static readonly string LC_CENSUS_PATTERN_1911_EW = @"(\d{1,5})\/(\d{1,3}).*?England & Wales 1911";
