@@ -46,7 +46,7 @@ namespace FTAnalyzer.Utilities
 
         public static string ConvertStringArrayToString(string[] array)
         {
-            char[] charsToTrim = {',', '.', ' '};
+            char[] charsToTrim = { ',', '.', ' ' };
             StringBuilder builder = new StringBuilder();
             foreach (string value in array)
             {
@@ -71,11 +71,13 @@ namespace FTAnalyzer.Utilities
             return sb.ToString().Normalize(NormalizationForm.FormC);
         }
 
-        public static string ClearWhiteSpace(string text)
+        public static string ClearWhiteSpace(this String text)
         {
             return text.Replace(System.Environment.NewLine, " ").Replace("\n", " ")
                        .Replace("\t", " ").Replace("   ", " ").Replace("  ", " ")
-                       .Replace("  ", " ").Replace("  ", " ").Replace("  ", " ").Trim();
+                       .Replace("  ", " ").Replace("  ", " ").Replace("  ", " ")
+                       .Replace(";", " ").Replace(":", " ").Replace("~", " ")
+                       .Trim();
         }
 
         public static string Replace(this String str, string oldValue, string newValue, StringComparison comparison)

@@ -212,9 +212,7 @@ namespace FTAnalyzer
 
         public static string ClearCommonPhrases(string input)
         {
-            return EnhancedTextInfo.ClearWhiteSpace(
-                   input.Replace(".", " ").Replace(";", " ").Replace(":", " ")
-                        .Replace("~", " ").Replace(",", " ").Replace("(", " ")
+            return input.Replace(".", " ").Replace(",", " ").Replace("(", " ")
                         .Replace(")", " ").Replace("{", " ").Replace("}", " ")
                         .Replace("Registration District", "RD", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Pg", "Page", StringComparison.InvariantCultureIgnoreCase)
@@ -227,7 +225,8 @@ namespace FTAnalyzer
                         .Replace("Sheet number and letter", "Page", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Sheet", "Page", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Affiliate Film Number", " ", StringComparison.InvariantCultureIgnoreCase)
-                        .Replace("Place", " ", StringComparison.InvariantCultureIgnoreCase));
+                        .Replace("Place", " ", StringComparison.InvariantCultureIgnoreCase)
+                        .ClearWhiteSpace();
         }
 
         private bool CheckPatterns(string originalText)
@@ -665,7 +664,7 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = "US" + matcher.Groups[1].ToString();
-                this.Place = GetOriginalPlace(matcher.Groups[2].ToString(), originalText, "Roll");
+                this.Place = GetOriginalPlace(matcher.Groups[2].ToString(), originalText, "ROLL");
                 this.Roll = matcher.Groups[3].ToString();
                 this.Page = matcher.Groups[5].ToString();
                 this.ED = matcher.Groups[6].ToString();
@@ -679,7 +678,7 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = "US" + matcher.Groups[1].ToString();
-                this.Place = GetOriginalPlace(matcher.Groups[2].ToString(), originalText, "Roll");
+                this.Place = GetOriginalPlace(matcher.Groups[2].ToString(), originalText, "ROLL");
                 this.Roll = matcher.Groups[3].ToString();
                 this.Page = matcher.Groups[5].ToString();
                 this.ED = matcher.Groups[6].ToString();
@@ -693,7 +692,7 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = "US" + matcher.Groups[1].ToString();
-                this.Place = GetOriginalPlace(matcher.Groups[2].ToString(), originalText, "Ward");
+                this.Place = GetOriginalPlace(matcher.Groups[2].ToString(), originalText, "WARD");
                 this.Roll = matcher.Groups[3].ToString();
                 this.Page = matcher.Groups[6].ToString();
                 this.ED = matcher.Groups[4].ToString();
@@ -841,10 +840,12 @@ namespace FTAnalyzer
         {
             int spacePos = match.IndexOf(" ");
             string startPlace = match.Substring(0, spacePos);
-            int matchPos = originalText.IndexOf(startPlace);
-            int stopPos = originalText.IndexOf(stopText);
-            string result = originalText.Substring(matchPos, stopPos - matchPos).Replace(";", "").Trim();
-            return result;
+            int matchPos = originalText.ToUpper().IndexOf(startPlace.ToUpper());
+            int stopPos = originalText.ToUpper().IndexOf(stopText);
+            if (matchPos > -1 && stopPos > -1 && stopPos - matchPos > 0)
+                return originalText.Substring(matchPos, stopPos - matchPos).ClearWhiteSpace();
+            else
+                return match.ClearWhiteSpace();
         }
 
         private string GetUKCensusClass(string year)
