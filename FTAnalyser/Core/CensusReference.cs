@@ -12,26 +12,26 @@ namespace FTAnalyzer
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private static readonly string EW_CENSUS_PATTERN = @"RG *(\d{1,3})[;,]? *Piece *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio *(\d{1,4}[a-z]?)[;,]? *Page *(\d{1,3})";
-        private static readonly string EW_CENSUS_PATTERN2 = @"RG *(\d{1,3})[;,]? *Piece *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio *(\d{1,4}[a-z]?)";
-        private static readonly string EW_CENSUS_PATTERN3 = @"(\d{4}) Census.*? *Piece *(number|no)?[;,]? *(\d{1,5})[;,]? *Book *(\d{1,3}[;,]?).*?Folio *(\d{1,4}[a-z]?)[;,]? *Page *(\d{1,3})";
-        private static readonly string EW_CENSUS_PATTERN4 = @"(\d{4}) Census.*? *Piece *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio *(\d{1,4}[a-z]?)[;,]? *Page *(\d{1,3})";
-        private static readonly string EW_CENSUS_PATTERN5 = @"(\d{4}) Census.*? *Piece *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio *(\d{1,4}[a-z]?)";
-        private static readonly string EW_CENSUS_PATTERN6 = @"Census[: ]*(\d{4}).*? *Piece *(number|no)?[;,]? *(\d{1,5})[;,]? *Book *(\d{1,3}[;,]?).*?Folio *(\d{1,4}[a-z]?)[;,]? *Page *(\d{1,3})";
-        private static readonly string EW_CENSUS_PATTERN7 = @"Census[: ]*(\d{4}).*? *Piece *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio *(\d{1,4}[a-z]?)[;,]? *Page *(\d{1,3})";
-        private static readonly string EW_CENSUS_PATTERN8 = @"Census[: ]*(\d{4}).*? *Piece *(number|no)?[;,]? *(\d{1,5})[;,]? *Folio *(\d{1,4}[a-z]?)";
+        private static readonly string EW_CENSUS_PATTERN = @"RG *(\d{1,3}) *Piece *(number|no)? *(\d{1,5}) *Folio *(\d{1,4}[a-z]?) *Page *(\d{1,3})";
+        private static readonly string EW_CENSUS_PATTERN2 = @"RG *(\d{1,3}) *Piece *(number|no)? *(\d{1,5}) *Folio *(\d{1,4}[a-z]?)";
+        private static readonly string EW_CENSUS_PATTERN3 = @"(\d{4}) Census.*? *Piece *(number|no)? *(\d{1,5}) *Book *(\d{1,3}).*?Folio *(\d{1,4}[a-z]?) *Page *(\d{1,3})";
+        private static readonly string EW_CENSUS_PATTERN4 = @"(\d{4}) Census.*? *Piece *(number|no)? *(\d{1,5}) *Folio *(\d{1,4}[a-z]?) *Page *(\d{1,3})";
+        private static readonly string EW_CENSUS_PATTERN5 = @"(\d{4}) Census.*? *Piece *(number|no)? *(\d{1,5}) *Folio *(\d{1,4}[a-z]?)";
+        private static readonly string EW_CENSUS_PATTERN6 = @"Census[: ]*(\d{4}).*? *Piece *(number|no)? *(\d{1,5}) *Book *(\d{1,3}).*?Folio *(\d{1,4}[a-z]?) *Page *(\d{1,3})";
+        private static readonly string EW_CENSUS_PATTERN7 = @"Census[: ]*(\d{4}).*? *Piece *(number|no)? *(\d{1,5}) *Folio *(\d{1,4}[a-z]?) *Page *(\d{1,3})";
+        private static readonly string EW_CENSUS_PATTERN8 = @"Census[: ]*(\d{4}).*? *Piece *(number|no)? *(\d{1,5}) *Folio *(\d{1,4}[a-z]?)";
 
         private static readonly string EW_CENSUS_PATTERN_FH = @"RG *(\d{1,2})\/(\d{1,5}) F(olio)? ?(\d{1,4}[a-z]?) p(age)? ?(\d{1,3})";
         private static readonly string EW_CENSUS_PATTERN_FH2 = @"RG *(\d{1,2})\/(\d{1,5}) ED *(\d{1,4}[a-z]?) F(olio)? ?(\d{1,4}[a-z]?) p(age)? ?(\d{1,3})";
 
-        private static readonly string EW_MISSINGCLASS_PATTERN = @"Piece *(\d{1,5})[;,]? *Folio *(\d{1,4}[a-z]?)[;,]? *Page *(\d{1,3})";
-        private static readonly string EW_MISSINGCLASS_PATTERN2 = @"Piece *(\d{1,5})[;,]? *Folio *(\d{1,4}[a-z]?)";
+        private static readonly string EW_MISSINGCLASS_PATTERN = @"Piece *(\d{1,5}) *Folio *(\d{1,4}[a-z]?) *Page *(\d{1,3})";
+        private static readonly string EW_MISSINGCLASS_PATTERN2 = @"Piece *(\d{1,5}) *Folio *(\d{1,4}[a-z]?)";
 
-        private static readonly string EW_CENSUS_1841_51_PATTERN = @"HO *107[;,]? *Piece *(\d{1,5})[;,]? *Folio *(\d{1,4}[a-z]?)[;,]? *Page *(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_51_PATTERN2 = @"HO *107[;,]? *Piece *(\d{1,5})[;,]? *Book *(\d{1,3})[;,]?.*?Folio *(\d{1,4}[a-z]?)[;,]? *Page *(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_51_PATTERN3 = @"HO *107[;,]? *Piece *(\d{1,5})[;,]? *(Book\/)?Folio *(\d{1,3}[a-z]?)?\/?(\d{1,4}[a-z]?)[;,]? *Page *(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_51_PATTERN4 = @"HO *107[;,]? *Piece *(\d{1,5})[;,]? *Book *(\d{1,3}[;,]?).*?Page *(\d{1,3})";
-        private static readonly string EW_CENSUS_1841_51_PATTERN5 = @"HO *107[;,]? *Piece *(\d{1,5})[;,]?.*?Page *(\d{1,3})";
+        private static readonly string EW_CENSUS_1841_51_PATTERN = @"HO *107 *Piece *(\d{1,5}) *Folio *(\d{1,4}[a-z]?) *Page *(\d{1,3})";
+        private static readonly string EW_CENSUS_1841_51_PATTERN2 = @"HO *107 *Piece *(\d{1,5}) *Book *(\d{1,3}).*?Folio *(\d{1,4}[a-z]?) *Page *(\d{1,3})";
+        private static readonly string EW_CENSUS_1841_51_PATTERN3 = @"HO *107 *Piece *(\d{1,5}) *(Book\/)?Folio *(\d{1,3}[a-z]?)?\/?(\d{1,4}[a-z]?) *Page *(\d{1,3})";
+        private static readonly string EW_CENSUS_1841_51_PATTERN4 = @"HO *107 *Piece *(\d{1,5}) *Book *(\d{1,3}).*?Page *(\d{1,3})";
+        private static readonly string EW_CENSUS_1841_51_PATTERN5 = @"HO *107 *Piece *(\d{1,5}).*?Page *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH = @"HO *107\/(\d{1,5})\/(\d{1,3}) .*?F(olio)? *(\d{1,4}[a-z]?) p(age)? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH2 = @"HO *107\/(\d{1,5}) ED *(\d{1,4}[a-z]?) F(olio)? *(\d{1,4}[a-z]?) p(age)? *(\d{1,3})";
         private static readonly string EW_CENSUS_1841_51_PATTERN_FH3 = @"HO *107\/(\d{1,5}) .*?F(olio)? *(\d{1,4}[a-z]?)\/(\d{1,4}) p(age)? *(\d{1,3})";
@@ -39,26 +39,26 @@ namespace FTAnalyzer
 
         private static readonly string EW_CENSUS_1911_PATTERN = @"RG *14\/? *Piece(\d{1,6}) .*?SN(\d{1,4})";
         private static readonly string EW_CENSUS_1911_PATTERN78 = @"RG *78\/? *Piece(\d{1,6}) .*?SN(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN2 = @"RG *14[;,\/]? *Piece *(\d{1,6})[;,]? *SN *(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN2A = @"1911 Census.*? *Piece *(\d{1,6})[;,]? *SN *(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN2B = @"Census[: ]*1911.*? *Piece *(\d{1,6})[;,]? *SN *(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN3 = @"RG *14[;,\/]? *Piece *(\d{1,6})[;,]? *SN *(\d{1,4})";
-        private static readonly string EW_CENSUS_1911_PATTERN4 = @"RG *14[;,\/]? *Piece *(\d{1,6})[;,]?$";
-        private static readonly string EW_CENSUS_1911_PATTERN5 = @"RG *14[;,\/]? *Piece *(\d{1,6})[;,]? *Page *(\d{1,3})";
-        private static readonly string EW_CENSUS_1911_PATTERN6 = @"RG *14[;,\/]? *RD *(\d{1,4})[;,]? *ED *(\d{1,3}) (\d{1,5})";
+        private static readonly string EW_CENSUS_1911_PATTERN2 = @"RG *14\/? *Piece *(\d{1,6}) *SN *(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN2A = @"1911 Census.*? *Piece *(\d{1,6}) *SN *(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN2B = @"Census[: ]*1911.*? *Piece *(\d{1,6}) *SN *(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN3 = @"RG *14\/? *Piece *(\d{1,6}) *SN *(\d{1,4})";
+        private static readonly string EW_CENSUS_1911_PATTERN4 = @"RG *14\/? *Piece *(\d{1,6})$";
+        private static readonly string EW_CENSUS_1911_PATTERN5 = @"RG *14\/? *Piece *(\d{1,6}) *Page *(\d{1,3})";
+        private static readonly string EW_CENSUS_1911_PATTERN6 = @"RG *14\/? *RD *(\d{1,4}) *ED *(\d{1,3}) (\d{1,5})";
         private static readonly string EW_CENSUS_1911_PATTERN_FH = @"RG *14\/PN(\d{1,6}) .*?SN(\d{1,4})";
 
-        private static readonly string SCOT_CENSUSYEAR_PATTERN = @"(1[89]\d[15]).{1,10}(\(?GROS *\)?)?Parish *([A-Z .'-]+)[;,]? *ED *(\d{1,3}[AB]?)[;,]? *Page *(\d{1,4})[;,]? *Line *(\d{1,2})";
+        private static readonly string SCOT_CENSUSYEAR_PATTERN = @"(1[89]\d[15]).{1,10}(\(?GROS *\)?)?Parish *([A-Z .'-]+) *ED *(\d{1,3}[AB]?) *Page *(\d{1,4}) *Line *(\d{1,2})";
         private static readonly string SCOT_CENSUSYEAR_PATTERN2 = @"(1[89]\d[15]).{1,10}(\(?GROS *\)?)?(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
         private static readonly string SCOT_CENSUSYEAR_PATTERN3 = @"(1[89]\d[15]).{1,10}(\(?GROS *\)?)?(\d{3}[AB]?)\/(\d{2}[AB]?) Page *(\d{1,4})";
-        private static readonly string SCOT_CENSUS_PATTERN = @"Parish *([A-Z .'-]+)[;,]? *ED *(\d{1,3}[AB]?)[;,]? *Page *(\d{1,4})[;,]? *Line *(\d{1,2})";
+        private static readonly string SCOT_CENSUS_PATTERN = @"Parish *([A-Z .'-]+) *ED *(\d{1,3}[AB]?) *Page *(\d{1,4}) *Line *(\d{1,2})";
         private static readonly string SCOT_CENSUS_PATTERN2 = @"(\(?GROS *\)?)?(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
         private static readonly string SCOT_CENSUS_PATTERN3 = @"(\(?GROS *\)?)?(\d{3}[AB]?)\/(\d{2}[AB]?) Page *(\d{1,4})";
 
-        private static readonly string US_CENSUS_PATTERN = @"Year *(\d{4});? *Census Place *(.*?)[;,]? *Roll *(.*?)[;,]? *Page *(\d{1,4}[AB]?)[,;]? *ED *(\d{1,5}[AB]?-?\d{0,2}[AB]?)";
+        private static readonly string US_CENSUS_PATTERN = @"Year *(\d{4});? *Census Place *(.*?) *Roll *(.*?) *Page *(\d{1,4}[AB]?)[,;]? *ED *(\d{1,5}[AB]?-?\d{0,2}[AB]?)";
         private static readonly string US_CENSUS_1940_PATTERN1 = @"District *(\d{1,2}[AB]?-\d{1,2}[AB]?).*?Page *(\d{1,3}[AB]?).*?T627 ?,? *(\d{1,5}-?[AB]?)";
-        private static readonly string US_CENSUS_1940_PATTERN2 = @"ED *(\d{1,2}[AB]?-\d{1,2}[AB]?).*?[;,]? *page *(\d{1,3}[AB]?).*?T627.*?roll ?(\d{1,5}-?[AB]?)";
-        private static readonly string US_CENSUS_1940_PATTERN3 = @"Year *1940;?.*?Roll *T627_(.*?)[;,]? *Page *(\d{1,4}[AB]?)[,;]? *ED *(\d{1,2}[AB]?-\d{1,2}[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN2 = @"ED *(\d{1,2}[AB]?-\d{1,2}[AB]?).*? *page *(\d{1,3}[AB]?).*?T627.*?roll ?(\d{1,5}-?[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN3 = @"Year *1940;?.*?Roll *T627_(.*?) *Page *(\d{1,4}[AB]?)[,;]? *ED *(\d{1,2}[AB]?-\d{1,2}[AB]?)";
 
         private static readonly string LC_CENSUS_PATTERN_EW = @"(\d{1,5})\/(\d{1,3})\/(d{1,3}).*?England & Wales (1841|1881)";
         private static readonly string LC_CENSUS_PATTERN_1911_EW = @"(\d{1,5})\/(\d{1,3}).*?England & Wales 1911";
