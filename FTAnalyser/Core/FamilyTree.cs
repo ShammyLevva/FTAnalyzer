@@ -2750,7 +2750,16 @@ namespace FTAnalyzer
             HashSet<string> result = new HashSet<string>();
             IEnumerable<Fact> unrecognised = AllIndividuals.SelectMany(x => x.PersonalFacts.Where(f => f.IsCensusFact && f.CensusReference != null && f.CensusReference.Status.Equals(CensusReference.ReferenceStatus.UNRECOGNISED)));
             foreach (Fact f in unrecognised)
-                result.Add(f.CensusReference.Reference);
+                result.Add(CensusReference.ClearCommonPhrases(f.CensusReference.Reference));
+            return result;
+        }
+
+        public HashSet<string> MissingCensusReferences()
+        {
+            HashSet<string> result = new HashSet<string>();
+            IEnumerable<Fact> missing = AllIndividuals.SelectMany(x => x.PersonalFacts.Where(f => f.IsCensusFact && f.CensusReference != null && f.CensusReference.Status.Equals(CensusReference.ReferenceStatus.BLANK)));
+            foreach (Fact f in missing)
+                result.Add(CensusReference.ClearCommonPhrases(f.SourceList)); // for missing census references show sources for census fact
             return result;
         }
 

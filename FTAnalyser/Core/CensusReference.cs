@@ -176,7 +176,7 @@ namespace FTAnalyzer
         private bool GetCensusReference(string text)
         {
             // aggressively remove multi spaces to allow for spaces in the census references
-            text = EnhancedTextInfo.ClearWhiteSpace(ClearCommonPhrases(text));
+            text = ClearCommonPhrases(text);
             if (text.Length > 0)
             {
                 if (CheckPatterns(text))
@@ -210,7 +210,8 @@ namespace FTAnalyzer
 
         public static string ClearCommonPhrases(string input)
         {
-            return input.Replace(".", " ").Replace(";", " ").Replace(":", " ")
+            return EnhancedTextInfo.ClearWhiteSpace(
+                   input.Replace(".", " ").Replace(";", " ").Replace(":", " ")
                         .Replace("~", " ").Replace(",", " ").Replace("(", " ")
                         .Replace(")", " ").Replace("{", " ").Replace("}", " ")
                         .Replace("Registration District", "RD", StringComparison.InvariantCultureIgnoreCase)
@@ -223,7 +224,7 @@ namespace FTAnalyzer
                         .Replace("Sub District", "SD", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Sheet number and letter", "Page", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Sheet", "Page", StringComparison.InvariantCultureIgnoreCase)
-                        .Replace("Affiliate Film Number", " ", StringComparison.InvariantCultureIgnoreCase);
+                        .Replace("Affiliate Film Number", " ", StringComparison.InvariantCultureIgnoreCase));
         }
 
         private bool CheckPatterns(string text)

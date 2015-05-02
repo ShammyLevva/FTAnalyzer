@@ -296,6 +296,7 @@
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.btnExportMissingCensusRefs = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -1630,6 +1631,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.btnExportMissingCensusRefs);
             this.groupBox6.Controls.Add(this.btnReportUnrecognised);
             this.groupBox6.Controls.Add(this.btnReportUnrecognisedNotes);
             this.groupBox6.Location = new System.Drawing.Point(339, 276);
@@ -1637,16 +1639,16 @@
             this.groupBox6.Size = new System.Drawing.Size(632, 59);
             this.groupBox6.TabIndex = 30;
             this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Exports";
+            this.groupBox6.Text = "Export Missing/Unrecognised data to File";
             // 
             // btnReportUnrecognised
             // 
             this.btnReportUnrecognised.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnReportUnrecognised.Location = new System.Drawing.Point(6, 19);
             this.btnReportUnrecognised.Name = "btnReportUnrecognised";
-            this.btnReportUnrecognised.Size = new System.Drawing.Size(306, 25);
+            this.btnReportUnrecognised.Size = new System.Drawing.Size(150, 25);
             this.btnReportUnrecognised.TabIndex = 30;
-            this.btnReportUnrecognised.Text = "Export Unrecognised Census References";
+            this.btnReportUnrecognised.Text = "Unrecognised Census Refs";
             this.btnReportUnrecognised.UseVisualStyleBackColor = true;
             this.btnReportUnrecognised.Click += new System.EventHandler(this.btnReportUnrecognised_Click);
             // 
@@ -1704,7 +1706,7 @@
             this.groupBox4.Size = new System.Drawing.Size(632, 88);
             this.groupBox4.TabIndex = 25;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Census References";
+            this.groupBox4.Text = "Census Reference Reports";
             // 
             // btnInconsistentLocations
             // 
@@ -3079,6 +3081,17 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // btnExportMissingCensusRefs
+            // 
+            this.btnExportMissingCensusRefs.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnExportMissingCensusRefs.Location = new System.Drawing.Point(162, 19);
+            this.btnExportMissingCensusRefs.Name = "btnExportMissingCensusRefs";
+            this.btnExportMissingCensusRefs.Size = new System.Drawing.Size(150, 25);
+            this.btnExportMissingCensusRefs.TabIndex = 31;
+            this.btnExportMissingCensusRefs.Text = "Missing Census Refs";
+            this.btnExportMissingCensusRefs.UseVisualStyleBackColor = true;
+            this.btnExportMissingCensusRefs.Click += new System.EventHandler(this.btnExportMissingCensusRefs_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -3440,6 +3453,7 @@
         private System.Windows.Forms.Button btnReportUnrecognisedNotes;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripMenuItem mnuLoadLocationsCSV;
+        private System.Windows.Forms.Button btnExportMissingCensusRefs;
     }
 }
 

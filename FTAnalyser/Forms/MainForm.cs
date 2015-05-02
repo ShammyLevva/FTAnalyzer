@@ -2380,6 +2380,16 @@ namespace FTAnalyzer
                 MessageBox.Show("No unrecognised census references found.", "FTAnalyzer");
         }
 
+        private void btnExportMissingCensusRefs_Click(object sender, EventArgs e)
+        {
+            IEnumerable<string> results = ft.MissingCensusReferences();
+            results = results.OrderBy(x => x.ToString());
+            if (results.Count() > 0)
+                SaveUnrecognisedDataFile(results, "Missing Census References for " + Path.GetFileNameWithoutExtension(filename) + ".txt", string.Empty);
+            else
+                MessageBox.Show("No missing census references found.", "FTAnalyzer");
+        }
+
         private void btnReportUnrecognisedNotes_Click(object sender, EventArgs e)
         {
             IEnumerable<string> results = ft.UnrecognisedCensusReferencesNotes();
