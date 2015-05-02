@@ -52,10 +52,12 @@ namespace FTAnalyzer
         private static readonly string SCOT_CENSUS_PATTERN2 = @"(\(?GROS *\)?)?(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
         private static readonly string SCOT_CENSUS_PATTERN3 = @"(\(?GROS *\)?)?(\d{3}[AB]?)\/(\d{2}[AB]?) Page *(\d{1,4})";
 
-        private static readonly string US_CENSUS_PATTERN = @"Year *(\d{4});? *Census Place *(.*?) *Roll *(.*?) *Page *(\d{1,4}[AB]?)[,;]? *ED *(\d{1,5}[AB]?-?\d{0,2}[AB]?)";
+        private static readonly string US_CENSUS_PATTERN = @"Year *(\d{4}) *Census *(.*?) *Roll *(.*?) *P(age)? *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,2}[AB]?)";
+        private static readonly string US_CENSUS_PATTERN2 = @"Census *(\d{4}) *(.*?) *Roll *(.*?) *P(age)? *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,2}[AB]?)";
+        private static readonly string US_CENSUS_PATTERN3 = @"Census *(\d{4}) *(.*?) *Ward *(.*?) *ED *(\d{1,5}[AB]?-?\d{0,2}[AB]?) *P(age)? *(\d{1,4}[AB]?)";
         private static readonly string US_CENSUS_1940_PATTERN1 = @"District *(\d{1,2}[AB]?-\d{1,2}[AB]?).*?Page *(\d{1,3}[AB]?).*?T627 ?,? *(\d{1,5}-?[AB]?)";
         private static readonly string US_CENSUS_1940_PATTERN2 = @"ED *(\d{1,2}[AB]?-\d{1,2}[AB]?).*? *page *(\d{1,3}[AB]?).*?T627.*?roll ?(\d{1,5}-?[AB]?)";
-        private static readonly string US_CENSUS_1940_PATTERN3 = @"Year *1940;?.*?Roll *T627_(.*?) *Page *(\d{1,4}[AB]?)[,;]? *ED *(\d{1,2}[AB]?-\d{1,2}[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN3 = @"Year *1940.*?Roll *T627_(.*?) *Page *(\d{1,4}[AB]?) *ED *(\d{1,2}[AB]?-\d{1,2}[AB]?)";
 
         private static readonly string LC_CENSUS_PATTERN_EW = @"(\d{1,5})\/(\d{1,3})\/(d{1,3}).*?England & Wales (1841|1881)";
         private static readonly string LC_CENSUS_PATTERN_1911_EW = @"(\d{1,5})\/(\d{1,3}).*?England & Wales 1911";
@@ -151,7 +153,10 @@ namespace FTAnalyzer
             else if (this.Class.StartsWith("US"))
             {
                 this.CensusYear = GetCensusYearFromReference();
-                this.CensusLocation = CensusLocation.UNITED_STATES;
+                if (this.Place.Length > 0)
+                    this.CensusLocation = new CensusLocation(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, this.Place);
+                else
+                    this.CensusLocation = CensusLocation.UNITED_STATES;
             }
             else
             {
@@ -220,12 +225,13 @@ namespace FTAnalyzer
                         .Replace("Sub District", "SD", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Sheet number and letter", "Page", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Sheet", "Page", StringComparison.InvariantCultureIgnoreCase)
-                        .Replace("Affiliate Film Number", " ", StringComparison.InvariantCultureIgnoreCase));
+                        .Replace("Affiliate Film Number", " ", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("Place", " ", StringComparison.InvariantCultureIgnoreCase));
         }
 
-        private bool CheckPatterns(string text)
+        private bool CheckPatterns(string originalText)
         {
-            text = ClearCommonPhrases(text);
+            string text = ClearCommonPhrases(originalText);
             if (text.Length == 0)
                 return false;
             Match matcher = Regex.Match(text, EW_CENSUS_PATTERN, RegexOptions.IgnoreCase);
@@ -658,10 +664,38 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = "US" + matcher.Groups[1].ToString();
-                this.Place = matcher.Groups[2].ToString();
+                this.Place = GetOriginalPlace(matcher.Groups[2].ToString(), originalText, "Roll");
                 this.Roll = matcher.Groups[3].ToString();
-                this.Page = matcher.Groups[4].ToString();
-                this.ED = matcher.Groups[5].ToString();
+                this.Page = matcher.Groups[5].ToString();
+                this.ED = matcher.Groups[6].ToString();
+                this.IsUKCensus = false;
+                this.Country = Countries.UNITED_STATES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, US_CENSUS_PATTERN2, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "US" + matcher.Groups[1].ToString();
+                this.Place = GetOriginalPlace(matcher.Groups[2].ToString(), originalText, "Roll");
+                this.Roll = matcher.Groups[3].ToString();
+                this.Page = matcher.Groups[5].ToString();
+                this.ED = matcher.Groups[6].ToString();
+                this.IsUKCensus = false;
+                this.Country = Countries.UNITED_STATES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, US_CENSUS_PATTERN3, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "US" + matcher.Groups[1].ToString();
+                this.Place = GetOriginalPlace(matcher.Groups[2].ToString(), originalText, "Ward");
+                this.Roll = matcher.Groups[3].ToString();
+                this.Page = matcher.Groups[6].ToString();
+                this.ED = matcher.Groups[4].ToString();
                 this.IsUKCensus = false;
                 this.Country = Countries.UNITED_STATES;
                 this.Status = ReferenceStatus.GOOD;
@@ -786,6 +820,16 @@ namespace FTAnalyzer
                 return true;
             }
             return false;
+        }
+
+        private string GetOriginalPlace(string match, string originalText, string stopText)
+        {
+            int spacePos = match.IndexOf(" ");
+            string startPlace = match.Substring(0, spacePos);
+            int matchPos = originalText.IndexOf(startPlace);
+            int stopPos = originalText.IndexOf(stopText);
+            string result = originalText.Substring(matchPos, stopPos - matchPos).Replace(";", "").Trim();
+            return result;
         }
 
         private string GetUKCensusClass(string year)
