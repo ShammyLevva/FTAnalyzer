@@ -451,6 +451,7 @@
     </Content>
     <Content Include="Resources\CensusLocations.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Resources\GINAP.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -471,6 +472,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Mapping URLs.txt" />
+    <Content Include="Resources\ScottishParishes.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="x86\SQLite.Interop.dll" />
     <Resource Include="Resources\Lib\SharpMap.dll">

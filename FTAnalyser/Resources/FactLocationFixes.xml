@@ -300,6 +300,7 @@
       <!-- Scotland -->
       <RegionTypo from="ABDN"    to="Aberdeenshire" />
       <RegionTypo from="Dumfriesshire"  to="Dumfries-shire" />
+      <RegionTypo from="Dumbartonshire" to="Dunbartonshire" />
       <RegionTypo from="Berwick"        to="Berwickshire" />
       <RegionTypo from="Invernessshire" to="Inverness-shire" />
       <RegionTypo from="Kinrossshire"   to="Kinross-shire" />
