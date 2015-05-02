@@ -55,9 +55,10 @@ namespace FTAnalyzer
         private static readonly string US_CENSUS_PATTERN = @"Year *(\d{4}) *Census *(.*?) *Roll *(.*?) *P(age)? *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
         private static readonly string US_CENSUS_PATTERN2 = @"Census *(\d{4}) *(.*?) *Roll *(.*?) *P(age)? *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
         private static readonly string US_CENSUS_PATTERN3 = @"Census *(\d{4}) *(.*?) *Ward *(.*?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?) *P(age)? *(\d{1,4}[AB]?)";
-        private static readonly string US_CENSUS_1940_PATTERN1 = @"District *(\d{1,5}[AB]?-?\d{0,4}[AB]?).*?Page *(\d{1,3}[AB]?).*?T627 ?,? *(\d{1,5}-?[AB]?)";
-        private static readonly string US_CENSUS_1940_PATTERN2 = @"ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?).*? *page *(\d{1,3}[AB]?).*?T627.*?roll ?(\d{1,5}-?[AB]?)";
-        private static readonly string US_CENSUS_1940_PATTERN3 = @"Year *1940.*?Roll *T627_(.*?) *Page *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN1 = @"District *(\d{1,5}[AB]?-?\d{0,4}[AB]?).*?P(age)? *(\d{1,3}[AB]?).*?T627 ?,? *(\d{1,5}-?[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN2 = @"ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?).*? *P(age)? *(\d{1,3}[AB]?).*?T627.*?roll ?(\d{1,5}-?[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN3 = @"Year *1940.*?Roll *T627_(.*?) *P(age)? *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN4 = @"Census *1940 *(.*?) *T627_(.*?) *P(age)? *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
 
         private static readonly string LC_CENSUS_PATTERN_EW = @"(\d{1,5})\/(\d{1,3})\/(d{1,3}).*?England & Wales (1841|1881)";
         private static readonly string LC_CENSUS_PATTERN_1911_EW = @"(\d{1,5})\/(\d{1,3}).*?England & Wales 1911";
@@ -706,9 +707,9 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = "US1940";
-                this.Roll = "T627_" + matcher.Groups[3].ToString();
+                this.Roll = "T627_" + matcher.Groups[4].ToString();
                 this.ED = matcher.Groups[1].ToString();
-                this.Page = matcher.Groups[2].ToString();
+                this.Page = matcher.Groups[3].ToString();
                 this.IsUKCensus = false;
                 this.Country = Countries.UNITED_STATES;
                 this.Status = ReferenceStatus.GOOD;
@@ -719,9 +720,9 @@ namespace FTAnalyzer
             if (matcher.Success)
             {
                 this.Class = "US1940";
-                this.Roll = "T627_" + matcher.Groups[3].ToString();
+                this.Roll = "T627_" + matcher.Groups[4].ToString();
                 this.ED = matcher.Groups[1].ToString();
-                this.Page = matcher.Groups[2].ToString();
+                this.Page = matcher.Groups[3].ToString();
                 this.IsUKCensus = false;
                 this.Country = Countries.UNITED_STATES;
                 this.Status = ReferenceStatus.GOOD;
@@ -733,8 +734,22 @@ namespace FTAnalyzer
             {
                 this.Class = "US1940";
                 this.Roll = "T627_" + matcher.Groups[1].ToString();
+                this.ED = matcher.Groups[4].ToString();
+                this.Page = matcher.Groups[3].ToString();
+                this.IsUKCensus = false;
+                this.Country = Countries.UNITED_STATES;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, US_CENSUS_1940_PATTERN4, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "US1940";
+                this.Place = GetOriginalPlace(matcher.Groups[1].ToString(), originalText, "T627");
+                this.Roll = "T627_" + matcher.Groups[2].ToString();
                 this.ED = matcher.Groups[5].ToString();
-                this.Page = matcher.Groups[2].ToString();
+                this.Page = matcher.Groups[4].ToString();
                 this.IsUKCensus = false;
                 this.Country = Countries.UNITED_STATES;
                 this.Status = ReferenceStatus.GOOD;
