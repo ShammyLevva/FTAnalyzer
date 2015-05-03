@@ -131,8 +131,9 @@ namespace FTAnalyzer
             if (fact.FactDate.IsKnown)
             {
                 if (this.CensusYear.IsKnown && !fact.FactDate.Overlaps(this.CensusYear))
-                    fact.SetError((int)FamilyTree.Dataerror.FACT_ERROR, Fact.FactError.WARNINGALLOW, "Census date doesn't match census reference date");
-                this.CensusYear = fact.FactDate;
+                    fact.SetError((int)FamilyTree.Dataerror.FACT_ERROR, Fact.FactError.WARNINGALLOW, "Census date " + fact.FactDate.ToString() + " doesn't match census reference date " + this.CensusYear);
+                else
+                    this.CensusYear = fact.FactDate;
             }
             else
                 fact.UpdateFactDate(this.CensusYear);

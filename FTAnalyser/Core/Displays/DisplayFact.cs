@@ -37,6 +37,7 @@ namespace FTAnalyzer
         public Age AgeAtFact { get { return Ind == null ? null : Ind.GetAge(Fact.FactDate, Fact.FactType); } }
         public string SourceList { get { return Fact.SourceList;  } }
         public CensusReference CensusReference { get { return Fact.CensusReference; } }
+        public string CensusRefYear { get { return Fact.CensusReference.CensusYear.IsKnown ? Fact.CensusReference.CensusYear.ToString() : string.Empty; } }
         public string FoundLocation { get { return Fact.Location.FoundLocation; } }
         public string FoundResultType { get { return Fact.Location.FoundResultType; } }
         public string GeocodeStatus { get { return Fact.Location.Geocoded; } }

@@ -25,6 +25,7 @@ namespace FTAnalyzer
         string FoundLocation { get; }
         string FoundResultType { get; }
         CensusReference CensusReference { get; }
+        string CensusRefYear { get; }
         string Comment { get; }
         string SourceList { get; }
         double Latitude { get; }
