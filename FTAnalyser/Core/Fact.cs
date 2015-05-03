@@ -623,9 +623,14 @@ namespace FTAnalyzer
                 FactDate = date;
         }
 
+        public bool HasValidCensusReference
+        {
+            get { return CensusReference != null && CensusReference.Status != CensusReference.ReferenceStatus.BLANK; }
+        }
+
         public void SetCensusReferenceDetails(CensusReference cr, CensusLocation cl, string comment)
         {
-            if (CensusReference == null || CensusReference.Status == CensusReference.ReferenceStatus.BLANK)
+            if (!HasValidCensusReference)
                 this.CensusReference = cr;
             if (Location.IsBlank)
                 Location = cl.Equals(CensusLocation.UNKNOWN) ? 

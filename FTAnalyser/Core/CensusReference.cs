@@ -110,6 +110,7 @@ namespace FTAnalyzer
             this.RD = string.Empty;
             this.ED = string.Empty;
             this.SD = string.Empty;
+            this.Family = string.Empty;
             this.ReferenceText = string.Empty;
             this.IsUKCensus = false;
             this.Status = ReferenceStatus.BLANK;
@@ -128,9 +129,13 @@ namespace FTAnalyzer
             if (GetCensusReference(node))
                 SetCensusReferenceDetails();
             if (fact.FactDate.IsKnown)
+            {
+                if (this.CensusYear.IsKnown && !fact.FactDate.Overlaps(this.CensusYear))
+                    fact.SetError((int)FamilyTree.Dataerror.FACT_ERROR, Fact.FactError.WARNINGALLOW, "Census date doesn't match census reference date");
                 this.CensusYear = fact.FactDate;
+            }
             else
-                this.Fact.UpdateFactDate(this.CensusYear);
+                fact.UpdateFactDate(this.CensusYear);
             fact.SetCensusReferenceDetails(this, CensusLocation, string.Empty);
         }
 
