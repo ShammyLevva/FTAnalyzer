@@ -20,6 +20,7 @@
       <CountryTypo from="Aust"    to="Australia" />
       <CountryTypo from="Eire"    to="Ireland" />
       <CountryTypo from="Scot"    to="Scotland" />
+      <CountryType from="Wal"     to="Wales" />
       <CountryTypo from="Holland" to="Netherlands" />
       <CountryTypo from="The Netherlands" to="Netherlands" />
       <CountryTypo from="St Lucia" to="Saint Lucia" />
@@ -79,7 +80,7 @@
       <CountryTypo from="BOL" to="Bolivia" />
       <CountryTypo from="BRA" to="Brazil" />
       <CountryTypo from="BRB" to="Barbados" />
-      <CountryTypo from="BRN" to="Brunei Darussalam" />
+      <CountryTypo from="BRN" to="Brunei" />
       <CountryTypo from="BTN" to="Bhutan" />
       <CountryTypo from="BVT" to="Bouvet Island" />
       <CountryTypo from="BWA" to="Botswana" />
@@ -259,7 +260,7 @@
       <CountryTypo from="SWZ" to="Swaziland" />
       <CountryTypo from="SXM" to="Sint Maarten (Dutch part)" />
       <CountryTypo from="SYC" to="Seychelles" />
-      <CountryTypo from="SYR" to="Syrian Arab Republic" />
+      <CountryTypo from="SYR" to="Syria" />
       <CountryTypo from="TCA" to="Turks and Caicos Islands" />
       <CountryTypo from="TCD" to="Chad" />
       <CountryTypo from="TGO" to="Togo" />
