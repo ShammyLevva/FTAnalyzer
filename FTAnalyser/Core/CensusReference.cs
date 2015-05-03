@@ -126,6 +126,7 @@ namespace FTAnalyzer
                 this.CensusYear = fact.FactDate;
             else
                 this.Fact.UpdateFactDate(this.CensusYear);
+            fact.SetCensusReferenceDetails(this, CensusLocation, string.Empty);
         }
 
         public CensusReference(string individualID, string notes, bool source)
