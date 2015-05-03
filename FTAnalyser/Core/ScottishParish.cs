@@ -31,7 +31,7 @@ namespace FTAnalyzer
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(filename);
                 //xmlDoc.Validate(something);
-                foreach (XmlNode n in xmlDoc.SelectNodes("ScottishParish/Parish"))
+                foreach (XmlNode n in xmlDoc.SelectNodes("ScottishParish/ByID/Parish"))
                 {
                     string region = n.Attributes["Region"].Value;
                     string name = n.Attributes["Name"].Value;

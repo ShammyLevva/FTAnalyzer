@@ -76,9 +76,10 @@ namespace CensusReferenceTest
             USCensusTest("Year 1940 Lebanon NH USA; Roll: T627_2286 Page 12B ED 5-33", CensusDate.USCENSUS1940, "T627_2286", "5-33", "12B");
             USCensusTest("Census 1930 Salt Lake City UT USA ED50 p6B", CensusDate.USCENSUS1930, string.Empty, "50", "6B");
 
-            ScottishCensusText("GROS 692/01 019/00 008", FactDate.UNKNOWN_DATE, "692-1", "19", "8");
-            ScottishCensusText("in the 1851 census, GROS 343/00 001/00 011.", CensusDate.UKCENSUS1851, "343", "1", "11");
-            ScottishCensusText("Parish: Inverurie; ED: 4; Page: 12; Line: 3; Roll: CSSCT1901_69", FactDate.UNKNOWN_DATE, "Inverurie", "4", "12");
+            ScottishCensusTest("GROS 692/01 019/00 008", FactDate.UNKNOWN_DATE, "692-1", "19", "8");
+            ScottishCensusTest("in the 1851 census, GROS 343/00 001/00 011.", CensusDate.UKCENSUS1851, "343", "1", "11");
+            ScottishCensusTest("Parish: Inverurie; ED: 4; Page: 12; Line: 3; Roll: CSSCT1901_69", FactDate.UNKNOWN_DATE, "Inverurie", "4", "12");
+            ScottishCensusTest("Census 1841 Kelso ROX SCT1841/793 f4 p45", CensusDate.UKCENSUS1841, "793", "4", "45");
 
             CensusHO107Test("HO107 Piece: 1607 Folio: 880 Page: 29", CensusDate.UKCENSUS1851, "1607", string.Empty, "880", "29");
             CensusHO107Test("HO107 piece 729 folio 5/15 page 6", CensusDate.UKCENSUS1841, "729", "5", "15", "6");
@@ -139,7 +140,7 @@ namespace CensusReferenceTest
                 Assert.IsTrue(censusRef.Book.Equals(book));
         }
 
-        private void ScottishCensusText(string reference, FactDate year, string parish, string ED, string page)
+        private void ScottishCensusTest(string reference, FactDate year, string parish, string ED, string page)
         {
             CensusReference censusRef = new CensusReference("I1", reference, false);
             Assert.IsTrue(censusRef.CensusYear.Equals(year));

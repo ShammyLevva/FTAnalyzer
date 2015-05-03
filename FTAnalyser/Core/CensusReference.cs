@@ -48,6 +48,7 @@ namespace FTAnalyzer
         private static readonly string SCOT_CENSUSYEAR_PATTERN = @"(1[89]\d[15]).{1,10}(\(?GROS *\)?)?Parish *([A-Z .'-]+) *ED *(\d{1,3}[AB]?) *Page *(\d{1,4}) *Line *(\d{1,2})";
         private static readonly string SCOT_CENSUSYEAR_PATTERN2 = @"(1[89]\d[15]).{1,10}(\(?GROS *\)?)?(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
         private static readonly string SCOT_CENSUSYEAR_PATTERN3 = @"(1[89]\d[15]).{1,10}(\(?GROS *\)?)?(\d{3}[AB]?)\/(\d{2}[AB]?) Page *(\d{1,4})";
+        private static readonly string SCOT_CENSUSYEAR_PATTERN4 = @"SCT(1[89]\d[15])\/?(\d{3}[AB]?) *f(olio)? *(\d{1,3}[AB]?) *p(age)? *(\d{1,4})";
         private static readonly string SCOT_CENSUS_PATTERN = @"Parish *([A-Z .'-]+) *ED *(\d{1,3}[AB]?) *Page *(\d{1,4}) *Line *(\d{1,2})";
         private static readonly string SCOT_CENSUS_PATTERN2 = @"(\(?GROS *\)?)?(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
         private static readonly string SCOT_CENSUS_PATTERN3 = @"(\(?GROS *\)?)?(\d{3}[AB]?)\/(\d{2}[AB]?) Page *(\d{1,4})";
@@ -621,6 +622,20 @@ namespace FTAnalyzer
                 this.Parish = matcher.Groups[3].ToString().TrimStart('0');
                 this.ED = matcher.Groups[4].ToString().Replace("/00", "").TrimStart('0');
                 this.Page = matcher.Groups[5].ToString().TrimStart('0');
+                this.IsUKCensus = true;
+                this.Country = Countries.SCOTLAND;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
+            matcher = Regex.Match(text, SCOT_CENSUSYEAR_PATTERN4, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "SCOT";
+                this.CensusYear = CensusDate.GetUKCensusDateFromYear(matcher.Groups[1].ToString());
+                this.Parish = matcher.Groups[2].ToString().TrimStart('0');
+                this.ED = matcher.Groups[4].ToString().Replace("/00", "").TrimStart('0');
+                this.Page = matcher.Groups[6].ToString().TrimStart('0');
                 this.IsUKCensus = true;
                 this.Country = Countries.SCOTLAND;
                 this.Status = ReferenceStatus.GOOD;
