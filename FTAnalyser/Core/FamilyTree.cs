@@ -2924,34 +2924,70 @@ namespace FTAnalyzer
 
         #region Load CSV Location Data
 
-        public void LoadCSVdata()
+        public void LoadLocationData(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
         {
             string csvFilename = string.Empty;
+            pb.Visible = true;
             try
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 string initialDir = (string)Application.UserAppDataRegistry.GetValue("Excel Export Individual Path");
                 openFileDialog.InitialDirectory = initialDir == null ? Environment.SpecialFolder.MyDocuments.ToString() : initialDir;
-                openFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv";
-                openFileDialog.FilterIndex = 1;
+                openFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv|TNG format (*.tng)|*.tng";
+                openFileDialog.FilterIndex = defaultIndex;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     csvFilename = openFileDialog.FileName;
+                    label.Text = "Loading " + csvFilename;
                     string path = Path.GetDirectoryName(csvFilename);
                     Application.UserAppDataRegistry.SetValue("Excel Export Individual Path", path);
-                    ReadCSVdata(csvFilename);
+                    if (csvFilename.EndsWith("TNG", StringComparison.InvariantCultureIgnoreCase))
+                        ReadTNGdata(pb, csvFilename);
+                    else
+                        ReadCSVdata(pb, csvFilename);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error loading CSV location data from " + csvFilename + "\nError was " + ex.Message, "FT Analyzer");
             }
+            pb.Visible = false;
+            label.Text = string.Empty;
         }
 
-        public void ReadCSVdata(string csvFilename)
+        public void ReadTNGdata(ToolStripProgressBar pb, string tngFilename)
         {
             int rowCount = 0;
+            int lineCount = File.ReadLines(tngFilename).Count();
+            pb.Maximum = lineCount;
+            pb.Minimum = 0;
+            pb.Value = rowCount;
+            using (CsvFileReader reader = new CsvFileReader(tngFilename, ';'))
+            {
+                CsvRow row = new CsvRow();
+                while (reader.ReadRow(row))
+                {
+                    if (row.Count == 4)
+                    {
+                        FactLocation loc = FactLocation.GetLocation(row[1], row[3], row[2], FactLocation.Geocode.NOT_SEARCHED, true, true);
+                        rowCount++;
+                    }
+                    pb.Value++;
+                    if(pb.Value % 10 == 0)
+                        Application.DoEvents();
+                }
+                MessageBox.Show("Loaded " + rowCount + " locations from TNG file " + tngFilename, "FTAnalyzer");
+            }
+        }
+
+        public void ReadCSVdata(ToolStripProgressBar pb, string csvFilename)
+        {
+            int rowCount = 0;
+            int lineCount = File.ReadLines(csvFilename).Count();
+            pb.Maximum = lineCount;
+            pb.Minimum = 0;
+            pb.Value = rowCount;
             using (CsvFileReader reader = new CsvFileReader(csvFilename))
             {
                 CsvRow headerRow = new CsvRow();
@@ -2968,8 +3004,14 @@ namespace FTAnalyzer
                     throw new InvalidLocationCSVFileException("No Longitude header record. Header should be Location, Latitude, Longitude");
                 while (reader.ReadRow(row))
                 {
-                    FactLocation loc = FactLocation.GetLocation(row[0], row[1], row[2], FactLocation.Geocode.NOT_SEARCHED, true, true);
-                    rowCount++;
+                    if (row.Count == 3)
+                    {
+                        FactLocation loc = FactLocation.GetLocation(row[0], row[1], row[2], FactLocation.Geocode.NOT_SEARCHED, true, true);
+                        rowCount++;
+                    }
+                    pb.Value++;
+                    if (pb.Value % 10 == 0)
+                        Application.DoEvents();
                 }
             }
             MessageBox.Show("Loaded " + rowCount + " locations from file " + csvFilename, "FTAnalyzer");

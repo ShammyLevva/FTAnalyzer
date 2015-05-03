@@ -63,14 +63,18 @@ namespace FTAnalyzer.Utilities
     /// </summary>
     public class CsvFileReader : StreamReader
     {
-        public CsvFileReader(Stream stream)
+        private char Separator { get; set; }
+
+        public CsvFileReader(Stream stream, char separator = ',')
             : base(stream)
         {
+            this.Separator = separator;
         }
 
-        public CsvFileReader(string filename)
+        public CsvFileReader(string filename, char separator = ',')
             : base(filename)
         {
+            this.Separator = separator;
         }
 
         /// <summary>
@@ -124,7 +128,7 @@ namespace FTAnalyzer.Utilities
                 {
                     // Parse unquoted value
                     int start = pos;
-                    while (pos < row.LineText.Length && row.LineText[pos] != ',')
+                    while (pos < row.LineText.Length && row.LineText[pos] != Separator)
                         pos++;
                     value = row.LineText.Substring(start, pos - start);
                 }
@@ -137,7 +141,7 @@ namespace FTAnalyzer.Utilities
                 rows++;
 
                 // Eat up to and including next comma
-                while (pos < row.LineText.Length && row.LineText[pos] != ',')
+                while (pos < row.LineText.Length && row.LineText[pos] != Separator)
                     pos++;
                 if (pos < row.LineText.Length)
                     pos++;

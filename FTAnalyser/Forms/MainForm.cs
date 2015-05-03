@@ -2827,13 +2827,21 @@ namespace FTAnalyzer
 
         private void mnuLoadLocationsCSV_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Function not yet available.");
+            LoadLocations(tspbTabProgress, tsStatusLabel, 1);
+        }
 
-            //DialogResult result = MessageBox.Show("It is recommended you backup your Geocoding database first.\nDo you want to backup now?", "FTAnalyzer", MessageBoxButtons.YesNoCancel);
-            //if(result == System.Windows.Forms.DialogResult.Yes)
-            //    ft.BackupDatabase(saveDatabase, "FT Analyzer zip file created by v" + VERSION);
-            //if(result != System.Windows.Forms.DialogResult.Cancel)
-            //    ft.LoadCSVdata();
+        private void mnuLoadLocationsTNG_Click(object sender, EventArgs e)
+        {
+            LoadLocations(tspbTabProgress, tsStatusLabel, 2);
+        }
+
+        private void LoadLocations(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
+        {
+            DialogResult result = MessageBox.Show("It is recommended you backup your Geocoding database first.\nDo you want to backup now?", "FTAnalyzer", MessageBoxButtons.YesNoCancel);
+            if (result == System.Windows.Forms.DialogResult.Yes)
+                ft.BackupDatabase(saveDatabase, "FT Analyzer zip file created by v" + VERSION);
+            if (result != System.Windows.Forms.DialogResult.Cancel)
+                ft.LoadLocationData(pb, label, defaultIndex);
         }
     }
 }
