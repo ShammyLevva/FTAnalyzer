@@ -101,10 +101,23 @@ namespace CensusReferenceTest
             UKCensusTest("            RG11 piece 870 folio 49 page 10", CensusDate.UKCENSUS1881, "870", "49", "10");
             UKCensusTest("Archive reference	RG11\nPiece number	870\nFolio	49\nPage	10", CensusDate.UKCENSUS1881, "870", "49", "10");
 
+            Canadian1881Census("        123/A/55/35/1	Canada 1881", "123", "A", "35", "1");
+            Canadian1881Census("        123/A/35/1	Canada 1881", "123", "A", "35", "1");
+
             censusRef = new CensusReference("I1", "RG14; Piece: 21983", false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
             Assert.IsTrue(censusRef.Piece.Equals("21983"));
             Assert.IsTrue(censusRef.Status.Equals(CensusReference.ReferenceStatus.INCOMPLETE));
+        }
+
+        private void Canadian1881Census(string reference, string ED, string SD, string page, string family)
+        {
+            CensusReference censusRef = new CensusReference("I1", reference, false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.CANADACENSUS1881));
+            Assert.IsTrue(censusRef.ED.Equals(ED));
+            Assert.IsTrue(censusRef.SD.Equals(SD));
+            Assert.IsTrue(censusRef.Page.Equals(page));
+            Assert.IsTrue(censusRef.Family.Equals(family));
         }
 
         private void USCensusTest(string reference, FactDate year, string roll, string ED, string page)

@@ -14,6 +14,7 @@ namespace FTAnalyzer
         public static readonly CensusLocation UNKNOWN = new CensusLocation(string.Empty);
         public static readonly CensusLocation SCOTLAND = new CensusLocation(Countries.SCOTLAND);
         public static readonly CensusLocation UNITED_STATES = new CensusLocation(Countries.UNITED_STATES);
+        public static readonly CensusLocation CANADA = new CensusLocation(Countries.CANADA);
         public string Year { get; private set; }
         public string Piece { get; private set; }
         public string RegistrationDistrict { get; private set; }

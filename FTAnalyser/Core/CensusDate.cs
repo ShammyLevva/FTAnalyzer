@@ -76,6 +76,11 @@ namespace FTAnalyzer
             USCENSUS1900, USCENSUS1910, USCENSUS1920, USCENSUS1930, USCENSUS1940 
         });
 
+        private static readonly ISet<CensusDate> CANADIAN_CENSUS = new HashSet<CensusDate>(new CensusDate[] { 
+            CANADACENSUS1851, CANADACENSUS1861, CANADACENSUS1871, CANADACENSUS1881, CANADACENSUS1891, CANADACENSUS1901, CANADACENSUS1906, 
+            CANADACENSUS1911, CANADACENSUS1916, CANADACENSUS1921 
+        });
+
         public static readonly ISet<CensusDate> SUPPORTED_CENSUS = new HashSet<CensusDate>(new CensusDate[] { 
             UKCENSUS1841, UKCENSUS1851, UKCENSUS1861, UKCENSUS1871, UKCENSUS1881, UKCENSUS1891, UKCENSUS1901, UKCENSUS1911,
             USCENSUS1790, USCENSUS1800, USCENSUS1810, USCENSUS1820, USCENSUS1830, USCENSUS1840, USCENSUS1850, USCENSUS1860,
@@ -192,6 +197,16 @@ namespace FTAnalyzer
             foreach(CensusDate cd in US_FEDERAL_CENSUS)
             {
                 if (cd.PropertyName.Equals(reference))
+                    return cd;
+            }
+            return FactDate.UNKNOWN_DATE;
+        }
+
+        public static FactDate GetCanadianCensusDateFromReference(string reference)
+        {
+            foreach (CensusDate cd in CANADIAN_CENSUS)
+            {
+                if (cd.PropertyName.ToUpper().Equals(reference))
                     return cd;
             }
             return FactDate.UNKNOWN_DATE;

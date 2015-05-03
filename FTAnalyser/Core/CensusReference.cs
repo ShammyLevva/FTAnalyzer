@@ -65,6 +65,7 @@ namespace FTAnalyzer
         private static readonly string LC_CENSUS_PATTERN_1911_EW = @"(\d{1,5})\/(\d{1,3}).*?England & Wales 1911";
         private static readonly string LC_CENSUS_PATTERN_SCOT = @"(\d{1,5}-?[AB12]?)\/(\d{1,3})\/(d{1,3}).*?Scotland 1881";
         private static readonly string LC_CENSUS_PATTERN_1940US = @"(T627[-_])(\d{1,5}-?[AB]?)\/(\d{1,2}[AB]?-\d{1,2}[AB]?)\/(d{1,3}[AB]?).*?US 1880";
+        private static readonly string LC_CENSUS_PATTERN_1881CANADA = @"(\d{1,5})\/(\d{0,4}[A-Z]{0,4})\/(\d{0,3})\/(\d{1,3})\/?(\d{1,3})?.*?Canada 1881";
 
         public enum ReferenceStatus { BLANK = 0, UNRECOGNISED = 1, INCOMPLETE = 2, GOOD = 3 };
         public static readonly CensusReference UNKNOWN = new CensusReference();
@@ -82,6 +83,8 @@ namespace FTAnalyzer
         public string Parish { get; private set; }
         private string RD { get; set; }
         public string ED { get; private set; }
+        public string SD { get; private set; }
+        public string Family { get; private set; }
         private string ReferenceText { get; set; }
         private CensusLocation CensusLocation { get; set; }
 
@@ -106,6 +109,7 @@ namespace FTAnalyzer
             this.Parish = string.Empty;
             this.RD = string.Empty;
             this.ED = string.Empty;
+            this.SD = string.Empty;
             this.ReferenceText = string.Empty;
             this.IsUKCensus = false;
             this.Status = ReferenceStatus.BLANK;
@@ -168,6 +172,14 @@ namespace FTAnalyzer
                     this.CensusLocation = new CensusLocation(this.Place);
                 else
                     this.CensusLocation = CensusLocation.UNITED_STATES;
+            }
+            else if (this.Class.StartsWith("CAN"))
+            {
+                this.CensusYear = GetCensusYearFromReference();
+                if (this.Place.Length > 0)
+                    this.CensusLocation = new CensusLocation(this.Place);
+                else
+                    this.CensusLocation = CensusLocation.CANADA;
             }
             else
             {
@@ -833,6 +845,30 @@ namespace FTAnalyzer
                 this.MatchString = matcher.Value;
                 return true;
             }
+            matcher = Regex.Match(text, LC_CENSUS_PATTERN_1881CANADA, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "CAN1881";
+                this.CensusYear = CensusDate.CANADACENSUS1881;
+                this.ED = matcher.Groups[1].ToString();
+                this.SD = matcher.Groups[2].ToString();
+                for if (matcher.Groups[5].Length >0)
+                {
+                    this.Page = matcher.Groups[4].ToString();
+                    this.Family = matcher.Groups[5].ToString();
+                }
+                else
+                {
+                    this.Page = matcher.Groups[3].ToString();
+                    this.Family = matcher.Groups[4].ToString();
+
+                }
+                this.IsUKCensus = false;
+                this.Country = Countries.CANADA;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
             matcher = Regex.Match(text, EW_MISSINGCLASS_PATTERN, RegexOptions.IgnoreCase);
             if (matcher.Success)
             {
@@ -918,6 +954,8 @@ namespace FTAnalyzer
                 return CensusDate.UKCENSUS1911;
             if (this.Class.StartsWith("US"))
                 return CensusDate.GetUSCensusDateFromReference(this.Class);
+            if (this.Class.StartsWith("CAN"))
+                return CensusDate.GetCanadianCensusDateFromReference(this.Class);
             return FactDate.UNKNOWN_DATE;
         }
 
@@ -1069,6 +1107,13 @@ namespace FTAnalyzer
         {
             get
             {
+                if (Family.Length > 0)
+                {
+                    if (Properties.GeneralSettings.Default.UseCompactCensusRef)
+                        return ED + "/" + SD + "/" + Page + "/" + Family;
+                    else
+                        return "District: " + ED + ", Sub-District: " + SD + ", Page: " + Page + ", Family: " + Family;
+                }
                 if (Roll.Length > 0)
                 {
                     if (Properties.GeneralSettings.Default.UseCompactCensusRef)
