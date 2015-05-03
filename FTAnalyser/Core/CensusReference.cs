@@ -150,12 +150,20 @@ namespace FTAnalyzer
         {
             this.unknownCensusRef = string.Empty;
             if (this.Class.Equals("SCOT"))
+            {
                 this.CensusLocation = CensusLocation.SCOTLAND;
+                if (this.Parish.Length > 0)
+                {
+                    ScottishParish sp = ScottishParish.FindParish(this.Parish);
+                    if (sp != ScottishParish.UNKNOWN_PARISH)
+                        this.CensusLocation = new CensusLocation(string.Empty, string.Empty, sp.RD, sp.Name, sp.Region, sp.Location.ToString());
+                }
+            }
             else if (this.Class.StartsWith("US"))
             {
                 this.CensusYear = GetCensusYearFromReference();
                 if (this.Place.Length > 0)
-                    this.CensusLocation = new CensusLocation(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, this.Place);
+                    this.CensusLocation = new CensusLocation(this.Place);
                 else
                     this.CensusLocation = CensusLocation.UNITED_STATES;
             }
@@ -1095,10 +1103,19 @@ namespace FTAnalyzer
                     if (Fact.Location.Country.Equals(Countries.SCOTLAND) && (Fact.FactDate.Overlaps(CensusDate.UKCENSUS1841) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1851) ||
                         Fact.FactDate.Overlaps(CensusDate.UKCENSUS1861) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1871) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1881) ||
                         Fact.FactDate.Overlaps(CensusDate.UKCENSUS1891) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1901) || Fact.FactDate.Overlaps(CensusDate.UKCENSUS1911)))
+                    {
+                        ScottishParish sp = ScottishParish.FindParish(Parish);
                         if (Properties.GeneralSettings.Default.UseCompactCensusRef)
-                            return Parish + Parishes.Reference(Parish) + "/" + ED + "/" + Page;
+                            if (sp == ScottishParish.UNKNOWN_PARISH)
+                                return Parish + "/" + ED + "/" + Page;
+                            else
+                                return sp.Reference + "/" + ED + "/" + Page;
                         else
-                            return "Parish: " + Parish + Parishes.Reference(Parish) + " ED: " + ED + ", Page: " + Page;
+                            if (sp == ScottishParish.UNKNOWN_PARISH)
+                                return "Parish: " + Parish + ", ED: " + ED + ", Page: " + Page;
+                            else
+                                return "Parish: " + sp.Reference + ", ED: " + ED + ", Page: " + Page;
+                    }
                 }
                 else if (RD.Length > 0)
                 {

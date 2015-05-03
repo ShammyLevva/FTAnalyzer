@@ -272,7 +272,7 @@
     <Compile Include="Core\Regions.cs" />
     <Compile Include="Core\StandardisedName.cs" />
     <Compile Include="Core\ParentalRelationship.cs" />
-    <Compile Include="Core\Parishes.cs" />
+    <Compile Include="Core\ScottishParish.cs" />
     <Compile Include="Core\Relationship.cs" />
     <Compile Include="Core\Surname.cs" />
     <Compile Include="Exceptions\InvalidLocationCSVFileException.cs" />

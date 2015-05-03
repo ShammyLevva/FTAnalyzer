@@ -11,9 +11,9 @@ namespace FTAnalyzer
     public class CensusLocation
     {
         private static Dictionary<Tuple<string, string>, CensusLocation> CENSUSLOCATIONS = new Dictionary<Tuple<string, string>, CensusLocation>();
-        public static readonly CensusLocation UNKNOWN = new CensusLocation(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
-        public static readonly CensusLocation SCOTLAND = new CensusLocation(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, Countries.SCOTLAND);
-        public static readonly CensusLocation UNITED_STATES = new CensusLocation(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, Countries.UNITED_STATES);
+        public static readonly CensusLocation UNKNOWN = new CensusLocation(string.Empty);
+        public static readonly CensusLocation SCOTLAND = new CensusLocation(Countries.SCOTLAND);
+        public static readonly CensusLocation UNITED_STATES = new CensusLocation(Countries.UNITED_STATES);
         public string Year { get; private set; }
         public string Piece { get; private set; }
         public string RegistrationDistrict { get; private set; }
@@ -56,6 +56,8 @@ namespace FTAnalyzer
             //}
             #endregion
         }
+
+        public CensusLocation(string location) : this(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, location) { }
 
         public CensusLocation(string year, string piece, string rd, string parish, string county, string location)
         {
