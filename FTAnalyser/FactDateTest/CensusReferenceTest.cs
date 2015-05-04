@@ -103,6 +103,7 @@ namespace CensusReferenceTest
 
             Canadian1881Census("        123/A/55/35/1	Canada 1881", "123", "A", "35", "1");
             Canadian1881Census("        123/A/35/1	Canada 1881", "123", "A", "35", "1");
+            CanadianCensus("Year: 1881; Census Place: Richibucto, Kent, New Brunswick; Roll: C_13184; Page: 32; Family No: 144", CensusDate.CANADACENSUS1881, "C_13184", "32", "144");
 
             censusRef = new CensusReference("I1", "RG14; Piece: 21983", false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
@@ -116,6 +117,15 @@ namespace CensusReferenceTest
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.CANADACENSUS1881));
             Assert.IsTrue(censusRef.ED.Equals(ED));
             Assert.IsTrue(censusRef.SD.Equals(SD));
+            Assert.IsTrue(censusRef.Page.Equals(page));
+            Assert.IsTrue(censusRef.Family.Equals(family));
+        }
+
+        private void CanadianCensus(string reference, FactDate year, string Roll,string page, string family)
+        {
+            CensusReference censusRef = new CensusReference("I1", reference, false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(year));
+            Assert.IsTrue(censusRef.Roll.Equals(Roll));
             Assert.IsTrue(censusRef.Page.Equals(page));
             Assert.IsTrue(censusRef.Family.Equals(family));
         }

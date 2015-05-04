@@ -61,6 +61,8 @@ namespace FTAnalyzer
         private static readonly string US_CENSUS_1940_PATTERN2 = @"ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?).*? *P(age)? *(\d{1,3}[AB]?).*?T627.*?roll ?(\d{1,5}-?[AB]?)";
         private static readonly string US_CENSUS_1940_PATTERN3 = @"1940 *(.*?)(Roll)? *T627_(.*?) *P(age)? *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
 
+        private static readonly string CANADA_CENSUS_PATTERN = @"Year *(\d{4}) *Census *(.*?) *Roll *(.*?) *P(age)? *(\d{1,4}[AB]?) *Family *(\d{1,4})";
+
         private static readonly string LC_CENSUS_PATTERN_EW = @"(\d{1,5})\/(\d{1,3})\/(d{1,3}).*?England & Wales (1841|1881)";
         private static readonly string LC_CENSUS_PATTERN_1911_EW = @"(\d{1,5})\/(\d{1,3}).*?England & Wales 1911";
         private static readonly string LC_CENSUS_PATTERN_SCOT = @"(\d{1,5}-?[AB12]?)\/(\d{1,3})\/(d{1,3}).*?Scotland 1881";
@@ -254,6 +256,8 @@ namespace FTAnalyzer
                         .Replace("Sheet", "Page", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Affiliate Film Number", " ", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Place", " ", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("Family Number", "Family", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("Family No", "Family", StringComparison.InvariantCultureIgnoreCase)
                         .ClearWhiteSpace();
         }
 
@@ -797,6 +801,20 @@ namespace FTAnalyzer
                 this.MatchString = matcher.Value;
                 return true;
             }
+            matcher = Regex.Match(text, CANADA_CENSUS_PATTERN, RegexOptions.IgnoreCase);
+            if (matcher.Success)
+            {
+                this.Class = "CAN" + matcher.Groups[1].ToString();
+                this.Place = GetOriginalPlace(matcher.Groups[2].ToString(), originalText, "ROLL");
+                this.Roll = matcher.Groups[3].ToString();
+                this.Page = matcher.Groups[5].ToString();
+                this.Family = matcher.Groups[6].ToString();
+                this.IsUKCensus = false;
+                this.Country = Countries.CANADA;
+                this.Status = ReferenceStatus.GOOD;
+                this.MatchString = matcher.Value;
+                return true;
+            }
             matcher = Regex.Match(text, LC_CENSUS_PATTERN_EW, RegexOptions.IgnoreCase);
             if (matcher.Success)
             {
@@ -1115,10 +1133,20 @@ namespace FTAnalyzer
             {
                 if (Family.Length > 0)
                 {
-                    if (Properties.GeneralSettings.Default.UseCompactCensusRef)
-                        return ED + "/" + SD + "/" + Page + "/" + Family;
+                    if (Roll.Length > 0)
+                    {
+                        if (Properties.GeneralSettings.Default.UseCompactCensusRef)
+                            return Roll + "/" + Page + "/" + Family;
+                        else
+                            return "Roll: " + Roll + ", Page: " + Page + ", Family: " + Family;
+                    }
                     else
-                        return "District: " + ED + ", Sub-District: " + SD + ", Page: " + Page + ", Family: " + Family;
+                    {
+                        if (Properties.GeneralSettings.Default.UseCompactCensusRef)
+                            return ED + "/" + SD + "/" + Page + "/" + Family;
+                        else
+                            return "District: " + ED + ", Sub-District: " + SD + ", Page: " + Page + ", Family: " + Family;
+                    }
                 }
                 if (Roll.Length > 0)
                 {
