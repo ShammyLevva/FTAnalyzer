@@ -330,7 +330,8 @@ namespace FTAnalyzer
                     }
                     SetCommentAndLocation(FactType, FamilyTree.GetText(node, false), FamilyTree.GetText(node, "PLAC", false),
                         FamilyTree.GetText(node, "PLAC/MAP/LATI", false), FamilyTree.GetText(node, "PLAC/MAP/LONG", false));
-                    SetAddress(FactType, node);
+                    if(Location.IsBlank)
+                        SetAddress(FactType, node);
 
                     // only check UK census dates for errors as those are used for colour census
                     if (FactType.Equals(CENSUS) && Location.IsUnitedKingdom)
@@ -474,7 +475,8 @@ namespace FTAnalyzer
             string address = string.Empty;
             if (addr.FirstChild != null && addr.FirstChild.Value != null)
                 address = addr.FirstChild.Value;
-            foreach (XmlNode cont in node.SelectNodes("ADDR/CONT"))
+            XmlNodeList list = node.SelectNodes("ADDR/CONT");
+            foreach (XmlNode cont in list)
             {
                 if (cont.FirstChild != null && cont.FirstChild.Value != null)
                     address += " " + cont.FirstChild.Value;
@@ -491,9 +493,6 @@ namespace FTAnalyzer
             //+1 POST <ADDRESS_POSTAL_CODE> {0:1} p.41
             //+1 CTRY <ADDRESS_COUNTRY> 
 
-            // if we have a location and its not a comment fact then add them together
-            if (!Location.Equals(FactLocation.UNKNOWN_LOCATION))
-                result = result + ", " + Location.GEDCOMLocation;
             if (!Fact.COMMENT_FACTS.Contains(factType))
                 Location = FactLocation.GetLocation(result);
         }
