@@ -104,7 +104,7 @@ namespace CensusReferenceTest
             Canadian1881Census("        123/A/55/35/1	Canada 1881", "123", "A", "35", "1");
             Canadian1881Census("        123/A/35/1	Canada 1881", "123", "A", "35", "1");
             CanadianCensus("Year: 1881; Census Place: Richibucto, Kent, New Brunswick; Roll: C_13184; Page: 32; Family No: 144", CensusDate.CANADACENSUS1881, "C_13184", "32", "144");
-
+            Canadian1881Census("1881 census - District 146/B, Page 59, Family 273 - living at Rainham, Haldimand, Ontario, Canada.", "146", "B", "59", "273");
             //CanadianCensus("Event Place: Dumfries South, Brant North, Ontario, Canada\nDistrict Number: 160\nSub-District: C\nDivision: 2\nPage Number: 1\nFamily Number: 3\nAffiliate Film Number: C-13264", , CensusDate.CANADACENSUS1881, "C_13184", "1", "3");
 
 
