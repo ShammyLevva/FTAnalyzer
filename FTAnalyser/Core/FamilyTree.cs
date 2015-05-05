@@ -491,10 +491,10 @@ namespace FTAnalyzer
                 resiFacts += ind.FactCount(Fact.RESIDENCE);
                 resiWarnAllow += ind.ErrorFactCount(Fact.RESIDENCE, Fact.FactError.WARNINGALLOW);
                 resiCensus += ind.ResidenceCensusFactCount;
-                lostCousinsFacts += ind.FactCount(Fact.LOSTCOUSINS);
-                lostCousinsWarnAllow += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNINGALLOW);
-                lostCousinsWarnIgnore += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNINGIGNORE);
-                lostCousinsErrors += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.ERROR);
+                lostCousinsFacts += ind.FactCount(Fact.LOSTCOUSINS) + ind.FactCount(Fact.LC_FTA);
+                lostCousinsWarnAllow += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNINGALLOW) + ind.ErrorFactCount(Fact.LC_FTA, Fact.FactError.WARNINGALLOW);
+                lostCousinsWarnIgnore += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.WARNINGIGNORE) + ind.ErrorFactCount(Fact.LC_FTA, Fact.FactError.WARNINGIGNORE);
+                lostCousinsErrors += ind.ErrorFactCount(Fact.LOSTCOUSINS, Fact.FactError.ERROR) + ind.ErrorFactCount(Fact.LC_FTA, Fact.FactError.ERROR);
                 censusReferences += ind.CensusReferenceCount(CensusReference.ReferenceStatus.GOOD);
                 blankCensusRefs += ind.CensusReferenceCount(CensusReference.ReferenceStatus.BLANK);
                 partialCensusRefs += ind.CensusReferenceCount(CensusReference.ReferenceStatus.INCOMPLETE);
@@ -1598,7 +1598,7 @@ namespace FTAnalyzer
                                 new DataError(f.FactErrorNumber, ind, f.FactErrorMessage));
                             added = true;
                         }
-                        else if (f.FactType == Fact.LOSTCOUSINS)
+                        else if (f.FactType == Fact.LOSTCOUSINS || f.FactType == Fact.LC_FTA)
                         {
                             if (!CensusDate.IsCensusYear(f.FactDate, false))
                             {

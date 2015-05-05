@@ -189,7 +189,7 @@ namespace FTAnalyzer
             get
             {
                 foreach (Fact f in AllFacts)
-                    if (f.FactType == Fact.LOSTCOUSINS)
+                    if (f.FactType == Fact.LOSTCOUSINS || f.FactType == Fact.LC_FTA)
                         return true;
                 return false;
             }
@@ -702,7 +702,7 @@ namespace FTAnalyzer
         {
             get
             {
-                IEnumerable<Fact> lcFacts = AllFacts.Where(f => f.FactType == Fact.LOSTCOUSINS);
+                IEnumerable<Fact> lcFacts = AllFacts.Where(f => f.FactType == Fact.LOSTCOUSINS || f.FactType == Fact.LC_FTA);
                 int distinctFacts = lcFacts.Distinct(factComparer).Count();
                 return LostCousinsFacts - distinctFacts;
             }
@@ -727,7 +727,7 @@ namespace FTAnalyzer
 
         public int LostCousinsFacts
         {
-            get { return facts.Count(f => f.FactType == Fact.LOSTCOUSINS); }
+            get { return facts.Count(f => f.FactType == Fact.LOSTCOUSINS || f.FactType == Fact.LC_FTA); }
         }
 
         public bool IsAlive(FactDate when)
@@ -887,6 +887,8 @@ namespace FTAnalyzer
                         {
                             cr.Fact.Sources.Add(s);
                             toAdd.Add(cr.Fact);
+                            if (cr.IsLCCensusFact)
+                                toAdd.Add(CreateLCFact(cr));
                         }
                         else
                             UpdateCensusFactReference(cr);
@@ -895,6 +897,11 @@ namespace FTAnalyzer
             }
             foreach (Fact f in toAdd)
                 AddFact(f);
+        }
+
+        private Fact CreateLCFact(CensusReference cr)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -910,8 +917,12 @@ namespace FTAnalyzer
                 {
                     checkNotes = false;
                     CensusReference cr = new CensusReference(IndividualID, notes, false);
-                    if (OKtoAddReference(cr, false)) // add census fact even if other created census facts exist for that year
+                    if (OKtoAddReference(cr, false))
+                    {   // add census fact even if other created census facts exist for that year
                         AddFact(cr.Fact);
+                        if (cr.IsLCCensusFact)
+                            AddFact(CreateLCFact(cr));
+                    }
                     else
                         UpdateCensusFactReference(cr);
                     if (cr.MatchString.Length > 0)

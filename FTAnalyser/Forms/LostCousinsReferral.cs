@@ -30,11 +30,16 @@ namespace FTAnalyzer.Forms
             List<Individual> lostCousinsFacts = ft.AllIndividuals.Where(lostCousinsFact).ToList<Individual>();
             referrals = new List<ExportReferrals>();
             foreach (Individual ind in lostCousinsFacts)
-                foreach (Fact f in ind.GetFacts(Fact.LOSTCOUSINS))
+            {
+                List<Fact> indLCFacts = new List<Fact>();
+                indLCFacts.AddRange(ind.GetFacts(Fact.LOSTCOUSINS));
+                indLCFacts.AddRange(ind.GetFacts(Fact.LC_FTA));
+                foreach (Fact f in indLCFacts)
                 {
-                    if((onlyInCommon && ind.IsBloodDirect) || !onlyInCommon)
+                    if ((onlyInCommon && ind.IsBloodDirect) || !onlyInCommon)
                         referrals.Add(new ExportReferrals(ind, f));
                 }
+            }
             reportFormHelper.LoadColumnLayout("LCReferralsColumns.xml");
             tsRecords.Text = GetCountofRecords();
         }

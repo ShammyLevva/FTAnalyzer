@@ -34,7 +34,7 @@ namespace FTAnalyzer
         public const string CHILDLESS = "*CHILD", UNMARRIED = "*UNMAR", WITNESS = "*WITNE",
                 LOOSEDEATH = "*LOOSED", LOOSEBIRTH = "*LOOSEB", FAMILYSEARCH = "*IGI",
                 CONTACT = "*CONT", ARRIVAL = "*ARRI", DEPARTURE = "*DEPT", PARENT = "*PARENT",
-                CHILDREN = "*CHILDREN", CHANGE = "*CHNG", LOSTCOUSINS = "*LOST",
+                CHILDREN = "*CHILDREN", CHANGE = "*CHNG", LOSTCOUSINS = "*LOST", LC_FTA = "*LOST_FTA",
                 DIED_SINGLE = "*SINGLE", MISSING = "*MISSING", CHILDREN1911 = "CHILDREN1911",
                 REPORT = "*REPORT", WORLD_EVENT = "*WORLD_EVENT", BIRTH_CALC = "_BIRTHCALC";
 
@@ -42,14 +42,14 @@ namespace FTAnalyzer
             CHRISTENING, BAPTISM, RESIDENCE, WITNESS, EMIGRATION, IMMIGRATION, ARRIVAL, DEPARTURE, 
             EDUCATION, DEGREE, ADOPTION, BAR_MITZVAH, BAS_MITZVAH, ADULT_CHRISTENING, CONFIRMATION, 
             FIRST_COMMUNION, ORDINATION, NATURALIZATION, GRADUATION, RETIREMENT, LOSTCOUSINS, 
-            MARR_CONTRACT, MARR_LICENSE, MARR_SETTLEMENT, MARRIAGE, MARRIAGE_BANN, DEATH, 
+            LC_FTA, MARR_CONTRACT, MARR_LICENSE, MARR_SETTLEMENT, MARRIAGE, MARRIAGE_BANN, DEATH, 
             CREMATION, BURIAL, CENSUS, BIRTH_CALC
                     });
 
         public static readonly ISet<string> LOOSE_DEATH_FACTS = new HashSet<string>(new string[] {
             CENSUS, RESIDENCE, WITNESS, EMIGRATION, IMMIGRATION, ARRIVAL, DEPARTURE, EDUCATION,
             DEGREE, ADOPTION, BAR_MITZVAH, BAS_MITZVAH, ADULT_CHRISTENING, CONFIRMATION, FIRST_COMMUNION,
-            ORDINATION, NATURALIZATION, GRADUATION, RETIREMENT, LOSTCOUSINS
+            ORDINATION, NATURALIZATION, GRADUATION, RETIREMENT, LOSTCOUSINS, LC_FTA
                     });
 
         public static readonly ISet<string> RANGED_DATE_FACTS = new HashSet<string>(new string[] {
@@ -161,6 +161,7 @@ namespace FTAnalyzer
             COMMENT_FACTS.Add(UNKNOWN);
             COMMENT_FACTS.Add(FAMILYSEARCH);
             COMMENT_FACTS.Add(LOSTCOUSINS);
+            COMMENT_FACTS.Add(LC_FTA);
             COMMENT_FACTS.Add(MISSING);
             COMMENT_FACTS.Add(DEGREE);
             COMMENT_FACTS.Add(EDUCATION);
@@ -245,6 +246,7 @@ namespace FTAnalyzer
                 case DEPARTURE: return "Departure";
                 case CHANGE: return "Record change";
                 case LOSTCOUSINS: return "Lost Cousins";
+                case LC_FTA: return "Lost Cousins (FTAnalyzer)";
                 case DIED_SINGLE: return "Died Single";
                 case UNKNOWN: return "UNKNOWN";
                 case PARENT: return "Parental Info";
@@ -633,7 +635,7 @@ namespace FTAnalyzer
             if (!HasValidCensusReference)
                 this.CensusReference = cr;
             if (Location.IsBlank)
-                Location = cl.Equals(CensusLocation.UNKNOWN) ? 
+                Location = cl.Equals(CensusLocation.UNKNOWN) ?
                     FactLocation.GetLocation(cr.Country, Properties.GeneralSettings.Default.AddCreatedLocations) :
                     FactLocation.GetLocation(cl.Location, Properties.GeneralSettings.Default.AddCreatedLocations);
             if (Comment.Length == 0 && comment.Length > 0)
@@ -817,7 +819,8 @@ namespace FTAnalyzer
 
         public bool IsValidLostCousins(FactDate when)
         {
-            return FactDate.IsKnown && FactType == Fact.LOSTCOUSINS && FactDate.Overlaps(when) && FactDate.IsNotBEForeOrAFTer && FactErrorLevel == Fact.FactError.GOOD;
+            return FactDate.IsKnown && (FactType == Fact.LOSTCOUSINS || FactType == Fact.LC_FTA) 
+                && FactDate.Overlaps(when) && FactDate.IsNotBEForeOrAFTer && FactErrorLevel == Fact.FactError.GOOD;
         }
 
         public bool IsOverseasUKCensus(string country)
