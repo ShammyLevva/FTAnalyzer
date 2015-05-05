@@ -950,16 +950,13 @@ namespace FTAnalyzer
         private void UpdateCensusFactReference(CensusReference cr)
         {
             Fact censusFact = GetCensusFact(cr.Fact, false);
-            if (censusFact != null && censusFact.CensusReference.Status.Equals(CensusReference.ReferenceStatus.BLANK)
-                && (cr.Status.Equals(CensusReference.ReferenceStatus.GOOD) || cr.Status.Equals(CensusReference.ReferenceStatus.INCOMPLETE)))
+            if (censusFact != null && censusFact.CensusReference.Status.Equals(CensusReference.ReferenceStatus.BLANK) && (cr.IsKnownStatus))
                 censusFact.SetCensusReferenceDetails(cr, CensusLocation.UNKNOWN, string.Empty);
         }
 
         private bool OKtoAddReference(CensusReference cr, bool includeCreated)
         {
-            return !cr.Status.Equals(CensusReference.ReferenceStatus.BLANK) &&
-                   !cr.Status.Equals(CensusReference.ReferenceStatus.UNRECOGNISED) &&
-                   !CensusFactExists(cr.Fact.FactDate, includeCreated);
+            return cr.IsKnownStatus && !CensusFactExists(cr.Fact.FactDate, includeCreated);
         }
 
         private void AddLocation(Fact fact)

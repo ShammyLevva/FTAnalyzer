@@ -770,7 +770,7 @@ namespace FTAnalyzer
                 this.CensusYear = CensusDate.CANADACENSUS1881;
                 this.ED = matcher.Groups[1].ToString();
                 this.SD = matcher.Groups[2].ToString();
-                if (matcher.Groups[5].Length >0)
+                if (matcher.Groups[5].Length > 0)
                 {
                     this.Page = matcher.Groups[4].ToString();
                     this.Family = matcher.Groups[5].ToString();
@@ -1019,6 +1019,11 @@ namespace FTAnalyzer
                 }
             }
             return Countries.ENG_WALES;
+        }
+
+        public bool IsKnownStatus
+        {
+            get { return Status.Equals(ReferenceStatus.GOOD) || Status.Equals(ReferenceStatus.INCOMPLETE); }
         }
 
         public string Reference

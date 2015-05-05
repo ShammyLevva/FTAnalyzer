@@ -368,7 +368,7 @@ namespace FTAnalyzer
                     if (IsCensusFact)
                     {
                         CheckForSharedFacts(node);
-                        if (this.CensusReference == CensusReference.UNKNOWN)
+                        if (this.CensusReference == CensusReference.UNKNOWN || !this.CensusReference.IsKnownStatus)
                             this.CensusReference = new CensusReference(this, node);
                     }
                     if (FactType == DEATH)
