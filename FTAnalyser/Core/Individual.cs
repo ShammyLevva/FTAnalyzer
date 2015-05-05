@@ -888,7 +888,7 @@ namespace FTAnalyzer
                             cr.Fact.Sources.Add(s);
                             toAdd.Add(cr.Fact);
                             if (cr.IsLCCensusFact)
-                                toAdd.Add(CreateLCFact(cr));
+                                CreateLCFact(toAdd, cr);
                         }
                         else
                             UpdateCensusFactReference(cr);
@@ -899,9 +899,16 @@ namespace FTAnalyzer
                 AddFact(f);
         }
 
-        private Fact CreateLCFact(CensusReference cr)
+        private void CreateLCFact(List<Fact> toAdd, CensusReference cr)
         {
-            throw new NotImplementedException();
+            if (!IsLostCousinsEntered((CensusDate)cr.Fact.FactDate))
+            {
+                Fact lcFact = new Fact("LostCousins", Fact.LC_FTA, cr.Fact.FactDate, cr.Fact.Location, "Lost Cousins fact created by FTAnalyzer by recognising census ref " + cr.Reference, false, true);
+                if (toAdd == null)
+                    AddFact(lcFact);
+                else
+                    toAdd.Add(lcFact);
+            }
         }
 
         /// <summary>
@@ -921,7 +928,7 @@ namespace FTAnalyzer
                     {   // add census fact even if other created census facts exist for that year
                         AddFact(cr.Fact);
                         if (cr.IsLCCensusFact)
-                            AddFact(CreateLCFact(cr));
+                            CreateLCFact(null, cr);
                     }
                     else
                         UpdateCensusFactReference(cr);
