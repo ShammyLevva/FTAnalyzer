@@ -325,7 +325,7 @@ namespace FTAnalyzer
             CountUnknownFactTypes();
             FactLocation.LoadGoogleFixesXMLFile(xmlErrorbox);
             Application.DoEvents();
-            pbR.Maximum += LoadLegacyLocations(doc.SelectNodes("GED/_PLAC_DEFN/PLAC"));
+            LoadLegacyLocations(doc.SelectNodes("GED/_PLAC_DEFN/PLAC"), pbR);
             LoadGeoLocationsFromDataBase(pbR);
             _loading = false;
             _dataloaded = true;
@@ -2421,8 +2421,9 @@ namespace FTAnalyzer
 
         #region Geocoding
 
-        private int LoadLegacyLocations(XmlNodeList list)
+        private void LoadLegacyLocations(XmlNodeList list, ProgressBar pb)
         {
+            pb.Maximum += list.Count;
             int beforeCount = FactLocation.AllLocations.Count();
             foreach (XmlNode node in list)
             {
@@ -2435,9 +2436,11 @@ namespace FTAnalyzer
                     string lng = long_node.InnerText;
                     FactLocation loc = FactLocation.GetLocation(place, lat, lng, FactLocation.Geocode.GEDCOM_USER, true, true);
                 }
+                pb.Value++;
+                Application.DoEvents();
             }
             int afterCount = FactLocation.AllLocations.Count();
-            return afterCount - beforeCount;
+            pb.Maximum += afterCount - beforeCount;
         }
 
         public void LoadGeoLocationsFromDataBase(ProgressBar pb)
