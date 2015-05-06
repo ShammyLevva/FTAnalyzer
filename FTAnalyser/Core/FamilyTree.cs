@@ -325,7 +325,7 @@ namespace FTAnalyzer
             CountUnknownFactTypes();
             FactLocation.LoadGoogleFixesXMLFile(xmlErrorbox);
             Application.DoEvents();
-            LoadLegacyLocations(doc.SelectNodes("GED/_PLAC_DEFN/PLAC"));
+            pbR.Maximum += LoadLegacyLocations(doc.SelectNodes("GED/_PLAC_DEFN/PLAC"));
             LoadGeoLocationsFromDataBase(pbR);
             _loading = false;
             _dataloaded = true;
@@ -2421,20 +2421,23 @@ namespace FTAnalyzer
 
         #region Geocoding
 
-        private void LoadLegacyLocations(XmlNodeList list)
+        private int LoadLegacyLocations(XmlNodeList list)
         {
-            foreach(XmlNode node in list)
+            int beforeCount = FactLocation.AllLocations.Count();
+            foreach (XmlNode node in list)
             {
                 string place = GetText(node, false);
                 XmlNode lat_node = node.SelectSingleNode("MAP/LATI");
                 XmlNode long_node = node.SelectSingleNode("MAP/LONG");
-                if (lat_node != null && long_node != null)
+                if (place.Length > 0 && lat_node != null && long_node != null)
                 {
                     string lat = lat_node.InnerText;
                     string lng = long_node.InnerText;
                     FactLocation loc = FactLocation.GetLocation(place, lat, lng, FactLocation.Geocode.GEDCOM_USER, true, true);
                 }
             }
+            int afterCount = FactLocation.AllLocations.Count();
+            return afterCount - beforeCount;
         }
 
         public void LoadGeoLocationsFromDataBase(ProgressBar pb)
@@ -2991,7 +2994,7 @@ namespace FTAnalyzer
                         rowCount++;
                     }
                     pb.Value++;
-                    if(pb.Value % 10 == 0)
+                    if (pb.Value % 10 == 0)
                         Application.DoEvents();
                 }
                 MessageBox.Show("Loaded " + rowCount + " locations from TNG file " + tngFilename, "FTAnalyzer");
