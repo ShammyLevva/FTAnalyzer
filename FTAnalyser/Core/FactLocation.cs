@@ -420,7 +420,23 @@ namespace FTAnalyzer
             // GEDCOM lat/long will be prefixed with NS and EW which needs to be +/- to work.
             latitude = latitude.Replace("N", "").Replace("S", "-");
             longitude = longitude.Replace("W", "-").Replace("E", "");
-            if (!locations.TryGetValue(place, out result))
+            if (locations.TryGetValue(place, out result))
+            {  // found location now check if we need to update its geocoding
+                if(updateLatLong && !result.IsGeoCoded(true))
+                {  // we are updating and old value isn't geocoded
+                    temp = new FactLocation(place, latitude, longitude, status);
+                    if (temp.IsGeoCoded(true))
+                    {
+                        result.Latitude = temp.Latitude;
+                        result.LatitudeM = temp.LatitudeM;
+                        result.Longitude = temp.Longitude;
+                        result.LongitudeM = temp.LongitudeM;
+                        SaveLocationToDatabase(result);
+                    }
+                    return result;
+                }
+            }
+            else
             {
                 result = new FactLocation(place, latitude, longitude, status);
                 if (locations.TryGetValue(result.ToString(), out temp))
@@ -462,7 +478,7 @@ namespace FTAnalyzer
             {   // check whether the location in database is geocoded.
                 FactLocation inDatabase = new FactLocation(loc.ToString());
                 DatabaseHelper.Instance.GetLocationDetails(inDatabase);
-                if(!inDatabase.IsGeoCoded(true))
+                if (!inDatabase.IsGeoCoded(true))
                     DatabaseHelper.Instance.UpdateGeocode(loc); // only update if existing record wasn't geocoded
             }
             else
