@@ -304,6 +304,7 @@
       <RegionTypo from="Dumbartonshire" to="Dunbartonshire" />
       <RegionTypo from="Berwick"        to="Berwickshire" />
       <RegionTypo from="Invernessshire" to="Inverness-shire" />
+      <RegionTypo from="Invernesshire"  to="Inverness-shire" />
       <RegionTypo from="Kinrossshire"   to="Kinross-shire" />
       <RegionTypo from="Peeblesshire"   to="Peebles" />
       <RegionTypo from="Peebles-shire"  to="Peebles" />

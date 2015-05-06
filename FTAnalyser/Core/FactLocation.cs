@@ -387,7 +387,6 @@ namespace FTAnalyzer
                 string before = (SubRegion + ", " + Region + ", " + Country).ToUpper().Trim();
                 if (!Properties.GeneralSettings.Default.AllowEmptyLocations)
                     FixEmptyFields();
-                FixCapitalisation();
                 FixRegionFullStops();
                 FixCountryFullStops();
                 FixMultipleSpacesAmpersandsCommas();
@@ -400,6 +399,7 @@ namespace FTAnalyzer
                 SetSortableLocation();
                 SetMetaphones();
                 KnownRegion = Regions.GetRegion(Region);
+                FixCapitalisation();
                 //string after = (parish + ", " + region + ", " + country).ToUpper().Trim();
                 //if (!before.Equals(after))
                 //    Console.WriteLine("Debug : '" + before + "'  converted to '" + after + "'");
