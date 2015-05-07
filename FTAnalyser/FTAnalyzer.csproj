@@ -222,6 +222,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comparators\Census\CensusIndividualIDComparer.cs" />
     <Compile Include="Comparators\Census\CensusIndividualNameComparer.cs" />
     <Compile Include="Comparators\Census\CensusFamilyGedComparer.cs" />
     <Compile Include="Comparators\Census\DefaultCensusComparer.cs" />

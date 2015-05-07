@@ -22,6 +22,11 @@ namespace FTAnalyzer
             this.CensusStatus = CensusStatus;
         }
 
+        public int FamilyMembersCount
+        {
+            get { return family.Members.Count<CensusIndividual>(); }
+        }
+
         public string FamilyID
         {
             get { return family.FamilyID; }
