@@ -51,33 +51,18 @@ namespace FTAnalyzer.Forms
         {
             IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, CensusDone, true);
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Where(filter).ToList();
-            //RemoveDuplicateIndividuals(individuals);
+            individuals = FilterDuplicateIndividuals(individuals);
             RecordCount = individuals.Count;
             SetupDataGridView(CensusDone, individuals);
         }
 
-        private void RemoveDuplicateIndividuals(List<CensusIndividual> individuals)
-        {  // detect all possible duplicates and remove any where the individual is the only person in the census family
-            List<CensusIndividual> toRemove = new List<CensusIndividual>();
-            IEnumerable<CensusIndividual> duplicates = individuals.Distinct(new CensusIndividualIDComparer());
-            foreach(CensusIndividual c in duplicates)
-            {
-                IEnumerable<CensusIndividual> entries = individuals.Where(x => x.IndividualID == c.IndividualID);
-                bool remove = false;
-                List<CensusIndividual> candidates = new List<CensusIndividual>();
-                foreach (CensusIndividual ci in entries)
-                {
-                    if (ci.FamilyMembersCount == 1)
-                        candidates.Add(ci);
-                    else
-                        remove = true;
-                }
-                if (remove)
-                    toRemove.AddRange(candidates);
-            }
-            // we now have all people to remove that appear solo and in a family but what about people that appear solo twice or more
-            // we need to remove the toRemove from list and the multiple solo people.
-            // Another foreach loop???
+        private List<CensusIndividual> FilterDuplicateIndividuals(List<CensusIndividual> individuals)
+        {
+            List<CensusIndividual> result = individuals.Where(i => i.FamilyMembersCount > 1).ToList();
+            foreach (CensusIndividual i in individuals.Where(i => i.FamilyMembersCount == 1)) 
+                if (!result.Contains(i))
+                    result.Add(i);
+            return result;
         }
 
         public void SetupLCCensus(Predicate<CensusIndividual> relationFilter, bool showEnteredLostCousins)

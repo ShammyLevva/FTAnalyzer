@@ -102,7 +102,7 @@ namespace FTAnalyzer
                     {
                         try
                         {
-                            line = line.Replace('–', '-').Replace('—', '-');
+                            line = line.Replace('–', '-').Replace('—', '-').Replace("***Data is already there***", ""); // "data is already there" is some Ancestry anomaly
                             cpos1 = line.IndexOf(' ');
                             if (cpos1 < 0) throw new Exception("No space in line");
 
