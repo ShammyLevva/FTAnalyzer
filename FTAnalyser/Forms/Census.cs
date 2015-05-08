@@ -59,9 +59,13 @@ namespace FTAnalyzer.Forms
         private List<CensusIndividual> FilterDuplicateIndividuals(List<CensusIndividual> individuals)
         {
             List<CensusIndividual> result = individuals.Where(i => i.FamilyMembersCount > 1).ToList();
-            foreach (CensusIndividual i in individuals.Where(i => i.FamilyMembersCount == 1)) 
-                if (!result.Contains(i))
+            HashSet<string> ids = new HashSet<string>(result.Select(i => i.IndividualID));
+            foreach (CensusIndividual i in individuals.Where(i => i.FamilyMembersCount == 1))
+                if (!ids.Contains(i.IndividualID))
+                {
                     result.Add(i);
+                    ids.Add(i.IndividualID);
+                }
             return result;
         }
 
