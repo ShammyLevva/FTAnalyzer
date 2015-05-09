@@ -186,6 +186,7 @@ namespace FTAnalyzer
                 rtbOutput.Text = string.Empty;
             tsCountLabel.Text = string.Empty;
             tsHintsLabel.Text = string.Empty;
+            tsStatusLabel.Text = string.Empty;
             rtbToday.Text = string.Empty;
             pbSources.Value = 0;
             pbIndividuals.Value = 0;
