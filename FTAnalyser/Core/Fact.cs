@@ -166,8 +166,6 @@ namespace FTAnalyzer
             COMMENT_FACTS.Add(DEGREE);
             COMMENT_FACTS.Add(EDUCATION);
             COMMENT_FACTS.Add(GRADUATION);
-            COMMENT_FACTS.Add(DEPARTURE);
-            COMMENT_FACTS.Add(ARRIVAL);
             COMMENT_FACTS.Add(EMPLOYMENT);
             COMMENT_FACTS.Add(MEDICAL_CONDITION);
             COMMENT_FACTS.Add(ORDINATION);

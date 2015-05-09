@@ -941,6 +941,7 @@ namespace FTAnalyzer
                     geo = new GeocodeLocations();
                 geo.Show();
                 geo.Focus();
+                Application.DoEvents();
                 switch (type)
                 {
                     case GecodingType.Google:
