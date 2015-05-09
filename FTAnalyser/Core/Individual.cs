@@ -737,7 +737,7 @@ namespace FTAnalyzer
 
         public bool IsBorn(FactDate when)
         {
-            return !BirthDate.IsKnown || BirthDate.IsBefore(when); // assume born if birthdate is unknown
+            return !BirthDate.IsKnown || BirthDate.StartsBefore(when); // assume born if birthdate is unknown
         }
 
         public bool IsDeceased(FactDate when)
