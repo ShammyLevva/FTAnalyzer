@@ -1028,7 +1028,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Predicate<Individual> predicate = new Predicate<Individual>(x => x.Notes.ToLower().Contains("census"));
-            List<Individual> censusNotes = ft.AllIndividuals.Where(predicate).ToList<Individual>();
+            List<Individual> censusNotes = ft.AllIndividuals.Filter(predicate).ToList<Individual>();
             People people = new People();
             people.SetIndividuals(censusNotes, "List of Possible Census records incorrectly recorded as notes");
             DisposeDuplicateForms(people);
@@ -1116,15 +1116,7 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabSurnames)
                 {
-                    tspbTabProgress.Visible = true;
-                    SortableBindingList<SurnameStats> list = new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(tspbTabProgress));
-                    dgSurnames.DataSource = list;
-                    dgSurnames.Sort(dgSurnames.Columns["Surname"], ListSortDirection.Ascending);
-                    dgSurnames.AllowUserToResizeColumns = true;
-                    dgSurnames.Focus();
-                    tsCountLabel.Text = Properties.Messages.Count + list.Count + " Surnames.";
-                    tsHintsLabel.Text = Properties.Messages.Hints_Surname;
-                    tspbTabProgress.Visible = false;
+                    // show empty form click button to load
                 }
                 else if (tabSelector.SelectedTab == tabCensus)
                 {
@@ -1312,7 +1304,7 @@ namespace FTAnalyzer
             rtbLostCousins.SelectionLength = 0;
 
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
-            IEnumerable<Individual> listToCheck = ft.AllIndividuals.Where(relationFilter).ToList();
+            IEnumerable<Individual> listToCheck = ft.AllIndividuals.Filter(relationFilter).ToList();
 
             int countEW1841 = listToCheck.Count(ind => ind.IsLostCousinsEntered(CensusDate.EWCENSUS1841, false) == true);
             int countEW1881 = listToCheck.Count(ind => ind.IsLostCousinsEntered(CensusDate.EWCENSUS1881, false) == true);
@@ -1995,7 +1987,7 @@ namespace FTAnalyzer
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            Facts facts = new Facts(ft.AllIndividuals.Where(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true));
+            Facts facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true));
             facts.Show();
             HourGlass(false);
         }
@@ -2099,7 +2091,7 @@ namespace FTAnalyzer
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            Facts facts = new Facts(ft.AllIndividuals.Where(filter), BuildFactTypeList(ckbFactSelect, false));
+            Facts facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, false));
             facts.Show();
             HourGlass(false);
         }
@@ -2292,7 +2284,7 @@ namespace FTAnalyzer
         private string GetRandomSurname()
         {
             Predicate<Individual> direct = x => x.RelationType == Individual.DIRECT;
-            IEnumerable<Individual> directs = ft.AllIndividuals.Where(direct);
+            IEnumerable<Individual> directs = ft.AllIndividuals.Filter(direct);
             List<string> surnames = directs.Select(x => x.Surname).Distinct<string>().ToList<string>();
             Random rnd = new Random();
             string surname;
@@ -2454,7 +2446,7 @@ namespace FTAnalyzer
             foreach (string censusref in distinctRefs)
             {
                 Predicate<DisplayFact> match = x => censusref == x.FactDate.StartDate.Year + x.CensusReference.ToString();
-                IEnumerable<DisplayFact> result = censusRefs.Where(match);
+                IEnumerable<DisplayFact> result = censusRefs.Filter(match);
                 int count = result.Select(x => x.Location).Distinct().Count();
                 if (count > 1)
                     results.AddRange(result);
@@ -2555,8 +2547,8 @@ namespace FTAnalyzer
                 Predicate<Family> surnameFilter = x => x.ContainsSurname(txtColouredSurname.Text);
                 Predicate<Family> relationFilter = relTypesColoured.BuildFamilyFilter<Family>(x => x.RelationTypes);
                 if (txtColouredSurname.Text.Length > 0)
-                    candidates = candidates.Where(surnameFilter);
-                List<Family> list = candidates.Where(relationFilter).ToList<Family>();
+                    candidates = candidates.Filter(surnameFilter);
+                List<Family> list = candidates.Filter(relationFilter).ToList<Family>();
                 list.Sort(new DefaultFamilyComparer());
                 foreach (Family family in list)
                 {
@@ -2844,6 +2836,26 @@ namespace FTAnalyzer
                 ft.BackupDatabase(saveDatabase, "FT Analyzer zip file created by v" + VERSION);
             if (result != System.Windows.Forms.DialogResult.Cancel)
                 ft.LoadLocationData(pb, label, defaultIndex);
+        }
+
+        private void btnShowSurnames_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            tsCountLabel.Text = string.Empty;
+            tsHintsLabel.Text = string.Empty;
+            tspbTabProgress.Visible = true;
+            Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
+            Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
+            
+            SortableBindingList<SurnameStats> list = new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, tspbTabProgress));
+            dgSurnames.DataSource = list;
+            dgSurnames.Sort(dgSurnames.Columns["Surname"], ListSortDirection.Ascending);
+            dgSurnames.AllowUserToResizeColumns = true;
+            dgSurnames.Focus();
+            tsCountLabel.Text = Properties.Messages.Count + list.Count + " Surnames.";
+            tsHintsLabel.Text = Properties.Messages.Hints_Surname;
+            tspbTabProgress.Visible = false;
+            HourGlass(false);
         }
     }
 }

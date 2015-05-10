@@ -970,12 +970,12 @@ namespace FTAnalyzer.Forms
         public void SelectLocation(FactLocation location)
         {
             Predicate<DataGridViewRow> condition = r => r.Cells["GeocodedLocation"].Value.ToString().Equals(location.SortableLocation);
-            DataGridViewRow row = dgLocations.Rows.Cast<DataGridViewRow>().Where(condition).FirstOrDefault();
+            DataGridViewRow row = dgLocations.Rows.Cast<DataGridViewRow>().Filter(condition).FirstOrDefault();
             if (row == null)
             {
                 dgLocations.DataSource = ApplyFilters(location);  // forces location to appear in list
                 dgLocations.Refresh();
-                row = dgLocations.Rows.Cast<DataGridViewRow>().Where(condition).FirstOrDefault();
+                row = dgLocations.Rows.Cast<DataGridViewRow>().Filter(condition).FirstOrDefault();
             }
             if (row != null)
             {
@@ -1209,7 +1209,7 @@ namespace FTAnalyzer.Forms
             if (loc.Level >= FactLocation.ADDRESS)
             {
                 Predicate<OS50kGazetteer> match = x => (x.FuzzyMatch == loc.FuzzyMatch || x.FuzzyNoParishMatch == loc.FuzzyNoParishMatch) && x.IsCountyMatch(loc);
-                List<OS50kGazetteer> results = OS50k.Where(match).ToList<OS50kGazetteer>();
+                List<OS50kGazetteer> results = OS50k.Filter(match).ToList<OS50kGazetteer>();
                 if (results.Count > 0)
                 {
                     if(loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH || loc.GeocodeStatus == FactLocation.Geocode.LEVEL_MISMATCH)
@@ -1256,7 +1256,7 @@ namespace FTAnalyzer.Forms
             IList<OS50kGazetteer> results = null;
             if (key.Length > 0 && OS50kDictionary.TryGetValue(key, out results))
             {
-                IEnumerable<OS50kGazetteer> placeMatches = results.Where(x => x.IsCountyMatch(loc));
+                IEnumerable<OS50kGazetteer> placeMatches = results.Filter(x => x.IsCountyMatch(loc));
                 if (placeMatches.Count() > 0)
                     return ProcessOS50kMatches(placeMatches, loc, FactLocation.PLACE);
                 else

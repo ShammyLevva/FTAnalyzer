@@ -95,7 +95,7 @@ namespace FTAnalyzer.Forms
             this.Text = "Individuals & Families whose surame is " + stat.Surname;
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
             Predicate<Individual> indSurnames = x => x.Surname.Equals(stat.Surname);
-            foreach (Individual i in ft.AllIndividuals.Where(indSurnames))
+            foreach (Individual i in ft.AllIndividuals.Filter(indSurnames))
                 dsInd.Add(i);
             dgIndividuals.DataSource = dsInd;
             SortIndividuals();
@@ -103,7 +103,7 @@ namespace FTAnalyzer.Forms
 
             Predicate<Family> famSurnames = x => x.ContainsSurname(stat.Surname);
             SortableBindingList<IDisplayFamily> dsFam = new SortableBindingList<IDisplayFamily>();
-            foreach (Family f in ft.AllFamilies.Where(famSurnames))
+            foreach (Family f in ft.AllFamilies.Filter(famSurnames))
                 dsFam.Add(f);
             dgFamilies.DataSource = dsFam;
             SortFamilies();
@@ -115,16 +115,16 @@ namespace FTAnalyzer.Forms
         {
             Predicate<Individual> lcFacts = i => i.DuplicateLCFacts > 0;
             Predicate<Individual> filter = FilterUtils.AndFilter<Individual>(relationFilter, lcFacts);
-            List<Individual> individuals = ft.AllIndividuals.Where(filter).ToList();
+            List<Individual> individuals = ft.AllIndividuals.Filter(filter).ToList();
             SetIndividuals(individuals, "Lost Cousins with Duplicate Facts");
         }
 
         public void SetupLCnoCensus(Predicate<Individual> relationFilter)
         {
-            List<Individual> listtoCheck = ft.AllIndividuals.Where(relationFilter).ToList();
+            List<Individual> listtoCheck = ft.AllIndividuals.Filter(relationFilter).ToList();
             List<Individual> individuals = new List<Individual>();
             Predicate<Individual> lcFacts = new Predicate<Individual>(i => i.HasLostCousinsFactWithNoCensusFact);
-            IEnumerable<Individual> censusMissing = listtoCheck.Where(lcFacts);
+            IEnumerable<Individual> censusMissing = listtoCheck.Filter(lcFacts);
             individuals.AddRange(censusMissing);
             individuals = individuals.Distinct<Individual>().ToList();
             SetIndividuals(individuals, "Lost Cousins facts with no corresponding census entry");
@@ -134,7 +134,7 @@ namespace FTAnalyzer.Forms
         {
             Predicate<Individual> lcFacts = x => x.LostCousinsFacts > 0;
             Predicate<Individual> filter = FilterUtils.AndFilter<Individual>(relationFilter, lcFacts);
-            IEnumerable<Individual> listToCheck = ft.AllIndividuals.Where(filter).ToList();
+            IEnumerable<Individual> listToCheck = ft.AllIndividuals.Filter(filter).ToList();
 
             Predicate<Individual> missing = x => !x.IsLostCousinsEntered(CensusDate.EWCENSUS1841, false)
                                               && !x.IsLostCousinsEntered(CensusDate.EWCENSUS1881, false)
@@ -144,7 +144,7 @@ namespace FTAnalyzer.Forms
                                               && !x.IsLostCousinsEntered(CensusDate.IRELANDCENSUS1911, false)
                                               && !x.IsLostCousinsEntered(CensusDate.USCENSUS1880, false)
                                               && !x.IsLostCousinsEntered(CensusDate.USCENSUS1940, false);
-            List<Individual> individuals = listToCheck.Where(missing).ToList<Individual>();
+            List<Individual> individuals = listToCheck.Filter(missing).ToList<Individual>();
             SetIndividuals(individuals, "Lost Cousins facts with no facts found to identify Country");
         }
 
@@ -293,7 +293,7 @@ namespace FTAnalyzer.Forms
             foreach (CensusDate censusDate in CensusDate.SUPPORTED_CENSUS)
             {
                 Predicate<Individual> censusFacts = new Predicate<Individual>(x => x.IsCensusDone(censusDate) && !x.HasCensusLocation(censusDate));
-                IEnumerable<Individual> censusMissing = ft.AllIndividuals.Where(censusFacts);
+                IEnumerable<Individual> censusMissing = ft.AllIndividuals.Filter(censusFacts);
                 individuals.AddRange(censusMissing);
             }
             individuals = individuals.Distinct<Individual>().ToList();
@@ -306,7 +306,7 @@ namespace FTAnalyzer.Forms
             foreach (CensusDate censusDate in CensusDate.SUPPORTED_CENSUS)
             {
                 Predicate<Individual> censusFacts = new Predicate<Individual>(i => i.CensusDateFactCount(censusDate) > 1);
-                IEnumerable<Individual> censusMissing = ft.AllIndividuals.Where(censusFacts);
+                IEnumerable<Individual> censusMissing = ft.AllIndividuals.Filter(censusFacts);
                 individuals.AddRange(censusMissing);
             }
             individuals = individuals.Distinct<Individual>().ToList();

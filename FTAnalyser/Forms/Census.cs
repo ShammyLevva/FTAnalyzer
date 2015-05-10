@@ -50,7 +50,7 @@ namespace FTAnalyzer.Forms
         public void SetupCensus(Predicate<CensusIndividual> filter)
         {
             IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, CensusDone, true);
-            List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Where(filter).ToList();
+            List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Filter(filter).ToList();
             individuals = FilterDuplicateIndividuals(individuals);
             RecordCount = individuals.Count;
             SetupDataGridView(CensusDone, individuals);
@@ -58,9 +58,9 @@ namespace FTAnalyzer.Forms
 
         private List<CensusIndividual> FilterDuplicateIndividuals(List<CensusIndividual> individuals)
         {
-            List<CensusIndividual> result = individuals.Where(i => i.FamilyMembersCount > 1).ToList();
+            List<CensusIndividual> result = individuals.Filter(i => i.FamilyMembersCount > 1).ToList();
             HashSet<string> ids = new HashSet<string>(result.Select(i => i.IndividualID));
-            foreach (CensusIndividual i in individuals.Where(i => i.FamilyMembersCount == 1))
+            foreach (CensusIndividual i in individuals.Filter(i => i.FamilyMembersCount == 1))
                 if (!ids.Contains(i.IndividualID))
                 {
                     result.Add(i);
@@ -79,7 +79,7 @@ namespace FTAnalyzer.Forms
                 predicate = x => x.MissingLostCousins(CensusDate, false);
             IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, true, false);
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, predicate);
-            List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Where(filter).ToList();
+            List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Filter(filter).ToList();
             RecordCount = individuals.Count;
             SetupDataGridView(true, individuals);
         }

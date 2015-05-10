@@ -55,6 +55,7 @@
             this.mnuRestore = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuLoadLocationsCSV = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuLoadLocationsTNG = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuCloseGEDCOM = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,6 +104,7 @@
             this.tsCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsHintsLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tspbTabProgress = new System.Windows.Forms.ToolStripProgressBar();
+            this.tsStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
             this.dgDataErrors = new System.Windows.Forms.DataGridView();
             this.dgRegions = new System.Windows.Forms.DataGridView();
@@ -286,9 +288,9 @@
             this.dpToday = new System.Windows.Forms.DateTimePicker();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.mnuLoadLocationsTNG = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnShowSurnames = new System.Windows.Forms.Button();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
+            this.reltypesSurnames = new Controls.RelationTypes();
             this.relTypesFacts = new Controls.RelationTypes();
             this.cenDate = new Controls.CensusDateSelector();
             this.relTypesCensus = new Controls.RelationTypes();
@@ -530,6 +532,13 @@
             this.mnuLoadLocationsCSV.Size = new System.Drawing.Size(238, 22);
             this.mnuLoadLocationsCSV.Text = "Load Geocoded Locations CSV";
             this.mnuLoadLocationsCSV.Click += new System.EventHandler(this.mnuLoadLocationsCSV_Click);
+            // 
+            // mnuLoadLocationsTNG
+            // 
+            this.mnuLoadLocationsTNG.Name = "mnuLoadLocationsTNG";
+            this.mnuLoadLocationsTNG.Size = new System.Drawing.Size(238, 22);
+            this.mnuLoadLocationsTNG.Text = "Load Geocoded Locations TNG";
+            this.mnuLoadLocationsTNG.Click += new System.EventHandler(this.mnuLoadLocationsTNG_Click);
             // 
             // toolStripSeparator5
             // 
@@ -889,6 +898,11 @@
             this.tspbTabProgress.Name = "tspbTabProgress";
             this.tspbTabProgress.Size = new System.Drawing.Size(200, 16);
             this.tspbTabProgress.Visible = false;
+            // 
+            // tsStatusLabel
+            // 
+            this.tsStatusLabel.Name = "tsStatusLabel";
+            this.tsStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // dgDataErrors
             // 
@@ -2403,6 +2417,8 @@
             // 
             // tabSurnames
             // 
+            this.tabSurnames.Controls.Add(this.btnShowSurnames);
+            this.tabSurnames.Controls.Add(this.reltypesSurnames);
             this.tabSurnames.Controls.Add(this.dgSurnames);
             this.tabSurnames.Location = new System.Drawing.Point(4, 22);
             this.tabSurnames.Name = "tabSurnames";
@@ -2423,14 +2439,13 @@
             this.Individuals,
             this.Families,
             this.Marriages});
-            this.dgSurnames.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgSurnames.Location = new System.Drawing.Point(3, 3);
+            this.dgSurnames.Location = new System.Drawing.Point(3, 90);
             this.dgSurnames.MultiSelect = false;
             this.dgSurnames.Name = "dgSurnames";
             this.dgSurnames.ReadOnly = true;
             this.dgSurnames.RowHeadersWidth = 20;
             this.dgSurnames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgSurnames.Size = new System.Drawing.Size(1079, 439);
+            this.dgSurnames.Size = new System.Drawing.Size(1079, 352);
             this.dgSurnames.TabIndex = 1;
             this.dgSurnames.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSurnames_CellContentClick);
             this.dgSurnames.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSurnames_CellDoubleClick);
@@ -2990,17 +3005,15 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // mnuLoadLocationsTNG
+            // btnShowSurnames
             // 
-            this.mnuLoadLocationsTNG.Name = "mnuLoadLocationsTNG";
-            this.mnuLoadLocationsTNG.Size = new System.Drawing.Size(238, 22);
-            this.mnuLoadLocationsTNG.Text = "Load Geocoded Locations TNG";
-            this.mnuLoadLocationsTNG.Click += new System.EventHandler(this.mnuLoadLocationsTNG_Click);
-            // 
-            // tsStatusLabel
-            // 
-            this.tsStatusLabel.Name = "tsStatusLabel";
-            this.tsStatusLabel.Size = new System.Drawing.Size(0, 17);
+            this.btnShowSurnames.Location = new System.Drawing.Point(337, 52);
+            this.btnShowSurnames.Name = "btnShowSurnames";
+            this.btnShowSurnames.Size = new System.Drawing.Size(154, 23);
+            this.btnShowSurnames.TabIndex = 23;
+            this.btnShowSurnames.Text = "Show Surnames";
+            this.btnShowSurnames.UseVisualStyleBackColor = true;
+            this.btnShowSurnames.Click += new System.EventHandler(this.btnShowSurnames_Click);
             // 
             // rtbOutput
             // 
@@ -3015,6 +3028,14 @@
             this.rtbOutput.TabIndex = 6;
             this.rtbOutput.Text = "";
             this.rtbOutput.TextChanged += new System.EventHandler(this.rtbOutput_TextChanged);
+            // 
+            // reltypesSurnames
+            // 
+            this.reltypesSurnames.Location = new System.Drawing.Point(6, 6);
+            this.reltypesSurnames.MarriedToDB = true;
+            this.reltypesSurnames.Name = "reltypesSurnames";
+            this.reltypesSurnames.Size = new System.Drawing.Size(325, 78);
+            this.reltypesSurnames.TabIndex = 22;
             // 
             // relTypesFacts
             // 
@@ -3472,6 +3493,8 @@
         private System.Windows.Forms.Button btnExportMissingCensusRefs;
         private System.Windows.Forms.ToolStripMenuItem mnuLoadLocationsTNG;
         private System.Windows.Forms.ToolStripStatusLabel tsStatusLabel;
+        private System.Windows.Forms.Button btnShowSurnames;
+        private Controls.RelationTypes reltypesSurnames;
     }
 }
 

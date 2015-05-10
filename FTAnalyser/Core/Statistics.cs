@@ -7,6 +7,7 @@ using HtmlAgilityPack;
 using System.Net;
 using System.IO;
 using System.Windows.Forms;
+using FTAnalyzer.Filters;
 
 namespace FTAnalyzer
 {
@@ -97,11 +98,9 @@ namespace FTAnalyzer
             this.surnames = null;
         }
 
-        public List<SurnameStats> Surnames(ToolStripProgressBar pb)
+        public List<SurnameStats> Surnames(Predicate<Individual> indFilter, Predicate<Family> famFilter, ToolStripProgressBar pb)
         {
-            if (surnames != null)
-                return surnames;
-            IEnumerable<Individual> list = ft.AllIndividuals.GroupBy(x => x.Surname).Select(group => group.First());
+            IEnumerable<Individual> list = ft.AllIndividuals.Filter(indFilter).GroupBy(x => x.Surname).Select(group => group.First());
             surnames = list.Select(x => new SurnameStats(x.Surname)).ToList();
             pb.Value = 0;
             pb.Minimum = 0;
@@ -109,9 +108,9 @@ namespace FTAnalyzer
             LoadGOONS(pb);
             foreach (SurnameStats stat in surnames)
             {
-                stat.Individuals = ft.AllIndividuals.Where(x => x.Surname.Equals(stat.Surname, StringComparison.InvariantCultureIgnoreCase)).Count();
-                stat.Families = ft.AllFamilies.Where(x => x.ContainsSurname(stat.Surname)).Count();
-                stat.Marriages = ft.AllFamilies.Where(x => x.ContainsSurname(stat.Surname) && x.MaritalStatus == Family.MARRIED).Count();
+                stat.Individuals = ft.AllIndividuals.Filter(indFilter).Where(x => x.Surname.Equals(stat.Surname, StringComparison.InvariantCultureIgnoreCase)).Count();
+                stat.Families = ft.AllFamilies.Filter(famFilter).Where(x => x.ContainsSurname(stat.Surname)).Count();
+                stat.Marriages = ft.AllFamilies.Filter(famFilter).Where(x => x.ContainsSurname(stat.Surname) && x.MaritalStatus == Family.MARRIED).Count();
                 pb.Value++;
                 if (pb.Value % 25 == 0)
                     Application.DoEvents();

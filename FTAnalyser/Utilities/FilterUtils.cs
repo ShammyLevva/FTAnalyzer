@@ -95,14 +95,14 @@ namespace FTAnalyzer.Filters
             };
         }
 
-        public static IEnumerable<T> Where<T>(this IEnumerable<T> l, Predicate<T> p)
+        public static IEnumerable<T> Filter<T>(this IEnumerable<T> l, Predicate<T> p)
         {
             return l.Where(new Func<T, bool>(x => p(x)));
         }
 
-        public static IEnumerable<T> Where<T>(this IList<T> l, Predicate<T> p)
+        public static IEnumerable<T> Filter<T>(this IList<T> l, Predicate<T> p)
         {
-            return (l as IEnumerable<T>).Where(p);
+            return (l as IEnumerable<T>).Filter(p);
         }
 
         private static bool StringMatches(string s1, string s2)

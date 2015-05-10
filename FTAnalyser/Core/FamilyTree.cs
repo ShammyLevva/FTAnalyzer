@@ -698,7 +698,7 @@ namespace FTAnalyzer
 
         public int IndividualCount { get { return individuals.Count; } }
 
-        public List<Individual> DeadOrAlive { get { return individuals.Where(x => x.DeathDate.IsKnown && x.IsFlaggedAsLiving).ToList<Individual>(); } }
+        public List<Individual> DeadOrAlive { get { return individuals.Filter(x => x.DeathDate.IsKnown && x.IsFlaggedAsLiving).ToList<Individual>(); } }
 
         #endregion
 
@@ -706,12 +706,12 @@ namespace FTAnalyzer
 
         public IEnumerable<Individual> GetAllRelationsOfType(int relationType)
         {
-            return individuals.Where(ind => ind.RelationType == relationType);
+            return individuals.Filter(ind => ind.RelationType == relationType);
         }
 
         public IEnumerable<Individual> GetUncertifiedFacts(string factType, int relationType)
         {
-            return individuals.Where(ind =>
+            return individuals.Filter(ind =>
             {
                 if (ind.RelationType == relationType)
                 {
@@ -745,12 +745,12 @@ namespace FTAnalyzer
 
         public IEnumerable<Individual> GetIndividualsAtLocation(FactLocation loc, int level)
         {
-            return individuals.Where(i => i.IsAtLocation(loc, level));
+            return individuals.Filter(i => i.IsAtLocation(loc, level));
         }
 
         public IEnumerable<Family> GetFamiliesAtLocation(FactLocation loc, int level)
         {
-            return families.Where(f => f.IsAtLocation(loc, level));
+            return families.Filter(f => f.IsAtLocation(loc, level));
         }
 
         public List<string> GetSurnamesAtLocation(FactLocation loc) { return GetSurnamesAtLocation(loc, FactLocation.SUBREGION); }
@@ -833,7 +833,7 @@ namespace FTAnalyzer
                     if (fam.Children.Count > 0)
                     {   // must be at least X years old at birth of child
                         List<Individual> childrenNoAFT =
-                            fam.Children.Where(child => child.BirthDate.EndDate != FactDate.MAXDATE && !child.BirthDate.IsLongYearSpan).ToList();
+                            fam.Children.Filter(child => child.BirthDate.EndDate != FactDate.MAXDATE && !child.BirthDate.IsLongYearSpan).ToList();
                         if (childrenNoAFT.Count > 0)
                         {
                             int minChildYear = childrenNoAFT.Min(child => child.BirthDate.EndDate).Year;
@@ -842,7 +842,7 @@ namespace FTAnalyzer
                                 minEnd = minChild;
                         }
                         List<Individual> childrenNoBEF =
-                            fam.Children.Where(child => child.BirthDate.StartDate != FactDate.MINDATE && !child.BirthDate.IsLongYearSpan).ToList();
+                            fam.Children.Filter(child => child.BirthDate.StartDate != FactDate.MINDATE && !child.BirthDate.IsLongYearSpan).ToList();
                         if (childrenNoBEF.Count > 0)
                         {
                             int maxChildYear = childrenNoBEF.Max(child => child.BirthDate.StartDate).Year;
@@ -1034,7 +1034,7 @@ namespace FTAnalyzer
                 FactDate marriageDate = fam.GetPreferredFactDate(Fact.MARRIAGE);
                 if (marriageDate.StartDate > maxdate && !marriageDate.IsLongYearSpan)
                     maxdate = marriageDate.StartDate;
-                List<Individual> childrenNoLongSpan = fam.Children.Where(child => !child.BirthDate.IsLongYearSpan).ToList<Individual>();
+                List<Individual> childrenNoLongSpan = fam.Children.Filter(child => !child.BirthDate.IsLongYearSpan).ToList<Individual>();
                 if (childrenNoLongSpan.Count > 0)
                 {
                     DateTime maxChildBirthDate = childrenNoLongSpan.Max(child => child.BirthDate.StartDate);
@@ -1096,7 +1096,7 @@ namespace FTAnalyzer
 
         public IEnumerable<IDisplayIndividual> GetTreeTops(Predicate<Individual> filter)
         {
-            return individuals.Where(ind => !ind.HasParents && filter(ind));
+            return individuals.Filter(ind => !ind.HasParents && filter(ind));
         }
 
         #endregion
@@ -1105,7 +1105,7 @@ namespace FTAnalyzer
 
         public IEnumerable<IDisplayIndividual> GetWorldWars(Predicate<Individual> filter)
         {
-            return individuals.Where(ind => ind.IsMale && filter(ind));
+            return individuals.Filter(ind => ind.IsMale && filter(ind));
         }
 
         #endregion
@@ -1353,7 +1353,7 @@ namespace FTAnalyzer
                     }
                 }
                 // also add all individuals that don't ever appear as a child as they may have census facts for when they are children
-                foreach (Individual ind in individuals.Where(x => x.FamiliesAsChild.Count == 0))
+                foreach (Individual ind in individuals.Filter(x => x.FamiliesAsChild.Count == 0))
                 {
                     //if (ind.IndividualID == "I0282")
                     //    Console.WriteLine("found it");
@@ -1536,7 +1536,7 @@ namespace FTAnalyzer
             }
             else
                 filter = x => family.Members.Contains<Individual>(x);
-            return individuals.Where(filter).ToList<IDisplayColourCensus>();
+            return individuals.Filter(filter).ToList<IDisplayColourCensus>();
         }
 
         public List<IDisplayColourBMD> ColourBMD(Controls.RelationTypes relType, string surname, ComboBoxFamily family)
@@ -1553,7 +1553,7 @@ namespace FTAnalyzer
             }
             else
                 filter = x => family.Members.Contains<Individual>(x);
-            return individuals.Where(filter).ToList<IDisplayColourBMD>();
+            return individuals.Filter(filter).ToList<IDisplayColourBMD>();
         }
 
         #endregion
@@ -1813,7 +1813,7 @@ namespace FTAnalyzer
 
         public void SetFactTypeList(CheckedListBox ckbFactSelect, CheckedListBox ckbFactExclude, Predicate<ExportFact> filter)
         {
-            List<string> factTypes = AllExportFacts.Where(filter).Select(x => x.FactType).Distinct().ToList<string>();
+            List<string> factTypes = AllExportFacts.Filter(filter).Select(x => x.FactType).Distinct().ToList<string>();
             factTypes.Sort();
             ckbFactSelect.Items.Clear();
             ckbFactExclude.Items.Clear();
@@ -2629,8 +2629,8 @@ namespace FTAnalyzer
             tb.Enabled = false;
             _cancelDuplicates = false;
             duplicates = new SortableBindingList<DuplicateIndividual>();
-            IEnumerable<Individual> males = individuals.Where<Individual>(x => (x.Gender == "M" || x.Gender == "U"));
-            IEnumerable<Individual> females = individuals.Where<Individual>(x => (x.Gender == "F" || x.Gender == "U"));
+            IEnumerable<Individual> males = individuals.Filter<Individual>(x => (x.Gender == "M" || x.Gender == "U"));
+            IEnumerable<Individual> females = individuals.Filter<Individual>(x => (x.Gender == "F" || x.Gender == "U"));
             pb.Maximum = (males.Count() * males.Count() + females.Count() * females.Count()) / 2;
             pb.Value = 0;
             IdentifyDuplicates(pb, males);
@@ -2771,7 +2771,7 @@ namespace FTAnalyzer
         public HashSet<string> UnrecognisedCensusReferences()
         {
             HashSet<string> result = new HashSet<string>();
-            IEnumerable<Fact> unrecognised = AllIndividuals.SelectMany(x => x.PersonalFacts.Where(f => f.IsCensusFact && f.CensusReference != null && f.CensusReference.Status.Equals(CensusReference.ReferenceStatus.UNRECOGNISED)));
+            IEnumerable<Fact> unrecognised = AllIndividuals.SelectMany(x => x.PersonalFacts.Filter(f => f.IsCensusFact && f.CensusReference != null && f.CensusReference.Status.Equals(CensusReference.ReferenceStatus.UNRECOGNISED)));
             foreach (Fact f in unrecognised)
                 result.Add(CensusReference.ClearCommonPhrases(f.CensusReference.Reference));
             return result;
@@ -2780,7 +2780,7 @@ namespace FTAnalyzer
         public HashSet<string> MissingCensusReferences()
         {
             HashSet<string> result = new HashSet<string>();
-            IEnumerable<Fact> missing = AllIndividuals.SelectMany(x => x.PersonalFacts.Where(f => f.IsCensusFact && f.CensusReference != null && f.CensusReference.Status.Equals(CensusReference.ReferenceStatus.BLANK)));
+            IEnumerable<Fact> missing = AllIndividuals.SelectMany(x => x.PersonalFacts.Filter(f => f.IsCensusFact && f.CensusReference != null && f.CensusReference.Status.Equals(CensusReference.ReferenceStatus.BLANK)));
             foreach (Fact f in missing)
                 result.Add(CensusReference.ClearCommonPhrases(f.SourceList)); // for missing census references show sources for census fact
             return result;
@@ -2790,7 +2790,7 @@ namespace FTAnalyzer
         {
             HashSet<string> result = new HashSet<string>();
             Predicate<Individual> predicate = i => i.UnrecognisedCensusNotes.Length > 0;
-            IEnumerable<Individual> unrecognised = AllIndividuals.Where(predicate);
+            IEnumerable<Individual> unrecognised = AllIndividuals.Filter(predicate);
             foreach (Individual i in unrecognised)
                 result.Add(i.UnrecognisedCensusNotes + "\n--------------------------------------------------------------------------------\n");
             return result;
