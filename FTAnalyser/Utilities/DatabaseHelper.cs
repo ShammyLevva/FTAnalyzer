@@ -168,14 +168,36 @@ namespace FTAnalyzer.Utilities
                         }
                         if (proceed)
                         {
-                            using (SQLiteCommand cmd = new SQLiteCommand("alter table geocode add column Latm real default 0.0", conn))
+                            bool latm = false;
+                            bool longm = false;
+                            using (SQLiteCommand cmd = new SQLiteCommand("PRAGMA table_info('geocode')", conn))
                             {
-                                cmd.ExecuteNonQuery();
+                                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        string column = reader[1].ToString();
+                                        if (column.Equals("Latm"))
+                                            latm = true;
+                                        if (column.Equals("Longm"))
+                                            longm = true;
+                                    }
+                                }
                             }
-                            using (SQLiteCommand cmd = new SQLiteCommand("alter table geocode add column Longm real default 0.0", conn))
+                            if (!latm)
                             {
-                                cmd.ExecuteNonQuery();
-                                ConvertLatLongs();
+                                using (SQLiteCommand cmd = new SQLiteCommand("alter table geocode add column Latm real default 0.0", conn))
+                                {
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
+                            if (!longm)
+                            {
+                                using (SQLiteCommand cmd = new SQLiteCommand("alter table geocode add column Longm real default 0.0", conn))
+                                {
+                                    cmd.ExecuteNonQuery();
+                                    ConvertLatLongs();
+                                }
                             }
                             using (SQLiteCommand cmd = new SQLiteCommand("update geocode set foundlocation='', foundlevel=-2 where geocodestatus=3", conn))
                             {
@@ -309,7 +331,7 @@ namespace FTAnalyzer.Utilities
             return latitude.ToString("F6") + longitude.ToString("F6");
         }
 
-        public Dictionary<string, Tuple<string,string>> GetLatLongIndex()
+        public Dictionary<string, Tuple<string, string>> GetLatLongIndex()
         {
             Dictionary<string, Tuple<string, string>> results = new Dictionary<string, Tuple<string, string>>();
 
