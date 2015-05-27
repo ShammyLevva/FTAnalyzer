@@ -890,22 +890,19 @@ namespace FTAnalyzer
                     string querystring = string.Empty;
                     if (!Country.Equals(Countries.SCOTLAND))
                     {
-                        if (Piece.Length > 0)
+                        if (Piece.Length > 0 && !Piece.Equals(MISSING))
                             querystring = @"pieceno=" + this.Piece;
-                        if (Folio.Length > 0)
+                        if (Folio.Length > 0 && !Folio.Equals(MISSING))
                         {
                             string lastChar = Folio.Substring(Folio.Length).ToUpper();
                             if (!lastChar.Equals("F") && !lastChar.Equals("R") && !lastChar.Equals("O"))
                                 querystring = querystring + @"&folio=" + this.Folio;
                         }
-                        if (Page.Length > 0)
+                        if (Page.Length > 0 && !Page.Equals(MISSING))
                             querystring = querystring + @"&page=" + this.Page;
                     }
-                    if (year.Equals("1841"))
-                    {
-                        if (this.Book.Length > 0)
-                            return baseURL + @"1841&p=http://search.findmypast.co.uk/results/world-records/1841-england-wales-and-scotland-census?" + querystring + @"&book=" + this.Book;
-                    }
+                    if (year.Equals("1841") && Book.Length > 0 && !Book.Equals(MISSING))
+                        return baseURL + @"1841&p=http://search.findmypast.co.uk/results/world-records/1841-england-wales-and-scotland-census?" + querystring + @"&book=" + this.Book;
                     else if (querystring.Length > 0)
                         return baseURL + year + @"&p=http://search.findmypast.co.uk/results/world-records/" + year + "-england-wales-and-scotland-census?" + querystring;
                 }
