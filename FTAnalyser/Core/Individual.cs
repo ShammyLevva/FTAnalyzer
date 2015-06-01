@@ -324,7 +324,9 @@ namespace FTAnalyzer
                     surname = Individual.UNKNOWN_NAME;
                     forenames = name;
                 }
-                if (surname == "?" || surname.ToLower() == "mnu")
+                if (surname == "?" || surname.ToLower() == "mnu" || surname.Length == 0)
+                    surname = Individual.UNKNOWN_NAME;
+                if(Properties.GeneralSettings.Default.TreatFemaleSurnamesAsUnknown && !IsMale && surname.StartsWith("(") && surname.EndsWith(")"))
                     surname = Individual.UNKNOWN_NAME;
                 marriedName = surname;
             }

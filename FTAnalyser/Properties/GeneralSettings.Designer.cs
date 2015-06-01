@@ -262,5 +262,17 @@ namespace FTAnalyzer.Properties {
                 this["IgnoreFactTypeWarnings"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool TreatFemaleSurnamesAsUnknown {
+            get {
+                return ((bool)(this["TreatFemaleSurnamesAsUnknown"]));
+            }
+            set {
+                this["TreatFemaleSurnamesAsUnknown"] = value;
+            }
+        }
     }
 }

@@ -49,6 +49,7 @@
             this.chkShowWorldEvents = new System.Windows.Forms.CheckBox();
             this.chkAddCreatedLocations = new System.Windows.Forms.CheckBox();
             this.chkIgnoreFactTypeWarnings = new System.Windows.Forms.CheckBox();
+            this.chkTreatFemaleAsUnknown = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownAge)).BeginInit();
             this.SuspendLayout();
@@ -200,10 +201,20 @@
             this.chkIgnoreFactTypeWarnings.Name = "chkIgnoreFactTypeWarnings";
             this.chkIgnoreFactTypeWarnings.UseVisualStyleBackColor = true;
             // 
+            // chkTreatFemaleAsUnknown
+            // 
+            resources.ApplyResources(this.chkTreatFemaleAsUnknown, "chkTreatFemaleAsUnknown");
+            this.chkTreatFemaleAsUnknown.Checked = true;
+            this.chkTreatFemaleAsUnknown.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTreatFemaleAsUnknown.Name = "chkTreatFemaleAsUnknown";
+            this.chkTreatFemaleAsUnknown.UseVisualStyleBackColor = true;
+            this.chkTreatFemaleAsUnknown.CheckedChanged += new System.EventHandler(this.chkTreatFemaleAsUnknown_CheckedChanged);
+            // 
             // GeneralSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkTreatFemaleAsUnknown);
             this.Controls.Add(this.chkIgnoreFactTypeWarnings);
             this.Controls.Add(this.chkAddCreatedLocations);
             this.Controls.Add(this.chkShowWorldEvents);
@@ -251,6 +262,7 @@
         private System.Windows.Forms.CheckBox chkAutoCreateCensus;
         private System.Windows.Forms.CheckBox chkAddCreatedLocations;
         private System.Windows.Forms.CheckBox chkIgnoreFactTypeWarnings;
+        private System.Windows.Forms.CheckBox chkTreatFemaleAsUnknown;
 
 
 	}

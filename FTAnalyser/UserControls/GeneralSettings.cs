@@ -32,6 +32,7 @@ namespace FTAnalyzer.UserControls
             chkAddCreatedLocations.Checked = Properties.GeneralSettings.Default.AddCreatedLocations;
             chkShowWorldEvents.Checked = Properties.GeneralSettings.Default.ShowWorldEvents;
             chkIgnoreFactTypeWarnings.Checked = Properties.GeneralSettings.Default.IgnoreFactTypeWarnings;
+            chkTreatFemaleAsUnknown.Checked = Properties.GeneralSettings.Default.TreatFemaleSurnamesAsUnknown;
 			Properties.GeneralSettings.Default.ReloadRequired = false;
 		}
 
@@ -55,6 +56,7 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.AddCreatedLocations = chkAddCreatedLocations.Checked;
             Properties.GeneralSettings.Default.ShowWorldEvents = chkShowWorldEvents.Checked;
             Properties.GeneralSettings.Default.IgnoreFactTypeWarnings = chkIgnoreFactTypeWarnings.Checked;
+            Properties.GeneralSettings.Default.TreatFemaleSurnamesAsUnknown = chkTreatFemaleAsUnknown.Checked;
             Properties.GeneralSettings.Default.Save();
 			OnUseBaptismDatesChanged();
 			OnAllowEmptyLocationsChanged();
@@ -68,6 +70,7 @@ namespace FTAnalyzer.UserControls
             OnAutoCreateCensusFactsChanged();
             OnAddCreatedLocationsChanged();
             OnShowWorldEventsChanged();
+            OnTreatFemaleUnknownChanged();
 		}
 
 		public void Cancel()
@@ -212,6 +215,13 @@ namespace FTAnalyzer.UserControls
                 ShowWorldEventsChanged(null, EventArgs.Empty);
         }
 
+        public static event EventHandler TreatFemaleUnknownChanged;
+        protected static void OnTreatFemaleUnknownChanged()
+        {
+            if (TreatFemaleUnknownChanged != null)
+                TreatFemaleUnknownChanged(null, EventArgs.Empty);
+        }
+
         private void chkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)
 		{
 			Properties.GeneralSettings.Default.ReloadRequired = true;
@@ -243,6 +253,11 @@ namespace FTAnalyzer.UserControls
         }
 
         private void chkAddCreatedLocations_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.GeneralSettings.Default.ReloadRequired = true;
+        }
+
+        private void chkTreatFemaleAsUnknown_CheckedChanged(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = true;
         }
