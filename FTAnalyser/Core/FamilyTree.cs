@@ -2212,7 +2212,12 @@ namespace FTAnalyzer
             uri.Path = "cgi-bin/sse.dll";
             //gsln_x=NP&
             StringBuilder query = new StringBuilder();
-            query.Append("gl=34&");
+            if(st.Equals(SearchType.BIRTH))
+                query.Append("gl=BMD_BIRTH&");
+            if (st.Equals(SearchType.MARRIAGE))
+                query.Append("gl=BMD_MARRIAGE&");
+            if (st.Equals(SearchType.DEATH))
+                query.Append("gl=BMD_DEATH&");
             query.Append("gss=ms_f-34&");
             query.Append("rank=1&");
             query.Append("new=1&");

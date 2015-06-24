@@ -199,7 +199,7 @@ namespace FTAnalyzer.Forms
                         {
                             ft.SearchBMD(FamilyTree.SearchType.BIRTH, ft.GetIndividual(person.IndividualID), cbBMDSearchProvider.SelectedIndex);
                         }
-                        else if (e.ColumnIndex >= birthColumnIndex + 2 && e.ColumnIndex <= birthColumnIndex + 5)
+                        else if (e.ColumnIndex >= birthColumnIndex + 2 && e.ColumnIndex <= birthColumnIndex + 4)
                         {
                             ft.SearchBMD(FamilyTree.SearchType.MARRIAGE, ft.GetIndividual(person.IndividualID), cbBMDSearchProvider.SelectedIndex);
                         }
