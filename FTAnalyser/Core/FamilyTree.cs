@@ -2189,8 +2189,57 @@ namespace FTAnalyzer
 
         private string BuildFamilySearchQuery(SearchType st, Individual individual)
         {
-            MessageBox.Show(Properties.Messages.NotYet, "FT Analyzer");
-            return null;
+            // https://familysearch.org/search/record/results?count=20&query=%2Bgivenname%3AElizabeth~%20%2Bsurname%3AAckers~%20%2Bbirth_place%3A%22walton%20le%20dale%2C%20lancashire%2C%20england%22~%20%2Bbirth_year%3A1879-1881~%20%2Brecord_country%3AEngland
+            UriBuilder uri = new UriBuilder();
+            uri.Host = "familysearch.org";
+            uri.Path = "search/record/results";
+            StringBuilder query = new StringBuilder();
+            query.Append("count=20&query=");
+
+            if (individual.Forenames != "?" && individual.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
+            {
+                query.Append("%2Bgivenname%3A" + HttpUtility.UrlEncode(individual.Forenames) + "~%20");
+            }
+            string surname = string.Empty;
+            if (individual.Surname != "?" && individual.Surname.ToUpper() != Individual.UNKNOWN_NAME)
+            {
+                surname = individual.Surname;
+            }
+            //if (individual.MarriedName != "?" && individual.MarriedName.ToUpper() != Individual.UNKNOWN_NAME && individual.MarriedName != individual.Surname)
+            //{
+            //    surname += " " + individual.MarriedName;
+            //}
+            surname = surname.Trim();
+            query.Append("%2Bsurname%3A" + HttpUtility.UrlEncode(surname) + "~%20");
+            if (individual.BirthDate.IsKnown)
+            {
+                int startYear = individual.BirthDate.StartDate.Year;
+                int endYear = individual.BirthDate.EndDate.Year;
+                if (startYear == FactDate.MINDATE.Year)
+                    startYear = endYear - 9;
+                else if (endYear == FactDate.MAXDATE.Year)
+                    endYear = startYear + 9;
+                query.Append("%2Bbirth_year%3A" + startYear + "-" + endYear + "~%20");
+            }
+            if (individual.BirthLocation != FactLocation.UNKNOWN_LOCATION)
+            {
+                string location = individual.BirthLocation.GetLocation(FactLocation.SUBREGION).ToString();
+                query.Append("%2Bbirth_place%3A%22" + HttpUtility.UrlEncode(location) + "%22~%20");
+            }
+            string record_country = Countries.UNKNOWN_COUNTRY;
+            if (Countries.IsKnownCountry(individual.BirthLocation.Country))
+                record_country = individual.BirthLocation.Country;
+            //if (st.Equals(SearchType.MARRIAGE))
+            //{
+            //    FactDate expectedMarriage = individual.m
+            //    record_country = individual.BestLocation()
+            //}
+            if (st.Equals(SearchType.DEATH) && Countries.IsKnownCountry(individual.DeathLocation.Country))
+                record_country = individual.DeathLocation.Country;
+            if (Countries.IsKnownCountry(record_country))
+                query.Append("%2Brecord_country%3A" + HttpUtility.UrlEncode(record_country));            
+            uri.Query = query.ToString();
+            return uri.ToString();
         }
 
         private string BuildFreeCenQuery(SearchType st, Individual individual)
