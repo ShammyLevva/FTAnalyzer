@@ -80,6 +80,8 @@ namespace FTAnalyzer.Forms
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
                 defaultProvider = "FamilySearch";
+            if (defaultProvider.Equals("FreeCen"))
+                defaultProvider = "FreeBMD";
             cbBMDSearchProvider.Text = defaultProvider;
             cbFilter.Text = "All Individuals";
         }
@@ -221,7 +223,10 @@ namespace FTAnalyzer.Forms
 
         private void cbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Application.UserAppDataRegistry.SetValue("Default Search Provider", cbBMDSearchProvider.SelectedItem.ToString());
+            string provider = cbBMDSearchProvider.SelectedItem.ToString();
+            if (provider.Equals("FreeBMD"))
+                provider = "FreeCen";
+            Application.UserAppDataRegistry.SetValue("Default Search Provider", provider);
             dgBMDReportSheet.Refresh(); // forces refresh of tooltips
             dgBMDReportSheet.Focus();
         }

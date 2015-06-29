@@ -450,7 +450,7 @@
             this.cbBMDSearchProvider.Items.AddRange(new object[] {
             "Ancestry",
             "Find My Past",
-            "FreeCen",
+            "FreeBMD",
             "FamilySearch"});
             this.cbBMDSearchProvider.Name = "cbBMDSearchProvider";
             this.cbBMDSearchProvider.Size = new System.Drawing.Size(121, 25);
