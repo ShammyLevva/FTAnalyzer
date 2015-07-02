@@ -2178,7 +2178,7 @@ namespace FTAnalyzer
             {
                 case 0: uri = BuildAncestryQuery(st, individual); break;
                 case 1: uri = BuildFindMyPastQuery(st, individual); break;
-                case 2: uri = BuildFreeCenQuery(st, individual); break;
+                case 2: uri = BuildFreeBMDQuery(st, individual); break;
                 case 3: uri = BuildFamilySearchQuery(st, individual); break;
             }
             if (uri != null)
@@ -2242,7 +2242,7 @@ namespace FTAnalyzer
             return uri.ToString();
         }
 
-        private string BuildFreeCenQuery(SearchType st, Individual individual)
+        private string BuildFreeBMDQuery(SearchType st, Individual individual)
         {
             MessageBox.Show(Properties.Messages.NotYet, "FT Analyzer");
             return null;
