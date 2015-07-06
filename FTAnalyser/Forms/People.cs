@@ -148,6 +148,13 @@ namespace FTAnalyzer.Forms
             SetIndividuals(individuals, "Lost Cousins facts with no facts found to identify Country");
         }
 
+        public void ListRelationToRoot(string relationtoRoot)
+        {
+            Predicate<Individual> filter = x => x.RelationToRoot.Equals(relationtoRoot);
+            List<Individual> individuals = ft.AllIndividuals.Filter(filter).ToList();
+            SetIndividuals(individuals, "Individuals who are a " + relationtoRoot + " of root person");
+        }
+
         private void SortIndividuals()
         {
             dgIndividuals.Sort(dgIndividuals.Columns[1], ListSortDirection.Ascending);

@@ -312,6 +312,7 @@ namespace FTAnalyzer
             mnuLocationsGeocodeReport.Enabled = enabled;
             mnuLifelines.Enabled = enabled;
             mnuPlaces.Enabled = enabled;
+            mnuCousinsCountReport.Enabled = enabled;
             mnuLookupBlankFoundLocations.Enabled = enabled;
             mnuTreetopsToExcel.Enabled = enabled && dgTreeTops.RowCount > 0;
             mnuWorldWarsToExcel.Enabled = enabled && dgWorldWars.RowCount > 0;

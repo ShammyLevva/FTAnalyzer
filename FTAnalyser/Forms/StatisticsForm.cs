@@ -15,6 +15,7 @@ namespace FTAnalyzer.Forms
         public StatisticsForm()
         {
             InitializeComponent();
+            tsStatusLabel.Text = string.Empty;
         }
 
         public void CousinsCountReport()
@@ -30,7 +31,19 @@ namespace FTAnalyzer.Forms
             dgStatistics.Columns[1].SortMode = DataGridViewColumnSortMode.Automatic;
             dgStatistics.Columns[1].HeaderText = "Count";
             dgStatistics.Sort(dgStatistics.Columns[0], ListSortDirection.Ascending);
+            tsStatusLabel.Text = "Double click to show all individuals with that relationship to root person.";
+            tsStatusLabel.Visible = true;
         }
 
+        private void dgStatistics_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                Tuple<string, int> row = dgStatistics.Rows[e.RowIndex].DataBoundItem as Tuple<string, int>;
+                People form = new People();
+                form.ListRelationToRoot(row.Item1);
+                form.Show();
+            }
+        }
     }
 }
