@@ -63,6 +63,7 @@
             this.mnuChildAgeProfiles = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOlderParents = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPossibleCensusFacts = new System.Windows.Forms.ToolStripMenuItem();
+            this.CousinsCountReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuIndividualsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFamiliesToExcel = new System.Windows.Forms.ToolStripMenuItem();
@@ -564,7 +565,8 @@
             this.mnuReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuChildAgeProfiles,
             this.mnuOlderParents,
-            this.mnuPossibleCensusFacts});
+            this.mnuPossibleCensusFacts,
+            this.CousinsCountReportToolStripMenuItem});
             this.mnuReports.Name = "mnuReports";
             this.mnuReports.Size = new System.Drawing.Size(59, 20);
             this.mnuReports.Text = "Reports";
@@ -572,25 +574,32 @@
             // mnuChildAgeProfiles
             // 
             this.mnuChildAgeProfiles.Name = "mnuChildAgeProfiles";
-            this.mnuChildAgeProfiles.Size = new System.Drawing.Size(188, 22);
+            this.mnuChildAgeProfiles.Size = new System.Drawing.Size(190, 22);
             this.mnuChildAgeProfiles.Text = "Parent Age Report";
             this.mnuChildAgeProfiles.Click += new System.EventHandler(this.childAgeProfilesToolStripMenuItem_Click);
             // 
             // mnuOlderParents
             // 
             this.mnuOlderParents.Name = "mnuOlderParents";
-            this.mnuOlderParents.Size = new System.Drawing.Size(188, 22);
+            this.mnuOlderParents.Size = new System.Drawing.Size(190, 22);
             this.mnuOlderParents.Text = "Older Parents";
             this.mnuOlderParents.Click += new System.EventHandler(this.olderParentsToolStripMenuItem_Click);
             // 
             // mnuPossibleCensusFacts
             // 
             this.mnuPossibleCensusFacts.Name = "mnuPossibleCensusFacts";
-            this.mnuPossibleCensusFacts.Size = new System.Drawing.Size(188, 22);
+            this.mnuPossibleCensusFacts.Size = new System.Drawing.Size(190, 22);
             this.mnuPossibleCensusFacts.Text = "Possible Census Facts";
             this.mnuPossibleCensusFacts.ToolTipText = "This report aims to find census facts that have been incorrectly recorded as note" +
     "s";
             this.mnuPossibleCensusFacts.Click += new System.EventHandler(this.possibleCensusFactsToolStripMenuItem_Click);
+            // 
+            // CousinsCountReportToolStripMenuItem
+            // 
+            this.CousinsCountReportToolStripMenuItem.Name = "CousinsCountReportToolStripMenuItem";
+            this.CousinsCountReportToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.CousinsCountReportToolStripMenuItem.Text = "Cousins Count Report";
+            this.CousinsCountReportToolStripMenuItem.Click += new System.EventHandler(this.CousinsCountReportToolStripMenuItem_Click);
             // 
             // mnuExport
             // 
@@ -3498,6 +3507,7 @@
         private System.Windows.Forms.ToolStripStatusLabel tsStatusLabel;
         private System.Windows.Forms.Button btnShowSurnames;
         private Controls.RelationTypes reltypesSurnames;
+        private System.Windows.Forms.ToolStripMenuItem CousinsCountReportToolStripMenuItem;
     }
 }
 

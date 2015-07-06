@@ -2857,5 +2857,15 @@ namespace FTAnalyzer
             tspbTabProgress.Visible = false;
             HourGlass(false);
         }
+
+        private void CousinsCountReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            StatisticsForm f = new StatisticsForm();
+            f.CousinsCountReport();
+            DisposeDuplicateForms(f);
+            f.Show();
+            HourGlass(false);
+        }
     }
 }
