@@ -1501,6 +1501,41 @@ namespace FTAnalyzer
             get { return MarriageString(2); }
         }
 
+        public FactDate FirstMarriageDate
+        {
+            get {
+                Family fam = Marriages(0);
+                if (fam == null)
+                    return FactDate.UNKNOWN_DATE;
+                else
+                    return Marriages(0).MarriageDate;
+            }
+        }
+
+        public FactDate SecondMarriageDate
+        {
+            get
+            {
+                Family fam = Marriages(1);
+                if (fam == null)
+                    return FactDate.UNKNOWN_DATE;
+                else
+                    return Marriages(1).MarriageDate;
+            }
+        }
+
+        public FactDate ThirdMarriageDate
+        {
+            get
+            {
+                Family fam = Marriages(2);
+                if (fam == null)
+                    return FactDate.UNKNOWN_DATE;
+                else
+                    return Marriages(2).MarriageDate;
+            }
+        }
+
         public int Death
         {
             get

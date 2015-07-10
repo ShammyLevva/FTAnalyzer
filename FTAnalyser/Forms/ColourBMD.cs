@@ -197,17 +197,25 @@ namespace FTAnalyzer.Forms
                     if (value != EXACT_DATE)
                     {
                         IDisplayColourBMD person = (IDisplayColourBMD)dgBMDReportSheet.Rows[e.RowIndex].DataBoundItem;
+                        Individual ind = ft.GetIndividual(person.IndividualID);
                         if (e.ColumnIndex == birthColumnIndex || e.ColumnIndex == birthColumnIndex + 1)
                         {
-                            ft.SearchBMD(FamilyTree.SearchType.BIRTH, ft.GetIndividual(person.IndividualID), cbBMDSearchProvider.SelectedIndex);
+                            ft.SearchBMD(FamilyTree.SearchType.BIRTH, ind, ind.BirthDate, cbBMDSearchProvider.SelectedIndex);
                         }
                         else if (e.ColumnIndex >= birthColumnIndex + 2 && e.ColumnIndex <= birthColumnIndex + 4)
                         {
-                            ft.SearchBMD(FamilyTree.SearchType.MARRIAGE, ft.GetIndividual(person.IndividualID), cbBMDSearchProvider.SelectedIndex);
+                            FactDate marriageDate = FactDate.UNKNOWN_DATE;
+                            if (e.ColumnIndex == birthColumnIndex + 2)
+                                marriageDate = ind.FirstMarriageDate;
+                            if (e.ColumnIndex == birthColumnIndex + 3)
+                                marriageDate = ind.SecondMarriageDate;
+                            if (e.ColumnIndex == birthColumnIndex + 4)
+                                marriageDate = ind.ThirdMarriageDate;
+                            ft.SearchBMD(FamilyTree.SearchType.MARRIAGE, ind, marriageDate, cbBMDSearchProvider.SelectedIndex);
                         }
                         else if (e.ColumnIndex == burialColumnIndex || e.ColumnIndex == burialColumnIndex - 1)
                         {
-                            ft.SearchBMD(FamilyTree.SearchType.DEATH, ft.GetIndividual(person.IndividualID), cbBMDSearchProvider.SelectedIndex);
+                            ft.SearchBMD(FamilyTree.SearchType.DEATH, ind, ind.DeathDate, cbBMDSearchProvider.SelectedIndex);
                         }
                     }
                 }

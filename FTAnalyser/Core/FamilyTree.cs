@@ -2170,16 +2170,16 @@ namespace FTAnalyzer
 
         public enum SearchType { BIRTH = 0, MARRIAGE = 1, DEATH = 2 };
 
-        public void SearchBMD(SearchType st, Individual individual, int searchProvider)
+        public void SearchBMD(SearchType st, Individual individual, FactDate factdate, int searchProvider)
         {
             string uri = null;
 
             switch (searchProvider)
             {
-                case 0: uri = BuildAncestryQuery(st, individual); break;
-                case 1: uri = BuildFindMyPastQuery(st, individual); break;
-                case 2: uri = BuildFreeBMDQuery(st, individual); break;
-                case 3: uri = BuildFamilySearchQuery(st, individual); break;
+                case 0: uri = BuildAncestryQuery(st, individual, factdate); break;
+                case 1: uri = BuildFindMyPastQuery(st, individual, factdate); break;
+                case 2: uri = BuildFreeBMDQuery(st, individual, factdate); break;
+                case 3: uri = BuildFamilySearchQuery(st, individual, factdate); break;
             }
             if (uri != null)
             {
@@ -2187,7 +2187,7 @@ namespace FTAnalyzer
             }
         }
 
-        private string BuildFamilySearchQuery(SearchType st, Individual individual)
+        private string BuildFamilySearchQuery(SearchType st, Individual individual, FactDate factdate)
         {
             // https://familysearch.org/search/record/results?count=20&query=%2Bgivenname%3AElizabeth~%20%2Bsurname%3AAckers~%20%2Bbirth_place%3A%22walton%20le%20dale%2C%20lancashire%2C%20england%22~%20%2Bbirth_year%3A1879-1881~%20%2Brecord_country%3AEngland
             UriBuilder uri = new UriBuilder();
@@ -2197,14 +2197,10 @@ namespace FTAnalyzer
             query.Append("count=20&query=");
 
             if (individual.Forenames != "?" && individual.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
-            {
                 query.Append("%2Bgivenname%3A" + HttpUtility.UrlEncode(individual.Forenames) + "~%20");
-            }
             string surname = string.Empty;
             if (individual.Surname != "?" && individual.Surname.ToUpper() != Individual.UNKNOWN_NAME)
-            {
                 surname = individual.Surname;
-            }
             //if (individual.MarriedName != "?" && individual.MarriedName.ToUpper() != Individual.UNKNOWN_NAME && individual.MarriedName != individual.Surname)
             //{
             //    surname += " " + individual.MarriedName;
@@ -2226,35 +2222,70 @@ namespace FTAnalyzer
                 string location = individual.BirthLocation.GetLocation(FactLocation.SUBREGION).ToString();
                 query.Append("%2Bbirth_place%3A%22" + HttpUtility.UrlEncode(location) + "%22~%20");
             }
-            string record_country = Countries.UNKNOWN_COUNTRY;
-            if (Countries.IsKnownCountry(individual.BirthLocation.Country))
-                record_country = individual.BirthLocation.Country;
-            //if (st.Equals(SearchType.MARRIAGE))
-            //{
-            //    FactDate expectedMarriage = individual.m
-            //    record_country = individual.BestLocation()
-            //}
-            if (st.Equals(SearchType.DEATH) && Countries.IsKnownCountry(individual.DeathLocation.Country))
-                record_country = individual.DeathLocation.Country;
+            string record_country = RecordCountry(st, individual, factdate);
             if (Countries.IsKnownCountry(record_country))
                 query.Append("%2Brecord_country%3A" + HttpUtility.UrlEncode(record_country));            
             uri.Query = query.ToString();
             return uri.ToString();
         }
 
-        private string BuildFreeBMDQuery(SearchType st, Individual individual)
+        private static string RecordCountry(SearchType st, Individual individual, FactDate factdate)
+        {
+            string record_country = Countries.UNKNOWN_COUNTRY;
+            if (Countries.IsKnownCountry(individual.BirthLocation.Country))
+                record_country = individual.BirthLocation.Country;
+            if (st.Equals(SearchType.MARRIAGE))
+                record_country = individual.BestLocation(factdate).Country;
+            if (st.Equals(SearchType.DEATH) && Countries.IsKnownCountry(individual.DeathLocation.Country))
+                record_country = individual.DeathLocation.Country;
+            if (!Countries.IsKnownCountry(record_country))
+                record_country = individual.BestLocation(factdate).Country;
+            return record_country;
+        }
+
+        private string BuildFreeBMDQuery(SearchType st, Individual individual, FactDate factdate)
         {
             MessageBox.Show(Properties.Messages.NotYet, "FT Analyzer");
             return null;
         }
 
-        private string BuildFindMyPastQuery(SearchType st, Individual individual)
+        private string BuildFindMyPastQuery(SearchType st, Individual individual, FactDate factdate)
         {
-            MessageBox.Show(Properties.Messages.NotYet, "FT Analyzer");
-            return null;
+            UriBuilder uri = new UriBuilder();
+            uri.Host = "search.findmypast.co.uk";
+            string record_country = RecordCountry(st, individual, factdate);
+            if (Countries.IsUnitedKingdom(record_country))
+                uri.Path = "results/united-kingdom-records-in-birth-marriage-death-and-parish-records";
+            else if (record_country.Equals(Countries.UNITED_STATES))
+                uri.Path = "results/united-states-records-in-birth-marriage-death-and-parish-records";
+            else if (record_country.Equals(Countries.NEW_ZEALAND) || record_country.Equals(Countries.AUSTRALIA))
+                uri.Path = "results/australia-and-new-zealand-records-in-birth-marriage-death-and-parish-records";
+            else if (record_country.Equals(Countries.IRELAND))
+                uri.Path = "results/ireland-records-in-birth-marriage-death-and-parish-records";
+            else
+                uri.Path = "results/world-records-in-birth-marriage-death-and-parish-records";
+            StringBuilder query = new StringBuilder();
+            if (individual.Forenames != "?" && individual.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
+                query.Append("firstname=" + HttpUtility.UrlEncode(individual.Forenames) + "&firstname_variants=true&");
+            string surname = string.Empty;
+            if (individual.Surname != "?" && individual.Surname.ToUpper() != Individual.UNKNOWN_NAME)
+                surname = individual.Surname;
+            //if (individual.MarriedName != "?" && individual.MarriedName.ToUpper() != Individual.UNKNOWN_NAME && individual.MarriedName != individual.Surname)
+            //{
+            //    surname += " " + individual.MarriedName;
+            //}
+            surname = surname.Trim();
+            query.Append("lastname=" + HttpUtility.UrlEncode(surname) + "&lastname_variants=true&");
+            AppendYearandRange(individual.BirthDate, query, "yearofbirth=", "yearofbirth_offset=", true);
+            if (st.Equals(SearchType.MARRIAGE))
+                AppendYearandRange(factdate, query, "yearofmarriage=", "yearofmarriage_offset=", true);
+            if (st.Equals(SearchType.DEATH))
+                AppendYearandRange(factdate, query, "yearofdeath=", "yearofdeath_offset=", true);
+            uri.Query = query.ToString();
+            return uri.ToString();
         }
 
-        private string BuildAncestryQuery(SearchType st, Individual individual)
+        private string BuildAncestryQuery(SearchType st, Individual individual, FactDate factdate)
         {
             UriBuilder uri = new UriBuilder();
             uri.Host = "search.ancestry.co.uk";
@@ -2288,10 +2319,23 @@ namespace FTAnalyzer
             }
             surname = surname.Trim();
             query.Append("gsln=" + HttpUtility.UrlEncode(surname) + "&");
-            if (individual.BirthDate.IsKnown)
+            AppendYearandRange(individual.BirthDate, query, "msbdy=", "msbdp=", false);
+            if (individual.BirthLocation != FactLocation.UNKNOWN_LOCATION)
             {
-                int startYear = individual.BirthDate.StartDate.Year;
-                int endYear = individual.BirthDate.EndDate.Year;
+                string location = individual.BirthLocation.GetLocation(FactLocation.SUBREGION).ToString();
+                query.Append("msbpn__ftp=" + HttpUtility.UrlEncode(location) + "&");
+            }
+            query.Append("cpxt=1&uidh=6b2&cp=11");
+            uri.Query = query.ToString();
+            return uri.ToString();
+        }
+
+        private static void AppendYearandRange(FactDate factdate, StringBuilder query, string yeartext, string rangetext, bool FMP)
+        {
+            if (factdate.IsKnown)
+            {
+                int startYear = factdate.StartDate.Year;
+                int endYear = factdate.EndDate.Year;
                 int year, range;
                 if (startYear == FactDate.MINDATE.Year)
                 {
@@ -2308,19 +2352,17 @@ namespace FTAnalyzer
                     year = (endYear + startYear + 1) / 2;
                     range = (endYear - startYear + 1) / 2;
                     if (2 < range && range < 5) range = 5;
-                    if (range > 5) range = 10;
+                    if (range > 5 && !FMP) range = 10;
+                    if(FMP)
+                    {
+                        if (5 < range && range < 10) range = 10;
+                        if (10 < range && range < 20) range = 20;
+                        if (range > 20) range = 40;
+                    }
                 }
-                query.Append("msbdy=" + year + "&");
-                query.Append("msbdp=" + range + "&");
+                query.Append(yeartext + year + "&");
+                query.Append(rangetext + range + "&");
             }
-            if (individual.BirthLocation != FactLocation.UNKNOWN_LOCATION)
-            {
-                string location = individual.BirthLocation.GetLocation(FactLocation.SUBREGION).ToString();
-                query.Append("msbpn__ftp=" + HttpUtility.UrlEncode(location) + "&");
-            }
-            query.Append("cpxt=1&uidh=6b2&cp=11");
-            uri.Query = query.ToString();
-            return uri.ToString();
         }
 
         #endregion
