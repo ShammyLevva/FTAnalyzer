@@ -444,7 +444,7 @@ namespace FTAnalyzer
 
         public FactLocation DeathLocation
         {
-            get { return DeathFact == null ? null : DeathFact.Location; }
+            get { return DeathFact == null ? FactLocation.UNKNOWN_LOCATION : DeathFact.Location; }
         }
 
         public FactDate BurialDate

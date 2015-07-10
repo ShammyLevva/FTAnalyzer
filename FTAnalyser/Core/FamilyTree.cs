@@ -2264,6 +2264,12 @@ namespace FTAnalyzer
                 uri.Path = "results/ireland-records-in-birth-marriage-death-and-parish-records";
             else
                 uri.Path = "results/world-records-in-birth-marriage-death-and-parish-records";
+            if (st.Equals(SearchType.BIRTH))
+                uri.Path = uri.Path + "/births-and-baptisms~church-registers";
+            if (st.Equals(SearchType.MARRIAGE))
+                uri.Path = uri.Path + "/church-registers~marriages-and-divorces";
+            if (st.Equals(SearchType.DEATH))
+                uri.Path = uri.Path + "/church-registers~wills-and-probate~deaths-and-burials";
             StringBuilder query = new StringBuilder();
             if (individual.Forenames != "?" && individual.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
                 query.Append("firstname=" + HttpUtility.UrlEncode(individual.Forenames) + "&firstname_variants=true&");
