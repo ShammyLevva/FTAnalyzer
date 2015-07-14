@@ -1394,8 +1394,7 @@ namespace FTAnalyzer
                 return false;
             }
         }
-
-
+        
         public int LostCousinsCensusFactCount
         {
             get { return facts.Count(f => f.IsLCCensusFact); }
