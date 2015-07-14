@@ -128,7 +128,7 @@ namespace FTAnalyzer
             this.CensusLocation = CensusLocation.UNKNOWN;
         }
 
-        public CensusReference(Fact fact, XmlNode node)
+        public CensusReference(Fact fact, XmlNode node, CensusReference pageRef = null)
             : this()
         {
             this.Fact = fact;
@@ -143,6 +143,8 @@ namespace FTAnalyzer
             }
             else
                 fact.UpdateFactDate(this.CensusYear);
+            if (pageRef != null && !pageRef.IsKnownStatus && !this.IsKnownStatus)
+                unknownCensusRef = pageRef.unknownCensusRef + "\n" + unknownCensusRef; 
             fact.SetCensusReferenceDetails(this, CensusLocation, string.Empty);
         }
 
@@ -212,7 +214,6 @@ namespace FTAnalyzer
 
         private bool GetCensusReference(string text)
         {
-            // aggressively remove multi spaces to allow for spaces in the census references
             if (text.Length > 0)
             {
                 if (CheckPatterns(text))
@@ -253,6 +254,7 @@ namespace FTAnalyzer
                         .Replace("PN", "Piece", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Schedule No", "SN", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Schedule Number", "SN", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("Schedule", "SN", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Enumeration District ED", "ED", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Enumeration District", "ED", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Sub District", "SD", StringComparison.InvariantCultureIgnoreCase)

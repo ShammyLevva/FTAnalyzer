@@ -23,7 +23,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "5.1.0.0-beta1";
+        public static string VERSION = "5.1.0.0-beta2";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -1349,9 +1349,9 @@ namespace FTAnalyzer
             rtbLostCousins.AppendText("1940 US Census: " + countUS1940 + " Found, " + missingUS1940 + " Missing\n");
             rtbLostCousins.AppendText("____________________________________________________\n");
             if (moreThanOneLCfact > 0)
-                rtbLostCousins.AppendText("Duplicate LostCousins facts: " + moreThanOneLCfact + "\n");
+                rtbLostCousins.AppendText("Duplicate Lost Cousins facts: " + moreThanOneLCfact + "\n");
             if (LCtotal > total)
-                rtbLostCousins.AppendText("LostCousins fact with no Lost Cousins census country : " + (LCtotal - total) + "\n");
+                rtbLostCousins.AppendText("Lost Cousins fact with no Lost Cousins census country : " + (LCtotal - total) + "\n");
             //if (noCountryTotal > 0)
             //    rtbLostCousins.AppendText("Census facts with no census country and no Lost Cousins fact : " + noCountryTotal + "\n");
             if (moreThanOneLCfact > 0 || LCtotal > total) // || noCountryTotal > 0)
@@ -1363,7 +1363,7 @@ namespace FTAnalyzer
             if (LCnoCensus > 0)
             {
                 int startpos = rtbLostCousins.TextLength;
-                rtbLostCousins.AppendText("LostCousins facts with bad/missing census fact: " + LCnoCensus + "\n\n");
+                rtbLostCousins.AppendText("Lost Cousins facts with bad/missing census fact: " + LCnoCensus + "\n\n");
                 int endpos = rtbLostCousins.TextLength;
                 rtbLostCousins.Select(startpos, endpos);
                 rtbLostCousins.SelectionColor = Color.Red;

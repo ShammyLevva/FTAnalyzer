@@ -366,8 +366,13 @@ namespace FTAnalyzer
                     if (IsCensusFact)
                     {
                         CheckForSharedFacts(node);
-                        if (this.CensusReference == CensusReference.UNKNOWN || !this.CensusReference.IsKnownStatus)
+                        if (this.CensusReference == CensusReference.UNKNOWN)
                             this.CensusReference = new CensusReference(this, node);
+                        else if(!this.CensusReference.IsKnownStatus)
+                        {
+                            CensusReference pageRef = this.CensusReference;
+                            this.CensusReference = new CensusReference(this, node, pageRef);
+                        }
                     }
                     if (FactType == DEATH)
                     {
@@ -811,13 +816,13 @@ namespace FTAnalyzer
 
         public bool IsValidCensus(FactDate when)
         {
-            return FactDate.IsKnown && IsCensusFact && FactDate.Overlaps(when) && FactDate.IsNotBEForeOrAFTer && FactErrorLevel == Fact.FactError.GOOD;
+            return FactDate.IsKnown && IsCensusFact && FactDate.YearMatches(when) && FactDate.IsNotBEForeOrAFTer && FactErrorLevel == Fact.FactError.GOOD;
         }
 
         public bool IsValidLostCousins(FactDate when)
         {
             return FactDate.IsKnown && (FactType == Fact.LOSTCOUSINS || FactType == Fact.LC_FTA) 
-                && FactDate.Overlaps(when) && FactDate.IsNotBEForeOrAFTer && FactErrorLevel == Fact.FactError.GOOD;
+                && FactDate.YearMatches(when) && FactDate.IsNotBEForeOrAFTer && FactErrorLevel == Fact.FactError.GOOD;
         }
 
         public bool IsOverseasUKCensus(string country)
