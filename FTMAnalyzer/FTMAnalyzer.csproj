@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4DA6B8B8-8F42-4DFF-B998-5DF9F99929AE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FTM</RootNamespace>
+    <AssemblyName>FTMAnalyzer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Family Tree Maker 2012\Common.dll</HintPath>
+    </Reference>
+    <Reference Include="FTM.Configuration">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Family Tree Maker 2012\FTM.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="FTM.Data">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Family Tree Maker 2012\FTM.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="FTM.Data.DB">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Family Tree Maker 2012\FTM.Data.DB.dll</HintPath>
+    </Reference>
+    <Reference Include="FTM.Import">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Family Tree Maker 2012\FTM.Import.dll</HintPath>
+    </Reference>
+    <Reference Include="FTM.Import.FTW">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Family Tree Maker 2012\FTM.Import.FTW.dll</HintPath>
+    </Reference>
+    <Reference Include="FTM.Services.Contracts">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Family Tree Maker 2012\FTM.Services.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="FTM.Services.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=69cf5367912b86b4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Family Tree Maker 2012\FTM.Services.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="FTM.Services.Shared">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Family Tree Maker 2012\FTM.Services.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="FTM.Shared">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Family Tree Maker 2012\FTM.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="FTM.Shared.Controls">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Family Tree Maker 2012\FTM.Shared.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.CompositeUI">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Family Tree Maker 2012\Microsoft.Practices.CompositeUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.CompositeUI.WinForms">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Family Tree Maker 2012\Microsoft.Practices.CompositeUI.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ObjectBuilder">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Family Tree Maker 2012\Microsoft.Practices.ObjectBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="MyFamily.Shared, Version=21.0.0.0, Culture=neutral, PublicKeyToken=69cf5367912b86b4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Family Tree Maker 2012\MyFamily.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="MyFamily.Shared.Data, Version=21.0.0.723, Culture=neutral, PublicKeyToken=69cf5367912b86b4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Family Tree Maker 2012\MyFamily.Shared.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Analyzer\AnalyzerModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
