@@ -2196,8 +2196,8 @@ namespace FTAnalyzer
             StringBuilder query = new StringBuilder();
             query.Append("count=20&query=");
 
-            if (individual.Forenames != "?" && individual.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
-                query.Append("%2Bgivenname%3A" + HttpUtility.UrlEncode(individual.Forenames) + "~%20");
+            if (individual.Forename != "?" && individual.Forename.ToUpper() != Individual.UNKNOWN_NAME)
+                query.Append("%2Bgivenname%3A" + HttpUtility.UrlEncode(individual.Forename) + "~%20");
             string surname = GetSurname(st, individual, false);
             query.Append("%2Bsurname%3A" + HttpUtility.UrlEncode(surname) + "~%20");
             if (individual.BirthDate.IsKnown)
