@@ -2188,8 +2188,8 @@ namespace FTAnalyzer
                     endYear = startYear + 9;
                 query.Append("%2Bbirth_year%3A" + startYear + "-" + endYear + "~%20");
             }
-            if (individual.BirthLocation != FactLocation.UNKNOWN_LOCATION)
-            {
+            if (st.Equals(SearchType.BIRTH) && individual.BirthLocation != FactLocation.UNKNOWN_LOCATION)
+            {  // add birth place if searching for a birth
                 string location = individual.BirthLocation.GetLocation(FactLocation.SUBREGION).ToString();
                 query.Append("%2Bbirth_place%3A%22" + HttpUtility.UrlEncode(location) + "%22~%20");
             }
