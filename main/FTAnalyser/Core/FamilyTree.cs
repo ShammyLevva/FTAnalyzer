@@ -1872,15 +1872,11 @@ namespace FTAnalyzer
             // good https://familysearch.org/search/record/results#count=20&query=%2Bgivenname%3ACharles%7E%20%2Bsurname%3ABisset%7E%20%2Brecord_country%3AScotland%20%2Brecord_type%3A%283%29&collection_id=2046756
             StringBuilder path = new StringBuilder();
             path.Append("https://www.familysearch.org/search/record/results#count=20&query=");
-            if (person.Forenames != "?" && person.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
-            {
+            if (person.Forename != "?" && person.Forename.ToUpper() != Individual.UNKNOWN_NAME)
                 path.Append("%2B" + FamilySearch.GIVENNAME + "%3A%22" + HttpUtility.UrlEncode(person.Forenames) + "%22%7E%20");
-            }
             string surname = person.SurnameAtDate(censusFactDate);
             if (surname != "?" && surname.ToUpper() != Individual.UNKNOWN_NAME)
-            {
                 path.Append("%2B" + FamilySearch.SURNAME + "%3A" + HttpUtility.UrlEncode(surname) + "%7E%20");
-            }
             path.Append("%2B" + FamilySearch.RECORD_TYPE + "%3A%283%29");
             if (person.BirthDate.IsKnown)
             {
@@ -1892,13 +1888,9 @@ namespace FTAnalyzer
             if (person.BirthLocation != FactLocation.UNKNOWN_LOCATION)
             {
                 if (person.BirthLocation.Country != country)
-                {
                     location = person.BirthLocation.Country;
-                }
                 else
-                {
                     location = person.BirthLocation.GetLocation(FactLocation.REGION).ToString().Replace(",", "");
-                }
                 path.Append("%2B" + FamilySearch.BIRTH_LOCATION + "%3A" + HttpUtility.UrlEncode(location) + "%7E%20");
             }
             int collection = FamilySearch.CensusCollectionID(country, censusYear);
@@ -1960,18 +1952,12 @@ namespace FTAnalyzer
             query.Append("MSAV=1&");
             query.Append("msT=1&");
             if (person.Forenames != "?" && person.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
-            {
                 query.Append("gsfn=" + HttpUtility.UrlEncode(person.Forenames) + "&");
-            }
             string surname = string.Empty;
             if (person.Surname != "?" && person.Surname.ToUpper() != Individual.UNKNOWN_NAME)
-            {
                 surname = person.Surname;
-            }
             if (person.MarriedName != "?" && person.MarriedName.ToUpper() != Individual.UNKNOWN_NAME && person.MarriedName != person.Surname)
-            {
                 surname += " " + person.MarriedName;
-            }
             surname = surname.Trim();
             query.Append("gsln=" + HttpUtility.UrlEncode(surname) + "&");
             if (person.BirthDate.IsKnown)
@@ -2057,21 +2043,13 @@ namespace FTAnalyzer
                     range = (endYear - startYear + 5) / 2;
                 }
                 if (range == 0)
-                {
                     query.Append("r=0&");
-                }
                 else if (range <= 2)
-                {
                     query.Append("r=2&");
-                }
                 else if (range <= 5)
-                {
                     query.Append("r=5&");
-                }
                 else
-                {
                     query.Append("r=10&");
-                }
                 query.Append("a=" + year + "&");
             }
             if (person.BirthLocation != FactLocation.UNKNOWN_LOCATION)
