@@ -2320,7 +2320,7 @@ namespace FTAnalyzer
                 else
                 {
                     year = (endYear + startYear + 1) / 2;
-                    range = (endYear - startYear + 1) / 2;
+                    range = (endYear - startYear + 2) / 2; // add two to make year range searches always at least one year either side
                     if (2 < range && range < 5) range = 5;
                     if (range > 5 && !FMP) range = 10;
                     if(FMP)
