@@ -97,6 +97,7 @@ namespace CensusReferenceTest
             Census1911Test("RG14, Piece 00866, Registration District 10, Sub District 4, Enumeration District 25, Schedule No. 63", "00866", "63");
             Census1911Test("Census 1911 Coventry WAR ENG RG14Piece18568 RG78Piece1111 RD390 SD2 ED30 SN129", "18568", "129");
             Census1911Test("Census 1911 Wortley Leeds YKS ENG RG14/Piece26892 RG78Piece1545 RD499 SD3 ED22 SN150", "26892", "150");
+            Census1911Test("1911 census - Piece 23919, SN 32 - living at 114 Princess Road, Moss Side, Manchester, Lancashire", "23919", "32");
 
             UKCensusTest("Database online. Class: RG9; Piece: 1105; Folio: 90; Page: 21; GSU", CensusDate.UKCENSUS1861, "1105", "90", "21");
             UKCensusTest("            RG11 piece 870 folio 49 page 10", CensusDate.UKCENSUS1881, "870", "49", "10");
