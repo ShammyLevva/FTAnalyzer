@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTAnalyzer", "FTAnalyzer.csproj", "{799ECA65-6748-4B7C-BBD5-429C19E02161}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -38,35 +38,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSGazetteerProcessor", "..\OSGazetteerProcessor\OSGazetteerProcessor.csproj", "{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = FTAnalyzer.csproj
-		SccLocalPath1 = .
-		SccProjectUniqueName2 = ..\\FTMAnalyzer\\FTMAnalyzer.csproj
-		SccProjectName2 = ../FTMAnalyzer
-		SccLocalPath2 = ..\\FTMAnalyzer
-		SccProjectUniqueName3 = FactDateTest\\FTA-UnitTests.csproj
-		SccProjectName3 = FactDateTest
-		SccLocalPath3 = FactDateTest
-		SccProjectUniqueName4 = ..\\Printing.DataGridViewPrint\\Printing.DataGridViewPrint.csproj
-		SccProjectName4 = ../Printing.DataGridViewPrint
-		SccLocalPath4 = ..\\Printing.DataGridViewPrint
-		SccProjectUniqueName5 = ..\\DgvFilterPopup\\DgvFilterPopup.csproj
-		SccProjectName5 = ../DgvFilterPopup
-		SccLocalPath5 = ..\\DgvFilterPopup
-		SccProjectUniqueName6 = ..\\BruTile\\BruTile\\BruTile.csproj
-		SccProjectName6 = ../BruTile/BruTile
-		SccLocalPath6 = ..\\BruTile\\BruTile
-		SccProjectUniqueName7 = ..\\BruTile\\BruTile.Desktop\\BruTile.Desktop.csproj
-		SccProjectName7 = ../BruTile/BruTile.Desktop
-		SccLocalPath7 = ..\\BruTile\\BruTile.Desktop
-		SccProjectUniqueName8 = ..\\OSGazetteerProcessor\\OSGazetteerProcessor.csproj
-		SccProjectName8 = ../OSGazetteerProcessor
-		SccLocalPath8 = ..\\OSGazetteerProcessor
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
 		CD_ROM|x86 = CD_ROM|x86
@@ -261,6 +232,35 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = FTAnalyzer.csproj
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = ..\\FTMAnalyzer\\FTMAnalyzer.csproj
+		SccProjectName2 = ../FTMAnalyzer
+		SccLocalPath2 = ..\\FTMAnalyzer
+		SccProjectUniqueName3 = FactDateTest\\FTA-UnitTests.csproj
+		SccProjectName3 = FactDateTest
+		SccLocalPath3 = FactDateTest
+		SccProjectUniqueName4 = ..\\Printing.DataGridViewPrint\\Printing.DataGridViewPrint.csproj
+		SccProjectName4 = ../Printing.DataGridViewPrint
+		SccLocalPath4 = ..\\Printing.DataGridViewPrint
+		SccProjectUniqueName5 = ..\\DgvFilterPopup\\DgvFilterPopup.csproj
+		SccProjectName5 = ../DgvFilterPopup
+		SccLocalPath5 = ..\\DgvFilterPopup
+		SccProjectUniqueName6 = ..\\BruTile\\BruTile\\BruTile.csproj
+		SccProjectName6 = ../BruTile/BruTile
+		SccLocalPath6 = ..\\BruTile\\BruTile
+		SccProjectUniqueName7 = ..\\BruTile\\BruTile.Desktop\\BruTile.Desktop.csproj
+		SccProjectName7 = ../BruTile/BruTile.Desktop
+		SccLocalPath7 = ..\\BruTile\\BruTile.Desktop
+		SccProjectUniqueName8 = ..\\OSGazetteerProcessor\\OSGazetteerProcessor.csproj
+		SccProjectName8 = ../OSGazetteerProcessor
+		SccLocalPath8 = ..\\OSGazetteerProcessor
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FTAnalyzer.vsmdi
