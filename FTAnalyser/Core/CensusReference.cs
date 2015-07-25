@@ -91,7 +91,6 @@ namespace FTAnalyzer
         public string Family { get; private set; }
         private string ReferenceText { get; set; }
         private CensusLocation CensusLocation { get; set; }
-
         public Fact Fact { get; private set; }
         public bool IsUKCensus { get; private set; }
         public bool IsLCCensusFact { get; private set; }

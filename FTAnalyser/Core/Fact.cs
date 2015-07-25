@@ -363,7 +363,7 @@ namespace FTAnalyzer
                             this.CensusReference = new CensusReference(this, n);
                     }
                     // if we have checked the sources and no census ref see if its been added as a comment to this fact
-                    if (IsCensusFact)
+                    if (FactType.Equals(CENSUS) || FactType.Equals(CENSUS_FTA) || FactType.Equals(RESIDENCE))
                     {
                         CheckForSharedFacts(node);
                         if (this.CensusReference == CensusReference.UNKNOWN)
