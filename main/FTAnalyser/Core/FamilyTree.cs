@@ -2198,14 +2198,7 @@ namespace FTAnalyzer
 
             if (individual.Forenames != "?" && individual.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
                 query.Append("%2Bgivenname%3A" + HttpUtility.UrlEncode(individual.Forenames) + "~%20");
-            string surname = string.Empty;
-            if (individual.Surname != "?" && individual.Surname.ToUpper() != Individual.UNKNOWN_NAME)
-                surname = individual.Surname;
-            //if (individual.MarriedName != "?" && individual.MarriedName.ToUpper() != Individual.UNKNOWN_NAME && individual.MarriedName != individual.Surname)
-            //{
-            //    surname += " " + individual.MarriedName;
-            //}
-            surname = surname.Trim();
+            string surname = GetSurname(st, individual, false);
             query.Append("%2Bsurname%3A" + HttpUtility.UrlEncode(surname) + "~%20");
             if (individual.BirthDate.IsKnown)
             {
@@ -2273,14 +2266,7 @@ namespace FTAnalyzer
             StringBuilder query = new StringBuilder();
             if (individual.Forenames != "?" && individual.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
                 query.Append("firstname=" + HttpUtility.UrlEncode(individual.Forenames) + "&firstname_variants=true&");
-            string surname = string.Empty;
-            if (individual.Surname != "?" && individual.Surname.ToUpper() != Individual.UNKNOWN_NAME)
-                surname = individual.Surname;
-            //if (individual.MarriedName != "?" && individual.MarriedName.ToUpper() != Individual.UNKNOWN_NAME && individual.MarriedName != individual.Surname)
-            //{
-            //    surname += " " + individual.MarriedName;
-            //}
-            surname = surname.Trim();
+            string surname = GetSurname(st, individual, false);
             query.Append("lastname=" + HttpUtility.UrlEncode(surname) + "&lastname_variants=true&");
             AppendYearandRange(individual.BirthDate, query, "yearofbirth=", "yearofbirth_offset=", true);
             if (st.Equals(SearchType.MARRIAGE))
@@ -2289,6 +2275,17 @@ namespace FTAnalyzer
                 AppendYearandRange(factdate, query, "yearofdeath=", "yearofdeath_offset=", true);
             uri.Query = query.ToString();
             return uri.ToString();
+        }
+
+        private static string GetSurname(SearchType st, Individual individual, bool ancestry)
+        {
+            string surname = string.Empty;
+            if (individual.Surname != "?" && individual.Surname.ToUpper() != Individual.UNKNOWN_NAME)
+                surname = individual.Surname;
+            if (st.Equals(SearchType.DEATH) && individual.MarriedName != "?" && individual.MarriedName.ToUpper() != Individual.UNKNOWN_NAME && individual.MarriedName != individual.Surname)
+                surname = ancestry ? surname + " " + individual.MarriedName : individual.MarriedName; // for ancestry combine names for others sites just use marriedName if death search
+            surname = surname.Trim();
+            return surname;
         }
 
         private string BuildAncestryQuery(SearchType st, Individual individual, FactDate factdate)
@@ -2311,19 +2308,8 @@ namespace FTAnalyzer
             query.Append("MSAV=1&");
             query.Append("msT=1&");
             if (individual.Forenames != "?" && individual.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
-            {
                 query.Append("gsfn=" + HttpUtility.UrlEncode(individual.Forenames) + "&");
-            }
-            string surname = string.Empty;
-            if (individual.Surname != "?" && individual.Surname.ToUpper() != Individual.UNKNOWN_NAME)
-            {
-                surname = individual.Surname;
-            }
-            if (individual.MarriedName != "?" && individual.MarriedName.ToUpper() != Individual.UNKNOWN_NAME && individual.MarriedName != individual.Surname)
-            {
-                surname += " " + individual.MarriedName;
-            }
-            surname = surname.Trim();
+            string surname = GetSurname(st, individual, true);
             query.Append("gsln=" + HttpUtility.UrlEncode(surname) + "&");
             AppendYearandRange(individual.BirthDate, query, "msbdy=", "msbdp=", false);
             if (individual.BirthLocation != FactLocation.UNKNOWN_LOCATION)
