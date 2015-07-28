@@ -1,0 +1,1551 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharpMap.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:SharpMap.Data.Providers.DataTablePoint">
+            <summary>
+            The DataTablePoint provider is used for rendering point data 
+            from a System.Data.DataTable.
+            </summary>
+            <remarks>
+            <para>
+            The data source will need to have two double-type columns, 
+            xColumn and yColumn that contains the coordinates of the point,
+            and an integer-type column containing a unique identifier for each row.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:SharpMap.Data.Providers.DataTablePoint.#ctor(System.Data.DataTable,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the DataTablePoint provider
+            </summary>
+            <param name="dataTable">
+            Instance of <see cref="T:System.Data.DataTable"/> to use as data source.
+            </param>
+            <param name="oidColumnName">
+            Name of the OID column.
+            </param>
+            <param name="xColumn">
+            Name of column where point's X value is stored.
+            </param>
+            <param name="yColumn">
+            Name of column where point's Y value is stored.
+            </param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.DataTablePoint.GetGeometriesInView(GeoAPI.Geometries.Envelope)">
+            <summary>
+            Returns geometries within the specified bounding box
+            </summary>
+            <param name="bbox"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.DataTablePoint.GetObjectIDsInView(GeoAPI.Geometries.Envelope)">
+            <summary>
+            Returns geometry Object IDs whose bounding box intersects 'bbox'
+            </summary>
+            <param name="bbox"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.DataTablePoint.GetGeometryByID(System.UInt32)">
+            <summary>
+            Returns the geometry corresponding to the Object ID
+            </summary>
+            <param name="oid">Object ID</param>
+            <returns>geometry</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.DataTablePoint.ExecuteIntersectionQuery(GeoAPI.Geometries.Envelope,SharpMap.Data.FeatureDataSet)">
+            <summary>
+            Retrieves all features within the given BoundingBox.
+            </summary>
+            <param name="bbox">Bounds of the region to search.</param>
+            <param name="ds">FeatureDataSet to fill data into</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.DataTablePoint.GetFeatureCount">
+            <summary>
+            Returns the number of features in the dataset
+            </summary>
+            <returns>Total number of features</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.DataTablePoint.GetFeature(System.UInt32)">
+            <summary>
+            Returns a datarow based on a RowID
+            </summary>
+            <param name="rowId"></param>
+            <returns>datarow</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.DataTablePoint.GetExtents">
+            <summary>
+            Computes the full extents of the data source as a 
+            <see cref="T:GeoAPI.Geometries.Envelope"/>.
+            </summary>
+            <returns>
+            A BoundingBox instance which minimally bounds all the features
+            available in this data source.
+            </returns>
+        </member>
+        <member name="P:SharpMap.Data.Providers.DataTablePoint.Table">
+            <summary>
+            Data table used as the data source.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.DataTablePoint.ObjectIdColumn">
+            <summary>
+            Name of column that contains the Object ID
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.DataTablePoint.XColumn">
+            <summary>
+            Name of column that contains X coordinate
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.DataTablePoint.YColumn">
+            <summary>
+            Name of column that contains Y coordinate
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.DataTablePoint.ConnectionString">
+            <summary>
+            Connectionstring
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.DataTablePoint.DefinitionQuery">
+            <summary>
+            Definition query used for limiting dataset
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ManagedSpatiaLite">
+            <summary>
+            Managed SpatiaLite Provider for SharpMap that does NOT require the libspatialite DLLs
+            <para>
+            Spatialite is a spatial extension for the popular SQLite database engine.
+            </para>
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ManagedSpatiaLite.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates an instance of SpatiaLite provider
+            </summary>
+            <param name="connectionStr">Connection String to SQLite database file 
+            ("http://www.connectionstrings.com/sqlite")</param>
+            <param name="tablename">Name of the table with geometry information</param>
+            <param name="geometryColumnName">Name of the desired geometry column</param>
+            <param name="oidColumnName">Name of the object Id column</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ManagedSpatiaLite.GetNonSpatialColumns">
+            <summary>
+            Get the non-spatial columns
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ManagedSpatiaLite.DequoteIdentifier(System.String)">
+            <summary>
+            Function to remove double quotes from identifiers. SQLite returns quoted column names when querying a view.
+            </summary>
+            <param name="item">The identifier</param>
+            <returns>The unquoted <paramref name="item"/></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ManagedSpatiaLite.GetSpatialTables(System.String)">
+            <summary>
+            Function to return an <see cref="T:System.Collections.Generic.IEnumerable`1"/> for a given sqlite database.
+            </summary>
+            <param name="connectionString">The connection to the sqlite database.</param>
+            <returns>
+            An <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
+            </returns>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ManagedSpatiaLite.UseLike">
+            <summary>
+            Gets or sets whether geometry definition lookup should use sql LIKE operator for name comparison.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ManagedSpatiaLite.CachedExtent">
+            <summary>
+            Gets or sets the extent for this data source
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ManagedSpatiaLite.ConnectionString">
+            <summary>
+            Connectionstring
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ManagedSpatiaLite.Table">
+            <summary>
+            Data table name
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ManagedSpatiaLite.GeometryColumn">
+            <summary>
+            Name of geometry column
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ManagedSpatiaLite.ObjectIdColumn">
+            <summary>
+            Name of column that contains the Object ID
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ManagedSpatiaLite.SpatialIndex">
+            <summary>
+            Name of the spatial index
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ManagedSpatiaLite.DefinitionQuery">
+            <summary>
+            Definition query used for limiting dataset
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.NtsProvider">
+            <summary>
+            The NtsProvider enables you to feed any SharpMap datasource through the <a href="http://sourceforge.net/projects/nts">NetTopologySuite</a>
+            geometry using any NTS operation.
+            </summary>
+            <remarks>
+            The following example shows how to apply buffers to a shapefile-based river-dataset:
+            <code lang="C#">
+            public void InitializeMap(SharpMap.Map map)
+            {
+            	//Create Shapefile datasource
+            	SharpMap.Data.Providers.ShapeFile shp = new SharpMap.Data.Providers.ShapeFile("rivers.shp", true);
+            	//Create NTS Datasource that gets its data from 'shp' and calls 'NtsOperation' that defines a geoprocessing method
+            	SharpMap.Data.Providers.NtsProvider nts = new SharpMap.Data.Providers.NtsProvider(shp,new SharpMap.Data.Providers.NtsProvider.GeometryOperationDelegate(NtsOperation));
+            	//Create the layer for rendering
+            	SharpMap.Layers.VectorLayer layRivers = new SharpMap.Layers.VectorLayer("Rivers");
+            	layRivers.DataSource = nts;
+            	layRivers.Style.Fill = Brushes.Blue;
+            	map.Layers.Add(layRivers);
+            }
+            //Define geoprocessing delegate that buffers all geometries with a distance of 0.5 mapunits
+            public static void NtsOperation(List&lt;NetTopologySuite.Features.Feature&gt; geoms)
+            {
+            	foreach (GisSharpBlog.NetTopologySuite.Features.Feature f in geoms)
+            		f.Geometry = f.Geometry.Buffer(0.5);
+            }
+            </code>
+            </remarks>
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpMap.Data.Providers.NtsProvider"/> class
+            using a default <see cref="T:NetTopologySuite.Geometries.PrecisionModel"/> 
+            with Floating precision.
+            </summary>        
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.#ctor(NetTopologySuite.Geometries.PrecisionModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpMap.Data.Providers.NtsProvider"/> class
+            using the given <paramref name="precisionModel"/>.
+            </summary>
+            <param name="precisionModel">
+            The <see cref="T:NetTopologySuite.Geometries.PrecisionModel"/>  
+            to use for define the precision of the geometry operations.
+            </param>
+            <seealso cref="T:NetTopologySuite.Geometries.PrecisionModel"/>
+            <seealso cref="T:NetTopologySuite.Geometries.GeometryFactory"/>
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.#ctor(SharpMap.Data.Providers.IProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpMap.Data.Providers.NtsProvider"/> class 
+            from another <see cref="T:SharpMap.Data.Providers.IProvider"/>.
+            </summary>
+            <param name="provider">
+            The base <see cref="T:SharpMap.Data.Providers.IProvider"/> 
+            from witch initialize the <see cref="T:SharpMap.Data.Providers.NtsProvider"/> instance.
+            </param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.#ctor(SharpMap.Data.Providers.IProvider,NetTopologySuite.Geometries.PrecisionModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpMap.Data.Providers.NtsProvider"/> class
+            from another <see cref="T:SharpMap.Data.Providers.IProvider"/>.
+            </summary>
+            <param name="provider">
+            The base <see cref="T:SharpMap.Data.Providers.IProvider"/> 
+            from witch initialize the <see cref="T:SharpMap.Data.Providers.NtsProvider"/> instance.
+            </param>
+            <param name="precisionModel">
+            The <see cref="T:NetTopologySuite.Geometries.PrecisionModel"/>  
+            to use for define the precision of the geometry operations.
+            </param>
+            <seealso cref="T:NetTopologySuite.Geometries.PrecisionModel"/>     
+            <seealso cref="T:NetTopologySuite.Geometries.GeometryFactory"/>
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.#ctor(SharpMap.Data.Providers.IProvider,SharpMap.Data.Providers.NtsProvider.GeometryOperationDelegate)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpMap.Data.Providers.NtsProvider"/> class
+            from another <see cref="T:SharpMap.Data.Providers.IProvider"/>.
+            </summary>
+            <param name="provider">
+            The base <see cref="T:SharpMap.Data.Providers.IProvider"/> 
+            from witch initialize the <see cref="T:SharpMap.Data.Providers.NtsProvider"/> instance.
+            </param>
+            <param name="operation">
+            The <see cref="T:SharpMap.Data.Providers.NtsProvider.GeometryOperationDelegate"/> to apply 
+            to all geometry elements in the <paramref name="provider"/>.
+            </param>  
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.#ctor(SharpMap.Data.Providers.IProvider,SharpMap.Data.Providers.NtsProvider.GeometryOperationDelegate,NetTopologySuite.Geometries.PrecisionModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpMap.Data.Providers.NtsProvider"/> class
+            from another <see cref="T:SharpMap.Data.Providers.IProvider"/>.
+            </summary>
+            <param name="provider">
+            The base <see cref="T:SharpMap.Data.Providers.IProvider"/> 
+            from witch initialize the <see cref="T:SharpMap.Data.Providers.NtsProvider"/> instance.
+            </param>
+            <param name="operation">
+            The <see cref="T:SharpMap.Data.Providers.NtsProvider.GeometryOperationDelegate"/> to apply 
+            to all geometry elements in the <paramref name="provider"/>.
+            </param>         
+            <param name="precisionModel">
+            The <see cref="T:NetTopologySuite.Geometries.PrecisionModel"/>  
+            to use for define the precision of the geometry operations.
+            </param>
+            <seealso cref="T:NetTopologySuite.Geometries.PrecisionModel"/> 
+            <seealso cref="T:NetTopologySuite.Geometries.GeometryFactory"/>
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.BuildFromProvider(SharpMap.Data.Providers.IProvider)">
+            <summary>
+            Builds from the given provider.
+            </summary>
+            <param name="provider">
+            The base <see cref="T:SharpMap.Data.Providers.IProvider"/> 
+            from witch initialize the <see cref="T:SharpMap.Data.Providers.NtsProvider"/> instance.
+            </param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.GetExtents">
+            <summary>
+            Returns the BoundingBox of the dataset.
+            </summary>
+            <returns>BoundingBox</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.GetFeature(System.UInt32)">
+            <summary>
+            Gets the feature identified from the given <paramref name="rowId" />.
+            </summary>
+            <param name="rowId">The row ID.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.GetFeatureCount">
+            <summary>
+            Returns the number of features in the dataset.
+            </summary>
+            <returns>number of features</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.GetGeometriesInView(GeoAPI.Geometries.Envelope)">
+            <summary>
+            Returns features within the specified bounding box.
+            </summary>
+            <param name="envelope"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.ExecuteIntersectionQuery(GeoAPI.Geometries.Envelope,SharpMap.Data.FeatureDataSet)">
+            <summary>
+            
+            </summary>
+            <param name="envelope"></param>
+            <param name="ds"></param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.OnExecuteIntersectionQuery(GeoAPI.Geometries.IGeometry,SharpMap.Data.FeatureDataSet)">
+            <summary>
+            
+            </summary>
+            <param name="geom"></param>
+            <param name="ds"></param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.GetGeometryByID(System.UInt32)">
+            <summary>
+            Gets the geometry by ID.
+            </summary>
+            <param name="oid">The oid.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.GetObjectIDsInView(GeoAPI.Geometries.Envelope)">
+            <summary>
+            Gets the object IDs in the view.
+            </summary>
+            <param name="bbox">The bbox.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.ReleaseManagedResources">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.CreateNewRow(SharpMap.Data.FeatureDataTable,NetTopologySuite.Features.Feature)">
+            <summary>
+            Creates a new row in the given <see cref="T:SharpMap.Data.FeatureDataTable"/> <paramref name="dataTable"/>
+            using data in <see cref="T:NetTopologySuite.Features.Feature"/> <paramref name="feature"/>.
+            </summary>
+            <param name="dataTable">The <see cref="T:SharpMap.Data.FeatureDataTable"/> to fill.</param>
+            <param name="feature">Data to insert in the <see cref="T:SharpMap.Data.FeatureDataTable"/>.</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.CreateFeatureDataTable">
+            <summary>
+            Creates a <see cref="T:SharpMap.Data.FeatureDataTable"/> using a stub feature (feature[0]).
+            </summary>
+            <returns><see cref="T:SharpMap.Data.FeatureDataTable"/></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.NtsProvider.GetFeaturesInView(GeoAPI.Geometries.Envelope,SharpMap.Data.FeatureDataSet)">
+            <summary>
+            Gets the features in view.
+            </summary>
+            <param name="bbox">The bbox.</param>
+            <param name="ds">The ds.</param>
+        </member>
+        <member name="P:SharpMap.Data.Providers.NtsProvider.IsOpen">
+            <summary>
+            Gets a value indicating whether this instance is open.
+            </summary>
+            <value><c>true</c> if this instance is open; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="T:SharpMap.Data.Providers.NtsProvider.GeometryOperationDelegate">
+            <summary>
+            Defines a geometry operation that will be applied to all geometries in <see cref="T:SharpMap.Data.Providers.NtsProvider"/>.
+            </summary>
+            <param name="features"></param>
+        </member>
+        <member name="T:SharpMap.Data.Providers.Ogr">
+            <summary>
+            Ogr provider for SharpMap
+            Using the csharp and native dlls provided with FwTools. See version FWToolsVersion property below.
+            <code>
+            SharpMap.Layers.VectorLayer vLayerOgr = new SharpMap.Layers.VectorLayer("MapInfoLayer");
+            vLayerOgr.DataSource = new SharpMap.Data.Providers.Ogr(@"D:\GeoData\myWorld.tab");
+            </code>
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.ContainsLayer(System.String)">
+            <summary>
+            Function to test if a the datasource contains the specified <paramref name="layerName"/>
+            </summary>
+            <param name="layerName">The name of the layer</param>
+            <returns><c>true</c> if the layer is present, otherwise <c>false</c></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.#ctor(System.String,System.String)">
+             <summary>
+             Loads a Ogr datasource with the specified layer
+             </summary>
+             <param name="filename">datasource</param>
+             <param name="layerName">name of layer</param>
+            If you want this functionality use
+            <example>
+            SharpMap.Data.Providers.Ogr prov = new SharpMap.Data.Providers.Ogr(datasource);
+            prov.LayerName = layerName;
+            </example>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.#ctor(System.String,System.Int32)">
+            <summary>
+            Loads a Ogr datasource with the specified layer
+            </summary>
+            <param name="filename">datasource</param>
+            <param name="layerNum">number of layer</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.#ctor(System.String,System.Int32,System.String@)">
+             <summary>
+             Loads a Ogr datasource with the specified layer
+             </summary>
+             <param name="datasource">datasource</param>
+             <param name="layerNum">number of layer</param>
+             <param name="name">Returns the name of the loaded layer</param>
+            If you want this functionality use
+            <example>
+            SharpMap.Data.Providers.Ogr prov = new SharpMap.Data.Providers.Ogr(datasource, layerNum);
+            string layerName = prov.Layername;
+            </example>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.#ctor(System.String)">
+            <summary>
+            Loads a Ogr datasource with the first layer
+            </summary>
+            <param name="datasource">datasource</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.#ctor(System.String,System.String@)">
+             <summary>
+             Loads a Ogr datasource with the first layer
+             </summary>
+             <param name="datasource">datasource</param>
+             <param name="name">Returns the name of the loaded layer</param>
+            <remarks>
+            This constructor is obsolete!
+            If you want this functionality use
+            <example>
+            SharpMap.Data.Providers.Ogr prov = new SharpMap.Data.Providers.Ogr(datasource);
+            string layerName = prov.Layername;
+            </example>
+            </remarks>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.GetExtents">
+            <summary>
+            Boundingbox of the dataset
+            </summary>
+            <returns>boundingbox</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.GetFeatureCount">
+            <summary>
+            Returns the number of features in the dataset
+            </summary>
+            <returns>number of features</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.GetFeature(System.UInt32)">
+            <summary>
+            Returns a FeatureDataRow based on a RowID
+            </summary>
+            <param name="rowId"></param>
+            <returns>FeatureDataRow</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.GetObjectIDsInView(GeoAPI.Geometries.Envelope)">
+            <summary>
+            Returns geometry Object IDs whose bounding box intersects 'bbox'
+            </summary>
+            <param name="bbox"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.GetGeometryByID(System.UInt32)">
+            <summary>
+            Returns the geometry corresponding to the Object ID
+            </summary>
+            <param name="oid">Object ID</param>
+            <returns>geometry</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.GetGeometriesInView(GeoAPI.Geometries.Envelope)">
+            <summary>
+            Returns geometries within the specified bounding box
+            </summary>
+            <param name="bbox"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.ExecuteIntersectionQuery(GeoAPI.Geometries.Envelope,SharpMap.Data.FeatureDataSet)">
+            <summary>
+            Returns the data associated with all the geometries that are intersected by 'geom'
+            </summary>
+            <param name="bbox">Geometry to intersect with</param>
+            <param name="ds">FeatureDataSet to fill data into</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.OnExecuteIntersectionQuery(GeoAPI.Geometries.IGeometry,SharpMap.Data.FeatureDataSet)">
+            <summary>
+            Returns the data associated with all the geometries that are intersected by 'geom'
+            </summary>
+            <param name="geom">Geometry to intersect with</param>
+            <param name="ds">FeatureDataSet to fill data into</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.ReadColumnDefinition(OSGeo.OGR.Layer)">
+            <summary>
+            Reads the field types from the OgrFeatureDefinition -> OgrFieldDefinition
+            </summary>
+            <param name="oLayer">OgrLayer</param>
+            <returns>The feature data table</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.QueryFeatures(GeoAPI.Geometries.IGeometry,System.Double)">
+            <summary>
+            Returns the data associated with all the geometries that is within 'distance' of 'geom'
+            </summary>
+            <param name="geom"></param>
+            <param name="distance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.ExecuteIntersectionQuery(GeoAPI.Geometries.IGeometry)">
+            <summary>
+            Returns the features that intersects with 'geom'
+            </summary>
+            <param name="geom">Geometry</param>
+            <returns>FeatureDataTable</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Ogr.GetFeaturesInView(GeoAPI.Geometries.Envelope,SharpMap.Data.FeatureDataSet)">
+            <summary>
+            Returns all features with the view box
+            </summary>
+            <param name="bbox">view box</param>
+            <param name="ds">FeatureDataSet to fill data into</param>
+        </member>
+        <member name="P:SharpMap.Data.Providers.Ogr.FWToolsVersion">
+            <summary>
+             Gets the version of fwTools that was used to compile and test this Ogr Provider
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.Ogr.Filename">
+            <summary>
+            return the file name of the datasource
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.Ogr.LayerName">
+             <summary>
+             Get the name of the layer set or set the layer by its name
+             </summary>
+            <remarks>
+             If the name set is not within the layer collection of the
+             datasource the old layer is kept.
+            </remarks>
+        </member>
+        <member name="P:SharpMap.Data.Providers.Ogr.LayerIndex">
+            <summary>
+            Get the index of the layer set or set the layer by its index
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.Oracle">
+            <summary>
+            Oracle dataprovider
+            </summary>
+            <remarks>
+            <para>This provider needs the Oracle software client installed on the PC where the application runs.
+            If you need to connect to an Oracle database, it has to have oracle client (or Oracle Instant Client) installed. </para>
+            <para>You can download Oracle Client here:
+            http://www.oracle.com/technology/software/index.html</para>
+            <para>If client don4t need an instance of Oracle, a better option is to use Oracle Instant client
+            http://www.oracle.com/technology/tech/oci/instantclient/index.html</para>
+            <example>
+            Adding a datasource to a layer:
+            <code lang="C#">
+            SharpMap.Layers.VectorLayer myLayer = new SharpMap.Layers.VectorLayer("My layer");
+            string ConnStr = "Server=127.0.0.1;Port=5432;User Id=userid;Password=password;Database=myGisDb;";
+            myLayer.DataSource = new SharpMap.Data.Providers.Oracle(ConnStr, "myTable", "GeomColumn", "OidColumn");
+            </code>
+            </example>
+            <para>SharpMap Oracle provider by Humberto Ferreira (humbertojdf at gmail com).</para>
+            </remarks>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Oracle.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new connection to Oracle
+            </summary>
+            <param name="ConnectionStr">Connectionstring</param>
+            <param name="tablename">Name of data table</param>
+            <param name="geometryColumnName">Name of geometry column</param>
+            /// <param name="OID_ColumnName">Name of column with unique identifier</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Oracle.#ctor(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new connection to Oracle
+            </summary>
+            <param name="username">Username</param>
+            <param name="password">Password</param>
+            <param name="datasource">Datasoure</param>
+            <param name="tablename">Tablename</param>
+            <param name="geometryColumnName">Geometry column name</param>
+            <param name="OID_ColumnName">Object ID column</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Oracle.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new connection to Oracle
+            </summary>
+            <param name="ConnectionStr">Connectionstring</param>
+            <param name="tablename">Name of data table</param>
+            <param name="OID_ColumnName">Name of column with unique identifier</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Oracle.GetGeometriesInView(GeoAPI.Geometries.Envelope)">
+            <summary>
+            Returns geometries within the specified bounding box
+            </summary>
+            <param name="bbox"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Oracle.GetGeometryByID(System.UInt32)">
+            <summary>
+            Returns the geometry corresponding to the Object ID
+            </summary>
+            <param name="oid">Object ID</param>
+            <returns>geometry</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Oracle.GetObjectIDsInView(GeoAPI.Geometries.Envelope)">
+            <summary>
+            Returns geometry Object IDs whose bounding box intersects 'bbox'
+            </summary>
+            <param name="bbox"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Oracle.OnExecuteIntersectionQuery(GeoAPI.Geometries.IGeometry,SharpMap.Data.FeatureDataSet)">
+            <summary>
+            Returns the features that intersects with 'geom'
+            </summary>
+            <param name="geom"></param>
+            <param name="ds">FeatureDataSet to fill data into</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Oracle.GetFeatureCount">
+            <summary>
+            Returns the number of features in the dataset
+            </summary>
+            <returns>number of features</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Oracle.GetFeature(System.UInt32)">
+            <summary>
+            Returns a datarow based on a RowID
+            </summary>
+            <param name="rowId"></param>
+            <returns>datarow</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Oracle.GetExtents">
+            <summary>
+            Boundingbox of dataset
+            </summary>
+            <returns>boundingbox</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Oracle.ExecuteIntersectionQuery(GeoAPI.Geometries.Envelope,SharpMap.Data.FeatureDataSet)">
+            <summary>
+            Returns all features with the view box
+            </summary>
+            <param name="bbox">view box</param>
+            <param name="ds">FeatureDataSet to fill data into</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Oracle.GetBoxFilterStr(GeoAPI.Geometries.Envelope)">
+            <summary>
+            Returns the box filter string needed in SQL query
+            </summary>
+            <param name="bbox"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Oracle.GetGeometryColumn">
+            <summary>
+            Queries the Oracle database to get the name of the Geometry Column. This is used if the columnname isn't specified in the constructor
+            </summary>
+            <remarks></remarks>
+            <returns>Name of column containing geometry</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.Oracle.GetFeaturesInView(GeoAPI.Geometries.Envelope,SharpMap.Data.FeatureDataSet)">
+            <summary>
+            Returns all features with the view box
+            </summary>
+            <param name="bbox">view box</param>
+            <param name="ds">FeatureDataSet to fill data into</param>
+        </member>
+        <member name="P:SharpMap.Data.Providers.Oracle.ConnectionString">
+            <summary>
+            Connectionstring
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.Oracle.Table">
+            <summary>
+            Data table name
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.Oracle.GeometryColumn">
+            <summary>
+            Name of geometry column
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.Oracle.ObjectIdColumn">
+            <summary>
+            Name of column that contains the Object ID
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.Oracle.DefinitionQuery">
+            <summary>
+            Definition query used for limiting dataset
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.PostGisSpatialObjectType">
+            <summary>
+            Possible spatial objects when working with PostGIS data sources
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.PostGisSpatialObjectType.Geometry">
+            <summary>
+            Spatial object stored in cartesian coordinate system, that is defined by a spatial reference system id.
+            <para>This is the standard way</para>
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.PostGisSpatialObjectType.Geography">
+            <summary>
+            Spatial object stored in WGS84, calculations performed on the sphere.
+            </summary>
+            <see href="http://workshops.opengeo.org/postgis-intro/geography.html"/>
+        </member>
+        <member name="T:SharpMap.Data.Providers.PostGIS">
+            <summary>
+            PostgreSQL / PostGIS dataprovider
+            <para/>Uses NPGSQL for communicating with database.
+            <para/>Detects PostGIS version and uses ST_Intersects method for PG_Verions >= 1.3 and &amp;&amp; (bbox comparison) for others)
+            </summary>
+            <example>
+            Adding a datasource to a layer:
+            <code lang="C#">
+            SharpMap.Layers.VectorLayer myLayer = new SharpMap.Layers.VectorLayer("My layer");
+            string ConnStr = "Server=127.0.0.1;Port=5432;User Id=postgres;Password=password;Database=myGisDb;";
+            myLayer.DataSource = new SharpMap.Data.Providers.PostGIS(ConnStr, "myTable");
+            </code>
+            </example>
+        </member>
+        <member name="M:SharpMap.Data.Providers.PostGIS.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new connection to PostGIS
+            </summary>
+            <param name="connectionString">Connectionstring</param>
+            <param name="tablename">Name of data table</param>
+            <param name="geometryColumnName">Name of geometry column</param>
+            <param name="objectIdColumnName">Name of column with unique identifier</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.PostGIS.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new connection to PostGIS
+            </summary>
+            <param name="connectionString">Connectionstring</param>
+            <param name="tablename">Name of data table</param>
+            <param name="objectIdColumnName">Name of column with unique identifier</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.PostGIS.GetNonSpatialColumns">
+            <summary>
+            Get the non-spatial columns
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.PostGIS.GetGeometriesInView(GeoAPI.Geometries.Envelope)">
+            <summary>
+            Returns geometries within the specified bounding box
+            </summary>
+            <param name="bbox"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.PostGIS.GetGeometryByID(System.UInt32)">
+            <summary>
+            Returns the geometry corresponding to the Object ID
+            </summary>
+            <param name="oid">Object ID</param>
+            <returns>The geometry</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.PostGIS.GetObjectIDsInView(GeoAPI.Geometries.Envelope)">
+            <summary>
+            Returns geometry Object IDs whose bounding box intersects 'bbox'
+            </summary>
+            <param name="bbox">The view envelope</param>
+            <returns>A collection of ids</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.PostGIS.OnExecuteIntersectionQuery(GeoAPI.Geometries.IGeometry,SharpMap.Data.FeatureDataSet)">
+            <summary>
+            Returns the features that intersects with 'geom'
+            </summary>
+            <param name="geom"></param>
+            <param name="ds">FeatureDataSet to fill data into</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.PostGIS.GetFeatureCount">
+            <summary>
+            Returns the number of features in the dataset
+            </summary>
+            <returns>number of features</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.PostGIS.GetFeature(System.UInt32)">
+            <summary>
+            Returns a datarow based on a RowID
+            </summary>
+            <param name="rowId"></param>
+            <returns>datarow</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.PostGIS.GetExtents">
+            <summary>
+            Boundingbox of dataset
+            </summary>
+            <returns>boundingbox</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.PostGIS.ExecuteIntersectionQuery(GeoAPI.Geometries.Envelope,SharpMap.Data.FeatureDataSet)">
+            <summary>
+            Returns all features with the view box
+            </summary>
+            <param name="bbox">view box</param>
+            <param name="ds">FeatureDataSet to fill data into</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.PostGIS.GetGeometryColumn(System.Int32@)">
+            <summary>
+            Queries the PostGIS database to get the name of the Geometry Column. This is used if the columnname isn't specified in the constructor
+            </summary>
+            <remarks></remarks>
+            <returns>Name of column containing geometry</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.PostGIS.GetSpatialObjectType">
+            <summary>
+            Queries the data t
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.PostGIS.GetGeometrySrid">
+            <summary>
+            Queries the PostGIS database to get the srid of the Geometry Column. This is used if the columnname isn't specified in the constructor
+            </summary>
+            <remarks></remarks>
+            <returns>Name of column containing geometry</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.PostGIS.GetPostGISVersion">
+            <summary>
+            Reads the postgis version installed on the server
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:SharpMap.Data.Providers.PostGIS.CachedExtent">
+            <summary>
+            Gets or sets the extent for this data source
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.PostGIS.ConnectionString">
+            <summary>
+            Connectionstring
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.PostGIS.Table">
+            <summary>
+            Data table name
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.PostGIS.Schema">
+            <summary>
+            Schema Name
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.PostGIS.QualifiedTable">
+            <summary>
+            Qualified Table Name
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.PostGIS.GeometryColumn">
+            <summary>
+            Name of geometry column
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.PostGIS.ObjectIdColumn">
+            <summary>
+            Name of column that contains the Object ID
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.PostGIS.DefinitionQuery">
+            <summary>
+            Definition query used for limiting dataset
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.SpatiaLite">
+            <summary>
+            SpatiaLite Provider for SharpMap
+            <para>
+            Spatialite is a spatial extension for the popular SQLite database engine.
+            </para>
+            <para>
+            In order to use this provider with SharpMap, you need to 
+            <list type="bullet">
+            <item>get your copy of the native spatialite binaries from http://www.gaia-gis.it/spatialite/ ,</item>
+            <item>copy them all in <strong>one</strong> directory,</item>
+            <item>add a (or modify your) app.config- or web.config-file with key/value pairs SpatiaLitePath and SpatiaLiteNativeDll</item>
+            </list>
+            </para>
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.SpatiaLite.#cctor">
+            <summary>
+            Initializes Provider with information about where to find native spatialite library and how
+            it is named.
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.SpatiaLite.SpatiaLiteConnection(System.String)">
+            <summary>
+            Function to provide an SqLiteConnection with SpatiaLite extension loaded.
+            </summary>
+            <param name="connectionString">Connection string to connect to SQLite database file.</param>
+            <returns>Opened <see cref="T:System.Data.SQLite.SQLiteConnection"/></returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.SpatiaLite.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates an instance of SpatiaLite provider
+            </summary>
+            <param name="connectionStr">Connection String to SQLite database file 
+            ("http://www.connectionstrings.com/sqlite")</param>
+            <param name="tablename">Name of the table with geometry information</param>
+            <param name="geometryColumnName">Name of the desired geometry column</param>
+            <param name="oidColumnName">Name of the object Id column</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.SpatiaLite.GetSpatialTables(System.String)">
+            <summary>
+            Function to return an <see cref="T:System.Collections.Generic.IEnumerable`1"/> for a given sqlite database.
+            </summary>
+            <param name="connectionString">The connection to the sqlite database.</param>
+            <returns>
+            An <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
+            </returns>
+        </member>
+        <member name="P:SharpMap.Data.Providers.SpatiaLite.UseLike">
+            <summary>
+            Gets or sets whether geometry definition lookup should use sql LIKE operator for name comparison.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.SpatiaLite.CachedExtent">
+            <summary>
+            Gets or sets the extent for this data source
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.SpatiaLite.ConnectionString">
+            <summary>
+            Connectionstring
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.SpatiaLite.Table">
+            <summary>
+            Data table name
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.SpatiaLite.GeometryColumn">
+            <summary>
+            Name of geometry column
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.SpatiaLite.ObjectIdColumn">
+            <summary>
+            Name of column that contains the Object ID
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.SpatiaLite.SpatialIndex">
+            <summary>
+            Name of the spatial index
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.SpatiaLite.DefinitionQuery">
+            <summary>
+            Definition query used for limiting dataset
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.SpatiaLiteIndex">
+            <summary>
+            Defines possible spatial indices
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.SpatiaLiteIndex.None">
+            <summary>
+            No spatial index defined
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.SpatiaLiteIndex.RTree">
+            <summary>
+            RTree
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.SpatiaLiteIndex.MbrCache">
+            <summary>
+            Cache of minimum bounding rectangles (MBR)
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.SqlLite.CreateDataTable(SharpMap.Data.Providers.IProvider,System.String,System.String)">
+            <summary>
+            Creates a new table in a SQLite database and copies rows from an existing datasource.
+            </summary>
+            <remarks>
+            <para>The datatable created will contain six extra columns besides the attribute data: "oid" (Object ID row), 
+            "geom" (Geometry stored as WKT), and minx, miny, maxx, maxy for geometry bounding box.</para>
+            <para>
+            <example>
+            Upload a ShapeFile to a database:
+            <code>
+            public void CreateDatabase(string shapeFile)
+            {
+            	if (!System.IO.File.Exists(shapeFile))
+            	{
+            		MessageBox.Show("File not found");
+            		return;
+            	}
+            	ShapeFile shp = new ShapeFile(shapeFile, false);
+            	//Create tablename from filename
+            	string tablename = shapeFile.Substring(shapeFile.LastIndexOf('\\') + 1,
+            		shapeFile.LastIndexOf('.') - shapeFile.LastIndexOf('\\') - 1);
+            	//Create connectionstring
+            	string connstr = @"Data Source=|DataDirectory|GeoDatabase.sqlite;Version=3";
+            	int count = SharpMap.Data.Providers.SqlLite.CreateDataTable(shp, tablename, connstr);
+            	MessageBox.Show("Uploaded " + count.ToString() + " features to datatable '" + tablename + "'");
+            }
+            </code>
+            </example>
+            </para>
+            </remarks>
+            <param name="datasource">Datasource to upload</param>
+            <param name="tablename">Name of table to create (existing table will be overwritten!)</param>
+            <param name="connstr">Connection string to database</param>
+            <returns>Number or rows inserted, -1 if failed and 0 if table created but no rows inserted.</returns>        
+        </member>
+        <member name="P:SharpMap.Data.Providers.SqlLite.ConnectionString">
+            <summary>
+            Connectionstring
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.SqlLite.Table">
+            <summary>
+            Data table name
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.SqlLite.GeometryColumn">
+            <summary>
+            Name of geometry column
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.SqlLite.ObjectIdColumn">
+            <summary>
+            Name of column that contains the Object ID
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.SqlLite.DefinitionQuery">
+            <summary>
+            Definition query used for limiting dataset
+            </summary>
+        </member>
+        <member name="M:SharpMap.GdalConfiguration.GetPlatform">
+            <summary>
+            Function to determine which platform we're on
+            </summary>
+        </member>
+        <member name="M:SharpMap.GdalConfiguration.#cctor">
+            <summary>
+            Construction of Gdal/Ogr
+            </summary>
+        </member>
+        <member name="M:SharpMap.GdalConfiguration.ConfigureOgr">
+            <summary>
+            Method to ensure the static constructor is being called.
+            </summary>
+            <remarks>Be sure to call this function before using Gdal/Ogr/Osr</remarks>
+        </member>
+        <member name="M:SharpMap.GdalConfiguration.ConfigureGdal">
+            <summary>
+            Method to ensure the static constructor is being called.
+            </summary>
+            <remarks>Be sure to call this function before using Gdal/Ogr/Osr</remarks>
+        </member>
+        <!-- Ungültiger XML-Kommentar wurde für den Member "T:SharpMap.Layers.GdalTileIndexRasterLayer" ignoriert -->
+        <member name="T:SharpMap.Layers.GdalRasterLayer">
+            <summary>
+            Gdal raster image layer
+            </summary>
+            <remarks>
+            <example>
+            <code lang="C#">
+            myMap = new SharpMap.Map(new System.Drawing.Size(500,250);
+            SharpMap.Layers.GdalRasterLayer layGdal = new SharpMap.Layers.GdalRasterLayer("Blue Marble", @"C:\data\bluemarble.ecw");
+            myMap.Layers.Add(layGdal);
+            myMap.ZoomToExtents();
+            </code>
+            </example>
+            </remarks>
+        </member>
+        <member name="M:SharpMap.Layers.GdalRasterLayer.#ctor(System.String,System.String)">
+            <summary>
+            initialize a Gdal based raster layer
+            </summary>
+            <param name="strLayerName">Name of layer</param>
+            <param name="imageFilename">location of image</param>
+        </member>
+        <member name="M:SharpMap.Layers.GdalRasterLayer.Render(System.Drawing.Graphics,SharpMap.Map)">
+            <summary>
+            Renders the layer
+            </summary>
+            <param name="g">Graphics object reference</param>
+            <param name="map">Map which is rendered</param>
+        </member>
+        <member name="M:SharpMap.Layers.GdalRasterLayer.GetOneToOne(SharpMap.Map)">
+            <summary>
+            Zoom to the native resolution
+            </summary>
+            <param name="map">The map object</param>
+            <returns>The zoom factor for a 1:1 Scale</returns>
+        </member>
+        <member name="M:SharpMap.Layers.GdalRasterLayer.ReprojectToMap(SharpMap.Map)">
+            <summary>
+            Method to set <see cref="P:SharpMap.Layers.GdalRasterLayer.Envelope"/> and <see cref="P:SharpMap.Layers.Layer.CoordinateTransformation"/> to the projection of the map
+            </summary>
+            <param name="map">The map</param>
+        </member>
+        <member name="M:SharpMap.Layers.GdalRasterLayer.GetBitScalar">
+            <summary>
+            Method to get a scalar by which to scale raster values
+            </summary>
+            <returns>A scale value dependant on <see cref="P:SharpMap.Layers.GdalRasterLayer.BitDepth"/></returns>
+        </member>
+        <member name="M:SharpMap.Layers.GdalRasterLayer.ComputeStretch">
+            <summary>
+            Find min and max pixel values of the image
+            </summary>
+        </member>
+        <member name="M:SharpMap.Layers.GdalRasterLayer.Finalize">
+            <summary>
+            Finalizer
+            </summary>
+        </member>
+        <member name="M:SharpMap.Layers.GdalRasterLayer.ExecuteIntersectionQuery(GeoAPI.Geometries.Envelope,SharpMap.Data.FeatureDataSet)">
+            <summary>
+            Returns the data associated with the centroid of the bounding box.
+            </summary>
+            <param name="box">Envelope to intersect with</param>
+            <param name="ds">FeatureDataSet to fill data into</param>
+        </member>
+        <member name="M:SharpMap.Layers.GdalRasterLayer.ExecuteIntersectionQuery(GeoAPI.Geometries.IGeometry,SharpMap.Data.FeatureDataSet)">
+            <summary>
+            Returns the data associated with all the geometries that are intersected by 'geom'
+            </summary>
+            <param name="geometry">Geometry to intersect with</param>
+            <param name="ds">FeatureDataSet to fill data into</param>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.FWToolsVersion">
+            <summary>
+             Gets the version of fwTools that was used to compile and test this GdalRasterLayer
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.Filename">
+            <summary>
+            Gets or sets the filename of the raster file
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.TilingSize">
+            <summary>
+            Gets or sets a rectangle that is used to tile the image when rendering
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.BitDepth">
+            <summary>
+            Gets or sets the bit depth of the raster file
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.Projection">
+            <summary>
+            Gets or set the projection of the raster file
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.DisplayIR">
+            <summary>
+            Gets or sets to display IR Band
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.DisplayCIR">
+            <summary>
+            Gets or sets to display color InfraRed
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.ShowClip">
+            <summary>
+            Gets or sets to display clip
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.Gamma">
+            <summary>
+            Gets or sets to display gamma
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.SpotGamma">
+            <summary>
+            Gets or sets to display gamma for Spot spot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.NonSpotGamma">
+            <summary>
+            Gets or sets to display gamma for NonSpot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.Gain">
+            <summary>
+            Gets or sets to display red Gain
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.SpotGain">
+            <summary>
+            Gets or sets to display red Gain for Spot spot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.NonSpotGain">
+            <summary>
+            Gets or sets to display red Gain for Spot spot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.CurveLut">
+            <summary>
+            Gets or sets to display curve lut
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.HaveSpot">
+            <summary>
+            Correct Spot spot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.SpotCurveLut">
+            <summary>
+            Gets or sets to display curve lut for Spot spot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.NonSpotCurveLut">
+            <summary>
+            Gets or sets to display curve lut for NonSpot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.SpotPoint">
+            <summary>
+            Gets or sets the center point of the Spot spot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.InnerSpotRadius">
+            <summary>
+            Gets or sets the inner radius for the spot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.OuterSpotRadius">
+            <summary>
+            Gets or sets the outer radius for the spot (feather zone)
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.Histogram">
+            <summary>
+            Gets the true histogram
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.HistoMean">
+            <summary>
+            Gets the quick histogram mean
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.HistoBrightness">
+            <summary>
+            Gets the quick histogram brightness
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.HistoContrast">
+            <summary>
+            Gets the quick histogram contrast
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.Bands">
+            <summary>
+            Gets the number of bands
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.GSD">
+            <summary>
+            Gets the GSD (Horizontal)
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.UseRotation">
+            <summary>
+             Use rotation information
+             </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.StretchPoint">
+            <summary>
+            Gets or sets the minimum- and maximum pixel byte values of all raster bands.
+            <para/>Knowing these, you can scale the color range
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayer.Envelope">
+            <summary>
+            Returns the extent of the layer
+            </summary>
+            <returns>Bounding box corresponding to the extent of the features in the layer</returns>
+        </member>
+        <!-- Ungültiger XML-Kommentar wurde für den Member "M:SharpMap.Layers.GdalTileIndexRasterLayer.#ctor(System.String,System.String,System.String)" ignoriert -->
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.BitDepth">
+            <summary>
+            Gets or sets the bit depth of the raster file
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.Projection">
+            <summary>
+            Gets or set the projection of the raster file
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.DisplayIR">
+            <summary>
+            Gets or sets to display IR Band
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.DisplayCIR">
+            <summary>
+            Gets or sets to display color InfraRed
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.ShowClip">
+            <summary>
+            Gets or sets to display clip
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.Gamma">
+            <summary>
+            Gets or sets to display gamma
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.SpotGamma">
+            <summary>
+            Gets or sets to display gamma for Spot spot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.NonSpotGamma">
+            <summary>
+            Gets or sets to display gamma for NonSpot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.Gain">
+            <summary>
+            Gets or sets to display red Gain
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.SpotGain">
+            <summary>
+            Gets or sets to display red Gain for Spot spot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.NonSpotGain">
+            <summary>
+            Gets or sets to display red Gain for Spot spot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.CurveLut">
+            <summary>
+            Gets or sets to display curve lut
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.HaveSpot">
+            <summary>
+            Correct Spot spot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.SpotCurveLut">
+            <summary>
+            Gets or sets to display curve lut for Spot spot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.NonSpotCurveLut">
+            <summary>
+            Gets or sets to display curve lut for NonSpot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.SpotPoint">
+            <summary>
+            Gets or sets the center point of the Spot spot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.InnerSpotRadius">
+            <summary>
+            Gets or sets the inner radius for the spot
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.OuterSpotRadius">
+            <summary>
+            Gets or sets the outer radius for the spot (feather zone)
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.Histogram">
+            <summary>
+            Gets the true histogram
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.HistoMean">
+            <summary>
+            Gets the quick histogram mean
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.HistoBrightness">
+            <summary>
+            Gets the quick histogram brightness
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.HistoContrast">
+            <summary>
+            Gets the quick histogram contrast
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.Bands">
+            <summary>
+            Gets the number of bands
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.GSD">
+            <summary>
+            Gets the GSD (Horizontal)
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GdalRasterLayerCachingProxy.UseRotation">
+            <summary>
+             Use rotation information
+             </summary>
+        </member>
+        <member name="T:SharpMap.Layers.GeoTransform">
+            <summary>
+            The coefficients for transforming between pixel/line (X,Y) raster space, and projection coordinates (Xp,Yp) space.<br/>
+            Xp = T[0] + T[1]*X + T[2]*Y<br/>
+            Yp = T[3] + T[4]*X + T[5]*Y<br/>
+            In a north up image, T[1] is the pixel width, and T[5] is the pixel height.
+            The upper left corner of the upper left pixel is at position (T[0],T[3]).
+            </summary>
+        </member>
+        <member name="M:SharpMap.Layers.GeoTransform.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:SharpMap.Layers.GeoTransform.#ctor(System.Double[])">
+            <summary>
+            Constructor
+            </summary>
+            <param name="array"></param>
+        </member>
+        <member name="M:SharpMap.Layers.GeoTransform.#ctor(OSGeo.GDAL.Dataset)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="gdalDataset">The gdal dataset</param>
+        </member>
+        <member name="M:SharpMap.Layers.GeoTransform.ProjectedX(System.Double,System.Double)">
+            <summary>
+            converts image point into projected point
+            </summary>
+            <param name="imgX">image x value</param>
+            <param name="imgY">image y value</param>
+            <returns>projected x coordinate</returns>
+        </member>
+        <member name="M:SharpMap.Layers.GeoTransform.ProjectedY(System.Double,System.Double)">
+            <summary>
+            converts image point into projected point
+            </summary>
+            <param name="imgX">image x value</param>
+            <param name="imgY">image y value</param>
+            <returns>projected y coordinate</returns>
+        </member>
+        <member name="M:SharpMap.Layers.GeoTransform.RotationAngle">
+            <summary>
+            Method to compute the rotation angle
+            </summary>
+            <returns>The rotation angle</returns>
+        </member>
+        <member name="M:SharpMap.Layers.GeoTransform.IsFlipped">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:SharpMap.Layers.GeoTransform.Item(System.Int32)">
+            <summary>
+            returns value of the transform array
+            </summary>
+            <param name="i">place in array</param>
+            <returns>value dependent on i</returns>
+        </member>
+        <member name="P:SharpMap.Layers.GeoTransform.IsIdentity">
+            <summary>
+            Gets a value indicating if this transformation does not actually perform anything transformation
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GeoTransform.IsTrivial">
+            <summary>
+            Returns true if no values were fetched
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GeoTransform.IsScaling">
+            <summary>
+            Gets a value indicating if this transformation is scaling coordinates
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GeoTransform.IsRotating">
+            <summary>
+            Gets a value indicating if this transformation is rotating coordinates
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GeoTransform.Left">
+            <summary>
+            Gets the left value of the image
+            </summary>       
+        </member>
+        <member name="P:SharpMap.Layers.GeoTransform.Top">
+            <summary>
+            Gets or sets the top value of the image
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GeoTransform.HorizontalPixelResolution">
+            <summary>
+            Gets or sets the west to east pixel resolution
+            </summary>
+        </member>
+        <member name="P:SharpMap.Layers.GeoTransform.VerticalPixelResolution">
+            <summary>
+             Gets or sets the north to south pixel resolution
+            </summary>
+        </member>
+    </members>
+</doc>
