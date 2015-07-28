@@ -55,9 +55,6 @@
       <HintPath>..\FTAnalyser\packages\GeoAPI.1.7.3.1\lib\net40-client\GeoAPI.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\FTAnalyser\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="NetTopologySuite, Version=1.13.3.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
       <HintPath>..\FTAnalyser\packages\NetTopologySuite.1.13.3.2\lib\net45\NetTopologySuite.dll</HintPath>
       <Private>True</Private>
