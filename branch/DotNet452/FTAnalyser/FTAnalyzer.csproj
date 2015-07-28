@@ -181,17 +181,6 @@
       <HintPath>packages\ProjNET4GeoAPI.1.3.0.3\lib\net403-client\ProjNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SharpMap, Version=1.0.4.3, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Resources\Lib\SharpMap.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpMap.Extensions">
-      <HintPath>Resources\Lib\SharpMap.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpMap.UI, Version=1.0.4.3, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Resources\Lib\SharpMap.UI.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -463,12 +452,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="x86\SQLite.Interop.dll" />
-    <Resource Include="Resources\Lib\SharpMap.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Lib\SharpMap.UI.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Content Include="Resources\Icons\arrow-left.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -479,9 +462,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\Scroll_NoText.png" />
-    <Resource Include="Resources\Lib\SharpMap.Extensions.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Content Include="Resources\Icons\teardrop_black.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
