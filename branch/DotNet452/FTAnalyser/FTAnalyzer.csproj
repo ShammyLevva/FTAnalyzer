@@ -348,8 +348,11 @@
     </Compile>
     <Compile Include="GdalConfiguration.cs" />
     <Compile Include="GdalNativeConfiguration.cs" />
+    <Compile Include="Mapping\NLSBasicRequest.cs" />
     <Compile Include="Mapping\BingOSTileSource.cs" />
+    <Compile Include="Mapping\BingOSRequest.cs" />
     <Compile Include="Mapping\ClusterLayer.cs" />
+    <Compile Include="Mapping\GlobalSphericalMercator.cs" />
     <Compile Include="Mapping\MapLifeLine.cs" />
     <Compile Include="Mapping\MapHelper.cs" />
     <Compile Include="Mapping\NLSRequest.cs" />

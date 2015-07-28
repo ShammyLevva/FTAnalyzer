@@ -243,7 +243,7 @@ namespace FTAnalyzer.Forms.Controls
             else if (sender == mnuBingMapOS)
             {
                 mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BingTileSource(new BingRequest(BingRequest.UrlBing, null, BingMapType.OS), null), "BingMapOS",
+                    new BingOSTileSource(BingOSRequest.UrlBing, null, BingOSMapType.OS), "BingMapOS",
                         new Color(), true, Path.Combine(Path.GetTempPath(), "BingTileCache")));
                 mnuBingMapOS.Checked = true;
                 UpdateLinkLabel(LinkLabelType.BING);

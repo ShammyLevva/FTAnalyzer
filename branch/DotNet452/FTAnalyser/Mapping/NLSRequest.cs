@@ -15,7 +15,7 @@ namespace FTAnalyzer.Mapping
         public NLSTileServerConfig()
             : base("http://t{0}.cz.tileserver.com/nls/{1}/{2}/{3}.jpg", 5, new[] { "0", "1", "2", "3", "4" }, 0, 14)
         {
-            mDefault = OsmTileServerConfig.Create(KnownTileServers.Mapnik, null);
+            mDefault = new OsmTileServerConfig("http://{0}.tile.openstreetmap.org/{1}/{2}/{3}.png", 3, new[] { "a", "b", "c" }, 0, 18);
         }
 
         public override Uri GetUri(BruTile.TileIndex tileIndex)
