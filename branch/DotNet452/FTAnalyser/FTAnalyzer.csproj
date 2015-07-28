@@ -135,8 +135,8 @@
       <HintPath>packages\Common.Logging.Core.3.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GeoAPI, Version=1.7.3.0, Culture=neutral, PublicKeyToken=a1a0da7def465678, processorArchitecture=MSIL">
-      <HintPath>packages\GeoAPI.1.7.3.1\lib\net45\GeoAPI.dll</HintPath>
+    <Reference Include="GeoAPI, Version=1.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\GeoAPI.1.7.2\lib\net403-client\GeoAPI.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
@@ -151,38 +151,34 @@
       <HintPath>packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NetTopologySuite, Version=1.13.3.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
-      <HintPath>packages\NetTopologySuite.1.13.3.2\lib\net45\NetTopologySuite.dll</HintPath>
+    <Reference Include="NetTopologySuite, Version=1.13.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\NetTopologySuite.1.13.2\lib\net403-client\NetTopologySuite.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NetTopologySuite.IO.GeoTools, Version=1.13.3.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
-      <HintPath>packages\NetTopologySuite.IO.1.13.3.2\lib\net45\NetTopologySuite.IO.GeoTools.dll</HintPath>
+    <Reference Include="NetTopologySuite.IO.GeoTools, Version=1.13.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\NetTopologySuite.IO.1.13.2\lib\net403-client\NetTopologySuite.IO.GeoTools.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NetTopologySuite.IO.MsSqlSpatial, Version=1.13.3.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
-      <HintPath>packages\NetTopologySuite.IO.1.13.3.2\lib\net45\NetTopologySuite.IO.MsSqlSpatial.dll</HintPath>
+    <Reference Include="NetTopologySuite.IO.MsSqlSpatial, Version=1.13.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\NetTopologySuite.IO.1.13.2\lib\net403-client\NetTopologySuite.IO.MsSqlSpatial.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NetTopologySuite.IO.PostGis, Version=1.13.3.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
-      <HintPath>packages\NetTopologySuite.IO.1.13.3.2\lib\net45\NetTopologySuite.IO.PostGis.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="NetTopologySuite.IO.ShapeFile, Version=1.13.3.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
-      <HintPath>packages\NetTopologySuite.IO.1.13.3.2\lib\net45\NetTopologySuite.IO.ShapeFile.dll</HintPath>
+    <Reference Include="NetTopologySuite.IO.PostGis, Version=1.13.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\NetTopologySuite.IO.1.13.2\lib\net403-client\NetTopologySuite.IO.PostGis.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PowerCollections, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2573bf8a1bdddcd5, processorArchitecture=MSIL">
-      <HintPath>packages\NetTopologySuite.1.13.3.2\lib\net45\PowerCollections.dll</HintPath>
+    <Reference Include="PowerCollections, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\NetTopologySuite.1.13.2\lib\net403-client\PowerCollections.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="ProjNet, Version=1.3.0.3, Culture=neutral, PublicKeyToken=a1f5bdcd9c6f5740, processorArchitecture=MSIL">
-      <HintPath>packages\ProjNET4GeoAPI.1.3.0.4\lib\net45-client\ProjNet.dll</HintPath>
+    <Reference Include="ProjNet, Version=1.3.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\ProjNET4GeoAPI.1.3.0.3\lib\net403-client\ProjNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SharpMap, Version=1.0.4.3, Culture=neutral, processorArchitecture=MSIL">
@@ -439,18 +435,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\msvcr100.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\SqlServerSpatial110.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\msvcr100.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\SqlServerSpatial110.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\CensusLocations.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -892,7 +876,9 @@
       <Name>Printing.DataGridViewPrint</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="packages\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>
