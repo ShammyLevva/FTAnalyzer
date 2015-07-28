@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>SharpMap.UI</id>
+    <version>1.0.4</version>
+    <authors>SharpMap-Team</authors>
+    <owners>SharpMap-Team</owners>
+    <licenseUrl>http://sharpmap.codeplex.com/license</licenseUrl>
+    <projectUrl>http://sharpmap.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This package contains the Windows Forms user interface components of SharpMap.</description>
+    <summary>SharpMap is an easy-to-use mapping library for use in web and desktop applications.
+It provides access to many types of GIS data, enables spatial querying of that data, and renders beautiful maps.
+The engine is written in C# and based on the .Net 4.0 framework.</summary>
+    <tags>SharpMap GIS Map GeoSpatial</tags>
+    <dependencies>
+      <dependency id="SharpMap" version="[1.0.0, 1.1)" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Windows.Forms" targetFramework=".NETFramework4.0-Client" />
+    </frameworkAssemblies>
+  </metadata>
+</package>
