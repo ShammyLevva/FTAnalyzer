@@ -154,7 +154,7 @@ namespace FTAnalyzer.Forms
         public static string LocationText(GeoResponse res, FactLocation loc, int level)
         {
             string output = string.Empty;
-            int returnlevel = GetFactLocation(res.Results[0].Types);
+            int returnlevel = GetFactLocation(res.Results[0].Types, loc.Country.Equals(Countries.UNITED_STATES));
             if (returnlevel != FactLocation.UNKNOWN)
             {
                 output = "Google found " + loc.GetLocation(returnlevel);
@@ -170,7 +170,7 @@ namespace FTAnalyzer.Forms
             return output;
         }
 
-        public static int GetFactLocation(string[] locationTypes)
+        public static int GetFactLocation(string[] locationTypes, bool US)
         {
             HashSet<string> types = new HashSet<string>(locationTypes);
             foreach(string type in types)
@@ -178,11 +178,12 @@ namespace FTAnalyzer.Forms
                     return FactLocation.PLACE;
             if (types.Contains(SUBLOCALITY) || types.Contains(POSTALCODE) || types.Contains(NEIGHBOURHOOD))
                 return FactLocation.ADDRESS;
-            if (types.Contains(ADMIN3) || types.Contains(LOCALITY) || types.Contains(POSTALCODEPREFIX) ||
-                types.Contains(POSTALTOWN) || types.Contains(COLLOQUIAL_AREA))
+            if (types.Contains(ADMIN3) || types.Contains(LOCALITY))
+                return US ? FactLocation.ADDRESS : FactLocation.SUBREGION; 
+            if (types.Contains(POSTALCODEPREFIX) || types.Contains(POSTALTOWN) || types.Contains(COLLOQUIAL_AREA))
                 return FactLocation.SUBREGION;
             if (types.Contains(ADMIN2))
-                return FactLocation.REGION;
+                return US ? FactLocation.SUBREGION : FactLocation.REGION;
             if (types.Contains(COUNTRY) || types.Contains(ADMIN1))
                 return FactLocation.COUNTRY;
             return FactLocation.UNKNOWN;
