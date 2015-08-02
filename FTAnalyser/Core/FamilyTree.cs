@@ -2945,15 +2945,17 @@ namespace FTAnalyzer
             return events;
         }
 
+        static Regex brackets = new Regex("{{.*}}", RegexOptions.Compiled);
+        static Regex links = new Regex("<a href=.*</a>", RegexOptions.Compiled);
+        static Regex quotes = new Regex("(.*)quot(.*)quot(.*)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
         private string FixWikiFormatting(string input)
         {
             string result = input.Replace("ampampnbsp", " ").Replace("ampnbsp", " ").Replace("ampampndash", "-").Replace("ampndash", "-");
             //strip out {{cite xxxxx }} citation text with its urls
-            Regex rgx = new Regex("{{.*}}");
-            result = rgx.Replace(result, string.Empty);
-            rgx = new Regex("<a href=.*</a>");
-            result = rgx.Replace(result, string.Empty);
-            Match match = Regex.Match(result, "(.*)quot(.*)quot(.*)", RegexOptions.IgnoreCase);
+            result = brackets.Replace(result, string.Empty);
+            result = links.Replace(result, string.Empty);
+            Match match = quotes.Match(result);
             if (match.Success)
                 result = match.Groups[1].ToString().Trim() + " " + '\u0022' + match.Groups[2].ToString().Trim() + '\u0022' + " " + match.Groups[3].ToString().Trim();
             return result;

@@ -110,12 +110,12 @@ namespace FTAnalyzer
         {
             foreach (Fact f in ChildrenStatusFacts)
             {
-                Match matcher = Regex.Match(f.Comment, Fact.CHILDREN_STATUS_PATTERN1);
+                Match matcher = Fact.regexChildren1.Match(f.Comment);
                 if (matcher.Success)
                     SetChildrenStatusCounts(matcher, 1, 2, 4);
                 else
                 {
-                    matcher = Regex.Match(f.Comment, Fact.CHILDREN_STATUS_PATTERN2);
+                    matcher = Fact.regexChildren1.Match(f.Comment);
                     if (matcher.Success)
                         SetChildrenStatusCounts(matcher, 1, 3, 4);
                 }

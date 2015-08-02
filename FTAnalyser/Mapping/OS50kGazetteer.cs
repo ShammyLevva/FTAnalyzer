@@ -83,6 +83,8 @@ namespace FTAnalyzer.Mapping
                 DefinitiveName = (DefinitiveName.Substring(pos + 1) + " " + DefinitiveName.Substring(0, pos)).Trim();
         }
 
+        static Regex slash = new Regex(@"(.*)\(.*\)", RegexOptions.Compiled);
+
         private void FixAbbreviations()
         {
             DefinitiveName = DefinitiveName.Trim();
@@ -123,13 +125,13 @@ namespace FTAnalyzer.Mapping
 
             if (DefinitiveName.Contains("("))
             { 
-                Match match = Regex.Match(DefinitiveName, @"(.*)\(.*\)");
+                Match match = slash.Match(DefinitiveName);
                 if(match.Success)
                     DefinitiveName = match.Groups[1].ToString().Trim();
             }
             if (ParishName.Contains("("))
             {
-                Match match = Regex.Match(ParishName, @"(.*)\(.*\)");
+                Match match = slash.Match(ParishName);
                 if (match.Success)
                     ParishName = match.Groups[1].ToString().Trim();
             }
