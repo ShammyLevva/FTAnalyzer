@@ -2316,15 +2316,23 @@ namespace FTAnalyzer
             string surname = GetSurname(st, individual, true);
             query.Append("gsln=" + HttpUtility.UrlEncode(surname) + "&");
             AppendYearandRange(individual.BirthDate, query, "msbdy=", "msbdp=", false);
+            if(individual.BirthDate.IsKnown)
+                query.Append("&msbdy_x=1");
             if (individual.BirthLocation != FactLocation.UNKNOWN_LOCATION)
             {
                 string location = individual.BirthLocation.GetLocation(FactLocation.SUBREGION).ToString();
                 query.Append("msbpn__ftp=" + HttpUtility.UrlEncode(location) + "&");
             }
-            if(st.Equals(SearchType.DEATH) && factdate.IsKnown)
+            if (st.Equals(SearchType.DEATH) && factdate.IsKnown)
+            {
                 AppendYearandRange(factdate, query, "msddy=", "msddp=", false);
+                query.Append("&msddy_x=1");
+            }
             if (st.Equals(SearchType.MARRIAGE) && factdate.IsKnown)
+            {
                 AppendYearandRange(factdate, query, "msgdy=", "msgdp=", false);
+                query.Append("&msgdy_x=1");
+            }
             query.Append("cpxt=1&uidh=6b2&cp=11");
             uri.Query = query.ToString();
             return uri.ToString();
