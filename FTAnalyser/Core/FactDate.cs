@@ -42,30 +42,32 @@ namespace FTAnalyzer
         private static readonly string USDATEFIX = "^([A-Za-z]{3}) *(\\d{1,2} )(\\d{4})$";
         private static readonly string SPACEFIX = "^(\\d{1,2}) *([A-Za-z]{3}) *(\\d{0,4})$";
 
-        public static readonly FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
-        public static readonly FactDate MARRIAGE_LESS_THAN_13 = new FactDate("1600");
+        public static readonly FactDate UNKNOWN_DATE;
+        public static readonly FactDate MARRIAGE_LESS_THAN_13;
 
         private static Dictionary<string, Regex> datePatterns;
 
         static FactDate()
         {
             datePatterns = new Dictionary<string, Regex>();
-            datePatterns[DATE_PATTERN] = new Regex(DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns[INTERPRETED_DATE_PATTERN] = new Regex(INTERPRETED_DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns[EARLY_DATE_PATTERN] = new Regex(EARLY_DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns[DOUBLE_DATE_PATTERN] = new Regex(DOUBLE_DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns[DOUBLE_DATE_PATTERN2] = new Regex(DOUBLE_DATE_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns[POSTFIX] = new Regex(POSTFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns[BETWEENFIX] = new Regex(BETWEENFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns[BETWEENFIX2] = new Regex(BETWEENFIX2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns[BETWEENFIX3] = new Regex(BETWEENFIX3, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns[BETWEENFIX4] = new Regex(BETWEENFIX4, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns[BETWEENFIX5] = new Regex(BETWEENFIX5, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns[USDATEFIX] = new Regex(USDATEFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns[SPACEFIX] = new Regex(SPACEFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        }
+            datePatterns["DATE_PATTERN"] = new Regex(DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns["INTERPRETED_DATE_PATTERN"] = new Regex(INTERPRETED_DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns["EARLY_DATE_PATTERN"] = new Regex(EARLY_DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns["DOUBLE_DATE_PATTERN"] = new Regex(DOUBLE_DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns["DOUBLE_DATE_PATTERN2"] = new Regex(DOUBLE_DATE_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns["POSTFIX"] = new Regex(POSTFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns["BETWEENFIX"] = new Regex(BETWEENFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns["BETWEENFIX2"] = new Regex(BETWEENFIX2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns["BETWEENFIX3"] = new Regex(BETWEENFIX3, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns["BETWEENFIX4"] = new Regex(BETWEENFIX4, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns["BETWEENFIX5"] = new Regex(BETWEENFIX5, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns["USDATEFIX"] = new Regex(USDATEFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns["SPACEFIX"] = new Regex(SPACEFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            UNKNOWN_DATE = new FactDate("UNKNOWN");
+            MARRIAGE_LESS_THAN_13 = new FactDate("1600");
+    }
 
-        public enum FactDateType
+    public enum FactDateType
         {
             BEF, AFT, BET, ABT, UNK, EXT,
         }
@@ -500,6 +502,8 @@ namespace FTAnalyzer
                 {   // Try matching double date pattern
                     matcher = datePatterns["DOUBLE_DATE_PATTERN"].Match(dateValue);
                     matcher2 = datePatterns["DOUBLE_DATE_PATTERN2"].Match(dateValue);
+                    matcher = Regex.Match(dateValue, DOUBLE_DATE_PATTERN);
+                    matcher2 = Regex.Match(dateValue, DOUBLE_DATE_PATTERN2);
                     if (matcher.Success)
                     {
                         gDay = matcher.Groups[1];
