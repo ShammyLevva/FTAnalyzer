@@ -71,6 +71,14 @@ namespace FTAnalyzer
         private static readonly string LC_CENSUS_PATTERN_1940US = @"(T627[-_])(\d{1,5}-?[AB]?)\/(\d{1,2}[AB]?-\d{1,2}[AB]?)\/(\d{1,3}[AB]?).*?US 1880";
         private static readonly string LC_CENSUS_PATTERN_1881CANADA = @"(\d{1,5})\/(\d{0,4}[A-Z]{0,4})\/(\d{0,3})\/(\d{1,3})\/?(\d{1,3})?.*?Canada 1881";
 
+        private static Dictionary<string, Regex> censusRegexs;
+
+        static CensusReference()
+        {
+            censusRegexs = new Dictionary<string, Regex>();
+            censusRegexs["EW_CENSUS_PATTERN"] = new Regex(EW_CENSUS_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        }
+
         public enum ReferenceStatus { BLANK = 0, UNRECOGNISED = 1, INCOMPLETE = 2, GOOD = 3 };
         public static readonly CensusReference UNKNOWN = new CensusReference();
         private static readonly string MISSING = "Missing";
@@ -275,7 +283,7 @@ namespace FTAnalyzer
             string text = ClearCommonPhrases(originalText);
             if (text.Length == 0)
                 return false;
-            Match matcher = Regex.Match(text, EW_CENSUS_PATTERN, RegexOptions.IgnoreCase);
+            Match matcher = censusRegexs["EW_CENSUS_PATTERN"].Match(text);
             if (matcher.Success)
             {
                 this.Class = "RG" + matcher.Groups[1].ToString();
