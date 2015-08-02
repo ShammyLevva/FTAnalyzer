@@ -805,7 +805,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void CheckLooseBirth(Individual indiv, SortableBindingList<IDisplayLooseBirth> result)
+        private void CheckLooseBirth(Individual indiv, SortableBindingList<IDisplayLooseBirth> result = null)
         {
             FactDate birthDate = indiv.BirthDate;
             FactDate toAdd = null;
@@ -911,7 +911,8 @@ namespace FTAnalyzer
                 // range as the existing death date
                 Fact looseBirth = new Fact(indiv.IndividualID, Fact.LOOSEBIRTH, toAdd, FactLocation.UNKNOWN_LOCATION);
                 indiv.AddFact(looseBirth);
-                result.Add(indiv);
+                if (result == null)
+                    result.Add(indiv);
             }
         }
 
@@ -979,7 +980,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void CheckLooseDeath(Individual indiv, SortableBindingList<IDisplayLooseDeath> result)
+        private void CheckLooseDeath(Individual indiv, SortableBindingList<IDisplayLooseDeath> result = null)
         {
             FactDate deathDate = indiv.DeathDate;
             FactDate toAdd = null;
@@ -1017,7 +1018,8 @@ namespace FTAnalyzer
                 // range as the existing death date
                 Fact looseDeath = new Fact(indiv.IndividualID, Fact.LOOSEDEATH, toAdd, FactLocation.UNKNOWN_LOCATION);
                 indiv.AddFact(looseDeath);
-                result.Add(indiv);
+                if (result != null)
+                    result.Add(indiv);
             }
         }
 
@@ -1088,6 +1090,11 @@ namespace FTAnalyzer
                 return minDeath;
             else
                 return deathDate.EndDate;
+        }
+
+        private void CheckLooseMarriage(Individual ind)
+        {
+
         }
 
         #endregion
@@ -1903,15 +1910,15 @@ namespace FTAnalyzer
                     path.Append("&collection_id=" + collection);
                 else
                     if (Countries.IsUnitedKingdom(country))
-                    {
-                        collection = FamilySearch.CensusCollectionID(Countries.ENGLAND, censusYear);
-                        path.Append("&collection_id=" + collection);
-                    }
-                    else if (Countries.IsKnownCountry(country))
-                    {
-                        MessageBox.Show("Sorry searching the " + country + " census on FamilySearch for " + censusYear + " is not supported by FTAnalyzer at this time", "FT Analyzer");
-                        return null;
-                    }
+                {
+                    collection = FamilySearch.CensusCollectionID(Countries.ENGLAND, censusYear);
+                    path.Append("&collection_id=" + collection);
+                }
+                else if (Countries.IsKnownCountry(country))
+                {
+                    MessageBox.Show("Sorry searching the " + country + " census on FamilySearch for " + censusYear + " is not supported by FTAnalyzer at this time", "FT Analyzer");
+                    return null;
+                }
             }
             return path.Replace("+", "%20").ToString();
         }
@@ -2151,7 +2158,26 @@ namespace FTAnalyzer
         public void SearchBMD(SearchType st, Individual individual, FactDate factdate, int searchProvider)
         {
             string uri = null;
-
+            if (!factdate.IsKnown)
+            {
+                if (st.Equals(SearchType.BIRTH))
+                {
+                    CheckLooseBirth(individual);
+                    factdate = individual.LooseBirthDate;
+                }
+                //if(st.Equals(SearchType.MARRIAGE))
+                //{
+                //    CheckLooseMarriage(individual);
+                //    factdate = individual.LooseMarriageDate;
+                //}
+                if (st.Equals(SearchType.DEATH))
+                {
+                    CheckLooseDeath(individual);
+                    factdate = individual.LooseDeathDate;
+                }
+                if (factdate.StartDate > factdate.EndDate)
+                    factdate = FactDate.UNKNOWN_DATE; // errors in facts corrupts loose births or deaths
+            }
             switch (searchProvider)
             {
                 case 0: uri = BuildAncestryQuery(st, individual, factdate); break;
@@ -2195,7 +2221,7 @@ namespace FTAnalyzer
             }
             string record_country = RecordCountry(st, individual, factdate);
             if (Countries.IsKnownCountry(record_country))
-                query.Append("%2Brecord_country%3A" + HttpUtility.UrlEncode(record_country));            
+                query.Append("%2Brecord_country%3A" + HttpUtility.UrlEncode(record_country));
             uri.Query = query.ToString();
             return uri.ToString();
         }
@@ -2273,7 +2299,7 @@ namespace FTAnalyzer
             uri.Path = "cgi-bin/sse.dll";
             //gsln_x=NP&
             StringBuilder query = new StringBuilder();
-            if(st.Equals(SearchType.BIRTH))
+            if (st.Equals(SearchType.BIRTH))
                 query.Append("gl=BMD_BIRTH&");
             if (st.Equals(SearchType.MARRIAGE))
                 query.Append("gl=BMD_MARRIAGE&");
@@ -2295,6 +2321,10 @@ namespace FTAnalyzer
                 string location = individual.BirthLocation.GetLocation(FactLocation.SUBREGION).ToString();
                 query.Append("msbpn__ftp=" + HttpUtility.UrlEncode(location) + "&");
             }
+            if(st.Equals(SearchType.DEATH) && factdate.IsKnown)
+                AppendYearandRange(factdate, query, "msddy=", "msddp=", false);
+            if (st.Equals(SearchType.MARRIAGE) && factdate.IsKnown)
+                AppendYearandRange(factdate, query, "msgdy=", "msgdp=", false);
             query.Append("cpxt=1&uidh=6b2&cp=11");
             uri.Query = query.ToString();
             return uri.ToString();
@@ -2323,7 +2353,7 @@ namespace FTAnalyzer
                     range = (endYear - startYear + 2) / 2; // add two to make year range searches always at least one year either side
                     if (2 < range && range < 5) range = 5;
                     if (range > 5 && !FMP) range = 10;
-                    if(FMP)
+                    if (FMP)
                     {
                         if (5 < range && range < 10) range = 10;
                         if (10 < range && range < 20) range = 20;

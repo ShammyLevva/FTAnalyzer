@@ -475,13 +475,30 @@ namespace FTAnalyzer
             get { return GetAge(DateTime.Now); }
         }
 
-        public string LooseBirth
+        public FactDate LooseBirthDate
         {
             get
             {
                 Fact loose = GetPreferredFact(Fact.LOOSEBIRTH);
-                FactDate fd = loose == null ? FactDate.UNKNOWN_DATE : loose.FactDate;
+                return loose == null ? FactDate.UNKNOWN_DATE : loose.FactDate;
+            }
+        }
+
+        public string LooseBirth
+        {
+            get
+            {
+                FactDate fd = LooseBirthDate;
                 return (fd.StartDate > fd.EndDate) ? "Alive facts after death, check data errors tab and children's births" : fd.ToString();
+            }
+        }
+
+        public FactDate LooseDeathDate
+        {
+            get
+            {
+                Fact loose = GetPreferredFact(Fact.LOOSEDEATH);
+                return loose == null ? FactDate.UNKNOWN_DATE : loose.FactDate;
             }
         }
 
@@ -489,8 +506,7 @@ namespace FTAnalyzer
         {
             get
             {
-                Fact loose = GetPreferredFact(Fact.LOOSEDEATH);
-                FactDate fd = loose == null ? FactDate.UNKNOWN_DATE : loose.FactDate;
+                FactDate fd = LooseDeathDate;
                 return (fd.StartDate > fd.EndDate) ? "Alive facts after death, check data errors tab and children's births" : fd.ToString();
             }
         }
