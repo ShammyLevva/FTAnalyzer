@@ -1021,6 +1021,8 @@ namespace FTAnalyzer
             return GeocodeStatus == Geocode.MATCHED || GeocodeStatus == Geocode.GEDCOM_USER || GeocodeStatus == Geocode.OS_50KMATCH || GeocodeStatus == Geocode.OS_50KFUZZY;
         }
 
+        static Regex numericFix = new Regex("\\d+[A-Za-z½]?", RegexOptions.Compiled);
+
         private string FixNumerics(string addressField, bool returnNumber)
         {
             int pos = addressField.IndexOf(" ");
@@ -1028,7 +1030,7 @@ namespace FTAnalyzer
             {
                 string number = addressField.Substring(0, pos);
                 string name = addressField.Substring(pos + 1);
-                Match matcher = Regex.Match(number, "\\d+[A-Za-z½]?");
+                Match matcher = numericFix.Match(number);
                 if (matcher.Success)
                     return returnNumber ? name + " - " + number : name;
             }

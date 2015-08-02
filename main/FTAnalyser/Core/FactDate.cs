@@ -45,6 +45,26 @@ namespace FTAnalyzer
         public static readonly FactDate UNKNOWN_DATE = new FactDate("UNKNOWN");
         public static readonly FactDate MARRIAGE_LESS_THAN_13 = new FactDate("1600");
 
+        private static Dictionary<string, Regex> datePatterns;
+
+        static FactDate()
+        {
+            datePatterns = new Dictionary<string, Regex>();
+            datePatterns[DATE_PATTERN] = new Regex(DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns[INTERPRETED_DATE_PATTERN] = new Regex(INTERPRETED_DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns[EARLY_DATE_PATTERN] = new Regex(EARLY_DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns[DOUBLE_DATE_PATTERN] = new Regex(DOUBLE_DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns[DOUBLE_DATE_PATTERN2] = new Regex(DOUBLE_DATE_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns[POSTFIX] = new Regex(POSTFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns[BETWEENFIX] = new Regex(BETWEENFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns[BETWEENFIX2] = new Regex(BETWEENFIX2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns[BETWEENFIX3] = new Regex(BETWEENFIX3, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns[BETWEENFIX4] = new Regex(BETWEENFIX4, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns[BETWEENFIX5] = new Regex(BETWEENFIX5, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns[USDATEFIX] = new Regex(USDATEFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns[SPACEFIX] = new Regex(SPACEFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        }
+
         public enum FactDateType
         {
             BEF, AFT, BET, ABT, UNK, EXT,
@@ -223,56 +243,56 @@ namespace FTAnalyzer
             Match matcher;
             if (str.StartsWith("INT")) // Interpreted date but we can discard <<Date_Phrase>>
             {
-                matcher = Regex.Match(str, INTERPRETED_DATE_PATTERN);
+                matcher = datePatterns["INTERPRETED_DATE_PATTERN"].Match(str);
                 if (matcher.Success)
                 {
                     string result = matcher.Groups[1].ToString() + matcher.Groups[2].ToString() + " " + matcher.Groups[3].ToString();
                     return result.Trim();
                 }
             }
-            matcher = Regex.Match(str, POSTFIX);
+            matcher = datePatterns["POSTFIX"].Match(str);
             if (matcher.Success)
             {
                 string result = matcher.Groups[1].ToString() + matcher.Groups[2].ToString();
                 return result.Trim();
             }
-            matcher = Regex.Match(str, BETWEENFIX);
+            matcher = datePatterns["BETWEENFIX"].Match(str);
             if (matcher.Success)
             {
                 string result = "BET " + matcher.Groups[1].ToString() + " AND " + matcher.Groups[2].ToString();
                 return result.Trim();
             }
-            matcher = Regex.Match(str, BETWEENFIX2);
+            matcher = datePatterns["BETWEENFIX2"].Match(str);
             if (matcher.Success)
             {
                 string result = "BET " + matcher.Groups[1].ToString() + " " + matcher.Groups[2].ToString() + " AND " + matcher.Groups[3].ToString() + " " + matcher.Groups[4].ToString();
                 return result.Trim();
             }
-            matcher = Regex.Match(str, BETWEENFIX3);
+            matcher = datePatterns["BETWEENFIX3"].Match(str);
             if (matcher.Success)
             {
                 string result = "BET " + matcher.Groups[1].ToString() + matcher.Groups[2].ToString() + " " + matcher.Groups[3].ToString() + " AND " + matcher.Groups[4].ToString() + matcher.Groups[5].ToString() + " " + matcher.Groups[6].ToString();
                 return result.Trim();
             }
-            matcher = Regex.Match(str, BETWEENFIX4);
+            matcher = datePatterns["BETWEENFIX4"].Match(str);
             if (matcher.Success)
             {
                 string result = "BET " + matcher.Groups[1].ToString() + " " + matcher.Groups[3].ToString() + " " + matcher.Groups[4].ToString() + " AND " + matcher.Groups[2].ToString() + matcher.Groups[3].ToString() + " " + matcher.Groups[4].ToString();
                 return result.Trim();
             }
-            matcher = Regex.Match(str, BETWEENFIX5);
+            matcher = datePatterns["BETWEENFIX5"].Match(str);
             if (matcher.Success)
             {
                 string result = "BET " + matcher.Groups[1].ToString() + matcher.Groups[2].ToString() + " " + matcher.Groups[5].ToString() + " AND " + matcher.Groups[3].ToString() + matcher.Groups[4].ToString() + " " + matcher.Groups[5].ToString();
                 return result.Trim();
             }
-            matcher = Regex.Match(str, USDATEFIX);
+            matcher = datePatterns["USDATEFIX"].Match(str);
             if (matcher.Success)
             {
                 string result = matcher.Groups[2].ToString() + matcher.Groups[1].ToString() + " " + matcher.Groups[3].ToString();
                 return result.Trim();
             }
-            matcher = Regex.Match(str, SPACEFIX);
+            matcher = datePatterns["SPACEFIX"].Match(str);
             if (matcher.Success)
             {
                 string result = matcher.Groups[1].ToString() + " " + matcher.Groups[2].ToString() + " " + matcher.Groups[3].ToString();
@@ -460,8 +480,8 @@ namespace FTAnalyzer
             try
             {
                 // Match the regular expression pattern against a text string.
-                Match matcher = Regex.Match(dateValue, DATE_PATTERN);
-                Match matcher2 = Regex.Match(dateValue, EARLY_DATE_PATTERN);
+                Match matcher = datePatterns["DATE_PATTERN"].Match(dateValue);
+                Match matcher2 = datePatterns["EARLY_DATE_PATTERN"].Match(dateValue);
                 if (matcher2.Success)
                 {  // first check match vs 
                     gDay = null;
@@ -478,8 +498,8 @@ namespace FTAnalyzer
                 }
                 else
                 {   // Try matching double date pattern
-                    matcher = Regex.Match(dateValue, DOUBLE_DATE_PATTERN);
-                    matcher2 = Regex.Match(dateValue, DOUBLE_DATE_PATTERN2);
+                    matcher = datePatterns["DOUBLE_DATE_PATTERN"].Match(dateValue);
+                    matcher2 = datePatterns["DOUBLE_DATE_PATTERN2"].Match(dateValue);
                     if (matcher.Success)
                     {
                         gDay = matcher.Groups[1];

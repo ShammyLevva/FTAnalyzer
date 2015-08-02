@@ -55,12 +55,14 @@ namespace FTAnalyzer
             }
         }
 
+        static string pattern = @"^(?<year>\d{1,3}y)? ?(?<month>\d{1,2}m)? ?(?<day>\d{1,2}d)?$";
+        static Regex ydm = new Regex(pattern, RegexOptions.Compiled);
+
         public Age(string gedcomAge, FactDate when)
             : this()
         {
             // parse ages from gedcom
-            string pattern = @"^(?<year>\d{1,3}y)? ?(?<month>\d{1,2}m)? ?(?<day>\d{1,2}d)?$";
-            Match matcher = Regex.Match(gedcomAge, pattern);
+            Match matcher = ydm.Match(gedcomAge);
             if (matcher.Success)
             {
                 this.GEDCOM_Age = gedcomAge;

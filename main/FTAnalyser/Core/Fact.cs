@@ -405,8 +405,10 @@ namespace FTAnalyzer
             }
         }
 
-        public static readonly string CHILDREN_STATUS_PATTERN1 = @"(\d{1,2}) Total ?,? ?(\d{1,2}) (Alive|Living) ?,? ?(\d{1,2}) Dead";
-        public static readonly string CHILDREN_STATUS_PATTERN2 = @"Total:? (\d{1,2}) ?,? ?(Alive|Living):? (\d{1,2}) ?,? ?Dead:? (\d{1,2})";
+        static readonly string CHILDREN_STATUS_PATTERN1 = @"(\d{1,2}) Total ?,? ?(\d{1,2}) (Alive|Living) ?,? ?(\d{1,2}) Dead";
+        static readonly string CHILDREN_STATUS_PATTERN2 = @"Total:? (\d{1,2}) ?,? ?(Alive|Living):? (\d{1,2}) ?,? ?Dead:? (\d{1,2})";
+        public readonly static Regex regexChildren1 = new Regex(CHILDREN_STATUS_PATTERN1, RegexOptions.Compiled);
+        public readonly static Regex regexChildren2 = new Regex(CHILDREN_STATUS_PATTERN2, RegexOptions.Compiled);
 
         private void CheckValidChildrenStatus(XmlNode node)
         {
@@ -420,7 +422,7 @@ namespace FTAnalyzer
             bool success = false;
             int total, alive, dead;
             total = alive = dead = 0;
-            Match matcher = Regex.Match(Comment, CHILDREN_STATUS_PATTERN1);
+            Match matcher = regexChildren1.Match(Comment);
             if (matcher.Success)
             {
                 success = true;
@@ -430,7 +432,7 @@ namespace FTAnalyzer
             }
             else
             {
-                matcher = Regex.Match(Comment, CHILDREN_STATUS_PATTERN2);
+                matcher = regexChildren2.Match(Comment);
                 if (matcher.Success)
                 {
                     success = true;
