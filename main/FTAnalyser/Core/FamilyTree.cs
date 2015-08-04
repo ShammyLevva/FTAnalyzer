@@ -2158,7 +2158,7 @@ namespace FTAnalyzer
         public void SearchBMD(SearchType st, Individual individual, FactDate factdate, int searchProvider)
         {
             string uri = null;
-            if (!factdate.IsKnown)
+            if (!factdate.IsKnown || factdate.DateType.Equals(FactDate.FactDateType.AFT) || factdate.DateType.Equals(FactDate.FactDateType.BEF))
             {
                 if (st.Equals(SearchType.BIRTH))
                 {
@@ -2186,9 +2186,7 @@ namespace FTAnalyzer
                 case 3: uri = BuildFamilySearchQuery(st, individual, factdate); break;
             }
             if (uri != null)
-            {
                 HttpUtility.VisitWebsite(uri);
-            }
         }
 
         private string BuildFamilySearchQuery(SearchType st, Individual individual, FactDate factdate)
@@ -2347,13 +2345,13 @@ namespace FTAnalyzer
                 int year, range;
                 if (startYear == FactDate.MINDATE.Year)
                 {
-                    year = endYear - 9;
-                    range = 10;
+                    year = endYear - (FMP ? 39 : 9);
+                    range = FMP ? 40 : 10;
                 }
                 else if (endYear == FactDate.MAXDATE.Year)
                 {
-                    year = startYear + 9;
-                    range = 10;
+                    year = startYear + (FMP ? 39 : 9);
+                    range = FMP ? 40 : 10;
                 }
                 else
                 {
