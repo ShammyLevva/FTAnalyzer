@@ -90,10 +90,11 @@ namespace FTAnalyzer
             int Height = (int)Application.UserAppDataRegistry.GetValue("Mainform size - height", this.Height);
             int Top = (int)Application.UserAppDataRegistry.GetValue("Mainform position - top", this.Top);
             int Left = (int)Application.UserAppDataRegistry.GetValue("Mainform position - left", this.Left);
+            Point leftTop = ReportFormHelper.CheckIsOnScreen(Top, Left);
             this.Width = Width;
             this.Height = Height;
-            this.Top = Top;
-            this.Left = Left;
+            this.Top = leftTop.Y;
+            this.Left = leftTop.X;
         }
 
         #region Version Info
