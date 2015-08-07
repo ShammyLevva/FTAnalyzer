@@ -126,6 +126,15 @@ namespace FTAnalyzer
             SaveFormLayout();
         }
 
+        public static Point CheckIsOnScreen(int top, int left)
+        {
+            Point toCheck = new Point(left, top);
+            foreach (Screen s in Screen.AllScreens)
+                if (s.Bounds.Contains(toCheck))
+                    return toCheck; // its inside bounds so return the point checked
+            return new Point(50, 50);
+        }
+
         public void LoadColumnLayout(string filename)
         {
             try
@@ -189,8 +198,11 @@ namespace FTAnalyzer
             {
                 parent.WindowState = FormWindowState.Normal;
                 parent.StartPosition = FormStartPosition.Manual;
-                parent.Top = (int)Application.UserAppDataRegistry.GetValue(registry + " position - top", defaultLocation.Item1);
-                parent.Left = (int)Application.UserAppDataRegistry.GetValue(registry + " position - left", defaultLocation.Item2);
+                int top = (int)Application.UserAppDataRegistry.GetValue(registry + " position - top", defaultLocation.Item1);
+                int left = (int)Application.UserAppDataRegistry.GetValue(registry + " position - left", defaultLocation.Item2);
+                Point topLeft = CheckIsOnScreen(top, left);
+                parent.Top = topLeft.Y;
+                parent.Left = topLeft.X;
                 parent.Height = (int)Application.UserAppDataRegistry.GetValue(registry + " size - height", defaultSize.Item1);
                 parent.Width = (int)Application.UserAppDataRegistry.GetValue(registry + " size - width", defaultSize.Item2);
             }
