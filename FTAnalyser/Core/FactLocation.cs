@@ -1022,6 +1022,7 @@ namespace FTAnalyzer
                 return true;
             return GeocodeStatus == Geocode.MATCHED || GeocodeStatus == Geocode.GEDCOM_USER || 
                    GeocodeStatus == Geocode.OS_50KMATCH || GeocodeStatus == Geocode.OS_50KFUZZY;
+            // remaining options return false ie: Geocode.OUT_OF_BOUNDS, Geocode.NO_MATCH, Geocode.NOT_SEARCHED, Geocode.INCORRECT
         }
 
         static Regex numericFix = new Regex("\\d+[A-Za-z½]?", RegexOptions.Compiled);
