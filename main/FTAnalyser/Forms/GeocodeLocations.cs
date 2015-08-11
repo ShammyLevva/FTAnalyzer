@@ -80,8 +80,9 @@ namespace FTAnalyzer.Forms
             int total = FactLocation.LocationsCount;
             txtGoogleWait.Text = string.Empty;
             statusText = "Already Geocoded: " + (gedcom + found + osmatch + osfuzzy) +
-                ", partials: " + (partial + levelpartial + ospartial + notfound + incorrect + outofbounds)
-                + ", yet to search: " + notsearched + " of " + total + " locations.";
+                ", partials: " + (partial + levelpartial + ospartial) +
+                ", notfound/incorrect: " + (notfound + incorrect + outofbounds) +
+                ", yet to search: " + notsearched + " of " + total + " locations.";
             txtLocations.Text = statusText;
         }
 
@@ -177,6 +178,7 @@ namespace FTAnalyzer.Forms
             if (sortCol != null)
                 dgLocations.Sort(sortCol, sortOrder);
             dgLocations.Refresh();
+            SetStatusText();
             txtLocations.Text = statusText + " Displaying: " + dgLocations.RowCount + ". ";
             if(loc != null) 
                 SelectLocation(loc);
@@ -591,7 +593,7 @@ namespace FTAnalyzer.Forms
                                     {
                                         foreach (GeoResponse.CResult result in res.Results)
                                         {
-                                            foundLevel = GoogleMap.GetFactLocation(result.Types, loc.Country.Equals(Countries.UNITED_STATES));
+                                            foundLevel = GoogleMap.GetFactLocationType(result.Types, loc);
                                             address = result.ReturnAddress;
                                             viewport = result.Geometry.ViewPort;
                                             resultType = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
@@ -625,7 +627,7 @@ namespace FTAnalyzer.Forms
                                     if (loc.GeocodeStatus != FactLocation.Geocode.MATCHED)
                                     {
                                         // we checked all the google results and no joy so take first result as level partial match
-                                        foundLevel = GoogleMap.GetFactLocation(originalResult.Types, loc.Country.Equals(Countries.UNITED_STATES));
+                                        foundLevel = GoogleMap.GetFactLocationType(originalResult.Types, loc);
                                         address = originalResult.ReturnAddress;
                                         latitude = originalResult.Geometry.Location.Lat;
                                         longitude = originalResult.Geometry.Location.Long;
@@ -900,7 +902,7 @@ namespace FTAnalyzer.Forms
                 LogResults(loc, res);
                 foreach (GeoResponse.CResult result in res.Results)
                 {
-                    foundLevel = GoogleMap.GetFactLocation(result.Types, loc.Country.Equals(Countries.UNITED_STATES));
+                    foundLevel = GoogleMap.GetFactLocationType(result.Types, loc);
                     viewport = result.Geometry.ViewPort;
                     string resultTypes = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
                     if (((foundLevel == FactLocation.PLACE && loc.PixelSize < 10) ||
@@ -921,7 +923,7 @@ namespace FTAnalyzer.Forms
                     // we haven't got a good match so try again with level <=
                     foreach (GeoResponse.CResult result in res.Results)
                     {
-                        foundLevel = GoogleMap.GetFactLocation(result.Types, loc.Country.Equals(Countries.UNITED_STATES));
+                        foundLevel = GoogleMap.GetFactLocationType(result.Types, loc);
                         viewport = result.Geometry.ViewPort;
                         if (foundLevel <= loc.Level)
                         {
@@ -944,7 +946,7 @@ namespace FTAnalyzer.Forms
             log.Info("Pixelsize: " + loc.PixelSize + ", Found " + res.Results.Count() + " results for " + loc.ToString());
             foreach (GeoResponse.CResult result in res.Results)
             {
-                log.Info("Level: " + GoogleMap.GetFactLocation(result.Types, loc.Country.Equals(Countries.UNITED_STATES)) + "=" + result.ReturnAddress + ". Type: " + EnhancedTextInfo.ConvertStringArrayToString(result.Types));
+                log.Info("Level: " + GoogleMap.GetFactLocationType(result.Types, loc) + "=" + result.ReturnAddress + ". Type: " + EnhancedTextInfo.ConvertStringArrayToString(result.Types));
             }
         }
         #endregion
