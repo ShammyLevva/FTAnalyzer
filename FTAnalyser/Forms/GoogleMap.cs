@@ -154,7 +154,7 @@ namespace FTAnalyzer.Forms
         public static string LocationText(GeoResponse res, FactLocation loc, int level)
         {
             string output = string.Empty;
-            int returnlevel = GetFactLocation(res.Results[0].Types, loc.Country.Equals(Countries.UNITED_STATES));
+            int returnlevel = GetFactLocationType(res.Results[0].Types, loc);
             if (returnlevel != FactLocation.UNKNOWN)
             {
                 output = "Google found " + loc.GetLocation(returnlevel);
@@ -170,8 +170,9 @@ namespace FTAnalyzer.Forms
             return output;
         }
 
-        public static int GetFactLocation(string[] locationTypes, bool US)
+        public static int GetFactLocationType(string[] locationTypes, FactLocation loc)
         {
+            bool UK = loc.IsUnitedKingdom;
             HashSet<string> types = new HashSet<string>(locationTypes);
             foreach(string type in types)
                 if (PLACES.Contains(type))
@@ -179,12 +180,14 @@ namespace FTAnalyzer.Forms
             if (types.Contains(SUBLOCALITY) || types.Contains(POSTALCODE) || types.Contains(NEIGHBOURHOOD))
                 return FactLocation.ADDRESS;
             if (types.Contains(ADMIN3) || types.Contains(LOCALITY))
-                return US ? FactLocation.ADDRESS : FactLocation.SUBREGION; 
+                return UK ? FactLocation.SUBREGION : FactLocation.ADDRESS;
             if (types.Contains(POSTALCODEPREFIX) || types.Contains(POSTALTOWN) || types.Contains(COLLOQUIAL_AREA))
                 return FactLocation.SUBREGION;
             if (types.Contains(ADMIN2))
-                return US ? FactLocation.SUBREGION : FactLocation.REGION;
-            if (types.Contains(COUNTRY) || types.Contains(ADMIN1))
+                return UK ? FactLocation.REGION : FactLocation.SUBREGION;
+            if (types.Contains(ADMIN1))
+                return UK ? FactLocation.COUNTRY : FactLocation.REGION;
+            if (types.Contains(COUNTRY))
                 return FactLocation.COUNTRY;
             return FactLocation.UNKNOWN;
         }
