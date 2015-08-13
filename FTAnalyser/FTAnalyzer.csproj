@@ -97,7 +97,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>2D247322E11563A20684F881EF7486EBC516D62B</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>B0A8C671617791A4FAFE81F66062681D1F058065</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>
@@ -144,6 +144,9 @@
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\log4net.2.0.3\lib\net40-client\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MediaSlider">
+      <HintPath>Resources\Lib\MediaSlider.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -284,6 +287,12 @@
     </Compile>
     <Compile Include="Forms\LostCousinsReferral.Designer.cs">
       <DependentUpon>LostCousinsReferral.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MissingData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MissingData.Designer.cs">
+      <DependentUpon>MissingData.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Notes.cs">
       <SubType>Form</SubType>
@@ -474,6 +483,9 @@
     <Content Include="Resources\Icons\OS50kMatch.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\Lib\MediaSlider.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Resources\OS50kGazetteer.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -524,6 +536,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LostCousinsReferral.resx">
       <DependentUpon>LostCousinsReferral.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MissingData.resx">
+      <DependentUpon>MissingData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Notes.resx">
       <DependentUpon>Notes.cs</DependentUpon>
