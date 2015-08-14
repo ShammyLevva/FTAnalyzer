@@ -1,4 +1,3 @@
-using FTAnalyzer.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1431,34 +1430,36 @@ namespace FTAnalyzer
             get { return IsFlaggedAsLiving && DeathDate.IsKnown; }
         }
 
-        public int Birth
+        public Forms.ColourBMD.ColourValue Birth
         {
             get { return BirthDate.DateStatus(false); }
         }
 
-        public int BaptChri
+        public Forms.ColourBMD.ColourValue BaptChri
         {
             get
             {
                 FactDate baptism = GetPreferredFactDate(Fact.BAPTISM);
                 FactDate christening = GetPreferredFactDate(Fact.CHRISTENING);
-                return Math.Max(baptism.DateStatus(true), christening.DateStatus(true));
+                Forms.ColourBMD.ColourValue baptismStatus = baptism.DateStatus(true);
+                Forms.ColourBMD.ColourValue christeningStatus = christening.DateStatus(true);
+                return (int)baptismStatus < (int)christeningStatus ? baptismStatus : christeningStatus;
             }
         }
 
-        private int CheckMarriageStatus(Family fam)
+        private Forms.ColourBMD.ColourValue CheckMarriageStatus(Family fam)
         {
             // individual is a member of a family as parent so check family status
             if ((this.IndividualID == fam.HusbandID && fam.Wife == null) ||
                 (this.IndividualID == fam.WifeID && fam.Husband == null))
-                return 7; // no partner but has children
+                return Forms.ColourBMD.ColourValue.NO_PARTNER; // no partner but has children
             else if (fam.GetPreferredFact(Fact.MARRIAGE) == null)
-                return 8; // has a partner but no marriage fact
+                return Forms.ColourBMD.ColourValue.NO_MARRIAGE; // has a partner but no marriage fact
             else
                 return fam.MarriageDate.DateStatus(false); // has a partner and a marriage so return date status
         }
 
-        public int Marriage1
+        public Forms.ColourBMD.ColourValue Marriage1
         {
             get
             {
@@ -1466,9 +1467,9 @@ namespace FTAnalyzer
                 if (fam == null)
                 {
                     if (MaxAgeAtDeath > 13 && GetPreferredFact(Fact.DIED_SINGLE) == null)
-                        return 6; // of marrying age but hasn't a partner nor died single
+                        return Forms.ColourBMD.ColourValue.NO_SPOUSE; // of marrying age but hasn't a partner nor died single
                     else
-                        return 0;
+                        return Forms.ColourBMD.ColourValue.EMPTY;
                 }
                 else
                 {
@@ -1477,19 +1478,19 @@ namespace FTAnalyzer
             }
         }
 
-        public int Marriage2
+        public Forms.ColourBMD.ColourValue Marriage2
         {
             get
             {
                 Family fam = Marriages(1);
                 if (fam == null)
-                    return 0;
+                    return Forms.ColourBMD.ColourValue.EMPTY;
                 else
                     return CheckMarriageStatus(fam);
             }
         }
 
-        public int Marriage3
+        public Forms.ColourBMD.ColourValue Marriage3
         {
             get
             {
@@ -1551,29 +1552,31 @@ namespace FTAnalyzer
             }
         }
 
-        public int Death
+        public Forms.ColourBMD.ColourValue Death
         {
             get
             {
                 if (IsFlaggedAsLiving)
-                    return 9;
+                    return Forms.ColourBMD.ColourValue.ISLIVING;
                 else if (!DeathDate.IsKnown && GetMaxAge(DateTime.Now) < FactDate.MAXYEARS)
                     if (GetMaxAge(DateTime.Now) < 90)
-                        return 0;
+                        return Forms.ColourBMD.ColourValue.EMPTY;
                     else
-                        return 10;
+                        return Forms.ColourBMD.ColourValue.OVER90;
                 else
                     return DeathDate.DateStatus(false);
             }
         }
 
-        public int CremBuri
+        public Forms.ColourBMD.ColourValue CremBuri
         {
             get
             {
                 FactDate cremation = GetPreferredFactDate(Fact.CREMATION);
                 FactDate burial = GetPreferredFactDate(Fact.BURIAL);
-                return Math.Max(cremation.DateStatus(true), burial.DateStatus(true));
+                Forms.ColourBMD.ColourValue cremationStatus = cremation.DateStatus(true);
+                Forms.ColourBMD.ColourValue burialStatus = burial.DateStatus(true);
+                return (int)cremationStatus < (int) burialStatus ? cremationStatus : burialStatus;
             }
         }
 

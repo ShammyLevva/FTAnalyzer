@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace FTAnalyzer
 {
@@ -13,13 +10,13 @@ namespace FTAnalyzer
         string Relation { get; }
         string RelationToRoot { get; }
         
-        int Birth { get; }
-        int BaptChri { get; }
-        int Marriage1 { get; }
-        int Marriage2 { get; }
-        int Marriage3 { get; }
-        int Death { get; }
-        int CremBuri { get; }
+        Forms.ColourBMD.ColourValue Birth { get; }
+        Forms.ColourBMD.ColourValue BaptChri { get; }
+        Forms.ColourBMD.ColourValue Marriage1 { get; }
+        Forms.ColourBMD.ColourValue Marriage2 { get; }
+        Forms.ColourBMD.ColourValue Marriage3 { get; }
+        Forms.ColourBMD.ColourValue Death { get; }
+        Forms.ColourBMD.ColourValue CremBuri { get; }
         
         FactDate BirthDate { get; }
         FactDate DeathDate { get; }
