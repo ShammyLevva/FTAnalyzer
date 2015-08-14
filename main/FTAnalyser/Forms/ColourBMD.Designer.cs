@@ -470,6 +470,7 @@
             "All Individuals",
             "None Found (All Red)",
             "All Found (All Green)",
+            "All Very Wide Date Range (Dark Orange)",
             "All Wide Date Range (Orange)",
             "All Narrow Date Range (Yellow)",
             "All Approx Date Range (Light Green)",

@@ -782,20 +782,22 @@ namespace FTAnalyzer
             return difference;
         }
 
-        public int DateStatus(bool ignoreUnknown)
+        public Forms.ColourBMD.ColourValue DateStatus(bool ignoreUnknown)
         {
-            // 0 = grey, 1 = red, 2 = orange, 3 = yellow, 4=green
+            // 0 = grey, 1 = red, 2 = dark orange, 3 = light orange, 4 = yellow, 5 = light green, 6 = dark green
             if (DateType == FactDateType.UNK)
-                return ignoreUnknown ? 0 : 1;
+                return ignoreUnknown ? Forms.ColourBMD.ColourValue.EMPTY : Forms.ColourBMD.ColourValue.UNKNOWN_DATE;
             TimeSpan ts = EndDate - StartDate;
-            if (ts.Days > 365.25 * 2)
-                return 2; // more than 2 years
+            if (ts.Days > 365.25 * 10)
+                return Forms.ColourBMD.ColourValue.VERY_WIDE_DATE; // more than 10 years
+            if (ts.Days > 365.25 * 10)
+                return Forms.ColourBMD.ColourValue.WIDE_DATE; // more than 2 years
             else if (ts.Days > 125)
-                return 3; // more than 4 months
+                return Forms.ColourBMD.ColourValue.NARROW_DATE; // more than 4 months
             else if (ts.Days > 0)
-                return 4; // less than 4 months not exact
+                return Forms.ColourBMD.ColourValue.APPROX_DATE; // less than 4 months not exact
             else
-                return 5; // exact date
+                return Forms.ColourBMD.ColourValue.EXACT_DATE; // exact date
         }
 
         #endregion
