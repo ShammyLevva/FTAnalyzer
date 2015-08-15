@@ -470,18 +470,21 @@
             "All Individuals",
             "None Found (All Red)",
             "All Found (All Green)",
-            "All Very Wide Date Range (Dark Orange)",
+            "All Very Wide Date Range (Orange Red)",
             "All Wide Date Range (Orange)",
             "All Narrow Date Range (Yellow)",
+            "All Just Year Date (Yellow Green)",
             "All Approx Date Range (Light Green)",
             "Some Missing (Some Red)",
             "Some Found (Some Green)",
+            "Some Very Wide Date Range (Orange Red)",
             "Some Wide Date Range (Orange)",
             "Some Narrow Date Range (Yellow)",
+            "Some Just Year Date (Yellow Green)",
             "Some Approx Date Range (Light Green)",
-            "Of Marrying Age no partner (Peach)",
-            "No Partner shared fact/children (Light Blue)",
-            "Partner but no marriage (Dark Blue)"});
+            "Of Marrying Age no partner (Pink)",
+            "No Partner shared fact/children (Coral)",
+            "Partner but no marriage (Red Brown)"});
             this.cbFilter.Name = "cbFilter";
             this.cbFilter.Size = new System.Drawing.Size(235, 25);
             this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.cbFilter_SelectedIndexChanged);
