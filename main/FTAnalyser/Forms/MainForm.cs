@@ -2507,6 +2507,23 @@ namespace FTAnalyzer
             DisplayColourCensus(Countries.CANADA);
         }
 
+
+        private void btnStandardMissingData_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Not Implemented Yet");
+        }
+
+        private void btnAdvancedMissingData_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            List<IDisplayMissingData> list = ft.MissingData(relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
+            MissingData rs = new MissingData();
+            DisposeDuplicateForms(rs);
+            rs.Show();
+            rs.Focus();
+            HourGlass(false);
+        }
+
         private void cmbColourFamily_Click(object sender, EventArgs e)
         {
             UpdateColourFamilyComboBox(null);

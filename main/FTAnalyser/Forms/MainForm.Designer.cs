@@ -33,7 +33,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -302,6 +302,9 @@
             this.wardeadRelation = new Controls.RelationTypes();
             this.wardeadCountry = new Controls.CensusCountry();
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.btnStandardMissingData = new System.Windows.Forms.Button();
+            this.btnAdvancedMissingData = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -361,6 +364,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgDuplicates)).BeginInit();
             this.tabToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).BeginInit();
+            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -692,7 +696,7 @@
             this.displayOptionsOnLoadToolStripMenuItem,
             this.resetToDefaultFormSizeToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // optionsToolStripMenuItem
@@ -813,40 +817,40 @@
             // viewOnlineManualToolStripMenuItem
             // 
             this.viewOnlineManualToolStripMenuItem.Name = "viewOnlineManualToolStripMenuItem";
-            this.viewOnlineManualToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.viewOnlineManualToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.viewOnlineManualToolStripMenuItem.Text = "View Online Manual";
             this.viewOnlineManualToolStripMenuItem.Click += new System.EventHandler(this.viewOnlineManualToolStripMenuItem_Click);
             // 
             // onlineGuidesToUsingFTAnalyzerToolStripMenuItem
             // 
             this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Name = "onlineGuidesToUsingFTAnalyzerToolStripMenuItem";
-            this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Text = "Online Guides to Using FTAnalyzer";
             this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Click += new System.EventHandler(this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem_Click);
             // 
             // reportAnIssueToolStripMenuItem
             // 
             this.reportAnIssueToolStripMenuItem.Name = "reportAnIssueToolStripMenuItem";
-            this.reportAnIssueToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.reportAnIssueToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.reportAnIssueToolStripMenuItem.Text = "Report an Issue";
             this.reportAnIssueToolStripMenuItem.Click += new System.EventHandler(this.reportAnIssueToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(253, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(252, 6);
             // 
             // whatsNewToolStripMenuItem
             // 
             this.whatsNewToolStripMenuItem.Name = "whatsNewToolStripMenuItem";
-            this.whatsNewToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.whatsNewToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.whatsNewToolStripMenuItem.Text = "What\'s New";
             this.whatsNewToolStripMenuItem.Click += new System.EventHandler(this.whatsNewToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -922,14 +926,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 154);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1249,6 +1253,7 @@
             // 
             // tabColourReports
             // 
+            this.tabColourReports.Controls.Add(this.groupBox7);
             this.tabColourReports.Controls.Add(this.btnRandomSurnameColour);
             this.tabColourReports.Controls.Add(this.label14);
             this.tabColourReports.Controls.Add(this.cmbColourFamily);
@@ -1281,7 +1286,7 @@
             this.groupBox3.Controls.Add(this.btnUSColourCensus);
             this.groupBox3.Location = new System.Drawing.Point(8, 92);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(417, 86);
+            this.groupBox3.Size = new System.Drawing.Size(409, 86);
             this.groupBox3.TabIndex = 36;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Colour Census Reports";
@@ -3141,6 +3146,37 @@
             this.rtbToday.TabIndex = 7;
             this.rtbToday.Text = "";
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.btnAdvancedMissingData);
+            this.groupBox7.Controls.Add(this.btnStandardMissingData);
+            this.groupBox7.Location = new System.Drawing.Point(431, 92);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(409, 86);
+            this.groupBox7.TabIndex = 63;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Missing Data Reports";
+            // 
+            // btnStandardMissingData
+            // 
+            this.btnStandardMissingData.Location = new System.Drawing.Point(6, 19);
+            this.btnStandardMissingData.Name = "btnStandardMissingData";
+            this.btnStandardMissingData.Size = new System.Drawing.Size(195, 23);
+            this.btnStandardMissingData.TabIndex = 39;
+            this.btnStandardMissingData.Text = "Standard Missing Data Report";
+            this.btnStandardMissingData.UseVisualStyleBackColor = true;
+            this.btnStandardMissingData.Click += new System.EventHandler(this.btnStandardMissingData_Click);
+            // 
+            // btnAdvancedMissingData
+            // 
+            this.btnAdvancedMissingData.Location = new System.Drawing.Point(207, 19);
+            this.btnAdvancedMissingData.Name = "btnAdvancedMissingData";
+            this.btnAdvancedMissingData.Size = new System.Drawing.Size(195, 23);
+            this.btnAdvancedMissingData.TabIndex = 40;
+            this.btnAdvancedMissingData.Text = "Advanced Missing Data Report";
+            this.btnAdvancedMissingData.UseVisualStyleBackColor = true;
+            this.btnAdvancedMissingData.Click += new System.EventHandler(this.btnAdvancedMissingData_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -3232,6 +3268,7 @@
             this.tabToday.ResumeLayout(false);
             this.tabToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).EndInit();
+            this.groupBox7.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3508,6 +3545,9 @@
         private System.Windows.Forms.Button btnShowSurnames;
         private Controls.RelationTypes reltypesSurnames;
         private System.Windows.Forms.ToolStripMenuItem mnuCousinsCountReport;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Button btnAdvancedMissingData;
+        private System.Windows.Forms.Button btnStandardMissingData;
     }
 }
 

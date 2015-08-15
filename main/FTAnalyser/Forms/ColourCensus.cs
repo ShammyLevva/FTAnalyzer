@@ -46,10 +46,10 @@ namespace FTAnalyzer.Forms
             censusMissingLC.BackColor = censusMissingLC.ForeColor = Color.Yellow;
             styles.Add(2, censusMissingLC);
             DataGridViewCellStyle notCensusEnterednotLCYear = new DataGridViewCellStyle();
-            notCensusEnterednotLCYear.BackColor = notCensusEnterednotLCYear.ForeColor = Color.Green;
+            notCensusEnterednotLCYear.BackColor = notCensusEnterednotLCYear.ForeColor = Color.LawnGreen;
             styles.Add(3, notCensusEnterednotLCYear);
             DataGridViewCellStyle allEntered = new DataGridViewCellStyle();
-            allEntered.BackColor = allEntered.ForeColor = Color.Green;
+            allEntered.BackColor = allEntered.ForeColor = Color.LawnGreen;
             styles.Add(4, allEntered);
             DataGridViewCellStyle lcNoCensus = new DataGridViewCellStyle();
             lcNoCensus.BackColor = lcNoCensus.ForeColor = Color.DarkOrange;
