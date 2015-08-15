@@ -29,21 +29,31 @@
         private void InitializeComponent()
         {
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.dsBirth = new FTAnalyzer.Forms.Controls.DateSliders();
             this.SuspendLayout();
             // 
             // statusStrip1
             // 
             this.statusStrip1.Location = new System.Drawing.Point(0, 435);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(638, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(688, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // dsBirth
+            // 
+            this.dsBirth.GroupBoxText = "Birth Date";
+            this.dsBirth.Location = new System.Drawing.Point(12, 12);
+            this.dsBirth.Name = "dsBirth";
+            this.dsBirth.Size = new System.Drawing.Size(334, 163);
+            this.dsBirth.TabIndex = 2;
             // 
             // MissingData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(638, 457);
+            this.ClientSize = new System.Drawing.Size(688, 457);
+            this.Controls.Add(this.dsBirth);
             this.Controls.Add(this.statusStrip1);
             this.Name = "MissingData";
             this.Text = "Missing Data Configuration";
@@ -54,5 +64,6 @@
 
         #endregion
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private Controls.DateSliders dsBirth;
     }
 }

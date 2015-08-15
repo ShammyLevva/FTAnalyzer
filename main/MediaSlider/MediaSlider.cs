@@ -313,7 +313,7 @@ namespace MediaSlider
                 ErrorHandler.Dispose();
         }
 
-        public void Dispose()
+        public new void Dispose()
         {
             DeInit();
         }
