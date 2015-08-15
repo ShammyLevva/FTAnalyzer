@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace FTAnalyzer
@@ -790,10 +790,12 @@ namespace FTAnalyzer
             TimeSpan ts = EndDate - StartDate;
             if (ts.Days > 365.25 * 10)
                 return Forms.ColourBMD.ColourValue.VERY_WIDE_DATE; // more than 10 years
-            if (ts.Days > 365.25 * 10)
-                return Forms.ColourBMD.ColourValue.WIDE_DATE; // more than 2 years
+            if (ts.Days > 365.25 * 2)
+                return Forms.ColourBMD.ColourValue.WIDE_DATE; // over 2 years less than 10 years
+            if (ts.Days > 365.25)
+                return Forms.ColourBMD.ColourValue.NARROW_DATE; // over 1 year less than 2 years
             else if (ts.Days > 125)
-                return Forms.ColourBMD.ColourValue.NARROW_DATE; // more than 4 months
+                return Forms.ColourBMD.ColourValue.JUST_YEAR_DATE; // more than 4 months less than 1 year
             else if (ts.Days > 0)
                 return Forms.ColourBMD.ColourValue.APPROX_DATE; // less than 4 months not exact
             else
