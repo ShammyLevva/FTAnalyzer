@@ -1563,6 +1563,23 @@ namespace FTAnalyzer
             return individuals.Filter(filter).ToList<IDisplayColourBMD>();
         }
 
+        public List<IDisplayMissingData> MissingData(Controls.RelationTypes relType, string surname, ComboBoxFamily family)
+        {
+            Predicate<Individual> filter;
+            if (family == null)
+            {
+                filter = relType.BuildFilter<Individual>(x => x.RelationType);
+                if (surname.Length > 0)
+                {
+                    Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, surname);
+                    filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
+                }
+            }
+            else
+                filter = x => family.Members.Contains<Individual>(x);
+            return individuals.Filter(filter).ToList<IDisplayMissingData>();
+        }
+
         #endregion
 
         #region Data Errors

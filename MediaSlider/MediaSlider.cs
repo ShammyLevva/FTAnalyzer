@@ -233,7 +233,7 @@ namespace MediaSlider
         private Color _clrButtonAccentColor = Color.FromArgb(128, 64, 64, 64);
         private Color _clrButtonBorderColor = Color.Black;
         private Color _clrButtonColor = Color.FromArgb(160, 0, 0, 0);
-        private Color _clrBackColor = Color.Black;
+        private Color _clrBackColor = Color.Transparent;
         private Color _clrTrackBorderColor = Color.FromArgb(160, Color.White);
         private Color _clrTrackFillColor = Color.Transparent;
         private Color _clrTrackProgressColor = Color.FromArgb(5, 101, 188);

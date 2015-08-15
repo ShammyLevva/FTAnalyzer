@@ -8,7 +8,7 @@ namespace FTAnalyzer
 {
     public class Individual : IComparable<Individual>,
         IDisplayIndividual, IDisplayLooseDeath, IDisplayLooseBirth, IExportIndividual,
-        IDisplayColourCensus, IDisplayColourBMD
+        IDisplayColourCensus, IDisplayColourBMD, IDisplayMissingData
     {
         // define relation type from direct ancestor to related by marriage and 
         // MARRIAGEDB ie: married to a direct or blood relation
@@ -1343,6 +1343,12 @@ namespace FTAnalyzer
         public int V1925
         {
             get { return ColourCensusReport(CensusDate.SCOTVALUATION1925); }
+        }
+
+        public float Score
+        {
+            get { return 0.0f; }
+            // TODO Add scoring mechanism
         }
 
         public bool AliveOnAnyCensus(string country)

@@ -246,6 +246,7 @@
     <Compile Include="Core\DataError.cs" />
     <Compile Include="Core\DataErrorGroup.cs" />
     <Compile Include="Core\Displays\DisplayDuplicateIndividual.cs" />
+    <Compile Include="Core\Displays\IDisplayMissingData.cs" />
     <Compile Include="Core\Displays\IDisplayDuplicateIndividual.cs" />
     <Compile Include="Core\Displays\IDisplayLooseBirth.cs" />
     <Compile Include="Core\Displays\IDisplayColourBMD.cs" />
@@ -276,6 +277,12 @@
     <Compile Include="Core\Relationship.cs" />
     <Compile Include="Core\Surname.cs" />
     <Compile Include="Exceptions\InvalidLocationCSVFileException.cs" />
+    <Compile Include="Forms\Controls\DateSliders.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Controls\DateSliders.Designer.cs">
+      <DependentUpon>DateSliders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Controls\ToolStripMapSelector.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -527,6 +534,9 @@
     </Content>
     <EmbeddedResource Include="Forms\ColourBMD.resx">
       <DependentUpon>ColourBMD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Controls\DateSliders.resx">
+      <DependentUpon>DateSliders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LostCousinsReferral.resx">
       <DependentUpon>LostCousinsReferral.cs</DependentUpon>
