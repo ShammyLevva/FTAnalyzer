@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTile.Desktop", "..\BruTi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSGazetteerProcessor", "..\OSGazetteerProcessor\OSGazetteerProcessor.csproj", "{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaSlider", "..\MediaSlider\MediaSlider.csproj", "{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}"
+EndProject
 Global
 	GlobalSection(Performance) = preSolution
 		HasPerformanceSessions = true
@@ -213,12 +215,40 @@ Global
 		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.SingleImage|x86.ActiveCfg = Release|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.CD_ROM|x86.ActiveCfg = Release|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.CD_ROM|x86.Build.0 = Release|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.Debug|x86.Build.0 = Debug|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.DebugDSProjection|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.DebugDSProjection|Any CPU.Build.0 = Debug|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.DebugDSProjection|x86.ActiveCfg = Debug|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.DebugDSProjection|x86.Build.0 = Debug|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.DVD-5|x86.ActiveCfg = Debug|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.DVD-5|x86.Build.0 = Debug|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.Release|x86.ActiveCfg = Release|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.Release|x86.Build.0 = Release|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.ReleaseDSProjection|Any CPU.ActiveCfg = Release|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.ReleaseDSProjection|Any CPU.Build.0 = Release|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.ReleaseDSProjection|x86.ActiveCfg = Release|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.ReleaseDSProjection|x86.Build.0 = Release|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.SingleImage|x86.ActiveCfg = Release|Any CPU
+		{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}.SingleImage|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
 		SccLocalPath0 = .
@@ -242,6 +272,9 @@ Global
 		SccProjectUniqueName7 = ..\\OSGazetteerProcessor\\OSGazetteerProcessor.csproj
 		SccProjectName7 = ../OSGazetteerProcessor
 		SccLocalPath7 = ..\\OSGazetteerProcessor
+		SccProjectUniqueName8 = ..\\MediaSlider\\MediaSlider.csproj
+		SccProjectName8 = ../MediaSlider
+		SccLocalPath8 = ..\\MediaSlider
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FTAnalyzer.vsmdi
