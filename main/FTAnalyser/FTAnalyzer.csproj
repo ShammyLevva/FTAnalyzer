@@ -145,9 +145,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\log4net.2.0.3\lib\net40-client\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="MediaSlider">
-      <HintPath>Resources\Lib\MediaSlider.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>packages\Microsoft.SqlServer.Types.11.0.2\lib\net20\Microsoft.SqlServer.Types.dll</HintPath>
@@ -483,9 +480,6 @@
     <Content Include="Resources\Icons\OS50kMatch.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Resources\Lib\MediaSlider.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Content Include="Resources\OS50kGazetteer.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -914,6 +908,10 @@
     <ProjectReference Include="..\BruTile\BruTile\BruTile.csproj">
       <Project>{3d793607-bf4f-4e49-870f-191e187c2ead}</Project>
       <Name>BruTile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MediaSlider\MediaSlider.csproj">
+      <Project>{3bff2d79-9bc6-4f1a-a0ab-de3f9a7b5b57}</Project>
+      <Name>MediaSlider</Name>
     </ProjectReference>
     <ProjectReference Include="..\Printing.DataGridViewPrint\Printing.DataGridViewPrint.csproj">
       <Project>{FDFCB41B-C75D-476F-A4AA-EFD8C875A677}</Project>
