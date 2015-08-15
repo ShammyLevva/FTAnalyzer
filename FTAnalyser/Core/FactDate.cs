@@ -782,24 +782,24 @@ namespace FTAnalyzer
             return difference;
         }
 
-        public Forms.ColourBMD.ColourValue DateStatus(bool ignoreUnknown)
+        public ColourValues.ColourValue DateStatus(bool ignoreUnknown)
         {
             // 0 = grey, 1 = red, 2 = dark orange, 3 = light orange, 4 = yellow, 5 = light green, 6 = dark green
             if (DateType == FactDateType.UNK)
-                return ignoreUnknown ? Forms.ColourBMD.ColourValue.EMPTY : Forms.ColourBMD.ColourValue.UNKNOWN_DATE;
+                return ignoreUnknown ? ColourValues.ColourValue.EMPTY : ColourValues.ColourValue.UNKNOWN_DATE;
             TimeSpan ts = EndDate - StartDate;
             if (ts.Days > 365.25 * 10)
-                return Forms.ColourBMD.ColourValue.VERY_WIDE_DATE; // more than 10 years
+                return ColourValues.ColourValue.VERY_WIDE_DATE; // more than 10 years
             if (ts.Days > 365.25 * 2)
-                return Forms.ColourBMD.ColourValue.WIDE_DATE; // over 2 years less than 10 years
+                return ColourValues.ColourValue.WIDE_DATE; // over 2 years less than 10 years
             if (ts.Days > 365.25)
-                return Forms.ColourBMD.ColourValue.NARROW_DATE; // over 1 year less than 2 years
+                return ColourValues.ColourValue.NARROW_DATE; // over 1 year less than 2 years
             else if (ts.Days > 125)
-                return Forms.ColourBMD.ColourValue.JUST_YEAR_DATE; // more than 4 months less than 1 year
+                return ColourValues.ColourValue.JUST_YEAR_DATE; // more than 4 months less than 1 year
             else if (ts.Days > 0)
-                return Forms.ColourBMD.ColourValue.APPROX_DATE; // less than 4 months not exact
+                return ColourValues.ColourValue.APPROX_DATE; // less than 4 months not exact
             else
-                return Forms.ColourBMD.ColourValue.EXACT_DATE; // exact date
+                return ColourValues.ColourValue.EXACT_DATE; // exact date
         }
 
         #endregion

@@ -10,13 +10,13 @@ namespace FTAnalyzer
         string Relation { get; }
         string RelationToRoot { get; }
         
-        Forms.ColourBMD.ColourValue Birth { get; }
-        Forms.ColourBMD.ColourValue BaptChri { get; }
-        Forms.ColourBMD.ColourValue Marriage1 { get; }
-        Forms.ColourBMD.ColourValue Marriage2 { get; }
-        Forms.ColourBMD.ColourValue Marriage3 { get; }
-        Forms.ColourBMD.ColourValue Death { get; }
-        Forms.ColourBMD.ColourValue CremBuri { get; }
+        ColourValues.ColourValue Birth { get; }
+        ColourValues.ColourValue BaptChri { get; }
+        ColourValues.ColourValue Marriage1 { get; }
+        ColourValues.ColourValue Marriage2 { get; }
+        ColourValues.ColourValue Marriage3 { get; }
+        ColourValues.ColourValue Death { get; }
+        ColourValues.ColourValue CremBuri { get; }
         
         FactDate BirthDate { get; }
         FactDate DeathDate { get; }
