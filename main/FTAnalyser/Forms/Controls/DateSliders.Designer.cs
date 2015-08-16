@@ -85,7 +85,7 @@
             this.msExact.AnimationSpeed = MediaSlider.MediaSlider.AnimateSpeed.Normal;
             this.msExact.AutoScrollMargin = new System.Drawing.Size(0, 0);
             this.msExact.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.msExact.BackColor = System.Drawing.Color.Transparent;
+            this.msExact.BackColor = System.Drawing.SystemColors.Control;
             this.msExact.BackgroundImage = null;
             this.msExact.ButtonAccentColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.msExact.ButtonBorderColor = System.Drawing.Color.Black;
@@ -110,15 +110,14 @@
             this.msExact.TickColor = System.Drawing.Color.DarkGray;
             this.msExact.TickStyle = System.Windows.Forms.TickStyle.None;
             this.msExact.TickType = MediaSlider.MediaSlider.TickMode.Standard;
-            this.msExact.TrackBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.msExact.TrackBorderColor = System.Drawing.SystemColors.ControlDark;
             this.msExact.TrackDepth = 6;
-            this.msExact.TrackFillColor = System.Drawing.Color.Transparent;
+            this.msExact.TrackFillColor = System.Drawing.SystemColors.ControlLight;
             this.msExact.TrackProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(101)))), ((int)(((byte)(188)))));
             this.msExact.TrackShadow = false;
-            this.msExact.TrackShadowColor = System.Drawing.Color.DarkGray;
+            this.msExact.TrackShadowColor = System.Drawing.SystemColors.ControlDarkDark;
             this.msExact.TrackStyle = MediaSlider.MediaSlider.TrackType.Value;
             this.msExact.Value = 0;
-            this.msExact.ValueChanged += new MediaSlider.MediaSlider.ValueChangedDelegate(this.msExact_ValueChanged);
             // 
             // label6
             // 
@@ -136,7 +135,7 @@
             this.msApprox.AnimationSpeed = MediaSlider.MediaSlider.AnimateSpeed.Normal;
             this.msApprox.AutoScrollMargin = new System.Drawing.Size(0, 0);
             this.msApprox.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.msApprox.BackColor = System.Drawing.Color.Transparent;
+            this.msApprox.BackColor = System.Drawing.SystemColors.Control;
             this.msApprox.BackgroundImage = null;
             this.msApprox.ButtonAccentColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.msApprox.ButtonBorderColor = System.Drawing.Color.Black;
@@ -161,15 +160,14 @@
             this.msApprox.TickColor = System.Drawing.Color.DarkGray;
             this.msApprox.TickStyle = System.Windows.Forms.TickStyle.None;
             this.msApprox.TickType = MediaSlider.MediaSlider.TickMode.Standard;
-            this.msApprox.TrackBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.msApprox.TrackBorderColor = System.Drawing.SystemColors.ControlDark;
             this.msApprox.TrackDepth = 6;
-            this.msApprox.TrackFillColor = System.Drawing.Color.Transparent;
+            this.msApprox.TrackFillColor = System.Drawing.SystemColors.ControlLight;
             this.msApprox.TrackProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(101)))), ((int)(((byte)(188)))));
             this.msApprox.TrackShadow = false;
-            this.msApprox.TrackShadowColor = System.Drawing.Color.DarkGray;
+            this.msApprox.TrackShadowColor = System.Drawing.SystemColors.ControlDarkDark;
             this.msApprox.TrackStyle = MediaSlider.MediaSlider.TrackType.Value;
             this.msApprox.Value = 0;
-            this.msApprox.ValueChanged += new MediaSlider.MediaSlider.ValueChangedDelegate(this.msApprox_ValueChanged);
             // 
             // label5
             // 
@@ -187,7 +185,7 @@
             this.msJustYear.AnimationSpeed = MediaSlider.MediaSlider.AnimateSpeed.Normal;
             this.msJustYear.AutoScrollMargin = new System.Drawing.Size(0, 0);
             this.msJustYear.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.msJustYear.BackColor = System.Drawing.Color.Transparent;
+            this.msJustYear.BackColor = System.Drawing.SystemColors.Control;
             this.msJustYear.BackgroundImage = null;
             this.msJustYear.ButtonAccentColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.msJustYear.ButtonBorderColor = System.Drawing.Color.Black;
@@ -212,15 +210,14 @@
             this.msJustYear.TickColor = System.Drawing.Color.DarkGray;
             this.msJustYear.TickStyle = System.Windows.Forms.TickStyle.None;
             this.msJustYear.TickType = MediaSlider.MediaSlider.TickMode.Standard;
-            this.msJustYear.TrackBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.msJustYear.TrackBorderColor = System.Drawing.SystemColors.ControlDark;
             this.msJustYear.TrackDepth = 6;
-            this.msJustYear.TrackFillColor = System.Drawing.Color.Transparent;
+            this.msJustYear.TrackFillColor = System.Drawing.SystemColors.ControlLight;
             this.msJustYear.TrackProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(101)))), ((int)(((byte)(188)))));
             this.msJustYear.TrackShadow = false;
-            this.msJustYear.TrackShadowColor = System.Drawing.Color.DarkGray;
+            this.msJustYear.TrackShadowColor = System.Drawing.SystemColors.ControlDarkDark;
             this.msJustYear.TrackStyle = MediaSlider.MediaSlider.TrackType.Value;
             this.msJustYear.Value = 0;
-            this.msJustYear.ValueChanged += new MediaSlider.MediaSlider.ValueChangedDelegate(this.msJustYear_ValueChanged);
             // 
             // label4
             // 
@@ -238,7 +235,7 @@
             this.msNarrow.AnimationSpeed = MediaSlider.MediaSlider.AnimateSpeed.Normal;
             this.msNarrow.AutoScrollMargin = new System.Drawing.Size(0, 0);
             this.msNarrow.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.msNarrow.BackColor = System.Drawing.Color.Transparent;
+            this.msNarrow.BackColor = System.Drawing.SystemColors.Control;
             this.msNarrow.BackgroundImage = null;
             this.msNarrow.ButtonAccentColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.msNarrow.ButtonBorderColor = System.Drawing.Color.Black;
@@ -263,15 +260,14 @@
             this.msNarrow.TickColor = System.Drawing.Color.DarkGray;
             this.msNarrow.TickStyle = System.Windows.Forms.TickStyle.None;
             this.msNarrow.TickType = MediaSlider.MediaSlider.TickMode.Standard;
-            this.msNarrow.TrackBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.msNarrow.TrackBorderColor = System.Drawing.SystemColors.ControlDark;
             this.msNarrow.TrackDepth = 6;
-            this.msNarrow.TrackFillColor = System.Drawing.Color.Transparent;
+            this.msNarrow.TrackFillColor = System.Drawing.SystemColors.ControlLight;
             this.msNarrow.TrackProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(101)))), ((int)(((byte)(188)))));
             this.msNarrow.TrackShadow = false;
-            this.msNarrow.TrackShadowColor = System.Drawing.Color.DarkGray;
+            this.msNarrow.TrackShadowColor = System.Drawing.SystemColors.ControlDarkDark;
             this.msNarrow.TrackStyle = MediaSlider.MediaSlider.TrackType.Value;
             this.msNarrow.Value = 0;
-            this.msNarrow.ValueChanged += new MediaSlider.MediaSlider.ValueChangedDelegate(this.msNarrow_ValueChanged);
             // 
             // label3
             // 
@@ -289,7 +285,7 @@
             this.msWide.AnimationSpeed = MediaSlider.MediaSlider.AnimateSpeed.Normal;
             this.msWide.AutoScrollMargin = new System.Drawing.Size(0, 0);
             this.msWide.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.msWide.BackColor = System.Drawing.Color.Transparent;
+            this.msWide.BackColor = System.Drawing.SystemColors.Control;
             this.msWide.BackgroundImage = null;
             this.msWide.ButtonAccentColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.msWide.ButtonBorderColor = System.Drawing.Color.Black;
@@ -314,15 +310,14 @@
             this.msWide.TickColor = System.Drawing.Color.DarkGray;
             this.msWide.TickStyle = System.Windows.Forms.TickStyle.None;
             this.msWide.TickType = MediaSlider.MediaSlider.TickMode.Standard;
-            this.msWide.TrackBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.msWide.TrackBorderColor = System.Drawing.SystemColors.ControlDark;
             this.msWide.TrackDepth = 6;
-            this.msWide.TrackFillColor = System.Drawing.Color.Transparent;
+            this.msWide.TrackFillColor = System.Drawing.SystemColors.ControlLight;
             this.msWide.TrackProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(101)))), ((int)(((byte)(188)))));
             this.msWide.TrackShadow = false;
-            this.msWide.TrackShadowColor = System.Drawing.Color.DarkGray;
+            this.msWide.TrackShadowColor = System.Drawing.SystemColors.ControlDarkDark;
             this.msWide.TrackStyle = MediaSlider.MediaSlider.TrackType.Value;
             this.msWide.Value = 0;
-            this.msWide.ValueChanged += new MediaSlider.MediaSlider.ValueChangedDelegate(this.msWide_ValueChanged);
             // 
             // label2
             // 
@@ -340,7 +335,7 @@
             this.msVeryWide.AnimationSpeed = MediaSlider.MediaSlider.AnimateSpeed.Normal;
             this.msVeryWide.AutoScrollMargin = new System.Drawing.Size(0, 0);
             this.msVeryWide.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.msVeryWide.BackColor = System.Drawing.Color.Transparent;
+            this.msVeryWide.BackColor = System.Drawing.SystemColors.Control;
             this.msVeryWide.BackgroundImage = null;
             this.msVeryWide.ButtonAccentColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.msVeryWide.ButtonBorderColor = System.Drawing.Color.Black;
@@ -365,15 +360,14 @@
             this.msVeryWide.TickColor = System.Drawing.Color.DarkGray;
             this.msVeryWide.TickStyle = System.Windows.Forms.TickStyle.None;
             this.msVeryWide.TickType = MediaSlider.MediaSlider.TickMode.Standard;
-            this.msVeryWide.TrackBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.msVeryWide.TrackBorderColor = System.Drawing.SystemColors.ControlDark;
             this.msVeryWide.TrackDepth = 6;
-            this.msVeryWide.TrackFillColor = System.Drawing.Color.Transparent;
+            this.msVeryWide.TrackFillColor = System.Drawing.SystemColors.ControlLight;
             this.msVeryWide.TrackProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(101)))), ((int)(((byte)(188)))));
             this.msVeryWide.TrackShadow = false;
-            this.msVeryWide.TrackShadowColor = System.Drawing.Color.DarkGray;
+            this.msVeryWide.TrackShadowColor = System.Drawing.SystemColors.ControlDarkDark;
             this.msVeryWide.TrackStyle = MediaSlider.MediaSlider.TrackType.Value;
             this.msVeryWide.Value = 0;
-            this.msVeryWide.ValueChanged += new MediaSlider.MediaSlider.ValueChangedDelegate(this.msVeryWide_ValueChanged);
             // 
             // label1
             // 
@@ -391,7 +385,7 @@
             this.msUnknown.AnimationSpeed = MediaSlider.MediaSlider.AnimateSpeed.Normal;
             this.msUnknown.AutoScrollMargin = new System.Drawing.Size(0, 0);
             this.msUnknown.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.msUnknown.BackColor = System.Drawing.Color.Transparent;
+            this.msUnknown.BackColor = System.Drawing.SystemColors.Control;
             this.msUnknown.BackgroundImage = null;
             this.msUnknown.ButtonAccentColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.msUnknown.ButtonBorderColor = System.Drawing.Color.Black;
@@ -416,15 +410,14 @@
             this.msUnknown.TickColor = System.Drawing.Color.DarkGray;
             this.msUnknown.TickStyle = System.Windows.Forms.TickStyle.None;
             this.msUnknown.TickType = MediaSlider.MediaSlider.TickMode.Standard;
-            this.msUnknown.TrackBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.msUnknown.TrackBorderColor = System.Drawing.SystemColors.ControlDark;
             this.msUnknown.TrackDepth = 6;
-            this.msUnknown.TrackFillColor = System.Drawing.Color.Transparent;
+            this.msUnknown.TrackFillColor = System.Drawing.SystemColors.ControlLight;
             this.msUnknown.TrackProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(101)))), ((int)(((byte)(188)))));
             this.msUnknown.TrackShadow = false;
-            this.msUnknown.TrackShadowColor = System.Drawing.Color.DarkGray;
+            this.msUnknown.TrackShadowColor = System.Drawing.SystemColors.ControlDarkDark;
             this.msUnknown.TrackStyle = MediaSlider.MediaSlider.TrackType.Value;
             this.msUnknown.Value = 0;
-            this.msUnknown.ValueChanged += new MediaSlider.MediaSlider.ValueChangedDelegate(this.msUnknown_ValueChanged);
             // 
             // DateSliders
             // 
