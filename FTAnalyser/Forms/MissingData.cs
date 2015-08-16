@@ -29,7 +29,6 @@ namespace FTAnalyzer.Forms
             dsBirth.Scores.JustYearDate = 25;
             dsBirth.Scores.ApproxDate = 10;
             dsBirth.Scores.ExactDate = 0;
-
         }
     }
 }
