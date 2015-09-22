@@ -4,8 +4,8 @@ using System;
 
 namespace FactDateTest
 {
-    
-    
+
+
     /// <summary>
     ///This is a test class for FactDateTest and is intended
     ///to contain all FactDateTest Unit Tests
@@ -191,7 +191,7 @@ namespace FactDateTest
             target = new FactDate("15 FEB 1599/00");
             Assert.AreEqual(new DateTime(1600, 2, 15), target.StartDate);
             Assert.AreEqual(new DateTime(1600, 2, 15), target.EndDate);
-            
+
             // test some alternative date formats
             target = new FactDate("Q3 1947");
             Assert.AreEqual(new DateTime(1947, 6, 1), target.StartDate);
@@ -327,6 +327,13 @@ namespace FactDateTest
             Assert.IsTrue(census.Overlaps(CensusDate.UKCENSUS1911));
             census = new FactDate("FROM 1 JAN 1911 TO 2 APR 1911");
             Assert.IsTrue(census.Overlaps(CensusDate.UKCENSUS1911));
+        }
+
+        [TestMethod()]
+        public void FactDateFunctionsTest()
+        {
+            FactDate testdate = new FactDate("AFT 03 FEB 1688/89");
+            FactDate result = testdate.AddYears(1);
         }
     }
 }
