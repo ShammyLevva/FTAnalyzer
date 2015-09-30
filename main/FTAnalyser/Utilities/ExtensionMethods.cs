@@ -29,6 +29,8 @@ namespace FTAnalyzer.Utilities
             {
                 date = years >= 0 ? FactDate.MAXDATE : FactDate.MINDATE;
             }
+            if (date > FactDate.MAXDATE) date = FactDate.MAXDATE;
+            if (date < FactDate.MINDATE) date = FactDate.MINDATE;
             return date;
         }
     }
