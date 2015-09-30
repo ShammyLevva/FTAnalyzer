@@ -869,7 +869,7 @@ namespace FTAnalyzer
                     if (fam.Husband != null)
                     {
                         if (fam.Husband.BirthDate.IsKnown && fam.Husband.BirthDate.StartDate != FactDate.MINDATE)
-                            if (fam.Husband.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
+                            if (fam.Husband.BirthDate.StartDate.TryAddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
                                 minStart = CreateDate(fam.Husband.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
                         if (fam.Husband.DeathDate.IsKnown && fam.Husband.DeathDate.EndDate != FactDate.MAXDATE)
                             if (fam.Husband.DeathDate.EndDate.Year != FactDate.MAXDATE.Year && fam.Husband.DeathDate.EndDate.AddMonths(9) < minEnd)
@@ -878,7 +878,7 @@ namespace FTAnalyzer
                     if (fam.Wife != null)
                     {
                         if (fam.Wife.BirthDate.IsKnown && fam.Wife.BirthDate.StartDate != FactDate.MINDATE)
-                            if (fam.Wife.BirthDate.StartDate.AddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
+                            if (fam.Wife.BirthDate.StartDate.TryAddYears(Properties.GeneralSettings.Default.MinParentalAge) > minStart)
                                 minStart = CreateDate(fam.Wife.BirthDate.StartDate.Year + Properties.GeneralSettings.Default.MinParentalAge, 1, 1);
                         if (fam.Wife.DeathDate.IsKnown && fam.Wife.DeathDate.EndDate != FactDate.MAXDATE)
                             if (fam.Wife.DeathDate.EndDate.Year != FactDate.MAXDATE.Year && fam.Wife.DeathDate.EndDate < minEnd)
@@ -887,8 +887,8 @@ namespace FTAnalyzer
                 }
                 if (birthDate.EndDate <= minEnd && birthDate.EndDate != FactDate.MAXDATE)
                 {  // check for BEF XXXX types that are prevalent in my tree
-                    if (birthDate.StartDate == FactDate.MINDATE && birthDate.EndDate.AddYears(1) <= minEnd)
-                        minEnd = birthDate.EndDate.AddYears(1);
+                    if (birthDate.StartDate == FactDate.MINDATE && birthDate.EndDate.TryAddYears(1) <= minEnd)
+                        minEnd = birthDate.EndDate.TryAddYears(1);
                     else
                         minEnd = birthDate.EndDate;
                 }
@@ -900,7 +900,7 @@ namespace FTAnalyzer
                 if (minStart.Year == 1 && minStart != FactDate.MINDATE)
                     minStart = FactDate.MINDATE;
                 if (minEnd.Month == 1 && minEnd.Day == 1 && birthDate.EndDate.Month == 12 && birthDate.EndDate.Day == 31)
-                    minEnd = minEnd.AddYears(1).AddDays(-1); // year has rounded to 1st Jan when was upper year.
+                    minEnd = minEnd.TryAddYears(1).AddDays(-1); // year has rounded to 1st Jan when was upper year.
                 baseDate = new FactDate(minStart, minEnd);
                 if (birthDate != baseDate)
                     toAdd = baseDate;
@@ -998,7 +998,7 @@ namespace FTAnalyzer
                             toAdd = new FactDate(maxLiving, minDeath);
                         else if (deathDate.DateType == FactDate.FactDateType.BEF && minDeath != FactDate.MAXDATE
                               && deathDate.EndDate != FactDate.MAXDATE
-                              && deathDate.EndDate.AddYears(1) == minDeath)
+                              && deathDate.EndDate.TryAddYears(1) == minDeath)
                             toAdd = new FactDate(maxLiving, minDeath);
                         else
                             toAdd = new FactDate(maxLiving, deathDate.EndDate);
@@ -1077,7 +1077,7 @@ namespace FTAnalyzer
             {
                 minDeath = CreateDate(indiv.BirthDate.EndDate.Year + FactDate.MAXYEARS, 12, 31);
                 if (birthDateType == FactDate.FactDateType.BEF)
-                    minDeath = minDeath.AddYears(1);
+                    minDeath = minDeath.TryAddYears(1);
                 if (minDeath > now) // 110 years after birth is after todays date so we set to ignore
                     minDeath = FactDate.MAXDATE;
             }

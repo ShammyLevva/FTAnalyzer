@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer
 {
@@ -76,8 +77,8 @@ namespace FTAnalyzer
                 if (int.TryParse(year, out yearno))
                 {
                     if(startDate != FactDate.MINDATE && startDate.Year > yearno + 1)
-                        startDate = startDate.AddYears(-yearno);
-                    endDate = endDate.AddYears(-yearno);
+                        startDate = startDate.TryAddYears(-yearno);
+                    endDate = endDate.TryAddYears(-yearno);
                 }
                 if (int.TryParse(month, out monthno))
                 {
@@ -101,7 +102,7 @@ namespace FTAnalyzer
             age = laterDate.Year - birthDate.Year;
             if (age > 0)
             {
-                age -= Convert.ToInt32(laterDate.Date < birthDate.Date.AddYears(age));
+                age -= Convert.ToInt32(laterDate.Date < birthDate.Date.TryAddYears(age));
             }
             else
             {
@@ -118,8 +119,8 @@ namespace FTAnalyzer
                 return CalculatedBirthDate;
             else
             {
-                DateTime startDate = when.StartDate.AddYears(-MaxAge);
-                DateTime endDate = when.EndDate.AddYears(-MinAge);
+                DateTime startDate = when.StartDate.TryAddYears(-MaxAge);
+                DateTime endDate = when.EndDate.TryAddYears(-MinAge);
                 return new FactDate(startDate, endDate);
             }
         }
