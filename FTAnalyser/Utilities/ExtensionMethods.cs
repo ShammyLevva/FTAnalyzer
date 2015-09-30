@@ -16,5 +16,20 @@ namespace FTAnalyzer.Utilities
                 BindingFlags.Instance | BindingFlags.NonPublic);
             pi.SetValue(dgv, setting, null);
         }
+
+        public static DateTime TryAddYears(this DateTime date, int years)
+        {
+            // Make sure adding/subtracting years won't put date 
+            // over DateTime.MaxValue or below DateTime.MinValue
+            try
+            {
+                date = date.AddYears(years);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                date = years >= 0 ? FactDate.MAXDATE : FactDate.MINDATE;
+            }
+            return date;
+        }
     }
 }
