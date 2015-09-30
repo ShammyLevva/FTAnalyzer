@@ -333,7 +333,7 @@ namespace FactDateTest
         public void FactDateFunctionsTest()
         {
             FactDate testdate = new FactDate("AFT 03 FEB 1688/89");
-            FactDate result = testdate.AddYears(1);
+            //FactDate result = testdate.AddYears(1);
         }
     }
 }
