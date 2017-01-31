@@ -328,12 +328,5 @@ namespace FactDateTest
             census = new FactDate("FROM 1 JAN 1911 TO 2 APR 1911");
             Assert.IsTrue(census.Overlaps(CensusDate.UKCENSUS1911));
         }
-
-        [TestMethod()]
-        public void FactDateFunctionsTest()
-        {
-            FactDate testdate = new FactDate("AFT 03 FEB 1688/89");
-            //FactDate result = testdate.AddYears(1);
-        }
     }
 }
