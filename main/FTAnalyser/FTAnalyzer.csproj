@@ -101,8 +101,7 @@
     <ManifestCertificateThumbprint>544B2C041CECDDF973974E4355A5496DE4EA94F0</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>
-    </ManifestKeyFile>
+    <ManifestKeyFile>code signing certificate.crt.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -666,6 +665,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="code signing certificate.crt.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\FileHandling.settings">
