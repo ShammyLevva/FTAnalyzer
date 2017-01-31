@@ -883,6 +883,8 @@ namespace FTAnalyzer
         private string GetOriginalPlace(string match, string originalText, string stopText)
         {
             int spacePos = match.IndexOf(" ");
+            if(spacePos == -1)
+                return match.ClearWhiteSpace();
             string startPlace = match.Substring(0, spacePos);
             int matchPos = originalText.ToUpper().IndexOf(startPlace.ToUpper());
             int stopPos = originalText.ToUpper().IndexOf(stopText);
