@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml;
 using System.IO;
 using System.Windows.Forms;
+using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer
 {
@@ -148,6 +149,15 @@ namespace FTAnalyzer
                                     else
                                         xref = token2.Substring(1, token2.Length - 2);
                                     line = remainder(line);
+                                }
+                            }
+                            if (token1.Equals("CONT") || token1.Equals("CONC"))
+                            {
+                                // check if nextline does not start with a number ie: could be a wrapped line, if so then concatenate
+                                while (nextline != null && !nextline.StartsWithNumeric())
+                                {
+                                    line = line + "\n" + nextline.Trim();
+                                    nextline = reader.ReadLine();
                                 }
                             }
 
