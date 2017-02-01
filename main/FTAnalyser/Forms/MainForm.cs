@@ -37,9 +37,9 @@ namespace FTAnalyzer
 
         public MainForm()
         {
-            log.Info("Reached MainForm Constructor");
+            log.Debug("Reached MainForm Constructor");
             InitializeComponent();
-            log.Info("--Components Initialised");
+            log.Debug("--Components Initialised");
             loading = true;
             displayOptionsOnLoadToolStripMenuItem.Checked = Properties.GeneralSettings.Default.ReportOptions;
             ft.XmlErrorBox = rtbOutput;
@@ -52,27 +52,27 @@ namespace FTAnalyzer
             int pos = VERSION.IndexOf('-');
             string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
             DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
-            log.Info("--Database Initialised");
+            log.Debug("--Database Initialised");
             SetSavePath();
             BuildRecentList();
-            log.Info("Completed MainForm Constructor");
+            log.Debug("Completed MainForm Constructor");
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            log.Info("Reached MainForm_Load");
+            log.Debug("Reached MainForm_Load");
             boldFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Bold);
             normalFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Regular);
             RegisterEventHandlers();
-            log.Info("--Registed EventHandlers");
+            log.Debug("--Registed EventHandlers");
             this.Text = "Family Tree Analyzer v" + VERSION;
             SetHeightWidth();
             dgSurnames.AutoGenerateColumns = false;
             dgDuplicates.AutoGenerateColumns = false;
             rfhDuplicates = new ReportFormHelper(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
-            log.Info("--Setup ReportFormHelper");
+            log.Debug("--Setup ReportFormHelper");
             loading = false;
-            log.Info("Completed MainForm Load");
+            log.Debug("Completed MainForm Load");
         }
 
         private void RegisterEventHandlers()
