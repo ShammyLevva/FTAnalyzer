@@ -100,8 +100,9 @@ namespace FTAnalyzer.Utilities
                 if (dbVersion < programVersion)
                     UpgradeDatabase(dbVersion);
             }
-            catch (SQLiteException)
+            catch (SQLiteException e)
             {
+                log.Debug("Caught Exception in CheckDatabaseVersion " + e.Message);
                 UpgradeDatabase(new Version("0.0.0.0"));
             }
             log.Debug("--Leaving Checking Database Version");
@@ -109,16 +110,30 @@ namespace FTAnalyzer.Utilities
 
         private static Version GetDatabaseVersion()
         {
-            string db;
-            using (SQLiteConnection c = new SQLiteConnection(connectionString))
+            log.Debug("--Entered Get Database Version");
+            string db = null;
+            log.Debug("--About to try connection to DB " + connectionString);
+            try
             {
-                c.Open();
-                using (SQLiteCommand cmd = new SQLiteCommand("select Database from versions", c))
+                using (SQLiteConnection c = new SQLiteConnection(connectionString))
                 {
-                    db = (string)cmd.ExecuteScalar();
+                    log.Debug("--Got connection to DB " + connectionString);
+                    c.Open();
+                    log.Debug("--Opened DB connection");
+                    using (SQLiteCommand cmd = new SQLiteCommand("select Database from versions", c))
+                    {
+                        log.Debug("--About to execute DB command");
+                        db = (string)cmd.ExecuteScalar();
+                        log.Debug("--Executed DB command");
+                    }
                 }
             }
+            catch(Exception e)
+            {
+                log.Error("Error in GetDatabaseVersion " + e.Message);
+            }
             Version dbVersion = db == null ? new Version("0.0.0.0") : new Version(db);
+            log.Debug("--Leaving Get Database Version");
             return dbVersion;
         }
 
