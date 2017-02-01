@@ -21,14 +21,17 @@ namespace FTAnalyzer.Utilities
         public string DatabasePath { get; private set; }
         private Version ProgramVersion { get; set; }
         private bool restoring;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         #region Constructor/Destructor
         private DatabaseHelper()
         {
+            log.Debug("Entered DatabaseHelper Constructor");
             DatabasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer");
             CurrentFilename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\FTA-RestoreTemp.s3db");
             CheckDatabaseConnection();
             restoring = false;
+            log.Debug("Leaving DatabaseHelper Constructor");
         }
 
         public static DatabaseHelper Instance
@@ -63,11 +66,13 @@ namespace FTAnalyzer.Utilities
 
         private void CheckDatabaseConnection()
         {
+            log.Debug("Entering CheckDatabaseConnection");
             try
             {
                 Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\Geocodes.s3db");
                 if (!File.Exists(Filename))
                 {
+                    log.Debug("--No Database file " + Filename + " found");
                     string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer");
                     if (!Directory.Exists(path))
                         Directory.CreateDirectory(path);
@@ -77,14 +82,17 @@ namespace FTAnalyzer.Utilities
             }
             catch (Exception ex)
             {
+                log.Error("Error opening database. Error is :" + ex.Message);
                 MessageBox.Show("Error opening database. Error is :" + ex.Message, "FT Analyzer");
             }
+            log.Debug("Entering CheckDatabaseConnection");
         }
         #endregion
 
         #region Database Update Functions
         public void CheckDatabaseVersion(Version programVersion)
         {
+            log.Debug("--Entered Checking Database Version");
             try
             {
                 ProgramVersion = programVersion;
@@ -96,7 +104,8 @@ namespace FTAnalyzer.Utilities
             {
                 UpgradeDatabase(new Version("0.0.0.0"));
             }
-        }
+            log.Debug("--Leaving Checking Database Version");
+       }
 
         private static Version GetDatabaseVersion()
         {
