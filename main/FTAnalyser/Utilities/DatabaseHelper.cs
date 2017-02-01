@@ -1,13 +1,14 @@
-﻿using System;
-using System.Data;
-using System.IO;
-using System.Windows.Forms;
-using System.Linq;
-using FTAnalyzer.Forms;
+﻿using FTAnalyzer.Forms;
 using FTAnalyzer.Mapping;
 using GeoAPI.Geometries;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SQLite;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace FTAnalyzer.Utilities
 {

@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Windows.Forms;
-using FTAnalyzer.Mapping;
+﻿using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
-using GeoAPI.CoordinateSystems.Transformations;
 using GeoAPI.Geometries;
 using SharpMap.Data;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Web;
+using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
 {
