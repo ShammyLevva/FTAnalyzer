@@ -26,12 +26,10 @@ namespace FTAnalyzer.Utilities
         #region Constructor/Destructor
         private DatabaseHelper()
         {
-            log.Debug("Entered DatabaseHelper Constructor");
             DatabasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer");
             CurrentFilename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\FTA-RestoreTemp.s3db");
             CheckDatabaseConnection();
             restoring = false;
-            log.Debug("Leaving DatabaseHelper Constructor");
         }
 
         public static DatabaseHelper Instance
@@ -66,13 +64,11 @@ namespace FTAnalyzer.Utilities
 
         private void CheckDatabaseConnection()
         {
-            log.Debug("Entering CheckDatabaseConnection");
             try
             {
                 Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\Geocodes.s3db");
                 if (!File.Exists(Filename))
                 {
-                    log.Debug("--No Database file " + Filename + " found");
                     string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer");
                     if (!Directory.Exists(path))
                         Directory.CreateDirectory(path);
@@ -85,14 +81,12 @@ namespace FTAnalyzer.Utilities
                 log.Error("Error opening database. Error is :" + ex.Message);
                 MessageBox.Show("Error opening database. Error is :" + ex.Message, "FT Analyzer");
             }
-            log.Debug("Entering CheckDatabaseConnection");
         }
         #endregion
 
         #region Database Update Functions
         public void CheckDatabaseVersion(Version programVersion)
         {
-            log.Debug("--Entered Checking Database Version");
             try
             {
                 ProgramVersion = programVersion;
@@ -105,26 +99,19 @@ namespace FTAnalyzer.Utilities
                 log.Debug("Caught Exception in CheckDatabaseVersion " + e.Message);
                 UpgradeDatabase(new Version("0.0.0.0"));
             }
-            log.Debug("--Leaving Checking Database Version");
        }
 
         private static Version GetDatabaseVersion()
         {
-            log.Debug("--Entered Get Database Version");
             string db = null;
-            log.Debug("--About to try connection to DB " + connectionString);
             try
             {
                 using (SQLiteConnection c = new SQLiteConnection(connectionString))
                 {
-                    log.Debug("--Got connection to DB " + connectionString);
                     c.Open();
-                    log.Debug("--Opened DB connection");
                     using (SQLiteCommand cmd = new SQLiteCommand("select Database from versions", c))
                     {
-                        log.Debug("--About to execute DB command");
                         db = (string)cmd.ExecuteScalar();
-                        log.Debug("--Executed DB command");
                     }
                 }
             }
@@ -133,7 +120,6 @@ namespace FTAnalyzer.Utilities
                 log.Error("Error in GetDatabaseVersion " + e.Message);
             }
             Version dbVersion = db == null ? new Version("0.0.0.0") : new Version(db);
-            log.Debug("--Leaving Get Database Version");
             return dbVersion;
         }
 
