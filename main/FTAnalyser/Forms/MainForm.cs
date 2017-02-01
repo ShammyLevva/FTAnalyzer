@@ -109,6 +109,9 @@ namespace FTAnalyzer
         {
             if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
             {
+                log.Debug("Running Network Deployed App");
+                Debugger.Break();
+                log.Debug("skipped over debugger break");
                 Version ver = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
                 return string.Format("{0}.{1}.{2}.{3}", ver.Major, ver.Minor, ver.Build, ver.Revision);
             }
