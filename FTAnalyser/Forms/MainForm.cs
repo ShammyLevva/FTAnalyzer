@@ -22,7 +22,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "5.2.1.0";
+        public static string VERSION = "5.3.0.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -37,9 +37,7 @@ namespace FTAnalyzer
 
         public MainForm()
         {
-            log.Debug("Reached MainForm Constructor");
             InitializeComponent();
-            log.Debug("--Components Initialised");
             loading = true;
             displayOptionsOnLoadToolStripMenuItem.Checked = Properties.GeneralSettings.Default.ReportOptions;
             ft.XmlErrorBox = rtbOutput;
@@ -52,27 +50,21 @@ namespace FTAnalyzer
             int pos = VERSION.IndexOf('-');
             string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
             DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
-            log.Debug("--Database Initialised");
             SetSavePath();
             BuildRecentList();
-            log.Debug("Completed MainForm Constructor");
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            log.Debug("Reached MainForm_Load");
             boldFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Bold);
             normalFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Regular);
             RegisterEventHandlers();
-            log.Debug("--Registed EventHandlers");
             this.Text = "Family Tree Analyzer v" + VERSION;
             SetHeightWidth();
             dgSurnames.AutoGenerateColumns = false;
             dgDuplicates.AutoGenerateColumns = false;
             rfhDuplicates = new ReportFormHelper(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
-            log.Debug("--Setup ReportFormHelper");
             loading = false;
-            log.Debug("Completed MainForm Load");
         }
 
         private void RegisterEventHandlers()
@@ -109,9 +101,6 @@ namespace FTAnalyzer
         {
             if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
             {
-                log.Debug("--Running Network Deployed App");
-                MessageBox.Show("Stop here");
-                log.Debug("--skipped over debugger break");
                 Version ver = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
                 return string.Format("{0}.{1}.{2}.{3}", ver.Major, ver.Minor, ver.Build, ver.Revision);
             }
