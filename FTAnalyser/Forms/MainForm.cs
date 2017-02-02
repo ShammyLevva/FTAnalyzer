@@ -116,7 +116,7 @@ namespace FTAnalyzer
                 DateTime lastWarning = Properties.GeneralSettings.Default.LastXPWarning;
                 if (lastWarning.AddDays(14.0) < DateTime.Now)
                 {
-                    MessageBox.Show("You are running an antique version of Windows that is no longer supported as of 8th April 2014.\nPlease be aware that FTAnalyzer is likely to cease to work on such an ancient version of windows at some point in the near future.", "FTAnalyzer");
+                    MessageBox.Show("You are running an antique version of Windows that is no longer supported as of 8th April 2014.\nPlease be aware that FTAnalyzer has ceased to work on such an ancient version of Windows.", "FTAnalyzer");
                     Properties.GeneralSettings.Default.LastXPWarning = DateTime.Now;
                     Properties.GeneralSettings.Default.Save();
                 }
