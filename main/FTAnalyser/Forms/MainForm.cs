@@ -22,7 +22,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "5.3.0.0";
+        public static string VERSION = "5.3.1.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -639,7 +639,7 @@ namespace FTAnalyzer
         private void childAgeProfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Statistics s = Statistics.Instance;
-            MessageBox.Show(s.ChildrenBirthProfiles(), "Birth Profile Information", "FTAnalyzer");
+            MessageBox.Show(s.ChildrenBirthProfiles(), "Birth Profile Information");
         }
 
         private void viewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)

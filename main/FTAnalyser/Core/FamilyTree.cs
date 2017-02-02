@@ -1879,7 +1879,12 @@ namespace FTAnalyzer
             switch (censusProvider)
             {
                 case 0: uri = BuildAncestryQuery(censusCountry, censusYear, person); break;
-                case 1: uri = BuildFindMyPastQuery(censusCountry, censusYear, person); break;
+                case 1:
+                    if(censusYear == 1939)
+                        uri = BuildFindMyPast1939Query(censusCountry, person);
+                    else
+                        uri = BuildFindMyPastQuery(censusCountry, censusYear, person);
+                    break;
                 case 2: uri = BuildFreeCenQuery(censusCountry, censusYear, person); break;
                 case 3: uri = BuildFamilySearchQuery(censusCountry, censusYear, person); break;
             }
@@ -2166,6 +2171,60 @@ namespace FTAnalyzer
             uri.Query = query.ToString();
             return @"http://www.awin1.com/cread.php?awinmid=2114&awinaffid=88963&clickref=FTACensusSearch&p=" + uri.ToString();
         }
+
+        private string BuildFindMyPast1939Query(string censusCountry, Individual person)
+        {
+            // new http://search.findmypast.co.uk/results/world-records/1939-register?firstname=frederick&firstname_variants=true&lastname=deakin&lastname_variants=true&yearofbirth=1879
+            FactDate censusFactDate = CensusDate.UKCENSUS1939;
+            UriBuilder uri = new UriBuilder();
+            uri.Host = "search.findmypast.co.uk";
+            uri.Path = "/results/world-records/1939-register";
+            StringBuilder query = new StringBuilder();
+
+            if (person.Forenames != "?" && person.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
+            {
+                int pos = person.Forenames.IndexOf(" ");
+                string forenames = person.Forenames;
+                if (pos > 0)
+                    forenames = person.Forenames.Substring(0, pos); //strip out any middle names as searches better without then
+                query.Append("firstname=" + HttpUtility.UrlEncode(forenames) + "&");
+                query.Append("firstname_variants=true&");
+            }
+            string surname = person.SurnameAtDate(censusFactDate);
+            if (surname != "?" && surname.ToUpper() != Individual.UNKNOWN_NAME)
+            {
+                query.Append("lastName=" + HttpUtility.UrlEncode(surname) + "&");
+                query.Append("lastname_variants=true&");
+            }
+            if (person.BirthDate.IsKnown)
+            {
+                int startYear = person.BirthDate.StartDate.Year;
+                int endYear = person.BirthDate.EndDate.Year;
+                int year, range;
+                if (startYear == FactDate.MINDATE.Year)
+                {
+                    year = endYear - 9;
+                    range = 10;
+                }
+                else if (endYear == FactDate.MAXDATE.Year)
+                {
+                    year = startYear + 9;
+                    range = 10;
+                }
+                else
+                {
+                    year = (endYear + startYear + 1) / 2;
+                    range = (endYear - startYear + 3) / 2;
+                    if (range > 5) range = 10;
+                    if (year > 1939) year = 1939;
+                }
+                query.Append("yearofbirth=" + year + "&");
+                query.Append("yearofbirth_offset=" + range + "&");
+            }
+            uri.Query = query.ToString();
+            return @"http://www.awin1.com/cread.php?awinmid=2114&awinaffid=88963&clickref=FTACensusSearch&p=" + uri.ToString();
+        }
+
         #endregion
 
         #region Birth/Marriage/Death Searching
