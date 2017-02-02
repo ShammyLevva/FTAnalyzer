@@ -257,7 +257,7 @@ namespace FTAnalyzer
             {
                 List<IDisplayFact> allGeocodedFacts = new List<IDisplayFact>();
                 foreach (Fact f in AllFacts)
-                    if (f.Location.IsGeoCoded(false))
+                    if (f.Location.IsGeoCoded(false) && f.Location.GeocodeStatus != FactLocation.Geocode.UNKNOWN)
                         allGeocodedFacts.Add(new DisplayFact(this, f));
                 allGeocodedFacts.Sort();
                 return allGeocodedFacts;
