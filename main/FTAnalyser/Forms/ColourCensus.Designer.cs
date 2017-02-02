@@ -66,6 +66,7 @@
             this.C1891 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.C1901 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.C1911 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C1939 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.US1790 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.US1800 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.US1810 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -130,6 +131,7 @@
             this.C1891,
             this.C1901,
             this.C1911,
+            this.C1939,
             this.US1790,
             this.US1800,
             this.US1810,
@@ -488,6 +490,17 @@
             this.C1911.ReadOnly = true;
             this.C1911.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.C1911.Width = 60;
+            // 
+            // C1939
+            // 
+            this.C1939.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.C1939.DataPropertyName = "C1939";
+            this.C1939.HeaderText = "1939 National Register";
+            this.C1939.MinimumWidth = 60;
+            this.C1939.Name = "C1939";
+            this.C1939.ReadOnly = true;
+            this.C1939.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.C1939.Width = 60;
             // 
             // US1790
             // 
@@ -915,6 +928,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn C1891;
         private System.Windows.Forms.DataGridViewTextBoxColumn C1901;
         private System.Windows.Forms.DataGridViewTextBoxColumn C1911;
+        private System.Windows.Forms.DataGridViewTextBoxColumn C1939;
         private System.Windows.Forms.DataGridViewTextBoxColumn US1790;
         private System.Windows.Forms.DataGridViewTextBoxColumn US1800;
         private System.Windows.Forms.DataGridViewTextBoxColumn US1810;

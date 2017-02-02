@@ -104,6 +104,7 @@ namespace Controls
                 cbCensusDate.Items.Add(CensusDate.UKCENSUS1891);
                 cbCensusDate.Items.Add(CensusDate.UKCENSUS1901);
                 cbCensusDate.Items.Add(CensusDate.UKCENSUS1911);
+                cbCensusDate.Items.Add(CensusDate.UKCENSUS1939);
             }
             else if (location.Equals(Countries.IRELAND))
             {

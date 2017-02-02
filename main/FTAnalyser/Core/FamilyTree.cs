@@ -798,7 +798,7 @@ namespace FTAnalyzer
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Problem calculating Loose Births. Error was " + ex.Message);
+                    MessageBox.Show("Problem calculating Loose Births. Error was " + ex.Message, "FTAnalyzer");
                 }
                 looseBirths = result;
                 return result;
@@ -973,7 +973,7 @@ namespace FTAnalyzer
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Problem calculating Loose Deaths. Error was " + ex.Message);
+                    MessageBox.Show("Problem calculating Loose Deaths. Error was " + ex.Message, "FTAnalyzer");
                 }
                 looseDeaths = result;
                 return result;
@@ -1933,7 +1933,7 @@ namespace FTAnalyzer
                 }
                 else if (Countries.IsKnownCountry(country))
                 {
-                    MessageBox.Show("Sorry searching the " + country + " census on FamilySearch for " + censusYear + " is not supported by FTAnalyzer at this time", "FT Analyzer");
+                    MessageBox.Show("Sorry searching the " + country + " census on FamilySearch for " + censusYear + " is not supported by FTAnalyzer at this time", "FTAnalyzer");
                     return null;
                 }
             }
@@ -2023,7 +2023,7 @@ namespace FTAnalyzer
         {
             if (!censusCountry.Equals(Countries.UNITED_KINGDOM) && !censusCountry.Equals("Unknown"))
             {
-                MessageBox.Show("Sorry only UK searches can be done on FreeCEN.", "FT Analyzer");
+                MessageBox.Show("Sorry only UK searches can be done on FreeCEN.", "FTAnalyzer");
                 return null;
             }
             FactDate censusFactDate = new FactDate(censusYear.ToString());
@@ -2257,7 +2257,7 @@ namespace FTAnalyzer
 
         private string BuildFreeBMDQuery(SearchType st, Individual individual, FactDate factdate)
         {
-            MessageBox.Show(Properties.Messages.NotYet, "FT Analyzer");
+            MessageBox.Show(Properties.Messages.NotYet, "FTAnalyzer");
             return null;
         }
 
@@ -2571,7 +2571,7 @@ namespace FTAnalyzer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading previously geocoded data. " + ex.Message, "FT Analyzer");
+                MessageBox.Show("Error loading previously geocoded data. " + ex.Message, "FTAnalyzer");
             }
         }
 
@@ -2757,7 +2757,7 @@ namespace FTAnalyzer
             if (_cancelDuplicates)
             {
                 pb.Value = 0;
-                MessageBox.Show("Possible Duplicate Search Cancelled", "FT Analyzer");
+                MessageBox.Show("Possible Duplicate Search Cancelled", "FTAnalyzer");
                 tb.Minimum = 1;
                 tb.Maximum = 10;
                 tb.Enabled = true;
@@ -3028,7 +3028,7 @@ namespace FTAnalyzer
             catch (Exception)
             {
                 log.Error("Error processing wiki date for " + dateNode);
-                MessageBox.Show("Error processing wiki date for " + dateNode);
+                MessageBox.Show("Error processing wiki date for " + dateNode, "FTAnalyzer");
                 fd = defaultDate;
             }
             return fd;
@@ -3094,7 +3094,7 @@ namespace FTAnalyzer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading CSV location data from " + csvFilename + "\nError was " + ex.Message, "FT Analyzer");
+                MessageBox.Show("Error loading CSV location data from " + csvFilename + "\nError was " + ex.Message, "FTAnalyzer");
             }
             pb.Visible = false;
             label.Text = string.Empty;

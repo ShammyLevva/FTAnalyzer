@@ -230,7 +230,7 @@ namespace FTAnalyzer.Forms
             }
             else
             {
-                MessageBox.Show("You have no parents older than " + minAge + " at time of children's birth.", "FT Analyzer");
+                MessageBox.Show("You have no parents older than " + minAge + " at time of children's birth.", "FTAnalyzer");
                 return false;
             }
         }
