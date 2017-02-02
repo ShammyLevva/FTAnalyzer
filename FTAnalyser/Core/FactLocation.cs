@@ -240,7 +240,7 @@ namespace FTAnalyzer
             catch (Exception e)
             {
                 LOCAL_GOOGLE_FIXES = new Dictionary<Tuple<int, string>, string>();
-                MessageBox.Show("Error processing user defined GoogleFixes.xml file. File will be ignored.\n\nError was : " + e.Message, "FT Analyzer");
+                MessageBox.Show("Error processing user defined GoogleFixes.xml file. File will be ignored.\n\nError was : " + e.Message, "FTAnalyzer");
             }
         }
 

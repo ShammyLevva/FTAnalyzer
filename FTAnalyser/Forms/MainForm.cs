@@ -146,7 +146,7 @@ namespace FTAnalyzer
                         HourGlass(false);
                         AddFileToRecentList(filename);
                         this.Text = "Family Tree Analyzer v" + VERSION + ". Analysing: " + filename;
-                        MessageBox.Show("Gedcom File " + filename + " Loaded", "FT Analyzer");
+                        MessageBox.Show("Gedcom File " + filename + " Loaded", "FTAnalyzer");
                     }
                     else
                         CloseGEDCOM(true);
@@ -154,13 +154,13 @@ namespace FTAnalyzer
             }
             catch (IOException ex)
             {
-                MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message, "FT Analyzer");
+                MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message, "FTAnalyzer");
             }
             catch (Exception ex2)
             {
                 string message = ex2.Message + (ex2.InnerException != null ? ex2.InnerException.Message : string.Empty);
                 MessageBox.Show("Error: Problem processing your file. Please try again.\n" +
-                    "If this problem persists please report this at http://ftanalyzer.codeplex.com. Error was: " + ex2.Message + "\n" + ex2.InnerException, "FT Analyzer");
+                    "If this problem persists please report this at http://ftanalyzer.codeplex.com. Error was: " + ex2.Message + "\n" + ex2.InnerException, "FTAnalyzer");
                 CleanUp();
             }
             finally
@@ -253,7 +253,7 @@ namespace FTAnalyzer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Found a problem starting up.\nPlease report this at http://ftanalyzer.codeplex.com\nThe error was :" + ex.Message, "FT Analyzer");
+                MessageBox.Show("Found a problem starting up.\nPlease report this at http://ftanalyzer.codeplex.com\nThe error was :" + ex.Message, "FTAnalyzer");
             }
         }
 
@@ -502,7 +502,7 @@ namespace FTAnalyzer
             {
                 ft.UpdateRootIndividual(ind.IndividualID, pbRelationships);
                 dgIndividuals.Refresh();
-                MessageBox.Show("Root person set as " + ind.Name + "\n\n" + ft.PrintRelationCount(), "FT Analyzer");
+                MessageBox.Show("Root person set as " + ind.Name + "\n\n" + ft.PrintRelationCount(), "FTAnalyzer");
             }
             HourGlass(false);
         }
@@ -542,7 +542,7 @@ namespace FTAnalyzer
                 else
                 {
                     frmGoogleMap.Dispose();
-                    MessageBox.Show("Unable to find location : " + loc.GetLocation(locType), "FT Analyzer");
+                    MessageBox.Show("Unable to find location : " + loc.GetLocation(locType), "FTAnalyzer");
                 }
             }
             HourGlass(false);
@@ -564,7 +564,7 @@ namespace FTAnalyzer
                 else
                 {
                     frmBingMap.Dispose();
-                    MessageBox.Show("Unable to find location : " + loc.GetLocation(locType), "FT Analyzer");
+                    MessageBox.Show("Unable to find location : " + loc.GetLocation(locType), "FTAnalyzer");
                 }
             }
             this.Cursor = Cursors.Default;
@@ -604,9 +604,9 @@ namespace FTAnalyzer
             if (loc == null)
             {
                 if (tabCtrlLocations.SelectedTab.Text == "Tree View")
-                    MessageBox.Show("Location selected isn't valid to show on the map.", "FT Analyzer");
+                    MessageBox.Show("Location selected isn't valid to show on the map.", "FTAnalyzer");
                 else
-                    MessageBox.Show("Nothing selected. Please select a location to show on the map.", "FT Analyzer");
+                    MessageBox.Show("Nothing selected. Please select a location to show on the map.", "FTAnalyzer");
                 return locType;
             }
             if (locType == FactLocation.UNKNOWN)
@@ -639,7 +639,7 @@ namespace FTAnalyzer
         private void childAgeProfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Statistics s = Statistics.Instance;
-            MessageBox.Show(s.ChildrenBirthProfiles(), "Birth Profile Information");
+            MessageBox.Show(s.ChildrenBirthProfiles(), "Birth Profile Information", "FTAnalyzer");
         }
 
         private void viewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)
@@ -669,10 +669,10 @@ namespace FTAnalyzer
                 catch (Exception)
                 {
                     if (result != DialogResult.Cancel)
-                        MessageBox.Show("Invalid Age entered", "FT Analyzer");
+                        MessageBox.Show("Invalid Age entered", "FTAnalyzer");
                 }
                 if (age < 13 || age > 90)
-                    MessageBox.Show("Please enter an age between 13 and 90", "FT Analyzer");
+                    MessageBox.Show("Please enter an age between 13 and 90", "FTAnalyzer");
             } while ((result != DialogResult.Cancel) && (age < 13 || age > 90));
             if (result == DialogResult.OK)
             {
@@ -1058,7 +1058,7 @@ namespace FTAnalyzer
                         tabSelector.SelectedTab = tabDisplayProgress;
                         mnuRestore.Enabled = true;
                         mnuLoadLocationsCSV.Enabled = true;
-                        MessageBox.Show(Properties.ErrorMessages.FTA_0002, "Error : FTA_0002");
+                        MessageBox.Show(Properties.ErrorMessages.FTA_0002, "FTAnalyzer Error : FTA_0002");
                     }
                     return;
                 }
@@ -1508,7 +1508,7 @@ namespace FTAnalyzer
         #region ToolStrip Clicks
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is Family Tree Analyzer version " + VERSION, "FT Analyzer");
+            MessageBox.Show("This is Family Tree Analyzer version " + VERSION, "FTAnalyzer");
         }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1662,17 +1662,17 @@ namespace FTAnalyzer
         private void backupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ft.Geocoding)
-                MessageBox.Show("You need to stop Geocoding before you can export the database", "FT Analyzer");
+                MessageBox.Show("You need to stop Geocoding before you can export the database", "FTAnalyzer");
             else
             {
-                ft.BackupDatabase(saveDatabase, "FT Analyzer zip file created by v" + VERSION);
+                ft.BackupDatabase(saveDatabase, "FTAnalyzer zip file created by v" + VERSION);
             }
         }
 
         private void restoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ft.Geocoding)
-                MessageBox.Show("You need to stop Geocoding before you can import the database", "FT Analyzer");
+                MessageBox.Show("You need to stop Geocoding before you can import the database", "FTAnalyzer");
             else
             {
                 string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();
@@ -2114,9 +2114,9 @@ namespace FTAnalyzer
             }
             if (!fileLoaded)
                 if (files.Length > 1)
-                    MessageBox.Show("Unable to load File. None of the files dragged and dropped were *.ged files", "FT Analyzer");
+                    MessageBox.Show("Unable to load File. None of the files dragged and dropped were *.ged files", "FTAnalyzer");
                 else
-                    MessageBox.Show("Unable to load File. The file dragged and dropped wasn't a *.ged file", "FT Analyzer");
+                    MessageBox.Show("Unable to load File. The file dragged and dropped wasn't a *.ged file", "FTAnalyzer");
         }
 
         private void mainForm_DragEnter(object sender, DragEventArgs e)
@@ -2413,12 +2413,12 @@ namespace FTAnalyzer
                     string path = Path.GetDirectoryName(saveFileDialog.FileName);
                     Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
                     WriteFile(results, saveFileDialog.FileName);
-                    MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease upload it to http://ftanalyzer.codeplex.com in the issues section, if you feel you have standard census references that should be recognised." + privateWarning, "FT Analyzer");
+                    MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease upload it to http://ftanalyzer.codeplex.com in the issues section, if you feel you have standard census references that should be recognised." + privateWarning, "FTAnalyzer");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "FT Analyzer");
+                MessageBox.Show(ex.Message, "FTAnalyzer");
             }
         }
 
@@ -2509,7 +2509,7 @@ namespace FTAnalyzer
 
         private void btnStandardMissingData_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Not Implemented Yet");
+            MessageBox.Show("Not Implemented Yet", "FTAnalyzer");
         }
 
         private void btnAdvancedMissingData_Click(object sender, EventArgs e)
@@ -2851,7 +2851,7 @@ namespace FTAnalyzer
         {
             DialogResult result = MessageBox.Show("It is recommended you backup your Geocoding database first.\nDo you want to backup now?", "FTAnalyzer", MessageBoxButtons.YesNoCancel);
             if (result == System.Windows.Forms.DialogResult.Yes)
-                ft.BackupDatabase(saveDatabase, "FT Analyzer zip file created by v" + VERSION);
+                ft.BackupDatabase(saveDatabase, "FTAnalyzer zip file created by v" + VERSION);
             if (result != System.Windows.Forms.DialogResult.Cancel)
                 ft.LoadLocationData(pb, label, defaultIndex);
         }

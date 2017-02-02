@@ -147,7 +147,7 @@ namespace FTAnalyzer.Forms
         {
             if (CensusDate.VALUATIONROLLS.Contains(CensusDate))
                 return string.Empty;
-            return "Double click to search " + cbCensusSearchProvider.Text + " for this person's census record. Shift Double click to display thier facts.";
+            return "Double click to search " + cbCensusSearchProvider.Text + " for this person's census record. Shift Double click to display their facts.";
         }
 
         private void dgCensus_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -205,7 +205,7 @@ namespace FTAnalyzer.Forms
                 if (frmGoogleMap.SetLocation(loc, loc.Level))
                     frmGoogleMap.Show();
                 else
-                    MessageBox.Show("Unable to find location : " + loc.ToString(), "FT Analyzer");
+                    MessageBox.Show("Unable to find location : " + loc.ToString(), "FTAnalyzer");
             }
             this.Cursor = Cursors.Default;
         }
@@ -221,7 +221,7 @@ namespace FTAnalyzer.Forms
                 if (frmBingMap.SetLocation(loc, loc.Level))
                     frmBingMap.Show();
                 else
-                    MessageBox.Show("Unable to find location : " + loc.ToString(), "FT Analyzer");
+                    MessageBox.Show("Unable to find location : " + loc.ToString(), "FTAnalyzer");
             }
             this.Cursor = Cursors.Default;
         }

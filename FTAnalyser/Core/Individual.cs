@@ -1165,6 +1165,11 @@ namespace FTAnalyzer
             get { return ColourCensusReport(CensusDate.UKCENSUS1911); }
         }
 
+        public int C1939
+        {
+            get { return ColourCensusReport(CensusDate.UKCENSUS1939); }
+        }
+
         public int Ire1901
         {
             get { return ColourCensusReport(CensusDate.IRELANDCENSUS1901); }
@@ -1353,7 +1358,7 @@ namespace FTAnalyzer
 
         public bool AliveOnAnyCensus(string country)
         {
-            int ukCensus = C1841 + C1851 + C1861 + C1871 + C1881 + C1891 + C1901 + C1911;
+            int ukCensus = C1841 + C1851 + C1861 + C1871 + C1881 + C1891 + C1901 + C1911 + C1939;
             if (country.Equals(Countries.UNITED_STATES))
                 return (US1790 + US1800 + US1810 + US1810 + US1820 + US1830 + US1840 + US1850 + US1860 + US1870 + US1880 + US1890 + US1900 + US1910 + US1920 + US1930 + US1940) > 0;
             else if (country.Equals(Countries.CANADA))

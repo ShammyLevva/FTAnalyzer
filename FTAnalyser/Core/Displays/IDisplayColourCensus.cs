@@ -21,6 +21,7 @@ namespace FTAnalyzer
         int C1891 { get; }
         int C1901 { get; }
         int C1911 { get; }
+        int C1939 { get; }
 
         int US1790 { get; }
         int US1800 { get; }

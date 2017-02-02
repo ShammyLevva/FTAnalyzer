@@ -98,7 +98,7 @@ namespace FTAnalyzer.Forms
             else
             {
                 startColumnIndex = dgReportSheet.Columns["C1841"].Index;
-                endColumnIndex = dgReportSheet.Columns["C1911"].Index;
+                endColumnIndex = dgReportSheet.Columns["C1939"].Index;
             }
             // show those columns that should be visible for the country in use
             for (int index = startColumnIndex; index <= endColumnIndex; index++)
@@ -154,7 +154,13 @@ namespace FTAnalyzer.Forms
                             cell.ToolTipText = "Not alive at time of census.";
                             break;
                         case 1:
-                            cell.ToolTipText = "No census information entered. Double click to search " + cbCensusSearchProvider.SelectedItem + ".";
+                            if (e.ColumnIndex == C1939.Index)
+                                if (cbCensusSearchProvider.SelectedItem.Equals("Find My Past"))
+                                    cell.ToolTipText = "No census information entered. Double click to search " + cbCensusSearchProvider.SelectedItem + ".";
+                                else
+                                    cell.ToolTipText = "No census information entered. No search on " + cbCensusSearchProvider.SelectedItem + " available.";
+                            else
+                                cell.ToolTipText = "No census information entered. Double click to search " + cbCensusSearchProvider.SelectedItem + ".";
                             break;
                         case 2:
                             cell.ToolTipText = "Census entered but no Lost Cousins flag set.";
@@ -206,19 +212,27 @@ namespace FTAnalyzer.Forms
                     {
                         IDisplayColourCensus person = (IDisplayColourCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
                         int censusYear;
-                        if(country.Equals(Countries.UNITED_STATES))
+                        if (country.Equals(Countries.UNITED_STATES))
                             censusYear = (1790 + (e.ColumnIndex - startColumnIndex) * 10);
                         else if (country.Equals(Countries.CANADA))
-                            if(e.ColumnIndex <= dgReportSheet.Columns["Can1901"].Index)
+                            if (e.ColumnIndex <= dgReportSheet.Columns["Can1901"].Index)
                                 censusYear = (1851 + (e.ColumnIndex - startColumnIndex) * 10);
                             else
                                 censusYear = (1901 + (e.ColumnIndex - dgReportSheet.Columns["Can1901"].Index) * 5);
                         else if (country.Equals(Countries.IRELAND))
                             censusYear = (1901 + (e.ColumnIndex - startColumnIndex) * 10);
                         else
-                            censusYear = (1841 + (e.ColumnIndex - startColumnIndex) * 10);
+                        {
+                            if (e.ColumnIndex == C1939.Index)
+                                censusYear = 1939;
+                            else
+                                censusYear = (1841 + (e.ColumnIndex - startColumnIndex) * 10);
+                        }
                         string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
-                        ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
+                        if (censusYear == 1939 && !cbCensusSearchProvider.SelectedItem.Equals("Find My Past"))
+                            MessageBox.Show("Unable to search the 1939 National Register on " + cbCensusSearchProvider.SelectedItem + ".", "FTAnalyzer");
+                        else
+                            ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
                     }
                 }
                 else if (e.ColumnIndex >= 0)
@@ -251,8 +265,9 @@ namespace FTAnalyzer.Forms
                             (row.C1861 == toFind || row.C1861 == 0) && (row.C1871 == toFind || row.C1871 == 0) &&
                             (row.C1881 == toFind || row.C1881 == 4 || row.C1881 == 0) && (row.C1891 == toFind || row.C1891 == 0) &&
                             (row.C1901 == toFind || row.C1901 == 0) && (row.C1911 == toFind || row.C1911 == 4 || row.C1911 == 0) &&
+                            (row.C1939 == toFind || row.C1939 == 4 || row.C1939 == 0) &&
                             !(row.C1841 == 0 && row.C1851 == 0 && row.C1861 == 0 && row.C1871 == 0 &&
-                              row.C1881 == 0 && row.C1891 == 0 && row.C1901 == 0 && row.C1911 == 0 && toFind != 0)) // exclude all greys
+                              row.C1881 == 0 && row.C1891 == 0 && row.C1901 == 0 && row.C1911 == 0 && row.C1939 == 0 && toFind != 0)) // exclude all greys
                             result.Add(row);
                     }
                     else
@@ -260,14 +275,15 @@ namespace FTAnalyzer.Forms
                             (row.C1861 == toFind || row.C1861 == 0) && (row.C1871 == toFind || row.C1871 == 0) &&
                             (row.C1881 == toFind || row.C1881 == 0) && (row.C1891 == toFind || row.C1891 == 0) &&
                             (row.C1901 == toFind || row.C1901 == 0) && (row.C1911 == toFind || row.C1911 == 0) &&
+                            (row.C1939 == toFind || row.C1939 == 0) &&
                             !(row.C1841 == 0 && row.C1851 == 0 && row.C1861 == 0 && row.C1871 == 0 && 
-                              row.C1881 == 0 && row.C1891 == 0 && row.C1901 == 0 && row.C1911 == 0 && toFind != 0)) // exclude all greys
+                              row.C1881 == 0 && row.C1891 == 0 && row.C1901 == 0 && row.C1911 == 0 && row.C1939 == 0 && toFind != 0)) // exclude all greys
                             result.Add(row);
                 }
                 else
                 {
                     if (row.C1841 == toFind || row.C1851 == toFind || row.C1861 == toFind || row.C1871 == toFind ||
-                       row.C1881 == toFind || row.C1891 == toFind || row.C1901 == toFind || row.C1911 == toFind)
+                       row.C1881 == toFind || row.C1891 == toFind || row.C1901 == toFind || row.C1911 == toFind || row.C1939 == toFind)
                         result.Add(row);
                 }
 

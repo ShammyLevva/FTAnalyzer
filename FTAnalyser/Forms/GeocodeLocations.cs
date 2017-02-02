@@ -523,7 +523,7 @@ namespace FTAnalyzer.Forms
         {
             if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy)
             {
-                MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FT Analyzer");
+                MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
             }
             else
             {
@@ -806,7 +806,7 @@ namespace FTAnalyzer.Forms
         {
             if (reverseGeocodeBackgroundWorker.IsBusy)
             {
-                MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FT Analyzer");
+                MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
             }
             else
             {
@@ -965,7 +965,7 @@ namespace FTAnalyzer.Forms
                 DatabaseHelper.Instance.ResetPartials();
                 ft.LoadGeoLocationsFromDataBase(null);
                 ft.WriteGeocodeStatstoRTB("Geocoding status after reset partials:");
-                MessageBox.Show("Partials have been reset", "FT Analyzer");
+                MessageBox.Show("Partials have been reset", "FTAnalyzer");
             }
         }
 
@@ -996,7 +996,7 @@ namespace FTAnalyzer.Forms
         {
             if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy)
             {
-                MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FT Analyzer");
+                MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
             }
             else
             {

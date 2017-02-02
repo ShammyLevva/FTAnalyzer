@@ -79,7 +79,7 @@ namespace FTAnalyzer.Utilities
             catch (Exception ex)
             {
                 log.Error("Error opening database. Error is :" + ex.Message);
-                MessageBox.Show("Error opening database. Error is :" + ex.Message, "FT Analyzer");
+                MessageBox.Show("Error opening database. Error is :" + ex.Message, "FTAnalyzer");
             }
         }
         #endregion
@@ -161,7 +161,7 @@ namespace FTAnalyzer.Utilities
                         {
                             cmd.ExecuteNonQuery();
                         }
-                        MessageBox.Show("Please note that due to fixes in the way Google reports\nlocations your 'Google Matched' geocodes have been reset.", "FT Analyzer");
+                        MessageBox.Show("Please note that due to fixes in the way Google reports\nlocations your 'Google Matched' geocodes have been reset.", "FTAnalyzer");
                     }
                     if (dbVersion < v3_1_2_0)
                     {
@@ -173,7 +173,7 @@ namespace FTAnalyzer.Utilities
                             DialogResult result = MessageBox.Show("In order to improve speed of the maps a database upgrade is needed.\nThis may take several minutes and must be allowed to complete.\nYou must backup your database first. Ok to proceed?", "Database upgrading", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                             Application.UseWaitCursor = true;
                             if (result == DialogResult.Yes)
-                                proceed = FamilyTree.Instance.BackupDatabase(new SaveFileDialog(), "FT Analyzer zip file created by Database upgrade for v3.2.1.0");
+                                proceed = FamilyTree.Instance.BackupDatabase(new SaveFileDialog(), "FTAnalyzer zip file created by Database upgrade for v3.2.1.0");
                             Application.UseWaitCursor = false;
                         }
                         if (proceed)
@@ -217,7 +217,7 @@ namespace FTAnalyzer.Utilities
                             {
                                 cmd.ExecuteNonQuery();
                             }
-                            MessageBox.Show("Database lat/long upgrade complete", "FT Analyzer");
+                            MessageBox.Show("Database lat/long upgrade complete", "FTAnalyzer");
                         }
                         else
                         {
@@ -240,7 +240,7 @@ namespace FTAnalyzer.Utilities
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error upgrading database. Error is :" + ex.Message, "FT Analyzer");
+                MessageBox.Show("Error upgrading database. Error is :" + ex.Message, "FTAnalyzer");
             }
         }
         #endregion
