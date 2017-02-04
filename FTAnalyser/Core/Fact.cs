@@ -674,6 +674,7 @@ namespace FTAnalyzer
                 (tag == "Census 1891" && !FactDate.Overlaps(CensusDate.UKCENSUS1891)) ||
                 (tag == "Census 1901" && !FactDate.Overlaps(CensusDate.UKCENSUS1901)) ||
                 (tag == "Census 1911" && !FactDate.Overlaps(CensusDate.UKCENSUS1911)) ||
+                (tag == "Census 1939" && !FactDate.Overlaps(CensusDate.UKCENSUS1939)) ||
                 (tag == "Census" && !CensusDate.IsUKCensusYear(FactDate, false)) ||
                 ((tag == "Lost Cousins" || tag == "LostCousins") && !CensusDate.IsLostCousinsCensusYear(FactDate, false))
                 && FactDate.DateString.Length >= 4)
@@ -705,7 +706,8 @@ namespace FTAnalyzer
                 (tag == "Census 1881" && !yearAdjusted.Overlaps(CensusDate.UKCENSUS1881)) ||
                 (tag == "Census 1891" && !yearAdjusted.Overlaps(CensusDate.UKCENSUS1891)) ||
                 (tag == "Census 1901" && !yearAdjusted.Overlaps(CensusDate.UKCENSUS1901)) ||
-                (tag == "Census 1911" && !yearAdjusted.Overlaps(CensusDate.UKCENSUS1911)))
+                (tag == "Census 1911" && !yearAdjusted.Overlaps(CensusDate.UKCENSUS1911)) ||
+                (tag == "Census 1939" && !yearAdjusted.Overlaps(CensusDate.UKCENSUS1939)))
             {
                 this.FactErrorMessage = "UK Census fact error date '" + FactDate + "' doesn't match '" + tag + "' tag. Check for incorrect date entered.";
                 this.FactErrorLevel = FactError.ERROR;
