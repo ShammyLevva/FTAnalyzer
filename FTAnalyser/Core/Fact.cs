@@ -98,6 +98,8 @@ namespace FTAnalyzer
             CUSTOM_TAGS.Add("CENSUS 1891", CENSUS);
             CUSTOM_TAGS.Add("CENSUS 1901", CENSUS);
             CUSTOM_TAGS.Add("CENSUS 1911", CENSUS);
+            CUSTOM_TAGS.Add("CENSUS 1939", CENSUS);
+            CUSTOM_TAGS.Add("NATIONAL REGISTER 1939", CENSUS);
             CUSTOM_TAGS.Add("CENSUS 1790", CENSUS);
             CUSTOM_TAGS.Add("CENSUS 1800", CENSUS);
             CUSTOM_TAGS.Add("CENSUS 1810", CENSUS);
