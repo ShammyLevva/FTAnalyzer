@@ -154,7 +154,7 @@ namespace FTAnalyzer
                             if (token1.Equals("CONT") || token1.Equals("CONC"))
                             {
                                 // check if nextline does not start with a number ie: could be a wrapped line, if so then concatenate
-                                while (nextline != null && !nextline.StartsWithNumeric())
+                                while (nextline != null && !nextline.Trim().StartsWithNumeric())
                                 {
                                     line = line + "\n" + nextline.Trim();
                                     nextline = reader.ReadLine();
