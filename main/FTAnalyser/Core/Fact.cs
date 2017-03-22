@@ -162,8 +162,6 @@ namespace FTAnalyzer
             COMMENT_FACTS.Add(UNMARRIED);
             COMMENT_FACTS.Add(UNKNOWN);
             COMMENT_FACTS.Add(FAMILYSEARCH);
-            COMMENT_FACTS.Add(LOSTCOUSINS);
-            COMMENT_FACTS.Add(LC_FTA);
             COMMENT_FACTS.Add(MISSING);
             COMMENT_FACTS.Add(DEGREE);
             COMMENT_FACTS.Add(EDUCATION);
