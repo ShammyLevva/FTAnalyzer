@@ -54,16 +54,17 @@ namespace FTAnalyzer
         private static readonly string SCOT_CENSUS_PATTERN2 = @"(\(?GROS *\)?)?(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
         private static readonly string SCOT_CENSUS_PATTERN3 = @"(\(?GROS *\)?)?(\d{3}[AB]?)\/(\d{2}[AB]?) Page *(\d{1,4})";
 
-        private static readonly string US_CENSUS_PATTERN = @"Year *(\d{4}) *Census *(.*?) *Roll *(.*?) *P(age)? *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
-        private static readonly string US_CENSUS_PATTERN2 = @"Census *(\d{4}) *(.*?) *Roll *(.*?) *P(age)? *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
-        private static readonly string US_CENSUS_PATTERN3 = @"Census *(\d{4}) *(.*?) *Ward *(.*?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?) *P(age)? *(\d{1,4}[AB]?)";
-        private static readonly string US_CENSUS_PATTERN4 = @"Census *(\d{4}) *(.*?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?) *P(age)? *(\d{1,4}[AB]?)";
-        private static readonly string US_CENSUS_1940_PATTERN = @"District *(\d{1,5}[AB]?-?\d{0,4}[AB]?).*?P(age)? *(\d{1,3}[AB]?).*?T627 ?,? *(\d{1,5}-?[AB]?)";
-        private static readonly string US_CENSUS_1940_PATTERN2 = @"ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?).*? *P(age)? *(\d{1,3}[AB]?).*?T627.*?roll ?(\d{1,5}-?[AB]?)";
-        private static readonly string US_CENSUS_1940_PATTERN3 = @"1940 *(.*?)(Roll)? *T627_(.*?) *P(age)? *(\d{1,4}[AB]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
+        private static readonly string US_CENSUS_PATTERN = @"Year *(\d{4}) *Census *(.*?) *Roll *(.*?) *Film (.*?) *P(age)? *(\d{1,4}[ABCD]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
+        private static readonly string US_CENSUS_PATTERN1A = @"Year *(\d{4}) *Census *(.*?) *Roll *(.*?) *P(age)? *(\d{1,4}[ABCD]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
+        private static readonly string US_CENSUS_PATTERN2 = @"Census *(\d{4}) *(.*?) *Roll *(.*?) *P(age)? *(\d{1,4}[ABCD]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
+        private static readonly string US_CENSUS_PATTERN3 = @"Census *(\d{4}) *(.*?) *Ward *(.*?) *ED *(\d{1,5}[ABCD]?-?\d{0,4}[AB]?) *P(age)? *(\d{1,4}[AB]?)";
+        private static readonly string US_CENSUS_PATTERN4 = @"Census *(\d{4}) *(.*?) *ED *(\d{1,5}[AB]?-?\d{0,4}[ABCD]?) *P(age)? *(\d{1,4}[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN = @"District *(\d{1,5}[AB]?-?\d{0,4}[AB]?).*?P(age)? *(\d{1,3}[ABCD]?).*?T627 ?,? *(\d{1,5}-?[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN2 = @"ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?).*? *P(age)? *(\d{1,3}[ABCD]?).*?T627.*?roll ?(\d{1,5}-?[AB]?)";
+        private static readonly string US_CENSUS_1940_PATTERN3 = @"1940 *(.*?)(Roll)? *T627_(.*?) *P(age)? *(\d{1,4}[ABCD]?) *ED *(\d{1,5}[AB]?-?\d{0,4}[AB]?)";
 
-        private static readonly string CANADA_CENSUS_PATTERN = @"Year *(\d{4}) *Census *(.*?) *Roll *(.*?) *P(age)? *(\d{1,4}[AB]?) *Family *(\d{1,4})";
-        private static readonly string CANADA_CENSUS_PATTERN2 = @"(\d{4}) *Census[ -]*District *(\d{1,5})\/(\d{0,4}[A-Z]{0,4}) *P(age)? *(\d{1,4}[AB]?) *Family *(\d{1,4})";
+        private static readonly string CANADA_CENSUS_PATTERN = @"Year *(\d{4}) *Census *(.*?) *Roll *(.*?) *P(age)? *(\d{1,4}[ABCD]?) *Family *(\d{1,4})";
+        private static readonly string CANADA_CENSUS_PATTERN2 = @"(\d{4}) *Census[ -]*District *(\d{1,5})\/(\d{0,4}[A-Z]{0,4}) *P(age)? *(\d{1,4}[ABCD]?) *Family *(\d{1,4})";
 
         private static readonly string LC_CENSUS_PATTERN_EW = @"(\d{1,5})\/(\d{1,3})\/(\d{1,3}).*?England & Wales (1841|1881)";
         private static readonly string LC_CENSUS_PATTERN_1911_EW = @"(\d{1,5})\/(\d{1,3}).*?England & Wales 1911";
@@ -119,6 +120,7 @@ namespace FTAnalyzer
             censusRegexs["SCOT_CENSUS_PATTERN3"] = new Regex(SCOT_CENSUS_PATTERN3, RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
             censusRegexs["US_CENSUS_PATTERN"] = new Regex(US_CENSUS_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            censusRegexs["US_CENSUS_PATTERN1A"] = new Regex(US_CENSUS_PATTERN1A, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             censusRegexs["US_CENSUS_PATTERN2"] = new Regex(US_CENSUS_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             censusRegexs["US_CENSUS_PATTERN3"] = new Regex(US_CENSUS_PATTERN3, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             censusRegexs["US_CENSUS_PATTERN4"] = new Regex(US_CENSUS_PATTERN4, RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -325,6 +327,8 @@ namespace FTAnalyzer
                         .Replace("Sheet number and letter", "Page", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Sheet", "Page", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Affiliate Film Number", " ", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("Family History Film", "Film ", StringComparison.InvariantCultureIgnoreCase)
+                        .Replace("FamilyHistory Film", "Film ", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Place", " ", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Family Number", "Family", StringComparison.InvariantCultureIgnoreCase)
                         .Replace("Family No", "Family", StringComparison.InvariantCultureIgnoreCase)
@@ -697,6 +701,17 @@ namespace FTAnalyzer
                 this.Class = "US" + matcher.Groups[1].ToString();
                 this.Place = GetOriginalPlace(matcher.Groups[2].ToString(), originalText, "ROLL");
                 this.Roll = matcher.Groups[3].ToString();
+                this.Page = matcher.Groups[6].ToString();
+                this.ED = matcher.Groups[7].ToString();
+                SetFlagsandCountry(false, false, Countries.UNITED_STATES, ReferenceStatus.GOOD, matcher.Value);
+                return true;
+            }
+            matcher = censusRegexs["US_CENSUS_PATTERN1A"].Match(text);
+            if (matcher.Success)
+            {
+                this.Class = "US" + matcher.Groups[1].ToString();
+                this.Place = GetOriginalPlace(matcher.Groups[2].ToString(), originalText, "ROLL");
+                this.Roll = matcher.Groups[3].ToString();
                 this.Page = matcher.Groups[5].ToString();
                 this.ED = matcher.Groups[6].ToString();
                 SetFlagsandCountry(false, false, Countries.UNITED_STATES, ReferenceStatus.GOOD, matcher.Value);
@@ -724,7 +739,7 @@ namespace FTAnalyzer
                 SetFlagsandCountry(false, false, Countries.UNITED_STATES, ReferenceStatus.GOOD, matcher.Value);
                 return true;
             }
-            matcher = censusRegexs["US_CENSUS_PATTERN"].Match(text);
+            matcher = censusRegexs["US_CENSUS_PATTERN4"].Match(text);
             if (matcher.Success)
             {
                 this.Class = "US" + matcher.Groups[1].ToString();
