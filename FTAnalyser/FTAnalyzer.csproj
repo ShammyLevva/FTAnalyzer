@@ -44,10 +44,10 @@
     <TargetCulture>en</TargetCulture>
     <ProductName>FT Analyzer</ProductName>
     <PublisherName>FT Analyzer</PublisherName>
-    <MinimumRequiredVersion>5.3.1.2</MinimumRequiredVersion>
+    <MinimumRequiredVersion>5.3.1.3</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>5.3.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
