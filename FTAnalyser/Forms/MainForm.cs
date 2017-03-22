@@ -1350,7 +1350,7 @@ namespace FTAnalyzer
             if (moreThanOneLCfact > 0)
                 rtbLostCousins.AppendText("Duplicate Lost Cousins facts: " + moreThanOneLCfact + "\n");
             if (LCtotal > total)
-                rtbLostCousins.AppendText("Lost Cousins fact with no Lost Cousins census country : " + (LCtotal - total) + "\n");
+                rtbLostCousins.AppendText("Lost Cousins fact where Census fact has no country : " + (LCtotal - total) + "\n");
             //if (noCountryTotal > 0)
             //    rtbLostCousins.AppendText("Census facts with no census country and no Lost Cousins fact : " + noCountryTotal + "\n");
             if (moreThanOneLCfact > 0 || LCtotal > total) // || noCountryTotal > 0)
