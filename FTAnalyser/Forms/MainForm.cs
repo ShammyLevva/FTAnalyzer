@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "5.3.1.3";
+        public static string VERSION = "5.3.1.4";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -2036,11 +2036,14 @@ namespace FTAnalyzer
         private void ckbFactSelect_MouseClick(object sender, MouseEventArgs e)
         {
             int index = ckbFactSelect.IndexFromPoint(e.Location);
-            string factType = ckbFactSelect.Items[index].ToString();
-            bool selected = ckbFactSelect.GetItemChecked(index);
-            ckbFactSelect.SetItemChecked(index, !selected);
-            Application.UserAppDataRegistry.SetValue("Fact: " + factType, !selected);
-            SetShowFactsButton();
+            if (index > 0)
+            {
+                string factType = ckbFactSelect.Items[index].ToString();
+                bool selected = ckbFactSelect.GetItemChecked(index);
+                ckbFactSelect.SetItemChecked(index, !selected);
+                Application.UserAppDataRegistry.SetValue("Fact: " + factType, !selected);
+                SetShowFactsButton();
+            }
         }
 
         private void SetShowFactsButton()
