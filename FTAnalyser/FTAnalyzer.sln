@@ -1,12 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTAnalyzer", "FTAnalyzer.csproj", "{799ECA65-6748-4B7C-BBD5-429C19E02161}"
-	ProjectSection(ProjectDependencies) = postProject
-		{3D793607-BF4F-4E49-870F-191E187C2EAD} = {3D793607-BF4F-4E49-870F-191E187C2EAD}
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F} = {2DDE32B6-2BC5-44D3-8BE2-E7705645558F}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTA-UnitTests", "FactDateTest\FTA-UnitTests.csproj", "{B1B5657E-4843-42BC-B859-FFEE313A1680}"
 EndProject
@@ -30,10 +26,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{918894
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTile", "..\BruTile\BruTile\BruTile.csproj", "{3D793607-BF4F-4E49-870F-191E187C2EAD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTile.Desktop", "..\BruTile\BruTile.Desktop\BruTile.Desktop.csproj", "{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSGazetteerProcessor", "..\OSGazetteerProcessor\OSGazetteerProcessor.csproj", "{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}"
 EndProject
@@ -146,51 +138,6 @@ Global
 		{4B9BE5FD-303E-4270-9C4D-FA3BDE6C34EB}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{4B9BE5FD-303E-4270-9C4D-FA3BDE6C34EB}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 		{4B9BE5FD-303E-4270-9C4D-FA3BDE6C34EB}.SingleImage|x86.ActiveCfg = Release|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.CD_ROM|x86.ActiveCfg = Release|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.DebugDSProjection|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.DebugDSProjection|Any CPU.Build.0 = Debug|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.DebugDSProjection|x86.ActiveCfg = Debug|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.DVD-5|x86.ActiveCfg = Debug|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.Release|x86.ActiveCfg = Release|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.ReleaseDSProjection|Any CPU.ActiveCfg = Release|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.ReleaseDSProjection|Any CPU.Build.0 = Release|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.ReleaseDSProjection|x86.ActiveCfg = Release|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.SingleImage|Any CPU.Build.0 = Release|Any CPU
-		{3D793607-BF4F-4E49-870F-191E187C2EAD}.SingleImage|x86.ActiveCfg = Release|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.CD_ROM|x86.ActiveCfg = Release|x86
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.CD_ROM|x86.Build.0 = Release|x86
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.DebugDSProjection|Any CPU.ActiveCfg = Debug|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.DebugDSProjection|Any CPU.Build.0 = Debug|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.DebugDSProjection|x86.ActiveCfg = Debug|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.DVD-5|x86.ActiveCfg = Debug|x86
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.DVD-5|x86.Build.0 = Debug|x86
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.Release|x86.ActiveCfg = Release|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.ReleaseDSProjection|Any CPU.ActiveCfg = Release|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.ReleaseDSProjection|Any CPU.Build.0 = Release|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.ReleaseDSProjection|x86.ActiveCfg = Release|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.SingleImage|Any CPU.Build.0 = Release|Any CPU
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.SingleImage|x86.ActiveCfg = Release|x86
-		{2DDE32B6-2BC5-44D3-8BE2-E7705645558F}.SingleImage|x86.Build.0 = Release|x86
 		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
 		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
 		{FB20C4F6-B32D-428D-AACC-26C7D0EC314F}.CD_ROM|x86.ActiveCfg = Release|Any CPU
@@ -243,35 +190,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = FTAnalyzer.csproj
-		SccLocalPath1 = .
-		SccProjectUniqueName2 = FactDateTest\\FTA-UnitTests.csproj
-		SccProjectName2 = FactDateTest
-		SccLocalPath2 = FactDateTest
-		SccProjectUniqueName3 = ..\\Printing.DataGridViewPrint\\Printing.DataGridViewPrint.csproj
-		SccProjectName3 = ../Printing.DataGridViewPrint
-		SccLocalPath3 = ..\\Printing.DataGridViewPrint
-		SccProjectUniqueName4 = ..\\DgvFilterPopup\\DgvFilterPopup.csproj
-		SccProjectName4 = ../DgvFilterPopup
-		SccLocalPath4 = ..\\DgvFilterPopup
-		SccProjectUniqueName5 = ..\\BruTile\\BruTile\\BruTile.csproj
-		SccProjectName5 = ../BruTile/BruTile
-		SccLocalPath5 = ..\\BruTile\\BruTile
-		SccProjectUniqueName6 = ..\\BruTile\\BruTile.Desktop\\BruTile.Desktop.csproj
-		SccProjectName6 = ../BruTile/BruTile.Desktop
-		SccLocalPath6 = ..\\BruTile\\BruTile.Desktop
-		SccProjectUniqueName7 = ..\\OSGazetteerProcessor\\OSGazetteerProcessor.csproj
-		SccProjectName7 = ../OSGazetteerProcessor
-		SccLocalPath7 = ..\\OSGazetteerProcessor
-		SccProjectUniqueName8 = ..\\MediaSlider\\MediaSlider.csproj
-		SccProjectName8 = ../MediaSlider
-		SccLocalPath8 = ..\\MediaSlider
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FTAnalyzer.vsmdi

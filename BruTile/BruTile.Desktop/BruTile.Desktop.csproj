@@ -81,12 +81,6 @@
     <Compile Include="Web\GoogleRequest.cs" />
     <Compile Include="Web\GoogleTileSource.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BruTile\BruTile.csproj">
-      <Project>{3d793607-bf4f-4e49-870f-191e187c2ead}</Project>
-      <Name>BruTile</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
