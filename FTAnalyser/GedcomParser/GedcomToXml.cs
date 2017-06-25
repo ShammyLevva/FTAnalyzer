@@ -107,7 +107,7 @@ namespace FTAnalyzer
                             cpos1 = line.IndexOf(' ');
                             if (cpos1 < 0) throw new Exception("No space in line");
 
-                            level = firstWord(line);
+                            level = FirstWord(line);
                             thislevel = Int32.Parse(level);
 
                             // check the level number
@@ -117,9 +117,9 @@ namespace FTAnalyzer
                             if (thislevel < 0)
                                 throw new Exception("Level number must not be negative");
 
-                            line = remainder(line);
-                            token1 = firstWord(line);
-                            line = remainder(line);
+                            line = Remainder(line);
+                            token1 = FirstWord(line);
+                            line = Remainder(line);
 
                             if (token1.StartsWith("@"))
                             {
@@ -127,8 +127,8 @@ namespace FTAnalyzer
                                     throw new Exception("Bad xref_id");
 
                                 iden = token1.Substring(1, token1.Length - 2);
-                                tag = firstWord(line);
-                                line = remainder(line);
+                                tag = FirstWord(line);
+                                line = Remainder(line);
                             }
                             else
                             {
@@ -141,14 +141,14 @@ namespace FTAnalyzer
                             {
                                 if (!token1.Equals("CONT") && !token1.Equals("CONC"))
                                 {
-                                    token2 = firstWord(line);
+                                    token2 = FirstWord(line);
                                     if (token2.Length == 1 || (!token2.EndsWith("@") && !token2.EndsWith("@,")))
                                         throw new Exception("Bad pointer value");
                                     if (token2.EndsWith("@,"))
                                         xref = token2.Substring(1, token2.Length - 3);
                                     else
                                         xref = token2.Substring(1, token2.Length - 2);
-                                    line = remainder(line);
+                                    line = Remainder(line);
                                 }
                             }
                             if (token1.Equals("CONT") || token1.Equals("CONC"))
@@ -248,11 +248,11 @@ namespace FTAnalyzer
         /**
          * Procedure to return the first word in a string
          */
-        private static string firstWord(string inp)
+        private static string FirstWord(string inp)
         {
             int i;
             i = inp.IndexOf(' ');
-            if (i == 0) return firstWord(inp.Trim());
+            if (i == 0) return FirstWord(inp.Trim());
             if (i < 0) return inp;
             return inp.Substring(0, i).Trim();
         }
@@ -261,11 +261,11 @@ namespace FTAnalyzer
           * Procedure to return the text after the first word in a string
           */
 
-        private static string remainder(string inp)
+        private static string Remainder(string inp)
         {
             int i;
             i = inp.IndexOf(' ');
-            if (i == 0) return remainder(inp.Trim());
+            if (i == 0) return Remainder(inp.Trim());
             if (i < 0) return "";
             return inp.Substring(i + 1).Trim();
         }

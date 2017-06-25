@@ -19,7 +19,7 @@ namespace FTAnalyzer
                 }
                 else
                 {
-                    int ansel = convertToAnsel(ch);
+                    int ansel = ConvertToAnsel(ch);
                     byteCount++;
                     if (ansel > 0xFF)
                         byteCount++;
@@ -40,7 +40,7 @@ namespace FTAnalyzer
                 }
                 else
                 {
-                    int ansel = convertToAnsel(ch);
+                    int ansel = ConvertToAnsel(ch);
                     if (ansel <= 0xFF)
                     {
                         bytes[j++] = (byte) ansel;
@@ -82,12 +82,12 @@ namespace FTAnalyzer
                 {
                     if ((i + 1 < byteIndex + byteCount) && (bytes[i + 1] > 0))
                     {
-                        ch = (char) convertTwoBytesToUnicode(b * 256 + bytes[i + 1]);
+                        ch = (char) ConvertTwoBytesToUnicode(b * 256 + bytes[i + 1]);
                         i++;
                     }
                     else
                     {
-                        ch = (char) convertOneByteToUnicode(b);
+                        ch = (char) ConvertOneByteToUnicode(b);
                     }
                 }
                 chars[j++] = ch;
@@ -105,7 +105,7 @@ namespace FTAnalyzer
             return byteCount;
         }
 
-        private int convertToAnsel(int unicode)
+        private int ConvertToAnsel(int unicode)
         {
           switch(unicode) {
 
@@ -490,7 +490,7 @@ namespace FTAnalyzer
         * Conversion table for ANSEL characters coded in one byte
         */
 
-        private int convertOneByteToUnicode(int ansel)
+        private int ConvertOneByteToUnicode(int ansel)
         {
             switch (ansel)
             {
@@ -569,7 +569,7 @@ namespace FTAnalyzer
         * Conversion table for ANSEL characters coded in two bytes
         */
 
-        private int convertTwoBytesToUnicode(int ansel)
+        private int ConvertTwoBytesToUnicode(int ansel)
         {
             switch (ansel)
             {
