@@ -10,6 +10,7 @@ using BruTile.Web;
 using SharpMap.Forms;
 using System.Drawing;
 using System.IO;
+using BruTile.Predefined;
 
 namespace FTAnalyzer.Forms.Controls
 {
@@ -45,7 +46,7 @@ namespace FTAnalyzer.Forms.Controls
 
         public void GetCurrentMapPreference()
         {
-            string mapPreference = Application.UserAppDataRegistry.GetValue("Default Map Background", "mnuGoogleMap").ToString();
+            string mapPreference = Application.UserAppDataRegistry.GetValue("Default Map Background", "mnuBingMapRoads").ToString();
             foreach (ToolStripMenuItem menu in this.DropDownItems)
             {
                 if (mapPreference.Equals(menu.Name))
@@ -70,14 +71,15 @@ namespace FTAnalyzer.Forms.Controls
             // Setup map selector menu
             this.DisplayStyle = ToolStripItemDisplayStyle.Text;
             this.DropDownItems.AddRange(new ToolStripItem[] {
-            this.mnuGoogleMap,
-            this.mnuGoogleSatellite,
+            //this.mnuGoogleMap,
+            //this.mnuGoogleSatellite,
             this.mnuOpenStreetMap,
             this.mnuBingMapAerial,
             this.mnuBingMapRoads,
             this.mnuBingMapHybrid,
-            this.mnuBingMapOS,
-            this.mnuNLSOSHistoric});
+            //this.mnuBingMapOS,
+            //this.mnuNLSOSHistoric
+            });
             this.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Name = "mnuMapStyle";
             this.Size = new System.Drawing.Size(71, 22);
@@ -191,27 +193,27 @@ namespace FTAnalyzer.Forms.Controls
                 menu.Checked = false;
             if(mapbox.Map.BackgroundLayer.Count > 0)
                 mapbox.Map.BackgroundLayer.RemoveAt(0);
-            if (sender == mnuGoogleMap)
+            //if (sender == mnuGoogleMap)
+            //{
+            //    mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
+            //            new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap",
+            //            new Color(), true, Path.Combine(Path.GetTempPath(), "GoogleTileCache")));
+            //    mnuGoogleMap.Checked = true;
+            //    UpdateLinkLabel(LinkLabelType.GOOGLE);
+            //}
+            //else if (sender == mnuGoogleSatellite)
+            //{
+            //    mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
+            //            new GoogleTileSource(GoogleMapType.GoogleSatellite), "GoogleSatellite",
+            //            new Color(), true, Path.Combine(Path.GetTempPath(), "GoogleTileCache")));
+            //    mnuGoogleSatellite.Checked = true;
+            //    UpdateLinkLabel(LinkLabelType.GOOGLE);
+            //    mnuGoogleSatellite.Visible = false;
+            //}
+            if (sender == mnuOpenStreetMap)
             {
                 mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                        new GoogleTileSource(GoogleMapType.GoogleMap), "GoogleMap",
-                        new Color(), true, Path.Combine(Path.GetTempPath(), "GoogleTileCache")));
-                mnuGoogleMap.Checked = true;
-                UpdateLinkLabel(LinkLabelType.GOOGLE);
-            }
-            else if (sender == mnuGoogleSatellite)
-            {
-                mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                        new GoogleTileSource(GoogleMapType.GoogleSatellite), "GoogleSatellite",
-                        new Color(), true, Path.Combine(Path.GetTempPath(), "GoogleTileCache")));
-                mnuGoogleSatellite.Checked = true;
-                UpdateLinkLabel(LinkLabelType.GOOGLE);
-                mnuGoogleSatellite.Visible = false;
-            }
-            else if (sender == mnuOpenStreetMap)
-            {
-                mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new OsmTileSource(), "OpenStreetMap",
+                    KnownTileSources.Create(KnownTileSource.OpenStreetMap), "OpenStreetMap",
                         new Color(), true, Path.Combine(Path.GetTempPath(), "OSMTileCache")));
                 mnuOpenStreetMap.Checked = true;
                 UpdateLinkLabel(LinkLabelType.OSM);
@@ -219,7 +221,7 @@ namespace FTAnalyzer.Forms.Controls
             else if (sender == mnuBingMapAerial)
             {
                 mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BingTileSource(BingRequest.UrlBing, null, BingMapType.Aerial), "BingMapAerial",
+                    KnownTileSources.Create(KnownTileSource.BingAerial), "BingMapAerial",
                         new Color(), true, Path.Combine(Path.GetTempPath(), "BingTileCache")));
                 mnuBingMapAerial.Checked = true;
                 UpdateLinkLabel(LinkLabelType.BING);
@@ -227,7 +229,7 @@ namespace FTAnalyzer.Forms.Controls
             else if (sender == mnuBingMapRoads)
             {
                 mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BingTileSource(BingRequest.UrlBing, null, BingMapType.Roads), "BingMapRoads",
+                    KnownTileSources.Create(KnownTileSource.BingRoads), "BingMapRoads",
                         new Color(), true, Path.Combine(Path.GetTempPath(), "BingTileCache")));
                 mnuBingMapRoads.Checked = true;
                 UpdateLinkLabel(LinkLabelType.BING);
@@ -235,27 +237,27 @@ namespace FTAnalyzer.Forms.Controls
             else if (sender == mnuBingMapHybrid)
             {
                 mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BingTileSource(BingRequest.UrlBing, null, BingMapType.Hybrid), "BingMapHybrid",
+                    KnownTileSources.Create(KnownTileSource.BingHybrid), "BingMapHybrid",
                         new Color(), true, Path.Combine(Path.GetTempPath(), "BingTileCache")));
                 mnuBingMapHybrid.Checked = true;
                 UpdateLinkLabel(LinkLabelType.BING);
             }
-            else if (sender == mnuBingMapOS)
-            {
-                mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new BingTileSource(new BingRequest(BingRequest.UrlBing, null, BingMapType.OS), null), "BingMapOS",
-                        new Color(), true, Path.Combine(Path.GetTempPath(), "BingTileCache")));
-                mnuBingMapOS.Checked = true;
-                UpdateLinkLabel(LinkLabelType.BING);
-            }
-            else if (sender == mnuNLSOSHistoric)
-            {
-                mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
-                    new OsmTileSource(new NLSRequest(), null), "NLSOSHistoric",
-                        new Color(), true, Path.Combine(Path.GetTempPath(), "OSMTileCache")));
-                mnuNLSOSHistoric.Checked = true;
-                UpdateLinkLabel(LinkLabelType.NLS);
-            }
+            //else if (sender == mnuBingMapOS)
+            //{
+            //    mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
+            //        new BingTileSource(new BingRequest(BingRequest.UrlBing, null, BingMapType.OS), null), "BingMapOS",
+            //            new Color(), true, Path.Combine(Path.GetTempPath(), "BingTileCache")));
+            //    mnuBingMapOS.Checked = true;
+            //    UpdateLinkLabel(LinkLabelType.BING);
+            //}
+            //else if (sender == mnuNLSOSHistoric)
+            //{
+            //    mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(
+            //        new OsmTileSource(new NLSRequest(), null), "NLSOSHistoric",
+            //            new Color(), true, Path.Combine(Path.GetTempPath(), "OSMTileCache")));
+            //    mnuNLSOSHistoric.Checked = true;
+            //    UpdateLinkLabel(LinkLabelType.NLS);
+            //}
             Application.UserAppDataRegistry.SetValue("Default Map Background", ((ToolStripMenuItem)sender).Name);
             mapbox.Refresh();
         }
