@@ -55,7 +55,7 @@ the download tab here</a>.</p>
 <h3>Installing the software</h3>
 <p>Installation is simple with the click once installer. Click the download button and run the application. This will then ask you to allow it to run once allowed it downloads and installs the application for you.<br>
 <br>
-<strong>NB. This program will require the Microsoft .Net 4 Client Profile to have been installed.</strong> This is usually present on most windows machines if not it can be downloaded free from Microsoft at
-<a href="http://www.microsoft.com/en-us/download/details.aspx?id=24872">http://www.microsoft.com/en-us/download/details.aspx?id=24872</a>&nbsp;and clicking the download link. Once downloaded simply run the file to install.</p>
+<strong>NB. This program will require the Microsoft .Net 4.6 to have been installed.</strong> This is usually present on most windows machines assuming that your machine is patched with the latest security updates. If not it can be downloaded free from Microsoft at
+<a href="https://www.microsoft.com/en-gb/download/details.aspx?id=48130">https://www.microsoft.com/en-gb/download/details.aspx?id=48130</a>&nbsp;and clicking the download link. Once downloaded simply run the file to install.</p>
 <h3><span style="font-size:11px">&nbsp;</span></h3>
 </div><div class="ClearBoth"></div>
