@@ -1,4 +1,5 @@
 <div class="wikidoc">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <h1>Family Tree Analyzer</h1>
  <h3>NOTE This documentation has been moved from Codeplex largely unchanged and requires a LOT of revision, in particular a lot of links will be broken or still refer back to Codeplex</h3>
 <p>Use FTAnalyzer to investigate your family tree in new and interesting ways, see where your ancestors lived and moved over time on the new maps feature. Find errors in your tree eg: childrens birthdates before parent was born. See lists of who is missing
