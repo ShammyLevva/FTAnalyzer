@@ -6,8 +6,9 @@
 ###############################################################################
 # Set behavior for published files to avoid normalising line endings.
 ###############################################################################
-*.deploy    merge=binary
-*.manifest  merge=binary
+*.manifest    binary
+*.application binary
+*.deploy      binary
 
 ###############################################################################
 # Set default behavior for command prompt diff.
