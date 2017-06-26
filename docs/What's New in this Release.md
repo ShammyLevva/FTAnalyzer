@@ -1,4 +1,10 @@
 <div class="wikidoc">
+<p><font color="#0000ff">Updated release &quot;Version 5.2.0.7&quot; for project FTAnalyzer, 31th Jan 2017</font>
+</p>
+<p><b>New Features</b><br>
+Added filter to loading GEDCOM so that badly formatted CONC or CONT text that wraps onto a line leaving invalid GEDCOM syntax is treated as a continuation of the previous line of text.
+If the Census checker finds a reference but its partial don't crash
+</p>
 <p><font color="#0000ff">Updated release &quot;Version 5.1.0.5&quot; for project FTAnalyzer, 11th Aug 2015</font>
 </p>
 <p><b>New Features</b><br>
