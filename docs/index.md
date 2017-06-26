@@ -7,8 +7,7 @@
 <p>Windows 10 &amp; 8.1 installs may require you to click More Info and accept the certificate the first time you run the app.</p>
 <h3><span style="font-size:1.17em">Helpful Guides to Using FTAnalyzer</span></h3>
 <p>There is now a series of helpful guides to downloading, installing and using FTAnalyzer. You can get them from
-<a title="FTAnalyzer Guides" href="https://ftanalyzer.codeplex.com/releases/view/122486" target="_blank">
-the download tab here</a>.</p>
+<a title="FTAnalyzer Guides" href="help_guides.md" target="_blank">here</a>.</p>
 <h3><span style="font-size:1.17em">Initial Features</span></h3>
 <p>This program is under constant development and suggestions for improvements and new features are very welcome. Please add suggestions via the Issues tab and add suggestion in the subject. There are Help pages available under the Documentation tab.</p>
 <p>Once you load your GEDCOM file you can start analysing your tree and displaying some basic reports. These reports include:</p>
