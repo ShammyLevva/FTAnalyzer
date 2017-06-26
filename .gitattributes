@@ -1,7 +1,13 @@
 ###############################################################################
-# Set default behavior to automatically normalize line endings.
+# Set default behavior to automatically normalise line endings.
 ###############################################################################
 * text=auto
+
+###############################################################################
+# Set behavior for published files to avoid normalising line endings.
+###############################################################################
+*.deploy    merge=binary
+*.manifest  merge=binary
 
 ###############################################################################
 # Set default behavior for command prompt diff.
