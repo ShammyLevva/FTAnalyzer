@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("FTAnalyzer")]
-[assembly: AssemblyCopyright("Copyright © Alexander Bisset & Deryck Brown 2010-2017")]
+[assembly: AssemblyCopyright("Copyright © Alexander Bisset & Deryck Brown 2010-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
