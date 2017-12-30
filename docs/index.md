@@ -1,5 +1,5 @@
 <div class="wikidoc">
- <h4>To install the latest version click <a href="http://www.ftanaylzer.com/install/">here.</a></h4>
+ <h4>To install the latest version click <a href="http://ftanalyzer.com/install/">here.</a></h4>
 <h4>NOTE This documentation has been moved from Codeplex largely unchanged and requires a LOT of revision, in particular a lot of links will be broken or still refer back to Codeplex</h4>
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?">
 <h1>Family Tree Analyzer</h1>
