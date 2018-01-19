@@ -19,7 +19,7 @@ namespace FTAnalyzer.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class ErrorMessages {
@@ -62,7 +62,7 @@ namespace FTAnalyzer.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to Unexpected Error Checking for inconsistencies in your data
-        ///Please report this on the issues page at http://ftanalyzer.codeplex.com
+        ///Please report this on the issues page at http://ftanalyzer.com/issues
         ///Error was:.
         /// </summary>
         internal static string FTA_0001 {

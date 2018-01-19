@@ -305,7 +305,7 @@ namespace FTAnalyzer.Forms
 
         private void btnHelp_Click(object sender, EventArgs e)
         {
-            HttpUtility.VisitWebsite("https://ftanalyzer.codeplex.com/wikipage?title=The%20Census%20Tab&referringTitle=Documentation");
+            HttpUtility.VisitWebsite("http://ftanalyzer.com/The%20Census%20Tab");
         }
     }
 }

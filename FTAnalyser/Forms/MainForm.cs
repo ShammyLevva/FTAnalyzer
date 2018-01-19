@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "6.0.1.0";
+        public static string VERSION = "6.0.2.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -890,12 +890,12 @@ namespace FTAnalyzer
 
         private void reportAnIssueToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HttpUtility.VisitWebsite("http://ftanalyzer.codeplex.com/workitem/list/basic");
+            HttpUtility.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/issues");
         }
 
         private void whatsNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HttpUtility.VisitWebsite("http://ftanalyzer.codeplex.com/wikipage?title=What%27s%20New%20in%20this%20Release%3f");
+            HttpUtility.VisitWebsite("http://ftanalyzer.com/Whats%20New%20in%20this%20Release");
         }
 
         private void mnuShowTimeline_Click(object sender, EventArgs e)
