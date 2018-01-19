@@ -1625,7 +1625,7 @@ namespace FTAnalyzer
                         }
                         else if (f.FactType == Fact.LOSTCOUSINS || f.FactType == Fact.LC_FTA)
                         {
-                            if (!CensusDate.IsCensusYear(f.FactDate, false))
+                            if (!CensusDate.IsCensusYear(f.FactDate, f.Country, false))
                             {
                                 errors[(int)Dataerror.LOST_COUSINS_NON_CENSUS].Add(
                                     new DataError((int)Dataerror.LOST_COUSINS_NON_CENSUS, ind, "Lost Cousins event for " + f.FactDate + " which isn't a census year"));

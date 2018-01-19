@@ -716,13 +716,21 @@ namespace FTAnalyzer
             get { return StartDate != MINDATE && EndDate != MAXDATE; }
         }
 
-        public bool YearMatches(FactDate that)
+        public bool FactYearMatches(FactDate factDate)
         {
-            if (that == null ||
-                that.StartDate.Year != that.EndDate.Year ||
-                this.StartDate.Year != this.EndDate.Year) return false;
+            if (factDate == null) return false;
+            if (factDate.StartDate.Year != factDate.EndDate.Year ||
+                 this.StartDate.Year != this.EndDate.Year) return false;
             // both this & that have exact years now return whether this and that match
-            return this.StartDate.Year == that.StartDate.Year;
+            return this.StartDate.Year == factDate.StartDate.Year;
+        }
+
+        public bool CensusYearMatches(CensusDate censusDate)
+        {
+            if (censusDate == null) return false;
+           if(this.StartDate.Year != this.EndDate.Year) return false;
+            // both this & that have exact years now return whether this and that match given a census date can go over a year end
+            return this.StartDate.Year == censusDate.StartDate.Year || this.StartDate.Year == censusDate.EndDate.Year;
         }
 
         public bool Contains(FactDate that)

@@ -540,7 +540,7 @@ namespace FTAnalyzer
             {
                 if (FactType == CENSUS || FactType == CENSUS_FTA) return true;
                 if (FactType == RESIDENCE && Properties.GeneralSettings.Default.UseResidenceAsCensus)
-                    return CensusDate.IsCensusYear(FactDate, Properties.GeneralSettings.Default.TolerateInaccurateCensusDate);
+                    return CensusDate.IsCensusYear(FactDate, Country, Properties.GeneralSettings.Default.TolerateInaccurateCensusDate);
                 return false;
             }
         }
@@ -553,21 +553,21 @@ namespace FTAnalyzer
                     return false;
                 if (!CensusDate.IsLostCousinsCensusYear(FactDate, false))
                     return false;
-                if (FactDate.YearMatches(CensusDate.EWCENSUS1841) && Countries.IsEnglandWales(Country))
+                if (FactDate.CensusYearMatches(CensusDate.EWCENSUS1841) && Countries.IsEnglandWales(Country))
                     return true;
-                if (FactDate.YearMatches(CensusDate.EWCENSUS1881) && Countries.IsEnglandWales(Country))
+                if (FactDate.CensusYearMatches(CensusDate.EWCENSUS1881) && Countries.IsEnglandWales(Country))
                     return true;
-                if (FactDate.YearMatches(CensusDate.SCOTCENSUS1881) && Country.Equals(Countries.SCOTLAND))
+                if (FactDate.CensusYearMatches(CensusDate.SCOTCENSUS1881) && Country.Equals(Countries.SCOTLAND))
                     return true;
-                if (FactDate.YearMatches(CensusDate.CANADACENSUS1881) && Country.Equals(Countries.CANADA))
+                if (FactDate.CensusYearMatches(CensusDate.CANADACENSUS1881) && Country.Equals(Countries.CANADA))
                     return true;
-                if (FactDate.YearMatches(CensusDate.EWCENSUS1911) && Countries.IsEnglandWales(Country))
+                if (FactDate.CensusYearMatches(CensusDate.EWCENSUS1911) && Countries.IsEnglandWales(Country))
                     return true;
-                if (FactDate.YearMatches(CensusDate.IRELANDCENSUS1911) && Country.Equals(Countries.IRELAND))
+                if (FactDate.CensusYearMatches(CensusDate.IRELANDCENSUS1911) && Country.Equals(Countries.IRELAND))
                     return true;
-                if (FactDate.YearMatches(CensusDate.USCENSUS1880) && Country.Equals(Countries.UNITED_STATES))
+                if (FactDate.CensusYearMatches(CensusDate.USCENSUS1880) && Country.Equals(Countries.UNITED_STATES))
                     return true;
-                if (FactDate.YearMatches(CensusDate.USCENSUS1940) && Country.Equals(Countries.UNITED_STATES))
+                if (FactDate.CensusYearMatches(CensusDate.USCENSUS1940) && Country.Equals(Countries.UNITED_STATES))
                     return true;
                 return false;
             }
@@ -648,7 +648,7 @@ namespace FTAnalyzer
 
         private void CheckResidenceCensusDate()
         {
-            if (FactDate.IsKnown && CensusDate.IsCensusYear(FactDate, true) && !CensusDate.IsCensusYear(FactDate, false))
+            if (FactDate.IsKnown && CensusDate.IsCensusYear(FactDate, Country, true) && !CensusDate.IsCensusYear(FactDate, Country, false))
             {
                 // residence isn't a normal census year but it is a census year if tolerate is on
                 if (CensusDate.IsCensusCountry(FactDate, Location) || !Location.IsKnownCountry)
@@ -727,14 +727,14 @@ namespace FTAnalyzer
             }
             if (tag == "Census")
             {
-                if (!CensusDate.IsCensusYear(yearAdjusted, false))
+                if (!CensusDate.IsCensusYear(yearAdjusted, Country, false))
                 {
                     //                    this.FactErrorNumber = (int)FamilyTree.Dataerror.CENSUS_COVERAGE;
                     this.FactErrorMessage = "Census fact error date '" + FactDate + "' isn't a supported census date. Check for incorrect date entered or try Tolerate slightly inaccurate census date option.";
                     this.FactErrorLevel = FactError.ERROR;
                     return;
                 }
-                if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && yearAdjusted.IsKnown && !CensusDate.IsCensusYear(yearAdjusted, true))
+                if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate && yearAdjusted.IsKnown && !CensusDate.IsCensusYear(yearAdjusted, Country, true))
                 {
                     //                    this.FactErrorNumber = (int)FamilyTree.Dataerror.CENSUS_COVERAGE;
                     this.FactErrorMessage = "Warning : Census fact error date '" + FactDate + "' overlaps census date but is vague. Check for incorrect date entered.";
@@ -818,15 +818,20 @@ namespace FTAnalyzer
             });
         }
 
-        public bool IsValidCensus(FactDate when)
+        public bool IsValidCensus(FactDate factDate)
         {
-            return FactDate.IsKnown && IsCensusFact && FactDate.YearMatches(when) && FactDate.IsNotBEForeOrAFTer && FactErrorLevel == Fact.FactError.GOOD;
+            return FactDate.IsKnown && IsCensusFact && FactDate.FactYearMatches(factDate) && FactDate.IsNotBEForeOrAFTer && FactErrorLevel == Fact.FactError.GOOD;
         }
 
-        public bool IsValidLostCousins(FactDate when)
+        public bool IsValidCensus(CensusDate censusDate)
+        {
+            return FactDate.IsKnown && IsCensusFact && FactDate.CensusYearMatches(censusDate) && FactDate.IsNotBEForeOrAFTer && FactErrorLevel == Fact.FactError.GOOD;
+        }
+
+        public bool IsValidLostCousins(CensusDate censusDate)
         {
             return FactDate.IsKnown && (FactType == Fact.LOSTCOUSINS || FactType == Fact.LC_FTA) 
-                && FactDate.YearMatches(when) && FactDate.IsNotBEForeOrAFTer && FactErrorLevel == Fact.FactError.GOOD;
+                && FactDate.CensusYearMatches(censusDate) && FactDate.IsNotBEForeOrAFTer && FactErrorLevel == Fact.FactError.GOOD;
         }
 
         public bool IsOverseasUKCensus(string country)

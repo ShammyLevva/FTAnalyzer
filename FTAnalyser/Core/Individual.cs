@@ -639,12 +639,12 @@ namespace FTAnalyzer
             return false;
         }
 
-        public bool CensusFactExists(FactDate when, bool includeCreated)
+        public bool CensusFactExists(FactDate factDate, bool includeCreated)
         {
-            if (when == null) return false;
+            if (factDate == null) return false;
             foreach (Fact f in facts)
             {
-                if (f.IsValidCensus(when))
+                if (f.IsValidCensus(factDate))
                 {
                     if (!f.Created)
                         return true;

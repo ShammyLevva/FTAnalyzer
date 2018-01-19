@@ -136,11 +136,14 @@ namespace FTAnalyzer
             }
         }
 
-        public static bool IsCensusYear(FactDate fd, bool exactYear)
+        public static bool IsCensusYear(FactDate fd, string Country, bool exactYear)
         {
             foreach (CensusDate cd in SUPPORTED_CENSUS)
             {
-                if (exactYear && fd.YearMatches(cd))
+                if (cd.Country.Equals(Country) && (cd.Country.Equals(Countries.UNITED_STATES) || cd.Country.Equals(Countries.CANADA)))
+                    if (fd.Overlaps(cd))
+                        return true;
+                if (exactYear && fd.CensusYearMatches(cd))
                     return true;
                 if (!exactYear && fd.Overlaps(cd))
                     return true;
@@ -152,7 +155,7 @@ namespace FTAnalyzer
         {
             foreach (CensusDate cd in UK_CENSUS)
             {
-                if (exactYear && fd.YearMatches(cd))
+                if (exactYear && fd.CensusYearMatches(cd))
                     return true;
                 if (!exactYear && fd.Overlaps(cd))
                     return true;
@@ -164,7 +167,7 @@ namespace FTAnalyzer
         {
             foreach (CensusDate cd in LOSTCOUSINS_CENSUS)
             {
-                if (exactYear && fd.YearMatches(cd))
+                if (exactYear && fd.CensusYearMatches(cd))
                     return true;
                 if (!exactYear && fd.Overlaps(cd))
                     return true;
@@ -177,7 +180,7 @@ namespace FTAnalyzer
             List<CensusDate> matches = SUPPORTED_CENSUS.Where(cd => cd.Country.Equals(location.CensusCountry)).ToList();
             foreach (CensusDate cd in matches)
             {
-                if (fd.YearMatches(cd))
+                if (fd.CensusYearMatches(cd))
                     return true;
             }
             return false;
@@ -187,7 +190,7 @@ namespace FTAnalyzer
         {
             foreach (CensusDate cd in LOSTCOUSINS_CENSUS)
             {
-                if (exactYear && fd.YearMatches(cd))
+                if (exactYear && fd.CensusYearMatches(cd))
                     return cd;
                 if (!exactYear && fd.Overlaps(cd))
                     return cd;
