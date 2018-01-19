@@ -1,7 +1,5 @@
 #### To install the latest version click [here.](http://ftanalyzer.com/install/)
 
-#### NOTE This documentation has been moved from Codeplex largely unchanged and requires a LOT of revision, in particular a lot of links will be broken or still refer back to Codeplex
-
 Family Tree Analyzer
 ====================
 
@@ -65,3 +63,7 @@ All feedback welcome. Please note this is very much a work in progress, it works
 Installation is simple with the click once installer. Click the download button and run the application. This will then ask you to allow it to run once allowed it downloads and installs the application for you.  
   
 **NB. This program will require the Microsoft .Net 4.6 to have been installed.** This is usually present on most windows machines assuming that your machine is patched with the latest security updates. If not it can be downloaded free from Microsoft at [https://www.microsoft.com/en-gb/download/details.aspx?id=48130](https://www.microsoft.com/en-gb/download/details.aspx?id=48130) and clicking the download link. Once downloaded simply run the file to install.
+
+#### NOTE This documentation has been moved from Codeplex largely unchanged and requires a LOT of revision, in particular a lot of links will be broken or still refer back to Codeplex
+
+
