@@ -11,6 +11,10 @@ Windows 10 & 8.1 installs may require you to click More Info and accept the cert
 
 There is now a series of helpful guides to downloading, installing and using FTAnalyzer. You can get them from [here](/guides "FTAnalyzer Guides").
 
+### Documentation Website
+
+The [documentation](./documentation) has been brought across from Codeplex and needs a lot of tweaking to bring it up to date. 
+
 ### Initial Features
 
 This program is under constant development and suggestions for improvements and new features are very welcome. Please add suggestions via the Issues tab and add suggestion in the subject. There are Help pages available under the Documentation tab.
