@@ -316,7 +316,7 @@ namespace FTAnalyzer
                 if (startPos >= 0 && endPos > startPos)
                 {
                     surname = name.Substring(startPos + 1, endPos - startPos - 1);
-                    forenames = startPos == 0 ? Individual.UNKNOWN_NAME : name.Substring(0, startPos - 1);
+                    forenames = startPos == 0 ? Individual.UNKNOWN_NAME : name.Substring(0, startPos).Trim();
                 }
                 else
                 {

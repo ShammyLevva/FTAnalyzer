@@ -2415,7 +2415,7 @@ namespace FTAnalyzer
                     string path = Path.GetDirectoryName(saveFileDialog.FileName);
                     Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
                     WriteFile(results, saveFileDialog.FileName);
-                    MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease upload it to http://ftanalyzer.codeplex.com in the issues section, if you feel you have standard census references that should be recognised." + privateWarning, "FTAnalyzer");
+                    MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease create an issue http://www.ftanalyzer.com/issues in issues section and upload your file, if you feel you have standard census references that should be recognised." + privateWarning, "FTAnalyzer");
                 }
             }
             catch (Exception ex)
