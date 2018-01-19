@@ -159,7 +159,7 @@ namespace FTAnalyzer
             {
                 string message = ex2.Message + (ex2.InnerException != null ? ex2.InnerException.Message : string.Empty);
                 MessageBox.Show("Error: Problem processing your file. Please try again.\n" +
-                    "If this problem persists please report this at http://ftanalyzer.codeplex.com. Error was: " + ex2.Message + "\n" + ex2.InnerException, "FTAnalyzer");
+                    "If this problem persists please report this at http://www.ftanalyzer.com/issues. Error was: " + ex2.Message + "\n" + ex2.InnerException, "FTAnalyzer");
                 CleanUp();
             }
             finally
@@ -252,7 +252,7 @@ namespace FTAnalyzer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Found a problem starting up.\nPlease report this at http://ftanalyzer.codeplex.com\nThe error was :" + ex.Message, "FTAnalyzer");
+                MessageBox.Show("Found a problem starting up.\nPlease report this at http://www.ftanalyzer.com/issues\nThe error was :" + ex.Message, "FTAnalyzer");
             }
         }
 
@@ -643,12 +643,12 @@ namespace FTAnalyzer
 
         private void viewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HttpUtility.VisitWebsite("http://ftanalyzer.codeplex.com/documentation");
+            HttpUtility.VisitWebsite("http://www.ftanalyzer.com");
         }
 
         private void onlineGuidesToUsingFTAnalyzerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HttpUtility.VisitWebsite("http://ftanalyzer.codeplex.com/releases/view/122486");
+            HttpUtility.VisitWebsite("http://www.ftanalyzer.com/guides");
         }
 
         private void olderParentsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2415,7 +2415,7 @@ namespace FTAnalyzer
                     string path = Path.GetDirectoryName(saveFileDialog.FileName);
                     Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
                     WriteFile(results, saveFileDialog.FileName);
-                    MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease create an issue http://www.ftanalyzer.com/issues in issues section and upload your file, if you feel you have standard census references that should be recognised." + privateWarning, "FTAnalyzer");
+                    MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease create an issue at http://www.ftanalyzer.com/issues in issues section and upload your file, if you feel you have standard census references that should be recognised." + privateWarning, "FTAnalyzer");
                 }
             }
             catch (Exception ex)
