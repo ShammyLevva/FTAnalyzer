@@ -1,9 +1,20 @@
-Updated release "Version 5.2.0.7" for project FTAnalyzer, 31th Jan 2017
+#### Updated Release Version 6.0.2.0 
+
+**Updates**
+Fixed most links to old codeplex documentation
+Amended range of dates for US census as enumerators didn't always adhere to guidelines that the census be recorded on a specific date.
+
+Release Version 6.0.1.0, 8th Jun 2017
+**Updates**
+Rebuilt for deployment on GitHub
+Upgraded to .Net 4.6 dropping XP support 
+
+#### Updated Release Version 5.2.0.7 of FTAnalyzer, 31th Jan 2017
 
 **New Features**  
 Added filter to loading GEDCOM so that badly formatted CONC or CONT text that wraps onto a line leaving invalid GEDCOM syntax is treated as a continuation of the previous line of text. If the Census checker finds a reference but its partial don't crash
 
-Updated release "Version 5.1.0.5" for project FTAnalyzer, 11th Aug 2015
+#### Updated Release Version 5.1.0.5 of FTAnalyzer, 11th Aug 2015
 
 **New Features**  
 **Updates**  
@@ -16,7 +27,7 @@ When loading form locations added a check to make sure it is on one of the user'
 UK addresses geocode one level below rest of world due to Scotland, England, Wales etc being the country not UK.  
 Status text on geocoding form wasn't correctly refreshing
 
-Updated release "Version 5.1.0.4" for project FTAnalyzer, 4th Aug 2015
+#### Updated Release Version 5.1.0.4 of FTAnalyzer, 4th Aug 2015
 
 **New Features**  
 **Updates**  
@@ -24,7 +35,7 @@ Updated release "Version 5.1.0.4" for project FTAnalyzer, 4th Aug 2015
 Geocoding of US locations have an extra level  
 Fix for 40 year death ranges on FMP if unknown dates
 
-Updated release "Version 5.1.0.3" for project FTAnalyzer, 2nd August 2015
+#### Updated Release Version 5.1.0.3 of FTAnalyzer, 2nd August 2015
 
 **New Features**  
 **Updates**  
@@ -32,14 +43,14 @@ Birth and death searches now use loose birth/death to narrow range if unknown da
 Ancestry searches now filter on marriage date and death date  
 Census Ref and date pattern matching is now faster  
 **Bug Fixes**  
-Updated release "Version 5.1.0.2" for project FTAnalyzer, 1 August 2015
+#### Updated Release Version 5.1.0.2 of FTAnalyzer, 1 August 2015
 
 **New Features**  
 **Updates**  
 **Bug Fixes**  
 Geocoding of US locations have an extra level
 
-Updated release "Version 5.1.0.1" for project FTAnalyzer, 25 July 2015
+#### Updated Release Version 5.1.0.1 of FTAnalyzer, 25 July 2015
 
 **New Features**  
 **Updates**  
@@ -49,7 +60,7 @@ Use married surnames for death searches
 Family Search only include birth location for birth searches  
 Always make birth year dates use range of at least 1 year
 
-Updated release "Version 5.1.0.0" for project FTAnalyzer, 23 July 2015
+#### Updated Release Version 5.1.0.0 of FTAnalyzer, 23 July 2015
 
 **New Features**  
 Added Report to show a count of relatives of each type  
@@ -64,14 +75,14 @@ Valid Census records on Lost Cousins and colour census reports now use year comp
 Census ref search wasn't picking up schedule for 1911  
 Unknown page census refs were getting lost by unknown census refs
 
-Updated release "Version 5.0.4.2" for project FTAnalyzer, 11 May 2015
+#### Updated Release Version 5.0.4.2 of FTAnalyzer, 11 May 2015
 
 **Updates**  
 Added Relation filter for Surname report  
 **Bug Fixes**  
 Loading with old database no longer fails if latm/longm columns already exist.
 
-Updated release "Version 5.0.4.1" for project FTAnalyzer, 9 May 2015
+#### Updated Release Version 5.0.4.1 of FTAnalyzer, 9 May 2015
 
 **Updates**  
 Now recognises lat/long places from Legacy files  
@@ -81,7 +92,7 @@ Arrival and departure facts are location facts not comment facts
 Change IsAlive to StartsBefore instead of IsBefore  
 Status bar text wasn't clearing on a reload
 
-New release "Version 5.0.4.0" for project FTAnalyzer, 5 May 2015
+#### New Release Version 5.0.4.0 of FTAnalyzer, 5 May 2015
 
 **Updates**  
 If a census reference cut n paste from Lost Cousins is detected then a created Lost Cousins fact is added if one didn't exist.  
@@ -89,20 +100,20 @@ If a census reference cut n paste from Lost Cousins is detected then a created L
 ADDR & PLAC records for fact are no longer concatenated  
 Census ref wasn't picking up from fact notes if it found text it didn't recognise in source
 
-Updated release "Version 5.0.3.2" for project FTAnalyzer, 5 May 2015
+#### Updated Release Version 5.0.3.2 of FTAnalyzer, 5 May 2015
 
 **Updates**  
 Add support for 1881 census - District 146/B, Page 59, Family 273 - living at Rainham, Haldimand, Ontario, Canada. style Canadian census ref.  
 **Bug Fixes**  
 
-Updated release "Version 5.0.3.1" for project FTAnalyzer, 5 May 2015
+#### Updated Release Version 5.0.3.1 of FTAnalyzer, 5 May 2015
 
 **Updates**  
 Add support for Canadian Ancestry census references  
 **Bug Fixes**  
 Fix typo in census recognition for Lost Cousins census references
 
-New release "Version 5.0.3.0" for project FTAnalyzer, 3 May 2015
+#### New Release Version 5.0.3.0 of FTAnalyzer, 3 May 2015
 
 **Updates**  
 Step value for "on this day" remembered between sessions  
@@ -118,14 +129,14 @@ Added census ref year to facts display
 Lost Cousins Colour status now also checks if likely to be out of country  
 Fix for recognising Russia from Chapman Code
 
-Updated release "Version 5.0.2.4" for project FTAnalyzer
+#### Updated Release Version 5.0.2.4 of FTAnalyzer
 
 **Updates**  
 **Bug Fixes**
 
 Only copy census references if reference is good or partial  
 
-Updated release "Version 5.0.2.3" for project FTAnalyzer
+#### Updated Release Version 5.0.2.3 of FTAnalyzer
 
 **Updates**  
 **Bug Fixes**  
@@ -133,7 +144,7 @@ Notes continuation line was being read then ignored
 Set Census ref comment if length > 0  
 When a census fact exists and a note exists with a census ref copy the census ref across if the census fact doesnt have one
 
-Updated release "Version 5.0.2.2" for project FTAnalyzer
+#### Updated Release Version 5.0.2.2 of FTAnalyzer
 
 **Updates**  
 Add support for Scottish Census patterns with years  
@@ -142,7 +153,7 @@ Added recognition of 1940 US census references as cut n paste from FamilySearch,
 **Bug Fixes**  
 Fix text lookup was aggressively looking for text even on names etc
 
-Updated release "Version 5.0.2.1" for project FTAnalyzer
+#### Updated Release Version 5.0.2.1 of FTAnalyzer
 
 **Updates**  
 Added support for Legacy 8 default fact types recognition  
@@ -155,7 +166,7 @@ Lots of tweaks to handling of notes to find more census references
 Gedcom parser now allows CONT & CONC lines to start with a @  
 fix for WWI & WWII abbreviations being converted.
 
-New release "Version 5.0.2.0" for project FTAnalyzer
+#### New Release Version 5.0.2.0 of FTAnalyzer
 
 **Updates**  
 Parent and Children facts now include birth location if known  
@@ -168,7 +179,7 @@ Census Facts now check for notes on the fact as well as in general notes to find
 Fixed issue with double counting LC facts with bad/missing census facts  
 "1841 Census:" reference types with Book: were getting skipped by mistake
 
-Updated release "Version 5.0.1.5" for project FTAnalyzer
+#### Updated Release Version 5.0.1.5 of FTAnalyzer
 
 **Updates**  
 **Bug Fixes**  
@@ -177,7 +188,7 @@ Only show missing children status where both parents are alive and at least pare
 Fix Age calc being 1 day out  
 Fix loose births getting confused when partial dates used with no year
 
-Updated release "Version 5.0.1.4" for project FTAnalyzer
+#### Updated Release Version 5.0.1.4 of FTAnalyzer
 
 **Updates**  
 Added File Handling option menu to allow loading files with special character handling  
@@ -194,7 +205,7 @@ Loading families no longer fails if missing REF attribute
 Tidied up some reload required options not forcing a reload  
 Added missing options current settings text to report window
 
-Updated release "Version 5.0.1.3" for project FTAnalyzer
+#### Updated Release Version 5.0.1.3 of FTAnalyzer
 
 **Updates**  
 Add extra Scottish Valuation Rolls dates  
@@ -203,14 +214,14 @@ Check Lost Cousins Fact Location before checking related census fact location
 Lost Cousins facts with missing census facts now shown separately from Census facts with missing Lost Cousins facts  
 Fix issues with Date Calculations causing crash
 
-Updated release "Version 5.0.1.2" for project FTAnalyzer
+#### Updated Release Version 5.0.1.2 of FTAnalyzer
 
 **Updates**  
 **Bug Fixes**  
 Census reference URL doesn't append F, R or O  
 Fixed loading GEDCOMs with individuals with null IDs
 
-Updated release "Version 5.0.1.1" for project FTAnalyzer
+#### Updated Release Version 5.0.1.1 of FTAnalyzer
 
 **Updates**  
 Census References now give better locations as taken from the census piece number descriptions on FindMyPast & Ancestry  
@@ -229,7 +240,7 @@ Make all census reference searches lazy
 Tweaks to census references to fix folio numbers with alphabetic suffixes  
 Census year check now fixed for Census XXXX or XXXX Census references
 
-Updated release "Version 5.0.1.0" for project FTAnalyzer
+#### Updated Release Version 5.0.1.0 of FTAnalyzer
 
 **Updates**  
 Census References now give better locations as taken from the census piece number descriptions on FindMyPast & Ancestry  
@@ -238,12 +249,12 @@ Added option to exclude auto created locations from locations list
 Census References now displays on all fact reports  
 Added tooltip to Census Ref column in Facts report if census reference URL available
 
-Updated release "Version 5.0.0.2" for project FTAnalyzer
+#### Updated Release Version 5.0.0.2 of FTAnalyzer
 
 **Bug Fixes**  
 Fixed issue with census references with no sources passing null dates around causing load GEDCOM to fail
 
-New release "Version 5.0.0.0" for project FTAnalyzer
+#### New Release Version 5.0.0.0 of FTAnalyzer
 
 **New Features**  
 Added support for auto creating census records from identified census references in notes and source records. This will go a long way to helping users with older family tree applications that have no census facts.
@@ -278,7 +289,7 @@ Children Status grid colours changed to make it easier to see errors
 Children Status tooltips added to highlight why cell is coloured  
 Loose Births and deaths grids can have columns ordered by user
 
-Updated release "Version 4.1.1.4" for project FTAnalyzer
+#### Updated Release Version 4.1.1.4 of FTAnalyzer
 
 **Updates**  
 Added Enumeration District detection to US census ref  
@@ -286,14 +297,14 @@ Individuals export now exports relation to root column
 **Bug Fixes**  
 29th or higher great grandparents now show correctly in relation to root calculations
 
-Updated release "Version 4.1.1.3" for project FTAnalyzer
+#### Updated Release Version 4.1.1.3 of FTAnalyzer
 
 **Updates**  
 **Bug Fixes**  
 US Census ref was being loaded but not displayed  
 Fix issue with Channel Islands not counting as part of England & Wales for census
 
-Updated release "Version 4.1.1.2" for project FTAnalyzer
+#### Updated Release Version 4.1.1.2 of FTAnalyzer
 
 **Updates**  
 Added Enumeration District detection to US census ref  
@@ -301,7 +312,7 @@ Added Enumeration District detection to US census ref
 Region shifts now only consider UK regions  
 Files with bad data now clear data they partially loaded
 
-Updated release "Version 4.1.1.1" for project FTAnalyzer
+#### Updated Release Version 4.1.1.1 of FTAnalyzer
 
 **Updates**  
 **Bug Fixes**  
@@ -311,7 +322,7 @@ Red for mismatched entries was on wrong columns
 Report unrecognised census refs wasn't linked to button  
 Multiple marriages was wrongly affecting loose births
 
-New release "Version 4.1.1.0" for project FTAnalyzer
+#### New Release Version 4.1.1.0 of FTAnalyzer
 
 **Updates**  
 Added ignore option to mismatched census references. This allows you to hide results where the reason is two families on same census page but different addresses.  
@@ -320,7 +331,7 @@ Added At Sea as a special country that doesn't get Google lookups so it can be u
 **Bug Fixes**  
 Isle of Wight fact location fix
 
-Updated release "Version 4.1.0.2" for project FTAnalyzer
+#### Updated Release Version 4.1.0.2 of FTAnalyzer
 
 **New Features**  
 **Updates**  
@@ -328,7 +339,7 @@ Loose births checks persons birth is before parents die
 **Bug fixes**  
 Editing locations no longer loses it's place when reverse geocoding updates list
 
-Updated release "Version 4.1.0.1" for project FTAnalyzer
+#### Updated Release Version 4.1.0.1 of FTAnalyzer
 
 **New Features**  
 **Updates**  
@@ -342,7 +353,7 @@ Ignored facts weren't being ignored on census inconsistent report
 alive/dead totals were counting children born after census as not alive thus dead.  
 AFT dates strings don't need to say 1 JAN if only a year
 
-New release "Version 4.1.0.0" for project FTAnalyzer
+#### New Release Version 4.1.0.0 of FTAnalyzer
 
 **New Features**  
 Added an Inconsistent Census refs vs locations report  
@@ -363,7 +374,7 @@ Missing Facts report is now limited to a single report fact per person and doubl
 Beef up error message on null pointer on load to show inner exception text  
 Strings for spouse names were missing on mismatch report
 
-Updated release "Version 4.0.0.1" for project FTAnalyzer
+#### Updated Release Version 4.0.0.1 of FTAnalyzer
 
 **Updates**  
 Census refs visible on source facts report  
@@ -371,7 +382,7 @@ OS Geocoding sets found location and type based on what was found
 OS Geocoding also now uses Fuzzy search and identifies matches with OS Fuzzy search. This allows matches where the names are not exact.  
 **Bug Fixes**
 
-New release "Version 4.0.0.0" for project FTAnalyzer
+#### New Release Version 4.0.0.0 of FTAnalyzer
 
 This major release introduces a significant new feature the ability to search the UK Ordnance Survey 50k Gazetteer for small placenames that often don't appear on a modern Google Map. This means significant numbers of locations that were previously not found by Google Geocoding will now be found by using OS Geocoding.  
 In addition I've added support for loading the Scottish 1930 Parish boundary maps, whilst slightly different from the parish boundaries in use in the 1800s that are familiar to family historians most rural areas have almost the same if not identical boundaries in the 1800s as is in the 1930s Parish boundary set. The major variances is in the cities where several smaller parishes are amalgamated into one large parish ie: Glasgow has one large city centre parish rather than several smaller ones.  
@@ -398,7 +409,7 @@ Updated Fact Report to correct count of distinct individuals
 Add null protection to treeview image nodes  
 Prevented opening a new file during loading
 
-Updated release "Version 3.7.3.4" for project FTAnalyzer
+#### Updated Release Version 3.7.3.4 of FTAnalyzer
 
 **New Features**  
 **Updates**  
@@ -408,7 +419,7 @@ Updated source fact count to be 1 for each person in marriage instead of 1 for e
 Source IDs are now zero padded same as individual and family IDs which makes sorting work as expected  
 Fix issue for brand new users not having an empty database setup correctly
 
-Updated release "Version 3.7.3.3" for project FTAnalyzer
+#### Updated Release Version 3.7.3.3 of FTAnalyzer
 
 **New Features**  
 **Updates**  
@@ -418,7 +429,7 @@ Fix Fact Sources trying to display marriage facts caused a crash
 Updated source fact count to be 1 for each person in marriage instead of 1 for each shared fact  
 Source IDs are now zero padded same as individual and family IDs which makes sorting work as expected
 
-Updated release "Version 3.7.3.2" for project FTAnalyzer
+#### Updated Release Version 3.7.3.2 of FTAnalyzer
 
 **New Features**  
 Added support for Family Historian Living flag  
@@ -433,7 +444,7 @@ Wrapped web calls in helper routine with try catch so failure to launch website 
 Census report now checks to see if census done for bold highlighting  
 Recent File List now checks if file exists before adding to or displaying list
 
-Updated release "Version 3.7.3.1" for project FTAnalyzer
+#### Updated Release Version 3.7.3.1 of FTAnalyzer
 
 **New Features**  
 **Updates**  
@@ -443,7 +454,7 @@ Removed now redundant no country no LC fact as covered by bad/missing
 Footer text clear on tab switch now consistent across tabs  
 Don’t use date filter for family groups on colour census report
 
-New release "Version 3.7.3.0" for project FTAnalyzer
+#### New Release Version 3.7.3.0 of FTAnalyzer
 
 **New Features**  
 Added family drop down filter to colour reports so now you can view just a single family at a time  
@@ -456,19 +467,19 @@ Facts report now has birth date - assists identifying multiple individuals of sa
 Added country check for LC census facts  
 Fixed report of LC facts with no country
 
-Updated release "Version 3.7.2.2" for project FTAnalyzer
+#### Updated Release Version 3.7.2.2 of FTAnalyzer
 
 **Updates**  
 **Bug Fixes**  
 Strip spaces from census references to make matching space insensitive
 
-Updated release "Version 3.7.2.1" for project FTAnalyzer
+#### Updated Release Version 3.7.2.1 of FTAnalyzer
 
 **Updates**  
 **Bug Fixes**  
 Family facts were getting hidden with v3.7.2.0
 
-New release "Version 3.7.2.0" for project FTAnalyzer
+#### New Release Version 3.7.2.0 of FTAnalyzer
 
 **Updates**  
 Update URL for Lives of First World War to cope now the site has gone live  
@@ -483,7 +494,7 @@ Source Facts include error facts
 Add Datagridview double buffering to improve flicker on grid redraw  
 Facts now log individuals
 
-Updated release "Version 3.7.1.1" for project FTAnalyzer
+#### Updated Release Version 3.7.1.1 of FTAnalyzer
 
 **New Features**  
 **Updates**  
@@ -491,7 +502,7 @@ Shift click on census form now shows facts
 **Bug Fixes**  
 Channel Islands now recognised as part of UK for census references
 
-New release "Version 3.7.1.0" for project FTAnalyzer
+#### New Release Version 3.7.1.0 of FTAnalyzer
 
 **New Features**  
 Census Tab now has four new reports showing census records that have :
@@ -523,7 +534,7 @@ Facts before birth & after death no longer appear twice
 Export Lost Cousins Referrals and Export Sources were crashing  
 Fix Column sizing of census refs
 
-Updated release "Version 3.7.0.2" for project FTAnalyzer
+#### Updated Release Version 3.7.0.2 of FTAnalyzer
 
 **New Features**  
 **Updates**  
@@ -531,7 +542,7 @@ Updated release "Version 3.7.0.2" for project FTAnalyzer
 Colour census filters now show only distinct records  
 Lost Cousins facts for overseas UK census entries now checks census fact country rather than LC country
 
-Updated release "Version 3.7.0.1" for project FTAnalyzer
+#### Updated Release Version 3.7.0.1 of FTAnalyzer
 
 **New Features**  
 **Updates**  
@@ -539,7 +550,7 @@ Updated release "Version 3.7.0.1" for project FTAnalyzer
 Lost Cousins facts won't now show orange if any UK fact is present  
 If no preferred facts get first fact of that type - usually calculated fact
 
-New release "Version 3.7.0.0" for project FTAnalyzer
+#### New Release Version 3.7.0.0 of FTAnalyzer
 
 **New Features**  
 Added US, Canadian and Irish Colour census reports  
@@ -557,7 +568,7 @@ Census refs now tolerate lack of spaces after :
 Schedule numbers can now be 4 digits  
 Only add preferred facts to preferred fact list
 
-Updated release "Version 3.6.1.5" for project FTAnalyzer
+#### Updated Release Version 3.6.1.5 of FTAnalyzer
 
 **New Features**  
 **Updates**  
@@ -565,21 +576,21 @@ Added support for Missing tag so users can mark people as unable to be found on 
 **Bug Fixes**  
 Fix relation types if people married to blood/direct are also blood relations
 
-Updated release "Version 3.6.1.4" for project FTAnalyzer
+#### Updated Release Version 3.6.1.4 of FTAnalyzer
 
 **New Features**  
 **Updates**  
 Colour Census report now shows dark grey if person likely to be out of UK on census date  
 **Bug Fixes**
 
-Updated release "Version 3.6.1.3" for project FTAnalyzer
+#### Updated Release Version 3.6.1.3 of FTAnalyzer
 
 **New Features**  
 **Updates**  
 Added features to exclude people with unknown births from census reports  
 **Bug Fixes**
 
-Updated release "Version 3.6.1.2" for project FTAnalyzer
+#### Updated Release Version 3.6.1.2 of FTAnalyzer
 
 **New Features**  
 **Updates**  
@@ -587,7 +598,7 @@ Updated release "Version 3.6.1.2" for project FTAnalyzer
 Default FamilySearch UK census searches to England if unknown country  
 GoogleFixes.xml allows empty to strings
 
-Updated release "Version 3.6.1.1" for project FTAnalyzer
+#### Updated Release Version 3.6.1.1 of FTAnalyzer
 
 **New Features**  
 **Updates**  
@@ -596,7 +607,7 @@ FamilySearch set as default search provider for Lost Cousins Searches
 Tweaks to Loose Births to ignore effects of long range dates  
 FamilySearch now understands UK Searches
 
-New release "Version 3.6.1.0" for project FTAnalyzer
+#### New Release Version 3.6.1.0 of FTAnalyzer
 
 **New Features**  
 Added Export to Excel for Treetops and World Wars Reports  
@@ -606,7 +617,7 @@ Add Witnesses as custom fact type so that it functions the same as Witness custo
 **Bug Fixes**  
 Colour census "All green" now includes all with flag of green
 
-Updated release "Version 3.6.0.2" for project FTAnalyzer
+#### Updated Release Version 3.6.0.2 of FTAnalyzer
 
 **New Features**  
 **Updates**  
@@ -617,7 +628,7 @@ Census refs can optionally end in a ;
 **Library Updates**
 
   
-Updated release "Version 3.6.0.1" for project FTAnalyzer
+#### Updated Release Version 3.6.0.1 of FTAnalyzer
 
 **New Features**  
 **Updates**  
@@ -626,7 +637,7 @@ Allow census references to be less specific for matching
 Facts that have ADDR and PLAC tags now use both  
 **Library Updates**
 
-New release "Version 3.6.0.0" for project FTAnalyzer
+#### New Release Version 3.6.0.0 of FTAnalyzer
 
 **New Features**  
 Added Loose Birth & Death export to Excel menu items  
@@ -649,7 +660,7 @@ Updated SharpMap to v1.1
 Updated BruTile to v0.9.8  
 Replaced TreeViewMS with MultiSelectTreeView
 
-New release "Version 3.5.1.0" for project FTAnalyzer
+#### New Release Version 3.5.1.0 of FTAnalyzer
 
 **Updates**  
 Include UNKNOWN & Reference facts  
@@ -665,7 +676,7 @@ Updated Log4Net to v1.2.13
 Update DotNetZip to 1.9.2  
 Update SQLLite to 1.0.92
 
-New release "Version 3.5.0.0" for project FTAnalyzer
+#### New Release Version 3.5.0.0 of FTAnalyzer
 
 **New Features**  
 Added sources tab - double clicking lists all facts for that source  
@@ -674,7 +685,7 @@ Individuals reports now lists notes in GEDCOM, right click on individuals report
 Extra column in Individuals reports lists whether notes exist or not.  
 Added Possible census facts report which lists all people who have a note with the word census in it. The idea is this should help people with census records as notes work out who has a census note.
 
-New release "Version 3.4.1.0" for project FTAnalyzer
+#### New Release Version 3.4.1.0 of FTAnalyzer
 
 **Updates**  
 Added Child Born facts to facts reports so that it gives a better timeline of facts for an individual  
@@ -683,7 +694,7 @@ Fixed crash if user clicks on duplicates grid or slider etc whilst duplicates da
 Updated Hourglass function  
 Fixed flickering on duplicates tab
 
-New release "Version 3.4.0.0" for project FTAnalyzer
+#### New Release Version 3.4.0.0 of FTAnalyzer
 
 **New Features**  
 Added a duplicates report - allows you to check if you have any likely duplicates in your file  
@@ -709,7 +720,7 @@ Added select all/deselect all to fact tab
 Single click now works for selecting fact types to filter  
 Unknown fact types no longer have blank descriptions
 
-New release "Version 3.3.3.0" for project FTAnalyzer
+#### New Release Version 3.3.3.0 of FTAnalyzer
 
 **New Features**  
 Added Relation to Root description column to various reports  
@@ -721,7 +732,7 @@ Lost Cousins and Census Facts were erroring for non UK census dates
 Printing forms was erroneously using same title for all reports  
 Colour reports right columns now sizable
 
-Updated release "Version 3.3.2.8" for project FTAnalyzer
+#### Updated Release Version 3.3.2.8 of FTAnalyzer
 
 **New Features**  
 Added support for 1921 Canadian Census
@@ -729,7 +740,7 @@ Added support for 1921 Canadian Census
 **Updates**  
 **Bug Fixes**
 
-Updated release "Version 3.3.2.7" for project FTAnalyzer
+#### Updated Release Version 3.3.2.7 of FTAnalyzer
 
 **New Features**  
 **Updates**  
@@ -737,7 +748,7 @@ Updated release "Version 3.3.2.7" for project FTAnalyzer
 
 1911 Irish Lost Cousins census wasn't showing people
 
-Updated release "Version 3.3.2.6" for project FTAnalyzer
+#### Updated Release Version 3.3.2.6 of FTAnalyzer
 
 **New Features**  
 **Updates**  
@@ -745,7 +756,7 @@ Updated release "Version 3.3.2.6" for project FTAnalyzer
 Colour BMD & Census column widths now save/reload properly  
 1881 LostCousins years wasn't showing correct colours
 
-Updated release "Version 3.3.2.5" for project FTAnalyzer
+#### Updated Release Version 3.3.2.5 of FTAnalyzer
 
 **New Features**  
 **Updates**
@@ -759,7 +770,7 @@ Title bar now shows which GEDCOM file you are working on
 
 Updating location geocode status now correctly updates treeviews
 
-Updated release "Version 3.3.2.4" for project FTAnalyzer
+#### Updated Release Version 3.3.2.4 of FTAnalyzer
 
 **New Features**  
 **Updates**  
@@ -769,7 +780,7 @@ Added logging for Google fixes
 Google fixes now load when GEDCOM loads and reports to the stats window  
 **Bug Fixes**
 
-Updated release "Version 3.3.2.3" for project FTAnalyzer
+#### Updated Release Version 3.3.2.3 of FTAnalyzer
 
 **New Features**  
 Added option for users to use their own GoogleFixes.xml file  
@@ -778,14 +789,14 @@ Fix for edit location not restoring pre-search value if clicked no to save on ex
 Fix for edit location search not moving to correct location on search  
 Google geocoding viewport was getting wrongly set
 
-Updated release "Version 3.3.2.2" for project FTAnalyzer
+#### Updated Release Version 3.3.2.2 of FTAnalyzer
 
 **New Features**  
 **Bug Fixes**  
 Places selection now actually shows a result  
 Fix for max living date within 9 months of MINDATE.
 
-Updated release "Version 3.3.2.1" for project FTAnalyzer
+#### Updated Release Version 3.3.2.1 of FTAnalyzer
 
 **New Features**  
 **Bug Fixes**  
@@ -794,7 +805,7 @@ Fix for saving size and position of mainform
 Add end cap triangles to line.  
 Places selection now actually shows a resultFix for max living date within 9 months of MINDATE.
 
-New release "Version 3.3.2.0" for project FTAnalyzer
+#### New Release Version 3.3.2.0 of FTAnalyzer
 
 **New Features**  
 Surname tab - reports counts of individuals, families & marriages in a family.  
@@ -803,7 +814,7 @@ Also links to Guild of One Name Studies site where surname is a GOONS study
 Fix dates with huge numbers of spaces  
 Count of not searched locations was wrong
 
-New release "Version 3.3.1.0" for project FTAnalyzer
+#### New Release Version 3.3.1.0 of FTAnalyzer
 
 **Updates**  
 Lifelines Report now highlights birth facts (red teardrop), death facts (black teardrop) and currently selected fact (green teardrop).  
@@ -813,7 +824,7 @@ Tooltip also now shows the facts beneath the mouse.
 **Bug Fixes**  
 All times birth facts and death facts are looked at the rule to use christening/burial facts is implemented
 
-Updated release "Version 3.3.0.1" for project FTAnalyzer
+#### Updated Release Version 3.3.0.1 of FTAnalyzer
 
 **New Features**  
 Added Places form - You can now select a place or places and see who lived there on a map. Discover different branches of your family living in the same area perhaps uncover new leads.  
@@ -843,7 +854,7 @@ Map Individuals Icons refreshed on edit location
 Clicking to open locations window always ensures that location isn't filtered  
 If a file encounters too many errors and user says to quit it will now fail gracefully
 
-New release "Version 3.2.0.0" for project FTAnalyzer
+#### New Release Version 3.2.0.0 of FTAnalyzer
 
 **Major Features**  
 Added Lifelines map - shows where ancestors lived with lines for how they moved over time. Allows selection of one or more individuals  
@@ -875,7 +886,7 @@ Turn off auto size mode on source column in facts
 Fix surname search for facts  
 If GEDCOM CHAR set is UTF-8 then use the UTF-8 encoding
 
-New release "Version 3.1.2.0" for project FTAnalyzer
+#### New Release Version 3.1.2.0 of FTAnalyzer
 
 **New Features**  
 Added database restore option  
@@ -890,7 +901,7 @@ Logger added creates a FTAnalyzer.log file for reverse geocoding info and future
 Fact dates tolerate spaces between dashes  
 Force Treeview font to bold or regular to hopefully fix truncation issues
 
-New release "Version 3.1.1.0" for project FTAnalyzer
+#### New Release Version 3.1.1.0 of FTAnalyzer
 
 ### Edit Location Enhancements
 
@@ -906,7 +917,7 @@ Fixed map issue when behind a proxy
 Understands GEDCOM DEATH Y tags used when death date/location unknown but it is known the individual is dead.  
 Added support for MON YYYY-MON YYYY format dates
 
-New release "Version 3.1.0.0" for project FTAnalyzer
+#### New Release Version 3.1.0.0 of FTAnalyzer
 
 #### New Features
 
@@ -922,7 +933,7 @@ Map selector remembers the last map used
 
 Don't add pre-marriage individuals if already in a family
 
-New release "Version 3.0.3.0" for project FTAnalyzer
+#### New Release Version 3.0.3.0 of FTAnalyzer
 
 Count Isle of Man as England & Wales for Census  
 Lost Cousins text was preventing drag and drop of files  
@@ -942,13 +953,13 @@ First fact of a fact type for an individual is recorded as the preferred fact
 Individuals report now has a double click for facts  
 People form shows proper split grid and scrollbars and now has double click for facts
 
-New release "Version 3.0.2.4" for project FTAnalyzer
+#### New Release Version 3.0.2.4 of FTAnalyzer
 
 Added Lost Cousins missing country report  
 Tweaked Loose Births to take account of childrens ages  
 Fixed bug with export to excel from census report
 
-New release "Version 3.0.2.3" for project FTAnalyzer
+#### New Release Version 3.0.2.3 of FTAnalyzer
 
 Fixed bug with census dates always being 1881.  
 Lost Cousins tab now has a proper Relation Types filter  
@@ -956,7 +967,7 @@ Lost Cousins tab buttons have lost weight
 Add Individual ID to facts list  
 Initial work on reverse geocoding - doesn't do anything with the results it finds yet
 
-New release "Version 3.0.2.2" for project FTAnalyzer
+#### New Release Version 3.0.2.2 of FTAnalyzer
 
 Fixed Select All/Clear All  
 On finished Geocoding display results on stats tab  
@@ -965,14 +976,14 @@ Unknown fact types now display fact type description from GEDCOM
 Custom facts were erroneously checking for Birth/Marriage/Death text  
 Reset any User entered/verified locations to set the Google location to empty
 
-New release "Version 3.0.2.1" for project FTAnalyzer
+#### New Release Version 3.0.2.1 of FTAnalyzer
 
 Added right click menus to census, Lost Cousins, and both colour reports to view facts for individuals.  
 Fixed issue with 1851 & 1901 census dates for colour report not working due to matching Canadian census dates  
 Tolerated census dates now set the adjusted year  
 Family facts weren't getting checked for data errors when added to facts list
 
-New release "Version 3.0.2.0" for project FTAnalyzer
+#### New Release Version 3.0.2.0 of FTAnalyzer
 
 Using Google Maps Geocoder v3 - **NB. your old Google Matched results will be reset**  
 Added Use Burial/Cremation dates option if no death date  
@@ -987,7 +998,7 @@ Added extra map background tiles to Timeline
 Fixes to loose births to use death fact when calculating earliest living date  
 Loose Births & Deaths sorted by surname, forename
 
-New release "Version 3.0.1.0" for project FTAnalyzer
+#### New Release Version 3.0.1.0 of FTAnalyzer
 
 **New Features**  
 Added a Loose Births report  
@@ -997,7 +1008,7 @@ People on a census outside UK now show as such in census report (includes "equiv
 **Bug Fixes**  
 Fix check for not_searched and partial_match not re-checking Google.
 
-New release "Version 3.0.1.0" for project FTAnalyzer
+#### New Release Version 3.0.1.0 of FTAnalyzer
 
 **New Features**  
 Added a Loose Births report  
@@ -1005,7 +1016,7 @@ Added ability to backup Geocoding database
 Added option to only apply family census facts to parents  
 People on a census outside UK now show as such in census report (includes "equivalent" US census year eg: 1880 for 1881 UK).
 
-New release "Version 3.0.0.2" for project FTAnalyzer
+#### New Release Version 3.0.0.2 of FTAnalyzer
 
 New Mapping Feature
 ===================
@@ -1082,11 +1093,11 @@ Fix tooltip zoom icon tooltip text
 Fixed bugs with Census & Lost Cousins forms headings  
 Fixed Census & Lost Cousins forms ignoring census records for people with no parents
 
-New release "Version 2.2.1.1" for project FTAnalyzer  
+#### New Release Version 2.2.1.1 of FTAnalyzer  
   
 Fix for 1Q style quarter days  
   
-New release "Version 2.2.1.0." for project FTAnalyzer  
+#### New Release Version 2.2.1.0. of FTAnalyzer  
   
 Colour BMD, Colour Census, Facts Report & Census all now :  
 use custom data grids  
@@ -1099,7 +1110,7 @@ Changing Use Residence facts as census facts now requires a reload to force upda
 Status bar message on main form now shows what actions can happen on a double click  
 First tentative search Ancestry.co.uk code on double click BMD.
 
-New release "Version 2.2.0.1." for project FTAnalyzer
+#### New Release Version 2.2.0.1. of FTAnalyzer
 
 Residence facts location checked for census date warning.  
 Do not prompt to reload file if no settings are changed.  
@@ -1111,7 +1122,7 @@ Various extra countries recognised
 All standalone forms now implement custom column ordering  
 Printing now allows icon printing and colours printing
 
-New release "Version 2.2.0.0." for project FTAnalyzer
+#### New Release Version 2.2.0.0. of FTAnalyzer
 
 ### New Features in v2.2.0.0
 
