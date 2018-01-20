@@ -13,7 +13,7 @@ There is now a series of helpful guides to downloading, installing and using FTA
 
 ### Documentation Website
 
-The [documentation](./documentation) has been brought across from Codeplex and needs a lot of tweaking to bring it up to date. 
+The [documentation](./documentation.md) has been brought across from Codeplex and needs a lot of tweaking to bring it up to date. 
 
 ### Initial Features
 
