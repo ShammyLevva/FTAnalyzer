@@ -4,7 +4,7 @@ The first thing you need to do is to open your Family Tree data. Your family tre
 
 The default file output from Family Tree software is not gedcom, but all Family Tree programs can export and import gedcom files.
 
-Creating a gedcom file for your Family Tree software is covered in the section **[Using FTAnalyzer with popular Family History Programs](/Documentation.md)**
+Creating a gedcom file for your Family Tree software is covered in the section **[Using FTAnalyzer with popular Family History Programs](/Documentation)**
 
 Click on the File in the top left hand cornet of FTAnalyzer and click on Open.  Navigate to where you have saved your gedcom file.  Highlight the file name and click on open.
 
@@ -14,4 +14,4 @@ After successfully loading, a message box will pop up to tell you that the load 
 
 Click OK to continue.
 
-Now you can use the various reports to analyse the data in your Family Tree.  These reports are covered in more detail in their own section in this [documentation](/documentation.md).
+Now you can use the various reports to analyse the data in your Family Tree.  These reports are covered in more detail in their own section in this [documentation](/Documentation).
