@@ -1,6 +1,6 @@
 ### New Step by Step Guide Available
 
-Part I of the new Family Tree Analyzer guide is now available [to download](http://www.ftanalyzer.com/guides)
+Parts I to III of the new Family Tree Analyzer guides are now available [to download](http://www.ftanalyzer.com/guides)
 
 ### Installing the software
 
