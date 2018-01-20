@@ -12,7 +12,7 @@ If you have any problems, issues or suggestions please add them to the [Issues S
 
 **[What's New in this Release](http://ftanalyzer.codeplex.comWhat%27s%20New%20in%20this%20Release%3f)?**
 
-**[The Menu](#the-menu)**
+**The Menu[](#the-menu)**
 
 *   **[File](http://ftanalyzer.codeplex.comFile)**
 *   **[Reports](http://ftanalyzer.codeplex.comreports)**
@@ -21,30 +21,30 @@ If you have any problems, issues or suggestions please add them to the [Issues S
 *   **[Maps](http://ftanalyzer.codeplex.comMaps)**
 *   **Help**
 
-**[The Tabs](#the-tabs)**
+**The Tabs[](#the-tabs)**
 
 *   **[The Individuals Tab](The%20Individuals%20Tab)**
 *   **[The Families Tab](The%20Families%20Tab)**
 *   **[The Surnames Tab](wikipage?title=Surnames)**
 *   **[The Locations Tab](The%20Locations%20Tab)**
 *   **[The Occupations Tab](The%20Occupations%20Tab)**
-*   **[The Facts Tab](wikipage?title=The%20Facts%20Tab)**
-*   **The Sources Tab**
+*   **[The Facts Tab](The%20Facts%20Tab)**
+*   **[The Sources Tab]**(The%20Sources%20Tab)**
 *   **[The Data Errors Tab](The%20Data%20Errors%20Tab)**
 *   **[The Births/Deaths Tab](The%20Loose%20Deaths%20Tab)**
 *   **[The Census Tab](The%20Census%20Tab)**
 *   **[The Lost Cousins Tab](The%20Lost%20Cousins%20Tab)**
-*   **[The Colour Reports Tab](wikipage?title=Search%20Summaries%20Tab)**
+*   **[The Colour Reports Tab](Search%20Summaries%20Tab)**
 *   **[The Tree Tops Tab](The%20Tree%20Tops%20Tab)**
 *   **[The World Wars Tab](The%20War%20Dead%20Tab)**
 
-**[Hints and Tips](#hints-and-tips)**
+**Hints and Tips[](#hints-and-tips)**
 
 *   **[Creating Custom Facts](Creating%20Custom%20Facts)**
 *   **[Guide for Lost Cousins Members](Guide%20for%20Lost%20Cousins%20Members)**
 *   **[Acceptable Date Entry Formats](wikipage?title=Acceptable%20Date%20Entry%20Formats)**
 
-**[Using FTAnalyzer with popular Family History Programs](#using-ftnalyzer-with-popular-family-history-programs)**
+**Using FTAnalyzer with popular Family History Programs[](#using-ftnalyzer-with-popular-family-history-programs)**
 
 *   **[Family Tree Maker](Family%20Tree%20Maker)**
 *   **[GenoPro](GenoPro)**
