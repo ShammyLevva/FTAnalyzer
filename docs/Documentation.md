@@ -29,7 +29,7 @@ If you have any problems, issues or suggestions please add them to the [Issues S
 *   **[The Locations Tab](The%20Locations%20Tab)**
 *   **[The Occupations Tab](The%20Occupations%20Tab)**
 *   **[The Facts Tab](The%20Facts%20Tab)**
-*   **[The Sources Tab]**(The%20Sources%20Tab)**
+*   **[The Sources Tab](The%20Sources%20Tab)**
 *   **[The Data Errors Tab](The%20Data%20Errors%20Tab)**
 *   **[The Births/Deaths Tab](The%20Loose%20Deaths%20Tab)**
 *   **[The Census Tab](The%20Census%20Tab)**
