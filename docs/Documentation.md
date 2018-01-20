@@ -12,7 +12,7 @@ If you have any problems, issues or suggestions please add them to the [Issues S
 
 **[What's New in this Release](http://ftanalyzer.codeplex.comWhat%27s%20New%20in%20this%20Release%3f)?**
 
-**(#The-Menu)**
+**[The Menu](#the-menu)**
 
 *   **[File](http://ftanalyzer.codeplex.comFile)**
 *   **[Reports](http://ftanalyzer.codeplex.comreports)**
@@ -21,7 +21,7 @@ If you have any problems, issues or suggestions please add them to the [Issues S
 *   **[Maps](http://ftanalyzer.codeplex.comMaps)**
 *   **Help**
 
-**(#The-Tabs)**
+**[The Tabs](#the-tabs)**
 
 *   **[The Individuals Tab](The%20Individuals%20Tab)**
 *   **[The Families Tab](The%20Families%20Tab)**
@@ -38,13 +38,13 @@ If you have any problems, issues or suggestions please add them to the [Issues S
 *   **[The Tree Tops Tab](The%20Tree%20Tops%20Tab)**
 *   **[The World Wars Tab](The%20War%20Dead%20Tab)**
 
-**(#Hints-and-Tips)**
+**[Hints and Tips](#hints-and-tips)**
 
 *   **[Creating Custom Facts](Creating%20Custom%20Facts)**
 *   **[Guide for Lost Cousins Members](Guide%20for%20Lost%20Cousins%20Members)**
 *   **[Acceptable Date Entry Formats](wikipage?title=Acceptable%20Date%20Entry%20Formats)**
 
-**(#Using-FTAnalyzer-with-popular-Family-History-Programs)**
+**[Using FTAnalyzer with popular Family History Programs](#using-ftnalyzer-with-popular-family-history-programs)**
 
 *   **[Family Tree Maker](Family%20Tree%20Maker)**
 *   **[GenoPro](GenoPro)**
