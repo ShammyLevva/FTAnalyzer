@@ -50,6 +50,7 @@ namespace FTAnalyzer
         private bool _dataloaded = false;
         private bool _cancelDuplicates = false;
         private Int64 maxAhnentafel = 0;
+        private Dictionary<string, Individual> individualLookup;
 
         public bool Geocoding { get; set; }
         public List<NonDuplicate> NonDuplicates { get; private set; }
@@ -209,6 +210,7 @@ namespace FTAnalyzer
             maxAhnentafel = 0;
             FactLocation.ResetLocations();
             LoadStandardisedNames();
+            individualLookup = new Dictionary<string, Individual>();
         }
 
         public void ResetLooseFacts()
@@ -286,6 +288,10 @@ namespace FTAnalyzer
                 {
                     Individual individual = new Individual(n);
                     individuals.Add(individual);
+                    if (individualLookup.ContainsKey(individual.IndividualID))
+                        xmlErrorbox.AppendText("More than one INDI record found with ID value " + individual.IndividualID + "\n");
+                    else
+                        individualLookup.Add(individual.IndividualID, individual);
                     AddOccupations(individual);
                     pbI.Value = counter++;
                     Application.DoEvents();
@@ -316,7 +322,7 @@ namespace FTAnalyzer
             Application.DoEvents();
             if (rootIndividualID == string.Empty)
                 rootIndividualID = individuals[0].IndividualID;
-            UpdateRootIndividual(rootIndividualID, pbR);
+            UpdateRootIndividual(rootIndividualID, pbR, true);
             Application.DoEvents();
             CreateSharedFacts();
             CountCensusFacts();
@@ -332,7 +338,7 @@ namespace FTAnalyzer
             return true;
         }
 
-        public void UpdateRootIndividual(string rootIndividualID, ProgressBar pb)
+        public void UpdateRootIndividual(string rootIndividualID, ProgressBar pb, bool locationsToFollow=false)
         {
             int start = xmlErrorbox.TextLength;
             xmlErrorbox.AppendText("\nCalculating Relationships using " + rootIndividualID + ": " +
@@ -342,7 +348,9 @@ namespace FTAnalyzer
             xmlErrorbox.SelectionLength = end - start;
             xmlErrorbox.SelectionFont = new Font(xmlErrorbox.Font, FontStyle.Bold);
             xmlErrorbox.SelectionLength = 0;
-            int locationCount = FactLocation.AllLocations.Count();
+
+            // When the user changes the root individual, no location processing is taking place
+            int locationCount = locationsToFollow ? FactLocation.AllLocations.Count() : 0;
             pb.Maximum = (individuals.Count * 2) + locationCount;
             pb.Value = 0;
             Application.DoEvents();
@@ -729,7 +737,12 @@ namespace FTAnalyzer
 
         public Individual GetIndividual(string individualID)
         {
-            return individuals.FirstOrDefault(i => i.IndividualID == individualID);
+//            return individuals.FirstOrDefault(i => i.IndividualID == individualID);
+            if (string.IsNullOrEmpty(individualID))
+                return null;
+            Individual person;
+            individualLookup.TryGetValue(individualID, out person);
+            return person;
         }
 
         public Family GetFamily(string familyID)
@@ -771,7 +784,12 @@ namespace FTAnalyzer
         {
             int indLen = individuals.Count.ToString().Length;
             foreach (Individual ind in individuals)
+            {
                 ind.FixIndividualID(indLen);
+                // If the individual id has been changed, the lookup needs to be updated
+                if (!individualLookup.ContainsKey(ind.IndividualID))
+                    individualLookup.Add(ind.IndividualID, ind);
+            }
             int famLen = families.Count.ToString().Length;
             foreach (Family f in families)
                 f.FixFamilyID(famLen);

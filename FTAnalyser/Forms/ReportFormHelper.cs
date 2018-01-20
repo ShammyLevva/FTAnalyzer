@@ -83,14 +83,14 @@ namespace FTAnalyzer
             printPreviewDialog.ShowDialog(parent);
         }
 
-        public void DoExportToExcel<T>()
+        public void DoExportToExcel<T>(DataGridViewColumnCollection shown = null)
         {
             if (ReportGrid.DataSource == null || ReportGrid.RowCount == 0)
                 return;
             parent.Cursor = Cursors.WaitCursor;
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
             SortableBindingList<T> gridDatasource = ReportGrid.DataSource as SortableBindingList<T>;
-            DataTable dt = convertor.ToDataTable(gridDatasource.ToList());
+            DataTable dt = convertor.ToDataTable(gridDatasource.ToList(), shown);
             ExportToExcel.Export(dt);
             parent.Cursor = Cursors.Default;
         }
