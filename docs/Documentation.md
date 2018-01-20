@@ -1,7 +1,7 @@
 FTAnalyzer Documentation
 ========================
 
-#### PLEASE NOTE you MUST uninstall the old Codeplex version before the version 6.0.1.0 or above can be updated. The latest version can be downloaded from the downloads link at the top of the page.
+#### PLEASE NOTE you MUST uninstall the old Codeplex version before the version 6.0.1.0 or above can be updated. The latest version can be installed from the [installs](http://www.ftanalyzer.com/install) page.
 
 If you have any problems, issues or suggestions please add them to the [Issues Section](https://github.com/ShammyLevva/FTAnalyzer/issues). Thank you.
 
