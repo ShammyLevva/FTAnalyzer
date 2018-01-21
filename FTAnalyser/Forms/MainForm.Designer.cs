@@ -236,6 +236,8 @@
             this.tabIndividuals = new System.Windows.Forms.TabPage();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
+            this.label19 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.pbRelationships = new System.Windows.Forms.ProgressBar();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
@@ -355,6 +357,7 @@
             this.tabIndividuals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.tabDisplayProgress.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabSelector.SuspendLayout();
             this.tabSurnames.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSurnames)).BeginInit();
@@ -1937,7 +1940,7 @@
             this.cenDate.Country = "";
             this.cenDate.Location = new System.Drawing.Point(15, 103);
             this.cenDate.Name = "cenDate";
-            this.cenDate.Size = new System.Drawing.Size(186, 27);
+            this.cenDate.Size = new System.Drawing.Size(234, 27);
             this.cenDate.TabIndex = 28;
             // 
             // relTypesCensus
@@ -2420,6 +2423,8 @@
             // 
             // tabDisplayProgress
             // 
+            this.tabDisplayProgress.Controls.Add(this.pictureBox1);
+            this.tabDisplayProgress.Controls.Add(this.label19);
             this.tabDisplayProgress.Controls.Add(this.label7);
             this.tabDisplayProgress.Controls.Add(this.pbRelationships);
             this.tabDisplayProgress.Controls.Add(this.rtbOutput);
@@ -2436,6 +2441,28 @@
             this.tabDisplayProgress.TabIndex = 1;
             this.tabDisplayProgress.Text = "Gedcom Stats";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
+            // 
+            // label19
+            // 
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Kunstler Script", 51.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(461, 18);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(511, 74);
+            this.label19.TabIndex = 10;
+            this.label19.Text = "Family Tree Analyzer";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::FTAnalyzer.Properties.Resources.High_Res_Logo_100x100;
+            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.Location = new System.Drawing.Point(977, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
             // 
             // label7
             // 
@@ -3256,6 +3283,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
             this.tabDisplayProgress.ResumeLayout(false);
             this.tabDisplayProgress.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabSelector.ResumeLayout(false);
             this.tabSurnames.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgSurnames)).EndInit();
@@ -3548,6 +3576,8 @@
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Button btnAdvancedMissingData;
         private System.Windows.Forms.Button btnStandardMissingData;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label19;
     }
 }
 

@@ -463,6 +463,8 @@
     <Content Include="Resources\GINAP.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\High Res Logo 400x400.png" />
+    <None Include="Resources\High Res Logo 100x100.png" />
     <Content Include="Resources\Icons\Filter.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
