@@ -8,24 +8,24 @@ If you have any problems, issues or suggestions please add them to the [Issues S
 **[Install Instructions](Install%20Instructions)**  
 **[Getting Started](Getting%20Started)**  
 **[Program's Purpose](Program%27s%20Purpose)**  
-**[Changing the Root Person](https://ftanalyzer.codeplex.comThe%20Individuals%20Tab)**
+**[Changing the Root Person](The%20Individuals%20Tab)**
 
-**[What's New in this Release](http://ftanalyzer.codeplex.comWhat%27s%20New%20in%20this%20Release%3f)?**
+**[What's New in this Release](Whats%20New%20in%20this%20Release)?**
 
 **The Menu[](#the-menu)**
 
-*   **[File](http://ftanalyzer.codeplex.comFile)**
-*   **[Reports](http://ftanalyzer.codeplex.comreports)**
-*   **[Export](http://ftanalyzer.codeplex.comExport)**
-*   **[Tools](http://ftanalyzer.codeplex.comTools)**
-*   **[Maps](http://ftanalyzer.codeplex.comMaps)**
+*   **[File](File)**
+*   **[Reports](Reports)**
+*   **[Export](Export)**
+*   **[Tools](Tools)**
+*   **[Maps](Maps)**
 *   **Help**
 
 **The Tabs[](#the-tabs)**
 
 *   **[The Individuals Tab](The%20Individuals%20Tab)**
 *   **[The Families Tab](The%20Families%20Tab)**
-*   **[The Surnames Tab](wikipage?title=Surnames)**
+*   **[The Surnames Tab](Surnames)**
 *   **[The Locations Tab](The%20Locations%20Tab)**
 *   **[The Occupations Tab](The%20Occupations%20Tab)**
 *   **[The Facts Tab](The%20Facts%20Tab)**
@@ -42,7 +42,7 @@ If you have any problems, issues or suggestions please add them to the [Issues S
 
 *   **[Creating Custom Facts](Creating%20Custom%20Facts)**
 *   **[Guide for Lost Cousins Members](Guide%20for%20Lost%20Cousins%20Members)**
-*   **[Acceptable Date Entry Formats](wikipage?title=Acceptable%20Date%20Entry%20Formats)**
+*   **[Acceptable Date Entry Formats](Acceptable%20Date%20Entry%20Formats)**
 
 **Using FTAnalyzer with popular Family History Programs[](#using-ftnalyzer-with-popular-family-history-programs)**
 
