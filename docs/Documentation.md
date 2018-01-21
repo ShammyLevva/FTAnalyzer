@@ -1,6 +1,8 @@
 FTAnalyzer Documentation
 ========================
 
+Delve deep into your Family Tree and find out where you have gaps, errors, and untapped sources and find new ways of viewing your tree.
+
 #### PLEASE NOTE you MUST uninstall the old Codeplex version before the version 6.0.1.0 or above can be updated. The latest version can be installed from the [installs](http://www.ftanalyzer.com/install) page.
 
 If you have any problems, issues or suggestions please add them to the [Issues Section](https://github.com/ShammyLevva/FTAnalyzer/issues). Thank you.
